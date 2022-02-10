@@ -7,14 +7,14 @@
 - 移除 `resolveSlot` 中无用的 `console.log`
 - 修复 `n-tag` 在 `checkable=true` 时缺少背景色
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
-- 修复 `selection` `maxTagCount` 标签 size 错误问题
+- 修复 `n-select` `max-tag-count` 标签尺寸和 `n-select` size 不同
 
 ### Feats
 
 - `n-progress` 的 `type` 属性新增 `dashboard` 类型
 - `n-progress` 新增 `gap-degree` 属性
 - `n-progress` 新增 `gap-offset-degree` 属性
-- `n-select` 新增 `clearFilterAfterSelect` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
+- `n-select` 新增 `clear-filter-after-select` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
 
 ### i18n
 

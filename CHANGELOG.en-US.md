@@ -7,14 +7,14 @@
 - Remove useless `console.log` in `resolveSlot`.
 - Fix `n-tag` misses background color when `checkable=true`.
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
-- fix `selection` `maxTagCount` tag size error.
+- fix `n-select` `max-tag-count` tag size doesn't follow select size.
 
 ### Feats
 
 - `n-progress` props `type` add type `dashboard`.
 - `n-progress` adds `gap-degree` prop.
 - `n-progress` adds `gap-offset-degree` prop.
-- `n-select` adds `clearFilterAfterSelect` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
+- `n-select` adds `clear-filter-after-select` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
 
 ### i18n
 
@@ -112,7 +112,7 @@
 ### Fixes
 
 - `n-input` placeholder has no line-wrap in `textarea` type.
-- `date-picker` lacks space between panel year & month.
+- `n-date-picker` lacks space between panel year & month.
 
 ### Feats
 
