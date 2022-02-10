@@ -279,7 +279,7 @@ function yearArray (
   defaultYearArray?: number[]
 ): YearItem[] {
   const calendarYears: YearItem[] = []
-  if (defaultYearArray && defaultYearArray.length) {
+  if (defaultYearArray?.length) {
     for (let i = 0; i < defaultYearArray.length; i++) {
       calendarYears.push(
         yearItem(getTime(new Date(defaultYearArray[i], 0, 1)), valueTs, currentTs)

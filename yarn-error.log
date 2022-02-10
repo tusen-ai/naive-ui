@@ -1,0 +1,214 @@
+Arguments: 
+  /Users/wcq/.nvm/versions/node/bin/node /Users/wcq/.nvm/versions/node/v14.18.1/bin/yarn
+
+PATH: 
+  /usr/local/bin:/Users/wcq/.nvm/versions/node/bin:/Users/wcq/.nvm/versions/node/v14.18.1/bin:.:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/wcq/.nvm/versions/node/bin:.:/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/usr/local/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  12.17.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: http://10.20.128.20:7000/cssfontparser/download/cssfontparser-1.2.1.tgz: Request failed "404 Not Found"
+      at ResponseError.ExtendableBuiltin (/Users/wcq/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:696:66)
+      at new ResponseError (/Users/wcq/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:802:124)
+      at Request.<anonymous> (/Users/wcq/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:67099:16)
+      at Request.emit (events.js:315:20)
+      at Request.module.exports.Request.onRequestResponse (/Users/wcq/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:141760:10)
+      at ClientRequest.emit (events.js:315:20)
+      at HTTPParser.parserOnIncomingClient [as onIncoming] (_http_client.js:596:27)
+      at HTTPParser.parserOnHeadersComplete (_http_common.js:119:17)
+      at Socket.socketOnData (_http_client.js:469:22)
+      at Socket.emit (events.js:315:20)
+
+npm manifest: 
+  {
+    "name": "naive-ui",
+    "version": "2.25.1",
+    "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
+    "main": "lib/index.js",
+    "module": "es/index.js",
+    "scripts": {
+      "start": "pnpm run dev",
+      "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
+      "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+      "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
+      "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
+      "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
+      "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
+      "lint": "pnpm run lint:code && pnpm run lint:type",
+      "lint:type": "pnpm run lint:src-type && pnpm run lint:demo-type",
+      "lint:code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
+      "lint:fix": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
+      "lint:src-type": "tsc -b --force tsconfig.esm.json",
+      "lint:demo-type": "vue-tsc -p src/tsconfig.demo.json",
+      "format": "pnpm run format:code && pnpm run format:md && pnpm run lint:fix",
+      "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
+      "format:md": "prettier --write --parser markdown --prose-wrap never \"(src|demo)/**/*.md\"",
+      "test": "cross-env NODE_ENV=test jest --collectCoverage=false",
+      "test:cov": "cross-env NODE_ENV=test NODE_OPTIONS=--unhandled-rejections=warn jest",
+      "test:watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage",
+      "gen-version": "node scripts/gen-version",
+      "gen-volar-dts": "esno scripts/gen-component-declaration",
+      "release-changelog": "node scripts/release-changelog",
+      "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
+      "prepare": "husky install",
+      "transpile-docs": "node scripts/md-to-vue card",
+      "typecheck": "vue-tsc --noEmit src/**/*.vue"
+    },
+    "author": "07akioni",
+    "license": "MIT",
+    "files": [
+      "es",
+      "lib",
+      "volar.d.ts",
+      "web-types.json",
+      "README.md"
+    ],
+    "web-types": "./web-types.json",
+    "lint-staged": {
+      "*.js": [
+        "prettier --write",
+        "eslint --fix"
+      ],
+      "*.ts": [
+        "prettier --write",
+        "eslint --fix"
+      ],
+      "*.tsx": [
+        "prettier --write",
+        "eslint --fix"
+      ],
+      "*.vue": [
+        "prettier --parser=vue --write",
+        "eslint --fix"
+      ],
+      "*.css": [
+        "prettier --write"
+      ],
+      "*.md": [
+        "prettier --write --parser markdown --prose-wrap never",
+        "eslint --fix"
+      ]
+    },
+    "devDependencies": {
+      "@babel/eslint-parser": "^7.15.8",
+      "@babel/generator": "^7.12.11",
+      "@babel/parser": "^7.12.11",
+      "@babel/preset-env": "^7.12.10",
+      "@babel/traverse": "^7.12.12",
+      "@rollup/plugin-babel": "^5.3.0",
+      "@types/estree": "^0.0.51",
+      "@types/jest": "^27.0.1",
+      "@typescript-eslint/eslint-plugin": "^5.9.0",
+      "@typescript-eslint/parser": "^5.9.0",
+      "@vicons/fluent": "^0.12.0",
+      "@vicons/ionicons4": "^0.12.0",
+      "@vicons/ionicons5": "^0.12.0",
+      "@vitejs/plugin-vue": "^2.0.0",
+      "@vue/compiler-sfc": "^3.0.10",
+      "@vue/eslint-config-standard": "^6.0.0",
+      "@vue/eslint-config-typescript": "^10.0.0",
+      "@vue/server-renderer": "^3.2.18",
+      "@vue/test-utils": "2.0.0-rc.16",
+      "autoprefixer": "^10.2.6",
+      "axios": "^0.25.0",
+      "babel-jest": "^27.0.2",
+      "codesandbox": "^2.2.3",
+      "cross-env": "^7.0.3",
+      "cssnano": "^5.0.5",
+      "esbuild": "0.14.21",
+      "eslint": "^8.6.0",
+      "eslint-config-prettier": "^8.3.0",
+      "eslint-config-standard": "^16.0.2",
+      "eslint-config-standard-with-typescript": "^21.0.1",
+      "eslint-plugin-import": "^2.22.1",
+      "eslint-plugin-markdown": "^2.0.0",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-promise": "^6.0.0",
+      "eslint-plugin-vue": "^8.2.0",
+      "esno": "^0.14.0",
+      "express": "^4.17.1",
+      "fast-glob": "^3.2.7",
+      "fs-extra": "^10.0.0",
+      "husky": "^7.0.0",
+      "inquirer": "^8.1.0",
+      "jest": "^27.0.4",
+      "jest-canvas-mock": "^2.3.1",
+      "lint-staged": "^12.1.5",
+      "marked": "^4.0.4",
+      "prettier": "^2.2.1",
+      "rimraf": "^3.0.2",
+      "superagent": "^7.0.0",
+      "ts-jest": "^27.0.7",
+      "typescript": "^4.4.2",
+      "vite": "^2.1.3",
+      "vue": "^3.2.12",
+      "vue-router": "^4.0.5",
+      "vue-tsc": "^0.31.1"
+    },
+    "peerDependencies": {
+      "vue": "^3.0.0"
+    },
+    "dependencies": {
+      "@css-render/plugin-bem": "^0.15.8",
+      "@css-render/vue3-ssr": "^0.15.8",
+      "@types/estree": "^0.0.51",
+      "@types/lodash": "^4.14.170",
+      "@types/lodash-es": "^4.17.4",
+      "async-validator": "^4.0.1",
+      "css-render": "^0.15.8",
+      "date-fns": "^2.27.0",
+      "date-fns-tz": "^1.1.6",
+      "evtd": "^0.2.3",
+      "highlight.js": "^11.0.1",
+      "lodash": "^4.17.21",
+      "lodash-es": "^4.17.21",
+      "seemly": "^0.3.3",
+      "treemate": "^0.3.9",
+      "vdirs": "^0.1.7",
+      "vfonts": "^0.0.3",
+      "vooks": "^0.2.12",
+      "vueuc": "^0.4.25"
+    },
+    "sideEffects": false,
+    "homepage": "https://www.naiveui.com",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/TuSimple/naive-ui"
+    },
+    "keywords": [
+      "naive-ui",
+      "component library",
+      "ui framework",
+      "ui",
+      "vue"
+    ],
+    "pnpm": {
+      "peerDependencyRules": {
+        "ignoreMissing": [
+          "@babel/core",
+          "postcss",
+          "rollup",
+          "webpack"
+        ],
+        "allowedVersions": {
+          "eslint": "^8.6.0",
+          "eslint-plugin-promise": "^6.0.0",
+          "@typescript-eslint/eslint-plugin": "^5.9.1",
+          "eslint-plugin-vue": "^8.3.0"
+        }
+      }
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
