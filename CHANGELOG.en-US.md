@@ -12,6 +12,7 @@
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
+- Add eo locale.
 
 ## 2.25.1 (2022-02-06)
 

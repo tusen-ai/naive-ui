@@ -57,6 +57,7 @@ PRs are welcomed for locales that are not supported yet!
 | Italiano                  | itIT   | dateItIT    | 2.24.2       |
 | English (British)         | enGB   | dateEnGB    | 2.25.1       |
 | Polish (Poland)           | plPL   | datePlPL    | NEXT_VERSION |
+| Esperanto                 | eo     | dateEo      | NEXT_VERSION |
 
 ## Customize the existing locale
 
