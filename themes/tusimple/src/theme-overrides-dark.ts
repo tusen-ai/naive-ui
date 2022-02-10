@@ -496,6 +496,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     buttonWidthPressedLarge: '38px',
     buttonBorderRadiusMedium: '12px',
     buttonBorderRadiusLarge: '16px',
+    opacityDisabled: '1',
     railColor: '#5B5B5B',
     railColorActive: '#5B5B5B',
     buttonColor: '#5B5B5B',
