@@ -56,10 +56,10 @@ Mention 在 `v2.2.0` 及以后可用。
 
 ### Mention Methods
 
-| Name  | Type         | Description                   |
-| ----- | ------------ | ----------------------------- |
-| focus | `() => void` | Manually focus the component. |
-| blur  | `() => void` | Manually blur the component.  |
+| Name  | Type         | Description |
+| ----- | ------------ | ----------- |
+| focus | `() => void` | 聚焦        |
+| blur  | `() => void` | 失焦        |
 
 ### Mention Slots
 
