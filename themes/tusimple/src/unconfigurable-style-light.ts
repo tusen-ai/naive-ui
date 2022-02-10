@@ -122,12 +122,7 @@ export const unconfigurableStyle = c([
     cB('data-table-td', [
       c('&.n-data-table-td--hover', {
         backgroundColor: 'transparent'
-      }),
-      cM('last-col', [
-        c('&:first-child', {
-          paddingLeft: '100px'
-        })
-      ])
+      })
     ]),
     cM('bottom-bordered', [
       cB('data-table-wrapper', [
@@ -244,31 +239,33 @@ export const unconfigurableStyle = c([
             padding: '0'
           },
           [
-            c('&:hover:not(.n-button--disabled)', [
-              cB('button__icon', {
-                color: 'var(--n-text-color-hover)'
-              })
+            c('&:hover', [
+              cNotM('disabled', [
+                cE('icon', {
+                  color: 'var(--n-text-color-hover)'
+                })
+              ])
             ]),
             cE('border', {
               border: '1px solid #ccc'
             }),
             cE('icon', {
               color: '#999'
-            })
-          ]
-        ),
-        cB(
-          'button--disabled',
-          {
-            backgroundColor: 'transparent'
-          },
-          [
-            cB('button__border', {
-              border: '1px solid #D7DAE0'
             }),
-            cB('button__icon', {
-              color: '#D7DAE0'
-            })
+            cM(
+              'disabled',
+              {
+                backgroundColor: 'transparent'
+              },
+              [
+                cE('border', {
+                  border: '1px solid #D7DAE0'
+                }),
+                cE('icon', {
+                  color: '#D7DAE0'
+                })
+              ]
+            )
           ]
         )
       ]
