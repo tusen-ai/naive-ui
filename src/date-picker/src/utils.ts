@@ -296,7 +296,6 @@ function yearArray (
       )
     }
   }
-  console.log(calendarYears)
   return calendarYears
 }
 

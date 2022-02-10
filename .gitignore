@@ -8,7 +8,9 @@ test-bundle
 test/unit/coverage
 package-lock.json
 playground/temp
+yarn-error.log
 yarn.lock
+./husky
 .DS_Store
 .vscode
 .idea

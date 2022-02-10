@@ -109,7 +109,7 @@ focus.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Operations supported for the `month` type date picker. |  |
-| defaultYearArray | `Array<number>` | Custom year list. |
+| defaultYearArray | `Array<number>` | `[1901, 1902, ..., 2100]` | Custom year list. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the month. |  |
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |
@@ -121,6 +121,7 @@ focus.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `year` type date picker. |  |
+| defaultYearArray | `Array<number>` | `[1901, 1902, ..., 2100]` | Custom year list. | NEXT_VERSION |
 | format | `string` | `'yyyy'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the year. |  |
 | placeholder | `string` | `'Select Year'` | Placeholder. |  |
