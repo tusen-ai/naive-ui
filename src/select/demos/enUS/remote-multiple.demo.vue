@@ -14,6 +14,7 @@ Asynchronous options example for a multiple select case.
     :loading="loading"
     clearable
     remote
+    :clear-filter-after-select="false"
     @search="handleSearch"
   />
 </template>

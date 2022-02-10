@@ -62,7 +62,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       borderHover: `1px solid ${primaryColorHover}`,
       borderActive: `1px solid ${primaryColor}`,
       borderFocus: `1px solid ${primaryColorHover}`,
-      boxShadowHover: null,
+      boxShadowHover: 'none',
       boxShadowActive: `0 0 8px 0 ${changeColor(primaryColor, {
         alpha: 0.4
       })}`,
@@ -78,7 +78,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       borderHoverWarning: `1px solid ${warningColorHover}`,
       borderActiveWarning: `1px solid ${warningColor}`,
       borderFocusWarning: `1px solid ${warningColorHover}`,
-      boxShadowHoverWarning: null,
+      boxShadowHoverWarning: 'none',
       boxShadowActiveWarning: `0 0 8px 0 ${changeColor(warningColor, {
         alpha: 0.4
       })}`,
@@ -92,7 +92,7 @@ const internalSelectionDark: InternalSelectionTheme = {
       borderHoverError: `1px solid ${errorColorHover}`,
       borderActiveError: `1px solid ${errorColor}`,
       borderFocusError: `1px solid ${errorColorHover}`,
-      boxShadowHoverError: null,
+      boxShadowHoverError: 'none',
       boxShadowActiveError: `0 0 8px 0 ${changeColor(errorColor, {
         alpha: 0.4
       })}`,

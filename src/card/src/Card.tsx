@@ -1,6 +1,11 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
-import { useConfig, useTheme } from '../../_mixins'
+import {
+  emptyThemeClassHandle,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -62,6 +67,7 @@ export default defineComponent({
       if (onClose) call(onClose)
     }
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const disableInlineTheme = NConfigProvider?.disableInlineTheme
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -75,69 +81,81 @@ export default defineComponent({
       NConfigProvider?.mergedRtlRef,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        self: {
+          color,
+          colorModal,
+          colorTarget,
+          textColor,
+          titleTextColor,
+          titleFontWeight,
+          borderColor,
+          actionColor,
+          borderRadius,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          lineHeight,
+          closeSize,
+          boxShadow,
+          colorPopover,
+          colorEmbedded,
+          [createKey('padding', size)]: padding,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('titleFontSize', size)]: titleFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      const {
+        top: paddingTop,
+        left: paddingLeft,
+        bottom: paddingBottom
+      } = getPadding(padding)
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-color': props.embedded ? colorEmbedded : color,
+        '--n-color-modal': colorModal,
+        '--n-color-popover': colorPopover,
+        '--n-color-target': colorTarget,
+        '--n-text-color': textColor,
+        '--n-line-height': lineHeight,
+        '--n-action-color': actionColor,
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-border-color': borderColor,
+        '--n-box-shadow': boxShadow,
+        // size
+        '--n-padding-top': paddingTop,
+        '--n-padding-bottom': paddingBottom,
+        '--n-padding-left': paddingLeft,
+        '--n-font-size': fontSize,
+        '--n-title-font-size': titleFontSize,
+        '--n-close-size': closeSize
+      }
+    })
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
+        'card',
+        computed(() => {
+          return props.size[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : emptyThemeClassHandle
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          self: {
-            color,
-            colorModal,
-            colorTarget,
-            textColor,
-            titleTextColor,
-            titleFontWeight,
-            borderColor,
-            actionColor,
-            borderRadius,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            lineHeight,
-            closeSize,
-            boxShadow,
-            colorPopover,
-            colorEmbedded,
-            [createKey('padding', size)]: padding,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('titleFontSize', size)]: titleFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        const {
-          top: paddingTop,
-          left: paddingLeft,
-          bottom: paddingBottom
-        } = getPadding(padding)
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-color': props.embedded ? colorEmbedded : color,
-          '--n-color-modal': colorModal,
-          '--n-color-popover': colorPopover,
-          '--n-color-target': colorTarget,
-          '--n-text-color': textColor,
-          '--n-line-height': lineHeight,
-          '--n-action-color': actionColor,
-          '--n-title-text-color': titleTextColor,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-border-color': borderColor,
-          '--n-box-shadow': boxShadow,
-          // size
-          '--n-padding-top': paddingTop,
-          '--n-padding-bottom': paddingBottom,
-          '--n-padding-left': paddingLeft,
-          '--n-font-size': fontSize,
-          '--n-title-font-size': titleFontSize,
-          '--n-close-size': closeSize
-        }
-      })
+      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      ...themeClassHandle
     }
   },
   render () {
@@ -147,12 +165,15 @@ export default defineComponent({
       hoverable,
       mergedClsPrefix,
       rtlEnabled,
+      onRender,
       $slots
     } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-card`,
+          this.themeClass,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
             [`${mergedClsPrefix}-card--content${

@@ -1,5 +1,10 @@
 import { computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useCssVarsClass } from '../../_mixins'
+import {
+  emptyThemeClassHandle,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
@@ -44,16 +49,17 @@ export const NIconWrapper = defineComponent({
         '--n-icon-color': iconColor
       }
     })
-    const cssVarsClassRef = disableInlineTheme
-      ? useCssVarsClass('icon-wrapper', undefined, cssVarsRef, props)
-      : undefined
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass('icon-wrapper', undefined, cssVarsRef, props)
+      : emptyThemeClassHandle
     return () => {
       const size = formatLength(props.size)
+      themeClassHandle.onRender?.()
       return (
         <div
           class={[
             `${mergedClsPrefixRef.value}-icon-wrapper`,
-            cssVarsClassRef?.value
+            themeClassHandle?.themeClass?.value
           ]}
           style={[
             cssVarsRef?.value as any,
