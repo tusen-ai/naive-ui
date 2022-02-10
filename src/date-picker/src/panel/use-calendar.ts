@@ -40,7 +40,8 @@ const useCalendarProps = {
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
-  }
+  },
+  defaultYearArray: Array as PropType<number[]>
 } as const
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -102,7 +103,7 @@ function useCalendar (
     return monthArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const yearArrayRef = computed(() => {
-    return yearArray(calendarValueRef.value, props.value, nowRef.value)
+    return yearArray(calendarValueRef.value, props.value, nowRef.value, props.defaultYearArray)
   })
   const quarterArrayRef = computed(() => {
     return quarterArray(calendarValueRef.value, props.value, nowRef.value)

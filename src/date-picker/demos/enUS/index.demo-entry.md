@@ -109,6 +109,7 @@ focus.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Operations supported for the `month` type date picker. |  |
+| defaultYearArray | `Array<number>` | Custom year list. |
 | format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the month. |  |
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |

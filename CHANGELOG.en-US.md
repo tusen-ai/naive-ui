@@ -76,6 +76,7 @@
 - `n-select` exports `SelectRenderOption` type.
 - `n-select` exports `SelectRenderTag` type.
 - `n-tree` adds `node-props` prop.
+- `n-date-picker` adds `default-year-array` prop, closes[#2214](https://github.com/TuSimple/naive-ui/issues/2214)
 
 ## 2.24.7 (2022-01-28)
 

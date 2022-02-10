@@ -2,7 +2,7 @@ import { h, defineComponent, VNode, PropType, onMounted, nextTick } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import type { MonthItem, YearItem, QuarterItem } from '../utils'
+import type { MonthItem, YearItem, QuarterItem, yearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import { OnPanelUpdateValueImpl } from '../interface'
@@ -17,6 +17,7 @@ export default defineComponent({
   name: 'MonthPanel',
   props: {
     ...useCalendarProps,
+    defaultYearArray: Array as PropType<number[]>,
     type: {
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true

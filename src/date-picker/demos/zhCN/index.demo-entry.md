@@ -110,6 +110,7 @@ focus.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Month 类型的 Date Picker 中支持的操作 |  |
+| defaultYearArray | `Array<number>` | 自定义年份列表 |
 | format | `string` | `'yyyy-MM'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 月份禁用的校验函数 |  |
 | placeholder | `string` | `'选择月份'` | 自动填充的提示信息 |  |
