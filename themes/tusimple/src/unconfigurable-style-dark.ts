@@ -87,9 +87,6 @@ export const unconfigurableStyle = c([
             })
           ]
         ),
-        cM('selected', {
-          color: '#fff'
-        }),
         cM('start, end', [
           c('&:nth-child(7n + 1)::before', {
             left: '0'
