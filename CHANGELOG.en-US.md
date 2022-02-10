@@ -12,6 +12,8 @@
 ### Feats
 
 - `n-progress` props `type` add type `dashboard`.
+- `n-progress` adds `gap-degree` prop.
+- `n-progress` adds `gap-offset-degree` prop.
 - `n-select` adds `clearFilterAfterSelect` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
 
 ### i18n

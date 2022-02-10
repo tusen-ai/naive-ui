@@ -12,6 +12,8 @@
 ### Feats
 
 - `n-progress` 的 `type` 属性新增 `dashboard` 类型
+- `n-progress` 新增 `gap-degree` 属性
+- `n-progress` 新增 `gap-offset-degree` 属性
 - `n-select` 新增 `clearFilterAfterSelect` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
 
 ### i18n

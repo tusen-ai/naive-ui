@@ -5,16 +5,16 @@ I have no words to say but there still should be a placeholder to make layout lo
 ## Demos
 
 ```demo
-circle
-line
+circle.vue
+line.vue
 circle-offset.vue
-multiple-circle
+multiple-circle.vue
 dashboard.vue
-custom-indicator
-color
-no-indicator
-height
-processing
+custom-indicator.vue
+color.vue
+no-indicator.vue
+height.vue
+processing.vue
 ```
 
 ## API
@@ -27,8 +27,8 @@ processing
 | circle-gap | `number` | `1` | The gap between circles when type is `'multiple-circle'`, suppose `viewbox` size is `100`. |  |
 | color | `string \| string[]` | `undefined` | Progress color. |  |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed. |  |
-| gap-degree | `number` | `0` | The gap degree of half circle, 0 ~ 360. |  |
-| gap-position | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | The gap position. |  |
+| gap-degree | `number` | `75` | The gap degree of half circle, 0 ~ 360. | NEXT_VERSION |
+| gap-offset-degree | `number` | `0` | The gap offset degree. | NEXT_VERSION |
 | height | `number` | `undefined` | `'line'` typed progress's height. Keep default height if not passed. |  |
 | indicator-placement | `'inside' \| 'outside'` | `'outside'` | Indicator placement. |  |
 | indicator-text-color | `string` | `undefined` | Indicator text color. |  |
@@ -40,7 +40,7 @@ processing
 | show-indicator | `boolean` | `true` | Whether to display indicators. |  |
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Progress status. |  |
 | stroke-width | `number` | `7` | Progress width. |  |
-| type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `line` | Progress type. |  |
+| type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `line` | Progress type. | `'dashboard'` NEXT_VERSION |
 | unit | `string` | `%` | Progress unit. |  |
 
 ### Progress Slots

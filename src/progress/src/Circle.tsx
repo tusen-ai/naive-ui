@@ -53,11 +53,11 @@ export default defineComponent({
     },
     gapDegree: {
       type: Number as PropType<number>,
-      default: 0
+      required: true
     },
-    gapPosition: {
-      type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
-      default: 'bottom'
+    gapOffsetDegree: {
+      type: Number,
+      default: 0
     }
   },
   setup (props, { slots }) {
@@ -66,44 +66,22 @@ export default defineComponent({
       offsetDegree: number,
       strokeColor?: string
     ): { pathString: string, pathStyle: CSSProperties } {
-      const { gapPosition, gapDegree, railStyle, viewBoxWidth } = props
+      const { gapDegree, viewBoxWidth } = props
       const radius = 50
-      let beginPositionX = 0
-      let beginPositionY = -radius
-      let endPositionX = 0
-      let endPositionY = -2 * radius
-      switch (gapPosition) {
-        case 'left':
-          beginPositionX = -radius
-          beginPositionY = 0
-          endPositionX = 2 * radius
-          endPositionY = 0
-          break
-        case 'right':
-          beginPositionX = radius
-          beginPositionY = 0
-          endPositionX = -2 * radius
-          endPositionY = 0
-          break
-        case 'bottom':
-          beginPositionY = radius
-          endPositionY = 2 * radius
-          break
-        default:
-      }
+      const beginPositionX = 0
+      const beginPositionY = radius
+      const endPositionX = 0
+      const endPositionY = 2 * radius
       const pathString = `M 55,55 m ${beginPositionX},${beginPositionY}
       a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
-      const pathStyle = {
+      const pathStyle: CSSProperties = {
         stroke: strokeColor,
         strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
-        strokeDashoffset: `-${
-          gapDegree / 2 + (Math.PI / 3.6) * offsetDegree
-        }px`,
-        railStyle
+        strokeDashoffset: `-${gapDegree / 2 + (Math.PI / 3.6) * offsetDegree}px`
       }
       return {
         pathString,
@@ -121,6 +99,7 @@ export default defineComponent({
         showIndicator,
         indicatorTextColor,
         unit,
+        gapOffsetDegree,
         clsPrefix
       } = props
       const { pathString: railPathString, pathStyle: railPathStyle } =
@@ -130,7 +109,14 @@ export default defineComponent({
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
-            <div class={`${clsPrefix}-progress-graph-circle`}>
+            <div
+              class={`${clsPrefix}-progress-graph-circle`}
+              style={{
+                transform: gapOffsetDegree
+                  ? `rotate(${gapOffsetDegree}deg)`
+                  : undefined
+              }}
+            >
               <svg viewBox="0 0 110 110">
                 <g>
                   <path
