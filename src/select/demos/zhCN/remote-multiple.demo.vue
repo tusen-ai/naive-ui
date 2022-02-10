@@ -14,6 +14,7 @@
     :loading="loading"
     clearable
     remote
+    :clear-filter-after-select="false"
     @search="handleSearch"
   />
 </template>

@@ -9,6 +9,10 @@
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
 - fix `selection` `maxTagCount` tag size error.
 
+### Feats
+
+- `n-select` adds `clearFilterAfterSelect` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
+
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
