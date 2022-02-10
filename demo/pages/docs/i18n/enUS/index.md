@@ -42,22 +42,22 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
 
 PRs are welcomed for locales that are not supported yet!
 
-| Language                  | Config | Date config | Version      |
-| ------------------------- | ------ | ----------- | ------------ |
-| English                   | enUS   | dateEnUS    |              |
-| Japanese                  | jaJP   | dateJaJP    |              |
-| Russian                   | ruRU   | dateRuRU    |              |
-| Ukrainian                 | ukUA   | dateUkUA    |              |
-| Chinese (Simplified)      | zhCN   | dateZhCN    |              |
-| Chinese (Traditional)     | zhTW   | dateZhTW    |              |
-| German (Germany)          | deDE   | dateDeDe    |              |
-| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |              |
-| French                    | frFR   | dateFrFR    |              |
-| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2       |
-| Italiano                  | itIT   | dateItIT    | 2.24.2       |
-| English (British)         | enGB   | dateEnGB    | 2.25.1       |
-| Polish (Poland)           | plPL   | datePlPL    | NEXT_VERSION |
-| Esperanto                 | eo     | dateEo      | NEXT_VERSION |
+| Language                  | Config | Date config | Version |
+| ------------------------- | ------ | ----------- | ------- |
+| English                   | enUS   | dateEnUS    |         |
+| Japanese                  | jaJP   | dateJaJP    |         |
+| Russian                   | ruRU   | dateRuRU    |         |
+| Ukrainian                 | ukUA   | dateUkUA    |         |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |         |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |         |
+| German (Germany)          | deDE   | dateDeDe    |         |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |         |
+| French                    | frFR   | dateFrFR    |         |
+| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
+| Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
+| Esperanto                 | eo     | dateEo      | 2.25.2  |
 
 ## Customize the existing locale
 
