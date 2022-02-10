@@ -9,6 +9,10 @@
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
 - 修复 `selection` `maxTagCount` 标签 size 错误问题
 
+### Feats
+
+- `n-date-picker` 新增 `default-year-array` 属性, 关闭[#2214](https://github.com/TuSimple/naive-ui/issues/2214)
+
 ### i18n
 
 - 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
@@ -76,7 +80,6 @@
 - `n-select` 导出 `SelectRenderOption` 类型
 - `n-select` 导出 `SelectRenderTag` 类型
 - `n-tree` 新增 `node-props` 属性
-- `n-date-picker` 新增 `default-year-array` 属性, 关闭[#2214](https://github.com/TuSimple/naive-ui/issues/2214)
 
 ## 2.24.7 (2022-01-28)
 

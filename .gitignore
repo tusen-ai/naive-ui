@@ -10,7 +10,7 @@ package-lock.json
 playground/temp
 yarn-error.log
 yarn.lock
-./husky
+husky/pre-commit
 .DS_Store
 .vscode
 .idea
