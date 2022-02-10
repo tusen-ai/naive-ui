@@ -14,8 +14,15 @@ const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
   processing: Boolean,
   type: {
-    type: String as PropType<'line' | 'circle' | 'multiple-circle'>,
+    type: String as PropType<
+    'line' | 'circle' | 'multiple-circle' | 'dashboard'
+    >,
     default: 'line'
+  },
+  gapDegree: Number as PropType<number>,
+  gapPosition: {
+    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    default: 'top'
   },
   status: {
     type: String as PropType<Status>,
@@ -71,6 +78,15 @@ export default defineComponent({
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
+    const gapDeg = computed(() => {
+      if (props.gapDegree || props.gapDegree === 0) {
+        return props.gapDegree
+      }
+      if (props.type === 'dashboard') {
+        return 75
+      }
+      return undefined
+    })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
@@ -83,6 +99,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
+      gapDeg,
       cssVars: computed(() => {
         const { status } = props
         const {
@@ -144,6 +161,8 @@ export default defineComponent({
       processing,
       circleGap,
       mergedClsPrefix,
+      gapDeg,
+      gapPosition,
       $slots
     } = this
     return (
@@ -157,9 +176,13 @@ export default defineComponent({
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={percentage as number}
-        role={type === 'circle' || type === 'line' ? 'progressbar' : 'none'}
+        role={
+          type === 'circle' || type === 'line' || type === 'dashboard'
+            ? 'progressbar'
+            : 'none'
+        }
       >
-        {type === 'circle' ? (
+        {type === 'circle' || type === 'dashboard' ? (
           <Circle
             clsPrefix={mergedClsPrefix}
             status={status}
@@ -172,6 +195,8 @@ export default defineComponent({
             percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
+            gapDegree={gapDeg}
+            gapPosition={gapPosition}
             unit={unit}
           >
             {$slots}
