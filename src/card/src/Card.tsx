@@ -1,6 +1,11 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
+  emptyThemeClassHandle,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -143,7 +148,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : undefined
+      : emptyThemeClassHandle
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
