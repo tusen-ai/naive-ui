@@ -12,7 +12,13 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  emptyThemeClassHandle,
+  useConfig,
+  useFormItem,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -509,7 +515,7 @@ const Button = defineComponent({
         cssVarsRef,
         props
       )
-      : undefined
+      : emptyThemeClassHandle
 
     return {
       selfElRef,

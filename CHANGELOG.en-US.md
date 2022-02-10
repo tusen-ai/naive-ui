@@ -12,10 +12,12 @@
 ### Feats
 
 - `n-progress` props `type` add type `dashboard`.
+- `n-select` adds `clearFilterAfterSelect` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
 
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
+- Add eo locale.
 
 ## 2.25.1 (2022-02-06)
 

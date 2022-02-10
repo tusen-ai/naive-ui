@@ -58,6 +58,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 意大利语          | itIT | dateItIT | 2.24.2       |
 | 英国英语          | enGB | dateEnGB | 2.25.1       |
 | 波兰语（波兰）    | plPL | datePlPL | NEXT_VERSION |
+| 世界语            | eo   | dateEo   | NEXT_VERSION |
 
 ## 在现有国际化基础上调整
 

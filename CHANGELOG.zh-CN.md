@@ -12,10 +12,12 @@
 ### Feats
 
 - `n-progress` 的 `type` 属性新增 `dashboard` 类型
+- `n-select` 新增 `clearFilterAfterSelect` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
 
 ### i18n
 
 - 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
+- 新增 eo locale
 
 ## 2.25.1 (2022-02-06)
 

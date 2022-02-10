@@ -38,6 +38,7 @@ tag-input.vue
 | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as the select trigger element. Setting it to `false` will also disable `virtual-scroll`. |  |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | when multiple and filter is true, whether to clear filter keyword after select an option. | NEXT_VERSION |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the select. |  |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |

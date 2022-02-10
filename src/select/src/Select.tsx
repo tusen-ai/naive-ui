@@ -71,6 +71,10 @@ const selectProps = {
     default: undefined
   },
   clearable: Boolean,
+  clearFilterAfterSelect: {
+    type: Boolean,
+    default: true
+  },
   options: {
     type: Array as PropType<SelectMixedOption[]>,
     default: () => []
@@ -491,7 +495,7 @@ export default defineComponent({
     }
     function handleToggleByOption (option: SelectOption): void {
       if (mergedDisabledRef.value) return
-      const { tag, remote } = props
+      const { tag, remote, clearFilterAfterSelect } = props
       if (tag && !remote) {
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
@@ -514,12 +518,12 @@ export default defineComponent({
             const createdOptionIndex = getCreatedOptionIndex(option.value)
             if (~createdOptionIndex) {
               createdOptionsRef.value.splice(createdOptionIndex, 1)
-              patternRef.value = ''
+              if (clearFilterAfterSelect) patternRef.value = ''
             }
           }
         } else {
           changedValue.push(option.value)
-          patternRef.value = ''
+          if (clearFilterAfterSelect) patternRef.value = ''
         }
         doUpdateValue(changedValue, getMergedOptions(changedValue))
       } else {
