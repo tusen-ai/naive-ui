@@ -20,7 +20,11 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
-import { useThemeClass, useTheme } from '../../../_mixins'
+import {
+  useThemeClass,
+  useTheme,
+  emptyThemeClassHandle
+} from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
@@ -468,7 +472,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : undefined
+      : emptyThemeClassHandle
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
@@ -620,6 +624,7 @@ export default defineComponent({
               ref="counterWrapperRef"
             >
               <NTag
+                size={size}
                 ref="counterRef"
                 onMouseenter={this.handleMouseEnterCounter}
                 onMouseleave={this.handleMouseLeaveCounter}
@@ -638,6 +643,7 @@ export default defineComponent({
               key="__counter__"
             >
               <NTag
+                size={size}
                 ref="counterRef"
                 onMouseenter={this.handleMouseEnterCounter}
                 disabled={disabled}

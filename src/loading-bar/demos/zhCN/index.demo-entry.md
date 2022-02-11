@@ -48,7 +48,7 @@ basic
 | --- | --- | --- | --- |
 | loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
 
-### `loadingBar` Injection Methods
+### loadingBar Injection Methods
 
 | 名称   | 类型         | 说明                     |
 | ------ | ------------ | ------------------------ |

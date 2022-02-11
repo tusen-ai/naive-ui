@@ -1,5 +1,10 @@
 import { computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
+  emptyThemeClassHandle,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
@@ -46,10 +51,10 @@ export const NIconWrapper = defineComponent({
     })
     const themeClassHandle = disableInlineTheme
       ? useThemeClass('icon-wrapper', undefined, cssVarsRef, props)
-      : undefined
+      : emptyThemeClassHandle
     return () => {
       const size = formatLength(props.size)
-      themeClassHandle?.onRender()
+      themeClassHandle.onRender?.()
       return (
         <div
           class={[

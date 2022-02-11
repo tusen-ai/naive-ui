@@ -9,7 +9,12 @@ import {
   provide,
   toRef
 } from 'vue'
-import { useConfig, useThemeClass, useTheme } from '../../_mixins'
+import {
+  useConfig,
+  useThemeClass,
+  useTheme,
+  emptyThemeClassHandle
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
 import {
@@ -209,7 +214,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : undefined
+      : emptyThemeClassHandle
     return {
       ...tagPublicMethods,
       rtlEnabled: rtlEnabledRef,

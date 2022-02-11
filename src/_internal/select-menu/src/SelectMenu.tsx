@@ -26,7 +26,11 @@ import type {
 } from '../../../select/src/interface'
 import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useThemeClass, useTheme } from '../../../_mixins'
+import {
+  useThemeClass,
+  useTheme,
+  emptyThemeClassHandle
+} from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
@@ -352,7 +356,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : undefined
+      : emptyThemeClassHandle
     const styleRef = computed(() => {
       return [
         { width: formatLength(props.width) },
