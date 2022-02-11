@@ -18,20 +18,27 @@ if (!DISCORD_TOKEN) {
 }
 
 async function releaseChangelogToDingTalk () {
-  const changelog = fs
+  const allLog = fs
     .readFileSync(path.resolve(__dirname, '../CHANGELOG.zh-CN.md'), 'utf-8')
     .split(/^## /gm)[1]
+
+  const changelog = allLog
+    .replace(/(^.*?\n)/g, '')
     .replace(/^##/gm, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '[$1]')
 
-  const message = `变更日志 ${changelog.trim()}\n\n完整信息见 https://github.com/TuSimple/naive-ui/blob/main/CHANGELOG.zh-CN.md\n`
+  const number = allLog.split(/^(.*)$/m)[1]
+
+  const title = `变更日志 ${number.trim()}`
+
+  const text = `${changelog.trim()}\n\n完整信息见 https://github.com/TuSimple/naive-ui/blob/main/CHANGELOG.zh-CN.md\n`
 
   await inquirer
     .prompt([
       {
         type: 'confirm',
         name: 'release-changelog',
-        message: `发布以下变更日志到钉钉群：\n\n${message}`
+        message: `发布以下变更日志到钉钉群：\n\n${title}\n\n${text}`
       }
     ])
     .then(async (ans) => {
@@ -44,9 +51,10 @@ async function releaseChangelogToDingTalk () {
             })
             .type('application/json')
             .send({
-              msgtype: 'text',
-              text: {
-                content: message
+              msgtype: 'markdown',
+              markdown: {
+                title,
+                text
               }
             })
             .then((res) => {
