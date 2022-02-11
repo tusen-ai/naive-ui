@@ -79,6 +79,10 @@ const cascaderProps = {
     default: 'click'
   },
   clearable: Boolean,
+  clearFilterAfterSelect: {
+    type: Boolean,
+    default: true
+  },
   remote: Boolean,
   onLoad: Function as PropType<OnLoad>,
   separator: {
@@ -491,6 +495,9 @@ export default defineComponent({
       if (!showSelectMenuRef.value) return
       handleCascaderMenuClickOutside(e)
     }
+    function clearPattern (): void {
+      if (props.clearFilterAfterSelect) patternRef.value = ''
+    }
     // --- keyboard
     function move (direction: 'prev' | 'next' | 'child' | 'parent'): void {
       const { value: keyboardKey } = keyboardKeyRef
@@ -608,7 +615,7 @@ export default defineComponent({
             } else {
               if (selectMenuInstRef.value) {
                 const hasCorrespondingOption = selectMenuInstRef.value.enter()
-                if (hasCorrespondingOption) patternRef.value = ''
+                if (hasCorrespondingOption) clearPattern()
               }
             }
           }
@@ -773,7 +780,8 @@ export default defineComponent({
       doUncheck,
       closeMenu,
       handleSelectMenuClickOutside,
-      handleCascaderMenuClickOutside
+      handleCascaderMenuClickOutside,
+      clearPattern
     })
     const exposedMethods: CascaderInst = {
       focus: () => {
