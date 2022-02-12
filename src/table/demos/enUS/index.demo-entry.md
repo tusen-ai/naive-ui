@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-If you only want to render some basic.vue table, use it. If you want to render structured data, see [Data Table](data-table).
+If you only want to render some basic tables, use it. If you want to render structured data, see [Data Table](data-table).
 
 ## Demos
 

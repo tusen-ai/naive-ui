@@ -1,6 +1,6 @@
 # Affix
 
-Affix can make content stick to fixed places when scrolling. It's similar to `position.vue: sticky` but can do more things.
+Affix can make content stick to fixed places when scrolling. It's similar to `position: sticky` but can do more things.
 
 ## Demos
 

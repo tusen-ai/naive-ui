@@ -1,6 +1,6 @@
 # 固钉 Affix
 
-Affix 可以让内容在页面滚动的时候固定在一个位置，它和 `position.vue: sticky` 有那么点像不过可以做更多事。
+Affix 可以让内容在页面滚动的时候固定在一个位置，它和 `position: sticky` 有那么点像不过可以做更多事。
 
 ## 演示
 
