@@ -1,6 +1,6 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useCompitable } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -40,7 +40,7 @@ export default defineComponent({
   name: 'Text',
   props: textProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
       '-text',
@@ -49,44 +49,57 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { depth, type } = props
+      const textColorKey =
+        type === 'default'
+          ? depth === undefined
+            ? 'textColor'
+            : `textColor${depth}Depth`
+          : createKey('textColor', type)
+      const {
+        common: { fontWeightStrong, fontFamilyMono, cubicBezierEaseInOut },
+        self: {
+          codeTextColor,
+          codeBorderRadius,
+          codeColor,
+          codeBorder,
+          [textColorKey as 'textColor']: textColor
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-font-weight-strong': fontWeightStrong,
+        '--n-font-famliy-mono': fontFamilyMono,
+        '--n-code-border-radius': codeBorderRadius,
+        '--n-code-text-color': codeTextColor,
+        '--n-code-color': codeColor,
+        '--n-code-border': codeBorder
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'text',
+        computed(() => `${props.type[0]}${props.depth || ''}`),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       compitableTag: useCompitable(props, ['as', 'tag']),
-      cssVars: computed(() => {
-        const { depth, type } = props
-        const textColorKey =
-          type === 'default'
-            ? depth === undefined
-              ? 'textColor'
-              : `textColor${depth}Depth`
-            : createKey('textColor', type)
-        const {
-          common: { fontWeightStrong, fontFamilyMono, cubicBezierEaseInOut },
-          self: {
-            codeTextColor,
-            codeBorderRadius,
-            codeColor,
-            codeBorder,
-            [textColorKey as 'textColor']: textColor
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-text-color': textColor,
-          '--n-font-weight-strong': fontWeightStrong,
-          '--n-font-famliy-mono': fontFamilyMono,
-          '--n-code-border-radius': codeBorderRadius,
-          '--n-code-text-color': codeTextColor,
-          '--n-code-color': codeColor,
-          '--n-code-border': codeBorder
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedClsPrefix } = this
+    this.onRender?.()
     const textClass = [
       `${mergedClsPrefix}-text`,
+      this.themeClass,
       {
         [`${mergedClsPrefix}-text--code`]: this.code,
         [`${mergedClsPrefix}-text--delete`]: this.delete,

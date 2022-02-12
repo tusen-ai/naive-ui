@@ -7,10 +7,10 @@ Typography is an art.
 ## Demos
 
 ```demo
-header
-tags
-text
-router-link
+header.vue
+tags.vue
+text.vue
+router-link.vue
 ```
 
 ## API
