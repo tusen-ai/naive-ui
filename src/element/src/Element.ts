@@ -50,7 +50,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { tag, mergedClsPrefix, cssVars, themeClass, $slots } = this
+    const { tag, mergedClsPrefix, cssVars, themeClass, onRender, $slots } = this
+    onRender?.()
     return h(
       tag,
       {
