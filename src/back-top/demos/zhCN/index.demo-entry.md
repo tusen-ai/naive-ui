@@ -9,10 +9,10 @@
 向下滚动页面查看效果。
 
 ```demo
-basic
-visibility-height
-change-position
-target-container-selector
+basic.vue
+visibility-height.vue
+change-position.vue
+target-container-selector.vue
 ```
 
 ## API

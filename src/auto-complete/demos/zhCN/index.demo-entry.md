@@ -5,12 +5,12 @@
 ## 演示
 
 ```demo
-basic
-size
-group
-custom-input
-after-select
-show-options-by-value
+basic.vue
+size.vue
+group.vue
+custom-input.vue
+after-select.vue
+show-options-by-value.vue
 customized-rendering.vue
 ```
 
