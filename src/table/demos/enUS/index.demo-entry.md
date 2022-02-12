@@ -2,17 +2,17 @@
 
 <!--single-column-->
 
-If you only want to render some basic table, use it. If you want to render structured data, see [Data Table](data-table).
+If you only want to render some basic.vue table, use it. If you want to render structured data, see [Data Table](data-table).
 
 ## Demos
 
 ```demo
-basic
-bordered
-size
-single-column
-single-line
-striped
+basic.vue
+bordered.vue
+size.vue
+single-column.vue
+single-line.vue
+striped.vue
 ```
 
 ## Components

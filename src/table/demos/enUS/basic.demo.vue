@@ -1,8 +1,9 @@
-# Stripe
+<markdown>
+# Basic
+</markdown>
 
-```html
-<n-space vertical>
-  <n-table striped>
+<template>
+  <n-table :bordered="false" :single-line="false">
     <thead>
       <tr>
         <th>Abandon</th>
@@ -27,14 +28,6 @@
         <td>...</td>
         <td>...</td>
       </tr>
-      <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-      </tr>
     </tbody>
   </n-table>
-</n-space>
-```
+</template>
