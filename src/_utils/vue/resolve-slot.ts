@@ -1,4 +1,11 @@
-import { Fragment, isVNode, Slot, Comment, VNodeArrayChildren } from 'vue'
+import {
+  Fragment,
+  isVNode,
+  Slot,
+  Comment,
+  VNodeArrayChildren,
+  VNodeChild
+} from 'vue'
 
 function ensureValidVNode (
   vnodes: VNodeArrayChildren
@@ -37,17 +44,18 @@ export function resolveSlotWithProps<T> (
   props: T,
   fallback: (props: T) => VNodeArrayChildren
 ): VNodeArrayChildren {
-  console.log(slot && ensureValidVNode(slot(props)))
   return (slot && ensureValidVNode(slot(props))) || fallback(props)
 }
 
+/**
+ * Resolve slot with wrapper if content exists, no fallback
+ */
 export function resolveWrappedSlot (
   slot: Slot | undefined,
-  wrapper: (children: VNodeArrayChildren) => VNodeArrayChildren
-): VNodeArrayChildren | null {
+  wrapper: (children: VNodeArrayChildren | null) => VNodeChild
+): VNodeChild {
   const children = slot && ensureValidVNode(slot())
-  if (children) return wrapper(children)
-  return null
+  return wrapper(children || null)
 }
 
 export function isSlotEmpty (slot: Slot | undefined): boolean {

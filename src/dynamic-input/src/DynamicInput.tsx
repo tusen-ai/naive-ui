@@ -104,7 +104,7 @@ export default defineComponent({
         }
       })
     }
-    const { NConfigProvider, mergedClsPrefixRef } = useConfig()
+    const { mergedComponentPropsRef, mergedClsPrefixRef } = useConfig()
     const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -134,8 +134,7 @@ export default defineComponent({
       return true
     })
     const buttonSizeRef = computed(() => {
-      return NConfigProvider?.mergedComponentPropsRef.value?.DynamicInput
-        ?.buttonSize
+      return mergedComponentPropsRef?.value?.DynamicInput?.buttonSize
     })
     function doUpdateValue (value: any[]): void {
       const { onInput, 'onUpdate:value': _onUpdateValue, onUpdateValue } = props

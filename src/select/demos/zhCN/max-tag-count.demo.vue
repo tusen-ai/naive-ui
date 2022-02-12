@@ -12,6 +12,7 @@
       multiple
       :options="options"
       max-tag-count="responsive"
+      size="small"
     />
     <n-select
       v-model:value="value"

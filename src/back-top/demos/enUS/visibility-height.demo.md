@@ -1,4 +1,4 @@
-# Visibility Height
+# Visibility height
 
 You can change visibility height of backtop.
 

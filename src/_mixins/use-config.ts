@@ -1,5 +1,9 @@
-import { inject, computed, ComputedRef } from 'vue'
-import type { ConfigProviderInjection } from '../config-provider/src/internal-interface'
+import { inject, computed, ComputedRef, Ref } from 'vue'
+import type {
+  RtlEnabledState,
+  GlobalComponentConfig,
+  Breakpoints
+} from '../config-provider/src/internal-interface'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
 type UseConfigProps = Readonly<{
@@ -17,14 +21,21 @@ export default function useConfig (
     defaultBordered: true
   }
 ): {
-    NConfigProvider: ConfigProviderInjection | null
+    inlineThemeDisabled: boolean | undefined
+    mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
     mergedBorderedRef: ComputedRef<boolean>
     mergedClsPrefixRef: ComputedRef<string>
+    mergedBreakpointsRef: Ref<Breakpoints> | undefined
+    mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
     namespaceRef: ComputedRef<string | undefined>
   } {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
-    NConfigProvider,
+    // NConfigProvider,
+    inlineThemeDisabled: NConfigProvider?.inlineThemeDisabled,
+    mergedRtlRef: NConfigProvider?.mergedRtlRef,
+    mergedComponentPropsRef: NConfigProvider?.mergedComponentPropsRef,
+    mergedBreakpointsRef: NConfigProvider?.mergedBreakpointsRef,
     mergedBorderedRef: computed(() => {
       const { bordered } = props
       if (bordered !== undefined) return bordered

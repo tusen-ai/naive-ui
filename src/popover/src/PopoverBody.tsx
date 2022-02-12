@@ -230,10 +230,16 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => [
-          resolveWrappedSlot(slots.header, (children) => [
-            <div class={`${mergedClsPrefix}-popover__header`}>{children}</div>,
-            <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
-          ]) || slots.default?.(),
+          resolveWrappedSlot(
+            slots.header,
+            (children) =>
+              children && [
+                <div class={`${mergedClsPrefix}-popover__header`}>
+                  {children}
+                </div>,
+                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+              ]
+          ) || slots.default?.(),
           props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,

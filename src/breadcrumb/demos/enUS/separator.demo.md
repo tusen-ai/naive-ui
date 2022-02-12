@@ -1,4 +1,4 @@
-# Custom Separator
+# Customize separator
 
 Use separator prop to custom separator.
 

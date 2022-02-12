@@ -238,5 +238,5 @@ export interface ConfigProviderInjection {
   mergedRtlRef: Ref<RtlEnabledState | undefined>
   mergedThemeHashRef: Ref<string>
   // non-reactive
-  disableInlineTheme: boolean
+  inlineThemeDisabled: boolean
 }

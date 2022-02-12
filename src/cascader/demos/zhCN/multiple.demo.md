@@ -15,6 +15,11 @@
       ><n-switch v-model:value="responsiveMaxTagCount" />Responsive
       MaxTagCount</n-space
     >
+    <n-space
+      ><n-switch
+        v-model:value="clearFilterAfterSelect"
+      />clearFilterAfterSelect</n-space
+    >
   </n-space>
   <n-cascader
     v-model:value="value"
@@ -28,6 +33,7 @@
     :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     :filterable="filterable"
+    :clear-filter-after-select="clearFilterAfterSelect"
     @update:value="handleUpdateValue"
   />
 </n-space>
@@ -75,6 +81,7 @@ export default defineComponent({
       value: ref(null),
       filterable: ref(false),
       responsiveMaxTagCount: ref(true),
+      clearFilterAfterSelect: ref(true),
       options: getOptions(),
       handleUpdateValue (...args) {
         console.log(...args)

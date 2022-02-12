@@ -91,6 +91,7 @@ export interface CascaderInjection {
   renderLabelRef: Ref<
     ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
+  clearPattern: () => void
 }
 
 export interface CascaderSubmenuInstance {

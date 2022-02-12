@@ -1,14 +1,35 @@
 # CHANGELOG
 
-## Pending
-
-### Fixes
+## NEXT_VERSION
 
 ### Feats
 
+- `n-tree-select` add `clear-filter-after-select` prop.
+- `n-cascader` add `clear-filter-after-select` prop.
 - `n-switch` add `icon` slot.
-- `n-switch` add `checkedIcon` slot.
-- `n-switch` add `uncheckedIcon` slot.
+- `n-switch` add `checked-icon` slot.
+- `n-switch` add `unchecked-icon` slot.
+
+## 2.25.2
+
+### Fixes
+
+- Remove useless `console.log` in `resolveSlot`.
+- Fix `n-tag` misses background color when `checkable=true`.
+- Fix `n-tree` throws `Image` error in `happydom` testing environment.
+- fix `n-select` `max-tag-count` tag size doesn't follow select size.
+
+### Feats
+
+- `n-progress` props `type` add type `dashboard`.
+- `n-progress` adds `gap-degree` prop.
+- `n-progress` adds `gap-offset-degree` prop.
+- `n-select` adds `clear-filter-after-select` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
+
+### i18n
+
+- Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
+- Add eo locale.
 
 ## 2.25.1 (2022-02-06)
 
@@ -101,7 +122,7 @@
 ### Fixes
 
 - `n-input` placeholder has no line-wrap in `textarea` type.
-- `date-picker` lacks space between panel year & month.
+- `n-date-picker` lacks space between panel year & month.
 
 ### Feats
 

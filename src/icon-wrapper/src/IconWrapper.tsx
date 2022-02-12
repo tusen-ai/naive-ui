@@ -1,5 +1,5 @@
 import { computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useCssVarsClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
@@ -31,8 +31,7 @@ export const NIconWrapper = defineComponent({
       iconWrapperLight,
       props
     )
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
-    const { disableInlineTheme } = NConfigProvider || {}
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
@@ -44,16 +43,17 @@ export const NIconWrapper = defineComponent({
         '--n-icon-color': iconColor
       }
     })
-    const cssVarsClassRef = disableInlineTheme
-      ? useCssVarsClass('icon-wrapper', undefined, cssVarsRef, props)
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('icon-wrapper', undefined, cssVarsRef, props)
       : undefined
     return () => {
       const size = formatLength(props.size)
+      themeClassHandle?.onRender()
       return (
         <div
           class={[
             `${mergedClsPrefixRef.value}-icon-wrapper`,
-            cssVarsClassRef?.value
+            themeClassHandle?.themeClass.value
           ]}
           style={[
             cssVarsRef?.value as any,

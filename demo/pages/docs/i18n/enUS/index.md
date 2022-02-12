@@ -56,6 +56,8 @@ PRs are welcomed for locales that are not supported yet!
 | Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
 | Italiano                  | itIT   | dateItIT    | 2.24.2  |
 | English (British)         | enGB   | dateEnGB    | 2.25.1  |
+| Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
+| Esperanto                 | eo     | dateEo      | 2.25.2  |
 
 ## Customize the existing locale
 

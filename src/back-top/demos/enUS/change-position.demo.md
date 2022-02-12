@@ -1,4 +1,4 @@
-# Change Position
+# Change position
 
 For example: right 40px & bottom 160px.
 

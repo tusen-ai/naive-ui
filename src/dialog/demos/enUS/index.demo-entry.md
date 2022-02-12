@@ -44,7 +44,7 @@ action
 
 ## API
 
-### `useDialog` API
+### useDialog API
 
 | Name | Type | Description |
 | --- | --- | --- |
