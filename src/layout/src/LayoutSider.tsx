@@ -10,7 +10,7 @@ import {
   provide
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, call, warn } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -175,7 +175,7 @@ export default defineComponent({
       collapsedRef: mergedCollapsedRef,
       collapseModeRef: toRef(props, 'collapseMode')
     })
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
       '-layout-sider',
@@ -198,6 +198,48 @@ export default defineComponent({
     const exposedMethods: LayoutSiderInst = {
       scrollTo
     }
+
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self
+      } = themeRef.value
+      const {
+        siderToggleButtonColor,
+        siderToggleButtonBorder,
+        siderToggleBarColor,
+        siderToggleBarColorHover
+      } = self
+      const vars: any = {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-toggle-button-color': siderToggleButtonColor,
+        '--n-toggle-button-border': siderToggleButtonBorder,
+        '--n-toggle-bar-color': siderToggleBarColor,
+        '--n-toggle-bar-color-hover': siderToggleBarColorHover
+      }
+      if (props.inverted) {
+        vars['--n-color'] = self.siderColorInverted
+        vars['--n-text-color'] = self.textColorInverted
+        vars['--n-border-color'] = self.siderBorderColorInverted
+        vars['--n-toggle-button-icon-color'] =
+          self.siderToggleButtonIconColorInverted
+        vars.__invertScrollbar = self.__invertScrollbar
+      } else {
+        vars['--n-color'] = self.siderColor
+        vars['--n-text-color'] = self.textColor
+        vars['--n-border-color'] = self.siderBorderColor
+        vars['--n-toggle-button-icon-color'] = self.siderToggleButtonIconColor
+      }
+      return vars
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'layout-sider',
+        computed(() => (props.inverted ? 'a' : 'b')),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       scrollableElRef,
       scrollbarInstRef,
@@ -209,48 +251,21 @@ export default defineComponent({
       siderPlacement: siderPlacementRef,
       handleTransitionend,
       handleTriggerClick,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self
-        } = themeRef.value
-        const {
-          siderToggleButtonColor,
-          siderToggleButtonBorder,
-          siderToggleBarColor,
-          siderToggleBarColorHover
-        } = self
-        const vars: any = {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-toggle-button-color': siderToggleButtonColor,
-          '--n-toggle-button-border': siderToggleButtonBorder,
-          '--n-toggle-bar-color': siderToggleBarColor,
-          '--n-toggle-bar-color-hover': siderToggleBarColorHover
-        }
-        if (props.inverted) {
-          vars['--n-color'] = self.siderColorInverted
-          vars['--n-text-color'] = self.textColorInverted
-          vars['--n-border-color'] = self.siderBorderColorInverted
-          vars['--n-toggle-button-icon-color'] =
-            self.siderToggleButtonIconColorInverted
-          vars.__invertScrollbar = self.__invertScrollbar
-        } else {
-          vars['--n-color'] = self.siderColor
-          vars['--n-text-color'] = self.textColor
-          vars['--n-border-color'] = self.siderBorderColor
-          vars['--n-toggle-button-icon-color'] = self.siderToggleButtonIconColor
-        }
-        return vars
-      }),
+      inlineThemeDisabled,
+      cssVars: cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
   },
   render () {
     const { mergedClsPrefix, mergedCollapsed, showTrigger } = this
+    this.onRender?.()
     return (
       <aside
         class={[
           `${mergedClsPrefix}-layout-sider`,
+          this.themeClass,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
           `${mergedClsPrefix}-layout-sider--${this.siderPlacement}-placement`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
@@ -260,7 +275,7 @@ export default defineComponent({
         ]}
         onTransitionend={this.handleTransitionend}
         style={[
-          this.cssVars,
+          this.inlineThemeDisabled ? undefined : this.cssVars,
           {
             maxWidth: this.styleMaxWidth,
             width: formatLength(this.width)

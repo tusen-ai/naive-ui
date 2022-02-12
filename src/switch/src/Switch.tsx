@@ -13,13 +13,18 @@ import { useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, warnOnce } from '../../_utils'
+import {
+  call,
+  createKey,
+  warnOnce,
+  isSlotEmpty,
+  resolveWrappedSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
 import type { OnUpdateValueImpl, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
-import { isSlotEmpty, resolveWrappedSlot } from '../../../es/_utils'
 
 const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),

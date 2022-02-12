@@ -1,44 +1,46 @@
+<markdown>
 # Inverted
 
 Use `inverted` to add contrast. You can set the prop on header, footer and sider. Usually used with menu.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
-  <n-layout>
-    <n-layout-header :inverted="inverted" bordered>
-      Header Header Header
-      <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
-    </n-layout-header>
-    <n-layout has-sider>
-      <n-layout-sider
-        bordered
-        show-trigger
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        :native-scrollbar="false"
-        :inverted="inverted"
-        style="max-height: 320px;"
-      >
-        <n-menu
-          :inverted="inverted"
+<template>
+  <n-space vertical>
+    <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
+    <n-layout>
+      <n-layout-header :inverted="inverted" bordered>
+        Header Header Header
+        <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
+      </n-layout-header>
+      <n-layout has-sider>
+        <n-layout-sider
+          bordered
+          show-trigger
+          collapse-mode="width"
           :collapsed-width="64"
-          :collapsed-icon-size="22"
-          :options="menuOptions"
-        />
-      </n-layout-sider>
-      <n-layout style="max-height: 320px;" />
+          :width="240"
+          :native-scrollbar="false"
+          :inverted="inverted"
+          style="max-height: 320px"
+        >
+          <n-menu
+            :inverted="inverted"
+            :collapsed-width="64"
+            :collapsed-icon-size="22"
+            :options="menuOptions"
+          />
+        </n-layout-sider>
+        <n-layout style="max-height: 320px" />
+      </n-layout>
+      <n-layout-footer :inverted="inverted" bordered>
+        Footer Footer Footer
+      </n-layout-footer>
     </n-layout>
-    <n-layout-footer :inverted="inverted" bordered>
-      Footer Footer Footer
-    </n-layout-footer>
-  </n-layout>
-</n-space>
-```
+  </n-space>
+</template>
 
-```js
-import { h, defineComponent, ref } from 'vue'
+<script lang="ts">
+import { h, defineComponent, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -46,7 +48,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -133,4 +135,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

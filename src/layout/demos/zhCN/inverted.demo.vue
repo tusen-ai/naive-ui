@@ -1,60 +1,45 @@
-# 折叠侧边栏的位置
+<markdown>
+# 反转
 
-有时候你可能想将折叠侧边栏放在右侧。
+使用 `inverted` 增加对比度，可以使用在 header、footer 和 sider 上，可以和 menu 搭配使用。
+</markdown>
 
-```html
-<n-space vertical size="large">
-  <n-layout has-sider sider-placement="right">
-    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
-    <n-layout-sider
-      collapse-mode="width"
-      :collapsed-width="120"
-      :width="240"
-      :native-scrollbar="true"
-      show-trigger="arrow-circle"
-      content-style="padding: 24px;"
-      bordered
-    >
-      <p>海淀桥 海淀桥 海淀桥 海淀桥 海淀桥</p>
-    </n-layout-sider>
-  </n-layout>
-  <n-layout has-sider sider-placement="right">
-    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
-    <n-layout-sider
-      collapse-mode="transform"
-      :collapsed-width="120"
-      :width="240"
-      :native-scrollbar="false"
-      show-trigger="bar"
-      content-style="padding: 24px;"
-      bordered
-    >
-      <n-h2>海淀桥</n-h2>
-    </n-layout-sider>
-  </n-layout>
-  <n-layout has-sider sider-placement="right">
-    <n-layout style="max-height: 320px;" />
-    <n-layout-sider
-      bordered
-      show-trigger
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :native-scrollbar="false"
-      style="max-height: 320px;"
-    >
-      <n-menu
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-      />
-    </n-layout-sider>
-  </n-layout>
-</n-space>
-```
-
-```js
-import { h, defineComponent } from 'vue'
+<template>
+  <n-space vertical>
+    <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
+    <n-layout>
+      <n-layout-header :inverted="inverted" bordered>
+        Header Header Header
+        <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
+      </n-layout-header>
+      <n-layout has-sider>
+        <n-layout-sider
+          bordered
+          show-trigger
+          collapse-mode="width"
+          :collapsed-width="64"
+          :width="240"
+          :native-scrollbar="false"
+          :inverted="inverted"
+          style="max-height: 320px"
+        >
+          <n-menu
+            :inverted="inverted"
+            :collapsed-width="64"
+            :collapsed-icon-size="22"
+            :options="menuOptions"
+          />
+        </n-layout-sider>
+        <n-layout style="max-height: 320px" />
+      </n-layout>
+      <n-layout-footer :inverted="inverted" bordered>
+        Footer Footer Footer
+      </n-layout-footer>
+    </n-layout>
+  </n-space>
+</template>
+<script lang="ts">
+import { h, defineComponent, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -62,7 +47,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -144,8 +129,9 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
+      inverted: ref(false),
       menuOptions
     }
   }
 })
-```
+</script>

@@ -22,7 +22,13 @@ import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, call, flatten, warnOnce } from '../../_utils'
+import {
+  createKey,
+  call,
+  flatten,
+  warnOnce,
+  resolveWrappedSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
@@ -40,7 +46,6 @@ import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { tabPaneProps } from './TabPane'
 import style from './styles/index.cssr'
-import { resolveWrappedSlot } from '../../../es/_utils'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
