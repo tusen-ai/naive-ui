@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree-select` add `clear-filter-after-select` prop.
+- `n-cascader` add `clear-filter-after-select` prop.
+
 ## 2.25.2
 
 ### Fixes

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree-select` 新增 `clear-filter-after-select` 属性
+- `n-cascader` 新增 `clear-filter-after-select` 属性
+
 ## 2.25.2
 
 ### Fixes
