@@ -1,20 +1,20 @@
 <markdown>
-# Custom Icon
+# Customizing Icon
 </markdown>
 
 <template>
   <n-space>
     <n-switch v-model:value="active" size="medium">
       <template #icon>
-        <n-icon :size="18" :component="NotificationsCircleOutline" />
+        🤔
       </template>
     </n-switch>
     <n-switch v-model:value="active" size="large">
-      <template #checkedIcon>
-        <n-icon :size="18" :component="MicCircleOutline" />
+      <template #checked-icon>
+        <n-icon :component="ArrowForwardOutline" />
       </template>
-      <template #uncheckedIcon>
-        <n-icon :size="24" :component="MicOffCircleOutline" />
+      <template #unchecked-icon>
+        <n-icon :component="ArrowBackOutline" />
       </template>
     </n-switch>
   </n-space>
@@ -22,19 +22,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import {
-  NotificationsCircleOutline,
-  MicCircleOutline,
-  MicOffCircleOutline
-} from '@vicons/ionicons5'
+import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
 
 export default defineComponent({
   setup () {
     return {
       active: ref(false),
-      NotificationsCircleOutline,
-      MicCircleOutline,
-      MicOffCircleOutline
+      ArrowBackOutline,
+      ArrowForwardOutline
     }
   }
 })

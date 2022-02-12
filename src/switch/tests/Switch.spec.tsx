@@ -145,15 +145,15 @@ describe('n-switch', () => {
     })
     expect(wrapper.find('.n-switch__button').text()).toEqual('icon')
   })
-  it('should work with `checkedIcon` & `uncheckedIcon` slots', async () => {
+  it('should work with `checked-icon` & `unchecked-icon` slots', async () => {
     const wrapper = mount(NSwitch, {
       slots: {
-        checkedIcon: () => h('div', null, 'checkedIcon'),
-        uncheckedIcon: () => h('div', null, 'uncheckedIcon')
+        'checked-icon': () => h('div', null, 'checked-icon'),
+        'unchecked-icon': () => h('div', null, 'unchecked-icon')
       }
     })
-    expect(wrapper.find('.n-switch__button').text()).toEqual('uncheckedIcon')
+    expect(wrapper.find('.n-switch__button').text()).toEqual('unchecked-icon')
     await wrapper.trigger('click')
-    expect(wrapper.find('.n-switch__button').text()).toEqual('checkedIcon')
+    expect(wrapper.find('.n-switch__button').text()).toEqual('checked-icon')
   })
 })

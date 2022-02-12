@@ -1,10 +1,12 @@
-# Event
+<markdown>
+# 事件
+</markdown>
 
-```html
-<n-switch v-model:value="active" @update:value="handleChange" />
-```
+<template>
+  <n-switch v-model:value="active" @update:value="handleChange" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -13,10 +15,10 @@ export default defineComponent({
     const message = useMessage()
     return {
       active: ref(false),
-      handleChange (value) {
+      handleChange (value: boolean) {
         message.info(`Update value: ${value}`)
       }
     }
   }
 })
-```
+</script>
