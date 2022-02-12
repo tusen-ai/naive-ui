@@ -129,13 +129,11 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
-      if (props.loading) return
-      if (!mergedDisabledRef.value) {
-        if (mergedValueRef.value !== props.checkedValue) {
-          doUpdateValue(props.checkedValue)
-        } else {
-          doUpdateValue(props.uncheckedValue)
-        }
+      if (props.loading || mergedDisabledRef.value) return
+      if (mergedValueRef.value !== props.checkedValue) {
+        doUpdateValue(props.checkedValue)
+      } else {
+        doUpdateValue(props.uncheckedValue)
       }
     }
     function handleFocus (): void {
@@ -148,14 +146,18 @@ export default defineComponent({
       pressedRef.value = false
     }
     function handleKeyup (e: KeyboardEvent): void {
-      if (props.loading) return
+      if (props.loading || mergedDisabledRef.value) return
       if (e.code === 'Space') {
-        doUpdateValue(!mergedValueRef.value)
+        if (mergedValueRef.value !== props.checkedValue) {
+          doUpdateValue(props.checkedValue)
+        } else {
+          doUpdateValue(props.uncheckedValue)
+        }
         pressedRef.value = false
       }
     }
     function handleKeydown (e: KeyboardEvent): void {
-      if (props.loading) return
+      if (props.loading || mergedDisabledRef.value) return
       if (e.code === 'Space') {
         e.preventDefault()
         pressedRef.value = true

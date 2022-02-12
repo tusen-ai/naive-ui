@@ -17,7 +17,8 @@
 - Remove useless `console.log` in `resolveSlot`.
 - Fix `n-tag` misses background color when `checkable=true`.
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
-- fix `n-select` `max-tag-count` tag size doesn't follow select size.
+- Fix `n-select` `max-tag-count` tag size doesn't follow select size.
+- Fix `n-switch` can't use keyboard operation when checked value is customized.
 
 ### Feats
 

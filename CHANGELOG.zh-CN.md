@@ -18,6 +18,7 @@
 - 修复 `n-tag` 在 `checkable=true` 时缺少背景色
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
 - 修复 `n-select` `max-tag-count` 标签尺寸和 `n-select` size 不同
+- 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
 
 ### Feats
 
