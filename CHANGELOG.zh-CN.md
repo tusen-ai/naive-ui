@@ -6,6 +6,9 @@
 
 - `n-tree-select` 新增 `clear-filter-after-select` 属性
 - `n-cascader` 新增 `clear-filter-after-select` 属性
+- `n-switch` 新增 `icon` 插槽
+- `n-switch` 新增 `checked-icon` 插槽
+- `n-switch` 新增 `unchecked-icon` 插槽
 
 ## 2.25.2
 

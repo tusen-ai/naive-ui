@@ -6,6 +6,9 @@
 
 - `n-tree-select` add `clear-filter-after-select` prop.
 - `n-cascader` add `clear-filter-after-select` prop.
+- `n-switch` add `icon` slot.
+- `n-switch` add `checked-icon` slot.
+- `n-switch` add `unchecked-icon` slot.
 
 ## 2.25.2
 

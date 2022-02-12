@@ -13,6 +13,7 @@ event
 customize-value
 shape
 color
+icon.vue
 ```
 
 ## API
@@ -36,7 +37,10 @@ color
 
 ### Switch Slots
 
-| Name      | Parameters | Description                           |
-| --------- | ---------- | ------------------------------------- |
-| checked   | `()`       | Content when the switch is checked.   |
-| unchecked | `()`       | Content when the switch is unchecked. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| checked | `()` | Content when the switch is checked. |  |
+| unchecked | `()` | Content when the switch is unchecked. |  |
+| icon | `()` | icon of switch button | NEXT_VERSION |
+| checkedIcon | `()` | icon of switch button when checked | NEXT_VERSION |
+| uncheckedIcon | `()` | icon of switch button when unchecked | NEXT_VERSION |

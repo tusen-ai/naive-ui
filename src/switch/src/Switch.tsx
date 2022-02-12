@@ -233,7 +233,13 @@ export default defineComponent({
       mergedRailStyle,
       $slots
     } = this
-    const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
+    const {
+      checked: checkedSlot,
+      unchecked: uncheckedSlot,
+      icon: iconSlot,
+      checkedIcon: checkedIconSlot,
+      uncheckedIcon: uncheckedIconSlot
+    } = $slots
     return (
       <div
         role="switch"
@@ -284,7 +290,11 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       strokeWidth={20}
                     />
-                  ) : null
+                  ) : (
+                    iconSlot?.() ||
+                    (checked && checkedIconSlot?.()) ||
+                    (!checked && uncheckedIconSlot?.())
+                  )
               }}
             </Transition>
             {checkedSlot && (
