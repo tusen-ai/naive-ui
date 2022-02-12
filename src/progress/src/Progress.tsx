@@ -89,8 +89,7 @@ export default defineComponent({
       }
       return undefined
     })
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
       '-progress',
@@ -136,7 +135,7 @@ export default defineComponent({
         '--n-text-color-line-outer': textColorLineOuter
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'progress',
         computed(() => props.status[0]),
@@ -148,7 +147,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       ...themeClassHandle
     }
   },

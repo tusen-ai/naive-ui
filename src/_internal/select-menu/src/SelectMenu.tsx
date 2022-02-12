@@ -102,7 +102,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    disableInlineTheme: Boolean,
+    inlineThemeDisabled: Boolean,
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
@@ -348,8 +348,8 @@ export default defineComponent({
         '--n-loading-size': loadingSize
       }
     })
-    const { disableInlineTheme } = props
-    const themeClassHandle = disableInlineTheme
+    const { inlineThemeDisabled } = props
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'internal-select-menu',
         computed(() => props.size[0]),
@@ -360,7 +360,7 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [
         { width: formatLength(props.width) },
-        disableInlineTheme ? undefined : cssVarsRef.value
+        inlineThemeDisabled ? undefined : cssVarsRef.value
       ]
     })
     const exposedProps: InternalExposedProps = {

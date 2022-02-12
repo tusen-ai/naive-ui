@@ -84,8 +84,12 @@ export default defineComponent({
   props: tagProps,
   setup (props) {
     const contentRef = ref<HTMLElement | null>(null)
-    const { mergedBorderedRef, mergedClsPrefixRef, NConfigProvider } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Tag',
       '-tag',
@@ -128,12 +132,7 @@ export default defineComponent({
         if (value) value.textContent = textContent
       }
     }
-    const rtlEnabledRef = useRtl(
-      'Tag',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { type, size, color: { color, textColor } = {} } = props
       const {
@@ -195,7 +194,7 @@ export default defineComponent({
         '--n-text-color-pressed-checkable': textColorPressedCheckable
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'tag',
         computed(() => {
@@ -223,7 +222,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       handleClick,
       handleCloseClick,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       ...themeClassHandle
     }
   },

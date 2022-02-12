@@ -11,7 +11,7 @@
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
-    "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
+    "release:changelog": "node scripts/release-changelog",
     "lint": "pnpm run lint:code && pnpm run lint:type",
     "lint:type": "pnpm run lint:src-type && pnpm run lint:demo-type",
     "lint:code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
@@ -26,11 +26,10 @@
     "test:watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage",
     "gen-version": "node scripts/gen-version",
     "gen-volar-dts": "esno scripts/gen-component-declaration",
-    "release-changelog": "node scripts/release-changelog",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky install",
     "transpile-docs": "node scripts/md-to-vue progress",
-    "typecheck": "vue-tsc --noEmit src/**/*.vue"
+    "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
   "author": "07akioni",
   "license": "MIT",

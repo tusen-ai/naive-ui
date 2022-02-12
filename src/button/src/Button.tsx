@@ -193,7 +193,8 @@ const Button = defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Button',
       '-button',
@@ -202,12 +203,7 @@ const Button = defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'Button',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const rtlEnabledRef = useRtl('Button', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const theme = themeRef.value
       const {
@@ -477,7 +473,7 @@ const Button = defineComponent({
         ...sizeProps
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'button',
         computed(() => {
@@ -543,7 +539,7 @@ const Button = defineComponent({
           '--n-border-color-disabled': color
         }
       }),
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       ...themeClassHandle
     }
   },

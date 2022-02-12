@@ -36,8 +36,7 @@ export const NIconWrapper = defineComponent({
       iconWrapperLight,
       props
     )
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
-    const { disableInlineTheme } = NConfigProvider || {}
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
@@ -49,7 +48,7 @@ export const NIconWrapper = defineComponent({
         '--n-icon-color': iconColor
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('icon-wrapper', undefined, cssVarsRef, props)
       : emptyThemeClassHandle
     return () => {

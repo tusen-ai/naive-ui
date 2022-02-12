@@ -24,7 +24,7 @@ export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       '-page-header',
@@ -33,11 +33,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'PageHeader',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
+    const rtlEnabledRef = useRtl('PageHeader', mergedRtlRef, mergedClsPrefixRef)
 
     return {
       rtlEnabled: rtlEnabledRef,

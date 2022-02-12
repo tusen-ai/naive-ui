@@ -66,8 +66,8 @@ export default defineComponent({
       const { onClose } = props
       if (onClose) call(onClose)
     }
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -76,11 +76,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'Card',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
+    const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
@@ -139,7 +135,7 @@ export default defineComponent({
         '--n-close-size': closeSize
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'card',
         computed(() => {
@@ -154,7 +150,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       ...themeClassHandle
     }
   },
