@@ -1,13 +1,8 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
-import {
-  emptyThemeClassHandle,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf } from '../../_utils'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
@@ -144,14 +139,15 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      ...themeClassHandle
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -193,57 +189,84 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         role={this.role}
       >
-        {$slots.cover ? (
-          <div class={`${mergedClsPrefix}-card-cover`} role="none">
-            {$slots.cover()}
-          </div>
-        ) : null}
-        {$slots.header || this.title || this.closable ? (
-          <div
-            class={`${mergedClsPrefix}-card-header`}
-            style={this.headerStyle}
-          >
-            <div class={`${mergedClsPrefix}-card-header__main`} role="heading">
-              {$slots.header ? $slots.header() : this.title}
-            </div>
-            {$slots['header-extra'] ? (
-              <div
-                class={`${mergedClsPrefix}-card-header__extra`}
-                style={this.headerExtraStyle}
-              >
-                {$slots['header-extra']()}
+        {resolveWrappedSlot(
+          $slots.cover,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-card-cover`} role="none">
+                {children}
               </div>
-            ) : null}
-            {this.closable ? (
-              <NBaseClose
-                clsPrefix={mergedClsPrefix}
-                class={`${mergedClsPrefix}-card-header__close`}
-                onClick={this.handleCloseClick}
-              />
-            ) : null}
-          </div>
-        ) : null}
-        <div
-          class={`${mergedClsPrefix}-card__content`}
-          style={this.contentStyle}
-          role="none"
-        >
-          {$slots}
-        </div>
-        {$slots.footer ? (
-          <div
-            class={`${mergedClsPrefix}-card__footer`}
-            style={this.footerStyle}
-            role="none"
-          >
-            {$slots.footer()}
-          </div>
-        ) : null}
-        {$slots.action ? (
-          <div class={`${mergedClsPrefix}-card__action`} role="none">
-            {$slots.action()}
-          </div>
-        ) : null}
+            )
+        )}
+        {resolveWrappedSlot($slots.header, (children) => {
+          return children || this.title || this.closable ? (
+            <div
+              class={`${mergedClsPrefix}-card-header`}
+              style={this.headerStyle}
+            >
+              <div
+                class={`${mergedClsPrefix}-card-header__main`}
+                role="heading"
+              >
+                {children || [this.title]}
+              </div>
+              {resolveWrappedSlot(
+                $slots['header-extra'],
+                (children) =>
+                  children && (
+                    <div
+                      class={`${mergedClsPrefix}-card-header__extra`}
+                      style={this.headerExtraStyle}
+                    >
+                      {children}
+                    </div>
+                  )
+              )}
+              {this.closable ? (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  class={`${mergedClsPrefix}-card-header__close`}
+                  onClick={this.handleCloseClick}
+                />
+              ) : null}
+            </div>
+          ) : null
+        })}
+        {resolveWrappedSlot(
+          $slots.default,
+          (children) =>
+            children && (
+              <div
+                class={`${mergedClsPrefix}-card__content`}
+                style={this.contentStyle}
+                role="none"
+              >
+                {children}
+              </div>
+            )
+        )}
+        {resolveWrappedSlot(
+          $slots.footer,
+          (children) =>
+            children && [
+              <div
+                class={`${mergedClsPrefix}-card__footer`}
+                style={this.footerStyle}
+                role="none"
+              >
+                {children}
+              </div>
+            ]
+        )}
+        {resolveWrappedSlot(
+          $slots.action,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-card__action`} role="none">
+                {children}
+              </div>
+            )
+        )}
       </div>
     )
   }

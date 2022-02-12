@@ -1,4 +1,4 @@
-# Custom
+# Dropdown
 
 It is possible to pass a custom template when you want to customize the item link to be, for example a `dropdown` or a `router-link`.
 

@@ -26,11 +26,7 @@ import type {
 } from '../../../select/src/interface'
 import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import {
-  useThemeClass,
-  useTheme,
-  emptyThemeClassHandle
-} from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
@@ -356,13 +352,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
-    const styleRef = computed(() => {
-      return [
-        { width: formatLength(props.width) },
-        inlineThemeDisabled ? undefined : cssVarsRef.value
-      ]
-    })
+      : undefined
     const exposedProps: InternalExposedProps = {
       selfRef,
       next,
@@ -373,7 +363,6 @@ export default defineComponent({
       mergedTheme: themeRef,
       virtualListRef,
       scrollbarRef,
-      style: styleRef,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
@@ -394,8 +383,10 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      ...exposedProps,
-      ...themeClassHandle
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef.value,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      ...exposedProps
     }
   },
   render () {
@@ -417,7 +408,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={this.style as any}
+        style={[{ width: formatLength(this.width) }, this.cssVars as any]}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
@@ -521,16 +512,20 @@ export default defineComponent({
             ])}
           </div>
         )}
-        {resolveWrappedSlot($slots.action, (children) => [
-          <div
-            class={`${clsPrefix}-base-select-menu__action`}
-            data-action
-            key="action"
-          >
-            {children}
-          </div>,
-          <NFocusDetector onFocus={this.onTabOut} key="focus-detector" />
-        ])}
+        {resolveWrappedSlot(
+          $slots.action,
+          (children) =>
+            children && [
+              <div
+                class={`${clsPrefix}-base-select-menu__action`}
+                data-action
+                key="action"
+              >
+                {children}
+              </div>,
+              <NFocusDetector onFocus={this.onTabOut} key="focus-detector" />
+            ]
+        )}
       </div>
     )
   }

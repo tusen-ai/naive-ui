@@ -9,12 +9,7 @@ import {
   provide,
   toRef
 } from 'vue'
-import {
-  useConfig,
-  useThemeClass,
-  useTheme,
-  emptyThemeClassHandle
-} from '../../_mixins'
+import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
 import {
@@ -213,7 +208,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       ...tagPublicMethods,
       rtlEnabled: rtlEnabledRef,
@@ -223,7 +218,8 @@ export default defineComponent({
       handleClick,
       handleCloseClick,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      ...themeClassHandle
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -253,9 +249,13 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {resolveWrappedSlot($slots.avatar, (children) => [
-          <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
-        ])}
+        {resolveWrappedSlot(
+          $slots.avatar,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
+            )
+        )}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots.default?.()}
         </span>

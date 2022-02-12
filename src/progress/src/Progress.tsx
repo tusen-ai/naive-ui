@@ -1,10 +1,5 @@
 import { h, computed, defineComponent, PropType, CSSProperties } from 'vue'
-import {
-  useConfig,
-  useTheme,
-  useThemeClass,
-  emptyThemeClassHandle
-} from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
@@ -142,13 +137,14 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      ...themeClassHandle
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {

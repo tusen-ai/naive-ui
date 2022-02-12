@@ -62,11 +62,3 @@ export function useThemeClass (
     }
   }
 }
-
-export const emptyThemeClassHandle: {
-  themeClass?: Ref<string>
-  onRender?: () => void
-} = {
-  themeClass: undefined,
-  onRender: undefined
-}

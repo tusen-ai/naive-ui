@@ -20,11 +20,7 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
-import {
-  useThemeClass,
-  useTheme,
-  emptyThemeClassHandle
-} from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
@@ -472,7 +468,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
@@ -518,7 +514,8 @@ export default defineComponent({
       getTail,
       renderLabel: props.renderLabel as RenderLabelImpl,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      ...themeClassHandle
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {

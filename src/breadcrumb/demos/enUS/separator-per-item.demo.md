@@ -1,4 +1,4 @@
-# Custom Separator by Item
+# Custom separator by item
 
 Use separator prop or separator slot to custom separator of an item. When both are present, separator slot will be used.
 
