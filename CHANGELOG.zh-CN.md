@@ -9,6 +9,7 @@
 - `n-switch` 新增 `icon` 插槽
 - `n-switch` 新增 `checked-icon` 插槽
 - `n-switch` 新增 `unchecked-icon` 插槽
+- `n-tabs` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.25.2
 

@@ -9,6 +9,7 @@
 - `n-switch` add `icon` slot.
 - `n-switch` add `checked-icon` slot.
 - `n-switch` add `unchecked-icon` slot.
+- `n-tabs` uses `n` as CSS vars prefix.
 
 ## 2.25.2
 
