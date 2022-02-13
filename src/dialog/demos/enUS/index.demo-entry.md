@@ -35,11 +35,11 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
-async
-use-component
-mask
-action
+basic.vue
+async.vue
+use-component.vue
+mask.vue
+action.vue
 ```
 
 ## API

@@ -5,27 +5,27 @@
 ## 演示
 
 ```demo
-basic
-controlled
-mask-closable
-custom-position
-preset-card
-preset-confirm
-preset-confirm-slot
-transform-origin
-a11y-debug
-raw-debug
-dark-1-debug
-dark-2-debug
-dark-3-debug
-dark-4-debug
-dark-5-debug
-drawer-debug
-dark-6-debug
-dark-7-debug
-dark-8-debug
-dark-9-debug
-dark-10-debug
+basic.vue
+controlled.vue
+mask-closable.vue
+custom-position.vue
+preset-card.vue
+preset-confirm.vue
+preset-confirm-slot.vue
+transform-origin.vue
+a11y-debug.vue
+raw-debug.vue
+dark-1-debug.vue
+dark-2-debug.vue
+dark-3-debug.vue
+dark-4-debug.vue
+dark-5-debug.vue
+drawer-debug.vue
+dark-6-debug.vue
+dark-7-debug.vue
+dark-8-debug.vue
+dark-9-debug.vue
+dark-10-debug.vue
 ```
 
 ## API
