@@ -13,6 +13,7 @@ preset-card.vue
 preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
+nested-debug.vue
 a11y-debug.vue
 raw-debug.vue
 dark-1-debug.vue
