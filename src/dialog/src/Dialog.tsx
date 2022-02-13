@@ -1,4 +1,5 @@
-import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { h, defineComponent, computed, CSSProperties, ref } from 'vue'
+import { on, off } from 'evtd'
 import {
   InfoIcon,
   SuccessIcon,
@@ -40,9 +41,16 @@ export const NDialog = defineComponent({
     ...(useTheme.props as ThemeProps<DialogTheme>),
     ...dialogProps
   },
-  setup (props) {
+  setup(props) {
     const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
       useConfig(props)
+    // draggable
+    const dialogElementRef = ref<HTMLDivElement | null>(null)
+    const topRef = ref('50%')
+    const leftRef = ref('50%')
+    const mouseClientX = ref(0)
+    const mouseClientY = ref(0)
+
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
@@ -51,17 +59,45 @@ export const NDialog = defineComponent({
         'left'
       )
     })
-    function handlePositiveClick (e: MouseEvent): void {
+    function handlePositiveClick(e: MouseEvent): void {
       const { onPositiveClick } = props
       if (onPositiveClick) onPositiveClick(e)
     }
-    function handleNegativeClick (e: MouseEvent): void {
+    function handleNegativeClick(e: MouseEvent): void {
       const { onNegativeClick } = props
       if (onNegativeClick) onNegativeClick(e)
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
       if (onClose) onClose()
+    }
+    function handleMouseMove(e: MouseEvent): void {
+      const dX = e.clientX - mouseClientX.value
+      const dY = e.clientY - mouseClientY.value
+
+      topRef.value = `${parseInt(topRef.value, 10) + dY}px`
+      leftRef.value = `${parseInt(leftRef.value, 10) + dX}px`
+
+      mouseClientX.value = e.clientX
+      mouseClientY.value = e.clientY
+    }
+    function handleMouseUp(e: MouseEvent): void {
+      e.preventDefault()
+      e.stopPropagation()
+      off('mousemove', window, handleMouseMove, true)
+      off('mouseup', window, handleMouseUp, true)
+    }
+    function handleTitleMouseDown(e: MouseEvent): void {
+      e.preventDefault()
+      e.stopPropagation()
+      if (dialogElementRef.value === null || !props.draggable) return
+      const computedStyle = getComputedStyle(dialogElementRef.value)
+      topRef.value = computedStyle.top
+      leftRef.value = computedStyle.left
+      mouseClientX.value = e.clientX
+      mouseClientY.value = e.clientY
+      on('mousemove', window, handleMouseMove, true)
+      on('mouseup', window, handleMouseUp, true)
     }
     const themeRef = useTheme(
       'Dialog',
@@ -127,25 +163,79 @@ export const NDialog = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'dialog',
-        computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
-        cssVarsRef,
-        props
-      )
+          'dialog',
+          computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
+      dialogElementRef,
+      topRef,
+      leftRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIconPlacement: mergedIconPlacementRef,
       mergedTheme: themeRef,
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      handleTitleMouseDown,
+      cssVars: computed(() => {
+        const { type, iconPlacement } = props
+        const {
+          common: { cubicBezierEaseInOut },
+          self: {
+            fontSize,
+            lineHeight,
+            border,
+            titleTextColor,
+            textColor,
+            color,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
+            borderRadius,
+            titleFontWeight,
+            titleFontSize,
+            padding,
+            iconSize,
+            actionSpace,
+            contentMargin,
+            closeSize,
+            [iconPlacement === 'top' ? 'iconMarginIconTop' : 'iconMargin']:
+              iconMargin,
+            [iconPlacement === 'top' ? 'closeMarginIconTop' : 'closeMargin']:
+              closeMargin,
+            [createKey('iconColor', type)]: iconColor
+          }
+        } = themeRef.value
+        return {
+          '--n-font-size': fontSize,
+          '--n-icon-color': iconColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-close-margin': closeMargin,
+          '--n-icon-margin': iconMargin,
+          '--n-icon-size': iconSize,
+          '--n-close-size': closeSize,
+          '--n-close-color': closeColor,
+          '--n-close-color-hover': closeColorHover,
+          '--n-close-color-pressed': closeColorPressed,
+          '--n-color': color,
+          '--n-text-color': textColor,
+          '--n-border-radius': borderRadius,
+          '--n-padding': padding,
+          '--n-line-height': lineHeight,
+          '--n-border': border,
+          '--n-content-margin': contentMargin,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-title-text-color': titleTextColor,
+          '--n-action-space': actionSpace
+        }
+      })
     }
   },
-  render () {
+  render() {
     const {
       bordered,
       mergedIconPlacement,
@@ -153,16 +243,20 @@ export const NDialog = defineComponent({
       closable,
       showIcon,
       title,
+      topRef,
+      leftRef,
       content,
       action,
       negativeText,
       positiveText,
       handlePositiveClick,
       handleNegativeClick,
+      handleTitleMouseDown,
       mergedTheme,
       loading,
       type,
-      mergedClsPrefix
+      mergedClsPrefix,
+      draggable
     } = this
 
     this.onRender?.()
@@ -189,10 +283,16 @@ export const NDialog = defineComponent({
           `${mergedClsPrefix}-dialog`,
           this.themeClass,
           `${mergedClsPrefix}-dialog--icon-${mergedIconPlacement}`,
-          bordered && `${mergedClsPrefix}-dialog--bordered`
+          bordered && `${mergedClsPrefix}-dialog--bordered`,
+          draggable && `${mergedClsPrefix}-dialog--draggable`
         ]}
-        style={cssVars as CSSProperties}
+        style={{
+          ...(cssVars as CSSProperties),
+          top: draggable ? topRef : undefined,
+          left: draggable ? leftRef : undefined
+        }}
         role="dialog"
+        ref="dialogElementRef"
       >
         {closable ? (
           <NBaseClose
@@ -204,9 +304,26 @@ export const NDialog = defineComponent({
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}
-        <div class={`${mergedClsPrefix}-dialog__title`}>
-          {showIcon && mergedIconPlacement === 'left' ? icon : null}
-          {resolveSlot(this.$slots.header, () => [render(title)])}
+        <div
+          class={`${mergedClsPrefix}-dialog__title`}
+          onMousedown={draggable ? handleTitleMouseDown : undefined}
+        >
+          {showIcon && mergedIconPlacement === 'left' ? (
+            <NBaseIcon
+              clsPrefix={mergedClsPrefix}
+              class={`${mergedClsPrefix}-dialog__icon`}
+            >
+              {{
+                default: () =>
+                  $slots.icon
+                    ? $slots.icon()
+                    : this.icon
+                    ? render(this.icon)
+                    : iconMap[this.type]
+              }}
+            </NBaseIcon>
+          ) : null}
+          {$slots.header ? $slots.header() : render(title)}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
           {resolveSlot(this.$slots.default, () => [render(content)])}

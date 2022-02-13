@@ -21,10 +21,10 @@ import { useDialog } from 'naive-ui'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const dialog = useDialog()
     return {
-      warning () {
+      warning() {
         dialog.warning(options)
       }
     }
@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+draggable.vue
 ```
 
 ## API

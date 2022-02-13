@@ -16,6 +16,7 @@ const dialogProps = {
     type: Boolean,
     default: true
   },
+  draggable: Boolean,
   negativeText: String,
   positiveText: String,
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
