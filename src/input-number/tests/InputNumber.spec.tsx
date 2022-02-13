@@ -95,9 +95,16 @@ describe('n-input-number', () => {
     const buttons = wrapper.findAll('.n-input__suffix > button')
     const minusBtn = buttons[0]
     const addBtn = buttons[1]
+    const buttonIcons = wrapper.findAll(
+      '.n-input__suffix > button .n-base-icon'
+    )
+    const minusBtnIcon = buttonIcons[0]
+    const addBtnIcon = buttonIcons[1]
     let arr = [0.1, 0]
     for (let i = 0; i < arr.length; i++) {
-      await minusBtn.trigger('click')
+      await minusBtnIcon.trigger('mousedown')
+      await new Promise((resolve) => setTimeout(resolve, 50))
+      await minusBtnIcon.trigger('mouseup')
       expect((input.element as HTMLInputElement).value).toEqual(
         arr[i].toString()
       )
@@ -107,7 +114,9 @@ describe('n-input-number', () => {
     await wrapper.setProps({ max: 0.6 })
     arr = [0.2, 0.4, 0.6]
     for (let i = 0; i < arr.length; i++) {
-      await addBtn.trigger('click')
+      await addBtnIcon.trigger('mousedown')
+      await new Promise((resolve) => setTimeout(resolve, 50))
+      await addBtnIcon.trigger('mouseup')
       expect((input.element as HTMLInputElement).value).toEqual(
         arr[i].toString()
       )
@@ -131,14 +140,20 @@ describe('n-input-number', () => {
     await wrapper.find('input').trigger('input')
     await wrapper.find('input').trigger('blur')
     expect(wrapper.find('input').element.value).toEqual('0.3333')
-    const addBtn = wrapper.findAll('.n-input__suffix > button')[1]
-    await addBtn.trigger('click')
+    const addBtn = wrapper.findAll('.n-input__suffix > button .n-base-icon')[1]
+    await addBtn.trigger('mousedown')
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await addBtn.trigger('mouseup')
     expect(wrapper.find('input').element.value).toEqual('2.3333')
     await wrapper.setProps({ step: 2.333333 })
-    await addBtn.trigger('click')
+    await addBtn.trigger('mousedown')
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await addBtn.trigger('mouseup')
     expect(wrapper.find('input').element.value).toEqual('4.666633')
     await wrapper.setProps({ step: 2.33 })
-    await addBtn.trigger('click')
+    await addBtn.trigger('mousedown')
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await addBtn.trigger('mouseup')
     expect(wrapper.find('input').element.value).toEqual('6.996633')
     wrapper.unmount()
   })

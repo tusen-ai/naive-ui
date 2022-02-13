@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Pending
+
+- `n-input-number` adds hold click to increment/decrement, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
+
 ## 2.25.2
 
 ### Fixes
