@@ -5,8 +5,8 @@ It looks better but I'm sure it's not as reliable as native scrollbar.
 ## Demos
 
 ```demo
-basic
-x
+basic.vue
+x.vue
 ```
 
 ## API

@@ -7,11 +7,11 @@
 ## 演示
 
 ```demo
-basic
-ignore-gap
-affix
-scrollto
-max-height-debug
+basic.vue
+ignore-gap.vue
+affix.vue
+scrollto.vue
+max-height-debug.vue
 ```
 
 ## API

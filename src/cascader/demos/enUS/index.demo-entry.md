@@ -28,6 +28,7 @@ focus.vue
 | check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked (not working in single select mode). `child` means showing all child node. |  |
 | children-field | `string` | `'children'` | The children field in `CascaderOption`. |  |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | NEXT_VERSION |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |  |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |  |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |

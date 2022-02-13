@@ -11,17 +11,17 @@
 ## 演示
 
 ```demo
-basic
-set-padding
-embedded
-border
-absolute
-scrollbar
-collapse
-collapse-right
-inverted
-show-sider-content
-scroll-to
+basic.vue
+set-padding.vue
+embedded.vue
+border.vue
+absolute.vue
+scrollbar.vue
+collapse.vue
+collapse-right.vue
+inverted.vue
+show-sider-content.vue
+scroll-to.vue
 ```
 
 ## API

@@ -7,7 +7,7 @@ import {
   Ref,
   toRef
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import type { BreadcrumbTheme } from '../styles'
@@ -36,7 +36,7 @@ export default defineComponent({
   name: 'Breadcrumb',
   props: breadcrumbProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Breadcrumb',
       '-breadcrumb',
@@ -49,38 +49,45 @@ export default defineComponent({
       separatorRef: toRef(props, 'separator'),
       mergedClsPrefixRef
     })
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          separatorColor,
+          itemTextColor,
+          itemTextColorHover,
+          itemTextColorPressed,
+          itemTextColorActive,
+          fontSize,
+          fontWeightActive
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-hover': itemTextColorHover,
+        '--n-item-text-color-pressed': itemTextColorPressed,
+        '--n-item-text-color-active': itemTextColorActive,
+        '--n-separator-color': separatorColor,
+        '--n-font-weight-active': fontWeightActive
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('breadcrumb', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            separatorColor,
-            itemTextColor,
-            itemTextColorHover,
-            itemTextColorPressed,
-            itemTextColorActive,
-            fontSize,
-            fontWeightActive
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-item-text-color': itemTextColor,
-          '--n-item-text-color-hover': itemTextColorHover,
-          '--n-item-text-color-pressed': itemTextColorPressed,
-          '--n-item-text-color-active': itemTextColorActive,
-          '--n-separator-color': separatorColor,
-          '--n-font-weight-active': fontWeightActive
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
+    this.onRender?.()
     return (
       <nav
-        class={`${this.mergedClsPrefix}-breadcrumb`}
+        class={[`${this.mergedClsPrefix}-breadcrumb`, this.themeClass]}
         style={this.cssVars as CSSProperties}
         aria-label="Breadcrumb"
       >

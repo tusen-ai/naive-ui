@@ -68,7 +68,8 @@ export default defineComponent({
       closeMenu,
       handleSelectMenuClickOutside,
       doUncheck: cascaderDoUncheck,
-      doCheck: cascaderDoCheck
+      doCheck: cascaderDoCheck,
+      clearPattern
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
@@ -137,6 +138,7 @@ export default defineComponent({
         } else if (mergedValue === null) {
           cascaderDoCheck(tmNode.key)
         }
+        clearPattern()
       } else {
         cascaderDoCheck(tmNode.key)
         // currently the select menu is set to focusable

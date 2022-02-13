@@ -1,4 +1,13 @@
-import { h, computed, defineComponent, ref, Fragment, toRaw, watch } from 'vue'
+import {
+  h,
+  computed,
+  defineComponent,
+  ref,
+  Fragment,
+  toRaw,
+  watch,
+  inject
+} from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { lightTheme } from '../../themes/light'
 import {
@@ -6,12 +15,13 @@ import {
   GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NPopover } from '../../popover'
 import { NScrollbar } from '../../_internal'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NInput } from '../../input'
 import { NSpace } from '../../space'
-import { useConfig, useLocale } from '../../_mixins'
+import { useLocale } from '../../_mixins'
 import { NElement } from '../../element'
 import { NDivider } from '../../divider'
 import { NButton } from '../../button'
@@ -56,7 +66,7 @@ export default defineComponent({
   inheritAttrs: false,
   setup () {
     const fileInputRef = ref<HTMLInputElement | null>(null)
-    const { NConfigProvider } = useConfig()
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const theme = computed(() => {
       const mergedTheme: GlobalTheme =
         NConfigProvider?.mergedThemeRef.value || lightTheme

@@ -5,14 +5,15 @@ I have a Nintendo Switch, but don't have time to play it. This reminds me of my 
 ## Demos
 
 ```demo
-basic
-size
-content
-loading
-event
-customize-value
-shape
-color
+basic.vue
+size.vue
+content.vue
+loading.vue
+event.vue
+customize-value.vue
+shape.vue
+color.vue
+icon.vue
 ```
 
 ## API
@@ -36,7 +37,10 @@ color
 
 ### Switch Slots
 
-| Name      | Parameters | Description                           |
-| --------- | ---------- | ------------------------------------- |
-| checked   | `()`       | Content when the switch is checked.   |
-| unchecked | `()`       | Content when the switch is unchecked. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| checked | `()` | Content when the switch is checked. |  |
+| checked-icon | `()` | Icon of switch button when checked. | NEXT_VERSION |
+| icon | `()` | Icon of switch button. | NEXT_VERSION |
+| unchecked | `()` | Content when the switch is unchecked. |  |
+| unchecked-icon | `()` | Icon of switch button when unchecked. | NEXT_VERSION |

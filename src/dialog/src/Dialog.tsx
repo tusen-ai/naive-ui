@@ -36,12 +36,12 @@ export const NDialog = defineComponent({
     ...dialogProps
   },
   setup (props) {
-    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
+    const { mergedComponentPropsRef, mergedClsPrefixRef } = useConfig(props)
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
-        iconPlacement ??
-        NConfigProvider?.mergedComponentPropsRef.value?.Dialog?.iconPlacement ??
+        iconPlacement ||
+        mergedComponentPropsRef?.value?.Dialog?.iconPlacement ||
         'left'
       )
     })

@@ -7,10 +7,10 @@ Naive UI 提供了常用 HTML 标签的一些基本样式，以及对文本渲�
 ## 演示
 
 ```demo
-header
-tags
-text
-router-link
+header.vue
+tags.vue
+text.vue
+router-link.vue
 ```
 
 ## API

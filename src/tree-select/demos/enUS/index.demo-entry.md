@@ -26,6 +26,7 @@ debug
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
 | children-field | `string` | `'children'` | The children property to use for `TreeSelectOption`'s. |  |
 | clearable | `boolean` | `false` | Whether the selection is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | NEXT_VERSION |
 | consistent-menu-width | `boolean` | `true` | Force the widths of selection input and menu to be equal. \*This will disable virtual scrolling. |  |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when `multiple`) by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
