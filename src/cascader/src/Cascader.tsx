@@ -889,7 +889,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-cascader`}>
         <VBinder>
@@ -958,7 +958,10 @@ export default defineComponent({
                         onMousedown={this.handleMenuMousedown}
                         onTabout={this.handleMenuTabout}
                       >
-                        {$slots}
+                        {{
+                          action: () => this.$slots.action?.(),
+                          empty: () => this.$slots.empty?.()
+                        }}
                       </CascaderMenu>
                     )
                   }

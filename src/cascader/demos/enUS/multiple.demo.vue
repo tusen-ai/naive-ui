@@ -6,16 +6,14 @@
   <n-space vertical>
     <n-space>
       <n-space>
-        <n-switch v-model:value="checkStrategyIsChild" />Child Check
-        Strategy
+        <n-switch v-model:value="checkStrategyIsChild" />Child Check Strategy
       </n-space>
       <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
       <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
       <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
       <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
       <n-space>
-        <n-switch v-model:value="responsiveMaxTagCount" />Responsive
-        MaxTagCount
+        <n-switch v-model:value="responsiveMaxTagCount" />Responsive MaxTagCount
       </n-space>
       <n-space>
         <n-switch
@@ -42,10 +40,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -84,8 +83,8 @@ export default defineComponent({
       responsiveMaxTagCount: ref(true),
       clearFilterAfterSelect: ref(true),
       options: getOptions(),
-      handleUpdateValue (...args) {
-        console.log(...args)
+      handleUpdateValue (value: string[], options: CascaderOption[]) {
+        console.log(value, options)
       }
     }
   }
