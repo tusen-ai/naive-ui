@@ -1,39 +1,42 @@
-# Size
+<markdown>
+# 尺寸
 
-Cascader has `small`, `medium` and `large` sizes.
+级联选择有 `small`、`medium` 和 `large` 尺寸。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-cascader
-    v-model:value="value"
-    placeholder="Meaningless values"
-    :options="options"
-    :leaf-only="false"
-    size="small"
-  />
-  <n-cascader
-    v-model:value="value"
-    placeholder="Meaningless values"
-    :options="options"
-    :leaf-only="false"
-    size="medium"
-  />
-  <n-cascader
-    v-model:value="value"
-    placeholder="Meaningless values"
-    :options="options"
-    :leaf-only="false"
-    size="large"
-  />
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-cascader
+      v-model:value="value"
+      placeholder="没啥用的值"
+      :options="options"
+      :leaf-only="false"
+      size="small"
+    />
+    <n-cascader
+      v-model:value="value"
+      placeholder="没啥用的值"
+      :options="options"
+      :leaf-only="false"
+      size="medium"
+    />
+    <n-cascader
+      v-model:value="value"
+      placeholder="没啥用的值"
+      :options="options"
+      :leaf-only="false"
+      size="large"
+    />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -68,4 +71,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

@@ -1,19 +1,28 @@
-# 操作插槽
+<markdown>
+# Action slot
 
-有人要在级联菜单里用这个插槽吗？
+Is there anybody who needs an action slot on a cascader menu?
+</markdown>
 
-```html
-<n-cascader v-model:value="value" placeholder="没啥用的值" :options="options">
-  <template #action>站在能分割世界的桥</template>
-</n-cascader>
-```
+<template>
+  <n-cascader
+    v-model:value="value"
+    placeholder="Meaningless values"
+    :options="options"
+  >
+    <template #action>
+      Standing on a bridge that can divide the world
+    </template>
+  </n-cascader>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -48,4 +57,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

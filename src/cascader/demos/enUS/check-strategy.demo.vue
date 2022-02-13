@@ -1,33 +1,42 @@
+<markdown>
 # Setting check strategy
 
 Set the way to show checked options. `all` means showing all checked nodes. `parent` means showing all checked parent nodes when all child node are checked. `child` means showing all child nodes.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space>
-    <n-radio-group v-model:value="checkStrategy">
-      <n-radio-button value="all">All</n-radio-button>
-      <n-radio-button value="parent">Parent</n-radio-button>
-      <n-radio-button value="child">Child</n-radio-button>
-    </n-radio-group>
+<template>
+  <n-space vertical>
+    <n-space>
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
+    </n-space>
+    <n-cascader
+      multiple
+      cascade
+      :check-strategy="checkStrategy"
+      :options="options"
+      :default-value="['1-1-1-1', '1-1-2-1', '1-1-2-2', '1-1-2-3']"
+      @update:value="handleUpdateValue"
+    />
   </n-space>
-  <n-cascader
-    multiple
-    cascade
-    :check-strategy="checkStrategy"
-    :options="options"
-    :default-value="['1-1-1-1', '1-1-2-1', '1-1-2-2', '1-1-2-3']"
-    @update:value="handleUpdateValue"
-  />
-</n-space>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 4, iterator = 1, prefix = '') {
   const length = 3
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -57,12 +66,12 @@ function getOptions (depth = 4, iterator = 1, prefix = '') {
 export default defineComponent({
   setup () {
     return {
-      checkStrategy: ref('all'),
+      checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       options: getOptions(),
-      handleUpdateValue: (values) => {
+      handleUpdateValue: (values: string | string[]) => {
         console.log(values)
       }
     }
   }
 })
-```
+</script>

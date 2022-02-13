@@ -5,15 +5,15 @@
 ## 演示
 
 ```demo
-single
-multiple
-size
-single-lazy
-multiple-lazy
-action
-virtual
-check-strategy
-custom-field
+single.vue
+multiple.vue
+size.vue
+single-lazy.vue
+multiple-lazy.vue
+action.vue
+virtual.vue
+check-strategy.vue
+custom-field.vue
 custom-render.vue
 focus.vue
 ```

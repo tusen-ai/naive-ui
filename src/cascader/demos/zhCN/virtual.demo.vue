@@ -1,40 +1,40 @@
+<markdown>
 # 大量数据
 
-大量数据也可以，`virtual-scroll` 默认是打开的，所以这个例子只是为了给你看看。
-
 下面这个例子有 5000 \* 2 \* 2 = 20000 条数据。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space>
-    <n-space
-      ><n-switch v-model:value="checkStrategyIsChild" />Child Check
-      Strategy</n-space
-    >
-    <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
-    <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
-    <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
-    <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
+<template>
+  <n-space vertical>
+    <n-space>
+      <n-space>
+        <n-switch v-model:value="checkStrategyIsChild" />Child Check Strategy
+      </n-space>
+      <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
+      <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
+      <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
+      <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
+    </n-space>
+    <n-cascader
+      v-model:value="value"
+      placeholder="没啥用的值"
+      :expand-trigger="hoverTrigger ? 'hover' : 'click'"
+      :options="options"
+      :cascade="cascade"
+      :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
+      :show-path="showPath"
+      :filterable="filterable"
+    />
   </n-space>
-  <n-cascader
-    v-model:value="value"
-    placeholder="没啥用的值"
-    :expand-trigger="hoverTrigger ? 'hover' : 'click'"
-    :options="options"
-    :cascade="cascade"
-    :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
-    :show-path="showPath"
-    :filterable="filterable"
-  />
-</n-space>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = iterator === 1 ? 5000 : 2
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -74,4 +74,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
