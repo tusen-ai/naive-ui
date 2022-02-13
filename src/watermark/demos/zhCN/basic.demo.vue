@@ -3,24 +3,35 @@
 </markdown>
 
 <template>
-  <n-watermark content="水印" :gap-x="10" :gap-y="50">
+  <n-watermark
+    content="核心机密"
+    cross
+    selectable
+    :font-size="16"
+    :line-height="16"
+    :width="192"
+    :height="128"
+    :x-offset="12"
+    :y-offset="28"
+    :rotate="-15"
+  >
     <n-table :bordered="false" :single-line="false">
       <thead>
         <tr>
-          <th>不问</th>
-          <th>不能</th>
-          <th>不明白</th>
+          <th>复盘</th>
+          <th>赋能</th>
+          <th>协同</th>
           <th>...</th>
-          <th>不！不！不！</th>
+          <th>串联</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>机密</td>
-          <td>禁止</td>
-          <td>外传</td>
+          <td>拉通</td>
+          <td>打通</td>
+          <td>树立</td>
           <td>...</td>
-          <td>给司外势力递刀子</td>
+          <td>履约</td>
         </tr>
         <tr>
           <td>...</td>

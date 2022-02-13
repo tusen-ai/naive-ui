@@ -15,6 +15,7 @@
 - `n-switch` add `checked-icon` slot.
 - `n-switch` add `unchecked-icon` slot.
 - `n-tabs` uses `n` as CSS vars prefix.
+- `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
 
 ## 2.25.2
 
@@ -31,10 +32,6 @@
 - `n-progress` adds `gap-degree` prop.
 - `n-progress` adds `gap-offset-degree` prop.
 - `n-select` adds `clear-filter-after-select` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
-
-### Feats
-
-- `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
 
 ### i18n
 

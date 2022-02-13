@@ -1,8 +1,8 @@
-import { h, defineComponent, PropType, ref } from 'vue'
+import { h, defineComponent, PropType, ref, watchEffect } from 'vue'
+import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { ExtractPublicPropTypes, warnOnce } from '../../_utils'
-import { useThemeVars } from '../../composables/index'
 import { watermarkLight, WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
@@ -23,47 +23,76 @@ function getRatio (context: any): number {
 
 const watermarkProps = {
   ...(useTheme.props as ThemeProps<WatermarkTheme>),
+  debug: Boolean,
+  cross: Boolean,
   width: {
     type: Number,
-    default: 120
+    default: 32
   },
   height: {
     type: Number,
-    default: 64
+    default: 32
   },
   zIndex: {
     type: Number,
     default: 10
   },
-  gapX: {
+  xGap: {
     type: Number,
-    default: 212
+    default: 0
   },
-  gapY: {
+  yGap: {
     type: Number,
-    default: 222
+    default: 0
   },
-  offsetTop: Number,
-  offsetLeft: Number,
+  yOffset: {
+    type: Number,
+    default: 0
+  },
+  xOffset: {
+    type: Number,
+    default: 0
+  },
   rotate: {
     type: Number,
-    default: -22
+    default: 0
   },
   image: String,
   content: String,
+  selectable: {
+    type: Boolean,
+    default: true
+  },
+  fontSize: {
+    type: Number,
+    default: 14
+  },
+  fontFamily: String,
+  fontStyle: {
+    type: String as PropType<
+    'normal' | 'italic' | 'oblique' | `oblique ${number}deg`
+    >,
+    default: 'normal'
+  },
+  fontVariant: {
+    type: String,
+    default: ''
+  },
+  fontWeight: {
+    type: Number,
+    default: 400
+  },
   fontColor: {
     type: String,
     default: 'rgba(0,0,0,.15)'
   },
-  fontStyle: {
-    type: [String, Number] as PropType<
-    'normal' | 'italic' | 'oblique' | number
-    >,
-    default: 'normal'
+  fontStretch: {
+    type: String,
+    default: ''
   },
-  selectable: {
-    type: Boolean,
-    default: true
+  lineHeight: {
+    type: Number,
+    default: 14
   }
 } as const
 
@@ -74,73 +103,109 @@ export default defineComponent({
   props: watermarkProps,
   setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const {
-      gapX,
-      gapY,
-      zIndex,
-      width,
-      height,
-      offsetTop,
-      offsetLeft,
-      rotate,
-      image,
-      content,
-      fontColor,
-      fontStyle,
-      selectable
-    } = props
+    const themeRef = useTheme(
+      'Watermark',
+      '-watermark',
+      style,
+      watermarkLight,
+      props
+    )
     const base64UrlRef = ref('')
-    const themeVars = useThemeVars().value
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
-    const ratio = getRatio(ctx)
-    const canvasWidth = (gapX + width) * ratio
-    const canvasHeight = (gapY + height) * ratio
-    const canvasOffsetLeft = offsetLeft || gapX / 2
-    const canvasOffsetTop = offsetTop || gapY / 2
-    canvas.width = canvasWidth
-    canvas.height = canvasHeight
-    if (ctx) {
-      ctx.translate(canvasOffsetLeft * ratio, canvasOffsetTop * ratio)
-      ctx.rotate(rotate * (Math.PI / 180))
-      const markWidth = width * ratio
-      const markHeight = height * ratio
-      if (image) {
-        const img = new Image()
-        img.crossOrigin = 'anonymous'
-        img.referrerPolicy = 'no-referrer'
-        img.src = image
-        img.onload = () => {
-          ctx.drawImage(img, 0, 0, markWidth, markHeight)
+    const fontsReadyRef = ref(false)
+    onFontsReady(() => (fontsReadyRef.value = true))
+    watchEffect(() => {
+      void fontsReadyRef.value
+      const ratio = getRatio(ctx)
+      const {
+        xGap,
+        yGap,
+        width,
+        height,
+        yOffset,
+        xOffset,
+        rotate,
+        image,
+        content,
+        fontColor,
+        fontStyle,
+        fontVariant,
+        fontStretch,
+        fontWeight,
+        fontFamily,
+        fontSize,
+        lineHeight,
+        debug
+      } = props
+      const canvasWidth = (xGap + width) * ratio
+      const canvasHeight = (yGap + height) * ratio
+      const canvasOffsetLeft = xOffset * ratio
+      const canvasOffsetTop = yOffset * ratio
+      canvas.width = canvasWidth
+      canvas.height = canvasHeight
+      if (ctx) {
+        ctx.translate(0, 0)
+        const markWidth = width * ratio
+        const markHeight = height * ratio
+        if (debug) {
+          ctx.strokeStyle = 'grey'
+          ctx.strokeRect(0, 0, markWidth, markHeight)
+        }
+        ctx.rotate(rotate * (Math.PI / 180))
+        if (image) {
+          const img = new Image()
+          img.crossOrigin = 'anonymous'
+          img.referrerPolicy = 'no-referrer'
+          img.src = image
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0, markWidth, markHeight)
+            base64UrlRef.value = canvas.toDataURL()
+          }
+        } else if (content) {
+          if (debug) {
+            ctx.strokeStyle = 'green'
+            ctx.strokeRect(0, 0, markWidth, markHeight)
+          }
+          ctx.font = `${fontStyle} ${fontVariant} ${fontWeight} ${fontStretch} ${
+            fontSize * ratio
+          }px/${lineHeight * ratio}px ${
+            fontFamily || themeRef.value.self.fontFamily
+          }`
+          ctx.fillStyle = fontColor
+          ctx.fillText(
+            content,
+            canvasOffsetLeft,
+            canvasOffsetTop + lineHeight * ratio
+          )
           base64UrlRef.value = canvas.toDataURL()
         }
-      } else if (content) {
-        const markSize = parseInt(themeVars.fontSizeHuge, 10) * ratio
-        ctx.font = `${fontStyle} normal ${themeVars.fontWeight} ${markSize}px/${markHeight} ${themeVars.fontFamily}`
-        ctx.fillStyle = fontColor
-        ctx.fillText(content, 0, 0)
-        base64UrlRef.value = canvas.toDataURL()
+      } else {
+        warnOnce('watermark', 'Canvas is not supported in the browser.')
       }
-    } else {
-      warnOnce('Watermark:', 'Canvas is not supported in this browser.')
-    }
-    useTheme('Watermark', '-watermark', style, watermarkLight, props)
+    })
     return () => (
       <div
         class={[
           `${mergedClsPrefixRef.value}-watermark-container`,
-          !selectable && `${mergedClsPrefixRef.value}-watermark--selectable`
+          props.selectable &&
+            `${mergedClsPrefixRef.value}-watermark-container--selectable`
         ]}
       >
         {slots.default?.()}
         <div
           class={`${mergedClsPrefixRef.value}-watermark`}
           style={{
-            zIndex: zIndex,
-            backgroundSize: `${gapX + width}px`,
-            backgroundImage: `url(${base64UrlRef.value})`
+            zIndex: props.zIndex,
+            backgroundSize: `${props.xGap + props.width}px`,
+            backgroundPosition: props.cross
+              ? `${props.width / 2}px ${props.height / 2}px, 0 0`
+              : '',
+            backgroundImage: props.cross
+              ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
+              : `url(${base64UrlRef.value})`
           }}
-        ></div>
+        />
       </div>
     )
   }

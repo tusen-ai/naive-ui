@@ -17,10 +17,10 @@ describe('NWatermark', () => {
       'z-index: 9'
     )
   })
-  it('should work with `gap-x` & `width` props', () => {
+  it('should work with `x-gap` & `width` props', () => {
     const wrapper = mount(NWatermark, {
       props: {
-        gapX: 10,
+        xGap: 10,
         width: 100
       }
     })
@@ -31,9 +31,11 @@ describe('NWatermark', () => {
   it('should work with `selectable` prop', () => {
     const wrapper = mount(NWatermark, {
       props: {
-        selectable: false
+        selectable: true
       }
     })
-    expect(wrapper.find('.n-watermark--selectable').exists()).toBe(true)
+    expect(wrapper.find('.n-watermark-container--selectable').exists()).toBe(
+      true
+    )
   })
 })

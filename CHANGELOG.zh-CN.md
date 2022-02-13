@@ -15,6 +15,7 @@
 - `n-switch` 新增 `checked-icon` 插槽
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
+- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 
 ## 2.25.2
 
@@ -31,10 +32,6 @@
 - `n-progress` 新增 `gap-degree` 属性
 - `n-progress` 新增 `gap-offset-degree` 属性
 - `n-select` 新增 `clear-filter-after-select` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
-
-### Feats
-
-- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 
 ### i18n
 

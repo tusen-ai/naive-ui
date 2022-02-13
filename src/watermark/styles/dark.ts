@@ -3,7 +3,13 @@ import type { WatermarkTheme } from './light'
 
 const watermarkDark: WatermarkTheme = {
   name: 'Watermark',
-  common: commonDark
+  common: commonDark,
+  self (vars) {
+    const { fontFamily } = vars
+    return {
+      fontFamily
+    }
+  }
 }
 
 export default watermarkDark
