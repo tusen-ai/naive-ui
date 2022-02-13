@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-switch` can't use keyboard operation when checked value is customized.
+- Fix `n-data-table`'s fixed column is covered by scroll content when placed inside popover.
+
 ### Feats
 
 - `n-tree-select` add `clear-filter-after-select` prop.
@@ -19,7 +24,6 @@
 - Fix `n-tag` misses background color when `checkable=true`.
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
 - Fix `n-select` `max-tag-count` tag size doesn't follow select size.
-- Fix `n-switch` can't use keyboard operation when checked value is customized.
 
 ### Feats
 

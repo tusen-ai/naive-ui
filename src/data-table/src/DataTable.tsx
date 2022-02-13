@@ -459,7 +459,7 @@ export default defineComponent({
           '--n-td-color-hover': tdColorHover,
           '--n-td-color-modal': tdColorModal,
           '--n-td-color-hover-modal': tdColorHoverModal,
-          '--n-n-td-color-popover': tdColorPopover,
+          '--n-td-color-popover': tdColorPopover,
           '--n-td-color-hover-popover': tdColorHoverPopover,
           '--n-th-text-color': thTextColor,
           '--n-td-text-color': tdTextColor,
