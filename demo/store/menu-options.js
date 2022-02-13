@@ -260,6 +260,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '排印',
           enSuffix: true,
           path: '/typography'
+        },
+        {
+          en: 'Watermark',
+          zh: '水印',
+          enSuffix: true,
+          path: '/watermark'
         }
       ]
     }),

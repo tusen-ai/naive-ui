@@ -1,0 +1,56 @@
+<markdown>
+# Basic
+</markdown>
+
+<template>
+  <n-watermark content="watermark" :gap-x="5" :gap-y="70">
+    <n-table :bordered="false" :single-line="false">
+      <thead>
+        <tr>
+          <th>...</th>
+          <th>...</th>
+          <th>...</th>
+          <th>...</th>
+          <th>......</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>......</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+      </tbody>
+    </n-table>
+  </n-watermark>
+</template>
