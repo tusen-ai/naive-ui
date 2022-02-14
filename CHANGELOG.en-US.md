@@ -6,6 +6,7 @@
 
 - Fix `n-switch` can't use keyboard operation when checked value is customized.
 - Fix `n-data-table`'s fixed column is covered by scroll content when placed inside popover.
+- Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect.
 
 ### Feats
 
