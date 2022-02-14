@@ -49,7 +49,7 @@ describe('n-number-animation', () => {
     })
     expect(wrapper.text()).not.toBe('110')
 
-    await sleep(25)
+    await sleep(100)
     expect(wrapper.text()).toBe('110')
     wrapper.unmount()
   })
