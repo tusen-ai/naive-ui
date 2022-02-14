@@ -145,7 +145,7 @@ export const unconfigurableStyle = c([
   ]),
   cB('dynamic-tags', [
     cB('button', {
-      height: ' 24px'
+      height: '24px'
     }),
     cB('input', [
       cM('autosize', {
