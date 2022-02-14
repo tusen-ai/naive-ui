@@ -42,4 +42,15 @@ describe('n-number-animation', () => {
     expect(wrapper.text()).toBe('10')
     wrapper.unmount()
   })
+
+  it('should work with `duration` prop', async () => {
+    const wrapper = mount(NNumberAnimation, {
+      props: { to: 110, from: 10, duration: 20 }
+    })
+    expect(wrapper.text()).not.toBe('110')
+
+    await sleep(25)
+    expect(wrapper.text()).toBe('110')
+    wrapper.unmount()
+  })
 })
