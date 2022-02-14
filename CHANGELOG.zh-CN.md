@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
+- 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
+
 ### Feats
 
 - `n-tree-select` 新增 `clear-filter-after-select` 属性
@@ -10,6 +15,7 @@
 - `n-switch` 新增 `checked-icon` 插槽
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
+- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 
 ## 2.25.2
 
@@ -19,7 +25,6 @@
 - 修复 `n-tag` 在 `checkable=true` 时缺少背景色
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
 - 修复 `n-select` `max-tag-count` 标签尺寸和 `n-select` size 不同
-- 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
 
 ### Feats
 

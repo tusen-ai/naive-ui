@@ -139,6 +139,7 @@ declare module 'vue' {
     NCol: typeof import('naive-ui')['NCol']
     NRow: typeof import('naive-ui')['NRow']
     NIconWrapper: typeof import('naive-ui')['NIconWrapper']
+    NWatermark: typeof import('naive-ui')['NWatermark']
     [key: string]: any
   }
 }

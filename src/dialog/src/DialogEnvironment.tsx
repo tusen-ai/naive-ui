@@ -117,11 +117,11 @@ export const NDialogEnvironment = defineComponent({
         show={show}
         onUpdateShow={handleUpdateShow}
         onMaskClick={handleMaskClick}
-        appear
-        dialog
         to={to}
         maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
+        internalAppear
+        internalDialog
       >
         {{
           default: () => (
