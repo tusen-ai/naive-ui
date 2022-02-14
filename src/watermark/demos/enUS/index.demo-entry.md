@@ -12,23 +12,29 @@ basic.vue
 
 ### Watermark Props
 
-需要更新
-
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content | `string` | - | content of watermark | NEXT_VERSION |
-| font-color | string | `rgba(0,0,0,.15)` | font color | NEXT_VERSION |
-| font-style | `'normal' \| 'italic' \| 'oblique' \| number` | `normal` | font style | NEXT_VERSION |
-| height | `number` | `64` | height | NEXT_VERSION |
-| image | `string` | - | src of a watermark image | NEXT_VERSION |
-| offset-left | `number` | - | offset left | NEXT_VERSION |
-| offset-top | `number` | - | offset top | NEXT_VERSION |
-| rotate | `number` | `-22` | rotation angle | NEXT_VERSION |
-| selectable | `boolean` | `true` | whether the watermark is selectable | NEXT_VERSION |
-| width | `number` | `120` | width | NEXT_VERSION |
-| x-gap | `number` | `212` | gap of x | NEXT_VERSION |
-| y-gap | `number` | `222` | gap of y | NEXT_VERSION |
-| z-index | `number` | `10` | z-index | NEXT_VERSION |
+| content | `string` | `undefined` | content of watermark | NEXT_VERSION |
+| cross | `boolean` | `false` | whetcher show watermark when cross the border | NEXT_VERSION |
+| debug | `boolean` | `false` | whether show debug info | NEXT_VERSION |
+| font-size | `number` | `14` | size of font | NEXT_VERSION |
+| font-family | `string` | `undefined` | font family | NEXT_VERSION |
+| font-style | `'normal' \| 'italic' \| oblique ${number}deg` | `normal` | style of font | NEXT_VERSION |
+| font-variant | `string` | `''` | font variant | NEXT_VERSION |
+| font-Weight | `number` | `400` | font weight | NEXT_VERSION |
+| font-color | `string` | `rgba(0,0,0,.15)` | color of font | NEXT_VERSION |
+| font-strengths | `string` | `''` | face for font | NEXT_VERSION |
+| line-height | `number` | `14` | height of a line | NEXT_VERSION |
+| height | `number` | `32` | height of watermark | NEXT_VERSION |
+| image | `string` | `undefined` | the URI for image | NEXT_VERSION |
+| rotate | `number` | `0` | rotate degree | NEXT_VERSION |
+| selectable | `boolean` | `true` | whether selectable when coverd by watermark | NEXT_VERSION |
+| width | `number` | `32` | width of watermark | NEXT_VERSION |
+| x-gap | `number` | `0` | gap of x | NEXT_VERSION |
+| x-offset | `number` | `0` | offset of x | NEXT_VERSION |
+| y-gap | `number` | `0` | gap of y | NEXT_VERSION |
+| y-offset | `number` | `0` | offset of y | NEXT_VERSION |
+| z-index | `number` | `10` | height of z index | NEXT_VERSION |
 
 ### Watermark Slots
 
