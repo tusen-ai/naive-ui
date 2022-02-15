@@ -43,7 +43,7 @@ export default cB('tag', `
     color .3s var(--n-bezier),
     box-shadow .3s var(--n-bezier),
     opacity .3s var(--n-bezier);
-  line-height: 1.2;
+  line-height: 1;
   height: var(--n-height);
   font-size: var(--n-font-size);
 `, [
@@ -87,32 +87,20 @@ export default cB('tag', `
     background-color: var(--n-color-checkable);
   `, [
     cNotM('disabled', [
-      c('&:hover', {
-        backgroundColor: 'var(--n-color-hover-checkable)'
-      }, [
-        cNotM('checked', {
-          color: 'var(--n-text-color-hover-checkable)'
-        })
+      c('&:hover', 'background-color: var(--n-color-hover-checkable);', [
+        cNotM('checked', 'color: var(--n-text-color-hover-checkable);')
       ]),
-      c('&:active', {
-        backgroundColor: 'var(--n-color-pressed-checkable)'
-      }, [
-        cNotM('checked', {
-          color: 'var(--n-text-color-pressed-checkable)'
-        })
+      c('&:active', 'background-color: var(--n-color-pressed-checkable);', [
+        cNotM('checked', 'color: var(--n-text-color-pressed-checkable);')
       ])
     ]),
-    cM('checked', {
-      color: 'var(--n-text-color-checked)',
-      backgroundColor: 'var(--n-color-checked)'
-    }, [
+    cM('checked', `
+      color: var(--n-text-color-checked);
+      background-color: var(--n-color-checked);
+    `, [
       cNotM('disabled', [
-        c('&:hover', {
-          backgroundColor: 'var(--n-color-checked-hover)'
-        }),
-        c('&:active', {
-          backgroundColor: 'var(--n-color-checked-pressed)'
-        })
+        c('&:hover', 'background-color: var(--n-color-checked-hover);'),
+        c('&:active', 'background-color: var(--n-color-checked-pressed);')
       ])
     ])
   ])

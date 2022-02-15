@@ -5,35 +5,35 @@
 ## 演示
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
+group.vue
+many-options.vue
+custom-option.vue
 custom-suffix.vue
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
-render-person
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
 focus.vue
-change-debug
-placeholder-debug
-menu-debug
-render-debug
-spin-debug
-options-change-debug
-filterable-debug
+render-person.vue
+tag-input.vue
+placeholder-debug.vue
+menu-debug.vue
+render-debug.vue
+spin-debug.vue
+options-change-debug.vue
+filterable-debug.vue
 ```
 
 ## API
@@ -44,6 +44,7 @@ filterable-debug
 | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | 菜单宽度是否和选择触发器一致，设为 `false` 会使 `virtual-scroll` 失效 |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
+| clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
@@ -56,6 +57,7 @@ filterable-debug
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 菜单的弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |  |

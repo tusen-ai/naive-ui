@@ -185,7 +185,10 @@ export default defineComponent({
         onMouseleave={this.onMouseenter}
         onMousedown={this.handleMenuMousedown}
       >
-        {this.$slots}
+        {{
+          action: () => this.$slots.action?.() || [],
+          empty: () => this.$slots.empty?.() || []
+        }}
       </NInternalSelectMenu>
     )
   }

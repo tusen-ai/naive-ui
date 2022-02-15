@@ -17,20 +17,6 @@ cssr.use(plugin)
 const { c, find } = cssr
 const { cB, cE, cM, cNotM } = plugin
 
-function insideFormItem (status: string | null, style: CNode): CNode {
-  if (status === null) return style
-  return c([
-    ({ props: { bPrefix } }) =>
-      c(`${bPrefix || prefix}form-item`, [
-        c(`${bPrefix || prefix}form-item-blank`, [
-          c(`&${bPrefix || prefix}form-item-blank${modifierPrefix}${status}`, [
-            style
-          ])
-        ])
-      ])
-  ])
-}
-
 function insideModal (style: CNode): CNode {
   return c(
     ({ props: { bPrefix } }) =>
@@ -63,7 +49,6 @@ export {
   cM,
   cNotM,
   cCB,
-  insideFormItem,
   insideModal,
   insidePopover,
   asModal,

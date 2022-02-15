@@ -1,5 +1,5 @@
-import { cB, cE, cM } from '../../../_utils/cssr'
-import fadeDownTranstion from '../../../_styles/transitions/fade-down.cssr'
+import { cB, cE, cM, c } from '../../../_utils/cssr'
+import fadeDownTransition from '../../../_styles/transitions/fade-down.cssr'
 
 // vars:
 // --n-line-height
@@ -92,10 +92,12 @@ export default cB('form-item', {
     box-sizing: border-box;
     min-height: var(--n-feedback-height);
     font-size: var(--n-feedback-font-size);
-    padding: var(--n-feedback-padding);
     line-height: 1.25;
     transform-origin: top left;
   `, [
+    c('&:not(:empty)', `
+      padding: var(--n-feedback-padding);
+    `),
     cB('form-item-feedback', {
       transition: 'color .3s var(--n-bezier)',
       color: 'var(--n-feedback-text-color)'
@@ -106,7 +108,7 @@ export default cB('form-item', {
       cM('error', {
         color: 'var(--n-feedback-text-color-error)'
       }),
-      fadeDownTranstion({
+      fadeDownTransition({
         fromOffset: '-3px',
         enterDuration: '.3s',
         leaveDuration: '.2s'

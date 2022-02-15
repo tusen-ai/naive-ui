@@ -5,14 +5,14 @@ Tags are great for showing attributes; and sometimes toggle options.
 ## Demos
 
 ```demo
-basic
-closable
-disabled
-size
-checkable
-shape
-color
-avatar
+basic.vue
+closable.vue
+disabled.vue
+size.vue
+checkable.vue
+shape.vue
+color.vue
+avatar.vue
 ```
 
 ## API

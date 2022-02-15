@@ -76,19 +76,24 @@ async function releaseChangelogToDiscord () {
     ])
     .then((ans) => {
       if (ans['release-changelog']) {
-        request
-          .post(`https://discord.com/api/webhooks/${DISCORD_TOKEN}`)
-          .type('application/json')
-          .send({
-            content: message
-          })
-          .then(() => {
-            console.log('done')
-          })
-          .catch((e) => {
-            console.error(e)
-            console.log('Error happens.')
-          })
+        ;(async () => {
+          for (let i = 0; i < message.length; i += 1800) {
+            const part = message.slice(i, i + 1800)
+            await request
+              .post(`https://discord.com/api/webhooks/${DISCORD_TOKEN}`)
+              .type('application/json')
+              .send({
+                content: part
+              })
+              .then(() => {
+                console.log('done')
+              })
+              .catch((e) => {
+                console.error(e)
+                console.log('Error happens.')
+              })
+          }
+        })()
       }
     })
 }

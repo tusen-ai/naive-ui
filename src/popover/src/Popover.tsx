@@ -150,11 +150,15 @@ export const popoverBaseProps = {
     default: undefined
   },
   overlap: Boolean,
+  keepAliveOnHover: {
+    type: Boolean,
+    default: true
+  },
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   internalExtraClass: {
     type: Array as PropType<string[]>,
     default: () => []
   },
-  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   // events
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -561,7 +565,10 @@ export default defineComponent({
                   showArrow: this.mergedShowArrow,
                   show: mergedShow
                 }),
-                slots
+                {
+                  default: () => this.$slots.default?.(),
+                  header: () => this.$slots.header?.()
+                }
               )
             ]
           }

@@ -5,15 +5,15 @@
 ## 演示
 
 ```demo
-basic
-closable
-disabled
-size
-checkable
-shape
-color
-avatar
-rtl-debug
+basic.vue
+closable.vue
+disabled.vue
+size.vue
+checkable.vue
+shape.vue
+color.vue
+avatar.vue
+rtl-debug.vue
 ```
 
 ## API

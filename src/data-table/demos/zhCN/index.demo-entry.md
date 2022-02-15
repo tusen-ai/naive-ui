@@ -12,7 +12,7 @@
 </n-alert>
 
 ```demo
-basic
+basic.vue
 empty
 border
 size

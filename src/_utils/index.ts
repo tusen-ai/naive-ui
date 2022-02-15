@@ -10,7 +10,11 @@ export {
   getFirstSlotVNode,
   createDataKey,
   createRefSetter,
-  createInjectionKey
+  createInjectionKey,
+  resolveSlot,
+  resolveSlotWithProps,
+  resolveWrappedSlot,
+  isSlotEmpty
 } from './vue'
 export type { MaybeArray } from './vue'
 export {
@@ -26,6 +30,6 @@ export type {
   ExtractInternalPropTypes,
   Mutable
 } from './naive'
-export { formatLength } from './css'
+export { formatLength, color2Class } from './css'
 export { createKey } from './cssr'
 export * from './composable'

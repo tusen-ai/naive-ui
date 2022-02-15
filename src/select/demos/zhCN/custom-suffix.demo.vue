@@ -9,8 +9,8 @@
     <n-select v-model:show="show1" placeholder="选择歌曲" :options="options">
       <template #arrow>
         <transition name="slide-left">
-          <animal-rabbit16-regular v-if="show1" />
-          <animal-turtle16-regular v-else />
+          <flash-checkmark16-regular v-if="show1" />
+          <flash16-regular v-else />
         </transition>
       </template>
     </n-select>
@@ -29,15 +29,15 @@
 
 <script lang="ts">
 import MdSearch from '@vicons/ionicons4/MdSearch'
-import AnimalTurtle16Regular from '@vicons/fluent/AnimalTurtle16Regular'
-import AnimalRabbit16Regular from '@vicons/fluent/AnimalRabbit28Regular'
+import Flash16Regular from '@vicons/fluent/Flash16Regular'
+import FlashCheckmark16Regular from '@vicons/fluent/FlashCheckmark16Regular'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {
     MdSearch,
-    AnimalTurtle16Regular,
-    AnimalRabbit16Regular
+    Flash16Regular,
+    FlashCheckmark16Regular
   },
   setup () {
     return {

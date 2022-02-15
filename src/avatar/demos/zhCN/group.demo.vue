@@ -18,7 +18,7 @@
     <template #rest="{ options: dropdownOptions, rest }">
       <n-dropdown
         :options="
-          dropdownOptions.map((option) => ({
+          dropdownOptions.map((option: { name: string, src: string }) => ({
             key: option.name,
             label: option.name
           }))

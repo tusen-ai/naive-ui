@@ -39,8 +39,20 @@ const TreeNode = defineComponent({
       draggingNodeRef,
       droppingPositionRef,
       droppingOffsetLevelRef,
-      indentRef
+      nodePropsRef,
+      indentRef,
+      blockLineRef
     } = NTree
+
+    const disabledRef = computed(
+      () => NTree.disabledRef.value || props.tmNode.disabled
+    )
+
+    const resolvedNodePropsRef = computed(() => {
+      const { value: nodeProps } = nodePropsRef
+      if (!nodeProps) return undefined
+      return nodeProps({ option: props.tmNode.rawNode })
+    })
 
     // used for drag and drop
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
@@ -73,9 +85,24 @@ const TreeNode = defineComponent({
         NTree.handleSwitcherClick(tmNode)
       }
     }
-    function handleContentClick (e: MouseEvent): void {
+
+    function _handleClick (e: MouseEvent): void {
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       NTree.handleSelect(props.tmNode)
+    }
+
+    function handleContentClick (e: MouseEvent): void {
+      if (blockLineRef.value) return
+      if (!disabledRef.value) _handleClick(e)
+      resolvedNodePropsRef.value?.onClick?.(e)
+    }
+
+    function handleLineClick (e: MouseEvent): void {
+      if (!blockLineRef.value) return
+      if (!disabledRef.value) {
+        _handleClick(e)
+      }
+      resolvedNodePropsRef.value?.onClick?.(e)
     }
 
     function handleCheck (checked: boolean): void {
@@ -172,9 +199,7 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      disabled: computed(
-        () => NTree.disabledRef.value || props.tmNode.disabled
-      ),
+      disabled: disabledRef,
       checkable: computed(
         () =>
           NTree.checkableRef.value &&
@@ -192,7 +217,8 @@ const TreeNode = defineComponent({
       ),
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
-      blockLine: NTree.blockLineRef,
+      blockLine: blockLineRef,
+      nodeProps: resolvedNodePropsRef,
       checkboxFocusable: NTree.internalCheckboxFocusableRef,
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
@@ -206,6 +232,7 @@ const TreeNode = defineComponent({
       handleDragOver,
       handleDragEnd,
       handleDragLeave,
+      handleLineClick,
       handleContentClick,
       handleSwitcherClick
     }
@@ -224,7 +251,8 @@ const TreeNode = defineComponent({
       indent,
       disabled,
       pending,
-      internalScrollable
+      internalScrollable,
+      nodeProps
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -244,6 +272,7 @@ const TreeNode = defineComponent({
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
+          {...(blockLine ? nodeProps : undefined)}
           class={[
             `${clsPrefix}-tree-node`,
             {
@@ -253,11 +282,12 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled,
               [`${clsPrefix}-tree-node--selectable`]: selectable
-            }
+            },
+            nodeProps?.class
           ]}
           data-key={dataKey}
           draggable={draggable && blockLine}
-          onClick={blockLine && !disabled ? this.handleContentClick : undefined}
+          onClick={this.handleLineClick}
           onDragstart={
             draggable && blockLine && !disabled
               ? this.handleDragStart
@@ -293,9 +323,8 @@ const TreeNode = defineComponent({
             clsPrefix={clsPrefix}
             checked={checked}
             selected={selected}
-            onClick={
-              blockLine || disabled ? undefined : this.handleContentClick
-            }
+            onClick={this.handleContentClick}
+            nodeProps={blockLine ? undefined : nodeProps}
             onDragstart={
               draggable && !blockLine && !disabled
                 ? this.handleDragStart
