@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import { NWatermark } from '../index'
-import 'jest-canvas-mock'
 
 describe('NWatermark', () => {
   it('should work with import on demand', () => {
