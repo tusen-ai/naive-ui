@@ -1,13 +1,15 @@
-# Use vue-router
+<markdown>
+# 使用 vue-router
 
-Usually you can use vue-router here to accomplish routing. You can render `label` as `<router-link />` to set route.
+你可以在这个地方配合 vue-router 完成路由。通过将 `label` 渲染为 `<router-link />` 来改变路由。
+</markdown>
 
-```html
-<n-menu :options="menuOptions" />
-```
+<template>
+  <n-menu :options="menuOptions" />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import {
@@ -15,7 +17,7 @@ import {
   LogOutOutline as HomeIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -32,7 +34,7 @@ const menuOptions = [
             }
           }
         },
-        { default: () => 'Go Home' }
+        { default: () => '回家' }
       ),
     key: 'go-back-home',
     icon: renderIcon(HomeIcon)
@@ -46,7 +48,7 @@ const menuOptions = [
             path: '/zh-CN/os-theme/components/code'
           }
         },
-        { default: () => 'Go to work' }
+        { default: () => '上班' }
       ),
     key: 'go-to-work',
     icon: renderIcon(WorkIcon)
@@ -60,4 +62,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

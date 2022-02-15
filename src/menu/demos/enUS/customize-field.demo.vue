@@ -1,35 +1,37 @@
-# 自定义字段
+<markdown>
+# Customizing Field
 
-后端会传来各种各样的数据，你可以自定义 `key`、`label` 和 `children` 的字段。
+Various data would come from backend, you can customize `key`, `label` and `children`'s field name.
+</markdown>
 
-```html
-<n-layout has-sider>
-  <n-layout-sider
-    bordered
-    collapse-mode="width"
-    :collapsed-width="64"
-    :width="240"
-    :collapsed="collapsed"
-    show-trigger
-    @collapse="collapsed = true"
-    @expand="collapsed = false"
-  >
-    <n-menu
-      :collapsed="collapsed"
+<template>
+  <n-layout has-sider>
+    <n-layout-sider
+      bordered
+      collapse-mode="width"
       :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :options="menuOptions"
-      key-field="whateverKey"
-      label-field="whateverLabel"
-      children-field="whateverChildren"
-    />
-  </n-layout-sider>
-  <n-layout />
-</n-layout>
-```
+      :width="240"
+      :collapsed="collapsed"
+      show-trigger
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+        key-field="whateverKey"
+        label-field="whateverLabel"
+        children-field="whateverChildren"
+      />
+    </n-layout-sider>
+    <n-layout />
+  </n-layout>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -37,79 +39,79 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    whateverLabel: '且听风吟',
+    whateverLabel: 'Hear the Wind Sing',
     whateverKey: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
   {
-    whateverLabel: '1973年的弹珠玩具',
+    whateverLabel: 'Pinball 1973',
     whateverKey: 'pinball-1973',
     icon: renderIcon(BookIcon),
     disabled: true,
     whateverChildren: [
       {
-        whateverLabel: '鼠',
+        whateverLabel: 'Rat',
         whateverKey: 'rat'
       }
     ]
   },
   {
-    whateverLabel: '寻羊冒险记',
+    whateverLabel: 'A Wild Sheep Chase',
     whateverKey: 'a-wild-sheep-chase',
     disabled: true,
     icon: renderIcon(BookIcon)
   },
   {
-    whateverLabel: '舞，舞，舞',
-    whateverKey: 'dance-dance-dance',
+    whateverLabel: 'Dance Dance Dance',
+    whateverKey: 'Dance Dance Dance',
     icon: renderIcon(BookIcon),
     whateverChildren: [
       {
         type: 'group',
-        whateverLabel: '人物',
+        whateverLabel: 'People',
         whateverKey: 'people',
         whateverChildren: [
           {
-            whateverLabel: '叙事者',
+            whateverLabel: 'Narrator',
             whateverKey: 'narrator',
             icon: renderIcon(PersonIcon)
           },
           {
-            whateverLabel: '羊男',
+            whateverLabel: 'Sheep Man',
             whateverKey: 'sheep-man',
             icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
-        whateverLabel: '饮品',
+        whateverLabel: 'Beverage',
         whateverKey: 'beverage',
         icon: renderIcon(WineIcon),
         whateverChildren: [
           {
-            whateverLabel: '威士忌',
+            whateverLabel: 'Whisky',
             whateverKey: 'whisky'
           }
         ]
       },
       {
-        whateverLabel: '食物',
+        whateverLabel: 'Food',
         whateverKey: 'food',
         whateverChildren: [
           {
-            whateverLabel: '三明治',
+            whateverLabel: 'Sandwich',
             whateverKey: 'sandwich'
           }
         ]
       },
       {
-        whateverLabel: '过去增多，未来减少',
+        whateverLabel: 'The past increases. The future recedes.',
         whateverKey: 'the-past-increases-the-future-recedes'
       }
     ]
@@ -124,4 +126,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

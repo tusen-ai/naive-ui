@@ -1,41 +1,43 @@
+<markdown>
 # 批量处理菜单渲染
 
 使用 `render-label`、`render-icon`、`expand-icon` 可以批量控制菜单的选项渲染。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-switch v-model:value="collapsed" />
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="collapsed" />
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
-        :expand-icon="expandIcon"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>内容</span>
+        :width="240"
+        :collapsed="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+          :render-label="renderMenuLabel"
+          :render-icon="renderMenuIcon"
+          :expand-icon="expandIcon"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>内容</span>
+      </n-layout>
     </n-layout>
-  </n-layout>
-</n-space>
-```
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { h, ref, defineComponent } from 'vue'
-import { NIcon } from 'naive-ui'
+import { NIcon, MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
 const menuOptions = [
@@ -113,13 +115,17 @@ export default defineComponent({
     return {
       collapsed: ref(true),
       menuOptions,
-      renderMenuLabel (option) {
+      renderMenuLabel (option: MenuOption) {
         if ('href' in option) {
-          return h('a', { href: option.href, target: '_blank' }, option.label)
+          return h(
+            'a',
+            { href: option.href, target: '_blank' },
+            option.label as string
+          )
         }
-        return option.label
+        return option.label as string
       },
-      renderMenuIcon (option) {
+      renderMenuIcon (option: MenuOption) {
         // 渲染图标占位符以保持缩进
         if (option.key === 'sheep-man') return true
         // 返回 falsy 值，不再渲染图标及占位符
@@ -132,4 +138,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

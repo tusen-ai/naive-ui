@@ -1,38 +1,15 @@
-# Collapsed Menu
+<markdown>
+# Horizontal
 
-Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
+A horiziontal menu.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-switch v-model:value="collapsed" />
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        v-model:value="activeKey"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>Content</span>
-    </n-layout>
-  </n-layout>
-</n-space>
-```
+<template>
+  <n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -40,13 +17,22 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    label: 'Hear the Wind Sing',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        'Hear the Wind Sing'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
@@ -123,9 +109,8 @@ export default defineComponent({
   setup () {
     return {
       activeKey: ref(null),
-      collapsed: ref(true),
       menuOptions
     }
   }
 })
-```
+</script>

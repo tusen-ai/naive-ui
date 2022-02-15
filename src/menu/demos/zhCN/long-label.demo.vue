@@ -1,12 +1,14 @@
+<markdown>
 # 菜单内容很长
 
 将 `label` 设为渲染函数，结合 `n-ellipsis`。
+</markdown>
 
-```html
-<n-menu :options="options" style="width: 180px;" default-value="1" />
-```
+<template>
+  <n-menu :options="options" style="width: 180px" default-value="1" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, h } from 'vue'
 import { NEllipsis } from 'naive-ui'
 
@@ -28,4 +30,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

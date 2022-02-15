@@ -21,7 +21,7 @@ import { VResizeObserver } from 'vueuc'
 import { on, off } from 'evtd'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { flatten, keep } from '../../_utils'
+import { flatten, keep, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
@@ -930,20 +930,22 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {this.showDots &&
-          (dotsSlot
-            ? dotsSlot(dotSlotProps)
-            : dotSlotProps.total > 1 && (
-                <NCarouselDots
-                  key={dotType + dotPlacement}
-                  total={dotSlotProps.total}
-                  currentIndex={dotSlotProps.currentIndex}
-                  dotType={dotType}
-                  trigger={this.trigger}
-                  keyboard={this.keyboard}
-                />
-            ))}
+          resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
+            dotSlotProps.total > 1 && (
+              <NCarouselDots
+                key={dotType + dotPlacement}
+                total={dotSlotProps.total}
+                currentIndex={dotSlotProps.currentIndex}
+                dotType={dotType}
+                trigger={this.trigger}
+                keyboard={this.keyboard}
+              />
+            )
+          ])}
         {showArrow &&
-          (arrowSlot ? arrowSlot(arrowSlotProps) : <NCarouselArrow />)}
+          resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+            <NCarouselArrow />
+          ])}
       </div>
     )
   }

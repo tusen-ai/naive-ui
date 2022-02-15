@@ -1,115 +1,99 @@
-# 反转
+<markdown>
+# Expand Submenu
 
-通过 `inverted` 来增加对比，一般和 `n-layout` 配合使用。
+If you don't set `default-expanded-keys`, menu will expand all the ascendant of selected option by default.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space> <n-switch v-model:value="inverted" />inverted</n-space>
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      show-trigger
-      :inverted="inverted"
-    >
-      <n-menu
-        :inverted="inverted"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>内容</span>
-    </n-layout>
-  </n-layout>
-</n-space>
-```
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    @update:expanded-keys="handleUpdateExpandedKeys"
+  />
+</template>
 
-```js
-import { h, defineComponent, ref } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
+import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    label: '且听风吟',
+    label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
   {
-    label: '1973年的弹珠玩具',
+    label: 'Pinball 1973',
     key: 'pinball-1973',
     icon: renderIcon(BookIcon),
     disabled: true,
     children: [
       {
-        label: '鼠',
+        label: 'Rat',
         key: 'rat'
       }
     ]
   },
   {
-    label: '寻羊冒险记',
+    label: 'A Wild Sheep Chase',
     key: 'a-wild-sheep-chase',
     disabled: true,
     icon: renderIcon(BookIcon)
   },
   {
-    label: '舞，舞，舞',
+    label: 'Dance Dance Dance',
     key: 'dance-dance-dance',
     icon: renderIcon(BookIcon),
     children: [
       {
         type: 'group',
-        label: '人物',
+        label: 'People',
         key: 'people',
         children: [
           {
-            label: '叙事者',
+            label: 'Narrator',
             key: 'narrator',
             icon: renderIcon(PersonIcon)
           },
           {
-            label: '羊男',
+            label: 'Sheep Man',
             key: 'sheep-man',
             icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
-        label: '饮品',
+        label: 'Beverage',
         key: 'beverage',
         icon: renderIcon(WineIcon),
         children: [
           {
-            label: '威士忌',
+            label: 'Whisky',
             key: 'whisky'
           }
         ]
       },
       {
-        label: '食物',
+        label: 'Food',
         key: 'food',
         children: [
           {
-            label: '三明治',
+            label: 'Sandwich',
             key: 'sandwich'
           }
         ]
       },
       {
-        label: '过去增多，未来减少',
+        label: 'The past increases. The future recedes.',
         key: 'the-past-increases-the-future-recedes'
       }
     ]
@@ -118,10 +102,15 @@ const menuOptions = [
 
 export default defineComponent({
   setup () {
+    const message = useMessage()
+
     return {
-      inverted: ref(false),
-      menuOptions
+      menuOptions,
+      defaultExpandedKeys: ['dance-dance-dance', 'food'],
+      handleUpdateExpandedKeys (value: string[]) {
+        message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
+      }
     }
   }
 })
-```
+</script>

@@ -1,13 +1,37 @@
-# Horizontal
+<markdown>
+# Inverted
 
-A horiziontal menu.
+Set `inverted` to add contrast. Usually used with `n-layout`.
+</markdown>
 
-```html
-<n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
-```
+<template>
+  <n-space vertical>
+    <n-space><n-switch v-model:value="inverted" />inverted</n-space>
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        show-trigger
+        :inverted="inverted"
+      >
+        <n-menu
+          :inverted="inverted"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>Content</span>
+      </n-layout>
+    </n-layout>
+  </n-space>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { h, defineComponent, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -15,22 +39,13 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    label: () =>
-      h(
-        'a',
-        {
-          href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing',
-          target: '_blank',
-          rel: 'noopenner noreferrer'
-        },
-        'Hear the Wind Sing'
-      ),
+    label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
@@ -106,9 +121,9 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      activeKey: ref(null),
+      inverted: ref(false),
       menuOptions
     }
   }
 })
-```
+</script>

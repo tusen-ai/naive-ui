@@ -1,13 +1,37 @@
-# 水平菜单
+<markdown>
+# 反转
 
-一个水平菜单
+通过 `inverted` 来增加对比，一般和 `n-layout` 配合使用。
+</markdown>
 
-```html
-<n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
-```
+<template>
+  <n-space vertical>
+    <n-space> <n-switch v-model:value="inverted" />inverted</n-space>
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        show-trigger
+        :inverted="inverted"
+      >
+        <n-menu
+          :inverted="inverted"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>内容</span>
+      </n-layout>
+    </n-layout>
+  </n-space>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { h, defineComponent, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -15,22 +39,13 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    label: () =>
-      h(
-        'a',
-        {
-          href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
-          target: '_blank',
-          rel: 'noopenner noreferrer'
-        },
-        '且听风吟'
-      ),
+    label: '且听风吟',
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
@@ -49,8 +64,8 @@ const menuOptions = [
   {
     label: '寻羊冒险记',
     key: 'a-wild-sheep-chase',
-    icon: renderIcon(BookIcon),
-    disabled: true
+    disabled: true,
+    icon: renderIcon(BookIcon)
   },
   {
     label: '舞，舞，舞',
@@ -106,9 +121,9 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      activeKey: ref(null),
+      inverted: ref(false),
       menuOptions
     }
   }
 })
-```
+</script>

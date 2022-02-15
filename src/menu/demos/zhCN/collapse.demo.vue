@@ -1,38 +1,40 @@
+<markdown>
 # 压缩菜单
 
 可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`。详细信息参考页面底下的 API 文档。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-switch v-model:value="collapsed" />
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="collapsed" />
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        v-model:value="activeKey"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>内容</span>
+        :width="240"
+        :collapsed="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          v-model:value="activeKey"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>内容</span>
+      </n-layout>
     </n-layout>
-  </n-layout>
-</n-space>
-```
+  </n-space>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -40,7 +42,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -128,4 +130,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

@@ -1,19 +1,19 @@
+<markdown>
 # 展开子菜单
 
-你可以设定 `default-expanded-keys` 让菜单工作在非受控状态下或者使用 `expanded-keys` 和 `@update:expanded-keys` 以受控的方式控制菜单。
-
 如果你不设定 `default-expanded-keys`，菜单会默认展开选中项的全部父级。
+</markdown>
 
-```html
-<n-menu
-  :options="menuOptions"
-  :default-expanded-keys="defaultExpandedKeys"
-  @update:expanded-keys="handleUpdateExpandedKeys"
-/>
-```
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    @update:expanded-keys="handleUpdateExpandedKeys"
+  />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -21,7 +21,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -106,10 +106,10 @@ export default defineComponent({
     return {
       menuOptions,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      handleUpdateExpandedKeys (keys) {
+      handleUpdateExpandedKeys (keys: string[]) {
         message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(keys))
       }
     }
   }
 })
-```
+</script>

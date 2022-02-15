@@ -1,16 +1,17 @@
+<markdown>
 # Select & Routing
 
-Use `@update:value` to listen to the select action of the menu. The first argument of the callback is the `key` of the selected menu item. The second is the orginal data of the menu item.
-
 Usually you can use vue-router here to accomplish routing. Also, you can render `label` as `<router-link />` or `<a />` to set route.
+</markdown>
 
-```html
-<n-menu @update:value="handleUpdateValue" :options="menuOptions" />
-```
+<template>
+  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
+</template>
 
-```js
-import { defineComponent, h, resolveComponent } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
+import { RouterLink } from 'vue-router'
+import { NIcon, useMessage, MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -18,7 +19,7 @@ import {
   HomeOutline as HomeIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -26,7 +27,7 @@ const menuOptions = [
   {
     label: () =>
       h(
-        resolveComponent('router-link'),
+        RouterLink,
         {
           to: {
             name: 'home',
@@ -137,11 +138,11 @@ export default defineComponent({
     const message = useMessage()
     return {
       menuOptions,
-      handleUpdateValue (key, item) {
+      handleUpdateValue (key: string, item: MenuOption) {
         message.info('[onUpdate:value]: ' + JSON.stringify(key))
         message.info('[onUpdate:value]: ' + JSON.stringify(item))
       }
     }
   }
 })
-```
+</script>

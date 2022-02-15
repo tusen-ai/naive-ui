@@ -1,32 +1,66 @@
-# 缩进
+<markdown>
+# 选中 & 路由
 
-你可以设定菜单的 `indent` & `root-indent`。`root-indent` 只决定第一层项目的缩进。
+你通常可以在这个地方配合 vue-router 完成路由。当然，你也可以通过将 `label` 渲染为 `<router-link />` 或 `<a />` 来改变路由。
+</markdown>
 
-```html
-<n-menu
-  v-model:value="activeKey"
-  :root-indent="36"
-  :indent="12"
-  :options="menuOptions"
-/>
-```
+<template>
+  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
+import { NIcon, useMessage, MenuOption } from 'naive-ui'
+import { RouterLink } from 'vue-router'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
-  WineOutline as WineIcon
+  WineOutline as WineIcon,
+  HomeOutline as HomeIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
 const menuOptions = [
   {
-    label: '且听风吟',
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'home',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '回家' }
+      ),
+    key: 'go-back-home',
+    icon: renderIcon(HomeIcon)
+  },
+  {
+    key: 'divider-1',
+    type: 'divider',
+    props: {
+      style: {
+        marginLeft: '32px'
+      }
+    }
+  },
+  {
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        '且听风吟'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
@@ -101,10 +135,14 @@ const menuOptions = [
 
 export default defineComponent({
   setup () {
+    const message = useMessage()
     return {
-      activeKey: ref(null),
-      menuOptions
+      menuOptions,
+      handleUpdateValue (key: string, item: MenuOption) {
+        message.info('[onUpdate:value]: ' + JSON.stringify(key))
+        message.info('[onUpdate:value]: ' + JSON.stringify(item))
+      }
     }
   }
 })
-```
+</script>

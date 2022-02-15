@@ -1,17 +1,19 @@
+<markdown>
 # 手风琴
 
 像一个手风琴。使用 `accordion` 属性对一级菜单使用该模式。
+</markdown>
 
-```html
-<n-menu
-  :options="menuOptions"
-  :default-expanded-keys="defaultExpandedKeys"
-  accordion
-/>
-```
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    accordion
+  />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
+<script lang="ts">
+import { defineComponent, h, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   FishOutline as FishIcon,
@@ -19,7 +21,7 @@ import {
   BagOutline as BagOutlineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -83,4 +85,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

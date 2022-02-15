@@ -1,35 +1,40 @@
-# Inverted
+<markdown>
+# Collapsed Menu
 
-Set `inverted` to add contrast. Usually used with `n-layout`.
+Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space><n-switch v-model:value="inverted" />inverted</n-space>
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      show-trigger
-      :inverted="inverted"
-    >
-      <n-menu
-        :inverted="inverted"
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="collapsed" />
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>Content</span>
+        :width="240"
+        :collapsed="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          v-model:value="activeKey"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>Content</span>
+      </n-layout>
     </n-layout>
-  </n-layout>
-</n-space>
-```
+  </n-space>
+</template>
 
-```js
-import { h, defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -37,7 +42,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -119,9 +124,10 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      inverted: ref(false),
+      activeKey: ref(null),
+      collapsed: ref(true),
       menuOptions
     }
   }
 })
-```
+</script>

@@ -1,18 +1,20 @@
+<markdown>
 # Indent
 
 You can specify `indent` & `root-indent` of the menu. `root-indent` only determines the first-leveled children.
+</markdown>
 
-```html
-<n-menu
-  v-model:value="activeKey"
-  :root-indent="36"
-  :indent="12"
-  :options="menuOptions"
-/>
-```
+<template>
+  <n-menu
+    v-model:value="activeKey"
+    :root-indent="36"
+    :indent="12"
+    :options="menuOptions"
+  />
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -20,7 +22,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
+function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -107,4 +109,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
