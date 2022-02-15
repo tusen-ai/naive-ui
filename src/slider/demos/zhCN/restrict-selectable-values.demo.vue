@@ -1,14 +1,16 @@
+<markdown>
 # 限制可选值
 
 设定 `step="mark"` 将可选值限制为标记属性所提供的值。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-slider v-model:value="value" :marks="marks" step="mark" />
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-slider v-model:value="value" :marks="marks" step="mark" />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -24,4 +26,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

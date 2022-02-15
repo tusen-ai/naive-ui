@@ -1,14 +1,16 @@
+<markdown>
 # 多于两个滑块
 
 虽然我也不知道有啥用，但是这看起来很屌。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-slider range v-model:value="value" :step="1" />
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-slider v-model:value="value" range :step="1" />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -18,4 +20,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

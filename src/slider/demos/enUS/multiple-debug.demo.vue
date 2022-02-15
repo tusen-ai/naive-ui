@@ -1,14 +1,16 @@
+<markdown>
 # More than 2 handles
 
 Although I don't know where it can be used, but it looks cool.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-slider range v-model:value="value" :step="1" />
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-slider v-model:value="value" range :step="1" />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -18,4 +20,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
