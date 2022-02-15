@@ -1,47 +1,49 @@
+<markdown>
 # 自定义箭头以及控制点
+</markdown>
 
-```html
-<n-carousel show-arrow autoplay>
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-  />
-  <template #arrow="{ prev, next }">
-    <div class="custom-arrow">
-      <button type="button" class="curtom-arrow--left" @click="prev">
-        <n-icon><ArrowBack /></n-icon>
-      </button>
-      <button type="button" class="curtom-arrow--right" @click="next">
-        <n-icon><ArrowForward /></n-icon>
-      </button>
-    </div>
-  </template>
-  <template #dots="{ total, currentIndex, to }">
-    <ul class="custom-dots">
-      <li
-        v-for="index of total"
-        :class="{ ['is-active']: currentIndex === index - 1 }"
-        :key="index"
-        @click="to(index - 1)"
-      ></li>
-    </ul>
-  </template>
-</n-carousel>
-```
+<template>
+  <n-carousel show-arrow autoplay>
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+    >
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+    >
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+    >
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+    >
+    <template #arrow="{ prev, next }">
+      <div class="custom-arrow">
+        <button type="button" class="curtom-arrow--left" @click="prev">
+          <n-icon><ArrowBack /></n-icon>
+        </button>
+        <button type="button" class="curtom-arrow--right" @click="next">
+          <n-icon><ArrowForward /></n-icon>
+        </button>
+      </div>
+    </template>
+    <template #dots="{ total, currentIndex, to }">
+      <ul class="custom-dots">
+        <li
+          v-for="index of total"
+          :key="index"
+          :class="{ ['is-active']: currentIndex === index - 1 }"
+          @click="to(index - 1)"
+        />
+      </ul>
+    </template>
+  </n-carousel>
+</template>
 
-```js
+<script lang="ts">
 import { ArrowBack, ArrowForward } from '@vicons/ionicons5'
 import { defineComponent } from 'vue'
 
@@ -51,9 +53,9 @@ export default defineComponent({
     ArrowForward
   }
 })
-```
+</script>
 
-```css
+<style>
 .carousel-img {
   width: 100%;
   height: 240px;
@@ -115,4 +117,4 @@ export default defineComponent({
   width: 40px;
   background: #fff;
 }
-```
+</style>
