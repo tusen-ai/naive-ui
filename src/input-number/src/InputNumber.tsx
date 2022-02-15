@@ -112,7 +112,8 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
-    let timeClicked: number
+    let clickedTime: number
+    let compareClickTime: number
     const minusHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const addHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const getMaxPrecision = (currentValue: number): number => {
@@ -270,8 +271,6 @@ export default defineComponent({
       const { nTriggerFormBlur } = formItem
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
-      clearAddStepInterval()
-      clearMinusStepInterval()
     }
     function doClear (e: MouseEvent): void {
       const { onClear } = props
@@ -279,11 +278,14 @@ export default defineComponent({
     }
     function incrementStep (): void {
       if (addHoldStateInterval.value === null) {
-        timeClicked = Date.now()
+        clickedTime = Date.now()
         addHoldStateInterval.value = setInterval(doAdd, 100)
       }
     }
     function doAdd (): void {
+      compareClickTime = Date.now()
+      const totalTimeClicked = compareClickTime - clickedTime
+      if (totalTimeClicked > 100 && totalTimeClicked <= 1000) return
       const { value: addable } = addableRef
       if (!addable) return
       const { value: mergedValue } = mergedValueRef
@@ -297,22 +299,25 @@ export default defineComponent({
       }
     }
     function clearAddStepInterval (): void {
-      const timeNow = Date.now()
-      if (timeNow - timeClicked < 100) {
-        doAdd()
-      }
       if (addHoldStateInterval.value != null) {
+        const totalTimeClicked = compareClickTime - clickedTime
+        if (totalTimeClicked < 100) {
+          doAdd()
+        }
         clearInterval(addHoldStateInterval.value)
         addHoldStateInterval.value = null
       }
     }
     function decrementStep (): void {
       if (minusHoldStateInterval.value === null) {
-        timeClicked = Date.now()
+        clickedTime = Date.now()
         minusHoldStateInterval.value = setInterval(doMinus, 100)
       }
     }
     function doMinus (): void {
+      compareClickTime = Date.now()
+      const totalTimeClicked = compareClickTime - clickedTime
+      if (totalTimeClicked > 100 && totalTimeClicked <= 1000) return
       const { value: minusable } = minusableRef
       if (!minusable) return
       const { value: mergedValue } = mergedValueRef
@@ -326,11 +331,11 @@ export default defineComponent({
       }
     }
     function clearMinusStepInterval (): void {
-      const timeNow = Date.now()
-      if (timeNow - timeClicked < 100) {
-        doMinus()
-      }
       if (minusHoldStateInterval.value != null) {
+        const totalTimeClicked = compareClickTime - clickedTime
+        if (totalTimeClicked < 100) {
+          doMinus()
+        }
         clearInterval(minusHoldStateInterval.value)
         minusHoldStateInterval.value = null
       }
@@ -496,6 +501,17 @@ export default defineComponent({
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
+                      onMouseleave={this.clearMinusStepInterval}
+                      onMousedown={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.handleMinusClick
+                      }
+                      onMouseup={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.clearMinusStepInterval
+                      }
                       ref="minusButtonInstRef"
                     >
                       {{
@@ -503,20 +519,6 @@ export default defineComponent({
                           <NBaseIcon
                             clsPrefix={mergedClsPrefix}
                             aria-disabled={true}
-                            onMousedown={
-                              !this.minusable ||
-                              this.mergedDisabled ||
-                              this.readonly
-                                ? undefined
-                                : this.handleMinusClick
-                            }
-                            onMouseup={
-                              !this.minusable ||
-                              this.mergedDisabled ||
-                              this.readonly
-                                ? undefined
-                                : this.clearMinusStepInterval
-                            }
                           >
                             {{
                               default: () => <RemoveIcon />
@@ -532,27 +534,22 @@ export default defineComponent({
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
+                      onMouseleave={this.clearAddStepInterval}
+                      onMousedown={
+                        !this.addable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.handleAddClick
+                      }
+                      onMouseup={
+                        !this.addable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.clearAddStepInterval
+                      }
                       ref="addButtonInstRef"
                     >
                       {{
                         default: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            onMousedown={
-                              !this.addable ||
-                              this.mergedDisabled ||
-                              this.readonly
-                                ? undefined
-                                : this.handleAddClick
-                            }
-                            onMouseup={
-                              !this.addable ||
-                              this.mergedDisabled ||
-                              this.readonly
-                                ? undefined
-                                : this.clearAddStepInterval
-                            }
-                          >
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
                             {{
                               default: () => <AddIcon />
                             }}
