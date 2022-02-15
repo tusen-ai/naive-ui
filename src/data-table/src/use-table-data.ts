@@ -91,7 +91,7 @@ export function useTableData (
     columnsWithControlledFilter.forEach((column) => {
       if (column.type === 'selection' || column.type === 'expand') return
       controlledFilterState[column.key] =
-        column.filterOptionValues || column.filterOptionValue || null
+        column.filterOptionValues ?? column.filterOptionValue ?? null
     })
     const activeFilters = Object.assign(
       createShallowClonedObject(uncontrolledFilterStateRef.value),
