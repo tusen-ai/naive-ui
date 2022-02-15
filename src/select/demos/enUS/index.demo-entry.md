@@ -52,7 +52,7 @@ focus.vue
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
-| render-tag | `(props: { option: SelectBaseOption, onClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
+| render-tag | `(props: { option: SelectBaseOption, handleClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
