@@ -1,14 +1,16 @@
+<markdown>
 # Restrict selectable values
 
 Set `step="mark"` to restrict the selectable values to those provided by the mark prop.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-slider v-model:value="value" :marks="marks" step="mark" />
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-slider v-model:value="value" :marks="marks" step="mark" />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -24,4 +26,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
