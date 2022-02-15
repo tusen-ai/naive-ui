@@ -6,6 +6,6 @@
   <n-slider
     :default-value="50"
     :step="10"
-    :format-tooltip="(value) => `${value}%`"
+    :format-tooltip="(value: number) => `${value}%`"
   />
 </template>
