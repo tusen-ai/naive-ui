@@ -283,9 +283,12 @@ export default defineComponent({
       }
     }
     function doAdd (timeClicked?: number): void {
-      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: addable } = addableRef
-      if (!addable) return
+      if (!addable) {
+        clearAddStepInterval()
+        return
+      }
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -313,9 +316,12 @@ export default defineComponent({
       }
     }
     function doMinus (timeClicked?: number): void {
-      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: minusable } = minusableRef
-      if (!minusable) return
+      if (!minusable) {
+        clearMinusStepInterval()
+        return
+      }
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
