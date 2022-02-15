@@ -65,3 +65,7 @@ body {
 .md-card {
   margin-bottom: 16px;
 }
+
+.ts-dark-theme .n-layout .n-card {
+  background-color: #141414;
+}

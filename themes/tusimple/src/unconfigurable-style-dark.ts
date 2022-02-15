@@ -145,7 +145,7 @@ export const unconfigurableStyle = c([
   ]),
   cB('dynamic-tags', [
     cB('button', {
-      height: ' 24px'
+      height: '24px'
     }),
     cB('input', [
       cM('autosize', {
@@ -293,11 +293,6 @@ export const unconfigurableStyle = c([
         ])
       ])
     ])
-  ]),
-  cB('layout', [
-    cB('card', {
-      backgroundColor: '#141414'
-    })
   ]),
   cB('message', [
     cE('close', [
