@@ -84,6 +84,7 @@ describe('n-input-number', () => {
   })
   it('should work with decimal `step`', async () => {
     const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
       props: {
         defaultValue: 0.2,
         min: 0,
@@ -95,6 +96,7 @@ describe('n-input-number', () => {
     const buttons = wrapper.findAll('.n-input__suffix > button')
     const minusBtn = buttons[0]
     const addBtn = buttons[1]
+
     let arr = [0.1, 0]
     for (let i = 0; i < arr.length; i++) {
       await minusBtn.trigger('mousedown')

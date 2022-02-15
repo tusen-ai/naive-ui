@@ -113,7 +113,6 @@ export default defineComponent({
     )
     const displayedValueRef = ref('')
     let clickedTime: number
-    let compareClickTime: number
     const minusHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const addHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const getMaxPrecision = (currentValue: number): number => {
@@ -278,14 +277,13 @@ export default defineComponent({
     }
     function incrementStep (): void {
       if (addHoldStateInterval.value === null) {
+        doAdd()
         clickedTime = Date.now()
-        addHoldStateInterval.value = setInterval(doAdd, 100)
+        addHoldStateInterval.value = setInterval(() => doAdd(Date.now()), 100)
       }
     }
-    function doAdd (): void {
-      compareClickTime = Date.now()
-      const totalTimeClicked = compareClickTime - clickedTime
-      if (totalTimeClicked > 100 && totalTimeClicked <= 1000) return
+    function doAdd (timeClicked?: number): void {
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: addable } = addableRef
       if (!addable) return
       const { value: mergedValue } = mergedValueRef
@@ -300,24 +298,22 @@ export default defineComponent({
     }
     function clearAddStepInterval (): void {
       if (addHoldStateInterval.value != null) {
-        const totalTimeClicked = compareClickTime - clickedTime
-        if (totalTimeClicked < 100) {
-          doAdd()
-        }
         clearInterval(addHoldStateInterval.value)
         addHoldStateInterval.value = null
       }
     }
     function decrementStep (): void {
       if (minusHoldStateInterval.value === null) {
+        doMinus()
         clickedTime = Date.now()
-        minusHoldStateInterval.value = setInterval(doMinus, 100)
+        minusHoldStateInterval.value = setInterval(
+          () => doMinus(Date.now()),
+          100
+        )
       }
     }
-    function doMinus (): void {
-      compareClickTime = Date.now()
-      const totalTimeClicked = compareClickTime - clickedTime
-      if (totalTimeClicked > 100 && totalTimeClicked <= 1000) return
+    function doMinus (timeClicked?: number): void {
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: minusable } = minusableRef
       if (!minusable) return
       const { value: mergedValue } = mergedValueRef
@@ -332,10 +328,6 @@ export default defineComponent({
     }
     function clearMinusStepInterval (): void {
       if (minusHoldStateInterval.value != null) {
-        const totalTimeClicked = compareClickTime - clickedTime
-        if (totalTimeClicked < 100) {
-          doMinus()
-        }
         clearInterval(minusHoldStateInterval.value)
         minusHoldStateInterval.value = null
       }
