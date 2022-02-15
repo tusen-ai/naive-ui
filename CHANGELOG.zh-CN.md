@@ -6,6 +6,7 @@
 
 - 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
 - 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
+- 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
 
 ### Feats
 
