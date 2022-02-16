@@ -7,11 +7,11 @@
 ## Demos
 
 ```demo
-basic
-size
-vertical
-content
-custom-icon
+basic.vue
+size.vue
+vertical.vue
+content.vue
+custom-icon.vue
 ```
 
 ## API
