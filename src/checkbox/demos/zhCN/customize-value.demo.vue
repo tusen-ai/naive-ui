@@ -22,8 +22,8 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      handleUpdateChecked (value) {
-        message.info(value)
+      handleUpdateChecked (value: boolean) {
+        message.info(String(value))
       }
     }
   }

@@ -27,16 +27,16 @@ import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const checkedRef = ref(false)
-    const citiesRef = ref(null)
+    const citiesRef = ref<(string | number)[] | null>(null)
     const message = useMessage()
     return {
       checked: checkedRef,
       cities: citiesRef,
-      handleCheckedChange (checked) {
+      handleCheckedChange (checked: boolean) {
         checkedRef.value = checked
         message.info(JSON.stringify(checked))
       },
-      handleUpdateValue (value) {
+      handleUpdateValue (value: (string | number)[]) {
         citiesRef.value = value
         message.info(JSON.stringify(value))
       }
