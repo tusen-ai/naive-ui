@@ -2,12 +2,12 @@
 
 全局化配置设置内部组件的主题、语言和组件卸载于其他位置的 DOM 的类名。
 
-了解更多关于主题设定的信息，参见[调整主题](../docs/customize-theme.vue)。
+了解更多关于主题设定的信息，参见[调整主题](../docs/customize-theme)。
 
 ## 演示
 
 ```demo
-theme
+theme.vue
 namespace.vue
 inherit-theme.vue
 os-theme.vue

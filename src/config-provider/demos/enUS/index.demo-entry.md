@@ -1,17 +1,17 @@
 # Config Provider
 
-Config Provider is used to set global theme.vue, set global language.vue and set namespace.vue for components (detached parts).
+Config Provider is used to set global theme, set global language and set namespace for components (detached parts).
 
 For more info about theming, see [Customizing Theme](../docs/customize-theme).
 
 ## Demos
 
 ```demo
-theme
-namespace
+theme.vue
+namespace.vue
 inherit-theme.vue
 os-theme.vue
-language
+language.vue
 transparent.vue
 ```
 
