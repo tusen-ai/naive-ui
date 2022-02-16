@@ -1,29 +1,36 @@
+<markdown>
 # Button Group
 
 Sometimes a radio button group can look more elegant.
+</markdown>
 
-```html
-<n-space vertical>
-  <n-radio-group v-model:value="value" name="radiobuttongroup1">
-    <n-radio-button
-      v-for="song in songs"
-      :key="song.value"
-      :value="song.value"
-      :disabled="(song.label === 'Live Forever' && disabled1 || song.label === 'Shakermaker' && disabled2)"
-    >
-      {{ song.label }}
-    </n-radio-button>
-  </n-radio-group>
-  <n-space>
-    <n-checkbox v-model:checked="disabled2" style="margin-right: 12px;">
-      Disable Shakemaker
-    </n-checkbox>
-    <n-checkbox v-model:checked="disabled1"> Disable Live Forever </n-checkbox>
+<template>
+  <n-space vertical>
+    <n-radio-group v-model:value="value" name="radiobuttongroup1">
+      <n-radio-button
+        v-for="song in songs"
+        :key="song.value"
+        :value="song.value"
+        :disabled="
+          (song.label === 'Live Forever' && disabled1) ||
+            (song.label === 'Shakermaker' && disabled2)
+        "
+      >
+        {{ song.label }}
+      </n-radio-button>
+    </n-radio-group>
+    <n-space>
+      <n-checkbox v-model:checked="disabled2" style="margin-right: 12px">
+        Disable Shakemaker
+      </n-checkbox>
+      <n-checkbox v-model:checked="disabled1">
+        Disable Live Forever
+      </n-checkbox>
+    </n-space>
   </n-space>
-</n-space>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -60,4 +67,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
