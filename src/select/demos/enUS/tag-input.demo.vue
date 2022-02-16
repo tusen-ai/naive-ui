@@ -22,8 +22,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      multipleSelectValue: ref(null),
-      selectValue: ref(null)
+      multipleSelectValue: ref(null)
     }
   }
 })

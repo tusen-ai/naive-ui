@@ -501,7 +501,7 @@ export default defineComponent({
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
-          createdOptionsRef.value.push(beingCreatedOptions[0])
+          createdOptionsRef.value.push(beingCreatedOption)
           beingCreatedOptionsRef.value = []
         }
       }
