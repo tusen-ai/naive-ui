@@ -6,6 +6,10 @@
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
 
+### i18n
+
+- skSK locale
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
