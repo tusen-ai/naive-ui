@@ -8,7 +8,7 @@
 
 ### i18n
 
-- skSK locale
+- Add skSK locale
 
 ## 2.24.7 (2022-01-28)
 
