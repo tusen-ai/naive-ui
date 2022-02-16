@@ -5,15 +5,20 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { render, createKey } from '../../_utils'
+import {
+  render,
+  createKey,
+  resolveWrappedSlot,
+  resolveSlot
+} from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
-import style from './styles/index.cssr'
 import { dialogProps } from './dialogProps'
+import style from './styles/index.cssr'
 
 const infoIcon = <InfoIcon />
 
@@ -36,12 +41,13 @@ export const NDialog = defineComponent({
     ...dialogProps
   },
   setup (props) {
-    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
+    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
-        iconPlacement ??
-        NConfigProvider?.mergedComponentPropsRef.value?.Dialog?.iconPlacement ??
+        iconPlacement ||
+        mergedComponentPropsRef?.value?.Dialog?.iconPlacement ||
         'left'
       )
     })
@@ -59,12 +65,74 @@ export const NDialog = defineComponent({
     }
     const themeRef = useTheme(
       'Dialog',
-      'Dialog',
+      '-dialog',
       style,
       dialogLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { type } = props
+      const iconPlacement = mergedIconPlacementRef.value
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          fontSize,
+          lineHeight,
+          border,
+          titleTextColor,
+          textColor,
+          color,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          borderRadius,
+          titleFontWeight,
+          titleFontSize,
+          padding,
+          iconSize,
+          actionSpace,
+          contentMargin,
+          closeSize,
+          [iconPlacement === 'top' ? 'iconMarginIconTop' : 'iconMargin']:
+            iconMargin,
+          [iconPlacement === 'top' ? 'closeMarginIconTop' : 'closeMargin']:
+            closeMargin,
+          [createKey('iconColor', type)]: iconColor
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-icon-color': iconColor,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-close-margin': closeMargin,
+        '--n-icon-margin': iconMargin,
+        '--n-icon-size': iconSize,
+        '--n-close-size': closeSize,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-color': color,
+        '--n-text-color': textColor,
+        '--n-border-radius': borderRadius,
+        '--n-padding': padding,
+        '--n-line-height': lineHeight,
+        '--n-border': border,
+        '--n-content-margin': contentMargin,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-text-color': titleTextColor,
+        '--n-action-space': actionSpace
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'dialog',
+        computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIconPlacement: mergedIconPlacementRef,
@@ -72,64 +140,13 @@ export const NDialog = defineComponent({
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
-      cssVars: computed(() => {
-        const { type, iconPlacement } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            fontSize,
-            lineHeight,
-            border,
-            titleTextColor,
-            textColor,
-            color,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            borderRadius,
-            titleFontWeight,
-            titleFontSize,
-            padding,
-            iconSize,
-            actionSpace,
-            contentMargin,
-            closeSize,
-            [iconPlacement === 'top' ? 'iconMarginIconTop' : 'iconMargin']:
-              iconMargin,
-            [iconPlacement === 'top' ? 'closeMarginIconTop' : 'closeMargin']:
-              closeMargin,
-            [createKey('iconColor', type)]: iconColor
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-icon-color': iconColor,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-close-margin': closeMargin,
-          '--n-icon-margin': iconMargin,
-          '--n-icon-size': iconSize,
-          '--n-close-size': closeSize,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-color': color,
-          '--n-text-color': textColor,
-          '--n-border-radius': borderRadius,
-          '--n-padding': padding,
-          '--n-line-height': lineHeight,
-          '--n-border': border,
-          '--n-content-margin': contentMargin,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-title-text-color': titleTextColor,
-          '--n-action-space': actionSpace
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const {
-      $slots,
       bordered,
       mergedIconPlacement,
       cssVars,
@@ -148,10 +165,29 @@ export const NDialog = defineComponent({
       mergedClsPrefix
     } = this
 
+    this.onRender?.()
+
+    const icon = showIcon ? (
+      <NBaseIcon
+        clsPrefix={mergedClsPrefix}
+        class={`${mergedClsPrefix}-dialog__icon`}
+      >
+        {{
+          default: () =>
+            resolveWrappedSlot(
+              this.$slots.icon,
+              (children) =>
+                children || (this.icon ? render(this.icon) : iconMap[this.type])
+            )
+        }}
+      </NBaseIcon>
+    ) : null
+
     return (
       <div
         class={[
           `${mergedClsPrefix}-dialog`,
+          this.themeClass,
           `${mergedClsPrefix}-dialog--icon-${mergedIconPlacement}`,
           bordered && `${mergedClsPrefix}-dialog--bordered`
         ]}
@@ -166,81 +202,54 @@ export const NDialog = defineComponent({
           />
         ) : null}
         {showIcon && mergedIconPlacement === 'top' ? (
-          <div class={`${mergedClsPrefix}-dialog-icon-container`}>
-            <NBaseIcon
-              clsPrefix={mergedClsPrefix}
-              class={`${mergedClsPrefix}-dialog__icon`}
-            >
-              {{
-                default: () =>
-                  $slots.icon
-                    ? $slots.icon()
-                    : this.icon
-                      ? render(this.icon)
-                      : iconMap[this.type]
-              }}
-            </NBaseIcon>
-          </div>
+          <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}
         <div class={`${mergedClsPrefix}-dialog__title`}>
-          {showIcon && mergedIconPlacement === 'left' ? (
-            <NBaseIcon
-              clsPrefix={mergedClsPrefix}
-              class={`${mergedClsPrefix}-dialog__icon`}
-            >
-              {{
-                default: () =>
-                  $slots.icon
-                    ? $slots.icon()
-                    : this.icon
-                      ? render(this.icon)
-                      : iconMap[this.type]
-              }}
-            </NBaseIcon>
-          ) : null}
-          {$slots.header ? $slots.header() : render(title)}
+          {showIcon && mergedIconPlacement === 'left' ? icon : null}
+          {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
-          {$slots.default ? $slots.default() : render(content)}
+          {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>
-        {$slots.action || positiveText || negativeText || action ? (
-          <div class={`${mergedClsPrefix}-dialog__action`}>
-            {$slots.action
-              ? $slots.action()
-              : action
-                ? render(action)
-                : [
-                    this.negativeText && (
-                    <NButton
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                      ghost
-                      size="small"
-                      onClick={handleNegativeClick}
-                    >
-                      {{
-                        default: () => render(this.negativeText)
-                      }}
-                    </NButton>
-                    ),
-                    this.positiveText && (
-                    <NButton
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                      disabled={loading}
-                      loading={loading}
-                      size="small"
-                      type={type === 'default' ? 'primary' : type}
-                      onClick={handlePositiveClick}
-                    >
-                      {{
-                        default: () => render(this.positiveText)
-                      }}
-                    </NButton>
-                    )
-                  ]}
-          </div>
-        ) : null}
+        {resolveWrappedSlot(this.$slots.action, (children) =>
+          children || positiveText || negativeText || action ? (
+            <div class={`${mergedClsPrefix}-dialog__action`}>
+              {children ||
+                (action
+                  ? [render(action)]
+                  : [
+                      this.negativeText && (
+                        <NButton
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          ghost
+                          size="small"
+                          onClick={handleNegativeClick}
+                        >
+                          {{
+                            default: () => render(this.negativeText)
+                          }}
+                        </NButton>
+                      ),
+                      this.positiveText && (
+                        <NButton
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          disabled={loading}
+                          loading={loading}
+                          size="small"
+                          type={type === 'default' ? 'primary' : type}
+                          onClick={handlePositiveClick}
+                        >
+                          {{
+                            default: () => render(this.positiveText)
+                          }}
+                        </NButton>
+                      )
+                    ])}
+            </div>
+          ) : null
+        )}
       </div>
     )
   }

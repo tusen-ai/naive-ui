@@ -19,9 +19,9 @@ import {
 import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { on, off } from 'evtd'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { flatten, keep } from '../../_utils'
+import { flatten, keep, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
@@ -132,7 +132,7 @@ export default defineComponent({
   name: 'Carousel',
   props: carouselProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     // Dom
     const selfElRef = ref<HTMLDivElement | null>(null)
     const slidesElsRef = ref<HTMLElement[]>([])
@@ -780,11 +780,39 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Carousel',
-      'Carousel',
+      '-carousel',
       style,
       carouselLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          dotSize,
+          dotColor,
+          dotColorActive,
+          dotColorFocus,
+          dotLineWidth,
+          dotLineWidthActive,
+          arrowColor
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-dot-color': dotColor,
+        '--n-dot-color-focus': dotColorFocus,
+        '--n-dot-color-active': dotColorActive,
+        '--n-dot-size': dotSize,
+        '--n-dot-line-width': dotLineWidth,
+        '--n-dot-line-width-active': dotLineWidthActive,
+        '--n-arrow-color': arrowColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('carousel', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
@@ -804,30 +832,9 @@ export default defineComponent({
       isActive: isDisplayActive,
       ...caroulseSlotProps,
       ...caroulseExposedMethod,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            dotSize,
-            dotColor,
-            dotColorActive,
-            dotColorFocus,
-            dotLineWidth,
-            dotLineWidthActive,
-            arrowColor
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-dot-color': dotColor,
-          '--n-dot-color-focus': dotColorFocus,
-          '--n-dot-color-active': dotColorActive,
-          '--n-dot-size': dotSize,
-          '--n-dot-line-width': dotLineWidth,
-          '--n-dot-line-width-active': dotLineWidthActive,
-          '--n-arrow-color': arrowColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -875,11 +882,16 @@ export default defineComponent({
         </VResizeObserver>
       ))
     }
+    this.onRender?.()
     return (
       <div
         ref="selfElRef"
         class={[
+          this.themeClass,
           `${mergedClsPrefix}-carousel`,
+          this.direction === 'vertical' &&
+            `${mergedClsPrefix}-carousel--vertical`,
+          this.showArrow && `${mergedClsPrefix}-carousel--show-arrow`,
           `${mergedClsPrefix}-carousel--${dotPlacement}`,
           `${mergedClsPrefix}-carousel--${this.direction}`,
           `${mergedClsPrefix}-carousel--${this.effect}`,
@@ -918,20 +930,22 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {this.showDots &&
-          (dotsSlot
-            ? dotsSlot(dotSlotProps)
-            : dotSlotProps.total > 1 && (
-                <NCarouselDots
-                  key={dotType + dotPlacement}
-                  total={dotSlotProps.total}
-                  currentIndex={dotSlotProps.currentIndex}
-                  dotType={dotType}
-                  trigger={this.trigger}
-                  keyboard={this.keyboard}
-                />
-            ))}
+          resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
+            dotSlotProps.total > 1 && (
+              <NCarouselDots
+                key={dotType + dotPlacement}
+                total={dotSlotProps.total}
+                currentIndex={dotSlotProps.currentIndex}
+                dotType={dotType}
+                trigger={this.trigger}
+                keyboard={this.keyboard}
+              />
+            )
+          ])}
         {showArrow &&
-          (arrowSlot ? arrowSlot(arrowSlotProps) : <NCarouselArrow />)}
+          resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+            <NCarouselArrow />
+          ])}
       </div>
     )
   }

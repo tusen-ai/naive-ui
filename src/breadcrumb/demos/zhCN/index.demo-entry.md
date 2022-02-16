@@ -5,10 +5,10 @@
 ## 演示
 
 ```demo
-basic
-custom
-separator
-separator-per-item
+basic.vue
+custom.vue
+separator.vue
+separator-per-item.vue
 ```
 
 ## API

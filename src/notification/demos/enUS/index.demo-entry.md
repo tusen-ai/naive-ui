@@ -40,28 +40,29 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
-type
-change-content
-scrollable
-closable
-duration
-max
-placement
+basic.vue
+type.vue
+change-content.vue
+scrollable.vue
+closable.vue
+duration.vue
+max.vue
+placement.vue
 ```
 
 ## API
 
 ### NotificationProvider Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |
-| max | `number` | `undefined` | Limit the number of notifications to display. |
-| scrollable | `boolean` | `true` | Whether notification can be scroll. |
-| to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| container-style | `string \| Object` | `undefined` | Style of notification container. | 2.25.0 |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |  |
+| max | `number` | `undefined` | Limit the number of notifications to display. |  |
+| scrollable | `boolean` | `true` | Whether notification can be scroll. |  |
+| to | `string \| HTMLElement` | `'body'` | Container node of notification container. |  |
 
-### `notification` Injection Methods
+### notification Injection Methods
 
 | Name | Type | Description |
 | --- | --- | --- |

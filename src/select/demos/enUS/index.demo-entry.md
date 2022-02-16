@@ -5,28 +5,29 @@ Select something!
 ## Demo
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
+group.vue
+many-options.vue
+custom-option.vue
 custom-suffix.vue
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
-render-person
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
 focus.vue
+render-person.vue
+tag-input.vue
 ```
 
 ## API
@@ -37,6 +38,7 @@ focus.vue
 | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as the select trigger element. Setting it to `false` will also disable `virtual-scroll`. |  |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the select. |  |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
@@ -49,10 +51,11 @@ focus.vue
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Option menu's placement. | 2.25.0 |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
-| render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function for each option tag. |  |
+| render-tag | `(props: { option: SelectBaseOption, onClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |

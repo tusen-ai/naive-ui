@@ -7,10 +7,10 @@
 ## 演示
 
 ```demo
-basic
-closable
-icon
-no-icon
+basic.vue
+closable.vue
+icon.vue
+no-icon.vue
 ```
 
 ## API

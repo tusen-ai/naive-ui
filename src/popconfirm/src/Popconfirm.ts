@@ -42,7 +42,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig()
     const themeRef = useTheme(
       'Popconfirm',
-      'Popconfirm',
+      '-popconfirm',
       style,
       popconfirmLight,
       props,

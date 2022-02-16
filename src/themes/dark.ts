@@ -31,6 +31,7 @@ import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
+import { iconWrapperDark } from '../icon-wrapper/styles'
 import { imageDark } from '../image/styles'
 import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
@@ -73,9 +74,11 @@ import { treeSelectDark } from '../tree-select/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
+import { watermarkDark } from '../watermark/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
+  name: 'dark',
   common: commonDark,
   Alert: alertDark,
   Anchor: anchorDark,
@@ -109,6 +112,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
+  IconWrapper: iconWrapperDark,
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
@@ -150,5 +154,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Tree: treeDark,
   TreeSelect: treeSelectDark,
   Typography: typographyDark,
-  Upload: uploadDark
+  Upload: uploadDark,
+  Watermark: watermarkDark
 }

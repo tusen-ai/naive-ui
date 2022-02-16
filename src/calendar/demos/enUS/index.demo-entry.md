@@ -7,7 +7,7 @@ How time flies.
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

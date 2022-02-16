@@ -15,9 +15,9 @@ import {
   ErrorIcon
 } from '../../_internal/icons'
 import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
+import { warn, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
@@ -70,16 +70,16 @@ export default defineComponent({
   inheritAttrs: false,
   props: alertProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Alert',
-      'Alert',
+      '-alert',
       style,
       alertLight,
       props,
       mergedClsPrefixRef
     )
-    const cssVars = computed(() => {
+    const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
         self
@@ -120,6 +120,16 @@ export default defineComponent({
         '--n-icon-margin-right': right
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'alert',
+        computed(() => {
+          return props.type[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     const visibleRef = ref(true)
     const doAfterLeave = (): void => {
       const {
@@ -144,10 +154,13 @@ export default defineComponent({
       handleCloseClick,
       handleAfterLeave,
       mergedTheme: themeRef,
-      cssVars
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
+    this.onRender?.()
     return (
       <NFadeInExpandTransition onAfterLeave={this.handleAfterLeave}>
         {{
@@ -156,6 +169,7 @@ export default defineComponent({
             const attrs: HTMLAttributes = {
               class: [
                 `${mergedClsPrefix}-alert`,
+                this.themeClass,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`
               ],
               style: this.cssVars as any,
@@ -175,9 +189,7 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-alert__icon`}
                     aria-hidden="true"
                   >
-                    {$slots.icon ? (
-                      $slots.icon()
-                    ) : (
+                    {resolveSlot($slots.icon, () => [
                       <NBaseIcon clsPrefix={mergedClsPrefix}>
                         {{
                           default: () => {
@@ -196,15 +208,18 @@ export default defineComponent({
                           }
                         }}
                       </NBaseIcon>
-                    )}
+                    ])}
                   </div>
                 )}
                 <div class={`${mergedClsPrefix}-alert-body`}>
-                  {this.title || $slots.header ? (
-                    <div class={`${mergedClsPrefix}-alert-body__title`}>
-                      {$slots.header ? $slots.header() : this.title}
-                    </div>
-                  ) : null}
+                  {resolveWrappedSlot($slots.header, (children) => {
+                    const mergedChildren = children || this.title
+                    return mergedChildren ? (
+                      <div class={`${mergedClsPrefix}-alert-body__title`}>
+                        {mergedChildren}
+                      </div>
+                    ) : null
+                  })}
                   {$slots.default && (
                     <div class={`${mergedClsPrefix}-alert-body__content`}>
                       {$slots}

@@ -9,6 +9,7 @@ test/unit/coverage
 package-lock.json
 playground/temp
 yarn.lock
+.DS_Store
 .vscode
 .idea
 *.swp

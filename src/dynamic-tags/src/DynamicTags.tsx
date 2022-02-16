@@ -6,24 +6,26 @@ import {
   CSSProperties,
   computed,
   nextTick,
-  toRef
+  toRef,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
 import { NSpace } from '../../space'
-import { InputInst, NInput } from '../../input'
+import type { InputInst, InputProps } from '../../input'
+import { NInput } from '../../input'
 import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, smallerSize } from '../../_utils'
+import { call, smallerSize, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
-import style from './styles/index.cssr'
 import type { OnUpdateValue } from './interface'
+import style from './styles/index.cssr'
 
 const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
@@ -38,24 +40,13 @@ const dynamicTagsProps = {
   },
   value: Array as PropType<string[]>,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  inputProps: Object as PropType<InputProps>,
   max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'dynamic-tags',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
 export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
@@ -64,6 +55,16 @@ export default defineComponent({
   name: 'DynamicTags',
   props: dynamicTagsProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'dynamic-tags',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
@@ -74,7 +75,7 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     const themeRef = useTheme(
       'DynamicTags',
-      'DynamicTags',
+      '-dynamic-tags',
       style,
       dynamicTagsLight,
       props,
@@ -232,17 +233,18 @@ export default defineComponent({
                     $slots.input({ submit: handleInputConfirm })
                   ) : (
                     <NInput
-                      ref="inputInstRef"
+                      placeholder=""
+                      size={inputSize}
+                      style={inputStyle}
                       autosize
+                      {...this.inputProps}
+                      ref="inputInstRef"
                       value={inputValue}
                       onUpdateValue={(v) => {
                         this.inputValue = v
                       }}
                       theme={mergedTheme.peers.Input}
                       themeOverrides={mergedTheme.peerOverrides.Input}
-                      style={inputStyle}
-                      size={inputSize}
-                      placeholder=""
                       onKeyup={handleInputKeyUp}
                       onBlur={handleInputBlur}
                       internalForceFocus={inputForceFocused}

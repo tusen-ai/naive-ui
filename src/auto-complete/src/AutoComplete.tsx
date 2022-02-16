@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
@@ -20,7 +20,7 @@ import {
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
-import { useFormItem, useTheme, useConfig } from '../../_mixins'
+import { useFormItem, useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   call,
@@ -73,6 +73,10 @@ const autoCompleteProps = {
     default: undefined
   },
   placeholder: String,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
+  },
   value: String,
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
@@ -111,10 +115,14 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      namespaceRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
 
@@ -129,7 +137,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'AutoComplete',
-      'AutoComplete',
+      '-auto-complete',
       style,
       autoCompleteLight,
       props,
@@ -257,6 +265,19 @@ export default defineComponent({
         ;(document.activeElement as HTMLElement)?.blur()
       }
     }
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: { menuBoxShadow }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow,
+        '--n-bezier': cubicBezierEaseInOut
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('auto-complete', undefined, cssVarsRef, props)
+      : undefined
     return {
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -268,6 +289,7 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       mergedDisabled: mergedDisabledRef,
       active: activeRef,
+      mergedStatus: mergedStatusRef,
       handleClear,
       handleFocus,
       handleBlur,
@@ -278,16 +300,9 @@ export default defineComponent({
       handleCompositionEnd,
       handleKeyDown,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow }
-        } = themeRef.value
-        return {
-          '--n-menu-box-shadow': menuBoxShadow,
-          '--n-bezier': cubicBezierEaseInOut
-        }
-      }),
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
       mergedClsPrefix: mergedClsPrefixRef
@@ -321,6 +336,7 @@ export default defineComponent({
                     const { mergedTheme } = this
                     return (
                       <NInput
+                        status={this.mergedStatus}
                         theme={mergedTheme.peers.Input}
                         themeOverrides={mergedTheme.peerOverrides.Input}
                         bordered={this.mergedBordered}
@@ -337,8 +353,8 @@ export default defineComponent({
                         onBlur={this.handleBlur}
                       >
                         {{
-                          suffix: this.$slots.suffix,
-                          prefix: this.$slots.prefix
+                          suffix: () => this.$slots.suffix?.(),
+                          prefix: () => this.$slots.prefix?.()
                         }}
                       </NInput>
                     )
@@ -351,7 +367,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 zIndex={this.zIndex}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
                 width="target"
               >
                 {{
@@ -361,8 +377,9 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.active
+                        default: () => {
+                          this.onRender?.()
+                          return this.active
                             ? withDirectives(
                                 <NInternalSelectMenu
                                   clsPrefix={mergedClsPrefix}
@@ -375,7 +392,10 @@ export default defineComponent({
                                       .InternalSelectMenu
                                   }
                                   auto-pending
-                                  class={`${mergedClsPrefix}-auto-complete-menu`}
+                                  class={[
+                                    `${mergedClsPrefix}-auto-complete-menu`,
+                                    this.themeClass
+                                  ]}
                                   style={this.cssVars as CSSProperties}
                                   treeMate={this.treeMate}
                                   multiple={false}
@@ -387,6 +407,7 @@ export default defineComponent({
                                 [[clickoutside, this.handleClickOutsideMenu]]
                             )
                             : null
+                        }
                       }}
                     </Transition>
                   )

@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
@@ -204,7 +204,8 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -215,7 +216,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'DataTable',
-      'DataTable',
+      '-data-table',
       style,
       dataTableLight,
       props,
@@ -385,6 +386,101 @@ export default defineComponent({
       sort,
       clearFilter
     }
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderColor,
+          tdColorHover,
+          thColor,
+          thColorHover,
+          tdColor,
+          tdTextColor,
+          thTextColor,
+          thFontWeight,
+          thButtonColorHover,
+          thIconColor,
+          thIconColorActive,
+          filterSize,
+          borderRadius,
+          lineHeight,
+          tdColorModal,
+          thColorModal,
+          borderColorModal,
+          thColorHoverModal,
+          tdColorHoverModal,
+          borderColorPopover,
+          thColorPopover,
+          tdColorPopover,
+          tdColorHoverPopover,
+          thColorHoverPopover,
+          paginationMargin,
+          emptyPadding,
+          boxShadowAfter,
+          boxShadowBefore,
+          sorterSize,
+          loadingColor,
+          loadingSize,
+          opacityLoading,
+          tdColorStriped,
+          tdColorStripedModal,
+          tdColorStripedPopover,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('thPadding', size)]: thPadding,
+          [createKey('tdPadding', size)]: tdPadding
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-th-padding': thPadding,
+        '--n-td-padding': tdPadding,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-line-height': lineHeight,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-th-color': thColor,
+        '--n-th-color-hover': thColorHover,
+        '--n-th-color-modal': thColorModal,
+        '--n-th-color-hover-modal': thColorHoverModal,
+        '--n-th-color-popover': thColorPopover,
+        '--n-th-color-hover-popover': thColorHoverPopover,
+        '--n-td-color': tdColor,
+        '--n-td-color-hover': tdColorHover,
+        '--n-td-color-modal': tdColorModal,
+        '--n-td-color-hover-modal': tdColorHoverModal,
+        '--n-td-color-popover': tdColorPopover,
+        '--n-td-color-hover-popover': tdColorHoverPopover,
+        '--n-th-text-color': thTextColor,
+        '--n-td-text-color': tdTextColor,
+        '--n-th-font-weight': thFontWeight,
+        '--n-th-button-color-hover': thButtonColorHover,
+        '--n-th-icon-color': thIconColor,
+        '--n-th-icon-color-active': thIconColorActive,
+        '--n-filter-size': filterSize,
+        '--n-pagination-margin': paginationMargin,
+        '--n-empty-padding': emptyPadding,
+        '--n-box-shadow-before': boxShadowBefore,
+        '--n-box-shadow-after': boxShadowAfter,
+        '--n-sorter-size': sorterSize,
+        '--n-loading-size': loadingSize,
+        '--n-loading-color': loadingColor,
+        '--n-opacity-loading': opacityLoading,
+        '--n-td-color-striped': tdColorStriped,
+        '--n-td-color-striped-modal': tdColorStripedModal,
+        '--n-td-color-striped-popover': tdColorStripedPopover
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'data-table',
+        computed(() => props.size[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -393,102 +489,20 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
-      ...exposedMethods,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderColor,
-            tdColorHover,
-            thColor,
-            thColorHover,
-            tdColor,
-            tdTextColor,
-            thTextColor,
-            thFontWeight,
-            thButtonColorHover,
-            thIconColor,
-            thIconColorActive,
-            filterSize,
-            borderRadius,
-            lineHeight,
-            tdColorModal,
-            thColorModal,
-            borderColorModal,
-            thColorHoverModal,
-            tdColorHoverModal,
-            borderColorPopover,
-            thColorPopover,
-            tdColorPopover,
-            tdColorHoverPopover,
-            thColorHoverPopover,
-            paginationMargin,
-            emptyPadding,
-            boxShadowAfter,
-            boxShadowBefore,
-            sorterSize,
-            loadingColor,
-            loadingSize,
-            opacityLoading,
-            tdColorStriped,
-            tdColorStripedModal,
-            tdColorStripedPopover,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('thPadding', size)]: thPadding,
-            [createKey('tdPadding', size)]: tdPadding
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-th-padding': thPadding,
-          '--n-td-padding': tdPadding,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-line-height': lineHeight,
-          '--n-border-color': borderColor,
-          '--n-border-color-modal': borderColorModal,
-          '--n-border-color-popover': borderColorPopover,
-          '--n-th-color': thColor,
-          '--n-th-color-hover': thColorHover,
-          '--n-th-color-modal': thColorModal,
-          '--n-th-color-hover-modal': thColorHoverModal,
-          '--n-th-color-popover': thColorPopover,
-          '--n-th-color-hover-popover': thColorHoverPopover,
-          '--n-td-color': tdColor,
-          '--n-td-color-hover': tdColorHover,
-          '--n-td-color-modal': tdColorModal,
-          '--n-td-color-hover-modal': tdColorHoverModal,
-          '--n-n-td-color-popover': tdColorPopover,
-          '--n-td-color-hover-popover': tdColorHoverPopover,
-          '--n-th-text-color': thTextColor,
-          '--n-td-text-color': tdTextColor,
-          '--n-th-font-weight': thFontWeight,
-          '--n-th-button-color-hover': thButtonColorHover,
-          '--n-th-icon-color': thIconColor,
-          '--n-th-icon-color-active': thIconColorActive,
-          '--n-filter-size': filterSize,
-          '--n-pagination-margin': paginationMargin,
-          '--n-empty-padding': emptyPadding,
-          '--n-box-shadow-before': boxShadowBefore,
-          '--n-box-shadow-after': boxShadowAfter,
-          '--n-sorter-size': sorterSize,
-          '--n-loading-size': loadingSize,
-          '--n-loading-color': loadingColor,
-          '--n-opacity-loading': opacityLoading,
-          '--n-td-color-striped': tdColorStriped,
-          '--n-td-color-striped-modal': tdColorStripedModal,
-          '--n-td-color-striped-popover': tdColorStripedPopover
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, themeClass, onRender } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-data-table`,
+          themeClass,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,
             [`${mergedClsPrefix}-data-table--bottom-bordered`]:

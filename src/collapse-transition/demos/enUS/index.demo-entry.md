@@ -5,7 +5,7 @@ A collapse item without any form of encapsulation.
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

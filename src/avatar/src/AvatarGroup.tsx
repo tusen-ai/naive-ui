@@ -39,7 +39,7 @@ export default defineComponent({
   props: avatarGroupProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useStyle('AvatarGroup', style, mergedClsPrefixRef)
+    useStyle('-avatar-group', style, mergedClsPrefixRef)
     provide(avatarGroupInjectionKey, props)
     const restOptionsRef = computed(() => {
       const { max } = props

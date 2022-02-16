@@ -126,10 +126,10 @@ export default defineComponent({
         }
       })
     }
-    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
+    const { mergedComponentPropsRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
-      'Pagination',
+      '-pagination',
       style,
       paginationLight,
       props,
@@ -176,16 +176,10 @@ export default defineComponent({
       })
     })
     const inputSizeRef = computed<InputSize>(() => {
-      return (
-        NConfigProvider?.mergedComponentPropsRef.value?.Pagination?.inputSize ||
-        'small'
-      )
+      return mergedComponentPropsRef?.value?.Pagination?.inputSize || 'small'
     })
     const selectSizeRef = computed<SelectSize>(() => {
-      return (
-        NConfigProvider?.mergedComponentPropsRef.value?.Pagination
-          ?.selectSize || 'small'
-      )
+      return mergedComponentPropsRef?.value?.Pagination?.selectSize || 'small'
     })
     const startIndexRef = computed(() => {
       return (mergedPageRef.value - 1) * mergedPageSizeRef.value

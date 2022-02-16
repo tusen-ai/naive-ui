@@ -7,14 +7,13 @@ import {
   provide,
   PropType,
   ExtractPropTypes,
-  CSSProperties,
   inject,
   VNodeChild,
   watchEffect
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
@@ -138,10 +137,10 @@ export default defineComponent({
     if (__DEV__) {
       useCheckDeprecated(props)
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Menu',
-      'Menu',
+      '-menu',
       style,
       menuLight,
       props,
@@ -296,6 +295,79 @@ export default defineComponent({
       }
       doUpdateExpandedKeys(currentExpandedKeys)
     }
+    const cssVarsRef = computed(() => {
+      const { inverted } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self
+      } = themeRef.value
+      const {
+        borderRadius,
+        borderColorHorizontal,
+        fontSize,
+        itemHeight,
+        dividerColor
+      } = self
+      const vars: any = {
+        '--n-divider-color': dividerColor,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': fontSize,
+        '--n-border-color-horizontal': borderColorHorizontal,
+        '--n-border-radius': borderRadius,
+        '--n-item-height': itemHeight
+      }
+      if (inverted) {
+        vars['--n-group-text-color'] = self.groupTextColorInverted
+        vars['--n-color'] = self.colorInverted
+        vars['--n-item-text-color'] = self.itemTextColorInverted
+        vars['--n-arrow-color'] = self.arrowColorInverted
+        vars['--n-arrow-color-hover'] = self.arrowColorHoverInverted
+        vars['--n-arrow-color-active'] = self.arrowColorActiveInverted
+        vars['--n-arrow-color-child-active'] =
+          self.arrowColorChildActiveInverted
+        vars['--n-item-icon-color'] = self.itemIconColorInverted
+        vars['--n-item-text-color-hover'] = self.itemTextColorHoverInverted
+        vars['--n-item-icon-color-hover'] = self.itemIconColorHoverInverted
+        vars['--n-item-text-color-active'] = self.itemTextColorActiveInverted
+        vars['--n-item-icon-color-active'] = self.itemIconColorActiveInverted
+        vars['--n-item-icon-color-collapsed'] =
+          self.itemIconColorCollapsedInverted
+        vars['--n-item-color-active'] = self.itemColorActiveInverted
+        vars['--n-item-color-active-collapsed'] =
+          self.itemColorActiveCollapsedInverted
+        vars['--n-item-text-color-child-active'] =
+          self.itemTextColorChildActiveInverted
+        vars['--n-item-icon-color-child-active'] =
+          self.itemIconColorChildActiveInverted
+      } else {
+        vars['--n-group-text-color'] = self.groupTextColor
+        vars['--n-color'] = self.color
+        vars['--n-item-text-color'] = self.itemTextColor
+        vars['--n-arrow-color'] = self.arrowColor
+        vars['--n-arrow-color-hover'] = self.arrowColorHover
+        vars['--n-arrow-color-active'] = self.arrowColorActive
+        vars['--n-arrow-color-child-active'] = self.arrowColorChildActive
+        vars['--n-item-icon-color'] = self.itemIconColor
+        vars['--n-item-text-color-hover'] = self.itemTextColorHover
+        vars['--n-item-icon-color-hover'] = self.itemIconColorHover
+        vars['--n-item-text-color-active'] = self.itemTextColorActive
+        vars['--n-item-icon-color-active'] = self.itemIconColorActive
+        vars['--n-item-icon-color-collapsed'] = self.itemIconColorCollapsed
+        vars['--n-item-color-active'] = self.itemColorActive
+        vars['--n-item-color-active-collapsed'] = self.itemColorActiveCollapsed
+        vars['--n-item-text-color-child-active'] = self.itemTextColorChildActive
+        vars['--n-item-icon-color-child-active'] = self.itemIconColorChildActive
+      }
+      return vars
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'menu',
+        computed(() => (props.inverted ? 'a' : 'b')),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       controlledExpandedKeys: controlledExpandedKeysRef,
@@ -307,87 +379,24 @@ export default defineComponent({
       tmNodes: tmNodesRef,
       mergedTheme: themeRef,
       mergedCollapsed: mergedCollapsedRef,
-      cssVars: computed(() => {
-        const { inverted } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self
-        } = themeRef.value
-        const {
-          borderRadius,
-          borderColorHorizontal,
-          fontSize,
-          itemHeight,
-          dividerColor
-        } = self
-        const vars: any = {
-          '--n-divider-color': dividerColor,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-font-size': fontSize,
-          '--n-border-color-horizontal': borderColorHorizontal,
-          '--n-border-radius': borderRadius,
-          '--n-item-height': itemHeight
-        }
-        if (inverted) {
-          vars['--n-group-text-color'] = self.groupTextColorInverted
-          vars['--n-color'] = self.colorInverted
-          vars['--n-item-text-color'] = self.itemTextColorInverted
-          vars['--n-arrow-color'] = self.arrowColorInverted
-          vars['--n-arrow-color-hover'] = self.arrowColorHoverInverted
-          vars['--n-arrow-color-active'] = self.arrowColorActiveInverted
-          vars['--n-arrow-color-child-active'] =
-            self.arrowColorChildActiveInverted
-          vars['--n-item-icon-color'] = self.itemIconColorInverted
-          vars['--n-item-text-color-hover'] = self.itemTextColorHoverInverted
-          vars['--n-item-icon-color-hover'] = self.itemIconColorHoverInverted
-          vars['--n-item-text-color-active'] = self.itemTextColorActiveInverted
-          vars['--n-item-icon-color-active'] = self.itemIconColorActiveInverted
-          vars['--n-item-icon-color-collapsed'] =
-            self.itemIconColorCollapsedInverted
-          vars['--n-item-color-active'] = self.itemColorActiveInverted
-          vars['--n-item-color-active-collapsed'] =
-            self.itemColorActiveCollapsedInverted
-          vars['--n-item-text-color-child-active'] =
-            self.itemTextColorChildActiveInverted
-          vars['--n-item-icon-color-child-active'] =
-            self.itemIconColorChildActiveInverted
-        } else {
-          vars['--n-group-text-color'] = self.groupTextColor
-          vars['--n-color'] = self.color
-          vars['--n-item-text-color'] = self.itemTextColor
-          vars['--n-arrow-color'] = self.arrowColor
-          vars['--n-arrow-color-hover'] = self.arrowColorHover
-          vars['--n-arrow-color-active'] = self.arrowColorActive
-          vars['--n-arrow-color-child-active'] = self.arrowColorChildActive
-          vars['--n-item-icon-color'] = self.itemIconColor
-          vars['--n-item-text-color-hover'] = self.itemTextColorHover
-          vars['--n-item-icon-color-hover'] = self.itemIconColorHover
-          vars['--n-item-text-color-active'] = self.itemTextColorActive
-          vars['--n-item-icon-color-active'] = self.itemIconColorActive
-          vars['--n-item-icon-color-collapsed'] = self.itemIconColorCollapsed
-          vars['--n-item-color-active'] = self.itemColorActive
-          vars['--n-item-color-active-collapsed'] =
-            self.itemColorActiveCollapsed
-          vars['--n-item-text-color-child-active'] =
-            self.itemTextColorChildActive
-          vars['--n-item-icon-color-child-active'] =
-            self.itemIconColorChildActive
-        }
-        return vars
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, mode } = this
+    const { mergedClsPrefix, mode, themeClass, onRender } = this
+    onRender?.()
     return (
       <div
         role={mode === 'horizontal' ? 'menubar' : 'menu'}
         class={[
           `${mergedClsPrefix}-menu`,
+          themeClass,
           `${mergedClsPrefix}-menu--${mode}`,
           this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars as any}
       >
         {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))}
       </div>

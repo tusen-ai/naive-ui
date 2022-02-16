@@ -13,21 +13,31 @@ import {
 import { throttle } from 'lodash-es'
 import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
 import type { Hljs } from '../../_mixins'
-import { ExtractPublicPropTypes, warn } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { NCode } from '../../code'
-import { logLight, LogTheme } from '../styles'
+import type { LogTheme } from '../styles'
+import { logLight } from '../styles'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
-import style from './styles/index.cssr'
 import { logInjectionKey } from './context'
+import style from './styles/index.cssr'
 
 export interface LogInjection {
   trimRef: Ref<boolean>
   languageRef: Ref<string | undefined>
   highlightRef: Ref<boolean>
   mergedHljsRef: Ref<Hljs | undefined>
+}
+
+export interface LogInst {
+  scrollTo: ((options: {
+    slient?: boolean
+    position: 'top' | 'bottom'
+  }) => void) &
+    ((options: { slient?: boolean, top: number }) => void)
 }
 
 const logProps = {
@@ -78,8 +88,9 @@ export default defineComponent({
       return props.language !== undefined
     })
     const styleHeightRef = computed(() => {
-      const lineHeight = Math.floor(props.fontSize * props.lineHeight)
-      return `calc(${props.rows * lineHeight}px)`
+      return `calc(${Math.round(
+        props.rows * props.lineHeight * props.fontSize
+      )}px)`
     })
     const mergedLinesRef = computed(() => {
       const { log } = props
@@ -91,7 +102,7 @@ export default defineComponent({
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme(
       'Log',
-      'Log',
+      '-log',
       style,
       logLight,
       props,
@@ -200,13 +211,18 @@ export default defineComponent({
       trimRef: toRef(props, 'trim'),
       highlightRef
     })
+
+    const exportedMethods: LogInst = {
+      scrollTo
+    }
+
     return {
+      ...exportedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       scrollbarRef,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
       mergedLines: mergedLinesRef,
-      scrollTo,
       scrollToTop,
       scrollToBottom,
       handleWheel,

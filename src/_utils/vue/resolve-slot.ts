@@ -1,6 +1,15 @@
-import { Fragment, isVNode, Slot, VNodeChild, Comment } from 'vue'
+import {
+  Fragment,
+  isVNode,
+  Slot,
+  Comment,
+  VNodeArrayChildren,
+  VNodeChild
+} from 'vue'
 
-function ensureValidVNode (vnodes): VNodeChild[] | null {
+function ensureValidVNode (
+  vnodes: VNodeArrayChildren
+): VNodeArrayChildren | null {
   return vnodes.some((child) => {
     if (!isVNode(child)) {
       return true
@@ -8,7 +17,10 @@ function ensureValidVNode (vnodes): VNodeChild[] | null {
     if (child.type === Comment) {
       return false
     }
-    if (child.type === Fragment && !ensureValidVNode(child.children)) {
+    if (
+      child.type === Fragment &&
+      !ensureValidVNode(child.children as VNodeArrayChildren)
+    ) {
       return false
     }
     return true
@@ -17,9 +29,35 @@ function ensureValidVNode (vnodes): VNodeChild[] | null {
     : null
 }
 
+/**
+ * We shouldn't use the following functions with slot flags `_: 1, 2, 3`
+ */
 export function resolveSlot (
   slot: Slot | undefined,
-  fallback: () => VNodeChild[]
-): VNodeChild {
+  fallback: () => VNodeArrayChildren
+): VNodeArrayChildren {
   return (slot && ensureValidVNode(slot())) || fallback()
+}
+
+export function resolveSlotWithProps<T> (
+  slot: Slot | undefined,
+  props: T,
+  fallback: (props: T) => VNodeArrayChildren
+): VNodeArrayChildren {
+  return (slot && ensureValidVNode(slot(props))) || fallback(props)
+}
+
+/**
+ * Resolve slot with wrapper if content exists, no fallback
+ */
+export function resolveWrappedSlot (
+  slot: Slot | undefined,
+  wrapper: (children: VNodeArrayChildren | null) => VNodeChild
+): VNodeChild {
+  const children = slot && ensureValidVNode(slot())
+  return wrapper(children || null)
+}
+
+export function isSlotEmpty (slot: Slot | undefined): boolean {
+  return !(slot && ensureValidVNode(slot()))
 }

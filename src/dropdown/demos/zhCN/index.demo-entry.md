@@ -47,7 +47,7 @@ option-props
 | children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOptionOption>` | 子菜单的 children 项 |
 | icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
 | key | `string \| number` | 需要唯一 |
-| label | `string` | 显示的 label 值 |
+| label | `string \| () => VNodeChild` | 显示的 label 值 |
 | disabled | `boolean` | 是否禁用 |
 | props | `HTMLAttributes` | 自定义选项属性 |
 
@@ -70,8 +70,8 @@ option-props
 
 #### DropdownRenderOption Type
 
-| 属性   | 类型               | 说明                                   |
-| ------ | ------------------ | -------------------------------------- |
-| type   | `'render'`         | The type of the DropdownRenderOption.  |
-| key    | `string \| number` | Render option ID (should be unique).   |
-| render | `() => VNodeChild` | Render function of the option content. |
+| 属性   | 类型               | 说明                        |
+| ------ | ------------------ | --------------------------- |
+| type   | `'render'`         | DropdownRenderOption 的类型 |
+| key    | `string \| number` | 渲染选项 ID（应该是唯一的） |
+| render | `() => VNodeChild` | 选项内容的渲染功能          |

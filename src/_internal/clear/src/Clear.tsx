@@ -1,5 +1,5 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
-import { useStyle, useConfig } from '../../../_mixins'
+import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
@@ -16,10 +16,8 @@ export default defineComponent({
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseClear', style, toRef(props, 'clsPrefix'))
-    const { NConfigProvider } = useConfig()
+    useStyle('-base-clear', style, toRef(props, 'clsPrefix'))
     return {
-      NConfigProvider,
       handleMouseDown (e: MouseEvent) {
         e.preventDefault()
       }
@@ -47,7 +45,7 @@ export default defineComponent({
                 </NBaseIcon>
               ) : (
                 <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
-                  {this.$slots}
+                  {this.$slots.default?.()}
                 </div>
               )
             }

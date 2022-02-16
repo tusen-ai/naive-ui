@@ -63,7 +63,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'GradientText',
-      'GradientText',
+      '-gradient-text',
       style,
       gradientTextLight,
       props,

@@ -41,6 +41,17 @@ function getPartsOfMdDemo (tokens) {
   }
 }
 
+function createBlockTemplate (tag, content, attrs) {
+  const attrsStr = attrs
+    ? Object.keys(attrs).reduce((attrsStr, key) => {
+      return attrsStr + ` ${key}="${attrs[key]}"`
+    }, '')
+    : ''
+  return `<${tag}${attrsStr}>
+${content}
+</${tag}>`
+}
+
 async function loadFile (filepath) {
   if (fs.existsSync(filepath)) {
     return await fs.readFile(filepath, 'utf-8')
@@ -84,38 +95,41 @@ async function updateIndexEntryDemo (file) {
   )
 }
 
+const LINE_SPACE = '\n\n'
 async function transformMdToVueAndUpdateEntryFile (files) {
   for (const file of files) {
     const fileString = await loadFile(file.path)
     const tokens = marked.lexer(fileString)
     const parts = getPartsOfMdDemo(tokens)
-    let vueDemo = ''
+    const vueDemoBlocks = []
     if (parts.title || parts.content) {
-      vueDemo += `<markdown>
-# ${parts.title}
-${parts.content ? `\n${parts.content}` : ''}
-</markdown>\n`
+      vueDemoBlocks.push(
+        createBlockTemplate(
+          'markdown',
+          `# ${parts.title}${
+            parts.content ? `${LINE_SPACE}${parts.content}` : ''
+          }`
+        )
+      )
     }
     if (parts.template) {
-      vueDemo += `<template>
-${parts.template}
-</template>\n`
+      vueDemoBlocks.push(createBlockTemplate('template', parts.template))
     }
     if (parts.script) {
-      vueDemo += `<script lang="ts">
-${parts.script}
-</script>\n`
+      vueDemoBlocks.push(
+        createBlockTemplate('script', parts.script, {
+          lang: 'ts'
+        })
+      )
     }
     if (parts.style) {
-      vueDemo += `<style>
-${parts.style}
-</style>\n`
+      vueDemoBlocks.push(createBlockTemplate('style', parts.style))
     }
     await fs.remove(file.path)
     await fs.ensureDir(file.dir)
     await fs.writeFileSync(
       path.resolve(file.dir, `./${file.name}.vue`),
-      vueDemo
+      `${vueDemoBlocks.join(LINE_SPACE)}\n`
     )
     // should be able to be modified together
     await updateIndexEntryDemo(file)

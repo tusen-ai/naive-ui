@@ -1,5 +1,5 @@
 import { h, computed, defineComponent, PropType, CSSProperties } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
@@ -14,9 +14,13 @@ const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
   processing: Boolean,
   type: {
-    type: String as PropType<'line' | 'circle' | 'multiple-circle'>,
+    type: String as PropType<
+    'line' | 'circle' | 'multiple-circle' | 'dashboard'
+    >,
     default: 'line'
   },
+  gapDegree: Number,
+  gapOffsetDegree: Number,
   status: {
     type: String as PropType<Status>,
     default: 'default'
@@ -71,55 +75,76 @@ export default defineComponent({
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
-    const { mergedClsPrefixRef } = useConfig(props)
+    const gapDeg = computed(() => {
+      if (props.gapDegree || props.gapDegree === 0) {
+        return props.gapDegree
+      }
+      if (props.type === 'dashboard') {
+        return 75
+      }
+      return undefined
+    })
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
-      'Progress',
+      '-progress',
       style,
       progressLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { status } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          fontSize,
+          fontSizeCircle,
+          railColor,
+          railHeight,
+          iconSizeCircle,
+          iconSizeLine,
+          textColorCircle,
+          textColorLineInner,
+          textColorLineOuter,
+          lineBgProcessing,
+          fontWeightCircle,
+          [createKey('iconColor', status)]: iconColor,
+          [createKey('fillColor', status)]: fillColor
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-fill-color': fillColor,
+        '--n-font-size': fontSize,
+        '--n-font-size-circle': fontSizeCircle,
+        '--n-font-weight-circle': fontWeightCircle,
+        '--n-icon-color': iconColor,
+        '--n-icon-size-circle': iconSizeCircle,
+        '--n-icon-size-line': iconSizeLine,
+        '--n-line-bg-processing': lineBgProcessing,
+        '--n-rail-color': railColor,
+        '--n-rail-height': railHeight,
+        '--n-text-color-circle': textColorCircle,
+        '--n-text-color-line-inner': textColorLineInner,
+        '--n-text-color-line-outer': textColorLineOuter
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'progress',
+        computed(() => props.status[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
-      cssVars: computed(() => {
-        const { status } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            fontSize,
-            fontSizeCircle,
-            railColor,
-            railHeight,
-            iconSizeCircle,
-            iconSizeLine,
-            textColorCircle,
-            textColorLineInner,
-            textColorLineOuter,
-            lineBgProcessing,
-            fontWeightCircle,
-            [createKey('iconColor', status)]: iconColor,
-            [createKey('fillColor', status)]: fillColor
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-fill-color': fillColor,
-          '--n-font-size': fontSize,
-          '--n-font-size-circle': fontSizeCircle,
-          '--n-font-weight-circle': fontWeightCircle,
-          '--n-icon-color': iconColor,
-          '--n-icon-size-circle': iconSizeCircle,
-          '--n-icon-size-line': iconSizeLine,
-          '--n-line-bg-processing': lineBgProcessing,
-          '--n-rail-color': railColor,
-          '--n-rail-height': railHeight,
-          '--n-text-color-circle': textColorCircle,
-          '--n-text-color-line-inner': textColorLineInner,
-          '--n-text-color-line-outer': textColorLineOuter
-        }
-      })
+      gapDeg,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -144,11 +169,17 @@ export default defineComponent({
       processing,
       circleGap,
       mergedClsPrefix,
-      $slots
+      gapDeg,
+      gapOffsetDegree,
+      themeClass,
+      $slots,
+      onRender
     } = this
+    onRender?.()
     return (
       <div
         class={[
+          themeClass,
           `${mergedClsPrefix}-progress`,
           `${mergedClsPrefix}-progress--${type}`,
           `${mergedClsPrefix}-progress--${status}`
@@ -157,9 +188,13 @@ export default defineComponent({
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={percentage as number}
-        role={type === 'circle' || type === 'line' ? 'progressbar' : 'none'}
+        role={
+          type === 'circle' || type === 'line' || type === 'dashboard'
+            ? 'progressbar'
+            : 'none'
+        }
       >
-        {type === 'circle' ? (
+        {type === 'circle' || type === 'dashboard' ? (
           <Circle
             clsPrefix={mergedClsPrefix}
             status={status}
@@ -172,6 +207,10 @@ export default defineComponent({
             percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
+            gapDegree={
+              gapDeg === undefined ? (type === 'dashboard' ? 75 : 0) : gapDeg
+            }
+            gapOffsetDegree={gapOffsetDegree}
             unit={unit}
           >
             {$slots}

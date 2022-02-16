@@ -84,6 +84,7 @@ export default c([
     `)
   ]),
   cB('color-picker-handle', `
+    z-index: 1;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .45);
     position: absolute;
     background-color: white;

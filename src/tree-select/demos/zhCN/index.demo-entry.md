@@ -27,6 +27,7 @@ debug
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点 |  |
 | children-field | `string` | `'children'` | 替代 `TreeSelectOption` 中的 children 字段名 |  |
 | clearable | `boolean` | `false` | 是否可清除 |  |
+| clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | NEXT_VERSION |
 | consistent-menu-width | `boolean` | `true` | 是否使菜单宽度和输入框一致，打开会禁用虚拟滚动 |  |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | 默认选中的 key |  |
 | default-expand-all | `boolean` | `false` | 默认展开全部 |  |
@@ -44,6 +45,7 @@ debug
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |

@@ -3,7 +3,7 @@ import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
 import type { DataTableSetupProps } from './DataTable'
 import type { ColumnKey, MainTableRef, TableColumn } from './interface'
-import { getColWidth, getColKey } from './utils'
+import { getNumberColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useScroll (
@@ -48,7 +48,7 @@ export function useScroll (
           traverse(col.children)
           positionInfo.end = left
         } else {
-          left += getColWidth(col) || 0
+          left += getNumberColWidth(col) || 0
           positionInfo.end = left
         }
       })
@@ -71,7 +71,7 @@ export function useScroll (
           traverse(col.children)
           positionInfo.end = right
         } else {
-          right += getColWidth(col) || 0
+          right += getNumberColWidth(col) || 0
           positionInfo.end = right
         }
       }

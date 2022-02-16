@@ -16,7 +16,7 @@ import {
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { useConfig, useTheme } from '../../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -108,7 +108,7 @@ const Scrollbar = defineComponent({
   props: scrollbarProps,
   inheritAttrs: false,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     // dom ref
     const wrapperRef = ref<HTMLElement | null>(null)
@@ -575,12 +575,34 @@ const Scrollbar = defineComponent({
     })
     const themeRef = useTheme(
       'Scrollbar',
-      'Scrollbar',
+      '-scrollbar',
       style,
       scrollbarLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        common: {
+          cubicBezierEaseInOut,
+          scrollbarBorderRadius,
+          scrollbarHeight,
+          scrollbarWidth
+        },
+        self: { color, colorHover }
+      } = themeRef.value
+      return {
+        '--n-scrollbar-bezier': cubicBezierEaseInOut,
+        '--n-scrollbar-color': color,
+        '--n-scrollbar-color-hover': colorHover,
+        '--n-scrollbar-border-radius': scrollbarBorderRadius,
+        '--n-scrollbar-width': scrollbarWidth,
+        '--n-scrollbar-height': scrollbarHeight
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('scrollbar', undefined, cssVarsRef, props)
+      : undefined
     const exposedMethods: ScrollbarInstMethods = {
       scrollTo,
       sync,
@@ -611,37 +633,22 @@ const Scrollbar = defineComponent({
       handleContainerResize,
       handleYScrollMouseDown,
       handleXScrollMouseDown,
-      cssVars: computed(() => {
-        const {
-          common: {
-            cubicBezierEaseInOut,
-            scrollbarBorderRadius,
-            scrollbarHeight,
-            scrollbarWidth
-          },
-          self: { color, colorHover }
-        } = themeRef.value
-        return {
-          '--n-scrollbar-bezier': cubicBezierEaseInOut,
-          '--n-scrollbar-color': color,
-          '--n-scrollbar-color-hover': colorHover,
-          '--n-scrollbar-border-radius': scrollbarBorderRadius,
-          '--n-scrollbar-width': scrollbarWidth,
-          '--n-scrollbar-height': scrollbarHeight
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { $slots, mergedClsPrefix, triggerDisplayManually } = this
     if (!this.scrollable) return $slots.default?.()
-    const createChildren = (): VNode =>
-      h(
+    const createChildren = (): VNode => {
+      this.onRender?.()
+      return h(
         'div',
         mergeProps(this.$attrs, {
           role: 'none',
           ref: 'wrapperRef',
-          class: `${mergedClsPrefix}-scrollbar`,
+          class: [`${mergedClsPrefix}-scrollbar`, this.themeClass],
           style: this.cssVars,
           onMouseenter: triggerDisplayManually
             ? undefined
@@ -737,6 +744,7 @@ const Scrollbar = defineComponent({
           </div>
         ]
       )
+    }
     return this.container ? (
       createChildren()
     ) : (

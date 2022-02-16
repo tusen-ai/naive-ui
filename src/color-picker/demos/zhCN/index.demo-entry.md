@@ -5,14 +5,14 @@
 ## 演示
 
 ```demo
-basic
-alpha
-size
-disabled
-modes
-form
-swatches
-native
+basic.vue
+alpha.vue
+size.vue
+disabled.vue
+modes.vue
+form.vue
+swatches.vue
+native.vue
 ```
 
 ## API
@@ -24,6 +24,7 @@ native
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |  |
 | default-value | `string \| null` | 和第一个 mode 对应的黑色值 | 默认的颜色值 |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | render-label | `(color: string \| null) => VNodeChild` | `undefined` | 触发器的内容 | 2.24.0 |
 | show | `boolean` | `undefined` | 是否展示面板 |  |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |  |

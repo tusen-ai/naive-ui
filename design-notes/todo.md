@@ -2,8 +2,8 @@
 
 ## Urgent
 
-- carousel refactor arrow style
 - use resolve slot!!!
+- manual trigger style
 
 ## DataTable
 

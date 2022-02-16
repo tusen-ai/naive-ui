@@ -5,22 +5,22 @@ It's usually used to display good news.
 ## Demos
 
 ```demo
-basic
-arrow
-dots
-autoplay
-vertical
-space-between
-slides-per-view
-slides-per-view-auto
-centered
-effect
-transition-name
-hover
-keyboard
-mousewheel
-simulate-drag
-custom-arrow-and-dots
+basic.vue
+arrow.vue
+dots.vue
+autoplay.vue
+vertical.vue
+space-between.vue
+slides-per-view.vue
+slides-per-view-auto.vue
+centered.vue
+effect.vue
+transition-name.vue
+hover.vue
+keyboard.vue
+mousewheel.vue
+simulate-drag.vue
+custom-arrow-and-dots.vue
 ```
 
 ## API
@@ -35,7 +35,7 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | default index. | 2.24.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Carousel shows the direction. |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. | 2.24.0 |
-| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | Dot style. | 2.24.0 |
+| dot-type | `'dot' \| 'line'` | `'dot'` | Dot style. | 2.24.0 |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. | 2.24.0 |
 | effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | 2.24.0, `'card'` 2.24.2 |
 | interval | `number` | `5000` | Auto play interval (ms). |

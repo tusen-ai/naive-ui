@@ -12,6 +12,7 @@
     multiple
     checkable
     filterable
+    :clear-filter-after-select="false"
     :options="options"
     :default-value="['Norwegian Wood']"
     clearable

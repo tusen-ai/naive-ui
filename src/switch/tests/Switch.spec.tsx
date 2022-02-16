@@ -137,4 +137,23 @@ describe('n-switch', () => {
     expect(wrapper.find('.n-switch__checked').text()).toEqual('checked')
     expect(wrapper.find('.n-switch__unchecked').text()).toEqual('unchecked')
   })
+  it('should work with `icon` slot', () => {
+    const wrapper = mount(NSwitch, {
+      slots: {
+        icon: () => h('div', null, 'icon')
+      }
+    })
+    expect(wrapper.find('.n-switch__button').text()).toEqual('icon')
+  })
+  it('should work with `checked-icon` & `unchecked-icon` slots', async () => {
+    const wrapper = mount(NSwitch, {
+      slots: {
+        'checked-icon': () => h('div', null, 'checked-icon'),
+        'unchecked-icon': () => h('div', null, 'unchecked-icon')
+      }
+    })
+    expect(wrapper.find('.n-switch__button').text()).toEqual('unchecked-icon')
+    await wrapper.trigger('click')
+    expect(wrapper.find('.n-switch__button').text()).toEqual('checked-icon')
+  })
 })

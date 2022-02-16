@@ -169,7 +169,7 @@ export default defineComponent({
       : ref(false)
     const themeRef = useTheme(
       'Form',
-      'FormItem',
+      '-form-item',
       style,
       formLight,
       props,
@@ -326,6 +326,7 @@ export default defineComponent({
       path: toRef(props, 'path'),
       disabled: mergedDisabledRef,
       mergedSize: formItemSizeRefs.mergedSize,
+      mergedValidationStatus: formItemMiscRefs.mergedValidationStatus,
       restoreValidation,
       handleContentBlur,
       handleContentChange,

@@ -5,8 +5,8 @@
 ## 演示
 
 ```demo
-basic
-x
+basic.vue
+x.vue
 ```
 
 ## API

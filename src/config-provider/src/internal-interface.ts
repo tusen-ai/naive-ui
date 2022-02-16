@@ -31,6 +31,7 @@ import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
+import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { ImageTheme } from '../../image/styles'
 import type { InputTheme } from '../../input/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
@@ -73,6 +74,7 @@ import type { TreeTheme } from '../../tree/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
+import type { WatermarkTheme } from '../../watermark/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { NDateLocale, NLocale } from '../../locales'
@@ -120,6 +122,7 @@ export interface GlobalThemeWithoutCommon {
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
+  IconWrapper?: IconWrapperTheme
   Image?: ImageTheme
   Input?: InputTheme
   InputNumber?: InputNumberTheme
@@ -162,6 +165,7 @@ export interface GlobalThemeWithoutCommon {
   TreeSelect?: TreeSelectTheme
   Typography?: TypographyTheme
   Upload?: UploadTheme
+  Watermark?: WatermarkTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
@@ -234,4 +238,7 @@ export interface ConfigProviderInjection {
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
+  mergedThemeHashRef: Ref<string>
+  // non-reactive
+  inlineThemeDisabled: boolean
 }
