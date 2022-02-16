@@ -521,8 +521,8 @@ export default defineComponent({
       return (
         <div
           class={[
-            themeClassHandle?.themeClass.value,
-            `${mergedClsPrefix}-color-picker-panel`
+            `${mergedClsPrefix}-color-picker-panel`,
+            themeClassHandle?.themeClass.value
           ]}
           onDragstart={(e) => {
             e.preventDefault()
