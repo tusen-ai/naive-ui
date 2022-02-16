@@ -294,6 +294,11 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('tree', [
+    cB('tree-node-wrapper', {
+      margin: '0 -4px'
+    })
+  ]),
   cB('message', [
     cE('close', [
       c('&:hover', {
