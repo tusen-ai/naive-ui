@@ -7,16 +7,20 @@
     <n-space>
       <n-button
         @click="
-          locale = null
-          dateLocale = null
+          () => {
+            locale = null
+            dateLocale = null
+          }
         "
       >
         英文
       </n-button>
       <n-button
         @click="
-          locale = zhCN
-          dateLocale = dateZhCN
+          () => {
+            locale = zhCN
+            dateLocale = dateZhCN
+          }
         "
       >
         中文
