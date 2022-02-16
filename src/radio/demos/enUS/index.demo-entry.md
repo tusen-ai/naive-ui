@@ -24,7 +24,7 @@ size
 | disabled | `boolean` | `false` | Disabled state. |
 | name | `string` | `undefined` | The name attribute of the radio element. If not set, name of `radio-group` will be used. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| value | `string` | `undefined` | Checked value. |
+| value | `string \| number` | `undefined` | Checked value. |
 | on-update:checked | `(check: boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |
 
 ### RadioGroup Props
@@ -34,5 +34,6 @@ size
 | disabled | `boolean` | `false` | Disabled state. |
 | name | `string` | `undefined` | The name attribute of the radio elements inside the group. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| value | `string \| null` | `null` | Checked value. |
+| value | `string \| number \| null` | `null` | Checked value. |
+| default-value | `string \| number \| null` | `null` | Default checked value. |
 | on-update:value | `(value: string) => void` | `undefined` | Callback method triggered when a selection change occurs. |
