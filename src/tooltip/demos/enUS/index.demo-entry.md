@@ -5,12 +5,12 @@ It walks like a popover, quacks like a popover but looks a bit different from po
 ## Demos
 
 ```demo
-basic
-trigger
-event
-placement
-body-style
-arrow
+basic.vue
+trigger.vue
+event.vue
+placement.vue
+body-style.vue
+arrow.vue
 ```
 
 ## API
