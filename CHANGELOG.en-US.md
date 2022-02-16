@@ -6,6 +6,10 @@
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
 
+### i18n
+
+- Add skSK locale.
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
