@@ -1,18 +1,20 @@
+<markdown>
 # Customize Checked Value
 
 Use `checked-value` and `unchecked-value` to customize value.
+</markdown>
 
-```html
-<n-checkbox
-  checked-value="Foo"
-  unchecked-value="Bar"
-  @update:checked="handleUpdateChecked"
->
-  FooBar
-</n-checkbox>
-```
+<template>
+  <n-checkbox
+    checked-value="Foo"
+    unchecked-value="Bar"
+    @update:checked="handleUpdateChecked"
+  >
+    FooBar
+  </n-checkbox>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -26,4 +28,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

@@ -5,13 +5,13 @@ Yo, yo, check it out.
 ## Demos
 
 ```demo
-basic
-group
-grid
-indeterminate
-controlled
-event
-customize-value
+basic.vue
+group.vue
+grid.vue
+indeterminate.vue
+controlled.vue
+event.vue
+customize-value.vue
 focus.vue
 ```
 
