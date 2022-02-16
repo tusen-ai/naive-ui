@@ -131,14 +131,14 @@ context-menu.vue
 type DataTableCreateSummary = (pageData: RowData[]) =>
   | Array<{
       [columnKey: string]: {
-        value: string | number
+        value: string | number | (() => VNodeChild)
         colSpan?: number
         rowSpan?: number
       }
     }>
   | {
       [columnKey: string]: {
-        value: string | number
+        value: string | number | (() => VNodeChild)
         colSpan?: number
         rowSpan?: number
       }

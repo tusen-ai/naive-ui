@@ -18,6 +18,7 @@
 - `n-switch` add `unchecked-icon` slot.
 - `n-tabs` uses `n` as CSS vars prefix.
 - `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- `n-data-table`'s `summary`'s `value` support custom content, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
 
 ## 2.25.2
 

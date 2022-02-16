@@ -18,6 +18,7 @@
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
 - `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- `n-data-table` 的 `summary` 属性的 value 值支持自定义内容，　关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 
 ## 2.25.2
 
