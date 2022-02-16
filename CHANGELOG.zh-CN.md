@@ -6,8 +6,9 @@
 
 - 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
 - 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
-- 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效
+- 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效, 关闭 [#2392](https://github.com/TuSimple/naive-ui/issues/2392)
 - 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
+- 修复 `n-table` 动态增加时 `border-color` 的样式异常，关闭 [#2403](https://github.com/TuSimple/naive-ui/issues/2403)
 
 ### Feats
 
