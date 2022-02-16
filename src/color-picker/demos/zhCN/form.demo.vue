@@ -24,7 +24,7 @@ export default defineComponent({
       model,
       colorRule: {
         trigger: 'change',
-        validator (_, value) {
+        validator (_: unknown, value: string) {
           if (value !== '#18A058') return new Error('不许改颜色')
         }
       }
