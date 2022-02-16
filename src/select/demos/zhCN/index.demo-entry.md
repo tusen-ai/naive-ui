@@ -28,6 +28,7 @@ render-tag.vue
 focus.vue
 render-person.vue
 tag-input.vue
+separator.vue
 placeholder-debug.vue
 menu-debug.vue
 render-debug.vue
@@ -65,6 +66,7 @@ filterable-debug.vue
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
+| separator | `string` | `undefined` | 分隔符，在和 `tag` 需要和 `filterable` 一起使用 | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |

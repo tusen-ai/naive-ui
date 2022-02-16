@@ -1,7 +1,7 @@
 <markdown>
-# 作为 Tag 框输入使用
+# Use separator to separate tags input
 
-使用 `tag` 和 `:show="false"` 来作为 Tag 框输入使用。
+set `tag` and `:show="false"` and `separator"`to use as tag input with `separator`.
 </markdown>
 
 <template>
@@ -10,7 +10,8 @@
     filterable
     multiple
     tag
-    placeholder="输入，按回车确认"
+    placeholder="use ; as separator"
+    :separator="';'"
     :show-arrow="false"
     :show="false"
   />

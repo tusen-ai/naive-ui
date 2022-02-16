@@ -132,6 +132,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
+  separator: String,
   maxTagCount: [Number, String] as PropType<number | 'responsive'>,
   consistentMenuWidth: {
     type: Boolean,
@@ -500,7 +501,7 @@ export default defineComponent({
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
-          createdOptionsRef.value.push(beingCreatedOption)
+          createdOptionsRef.value.push(beingCreatedOptions[0])
           beingCreatedOptionsRef.value = []
         }
       }
@@ -540,6 +541,41 @@ export default defineComponent({
         focusSelection()
         closeMenu()
         doUpdateValue(option.value, option)
+      }
+    }
+    function handleToggleByOptions (option: SelectOption[]): void {
+      if (mergedDisabledRef.value) return
+      const { tag, remote, clearFilterAfterSelect } = props
+      if (tag && !remote) {
+        const { value: beingCreatedOptions } = beingCreatedOptionsRef
+        if (beingCreatedOptions.length) {
+          createdOptionsRef.value = beingCreatedOptions
+          beingCreatedOptionsRef.value = []
+        }
+      }
+      if (props.multiple) {
+        const changedValues = createClearedMultipleSelectValue(
+          mergedValueRef.value
+        )
+        createdOptionsRef.value.forEach((option) => {
+          const index = changedValues.findIndex(
+            (value) => value === option.value
+          )
+          if (~index) {
+            changedValues.splice(index, 1)
+            if (tag && !remote) {
+              const createdOptionIndex = getCreatedOptionIndex(option.value)
+              if (~createdOptionIndex) {
+                createdOptionsRef.value.splice(createdOptionIndex, 1)
+                if (clearFilterAfterSelect) patternRef.value = ''
+              }
+            }
+          } else {
+            changedValues.push(option.value)
+            if (clearFilterAfterSelect) patternRef.value = ''
+          }
+        })
+        doUpdateValue(changedValues, getMergedOptions(changedValues))
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -631,7 +667,19 @@ export default defineComponent({
                     ) {
                       // do nothing
                     } else {
-                      handleToggleByOption(beingCreatedOption)
+                      const { tag, separator, onCreate } = props
+                      if (tag && separator) {
+                        const optionValues =
+                          String(optionValue).split(separator)
+                        beingCreatedOptionsRef.value.pop()
+                        optionValues.forEach((v) => {
+                          const option = onCreate(v)
+                          beingCreatedOptionsRef.value.push(option)
+                        })
+                        handleToggleByOptions(beingCreatedOptionsRef.value)
+                      } else {
+                        handleToggleByOption(beingCreatedOption)
+                      }
                     }
                   } else {
                     handleToggleByOption(beingCreatedOption)

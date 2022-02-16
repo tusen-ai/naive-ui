@@ -16,6 +16,7 @@
 - `n-switch` add `unchecked-icon` slot.
 - `n-tabs` uses `n` as CSS vars prefix.
 - `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- `n-select` add `seprator` prop, closes [#2368](https://github.com/TuSimple/naive-ui/issues/2368).
 
 ## 2.25.2
 

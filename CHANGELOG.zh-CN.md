@@ -16,6 +16,7 @@
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
 - `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- `n-select` 新增 `separator` 属性，关闭 [#2368](https://github.com/TuSimple/naive-ui/issues/2368)
 
 ## 2.25.2
 
