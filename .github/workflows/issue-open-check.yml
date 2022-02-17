@@ -14,7 +14,7 @@ jobs:
 
       - name: check format
         if: (contains(github.event.issue.body, 'issue-helper') == false && steps.check.outputs.result == 0)
-        uses: actions-cool/issues-helper@v2.5.0
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment,add-labels,close-issue'
           issue-number: ${{ github.event.issue.number }}
