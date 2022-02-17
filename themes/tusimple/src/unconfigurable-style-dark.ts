@@ -437,5 +437,16 @@ export const unconfigurableStyle = c([
         })
       ]
     )
+  ]),
+  cB('upload-file-list', [
+    cB('upload-file', [
+      cB('upload-file-info', [
+        cE('action', [
+          cB('button--default-type', {
+            color: '#ADADAD'
+          })
+        ])
+      ])
+    ])
   ])
 ])
