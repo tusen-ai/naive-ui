@@ -34,6 +34,10 @@ export const unconfigurableStyle = c([
       overflow: 'hidden'
     },
     [
+      cB('base-select-menu-option-wrapper', {
+        paddingTop: '4px!important',
+        paddingBottom: '4px!important'
+      }),
       cB('base-select-option', [
         cM(
           'selected',

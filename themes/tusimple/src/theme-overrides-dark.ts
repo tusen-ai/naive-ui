@@ -257,6 +257,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     closeColorHover: colors.primaryColor,
     closeColorPressed: colors.primaryColorPressed
   },
+  Dropdown: {
+    optionHeightMedium: '38px'
+  },
   Divider: {
     color: '#5B5B5B'
   },
