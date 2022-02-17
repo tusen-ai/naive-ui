@@ -238,6 +238,9 @@ export const unconfigurableStyle = c([
       ]
     )
   ]),
+  cB('tooltip', {
+    padding: '8px 16px!important'
+  }),
   cB('transfer', [
     cB(
       'transfer-gap',
