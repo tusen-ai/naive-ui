@@ -357,7 +357,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     arrowHeight: '8px',
     space: '4px',
     spaceArrow: '14px',
-    padding: '20px 12px'
+    padding: '12px 20px'
   },
   Progress: {
     fontWeightCircle: '700',

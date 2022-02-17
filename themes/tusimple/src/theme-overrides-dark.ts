@@ -444,7 +444,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     spaceArrow: '14px',
     textColor: '#FFF',
     boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
-    padding: '20px 12px'
+    padding: '12px 20px'
   },
   Popconfirm: {
     iconColor: '#FAB23E !important'
@@ -608,8 +608,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     headerBarColor: '#ADADAD'
   },
   Upload: {
-    itemColorHover: '#0000',
-    itemColorHoverError: '#0000',
+    itemColorHover: 'rgba(255, 255, 255, 0.09)',
+    itemColorHoverError: 'rgba(232, 128, 128, 0.09)',
     itemIconColor: '#FFFFFF',
     fontSize: '16px'
   }
