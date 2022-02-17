@@ -467,6 +467,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     fillColorError: colors.errorColor,
     textColorCircle: '#ADADAD'
   },
+  Steps: {
+    indicatorTextColorProcess: '#333'
+  },
   Radio: {
     labelPadding: '0 8px 0 12px',
     fontSizeMedium: '16px',
