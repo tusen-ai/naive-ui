@@ -7,11 +7,11 @@
 ## 演示
 
 ```demo
-basic
-line-clamp
-expand-trigger
-custom-tooltip
-dynamic-debug
+basic.vue
+line-clamp.vue
+expand-trigger.vue
+custom-tooltip.vue
+dynamic-debug.vue
 ```
 
 ## API
