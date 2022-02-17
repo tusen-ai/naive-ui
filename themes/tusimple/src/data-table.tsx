@@ -6,7 +6,7 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
   const chevronStyle = {
     height: '16px',
     width: '16px',
-    marginBottom: '-4px',
+    marginBottom: '-5px',
     transition: 'fill .3s cubic-bezier(.4, 0, .2, 1)'
   }
   return h(
@@ -64,6 +64,7 @@ export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
           fill,
           height: '20px',
           width: '20px',
+          marginBottom: '-2px',
           transition: 'fill .3s cubic-bezier(.4, 0, .2, 1)'
         }}
         viewBox="0 0 24 24"
