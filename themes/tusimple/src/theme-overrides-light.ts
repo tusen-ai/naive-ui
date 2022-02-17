@@ -71,7 +71,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
   },
   Breadcrumb: {
     fontSize: '16px',
-    fontWeightActive: '500'
+    fontWeightActive: '500',
+    itemTextColor: '#999',
+    separatorColor: '#999'
   },
   Button: {
     textColorWarning: '#333',
