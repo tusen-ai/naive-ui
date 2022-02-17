@@ -214,10 +214,16 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
-          dateLocale: dateSkSK,
-          locale: skSK
           dateLocale: dateEnGB,
           locale: enGB
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateSkSK,
+          locale: skSK
         }
       }).html()
     ).toMatchSnapshot()

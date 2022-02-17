@@ -20,6 +20,10 @@
 - `n-tabs` uses `n` as CSS vars prefix.
 - `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
 
+### i18n
+
+- Add skSK locale.
+
 ## 2.25.2
 
 ### Fixes
@@ -104,10 +108,6 @@
 - `n-select` exports `SelectRenderOption` type.
 - `n-select` exports `SelectRenderTag` type.
 - `n-tree` adds `node-props` prop.
-
-### i18n
-
-- Add skSK locale.
 
 ## 2.24.7 (2022-01-28)
 

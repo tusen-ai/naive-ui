@@ -20,6 +20,10 @@
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
 - `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 
+### i18n
+
+- 新增 skSK locale
+
 ## 2.25.2
 
 ### Fixes
@@ -104,10 +108,6 @@
 - `n-select` 导出 `SelectRenderOption` 类型
 - `n-select` 导出 `SelectRenderTag` 类型
 - `n-tree` 新增 `node-props` 属性
-
-### i18n
-
-- Add skSK locale
 
 ## 2.24.7 (2022-01-28)
 

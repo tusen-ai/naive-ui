@@ -1,4 +1,6 @@
-const skSK = {
+import type { NLocale } from './enUS'
+
+const skSK: NLocale = {
   name: 'sk-SK',
   global: {
     undo: 'Späť',
@@ -109,5 +111,4 @@ const skSK = {
   }
 }
 
-export type NLocale = typeof skSK
 export default skSK
