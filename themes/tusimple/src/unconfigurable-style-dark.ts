@@ -71,6 +71,13 @@ export const unconfigurableStyle = c([
       )
     ])
   ]),
+  cB('button', [
+    cNotM('disabled', [
+      c('&:hover', {
+        color: 'var(--n-text-color)'
+      })
+    ])
+  ]),
   cB('cascader-menu', {
     padding: '4px 0'
   }),
