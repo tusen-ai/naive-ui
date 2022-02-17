@@ -443,7 +443,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     space: '4px',
     spaceArrow: '14px',
     textColor: '#FFF',
-    boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME
+    boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    padding: '20px 12px'
   },
   Popconfirm: {
     iconColor: '#FAB23E !important'
