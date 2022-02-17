@@ -31,8 +31,7 @@ export const colors = {
   warningColorHover: createHoverColor('#FFAC26', 0.2),
   warningColorPressed: createPressedColor('#FFAC26', 0.05),
   textColorDisabled: '#D7DAE0',
-  textColor1: '#333',
-  textColor2: '#333'
+  textColor1: '#333'
 }
 
 export const themeOverridesLight: GlobalThemeOverrides = {
@@ -149,8 +148,8 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     checkMarkColorDisabled: colors.textColorDisabled,
     checkMarkColorDisabledChecked: '#FFF',
     colorDisabled: '#0000',
-    colorDisabledChecked: '#D8D8D8',
-    textColor: commonLight.textColor1,
+    colorDisabledChecked: '#F5F6F7 ',
+    textColor: colors.textColor1,
     textColorDisabled: colors.textColorDisabled
   },
   Card: {

@@ -472,7 +472,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     fontSizeMedium: '16px',
     radioSizeMedium: '16px',
     dotColorDisabled: '#5B5B5B',
-    boxShadowDisabled: 'inset 0 0 0 1px #5B5B5B'
+    boxShadowDisabled: 'inset 0 0 0 1px #5B5B5B',
+    textColor: '#FFFFFF'
   },
   Slider: {
     railColor: '#5B5B5B',
