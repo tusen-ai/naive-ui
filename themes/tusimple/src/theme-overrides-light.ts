@@ -336,10 +336,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
     ),
-    itemColorHover: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, 0.9)'
-    ),
+    itemColorHover: 'rgba(79,178,51,.1)',
     itemColorActiveHover: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
