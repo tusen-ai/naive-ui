@@ -158,7 +158,8 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     paddingHuge: '20px'
   },
   Cascader: {
-    menuHeight: '290px'
+    menuHeight: '290px',
+    optionHeight: '38px'
   },
   DataTable: {
     fontSizeMedium: '16px',

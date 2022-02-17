@@ -71,6 +71,9 @@ export const unconfigurableStyle = c([
       )
     ])
   ]),
+  cB('cascader-menu', {
+    padding: '4px 0'
+  }),
   cB('dropdown-menu', {
     overflow: 'hidden'
   }),

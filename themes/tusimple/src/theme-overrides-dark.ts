@@ -194,7 +194,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     closeColorPressed: colors.primaryColorPressed
   },
   Cascader: {
-    menuHeight: '290px'
+    menuHeight: '290px',
+    optionHeight: '38px'
   },
   DataTable: {
     fontSizeMedium: '16px',
