@@ -105,6 +105,10 @@
 - `n-select` 导出 `SelectRenderTag` 类型
 - `n-tree` 新增 `node-props` 属性
 
+### i18n
+
+- Add skSK locale
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes

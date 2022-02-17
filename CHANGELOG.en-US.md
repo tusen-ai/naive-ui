@@ -105,6 +105,10 @@
 - `n-select` exports `SelectRenderTag` type.
 - `n-tree` adds `node-props` prop.
 
+### i18n
+
+- Add skSK locale.
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
