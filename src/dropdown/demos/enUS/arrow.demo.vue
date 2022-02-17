@@ -1,19 +1,21 @@
+<markdown>
 # Arrow
 
 Show an arrow with the dropdown.
+</markdown>
 
-```html
-<n-dropdown
-  trigger="click"
-  @select="handleSelect"
-  :options="options"
-  :show-arrow="true"
->
-  <n-button>Go For a Trip</n-button>
-</n-dropdown>
-```
+<template>
+  <n-dropdown
+    trigger="click"
+    :options="options"
+    :show-arrow="true"
+    @select="handleSelect"
+  >
+    <n-button>Go For a Trip</n-button>
+  </n-dropdown>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -40,10 +42,10 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key) {
-        message.info(key)
+      handleSelect (key: string | number) {
+        message.info(String(key))
       }
     }
   }
 })
-```
+</script>

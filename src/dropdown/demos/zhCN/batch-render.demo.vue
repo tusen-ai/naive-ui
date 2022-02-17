@@ -1,55 +1,56 @@
-# Batch Render
+<markdown>
+# 批量渲染
 
-The `render-label` and `render-icon` properties can be used to pre-process dropdown options.
+注意：`render-label` 会对 group 类型的标签生效，可通过 `option.type` 进行设置。
+</markdown>
 
-Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    :render-label="renderDropdownLabel"
+    :render-icon="renderDropdownIcon"
+  >
+    <n-button>我是批量渲染</n-button>
+  </n-dropdown>
+</template>
 
-```html
-<n-dropdown
-  :options="options"
-  placement="bottom-start"
-  trigger="click"
-  @select="handleSelect"
-  :render-label="renderDropdownLabel"
-  :render-icon="renderDropdownIcon"
->
-  <n-button>Batch Render</n-button>
-</n-dropdown>
-```
-
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
+import type { VNodeChild } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { DropdownOption } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
 const options = [
   {
     type: 'group',
-    label: 'People and Some Food to Eat',
+    label: '主角和吃的',
     key: 'main',
     children: [
       {
-        label: 'Jay Gatsby',
+        label: '杰·盖茨比',
         key: 'jay gatsby'
       },
       {
-        label: 'Daisy Buchanan',
+        label: '黛西·布坎南',
         key: 'daisy buchanan'
       },
       {
-        label: 'Nick Carraway',
+        label: '尼克·卡拉威',
         key: 'nick carraway'
       },
       {
-        label: 'food',
+        label: '吃的',
         key: 'food',
         children: [
           {
-            label: 'chicken',
+            label: '鸡肉',
             key: 'chicken'
           },
           {
-            label: 'beef',
+            label: '牛肉',
             key: 'beef'
           }
         ]
@@ -62,9 +63,9 @@ export default defineComponent({
   setup () {
     return {
       options,
-      renderDropdownLabel (option) {
+      renderDropdownLabel (option: DropdownOption) {
         if (option.type === 'group') {
-          return option.label
+          return option.label as VNodeChild
         }
         return h(
           'a',
@@ -73,11 +74,11 @@ export default defineComponent({
             target: '_blank'
           },
           {
-            default: () => option.label
+            default: () => option.label as VNodeChild
           }
         )
       },
-      renderDropdownIcon (option) {
+      renderDropdownIcon () {
         return h(NIcon, null, {
           default: () => h(CashIcon)
         })
@@ -85,4 +86,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

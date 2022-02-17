@@ -1,29 +1,29 @@
+<markdown>
 # Manually Positioned
 
-In some cases, you may want to manually position the dropdown. An example is to position the dropdown options where you right click on some area.
-
 Warning: when manually positioned, the `trigger` prop must be set to `'manual'`.
+</markdown>
 
-```html
-<div
-  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
-  @contextmenu="handleContextMenu"
->
-  Right Click
-</div>
-<n-dropdown
-  placement="bottom-start"
-  @select="handleSelect"
-  trigger="manual"
-  :x="x"
-  :y="y"
-  :options="options"
-  :show="showDropdown"
-  :on-clickoutside="onClickoutside"
-/>
-```
+<template>
+  <div
+    style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, 0.5)"
+    @contextmenu="handleContextMenu"
+  >
+    Right Click
+  </div>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="manual"
+    :x="x"
+    :y="y"
+    :options="options"
+    :show="showDropdown"
+    :on-clickoutside="onClickoutside"
+    @select="handleSelect"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref, nextTick } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -87,14 +87,11 @@ export default defineComponent({
       showDropdown: showDropdownRef,
       x: xRef,
       y: yRef,
-      handleSelect (key) {
+      handleSelect (key: string | number) {
         showDropdownRef.value = false
-        message.info(key)
+        message.info(String(key))
       },
-      handleBlur () {
-        showDropdownRef.value = false
-      },
-      handleContextMenu (e) {
+      handleContextMenu (e: MouseEvent) {
         e.preventDefault()
         showDropdownRef.value = false
         nextTick().then(() => {
@@ -103,11 +100,11 @@ export default defineComponent({
           yRef.value = e.clientY
         })
       },
-      onClickoutside (e) {
+      onClickoutside () {
         message.info('clickoutside')
         showDropdownRef.value = false
       }
     }
   }
 })
-```
+</script>

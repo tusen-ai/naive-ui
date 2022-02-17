@@ -1,21 +1,21 @@
 # Dropdown
 
-When you have some functions to trigger.
+When you have some functions to trigger.vue.
 
 ## Demos
 
 ```demo
-basic
-icon
+basic.vue
+icon.vue
 trigger
-cascade
-arrow
-placement
-size
-manual-position
-batch-render
+cascade.vue
+arrow.vue
+placement.vue
+size.vue
+manual-position.vue
+batch-render.vue.vue
 render
-option-props
+option-props.vue
 ```
 
 ## API

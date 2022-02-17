@@ -1,22 +1,26 @@
+<markdown>
 # 触发
 
 下拉菜单不同的触发方式。
+</markdown>
 
-```html
-<n-space>
-  <n-dropdown @select="handleSelect" trigger="hover" :options="options">
-    <n-button>悬浮！</n-button>
-  </n-dropdown>
-  <n-dropdown @select="handleSelect" trigger="click" :options="options">
-    <n-button>点击！</n-button>
-  </n-dropdown>
-  <n-dropdown @select="handleSelect" :show="showDropdown" :options="options">
-    <n-button @click="handleClick">噢！我要自己手动！</n-button>
-  </n-dropdown>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+      <n-button>悬浮！</n-button>
+    </n-dropdown>
+    <n-dropdown trigger="click" :options="options" @select="handleSelect">
+      <n-button>点击！</n-button>
+    </n-dropdown>
+    <n-dropdown :show="showDropdown" :options="options" @select="handleSelect">
+      <n-button @click="handleClick">
+        噢！我要自己手动！
+      </n-button>
+    </n-dropdown>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -45,8 +49,8 @@ export default defineComponent({
         }
       ],
       showDropdown: showDropdownRef,
-      handleSelect (key) {
-        message.info(key)
+      handleSelect (key: string | number) {
+        message.info(String(key))
       },
       handleClick () {
         showDropdownRef.value = !showDropdownRef.value
@@ -54,4 +58,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
