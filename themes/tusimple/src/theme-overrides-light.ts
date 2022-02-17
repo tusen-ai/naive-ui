@@ -378,6 +378,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     fillColorError: colors.errorColor,
     textColorCircle: '#666666'
   },
+  Radio: {
+    dotColorDisabled: '#D7DAE0'
+  },
   Switch: {
     railHeightMedium: '15px',
     railHeightLarge: '20px',
