@@ -10,7 +10,7 @@ const esAR = {
     negativeText: 'Cancelar'
   },
   Cascader: {
-    placeholder: 'Seleccionar por pavor',
+    placeholder: 'Seleccionar por favor',
     loading: 'Cargando',
     loadingRequiredMessage: (label: string): string =>
       `Por favor, cargue los descendientes de ${label} antes de marcarlo.`
@@ -61,7 +61,7 @@ const esAR = {
     description: 'Sin datos'
   },
   Select: {
-    placeholder: 'Seleccionar por pavor'
+    placeholder: 'Seleccionar por favor'
   },
   TimePicker: {
     placeholder: 'Seleccionar hora',
