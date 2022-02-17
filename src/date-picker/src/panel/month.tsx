@@ -17,6 +17,7 @@ export default defineComponent({
   name: 'MonthPanel',
   props: {
     ...useCalendarProps,
+    defaultYearArray: Array as PropType<number[]>,
     type: {
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true

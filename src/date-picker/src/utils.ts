@@ -275,17 +275,26 @@ function quarterArray (
 function yearArray (
   yearTs: number,
   valueTs: number | [number, number] | null,
-  currentTs: number
+  currentTs: number,
+  defaultYearArray?: number[]
 ): YearItem[] {
   const calendarYears: YearItem[] = []
-  const time1900 = new Date(START_YEAR, 0, 1)
-  // 1900 is not a round time, so we use 1911 as start...
-  // new Date(1900, 0, 1)
-  // 1899-12-31T15:54:17.000Z
-  for (let i = 0; i < 200; i++) {
-    calendarYears.push(
-      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs)
-    )
+  if (defaultYearArray?.length) {
+    for (let i = 0; i < defaultYearArray.length; i++) {
+      calendarYears.push(
+        yearItem(getTime(new Date(defaultYearArray[i], 0, 1)), valueTs, currentTs)
+      )
+    }
+  } else {
+    const time1900 = new Date(START_YEAR, 0, 1)
+    // 1900 is not a round time, so we use 1911 as start...
+    // new Date(1900, 0, 1)
+    // 1899-12-31T15:54:17.000Z
+    for (let i = 0; i < 200; i++) {
+      calendarYears.push(
+        yearItem(getTime(addYears(time1900, i)), valueTs, currentTs)
+      )
+    }
   }
   return calendarYears
 }
@@ -332,5 +341,6 @@ export {
   quarterArray,
   strictParse,
   getDerivedTimeFromKeyboardEvent,
-  getDefaultTime
+  getDefaultTime,
+  yearItem
 }

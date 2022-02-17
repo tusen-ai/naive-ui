@@ -1,7 +1,7 @@
 # 年份
 
 ```html
-<n-date-picker v-model:value="timestamp" type="year" clearable />
+<n-date-picker v-model:value="timestamp" :defaultYearArray="defaultYearArray" type="year" clearable />
 <pre>{{ JSON.stringify(timestamp) }}</pre>
 ```
 
@@ -11,6 +11,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
+      defaultYearArray: [2007, 2008, 2009, 2011],
       timestamp: ref(1183135260000)
     }
   }

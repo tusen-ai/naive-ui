@@ -128,6 +128,7 @@
   "dependencies": {
     "@css-render/plugin-bem": "^0.15.8",
     "@css-render/vue3-ssr": "^0.15.8",
+    "@types/estree": "^0.0.51",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.4",
     "async-validator": "^4.0.1",

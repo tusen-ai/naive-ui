@@ -70,6 +70,10 @@ const datePickerProps = {
   updateValueOnClose: Boolean,
   defaultValue: [Number, Array] as PropType<Value | null>,
   defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
+  defaultYearArray: {
+    type: Array as PropType<number[] | undefined>,
+    default: undefined
+  },
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -833,7 +837,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clearable } = this
+    const { clearable, defaultYearArray } = this
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
@@ -983,18 +987,21 @@ export default defineComponent({
                                     {...commonPanelProps}
                                     type="month"
                                     key="month"
+                                    defaultYearArray={defaultYearArray}
                                   />
                               ) : this.type === 'year' ? (
                                   <MonthPanel
                                     {...commonPanelProps}
                                     type="year"
                                     key="year"
+                                    defaultYearArray={defaultYearArray}
                                   />
                               ) : this.type === 'quarter' ? (
                                   <MonthPanel
                                     {...commonPanelProps}
                                     type="quarter"
                                     key="quarter"
+                                    defaultYearArray={defaultYearArray}
                                   />
                               ) : (
                                   <DatePanel {...commonPanelProps} />

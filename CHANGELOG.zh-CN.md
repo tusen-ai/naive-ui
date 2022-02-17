@@ -40,6 +40,10 @@
 - `n-progress` 新增 `gap-offset-degree` 属性
 - `n-select` 新增 `clear-filter-after-select` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
 
+### Feats
+
+- `n-date-picker` 新增 `default-year-array` 属性, 关闭[#2214](https://github.com/TuSimple/naive-ui/issues/2214)
+
 ### i18n
 
 - 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)

@@ -40,6 +40,10 @@
 - `n-progress` adds `gap-offset-degree` prop.
 - `n-select` adds `clear-filter-after-select` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
 
+### Feats
+
+- `n-date-picker` adds `default-year-array` prop, closes[#2214](https://github.com/TuSimple/naive-ui/issues/2214).
+
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
