@@ -1,16 +1,22 @@
+<markdown>
 # Dynamic Debug
+</markdown>
 
-```html
-<p>测试：：：：</p>
+<template>
+  <p>测试：：：：</p>
 
-<n-ellipsis style="max-width: 240px"> {{ text }} </n-ellipsis>
-<br />
-<br />
-<br />
-<n-button type="primary" @click="toogleText">测试动态文字</n-button>
-```
+  <n-ellipsis style="max-width: 240px">
+    {{ text }}
+  </n-ellipsis>
+  <br>
+  <br>
+  <br>
+  <n-button type="primary" @click="toogleText">
+    测试动态文字
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -34,4 +40,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

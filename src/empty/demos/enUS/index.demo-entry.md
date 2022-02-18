@@ -5,9 +5,9 @@ E<span style="opacity: 0;">mpt</span>y.
 ## Demos
 
 ```demo
-basic
-icon
-size
+basic.vue
+icon.vue
+size.vue
 ```
 
 ## API
