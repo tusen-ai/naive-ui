@@ -1,8 +1,11 @@
-# 水平
+<markdown>
+# 大小
 
-```html
-<div style="overflow: auto;">
-  <n-timeline horizontal>
+有 `medium`、`large` 大小
+</markdown>
+
+<template>
+  <n-timeline size="large">
     <n-timeline-item content="啊" />
     <n-timeline-item
       type="success"
@@ -10,7 +13,7 @@
       content="哪里成功"
       time="2018-04-03 20:46"
     />
-    <n-timeline-item type="error" content="哪里失败" time="2018-04-03 20:46" />
+    <n-timeline-item type="error" content="哪里错误" time="2018-04-03 20:46" />
     <n-timeline-item
       type="warning"
       title="警告"
@@ -24,5 +27,4 @@
       time="2018-04-03 20:46"
     />
   </n-timeline>
-</div>
-```
+</template>
