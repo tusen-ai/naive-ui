@@ -31,7 +31,8 @@ export const colors = {
   warningColorHover: createHoverColor('#FFAC26', 0.2),
   warningColorPressed: createPressedColor('#FFAC26', 0.05),
   textColorDisabled: '#D7DAE0',
-  textColor1: '#333'
+  textColor1: '#333',
+  textColor2: '#333'
 }
 
 export const themeOverridesLight: GlobalThemeOverrides = {
