@@ -482,12 +482,13 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     railColor: '#5B5B5B',
     fillColor: colors.primaryColor,
     fillColorHover: colors.primaryColorHover,
+    railColorHover: '#5B5B5B',
     handleBoxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowHover: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowActive: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowFocus: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     dotColor: '#333333',
-    dotBorder: '2px solid #333333',
+    dotBorder: '2px solid #5B5B5B',
     dotBorderActive: `2px solid ${colors.primaryColor}`
   },
   Switch: {
