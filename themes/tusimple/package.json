@@ -4,7 +4,7 @@
   "module": "es/index.js",
   "version": "0.1.8",
   "peerDependencies": {
-    "naive-ui": "^2.10.0"
+    "naive-ui": "^2.24.6"
   },
   "author": "07akioni",
   "license": "MIT",
