@@ -327,7 +327,7 @@ export default defineComponent({
         ? dataTreeMateRef.value!.getNonLeafKeys()
         : props.defaultExpandedKeys
     }
-    if (watchProps?.includes('defaultExpandedKeys')) {
+    if (watchProps?.includes('defaultExpandedKeys') || props.defaultExpandAll) {
       watchEffect(initUncontrolledExpandedKeys)
     } else {
       initUncontrolledExpandedKeys()
