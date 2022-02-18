@@ -5,10 +5,10 @@
 ## 演示
 
 ```demo
-basic
-group
-error
-preview-disabled
+basic.vue
+group.vue
+error.vue
+preview-disabled.vue
 custom.vue
 tooltip.vue
 ```
