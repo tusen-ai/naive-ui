@@ -5,24 +5,24 @@
 ## 演示
 
 ```demo
-date
-datetime
-datetimeformat
-daterange
-datetimerange
-month
-year
-quarter
-size
-default-time
-disabled
-disabled-time
-actions
-shortcuts
-events
-format
-footerslot
-update-on-close
+date.vue
+datetime.vue
+datetimeformat.vue
+daterange.vue
+datetimerange.vue
+month.vue
+year.vue
+quarter.vue
+size.vue
+default-time.vue
+disabled.vue
+disabled-time.vue
+actions.vue
+shortcuts.vue
+events.vue
+format.vue
+footerslot.vue
+update-on-close.vue
 focus.vue
 ```
 
