@@ -1,15 +1,17 @@
+<markdown>
 # Hide button
 
 Use `show-button` prop to control whether to show control buttons.
+</markdown>
 
-```html
-<n-space align="center">
-  <n-switch v-model:value="disabled" />
-  <n-input-number :show-button="disabled" v-model:value="value" />
-</n-space>
-```
+<template>
+  <n-space align="center">
+    <n-switch v-model:value="disabled" />
+    <n-input-number v-model:value="value" :show-button="disabled" />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -20,4 +22,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

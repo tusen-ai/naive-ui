@@ -1,10 +1,12 @@
+<markdown>
 # Basic
+</markdown>
 
-```html
-<n-input-number v-model:value="value" clearable />
-```
+<template>
+  <n-input-number v-model:value="value" clearable />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -14,4 +16,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

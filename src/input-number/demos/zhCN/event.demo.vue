@@ -1,17 +1,17 @@
-# Event
+<markdown>
+# 事件
+</markdown>
 
-Blur & change events are exposed.
+<template>
+  <n-input-number
+    v-model:value="value"
+    @update:value="handleChange"
+    @focus="handleFocus"
+    @blur="handleBlur"
+  />
+</template>
 
-```html
-<n-input-number
-  v-model:value="value"
-  @update:value="handleChange"
-  @focus="handleFocus"
-  @blur="handleBlur"
-/>
-```
-
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -20,7 +20,7 @@ export default defineComponent({
     const message = useMessage()
     return {
       value: ref(0),
-      handleChange (v) {
+      handleChange (v: number | null) {
         message.info(`update:value(${v})`)
       },
       handleBlur () {
@@ -32,4 +32,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
