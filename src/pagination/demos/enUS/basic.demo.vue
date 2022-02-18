@@ -1,10 +1,12 @@
+<markdown>
 # Basic
+</markdown>
 
-```html
-<n-pagination v-model:page="page" :page-count="100" />
-```
+<template>
+  <n-pagination v-model:page="page" :page-count="100" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -14,4 +16,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

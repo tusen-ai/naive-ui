@@ -1,16 +1,18 @@
+<markdown>
 # 自定义 PageSizes 选项
+</markdown>
 
-```html
-<n-pagination
-  v-model:page="page"
-  v-model:page-size="pageSize"
-  :page-count="100"
-  show-size-picker
-  :page-sizes="pageSizes"
-/>
-```
+<template>
+  <n-pagination
+    v-model:page="page"
+    v-model:page-size="pageSize"
+    :page-count="100"
+    show-size-picker
+    :page-sizes="pageSizes"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -40,4 +42,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
