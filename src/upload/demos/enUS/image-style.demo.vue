@@ -1,28 +1,29 @@
+<markdown>
 # Thumbnail file list
 
-Uploaded files can be listed with types, such as `list-type = "image"`.
-
 Thumbnails can be created using your own custom method via the `create-thumbnail-url` property.
+</markdown>
 
-```html
-<n-upload
-  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :default-file-list="fileList"
-  list-type="image"
-  :createThumbnailUrl="createThumbnailUrl"
->
-  <n-button>Upload</n-button>
-</n-upload>
-```
+<template>
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="fileList"
+    list-type="image"
+    :create-thumbnail-url="createThumbnailUrl"
+  >
+    <n-button>Upload</n-button>
+  </n-upload>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref, h } from 'vue'
 import { useMessage } from 'naive-ui'
+import type { UploadFileInfo } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    const fileListRef = ref([
+    const fileListRef = ref<UploadFileInfo[]>([
       {
         id: 'a',
         name: 'My Fault.png',
@@ -49,15 +50,23 @@ export default defineComponent({
     ])
     return {
       fileList: fileListRef,
-      createThumbnailUrl (file) {
+      createThumbnailUrl (file: File): Promise<string> {
         message.info(() => [
           '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
           h('br'),
-          'It will be 07akioni whatever you upload.'
+          'It will be 07akioni whatever you upload.',
+          file.name
         ])
-        return '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        message.info(`${file.name}`)
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(
+              '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+            )
+          }, 1000)
+        })
       }
     }
   }
 })
-```
+</script>
