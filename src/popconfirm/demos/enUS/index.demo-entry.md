@@ -5,12 +5,12 @@ A confirm, poped.
 ## Demos
 
 ```demo
-basic
-custom-action
-custom-icon
-event
-no-icon
-actions
+basic.vue
+custom-action.vue
+custom-icon.vue
+event.vue
+no-icon.vue
+actions.vue
 ```
 
 ## API

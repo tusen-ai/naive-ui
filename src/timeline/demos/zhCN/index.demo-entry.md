@@ -5,11 +5,11 @@
 ## 演示
 
 ```demo
-basic
-size
-item-placement
-horizontal
-customize-icon
+basic.vue
+size.vue
+item-placement.vue
+horizontal.vue
+customize-icon.vue
 ```
 
 ## API

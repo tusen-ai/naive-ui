@@ -71,14 +71,16 @@ export const themeOverridesLight: GlobalThemeOverrides = {
   },
   Breadcrumb: {
     fontSize: '16px',
-    fontWeightActive: '500'
+    fontWeightActive: '500',
+    itemTextColor: '#999',
+    separatorColor: '#999'
   },
   Button: {
     textColorWarning: '#333',
     textColorHoverWarning: '#333',
     textColorFocusWarning: '#333',
     textColorPressedWarning: '#333',
-    iconSizeTiny: '16px',
+    iconSizeTiny: '14px',
     iconSizeSmall: '20px',
     iconSizeMedium: '20px',
     iconSizeLarge: '28px',
@@ -94,10 +96,10 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     fontSizeSmall: '16px',
     fontSizeMedium: '16px',
     fontSizeLarge: '24px',
-    paddingTiny: '0 12px',
+    paddingTiny: '0 16px',
     paddingSmall: '0 24px',
-    paddingMedium: '0 48px',
-    paddingLarge: '0 80px',
+    paddingMedium: '0 40px',
+    paddingLarge: '0 72px',
     paddingRoundTiny: '0 12px',
     paddingRoundSmall: '0 24px',
     paddingRoundMedium: '0 48px',
@@ -147,22 +149,27 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     checkMarkColorDisabled: colors.textColorDisabled,
     checkMarkColorDisabledChecked: '#FFF',
     colorDisabled: '#0000',
-    colorDisabledChecked: '#D8D8D8',
-    textColor: commonLight.textColor1,
+    colorDisabledChecked: '#F5F6F7 ',
+    textColor: colors.textColor1,
     textColorDisabled: colors.textColorDisabled
   },
+  Card: {
+    paddingSmall: '20px',
+    paddingMedium: '20px',
+    paddingLarge: '20px',
+    paddingHuge: '20px'
+  },
   Cascader: {
-    menuHeight: '290px'
+    menuHeight: '290px',
+    optionHeight: '38px'
   },
   DataTable: {
     fontSizeMedium: '16px',
     thColor: '#EBEDF0',
+    thIconColor: '#ccc',
     thTextColor: commonLight.textColor2,
     thFontWeight: commonLight.fontWeight,
-    tdColorHover: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, .9)'
-    ),
+    tdColorHover: 'rgba(79, 178, 51, .1)',
     thButtonColorHover: '#0000',
     thColorModal: '#EBEDF0',
     tdColorHoverModal: composite(
@@ -209,6 +216,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     fontSize: '16px',
     actionSpace: '20px',
     contentMargin: '12px 0 40px 0'
+  },
+  Dropdown: {
+    optionHeightMedium: '38px'
   },
   DynamicTags: {
     peers: {
@@ -279,16 +289,16 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     iconMargin: '0 20px 0 0',
     closeMargin: '0 -8px 0 20px',
     colorSuccess: colors.successColor,
-    colorInfo: colors.warningColor,
-    colorWarning: colors.errorColor,
+    colorInfo: colors.infoColor,
+    colorWarning: colors.warningColor,
     colorError: colors.errorColor,
     textColorError: '#FFF',
     textColorSuccess: '#FFF',
-    textColorInfo: '#FFF',
-    textColorWarning: '#FFF',
-    iconColorInfo: 'rgb(0, 0, 0)',
+    textColorInfo: '#FFFFFF',
+    textColorWarning: '#333',
+    iconColorInfo: '#FFF',
     iconColorSuccess: 'rgb(255, 255, 255)',
-    iconColorWarning: 'rgb(255, 255, 255)',
+    iconColorWarning: '#333',
     iconColorError: 'rgb(255, 255, 255)',
     closeColorInfo: 'rgb(0, 0, 0)',
     closeColorHoverInfo: 'rgb(0, 0, 0)',
@@ -326,10 +336,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
     ),
-    itemColorHover: composite(
-      commonLight.primaryColor,
-      'rgba(255, 255, 255, 0.9)'
-    ),
+    itemColorHover: 'rgba(79,178,51,.1)',
     itemColorActiveHover: composite(
       commonLight.primaryColor,
       'rgba(255, 255, 255, 0.9)'
@@ -345,12 +352,13 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     buttonIconColorHover: commonLight.primaryColor
   },
   Popover: {
-    padding: '20px',
     fontSize: '16px',
     arrowOffset: '40px',
     arrowOffsetVertical: '16px',
     arrowHeight: '8px',
-    spaceArrow: '14px'
+    space: '4px',
+    spaceArrow: '14px',
+    padding: '12px 20px'
   },
   Progress: {
     fontWeightCircle: '700',
@@ -370,6 +378,11 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     fillColorError: colors.errorColor,
     textColorCircle: '#666666'
   },
+  Radio: {
+    dotColorDisabled: '#D7DAE0',
+    buttonColorActive: '#4FB233',
+    buttonTextColorActive: '#FFF'
+  },
   Switch: {
     railHeightMedium: '15px',
     railHeightLarge: '20px',
@@ -385,8 +398,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     buttonWidthPressedLarge: '38px',
     buttonBorderRadiusMedium: '12px',
     buttonBorderRadiusLarge: '16px',
-    railColor: '#EBEDF0',
-    railColorActive: '#EBEDF0',
+    opacityDisabled: '1',
+    railColor: '#D7DAE0',
+    railColorActive: '#D7DAE0',
     buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   },
   Table: {
@@ -423,13 +437,15 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     closeSizeLarge: '20px',
     fontSizeSmall: '12px',
     fontSizeMedium: '16px',
-    fontSizeLarge: '16px'
+    fontSizeLarge: '16px',
+    colorCheckable: 'rgba(102, 102, 102, .1)',
+    colorHoverCheckable: 'rgba(79, 178, 51, 0.1)'
   },
   TimePicker: {
     itemFontSize: '16px',
     itemHeight: '38px',
-    itemWidth: '66px',
-    panelActionPadding: '12px 20px'
+    itemWidth: '74px',
+    panelActionPadding: '12px 0'
   },
   Tooltip: {
     peers: {
@@ -440,7 +456,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     }
   },
   Transfer: {
-    extraTextColor: colors.textColor1
+    extraTextColor: '#666'
   },
   Typography: {
     headerPrefixWidth3: '15px',

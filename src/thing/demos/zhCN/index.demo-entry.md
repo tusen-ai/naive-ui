@@ -7,8 +7,8 @@
 ## 演示
 
 ```demo
-basic
-indent
+basic.vue
+indent.vue
 ```
 
 ## API

@@ -30,18 +30,18 @@ export const colors = {
   primaryColor: '#4FB233',
   primaryColorHover: createHoverColor('#4FB233'),
   primaryColorPressed: createPressedColor('#4FB233'),
-  infoColor: '#335FFF',
-  infoColorHover: createHoverColor('#335FFF'),
-  infoColorPressed: createPressedColor('#335FFF'),
+  infoColor: '#4B70FA',
+  infoColorHover: createHoverColor('#4B70FA'),
+  infoColorPressed: createPressedColor('#4B70FA'),
   successColor: '#4FB233',
   successColorHover: createHoverColor('#4FB233'),
   successColorPressed: createPressedColor('#4FB233'),
-  errorColor: '#D92149',
-  errorColorHover: createHoverColor('#D92149'),
-  errorColorPressed: createPressedColor('#D92149'),
-  warningColor: '#FFAC26',
-  warningColorHover: createHoverColor('#FFAC26', 0.2),
-  warningColorPressed: createPressedColor('#FFAC26', 0.05),
+  errorColor: '#EB3B61',
+  errorColorHover: createHoverColor('#EB3B61'),
+  errorColorPressed: createPressedColor('#EB3B61'),
+  warningColor: '#FAB23E',
+  warningColorHover: createHoverColor('#FAB23E', 0.2),
+  warningColorPressed: createPressedColor('#FAB23E', 0.05),
   textColorDisabled: '#5B5B5B',
   textColor1: '#FFFFFF',
   textColor2: '#D6D6D6'
@@ -112,10 +112,10 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     textColorWarning: '#333',
     textColorSuccess: '#333',
     textColorPrimary: '#333',
-    iconSizeTiny: '24px',
-    iconSizeSmall: '24px',
-    iconSizeMedium: '24px',
-    iconSizeLarge: '36px',
+    iconSizeTiny: '14px',
+    iconSizeSmall: '20px',
+    iconSizeMedium: '20px',
+    iconSizeLarge: '28px',
     borderRadiusTiny: '16px',
     borderRadiusSmall: '16px',
     borderRadiusMedium: '24px',
@@ -130,8 +130,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     fontSizeLarge: '24px',
     paddingTiny: '0 16px',
     paddingSmall: '0 24px',
-    paddingMedium: '0 48px',
-    paddingLarge: '0 80px',
+    paddingMedium: '0 40px',
+    paddingLarge: '0 72px',
     paddingRoundTiny: '0 12px',
     paddingRoundSmall: '0 24px',
     paddingRoundMedium: '0 48px',
@@ -194,12 +194,12 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     closeColorPressed: colors.primaryColorPressed
   },
   Cascader: {
-    menuHeight: '290px'
+    menuHeight: '290px',
+    optionHeight: '38px'
   },
   DataTable: {
     fontSizeMedium: '16px',
-    borderColor: '5B5B5B',
-    thColor: '#282828',
+    borderColor: '#404040',
     thTextColor: '#FFFFFF',
     tdColor: '#1E1E1E',
     tdTextColor: '#FFFFFF',
@@ -257,6 +257,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     contentMargin: '12px 0 40px 0',
     closeColorHover: colors.primaryColor,
     closeColorPressed: colors.primaryColorPressed
+  },
+  Dropdown: {
+    optionHeightMedium: '38px'
   },
   Divider: {
     color: '#5B5B5B'
@@ -360,22 +363,22 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     iconMargin: '0 20px 0 0',
     closeMargin: '0 -8px 0 20px',
     colorSuccess: colors.successColor,
-    colorInfo: colors.warningColor,
-    colorWarning: colors.errorColor,
+    colorInfo: colors.infoColor,
+    colorWarning: colors.warningColor,
     colorError: colors.errorColor,
     boxShadowInfo: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     boxShadowSuccess: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     boxShadowError: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     boxShadowWarning: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     textColorError: '#FFF',
-    textColorSuccess: '#FFF',
+    textColorSuccess: '#333',
     textColorInfo: '#FFF',
-    textColorWarning: '#FFF',
-    iconColorInfo: 'rgb(255, 255, 255)',
+    textColorWarning: '#333',
+    iconColorInfo: 'FFF',
     iconColorSuccess: '#333333',
     iconColorWarning: '#333333',
     iconColorError: 'rgb(255, 255, 255)',
-    iconColorLoading: 'rgb(255, 255, 255)',
+    iconColorLoading: '#4FB233',
     closeColorInfo: 'rgb(255, 255, 255)',
     closeColorHoverInfo: 'rgb(255, 255, 255)',
     closeColorPressedInfo: 'rgb(255, 255, 255)',
@@ -433,14 +436,15 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     buttonIconColorHover: commonDark.primaryColor
   },
   Popover: {
-    padding: '20px',
     fontSize: '16px',
     arrowOffset: '40px',
     arrowOffsetVertical: '16px',
     arrowHeight: '8px',
+    space: '4px',
     spaceArrow: '14px',
     textColor: '#FFF',
-    boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME
+    boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
+    padding: '12px 20px'
   },
   Popconfirm: {
     iconColor: '#FAB23E !important'
@@ -461,25 +465,31 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     fillColorSuccess: colors.successColor,
     fillColorWarning: colors.warningColor,
     fillColorError: colors.errorColor,
-    textColorCircle: '#666666'
+    textColorCircle: '#ADADAD'
+  },
+  Steps: {
+    indicatorTextColorProcess: '#333'
   },
   Radio: {
     labelPadding: '0 8px 0 12px',
     fontSizeMedium: '16px',
     radioSizeMedium: '16px',
     dotColorDisabled: '#5B5B5B',
-    boxShadowDisabled: 'inset 0 0 0 1px #5B5B5B'
+    boxShadowDisabled: 'inset 0 0 0 1px #5B5B5B',
+    textColor: '#FFFFFF',
+    buttonTextColorActive: '#333'
   },
   Slider: {
     railColor: '#5B5B5B',
     fillColor: colors.primaryColor,
     fillColorHover: colors.primaryColorHover,
+    railColorHover: '#5B5B5B',
     handleBoxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowHover: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowActive: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     handleBoxShadowFocus: vars.NORMAL_BOX_SHADOW_DARK_THEME,
     dotColor: '#333333',
-    dotBorder: '2px solid #333333',
+    dotBorder: '2px solid #5B5B5B',
     dotBorderActive: `2px solid ${colors.primaryColor}`
   },
   Switch: {
@@ -497,6 +507,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     buttonWidthPressedLarge: '38px',
     buttonBorderRadiusMedium: '12px',
     buttonBorderRadiusLarge: '16px',
+    opacityDisabled: '1',
     railColor: '#5B5B5B',
     railColorActive: '#5B5B5B',
     buttonColor: '#5B5B5B',
@@ -508,7 +519,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     tdColor: '#1E1E1E',
     tdTextColor: '#FFFFFF',
     thFontWeight: commonDark.fontWeight,
-    borderColor: '#5B5B5B',
+    borderColor: '#404040',
     thPaddingSmall: '10px 20px',
     thPaddingMedium: '10px 20px',
     thPaddingLarge: '10px 20px',
@@ -553,9 +564,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     padding: '0 12px',
     closeMargin: '0 0 0 8px',
     heightMedium: '24px',
-    closeSizeSmall: '24px',
-    closeSizeMedium: '24px',
-    closeSizeLarge: '24px',
+    closeSizeSmall: '20px',
+    closeSizeMedium: '20px',
+    closeSizeLarge: '20px',
     fontSizeSmall: '12px',
     fontSizeMedium: '16px',
     fontSizeLarge: '16px',
@@ -572,8 +583,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   TimePicker: {
     itemFontSize: '16px',
     itemHeight: '38px',
-    itemWidth: '66px',
-    panelActionPadding: '12px 20px',
+    itemWidth: '74px',
+    panelActionPadding: '12px 0',
     itemTextColor: '#FFF'
   },
   Tooltip: {
@@ -588,8 +599,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   },
   Transfer: {
     borderColor: '#5B5B5B',
-    headerColor: '#333333',
-    extraTextColor: colors.textColor1
+    headerColor: '#363636',
+    extraTextColor: '#D6D6D6'
   },
   Typography: {
     headerPrefixWidth3: '15px',
@@ -599,8 +610,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     headerBarColor: '#ADADAD'
   },
   Upload: {
-    itemColorHover: '#0000',
-    itemColorHoverError: '#0000',
+    itemColorHover: 'rgba(255, 255, 255, 0.09)',
+    itemColorHoverError: 'rgba(232, 128, 128, 0.09)',
     itemIconColor: '#FFFFFF',
     fontSize: '16px'
   }

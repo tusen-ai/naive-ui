@@ -5,9 +5,9 @@
 ## 演示
 
 ```demo
-basic
-box
-size
+basic.vue
+box.vue
+size.vue
 ```
 
 ## API
