@@ -1,51 +1,52 @@
+<markdown>
 # 照片墙
 
-`list-type="image-card"`。
-
 照片墙中的预览会默认调用内部组件，你也可以使用 `on-preview` 自定义展示上传文件的方法。
+</markdown>
 
-```html
-<n-upload
-  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :default-file-list="fileList"
-  list-type="image-card"
->
-  点击上传
-</n-upload>
-<n-divider />
-<n-upload
-  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :default-file-list="previewFileList"
-  list-type="image-card"
-  @preview="handlePreview"
-/>
-<n-modal
-  v-model:show="showModal"
-  preset="card"
-  style="width: 600px;"
-  title="一张很酷的图片"
->
-  <img :src="previewImageUrl" style="width: 100%;" />
-</n-modal>
-```
+<template>
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="fileList"
+    list-type="image-card"
+  >
+    点击上传
+  </n-upload>
+  <n-divider />
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="previewFileList"
+    list-type="image-card"
+    @preview="handlePreview"
+  />
+  <n-modal
+    v-model:show="showModal"
+    preset="card"
+    style="width: 600px"
+    title="一张很酷的图片"
+  >
+    <img :src="previewImageUrl" style="width: 100%">
+  </n-modal>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { UploadFileInfo } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const showModalRef = ref(false)
     const previewImageUrlRef = ref('')
-    function handlePreview (file) {
+    function handlePreview (file: UploadFileInfo) {
       const { url } = file
-      previewImageUrlRef.value = url
+      previewImageUrlRef.value = url as string
       showModalRef.value = true
     }
     return {
       handlePreview,
       showModal: showModalRef,
       previewImageUrl: previewImageUrlRef,
-      fileList: ref([
+      fileList: ref<UploadFileInfo[]>([
         {
           id: 'a',
           name: '我是上传出错的普通文件.png',
@@ -70,7 +71,7 @@ export default defineComponent({
           percentage: 99
         }
       ]),
-      previewFileList: ref([
+      previewFileList: ref<UploadFileInfo[]>([
         {
           id: 'react',
           name: '我是react.png',
@@ -87,4 +88,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
