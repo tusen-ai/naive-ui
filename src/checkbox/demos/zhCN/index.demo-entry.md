@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+size.vue
 group.vue
 grid.vue
 indeterminate.vue
