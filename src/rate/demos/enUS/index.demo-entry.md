@@ -1,16 +1,16 @@
 # Rate
 
-Hint: If you are not very confident, think twice before changing the star's color. That can lead to a disaster.
+Hint: If you are not very confident, think twice before changing the star's color.vue. That can lead to a disaster.
 
 ## Demos
 
 ```demo
-basic
-size
-color
+basic.vue
+size.vue
+color.vue
 icon.vue
-allow-half
-readonly
+allow-half.vue
+readonly.vue
 ```
 
 ## API
