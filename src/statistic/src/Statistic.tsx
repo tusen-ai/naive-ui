@@ -1,5 +1,5 @@
 import { defineComponent, computed, CSSProperties, h } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { statisticLight } from '../styles'
@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'Statistic',
   props: statisticProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
       '-statistic',
@@ -28,39 +28,46 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          labelFontWeight,
+          valueFontWeight,
+          valuePrefixTextColor,
+          labelTextColor,
+          valueSuffixTextColor,
+          valueTextColor,
+          labelFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-label-font-size': labelFontSize,
+        '--n-label-font-weight': labelFontWeight,
+        '--n-label-text-color': labelTextColor,
+        '--n-value-font-weight': valueFontWeight,
+        '--n-value-prefix-text-color': valuePrefixTextColor,
+        '--n-value-suffix-text-color': valueSuffixTextColor,
+        '--n-value-text-color': valueTextColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('statistic', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            labelFontWeight,
-            valueFontWeight,
-            valuePrefixTextColor,
-            labelTextColor,
-            valueSuffixTextColor,
-            valueTextColor,
-            labelFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-label-font-size': labelFontSize,
-          '--n-label-font-weight': labelFontWeight,
-          '--n-label-text-color': labelTextColor,
-          '--n-value-font-weight': valueFontWeight,
-          '--n-value-prefix-text-color': valuePrefixTextColor,
-          '--n-value-suffix-text-color': valueSuffixTextColor,
-          '--n-value-text-color': valueTextColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { $slots, mergedClsPrefix } = this
+    this.onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-statistic`}
+        class={[`${mergedClsPrefix}-statistic`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-statistic__label`}>
