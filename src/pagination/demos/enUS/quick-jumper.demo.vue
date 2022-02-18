@@ -1,10 +1,12 @@
+<markdown>
 # Quick Jumper
+</markdown>
 
-```html
-<n-pagination v-model:page="page" :page-count="100" show-quick-jumper />
-```
+<template>
+  <n-pagination v-model:page="page" :page-count="100" show-quick-jumper />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -14,4 +16,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
