@@ -7,8 +7,8 @@ I wish there is a way to build all kinds of frequently used layout inside a comp
 ## Demos
 
 ```demo
-basic
-indent
+basic.vue
+indent.vue
 ```
 
 ## API
