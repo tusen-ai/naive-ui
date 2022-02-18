@@ -1,12 +1,16 @@
-# 关于主题的注意事项
+<markdown>
+# Caveat about theme
 
-如果你不明确指明主题，被创建信息的主题会与对应 `n-message-provider` 的主题一致。
+If you don't specified the theme, the theme of created message will be the same as its `n-message-provider`.
+</markdown>
 
-```html
-<n-button @click="info"> 你可以在 Message 还在的时候切换主题 </n-button>
-```
+<template>
+  <n-button @click="info">
+    You can change the theme while the message is active
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -23,4 +27,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

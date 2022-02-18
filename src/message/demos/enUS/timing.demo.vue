@@ -1,12 +1,16 @@
-# 时间
+<markdown>
+# Timing
 
-设定 Message 的持续时间。
+Specify the duration of messages.
+</markdown>
 
-```html
-<n-button @click="createMessage"> 持续 5 秒 </n-button>
-```
+<template>
+  <n-button @click="createMessage">
+    Last for 5 second
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -23,4 +27,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

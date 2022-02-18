@@ -1,10 +1,14 @@
+<markdown>
 # 图标
+</markdown>
 
-```html
-<n-button @click="createMessage"> 漏斗图标 </n-button>
-```
+<template>
+  <n-button @click="createMessage">
+    漏斗图标
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import { MdHourglass } from '@vicons/ionicons4'
@@ -21,4 +25,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
