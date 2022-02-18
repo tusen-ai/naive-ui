@@ -5,19 +5,19 @@
 ## 演示
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-download
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-retry-debug
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+download.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+retry-debug.vue
 ```
 
 ## API
@@ -55,7 +55,7 @@ retry-debug
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
-| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
+| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
@@ -69,7 +69,7 @@ retry-debug
 | id | `string \| number` | 文件 id，需要唯一 |
 | name | `string` | 文件名 |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |
-| percentage | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
+| percentage? | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
 | file? | `File \| null` | 文件对应的浏览器 File 对象 |
 | thumbnailUrl? | `string \| null` | 缩略图 URL |
 | type? | `string \| null` | MIME 类型 |
