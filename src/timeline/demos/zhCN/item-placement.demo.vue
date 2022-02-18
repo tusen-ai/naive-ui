@@ -1,8 +1,11 @@
-# Horizontal
+<markdown>
+# 方向
 
-```html
-<div style="overflow: auto;">
-  <n-timeline horizontal>
+左，<span style="display: inline-block; transform: scaleX(-1);">右</span>
+</markdown>
+
+<template>
+  <n-timeline item-placement="right">
     <n-timeline-item content="啊" />
     <n-timeline-item
       type="success"
@@ -24,5 +27,4 @@
       time="2018-04-03 20:46"
     />
   </n-timeline>
-</div>
-```
+</template>
