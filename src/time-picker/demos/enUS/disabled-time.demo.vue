@@ -1,27 +1,27 @@
-# 禁用某些时间
+<markdown>
+# Disable time
 
-你可以禁用某些时间。
-
-```html
-<n-time-picker
-  v-model:value="time0"
-  :is-hour-disabled="isHourDisabled"
-  :is-minute-disabled="isMinuteDisabled"
-  :is-second-disabled="isSecondDisabled"
-/>
-```
-
-```js
+If you can't stop time, at least disable it.
+</markdown>
+<template>
+  <n-time-picker
+    v-model:value="time0"
+    :is-hour-disabled="isHourDisabled"
+    :is-minute-disabled="isMinuteDisabled"
+    :is-second-disabled="isSecondDisabled"
+  />
+</template>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
       time0: ref(null),
-      isHourDisabled (hour) {
+      isHourDisabled (hour: number) {
         return hour % 2 === 0
       },
-      isMinuteDisabled (minute, selectedHour) {
+      isMinuteDisabled (minute: number, selectedHour: number | null) {
         if (selectedHour === null) return false
         if (Number(selectedHour) < 12) {
           return minute < 30
@@ -29,7 +29,11 @@ export default defineComponent({
           return false
         }
       },
-      isSecondDisabled (second, selectedMinute, selectedHour) {
+      isSecondDisabled (
+        second: number,
+        selectedMinute: number | null,
+        selectedHour: number | null
+      ) {
         if (selectedHour === null || selectedMinute === null) return false
         if (Number(selectedHour) > 20 && Number(selectedMinute) < 30) {
           return second < 40
@@ -40,4 +44,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
