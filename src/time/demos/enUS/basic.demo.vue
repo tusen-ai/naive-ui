@@ -1,12 +1,14 @@
+<markdown>
 # Basic
+</markdown>
 
-```html
-<n-time :time="0" />
-<br />
-<n-time :time="time" />
-```
+<template>
+  <n-time :time="0" />
+  <br>
+  <n-time :time="time" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -16,4 +18,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
