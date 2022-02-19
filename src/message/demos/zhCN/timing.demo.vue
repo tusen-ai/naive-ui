@@ -1,12 +1,16 @@
-# 可关闭
+<markdown>
+# 时间
 
-设定 `closable` 使 Message 可以通过点击关闭。
+设定 Message 的持续时间。
+</markdown>
 
-```html
-<n-button @click="createMessage"> 打开信息 </n-button>
-```
+<template>
+  <n-button @click="createMessage">
+    持续 5 秒
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -17,13 +21,10 @@ export default defineComponent({
       createMessage () {
         message.info(
           "I don't know why nobody told you how to unfold your love",
-          {
-            closable: true,
-            duration: 5000
-          }
+          { duration: 5000 }
         )
       }
     }
   }
 })
-```
+</script>

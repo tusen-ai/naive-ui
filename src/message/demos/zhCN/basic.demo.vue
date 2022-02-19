@@ -1,16 +1,28 @@
-# Basic
+<markdown>
+# 基础用法
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="info"> Info(Hover will keep alive) </n-button>
-  <n-button @click="error"> Error </n-button>
-  <n-button @click="warning"> Warning </n-button>
-  <n-button @click="success"> Success </n-button>
-  <n-button @click="loading"> Loading </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="info">
+      信息（Hover不消失）
+    </n-button>
+    <n-button @click="error">
+      错误
+    </n-button>
+    <n-button @click="warning">
+      警告
+    </n-button>
+    <n-button @click="success">
+      成功
+    </n-button>
+    <n-button @click="loading">
+      加载中
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -45,4 +57,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

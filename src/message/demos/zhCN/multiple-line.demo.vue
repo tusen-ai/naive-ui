@@ -1,10 +1,14 @@
-# Multiple line
+<markdown>
+# 多行
+</markdown>
 
-```html
-<n-button @click="info"> Multiple Line </n-button>
-```
+<template>
+  <n-button @click="info">
+    多行
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -20,4 +24,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

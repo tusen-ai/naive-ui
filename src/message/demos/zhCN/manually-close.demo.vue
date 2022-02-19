@@ -1,20 +1,27 @@
-# Manually close
+<markdown>
+# 手动关闭
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="createMessage"> Create </n-button>
-  <n-button @click="removeMessage"> Destroy </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="createMessage">
+      打开
+    </n-button>
+    <n-button @click="removeMessage">
+      关闭
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, onBeforeUnmount } from 'vue'
 import { useMessage } from 'naive-ui'
+import type { MessageReactive } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    let messageReactive = null
+    let messageReactive: MessageReactive | null = null
 
     const removeMessage = () => {
       if (messageReactive) {
@@ -37,4 +44,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

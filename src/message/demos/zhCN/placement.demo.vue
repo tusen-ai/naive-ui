@@ -1,20 +1,28 @@
+<markdown>
 # 位置
+</markdown>
 
-```html
-<n-message-provider :placement="placement">
-  <Buttons @changePlacement="changePlacement" />
-</n-message-provider>
-```
+<template>
+  <n-message-provider :placement="placement">
+    <Buttons @change-placement="changePlacement" />
+  </n-message-provider>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, h, ref, VNode } from 'vue'
 import { useMessage, NButton } from 'naive-ui'
+import type { MessageProviderProps } from 'naive-ui'
 
-const Buttons = {
+interface Item {
+  placement: MessageProviderProps['placement']
+  text: string
+}
+
+export const Buttons = defineComponent({
   emits: ['changePlacement'],
   setup () {
     const message = useMessage()
-    const placementArray = [
+    const placementArray: Item[] = [
       { placement: 'top', text: '顶部' },
       { placement: 'bottom', text: '底部' },
       { placement: 'top-left', text: '左上' },
@@ -27,14 +35,15 @@ const Buttons = {
       placementArray
     }
   },
-  render () {
-    return this.placementArray.map((item) =>
+  render (): VNode[] {
+    const { message, placementArray, $emit } = this
+    return placementArray.map((item: Item) =>
       h(
         NButton,
         {
           onClick: () => {
-            this.$emit('changePlacement', item.placement)
-            this.message.info('How many roads must a man walk down')
+            $emit('changePlacement', item.placement)
+            message.info('How many roads must a man walk down')
           },
           style: {
             marginRight: '10px'
@@ -44,20 +53,20 @@ const Buttons = {
       )
     )
   }
-}
+})
 
 export default defineComponent({
   components: {
     Buttons
   },
   setup () {
-    const placementRef = ref('top')
+    const placementRef = ref<MessageProviderProps['placement']>('top')
     return {
       placement: placementRef,
-      changePlacement (val) {
+      changePlacement (val: MessageProviderProps['placement']) {
         placementRef.value = val
       }
     }
   }
 })
-```
+</script>
