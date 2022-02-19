@@ -24,6 +24,7 @@
 ### i18n
 
 - Add skSK locale.
+- Fix frFR locale.
 
 ## 2.25.2
 

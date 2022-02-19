@@ -24,6 +24,7 @@
 ### i18n
 
 - 新增 skSK locale
+- 完善 frFR locale
 
 ## 2.25.2
 
