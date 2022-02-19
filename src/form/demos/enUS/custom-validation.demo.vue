@@ -1,42 +1,46 @@
+<markdown>
 # Custom validation
 
 If you need to customize the timing and effect of a validation, use `validation-status` and `feedback`. In this case, there's usually no need for providing a `path` for the form item.
+</markdown>
 
-```html
-<n-form>
-  <n-form-item
-    label="Airports"
-    :validation-status="inputValidationStatus"
-    :feedback="inputFeedback"
-  >
-    <n-input v-model:value="inputValue" clearable />
-  </n-form-item>
-  <n-form-item
-    label="Airports"
-    :validation-status="inputNumberValidationStatus"
-  >
-    <n-input-number v-model:value="inputNumberValue" />
-    <template #feedback>{{ inputNumberFeedback }}</template>
-  </n-form-item>
-  <n-form-item
-    label="Airports"
-    :validation-status="selectValidationStatus"
-    :feedback="selectFeedback"
-  >
-    <n-select
-      debug
-      v-model:value="selectValue"
-      :options="selectOptions"
-      clearable
-    />
-  </n-form-item>
-</n-form>
-```
+<template>
+  <n-form>
+    <n-form-item
+      label="Airports"
+      :validation-status="inputValidationStatus"
+      :feedback="inputFeedback"
+    >
+      <n-input v-model:value="inputValue" clearable />
+    </n-form-item>
+    <n-form-item
+      label="Airports"
+      :validation-status="inputNumberValidationStatus"
+    >
+      <n-input-number v-model:value="inputNumberValue" />
+      <template #feedback>
+        {{ inputNumberFeedback }}
+      </template>
+    </n-form-item>
+    <n-form-item
+      label="Airports"
+      :validation-status="selectValidationStatus"
+      :feedback="selectFeedback"
+    >
+      <n-select
+        v-model:value="selectValue"
+        debug
+        :options="selectOptions"
+        clearable
+      />
+    </n-form-item>
+  </n-form>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
 
-function createStatus (value) {
+function createStatus (value: string) {
   switch (value) {
     case '10:30':
       return undefined
@@ -47,7 +51,7 @@ function createStatus (value) {
   }
 }
 
-function createFeedback (value) {
+function createFeedback (value: string) {
   switch (value) {
     case '10:30':
       return 'The plane of 10:30 has arrived.'
@@ -58,8 +62,8 @@ function createFeedback (value) {
   }
 }
 
-function createTimeForNumber (num) {
-  return `${parseInt(num / 100, 10)}:${num % 100}`
+function createTimeForNumber (num: number) {
+  return `${parseInt(String(num / 100), 10)}:${num % 100}`
 }
 
 export default defineComponent({
@@ -107,4 +111,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

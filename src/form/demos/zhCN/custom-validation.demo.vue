@@ -1,37 +1,45 @@
+<markdown>
 # 自定义验证
 
 你可能需要自定义验证的时机和效果，使用 `validation-status` 和 `feedback` 来控制表项的验证效果。在这种情况下通常不需要提供 `path`。
+</markdown>
 
-```html
-<n-form>
-  <n-form-item
-    label="飞机场的"
-    :validation-status="inputValidationStatus"
-    :feedback="inputFeedback"
-  >
-    <n-input v-model:value="inputValue" clearable />
-  </n-form-item>
-  <n-form-item
-    label="飞机场的"
-    :validation-status="inputNumberValidationStatus"
-  >
-    <n-input-number v-model:value="inputNumberValue" />
-    <template #feedback>{{ inputNumberFeedback }}</template>
-  </n-form-item>
-  <n-form-item
-    label="飞机场的"
-    :validation-status="selectValidationStatus"
-    :feedback="selectFeedback"
-  >
-    <n-select v-model:value="selectValue" :options="selectOptions" clearable />
-  </n-form-item>
-</n-form>
-```
+<template>
+  <n-form>
+    <n-form-item
+      label="飞机场的"
+      :validation-status="inputValidationStatus"
+      :feedback="inputFeedback"
+    >
+      <n-input v-model:value="inputValue" clearable />
+    </n-form-item>
+    <n-form-item
+      label="飞机场的"
+      :validation-status="inputNumberValidationStatus"
+    >
+      <n-input-number v-model:value="inputNumberValue" />
+      <template #feedback>
+        {{ inputNumberFeedback }}
+      </template>
+    </n-form-item>
+    <n-form-item
+      label="飞机场的"
+      :validation-status="selectValidationStatus"
+      :feedback="selectFeedback"
+    >
+      <n-select
+        v-model:value="selectValue"
+        :options="selectOptions"
+        clearable
+      />
+    </n-form-item>
+  </n-form>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
 
-function createStatus (value) {
+function createStatus (value: string) {
   switch (value) {
     case '10:30':
       return undefined
@@ -42,7 +50,7 @@ function createStatus (value) {
   }
 }
 
-function createFeedback (value) {
+function createFeedback (value: string) {
   switch (value) {
     case '10:30':
       return '十点半的飞机已经到了'
@@ -53,8 +61,8 @@ function createFeedback (value) {
   }
 }
 
-function createTimeForNumber (num) {
-  return `${parseInt(num / 100, 10)}:${num % 100}`
+function createTimeForNumber (num: number) {
+  return `${parseInt(String(num / 100), 10)}:${num % 100}`
 }
 
 export default defineComponent({
@@ -102,4 +110,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

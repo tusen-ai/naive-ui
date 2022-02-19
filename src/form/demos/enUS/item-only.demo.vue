@@ -1,17 +1,19 @@
-# 只使用 FormItem
+<markdown>
+# Use form item alone
 
-你可以单独使用 `n-form-item`，不在 `n-form` 中验证表项。
+You can also use `n-form-item` outside of an `n-form` element.
+</markdown>
 
-```html
-<n-form-item label="这是个 FormItem" :rule="rule">
-  <n-input v-model:value="value" />
-</n-form-item>
-```
+<template>
+  <n-form-item label="This is a FormItem" :rule="rule">
+    <n-input v-model:value="value" />
+  </n-form-item>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-const message = '它不在 Form 里面'
+const message = 'It is not in a Form'
 
 export default defineComponent({
   setup () {
@@ -29,4 +31,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

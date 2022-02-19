@@ -1,145 +1,163 @@
-# 标签上置
+<markdown>
+# 标签左置
+</markdown>
 
- 使用 `n-grid` 和 `n-form-item-gi`（grid item）轻松写表单。
-
-```html
-<n-radio-group
-  v-model:value="size"
-  name="top-size"
-  style="margin-bottom: 12px;"
->
-  <n-radio-button value="small">小</n-radio-button>
-  <n-radio-button value="medium">中</n-radio-button>
-  <n-radio-button value="large">大</n-radio-button>
-</n-radio-group>
-<n-form
-  :model="model"
-  :rules="rules"
-  :size="size"
-  ref="formRef"
-  label-placement="top"
->
-  <n-grid :cols="24" :x-gap="24">
-    <n-form-item-gi :span="12" label="Input" path="inputValue">
-      <n-input placeholder="Input" v-model:value="model.inputValue" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Textarea" path="textareaValue">
+<template>
+  <n-radio-group
+    v-model:value="size"
+    name="left-size"
+    style="margin-bottom: 12px"
+  >
+    <n-radio-button value="small">
+      小
+    </n-radio-button>
+    <n-radio-button value="medium">
+      中
+    </n-radio-button>
+    <n-radio-button value="large">
+      大
+    </n-radio-button>
+  </n-radio-group>
+  <n-form
+    ref="formRef"
+    :model="model"
+    :rules="rules"
+    label-placement="left"
+    label-width="auto"
+    require-mark-placement="right-hanging"
+    :size="size"
+    :style="{
+      maxWidth: '640px'
+    }"
+  >
+    <n-form-item label="Input" path="inputValue">
+      <n-input v-model:value="model.inputValue" placeholder="Input" />
+    </n-form-item>
+    <n-form-item label="Textarea" path="textareaValue">
       <n-input
-        placeholder="Textarea"
         v-model:value="model.textareaValue"
+        placeholder="Textarea"
         type="textarea"
         :autosize="{
           minRows: 3,
           maxRows: 5
         }"
       />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Select" path="selectValue">
+    </n-form-item>
+    <n-form-item label="Select" path="selectValue">
       <n-select
-        placeholder="Select"
-        :options="generalOptions"
         v-model:value="model.selectValue"
-      />
-    </n-form-item-gi>
-    <n-form-item-gi
-      :span="12"
-      label="Multiple Select"
-      path="multipleSelectValue"
-    >
-      <n-select
         placeholder="Select"
         :options="generalOptions"
+      />
+    </n-form-item>
+    <n-form-item label="Multiple Select" path="multipleSelectValue">
+      <n-select
         v-model:value="model.multipleSelectValue"
+        placeholder="Select"
+        :options="generalOptions"
         multiple
       />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Datetime" path="datetimeValue">
-      <n-date-picker type="datetime" v-model:value="model.datetimeValue" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Switch" path="switchValue">
+    </n-form-item>
+    <n-form-item label="Datetime" path="datetimeValue">
+      <n-date-picker v-model:value="model.datetimeValue" type="datetime" />
+    </n-form-item>
+    <n-form-item label="Switch" path="switchValue">
       <n-switch v-model:value="model.switchValue" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Checkbox Group" path="checkboxGroupValue">
+    </n-form-item>
+    <n-form-item label="Checkbox Group" path="checkboxGroupValue">
       <n-checkbox-group v-model:value="model.checkboxGroupValue">
         <n-space>
-          <n-checkbox value="Option 1">Option 1</n-checkbox>
-          <n-checkbox value="Option 2">Option 2</n-checkbox>
-          <n-checkbox value="Option 3">Option 3</n-checkbox>
+          <n-checkbox value="Option 1">
+            Option 1
+          </n-checkbox>
+          <n-checkbox value="Option 2">
+            Option 2
+          </n-checkbox>
+          <n-checkbox value="Option 3">
+            Option 3
+          </n-checkbox>
         </n-space>
       </n-checkbox-group>
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Radio Group" path="radioGroupValue">
+    </n-form-item>
+    <n-form-item label="Radio Group" path="radioGroupValue">
       <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
         <n-space>
-          <n-radio value="Radio 1">Radio 1</n-radio>
-          <n-radio value="Radio 2">Radio 2</n-radio>
-          <n-radio value="Radio 3">Radio 3</n-radio>
+          <n-radio value="Radio 1">
+            Radio 1
+          </n-radio>
+          <n-radio value="Radio 2">
+            Radio 2
+          </n-radio>
+          <n-radio value="Radio 3">
+            Radio 3
+          </n-radio>
         </n-space>
       </n-radio-group>
-    </n-form-item-gi>
-    <n-form-item-gi
-      :span="12"
-      label="Radio Button Group"
-      path="radioGroupValue"
-    >
+    </n-form-item>
+    <n-form-item label="Radio Button Group" path="radioGroupValue">
       <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup2">
-        <n-radio-button value="Radio 1">Radio 1</n-radio-button>
-        <n-radio-button value="Radio 2">Radio 2</n-radio-button>
-        <n-radio-button value="Radio 3">Radio 3</n-radio-button>
+        <n-radio-button value="Radio 1">
+          Radio 1
+        </n-radio-button>
+        <n-radio-button value="Radio 2">
+          Radio 2
+        </n-radio-button>
+        <n-radio-button value="Radio 3">
+          Radio 3
+        </n-radio-button>
       </n-radio-group>
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Input Number" path="inputNumberValue">
+    </n-form-item>
+    <n-form-item label="Input Number" path="inputNumberValue">
       <n-input-number v-model:value="model.inputNumberValue" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Time Picker" path="timePickerValue">
+    </n-form-item>
+    <n-form-item label="Time Picker" path="timePickerValue">
       <n-time-picker v-model:value="model.timePickerValue" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="12" label="Slider" path="sliderValue">
+    </n-form-item>
+    <n-form-item label="Slider" path="sliderValue">
       <n-slider v-model:value="model.sliderValue" :step="5" />
-    </n-form-item-gi>
-    <n-form-item-gi :span="14" label="Transfer" path="transferValue">
+    </n-form-item>
+    <n-form-item label="Transfer" path="transferValue">
       <n-transfer
-        style="width: 100%;"
         v-model:value="model.transferValue"
         :options="generalOptions"
       />
-    </n-form-item-gi>
-    <n-form-item-gi :span="5" label="Nested Path" path="nestedValue.path1">
-      <n-cascader
-        placeholder="Nested Path 1"
-        v-model:value="model.nestedValue.path1"
-        :options="cascaderOptions"
-      />
-    </n-form-item-gi>
-    <n-form-item-gi :span="5" path="nestedValue.path2">
-      <n-select
-        placeholder="Nested Path 2"
-        :options="generalOptions"
-        v-model:value="model.nestedValue.path2"
-      />
-    </n-form-item-gi>
-    <n-gi :span="24">
-      <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary"
-          >验证</n-button
-        >
-      </div>
-    </n-gi>
-  </n-grid>
-</n-form>
+    </n-form-item>
+    <n-form-item label="Nested Path" :show-feedback="false">
+      <n-grid :cols="2" :x-gap="24">
+        <n-form-item-gi path="nestedValue.path1">
+          <n-input
+            v-model:value="model.nestedValue.path1"
+            placeholder="Nested Path 1"
+          />
+        </n-form-item-gi>
+        <n-form-item-gi path="nestedValue.path2">
+          <n-select
+            v-model:value="model.nestedValue.path2"
+            placeholder="Nested Path 2"
+            :options="generalOptions"
+          />
+        </n-form-item-gi>
+      </n-grid>
+    </n-form-item>
+    <div style="display: flex; justify-content: flex-end">
+      <n-button round type="primary" @click="handleValidateButtonClick">
+        验证
+      </n-button>
+    </div>
+  </n-form>
 
-<pre>
-{{  JSON.stringify(model, 0, 2) }}
+  <pre>{{ JSON.stringify(model, null, 2) }}
 </pre>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
+import { FormInst, FormItemRule, useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const formRef = ref(null)
+    const formRef = ref<FormInst | null>(null)
     const message = useMessage()
     return {
       formRef,
@@ -169,18 +187,6 @@ export default defineComponent({
           value: v
         })
       ),
-      cascaderOptions: [
-        {
-          label: 'groode',
-          value: 'groode',
-          children: [
-            {
-              label: 'veli good',
-              value: 'veli good'
-            }
-          ]
-        }
-      ],
       rules: {
         inputValue: {
           required: true,
@@ -250,7 +256,7 @@ export default defineComponent({
           message: '请输入 timePickerValue'
         },
         sliderValue: {
-          validator (rule, value) {
+          validator (rule: FormItemRule, value: number) {
             return value > 50
           },
           trigger: ['blur', 'change'],
@@ -263,9 +269,9 @@ export default defineComponent({
           message: '请输入 transferValue'
         }
       },
-      handleValidateButtonClick (e) {
+      handleValidateButtonClick (e: MouseEvent) {
         e.preventDefault()
-        formRef.value.validate((errors) => {
+        formRef.value?.validate((errors) => {
           if (!errors) {
             message.success('验证成功')
           } else {
@@ -277,4 +283,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
