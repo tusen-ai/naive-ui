@@ -1,6 +1,6 @@
 # Rate
 
-Hint: If you are not very confident, think twice before changing the star's color.vue. That can lead to a disaster.
+Hint: If you are not very confident, think twice before changing the star's color. That can lead to a disaster.
 
 ## Demos
 

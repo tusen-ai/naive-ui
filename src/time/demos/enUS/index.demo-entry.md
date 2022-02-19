@@ -1,13 +1,13 @@
 # Time
 
-Time provide some basic.vue format.vueion for time.
+Time provide some basic formation for time.
 
 ## Demos
 
 ```demo
-basic
+basic.vue
 type.vue
-format
+format.vue
 relative.vue
 unix.vue
 ```

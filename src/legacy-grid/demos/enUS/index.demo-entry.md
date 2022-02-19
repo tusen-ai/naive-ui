@@ -6,12 +6,12 @@
   At most of time you should use <router-link to="grid" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">Grid</n-a></router-link>.
 </n-alert>
 
-A basic.vue grid system.
+A basic grid system.
 
 ## Demos
 
 ```demo
-basic
+basic.vue
 gutter.vue
 offset.vue
 push-pull.vue
