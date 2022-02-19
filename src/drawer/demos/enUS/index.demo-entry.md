@@ -5,11 +5,11 @@ I think it is similar with modal, with a bit difference on placement.
 ## Demos
 
 ```demo
-basic
-multiple
+basic.vue
+multiple.vue
 target.vue
-closable
-slot
+closable.vue
+slot.vue
 ```
 
 ## API

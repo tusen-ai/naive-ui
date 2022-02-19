@@ -1,50 +1,25 @@
 <markdown>
-# Customize display area
-
-You can customize display area by `to` prop. Remember to set `:trap-focus="false"`, otherwise content outside drawer won't be focusable.
+# 基础用法
 </markdown>
 
 <template>
   <n-button-group>
     <n-button @click="activate('top')">
-      Top
+      上
     </n-button>
     <n-button @click="activate('right')">
-      Right
+      右
     </n-button>
     <n-button @click="activate('bottom')">
-      Bottom
+      下
     </n-button>
     <n-button @click="activate('left')">
-      Left
+      左
     </n-button>
   </n-button-group>
-  <div
-    id="drawer-target"
-    style="
-      position: relative;
-      width: 100%;
-      height: 300px;
-      border: 1px solid rgba(128, 128, 128, 0.2);
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    "
-  >
-    Target Area
-  </div>
-  <n-drawer
-    v-model:show="active"
-    :width="200"
-    :height="200"
-    :placement="placement"
-    :trap-focus="false"
-    to="#drawer-target"
-  >
-    <n-drawer-content title="Stoner">
-      Stoner is a 1965 novel by the American writer John Williams.
+  <n-drawer v-model:show="active" :width="502" :placement="placement">
+    <n-drawer-content title="斯通纳">
+      《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
     </n-drawer-content>
   </n-drawer>
 </template>

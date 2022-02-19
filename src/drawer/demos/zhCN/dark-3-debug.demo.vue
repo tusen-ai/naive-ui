@@ -1,23 +1,28 @@
+<markdown>
 # Dark Debug 3
+</markdown>
 
-```html
-<n-button @click="modalActive = !modalActive">Toggle</n-button>
-<n-drawer v-model:show="modalActive" width="800">
-  <n-data-table
-    ref="table"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-    :max-height="250"
-    :scroll-x="1800"
-  />
-</n-drawer>
-```
+<template>
+  <n-button @click="modalActive = !modalActive">
+    Toggle
+  </n-button>
+  <n-drawer v-model:show="modalActive" width="800">
+    <n-data-table
+      ref="table"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      :max-height="250"
+      :scroll-x="1800"
+    />
+  </n-drawer>
+</template>
 
-```js
-import { h } from 'vue'
+<script lang="ts">
+import { defineComponent, h } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 
-const columns = [
+const columns: DataTableColumns = [
   {
     title: 'Name',
     key: 'name',
@@ -77,14 +82,14 @@ const columns = [
   }
 ]
 
-const data = Array.apply(null, { length: 46 }).map((_, index) => ({
+const data = Array.from({ length: 46 }).map((_, index) => ({
   key: index,
   name: `Edward King ${index % 4}`,
   age: 32 + (index % 3),
   address: `London, Park Lane no. ${index}`
 }))
 
-export default {
+export default defineComponent({
   data () {
     return {
       modalActive: false,
@@ -97,5 +102,5 @@ export default {
       return { pageSize: 10 }
     }
   }
-}
-```
+})
+</script>

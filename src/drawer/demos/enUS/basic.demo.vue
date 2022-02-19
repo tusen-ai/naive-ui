@@ -1,7 +1,5 @@
 <markdown>
-# Customize display area
-
-You can customize display area by `to` prop. Remember to set `:trap-focus="false"`, otherwise content outside drawer won't be focusable.
+# Basic
 </markdown>
 
 <template>
@@ -19,30 +17,7 @@ You can customize display area by `to` prop. Remember to set `:trap-focus="false
       Left
     </n-button>
   </n-button-group>
-  <div
-    id="drawer-target"
-    style="
-      position: relative;
-      width: 100%;
-      height: 300px;
-      border: 1px solid rgba(128, 128, 128, 0.2);
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    "
-  >
-    Target Area
-  </div>
-  <n-drawer
-    v-model:show="active"
-    :width="200"
-    :height="200"
-    :placement="placement"
-    :trap-focus="false"
-    to="#drawer-target"
-  >
+  <n-drawer v-model:show="active" :width="502" :placement="placement">
     <n-drawer-content title="Stoner">
       Stoner is a 1965 novel by the American writer John Williams.
     </n-drawer-content>
