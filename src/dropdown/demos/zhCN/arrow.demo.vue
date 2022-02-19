@@ -1,19 +1,19 @@
-# 弹出位置
+<markdown>
+# 显示箭头
+</markdown>
 
-使用不同的弹出位置。
+<template>
+  <n-dropdown
+    trigger="click"
+    :options="options"
+    :show-arrow="true"
+    @select="handleSelect"
+  >
+    <n-button>找个地方休息</n-button>
+  </n-dropdown>
+</template>
 
-```html
-<n-dropdown
-  trigger="hover"
-  @select="handleSelect"
-  placement="bottom-start"
-  :options="options"
->
-  <n-button> 找个地方休息 </n-button>
-</n-dropdown>
-```
-
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -24,7 +24,8 @@ export default defineComponent({
       options: [
         {
           label: '滨海湾金沙，新加坡',
-          key: 'marina bay sands'
+          key: 'marina bay sands',
+          disabled: true
         },
         {
           label: '布朗酒店，伦敦',
@@ -39,10 +40,10 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key) {
-        message.info(key)
+      handleSelect (key: string | number) {
+        message.info(String(key))
       }
     }
   }
 })
-```
+</script>

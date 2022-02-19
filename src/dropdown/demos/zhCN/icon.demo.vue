@@ -1,13 +1,16 @@
+<markdown>
 # 图标
+</markdown>
 
-```html
-<n-dropdown :options="options">
-  <n-button>用户资料</n-button>
-</n-dropdown>
-```
+<template>
+  <n-dropdown :options="options">
+    <n-button>用户资料</n-button>
+  </n-dropdown>
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
+import type { Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   PersonCircleOutline as UserIcon,
@@ -15,7 +18,7 @@ import {
   LogOutOutline as LogoutIcon
 } from '@vicons/ionicons5'
 
-const renderIcon = (icon) => {
+const renderIcon = (icon: Component) => {
   return () => {
     return h(NIcon, null, {
       default: () => h(icon)
@@ -46,4 +49,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

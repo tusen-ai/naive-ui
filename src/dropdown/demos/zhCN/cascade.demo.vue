@@ -1,19 +1,21 @@
+<markdown>
 # 多级
 
 下拉菜单可以是多级的。
+</markdown>
 
-```html
-<n-dropdown
-  :options="options"
-  placement="bottom-start"
-  trigger="click"
-  @select="handleSelect"
->
-  <n-button>人物和食物</n-button>
-</n-dropdown>
-```
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    @select="handleSelect"
+  >
+    <n-button>人物和食物</n-button>
+  </n-dropdown>
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
@@ -76,10 +78,10 @@ export default defineComponent({
     const message = useMessage()
     return {
       options,
-      handleSelect (key) {
-        message.info(key)
+      handleSelect (key: string | number) {
+        message.info(String(key))
       }
     }
   }
 })
-```
+</script>

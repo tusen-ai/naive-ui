@@ -1,14 +1,16 @@
+<markdown>
 # 基础用法
 
 下拉菜单的基础用法。
+</markdown>
 
-```html
-<n-dropdown trigger="hover" @select="handleSelect" :options="options">
-  <n-button>找个地方休息</n-button>
-</n-dropdown>
-```
+<template>
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <n-button>找个地方休息</n-button>
+  </n-dropdown>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -35,10 +37,10 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key) {
-        message.info(key)
+      handleSelect (key: string | number) {
+        message.info(String(key))
       }
     }
   }
 })
-```
+</script>
