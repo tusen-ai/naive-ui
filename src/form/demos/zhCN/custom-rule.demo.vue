@@ -46,13 +46,19 @@
     </n-row>
   </n-form>
 
-  <pre>{{ JSON.stringify(model, 0, 2) }}
+  <pre>{{ JSON.stringify(model, null, 2) }}
 </pre>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { FormInst, FormItemInst, FormItemRule, useMessage } from 'naive-ui'
+import {
+  FormInst,
+  FormItemInst,
+  FormItemRule,
+  useMessage,
+  FormRules
+} from 'naive-ui'
 
 interface ModelType {
   age: string | null
@@ -70,61 +76,65 @@ export default defineComponent({
       password: null,
       reenteredPassword: null
     })
-    function validatePasswordStartWith (rule: FormItemRule, value: string) {
+    function validatePasswordStartWith (
+      rule: FormItemRule,
+      value: string
+    ): boolean {
       return (
-        modelRef.value.password &&
+        !!modelRef.value.password &&
         modelRef.value.password.startsWith(value) &&
         modelRef.value.password.length >= value.length
       )
     }
-    function validatePasswordSame (rule: FormItemRule, value: string) {
+    function validatePasswordSame (rule: FormItemRule, value: string): boolean {
       return value === modelRef.value.password
+    }
+    const rules: FormRules = {
+      age: [
+        {
+          required: true,
+          validator (rule: FormItemRule, value: string) {
+            if (!value) {
+              return new Error('需要年龄')
+            } else if (!/^\d*$/.test(value)) {
+              return new Error('年龄应该为整数')
+            } else if (Number(value) < 18) {
+              return new Error('年龄应该超过十八岁')
+            }
+            return true
+          },
+          trigger: ['input', 'blur']
+        }
+      ],
+      password: [
+        {
+          required: true,
+          message: '请输入密码'
+        }
+      ],
+      reenteredPassword: [
+        {
+          required: true,
+          message: '请再次输入密码',
+          trigger: ['input', 'blur']
+        },
+        {
+          validator: validatePasswordStartWith,
+          message: '两次密码输入不一致',
+          trigger: 'input'
+        },
+        {
+          validator: validatePasswordSame,
+          message: '两次密码输入不一致',
+          trigger: ['blur', 'password-input']
+        }
+      ]
     }
     return {
       formRef,
       rPasswordFormItemRef,
       model: modelRef,
-      rules: {
-        age: [
-          {
-            required: true,
-            validator (rule: FormItemRule, value: string) {
-              if (!value) {
-                return new Error('需要年龄')
-              } else if (!/^\d*$/.test(value)) {
-                return new Error('年龄应该为整数')
-              } else if (Number(value) < 18) {
-                return new Error('年龄应该超过十八岁')
-              }
-              return true
-            },
-            trigger: ['input', 'blur']
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: '请输入密码'
-          }
-        ],
-        reenteredPassword: [
-          {
-            required: true,
-            message: '请再次输入密码',
-            trigger: ['input', 'blur']
-          },
-          {
-            validator: validatePasswordStartWith,
-            message: '两次密码输入不一致',
-            trigger: 'input'
-          },
-          {
-            validator: validatePasswordSame,
-            message: '两次密码输入不一致',
-            trigger: ['blur', 'password-input']
-          }
-        ]
-      },
+      rules,
       handlePasswordInput () {
         if (modelRef.value.reenteredPassword) {
           rPasswordFormItemRef.value?.validate({ trigger: 'password-input' })

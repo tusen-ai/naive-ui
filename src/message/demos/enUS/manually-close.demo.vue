@@ -15,12 +15,12 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from 'vue'
-import { useMessage } from 'naive-ui'
+import { useMessage, MessageReactive } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    let messageReactive = null
+    let messageReactive: MessageReactive | null = null
 
     const removeMessage = () => {
       if (messageReactive) {

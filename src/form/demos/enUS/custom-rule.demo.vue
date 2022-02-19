@@ -57,7 +57,8 @@ import {
   FormItemInst,
   FormItemRule,
   FormValidationError,
-  useMessage
+  useMessage,
+  FormRules
 } from 'naive-ui'
 
 interface ModelType {
@@ -76,61 +77,65 @@ export default defineComponent({
       password: null,
       reenteredPassword: null
     })
-    function validatePasswordStartWith (rule: FormItemRule, value: string) {
+    function validatePasswordStartWith (
+      rule: FormItemRule,
+      value: string
+    ): boolean {
       return (
-        modelRef.value.password &&
+        !!modelRef.value.password &&
         modelRef.value.password.startsWith(value) &&
         modelRef.value.password.length >= value.length
       )
     }
-    function validatePasswordSame (rule: FormItemRule, value: string) {
+    function validatePasswordSame (rule: FormItemRule, value: string): boolean {
       return value === modelRef.value.password
+    }
+    const rules: FormRules = {
+      age: [
+        {
+          required: true,
+          validator (rule: FormItemRule, value: string) {
+            if (!value) {
+              return new Error('Age is required')
+            } else if (!/^\d*$/.test(value)) {
+              return new Error('Age should be an integer')
+            } else if (Number(value) < 18) {
+              return new Error('Age should be above 18')
+            }
+            return true
+          },
+          trigger: ['input', 'blur']
+        }
+      ],
+      password: [
+        {
+          required: true,
+          message: 'Password is required'
+        }
+      ],
+      reenteredPassword: [
+        {
+          required: true,
+          message: 'Re-entered password is required',
+          trigger: ['input', 'blur']
+        },
+        {
+          validator: validatePasswordStartWith,
+          message: 'Password is not same as re-entered password!',
+          trigger: 'input'
+        },
+        {
+          validator: validatePasswordSame,
+          message: 'Password is not same as re-entered password!',
+          trigger: ['blur', 'password-input']
+        }
+      ]
     }
     return {
       formRef,
       rPasswordFormItemRef,
       model: modelRef,
-      rules: {
-        age: [
-          {
-            required: true,
-            validator (rule: FormItemRule, value: string) {
-              if (!value) {
-                return new Error('Age is required')
-              } else if (!/^\d*$/.test(value)) {
-                return new Error('Age should be an integer')
-              } else if (Number(value) < 18) {
-                return new Error('Age should be above 18')
-              }
-              return true
-            },
-            trigger: ['input', 'blur']
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: 'Password is required'
-          }
-        ],
-        reenteredPassword: [
-          {
-            required: true,
-            message: 'Re-entered password is required',
-            trigger: ['input', 'blur']
-          },
-          {
-            validator: validatePasswordStartWith,
-            message: 'Password is not same as re-entered password!',
-            trigger: 'input'
-          },
-          {
-            validator: validatePasswordSame,
-            message: 'Password is not same as re-entered password!',
-            trigger: ['blur', 'password-input']
-          }
-        ]
-      },
+      rules,
       handlePasswordInput () {
         if (modelRef.value.reenteredPassword) {
           rPasswordFormItemRef.value?.validate({ trigger: 'password-input' })
