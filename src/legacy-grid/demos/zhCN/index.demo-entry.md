@@ -11,10 +11,10 @@
 ## 演示
 
 ```demo
-basic
-gutter
-offset
-push-pull
+basic.vue
+gutter.vue
+offset.vue
+push-pull.vue
 ```
 
 ## API
