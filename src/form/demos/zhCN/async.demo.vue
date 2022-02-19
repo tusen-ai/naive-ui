@@ -1,45 +1,48 @@
+<markdown>
 # 异步验证
+</markdown>
 
-```html
-<n-form
-  inline
-  :label-width="80"
-  :model="formValue"
-  :rules="rules"
-  ref="formRef"
->
-  <n-form-item label="Name" path="user.name">
-    <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
-  </n-form-item>
-  <n-form-item label="Age" path="user.age">
-    <n-input placeholder="Input Age" v-model:value="formValue.user.age" />
-  </n-form-item>
-  <n-form-item label="Adress" path="user.address">
-    <n-input
-      placeholder="Input Address"
-      v-model:value="formValue.user.address"
-    />
-  </n-form-item>
-  <n-form-item label="Phone" path="phone">
-    <n-input placeholder="Phone Number" v-model:value="formValue.phone" />
-  </n-form-item>
-  <n-form-item>
-    <n-button @click="handleValidateClick">Validate</n-button>
-  </n-form-item>
-</n-form>
+<template>
+  <n-form
+    ref="formRef"
+    inline
+    :label-width="80"
+    :model="formValue"
+    :rules="rules"
+  >
+    <n-form-item label="Name" path="user.name">
+      <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
+    </n-form-item>
+    <n-form-item label="Age" path="user.age">
+      <n-input v-model:value="formValue.user.age" placeholder="Input Age" />
+    </n-form-item>
+    <n-form-item label="Adress" path="user.address">
+      <n-input
+        v-model:value="formValue.user.address"
+        placeholder="Input Address"
+      />
+    </n-form-item>
+    <n-form-item label="Phone" path="phone">
+      <n-input v-model:value="formValue.phone" placeholder="Phone Number" />
+    </n-form-item>
+    <n-form-item>
+      <n-button @click="handleValidateClick">
+        Validate
+      </n-button>
+    </n-form-item>
+  </n-form>
 
-<pre>
-{{  JSON.stringify(formValue, 0, 2) }}
+  <pre>{{ JSON.stringify(formValue, null, 2) }}
 </pre>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
+import { FormInst, FormItemRule, useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const formRef = ref()
+    const formRef = ref<FormInst | null>()
     const message = useMessage()
     return {
       formRef,
@@ -56,8 +59,8 @@ export default defineComponent({
           name: {
             required: true,
             trigger: 'blur',
-            validator: (rule, value) => {
-              return new Promise((resolve, reject) => {
+            validator: (rule: FormItemRule, value: string) => {
+              return new Promise<void>((resolve, reject) => {
                 if (value !== 'testName') {
                   reject(Error('非正确名字')) // reject with error message
                 } else {
@@ -69,8 +72,8 @@ export default defineComponent({
           age: {
             required: true,
             trigger: 'input',
-            validator: (rule, value) => {
-              return new Promise((resolve, reject) => {
+            validator: (rule: FormItemRule, value: number) => {
+              return new Promise<void>((resolve, reject) => {
                 setTimeout(() => {
                   if (value <= 16) {
                     reject(Error('非正确年龄'))
@@ -85,17 +88,17 @@ export default defineComponent({
         phone: {
           required: true,
           trigger: ['input'],
-          validator: (rule, value) => {
+          validator: (rule: FormItemRule, value: string) => {
             return /^[1]+[3,8]+\\d{9}$/.test(value)
           }
         }
       },
-      handleValidateClick (e) {
+      handleValidateClick (e: MouseEvent) {
         e.preventDefault()
         const messageReactive = message.loading('Verifying', {
           duration: 0
         })
-        formRef.value.validate((errors) => {
+        formRef.value?.validate((errors) => {
           if (!errors) {
             message.success('Valid')
           } else {
@@ -108,4 +111,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
