@@ -12,13 +12,14 @@
 
 ### Feats
 
-- `n-tree-select` add `clear-filter-after-select` prop.
-- `n-cascader` add `clear-filter-after-select` prop.
-- `n-switch` add `icon` slot.
-- `n-switch` add `checked-icon` slot.
-- `n-switch` add `unchecked-icon` slot.
+- `n-tree-select` adds `clear-filter-after-select` prop.
+- `n-cascader` adds `clear-filter-after-select` prop.
+- `n-switch` adds `icon` slot.
+- `n-switch` adds `checked-icon` slot.
+- `n-switch` adds `unchecked-icon` slot.
 - `n-tabs` uses `n` as CSS vars prefix.
-- `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- Add `n-watermark` component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 
 ### i18n
 

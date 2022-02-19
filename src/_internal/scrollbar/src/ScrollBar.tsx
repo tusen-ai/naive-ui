@@ -52,9 +52,15 @@ export interface ScrollTo {
   }): void
 }
 
+export interface ScrollBy {
+  (x: number, y: number): void
+  (options: { left?: number, top?: number, behavior?: ScrollBehavior }): void
+}
+
 export interface ScrollbarInstMethods {
   syncUnifiedContainer: () => void
   scrollTo: ScrollTo
+  scrollBy: ScrollBy
   sync: () => void
   handleMouseEnterWrapper: () => void
   handleMouseLeaveWrapper: () => void
@@ -294,6 +300,19 @@ const Scrollbar = defineComponent({
         scrollToPosition(0, Number.MAX_SAFE_INTEGER, 0, false, behavior)
       } else if (position === 'top') {
         scrollToPosition(0, 0, 0, false, behavior)
+      }
+    }
+    const scrollBy: ScrollBy = (
+      options: ScrollOptions | number,
+      y?: number
+    ): void => {
+      if (!props.scrollable) return
+      const { value: container } = mergedContainerRef
+      if (!container) return
+      if (typeof options === 'object') {
+        container.scrollBy(options)
+      } else {
+        container.scrollBy(options, y || 0)
       }
     }
     function scrollToPosition (
@@ -605,6 +624,7 @@ const Scrollbar = defineComponent({
       : undefined
     const exposedMethods: ScrollbarInstMethods = {
       scrollTo,
+      scrollBy,
       sync,
       syncUnifiedContainer,
       handleMouseEnterWrapper,
