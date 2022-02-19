@@ -90,7 +90,7 @@ const frFR: NLocale = {
     create: 'Créer'
   },
   ThemeEditor: {
-    title: 'Editeur de thème',
+    title: 'Éditeur de thème',
     clearAllVars: 'Effacer toutes les variables',
     clearSearch: 'Effacer la recherche',
     filterCompName: 'Filtrer par nom de composant',
@@ -99,15 +99,14 @@ const frFR: NLocale = {
     export: 'Exporter',
     restore: 'Réinitialiser'
   },
-  // TODO: translation
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
-    tipZoomOut: 'Zoom out',
-    tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)'
+    tipPrevious: 'Image précédente (←)',
+    tipNext: 'Image suivante (→)',
+    tipCounterclockwise: 'Sens antihoraire',
+    tipClockwise: 'Sens horaire',
+    tipZoomOut: 'Dézoomer',
+    tipZoomIn: 'Zoomer',
+    tipClose: 'Fermer (Échap.)'
   }
 }
 
