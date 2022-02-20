@@ -1,35 +1,33 @@
-# Set Check Strategy
+<markdown>
+# 可过滤
+</markdown>
 
-Set the way to display selected nodes when parents and children are selected. `all` will display both the parent and the children when all the children are selected. `parent` will only show the parent option if all of the children are selected. `child` will only ever show leaf nodes (nodes with no children).
-
-```html
-<n-space vertical>
-  <n-space>
-    <n-radio-group v-model:value="checkStrategy">
-      <n-radio-button value="all">All</n-radio-button>
-      <n-radio-button value="parent">Parent</n-radio-button>
-      <n-radio-button value="child">Child</n-radio-button>
-    </n-radio-group>
+<template>
+  <n-space vertical>
+    <n-tree-select
+      filterable
+      :options="options"
+      default-value="Drive My Car"
+      clearable
+    />
+    <n-tree-select
+      multiple
+      checkable
+      filterable
+      :clear-filter-after-select="false"
+      :options="options"
+      :default-value="['Norwegian Wood']"
+      clearable
+    />
   </n-space>
-  <n-tree-select
-    multiple
-    cascade
-    checkable
-    :check-strategy="checkStrategy"
-    :options="options"
-    :default-value="['Dig It', 'go']"
-    @update:value="handleUpdateValue"
-  />
-</n-space>
-```
+</template>
 
-```js
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      checkStrategy: ref('all'),
       options: [
         {
           label: 'Rubber Soul',
@@ -107,25 +105,48 @@ export default defineComponent({
             },
             {
               label: 'Across The Universe',
-              key: 'Across The Universe',
-              children: [
-                {
-                  label: 'Dig It',
-                  key: 'Dig It'
-                },
-                {
-                  label: 'go',
-                  key: 'go'
-                }
-              ]
+              key: 'Across The Universe'
+            },
+            {
+              label: 'I Me Mine',
+              key: 'I Me Mine'
+            },
+            {
+              label: 'Dig It',
+              key: 'Dig It'
+            },
+            {
+              label: 'Let It Be',
+              key: 'Let It Be'
+            },
+            {
+              label: 'Maggie Mae',
+              key: 'Maggie Mae'
+            },
+            {
+              label: "I've Got A Feeling",
+              key: "I've Got A Feeling"
+            },
+            {
+              label: 'One After 909',
+              key: 'One After 909'
+            },
+            {
+              label: 'The Long And Winding Road',
+              key: 'The Long And Winding Road'
+            },
+            {
+              label: 'For You Blue',
+              key: 'For You Blue'
+            },
+            {
+              label: 'Get Back',
+              key: 'Get Back'
             }
           ]
         }
-      ],
-      handleUpdateValue: (values) => {
-        console.log(values)
-      }
+      ]
     }
   }
 })
-```
+</script>

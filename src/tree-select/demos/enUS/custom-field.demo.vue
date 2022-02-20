@@ -1,18 +1,20 @@
+<markdown>
 # Customize Fields
 
 You can also target difference label and key properties of the objects you are using as nodes.
+</markdown>
 
-```html
-<n-tree-select
-  :options="options"
-  default-value="Drive My Car"
-  label-field="whateverLabel"
-  key-field="whateverKey"
-  children-field="whateverChildren"
-/>
-```
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    label-field="whateverLabel"
+    key-field="whateverKey"
+    children-field="whateverChildren"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -140,4 +142,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

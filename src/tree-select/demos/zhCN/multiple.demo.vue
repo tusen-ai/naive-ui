@@ -1,23 +1,29 @@
-# 使用 Checkbox 选择
+<markdown>
+# 多选
+</markdown>
 
-想达到 demo 的效果，`checkable`、`cascade`、`multiple` 需要同时设定。
+<template>
+  <n-tree-select
+    multiple
+    :options="options"
+    :default-value="['Norwegian Wood']"
+    @update:value="handleUpdateValue"
+  />
+</template>
 
-```html
-<n-tree-select
-  multiple
-  cascade
-  checkable
-  :options="options"
-  :default-value="['Norwegian Wood']"
-/>
-```
-
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
+import { TreeSelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
+      handleUpdateValue (
+        value: string | number | Array<string | number> | null,
+        option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      ) {
+        console.log(value, option)
+      },
       options: [
         {
           label: 'Rubber Soul',
@@ -139,4 +145,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

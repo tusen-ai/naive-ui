@@ -1,22 +1,33 @@
-# Basic
+<markdown>
+# Filterable
+</markdown>
 
-```html
-<n-tree-select
-  :options="options"
-  default-value="Drive My Car"
-  @update:value="handleUpdateValue"
-/>
-```
+<template>
+  <n-space vertical>
+    <n-tree-select
+      filterable
+      :options="options"
+      default-value="Drive My Car"
+      clearable
+    />
+    <n-tree-select
+      multiple
+      checkable
+      filterable
+      :clear-filter-after-select="false"
+      :options="options"
+      :default-value="['Norwegian Wood']"
+      clearable
+    />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      handleUpdateValue (...args) {
-        console.log(...args)
-      },
       options: [
         {
           label: 'Rubber Soul',
@@ -138,4 +149,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

@@ -1,18 +1,20 @@
+<markdown>
 # 自定义字段
 
 后端会传来各种各样的数据。
+</markdown>
 
-```html
-<n-tree-select
-  :options="options"
-  default-value="Drive My Car"
-  label-field="whateverLabel"
-  key-field="whateverKey"
-  children-field="whateverChildren"
-/>
-```
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    label-field="whateverLabel"
+    key-field="whateverKey"
+    children-field="whateverChildren"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -140,4 +142,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

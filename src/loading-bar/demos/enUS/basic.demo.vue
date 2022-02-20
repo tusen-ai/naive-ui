@@ -1,14 +1,22 @@
+<markdown>
 # Basic
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="handleStart"> start </n-button>
-  <n-button @click="handleFinish" :disabled="disabled"> finish </n-button>
-  <n-button @click="handleError"> error </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="handleStart">
+      start
+    </n-button>
+    <n-button :disabled="disabled" @click="handleFinish">
+      finish
+    </n-button>
+    <n-button @click="handleError">
+      error
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useLoadingBar } from 'naive-ui'
 
@@ -33,4 +41,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
