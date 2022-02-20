@@ -5,15 +5,15 @@
 ## 演示
 
 ```demo
-basic
-custom-field
-multiple
-checkbox
-check-strategy
-filterable
-check-strategy-debug
-action
-debug
+basic.vue
+custom-field.vue
+multiple.vue
+checkbox.vue
+check-strategy.vue
+filterable.vue
+check-strategy-debug.vue
+action.vue
+debug.vue
 ```
 
 ## API

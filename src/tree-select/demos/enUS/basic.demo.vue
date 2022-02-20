@@ -1,22 +1,27 @@
-# 多选
+<markdown>
+# Basic
+</markdown>
 
-```html
-<n-tree-select
-  multiple
-  :options="options"
-  :default-value="['Norwegian Wood']"
-  @update:value="handleUpdateValue"
-/>
-```
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    @update:value="handleUpdateValue"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
+import { TreeSelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      handleUpdateValue (...args) {
-        console.log(...args)
+      handleUpdateValue (
+        value: string | number | Array<string | number> | null,
+        option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      ) {
+        console.log(value, option)
       },
       options: [
         {
@@ -139,4 +144,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

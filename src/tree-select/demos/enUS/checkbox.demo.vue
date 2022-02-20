@@ -1,49 +1,25 @@
-# Check Strategy Debug
+<markdown>
+# Use Checkbox
 
-```html
-<n-space vertical>
-  <n-space>
-    <n-radio-group v-model:value="checkStrategy">
-      <n-radio-button value="all">All</n-radio-button>
-      <n-radio-button value="parent">Parent</n-radio-button>
-      <n-radio-button value="child">Child</n-radio-button>
-    </n-radio-group>
-    <n-switch v-model:value="checkable">
-      <template #checked>Checkable</template>
-      <template #unchecked>Unhheckable</template>
-    </n-switch>
-    <n-switch v-model:value="multiple">
-      <template #checked>Multiple</template>
-      <template #unchecked>Single</template>
-    </n-switch>
-    <n-switch v-model:value="cascade">
-      <template #checked>Cascade</template>
-      <template #unchecked>Uncascade</template>
-    </n-switch>
-  </n-space>
+If you want to have the same effect of this demo, you will need `checkable`, `cascade` and `multiple` properties.
+</markdown>
+
+<template>
   <n-tree-select
-    default-expand-all
-    :multiple="multiple"
-    :cascade="cascade"
-    :checkable="checkable"
-    :check-strategy="checkStrategy"
+    multiple
+    cascade
+    checkable
     :options="options"
-    :default-value="['Dig It', 'go']"
-    @update:value="handleUpdateValue"
+    :default-value="['Norwegian Wood']"
   />
-</n-space>
-```
+</template>
 
-```js
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      cascade: ref(false),
-      multiple: ref(false),
-      checkStrategy: ref('all'),
-      checkable: ref(false),
       options: [
         {
           label: 'Rubber Soul',
@@ -121,25 +97,48 @@ export default defineComponent({
             },
             {
               label: 'Across The Universe',
-              key: 'Across The Universe',
-              children: [
-                {
-                  label: 'Dig It',
-                  key: 'Dig It'
-                },
-                {
-                  label: 'go',
-                  key: 'go'
-                }
-              ]
+              key: 'Across The Universe'
+            },
+            {
+              label: 'I Me Mine',
+              key: 'I Me Mine'
+            },
+            {
+              label: 'Dig It',
+              key: 'Dig It'
+            },
+            {
+              label: 'Let It Be',
+              key: 'Let It Be'
+            },
+            {
+              label: 'Maggie Mae',
+              key: 'Maggie Mae'
+            },
+            {
+              label: "I've Got A Feeling",
+              key: "I've Got A Feeling"
+            },
+            {
+              label: 'One After 909',
+              key: 'One After 909'
+            },
+            {
+              label: 'The Long And Winding Road',
+              key: 'The Long And Winding Road'
+            },
+            {
+              label: 'For You Blue',
+              key: 'For You Blue'
+            },
+            {
+              label: 'Get Back',
+              key: 'Get Back'
             }
           ]
         }
-      ],
-      handleUpdateValue: (values) => {
-        console.log(values)
-      }
+      ]
     }
   }
 })
-```
+</script>
