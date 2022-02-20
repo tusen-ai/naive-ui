@@ -21,6 +21,7 @@
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
 - `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 - `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
+- `n-data-table` 的 `summary` 属性的 value 值支持自定义内容，　关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 
 ### i18n
 
