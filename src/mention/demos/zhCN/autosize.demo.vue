@@ -1,12 +1,12 @@
-# Textarea
+<markdown>
+# 自动换行
+</markdown>
 
-The input `type` can be set to `'textarea'`.
+<template>
+  <n-mention type="textarea" :options="options" autosize />
+</template>
 
-```html
-<n-mention type="textarea" :options="options" />
-```
-
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -22,15 +22,15 @@ export default defineComponent({
           value: 'star-kirby'
         },
         {
-          label: 'Guandong-Road',
-          value: 'Guandong-Road'
+          label: '广东路',
+          value: '广东路'
         },
         {
-          label: 'No.5-Yiheyuan-Road',
-          value: 'No.5-Yiheyuan-Road'
+          label: '颐和园路5号',
+          value: '颐和园路5号'
         }
       ]
     }
   }
 })
-```
+</script>

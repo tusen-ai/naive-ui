@@ -1,29 +1,34 @@
-# Work with Form
+<markdown>
+# 配合表单
+</markdown>
 
-```html
-<n-space vertical>
-  <n-form :model="formModel" :rules="rules" ref="formInstRef">
-    <n-form-item label="Cool" path="cool">
-      <n-mention :options="options" v-model:value="formModel.cool" />
-    </n-form-item>
-    <n-form-item label="Very Cool" path="veryCool">
-      <n-mention
-        type="textarea"
-        :options="options"
-        v-model:value="formModel.veryCool"
-      />
-    </n-form-item>
-  </n-form>
-  <n-button @click="handleButtonClick">Validate</n-button>
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-form ref="formInstRef" :model="formModel" :rules="rules">
+      <n-form-item label="Cool" path="cool">
+        <n-mention v-model:value="formModel.cool" :options="options" />
+      </n-form-item>
+      <n-form-item label="Very Cool" path="veryCool">
+        <n-mention
+          v-model:value="formModel.veryCool"
+          type="textarea"
+          :options="options"
+        />
+      </n-form-item>
+    </n-form>
+    <n-button @click="handleButtonClick">
+      Validate
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { FormInst } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const formInstRef = ref(null)
+    const formInstRef = ref<FormInst | null>(null)
     const formModelRef = ref({
       cool: '',
       veryCool: ''
@@ -58,9 +63,9 @@ export default defineComponent({
         }
       ],
       handleButtonClick () {
-        formInstRef.value.validate()
+        formInstRef.value?.validate()
       }
     }
   }
 })
-```
+</script>

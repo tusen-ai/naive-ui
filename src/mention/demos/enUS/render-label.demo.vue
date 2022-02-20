@@ -1,14 +1,16 @@
+<markdown>
 # Render Label
 
 If the `option.label` property is not a string, the `option.value` property will be used for matching by default.
+</markdown>
 
-```html
-<n-mention :options="options" :render-label="renderLabel" />
-```
+<template>
+  <n-mention :options="options" :render-label="renderLabel" />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
-import { NAvatar } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, VNodeChild } from 'vue'
+import { NAvatar, MentionOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -27,7 +29,7 @@ export default defineComponent({
           value: 'amadeus711'
         }
       ],
-      renderLabel: (option) =>
+      renderLabel: (option: MentionOption): VNodeChild =>
         h('div', { style: 'display: flex; align-items: center;' }, [
           h(NAvatar, {
             style: 'margin-right: 8px;',
@@ -40,4 +42,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

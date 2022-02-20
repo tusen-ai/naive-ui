@@ -1,32 +1,35 @@
+<markdown>
 # Load Remote Options
 
 Load options asynchronously.
+</markdown>
 
-```html
-<n-mention
-  :options="options"
-  default-value="@"
-  @search="handleSearch"
-  :loading="loading"
-/>
-```
+<template>
+  <n-mention
+    :options="options"
+    default-value="@"
+    :loading="loading"
+    @search="handleSearch"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { MentionOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const optionsRef = ref([])
+    const optionsRef = ref<MentionOption[]>([])
     const loadingRef = ref(false)
-    let searchTimerId = null
+    let searchTimerId: number | null = null
     return {
       options: optionsRef,
       loading: loadingRef,
-      handleSearch (pattern, prefix) {
+      handleSearch (pattern: string, prefix: string) {
         if (searchTimerId !== null) clearTimeout(searchTimerId)
         console.log(pattern, prefix)
         loadingRef.value = true
-        searchTimerId = setTimeout(() => {
+        searchTimerId = window.setTimeout(() => {
           optionsRef.value = [
             'We',
             'all',
@@ -45,4 +48,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
