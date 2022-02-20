@@ -1,35 +1,29 @@
-# 指定勾选策略
+<markdown>
+# Multiple
+</markdown>
 
-设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点。
-
-```html
-<n-space vertical>
-  <n-space>
-    <n-radio-group v-model:value="checkStrategy">
-      <n-radio-button value="all">All</n-radio-button>
-      <n-radio-button value="parent">Parent</n-radio-button>
-      <n-radio-button value="child">Child</n-radio-button>
-    </n-radio-group>
-  </n-space>
+<template>
   <n-tree-select
     multiple
-    cascade
-    checkable
-    :check-strategy="checkStrategy"
     :options="options"
-    :default-value="['Dig It', 'go']"
+    :default-value="['Norwegian Wood']"
     @update:value="handleUpdateValue"
   />
-</n-space>
-```
+</template>
 
-```js
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { TreeSelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      checkStrategy: ref('all'),
+      handleUpdateValue (
+        value: string | number | Array<string | number> | null,
+        option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      ) {
+        console.log(value, option)
+      },
       options: [
         {
           label: 'Rubber Soul',
@@ -107,25 +101,48 @@ export default defineComponent({
             },
             {
               label: 'Across The Universe',
-              key: 'Across The Universe',
-              children: [
-                {
-                  label: 'Dig It',
-                  key: 'Dig It'
-                },
-                {
-                  label: 'go',
-                  key: 'go'
-                }
-              ]
+              key: 'Across The Universe'
+            },
+            {
+              label: 'I Me Mine',
+              key: 'I Me Mine'
+            },
+            {
+              label: 'Dig It',
+              key: 'Dig It'
+            },
+            {
+              label: 'Let It Be',
+              key: 'Let It Be'
+            },
+            {
+              label: 'Maggie Mae',
+              key: 'Maggie Mae'
+            },
+            {
+              label: "I've Got A Feeling",
+              key: "I've Got A Feeling"
+            },
+            {
+              label: 'One After 909',
+              key: 'One After 909'
+            },
+            {
+              label: 'The Long And Winding Road',
+              key: 'The Long And Winding Road'
+            },
+            {
+              label: 'For You Blue',
+              key: 'For You Blue'
+            },
+            {
+              label: 'Get Back',
+              key: 'Get Back'
             }
           ]
         }
-      ],
-      handleUpdateValue: (values) => {
-        console.log(values)
-      }
+      ]
     }
   }
 })
-```
+</script>

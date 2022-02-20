@@ -1,25 +1,33 @@
+<markdown>
 # 操作插槽
 
 可能你需要在树型选择菜单里用这个插槽。
+</markdown>
 
-```html
-<n-tree-select
-  :options="options"
-  default-value="Drive My Car"
-  @update:value="handleUpdateValue"
->
-  <template #action>你可以在这里自定义一些操作</template>
-</n-tree-select>
-```
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    @update:value="handleUpdateValue"
+  >
+    <template #action>
+      你可以在这里自定义一些操作
+    </template>
+  </n-tree-select>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
+import { TreeSelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      handleUpdateValue (...args) {
-        console.log(...args)
+      handleUpdateValue (
+        value: string | number | Array<string | number> | null,
+        option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      ) {
+        console.log(value, option)
       },
       options: [
         {
@@ -88,4 +96,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

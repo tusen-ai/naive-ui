@@ -1,21 +1,33 @@
-# 基础用法
+<markdown>
+# Action slot
 
-```html
-<n-tree-select
-  :options="options"
-  default-value="Drive My Car"
-  @update:value="handleUpdateValue"
-/>
-```
+Maybe you need to use this slot in the tree selection menu.
+</markdown>
 
-```js
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    @update:value="handleUpdateValue"
+  >
+    <template #action>
+      You can customize some operations here.
+    </template>
+  </n-tree-select>
+</template>
+
+<script lang="ts">
 import { defineComponent } from 'vue'
+import { TreeSelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      handleUpdateValue (...args) {
-        console.log(...args)
+      handleUpdateValue (
+        value: string | number | Array<string | number> | null,
+        option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      ) {
+        console.log(value, option)
       },
       options: [
         {
@@ -79,63 +91,9 @@ export default defineComponent({
               key: 'Wait'
             }
           ]
-        },
-        {
-          label: 'Let It Be',
-          key: 'Let It Be Album',
-          children: [
-            {
-              label: 'Two Of Us',
-              key: 'Two Of Us'
-            },
-            {
-              label: 'Dig A Pony',
-              key: 'Dig A Pony'
-            },
-            {
-              label: 'Across The Universe',
-              key: 'Across The Universe'
-            },
-            {
-              label: 'I Me Mine',
-              key: 'I Me Mine'
-            },
-            {
-              label: 'Dig It',
-              key: 'Dig It'
-            },
-            {
-              label: 'Let It Be',
-              key: 'Let It Be'
-            },
-            {
-              label: 'Maggie Mae',
-              key: 'Maggie Mae'
-            },
-            {
-              label: "I've Got A Feeling",
-              key: "I've Got A Feeling"
-            },
-            {
-              label: 'One After 909',
-              key: 'One After 909'
-            },
-            {
-              label: 'The Long And Winding Road',
-              key: 'The Long And Winding Road'
-            },
-            {
-              label: 'For You Blue',
-              key: 'For You Blue'
-            },
-            {
-              label: 'Get Back',
-              key: 'Get Back'
-            }
-          ]
         }
       ]
     }
   }
 })
-```
+</script>
