@@ -1,7 +1,7 @@
 <markdown>
 # Use separator to separate tags input
 
-set `tag` and `:show="false"` and `separator"`to use as tag input with `separator`.
+set `tag` and `:show="false"` and `separator`to use as tag input with `separator`.
 </markdown>
 
 <template>
