@@ -14,8 +14,8 @@ placement.vue
 size.vue
 group-debug.vue
 manual-position.vue
-batch-render.vue.vue
-render
+batch-render.vue
+render.vue
 option-props.vue
 ```
 

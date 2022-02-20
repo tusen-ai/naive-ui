@@ -1,4 +1,7 @@
-curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+if ! [[ -x $(command -v pnpm) ]]; then
+  curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+fi
+
 pnpm run build:package
 
 pnpm pack
