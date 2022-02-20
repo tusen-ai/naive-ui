@@ -1,28 +1,32 @@
+<markdown>
 # 手动 Focus & Blur
 
 可能你想要手动 `focus` 和 `blur`。
+</markdown>
 
-```html
-<n-space>
-  <n-mention :options="options" default-value="@" ref="myMention" />
-  <n-button @click="triggerFocus">点击聚焦，一秒后失去焦点</n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-mention ref="myMention" :options="options" default-value="@" />
+    <n-button @click="triggerFocus">
+      点击聚焦，一秒后失去焦点
+    </n-button>
+  </n-space>
+</template>
 
-```js
-import { defineComponent, h, ref } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, ref, VNodeChild } from 'vue'
+import { NIcon, MentionOption, MentionInst } from 'naive-ui'
 import { HomeOutline as HomeIcon } from '@vicons/ionicons5'
 
 export default defineComponent({
   setup () {
-    const myMentionRef = ref(null)
+    const myMentionRef = ref<MentionInst | null>(null)
     const triggerFocus = () => {
-      myMentionRef.value.focus()
+      myMentionRef.value?.focus()
       setTimeout(triggerBlur, 1000)
     }
     const triggerBlur = () => {
-      myMentionRef.value.blur()
+      myMentionRef.value?.blur()
     }
     return {
       myMention: myMentionRef,
@@ -42,7 +46,7 @@ export default defineComponent({
           value: '广东路'
         },
         {
-          label: (option) =>
+          label: (option: MentionOption): VNodeChild =>
             h('div', { style: 'display: flex; align-items: center;' }, [
               h(
                 NIcon,
@@ -57,4 +61,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

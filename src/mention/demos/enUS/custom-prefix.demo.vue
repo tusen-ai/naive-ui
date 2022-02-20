@@ -1,13 +1,16 @@
+<markdown>
 # Custom Trigger Prefix
 
 Use `prefix` to set the trigger character(s).
+</markdown>
 
-```html
-<n-mention :options="options" :prefix="['@', '#']" @search="handleSearch" />
-```
+<template>
+  <n-mention :options="options" :prefix="['@', '#']" @search="handleSearch" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { MentionOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -59,10 +62,10 @@ export default defineComponent({
         value: 'submarine'
       }
     ]
-    const optionsRef = ref([])
+    const optionsRef = ref<MentionOption[]>([])
     return {
       options: optionsRef,
-      handleSearch (_, prefix) {
+      handleSearch (_: string, prefix: string) {
         if (prefix === '@') {
           optionsRef.value = atOptions
         } else {
@@ -72,4 +75,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

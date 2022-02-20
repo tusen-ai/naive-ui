@@ -1,12 +1,12 @@
-# 文本区域
+<markdown>
+# Autosize
+</markdown>
 
-将 `type` 设为 `'textarea'`。
+<template>
+  <n-mention type="textarea" :options="options" autosize />
+</template>
 
-```html
-<n-mention type="textarea" :options="options" />
-```
-
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -22,15 +22,15 @@ export default defineComponent({
           value: 'star-kirby'
         },
         {
-          label: '广东路',
-          value: '广东路'
+          label: 'Guandong-Road',
+          value: 'Guandong-Road'
         },
         {
-          label: '颐和园路5号',
-          value: '颐和园路5号'
+          label: 'No.5-Yiheyuan-Road',
+          value: 'No.5-Yiheyuan-Road'
         }
       ]
     }
   }
 })
-```
+</script>

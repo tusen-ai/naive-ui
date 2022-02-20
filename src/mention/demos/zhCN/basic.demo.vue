@@ -1,14 +1,16 @@
-# Basic Usage
+<markdown>
+# 基本用法
 
-If `label` is a render function, the `value` property will be used for matching.
+如果 `label` 是回调函数，输入匹配则会根据 `value` 进行匹配
+</markdown>
 
-```html
-<n-mention :options="options" default-value="@" />
-```
+<template>
+  <n-mention :options="options" default-value="@" />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts">
+import { defineComponent, h, VNodeChild } from 'vue'
+import { NIcon, MentionOption } from 'naive-ui'
 import { HomeOutline as HomeIcon } from '@vicons/ionicons5'
 
 export default defineComponent({
@@ -24,12 +26,12 @@ export default defineComponent({
           value: 'star-kirby'
         },
         {
-          label: 'Guandong-Road',
-          value: 'Guandong-Road'
+          label: '广东路',
+          value: '广东路'
         },
         {
-          label: (option) =>
-            h('span', { style: 'display: flex; align-items: center;' }, [
+          label: (option: MentionOption): VNodeChild =>
+            h('div', { style: 'display: flex; align-items: center;' }, [
               h(
                 NIcon,
                 { style: 'margin-right: 5px' },
@@ -37,10 +39,10 @@ export default defineComponent({
               ),
               option.value
             ]),
-          value: 'No.5-Yiheyuan-Road'
+          value: '颐和园路5号'
         }
       ]
     }
   }
 })
-```
+</script>

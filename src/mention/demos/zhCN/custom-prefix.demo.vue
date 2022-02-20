@@ -1,13 +1,16 @@
+<markdown>
 # 自定义触发字符
 
 使用 `prefix` 设定触发字符。
+</markdown>
 
-```html
-<n-mention :options="options" :prefix="['@', '#']" @search="handleSearch" />
-```
+<template>
+  <n-mention :options="options" :prefix="['@', '#']" @search="handleSearch" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { MentionOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -47,10 +50,10 @@ export default defineComponent({
         value: '不要回头'
       }
     ]
-    const optionsRef = ref([])
+    const optionsRef = ref<MentionOption[]>([])
     return {
       options: optionsRef,
-      handleSearch (_, prefix) {
+      handleSearch (_: string, prefix: string) {
         if (prefix === '@') {
           optionsRef.value = atOptions
         } else {
@@ -60,4 +63,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
