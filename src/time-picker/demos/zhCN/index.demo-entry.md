@@ -5,13 +5,13 @@
 ## 演示
 
 ```demo
-basic
-size
-disabled-time
-step-time
-format
-actions
-hours12
+basic.vue
+size.vue
+disabled-time.vue
+step-time.vue
+format.vue
+actions.vue
+hours12.vue
 formatted.vue
 focus.vue
 ```

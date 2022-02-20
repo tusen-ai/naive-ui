@@ -5,14 +5,14 @@ It's said that 99% of the people can't distinguish the `TreeSelect` component fr
 ## Demos
 
 ```demo
-basic
-custom-field
-multiple
-checkbox
-check-strategy
-filterable
-action
-debug
+basic.vue
+custom-field.vue
+multiple.vue
+checkbox.vue
+check-strategy.vue
+filterable.vue
+action.vue
+debug.vue
 ```
 
 ## API

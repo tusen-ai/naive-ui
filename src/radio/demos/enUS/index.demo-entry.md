@@ -7,10 +7,10 @@ When I was young, I loved listening to the radio, such as FM 106.8 or FM 92.1.
 ## Demos
 
 ```demo
-basic
-group
-button-group
-size
+basic.vue
+group.vue
+button-group.vue
+size.vue
 ```
 
 ## API

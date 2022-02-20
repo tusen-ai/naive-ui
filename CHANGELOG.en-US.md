@@ -6,19 +6,27 @@
 
 - Fix `n-switch` can't use keyboard operation when checked value is customized.
 - Fix `n-data-table`'s fixed column is covered by scroll content when placed inside popover.
-- Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect.
+- Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect, closes [#2392](https://github.com/TuSimple/naive-ui/issues/2392).
 - Fix `n-data-table` cannot click selection checkbox if the selection column is a column's child.
+- Fix `n-table`'s `border-color` abnormal style when this added dynamically, closes [#2403](https://github.com/TuSimple/naive-ui/issues/2403).
+- Fix `n-tree`'s `default-expand-all` prop doesn't work for dynamic data.
 
 ### Feats
 
-- `n-tree-select` add `clear-filter-after-select` prop.
-- `n-cascader` add `clear-filter-after-select` prop.
-- `n-switch` add `icon` slot.
-- `n-switch` add `checked-icon` slot.
-- `n-switch` add `unchecked-icon` slot.
+- `n-tree-select` adds `clear-filter-after-select` prop.
+- `n-cascader` adds `clear-filter-after-select` prop.
+- `n-switch` adds `icon` slot.
+- `n-switch` adds `checked-icon` slot.
+- `n-switch` adds `unchecked-icon` slot.
 - `n-tabs` uses `n` as CSS vars prefix.
-- `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- Add `n-watermark` component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 - `n-data-table`'s `summary`'s `value` support custom content, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
+
+### i18n
+
+- Add skSK locale.
+- Fix frFR locale.
 
 ## 2.25.2
 

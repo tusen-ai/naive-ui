@@ -5,11 +5,11 @@ Time 提供一些基本的时间格式化功能。
 ## 演示
 
 ```demo
-basic
-type
-format
-relative
-unix
+basic.vue
+type.vue
+format.vue
+relative.vue
+unix.vue
 ```
 
 ## API

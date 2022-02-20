@@ -5,14 +5,14 @@
 ## 演示
 
 ```demo
-basic
-textarea
-async
-autosize
-form
-render-label
-custom-prefix
-manual-trigger
+basic.vue
+textarea.vue
+async.vue
+autosize.vue
+form.vue
+render-label.vue
+custom-prefix.vue
+manual-trigger.vue
 ```
 
 ## API

@@ -7,11 +7,11 @@
 ## 演示
 
 ```demo
-basic
-group
-button-group
-size
-radio-focus-debug
+basic.vue
+group.vue
+button-group.vue
+size.vue
+radio-focus-debug.vue
 ```
 
 ## API

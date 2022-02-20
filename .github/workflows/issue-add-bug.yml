@@ -10,7 +10,7 @@ jobs:
     if: contains(github.event.issue.body, '__BUG__') == true
     steps:
       - name: Add labels
-        uses: actions-cool/issues-helper@v2.2.1
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'add-labels'
           token: ${{ secrets.GITHUB_TOKEN }}

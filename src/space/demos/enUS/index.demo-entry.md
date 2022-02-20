@@ -5,12 +5,12 @@ A great invention (which is not invented by me).
 ## Demos
 
 ```demo
-basic
-vertical
-from-end
-space-between
-space-around
-center
+basic.vue
+vertical.vue
+from-end.vue
+space-between.vue
+space-around.vue
+center.vue
 ```
 
 ## API

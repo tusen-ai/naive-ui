@@ -5,10 +5,10 @@
 ## 演示
 
 ```demo
-basic
-wrap
-description
-customize-icon
+basic.vue
+wrap.vue
+description.vue
+customize-icon.vue
 ```
 
 ## API
