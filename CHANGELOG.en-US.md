@@ -9,6 +9,7 @@
 - Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect, closes [#2392](https://github.com/TuSimple/naive-ui/issues/2392).
 - Fix `n-data-table` cannot click selection checkbox if the selection column is a column's child.
 - Fix `n-table`'s `border-color` abnormal style when this added dynamically, closes [#2403](https://github.com/TuSimple/naive-ui/issues/2403).
+- Fix `n-tree`'s `default-expand-all` prop doesn't work for dynamic data.
 
 ### Feats
 

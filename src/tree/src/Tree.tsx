@@ -322,15 +322,20 @@ export default defineComponent({
       uncontrolledSelectedKeysRef
     )
     const uncontrolledExpandedKeysRef = ref<Key[]>([])
-    const initUncontrolledExpandedKeys = (): void => {
+
+    const initUncontrolledExpandedKeys = (keys: undefined | Key[]): void => {
       uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? dataTreeMateRef.value!.getNonLeafKeys()
-        : props.defaultExpandedKeys
+        : keys === undefined
+          ? props.defaultExpandedKeys
+          : keys
     }
-    if (watchProps?.includes('defaultExpandedKeys') || props.defaultExpandAll) {
-      watchEffect(initUncontrolledExpandedKeys)
+    if (watchProps?.includes('defaultExpandedKeys')) {
+      // if watching defaultExpandedKeys, we use access props.defaultExpandedKeys inside initiator
+      watchEffect(() => initUncontrolledExpandedKeys(undefined))
     } else {
-      initUncontrolledExpandedKeys()
+      // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
+      watchEffect(() => initUncontrolledExpandedKeys(props.defaultExpandedKeys))
     }
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(

@@ -9,6 +9,7 @@
 - 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效, 关闭 [#2392](https://github.com/TuSimple/naive-ui/issues/2392)
 - 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
 - 修复 `n-table` 动态增加时 `border-color` 的样式异常，关闭 [#2403](https://github.com/TuSimple/naive-ui/issues/2403)
+- 修复 `n-tree` 的 `default-expand-all` 对于动态数据不生效
 
 ### Feats
 
