@@ -669,8 +669,17 @@ export default defineComponent({
                     } else {
                       const { tag, separator, onCreate } = props
                       if (tag && separator) {
+                        let optionValueString = String(optionValue)
+                        optionValueString = optionValueString.endsWith(
+                          separator
+                        )
+                          ? optionValueString.substring(
+                            0,
+                            optionValueString.length - 1
+                          )
+                          : optionValueString
                         const optionValues =
-                          String(optionValue).split(separator)
+                          String(optionValueString).split(separator)
                         beingCreatedOptionsRef.value.pop()
                         optionValues.forEach((v) => {
                           const option = onCreate(v)
