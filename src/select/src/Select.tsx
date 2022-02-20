@@ -682,7 +682,7 @@ export default defineComponent({
                           String(optionValueString).split(separator)
                         beingCreatedOptionsRef.value.pop()
                         optionValues.forEach((v) => {
-                          const option = onCreate(v)
+                          const option = onCreate(v.trim())
                           beingCreatedOptionsRef.value.push(option)
                         })
                         handleToggleByOptions(beingCreatedOptionsRef.value)
