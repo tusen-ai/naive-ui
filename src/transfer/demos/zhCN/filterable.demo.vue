@@ -1,29 +1,22 @@
-# Size
+<markdown>
+# 可过滤
+</markdown>
 
-Mixing sizes does not look harmonious.
-
-```html
-<n-space vertical>
+<template>
   <n-transfer
     ref="transfer"
     v-model:value="value"
+    virtual-scroll
     :options="options"
-    size="small"
+    filterable
   />
-  <n-transfer
-    ref="transfer"
-    v-model:value="value"
-    :options="options"
-    size="large"
-  />
-</n-space>
-```
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 function createOptions () {
-  return Array.apply(null, { length: 100 }).map((v, i) => ({
+  return Array.from({ length: 100 }).map((v, i) => ({
     label: 'Option ' + i,
     value: i,
     disabled: i % 5 === 0
@@ -31,7 +24,7 @@ function createOptions () {
 }
 
 function createValues () {
-  return Array.apply(null, { length: 50 }).map((v, i) => i)
+  return Array.from({ length: 50 }).map((v, i) => i)
 }
 
 export default defineComponent({
@@ -42,4 +35,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

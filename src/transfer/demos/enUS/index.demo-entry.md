@@ -7,10 +7,10 @@ Left, right, right, left... I'm a simple man, and I can play this all day.
 ## Demos
 
 ```demo
-basic
-large-data
-size
-filterable
+basic.vue
+large-data.vue
+size.vue
+filterable.vue
 ```
 
 ## API
