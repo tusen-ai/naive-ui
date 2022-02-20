@@ -10,9 +10,9 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
-import { useTheme, useFormItem, useConfig } from '../../_mixins'
+import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey } from '../../_utils'
+import { call, color2Class, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
 import type { RateTheme } from '../styles'
@@ -51,7 +51,7 @@ export default defineComponent({
   name: 'Rate',
   props: rateProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Rate',
       '-rate',
@@ -100,6 +100,49 @@ export default defineComponent({
     function handleClick (index: number, e: MouseEvent): void {
       doUpdateValue(getDerivedValue(index, e))
     }
+
+    const mergedSizeRef = computed(() => {
+      const { size } = props
+      const { self } = themeRef.value
+      if (typeof size === 'number') {
+        return `${size}px`
+      } else {
+        return self[createKey('size', size)]
+      }
+    })
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self
+      } = themeRef.value
+      const { itemColor, itemColorActive } = self
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-item-color': itemColor,
+        '--n-item-color-active': props.color || itemColorActive,
+        '--n-item-size': mergedSizeRef.value
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'card',
+        computed(() => {
+          const size = mergedSizeRef.value
+          const { color } = props
+          let hash = ''
+          if (size) {
+            hash += size[0]
+          }
+          if (color) {
+            hash += color2Class(color)
+          }
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
@@ -107,26 +150,9 @@ export default defineComponent({
       handleMouseMove,
       handleClick,
       handleMouseLeave,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self
-        } = themeRef.value
-        const { itemColor, itemColorActive } = self
-        let mergedSize: string
-        if (typeof size === 'number') {
-          mergedSize = `${size}px`
-        } else {
-          mergedSize = self[createKey('size', size)]
-        }
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-item-color': itemColor,
-          '--n-item-color-active': props.color || itemColorActive,
-          '--n-item-size': mergedSize
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -135,15 +161,18 @@ export default defineComponent({
       hoverIndex,
       mergedValue,
       mergedClsPrefix,
+      onRender,
       $slots: { default: defaultSlot }
     } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-rate`,
           {
             [`${mergedClsPrefix}-rate--readonly`]: readonly
-          }
+          },
+          this.themeClass
         ]}
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
