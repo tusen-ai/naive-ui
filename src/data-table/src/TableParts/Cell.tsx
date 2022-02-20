@@ -4,7 +4,6 @@ import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
 import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
 import type { DataTableTheme } from '../../styles'
-import { render as customRender } from '../../../_utils'
 
 export default defineComponent({
   name: 'DataTableCell',
@@ -38,7 +37,7 @@ export default defineComponent({
       cell = render(row, this.index)
     } else {
       if (isSummary) {
-        cell = customRender((row[key] as SummaryCell).value)
+        cell = (row[key] as SummaryCell).value
       } else {
         cell = get(row, key) as any
       }

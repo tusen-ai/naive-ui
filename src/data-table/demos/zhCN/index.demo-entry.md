@@ -135,14 +135,14 @@ height-debug
 type DataTableCreateSummary = (pageData: RowData[]) =>
   | Array<{
       [columnKey: string]: {
-        value?: string | number | (() => VNodeChild)
+        value?: VNodeChild
         colSpan?: number
         rowSpan?: number
       }
     }>
   | {
       [columnKey: string]: {
-        value?: string | number | (() => VNodeChild)
+        value?: VNodeChild
         colSpan?: number
         rowSpan?: number
       }
