@@ -37,7 +37,7 @@ export default defineComponent({
 ## 演示
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

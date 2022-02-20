@@ -1,14 +1,22 @@
+<markdown>
 # 基础用法
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="handleStart"> 开始 </n-button>
-  <n-button @click="handleFinish" :disabled="disabled"> 结束 </n-button>
-  <n-button @click="handleError"> 报个错 </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="handleStart">
+      开始
+    </n-button>
+    <n-button :disabled="disabled" @click="handleFinish">
+      结束
+    </n-button>
+    <n-button @click="handleError">
+      报个错
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useLoadingBar } from 'naive-ui'
 
@@ -33,4 +41,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
