@@ -5,18 +5,18 @@ If latency didn't matter, I'd just fill trucks with hard disks.
 ## Demos
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-download
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+download.vue
 ```
 
 ## API
@@ -54,7 +54,7 @@ download
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
-| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
+| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| undefined` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |  |
@@ -68,7 +68,7 @@ download
 | id | `string \| number` | Unique file ID. |
 | name | `string` | Filename. |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage | `number` | The progress percentage of the file being uploaded. |
+| percentage? | `number` | The progress percentage of the file being uploaded. |
 | file? | `File \| null` | The object of the file stored in the browser. |
 | thumbnailUrl? | `string \| null` | Thumbnail URL. |
 | type? | `string \| null` | MIME type. |

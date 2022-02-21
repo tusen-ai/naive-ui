@@ -11,17 +11,17 @@ If you are use version before v2.3.0, you may want to know about <n-a href="#Cha
 ## Demos
 
 ```demo
-basic
-set-padding
-border
-embedded
-absolute
-scrollbar
-collapse
-collapse-right
-inverted
-show-sider-content
-scroll-to
+basic.vue
+set-padding.vue
+border.vue
+embedded.vue
+absolute.vue
+scrollbar.vue
+collapse.vue
+collapse-right.vue
+inverted.vue
+show-sider-content.vue
+scroll-to.vue
 ```
 
 ## API

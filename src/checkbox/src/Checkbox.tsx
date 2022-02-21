@@ -12,7 +12,7 @@ import {
 import { useMergedState, useMemo } from 'vooks'
 import { createId } from 'seemly'
 import { on } from 'evtd'
-import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
 import {
@@ -93,7 +93,7 @@ export default defineComponent({
       })
     }
     const selfRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
         const { size } = props
@@ -223,6 +223,69 @@ export default defineComponent({
         selfRef.value?.blur()
       }
     }
+    const cssVarsRef = computed(() => {
+      const { value: mergedSize } = mergedSizeRef
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderRadius,
+          color,
+          colorChecked,
+          colorDisabled,
+          colorTableHeader,
+          colorTableHeaderModal,
+          colorTableHeaderPopover,
+          checkMarkColor,
+          checkMarkColorDisabled,
+          border,
+          borderFocus,
+          borderDisabled,
+          borderChecked,
+          boxShadowFocus,
+          textColor,
+          textColorDisabled,
+          checkMarkColorDisabledChecked,
+          colorDisabledChecked,
+          borderDisabledChecked,
+          labelPadding,
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('size', mergedSize)]: size
+        }
+      } = themeRef.value
+      return {
+        '--n-size': size,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-border': border,
+        '--n-border-checked': borderChecked,
+        '--n-border-focus': borderFocus,
+        '--n-border-disabled': borderDisabled,
+        '--n-border-disabled-checked': borderDisabledChecked,
+        '--n-box-shadow-focus': boxShadowFocus,
+        '--n-color': color,
+        '--n-color-checked': colorChecked,
+        '--n-color-table-header': colorTableHeader,
+        '--n-color-table-header-modal': colorTableHeaderModal,
+        '--n-color-table-header-popover': colorTableHeaderPopover,
+        '--n-color-disabled': colorDisabled,
+        '--n-color-disabled-checked': colorDisabledChecked,
+        '--n-text-color': textColor,
+        '--n-text-color-disabled': textColorDisabled,
+        '--n-check-mark-color': checkMarkColor,
+        '--n-check-mark-color-disabled': checkMarkColorDisabled,
+        '--n-check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
+        '--n-font-size': fontSize,
+        '--n-label-padding': labelPadding
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'checkbox',
+        computed(() => mergedSizeRef.value[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return Object.assign(formItem, exposedMethods, {
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -233,62 +296,9 @@ export default defineComponent({
       handleClick,
       handleKeyUp,
       handleKeyDown,
-      cssVars: computed(() => {
-        const { value: mergedSize } = mergedSizeRef
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderRadius,
-            color,
-            colorChecked,
-            colorDisabled,
-            colorTableHeader,
-            colorTableHeaderModal,
-            colorTableHeaderPopover,
-            checkMarkColor,
-            checkMarkColorDisabled,
-            border,
-            borderFocus,
-            borderDisabled,
-            borderChecked,
-            boxShadowFocus,
-            textColor,
-            textColorDisabled,
-            checkMarkColorDisabledChecked,
-            colorDisabledChecked,
-            borderDisabledChecked,
-            labelPadding,
-            [createKey('fontSize', mergedSize)]: fontSize,
-            [createKey('size', mergedSize)]: size
-          }
-        } = themeRef.value
-        return {
-          '--n-size': size,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-border': border,
-          '--n-border-checked': borderChecked,
-          '--n-border-focus': borderFocus,
-          '--n-border-disabled': borderDisabled,
-          '--n-border-disabled-checked': borderDisabledChecked,
-          '--n-box-shadow-focus': boxShadowFocus,
-          '--n-color': color,
-          '--n-color-checked': colorChecked,
-          '--n-color-table-header': colorTableHeader,
-          '--n-color-table-header-modal': colorTableHeaderModal,
-          '--n-color-table-header-popover': colorTableHeaderPopover,
-          '--n-color-disabled': colorDisabled,
-          '--n-color-disabled-checked': colorDisabledChecked,
-          '--n-text-color': textColor,
-          '--n-text-color-disabled': textColorDisabled,
-          '--n-check-mark-color': checkMarkColor,
-          '--n-check-mark-color-disabled': checkMarkColorDisabled,
-          '--n-check-mark-color-disabled-checked':
-            checkMarkColorDisabledChecked,
-          '--n-font-size': fontSize,
-          '--n-label-padding': labelPadding
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     })
   },
   render () {
@@ -307,11 +317,13 @@ export default defineComponent({
       handleKeyDown,
       handleClick
     } = this
+    this.onRender?.()
     return (
       <div
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-checkbox`,
+          this.themeClass,
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,

@@ -5,9 +5,9 @@
 ## 演示
 
 ```demo
-basic
-size
-custom
+basic.vue
+size.vue
+custom.vue
 ```
 
 ## API

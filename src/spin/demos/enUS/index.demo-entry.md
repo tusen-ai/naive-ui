@@ -5,10 +5,10 @@ It could've been called `loading`, but why is it called `spin`? Because there is
 ## Demos
 
 ```demo
-basic
-wrap
-description
-customize-icon
+basic.vue
+wrap.vue
+description.vue
+customize-icon.vue
 ```
 
 ## API

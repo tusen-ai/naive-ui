@@ -5,8 +5,8 @@ It looks better but I'm sure it's not as reliable as native scrollbar.
 ## Demos
 
 ```demo
-basic
-x
+basic.vue
+x.vue
 ```
 
 ## API
@@ -27,4 +27,5 @@ x
 
 | Name | Type | Description |
 | --- | --- | --- |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scrolling content. |
+| scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content by specific distance. |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. |

@@ -5,15 +5,15 @@
 ## 演示
 
 ```demo
-single
-multiple
-size
-single-lazy
-multiple-lazy
-action
-virtual
-check-strategy
-custom-field
+single.vue
+multiple.vue
+size.vue
+single-lazy.vue
+multiple-lazy.vue
+action.vue
+virtual.vue
+check-strategy.vue
+custom-field.vue
 custom-render.vue
 focus.vue
 ```
@@ -28,6 +28,7 @@ focus.vue
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时，对于单选无效）；`child` 表示只显示子节点； |  |
 | children-field | `string` | `'children'` | 替代 `CascaderOption` 中的 children 字段名 |  |
 | clearable | `boolean` | `false` | 值是否可清除 |  |
+| clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | NEXT_VERSION |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |  |

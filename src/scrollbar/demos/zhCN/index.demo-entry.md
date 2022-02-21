@@ -5,8 +5,8 @@
 ## 演示
 
 ```demo
-basic
-x
+basic.vue
+x.vue
 ```
 
 ## API
@@ -27,4 +27,5 @@ x
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
+| scrollBy | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动特定距离 |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 |

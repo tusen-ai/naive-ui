@@ -5,10 +5,10 @@ It doesn't look like what it calls.
 ## Demos
 
 ```demo
-basic
-custom
-separator
-separator-per-item
+basic.vue
+custom.vue
+separator.vue
+separator-per-item.vue
 ```
 
 ## API

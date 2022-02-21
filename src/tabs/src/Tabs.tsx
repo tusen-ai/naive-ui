@@ -20,9 +20,15 @@ import {
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, call, flatten, warnOnce } from '../../_utils'
+import {
+  createKey,
+  call,
+  flatten,
+  warnOnce,
+  resolveWrappedSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
@@ -117,7 +123,7 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
       '-tabs',
@@ -340,6 +346,81 @@ export default defineComponent({
       }
     }
 
+    const cssVarsRef = computed(() => {
+      const { value: size } = compitableSizeRef
+      const { type } = props
+      const typeSuffix = (
+        {
+          card: 'Card',
+          bar: 'Bar',
+          line: 'Line',
+          segment: 'Segment'
+        } as const
+      )[type]
+      const sizeType = `${size}${typeSuffix}` as const
+      const {
+        self: {
+          barColor,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          tabColor,
+          tabBorderColor,
+          paneTextColor,
+          tabFontWeight,
+          tabBorderRadius,
+          tabFontWeightActive,
+          colorSegment,
+          fontWeightStrong,
+          tabColorSegment,
+          [createKey('panePadding', size)]: panePadding,
+          [createKey('tabPadding', sizeType)]: tabPadding,
+          [createKey('tabGap', sizeType)]: tabGap,
+          [createKey('tabTextColor', type)]: tabTextColor,
+          [createKey('tabTextColorActive', type)]: tabTextColorActive,
+          [createKey('tabTextColorHover', type)]: tabTextColorHover,
+          [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
+          [createKey('tabFontSize', size)]: tabFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-color-segment': colorSegment,
+        '--n-bar-color': barColor,
+        '--n-tab-font-size': tabFontSize,
+        '--n-tab-text-color': tabTextColor,
+        '--n-tab-text-color-active': tabTextColorActive,
+        '--n-tab-text-color-disabled': tabTextColorDisabled,
+        '--n-tab-text-color-hover': tabTextColorHover,
+        '--n-pane-text-color': paneTextColor,
+        '--n-tab-border-color': tabBorderColor,
+        '--n-tab-border-radius': tabBorderRadius,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-tab-color': tabColor,
+        '--n-tab-font-weight': tabFontWeight,
+        '--n-tab-font-weight-active': tabFontWeightActive,
+        '--n-tab-padding': tabPadding,
+        '--n-tab-gap': tabGap,
+        '--n-pane-padding': panePadding,
+        '--n-font-weight-strong': fontWeightStrong,
+        '--n-tab-color-segment': tabColorSegment
+      }
+    })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'tabs',
+        computed(() => {
+          return `${compitableSizeRef.value[0]}${props.type[0]}`
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
@@ -355,69 +436,9 @@ export default defineComponent({
       mergedSize: compitableSizeRef,
       handleScroll,
       handleTabsResize,
-      cssVars: computed(() => {
-        const { value: size } = compitableSizeRef
-        const { type } = props
-        const typeSuffix = (
-          {
-            card: 'Card',
-            bar: 'Bar',
-            line: 'Line',
-            segment: 'Segment'
-          } as const
-        )[type]
-        const sizeType = `${size}${typeSuffix}` as const
-        const {
-          self: {
-            barColor,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            tabColor,
-            tabBorderColor,
-            paneTextColor,
-            tabFontWeight,
-            tabBorderRadius,
-            tabFontWeightActive,
-            colorSegment,
-            fontWeightStrong,
-            tabColorSegment,
-            [createKey('panePadding', size)]: panePadding,
-            [createKey('tabPadding', sizeType)]: tabPadding,
-            [createKey('tabGap', sizeType)]: tabGap,
-            [createKey('tabTextColor', type)]: tabTextColor,
-            [createKey('tabTextColorActive', type)]: tabTextColorActive,
-            [createKey('tabTextColorHover', type)]: tabTextColorHover,
-            [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
-            [createKey('tabFontSize', size)]: tabFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color-segment': colorSegment,
-          '--bar-color': barColor,
-          '--tab-font-size': tabFontSize,
-          '--tab-text-color': tabTextColor,
-          '--tab-text-color-active': tabTextColorActive,
-          '--tab-text-color-disabled': tabTextColorDisabled,
-          '--tab-text-color-hover': tabTextColorHover,
-          '--pane-text-color': paneTextColor,
-          '--tab-border-color': tabBorderColor,
-          '--tab-border-radius': tabBorderRadius,
-          '--close-color': closeColor,
-          '--close-color-hover': closeColorHover,
-          '--close-color-pressed': closeColorPressed,
-          '--tab-color': tabColor,
-          '--tab-font-weight': tabFontWeight,
-          '--tab-font-weight-active': tabFontWeightActive,
-          '--tab-padding': tabPadding,
-          '--tab-gap': tabGap,
-          '--pane-padding': panePadding,
-          '--font-weight-strong': fontWeightStrong,
-          '--tab-color-segment': tabColorSegment
-        }
-      }),
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
   },
@@ -428,8 +449,11 @@ export default defineComponent({
       addTabFixed,
       addable,
       mergedSize,
+      onRender,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
+
+    onRender?.()
 
     const tabPaneChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
@@ -442,8 +466,6 @@ export default defineComponent({
       })
       : []
     const showPane = !tabChildren.length
-    const prefix = prefixSlot ? prefixSlot() : null
-    const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
@@ -451,6 +473,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-tabs`,
+          this.themeClass,
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`
@@ -467,9 +490,15 @@ export default defineComponent({
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
-          {prefix ? (
-            <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
-          ) : null}
+          {resolveWrappedSlot(
+            prefixSlot,
+            (children) =>
+              children && (
+                <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>
+                  {children}
+                </div>
+              )
+          )}
           {isSegment ? (
             <div class={`${mergedClsPrefix}-tabs-rail`}>
               {showPane
@@ -607,9 +636,15 @@ export default defineComponent({
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}
-          {suffix ? (
-            <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
-          ) : null}
+          {resolveWrappedSlot(
+            suffixSlot,
+            (children) =>
+              children && (
+                <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>
+                  {children}
+                </div>
+              )
+          )}
         </div>
         {showPane &&
           filterMapTabPanes(

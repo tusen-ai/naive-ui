@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, defineComponent, computed, CSSProperties, PropType } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { h, defineComponent, computed, PropType } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { pageHeaderLight } from '../styles/light'
 import type { PageHeaderTheme } from '../styles/light'
@@ -24,7 +24,8 @@ export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       '-page-header',
@@ -33,48 +34,50 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'PageHeader',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-
+    const rtlEnabledRef = useRtl('PageHeader', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          titleTextColor,
+          subtitleTextColor,
+          backColor,
+          fontSize,
+          titleFontSize,
+          backSize,
+          titleFontWeight,
+          backColorHover,
+          backColorPressed
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-font-size': fontSize,
+        '--n-back-size': backSize,
+        '--n-subtitle-text-color': subtitleTextColor,
+        '--n-back-color': backColor,
+        '--n-back-color-hover': backColorHover,
+        '--n-back-color-pressed': backColorPressed,
+        '--n-bezier': cubicBezierEaseInOut
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('page-header', undefined, cssVarsRef, props)
+      : undefined
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            titleTextColor,
-            subtitleTextColor,
-            backColor,
-            fontSize,
-            titleFontSize,
-            backSize,
-            titleFontWeight,
-            backColorHover,
-            backColorPressed
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-title-text-color': titleTextColor,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-font-size': fontSize,
-          '--n-back-size': backSize,
-          '--n-subtitle-text-color': subtitleTextColor,
-          '--n-back-color': backColor,
-          '--n-back-color-hover': backColorHover,
-          '--n-back-color-pressed': backColorPressed,
-          '--n-bezier': cubicBezierEaseInOut
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots } =
       this
+    this.onRender?.()
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -91,7 +94,7 @@ export default defineComponent({
     const showExtra = extra || extraSlot
     return (
       <div
-        style={cssVars as CSSProperties}
+        style={cssVars as any}
         class={[
           `${mergedClsPrefix}-page-header-wrapper`,
           this.rtlEnabled && `${mergedClsPrefix}-page-header-wrapper--rtl`

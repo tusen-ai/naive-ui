@@ -7,7 +7,7 @@ import type { UploadTheme } from '../styles'
 export interface FileInfo {
   id: string
   name: string
-  percentage: number
+  percentage?: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   url?: string | null
   file?: File | null

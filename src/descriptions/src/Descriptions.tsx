@@ -7,7 +7,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   warn,
@@ -57,7 +57,7 @@ export default defineComponent({
   name: 'Descriptions',
   props: descriptionProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
       '-descriptions',
@@ -66,56 +66,74 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { size, bordered } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          thColor,
+          thColorModal,
+          thColorPopover,
+          thTextColor,
+          thFontWeight,
+          tdTextColor,
+          tdColor,
+          tdColorModal,
+          tdColorPopover,
+          borderColor,
+          borderColorModal,
+          borderColorPopover,
+          borderRadius,
+          lineHeight,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
+            thPadding,
+          [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
+            tdPadding
+        }
+      } = themeRef.value
+      return {
+        '--n-th-padding': thPadding,
+        '--n-td-padding': tdPadding,
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-th-font-weight': thFontWeight,
+        '--n-line-height': lineHeight,
+        '--n-th-text-color': thTextColor,
+        '--n-td-text-color': tdTextColor,
+        '--n-th-color': thColor,
+        '--n-th-color-modal': thColorModal,
+        '--n-th-color-popover': thColorPopover,
+        '--n-td-color': tdColor,
+        '--n-td-color-modal': tdColorModal,
+        '--n-td-color-popover': tdColorPopover,
+        '--n-border-radius': borderRadius,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'descriptions',
+        computed(() => {
+          let hash = ''
+          const { size, bordered } = props
+          if (bordered) hash += 'a'
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const { size, bordered } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            thColor,
-            thColorModal,
-            thColorPopover,
-            thTextColor,
-            thFontWeight,
-            tdTextColor,
-            tdColor,
-            tdColorModal,
-            tdColorPopover,
-            borderColor,
-            borderColorModal,
-            borderColorPopover,
-            borderRadius,
-            lineHeight,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
-              thPadding,
-            [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
-              tdPadding
-          }
-        } = themeRef.value
-        return {
-          '--n-th-padding': thPadding,
-          '--n-td-padding': tdPadding,
-          '--n-font-size': fontSize,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-th-font-weight': thFontWeight,
-          '--n-line-height': lineHeight,
-          '--n-th-text-color': thTextColor,
-          '--n-td-text-color': tdTextColor,
-          '--n-th-color': thColor,
-          '--n-th-color-modal': thColorModal,
-          '--n-th-color-popover': thColorPopover,
-          '--n-td-color': tdColor,
-          '--n-td-color-modal': tdColorModal,
-          '--n-td-color-popover': tdColorPopover,
-          '--n-border-radius': borderRadius,
-          '--n-border-color': borderColor,
-          '--n-border-color-modal': borderColorModal,
-          '--n-border-color-popover': borderColorPopover
-        }
-      }),
-      compitableColumn: useCompitable(props, ['columns', 'column'])
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      compitableColumn: useCompitable(props, ['columns', 'column']),
+      inlineThemeDisabled
     }
   },
   render () {
@@ -131,8 +149,10 @@ export default defineComponent({
       title,
       cssVars,
       mergedClsPrefix,
-      separator
+      separator,
+      onRender
     } = this
+    onRender?.()
     const filteredChildren: VNode[] = children.filter((child) =>
       isDescriptionsItem(child)
     )
@@ -264,9 +284,10 @@ export default defineComponent({
     ))
     return (
       <div
-        style={cssVars as CSSProperties}
+        style={cssVars as any}
         class={[
           `${mergedClsPrefix}-descriptions`,
+          this.themeClass,
           `${mergedClsPrefix}-descriptions--${labelPlacement}-label-placement`,
           `${mergedClsPrefix}-descriptions--${labelAlign}-label-align`,
           `${mergedClsPrefix}-descriptions--${size}-size`,

@@ -20,6 +20,20 @@ describe('n-statistic', () => {
     expect(wrapper.find('.n-statistic-value__content').text()).toBe('test')
   })
 
+  it('should work with `tabularNums` prop', async () => {
+    const wrapper = mount(NStatistic, {
+      props: {
+        value: 10001
+      }
+    })
+
+    expect(wrapper.find('.n-statistic-value').attributes('style')).toBeFalsy()
+    await wrapper.setProps({ tabularNums: true })
+    expect(wrapper.find('.n-statistic-value').attributes('style')).toContain(
+      'font-variant-numeric: tabular-nums;'
+    )
+  })
+
   it('should work with `default` slot', async () => {
     const wrapper = mount(NStatistic, { slots: { default: () => 'test' } })
 

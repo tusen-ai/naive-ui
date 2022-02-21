@@ -7,10 +7,10 @@ When you hear somebody talk about a subtle concept, keep alert.
 ## Demos
 
 ```demo
-basic
-line-clamp
-expand-trigger
-custom-tooltip
+basic.vue
+line-clamp.vue
+expand-trigger.vue
+custom-tooltip.vue
 ```
 
 ## API

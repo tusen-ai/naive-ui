@@ -1,8 +1,34 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
+- 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
+- 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效, 关闭 [#2392](https://github.com/TuSimple/naive-ui/issues/2392)
+- 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
+- 修复 `n-table` 动态增加时 `border-color` 的样式异常，关闭 [#2403](https://github.com/TuSimple/naive-ui/issues/2403)
+- 修复 `n-tree` 的 `default-expand-all` 对于动态数据不生效
+- 修复 `n-form` 当 `model.xxx` 为 `undefined` 的时候会使用 `null` 作为验证值，关闭 [#2486](https://github.com/TuSimple/naive-ui/issues/2486)
+
+### Feats
+
+- `n-tree-select` 新增 `clear-filter-after-select` 属性
+- `n-cascader` 新增 `clear-filter-after-select` 属性
+- `n-switch` 新增 `icon` 插槽
+- `n-switch` 新增 `checked-icon` 插槽
+- `n-switch` 新增 `unchecked-icon` 插槽
+- `n-tabs` 的 CSS 变量使用 `n` 作为前缀
+- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
+- `n-data-table` 的 `summary` 属性的 value 值支持 `VNodeChild`，关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 - `n-input-number` adds hold click to increment/decrement, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
+
+### i18n
+
+- 新增 skSK locale
+- 完善 frFR locale
 
 ## 2.25.2
 

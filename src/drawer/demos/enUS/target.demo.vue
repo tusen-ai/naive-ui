@@ -51,7 +51,7 @@ You can customize display area by `to` prop. Remember to set `:trap-focus="false
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { DrawerPlacement } from 'naive-ui'
+import type { DrawerPlacement } from 'naive-ui'
 
 export default defineComponent({
   setup () {

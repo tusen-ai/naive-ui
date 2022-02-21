@@ -5,12 +5,12 @@
 ## 演示
 
 ```demo
-basic
-trigger
-event
-placement
-body-style
-arrow
+basic.vue
+trigger.vue
+event.vue
+placement.vue
+body-style.vue
+arrow.vue
 ```
 
 ## API

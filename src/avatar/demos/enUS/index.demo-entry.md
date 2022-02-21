@@ -5,15 +5,15 @@ On the Internet, nobody knows you're a dog.
 ## Demos
 
 ```demo
-size
-shape
-color
-badge
-icon
-name-size
-fallback
+size.vue
+shape.vue
+color.vue
+badge.vue
+icon.vue
+name-size.vue
+fallback.vue
 group.vue
-v-show-debug
+v-show-debug.vue
 ```
 
 ## API

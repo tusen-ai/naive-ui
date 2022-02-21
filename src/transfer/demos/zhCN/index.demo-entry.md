@@ -7,10 +7,10 @@
 ## 演示
 
 ```demo
-basic
-large-data
-size
-filterable
+basic.vue
+large-data.vue
+size.vue
+filterable.vue
 ```
 
 ## API
