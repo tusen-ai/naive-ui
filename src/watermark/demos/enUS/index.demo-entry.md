@@ -23,7 +23,7 @@ fullscreen.vue
 | font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | Font style. | NEXT_VERSION |
 | font-variant | `string` | `''` | Font variant. | NEXT_VERSION |
 | font-weight | `number` | `400` | Font weight. | NEXT_VERSION |
-| font-color | `string` | `rgba(0,0,0,.15)` | Font color. | NEXT_VERSION |
+| font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | NEXT_VERSION |
 | fullscreen | `boolean` | `false` | Whether to show fullscreen watermark. | NEXT_VERSION |
 | line-height | `number` | `14` | Line height. | NEXT_VERSION |
 | height | `number` | `32` | Height of watermark area. | NEXT_VERSION |

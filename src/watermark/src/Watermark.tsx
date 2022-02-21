@@ -85,7 +85,7 @@ const watermarkProps = {
   },
   fontColor: {
     type: String,
-    default: 'rgba(0,0,0,.15)'
+    default: 'rgba(128, 128, 128, .3)'
   },
   fontStretch: {
     type: String,

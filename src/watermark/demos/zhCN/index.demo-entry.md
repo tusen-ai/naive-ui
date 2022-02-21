@@ -23,7 +23,7 @@ fullscreen.vue
 | font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | 字体风格 | NEXT_VERSION |
 | font-variant | `string` | `''` | 字型 | NEXT_VERSION |
 | font-weight | `number` | `400` | 字重 | NEXT_VERSION |
-| font-color | `string` | `rgba(0,0,0,.15)` | 字体颜色 | NEXT_VERSION |
+| font-color | `string` | `rgba(128, 128, 128, .3)` | 字体颜色 | NEXT_VERSION |
 | fullscreen | `boolean` | `false` | 是否展示全屏 | NEXT_VERSION |
 | line-height | `number` | `14` | 行高 | NEXT_VERSION |
 | height | `number` | `32` | 高度 | NEXT_VERSION |
