@@ -366,7 +366,7 @@ export default defineComponent({
       }
       if (addHoldStateIntervalId) {
         window.clearInterval(addHoldStateIntervalId)
-        firstAddMousedownId = null
+        addHoldStateIntervalId = null
       }
     }
     function handleMinusMousedown (): void {
