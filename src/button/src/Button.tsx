@@ -83,6 +83,9 @@ const buttonProps = {
     type: Boolean,
     default: true
   },
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+  onMousedown: Function as PropType<(e: MouseEvent) => void>,
+  onMouseup: Function as PropType<(e: MouseEvent) => void>,
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   internalAutoFocus: Boolean
 } as const
@@ -160,6 +163,8 @@ const Button = defineComponent({
       if (mergedFocusableRef.value) {
         selfElRef.value?.focus({ preventScroll: true })
       }
+      const { onMousedown } = props
+      if (onMousedown) call(onMousedown, e)
     }
     const handleClick = (e: MouseEvent): void => {
       if (!props.disabled && !props.loading) {
@@ -580,8 +585,10 @@ const Button = defineComponent({
         onClick={this.handleClick}
         onBlur={this.handleBlur}
         onMousedown={this.handleMousedown}
+        onMouseup={this.onMouseup}
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
+        onMouseleave={this.onMouseleave}
       >
         {this.iconPlacement === 'right' && children}
         <NFadeInExpandTransition width>

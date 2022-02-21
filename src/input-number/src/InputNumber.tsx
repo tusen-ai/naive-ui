@@ -112,6 +112,9 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
+    let clickedTime: number
+    const minusHoldStateInterval = ref<NodeJS.Timeout | null>(null)
+    const addHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
         (item) => {
@@ -272,9 +275,20 @@ export default defineComponent({
       const { onClear } = props
       if (onClear) call(onClear, e)
     }
-    function doAdd (): void {
+    function incrementStep (): void {
+      if (addHoldStateInterval.value === null) {
+        doAdd()
+        clickedTime = Date.now()
+        addHoldStateInterval.value = setInterval(() => doAdd(Date.now()), 100)
+      }
+    }
+    function doAdd (timeClicked?: number): void {
       const { value: addable } = addableRef
-      if (!addable) return
+      if (!addable) {
+        clearAddStepInterval()
+        return
+      }
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -285,9 +299,29 @@ export default defineComponent({
         deriveValueFromDisplayedValue(mergedStep)
       }
     }
-    function doMinus (): void {
+    function clearAddStepInterval (): void {
+      if (addHoldStateInterval.value != null) {
+        clearInterval(addHoldStateInterval.value)
+        addHoldStateInterval.value = null
+      }
+    }
+    function decrementStep (): void {
+      if (minusHoldStateInterval.value === null) {
+        doMinus()
+        clickedTime = Date.now()
+        minusHoldStateInterval.value = setInterval(
+          () => doMinus(Date.now()),
+          100
+        )
+      }
+    }
+    function doMinus (timeClicked?: number): void {
       const { value: minusable } = minusableRef
-      if (!minusable) return
+      if (!minusable) {
+        clearMinusStepInterval()
+        return
+      }
+      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -296,6 +330,12 @@ export default defineComponent({
       } else {
         const { value: mergedStep } = mergedStepRef
         deriveValueFromDisplayedValue(-mergedStep)
+      }
+    }
+    function clearMinusStepInterval (): void {
+      if (minusHoldStateInterval.value != null) {
+        clearInterval(minusHoldStateInterval.value)
+        minusHoldStateInterval.value = null
       }
     }
     const handleFocus = doFocus
@@ -325,8 +365,8 @@ export default defineComponent({
       }
       inputInstRef.value?.activate()
     }
-    const handleAddClick = doAdd
-    const handleMinusClick = doMinus
+    const handleAddClick = incrementStep
+    const handleMinusClick = decrementStep
     function handleKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
@@ -392,6 +432,8 @@ export default defineComponent({
       handleMinusClick,
       handleKeyDown,
       handleUpdateDisplayedValue,
+      clearAddStepInterval,
+      clearMinusStepInterval,
       // theme
       mergedTheme: themeRef,
       inputThemeOverrides: {
@@ -457,12 +499,25 @@ export default defineComponent({
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleMinusClick}
+                      onMouseleave={this.clearMinusStepInterval}
+                      onMousedown={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.handleMinusClick
+                      }
+                      onMouseup={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.clearMinusStepInterval
+                      }
                       ref="minusButtonInstRef"
                     >
                       {{
                         default: () => (
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          <NBaseIcon
+                            clsPrefix={mergedClsPrefix}
+                            aria-disabled={true}
+                          >
                             {{
                               default: () => <RemoveIcon />
                             }}
@@ -477,7 +532,17 @@ export default defineComponent({
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleAddClick}
+                      onMouseleave={this.clearAddStepInterval}
+                      onMousedown={
+                        !this.addable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.handleAddClick
+                      }
+                      onMouseup={
+                        !this.addable || this.mergedDisabled || this.readonly
+                          ? undefined
+                          : this.clearAddStepInterval
+                      }
                       ref="addButtonInstRef"
                     >
                       {{

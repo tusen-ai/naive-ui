@@ -23,6 +23,7 @@
 - Add `n-watermark` component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
 - `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 - `n-data-table`'s `summary`'s `value` supports `VNodeChild`, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
+- `n-input-number` adds hold click to increment, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
 
 ### i18n
 
