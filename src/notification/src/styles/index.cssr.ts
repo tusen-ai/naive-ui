@@ -189,6 +189,9 @@ export default c([
         width: 28px;
         height: 28px;
         font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `, [
         cB('icon', {
           transition: 'color .3s var(--n-bezier)'
@@ -251,17 +254,15 @@ export default c([
 ])
 
 function placementTransformStyle (placement: string): CNode {
-  const [position, direction] = placement.split('-')
-  const transformYEnter = position === 'top' ? '-100%' : '100%'
-  const transformYLeave = position === 'top' ? '0' : '0'
+  const direction = placement.split('-')[1]
   const transformXEnter = direction === 'left' ? 'calc(-100%)' : 'calc(100%)'
   const transformXLeave = '0'
   return cB('notification', [
     c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
-      transform: translate(${transformXEnter}, ${transformYEnter});
+      transform: translate(${transformXEnter}, 0);
     `),
     c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
-      transform: translate(${transformXLeave}, ${transformYLeave});
+      transform: translate(${transformXLeave}, 0);
     `)
   ])
 }
