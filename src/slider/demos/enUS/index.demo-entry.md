@@ -5,17 +5,17 @@ As far as I know, it is always used as a volume control.
 ## Demos
 
 ```demo
-basic
-range
-mark
-restrict-selectable-values
-disabled
-disable-tooltip
-format
-reverse
-vertical
+basic.vue
+range.vue
+mark.vue
+restrict-selectable-values.vue
+disabled.vue
+disable-tooltip.vue
+format.vue
+reverse.vue
+vertical.vue
 show-tooltip.vue
-multiple-debug
+multiple-debug.vue
 ```
 
 ## API

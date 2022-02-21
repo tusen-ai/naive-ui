@@ -39,15 +39,15 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
-icon
-timing
-closable
+basic.vue
+icon.vue
+timing.vue
+closable.vue
 modify-content.vue
-manually-close
-about-theme
-multiple-line
-placement
+manually-close.vue
+about-theme.vue
+multiple-line.vue
+placement.vue
 customize-message.vue
 ```
 

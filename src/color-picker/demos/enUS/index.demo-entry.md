@@ -5,14 +5,14 @@ Unlike the real world, these color values are discrete.
 ## Demos
 
 ```demo
-basic
-alpha
-size
-disabled
-modes
-form
-swatches
-native
+basic.vue
+alpha.vue
+size.vue
+disabled.vue
+modes.vue
+form.vue
+swatches.vue
+native.vue
 ```
 
 ## API

@@ -309,7 +309,7 @@ export type CreateSummary<T = InternalRowData> = (
 ) => SummaryRowData | SummaryRowData[]
 
 export interface SummaryCell {
-  value?: string | number
+  value?: VNodeChild
   colSpan?: number
   rowSpan?: number
 }

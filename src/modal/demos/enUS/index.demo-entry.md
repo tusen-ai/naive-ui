@@ -5,14 +5,14 @@ It just pops and shows you something.
 ## Demos
 
 ```demo
-basic
-controlled
-mask-closable
-custom-position
-preset-card
-preset-confirm
-preset-confirm-slot
-transform-origin
+basic.vue
+controlled.vue
+mask-closable.vue
+custom-position.vue
+preset-card.vue
+preset-confirm.vue
+preset-confirm-slot.vue
+transform-origin.vue
 ```
 
 ## API

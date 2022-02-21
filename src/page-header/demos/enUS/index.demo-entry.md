@@ -7,7 +7,7 @@ I hope this component has all the slots you need!
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

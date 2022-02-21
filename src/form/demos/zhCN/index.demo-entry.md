@@ -7,18 +7,16 @@
 ## 演示
 
 ```demo
-inline
-custom-rule
-custom-validation
-top
-left
-item-only
-async
-disabled
-height-debug
-validator-debug
-show-label
-partially-apply-rules
+inline.vue
+custom-rule.vue
+custom-validation.vue
+top.vue
+left.vue
+item-only.vue
+async.vue
+disabled.vue
+show-label.vue
+partially-apply-rules.vue
 ```
 
 ## API
