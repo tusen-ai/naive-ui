@@ -12,6 +12,7 @@
 - 修复 `n-tree` 的 `default-expand-all` 对于动态数据不生效
 - 修复 `n-form` 当 `model.xxx` 为 `undefined` 的时候会使用 `null` 作为验证值，关闭 [#2486](https://github.com/TuSimple/naive-ui/issues/2486)
 - 修复 `n-input` focus 样式优先级低于 hover，关闭 [#2480](https://github.com/TuSimple/naive-ui/issues/2480)
+- 修复 `n-data-table` 在使用 keep-alive 组件中使用虚拟滚动的显示问题，关闭 [#2183](https://github.com/TuSimple/naive-ui/issues/2183)
 
 ### Feats
 

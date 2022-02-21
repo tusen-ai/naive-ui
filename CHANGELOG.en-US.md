@@ -12,6 +12,7 @@
 - Fix `n-tree`'s `default-expand-all` prop doesn't work for dynamic data.
 - Fix `n-form` when `model.xxx` is `undefined`, validator will use `null` as validation value, closes [#2486](https://github.com/TuSimple/naive-ui/issues/2486).
 - Fix `n-input` focus style's priority is lower than hover style, closes [#2480](https://github.com/TuSimple/naive-ui/issues/2480).
+- Fix `n-data-table` display issue when placed inside keep-alive component with virtual scroll, closes [#2183](https://github.com/TuSimple/naive-ui/issues/2183).
 
 ### Feats
 
