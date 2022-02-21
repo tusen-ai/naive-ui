@@ -10,6 +10,7 @@
 - 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
 - 修复 `n-table` 动态增加时 `border-color` 的样式异常，关闭 [#2403](https://github.com/TuSimple/naive-ui/issues/2403)
 - 修复 `n-tree` 的 `default-expand-all` 对于动态数据不生效
+- 修复 `n-form` 当 `model.xxx` 为 `undefined` 的时候会使用 `null` 作为验证值，关闭 [#2486](https://github.com/TuSimple/naive-ui/issues/2486)
 
 ### Feats
 
