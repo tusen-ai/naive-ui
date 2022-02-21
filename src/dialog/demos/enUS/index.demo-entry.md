@@ -70,6 +70,7 @@ action.vue
 | negativeText | `string` | `undefined` | Corresponding button won't show if not set. |
 | positiveText | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` | Whether to show `icon`. |
+| style | `string \| Object` | Style of the dialog. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |
