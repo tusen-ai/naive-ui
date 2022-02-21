@@ -99,9 +99,7 @@ describe('n-input-number', () => {
 
     let arr = [0.1, 0]
     for (let i = 0; i < arr.length; i++) {
-      await minusBtn.trigger('mousedown')
-      await new Promise((resolve) => setTimeout(resolve, 50))
-      await minusBtn.trigger('mouseup')
+      await minusBtn.trigger('click')
       expect((input.element as HTMLInputElement).value).toEqual(
         arr[i].toString()
       )
@@ -111,9 +109,7 @@ describe('n-input-number', () => {
     await wrapper.setProps({ max: 0.6 })
     arr = [0.2, 0.4, 0.6]
     for (let i = 0; i < arr.length; i++) {
-      await addBtn.trigger('mousedown')
-      await new Promise((resolve) => setTimeout(resolve, 50))
-      await addBtn.trigger('mouseup')
+      await addBtn.trigger('click')
       expect((input.element as HTMLInputElement).value).toEqual(
         arr[i].toString()
       )
@@ -139,18 +135,21 @@ describe('n-input-number', () => {
     expect(wrapper.find('input').element.value).toEqual('0.3333')
     const addBtn = wrapper.findAll('.n-input__suffix > button')[1]
     await addBtn.trigger('mousedown')
-    await new Promise((resolve) => setTimeout(resolve, 50))
     await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('0.3333')
+    await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('2.3333')
     await wrapper.setProps({ step: 2.333333 })
     await addBtn.trigger('mousedown')
-    await new Promise((resolve) => setTimeout(resolve, 50))
     await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('2.3333')
+    await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('4.666633')
     await wrapper.setProps({ step: 2.33 })
     await addBtn.trigger('mousedown')
-    await new Promise((resolve) => setTimeout(resolve, 50))
     await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('4.666633')
+    await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('6.996633')
     wrapper.unmount()
   })
