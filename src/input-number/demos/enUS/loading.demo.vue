@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-space>
+  <n-space align="center">
     <n-input-number clearable :loading="loading" />
     <n-switch v-model:value="loading" />
   </n-space>

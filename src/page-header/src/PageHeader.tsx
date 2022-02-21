@@ -97,6 +97,7 @@ export default defineComponent({
         style={cssVars as any}
         class={[
           `${mergedClsPrefix}-page-header-wrapper`,
+          this.themeClass,
           this.rtlEnabled && `${mergedClsPrefix}-page-header-wrapper--rtl`
         ]}
       >

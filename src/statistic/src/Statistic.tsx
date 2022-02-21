@@ -75,7 +75,10 @@ export default defineComponent({
     } = this
     this.onRender?.()
     return (
-      <div class={`${mergedClsPrefix}-statistic`} style={this.cssVars as any}>
+      <div
+        class={[`${mergedClsPrefix}-statistic`, this.themeClass]}
+        style={this.cssVars as any}
+      >
         {resolveWrappedSlot(labelSlot, (children) => (
           <div class={`${mergedClsPrefix}-statistic__label`}>
             {this.label || children}
