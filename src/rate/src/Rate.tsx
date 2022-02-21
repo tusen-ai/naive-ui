@@ -125,7 +125,7 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'card',
+        'rate',
         computed(() => {
           const size = mergedSizeRef.value
           const { color } = props
