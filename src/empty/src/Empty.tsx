@@ -1,15 +1,7 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  CSSProperties,
-  inject,
-  VNodeChild
-} from 'vue'
+import { h, defineComponent, computed, PropType, inject, VNodeChild } from 'vue'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { EmptyIcon } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -42,7 +34,7 @@ export default defineComponent({
   name: 'Empty',
   props: emptyProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Empty',
       '-empty',
@@ -64,41 +56,58 @@ export default defineComponent({
         NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon ||
         (() => <EmptyIcon />)
     )
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          [createKey('iconSize', size)]: iconSize,
+          [createKey('fontSize', size)]: fontSize,
+          textColor,
+          iconColor,
+          extraTextColor
+        }
+      } = themeRef.value
+      return {
+        '--n-icon-size': iconSize,
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-icon-color': iconColor,
+        '--n-extra-text-color': extraTextColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'empty',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderIcon: mergedRenderIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            [createKey('iconSize', size)]: iconSize,
-            [createKey('fontSize', size)]: fontSize,
-            textColor,
-            iconColor,
-            extraTextColor
-          }
-        } = themeRef.value
-        return {
-          '--n-icon-size': iconSize,
-          '--n-font-size': fontSize,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-text-color': textColor,
-          '--n-icon-color': iconColor,
-          '--n-extra-text-color': extraTextColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-empty`}
-        style={this.cssVars as CSSProperties}
+        class={[`${mergedClsPrefix}-empty`, this.themeClass]}
+        style={this.cssVars as any}
       >
         {this.showIcon ? (
           <div class={`${mergedClsPrefix}-empty__icon`}>
