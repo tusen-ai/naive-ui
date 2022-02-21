@@ -1,20 +1,37 @@
-import { h, defineComponent, ref, toRef, watch, computed, PropType } from 'vue'
+import {
+  h,
+  defineComponent,
+  ref,
+  toRef,
+  watch,
+  computed,
+  PropType,
+  watchEffect
+} from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
+import { on } from 'evtd'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { NButton } from '../../button'
+import { NxButton } from '../../button'
 import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { warn, call } from '../../_utils'
+import {
+  MaybeArray,
+  ExtractPublicPropTypes,
+  warnOnce,
+  call
+} from '../../_utils'
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
+
+const HOLDING_CHANGE_THRESHOLD = 800
+const HOLDING_CHANGE_INTERVAL = 100
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
@@ -67,19 +84,7 @@ const inputNumberProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'input-number',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 }
 
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
@@ -88,6 +93,16 @@ export default defineComponent({
   name: 'InputNumber',
   props: inputNumberProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'input-number',
+            '`on-change` is deprecated, please use `on-update:value` instead'
+          )
+        }
+      })
+    }
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
@@ -112,9 +127,6 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
-    let clickedTime: number
-    const minusHoldStateInterval = ref<NodeJS.Timeout | null>(null)
-    const addHoldStateInterval = ref<NodeJS.Timeout | null>(null)
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
         (item) => {
@@ -275,20 +287,12 @@ export default defineComponent({
       const { onClear } = props
       if (onClear) call(onClear, e)
     }
-    function incrementStep (): void {
-      if (addHoldStateInterval.value === null) {
-        doAdd()
-        clickedTime = Date.now()
-        addHoldStateInterval.value = setInterval(() => doAdd(Date.now()), 100)
-      }
-    }
-    function doAdd (timeClicked?: number): void {
+    function doAdd (): void {
       const { value: addable } = addableRef
       if (!addable) {
-        clearAddStepInterval()
+        clearAddHoldTimeout()
         return
       }
-      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -299,29 +303,12 @@ export default defineComponent({
         deriveValueFromDisplayedValue(mergedStep)
       }
     }
-    function clearAddStepInterval (): void {
-      if (addHoldStateInterval.value != null) {
-        clearInterval(addHoldStateInterval.value)
-        addHoldStateInterval.value = null
-      }
-    }
-    function decrementStep (): void {
-      if (minusHoldStateInterval.value === null) {
-        doMinus()
-        clickedTime = Date.now()
-        minusHoldStateInterval.value = setInterval(
-          () => doMinus(Date.now()),
-          100
-        )
-      }
-    }
-    function doMinus (timeClicked?: number): void {
+    function doMinus (): void {
       const { value: minusable } = minusableRef
       if (!minusable) {
-        clearMinusStepInterval()
+        clearMinusHoldTimeout()
         return
       }
-      if (timeClicked && timeClicked - clickedTime < 1000) return
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -330,12 +317,6 @@ export default defineComponent({
       } else {
         const { value: mergedStep } = mergedStepRef
         deriveValueFromDisplayedValue(-mergedStep)
-      }
-    }
-    function clearMinusStepInterval (): void {
-      if (minusHoldStateInterval.value != null) {
-        clearInterval(minusHoldStateInterval.value)
-        minusHoldStateInterval.value = null
       }
     }
     const handleFocus = doFocus
@@ -365,8 +346,58 @@ export default defineComponent({
       }
       inputInstRef.value?.activate()
     }
-    const handleAddClick = incrementStep
-    const handleMinusClick = decrementStep
+    let minusHoldStateIntervalId: number | null = null
+    let addHoldStateIntervalId: number | null = null
+    let firstMinusMousedownId: number | null = null
+    function clearMinusHoldTimeout (): void {
+      if (firstMinusMousedownId) {
+        window.clearTimeout(firstMinusMousedownId)
+        firstMinusMousedownId = null
+      }
+      if (minusHoldStateIntervalId) {
+        window.clearInterval(minusHoldStateIntervalId)
+        minusHoldStateIntervalId = null
+      }
+    }
+    function clearAddHoldTimeout (): void {
+      if (firstAddMousedownId) {
+        window.clearTimeout(firstAddMousedownId)
+        firstAddMousedownId = null
+      }
+      if (addHoldStateIntervalId) {
+        window.clearInterval(addHoldStateIntervalId)
+        firstAddMousedownId = null
+      }
+    }
+    function handleMinusMousedown (): void {
+      firstMinusMousedownId = window.setTimeout(() => {
+        minusHoldStateIntervalId = window.setInterval(() => {
+          doMinus()
+        }, HOLDING_CHANGE_INTERVAL)
+      }, HOLDING_CHANGE_THRESHOLD)
+      on('mouseup', document, () => {
+        window.setTimeout(clearMinusHoldTimeout, 0)
+      })
+    }
+    let firstAddMousedownId: number | null = null
+    function handleAddMousedown (): void {
+      firstAddMousedownId = window.setTimeout(() => {
+        addHoldStateIntervalId = window.setInterval(() => {
+          doAdd()
+        }, HOLDING_CHANGE_INTERVAL)
+      }, HOLDING_CHANGE_THRESHOLD)
+      on('mouseup', document, () => {
+        window.setTimeout(clearAddHoldTimeout, 0)
+      })
+    }
+    const handleAddClick = (): void => {
+      if (addHoldStateIntervalId) return
+      doAdd()
+    }
+    const handleMinusClick = (): void => {
+      if (minusHoldStateIntervalId) return
+      doMinus()
+    }
     function handleKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
@@ -430,10 +461,10 @@ export default defineComponent({
       handleMouseDown,
       handleAddClick,
       handleMinusClick,
+      handleAddMousedown,
+      handleMinusMousedown,
       handleKeyDown,
       handleUpdateDisplayedValue,
-      clearAddStepInterval,
-      clearMinusStepInterval,
       // theme
       mergedTheme: themeRef,
       inputThemeOverrides: {
@@ -492,24 +523,15 @@ export default defineComponent({
                         {{ default: this.$slots.suffix }}
                       </span>
                     ),
-                    <NButton
+                    <NxButton
                       text
                       disabled={
                         !this.minusable || this.mergedDisabled || this.readonly
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
-                      onMouseleave={this.clearMinusStepInterval}
-                      onMousedown={
-                        !this.minusable || this.mergedDisabled || this.readonly
-                          ? undefined
-                          : this.handleMinusClick
-                      }
-                      onMouseup={
-                        !this.minusable || this.mergedDisabled || this.readonly
-                          ? undefined
-                          : this.clearMinusStepInterval
-                      }
+                      onClick={this.handleMinusClick}
+                      onMousedown={this.handleMinusMousedown}
                       ref="minusButtonInstRef"
                     >
                       {{
@@ -524,25 +546,16 @@ export default defineComponent({
                           </NBaseIcon>
                         )
                       }}
-                    </NButton>,
-                    <NButton
+                    </NxButton>,
+                    <NxButton
                       text
                       disabled={
                         !this.addable || this.mergedDisabled || this.readonly
                       }
                       focusable={false}
                       builtinThemeOverrides={this.buttonThemeOverrides}
-                      onMouseleave={this.clearAddStepInterval}
-                      onMousedown={
-                        !this.addable || this.mergedDisabled || this.readonly
-                          ? undefined
-                          : this.handleAddClick
-                      }
-                      onMouseup={
-                        !this.addable || this.mergedDisabled || this.readonly
-                          ? undefined
-                          : this.clearAddStepInterval
-                      }
+                      onClick={this.handleAddClick}
+                      onMousedown={this.handleAddMousedown}
                       ref="addButtonInstRef"
                     >
                       {{
@@ -554,7 +567,7 @@ export default defineComponent({
                           </NBaseIcon>
                         )
                       }}
-                    </NButton>
+                    </NxButton>
                   ]
                 : this.$slots.suffix?.()
           }}

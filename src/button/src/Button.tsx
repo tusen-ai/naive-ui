@@ -8,7 +8,8 @@ import {
   PropType,
   CSSProperties,
   ButtonHTMLAttributes,
-  watchEffect
+  watchEffect,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -83,9 +84,6 @@ const buttonProps = {
     type: Boolean,
     default: true
   },
-  onMouseleave: Function as PropType<(e: MouseEvent) => void>,
-  onMousedown: Function as PropType<(e: MouseEvent) => void>,
-  onMouseup: Function as PropType<(e: MouseEvent) => void>,
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   internalAutoFocus: Boolean
 } as const
@@ -163,8 +161,6 @@ const Button = defineComponent({
       if (mergedFocusableRef.value) {
         selfElRef.value?.focus({ preventScroll: true })
       }
-      const { onMousedown } = props
-      if (onMousedown) call(onMousedown, e)
     }
     const handleClick = (e: MouseEvent): void => {
       if (!props.disabled && !props.loading) {
@@ -585,10 +581,8 @@ const Button = defineComponent({
         onClick={this.handleClick}
         onBlur={this.handleBlur}
         onMousedown={this.handleMousedown}
-        onMouseup={this.onMouseup}
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
-        onMouseleave={this.onMouseleave}
       >
         {this.iconPlacement === 'right' && children}
         <NFadeInExpandTransition width>
@@ -653,8 +647,9 @@ const Button = defineComponent({
   }
 })
 
-type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof ButtonProps>
-type MergedProps = Partial<ButtonProps & NativeButtonProps>
+type InternalButtonProps = ExtractPropTypes<typeof buttonProps>
+type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof InternalButtonProps>
+type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 
 export default Button
 
