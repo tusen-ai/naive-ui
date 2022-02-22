@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.25.3
+## 2.25.3 (2022-02-23)
 
 ### Fixes
 
@@ -34,7 +34,7 @@
 - Add skSK locale.
 - Fix frFR locale.
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 
