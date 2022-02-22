@@ -10,6 +10,10 @@
 - Fix `n-data-table` cannot click selection checkbox if the selection column is a column's child.
 - Fix `n-table`'s `border-color` abnormal style when this added dynamically, closes [#2403](https://github.com/TuSimple/naive-ui/issues/2403).
 - Fix `n-tree`'s `default-expand-all` prop doesn't work for dynamic data.
+- Fix `n-form` when `model.xxx` is `undefined`, validator will use `null` as validation value, closes [#2486](https://github.com/TuSimple/naive-ui/issues/2486).
+- Fix `n-input` focus style's priority is lower than hover style, closes [#2480](https://github.com/TuSimple/naive-ui/issues/2480).
+- Fix `n-data-table` display issue when placed inside keep-alive component with virtual scroll, closes [#2183](https://github.com/TuSimple/naive-ui/issues/2183).
+- Fix `notification` enter & leave animation.
 
 ### Feats
 
@@ -22,6 +26,7 @@
 - Add `n-watermark` component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
 - `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 - `n-data-table`'s `summary`'s `value` supports `VNodeChild`, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
+- `n-input-number` adds hold click to increment, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
 
 ### i18n
 

@@ -25,6 +25,7 @@ const watermarkProps = {
   ...(useTheme.props as ThemeProps<WatermarkTheme>),
   debug: Boolean,
   cross: Boolean,
+  fullscreen: Boolean,
   width: {
     type: Number,
     default: 32
@@ -84,7 +85,7 @@ const watermarkProps = {
   },
   fontColor: {
     type: String,
-    default: 'rgba(0,0,0,.15)'
+    default: 'rgba(128, 128, 128, .3)'
   },
   fontStretch: {
     type: String,
@@ -184,17 +185,14 @@ export default defineComponent({
         warnOnce('watermark', 'Canvas is not supported in the browser.')
       }
     })
-    return () => (
-      <div
-        class={[
-          `${mergedClsPrefixRef.value}-watermark-container`,
-          props.selectable &&
-            `${mergedClsPrefixRef.value}-watermark-container--selectable`
-        ]}
-      >
-        {slots.default?.()}
+    return () => {
+      const watarmarkNode = (
         <div
-          class={`${mergedClsPrefixRef.value}-watermark`}
+          class={[
+            `${mergedClsPrefixRef.value}-watermark`,
+            props.fullscreen &&
+              `${mergedClsPrefixRef.value}-watermark--fullscreen`
+          ]}
           style={{
             zIndex: props.zIndex,
             backgroundSize: `${props.xGap + props.width}px`,
@@ -206,7 +204,20 @@ export default defineComponent({
               : `url(${base64UrlRef.value})`
           }}
         />
-      </div>
-    )
+      )
+      if (props.fullscreen) return watarmarkNode
+      return (
+        <div
+          class={[
+            `${mergedClsPrefixRef.value}-watermark-container`,
+            props.selectable &&
+              `${mergedClsPrefixRef.value}-watermark-container--selectable`
+          ]}
+        >
+          {slots.default?.()}
+          {watarmarkNode}
+        </div>
+      )
+    }
   }
 })

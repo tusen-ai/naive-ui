@@ -255,14 +255,14 @@ export default cB('input', `
         color: var(--n-icon-color-pressed);
       `)
     ]),
+    c('&:hover', [
+      cE('state-border', 'border: var(--n-border-hover);')
+    ]),
     cM('focus', 'background-color: var(--n-color-focus);', [
       cE('state-border', `
         border: var(--n-border-focus);
         box-shadow: var(--n-box-shadow-focus);
       `)
-    ]),
-    c('&:hover', [
-      cE('state-border', 'border: var(--n-border-hover);')
     ])
   ]),
   cE('border, state-border', `
