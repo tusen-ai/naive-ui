@@ -19,6 +19,7 @@ import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_util
 // --n-border-color
 // --n-border-color-modal
 // --n-border-color-popover
+// --n-title-text-color
 export default c([
   cB('descriptions', {
     fontSize: 'var(--n-font-size)'
@@ -115,7 +116,7 @@ export default c([
       transition: color .3s var(--n-bezier);
       line-height: var(--n-line-height);
       margin-bottom: 16px;
-      color: var(--n-th-text-color);
+      color: var(--n-title-text-color);
     `),
     cB('descriptions-table-wrapper', `
       transition:

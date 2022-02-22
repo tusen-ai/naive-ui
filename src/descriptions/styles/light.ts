@@ -6,8 +6,8 @@ import { Theme } from '../../_mixins/use-theme'
 export const self = (vars: ThemeCommonVars) => {
   const {
     tableHeaderColor,
-    textColor1,
     textColor2,
+    textColor1,
     cardColor,
     modalColor,
     popoverColor,
@@ -25,6 +25,7 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
+    titleTextColor: textColor1,
     thColor: composite(cardColor, tableHeaderColor),
     thColorModal: composite(modalColor, tableHeaderColor),
     thColorPopover: composite(popoverColor, tableHeaderColor),

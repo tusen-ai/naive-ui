@@ -71,6 +71,7 @@ export default defineComponent({
       const {
         common: { cubicBezierEaseInOut },
         self: {
+          titleTextColor,
           thColor,
           thColorModal,
           thColorPopover,
@@ -93,6 +94,7 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
+        '--n-title-text-color': titleTextColor,
         '--n-th-padding': thPadding,
         '--n-td-padding': tdPadding,
         '--n-font-size': fontSize,

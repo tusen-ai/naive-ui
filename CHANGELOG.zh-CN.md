@@ -27,6 +27,7 @@
 - `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
 - `n-data-table` 的 `summary` 属性的 value 值支持 `VNodeChild`，关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 - `n-input-number` 可以使用长按来改变值，关闭 [#1293](https://github.com/TuSimple/naive-ui/issues/1293)
+- `n-description` 新增 `titleTextColor` 主题变量
 
 ### i18n
 
