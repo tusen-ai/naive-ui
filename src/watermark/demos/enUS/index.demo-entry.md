@@ -28,6 +28,9 @@ fullscreen.vue
 | line-height | `number` | `14` | Line height. | NEXT_VERSION |
 | height | `number` | `32` | Height of watermark area. | NEXT_VERSION |
 | image | `string` | `undefined` | The URI of watermark image. | NEXT_VERSION |
+| image-height | `number` | `undefined` | Image height. | NEXT_VERSION |
+| image-opacity | `number` | `1` | Image opacity. | NEXT_VERSION |
+| image-width | `number` | `undefined` | Image width. | NEXT_VERSION |
 | rotate | `number` | `0` | Rotate degree | NEXT_VERSION |
 | selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | NEXT_VERSION |
 | width | `number` | `32` | Width of watermark area. | NEXT_VERSION |

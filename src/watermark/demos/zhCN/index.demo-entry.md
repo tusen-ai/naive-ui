@@ -7,6 +7,7 @@
 ```demo
 basic.vue
 fullscreen.vue
+image.vue
 ```
 
 ## API
@@ -28,6 +29,9 @@ fullscreen.vue
 | line-height | `number` | `14` | 行高 | NEXT_VERSION |
 | height | `number` | `32` | 高度 | NEXT_VERSION |
 | image | `string` | `undefined` | 图片路径 | NEXT_VERSION |
+| image-height | `number` | `undefined` | 图片高度 | NEXT_VERSION |
+| image-opacity | `number` | `1` | 图片不透明度 | NEXT_VERSION |
+| image-width | `number` | `undefined` | 图片宽度 | NEXT_VERSION |
 | rotate | `number` | `0` | 旋转角度 | NEXT_VERSION |
 | selectable | `boolean` | `true` | 被水印覆盖的内容是否可选中 | NEXT_VERSION |
 | width | `number` | `32` | 宽度 | NEXT_VERSION |
