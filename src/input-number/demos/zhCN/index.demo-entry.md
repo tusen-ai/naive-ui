@@ -5,19 +5,19 @@
 ## 演示
 
 ```demo
-basic
-disabled
-event
-icon
-loading
-min-max
-size
-step
-validator
-show-button
-disable-keyboard
-change-timing
-debug
+basic.vue
+disabled.vue
+event.vue
+icon.vue
+loading.vue
+min-max.vue
+size.vue
+step.vue
+validator.vue
+show-button.vue
+disable-keyboard.vue
+change-timing.vue
+debug.vue
 ```
 
 ## API

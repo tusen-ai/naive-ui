@@ -10,7 +10,6 @@ import {
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 const countdownProps = {
-  label: String,
   duration: {
     type: Number,
     default: 0

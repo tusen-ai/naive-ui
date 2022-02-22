@@ -7,8 +7,8 @@
 ## 演示
 
 ```demo
-basic
-rtl-debug
+basic.vue
+rtl-debug.vue
 ```
 
 ## API

@@ -8,7 +8,8 @@ import {
   PropType,
   CSSProperties,
   ButtonHTMLAttributes,
-  watchEffect
+  watchEffect,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -646,8 +647,9 @@ const Button = defineComponent({
   }
 })
 
-type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof ButtonProps>
-type MergedProps = Partial<ButtonProps & NativeButtonProps>
+type InternalButtonProps = ExtractPropTypes<typeof buttonProps>
+type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof InternalButtonProps>
+type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 
 export default Button
 

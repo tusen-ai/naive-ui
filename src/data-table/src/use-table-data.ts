@@ -32,14 +32,20 @@ export function useTableData (
   }
 ) {
   const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
-    return (
-      (props.columns.find((col) => {
-        if (col.type === 'selection') {
-          return true
+    const getSelectionColumn = (
+      cols: typeof props.columns
+    ): TableSelectionColumn | null => {
+      for (let i = 0; i < cols.length; ++i) {
+        const col = cols[i]
+        if ('children' in col) {
+          return getSelectionColumn(col.children)
+        } else if (col.type === 'selection') {
+          return col
         }
-        return false
-      }) as TableSelectionColumn | undefined) || null
-    )
+      }
+      return null
+    }
+    return getSelectionColumn(props.columns)
   })
 
   const treeMateRef = computed(() => {
@@ -84,8 +90,11 @@ export function useTableData (
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
       if (column.type === 'selection' || column.type === 'expand') return
-      controlledFilterState[column.key] =
-        column.filterOptionValues || column.filterOptionValue || null
+      if (column.filterOptionValues === undefined) {
+        controlledFilterState[column.key] = column.filterOptionValue ?? null
+      } else {
+        controlledFilterState[column.key] = column.filterOptionValues
+      }
     })
     const activeFilters = Object.assign(
       createShallowClonedObject(uncontrolledFilterStateRef.value),

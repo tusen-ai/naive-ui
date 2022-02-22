@@ -151,6 +151,47 @@ describe('n-tree', () => {
     expect(test2Child).toBeDefined()
   })
 
+  it('should work with `default-expand-all`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        defaultExpandAll: true
+      }
+    })
+    await wrapper.setProps({
+      data: [
+        {
+          label: 'test1',
+          key: '1',
+          children: [
+            {
+              label: 'test1-1',
+              key: '1-1'
+            }
+          ]
+        },
+        {
+          label: 'test2',
+          key: '2',
+          children: [
+            {
+              label: 'test2-1',
+              key: '2-1'
+            }
+          ]
+        }
+      ]
+    })
+    const test1Child = wrapper
+      .findAll('.n-tree-node')
+      .find((el) => el.text() === 'test1-1')
+    const test2Child = wrapper
+      .findAll('.n-tree-node')
+      .find((el) => el.text() === 'test2-1')
+
+    expect(test1Child).toBeDefined()
+    expect(test2Child).toBeDefined()
+  })
+
   it('should work with `checkable` and `defaultCheckedKeys`', () => {
     const wrapper = mount(NTree, {
       props: {

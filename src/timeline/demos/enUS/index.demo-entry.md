@@ -5,11 +5,11 @@ The world is 2 demensioned. One of them is time. The Other is event.
 ## Demos
 
 ```demo
-basic
-size
-item-placement
-horizontal
-customize-icon
+basic.vue
+size.vue
+item-placement.vue
+horizontal.vue
+customize-icon.vue
 ```
 
 ## API

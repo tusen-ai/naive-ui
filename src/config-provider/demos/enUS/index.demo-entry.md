@@ -7,12 +7,12 @@ For more info about theming, see [Customizing Theme](../docs/customize-theme).
 ## Demos
 
 ```demo
-theme
-namespace
-inherit-theme
-os-theme
-language
-transparent
+theme.vue
+namespace.vue
+inherit-theme.vue
+os-theme.vue
+language.vue
+transparent.vue
 ```
 
 ## API

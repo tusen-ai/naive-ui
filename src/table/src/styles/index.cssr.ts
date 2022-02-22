@@ -81,7 +81,7 @@ export default c([
       c('tr', [
         c('&:last-child', [
           c('td', `
-            border-bottom: none;
+            border-bottom: 0 solid var(--n-merged-border-color);
           `)
         ])
       ])

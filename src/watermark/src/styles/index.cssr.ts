@@ -1,8 +1,11 @@
-import { cB, cNotM } from '../../../_utils/cssr'
+import { c, cB, cNotM, cM } from '../../../_utils/cssr'
 
-export default cB('watermark-container', `
-  position: relative;
-`, [
+export default c([
+  cB('watermark-container', `
+    position: relative;
+  `, [
+    cNotM('selectable', 'user-select: none;')
+  ]),
   cB('watermark', `
     position: absolute;
     top: 0;
@@ -11,6 +14,9 @@ export default cB('watermark-container', `
     height: 100%;
     pointer-events: none;
     background-repeat: repeat;
-  `),
-  cNotM('selectable', 'user-select: none;')
+  `, [
+    cM('fullscreen', `
+      position: fixed;
+    `)
+  ])
 ])

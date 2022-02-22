@@ -7,8 +7,8 @@ It is hard to make it looks elegant. However things should be done.
 ## Demos
 
 ```demo
-basic
-border
+basic.vue
+border.vue
 ```
 
 ## API

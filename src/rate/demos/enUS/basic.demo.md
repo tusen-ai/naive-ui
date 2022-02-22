@@ -1,5 +1,0 @@
-# Basic
-
-```html
-<n-rate />
-```
