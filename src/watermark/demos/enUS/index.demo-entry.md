@@ -15,33 +15,33 @@ fullscreen.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content | `string` | `undefined` | Content of watermark. | NEXT_VERSION |
-| cross | `boolean` | `false` | Whether to show watermark at cross position. | NEXT_VERSION |
-| debug | `boolean` | `false` | Whether to show debug grid. | NEXT_VERSION |
-| font-size | `number` | `14` | Font size. | NEXT_VERSION |
-| font-family | `string` | `undefined` | Font family. | NEXT_VERSION |
-| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | Font style. | NEXT_VERSION |
-| font-variant | `string` | `''` | Font variant. | NEXT_VERSION |
-| font-weight | `number` | `400` | Font weight. | NEXT_VERSION |
-| font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | NEXT_VERSION |
-| fullscreen | `boolean` | `false` | Whether to show fullscreen watermark. | NEXT_VERSION |
-| line-height | `number` | `14` | Line height. | NEXT_VERSION |
-| height | `number` | `32` | Height of watermark area. | NEXT_VERSION |
-| image | `string` | `undefined` | The URI of watermark image. | NEXT_VERSION |
-| image-height | `number` | `undefined` | Image height. | NEXT_VERSION |
-| image-opacity | `number` | `1` | Image opacity. | NEXT_VERSION |
-| image-width | `number` | `undefined` | Image width. | NEXT_VERSION |
-| rotate | `number` | `0` | Rotate degree | NEXT_VERSION |
-| selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | NEXT_VERSION |
-| width | `number` | `32` | Width of watermark area. | NEXT_VERSION |
-| x-gap | `number` | `0` | Horizontal gap. | NEXT_VERSION |
-| x-offset | `number` | `0` | Horizontal offset. | NEXT_VERSION |
-| y-gap | `number` | `0` | Vertical gap. | NEXT_VERSION |
-| y-offset | `number` | `0` | Vertical offset. | NEXT_VERSION |
-| z-index | `number` | `10` | Z index of watermark. | NEXT_VERSION |
+| content | `string` | `undefined` | Content of watermark. | 2.25.3 |
+| cross | `boolean` | `false` | Whether to show watermark at cross position. | 2.25.3 |
+| debug | `boolean` | `false` | Whether to show debug grid. | 2.25.3 |
+| font-size | `number` | `14` | Font size. | 2.25.3 |
+| font-family | `string` | `undefined` | Font family. | 2.25.3 |
+| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | Font style. | 2.25.3 |
+| font-variant | `string` | `''` | Font variant. | 2.25.3 |
+| font-weight | `number` | `400` | Font weight. | 2.25.3 |
+| font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | 2.25.3 |
+| fullscreen | `boolean` | `false` | Whether to show fullscreen watermark. | 2.25.3 |
+| line-height | `number` | `14` | Line height. | 2.25.3 |
+| height | `number` | `32` | Height of watermark area. | 2.25.3 |
+| image | `string` | `undefined` | The URI of watermark image. | 2.25.3 |
+| image-height | `number` | `undefined` | Image height. | 2.25.3 |
+| image-opacity | `number` | `1` | Image opacity. | 2.25.3 |
+| image-width | `number` | `undefined` | Image width. | 2.25.3 |
+| rotate | `number` | `0` | Rotate degree | 2.25.3 |
+| selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | 2.25.3 |
+| width | `number` | `32` | Width of watermark area. | 2.25.3 |
+| x-gap | `number` | `0` | Horizontal gap. | 2.25.3 |
+| x-offset | `number` | `0` | Horizontal offset. | 2.25.3 |
+| y-gap | `number` | `0` | Vertical gap. | 2.25.3 |
+| y-offset | `number` | `0` | Vertical offset. | 2.25.3 |
+| z-index | `number` | `10` | Z index of watermark. | 2.25.3 |
 
 ### Watermark Slots
 
-| Name    | Parameters | Description              | Version      |
-| ------- | ---------- | ------------------------ | ------------ |
-| default | `()`       | something with watermark | NEXT_VERSION |
+| Name    | Parameters | Description              | Version |
+| ------- | ---------- | ------------------------ | ------- |
+| default | `()`       | something with watermark | 2.25.3  |
