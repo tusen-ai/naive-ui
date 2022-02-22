@@ -20,11 +20,7 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
-import {
-  useThemeClass,
-  useTheme,
-  emptyThemeClassHandle
-} from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
@@ -101,7 +97,7 @@ export default defineComponent({
     onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
     renderLabel: Function as PropType<RenderLabel>,
     status: String as PropType<FormValidationStatus>,
-    disableInlineTheme: Boolean
+    inlineThemeDisabled: Boolean
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -355,7 +351,7 @@ export default defineComponent({
           props.disabled || patternInputFocusedRef.value ? -1 : 0
       })
     })
-    const { disableInlineTheme } = props
+    const { inlineThemeDisabled } = props
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
@@ -463,7 +459,7 @@ export default defineComponent({
         '--n-arrow-size': arrowSize
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'internal-selection',
         computed(() => {
@@ -472,7 +468,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
@@ -517,8 +513,9 @@ export default defineComponent({
       getCounter,
       getTail,
       renderLabel: props.renderLabel as RenderLabelImpl,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      ...themeClassHandle
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {

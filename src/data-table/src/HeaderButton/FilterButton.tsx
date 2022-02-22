@@ -37,7 +37,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { NConfigProvider } = useConfig()
+    const { mergedComponentPropsRef } = useConfig()
     const {
       mergedThemeRef,
       mergedClsPrefixRef,
@@ -69,8 +69,8 @@ export default defineComponent({
     })
     const mergedRenderFilterRef = computed(() => {
       return (
-        NConfigProvider?.mergedComponentPropsRef.value?.DataTable
-          ?.renderFilter || props.column.renderFilter
+        mergedComponentPropsRef?.value?.DataTable?.renderFilter ||
+        props.column.renderFilter
       )
     })
     function handleFilterChange (

@@ -1,10 +1,5 @@
 import { h, computed, defineComponent, PropType, CSSProperties } from 'vue'
-import {
-  useConfig,
-  useTheme,
-  useThemeClass,
-  emptyThemeClassHandle
-} from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
@@ -89,8 +84,7 @@ export default defineComponent({
       }
       return undefined
     })
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
       '-progress',
@@ -136,20 +130,21 @@ export default defineComponent({
         '--n-text-color-line-outer': textColorLineOuter
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'progress',
         computed(() => props.status[0]),
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      ...themeClassHandle
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {

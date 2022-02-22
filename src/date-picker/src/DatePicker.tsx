@@ -147,7 +147,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
-      NConfigProvider,
+      mergedComponentPropsRef,
       mergedClsPrefixRef,
       mergedBorderedRef,
       namespaceRef
@@ -250,8 +250,7 @@ export default defineComponent({
     )
     const timePickerSizeRef = computed<TimePickerSize>(() => {
       return (
-        NConfigProvider?.mergedComponentPropsRef.value?.DatePicker
-          ?.timePickerSize || 'small'
+        mergedComponentPropsRef?.value?.DatePicker?.timePickerSize || 'small'
       )
     })
     const isRangeRef = computed(() => {

@@ -48,7 +48,7 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
-  disableInlineTheme: {
+  inlineThemeDisabled: {
     type: Boolean,
     default: undefined
   },
@@ -144,8 +144,8 @@ export default defineComponent({
     const mergedBreakpointsRef = computed(() => {
       return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
     })
-    const disableInlineTheme =
-      props.disableInlineTheme || NConfigProvider?.disableInlineTheme
+    const inlineThemeDisabled =
+      props.inlineThemeDisabled || NConfigProvider?.inlineThemeDisabled
 
     const mergedThemeHashRef = computed(() => {
       const { value: theme } = mergedThemeRef
@@ -196,7 +196,7 @@ export default defineComponent({
       }),
       mergedThemeRef,
       mergedThemeOverridesRef,
-      disableInlineTheme: disableInlineTheme || false
+      inlineThemeDisabled: inlineThemeDisabled || false
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

@@ -7,10 +7,10 @@ Tell you where you are.
 ## Demos
 
 ```demo
-basic
-ignore-gap
-affix
-scrollto
+basic.vue
+ignore-gap.vue
+affix.vue
+scrollto.vue
 ```
 
 ## API

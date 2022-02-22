@@ -260,8 +260,7 @@ export default defineComponent({
         if (!options.first) options.first = props.first
       }
       const { value: rules } = mergedRulesRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = NForm ? get(NForm.props.model, path!, null) : undefined
+      const value = NForm ? get(NForm.props.model, path || '') : undefined
       const activeRules = (
         !trigger
           ? rules

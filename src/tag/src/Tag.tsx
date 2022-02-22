@@ -9,12 +9,7 @@ import {
   provide,
   toRef
 } from 'vue'
-import {
-  useConfig,
-  useThemeClass,
-  useTheme,
-  emptyThemeClassHandle
-} from '../../_mixins'
+import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
 import {
@@ -84,8 +79,12 @@ export default defineComponent({
   props: tagProps,
   setup (props) {
     const contentRef = ref<HTMLElement | null>(null)
-    const { mergedBorderedRef, mergedClsPrefixRef, NConfigProvider } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Tag',
       '-tag',
@@ -128,12 +127,7 @@ export default defineComponent({
         if (value) value.textContent = textContent
       }
     }
-    const rtlEnabledRef = useRtl(
-      'Tag',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { type, size, color: { color, textColor } = {} } = props
       const {
@@ -195,7 +189,7 @@ export default defineComponent({
         '--n-text-color-pressed-checkable': textColorPressedCheckable
       }
     })
-    const themeClassHandle = disableInlineTheme
+    const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'tag',
         computed(() => {
@@ -214,7 +208,7 @@ export default defineComponent({
         cssVarsRef,
         props
       )
-      : emptyThemeClassHandle
+      : undefined
     return {
       ...tagPublicMethods,
       rtlEnabled: rtlEnabledRef,
@@ -223,8 +217,9 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       handleClick,
       handleCloseClick,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      ...themeClassHandle
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -254,9 +249,13 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {resolveWrappedSlot($slots.avatar, (children) => [
-          <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
-        ])}
+        {resolveWrappedSlot(
+          $slots.avatar,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
+            )
+        )}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots.default?.()}
         </span>

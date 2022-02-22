@@ -23,7 +23,7 @@ import { NBaseIcon } from '../../_internal'
 import { call } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton, NButtonGroup } from '../../button'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
@@ -49,7 +49,7 @@ export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
       '-calendar',
@@ -110,6 +110,59 @@ export default defineComponent({
       }
       monthTsRef.value = newMonthTs
     }
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderColor,
+          borderColorModal,
+          borderColorPopover,
+          borderRadius,
+          titleFontSize,
+          textColor,
+          titleFontWeight,
+          titleTextColor,
+          dayTextColor,
+          fontSize,
+          lineHeight,
+          dateColorCurrent,
+          dateTextColorCurrent,
+          cellColorHover,
+          cellColor,
+          cellColorModal,
+          barColor,
+          cellColorPopover,
+          cellColorHoverModal,
+          cellColorHoverPopover
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-border-radius': borderRadius,
+        '--n-text-color': textColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-text-color': titleTextColor,
+        '--n-day-text-color': dayTextColor,
+        '--n-font-size': fontSize,
+        '--n-line-height': lineHeight,
+        '--n-date-color-current': dateColorCurrent,
+        '--n-date-text-color-current': dateTextColorCurrent,
+        '--n-cell-color': cellColor,
+        '--n-cell-color-modal': cellColorModal,
+        '--n-cell-color-popover': cellColorPopover,
+        '--n-cell-color-hover': cellColorHover,
+        '--n-cell-color-hover-modal': cellColorHoverModal,
+        '--n-cell-color-hover-popover': cellColorHoverPopover,
+        '--n-bar-color': barColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('calendar', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
@@ -131,56 +184,9 @@ export default defineComponent({
       handlePrevClick,
       handleNextClick,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderColor,
-            borderColorModal,
-            borderColorPopover,
-            borderRadius,
-            titleFontSize,
-            textColor,
-            titleFontWeight,
-            titleTextColor,
-            dayTextColor,
-            fontSize,
-            lineHeight,
-            dateColorCurrent,
-            dateTextColorCurrent,
-            cellColorHover,
-            cellColor,
-            cellColorModal,
-            barColor,
-            cellColorPopover,
-            cellColorHoverModal,
-            cellColorHoverPopover
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-color': borderColor,
-          '--n-border-color-modal': borderColorModal,
-          '--n-border-color-popover': borderColorPopover,
-          '--n-border-radius': borderRadius,
-          '--n-text-color': textColor,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-text-color': titleTextColor,
-          '--n-day-text-color': dayTextColor,
-          '--n-font-size': fontSize,
-          '--n-line-height': lineHeight,
-          '--n-date-color-current': dateColorCurrent,
-          '--n-date-text-color-current': dateTextColorCurrent,
-          '--n-cell-color': cellColor,
-          '--n-cell-color-modal': cellColorModal,
-          '--n-cell-color-popover': cellColorPopover,
-          '--n-cell-color-hover': cellColorHover,
-          '--n-cell-color-hover-modal': cellColorHoverModal,
-          '--n-cell-color-hover-popover': cellColorHoverPopover,
-          '--n-bar-color': barColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -196,8 +202,10 @@ export default defineComponent({
       dateLocale: { locale },
       handleTodayClick,
       handlePrevClick,
-      handleNextClick
+      handleNextClick,
+      onRender
     } = this
+    onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
     const localeMonth = format(monthTs, 'MMMM', { locale })
     const year = getYear(monthTs)
@@ -206,7 +214,7 @@ export default defineComponent({
       : `${year} ${localeMonth}`
     return (
       <div
-        class={`${mergedClsPrefix}-calendar`}
+        class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>

@@ -5,22 +5,22 @@ It's usually used to display good news.
 ## Demos
 
 ```demo
-basic
-arrow
+basic.vue
+arrow.vue
 dots.vue
-autoplay
-vertical
-space-between
-slides-per-view
-slides-per-view-auto
-centered
-effect
-transition-name
-hover
-keyboard
-mousewheel
-simulate-drag
-custom-arrow-and-dots
+autoplay.vue
+vertical.vue
+space-between.vue
+slides-per-view.vue
+slides-per-view-auto.vue
+centered.vue
+effect.vue
+transition-name.vue
+hover.vue
+keyboard.vue
+mousewheel.vue
+simulate-drag.vue
+custom-arrow-and-dots.vue
 ```
 
 ## API

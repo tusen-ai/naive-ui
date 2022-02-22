@@ -9,7 +9,7 @@ export function useThemeClass (
   componentName: string,
   hashRef: Ref<string> | undefined,
   cssVarsRef: ComputedRef<Record<string, string>> | undefined,
-  props: { themeOverrides?: unknown }
+  props: { themeOverrides?: unknown, builtinThemeOverrides?: unknown }
 ): {
     themeClass: Ref<string>
     onRender: () => void
@@ -33,8 +33,12 @@ export function useThemeClass (
     const themeHash = mergedThemeHashRef?.value
     if (themeHash) finalThemeHash += '-' + themeHash
     if (hashValue) finalThemeHash += '-' + hashValue
-    if (props.themeOverrides) {
-      finalThemeHash += '-' + hash(JSON.stringify(props.themeOverrides))
+    const { themeOverrides, builtinThemeOverrides } = props
+    if (themeOverrides) {
+      finalThemeHash += '-' + hash(JSON.stringify(themeOverrides))
+    }
+    if (builtinThemeOverrides) {
+      finalThemeHash += '-' + hash(JSON.stringify(builtinThemeOverrides))
     }
     themeClassRef.value = finalThemeHash
     renderCallback = () => {
@@ -61,12 +65,4 @@ export function useThemeClass (
       renderCallback?.()
     }
   }
-}
-
-export const emptyThemeClassHandle: {
-  themeClass?: Ref<string>
-  onRender?: () => void
-} = {
-  themeClass: undefined,
-  onRender: undefined
 }

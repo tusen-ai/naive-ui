@@ -5,7 +5,7 @@
 If you have some logs to show, use log.
 
 <n-alert title="Note" type="warning" style="margin-bottom: 16px;">
-  Due to package size.vue, Naive UI doesn't include highlight.vue.js. If you want highlight logs, make sure you have set highlightjs before using it.
+  Due to package size, Naive UI doesn't include highlight.js. If you want highlight logs, make sure you have set highlightjs before using it.
 </n-alert>
 
 In highlight demo, we defined a language called `naive-log` which will highlight all the numbers of line. The following code shows how we defined it. If you want to know more about highlight.js, see <n-a href="https://highlightjs.org/" target="_blank">highlight.js</n-a> and <n-a href="https://highlightjs.readthedocs.io/en/latest/index.html" target="_blank">highlight.js developer documentation</n-a>

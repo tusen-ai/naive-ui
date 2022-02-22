@@ -5,9 +5,9 @@ It doesn't seem very useful... In fact it isn't.
 ## Demos
 
 ```demo
-basic
-size
-custom
+basic.vue
+size.vue
+custom.vue
 ```
 
 ## API

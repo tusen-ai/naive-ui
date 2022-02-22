@@ -7,8 +7,8 @@
 ## 演示
 
 ```demo
-basic
-border
+basic.vue
+border.vue
 ```
 
 ## API

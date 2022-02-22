@@ -5,10 +5,11 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
-  const { primaryColor, opacityDisabled, borderRadius } = vars
+  const { primaryColor, opacityDisabled, borderRadius, textColor3 } = vars
   const railOverlayColor = 'rgba(0, 0, 0, .14)'
   return {
     ...commonVars,
+    iconColor: textColor3,
     textColor: 'white',
     loadingColor: primaryColor,
     opacityDisabled,

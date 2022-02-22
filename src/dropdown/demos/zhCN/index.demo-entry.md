@@ -5,18 +5,18 @@
 ## 演示
 
 ```demo
-basic
-icon
-trigger
-cascade
-arrow
-placement
-size
-group-debug
-manual-position
-batch-render
-render
-option-props
+basic.vue
+icon.vue
+trigger.vue
+cascade.vue
+arrow.vue
+placement.vue
+size.vue
+group-debug.vue
+manual-position.vue
+batch-render.vue
+render.vue
+option-props.vue
 ```
 
 ## API

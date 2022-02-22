@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { sleep } from 'seemly'
 import { NNumberAnimation } from '../index'
 
 describe('n-number-animation', () => {
@@ -12,6 +13,7 @@ describe('n-number-animation', () => {
     })
 
     expect(wrapper.text()).toBe('110')
+    wrapper.unmount()
   })
 
   it('should work with `from` prop', async () => {
@@ -20,5 +22,46 @@ describe('n-number-animation', () => {
     })
 
     expect(wrapper.text()).toBe('10')
+    wrapper.unmount()
+  })
+
+  it('should work with `active` prop', async () => {
+    let wrapper = mount(NNumberAnimation, {
+      props: { to: 110, from: 10 }
+    })
+
+    await sleep(25)
+    expect(wrapper.text()).not.toBe('10')
+    wrapper.unmount()
+
+    wrapper = mount(NNumberAnimation, {
+      props: { to: 110, from: 10, active: false }
+    })
+
+    await sleep(25)
+    expect(wrapper.text()).toBe('10')
+    wrapper.unmount()
+  })
+
+  it('should work with `duration` prop', async () => {
+    const wrapper = mount(NNumberAnimation, {
+      props: { to: 110, from: 10, duration: 20 }
+    })
+    expect(wrapper.text()).not.toBe('110')
+
+    await sleep(100)
+    expect(wrapper.text()).toBe('110')
+    wrapper.unmount()
+  })
+
+  it('should work with `duration` prop', async () => {
+    const wrapper = mount(NNumberAnimation, {
+      props: { to: 10, from: 10, active: false }
+    })
+    expect(wrapper.text()).toBe('10')
+
+    await wrapper.setProps({ precision: 2 })
+    expect(wrapper.text()).toBe('10.00')
+    wrapper.unmount()
   })
 })

@@ -5,12 +5,12 @@
 ## 演示
 
 ```demo
-basic
-size
-color
+basic.vue
+size.vue
+color.vue
 icon.vue
-allow-half
-readonly
+allow-half.vue
+readonly.vue
 ```
 
 ## API

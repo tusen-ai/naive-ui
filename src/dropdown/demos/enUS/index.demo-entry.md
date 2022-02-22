@@ -5,17 +5,17 @@ When you have some functions to trigger.
 ## Demos
 
 ```demo
-basic
-icon
-trigger
-cascade
-arrow
-placement
-size
-manual-position
-batch-render
-render
-option-props
+basic.vue
+icon.vue
+trigger.vue
+cascade.vue
+arrow.vue
+placement.vue
+size.vue
+manual-position.vue
+batch-render.vue
+render.vue
+option-props.vue
 ```
 
 ## API

@@ -58,6 +58,7 @@ PRs are welcomed for locales that are not supported yet!
 | English (British)         | enGB   | dateEnGB    | 2.25.1  |
 | Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
 | Esperanto                 | eo     | dateEo      | 2.25.2  |
+| Slovak                    | skSK   | dateSkSK    | 2.25.3  |
 
 ## Customize the existing locale
 

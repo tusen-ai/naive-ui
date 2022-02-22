@@ -8,10 +8,10 @@ import {
   Transition,
   CSSProperties
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
-import { createKey, getTitleAttribute } from '../../_utils'
+import { color2Class, createKey, getTitleAttribute } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
@@ -21,10 +21,7 @@ const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
   value: [String, Number] as PropType<string | number>,
   max: Number,
-  dot: {
-    type: Boolean,
-    default: false
-  },
+  dot: Boolean,
   type: {
     type: String as PropType<
     'success' | 'error' | 'warning' | 'info' | 'default'
@@ -35,14 +32,8 @@ const badgeProps = {
     type: Boolean,
     default: true
   },
-  showZero: {
-    type: Boolean,
-    default: false
-  },
-  processing: {
-    type: Boolean,
-    default: false
-  },
+  showZero: Boolean,
+  processing: Boolean,
   color: String
 } as const
 
@@ -52,7 +43,7 @@ export default defineComponent({
   name: 'Badge',
   props: badgeProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Badge',
       '-badge',
@@ -78,43 +69,70 @@ export default defineComponent({
     onMounted(() => {
       if (showBadgeRef.value) appearedRef.value = true
     })
+
+    const cssVarsRef = computed(() => {
+      const { type, color: propColor } = props
+      const {
+        common: { cubicBezierEaseInOut, cubicBezierEaseOut },
+        self: { [createKey('color', type)]: color, fontFamily, fontSize }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-font-family': fontFamily,
+        '--n-color': propColor || color,
+        '--n-ripple-color': propColor || color,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-ripple-bezier': cubicBezierEaseOut
+      }
+    })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'badge',
+        computed(() => {
+          let hash = ''
+          const { type, color } = props
+          if (type) {
+            hash += type[0]
+          }
+          if (color) {
+            hash += color2Class(color)
+          }
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      appeared: ref(false),
+      appeared: appearedRef,
       showBadge: showBadgeRef,
       handleAfterEnter,
       handleAfterLeave,
-      cssVars: computed(() => {
-        const { type, color: propColor } = props
-        const {
-          common: { cubicBezierEaseInOut, cubicBezierEaseOut },
-          self: { [createKey('color', type)]: color, fontFamily, fontSize }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-font-family': fontFamily,
-          '--n-color': propColor || color,
-          '--n-ripple-color': propColor || color,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-ripple-bezier': cubicBezierEaseOut
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, onRender, themeClass, $slots } = this
+    onRender?.()
+    const children = $slots.default?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-badge`,
+          themeClass,
           {
             [`${mergedClsPrefix}-badge--dot`]: this.dot,
-            [`${mergedClsPrefix}-badge--as-is`]: !$slots.default
+            [`${mergedClsPrefix}-badge--as-is`]: !children
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {$slots.default?.()}
+        {children}
         <Transition
           name="fade-in-scale-up-transition"
           onAfterEnter={this.handleAfterEnter}

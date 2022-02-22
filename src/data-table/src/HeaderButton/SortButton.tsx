@@ -14,7 +14,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { NConfigProvider } = useConfig()
+    const { mergedComponentPropsRef } = useConfig()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedSortStateRef, mergedClsPrefixRef } = inject(
       dataTableInjectionKey
@@ -37,8 +37,8 @@ export default defineComponent({
     })
     const mergedRenderSorterRef = computed(() => {
       return (
-        NConfigProvider?.mergedComponentPropsRef.value?.DataTable
-          ?.renderSorter || props.column.renderSorter
+        mergedComponentPropsRef?.value?.DataTable?.renderSorter ||
+        props.column.renderSorter
       )
     })
     return {

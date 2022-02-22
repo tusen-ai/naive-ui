@@ -1,17 +1,24 @@
 import {
   h,
   defineComponent,
-  onBeforeMount,
   onBeforeUnmount,
-  PropType
+  PropType,
+  toRef,
+  watch
 } from 'vue'
 import { NConfigProvider, configProviderProps } from 'naive-ui'
 import { merge } from 'lodash-es'
 import { renderFilter, renderSorter } from './data-table'
 import { unconfigurableStyle, mountSvgDefs } from './unconfigurable-style-light'
+import {
+  unconfigurableStyle as unconfigurableDarkStyle,
+  mountSvgDefs as mountSvgDarkDefs
+} from './unconfigurable-style-dark'
+
 import { themeOverridesLight } from './theme-overrides-light'
 import { themeOverridesDark } from './theme-overrides-dark'
 import { icons as tusimpleIcons } from './icons'
+import { CNode } from 'css-render'
 
 const tusimpleComponentOptions = {
   Pagination: {
@@ -41,15 +48,44 @@ export default defineComponent({
     },
     ...configProviderProps
   },
-  setup () {
-    onBeforeMount(() => {
+  setup (props) {
+    let currentUnconfigurableStyle: CNode | null = null
+    function mountLightTheme (): void {
       mountSvgDefs()
+      currentUnconfigurableStyle = unconfigurableStyle
       unconfigurableStyle.mount({
         id: 'naive-ui/tusimple-theme'
       })
-    })
+    }
+    function mountDarkTheme (): void {
+      mountSvgDarkDefs()
+      currentUnconfigurableStyle = unconfigurableDarkStyle
+      unconfigurableDarkStyle.mount({
+        id: 'naive-ui/tusimple-theme'
+      })
+    }
+    function unmountTheme (): void {
+      if (currentUnconfigurableStyle) {
+        currentUnconfigurableStyle.unmount()
+      }
+    }
+    watch(
+      toRef(props, 'themeName'),
+      (themeName) => {
+        if (themeName === 'light') {
+          unmountTheme()
+          mountLightTheme()
+        } else {
+          unmountTheme()
+          mountDarkTheme()
+        }
+      },
+      {
+        immediate: true
+      }
+    )
     onBeforeUnmount(() => {
-      unconfigurableStyle.unmount()
+      unmountTheme()
     })
   },
   render () {

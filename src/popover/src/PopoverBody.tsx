@@ -20,7 +20,7 @@ import {
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
-import { useTheme, useConfig } from '../../_mixins'
+import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   formatLength,
@@ -85,7 +85,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup (props, { slots, attrs }) {
-    const { namespaceRef, mergedClsPrefixRef } = useConfig(props)
+    const { namespaceRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'Popover',
       '-popover',
@@ -127,7 +128,7 @@ export default defineComponent({
         },
         props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
         props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
-        cssVarsRef.value
+        inlineThemeDisabled ? undefined : cssVarsRef.value
       ]
     })
     const cssVarsRef = computed(() => {
@@ -167,6 +168,9 @@ export default defineComponent({
         '--n-space-arrow': spaceArrow
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('popover', undefined, cssVarsRef, props)
+      : undefined
     NPopover.setBodyInstance({
       syncPosition
     })
@@ -221,6 +225,7 @@ export default defineComponent({
     provide(modalBodyInjectionKey, null)
 
     function renderContentNode (): VNode | null {
+      themeClassHandle?.onRender()
       let contentNode: VNode
       const {
         internalRenderBodyRef: { value: renderBody }
@@ -230,10 +235,16 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => [
-          resolveWrappedSlot(slots.header, (children) => [
-            <div class={`${mergedClsPrefix}-popover__header`}>{children}</div>,
-            <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
-          ]) || slots.default?.(),
+          resolveWrappedSlot(
+            slots.header,
+            (children) =>
+              children && [
+                <div class={`${mergedClsPrefix}-popover__header`}>
+                  {children}
+                </div>,
+                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+              ]
+          ) || slots.default?.(),
           props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
@@ -247,6 +258,7 @@ export default defineComponent({
             {
               class: [
                 `${mergedClsPrefix}-popover`,
+                themeClassHandle?.themeClass.value,
                 extraClass.map((v) => `${mergedClsPrefix}-${v}`),
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
@@ -282,6 +294,7 @@ export default defineComponent({
           // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover`,
+            themeClassHandle?.themeClass.value,
             props.overlap && `${mergedClsPrefix}-popover--overlap`
           ],
           bodyRef,

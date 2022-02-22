@@ -19,7 +19,7 @@ import { useMemo } from 'vooks'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
-import { formatLength } from '../../../_utils'
+import { formatLength, resolveSlot } from '../../../_utils'
 import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
@@ -862,14 +862,12 @@ export default defineComponent({
           style={this.bodyStyle}
           ref="emptyElRef"
         >
-          {this.dataTableSlots.empty ? (
-            this.dataTableSlots.empty()
-          ) : (
+          {resolveSlot(this.dataTableSlots.empty, () => [
             <NEmpty
               theme={this.mergedTheme.peers.Empty}
               themeOverrides={this.mergedTheme.peerOverrides.Empty}
             />
-          )}
+          ])}
         </div>
       )
       if (this.shouldDisplaySomeTablePart) {
