@@ -543,14 +543,19 @@ export default defineComponent({
         doUpdateValue(option.value, option)
       }
     }
-    function handleToggleByOptions (option: SelectOption[]): void {
+    function handleSeparator (value: string): void {
       if (mergedDisabledRef.value) return
-      const { tag, remote, clearFilterAfterSelect } = props
+      const { tag, remote, clearFilterAfterSelect, separator } = props
       if (tag && !remote) {
-        const { value: beingCreatedOptions } = beingCreatedOptionsRef
-        if (beingCreatedOptions.length) {
-          createdOptionsRef.value = beingCreatedOptions
-          beingCreatedOptionsRef.value = []
+        if (separator) {
+          if (value.endsWith(separator)) { value = value.substring(0, value.length - 1) }
+          const beingCreatedOptions = value
+            .split(separator)
+            .map((value) => props.onCreate(value.trim()))
+          if (beingCreatedOptions.length) {
+            createdOptionsRef.value = beingCreatedOptions
+            beingCreatedOptionsRef.value = []
+          }
         }
       }
       if (props.multiple) {
@@ -590,25 +595,29 @@ export default defineComponent({
       }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
-      const { tag, remote } = props
+      const { tag, remote, separator } = props
       doSearch(value)
       if (tag && !remote) {
         if (!value) {
           beingCreatedOptionsRef.value = []
           return
         }
-        const optionBeingCreated = props.onCreate(value)
-        if (
-          compitableOptionsRef.value.some(
-            (option) => option.value === optionBeingCreated.value
-          ) ||
-          createdOptionsRef.value.some(
-            (option) => option.value === optionBeingCreated.value
-          )
-        ) {
-          beingCreatedOptionsRef.value = []
+        if (separator && value.includes(separator)) {
+          handleSeparator(value)
         } else {
-          beingCreatedOptionsRef.value = [optionBeingCreated]
+          const optionBeingCreated = props.onCreate(value)
+          if (
+            compitableOptionsRef.value.some(
+              (option) => option.value === optionBeingCreated.value
+            ) ||
+            createdOptionsRef.value.some(
+              (option) => option.value === optionBeingCreated.value
+            )
+          ) {
+            beingCreatedOptionsRef.value = []
+          } else {
+            beingCreatedOptionsRef.value = [optionBeingCreated]
+          }
         }
       }
     }
@@ -667,28 +676,7 @@ export default defineComponent({
                     ) {
                       // do nothing
                     } else {
-                      const { tag, separator, onCreate } = props
-                      if (tag && separator) {
-                        let optionValueString = String(optionValue)
-                        optionValueString = optionValueString.endsWith(
-                          separator
-                        )
-                          ? optionValueString.substring(
-                            0,
-                            optionValueString.length - 1
-                          )
-                          : optionValueString
-                        const optionValues =
-                          String(optionValueString).split(separator)
-                        beingCreatedOptionsRef.value.pop()
-                        optionValues.forEach((v) => {
-                          const option = onCreate(v.trim())
-                          beingCreatedOptionsRef.value.push(option)
-                        })
-                        handleToggleByOptions(beingCreatedOptionsRef.value)
-                      } else {
-                        handleToggleByOption(beingCreatedOption)
-                      }
+                      handleToggleByOption(beingCreatedOption)
                     }
                   } else {
                     handleToggleByOption(beingCreatedOption)

@@ -58,10 +58,10 @@ separator.vue
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
 | render-tag | `(props: { option: SelectBaseOption, onClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
+| separator | `string` | `undefined` | Separator for tag input | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
-| separator | `string` | `undefined` | Separator for tag input | NEXT_VERSION |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
