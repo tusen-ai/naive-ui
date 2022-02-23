@@ -24,7 +24,7 @@ import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import type { ButtonProps } from '../../button'
-import { useTheme, useLocale, useConfig } from '../../_mixins'
+import { useTheme, useLocale, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warnOnce, resolveSlotWithProps, resolveSlot } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -104,7 +104,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedComponentPropsRef, mergedClsPrefixRef } = useConfig()
+    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig()
     const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -250,6 +251,19 @@ export default defineComponent({
       valuePlaceholderRef: toRef(props, 'valuePlaceholder'),
       placeholderRef: toRef(props, 'placeholder')
     })
+
+    const cssVarsRef = computed(() => {
+      const {
+        self: { actionMargin }
+      } = themeRef.value
+      return {
+        '--action-margin': actionMargin
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('dynamic-input', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       locale: useLocale('DynamicInput').localeRef,
       buttonSize: buttonSizeRef,
@@ -266,14 +280,9 @@ export default defineComponent({
       move,
       createItem,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          self: { actionMargin }
-        } = themeRef.value
-        return {
-          '--action-margin': actionMargin
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -293,11 +302,13 @@ export default defineComponent({
       handleValueChange,
       remove,
       createItem,
-      move
+      move,
+      onRender
     } = this
+    onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-dynamic-input`}
+        class={[`${mergedClsPrefix}-dynamic-input`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (
