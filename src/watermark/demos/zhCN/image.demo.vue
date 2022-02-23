@@ -7,7 +7,7 @@
 <template>
   <n-watermark
     v-if="show"
-    image="/demo/assets/images/naivelogo.svg"
+    image="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
     cross
     fullscreen
     :font-size="16"
