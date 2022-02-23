@@ -2,6 +2,8 @@
 # Image
 
 Put image here.
+
+Please note about cross origin setting of the image URL. It will influence whether the image can be displayed.
 </markdown>
 
 <template>

@@ -7,6 +7,7 @@ Watermark.
 ```demo
 basic.vue
 fullscreen.vue
+image.vue
 ```
 
 ## API
