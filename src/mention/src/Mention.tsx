@@ -407,7 +407,6 @@ export default defineComponent({
   },
   render () {
     const { mergedTheme, mergedClsPrefix, $slots } = this
-    this.onRender?.()
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
@@ -464,7 +463,8 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          const { mergedTheme } = this
+                          const { mergedTheme, onRender } = this
+                          onRender?.()
                           return this.showMenu ? (
                             <NInternalSelectMenu
                               clsPrefix={mergedClsPrefix}
@@ -474,7 +474,10 @@ export default defineComponent({
                               }
                               autoPending
                               ref="selectMenuInstRef"
-                              class={`${mergedClsPrefix}-mention-menu`}
+                              class={[
+                                `${mergedClsPrefix}-mention-menu`,
+                                this.themeClass
+                              ]}
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}
