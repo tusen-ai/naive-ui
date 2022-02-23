@@ -37,10 +37,11 @@ The `render-label`, `render-icon`, `expand-icon` can be used to batch render men
 
 <script lang="ts">
 import { h, ref, defineComponent } from 'vue'
-import { NIcon, MenuOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',

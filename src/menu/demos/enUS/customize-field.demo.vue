@@ -33,6 +33,7 @@ Various data would come from backend, you can customize `key`, `label` and `chil
 <script lang="ts">
 import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -43,7 +44,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     whateverLabel: 'Hear the Wind Sing',
     whateverKey: 'hear-the-wind-sing',

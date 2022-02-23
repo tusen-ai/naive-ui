@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent, h, Component } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import {
   LaptopOutline as WorkIcon,
@@ -21,7 +22,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: () =>
       h(

@@ -11,6 +11,7 @@ A horiziontal menu.
 <script lang="ts">
 import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -21,7 +22,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: () =>
       h(
@@ -108,7 +109,7 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      activeKey: ref(null),
+      activeKey: ref<string | null>(null),
       menuOptions
     }
   }
