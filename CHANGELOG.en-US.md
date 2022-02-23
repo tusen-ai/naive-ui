@@ -1,6 +1,13 @@
 # CHANGELOG
 
-## 2.25.3
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+- Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/TuSimple/naive-ui/issues/2500).
+
+## 2.25.3 (2022-02-23)
 
 ### Fixes
 
@@ -34,7 +41,7 @@
 - Add skSK locale.
 - Fix frFR locale.
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 

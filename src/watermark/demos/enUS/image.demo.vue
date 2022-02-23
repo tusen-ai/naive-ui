@@ -2,12 +2,14 @@
 # Image
 
 Put image here.
+
+Please note about cross origin setting of the image URL. It will influence whether the image can be displayed.
 </markdown>
 
 <template>
   <n-watermark
     v-if="show"
-    image="/demo/assets/images/naivelogo.svg"
+    image="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
     cross
     fullscreen
     :font-size="16"

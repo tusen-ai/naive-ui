@@ -127,6 +127,8 @@ export default cB('tabs', `
   cB('tabs-nav-scroll-content', `
     display: flex;
     position: relative;
+    min-width: 100%;
+    width: fit-content;
   `),
   cB('tabs-wrapper', `
     display: inline-flex;

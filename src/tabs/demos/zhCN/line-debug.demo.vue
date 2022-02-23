@@ -20,6 +20,19 @@
       </n-tab-pane>
     </n-tabs>
   </n-card>
+
+  <n-card content-style="padding: 0;">
+    <n-tabs
+      type="line"
+      size="large"
+      :tabs-padding="20"
+      pane-style="padding: 20px;"
+    >
+      <n-tab-pane v-for="item in 50" :key="item" :name="`item${item}`">
+        PARKLIFE
+      </n-tab-pane>
+    </n-tabs>
+  </n-card>
 </template>
 
 <script lang="ts">

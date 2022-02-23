@@ -1,6 +1,13 @@
 # CHANGELOG
 
-## 2.25.3
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/TuSimple/naive-ui/issues/2497)
+- 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#25000](https://github.com/TuSimple/naive-ui/issues/2500)
+
+## 2.25.3 (2022-02-23)
 
 ### Fixes
 
@@ -34,7 +41,7 @@
 - 新增 skSK locale
 - 完善 frFR locale
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 

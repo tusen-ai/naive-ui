@@ -2,12 +2,14 @@
 # 图片
 
 放点图。
+
+记得注意图像 URL 的跨域设置，这会影响图片是否能正常显示。
 </markdown>
 
 <template>
   <n-watermark
     v-if="show"
-    image="/demo/assets/images/naivelogo.svg"
+    image="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
     cross
     fullscreen
     :font-size="16"
