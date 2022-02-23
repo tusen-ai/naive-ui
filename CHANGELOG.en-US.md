@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+- Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/TuSimple/naive-ui/issues/2500).
 
 ## 2.25.3 (2022-02-23)
 
