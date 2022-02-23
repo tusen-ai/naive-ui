@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/TuSimple/naive-ui/issues/2497)
+
 ## 2.25.3 (2022-02-23)
 
 ### Fixes

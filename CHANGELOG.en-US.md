@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+
 ## 2.25.3 (2022-02-23)
 
 ### Fixes

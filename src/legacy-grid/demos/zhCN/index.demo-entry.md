@@ -15,6 +15,7 @@ basic.vue
 gutter.vue
 offset.vue
 push-pull.vue
+wrap-debug.vue
 ```
 
 ## API
