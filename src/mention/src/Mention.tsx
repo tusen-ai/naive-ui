@@ -32,7 +32,7 @@ import { NInternalSelectMenu } from '../../_internal'
 import type { InternalSelectMenuRef } from '../../_internal'
 import { call, useAdjustedTo, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { mentionLight } from '../styles'
 import type { MentionTheme } from '../styles'
@@ -112,8 +112,12 @@ export default defineComponent({
   name: 'Mention',
   props: mentionProps,
   setup (props) {
-    const { namespaceRef, mergedClsPrefixRef, mergedBorderedRef } =
-      useConfig(props)
+    const {
+      namespaceRef,
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const themeRef = useTheme(
       'Mention',
       '-mention',
@@ -168,6 +172,17 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: { menuBoxShadow }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('mention', undefined, cssVarsRef, props)
+      : undefined
     function doUpdateShowMenu (show: boolean): void {
       if (props.disabled) return
       if (!show) {
@@ -385,18 +400,14 @@ export default defineComponent({
       handleInputMouseDown,
       focus,
       blur,
-      cssVars: computed(() => {
-        const {
-          self: { menuBoxShadow }
-        } = themeRef.value
-        return {
-          '--n-menu-box-shadow': menuBoxShadow
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedTheme, mergedClsPrefix, $slots } = this
+    this.onRender?.()
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
@@ -467,7 +478,7 @@ export default defineComponent({
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}
-                              style={this.cssVars as CSSProperties}
+                              style={this.cssVars as any}
                               onToggle={this.handleSelect}
                               renderLabel={this.renderLabel}
                             >
