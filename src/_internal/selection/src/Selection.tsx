@@ -824,7 +824,7 @@ export default defineComponent({
           <div
             ref="singleElRef"
             class={`${clsPrefix}-base-selection-label`}
-            tabindex={this.disabled || filterable ? undefined : 0}
+            tabindex={this.disabled ? undefined : 0}
           >
             {this.label !== undefined ? (
               <div
