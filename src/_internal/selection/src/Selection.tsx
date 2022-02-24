@@ -178,13 +178,11 @@ export default defineComponent({
       }
     })
     function doFocus (e: FocusEvent): void {
-      const { onFocus, filterable } = props
-      if (filterable) showInputTag()
+      const { onFocus } = props
       if (onFocus) onFocus(e)
     }
     function doBlur (e: FocusEvent): void {
-      const { onBlur, filterable } = props
-      if (filterable) hideInputTag()
+      const { onBlur } = props
       if (onBlur) onBlur(e)
     }
     function doDeleteOption (value: SelectBaseOption): void {
@@ -344,7 +342,9 @@ export default defineComponent({
         const patternInputWrapperEl = patternInputWrapperRef.value
         if (!patternInputWrapperEl) return
         patternInputWrapperEl.tabIndex =
-          props.disabled || patternInputFocusedRef.value ? -1 : 0
+          props.disabled || patternInputFocusedRef.value || props.filterable
+            ? -1
+            : 0
       })
     })
     return {
@@ -732,7 +732,7 @@ export default defineComponent({
           <div
             ref="multipleElRef"
             class={`${clsPrefix}-base-selection-tags`}
-            tabindex={disabled ? undefined : -1}
+            tabindex={disabled ? undefined : 0}
           >
             {tags}
             {suffix}
@@ -819,7 +819,7 @@ export default defineComponent({
           <div
             ref="singleElRef"
             class={`${clsPrefix}-base-selection-label`}
-            tabindex={this.disabled ? undefined : 0}
+            tabindex={this.disabled || filterable ? undefined : 0}
           >
             {this.label !== undefined ? (
               <div
