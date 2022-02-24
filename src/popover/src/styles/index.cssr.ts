@@ -101,7 +101,7 @@ export default c([
   `),
   placementStyle('top-end', `
     top: calc(${arrowSize} / -2);
-    right: calc(${getArrowOffset('top-end')} - var(--v-offset-left));
+    right: calc(${getArrowOffset('top-end')} + var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
     bottom: calc(${arrowSize} / -2);
@@ -114,11 +114,11 @@ export default c([
   `),
   placementStyle('bottom-end', `
     bottom: calc(${arrowSize} / -2);
-    right: calc(${getArrowOffset('bottom-end')} - var(--v-offset-left));
+    right: calc(${getArrowOffset('bottom-end')} + var(--v-offset-left));
   `),
   placementStyle('left-start', `
     left: calc(${arrowSize} / -2);
-    top: calc(${getArrowOffset('left-start')} - var(--v-offset-left));
+    top: calc(${getArrowOffset('left-start')} - var(--v-offset-top));
   `),
   placementStyle('left', `
     left: calc(${arrowSize} / -2);
@@ -127,11 +127,11 @@ export default c([
   `),
   placementStyle('left-end', `
     left: calc(${arrowSize} / -2);
-    bottom: calc(${getArrowOffset('left-end')} - var(--v-offset-left));
+    bottom: calc(${getArrowOffset('left-end')} + var(--v-offset-top));
   `),
   placementStyle('right-start', `
     right: calc(${arrowSize} / -2);
-    top: calc(${getArrowOffset('right-start')} - var(--v-offset-left));
+    top: calc(${getArrowOffset('right-start')} - var(--v-offset-top));
   `),
   placementStyle('right', `
     right: calc(${arrowSize} / -2);
@@ -140,7 +140,7 @@ export default c([
   `),
   placementStyle('right-end', `
     right: calc(${arrowSize} / -2);
-    bottom: calc(${getArrowOffset('right-end')} - var(--v-offset-left));
+    bottom: calc(${getArrowOffset('right-end')} + var(--v-offset-top));
   `),
   ...map(
     {
@@ -150,10 +150,10 @@ export default c([
       left: ['top-start', 'bottom-start']
     },
     (placements, direction): CNode[] => {
-      const sizeType = ['right', 'left'].includes(direction)
-        ? 'width'
-        : 'height'
+      const isVertical = ['right', 'left'].includes(direction)
+      const sizeType = isVertical ? 'width' : 'height'
       return placements.map(placement => {
+        const isReverse = placement.split('-')[0] === 'end'
         const targetSize = `var(--v-target-${sizeType}, 0px)`
         const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
         const offset = getArrowOffset(placement as FollowerPlacement)
@@ -162,7 +162,9 @@ export default c([
             cM('center-arrow', [
               cB(
                 'popover-arrow',
-                `${direction}: calc(max(${centerOffset}, ${offset}) - var(--v-offset-left));`
+                `${direction}: calc(max(${centerOffset}, ${offset}) ${
+                  isReverse ? '+' : '-'
+                } var(--v-offset-${isVertical ? 'left' : 'top'}));`
               )
             ])
           ])
