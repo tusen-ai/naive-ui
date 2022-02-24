@@ -49,6 +49,7 @@ about-theme.vue
 multiple-line.vue
 placement.vue
 customize-message.vue
+no-icon.vue
 ```
 
 ## API
