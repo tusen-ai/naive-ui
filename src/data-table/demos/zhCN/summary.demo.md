@@ -56,12 +56,11 @@ export default defineComponent({
       summary: (pageData) => {
         return {
           name: {
-            value: () =>
-              h(
-                'span',
-                { style: { color: 'red' } },
-                pageData.reduce((prevValue, row) => prevValue + row.age, 0)
-              ),
+            value: h(
+              'span',
+              { style: { color: 'red' } },
+              pageData.reduce((prevValue, row) => prevValue + row.age, 0)
+            ),
             colSpan: 3
           }
         }
