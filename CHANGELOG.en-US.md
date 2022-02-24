@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-message` adds `show-icon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
+
 ## 2.25.5 (2022-02-24)
 
 ### Fixes

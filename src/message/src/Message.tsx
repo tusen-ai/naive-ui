@@ -125,8 +125,10 @@ export default defineComponent({
       mergedClsPrefix,
       cssVars,
       icon,
-      handleClose
+      handleClose,
+      showIcon
     } = this
+
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}
@@ -147,15 +149,19 @@ export default defineComponent({
           <div
             class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
           >
-            <div
-              class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
-            >
-              <NIconSwitchTransition>
-                {{
-                  default: () => [createIconVNode(icon, type, mergedClsPrefix)]
-                }}
-              </NIconSwitchTransition>
-            </div>
+            {showIcon ? (
+              <div
+                class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
+              >
+                <NIconSwitchTransition>
+                  {{
+                    default: () => [
+                      createIconVNode(icon, type, mergedClsPrefix)
+                    ]
+                  }}
+                </NIconSwitchTransition>
+              </div>
+            ) : null}
             <div class={`${mergedClsPrefix}-message__content`}>
               {render(content)}
             </div>
