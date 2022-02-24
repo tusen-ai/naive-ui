@@ -1,7 +1,7 @@
 import { h, defineComponent, computed, PropType } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes } from '../../_utils'
+import { color2Class, createKey, ExtractPublicPropTypes } from '../../_utils'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/header.cssr'
@@ -15,7 +15,8 @@ const headerProps = {
     default: 'default'
   },
   prefix: String,
-  alignText: Boolean
+  alignText: Boolean,
+  color: String
 } as const
 
 export type HeaderProps = ExtractPublicPropTypes<typeof headerProps>
@@ -36,7 +37,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
         mergedClsPrefixRef
       )
       const cssVarsRef = computed(() => {
-        const { type } = props
+        const { type, color } = props
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -56,14 +57,21 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
           '--n-bar-color': barColor,
           '--n-bar-width': barWidth,
           '--n-font-weight': headerFontWeight,
-          '--n-text-color': headerTextColor,
+          '--n-text-color': color || headerTextColor,
           '--n-prefix-width': prefixWidth
         }
       })
       const themeClassHandle = inlineThemeDisabled
         ? useThemeClass(
             `h${level}`,
-            computed(() => props.type[0]),
+            computed(() => {
+              let hash = props.type[0]
+              const { color } = props
+
+              if (color) hash += 'a' + color2Class(color)
+
+              return hash
+            }),
             cssVarsRef,
             props
         )

@@ -27,12 +27,14 @@ router-link.vue
 | code | `boolean` | `false` | 代码模式 |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | 文字深度 |
 | tag | `string` | `undefined` | 需要被渲染为什么标签，在 `code` 和 `del` 设定的情况下不生效 |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### P Props
 
-| 名称  | 类型                               | 默认值      | 说明     |
-| ----- | ---------------------------------- | ----------- | -------- |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | 文字深度 |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### H1, H2, H3, H4, H5, H6 Props
 
@@ -41,6 +43,7 @@ router-link.vue
 | align-text | `boolean` | `false` | 文本对齐 |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 排印类型 |
 | prefix | `'bar'` | `undefined` | 在字首显示条块 |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### Ul, Ol Props
 

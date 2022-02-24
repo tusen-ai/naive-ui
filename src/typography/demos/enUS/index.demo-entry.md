@@ -27,12 +27,14 @@ router-link.vue
 | code | `boolean` | `false` | Use the `code` tag and style. |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
 | tag | `string` | `undefined` | Tag to use. `code` or `delete` properties will override this. |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### P Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### H1, H2, H3, H4, H5, H6 Props
 
@@ -41,6 +43,7 @@ router-link.vue
 | align-text | `boolean` | `false` | Text alignment. |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Text color style. |
 | prefix | `'bar'` | `undefined` | Show a bar in front of the heading. |
+| color | `string` | `undefined` | Color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 
 ### Ul, Ol Props
 

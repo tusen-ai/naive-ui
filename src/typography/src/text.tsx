@@ -2,7 +2,7 @@ import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
+import { warn, createKey, color2Class } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
@@ -31,7 +31,8 @@ const textProps = {
       return true
     },
     default: undefined
-  }
+  },
+  color: String
 } as const
 
 export type TextProps = ExtractPublicPropTypes<typeof textProps>
@@ -50,7 +51,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { depth, type } = props
+      const { depth, type, color } = props
       const textColorKey =
         type === 'default'
           ? depth === undefined
@@ -69,7 +70,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
-        '--n-text-color': textColor,
+        '--n-text-color': color || textColor,
         '--n-font-weight-strong': fontWeightStrong,
         '--n-font-famliy-mono': fontFamilyMono,
         '--n-code-border-radius': codeBorderRadius,
@@ -81,7 +82,14 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'text',
-        computed(() => `${props.type[0]}${props.depth || ''}`),
+        computed(() => {
+          let hash = `${props.type[0]}${props.depth || ''}`
+          const { color } = props
+
+          if (color) hash += 'a' + color2Class(color)
+
+          return hash
+        }),
         cssVarsRef,
         props
       )

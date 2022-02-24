@@ -52,6 +52,9 @@ Make your headers pop with a little bar to the left. Much less boring.
       </n-text>
     </n-h1>
     <n-h2>cos(x)</n-h2>
+    <n-h2 color="#FF0000">
+      cos(x)
+    </n-h2>
     <n-h2 prefix="bar">
       cos(x)
     </n-h2>

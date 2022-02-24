@@ -4,11 +4,12 @@ import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/p.cssr'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { color2Class, ExtractPublicPropTypes } from '../../_utils'
 
 const pProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
-  depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>
+  depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>,
+  color: String
 }
 
 export type PProps = ExtractPublicPropTypes<typeof pProps>
@@ -27,7 +28,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { depth } = props
+      const { depth, color } = props
       const typeSafeDepth = depth || '1'
       const {
         common: { cubicBezierEaseInOut },
@@ -44,13 +45,21 @@ export default defineComponent({
         '--n-font-size': pFontSize,
         '--n-line-height': pLineHeight,
         '--n-margin': pMargin,
-        '--n-text-color': depth === undefined ? pTextColor : depthTextColor
+        '--n-text-color':
+          color ?? depth === undefined ? pTextColor : depthTextColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'p',
-        computed(() => `${props.depth || ''}`),
+        computed(() => {
+          let hash = `${props.depth || ''}`
+          const { color } = props
+
+          if (color) hash += 'a' + color2Class(color)
+
+          return hash
+        }),
         cssVarsRef,
         props
       )

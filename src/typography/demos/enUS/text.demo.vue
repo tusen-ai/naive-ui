@@ -44,4 +44,7 @@ Use different `types` to add some variety to your styles.
   <n-text tag="div">
     As Div
   </n-text>
+  <n-text color="#FF0000">
+    In red
+  </n-text>
 </template>
