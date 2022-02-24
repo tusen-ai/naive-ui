@@ -5,18 +5,18 @@ If you just want a number, this is for you.
 ## Demos
 
 ```demo
-basic
-disabled
-event
-icon
-loading
-min-max
-size
-step
-validator
-show-button
-disable-keyboard
-change-timing
+basic.vue
+disabled.vue
+event.vue
+icon.vue
+loading.vue
+min-max.vue
+size.vue
+step.vue
+validator.vue
+show-button.vue
+disable-keyboard.vue
+change-timing.vue
 ```
 
 ## API

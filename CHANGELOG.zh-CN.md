@@ -1,6 +1,75 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/TuSimple/naive-ui/issues/2497)
+- 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#2500](https://github.com/TuSimple/naive-ui/issues/2500)
+
+## 2.25.3 (2022-02-23)
+
+### Fixes
+
+- 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
+- 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
+- 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效, 关闭 [#2392](https://github.com/TuSimple/naive-ui/issues/2392)
+- 修复 `n-data-table` 当 selection column 为某个 column 的子 column 时无法点击全选复选框
+- 修复 `n-table` 动态增加时 `border-color` 的样式异常，关闭 [#2403](https://github.com/TuSimple/naive-ui/issues/2403)
+- 修复 `n-tree` 的 `default-expand-all` 对于动态数据不生效
+- 修复 `n-form` 当 `model.xxx` 为 `undefined` 的时候会使用 `null` 作为验证值，关闭 [#2486](https://github.com/TuSimple/naive-ui/issues/2486)
+- 修复 `n-input` focus 样式优先级低于 hover，关闭 [#2480](https://github.com/TuSimple/naive-ui/issues/2480)
+- 修复 `n-data-table` 在使用 keep-alive 组件中使用虚拟滚动的显示问题，关闭 [#2183](https://github.com/TuSimple/naive-ui/issues/2183)
+- 修复 `notification` 出现的动画
+
+### Feats
+
+- `n-tree-select` 新增 `clear-filter-after-select` 属性
+- `n-cascader` 新增 `clear-filter-after-select` 属性
+- `n-switch` 新增 `icon` 插槽
+- `n-switch` 新增 `checked-icon` 插槽
+- `n-switch` 新增 `unchecked-icon` 插槽
+- `n-tabs` 的 CSS 变量使用 `n` 作为前缀
+- 新增 `n-watermark` 组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
+- `n-data-table` 的 `summary` 属性的 value 值支持 `VNodeChild`，关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
+- `n-input-number` 可以使用长按来改变值，关闭 [#1293](https://github.com/TuSimple/naive-ui/issues/1293)
+- `n-description` 新增 `titleTextColor` 主题变量
+
+### i18n
+
+- 新增 skSK locale
+- 完善 frFR locale
+
+## 2.25.2 (2022-02-11)
+
+### Fixes
+
+- 移除 `resolveSlot` 中无用的 `console.log`
+- 修复 `n-tag` 在 `checkable=true` 时缺少背景色
+- 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
+- 修复 `n-select` `max-tag-count` 标签尺寸和 `n-select` size 不同
+
+### Feats
+
+- `n-progress` 的 `type` 属性新增 `dashboard` 类型
+- `n-progress` 新增 `gap-degree` 属性
+- `n-progress` 新增 `gap-offset-degree` 属性
+- `n-select` 新增 `clear-filter-after-select` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
+
+### i18n
+
+- 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
+- 新增 eo locale
+
+## 2.25.1 (2022-02-06)
+
+### i18n
+
+- 新增 enGB locale
+- 完善 deDE locale
+
+## 2.25.0 (2022-02-04)
 
 ### Breaking Changes
 
@@ -8,7 +77,7 @@
 
 ### Fixes
 
-- `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
 - 修复 `n-form-item` feedback DOM 内容为空依然有 padding
 - 修复 `n-button` 在 safari 下显示有多余 margin
 - 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
@@ -16,6 +85,13 @@
 - 修复 `n-log` 未导出 `LogInst` 类型
 - 修复 `n-popselect` action slot & empty slot 不生效
 - 修复 `n-data-table` 不能使用百分比列宽
+- 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
+- 修复 `n-select` 在动态创建选项时关闭菜单后创建中的选项未清空
+- 修复 `n-select` 在 `show=false` 和 `filterable=true` 时无法输入内容，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
+- 修复 `n-dropdown` 在 `trigger="manual"` 时有额外 margin
+- 修复 `web-types.json` 中 `n-h1` ~ `n-h6` 的名称
+- 修复 `n-select` 在输入法激活时按退格键会删除选项
+- 修复 `n-select` 在特定情况下打开菜单后会将禁用的选项作为待选选项
 - Fix `n-select` add proper tabindex when filterable
 
 ### Feats
@@ -45,6 +121,11 @@
 - `n-dynamic-input` 新增 `create-button-default` slot
 - `n-dynamic-input` 新增 `create-button-icon` slot
 - `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
+- `n-select` 可以作为标签输入框使用
+- `n-select` 导出 `SelectRenderLabel` 类型
+- `n-select` 导出 `SelectRenderOption` 类型
+- `n-select` 导出 `SelectRenderTag` 类型
+- `n-tree` 新增 `node-props` 属性
 
 ## 2.24.7 (2022-01-28)
 
@@ -55,6 +136,7 @@
 ### i18n
 
 - 更新 jaJP locale
+- 更新 deDE locale
 
 ## 2.24.6 (2022-01-26)
 

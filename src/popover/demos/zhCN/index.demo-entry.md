@@ -8,7 +8,6 @@ Popover 在内容周围弹出一些隐藏的信息。Popover 里面没什么内�
 
 ```demo
 basic.vue
-flip.vue
 trigger.vue
 delay.vue
 no-arrow.vue
@@ -40,11 +39,10 @@ zindex-debug.vue
 | display-directive | `'if' \| 'show'` | `'if'` | 条件渲染使用的指令，`if` 会让内容被使用 `v-if` 渲染，`show` 会让内容被使用 `v-show` 渲染 |  |
 | duration | `number` | `100` | 悬浮关闭弹出信息的延迟 |  |
 | flip | `boolean` | `true` | 是否在当前放置方式不能提供足够空间的时候调整弹出信息的位置 |  |
-| keep-alive-on-hover | `boolean` | `true` | 是否在 trigger 为 hover 的时候，悬浮在 popover 时保持 popover 显示 | NEXT_VERSION |
+| keep-alive-on-hover | `boolean` | `true` | 是否在 trigger 为 hover 的时候，悬浮在 popover 时保持 popover 显示 | 2.25.0 |
 | overlap | `boolean` | `false` | 覆盖触发元素 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | popover 的弹出位置 |  |
 | raw | `boolean` | `false` | 是否不添加默认样式 |  |
-| shift | `boolean` | `false` | 是否在当前放置方式不能提供足够空间的时候偏移弹出信息的位置 |  |
 | show-arrow | `boolean` | `true` | 是否显示箭头 |  |
 | show | `boolean` | `undefined` | 是否展示 popover |  |
 | title | `string` | `undefined` | popover 的 title 信息 |  |

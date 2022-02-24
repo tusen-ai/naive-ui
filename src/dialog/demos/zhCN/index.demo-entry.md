@@ -35,16 +35,16 @@ export default defineComponent({
 ## 演示
 
 ```demo
-basic
-async
-use-component
-mask
-action
+basic.vue
+async.vue
+use-component.vue
+mask.vue
+action.vue
 ```
 
 ## API
 
-### `useDialog` API
+### useDialog API
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -95,6 +95,7 @@ action
 | negativeText | `string` | 不填对应的按钮不会出现 |
 | positiveText | `string` | 不填对应的按钮不会出现 |
 | showIcon | `boolean` | 是否显示 `icon` |
+| style | `string \| Object` | 样式 |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |

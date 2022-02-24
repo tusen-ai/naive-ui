@@ -5,18 +5,18 @@
 ## 演示
 
 ```demo
-basic
-icon
-trigger
-cascade
-arrow
-placement
-size
-group-debug
-manual-position
-batch-render
-render
-option-props
+basic.vue
+icon.vue
+trigger.vue
+cascade.vue
+arrow.vue
+placement.vue
+size.vue
+group-debug.vue
+manual-position.vue
+batch-render.vue
+render.vue
+option-props.vue
 ```
 
 ## API
@@ -70,8 +70,8 @@ option-props
 
 #### DropdownRenderOption Type
 
-| 属性   | 类型               | 说明                                   |
-| ------ | ------------------ | -------------------------------------- |
-| type   | `'render'`         | The type of the DropdownRenderOption.  |
-| key    | `string \| number` | Render option ID (should be unique).   |
-| render | `() => VNodeChild` | Render function of the option content. |
+| 属性   | 类型               | 说明                        |
+| ------ | ------------------ | --------------------------- |
+| type   | `'render'`         | DropdownRenderOption 的类型 |
+| key    | `string \| number` | 渲染选项 ID（应该是唯一的） |
+| render | `() => VNodeChild` | 选项内容的渲染功能          |

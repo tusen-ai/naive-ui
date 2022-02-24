@@ -5,14 +5,14 @@
 ## 演示
 
 ```demo
-basic
-textarea
-async
-autosize
-form
-render-label
-custom-prefix
-manual-trigger
+basic.vue
+textarea.vue
+async.vue
+autosize.vue
+form.vue
+render-label.vue
+custom-prefix.vue
+manual-trigger.vue
 ```
 
 ## API
@@ -34,7 +34,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | loading | `boolean` | `false` | 选择面板是否显示加载状态 |  |
 | prefix | `string \| string[]` | `'@'` | 触发提及的前缀，长度必须为 1 |  |
 | placeholder | `string` | `''` | 输入框的占位符 |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择面板的弹出位置. | NEXT_VERSION |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择面板的弹出位置. | 2.25.0 |
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 输入框值发生更新时触发 |  |
@@ -56,10 +56,10 @@ Mention 在 `v2.2.0` 及以后可用。
 
 ### Mention Methods
 
-| Name  | Type         | Description                   |
-| ----- | ------------ | ----------------------------- |
-| focus | `() => void` | Manually focus the component. |
-| blur  | `() => void` | Manually blur the component.  |
+| Name  | Type         | Description |
+| ----- | ------------ | ----------- |
+| focus | `() => void` | 聚焦        |
+| blur  | `() => void` | 失焦        |
 
 ### Mention Slots
 

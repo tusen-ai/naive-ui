@@ -1,41 +1,41 @@
 import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --close-color
-// --close-color-hover
-// --close-color-pressed
-// --bar-color
-// --tab-font-size
-// --tab-text-color
-// --tab-text-color-active
-// --tab-text-color-disabled
-// --tab-text-color-hover
-// --pane-text-color
-// --tab-border-color
-// --tab-border-radius
-// --tab-color
-// --tab-font-weight
-// --tab-font-weight-active
-// --tab-gap
-// --tab-padding
-// --pane-padding
-// --color-segment
-// --font-weight-strong
-// --tab-color-segment
+// --n-bezier
+// --n-close-color
+// --n-close-color-hover
+// --n-close-color-pressed
+// --n-bar-color
+// --n-tab-font-size
+// --n-tab-text-color
+// --n-tab-text-color-active
+// --n-tab-text-color-disabled
+// --n-tab-text-color-hover
+// --n-pane-text-color
+// --n-tab-border-color
+// --n-tab-border-radius
+// --n-tab-color
+// --n-tab-font-weight
+// --n-tab-font-weight-active
+// --n-tab-gap
+// --n-tab-padding
+// --n-pane-padding
+// --n-color-segment
+// --n-font-weight-strong
+// --n-tab-color-segment
 export default cB('tabs', `
   box-sizing: border-box;
   width: 100%;
   transition:
-    background-color .3s var(--bezier),
-    border-color .3s var(--bezier);
+    background-color .3s var(--n-bezier),
+    border-color .3s var(--n-bezier);
 `, [
   cB('tabs-rail', `
     padding: 3px;
-    border-radius: var(--tab-border-radius);
+    border-radius: var(--n-tab-border-radius);
     width: 100%;
-    background-color: var(--color-segment);
-    transition: background-color .3s var(--bezier);
+    background-color: var(--n-color-segment);
+    transition: background-color .3s var(--n-bezier);
     display: flex;
     align-items: center;
   `, [
@@ -48,20 +48,20 @@ export default cB('tabs', `
     `, [
       cB('tabs-tab', `
         overflow: hidden;
-        border-radius: var(--tab-border-radius);
+        border-radius: var(--n-tab-border-radius);
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
       `, [
         cM('active', `
-          font-weight: var(--font-weight-strong);
-          color: var(--tab-text-color-active);
-          background-color: var(--tab-color-segment);
+          font-weight: var(--n-font-weight-strong);
+          color: var(--n-tab-text-color-active);
+          background-color: var(--n-tab-color-segment);
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
         `),
         c('&:hover', `
-          color: var(--tab-text-color-hover);
+          color: var(--n-tab-text-color-hover);
         `)
       ])
     ])
@@ -83,7 +83,7 @@ export default cB('tabs', `
     box-sizing: border-box;
     line-height: 1.5;
     display: flex;
-    transition: border-color .3s var(--bezier);
+    transition: border-color .3s var(--n-bezier);
   `, [
     cE('prefix, suffix', `
       display: flex;
@@ -108,7 +108,7 @@ export default cB('tabs', `
       `)
     ]),
     c('&::before, &::after', `
-      transition: box-shadow .3s var(--bezier);
+      transition: box-shadow .3s var(--n-bezier);
       pointer-events: none;
       content: "";
       position: absolute;
@@ -127,6 +127,8 @@ export default cB('tabs', `
   cB('tabs-nav-scroll-content', `
     display: flex;
     position: relative;
+    min-width: 100%;
+    width: fit-content;
   `),
   cB('tabs-wrapper', `
     display: inline-flex;
@@ -145,15 +147,15 @@ export default cB('tabs', `
     flex-wrap: nowrap;
     display: inline-flex;
     align-items: center;
-    color: var(--tab-text-color);
-    font-size: var(--tab-font-size);
+    color: var(--n-tab-text-color);
+    font-size: var(--n-tab-font-size);
     background-clip: padding-box;
-    padding: var(--tab-padding);
+    padding: var(--n-tab-padding);
     transition:
-      box-shadow .3s var(--bezier),
-      color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      border-color .3s var(--bezier);
+      box-shadow .3s var(--n-bezier),
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
   `, [
     cM('disabled', {
       cursor: 'not-allowed'
@@ -161,7 +163,7 @@ export default cB('tabs', `
     cE('close', `
       margin-left: 8px;
       font-size: 14px;
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
     `),
     cE('label', `
       display: flex;
@@ -173,58 +175,58 @@ export default cB('tabs', `
     bottom: 0;
     height: 2px;
     border-radius: 1px;
-    background-color: var(--bar-color);
+    background-color: var(--n-bar-color);
     transition:
-      left .2s var(--bezier),
-      max-width .2s var(--bezier),
-      background-color .3s var(--bezier);
+      left .2s var(--n-bezier),
+      max-width .2s var(--n-bezier),
+      background-color .3s var(--n-bezier);
   `, [
     cM('transition-disabled', `
       transition: none;
     `),
     cM('disabled', `
-      background-color: var(--tab-text-color-disabled)
+      background-color: var(--n-tab-text-color-disabled)
     `)
   ]),
   cB('tab-pane', `
-    color: var(--pane-text-color);
+    color: var(--n-pane-text-color);
     width: 100%;
-    padding: var(--pane-padding);
+    padding: var(--n-pane-padding);
     transition:
-      color .3s var(--bezier),
-      background-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
   `),
   cB('tabs-tab-pad', `
-    width: var(--tab-gap);
+    width: var(--n-tab-gap);
     flex-grow: 0;
     flex-shrink: 0;
   `),
   cM('line-type, bar-type', [
     cB('tabs-tab', `
-      font-weight: var(--tab-font-weight-active);
+      font-weight: var(--n-tab-font-weight-active);
       box-sizing: border-box;
       vertical-align: bottom;
     `, [
       c('&:hover', {
-        color: 'var(--tab-text-color-hover)'
+        color: 'var(--n-tab-text-color-hover)'
       }),
       cM('active', {
-        color: 'var(--tab-text-color-active)'
+        color: 'var(--n-tab-text-color-active)'
       }),
       cM('disabled', {
-        color: 'var(--tab-text-color-disabled)'
+        color: 'var(--n-tab-text-color-disabled)'
       })
     ])
   ]),
   cB('tabs-nav', [
     cM('line-type', [
       cE('prefix, suffix', `
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
+        transition: border-color .3s var(--n-bezier);
+        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-nav-scroll-content', `
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
+        transition: border-color .3s var(--n-bezier);
+        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-bar', `
         border-radius: 0;
@@ -233,31 +235,31 @@ export default cB('tabs', `
     ]),
     cM('card-type', [
       cE('prefix, suffix', `
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
+        transition: border-color .3s var(--n-bezier);
+        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-pad', `
         flex-grow: 1;
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
+        transition: border-color .3s var(--n-bezier);
+        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-tab-pad', `
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
+        transition: border-color .3s var(--n-bezier);
+        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-tab', `
-        font-weight: var(--tab-font-weight);
-        border: 1px solid var(--tab-border-color);
-        border-top-left-radius: var(--tab-border-radius);
-        border-top-right-radius: var(--tab-border-radius);
-        background-color: var(--tab-color);
+        font-weight: var(--n-tab-font-weight);
+        border: 1px solid var(--n-tab-border-color);
+        border-top-left-radius: var(--n-tab-border-radius);
+        border-top-right-radius: var(--n-tab-border-radius);
+        background-color: var(--n-tab-color);
         box-sizing: border-box;
         position: relative;
         vertical-align: bottom;
         display: flex;
         justify-content: space-between;
-        font-size: var(--tab-font-size);
-        color: var(--tab-text-color);
+        font-size: var(--n-tab-font-size);
+        color: var(--n-tab-text-color);
       `, [
         cM('addable', `
           padding-left: 8px;
@@ -266,7 +268,7 @@ export default cB('tabs', `
         `, [
           cNotM('disabled', [
             c('&:hover', `
-              color: var(--tab-text-color-hover);
+              color: var(--n-tab-text-color-hover);
             `)
           ])
         ]),
@@ -274,12 +276,12 @@ export default cB('tabs', `
         cM('active', `
           border-bottom: 1px solid #0000;
           background-color: #0000;
-          font-weight: var(--tab-font-weight-active);
-          color: var(--tab-text-color-active);
+          font-weight: var(--n-tab-font-weight-active);
+          color: var(--n-tab-text-color-active);
         `),
-        cM('disabled', 'color: var(--tab-text-color-disabled);')
+        cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
-      cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--tab-border-color);')
+      cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ])
   ])
 ])

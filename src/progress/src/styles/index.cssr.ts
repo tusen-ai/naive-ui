@@ -55,7 +55,7 @@ export default c([
         `)
       ])
     ]),
-    cM('circle', {
+    cM('circle, dashboard', {
       width: '120px'
     }, [
       cB('progress-custom-content', `

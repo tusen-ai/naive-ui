@@ -5,24 +5,24 @@
 ## 演示
 
 ```demo
-date
-datetime
-datetimeformat
-daterange
-datetimerange
-month
-year
-quarter
-size
-default-time
-disabled
-disabled-time
-actions
-shortcuts
-events
-format
-footerslot
-update-on-close
+date.vue
+datetime.vue
+datetimeformat.vue
+daterange.vue
+datetimerange.vue
+month.vue
+year.vue
+quarter.vue
+size.vue
+default-time.vue
+disabled.vue
+disabled-time.vue
+actions.vue
+shortcuts.vue
+events.vue
+format.vue
+footerslot.vue
+update-on-close.vue
 focus.vue
 ```
 
@@ -39,7 +39,7 @@ focus.vue
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |  |
 | formatted-value | `string \| [string, string] \| null` | `undefined` | 格式化之后的值 | 2.24.0 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | NEXT_VERSION |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0 |

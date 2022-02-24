@@ -8,16 +8,12 @@ import {
   PropType,
   CSSProperties,
   ButtonHTMLAttributes,
-  watchEffect
+  watchEffect,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import {
-  useConfig,
-  useFormItem,
-  useTheme,
-  useCssVarsClass
-} from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -26,7 +22,14 @@ import {
   NBaseWave
 } from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
-import { call, createKey, warnOnce } from '../../_utils'
+import {
+  call,
+  color2Class,
+  createKey,
+  isSlotEmpty,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
@@ -192,7 +195,8 @@ const Button = defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Button',
       '-button',
@@ -201,12 +205,7 @@ const Button = defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'Button',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const rtlEnabledRef = useRtl('Button', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const theme = themeRef.value
       const {
@@ -476,8 +475,8 @@ const Button = defineComponent({
         ...sizeProps
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
         'button',
         computed(() => {
           let hash = ''
@@ -504,8 +503,8 @@ const Button = defineComponent({
           if (tertiary) hash += 'g'
           if (quaternary) hash += 'h'
           if (strong) hash += 'i'
-          if (color) hash += 'j' + color.replace(/#|\(|\)|,|\s/g, '_')
-          if (textColor) hash += 'k' + textColor.replace(/#|\(|\)|,|\s/g, '_')
+          if (color) hash += 'j' + color2Class(color)
+          if (textColor) hash += 'k' + color2Class(textColor)
           const { value: size } = mergedSizeRef
           hash += 'l' + size[0]
           hash += 'm' + type[0]
@@ -542,12 +541,21 @@ const Button = defineComponent({
           '--n-border-color-disabled': color
         }
       }),
-      themeClass: themeClassRef,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, tag: Component } = this
+    const { mergedClsPrefix, tag: Component, onRender } = this
+    onRender?.()
+    const children = resolveWrappedSlot(
+      this.$slots.default,
+      (children) =>
+        children && (
+          <span class={`${mergedClsPrefix}-button__content`}>{children}</span>
+        )
+    )
     return (
       <Component
         ref="selfElRef"
@@ -576,47 +584,47 @@ const Button = defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
-        {$slots.default && this.iconPlacement === 'right' ? (
-          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
-        ) : null}
+        {this.iconPlacement === 'right' && children}
         <NFadeInExpandTransition width>
           {{
             default: () =>
-              $slots.icon || this.loading ? (
-                <span
-                  class={`${mergedClsPrefix}-button__icon`}
-                  style={{
-                    margin: !$slots.default ? 0 : ''
-                  }}
-                >
-                  <NIconSwitchTransition>
-                    {{
-                      default: () =>
-                        this.loading ? (
-                          <NBaseLoading
-                            clsPrefix={mergedClsPrefix}
-                            key="loading"
-                            class={`${mergedClsPrefix}-icon-slot`}
-                            strokeWidth={20}
-                          />
-                        ) : (
-                          <div
-                            key="icon"
-                            class={`${mergedClsPrefix}-icon-slot`}
-                            role="none"
-                          >
-                            {$slots.icon?.()}
-                          </div>
-                        )
-                    }}
-                  </NIconSwitchTransition>
-                </span>
-              ) : null
+              resolveWrappedSlot(
+                this.$slots.icon,
+                (children) =>
+                  (this.loading || children) && (
+                    <span
+                      class={`${mergedClsPrefix}-button__icon`}
+                      style={{
+                        margin: isSlotEmpty(this.$slots.default) ? '0' : ''
+                      }}
+                    >
+                      <NIconSwitchTransition>
+                        {{
+                          default: () =>
+                            this.loading ? (
+                              <NBaseLoading
+                                clsPrefix={mergedClsPrefix}
+                                key="loading"
+                                class={`${mergedClsPrefix}-icon-slot`}
+                                strokeWidth={20}
+                              />
+                            ) : (
+                              <div
+                                key="icon"
+                                class={`${mergedClsPrefix}-icon-slot`}
+                                role="none"
+                              >
+                                {children}
+                              </div>
+                            )
+                        }}
+                      </NIconSwitchTransition>
+                    </span>
+                  )
+              )
           }}
         </NFadeInExpandTransition>
-        {$slots.default && this.iconPlacement === 'left' ? (
-          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
-        ) : null}
+        {this.iconPlacement === 'left' && children}
         {!this.text ? (
           <NBaseWave ref="waveElRef" clsPrefix={mergedClsPrefix} />
         ) : null}
@@ -639,8 +647,9 @@ const Button = defineComponent({
   }
 })
 
-type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof ButtonProps>
-type MergedProps = Partial<ButtonProps & NativeButtonProps>
+type InternalButtonProps = ExtractPropTypes<typeof buttonProps>
+type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof InternalButtonProps>
+type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 
 export default Button
 

@@ -26,10 +26,10 @@ bar-width.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
-| bar-width | `number` | `undefined` | The width of the tab bar. | NEXT_VERSION |
+| bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
-| justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | Justify-content value of `flex` layout. |  |
+| justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | Justify-content value of `flex` layout. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |  |
 | pane-class | `string` | `undefined` | Class of the pane. |  |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |

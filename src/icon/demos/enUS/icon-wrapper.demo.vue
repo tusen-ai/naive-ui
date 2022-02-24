@@ -5,19 +5,19 @@ Sometime it looks better with a background.
 </markdown>
 
 <template>
-  <n-icon-wrapper :size="24" :border-radius="10" color="#ef4444">
-    <n-icon :size="18" :component="AlertOutline" />
+  <n-icon-wrapper :size="24" :border-radius="10">
+    <n-icon :size="18" :component="Checkmark16Filled" />
   </n-icon-wrapper>
 </template>
 
 <script lang="ts">
-import { AlertOutline } from '@vicons/ionicons5'
 import { defineComponent } from 'vue'
+import Checkmark16Filled from '@vicons/fluent/Checkmark16Filled'
 
 export default defineComponent({
   setup () {
     return {
-      AlertOutline
+      Checkmark16Filled
     }
   }
 })

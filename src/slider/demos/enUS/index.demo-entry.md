@@ -5,17 +5,17 @@ As far as I know, it is always used as a volume control.
 ## Demos
 
 ```demo
-basic
-range
-mark
-restrict-selectable-values
-disabled
-disable-tooltip
-format
-reverse
-vertical
+basic.vue
+range.vue
+mark.vue
+restrict-selectable-values.vue
+disabled.vue
+disable-tooltip.vue
+format.vue
+reverse.vue
+vertical.vue
 show-tooltip.vue
-multiple-debug
+multiple-debug.vue
 ```
 
 ## API
@@ -30,7 +30,7 @@ multiple-debug
 | marks | `{ [markValue: number]: string }` | `undefined` | Marks of the slider. |  |
 | max | `number` | `100` | Max value of the slider. |  |
 | min | `number` | `0` | Min value of the slider. |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip's placement | NEXT_VERSION |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip's placement | 2.25.0 |
 | range | `boolean` | `false` | Whether the slider uses range value. |  |
 | reverse | `boolean` | `false` | Whether to reverse the track. |  |
 | show-tooltip | `boolean` | `false` | Whether to always show tooltip. Only work with non-range slider. | 2.24.2 |

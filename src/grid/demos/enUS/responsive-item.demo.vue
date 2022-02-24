@@ -12,7 +12,7 @@ When `span` is 0, `n-grid-item` won't be displayed.
         0 ~ 400px: hidden<br>
         400 ~ 600px: span 1<br>
         600 ~ 800px: span 2<br>
-        800px 以上: span 3
+        800px +: span 3
       </div>
     </n-grid-item>
     <n-grid-item>

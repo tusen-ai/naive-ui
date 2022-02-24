@@ -155,9 +155,10 @@ function placementStyle (
     ? 'height: var(--n-space-arrow);'
     : 'width: var(--n-space-arrow);'
   return c(`[v-placement="${placement}"] >`, [
-    cB('popover', `
-      margin-${oppositePlacement[position]}: var(--n-space);
-    `, [
+    cB('popover', [
+      cNotM('manual-trigger', `
+        margin-${oppositePlacement[position]}: var(--n-space);
+      `),
       cM('show-arrow', `
         margin-${oppositePlacement[position]}: var(--n-space-arrow);
       `),

@@ -62,11 +62,11 @@ export default defineComponent({
   inheritAttrs: false,
   props: gridProps,
   setup (props) {
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { mergedClsPrefixRef, mergedBreakpointsRef } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
     const breakpointsRef = useBreakpoints(
-      NConfigProvider?.mergedBreakpointsRef.value || defaultBreakpoints
+      mergedBreakpointsRef?.value || defaultBreakpoints
     )
     const isResponsiveRef = useMemo(() => {
       if (props.itemResponsive) return true

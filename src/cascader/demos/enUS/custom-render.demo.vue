@@ -47,6 +47,7 @@ function getOptions (depth = 3, iterator = 1, prefix = '') {
   }
   return options
 }
+
 export default defineComponent({
   setup () {
     return {

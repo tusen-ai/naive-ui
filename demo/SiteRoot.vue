@@ -8,7 +8,7 @@
     :locale="locale"
     :date-locale="dateLocale"
     :hljs="hljs"
-    disable-inline-theme
+    inline-theme-disabled
   >
     <n-theme-editor :style="themeEditorStyle">
       <n-loading-bar-provider>

@@ -62,7 +62,11 @@ module.exports = {
       'date-fns/locale/uk',
       'date-fns/locale/zh-TW',
       'date-fns/locale/es',
-      'date-fns/locale/it'
+      'date-fns/locale/it',
+      'date-fns/locale/en-GB',
+      'date-fns/locale/pl',
+      'date-fns/locale/eo',
+      'date-fns/locale/sk'
     ],
     exclude: ['__INDEX__']
   },

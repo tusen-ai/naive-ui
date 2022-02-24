@@ -5,11 +5,11 @@ Time provide some basic formation for time.
 ## Demos
 
 ```demo
-basic
-type
-format
-relative
-unix
+basic.vue
+type.vue
+format.vue
+relative.vue
+unix.vue
 ```
 
 ## API

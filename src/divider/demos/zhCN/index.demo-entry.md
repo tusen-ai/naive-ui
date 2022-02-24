@@ -5,9 +5,9 @@
 ## 演示
 
 ```demo
-basic
-content
-vertical
+basic.vue
+content.vue
+vertical.vue
 ```
 
 ## API

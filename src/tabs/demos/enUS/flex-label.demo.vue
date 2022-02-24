@@ -29,7 +29,7 @@ Only works with `line` typed tabs.
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           Sign In
         </n-button>
       </n-tab-pane>
@@ -45,7 +45,7 @@ Only works with `line` typed tabs.
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           Sign Up
         </n-button>
       </n-tab-pane>

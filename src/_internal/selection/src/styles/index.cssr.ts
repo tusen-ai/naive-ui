@@ -287,8 +287,9 @@ export default c([
       max-width: 100%;
     `, [
       cE('content', `
+        line-height: 1.25;
         text-overflow: ellipsis;
-        overflow: hidden;
+          overflow: hidden;
       `)
     ])
   ])

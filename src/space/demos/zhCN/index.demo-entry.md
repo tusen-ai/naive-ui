@@ -5,13 +5,13 @@
 ## 演示
 
 ```demo
-basic
-vertical
-from-end
-space-between
-space-around
-center
-grid-debug
+basic.vue
+vertical.vue
+from-end.vue
+space-between.vue
+space-around.vue
+center.vue
+grid-debug.vue
 ```
 
 ## API

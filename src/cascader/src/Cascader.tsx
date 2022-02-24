@@ -25,7 +25,13 @@ import { useIsMounted, useMergedState } from 'vooks'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { NInternalSelection } from '../../_internal'
 import type { InternalSelectionInst } from '../../_internal'
-import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
+import {
+  useLocale,
+  useTheme,
+  useConfig,
+  useFormItem,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -79,6 +85,10 @@ const cascaderProps = {
     default: 'click'
   },
   clearable: Boolean,
+  clearFilterAfterSelect: {
+    type: Boolean,
+    default: true
+  },
   remote: Boolean,
   onLoad: Function as PropType<OnLoad>,
   separator: {
@@ -143,7 +153,6 @@ const cascaderProps = {
 
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 
-// TODO refactor cascader menu keyboard scroll (use virtual list)
 export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
@@ -164,8 +173,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
       '-cascader',
@@ -491,6 +504,9 @@ export default defineComponent({
       if (!showSelectMenuRef.value) return
       handleCascaderMenuClickOutside(e)
     }
+    function clearPattern (): void {
+      if (props.clearFilterAfterSelect) patternRef.value = ''
+    }
     // --- keyboard
     function move (direction: 'prev' | 'next' | 'child' | 'parent'): void {
       const { value: keyboardKey } = keyboardKeyRef
@@ -608,7 +624,7 @@ export default defineComponent({
             } else {
               if (selectMenuInstRef.value) {
                 const hasCorrespondingOption = selectMenuInstRef.value.enter()
-                if (hasCorrespondingOption) patternRef.value = ''
+                if (hasCorrespondingOption) clearPattern()
               }
             }
           }
@@ -773,7 +789,8 @@ export default defineComponent({
       doUncheck,
       closeMenu,
       handleSelectMenuClickOutside,
-      handleCascaderMenuClickOutside
+      handleCascaderMenuClickOutside,
+      clearPattern
     })
     const exposedMethods: CascaderInst = {
       focus: () => {
@@ -783,6 +800,50 @@ export default defineComponent({
         triggerInstRef.value?.blur()
       }
     }
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          optionArrowColor,
+          optionTextColor,
+          optionTextColorActive,
+          optionTextColorDisabled,
+          optionCheckMarkColor,
+          menuColor,
+          menuBoxShadow,
+          menuDividerColor,
+          menuBorderRadius,
+          menuHeight,
+          optionColorHover,
+          optionHeight,
+          optionFontSize,
+          loadingColor,
+          columnWidth
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-menu-border-radius': menuBorderRadius,
+        '--n-menu-box-shadow': menuBoxShadow,
+        '--n-menu-height': menuHeight,
+        '--n-column-width': columnWidth,
+        '--n-menu-color': menuColor,
+        '--n-menu-divider-color': menuDividerColor,
+        '--n-option-height': optionHeight,
+        '--n-option-font-size': optionFontSize,
+        '--n-option-text-color': optionTextColor,
+        '--n-option-text-color-disabled': optionTextColorDisabled,
+        '--n-option-text-color-active': optionTextColorActive,
+        '--n-option-color-hover': optionColorHover,
+        '--n-option-check-mark-color': optionCheckMarkColor,
+        '--n-option-arrow-color': optionArrowColor,
+        '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+        '--n-loading-color': loadingColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('cascader', undefined, cssVarsRef, props)
+      : undefined
     return {
       ...exposedMethods,
       mergedStatus: mergedStatusRef,
@@ -822,51 +883,13 @@ export default defineComponent({
       focused: focusedRef,
       optionHeight: optionHeightRef,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            optionArrowColor,
-            optionTextColor,
-            optionTextColorActive,
-            optionTextColorDisabled,
-            optionCheckMarkColor,
-            menuColor,
-            menuBoxShadow,
-            menuDividerColor,
-            menuBorderRadius,
-            menuHeight,
-            optionColorHover,
-            optionHeight,
-            optionFontSize,
-            loadingColor,
-            columnWidth
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-menu-border-radius': menuBorderRadius,
-          '--n-menu-box-shadow': menuBoxShadow,
-          '--n-menu-height': menuHeight,
-          '--n-column-width': columnWidth,
-          '--n-menu-color': menuColor,
-          '--n-menu-divider-color': menuDividerColor,
-          '--n-option-height': optionHeight,
-          '--n-option-font-size': optionFontSize,
-          '--n-option-text-color': optionTextColor,
-          '--n-option-text-color-disabled': optionTextColorDisabled,
-          '--n-option-text-color-active': optionTextColorActive,
-          '--n-option-color-hover': optionColorHover,
-          '--n-option-check-mark-color': optionCheckMarkColor,
-          '--n-option-arrow-color': optionArrowColor,
-          '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
-          '--n-loading-color': loadingColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-cascader`}>
         <VBinder>
@@ -919,22 +942,29 @@ export default defineComponent({
                 to={this.adjustedTo}
               >
                 {{
-                  default: () => (
-                    <CascaderMenu
-                      ref="cascaderMenuInstRef"
-                      value={this.mergedValue}
-                      show={this.mergedShow && !this.showSelectMenu}
-                      menuModel={this.menuModel}
-                      style={this.cssVars as CSSProperties}
-                      onFocus={this.handleMenuFocus}
-                      onBlur={this.handleMenuBlur}
-                      onKeyup={this.handleMenuKeyUp}
-                      onMousedown={this.handleMenuMousedown}
-                      onTabout={this.handleMenuTabout}
-                    >
-                      {$slots}
-                    </CascaderMenu>
-                  )
+                  default: () => {
+                    this.onRender?.()
+                    return (
+                      <CascaderMenu
+                        ref="cascaderMenuInstRef"
+                        class={this.themeClass}
+                        value={this.mergedValue}
+                        show={this.mergedShow && !this.showSelectMenu}
+                        menuModel={this.menuModel}
+                        style={this.cssVars as CSSProperties}
+                        onFocus={this.handleMenuFocus}
+                        onBlur={this.handleMenuBlur}
+                        onKeyup={this.handleMenuKeyUp}
+                        onMousedown={this.handleMenuMousedown}
+                        onTabout={this.handleMenuTabout}
+                      >
+                        {{
+                          action: () => this.$slots.action?.(),
+                          empty: () => this.$slots.empty?.()
+                        }}
+                      </CascaderMenu>
+                    )
+                  }
                 }}
               </VFollower>,
               <VFollower
@@ -948,20 +978,24 @@ export default defineComponent({
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
               >
                 {{
-                  default: () => (
-                    <CascaderSelectMenu
-                      ref="selectMenuInstRef"
-                      value={this.mergedValue}
-                      show={this.mergedShow && this.showSelectMenu}
-                      pattern={this.pattern}
-                      multiple={this.multiple}
-                      tmNodes={this.treeMate.treeNodes}
-                      filter={this.filter}
-                      labelField={this.labelField}
-                      separator={this.separator}
-                      style={this.cssVars as CSSProperties}
-                    />
-                  )
+                  default: () => {
+                    this.onRender?.()
+                    return (
+                      <CascaderSelectMenu
+                        ref="selectMenuInstRef"
+                        class={this.themeClass}
+                        value={this.mergedValue}
+                        show={this.mergedShow && this.showSelectMenu}
+                        pattern={this.pattern}
+                        multiple={this.multiple}
+                        tmNodes={this.treeMate.treeNodes}
+                        filter={this.filter}
+                        labelField={this.labelField}
+                        separator={this.separator}
+                        style={this.cssVars as CSSProperties}
+                      />
+                    )
+                  }
                 }}
               </VFollower>
             ]

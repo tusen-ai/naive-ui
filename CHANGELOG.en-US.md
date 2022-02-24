@@ -1,6 +1,75 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+- Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/TuSimple/naive-ui/issues/2500).
+
+## 2.25.3 (2022-02-23)
+
+### Fixes
+
+- Fix `n-switch` can't use keyboard operation when checked value is customized.
+- Fix `n-data-table`'s fixed column is covered by scroll content when placed inside popover.
+- Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect, closes [#2392](https://github.com/TuSimple/naive-ui/issues/2392).
+- Fix `n-data-table` cannot click selection checkbox if the selection column is a column's child.
+- Fix `n-table`'s `border-color` abnormal style when this added dynamically, closes [#2403](https://github.com/TuSimple/naive-ui/issues/2403).
+- Fix `n-tree`'s `default-expand-all` prop doesn't work for dynamic data.
+- Fix `n-form` when `model.xxx` is `undefined`, validator will use `null` as validation value, closes [#2486](https://github.com/TuSimple/naive-ui/issues/2486).
+- Fix `n-input` focus style's priority is lower than hover style, closes [#2480](https://github.com/TuSimple/naive-ui/issues/2480).
+- Fix `n-data-table` display issue when placed inside keep-alive component with virtual scroll, closes [#2183](https://github.com/TuSimple/naive-ui/issues/2183).
+- Fix `notification` enter & leave animation.
+
+### Feats
+
+- `n-tree-select` adds `clear-filter-after-select` prop.
+- `n-cascader` adds `clear-filter-after-select` prop.
+- `n-switch` adds `icon` slot.
+- `n-switch` adds `checked-icon` slot.
+- `n-switch` adds `unchecked-icon` slot.
+- `n-tabs` uses `n` as CSS vars prefix.
+- Add `n-watermark` component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+- `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
+- `n-data-table`'s `summary`'s `value` supports `VNodeChild`, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
+- `n-input-number` adds hold click to increment, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
+- `n-description` adds `titleTextColor` theme variable.
+
+### i18n
+
+- Add skSK locale.
+- Fix frFR locale.
+
+## 2.25.2 (2022-02-11)
+
+### Fixes
+
+- Remove useless `console.log` in `resolveSlot`.
+- Fix `n-tag` misses background color when `checkable=true`.
+- Fix `n-tree` throws `Image` error in `happydom` testing environment.
+- Fix `n-select` `max-tag-count` tag size doesn't follow select size.
+
+### Feats
+
+- `n-progress` props `type` add type `dashboard`.
+- `n-progress` adds `gap-degree` prop.
+- `n-progress` adds `gap-offset-degree` prop.
+- `n-select` adds `clear-filter-after-select` prop, closes [#2352](https://github.com/TuSimple/naive-ui/issues/2352).
+
+### i18n
+
+- Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).
+- Add eo locale.
+
+## 2.25.1 (2022-02-06)
+
+### i18n
+
+- Add enGB locale.
+- Fix deDE locale.
+
+## 2.25.0 (2022-02-04)
 
 ### Breaking Changes
 
@@ -8,19 +77,26 @@
 
 ### Fixes
 
-- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
+- Fix `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
 - Fix `n-form-item` prevent feedback padding when empty.
 - Fix `n-button` has extra margin in safari.
 - Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
 - Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
 - Fix `n-log` doesn't export `LogInst` type.
 - Fix `n-popselect` action slot & empty slot now working.
-- Fix `n-data-table` can't use percent as column width.
+- Fix `n-data-table` can't use percent as column width
+- Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
+- Fix `n-select`'s being created option is not cleared after menu is closed.
+- Fix `n-select` can't input content when `show=false` and `filterable=true`, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
+- Fix `n-dropdown` has extra margin when `trigger="manual"`.
+- Fix `web-types.json`'s `n-h1` ~ `n-h6` name.
+- Fix `n-select` deletes option on backspace pressed while compisiting.
+- Fix `n-select` uses disabled option as pending option after menu is opened.
 - Fix `n-select` add proper tabindex when filterable.
 
 ### Feats
 
-- `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-tabs` props `justify-content` add types `start` `center` `end`.
 - `n-auto-complete` adds `placement` prop.
 - `n-cascader` adds `placement` prop.
 - `n-color-picker` adds `placement` prop.
@@ -45,6 +121,11 @@
 - `n-dynamic-input` adds `create-button-default` slot.
 - `n-dynamic-input` adds `create-button-icon` slot.
 - `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
+- `n-select` can be used as tag input.
+- `n-select` exports `SelectRenderLabel` type.
+- `n-select` exports `SelectRenderOption` type.
+- `n-select` exports `SelectRenderTag` type.
+- `n-tree` adds `node-props` prop.
 
 ## 2.24.7 (2022-01-28)
 
@@ -55,6 +136,7 @@
 ### i18n
 
 - Update jaJP locale.
+- Update deDE locale.
 
 ## 2.24.6 (2022-01-26)
 
@@ -72,7 +154,7 @@
 ### Fixes
 
 - `n-input` placeholder has no line-wrap in `textarea` type.
-- `date-picker` lacks space between panel year & month.
+- `n-date-picker` lacks space between panel year & month.
 
 ### Feats
 

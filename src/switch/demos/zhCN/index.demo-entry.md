@@ -5,14 +5,15 @@
 ## 演示
 
 ```demo
-basic
-size
-content
-loading
-event
-customize-value
-shape
-color
+basic.vue
+size.vue
+content.vue
+loading.vue
+event.vue
+customize-value.vue
+shape.vue
+color.vue
+icon.vue
 ```
 
 ## API
@@ -34,7 +35,10 @@ color
 
 ### Switch Slots
 
-| 名称      | 参数 | 说明             |
-| --------- | ---- | ---------------- |
-| checked   | `()` | 开关激活时的内容 |
-| unchecked | `()` | 开关关闭时的内容 |
+| 名称           | 参数 | 说明                   | 版本   |
+| -------------- | ---- | ---------------------- | ------ |
+| checked        | `()` | 开关激活时的内容       |        |
+| checked-icon   | `()` | 开关按钮选中时的图标   | 2.25.3 |
+| icon           | `()` | 开关按钮的图标         | 2.25.3 |
+| unchecked      | `()` | 开关关闭时的内容       |        |
+| unchecked-icon | `()` | 开关按钮未选中时的图标 | 2.25.3 |

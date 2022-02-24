@@ -1,14 +1,13 @@
 # Popover
 
-Pop some hidden message around content. There isn't much builtin style.vues in popover. It's more up to you to fill the content.
+Pop some hidden message around content. There isn't much builtin styles in popover. It's more up to you to fill the content.
 
-If you just want to display some basic.vue text message, see [Tooltip](tooltip) instead.
+If you just want to display some basic text message, see [Tooltip](tooltip) instead.
 
 ## Demos
 
 ```demo
 basic.vue
-flip.vue
 trigger.vue
 delay.vue
 no-arrow.vue
@@ -34,11 +33,10 @@ header.vue
 | display-directive | `'if' \| 'show'` | `'if'` | The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content. |  |
 | duration | `number` | `100` | Popover vanish delay when trigger is `hover` |  |
 | flip | `boolean` | `true` | Whether to flip the popover when there is no space for current placement. |  |
-| keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | NEXT_VERSION |
+| keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | 2.25.0 |
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |  |
 | raw | `boolean` | `false` | Whether to use no default styles. |  |
-| shift | `boolean` | `false` | Whether to shift the popover when there is no space for current placement. |  |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |  |
 | show | `boolean` | `undefined` | Whether to show popover. |  |
 | title | `string` | `undefined` | Popover title. |  |

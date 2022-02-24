@@ -5,13 +5,13 @@ Like a digital clock.
 ## Demos
 
 ```demo
-basic
-size
-disabled-time
-step-time
-format
-actions
-hours12
+basic.vue
+size.vue
+disabled-time.vue
+step-time.vue
+format.vue
+actions.vue
+hours12.vue
 formatted.vue
 focus.vue
 ```
@@ -37,7 +37,7 @@ focus.vue
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling minutes. |  |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling seconds. |  |
 | placeholder | `string` | `'Select Time'` | Placeholder. |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | NEXT_VERSION |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | use-12-hours | `boolean` | `false` | Whether to use a 12-hour clock panel. |  |
 | value | `number \| null` | `undefined` | Value when being set manually. |  |

@@ -7,15 +7,15 @@
 ## 演示
 
 ```demo
-basic
-slot
-quick-jumper
-size-picker
-disabled
-item-count
-prev
-prefix
-page-size-option
+basic.vue
+slot.vue
+quick-jumper.vue
+size-picker.vue
+disabled.vue
+item-count.vue
+prev.vue
+prefix.vue
+page-size-option.vue
 ```
 
 ## API

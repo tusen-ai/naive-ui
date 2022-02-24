@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
+import { h, defineComponent, PropType, CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -43,56 +43,89 @@ export default defineComponent({
     },
     showIndicator: {
       type: Boolean,
-      reqiuired: true
+      required: true
     },
     indicatorTextColor: String,
     unit: String,
     viewBoxWidth: {
       type: Number,
       required: true
+    },
+    gapDegree: {
+      type: Number as PropType<number>,
+      required: true
+    },
+    gapOffsetDegree: {
+      type: Number,
+      default: 0
     }
   },
   setup (props, { slots }) {
-    const strokeDasharrayRef = computed(() => {
-      return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
-    })
-    const strokeDashoffsetRef = computed(() => {
-      return `-${(Math.PI / 3.6) * props.offsetDegree}`
-    })
+    function getPathStyles (
+      percent: number,
+      offsetDegree: number,
+      strokeColor?: string
+    ): { pathString: string, pathStyle: CSSProperties } {
+      const { gapDegree, viewBoxWidth } = props
+      const radius = 50
+      const beginPositionX = 0
+      const beginPositionY = radius
+      const endPositionX = 0
+      const endPositionY = 2 * radius
+      const pathString = `M 55,55 m ${beginPositionX},${beginPositionY}
+      a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
+      a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
+      const len = Math.PI * 2 * radius
+      const pathStyle: CSSProperties = {
+        stroke: strokeColor,
+        strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
+          viewBoxWidth * 8
+        }px`,
+        strokeDashoffset: `-${gapDegree / 2 + (Math.PI / 3.6) * offsetDegree}px`
+      }
+      return {
+        pathString,
+        pathStyle
+      }
+    }
     return () => {
       const {
         fillColor,
         railColor,
-        railStyle,
         strokeWidth,
+        offsetDegree,
         status,
         percentage,
         showIndicator,
         indicatorTextColor,
         unit,
+        gapOffsetDegree,
         clsPrefix
       } = props
+      const { pathString: railPathString, pathStyle: railPathStyle } =
+        getPathStyles(100, 0, railColor)
+      const { pathString: fillPathString, pathStyle: fillPathStyle } =
+        getPathStyles(percentage, offsetDegree, fillColor)
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
-            <div class={`${clsPrefix}-progress-graph-circle`}>
+            <div
+              class={`${clsPrefix}-progress-graph-circle`}
+              style={{
+                transform: gapOffsetDegree
+                  ? `rotate(${gapOffsetDegree}deg)`
+                  : undefined
+              }}
+            >
               <svg viewBox="0 0 110 110">
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
-                    d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                    stroke-width={strokeWidth * 1.1}
+                    d={railPathString}
+                    stroke-width={strokeWidth}
                     stroke-linecap="round"
                     fill="none"
-                    style={
-                      [
-                        {
-                          strokeDashoffset: 0,
-                          stroke: railColor
-                        },
-                        railStyle
-                      ] as any
-                    }
+                    style={railPathStyle}
                   />
                 </g>
                 <g>
@@ -102,15 +135,11 @@ export default defineComponent({
                       percentage === 0 &&
                         `${clsPrefix}-progress-graph-circle-fill--empty`
                     ]}
-                    d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                    stroke-width={strokeWidth * 1.1}
+                    d={fillPathString}
+                    stroke-width={strokeWidth}
                     stroke-linecap="round"
                     fill="none"
-                    style={{
-                      strokeDasharray: strokeDasharrayRef.value,
-                      strokeDashoffset: strokeDashoffsetRef.value,
-                      stroke: fillColor
-                    }}
+                    style={fillPathStyle}
                   />
                 </g>
               </svg>

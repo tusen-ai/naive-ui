@@ -47,7 +47,8 @@ import {
   useFormItem,
   useConfig,
   useTheme,
-  useLocale
+  useLocale,
+  useThemeClass
 } from '../../_mixins'
 import { call, createKey, useAdjustedTo } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -129,7 +130,8 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -499,6 +501,16 @@ export default defineComponent({
         '--n-divider-color': dividerColor
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'color-picker',
+        computed(() => {
+          return mergedSizeRef.value[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
 
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
@@ -508,11 +520,18 @@ export default defineComponent({
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
-          class={`${mergedClsPrefix}-color-picker-panel`}
+          class={[
+            `${mergedClsPrefix}-color-picker-panel`,
+            themeClassHandle?.themeClass.value
+          ]}
           onDragstart={(e) => {
             e.preventDefault()
           }}
-          style={cssVarsRef.value as CSSProperties}
+          style={
+            inlineThemeDisabled
+              ? undefined
+              : (cssVarsRef.value as CSSProperties)
+          }
         >
           <div class={`${mergedClsPrefix}-color-picker-control`}>
             <Pallete
@@ -636,14 +655,17 @@ export default defineComponent({
         doUpdateShow(false)
       },
       renderPanel,
-      cssVars: cssVarsRef
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-color-picker`}
+        class={[this.themeClass, `${mergedClsPrefix}-color-picker`]}
         ref="selfRef"
         style={this.cssVars as CSSProperties}
       >

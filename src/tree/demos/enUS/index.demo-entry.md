@@ -7,18 +7,19 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ## Demos
 
 ```demo
-basic
-custom-field
-cascade
-multiple
-filter
-drag-drop
-virtual
-async
-disabled
-prefix-and-suffix
-batch-render
+basic.vue
+custom-field.vue
+multiple.vue
+cascade.vue
+filter.vue
+drag-drop.vue
+virtual.vue
+async.vue
+disabled.vue
+prefix-and-suffix.vue
+batch-render.vue
 switcher-icon.vue
+node-props.vue
 ```
 
 ## API
@@ -49,6 +50,7 @@ switcher-icon.vue
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |
 | leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |  |
+| node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |

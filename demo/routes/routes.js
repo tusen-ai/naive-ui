@@ -498,6 +498,11 @@ export const enComponentRoutes = [
     path: 'number-animation',
     component: () =>
       import('../../src/number-animation/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'watermark',
+    component: () =>
+      import('../../src/watermark/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -857,6 +862,11 @@ export const zhComponentRoutes = [
     path: 'number-animation',
     component: () =>
       import('../../src/number-animation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'watermark',
+    component: () =>
+      import('../../src/watermark/demos/zhCN/index.demo-entry.md')
   }
 ]
 

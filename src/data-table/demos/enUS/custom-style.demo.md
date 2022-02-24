@@ -60,7 +60,7 @@ export default defineComponent({
         if (row.age > 32) {
           return 'too-old'
         }
-        return null
+        return ''
       }
     }
   }

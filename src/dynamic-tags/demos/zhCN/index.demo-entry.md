@@ -21,7 +21,7 @@ slot.vue
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后 `type` 无效 |  |
 | default-value | `string[]` | `[]` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| input-props | `InputProps` | `undefined` | 内部 `n-input` 组件的属性 | NEXT_VERSION |
+| input-props | `InputProps` | `undefined` | 内部 `n-input` 组件的属性 | 2.25.0 |
 | input-style | `string \| Object` | `undefined` | 自定义输入框的样式 |  |
 | max | `number` | `undefined` | tag 的最大数量 |  |
 | round | `boolean` | `false` | 是否圆角 |  |

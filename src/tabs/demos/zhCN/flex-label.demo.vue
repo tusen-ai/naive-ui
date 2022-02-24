@@ -29,7 +29,7 @@
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           登录
         </n-button>
       </n-tab-pane>
@@ -45,7 +45,7 @@
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           注册
         </n-button>
       </n-tab-pane>

@@ -1,8 +1,8 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf } from '../../_utils'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
@@ -61,7 +61,8 @@ export default defineComponent({
       const { onClose } = props
       if (onClose) call(onClose)
     }
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -70,74 +71,83 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'Card',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
+    const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        self: {
+          color,
+          colorModal,
+          colorTarget,
+          textColor,
+          titleTextColor,
+          titleFontWeight,
+          borderColor,
+          actionColor,
+          borderRadius,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          lineHeight,
+          closeSize,
+          boxShadow,
+          colorPopover,
+          colorEmbedded,
+          [createKey('padding', size)]: padding,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('titleFontSize', size)]: titleFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      const {
+        top: paddingTop,
+        left: paddingLeft,
+        bottom: paddingBottom
+      } = getPadding(padding)
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-color': props.embedded ? colorEmbedded : color,
+        '--n-color-modal': colorModal,
+        '--n-color-popover': colorPopover,
+        '--n-color-target': colorTarget,
+        '--n-text-color': textColor,
+        '--n-line-height': lineHeight,
+        '--n-action-color': actionColor,
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-border-color': borderColor,
+        '--n-box-shadow': boxShadow,
+        // size
+        '--n-padding-top': paddingTop,
+        '--n-padding-bottom': paddingBottom,
+        '--n-padding-left': paddingLeft,
+        '--n-font-size': fontSize,
+        '--n-title-font-size': titleFontSize,
+        '--n-close-size': closeSize
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'card',
+        computed(() => {
+          return props.size[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          self: {
-            color,
-            colorModal,
-            colorTarget,
-            textColor,
-            titleTextColor,
-            titleFontWeight,
-            borderColor,
-            actionColor,
-            borderRadius,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            lineHeight,
-            closeSize,
-            boxShadow,
-            colorPopover,
-            colorEmbedded,
-            [createKey('padding', size)]: padding,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('titleFontSize', size)]: titleFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        const {
-          top: paddingTop,
-          left: paddingLeft,
-          bottom: paddingBottom
-        } = getPadding(padding)
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-color': props.embedded ? colorEmbedded : color,
-          '--n-color-modal': colorModal,
-          '--n-color-popover': colorPopover,
-          '--n-color-target': colorTarget,
-          '--n-text-color': textColor,
-          '--n-line-height': lineHeight,
-          '--n-action-color': actionColor,
-          '--n-title-text-color': titleTextColor,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-border-color': borderColor,
-          '--n-box-shadow': boxShadow,
-          // size
-          '--n-padding-top': paddingTop,
-          '--n-padding-bottom': paddingBottom,
-          '--n-padding-left': paddingLeft,
-          '--n-font-size': fontSize,
-          '--n-title-font-size': titleFontSize,
-          '--n-close-size': closeSize
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -147,12 +157,15 @@ export default defineComponent({
       hoverable,
       mergedClsPrefix,
       rtlEnabled,
+      onRender,
       $slots
     } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-card`,
+          this.themeClass,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
             [`${mergedClsPrefix}-card--content${
@@ -176,57 +189,84 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         role={this.role}
       >
-        {$slots.cover ? (
-          <div class={`${mergedClsPrefix}-card-cover`} role="none">
-            {$slots.cover()}
-          </div>
-        ) : null}
-        {$slots.header || this.title || this.closable ? (
-          <div
-            class={`${mergedClsPrefix}-card-header`}
-            style={this.headerStyle}
-          >
-            <div class={`${mergedClsPrefix}-card-header__main`} role="heading">
-              {$slots.header ? $slots.header() : this.title}
-            </div>
-            {$slots['header-extra'] ? (
-              <div
-                class={`${mergedClsPrefix}-card-header__extra`}
-                style={this.headerExtraStyle}
-              >
-                {$slots['header-extra']()}
+        {resolveWrappedSlot(
+          $slots.cover,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-card-cover`} role="none">
+                {children}
               </div>
-            ) : null}
-            {this.closable ? (
-              <NBaseClose
-                clsPrefix={mergedClsPrefix}
-                class={`${mergedClsPrefix}-card-header__close`}
-                onClick={this.handleCloseClick}
-              />
-            ) : null}
-          </div>
-        ) : null}
-        <div
-          class={`${mergedClsPrefix}-card__content`}
-          style={this.contentStyle}
-          role="none"
-        >
-          {$slots}
-        </div>
-        {$slots.footer ? (
-          <div
-            class={`${mergedClsPrefix}-card__footer`}
-            style={this.footerStyle}
-            role="none"
-          >
-            {$slots.footer()}
-          </div>
-        ) : null}
-        {$slots.action ? (
-          <div class={`${mergedClsPrefix}-card__action`} role="none">
-            {$slots.action()}
-          </div>
-        ) : null}
+            )
+        )}
+        {resolveWrappedSlot($slots.header, (children) => {
+          return children || this.title || this.closable ? (
+            <div
+              class={`${mergedClsPrefix}-card-header`}
+              style={this.headerStyle}
+            >
+              <div
+                class={`${mergedClsPrefix}-card-header__main`}
+                role="heading"
+              >
+                {children || [this.title]}
+              </div>
+              {resolveWrappedSlot(
+                $slots['header-extra'],
+                (children) =>
+                  children && (
+                    <div
+                      class={`${mergedClsPrefix}-card-header__extra`}
+                      style={this.headerExtraStyle}
+                    >
+                      {children}
+                    </div>
+                  )
+              )}
+              {this.closable ? (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  class={`${mergedClsPrefix}-card-header__close`}
+                  onClick={this.handleCloseClick}
+                />
+              ) : null}
+            </div>
+          ) : null
+        })}
+        {resolveWrappedSlot(
+          $slots.default,
+          (children) =>
+            children && (
+              <div
+                class={`${mergedClsPrefix}-card__content`}
+                style={this.contentStyle}
+                role="none"
+              >
+                {children}
+              </div>
+            )
+        )}
+        {resolveWrappedSlot(
+          $slots.footer,
+          (children) =>
+            children && [
+              <div
+                class={`${mergedClsPrefix}-card__footer`}
+                style={this.footerStyle}
+                role="none"
+              >
+                {children}
+              </div>
+            ]
+        )}
+        {resolveWrappedSlot(
+          $slots.action,
+          (children) =>
+            children && (
+              <div class={`${mergedClsPrefix}-card__action`} role="none">
+                {children}
+              </div>
+            )
+        )}
       </div>
     )
   }

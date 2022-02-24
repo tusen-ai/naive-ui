@@ -1,6 +1,5 @@
 <markdown>
 # Trigger
-
 </markdown>
 
 <template>
@@ -13,7 +12,7 @@
     </n-popover>
     <n-popover trigger="hover" :keep-alive-on-hover="false">
       <template #trigger>
-        <n-button>Hover (careless about popup)</n-button>
+        <n-button>Hover (ignore popup)</n-button>
       </template>
       <span>I wish they all could be California girls</span>
     </n-popover>

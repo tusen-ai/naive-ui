@@ -5,14 +5,14 @@ A year ago, my product manager asked me if I could implement this feature. Back 
 ## Demos
 
 ```demo
-basic
-textarea
-async
-autosize
-form
-render-label
-custom-prefix
-manual-trigger
+basic.vue
+textarea.vue
+async.vue
+autosize.vue
+form.vue
+render-label.vue
+custom-prefix.vue
+manual-trigger.vue
 ```
 
 ## API
@@ -34,7 +34,7 @@ Mention requires `v2.2.0` and above.
 | loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |  |
 | prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |  |
 | placeholder | `string` | `''` | Placeholder. |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Selection panel's placement . | NEXT_VERSION |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Selection panel's placement . | 2.25.0 |
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |  |

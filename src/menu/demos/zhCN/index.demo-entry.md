@@ -7,17 +7,17 @@
 ## 演示
 
 ```demo
-horizontal
-select
-render-label
-default-expanded-keys
-indent
-collapse
-inverted
-long-label
-accordion
-router-link
-customize-field
+horizontal.vue
+select.vue
+render-label.vue
+default-expanded-keys.vue
+indent.vue
+collapse.vue
+inverted.vue
+long-label.vue
+accordion.vue
+router-link.vue
+customize-field.vue
 ```
 
 ## API

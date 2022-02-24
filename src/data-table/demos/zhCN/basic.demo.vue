@@ -29,8 +29,7 @@ const createColumns = ({
   return [
     {
       title: 'No',
-      key: 'no',
-      width: '50%'
+      key: 'no'
     },
     {
       title: 'Title',

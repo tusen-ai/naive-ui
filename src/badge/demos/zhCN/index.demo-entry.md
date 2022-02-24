@@ -5,15 +5,15 @@
 ## 演示
 
 ```demo
-basic
-type
-processing
-show-zero
-overflow
-manual
-custom-content
-color
-raw
+basic.vue
+type.vue
+processing.vue
+show-zero.vue
+overflow.vue
+manual.vue
+custom-content.vue
+color.vue
+raw.vue
 ```
 
 ## API

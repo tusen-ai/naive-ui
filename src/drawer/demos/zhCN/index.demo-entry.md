@@ -5,17 +5,17 @@
 ## 演示
 
 ```demo
-basic
-multiple
+basic.vue
+multiple.vue
 target.vue
-closable
-slot
+closable.vue
+slot.vue
 a11y-debug.vue
-custom-style-debug
-dark-1-debug
-dark-2-debug
-dark-3-debug
-dark-4-debug
+custom-style-debug.vue
+dark-1-debug.vue
+dark-2-debug.vue
+dark-3-debug.vue
+dark-4-debug.vue
 ```
 
 ## API

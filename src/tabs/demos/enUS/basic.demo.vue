@@ -27,7 +27,7 @@
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           Sign In
         </n-button>
       </n-tab-pane>
@@ -43,7 +43,7 @@
             <n-input />
           </n-form-item-row>
         </n-form>
-        <n-button type="primary" block>
+        <n-button type="primary" block secondary strong>
           Sign Up
         </n-button>
       </n-tab-pane>

@@ -15,7 +15,7 @@ import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { keep, call, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -77,8 +77,8 @@ const modalProps = {
   onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   // private
-  dialog: Boolean,
-  appear: {
+  internalDialog: Boolean,
+  internalAppear: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
@@ -120,7 +120,8 @@ export default defineComponent({
       }
     }
     const containerRef = ref<HTMLElement | null>(null)
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'Modal',
       '-modal',
@@ -132,7 +133,7 @@ export default defineComponent({
     const clickedRef = useClicked(64)
     const clickedPositionRef = useClickPosition()
     const isMountedRef = useIsMounted()
-    const NDialogProvider = props.dialog
+    const NDialogProvider = props.internalDialog
       ? inject(dialogProviderInjectionKey, null)
       : null
     function doUpdateShow (show: boolean): void {
@@ -220,9 +221,24 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       isMountedRef,
-      appearRef: toRef(props, 'appear'),
+      appearRef: toRef(props, 'internalAppear'),
       transformOriginRef: toRef(props, 'transformOrigin')
     })
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseOut },
+        self: { boxShadow, color, textColor }
+      } = themeRef.value
+      return {
+        '--n-bezier-ease-out': cubicBezierEaseOut,
+        '--n-box-shadow': boxShadow,
+        '--n-color': color,
+        '--n-text-color': textColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('theme-class', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -241,18 +257,9 @@ export default defineComponent({
       handleNegativeClick,
       handlePositiveClick,
       handleCloseClick,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseOut },
-          self: { boxShadow, color, textColor }
-        } = themeRef.value
-        return {
-          '--n-bezier-ease-out': cubicBezierEaseOut,
-          '--n-box-shadow': boxShadow,
-          '--n-color': color,
-          '--n-text-color': textColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : inlineThemeDisabled,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -260,19 +267,24 @@ export default defineComponent({
     return (
       <VLazyTeleport to={this.to} show={this.show}>
         {{
-          default: () => [
-            withDirectives(
+          default: () => {
+            this.onRender?.()
+            return withDirectives(
               <div
                 role="none"
                 ref="containerRef"
-                class={[`${mergedClsPrefix}-modal-container`, this.namespace]}
+                class={[
+                  `${mergedClsPrefix}-modal-container`,
+                  this.themeClass,
+                  this.namespace
+                ]}
                 style={this.cssVars as CSSProperties}
               >
                 {this.unstableShowMask ? (
                   <Transition
                     name="fade-in-transition"
                     key="mask"
-                    appear={this.appear ?? this.isMounted}
+                    appear={this.internalAppear ?? this.isMounted}
                   >
                     {{
                       default: () => {
@@ -290,7 +302,7 @@ export default defineComponent({
                 <NModalBodyWrapper
                   style={this.overlayStyle}
                   {...this.$attrs}
-                  ref={'bodyWrapper'}
+                  ref="bodyWrapper"
                   displayDirective={this.displayDirective}
                   show={this.show}
                   preset={this.preset}
@@ -319,7 +331,7 @@ export default defineComponent({
                 ]
               ]
             )
-          ]
+          }
         }}
       </VLazyTeleport>
     )

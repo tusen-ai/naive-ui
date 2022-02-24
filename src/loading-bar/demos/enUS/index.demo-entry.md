@@ -37,7 +37,7 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API
@@ -48,7 +48,7 @@ basic
 | --- | --- | --- | --- |
 | loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |
 
-### `loadingBar` Injection Methods
+### loadingBar Injection Methods
 
 | Name | Type | Description |
 | --- | --- | --- |
