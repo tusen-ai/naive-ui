@@ -92,7 +92,7 @@ export default c([
   ]),
   placementStyle('top-start', `
     top: calc(${arrowSize} / -2);
-    left: calc(${getArrowOffset('top-start')});
+    left: calc(${getArrowOffset('top-start')} - var(--v-offset-left));
   `),
   placementStyle('top', `
     top: calc(${arrowSize} / -2);
@@ -101,11 +101,11 @@ export default c([
   `),
   placementStyle('top-end', `
     top: calc(${arrowSize} / -2);
-    right: ${getArrowOffset('top-end')};
+    right: calc(${getArrowOffset('top-end')} - var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
     bottom: calc(${arrowSize} / -2);
-    left: calc(${getArrowOffset('bottom-start')});
+    left: calc(${getArrowOffset('bottom-start')} - var(--v-offset-left));
   `),
   placementStyle('bottom', `
     bottom: calc(${arrowSize} / -2);
@@ -114,11 +114,11 @@ export default c([
   `),
   placementStyle('bottom-end', `
     bottom: calc(${arrowSize} / -2);
-    right: calc(${getArrowOffset('bottom-end')});
+    right: calc(${getArrowOffset('bottom-end')} - var(--v-offset-left));
   `),
   placementStyle('left-start', `
     left: calc(${arrowSize} / -2);
-    top: calc(${getArrowOffset('left-start')});
+    top: calc(${getArrowOffset('left-start')} - var(--v-offset-left));
   `),
   placementStyle('left', `
     left: calc(${arrowSize} / -2);
@@ -127,11 +127,11 @@ export default c([
   `),
   placementStyle('left-end', `
     left: calc(${arrowSize} / -2);
-    bottom: calc(${getArrowOffset('left-end')});
+    bottom: calc(${getArrowOffset('left-end')} - var(--v-offset-left));
   `),
   placementStyle('right-start', `
     right: calc(${arrowSize} / -2);
-    top: calc(${getArrowOffset('right-start')});
+    top: calc(${getArrowOffset('right-start')} - var(--v-offset-left));
   `),
   placementStyle('right', `
     right: calc(${arrowSize} / -2);
@@ -140,25 +140,42 @@ export default c([
   `),
   placementStyle('right-end', `
     right: calc(${arrowSize} / -2);
-    bottom: calc(${getArrowOffset('right-end')});
+    bottom: calc(${getArrowOffset('right-end')} - var(--v-offset-left));
   `),
-  ...map({
-    top: ['right-start', 'left-start'],
-    right: ['top-end', 'bottom-end'],
-    bottom: ['right-end', 'left-end'],
-    left: ['top-start', 'bottom-start']
-  }, (placements, direction): CNode[] => placements.map((placement) => c(`[v-placement="${placement}"] >`, [
-    cB('popover', [cM('center-arrow', [
-      cB('popover-arrow', `
-        ${direction}: max(calc((var(--v-target-${['right', 'left'].includes(direction) ? 'width' : 'height'}, 0px) - ${arrowSize}) / 2), ${getArrowOffset(placement as FollowerPlacement)});
-      `)
-    ])])
-  ]))
+  ...map(
+    {
+      top: ['right-start', 'left-start'],
+      right: ['top-end', 'bottom-end'],
+      bottom: ['right-end', 'left-end'],
+      left: ['top-start', 'bottom-start']
+    },
+    (placements, direction): CNode[] => {
+      const sizeType = ['right', 'left'].includes(direction)
+        ? 'width'
+        : 'height'
+      return placements.map(placement => {
+        const targetSize = `var(--v-target-${sizeType}, 0px)`
+        const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
+        const offset = getArrowOffset(placement as FollowerPlacement)
+        return c(`[v-placement="${placement}"] >`, [
+          cB('popover', [
+            cM('center-arrow', [
+              cB(
+                'popover-arrow',
+                `${direction}: calc(max(${centerOffset}, ${offset}) - var(--v-offset-left));`
+              )
+            ])
+          ])
+        ])
+      })
+    }
   )
 ])
 
 function getArrowOffset (placement: FollowerPlacement): string {
-  return ['top', 'bottom'].includes(placement.split('-')[0]) ? 'calc(var(--n-arrow-offset) - var(--v-offset-left))' : 'calc(var(--n-arrow-offset-vertical) - var(--v-offset-top))'
+  return ['top', 'bottom'].includes(placement.split('-')[0])
+    ? 'var(--n-arrow-offset)'
+    : 'var(--n-arrow-offset-vertical)'
 }
 
 function placementStyle (
