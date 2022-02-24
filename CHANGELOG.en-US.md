@@ -2,6 +2,10 @@
 
 ## 2.25.5 (2022-02-24)
 
+### Feats
+
+- `n-popover` adds `arrow-point-to-center` prop.
+
 ### Fixes
 
 - Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
