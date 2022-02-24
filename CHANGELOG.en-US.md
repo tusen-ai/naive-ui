@@ -1,6 +1,13 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+- Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/TuSimple/naive-ui/issues/2500).
+
+## 2.25.3 (2022-02-23)
 
 ### Fixes
 
@@ -27,13 +34,14 @@
 - `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 - `n-data-table`'s `summary`'s `value` supports `VNodeChild`, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
 - `n-input-number` adds hold click to increment, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
+- `n-description` adds `titleTextColor` theme variable.
 
 ### i18n
 
 - Add skSK locale.
 - Fix frFR locale.
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 

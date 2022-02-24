@@ -69,7 +69,7 @@ context-menu.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
-| row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name of each row. |
+| row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |

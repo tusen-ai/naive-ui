@@ -40,7 +40,7 @@ icon.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | checked | `()` | Content when the switch is checked. |  |
-| checked-icon | `()` | Icon of switch button when checked. | NEXT_VERSION |
-| icon | `()` | Icon of switch button. | NEXT_VERSION |
+| checked-icon | `()` | Icon of switch button when checked. | 2.25.3 |
+| icon | `()` | Icon of switch button. | 2.25.3 |
 | unchecked | `()` | Content when the switch is unchecked. |  |
-| unchecked-icon | `()` | Icon of switch button when unchecked. | NEXT_VERSION |
+| unchecked-icon | `()` | Icon of switch button when unchecked. | 2.25.3 |

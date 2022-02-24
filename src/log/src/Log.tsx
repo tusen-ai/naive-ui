@@ -11,7 +11,13 @@ import {
   Ref
 } from 'vue'
 import { throttle } from 'lodash-es'
-import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
+import {
+  useTheme,
+  useHljs,
+  ThemeProps,
+  useConfig,
+  useThemeClass
+} from '../../_mixins'
 import type { Hljs } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warn } from '../../_utils'
@@ -82,7 +88,7 @@ export default defineComponent({
   name: 'Log',
   props: logProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const slientRef = ref(false)
     const highlightRef = computed(() => {
       return props.language !== undefined
@@ -216,6 +222,30 @@ export default defineComponent({
       scrollTo
     }
 
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          loaderFontSize,
+          loaderTextColor,
+          loaderColor,
+          loaderBorder,
+          loadingColor
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-loader-font-size': loaderFontSize,
+        '--n-loader-border': loaderBorder,
+        '--n-loader-color': loaderColor,
+        '--n-loader-text-color': loaderTextColor,
+        '--n-loading-color': loadingColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('log', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       ...exportedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -227,34 +257,18 @@ export default defineComponent({
       scrollToBottom,
       handleWheel,
       handleScroll,
-      cssVars: computed(() => {
-        const {
-          self: {
-            loaderFontSize,
-            loaderTextColor,
-            loaderColor,
-            loaderBorder,
-            loadingColor
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-loader-font-size': loaderFontSize,
-          '--n-loader-border': loaderBorder,
-          '--n-loader-color': loaderColor,
-          '--n-loader-text-color': loaderTextColor,
-          '--n-loading-color': loadingColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme, onRender } = this
+    onRender?.()
     return h(
       'div',
       {
-        class: `${mergedClsPrefix}-log`,
+        class: [`${mergedClsPrefix}-log`, this.themeClass],
         style: [
           {
             lineHeight: this.lineHeight,

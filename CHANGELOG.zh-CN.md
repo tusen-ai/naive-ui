@@ -1,6 +1,13 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/TuSimple/naive-ui/issues/2497)
+- 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#2500](https://github.com/TuSimple/naive-ui/issues/2500)
+
+## 2.25.3 (2022-02-23)
 
 ### Fixes
 
@@ -23,17 +30,18 @@
 - `n-switch` 新增 `checked-icon` 插槽
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
-- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- 新增 `n-watermark` 组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 - `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
 - `n-data-table` 的 `summary` 属性的 value 值支持 `VNodeChild`，关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 - `n-input-number` 可以使用长按来改变值，关闭 [#1293](https://github.com/TuSimple/naive-ui/issues/1293)
+- `n-description` 新增 `titleTextColor` 主题变量
 
 ### i18n
 
 - 新增 skSK locale
 - 完善 frFR locale
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 

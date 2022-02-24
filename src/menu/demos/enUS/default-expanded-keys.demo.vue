@@ -15,6 +15,7 @@ If you don't set `default-expanded-keys`, menu will expand all the ascendant of 
 <script lang="ts">
 import { defineComponent, h, Component } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -25,7 +26,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',

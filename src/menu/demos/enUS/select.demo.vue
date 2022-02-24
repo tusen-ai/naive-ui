@@ -11,7 +11,8 @@ Usually you can use vue-router here to accomplish routing. Also, you can render 
 <script lang="ts">
 import { defineComponent, h, Component } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NIcon, useMessage, MenuOption } from 'naive-ui'
+import { NIcon, useMessage } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -23,7 +24,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: () =>
       h(

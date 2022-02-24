@@ -264,9 +264,9 @@ export default defineComponent({
         '--n-box-shadow-focus': boxShadowFocus,
         '--n-color': color,
         '--n-color-checked': colorChecked,
-        '--n-color-table-header': colorTableHeader,
-        '--n-color-table-header-modal': colorTableHeaderModal,
-        '--n-color-table-header-popover': colorTableHeaderPopover,
+        '--n-color-table': colorTableHeader,
+        '--n-color-table-modal': colorTableHeaderModal,
+        '--n-color-table-popover': colorTableHeaderPopover,
         '--n-color-disabled': colorDisabled,
         '--n-color-disabled-checked': colorDisabledChecked,
         '--n-text-color': textColor,
@@ -327,7 +327,7 @@ export default defineComponent({
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateInsideTable && `${mergedClsPrefix}-checkbox--table-header`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
