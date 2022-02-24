@@ -347,11 +347,7 @@ export default defineComponent({
         const patternInputWrapperEl = patternInputWrapperRef.value
         if (!patternInputWrapperEl) return
         patternInputWrapperEl.tabIndex =
-          props.disabled ||
-          patternInputFocusedRef.value ||
-          (props.filterable && !props.multiple)
-            ? -1
-            : 0
+          props.disabled || patternInputFocusedRef.value ? -1 : 0
       })
     })
     return {
@@ -772,6 +768,7 @@ export default defineComponent({
           <div
             ref="patternInputWrapperRef"
             class={`${clsPrefix}-base-selection-label`}
+            onFocus={this.focusInput}
           >
             <input
               {...this.inputProps}
