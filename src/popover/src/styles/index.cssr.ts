@@ -153,7 +153,7 @@ export default c([
       const isVertical = ['right', 'left'].includes(direction)
       const sizeType = isVertical ? 'width' : 'height'
       return placements.map(placement => {
-        const isReverse = placement.split('-')[0] === 'end'
+        const isReverse = placement.split('-')[1] === 'end'
         const targetSize = `var(--v-target-${sizeType}, 0px)`
         const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
         const offset = getArrowOffset(placement as FollowerPlacement)
