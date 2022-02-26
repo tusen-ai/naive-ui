@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- `n-transfer` 的样式及代码被重构
+
+### Feats
+
+- `n-transfer` 新增 `render-label` 属性
+- `n-transfer` 新增 `render-source-list` 属性
+
 ## 2.25.5 (2022-02-24)
 
 ### Feats
@@ -46,10 +57,6 @@
 - 完善 frFR locale
 
 ## 2.25.2 (2022-02-11)
-
-### Breaking Changes
-
-- `n-transfer` 的样式及代码被重构
 
 ### Fixes
 

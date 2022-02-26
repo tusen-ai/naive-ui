@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- `n-transfer`'s styles and code are refactored.
+
+### Feats
+
+- `n-transfer` add `render-label` prop.
+- `n-transfer` add `render-source-list` prop.
+
 ## 2.25.5 (2022-02-24)
 
 ### Feats
@@ -46,10 +57,6 @@
 - Fix frFR locale.
 
 ## 2.25.2 (2022-02-11)
-
-### Breaking Changes
-
-- `n-transfer`'s styles and code are refactored.
 
 ### Fixes
 
