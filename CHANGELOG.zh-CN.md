@@ -2,6 +2,10 @@
 
 ## 2.25.5
 
+### Fixes
+
+- `n-time-picker` 在 `actions=null` 时依然显示操作栏
+
 ### Feats
 
 - `n-collapse` 添加 `RTL` 支持

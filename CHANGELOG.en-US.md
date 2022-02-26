@@ -2,6 +2,10 @@
 
 ## 2.25.6
 
+### Fixes
+
+- `n-time-picker` still shows action bar when `actions=null`.
+
 ### Feats
 
 - `n-collapse` add `RTL` support.
