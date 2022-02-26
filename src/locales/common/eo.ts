@@ -53,8 +53,8 @@ const eo = {
     clear: 'Malplenigi'
   },
   Transfer: {
-    sourceTitle: 'Fonto',
-    targetTitle: 'Celo'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Neniu datumo'
