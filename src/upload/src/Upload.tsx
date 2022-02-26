@@ -574,7 +574,7 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('upload', undefined, cssVarsRef, props)
-      : null
+      : undefined
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
