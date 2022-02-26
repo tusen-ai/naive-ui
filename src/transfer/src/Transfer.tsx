@@ -25,8 +25,11 @@ import {
   Option,
   Filter,
   OnUpdateValue,
-  transferInjectionKey
+  transferInjectionKey,
+  RenderLabelType,
+  RenderSourceListType
 } from './interface'
+import { NScrollbar } from '../../_internal'
 
 const transferProps = {
   ...(useTheme.props as ThemeProps<TransferTheme>),
@@ -59,6 +62,8 @@ const transferProps = {
     }
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
+  renderLabel: Function as PropType<RenderLabelType>,
+  renderSourceList: Function as PropType<RenderSourceListType>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onChange: {
@@ -114,7 +119,7 @@ export default defineComponent({
       handleInputFocus,
       handleInputBlur,
       handleSrcFilterUpdateValue
-    } = useTransferData(props, mergedDisabledRef)
+    } = useTransferData(props)
     function doUpdateValue (value: OptionValue[]): void {
       const {
         onUpdateValue,
@@ -138,7 +143,7 @@ export default defineComponent({
       doUpdateValue([...avlSrcValueSetRef.value])
     }
 
-    function handleItemClick (checked: boolean, optionValue: OptionValue): void {
+    function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
       if (checked) {
         doUpdateValue([...(mergedValueRef.value || []), optionValue])
       } else {
@@ -150,6 +155,11 @@ export default defineComponent({
         }
       }
     }
+
+    function handleChecked (optionValueList: OptionValue[]): void {
+      doUpdateValue(optionValueList)
+    }
+
     provide(transferInjectionKey, {
       tgtValueSetRef,
       mergedClsPrefixRef,
@@ -158,7 +168,8 @@ export default defineComponent({
       srcOptsRef,
       tgtOptsRef,
       headerBtnStatusRef,
-      handleItemClick
+      handleItemCheck,
+      renderLabel: props.renderLabel
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -175,6 +186,8 @@ export default defineComponent({
       handleSrcFilterUpdateValue,
       handleCheckedAll,
       handleClearAll,
+      handleItemCheck,
+      handleChecked,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -221,7 +234,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, renderSourceList, mergedTheme } = this
     return (
       <div
         class={[
@@ -250,15 +263,31 @@ export default defineComponent({
               />
             ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
-              <NTransferList
-                source
-                options={this.filteredSrcOpts}
-                disabled={this.mergedDisabled}
-                virtualScroll={this.virtualScroll}
-                isMounted={this.isMounted}
-                isInputing={this.isInputing}
-                itemSize={this.itemSize}
-              />
+              {renderSourceList ? (
+                <NScrollbar
+                  theme={mergedTheme.peers.Scrollbar}
+                  themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                >
+                  {{
+                    default: () =>
+                      renderSourceList({
+                        onCheck: this.handleChecked,
+                        checkedOptions: this.tgtOpts,
+                        pattern: this.srcPattern
+                      })
+                  }}
+                </NScrollbar>
+              ) : (
+                <NTransferList
+                  source
+                  options={this.filteredSrcOpts}
+                  disabled={this.mergedDisabled}
+                  virtualScroll={this.virtualScroll}
+                  isMounted={this.isMounted}
+                  isInputing={this.isInputing}
+                  itemSize={this.itemSize}
+                />
+              )}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-transfer-list__border`} />

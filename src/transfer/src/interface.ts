@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import { Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TransferTheme } from '../styles'
@@ -22,6 +22,21 @@ export type Filter = (
   from: 'source' | 'target'
 ) => boolean
 
+export interface RenderLabelProps {
+  from: 'source' | 'target'
+  option: Option
+}
+
+export type RenderLabelType = (props: RenderLabelProps) => VNodeChild
+
+export interface RenderListProps {
+  onCheck: (checkedValueList: OptionValue[]) => void
+  checkedOptions: Option[]
+  pattern: string
+}
+
+export type RenderSourceListType = (props: RenderListProps) => VNodeChild
+
 export interface TransferInjection {
   tgtValueSetRef: Ref<Set<OptionValue>>
   mergedClsPrefixRef: Ref<string>
@@ -30,7 +45,8 @@ export interface TransferInjection {
   srcOptsRef: Ref<Option[]>
   tgtOptsRef: Ref<Option[]>
   headerBtnStatusRef: Ref<CheckedStatus>
-  handleItemClick: (checked: boolean, value: OptionValue) => void
+  handleItemCheck: (checked: boolean, value: OptionValue) => void
+  renderLabel: RenderLabelType | undefined
 }
 
 export const transferInjectionKey =

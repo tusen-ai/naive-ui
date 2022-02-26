@@ -201,8 +201,7 @@ export default c([
               })
             ]),
             cB('transfer-list-item', `
-              height: var(--n-item-height);
-              max-height: var(--n-item-height);
+              min-height: var(--n-item-height);
               display: grid;
               grid-template-areas: "checkbox label suffix";
               grid-template-columns: auto 1fr auto;
@@ -217,10 +216,6 @@ export default c([
               cE('checkbox', `
                 grid-area: checkbox;
                 padding: 0 9px 0 14px;
-              `),
-              cE('label', `
-                grid-area: label;
-                padding-left: 14px;
               `),
               cE('close', `
                 grid-area: suffix;

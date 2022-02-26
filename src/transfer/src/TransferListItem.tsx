@@ -1,7 +1,7 @@
-import { h, inject, defineComponent, ref } from 'vue'
+import { h, inject, defineComponent, ref, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
-import { transferInjectionKey } from './interface'
+import { transferInjectionKey, Option } from './interface'
 import { getTitleAttribute } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 
@@ -23,6 +23,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    option: {
+      type: Object as PropType<Option>,
+      required: true
     }
   },
   setup (props) {
@@ -30,14 +34,15 @@ export default defineComponent({
       tgtValueSetRef,
       mergedClsPrefixRef,
       mergedThemeRef,
-      handleItemClick
+      handleItemCheck,
+      renderLabel
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkedRef = useMemo(() => tgtValueSetRef.value.has(props.value))
     const hasItemHoverRef = ref(false)
     function handleClick (): void {
       if (!props.disabled) {
-        handleItemClick(!checkedRef.value, props.value)
+        handleItemCheck(!checkedRef.value, props.value)
       }
     }
     function handleMouseEnter (): void {
@@ -53,12 +58,20 @@ export default defineComponent({
       hasItemHover: hasItemHoverRef,
       handleClick,
       handleMouseEnter,
-      handleMouseLeave
+      handleMouseLeave,
+      renderLabel
     }
   },
   render () {
-    const { disabled, mergedTheme, mergedClsPrefix, label, checked, source } =
-      this
+    const {
+      disabled,
+      mergedTheme,
+      mergedClsPrefix,
+      label,
+      checked,
+      source,
+      renderLabel
+    } = this
     return (
       <div
         class={[
@@ -86,7 +99,12 @@ export default defineComponent({
           class={`${mergedClsPrefix}-transfer-list-item__label`}
           title={getTitleAttribute(label)}
         >
-          {label}
+          {renderLabel
+            ? renderLabel({
+              from: source ? 'source' : 'target',
+              option: this.option
+            })
+            : label}
         </div>
         {!source && this.hasItemHover && !disabled && (
           <div class={`${mergedClsPrefix}-transfer-list-item__close`}>

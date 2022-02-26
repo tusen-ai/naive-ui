@@ -13,6 +13,8 @@ basic.vue
 large-data.vue
 size.vue
 filterable.vue
+render-label
+render-source-list
 ```
 
 ## API
@@ -26,6 +28,8 @@ filterable.vue
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 |
 | options | `Array<TransferOption>` | `[]` | 配置选项内容，详情见 TransferOption Type |
+| render-label | `({ from, option }: { from: 'source' \| 'target', option: TransferOption }) => VNodeChild` | `undefined` | 自定义标签 |
+| render-source-list | `({ onCheck, checkedOptions, pattern }: { onCheck: (checkedValueList: Array<OptionValue>) => void, checkedOptions: Array<Option>, pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 |
 | source-title | `string` | `'源项'` | 源项标题 |

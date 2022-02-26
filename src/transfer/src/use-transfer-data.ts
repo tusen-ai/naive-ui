@@ -1,4 +1,4 @@
-import { ref, computed, toRef, Ref } from 'vue'
+import { ref, computed, toRef } from 'vue'
 import { useMergedState } from 'vooks'
 import type { Option, OptionValue, Filter, CheckedStatus } from './interface'
 
@@ -11,10 +11,7 @@ interface UseTransferDataProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useTransferData (
-  props: UseTransferDataProps,
-  mergedDisabledRef: Ref<boolean>
-) {
+export function useTransferData (props: UseTransferDataProps) {
   const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = toRef(props, 'value')
 
@@ -27,7 +24,7 @@ export function useTransferData (
   const optMapRef = computed(() => {
     const map = new Map()
     ;(props.options || []).forEach((opt) => map.set(opt.value, opt))
-    return map
+    return map as Map<OptionValue, Option>
   })
 
   // set 化的 value
@@ -39,7 +36,7 @@ export function useTransferData (
   // 用于展示目标项列表数目
   const tgtOptsRef = computed(() => {
     const optMap = optMapRef.value
-    return (mergedValueRef.value || []).map((v) => optMap.get(v))
+    return (mergedValueRef.value || []).map((v) => optMap.get(v)) as Option[]
   })
 
   // 源项过滤输入的值
