@@ -11,7 +11,10 @@ export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
 export { cascaderDark } from './cascader/styles'
 export { checkboxDark } from './checkbox/styles'
 export { codeDark } from './code/styles'
-export { collapseDark } from './collapse/styles'
+export {
+  collapseDark,
+  collapseRtl as unstableCollapseRtl
+} from './collapse/styles'
 export { dataTableDark } from './data-table/styles'
 export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'

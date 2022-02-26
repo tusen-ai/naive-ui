@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.25.6
+
+### Feats
+
+- `n-collapse` add `RTL` support.
+
 ## 2.25.5 (2022-02-24)
 
 ### Feats
