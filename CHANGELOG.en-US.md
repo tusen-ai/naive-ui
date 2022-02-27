@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-time-picker` still shows action bar when `actions=null`.
+- `n-time-picker` still shows action bar when `:actions="null"`.
+- `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
 
 ### Feats
 
