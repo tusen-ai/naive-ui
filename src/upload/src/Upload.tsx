@@ -208,8 +208,8 @@ function appendData (
 
 function submitImpl (
   inst: UploadInternalInst,
+  fieldName: string,
   file: FileInfo,
-  formData: FormData,
   {
     method,
     action,
@@ -227,7 +227,9 @@ function submitImpl (
   const request = new XMLHttpRequest()
   inst.XhrMap.set(file.id, request)
   request.withCredentials = withCredentials
+  const formData = new FormData()
   appendData(formData, data, file)
+  formData.append(fieldName, file.file as File)
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -452,8 +454,6 @@ export default defineComponent({
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
-          const formData = new FormData()
-          formData.append(fieldName, file.file as File)
           if (props.customRequest) {
             customSubmitImpl({
               inst: {
@@ -477,8 +477,8 @@ export default defineComponent({
                 onFinish: props.onFinish,
                 onError: props.onError
               },
+              fieldName,
               file,
-              formData,
               {
                 method,
                 action,

@@ -4,8 +4,9 @@
 
 ### Fixes
 
-- `n-time-picker` 在 `"actions="null"` 时依然显示操作栏
-- `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
+- 修复 `n-time-picker` 在 `"actions="null"` 时依然显示操作栏
+- 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
+- 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 
 ### Feats
 

@@ -4,8 +4,9 @@
 
 ### Fixes
 
-- `n-time-picker` still shows action bar when `:actions="null"`.
-- `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
+- Fix `n-time-picker` still shows action bar when `:actions="null"`.
+- Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
+- Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 
 ### Feats
 
