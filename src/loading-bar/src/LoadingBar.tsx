@@ -151,8 +151,7 @@ export default defineComponent({
   },
   render () {
     if (!this.started) return null
-    const { mergedClsPrefix, themeClass } = this
-    this.onRender?.()
+    const { mergedClsPrefix } = this
     return (
       <Transition
         name="fade-in-transition"
@@ -168,14 +167,18 @@ export default defineComponent({
           it.
         */}
         {{
-          default: () =>
-            withDirectives(
+          default: () => {
+            this.onRender?.()
+            return withDirectives(
               <div
-                class={[`${mergedClsPrefix}-loading-bar-container`, themeClass]}
+                class={[
+                  `${mergedClsPrefix}-loading-bar-container`,
+                  this.themeClass
+                ]}
               >
                 <div
                   ref="loadingBarRef"
-                  class={`${mergedClsPrefix}-loading-bar`}
+                  class={[`${mergedClsPrefix}-loading-bar`]}
                   style={[
                     this.cssVars as any,
                     this.mergedLoadingBarStyle as any
@@ -184,6 +187,7 @@ export default defineComponent({
               </div>,
               [[vShow, this.loading || (!this.loading && this.entering)]]
             )
+          }
         }}
       </Transition>
     )

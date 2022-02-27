@@ -705,8 +705,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix, $slots, onRender } = this
-    onRender?.()
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
         <VBinder>
@@ -776,6 +775,7 @@ export default defineComponent({
                             multiple,
                             menuProps
                           } = this
+                          this.onRender?.()
                           return withDirectives(
                             <div
                               {...menuProps}

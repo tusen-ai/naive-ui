@@ -22,7 +22,7 @@ const collapseProps = {
     default: true
   },
   appear: Boolean,
-  // The collapsed is implemented will mistake, collapsed=true would make it show
+  // The collapsed is implemented with mistake, collapsed=true would make it show
   // However there's no possibility to change so I just let it deprecated and use
   // `show` prop instead.
   /** @deprecated */
@@ -89,27 +89,27 @@ export default defineComponent({
     }
   },
   render () {
-    this.onRender?.()
     return (
       <NFadeInExpandTransition appear={this.appear}>
         {{
-          default: () =>
-            this.mergedShow
-              ? h(
-                'div', // Don't use jsx since it would cause useless spread in each rendering
-                mergeProps(
-                  {
-                    class: [
-                        `${this.mergedClsPrefix}-collapse-transition`,
-                        this.themeClass
-                    ],
-                    style: this.cssVars
-                  },
-                  this.$attrs
-                ),
-                this.$slots
-              )
-              : null
+          default: () => {
+            if (!this.mergedShow) return
+            this.onRender?.()
+            return h(
+              'div', // Don't use jsx since it would cause useless spread in each rendering
+              mergeProps(
+                {
+                  class: [
+                    `${this.mergedClsPrefix}-collapse-transition`,
+                    this.themeClass
+                  ],
+                  style: this.cssVars
+                },
+                this.$attrs
+              ),
+              this.$slots
+            )
+          }
         }}
       </NFadeInExpandTransition>
     )
