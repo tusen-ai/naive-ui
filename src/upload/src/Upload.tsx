@@ -600,7 +600,9 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
-      cssVarsRef,
+      cssVarsRef: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClassRef: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       showTriggerRef: toRef(props, 'showTrigger'),
       imageGroupPropsRef: toRef(props, 'imageGroupProps')
     })
@@ -628,7 +630,6 @@ export default defineComponent({
   },
   render () {
     const { draggerInsideRef, mergedClsPrefix, $slots, onRender } = this
-    onRender?.()
     if ($slots.default && !this.abstract) {
       const firstChild = $slots.default()[0]
       if ((firstChild as any)?.type?.[uploadDraggerKey]) {
@@ -648,12 +649,17 @@ export default defineComponent({
       />
     )
 
-    return this.abstract ? (
-      <>
-        {$slots.default?.()}
-        <Teleport to="body">{inputNode}</Teleport>
-      </>
-    ) : (
+    if (this.abstract) {
+      return (
+        <>
+          {$slots.default?.()}
+          <Teleport to="body">{inputNode}</Teleport>
+        </>
+      )
+    }
+
+    onRender?.()
+    return (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
