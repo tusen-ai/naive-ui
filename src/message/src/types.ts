@@ -18,6 +18,7 @@ MessageSetupProps,
 export type MessageRenderMessage = (props: RenderMessageProps) => VNodeChild
 
 export interface MessageOptions {
+  type?: MessageType
   render?: MessageRenderMessage
   duration?: number
   closable?: boolean
