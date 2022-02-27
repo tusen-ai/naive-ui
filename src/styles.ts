@@ -9,7 +9,10 @@ export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
 export { cascaderDark } from './cascader/styles'
-export { checkboxDark } from './checkbox/styles'
+export {
+  checkboxDark,
+  checkboxRtl as unstableCheckboxRtl
+} from './checkbox/styles'
 export { codeDark } from './code/styles'
 export {
   collapseDark,

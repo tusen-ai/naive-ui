@@ -33,6 +33,7 @@ import type {
   CheckboxInst
 } from './interface'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
@@ -93,7 +94,8 @@ export default defineComponent({
       })
     }
     const selfRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
         const { size } = props
@@ -223,6 +225,7 @@ export default defineComponent({
         selfRef.value?.blur()
       }
     }
+    const rtlEnabledRef = useRtl('Checkbox', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { value: mergedSize } = mergedSizeRef
       const {
@@ -287,6 +290,7 @@ export default defineComponent({
       )
       : undefined
     return Object.assign(formItem, exposedMethods, {
+      rtlEnabled: rtlEnabledRef,
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
@@ -324,6 +328,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-checkbox`,
           this.themeClass,
+          this.rtlEnabled && `${mergedClsPrefix}-checkbox--rtl`,
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,

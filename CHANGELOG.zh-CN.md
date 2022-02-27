@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## 2.25.5
+## 2.25.6
 
 ### Feats
 
 - `n-collapse` 添加 `RTL` 支持
+- `n-checkbox` 添加 `RTL` 支持
 
 ## 2.25.5 (2022-02-24)
 
