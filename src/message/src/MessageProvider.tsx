@@ -39,6 +39,7 @@ export interface MessageReactive {
   keepAliveOnHover?: boolean
   type: MessageType
   icon?: () => VNodeChild
+  showIcon?: boolean
   onClose?: () => void
   destroy: () => void
 }

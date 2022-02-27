@@ -17,6 +17,7 @@ export interface MessageOptions {
   closable?: boolean
   keepAliveOnHover?: boolean
   icon?: () => VNodeChild
+  showIcon?: boolean
   onClose?: () => void
   onLeave?: () => void
   onAfterLeave?: () => void
