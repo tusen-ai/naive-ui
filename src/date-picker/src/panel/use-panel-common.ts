@@ -38,7 +38,9 @@ const usePanelCommonProps = {
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
-  }
+  },
+  themeClass: String,
+  onRender: Function as PropType<(() => void) | undefined>
 } as const
 
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>

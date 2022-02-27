@@ -22,7 +22,7 @@ import Schema, {
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { ThemeProps, useConfig, useTheme } from '../../_mixins'
+import { ThemeProps, useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   warn,
   createKey,
@@ -145,7 +145,7 @@ export default defineComponent({
       'formItems',
       toRef(props, 'path')
     )
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
@@ -345,6 +345,67 @@ export default defineComponent({
         )
       }
     })
+    const cssVarsRef = computed(() => {
+      const { value: size } = mergedSizeRef
+      const { value: labelPlacement } = labelPlacementRef
+      const direction: 'vertical' | 'horizontal' =
+        labelPlacement === 'top' ? 'vertical' : 'horizontal'
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          labelTextColor,
+          asteriskColor,
+          lineHeight,
+          feedbackTextColor,
+          feedbackTextColorWarning,
+          feedbackTextColorError,
+          feedbackPadding,
+          [createKey('labelHeight', size)]: labelHeight,
+          [createKey('blankHeight', size)]: blankHeight,
+          [createKey('feedbackFontSize', size)]: feedbackFontSize,
+          [createKey('feedbackHeight', size)]: feedbackHeight,
+          [createKey('labelPadding', direction)]: labelPadding,
+          [createKey('labelTextAlign', direction)]: labelTextAlign,
+          [createKey(createKey('labelFontSize', labelPlacement), size)]:
+            labelFontSize
+        }
+      } = themeRef.value
+
+      let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
+      if (labelPlacement === 'top') {
+        mergedLabelTextAlign =
+          mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
+      }
+
+      const cssVars = {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-line-height': lineHeight,
+        '--n-blank-height': blankHeight,
+        '--n-label-font-size': labelFontSize,
+        '--n-label-text-align': mergedLabelTextAlign,
+        '--n-label-height': labelHeight,
+        '--n-label-padding': labelPadding,
+        '--n-asterisk-color': asteriskColor,
+        '--n-label-text-color': labelTextColor,
+        '--n-feedback-padding': feedbackPadding,
+        '--n-feedback-font-size': feedbackFontSize,
+        '--n-feedback-height': feedbackHeight,
+        '--n-feedback-text-color': feedbackTextColor,
+        '--n-feedback-text-color-warning': feedbackTextColorWarning,
+        '--n-feedback-text-color-error': feedbackTextColorError
+      }
+      return cssVars
+    })
+    const themeClassHandle = useThemeClass(
+      'form-item',
+      computed(() => {
+        return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
+          labelTextAlignRef.value?.[0] || ''
+        }`
+      }),
+      cssVarsRef,
+      props
+    )
     return {
       labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -355,57 +416,9 @@ export default defineComponent({
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
-      cssVars: computed(() => {
-        const { value: size } = mergedSizeRef
-        const { value: labelPlacement } = labelPlacementRef
-        const direction: 'vertical' | 'horizontal' =
-          labelPlacement === 'top' ? 'vertical' : 'horizontal'
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            labelTextColor,
-            asteriskColor,
-            lineHeight,
-            feedbackTextColor,
-            feedbackTextColorWarning,
-            feedbackTextColorError,
-            feedbackPadding,
-            [createKey('labelHeight', size)]: labelHeight,
-            [createKey('blankHeight', size)]: blankHeight,
-            [createKey('feedbackFontSize', size)]: feedbackFontSize,
-            [createKey('feedbackHeight', size)]: feedbackHeight,
-            [createKey('labelPadding', direction)]: labelPadding,
-            [createKey('labelTextAlign', direction)]: labelTextAlign,
-            [createKey(createKey('labelFontSize', labelPlacement), size)]:
-              labelFontSize
-          }
-        } = themeRef.value
-
-        let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
-        if (labelPlacement === 'top') {
-          mergedLabelTextAlign =
-            mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
-        }
-
-        const cssVars = {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-line-height': lineHeight,
-          '--n-blank-height': blankHeight,
-          '--n-label-font-size': labelFontSize,
-          '--n-label-text-align': mergedLabelTextAlign,
-          '--n-label-height': labelHeight,
-          '--n-label-padding': labelPadding,
-          '--n-asterisk-color': asteriskColor,
-          '--n-label-text-color': labelTextColor,
-          '--n-feedback-padding': feedbackPadding,
-          '--n-feedback-font-size': feedbackFontSize,
-          '--n-feedback-height': feedbackHeight,
-          '--n-feedback-text-color': feedbackTextColor,
-          '--n-feedback-text-color-warning': feedbackTextColorWarning,
-          '--n-feedback-text-color-error': feedbackTextColorError
-        }
-        return cssVars
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -414,16 +427,19 @@ export default defineComponent({
       mergedClsPrefix,
       mergedShowLabel,
       mergedShowRequireMark,
-      mergedRequireMarkPlacement
+      mergedRequireMarkPlacement,
+      onRender
     } = this
     const renderedShowRequireMark =
       mergedShowRequireMark !== undefined
         ? mergedShowRequireMark
         : this.mergedRequired
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-form-item`,
+          this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`

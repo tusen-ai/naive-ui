@@ -9,6 +9,7 @@ import {
 import { createKey, formatLength, throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { timelineInjectionKey } from './Timeline'
+import { useConfig, useThemeClass } from '../../_mixins'
 
 const timelineItemProps = {
   time: [String, Number] as PropType<string | number>,
@@ -36,53 +37,73 @@ export default defineComponent({
         '`n-timeline-item` must be placed inside `n-timeline`.'
       )
     }
+    const { inlineThemeDisabled } = useConfig()
+    const cssVarsRef = computed(() => {
+      const {
+        props: { size, iconSize: iconSizeProp },
+        mergedThemeRef
+      } = NTimeline
+      const { type } = props
+      const {
+        self: {
+          titleTextColor,
+          contentTextColor,
+          metaTextColor,
+          lineColor,
+          titleFontWeight,
+          contentFontSize,
+          [createKey('iconSize', size)]: iconSize,
+          [createKey('titleMargin', size)]: titleMargin,
+          [createKey('titleFontSize', size)]: titleFontSize,
+          [createKey('circleBorder', type)]: circleBorder,
+          [createKey('iconColor', type)]: iconColor
+        },
+        common: { cubicBezierEaseInOut }
+      } = mergedThemeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-circle-border': circleBorder,
+        '--n-icon-color': iconColor,
+        '--n-content-font-size': contentFontSize,
+        '--n-content-text-color': contentTextColor,
+        '--n-line-color': lineColor,
+        '--n-meta-text-color': metaTextColor,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-margin': titleMargin,
+        '--n-title-text-color': titleTextColor,
+        '--n-icon-size': formatLength(iconSizeProp) || iconSize
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'timeline-item',
+        computed(() => {
+          const {
+            props: { size, iconSize: iconSizeProp }
+          } = NTimeline
+          const { type } = props
+          return `${size[0]}${iconSizeProp || 'a'}${type[0]}`
+        }),
+        cssVarsRef,
+        NTimeline.props
+      )
+      : undefined
     return {
       mergedClsPrefix: NTimeline.mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          props: { size, iconSize: iconSizeProp },
-          mergedThemeRef
-        } = NTimeline
-        const { type } = props
-        const {
-          self: {
-            titleTextColor,
-            contentTextColor,
-            metaTextColor,
-            lineColor,
-            titleFontWeight,
-            contentFontSize,
-            [createKey('iconSize', size)]: iconSize,
-            [createKey('titleMargin', size)]: titleMargin,
-            [createKey('titleFontSize', size)]: titleFontSize,
-            [createKey('circleBorder', type)]: circleBorder,
-            [createKey('iconColor', type)]: iconColor
-          },
-          common: { cubicBezierEaseInOut }
-        } = mergedThemeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-circle-border': circleBorder,
-          '--n-icon-color': iconColor,
-          '--n-content-font-size': contentFontSize,
-          '--n-content-text-color': contentTextColor,
-          '--n-line-color': lineColor,
-          '--n-meta-text-color': metaTextColor,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-title-margin': titleMargin,
-          '--n-title-text-color': titleTextColor,
-          '--n-icon-size': formatLength(iconSizeProp) || iconSize
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, color, $slots } = this
+    const { mergedClsPrefix, color, onRender, $slots } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-timeline-item`,
+          this.themeClass,
           `${mergedClsPrefix}-timeline-item--${this.type}-type`
         ]}
         style={this.cssVars as CSSProperties}

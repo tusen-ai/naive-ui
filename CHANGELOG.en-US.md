@@ -1,12 +1,23 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.6
+
+### Fixes
+
+- Fix `n-time-picker` still shows action bar when `:actions="null"`.
+- Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
+- Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 
 ### Feats
 
+- `n-collapse` add `RTL` support.
 - `n-message` adds `show-icon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
 
 ## 2.25.5 (2022-02-24)
+
+### Feats
+
+- `n-popover` adds `arrow-point-to-center` prop.
 
 ### Fixes
 

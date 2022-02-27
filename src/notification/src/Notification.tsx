@@ -17,6 +17,7 @@ import {
 import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
+import { useConfig, useThemeClass } from '../../_mixins'
 
 const iconMap = {
   info: <InfoIcon />,
@@ -55,10 +56,74 @@ export const Notification = defineComponent({
   name: 'Notification',
   props: notificationProps,
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedClsPrefixRef, mergedThemeRef } = inject(
-      notificationProviderInjectionKey
-    )!
+    const {
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      props: providerProps
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(notificationProviderInjectionKey)!
+    const { inlineThemeDisabled } = useConfig()
+    const cssVarsRef = computed(() => {
+      const { type } = props
+      const {
+        self: {
+          color,
+          textColor,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          headerTextColor,
+          descriptionTextColor,
+          actionTextColor,
+          borderRadius,
+          headerFontWeight,
+          boxShadow,
+          lineHeight,
+          fontSize,
+          closeMargin,
+          closeSize,
+          width,
+          padding,
+          [createKey('iconColor', type)]: iconColor
+        },
+        common: { cubicBezierEaseOut, cubicBezierEaseIn, cubicBezierEaseInOut }
+      } = mergedThemeRef.value
+      const { left, right, top, bottom } = getPadding(padding)
+      return {
+        '--n-color': color,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-description-text-color': descriptionTextColor,
+        '--n-action-text-color': actionTextColor,
+        '--n-title-text-color': headerTextColor,
+        '--n-title-font-weight': headerFontWeight,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-bezier-ease-out': cubicBezierEaseOut,
+        '--n-bezier-ease-in': cubicBezierEaseIn,
+        '--n-border-radius': borderRadius,
+        '--n-box-shadow': boxShadow,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-line-height': lineHeight,
+        '--n-icon-color': iconColor,
+        '--n-close-margin': closeMargin,
+        '--n-close-size': closeSize,
+        '--n-width': width,
+        '--n-padding-left': left,
+        '--n-padding-right': right,
+        '--n-padding-top': top,
+        '--n-padding-bottom': bottom
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'notification',
+        computed(() => props.type[0]),
+        cssVarsRef,
+        providerProps
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       showAvatar: computed(() => {
@@ -67,71 +132,19 @@ export const Notification = defineComponent({
       handleCloseClick () {
         props.onClose()
       },
-      cssVars: computed(() => {
-        const { type } = props
-        const {
-          self: {
-            color,
-            textColor,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            headerTextColor,
-            descriptionTextColor,
-            actionTextColor,
-            borderRadius,
-            headerFontWeight,
-            boxShadow,
-            lineHeight,
-            fontSize,
-            closeMargin,
-            closeSize,
-            width,
-            padding,
-            [createKey('iconColor', type)]: iconColor
-          },
-          common: {
-            cubicBezierEaseOut,
-            cubicBezierEaseIn,
-            cubicBezierEaseInOut
-          }
-        } = mergedThemeRef.value
-        const { left, right, top, bottom } = getPadding(padding)
-        return {
-          '--n-color': color,
-          '--n-font-size': fontSize,
-          '--n-text-color': textColor,
-          '--n-description-text-color': descriptionTextColor,
-          '--n-action-text-color': actionTextColor,
-          '--n-title-text-color': headerTextColor,
-          '--n-title-font-weight': headerFontWeight,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-bezier-ease-out': cubicBezierEaseOut,
-          '--n-bezier-ease-in': cubicBezierEaseIn,
-          '--n-border-radius': borderRadius,
-          '--n-box-shadow': boxShadow,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-line-height': lineHeight,
-          '--n-icon-color': iconColor,
-          '--n-close-margin': closeMargin,
-          '--n-close-size': closeSize,
-          '--n-width': width,
-          '--n-padding-left': left,
-          '--n-padding-right': right,
-          '--n-padding-top': top,
-          '--n-padding-bottom': bottom
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedClsPrefix } = this
+    this.onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-notification`,
+          this.themeClass,
           {
             [`${mergedClsPrefix}-notification--closable`]: this.closable,
             [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar

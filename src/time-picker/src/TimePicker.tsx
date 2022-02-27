@@ -36,7 +36,13 @@ import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
 import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
+import {
+  useConfig,
+  useTheme,
+  useLocale,
+  useFormItem,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -164,8 +170,12 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
@@ -634,8 +644,48 @@ export default defineComponent({
         inputInstRef.value?.blur()
       }
     }
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          panelColor,
+          itemTextColor,
+          itemTextColorActive,
+          itemColorHover,
+          panelDividerColor,
+          panelBoxShadow,
+          itemOpacityDisabled,
+          borderRadius,
+          itemFontSize,
+          itemWidth,
+          itemHeight,
+          panelActionPadding,
+          itemBorderRadius
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-font-size': itemFontSize,
+        '--n-item-height': itemHeight,
+        '--n-item-opacity-disabled': itemOpacityDisabled,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-active': itemTextColorActive,
+        '--n-item-width': itemWidth,
+        '--n-panel-action-padding': panelActionPadding,
+        '--n-panel-box-shadow': panelBoxShadow,
+        '--n-panel-color': panelColor,
+        '--n-panel-divider-color': panelDividerColor,
+        '--n-item-border-radius': itemBorderRadius
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('time-picker', undefined, cssVarsRef, props)
+      : undefined
     return {
-      ...exposedMethods,
+      focus: exposedMethods.focus,
+      blur: exposedMethods.blur,
       mergedStatus: mergedStatusRef,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -697,42 +747,9 @@ export default defineComponent({
           '--n-bezier': cubicBezierEaseInOut
         }
       }),
-      cssVars: computed(() => {
-        const {
-          self: {
-            panelColor,
-            itemTextColor,
-            itemTextColorActive,
-            itemColorHover,
-            panelDividerColor,
-            panelBoxShadow,
-            itemOpacityDisabled,
-            borderRadius,
-            itemFontSize,
-            itemWidth,
-            itemHeight,
-            panelActionPadding,
-            itemBorderRadius
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-item-color-hover': itemColorHover,
-          '--n-item-font-size': itemFontSize,
-          '--n-item-height': itemHeight,
-          '--n-item-opacity-disabled': itemOpacityDisabled,
-          '--n-item-text-color': itemTextColor,
-          '--n-item-text-color-active': itemTextColorActive,
-          '--n-item-width': itemWidth,
-          '--n-panel-action-padding': panelActionPadding,
-          '--n-panel-box-shadow': panelBoxShadow,
-          '--n-panel-color': panelColor,
-          '--n-panel-divider-color': panelDividerColor,
-          '--n-item-border-radius': itemBorderRadius
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -809,49 +826,53 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(
-                                <Panel
-                                  ref="panelInstRef"
-                                  actions={this.actions}
-                                  style={this.cssVars as CSSProperties}
-                                  seconds={this.seconds}
-                                  minutes={this.minutes}
-                                  hours={this.hours}
-                                  transitionDisabled={this.transitionDisabled}
-                                  hourValue={this.hourValue}
-                                  showHour={this.hourInFormat}
-                                  isHourInvalid={this.isHourInvalid}
-                                  isHourDisabled={this.isHourDisabled}
-                                  minuteValue={this.minuteValue}
-                                  showMinute={this.minuteInFormat}
-                                  isMinuteInvalid={this.isMinuteInvalid}
-                                  isMinuteDisabled={this.isMinuteDisabled}
-                                  secondValue={this.secondValue}
-                                  amPmValue={this.amPmValue}
-                                  showSecond={this.secondInFormat}
-                                  isSecondInvalid={this.isSecondInvalid}
-                                  isSecondDisabled={this.isSecondDisabled}
-                                  isValueInvalid={this.isValueInvalid}
-                                  nowText={this.localizedNow}
-                                  confirmText={this.localizedPositiveText}
-                                  use12Hours={this.use12Hours}
-                                  onFocusout={this.handleMenuFocusOut}
-                                  onKeydown={this.handleMenuKeyDown}
-                                  onHourClick={this.handleHourClick}
-                                  onMinuteClick={this.handleMinuteClick}
-                                  onSecondClick={this.handleSecondClick}
-                                  onAmPmClick={this.handleAmPmClick}
-                                  onNowClick={this.handleNowClick}
-                                  onConfirmClick={this.handleConfirmClick}
-                                  onFocusDetectorFocus={
-                                    this.handleFocusDetectorFocus
-                                  }
-                                />,
-                                [[clickoutside, this.handleClickOutside]]
+                        default: () => {
+                          if (this.mergedShow) {
+                            this.onRender?.()
+                            return withDirectives(
+                              <Panel
+                                ref="panelInstRef"
+                                actions={this.actions}
+                                class={this.themeClass}
+                                style={this.cssVars as CSSProperties}
+                                seconds={this.seconds}
+                                minutes={this.minutes}
+                                hours={this.hours}
+                                transitionDisabled={this.transitionDisabled}
+                                hourValue={this.hourValue}
+                                showHour={this.hourInFormat}
+                                isHourInvalid={this.isHourInvalid}
+                                isHourDisabled={this.isHourDisabled}
+                                minuteValue={this.minuteValue}
+                                showMinute={this.minuteInFormat}
+                                isMinuteInvalid={this.isMinuteInvalid}
+                                isMinuteDisabled={this.isMinuteDisabled}
+                                secondValue={this.secondValue}
+                                amPmValue={this.amPmValue}
+                                showSecond={this.secondInFormat}
+                                isSecondInvalid={this.isSecondInvalid}
+                                isSecondDisabled={this.isSecondDisabled}
+                                isValueInvalid={this.isValueInvalid}
+                                nowText={this.localizedNow}
+                                confirmText={this.localizedPositiveText}
+                                use12Hours={this.use12Hours}
+                                onFocusout={this.handleMenuFocusOut}
+                                onKeydown={this.handleMenuKeyDown}
+                                onHourClick={this.handleHourClick}
+                                onMinuteClick={this.handleMinuteClick}
+                                onSecondClick={this.handleSecondClick}
+                                onAmPmClick={this.handleAmPmClick}
+                                onNowClick={this.handleNowClick}
+                                onConfirmClick={this.handleConfirmClick}
+                                onFocusDetectorFocus={
+                                  this.handleFocusDetectorFocus
+                                }
+                              />,
+                              [[clickoutside, this.handleClickOutside]]
                             )
-                            : null
+                          }
+                          return null
+                        }
                       }}
                     </Transition>
                   )

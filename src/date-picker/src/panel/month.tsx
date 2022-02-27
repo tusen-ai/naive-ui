@@ -84,15 +84,18 @@ export default defineComponent({
       shortcuts,
       actions,
       renderItem,
-      type
+      type,
+      onRender
     } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--month`
+          `${mergedClsPrefix}-date-panel--month`,
+          this.themeClass
         ]}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}

@@ -1,12 +1,23 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.25.5
+
+### Fixes
+
+- 修复 `n-time-picker` 在 `"actions="null"` 时依然显示操作栏
+- 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
+- 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 
 ### Feats
 
+- `n-collapse` 添加 `RTL` 支持
 - `n-message` 新增 `show-icon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
 
 ## 2.25.5 (2022-02-24)
+
+### Feats
+
+- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ### Fixes
 
