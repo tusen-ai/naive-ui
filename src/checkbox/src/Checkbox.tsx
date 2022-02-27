@@ -248,11 +248,13 @@ export default defineComponent({
           colorDisabledChecked,
           borderDisabledChecked,
           labelPadding,
+          labelLineHeight,
           [createKey('fontSize', mergedSize)]: fontSize,
           [createKey('size', mergedSize)]: size
         }
       } = themeRef.value
       return {
+        '--n-label-line-height': labelLineHeight,
         '--n-size': size,
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
@@ -350,25 +352,28 @@ export default defineComponent({
           )
         }}
       >
-        <div class={`${mergedClsPrefix}-checkbox-box`}>
-          <NIconSwitchTransition>
-            {{
-              default: () =>
-                this.indeterminate ? (
-                  <div
-                    key="indeterminate"
-                    class={`${mergedClsPrefix}-checkbox-icon`}
-                  >
-                    {LineMark}
-                  </div>
-                ) : (
-                  <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                    {CheckMark}
-                  </div>
-                )
-            }}
-          </NIconSwitchTransition>
-          <div class={`${mergedClsPrefix}-checkbox-box__border`} />
+        <div class={`${mergedClsPrefix}-checkbox-box-wrapper`}>
+          &nbsp;
+          <div class={`${mergedClsPrefix}-checkbox-box`}>
+            <NIconSwitchTransition>
+              {{
+                default: () =>
+                  this.indeterminate ? (
+                    <div
+                      key="indeterminate"
+                      class={`${mergedClsPrefix}-checkbox-icon`}
+                    >
+                      {LineMark}
+                    </div>
+                  ) : (
+                    <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
+                      {CheckMark}
+                    </div>
+                  )
+              }}
+            </NIconSwitchTransition>
+            <div class={`${mergedClsPrefix}-checkbox-box__border`} />
+          </div>
         </div>
         {label !== null || $slots.default ? (
           <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>

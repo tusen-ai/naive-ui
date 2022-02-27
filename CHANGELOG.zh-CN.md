@@ -13,6 +13,8 @@
 - `n-collapse` 添加 `RTL` 支持
 - `useMessage` 新增 `showIcon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
 - `useMessage` 支持 `'default'` 的 `type`
+- `n-checkbox` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
+- `n-radio` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
 
 ## 2.25.5 (2022-02-24)
 
