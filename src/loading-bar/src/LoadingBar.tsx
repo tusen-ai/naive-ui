@@ -9,7 +9,7 @@ import {
   ref,
   nextTick
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'
 import { loadingBarProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
@@ -23,7 +23,8 @@ function createClassName (
 
 export default defineComponent({
   name: 'LoadingBar',
-  setup () {
+  setup (props) {
+    const { inlineThemeDisabled } = useConfig()
     const {
       props: providerProps,
       mergedClsPrefixRef
@@ -116,6 +117,19 @@ export default defineComponent({
       providerProps,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: { height, colorError, colorLoading }
+      } = themeRef.value
+      return {
+        '--n-height': height,
+        '--n-color-loading': colorLoading,
+        '--n-color-error': colorError
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('loading-bar', undefined, cssVarsRef, providerProps)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       loadingBarRef,
@@ -130,21 +144,15 @@ export default defineComponent({
       handleAfterEnter,
       handleAfterLeave,
       mergedLoadingBarStyle,
-      cssVars: computed(() => {
-        const {
-          self: { height, colorError, colorLoading }
-        } = themeRef.value
-        return {
-          '--n-height': height,
-          '--n-color-loading': colorLoading,
-          '--n-color-error': colorError
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     if (!this.started) return null
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, themeClass } = this
+    this.onRender?.()
     return (
       <Transition
         name="fade-in-transition"
@@ -162,7 +170,9 @@ export default defineComponent({
         {{
           default: () =>
             withDirectives(
-              <div class={`${mergedClsPrefix}-loading-bar-container`}>
+              <div
+                class={[`${mergedClsPrefix}-loading-bar-container`, themeClass]}
+              >
                 <div
                   ref="loadingBarRef"
                   class={`${mergedClsPrefix}-loading-bar`}
