@@ -11,7 +11,8 @@
 ### Feats
 
 - `n-collapse` 添加 `RTL` 支持
-- `n-message` 新增 `show-icon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
+- `useMessage` 新增 `showIcon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
+- `useMessage` 支持 `'default'` 的 `type`
 
 ## 2.25.5 (2022-02-24)
 

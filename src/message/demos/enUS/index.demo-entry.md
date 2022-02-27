@@ -70,14 +70,15 @@ no-icon.vue
 
 #### MessageProvider Injection Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| destroyAll | `() => void` | Destroy all popup messages. |
-| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. |
-| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use info type message. |
-| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use loading type message. |
-| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use success type message. |
-| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use warning type message. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| destroyAll | `() => void` | Destroy all popup messages. |  |
+| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. | NEXT_VERSION |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. |  |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use info type message. |  |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use loading type message. |  |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use success type message. |  |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use warning type message. |  |
 
 #### MessageOption Properties
 
@@ -88,6 +89,8 @@ no-icon.vue
 | icon | `() => VNodeChild` | Message icon. |  |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
 | render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
+| showIcon | `boolean` | Whether to show icon. | NEXT_VERSION |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` NEXT_VERSION |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onClose | `() => void` | Callback when close icon is clicked. |  |
 | onLeave | `() => void` | Callback when message start to disappear. |  |
@@ -106,16 +109,17 @@ type MessageRenderMessage = (props: {
 
 #### MessageReactive Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| closable | `boolean` | Whether to show close icon. |
-| content | `string \| (() => VNodeChild)` | Message content. |
-| destroy | `() => void` | Message destroy method. |
-| icon | `() => VNodeChild` | Message icon. |
-| keepAliveOnHover | `boolean` | Messages whether to destroy while hover |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
-| onAfterLeave | `() => void` | Callback after message disappeared. |
-| onLeave | `() => void` | Callback when message start to disappear. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| closable | `boolean` | Whether to show close icon. |  |
+| content | `string \| (() => VNodeChild)` | Message content. |  |
+| destroy | `() => void` | Message destroy method. |  |
+| icon | `() => VNodeChild` | Message icon. |  |
+| keepAliveOnHover | `boolean` | Messages whether to destroy while hover |  |
+| showIcon | `boolean` | Whether to show icon. | NEXT_VERSION |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` NEXT_VERSION |
+| onAfterLeave | `() => void` | Callback after message disappeared. |  |
+| onLeave | `() => void` | Callback when message start to disappear. |  |
 
 #### MessageReactive Methods
 

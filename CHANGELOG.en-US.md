@@ -11,7 +11,8 @@
 ### Feats
 
 - `n-collapse` add `RTL` support.
-- `n-message` adds `show-icon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
+- `useMessage` adds `showIcon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
+- `useMessage` supports `'default'` `type`.
 
 ## 2.25.5 (2022-02-24)
 

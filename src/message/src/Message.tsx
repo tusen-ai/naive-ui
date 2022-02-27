@@ -31,7 +31,8 @@ const iconMap = {
   info: <InfoIcon />,
   success: <SuccessIcon />,
   warning: <WarningIcon />,
-  error: <ErrorIcon />
+  error: <ErrorIcon />,
+  default: null
 }
 
 export default defineComponent({
@@ -143,6 +144,7 @@ export default defineComponent({
       showIcon
     } = this
     onRender?.()
+    let iconNode: VNodeChild
     return (
       <div
         class={[`${mergedClsPrefix}-message-wrapper`, themeClass]}
@@ -163,19 +165,18 @@ export default defineComponent({
           <div
             class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
           >
-            {showIcon ? (
+            {(iconNode = createIconVNode(icon, type, mergedClsPrefix)) &&
+            showIcon ? (
               <div
                 class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
               >
                 <NIconSwitchTransition>
                   {{
-                    default: () => [
-                      createIconVNode(icon, type, mergedClsPrefix)
-                    ]
+                    default: () => iconNode
                   }}
                 </NIconSwitchTransition>
               </div>
-            ) : null}
+                ) : null}
             <div class={`${mergedClsPrefix}-message__content`}>
               {render(content)}
             </div>
@@ -201,19 +202,17 @@ function createIconVNode (
   if (typeof icon === 'function') {
     return icon()
   } else {
+    const innerIcon =
+      type === 'loading' ? (
+        <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} scale={0.85} />
+      ) : (
+        iconMap[type]
+      )
+    if (!innerIcon) return null
     return (
       <NBaseIcon clsPrefix={clsPrefix} key={type}>
         {{
-          default: () =>
-            type === 'loading' ? (
-              <NBaseLoading
-                clsPrefix={clsPrefix}
-                strokeWidth={24}
-                scale={0.85}
-              />
-            ) : (
-              iconMap[type]
-            )
+          default: () => innerIcon
         }}
       </NBaseIcon>
     )

@@ -15,6 +15,7 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 // --n-text-color
 // --n-color
 // --n-box-shadow
+// --n-icon-color-default
 // --n-icon-color-info
 // --n-icon-color-success
 // --n-icon-color-warning
@@ -75,7 +76,7 @@ export default c([
       font-size: var(--n-icon-size);
       flex-shrink: 0;
     `, [
-      ['info', 'success', 'warning', 'error', 'loading'].map((type) =>
+      ['default', 'info', 'success', 'warning', 'error', 'loading'].map((type) =>
         cM(`${type}-type`, [
           c('> *', `
             color: var(--n-icon-color-${type});

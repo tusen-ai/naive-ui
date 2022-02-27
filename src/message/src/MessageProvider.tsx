@@ -24,6 +24,7 @@ import { messageApiInjectionKey, messageProviderInjectionKey } from './context'
 type ContentType = string | (() => VNodeChild)
 
 export interface MessageApiInjection {
+  create: (content: ContentType, options?: MessageOptions) => MessageReactive
   info: (content: ContentType, options?: MessageOptions) => MessageReactive
   success: (content: ContentType, options?: MessageOptions) => MessageReactive
   warning: (content: ContentType, options?: MessageOptions) => MessageReactive
@@ -95,6 +96,9 @@ export default defineComponent({
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
+      create (content: ContentType, options?: MessageOptions) {
+        return create(content, { type: 'default', ...options })
+      },
       info (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
