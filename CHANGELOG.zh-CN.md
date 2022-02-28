@@ -8,6 +8,10 @@
 - `n-checkbox` 添加 `RTL` 支持
 - `n-input` 添加 `RTL` 支持
 
+### Fixes
+
+- 修复 `n-button` rtl 支持
+
 ## 2.25.5 (2022-02-24)
 
 ### Feats
