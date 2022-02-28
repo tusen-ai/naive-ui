@@ -19,12 +19,9 @@
 - `n-checkbox` 添加 `RTL` 支持
 - `n-input` 添加 `RTL` 支持
 - `n-input-number` 添加 `RTL` 支持
+- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ## 2.25.5 (2022-02-24)
-
-### Feats
-
-- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ### Fixes
 
