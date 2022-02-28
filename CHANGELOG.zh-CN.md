@@ -8,6 +8,7 @@
 - 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
 - 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 - 修复 `n-button` rtl 支持
+- 修复 `n-form-item-row` 不能调用 `n-form-item` 的方法
 
 ### Feats
 
@@ -19,7 +20,6 @@
 - `n-checkbox` 添加 `RTL` 支持
 - `n-input` 添加 `RTL` 支持
 - `n-input-number` 添加 `RTL` 支持
-- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ## 2.25.5 (2022-02-24)
 

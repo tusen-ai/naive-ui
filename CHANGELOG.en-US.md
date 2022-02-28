@@ -8,7 +8,7 @@
 - Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
 - Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 - Fix `n-button` rtl support.
--
+- Fix `n-form-item-row` can't call `n-form-item`'s methods.
 
 ### Feats
 
@@ -20,7 +20,6 @@
 - `n-checkbox` add `RTL` support.
 - `n-input` add `RTL` support.
 - `n-input-number` add `RTL` support.
-- `n-popover` adds `arrow-point-to-center` prop.
 
 ## 2.25.5 (2022-02-24)
 

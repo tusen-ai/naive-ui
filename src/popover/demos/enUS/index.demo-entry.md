@@ -36,7 +36,6 @@ header.vue
 | keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | 2.25.0 |
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |  |
-| arrow-point-to-center | `boolean` | `false` | Whether to always point the arrow to the center of 'trigger'. | NEXT_VERSION |
 | raw | `boolean` | `false` | Whether to use no default styles. |  |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |  |
 | show | `boolean` | `undefined` | Whether to show popover. |  |

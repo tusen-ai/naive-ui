@@ -43,7 +43,6 @@ center-arrow-debug.vue
 | keep-alive-on-hover | `boolean` | `true` | 是否在 trigger 为 hover 的时候，悬浮在 popover 时保持 popover 显示 | 2.25.0 |
 | overlap | `boolean` | `false` | 覆盖触发元素 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | popover 的弹出位置 |  |
-| arrow-point-to-center | `boolean` | `false` | 是否总是将箭头指向 'trigger' 中心 | NEXT_VERSION |
 | raw | `boolean` | `false` | 是否不添加默认样式 |  |
 | show-arrow | `boolean` | `true` | 是否显示箭头 |  |
 | show | `boolean` | `undefined` | 是否展示 popover |  |
