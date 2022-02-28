@@ -79,7 +79,7 @@ export default c([
   ]),
   insideModal(
     cB('list', `
-    --merged-color: var(--n-color-modal);
+      --merged-color: var(--n-color-modal);
       --merged-border-color: var(--n-border-color-modal);
     `)
   ),

@@ -2,16 +2,23 @@
 
 ## 2.25.6
 
+### Fixes
+
+- Fix `n-time-picker` still shows action bar when `:actions="null"`.
+- Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
+- Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
+- Fix `n-button` rtl support.
+- 
 ### Feats
 
 - `n-collapse` add `RTL` support.
+- `useMessage` adds `showIcon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
+- `useMessage` supports `'default'` `type`.
+- `n-checkbox` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
+- `n-radio` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
 - `n-checkbox` add `RTL` support.
 - `n-input` add `RTL` support.
 - `n-input-number` add `RTL` support.
-
-### Fixes
-
-- Fix `n-button` rtl support.
 
 ## 2.25.5 (2022-02-24)
 

@@ -305,12 +305,17 @@ export default defineComponent({
         }
       ]
     })
+    const textAreaScrollContainerWidthRef = ref<number | undefined>(undefined)
     // textarea autosize
     const updateTextAreaStyle = (): void => {
       if (props.type === 'textarea') {
         const { autosize } = props
-        if (typeof autosize === 'boolean') return
+        if (autosize) {
+          textAreaScrollContainerWidthRef.value =
+            textareaScrollbarInstRef.value?.$el?.offsetWidth
+        }
         if (!textareaElRef.value) return
+        if (typeof autosize === 'boolean') return
         const {
           paddingTop: stylePaddingTop,
           paddingBottom: stylePaddingBottom,
@@ -893,6 +898,7 @@ export default defineComponent({
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       placeholderStyle: placeholderStyleRef,
       mergedStatus: mergedStatusRef,
+      textAreaScrollContainerWidth: textAreaScrollContainerWidthRef,
       // methods
       handleTextAreaScroll,
       handleCompositionStart,
@@ -981,6 +987,13 @@ export default defineComponent({
             >
               {{
                 default: () => {
+                  const { textAreaScrollContainerWidth } = this
+                  const scrollContainerWidthStyle = {
+                    width:
+                      this.autosize &&
+                      textAreaScrollContainerWidth &&
+                      `${textAreaScrollContainerWidth}px`
+                  }
                   return (
                     <>
                       <textarea
@@ -1000,7 +1013,10 @@ export default defineComponent({
                             ? -1
                             : undefined
                         }
-                        style={this.textDecorationStyle[0] as any}
+                        style={[
+                          this.textDecorationStyle[0] as any,
+                          scrollContainerWidthStyle
+                        ]}
                         onBlur={this.handleInputBlur}
                         onFocus={this.handleInputFocus}
                         onInput={this.handleInput}
@@ -1010,7 +1026,10 @@ export default defineComponent({
                       {this.showPlaceholder1 ? (
                         <div
                           class={`${mergedClsPrefix}-input__placeholder`}
-                          style={this.placeholderStyle}
+                          style={[
+                            this.placeholderStyle as any,
+                            scrollContainerWidthStyle
+                          ]}
                           key="placeholder"
                         >
                           {this.mergedPlaceholder[0]}

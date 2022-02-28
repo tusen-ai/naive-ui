@@ -190,6 +190,7 @@ export default cB('input', `
       white-space: pre-wrap;
     `),
     cE('textarea-mirror', `
+      width: 100%;
       pointer-events: none;
       overflow: hidden;
       visibility: hidden;

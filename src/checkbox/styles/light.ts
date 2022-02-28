@@ -18,10 +18,12 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
-    borderRadiusSmall
+    borderRadiusSmall,
+    lineHeight
   } = vars
   return {
     ...commonVariables,
+    labelLineHeight: lineHeight,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,

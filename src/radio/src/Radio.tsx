@@ -1,7 +1,7 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
+import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, RadioTheme } from '../styles'
 import useRadio from './use-radio'
@@ -44,12 +44,14 @@ export default defineComponent({
           dotColorActive,
           dotColorDisabled,
           labelPadding,
+          labelLineHeight,
           [createKey('fontSize', size)]: fontSize,
           [createKey('radioSize', size)]: radioSize
         }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-label-line-height': labelLineHeight,
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-active': boxShadowActive,
         '--n-box-shadow-disabled': boxShadowDisabled,
@@ -109,17 +111,23 @@ export default defineComponent({
           onFocus={this.handleRadioInputFocus}
           onBlur={this.handleRadioInputBlur}
         />
-        <div
-          class={[
-            `${mergedClsPrefix}-radio__dot`,
-            this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
-          ]}
-        />
-        {$slots.default ? (
-          <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
-            {$slots.default()}
-          </div>
-        ) : null}
+        <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
+          &nbsp;
+          <div
+            class={[
+              `${mergedClsPrefix}-radio__dot`,
+              this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
+            ]}
+          />
+        </div>
+        {resolveWrappedSlot($slots.default, (children) => {
+          if (!children) return null
+          return (
+            <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
+              {children}
+            </div>
+          )
+        })}
       </label>
     )
   }

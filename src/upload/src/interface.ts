@@ -79,7 +79,9 @@ export interface UploadInjection {
   maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
   imageGroupPropsRef: Ref<ImageGroupProps | undefined>
-  cssVarsRef: Ref<CSSProperties>
+  cssVarsRef: undefined | Ref<CSSProperties>
+  themeClassRef: undefined | Ref<string>
+  onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
   handleFileAddition: (files: FileList | null, e?: Event) => void
