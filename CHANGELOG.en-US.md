@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.25.6
+## 2.25.7
 
 ### Fixes
 
@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-collapse` add `RTL` support.
+- `useMessage` adds `create` methods.
 - `useMessage` adds `showIcon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
 - `useMessage` supports `'default'` `type`.
 - `n-checkbox` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
