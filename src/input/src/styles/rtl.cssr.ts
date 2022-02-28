@@ -19,8 +19,8 @@ export default cB('input', [
     `)
     ]),
     cB('input-word-count', `
-    margin-left: 0;
-    margin-right: 4px;
-  `)
+      margin-left: 0;
+      margin-right: 4px;
+    `)
   ])
 ])
