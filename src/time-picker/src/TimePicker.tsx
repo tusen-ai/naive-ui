@@ -644,6 +644,25 @@ export default defineComponent({
         inputInstRef.value?.blur()
       }
     }
+    const triggerCssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: { iconColor, iconColorDisabled }
+      } = themeRef.value
+      return {
+        '--n-icon-color': iconColor,
+        '--n-icon-color-disabled': iconColorDisabled,
+        '--n-bezier': cubicBezierEaseInOut
+      }
+    })
+    const triggerThemeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'time-picker-trigger',
+        undefined,
+        triggerCssVarsRef,
+        props
+      )
+      : undefined
     const cssVarsRef = computed(() => {
       const {
         self: {
@@ -736,27 +755,20 @@ export default defineComponent({
       handleMenuKeyDown,
       handleTriggerClick,
       mergedTheme: themeRef,
-      triggerCssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: { iconColor, iconColorDisabled }
-        } = themeRef.value
-        return {
-          '--n-icon-color': iconColor,
-          '--n-icon-color-disabled': iconColorDisabled,
-          '--n-bezier': cubicBezierEaseInOut
-        }
-      }),
+      triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
+      triggerThemeClass: triggerThemeClassHandle?.themeClass,
+      triggerOnRender: triggerThemeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, $slots, triggerOnRender } = this
+    triggerOnRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-time-picker`}
+        class={[`${mergedClsPrefix}-time-picker`, this.triggerThemeClass]}
         style={this.triggerCssVars as CSSProperties}
       >
         <VBinder>
