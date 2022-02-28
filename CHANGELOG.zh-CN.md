@@ -7,6 +7,7 @@
 - `n-collapse` 添加 `RTL` 支持
 - `n-checkbox` 添加 `RTL` 支持
 - `n-input` 添加 `RTL` 支持
+- `n-input-number` 添加 `RTL` 支持
 
 ### Fixes
 

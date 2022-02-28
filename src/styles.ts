@@ -33,7 +33,10 @@ export { formDark } from './form/styles'
 export { gradientTextDark } from './gradient-text/styles'
 export { iconDark } from './icon/styles'
 export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
-export { inputNumberDark } from './input-number/styles'
+export {
+  inputNumberDark,
+  inputNumberRtl as unstableInputNumberRtl
+} from './input-number/styles'
 export { layoutDark } from './layout/styles'
 export { listDark } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'

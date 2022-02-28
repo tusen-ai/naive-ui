@@ -7,6 +7,7 @@
 - `n-collapse` add `RTL` support.
 - `n-checkbox` add `RTL` support.
 - `n-input` add `RTL` support.
+- `n-input-number` add `RTL` support.
 
 ### Fixes
 
