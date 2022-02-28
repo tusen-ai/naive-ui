@@ -18,6 +18,7 @@ show-button.vue
 disable-keyboard.vue
 change-timing.vue
 debug.vue
+rtl-debug.vue
 ```
 
 ## API

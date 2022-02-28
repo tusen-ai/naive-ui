@@ -67,6 +67,7 @@ export interface ScrollbarInstMethods {
 }
 
 export interface ScrollbarInst extends ScrollbarInstMethods {
+  $el: HTMLElement
   containerRef: HTMLElement | null
   contentRef: HTMLElement | null
   containerScrollTop: number

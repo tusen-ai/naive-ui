@@ -19,10 +19,12 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     heightSmall,
     heightMedium,
-    heightLarge
+    heightLarge,
+    lineHeight
   } = vars
   return {
     ...commonVariables,
+    labelLineHeight: lineHeight,
     buttonHeightSmall: heightSmall,
     buttonHeightMedium: heightMedium,
     buttonHeightLarge: heightLarge,

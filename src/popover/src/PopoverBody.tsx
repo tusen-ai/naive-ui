@@ -46,6 +46,7 @@ export const popoverBodyProps = {
   delay: Number,
   duration: Number,
   raw: Boolean,
+  arrowPointToCenter: Boolean,
   arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   displayDirective: String as PropType<'if' | 'show'>,
   x: Number,
@@ -268,7 +269,9 @@ export default defineComponent({
                   ),
                   [`${mergedClsPrefix}-popover--raw`]: props.raw,
                   [`${mergedClsPrefix}-popover--manual-trigger`]:
-                    props.trigger === 'manual'
+                    props.trigger === 'manual',
+                  [`${mergedClsPrefix}-popover--center-arrow`]:
+                    props.arrowPointToCenter
                 }
               ],
               ref: bodyRef,

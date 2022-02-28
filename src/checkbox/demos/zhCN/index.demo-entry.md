@@ -14,6 +14,7 @@ controlled.vue
 event.vue
 customize-value.vue
 focus.vue
+rtl-debug.vue
 ```
 
 ## API

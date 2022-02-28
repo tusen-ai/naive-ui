@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useFormItem } from '../../_mixins'
+import { useConfig, useTheme, useFormItem, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { warn, call, throwError } from '../../_utils'
@@ -208,8 +208,8 @@ function appendData (
 
 function submitImpl (
   inst: UploadInternalInst,
+  fieldName: string,
   file: FileInfo,
-  formData: FormData,
   {
     method,
     action,
@@ -227,7 +227,9 @@ function submitImpl (
   const request = new XMLHttpRequest()
   inst.XhrMap.set(file.id, request)
   request.withCredentials = withCredentials
+  const formData = new FormData()
   appendData(formData, data, file)
+  formData.append(fieldName, file.file as File)
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -336,7 +338,7 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Upload',
       '-upload',
@@ -452,8 +454,6 @@ export default defineComponent({
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
-          const formData = new FormData()
-          formData.append(fieldName, file.file as File)
           if (props.customRequest) {
             customSubmitImpl({
               inst: {
@@ -477,8 +477,8 @@ export default defineComponent({
                 onFinish: props.onFinish,
                 onError: props.onError
               },
+              fieldName,
               file,
-              formData,
               {
                 method,
                 action,
@@ -572,7 +572,9 @@ export default defineComponent({
         '--n-item-border-image-card': itemBorderImageCard
       } as any
     })
-
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('upload', undefined, cssVarsRef, props)
+      : undefined
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -598,7 +600,9 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
-      cssVarsRef,
+      cssVarsRef: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClassRef: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       showTriggerRef: toRef(props, 'showTrigger'),
       imageGroupPropsRef: toRef(props, 'imageGroupProps')
     })
@@ -618,13 +622,14 @@ export default defineComponent({
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleFileInputChange,
-      cssVars: cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix, $slots } = this
-
+    const { draggerInsideRef, mergedClsPrefix, $slots, onRender } = this
     if ($slots.default && !this.abstract) {
       const firstChild = $slots.default()[0]
       if ((firstChild as any)?.type?.[uploadDraggerKey]) {
@@ -644,19 +649,25 @@ export default defineComponent({
       />
     )
 
-    return this.abstract ? (
-      <>
-        {$slots.default?.()}
-        <Teleport to="body">{inputNode}</Teleport>
-      </>
-    ) : (
+    if (this.abstract) {
+      return (
+        <>
+          {$slots.default?.()}
+          <Teleport to="body">{inputNode}</Teleport>
+        </>
+      )
+    }
+
+    onRender?.()
+    return (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
-          this.dragOver && `${mergedClsPrefix}-upload--drag-over`
+          this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
+          this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars as any}
       >
         {inputNode}
         {this.showTrigger && this.listType !== 'image-card' && (

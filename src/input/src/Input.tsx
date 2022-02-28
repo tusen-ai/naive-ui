@@ -59,6 +59,7 @@ import { inputInjectionKey } from './interface'
 import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -173,8 +174,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, mergedBorderedRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Input',
       '-input',
@@ -300,12 +305,17 @@ export default defineComponent({
         }
       ]
     })
+    const textAreaScrollContainerWidthRef = ref<number | undefined>(undefined)
     // textarea autosize
     const updateTextAreaStyle = (): void => {
       if (props.type === 'textarea') {
         const { autosize } = props
-        if (typeof autosize === 'boolean') return
+        if (autosize) {
+          textAreaScrollContainerWidthRef.value =
+            textareaScrollbarInstRef.value?.$el?.offsetWidth
+        }
         if (!textareaElRef.value) return
+        if (typeof autosize === 'boolean') return
         const {
           paddingTop: stylePaddingTop,
           paddingBottom: stylePaddingBottom,
@@ -738,6 +748,7 @@ export default defineComponent({
       activate
     }
 
+    const rtlEnabledRef = useRtl('Input', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -868,6 +879,7 @@ export default defineComponent({
       textareaMirrorElRef,
       textareaScrollbarInstRef,
       // value
+      rtlEnabled: rtlEnabledRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       passwordVisible: passwordVisibleRef,
@@ -886,6 +898,7 @@ export default defineComponent({
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       placeholderStyle: placeholderStyleRef,
       mergedStatus: mergedStatusRef,
+      textAreaScrollContainerWidth: textAreaScrollContainerWidthRef,
       // methods
       handleTextAreaScroll,
       handleCompositionStart,
@@ -925,6 +938,7 @@ export default defineComponent({
           themeClass,
           mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {
+            [`${mergedClsPrefix}-input--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
@@ -973,6 +987,13 @@ export default defineComponent({
             >
               {{
                 default: () => {
+                  const { textAreaScrollContainerWidth } = this
+                  const scrollContainerWidthStyle = {
+                    width:
+                      this.autosize &&
+                      textAreaScrollContainerWidth &&
+                      `${textAreaScrollContainerWidth}px`
+                  }
                   return (
                     <>
                       <textarea
@@ -992,7 +1013,10 @@ export default defineComponent({
                             ? -1
                             : undefined
                         }
-                        style={this.textDecorationStyle[0] as any}
+                        style={[
+                          this.textDecorationStyle[0] as any,
+                          scrollContainerWidthStyle
+                        ]}
                         onBlur={this.handleInputBlur}
                         onFocus={this.handleInputFocus}
                         onInput={this.handleInput}
@@ -1002,7 +1026,10 @@ export default defineComponent({
                       {this.showPlaceholder1 ? (
                         <div
                           class={`${mergedClsPrefix}-input__placeholder`}
-                          style={this.placeholderStyle}
+                          style={[
+                            this.placeholderStyle as any,
+                            scrollContainerWidthStyle
+                          ]}
                           key="placeholder"
                         >
                           {this.mergedPlaceholder[0]}
