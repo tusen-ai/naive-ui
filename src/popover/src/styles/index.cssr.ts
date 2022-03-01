@@ -1,5 +1,5 @@
 import { CNode } from 'css-render'
-import { map } from 'lodash'
+import { map } from 'lodash-es'
 import { FollowerPlacement } from 'vueuc'
 import { c, cB, cM, cNotM, cE, cCB } from '../../../_utils/cssr'
 

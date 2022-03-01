@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## 2.25.5
+## 2.25.8
+
+### Fixes
+
+- 修复 `useMessage` 丢失样式
+
+## 2.25.7
 
 ### Fixes
 
@@ -8,10 +14,12 @@
 - 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
 - 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 - 修复 `n-button` rtl 支持
+- 修复 `n-form-item-row` 不能调用 `n-form-item` 的方法
 
 ### Feats
 
 - `n-collapse` 添加 `RTL` 支持
+- `useMessage` 新增 `create` 方法
 - `useMessage` 新增 `showIcon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
 - `useMessage` 支持 `'default'` 的 `type`
 - `n-checkbox` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
@@ -21,10 +29,6 @@
 - `n-input-number` 添加 `RTL` 支持
 
 ## 2.25.5 (2022-02-24)
-
-### Feats
-
-- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ### Fixes
 

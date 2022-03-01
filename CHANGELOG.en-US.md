@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## 2.25.6
+## 2.25.8
+
+### Fixes
+
+- Fix `useMessage` loses styles.
+
+## 2.25.7
 
 ### Fixes
 
@@ -8,10 +14,12 @@
 - Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
 - Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
 - Fix `n-button` rtl support.
-- 
+- Fix `n-form-item-row` can't call `n-form-item`'s methods.
+
 ### Feats
 
 - `n-collapse` add `RTL` support.
+- `useMessage` adds `create` methods.
 - `useMessage` adds `showIcon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
 - `useMessage` supports `'default'` `type`.
 - `n-checkbox` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
@@ -21,10 +29,6 @@
 - `n-input-number` add `RTL` support.
 
 ## 2.25.5 (2022-02-24)
-
-### Feats
-
-- `n-popover` adds `arrow-point-to-center` prop.
 
 ### Fixes
 

@@ -137,6 +137,11 @@ export default defineComponent({
         const rtlEnabledState: RtlEnabledState = {}
         for (const rtlInfo of rtl) {
           rtlEnabledState[rtlInfo.name] = markRaw(rtlInfo)
+          rtlInfo.peers?.forEach((peerRtlInfo) => {
+            if (!(peerRtlInfo.name in rtlEnabledState)) {
+              rtlEnabledState[peerRtlInfo.name] = markRaw(peerRtlInfo)
+            }
+          })
         }
         return rtlEnabledState
       }

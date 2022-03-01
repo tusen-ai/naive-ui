@@ -73,7 +73,7 @@ no-icon.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | destroyAll | `() => void` | Destroy all popup messages. |  |
-| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. | NEXT_VERSION |
+| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. | 2.25.7 |
 | error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. |  |
 | info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use info type message. |  |
 | loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use loading type message. |  |
@@ -89,8 +89,8 @@ no-icon.vue
 | icon | `() => VNodeChild` | Message icon. |  |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
 | render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
-| showIcon | `boolean` | Whether to show icon. | NEXT_VERSION |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` NEXT_VERSION |
+| showIcon | `boolean` | Whether to show icon. | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onClose | `() => void` | Callback when close icon is clicked. |  |
 | onLeave | `() => void` | Callback when message start to disappear. |  |
@@ -116,8 +116,8 @@ type MessageRenderMessage = (props: {
 | destroy | `() => void` | Message destroy method. |  |
 | icon | `() => VNodeChild` | Message icon. |  |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover |  |
-| showIcon | `boolean` | Whether to show icon. | NEXT_VERSION |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` NEXT_VERSION |
+| showIcon | `boolean` | Whether to show icon. | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onLeave | `() => void` | Callback when message start to disappear. |  |
 
