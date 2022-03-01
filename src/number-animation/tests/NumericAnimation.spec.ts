@@ -54,7 +54,7 @@ describe('n-number-animation', () => {
     wrapper.unmount()
   })
 
-  it('should work with `duration` prop', async () => {
+  it('should work with `precision` prop', async () => {
     const wrapper = mount(NNumberAnimation, {
       props: { to: 10, from: 10, active: false }
     })
@@ -62,6 +62,17 @@ describe('n-number-animation', () => {
 
     await wrapper.setProps({ precision: 2 })
     expect(wrapper.text()).toBe('10.00')
+    wrapper.unmount()
+  })
+
+  it('should work with `show-separator` prop', async () => {
+    const wrapper = mount(NNumberAnimation, {
+      props: { to: 1000000, from: 1000000, active: false }
+    })
+    expect(wrapper.text()).toBe('1000000')
+
+    await wrapper.setProps({ showSeparator: true })
+    expect(wrapper.text()).toBe('1,000,000')
     wrapper.unmount()
   })
 })
