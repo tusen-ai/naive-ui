@@ -123,7 +123,7 @@ export default defineComponent({
       handleClose () {
         props.onClose?.()
       },
-      cssVars: inlineThemeDisabled ? undefined : inlineThemeDisabled,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       placement: messageProviderProps.placement

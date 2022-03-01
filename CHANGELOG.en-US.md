@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.25.8
+
+### Fixes
+
+- Fix `useMessage` loses styles.
+
 ## 2.25.7
 
 ### Fixes

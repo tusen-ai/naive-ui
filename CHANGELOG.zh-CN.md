@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.25.8
+
+### Fixes
+
+- 修复 `useMessage` 丢失样式
+
 ## 2.25.7
 
 ### Fixes
