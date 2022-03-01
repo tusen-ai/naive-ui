@@ -98,6 +98,7 @@ export default defineComponent({
                 content={this.content}
                 type={this.type}
                 icon={this.icon}
+                showIcon={this.showIcon}
                 closable={this.closable}
                 onClose={this.handleClose}
                 onMouseenter={

@@ -45,7 +45,7 @@ export default defineComponent({
         return h(
           NFormItemCol,
           {
-            ref: 'formItemColRef',
+            ref: 'formItemColInstRef',
             ...colProps,
             span: 24
           },

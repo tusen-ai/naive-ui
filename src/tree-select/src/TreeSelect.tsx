@@ -36,7 +36,13 @@ import {
 } from '../../_internal'
 import { NTree } from '../../tree'
 import { NEmpty } from '../../empty'
-import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   call,
@@ -163,7 +169,8 @@ export default defineComponent({
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const treeInstRef = ref<InternalTreeInst | null>(null)
     const menuElRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
     const { localeRef } = useLocale('Select')
     const {
       mergedSizeRef,
@@ -617,6 +624,35 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          menuBoxShadow,
+          menuBorderRadius,
+          menuColor,
+          menuHeight,
+          actionPadding,
+          actionDividerColor,
+          actionTextColor
+        }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow,
+        '--n-menu-border-radius': menuBorderRadius,
+        '--n-menu-color': menuColor,
+        '--n-menu-height': menuHeight,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-action-padding': actionPadding,
+        '--n-action-text-color': actionTextColor,
+        '--n-action-divider-color': actionDividerColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('tree-select', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       menuElRef,
       mergedStatus: mergedStatusRef,
@@ -662,31 +698,10 @@ export default defineComponent({
       handleKeyup,
       handleTabOut,
       handleMenuMousedown,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            menuBoxShadow,
-            menuBorderRadius,
-            menuColor,
-            menuHeight,
-            actionPadding,
-            actionDividerColor,
-            actionTextColor
-          }
-        } = themeRef.value
-        return {
-          '--n-menu-box-shadow': menuBoxShadow,
-          '--n-menu-border-radius': menuBorderRadius,
-          '--n-menu-color': menuColor,
-          '--n-menu-height': menuHeight,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-action-padding': actionPadding,
-          '--n-action-text-color': actionTextColor,
-          '--n-action-divider-color': actionDividerColor
-        }
-      }),
-      mergedTheme: themeRef
+      mergedTheme: themeRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -760,12 +775,14 @@ export default defineComponent({
                             multiple,
                             menuProps
                           } = this
+                          this.onRender?.()
                           return withDirectives(
                             <div
                               {...menuProps}
                               class={[
                                 `${mergedClsPrefix}-tree-select-menu`,
-                                menuProps?.class
+                                menuProps?.class,
+                                this.themeClass
                               ]}
                               ref="menuElRef"
                               style={[

@@ -5,13 +5,13 @@ export default cB('button', [
     direction: rtl;
   `, [
     cE('icon', {
-      margin: 'var(--icon-margin)',
+      margin: 'var(--n-icon-margin)',
       marginRight: 0
     }),
     cE('content', [
       c('~', [
         cE('icon', {
-          margin: 'var(--icon-margin)',
+          margin: 'var(--n-icon-margin)',
           marginLeft: 0
         })
       ])

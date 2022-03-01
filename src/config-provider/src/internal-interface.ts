@@ -216,6 +216,7 @@ export interface GlobalIconConfig {
 export interface RtlItem {
   name: keyof GlobalThemeWithoutCommon
   style: CNode
+  peers?: RtlItem[]
 }
 export type RtlProp = RtlItem[]
 

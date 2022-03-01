@@ -41,6 +41,7 @@ ExtractPropTypes<typeof notificationEnvOptions>
 >
 
 export interface NotificationProviderInjection {
+  props: ExtractPropTypes<typeof notificationProviderProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
@@ -179,6 +180,7 @@ export default defineComponent({
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
+      props,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef
     })

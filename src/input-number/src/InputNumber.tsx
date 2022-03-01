@@ -29,6 +29,7 @@ import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
@@ -103,7 +104,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       '-input-number',
@@ -438,8 +440,14 @@ export default defineComponent({
       focus: () => inputInstRef.value?.focus(),
       blur: () => inputInstRef.value?.blur()
     }
+    const rtlEnabledRef = useRtl(
+      'InputNumber',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     return {
       ...exposedMethods,
+      rtlEnabled: rtlEnabledRef,
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
@@ -487,7 +495,12 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-input-number`}>
+      <div
+        class={[
+          `${mergedClsPrefix}-input-number`,
+          this.rtlEnabled && `${mergedClsPrefix}-input-number--rtl`
+        ]}
+      >
         <NInput
           ref="inputInstRef"
           status={this.mergedStatus}
