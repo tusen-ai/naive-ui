@@ -13,6 +13,7 @@ inherit-theme.vue
 os-theme.vue
 language.vue
 transparent.vue
+inline-theme-disabled.vue
 ```
 
 ## API
