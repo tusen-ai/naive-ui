@@ -27,7 +27,7 @@ header.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | animated | `boolean` | `true` | Use animation when popping up. |  |
-| arrow-point-to-center | `boolean` | `false` | Whether the arrow points to center of the trigger element. | NEXT_VERSION |
+| arrow-point-to-center | `boolean` | `false` | Whether the arrow points to center of the trigger element. | 2.26.0 |
 | arrow-style | `Object` | `undefined` | Arrow style for popover. |  |
 | delay | `number` | `100` | Popover showing delay when trigger is `hover` |  |
 | disabled | `boolean` | `false` | Whether the popover can't be activated. |  |
