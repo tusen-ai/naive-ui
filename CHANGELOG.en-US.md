@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-popover` adds `arrow-point-to-center` prop.
+- `n-config-provider` adds `inline-theme-disabled` prop.
 
 ## 2.25.8
 

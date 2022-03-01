@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-popover` 新增 `arrow-point-to-center` 属性
+- `n-config-provider` 新增 `inline-theme-disabled` 属性
 
 ## 2.25.8
 
