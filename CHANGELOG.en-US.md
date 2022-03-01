@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- Fix `n-tooltip`'s gap between arrow and body. `n-tooltip` can't be translucent anymore.
+
+### Feats
+
+- `n-popover` adds `arrow-point-to-center` prop.
+
 ## 2.25.8
 
 ### Fixes

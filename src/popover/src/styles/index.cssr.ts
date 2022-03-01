@@ -91,55 +91,55 @@ export default c([
     ])
   ]),
   placementStyle('top-start', `
-    top: calc(${arrowSize} / -2);
+    top: calc(${arrowSize} / -2 + 1px);
     left: calc(${getArrowOffset('top-start')} - var(--v-offset-left));
   `),
   placementStyle('top', `
-    top: calc(${arrowSize} / -2);
+    top: calc(${arrowSize} / -2 + 1px);
     transform: translateX(calc(${arrowSize} / -2)) rotate(45deg);
     left: 50%;
   `),
   placementStyle('top-end', `
-    top: calc(${arrowSize} / -2);
+    top: calc(${arrowSize} / -2 + 1px);
     right: calc(${getArrowOffset('top-end')} + var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
-    bottom: calc(${arrowSize} / -2);
+    bottom: calc(${arrowSize} / -2 + 1px);
     left: calc(${getArrowOffset('bottom-start')} - var(--v-offset-left));
   `),
   placementStyle('bottom', `
-    bottom: calc(${arrowSize} / -2);
+    bottom: calc(${arrowSize} / -2 + 1px);
     transform: translateX(calc(${arrowSize} / -2)) rotate(45deg);
     left: 50%;
   `),
   placementStyle('bottom-end', `
-    bottom: calc(${arrowSize} / -2);
+    bottom: calc(${arrowSize} / -2 + 1px);
     right: calc(${getArrowOffset('bottom-end')} + var(--v-offset-left));
   `),
   placementStyle('left-start', `
-    left: calc(${arrowSize} / -2);
+    left: calc(${arrowSize} / -2 + 1px);
     top: calc(${getArrowOffset('left-start')} - var(--v-offset-top));
   `),
   placementStyle('left', `
-    left: calc(${arrowSize} / -2);
+    left: calc(${arrowSize} / -2 + 1px);
     transform: translateY(calc(${arrowSize} / -2)) rotate(45deg);
     top: 50%;
   `),
   placementStyle('left-end', `
-    left: calc(${arrowSize} / -2);
+    left: calc(${arrowSize} / -2 + 1px);
     bottom: calc(${getArrowOffset('left-end')} + var(--v-offset-top));
   `),
   placementStyle('right-start', `
-    right: calc(${arrowSize} / -2);
+    right: calc(${arrowSize} / -2 + 1px);
     top: calc(${getArrowOffset('right-start')} - var(--v-offset-top));
   `),
   placementStyle('right', `
-    right: calc(${arrowSize} / -2);
+    right: calc(${arrowSize} / -2 + 1px);
     transform: translateY(calc(${arrowSize} / -2)) rotate(45deg);
     top: 50%;
   `),
   placementStyle('right-end', `
-    right: calc(${arrowSize} / -2);
+    right: calc(${arrowSize} / -2 + 1px);
     bottom: calc(${getArrowOffset('right-end')} + var(--v-offset-top));
   `),
   ...map(
@@ -208,7 +208,7 @@ function placementStyle (
         left: 0;
         top: 0;
         bottom: 0;
-        ${position}: 100%;
+        ${position}: calc(100% - 1px);
         ${oppositePlacement[position]}: auto;
         ${sizeStyle}
       `, [
