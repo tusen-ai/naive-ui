@@ -1,5 +1,5 @@
 <markdown>
-# Basic Usage
+# Basic usage
 
 Use `text` to create text skeleton.
 </markdown>

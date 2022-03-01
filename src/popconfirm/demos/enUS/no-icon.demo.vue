@@ -1,11 +1,11 @@
 <markdown>
-# No Icon
+# No icon
 </markdown>
 
 <template>
   <n-popconfirm :show-icon="false">
     <template #activator>
-      <n-button>No Icon</n-button>
+      <n-button>No icon</n-button>
     </template>
     As is
   </n-popconfirm>

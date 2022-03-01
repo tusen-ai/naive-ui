@@ -1,5 +1,5 @@
 <markdown>
-# No Wrapper DOM
+# No wrapper DOM
 
 If you don't need wrapper DOM, set `abstract` on it.
 </markdown>

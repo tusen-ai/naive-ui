@@ -1,5 +1,5 @@
 <markdown>
-# Custom Color
+# Customize color
 
 If you are not satisfied with builtin colors.
 </markdown>

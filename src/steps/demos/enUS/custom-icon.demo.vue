@@ -1,5 +1,5 @@
 <markdown>
-# Custom Icon
+# Customizing icon
 
 Only provide icon customization in `'finish'` and `'error'` states.
 </markdown>

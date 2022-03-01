@@ -1,5 +1,5 @@
 <markdown>
-# Custom Gradient
+# Customizing gradient
 
 Design it yourself.
 </markdown>

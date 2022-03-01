@@ -1,5 +1,5 @@
 <markdown>
-# Extra Info in Header
+# Extra info in header
 
 Put some info on the right side of the item.
 </markdown>

@@ -1,5 +1,5 @@
 <markdown>
-# Image Group
+# Image group
 </markdown>
 
 <template>

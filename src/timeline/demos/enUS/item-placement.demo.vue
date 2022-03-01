@@ -1,5 +1,5 @@
 <markdown>
-# Item Placement
+# Item placement
 
 Left. .thgiR
 </markdown>
