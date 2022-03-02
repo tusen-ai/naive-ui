@@ -6,7 +6,35 @@ By default the component theme is light, locale is enUS, no extra imports is nee
 
 For more info about theming, see [Customizing Theme](customize-theme).
 
-## Import Directly
+
+## On-demand Import(Auto)
+
+If you develop using the template approach, you can use the `unplugin-vue-components` plugin to automatically load components on demand.
+
+The plugin will automatically parse the components used in the template and import the components.
+
+```vite.config.js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue(),
+    Components({
+      resolvers: [
+        NaiveUiResolver()
+      ]
+    })
+  ]
+});
+```
+Note: This method does not handle function API components, such as the `useMessage` component, and the user still needs to import the corresponding component manually.
+
+`import { useMessage } from 'naive-ui'`
+
+## Import Directly(Manual)
 
 ```html
 <script>
@@ -50,7 +78,7 @@ For more info about theming, see [Customizing Theme](customize-theme).
 </style>
 ```
 
-## Install on Demand Globally
+## Install on Demand Globally(Manual)
 
 ```js
 import { createApp } from 'vue'
