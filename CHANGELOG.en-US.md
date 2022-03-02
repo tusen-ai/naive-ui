@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-space` add `RTL` support.
+- `n-avatar` add `RTL` support.
 
 ## 2.25.8
 
