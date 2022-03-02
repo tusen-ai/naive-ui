@@ -6,6 +6,7 @@
 
 - `n-space` 添加 `RTL` 支持
 - `n-avatar` 添加 `RTL` 支持
+- `n-badge` 添加 `RTL` 支持
 
 ## 2.25.8
 

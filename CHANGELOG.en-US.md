@@ -6,6 +6,7 @@
 
 - `n-space` add `RTL` support.
 - `n-avatar` add `RTL` support.
+- `n-badge` add `RTL` support.
 
 ## 2.25.8
 

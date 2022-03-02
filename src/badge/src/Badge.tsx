@@ -16,6 +16,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
@@ -43,7 +44,8 @@ export default defineComponent({
   name: 'Badge',
   props: badgeProps,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Badge',
       '-badge',
@@ -70,6 +72,7 @@ export default defineComponent({
       if (showBadgeRef.value) appearedRef.value = true
     })
 
+    const rtlEnabledRef = useRtl('Badge', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { type, color: propColor } = props
       const {
@@ -106,6 +109,7 @@ export default defineComponent({
       : undefined
 
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       appeared: appearedRef,
       showBadge: showBadgeRef,
@@ -124,6 +128,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-badge`,
+          this.rtlEnabled && `${mergedClsPrefix}-badge--rtl`,
           themeClass,
           {
             [`${mergedClsPrefix}-badge--dot`]: this.dot,

@@ -7,7 +7,7 @@ export {
   avatarGroupRtl as unstableAvatarGroupRtl
 } from './avatar/styles'
 export { backTopDark } from './back-top/styles'
-export { badgeDark } from './badge/styles'
+export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
