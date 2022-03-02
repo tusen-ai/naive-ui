@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.25.9
+
+### Feats
+
+- `n-space` 添加 `RTL` 支持
+
 ## 2.25.8
 
 ### Fixes
