@@ -10,7 +10,7 @@ Naive UI 支持 tree shaking，组件、语言、主题均可 tree-shaking。
 
 如果使用模板方式进行开发，可以使用`unplugin-vue-components`插件来按需自动加载组件。
 
-插件会自动解析模板中的使用到的组件，并导入组件和对应的样式文件。
+插件会自动解析模板中的使用到的组件，并导入组件。
 
 ```vite.config.js
 import { defineConfig } from 'vite'
