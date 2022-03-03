@@ -1,7 +1,7 @@
 <markdown>
 # 基础
 
-按钮的 `type` 分别为 `default`、`primary`、`info`、`success`、`warning` 和 `error`。
+按钮的 `type` 分别为 `default`、`tertiary`、`primary`、`info`、`success`、`warning` 和 `error`。
 </markdown>
 
 <template>
