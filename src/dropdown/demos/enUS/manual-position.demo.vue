@@ -1,5 +1,5 @@
 <markdown>
-# Manually Positioned
+# Manually positioned
 
 Warning: when manually positioned, the `trigger` prop must be set to `'manual'`.
 </markdown>

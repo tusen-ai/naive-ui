@@ -1,5 +1,5 @@
 <markdown>
-# Collapse Sider
+# Collapse sider
 
 Use `show-trigger` to use builtin button.
 </markdown>

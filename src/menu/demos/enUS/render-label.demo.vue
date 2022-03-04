@@ -1,5 +1,5 @@
 <markdown>
-# Batch Customizing Menu Options
+# Batch customizing menu options
 
 The `render-label`, `render-icon`, `expand-icon` can be used to batch render menu options.
 </markdown>

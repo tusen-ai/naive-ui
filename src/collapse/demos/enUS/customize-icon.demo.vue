@@ -1,5 +1,5 @@
 <markdown>
-# Customize Icon
+# Customize icon
 </markdown>
 
 <template>

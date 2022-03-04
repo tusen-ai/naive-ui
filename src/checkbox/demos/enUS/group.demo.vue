@@ -1,5 +1,5 @@
 <markdown>
-# Checkbox Group
+# Checkbox group
 </markdown>
 
 <template>

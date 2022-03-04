@@ -1,5 +1,5 @@
 <markdown>
-# No Indicator
+# No indicator
 
 If you don't want indicator.
 </markdown>

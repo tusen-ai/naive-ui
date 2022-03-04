@@ -38,7 +38,7 @@ import { TreeSelectOption } from 'naive-ui'
 export default defineComponent({
   setup () {
     return {
-      checkStrategy: ref('all'),
+      checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       options: [
         {
           label: 'Rubber Soul',

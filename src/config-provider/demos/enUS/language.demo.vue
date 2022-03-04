@@ -1,5 +1,5 @@
 <markdown>
-# Language
+# Locale
 </markdown>
 
 <template>

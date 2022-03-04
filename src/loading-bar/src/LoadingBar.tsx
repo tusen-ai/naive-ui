@@ -158,6 +158,7 @@ export default defineComponent({
         appear
         onEnter={this.handleEnter}
         onAfterEnter={this.handleAfterEnter}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onAfterLeave={this.handleAfterLeave}
         css={!this.transitionDisabled}
       >

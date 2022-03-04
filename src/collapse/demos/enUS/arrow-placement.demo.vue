@@ -1,5 +1,5 @@
 <markdown>
-# Arrow Placement
+# Arrow placement
 
 Use `arrow-placement` to set the placement of arrow.
 </markdown>

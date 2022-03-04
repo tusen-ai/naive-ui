@@ -1,5 +1,5 @@
 <markdown>
-# Single Column
+# Single column
 </markdown>
 
 <template>

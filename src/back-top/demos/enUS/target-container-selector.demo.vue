@@ -1,5 +1,5 @@
 <markdown>
-# Target to be Listened to
+# Target to be listened to
 
 You can specify target to listen scroll event of.
 </markdown>

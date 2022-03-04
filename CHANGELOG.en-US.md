@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2.26.0
+
+### Breaking Changes
+
+- Fix `n-tooltip`'s gap between arrow and body. `n-tooltip` can't be translucent anymore.
+
+### Feats
+
+- `n-popover` adds `arrow-point-to-center` prop.
+- `n-config-provider` adds `inline-theme-disabled` prop.
+
+## 2.25.8
+
+### Fixes
+
+- Fix `useMessage` loses styles.
+
 ## 2.25.7
 
 ### Fixes

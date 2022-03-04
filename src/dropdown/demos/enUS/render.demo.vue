@@ -1,5 +1,5 @@
 <markdown>
-# Pure Rendering Content
+# Pure rendering content
 
 You can just render something which is not related to options data by setting `type='render'` on option.
 </markdown>

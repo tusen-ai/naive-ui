@@ -1,5 +1,5 @@
 <markdown>
-# Set Check Strategy
+# Set check strategy
 
 Set the way to display selected nodes when parents and children are selected. `all` will display both the parent and the children when all the children are selected. `parent` will only show the parent option if all of the children are selected. `child` will only ever show leaf nodes (nodes with no children).
 </markdown>
@@ -38,7 +38,7 @@ import { TreeSelectOption } from 'naive-ui'
 export default defineComponent({
   setup () {
     return {
-      checkStrategy: ref('all'),
+      checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       options: [
         {
           label: 'Rubber Soul',

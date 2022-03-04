@@ -1,5 +1,5 @@
 <markdown>
-# Quick Jumper
+# Quick jumper
 </markdown>
 
 <template>

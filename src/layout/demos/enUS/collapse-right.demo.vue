@@ -1,5 +1,5 @@
 <markdown>
-# Sider Placement
+# Sider placement
 
 Sometimes you might want to put the collapsed sidebar on the right.
 </markdown>

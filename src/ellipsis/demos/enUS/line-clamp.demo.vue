@@ -1,5 +1,5 @@
 <markdown>
-# Line Clamp
+# Line clamp
 
 See [caniuse](https://caniuse.com/?search=line-clamp) for compatibility.
 </markdown>

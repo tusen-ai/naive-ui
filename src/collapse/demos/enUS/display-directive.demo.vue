@@ -1,5 +1,5 @@
 <markdown>
-# Display Directive
+# Display directive
 
 Set `display-directive` to `if` or `show` to determine whether to keep the DOM inside `n-collapse-item` when inactive.
 </markdown>

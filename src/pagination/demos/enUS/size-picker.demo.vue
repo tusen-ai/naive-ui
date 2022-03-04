@@ -1,5 +1,5 @@
 <markdown>
-# Size Picker
+# Size picker
 </markdown>
 
 <template>
