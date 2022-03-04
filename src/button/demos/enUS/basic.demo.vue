@@ -1,12 +1,15 @@
 <markdown>
 # Basic
 
-There are `default`, `primary`, `info`, `success`, `warning` and `error` button types.
+There are `default`, `primary`, `tertiary`, `info`, `success`, `warning` and `error` button types.
 </markdown>
 
 <template>
   <n-space>
     <n-button>Default</n-button>
+    <n-button type="tertiary">
+      Tertiary
+    </n-button>
     <n-button type="primary">
       Primary
     </n-button>
