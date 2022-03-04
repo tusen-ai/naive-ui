@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `base-loading` use css transition rather than svg animateTrantion to prevent js blocking
+
 ## 2.26.0
 
 ### Breaking Changes
@@ -2016,7 +2022,7 @@ See vue3.md
 ### Fixes
 
 - Fix the problem that `n-radio` can not be focused.
-- Fix the problem that `n-data-table`'s `max-height` style is broken. https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
+- Fix the problem that `n-data-table`'s `max-height` style is broken. <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
 
 ### Refactors
 
