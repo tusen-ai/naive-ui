@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fixes `n-time` can't get `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+
 ## 2.26.0
 
 ### Breaking Changes
