@@ -13,6 +13,7 @@
 - `n-time-line-item` 新增 line-type 属性，关闭 [#2548](https://github.com/TuSimple/naive-ui/issues/2548)
 - `n-step` 新增 `icon` slot，关闭 [#2547](https://github.com/TuSimple/naive-ui/issues/2547)
 - `n-input-number` 新增 `autofocus` 属性，关闭 [#2551](https://github.com/TuSimple/naive-ui/issues/2551)
+- `n-date-picker` 扩大日期点击触发范围，关闭 [#2552](https://github.com/TuSimple/naive-ui/issues/2552)
 
 ## 2.26.0
 
