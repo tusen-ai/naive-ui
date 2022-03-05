@@ -10,6 +10,7 @@ size.vue
 item-placement.vue
 horizontal.vue
 customize-icon.vue
+nested-debug.vue
 ```
 
 ## API

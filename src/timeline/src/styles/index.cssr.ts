@@ -24,29 +24,33 @@ export default cB('timeline', `
   cM('horizontal', `
     flex-direction: row;
   `, [
-    cB('timeline-item', `
-      flex-shrink: 0;
-      padding-right: 40px;
-    `, [
-      cB('timeline-item-content', `
-        margin-top: calc(var(--n-icon-size) + 12px);
+    c('>', [
+      cB('timeline-item', `
+        flex-shrink: 0;
+        padding-right: 40px;
       `, [
-        cE('meta', `
-          margin-top: 6px;
-          margin-bottom: unset;
-        `)
-      ]),
-      cB('timeline-item-timeline', `
-        width: 100%;
-        height: calc(var(--n-icon-size) + 12px);
-      `, [
-        cE('line', `
-          left: var(--n-icon-size);
-          top: calc(var(--n-icon-size) / 2 - 1px);
-          right: 0px;
-          width: unset;
-          height: 2px;
-        `)
+        c('>', [
+          cB('timeline-item-content', `
+          margin-top: calc(var(--n-icon-size) + 12px);
+          `, [
+            cE('meta', `
+              margin-top: 6px;
+              margin-bottom: unset;
+            `)
+          ]),
+          cB('timeline-item-timeline', `
+            width: 100%;
+            height: calc(var(--n-icon-size) + 12px);
+          `, [
+            cE('line', `
+              left: var(--n-icon-size);
+              top: calc(var(--n-icon-size) / 2 - 1px);
+              right: 0px;
+              width: unset;
+              height: 2px;
+            `)
+          ])
+        ])
       ])
     ])
   ]),
