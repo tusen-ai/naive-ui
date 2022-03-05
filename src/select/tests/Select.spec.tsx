@@ -274,11 +274,11 @@ describe('n-select', () => {
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NSelect)
 
-    expect(wrapper.find('.n-base-loading__icon').exists()).not.toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).not.toBe(true)
     await wrapper.setProps({
       loading: true
     })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
   })
 
   it('should work with `multiple` prop', async () => {
