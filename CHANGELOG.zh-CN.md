@@ -8,6 +8,7 @@
 - 修复 `n-time` 由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 - 修复 `n-modal` 遮罩出现没有动画
 - 修复 `n-timeline` 在水平和非水平嵌套时的样式冲突，关闭 [#2549](https://github.com/TuSimple/naive-ui/issues/2549)
+- 修复 `n-tree` 箭头和 loading 切换时动画不完整
 
 ### Feats
 
