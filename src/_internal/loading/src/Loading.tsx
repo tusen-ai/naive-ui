@@ -67,7 +67,7 @@ export default defineComponent({
                           r={radius - strokeWidth / 2}
                           stroke-dasharray={4.91 * radius}
                           stroke-dashoffset={2.46 * radius}
-                        ></circle>
+                        />
                       </svg>
                     </div>
                     <div
@@ -89,7 +89,7 @@ export default defineComponent({
                           r={radius - strokeWidth / 2}
                           stroke-dasharray={4.91 * radius}
                           stroke-dashoffset={2.46 * radius}
-                        ></circle>
+                        />
                       </svg>
                     </div>
                     <div
@@ -111,7 +111,7 @@ export default defineComponent({
                           r={radius - strokeWidth / 2}
                           stroke-dasharray={4.91 * radius}
                           stroke-dashoffset={2.46 * radius}
-                        ></circle>
+                        />
                       </svg>
                     </div>
                   </div>

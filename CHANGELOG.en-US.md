@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `base-loading` use css transition rather than svg animateTrantion to prevent js blocking
+- Fix `base-loading` use css transition rather than svg animateTrantion to prevent js blocking, close [#2506](https://github.com/TuSimple/naive-ui/issues/2506).
 - Fix `n-time` throws error caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
 - Fix `n-modal`'s mask doesn't have enter & leave transition.
 - Fix `n-timeline` has style conflict when vertical & horizontal `n-timeline` are nested, closes [#2549](https://github.com/TuSimple/naive-ui/issues/2549).

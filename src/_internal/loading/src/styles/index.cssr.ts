@@ -54,7 +54,8 @@ export default c([
     to {
       -webkit-transform: rotate(265deg);
       transform: rotate(265deg);
-    }`),
+    }
+  `),
   c('@keyframes loading-right-spin', `
     from {
       -webkit-transform: rotate(-265deg);
@@ -67,13 +68,14 @@ export default c([
     to {
       -webkit-transform: rotate(-265deg);
       transform: rotate(-265deg);
-    }`),
+    }
+  `),
   cB('base-loading', `
-      position: relative;
-      line-height: 0;
-      width: 1em;
-      height: 1em;
-    `, [
+    position: relative;
+    line-height: 0;
+    width: 1em;
+    height: 1em;
+  `, [
     cE('container', `
       display: inline-flex;
       position: relative;
@@ -87,26 +89,27 @@ export default c([
       position: absolute;
       width: 100%;
       height: 100%;
-      `, [
+    `, [
       cE('svg', `
-          stroke: var(--n-text-color);
-          fill: transparent;
-          position: absolute;
-          height: 100%;
-          overflow: hidden;`),
+        stroke: var(--n-text-color);
+        fill: transparent;
+        position: absolute;
+        height: 100%;
+        overflow: hidden;
+      `),
       cE('container-layer', `
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          animation: loading-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-        `, [
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: loading-layer-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+      `, [
         cE('container-layer-left', `
           display: inline-flex;
           position: relative;
           width: 50%;
           height: 100%;
           overflow: hidden;
-          `, [
+        `, [
           cE('svg', `
             animation: loading-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
              width: 200%;
@@ -120,7 +123,7 @@ export default c([
           width: 5%;
           height: 100%;
           overflow: hidden;
-          `, [
+        `, [
           cE('svg', `
             left: -900%;
             width: 2000%;
@@ -132,7 +135,8 @@ export default c([
           position: relative;
           width: 50%;
           height: 100%;
-          overflow: hidden;`, [
+          overflow: hidden;
+        `, [
           cE('svg', `
             animation: loading-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
             left: -100%;
