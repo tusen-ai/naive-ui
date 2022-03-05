@@ -13,8 +13,10 @@ If you develop using the template approach, you can use the `unplugin-vue-compon
 
 The plugin will automatically parse the components used in the template and import the components.
 
-```vite.config.js
+```ts
+// vite.config.ts
 import { defineConfig } from 'vite'
+
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
@@ -30,7 +32,7 @@ export default defineConfig({
   ]
 });
 ```
-Note: This method does not handle function API components, such as the `useMessage` component, and the user still needs to import the corresponding component manually.
+Note: This method does not work with composables such as `useMessage`, and the user still needs to import the corresponding composable manually.
 
 `import { useMessage } from 'naive-ui'`
 
@@ -78,7 +80,7 @@ Note: This method does not handle function API components, such as the `useMessa
 </style>
 ```
 
-## Install on Demand Globally(Manual)
+## Install on Demand Globally (Manually)
 
 ```js
 import { createApp } from 'vue'
