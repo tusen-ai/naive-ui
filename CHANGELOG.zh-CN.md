@@ -7,6 +7,10 @@
 - 修复 `n-time` 由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 - 修复 `n-modal` 遮罩出现没有动画
 
+### Feats
+
+- `n-time-line-item` 新增 line-type 属性，关闭 [#2548](https://github.com/TuSimple/naive-ui/issues/2548)
+
 ## 2.26.0
 
 ### Breaking Changes

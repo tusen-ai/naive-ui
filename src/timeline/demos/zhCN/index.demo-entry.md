@@ -25,13 +25,14 @@ customize-icon.vue
 
 ### TimelineItem Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| color | `string` | `undefined` | 选项的颜色 |
-| content | `string` | `undefined` | 选项内容 |
-| time | `string` | `undefined` | 选项时间 |
-| title | `string` | `undefined` | 选项标题 |
-| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| color | `string` | `undefined` | 选项的颜色 |  |
+| content | `string` | `undefined` | 选项内容 |  |
+| line-type | `'default' \| 'dashed'` | `'default'` | 线的类型 | NEXT_VERSION |
+| time | `string` | `undefined` | 选项时间 |  |
+| title | `string` | `undefined` | 选项标题 |  |
+| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |  |
 
 ### Timeline Slots
 

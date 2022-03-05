@@ -7,6 +7,10 @@
 - Fix `n-time` throws error caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
 - Fix `n-modal`'s mask doesn't have enter & leave transition.
 
+### Feats
+
+- `n-time-line-item` add `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
+
 ## 2.26.0
 
 ### Breaking Changes

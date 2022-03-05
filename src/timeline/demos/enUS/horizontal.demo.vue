@@ -5,28 +5,28 @@
 <template>
   <div style="overflow: auto">
     <n-timeline horizontal>
-      <n-timeline-item content="啊" />
+      <n-timeline-item content="Oops" />
       <n-timeline-item
         type="success"
-        title="成功"
-        content="哪里成功"
+        title="Success"
+        content="Success content"
         time="2018-04-03 20:46"
       />
       <n-timeline-item
         type="error"
-        content="哪里失败"
+        content="Error content"
         time="2018-04-03 20:46"
       />
       <n-timeline-item
         type="warning"
-        title="警告"
-        content="哪里警告"
+        title="Warning"
+        content="Warning content"
         time="2018-04-03 20:46"
       />
       <n-timeline-item
         type="info"
-        title="信息"
-        content="是的"
+        title="Info"
+        content="Info content"
         time="2018-04-03 20:46"
       />
     </n-timeline>
