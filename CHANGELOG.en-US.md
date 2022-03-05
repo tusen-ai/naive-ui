@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- Fixes `n-time` can't get `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-time` throws error caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-modal`'s mask doesn't have enter & leave transition.
 
 ## 2.26.0
 
