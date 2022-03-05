@@ -31,6 +31,17 @@ describe('n-dynamic-input', () => {
     expect(wrapper.find('.n-button').classes()).toContain('n-button--dashed')
   })
 
+  it('should work with `show-sort-button` props', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: ['aaa'],
+        showSortButton: true
+      }
+    })
+
+    expect(wrapper.findAll('button').length).toBe(4)
+  })
+
   it('should work with `item-style` prop', async () => {
     const wrapper = mount(NDynamicInput, {
       props: {

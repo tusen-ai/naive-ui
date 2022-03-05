@@ -6,7 +6,14 @@ import {
   h,
   CSSProperties
 } from 'vue'
-import { createKey, formatLength, throwError } from '../../_utils'
+import {
+  createKey,
+  formatLength,
+  resolveSlot,
+  resolveWrappedSlot,
+  throwError,
+  useHoudini
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { timelineInjectionKey } from './Timeline'
 import { useConfig, useThemeClass } from '../../_mixins'
@@ -16,6 +23,10 @@ const timelineItemProps = {
   title: String,
   content: String,
   color: String,
+  lineType: {
+    type: String as PropType<'default' | 'dashed'>,
+    default: 'default'
+  },
   type: {
     type: String as PropType<
     'default' | 'success' | 'error' | 'warning' | 'info'
@@ -37,6 +48,7 @@ export default defineComponent({
         '`n-timeline-item` must be placed inside `n-timeline`.'
       )
     }
+    useHoudini()
     const { inlineThemeDisabled } = useConfig()
     const cssVarsRef = computed(() => {
       const {
@@ -104,37 +116,46 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-timeline-item`,
           this.themeClass,
-          `${mergedClsPrefix}-timeline-item--${this.type}-type`
+          `${mergedClsPrefix}-timeline-item--${this.type}-type`,
+          `${mergedClsPrefix}-timeline-item--${this.lineType}-line-type`
         ]}
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
-          {$slots.icon ? (
-            <div
-              class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
-              style={{ color: color }}
-            >
-              {$slots.icon()}
-            </div>
-          ) : (
-            <div
-              class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
-              style={{ borderColor: color }}
-            />
-          )}
+          {resolveWrappedSlot($slots.icon, (children) => {
+            return children ? (
+              <div
+                class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
+                style={{ color: color }}
+              >
+                {children}
+              </div>
+            ) : (
+              <div
+                class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
+                style={{ borderColor: color }}
+              />
+            )
+          })}
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
-          {this.title || $slots.header ? (
-            <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
-              {$slots.header ? $slots.header() : this.title}
-            </div>
-          ) : null}
+          {resolveWrappedSlot($slots.header, (children) => {
+            const mergedChildren = children || this.title
+            if (mergedChildren) {
+              return (
+                <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
+                  {children || this.title}
+                </div>
+              )
+            }
+            return null
+          })}
           <div class={`${mergedClsPrefix}-timeline-item-content__content`}>
-            {$slots.default ? $slots.default() : this.content}
+            {resolveSlot($slots.default, () => [this.content])}
           </div>
           <div class={`${mergedClsPrefix}-timeline-item-content__meta`}>
-            {$slots.footer ? $slots.footer() : this.time}
+            {resolveSlot($slots.footer, () => [this.time])}
           </div>
         </div>
       </div>

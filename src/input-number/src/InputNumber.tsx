@@ -36,6 +36,7 @@ const HOLDING_CHANGE_INTERVAL = 100
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  autofocus: Boolean,
   loading: {
     type: Boolean,
     default: undefined
@@ -503,6 +504,7 @@ export default defineComponent({
       >
         <NInput
           ref="inputInstRef"
+          autofocus={this.autofocus}
           status={this.mergedStatus}
           bordered={this.mergedBordered}
           loading={this.loading}

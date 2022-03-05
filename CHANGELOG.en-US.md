@@ -5,6 +5,16 @@
 ### Fixes
 
 - Fix `base-loading` use css transition rather than svg animateTrantion to prevent js blocking
+- Fix `n-time` throws error caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-modal`'s mask doesn't have enter & leave transition.
+- Fix `n-timeline` has style conflict when vertical & horizontal `n-timeline` are nested, closes [#2549](https://github.com/TuSimple/naive-ui/issues/2549).
+
+### Feats
+
+- `n-time-line-item` adds `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
+- `n-step` adds `icon` slot, closes [#2547](https://github.com/TuSimple/naive-ui/issues/2547).
+- `n-input-number` adds `autofocus` prop, closes [#2551](https://github.com/TuSimple/naive-ui/issues/2551).
+- `n-date-picker`'s date item click trigger area is as large as cell size, closes [#2552](https://github.com/TuSimple/naive-ui/issues/2552).
 
 ## 2.26.0
 
