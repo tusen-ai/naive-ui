@@ -25,7 +25,7 @@ change-timing.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| autofocus | `boolean` | `false` | Whether to autofocus. | NEXT_VERSION |
+| autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |

@@ -27,7 +27,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| autofocus | `boolean` | `false` | 是否自动获取焦点 | NEXT_VERSION |
+| autofocus | `boolean` | `false` | 是否自动获取焦点 | 2.26.1 |
 | bordered | `boolean` | `true` | 是否有边框 |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |

@@ -30,7 +30,7 @@ nested-debug.vue
 | --- | --- | --- | --- | --- |
 | color | `string` | `undefined` | 选项的颜色 |  |
 | content | `string` | `undefined` | 选项内容 |  |
-| line-type | `'default' \| 'dashed'` | `'default'` | 线的类型 | NEXT_VERSION |
+| line-type | `'default' \| 'dashed'` | `'default'` | 线的类型 | 2.26.1 |
 | time | `string` | `undefined` | 选项时间 |  |
 | title | `string` | `undefined` | 选项标题 |  |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |  |
