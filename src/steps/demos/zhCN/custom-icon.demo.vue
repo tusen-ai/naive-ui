@@ -1,7 +1,7 @@
 <markdown>
 # 定制图标
 
-只提供 `'finish'` 和 `'error'` 状态下的图标定制
+可以定制 `'finish'` 和 `'error'` 状态下的图标和每一步的图标。
 </markdown>
 
 <template>
@@ -32,7 +32,13 @@
       <n-step
         title="Something"
         description="Something in the way she moves Attracts me like no other lover"
-      />
+      >
+        <template #icon>
+          <n-icon>
+            <md-cafe />
+          </n-icon>
+        </template>
+      </n-step>
     </n-steps>
     <n-space>
       <n-button-group>
@@ -74,6 +80,7 @@ import { defineComponent, ref } from 'vue'
 import {
   MdArrowRoundBack,
   MdArrowRoundForward,
+  MdCafe,
   MdHappy,
   MdSad
 } from '@vicons/ionicons4'
@@ -84,7 +91,8 @@ export default defineComponent({
     MdArrowRoundBack,
     MdArrowRoundForward,
     MdHappy,
-    MdSad
+    MdSad,
+    MdCafe
   },
   setup () {
     const currentRef = ref<number | null>(1)

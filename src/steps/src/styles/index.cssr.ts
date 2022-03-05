@@ -106,6 +106,12 @@ export default cB('steps', `
       `, [
         iconSwitchTransition()
       ]),
+      cB('icon', `
+        color: var(--n-indicator-text-color);
+        transition: color .3s var(--n-bezier);
+      `, [
+        iconSwitchTransition()
+      ]),
       cB('base-icon', `
         color: var(--n-indicator-text-color);
         transition: color .3s var(--n-bezier);

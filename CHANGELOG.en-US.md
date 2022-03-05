@@ -9,7 +9,8 @@
 
 ### Feats
 
-- `n-time-line-item` add `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
+- `n-time-line-item` adds `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
+- `n-step` adds `icon` slot, closes [#2547](https://github.com/TuSimple/naive-ui/issues/2547).
 
 ## 2.26.0
 
