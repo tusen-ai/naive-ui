@@ -12,6 +12,7 @@
 
 - `n-time-line-item` adds `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
 - `n-step` adds `icon` slot, closes [#2547](https://github.com/TuSimple/naive-ui/issues/2547).
+- `n-input-number` adds `autofocus` prop, closes [#2551](https://github.com/TuSimple/naive-ui/issues/2551).
 
 ## 2.26.0
 
