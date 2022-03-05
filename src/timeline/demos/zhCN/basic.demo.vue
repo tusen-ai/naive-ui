@@ -23,6 +23,8 @@
       title="信息"
       content="是的"
       time="2018-04-03 20:46"
+      line-type="dashed"
     />
+    <n-timeline-item content="啊" />
   </n-timeline>
 </template>

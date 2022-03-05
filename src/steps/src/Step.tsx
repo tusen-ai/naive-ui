@@ -11,7 +11,12 @@ import {
   CloseIcon as ErrorIcon
 } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
-import { createKey, throwError } from '../../_utils'
+import {
+  createKey,
+  resolveSlot,
+  resolveWrappedSlot,
+  throwError
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { stepsInjectionKey } from './Steps'
 import { useConfig, useThemeClass } from '../../_mixins'
@@ -124,16 +129,28 @@ export default defineComponent({
     }
   },
   render () {
-    const showDescription =
-      this.description !== undefined || this.$slots.default
     const { mergedClsPrefix, onRender } = this
+    const descriptionNode = resolveWrappedSlot(
+      this.$slots.default,
+      (children) => {
+        const mergedDescription = children || this.description
+        if (mergedDescription) {
+          return (
+            <div class={`${mergedClsPrefix}-step-content__description`}>
+              {mergedDescription}
+            </div>
+          )
+        }
+        return null
+      }
+    )
     onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-step`,
           this.themeClass,
-          showDescription && `${mergedClsPrefix}-step--show-description`
+          descriptionNode && `${mergedClsPrefix}-step--show-description`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -142,39 +159,39 @@ export default defineComponent({
             <NIconSwitchTransition>
               {{
                 default: () => {
-                  const { mergedStatus, stepsSlots } = this
-                  return !(
-                    mergedStatus === 'finish' || mergedStatus === 'error'
-                  ) ? (
-                    <div
-                      key={this.internalIndex}
-                      class={`${mergedClsPrefix}-step-indicator-slot__index`}
-                    >
-                      {this.internalIndex}
-                    </div>
-                      ) : mergedStatus === 'finish' ? (
-                    <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
-                      {{
-                        default: () =>
-                          stepsSlots['finish-icon'] ? (
-                            stepsSlots['finish-icon']()
-                          ) : (
-                            <FinishedIcon />
+                  return resolveWrappedSlot(this.$slots.icon, (icon) => {
+                    const { mergedStatus, stepsSlots } = this
+                    return !(
+                      mergedStatus === 'finish' || mergedStatus === 'error'
+                    ) ? (
+                          icon || (
+                        <div
+                          key={this.internalIndex}
+                          class={`${mergedClsPrefix}-step-indicator-slot__index`}
+                        >
+                          {this.internalIndex}
+                        </div>
                           )
-                      }}
-                    </NBaseIcon>
-                      ) : mergedStatus === 'error' ? (
-                    <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
-                      {{
-                        default: () =>
-                          stepsSlots['error-icon'] ? (
-                            stepsSlots['error-icon']()
-                          ) : (
-                            <ErrorIcon />
-                          )
-                      }}
-                    </NBaseIcon>
-                      ) : null
+                        ) : mergedStatus === 'finish' ? (
+                      <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
+                        {{
+                          default: () =>
+                            resolveSlot(stepsSlots['finish-icon'], () => [
+                              <FinishedIcon />
+                            ])
+                        }}
+                      </NBaseIcon>
+                        ) : mergedStatus === 'error' ? (
+                      <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
+                        {{
+                          default: () =>
+                            resolveSlot(stepsSlots['error-icon'], () => [
+                              <ErrorIcon />
+                            ])
+                        }}
+                      </NBaseIcon>
+                        ) : null
+                  })
                 }
               }}
             </NIconSwitchTransition>
@@ -186,17 +203,13 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-step-content`}>
           <div class={`${mergedClsPrefix}-step-content-header`}>
             <div class={`${mergedClsPrefix}-step-content-header__title`}>
-              {this.$slots.title ? this.$slots.title() : this.title}
+              {resolveSlot(this.$slots.title, () => [this.title])}
             </div>
             {!this.vertical ? (
               <div class={`${mergedClsPrefix}-step-splitor`} />
             ) : null}
           </div>
-          {showDescription ? (
-            <div class={`${mergedClsPrefix}-step-content__description`}>
-              {this.$slots.default ? this.$slots.default() : this.description}
-            </div>
-          ) : null}
+          {descriptionNode}
         </div>
       </div>
     )

@@ -311,6 +311,13 @@ export default c([
           background-color .2s var(--n-bezier),
           color .2s var(--n-bezier);
       `, [
+        cE('trigger', `
+          position: absolute;
+          left: calc(var(--n-item-size) / 2 - var(--n-item-cell-width) / 2);
+          top: calc(var(--n-item-size) / 2 - var(--n-item-cell-height) / 2);
+          width:  var(--n-item-cell-width);
+          height:  var(--n-item-cell-height);
+        `),
         cNotM('disabled', [
           cNotM('selected', [
             c('&:hover', {

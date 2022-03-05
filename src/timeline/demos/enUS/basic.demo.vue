@@ -27,6 +27,8 @@
       title="Info"
       content="info content"
       time="2018-04-03 20:46"
+      line-type="dashed"
     />
+    <n-timeline-item content="Oops" />
   </n-timeline>
 </template>
