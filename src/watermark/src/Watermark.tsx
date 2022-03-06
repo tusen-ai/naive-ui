@@ -1,4 +1,13 @@
-import { h, defineComponent, PropType, ref, watchEffect } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  ref,
+  watchEffect,
+  onMounted,
+  nextTick,
+  onUnmounted
+} from 'vue'
 import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -202,9 +211,12 @@ export default defineComponent({
         warnOnce('watermark', 'Canvas is not supported in the browser.')
       }
     })
-    return () => {
-      const watarmarkNode = (
+
+    const WatermarkComp = defineComponent(() => {
+      return () => (
         <div
+          // DO NOT remove
+          data-watermark
           class={[
             `${mergedClsPrefixRef.value}-watermark`,
             props.fullscreen &&
@@ -222,19 +234,88 @@ export default defineComponent({
           }}
         />
       )
-      if (props.fullscreen) return watarmarkNode
-      return (
-        <div
-          class={[
-            `${mergedClsPrefixRef.value}-watermark-container`,
-            props.selectable &&
-              `${mergedClsPrefixRef.value}-watermark-container--selectable`
-          ]}
-        >
-          {slots.default?.()}
-          {watarmarkNode}
-        </div>
-      )
+    })
+
+    const ObservedWatermarkComp = defineComponent(() => {
+      const observer = new MutationObserver(() => {
+        if (!$watermarkWrapper.value) {
+          return
+        }
+        const $watermark = $watermarkWrapper.value.querySelector(
+          '[data-watermark]'
+        ) as HTMLDivElement
+
+        const doForceRender = (): void => {
+          renderFlag.value = false
+
+          void nextTick(() => {
+            renderFlag.value = true
+            // disconnect before old dom element, then observe  to new dom element
+            observer.disconnect()
+            // re-observer newer dom element
+            void nextTick(() => {
+              makeObserver()
+            })
+          })
+        }
+
+        const watermarkStyle = getComputedStyle($watermark)
+
+        if (!$watermark || $watermark.tagName !== 'DIV') {
+          doForceRender()
+        } else if (watermarkStyle.display === 'none') {
+          $watermark.style.display = 'block'
+        } else if (watermarkStyle.visibility === 'hidden') {
+          $watermark.style.visibility = 'visible'
+        } else if (+watermarkStyle.opacity < 1) {
+          $watermark.style.opacity = '1'
+        } else if (
+          watermarkStyle.color === 'transparent' ||
+          (watermarkStyle.color.startsWith('rgba') &&
+            watermarkStyle.color.endsWith('0)'))
+        ) {
+          $watermark.style.color = 'unset'
+        }
+      })
+      const $watermarkWrapper = ref<HTMLDivElement>()
+      const makeObserver = (): void => {
+        if ($watermarkWrapper.value) {
+          observer.observe($watermarkWrapper.value, {
+            subtree: true,
+            attributes: true,
+            childList: true
+          })
+        }
+      }
+      onMounted(() => {
+        makeObserver()
+      })
+
+      onUnmounted(() => {
+        observer.disconnect()
+      })
+
+      // HACK: re-render element
+      const renderFlag = ref(true)
+
+      return () =>
+        renderFlag.value && (
+          <div
+            ref={$watermarkWrapper}
+            class={[
+              `${mergedClsPrefixRef.value}-watermark-container`,
+              props.selectable &&
+                `${mergedClsPrefixRef.value}-watermark-container--selectable`
+            ]}
+          >
+            {slots.default?.()}
+            <WatermarkComp />
+          </div>
+        )
+    })
+    return () => {
+      if (props.fullscreen) return <WatermarkComp />
+      return <ObservedWatermarkComp />
     }
   }
 })
