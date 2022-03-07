@@ -77,6 +77,27 @@ describe('n-dynamic-input', () => {
     ).toBe('color: green;')
   })
 
+  it('should work with `min` `max` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: ['', '', ''],
+        min: 2,
+        max: 4
+      }
+    })
+    expect(wrapper.find('.n-button--disabled').exists()).toBe(false)
+
+    await wrapper.setProps({ value: ['', ''] })
+    expect(wrapper.findAll('button')[0].classes()).toContain(
+      'n-button--disabled'
+    )
+
+    await wrapper.setProps({ value: ['', '', '', ''] })
+    expect(wrapper.findAll('button')[1].classes()).toContain(
+      'n-button--disabled'
+    )
+  })
+
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NDynamicInput, {
       props: {
