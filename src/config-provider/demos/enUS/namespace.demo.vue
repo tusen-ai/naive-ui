@@ -1,5 +1,5 @@
 <markdown>
-# Namespace (Class on Detached DOM)
+# Namespace (class on detached DOM)
 
 Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of `n-config-provider`. Open devtools to see detached part.
 </markdown>
@@ -12,7 +12,7 @@ Some parts of component are detached to `document.body`. If you want to add a cl
           Activate Component with Detached Content
         </n-button>
       </template>
-      <span> Detached Part </span>
+      <span>Detached Part</span>
     </n-tooltip>
   </n-config-provider>
 </template>

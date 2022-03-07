@@ -1,5 +1,5 @@
 <markdown>
-# Use Slot in Step
+# Use slot in step
 </markdown>
 
 <template>

@@ -130,6 +130,7 @@ export const popoverBaseProps = {
   },
   x: Number,
   y: Number,
+  arrowPointToCenter: Boolean,
   disabled: Boolean,
   getDisabled: Function as PropType<() => boolean>,
   displayDirective: {

@@ -27,6 +27,7 @@ header.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | animated | `boolean` | `true` | Use animation when popping up. |  |
+| arrow-point-to-center | `boolean` | `false` | Whether the arrow points to center of the trigger element. | 2.26.0 |
 | arrow-style | `Object` | `undefined` | Arrow style for popover. |  |
 | delay | `number` | `100` | Popover showing delay when trigger is `hover` |  |
 | disabled | `boolean` | `false` | Whether the popover can't be activated. |  |
@@ -36,7 +37,6 @@ header.vue
 | keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | 2.25.0 |
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |  |
-| arrow-point-to-center | `boolean` | `false` | Whether to always point the arrow to the center of 'trigger'. | NEXT_VERSION |
 | raw | `boolean` | `false` | Whether to use no default styles. |  |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |  |
 | show | `boolean` | `undefined` | Whether to show popover. |  |

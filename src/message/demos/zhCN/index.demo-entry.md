@@ -73,7 +73,7 @@ no-icon.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | destroyAll | `() => void` | 销毁所有弹出的信息 |  |
-| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 | NEXT_VERSION |
+| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 | 2.25.7 |
 | error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 |  |
 | info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 info 类型的信息 |  |
 | loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 loading 类型的信息 |  |
@@ -89,8 +89,8 @@ no-icon.vue
 | icon | `() => VNodeChild` | 信息图标 |  |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
 | render | `MessageRenderMessage` | 消息的渲染函数 | 2.24.0 |
-| showIcon | `boolean` | 是否展示图标 | NEXT_VERSION |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` NEXT_VERSION |
+| showIcon | `boolean` | 是否展示图标 | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
 | onClose | `() => void` | 点击关闭图标的回调 |  |
 | onLeave | `() => void` | 信息开始消失的回调 |  |
@@ -116,8 +116,8 @@ type MessageRenderMessage = (props: {
 | destroy | `() => void` | 销毁信息的方法 |  |
 | icon | `() => VNodeChild` | 信息图标 |  |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
-| showIcon | `boolean` | 是否展示图标 | NEXT_VERSION |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` NEXT_VERSION |
+| showIcon | `boolean` | 是否展示图标 | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
 | onLeave | `() => void` | 信息开始消失的回调 |  |
 

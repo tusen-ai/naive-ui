@@ -1,5 +1,5 @@
 <markdown>
-# Load Remote Options
+# Load remote options
 
 Load options asynchronously.
 </markdown>

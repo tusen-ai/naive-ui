@@ -1,5 +1,5 @@
 <markdown>
-# Customizing Field
+# Customizing field
 
 Various data would come from backend, you can customize `key`, `label` and `children`'s field name.
 </markdown>

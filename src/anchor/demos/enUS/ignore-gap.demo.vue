@@ -1,5 +1,5 @@
 <markdown>
-# Ignore Gap
+# Ignore gap
 </markdown>
 
 <template>

@@ -9,7 +9,10 @@ export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
 export { cascaderDark } from './cascader/styles'
-export { checkboxDark } from './checkbox/styles'
+export {
+  checkboxDark,
+  checkboxRtl as unstableCheckboxRtl
+} from './checkbox/styles'
 export { codeDark } from './code/styles'
 export {
   collapseDark,
@@ -29,8 +32,11 @@ export { emptyDark } from './empty/styles'
 export { formDark } from './form/styles'
 export { gradientTextDark } from './gradient-text/styles'
 export { iconDark } from './icon/styles'
-export { inputDark } from './input/styles'
-export { inputNumberDark } from './input-number/styles'
+export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
+export {
+  inputNumberDark,
+  inputNumberRtl as unstableInputNumberRtl
+} from './input-number/styles'
 export { layoutDark } from './layout/styles'
 export { listDark } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'

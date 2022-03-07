@@ -1,5 +1,5 @@
 <markdown>
-# Custom Indicator
+# Custom indicator
 
 You can custom the indicator.
 </markdown>

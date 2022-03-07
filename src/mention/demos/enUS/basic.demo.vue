@@ -1,5 +1,5 @@
 <markdown>
-# Basic Usage
+# Basic usage
 
 If `label` is a render function, the `value` property will be used for matching.
 </markdown>

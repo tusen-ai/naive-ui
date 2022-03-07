@@ -1,5 +1,5 @@
 <markdown>
-# Click on Item Header
+# Click on item header
 </markdown>
 
 <template>

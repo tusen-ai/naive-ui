@@ -1,5 +1,5 @@
 <markdown>
-# Controlled Checkbox
+# Controlled checkbox
 </markdown>
 
 <template>

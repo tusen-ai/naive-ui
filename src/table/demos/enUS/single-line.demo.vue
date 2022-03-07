@@ -1,5 +1,5 @@
 <markdown>
-# Single Line
+# Single line
 </markdown>
 
 <template>

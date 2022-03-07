@@ -1,5 +1,5 @@
 <markdown>
-# Long Label
+# Long label
 
 Set `label` to render function that renders `n-ellipsis`.
 </markdown>

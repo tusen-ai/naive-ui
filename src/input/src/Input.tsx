@@ -59,6 +59,7 @@ import { inputInjectionKey } from './interface'
 import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -173,8 +174,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, mergedBorderedRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Input',
       '-input',
@@ -743,6 +748,7 @@ export default defineComponent({
       activate
     }
 
+    const rtlEnabledRef = useRtl('Input', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -873,6 +879,7 @@ export default defineComponent({
       textareaMirrorElRef,
       textareaScrollbarInstRef,
       // value
+      rtlEnabled: rtlEnabledRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       passwordVisible: passwordVisibleRef,
@@ -931,6 +938,7 @@ export default defineComponent({
           themeClass,
           mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {
+            [`${mergedClsPrefix}-input--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:

@@ -113,7 +113,10 @@ export default defineComponent({
             onClick={this.handleClick}
           >
             {arrowPlacement === 'right' && headerNode}
-            <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
+            <div
+              class={`${mergedClsPrefix}-collapse-item-arrow`}
+              key={this.rtlEnabled ? 0 : 1}
+            >
               {arrowSlot ? (
                 arrowSlot({ collapsed })
               ) : (

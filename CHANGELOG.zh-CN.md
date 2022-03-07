@@ -1,26 +1,62 @@
 # CHANGELOG
 
-## 2.25.5
+## 2.26.1
+
+### Fixes
+
+- 修复 `base-loading` 动画会被 js 堵塞，关闭 [#2506](https://github.com/TuSimple/naive-ui/issues/2506)
+- 修复 `n-time` 由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
+- 修复 `n-modal` 遮罩出现没有动画
+- 修复 `n-timeline` 在水平和非水平嵌套时的样式冲突，关闭 [#2549](https://github.com/TuSimple/naive-ui/issues/2549)
+- 修复 `n-tree` 箭头和 loading 切换时动画不完整
+
+### Feats
+
+- `n-time-line-item` 新增 `line-type` 属性，关闭 [#2548](https://github.com/TuSimple/naive-ui/issues/2548)
+- `n-step` 新增 `icon` slot，关闭 [#2547](https://github.com/TuSimple/naive-ui/issues/2547)
+- `n-input-number` 新增 `autofocus` 属性，关闭 [#2551](https://github.com/TuSimple/naive-ui/issues/2551)
+- `n-date-picker` 扩大日期点击触发范围，关闭 [#2552](https://github.com/TuSimple/naive-ui/issues/2552)
+
+## 2.26.0
+
+### Breaking Changes
+
+- 修复 `n-tooltip` 箭头和主体之间的间隙，`n-tooltip` 不再能使用半透明的颜色
+
+### Feats
+
+- `n-popover` 新增 `arrow-point-to-center` 属性
+- `n-config-provider` 新增 `inline-theme-disabled` 属性
+
+## 2.25.8
+
+### Fixes
+
+- 修复 `useMessage` 丢失样式
+
+## 2.25.7
 
 ### Fixes
 
 - 修复 `n-time-picker` 在 `"actions="null"` 时依然显示操作栏
 - 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
 - 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
+- 修复 `n-button` rtl 支持
+- 修复 `n-form-item-row` 不能调用 `n-form-item` 的方法
 
 ### Feats
 
 - `n-collapse` 添加 `RTL` 支持
+- `useMessage` 新增 `create` 方法
 - `useMessage` 新增 `showIcon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
 - `useMessage` 支持 `'default'` 的 `type`
 - `n-checkbox` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
 - `n-radio` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
+- `n-checkbox` 添加 `RTL` 支持
+- `n-input` 添加 `RTL` 支持
+- `n-input-number` 添加 `RTL` 支持
 
 ## 2.25.5 (2022-02-24)
-
-### Feats
-
-- `n-popover` 新增 `arrow-point-to-center` 属性
 
 ### Fixes
 
@@ -1996,7 +2032,7 @@
 ### Fixes
 
 - 修正了 `n-radio` 无法聚焦的问题
-- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
 
 ### Refactors
 

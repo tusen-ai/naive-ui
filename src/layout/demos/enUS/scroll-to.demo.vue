@@ -1,5 +1,5 @@
 <markdown>
-# Scroll To
+# Scroll to
 </markdown>
 
 <template>
