@@ -31,6 +31,39 @@ describe('n-dynamic-input', () => {
     expect(wrapper.find('.n-button').classes()).toContain('n-button--dashed')
   })
 
+  it('should work with `preset` props', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: ['aaa']
+      }
+    })
+    expect(wrapper.find('.n-dynamic-input-preset-input').exists()).toBe(true)
+    expect(wrapper.find('.n-dynamic-input-preset-pair').exists()).toBe(false)
+
+    await wrapper.setProps({
+      preset: 'pair',
+      value: [
+        {
+          key: 'key',
+          value: 'value'
+        }
+      ]
+    })
+    expect(wrapper.find('.n-dynamic-input-preset-input').exists()).toBe(false)
+    expect(wrapper.find('.n-dynamic-input-preset-pair').exists()).toBe(true)
+  })
+
+  it('should work with `show-sort-button` props', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: ['aaa'],
+        showSortButton: true
+      }
+    })
+
+    expect(wrapper.findAll('button').length).toBe(4)
+  })
+
   it('should work with `item-style` prop', async () => {
     const wrapper = mount(NDynamicInput, {
       props: {
