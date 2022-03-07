@@ -1,17 +1,20 @@
+<markdown>
 # 可拖拽
 
 可拖拽移动弹框。
 
-```html
-<n-space>
-  <n-button @click="handleConfirm"> 可拖拽 </n-button>
-</n-space>
-```
+</markdown>
+<template>
+  <n-space>
+    <n-button @click="handleConfirm">
+      可拖拽
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
-
 export default defineComponent({
   setup () {
     const message = useMessage()
@@ -35,4 +38,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
