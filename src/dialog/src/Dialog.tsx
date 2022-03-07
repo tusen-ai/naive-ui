@@ -41,7 +41,7 @@ export const NDialog = defineComponent({
     ...(useTheme.props as ThemeProps<DialogTheme>),
     ...dialogProps
   },
-  setup(props) {
+  setup (props) {
     const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
       useConfig(props)
     // draggable
@@ -59,19 +59,19 @@ export const NDialog = defineComponent({
         'left'
       )
     })
-    function handlePositiveClick(e: MouseEvent): void {
+    function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick } = props
       if (onPositiveClick) onPositiveClick(e)
     }
-    function handleNegativeClick(e: MouseEvent): void {
+    function handleNegativeClick (e: MouseEvent): void {
       const { onNegativeClick } = props
       if (onNegativeClick) onNegativeClick(e)
     }
-    function handleCloseClick(): void {
+    function handleCloseClick (): void {
       const { onClose } = props
       if (onClose) onClose()
     }
-    function handleMouseMove(e: MouseEvent): void {
+    function handleMouseMove (e: MouseEvent): void {
       const dX = e.clientX - mouseClientX.value
       const dY = e.clientY - mouseClientY.value
 
@@ -81,13 +81,13 @@ export const NDialog = defineComponent({
       mouseClientX.value = e.clientX
       mouseClientY.value = e.clientY
     }
-    function handleMouseUp(e: MouseEvent): void {
+    function handleMouseUp (e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       off('mousemove', window, handleMouseMove, true)
       off('mouseup', window, handleMouseUp, true)
     }
-    function handleTitleMouseDown(e: MouseEvent): void {
+    function handleTitleMouseDown (e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       if (dialogElementRef.value === null || !props.draggable) return
@@ -163,11 +163,11 @@ export const NDialog = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-          'dialog',
-          computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
-          cssVarsRef,
-          props
-        )
+        'dialog',
+        computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
+        cssVarsRef,
+        props
+      )
       : undefined
     return {
       dialogElementRef,
@@ -180,62 +180,12 @@ export const NDialog = defineComponent({
       handleNegativeClick,
       handleCloseClick,
       handleTitleMouseDown,
-      cssVars: computed(() => {
-        const { type, iconPlacement } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            fontSize,
-            lineHeight,
-            border,
-            titleTextColor,
-            textColor,
-            color,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            borderRadius,
-            titleFontWeight,
-            titleFontSize,
-            padding,
-            iconSize,
-            actionSpace,
-            contentMargin,
-            closeSize,
-            [iconPlacement === 'top' ? 'iconMarginIconTop' : 'iconMargin']:
-              iconMargin,
-            [iconPlacement === 'top' ? 'closeMarginIconTop' : 'closeMargin']:
-              closeMargin,
-            [createKey('iconColor', type)]: iconColor
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-icon-color': iconColor,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-close-margin': closeMargin,
-          '--n-icon-margin': iconMargin,
-          '--n-icon-size': iconSize,
-          '--n-close-size': closeSize,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-color': color,
-          '--n-text-color': textColor,
-          '--n-border-radius': borderRadius,
-          '--n-padding': padding,
-          '--n-line-height': lineHeight,
-          '--n-border': border,
-          '--n-content-margin': contentMargin,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-title-text-color': titleTextColor,
-          '--n-action-space': actionSpace
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
-  render() {
+  render () {
     const {
       bordered,
       mergedIconPlacement,
@@ -318,8 +268,8 @@ export const NDialog = defineComponent({
                   $slots.icon
                     ? $slots.icon()
                     : this.icon
-                    ? render(this.icon)
-                    : iconMap[this.type]
+                      ? render(this.icon)
+                      : iconMap[this.type]
               }}
             </NBaseIcon>
           ) : null}
