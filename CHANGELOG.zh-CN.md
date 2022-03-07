@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-dialog` 新增 `draggable` 属性，关闭 [#2152](https://github.com/TuSimple/naive-ui/issues/2152)
+
 ## 2.26.3
 
 ### Fixes

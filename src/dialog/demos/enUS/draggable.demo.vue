@@ -1,13 +1,13 @@
 <markdown>
-# 可拖拽
+# Draggable
 
-可拖拽移动弹框。
+Draggable dialog.
 
 </markdown>
 <template>
   <n-space>
     <n-button @click="handleConfirm">
-      可拖拽
+      Draggable
     </n-button>
   </n-space>
 </template>
@@ -22,13 +22,13 @@ export default defineComponent({
     return {
       handleConfirm () {
         dialog.warning({
-          title: '关闭',
-          content: '你确定？',
-          positiveText: '确定',
-          negativeText: '不确定',
+          title: 'Close',
+          content: 'Are you sure?',
+          positiveText: 'Sure',
+          negativeText: 'Not Sure',
           maskClosable: false,
           onMaskClick: () => {
-            message.success('不能关闭')
+            message.success('cannot close')
           },
           draggable: true
         })
