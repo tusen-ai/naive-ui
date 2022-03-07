@@ -258,22 +258,8 @@ export const NDialog = defineComponent({
           class={`${mergedClsPrefix}-dialog__title`}
           onMousedown={draggable ? handleTitleMouseDown : undefined}
         >
-          {showIcon && mergedIconPlacement === 'left' ? (
-            <NBaseIcon
-              clsPrefix={mergedClsPrefix}
-              class={`${mergedClsPrefix}-dialog__icon`}
-            >
-              {{
-                default: () =>
-                  $slots.icon
-                    ? $slots.icon()
-                    : this.icon
-                      ? render(this.icon)
-                      : iconMap[this.type]
-              }}
-            </NBaseIcon>
-          ) : null}
-          {$slots.header ? $slots.header() : render(title)}
+          {showIcon && mergedIconPlacement === 'left' ? icon : null}
+          {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
           {resolveSlot(this.$slots.default, () => [render(content)])}
