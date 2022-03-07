@@ -39,6 +39,7 @@ basic.vue
 inline.vue
 softwrap.vue
 loop-debug.vue
+line-numbers.vue
 ```
 
 ## API
@@ -53,3 +54,4 @@ loop-debug.vue
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
 | inline | `boolean` | `false` | 使用行内样式 |  |
 | word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | 2.24.0 |
+| line-numbers | `boolean` | `false` | 是否显示行号 |  |

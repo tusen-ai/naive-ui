@@ -3,7 +3,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins/use-theme'
 
 const self = (vars: ThemeCommonVars) => {
-  const { textColor2, fontSize, fontWeightStrong } = vars
+  const { textColor2, fontSize, fontWeightStrong, textColor3 } = vars
   return {
     textColor: textColor2,
     fontSize,
@@ -17,7 +17,10 @@ const self = (vars: ThemeCommonVars) => {
     'hue-5': '#e45649',
     'hue-5-2': '#c91243',
     'hue-6': '#986801',
-    'hue-6-2': '#c18401'
+    'hue-6-2': '#c18401',
+    // line-number styles
+    'padding-color': 'rgb(243, 243, 243)',
+    'line-number-color': textColor3
   }
 }
 
