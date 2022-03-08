@@ -43,7 +43,8 @@ custom-icon.vue
 
 ### Step Slots
 
-| Name    | Parameters | Description   |
-| ------- | ---------- | ------------- |
-| default | `()`       | Step content. |
-| title   | `()`       | Step title.   |
+| Name    | Parameters | Description   | Version |
+| ------- | ---------- | ------------- | ------- |
+| default | `()`       | Step content. |         |
+| icon    | `()`       | Step icon.    | 2.26.1  |
+| title   | `()`       | Step title.   |         |

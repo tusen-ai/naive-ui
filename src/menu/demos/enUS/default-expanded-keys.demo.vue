@@ -1,5 +1,5 @@
 <markdown>
-# Expand Submenu
+# Expand submenu
 
 If you don't set `default-expanded-keys`, menu will expand all the ascendant of selected option by default.
 </markdown>

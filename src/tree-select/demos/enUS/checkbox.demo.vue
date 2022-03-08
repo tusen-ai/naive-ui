@@ -1,5 +1,5 @@
 <markdown>
-# Use Checkbox
+# Use checkbox
 
 If you want to have the same effect of this demo, you will need `checkable`, `cascade` and `multiple` properties.
 </markdown>

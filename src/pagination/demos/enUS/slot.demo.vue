@@ -1,5 +1,5 @@
 <markdown>
-# Page Slot
+# Page slot
 
 The pagination has a property `page-slot`, try it and you will understand. It aims to solving misclicks caused by the length changing of pagination.
 </markdown>

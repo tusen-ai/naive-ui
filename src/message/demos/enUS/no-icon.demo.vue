@@ -1,10 +1,10 @@
 <markdown>
-# No Icon
+# No icon
 </markdown>
 
 <template>
   <n-button @click="createMessage">
-    No Icon
+    No icon
   </n-button>
 </template>
 

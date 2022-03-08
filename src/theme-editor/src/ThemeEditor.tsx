@@ -197,6 +197,7 @@ export default defineComponent({
         {{
           default: () => [
             <NPopover
+              arrowPointToCenter
               trigger="manual"
               show={this.showPanel}
               displayDirective="show"

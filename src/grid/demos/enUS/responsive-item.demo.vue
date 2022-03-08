@@ -1,5 +1,5 @@
 <markdown>
-# Responsive Grid Item
+# Responsive grid item
 
 When `span` is 0, `n-grid-item` won't be displayed.
 </markdown>

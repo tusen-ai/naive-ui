@@ -1,5 +1,5 @@
 <markdown>
-# Absolute Position
+# Absolute position
 
 All layout components can use absolute positioning. It can be used when you want content scrolling inside fixed area.
 </markdown>

@@ -25,12 +25,12 @@ describe('n-input', () => {
   it('`loading` prop', async () => {
     const wrapper = mount(NInput)
     expect(wrapper.find('.n-input__suffix').exists()).toBe(false)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: false })
     expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
     wrapper.unmount()
   })
 

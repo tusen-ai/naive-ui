@@ -1,5 +1,5 @@
 <markdown>
-# Manually Trigger Focus and Blur
+# Manually trigger focus and blur
 
 You may want to trigger `focus` and `blur` manually?
 </markdown>

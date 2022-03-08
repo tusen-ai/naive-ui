@@ -1,5 +1,5 @@
 <markdown>
-# Body Style
+# Body style
 
 Setting style is sometimes useful.
 </markdown>

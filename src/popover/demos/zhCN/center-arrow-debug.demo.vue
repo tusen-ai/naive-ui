@@ -11,7 +11,6 @@
       arrow-point-to-center
       placement="top-start"
       trigger="click"
-      style="--v-target-width: 97px"
     >
       <template #trigger>
         <n-button size="small" style="grid-area: 1 / 1 / 2 / 2">
@@ -42,7 +41,6 @@
       arrow-point-to-center
       placement="top-end"
       trigger="click"
-      style="--v-target-width: 97px"
     >
       <template #trigger>
         <n-button size="small" style="grid-area: 1 / 3 / 2 / 4">
@@ -152,7 +150,6 @@
       arrow-point-to-center
       placement="bottom-start"
       trigger="click"
-      style="--v-target-width: 97px"
     >
       <template #trigger>
         <n-button size="small" style="grid-area: 5 / 1 / 6 / 2">
@@ -183,7 +180,6 @@
       arrow-point-to-center
       placement="bottom-end"
       trigger="click"
-      style="--v-target-width: 97px"
     >
       <template #trigger>
         <n-button size="small" style="grid-area: 5 / 3 / 6 / 4">

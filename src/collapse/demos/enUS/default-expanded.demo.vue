@@ -1,5 +1,5 @@
 <markdown>
-# Default Expanded
+# Default expanded
 
 It should be noted that even if only one panel you want to set to be expanded, `default-expanded-names` should also be passed in an array, unless `accordion` is set to `true`.
 </markdown>

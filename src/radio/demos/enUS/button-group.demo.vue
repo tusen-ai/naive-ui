@@ -1,5 +1,5 @@
 <markdown>
-# Button Group
+# Button group
 
 Sometimes a radio button group can look more elegant.
 </markdown>

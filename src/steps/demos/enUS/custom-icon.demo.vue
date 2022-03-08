@@ -1,7 +1,7 @@
 <markdown>
-# Custom Icon
+# Customizing icon
 
-Only provide icon customization in `'finish'` and `'error'` states.
+`'finish'` and `'error'` states icon or index icon can be customized.
 </markdown>
 
 <template>
@@ -32,7 +32,13 @@ Only provide icon customization in `'finish'` and `'error'` states.
       <n-step
         title="Something"
         description="Something in the way she moves Attracts me like no other lover"
-      />
+      >
+        <template #icon>
+          <n-icon>
+            <md-cafe />
+          </n-icon>
+        </template>
+      </n-step>
     </n-steps>
     <n-space>
       <n-button-group>
@@ -75,7 +81,8 @@ import {
   MdArrowRoundBack,
   MdArrowRoundForward,
   MdHappy,
-  MdSad
+  MdSad,
+  MdCafe
 } from '@vicons/ionicons4'
 import { StepsProps } from 'naive-ui'
 
@@ -84,7 +91,8 @@ export default defineComponent({
     MdArrowRoundBack,
     MdArrowRoundForward,
     MdHappy,
-    MdSad
+    MdSad,
+    MdCafe
   },
   setup () {
     const currentRef = ref<number | null>(1)

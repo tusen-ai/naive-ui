@@ -113,6 +113,7 @@ export default defineComponent({
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
               >
+                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />

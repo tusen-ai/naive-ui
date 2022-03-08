@@ -141,6 +141,21 @@ describe('n-timeline-item', () => {
     )
   })
 
+  it('should work with `line-type` prop', () => {
+    ;(['default', 'dashed'] as const).forEach((lineType) => {
+      const wrapper = mount(NTimeline, {
+        slots: {
+          default: () =>
+            h(NTimelineItem, { title: 'test-title', lineType: lineType })
+        }
+      })
+
+      expect(wrapper.find('.n-timeline-item').classes()).toContain(
+        `n-timeline-item--${lineType}-line-type`
+      )
+    })
+  })
+
   it('should work with `default`, `footer`, `header` slots', async () => {
     const wrapper = mount(NTimeline, {
       slots: {

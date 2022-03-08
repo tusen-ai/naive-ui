@@ -1,5 +1,5 @@
 <markdown>
-# Customize Option Props
+# Customize option props
 
 Bind whatever you want.
 </markdown>

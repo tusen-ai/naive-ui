@@ -160,6 +160,9 @@ export default cB('tree', `
         bottom: 0;
       `, [
         iconSwitchTransition()
+      ]),
+      cB('base-icon', [
+        iconSwitchTransition()
       ])
     ]),
     cM('hide', {
