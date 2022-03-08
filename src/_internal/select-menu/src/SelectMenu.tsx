@@ -187,6 +187,9 @@ export default defineComponent({
       const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
     })
+    const styleRef = computed(() => {
+      return [{ width: formatLength(props.width) }, cssVarsRef.value]
+    })
     function doToggle (tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
       if (onToggle) onToggle(tmNode)
@@ -363,6 +366,7 @@ export default defineComponent({
       mergedTheme: themeRef,
       virtualListRef,
       scrollbarRef,
+      style: styleRef,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
@@ -408,7 +412,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={[{ width: formatLength(this.width) }, this.cssVars as any]}
+        style={this.style as any}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
