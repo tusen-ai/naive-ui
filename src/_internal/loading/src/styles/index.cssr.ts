@@ -76,6 +76,13 @@ export default c([
     width: 1em;
     height: 1em;
   `, [
+    cE('icon', `
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    `, [
+      iconSwitchTransition()
+    ]),
     cE('container', `
       display: inline-flex;
       position: relative;
@@ -112,7 +119,7 @@ export default c([
         `, [
           cE('svg', `
             animation: loading-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-             width: 200%;
+            width: 200%;
           `)
         ]),
         cE('container-layer-patch', `
@@ -156,12 +163,6 @@ export default c([
         top: '50%',
         originalTransform: 'translateX(-50%) translateY(-50%)'
       })
-    ]),
-    cE('icon', `
-      height: 1em;
-      width: 1em;
-    `, [
-      iconSwitchTransition()
     ])
   ])
 ])

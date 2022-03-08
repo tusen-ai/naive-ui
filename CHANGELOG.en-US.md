@@ -1,9 +1,14 @@
 # CHANGELOG
 
-## 2.26.2
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-cascader` arrow's loading animation is kept for too long time.
 
 ### Feats
 
+- `n-dynamic-tags` `input` slot handle blur, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
 - `n-space` add `RTL` support.
 - `n-avatar` add `RTL` support.
 - `n-badge` add `RTL` support.

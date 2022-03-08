@@ -1,9 +1,14 @@
 # CHANGELOG
 
-## 2.26.2
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-cascader` 节点箭头 loading 显示过久
 
 ### Feats
 
+- `n-dynamic-tags` 的 `input` slot 支持焦点管理，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
 - `n-space` 添加 `RTL` 支持
 - `n-avatar` 添加 `RTL` 支持
 - `n-badge` 添加 `RTL` 支持
