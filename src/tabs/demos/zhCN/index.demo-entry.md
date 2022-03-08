@@ -21,6 +21,7 @@ line-debug.vue
 style-inherit-debug.vue
 shadow-debug.vue
 unkeyed-debug.vue
+addable-debug.vue
 ```
 
 ## API

@@ -383,7 +383,7 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef.value,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       ...exposedProps

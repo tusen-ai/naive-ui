@@ -3,6 +3,7 @@ import { cB, cE, cM, c, cNotM } from '../../../_utils/cssr'
 // vars:
 // --n-bezier
 // --n-button-border-color
+// --n-button-border-color-active
 // --n-height
 // --n-opacity-disabled
 // --n-font-size
@@ -70,6 +71,7 @@ export default cB('radio-group', `
       z-index: 1;
     `),
     cE('state-border', `
+      z-index: 1;
       pointer-events: none;
       position: absolute;
       box-shadow: var(--n-button-box-shadow);

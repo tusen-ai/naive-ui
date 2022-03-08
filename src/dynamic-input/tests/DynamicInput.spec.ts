@@ -108,4 +108,17 @@ describe('n-dynamic-input', () => {
 
     expect(wrapper.find('input').attributes('placeholder')).toBe('test')
   })
+
+  it('should work with `on-create` prop', async () => {
+    const onCreate = jest.fn()
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: [''],
+        onCreate
+      }
+    })
+
+    await wrapper.findAll('button')[1].trigger('click')
+    expect(onCreate).toHaveBeenCalled()
+  })
 })

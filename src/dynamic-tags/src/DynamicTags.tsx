@@ -243,7 +243,10 @@ export default defineComponent({
               .concat(
                 showInput ? (
                   $slots.input ? (
-                    $slots.input({ submit: handleInputConfirm })
+                    $slots.input({
+                      submit: handleInputConfirm,
+                      deactivate: handleInputBlur
+                    })
                   ) : (
                     <NInput
                       placeholder=""

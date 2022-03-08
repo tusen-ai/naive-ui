@@ -64,3 +64,10 @@ customized-rendering.vue
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | 自定义输入元素，由用户填充 |
 | prefix | `()` | 输入框头部内容 |
 | suffix | `()` | 输入框尾部内容 |
+
+### Input Methods
+
+| 名称  | 类型         | 说明             | 版本   |
+| ----- | ------------ | ---------------- | ------ |
+| blur  | `() => void` | Blur input 元素  | 2.26.2 |
+| focus | `() => void` | Focus input 元素 | 2.26.2 |

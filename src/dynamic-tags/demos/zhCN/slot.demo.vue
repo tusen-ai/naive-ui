@@ -6,14 +6,16 @@
 
 <template>
   <n-dynamic-tags v-model:value="tags" :max="3">
-    <template #input="{ submit }">
+    <template #input="{ submit, deactivate }">
       <n-auto-complete
+        ref="autoCompleteInstRef"
         v-model:value="inputValue"
         size="small"
         :options="options"
         placeholder="邮箱"
         :clear-after-select="true"
         @select="submit($event)"
+        @blur="deactivate"
       />
     </template>
     <template #trigger="{ activate, disabled }">
@@ -36,7 +38,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, watch, nextTick } from 'vue'
+import { AutoCompleteInst } from 'naive-ui'
 import Add from '@vicons/ionicons5/Add'
 
 export default defineComponent({
@@ -44,6 +47,10 @@ export default defineComponent({
     Add
   },
   setup () {
+    const autoCompleteInstRef = ref<AutoCompleteInst | null>(null)
+    watch(autoCompleteInstRef, (value) => {
+      if (value) nextTick(() => value.focus())
+    })
     const inputValueRef = ref('')
     const options = computed(() => {
       if (inputValueRef.value === null) {
@@ -67,6 +74,7 @@ export default defineComponent({
       })
     })
     return {
+      autoCompleteInstRef,
       tags: ref(['教师', '程序员']),
       inputValue: inputValueRef,
       options
