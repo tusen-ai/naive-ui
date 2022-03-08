@@ -2,10 +2,8 @@ export { commonDark, commonLight } from './_styles/common'
 export { alertDark } from './alert/styles'
 export { anchorDark } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'
-export {
-  avatarDark,
-  avatarGroupRtl as unstableAvatarGroupRtl
-} from './avatar/styles'
+export { avatarDark } from './avatar/styles'
+export { avatarGroupRtl as unstableAvatarGroupRtl } from './avatar-group/styles'
 export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'

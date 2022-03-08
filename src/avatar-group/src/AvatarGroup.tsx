@@ -6,13 +6,15 @@ import {
   provide,
   computed
 } from 'vue'
-import type { Size } from './interface'
-import NAvatar from './Avatar'
-import { useConfig, useStyle } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { Size } from '../../avatar/src/interface'
+import { avatarGroupInjectionKey } from '../../avatar/src/context'
+import NAvatar from '../../avatar/src/Avatar'
+import { useConfig, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
-import { avatarGroupInjectionKey } from './context'
 import useRtl from '../../_mixins/use-rtl'
+import { avatarGroupLight, AvatarGroupTheme } from '../styles'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
@@ -23,6 +25,7 @@ interface AvatarOption {
 }
 
 const avatarGroupProps = {
+  ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,
   options: {
@@ -40,7 +43,14 @@ export default defineComponent({
   props: avatarGroupProps,
   setup (props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
-    useStyle('-avatar-group', style, mergedClsPrefixRef)
+    const mergedThemeRef = useTheme(
+      'AvatarGroup',
+      '-avatar-group',
+      style,
+      avatarGroupLight,
+      props,
+      mergedClsPrefixRef
+    )
     provide(avatarGroupInjectionKey, props)
     const rtlEnabledRef = useRtl(
       'AvatarGroup',
@@ -62,6 +72,7 @@ export default defineComponent({
       return options
     })
     return {
+      mergedTheme: mergedThemeRef,
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       restOptions: restOptionsRef,
@@ -69,7 +80,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, displayedOptions, restOptions, $slots } = this
+    const {
+      mergedClsPrefix,
+      displayedOptions,
+      restOptions,
+      mergedTheme,
+      $slots
+    } = this
     return (
       <div
         class={[
@@ -83,7 +100,11 @@ export default defineComponent({
           return $slots.avatar ? (
             $slots.avatar({ option })
           ) : (
-            <NAvatar src={option.src} />
+            <NAvatar
+              src={option.src}
+              theme={mergedTheme.peers.Avatar}
+              themeOverrides={mergedTheme.peerOverrides.Avatar}
+            />
           )
         })}
         {restOptions !== undefined &&
@@ -91,7 +112,11 @@ export default defineComponent({
           ($slots.rest ? (
             $slots.rest({ options: restOptions, rest: restOptions.length })
           ) : (
-            <NAvatar style={this.maxStyle}>
+            <NAvatar
+              style={this.maxStyle}
+              theme={mergedTheme.peers.Avatar}
+              themeOverrides={mergedTheme.peerOverrides.Avatar}
+            >
               {{
                 default: () => `+${restOptions.length}`
               }}

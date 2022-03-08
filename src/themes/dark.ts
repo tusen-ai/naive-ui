@@ -3,6 +3,7 @@ import { alertDark } from '../alert/styles'
 import { anchorDark } from '../anchor/styles'
 import { autoCompleteDark } from '../auto-complete/styles'
 import { avatarDark } from '../avatar/styles'
+import { avatarGroupDark } from '../avatar-group/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
@@ -84,6 +85,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Anchor: anchorDark,
   AutoComplete: autoCompleteDark,
   Avatar: avatarDark,
+  AvatarGroup: avatarGroupDark,
   BackTop: backTopDark,
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
