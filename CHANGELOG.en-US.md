@@ -8,6 +8,7 @@
 - Fix `n-select` menu doesn't follow theme.
 - Fix `n-tabs` throws error without child, closes [#809](https://github.com/TuSimple/naive-ui/issues/809).
 - Fix `n-menu`'s font color is not changed after theme is changed in chrome 99, closes [#2563](https://github.com/TuSimple/naive-ui/issues/2563). This is actual a bug of chrome, however we used a workaround and fixed it.
+- Fix `n-date-picker`'s date item click trigger area is as large as cell size only in `'date'` mode.
 
 ### Feats
 

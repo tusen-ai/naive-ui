@@ -8,6 +8,7 @@
 - 修复 `n-select` 菜单不随主题变化
 - 修复 `n-tabs` 不能没有子节点，关闭 [#809](https://github.com/TuSimple/naive-ui/issues/809)
 - 修复 `n-menu` 切换主题时在 chrome 99 内字体颜色异常，关闭 [#2563](https://github.com/TuSimple/naive-ui/issues/2563)，这实际上是一个 chrome 的问题，我们进行了临时的修复
+- 修复 `n-date-picker` 仅 `'date'` 类型的扩大日期点击触发范围
 
 ### Feats
 
