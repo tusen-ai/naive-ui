@@ -77,6 +77,27 @@ describe('n-dynamic-input', () => {
     ).toBe('color: green;')
   })
 
+  it('should work with `min` `max` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: ['', '', ''],
+        min: 2,
+        max: 4
+      }
+    })
+    expect(wrapper.find('.n-button--disabled').exists()).toBe(false)
+
+    await wrapper.setProps({ value: ['', ''] })
+    expect(wrapper.findAll('button')[0].classes()).toContain(
+      'n-button--disabled'
+    )
+
+    await wrapper.setProps({ value: ['', '', '', ''] })
+    expect(wrapper.findAll('button')[1].classes()).toContain(
+      'n-button--disabled'
+    )
+  })
+
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NDynamicInput, {
       props: {
@@ -86,5 +107,18 @@ describe('n-dynamic-input', () => {
     })
 
     expect(wrapper.find('input').attributes('placeholder')).toBe('test')
+  })
+
+  it('should work with `on-create` prop', async () => {
+    const onCreate = jest.fn()
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: [''],
+        onCreate
+      }
+    })
+
+    await wrapper.findAll('button')[1].trigger('click')
+    expect(onCreate).toHaveBeenCalled()
   })
 })
