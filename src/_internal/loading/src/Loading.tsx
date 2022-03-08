@@ -43,7 +43,10 @@ export default defineComponent({
           {{
             default: () =>
               this.show ? (
-                <div key="icon" class={`${clsPrefix}-base-loading__icon`}>
+                <div
+                  key="icon"
+                  class={`${clsPrefix}-base-loading__transition-wrapper`}
+                >
                   <div class={`${clsPrefix}-base-loading__container`}>
                     <div class={`${clsPrefix}-base-loading__container-layer`}>
                       <div

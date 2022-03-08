@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-cascader` 节点箭头 loading 显示过久
+- 修复 `n-select` 菜单不随主题变化
 
 ### Feats
 

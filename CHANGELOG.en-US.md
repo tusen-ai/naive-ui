@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-cascader` arrow's loading animation is kept for too long time.
+- Fix `n-select` menu doesn't follow theme.
 
 ### Feats
 

@@ -76,7 +76,7 @@ export default c([
     width: 1em;
     height: 1em;
   `, [
-    cE('icon', `
+    cE('transition-wrapper', `
       position: absolute;
       width: 100%;
       height: 100%;
