@@ -6,14 +6,16 @@ You can replace a dynamic-tags input or trigger element with another component.
 
 <template>
   <n-dynamic-tags v-model:value="tags">
-    <template #input="{ submit }">
+    <template #input="{ submit, handleBlur }">
       <n-auto-complete
+        ref="autoCompleteInstRef"
         v-model:value="inputValue"
         size="small"
         :options="options"
         placeholder="Email"
         :clear-after-select="true"
         @select="submit($event)"
+        @blur="handleBlur"
       />
     </template>
     <template #trigger="{ activate, disabled }">
@@ -36,7 +38,8 @@ You can replace a dynamic-tags input or trigger element with another component.
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, watch, nextTick } from 'vue'
+import { AutoCompleteInst } from 'naive-ui'
 import Add from '@vicons/ionicons5/Add'
 
 export default defineComponent({
@@ -44,6 +47,10 @@ export default defineComponent({
     Add
   },
   setup () {
+    const autoCompleteInstRef = ref<AutoCompleteInst | null>(null)
+    watch(autoCompleteInstRef, (value) => {
+      if (value) nextTick(() => value.focus())
+    })
     const inputValueRef = ref('')
     const options = computed(() => {
       if (inputValueRef.value === null) {
@@ -67,6 +74,7 @@ export default defineComponent({
       })
     })
     return {
+      autoCompleteInstRef,
       tags: ref(['Teacher', 'Programmer']),
       inputValue: inputValueRef,
       options

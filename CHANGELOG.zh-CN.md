@@ -10,11 +10,13 @@
 
 ### Feats
 
-- `n-dynamic-tags` 的 `input` slot 支持焦点管理，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-dynamic-tags` 的 `input` slot 新增 `handleBlur` 属性，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
 - `n-space` 添加 `RTL` 支持
 - `n-avatar` 添加 `RTL` 支持
 - `n-badge` 添加 `RTL` 支持
 - `n-radio` 添加 `RTL` 支持
+- `n-auto-complete` 新增 `focus` 方法
+- `n-auto-complete` 新增 `blur` 方法
 
 ## 2.26.1
 
