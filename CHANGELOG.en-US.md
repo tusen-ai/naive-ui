@@ -13,7 +13,7 @@
 
 - `n-dynamic-tags` `input` slot add `handleBlur` prop, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
 - `n-space` add `RTL` support.
-- `n-avatar` add `RTL` support.
+- `n-avatar-group` add `RTL` support.
 - `n-badge` add `RTL` support.
 - `n-radio` add `RTL` support.
 - `n-auto-complete` adds `focus` method.
