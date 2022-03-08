@@ -94,6 +94,7 @@ export interface GlobalThemeWithoutCommon {
   Anchor?: AnchorTheme
   AutoComplete?: AutoCompleteTheme
   Avatar?: AvatarTheme
+  AvatarGroup?: AvatarTheme
   BackTop?: BackTopTheme
   Badge?: BadgeTheme
   Breadcrumb?: BreadcrumbTheme

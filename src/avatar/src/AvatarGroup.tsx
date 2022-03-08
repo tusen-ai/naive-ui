@@ -12,6 +12,7 @@ import { useConfig, useStyle } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
 import { avatarGroupInjectionKey } from './context'
+import useRtl from '../../_mixins/use-rtl'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
@@ -38,9 +39,14 @@ export default defineComponent({
   name: 'AvatarGroup',
   props: avatarGroupProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     useStyle('-avatar-group', style, mergedClsPrefixRef)
     provide(avatarGroupInjectionKey, props)
+    const rtlEnabledRef = useRtl(
+      'AvatarGroup',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const restOptionsRef = computed(() => {
       const { max } = props
       if (max === undefined) return undefined
@@ -56,6 +62,7 @@ export default defineComponent({
       return options
     })
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       restOptions: restOptionsRef,
       displayedOptions: displayedOptionsRef
@@ -67,6 +74,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-avatar-group`,
+          this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`
         ]}
         role="group"

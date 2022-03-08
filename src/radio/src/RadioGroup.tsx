@@ -21,6 +21,7 @@ import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import useRtl from '../../_mixins/use-rtl'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -128,7 +129,8 @@ export default defineComponent({
       nTriggerFormBlur,
       nTriggerFormFocus
     } = useFormItem(props)
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Radio',
       '-radio-group',
@@ -175,6 +177,7 @@ export default defineComponent({
       mergedSizeRef,
       doUpdateValue
     })
+    const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -222,6 +225,7 @@ export default defineComponent({
       : undefined
     return {
       selfElRef,
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       handleFocusout,
@@ -246,6 +250,7 @@ export default defineComponent({
         ref="selfElRef"
         class={[
           `${mergedClsPrefix}-radio-group`,
+          this.rtlEnabled && `${mergedClsPrefix}-radio-group--rtl`,
           this.themeClass,
           isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`
         ]}

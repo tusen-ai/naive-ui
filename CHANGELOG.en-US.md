@@ -9,6 +9,10 @@
 ### Feats
 
 - `n-dynamic-tags` `input` slot handle blur, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-space` add `RTL` support.
+- `n-avatar` add `RTL` support.
+- `n-badge` add `RTL` support.
+- `n-radio` add `RTL` support.
 
 ## 2.26.1
 
