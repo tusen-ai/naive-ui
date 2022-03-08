@@ -67,7 +67,7 @@ customized-rendering.vue
 
 ### Input Methods
 
-| Name  | Type         | Description              | Version      |
-| ----- | ------------ | ------------------------ | ------------ |
-| blur  | `() => void` | Blur the input element.  | NEXT_VERSION |
-| focus | `() => void` | Focus the input element. | NEXT_VERSION |
+| Name  | Type         | Description              | Version |
+| ----- | ------------ | ------------------------ | ------- |
+| blur  | `() => void` | Blur the input element.  | 2.26.2  |
+| focus | `() => void` | Focus the input element. | 2.26.2  |

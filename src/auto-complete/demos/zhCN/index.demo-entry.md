@@ -67,7 +67,7 @@ customized-rendering.vue
 
 ### Input Methods
 
-| 名称  | 类型         | 说明             | 版本         |
-| ----- | ------------ | ---------------- | ------------ |
-| blur  | `() => void` | Blur input 元素  | NEXT_VERSION |
-| focus | `() => void` | Focus input 元素 | NEXT_VERSION |
+| 名称  | 类型         | 说明             | 版本   |
+| ----- | ------------ | ---------------- | ------ |
+| blur  | `() => void` | Blur input 元素  | 2.26.2 |
+| focus | `() => void` | Focus input 元素 | 2.26.2 |
