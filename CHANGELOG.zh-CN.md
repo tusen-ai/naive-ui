@@ -11,7 +11,7 @@
 
 ### Feats
 
-- `n-dynamic-tags` 的 `input` slot 新增 `handleBlur` 属性，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-dynamic-tags` 的 `input` slot 新增 `deactivate` 属性，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
 - `n-space` 添加 `RTL` 支持
 - `n-avatar-grop` 添加 `RTL` 支持
 - `n-badge` 添加 `RTL` 支持

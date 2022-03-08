@@ -35,5 +35,5 @@ slot.vue
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| input | `(info: { submit: (value: any) => void, handleBlur: (e: FocusEvent) => void })` | Custom element(s) to replace the regular input. | `handleBlur` NEXT_VERSION |
+| input | `(info: { submit: (value: any) => void, deactivate: () => void })` | Custom element(s) to replace the regular input. | `deactivate` NEXT_VERSION |
 | trigger | `(info: { activate: () => void, disabled: boolean })` | The element or component that triggers the tag to switch to an input. |  |

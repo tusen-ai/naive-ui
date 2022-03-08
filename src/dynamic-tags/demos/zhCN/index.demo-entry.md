@@ -35,5 +35,5 @@ slot.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| input | `(info: { submit: (value: any) => void, handleBlur: (e: FocusEvent) => void })` | 自定义输入元素，由用户填充 | `handleBlur` NEXT_VERSION |
+| input | `(info: { submit: (value: any) => void, deactivate: () => void })` | 自定义输入元素，由用户填充 | `deactivate` NEXT_VERSION |
 | trigger | `(info: { activate: () => void, disabled: boolean })` | 触发输入标签的组件或元素 |  |
