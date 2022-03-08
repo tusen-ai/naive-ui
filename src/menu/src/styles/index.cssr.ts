@@ -35,16 +35,12 @@ export default c([
     font-size: var(--n-font-size);
     padding-bottom: 6px;
   `, [
-    cM('horizontal', {
-      display: 'inline-flex',
-      paddingBottom: 0
-    }, [
-      cB('submenu', {
-        margin: 0
-      }),
-      cB('menu-item', {
-        margin: 0
-      }, [
+    cM('horizontal', `
+      display: inline-flex;
+      padding-bottom: 0;
+    `, [
+      cB('submenu', 'margin: 0;'),
+      cB('menu-item', 'margin: 0;', [
         c('&::before', {
           backgroundColor: '#0000 !important'
         }),
@@ -54,18 +50,16 @@ export default c([
           })
         ])
       ]),
-      cB('menu-item-content', {
-        padding: '0 20px',
-        borderBottom: '2px solid #0000'
-      }, [
-        cM('child-active', {
-          borderBottom: '2px solid var(--n-border-color-horizontal)'
-        }),
+      cB('menu-item-content', `
+        padding: 0 20px;
+        border-bottom: 2px solid #0000;
+      `, [
+        cM('child-active', `
+          border-bottom: 2px solid var(--n-border-color-horizontal);
+        `),
         cNotM('disabled', [
           hoverStyle(
-            {
-              borderBottom: '2px solid var(--n-border-color-horizontal)'
-            },
+            'border-bottom: 2px solid var(--n-border-color-horizontal);',
             null
           )
         ])
@@ -75,21 +69,15 @@ export default c([
     cM('collapsed', [
       cB('menu-item', [
         cM('selected', [
-          c('&::before', {
-            backgroundColor: 'var(--n-item-color-active-collapsed) !important'
-          })
+          c('&::before', `
+            background-color: var(--n-item-color-active-collapsed) !important;
+          `)
         ])
       ]),
       cB('menu-item-content', [
-        cB('menu-item-content-header', {
-          opacity: 0
-        }),
-        cE('arrow', {
-          opacity: 0
-        }),
-        cE('icon', {
-          color: 'var(--n-item-icon-color-collapsed)'
-        })
+        cB('menu-item-content-header', 'opacity: 0;'),
+        cE('arrow', 'opacity: 0;'),
+        cE('icon', 'color: var(--n-item-icon-color-collapsed);')
       ])
     ]),
     cB('menu-item', `
@@ -112,27 +100,18 @@ export default c([
         transition: background-color .3s var(--n-bezier);
       `),
       cNotM('disabled', [
-        c('&:active::before', {
-          backgroundColor: 'var(--n-item-color-active)'
-        })
+        c('&:active::before', 'background-color: var(--n-item-color-active);')
       ]),
       cM('selected', [
-        c('&::before', {
-          backgroundColor: 'var(--n-item-color-active)'
-        }),
+        c('&::before', 'background-color: var(--n-item-color-active);'),
         cB('menu-item-content', [
-          cE('arrow', {
-            color: 'var(--n-arrow-color-active)'
-          }),
-          cE('icon', {
-            color: 'var(--n-item-icon-color-active)'
-          }),
-          cB('menu-item-content-header', {
-            color: 'var(--n-item-text-color-active)'
-          }, [
-            cE('extra', {
-              color: 'var(--n-item-text-color-active)'
-            })
+          cE('arrow', 'color: var(--n-arrow-color-active);'),
+          cE('icon', 'color: var(--n-item-icon-color-active);'),
+          cB('menu-item-content-header', `
+            color: var(--n-item-text-color-active);
+          `, [
+            c('a', 'color: var(--n-item-text-color-active);'),
+            cE('extra', 'color: var(--n-item-text-color-active);')
           ])
         ])
       ])
@@ -154,44 +133,48 @@ export default c([
         padding-left .3s var(--n-bezier),
         border-color .3s var(--n-bezier);
     `, [
-      cM('disabled', {
-        opacity: '.45',
-        cursor: 'not-allowed'
-      }),
+      cM('disabled', `
+        opacity: .45;
+        cursor: not-allowed;
+      `),
       cM('collapsed', [
-        cE('arrow', {
-          transform: 'rotate(0)'
-        })
+        cE('arrow', 'transform: rotate(0);')
       ]),
       cM('child-active', [
-        cB('menu-item-content-header', {
-          color: 'var(--n-item-text-color-child-active)'
-        }, [
-          cE('extra', {
-            color: 'var(--n-item-text-color-child-active)'
-          })
+        cB('menu-item-content-header', `
+          color: var(--n-item-text-color-child-active);
+        `, [
+          c('a', `
+            color: var(--n-item-text-color-child-active);
+          `),
+          cE('extra', `
+            color: var(--n-item-text-color-child-active);
+          `)
         ]),
-        cE('arrow', {
-          color: 'var(--n-arrow-color-child-active)'
-        }),
-        cE('icon', {
-          color: 'var(--n-item-icon-color-child-active)'
-        })
+        cE('arrow', `
+          color: var(--n-arrow-color-child-active);
+        `),
+        cE('icon', `
+          color: var(--n-item-icon-color-child-active);
+        `)
       ]),
       cNotM('disabled', [
         hoverStyle(null, [
-          cE('arrow', {
-            color: 'var(--n-arrow-color-hover)'
-          }),
-          cE('icon', {
-            color: 'var(--n-item-icon-color-hover)'
-          }),
-          cB('menu-item-content-header', {
-            color: 'var(--n-item-text-color-hover)'
-          }, [
-            cE('extra', {
-              color: 'var(--n-item-text-color-hover)'
-            })
+          cE('arrow', `
+            color: var(--n-arrow-color-hover);
+          `),
+          cE('icon', `
+            color: var(--n-item-icon-color-hover);
+          `),
+          cB('menu-item-content-header', `
+            color: var(--n-item-text-color-hover);
+          `, [
+            c('a', `
+              color: var(--n-item-text-color-hover);
+            `),
+            cE('extra', `
+              color: var(--n-item-text-color-hover);
+            `)
           ])
         ])
       ]),
@@ -231,7 +214,8 @@ export default c([
       `, [
         c('a', `
           text-decoration: none;
-          color: inherit;
+          transition: color .3s var(--n-bezier);
+          color: var(--n-item-text-color);
         `, [
           c('&::before', `
             content: "";
@@ -249,18 +233,18 @@ export default c([
         `)
       ])
     ]),
-    cB('submenu', {
-      cursor: 'pointer',
-      position: 'relative',
-      marginTop: '6px'
-    }, [
+    cB('submenu', `
+      cursor: pointer;
+      position: relative;
+      margin-top: 6px;
+    `, [
       cB('menu-item-content', `
         height: var(--n-item-height);
       `),
-      cB('submenu-children', {
-        overflow: 'hidden',
-        padding: 0
-      }, [
+      cB('submenu-children', `
+        overflow: hidden;
+        padding: 0;
+      `, [
         fadeInHeightExpandTransition({
           duration: '.2s'
         })
