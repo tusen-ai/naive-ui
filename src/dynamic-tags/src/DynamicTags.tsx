@@ -87,6 +87,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    // 为什么要分受控和非受控
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -243,7 +244,10 @@ export default defineComponent({
               .concat(
                 showInput ? (
                   $slots.input ? (
-                    $slots.input({ submit: handleInputConfirm })
+                    $slots.input({
+                      submit: handleInputConfirm,
+                      handleInputBlur
+                    })
                   ) : (
                     <NInput
                       placeholder=""

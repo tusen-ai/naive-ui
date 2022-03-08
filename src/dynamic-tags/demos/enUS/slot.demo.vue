@@ -6,7 +6,7 @@ You can replace a dynamic-tags input or trigger element with another component.
 
 <template>
   <n-dynamic-tags v-model:value="tags">
-    <template #input="{ submit }">
+    <template #input="{ submit, handleInputBlur }">
       <n-auto-complete
         v-model:value="inputValue"
         size="small"
@@ -14,6 +14,7 @@ You can replace a dynamic-tags input or trigger element with another component.
         placeholder="Email"
         :clear-after-select="true"
         @select="submit($event)"
+        @blur="handleInputBlur"
       />
     </template>
     <template #trigger="{ activate, disabled }">
