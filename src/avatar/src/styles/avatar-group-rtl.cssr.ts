@@ -4,14 +4,14 @@ export default cB('avatar-group', [
   cM('rtl', `
     direction: rtl;
   `, [
-    cNotM('vertical', {
-      flexDirection: 'row'
-    }, [
+    cNotM('vertical', `
+      flex-direction: row;
+    `, [
       cB('avatar', [
         c('&:not(:first-child)', `
-         margin-right: -12px;
-         margin-left: 0;
-      `)
+          margin-right: -12px;
+          margin-left: 0;
+        `)
       ])
     ])
   ])
