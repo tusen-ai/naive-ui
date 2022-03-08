@@ -7,6 +7,7 @@
 ### Feats
 
 - `n-dynamic-tags` 的 `input` slot 支持焦点管理，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-tag` 新增 `icon` 插槽
 
 ## 2.26.1
 

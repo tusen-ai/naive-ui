@@ -166,4 +166,16 @@ describe('n-tag', () => {
       '--n-merged-size: var(--n-avatar-size-override, 34px);'
     )
   })
+
+  it('should work with `icon` slot', () => {
+    const wrapper = mount(NTag, {
+      props: { closable: true },
+      slots: {
+        icon: () => 'icon'
+      }
+    })
+
+    expect(wrapper.find('.n-tag__close').exists()).toBe(true)
+    expect(wrapper.find('.n-tag__close').text()).toBe('icon')
+  })
 })

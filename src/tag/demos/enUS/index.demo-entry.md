@@ -35,7 +35,8 @@ avatar.vue
 
 ### Tag Slots
 
-| Name    | Parameters | Description        |
-| ------- | ---------- | ------------------ |
-| avatar  | `()`       | Image information. |
-| default | `()`       | Tag's content.     |
+| Name    | Parameters | Description        | Version      |
+| ------- | ---------- | ------------------ | ------------ |
+| avatar  | `()`       | Image information. |              |
+| default | `()`       | Tag's content.     |              |
+| icon    | `()`       | Close icon.        | NEXT_VERSION |

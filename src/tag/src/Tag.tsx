@@ -257,16 +257,26 @@ export default defineComponent({
             )
         )}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
-          {this.$slots.default?.()}
+          {$slots.default?.()}
         </span>
-        {!this.checkable && this.closable ? (
-          <NBaseClose
-            clsPrefix={mergedClsPrefix}
-            class={`${mergedClsPrefix}-tag__close`}
-            disabled={this.disabled}
-            onClick={this.handleCloseClick}
-          />
-        ) : null}
+        {!this.checkable && this.closable
+          ? resolveWrappedSlot($slots.icon, (children) => {
+            const mergedChildren = children || (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  disabled={this.disabled}
+                />
+            )
+            return (
+                <span
+                  class={`${mergedClsPrefix}-tag__close`}
+                  onClick={this.handleCloseClick}
+                >
+                  {mergedChildren}
+                </span>
+            )
+          })
+          : null}
         {!this.checkable && this.mergedBordered ? (
           <div
             class={`${mergedClsPrefix}-tag__border`}

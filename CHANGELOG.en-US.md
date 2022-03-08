@@ -6,7 +6,8 @@
 
 ### Feats
 
-- `n-dynamic-tags` `input` slot handle blur, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-dynamic-tags` `input` slot handle blur, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575).
+- `n-tag` adds `icon` slot.
 
 ## 2.26.1
 

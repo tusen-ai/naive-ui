@@ -67,6 +67,8 @@ export default cB('tag', `
     margin: var(--n-close-margin);
     transition: color .3s var(--n-bezier);
     cursor: pointer;
+    display: flex;
+    vertical-align: middle;
   `),
   cM('round', `
     padding: 0 calc(var(--n-height) / 2);

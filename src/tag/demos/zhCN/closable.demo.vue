@@ -18,6 +18,11 @@
     </n-tag>
     <n-tag type="info" closable @close="handleClose">
       哪里都是你
+      <template #icon>
+        <n-icon>
+          <TrashBinOutline />
+        </n-icon>
+      </template>
     </n-tag>
   </n-space>
 </template>
@@ -25,8 +30,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
+import { TrashBinOutline } from '@vicons/ionicons5'
 
 export default defineComponent({
+  components: {
+    TrashBinOutline
+  },
   setup () {
     const message = useMessage()
     return {
