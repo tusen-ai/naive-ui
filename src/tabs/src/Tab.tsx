@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, computed, mergeProps } from 'vue'
+import { h, defineComponent, inject, computed, mergeProps, Fragment } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render, omit } from '../../_utils'
@@ -117,11 +117,16 @@ export default defineComponent({
         >
           <span class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (
-              <NBaseIcon clsPrefix={clsPrefix}>
-                {{
-                  default: () => <AddIcon />
-                }}
-              </NBaseIcon>
+              <>
+                <div class={`${clsPrefix}-tabs-tab__height-placeholder`}>
+                  &nbsp;
+                </div>
+                <NBaseIcon clsPrefix={clsPrefix}>
+                  {{
+                    default: () => <AddIcon />
+                  }}
+                </NBaseIcon>
+              </>
             ) : defaultSlot ? (
               defaultSlot()
             ) : typeof mergedTab === 'object' ? (

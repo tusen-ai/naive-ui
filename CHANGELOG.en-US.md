@@ -6,6 +6,7 @@
 
 - Fix `n-cascader` arrow's loading animation is kept for too long time.
 - Fix `n-select` menu doesn't follow theme.
+- Fix `n-tabs` throws error without child, closes [#809](https://github.com/TuSimple/naive-ui/issues/809).
 
 ### Feats
 

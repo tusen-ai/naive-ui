@@ -6,6 +6,7 @@
 
 - 修复 `n-cascader` 节点箭头 loading 显示过久
 - 修复 `n-select` 菜单不随主题变化
+- 修复 `n-tabs` 不能没有子节点，关闭 [#809](https://github.com/TuSimple/naive-ui/issues/809)
 
 ### Feats
 
