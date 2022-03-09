@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-dynamic-tags` add `render-tag` prop, closes [#2526](https://github.com/TuSimple/naive-ui/issues/2526).
+
 ## 2.26.3
 
 ### Fixes

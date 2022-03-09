@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-dynamic-tags` 新增 `render-tag` 属性，关闭 [#2526](https://github.com/TuSimple/naive-ui/issues/2526)
+
 ## 2.26.3
 
 ### Fixes
