@@ -9,7 +9,8 @@ import {
   provide,
   nextTick,
   watch,
-  WatchStopHandle
+  WatchStopHandle,
+  CSSProperties
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -408,7 +409,10 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={[{ width: formatLength(this.width) }, this.cssVars as any]}
+        style={[
+          { width: formatLength(this.width) },
+          this.cssVars as CSSProperties
+        ]}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
