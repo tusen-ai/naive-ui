@@ -4,6 +4,9 @@ import fs from 'fs-extra'
 
 const TYPE_ROOT = resolve(__dirname, '..')
 
+// XButton is for tsx type checking, does't export
+const excludeComponents = ['NxButton']
+
 function exist (path) {
   return fs.existsSync(path)
 }
@@ -23,7 +26,7 @@ async function generateComponentsType () {
   const components = {}
   Object.keys(globalComponents).forEach((key) => {
     const entry = `typeof import('naive-ui')['${key}']`
-    if (key.startsWith('N')) {
+    if (key.startsWith('N') && !excludeComponents.includes(key)) {
       components[key] = entry
     }
   })
