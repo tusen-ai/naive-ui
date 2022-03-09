@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 
 const TYPE_ROOT = resolve(__dirname, '..')
 
-// XButton is for tsx type checking, does't export
+// XButton is for tsx type checking, shouldn't be exported
 const excludeComponents = ['NxButton']
 
 function exist (path) {
