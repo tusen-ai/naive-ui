@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `base-loading` wrong position
+
 ## 2.26.2
 
 ### Fixes
