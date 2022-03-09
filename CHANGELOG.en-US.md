@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `base-loading` wrong position
+- Fix `n-button`'s loading icon shifts.
 
 ## 2.26.2
 

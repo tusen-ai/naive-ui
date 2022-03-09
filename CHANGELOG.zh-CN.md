@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- 修复 `base-loading` 位置错误
+- 修复 `n-button` loading 图标漂移
 
 ## 2.26.2
 
