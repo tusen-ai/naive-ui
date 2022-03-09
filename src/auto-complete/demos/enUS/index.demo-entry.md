@@ -65,7 +65,7 @@ customized-rendering.vue
 | prefix | `()` | Input's prefix content. |
 | suffix | `()` | Input's suffix content. |
 
-### Input Methods
+### AutoComplete Methods
 
 | Name  | Type         | Description              | Version |
 | ----- | ------------ | ------------------------ | ------- |

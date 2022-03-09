@@ -65,7 +65,7 @@ customized-rendering.vue
 | prefix | `()` | 输入框头部内容 |
 | suffix | `()` | 输入框尾部内容 |
 
-### Input Methods
+### AutoComplete Methods
 
 | 名称  | 类型         | 说明             | 版本   |
 | ----- | ------------ | ---------------- | ------ |
