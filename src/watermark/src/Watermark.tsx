@@ -115,6 +115,16 @@ export default defineComponent({
   name: 'Watermark',
   props: watermarkProps,
   setup (props, { slots }) {
+    return () => {
+      if (props.fullscreen) return <WatermarkComp {...props} />
+      return <ObservedWatermarkComp {...props}>{slots}</ObservedWatermarkComp>
+    }
+  }
+})
+
+const WatermarkComp = defineComponent({
+  props: watermarkProps,
+  setup (props, context) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Watermark',
@@ -131,6 +141,7 @@ export default defineComponent({
     watchEffect(() => {
       void fontsReadyRef.value
       const ratio = getRatio(ctx)
+
       const {
         xGap,
         yGap,
@@ -151,6 +162,7 @@ export default defineComponent({
         lineHeight,
         debug
       } = props
+
       const canvasWidth = (xGap + width) * ratio
       const canvasHeight = (yGap + height) * ratio
       const canvasOffsetLeft = xOffset * ratio
@@ -212,17 +224,15 @@ export default defineComponent({
       }
     })
 
-    const WatermarkComp = defineComponent(() => {
-      return () => (
-        <div
-          // DO NOT remove
-          data-watermark
-          class={[
-            `${mergedClsPrefixRef.value}-watermark`,
-            props.fullscreen &&
-              `${mergedClsPrefixRef.value}-watermark--fullscreen`
-          ]}
-          style={{
+    return () => (
+      <div
+        class={[
+          `${mergedClsPrefixRef.value}-watermark`,
+          props.fullscreen &&
+            `${mergedClsPrefixRef.value}-watermark--fullscreen`
+        ]}
+        style={
+          Object.entries({
             zIndex: props.zIndex,
             backgroundSize: `${props.xGap + props.width}px`,
             backgroundPosition: props.cross
@@ -231,91 +241,136 @@ export default defineComponent({
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
               : `url(${base64UrlRef.value})`
-          }}
-        />
-      )
-    })
+          }).reduce(
+            (acc, [k, v]) => ({ ...acc, [k]: `${v}  !important` }),
+            {}
+          ) as any
+        }
+      />
+    )
+  }
+})
 
-    const ObservedWatermarkComp = defineComponent(() => {
-      const observer = new MutationObserver(() => {
-        if (!$watermarkWrapper.value) {
+const ObservedWatermarkComp = defineComponent({
+  props: watermarkProps,
+  setup (props, { slots }) {
+    const watermarkId = 'naive-ui-observe-watermark'
+    const { mergedClsPrefixRef } = useConfig(props)
+
+    const willRerenderStyleAttrs: Array<(keyof CSSStyleDeclaration)> = [
+      'display',
+      'width',
+      'height',
+
+      'backgroundPosition',
+      'backgroundSize',
+      'backgroundImage',
+      'backfaceVisibility',
+      'background',
+
+      'position',
+      'opacity',
+      'visibility',
+      'top',
+      'bottom',
+      'left',
+      'right',
+      'transform',
+      'zIndex'
+    ]
+
+    const observer = new MutationObserver(() => {
+      if (!$watermarkWrapper.value) {
+        return
+      }
+      const $watermark = $watermarkWrapper.value.querySelector(
+        '[data-watermark]'
+      ) as HTMLDivElement
+
+      const doForceRender = (): void => {
+        renderFlag.value = false
+
+        void nextTick(() => {
+          renderFlag.value = true
+          // disconnect before old dom element, then observe  to new dom element
+          observer.disconnect()
+          // re-observer newer dom element
+          void nextTick(() => {
+            makeObserver()
+          })
+        })
+      }
+
+      if (!$watermark || $watermark.tagName !== 'DIV') {
+        return doForceRender()
+      }
+
+      const computedStyle = getComputedStyle($watermark)
+
+      for (const attr of willRerenderStyleAttrs) {
+        if (snapshotComputedStyle[attr] !== computedStyle[attr]) {
+          doForceRender()
           return
         }
-        const $watermark = $watermarkWrapper.value.querySelector(
-          '[data-watermark]'
-        ) as HTMLDivElement
-
-        const doForceRender = (): void => {
-          renderFlag.value = false
-
-          void nextTick(() => {
-            renderFlag.value = true
-            // disconnect before old dom element, then observe  to new dom element
-            observer.disconnect()
-            // re-observer newer dom element
-            void nextTick(() => {
-              makeObserver()
-            })
-          })
-        }
-
-        const watermarkStyle = getComputedStyle($watermark)
-
-        if (!$watermark || $watermark.tagName !== 'DIV') {
-          doForceRender()
-        } else if (watermarkStyle.display === 'none') {
-          $watermark.style.display = 'block'
-        } else if (watermarkStyle.visibility === 'hidden') {
-          $watermark.style.visibility = 'visible'
-        } else if (+watermarkStyle.opacity < 1) {
-          $watermark.style.opacity = '1'
-        } else if (
-          watermarkStyle.color === 'transparent' ||
-          (watermarkStyle.color.startsWith('rgba') &&
-            watermarkStyle.color.endsWith('0)'))
-        ) {
-          $watermark.style.color = 'unset'
-        }
-      })
-      const $watermarkWrapper = ref<HTMLDivElement>()
-      const makeObserver = (): void => {
-        if ($watermarkWrapper.value) {
-          observer.observe($watermarkWrapper.value, {
-            subtree: true,
-            attributes: true,
-            childList: true
-          })
-        }
       }
-      onMounted(() => {
-        makeObserver()
-      })
-
-      onUnmounted(() => {
-        observer.disconnect()
-      })
-
-      // HACK: re-render element
-      const renderFlag = ref(true)
-
-      return () =>
-        renderFlag.value && (
-          <div
-            ref={$watermarkWrapper}
-            class={[
-              `${mergedClsPrefixRef.value}-watermark-container`,
-              props.selectable &&
-                `${mergedClsPrefixRef.value}-watermark-container--selectable`
-            ]}
-          >
-            {slots.default?.()}
-            <WatermarkComp />
-          </div>
-        )
     })
-    return () => {
-      if (props.fullscreen) return <WatermarkComp />
-      return <ObservedWatermarkComp />
+    const $watermarkWrapper = ref<HTMLDivElement>()
+    const makeObserver = (): void => {
+      observer.observe(document.documentElement, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: [
+          'style',
+          'class',
+          'className',
+          'id',
+          'data-watermark'
+        ],
+        childList: true
+      })
     }
+    onMounted(() => {
+      makeObserver()
+
+      makeSnapshot()
+    })
+
+    onUnmounted(() => {
+      observer.disconnect()
+    })
+    let snapshotComputedStyle: CSSStyleDeclaration = {} as any
+    const makeSnapshot = (): void => {
+      if (!$watermarkWrapper.value) {
+        return
+      }
+      const $watermark = $watermarkWrapper.value.querySelector(
+        '[data-watermark]'
+      ) as HTMLDivElement
+      if (!$watermark) {
+        return
+      }
+
+      snapshotComputedStyle = {
+        ...getComputedStyle($watermark)
+      }
+    }
+
+    // HACK: re-render element
+    const renderFlag = ref(true)
+
+    return () =>
+      renderFlag.value && (
+        <div
+          ref={$watermarkWrapper}
+          class={[
+            `${mergedClsPrefixRef.value}-watermark-container`,
+            props.selectable &&
+              `${mergedClsPrefixRef.value}-watermark-container--selectable`
+          ]}
+        >
+          {slots.default?.()}
+          <WatermarkComp data-watermark={watermarkId} {...props} />
+        </div>
+      )
   }
 })
