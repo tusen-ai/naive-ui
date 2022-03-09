@@ -16,6 +16,7 @@ describe('n-dynamic-input', () => {
     const inputEl = await wrapper.find('input')
     expect(inputEl.element.value).toEqual('aaa')
     expect(wrapper.html()).toContain('data-key="0"')
+    wrapper.unmount()
   })
 
   it('should work with `create-button-props` props', async () => {
@@ -29,6 +30,7 @@ describe('n-dynamic-input', () => {
     })
 
     expect(wrapper.find('.n-button').classes()).toContain('n-button--dashed')
+    wrapper.unmount()
   })
 
   it('should work with `preset` props', async () => {
@@ -51,6 +53,7 @@ describe('n-dynamic-input', () => {
     })
     expect(wrapper.find('.n-dynamic-input-preset-input').exists()).toBe(false)
     expect(wrapper.find('.n-dynamic-input-preset-pair').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `show-sort-button` props', async () => {
@@ -62,6 +65,7 @@ describe('n-dynamic-input', () => {
     })
 
     expect(wrapper.findAll('button').length).toBe(4)
+    wrapper.unmount()
   })
 
   it('should work with `item-style` prop', async () => {
@@ -75,6 +79,7 @@ describe('n-dynamic-input', () => {
     expect(
       wrapper.findAll('.n-dynamic-input-item')[0].attributes('style')
     ).toBe('color: green;')
+    wrapper.unmount()
   })
 
   it('should work with `min` `max` prop', async () => {
@@ -96,6 +101,7 @@ describe('n-dynamic-input', () => {
     expect(wrapper.findAll('button')[1].classes()).toContain(
       'n-button--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `placeholder` prop', async () => {
@@ -107,6 +113,7 @@ describe('n-dynamic-input', () => {
     })
 
     expect(wrapper.find('input').attributes('placeholder')).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `on-create` prop', async () => {
@@ -120,5 +127,20 @@ describe('n-dynamic-input', () => {
 
     await wrapper.findAll('button')[1].trigger('click')
     expect(onCreate).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-remove` prop', async () => {
+    const onRemove = jest.fn()
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: [''],
+        onRemove
+      }
+    })
+
+    await wrapper.findAll('button')[0].trigger('click')
+    expect(onRemove).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })
