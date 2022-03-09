@@ -245,7 +245,7 @@ export default defineComponent({
                   $slots.input ? (
                     $slots.input({
                       submit: handleInputConfirm,
-                      handleInputBlur
+                      deactivate: handleInputBlur
                     })
                   ) : (
                     <NInput

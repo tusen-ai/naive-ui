@@ -1,12 +1,30 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.26.3
 
 ### Fixes
 
+- Fix `n-button`'s loading icon shifts.
+
+## 2.26.2
+
+### Fixes
+
+- Fix `n-cascader` arrow's loading animation last for too long time.
+- Fix `n-select` menu doesn't follow theme.
+- Fix `n-tabs` throws error without child, closes [#809](https://github.com/TuSimple/naive-ui/issues/809).
+- Fix `n-menu`'s font color is not changed after theme is changed in chrome 99, closes [#2563](https://github.com/TuSimple/naive-ui/issues/2563). This is actual a bug of chrome, however we used a workaround and fixed it.
+- Fix `n-date-picker`'s date item click trigger area is as large as cell size only in `'date'` mode.
+
 ### Feats
 
-- `n-dynamic-tags` `input` slot handle blur, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-dynamic-tags` `input` slot add `deactivate` prop, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575).
+- `n-space` add `RTL` support.
+- `n-avatar-group` add `RTL` support.
+- `n-badge` add `RTL` support.
+- `n-radio` add `RTL` support.
+- `n-auto-complete` adds `focus` method.
+- `n-auto-complete` adds `blur` method.
 
 ## 2.26.1
 

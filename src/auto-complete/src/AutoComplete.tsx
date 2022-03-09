@@ -31,6 +31,7 @@ import {
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
+import type { InputInst } from '../../input'
 import { NInput } from '../../input'
 import type {
   SelectBaseOption,
@@ -45,7 +46,8 @@ import type {
   OnUpdateValue,
   OnSelect,
   OnUpdateImpl,
-  AutoCompleteOption
+  AutoCompleteOption,
+  AutoCompleteInst
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -278,7 +280,19 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('auto-complete', undefined, cssVarsRef, props)
       : undefined
+    const inputInstRef = ref<InputInst | null>(null)
+    const exposedMethods: AutoCompleteInst = {
+      focus: () => {
+        inputInstRef.value?.focus()
+      },
+      blur: () => {
+        inputInstRef.value?.blur()
+      }
+    }
     return {
+      focus: exposedMethods.focus,
+      blur: exposedMethods.blur,
+      inputInstRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
@@ -336,6 +350,7 @@ export default defineComponent({
                     const { mergedTheme } = this
                     return (
                       <NInput
+                        ref="inputInstRef"
                         status={this.mergedStatus}
                         theme={mergedTheme.peers.Input}
                         themeOverrides={mergedTheme.peerOverrides.Input}

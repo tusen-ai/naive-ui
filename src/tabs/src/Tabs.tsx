@@ -150,7 +150,7 @@ export default defineComponent({
       compitableValueRef.value ??
         props.defaultValue ??
         (slots.default
-          ? ((flatten((slots as any).default())[0] as any).props.name as
+          ? ((flatten((slots as any).default())[0] as any)?.props?.name as
               | string
               | number)
           : null)
