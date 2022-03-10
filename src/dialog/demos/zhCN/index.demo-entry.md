@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+draggable.vue
 ```
 
 ## API

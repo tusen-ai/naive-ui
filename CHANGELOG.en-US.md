@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-dialog` adds `draggable` prop, closes [#2152](https://github.com/TuSimple/naive-ui/issues/2152)
+
 ## 2.26.3
 
 ### Fixes

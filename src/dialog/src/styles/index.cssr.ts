@@ -42,6 +42,14 @@ export default c([
     cM('bordered', {
       border: 'var(--n-border)'
     }),
+    cM('draggable', {
+      position: 'absolute',
+      transform: 'translate(-50%, -50%)'
+    }, [
+      cE('title', `
+        cursor: move;
+    `)
+    ]),
     cM('icon-top', [
       cE('close', {
         margin: 'var(--n-close-margin)'
