@@ -2,10 +2,22 @@
 
 ## NEXT_VERSION
 
+<<<<<<< data-type
 ### Feats
 
 - `n-data-table` export `DataTableFilterState` type.
 - `n-data-table` export `DataTableSortState` type.
+=======
+### Fixes
+
+- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node, closes [#2605](https://github.com/TuSimple/naive-ui/issues/2605).
+- Fix `n-tree` may throw error when node is removed, closes [#2597](https://github.com/TuSimple/naive-ui/issues/2597).
+- Fix `useDialog` renders component with popup content with unexpected focus management behavior, closes [#2612](https://github.com/TuSimple/naive-ui/issues/2612).
+
+### Feats
+
+- `useDialog` supports `closeOnEsc` prop.
+>>>>>>> main
 
 ## 2.26.3
 
