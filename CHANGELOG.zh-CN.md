@@ -11,6 +11,8 @@
 ### Feats
 
 - `useDialog` 支持 `closeOnEsc` 属性
+- `n-data-table` 导出 `DataTableFilterState` 类型
+- `n-data-table` 导出 `DataTableSortState` 类型
 
 ## 2.26.3
 

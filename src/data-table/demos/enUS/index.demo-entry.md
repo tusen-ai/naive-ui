@@ -82,10 +82,10 @@ context-menu.vue
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |
-| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
+| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
-| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `SortState[] \| null`, otherwise return `SortState \| null`. For types, see <n-a href="#SortState-Type">SorterState Type</n-a>. |
+| on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `DataTableSortState[] \| null`, otherwise return `DataTableSortState \| null`. |
 
 #### DataTableColumn Properties
 
@@ -145,16 +145,6 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
     }
 ```
 
-#### SortState Type
-
-```ts
-type SortState = {
-  columnKey: string | number
-  sorter: 'default' | function | boolean
-  order: 'ascend' | 'descend' | false
-}
-```
-
 ### DataTable Methods
 
 These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.
@@ -163,7 +153,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | --- | --- | --- |
 | clearFilters | `() => void` | Clear all filter state. |
 | clearSorter | `() => void` | Clear all sort state. |
-| filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
+| filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |
 | page | `(page: number) => void` | Manually set the page. |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |
 

@@ -2,6 +2,12 @@
 
 ## NEXT_VERSION
 
+<<<<<<< data-type
+### Feats
+
+- `n-data-table` export `DataTableFilterState` type.
+- `n-data-table` export `DataTableSortState` type.
+=======
 ### Fixes
 
 - Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node, closes [#2605](https://github.com/TuSimple/naive-ui/issues/2605).
@@ -11,6 +17,7 @@
 ### Feats
 
 - `useDialog` supports `closeOnEsc` prop.
+>>>>>>> main
 
 ## 2.26.3
 
