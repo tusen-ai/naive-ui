@@ -125,6 +125,26 @@ context-menu.vue
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
+The following types can be imported from the package.
+
+#### DataTableSortState Type
+
+```ts
+type DataTableSortState = {
+  columnKey: string | number
+  sorter: 'default' | function | boolean
+  order: 'ascend' | 'descend' | false
+}
+```
+
+#### DataTableFilterState Type
+
+```ts
+type DataTableFilterState = {
+  [key: string]: Array<string | number> | string | number | null | undefined
+}
+```
+
 #### DataTableCreateSummary Type
 
 ```ts

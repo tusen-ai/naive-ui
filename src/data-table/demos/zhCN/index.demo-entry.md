@@ -129,6 +129,26 @@ height-debug
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
 | width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 
+下面的类型可以直接从包中引入。
+
+#### DataTableSortState Type
+
+```ts
+type DataTableSortState = {
+  columnKey: string | number
+  sorter: 'default' | function | boolean
+  order: 'ascend' | 'descend' | false
+}
+```
+
+#### DataTableFilterState Type
+
+```ts
+type DataTableFilterState = {
+  [key: string]: Array<string | number> | string | number | null | undefined
+}
+```
+
 #### DataTableCreateSummary Type
 
 ```ts
