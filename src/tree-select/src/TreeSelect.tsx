@@ -830,6 +830,7 @@ export default defineComponent({
                                     this.consistentMenuWidth &&
                                     this.virtualScroll
                                   }
+                                  internalTreeSelect
                                   internalDataTreeMate={this.dataTreeMate}
                                   internalDisplayTreeMate={this.displayTreeMate}
                                   internalHighlightKeySet={

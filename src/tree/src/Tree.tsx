@@ -214,6 +214,7 @@ const treeProps = {
   >,
   ...treeSharedProps,
   // internal props for tree-select
+  internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
   // use it to do check
@@ -754,7 +755,10 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
-        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
+        (props.internalTreeSelect &&
+          !props.multiple &&
+          mergedCheckStrategyRef.value === 'child' &&
+          !node.isLeaf)
       ) {
         return
       }
@@ -1181,11 +1185,13 @@ export default defineComponent({
       pendingNodeKeyRef,
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
+      internalTreeSelect: props.internalTreeSelect,
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
+      multipleRef: toRef(props, 'multiple'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
