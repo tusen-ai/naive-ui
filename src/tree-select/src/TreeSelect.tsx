@@ -520,19 +520,27 @@ export default defineComponent({
       // only work for multiple mode
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((key) => key === option.value)
+        const { value: treeMate } = dataTreeMateRef
+        const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
+          mergedValue,
+          {
+            checkStrategy: props.checkStrategy,
+            cascade: mergedCascadeRef.value
+          }
+        )
+        const index = checkedKeysValue.findIndex((key) => key === option.value)
         if (~index) {
           if (props.checkable) {
-            const { checkedKeys } = dataTreeMateRef.value.uncheck(
+            const { checkedKeys } = treeMate.uncheck(
               option.value,
-              mergedValue,
+              checkedKeysValue,
               {
                 cascade: mergedCascadeRef.value
               }
             )
             doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
           } else {
-            const nextValue = Array.from(mergedValue)
+            const nextValue = Array.from(checkedKeysValue)
             nextValue.splice(index, 1)
             doUpdateValue(nextValue, getOptionsByKeys(nextValue))
           }

@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-button`'s loading icon shifts.
+- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node
 
 ## 2.26.2
 

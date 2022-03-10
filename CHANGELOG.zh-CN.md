@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-button` loading 图标漂移
+- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项
 
 ## 2.26.2
 
