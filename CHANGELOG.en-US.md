@@ -8,6 +8,7 @@
 - Fix `n-tree` may throw error when node is removed, closes [#2597](https://github.com/TuSimple/naive-ui/issues/2597).
 - Fix `useDialog` renders component with popup content with unexpected focus management behavior, closes [#2612](https://github.com/TuSimple/naive-ui/issues/2612).
 - Fix `n-tree-select`'s node sometimes can't be clicked when `check-strategy` is `'child'`.
+- Fix `n-tree-select`'s emitted value can be not corresponding to `check-strategy` when delete option in select box with `check-strategy` is not `'all'`.
 
 ### Feats
 
