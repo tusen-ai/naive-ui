@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-data-table` export `DataTableFilterState` type.
+- `n-data-table` export `DataTableSortState` type.
+
 ## 2.26.3
 
 ### Fixes

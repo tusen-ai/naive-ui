@@ -86,10 +86,10 @@ height-debug
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |
-| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
+| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |
-| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `SortState[] \| null` 否则返回 `SortState \| null`，类型见 <n-a href="#SortState-Type">SortState Type</n-a> |
+| on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `DataTableSortState[] \| null` 否则返回 `DataTableSortState \| null` |
 
 #### DataTableColumn Properties
 
@@ -149,16 +149,6 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
     }
 ```
 
-#### SortState Type
-
-```ts
-type SortState = {
-  columnKey: string | number
-  sorter: 'default' | function | boolean
-  order: 'ascend' | 'descend' | false
-}
-```
-
 ### DataTable Methods
 
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
@@ -167,7 +157,7 @@ type SortState = {
 | --- | --- | --- |
 | clearFilters | `() => void` | 清空所有的 filter 状态 |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |
-| filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
+| filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |
 | page | `(page: number) => void` | 手动设置 page |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |
 
