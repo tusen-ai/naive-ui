@@ -88,7 +88,7 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
 | closable | `boolean` | Whether to show `close` icon. |  |
-| closeOnEsc | `boolean` | Whether to close modal on Esc is pressed. | NEXT_VERSION |
+| closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a `render` function. |  |
 | iconPlacement | `'left' \| 'top'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `Render` function of `icon`. |  |
@@ -115,7 +115,7 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
-| closeOnEsc | `boolean` | `true` | Whether to close modal on Esc is pressed. | NEXT_VERSION |
+| closeOnEsc | `boolean` | `true` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Can be a `render` function. |  |
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |

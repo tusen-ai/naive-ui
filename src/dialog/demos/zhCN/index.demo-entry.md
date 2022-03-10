@@ -63,7 +63,7 @@ focus-debug.vue
 | action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |  |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
-| closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 | NEXT_VERISON |
+| closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |  |
@@ -89,7 +89,7 @@ focus-debug.vue
 | --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 `border` |  |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
-| closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭 | NEXT_VERISON |
+| closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |  |
 | iconPlacement | `'left' \| 'top'` | 图标的位置 |  |
 | icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |  |
