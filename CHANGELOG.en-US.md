@@ -1,11 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node
+- Fix `n-tree` may throw error when node is removed, closes [#2597](https://github.com/TuSimple/naive-ui/issues/2597).
+
 ## 2.26.3
 
 ### Fixes
 
 - Fix `n-button`'s loading icon shifts.
-- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node
 
 ## 2.26.2
 
