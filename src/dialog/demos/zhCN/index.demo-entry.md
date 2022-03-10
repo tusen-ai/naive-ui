@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+focus-debug.vue
 ```
 
 ## API
@@ -57,25 +58,26 @@ action.vue
 
 ### DialogOptions Properties
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |
-| bordered | `boolean` | `false` | 是否显示 `border` |
-| closable | `boolean` | `true` | 是否显示 `close` 图标 |
-| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |
-| icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |
-| icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |
-| loading | `boolean` | `false` | 是否显示 `loading` 状态 |
-| mask-closable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |
-| negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |
-| positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |
-| show-icon | `boolean` | `true` | 是否显示 `icon` |
-| title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |
-| onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |  |
+| bordered | `boolean` | `false` | 是否显示 `border` |  |
+| closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
+| closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
+| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
+| icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
+| icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |  |
+| loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
+| mask-closable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
+| negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| show-icon | `boolean` | `true` | 是否显示 `icon` |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
+| type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
+| onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |  |
 
 ### DialogReactive API
 
@@ -83,24 +85,25 @@ action.vue
 
 下列属性都可以被动态修改。
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| bordered | `boolean` | 是否显示 `border` |
-| closable | `boolean` | 是否显示 `close` 图标 |
-| content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |
-| iconPlacement | `'left' \| 'top'` | 图标的位置 |
-| icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |
-| loading | `boolean` | 是否显示 `loading` 状态 |
-| maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |
-| negativeText | `string` | 不填对应的按钮不会出现 |
-| positiveText | `string` | 不填对应的按钮不会出现 |
-| showIcon | `boolean` | 是否显示 `icon` |
-| style | `string \| Object` | 样式 |
-| title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |
-| type | `'error \| 'success' \| 'warning'` | 对话框类型 |
-| onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| bordered | `boolean` | 是否显示 `border` |  |
+| closable | `boolean` | 是否显示 `close` 图标 |  |
+| closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
+| content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |  |
+| iconPlacement | `'left' \| 'top'` | 图标的位置 |  |
+| icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |  |
+| loading | `boolean` | 是否显示 `loading` 状态 |  |
+| maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |  |
+| negativeText | `string` | 不填对应的按钮不会出现 |  |
+| positiveText | `string` | 不填对应的按钮不会出现 |  |
+| showIcon | `boolean` | 是否显示 `icon` |  |
+| style | `string \| Object` | 样式 |  |
+| title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
+| type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
+| onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 
 #### DialogReactive Methods
 

@@ -214,6 +214,7 @@ const treeProps = {
   >,
   ...treeSharedProps,
   // internal props for tree-select
+  internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
   // use it to do check
@@ -536,18 +537,20 @@ export default defineComponent({
         }
       }
       if (removedKey !== null) {
-        // play remove animation
-        aipRef.value = true
         afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(value)
         const collapsedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
         if (~collapsedNodeIndex) {
-          const collapsedChildren = flatten(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
-            value
-          )
+          const collapsedNodeChildren = (
+            afNodeRef.value[collapsedNodeIndex] as TmNode
+          ).children
+          // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
+          // but maybe children removed
+          if (!collapsedNodeChildren) return
+          // play remove animation
+          aipRef.value = true
+          const collapsedChildren = flatten(collapsedNodeChildren, value)
           afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
@@ -752,7 +755,10 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
-        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
+        (props.internalTreeSelect &&
+          !props.multiple &&
+          mergedCheckStrategyRef.value === 'child' &&
+          !node.isLeaf)
       ) {
         return
       }
@@ -1179,11 +1185,13 @@ export default defineComponent({
       pendingNodeKeyRef,
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
+      internalTreeSelect: props.internalTreeSelect,
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
+      multipleRef: toRef(props, 'multiple'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

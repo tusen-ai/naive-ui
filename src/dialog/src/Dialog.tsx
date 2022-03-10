@@ -183,6 +183,46 @@ export const NDialog = defineComponent({
       </NBaseIcon>
     ) : null
 
+    const actionNode = resolveWrappedSlot(this.$slots.action, (children) =>
+      children || positiveText || negativeText || action ? (
+        <div class={`${mergedClsPrefix}-dialog__action`}>
+          {children ||
+            (action
+              ? [render(action)]
+              : [
+                  this.negativeText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      ghost
+                      size="small"
+                      onClick={handleNegativeClick}
+                    >
+                      {{
+                        default: () => render(this.negativeText)
+                      }}
+                    </NButton>
+                  ),
+                  this.positiveText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      disabled={loading}
+                      loading={loading}
+                      size="small"
+                      type={type === 'default' ? 'primary' : type}
+                      onClick={handlePositiveClick}
+                    >
+                      {{
+                        default: () => render(this.positiveText)
+                      }}
+                    </NButton>
+                  )
+                ])}
+        </div>
+      ) : null
+    )
+
     return (
       <div
         class={[
@@ -208,48 +248,15 @@ export const NDialog = defineComponent({
           {showIcon && mergedIconPlacement === 'left' ? icon : null}
           {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
-        <div class={`${mergedClsPrefix}-dialog__content`}>
+        <div
+          class={[
+            `${mergedClsPrefix}-dialog__content`,
+            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`
+          ]}
+        >
           {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>
-        {resolveWrappedSlot(this.$slots.action, (children) =>
-          children || positiveText || negativeText || action ? (
-            <div class={`${mergedClsPrefix}-dialog__action`}>
-              {children ||
-                (action
-                  ? [render(action)]
-                  : [
-                      this.negativeText && (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          ghost
-                          size="small"
-                          onClick={handleNegativeClick}
-                        >
-                          {{
-                            default: () => render(this.negativeText)
-                          }}
-                        </NButton>
-                      ),
-                      this.positiveText && (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          disabled={loading}
-                          loading={loading}
-                          size="small"
-                          type={type === 'default' ? 'primary' : type}
-                          onClick={handlePositiveClick}
-                        >
-                          {{
-                            default: () => render(this.positiveText)
-                          }}
-                        </NButton>
-                      )
-                    ])}
-            </div>
-          ) : null
-        )}
+        {actionNode}
       </div>
     )
   }

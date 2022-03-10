@@ -15,5 +15,7 @@ export type {
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
   DataTableInst,
-  CreateSummary as DataTableCreateSummary
+  CreateSummary as DataTableCreateSummary,
+  FilterState as DataTableFilterState,
+  SortState as DataTableSortState
 } from './src/interface'
