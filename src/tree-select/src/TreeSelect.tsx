@@ -521,10 +521,10 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
         const { value: treeMate } = dataTreeMateRef
+        // all visible checked keys
         const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
           mergedValue,
           {
-            checkStrategy: props.checkStrategy,
             cascade: mergedCascadeRef.value
           }
         )
@@ -535,6 +535,7 @@ export default defineComponent({
               option.value,
               checkedKeysValue,
               {
+                checkStrategy: props.checkStrategy,
                 cascade: mergedCascadeRef.value
               }
             )
