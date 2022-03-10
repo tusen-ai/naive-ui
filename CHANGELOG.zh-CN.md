@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项
+- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项，关闭 [#2605](https://github.com/TuSimple/naive-ui/issues/2605)
 - 修复 `n-tree` 在移除节点时可能抛出异常，关闭 [#2597](https://github.com/TuSimple/naive-ui/issues/2597)
 
 ## 2.26.3
