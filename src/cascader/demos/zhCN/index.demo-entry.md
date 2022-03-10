@@ -37,6 +37,7 @@ focus.vue
 | value-field | `string` | `'value'` | 替代 `CascaderOption` 中的 value 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
+| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | NEXT_VERSION |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |

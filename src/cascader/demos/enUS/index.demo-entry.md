@@ -37,6 +37,7 @@ focus.vue
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
+| menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | NEXT_VERSION |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
 | options | `CascaderOption[]` | required | Options of the cascader. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |

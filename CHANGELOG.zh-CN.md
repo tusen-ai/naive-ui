@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+
 ## 2.26.4
 
 ### Fixes
