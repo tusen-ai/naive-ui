@@ -1,5 +1,5 @@
 <markdown>
-# Label Placement
+# Label placement
 
 You can set label placement to `top` or `left`.
 </markdown>

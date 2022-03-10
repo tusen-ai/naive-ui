@@ -23,10 +23,16 @@ import { useMessage, MessageReactive, MessageType } from 'naive-ui'
 export default defineComponent({
   setup () {
     const message = useMessage()
-    const types: MessageType[] = ['success', 'info', 'warning', 'error', 'loading']
+    const types: MessageType[] = [
+      'success',
+      'info',
+      'warning',
+      'error',
+      'loading'
+    ]
     const countRef = ref(0)
-    const typeIndexRef = ref(0)
-    let msgReactive:MessageReactive | null = null
+    let typeIndex = 0
+    let msgReactive: MessageReactive | null = null
 
     return {
       plus () {
@@ -37,12 +43,13 @@ export default defineComponent({
       },
       changeType () {
         if (msgReactive) {
-          typeIndexRef.value = (typeIndexRef.value + 1) % types.length
-          msgReactive.type = types[typeIndexRef.value]
+          typeIndex = (typeIndex + 1) % types.length
+          msgReactive.type = types[typeIndex]
         }
       },
       createMessage () {
-        msgReactive = message[types[typeIndexRef.value]]('' + countRef.value, {
+        msgReactive = message.create('' + countRef.value, {
+          type: types[typeIndex],
           duration: 10000
         })
       }

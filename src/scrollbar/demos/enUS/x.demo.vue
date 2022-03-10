@@ -1,5 +1,5 @@
 <markdown>
-# Scroll Horizontally
+# Scroll horizontally
 </markdown>
 
 <template>

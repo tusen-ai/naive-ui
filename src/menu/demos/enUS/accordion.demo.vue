@@ -15,6 +15,7 @@ Like an accordion. You can use `accordion` prop to switch this mode for the firs
 <script lang="ts">
 import { defineComponent, h, Component } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   FishOutline as FishIcon,
   PawOutline as PawIcon,
@@ -25,7 +26,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: 'Fish',
     key: 'fish',

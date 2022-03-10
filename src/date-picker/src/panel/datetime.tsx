@@ -25,12 +25,17 @@ export default defineComponent({
     return useCalendar(props, 'datetime')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--datetime`}
+        class={[
+          `${mergedClsPrefix}-date-panel`,
+          `${mergedClsPrefix}-date-panel--datetime`,
+          this.themeClass
+        ]}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
@@ -128,6 +133,7 @@ export default defineComponent({
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
               >
+                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />

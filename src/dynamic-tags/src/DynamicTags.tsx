@@ -18,7 +18,13 @@ import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
 import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
-import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
+import {
+  useTheme,
+  useFormItem,
+  useLocale,
+  useConfig,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, smallerSize, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -65,7 +71,7 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
@@ -147,6 +153,17 @@ export default defineComponent({
         inputForceFocusedRef.value = false
       })
     }
+    const cssVarsRef = computed(() => {
+      const {
+        self: { inputWidth }
+      } = themeRef.value
+      return {
+        '--n-input-width': inputWidth
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('dynamic-tags', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       inputInstRef,
@@ -164,23 +181,19 @@ export default defineComponent({
       handleCloseClick,
       handleInputConfirm,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          self: { inputWidth }
-        } = themeRef.value
-        return {
-          '--n-input-width': inputWidth
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedTheme, cssVars, mergedClsPrefix } = this
+    const { mergedTheme, cssVars, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <NSpace
-        class={`${mergedClsPrefix}-dynamic-tags`}
+        class={[`${mergedClsPrefix}-dynamic-tags`, this.themeClass]}
         size="small"
-        style={cssVars as CSSProperties}
+        style={cssVars as any}
         theme={mergedTheme.peers.Space}
         themeOverrides={mergedTheme.peerOverrides.Space}
         itemStyle="display: flex;"
@@ -230,7 +243,10 @@ export default defineComponent({
               .concat(
                 showInput ? (
                   $slots.input ? (
-                    $slots.input({ submit: handleInputConfirm })
+                    $slots.input({
+                      submit: handleInputConfirm,
+                      deactivate: handleInputBlur
+                    })
                   ) : (
                     <NInput
                       placeholder=""

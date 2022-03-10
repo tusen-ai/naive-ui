@@ -1,11 +1,16 @@
 import { h, defineComponent, PropType, inject, computed } from 'vue'
 import { createId } from 'seemly'
 import { useMemo } from 'vooks'
-import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
+import {
+  ChevronRightIcon as ArrowRightIcon,
+  ChevronLeftIcon as ArrowLeftIcon
+} from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { ExtractPublicPropTypes, throwError } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
+import useRtl from '../../_mixins/use-rtl'
+import { useConfig } from '../../_mixins'
 
 const collapseItemProps = {
   title: String,
@@ -19,6 +24,7 @@ export default defineComponent({
   name: 'CollapseItem',
   props: collapseItemProps,
   setup (props) {
+    const { mergedRtlRef } = useConfig(props)
     const randomName = createId()
     const mergedNameRef = useMemo(() => {
       return props.name ?? randomName
@@ -50,7 +56,9 @@ export default defineComponent({
       }
       return true
     })
+    const rtlEnabledRef = useRtl('Collapse', mergedRtlRef, mergedClsPrefixRef)
     return {
+      rtlEnabled: rtlEnabledRef,
       collapseSlots,
       randomName,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -105,13 +113,23 @@ export default defineComponent({
             onClick={this.handleClick}
           >
             {arrowPlacement === 'right' && headerNode}
-            <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
+            <div
+              class={`${mergedClsPrefix}-collapse-item-arrow`}
+              key={this.rtlEnabled ? 0 : 1}
+            >
               {arrowSlot ? (
                 arrowSlot({ collapsed })
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
-                    default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
+                    default:
+                      collapseSlots.expandIcon ??
+                      (() =>
+                        this.rtlEnabled ? (
+                          <ArrowLeftIcon />
+                        ) : (
+                          <ArrowRightIcon />
+                        ))
                   }}
                 </NBaseIcon>
               )}

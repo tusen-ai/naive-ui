@@ -22,7 +22,7 @@ import {
   ForwardIcon,
   MoreIcon
 } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { paginationLight } from '../styles'
 import type { PaginationTheme } from '../styles'
@@ -126,7 +126,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedComponentPropsRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       '-pagination',
@@ -324,6 +325,99 @@ export default defineComponent({
       void mergedPageSizeRef.value
       disableTransitionOneTick()
     })
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          itemSize,
+          itemPadding,
+          itemMargin,
+          inputWidth,
+          selectWidth,
+          inputMargin,
+          selectMargin,
+          buttonBorder,
+          buttonBorderHover,
+          buttonBorderPressed,
+          buttonIconColor,
+          buttonIconColorHover,
+          buttonIconColorPressed,
+          buttonIconSize,
+          itemTextColor,
+          itemTextColorHover,
+          itemTextColorPressed,
+          itemTextColorActive,
+          itemTextColorDisabled,
+          itemColor,
+          itemColorHover,
+          itemColorPressed,
+          itemColorActive,
+          itemColorActiveHover,
+          itemColorDisabled,
+          itemBorder,
+          itemBorderHover,
+          itemBorderPressed,
+          itemBorderActive,
+          itemBorderDisabled,
+          itemBorderRadius,
+          itemFontSize,
+          jumperFontSize,
+          jumperTextColor,
+          jumperTextColorDisabled,
+          prefixMargin,
+          suffixMargin,
+          buttonColor,
+          buttonColorHover,
+          buttonColorPressed
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-prefix-margin': prefixMargin,
+        '--n-suffix-margin': suffixMargin,
+        '--n-item-font-size': itemFontSize,
+        '--n-select-width': selectWidth,
+        '--n-select-margin': selectMargin,
+        '--n-input-width': inputWidth,
+        '--n-input-margin': inputMargin,
+        '--n-item-size': itemSize,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-disabled': itemTextColorDisabled,
+        '--n-item-text-color-hover': itemTextColorHover,
+        '--n-item-text-color-active': itemTextColorActive,
+        '--n-item-text-color-pressed': itemTextColorPressed,
+        '--n-item-color': itemColor,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-color-disabled': itemColorDisabled,
+        '--n-item-color-active': itemColorActive,
+        '--n-item-color-active-hover': itemColorActiveHover,
+        '--n-item-color-pressed': itemColorPressed,
+        '--n-item-border': itemBorder,
+        '--n-item-border-hover': itemBorderHover,
+        '--n-item-border-disabled': itemBorderDisabled,
+        '--n-item-border-active': itemBorderActive,
+        '--n-item-border-pressed': itemBorderPressed,
+        '--n-item-padding': itemPadding,
+        '--n-item-border-radius': itemBorderRadius,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-jumper-font-size': jumperFontSize,
+        '--n-jumper-text-color': jumperTextColor,
+        '--n-jumper-text-color-disabled': jumperTextColorDisabled,
+        '--n-item-margin': itemMargin,
+        '--n-button-icon-size': buttonIconSize,
+        '--n-button-icon-color': buttonIconColor,
+        '--n-button-icon-color-hover': buttonIconColorHover,
+        '--n-button-icon-color-pressed': buttonIconColorPressed,
+        '--n-button-color-hover': buttonColorHover,
+        '--n-button-color': buttonColor,
+        '--n-button-color-pressed': buttonColorPressed,
+        '--n-button-border': buttonBorder,
+        '--n-button-border-hover': buttonBorderHover,
+        '--n-button-border-pressed': buttonBorderPressed
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('pagination', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
@@ -353,96 +447,9 @@ export default defineComponent({
       handleQuickJumperKeyUp,
       handlePageItemMouseEnter,
       handlePageItemMouseLeave,
-      cssVars: computed(() => {
-        const {
-          self: {
-            itemSize,
-            itemPadding,
-            itemMargin,
-            inputWidth,
-            selectWidth,
-            inputMargin,
-            selectMargin,
-            buttonBorder,
-            buttonBorderHover,
-            buttonBorderPressed,
-            buttonIconColor,
-            buttonIconColorHover,
-            buttonIconColorPressed,
-            buttonIconSize,
-            itemTextColor,
-            itemTextColorHover,
-            itemTextColorPressed,
-            itemTextColorActive,
-            itemTextColorDisabled,
-            itemColor,
-            itemColorHover,
-            itemColorPressed,
-            itemColorActive,
-            itemColorActiveHover,
-            itemColorDisabled,
-            itemBorder,
-            itemBorderHover,
-            itemBorderPressed,
-            itemBorderActive,
-            itemBorderDisabled,
-            itemBorderRadius,
-            itemFontSize,
-            jumperFontSize,
-            jumperTextColor,
-            jumperTextColorDisabled,
-            prefixMargin,
-            suffixMargin,
-            buttonColor,
-            buttonColorHover,
-            buttonColorPressed
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-prefix-margin': prefixMargin,
-          '--n-suffix-margin': suffixMargin,
-          '--n-item-font-size': itemFontSize,
-          '--n-select-width': selectWidth,
-          '--n-select-margin': selectMargin,
-          '--n-input-width': inputWidth,
-          '--n-input-margin': inputMargin,
-          '--n-item-size': itemSize,
-          '--n-item-text-color': itemTextColor,
-          '--n-item-text-color-disabled': itemTextColorDisabled,
-          '--n-item-text-color-hover': itemTextColorHover,
-          '--n-item-text-color-active': itemTextColorActive,
-          '--n-item-text-color-pressed': itemTextColorPressed,
-          '--n-item-color': itemColor,
-          '--n-item-color-hover': itemColorHover,
-          '--n-item-color-disabled': itemColorDisabled,
-          '--n-item-color-active': itemColorActive,
-          '--n-item-color-active-hover': itemColorActiveHover,
-          '--n-item-color-pressed': itemColorPressed,
-          '--n-item-border': itemBorder,
-          '--n-item-border-hover': itemBorderHover,
-          '--n-item-border-disabled': itemBorderDisabled,
-          '--n-item-border-active': itemBorderActive,
-          '--n-item-border-pressed': itemBorderPressed,
-          '--n-item-padding': itemPadding,
-          '--n-item-border-radius': itemBorderRadius,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-jumper-font-size': jumperFontSize,
-          '--n-jumper-text-color': jumperTextColor,
-          '--n-jumper-text-color-disabled': jumperTextColorDisabled,
-          '--n-item-margin': itemMargin,
-          '--n-button-icon-size': buttonIconSize,
-          '--n-button-icon-color': buttonIconColor,
-          '--n-button-icon-color-hover': buttonIconColorHover,
-          '--n-button-icon-color-pressed': buttonIconColorPressed,
-          '--n-button-color-hover': buttonColorHover,
-          '--n-button-color': buttonColor,
-          '--n-button-color-pressed': buttonColorPressed,
-          '--n-button-border': buttonBorder,
-          '--n-button-border-hover': buttonBorderHover,
-          '--n-button-border-pressed': buttonBorderPressed
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -478,8 +485,10 @@ export default defineComponent({
       handlePageItemMouseEnter,
       handlePageItemMouseLeave,
       handleForwardClick,
-      handleQuickJumperKeyUp
+      handleQuickJumperKeyUp,
+      onRender
     } = this
+    onRender?.()
     const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
     const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
     const renderPrev = prev || $slots.prev
@@ -490,6 +499,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-pagination`,
+          this.themeClass,
           disabled && `${mergedClsPrefix}-pagination--disabled`
         ]}
         style={cssVars as CSSProperties}

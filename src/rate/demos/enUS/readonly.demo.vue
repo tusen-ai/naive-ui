@@ -1,5 +1,5 @@
 <markdown>
-# Read only
+# Readonly
 </markdown>
 
 <template>

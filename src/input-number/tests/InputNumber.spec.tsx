@@ -14,11 +14,11 @@ describe('n-input-number', () => {
 
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NInputNumber)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: false })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
     wrapper.unmount()
   })
 

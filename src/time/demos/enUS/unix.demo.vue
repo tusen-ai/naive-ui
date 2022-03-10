@@ -1,5 +1,5 @@
 <markdown>
-# Unix Timestamp
+# Unix timestamp
 
 Use Unix timestamp as time.
 </markdown>

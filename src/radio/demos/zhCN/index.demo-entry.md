@@ -12,6 +12,7 @@ group.vue
 button-group.vue
 size.vue
 radio-focus-debug.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -25,7 +26,7 @@ radio-focus-debug.vue
 | disabled | `boolean` | `false` | 禁用状态 |
 | name | `string` | `undefined` | 单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
-| value | `string` | `undefined` | 选中的值 |
+| value | `string \| number` | `'on'` | 选中的值 |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | 发生变化时触发的回调方法 |
 
 ### RadioGroup Props
@@ -35,5 +36,6 @@ radio-focus-debug.vue
 | disabled | `boolean` | `false` | 禁用状态 |
 | name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
-| value | `string \| null` | `null` | 选中的值 |
+| value | `string \| number \| null` | `null` | 选中的值 |
+| default-value | `string \| number \| null` | `null` | 默认选中的值 |
 | on-update:value | `(value: string) => void` | `undefined` | 发生变化时触发的回调方法 |

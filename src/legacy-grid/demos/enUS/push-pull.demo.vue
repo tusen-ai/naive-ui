@@ -1,5 +1,5 @@
 <markdown>
-# Push && Pull
+# Push & pull
 
 See codes to know what happens. Basically it is relative position change.
 </markdown>

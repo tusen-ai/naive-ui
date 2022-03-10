@@ -1,5 +1,5 @@
 <markdown>
-# Use OS Theme
+# Use OS theme
 
 Naive UI provides `useOsTheme` to get the current theme of your OS.
 </markdown>

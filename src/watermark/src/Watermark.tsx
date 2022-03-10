@@ -59,6 +59,9 @@ const watermarkProps = {
     default: 0
   },
   image: String,
+  imageOpacity: { type: Number, default: 1 },
+  imageHeight: Number,
+  imageWidth: Number,
   content: String,
   selectable: {
     type: Boolean,
@@ -160,7 +163,21 @@ export default defineComponent({
           img.referrerPolicy = 'no-referrer'
           img.src = image
           img.onload = () => {
-            ctx.drawImage(img, 0, 0, markWidth, markHeight)
+            ctx.globalAlpha = props.imageOpacity
+            const { imageWidth, imageHeight } = props
+            ctx.drawImage(
+              img,
+              canvasOffsetLeft,
+              canvasOffsetTop,
+              (props.imageWidth ||
+                (imageHeight
+                  ? (img.width * imageHeight) / img.height
+                  : img.width)) * ratio,
+              (props.imageHeight ||
+                (imageWidth
+                  ? (img.height * imageWidth) / img.width
+                  : img.height)) * ratio
+            )
             base64UrlRef.value = canvas.toDataURL()
           }
         } else if (content) {

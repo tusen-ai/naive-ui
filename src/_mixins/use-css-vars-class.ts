@@ -27,8 +27,9 @@ export function useThemeClass (
 
   let renderCallback: (() => void) | undefined
 
+  const hashClassPrefix = `__${componentName}`
   const mountStyle = (): void => {
-    let finalThemeHash = componentName
+    let finalThemeHash = hashClassPrefix
     const hashValue = hashRef ? hashRef.value : undefined
     const themeHash = mergedThemeHashRef?.value
     if (themeHash) finalThemeHash += '-' + themeHash

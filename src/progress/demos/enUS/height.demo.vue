@@ -1,5 +1,5 @@
 <markdown>
-# Height & Border Radius
+# Height & border radius
 
 In case you aren't satisfied with height & border-radius.
 </markdown>

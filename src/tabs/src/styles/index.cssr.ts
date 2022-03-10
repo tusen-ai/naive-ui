@@ -127,6 +127,8 @@ export default cB('tabs', `
   cB('tabs-nav-scroll-content', `
     display: flex;
     position: relative;
+    min-width: 100%;
+    width: fit-content;
   `),
   cB('tabs-wrapper', `
     display: inline-flex;
@@ -264,6 +266,10 @@ export default cB('tabs', `
           padding-right: 8px;
           font-size: 16px;
         `, [
+          cE('height-placeholder', `
+            width: 0;
+            font-size: var(--n-tab-font-size);
+          `),
           cNotM('disabled', [
             c('&:hover', `
               color: var(--n-tab-text-color-hover);

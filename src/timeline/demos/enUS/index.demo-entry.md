@@ -25,13 +25,14 @@ customize-icon.vue
 
 ### TimelineItem Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| color | `string` | `undefined` | Item color. |
-| content | `string` | `undefined` | Item content. |
-| time | `string` | `undefined` | Item time. |
-| title | `string` | `undefined` | Item title. |
-| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Item type. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| color | `string` | `undefined` | Item color. |  |
+| content | `string` | `undefined` | Item content. |  |
+| line-type | `'default' \| 'dashed'` | `'default'` | Line type. | 2.26.1 |
+| time | `string` | `undefined` | Item time. |  |
+| title | `string` | `undefined` | Item title. |  |
+| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Item type. |  |
 
 ### Timeline Slots
 

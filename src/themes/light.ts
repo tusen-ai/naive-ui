@@ -5,6 +5,7 @@ import { alertLight } from '../alert/styles'
 import { anchorLight } from '../anchor/styles'
 import { autoCompleteLight } from '../auto-complete/styles'
 import { avatarLight } from '../avatar/styles'
+import { avatarGroupLight } from '../avatar-group/styles'
 import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
@@ -86,6 +87,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Anchor: anchorLight,
   AutoComplete: autoCompleteLight,
   Avatar: avatarLight,
+  AvatarGroup: avatarGroupLight,
   BackTop: backTopLight,
   Badge: badgeLight,
   Breadcrumb: breadcrumbLight,

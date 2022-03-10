@@ -1,5 +1,5 @@
 <markdown>
-# Collapsed Menu
+# Collapsed menu
 
 Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
 </markdown>
@@ -36,6 +36,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
 <script lang="ts">
 import { defineComponent, h, ref, Component } from 'vue'
 import { NIcon } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -46,7 +47,7 @@ function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
@@ -124,7 +125,7 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      activeKey: ref(null),
+      activeKey: ref<string | null>(null),
       collapsed: ref(true),
       menuOptions
     }

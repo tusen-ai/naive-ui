@@ -24,6 +24,7 @@ nested-debug.vue
 nested2-debug.vue
 nested3-debug.vue
 zindex-debug.vue
+center-arrow-debug.vue
 ```
 
 ## API
@@ -34,6 +35,7 @@ zindex-debug.vue
 | --- | --- | --- | --- | --- |
 | animated | `boolean` | `true` | 弹出弹窗时使用动画 |  |
 | arrow-style | `Object` | `undefined` | popover 的箭头样式 |  |
+| arrow-point-to-center | `boolean` | `false` | 箭头是否指向触发元素中心 | 2.26.0 |
 | delay | `number` | `100` | 悬浮触发弹出信息的延迟 |  |
 | disabled | `boolean` | `false` | 是否不能激活弹出信息 |  |
 | display-directive | `'if' \| 'show'` | `'if'` | 条件渲染使用的指令，`if` 会让内容被使用 `v-if` 渲染，`show` 会让内容被使用 `v-show` 渲染 |  |

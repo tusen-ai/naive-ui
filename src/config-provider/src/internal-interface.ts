@@ -4,6 +4,7 @@ import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
 import type { AvatarTheme } from '../../avatar/styles'
+import type { AvatarGroupTheme } from '../../avatar-group/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
@@ -94,6 +95,7 @@ export interface GlobalThemeWithoutCommon {
   Anchor?: AnchorTheme
   AutoComplete?: AutoCompleteTheme
   Avatar?: AvatarTheme
+  AvatarGroup?: AvatarGroupTheme
   BackTop?: BackTopTheme
   Badge?: BadgeTheme
   Breadcrumb?: BreadcrumbTheme
@@ -216,6 +218,7 @@ export interface GlobalIconConfig {
 export interface RtlItem {
   name: keyof GlobalThemeWithoutCommon
   style: CNode
+  peers?: RtlItem[]
 }
 export type RtlProp = RtlItem[]
 

@@ -4,6 +4,111 @@
 
 ### Fixes
 
+- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项，关闭 [#2605](https://github.com/TuSimple/naive-ui/issues/2605)
+- 修复 `n-tree` 在移除节点时可能抛出异常，关闭 [#2597](https://github.com/TuSimple/naive-ui/issues/2597)
+- 修复 `useDialog` 中使用带有弹出层的元素有异常的焦点管理行为，关闭 [#2612](https://github.com/TuSimple/naive-ui/issues/2612)
+- 修复 `n-tree-select` 当 `check-strategy` 为 `'child'` 时有的节点不能被点击
+- 修复 `n-tree-select` 在 `check-strategy` 不为 `'all'` 的时候从选框中删除时发出的值可能和 `check-strategy` 不对应
+
+### Feats
+
+- `useDialog` 支持 `closeOnEsc` 属性
+- `n-data-table` 导出 `DataTableFilterState` 类型
+- `n-data-table` 导出 `DataTableSortState` 类型
+
+## 2.26.3
+
+### Fixes
+
+- 修复 `n-button` loading 图标漂移
+
+## 2.26.2
+
+### Fixes
+
+- 修复 `n-cascader` 节点箭头 loading 显示过久
+- 修复 `n-select` 菜单不随主题变化
+- 修复 `n-tabs` 不能没有子节点，关闭 [#809](https://github.com/TuSimple/naive-ui/issues/809)
+- 修复 `n-menu` 切换主题时在 chrome 99 内字体颜色异常，关闭 [#2563](https://github.com/TuSimple/naive-ui/issues/2563)，这实际上是一个 chrome 的问题，我们进行了临时的修复
+- 修复 `n-date-picker` 仅 `'date'` 类型的扩大日期点击触发范围
+
+### Feats
+
+- `n-dynamic-tags` 的 `input` slot 新增 `deactivate` 属性，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-space` 添加 `RTL` 支持
+- `n-avatar-group` 添加 `RTL` 支持
+- `n-badge` 添加 `RTL` 支持
+- `n-radio` 添加 `RTL` 支持
+- `n-auto-complete` 新增 `focus` 方法
+- `n-auto-complete` 新增 `blur` 方法
+
+## 2.26.1
+
+### Fixes
+
+- 修复 `base-loading` 动画会被 js 堵塞，关闭 [#2506](https://github.com/TuSimple/naive-ui/issues/2506)
+- 修复 `n-time` 由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
+- 修复 `n-modal` 遮罩出现没有动画
+- 修复 `n-timeline` 在水平和非水平嵌套时的样式冲突，关闭 [#2549](https://github.com/TuSimple/naive-ui/issues/2549)
+- 修复 `n-tree` 箭头和 loading 切换时动画不完整
+
+### Feats
+
+- `n-time-line-item` 新增 `line-type` 属性，关闭 [#2548](https://github.com/TuSimple/naive-ui/issues/2548)
+- `n-step` 新增 `icon` slot，关闭 [#2547](https://github.com/TuSimple/naive-ui/issues/2547)
+- `n-input-number` 新增 `autofocus` 属性，关闭 [#2551](https://github.com/TuSimple/naive-ui/issues/2551)
+- `n-date-picker` 扩大日期点击触发范围，关闭 [#2552](https://github.com/TuSimple/naive-ui/issues/2552)
+
+## 2.26.0
+
+### Breaking Changes
+
+- 修复 `n-tooltip` 箭头和主体之间的间隙，`n-tooltip` 不再能使用半透明的颜色
+
+### Feats
+
+- `n-popover` 新增 `arrow-point-to-center` 属性
+- `n-config-provider` 新增 `inline-theme-disabled` 属性
+
+## 2.25.8
+
+### Fixes
+
+- 修复 `useMessage` 丢失样式
+
+## 2.25.7
+
+### Fixes
+
+- 修复 `n-time-picker` 在 `"actions="null"` 时依然显示操作栏
+- 修复 `n-input` 在 `type="text"` 并且 `autosize` 被设定时文字内容可能溢出，关闭 [#2505](https://github.com/TuSimple/naive-ui/issues/2505)
+- 修复 `n-upload` 将 `file` 字段放于其他 `FormData` 字段之前，关闭 [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
+- 修复 `n-button` rtl 支持
+- 修复 `n-form-item-row` 不能调用 `n-form-item` 的方法
+
+### Feats
+
+- `n-collapse` 添加 `RTL` 支持
+- `useMessage` 新增 `create` 方法
+- `useMessage` 新增 `showIcon` 属性，关闭 [#2495](https://github.com/TuSimple/naive-ui/issues/2495)
+- `useMessage` 支持 `'default'` 的 `type`
+- `n-checkbox` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
+- `n-radio` 支持内容折行，关闭 [#2419](https://github.com/TuSimple/naive-ui/issues/2419)
+- `n-checkbox` 添加 `RTL` 支持
+- `n-input` 添加 `RTL` 支持
+- `n-input-number` 添加 `RTL` 支持
+
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/TuSimple/naive-ui/issues/2497)
+- 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#2500](https://github.com/TuSimple/naive-ui/issues/2500)
+
+## 2.25.3 (2022-02-23)
+
+### Fixes
+
 - 修复 `n-switch` 在自定义选中值的时候无法使用键盘操作
 - 修复 `n-data-table` 放在 popover 内使用固定列滚动内容覆盖
 - 修复 `n-data-table` 当 `filterOptions` 值为 0 时过滤不生效, 关闭 [#2392](https://github.com/TuSimple/naive-ui/issues/2392)
@@ -23,18 +128,18 @@
 - `n-switch` 新增 `checked-icon` 插槽
 - `n-switch` 新增 `unchecked-icon` 插槽
 - `n-tabs` 的 CSS 变量使用 `n` 作为前缀
-- `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+- 新增 `n-watermark` 组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
 - `n-scrollbar` 新增 `scrollBy` 方法，关闭 [#2435](https://github.com/TuSimple/naive-ui/issues/2435)
 - `n-data-table` 的 `summary` 属性的 value 值支持 `VNodeChild`，关闭 [#2339](https://github.com/TuSimple/naive-ui/issues/2339)
 - `n-input-number` 可以使用长按来改变值，关闭 [#1293](https://github.com/TuSimple/naive-ui/issues/1293)
-- `n-select` 新增 `separator` 属性，关闭 [#2368](https://github.com/TuSimple/naive-ui/issues/2368)
+- `n-description` 新增 `titleTextColor` 主题变量
 
 ### i18n
 
 - 新增 skSK locale
 - 完善 frFR locale
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 
@@ -1969,7 +2074,7 @@
 ### Fixes
 
 - 修正了 `n-radio` 无法聚焦的问题
-- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
 
 ### Refactors
 

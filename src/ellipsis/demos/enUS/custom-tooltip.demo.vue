@@ -1,5 +1,5 @@
 <markdown>
-# Customize Tooltip Content
+# Customize tooltip content
 
 Use the `tooltip` slot to customize the tooltip content.
 </markdown>

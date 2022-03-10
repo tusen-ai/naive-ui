@@ -30,7 +30,13 @@ import {
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import { RenderTag } from '../../_internal/selection/src/interface'
-import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
+import {
+  useTheme,
+  useConfig,
+  useLocale,
+  useFormItem,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -736,6 +742,17 @@ export default defineComponent({
         triggerRef.value?.blur()
       }
     }
+    const cssVarsRef = computed(() => {
+      const {
+        self: { menuBoxShadow }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('select', undefined, cssVarsRef, props)
+      : undefined
     return {
       ...exposedMethods,
       mergedStatus: mergedStatusRef,
@@ -781,14 +798,9 @@ export default defineComponent({
       handleMenuKeydown: handleKeydown,
       handleMenuMousedown,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          self: { menuBoxShadow }
-        } = themeRef.value
-        return {
-          '--n-menu-box-shadow': menuBoxShadow
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -862,10 +874,17 @@ export default defineComponent({
                       onAfterLeave={this.handleMenuAfterLeave}
                     >
                       {{
-                        default: () =>
-                          (this.mergedShow ||
-                            this.displayDirective === 'show') &&
-                          withDirectives(
+                        default: () => {
+                          if (
+                            !(
+                              this.mergedShow ||
+                              this.displayDirective === 'show'
+                            )
+                          ) {
+                            return null
+                          }
+                          this.onRender?.()
+                          return withDirectives(
                             <NInternalSelectMenu
                               {...this.menuProps}
                               ref="menuRef"
@@ -875,6 +894,7 @@ export default defineComponent({
                               }
                               class={[
                                 `${this.mergedClsPrefix}-select-menu`,
+                                this.themeClass,
                                 this.menuProps?.class
                               ]}
                               clsPrefix={this.mergedClsPrefix}
@@ -916,6 +936,7 @@ export default defineComponent({
                                 ]
                               : [[clickoutside, this.handleMenuClickOutside]]
                           )
+                        }
                       }}
                     </Transition>
                   )

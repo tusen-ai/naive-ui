@@ -24,7 +24,7 @@ import {
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -214,6 +214,7 @@ const treeProps = {
   >,
   ...treeSharedProps,
   // internal props for tree-select
+  internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
   // use it to do check
@@ -244,7 +245,7 @@ export default defineComponent({
   name: 'Tree',
   props: treeProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
       '-tree',
@@ -536,18 +537,20 @@ export default defineComponent({
         }
       }
       if (removedKey !== null) {
-        // play remove animation
-        aipRef.value = true
         afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(value)
         const collapsedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
         if (~collapsedNodeIndex) {
-          const collapsedChildren = flatten(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
-            value
-          )
+          const collapsedNodeChildren = (
+            afNodeRef.value[collapsedNodeIndex] as TmNode
+          ).children
+          // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
+          // but maybe children removed
+          if (!collapsedNodeChildren) return
+          // play remove animation
+          aipRef.value = true
+          const collapsedChildren = flatten(collapsedNodeChildren, value)
           afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
@@ -752,7 +755,10 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
-        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
+        (props.internalTreeSelect &&
+          !props.multiple &&
+          mergedCheckStrategyRef.value === 'child' &&
+          !node.isLeaf)
       ) {
         return
       }
@@ -1179,11 +1185,13 @@ export default defineComponent({
       pendingNodeKeyRef,
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
+      internalTreeSelect: props.internalTreeSelect,
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
+      multipleRef: toRef(props, 'multiple'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -1198,7 +1206,39 @@ export default defineComponent({
       handleKeydown,
       handleKeyup
     }
-
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          fontSize,
+          nodeBorderRadius,
+          nodeColorHover,
+          nodeColorPressed,
+          nodeColorActive,
+          arrowColor,
+          loadingColor,
+          nodeTextColor,
+          nodeTextColorDisabled,
+          dropMarkColor
+        }
+      } = themeRef.value
+      return {
+        '--n-arrow-color': arrowColor,
+        '--n-loading-color': loadingColor,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': fontSize,
+        '--n-node-border-radius': nodeBorderRadius,
+        '--n-node-color-active': nodeColorActive,
+        '--n-node-color-hover': nodeColorHover,
+        '--n-node-color-pressed': nodeColorPressed,
+        '--n-node-text-color': nodeTextColor,
+        '--n-node-text-color-disabled': nodeTextColorDisabled,
+        '--n-drop-mark-color': dropMarkColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('tree', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
@@ -1214,37 +1254,11 @@ export default defineComponent({
       getScrollContent,
       handleAfterEnter,
       handleResize,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            fontSize,
-            nodeBorderRadius,
-            nodeColorHover,
-            nodeColorPressed,
-            nodeColorActive,
-            arrowColor,
-            loadingColor,
-            nodeTextColor,
-            nodeTextColorDisabled,
-            dropMarkColor
-          }
-        } = themeRef.value
-        return {
-          '--n-arrow-color': arrowColor,
-          '--n-loading-color': loadingColor,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-font-size': fontSize,
-          '--n-node-border-radius': nodeBorderRadius,
-          '--n-node-color-active': nodeColorActive,
-          '--n-node-color-hover': nodeColorHover,
-          '--n-node-color-pressed': nodeColorPressed,
-          '--n-node-text-color': nodeTextColor,
-          '--n-node-text-color-disabled': nodeTextColorDisabled,
-          '--n-drop-mark-color': dropMarkColor
-        }
-      }),
-      ...exposedMethods
+      handleKeydown: exposedMethods.handleKeydown,
+      handleKeyup: exposedMethods.handleKeyup,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -1262,7 +1276,7 @@ export default defineComponent({
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined
-    const treeClass = [
+    const treeClass: Array<string | boolean | undefined> = [
       `${mergedClsPrefix}-tree`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
@@ -1285,7 +1299,6 @@ export default defineComponent({
         />
       )
     }
-
     if (this.virtualScroll) {
       const { mergedTheme, internalScrollablePadding } = this
       const padding = getPadding(internalScrollablePadding || '0')
@@ -1304,37 +1317,43 @@ export default defineComponent({
           onFocusout={mergedFocusable ? handleFocusout : undefined}
         >
           {{
-            default: () => (
-              <VVirtualList
-                ref="virtualListInstRef"
-                items={this.fNodes}
-                itemSize={ITEM_SIZE}
-                ignoreItemResize={this.aip}
-                paddingTop={padding.top}
-                paddingBottom={padding.bottom}
-                style={[
-                  this.cssVars as CSSProperties,
-                  {
-                    paddingLeft: padding.left,
-                    paddingRight: padding.right
-                  }
-                ]}
-                onScroll={this.handleScroll}
-                onResize={this.handleResize}
-                showScrollbar={false}
-                itemResizable
-              >
-                {{
-                  default: ({ item }: { item: TmNode | MotionData }) =>
-                    createNode(item)
-                }}
-              </VVirtualList>
-            )
+            default: () => {
+              this.onRender?.()
+              return (
+                <VVirtualList
+                  ref="virtualListInstRef"
+                  items={this.fNodes}
+                  itemSize={ITEM_SIZE}
+                  ignoreItemResize={this.aip}
+                  paddingTop={padding.top}
+                  paddingBottom={padding.bottom}
+                  class={this.themeClass}
+                  style={[
+                    this.cssVars as CSSProperties,
+                    {
+                      paddingLeft: padding.left,
+                      paddingRight: padding.right
+                    }
+                  ]}
+                  onScroll={this.handleScroll}
+                  onResize={this.handleResize}
+                  showScrollbar={false}
+                  itemResizable
+                >
+                  {{
+                    default: ({ item }: { item: TmNode | MotionData }) =>
+                      createNode(item)
+                  }}
+                </VVirtualList>
+              )
+            }
           }}
         </NxScrollbar>
       )
     }
     const { internalScrollable } = this
+    treeClass.push(this.themeClass)
+    this.onRender?.()
     if (internalScrollable) {
       return (
         <NxScrollbar

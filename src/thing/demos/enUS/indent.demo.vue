@@ -1,5 +1,5 @@
 <markdown>
-# Content Indented
+# Content indented
 
 Content can be indented after avatar.
 </markdown>

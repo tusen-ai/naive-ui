@@ -1,5 +1,5 @@
 <markdown>
-# Hide Sider Content
+# Hide sider content
 
 Sometimes you don't want to see content inside sider after it's collapsed. Set `show-collapsed-content` to `false` on sider.
 </markdown>

@@ -1,5 +1,5 @@
 <markdown>
-# Customize Fields
+# Customize fields
 
 You can also target difference label and key properties of the objects you are using as nodes.
 </markdown>

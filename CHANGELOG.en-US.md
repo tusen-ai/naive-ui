@@ -4,6 +4,111 @@
 
 ### Fixes
 
+- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node, closes [#2605](https://github.com/TuSimple/naive-ui/issues/2605).
+- Fix `n-tree` may throw error when node is removed, closes [#2597](https://github.com/TuSimple/naive-ui/issues/2597).
+- Fix `useDialog` renders component with popup content with unexpected focus management behavior, closes [#2612](https://github.com/TuSimple/naive-ui/issues/2612).
+- Fix `n-tree-select`'s node sometimes can't be clicked when `check-strategy` is `'child'`.
+- Fix `n-tree-select`'s emitted value can be not corresponding to `check-strategy` when delete option in select box with `check-strategy` is not `'all'`.
+
+### Feats
+
+- `useDialog` supports `closeOnEsc` prop.
+- `n-data-table` exports `DataTableFilterState` type.
+- `n-data-table` exports `DataTableSortState` type.
+
+## 2.26.3
+
+### Fixes
+
+- Fix `n-button`'s loading icon shifts.
+
+## 2.26.2
+
+### Fixes
+
+- Fix `n-cascader` arrow's loading animation last for too long time.
+- Fix `n-select` menu doesn't follow theme.
+- Fix `n-tabs` throws error without child, closes [#809](https://github.com/TuSimple/naive-ui/issues/809).
+- Fix `n-menu`'s font color is not changed after theme is changed in chrome 99, closes [#2563](https://github.com/TuSimple/naive-ui/issues/2563). This is actual a bug of chrome, however we used a workaround and fixed it.
+- Fix `n-date-picker`'s date item click trigger area is as large as cell size only in `'date'` mode.
+
+### Feats
+
+- `n-dynamic-tags` `input` slot add `deactivate` prop, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575).
+- `n-space` add `RTL` support.
+- `n-avatar-group` add `RTL` support.
+- `n-badge` add `RTL` support.
+- `n-radio` add `RTL` support.
+- `n-auto-complete` adds `focus` method.
+- `n-auto-complete` adds `blur` method.
+
+## 2.26.1
+
+### Fixes
+
+- Fix `base-loading` use css transition rather than svg animateTrantion to prevent js blocking, close [#2506](https://github.com/TuSimple/naive-ui/issues/2506).
+- Fix `n-time` throws error caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-modal`'s mask doesn't have enter & leave transition.
+- Fix `n-timeline` has style conflict when vertical & horizontal `n-timeline` are nested, closes [#2549](https://github.com/TuSimple/naive-ui/issues/2549).
+- Fix `n-tree`'s arrow & loading switch animation isn't complete.
+
+### Feats
+
+- `n-time-line-item` adds `line-type` prop, closes [#2548](https://github.com/TuSimple/naive-ui/issues/2548).
+- `n-step` adds `icon` slot, closes [#2547](https://github.com/TuSimple/naive-ui/issues/2547).
+- `n-input-number` adds `autofocus` prop, closes [#2551](https://github.com/TuSimple/naive-ui/issues/2551).
+- `n-date-picker`'s date item click trigger area is as large as cell size, closes [#2552](https://github.com/TuSimple/naive-ui/issues/2552).
+
+## 2.26.0
+
+### Breaking Changes
+
+- Fix `n-tooltip`'s gap between arrow and body. `n-tooltip` can't be translucent anymore.
+
+### Feats
+
+- `n-popover` adds `arrow-point-to-center` prop.
+- `n-config-provider` adds `inline-theme-disabled` prop.
+
+## 2.25.8
+
+### Fixes
+
+- Fix `useMessage` loses styles.
+
+## 2.25.7
+
+### Fixes
+
+- Fix `n-time-picker` still shows action bar when `:actions="null"`.
+- Fix `n-input`'s content may overflow when `type="text"` and `autosize` is enabled, closes [#2505](https://github.com/TuSimple/naive-ui/issues/2505).
+- Fix `n-upload` put `file` field before other `FormData` fields, closes [#2504](https://github.com/TuSimple/naive-ui/issues/2504)
+- Fix `n-button` rtl support.
+- Fix `n-form-item-row` can't call `n-form-item`'s methods.
+
+### Feats
+
+- `n-collapse` add `RTL` support.
+- `useMessage` adds `create` methods.
+- `useMessage` adds `showIcon` prop, closes [#2495](https://github.com/TuSimple/naive-ui/issues/2495).
+- `useMessage` supports `'default'` `type`.
+- `n-checkbox` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
+- `n-radio` supports label line wrap, closes [#2419](https://github.com/TuSimple/naive-ui/issues/2419).
+- `n-checkbox` add `RTL` support.
+- `n-input` add `RTL` support.
+- `n-input-number` add `RTL` support.
+
+## 2.25.5 (2022-02-24)
+
+### Fixes
+
+- Fix `n-col` can't be wrapped correctly when `span=6`, closes [#2497](https://github.com/TuSimple/naive-ui/issues/2497).
+- Fix `n-tabs` doesn't display border-bottom in scroll area on large number of tabs, closes [#2500](https://github.com/TuSimple/naive-ui/issues/2500).
+
+## 2.25.3 (2022-02-23)
+
+### Fixes
+
 - Fix `n-switch` can't use keyboard operation when checked value is customized.
 - Fix `n-data-table`'s fixed column is covered by scroll content when placed inside popover.
 - Fix `n-data-table` when the `filterOptions` value is 0, the filter will not take effect, closes [#2392](https://github.com/TuSimple/naive-ui/issues/2392).
@@ -27,14 +132,14 @@
 - `n-scrollbar` adds `scrollBy` method, closes [#2435](https://github.com/TuSimple/naive-ui/issues/2435).
 - `n-data-table`'s `summary`'s `value` supports `VNodeChild`, closes [#2339](https://github.com/TuSimple/naive-ui/issues/2339).
 - `n-input-number` adds hold click to increment, closes [#1293](https://github.com/TuSimple/naive-ui/issues/1293).
-- `n-select` add `seprator` prop, closes [#2368](https://github.com/TuSimple/naive-ui/issues/2368).
+- `n-description` adds `titleTextColor` theme variable.
 
 ### i18n
 
 - Add skSK locale.
 - Fix frFR locale.
 
-## 2.25.2
+## 2.25.2 (2022-02-11)
 
 ### Fixes
 
@@ -1970,7 +2075,7 @@ See vue3.md
 ### Fixes
 
 - Fix the problem that `n-radio` can not be focused.
-- Fix the problem that `n-data-table`'s `max-height` style is broken. https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
+- Fix the problem that `n-data-table`'s `max-height` style is broken. <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
 
 ### Refactors
 

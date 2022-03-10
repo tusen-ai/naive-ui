@@ -1,5 +1,5 @@
 <markdown>
-# Use Item Count
+# Use item count
 
 Sometime you don't want set `page-count`. At that time you may use `item-count` and `page-size`.
 </markdown>
