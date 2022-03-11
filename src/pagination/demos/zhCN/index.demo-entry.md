@@ -26,6 +26,7 @@ page-size-option.vue
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | 非受控模式下的当前页 |  |
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
+| disabled | `boolean` | `false` | 是否禁用 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | item-count | `number` | `undefined` | 总条数 |  |
