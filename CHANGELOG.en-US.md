@@ -15,6 +15,7 @@
 - `useDialog` supports `closeOnEsc` prop.
 - `n-data-table` exports `DataTableFilterState` type.
 - `n-data-table` exports `DataTableSortState` type.
+- `n-form` adds `messages` prop.
 
 ## 2.26.3
 
