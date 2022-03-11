@@ -20,7 +20,8 @@ import type {
   LabelAlign,
   LabelPlacement,
   FormInst,
-  Size
+  Size,
+  FormMessages
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
@@ -57,6 +58,10 @@ const formProps = {
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
+  },
+  messages: {
+    type: Object as PropType<Partial<FormMessages>>,
+    default: () => {}
   }
 } as const
 

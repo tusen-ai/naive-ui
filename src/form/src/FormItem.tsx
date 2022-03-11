@@ -297,6 +297,7 @@ export default defineComponent({
       }
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
+      validator.messages(NForm?.props.messages)
       return await new Promise((resolve) => {
         void validator.validate(
           { [mergedPath]: value },
