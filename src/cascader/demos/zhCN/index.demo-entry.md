@@ -34,6 +34,7 @@ focus.vue
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |  |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
+| filter-menu-props | `HTMLAttributes` | `undefined` | 可过滤菜单的 DOM 属性 | NEXT_VERSION |
 | value-field | `string` | `'value'` | 替代 `CascaderOption` 中的 value 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |

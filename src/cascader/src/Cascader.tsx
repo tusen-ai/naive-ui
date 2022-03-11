@@ -116,6 +116,7 @@ const cascaderProps = {
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   menuProps: Object as PropType<HTMLAttributes>,
+  filterMenuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -988,9 +989,9 @@ export default defineComponent({
                     this.onRender?.()
                     return (
                       <CascaderSelectMenu
-                        {...this.menuProps}
+                        {...this.filterMenuProps}
                         ref="selectMenuInstRef"
-                        class={[this.themeClass, this.menuProps?.class]}
+                        class={[this.themeClass, this.filterMenuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && this.showSelectMenu}
                         pattern={this.pattern}
@@ -1001,7 +1002,7 @@ export default defineComponent({
                         separator={this.separator}
                         style={[
                           this.cssVars as CSSProperties,
-                          this.menuProps?.style
+                          this.filterMenuProps?.style
                         ]}
                       />
                     )

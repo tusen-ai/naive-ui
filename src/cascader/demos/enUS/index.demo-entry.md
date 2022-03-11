@@ -34,6 +34,7 @@ focus.vue
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
+| filter-menu-props | `HTMLAttributes` | `undefined` | The filter menu's dom props. | NEXT_VERSION |
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
