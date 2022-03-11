@@ -46,6 +46,8 @@ export const NDialog = defineComponent({
       useConfig(props)
     // draggable
     const dialogElementRef = ref<HTMLDivElement | null>(null)
+    const xRef = ref(0)
+    const yRef = ref(0)
     const topRef = ref('50%')
     const leftRef = ref('50%')
     const mouseClientX = ref(0)
@@ -78,20 +80,31 @@ export const NDialog = defineComponent({
       topRef.value = `${parseInt(topRef.value, 10) + dY}px`
       leftRef.value = `${parseInt(leftRef.value, 10) + dX}px`
 
+      xRef.value = xRef.value - dX
+      yRef.value = yRef.value - dY
+
       mouseClientX.value = e.clientX
       mouseClientY.value = e.clientY
     }
     function handleMouseUp (e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
+
       off('mousemove', window, handleMouseMove, true)
       off('mouseup', window, handleMouseUp, true)
+
+      if (dialogElementRef.value === null || !props.draggable) return
+      dialogElementRef.value.style.transformOrigin = `${xRef.value}px ${yRef.value}px`
     }
     function handleTitleMouseDown (e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       if (dialogElementRef.value === null || !props.draggable) return
       const computedStyle = getComputedStyle(dialogElementRef.value)
+
+      xRef.value = parseInt(computedStyle.transformOrigin.split(' ')[0], 10)
+      yRef.value = parseInt(computedStyle.transformOrigin.split(' ')[1], 10)
+
       topRef.value = computedStyle.top
       leftRef.value = computedStyle.left
       mouseClientX.value = e.clientX

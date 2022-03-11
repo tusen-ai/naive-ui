@@ -129,7 +129,6 @@ export default defineComponent({
       })
     }
     function handleBeforeLeave (el: HTMLElement): void {
-      el.style.transformOrigin = styleTransformOrigin()
       props.onBeforeLeave()
     }
     function handleAfterLeave (): void {
