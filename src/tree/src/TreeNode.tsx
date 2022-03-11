@@ -211,8 +211,12 @@ const TreeNode = defineComponent({
       selectable: computed(
         () =>
           NTree.selectableRef.value &&
-          (NTree.mergedCheckStrategyRef.value === 'child'
-            ? props.tmNode.isLeaf
+          (NTree.internalTreeSelect
+            ? NTree.multipleRef.value
+              ? true
+              : NTree.mergedCheckStrategyRef.value === 'child'
+                ? props.tmNode.isLeaf
+                : true
             : true)
       ),
       internalScrollable: NTree.internalScrollableRef,

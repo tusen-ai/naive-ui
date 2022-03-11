@@ -63,7 +63,7 @@ export default defineComponent({
     return {
       cascade: ref(false),
       multiple: ref(false),
-      checkStrategy: ref('all'),
+      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
       checkable: ref(false),
       options: [
         {

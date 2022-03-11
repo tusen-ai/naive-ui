@@ -21,6 +21,7 @@ batch-render.vue
 switcher-icon.vue
 node-props.vue
 check-strategy-debug.vue
+change-debug.vue
 ```
 
 ## API

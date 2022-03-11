@@ -107,6 +107,8 @@ export interface TreeInjection {
   renderSwitcherIconRef: Ref<RenderSwitcherIcon | undefined>
   labelFieldRef: Ref<string>
   nodePropsRef: Ref<TreeNodeProps | undefined>
+  multipleRef: Ref<boolean>
+  internalTreeSelect: boolean
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
