@@ -55,6 +55,7 @@ import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
+  TreeSelectDropInfo,
   TreeSelectOption,
   Value
 } from './interface'
@@ -65,6 +66,8 @@ import {
   treeOption2SelectOptionWithPath
 } from './utils'
 import style from './styles/index.cssr'
+
+type OnLoad = (node: TreeSelectOption) => Promise<void>
 
 const props = {
   ...(useTheme.props as ThemeProps<TreeSelectTheme>),
@@ -95,6 +98,7 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
+  remote: Boolean,
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
@@ -131,7 +135,11 @@ const props = {
   },
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
+  onDrop: [Function, Array] as PropType<
+  MaybeArray<(e: TreeSelectDropInfo) => void>
+  >,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -827,6 +835,7 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
+                                  remote={this.remote}
                                   virtualScroll={
                                     this.consistentMenuWidth &&
                                     this.virtualScroll
@@ -842,6 +851,8 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
+                                  onDrop={this.onDrop}
+                                  onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
                                   }

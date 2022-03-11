@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-drop` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `isLeaf` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+
 ## 2.26.4
 
 ### Fixes

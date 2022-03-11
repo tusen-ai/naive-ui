@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` add `on-drop` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` add `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` add `isLeaf` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+
 ## 2.26.4
 
 ### Fixes
