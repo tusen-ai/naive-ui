@@ -143,4 +143,18 @@ describe('n-dynamic-input', () => {
     expect(onRemove).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should work with `create-button-default` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: []
+      },
+      slots: {
+        'create-button-default': () => 'test'
+      }
+    })
+
+    expect(wrapper.find('button').text()).toBe('test')
+    wrapper.unmount()
+  })
 })
