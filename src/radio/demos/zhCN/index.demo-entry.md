@@ -12,6 +12,7 @@ group.vue
 button-group.vue
 size.vue
 radio-focus-debug.vue
+rtl-debug.vue
 ```
 
 ## API

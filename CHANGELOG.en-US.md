@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 2.26.4
+
+### Fixes
+
+- Fix `n-tree-select`s in `multiple` mode cannot delete options whose `default-value` attribute contains parent node, closes [#2605](https://github.com/TuSimple/naive-ui/issues/2605).
+- Fix `n-tree` may throw error when node is removed, closes [#2597](https://github.com/TuSimple/naive-ui/issues/2597).
+- Fix `useDialog` renders component with popup content with unexpected focus management behavior, closes [#2612](https://github.com/TuSimple/naive-ui/issues/2612).
+- Fix `n-tree-select`'s node sometimes can't be clicked when `check-strategy` is `'child'`.
+- Fix `n-tree-select`'s emitted value can be not corresponding to `check-strategy` when delete option in select box with `check-strategy` is not `'all'`.
+
+### Feats
+
+- `useDialog` supports `closeOnEsc` prop.
+- `n-data-table` exports `DataTableFilterState` type.
+- `n-data-table` exports `DataTableSortState` type.
+
+## 2.26.3
+
+### Fixes
+
+- Fix `n-button`'s loading icon shifts.
+
+## 2.26.2
+
+### Fixes
+
+- Fix `n-cascader` arrow's loading animation last for too long time.
+- Fix `n-select` menu doesn't follow theme.
+- Fix `n-tabs` throws error without child, closes [#809](https://github.com/TuSimple/naive-ui/issues/809).
+- Fix `n-menu`'s font color is not changed after theme is changed in chrome 99, closes [#2563](https://github.com/TuSimple/naive-ui/issues/2563). This is actual a bug of chrome, however we used a workaround and fixed it.
+- Fix `n-date-picker`'s date item click trigger area is as large as cell size only in `'date'` mode.
+
+### Feats
+
+- `n-dynamic-tags` `input` slot add `deactivate` prop, closes [#2575](https://github.com/TuSimple/naive-ui/issues/2575).
+- `n-space` add `RTL` support.
+- `n-avatar-group` add `RTL` support.
+- `n-badge` add `RTL` support.
+- `n-radio` add `RTL` support.
+- `n-auto-complete` adds `focus` method.
+- `n-auto-complete` adds `blur` method.
+
 ## 2.26.1
 
 ### Fixes

@@ -33,7 +33,7 @@ slot.vue
 
 ### DynamicTags Slots
 
-| 名称 | 参数 | 说明 |
-| --- | --- | --- |
-| input | `(info: { submit: (value: any) => void, })` | 自定义输入元素，由用户填充 |
-| trigger | `(info: { activate: () => void, disabled: boolean })` | 触发输入标签的组件或元素 |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| input | `(info: { submit: (value: any) => void, deactivate: () => void })` | 自定义输入元素，由用户填充 | `deactivate` 2.26.2 |
+| trigger | `(info: { activate: () => void, disabled: boolean })` | 触发输入标签的组件或元素 |  |

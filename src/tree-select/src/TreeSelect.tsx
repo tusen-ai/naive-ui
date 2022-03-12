@@ -520,19 +520,28 @@ export default defineComponent({
       // only work for multiple mode
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((key) => key === option.value)
+        const { value: treeMate } = dataTreeMateRef
+        // all visible checked keys
+        const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
+          mergedValue,
+          {
+            cascade: mergedCascadeRef.value
+          }
+        )
+        const index = checkedKeysValue.findIndex((key) => key === option.value)
         if (~index) {
           if (props.checkable) {
-            const { checkedKeys } = dataTreeMateRef.value.uncheck(
+            const { checkedKeys } = treeMate.uncheck(
               option.value,
-              mergedValue,
+              checkedKeysValue,
               {
+                checkStrategy: props.checkStrategy,
                 cascade: mergedCascadeRef.value
               }
             )
             doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
           } else {
-            const nextValue = Array.from(mergedValue)
+            const nextValue = Array.from(checkedKeysValue)
             nextValue.splice(index, 1)
             doUpdateValue(nextValue, getOptionsByKeys(nextValue))
           }
@@ -822,6 +831,7 @@ export default defineComponent({
                                     this.consistentMenuWidth &&
                                     this.virtualScroll
                                   }
+                                  internalTreeSelect
                                   internalDataTreeMate={this.dataTreeMate}
                                   internalDisplayTreeMate={this.displayTreeMate}
                                   internalHighlightKeySet={

@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 2.26.4
+
+### Fixes
+
+- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项，关闭 [#2605](https://github.com/TuSimple/naive-ui/issues/2605)
+- 修复 `n-tree` 在移除节点时可能抛出异常，关闭 [#2597](https://github.com/TuSimple/naive-ui/issues/2597)
+- 修复 `useDialog` 中使用带有弹出层的元素有异常的焦点管理行为，关闭 [#2612](https://github.com/TuSimple/naive-ui/issues/2612)
+- 修复 `n-tree-select` 当 `check-strategy` 为 `'child'` 时有的节点不能被点击
+- 修复 `n-tree-select` 在 `check-strategy` 不为 `'all'` 的时候从选框中删除时发出的值可能和 `check-strategy` 不对应
+
+### Feats
+
+- `useDialog` 支持 `closeOnEsc` 属性
+- `n-data-table` 导出 `DataTableFilterState` 类型
+- `n-data-table` 导出 `DataTableSortState` 类型
+
+## 2.26.3
+
+### Fixes
+
+- 修复 `n-button` loading 图标漂移
+
+## 2.26.2
+
+### Fixes
+
+- 修复 `n-cascader` 节点箭头 loading 显示过久
+- 修复 `n-select` 菜单不随主题变化
+- 修复 `n-tabs` 不能没有子节点，关闭 [#809](https://github.com/TuSimple/naive-ui/issues/809)
+- 修复 `n-menu` 切换主题时在 chrome 99 内字体颜色异常，关闭 [#2563](https://github.com/TuSimple/naive-ui/issues/2563)，这实际上是一个 chrome 的问题，我们进行了临时的修复
+- 修复 `n-date-picker` 仅 `'date'` 类型的扩大日期点击触发范围
+
+### Feats
+
+- `n-dynamic-tags` 的 `input` slot 新增 `deactivate` 属性，关闭 [#2575](https://github.com/TuSimple/naive-ui/issues/2575)
+- `n-space` 添加 `RTL` 支持
+- `n-avatar-group` 添加 `RTL` 支持
+- `n-badge` 添加 `RTL` 支持
+- `n-radio` 添加 `RTL` 支持
+- `n-auto-complete` 新增 `focus` 方法
+- `n-auto-complete` 新增 `blur` 方法
+
 ## 2.26.1
 
 ### Fixes
