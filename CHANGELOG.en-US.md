@@ -16,6 +16,7 @@
 - `n-data-table` exports `DataTableFilterState` type.
 - `n-data-table` exports `DataTableSortState` type.
 - `n-form` adds `messages` prop.
+- `n-badge` adds `value` slot.
 
 ## 2.26.3
 
