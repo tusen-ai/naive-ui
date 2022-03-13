@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-badge` 新增 `value` slot
+- `n-form` 新增 `messages` 属性
+
 ## 2.26.4
 
 ### Fixes
@@ -15,8 +22,6 @@
 - `useDialog` 支持 `closeOnEsc` 属性
 - `n-data-table` 导出 `DataTableFilterState` 类型
 - `n-data-table` 导出 `DataTableSortState` 类型
-- `n-form` adds `messages` prop.
-- `n-badge` adds `value` slot.
 
 ## 2.26.3
 

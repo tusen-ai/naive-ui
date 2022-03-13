@@ -14,9 +14,8 @@ Insert some custom content in it.
     </n-badge>
     <n-badge processing>
       <n-avatar />
-
       <template #value>
-        <n-icon><md-lock /></n-icon>
+        <n-icon :component="LockClosedOutline" />
       </template>
     </n-badge>
   </n-space>
@@ -24,14 +23,13 @@ Insert some custom content in it.
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { MdLock } from '@vicons/ionicons4'
+import { LockClosedOutline } from '@vicons/ionicons5'
 
 export default defineComponent({
-  components: {
-    MdLock
-  },
   setup () {
-    return {}
+    return {
+      LockClosedOutline
+    }
   }
 })
 </script>

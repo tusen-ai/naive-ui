@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-badge` adds `value` slot.
+- `n-form` adds `messages` prop.
+
 ## 2.26.4
 
 ### Fixes
@@ -15,8 +22,6 @@
 - `useDialog` supports `closeOnEsc` prop.
 - `n-data-table` exports `DataTableFilterState` type.
 - `n-data-table` exports `DataTableSortState` type.
-- `n-form` adds `messages` prop.
-- `n-badge` adds `value` slot.
 
 ## 2.26.3
 
