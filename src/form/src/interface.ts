@@ -1,5 +1,10 @@
 import { Ref } from 'vue'
-import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
+import {
+  ValidateError,
+  RuleItem,
+  ValidateOption,
+  ValidateMessages
+} from 'async-validator'
 import { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -90,3 +95,5 @@ export interface FormInst {
 }
 
 export type FormValidationStatus = 'success' | 'error' | 'warning'
+
+export interface FormValidateMessages extends ValidateMessages {}

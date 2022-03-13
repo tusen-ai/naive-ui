@@ -677,21 +677,27 @@ export default defineComponent({
                       }
                     }
                     const hoverKey = isCrossRowTd ? this.hoverKey : null
-                    const { ellipsis } = column
+                    const { ellipsis, cellProps } = column
+                    const resolvedCellProps = cellProps?.(rowData, rowIndex)
                     return (
                       <td
+                        {...resolvedCellProps}
                         key={colKey}
-                        style={{
-                          textAlign: column.align || undefined,
-                          left: pxfy(fixedColumnLeftMap[colKey]?.start),
-                          right: pxfy(fixedColumnRightMap[colKey]?.start)
-                        }}
+                        style={[
+                          {
+                            textAlign: column.align || undefined,
+                            left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                            right: pxfy(fixedColumnRightMap[colKey]?.start)
+                          },
+                          resolvedCellProps?.style || ''
+                        ]}
                         colspan={mergedColSpan}
                         rowspan={isVirtual ? undefined : mergedRowSpan}
                         data-col-key={colKey}
                         class={[
                           `${mergedClsPrefix}-data-table-td`,
                           column.className,
+                          resolvedCellProps?.class,
                           isSummary &&
                             `${mergedClsPrefix}-data-table-td--summary`,
                           ((hoverKey !== null &&

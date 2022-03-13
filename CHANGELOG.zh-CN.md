@@ -5,9 +5,12 @@
 ### Feats
 
 - `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
-- `n-tree-select` 新增 `on-drop` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
 - `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
-- `n-tree-select` 新增 `isLeaf` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-cascader` 添加 `filter-menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-badge` 新增 `value` slot
+- `n-form` 新增 `messages` 属性
+- `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
 
 ## 2.26.4
 

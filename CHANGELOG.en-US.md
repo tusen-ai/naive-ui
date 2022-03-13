@@ -5,9 +5,12 @@
 ### Feats
 
 - `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
-- `n-tree-select` add `on-drop` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
 - `n-tree-select` add `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
-- `n-tree-select` add `isLeaf` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
+- `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
+- `n-badge` adds `value` slot.
+- `n-form` adds `messages` prop.
+- `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 
 ## 2.26.4
 
