@@ -21,7 +21,7 @@ import type {
   LabelPlacement,
   FormInst,
   Size,
-  FormMessages
+  FormValidateMessages
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
@@ -59,10 +59,7 @@ const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  messages: {
-    type: Object as PropType<Partial<FormMessages>>,
-    default: () => {}
-  }
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>

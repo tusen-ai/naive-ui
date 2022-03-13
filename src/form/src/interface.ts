@@ -96,4 +96,4 @@ export interface FormInst {
 
 export type FormValidationStatus = 'success' | 'error' | 'warning'
 
-export interface FormMessages extends ValidateMessages {}
+export interface FormValidateMessages extends ValidateMessages {}

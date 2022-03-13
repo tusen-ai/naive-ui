@@ -31,7 +31,6 @@ custom-messages.vue
 | label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |  |
 | label-align | `'left' \| 'right'` | `-` | Label text alignment. |  |
 | label-placement | `'left' \| 'top'` | `'top'` | Label placement. |  |
-| messages | `FormItemRule` | `undefined` | Validation messages. |  |
 | model | `Object` | `{}` | The object to get/set form item values. |  |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |  |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
@@ -39,6 +38,7 @@ custom-messages.vue
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | NEXT_VERSION |
 
 #### FormItemRule Type
 
@@ -54,7 +54,7 @@ custom-messages.vue
 | trigger | `string \| Array<string>` | Trigger type. |
 | message | `string` | Text to show when validation fails. |
 
-#### FormMessages Type
+#### FormValidateMessages Type
 
 <n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
   Please see the default messages defined in <n-a href="https://github.com/yiminghe/async-validator/blob/master/src/messages.ts" target="_blank">async-validator</n-a> in order to see which messages you can override.
