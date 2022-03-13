@@ -11,7 +11,13 @@ import {
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
-import { color2Class, createKey, getTitleAttribute } from '../../_utils'
+import {
+  color2Class,
+  createKey,
+  getTitleAttribute,
+  isSlotEmpty,
+  resolveSlot
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
@@ -43,7 +49,7 @@ export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
 export default defineComponent({
   name: 'Badge',
   props: badgeProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
       useConfig(props)
     const themeRef = useTheme(
@@ -65,7 +71,9 @@ export default defineComponent({
       return (
         props.show &&
         (props.dot ||
-          (props.value !== undefined && !(!props.showZero && props.value <= 0)))
+          (props.value !== undefined &&
+            !(!props.showZero && props.value <= 0)) ||
+          !isSlotEmpty(slots.value))
       )
     })
     onMounted(() => {
@@ -150,14 +158,16 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-badge-sup`}
                   title={getTitleAttribute(this.value)}
                 >
-                  {!this.dot ? (
-                    <NBaseSlotMachine
-                      clsPrefix={mergedClsPrefix}
-                      appeared={this.appeared}
-                      max={this.max}
-                      value={this.value}
-                    />
-                  ) : null}
+                  {resolveSlot($slots.value, () => [
+                    !this.dot ? (
+                      <NBaseSlotMachine
+                        clsPrefix={mergedClsPrefix}
+                        appeared={this.appeared}
+                        max={this.max}
+                        value={this.value}
+                      />
+                    ) : null
+                  ])}
                   {this.processing ? (
                     <NBaseWave clsPrefix={mergedClsPrefix} />
                   ) : null}
