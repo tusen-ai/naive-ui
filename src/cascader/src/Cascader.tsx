@@ -947,17 +947,18 @@ export default defineComponent({
                 {{
                   default: () => {
                     this.onRender?.()
+                    const { menuProps } = this
                     return (
                       <CascaderMenu
-                        {...this.menuProps}
+                        {...menuProps}
                         ref="cascaderMenuInstRef"
-                        class={[this.themeClass, this.menuProps?.class]}
+                        class={[this.themeClass, menuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && !this.showSelectMenu}
                         menuModel={this.menuModel}
                         style={[
                           this.cssVars as CSSProperties,
-                          this.menuProps?.style
+                          menuProps?.style
                         ]}
                         onFocus={this.handleMenuFocus}
                         onBlur={this.handleMenuBlur}
@@ -987,11 +988,12 @@ export default defineComponent({
                 {{
                   default: () => {
                     this.onRender?.()
+                    const { filterMenuProps } = this
                     return (
                       <CascaderSelectMenu
-                        {...this.filterMenuProps}
+                        {...filterMenuProps}
                         ref="selectMenuInstRef"
-                        class={[this.themeClass, this.filterMenuProps?.class]}
+                        class={[this.themeClass, filterMenuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && this.showSelectMenu}
                         pattern={this.pattern}
@@ -1002,7 +1004,7 @@ export default defineComponent({
                         separator={this.separator}
                         style={[
                           this.cssVars as CSSProperties,
-                          this.filterMenuProps?.style
+                          filterMenuProps?.style
                         ]}
                       />
                     )
