@@ -10,7 +10,8 @@ import {
   CSSProperties,
   isReactive,
   watchEffect,
-  VNodeChild
+  VNodeChild,
+  HTMLAttributes
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -114,6 +115,8 @@ const cascaderProps = {
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  menuProps: Object as PropType<HTMLAttributes>,
+  filterMenuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -946,12 +949,16 @@ export default defineComponent({
                     this.onRender?.()
                     return (
                       <CascaderMenu
+                        {...this.menuProps}
                         ref="cascaderMenuInstRef"
-                        class={this.themeClass}
+                        class={[this.themeClass, this.menuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && !this.showSelectMenu}
                         menuModel={this.menuModel}
-                        style={this.cssVars as CSSProperties}
+                        style={[
+                          this.cssVars as CSSProperties,
+                          this.menuProps?.style
+                        ]}
                         onFocus={this.handleMenuFocus}
                         onBlur={this.handleMenuBlur}
                         onKeyup={this.handleMenuKeyUp}
@@ -982,8 +989,9 @@ export default defineComponent({
                     this.onRender?.()
                     return (
                       <CascaderSelectMenu
+                        {...this.filterMenuProps}
                         ref="selectMenuInstRef"
-                        class={this.themeClass}
+                        class={[this.themeClass, this.filterMenuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && this.showSelectMenu}
                         pattern={this.pattern}
@@ -992,7 +1000,10 @@ export default defineComponent({
                         filter={this.filter}
                         labelField={this.labelField}
                         separator={this.separator}
-                        style={this.cssVars as CSSProperties}
+                        style={[
+                          this.cssVars as CSSProperties,
+                          this.filterMenuProps?.style
+                        ]}
                       />
                     )
                   }
