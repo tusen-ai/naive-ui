@@ -55,7 +55,6 @@ import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
-  TreeSelectDropInfo,
   TreeSelectOption,
   Value
 } from './interface'
@@ -135,9 +134,6 @@ const props = {
   },
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
-  onDrop: [Function, Array] as PropType<
-  MaybeArray<(e: TreeSelectDropInfo) => void>
-  >,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<

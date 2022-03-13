@@ -52,7 +52,6 @@ debug.vue
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
-| on-drop | `(data: { node: TreeSelectOption, dragNode: TreeSelectOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. | NEXT_VERSION |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | NEXT_VERSION |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |  |

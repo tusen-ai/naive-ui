@@ -41,13 +41,6 @@ export type OnUpdateValueImpl = (
 
 export type Value = string | number | Array<string | number> | null
 
-export interface TreeSelectDropInfo {
-  event: DragEvent
-  node: TreeSelectOption
-  dragNode: TreeSelectOption
-  dropPosition: 'before' | 'inside' | 'after'
-}
-
 export interface TreeSelectInjection {
   pendingNodeKeyRef: Ref<string | number | null>
 }

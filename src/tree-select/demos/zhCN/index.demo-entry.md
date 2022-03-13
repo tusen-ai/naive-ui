@@ -54,7 +54,6 @@ debug.vue
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
-| on-drop | `(data: { node: TreeSelectOption, dragNode: TreeSelectOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 | NEXT_VERSION |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | NEXT_VERSION |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |  |

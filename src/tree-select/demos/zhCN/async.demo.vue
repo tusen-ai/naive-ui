@@ -5,17 +5,12 @@
 </markdown>
 
 <template>
-  <n-tree-select
-    remote
-    :on-load="handleLoad"
-    :options="options"
-    @drop="handleDrop"
-  />
+  <n-tree-select remote :on-load="handleLoad" :options="options" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { TreeSelectOption, TreeSelectDropInfo } from 'naive-ui'
+import { TreeSelectOption } from 'naive-ui'
 
 function nextLabel (currentLabel?: string): string {
   if (!currentLabel) return '道生一'
@@ -24,20 +19,6 @@ function nextLabel (currentLabel?: string): string {
   if (currentLabel === '二生三') return '三生万物'
   if (currentLabel === '三生万物') return '道生一'
   return ''
-}
-
-function findSiblingsAndIndex (
-  node: TreeSelectOption,
-  nodes?: TreeSelectOption[]
-): [TreeSelectOption[], number] | [null, null] {
-  if (!nodes) return [null, null]
-  for (let i = 0; i < nodes.length; ++i) {
-    const siblingNode = nodes[i]
-    if (siblingNode.key === node.key) return [nodes, i]
-    const [siblings, index] = findSiblingsAndIndex(node, siblingNode.children)
-    if (siblings && index !== null) return [siblings, index]
-  }
-  return [null, null]
 }
 
 export default defineComponent({
@@ -69,37 +50,6 @@ export default defineComponent({
             resolve()
           }, 1000)
         })
-      },
-      handleDrop ({ node, dragNode, dropPosition }: TreeSelectDropInfo) {
-        const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
-          dragNode,
-          optionsRef.value
-        )
-        if (dragNodeSiblings === null || dragNodeIndex === null) return
-        dragNodeSiblings.splice(dragNodeIndex, 1)
-        if (dropPosition === 'inside') {
-          if (node.children) {
-            node.children.unshift(dragNode)
-          } else {
-            node.children = [dragNode]
-          }
-        } else if (dropPosition === 'before') {
-          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
-            node,
-            optionsRef.value
-          )
-          if (nodeSiblings === null || nodeIndex === null) return
-          nodeSiblings.splice(nodeIndex, 0, dragNode)
-        } else if (dropPosition === 'after') {
-          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
-            node,
-            optionsRef.value
-          )
-          if (nodeSiblings === null || nodeIndex === null) return
-          nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
-        }
-
-        optionsRef.value = Array.from(optionsRef.value)
       }
     }
   }
