@@ -6,6 +6,7 @@
 
 - `n-badge` 新增 `value` slot
 - `n-form` 新增 `messages` 属性
+- `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
 
 ## 2.26.4
 
