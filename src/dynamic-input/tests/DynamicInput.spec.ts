@@ -116,6 +116,26 @@ describe('n-dynamic-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `key-placeholder` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        preset: 'pair',
+        value: [
+          {
+            key: '',
+            value: ''
+          }
+        ],
+        keyPlaceholder: 'test-key-placeholder'
+      }
+    })
+
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe(
+      'test-key-placeholder'
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `on-create` prop', async () => {
     const onCreate = jest.fn()
     const wrapper = mount(NDynamicInput, {
