@@ -28,7 +28,6 @@ render-tag.vue
 focus.vue
 render-person.vue
 tag-input.vue
-separator.vue
 ```
 
 ## API

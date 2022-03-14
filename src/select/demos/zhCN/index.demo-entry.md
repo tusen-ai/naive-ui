@@ -28,7 +28,7 @@ render-tag.vue
 focus.vue
 render-person.vue
 tag-input.vue
-separator.vue
+separators.vue
 placeholder-debug.vue
 menu-debug.vue
 render-debug.vue

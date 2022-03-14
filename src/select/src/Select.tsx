@@ -138,7 +138,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
-  separator: String,
+  separators: Array as PropType<string[]>,
   maxTagCount: [Number, String] as PropType<number | 'responsive'>,
   consistentMenuWidth: {
     type: Boolean,
@@ -551,29 +551,31 @@ export default defineComponent({
     }
     function handleSeparator (value: string): void {
       if (mergedDisabledRef.value) return
-      const { tag, remote, clearFilterAfterSelect, separator } = props
-      if (tag && !remote) {
-        if (separator) {
-          if (value.endsWith(separator)) { value = value.substring(0, value.length - 1) }
-          const beingCreatedOptions = value
-            .split(separator)
-            .map((value) => props.onCreate(value.trim()))
-          if (beingCreatedOptions.length) {
-            createdOptionsRef.value = beingCreatedOptions
-            beingCreatedOptionsRef.value = []
-          }
-        }
-      }
-      if (props.multiple) {
+      const { tag, remote, clearFilterAfterSelect, separators, onCreate } =
+        props
+      if (!separators) return
+      const newValues = value.split(new RegExp(`[${separators.join('')}]`))
+      console.log('newValuess', newValues)
+      let beingCreatedOptions: SelectOption[] = []
+      if (newValues.length > 1) {
+        beingCreatedOptions = newValues
+          .filter((v) => v.length > 0)
+          .map((v) => onCreate(v.trim()))
+        console.log(beingCreatedOptions)
+        createdOptionsRef.value = beingCreatedOptions
+        beingCreatedOptionsRef.value = []
         const changedValues = createClearedMultipleSelectValue(
           mergedValueRef.value
         )
+        if (clearFilterAfterSelect && createdOptionsRef.value.length === 0) {
+          patternRef.value = ''
+          return
+        }
         createdOptionsRef.value.forEach((option) => {
           const index = changedValues.findIndex(
             (value) => value === option.value
           )
           if (~index) {
-            changedValues.splice(index, 1)
             if (tag && !remote) {
               const createdOptionIndex = getCreatedOptionIndex(option.value)
               if (~createdOptionIndex) {
@@ -587,6 +589,8 @@ export default defineComponent({
           }
         })
         doUpdateValue(changedValues, getMergedOptions(changedValues))
+      } else {
+        beingCreatedOptionsRef.value = [onCreate(newValues[0].trim())]
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -601,14 +605,15 @@ export default defineComponent({
       }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
-      const { tag, remote, separator } = props
+      const { tag, remote, multiple, separators } = props
       doSearch(value)
       if (tag && !remote) {
         if (!value) {
           beingCreatedOptionsRef.value = []
           return
         }
-        if (separator && value.includes(separator)) {
+        if (multiple && Array.isArray(separators)) {
+          console.log(value, separators)
           handleSeparator(value)
         } else {
           const optionBeingCreated = props.onCreate(value)
@@ -672,6 +677,7 @@ export default defineComponent({
               openMenu()
               if (props.tag && activeWithoutMenuOpenRef.value) {
                 const beingCreatedOption = beingCreatedOptionsRef.value[0]
+                // console.log('add', beingCreatedOption)
                 if (beingCreatedOption) {
                   const optionValue = beingCreatedOption.value
                   const { value: mergedValue } = mergedValueRef
@@ -682,6 +688,7 @@ export default defineComponent({
                     ) {
                       // do nothing
                     } else {
+                      console.log('add', beingCreatedOption)
                       handleToggleByOption(beingCreatedOption)
                     }
                   } else {
