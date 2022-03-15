@@ -25,7 +25,6 @@
 - Fix `useDialog` renders component with popup content with unexpected focus management behavior, closes [#2612](https://github.com/TuSimple/naive-ui/issues/2612).
 - Fix `n-tree-select`'s node sometimes can't be clicked when `check-strategy` is `'child'`.
 - Fix `n-tree-select`'s emitted value can be not corresponding to `check-strategy` when delete option in select box with `check-strategy` is not `'all'`.
-- Fix `n-time` throws error in nuxt caused by `getTimezoneOffset`, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
 
 ### Feats
 

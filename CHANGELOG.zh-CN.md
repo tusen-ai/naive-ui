@@ -25,7 +25,6 @@
 - 修复 `useDialog` 中使用带有弹出层的元素有异常的焦点管理行为，关闭 [#2612](https://github.com/TuSimple/naive-ui/issues/2612)
 - 修复 `n-tree-select` 当 `check-strategy` 为 `'child'` 时有的节点不能被点击
 - 修复 `n-tree-select` 在 `check-strategy` 不为 `'all'` 的时候从选框中删除时发出的值可能和 `check-strategy` 不对应
-- 修复 `n-time` 在 nuxt 中由于 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 
 ### Feats
 
