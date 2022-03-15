@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
+
 ### Feats
 
 - `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
