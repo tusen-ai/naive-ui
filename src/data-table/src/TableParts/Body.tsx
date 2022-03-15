@@ -553,7 +553,7 @@ export default defineComponent({
               if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
-                  key: rowInfo.key,
+                  key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row
                   tmNode: rowInfo.tmNode as TmNode
                 })
               } else {

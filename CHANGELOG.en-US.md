@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
+
 ### Feats
 
 - `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
