@@ -64,7 +64,7 @@ filterable-debug.vue
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |  |
 | render-tag | `(props: { option: SelectBaseOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
-| separator | `string` | `undefined` | 分隔符，在和 `tag` 需要和 `filterable` 一起使用 | NEXT_VERSION |
+| separators | `string[]` | `undefined` | 分隔符，需要和 `tag` 一起使用 | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |

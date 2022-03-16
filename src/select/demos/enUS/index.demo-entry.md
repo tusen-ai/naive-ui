@@ -28,6 +28,7 @@ render-tag.vue
 focus.vue
 render-person.vue
 tag-input.vue
+separators.vue
 ```
 
 ## API
@@ -57,7 +58,7 @@ tag-input.vue
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
 | render-tag | `(props: { option: SelectBaseOption, handleClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
-| separator | `string` | `undefined` | Separator for tag input | NEXT_VERSION |
+| separators | `string[]` | `undefined` | Separators for tag input | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |

@@ -1,7 +1,7 @@
 <markdown>
-# 作为带分隔符的 Tag 框输入使用
+# Use separators to separate tags input
 
-使用 `tag` 和 `separators` 来作为带分隔符的 Tag 框输入使用。
+set `tag` and `separators`to use as tag input with `separators`.
 </markdown>
 
 <template>
@@ -11,7 +11,7 @@
     filterable
     multiple
     tag
-    placeholder="使用 ; 或 , 作为分隔符"
+    placeholder="use ; or , as separators"
     :separators="separators"
     :show-arrow="false"
   />

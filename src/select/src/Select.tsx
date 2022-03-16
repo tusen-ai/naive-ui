@@ -549,48 +549,61 @@ export default defineComponent({
         doUpdateValue(option.value, option)
       }
     }
-    function handleSeparator (value: string): void {
-      if (mergedDisabledRef.value) return
-      const { tag, remote, clearFilterAfterSelect, separators, onCreate } =
-        props
-      if (!separators) return
-      const newValues = value.split(new RegExp(`[${separators.join('')}]`))
-      console.log('newValuess', newValues)
-      let beingCreatedOptions: SelectOption[] = []
-      if (newValues.length > 1) {
-        beingCreatedOptions = newValues
-          .filter((v) => v.length > 0)
-          .map((v) => onCreate(v.trim()))
-        console.log(beingCreatedOptions)
-        createdOptionsRef.value = beingCreatedOptions
-        beingCreatedOptionsRef.value = []
-        const changedValues = createClearedMultipleSelectValue(
-          mergedValueRef.value
+    function isRepeat (optionBeingCreated: SelectOption): boolean {
+      return (
+        compitableOptionsRef.value.some(
+          (option) => option.value === optionBeingCreated.value
+        ) ||
+        createdOptionsRef.value.some(
+          (option) => option.value === optionBeingCreated.value
         )
-        if (clearFilterAfterSelect && createdOptionsRef.value.length === 0) {
-          patternRef.value = ''
-          return
-        }
-        createdOptionsRef.value.forEach((option) => {
-          const index = changedValues.findIndex(
-            (value) => value === option.value
-          )
-          if (~index) {
-            if (tag && !remote) {
-              const createdOptionIndex = getCreatedOptionIndex(option.value)
-              if (~createdOptionIndex) {
-                createdOptionsRef.value.splice(createdOptionIndex, 1)
-                if (clearFilterAfterSelect) patternRef.value = ''
-              }
-            }
+      )
+    }
+    function optionsFilter (
+      optionsBeingCreated: SelectOption | SelectOption[]
+    ): void {
+      if (Array.isArray(optionsBeingCreated)) {
+        optionsBeingCreated.forEach((optionBeingCreated, index) => {
+          if (isRepeat(optionBeingCreated)) {
+            beingCreatedOptionsRef.value.splice(index, 1)
+            handleToggleByOption(optionBeingCreated)
           } else {
-            changedValues.push(option.value)
-            if (clearFilterAfterSelect) patternRef.value = ''
+            beingCreatedOptionsRef.value.push(optionBeingCreated)
           }
         })
-        doUpdateValue(changedValues, getMergedOptions(changedValues))
       } else {
-        beingCreatedOptionsRef.value = [onCreate(newValues[0].trim())]
+        if (isRepeat(optionsBeingCreated)) {
+          beingCreatedOptionsRef.value = []
+        } else {
+          beingCreatedOptionsRef.value = [optionsBeingCreated]
+        }
+      }
+    }
+    function handleSeparator (value: string): void {
+      if (mergedDisabledRef.value) return
+      const { clearFilterAfterSelect, separators, onCreate } = props
+      if (!separators) return
+      const newValues = value.split(new RegExp(`[${separators.join('')}]`))
+      const optionsBeingCreated: SelectOption[] = []
+      if (newValues.length > 1) {
+        optionsBeingCreated.push(
+          ...newValues
+            .filter((v) => v.length > 0)
+            .map((v) => onCreate(v.trim()))
+        )
+        // check repeat
+        optionsFilter(optionsBeingCreated)
+        beingCreatedOptionsRef.value.forEach((option) =>
+          handleToggleByOption(option)
+        )
+        // only input separators
+        if (clearFilterAfterSelect && createdOptionsRef.value.length === 0) {
+          patternRef.value = ''
+        }
+      } else {
+        // no separator create by enter
+        const optionBeingCreated = props.onCreate(value.trim())
+        optionsFilter(optionBeingCreated)
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -612,23 +625,11 @@ export default defineComponent({
           beingCreatedOptionsRef.value = []
           return
         }
-        if (multiple && Array.isArray(separators)) {
-          console.log(value, separators)
+        if (multiple && Array.isArray(separators) && ~separators.length) {
           handleSeparator(value)
         } else {
           const optionBeingCreated = props.onCreate(value)
-          if (
-            compitableOptionsRef.value.some(
-              (option) => option.value === optionBeingCreated.value
-            ) ||
-            createdOptionsRef.value.some(
-              (option) => option.value === optionBeingCreated.value
-            )
-          ) {
-            beingCreatedOptionsRef.value = []
-          } else {
-            beingCreatedOptionsRef.value = [optionBeingCreated]
-          }
+          optionsFilter(optionBeingCreated)
         }
       }
     }
@@ -677,7 +678,6 @@ export default defineComponent({
               openMenu()
               if (props.tag && activeWithoutMenuOpenRef.value) {
                 const beingCreatedOption = beingCreatedOptionsRef.value[0]
-                // console.log('add', beingCreatedOption)
                 if (beingCreatedOption) {
                   const optionValue = beingCreatedOption.value
                   const { value: mergedValue } = mergedValueRef
@@ -688,7 +688,6 @@ export default defineComponent({
                     ) {
                       // do nothing
                     } else {
-                      console.log('add', beingCreatedOption)
                       handleToggleByOption(beingCreatedOption)
                     }
                   } else {
