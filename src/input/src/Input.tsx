@@ -155,8 +155,8 @@ const inputProps = {
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
   internalLoadingBeforeSuffix: Boolean,
-  passwordOnIcon: Object as PropType<Component>,
-  passwordOffIcon: Object as PropType<Component>,
+  passwordVisibleIcon: Object as PropType<Component>,
+  passwordInvisibleIcon: Object as PropType<Component>,
   /** deprecated */
   showPasswordToggle: Boolean
 }
@@ -1110,13 +1110,13 @@ export default defineComponent({
           )}
           {!this.pair &&
             resolveWrappedSlot($slots.suffix, (children) => {
-              const passwordOnIcon = this.passwordOnIcon ? (
-                h(this.passwordOnIcon)
+              const passwordVisibleIcon = this.passwordVisibleIcon ? (
+                h(this.passwordVisibleIcon)
               ) : (
                 <EyeIcon />
               )
-              const passwordOffIcon = this.passwordOffIcon ? (
-                h(this.passwordOffIcon)
+              const passwordInvisibleIcon = this.passwordInvisibleIcon ? (
+                h(this.passwordInvisibleIcon)
               ) : (
                 <EyeOffIcon />
               )
@@ -1168,8 +1168,8 @@ export default defineComponent({
                         {{
                           default: () =>
                             this.passwordVisible
-                              ? passwordOnIcon
-                              : passwordOffIcon
+                              ? passwordVisibleIcon
+                              : passwordInvisibleIcon
                         }}
                       </NBaseIcon>
                     ) : null
