@@ -15,7 +15,8 @@ import {
   provide,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  Fragment
+  Fragment,
+  Component
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -154,6 +155,8 @@ const inputProps = {
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
   internalLoadingBeforeSuffix: Boolean,
+  passwordOnIcon: Object as PropType<Component>,
+  passwordOffIcon: Object as PropType<Component>,
   /** deprecated */
   showPasswordToggle: Boolean
 }
@@ -1107,6 +1110,16 @@ export default defineComponent({
           )}
           {!this.pair &&
             resolveWrappedSlot($slots.suffix, (children) => {
+              const passwordOnIcon = this.passwordOnIcon ? (
+                h(this.passwordOnIcon)
+              ) : (
+                <EyeIcon />
+              )
+              const passwordOffIcon = this.passwordOffIcon ? (
+                h(this.passwordOffIcon)
+              ) : (
+                <EyeOffIcon />
+              )
               return children ||
                 this.clearable ||
                 this.showCount ||
@@ -1154,7 +1167,9 @@ export default defineComponent({
                       >
                         {{
                           default: () =>
-                            this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
+                            this.passwordVisible
+                              ? passwordOnIcon
+                              : passwordOffIcon
                         }}
                       </NBaseIcon>
                     ) : null
