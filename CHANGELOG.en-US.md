@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-input` add `password-visible-icon` and `password invisible icon` for ability to change password toggle icon
+
 ## NEXT_VERSION
 
 ### Fixes
