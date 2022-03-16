@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-input` add `password-visible-icon` and `password-invisible-icon` for ability to change password toggle icon
+- `n-input` add `password-visible-icon` and `password-invisible-icon` slot for ability to change password toggle icon
 
 ## NEXT_VERSION
 

@@ -15,8 +15,7 @@ import {
   provide,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  Fragment,
-  Component
+  Fragment
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -155,8 +154,6 @@ const inputProps = {
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
   internalLoadingBeforeSuffix: Boolean,
-  passwordVisibleIcon: Object as PropType<Component>,
-  passwordInvisibleIcon: Object as PropType<Component>,
   /** deprecated */
   showPasswordToggle: Boolean
 }
@@ -1110,15 +1107,13 @@ export default defineComponent({
           )}
           {!this.pair &&
             resolveWrappedSlot($slots.suffix, (children) => {
-              const passwordVisibleIcon = this.passwordVisibleIcon ? (
-                h(this.passwordVisibleIcon)
-              ) : (
-                <EyeIcon />
+              const passwordVisibleIcon = resolveSlot(
+                $slots['password-visible-icon'],
+                () => [<EyeIcon />]
               )
-              const passwordInvisibleIcon = this.passwordInvisibleIcon ? (
-                h(this.passwordInvisibleIcon)
-              ) : (
-                <EyeOffIcon />
+              const passwordInvisibleIcon = resolveSlot(
+                $slots['password-invisible-icon'],
+                () => [<EyeOffIcon />]
               )
               return children ||
                 this.clearable ||
