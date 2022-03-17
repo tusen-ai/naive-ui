@@ -16,6 +16,8 @@
 - `n-form` 新增 `messages` 属性
 - `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
 - `n-step` adds class to distinguish status.
+- `n-popconfirm` 新增 `negative-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
+- `n-popconfirm` 新增 `positive-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
 
 ## 2.26.4
 

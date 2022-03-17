@@ -4,7 +4,8 @@ import {
   defineComponent,
   provide,
   PropType,
-  ExtractPropTypes
+  ExtractPropTypes,
+  HTMLAttributes
 } from 'vue'
 import { NPopover, PopoverInst, PopoverTrigger } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
@@ -31,6 +32,8 @@ const popconfirmProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'click'
   },
+  positiveButtonProps: Object as PropType<HTMLAttributes>,
+  negativeButtonProps: Object as PropType<HTMLAttributes>,
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | any
   >,
