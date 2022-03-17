@@ -66,6 +66,8 @@ import {
 } from './utils'
 import style from './styles/index.cssr'
 
+type OnLoad = (node: TreeSelectOption) => Promise<void>
+
 const props = {
   ...(useTheme.props as ThemeProps<TreeSelectTheme>),
   bordered: {
@@ -95,6 +97,7 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
+  remote: Boolean,
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
@@ -132,6 +135,7 @@ const props = {
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -827,6 +831,7 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
+                                  remote={this.remote}
                                   virtualScroll={
                                     this.consistentMenuWidth &&
                                     this.virtualScroll
@@ -842,6 +847,8 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
+                                  onDrop={this.onDrop}
+                                  onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
                                   }

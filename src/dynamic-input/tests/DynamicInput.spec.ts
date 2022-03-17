@@ -116,6 +116,26 @@ describe('n-dynamic-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `key-placeholder` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        preset: 'pair',
+        value: [
+          {
+            key: '',
+            value: ''
+          }
+        ],
+        keyPlaceholder: 'test-key-placeholder'
+      }
+    })
+
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe(
+      'test-key-placeholder'
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `on-create` prop', async () => {
     const onCreate = jest.fn()
     const wrapper = mount(NDynamicInput, {
@@ -150,11 +170,25 @@ describe('n-dynamic-input', () => {
         value: []
       },
       slots: {
-        'create-button-default': () => 'test'
+        'create-button-default': () => 'test-content'
       }
     })
 
-    expect(wrapper.find('button').text()).toBe('test')
+    expect(wrapper.find('.n-button__content').text()).toBe('test-content')
+    wrapper.unmount()
+  })
+
+  it('should work with `create-button-icon` prop', async () => {
+    const wrapper = mount(NDynamicInput, {
+      props: {
+        value: []
+      },
+      slots: {
+        'create-button-icon': () => 'test-icon'
+      }
+    })
+
+    expect(wrapper.find('.n-icon-slot').text()).toBe('test-icon')
     wrapper.unmount()
   })
 })

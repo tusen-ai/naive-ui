@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
+
+### Feats
+
+- `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` add `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
+- `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
+- `n-badge` adds `value` slot.
+- `n-form` adds `messages` prop.
+- `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
+- `n-step` adds class to distinguish status.
+
 ## 2.26.4
 
 ### Fixes
