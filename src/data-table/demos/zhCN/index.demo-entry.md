@@ -96,6 +96,7 @@ height-debug
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
+| cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | NEXT_VERSION |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
 | className | `string` | `undefined` | 列的类名 |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |  |

@@ -150,7 +150,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-step`,
           this.themeClass,
-          descriptionNode && `${mergedClsPrefix}-step--show-description`
+          descriptionNode && `${mergedClsPrefix}-step--show-description`,
+          `${mergedClsPrefix}-step--${this.mergedStatus}-status`
         ]}
         style={this.cssVars as CSSProperties}
       >

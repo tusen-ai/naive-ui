@@ -25,3 +25,9 @@ Note: Different fonts from vfonts have different font weights. If you want to us
   <app />
 </n-config-provider>
 ```
+
+## Change Global Fonts by Customizing Theme
+
+If you don't use `vfont` and want change global fonts by customzing theme, you need to use `n-global-style` to achieve that. Components' font won't be responsive to `theme-overrides` without `n-global-style`.
+
+Note: Make `vfont` work without `n-global-style` is a compromised design (I think this is a correct behavior). In the next major version, global reset style won't contain font related style. They'll be all put inside `n-global-style` component.

@@ -27,3 +27,9 @@ app.use(naive)
   <app />
 </n-config-provider>
 ```
+
+## 通过定制主题修改全局字体
+
+如果你不打算使用 `vfonts` 并且想要通过主题调整修改其为别的字体，你需要使用 `n-global-style` 来做到这一点。在不使用 `n-global-style` 的情况下组件不会响应 `theme-overrides` 中的字体变更。
+
+题外话：不使用 `n-global-style` 就能让 `vfonts` 直接生效是一个设计上的妥协，在下个大的版本默认的全局 reset 样式将不再带有字体相关的样式，而是全部置于 `n-global-style` 组件中。

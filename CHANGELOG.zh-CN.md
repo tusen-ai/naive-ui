@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
+
+### Feats
+
+- `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-cascader` 添加 `filter-menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-badge` 新增 `value` slot
+- `n-form` 新增 `messages` 属性
+- `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
+- `n-step` adds class to distinguish status.
+
 ## 2.26.4
 
 ### Fixes
