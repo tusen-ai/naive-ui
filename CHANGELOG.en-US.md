@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+- Feat: add `th` locale
+
 ### Fixes
 
 - Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
