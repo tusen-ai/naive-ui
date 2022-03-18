@@ -160,6 +160,22 @@ describe('n-dynamic-tags', () => {
     wrapper.unmount()
   })
 
+  it('should work with `input-props` prop', async () => {
+    const wrapper = mount(NDynamicTags, {
+      props: {
+        defaultValue: ['教师']
+      }
+    })
+    await wrapper.find('button').trigger('click')
+    expect(wrapper.find('.n-input').classes()).not.toContain(
+      'n-input--disabled'
+    )
+
+    await wrapper.setProps({ inputProps: { disabled: true } })
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--disabled')
+    wrapper.unmount()
+  })
+
   it('should work with `input` slot', async () => {
     const wrapper = mount(NDynamicTags, {
       props: {
