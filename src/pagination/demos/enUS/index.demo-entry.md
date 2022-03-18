@@ -26,6 +26,7 @@ page-size-option.vue
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | Current page in uncontrolled mode. |  |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
+| goto-text | `string` | `undefined` | Fast jump to text content. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |

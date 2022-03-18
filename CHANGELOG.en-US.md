@@ -16,6 +16,7 @@
 - `n-form` adds `messages` prop.
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
+- `n-pagination` adds `goto-text` prop.
 
 ## 2.26.4
 
