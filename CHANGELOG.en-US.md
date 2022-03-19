@@ -5,6 +5,8 @@
 ### Fixes
 
 - Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
+- Fix `n-popconfirm` doesn't has `setShow` & `syncPosition` methods.
+- Fix `n-popselect` doesn't has `setShow` & `syncPosition` methods.
 
 ### Feats
 

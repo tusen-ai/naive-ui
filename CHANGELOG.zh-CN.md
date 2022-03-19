@@ -5,6 +5,8 @@
 ### Fixes
 
 - 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
+- 修复 `n-popconfirm` 缺少 `setShow` 和 `syncPosition` 方法
+- 修复 `n-popselect` 缺少 `setShow` 和 `syncPosition` 方法
 
 ### Feats
 
