@@ -17,6 +17,10 @@
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
 
+### i18n
+
+- Add thTH locale.
+
 ## 2.26.4
 
 ### Fixes
