@@ -17,6 +17,10 @@
 - `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
 - `n-step` adds class to distinguish status.
 
+### i18n
+
+- 新增 thTH locale.
+
 ## 2.26.4
 
 ### Fixes

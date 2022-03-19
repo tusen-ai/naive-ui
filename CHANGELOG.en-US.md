@@ -2,8 +2,6 @@
 
 ## NEXT_VERSION
 
-- Feat: add `th` locale
-
 ### Fixes
 
 - Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
@@ -18,6 +16,10 @@
 - `n-form` adds `messages` prop.
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
+
+### i18n
+
+- Add thTH locale.
 
 ## 2.26.4
 

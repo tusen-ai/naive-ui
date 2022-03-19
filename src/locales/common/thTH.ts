@@ -1,5 +1,7 @@
-const enUS = {
-  name: 'th',
+import type { NLocale } from './enUS'
+
+const thTH: NLocale = {
+  name: 'thTH',
   global: {
     undo: 'เลิกทำ',
     redo: 'ทำซ้ำ',
@@ -109,5 +111,4 @@ const enUS = {
   }
 }
 
-export type NLocale = typeof enUS
-export default enUS
+export default thTH
