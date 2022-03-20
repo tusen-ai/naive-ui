@@ -44,6 +44,7 @@ striped
 simple-editable
 switchable-editable
 context-menu.vue
+async-expand.vue
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
@@ -55,7 +56,7 @@ height-debug
 ### DataTable Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | 是否显示 border |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
@@ -84,6 +85,7 @@ height-debug
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |
+| on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |

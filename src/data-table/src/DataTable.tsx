@@ -38,7 +38,8 @@ import type {
   DataTableInst,
   OnUpdateExpandedRowKeys,
   CreateSummary,
-  CreateRowProps
+  CreateRowProps,
+  DataTableOnLoad
 } from './interface'
 import { dataTableInjectionKey } from './interface'
 import { useGroupHeader } from './use-group-header'
@@ -117,6 +118,7 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
   >,
@@ -303,6 +305,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
@@ -346,9 +349,6 @@ export default defineComponent({
         return selectionColumn?.options
       }),
       rawPaginatedDataRef,
-      hasChildrenRef: computed(() => {
-        return treeMateRef.value.maxLevel > 0
-      }),
       filterMenuCssVarsRef: computed(() => {
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
@@ -360,6 +360,7 @@ export default defineComponent({
           '--n-action-divider-color': actionDividerColor
         } as CSSProperties
       }),
+      onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),

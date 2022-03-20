@@ -1,6 +1,10 @@
 import { h, defineComponent, PropType } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
-import { NBaseIcon } from '../../../_internal'
+import {
+  NBaseIcon,
+  NBaseLoading,
+  NIconSwitchTransition
+} from '../../../_internal'
 
 export default defineComponent({
   name: 'DataTableExpandTrigger',
@@ -10,6 +14,7 @@ export default defineComponent({
       required: true
     },
     expanded: Boolean,
+    loading: Boolean,
     onClick: {
       type: Function as PropType<() => void>,
       required: true
@@ -25,9 +30,28 @@ export default defineComponent({
         {{
           default: () => {
             return (
-              <ChevronRightIcon
-                style={this.expanded ? 'transform: rotate(90deg);' : undefined}
-              />
+              <NIconSwitchTransition>
+                {{
+                  default: () =>
+                    this.loading ? (
+                      <NBaseLoading
+                        clsPrefix={this.clsPrefix}
+                        radius={85}
+                        strokeWidth={15}
+                        scale={0.88}
+                      />
+                    ) : (
+                      <ChevronRightIcon
+                        class={`${this.clsPrefix}-data-table-expand-trigger__icon`}
+                        style={
+                          this.expanded
+                            ? 'transform: rotate(90deg);'
+                            : undefined
+                        }
+                      />
+                    )
+                }}
+              </NIconSwitchTransition>
             )
           }
         }}
