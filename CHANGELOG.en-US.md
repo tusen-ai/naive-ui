@@ -24,6 +24,7 @@
 - `n-input` adds `password-visible-icon` slot.
 - `n-input` adds `password-invisible-icon` slot.
 - `n-select` adds `status` prop.
+- `n-input-number` adds `status` prop.
 
 ### i18n
 

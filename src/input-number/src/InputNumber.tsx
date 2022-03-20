@@ -11,6 +11,7 @@ import {
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import { on } from 'evtd'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'
@@ -80,6 +81,7 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
