@@ -34,6 +34,7 @@
 - `n-time-picker` adds `status` prop.
 - `n-mention` adds `status` prop.
 - `n-tree-select` adds `status` prop.
+- `n-menu` adds `showOption` method, closes [#2562](https://github.com/TuSimple/naive-ui/issues/2562).
 
 ### i18n
 
@@ -1460,7 +1461,7 @@
 - Fix `n-select` doesn't scroll to selected item when menu is opened, closes [#346](https://github.com/TuSimple/naive-ui/issues/346).
 - Fix `n-tab-pane` throws error when using v-if.
 - Fix `n-modal` still closes when `on-negative-click` returns `false`.
-- Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
+- Fix `n-collapse` `defaultExpandedNames` does not work in accordion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
 - Fix `n-tag` lacks `on-update-checked` prop.
 - Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 

@@ -34,6 +34,7 @@
 - `n-time-picker` 新增 `status` 属性
 - `n-mention` 新增 `status` 属性
 - `n-tree-select` 新增 `status` 属性
+- `n-menu` 新增 `showOption` 方法，关闭 [#2562](https://github.com/TuSimple/naive-ui/issues/2562)
 
 ### i18n
 
