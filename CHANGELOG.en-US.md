@@ -12,8 +12,8 @@
 
 ### Feats
 
-- `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
-- `n-tree-select` add `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` adds `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` adds `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
 - `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-badge` adds `value` slot.
@@ -21,8 +21,9 @@
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
 - `n-pagination` adds `goto` slot.
-- `n-input` add `password-visible-icon` slot.
-- `n-input` add `password-invisible-icon` slot.
+- `n-input` adds `password-visible-icon` slot.
+- `n-input` adds `password-invisible-icon` slot.
+- `n-select` adds `status` prop.
 
 ### i18n
 

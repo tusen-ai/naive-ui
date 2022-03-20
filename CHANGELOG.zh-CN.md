@@ -23,6 +23,7 @@
 - `n-pagination` 新增 `goto` slot
 - `n-input` 新增 `password-visible-icon` slot
 - `n-input` 新增 `password-invisible-icon` slot
+- `n-select` 新增 `status` 属性
 
 ### i18n
 
