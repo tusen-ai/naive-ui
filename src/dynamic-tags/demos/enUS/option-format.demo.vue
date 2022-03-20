@@ -14,17 +14,18 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     const valueRef = ref([
-      { label: '你没见过不等于没有', value: 'hello world 1' },
       {
-        label: '不要给自己设限',
-        value: 'hello world 2'
+        label: 'Dig It',
+        value: 'hello world 1'
       },
+      { label: 'Maggie Mae', value: 'hello world 2' },
+
       {
-        label: '不要说连升两级',
+        label: 'I Me Mine',
         value: 'hello world 3'
       },
       {
-        label: '直接升到 CEO 都是有可能的',
+        label: "I've Got a Feeling",
         value: 'hello world 4'
       }
     ])
