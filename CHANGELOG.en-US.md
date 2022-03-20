@@ -35,6 +35,7 @@
 - `n-mention` adds `status` prop.
 - `n-tree-select` adds `status` prop.
 - `n-menu` adds `showOption` method, closes [#2562](https://github.com/TuSimple/naive-ui/issues/2562).
+- `n-dynamic-tags` add `render-tag` prop, closes [#2526](https://github.com/TuSimple/naive-ui/issues/2526).
 
 ### i18n
 

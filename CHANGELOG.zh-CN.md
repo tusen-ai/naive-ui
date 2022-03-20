@@ -35,6 +35,7 @@
 - `n-mention` 新增 `status` 属性
 - `n-tree-select` 新增 `status` 属性
 - `n-menu` 新增 `showOption` 方法，关闭 [#2562](https://github.com/TuSimple/naive-ui/issues/2562)
+- `n-dynamic-tags` 新增 `render-tag` 属性，关闭 [#2526](https://github.com/TuSimple/naive-ui/issues/2526)
 
 ### i18n
 

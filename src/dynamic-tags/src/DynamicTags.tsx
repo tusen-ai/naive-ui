@@ -7,7 +7,8 @@ import {
   computed,
   nextTick,
   toRef,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
@@ -49,6 +50,7 @@ const dynamicTagsProps = {
   inputProps: Object as PropType<InputProps>,
   max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
+  renderTag: Function as PropType<(tag: string, index: number) => VNodeChild>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
@@ -187,7 +189,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cssVars, mergedClsPrefix, onRender } = this
+    const { mergedTheme, cssVars, mergedClsPrefix, onRender, renderTag } = this
     onRender?.()
     return (
       <NSpace
@@ -223,23 +225,27 @@ export default defineComponent({
               $slots
             } = this
             return this.mergedValue
-              .map((tag, index) => (
-                <NTag
-                  key={index}
-                  theme={mergedTheme.peers.Tag}
-                  themeOverrides={mergedTheme.peerOverrides.Tag}
-                  style={tagStyle}
-                  type={type}
-                  round={round}
-                  size={size}
-                  color={color}
-                  closable={closable}
-                  disabled={mergedDisabled}
-                  onClose={() => handleCloseClick(index)}
-                >
-                  {{ default: () => tag }}
-                </NTag>
-              ))
+              .map((tag, index) =>
+                renderTag ? (
+                  renderTag(tag, index)
+                ) : (
+                  <NTag
+                    key={index}
+                    theme={mergedTheme.peers.Tag}
+                    themeOverrides={mergedTheme.peerOverrides.Tag}
+                    style={tagStyle}
+                    type={type}
+                    round={round}
+                    size={size}
+                    color={color}
+                    closable={closable}
+                    disabled={mergedDisabled}
+                    onClose={() => handleCloseClick(index)}
+                  >
+                    {{ default: () => tag }}
+                  </NTag>
+                )
+              )
               .concat(
                 showInput ? (
                   $slots.input ? (
