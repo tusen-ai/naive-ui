@@ -25,6 +25,12 @@
 - `n-input` adds `password-invisible-icon` slot.
 - `n-select` adds `status` prop.
 - `n-input-number` adds `status` prop.
+- `n-auto-complete` adds `status` prop.
+- `n-cascader` adds `status` prop.
+- `n-date-picker` adds `status` prop.
+- `n-time-picker` adds `status` prop.
+- `n-mention` adds `status` prop.
+- `n-tree-select` adds `status` prop.
 
 ### i18n
 

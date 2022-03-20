@@ -25,6 +25,12 @@
 - `n-input` 新增 `password-invisible-icon` slot
 - `n-select` 新增 `status` 属性
 - `n-input-number` 新增 `status` 属性
+- `n-auto-complete` 新增 `status` 属性
+- `n-cascader` 新增 `status` 属性
+- `n-date-picker` 新增 `status` 属性
+- `n-time-picker` 新增 `status` 属性
+- `n-mention` 新增 `status` 属性
+- `n-tree-select` 新增 `status` 属性
 
 ### i18n
 

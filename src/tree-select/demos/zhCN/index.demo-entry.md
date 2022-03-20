@@ -14,6 +14,7 @@ filterable.vue
 check-strategy-debug.vue
 action.vue
 async.vue
+status.vue
 debug.vue
 ```
 
@@ -51,6 +52,7 @@ debug.vue
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |

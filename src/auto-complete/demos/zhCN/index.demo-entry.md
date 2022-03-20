@@ -12,6 +12,7 @@ custom-input.vue
 after-select.vue
 show-options-by-value.vue
 customized-rendering.vue
+status.vue
 ```
 
 ## API
@@ -34,6 +35,7 @@ customized-rendering.vue
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 | 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |

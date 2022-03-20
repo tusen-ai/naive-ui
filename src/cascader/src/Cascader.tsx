@@ -23,6 +23,7 @@ import {
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
+import type { FormValidationStatus } from '../../form/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { NInternalSelection } from '../../_internal'
 import type { InternalSelectionInst } from '../../_internal'
@@ -140,6 +141,7 @@ const cascaderProps = {
   renderLabel: Function as PropType<
   (option: CascaderOption, checked: boolean) => VNodeChild
   >,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<

@@ -20,6 +20,8 @@ import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { FormValidationStatus } from '../../form/src/interface'
+import { DateIcon, ToIcon } from '../../_internal/icons'
 import type { DatePickerTheme } from '../styles/light'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
@@ -32,7 +34,6 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { DateIcon, ToIcon } from '../../_internal/icons'
 import { warn, call, useAdjustedTo, createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
@@ -112,6 +113,7 @@ const datePickerProps = {
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
   closeOnSelect: Boolean,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,

@@ -20,6 +20,7 @@ import {
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { useFormItem, useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -92,6 +93,7 @@ const autoCompleteProps = {
     default: () => []
   },
   zIndex: Number,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,

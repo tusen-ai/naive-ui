@@ -16,6 +16,7 @@ check-strategy.vue
 custom-field.vue
 custom-render.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -49,6 +50,7 @@ focus.vue
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | value | `string \| number \| Array<number \| string>` | `undefined` | 级联选择的数据受控 |  |
 | virtual-scroll | `boolean` | `true` | 是否支持虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
