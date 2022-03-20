@@ -19,7 +19,6 @@ export default defineComponent({
         value: 'hello world 1'
       },
       { label: 'Maggie Mae', value: 'hello world 2' },
-
       {
         label: 'I Me Mine',
         value: 'hello world 3'

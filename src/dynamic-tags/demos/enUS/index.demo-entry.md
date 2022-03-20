@@ -27,7 +27,7 @@ option-format.vue
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |  |
 | max | `number` | `undefined` | Maximum number of tags. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
-| render-tag | `(tag: string, index: number) => VNodeChild` | `undefined` | custom render tag. | NEXT_VERSION |
+| render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | custom render tag. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
