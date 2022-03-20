@@ -1107,14 +1107,6 @@ export default defineComponent({
           )}
           {!this.pair &&
             resolveWrappedSlot($slots.suffix, (children) => {
-              const passwordVisibleIcon = resolveSlot(
-                $slots['password-visible-icon'],
-                () => [<EyeIcon />]
-              )
-              const passwordInvisibleIcon = resolveSlot(
-                $slots['password-invisible-icon'],
-                () => [<EyeOffIcon />]
-              )
               return children ||
                 this.clearable ||
                 this.showCount ||
@@ -1161,10 +1153,17 @@ export default defineComponent({
                         onClick={this.handlePasswordToggleClick}
                       >
                         {{
-                          default: () =>
-                            this.passwordVisible
-                              ? passwordVisibleIcon
-                              : passwordInvisibleIcon
+                          default: () => {
+                            return this.passwordVisible
+                              ? resolveSlot(
+                                $slots['password-visible-icon'],
+                                () => [<EyeIcon />]
+                              )
+                              : resolveSlot(
+                                $slots['password-invisible-icon'],
+                                () => [<EyeOffIcon />]
+                              )
+                          }
                         }}
                       </NBaseIcon>
                     ) : null

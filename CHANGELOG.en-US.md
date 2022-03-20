@@ -2,10 +2,6 @@
 
 ## Pending
 
-### Feats
-
-- `n-input` add `password-visible-icon` and `password-invisible-icon` slot for ability to change password toggle icon
-
 ## NEXT_VERSION
 
 ### Fixes
@@ -25,6 +21,8 @@
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
 - `n-pagination` adds `goto` slot.
+- `n-input` add `password-visible-icon` slot.
+- `n-input` add `password-invisible-icon` slot.
 
 ### i18n
 
