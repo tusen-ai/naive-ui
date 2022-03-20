@@ -6,7 +6,7 @@
 
 <template>
   <n-space vertical>
-    <n-input status="warning" placeholder="" />
-    <n-input status="error" placeholder="" />
+    <n-tree-select status="warning" placeholder="" />
+    <n-tree-select status="error" placeholder="" />
   </n-space>
 </template>

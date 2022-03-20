@@ -16,8 +16,9 @@ import type { ThemeProps } from '../../_mixins'
 import { popconfirmLight } from '../styles'
 import type { PopconfirmTheme } from '../styles'
 import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
-import style from './styles/index.cssr'
 import { popconfirmInjectionKey } from './interface'
+import type { PopconfirmInst } from './interface'
+import style from './styles/index.cssr'
 
 const popconfirmProps = {
   ...(useTheme.props as ThemeProps<PopconfirmTheme>),
@@ -86,7 +87,16 @@ export default defineComponent({
       mergedClsPrefixRef,
       props
     })
+    const exposedMethods: PopconfirmInst = {
+      setShow (value) {
+        popoverInstRef.value?.setShow(value)
+      },
+      syncPosition () {
+        popoverInstRef.value?.syncPosition()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedTheme: themeRef,
       popoverInstRef,
       handlePositiveClick,

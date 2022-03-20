@@ -6,7 +6,7 @@
 
 <template>
   <n-space vertical>
-    <n-input status="warning" placeholder="" />
-    <n-input status="error" placeholder="" />
+    <n-date-picker status="warning" />
+    <n-date-picker status="error" />
   </n-space>
 </template>

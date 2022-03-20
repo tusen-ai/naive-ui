@@ -1,10 +1,14 @@
 # CHANGELOG
 
+## Pending
+
 ## NEXT_VERSION
 
 ### Fixes
 
 - 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
+- 修复 `n-popconfirm` 缺少 `setShow` 和 `syncPosition` 方法
+- 修复 `n-popselect` 缺少 `setShow` 和 `syncPosition` 方法
 
 ### Feats
 
@@ -18,6 +22,21 @@
 - `n-step` adds class to distinguish status.
 - `n-popconfirm` 新增 `negative-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
 - `n-popconfirm` 新增 `positive-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
+- `n-pagination` 新增 `goto` slot
+- `n-input` 新增 `password-visible-icon` slot
+- `n-input` 新增 `password-invisible-icon` slot
+- `n-select` 新增 `status` 属性
+- `n-input-number` 新增 `status` 属性
+- `n-auto-complete` 新增 `status` 属性
+- `n-cascader` 新增 `status` 属性
+- `n-date-picker` 新增 `status` 属性
+- `n-time-picker` 新增 `status` 属性
+- `n-mention` 新增 `status` 属性
+- `n-tree-select` 新增 `status` 属性
+
+### i18n
+
+- 新增 thTH locale.
 
 ## 2.26.4
 

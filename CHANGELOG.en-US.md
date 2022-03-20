@@ -1,15 +1,19 @@
 # CHANGELOG
 
+## Pending
+
 ## NEXT_VERSION
 
 ### Fixes
 
 - Fix `n-data-table`‘s row disorder when using `expand` type, closes [#2631](https://github.com/TuSimple/naive-ui/issues/2631).
+- Fix `n-popconfirm` doesn't has `setShow` & `syncPosition` methods.
+- Fix `n-popselect` doesn't has `setShow` & `syncPosition` methods.
 
 ### Feats
 
-- `n-tree-select` add `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
-- `n-tree-select` add `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` adds `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` adds `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
 - `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-badge` adds `value` slot.
@@ -18,6 +22,21 @@
 - `n-step` adds class to distinguish status.
 - `n-popconfirm` adds `negative-button-props` props, closes [#2642](https://github.com/TuSimple/naive-ui/issues/2642).
 - `n-popconfirm` adds `positive-button-props` props, closes [#2642](https://github.com/TuSimple/naive-ui/issues/2642).
+- `n-pagination` adds `goto` slot.
+- `n-input` adds `password-visible-icon` slot.
+- `n-input` adds `password-invisible-icon` slot.
+- `n-select` adds `status` prop.
+- `n-input-number` adds `status` prop.
+- `n-auto-complete` adds `status` prop.
+- `n-cascader` adds `status` prop.
+- `n-date-picker` adds `status` prop.
+- `n-time-picker` adds `status` prop.
+- `n-mention` adds `status` prop.
+- `n-tree-select` adds `status` prop.
+
+### i18n
+
+- Add thTH locale.
 
 ## 2.26.4
 

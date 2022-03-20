@@ -16,6 +16,7 @@ check-strategy.vue
 custom-field.vue
 custom-render.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -49,6 +50,7 @@ focus.vue
 | show | `boolean` | `undefined` | Whether to show the menu. |  |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader (if being set manually). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `() => void` | `undefined` | Callback on blurred. |  |

@@ -13,6 +13,7 @@ check-strategy.vue
 filterable.vue
 action.vue
 async.vue
+status.vue
 debug.vue
 ```
 
@@ -49,6 +50,7 @@ debug.vue
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |

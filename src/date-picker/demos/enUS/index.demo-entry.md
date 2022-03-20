@@ -24,6 +24,7 @@ format.vue
 footerslot.vue
 update-on-close.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -41,6 +42,7 @@ focus.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |

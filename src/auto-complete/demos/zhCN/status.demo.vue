@@ -6,7 +6,7 @@
 
 <template>
   <n-space vertical>
-    <n-input status="warning" placeholder="" />
-    <n-input status="error" placeholder="" />
+    <n-auto-complete status="warning" placeholder="" />
+    <n-auto-complete status="error" placeholder="" />
   </n-space>
 </template>
