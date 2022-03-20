@@ -10,6 +10,7 @@ max.vue
 form.vue
 slot.vue
 render-tag.vue
+option-format.vue
 ```
 
 ## API
@@ -29,8 +30,9 @@ render-tag.vue
 | render-tag | `(tag: string, index: number) => VNodeChild` | `undefined` | custom render tag. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
-| type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
+| type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |
+| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | NEXT_VERSION |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
 
 ### DynamicTags Slots
