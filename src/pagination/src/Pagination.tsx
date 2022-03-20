@@ -29,7 +29,7 @@ import type { PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, warn, warnOnce } from '../../_utils'
+import { call, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
@@ -78,7 +78,6 @@ const paginationProps = {
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
   label: Function as PropType<PaginationRenderLabel>,
-  gotoText: String,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -474,7 +473,6 @@ export default defineComponent({
       mergedPageSize,
       pageSizeOptions,
       jumperValue,
-      gotoText,
       prev,
       next,
       prefix,
@@ -660,7 +658,7 @@ export default defineComponent({
         ) : null}
         {showQuickJumper ? (
           <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-            {gotoText ?? locale.goto}
+            {resolveSlot(this.$slots.goto, () => [locale.goto])}
             <NInput
               ref="jumperRef"
               value={jumperValue}

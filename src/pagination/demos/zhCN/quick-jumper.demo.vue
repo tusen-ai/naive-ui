@@ -5,12 +5,11 @@
 </markdown>
 
 <template>
-  <n-pagination
-    v-model:page="page"
-    goto-text="go"
-    :page-count="100"
-    show-quick-jumper
-  />
+  <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
+    <template #goto>
+      请回答
+    </template>
+  </n-pagination>
 </template>
 
 <script lang="ts">
