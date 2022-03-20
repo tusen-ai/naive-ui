@@ -20,6 +20,8 @@
 - `n-form` adds `messages` prop.
 - `n-data-table`'s column supports `cellProps` prop, closes [#2625](https://github.com/TuSimple/naive-ui/issues/2625).
 - `n-step` adds class to distinguish status.
+- `n-popconfirm` adds `negative-button-props` props, closes [#2642](https://github.com/TuSimple/naive-ui/issues/2642).
+- `n-popconfirm` adds `positive-button-props` props, closes [#2642](https://github.com/TuSimple/naive-ui/issues/2642).
 - `n-pagination` adds `goto` slot.
 - `n-input` adds `password-visible-icon` slot.
 - `n-input` adds `password-invisible-icon` slot.
