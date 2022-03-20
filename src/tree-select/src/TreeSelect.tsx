@@ -25,6 +25,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
 import { happensIn } from 'seemly'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -66,6 +67,8 @@ import {
 } from './utils'
 import style from './styles/index.cssr'
 
+type OnLoad = (node: TreeSelectOption) => Promise<void>
+
 const props = {
   ...(useTheme.props as ThemeProps<TreeSelectTheme>),
   bordered: {
@@ -95,6 +98,7 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
+  remote: Boolean,
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
@@ -129,9 +133,11 @@ const props = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -520,19 +526,28 @@ export default defineComponent({
       // only work for multiple mode
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((key) => key === option.value)
+        const { value: treeMate } = dataTreeMateRef
+        // all visible checked keys
+        const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
+          mergedValue,
+          {
+            cascade: mergedCascadeRef.value
+          }
+        )
+        const index = checkedKeysValue.findIndex((key) => key === option.value)
         if (~index) {
           if (props.checkable) {
-            const { checkedKeys } = dataTreeMateRef.value.uncheck(
+            const { checkedKeys } = treeMate.uncheck(
               option.value,
-              mergedValue,
+              checkedKeysValue,
               {
+                checkStrategy: props.checkStrategy,
                 cascade: mergedCascadeRef.value
               }
             )
             doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
           } else {
-            const nextValue = Array.from(mergedValue)
+            const nextValue = Array.from(checkedKeysValue)
             nextValue.splice(index, 1)
             doUpdateValue(nextValue, getOptionsByKeys(nextValue))
           }
@@ -818,10 +833,12 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
+                                  remote={this.remote}
                                   virtualScroll={
                                     this.consistentMenuWidth &&
                                     this.virtualScroll
                                   }
+                                  internalTreeSelect
                                   internalDataTreeMate={this.dataTreeMate}
                                   internalDisplayTreeMate={this.displayTreeMate}
                                   internalHighlightKeySet={
@@ -832,6 +849,8 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
+                                  onDrop={this.onDrop}
+                                  onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
                                   }

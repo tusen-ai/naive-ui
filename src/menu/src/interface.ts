@@ -75,3 +75,7 @@ export type OnUpdateValueImpl = (
 export type OnUpdateKeysImpl = (
   keys: string[] | number[] | Array<string | number>
 ) => void
+
+export interface MenuInst {
+  showOption: (key?: Key) => void
+}

@@ -1,10 +1,61 @@
 # CHANGELOG
 
+## Pending
+
 ## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
+- 修复 `n-popconfirm` 缺少 `setShow` 和 `syncPosition` 方法
+- 修复 `n-popselect` 缺少 `setShow` 和 `syncPosition` 方法
+- 修复 `n-menu` 主题 peers 缺少 `Dropdown`
 
 ### Feats
 
+- `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-cascader` 添加 `filter-menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
+- `n-badge` 新增 `value` slot
+- `n-form` 新增 `messages` 属性
+- `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
+- `n-step` adds class to distinguish status.
+- `n-popconfirm` 新增 `negative-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
+- `n-popconfirm` 新增 `positive-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
+- `n-pagination` 新增 `goto` slot
+- `n-input` 新增 `password-visible-icon` slot
+- `n-input` 新增 `password-invisible-icon` slot
+- `n-select` 新增 `status` 属性
+- `n-input-number` 新增 `status` 属性
+- `n-auto-complete` 新增 `status` 属性
+- `n-cascader` 新增 `status` 属性
+- `n-date-picker` 新增 `status` 属性
+- `n-time-picker` 新增 `status` 属性
+- `n-mention` 新增 `status` 属性
+- `n-tree-select` 新增 `status` 属性
+- `n-menu` 新增 `showOption` 方法，关闭 [#2562](https://github.com/TuSimple/naive-ui/issues/2562)
 - `n-dynamic-tags` 新增 `render-tag` 属性，关闭 [#2526](https://github.com/TuSimple/naive-ui/issues/2526)
+
+### i18n
+
+- 新增 thTH locale.
+
+## 2.26.4
+
+### Fixes
+
+- 修复 `n-tree-select` 在 multiple 模式下不能删除 default-value 属性包含父节点的选项，关闭 [#2605](https://github.com/TuSimple/naive-ui/issues/2605)
+- 修复 `n-tree` 在移除节点时可能抛出异常，关闭 [#2597](https://github.com/TuSimple/naive-ui/issues/2597)
+- 修复 `useDialog` 中使用带有弹出层的元素有异常的焦点管理行为，关闭 [#2612](https://github.com/TuSimple/naive-ui/issues/2612)
+- 修复 `n-tree-select` 当 `check-strategy` 为 `'child'` 时有的节点不能被点击
+- 修复 `n-tree-select` 在 `check-strategy` 不为 `'all'` 的时候从选框中删除时发出的值可能和 `check-strategy` 不对应
+
+### Feats
+
+- `useDialog` 支持 `closeOnEsc` 属性
+- `n-data-table` 导出 `DataTableFilterState` 类型
+- `n-data-table` 导出 `DataTableSortState` 类型
 
 ## 2.26.3
 

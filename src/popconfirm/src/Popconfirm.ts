@@ -4,7 +4,8 @@ import {
   defineComponent,
   provide,
   PropType,
-  ExtractPropTypes
+  ExtractPropTypes,
+  HTMLAttributes
 } from 'vue'
 import { NPopover, PopoverInst, PopoverTrigger } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
@@ -15,8 +16,9 @@ import type { ThemeProps } from '../../_mixins'
 import { popconfirmLight } from '../styles'
 import type { PopconfirmTheme } from '../styles'
 import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
-import style from './styles/index.cssr'
 import { popconfirmInjectionKey } from './interface'
+import type { PopconfirmInst } from './interface'
+import style from './styles/index.cssr'
 
 const popconfirmProps = {
   ...(useTheme.props as ThemeProps<PopconfirmTheme>),
@@ -31,6 +33,8 @@ const popconfirmProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'click'
   },
+  positiveButtonProps: Object as PropType<HTMLAttributes>,
+  negativeButtonProps: Object as PropType<HTMLAttributes>,
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | any
   >,
@@ -83,7 +87,16 @@ export default defineComponent({
       mergedClsPrefixRef,
       props
     })
+    const exposedMethods: PopconfirmInst = {
+      setShow (value) {
+        popoverInstRef.value?.setShow(value)
+      },
+      syncPosition () {
+        popoverInstRef.value?.syncPosition()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedTheme: themeRef,
       popoverInstRef,
       handlePositiveClick,

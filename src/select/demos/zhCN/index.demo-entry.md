@@ -28,6 +28,7 @@ render-tag.vue
 focus.vue
 render-person.vue
 tag-input.vue
+status.vue
 placeholder-debug.vue
 menu-debug.vue
 render-debug.vue
@@ -66,6 +67,7 @@ filterable-debug.vue
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |  |

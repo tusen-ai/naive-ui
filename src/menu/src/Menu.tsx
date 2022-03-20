@@ -29,7 +29,8 @@ import {
   OnUpdateValue,
   OnUpdateKeys,
   OnUpdateValueImpl,
-  OnUpdateKeysImpl
+  OnUpdateKeysImpl,
+  MenuInst
 } from './interface'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import { FollowerPlacement } from 'vueuc'
@@ -295,6 +296,31 @@ export default defineComponent({
       }
       doUpdateExpandedKeys(currentExpandedKeys)
     }
+    const showOption: MenuInst['showOption'] = (key?: Key): void => {
+      const selectedKeyPath = treeMateRef.value.getPath(
+        key ?? mergedValueRef.value,
+        {
+          includeSelf: false
+        }
+      ).keyPath
+      if (!selectedKeyPath.length) return
+      const currentExpandedKeys = Array.from(mergedExpandedKeysRef.value)
+      const nextExpandedKeys = new Set([
+        ...currentExpandedKeys,
+        ...selectedKeyPath
+      ])
+      if (props.accordion) {
+        treeKeysLevelOneRef.value.forEach((firstLevelKey) => {
+          if (
+            nextExpandedKeys.has(firstLevelKey) &&
+            !selectedKeyPath.includes(firstLevelKey)
+          ) {
+            nextExpandedKeys.delete(firstLevelKey)
+          }
+        })
+      }
+      doUpdateExpandedKeys(Array.from(nextExpandedKeys))
+    }
     const cssVarsRef = computed(() => {
       const { inverted } = props
       const {
@@ -381,7 +407,8 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      showOption
     }
   },
   render () {

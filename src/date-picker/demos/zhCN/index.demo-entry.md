@@ -22,8 +22,7 @@ shortcuts.vue
 events.vue
 format.vue
 footerslot.vue
-update-on-close.vue
-focus.vue
+status.vue
 ```
 
 ## API
@@ -42,6 +41,7 @@ focus.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |

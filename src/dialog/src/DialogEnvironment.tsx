@@ -8,6 +8,7 @@ import { dialogProps, dialogPropKeys } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  closeOnEsc: { type: Boolean, default: true },
   internalStyle: [String, Object] as PropType<string | CSSProperties>,
   maskClosable: {
     type: Boolean,
@@ -120,6 +121,7 @@ export const NDialogEnvironment = defineComponent({
         to={to}
         maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
+        closeOnEsc={this.closeOnEsc}
         internalAppear
         internalDialog
       >

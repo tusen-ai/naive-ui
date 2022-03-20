@@ -246,6 +246,9 @@ export default cB('input', `
   ]),
   cNotM('disabled', [
     cE('eye', `
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--n-icon-color);
       cursor: pointer;
     `, [
@@ -254,7 +257,15 @@ export default cB('input', `
       `),
       c('&:active', `
         color: var(--n-icon-color-pressed);
-      `)
+      `),
+      cB('icon', [
+        c('&:hover', `
+          color: var(--n-icon-color-hover);
+        `),
+        c('&:active', `
+          color: var(--n-icon-color-pressed);
+        `)
+      ])
     ]),
     c('&:hover', [
       cE('state-border', 'border: var(--n-border-hover);')
