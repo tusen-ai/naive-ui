@@ -148,4 +148,21 @@ describe('n-card', () => {
       testStyle
     )
   })
+
+  it('should work with `header-extra-style` prop', async () => {
+    const testStyle = 'padding: 0px;'
+    const wrapper = mount(NCard, {
+      props: {
+        headerExtraStyle: testStyle
+      },
+      slots: {
+        header: () => 'test-header',
+        'header-extra': () => 'test-header-extra'
+      }
+    })
+
+    expect(wrapper.find('.n-card-header__extra').attributes('style')).toContain(
+      testStyle
+    )
+  })
 })
