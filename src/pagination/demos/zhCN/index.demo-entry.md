@@ -16,6 +16,7 @@ item-count.vue
 prev.vue
 prefix.vue
 page-size-option.vue
+rtl-debug.vue
 ```
 
 ## API

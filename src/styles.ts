@@ -47,7 +47,10 @@ export { menuDark } from './menu/styles'
 export { messageDark } from './message/styles'
 export { modalDark } from './modal/styles'
 export { notificationDark } from './notification/styles'
-export { paginationDark } from './pagination/styles'
+export {
+  paginationDark,
+  paginationRtl as unstablePaginationRtl
+} from './pagination/styles'
 export { pageHeaderRtl as unstablePageHeaderRtl } from './page-header/styles'
 export { popconfirmDark } from './popconfirm/styles'
 export { popoverDark } from './popover/styles'
