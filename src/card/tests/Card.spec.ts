@@ -45,6 +45,23 @@ describe('n-card', () => {
     )
   })
 
+  it('should work with `segmented` prop', async () => {
+    const wrapper = mount(NCard)
+    expect(wrapper.find('.n-card').classes()).not.toContain(
+      'n-card--content-segmented'
+    )
+
+    await wrapper.setProps({
+      segmented: {
+        content: true,
+        footer: 'soft'
+      }
+    })
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--content-segmented'
+    )
+  })
+
   it('should work with `slots` ', async () => {
     const wrapper = mount(NCard, {
       slots: {
