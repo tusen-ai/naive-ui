@@ -38,7 +38,7 @@
 - `n-dynamic-tags` adds `render-tag` prop, closes [#2526](https://github.com/TuSimple/naive-ui/issues/2526).
 - `n-dynamic-tags` adds `on-create` prop, closes [#2576](https://github.com/TuSimple/naive-ui/issues/2576).
 - `n-date-picker` adds `time-picker-props` props, closes [#2660](https://github.com/TuSimple/naive-ui/issues/2660).
-- `n-data-table` adds genric to type `SortState`
+- `n-data-table` adds genric to type `DataTableSortState`
 
 ### i18n
 
