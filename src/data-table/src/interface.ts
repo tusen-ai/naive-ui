@@ -263,8 +263,8 @@ export type OnUpdateFilters = (
   sourceColumn?: TableBaseColumn
 ) => void
 
-export interface SortState {
-  columnKey: ColumnKey
+export interface SortState<C = ColumnKey> {
+  columnKey: C
   order: SortOrder
   // Sorter    => sync data + functional sorter
   // 'default' => sync data + default sorter
