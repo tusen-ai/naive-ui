@@ -49,7 +49,7 @@ describe('n-carousel', () => {
     })
   })
 
-  it('should work with `dotPlacement` prop', async () => {
+  it('should work with `dot-placement` prop', async () => {
     const wrapper = mount(NCarousel)
 
     for (const placement of ['top', 'bottom', 'left', 'right'] as const) {
@@ -90,7 +90,7 @@ describe('n-carousel', () => {
     ).toBe('true')
   })
 
-  it('should work with `showArrow` prop', async () => {
+  it('should work with `show-arrow` prop', async () => {
     const wrapper = mount(NCarousel)
 
     await wrapper.setProps({
@@ -137,7 +137,7 @@ describe('n-carousel', () => {
     expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
   })
 
-  it('should work with `centeredSlides` prop', async () => {
+  it('should work with `centered-slides` prop', async () => {
     const wrapper = mount(NCarousel, {
       props: {
         slidesPerView: 'auto',
@@ -251,6 +251,38 @@ describe('n-carousel', () => {
         .element.children[0].getAttribute('src')
     ).toBe(
       'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+    )
+  })
+
+  it('should work with `dot-type` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        currentIndex: 0
+      },
+      slots: {
+        default: () => {
+          return [
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
+            }),
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+            })
+          ]
+        }
+      }
+    })
+
+    await sleep(100)
+    expect(wrapper.find('.n-carousel__dots').classes()).toContain(
+      'n-carousel__dots--dot'
+    )
+    await wrapper.setProps({ dotType: 'line' })
+    await sleep(100)
+    expect(wrapper.find('.n-carousel__dots').classes()).toContain(
+      'n-carousel__dots--line'
     )
   })
 })
