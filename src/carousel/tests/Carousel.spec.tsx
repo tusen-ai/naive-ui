@@ -5,7 +5,8 @@ import { sleep } from 'seemly'
 
 describe('n-carousel', () => {
   it('should work with import on demand', () => {
-    mount(NCarousel)
+    const wrapper = mount(NCarousel)
+    wrapper.unmount()
   })
 
   it('should work with `autoplay` and `interval` prop', async () => {
@@ -47,6 +48,7 @@ describe('n-carousel', () => {
         ).toBe('true')
       }
     })
+    wrapper.unmount()
   })
 
   it('should work with `dot-placement` prop', async () => {
@@ -58,6 +60,7 @@ describe('n-carousel', () => {
         `n-carousel--${placement}`
       )
     }
+    wrapper.unmount()
   })
 
   it('should work with `interval` prop', async () => {
@@ -88,6 +91,7 @@ describe('n-carousel', () => {
         .findAll('.n-carousel__dot')[1]
         .attributes('aria-selected')
     ).toBe('true')
+    wrapper.unmount()
   })
 
   it('should work with `show-arrow` prop', async () => {
@@ -99,6 +103,7 @@ describe('n-carousel', () => {
 
     expect(wrapper.find('.n-carousel__arrow-group').exists()).toBe(true)
     expect(wrapper.find('.n-carousel__arrow').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('arrow button should work', async () => {
@@ -135,6 +140,7 @@ describe('n-carousel', () => {
 
     await wrapper.findAll('.n-carousel__arrow')[0].trigger('click')
     expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
+    wrapper.unmount()
   })
 
   it('should work with `centered-slides` prop', async () => {
@@ -173,6 +179,7 @@ describe('n-carousel', () => {
       wrapper.vm.next()
       await nextTick()
     }
+    wrapper.unmount()
   })
 
   it('should work with `trigger` prop', async () => {
@@ -212,6 +219,7 @@ describe('n-carousel', () => {
         expect(slidesDOMArray[j].attributes('aria-hidden')).toBe('false')
       }
     }
+    wrapper.unmount()
   })
 
   it('should work with `current-index` prop', async () => {
@@ -252,6 +260,7 @@ describe('n-carousel', () => {
     ).toBe(
       'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
     )
+    wrapper.unmount()
   })
 
   it('should work with `dot-type` prop', async () => {
@@ -284,5 +293,20 @@ describe('n-carousel', () => {
     expect(wrapper.find('.n-carousel__dots').classes()).toContain(
       'n-carousel__dots--line'
     )
+    wrapper.unmount()
+  })
+
+  it('should work with `effect` prop', async () => {
+    const wrapper = mount(NCarousel)
+
+    for (const effect of ['slide', 'fade', 'card', 'custom'] as const) {
+      await wrapper.setProps({ effect })
+      await sleep(100)
+      expect(wrapper.find('.n-carousel').classes()).toContain(
+        `n-carousel--${effect}`
+      )
+    }
+
+    wrapper.unmount()
   })
 })
