@@ -215,10 +215,7 @@ export interface DataTableInjection {
   onLoadRef: Ref<DataTableOnLoad | undefined>
   loadingKeySetRef: Ref<Set<RowKey>>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
-  doUpdateFilters: (
-    filters: FilterState,
-    sourceColumn?: TableBaseColumn
-  ) => void
+  doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
@@ -260,7 +257,7 @@ export type OnUpdateSorterImpl = (
 ) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
-  sourceColumn?: TableBaseColumn
+  sourceColumn: TableBaseColumn
 ) => void
 
 export interface SortState {

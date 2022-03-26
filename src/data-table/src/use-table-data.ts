@@ -319,7 +319,7 @@ export function useTableData (
 
   function doUpdateFilters (
     filters: FilterState,
-    sourceColumn?: TableBaseColumn
+    sourceColumn: TableBaseColumn
   ): void {
     const {
       onUpdateFilters,
@@ -345,9 +345,9 @@ export function useTableData (
   }
   function filter (filters: FilterState | null): void {
     if (!filters) {
-      doUpdateFilters({})
+      uncontrolledFilterStateRef.value = {}
     } else if (filters) {
-      doUpdateFilters(createShallowClonedObject(filters))
+      uncontrolledFilterStateRef.value = createShallowClonedObject(filters)
     } else if (__DEV__) {
       warn('data-table', '`filters` is not an object')
     }

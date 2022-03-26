@@ -109,8 +109,8 @@ const carouselProps = {
   },
   transitionProps: Object as PropType<TransitionProps>,
   draggable: Boolean,
-  prevSlideStyle: Object as PropType<CSSProperties | string>,
-  nextSlideStyle: Object as PropType<CSSProperties | string>,
+  prevSlideStyle: [Object, String] as PropType<CSSProperties | string>,
+  nextSlideStyle: [Object, String] as PropType<CSSProperties | string>,
   touchable: {
     type: Boolean,
     default: true

@@ -12,43 +12,7 @@
 </n-alert>
 
 ```demo
-basic.vue
-empty
-border
-size
-row-props
-merge-cell
-filter-and-sorter
-multiple-sorter
-select
-custom-select
-group-header
-controlled-page
-controlled-filter
-controlled-sorter
-controlled-multiple-sorter
-fixed-header
-fixed-header-column
-summary
-ellipsis
-ellipsis-tooltip
-expand
-render-header
-custom-style
-ajax-usage
-virtual
-custom-filter-menu.vue
-tree
-flex-height
-striped
-simple-editable
-switchable-editable
-context-menu.vue
-async-expand.vue
-fixed-column-debug
-fixed-column2-debug
-scroll-debug
-height-debug
+controlled-filter.vue
 ```
 
 ## API
@@ -88,7 +52,7 @@ height-debug
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |  |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
-| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
+| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |  |
 | on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `DataTableSortState[] \| null` 否则返回 `DataTableSortState \| null` |  |

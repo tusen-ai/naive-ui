@@ -84,7 +84,7 @@ async-expand.vue
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |  |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
-| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
+| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |  |
 | on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `DataTableSortState[] \| null`, otherwise return `DataTableSortState \| null`. |  |
