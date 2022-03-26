@@ -19,6 +19,7 @@
 - Fix `n-layout-sider`'s `content-style` can't override `overflow: auto` prop, closes [#2671](https://github.com/TuSimple/naive-ui/issues/2671).
 - Fix `n-date-picker` displays panel item abnormally with `month` and `quarter` type in dark mode.
 - Fix `n-dropdown` `onUpdateShow` not working.
+- Fix `n-auto-complete` `onSelect` is triggered after `onUpdate:value`.
 
 ### Feats
 
