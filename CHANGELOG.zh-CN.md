@@ -10,6 +10,7 @@
 - 修复 `n-popconfirm` 缺少 `setShow` 和 `syncPosition` 方法
 - 修复 `n-popselect` 缺少 `setShow` 和 `syncPosition` 方法
 - 修复 `n-menu` 主题 peers 缺少 `Dropdown`
+- 修复 `n-color-picker` 不能输入 0 作为单位的值，关闭 [#2680](https://github.com/TuSimple/naive-ui/issues/2680)
 
 ### Feats
 

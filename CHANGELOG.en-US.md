@@ -10,6 +10,7 @@
 - Fix `n-popconfirm` doesn't has `setShow` & `syncPosition` methods.
 - Fix `n-popselect` doesn't has `setShow` & `syncPosition` methods.
 - Fix `n-menu` theme's peers missing `Dropdown`.
+- Fix `n-color-picker` can't input 0 as unit's value, closes [#2680](https://github.com/TuSimple/naive-ui/issues/2680)
 
 ### Feats
 
