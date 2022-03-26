@@ -16,9 +16,13 @@ const menuDark: MenuTheme = {
     const { primaryColor, primaryColorSuppl } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorActive = changeColor(primaryColor, { alpha: 0.15 })
+    commonSelf.itemColorActiveHover = changeColor(primaryColor, { alpha: 0.15 })
+    commonSelf.itemColorActiveCollapsed = changeColor(primaryColor, {
+      alpha: 0.15
+    })
     commonSelf.itemColorActiveInverted = primaryColorSuppl
+    commonSelf.itemColorActiveHoverInverted = primaryColorSuppl
     commonSelf.itemColorActiveCollapsedInverted = primaryColorSuppl
-    commonSelf.colorInverted = '#0000'
     return commonSelf
   }
 }

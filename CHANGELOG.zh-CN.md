@@ -4,6 +4,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-menu` 进行了一些样式改动
+
 ### Fixes
 
 - 修复 `n-data-table` 使用 `expand` 类型时，行错乱的问题，关闭 [#2631](https://github.com/TuSimple/naive-ui/issues/2631)
@@ -14,6 +18,7 @@
 - 修复 `n-tree` 再使用虚拟滚动时滚动条长度存在问题，关闭 [#2673](https://github.com/TuSimple/naive-ui/issues/2673)
 - 修复 `n-layout-sider` 的 `content-style` 不能覆盖 `overflow: auto` 属性，关闭 [#2671](https://github.com/TuSimple/naive-ui/issues/2671)
 - 修复 `n-date-picker` 在 `month` 和 `quarter` 模式下暗黑模式的 disabled 的面板时间显示有问题
+- 修复 `n-dropdown` `onUpdateShow` 不生效
 
 ### Feats
 
@@ -43,6 +48,7 @@
 - `n-dynamic-tags` 新增 `on-create` 属性，关闭 [#2576](https://github.com/TuSimple/naive-ui/issues/2576)
 - `n-date-picker` 新增 `time-picker-props` 属性，关闭 [#2660](https://github.com/TuSimple/naive-ui/issues/2660)
 - `n-tabs` 新增 `trigger` 属性，关闭 [#2679](https://github.com/TuSimple/naive-ui/issues/2679)
+- `n-menu` 新增 `itemColorHover`, `itemColorActiveHover`, `itemTextColorActiveHover`, `itemTextColorHorizontal`, `itemTextColorHoverHorizontal`, `itemTextColorActiveHorizontal`, `itemTextColorActiveHoverHorizontal`, `itemTextColorChildActiveHorizontal`, `itemIconColorActiveHover`, `itemIconColorHorizontal`, `itemIconColorHoverHorizontal`, `itemIconColorActiveHorizontal`, `itemIconColorActiveHoverHorizontal`, `itemIconColorChildActiveHorizontal`, `arrowColorActiveHover`, `itemColorHoverInverted`, `itemColorActiveHoverInverted`, `itemTextColorActiveHoverInverted`, `itemTextColorHorizontalInverted`, `itemTextColorHoverHorizontalInverted`, `itemTextColorChildActiveHorizontalInverted`, `itemTextColorActiveHorizontalInverted`, `itemTextColorActiveHoverHorizontalInverted`, `itemIconColorActiveHoverInverted`, `itemIconColorHorizontalInverted`, `itemIconColorHoverHorizontalInverted`, `itemIconColorActiveHorizontalInverted`, `itemIconColorActiveHoverHorizontalInverted`, `itemIconColorChildActiveHorizontalInverted`, `arrowColorActiveHoverInverted` 主题变量，关闭 [#2598](https://github.com/TuSimple/naive-ui/issues/2598)
 
 ### i18n
 
