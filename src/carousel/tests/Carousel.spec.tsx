@@ -340,6 +340,13 @@ describe('n-carousel', () => {
     expect(
       wrapper.findAll('.n-carousel__dot')[1].attributes('aria-selected')
     ).toBe('true')
+    await wrapper.find('.n-carousel__dot').trigger('keydown', {
+      code: 'ArrowLeft'
+    })
+    await sleep(100)
+    expect(
+      wrapper.findAll('.n-carousel__dot')[0].attributes('aria-selected')
+    ).toBe('true')
     wrapper.unmount()
   })
 })
