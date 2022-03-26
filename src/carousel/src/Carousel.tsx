@@ -109,6 +109,8 @@ const carouselProps = {
   },
   transitionProps: Object as PropType<TransitionProps>,
   draggable: Boolean,
+  prevSlideStyle: Object as PropType<CSSProperties | string>,
+  nextSlideStyle: Object as PropType<CSSProperties | string>,
   touchable: {
     type: Boolean,
     default: true
@@ -516,7 +518,9 @@ export default defineComponent({
       getSlideStyle,
       addSlide,
       removeSlide,
-      onCarouselItemClick
+      onCarouselItemClick,
+      prevSlideStyleRef: toRef(props, 'prevSlideStyle'),
+      nextSlideStyleRef: toRef(props, 'nextSlideStyle')
     }
     provide(carouselMethodsInjectionKey, carouselMethods)
 
