@@ -309,4 +309,44 @@ describe('n-carousel', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `keyboard` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        keyboard: true
+      },
+      slots: {
+        default: () => {
+          return [
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
+            }),
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+            })
+          ]
+        }
+      }
+    })
+
+    await sleep(100)
+    await wrapper.find('.n-carousel__dot').trigger('click')
+    await wrapper.find('.n-carousel__dot').trigger('keydown', {
+      code: 'ArrowRight'
+    })
+    await sleep(100)
+    expect(
+      wrapper.findAll('.n-carousel__dot')[1].attributes('aria-selected')
+    ).toBe('true')
+    await wrapper.find('.n-carousel__dot').trigger('keydown', {
+      code: 'ArrowLeft'
+    })
+    await sleep(100)
+    expect(
+      wrapper.findAll('.n-carousel__dot')[0].attributes('aria-selected')
+    ).toBe('true')
+    wrapper.unmount()
+  })
 })
