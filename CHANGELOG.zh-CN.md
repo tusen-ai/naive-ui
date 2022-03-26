@@ -20,6 +20,7 @@
 - 修复 `n-date-picker` 在 `month` 和 `quarter` 模式下暗黑模式的 disabled 的面板时间显示有问题
 - 修复 `n-dropdown` `onUpdateShow` 不生效
 - 修复 `n-auto-complete` `onSelect` 在 `onUpdate:value` 后被触发
+- 修复 `n-data-table` `onUpdate:filters` 的类型中 `initiatorColumn` 是可选选参数
 
 ### Feats
 

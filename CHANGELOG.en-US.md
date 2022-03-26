@@ -20,6 +20,7 @@
 - Fix `n-date-picker` displays panel item abnormally with `month` and `quarter` type in dark mode.
 - Fix `n-dropdown` `onUpdateShow` not working.
 - Fix `n-auto-complete` `onSelect` is triggered after `onUpdate:value`.
+- Fix `n-data-table` `initiatorColumn` in `onUpdate:filters`'s type is an optional parameter.
 
 ### Feats
 
