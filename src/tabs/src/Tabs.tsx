@@ -55,6 +55,10 @@ const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
+  trigger: {
+    type: String as PropType<'click' | 'hover'>,
+    default: 'click'
+  },
   type: {
     type: String as PropType<TabsType>,
     default: 'bar'
@@ -212,7 +216,7 @@ export default defineComponent({
         updateBarStyle(tabEl)
       }
     }
-    function handleTabClick (panelName: string | number): void {
+    function activateTab (panelName: string | number): void {
       doUpdateValue(panelName)
     }
     function doUpdateValue (panelName: string | number): void {
@@ -304,6 +308,7 @@ export default defineComponent({
       deriveScrollShadow(e.target as HTMLElement)
     }, 64)
     provide(tabsInjectionKey, {
+      triggerRef: toRef(props, 'trigger'),
       tabStyleRef: toRef(props, 'tabStyle'),
       paneClassRef: toRef(props, 'paneClass'),
       paneStyleRef: toRef(props, 'paneStyle'),
@@ -313,7 +318,7 @@ export default defineComponent({
       valueRef: mergedValueRef,
       tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
-      handleTabClick,
+      activateTab,
       handleClose,
       handleAdd
     })

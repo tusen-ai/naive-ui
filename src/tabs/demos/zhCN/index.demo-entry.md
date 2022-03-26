@@ -17,6 +17,7 @@ before-leave.vue
 no-pane.vue
 update-bar-manually.vue
 bar-width.vue
+trigger.vue
 line-debug.vue
 style-inherit-debug.vue
 shadow-debug.vue
@@ -40,6 +41,7 @@ addable-debug.vue
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
+| trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | NEXT_VERSION |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |  |
 | value | `string \| number` | `undefined` | 受控模式下的值 |  |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |  |
