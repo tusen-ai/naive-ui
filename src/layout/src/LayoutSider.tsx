@@ -310,10 +310,10 @@ export default defineComponent({
             onScroll={this.onScroll}
             style={[
               this.scrollContainerStyle,
-              this.contentStyle,
               {
                 overflow: 'auto'
-              }
+              },
+              this.contentStyle
             ]}
             ref="scrollableElRef"
           >
