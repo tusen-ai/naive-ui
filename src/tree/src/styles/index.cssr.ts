@@ -45,6 +45,7 @@ export default cB('tree', `
     ])
   ]),
   cB('tree-node-wrapper', `
+    box-sizing: border-box;
     padding: 3px 0;
   `),
   cB('tree-node', `

@@ -11,6 +11,7 @@
 - Fix `n-popselect` doesn't has `setShow` & `syncPosition` methods.
 - Fix `n-menu` theme's peers missing `Dropdown`.
 - Fix `n-color-picker` can't input 0 as unit's value, closes [#2680](https://github.com/TuSimple/naive-ui/issues/2680)
+- Fix `n-tree`'s scrollbar overflows in virtual scroll mode, closes [#2673](https://github.com/TuSimple/naive-ui/issues/2673)
 
 ### Feats
 

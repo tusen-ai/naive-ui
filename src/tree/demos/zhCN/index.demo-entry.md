@@ -22,6 +22,7 @@ switcher-icon.vue
 node-props.vue
 check-strategy-debug.vue
 change-debug.vue
+scrollbar-debug.vue
 ```
 
 ## API
