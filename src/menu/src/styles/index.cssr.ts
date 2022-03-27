@@ -158,7 +158,7 @@ export default c([
         padding-left .3s var(--n-bezier),
         border-color .3s var(--n-bezier);
     `, [
-      c('> *', 'position: relative;'),
+      c('> *', 'z-index: 1;'),
       c('&::before', `
         z-index: auto;
         content: "";
