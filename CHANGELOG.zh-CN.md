@@ -1,7 +1,5 @@
 # CHANGELOG
 
-## Pending
-
 ## 2.27.0
 
 ### Breaking Changes
