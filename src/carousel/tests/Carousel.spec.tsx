@@ -349,4 +349,34 @@ describe('n-carousel', () => {
     ).toBe('true')
     wrapper.unmount()
   })
+
+  it('should work with `space-between` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
+            }),
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+            })
+          ]
+        }
+      }
+    })
+
+    await sleep(100)
+    expect(
+      wrapper.find('.n-carousel__slide').attributes('style')
+    ).not.toContain('margin-right: 25px;')
+
+    await wrapper.setProps({ spaceBetween: 25 })
+    expect(wrapper.find('.n-carousel__slide').attributes('style')).toContain(
+      'margin-right: 25px;'
+    )
+    wrapper.unmount()
+  })
 })
