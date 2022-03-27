@@ -24,7 +24,7 @@ select
 custom-select
 group-header
 controlled-page
-controlled-filter
+controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
 fixed-header
