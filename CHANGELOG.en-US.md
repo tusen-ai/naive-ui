@@ -22,7 +22,8 @@
 
 ### Feats
 
-- `n-tree-select` adds `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-tree-select` adds `on-load` prop, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
+- `n-data-table` adds `on-load` prop.
 - `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-badge` adds `value` slot.

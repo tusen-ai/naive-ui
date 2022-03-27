@@ -22,7 +22,8 @@
 
 ### Feats
 
-- `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-load` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-data-table` 新增 `on-load` 属性
 - `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
 - `n-cascader` 添加 `filter-menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
 - `n-badge` 新增 `value` slot
