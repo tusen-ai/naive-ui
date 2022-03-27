@@ -60,7 +60,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 波兰语（波兰）    | plPL | datePlPL | 2.25.2       |
 | 世界语            | eo   | dateEo   | 2.25.2       |
 | 斯洛伐克语        | skSK | dateSkSK | 2.25.3       |
-| 泰语              | thTH | dateThTH | NEXT_VERSION |
+| 泰语（泰国）      | thTH | dateThTH | NEXT_VERSION |
 
 ## 在现有国际化基础上调整
 
