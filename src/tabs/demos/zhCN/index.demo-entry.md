@@ -9,8 +9,8 @@ basic.vue
 segment.vue
 card.vue
 flex-label.vue
-size.vue
 prefix.vue
+size.vue
 display-directive.vue
 addable.vue
 before-leave.vue
@@ -32,6 +32,7 @@ addable-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否允许添加标签，只在标签的 `type` 为 `card` 时生效 |  |
+| animated | `boolean` | `false` | 标签页切换是否使用动画 | NEXT_VERSION |
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |

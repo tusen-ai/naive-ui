@@ -54,6 +54,7 @@
 - `n-carousel` 新增 `next-slide-style` 和 `prev-slide-style` 属性，关闭 [#2340](https://github.com/TuSimple/naive-ui/issues/2340)
 - `n-dialog` 新增 `negative-button-props` 属性
 - `n-dialog` 新增 `positive-button-props` 属性
+- `n-tabs` 新增 `animated` 属性
 
 ### i18n
 

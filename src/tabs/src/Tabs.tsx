@@ -15,7 +15,8 @@ import {
   vShow,
   watchEffect,
   ExtractPropTypes,
-  cloneVNode
+  cloneVNode,
+  TransitionGroup
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -85,6 +86,7 @@ const tabsProps = {
     type: Number,
     default: 0
   },
+  animated: Boolean,
   onBeforeLeave: Function as PropType<OnBeforeLeave>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -216,7 +218,52 @@ export default defineComponent({
         updateBarStyle(tabEl)
       }
     }
+
+    const tabsPaneWrapperRef = ref<HTMLElement | null>(null)
+    let currentHeight = 0
+    function onAnimationBeforeLeave (): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        currentHeight = tabsPaneWrapperEl.getBoundingClientRect().height
+        const currentHeightPx = `${currentHeight}px`
+        tabsPaneWrapperEl.style.height = currentHeightPx
+        tabsPaneWrapperEl.style.maxHeight = currentHeightPx
+      }
+    }
+    function onAnimationEnter (el: HTMLElement): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        const targetHeight = el.getBoundingClientRect().height
+        tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
+        tabsPaneWrapperEl.style.height = `${Math.max(
+          currentHeight,
+          targetHeight
+        )}px`
+      }
+    }
+    function onAnimationAfterEnter (): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        tabsPaneWrapperEl.style.maxHeight = ''
+        tabsPaneWrapperEl.style.height = ''
+      }
+    }
+
+    const renderNameListRef: { value: Array<string | number> } = { value: [] }
+    const animationDirectionRef = ref<'next' | 'prev'>('next')
     function activateTab (panelName: string | number): void {
+      const currentValue = mergedValueRef.value
+      let dir: 'next' | 'prev' = 'next'
+      for (const name of renderNameListRef.value) {
+        if (name === currentValue) {
+          break
+        }
+        if (name === panelName) {
+          dir = 'prev'
+          break
+        }
+      }
+      animationDirectionRef.value = dir
       doUpdateValue(panelName)
     }
     function doUpdateValue (panelName: string | number): void {
@@ -430,6 +477,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
+      tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
       addTabInstRef,
@@ -443,6 +491,11 @@ export default defineComponent({
       handleTabsResize,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
+      animationDirection: animationDirectionRef,
+      renderNameListRef,
+      onAnimationBeforeLeave,
+      onAnimationEnter,
+      onAnimationAfterEnter,
       onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
@@ -454,6 +507,7 @@ export default defineComponent({
       addTabFixed,
       addable,
       mergedSize,
+      renderNameListRef,
       onRender,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
@@ -474,6 +528,7 @@ export default defineComponent({
     const isCard = type === 'card'
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
+    renderNameListRef.value = []
     return (
       <div
         class={[
@@ -508,6 +563,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-rail`}>
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
+                  renderNameListRef.value.push(tabPaneVNode.props.name)
                   return (
                       <Tab
                         {...tabPaneVNode.props}
@@ -523,6 +579,7 @@ export default defineComponent({
                   )
                 })
                 : tabChildren.map((tabVNode: any, index: number) => {
+                  renderNameListRef.value.push(tabVNode.props.name)
                   if (index === 0) {
                     return tabVNode
                   } else {
@@ -555,6 +612,9 @@ export default defineComponent({
                               {showPane
                                 ? tabPaneChildren.map(
                                   (tabPaneVNode: any, index: number) => {
+                                    renderNameListRef.value.push(
+                                      tabPaneVNode.props.name
+                                    )
                                     return justifyTabDynamicProps(
                                         <Tab
                                           {...tabPaneVNode.props}
@@ -575,6 +635,9 @@ export default defineComponent({
                                 )
                                 : tabChildren.map(
                                   (tabVNode: any, index: number) => {
+                                    renderNameListRef.value.push(
+                                      tabVNode.props.name
+                                    )
                                     if (
                                       index !== 0 &&
                                         !mergedJustifyContent
@@ -652,11 +715,28 @@ export default defineComponent({
           )}
         </div>
         {showPane &&
-          filterMapTabPanes(
-            tabPaneChildren,
-            this.mergedValue,
-            this.renderedNames
-          )}
+          (this.animated ? (
+            <div
+              ref="tabsPaneWrapperRef"
+              class={`${mergedClsPrefix}-tabs-pane-wrapper`}
+            >
+              {filterMapTabPanes(
+                tabPaneChildren,
+                this.mergedValue,
+                this.renderedNames,
+                this.onAnimationBeforeLeave,
+                this.onAnimationEnter,
+                this.onAnimationAfterEnter,
+                this.animationDirection
+              )}
+            </div>
+          ) : (
+            filterMapTabPanes(
+              tabPaneChildren,
+              this.mergedValue,
+              this.renderedNames
+            )
+          ))}
       </div>
     )
   }
@@ -665,8 +745,12 @@ export default defineComponent({
 function filterMapTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null,
-  renderedNames: Set<string | number>
-): VNode[] {
+  renderedNames: Set<string | number>,
+  onBeforeLeave?: () => void,
+  onEnter?: (el: HTMLElement) => void,
+  onAfterEnter?: () => void,
+  animationDirection?: 'next' | 'prev'
+): VNode | VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
     const {
@@ -694,7 +778,19 @@ function filterMapTabPanes (
       children.push(useVShow ? withDirectives(vNode, [[vShow, show]]) : vNode)
     }
   })
-  return children
+  if (!animationDirection) {
+    return children
+  }
+  return (
+    <TransitionGroup
+      name={`${animationDirection}-transition`}
+      onBeforeLeave={onBeforeLeave}
+      onEnter={onEnter as (el: Element) => void}
+      onAfterEnter={onAfterEnter}
+    >
+      {{ default: () => children }}
+    </TransitionGroup>
+  )
 }
 
 function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {

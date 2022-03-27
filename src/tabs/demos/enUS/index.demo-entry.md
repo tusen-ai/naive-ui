@@ -9,8 +9,8 @@ basic.vue
 segment.vue
 card.vue
 flex-label.vue
-size.vue
 prefix.vue
+size.vue
 display-directive.vue
 addable.vue
 before-leave.vue
@@ -27,6 +27,7 @@ trigger.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
+| animated | `boolean` | `false` | Whether to activate tab switching animation. | NEXT_VERSION |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |

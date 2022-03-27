@@ -54,6 +54,7 @@
 - `n-carousel` adds `next-slide-style` and `prev-slide-style` props, closes [#2340](https://github.com/TuSimple/naive-ui/issues/2340).
 - `n-dialog` adds `negative-button-props` prop.
 - `n-dialog` adds `positive-button-props` prop.
+- `n-tabs` adds `animated` prop.
 
 ### i18n
 
