@@ -59,6 +59,7 @@ PRs are welcomed for locales that are not supported yet!
 | Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
 | Esperanto                 | eo     | dateEo      | 2.25.2  |
 | Slovak                    | skSK   | dateSkSK    | 2.25.3  |
+| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
 
 ## Customize the existing locale
 

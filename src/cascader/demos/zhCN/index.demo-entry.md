@@ -16,6 +16,7 @@ check-strategy.vue
 custom-field.vue
 custom-render.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -34,9 +35,11 @@ focus.vue
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |  |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
+| filter-menu-props | `HTMLAttributes` | `undefined` | 可过滤菜单的 DOM 属性 | 2.27.0 |
 | value-field | `string` | `'value'` | 替代 `CascaderOption` 中的 value 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
+| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.27.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
@@ -47,6 +50,7 @@ focus.vue
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | value | `string \| number \| Array<number \| string>` | `undefined` | 级联选择的数据受控 |  |
 | virtual-scroll | `boolean` | `true` | 是否支持虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |

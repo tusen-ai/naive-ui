@@ -78,6 +78,7 @@ interface PaginationInfo {
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
+| goto | `()` | Fast jump text before quick jumper. | 2.27.0 |
 | label | The same as `PaginationRenderLabel`'s parameters | Item content. | 2.24.0 |
 | next | `(info: PaginationInfo)` | Next page. |  |
 | prev | `(info: PaginationInfo)` | Previous page. |  |

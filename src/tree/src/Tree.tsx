@@ -154,7 +154,6 @@ const treeProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
-  remote: Boolean,
   leafOnly: Boolean,
   multiple: Boolean,
   pattern: {
@@ -1170,7 +1169,6 @@ export default defineComponent({
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
       selectableRef: toRef(props, 'selectable'),
-      remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
       blockLineRef: toRef(props, 'blockLine'),

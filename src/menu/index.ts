@@ -3,5 +3,6 @@ export type { MenuProps } from './src/Menu'
 export type {
   MenuOption,
   MenuGroupOption,
-  MenuDividerOption
+  MenuDividerOption,
+  MenuInst
 } from './src/interface'

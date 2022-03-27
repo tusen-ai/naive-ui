@@ -25,6 +25,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
 import { happensIn } from 'seemly'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -65,6 +66,8 @@ import {
   treeOption2SelectOptionWithPath
 } from './utils'
 import style from './styles/index.cssr'
+
+type OnLoad = (node: TreeSelectOption) => Promise<void>
 
 const props = {
   ...(useTheme.props as ThemeProps<TreeSelectTheme>),
@@ -129,9 +132,11 @@ const props = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -842,6 +847,8 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
+                                  onDrop={this.onDrop}
+                                  onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
                                   }

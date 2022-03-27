@@ -154,9 +154,15 @@ export default c([
           ])
         ]),
         cM('disabled', `
-          background-color: var(--n-item-color-disabled);
+          color: var(--n-item-text-color-disabled);
           cursor: not-allowed;
-        `)
+        `, [
+          cM('selected', [
+            c('&::before', `
+              background-color: var(--n-item-color-disabled);
+            `)
+          ])
+        ])
       ])
     ]),
     cM('date', {

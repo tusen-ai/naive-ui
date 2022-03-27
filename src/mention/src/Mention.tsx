@@ -19,6 +19,7 @@ import {
   FollowerPlacement
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
@@ -89,10 +90,11 @@ const mentionProps = {
     default: 'bottom-start'
   },
   size: String as PropType<InputSize>,
+  renderLabel: Function as PropType<RenderLabel>,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
-  renderLabel: Function as PropType<RenderLabel>,
   onUpdateValue: [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,

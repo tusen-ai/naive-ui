@@ -18,6 +18,7 @@ long-label.vue
 accordion.vue
 router-link.vue
 customize-field.vue
+expand-selected-option.vue
 ```
 
 ## API
@@ -81,3 +82,9 @@ customize-field.vue
 | key   | `string`         | The indentifier of the menu group.       |
 | props | `HTMLAttributes` | Attributes of the divider.               |
 | type  | `'divider'`      | The type of the menu item, **required!** |
+
+### Menu Methods
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| showOption | `(key: string \| number) => void` | Expand menu to show option with specified `key`. If `key` is not specified, selected option will be displayed. | NEXT_VERSON |

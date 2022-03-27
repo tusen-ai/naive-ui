@@ -65,7 +65,7 @@ const TreeNode = defineComponent({
 
     function handleSwitcherClick (): void {
       const { tmNode } = props
-      if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
+      if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
           NTree.loadingKeysRef.value.add(tmNode.key)
         }

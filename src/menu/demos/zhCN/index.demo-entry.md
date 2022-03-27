@@ -18,6 +18,7 @@ long-label.vue
 accordion.vue
 router-link.vue
 customize-field.vue
+expand-selected-option.vue
 ```
 
 ## API
@@ -54,7 +55,7 @@ customize-field.vue
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
 | on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
 
-### MenuOption Properties
+#### MenuOption Properties
 
 | 名称      | 类型                                   | 说明             |
 | --------- | -------------------------------------- | ---------------- |
@@ -65,7 +66,7 @@ customize-field.vue
 | key       | `string`                               | 菜单项的标识符   |
 | label     | `string \| (() => VNodeChild)`         | 菜单项的内容     |
 
-### MenuGroupOption Properties
+#### MenuGroupOption Properties
 
 | 名称     | 类型                                   | 说明                     |
 | -------- | -------------------------------------- | ------------------------ |
@@ -74,10 +75,16 @@ customize-field.vue
 | label    | `string \| (() => VNodeChild)`         | 菜单项的内容             |
 | type     | `'group'`                              | 菜单项的类型，**必填！** |
 
-### MenuDividerOption Properties
+#### MenuDividerOption Properties
 
 | 名称  | 类型             | 说明                     |
 | ----- | ---------------- | ------------------------ |
 | key   | `string`         | 菜单项的标识符           |
 | props | `HTMLAttributes` | 分割线的属性             |
 | type  | `'divider'`      | 菜单项的类型，**必填！** |
+
+### Menu Methods
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| showOption | `(key?: string \| number) => void` | 展开菜单，确保设定的元素被显示，如果不传入 `key` 会当前选中元素 | NEXT_VERSON |

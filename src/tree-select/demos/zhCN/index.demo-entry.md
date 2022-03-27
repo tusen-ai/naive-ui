@@ -13,6 +13,8 @@ check-strategy.vue
 filterable.vue
 check-strategy-debug.vue
 action.vue
+async.vue
+status.vue
 debug.vue
 ```
 
@@ -49,22 +51,25 @@ debug.vue
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
+| on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | 2.27.0 |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |  |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | 更新值的回调 |  |
 
 ### TreeSelectOption Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| key | `string \| number` | 选项的 key，需要唯一，可使用 `key-field` 修改字段名 |
-| label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |
-| children? | `TreeSelectOption[]` | 节点的子选项 |
-| disabled? | `boolean` | 是否禁用选项 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| key | `string \| number` | 选项的 key，需要唯一，可使用 `key-field` 修改字段名 |  |
+| label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |  |
+| children? | `TreeSelectOption[]` | 节点的子选项 |  |
+| disabled? | `boolean` | 是否禁用选项 |  |
+| isLeaf? | `boolean` | 节点是否是叶节点，在异步展开状态下是必须的 | 2.27.0 |
 
 ### TreeSelect Slots
 

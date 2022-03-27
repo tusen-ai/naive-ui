@@ -57,26 +57,28 @@ action.vue
 
 ### DialogOptions Properties
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |
-| bordered | `boolean` | `false` | Whether to show `border`. |
-| closable | `boolean` | `true` | Whether to show `close` icon. |
-| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |
-| iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |
-| icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |
-| loading | `boolean` | `false` | Whether to display `loading` status. |
-| maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the `mask`. |
-| negativeText | `string` | `undefined` | Corresponding button won't show if not set. |
-| positiveText | `string` | `undefined` | Corresponding button won't show if not set. |
-| show-icon | `boolean` | `true` | Whether to show `icon`. |
-| style | `string \| Object` | Style of the dialog. |
-| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |
-| onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |
-| onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
+| bordered | `boolean` | `false` | Whether to show `border`. |  |
+| closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
+| iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
+| icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
+| loading | `boolean` | `false` | Whether to display `loading` status. |  |
+| maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the `mask`. |  |
+| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |  |
+| negativeText | `string` | `undefined` | Cancel button text. Corresponding button won't show if not set. |  |
+| positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
+| positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
+| showIcon | `boolean` | `true` | Whether to show `icon`. |  |
+| style | `string \| Object` | Style of the dialog. |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
+| type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
+| onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
+| onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
+| onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
+| onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |  |
 
 ### DialogReactive API
 
@@ -94,14 +96,16 @@ All the properties can be modified dynamically.
 | icon | `() => VNodeChild` | `Render` function of `icon`. |  |
 | loading | `boolean` | Whether to display `loading` status. |  |
 | maskClosable | `boolean` | Whether the dialog can be closed by clicking the `mask`. |  |
+| negativeButtonProps | `ButtonProps` | Cancel button's DOM props | 2.27.0 |
 | negativeText | `string` | Corresponding button won't show if not set. |  |
+| positiveButtonProps | `ButtonProps` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
+| onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
+| onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
 
 #### DialogReactive Methods
 
@@ -120,14 +124,16 @@ All the properties can be modified dynamically.
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
+| negative-button-props | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
+| positive-button-props | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
-| on-close | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
-| on-negative-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
-| on-positive-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
+| on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
+| on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |
+| on-positive-click | `(e: MouseEvent) => void` | `undefined` | Callback on negative button clicked. |  |
 
 ### Dialog Slots
 

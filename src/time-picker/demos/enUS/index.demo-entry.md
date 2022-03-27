@@ -14,6 +14,7 @@ actions.vue
 hours12.vue
 formatted.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -39,6 +40,7 @@ focus.vue
 | placeholder | `string` | `'Select Time'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | use-12-hours | `boolean` | `false` | Whether to use a 12-hour clock panel. |  |
 | value | `number \| null` | `undefined` | Value when being set manually. |  |
 | value-format | `string` | follows `format` | Format of formatted value. | 2.24.0 |
