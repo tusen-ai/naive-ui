@@ -43,8 +43,8 @@ custom-card.vue
 | keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 | 2.24.0 |
 | loop | `boolean` | `true` | 是否循环播放 | 2.24.0 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 | 2.24.0 |
-| next-slide-style | `object \| string` | `undefined` | 下一张轮播图的样式 | NEXT_VERSION |
-| prev-slide-style | `object \| string` | `undefined` | 上一张轮播图的样式 | NEXT_VERSION |
+| next-slide-style | `object \| string` | `undefined` | 下一张轮播图的样式 | 2.27.0 |
+| prev-slide-style | `object \| string` | `undefined` | 上一张轮播图的样式 | 2.27.0 |
 | slides-per-view | `'auto' \| number` | `1` | 每一页显示的轮播图数量 | 2.24.0 |
 | space-between | `number` | `0` | 轮播图之间的间距 | 2.24.0 |
 | show-arrow | `boolean` | `false` | 是否显示箭头按钮 | 2.24.0 |

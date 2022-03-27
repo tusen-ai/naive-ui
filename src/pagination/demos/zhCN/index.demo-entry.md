@@ -75,11 +75,11 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| 名称   | 参数                            | 说明               | 版本         |
-| ------ | ------------------------------- | ------------------ | ------------ |
-| goto   | `()`                            | 快速跳转的文本内容 | NEXT_VERSION |
-| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容       | 2.24.0       |
-| next   | `(info: PaginationInfo)`        | 下一页             |              |
-| prev   | `(info: PaginationInfo)`        | 上一页             |              |
-| prefix | `(info: PaginationInfo)`        | 分页前缀           |              |
-| suffix | `(info: PaginationInfo)`        | 分页后缀           |              |
+| 名称   | 参数                            | 说明               | 版本   |
+| ------ | ------------------------------- | ------------------ | ------ |
+| goto   | `()`                            | 快速跳转的文本内容 | 2.27.0 |
+| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容       | 2.24.0 |
+| next   | `(info: PaginationInfo)`        | 下一页             |        |
+| prev   | `(info: PaginationInfo)`        | 上一页             |        |
+| prefix | `(info: PaginationInfo)`        | 分页前缀           |        |
+| suffix | `(info: PaginationInfo)`        | 分页后缀           |        |

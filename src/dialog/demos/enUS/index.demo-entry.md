@@ -67,9 +67,9 @@ action.vue
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
 | maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the `mask`. |  |
-| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | NEXT_VERSION |  |
+| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |  |
 | negativeText | `string` | `undefined` | Cancel button text. Corresponding button won't show if not set. |  |
-| positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | NEXT_VERSION |
+| positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
 | style | `string \| Object` | Style of the dialog. |  |
@@ -96,9 +96,9 @@ All the properties can be modified dynamically.
 | icon | `() => VNodeChild` | `Render` function of `icon`. |  |
 | loading | `boolean` | Whether to display `loading` status. |  |
 | maskClosable | `boolean` | Whether the dialog can be closed by clicking the `mask`. |  |
-| negativeButtonProps | `ButtonProps` | Cancel button's DOM props | NEXT_VERSION |
+| negativeButtonProps | `ButtonProps` | Cancel button's DOM props | 2.27.0 |
 | negativeText | `string` | Corresponding button won't show if not set. |  |
-| positiveButtonProps | `ButtonProps` | Confirm button's DOM props | NEXT_VERSION |
+| positiveButtonProps | `ButtonProps` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
@@ -124,9 +124,9 @@ All the properties can be modified dynamically.
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
-| negative-button-props | `ButtonProps` | `undefined` | Cancel button's DOM props | NEXT_VERSION |
+| negative-button-props | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
-| positive-button-props | `ButtonProps` | `undefined` | Confirm button's DOM props | NEXT_VERSION |
+| positive-button-props | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |

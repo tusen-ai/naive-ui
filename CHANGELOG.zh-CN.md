@@ -2,7 +2,7 @@
 
 ## Pending
 
-## NEXT_VERSION
+## 2.27.0
 
 ### Breaking Changes
 

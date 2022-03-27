@@ -43,8 +43,8 @@ custom-card.vue
 | keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it only works when the focus is on Dots. | 2.24.0 |
 | loop | `boolean` | `true` | Whether to loop. | 2.24.0 |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. | 2.24.0 |
-| next-slide-style | `object \| string` | `undefined` | Next slide's style. | NEXT_VERSION |
-| prev-slide-style | `object \| string` | `undefined` | Previous slide's style. | NEXT_VERSION |
+| next-slide-style | `object \| string` | `undefined` | Next slide's style. | 2.27.0 |
+| prev-slide-style | `object \| string` | `undefined` | Previous slide's style. | 2.27.0 |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. | 2.24.0 |
 | show-dots | `boolean` | `true` | Whether to show dots. | 2.24.0 |
 | slides-per-view | `'auto' \| number` | `1` | Number of carousels displayed on per view. | 2.24.0 |

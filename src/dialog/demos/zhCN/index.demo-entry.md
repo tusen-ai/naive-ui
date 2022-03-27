@@ -69,9 +69,9 @@ focus-debug.vue
 | icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
-| negativeButtonProps | `ButtonProps` | `undefined` | 取消按钮的属性 | NEXT_VERSION |
+| negativeButtonProps | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
 | negativeText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
-| positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | NEXT_VERSION |
+| positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
@@ -97,9 +97,9 @@ focus-debug.vue
 | icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |  |
 | loading | `boolean` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |  |
-| negativeButtonProps | `ButtonProps` | 取消按钮的属性 | NEXT_VERSION |
+| negativeButtonProps | `ButtonProps` | 取消按钮的属性 | 2.27.0 |
 | negativeText | `string` | 不填对应的按钮不会出现 |  |
-| positiveButtonProps | `ButtonProps` | 确认按钮的属性 | NEXT_VERSION |
+| positiveButtonProps | `ButtonProps` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
@@ -125,9 +125,9 @@ focus-debug.vue
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
-| negative-button-props | `ButtonProps` | `undefined` | 取消按钮的属性 | NEXT_VERSION |
+| negative-button-props | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
 | negative-text | `string` | `undefined` | 取消按钮的文字，不填对应的按钮不会出现 |  |
-| positive-button-props | `ButtonProps` | `undefined` | 确认按钮的属性 | NEXT_VERSION |
+| positive-button-props | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positive-text | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | show-icon | `boolean` | `true` | 是否显示 `icon` |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |  |

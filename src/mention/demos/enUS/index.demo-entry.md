@@ -38,7 +38,7 @@ Mention requires `v2.2.0` and above.
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Selection panel's placement . | 2.25.0 |
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |  |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box is focussed on. |  |

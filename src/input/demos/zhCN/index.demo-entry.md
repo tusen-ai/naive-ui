@@ -65,8 +65,8 @@ rtl-debug.vue
 | 属性 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | count | `(value: string)` | 字数统计 |  |
-| password-invisible-icon | `()` | 密码关闭时的密码开关图标 | NEXT_VERSION |
-| password-visible-icon | `()` | 密码显示时的密码开关图标 | NEXT_VERSION |
+| password-invisible-icon | `()` | 密码关闭时的密码开关图标 | 2.27.0 |
+| password-visible-icon | `()` | 密码显示时的密码开关图标 | 2.27.0 |
 | prefix | `()` | 输入框头部内容 |  |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |  |
 | suffix | `()` | 输入框尾部内容 |  |

@@ -27,7 +27,7 @@ trigger.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
-| animated | `boolean` | `false` | Whether to activate tab switching animation. | NEXT_VERSION |
+| animated | `boolean` | `false` | Whether to activate tab switching animation. | 2.27.0 |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
@@ -37,7 +37,7 @@ trigger.vue
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |  |
-| trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | NEXT_VERSION |
+| trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |  |
 | value | `string \| number` | `undefined` | Value in controlled mode. |  |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |  |
