@@ -58,8 +58,6 @@ status.vue
 | on-focus | `() => void` | `undefined` | Callback triggered when the input is focussed on. |  |
 | on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input gets user input. |  |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |  |
-| password-visible-icon | `Component` | `undefined` | Custom show password icon |  |
-| password-invisible-icon | `Component` | `undefined` | Custom hide password icon |  |
 
 ### Input Slots
 

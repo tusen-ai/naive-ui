@@ -19,9 +19,9 @@ actions.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| negative-button-props | `HTMLAttributes` | `undefined` | Cancel button's DOM props | NEXT_VERSION |
+| negative-button-props | `ButtonProps` | `undefined` | Cancel button's DOM props | NEXT_VERSION |
 | negative-text | `string` | `'Cancel'` | Cancel button text. |  |
-| positive-button-props | `HTMLAttributes` | `undefined` | Confirm button's DOM props | NEXT_VERSION |
+| positive-button-props | `ButtonProps` | `undefined` | Confirm button's DOM props | NEXT_VERSION |
 | positive-text | `string` | `'Confirm'` | Confirm button text. |  |
 | show-icon | `boolean` | `true` | Whether to show icon. |  |
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | Callback of confirmation. |  |

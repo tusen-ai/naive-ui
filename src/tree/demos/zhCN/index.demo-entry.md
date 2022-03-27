@@ -57,7 +57,6 @@ scrollbar-debug.vue
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
-| remote | `boolean` | `false` | 是否异步获取选项，和 `onLoad` 配合 |  |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |
@@ -85,6 +84,6 @@ scrollbar-debug.vue
 | checkboxDisabled? | `boolean` | 是否禁用节点的 `checkbox` |
 | children? | `TreeOption[]` | 节点的子节点 |
 | disabled? | `boolean` | 是否禁用节点 |
-| isLeaf? | `boolean` | 节点是否是叶节点，在 `remote` 模式下是必须的 |
+| isLeaf? | `boolean` | 节点是否是叶节点，在异步展开状态下是必须的 |
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |

@@ -46,7 +46,6 @@ debug.vue
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
-| remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load`. | NEXT_VERSION |
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
@@ -68,7 +67,7 @@ debug.vue
 | label | `string` | Displayed content of the option. The field used can be set using `label-field`. |  |
 | children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |  |
 | disabled? | `boolean` | Option disabled state. |  |
-| isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. | NEXT_VERSION |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in async mode. | NEXT_VERSION |
 
 ### TreeSelect Slots
 

@@ -1,14 +1,13 @@
 <markdown>
 # 异步加载
 
-设定 `remote` 后，使用 `on-load` 回调来加载数据。异步加载时，所有 `isLeaf` 为 `false` 并且 `children` 不为数组的节点会被视为未加载的节点。
+使用 `on-load` 回调来加载数据。异步加载时，所有 `isLeaf` 为 `false` 并且 `children` 不为数组的节点会被视为未加载的节点。
 </markdown>
 
 <template>
   <n-tree
     block-line
     checkable
-    remote
     draggable
     :data="data"
     :checked-keys="checkedKeys"

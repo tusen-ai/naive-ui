@@ -98,7 +98,6 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
-  remote: Boolean,
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
@@ -833,7 +832,6 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
-                                  remote={this.remote}
                                   virtualScroll={
                                     this.consistentMenuWidth &&
                                     this.virtualScroll

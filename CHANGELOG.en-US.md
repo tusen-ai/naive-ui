@@ -24,7 +24,6 @@
 
 ### Feats
 
-- `n-tree-select` adds `remote` props, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
 - `n-tree-select` adds `on-load` method, closes [#2550](https://github.com/TuSimple/naive-ui/issues/2550).
 - `n-cascader` adds `menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
 - `n-cascader` adds `filter-menu-props` prop, closes [#2600](https://github.com/TuSimple/naive-ui/issues/2600).
@@ -46,6 +45,7 @@
 - `n-mention` adds `status` prop.
 - `n-tree-select` adds `status` prop.
 - `n-menu` adds `showOption` method, closes [#2562](https://github.com/TuSimple/naive-ui/issues/2562).
+- `n-dynamic-tags`'s `value` support object typed option.
 - `n-dynamic-tags` adds `render-tag` prop, closes [#2526](https://github.com/TuSimple/naive-ui/issues/2526).
 - `n-dynamic-tags` adds `on-create` prop, closes [#2576](https://github.com/TuSimple/naive-ui/issues/2576).
 - `n-date-picker` adds `time-picker-props` props, closes [#2660](https://github.com/TuSimple/naive-ui/issues/2660).
