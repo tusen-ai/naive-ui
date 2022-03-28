@@ -379,4 +379,32 @@ describe('n-carousel', () => {
     )
     wrapper.unmount()
   })
+
+  it('should work with `show-dots` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
+            }),
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+            })
+          ]
+        }
+      }
+    })
+    await sleep(100)
+    expect(wrapper.find('.n-carousel__dots').exists()).toBe(true)
+
+    await wrapper.setProps({
+      showDots: false
+    })
+    await sleep(100)
+    expect(wrapper.find('.n-carousel__dots').exists()).not.toBe(true)
+    wrapper.unmount()
+  })
 })
