@@ -87,7 +87,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const {
+      mergedClsPrefix,
+      showIcon,
+      $slots,
+      $slots: { default: defaultSlot }
+    } = this
     const actionContentNode = resolveSlot($slots.action, () =>
       this.negativeText === null && this.positiveText === null
         ? []
@@ -117,7 +122,7 @@ export default defineComponent({
     return (
       <div class={this.themeClass} style={this.cssVars as CSSProperties}>
         <div class={`${mergedClsPrefix}-popconfirm__body`}>
-          {this.showIcon ? (
+          {showIcon ? (
             <div class={`${mergedClsPrefix}-popconfirm__icon`}>
               {resolveSlot($slots.icon, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -126,10 +131,17 @@ export default defineComponent({
               ])}
             </div>
           ) : null}
-          {$slots.default?.()}
+          {defaultSlot?.()}
         </div>
         {actionContentNode ? (
-          <div class={`${mergedClsPrefix}-popconfirm__action`}>
+          <div
+            class={[
+              `${mergedClsPrefix}-popconfirm__action`,
+              showIcon || defaultSlot
+                ? `${mergedClsPrefix}-popconfirm__space`
+                : undefined
+            ]}
+          >
             {actionContentNode}
           </div>
         ) : null}

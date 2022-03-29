@@ -21,8 +21,10 @@ export default cB('popconfirm', [
       margin: 0 8px 0 0;
     `)
   ]),
-  cE('action', `
+  cE('space', `
     margin-top: 8px;
+  `),
+  cE('action', `
     display: flex;
     justify-content: flex-end;
   `, [
