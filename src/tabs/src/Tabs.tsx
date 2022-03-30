@@ -285,7 +285,17 @@ export default defineComponent({
     }
 
     let firstTimeUpdatePosition = true
-    const handleNavResize = throttle(function handleNavResize () {
+    let memorizedWidth = 0
+    const handleNavResize = throttle(function handleNavResize (
+      entry: ResizeObserverEntry
+    ) {
+      if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
+        return
+      }
+      if (memorizedWidth === entry.contentRect.width) {
+        return
+      }
+      memorizedWidth = entry.contentRect.width
       const { type } = props
       if (
         (type === 'line' || type === 'bar') &&
@@ -304,7 +314,8 @@ export default defineComponent({
       if (type !== 'segment') {
         deriveScrollShadow(xScrollInstRef.value?.$el)
       }
-    }, 64)
+    },
+    64)
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize (entry: ResizeObserverEntry): void {
