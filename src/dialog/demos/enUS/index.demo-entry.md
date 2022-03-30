@@ -58,7 +58,7 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
