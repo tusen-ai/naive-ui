@@ -52,6 +52,8 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    onAfterLeave: Function as PropType<() => void>,
+    onAfterEnter: Function as PropType<() => void>,
     onEsc: Function as PropType<() => void>
   },
   setup (props) {
@@ -64,6 +66,7 @@ export default defineComponent({
     })
     function handleAfterLeave (): void {
       displayedRef.value = false
+      props.onAfterLeave?.()
     }
     provide(drawerBodyInjectionKey, bodyRef)
     provide(popoverBodyInjectionKey, null)
@@ -103,6 +106,7 @@ export default defineComponent({
                   <Transition
                     name={this.transitionName}
                     appear={this.isMounted}
+                    onAfterEnter={this.onAfterEnter}
                     onAfterLeave={this.handleAfterLeave}
                   >
                     {{
