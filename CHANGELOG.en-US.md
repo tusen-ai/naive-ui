@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
+
 ## 2.27.0
 
 ### Breaking Changes
