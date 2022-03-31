@@ -1,5 +1,5 @@
 import { h, createTextVNode, PropType, defineComponent, computed } from 'vue'
-import { format, formatDistance, fromUnixTime, getTime } from 'date-fns'
+import { format, formatDistanceStrict, fromUnixTime, getTime } from 'date-fns'
 import { getTimezoneOffset } from 'date-fns-tz'
 import { useLocale } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
@@ -28,7 +28,7 @@ export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
 export default defineComponent({
   name: 'Time',
   props: timeProps,
-  setup (props) {
+  setup(props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
     const mergedFormatRef = computed(() => {
@@ -37,11 +37,11 @@ export default defineComponent({
         return (time: number | Date, _format: string) => {
           return format(
             getTime(time) +
-              -getTimezoneOffset(
-                Intl.DateTimeFormat().resolvedOptions().timeZone,
-                time
-              ) +
-              getTimezoneOffset(timezone, time),
+            -getTimezoneOffset(
+              Intl.DateTimeFormat().resolvedOptions().timeZone,
+              time
+            ) +
+            getTimezoneOffset(timezone, time),
             _format
           )
         }
@@ -89,7 +89,7 @@ export default defineComponent({
           dateFnsOptionsRef.value
         )
       } else {
-        return formatDistance(mergedTimeRef.value, mergedToRef.value, {
+        return formatDistanceStrict(mergedTimeRef.value, mergedToRef.value, {
           addSuffix: true,
           locale: dateLocaleRef.value.locale
         })
@@ -99,7 +99,7 @@ export default defineComponent({
       renderedTime: renderedTimeRef
     }
   },
-  render () {
+  render() {
     return this.text
       ? createTextVNode(this.renderedTime)
       : h('time', [this.renderedTime])
