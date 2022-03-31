@@ -120,28 +120,26 @@ export default defineComponent({
     )
     this.onRender?.()
     return (
-      <div class={this.themeClass} style={this.cssVars as CSSProperties}>
-        <div class={`${mergedClsPrefix}-popconfirm__body`}>
-          {showIcon ? (
-            <div class={`${mergedClsPrefix}-popconfirm__icon`}>
-              {resolveSlot($slots.icon, () => [
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <WarningIcon /> }}
-                </NBaseIcon>
-              ])}
-            </div>
-          ) : null}
-          {defaultSlot?.()}
-        </div>
+      <div
+        class={[`${mergedClsPrefix}-popconfirm__panel`, this.themeClass]}
+        style={this.cssVars as CSSProperties}
+      >
+        {showIcon || defaultSlot ? (
+          <div class={`${mergedClsPrefix}-popconfirm__body`}>
+            {showIcon ? (
+              <div class={`${mergedClsPrefix}-popconfirm__icon`}>
+                {resolveSlot($slots.icon, () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => <WarningIcon /> }}
+                  </NBaseIcon>
+                ])}
+              </div>
+            ) : null}
+            {defaultSlot?.()}
+          </div>
+        ) : null}
         {actionContentNode ? (
-          <div
-            class={[
-              `${mergedClsPrefix}-popconfirm__action`,
-              showIcon || defaultSlot
-                ? `${mergedClsPrefix}-popconfirm__space`
-                : undefined
-            ]}
-          >
+          <div class={[`${mergedClsPrefix}-popconfirm__action`]}>
             {actionContentNode}
           </div>
         ) : null}
