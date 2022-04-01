@@ -8,6 +8,7 @@ If you just want a number, this is for you.
 basic.vue
 disabled.vue
 event.vue
+justify-icon.vue
 icon.vue
 loading.vue
 min-max.vue

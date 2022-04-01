@@ -68,6 +68,10 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  justifyIcon: {
+    type: Boolean,
+    default: false
+  },
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -531,13 +535,12 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            prefix: () => this.$slots.prefix?.(),
-            suffix: () =>
-              this.showButton
+            prefix: () =>
+              this.showButton && this.justifyIcon
                 ? [
-                    this.$slots.suffix && (
-                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                        {{ default: this.$slots.suffix }}
+                    this.$slots.prefix && (
+                      <span class={`${mergedClsPrefix}-input-number-prefix`}>
+                        {{ default: this.$slots.prefix }}
                       </span>
                     ),
                     <NxButton
@@ -563,7 +566,45 @@ export default defineComponent({
                           </NBaseIcon>
                         )
                       }}
-                    </NxButton>,
+                    </NxButton>
+                  ]
+                : this.$slots.prefix?.(),
+            suffix: () =>
+              this.showButton
+                ? [
+                    this.$slots.suffix && (
+                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                        {{ default: this.$slots.suffix }}
+                      </span>
+                    ),
+                    !this.justifyIcon && (
+                      <NxButton
+                        text
+                        disabled={
+                          !this.minusable ||
+                          this.mergedDisabled ||
+                          this.readonly
+                        }
+                        focusable={false}
+                        builtinThemeOverrides={this.buttonThemeOverrides}
+                        onClick={this.handleMinusClick}
+                        onMousedown={this.handleMinusMousedown}
+                        ref="minusButtonInstRef"
+                      >
+                        {{
+                          default: () => (
+                            <NBaseIcon
+                              clsPrefix={mergedClsPrefix}
+                              aria-disabled={true}
+                            >
+                              {{
+                                default: () => <RemoveIcon />
+                              }}
+                            </NBaseIcon>
+                          )
+                        }}
+                      </NxButton>
+                    ),
                     <NxButton
                       text
                       disabled={

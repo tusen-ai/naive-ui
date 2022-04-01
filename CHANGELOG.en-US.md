@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+- Fix `n-input-number` add `justify-icon` props for justify add,remove icon (like: [- 0 +])
+
 ### Fixes
 
 - Fix `n-tabs` has unexpected line animation when nested with `n-tabs`, closes [#2689](https://github.com/TuSimple/naive-ui/issues/2689).
