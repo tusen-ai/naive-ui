@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
+- `n-data-table` hidden pagination when `item-count < page-size`, closes [#2043](https://github.com/TuSimple/naive-ui/issues/2043).
 
 ## 2.27.0
 

@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
+- `n-date-table` 当 `item-count < page-size` 时，隐藏 `pagination`，关闭 [#2043](https://github.com/TuSimple/naive-ui/issues/2043)
 
 ## 2.27.0
 

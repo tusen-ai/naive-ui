@@ -482,6 +482,13 @@ export default defineComponent({
         props
       )
       : undefined
+    const mergedShowPaginationRef = computed(
+      () =>
+        props.pagination &&
+        mergedPaginationRef.value.itemCount &&
+        mergedPaginationRef.value.pageSize &&
+        mergedPaginationRef.value.itemCount > mergedPaginationRef.value.pageSize
+    )
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -490,6 +497,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
+      mergedShowPagination: mergedShowPaginationRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -519,7 +527,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />
         </div>
-        {this.pagination ? (
+        {this.mergedShowPagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>
             <NPagination
               theme={this.mergedTheme.peers.Pagination}
