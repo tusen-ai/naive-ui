@@ -1,3 +1,4 @@
+import { CSSProperties, Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export const tuple = <T extends string[]>(...args: T): T => args
@@ -25,6 +26,8 @@ export interface CarouselMethodsInjection {
   addSlide: (slide?: HTMLElement) => void
   removeSlide: (slide?: HTMLElement) => void
   onCarouselItemClick: (index: number, event: MouseEvent) => void
+  prevSlideStyleRef: Ref<CSSProperties | string | undefined>
+  nextSlideStyleRef: Ref<CSSProperties | string | undefined>
 }
 export const carouselMethodsInjectionKey =
   createInjectionKey<CarouselMethodsInjection>('n-carousel-methods')

@@ -315,9 +315,7 @@ export default cB('carousel', `
   cM('fade', [
     cE('slide', `
       position: absolute;
-      left: 50%;
       opacity: 0;
-      transform: translateX(-50%);
       transition-property: opacity;
     `, [
       cM('current', `
@@ -327,7 +325,7 @@ export default cB('carousel', `
   ]),
   cM('card', [
     cE('slides', `
-      perspective: 1200px;
+      perspective: 1000px;
     `),
     cE('slide', `
       position: absolute;

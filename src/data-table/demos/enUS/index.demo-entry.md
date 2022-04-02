@@ -24,7 +24,7 @@ select
 custom-select
 group-header
 controlled-page
-controlled-filter
+controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
 fixed-header
@@ -44,55 +44,57 @@ striped
 simple-editable
 switchable-editable
 context-menu.vue
+async-expand.vue
 ```
 
 ## API
 
 ### DataTable Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| bordered | `boolean` | `true` | Whether to show border. |
-| bottom-bordered | `boolean` | `true` | Whether to show bottom border. |
-| checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
-| cascade | `boolean` | `true` | Whether to do cascade checking when using tree data. |
-| children-key | `string` | `'children'` | The key of children data in tree data's data entity. |
-| columns | `Array<DataTableColumn>` | `[]` | Columns to display. |
-| data | `Array<object>` | `[]` | Data to display. |
-| default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |
-| default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |
-| expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |
-| flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |
-| indent | `number` | `16` | Indent of row content when using tree data. |
-| loading | `boolean` | `false` | Whether to display loading status. |
-| max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
-| min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
-| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |
-| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
-| row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |
-| row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
-| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
-| scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
-| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
-| striped | `boolean` | `false` | Whether to show zebra stripes on rows. |
-| summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |
-| table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |
-| virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |
-| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |
-| on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |
-| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
-| on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
-| on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
-| on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `DataTableSortState[] \| null`, otherwise return `DataTableSortState \| null`. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `true` | Whether to show border. |  |
+| bottom-bordered | `boolean` | `true` | Whether to show bottom border. |  |
+| checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |  |
+| cascade | `boolean` | `true` | Whether to do cascade checking when using tree data. |  |
+| children-key | `string` | `'children'` | The key of children data in tree data's data entity. |  |
+| columns | `Array<DataTableColumn>` | `[]` | Columns to display. |  |
+| data | `Array<object>` | `[]` | Data to display. |  |
+| default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
+| default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
+| expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
+| flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
+| indent | `number` | `16` | Indent of row content when using tree data. |  |
+| loading | `boolean` | `false` | Whether to display loading status. |  |
+| max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
+| min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
+| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
+| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
+| row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
+| row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
+| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
+| scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
+| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
+| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
+| striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
+| summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
+| virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
+| on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
+| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |  |
+| on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
+| on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
+| on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |
+| on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |  |
+| on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `DataTableSortState[] \| null`, otherwise return `DataTableSortState \| null`. |  |
 
 #### DataTableColumn Properties
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
-| cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | NEXT_VERSION |
+| cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |  |

@@ -2,14 +2,15 @@ import { Ref, Slots } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
-import {
+import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled
 } from '../../time-picker/src/interface'
-import { MergedTheme } from '../../_mixins'
+import type { TimePickerProps } from '../../time-picker/src/TimePicker'
+import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import { DatePickerTheme } from '../styles/light'
+import type { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -86,6 +87,9 @@ export type DatePickerInjection = {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
+  timePickerPropsRef: Ref<
+  undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
+  >
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>

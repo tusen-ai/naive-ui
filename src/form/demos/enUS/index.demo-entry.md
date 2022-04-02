@@ -38,7 +38,7 @@ custom-messages.vue
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
-| validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | NEXT_VERSION |
+| validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | 2.27.0 |
 
 #### FormItemRule Type
 

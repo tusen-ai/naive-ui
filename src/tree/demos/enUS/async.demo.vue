@@ -1,14 +1,13 @@
 <markdown>
 # Async loading
 
-After set `remote`, use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
+Use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 </markdown>
 
 <template>
   <n-tree
     block-line
     checkable
-    remote
     draggable
     :data="data"
     :checked-keys="checkedKeys"

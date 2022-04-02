@@ -25,6 +25,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
 import { happensIn } from 'seemly'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -97,7 +98,6 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
-  remote: Boolean,
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
@@ -132,6 +132,7 @@ const props = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   ...treeSharedProps,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -831,7 +832,6 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
-                                  remote={this.remote}
                                   virtualScroll={
                                     this.consistentMenuWidth &&
                                     this.virtualScroll

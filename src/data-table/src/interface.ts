@@ -164,7 +164,6 @@ export type DataTableSelectionOptions = Array<
 export interface DataTableInjection {
   slots: Slots
   indentRef: Ref<number>
-  hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>
   componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
@@ -213,11 +212,10 @@ export interface DataTableInjection {
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
   stripedRef: Ref<boolean>
+  onLoadRef: Ref<DataTableOnLoad | undefined>
+  loadingKeySetRef: Ref<Set<RowKey>>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
-  doUpdateFilters: (
-    filters: FilterState,
-    sourceColumn?: TableBaseColumn
-  ) => void
+  doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
@@ -259,7 +257,7 @@ export type OnUpdateSorterImpl = (
 ) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
-  sourceColumn?: TableBaseColumn
+  sourceColumn: TableBaseColumn
 ) => void
 
 export interface SortState {
@@ -321,3 +319,5 @@ export interface SummaryCell {
 export interface SummaryRowData {
   [key: string]: SummaryCell
 }
+
+export type DataTableOnLoad = (node: RowData) => Promise<void>

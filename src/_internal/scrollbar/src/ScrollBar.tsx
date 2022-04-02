@@ -195,9 +195,10 @@ const Scrollbar = defineComponent({
       ) {
         return 0
       } else {
+        const heightDiff = contentHeight - containerHeight
+        if (!heightDiff) return 0
         return (
-          (containerScrollTop / (contentHeight - containerHeight)) *
-          (yRailSize - yBarSizeRef.value)
+          (containerScrollTop / heightDiff) * (yRailSize - yBarSizeRef.value)
         )
       }
     })
@@ -216,9 +217,10 @@ const Scrollbar = defineComponent({
       ) {
         return 0
       } else {
+        const widthDiff = contentWidth - containerWidth
+        if (!widthDiff) return 0
         return (
-          (containerScrollLeft / (contentWidth - containerWidth)) *
-          (xRailSize - xBarSizeRef.value)
+          (containerScrollLeft / widthDiff) * (xRailSize - xBarSizeRef.value)
         )
       }
     })

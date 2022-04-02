@@ -176,6 +176,22 @@ describe('n-dynamic-tags', () => {
     wrapper.unmount()
   })
 
+  it('should work with `input-style` prop', async () => {
+    const wrapper = mount(NDynamicTags, {
+      props: {
+        defaultValue: ['教师']
+      }
+    })
+    await wrapper.find('button').trigger('click')
+    expect(wrapper.find('.n-input').attributes('style')).not.toContain(
+      'color: red'
+    )
+
+    await wrapper.setProps({ inputStyle: { color: 'red' } })
+    expect(wrapper.find('.n-input').attributes('style')).toContain('color: red')
+    wrapper.unmount()
+  })
+
   it('should work with `input` slot', async () => {
     const wrapper = mount(NDynamicTags, {
       props: {

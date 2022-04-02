@@ -9,14 +9,15 @@ basic.vue
 segment.vue
 card.vue
 flex-label.vue
-size.vue
 prefix.vue
+size.vue
 display-directive.vue
 addable.vue
 before-leave.vue
 no-pane.vue
 update-bar-manually.vue
 bar-width.vue
+trigger.vue
 ```
 
 ## API
@@ -26,6 +27,7 @@ bar-width.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
+| animated | `boolean` | `false` | Whether to activate tab switching animation. | 2.27.0 |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
@@ -35,6 +37,7 @@ bar-width.vue
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |  |
+| trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |  |
 | value | `string \| number` | `undefined` | Value in controlled mode. |  |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |  |

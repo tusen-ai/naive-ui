@@ -29,7 +29,7 @@ import type { PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, warn, warnOnce } from '../../_utils'
+import { call, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
@@ -658,7 +658,7 @@ export default defineComponent({
         ) : null}
         {showQuickJumper ? (
           <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-            {locale.goto}
+            {resolveSlot(this.$slots.goto, () => [locale.goto])}
             <NInput
               ref="jumperRef"
               value={jumperValue}

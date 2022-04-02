@@ -74,6 +74,8 @@ const drawerProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   /** @deprecated */
   drawerStyle: [String, Object] as PropType<string | CSSProperties>,
   drawerClass: String,
@@ -277,6 +279,8 @@ export default defineComponent({
                   show={this.show}
                   displayDirective={this.displayDirective}
                   nativeScrollbar={this.nativeScrollbar}
+                  onAfterEnter={this.onAfterEnter}
+                  onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
                   onEsc={this.handleEsc}

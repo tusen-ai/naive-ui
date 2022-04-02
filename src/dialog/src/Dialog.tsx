@@ -157,6 +157,8 @@ export const NDialog = defineComponent({
       action,
       negativeText,
       positiveText,
+      positiveButtonProps,
+      negativeButtonProps,
       handlePositiveClick,
       handleNegativeClick,
       mergedTheme,
@@ -197,6 +199,7 @@ export const NDialog = defineComponent({
                       ghost
                       size="small"
                       onClick={handleNegativeClick}
+                      {...negativeButtonProps}
                     >
                       {{
                         default: () => render(this.negativeText)
@@ -207,11 +210,12 @@ export const NDialog = defineComponent({
                     <NButton
                       theme={mergedTheme.peers.Button}
                       themeOverrides={mergedTheme.peerOverrides.Button}
-                      disabled={loading}
-                      loading={loading}
                       size="small"
                       type={type === 'default' ? 'primary' : type}
+                      disabled={loading}
+                      loading={loading}
                       onClick={handlePositiveClick}
+                      {...positiveButtonProps}
                     >
                       {{
                         default: () => render(this.positiveText)

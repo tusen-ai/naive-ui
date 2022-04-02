@@ -32,6 +32,7 @@ import {
   getHours,
   getSeconds
 } from 'date-fns'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
 import { InputInst, NInput } from '../../input'
@@ -109,6 +110,7 @@ const timePickerProps = {
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   inputReadonly: Boolean,
   clearable: Boolean,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateFormattedValue: [Function, Array] as PropType<

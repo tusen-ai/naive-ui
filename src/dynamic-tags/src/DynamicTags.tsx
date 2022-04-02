@@ -7,7 +7,8 @@ import {
   computed,
   nextTick,
   toRef,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
@@ -30,7 +31,12 @@ import { call, smallerSize, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
-import type { OnUpdateValue } from './interface'
+import type {
+  OnUpdateValue,
+  DynamicTagsOption,
+  OnCreate,
+  OnUpdateValueImpl
+} from './interface'
 import style from './styles/index.cssr'
 
 const dynamicTagsProps = {
@@ -41,14 +47,22 @@ const dynamicTagsProps = {
     default: true
   },
   defaultValue: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<Array<string | DynamicTagsOption>>,
     default: () => []
   },
-  value: Array as PropType<string[]>,
+  value: Array as PropType<Array<string | DynamicTagsOption>>,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
   inputProps: Object as PropType<InputProps>,
   max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
+  renderTag: Function as PropType<
+  | ((tag: string, index: number) => VNodeChild)
+  | ((tag: DynamicTagsOption, index: number) => VNodeChild)
+  >,
+  onCreate: {
+    type: Function as PropType<OnCreate>,
+    default: (label: string) => label
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
@@ -93,7 +107,6 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-
     const localizedAddRef = computed(() => {
       return localeRef.value.add
     })
@@ -106,16 +119,16 @@ export default defineComponent({
         (!!props.max && mergedValueRef.value.length >= props.max)
       )
     })
-    function doChange (value: string[]): void {
+    function doChange (value: Array<string | DynamicTagsOption>): void {
       const {
         onChange,
         'onUpdate:value': _onUpdateValue,
         onUpdateValue
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange, value)
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -187,7 +200,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cssVars, mergedClsPrefix, onRender } = this
+    const { mergedTheme, cssVars, mergedClsPrefix, onRender, renderTag } = this
     onRender?.()
     return (
       <NSpace
@@ -223,23 +236,29 @@ export default defineComponent({
               $slots
             } = this
             return this.mergedValue
-              .map((tag, index) => (
-                <NTag
-                  key={index}
-                  theme={mergedTheme.peers.Tag}
-                  themeOverrides={mergedTheme.peerOverrides.Tag}
-                  style={tagStyle}
-                  type={type}
-                  round={round}
-                  size={size}
-                  color={color}
-                  closable={closable}
-                  disabled={mergedDisabled}
-                  onClose={() => handleCloseClick(index)}
-                >
-                  {{ default: () => tag }}
-                </NTag>
-              ))
+              .map((tag, index) =>
+                renderTag ? (
+                  renderTag(tag as string & DynamicTagsOption, index)
+                ) : (
+                  <NTag
+                    key={index}
+                    theme={mergedTheme.peers.Tag}
+                    themeOverrides={mergedTheme.peerOverrides.Tag}
+                    style={tagStyle}
+                    type={type}
+                    round={round}
+                    size={size}
+                    color={color}
+                    closable={closable}
+                    disabled={mergedDisabled}
+                    onClose={() => handleCloseClick(index)}
+                  >
+                    {{
+                      default: () => (typeof tag === 'string' ? tag : tag.label)
+                    }}
+                  </NTag>
+                )
+              )
               .concat(
                 showInput ? (
                   $slots.input ? (
