@@ -8,6 +8,7 @@
 
 ### Feats
 
+- `n-radio` 添加标签道具，关闭 [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
 
 ## 2.27.0

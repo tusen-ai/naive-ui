@@ -23,6 +23,7 @@ size.vue
 | default-checked | `boolean` | `false` | Default checked state. |
 | disabled | `boolean` | `false` | Disabled state. |
 | name | `string` | `undefined` | The name attribute of the radio element. If not set, name of `radio-group` will be used. |
+| label | `string` | `undefined` | Radio label. If not set, render default slot content |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | value | `string \| number` | `'on'` | Checked value. |
 | on-update:checked | `(check: boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |
