@@ -115,7 +115,10 @@ const inputProps = {
     default: true
   },
   showCount: Boolean,
-  loading: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   trim: Boolean,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
