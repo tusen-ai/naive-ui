@@ -115,10 +115,8 @@ const inputProps = {
     default: true
   },
   showCount: Boolean,
-  loading: {
-    type: Boolean,
-    default: undefined
-  },
+  loading: Boolean,
+  trim: Boolean,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -447,7 +445,8 @@ export default defineComponent({
       }
       syncSource = targetValue
       if (isComposingRef.value) return
-      const changedValue = targetValue
+      const changedValue = handleTrim(targetValue, index)
+
       if (!props.pair) {
         event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
       } else {
@@ -463,6 +462,31 @@ export default defineComponent({
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
       vm.$forceUpdate()
+    }
+    function handleTrim (value: string, index: number): string {
+      const inputElement =
+        props.type === 'textarea'
+          ? textareaElRef.value
+          : index === 0
+            ? inputElRef.value
+            : inputEl2Ref.value
+      const cursorPosition = inputElement?.selectionStart
+      const targetValueCache = value
+      const changedValue = props.trim ? value.trim() : value
+      const reg = /^[\s ]|[ ]$/gi
+      if (
+        props.trim &&
+        reg.test(targetValueCache) &&
+        cursorPosition === 1 &&
+        inputElement
+      ) {
+        inputElement.blur()
+        void setTimeout(() => {
+          inputElement.setSelectionRange(0, 0)
+          inputElement.focus()
+        })
+      }
+      return changedValue
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)

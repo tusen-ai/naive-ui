@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input` adds `trim` props.
+
 ## 2.28.0
 
 ### Breaking Changes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input` 新增 `trim` 属性
+
 ## 2.28.0
 
 ### Breaking Changes
