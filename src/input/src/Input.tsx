@@ -445,7 +445,9 @@ export default defineComponent({
       }
       syncSource = targetValue
       if (isComposingRef.value) return
-      const changedValue = handleTrim(targetValue, index)
+      const changedValue = props.trim
+        ? handleTrim(targetValue, index)
+        : targetValue
 
       if (!props.pair) {
         event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
@@ -471,22 +473,15 @@ export default defineComponent({
             ? inputElRef.value
             : inputEl2Ref.value
       const cursorPosition = inputElement?.selectionStart
-      const targetValueCache = value
-      const changedValue = props.trim ? value.trim() : value
       const reg = /^[\s ]|[ ]$/gi
-      if (
-        props.trim &&
-        reg.test(targetValueCache) &&
-        cursorPosition === 1 &&
-        inputElement
-      ) {
+      if (reg.test(value) && cursorPosition === 1 && inputElement) {
         inputElement.blur()
         void setTimeout(() => {
           inputElement.setSelectionRange(0, 0)
           inputElement.focus()
         })
       }
-      return changedValue
+      return value.trim()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
