@@ -22,10 +22,23 @@ describe('n-icon-wrapper', () => {
   it('should work with `color` prop', async () => {
     const wrapper = mount(NIconWrapper)
     expect(wrapper.find('.n-icon-wrapper').attributes('style')).not.toContain(
-      'color: red'
+      'background-color: red'
     )
 
     await wrapper.setProps({ color: 'red' })
+    expect(wrapper.find('.n-icon-wrapper').attributes('style')).toContain(
+      'background-color: red'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `icon-color` prop', async () => {
+    const wrapper = mount(NIconWrapper)
+    expect(wrapper.find('.n-icon-wrapper').attributes('style')).not.toContain(
+      'color: red'
+    )
+
+    await wrapper.setProps({ iconColor: 'red' })
     expect(wrapper.find('.n-icon-wrapper').attributes('style')).toContain(
       'color: red'
     )
