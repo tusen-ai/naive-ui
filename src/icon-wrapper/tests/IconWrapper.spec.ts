@@ -44,4 +44,17 @@ describe('n-icon-wrapper', () => {
     )
     wrapper.unmount()
   })
+
+  it('should work with `size` prop', async () => {
+    const wrapper = mount(NIconWrapper)
+    expect(wrapper.find('.n-icon-wrapper').attributes('style')).toContain(
+      'height: 24px; width: 24px;'
+    )
+
+    await wrapper.setProps({ size: 18 })
+    expect(wrapper.find('.n-icon-wrapper').attributes('style')).toContain(
+      'height: 18px; width: 18px;'
+    )
+    wrapper.unmount()
+  })
 })
