@@ -87,7 +87,7 @@
     "@vue/server-renderer": "^3.2.18",
     "@vue/test-utils": "2.0.0-rc.16",
     "autoprefixer": "^10.2.6",
-    "axios": "^0.26.0",
+    "lyla": "^0.4.0",
     "babel-jest": "^27.0.2",
     "codesandbox": "^2.2.3",
     "cross-env": "^7.0.3",

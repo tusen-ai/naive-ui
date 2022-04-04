@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
+- 修复 `n-tree-select` 无意义 warning
 
 ### Feats
 

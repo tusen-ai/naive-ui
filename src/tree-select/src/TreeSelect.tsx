@@ -847,7 +847,6 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
-                                  onDrop={this.onDrop}
                                   onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
