@@ -5,9 +5,11 @@
 ### Fixes
 
 - Fix `n-tabs` has unexpected line animation when nested with `n-tabs`, closes [#2689](https://github.com/TuSimple/naive-ui/issues/2689).
+- Fix `n-tree-select` unexpected warning.
 
 ### Feats
 
+- `n-radio` add `label` prop, closes [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
 - `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
 
 ## 2.27.0
