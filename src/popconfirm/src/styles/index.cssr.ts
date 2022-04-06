@@ -6,6 +6,11 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-bezier
 // --n-icon-color
 export default cB('popconfirm', [
+  cE('panel', '', [
+    c('>:not(:first-child)', {
+      marginTop: '8px'
+    })
+  ]),
   cE('body', `
     font-size: var(--n-font-size);
     display: flex;
@@ -22,7 +27,6 @@ export default cB('popconfirm', [
     `)
   ]),
   cE('action', `
-    margin-top: 8px;
     display: flex;
     justify-content: flex-end;
   `, [
