@@ -85,6 +85,10 @@ export const dataTableProps = {
     default: () => []
   },
   checkedRowKeys: Array as PropType<RowKey[]>,
+  showSinglePagination: {
+    type: Boolean,
+    default: true
+  },
   singleLine: {
     type: Boolean,
     default: true
@@ -482,13 +486,17 @@ export default defineComponent({
         props
       )
       : undefined
-    const mergedShowPaginationRef = computed(
-      () =>
-        props.pagination &&
-        mergedPaginationRef.value.itemCount &&
-        mergedPaginationRef.value.pageSize &&
-        mergedPaginationRef.value.itemCount > mergedPaginationRef.value.pageSize
-    )
+    const mergedShowPaginationRef = computed(() => {
+      if (props.pagination) {
+        return props.showSinglePagination
+          ? true
+          : mergedPaginationRef.value.itemCount &&
+              mergedPaginationRef.value.pageSize &&
+              mergedPaginationRef.value.itemCount >
+                mergedPaginationRef.value.pageSize
+      }
+      return false
+    })
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
