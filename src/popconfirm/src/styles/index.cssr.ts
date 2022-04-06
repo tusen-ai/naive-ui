@@ -6,11 +6,6 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-bezier
 // --n-icon-color
 export default cB('popconfirm', [
-  cE('panel', '', [
-    c('>:not(:first-child)', {
-      marginTop: '8px'
-    })
-  ]),
   cE('body', `
     font-size: var(--n-font-size);
     display: flex;
@@ -30,10 +25,9 @@ export default cB('popconfirm', [
     display: flex;
     justify-content: flex-end;
   `, [
+    c('&:not(:first-child)', 'margin-top: 8px'),
     cB('button', [
-      c('&:not(:last-child)', {
-        marginRight: '8px'
-      })
+      c('&:not(:last-child)', 'margin-right: 8px;')
     ])
   ])
 ])
