@@ -9,7 +9,7 @@
 ### Feats
 
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
-- `n-date-table` 新增 `show-single-pagination` 属性，关闭 [#2043](https://github.com/TuSimple/naive-ui/issues/2043)
+- `n-date-table` 新增 `paginate-single-page` 属性，关闭 [#2043](https://github.com/TuSimple/naive-ui/issues/2043)
 
 ## 2.27.0
 

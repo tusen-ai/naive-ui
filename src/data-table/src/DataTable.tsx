@@ -85,7 +85,7 @@ export const dataTableProps = {
     default: () => []
   },
   checkedRowKeys: Array as PropType<RowKey[]>,
-  showSinglePagination: {
+  paginateSinglePage: {
     type: Boolean,
     default: true
   },
@@ -488,7 +488,7 @@ export default defineComponent({
       : undefined
     const mergedShowPaginationRef = computed(() => {
       if (props.pagination) {
-        return props.showSinglePagination
+        return props.paginateSinglePage
           ? true
           : mergedPaginationRef.value.itemCount &&
               mergedPaginationRef.value.pageSize &&
