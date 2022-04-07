@@ -277,7 +277,7 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are no-drop
+              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
               const notInCurrentMonth = !inCurrentMonth
               const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
@@ -288,7 +288,7 @@ export default defineComponent({
                     `${mergedClsPrefix}-calendar-cell`,
                     (notInCurrentMonth || disabled) &&
                       `${mergedClsPrefix}-calendar-cell--disabled`,
-                    disabled && `${mergedClsPrefix}-calendar-cell--no-drop`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
