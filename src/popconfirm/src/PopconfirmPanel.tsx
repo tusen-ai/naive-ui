@@ -14,8 +14,8 @@ import { keysOf, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { popconfirmInjectionKey } from './interface'
 
 export const panelProps = {
-  positiveText: String,
-  negativeText: String,
+  positiveText: String as PropType<string | null>,
+  negativeText: String as PropType<string | null>,
   showIcon: {
     type: Boolean,
     default: true
