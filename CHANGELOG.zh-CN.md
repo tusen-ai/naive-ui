@@ -7,6 +7,7 @@
 - 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
 - 修复 `n-popconfirm` body 没有内容时外边距的异常，关闭 [#2690](https://github.com/TuSimple/naive-ui/issues/2690)
 - 修复 `n-tree-select` 无意义 warning
+- 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
 
 ### Feats
 
