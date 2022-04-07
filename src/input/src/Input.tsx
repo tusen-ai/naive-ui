@@ -119,7 +119,10 @@ const inputProps = {
     type: Boolean,
     default: undefined
   },
-  trim: Boolean,
+  trim: {
+    type: Boolean,
+    default: false
+  },
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
