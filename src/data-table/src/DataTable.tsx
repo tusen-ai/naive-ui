@@ -52,6 +52,10 @@ export const dataTableProps = {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
   },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
+  },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
   // Use any type as row data to make prop data acceptable
@@ -85,10 +89,6 @@ export const dataTableProps = {
     default: () => []
   },
   checkedRowKeys: Array as PropType<RowKey[]>,
-  paginateSinglePage: {
-    type: Boolean,
-    default: true
-  },
   singleLine: {
     type: Boolean,
     default: true
