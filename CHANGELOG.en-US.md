@@ -12,6 +12,7 @@
 
 - `n-radio` add `label` prop, closes [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
 - `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
+- `n-date-picker` adds `date-icon` and `to-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
 
 ## 2.27.0
 

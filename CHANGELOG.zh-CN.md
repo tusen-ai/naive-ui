@@ -12,6 +12,7 @@
 
 - `n-radio` 新增 `label` 属性，关闭 [#2707](https://github.com/TuSimple/naive-ui/issues/2707)
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
+- `n-date-picker` 新增 `date-icon` 和 `to-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
 
 ## 2.27.0
 

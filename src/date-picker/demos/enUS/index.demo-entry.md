@@ -25,6 +25,7 @@ footerslot.vue
 update-on-close.vue
 focus.vue
 status.vue
+icon.vue
 ```
 
 ## API
@@ -132,9 +133,11 @@ status.vue
 
 ### DatePicker Slots
 
-| Name   | Parameters | Description   |
-| ------ | ---------- | ------------- |
-| footer | `()`       | Extra Footer. |
+| Name      | Parameters | Description            | Version      |
+| --------- | ---------- | ---------------------- | ------------ |
+| date-icon | `()`       | icon of the input.     | NEXT_VERSION |
+| footer    | `()`       | Extra Footer.          |              |
+| to-icon   | `()`       | icon of the daterange. | NEXT_VERSION |
 
 ### DatePicker Methods
 
