@@ -7,7 +7,7 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
-    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo && babel --config-file ./babel.config.es.js -d es es",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
@@ -67,6 +67,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.15.8",
     "@babel/generator": "^7.12.11",
     "@babel/parser": "^7.12.11",
@@ -89,6 +91,7 @@
     "autoprefixer": "^10.2.6",
     "lyla": "^0.4.0",
     "babel-jest": "^27.0.2",
+    "babel-plugin-custom-import-path-transform": "^1.0.3",
     "codesandbox": "^2.2.3",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.5",
