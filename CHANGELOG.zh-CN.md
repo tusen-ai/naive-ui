@@ -8,6 +8,7 @@
 - 修复 `n-popconfirm` body 没有内容时外边距的异常，关闭 [#2690](https://github.com/TuSimple/naive-ui/issues/2690)
 - 修复 `n-tree-select` 无意义 warning
 - 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
+- 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
 
 ### Feats
 

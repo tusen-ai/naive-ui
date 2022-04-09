@@ -8,6 +8,7 @@
 - Fix `n-popconfirm` with no body content has wrong margin top, closes [#2690](https://github.com/TuSimple/naive-ui/issues/2690).
 - Fix `n-tree-select` unexpected warning.
 - Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).
+- Fix message icon won't show after first message is emitted in SSR mode, closes [#2721](https://github.com/TuSimple/naive-ui/issues/2721).
 
 ### Feats
 
