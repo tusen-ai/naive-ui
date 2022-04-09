@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input-number` 新增 `add-icon` 和 `minus-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
+
 ## 2.28.0
 
 ### Breaking Changes

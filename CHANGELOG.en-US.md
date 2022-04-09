@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input-number` adds `add-icon` and `minus-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+
 ## 2.28.0
 
 ### Breaking Changes
