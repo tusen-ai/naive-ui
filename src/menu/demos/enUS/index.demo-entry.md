@@ -87,4 +87,4 @@ expand-selected-option.vue
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| showOption | `(key: string \| number) => void` | Expand menu to show option with specified `key`. If `key` is not specified, selected option will be displayed. | NEXT_VERSON |
+| showOption | `(key: string \| number) => void` | Expand menu to show option with specified `key`. If `key` is not specified, selected option will be displayed. | 2.27.0 |
