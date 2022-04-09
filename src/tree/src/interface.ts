@@ -82,7 +82,6 @@ export interface TreeInjection {
   mergedSelectedKeysRef: Ref<Key[]>
   mergedExpandedKeysRef: Ref<Key[]>
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
-  remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>

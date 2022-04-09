@@ -34,7 +34,7 @@ status.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Autocomplete's placement. | 2.25.0 |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. | 2.24.0 |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |

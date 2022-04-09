@@ -30,7 +30,13 @@ export default defineComponent({
     return useDualCalendar(props, 'datetimerange')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      timePickerProps,
+      onRender
+    } = this
     onRender?.()
     return (
       <div
@@ -59,15 +65,18 @@ export default defineComponent({
             onUpdateValue={this.handleStartDateInput}
           />
           <NTimePicker
+            placeholder={this.locale.selectTime}
+            format={this.timeFormat}
             size={this.timePickerSize}
+            {...(Array.isArray(timePickerProps)
+              ? timePickerProps[0]
+              : timePickerProps)}
+            value={this.startTimeValue}
             to={false}
             showIcon={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
-            placeholder={this.locale.selectTime}
-            format={this.timeFormat}
-            value={this.startTimeValue}
             isHourDisabled={this.isStartHourDisabled}
             isMinuteDisabled={this.isStartMinuteDisabled}
             isSecondDisabled={this.isStartSecondDisabled}
@@ -86,14 +95,17 @@ export default defineComponent({
             onUpdateValue={this.handleEndDateInput}
           />
           <NTimePicker
+            placeholder={this.locale.selectTime}
+            format={this.timeFormat}
+            size={this.timePickerSize}
+            {...(Array.isArray(timePickerProps)
+              ? timePickerProps[1]
+              : timePickerProps)}
             showIcon={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             to={false}
-            size={this.timePickerSize}
             stateful={false}
-            format={this.timeFormat}
-            placeholder={this.locale.selectTime}
             value={this.endTimeValue}
             isHourDisabled={this.isEndHourDisabled}
             isMinuteDisabled={this.isEndMinuteDisabled}

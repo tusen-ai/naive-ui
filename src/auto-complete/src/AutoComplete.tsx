@@ -21,6 +21,11 @@ import {
 } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
 import type { FormValidationStatus } from '../../form/src/interface'
+import type {
+  SelectBaseOption,
+  SelectGroupOption,
+  SelectIgnoredOption
+} from '../../select/src/interface'
 import { useFormItem, useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -34,11 +39,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 import type { InputInst } from '../../input'
 import { NInput } from '../../input'
-import type {
-  SelectBaseOption,
-  SelectGroupOption,
-  SelectIgnoredOption
-} from '../../select/src/interface'
 import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
@@ -229,12 +229,12 @@ export default defineComponent({
     }
     function select (option: AutoCompleteOption): void {
       if (option) {
+        doSelect(option.value)
         if (props.clearAfterSelect) {
           doUpdateValue(null)
         } else {
           doUpdateValue(option.label)
         }
-        doSelect(option.value)
         canBeActivatedRef.value = false
         if (props.blurAfterSelect) {
           blur()

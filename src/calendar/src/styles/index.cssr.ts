@@ -120,6 +120,7 @@ export default c([
           `)
         ])
       ]),
+      cM('not-allowed', 'cursor: not-allowed;'),
       cM('current', [
         cB('calendar-date', [
           cE('date', `

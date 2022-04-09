@@ -20,6 +20,7 @@ import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
 import type { DatePickerTheme } from '../styles/light'
@@ -114,6 +115,9 @@ const datePickerProps = {
   inputReadonly: Boolean,
   closeOnSelect: Boolean,
   status: String as PropType<FormValidationStatus>,
+  timePickerProps: [Object, Array] as PropType<
+  TimePickerProps | [TimePickerProps, TimePickerProps]
+  >,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -660,6 +664,7 @@ export default defineComponent({
       firstDayOfWeekRef: toRef(props, 'firstDayOfWeek'),
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
+      timePickerPropsRef: toRef(props, 'timePickerProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
       ...uniVaidation,

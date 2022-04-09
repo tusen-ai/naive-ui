@@ -243,7 +243,8 @@ export default defineComponent({
       if (onSelect) call(onSelect as OnUpdateValueImpl, key, node)
     }
     function doUpdateShow (value: boolean): void {
-      const { 'onUpdate:show': onUpdateShow } = props
+      const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
+      if (_onUpdateShow) call(_onUpdateShow, value)
       if (onUpdateShow) call(onUpdateShow, value)
       uncontrolledShowRef.value = value
     }

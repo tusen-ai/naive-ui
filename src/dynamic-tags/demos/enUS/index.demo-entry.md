@@ -27,12 +27,12 @@ option-format.vue
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |  |
 | max | `number` | `undefined` | Maximum number of tags. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
-| render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | custom render tag. | NEXT_VERSION |
+| render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | custom render tag. | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |
-| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | NEXT_VERSION |
+| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | 2.27.0 |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
 
 ### DynamicTags Slots

@@ -48,16 +48,15 @@ debug.vue
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
-| remote | `boolean` | `false` | 是否异步获取选项，和 `onLoad` 配合 | NEXT_VERSION |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
-| on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | NEXT_VERSION |
+| on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | 2.27.0 |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |  |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | 更新值的回调 |  |
@@ -70,7 +69,7 @@ debug.vue
 | label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |  |
 | children? | `TreeSelectOption[]` | 节点的子选项 |  |
 | disabled? | `boolean` | 是否禁用选项 |  |
-| isLeaf? | `boolean` | 节点是否是叶节点，在 `remote` 模式下是必须的 | NEXT_VERSION |
+| isLeaf? | `boolean` | 节点是否是叶节点，在异步展开状态下是必须的 | 2.27.0 |
 
 ### TreeSelect Slots
 

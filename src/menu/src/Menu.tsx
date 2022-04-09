@@ -346,43 +346,94 @@ export default defineComponent({
         vars['--n-group-text-color'] = self.groupTextColorInverted
         vars['--n-color'] = self.colorInverted
         vars['--n-item-text-color'] = self.itemTextColorInverted
+        vars['--n-item-text-color-hover'] = self.itemTextColorHoverInverted
+        vars['--n-item-text-color-active'] = self.itemTextColorActiveInverted
+        vars['--n-item-text-color-child-active'] =
+          self.itemTextColorChildActiveInverted
+        vars['--n-item-text-color-active-hover'] =
+          self.itemTextColorActiveHoverInverted
+        vars['--n-item-icon-color'] = self.itemIconColorInverted
+        vars['--n-item-icon-color-hover'] = self.itemIconColorHoverInverted
+        vars['--n-item-icon-color-active'] = self.itemIconColorActiveInverted
+        vars['--n-item-icon-color-active-hover'] =
+          self.itemIconColorActiveHoverInverted
+        vars['--n-item-icon-color-child-active'] =
+          self.itemIconColorChildActiveInverted
+        vars['--n-item-icon-color-collapsed'] =
+          self.itemIconColorCollapsedInverted
+        vars['--n-item-text-color-horizontal'] =
+          self.itemTextColorHorizontalInverted
+        vars['--n-item-text-color-hover-horizontal'] =
+          self.itemTextColorHoverHorizontalInverted
+        vars['--n-item-text-color-active-horizontal'] =
+          self.itemTextColorActiveHorizontalInverted
+        vars['--n-item-text-color-child-active-horizontal'] =
+          self.itemTextColorChildActiveHorizontalInverted
+        vars['--n-item-text-color-active-hover-horizontal'] =
+          self.itemTextColorActiveHoverHorizontalInverted
+        vars['--n-item-icon-color-horizontal'] =
+          self.itemIconColorHorizontalInverted
+        vars['--n-item-icon-color-hover-horizontal'] =
+          self.itemIconColorHoverHorizontalInverted
+        vars['--n-item-icon-color-active-horizontal'] =
+          self.itemIconColorActiveHorizontalInverted
+        vars['--n-item-icon-color-active-hover-horizontal'] =
+          self.itemIconColorActiveHoverHorizontalInverted
+        vars['--n-item-icon-color-child-active-horizontal'] =
+          self.itemIconColorChildActiveHorizontalInverted
         vars['--n-arrow-color'] = self.arrowColorInverted
         vars['--n-arrow-color-hover'] = self.arrowColorHoverInverted
         vars['--n-arrow-color-active'] = self.arrowColorActiveInverted
+        vars['--n-arrow-color-active-hover'] =
+          self.arrowColorActiveHoverInverted
         vars['--n-arrow-color-child-active'] =
           self.arrowColorChildActiveInverted
-        vars['--n-item-icon-color'] = self.itemIconColorInverted
-        vars['--n-item-text-color-hover'] = self.itemTextColorHoverInverted
-        vars['--n-item-icon-color-hover'] = self.itemIconColorHoverInverted
-        vars['--n-item-text-color-active'] = self.itemTextColorActiveInverted
-        vars['--n-item-icon-color-active'] = self.itemIconColorActiveInverted
-        vars['--n-item-icon-color-collapsed'] =
-          self.itemIconColorCollapsedInverted
+        vars['--n-item-color-hover'] = self.itemColorHoverInverted
         vars['--n-item-color-active'] = self.itemColorActiveInverted
+        vars['--n-item-color-active-hover'] = self.itemColorActiveHoverInverted
         vars['--n-item-color-active-collapsed'] =
           self.itemColorActiveCollapsedInverted
-        vars['--n-item-text-color-child-active'] =
-          self.itemTextColorChildActiveInverted
-        vars['--n-item-icon-color-child-active'] =
-          self.itemIconColorChildActiveInverted
       } else {
         vars['--n-group-text-color'] = self.groupTextColor
         vars['--n-color'] = self.color
         vars['--n-item-text-color'] = self.itemTextColor
+        vars['--n-item-text-color-hover'] = self.itemTextColorHover
+        vars['--n-item-text-color-active'] = self.itemTextColorActive
+        vars['--n-item-text-color-child-active'] = self.itemTextColorChildActive
+        vars['--n-item-text-color-active-hover'] = self.itemTextColorActiveHover
+        vars['--n-item-icon-color'] = self.itemIconColor
+        vars['--n-item-icon-color-hover'] = self.itemIconColorHover
+        vars['--n-item-icon-color-active'] = self.itemIconColorActive
+        vars['--n-item-icon-color-active-hover'] = self.itemIconColorActiveHover
+        vars['--n-item-icon-color-child-active'] = self.itemIconColorChildActive
+        vars['--n-item-icon-color-collapsed'] = self.itemIconColorCollapsed
+        vars['--n-item-text-color-horizontal'] = self.itemTextColorHorizontal
+        vars['--n-item-text-color-hover-horizontal'] =
+          self.itemTextColorHoverHorizontal
+        vars['--n-item-text-color-active-horizontal'] =
+          self.itemTextColorActiveHorizontal
+        vars['--n-item-text-color-child-active-horizontal'] =
+          self.itemTextColorChildActiveHorizontal
+        vars['--n-item-text-color-active-hover-horizontal'] =
+          self.itemTextColorActiveHoverHorizontal
+        vars['--n-item-icon-color-horizontal'] = self.itemIconColorHorizontal
+        vars['--n-item-icon-color-hover-horizontal'] =
+          self.itemIconColorHoverHorizontal
+        vars['--n-item-icon-color-active-horizontal'] =
+          self.itemIconColorActiveHorizontal
+        vars['--n-item-icon-color-active-hover-horizontal'] =
+          self.itemIconColorActiveHoverHorizontal
+        vars['--n-item-icon-color-child-active-horizontal'] =
+          self.itemIconColorChildActiveHorizontal
         vars['--n-arrow-color'] = self.arrowColor
         vars['--n-arrow-color-hover'] = self.arrowColorHover
         vars['--n-arrow-color-active'] = self.arrowColorActive
+        vars['--n-arrow-color-active-hover'] = self.arrowColorActiveHover
         vars['--n-arrow-color-child-active'] = self.arrowColorChildActive
-        vars['--n-item-icon-color'] = self.itemIconColor
-        vars['--n-item-text-color-hover'] = self.itemTextColorHover
-        vars['--n-item-icon-color-hover'] = self.itemIconColorHover
-        vars['--n-item-text-color-active'] = self.itemTextColorActive
-        vars['--n-item-icon-color-active'] = self.itemIconColorActive
-        vars['--n-item-icon-color-collapsed'] = self.itemIconColorCollapsed
+        vars['--n-item-color-hover'] = self.itemColorHover
         vars['--n-item-color-active'] = self.itemColorActive
+        vars['--n-item-color-active-hover'] = self.itemColorActiveHover
         vars['--n-item-color-active-collapsed'] = self.itemColorActiveCollapsed
-        vars['--n-item-text-color-child-active'] = self.itemTextColorChildActive
-        vars['--n-item-icon-color-child-active'] = self.itemIconColorChildActive
       }
       return vars
     })

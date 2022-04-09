@@ -1,8 +1,26 @@
 # CHANGELOG
 
-## Pending
-
 ## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
+- 修复 `n-popconfirm` body 没有内容时外边距的异常，关闭 [#2690](https://github.com/TuSimple/naive-ui/issues/2690)
+- 修复 `n-tree-select` 无意义 warning
+- 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
+- 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
+
+### Feats
+
+- `n-radio` 新增 `label` 属性，关闭 [#2707](https://github.com/TuSimple/naive-ui/issues/2707)
+- `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
+- `n-pagination` 添加 `RTL` 支持
+
+## 2.27.0
+
+### Breaking Changes
+
+- `n-menu` 进行了一些样式改动
 
 ### Fixes
 
@@ -10,17 +28,24 @@
 - 修复 `n-popconfirm` 缺少 `setShow` 和 `syncPosition` 方法
 - 修复 `n-popselect` 缺少 `setShow` 和 `syncPosition` 方法
 - 修复 `n-menu` 主题 peers 缺少 `Dropdown`
+- 修复 `n-color-picker` 不能输入 0 作为单位的值，关闭 [#2680](https://github.com/TuSimple/naive-ui/issues/2680)
+- 修复 `n-tree` 在使用虚拟滚动时滚动条长度存在问题，关闭 [#2673](https://github.com/TuSimple/naive-ui/issues/2673)
+- 修复 `n-layout-sider` 的 `content-style` 不能覆盖 `overflow: auto` 属性，关闭 [#2671](https://github.com/TuSimple/naive-ui/issues/2671)
+- 修复 `n-date-picker` 在 `month` 和 `quarter` 模式下暗黑模式的 disabled 的面板时间显示有问题
+- 修复 `n-dropdown` `onUpdateShow` 不生效
+- 修复 `n-auto-complete` `onSelect` 在 `onUpdate:value` 后被触发
+- 修复 `n-data-table` `onUpdate:filters` 的类型中 `initiatorColumn` 是可选选参数
 
 ### Feats
 
-- `n-tree-select` 新增 `remote` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
-- `n-tree-select` 新增 `on-load` 方法，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-tree-select` 新增 `on-load` 属性，关闭 [#2550](https://github.com/TuSimple/naive-ui/issues/2550)
+- `n-data-table` 新增 `on-load` 属性
 - `n-cascader` 添加 `menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
 - `n-cascader` 添加 `filter-menu-props` 属性，关闭 [#2600](https://github.com/TuSimple/naive-ui/issues/2600)
 - `n-badge` 新增 `value` slot
-- `n-form` 新增 `messages` 属性
+- `n-form` 新增 `validate-messages` 属性
 - `n-data-table` 的 column 支持 `cellProps` 属性，关闭 [#2625](https://github.com/TuSimple/naive-ui/issues/2625)
-- `n-step` adds class to distinguish status.
+- `n-step` 增加类名用于区分状态
 - `n-popconfirm` 新增 `negative-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
 - `n-popconfirm` 新增 `positive-button-props` 属性，关闭 [#2642](https://github.com/TuSimple/naive-ui/issues/2642)
 - `n-pagination` 新增 `goto` slot
@@ -35,9 +60,16 @@
 - `n-mention` 新增 `status` 属性
 - `n-tree-select` 新增 `status` 属性
 - `n-menu` 新增 `showOption` 方法，关闭 [#2562](https://github.com/TuSimple/naive-ui/issues/2562)
+- `n-dynamic-tags` 的 `value` 属性支持对象类型的选项
 - `n-dynamic-tags` 新增 `render-tag` 属性，关闭 [#2526](https://github.com/TuSimple/naive-ui/issues/2526)
 - `n-dynamic-tags` 新增 `on-create` 属性，关闭 [#2576](https://github.com/TuSimple/naive-ui/issues/2576)
-- `n-pagination` 添加 `RTL` 支持
+- `n-date-picker` 新增 `time-picker-props` 属性，关闭 [#2660](https://github.com/TuSimple/naive-ui/issues/2660)
+- `n-tabs` 新增 `trigger` 属性，关闭 [#2679](https://github.com/TuSimple/naive-ui/issues/2679)
+- `n-menu` 新增 `itemColorHover`, `itemColorActiveHover`, `itemTextColorActiveHover`, `itemTextColorHorizontal`, `itemTextColorHoverHorizontal`, `itemTextColorActiveHorizontal`, `itemTextColorActiveHoverHorizontal`, `itemTextColorChildActiveHorizontal`, `itemIconColorActiveHover`, `itemIconColorHorizontal`, `itemIconColorHoverHorizontal`, `itemIconColorActiveHorizontal`, `itemIconColorActiveHoverHorizontal`, `itemIconColorChildActiveHorizontal`, `arrowColorActiveHover`, `itemColorHoverInverted`, `itemColorActiveHoverInverted`, `itemTextColorActiveHoverInverted`, `itemTextColorHorizontalInverted`, `itemTextColorHoverHorizontalInverted`, `itemTextColorChildActiveHorizontalInverted`, `itemTextColorActiveHorizontalInverted`, `itemTextColorActiveHoverHorizontalInverted`, `itemIconColorActiveHoverInverted`, `itemIconColorHorizontalInverted`, `itemIconColorHoverHorizontalInverted`, `itemIconColorActiveHorizontalInverted`, `itemIconColorActiveHoverHorizontalInverted`, `itemIconColorChildActiveHorizontalInverted`, `arrowColorActiveHoverInverted` 主题变量，关闭 [#2598](https://github.com/TuSimple/naive-ui/issues/2598)
+- `n-carousel` 新增 `next-slide-style` 和 `prev-slide-style` 属性，关闭 [#2340](https://github.com/TuSimple/naive-ui/issues/2340)
+- `n-dialog` 新增 `negative-button-props` 属性
+- `n-dialog` 新增 `positive-button-props` 属性
+- `n-tabs` 新增 `animated` 属性
 
 ### i18n
 

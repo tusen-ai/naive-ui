@@ -10,12 +10,12 @@ import { NButton } from '../../button'
 import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useThemeClass } from '../../_mixins'
-import { keysOf, resolveSlot } from '../../_utils'
+import { keysOf, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { popconfirmInjectionKey } from './interface'
 
 export const panelProps = {
-  positiveText: String,
-  negativeText: String,
+  positiveText: String as PropType<string | null>,
+  negativeText: String as PropType<string | null>,
   showIcon: {
     type: Boolean,
     default: true
@@ -87,7 +87,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, showIcon, $slots } = this
     const actionContentNode = resolveSlot($slots.action, () =>
       this.negativeText === null && this.positiveText === null
         ? []
@@ -115,21 +115,28 @@ export default defineComponent({
     )
     this.onRender?.()
     return (
-      <div class={this.themeClass} style={this.cssVars as CSSProperties}>
-        <div class={`${mergedClsPrefix}-popconfirm__body`}>
-          {this.showIcon ? (
-            <div class={`${mergedClsPrefix}-popconfirm__icon`}>
-              {resolveSlot($slots.icon, () => [
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <WarningIcon /> }}
-                </NBaseIcon>
-              ])}
+      <div
+        class={[`${mergedClsPrefix}-popconfirm__panel`, this.themeClass]}
+        style={this.cssVars as CSSProperties}
+      >
+        {resolveWrappedSlot($slots.default, (children) =>
+          showIcon || children ? (
+            <div class={`${mergedClsPrefix}-popconfirm__body`}>
+              {showIcon ? (
+                <div class={`${mergedClsPrefix}-popconfirm__icon`}>
+                  {resolveSlot($slots.icon, () => [
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <WarningIcon /> }}
+                    </NBaseIcon>
+                  ])}
+                </div>
+              ) : null}
+              {children}
             </div>
-          ) : null}
-          {$slots.default?.()}
-        </div>
+          ) : null
+        )}
         {actionContentNode ? (
-          <div class={`${mergedClsPrefix}-popconfirm__action`}>
+          <div class={[`${mergedClsPrefix}-popconfirm__action`]}>
             {actionContentNode}
           </div>
         ) : null}

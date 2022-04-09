@@ -54,7 +54,6 @@ node-props.vue
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |
-| remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load`. |  |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
@@ -82,6 +81,6 @@ node-props.vue
 | checkboxDisabled? | `boolean` | Whether the checkbox is disabled. |
 | children? | `TreeOption[]` | Child nodes of the node. |
 | disabled? | `boolean` | Whether the node is disabled. |
-| isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in async expanding mode. |
 | prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
 | suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |

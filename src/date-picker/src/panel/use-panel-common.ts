@@ -50,6 +50,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   const {
     dateLocaleRef,
     timePickerSizeRef,
+    timePickerPropsRef,
     localeRef,
     mergedClsPrefixRef,
     mergedThemeRef
@@ -150,6 +151,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
+    timePickerProps: timePickerPropsRef,
     selfRef,
     locale: localeRef,
     doConfirm,

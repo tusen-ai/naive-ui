@@ -27,6 +27,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | 非受控模式下的当前页 |  |
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
+| disabled | `boolean` | `false` | 是否禁用 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | item-count | `number` | `undefined` | 总条数 |  |
@@ -76,11 +77,11 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| 名称   | 参数                            | 说明               | 版本         |
-| ------ | ------------------------------- | ------------------ | ------------ |
-| goto   | `()`                            | 快速跳转的文本内容 | NEXT_VERSION |
-| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容       | 2.24.0       |
-| next   | `(info: PaginationInfo)`        | 下一页             |              |
-| prev   | `(info: PaginationInfo)`        | 上一页             |              |
-| prefix | `(info: PaginationInfo)`        | 分页前缀           |              |
-| suffix | `(info: PaginationInfo)`        | 分页后缀           |              |
+| 名称   | 参数                            | 说明               | 版本   |
+| ------ | ------------------------------- | ------------------ | ------ |
+| goto   | `()`                            | 快速跳转的文本内容 | 2.27.0 |
+| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容       | 2.24.0 |
+| next   | `(info: PaginationInfo)`        | 下一页             |        |
+| prev   | `(info: PaginationInfo)`        | 上一页             |        |
+| prefix | `(info: PaginationInfo)`        | 分页前缀           |        |
+| suffix | `(info: PaginationInfo)`        | 分页后缀           |        |

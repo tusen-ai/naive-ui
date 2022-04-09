@@ -1,11 +1,11 @@
 <markdown>
 # Async loading
 
-After setting `remote`, use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
+Use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 </markdown>
 
 <template>
-  <n-tree-select remote :on-load="handleLoad" :options="options" />
+  <n-tree-select :on-load="handleLoad" :options="options" />
 </template>
 
 <script lang="ts">
