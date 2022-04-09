@@ -118,9 +118,9 @@
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.2",
     "vite": "^2.9.1",
-    "vue": "^3.2.12",
-    "vue-router": "^4.0.5",
-    "vue-tsc": "0.33.7"
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.14",
+    "vue-tsc": "0.33.9"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
