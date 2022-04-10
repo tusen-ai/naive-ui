@@ -28,7 +28,7 @@ export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
 export default defineComponent({
   name: 'Time',
   props: timeProps,
-  setup(props) {
+  setup (props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
     const mergedFormatRef = computed(() => {
@@ -37,11 +37,11 @@ export default defineComponent({
         return (time: number | Date, _format: string) => {
           return format(
             getTime(time) +
-            -getTimezoneOffset(
-              Intl.DateTimeFormat().resolvedOptions().timeZone,
-              time
-            ) +
-            getTimezoneOffset(timezone, time),
+              -getTimezoneOffset(
+                Intl.DateTimeFormat().resolvedOptions().timeZone,
+                time
+              ) +
+              getTimezoneOffset(timezone, time),
             _format
           )
         }
@@ -99,7 +99,7 @@ export default defineComponent({
       renderedTime: renderedTimeRef
     }
   },
-  render() {
+  render () {
     return this.text
       ? createTextVNode(this.renderedTime)
       : h('time', [this.renderedTime])

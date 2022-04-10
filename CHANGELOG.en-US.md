@@ -5,11 +5,11 @@
 ### Breaking Changes
 
 - `n-data-table`'s check all action won't check child rows if `:cascade="false"`.
+- `n-time` uses `formatDistanceStrict` rather than `formatDistance` in `date-fns`, closes [#2703](https://github.com/TuSimple/naive-ui/issues/2703).
 
 ### Fixes
 
 - Fix `n-tabs` has unexpected line animation when nested with `n-tabs`, closes [#2689](https://github.com/TuSimple/naive-ui/issues/2689).
-- Fix `n-time` Relative time accuracy ambiguity problem, closes [#2703](https://github.com/TuSimple/naive-ui/issues/2703)
 - Fix `n-popconfirm` with no body content has wrong margin top, closes [#2690](https://github.com/TuSimple/naive-ui/issues/2690).
 - Fix `n-tree-select` unexpected warning.
 - Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).

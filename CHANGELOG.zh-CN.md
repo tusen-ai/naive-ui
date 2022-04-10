@@ -5,11 +5,11 @@
 ### Breaking Changes
 
 - `n-data-table` 在 `:cascade="false"` 的情况下全选不再会勾选子行
+- `n-time` 使用 `date-fns` 的 `formatDistanceStrict` 代替 `formatDistance`，关闭 [#2703](https://github.com/TuSimple/naive-ui/issues/2703)
 
 ### Fixes
 
 - 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
-- 修复 `n-time` 中相对时间精度模糊问题，关闭 [#2703](https://github.com/TuSimple/naive-ui/issues/2703)
 - 修复 `n-popconfirm` body 没有内容时外边距的异常，关闭 [#2690](https://github.com/TuSimple/naive-ui/issues/2690)
 - 修复 `n-tree-select` 无意义 warning
 - 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
