@@ -52,6 +52,10 @@ export const dataTableProps = {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
   },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
+  },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
   // Use any type as row data to make prop data acceptable
@@ -483,6 +487,17 @@ export default defineComponent({
         props
       )
       : undefined
+    const mergedShowPaginationRef = computed(() => {
+      if (props.pagination) {
+        return props.paginateSinglePage
+          ? true
+          : mergedPaginationRef.value.itemCount &&
+              mergedPaginationRef.value.pageSize &&
+              mergedPaginationRef.value.itemCount >
+                mergedPaginationRef.value.pageSize
+      }
+      return false
+    })
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -491,6 +506,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
+      mergedShowPagination: mergedShowPaginationRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -520,7 +536,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />
         </div>
-        {this.pagination ? (
+        {this.mergedShowPagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>
             <NPagination
               theme={this.mergedTheme.peers.Pagination}
