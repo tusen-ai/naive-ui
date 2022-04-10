@@ -19,6 +19,7 @@
 - Fix `n-steps` displays uncorrectly when nested in vertical & horizontal mode.
 - Fix `n-popconfirm`'s `positive-text` & `negetive-text` props don't allow `null` type.
 - Fix `n-color-picker` can't be closed if mousedown.stop is set when click outside, closes [#2709](https://github.com/TuSimple/naive-ui/issues/2709).
+- Fix `n-tabs` switch animation is incorrect when `display-directive='show'`, closes [#2718](https://github.com/TuSimple/naive-ui/issues/2718).
 
 ### Feats
 
