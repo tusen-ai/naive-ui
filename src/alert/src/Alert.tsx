@@ -22,6 +22,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const alertProps = {
   ...(useTheme.props as ThemeProps<AlertTheme>),
@@ -70,7 +71,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: alertProps,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Alert',
       '-alert',
@@ -79,6 +81,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Alert', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
@@ -91,8 +94,10 @@ export default defineComponent({
         lineHeight,
         iconSize,
         iconMargin,
+        iconMarginRtl,
         closeSize,
         closeMargin,
+        closeMarginRtl,
         padding
       } = self
       const { type } = props
@@ -113,8 +118,10 @@ export default defineComponent({
         '--n-title-font-weight': titleFontWeight,
         '--n-icon-size': iconSize,
         '--n-icon-margin': iconMargin,
+        '--n-icon-margin-rtl': iconMarginRtl,
         '--n-close-size': closeSize,
         '--n-close-margin': closeMargin,
+        '--n-close-margin-rtl': closeMarginRtl,
         '--n-padding': padding,
         '--n-icon-margin-left': left,
         '--n-icon-margin-right': right
@@ -149,6 +156,7 @@ export default defineComponent({
       doAfterLeave()
     }
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       visible: visibleRef,
       handleCloseClick,
@@ -170,7 +178,8 @@ export default defineComponent({
               class: [
                 `${mergedClsPrefix}-alert`,
                 this.themeClass,
-                this.showIcon && `${mergedClsPrefix}-alert--show-icon`
+                this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
+                this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`
               ],
               style: this.cssVars as any,
               role: 'alert'
