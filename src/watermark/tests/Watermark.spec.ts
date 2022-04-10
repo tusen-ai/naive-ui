@@ -37,4 +37,16 @@ describe('NWatermark', () => {
       true
     )
   })
+
+  it('should work with `fullscreen` prop', async () => {
+    const wrapper = mount(NWatermark)
+    expect(wrapper.find('.n-watermark').classes()).not.toContain(
+      'n-watermark--fullscreen'
+    )
+
+    await wrapper.setProps({ fullscreen: true })
+    expect(wrapper.find('.n-watermark').classes()).toContain(
+      'n-watermark--fullscreen'
+    )
+  })
 })
