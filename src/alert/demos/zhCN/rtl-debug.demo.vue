@@ -6,7 +6,7 @@
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-alert title="Default 类型" type="default">
+      <n-alert title="Default 类型" type="default" closable>
         <template #icon>
           <n-icon>
             <ios-airplane />

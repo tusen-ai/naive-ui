@@ -10,10 +10,10 @@ export default cB('alert', [
       margin: var(--n-icon-margin-rtl);
     `),
     cM('show-icon', [
-      cB('alert-body', {
-        paddingLeft: 'var(--n-padding)',
-        paddingRight: 'calc(var(--n-icon-margin-left) + var(--n-icon-size) + var(--n-icon-margin-right))'
-      })
+      cB('alert-body', `
+        padding-left: var(--n-padding);
+        padding-right: calc(var(--n-icon-margin-left) + var(--n-icon-size) + var(--n-icon-margin-right));
+      `)
     ]),
     cE('close', `
       position: absolute;

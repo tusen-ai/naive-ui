@@ -15,6 +15,7 @@ import {
   ErrorIcon
 } from '../../_internal/icons'
 import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
+import useRtl from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
@@ -22,7 +23,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
 const alertProps = {
   ...(useTheme.props as ThemeProps<AlertTheme>),
