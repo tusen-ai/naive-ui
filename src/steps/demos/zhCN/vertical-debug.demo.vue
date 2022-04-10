@@ -1,5 +1,5 @@
 <markdown>
-# 垂直
+# 垂直 debug
 </markdown>
 
 <template>
@@ -9,11 +9,7 @@
         title="I Me Mine"
         description="All through the day, I me mine I me mine, I me mine"
       >
-        <n-steps
-          vertical
-          :current="(current as number)"
-          :status="currentStatus"
-        >
+        <n-steps :current="(current as number)" :status="currentStatus">
           <n-step
             title="I Me Mine"
             description="All through the day, I me mine I me mine, I me mine"

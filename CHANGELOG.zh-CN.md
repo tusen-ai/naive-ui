@@ -15,6 +15,8 @@
 - 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
 - 修复 `n-data-table` 在异步加载树型数据时全选会报错，关闭 [#2758](https://github.com/TuSimple/naive-ui/issues/2758)
 - 修复 `n-popconfirm` 的 `positive-button-props` 和 `negative-button-props` 属性缺乏响应式，关闭 [#2753](https://github.com/TuSimple/naive-ui/issues/2753)
+- 修复 `n-step` 有多余的主题变量类名
+- 修复 `n-steps` 垂直水平相互嵌套样式错乱
 
 ### Feats
 
