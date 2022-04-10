@@ -13,6 +13,7 @@ modes.vue
 form.vue
 swatches.vue
 native.vue
+close-debug.vue
 ```
 
 ## API

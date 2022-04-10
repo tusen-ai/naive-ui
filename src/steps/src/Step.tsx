@@ -108,16 +108,18 @@ export default defineComponent({
         '--n-step-header-font-weight': stepHeaderFontWeight
       }
     })
-    const themeClassHandle = useThemeClass(
-      'step',
-      computed(() => {
-        const { value: status } = mergedStatusRef
-        const { size } = stepsProps
-        return `${status[0]}${size[0]}`
-      }),
-      cssVarsRef,
-      stepsProps
-    )
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'step',
+        computed(() => {
+          const { value: status } = mergedStatusRef
+          const { size } = stepsProps
+          return `${status[0]}${size[0]}`
+        }),
+        cssVarsRef,
+        stepsProps
+      )
+      : undefined
     return {
       stepsSlots,
       mergedClsPrefix: mergedClsPrefixRef,

@@ -53,6 +53,7 @@ async-expand.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. | NEXT_VERSION |
 | bordered | `boolean` | `true` | Whether to show border. |  |
 | bottom-bordered | `boolean` | `true` | Whether to show bottom border. |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |  |

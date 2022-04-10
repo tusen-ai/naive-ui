@@ -889,9 +889,21 @@ export default defineComponent({
                             this.displayDirective === 'show'
                               ? [
                                   [vShow, this.mergedShow],
-                                  [clickoutside, this.handleMenuClickOutside]
+                                  [
+                                    clickoutside,
+                                    this.handleMenuClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
-                              : [[clickoutside, this.handleMenuClickOutside]]
+                              : [
+                                  [
+                                    clickoutside,
+                                    this.handleMenuClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
+                                ]
                           )
                         }
                       }}

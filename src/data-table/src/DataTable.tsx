@@ -105,6 +105,7 @@ export const dataTableProps = {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
   },
+  allowCheckingNotLoaded: Boolean,
   cascade: {
     type: Boolean,
     default: true
