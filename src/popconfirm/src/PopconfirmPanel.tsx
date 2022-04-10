@@ -74,8 +74,8 @@ export default defineComponent({
       localizedNegativeText: computed(() => {
         return props.negativeText || localeRef.value.negativeText
       }),
-      positiveButtonProps: popconfirmProps.positiveButtonProps,
-      negativeButtonProps: popconfirmProps.negativeButtonProps,
+      positiveButtonProps: computed(() => popconfirmProps.positiveButtonProps),
+      negativeButtonProps: computed(() => popconfirmProps.negativeButtonProps),
       handlePositiveClick (e: MouseEvent) {
         props.onPositiveClick(e)
       },
