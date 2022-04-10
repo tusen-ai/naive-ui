@@ -492,7 +492,7 @@ export default defineComponent({
       if (props.paginateSinglePage) return true
       const mergedPagination = mergedPaginationRef.value
       const { pageCount } = mergedPagination
-      if (pageCount !== undefined) return pageCount
+      if (pageCount !== undefined) return pageCount > 1
       return (
         mergedPagination.itemCount &&
         mergedPagination.pageSize &&
