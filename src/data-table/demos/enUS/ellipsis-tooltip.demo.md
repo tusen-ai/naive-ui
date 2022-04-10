@@ -8,7 +8,6 @@ Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` a
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  :paginate-single-page="false"
 />
 ```
 

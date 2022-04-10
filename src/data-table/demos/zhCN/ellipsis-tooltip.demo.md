@@ -8,7 +8,6 @@
   :columns="columns"
   :data="data"
   :pagination="pagination"
-  :paginate-single-page="false"
 />
 ```
 

@@ -488,15 +488,16 @@ export default defineComponent({
       )
       : undefined
     const mergedShowPaginationRef = computed(() => {
-      if (props.pagination) {
-        return props.paginateSinglePage
-          ? true
-          : mergedPaginationRef.value.itemCount &&
-              mergedPaginationRef.value.pageSize &&
-              mergedPaginationRef.value.itemCount >
-                mergedPaginationRef.value.pageSize
-      }
-      return false
+      if (!props.pagination) return false
+      if (props.paginateSinglePage) return true
+      const mergedPagination = mergedPaginationRef.value
+      const { pageCount } = mergedPagination
+      if (pageCount !== undefined) return pageCount
+      return (
+        mergedPagination.itemCount &&
+        mergedPagination.pageSize &&
+        mergedPagination.itemCount > mergedPagination.pageSize
+      )
     })
     return {
       mainTableInstRef,
