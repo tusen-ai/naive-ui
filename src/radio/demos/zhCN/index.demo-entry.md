@@ -24,7 +24,7 @@ rtl-debug.vue
 | checked | `boolean` | `undefined` | 选中状态 |  |
 | default-checked | `boolean` | `false` | 默认选中的状态 |  |
 | disabled | `boolean` | `false` | 禁用状态 |  |
-| label | `string` | `undefined` | 标签 | NEXT_VERSION |
+| label | `string` | `undefined` | 标签 | 2.28.0 |
 | name | `string` | `undefined` | 单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |  |
 | value | `string \| number` | `'on'` | 选中的值 |  |

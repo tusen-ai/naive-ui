@@ -53,7 +53,7 @@ async-expand.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. | NEXT_VERSION |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. | 2.28.0 |
 | bordered | `boolean` | `true` | Whether to show border. |  |
 | bottom-bordered | `boolean` | `true` | Whether to show bottom border. |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |  |
@@ -69,7 +69,7 @@ async-expand.vue
 | loading | `boolean` | `false` | Whether to display loading status. |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
-| paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | NEXT_VERSION |
+| paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
