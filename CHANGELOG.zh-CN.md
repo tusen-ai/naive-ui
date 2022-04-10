@@ -14,6 +14,7 @@
 - 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
 - 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
 - 修复 `n-data-table` 在异步加载树型数据时全选会报错，关闭 [#2758](https://github.com/TuSimple/naive-ui/issues/2758)
+- 修复 `n-popconfirm` 的 `positive-button-props` 和 `negative-button-props` 属性缺乏响应式，关闭 [#2753](https://github.com/TuSimple/naive-ui/issues/2753)
 
 ### Feats
 

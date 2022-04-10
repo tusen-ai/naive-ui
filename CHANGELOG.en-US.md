@@ -14,6 +14,7 @@
 - Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).
 - Fix message icon won't show after first message is emitted in SSR mode, closes [#2721](https://github.com/TuSimple/naive-ui/issues/2721).
 - Fix `n-data-table` throws error when select all in async tree data mode with `:cascade="false"`, closes [#2758](https://github.com/TuSimple/naive-ui/issues/2758).
+- Fix `n-popconfirm`'s `positive-button-props` and `negative-button-props` props lack reactivity, closes [#2753](https://github.com/TuSimple/naive-ui/issues/2753).
 
 ### Feats
 

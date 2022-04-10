@@ -4,7 +4,8 @@ import {
   computed,
   inject,
   PropType,
-  CSSProperties
+  CSSProperties,
+  toRef
 } from 'vue'
 import { NButton } from '../../button'
 import { NBaseIcon } from '../../_internal'
@@ -74,8 +75,8 @@ export default defineComponent({
       localizedNegativeText: computed(() => {
         return props.negativeText || localeRef.value.negativeText
       }),
-      positiveButtonProps: popconfirmProps.positiveButtonProps,
-      negativeButtonProps: popconfirmProps.negativeButtonProps,
+      positiveButtonProps: toRef(popconfirmProps, 'positiveButtonProps'),
+      negativeButtonProps: toRef(popconfirmProps, 'negativeButtonProps'),
       handlePositiveClick (e: MouseEvent) {
         props.onPositiveClick(e)
       },
