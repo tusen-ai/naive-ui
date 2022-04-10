@@ -32,6 +32,8 @@ slot.vue
 | trap-focus | `boolean` | `true` | Whether to trap focus inside drawer. | 2.24.2 |
 | width | `number \| string` | `251` | Works when placement is `left` and `right`. |  |
 | z-index | `number` | `undefined` | Z index of the drawer. | 2.24.0 |
+| on-after-enter | `() => void` | `undefined` | Callback after drawer is opened. | 2.28.0 |
+| on-after-leave | `() => void` | `undefined` | Callback after drawer is closed. | 2.28.0 |
 | on-esc | `() => void` | `undefined` | Callback fired when the escape key is pressed and focus is within drawer. | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | Callback triggered on mask clicked. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback triggered on drawer display status would change. |  |

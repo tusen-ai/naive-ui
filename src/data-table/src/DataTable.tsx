@@ -52,6 +52,10 @@ export const dataTableProps = {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
   },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
+  },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
   // Use any type as row data to make prop data acceptable
@@ -105,6 +109,7 @@ export const dataTableProps = {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
   },
+  allowCheckingNotLoaded: Boolean,
   cascade: {
     type: Boolean,
     default: true
@@ -482,6 +487,18 @@ export default defineComponent({
         props
       )
       : undefined
+    const mergedShowPaginationRef = computed(() => {
+      if (!props.pagination) return false
+      if (props.paginateSinglePage) return true
+      const mergedPagination = mergedPaginationRef.value
+      const { pageCount } = mergedPagination
+      if (pageCount !== undefined) return pageCount > 1
+      return (
+        mergedPagination.itemCount &&
+        mergedPagination.pageSize &&
+        mergedPagination.itemCount > mergedPagination.pageSize
+      )
+    })
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -490,6 +507,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
+      mergedShowPagination: mergedShowPaginationRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -519,7 +537,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />
         </div>
-        {this.pagination ? (
+        {this.mergedShowPagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>
             <NPagination
               theme={this.mergedTheme.peers.Pagination}

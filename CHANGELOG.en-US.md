@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## 2.28.0
+
+### Breaking Changes
+
+- `n-time` uses `formatDistanceStrict` rather than `formatDistance` in `date-fns`, closes [#2703](https://github.com/TuSimple/naive-ui/issues/2703).
+
+### Fixes
+
+- Fix `n-tabs` has unexpected line animation when nested with `n-tabs`, closes [#2689](https://github.com/TuSimple/naive-ui/issues/2689).
+- Fix `n-popconfirm` with no body content has wrong margin top, closes [#2690](https://github.com/TuSimple/naive-ui/issues/2690).
+- Fix `n-tree-select` unexpected warning.
+- Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).
+- Fix message icon won't show after first message is emitted in SSR mode, closes [#2721](https://github.com/TuSimple/naive-ui/issues/2721).
+- Fix `n-popconfirm`'s `positive-button-props` and `negative-button-props` props lack reactivity, closes [#2753](https://github.com/TuSimple/naive-ui/issues/2753).
+- Fix `n-step` has unexpected theme variable class.
+- Fix `n-steps` displays uncorrectly when nested in vertical & horizontal mode.
+- Fix `n-popconfirm`'s `positive-text` & `negetive-text` props don't allow `null` type.
+- Fix `n-color-picker` can't be closed if mousedown.stop is set when click outside, closes [#2709](https://github.com/TuSimple/naive-ui/issues/2709).
+- Fix `n-tabs` switch animation is incorrect when `display-directive='show'`, closes [#2718](https://github.com/TuSimple/naive-ui/issues/2718).
+
+### Feats
+
+- `n-radio` adds `label` prop, closes [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
+- `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
+- `n-data-table` adds `paginate-single-page` prop , closes [#2043](https://github.com/TuSimple/naive-ui/issues/2043).
+- `n-pagination` add `RTL` support.
+- `n-alert` add `RTL` support.
+- `n-data-table` adds `allow-checking-not-loaded` prop, closes [#2758](https://github.com/TuSimple/naive-ui/issues/2758).
+
 ## 2.27.0
 
 ### Breaking Changes

@@ -24,8 +24,8 @@ import style from './styles/index.cssr'
 const popconfirmProps = {
   ...(useTheme.props as ThemeProps<PopconfirmTheme>),
   ...popoverBaseProps,
-  positiveText: String,
-  negativeText: String,
+  positiveText: String as PropType<string | null>,
+  negativeText: String as PropType<string | null>,
   showIcon: {
     type: Boolean,
     default: true

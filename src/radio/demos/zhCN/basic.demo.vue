@@ -25,10 +25,9 @@
       value="Be Here Now"
       :disabled="disabled"
       name="basic-demo"
+      label=" Be Here Now"
       @change="handleChange"
-    >
-      Be Here Now
-    </n-radio>
+    />
     <n-switch v-model:value="disabled" />
   </n-space>
 </template>
