@@ -20,7 +20,7 @@ import { DataTableColumns } from 'naive-ui'
 export default defineComponent({
   setup () {
     const columns: DataTableColumns = [
-      { key: 'check', type: 'selection' },
+      { type: 'selection' },
       { key: 'example', title: 'Example' }
     ]
     const dataRef = ref([
