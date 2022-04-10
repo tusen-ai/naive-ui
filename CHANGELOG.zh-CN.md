@@ -2,13 +2,29 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-data-table` 在 `:cascade="false"` 的情况下全选不再会勾选子行
+
 ### Fixes
 
 - 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
 - 修复 `n-time` 中相对时间精度模糊问题，关闭 [#2703](https://github.com/TuSimple/naive-ui/issues/2703)
+- 修复 `n-popconfirm` body 没有内容时外边距的异常，关闭 [#2690](https://github.com/TuSimple/naive-ui/issues/2690)
+- 修复 `n-tree-select` 无意义 warning
+- 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
+- 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
+- 修复 `n-data-table` 在异步加载树型数据时全选会报错，关闭 [#2758](https://github.com/TuSimple/naive-ui/issues/2758)
+- 修复 `n-popconfirm` 的 `positive-button-props` 和 `negative-button-props` 属性缺乏响应式，关闭 [#2753](https://github.com/TuSimple/naive-ui/issues/2753)
+- 修复 `n-step` 有多余的主题变量类名
+- 修复 `n-steps` 垂直水平相互嵌套样式错乱
+- 修复 `n-popconfirm` 的 `positive-text` & `negetive-text` 不允许 `null` 类型
+- 修复 `n-color-picker` 的面板关闭会被 `mousedown.stop` 阻止，关闭 [#2709](https://github.com/TuSimple/naive-ui/issues/2709)
+- 修复 `n-tabs` 切换动画在 `display-directive='show'` 的时候不正常，关闭 [#2718](https://github.com/TuSimple/naive-ui/issues/2718)
 
 ### Feats
 
+- `n-radio` 新增 `label` 属性，关闭 [#2707](https://github.com/TuSimple/naive-ui/issues/2707)
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
 
 ## 2.27.0

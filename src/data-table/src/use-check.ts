@@ -119,7 +119,7 @@ export function useCheck (
     // alway cascade, to emit correct row keys
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
-        cascade: true
+        cascade: props.cascade
       }).checkedKeys
     )
   }
@@ -141,7 +141,7 @@ export function useCheck (
         rowKeysToUncheck,
         mergedCheckedRowKeysRef.value,
         {
-          cascade: true
+          cascade: props.cascade
         }
       ).checkedKeys
     )

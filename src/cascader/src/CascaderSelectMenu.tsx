@@ -203,7 +203,14 @@ export default defineComponent({
                     value={this.value}
                     onToggle={this.handleToggle}
                   />,
-                  [[clickoutside, this.handleClickOutside]]
+                  [
+                    [
+                      clickoutside,
+                      this.handleClickOutside,
+                      undefined as unknown as string,
+                      { capture: true }
+                    ]
+                  ]
               )
               : null
         }}

@@ -7,9 +7,12 @@ A radio group looks elegant.
 <template>
   <n-radio-group v-model:value="value" name="radiogroup">
     <n-space>
-      <n-radio v-for="song in songs" :key="song.value" :value="song.value">
-        {{ song.label }}
-      </n-radio>
+      <n-radio
+        v-for="song in songs"
+        :key="song.value"
+        :value="song.value"
+        :label="song.label"
+      />
     </n-space>
   </n-radio-group>
 </template>
