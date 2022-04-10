@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-data-table`'s check all action won't check child rows if `:cascade="false"`.
+
 ### Fixes
 
 - Fix `n-tabs` has unexpected line animation when nested with `n-tabs`, closes [#2689](https://github.com/TuSimple/naive-ui/issues/2689).
@@ -9,6 +13,7 @@
 - Fix `n-tree-select` unexpected warning.
 - Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).
 - Fix message icon won't show after first message is emitted in SSR mode, closes [#2721](https://github.com/TuSimple/naive-ui/issues/2721).
+- Fix `n-data-table` throws error when select all in async tree data mode with `:cascade="false"`, closes [#2758](https://github.com/TuSimple/naive-ui/issues/2758).
 
 ### Feats
 

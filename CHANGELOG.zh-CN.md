@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-data-table` 在 `:cascade="false"` 的情况下全选不再会勾选子行
+
 ### Fixes
 
 - 修复 `n-tabs` 中嵌套 `n-tabs`，内部的线条会有一次多余的动画，关闭 [#2689](https://github.com/TuSimple/naive-ui/issues/2689)
@@ -9,6 +13,7 @@
 - 修复 `n-tree-select` 无意义 warning
 - 修复 `n-calendar` 的禁用单元格可以被点击，关闭 [#2686](https://github.com/TuSimple/naive-ui/issues/2686)
 - 修复 message 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2721](https://github.com/TuSimple/naive-ui/issues/2721)
+- 修复 `n-data-table` 在异步加载树型数据时全选会报错，关闭 [#2758](https://github.com/TuSimple/naive-ui/issues/2758)
 
 ### Feats
 
