@@ -108,14 +108,24 @@ export default defineComponent({
       } = NPopover
       if (!positionManually) {
         if (trigger === 'click' && !onClickoutside) {
-          directives.push([clickoutside, handleClickOutside])
+          directives.push([
+            clickoutside,
+            handleClickOutside,
+            undefined as any as string,
+            { capture: true }
+          ])
         }
         if (trigger === 'hover') {
           directives.push([mousemoveoutside, handleMouseMoveOutside])
         }
       }
       if (onClickoutside) {
-        directives.push([clickoutside, handleClickOutside])
+        directives.push([
+          clickoutside,
+          handleClickOutside,
+          undefined as any as string,
+          { capture: true }
+        ])
       }
       if (props.displayDirective === 'show') {
         directives.push([vShow, props.show])

@@ -886,7 +886,14 @@ export default defineComponent({
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />
                             </div>,
-                            [[clickoutside, this.handleMenuClickoutside]]
+                            [
+                              [
+                                clickoutside,
+                                this.handleMenuClickoutside,
+                                undefined as any as string,
+                                { capture: true }
+                              ]
+                            ]
                           )
                         }
                       }}

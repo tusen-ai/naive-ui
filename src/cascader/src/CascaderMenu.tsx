@@ -196,7 +196,14 @@ export default defineComponent({
                 )}
                 <FocusDetector onFocus={this.onTabout} />
               </div>,
-              [[clickoutside, this.handleClickOutside]]
+              [
+                [
+                  clickoutside,
+                  this.handleClickOutside,
+                  undefined as any as string,
+                  { capture: true }
+                ]
+              ]
             )
           }
         }}

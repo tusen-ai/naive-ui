@@ -283,7 +283,12 @@ export default defineComponent({
                                     )) as any,
                                 [
                                   [vShow, this.show],
-                                  [clickoutside, handleClickOutside]
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as any as string,
+                                    { capture: true }
+                                  ]
                                 ]
                               )
                           }}

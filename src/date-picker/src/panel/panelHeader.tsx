@@ -100,7 +100,14 @@ export default defineComponent({
                                   useAsQuickJump={true}
                                   value={this.value}
                                 />,
-                                [[clickoutside, handleClickOutside]]
+                                [
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as any as string,
+                                    { capture: true }
+                                  ]
+                                ]
                             )
                             : null
                       }}
