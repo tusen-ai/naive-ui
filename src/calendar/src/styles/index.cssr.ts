@@ -113,14 +113,18 @@ export default c([
           color: var(--n-text-color);
         `)
       ]),
-      cM('disabled', 'color: var(--n-day-text-color);', [
+      cM('disabled, other-month', `
+        color: var(--n-day-text-color);
+      `, [
         cB('calendar-date', [
           cE('date', `
             color: var(--n-day-text-color);
           `)
         ])
       ]),
-      cM('not-allowed', 'cursor: not-allowed;'),
+      cM('disabled', `
+        cursor: not-allowed;
+      `),
       cM('current', [
         cB('calendar-date', [
           cE('date', `

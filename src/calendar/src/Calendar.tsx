@@ -286,8 +286,9 @@ export default defineComponent({
                   key={isCurrentDate ? 'current' : index}
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
-                    (notInCurrentMonth || disabled) &&
-                      `${mergedClsPrefix}-calendar-cell--disabled`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    notInCurrentMonth &&
+                      `${mergedClsPrefix}-calendar-cell--other-month`,
                     disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
