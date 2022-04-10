@@ -92,7 +92,7 @@ export default defineComponent({
         'en-US': {
           start: 'Get Started',
           intro1: 'A Vue 3 Component Library',
-          intro2: 'Fairly Complete, Customizable Themes, Uses TypeScript, Fast',
+          intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
           intro3: 'Kinda Interesting',
           intro4: 'Change Theme'
         }
