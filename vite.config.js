@@ -73,11 +73,6 @@ module.exports = {
   build: {
     outDir: 'site',
     rollupOptions: {
-      output: {
-        manualChunks: {
-          axios: ['axios']
-        }
-      },
       plugins: [
         babel({
           babelHelpers: 'bundled'

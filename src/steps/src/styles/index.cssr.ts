@@ -24,9 +24,7 @@ export default cB('steps', `
     flex: 1;
   `, [
     c('&:last-child', [
-      cB('step-splitor', {
-        display: 'none'
-      })
+      cB('step-splitor', 'display: none;')
     ])
   ]),
   cB('step-splitor', `
@@ -41,9 +39,7 @@ export default cB('steps', `
       color .3s var(--n-bezier),
       background-color .3s var(--n-bezier);
   `),
-  cB('step-content', {
-    flex: 1
-  }, [
+  cB('step-content', 'flex: 1;', [
     cB('step-content-header', `
       color: var(--n-header-text-color);
       margin-top: calc(var(--n-indicator-size) / 2 - var(--n-step-header-font-size) / 2);
@@ -120,37 +116,33 @@ export default cB('steps', `
       ])
     ])
   ]),
-  cM('vertical', {
-    flexDirection: 'column'
-  }, [
+  cM('vertical', 'flex-direction: column;', [
     cNotM('show-description', [
-      cB('step', {
-        paddingBottom: '8px'
-      })
+      c('>', [
+        cB('step', 'padding-bottom: 8px;')
+      ])
     ]),
-    cB('step', {
-      marginBottom: '16px'
-    }, [
-      c('&:last-child', {
-        marginBottom: 0
-      })
-    ]),
-    cB('step-splitor', `
-      left: calc(var(--n-indicator-size) / 2);
-      height: calc(100% - var(--n-indicator-size));
-    `),
-    cB('step-indicator', [
-      cB('step-splitor', `
-        position: absolute;
-        bottom: -8px;
-        width: 1px;
-        margin: 0 !important;
-      `)
-    ]),
-    cB('step-content', [
-      cE('description', {
-        marginTop: '8px'
-      })
+    c('>', [
+      cB('step', 'margin-bottom: 16px;', [
+        c('&:last-child', 'margin-bottom: 0;'),
+        c('>', [
+          cB('step-indicator', [
+            c('>', [
+              cB('step-splitor', `
+                position: absolute;
+                bottom: -8px;
+                width: 1px;
+                margin: 0 !important;
+                left: calc(var(--n-indicator-size) / 2);
+                  height: calc(100% - var(--n-indicator-size));
+              `)
+            ])
+          ]),
+          cB('step-content', [
+            cE('description', 'margin-top: 8px;')
+          ])
+        ])
+      ])
     ])
   ])
 ])

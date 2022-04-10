@@ -24,6 +24,7 @@ shadow-debug.vue
 unkeyed-debug.vue
 addable-debug.vue
 animation-debug.vue
+animationx-debug.vue
 ```
 
 ## API

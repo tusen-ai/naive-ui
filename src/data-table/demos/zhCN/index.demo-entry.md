@@ -57,6 +57,7 @@ height-debug
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的 | NEXT_VERSION |
 | bordered | `boolean` | `true` | 是否显示 border |  |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |  |

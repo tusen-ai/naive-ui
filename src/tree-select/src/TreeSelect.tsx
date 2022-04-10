@@ -847,7 +847,6 @@ export default defineComponent({
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
                                   internalCheckboxFocusable={false}
-                                  onDrop={this.onDrop}
                                   onLoad={this.onLoad}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
@@ -887,7 +886,14 @@ export default defineComponent({
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />
                             </div>,
-                            [[clickoutside, this.handleMenuClickoutside]]
+                            [
+                              [
+                                clickoutside,
+                                this.handleMenuClickoutside,
+                                undefined as unknown as string,
+                                { capture: true }
+                              ]
+                            ]
                           )
                         }
                       }}

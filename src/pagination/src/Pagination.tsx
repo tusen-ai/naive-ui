@@ -41,6 +41,7 @@ import {
   PaginationRenderLabel,
   PaginationSizeOption
 } from './interface'
+import useRtl from '../../_mixins/use-rtl'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -126,8 +127,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedComponentPropsRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       '-pagination',
@@ -198,6 +203,7 @@ export default defineComponent({
       if (itemCount !== undefined) return itemCount
       return (props.pageCount || 1) * mergedPageSizeRef.value
     })
+    const rtlEnabledRef = useRtl('Pagination', mergedRtlRef, mergedClsPrefixRef)
 
     const disableTransitionOneTick = (): void => {
       void nextTick(() => {
@@ -331,9 +337,11 @@ export default defineComponent({
           itemSize,
           itemPadding,
           itemMargin,
+          itemMarginRtl,
           inputWidth,
           selectWidth,
           inputMargin,
+          inputMarginRtl,
           selectMargin,
           buttonBorder,
           buttonBorderHover,
@@ -379,6 +387,7 @@ export default defineComponent({
         '--n-select-margin': selectMargin,
         '--n-input-width': inputWidth,
         '--n-input-margin': inputMargin,
+        '--n-input-margin-rtl': inputMarginRtl,
         '--n-item-size': itemSize,
         '--n-item-text-color': itemTextColor,
         '--n-item-text-color-disabled': itemTextColorDisabled,
@@ -403,6 +412,7 @@ export default defineComponent({
         '--n-jumper-text-color': jumperTextColor,
         '--n-jumper-text-color-disabled': jumperTextColorDisabled,
         '--n-item-margin': itemMargin,
+        '--n-item-margin-rtl': itemMarginRtl,
         '--n-button-icon-size': buttonIconSize,
         '--n-button-icon-color': buttonIconColor,
         '--n-button-icon-color-hover': buttonIconColorHover,
@@ -419,6 +429,7 @@ export default defineComponent({
       ? useThemeClass('pagination', undefined, cssVarsRef, props)
       : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
@@ -500,6 +511,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-pagination`,
           this.themeClass,
+          this.rtlEnabled && `${mergedClsPrefix}-pagination--rtl`,
           disabled && `${mergedClsPrefix}-pagination--disabled`
         ]}
         style={cssVars as CSSProperties}
@@ -536,7 +548,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <BackwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <ForwardIcon /> : <BackwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
@@ -560,7 +575,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastForwardNode = showFastForward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastForwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastBackwardIcon />
+                      ) : (
+                        <FastForwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -581,7 +603,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastBackwardNode = showFastBackward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastBackwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastForwardIcon />
+                      ) : (
+                        <FastBackwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -640,7 +669,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <ForwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <BackwardIcon /> : <ForwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
