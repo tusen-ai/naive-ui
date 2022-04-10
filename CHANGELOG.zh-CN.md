@@ -18,6 +18,7 @@
 - 修复 `n-step` 有多余的主题变量类名
 - 修复 `n-steps` 垂直水平相互嵌套样式错乱
 - 修复 `n-popconfirm` 的 `positive-text` & `negetive-text` 不允许 `null` 类型
+- 修复 `n-color-picker` 的面板关闭会被 `mousedown.stop` 阻止，关闭 [#2709](https://github.com/TuSimple/naive-ui/issues/2709)
 
 ### Feats
 

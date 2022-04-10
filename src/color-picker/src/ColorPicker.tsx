@@ -706,7 +706,12 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [clickoutside, this.handleClickOutside]
+                              [
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined as any as string,
+                                { capture: true }
+                              ]
                             ])
                             : null
                       }}
