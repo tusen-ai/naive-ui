@@ -9,6 +9,7 @@ Change data in `onLoad` prop.
     :columns="columns"
     :data="data"
     :cascade="false"
+    allow-checking-not-loaded
     @load="onLoad"
   />
 </template>

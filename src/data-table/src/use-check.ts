@@ -27,7 +27,8 @@ export function useCheck (
         ? uncontrolledCheckedRowKeysRef.value
         : checkedRowKeys,
       {
-        cascade: props.cascade
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
       }
     )
   })
@@ -92,7 +93,8 @@ export function useCheck (
     if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
-        cascade: props.cascade
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys
     )
   }
@@ -100,7 +102,8 @@ export function useCheck (
     if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
-        cascade: props.cascade
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys
     )
   }
@@ -119,7 +122,8 @@ export function useCheck (
     // alway cascade, to emit correct row keys
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
-        cascade: props.cascade
+        cascade: true,
+        allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys
     )
   }
@@ -141,7 +145,8 @@ export function useCheck (
         rowKeysToUncheck,
         mergedCheckedRowKeysRef.value,
         {
-          cascade: props.cascade
+          cascade: true,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }
       ).checkedKeys
     )

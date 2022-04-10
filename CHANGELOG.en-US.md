@@ -4,7 +4,6 @@
 
 ### Breaking Changes
 
-- `n-data-table`'s check all action won't check child rows if `:cascade="false"`.
 - `n-time` uses `formatDistanceStrict` rather than `formatDistance` in `date-fns`, closes [#2703](https://github.com/TuSimple/naive-ui/issues/2703).
 
 ### Fixes
@@ -14,7 +13,6 @@
 - Fix `n-tree-select` unexpected warning.
 - Fix `n-calendar`'s disabled cells are clickable, closes [#2686](https://github.com/TuSimple/naive-ui/issues/2686).
 - Fix message icon won't show after first message is emitted in SSR mode, closes [#2721](https://github.com/TuSimple/naive-ui/issues/2721).
-- Fix `n-data-table` throws error when select all in async tree data mode with `:cascade="false"`, closes [#2758](https://github.com/TuSimple/naive-ui/issues/2758).
 - Fix `n-popconfirm`'s `positive-button-props` and `negative-button-props` props lack reactivity, closes [#2753](https://github.com/TuSimple/naive-ui/issues/2753).
 - Fix `n-step` has unexpected theme variable class.
 - Fix `n-steps` displays uncorrectly when nested in vertical & horizontal mode.
@@ -24,8 +22,9 @@
 
 ### Feats
 
-- `n-radio` add `label` prop, closes [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
+- `n-radio` adds `label` prop, closes [#2707](https://github.com/TuSimple/naive-ui/issues/2707).
 - `n-drawer` adds `on-after-enter` and `on-after-leave` props, closes [#2698](https://github.com/TuSimple/naive-ui/issues/2698).
+- `n-data-table` adds `allow-checking-not-loaded` prop, closes [#2758](https://github.com/TuSimple/naive-ui/issues/2758).
 
 ## 2.27.0
 
