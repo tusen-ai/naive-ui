@@ -17,6 +17,7 @@
 - 修复 `n-popconfirm` 的 `positive-button-props` 和 `negative-button-props` 属性缺乏响应式，关闭 [#2753](https://github.com/TuSimple/naive-ui/issues/2753)
 - 修复 `n-step` 有多余的主题变量类名
 - 修复 `n-steps` 垂直水平相互嵌套样式错乱
+- 修复 `n-popconfirm` 的 `positive-text` & `negetive-text` 不允许 `null` 类型
 
 ### Feats
 

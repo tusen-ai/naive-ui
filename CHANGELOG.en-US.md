@@ -17,6 +17,7 @@
 - Fix `n-popconfirm`'s `positive-button-props` and `negative-button-props` props lack reactivity, closes [#2753](https://github.com/TuSimple/naive-ui/issues/2753).
 - Fix `n-step` has unexpected theme variable class.
 - Fix `n-steps` displays uncorrectly when nested in vertical & horizontal mode.
+- Fix `n-popconfirm`'s `positive-text` & `negetive-text` props don't allow `null` type.
 
 ### Feats
 
