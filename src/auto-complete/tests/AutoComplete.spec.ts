@@ -134,4 +134,14 @@ describe('n-auto-complete', () => {
     expect(onFocus).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NAutoComplete, { props: { status: status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
 })
