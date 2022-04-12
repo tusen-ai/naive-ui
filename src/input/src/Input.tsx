@@ -479,7 +479,7 @@ export default defineComponent({
             ? inputElRef.value
             : inputEl2Ref.value
       const cursorPosition = inputElement?.selectionStart
-      const reg = /^[\s ]|[ ]$/gi
+      const reg = /(^\s)|(\s$)/
       if (reg.test(value) && cursorPosition === 1 && inputElement) {
         inputElement.blur()
         void setTimeout(() => {
