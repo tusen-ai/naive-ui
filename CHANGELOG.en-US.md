@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-dynamic-input` add `RTL` support.
+- `n-table` add `RTL` support.
+- `n-collapse-transition` add `RTL` support.
+
 ## 2.28.0
 
 ### Breaking Changes
