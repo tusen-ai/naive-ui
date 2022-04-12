@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-dynamic-input` add `RTL` support.
+- `n-table` add `RTL` support.
 
 ## 2.28.0
 
