@@ -25,12 +25,12 @@ icon-wrapper.vue
 
 ### IconWrapper Props
 
-| 名称          | 类型               | 默认值      | 说明         | 版本   |
-| ------------- | ------------------ | ----------- | ------------ | ------ |
-| border-radius | `number \| string` | `8`         | 边框圆角大小 | 2.25.0 |
-| color         | `string`           | `undefined` | 颜色         | 2.25.0 |
-| icon-color    | `string`           | `undefined` | 图标颜色     | 2.25.0 |
-| size          | `number \| string` | `24`        | 尺寸         | 2.25.0 |
+| 名称          | 类型     | 默认值      | 说明         | 版本   |
+| ------------- | -------- | ----------- | ------------ | ------ |
+| border-radius | `number` | `6`         | 边框圆角大小 | 2.25.0 |
+| color         | `string` | `undefined` | 颜色         | 2.25.0 |
+| icon-color    | `string` | `undefined` | 图标颜色     | 2.25.0 |
+| size          | `number` | `24`        | 尺寸         | 2.25.0 |
 
 ### Icon Slots
 

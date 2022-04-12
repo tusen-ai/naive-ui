@@ -49,13 +49,12 @@ describe('n-time', () => {
     await wrapper.setProps({ time: date, type: 'datetime' })
     expect(wrapper.find('time').text().length).toBe(19)
     await wrapper.setProps({ time: date, type: 'relative' })
-    expect(wrapper.find('time').text()).toContain('about 50 years ago')
-
+    expect(wrapper.find('time').text()).toContain('50 years ago')
     Date.now = () => new Date('1972-01-01 00:00:00 UTC').getTime()
     const wrapper2 = mount(NTime, {
       props: { to: 0, type: 'relative', unix: true }
     })
-    expect(wrapper2.find('time').text()).toContain('in about 2 years')
+    expect(wrapper2.find('time').text()).toContain('in 2 years')
 
     Date.now = cachedDateNow
   })

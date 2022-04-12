@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.28.0
 
 ### Breaking Changes
 
@@ -24,6 +24,7 @@
 
 - `n-radio` 新增 `label` 属性，关闭 [#2707](https://github.com/TuSimple/naive-ui/issues/2707)
 - `n-drawer` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#2698](https://github.com/TuSimple/naive-ui/issues/2698)
+- `n-date-table` 新增 `paginate-single-page` 属性，关闭 [#2043](https://github.com/TuSimple/naive-ui/issues/2043)
 - `n-pagination` 添加 `RTL` 支持
 - `n-alert` 添加 `RTL` 支持
 - `n-data-table` 新增 `allow-checking-not-loaded` 属性，关闭 [#2758](https://github.com/TuSimple/naive-ui/issues/2758)
