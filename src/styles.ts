@@ -26,7 +26,10 @@ export { dialogDark } from './dialog/styles'
 export { dividerDark } from './divider/styles'
 export { drawerDark } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'
-export { dynamicInputDark } from './dynamic-input/styles'
+export {
+  dynamicInputDark,
+  dynamicInputRtl as unstableDynamicInputRtl
+} from './dynamic-input/styles'
 export { dynamicTagsDark } from './dynamic-tags/styles'
 export { elementDark } from './element/styles'
 export { emptyDark } from './empty/styles'

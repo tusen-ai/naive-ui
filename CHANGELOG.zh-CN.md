@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-dynamic-input` 添加 `RTL` 支持
+
 ## 2.28.0
 
 ### Breaking Changes
