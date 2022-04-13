@@ -27,12 +27,12 @@ import type { MessageType, MessageRenderMessage } from './types'
 import { messageProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-const iconMap = {
-  info: <InfoIcon />,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />,
-  default: null
+const iconRenderMap = {
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />,
+  default: () => null
 }
 
 export default defineComponent({
@@ -206,7 +206,7 @@ function createIconVNode (
       type === 'loading' ? (
         <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} scale={0.85} />
       ) : (
-        iconMap[type]
+        iconRenderMap[type]()
       )
     if (!innerIcon) return null
     return (

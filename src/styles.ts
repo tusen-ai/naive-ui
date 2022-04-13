@@ -1,5 +1,5 @@
 export { commonDark, commonLight } from './_styles/common'
-export { alertDark } from './alert/styles'
+export { alertDark, alertRtl as unstableAlertRtl } from './alert/styles'
 export { anchorDark } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'
 export { avatarDark } from './avatar/styles'
@@ -19,6 +19,7 @@ export {
   collapseDark,
   collapseRtl as unstableCollapseRtl
 } from './collapse/styles'
+export { collapseTransitionRtl as unstableCollapseTransitionRtl } from './collapse-transition/styles'
 export { dataTableDark } from './data-table/styles'
 export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
@@ -26,7 +27,10 @@ export { dialogDark } from './dialog/styles'
 export { dividerDark } from './divider/styles'
 export { drawerDark } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'
-export { dynamicInputDark } from './dynamic-input/styles'
+export {
+  dynamicInputDark,
+  dynamicInputRtl as unstableDynamicInputRtl
+} from './dynamic-input/styles'
 export { dynamicTagsDark } from './dynamic-tags/styles'
 export { elementDark } from './element/styles'
 export { emptyDark } from './empty/styles'
@@ -47,7 +51,10 @@ export { menuDark } from './menu/styles'
 export { messageDark } from './message/styles'
 export { modalDark } from './modal/styles'
 export { notificationDark } from './notification/styles'
-export { paginationDark } from './pagination/styles'
+export {
+  paginationDark,
+  paginationRtl as unstablePaginationRtl
+} from './pagination/styles'
 export { pageHeaderRtl as unstablePageHeaderRtl } from './page-header/styles'
 export { popconfirmDark } from './popconfirm/styles'
 export { popoverDark } from './popover/styles'
@@ -63,7 +70,7 @@ export { spinDark } from './spin/styles'
 export { statisticDark } from './statistic/styles'
 export { stepsDark } from './steps/styles'
 export { switchDark } from './switch/styles'
-export { tableDark } from './table/styles'
+export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
 export { tabsDark } from './tabs/styles'
 export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'
 export { thingDark } from './thing/styles'

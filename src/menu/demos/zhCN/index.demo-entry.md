@@ -87,4 +87,4 @@ expand-selected-option.vue
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| showOption | `(key?: string \| number) => void` | 展开菜单，确保设定的元素被显示，如果不传入 `key` 会当前选中元素 | NEXT_VERSON |
+| showOption | `(key?: string \| number) => void` | 展开菜单，确保设定的元素被显示，如果不传入 `key` 会当前选中元素 | 2.27.0 |

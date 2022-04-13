@@ -882,7 +882,14 @@ export default defineComponent({
                                   this.handleFocusDetectorFocus
                                 }
                               />,
-                              [[clickoutside, this.handleClickOutside]]
+                              [
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ]
+                              ]
                             )
                           }
                           return null

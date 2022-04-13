@@ -1037,7 +1037,14 @@ export default defineComponent({
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),
-                              [[clickoutside, this.handleClickOutside]]
+                              [
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ]
+                              ]
                             )
                             : null
                       }}

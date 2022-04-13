@@ -277,7 +277,9 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
+              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
+              const notInCurrentMonth = !inCurrentMonth
+              const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
@@ -285,11 +287,15 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    notInCurrentMonth &&
+                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
+                    if (disabled) return
                     this.doUpdateValue(ts, {
                       year,
                       month: month + 1,

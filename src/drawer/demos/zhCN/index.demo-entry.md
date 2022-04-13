@@ -38,8 +38,8 @@ dark-4-debug.vue
 | trap-focus | `boolean` | `true` | 是否将焦点锁定在 Drawer 内部 | 2.24.2 |
 | width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |  |
 | z-index | `number` | `undefined` | 抽屉的 z-index | 2.24.0 |
-| on-after-enter | `() => void` | `undefined` | Drawer 出现后的回调 | NEXT_VERSION |
-| on-after-leave | `() => void` | `undefined` | Drawer 关闭后的回调 | NEXT_VERSION |
+| on-after-enter | `() => void` | `undefined` | Drawer 出现后的回调 | 2.28.0 |
+| on-after-leave | `() => void` | `undefined` | Drawer 关闭后的回调 | 2.28.0 |
 | on-esc | `() => void` | `undefined` | 焦点在 Drawer 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |

@@ -24,12 +24,12 @@ icon-wrapper.vue
 
 ### IconWrapper Props
 
-| Name          | Type               | Default     | Description    | Version |
-| ------------- | ------------------ | ----------- | -------------- | ------- |
-| border-radius | `number \| string` | `8`         | Border radius. | 2.25.0  |
-| color         | `string`           | `undefined` | Color.         | 2.25.0  |
-| icon-color    | `string`           | `undefined` | Icon color.    | 2.25.0  |
-| size          | `number \| string` | `24`        | Size.          | 2.25.0  |
+| Name          | Type     | Default     | Description    | Version |
+| ------------- | -------- | ----------- | -------------- | ------- |
+| border-radius | `number` | `6`         | Border radius. | 2.25.0  |
+| color         | `string` | `undefined` | Color.         | 2.25.0  |
+| icon-color    | `string` | `undefined` | Icon color.    | 2.25.0  |
+| size          | `number` | `24`        | Size.          | 2.25.0  |
 
 ### Icon Slots
 
