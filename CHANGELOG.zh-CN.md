@@ -6,6 +6,7 @@
 
 - `n-dynamic-input` 添加 `RTL` 支持
 - `n-table` 添加 `RTL` 支持
+- `n-collapse-transition` 添加 `RTL` 支持
 
 ## 2.28.0
 

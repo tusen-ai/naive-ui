@@ -19,6 +19,7 @@ export {
   collapseDark,
   collapseRtl as unstableCollapseRtl
 } from './collapse/styles'
+export { collapseTransitionRtl as unstableCollapseTransitionRtl } from './collapse-transition/styles'
 export { dataTableDark } from './data-table/styles'
 export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
