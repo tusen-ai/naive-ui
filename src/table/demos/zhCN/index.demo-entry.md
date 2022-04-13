@@ -13,6 +13,7 @@ size.vue
 single-column.vue
 single-line.vue
 striped.vue
+rtl-debug.vue
 ```
 
 ## Components

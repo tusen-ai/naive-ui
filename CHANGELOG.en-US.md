@@ -5,6 +5,9 @@
 ### Feats
 
 - `n-input-number` adds `add-icon` and `minus-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+- `n-dynamic-input` add `RTL` support.
+- `n-table` add `RTL` support.
+- `n-collapse-transition` add `RTL` support.
 
 ## 2.28.0
 

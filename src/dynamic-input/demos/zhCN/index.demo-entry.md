@@ -16,6 +16,7 @@ pair.vue
 custom.vue
 form.vue
 move.vue
+rtl-debug.vue
 ```
 
 ## API
