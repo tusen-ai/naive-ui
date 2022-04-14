@@ -1,15 +1,9 @@
-import type { Locale } from 'date-fns'
-import koKR from 'date-fns/locale/ko-KR'
+import ko from 'date-fns/locale/ko'
+import { NDateLocale } from './enUS'
 
-interface NDateLocale {
-  name: string
-  locale: Locale
-}
-
-const dateKoKr: NDateLocale = {
+const dateKoKR: NDateLocale = {
   name: 'ko-KR',
   locale: koKR
 }
 
-export { NDateLocale }
-export default dateKoKr
+export default dateKoKR
