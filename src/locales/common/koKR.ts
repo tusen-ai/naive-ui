@@ -99,7 +99,6 @@ const koKR = {
     export: '내보내기',
     restore: '기본으로 재설정'
   },
-  // TODO: translation
   Image: {
     tipPrevious: '이전 (←)',
     tipNext: '다음 (→)',
