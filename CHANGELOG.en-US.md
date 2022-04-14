@@ -9,6 +9,10 @@
 - `n-table` add `RTL` support.
 - `n-collapse-transition` add `RTL` support.
 
+### i18n
+
+- Add koKR locale.
+
 ## 2.28.0
 
 ### Breaking Changes
