@@ -3,7 +3,7 @@ import { NDateLocale } from './enUS'
 
 const dateKoKR: NDateLocale = {
   name: 'ko-KR',
-  locale: koKR
+  locale: ko
 }
 
 export default dateKoKR
