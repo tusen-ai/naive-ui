@@ -12,4 +12,4 @@ const dateKoKr: NDateLocale = {
 }
 
 export { NDateLocale }
-export default datekoKR
+export default datekoKr
