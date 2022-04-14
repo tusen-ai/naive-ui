@@ -6,7 +6,7 @@ interface NDateLocale {
   locale: Locale
 }
 
-const dateEnUs: NDateLocale = {
+const dateKoKr: NDateLocale = {
   name: 'ko-KR',
   locale: koKR
 }
