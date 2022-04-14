@@ -1,6 +1,6 @@
 import type { NLocale } from './enUS'
 
-const koKR = {
+const koKR: NLocale = {
   name: 'ko-KR',
   global: {
     undo: '실행 취소',
