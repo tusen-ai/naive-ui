@@ -11,6 +11,7 @@
 
 ### i18n
 
+- Add ptBR locale.
 - Add koKR locale.
 
 ## 2.28.0
