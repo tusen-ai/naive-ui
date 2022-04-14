@@ -1,3 +1,5 @@
+import type { NLocale } from './enUS'
+
 const koKR = {
   name: 'ko-KR',
   global: {
@@ -109,5 +111,4 @@ const koKR = {
   }
 }
 
-export type NLocale = typeof koKR
 export default koKR
