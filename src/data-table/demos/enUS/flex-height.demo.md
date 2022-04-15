@@ -12,7 +12,6 @@ If you want to set the overall height of the table, you can set the `flex-height
     style="max-width: 180px;"
   />
   <n-data-table
-    ref="table"
     :columns="columns"
     :data="data"
     :pagination="pagination"

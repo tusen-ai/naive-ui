@@ -6,7 +6,6 @@
 
 ```html
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
