@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-drawer` has a problem when using the `native-scrollbar` prop, closes [#2774](https://github.com/TuSimple/naive-ui/issues/2774)
+
 ### Feats
 
 - `n-input-number` adds `add-icon` and `minus-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-drawer` 中当 `native-scrollbar` 为 `false` 时，内容无法正常显示，关闭 [#2774](https://github.com/TuSimple/naive-ui/issues/2774)
+
 ### Feats
 
 - `n-input-number` 新增 `add-icon` 和 `minus-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
