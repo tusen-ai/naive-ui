@@ -23,7 +23,8 @@ import {
   MaybeArray,
   ExtractPublicPropTypes,
   warnOnce,
-  call
+  call,
+  resolveSlot
 } from '../../_utils'
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
@@ -496,7 +497,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={[
@@ -531,13 +532,13 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            prefix: () => this.$slots.prefix?.(),
+            prefix: () => $slots.prefix?.(),
             suffix: () =>
               this.showButton
                 ? [
-                    this.$slots.suffix && (
+                    $slots.suffix && (
                       <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                        {{ default: this.$slots.suffix }}
+                        {{ default: $slots.suffix }}
                       </span>
                     ),
                     <NxButton
@@ -558,7 +559,10 @@ export default defineComponent({
                             aria-disabled={true}
                           >
                             {{
-                              default: () => <RemoveIcon />
+                              default: () =>
+                                resolveSlot($slots['minus-icon'], () => [
+                                  <RemoveIcon />
+                                ])
                             }}
                           </NBaseIcon>
                         )
@@ -579,14 +583,17 @@ export default defineComponent({
                         default: () => (
                           <NBaseIcon clsPrefix={mergedClsPrefix}>
                             {{
-                              default: () => <AddIcon />
+                              default: () =>
+                                resolveSlot($slots['add-icon'], () => [
+                                  <AddIcon />
+                                ])
                             }}
                           </NBaseIcon>
                         )
                       }}
                     </NxButton>
                   ]
-                : this.$slots.suffix?.()
+                : $slots.suffix?.()
           }}
         </NInput>
       </div>

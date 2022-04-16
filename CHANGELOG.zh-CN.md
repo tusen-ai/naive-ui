@@ -4,9 +4,15 @@
 
 ### Feats
 
+- `n-input-number` 新增 `add-icon` 和 `minus-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
 - `n-dynamic-input` 添加 `RTL` 支持
 - `n-table` 添加 `RTL` 支持
 - `n-collapse-transition` 添加 `RTL` 支持
+
+### i18n
+
+- Add ptBR locale.
+- Add koKR locale.
 
 ## 2.28.0
 
