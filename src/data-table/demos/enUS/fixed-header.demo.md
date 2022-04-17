@@ -4,7 +4,6 @@ Display large amounts of data in scrollable view by set `max-height`.
 
 ```html
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
