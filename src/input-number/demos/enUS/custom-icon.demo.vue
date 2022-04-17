@@ -6,10 +6,10 @@
   <n-space vertical>
     <n-input-number v-model:value="value">
       <template #minus-icon>
-        <n-icon :size="16" :component="ArrowDownCircleOutline" />
+        <n-icon :component="ArrowDownCircleOutline" />
       </template>
       <template #add-icon>
-        <n-icon :size="16" :component="ArrowUpCircleOutline" />
+        <n-icon :component="ArrowUpCircleOutline" />
       </template>
     </n-input-number>
   </n-space>

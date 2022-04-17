@@ -78,7 +78,7 @@ placement.vue
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | action | `string \| (() => VNodeChild)` | `undefined` | Content of the operation area,, can be a render function. |
-| avatar | `() => VNodeChild` | `undefined` | Content of the `avatar`, can be a render function. |
+| avatar | `() => VNodeChild` | `undefined` | Content of the `avatar`. |
 | closable | `boolean` | `true` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
 | description | `string \| (() => VNodeChild)` | `undefined` | Content of the `description`, can be a render function. |

@@ -553,19 +553,14 @@ export default defineComponent({
                       ref="minusButtonInstRef"
                     >
                       {{
-                        default: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            aria-disabled={true}
-                          >
-                            {{
-                              default: () =>
-                                resolveSlot($slots['minus-icon'], () => [
-                                  <RemoveIcon />
-                                ])
-                            }}
-                          </NBaseIcon>
-                        )
+                        icon: () =>
+                          resolveSlot($slots['minus-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <RemoveIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
                       }}
                     </NxButton>,
                     <NxButton
@@ -580,16 +575,14 @@ export default defineComponent({
                       ref="addButtonInstRef"
                     >
                       {{
-                        default: () => (
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
-                            {{
-                              default: () =>
-                                resolveSlot($slots['add-icon'], () => [
-                                  <AddIcon />
-                                ])
-                            }}
-                          </NBaseIcon>
-                        )
+                        icon: () =>
+                          resolveSlot($slots['add-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <AddIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
                       }}
                     </NxButton>
                   ]

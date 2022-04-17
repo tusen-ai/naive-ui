@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-drawer` has a problem when using the `native-scrollbar` prop, closes [#2774](https://github.com/TuSimple/naive-ui/issues/2774)
+- Fix notification icon won't show after first notification is emitted in SSR mode, closes [#2793](https://github.com/TuSimple/naive-ui/issues/2793).
 
 ### Feats
 
