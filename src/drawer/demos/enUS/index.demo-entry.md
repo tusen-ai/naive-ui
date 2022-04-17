@@ -2,6 +2,10 @@
 
 I think it is similar with modal, with a bit difference on placement.
 
+<n-alert title="提示" type="warning">
+  If you need to use `n-drawer-content`, you should keep `n-drawer`'s `native-scrollbar` prop as `true`.
+</n-alert>
+
 ## Demos
 
 ```demo
