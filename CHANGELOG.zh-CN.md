@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 notification 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
+
 ### Feats
 
 - `n-input-number` 新增 `add-icon` 和 `minus-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
@@ -11,8 +15,8 @@
 
 ### i18n
 
-- Add ptBR locale.
-- Add koKR locale.
+- 新增 ptBR locale
+- 新增 koKR locale
 
 ## 2.28.0
 

@@ -152,7 +152,6 @@ export default c([
       box-sizing: border-box;
       opacity: 1;
     `, [
-      // TODO: refactor type styles & transition
       cE('avatar', [
         cB('icon', {
           color: 'var(--n-icon-color)'

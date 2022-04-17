@@ -77,7 +77,7 @@ placement.vue
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | action | `string \| (() => VNodeChild)` | `undefined` | 操作区域的内容,可以是 render 函数 |
-| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容，可以是 render 函数 |
+| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容 |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 通知框内容，可以是 render 函数 |
 | description | `string \| (() => VNodeChild)` | `undefined` | 描述的内容，可以是 render 函数 |
