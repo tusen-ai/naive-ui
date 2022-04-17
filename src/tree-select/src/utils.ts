@@ -32,7 +32,8 @@ export function filterTree (
   tree: TreeSelectOption[],
   filter: (pattern: string, v: TreeSelectOption) => boolean,
   pattern: string,
-  keyField: string
+  keyField: string,
+  childrenField: string
 ): {
     filteredTree: TreeSelectOption[]
     expandedKeys: Key[]
@@ -62,8 +63,9 @@ export function filterTree (
           }
         }
       }
-      if (n.children) {
-        visit(n.children)
+      const children = n[childrenField] as TreeSelectOption[] | undefined
+      if (children) {
+        visit(children)
       }
       path.pop()
     })
@@ -75,7 +77,7 @@ export function filterTree (
       const isVisitedTail = visitedTailKeys.has(key)
       const isVisitedNonTail = visitedNonTailKeys.has(key)
       if (!isVisitedTail && !isVisitedNonTail) return
-      const { children } = n
+      const children = n[childrenField] as TreeSelectOption[] | undefined
       if (children) {
         if (isVisitedTail) {
           // If it is visited path tail, use origin node
@@ -83,9 +85,9 @@ export function filterTree (
         } else {
           // It it is not visited path tail, use cloned node
           expandedKeys.push(key)
-          const clonedNode = { ...n, children: [] }
+          const clonedNode = { ...n, [childrenField]: [] }
           sibs.push(clonedNode)
-          build(children, clonedNode.children)
+          build(children, clonedNode[childrenField] as TreeSelectOption[])
         }
       } else {
         sibs.push(n)

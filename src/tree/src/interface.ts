@@ -76,7 +76,7 @@ export type RenderSwitcherIcon = () => VNodeChild
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>
-  highlightKeySetRef: Ref<Set<Key>>
+  highlightKeySetRef: Ref<Set<Key> | null>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>

@@ -209,13 +209,13 @@ export default defineComponent({
     })
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeSelectOption[]
-      highlightKeySet: Set<Key> | undefined
+      highlightKeySet: Set<Key> | null
       expandedKeys: Key[] | undefined
     }>(() => {
       if (!props.filterable) {
         return {
           filteredTree: props.options,
-          highlightKeySet: undefined,
+          highlightKeySet: null,
           expandedKeys: undefined
         }
       }
@@ -223,7 +223,7 @@ export default defineComponent({
       if (!pattern.length || !mergedFilterRef.value) {
         return {
           filteredTree: props.options,
-          highlightKeySet: undefined,
+          highlightKeySet: null,
           expandedKeys: undefined
         }
       }
@@ -231,7 +231,8 @@ export default defineComponent({
         props.options,
         mergedFilterRef.value,
         pattern,
-        props.keyField
+        props.keyField,
+        props.childrenField
       )
     })
     // used to resolve selected options

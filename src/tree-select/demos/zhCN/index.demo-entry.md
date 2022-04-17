@@ -16,6 +16,7 @@ action.vue
 async.vue
 status.vue
 debug.vue
+field-search-debug.vue
 ```
 
 ## API

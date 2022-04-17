@@ -220,7 +220,7 @@ const treeProps = {
   internalDataTreeMate: Object as PropType<TreeMate<TreeOption>>,
   // use it to display
   internalDisplayTreeMate: Object as PropType<TreeMate<TreeOption>>,
-  internalHighlightKeySet: Object as PropType<Set<Key>>,
+  internalHighlightKeySet: Object as PropType<Set<Key> | null>,
   internalUnifySelectCheck: Boolean,
   internalHideFilteredNode: Boolean, // I'm sure this won't work with draggable
   internalCheckboxFocusable: {

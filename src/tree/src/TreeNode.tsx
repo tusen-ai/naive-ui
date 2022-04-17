@@ -184,9 +184,9 @@ const TreeNode = defineComponent({
         () => NTree.pendingNodeKeyRef.value === props.tmNode.key
       ),
       loading: useMemo(() => NTree.loadingKeysRef.value.has(props.tmNode.key)),
-      highlight: useMemo(() =>
-        NTree.highlightKeySetRef.value.has(props.tmNode.key)
-      ),
+      highlight: useMemo(() => {
+        return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
+      }),
       checked: useMemo(() =>
         NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
       ),

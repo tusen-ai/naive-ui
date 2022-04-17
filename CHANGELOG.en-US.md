@@ -6,13 +6,15 @@
 
 - Fix notification icon won't show after first notification is emitted in SSR mode, closes [#2793](https://github.com/TuSimple/naive-ui/issues/2793).
 - Fix `n-drawer` & `n-modal` may overflow screen on opening if `:autofocus="true"`.
+- Fix `n-tree-select`'s filter not working correctly when `children-field` is not set, closed [#2789](https://github.com/TuSimple/naive-ui/issues/2789).
+- Fix `n-tree-select`'s matched style is not cleared after filter value is cleared.
 
 ### Feats
 
 - `n-input-number` adds `add-icon` and `minus-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
-- `n-dynamic-input` add `RTL` support.
-- `n-table` add `RTL` support.
-- `n-collapse-transition` add `RTL` support.
+- `n-dynamic-input` adds `RTL` support.
+- `n-table` adds `RTL` support.
+- `n-collapse-transition` adds `RTL` support.
 
 ### i18n
 
