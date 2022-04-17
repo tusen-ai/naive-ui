@@ -106,6 +106,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Common Issues',
           zh: '常见问题',
           path: '/common-issues'
+        },
+        {
+          en: 'Controlled & Uncontrolled',
+          zh: '受控与非受控',
+          path: '/controlled-uncontrolled'
         }
       ]
     },
