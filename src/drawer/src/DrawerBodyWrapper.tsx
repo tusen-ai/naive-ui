@@ -11,8 +11,7 @@ import {
   withDirectives,
   vShow,
   mergeProps,
-  CSSProperties,
-  Ref
+  CSSProperties
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
 import { NScrollbar } from '../../_internal'
@@ -59,7 +58,7 @@ export default defineComponent({
   },
   setup (props) {
     const displayedRef = ref(props.show)
-    const bodyRef: Ref<HTMLElement | null> | null = ref(null) // used for detached content
+    const bodyRef = ref<HTMLElement | null>(null) // used for detached content
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
     watchEffect(() => {

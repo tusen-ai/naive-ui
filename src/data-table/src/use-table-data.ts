@@ -15,7 +15,7 @@ import type {
   RowKey
 } from './interface'
 import { createShallowClonedObject } from './utils'
-import { PaginationProps } from '../../pagination/src/Pagination'
+import type { PaginationProps } from '../../pagination/src/Pagination'
 import { call, warn } from '../../_utils'
 import { useSorter } from './use-sorter'
 // useTableData combines filter, sorter and pagination
