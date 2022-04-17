@@ -51,7 +51,6 @@ export default c([
     ]),
     cB('drawer-content-wrapper', `
       box-sizing: border-box;
-      height: 100%;
     `),
     cB('drawer-content', `
       height: 100%;

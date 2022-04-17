@@ -4,7 +4,6 @@
 
 ### Fixes
 
-- 修复 `n-drawer` 中当 `native-scrollbar` 为 `false` 时，内容无法正常显示，关闭 [#2774](https://github.com/TuSimple/naive-ui/issues/2774)
 - 修复 notification 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
 - 修复 `n-drawer` 和 `n-modal` 在 `:autofocus="true"` 情况下打开时可能溢出屏幕
 

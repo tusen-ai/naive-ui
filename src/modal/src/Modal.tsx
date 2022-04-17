@@ -9,7 +9,8 @@ import {
   PropType,
   CSSProperties,
   toRef,
-  inject
+  inject,
+  Ref
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
@@ -119,7 +120,7 @@ export default defineComponent({
         )
       }
     }
-    const containerRef = ref<HTMLElement | null>(null)
+    const containerRef: Ref<HTMLElement | null> = ref(null)
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
       useConfig(props)
     const themeRef = useTheme(
