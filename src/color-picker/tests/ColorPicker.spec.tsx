@@ -193,3 +193,34 @@ describe('props.label', () => {
     wrapper.unmount()
   })
 })
+
+describe('n-color-picker', () => {
+  it('should work with `placement` prop', async () => {
+    ;(
+      [
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'
+      ] as const
+    ).forEach((placement) => {
+      const wrapper = mount(NColorPicker, { props: { placement: placement } })
+      setTimeout(() => {
+        expect(
+          document
+            .querySelector('.v-binder-follower-content')
+            ?.getAttribute('v-placement')
+        ).toBe(placement)
+        wrapper.unmount()
+      })
+    })
+  })
+})
