@@ -372,9 +372,47 @@ export default defineComponent({
     }
     function handleFileInputChange (e: Event): void {
       const target = e.target as HTMLInputElement
-      handleFileAddition(target.files, e)
+      handleFileAddition(Array.from(target.files!), e)
       // May have bug! set to null?
       target.value = ''
+    }
+    function handleFileInputDrop (e: DragEvent): void {
+      if (!e.dataTransfer) {
+        return
+      }
+
+      getAllFileEntries(e.dataTransfer?.items).then(entries => {
+        handleFileAddition(entries)
+      })
+    }
+    async function getAllFileEntries(dataTransferItemList: DataTransferItemList): Promise<FileSystemEntry[]> {
+      let fileEntries: FileSystemEntry[] = []
+      let queue: FileSystemEntry[] = []
+      for (let i = 0; i < dataTransferItemList.length; i++) {
+        let entry = dataTransferItemList[i].webkitGetAsEntry()
+        if (entry == null) continue
+        queue.push(entry)
+      }
+    
+      while (queue.length > 0) {
+        let entry = queue.shift() as FileSystemEntry
+        if (entry.isFile) {
+          fileEntries.push(entry)
+        } else if (entry.isDirectory) {
+          let reader = (entry as FileSystemDirectoryEntry).createReader()
+          readAllDirectoryEntries(reader).then(entries => queue.push(...entries))
+        }
+      }
+      return fileEntries
+    }
+    async function readAllDirectoryEntries(directoryReader: FileSystemDirectoryReader) {
+      let entries = []
+      let readEntries = await new Promise(directoryReader.readEntries)
+      while (readEntries.length > 0) {
+        entries.push(...readEntries)
+        readEntries = await new Promise(directoryReader.readEntries)
+      }
+      return entries
     }
     function doUpdateFileList (files: FileInfo[]): void {
       const { 'onUpdate:fileList': _onUpdateFileList, onUpdateFileList } = props
@@ -382,10 +420,10 @@ export default defineComponent({
       if (onUpdateFileList) call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
     }
-    function handleFileAddition (files: FileList | null, e?: Event): void {
+    function handleFileAddition (files: File[] | FileSystemEntry[] | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-      let filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      let filesAsArray = props.multiple ? files : [files[0]]
       const { max } = props
       if (max) {
         filesAsArray = filesAsArray.slice(
@@ -395,15 +433,24 @@ export default defineComponent({
       }
 
       void Promise.all(
-        filesAsArray.map(async (file) => {
+        filesAsArray.map(async (entry) => {
+          let file: File | null
+          if (entry instanceof FileSystemFileEntry) {
+            file = await new Promise(entry.file)
+          } else if (entry instanceof FileSystemDirectoryEntry) {
+            file = null
+          } else {
+            file = entry as File
+          }
           const fileInfo: FileInfo = {
             id: createId(),
-            name: file.name,
+            name: entry.name,
+            fullPath: (entry instanceof FileSystemEntry ? entry.fullPath : null),
             status: 'pending',
             percentage: 0,
-            file: file,
+            file,
             url: null,
-            type: file.type,
+            type: (entry instanceof File ? file?.type : (entry instanceof FileSystemFileEntry ? file?.type : 'directory')),
             thumbnailUrl: null
           }
           if (
@@ -622,6 +669,7 @@ export default defineComponent({
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleFileInputChange,
+      handleFileInputDrop,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -646,6 +694,7 @@ export default defineComponent({
         accept={this.accept}
         multiple={this.multiple}
         onChange={this.handleFileInputChange}
+        onDrop={this.handleFileInputDrop}
       />
     )
 
