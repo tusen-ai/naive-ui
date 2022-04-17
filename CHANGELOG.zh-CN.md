@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 notification 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
+- 修复 dialog 在 SSR 模式下第一个之后的 icon 都不会展示
 - 修复 `n-drawer` 和 `n-modal` 在 `:autofocus="true"` 情况下打开时可能溢出屏幕
 - 修复 `n-tree-select` 在使用 `children-field` 时过滤器不生效，关闭 [#2789](https://github.com/TuSimple/naive-ui/issues/2789)
 - 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新
