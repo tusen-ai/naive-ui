@@ -9,6 +9,7 @@
 - Fix `n-drawer` & `n-modal` may overflow screen on opening if `:autofocus="true"`.
 - Fix `n-tree-select`'s filter not working correctly when `children-field` is not set, closed [#2789](https://github.com/TuSimple/naive-ui/issues/2789).
 - Fix `n-tree-select`'s matched style is not cleared after filter value is cleared.
+- Fix `n-tree-select`'s parent items in tree are selectable when `check-strategy="child"` and `:cascade="false"`, closes [#2780](https://github.com/TuSimple/naive-ui/issues/2780).
 
 ### Feats
 

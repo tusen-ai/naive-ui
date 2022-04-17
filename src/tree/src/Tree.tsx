@@ -750,15 +750,7 @@ export default defineComponent({
       toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
-      if (
-        props.disabled ||
-        node.disabled ||
-        !props.selectable ||
-        (props.internalTreeSelect &&
-          !props.multiple &&
-          mergedCheckStrategyRef.value === 'child' &&
-          !node.isLeaf)
-      ) {
+      if (props.disabled || !props.selectable) {
         return
       }
       pendingNodeKeyRef.value = node.key

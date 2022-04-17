@@ -9,6 +9,7 @@
 - 修复 `n-drawer` 和 `n-modal` 在 `:autofocus="true"` 情况下打开时可能溢出屏幕
 - 修复 `n-tree-select` 在使用 `children-field` 时过滤器不生效，关闭 [#2789](https://github.com/TuSimple/naive-ui/issues/2789)
 - 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新
+- 修复 `n-tree-select` 在 `check-strategy="child"` 和 `:cascade="false"` 时非叶节点依然可以被选择，关闭 [#2780](https://github.com/TuSimple/naive-ui/issues/2780)
 
 ### Feats
 

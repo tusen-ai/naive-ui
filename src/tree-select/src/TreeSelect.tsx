@@ -49,6 +49,8 @@ import {
   call,
   ExtractPublicPropTypes,
   MaybeArray,
+  resolveSlot,
+  resolveWrappedSlot,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
@@ -863,28 +865,26 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  {$slots.empty ? (
-                                    $slots.empty()
-                                  ) : (
+                                  {resolveSlot($slots.empty, () => [
                                     <NEmpty
                                       theme={mergedTheme.peers.Empty}
                                       themeOverrides={
                                         mergedTheme.peerOverrides.Empty
                                       }
                                     />
-                                  )}
+                                  ])}
                                 </div>
                               )}
-                              {$slots.action && (
-                                <div
-                                  class={`${mergedClsPrefix}-tree-select-menu__action`}
-                                  data-action
-                                >
-                                  {{
-                                    default: $slots.action
-                                  }}
-                                </div>
-                              )}
+                              {resolveWrappedSlot($slots.action, (children) => {
+                                return children ? (
+                                  <div
+                                    class={`${mergedClsPrefix}-tree-select-menu__action`}
+                                    data-action
+                                  >
+                                    {children}
+                                  </div>
+                                ) : null
+                              })}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />
                             </div>,
                             [
