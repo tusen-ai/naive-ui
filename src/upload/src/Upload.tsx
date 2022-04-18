@@ -251,11 +251,10 @@ const uploadProps = {
   accept: String,
   action: String,
   customRequest: Function as PropType<CustomRequest>,
-  // to be impl
-  // directory: {
-  //   type: Boolean,
-  //   default: false
-  // },
+  directory: {
+    type: Boolean,
+    default: false
+  },
   method: {
     type: String,
     default: 'POST'
@@ -402,6 +401,7 @@ export default defineComponent({
             status: 'pending',
             percentage: 0,
             file: file,
+            fullPath: props.directory ? file.webkitRelativePath : null,
             url: null,
             type: file.type,
             thumbnailUrl: null
@@ -645,6 +645,7 @@ export default defineComponent({
         class={`${mergedClsPrefix}-upload-file-input`}
         accept={this.accept}
         multiple={this.multiple}
+        webkitdirectory={this.directory}
         onChange={this.handleFileInputChange}
       />
     )
