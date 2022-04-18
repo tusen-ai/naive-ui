@@ -95,6 +95,7 @@ export type OnUpdateKeysImpl = (
 type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
+  allowCheckingNotLoaded: Boolean,
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
   expandedKeys: Array as PropType<Key[]>,
@@ -774,7 +775,8 @@ export default defineComponent({
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        checkStrategy: mergedCheckStrategyRef.value
+        checkStrategy: mergedCheckStrategyRef.value,
+        allowNotLoaded: props.allowCheckingNotLoaded
       })
       doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys))
       doUpdateIndeterminateKeys(

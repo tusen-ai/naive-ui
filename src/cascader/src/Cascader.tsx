@@ -60,6 +60,7 @@ import style from './styles/index.cssr'
 
 const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
+  allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -332,7 +333,8 @@ export default defineComponent({
         try {
           const { checkedKeys } = check(key, mergedKeysRef.value.checkedKeys, {
             cascade,
-            checkStrategy: mergedCheckStrategyRef.value
+            checkStrategy: mergedCheckStrategyRef.value,
+            allowNotLoaded: props.allowCheckingNotLoaded
           })
           doUpdateValue(
             checkedKeys,
@@ -389,7 +391,8 @@ export default defineComponent({
         } = treeMateRef
         const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
         doUpdateValue(
           checkedKeys,

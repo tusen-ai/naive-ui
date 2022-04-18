@@ -509,7 +509,8 @@ export default defineComponent({
               checkedKeysValue,
               {
                 checkStrategy: props.checkStrategy,
-                cascade: mergedCascadeRef.value
+                cascade: mergedCascadeRef.value,
+                allowNotLoaded: props.allowCheckingNotLoaded
               }
             )
             doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
@@ -761,6 +762,9 @@ export default defineComponent({
                               <NTree
                                 ref="treeInstRef"
                                 blockLine
+                                allowCheckingNotLoaded={
+                                  this.allowCheckingNotLoaded
+                                }
                                 showIrrelevantNodes={false}
                                 animated={false}
                                 pattern={this.pattern}
