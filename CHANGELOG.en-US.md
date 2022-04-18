@@ -11,6 +11,7 @@
 - Fix `n-tree-select`'s matched style is not cleared after filter value is cleared.
 - Fix `n-tree-select`'s parent items in tree are selectable when `check-strategy="child"` and `:cascade="false"`, closes [#2780](https://github.com/TuSimple/naive-ui/issues/2780).
 - Fix `n-select`'s `empty` slot can't let `n-input` focus inside, closes [#2812](https://github.com/TuSimple/naive-ui/issues/2812).
+- Fix `n-select`'s menu is invisible in fullscreen mode, closes [#2722](https://github.com/TuSimple/naive-ui/issues/2722).
 
 ### Feats
 

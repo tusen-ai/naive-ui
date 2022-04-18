@@ -11,6 +11,7 @@
 - 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新
 - 修复 `n-tree-select` 在 `check-strategy="child"` 和 `:cascade="false"` 时非叶节点依然可以被选择，关闭 [#2780](https://github.com/TuSimple/naive-ui/issues/2780)
 - 修复 `n-select` 的 `empty` slot 中 `n-input` 无法聚焦，关闭 [#2812](https://github.com/TuSimple/naive-ui/issues/2812)
+- 修复 `n-select` 菜单在全屏模式下不可见，关闭 [#2722](https://github.com/TuSimple/naive-ui/issues/2722)
 
 ### Feats
 

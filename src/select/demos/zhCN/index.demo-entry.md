@@ -36,6 +36,7 @@ spin-debug.vue
 options-change-debug.vue
 filterable-debug.vue
 empty-debug.vue
+fullscreen-debug.vue
 ```
 
 ## API
