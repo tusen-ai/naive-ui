@@ -18,6 +18,7 @@
 - `n-dynamic-input` 添加 `RTL` 支持
 - `n-table` 添加 `RTL` 支持
 - `n-collapse-transition` 添加 `RTL` 支持
+- `n-tree-select` 新增 `show-irrelevant-nodes` 属性，关闭 [#2764](https://github.com/TuSimple/naive-ui/issues/2764)
 
 ### i18n
 

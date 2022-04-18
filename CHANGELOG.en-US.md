@@ -18,6 +18,7 @@
 - `n-dynamic-input` adds `RTL` support.
 - `n-table` adds `RTL` support.
 - `n-collapse-transition` adds `RTL` support.
+- `n-tree` adds `show-irrelevant-nodes` prop, closes [#2764](https://github.com/TuSimple/naive-ui/issues/2764).
 
 ### i18n
 
