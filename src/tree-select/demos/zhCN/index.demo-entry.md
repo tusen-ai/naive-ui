@@ -54,6 +54,7 @@ field-search-debug.vue
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |

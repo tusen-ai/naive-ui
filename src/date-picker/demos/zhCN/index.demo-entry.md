@@ -42,6 +42,7 @@ status.vue
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |

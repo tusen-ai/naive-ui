@@ -39,6 +39,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 输入框值发生更新时触发 |  |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | 输入框的选中时触发 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | 输入框获得焦点时触发 |  |

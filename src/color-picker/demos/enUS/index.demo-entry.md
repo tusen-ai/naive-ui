@@ -32,7 +32,7 @@ native.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |  |
 | disabled | `boolean` | `false` | Whether to disable the color picker. | 2.24.5 |
 | swatches | `string[]` | `undefined` | Value of the swatches. |  |
-| to | `string \| HTMLElement` | `'body'` | Where to attach the panel to. |  |
+| to | `string \| HTMLElement \| false` | `'body'` | Where to attach the panel to. `false` will keep it not detached. |  |
 | value | `string \| null` | `undefined` | Value of the picker. |  |
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |  |

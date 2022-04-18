@@ -51,6 +51,7 @@ debug.vue
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |

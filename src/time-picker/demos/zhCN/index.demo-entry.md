@@ -41,6 +41,7 @@ status.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 时间选择器的面板的弹出位置 | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | use-12-hours | `boolean` | `false` | 是否使用 12 小时制的面板 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
 | value-format | `string` | 跟随 `format` | 格式化后值的格式 | 2.24.0 |
