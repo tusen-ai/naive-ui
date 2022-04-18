@@ -598,7 +598,7 @@ export default defineComponent({
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action')) e.preventDefault()
+      if (!happensIn(e, 'action') && !happensIn(e, 'empty')) e.preventDefault()
     }
     // scroll events on menu
     function handleMenuScroll (e: Event): void {

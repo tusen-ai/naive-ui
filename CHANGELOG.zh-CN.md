@@ -10,6 +10,7 @@
 - 修复 `n-tree-select` 在使用 `children-field` 时过滤器不生效，关闭 [#2789](https://github.com/TuSimple/naive-ui/issues/2789)
 - 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新
 - 修复 `n-tree-select` 在 `check-strategy="child"` 和 `:cascade="false"` 时非叶节点依然可以被选择，关闭 [#2780](https://github.com/TuSimple/naive-ui/issues/2780)
+- 修复 `n-select` 的 `empty` slot 中 `n-input` 无法聚焦，关闭 [#2812](https://github.com/TuSimple/naive-ui/issues/2812)
 
 ### Feats
 
