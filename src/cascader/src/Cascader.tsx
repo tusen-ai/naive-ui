@@ -237,7 +237,8 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade
+          cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
       } else {
         return {
@@ -409,7 +410,8 @@ export default defineComponent({
         const { getCheckedKeys, getNode } = treeMateRef.value
         const value = getCheckedKeys(checkedKeysRef.value, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }).checkedKeys
         return value.map((key) => {
           const node = getNode(key)

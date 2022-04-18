@@ -149,10 +149,7 @@ const props = {
   /**
    * @deprecated
    */
-  leafOnly: {
-    type: Boolean,
-    default: undefined
-  }
+  leafOnly: Boolean
 } as const
 
 export type TreeSelectProps = ExtractPublicPropTypes<typeof props>
@@ -163,7 +160,7 @@ export default defineComponent({
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
-        if (props.leafOnly !== undefined) {
+        if (props.leafOnly) {
           warnOnce(
             'tree-select',
             '`leaf-only` is deprecated, please use `check-strategy="child"` instead.'
@@ -287,7 +284,8 @@ export default defineComponent({
         const { value: treeMate } = dataTreeMateRef
         const { checkedKeys } = treeMate.getCheckedKeys(mergedValue, {
           checkStrategy: props.checkStrategy,
-          cascade: mergedCascadeRef.value
+          cascade: mergedCascadeRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
         const { labelField } = props
         checkedKeys.forEach((value) => {

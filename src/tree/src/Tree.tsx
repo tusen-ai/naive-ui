@@ -27,7 +27,7 @@ import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createDataKey, resolveSlot, warn } from '../../_utils'
+import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
@@ -158,7 +158,6 @@ const treeProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
-  leafOnly: Boolean,
   multiple: Boolean,
   pattern: {
     type: String,
@@ -238,6 +237,13 @@ const treeProps = {
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
+  },
+  /**
+   * @deprecated
+   */
+  leafOnly: {
+    type: Boolean,
+    default: undefined
   }
 } as const
 
@@ -247,6 +253,16 @@ export default defineComponent({
   name: 'Tree',
   props: treeProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly !== undefined) {
+          warnOnce(
+            'tree',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
