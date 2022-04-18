@@ -23,7 +23,7 @@ function useAdjustedTo (
     const { to } = props
     if (to !== undefined) {
       if (to === false) return teleportDisabled
-      if (to === true) return 'body'
+      if (to === true) return document.fullscreenElement || 'body'
       return to
     }
     if (modal?.value) {
@@ -32,7 +32,7 @@ function useAdjustedTo (
     if (drawer?.value) return drawer.value
     if (popover?.value) return popover.value
     if (selectMenu?.value) return selectMenu.value
-    return to ?? 'body'
+    return to ?? (document.fullscreenElement || 'body')
   })
 }
 
