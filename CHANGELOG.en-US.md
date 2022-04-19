@@ -13,6 +13,7 @@
 - Fix `n-select`'s `empty` slot can't let `n-input` focus inside, closes [#2812](https://github.com/TuSimple/naive-ui/issues/2812).
 - Fix `n-select`'s menu is invisible in fullscreen mode, closes [#2722](https://github.com/TuSimple/naive-ui/issues/2722).
 - Fix `n-color-picker`'s `value` prop can't be `null`.
+- Fix `n-table`'s border color shifts when switch bewteen different props.
 
 ### Feats
 

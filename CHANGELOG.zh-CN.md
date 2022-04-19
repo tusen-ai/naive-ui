@@ -13,6 +13,7 @@
 - 修复 `n-select` 的 `empty` slot 中 `n-input` 无法聚焦，关闭 [#2812](https://github.com/TuSimple/naive-ui/issues/2812)
 - 修复 `n-select` 菜单在全屏模式下不可见，关闭 [#2722](https://github.com/TuSimple/naive-ui/issues/2722)
 - 修复 `n-color-picker` 的 `value` 属性类型不能为 `null`
+- 修复 `n-table` 在不同属性切换时边框颜色突变
 
 ### Feats
 
