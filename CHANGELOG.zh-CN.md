@@ -19,7 +19,7 @@
 - `n-dynamic-input` 添加 `RTL` 支持
 - `n-table` 添加 `RTL` 支持
 - `n-collapse-transition` 添加 `RTL` 支持
-- `n-tree-select` 新增 `show-irrelevant-nodes` 属性，关闭 [#2764](https://github.com/TuSimple/naive-ui/issues/2764)
+- `n-tree` 新增 `show-irrelevant-nodes` 属性，关闭 [#2764](https://github.com/TuSimple/naive-ui/issues/2764)
 - `n-tree-select` 新增 `allow-checking-not-loaded` 属性
 - `n-cascader` 新增 `allow-checking-not-loaded` 属性
 - `n-tree` 新增 `allow-checking-not-loaded` 属性

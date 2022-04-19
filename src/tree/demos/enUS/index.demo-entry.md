@@ -47,7 +47,7 @@ node-props.vue
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
-| show-irrelevant-nodes | `boolean` | `false` | Whether to filter unmached nodes when tree has pattern. | NEXT_VERSION |
+| show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | NEXT_VERSION |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |
