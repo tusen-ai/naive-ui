@@ -5,12 +5,7 @@
 列：在列对象上设定 `className` 属性为确定的列设定 class。
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :row-class-name="rowClassName"
-/>
+<n-data-table :columns="columns" :data="data" :row-class-name="rowClassName" />
 ```
 
 ```js

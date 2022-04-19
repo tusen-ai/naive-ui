@@ -10,7 +10,6 @@ If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `
     <n-button @click="clearSorter">Clear Sorter</n-button>
   </n-space>
   <n-data-table
-    ref="table"
     :columns="columns"
     :data="data"
     :pagination="pagination"

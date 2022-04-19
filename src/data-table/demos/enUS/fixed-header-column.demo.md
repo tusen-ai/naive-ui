@@ -6,7 +6,6 @@ Note that: If you have set fixed column, you should also set `scroll-x`.
 
 ```html
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"

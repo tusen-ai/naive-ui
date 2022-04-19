@@ -3,12 +3,7 @@
 通过设定 `column.ellipsis` 省略单元格内容。
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-data-table :columns="columns" :data="data" :pagination="pagination" />
 ```
 
 ```js

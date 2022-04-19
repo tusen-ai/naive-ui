@@ -9,7 +9,6 @@ Rows can be selectable by making first column's type as `selection`.
 </n-p>
 
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"
