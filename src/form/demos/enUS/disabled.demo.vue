@@ -51,7 +51,7 @@
           :value="model.cascaderValue"
           placeholder="Cascader"
           :options="options"
-          :leaf-only="false"
+          check-strategy="child"
           size="medium"
         />
       </n-form-item>
