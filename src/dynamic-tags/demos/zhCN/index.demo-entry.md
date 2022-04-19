@@ -35,7 +35,7 @@ option-format.vue
 | on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | 根据输入的值创造对应的选项 | 2.27.0 |
 | on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | 组件值发生变化时的回调 |  |
 
-### DynamicTagsOption Type
+#### DynamicTagsOption Type
 
 ```ts
 export interface DynamicTagsOption {

@@ -35,7 +35,7 @@ option-format.vue
 | on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | 2.27.0 |
 | on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | Callback when the component's value changes. |  |
 
-### DynamicTagsOption Type
+#### DynamicTagsOption Type
 
 ```ts
 export interface DynamicTagsOption {
