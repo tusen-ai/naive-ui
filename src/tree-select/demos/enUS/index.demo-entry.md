@@ -23,7 +23,7 @@ debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially there are disabled nodes. | NEXT_VERSION |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | NEXT_VERSION |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
