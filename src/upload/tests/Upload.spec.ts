@@ -6,7 +6,8 @@ import {
   NUploadTrigger
 } from '../index'
 import { sleep } from 'seemly'
-import { NButtonGroup, NButton } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 import { h } from 'vue'
 import { NCard } from '../../card'
 import { NImageGroup } from '../../image'

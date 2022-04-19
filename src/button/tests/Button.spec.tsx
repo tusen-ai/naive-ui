@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NButton, NButtonGroup, NxButton } from '../index'
+import { NButton, NxButton } from '../index'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 
@@ -308,33 +308,6 @@ describe('n-button', () => {
         ] as const
       ).every((i) => buttonStyle.includes(i))
     ).toBe(true)
-    wrapper.unmount()
-  })
-
-  it('should work with `button group`', async () => {
-    const wrapper = mount(NButtonGroup, {
-      slots: {
-        default: () => [
-          h(NButton, null, {
-            default: () => 'test1'
-          }),
-          h(NButton, null, {
-            default: () => 'test2'
-          }),
-          h(NButton, null, {
-            default: () => 'test3'
-          })
-        ]
-      }
-    })
-
-    expect(wrapper.find('[role="group"]').classes()).toContain('n-button-group')
-    expect(wrapper.findAll('button').length).toBe(3)
-
-    await wrapper.setProps({ vertical: true })
-    expect(wrapper.find('[role="group"]').classes()).toContain(
-      'n-button-group--vertical'
-    )
     wrapper.unmount()
   })
 })
