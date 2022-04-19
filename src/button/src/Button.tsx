@@ -12,6 +12,7 @@ import {
   ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
+import { changeColor } from 'seemly'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -33,11 +34,10 @@ import {
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
-import { buttonGroupInjectionKey } from './ButtonGroup'
+import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import type { Type, Size } from './interface'
-import style from './styles/button.cssr'
+import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
-import { changeColor } from 'seemly'
 
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),

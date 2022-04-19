@@ -8,6 +8,10 @@ export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
+export {
+  buttonGroupDark,
+  buttonGroupRtl as unstableButtonGroupRtl
+} from './button-group/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
 export { cascaderDark } from './cascader/styles'
 export {

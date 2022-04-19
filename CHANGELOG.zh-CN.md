@@ -24,6 +24,7 @@
 - `n-tree-select` 新增 `allow-checking-not-loaded` 属性
 - `n-cascader` 新增 `allow-checking-not-loaded` 属性
 - `n-tree` 新增 `allow-checking-not-loaded` 属性
+- `n-button-group` 添加 `RTL` 支持
 
 ### i18n
 

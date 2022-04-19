@@ -24,6 +24,7 @@
 - `n-tree-select` adds `allow-checking-not-loaded` prop.
 - `n-cascader` adds `allow-checking-not-loaded` prop.
 - `n-tree` adds `allow-checking-not-loaded` prop.
+- `n-button-group` adds `RTL` support.
 
 ### i18n
 
