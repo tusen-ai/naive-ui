@@ -20,14 +20,12 @@ import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 
-const infoIcon = <InfoIcon />
-
-const iconMap = {
-  default: infoIcon,
-  info: infoIcon,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />
+const iconRenderMap = {
+  default: () => <InfoIcon />,
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />
 }
 
 export const NDialog = defineComponent({
@@ -179,7 +177,8 @@ export const NDialog = defineComponent({
             resolveWrappedSlot(
               this.$slots.icon,
               (children) =>
-                children || (this.icon ? render(this.icon) : iconMap[this.type])
+                children ||
+                (this.icon ? render(this.icon) : iconRenderMap[this.type]())
             )
         }}
       </NBaseIcon>

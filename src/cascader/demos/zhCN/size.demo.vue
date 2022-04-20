@@ -10,21 +10,21 @@
       v-model:value="value"
       placeholder="没啥用的值"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="small"
     />
     <n-cascader
       v-model:value="value"
       placeholder="没啥用的值"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="medium"
     />
     <n-cascader
       v-model:value="value"
       placeholder="没啥用的值"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="large"
     />
   </n-space>

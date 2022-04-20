@@ -80,15 +80,19 @@ import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { Hljs } from '../../_mixins'
-import { Size as TimePickerSize } from '../../time-picker/src/interface'
-import { Size as InputSize } from '../../input/src/interface'
-import { Size as SelectSize } from '../../select/src/interface'
-import { Size as ButtonSize } from '../../button/src/interface'
-import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
-import { IconPlacement } from '../../dialog/src/interface'
+import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { Size as InputSize } from '../../input/src/interface'
+import type { Size as SelectSize } from '../../select/src/interface'
+import type { Size as ButtonSize } from '../../button/src/interface'
+import type {
+  DataTableRenderFilter,
+  DataTableRenderSorter
+} from '../../data-table'
+import type { IconPlacement } from '../../dialog/src/interface'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
-import { CollapseTransitionTheme } from '../../collapse-transition/styles'
+import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
+import type { ButtonGroupTheme } from '../../button-group/styles/light'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -100,6 +104,7 @@ export interface GlobalThemeWithoutCommon {
   Badge?: BadgeTheme
   Breadcrumb?: BreadcrumbTheme
   Button?: ButtonTheme
+  ButtonGroup?: ButtonGroupTheme
   Calendar?: CalendarTheme
   Card?: CardTheme
   Carousel?: CarouselTheme

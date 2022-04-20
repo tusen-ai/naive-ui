@@ -1,5 +1,37 @@
 # CHANGELOG
 
+## 2.28.1
+
+### Fixes
+
+- 修复 notification 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
+- 修复 dialog 在 SSR 模式下第一个之后的 icon 都不会展示
+- 修复 `n-drawer` 和 `n-modal` 在 `:autofocus="true"` 情况下打开时可能溢出屏幕
+- 修复 `n-tree-select` 在使用 `children-field` 时过滤器不生效，关闭 [#2789](https://github.com/TuSimple/naive-ui/issues/2789)
+- 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新
+- 修复 `n-tree-select` 在 `check-strategy="child"` 和 `:cascade="false"` 时非叶节点依然可以被选择，关闭 [#2780](https://github.com/TuSimple/naive-ui/issues/2780)
+- 修复 `n-select` 的 `empty` slot 中 `n-input` 无法聚焦，关闭 [#2812](https://github.com/TuSimple/naive-ui/issues/2812)
+- 修复 `n-select` 菜单在全屏模式下不可见，关闭 [#2722](https://github.com/TuSimple/naive-ui/issues/2722)
+- 修复 `n-color-picker` 的 `value` 属性类型不能为 `null`
+- 修复 `n-table` 在不同属性切换时边框颜色突变
+
+### Feats
+
+- `n-input-number` 新增 `add-icon` 和 `minus-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
+- `n-dynamic-input` 添加 `RTL` 支持
+- `n-table` 添加 `RTL` 支持
+- `n-collapse-transition` 添加 `RTL` 支持
+- `n-tree` 新增 `show-irrelevant-nodes` 属性，关闭 [#2764](https://github.com/TuSimple/naive-ui/issues/2764)
+- `n-tree-select` 新增 `allow-checking-not-loaded` 属性
+- `n-cascader` 新增 `allow-checking-not-loaded` 属性
+- `n-tree` 新增 `allow-checking-not-loaded` 属性
+- `n-button-group` 添加 `RTL` 支持
+
+### i18n
+
+- 新增 ptBR locale
+- 新增 koKR locale
+
 ## 2.28.0
 
 ### Breaking Changes

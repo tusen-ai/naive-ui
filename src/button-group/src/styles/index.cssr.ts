@@ -1,9 +1,9 @@
 import { CNode } from 'css-render'
+import type { Type } from '../../../button/src/interface'
 import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr/index'
-import { Type } from '../interface'
 
-const zero = '0!important'
-const n1 = '-1px!important'
+export const zero = '0!important'
+export const n1 = '-1px!important'
 
 function createLeftBorderStyle (type: Type): CNode {
   return cM(type + '-type', [
@@ -47,29 +47,31 @@ export default cB('button-group', `
   cNotM('vertical', {
     flexDirection: 'row'
   }, [
-    cB('button', [
-      c('&:first-child:not(:last-child)', `
-        margin-right: ${zero};
-        border-top-right-radius: ${zero};
-        border-bottom-right-radius: ${zero};
-      `),
-      c('&:last-child:not(:first-child)', `
-        margin-left: ${zero};
-        border-top-left-radius: ${zero};
-        border-bottom-left-radius: ${zero};
-      `),
-      c('&:not(:first-child):not(:last-child)', `
-        margin-left: ${zero};
-        margin-right: ${zero};
-        border-radius: ${zero};
-      `),
-      createLeftBorderStyle('default'),
-      cM('ghost', [
-        createLeftBorderStyle('primary'),
-        createLeftBorderStyle('info'),
-        createLeftBorderStyle('success'),
-        createLeftBorderStyle('warning'),
-        createLeftBorderStyle('error')
+    cNotM('rtl', [
+      cB('button', [
+        c('&:first-child:not(:last-child)', `
+          margin-right: ${zero};
+          border-top-right-radius: ${zero};
+          border-bottom-right-radius: ${zero};
+        `),
+        c('&:last-child:not(:first-child)', `
+          margin-left: ${zero};
+          border-top-left-radius: ${zero};
+          border-bottom-left-radius: ${zero};
+        `),
+        c('&:not(:first-child):not(:last-child)', `
+          margin-left: ${zero};
+          margin-right: ${zero};
+          border-radius: ${zero};
+        `),
+        createLeftBorderStyle('default'),
+        cM('ghost', [
+          createLeftBorderStyle('primary'),
+          createLeftBorderStyle('info'),
+          createLeftBorderStyle('success'),
+          createLeftBorderStyle('warning'),
+          createLeftBorderStyle('error')
+        ])
       ])
     ])
   ]),

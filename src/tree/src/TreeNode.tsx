@@ -86,7 +86,19 @@ const TreeNode = defineComponent({
       }
     }
 
+    const selectableRef = useMemo(
+      () =>
+        !props.tmNode.disabled &&
+        NTree.selectableRef.value &&
+        (NTree.internalTreeSelect
+          ? NTree.mergedCheckStrategyRef.value !== 'child' ||
+            (NTree.multipleRef.value && NTree.cascadeRef.value) ||
+            props.tmNode.isLeaf
+          : true)
+    )
+
     function _handleClick (e: MouseEvent): void {
+      if (!selectableRef.value) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       NTree.handleSelect(props.tmNode)
     }
@@ -184,9 +196,9 @@ const TreeNode = defineComponent({
         () => NTree.pendingNodeKeyRef.value === props.tmNode.key
       ),
       loading: useMemo(() => NTree.loadingKeysRef.value.has(props.tmNode.key)),
-      highlight: useMemo(() =>
-        NTree.highlightKeySetRef.value.has(props.tmNode.key)
-      ),
+      highlight: useMemo(() => {
+        return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
+      }),
       checked: useMemo(() =>
         NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
       ),
@@ -208,17 +220,7 @@ const TreeNode = defineComponent({
             props.tmNode.isLeaf)
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
-      selectable: computed(
-        () =>
-          NTree.selectableRef.value &&
-          (NTree.internalTreeSelect
-            ? NTree.multipleRef.value
-              ? true
-              : NTree.mergedCheckStrategyRef.value === 'child'
-                ? props.tmNode.isLeaf
-                : true
-            : true)
-      ),
+      selectable: selectableRef,
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
       blockLine: blockLineRef,

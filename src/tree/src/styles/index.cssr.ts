@@ -222,5 +222,6 @@ export default cB('tree', `
     cE('suffix', `
       display: inline-flex;
     `)
-  ])
+  ]),
+  cE('empty', 'margin: auto;')
 ])
