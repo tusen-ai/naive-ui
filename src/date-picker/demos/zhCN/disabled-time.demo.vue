@@ -93,10 +93,11 @@ export default defineComponent({
               )
             },
             isMinuteDisabled: (minute: number, hour: number | null) => {
+              if (hour === null) return false
               return (
                 range[1] -
                   startOfDay(range[0]).valueOf() -
-                  Number(hour) * h -
+                  hour * h -
                   minute * m <
                 d * 7
               )
@@ -106,11 +107,12 @@ export default defineComponent({
               minute: number | null,
               hour: number | null
             ) => {
+              if (hour === null || minute === null) return false
               return (
                 range[1] -
                   startOfDay(range[0]).valueOf() -
-                  Number(hour) * h -
-                  Number(minute) * m -
+                  hour * h -
+                  minute * m -
                   second * s <
                 d * 7
               )
@@ -139,10 +141,11 @@ export default defineComponent({
               minute: number | null,
               hour: number | null
             ) => {
+              if (hour === null || minute === null) return false
               return (
                 startOfDay(range[1]).valueOf() +
-                  Number(hour) * h +
-                  Number(minute) * m +
+                  hour * h +
+                  minute * m +
                   second * s -
                   range[0] <
                 d * 7
