@@ -5,6 +5,8 @@
 ### Fixes
 
 - Fix `date-picker` `actions` can't be `null`.
+- Fix `time-picker` `actions` can't be `null`.
+- Fix `n-tree-select`'s meaningles warning.
 
 ## 2.28.1
 

@@ -4,7 +4,9 @@
 
 ### Fixes
 
-- 修复 `date-picker` `actions` 不能为 `null` 的问题
+- 修复 `date-picker` `actions` 不能为 `null`
+- 修复 `time-picker` `actions` 不能为 `null`
+- 修复 `n-tree-select` 的无意义 warning
 
 ## 2.28.1
 
