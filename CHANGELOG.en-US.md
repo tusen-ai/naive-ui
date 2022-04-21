@@ -8,6 +8,8 @@
 - Fix `time-picker` `actions`'s type can't be `null`.
 - Fix `n-tree-select`'s meaningles warning.
 - Fix `n-tree-select`'s `allow-checking-not-loaded` prop not working.
+- Fix `n-tree-select`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
+- Fix `n-cascader`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
 
 ## 2.28.1
 

@@ -9,8 +9,6 @@ import {
   computed,
   CSSProperties,
   provide,
-  watch,
-  nextTick,
   watchEffect,
   HTMLAttributes
 } from 'vue'
@@ -52,6 +50,7 @@ import {
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
+  useOnResize,
   warnOnce
 } from '../../_utils'
 import { treeSelectLight, TreeSelectTheme } from '../styles'
@@ -573,13 +572,14 @@ export default defineComponent({
       pendingNodeKeyRef,
       dataTreeMate: dataTreeMateRef
     })
-    function syncPosition (): void {
+
+    function handleTriggerOrMenuResize (): void {
+      if (!mergedShowRef.value) return
       followerInstRef.value?.syncPosition()
     }
-    watch(mergedValueRef, () => {
-      if (!mergedShowRef.value) return
-      void nextTick(syncPosition)
-    })
+
+    useOnResize(menuElRef, handleTriggerOrMenuResize)
+
     const themeRef = useTheme(
       'TreeSelect',
       '-tree-select',
@@ -643,6 +643,7 @@ export default defineComponent({
       pendingNodeKey: pendingNodeKeyRef,
       mergedCascade: mergedCascadeRef,
       mergedFilter: mergedFilterRef,
+      handleTriggerOrMenuResize,
       doUpdateExpandedKeys,
       handleMenuLeave,
       handleTriggerClick,
@@ -678,6 +679,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      onResize={this.handleTriggerOrMenuResize}
                       status={this.mergedStatus}
                       focused={this.focused}
                       clsPrefix={mergedClsPrefix}

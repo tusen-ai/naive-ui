@@ -5,7 +5,6 @@ import {
   toRef,
   defineComponent,
   PropType,
-  nextTick,
   watch,
   Transition,
   withDirectives,
@@ -678,19 +677,13 @@ export default defineComponent({
     function focusSelectionInput (): void {
       triggerRef.value?.focusInput()
     }
-    function syncPosition (): void {
+    function handleTriggerOrMenuResize (): void {
+      if (!mergedShowRef.value) return
       followerRef.value?.syncPosition()
     }
     updateMemorizedOptions()
     watch(toRef(props, 'options'), updateMemorizedOptions)
-    watch(filteredOptionsRef, () => {
-      if (!mergedShowRef.value) return
-      void nextTick(syncPosition)
-    })
-    watch(mergedValueRef, () => {
-      if (!mergedShowRef.value) return
-      void nextTick(syncPosition)
-    })
+
     const exposedMethods: SelectInst = {
       focus: () => {
         triggerRef.value?.focus()
@@ -737,6 +730,7 @@ export default defineComponent({
       inlineThemeDisabled,
       onTriggerInputFocus,
       onTriggerInputBlur,
+      handleTriggerOrMenuResize,
       handleMenuFocus,
       handleMenuBlur,
       handleMenuTabOut,
@@ -748,7 +742,6 @@ export default defineComponent({
       handleTriggerBlur,
       handleTriggerFocus,
       handleKeydown,
-      syncPosition,
       handleMenuAfterLeave,
       handleMenuClickOutside,
       handleMenuScroll,
@@ -845,6 +838,7 @@ export default defineComponent({
                             <NInternalSelectMenu
                               {...this.menuProps}
                               ref="menuRef"
+                              onResize={this.handleTriggerOrMenuResize}
                               inlineThemeDisabled={this.inlineThemeDisabled}
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
