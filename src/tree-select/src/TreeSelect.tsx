@@ -496,7 +496,8 @@ export default defineComponent({
         const { checkedKeys: checkedKeysValue } = treeMate.getCheckedKeys(
           mergedValue,
           {
-            cascade: mergedCascadeRef.value
+            cascade: mergedCascadeRef.value,
+            allowNotLoaded: props.allowCheckingNotLoaded
           }
         )
         const index = checkedKeysValue.findIndex((key) => key === option.value)
@@ -569,7 +570,8 @@ export default defineComponent({
       if (!happensIn(e, 'action')) e.preventDefault()
     }
     provide(treeSelectInjectionKey, {
-      pendingNodeKeyRef
+      pendingNodeKeyRef,
+      dataTreeMate: dataTreeMateRef
     })
     function syncPosition (): void {
       followerInstRef.value?.syncPosition()
@@ -628,7 +630,6 @@ export default defineComponent({
       adjustedTo: useAdjustedTo(props),
       isMounted: useIsMounted(),
       focused: focusedRef,
-      dataTreeMate: dataTreeMateRef,
       menuPadding: menuPaddingRef,
       mergedPlaceholder: mergedPlaceholderRef,
       mergedExpandedKeys: mergedExpandedKeysRef,
@@ -788,7 +789,6 @@ export default defineComponent({
                                   this.consistentMenuWidth && this.virtualScroll
                                 }
                                 internalTreeSelect
-                                internalDataTreeMate={this.dataTreeMate}
                                 internalUnifySelectCheck
                                 internalScrollable
                                 internalScrollablePadding={this.menuPadding}

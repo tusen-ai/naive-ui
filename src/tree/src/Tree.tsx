@@ -12,19 +12,20 @@ import {
   VNode,
   nextTick,
   watchEffect,
-  VNodeChild
+  VNodeChild,
+  inject
 } from 'vue'
 import {
   createTreeMate,
   flatten,
   createIndexGetter,
-  TreeMate,
   TreeMateOptions,
   CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
@@ -219,8 +220,6 @@ const treeProps = {
   internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
-  // use it to do check
-  internalDataTreeMate: Object as PropType<TreeMate<TreeOption>>,
   // use it to display
   internalRenderEmpty: Function as PropType<() => VNodeChild>,
   internalHighlightKeySet: Object as PropType<Set<Key> | null>,
@@ -317,8 +316,9 @@ export default defineComponent({
         createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
-    const dataTreeMateRef = props.internalDataTreeMate
-      ? toRef(props, 'internalDataTreeMate')
+    const treeSelectInjection = inject(treeSelectInjectionKey, null)
+    const dataTreeMateRef = props.internalTreeSelect
+      ? treeSelectInjection!.dataTreeMate
       : displayTreeMateRef
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
@@ -335,10 +335,11 @@ export default defineComponent({
       uncontrolledCheckedKeysRef
     )
     const checkedStatusRef = computed(() => {
-      const value = dataTreeMateRef.value!.getCheckedKeys(
+      const value = dataTreeMateRef.value.getCheckedKeys(
         mergedCheckedKeysRef.value,
         {
-          cascade: props.cascade
+          cascade: props.cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }
       )
       return value
@@ -371,7 +372,7 @@ export default defineComponent({
 
     const initUncontrolledExpandedKeys = (keys: undefined | Key[]): void => {
       uncontrolledExpandedKeysRef.value = props.defaultExpandAll
-        ? dataTreeMateRef.value!.getNonLeafKeys()
+        ? dataTreeMateRef.value.getNonLeafKeys()
         : keys === undefined
           ? props.defaultExpandedKeys
           : keys
@@ -662,7 +663,7 @@ export default defineComponent({
     }
 
     function getOptionsByKeys (keys: Key[]): Array<TreeOption | null> {
-      const { getNode } = dataTreeMateRef.value!
+      const { getNode } = dataTreeMateRef.value
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
 
@@ -784,7 +785,7 @@ export default defineComponent({
         handleSelect(node)
         return
       }
-      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value![
+      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value[
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
