@@ -5,18 +5,38 @@
 </markdown>
 
 <template>
-  <n-tree
-    block-line
-    checkable
-    draggable
-    :data="data"
-    :checked-keys="checkedKeys"
-    :on-load="handleLoad"
-    :expanded-keys="expandedKeys"
-    @drop="handleDrop"
-    @update:checked-keys="handleCheckedKeysChange"
-    @update:expanded-keys="handleExpandedKeysChange"
-  />
+  <n-space vertical>
+    <n-space align="center">
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
+      <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
+    </n-space>
+    <n-tree
+      block-line
+      checkable
+      draggable
+      :data="data"
+      :checked-keys="checkedKeys"
+      :on-load="handleLoad"
+      :expanded-keys="expandedKeys"
+      :check-strategy="checkStrategy"
+      :allow-checking-not-loaded="cascade"
+      :cascade="cascade"
+      @drop="handleDrop"
+      @update:checked-keys="handleCheckedKeysChange"
+      @update:expanded-keys="handleExpandedKeysChange"
+    />
+    {{ JSON.stringify(checkedKeys) }}
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -39,11 +59,15 @@ function createData () {
 }
 
 function nextLabel (currentLabel?: string): string {
-  if (!currentLabel) return '道生一'
-  if (currentLabel === '道生一') return '一生二'
-  if (currentLabel === '一生二') return '二生三'
-  if (currentLabel === '二生三') return '三生万物'
-  if (currentLabel === '三生万物') return '道生一'
+  if (!currentLabel) return 'Out of Tao, One is born'
+  if (currentLabel === 'Out of Tao, One is born') return 'Out of One, Two'
+  if (currentLabel === 'Out of One, Two') return 'Out of Two, Three'
+  if (currentLabel === 'Out of Two, Three') {
+    return 'Out of Three, the created universe'
+  }
+  if (currentLabel === 'Out of Three, the created universe') {
+    return 'Out of Tao, One is born'
+  }
   return ''
 }
 
@@ -68,6 +92,8 @@ export default defineComponent({
     const dataRef = ref(createData())
 
     return {
+      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
+      cascade: ref(true),
       data: dataRef,
       expandedKeys: expandedKeysRef,
       checkedKeys: checkedKeysRef,

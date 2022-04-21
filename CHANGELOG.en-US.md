@@ -7,6 +7,7 @@
 - Fix `date-picker` `actions`'s type can't be `null`.
 - Fix `time-picker` `actions`'s type can't be `null`.
 - Fix `n-tree-select`'s meaningles warning.
+- Fix `n-tree-select`'s `allow-checking-not-loaded` prop not working.
 
 ## 2.28.1
 

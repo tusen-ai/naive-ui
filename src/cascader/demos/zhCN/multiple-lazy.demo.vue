@@ -4,7 +4,7 @@
 
 <template>
   <n-space vertical>
-    <n-space>
+    <n-space align="center">
       <n-radio-group v-model:value="checkStrategy">
         <n-radio-button value="all">
           All

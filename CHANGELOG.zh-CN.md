@@ -7,6 +7,7 @@
 - 修复 `date-picker` `actions` 的类型不能为 `null`
 - 修复 `time-picker` `actions` 的类型不能为 `null`
 - 修复 `n-tree-select` 的无意义 warning
+- 修复 `n-tree-select` `allow-checking-not-loaded` 属性不生效
 
 ## 2.28.1
 
