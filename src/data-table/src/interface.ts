@@ -61,6 +61,7 @@ export type Ellipsis = boolean | EllipsisProps
 export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
   width?: number | string
+  minWidth?: number | string,
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
