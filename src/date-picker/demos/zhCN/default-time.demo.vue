@@ -12,7 +12,7 @@
     <n-date-picker
       type="datetimerange"
       clearable
-      :default-time="['16:00:00']"
+      :default-time="(['16:00:00'] as unknown as [string,undefined])"
     />
     <n-date-picker
       type="datetimerange"

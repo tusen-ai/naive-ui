@@ -12,7 +12,7 @@ You can set the default time of picked date.
     <n-date-picker
       type="datetimerange"
       clearable
-      :default-time="['16:00:00']"
+      :default-time="(['16:00:00'] as unknown as [string,undefined])"
     />
     <n-date-picker
       type="datetimerange"
