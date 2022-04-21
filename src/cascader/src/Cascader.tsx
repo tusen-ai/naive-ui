@@ -767,6 +767,15 @@ export default defineComponent({
     function syncCascaderMenuPosition (): void {
       cascaderMenuFollowerRef.value?.syncPosition()
     }
+    function handleTriggerResize (): void {
+      if (mergedShowRef.value) {
+        if (showSelectMenuRef.value) {
+          syncSelectMenuPosition()
+        } else {
+          syncCascaderMenuPosition()
+        }
+      }
+    }
     provide(cascaderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -856,6 +865,7 @@ export default defineComponent({
       : undefined
     return {
       ...exposedMethods,
+      handleTriggerResize,
       mergedStatus: mergedStatusRef,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
@@ -909,6 +919,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      onResize={this.handleTriggerResize}
                       ref="triggerInstRef"
                       status={this.mergedStatus}
                       clsPrefix={mergedClsPrefix}
