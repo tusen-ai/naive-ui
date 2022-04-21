@@ -15,6 +15,10 @@ import {
   InputHTMLAttributes
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
+import type {
+  RenderLabel,
+  RenderLabelImpl
+} from '../../select-menu/src/interface'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
@@ -22,16 +26,17 @@ import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
-import { createKey, getTitleAttribute, render } from '../../../_utils'
+import {
+  createKey,
+  getTitleAttribute,
+  render,
+  useOnResize
+} from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
-import type {
-  RenderLabel,
-  RenderLabelImpl
-} from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
   isCompositing: boolean
@@ -97,7 +102,8 @@ export default defineComponent({
     onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
     renderLabel: Function as PropType<RenderLabel>,
     status: String as PropType<FormValidationStatus>,
-    inlineThemeDisabled: Boolean
+    inlineThemeDisabled: Boolean,
+    onResize: Function as PropType<() => void>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -351,6 +357,7 @@ export default defineComponent({
           props.disabled || patternInputFocusedRef.value ? -1 : 0
       })
     })
+    useOnResize(selfRef, props.onResize)
     const { inlineThemeDisabled } = props
     const cssVarsRef = computed(() => {
       const { size } = props
@@ -407,6 +414,7 @@ export default defineComponent({
           [createKey('fontSize', size)]: fontSize
         }
       } = themeRef.value
+
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border': border,

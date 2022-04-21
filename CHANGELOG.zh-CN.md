@@ -1,11 +1,22 @@
 # CHANGELOG
 
+## 2.28.2
+
+### Fixes
+
+- 修复 `date-picker` `actions` 的类型不能为 `null`
+- 修复 `time-picker` `actions` 的类型不能为 `null`
+- 修复 `n-tree-select` 的无意义 warning
+- 修复 `n-tree-select` 的 `allow-checking-not-loaded` 属性不生效
+- 修复 `n-tree-select` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
+- 修复 `n-cascader` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
+
 ## 2.28.1
 
 ### Fixes
 
-- 修复 notification 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
-- 修复 dialog 在 SSR 模式下第一个之后的 icon 都不会展示
+- 修复 `notification` 在 SSR 模式下第一个之后的 icon 都不会展示，关闭 [#2793](https://github.com/TuSimple/naive-ui/issues/2793)
+- 修复 `dialog` 在 SSR 模式下第一个之后的 icon 都不会展示
 - 修复 `n-drawer` 和 `n-modal` 在 `:autofocus="true"` 情况下打开时可能溢出屏幕
 - 修复 `n-tree-select` 在使用 `children-field` 时过滤器不生效，关闭 [#2789](https://github.com/TuSimple/naive-ui/issues/2789)
 - 修复 `n-tree-select` 清空搜索值时搜索命中样式未更新

@@ -25,7 +25,12 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
+import {
+  formatLength,
+  resolveSlot,
+  resolveWrappedSlot,
+  useOnResize
+} from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -95,6 +100,7 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    onResize: Function as PropType<() => void>,
     resetMenuOnOptionsChange: {
       type: Boolean,
       default: true
@@ -360,6 +366,7 @@ export default defineComponent({
       prev,
       getPendingTmNode
     }
+    useOnResize(selfRef, props.onResize)
     return {
       mergedTheme: themeRef,
       virtualListRef,

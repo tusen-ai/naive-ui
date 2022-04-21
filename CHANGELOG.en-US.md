@@ -1,11 +1,22 @@
 # CHANGELOG
 
+## 2.28.2
+
+### Fixes
+
+- Fix `date-picker` `actions`'s type can't be `null`.
+- Fix `time-picker` `actions`'s type can't be `null`.
+- Fix `n-tree-select`'s meaningless warning.
+- Fix `n-tree-select`'s `allow-checking-not-loaded` prop doesn't work.
+- Fix `n-tree-select`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
+- Fix `n-cascader`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
+
 ## 2.28.1
 
 ### Fixes
 
-- Fix notification icon won't show after first notification is emitted in SSR mode, closes [#2793](https://github.com/TuSimple/naive-ui/issues/2793).
-- Fix dialog icon won't show after first dialog is displayed in SSR mode.
+- Fix `notification` icon won't show after first notification is emitted in SSR mode, closes [#2793](https://github.com/TuSimple/naive-ui/issues/2793).
+- Fix `dialog` icon won't show after first dialog is displayed in SSR mode.
 - Fix `n-drawer` & `n-modal` may overflow screen on opening if `:autofocus="true"`.
 - Fix `n-tree-select`'s filter not working correctly when `children-field` is not set, closed [#2789](https://github.com/TuSimple/naive-ui/issues/2789).
 - Fix `n-tree-select`'s matched style is not cleared after filter value is cleared.
