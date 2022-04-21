@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.28.2
 
 ### Fixes
 
 - 修复 `date-picker` `actions` 的类型不能为 `null`
 - 修复 `time-picker` `actions` 的类型不能为 `null`
 - 修复 `n-tree-select` 的无意义 warning
-- 修复 `n-tree-select` `allow-checking-not-loaded` 属性不生效
+- 修复 `n-tree-select` 的 `allow-checking-not-loaded` 属性不生效
 - 修复 `n-tree-select` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
 - 修复 `n-cascader` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
 

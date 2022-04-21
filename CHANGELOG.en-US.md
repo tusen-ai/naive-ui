@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.28.2
 
 ### Fixes
 
 - Fix `date-picker` `actions`'s type can't be `null`.
 - Fix `time-picker` `actions`'s type can't be `null`.
-- Fix `n-tree-select`'s meaningles warning.
-- Fix `n-tree-select`'s `allow-checking-not-loaded` prop not working.
+- Fix `n-tree-select`'s meaningless warning.
+- Fix `n-tree-select`'s `allow-checking-not-loaded` prop doesn't work.
 - Fix `n-tree-select`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
 - Fix `n-cascader`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
 
