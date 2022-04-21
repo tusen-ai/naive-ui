@@ -241,10 +241,7 @@ const treeProps = {
   /**
    * @deprecated
    */
-  leafOnly: {
-    type: Boolean,
-    default: undefined
-  }
+  leafOnly: Boolean
 } as const
 
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
@@ -255,7 +252,7 @@ export default defineComponent({
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
-        if (props.leafOnly !== undefined) {
+        if (props.leafOnly) {
           warnOnce(
             'tree',
             '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
