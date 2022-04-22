@@ -236,4 +236,17 @@ describe('n-color-picker', () => {
     )
     wrapper.unmount()
   })
+
+  it('should work with `render-label` prop', async () => {
+    const wrapper = mount(NColorPicker)
+    expect(wrapper.find('.n-color-picker-trigger__value').text()).not.toBe(
+      'test-label'
+    )
+
+    await wrapper.setProps({ renderLabel: () => 'test-label' })
+    expect(wrapper.find('.n-color-picker-trigger__value').text()).toBe(
+      'test-label'
+    )
+    wrapper.unmount()
+  })
 })
