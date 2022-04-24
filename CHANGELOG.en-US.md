@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree` adds `checkbox-placement` prop.
+
 ## 2.28.2
 
 ### Fixes

@@ -20,6 +20,7 @@ prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
 node-props.vue
+checkboxPlacement.vue
 ```
 
 ## API
@@ -55,6 +56,7 @@ node-props.vue
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | NEXT_VERSION |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |

@@ -41,7 +41,8 @@ const TreeNode = defineComponent({
       droppingOffsetLevelRef,
       nodePropsRef,
       indentRef,
-      blockLineRef
+      blockLineRef,
+      checkboxPlacementRef
     } = NTree
 
     const disabledRef = computed(
@@ -229,6 +230,7 @@ const TreeNode = defineComponent({
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
+      checkboxPlacement: checkboxPlacementRef,
       contentInstRef,
       contentElRef,
       handleCheck,
@@ -258,7 +260,8 @@ const TreeNode = defineComponent({
       disabled,
       pending,
       internalScrollable,
-      nodeProps
+      nodeProps,
+      checkboxPlacement
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -314,7 +317,7 @@ const TreeNode = defineComponent({
             hide={tmNode.isLeaf}
             onClick={this.handleSwitcherClick}
           />
-          {checkable ? (
+          {checkable && checkboxPlacement === 'left' ? (
             <NTreeNodeCheckbox
               focusable={this.checkboxFocusable}
               disabled={disabled || this.checkboxDisabled}
@@ -355,6 +358,16 @@ const TreeNode = defineComponent({
                 })
                 : null
             : null}
+          {checkable && checkboxPlacement === 'right' ? (
+            <NTreeNodeCheckbox
+              focusable={this.checkboxFocusable}
+              disabled={disabled || this.checkboxDisabled}
+              clsPrefix={clsPrefix}
+              checked={this.checked}
+              indeterminate={this.indeterminate}
+              onCheck={this.handleCheck}
+            />
+          ) : null}
         </div>
       </div>
     )

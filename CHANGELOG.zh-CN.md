@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree` 新增 `checkbox-placement` 属性
+
 ## 2.28.2
 
 ### Fixes
