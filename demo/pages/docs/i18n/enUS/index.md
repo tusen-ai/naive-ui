@@ -44,27 +44,27 @@ PRs are welcomed for locales that are not supported yet!
 
 The following list is sorted by 'Config'.
 
-| Language                  | Config | Date config | Version      |
-| ------------------------- | ------ | ----------- | ------------ |
-| German (Germany)          | deDE   | dateDeDe    |              |
-| English (British)         | enGB   | dateEnGB    | 2.25.1       |
-| English                   | enUS   | dateEnUS    |              |
-| Esperanto                 | eo     | dateEo      | 2.25.2       |
-| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2       |
-| French                    | frFR   | dateFrFR    |              |
-| Bahasa Indonesia          | idID   | dateIdID    |              |
-| Italiano                  | itIT   | dateItIT    | 2.24.2       |
-| Japanese                  | jaJP   | dateJaJP    |              |
-| Korean                    | koKR   | dateKoKR    | NEXT_VERSION |
-| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |              |
-| Polish (Poland)           | plPL   | datePlPL    | 2.25.2       |
-| Portuguese (Brazil)       | ptBR   | datePtBR    | NEXT_VERSION |
-| Russian                   | ruRU   | dateRuRU    |              |
-| Slovak                    | skSK   | dateSkSK    | 2.25.3       |
-| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0       |
-| Ukrainian                 | ukUA   | dateUkUA    |              |
-| Chinese (Simplified)      | zhCN   | dateZhCN    |              |
-| Chinese (Traditional)     | zhTW   | dateZhTW    |              |
+| Language                  | Config | Date config | Version |
+| ------------------------- | ------ | ----------- | ------- |
+| German (Germany)          | deDE   | dateDeDe    |         |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
+| English                   | enUS   | dateEnUS    |         |
+| Esperanto                 | eo     | dateEo      | 2.25.2  |
+| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| French                    | frFR   | dateFrFR    |         |
+| Bahasa Indonesia          | idID   | dateIdID    |         |
+| Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| Japanese                  | jaJP   | dateJaJP    |         |
+| Korean (South Korea)      | koKR   | dateKoKR    | 2.28.1  |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |         |
+| Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
+| Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1  |
+| Russian                   | ruRU   | dateRuRU    |         |
+| Slovak                    | skSK   | dateSkSK    | 2.25.3  |
+| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
+| Ukrainian                 | ukUA   | dateUkUA    |         |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |         |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |         |
 
 ## Customize the existing locale
 

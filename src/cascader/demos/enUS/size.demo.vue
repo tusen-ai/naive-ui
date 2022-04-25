@@ -10,21 +10,21 @@ Cascader has `small`, `medium` and `large` sizes.
       v-model:value="value"
       placeholder="Meaningless values"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="small"
     />
     <n-cascader
       v-model:value="value"
       placeholder="Meaningless values"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="medium"
     />
     <n-cascader
       v-model:value="value"
       placeholder="Meaningless values"
       :options="options"
-      :leaf-only="false"
+      check-strategy="child"
       size="large"
     />
   </n-space>

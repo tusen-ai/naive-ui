@@ -68,15 +68,12 @@ import style from './styles/index.cssr'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
-  value: String,
+  value: String as PropType<string | null>,
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,

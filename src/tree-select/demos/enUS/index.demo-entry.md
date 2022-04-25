@@ -23,6 +23,7 @@ debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
@@ -50,6 +51,7 @@ debug.vue
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |

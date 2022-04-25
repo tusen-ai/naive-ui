@@ -31,6 +31,7 @@ scrollbar-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |  |
 | block-line | `boolean` | `false` | 节点整行撑开 |  |
 | block-node | `boolean` | `false` | 节点名称整行撑开 |  |
@@ -52,7 +53,6 @@ scrollbar-debug.vue
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |  |
-| leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |  |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.25.0 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
@@ -63,6 +63,7 @@ scrollbar-debug.vue
 | render-switcher-icon | `() => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0 |
 | selectable | `boolean` | `true` | 节点是否可以被选中 |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
+| show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |

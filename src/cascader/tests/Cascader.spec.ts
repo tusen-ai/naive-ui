@@ -57,6 +57,16 @@ describe('n-cascader', () => {
     })
   })
 
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NCascader, { props: { status: status } })
+      expect(wrapper.find('.n-base-selection').classes()).toContain(
+        `n-base-selection--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NCascader, {
       props: { placeholder: 'test-placeholder' }

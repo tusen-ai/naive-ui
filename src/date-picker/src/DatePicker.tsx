@@ -102,7 +102,7 @@ const datePickerProps = {
   format: String,
   dateFormat: String,
   timeFormat: String,
-  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'>>,
+  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
@@ -317,6 +317,7 @@ export default defineComponent({
     })
     const mergedActionsRef = computed(() => {
       const { actions, type } = props
+      if (actions === null) return []
       if (actions !== undefined) return actions
       switch (type) {
         case 'date': {

@@ -326,8 +326,8 @@ export default cB('input', `
         `)
       ])
     ]),
-    cB('icon', [
-      c('> *:not(.n-button *)', `
+    c('>', [
+      cB('icon', `
         transition: color .3s var(--n-bezier);
         color: var(--n-icon-color);
         font-size: var(--n-icon-size);

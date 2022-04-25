@@ -19,12 +19,12 @@ import { NBaseIcon, NBaseClose } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
 import { useConfig, useThemeClass } from '../../_mixins'
 
-const iconMap = {
-  info: <InfoIcon />,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />,
-  default: null
+const iconRenderMap = {
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />,
+  default: () => null
 }
 
 export const notificationProps = {
@@ -158,7 +158,7 @@ export const Notification = defineComponent({
               render(this.avatar)
             ) : this.type !== 'default' ? (
               <NBaseIcon clsPrefix={mergedClsPrefix}>
-                {{ default: () => iconMap[this.type] }}
+                {{ default: () => iconRenderMap[this.type]() }}
               </NBaseIcon>
             ) : null}
           </div>

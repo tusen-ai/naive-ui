@@ -6,7 +6,6 @@
 <n-p>你选中了 {{ checkedRowKeys.length }} 行。</n-p>
 
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"

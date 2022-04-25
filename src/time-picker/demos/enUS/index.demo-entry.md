@@ -35,12 +35,13 @@ status.vue
 | seconds | `number \| number[]` | `undefined` | The array of seconds that can be selected. If a number, it'll be converted into an array of numbers using that increment. |  |
 | input-readonly | `boolean` | `false` | Readonly state (does not apply to touch devices). |  |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` | Callback function for disabling hours. |  |
-| is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling minutes. |  |
-| is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling seconds. |  |
+| is-minute-disabled | `(minute: number, hour: number \| null) => boolean` | `() => false` | Callback function for disabling minutes. When value is empty, `hour` is `null`. |  |
+| is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | Callback function for disabling seconds. When value is empty, `hour` and `minute` are `null`. |  |
 | placeholder | `string` | `'Select Time'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | use-12-hours | `boolean` | `false` | Whether to use a 12-hour clock panel. |  |
 | value | `number \| null` | `undefined` | Value when being set manually. |  |
 | value-format | `string` | follows `format` | Format of formatted value. | 2.24.0 |

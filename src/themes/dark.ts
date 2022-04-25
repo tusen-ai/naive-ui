@@ -8,6 +8,7 @@ import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
 import { buttonDark } from '../button/styles'
+import { buttonGroupDark } from '../button-group/styles'
 import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
 import { carouselDark } from '../carousel/styles'
@@ -90,6 +91,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
+  ButtonGroup: buttonGroupDark,
   Calendar: calendarDark,
   Card: cardDark,
   Carousel: carouselDark,

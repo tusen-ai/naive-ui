@@ -13,7 +13,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      range: ref([1183135260000, Date.now()])
+      range: ref<[number, number]>([1183135260000, Date.now()])
     }
   }
 })

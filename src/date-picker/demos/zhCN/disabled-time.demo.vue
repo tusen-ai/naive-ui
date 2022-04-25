@@ -78,6 +78,7 @@ export default defineComponent({
             startOfDay(ts).valueOf() - startOfDay(range[0]).valueOf() <= d * 6
           )
         }
+        return false
       },
       isRangeTimeDisabled (
         current: number,
@@ -91,7 +92,8 @@ export default defineComponent({
                 range[1] - startOfDay(range[0]).valueOf() - hour * h < d * 7
               )
             },
-            isMinuteDisabled: (minute: number, hour: number) => {
+            isMinuteDisabled: (minute: number, hour: number | null) => {
+              if (hour === null) return false
               return (
                 range[1] -
                   startOfDay(range[0]).valueOf() -
@@ -102,9 +104,10 @@ export default defineComponent({
             },
             isSecondDisabled: (
               second: number,
-              minute: number,
-              hour: number
+              minute: number | null,
+              hour: number | null
             ) => {
+              if (hour === null || minute === null) return false
               return (
                 range[1] -
                   startOfDay(range[0]).valueOf() -
@@ -123,10 +126,10 @@ export default defineComponent({
                 d * 7
               )
             },
-            isMinuteDisabled: (minute: number, hour: number) => {
+            isMinuteDisabled: (minute: number, hour: number | null) => {
               return (
                 startOfDay(range[1]).valueOf() +
-                  hour * h +
+                  Number(hour) * h +
                   minute * m +
                   (m - s) -
                   range[0] <
@@ -135,9 +138,10 @@ export default defineComponent({
             },
             isSecondDisabled: (
               second: number,
-              minute: number,
-              hour: number
+              minute: number | null,
+              hour: number | null
             ) => {
+              if (hour === null || minute === null) return false
               return (
                 startOfDay(range[1]).valueOf() +
                   hour * h +

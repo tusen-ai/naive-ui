@@ -35,12 +35,13 @@ status.vue
 | seconds | `number \| number[]` | `undefined` | 通过数组指定显示的秒。当值为 `number` 时，将被当做时间步进处理 |  |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` | 用于禁用小时的回调函数 |  |
-| is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | 用于禁用分钟的回调函数 |  |
-| is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | 用于禁用秒钟的回调函数 |  |
+| is-minute-disabled | `(minute: number, hour: number \| null) => boolean` | `() => false` | 用于禁用分钟的回调函数，在没有选中值时，`hour` 是 `null` |  |
+| is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | 用于禁用秒钟的回调函数，在没有选中值时，`minute` 和 `hour` 是 `null` |  |
 | placeholder | `string` | `'请选择时间'` | 选择框的占位符 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 时间选择器的面板的弹出位置 | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | use-12-hours | `boolean` | `false` | 是否使用 12 小时制的面板 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
 | value-format | `string` | 跟随 `format` | 格式化后值的格式 | 2.24.0 |
