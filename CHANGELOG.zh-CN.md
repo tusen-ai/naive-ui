@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-data-table` 新增 `filter-page-state` 属性，关闭 [#2840](https://github.com/TuSimple/naive-ui/issues/2840)
+
 ## 2.28.2
 
 ### Fixes

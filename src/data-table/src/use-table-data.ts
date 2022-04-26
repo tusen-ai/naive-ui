@@ -124,6 +124,9 @@ export function useTableData (
       }
       columnEntries.push([column.key, column])
     })
+    if (props.filterPageState === 'first') {
+      page(1)
+    }
     return data
       ? data.filter((tmNode) => {
         const { rawNode: row } = tmNode

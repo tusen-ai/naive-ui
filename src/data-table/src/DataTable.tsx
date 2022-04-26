@@ -123,6 +123,10 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  filterPageState: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
