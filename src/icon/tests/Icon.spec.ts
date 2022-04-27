@@ -47,4 +47,17 @@ describe('n-icon', () => {
     const wrapper = mount(NIcon, { slots: { default: () => customize } })
     expect(wrapper.find('svg').exists()).toBe(true)
   })
+
+  it('should work with `component` prop', async () => {
+    const wrapper = mount(NIcon, {
+      props: {
+        component: h(
+          'div',
+          { class: 'test-component' },
+          { default: () => 'test-component' }
+        )
+      }
+    })
+    expect(wrapper.find('.test-component').exists()).toBe(true)
+  })
 })
