@@ -33,7 +33,8 @@ import {
   OnUpdateKeys,
   OnUpdateValueImpl,
   OnUpdateKeysImpl,
-  MenuInst
+  MenuInst,
+  MenuNodeProps
 } from './interface'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
@@ -109,13 +110,9 @@ const menuProps = {
   renderExtra: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
-  /** TODO: deprecate it */
-  dropdownPlacement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom'
-  },
   dropdownProps: Object as PropType<DropdownProps>,
   accordion: Boolean,
+  nodeProps: Function as PropType<MenuNodeProps>,
   // deprecated
   items: Array as PropType<Array<MenuOption | MenuGroupOption>>,
   onOpenNamesChange: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
@@ -124,7 +121,11 @@ const menuProps = {
   MaybeArray<OnUpdateKeys>
   >,
   expandedNames: Array as PropType<Key[]>,
-  defaultExpandedNames: Array as PropType<Key[]>
+  defaultExpandedNames: Array as PropType<Key[]>,
+  dropdownPlacement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
+  }
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>

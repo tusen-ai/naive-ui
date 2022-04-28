@@ -7,6 +7,10 @@
 - 修复 `n-menu` 的 `dropdown-props` 无法覆盖 `n-dropdown` 的 `size` 属性，关闭 [#2868](https://github.com/TuSimple/naive-ui/issues/2868)
 - 修复 `n-switch` 切换状态时 loading 动画异常，关闭 [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
 
+### Feats
+
+- `n-menu` 新增 `node-props` 属性
+
 ## 2.28.2
 
 ### Fixes
