@@ -13,6 +13,9 @@ import {
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
+import { FollowerPlacement } from 'vueuc'
+import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { DropdownProps } from '../../dropdown'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
@@ -32,9 +35,6 @@ import {
   OnUpdateKeysImpl,
   MenuInst
 } from './interface'
-import { layoutSiderInjectionKey } from '../../layout/src/interface'
-import { FollowerPlacement } from 'vueuc'
-import { DropdownProps } from '../../dropdown'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
 
