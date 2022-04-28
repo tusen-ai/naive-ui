@@ -103,6 +103,16 @@ describe('n-input', () => {
     })
   })
 
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NInput, { props: { status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `type` prop', async () => {
     const wrapper = mount(NInput)
     await wrapper.setProps({ type: 'text' })
