@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Pending
+
+- 修复 `n-menu` 的 `dropdown-props` 无法覆盖 `n-dropdown` 的 `size` 属性，关闭 [#2868](https://github.com/TuSimple/naive-ui/issues/2868)
+
 ## 2.28.2
 
 ### Fixes

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Pending
+
+- Fix `n-menu`'s `dropdown-props` prop can't override `n-dropdown`'s `size` prop, closes [#2868](https://github.com/TuSimple/naive-ui/issues/2868).
+
 ## 2.28.2
 
 ### Fixes
