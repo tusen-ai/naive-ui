@@ -123,6 +123,24 @@ describe('n-input', () => {
     expect(wrapper.find('textarea').exists()).toBe(true)
   })
 
+  it('should work with `show-password-on` prop', async () => {
+    let wrapper = mount(NInput, {
+      props: { type: 'password', showPasswordOn: 'click' }
+    })
+    expect(wrapper.find('input').attributes('type')).toBe('password')
+    await wrapper.find('.n-base-icon').trigger('click')
+    expect(wrapper.find('input').attributes('type')).toBe('text')
+
+    wrapper = mount(NInput, {
+      props: { type: 'password', showPasswordOn: 'mousedown' }
+    })
+    expect(wrapper.find('input').attributes('type')).toBe('password')
+    await wrapper.find('.n-base-icon').trigger('mousedown')
+    expect(wrapper.find('input').attributes('type')).toBe('text')
+
+    wrapper.unmount()
+  })
+
   it('should work with `show-count` prop', async () => {
     const maxlength = 30
     const wrapper = mount(NInput)
