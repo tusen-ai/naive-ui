@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+confirm.vue
 size.vue
 disabled-time.vue
 step-time.vue
@@ -46,6 +47,7 @@ status.vue
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
 | value-format | `string` | 跟随 `format` | 格式化后值的格式 | 2.24.0 |
 | on-blur | `() => void` | `undefined` | 选择框失去焦点时的回调 |  |
+| on-confirm | `() => void` | `undefined` | 点击确认按钮时的回调 | NEXT_VERSION |
 | on-focus | `() => void` | `undefined` | 选择框获得焦点时的回调 |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` 2.24.0 |

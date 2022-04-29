@@ -1,8 +1,14 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
 
 - Fix `n-menu`'s `dropdown-props` prop can't override `n-dropdown`'s `size` prop, closes [#2868](https://github.com/TuSimple/naive-ui/issues/2868).
+
+### Feats
+
+- `n-time-picker` adds `on-confirm` prop.
 
 ## 2.28.2
 
