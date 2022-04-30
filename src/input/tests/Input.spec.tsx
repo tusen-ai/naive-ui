@@ -20,6 +20,7 @@ describe('n-input', () => {
     wrapper.find('input').element.value = 'cool'
     await wrapper.find('input').trigger('input')
     expect(onUpdateValue).toHaveBeenCalledWith('cool')
+    wrapper.unmount()
   })
 
   it('`loading` prop', async () => {
@@ -121,6 +122,7 @@ describe('n-input', () => {
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `show-password-on` prop', async () => {
