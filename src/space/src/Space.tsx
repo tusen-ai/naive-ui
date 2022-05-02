@@ -23,6 +23,8 @@ export type Justify =
   | 'center'
   | 'space-around'
   | 'space-between'
+  | 'space-evenly'
+
 const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
