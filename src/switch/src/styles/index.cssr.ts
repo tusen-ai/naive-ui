@@ -56,6 +56,8 @@ export default cB('switch', `
     transition: color .3s var(--n-bezier);
   `, [
     iconSwitchTransition({
+      left: '50%',
+      top: '50%',
       originalTransform: 'translateX(-50%) translateY(-50%)'
     })
   ]),
