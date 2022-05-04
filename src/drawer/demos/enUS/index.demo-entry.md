@@ -23,6 +23,7 @@ slot.vue
 | Name | Parameters | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside drawer. | 2.24.2 |
+| block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | NEXT_VERSION |
 | close-on-esc | `boolean` | `true` | Whether to close drawer on Esc is pressed. | 2.24.2 |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |  |
 | display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-drawer` is rendered. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |  |

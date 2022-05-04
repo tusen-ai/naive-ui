@@ -29,6 +29,7 @@ dark-4-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | auto-focus | `boolean` | `true` | 是否自动聚焦 Drawer 第一个可聚焦的元素 | 2.24.2 |
+| block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | NEXT_VERSION |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Drawer | 2.24.2 |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |  |
 | display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |

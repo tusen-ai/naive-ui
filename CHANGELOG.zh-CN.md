@@ -22,6 +22,10 @@
 - `n-date-picker` 属性 `type` 支持 `monthrange` 选项
 - `n-data-table` 的 `columns` 的元素支持 `minWidth` 属性
 - `n-tree` 新增 `checkbox-placement` 属性
+- `n-modal` 新增 `block-scroll` 属性
+- `n-modal` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
+- `n-drawer` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
+- `useDialog` 支持 `blockScroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
 
 ## 2.28.2
 

@@ -22,6 +22,9 @@
 - `n-date-picker`'s `type` prop supports `monthrange` option.
 - `n-data-table`'s `columns`'s element supports `minWidth` prop.
 - `n-tree` adds `checkbox-placement` prop.
+- `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
+- `n-drawer` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
+- `useDialog` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 
 ## 2.28.2
 

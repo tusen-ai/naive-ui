@@ -68,6 +68,10 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -273,6 +277,7 @@ export default defineComponent({
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
                   style={[this.mergedBodyStyle, this.$attrs.style]}
+                  blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}

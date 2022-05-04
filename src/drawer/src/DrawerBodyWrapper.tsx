@@ -19,6 +19,7 @@ import type { ScrollbarProps } from '../../_internal'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
+import { useLockHtmlScroll } from '../../_utils'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
 
@@ -26,6 +27,7 @@ export default defineComponent({
   name: 'NDrawerContent',
   inheritAttrs: false,
   props: {
+    blockScroll: Boolean,
     show: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -57,7 +59,7 @@ export default defineComponent({
     onEsc: Function as PropType<() => void>
   },
   setup (props) {
-    const displayedRef = ref(props.show)
+    const displayedRef = ref(!!props.show)
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
@@ -68,6 +70,7 @@ export default defineComponent({
       displayedRef.value = false
       props.onAfterLeave?.()
     }
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     provide(drawerBodyInjectionKey, bodyRef)
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
