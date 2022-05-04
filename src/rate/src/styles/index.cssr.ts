@@ -1,9 +1,9 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --item-color
-// --item-color-active
+// --n-bezier
+// --n-item-color
+// --n-item-color-active
 export default cB('rate', {
   display: 'inline-flex',
   flexWrap: 'nowrap'
@@ -11,25 +11,25 @@ export default cB('rate', {
   c('&:hover', [
     cE('item', `
       transition:
-        transform .1s var(--bezier),
-        color .3s var(--bezier);
+        transform .1s var(--n-bezier),
+        color .3s var(--n-bezier);
     `)
   ]),
   cE('item', `
     position: relative;
     display: flex;
     transition:
-      transform .1s var(--bezier),
-      color .3s var(--bezier);
+      transform .1s var(--n-bezier),
+      color .3s var(--n-bezier);
     transform: scale(1);
-    font-size: var(--item-size);
-    color: var(--item-color);
+    font-size: var(--n-item-size);
+    color: var(--n-item-color);
   `, [
     c('&:not(:first-child)', {
       marginLeft: '6px'
     }),
     cM('active', {
-      color: 'var(--item-color-active)'
+      color: 'var(--n-item-color-active)'
     })
   ]),
   cNotM('readonly', `
@@ -56,7 +56,7 @@ export default cB('rate', {
     color: rgba(255, 255, 255, 0);
   `, [
     cM('active', {
-      color: 'var(--item-color-active)'
+      color: 'var(--n-item-color-active)'
     })
   ])
 ])

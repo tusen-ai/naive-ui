@@ -1,4 +1,4 @@
-# Controlled multi-col sorting
+# Controlled multi-column sorting
 
 If column object's `sortOrder` is set to `'ascend'`, `'descend'` or `false`, the data table would be in controlled state.
 

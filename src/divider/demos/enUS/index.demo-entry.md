@@ -5,9 +5,9 @@ Divide something.
 ## Demos
 
 ```demo
-basic
-content
-vertical
+basic.vue
+content.vue
+vertical.vue
 ```
 
 ## API

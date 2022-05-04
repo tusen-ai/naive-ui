@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NTimePicker } from '../../../time-picker'
 import { NInput } from '../../../input'
@@ -10,6 +10,7 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
+import PanelHeader from './panelHeader'
 
 /**
  * DateTime Panel
@@ -24,12 +25,23 @@ export default defineComponent({
     return useCalendar(props, 'datetime')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      timePickerProps,
+      onRender
+    } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--datetime`}
+        class={[
+          `${mergedClsPrefix}-date-panel`,
+          `${mergedClsPrefix}-date-panel--datetime`,
+          this.themeClass
+        ]}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
@@ -47,19 +59,20 @@ export default defineComponent({
             onUpdateValue={this.handleDateInput}
           />
           <NTimePicker
-            showIcon={false}
+            size={this.timePickerSize}
+            placeholder={this.locale.selectTime}
             format={this.timeFormat}
-            stateful={false}
+            {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
+            showIcon={false}
+            to={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
-            to={false}
-            size={this.timePickerSize}
             value={Array.isArray(this.value) ? null : this.value}
-            placeholder={this.locale.selectTime}
             isHourDisabled={this.isHourDisabled}
             isMinuteDisabled={this.isMinuteDisabled}
             isSecondDisabled={this.isSecondDisabled}
             onUpdateValue={this.handleTimePickerChange}
+            stateful={false}
           />
         </div>
         <div class={`${mergedClsPrefix}-date-panel-calendar`}>
@@ -76,11 +89,14 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.calendarMonth} ${this.calendarYear}`
-                : `${this.calendarYear} ${this.calendarMonth}`}
-            </div>
+            <PanelHeader
+              monthBeforeYear={this.locale.monthBeforeYear}
+              value={this.calendarValue}
+              onUpdateValue={this.onUpdateCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.calendarMonth}
+              calendarYear={this.calendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
@@ -124,6 +140,7 @@ export default defineComponent({
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
               >
+                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
@@ -134,7 +151,7 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {this.datePickerSlots.footer()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

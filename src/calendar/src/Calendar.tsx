@@ -8,19 +8,27 @@ import {
   Fragment,
   toRef
 } from 'vue'
-import { format, getYear, addMonths, startOfDay, startOfMonth } from 'date-fns'
+import {
+  format,
+  getYear,
+  addMonths,
+  startOfDay,
+  startOfMonth,
+  getMonth
+} from 'date-fns'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { call } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NButton, NButtonGroup } from '../../button'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
-import type { OnUpdateValue, DateItem } from './interface'
+import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
 const calendarProps = {
@@ -29,8 +37,9 @@ const calendarProps = {
   value: Number,
   defaultValue: {
     type: Number as PropType<number | null>,
-    defualt: null
+    default: null
   },
+  onPanelChange: Function as PropType<OnPanelChange>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
@@ -41,10 +50,10 @@ export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
-      'Calendar',
+      '-calendar',
       style,
       calendarLight,
       props,
@@ -72,14 +81,89 @@ export default defineComponent({
     }
 
     function handlePrevClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, -1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, -1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleNextClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, 1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, 1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleTodayClick (): void {
-      monthTsRef.value = startOfMonth(now).valueOf()
+      const { value: monthTs } = monthTsRef
+      const oldYear = getYear(monthTs)
+      const oldMonth = getMonth(monthTs)
+      const newMonthTs = startOfMonth(now).valueOf()
+      const newYear = getYear(newMonthTs)
+      const newMonth = getMonth(newMonthTs)
+      if (oldYear !== newYear || oldMonth !== newMonth) {
+        props.onPanelChange?.({
+          year: newYear,
+          month: newMonthTs
+        })
+      }
+      monthTsRef.value = newMonthTs
     }
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderColor,
+          borderColorModal,
+          borderColorPopover,
+          borderRadius,
+          titleFontSize,
+          textColor,
+          titleFontWeight,
+          titleTextColor,
+          dayTextColor,
+          fontSize,
+          lineHeight,
+          dateColorCurrent,
+          dateTextColorCurrent,
+          cellColorHover,
+          cellColor,
+          cellColorModal,
+          barColor,
+          cellColorPopover,
+          cellColorHoverModal,
+          cellColorHoverPopover
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-border-radius': borderRadius,
+        '--n-text-color': textColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-text-color': titleTextColor,
+        '--n-day-text-color': dayTextColor,
+        '--n-font-size': fontSize,
+        '--n-line-height': lineHeight,
+        '--n-date-color-current': dateColorCurrent,
+        '--n-date-text-color-current': dateTextColorCurrent,
+        '--n-cell-color': cellColor,
+        '--n-cell-color-modal': cellColorModal,
+        '--n-cell-color-popover': cellColorPopover,
+        '--n-cell-color-hover': cellColorHover,
+        '--n-cell-color-hover-modal': cellColorHoverModal,
+        '--n-cell-color-hover-popover': cellColorHoverPopover,
+        '--n-bar-color': barColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('calendar', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
@@ -101,56 +185,9 @@ export default defineComponent({
       handlePrevClick,
       handleNextClick,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderColor,
-            borderColorModal,
-            borderColorPopover,
-            borderRadius,
-            titleFontSize,
-            textColor,
-            titleFontWeight,
-            titleTextColor,
-            dayTextColor,
-            fontSize,
-            lineHeight,
-            dateColorCurrent,
-            dateTextColorCurrent,
-            cellColorHover,
-            cellColor,
-            cellColorModal,
-            barColor,
-            cellColorPopover,
-            cellColorHoverModal,
-            cellColorHoverPopover
-          }
-        } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--border-radius': borderRadius,
-          '--text-color': textColor,
-          '--title-font-weight': titleFontWeight,
-          '--title-font-size': titleFontSize,
-          '--title-text-color': titleTextColor,
-          '--day-text-color': dayTextColor,
-          '--font-size': fontSize,
-          '--line-height': lineHeight,
-          '--date-color-current': dateColorCurrent,
-          '--date-text-color-current': dateTextColorCurrent,
-          '--cell-color': cellColor,
-          '--cell-color-modal': cellColorModal,
-          '--cell-color-popover': cellColorPopover,
-          '--cell-color-hover': cellColorHover,
-          '--cell-color-hover-modal': cellColorHoverModal,
-          '--cell-color-hover-popover': cellColorHoverPopover,
-          '--bar-color': barColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -166,8 +203,10 @@ export default defineComponent({
       dateLocale: { locale },
       handleTodayClick,
       handlePrevClick,
-      handleNextClick
+      handleNextClick,
+      onRender
     } = this
+    onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
     const localeMonth = format(monthTs, 'MMMM', { locale })
     const year = getYear(monthTs)
@@ -176,7 +215,7 @@ export default defineComponent({
       : `${year} ${localeMonth}`
     return (
       <div
-        class={`${mergedClsPrefix}-calendar`}
+        class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
@@ -239,7 +278,9 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
+              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
+              const notInCurrentMonth = !inCurrentMonth
+              const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
@@ -247,11 +288,15 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    notInCurrentMonth &&
+                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
+                    if (disabled) return
                     this.doUpdateValue(ts, {
                       year,
                       month: month + 1,

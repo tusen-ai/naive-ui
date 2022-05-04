@@ -1,9 +1,9 @@
 import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
-import { DataTableSetupProps } from './DataTable'
+import type { DataTableSetupProps } from './DataTable'
 import type { ColumnKey, MainTableRef, TableColumn } from './interface'
-import { getColWidth, getColKey } from './utils'
+import { getNumberColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useScroll (
@@ -48,7 +48,7 @@ export function useScroll (
           traverse(col.children)
           positionInfo.end = left
         } else {
-          left += getColWidth(col) || 0
+          left += getNumberColWidth(col) || 0
           positionInfo.end = left
         }
       })
@@ -71,7 +71,7 @@ export function useScroll (
           traverse(col.children)
           positionInfo.end = right
         } else {
-          right += getColWidth(col) || 0
+          right += getNumberColWidth(col) || 0
           positionInfo.end = right
         }
       }
@@ -84,7 +84,7 @@ export function useScroll (
     const { value: leftFixedColumns } = leftFixedColumnsRef
     let leftWidth = 0
     const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
-    let leftActiveFixedColKey = null
+    let leftActiveFixedColKey: string | number | null = null
     for (let i = 0; i < leftFixedColumns.length; ++i) {
       const key = getColKey(leftFixedColumns[i])
       if (scrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
@@ -119,7 +119,7 @@ export function useScroll (
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     let rightWidth = 0
-    let rightActiveFixedColKey = null
+    let rightActiveFixedColKey: string | number | null = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
     for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
       const key = getColKey(rightFixedColumns[i])

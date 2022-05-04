@@ -46,10 +46,10 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   ValueAtom[] &
-  (ValueAtom | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (ValueAtom[] | null),
+    (ValueAtom | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (ValueAtom[] | null),
   option: SelectBaseOption & null & SelectBaseOption[]
 ) => void
 export type OnUpdateValueImpl = (
@@ -82,3 +82,11 @@ export type SelectGroupOption =
   | (SelectGroupOptionBase & {
     key: string | number
   })
+
+export interface SelectInst {
+  focus: () => void
+  blur: () => void
+}
+
+export type SelectFallbackOption = (value: string & number) => SelectOption
+export type SelectFallbackOptionImpl = (value: string | number) => SelectOption

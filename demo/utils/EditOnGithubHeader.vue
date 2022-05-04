@@ -16,11 +16,12 @@
   </n-h1>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { i18n } from '../utils/composables'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
-export default {
+export default defineComponent({
   name: 'EditOnGithubHeader',
   components: {
     EditOnGithubButton
@@ -52,7 +53,7 @@ export default {
       return this.text.replace(/ /g, '-')
     }
   }
-}
+})
 </script>
 
 <style scoped>

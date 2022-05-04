@@ -1,7 +1,7 @@
 import { cB, c } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
-// --menu-box-shadow
+// --n-menu-box-shadow
 export default c([
   cB('select', `
     z-index: auto;
@@ -11,7 +11,7 @@ export default c([
   `),
   cB('select-menu', `
     margin: 4px 0;
-    box-shadow: var(--menu-box-shadow);
+    box-shadow: var(--n-menu-box-shadow);
   `, [
     fadeInScaleUpTransition()
   ])

@@ -20,7 +20,8 @@ import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import { FileInfo, listType, uploadInjectionKey } from './interface'
+import { uploadInjectionKey } from './interface'
+import type { FileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { environmentSupportFile, isImageFile } from './utils'
 import { NImage } from '../../image'
@@ -38,7 +39,7 @@ export default defineComponent({
       required: true
     },
     listType: {
-      type: String as PropType<listType>,
+      type: String as PropType<ListType>,
       required: true
     }
   },
@@ -229,14 +230,18 @@ export default defineComponent({
         >
           {listType === 'image-card' ? (
             <NImage
-              src={this.thumbnailUrl || file.thumbnailUrl || file.url || undefined}
+              src={
+                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
+              }
               previewSrc={file.url || undefined}
               alt={file.name}
               ref="imageRef"
             />
           ) : (
             <img
-              src={this.thumbnailUrl || file.thumbnailUrl || file.url || undefined}
+              src={
+                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
+              }
               alt={file.name}
             />
           )}

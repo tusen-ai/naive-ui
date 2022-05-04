@@ -51,21 +51,27 @@ describe('n-avatar', () => {
 
   it('size is string', () => {
     const wrapper = mount(NAvatar, { props: { size: 'medium' } })
-    expect(wrapper.attributes('style')).toContain('--merged-size')
+    expect(wrapper.attributes('style')).toContain('--n-merged-size')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('size is number', () => {
     const wrapper = mount(NAvatar, { props: { size: 50 } })
     expect(wrapper.attributes('style')).toContain(
-      '--merged-size: var(--avatar-size-override, 50px);'
+      '--n-merged-size: var(--n-avatar-size-override, 50px);'
     )
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('round avatar', () => {
     const wrapper = mount(NAvatar, { props: { round: true } })
-    expect(wrapper.attributes('style')).toContain('--border-radius: 50%;')
+    expect(wrapper.attributes('style')).toContain('--n-border-radius: 50%;')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('bordered avatar', () => {
+    const wrapper = mount(NAvatar, { props: { bordered: true } })
+    expect(wrapper.attributes('style')).toContain('--n-border: 2px solid #fff;')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

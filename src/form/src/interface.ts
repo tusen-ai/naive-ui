@@ -1,20 +1,29 @@
-import { InjectionKey } from 'vue'
-import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
+import { Ref } from 'vue'
+import {
+  ValidateError,
+  RuleItem,
+  ValidateOption,
+  ValidateMessages
+} from 'async-validator'
 import { FormSetupProps } from './Form'
 
 export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
 }
 
+type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
+  ? (rule: R, ...args: K) => P
+  : never
+
 export type FormItemRuleValidatorParams = Parameters<
-NonNullable<RuleItem['validator']>
+SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
   ...args: FormItemRuleValidatorParams
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
-// In src of async-validator, any non-promise of asyncValidator will be abadoned
+// In src of async-validator, any non-promise of asyncValidator will be abandoned
 export type FormItemRuleAsyncValidator = (
   ...args: FormItemRuleValidatorParams
 ) => Promise<void> | undefined
@@ -45,7 +54,7 @@ export type FormItemInternalValidate = (
 export type FormItemValidate = ((
   options: FormItemValidateOptions
 ) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+  ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -57,11 +66,11 @@ export interface FormItemInst {
 export type FormItemColRef = FormItemInst
 export type FormItemRowRef = FormItemInst
 
-export type FormInjection = FormSetupProps
-
-export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
-export const formItemInstsInjectionKey: InjectionKey<unknown> =
-  Symbol('formItemInsts')
+export interface FormInjection {
+  props: FormSetupProps
+  maxChildLabelWidthRef: Ref<number | undefined>
+  deriveMaxChildLabelWidth: (currentWidth: number) => void
+}
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'
@@ -84,3 +93,7 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
+
+export type FormValidationStatus = 'success' | 'error' | 'warning'
+
+export interface FormValidateMessages extends ValidateMessages {}

@@ -1,7 +1,7 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import type { FormItemSetupProps } from './FormItem'
-import { formInjectionKey } from './interface'
+import { formInjectionKey } from './context'
 import type { Size, FormItemRule } from './interface'
 import { formatLength } from '../../_utils'
 
@@ -12,7 +12,7 @@ export function formItemSize (props: FormItemSetupProps): {
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined) return props.size
-      if (NForm?.size !== undefined) return NForm.size
+      if (NForm?.props.size !== undefined) return NForm.props.size
       return 'medium'
     })
   }
@@ -25,44 +25,54 @@ export function formItemMisc (props: FormItemSetupProps) {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
 
-    if (labelWidth !== undefined) {
+    if (labelWidth !== undefined && labelWidth !== 'auto') {
       return formatLength(labelWidth)
     }
 
-    if (NForm?.labelWidth !== undefined) {
-      return formatLength(NForm.labelWidth)
+    if (labelWidth === 'auto' || NForm?.props.labelWidth === 'auto') {
+      const autoComputedWidth = NForm?.maxChildLabelWidthRef.value
+      if (autoComputedWidth !== undefined) {
+        return formatLength(autoComputedWidth)
+      } else {
+        return undefined
+      }
+    }
+
+    if (NForm?.props.labelWidth !== undefined) {
+      return formatLength(NForm.props.labelWidth)
     }
     return undefined
   })
   const mergedLabelPlacementRef = computed(() => {
     const { labelPlacement } = props
     if (labelPlacement !== undefined) return labelPlacement
-    if (NForm?.labelPlacement) return NForm.labelPlacement
+    if (NForm?.props.labelPlacement) return NForm.props.labelPlacement
     return 'top'
   })
   const mergedLabelAlignRef = computed(() => {
     const { labelAlign } = props
     if (labelAlign) return labelAlign
-    if (NForm?.labelAlign) return NForm.labelAlign
+    if (NForm?.props.labelAlign) return NForm.props.labelAlign
     return undefined
   })
   const mergedLabelStyleRef = computed(() => {
     return [
+      props.labelProps?.style,
+      props.labelStyle,
       {
         width: mergedLabelWidthRef.value
-      },
-      props.labelStyle
+      }
     ]
   })
   const mergedShowRequireMarkRef = computed(() => {
     const { showRequireMark } = props
     if (showRequireMark !== undefined) return showRequireMark
-    return NForm?.showRequireMark
+    return NForm?.props.showRequireMark
   })
   const mergedRequireMarkPlacementRef = computed(() => {
     const { requireMarkPlacement } = props
     if (requireMarkPlacement !== undefined) return requireMarkPlacement
-    return NForm?.requireMarkPlacement
+    return NForm?.props.requireMarkPlacement || 'right'
   })
   const validationErroredRef = ref(false)
   const mergedValidationStatusRef = computed(() => {
@@ -74,13 +84,13 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedShowFeedbackRef = computed(() => {
     const { showFeedback } = props
     if (showFeedback !== undefined) return showFeedback
-    if (NForm?.showFeedback !== undefined) return NForm.showFeedback
+    if (NForm?.props.showFeedback !== undefined) return NForm.props.showFeedback
     return true
   })
   const mergedShowLabelRef = computed(() => {
     const { showLabel } = props
     if (showLabel !== undefined) return showLabel
-    if (NForm?.showLabel !== undefined) return NForm.showLabel
+    if (NForm?.props.showLabel !== undefined) return NForm.props.showLabel
     return true
   })
   return {
@@ -107,14 +117,14 @@ export function formItemRule (props: FormItemSetupProps) {
     return undefined
   })
   const mergedRulesRef = computed(() => {
-    const rules = []
+    const rules: FormItemRule[] = []
     const { rule } = props
     if (rule !== undefined) {
       if (Array.isArray(rule)) rules.push(...rule)
       else rules.push(rule)
     }
     if (NForm) {
-      const { rules: formRules } = NForm
+      const { rules: formRules } = NForm.props
       const { value: rulePath } = compatibleRulePathRef
       if (formRules !== undefined && rulePath !== undefined) {
         const formRule = get(formRules, rulePath)

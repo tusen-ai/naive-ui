@@ -129,12 +129,14 @@ export default defineComponent({
                     maxWidth: `${props.percentage}%`,
                     backgroundColor: fillColor,
                     height: styleHeightRef.value,
+                    lineHeight: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value
                   }}
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class={`${clsPrefix}-progress-graph-line-indicator`}>
-                      {`${percentage}${unit}`}
+                      {percentage}
+                      {unit}
                     </div>
                   ) : null}
                 </div>

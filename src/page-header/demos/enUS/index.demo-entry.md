@@ -7,7 +7,7 @@ I hope this component has all the slots you need!
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API
@@ -23,12 +23,13 @@ basic
 
 ### PageHeader Slots
 
-| Name     | Parameters | Description           |
-| -------- | ---------- | --------------------- |
-| avatar   | `()`       | Image information.    |
-| header   | `()`       | Header information.   |
-| default  | `()`       | Content.              |
-| extra    | `()`       | Extra information.    |
-| footer   | `()`       | Footer information.   |
-| subtitle | `()`       | Subtitle information. |
-| title    | `()`       | Title information.    |
+| Name     | Parameters | Description           | Version |
+| -------- | ---------- | --------------------- | ------- |
+| avatar   | `()`       | Image information.    |         |
+| header   | `()`       | Header information.   |         |
+| default  | `()`       | Content.              |         |
+| extra    | `()`       | Extra information.    |         |
+| footer   | `()`       | Footer information.   |         |
+| subtitle | `()`       | Subtitle information. |         |
+| title    | `()`       | Title information.    |         |
+| back     | `()`       | Back icon.            | 2.24.2  |

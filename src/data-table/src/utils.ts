@@ -1,5 +1,6 @@
 import { CSSProperties } from 'vue'
-import { pxfy } from 'seemly'
+import { depx } from 'seemly'
+import { formatLength } from '../../_utils'
 import type {
   SortOrder,
   TableBaseColumn,
@@ -15,11 +16,21 @@ import type {
 export const selectionColWidth = 40
 export const expandColWidth = 40
 
-export function getColWidth (col: TableColumn): number | undefined {
+export function getNumberColWidth (col: TableColumn): number | undefined {
   if (col.type === 'selection') return selectionColWidth
   if (col.type === 'expand') return expandColWidth
   if ('children' in col) return undefined
+  if (typeof col.width === 'string') {
+    return depx(col.width)
+  }
   return col.width
+}
+
+export function getStringColWidth (col: TableColumn): string | undefined {
+  if (col.type === 'selection') return formatLength(selectionColWidth)
+  if (col.type === 'expand') return formatLength(expandColWidth)
+  if ('children' in col) return undefined
+  return formatLength(col.width)
 }
 
 export function getColKey (col: TableColumn): string | number {
@@ -45,7 +56,7 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
 ): CSSProperties {
-  const width = pxfy(getColWidth(column))
+  const width = getStringColWidth(column)
   return {
     width,
     minWidth: width

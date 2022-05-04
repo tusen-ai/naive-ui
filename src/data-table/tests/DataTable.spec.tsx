@@ -2,7 +2,8 @@ import { h, HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { DataTableInst, NDataTable } from '../index'
 import type { DataTableColumns } from '../index'
-import { NButton, NButtonGroup } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {

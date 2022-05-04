@@ -47,7 +47,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Skeleton',
-      'Skeleton',
+      '-skeleton',
       style,
       skeletonLight,
       props,
@@ -63,16 +63,8 @@ export default defineComponent({
         const selfThemeVars = theme.self
         const { color, colorEnd, borderRadius } = selfThemeVars
         let sizeHeight: string | undefined
-        const {
-          circle,
-          sharp,
-          round,
-          width,
-          height,
-          size,
-          text,
-          animated
-        } = props
+        const { circle, sharp, round, width, height, size, text, animated } =
+          props
         if (size !== undefined) {
           sizeHeight = selfThemeVars[createKey('height', size)]
         }
@@ -95,9 +87,9 @@ export default defineComponent({
               ? pxfy(mergedHeight)
               : mergedHeight,
           animation: !animated ? 'none' : '',
-          '--bezier': cubicBezierEaseInOut,
-          '--color-start': color,
-          '--color-end': colorEnd
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-color-start': color,
+          '--n-color-end': colorEnd
         }
       })
     }

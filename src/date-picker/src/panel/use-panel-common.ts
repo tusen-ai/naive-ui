@@ -17,18 +17,14 @@ import {
   DefaultTime
 } from '../interface'
 
-const DATE_FORMAT = 'yyyy-MM-dd'
 const TIME_FORMAT = 'HH:mm:ss'
 
 const usePanelCommonProps = {
   active: Boolean,
-  dateFormat: {
-    type: String,
-    default: DATE_FORMAT
-  },
+  dateFormat: String,
   timeFormat: {
     type: String,
-    default: TIME_FORMAT
+    value: TIME_FORMAT
   },
   value: {
     type: [Array, Number] as PropType<Value | null>,
@@ -42,7 +38,9 @@ const usePanelCommonProps = {
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
-  }
+  },
+  themeClass: String,
+  onRender: Function as PropType<(() => void) | undefined>
 } as const
 
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
@@ -52,6 +50,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   const {
     dateLocaleRef,
     timePickerSizeRef,
+    timePickerPropsRef,
     localeRef,
     mergedClsPrefixRef,
     mergedThemeRef
@@ -143,11 +142,16 @@ function usePanelCommon (props: UsePanelCommonProps) {
     return shortcut
   }
 
+  const showMonthYearPanel = ref(false)
+  function handleOpenQuickSelectMonthPanel (): void {
+    showMonthYearPanel.value = !showMonthYearPanel.value
+  }
   return {
     mergedTheme: mergedThemeRef,
     mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
+    timePickerProps: timePickerPropsRef,
     selfRef,
     locale: localeRef,
     doConfirm,
@@ -163,7 +167,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
     clearPendingValue,
     restorePendingValue,
     getShortcutValue,
-    handleShortcutMouseleave: restorePendingValue
+    handleShortcutMouseleave: restorePendingValue,
+    showMonthYearPanel,
+    handleOpenQuickSelectMonthPanel
   }
 }
 

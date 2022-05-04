@@ -1,4 +1,5 @@
-import { Ref, InjectionKey, CSSProperties } from 'vue'
+import { Ref, CSSProperties } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type TabsType = 'line' | 'card' | 'bar' | 'segment'
 
@@ -27,7 +28,8 @@ export interface TabsInjection {
   paneStyleRef: Ref<string | CSSProperties | undefined>
   tabChangeIdRef: { id: number }
   onBeforeLeaveRef: Ref<OnBeforeLeave | undefined>
-  handleTabClick: (panelName: string | number) => void
+  triggerRef: Ref<'click' | 'hover'>
+  activateTab: (panelName: string | number) => void
   handleClose: (panelName: string | number) => void
   handleAdd: () => void
 }
@@ -38,4 +40,8 @@ export type Addable =
     disabled?: boolean
   }
 
-export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
+export const tabsInjectionKey = createInjectionKey<TabsInjection>('n-tabs')
+
+export interface TabsInst {
+  syncBarPosition: () => void
+}

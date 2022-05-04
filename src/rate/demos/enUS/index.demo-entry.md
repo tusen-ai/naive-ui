@@ -5,12 +5,12 @@ Hint: If you are not very confident, think twice before changing the star's colo
 ## Demos
 
 ```demo
-basic
-size
-color
-icon
-allow-half
-readonly
+basic.vue
+size.vue
+color.vue
+icon.vue
+allow-half.vue
+readonly.vue
 ```
 
 ## API
@@ -30,6 +30,6 @@ readonly
 
 ### Rate Slots
 
-| Name    | Parameters | Description           |
-| ------- | ---------- | --------------------- |
+| Name    | Parameters | Description             |
+| ------- | ---------- | ----------------------- |
 | default | `()`       | The icon of the rating. |

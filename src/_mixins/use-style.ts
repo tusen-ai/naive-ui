@@ -3,6 +3,7 @@ import { Ref, onBeforeMount } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
 import { throwError } from '../_utils'
+import { cssrAnchorMetaName } from './common'
 
 export default function useStyle (
   mountId: string,
@@ -19,14 +20,16 @@ export default function useStyle (
     style.mount({
       id: clsPrefix === undefined ? mountId : clsPrefix + mountId,
       head: true,
+      anchorMetaName: cssrAnchorMetaName,
       props: {
         bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
       },
       ssr: ssrAdapter
     })
     globalStyle.mount({
-      id: 'naive-ui/global',
+      id: 'n-global',
       head: true,
+      anchorMetaName: cssrAnchorMetaName,
       ssr: ssrAdapter
     })
   }

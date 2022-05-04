@@ -1,11 +1,9 @@
-import { Ref, UnwrapRef, InjectionKey } from 'vue'
+import { Ref, UnwrapRef } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
-// null is for clearable
-export type OnUpdateValue = <T extends string & [string, string]>(
-  value: T
-) => void
+export type OnUpdateValue = (value: string & [string, string]) => void
 export type OnUpdateValueImpl = (value: string | [string, string]) => void
 
 export interface InputWrappedRef {
@@ -22,8 +20,8 @@ export interface InputWrappedRef {
 
 export type InputInst = UnwrapRef<InputWrappedRef>
 
-export const inputInjectionKey: InjectionKey<{
+export const inputInjectionKey = createInjectionKey<{
   mergedValueRef: Ref<string | [string, string] | null>
   maxlengthRef: Ref<number | undefined>
   mergedClsPrefixRef: Ref<string>
-}> = Symbol('input')
+}>('n-input')

@@ -151,6 +151,47 @@ describe('n-tree', () => {
     expect(test2Child).toBeDefined()
   })
 
+  it('should work with `default-expand-all`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        defaultExpandAll: true
+      }
+    })
+    await wrapper.setProps({
+      data: [
+        {
+          label: 'test1',
+          key: '1',
+          children: [
+            {
+              label: 'test1-1',
+              key: '1-1'
+            }
+          ]
+        },
+        {
+          label: 'test2',
+          key: '2',
+          children: [
+            {
+              label: 'test2-1',
+              key: '2-1'
+            }
+          ]
+        }
+      ]
+    })
+    const test1Child = wrapper
+      .findAll('.n-tree-node')
+      .find((el) => el.text() === 'test1-1')
+    const test2Child = wrapper
+      .findAll('.n-tree-node')
+      .find((el) => el.text() === 'test2-1')
+
+    expect(test1Child).toBeDefined()
+    expect(test2Child).toBeDefined()
+  })
+
   it('should work with `checkable` and `defaultCheckedKeys`', () => {
     const wrapper = mount(NTree, {
       props: {
@@ -315,6 +356,30 @@ describe('n-tree', () => {
     })
 
     expect(wrapper.find('.n-tree-node--disabled').exists()).toBe(true)
+  })
+
+  it('should work with `children-field`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            disabled: true,
+            nodes: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        childrenField: 'nodes',
+        defaultExpandAll: true
+      }
+    })
+
+    expect(wrapper.findAll('.n-tree-node')[1].text()).toBe('1231')
   })
 
   it('should work with `onLoad`', async () => {

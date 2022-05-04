@@ -5,14 +5,16 @@ It's said that 99% of the people can't distinguish the `TreeSelect` component fr
 ## Demos
 
 ```demo
-basic
-custom-field
-multiple
-checkbox
-check-strategy
-filterable
-action
-debug
+basic.vue
+custom-field.vue
+multiple.vue
+checkbox.vue
+check-strategy.vue
+filterable.vue
+action.vue
+async.vue
+status.vue
+debug.vue
 ```
 
 ## API
@@ -21,11 +23,13 @@ debug
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
 | children-field | `string` | `'children'` | The children property to use for `TreeSelectOption`'s. |  |
 | clearable | `boolean` | `false` | Whether the selection is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.3 |
 | consistent-menu-width | `boolean` | `true` | Force the widths of selection input and menu to be equal. \*This will disable virtual scrolling. |  |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when `multiple`) by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
@@ -42,25 +46,30 @@ debug
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
+| on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |  |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function on indeterminate options changing. |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | Callback on value updated. |  |
 
 ### TreeSelectOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| key | `string \| number` | Unique option key. The field used can be set using `key-field`. |
-| label | `string` | Displayed content of the option. The field used can be set using `label-field`. |
-| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |
-| disabled? | `boolean` | Option disabled state. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| key | `string \| number` | Unique option key. The field used can be set using `key-field`. |  |
+| label | `string` | Displayed content of the option. The field used can be set using `label-field`. |  |
+| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |  |
+| disabled? | `boolean` | Option disabled state. |  |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in async mode. | 2.27.0 |
 
 ### TreeSelect Slots
 

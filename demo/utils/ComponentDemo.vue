@@ -84,7 +84,11 @@
           JavaScript
         </n-tab>
       </n-tabs>
-      <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
+      <n-scrollbar
+        x-scrollable
+        content-style="padding: 20px 24px;"
+        style="height: auto"
+      >
         <n-code v-if="showTs" language="html" :code="sfcTsCode" />
         <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>
@@ -92,8 +96,8 @@
   </n-card>
 </template>
 
-<script>
-import { computed, nextTick, ref, watch } from 'vue'
+<script lang="ts">
+import { defineComponent, computed, nextTick, ref, watch } from 'vue'
 import { CodeOutline } from '@vicons/ionicons5'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
@@ -101,7 +105,7 @@ import EditOnGithubButton from './EditOnGithubButton.vue'
 import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
 
-export default {
+export default defineComponent({
   components: {
     CodeOutline,
     EditOnGithubButton,
@@ -141,7 +145,7 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
-    const showTsRef = ref(true)
+    const showTsRef = ref(props.languageType === 'ts')
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
@@ -184,5 +188,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

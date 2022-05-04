@@ -39,8 +39,20 @@ const TreeNode = defineComponent({
       draggingNodeRef,
       droppingPositionRef,
       droppingOffsetLevelRef,
-      indentRef
+      nodePropsRef,
+      indentRef,
+      blockLineRef
     } = NTree
+
+    const disabledRef = computed(
+      () => NTree.disabledRef.value || props.tmNode.disabled
+    )
+
+    const resolvedNodePropsRef = computed(() => {
+      const { value: nodeProps } = nodePropsRef
+      if (!nodeProps) return undefined
+      return nodeProps({ option: props.tmNode.rawNode })
+    })
 
     // used for drag and drop
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
@@ -53,7 +65,7 @@ const TreeNode = defineComponent({
 
     function handleSwitcherClick (): void {
       const { tmNode } = props
-      if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
+      if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
           NTree.loadingKeysRef.value.add(tmNode.key)
         }
@@ -73,9 +85,36 @@ const TreeNode = defineComponent({
         NTree.handleSwitcherClick(tmNode)
       }
     }
-    function handleContentClick (e: MouseEvent): void {
+
+    const selectableRef = useMemo(
+      () =>
+        !props.tmNode.disabled &&
+        NTree.selectableRef.value &&
+        (NTree.internalTreeSelect
+          ? NTree.mergedCheckStrategyRef.value !== 'child' ||
+            (NTree.multipleRef.value && NTree.cascadeRef.value) ||
+            props.tmNode.isLeaf
+          : true)
+    )
+
+    function _handleClick (e: MouseEvent): void {
+      if (!selectableRef.value) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       NTree.handleSelect(props.tmNode)
+    }
+
+    function handleContentClick (e: MouseEvent): void {
+      if (blockLineRef.value) return
+      if (!disabledRef.value) _handleClick(e)
+      resolvedNodePropsRef.value?.onClick?.(e)
+    }
+
+    function handleLineClick (e: MouseEvent): void {
+      if (!blockLineRef.value) return
+      if (!disabledRef.value) {
+        _handleClick(e)
+      }
+      resolvedNodePropsRef.value?.onClick?.(e)
     }
 
     function handleCheck (checked: boolean): void {
@@ -157,9 +196,9 @@ const TreeNode = defineComponent({
         () => NTree.pendingNodeKeyRef.value === props.tmNode.key
       ),
       loading: useMemo(() => NTree.loadingKeysRef.value.has(props.tmNode.key)),
-      highlight: useMemo(() =>
-        NTree.highlightKeySetRef.value.has(props.tmNode.key)
-      ),
+      highlight: useMemo(() => {
+        return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
+      }),
       checked: useMemo(() =>
         NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
       ),
@@ -172,9 +211,7 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      disabled: computed(
-        () => NTree.disabledRef.value || props.tmNode.disabled
-      ),
+      disabled: disabledRef,
       checkable: computed(
         () =>
           NTree.checkableRef.value &&
@@ -183,16 +220,11 @@ const TreeNode = defineComponent({
             props.tmNode.isLeaf)
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
-      selectable: computed(
-        () =>
-          NTree.selectableRef.value &&
-          (NTree.mergedCheckStrategyRef.value === 'child'
-            ? props.tmNode.isLeaf
-            : true)
-      ),
+      selectable: selectableRef,
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
-      blockLine: NTree.blockLineRef,
+      blockLine: blockLineRef,
+      nodeProps: resolvedNodePropsRef,
       checkboxFocusable: NTree.internalCheckboxFocusableRef,
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
@@ -206,6 +238,7 @@ const TreeNode = defineComponent({
       handleDragOver,
       handleDragEnd,
       handleDragLeave,
+      handleLineClick,
       handleContentClick,
       handleSwitcherClick
     }
@@ -224,7 +257,8 @@ const TreeNode = defineComponent({
       indent,
       disabled,
       pending,
-      internalScrollable
+      internalScrollable,
+      nodeProps
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -244,6 +278,7 @@ const TreeNode = defineComponent({
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
+          {...(blockLine ? nodeProps : undefined)}
           class={[
             `${clsPrefix}-tree-node`,
             {
@@ -253,11 +288,12 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled,
               [`${clsPrefix}-tree-node--selectable`]: selectable
-            }
+            },
+            nodeProps?.class
           ]}
           data-key={dataKey}
           draggable={draggable && blockLine}
-          onClick={blockLine && !disabled ? this.handleContentClick : undefined}
+          onClick={this.handleLineClick}
           onDragstart={
             draggable && blockLine && !disabled
               ? this.handleDragStart
@@ -293,9 +329,8 @@ const TreeNode = defineComponent({
             clsPrefix={clsPrefix}
             checked={checked}
             selected={selected}
-            onClick={
-              blockLine || disabled ? undefined : this.handleContentClick
-            }
+            onClick={this.handleContentClick}
+            nodeProps={blockLine ? undefined : nodeProps}
             onDragstart={
               draggable && !blockLine && !disabled
                 ? this.handleDragStart

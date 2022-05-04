@@ -1,14 +1,12 @@
 import { h } from 'vue'
 import { CaretUpOutline, CaretDownOutline } from '@vicons/ionicons5'
-import { colors } from './theme-overrides-light'
-import { GRAY_COLOR_4 } from './vars'
 import type { DataTableRenderFilter, DataTableRenderSorter } from 'naive-ui'
 
 export const renderSorter: DataTableRenderSorter = ({ order }) => {
   const chevronStyle = {
     height: '16px',
     width: '16px',
-    marginBottom: '-4px',
+    marginBottom: '-5px',
     transition: 'fill .3s cubic-bezier(.4, 0, .2, 1)'
   }
   return h(
@@ -27,13 +25,19 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
         style: {
           ...chevronStyle,
           marginTop: '-4px',
-          color: order === 'ascend' ? colors.successColor : GRAY_COLOR_4
+          color:
+            order === 'ascend'
+              ? 'var(--n-th-icon-color-active)'
+              : 'var(--n-th-icon-color)'
         }
       }),
       h(CaretDownOutline, {
         style: {
           ...chevronStyle,
-          color: order === 'descend' ? colors.successColor : GRAY_COLOR_4
+          color:
+            order === 'descend'
+              ? 'var(--n-th-icon-color-active)'
+              : 'var(--n-th-icon-color)'
         }
       })
     ]
@@ -41,7 +45,8 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
 }
 
 export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
-  const fill = active || show ? colors.successColor : GRAY_COLOR_4
+  const fill =
+    active || show ? 'var(--n-th-icon-color-active)' : 'var(--n-th-icon-color)'
   return (
     <div
       style={{
@@ -59,6 +64,7 @@ export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
           fill,
           height: '20px',
           width: '20px',
+          marginBottom: '-2px',
           transition: 'fill .3s cubic-bezier(.4, 0, .2, 1)'
         }}
         viewBox="0 0 24 24"

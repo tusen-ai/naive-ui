@@ -8,22 +8,23 @@ import {
   CSSProperties
 } from 'vue'
 import { getPadding } from 'seemly'
-import { createKey, keysOf, render } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_internal'
 import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { notificationProviderInjectionKey } from './NotificationProvider'
+import { createKey, keysOf, render } from '../../_utils'
+import { NBaseIcon, NBaseClose } from '../../_internal'
+import { notificationProviderInjectionKey } from './context'
+import { useConfig, useThemeClass } from '../../_mixins'
 
-const iconMap = {
-  info: <InfoIcon />,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />,
-  default: null
+const iconRenderMap = {
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />,
+  default: () => null
 }
 
 export const notificationProps = {
@@ -38,8 +39,6 @@ export const notificationProps = {
     default: 'default'
   },
   avatar: Function as PropType<() => VNodeChild>,
-  // BUG
-  // Wired Case, can't be set to [String, Function] as PropType<string | (() => VNodeChild)>,
   title: [String, Function] as PropType<string | (() => VNodeChild)>,
   description: [String, Function] as PropType<string | (() => VNodeChild)>,
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
@@ -53,14 +52,78 @@ export const notificationProps = {
 
 export const notificationPropKeys = keysOf(notificationProps)
 
-export default defineComponent({
+export const Notification = defineComponent({
   name: 'Notification',
   props: notificationProps,
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedClsPrefixRef, mergedThemeRef } = inject(
-      notificationProviderInjectionKey
-    )!
+    const {
+      mergedClsPrefixRef,
+      mergedThemeRef,
+      props: providerProps
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(notificationProviderInjectionKey)!
+    const { inlineThemeDisabled } = useConfig()
+    const cssVarsRef = computed(() => {
+      const { type } = props
+      const {
+        self: {
+          color,
+          textColor,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          headerTextColor,
+          descriptionTextColor,
+          actionTextColor,
+          borderRadius,
+          headerFontWeight,
+          boxShadow,
+          lineHeight,
+          fontSize,
+          closeMargin,
+          closeSize,
+          width,
+          padding,
+          [createKey('iconColor', type)]: iconColor
+        },
+        common: { cubicBezierEaseOut, cubicBezierEaseIn, cubicBezierEaseInOut }
+      } = mergedThemeRef.value
+      const { left, right, top, bottom } = getPadding(padding)
+      return {
+        '--n-color': color,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-description-text-color': descriptionTextColor,
+        '--n-action-text-color': actionTextColor,
+        '--n-title-text-color': headerTextColor,
+        '--n-title-font-weight': headerFontWeight,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-bezier-ease-out': cubicBezierEaseOut,
+        '--n-bezier-ease-in': cubicBezierEaseIn,
+        '--n-border-radius': borderRadius,
+        '--n-box-shadow': boxShadow,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-line-height': lineHeight,
+        '--n-icon-color': iconColor,
+        '--n-close-margin': closeMargin,
+        '--n-close-size': closeSize,
+        '--n-width': width,
+        '--n-padding-left': left,
+        '--n-padding-right': right,
+        '--n-padding-top': top,
+        '--n-padding-bottom': bottom
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'notification',
+        computed(() => props.type[0]),
+        cssVarsRef,
+        providerProps
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       showAvatar: computed(() => {
@@ -69,71 +132,19 @@ export default defineComponent({
       handleCloseClick () {
         props.onClose()
       },
-      cssVars: computed(() => {
-        const { type } = props
-        const {
-          self: {
-            color,
-            textColor,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            headerTextColor,
-            descriptionTextColor,
-            actionTextColor,
-            borderRadius,
-            headerFontWeight,
-            boxShadow,
-            lineHeight,
-            fontSize,
-            closeMargin,
-            closeSize,
-            width,
-            padding,
-            [createKey('iconColor', type)]: iconColor
-          },
-          common: {
-            cubicBezierEaseOut,
-            cubicBezierEaseIn,
-            cubicBezierEaseInOut
-          }
-        } = mergedThemeRef.value
-        const { left, right, top, bottom } = getPadding(padding)
-        return {
-          '--color': color,
-          '--font-size': fontSize,
-          '--text-color': textColor,
-          '--description-text-color': descriptionTextColor,
-          '--action-text-color': actionTextColor,
-          '--title-text-color': headerTextColor,
-          '--title-font-weight': headerFontWeight,
-          '--bezier': cubicBezierEaseInOut,
-          '--bezier-ease-out': cubicBezierEaseOut,
-          '--bezier-ease-in': cubicBezierEaseIn,
-          '--border-radius': borderRadius,
-          '--box-shadow': boxShadow,
-          '--close-color': closeColor,
-          '--close-color-hover': closeColorHover,
-          '--close-color-pressed': closeColorPressed,
-          '--line-height': lineHeight,
-          '--icon-color': iconColor,
-          '--close-margin': closeMargin,
-          '--close-size': closeSize,
-          '--width': width,
-          '--padding-left': left,
-          '--padding-right': right,
-          '--padding-top': top,
-          '--padding-bottom': bottom
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedClsPrefix } = this
+    this.onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-notification`,
+          this.themeClass,
           {
             [`${mergedClsPrefix}-notification--closable`]: this.closable,
             [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar
@@ -147,7 +158,7 @@ export default defineComponent({
               render(this.avatar)
             ) : this.type !== 'default' ? (
               <NBaseIcon clsPrefix={mergedClsPrefix}>
-                {{ default: () => iconMap[this.type] }}
+                {{ default: () => iconRenderMap[this.type]() }}
               </NBaseIcon>
             ) : null}
           </div>

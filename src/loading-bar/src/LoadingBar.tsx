@@ -9,9 +9,9 @@ import {
   ref,
   nextTick
 } from 'vue'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'
-import { loadingBarProviderInjectionKey } from './LoadingBarProvider'
+import { loadingBarProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 function createClassName (
@@ -23,7 +23,8 @@ function createClassName (
 
 export default defineComponent({
   name: 'LoadingBar',
-  setup () {
+  setup (props) {
+    const { inlineThemeDisabled } = useConfig()
     const {
       props: providerProps,
       mergedClsPrefixRef
@@ -110,12 +111,25 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'LoadingBar',
-      'LoadingBar',
+      '-loading-bar',
       style,
       loadingBarLight,
       providerProps,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: { height, colorError, colorLoading }
+      } = themeRef.value
+      return {
+        '--n-height': height,
+        '--n-color-loading': colorLoading,
+        '--n-color-error': colorError
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('loading-bar', undefined, cssVarsRef, providerProps)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       loadingBarRef,
@@ -130,16 +144,9 @@ export default defineComponent({
       handleAfterEnter,
       handleAfterLeave,
       mergedLoadingBarStyle,
-      cssVars: computed(() => {
-        const {
-          self: { height, colorError, colorLoading }
-        } = themeRef.value
-        return {
-          '--height': height,
-          '--color-loading': colorLoading,
-          '--color-error': colorError
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -151,6 +158,7 @@ export default defineComponent({
         appear
         onEnter={this.handleEnter}
         onAfterEnter={this.handleAfterEnter}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onAfterLeave={this.handleAfterLeave}
         css={!this.transitionDisabled}
       >
@@ -160,12 +168,18 @@ export default defineComponent({
           it.
         */}
         {{
-          default: () =>
-            withDirectives(
-              <div class={`${mergedClsPrefix}-loading-bar-container`}>
+          default: () => {
+            this.onRender?.()
+            return withDirectives(
+              <div
+                class={[
+                  `${mergedClsPrefix}-loading-bar-container`,
+                  this.themeClass
+                ]}
+              >
                 <div
                   ref="loadingBarRef"
-                  class={`${mergedClsPrefix}-loading-bar`}
+                  class={[`${mergedClsPrefix}-loading-bar`]}
                   style={[
                     this.cssVars as any,
                     this.mergedLoadingBarStyle as any
@@ -174,6 +188,7 @@ export default defineComponent({
               </div>,
               [[vShow, this.loading || (!this.loading && this.entering)]]
             )
+          }
         }}
       </Transition>
     )

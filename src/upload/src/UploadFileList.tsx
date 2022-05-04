@@ -18,13 +18,16 @@ export default defineComponent({
     }
 
     const {
+      abstractRef,
       mergedClsPrefixRef,
       listTypeRef,
       mergedFileListRef,
       fileListStyleRef,
       cssVarsRef,
+      themeClassRef,
       maxReachedRef,
-      showTriggerRef
+      showTriggerRef,
+      imageGroupPropsRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -43,7 +46,9 @@ export default defineComponent({
 
     const renderUploadFileList = (): VNode =>
       isImageCardTypeRef.value ? (
-        <NImageGroup>{{ default: renderFileList }}</NImageGroup>
+        <NImageGroup {...imageGroupPropsRef.value}>
+          {{ default: renderFileList }}
+        </NImageGroup>
       ) : (
         <NFadeInExpandTransition group>
           {{
@@ -54,14 +59,19 @@ export default defineComponent({
 
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const { value: abstract } = abstractRef
       return (
         <div
           class={[
             `${mergedClsPrefix}-upload-file-list`,
             isImageCardTypeRef.value &&
-              `${mergedClsPrefix}-upload-file-list--grid`
+              `${mergedClsPrefix}-upload-file-list--grid`,
+            abstract ? themeClassRef?.value : undefined
           ]}
-          style={[cssVarsRef.value, fileListStyleRef.value as CSSProperties]}
+          style={[
+            abstract && cssVarsRef ? cssVarsRef.value : '',
+            fileListStyleRef.value as CSSProperties
+          ]}
         >
           {renderUploadFileList()}
           {showTriggerRef.value &&

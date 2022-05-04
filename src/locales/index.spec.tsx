@@ -7,20 +7,38 @@ import {
   enUS,
   ukUA,
   jaJP,
+  koKR,
   idID,
   deDE,
   nbNO,
   frFR,
+  esAR,
+  itIT,
+  skSK,
+  enGB,
+  plPL,
+  ptBR,
+  thTH,
+  eo,
   dateEnUS,
   dateZhCN,
   dateZhTW,
   dateRuRU,
   dateUkUA,
   dateJaJP,
+  dateKoKR,
   dateIdID,
   dateDeDE,
   dateNbNO,
   dateFrFR,
+  dateEsAR,
+  dateItIT,
+  dateSkSK,
+  dateEnGB,
+  datePlPL,
+  datePtBR,
+  dateThTH,
+  dateEo,
   NConfigProvider,
   NDateLocale,
   NLocale,
@@ -151,6 +169,15 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
+          dateLocale: dateKoKR,
+          locale: koKR,
+          onMounted: (date: string) => expect(date).toMatchSnapshot()
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
           dateLocale: dateIdID,
           locale: idID,
           onMounted: (date: string) => expect(date).toMatchSnapshot()
@@ -180,6 +207,70 @@ describe('locale', () => {
         props: {
           dateLocale: dateFrFR,
           locale: frFR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateEsAR,
+          locale: esAR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateItIT,
+          locale: itIT
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateEnGB,
+          locale: enGB
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateSkSK,
+          locale: skSK
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: datePlPL,
+          locale: plPL
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: datePtBR,
+          locale: ptBR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateThTH,
+          locale: thTH
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateEo,
+          locale: eo
         }
       }).html()
     ).toMatchSnapshot()

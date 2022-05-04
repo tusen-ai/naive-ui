@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, defineComponent, computed, CSSProperties, PropType } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { h, defineComponent, computed, PropType } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { pageHeaderLight } from '../styles/light'
 import type { PageHeaderTheme } from '../styles/light'
@@ -18,63 +18,66 @@ const pageHeaderProps = {
   onBack: Function as PropType<() => void>
 }
 
-export type PageHeaderPorps = ExtractPublicPropTypes<typeof pageHeaderProps>
+export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
 export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
-      'PageHeader',
+      '-page-header',
       style,
       pageHeaderLight,
       props,
       mergedClsPrefixRef
     )
-    const rtlEnabledRef = useRtl(
-      'PageHeader',
-      NConfigProvider?.mergedRtlRef,
-      mergedClsPrefixRef
-    )
-
+    const rtlEnabledRef = useRtl('PageHeader', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          titleTextColor,
+          subtitleTextColor,
+          backColor,
+          fontSize,
+          titleFontSize,
+          backSize,
+          titleFontWeight,
+          backColorHover,
+          backColorPressed
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-font-size': fontSize,
+        '--n-back-size': backSize,
+        '--n-subtitle-text-color': subtitleTextColor,
+        '--n-back-color': backColor,
+        '--n-back-color-hover': backColorHover,
+        '--n-back-color-pressed': backColorPressed,
+        '--n-bezier': cubicBezierEaseInOut
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('page-header', undefined, cssVarsRef, props)
+      : undefined
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            titleTextColor,
-            subtitleTextColor,
-            backColor,
-            fontSize,
-            titleFontSize,
-            backSize,
-            titleFontWeight,
-            backColorHover,
-            backColorPressed
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--title-text-color': titleTextColor,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--font-size': fontSize,
-          '--back-size': backSize,
-          '--subtitle-text-color': subtitleTextColor,
-          '--back-color': backColor,
-          '--back-color-hover': backColorHover,
-          '--back-color-pressed': backColorPressed,
-          '--bezier': cubicBezierEaseInOut
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots } =
       this
+    this.onRender?.()
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -82,7 +85,8 @@ export default defineComponent({
       default: defaultSlot,
       header: headerSlot,
       avatar: avatarSlot,
-      footer: footerSlot
+      footer: footerSlot,
+      back: backSlot
     } = $slots
     const showBack = onBack
     const showTitle = title || titleSlot
@@ -90,9 +94,10 @@ export default defineComponent({
     const showExtra = extra || extraSlot
     return (
       <div
-        style={cssVars as CSSProperties}
+        style={cssVars as any}
         class={[
           `${mergedClsPrefix}-page-header-wrapper`,
+          this.themeClass,
           this.rtlEnabled && `${mergedClsPrefix}-page-header-wrapper--rtl`
         ]}
       >
@@ -109,11 +114,15 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-page-header__back`}
                   onClick={onBack}
                 >
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{
-                      default: () => <ArrowBackIcon />
-                    }}
-                  </NBaseIcon>
+                  {backSlot ? (
+                    backSlot()
+                  ) : (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{
+                        default: () => <ArrowBackIcon />
+                      }}
+                    </NBaseIcon>
+                  )}
                 </div>
               ) : null}
               {avatarSlot ? (

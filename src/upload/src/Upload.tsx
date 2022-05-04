@@ -9,23 +9,19 @@ import {
   CSSProperties,
   Fragment,
   Teleport,
-  nextTick
+  nextTick,
+  InputHTMLAttributes
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useFormItem } from '../../_mixins'
+import { useConfig, useTheme, useFormItem, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  ExtractPublicPropTypes,
-  warn,
-  MaybeArray,
-  call,
-  throwError
-} from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { warn, call, throwError } from '../../_utils'
+import type { ImageGroupProps } from '../../image'
 import { uploadLight, UploadTheme } from '../styles'
 import { uploadDraggerKey } from './UploadDragger'
-import style from './styles/index.cssr'
-import {
+import type {
   XhrHandlers,
   FileInfo,
   DoChange,
@@ -36,17 +32,20 @@ import {
   OnRemove,
   OnDownload,
   OnChange,
-  uploadInjectionKey,
   OnUpdateFileList,
   OnBeforeUpload,
-  listType,
+  ListType,
   OnPreview,
   CreateThumbnailUrl,
-  CustomRequest
+  CustomRequest,
+  OnError
 } from './interface'
+import { uploadInjectionKey } from './interface'
 import { createImageDataUrl } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
+import style from './styles/index.cssr'
+
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
@@ -58,15 +57,17 @@ function createXhrHandlers (
   const { doChange, XhrMap } = inst
   let percentage = 0
   function handleXHRError (e: ProgressEvent<EventTarget>): void {
-    const fileAfterChange: FileInfo = Object.assign({}, file, {
+    let fileAfterChange: FileInfo = Object.assign({}, file, {
       status: 'error',
       percentage
     })
     XhrMap.delete(file.id)
+    fileAfterChange =
+      inst.onError?.({ file: fileAfterChange, event: e }) || fileAfterChange
     doChange(fileAfterChange, e)
   }
   function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
-    if (XHR.status !== 200) {
+    if (XHR.status < 200 || XHR.status >= 300) {
       handleXHRError(e)
       return
     }
@@ -145,10 +146,12 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onError () {
-      const fileAfterChange: FileInfo = Object.assign({}, file, {
+      let fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
         percentage
       })
+      fileAfterChange =
+        inst.onError?.({ file: fileAfterChange }) || fileAfterChange
       doChange(fileAfterChange)
     }
   })
@@ -205,8 +208,8 @@ function appendData (
 
 function submitImpl (
   inst: UploadInternalInst,
+  fieldName: string,
   file: FileInfo,
-  formData: FormData,
   {
     method,
     action,
@@ -224,7 +227,9 @@ function submitImpl (
   const request = new XMLHttpRequest()
   inst.XhrMap.set(file.id, request)
   request.withCredentials = withCredentials
+  const formData = new FormData()
   appendData(formData, data, file)
+  formData.append(fieldName, file.file as File)
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -270,6 +275,7 @@ const uploadProps = {
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
+  onError: Function as PropType<OnError>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
   /** currently of no usage */
   onDownload: Function as PropType<OnDownload>,
@@ -305,7 +311,7 @@ const uploadProps = {
     default: true
   },
   listType: {
-    type: String as PropType<listType>,
+    type: String as PropType<ListType>,
     default: 'text'
   },
   onPreview: Function as PropType<OnPreview>,
@@ -315,7 +321,9 @@ const uploadProps = {
   showTrigger: {
     type: Boolean,
     default: true
-  }
+  },
+  imageGroupProps: Object as PropType<ImageGroupProps>,
+  inputProps: Object as PropType<InputHTMLAttributes>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -330,10 +338,10 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Upload',
-      'Upload',
+      '-upload',
       style,
       uploadLight,
       props,
@@ -446,14 +454,13 @@ export default defineComponent({
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
-          const formData = new FormData()
-          formData.append(fieldName, file.file as File)
           if (props.customRequest) {
             customSubmitImpl({
               inst: {
                 doChange,
                 XhrMap,
-                onFinish: props.onFinish
+                onFinish: props.onFinish,
+                onError: props.onError
               },
               file,
               action,
@@ -467,10 +474,11 @@ export default defineComponent({
               {
                 doChange,
                 XhrMap,
-                onFinish: props.onFinish
+                onFinish: props.onFinish,
+                onError: props.onError
               },
+              fieldName,
               file,
-              formData,
               {
                 method,
                 action,
@@ -546,25 +554,27 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--border-radius': borderRadius,
-        '--dragger-border': draggerBorder,
-        '--dragger-border-hover': draggerBorderHover,
-        '--dragger-color': draggerColor,
-        '--font-size': fontSize,
-        '--item-color-hover': itemColorHover,
-        '--item-color-hover-error': itemColorHoverError,
-        '--item-disabled-opacity': itemDisabledOpacity,
-        '--item-icon-color': itemIconColor,
-        '--item-text-color': itemTextColor,
-        '--item-text-color-error': itemTextColorError,
-        '--item-text-color-success': itemTextColorSuccess,
-        '--line-height': lineHeight,
-        '--item-border-image-card-error': itemBorderImageCardError,
-        '--item-border-image-card': itemBorderImageCard
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-dragger-border': draggerBorder,
+        '--n-dragger-border-hover': draggerBorderHover,
+        '--n-dragger-color': draggerColor,
+        '--n-font-size': fontSize,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-color-hover-error': itemColorHoverError,
+        '--n-item-disabled-opacity': itemDisabledOpacity,
+        '--n-item-icon-color': itemIconColor,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-error': itemTextColorError,
+        '--n-item-text-color-success': itemTextColorSuccess,
+        '--n-line-height': lineHeight,
+        '--n-item-border-image-card-error': itemBorderImageCardError,
+        '--n-item-border-image-card': itemBorderImageCard
       } as any
     })
-
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('upload', undefined, cssVarsRef, props)
+      : undefined
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -590,11 +600,17 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
-      cssVarsRef,
-      showTriggerRef: toRef(props, 'showTrigger')
+      cssVarsRef: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClassRef: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      showTriggerRef: toRef(props, 'showTrigger'),
+      imageGroupPropsRef: toRef(props, 'imageGroupProps')
     })
 
     const exposedMethods: UploadInst = {
+      clear: () => {
+        uncontrolledFileListRef.value = []
+      },
       submit,
       openOpenFileDialog
     }
@@ -606,13 +622,14 @@ export default defineComponent({
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleFileInputChange,
-      cssVars: cssVarsRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix, $slots } = this
-
+    const { draggerInsideRef, mergedClsPrefix, $slots, onRender } = this
     if ($slots.default && !this.abstract) {
       const firstChild = $slots.default()[0]
       if ((firstChild as any)?.type?.[uploadDraggerKey]) {
@@ -622,6 +639,7 @@ export default defineComponent({
 
     const inputNode = (
       <input
+        {...this.inputProps}
         ref="inputElRef"
         type="file"
         class={`${mergedClsPrefix}-upload-file-input`}
@@ -631,19 +649,25 @@ export default defineComponent({
       />
     )
 
-    return this.abstract ? (
-      <>
-        {$slots.default?.()}
-        <Teleport to="body">{inputNode}</Teleport>
-      </>
-    ) : (
+    if (this.abstract) {
+      return (
+        <>
+          {$slots.default?.()}
+          <Teleport to="body">{inputNode}</Teleport>
+        </>
+      )
+    }
+
+    onRender?.()
+    return (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
-          this.dragOver && `${mergedClsPrefix}-upload--drag-over`
+          this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
+          this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars as any}
       >
         {inputNode}
         {this.showTrigger && this.listType !== 'image-card' && (

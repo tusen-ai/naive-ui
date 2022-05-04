@@ -5,14 +5,14 @@ import {
   inject,
   ref,
   toRef,
-  renderSlot,
   PropType,
   CSSProperties,
   watchEffect
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { createId } from 'seemly'
-import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { on } from 'evtd'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
 import {
@@ -27,9 +27,13 @@ import type { CheckboxTheme } from '../styles'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import type { OnUpdateChecked, OnUpdateCheckedImpl } from './interface'
+import type {
+  OnUpdateChecked,
+  OnUpdateCheckedImpl,
+  CheckboxInst
+} from './interface'
 import style from './styles/index.cssr'
-import { on } from 'evtd'
+import useRtl from '../../_mixins/use-rtl'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
@@ -89,7 +93,9 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const selfRef = ref<HTMLDivElement | null>(null)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
         const { size } = props
@@ -160,7 +166,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'Checkbox',
-      'Checkbox',
+      '-checkbox',
       style,
       checkboxLight,
       props,
@@ -211,7 +217,83 @@ export default defineComponent({
           e.preventDefault()
       }
     }
-    return Object.assign(formItem, {
+    const exposedMethods: CheckboxInst = {
+      focus: () => {
+        selfRef.value?.focus()
+      },
+      blur: () => {
+        selfRef.value?.blur()
+      }
+    }
+    const rtlEnabledRef = useRtl('Checkbox', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const { value: mergedSize } = mergedSizeRef
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderRadius,
+          color,
+          colorChecked,
+          colorDisabled,
+          colorTableHeader,
+          colorTableHeaderModal,
+          colorTableHeaderPopover,
+          checkMarkColor,
+          checkMarkColorDisabled,
+          border,
+          borderFocus,
+          borderDisabled,
+          borderChecked,
+          boxShadowFocus,
+          textColor,
+          textColorDisabled,
+          checkMarkColorDisabledChecked,
+          colorDisabledChecked,
+          borderDisabledChecked,
+          labelPadding,
+          labelLineHeight,
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('size', mergedSize)]: size
+        }
+      } = themeRef.value
+      return {
+        '--n-label-line-height': labelLineHeight,
+        '--n-size': size,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-border': border,
+        '--n-border-checked': borderChecked,
+        '--n-border-focus': borderFocus,
+        '--n-border-disabled': borderDisabled,
+        '--n-border-disabled-checked': borderDisabledChecked,
+        '--n-box-shadow-focus': boxShadowFocus,
+        '--n-color': color,
+        '--n-color-checked': colorChecked,
+        '--n-color-table': colorTableHeader,
+        '--n-color-table-modal': colorTableHeaderModal,
+        '--n-color-table-popover': colorTableHeaderPopover,
+        '--n-color-disabled': colorDisabled,
+        '--n-color-disabled-checked': colorDisabledChecked,
+        '--n-text-color': textColor,
+        '--n-text-color-disabled': textColorDisabled,
+        '--n-check-mark-color': checkMarkColor,
+        '--n-check-mark-color-disabled': checkMarkColorDisabled,
+        '--n-check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
+        '--n-font-size': fontSize,
+        '--n-label-padding': labelPadding
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'checkbox',
+        computed(() => mergedSizeRef.value[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
+    return Object.assign(formItem, exposedMethods, {
+      rtlEnabled: rtlEnabledRef,
+      selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
@@ -220,61 +302,9 @@ export default defineComponent({
       handleClick,
       handleKeyUp,
       handleKeyDown,
-      cssVars: computed(() => {
-        const { value: mergedSize } = mergedSizeRef
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderRadius,
-            color,
-            colorChecked,
-            colorDisabled,
-            colorTableHeader,
-            colorTableHeaderModal,
-            colorTableHeaderPopover,
-            checkMarkColor,
-            checkMarkColorDisabled,
-            border,
-            borderFocus,
-            borderDisabled,
-            borderChecked,
-            boxShadowFocus,
-            textColor,
-            textColorDisabled,
-            checkMarkColorDisabledChecked,
-            colorDisabledChecked,
-            borderDisabledChecked,
-            labelPadding,
-            [createKey('fontSize', mergedSize)]: fontSize,
-            [createKey('size', mergedSize)]: size
-          }
-        } = themeRef.value
-        return {
-          '--size': size,
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--border': border,
-          '--border-checked': borderChecked,
-          '--border-focus': borderFocus,
-          '--border-disabled': borderDisabled,
-          '--border-disabled-checked': borderDisabledChecked,
-          '--box-shadow-focus': boxShadowFocus,
-          '--color': color,
-          '--color-checked': colorChecked,
-          '--color-table-header': colorTableHeader,
-          '--color-table-header-modal': colorTableHeaderModal,
-          '--color-table-header-popover': colorTableHeaderPopover,
-          '--color-disabled': colorDisabled,
-          '--color-disabled-checked': colorDisabledChecked,
-          '--text-color': textColor,
-          '--text-color-disabled': textColorDisabled,
-          '--check-mark-color': checkMarkColor,
-          '--check-mark-color-disabled': checkMarkColorDisabled,
-          '--check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
-          '--font-size': fontSize,
-          '--label-padding': labelPadding
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     })
   },
   render () {
@@ -293,14 +323,18 @@ export default defineComponent({
       handleKeyDown,
       handleClick
     } = this
+    this.onRender?.()
     return (
       <div
+        ref="selfRef"
         class={[
           `${mergedClsPrefix}-checkbox`,
+          this.themeClass,
+          this.rtlEnabled && `${mergedClsPrefix}-checkbox--rtl`,
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateInsideTable && `${mergedClsPrefix}-checkbox--table-header`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
@@ -323,29 +357,32 @@ export default defineComponent({
           )
         }}
       >
-        <div class={`${mergedClsPrefix}-checkbox-box`}>
-          <NIconSwitchTransition>
-            {{
-              default: () =>
-                this.indeterminate ? (
-                  <div
-                    key="indeterminate"
-                    class={`${mergedClsPrefix}-checkbox-icon`}
-                  >
-                    {LineMark}
-                  </div>
-                ) : (
-                  <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                    {CheckMark}
-                  </div>
-                )
-            }}
-          </NIconSwitchTransition>
-          <div class={`${mergedClsPrefix}-checkbox-box__border`} />
+        <div class={`${mergedClsPrefix}-checkbox-box-wrapper`}>
+          &nbsp;
+          <div class={`${mergedClsPrefix}-checkbox-box`}>
+            <NIconSwitchTransition>
+              {{
+                default: () =>
+                  this.indeterminate ? (
+                    <div
+                      key="indeterminate"
+                      class={`${mergedClsPrefix}-checkbox-icon`}
+                    >
+                      {LineMark}
+                    </div>
+                  ) : (
+                    <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
+                      {CheckMark}
+                    </div>
+                  )
+              }}
+            </NIconSwitchTransition>
+            <div class={`${mergedClsPrefix}-checkbox-box__border`} />
+          </div>
         </div>
         {label !== null || $slots.default ? (
           <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
-            {renderSlot($slots, 'default', undefined, () => [label])}
+            {$slots.default ? $slots.default() : label}
           </span>
         ) : null}
       </div>

@@ -1,14 +1,16 @@
-import { InjectionKey, Ref, Slots } from 'vue'
+import { Ref, Slots } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
-import {
+import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled
 } from '../../time-picker/src/interface'
-import { MergedTheme } from '../../_mixins'
-import { DatePickerTheme } from '../styles/light'
+import type { TimePickerProps } from '../../time-picker/src/TimePicker'
+import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
+import type { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -18,21 +20,49 @@ export type Value = number | [number, number]
 
 export type DefaultTime = string | [string | undefined, string | undefined]
 
+export type FormattedValue = string | [string, string]
+
 export type Shortcuts =
   | Record<string, number | (() => number)>
   | Record<string, [number, number] | (() => [number, number])>
 
 export type OnUpdateValue = (
-  value: number & (number | null) & [number, number] & ([number, number] | null)
+  value: number &
+    (number | null) &
+  [number, number] &
+    ([number, number] | null),
+  formattedValue: string &
+    (string | null) &
+  [string, string] &
+    ([string, string] | null)
 ) => void
 
-export type OnUpdateValueImpl = (value: Value | null) => void
+export type OnUpdateFormattedValue = (
+  value: string &
+    (string | null) &
+  [string, string] &
+    ([string, string] | null),
+  timestampValue: number &
+    (number | null) &
+  [number, number] &
+    ([number, number] | null)
+) => void
+
+export type OnUpdateFormattedValueImpl = (
+  value: string | [string, string] | null,
+  timestampValue: number | [number, number] | null
+) => void
+
+export type OnUpdateValueImpl = (
+  value: Value | null,
+  formattedValue: string | [string, string] | null
+) => void
 
 export type OnPanelUpdateValue = (
   value: number &
-  (number | null) &
+    (number | null) &
   [number, number] &
-  ([number, number] | null),
+    ([number, number] | null),
   doUpdate: boolean
 ) => void
 
@@ -61,6 +91,9 @@ export type DatePickerInjection = {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
+  timePickerPropsRef: Ref<
+  undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
+  >
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
@@ -74,8 +107,8 @@ export type DatePickerInjection = {
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
-export const datePickerInjectionKey: InjectionKey<DatePickerInjection> =
-  Symbol('datePicker')
+export const datePickerInjectionKey =
+  createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 export type IsSingleDateDisabled = (date: number) => boolean
@@ -98,3 +131,8 @@ export type IsRangeTimeDisabled = (
   position: 'start' | 'end',
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
+
+export interface DatePickerInst {
+  focus: () => void
+  blur: () => void
+}

@@ -2,7 +2,7 @@
 
 A kind of good placebo for anxiety.
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert title="Prerequisite" type="warning">
   If you want use loading bar, you need to wrap the component where you call related methods inside <n-text code>n-loading-bar-provider</n-text> and inject <n-text code>loadingBar</n-text>.
 </n-alert>
@@ -37,7 +37,7 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API
@@ -48,7 +48,7 @@ basic
 | --- | --- | --- | --- |
 | loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |
 
-### `loadingBar` Injection Methods
+### loadingBar Injection Methods
 
 | Name | Type | Description |
 | --- | --- | --- |

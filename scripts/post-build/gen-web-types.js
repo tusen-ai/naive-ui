@@ -7,7 +7,7 @@ exports.genWebTypes = function genWebTypes () {
   const components = require('../../lib/components')
   const { default: version } = require('../../lib/version')
 
-  const tags = []
+  const elements = []
 
   const scaffold = {
     $schema:
@@ -18,9 +18,9 @@ exports.genWebTypes = function genWebTypes () {
     contributions: {
       html: {
         // we need to fill tags
-        tags,
+        elements,
         attributes: [],
-        'types-syntax': 'typescript'
+        'js-types-syntax': 'typescript'
       }
     }
   }
@@ -31,7 +31,9 @@ exports.genWebTypes = function genWebTypes () {
     if (exportName[0] !== 'N') return
     if (exportName.startsWith('Nx')) return
     const { props } = component
-    const name = kebabCase(exportName)
+    const name = /^NH\d$/.test(exportName)
+      ? exportName.replace('NH', 'n-h')
+      : kebabCase(exportName)
     const slots = []
     const attributes = []
     const events = []
@@ -44,6 +46,13 @@ exports.genWebTypes = function genWebTypes () {
           events.push({
             name: kebabCase(propName.slice(2)),
             description: '-'
+          })
+        } else if (prop === null) {
+          attributes.push({
+            name: kebabCase(propName),
+            default: '-',
+            description: '-',
+            kind: 'expression'
           })
         } else {
           const attribute = {
@@ -62,11 +71,11 @@ exports.genWebTypes = function genWebTypes () {
           attributes.push(attribute)
         }
       })
-    tags.push({
+    elements.push({
       name,
       slots,
       attributes,
-      events
+      'js/events': events
     })
   })
 

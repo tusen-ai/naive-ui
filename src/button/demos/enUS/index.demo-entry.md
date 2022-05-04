@@ -5,23 +5,24 @@ Button is used to trigger some actions.
 ## Demos
 
 ```demo
-basic
-secondary
-tertiary
-quaternary
-dashed
-size
-text
-tag
-disabled
-icon
-events
-shape
-ghost
-loading
-color
-group
-icon-button
+basic.vue
+secondary.vue
+tertiary.vue
+quaternary.vue
+dashed.vue
+size.vue
+text.vue
+tag.vue
+disabled.vue
+icon.vue
+events.vue
+shape.vue
+ghost.vue
+loading.vue
+color.vue
+group.vue
+icon-button.vue
+popover.vue
 ```
 
 ## API
@@ -37,6 +38,7 @@ icon-button
 | color | `string` | `undefined` | Button color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 | dashed | `boolean` | `false` | Whether the button's border is a dashed line. |
 | disabled | `boolean` | `false` | Whether the button is disabled. |
+| focusable | `boolean` | `true` | Whether the button is focusable. |
 | ghost | `boolean` | `false` | Whether the button is ghost. |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |
@@ -49,7 +51,7 @@ icon-button
 | tertiary | `boolean` | `false` | Whether the button is tertiary button. |
 | text | `boolean` | `false` | Whether to display as a text button. |
 | text-color | `string` | `undefined` | Button text color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
-| type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |
+| type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |
 | tag | `string` | `'button'` | What tag need the button be rendered as. |
 
 ### ButtonGroup Props

@@ -2,17 +2,17 @@
 
 <!--single-column-->
 
-If you only want to render some basic table, use it. If you want to render structured data, see [Data Table](data-table).
+If you only want to render some basic tables, use it. If you want to render structured data, see [Data Table](data-table).
 
 ## Demos
 
 ```demo
-basic
-bordered
-size
-single-column
-single-line
-striped
+basic.vue
+bordered.vue
+size.vue
+single-column.vue
+single-line.vue
+striped.vue
 ```
 
 ## Components
@@ -27,7 +27,7 @@ You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`. At most 
 | --- | --- | --- | --- |
 | bottom-bordered | `boolean` | `true` | The bottom border of the table, this prop is invalid when `bordered` is `true`. |
 | bordered | `boolean` | `true` | Whether to show table border. |
-| single-column | `boolean` | `false` | Whether to display as a column (when `true`, each column has `border-right`). |
-| single-line | `boolean` | `true` | Whether to display as a line (when `true`, each row has `border-bottom`). |
+| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
+| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |

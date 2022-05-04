@@ -45,7 +45,7 @@ describe('n-tabs', () => {
     })
   })
 
-  it('should show AddIcon with `addable` prop', async () => {
+  it('should show AddIcon with `addable` `on-add` prop', async () => {
     const onAdd = jest.fn()
     const wrapper = mount(NTabs, {
       props: {
@@ -78,6 +78,27 @@ describe('n-tabs', () => {
     expect(wrapper.find('.n-tabs-wrapper').attributes('style')).toContain(
       'justify-content: space-evenly;'
     )
+  })
+
+  it('should work with `closable` prop', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        type: 'card',
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-base-close').exists()).toBe(false)
+
+    await wrapper.setProps({ closable: true })
+    expect(wrapper.find('.n-base-close').exists()).toBe(true)
   })
 
   it('should work with `size` prop', async () => {
@@ -258,5 +279,78 @@ describe('n-tabs', () => {
     })
 
     expect(wrapper.find('.n-tabs-tab').attributes('style')).toBe('color: red;')
+  })
+
+  it('should work with `type` prop', () => {
+    ;(['bar', 'line', 'card', 'segment'] as const).forEach((type) => {
+      const wrapper = mount(NTabs, {
+        props: {
+          type
+        },
+        slots: {
+          default: () =>
+            h(
+              NTabPane,
+              {
+                tab: 'Oasis',
+                name: 'oasis'
+              },
+              'Wonderwall'
+            )
+        }
+      })
+
+      expect(wrapper.find('.n-tabs').classes()).toContain(
+        `n-tabs--${type}-type`
+      )
+      wrapper.unmount()
+    })
+  })
+
+  it('should work with `on-close` prop', async () => {
+    const onClose = jest.fn()
+    const wrapper = mount(NTabs, {
+      props: {
+        type: 'card',
+        defaultValue: '1',
+        closable: true,
+        onClose
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+
+    const addIcon = wrapper.find('.n-base-close')
+    await addIcon.trigger('click')
+    expect(onClose).toHaveBeenCalled()
+  })
+
+  it('should work with `prefix` `suffix` slots', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ],
+        prefix: () => 'test-prefix',
+        suffix: () => 'test-suffix'
+      }
+    })
+
+    expect(wrapper.find('.n-tabs-nav__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-tabs-nav__prefix').text()).toBe('test-prefix')
+    expect(wrapper.find('.n-tabs-nav__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
   })
 })

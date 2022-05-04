@@ -5,9 +5,11 @@
     },
     "strict": true,
     "strictNullChecks": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
     "module": "ES6",
     "moduleResolution": "Node",
     "declaration": true,
@@ -15,9 +17,6 @@
     "composite": true,
     "target": "ES6",
     "esModuleInterop": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ]
+    "lib": ["ESNext", "DOM"]
   }
 }

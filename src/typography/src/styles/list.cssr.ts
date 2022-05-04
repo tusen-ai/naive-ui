@@ -1,11 +1,11 @@
 import { c, cB, cM } from '../../../_utils/cssr'
 
 const liStyle = c('li', {
-  transition: 'color .3s var(--bezier)',
-  lineHeight: 'var(--line-height)',
-  margin: 'var(--li-margin)',
+  transition: 'color .3s var(--n-bezier)',
+  lineHeight: 'var(--n-line-height)',
+  margin: 'var(--n-li-margin)',
   marginBottom: 0,
-  color: 'var(--text-color)'
+  color: 'var(--n-text-color)'
 })
 
 const childStyle = [
@@ -18,17 +18,17 @@ const childStyle = [
 ]
 
 // vars:
-// --bezier
-// --font-size
-// --line-height
-// --text-color
-// --li-margin
-// --ol-padding
-// --ul-padding
+// --n-bezier
+// --n-font-size
+// --n-line-height
+// --n-text-color
+// --n-li-margin
+// --n-ol-padding
+// --n-ul-padding
 export default c([
   cB('ol', {
-    fontSize: 'var(--font-size)',
-    padding: 'var(--ol-padding)'
+    fontSize: 'var(--n-font-size)',
+    padding: 'var(--n-ol-padding)'
   }, [
     cM('align-text', {
       paddingLeft: 0
@@ -37,8 +37,8 @@ export default c([
     childStyle
   ]),
   cB('ul', {
-    fontSize: 'var(--font-size)',
-    padding: 'var(--ul-padding)'
+    fontSize: 'var(--n-font-size)',
+    padding: 'var(--n-ul-padding)'
   }, [
     cM('align-text', {
       paddingLeft: 0

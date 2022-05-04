@@ -179,8 +179,7 @@ export function getRelativePosition (
         style.lineHeight = computed.height
       }
     } else {
-      // @ts-expect-error
-      style[prop] = computed[prop]
+      style[prop as any] = computed[prop]
     }
   })
 

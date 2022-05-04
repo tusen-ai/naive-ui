@@ -100,6 +100,16 @@ const zhTW: NLocale = {
     import: '導入',
     export: '匯出',
     restore: '恢復默認'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: '上一张（←）',
+    tipNext: '下一张（→）',
+    tipCounterclockwise: '向左旋转',
+    tipClockwise: '向右旋转',
+    tipZoomOut: '缩小',
+    tipZoomIn: '放大',
+    tipClose: '关闭（Esc）'
   }
 }
 

@@ -8,7 +8,11 @@ const {
 } = require('./convert-md-to-demo')
 
 function getPartsOfDemo (text) {
-  const template = text.match(/<template>([\s\S]*?)<\/template>/)[1]
+  // slot template
+  const firstIndex = text.indexOf('<template>')
+  let template = text.slice(firstIndex + 10)
+  const lastIndex = template.lastIndexOf('</template>')
+  template = template.slice(0, lastIndex)
   const script = text.match(/<script.*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText = text
@@ -37,11 +41,15 @@ function getPartsOfDemo (text) {
   }
 }
 
-function convertVue2Demo (content, { resourcePath, relativeUrl }) {
+function convertVue2Demo (content, { resourcePath, relativeUrl, isVue = true }) {
   const parts = getPartsOfDemo(content)
-  const mergedParts = mergeParts({ parts, isVue: true })
+  const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
-  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl)
+  const vueComponent = genVueComponent(
+    mergedParts,
+    fileName + '.vue',
+    relativeUrl
+  )
   return vueComponent
 }
 

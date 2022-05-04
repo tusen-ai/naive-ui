@@ -1,30 +1,23 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  CSSProperties,
-  renderSlot,
-  inject,
-  VNodeChild
-} from 'vue'
+import { h, defineComponent, computed, PropType, inject, VNodeChild } from 'vue'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { EmptyIcon } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes } from '../../_utils'
+import { createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
-import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 
 const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
-  description: {
-    type: String,
-    default: undefined
-  },
+  description: String,
   showDescription: {
+    type: Boolean,
+    default: true
+  },
+  showIcon: {
     type: Boolean,
     default: true
   },
@@ -41,10 +34,10 @@ export default defineComponent({
   name: 'Empty',
   props: emptyProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Empty',
-      'Empty',
+      '-empty',
       style,
       emptyLight,
       props,
@@ -63,60 +56,77 @@ export default defineComponent({
         NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon ||
         (() => <EmptyIcon />)
     )
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          [createKey('iconSize', size)]: iconSize,
+          [createKey('fontSize', size)]: fontSize,
+          textColor,
+          iconColor,
+          extraTextColor
+        }
+      } = themeRef.value
+      return {
+        '--n-icon-size': iconSize,
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-icon-color': iconColor,
+        '--n-extra-text-color': extraTextColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'empty',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderIcon: mergedRenderIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            [createKey('iconSize', size)]: iconSize,
-            [createKey('fontSize', size)]: fontSize,
-            textColor,
-            iconColor,
-            extraTextColor
-          }
-        } = themeRef.value
-        return {
-          '--icon-size': iconSize,
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--text-color': textColor,
-          '--icon-color': iconColor,
-          '--extra-text-color': extraTextColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-empty`}
-        style={this.cssVars as CSSProperties}
+        class={[`${mergedClsPrefix}-empty`, this.themeClass]}
+        style={this.cssVars as any}
       >
-        <div class={`${mergedClsPrefix}-empty__icon`}>
-          {renderSlot($slots, 'icon', undefined, () => [
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: this.mergedRenderIcon }}
-            </NBaseIcon>
-          ])}
-        </div>
+        {this.showIcon ? (
+          <div class={`${mergedClsPrefix}-empty__icon`}>
+            {$slots.icon ? (
+              $slots.icon()
+            ) : (
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                {{ default: this.mergedRenderIcon }}
+              </NBaseIcon>
+            )}
+          </div>
+        ) : null}
         {this.showDescription ? (
           <div class={`${mergedClsPrefix}-empty__description`}>
-            {renderSlot($slots, 'default', undefined, () => [
-              this.localizedDescription
-            ])}
+            {$slots.default ? $slots.default() : this.localizedDescription}
           </div>
         ) : null}
         {$slots.extra ? (
-          <div class={`${mergedClsPrefix}-empty__extra`}>
-            {renderSlot($slots, 'extra')}
-          </div>
+          <div class={`${mergedClsPrefix}-empty__extra`}>{$slots.extra()}</div>
         ) : null}
       </div>
     )

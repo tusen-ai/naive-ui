@@ -1,75 +1,75 @@
 import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --border-radius
-// --color
-// --color-modal
-// --color-popover
-// --text-color
-// --line-height
-// --padding-top
-// --padding-bottom
-// --padding-left
-// --font-size
-// --action-color
-// --title-font-weight
-// --title-font-size
-// --title-text-color
-// --close-color
-// --close-color-hover
-// --close-color-pressed
-// --border-color
-// --close-size
-// --box-shadow
+// --n-bezier
+// --n-border-radius
+// --n-color
+// --n-color-modal
+// --n-color-popover
+// --n-text-color
+// --n-line-height
+// --n-padding-top
+// --n-padding-bottom
+// --n-padding-left
+// --n-font-size
+// --n-action-color
+// --n-title-font-weight
+// --n-title-font-size
+// --n-title-text-color
+// --n-close-color
+// --n-close-color-hover
+// --n-close-color-pressed
+// --n-border-color
+// --n-close-size
+// --n-box-shadow
 export default c([
   cB('card', `
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    font-size: var(--n-font-size);
+    line-height: var(--n-line-height);
     display: flex;
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    border-radius: var(--border-radius);
-    background-color: var(--color);
-    color: var(--text-color);
+    border-radius: var(--n-border-radius);
+    background-color: var(--n-color);
+    color: var(--n-text-color);
     transition: 
-      color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      box-shadow .3s var(--bezier),
-      border-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      box-shadow .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
   `, [
     cM('hoverable', [
-      c('&:hover', 'box-shadow: var(--box-shadow);')
+      c('&:hover', 'box-shadow: var(--n-box-shadow);')
     ]),
     cM('content-segmented', [
       c('>', [
         cE('content', {
-          paddingTop: 'var(--padding-bottom)'
+          paddingTop: 'var(--n-padding-bottom)'
         })
       ])
     ]),
     cM('content-soft-segmented', [
       c('>', [
         cE('content', `
-          margin: 0 var(--padding-left);
-          padding: var(--padding-bottom) 0;
+          margin: 0 var(--n-padding-left);
+          padding: var(--n-padding-bottom) 0;
         `)
       ])
     ]),
     cM('footer-segmented', [
       c('>', [
         cE('footer', {
-          paddingTop: 'var(--padding-bottom)'
+          paddingTop: 'var(--n-padding-bottom)'
         })
       ])
     ]),
     cM('footer-soft-segmented', [
       c('>', [
         cE('footer', `
-          padding: var(--padding-bottom) 0;
-          margin: 0 var(--padding-left);
+          padding: var(--n-padding-bottom) 0;
+          margin: 0 var(--n-padding-left);
         `)
       ])
     ]),
@@ -78,59 +78,61 @@ export default c([
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        font-size: var(--title-font-size);
+        font-size: var(--n-title-font-size);
         padding:
-          var(--padding-top)
-          var(--padding-left)
-          var(--padding-bottom)
-          var(--padding-left);
+          var(--n-padding-top)
+          var(--n-padding-left)
+          var(--n-padding-bottom)
+          var(--n-padding-left);
       `, [
         cE('main', `
-          font-weight: var(--title-font-weight);
-          transition: color .3s var(--bezier);
+          font-weight: var(--n-title-font-weight);
+          transition: color .3s var(--n-bezier);
           flex: 1;
-          color: var(--title-text-color);
+          color: var(--n-title-text-color);
         `),
         cE('extra', `
           display: flex;
           align-items: center;
-          font-size: var(--font-size);
+          font-size: var(--n-font-size);
           font-weight: 400;
-          transition: color .3s var(--bezier);
-          color: var(--text-color);
+          transition: color .3s var(--n-bezier);
+          color: var(--n-text-color);
         `),
         cE('close', `
-          font-size: var(--close-size);
-          transition: color .3s var(--bezier);
+          font-size: var(--n-close-size);
+          transition: color .3s var(--n-bezier);
         `)
       ]),
       cE('action', `
         box-sizing: border-box;
         transition:
-          background-color .3s var(--bezier),
-          border-color .3s var(--bezier);
+          background-color .3s var(--n-bezier),
+          border-color .3s var(--n-bezier);
         background-clip: padding-box;
-        background-color: var(--action-color);
+        background-color: var(--n-action-color);
       `),
       cE('content', 'flex: 1;'),
       cE('content, footer', `
         box-sizing: border-box;
-        padding: 0 var(--padding-left) var(--padding-bottom) var(--padding-left);
-        font-size: var(--font-size);
+        padding: 0 var(--n-padding-left) var(--n-padding-bottom) var(--n-padding-left);
+        font-size: var(--n-font-size);
       `, [
         c('&:first-child', {
-          paddingTop: 'var(--padding-bottom)'
+          paddingTop: 'var(--n-padding-bottom)'
         })
       ]),
       cE('action', `
-        background-color: var(--action-color);
-        padding: var(--padding-bottom) var(--padding-left);
+        background-color: var(--n-action-color);
+        padding: var(--n-padding-bottom) var(--n-padding-left);
+        border-bottom-left-radius: var(--n-border-radius);
+        border-bottom-right-radius: var(--n-border-radius);
       `)
     ]),
     cB('card-cover', `
       overflow: hidden;
       width: 100%;
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      border-radius: var(--n-border-radius) var(--n-border-radius) 0 0;
     `, [
       c('img', `
         display: block;
@@ -138,15 +140,15 @@ export default c([
       `)
     ]),
     cM('bordered', `
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--n-border-color);
     `, [
-      c('&:target', 'border-color: var(--color-target);')
+      c('&:target', 'border-color: var(--n-color-target);')
     ]),
     cM('action-segmented', [
       c('>', [
         cE('action', [
           c('&:not(:first-child)', {
-            borderTop: '1px solid var(--border-color)'
+            borderTop: '1px solid var(--n-border-color)'
           })
         ])
       ])
@@ -154,10 +156,10 @@ export default c([
     cM('content-segmented, content-soft-segmented', [
       c('>', [
         cE('content', {
-          transition: 'border-color 0.3s var(--bezier)'
+          transition: 'border-color 0.3s var(--n-bezier)'
         }, [
           c('&:not(:first-child)', {
-            borderTop: '1px solid var(--border-color)'
+            borderTop: '1px solid var(--n-border-color)'
           })
         ])
       ])
@@ -165,24 +167,24 @@ export default c([
     cM('footer-segmented, footer-soft-segmented', [
       c('>', [
         cE('footer', {
-          transition: 'border-color 0.3s var(--bezier)'
+          transition: 'border-color 0.3s var(--n-bezier)'
         }, [
           c('&:not(:first-child)', {
-            borderTop: '1px solid var(--border-color)'
+            borderTop: '1px solid var(--n-border-color)'
           })
         ])
       ])
     ])
   ]),
   insideModal(cB('card', {
-    background: 'var(--color-modal)'
+    background: 'var(--n-color-modal)'
   })),
   insidePopover(cB('card', {
-    background: 'var(--color-popover)'
+    background: 'var(--n-color-popover)'
   })),
   cB('card', [
     asModal({
-      background: 'var(--color-modal)'
+      background: 'var(--n-color-modal)'
     })
   ])
 ])

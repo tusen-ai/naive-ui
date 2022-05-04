@@ -4,8 +4,7 @@ import commonVariables from '../common/_common'
 
 const {
   cubicBezierEaseIn,
-  cubicBezierEaseOut,
-  transformDebounceScale
+  cubicBezierEaseOut
 } = commonVariables
 
 interface FadeInScaleUpTransitionOptions {
@@ -42,7 +41,7 @@ export default function ({
     }),
     c('&.fade-in-scale-up-transition-leave-from, &.fade-in-scale-up-transition-enter-to', {
       opacity: 1,
-      transform: `${originalTransform} scale(${transformDebounceScale})`
+      transform: `${originalTransform} scale(1)`
     })
   ]
 }

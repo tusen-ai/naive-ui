@@ -4,13 +4,12 @@ import {
   PropType,
   ExtractPropTypes,
   provide,
-  InjectionKey,
   Ref
 } from 'vue'
 import { MergedTheme, useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { TimelineTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { timelineLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -33,8 +32,9 @@ export interface TimelineInjection {
   mergedThemeRef: Ref<MergedTheme<TimelineTheme>>
   mergedClsPrefixRef: Ref<string>
 }
-export const timelineInjectionKey: InjectionKey<TimelineInjection> =
-  Symbol('timeline')
+export const timelineInjectionKey =
+  createInjectionKey<TimelineInjection>('n-timeline')
+
 export type TimelineProps = ExtractPublicPropTypes<typeof timelineProps>
 
 export default defineComponent({
@@ -44,7 +44,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Timeline',
-      'Timeline',
+      '-timeline',
       style,
       timelineLight,
       props,

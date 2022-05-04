@@ -1,18 +1,12 @@
 import { TreeNode } from 'treemate'
-import {
-  CSSProperties,
-  InjectionKey,
-  Ref,
-  VNodeChild,
-  HTMLAttributes,
-  Slots
-} from 'vue'
+import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
-import { RowItem, ColItem } from './use-group-header'
-import { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import type { RowItem, ColItem } from './use-group-header'
+import type { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import { createInjectionKey } from '../../_utils'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -32,6 +26,10 @@ export type CreateRowClassName<T = InternalRowData> = (
   index: number
 ) => string
 export type CreateRowProps<T = InternalRowData> = (
+  row: T,
+  index: number
+) => HTMLAttributes
+export type CreateCellProps<T = InternalRowData> = (
   row: T,
   index: number
 ) => HTMLAttributes
@@ -60,12 +58,13 @@ export type SortOrder = 'ascend' | 'descend' | false
 
 export type Ellipsis = boolean | EllipsisProps
 
-export interface CommonColumnInfo {
+export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
-  width?: number
+  width?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
+  cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
 }
 
 export type TableColumnTitle =
@@ -112,9 +111,10 @@ export type TableBaseColumn<T = InternalRowData> = {
   filterMultiple?: boolean
 
   render?: (rowData: T, rowIndex: number) => VNodeChild
-  renderSorter?: RenderSorter
   renderFilter?: RenderFilter
-  renderFilterIcon?: RenderFilter
+  renderFilterIcon?: RenderFilterIcon
+  renderSorter?: RenderSorter
+  renderSorterIcon?: RenderSorterIcon
   renderFilterMenu?: RenderFilterMenu
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
@@ -151,7 +151,7 @@ export interface TableExpandColumn<T = InternalRowData>
 }
 
 export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup
+  | TableColumnGroup<T>
   | TableBaseColumn<T>
   | TableSelectionColumn<T>
   | TableExpandColumn<T>
@@ -164,7 +164,6 @@ export type DataTableSelectionOptions = Array<
 export interface DataTableInjection {
   slots: Slots
   indentRef: Ref<number>
-  hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>
   componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
@@ -213,11 +212,12 @@ export interface DataTableInjection {
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
   stripedRef: Ref<boolean>
+  onLoadRef: Ref<DataTableOnLoad | undefined>
+  loadingKeySetRef: Ref<Set<RowKey>>
+  paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
+  doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
-  doUpdateFilters: (
-    filters: FilterState,
-    sourceColumn?: TableBaseColumn
-  ) => void
+  doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
@@ -229,8 +229,8 @@ export interface DataTableInjection {
   setHeaderScrollLeft: (scrollLeft: number) => void
 }
 
-export const dataTableInjectionKey: InjectionKey<DataTableInjection> =
-  Symbol('dataTable')
+export const dataTableInjectionKey =
+  createInjectionKey<DataTableInjection>('n-data-table')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null
@@ -242,7 +242,11 @@ export type RenderFilter = (props: {
   show: boolean
 }) => VNodeChild
 
-export type RenderSorter = (props: { order: SortOrder | false }) => VNodeChild
+export type RenderFilterIcon = RenderFilter
+
+export type RenderSorter = (props: { order: SortOrder }) => VNodeChild
+
+export type RenderSorterIcon = RenderSorter
 
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
@@ -255,7 +259,7 @@ export type OnUpdateSorterImpl = (
 ) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
-  sourceColumn?: TableBaseColumn
+  sourceColumn: TableBaseColumn
 ) => void
 
 export interface SortState {
@@ -310,10 +314,12 @@ export type CreateSummary<T = InternalRowData> = (
 ) => SummaryRowData | SummaryRowData[]
 
 export interface SummaryCell {
-  value?: string | number
+  value?: VNodeChild
   colSpan?: number
   rowSpan?: number
 }
 export interface SummaryRowData {
   [key: string]: SummaryCell
 }
+
+export type DataTableOnLoad = (node: RowData) => Promise<void>

@@ -2,7 +2,7 @@
 
 焦虑的安慰剂，疗效尚可。
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert title="使用前提" type="warning">
   如果你想使用加载条，你需要把调用其方法的组件放在 <n-text code>n-loading-bar-provider</n-text> 内部并且注入 <n-text code>loadingBar</n-text>。
 </n-alert>
@@ -37,7 +37,7 @@ export default defineComponent({
 ## 演示
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API
@@ -48,7 +48,7 @@ basic
 | --- | --- | --- | --- |
 | loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
 
-### `loadingBar` Injection Methods
+### loadingBar Injection Methods
 
 | 名称   | 类型         | 说明                     |
 | ------ | ------------ | ------------------------ |

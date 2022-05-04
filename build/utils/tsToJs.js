@@ -5,7 +5,10 @@ const tsToJs = (content) => {
     return ''
   }
   // esbuild will remove blank line
-  const beforeTransformContent = content.replace(/\n(\s)*\n/g, '\n__blankline\n')
+  const beforeTransformContent = content.replace(
+    /\n(\s)*\n/g,
+    '\n__blankline\n'
+  )
   const { code } = transformSync(beforeTransformContent, {
     loader: 'ts',
     minify: false,

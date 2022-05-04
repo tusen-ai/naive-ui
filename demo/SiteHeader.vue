@@ -1,11 +1,11 @@
 <template>
   <n-layout-header bordered class="nav" :style="style">
     <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
-      <img src="./assets/images/naivelogo.svg" />
+      <img src="./assets/images/naivelogo.svg">
       <span v-if="!isMobile">Naive UI</span>
     </n-text>
     <div :style="!isMobile ? 'display: flex; align-items: center;' : ''">
-      <div class="nav-menu" v-if="!(isMobile || isTablet)">
+      <div v-if="!(isMobile || isTablet)" class="nav-menu">
         <n-menu
           mode="horizontal"
           :value="menuValue"
@@ -21,8 +21,7 @@
         clear-after-select
         blur-after-select
         @select="handleSearch"
-      >
-      </n-auto-complete>
+      />
       <!-- TODO: add it -->
       <!-- template #suffix>
         <span style="color: var(--placeholder-color)">⌘ + K</span>
@@ -30,26 +29,28 @@
     </div>
     <n-popover
       v-if="isMobile || isTablet"
+      ref="mobilePopoverRef"
       style="padding: 0; width: 288px"
       placement="bottom-end"
       display-directive="show"
       trigger="click"
-      ref="mobilePopoverRef"
     >
       <template #trigger>
-        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
+        <n-icon size="20" style="margin-left: 12px">
+          <menu-outline />
+        </n-icon>
       </template>
       <div style="overflow: auto; max-height: 79vh">
         <n-menu
           :value="mobileMenuValue"
           :options="mobileMenuOptions"
           :indent="18"
-          @update:value="handleUpdateMobileMenu"
           :render-label="renderMenuLabel"
+          @update:value="handleUpdateMobileMenu"
         />
       </div>
     </n-popover>
-    <div class="nav-end" v-else>
+    <div v-else class="nav-end">
       <n-button
         size="small"
         quaternary
@@ -80,8 +81,8 @@
         {{ version }}
       </n-text>
       <n-button
-        size="small"
         v-if="dev"
+        size="small"
         quaternary
         class="nav-picker"
         @click="handleDisplayModeUpdate"
@@ -89,8 +90,8 @@
         {{ displayModeLabelMap[displayMode] }}
       </n-button>
       <n-button
-        size="small"
         v-if="tusimple || dev"
+        size="small"
         quaternary
         class="nav-picker"
         @click="handleConfigProviderUpdate"
@@ -101,8 +102,8 @@
   </n-layout-header>
 </template>
 
-<script>
-import { computed, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
@@ -157,7 +158,7 @@ const locales = {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'SiteHeader',
   components: {
     MenuOutline
@@ -408,7 +409,7 @@ export default {
       })
     }
   }
-}
+})
 </script>
 
 <style scoped>

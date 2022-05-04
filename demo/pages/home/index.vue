@@ -5,13 +5,12 @@
     :style="isMobile ? undefined : 'top: var(--header-height);'"
   >
     <div class="banner" style="overflow: hidden">
-      <right-image class="right-image" v-if="!(isMobile || isTablet)" />
+      <right-image v-if="!(isMobile || isTablet)" class="right-image" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
           @mouseleave="handleTitleMouseLeave"
-          >Na{{ hover ? 'ï' : 'i' }}ve UI</span
-        >
+        >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
       </n-h1>
       <n-p style="font-size: 16px; margin-top: 0; margin-bottom: 0">
         {{ t('intro1') }}
@@ -55,15 +54,15 @@
   </n-layout>
 </template>
 
-<script>
-import { computed } from 'vue'
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
 import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
-export default {
+export default defineComponent({
   components: {
     LandingFooter,
     leftImage,
@@ -86,15 +85,14 @@ export default {
         'zh-CN': {
           start: '开始使用',
           intro1: '一个 Vue 3 组件库',
-          intro2: '比较完整，主题可调，使用 TypeScript，不算太慢',
+          intro2: '比较完整，主题可调，使用 TypeScript，快',
           intro3: '有点意思',
           intro4: '换个主题'
         },
         'en-US': {
           start: 'Get Started',
           intro1: 'A Vue 3 Component Library',
-          intro2:
-            'Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow',
+          intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
           intro3: 'Kinda Interesting',
           intro4: 'Change Theme'
         }
@@ -128,7 +126,7 @@ export default {
       this.theme = this.themeOptions[this.theme].next
     }
   }
-}
+})
 </script>
 
 <style scoped>

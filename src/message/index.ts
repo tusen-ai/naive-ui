@@ -4,6 +4,10 @@ export type {
   MessageApiInjection as MessageApi,
   MessageProviderInst,
   MessageProviderProps,
-  MessageOptions,
   MessageReactive
 } from './src/MessageProvider'
+export type {
+  MessageOptions,
+  MessageRenderMessage,
+  MessageType
+} from './src/types'

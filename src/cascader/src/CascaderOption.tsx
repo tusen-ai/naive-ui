@@ -37,7 +37,8 @@ export default defineComponent({
       deleteLoadingKey,
       closeMenu,
       doCheck,
-      doUncheck
+      doUncheck,
+      renderLabelRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const valueRef = computed(() => props.tmNode.key)
@@ -165,11 +166,12 @@ export default defineComponent({
       handleClick,
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
-      mergedHandleMouseMove: mergedHandleMouseMoveRef
+      mergedHandleMouseMove: mergedHandleMouseMoveRef,
+      renderLabel: renderLabelRef
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, renderLabel } = this
     return (
       <div
         class={[
@@ -201,7 +203,9 @@ export default defineComponent({
           </div>
         ) : null}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {this.label}
+          {renderLabel
+            ? renderLabel(this.tmNode.rawNode, this.checked)
+            : this.label}
         </span>
         <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
           <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>

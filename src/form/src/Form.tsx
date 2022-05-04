@@ -1,11 +1,18 @@
-import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  provide,
+  ExtractPropTypes,
+  ref
+} from 'vue'
 import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
-import {
+import type {
   ShouldRuleBeApplied,
   FormItemInst,
   FormRules,
@@ -13,10 +20,11 @@ import {
   LabelAlign,
   LabelPlacement,
   FormInst,
-  formItemInstsInjectionKey,
-  formInjectionKey
+  Size,
+  FormValidateMessages
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
 const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -33,12 +41,12 @@ const formProps = {
   },
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<Size>,
   showRequireMark: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: String as PropType<'left' | 'right'>,
+  requireMarkPlacement: String as PropType<'left' | 'right' | 'right-hanging'>,
   showFeedback: {
     type: Boolean,
     default: true
@@ -50,7 +58,8 @@ const formProps = {
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
-  }
+  },
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -61,15 +70,31 @@ export default defineComponent({
   props: formProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
+    useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
+    // for label-width = 'auto'
+    const maxChildLabelWidthRef = ref<number | undefined>(undefined)
+    const deriveMaxChildLabelWidth = (currentWidth: number): void => {
+      const currentMaxChildLabelWidth = maxChildLabelWidthRef.value
+      if (
+        currentMaxChildLabelWidth === undefined ||
+        currentWidth >= currentMaxChildLabelWidth
+      ) {
+        maxChildLabelWidthRef.value = currentWidth
+      }
+    }
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<void> {
       return await new Promise((resolve, reject) => {
-        const formItemValidationPromises = []
+        const formItemValidationPromises: Array<
+        Promise<{
+          valid: boolean
+          errors?: ValidateError[]
+        }>
+        > = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {
@@ -87,14 +112,11 @@ export default defineComponent({
               .map((result) => result.errors)
             if (validateCallback) {
               validateCallback(errors as ValidateError[][])
-            } else {
-              reject(errors)
             }
+            reject(errors)
           } else {
             if (validateCallback) validateCallback()
-            else {
-              resolve()
-            }
+            resolve()
           }
         })
       })
@@ -107,7 +129,11 @@ export default defineComponent({
         }
       }
     }
-    provide(formInjectionKey, props)
+    provide(formInjectionKey, {
+      props,
+      maxChildLabelWidthRef,
+      deriveMaxChildLabelWidth
+    })
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,

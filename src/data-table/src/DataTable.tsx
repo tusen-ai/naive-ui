@@ -8,17 +8,19 @@ import {
   ExtractPropTypes,
   toRef,
   CSSProperties,
-  Transition
+  Transition,
+  watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import { PaginationProps } from '../../pagination/src/Pagination'
-import { warn, createKey } from '../../_utils'
+import type { PaginationProps } from '../../pagination'
+import { createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { dataTableLight, DataTableTheme } from '../styles'
+import { dataTableLight } from '../styles'
+import type { DataTableTheme } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
@@ -36,18 +38,23 @@ import type {
   DataTableInst,
   OnUpdateExpandedRowKeys,
   CreateSummary,
-  CreateRowProps
+  CreateRowProps,
+  DataTableOnLoad
 } from './interface'
 import { dataTableInjectionKey } from './interface'
-import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
+import style from './styles/index.cssr'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
+  },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
   },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
@@ -102,6 +109,7 @@ export const dataTableProps = {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
   },
+  allowCheckingNotLoaded: Boolean,
   cascade: {
     type: Boolean,
     default: true
@@ -115,6 +123,11 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  paginationBehaviorOnFilter: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
+  onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
   >,
@@ -144,75 +157,19 @@ export const dataTableProps = {
   MaybeArray<OnUpdateExpandedRowKeys>
   >,
   // deprecated
-  onPageChange: {
-    type: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-page-change` is deprecated, please use `on-update:page` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onPageSizeChange: {
-    type: [Function, Array] as PropType<PaginationProps['onUpdate:pageSize']>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onSorterChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateSorter> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onFiltersChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<OnUpdateFilters> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-filters-change` is deprecated, please use `on-update:filters` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onCheckedRowKeysChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<OnUpdateCheckedRowKeys> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
+  onPageSizeChange: [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
+  onSorterChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateSorter> | undefined
+  >,
+  onFiltersChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFilters> | undefined
+  >,
+  onCheckedRowKeysChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys> | undefined
+  >
 } as const
 
 export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
@@ -223,7 +180,43 @@ export default defineComponent({
   alias: ['AdvancedTable'],
   props: dataTableProps,
   setup (props, { slots }) {
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onPageChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-page-change` is deprecated, please use `on-update:page` instead.'
+          )
+        }
+        if (props.onPageSizeChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
+          )
+        }
+        if (props.onSorterChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.'
+          )
+        }
+        if (props.onFiltersChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-filters-change` is deprecated, please use `on-update:filters` instead.'
+          )
+        }
+        if (props.onCheckedRowKeysChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.'
+          )
+        }
+      })
+    }
+
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -234,7 +227,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'DataTable',
-      'DataTable',
+      '-data-table',
       style,
       dataTableLight,
       props,
@@ -256,6 +249,7 @@ export default defineComponent({
       mergedFilterStateRef,
       mergedSortStateRef,
       firstContentfulColIndexRef,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       filter,
@@ -321,6 +315,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
@@ -364,26 +359,26 @@ export default defineComponent({
         return selectionColumn?.options
       }),
       rawPaginatedDataRef,
-      hasChildrenRef: computed(() => {
-        return treeMateRef.value.maxLevel > 0
-      }),
       filterMenuCssVarsRef: computed(() => {
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
         } = themeRef.value
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
-          '--action-padding': actionPadding,
-          '--action-button-margin': actionButtonMargin,
-          '--action-divider-color': actionDividerColor
+          '--n-action-padding': actionPadding,
+          '--n-action-button-margin': actionButtonMargin,
+          '--n-action-divider-color': actionDividerColor
         } as CSSProperties
       }),
+      onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
+      paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       syncScrollState,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       doCheck,
@@ -404,6 +399,113 @@ export default defineComponent({
       sort,
       clearFilter
     }
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderColor,
+          tdColorHover,
+          thColor,
+          thColorHover,
+          tdColor,
+          tdTextColor,
+          thTextColor,
+          thFontWeight,
+          thButtonColorHover,
+          thIconColor,
+          thIconColorActive,
+          filterSize,
+          borderRadius,
+          lineHeight,
+          tdColorModal,
+          thColorModal,
+          borderColorModal,
+          thColorHoverModal,
+          tdColorHoverModal,
+          borderColorPopover,
+          thColorPopover,
+          tdColorPopover,
+          tdColorHoverPopover,
+          thColorHoverPopover,
+          paginationMargin,
+          emptyPadding,
+          boxShadowAfter,
+          boxShadowBefore,
+          sorterSize,
+          loadingColor,
+          loadingSize,
+          opacityLoading,
+          tdColorStriped,
+          tdColorStripedModal,
+          tdColorStripedPopover,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('thPadding', size)]: thPadding,
+          [createKey('tdPadding', size)]: tdPadding
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-th-padding': thPadding,
+        '--n-td-padding': tdPadding,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-line-height': lineHeight,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-th-color': thColor,
+        '--n-th-color-hover': thColorHover,
+        '--n-th-color-modal': thColorModal,
+        '--n-th-color-hover-modal': thColorHoverModal,
+        '--n-th-color-popover': thColorPopover,
+        '--n-th-color-hover-popover': thColorHoverPopover,
+        '--n-td-color': tdColor,
+        '--n-td-color-hover': tdColorHover,
+        '--n-td-color-modal': tdColorModal,
+        '--n-td-color-hover-modal': tdColorHoverModal,
+        '--n-td-color-popover': tdColorPopover,
+        '--n-td-color-hover-popover': tdColorHoverPopover,
+        '--n-th-text-color': thTextColor,
+        '--n-td-text-color': tdTextColor,
+        '--n-th-font-weight': thFontWeight,
+        '--n-th-button-color-hover': thButtonColorHover,
+        '--n-th-icon-color': thIconColor,
+        '--n-th-icon-color-active': thIconColorActive,
+        '--n-filter-size': filterSize,
+        '--n-pagination-margin': paginationMargin,
+        '--n-empty-padding': emptyPadding,
+        '--n-box-shadow-before': boxShadowBefore,
+        '--n-box-shadow-after': boxShadowAfter,
+        '--n-sorter-size': sorterSize,
+        '--n-loading-size': loadingSize,
+        '--n-loading-color': loadingColor,
+        '--n-opacity-loading': opacityLoading,
+        '--n-td-color-striped': tdColorStriped,
+        '--n-td-color-striped-modal': tdColorStripedModal,
+        '--n-td-color-striped-popover': tdColorStripedPopover
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'data-table',
+        computed(() => props.size[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
+    const mergedShowPaginationRef = computed(() => {
+      if (!props.pagination) return false
+      if (props.paginateSinglePage) return true
+      const mergedPagination = mergedPaginationRef.value
+      const { pageCount } = mergedPagination
+      if (pageCount !== undefined) return pageCount > 1
+      return (
+        mergedPagination.itemCount &&
+        mergedPagination.pageSize &&
+        mergedPagination.itemCount > mergedPagination.pageSize
+      )
+    })
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -412,102 +514,21 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
-      ...exposedMethods,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderColor,
-            tdColorHover,
-            thColor,
-            thColorHover,
-            tdColor,
-            tdTextColor,
-            thTextColor,
-            thFontWeight,
-            thButtonColorHover,
-            thIconColor,
-            thIconColorActive,
-            filterSize,
-            borderRadius,
-            lineHeight,
-            tdColorModal,
-            thColorModal,
-            borderColorModal,
-            thColorHoverModal,
-            tdColorHoverModal,
-            borderColorPopover,
-            thColorPopover,
-            tdColorPopover,
-            tdColorHoverPopover,
-            thColorHoverPopover,
-            paginationMargin,
-            emptyPadding,
-            boxShadowAfter,
-            boxShadowBefore,
-            sorterSize,
-            loadingColor,
-            loadingSize,
-            opacityLoading,
-            tdColorStriped,
-            tdColorStripedModal,
-            tdColorStripedPopover,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('thPadding', size)]: thPadding,
-            [createKey('tdPadding', size)]: tdPadding
-          }
-        } = themeRef.value
-        return {
-          '--font-size': fontSize,
-          '--th-padding': thPadding,
-          '--td-padding': tdPadding,
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--line-height': lineHeight,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--th-color': thColor,
-          '--th-color-hover': thColorHover,
-          '--th-color-modal': thColorModal,
-          '--th-color-hover-modal': thColorHoverModal,
-          '--th-color-popover': thColorPopover,
-          '--th-color-hover-popover': thColorHoverPopover,
-          '--td-color': tdColor,
-          '--td-color-hover': tdColorHover,
-          '--td-color-modal': tdColorModal,
-          '--td-color-hover-modal': tdColorHoverModal,
-          '--td-color-popover': tdColorPopover,
-          '--td-color-hover-popover': tdColorHoverPopover,
-          '--th-text-color': thTextColor,
-          '--td-text-color': tdTextColor,
-          '--th-font-weight': thFontWeight,
-          '--th-button-color-hover': thButtonColorHover,
-          '--th-icon-color': thIconColor,
-          '--th-icon-color-active': thIconColorActive,
-          '--filter-size': filterSize,
-          '--pagination-margin': paginationMargin,
-          '--empty-padding': emptyPadding,
-          '--box-shadow-before': boxShadowBefore,
-          '--box-shadow-after': boxShadowAfter,
-          '--sorter-size': sorterSize,
-          '--loading-size': loadingSize,
-          '--loading-color': loadingColor,
-          '--opacity-loading': opacityLoading,
-          '--td-color-striped': tdColorStriped,
-          '--td-color-striped-modal': tdColorStripedModal,
-          '--td-color-striped-popover': tdColorStripedPopover
-        }
-      })
+      mergedShowPagination: mergedShowPaginationRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, themeClass, onRender } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-data-table`,
+          themeClass,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,
             [`${mergedClsPrefix}-data-table--bottom-bordered`]:
@@ -523,7 +544,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />
         </div>
-        {this.pagination ? (
+        {this.mergedShowPagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>
             <NPagination
               theme={this.mergedTheme.peers.Pagination}

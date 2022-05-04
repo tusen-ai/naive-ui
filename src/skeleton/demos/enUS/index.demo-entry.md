@@ -5,9 +5,9 @@ A twinkle placeholder.
 ## Demos
 
 ```demo
-basic
-box
-size
+basic.vue
+box.vue
+size.vue
 ```
 
 ## API

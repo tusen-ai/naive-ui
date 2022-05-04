@@ -1,26 +1,16 @@
-import {
-  defineComponent,
-  h,
-  ref,
-  provide,
-  InjectionKey,
-  renderSlot,
-  getCurrentInstance,
-  Ref
-} from 'vue'
+import { defineComponent, h, ref, provide, getCurrentInstance, Ref } from 'vue'
 import { createId } from 'seemly'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
+import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
-import { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig } from '../../_mixins'
+import { imagePreviewSharedProps } from './interface'
 
-export const imageGroupInjectionKey: InjectionKey<
+export const imageGroupInjectionKey = createInjectionKey<
 ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
-> = Symbol('image-group')
+>('n-image-group')
 
-const imageGroupProps = {
-  showToolbar: { type: Boolean, default: true }
-}
+const imageGroupProps = imagePreviewSharedProps
 
 export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 
@@ -78,15 +68,16 @@ export default defineComponent({
   render () {
     return (
       <NImagePreview
+        theme={this.theme}
+        themeOverrides={this.themeOverrides}
         clsPrefix={this.mergedClsPrefix}
         ref="previewInstRef"
         onPrev={this.prev}
         onNext={this.next}
         showToolbar={this.showToolbar}
+        showToolbarTooltip={this.showToolbarTooltip}
       >
-        {{
-          default: () => renderSlot(this.$slots, 'default')
-        }}
+        {this.$slots}
       </NImagePreview>
     )
   }

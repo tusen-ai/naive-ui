@@ -5,10 +5,12 @@ import { alertLight } from '../alert/styles'
 import { anchorLight } from '../anchor/styles'
 import { autoCompleteLight } from '../auto-complete/styles'
 import { avatarLight } from '../avatar/styles'
+import { avatarGroupLight } from '../avatar-group/styles'
 import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
 import { buttonLight } from '../button/styles'
+import { buttonGroupLight } from '../button-group/styles'
 import { calendarLight } from '../calendar/styles'
 import { cardLight } from '../card/styles'
 import { carouselLight } from '../carousel/styles'
@@ -33,6 +35,7 @@ import { emptyLight } from '../empty/styles'
 import { formLight } from '../form/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
+import { iconWrapperLight } from '../icon-wrapper/styles'
 import { imageLight } from '../image/styles'
 import { inputLight } from '../input/styles'
 import { inputNumberLight } from '../input-number/styles'
@@ -75,18 +78,22 @@ import { typographyLight } from '../typography/styles'
 import { treeLight } from '../tree/styles'
 import { treeSelectLight } from '../tree-select/styles'
 import { uploadLight } from '../upload/styles'
+import { watermarkLight } from '../watermark/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
+  name: 'light',
   common: commonLight,
   Alert: alertLight,
   Anchor: anchorLight,
   AutoComplete: autoCompleteLight,
   Avatar: avatarLight,
+  AvatarGroup: avatarGroupLight,
   BackTop: backTopLight,
   Badge: badgeLight,
   Breadcrumb: breadcrumbLight,
   Button: buttonLight,
+  ButtonGroup: buttonGroupLight,
   Calendar: calendarLight,
   Card: cardLight,
   Carousel: carouselLight,
@@ -111,6 +118,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Form: formLight,
   GradientText: gradientTextLight,
   Icon: iconLight,
+  IconWrapper: iconWrapperLight,
   Image: imageLight,
   Input: inputLight,
   InputNumber: inputNumberLight,
@@ -152,5 +160,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Tree: treeLight,
   TreeSelect: treeSelectLight,
   Typography: typographyLight,
-  Upload: uploadLight
+  Upload: uploadLight,
+  Watermark: watermarkLight
 }

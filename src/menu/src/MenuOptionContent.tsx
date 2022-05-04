@@ -2,7 +2,7 @@ import { computed, defineComponent, h, inject, PropType } from 'vue'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
-import { menuInjectionKey } from './Menu'
+import { menuInjectionKey } from './context'
 import { TmNode } from './interface'
 
 export default defineComponent({
@@ -17,6 +17,7 @@ export default defineComponent({
     childActive: Boolean,
     hover: Boolean,
     paddingLeft: Number,
+    selected: Boolean,
     maxIconSize: {
       type: Number,
       required: true
@@ -63,23 +64,30 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
+      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon, nodeProps }
     } = this
     const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
+    const attrs = nodeProps?.(tmNode.rawNode)
     return (
       <div
-        onClick={this.onClick}
+        {...attrs}
+        onClick={(e) => {
+          attrs?.onClick?.(e)
+          this.onClick?.(e)
+        }}
         role="none"
         class={[
           `${clsPrefix}-menu-item-content`,
           {
+            [`${clsPrefix}-menu-item-content--selected`]: this.selected,
             [`${clsPrefix}-menu-item-content--collapsed`]: this.collapsed,
             [`${clsPrefix}-menu-item-content--child-active`]: this.childActive,
             [`${clsPrefix}-menu-item-content--disabled`]: this.disabled,
             [`${clsPrefix}-menu-item-content--hover`]: this.hover
-          }
+          },
+          attrs?.class
         ]}
-        style={this.style}
+        style={[this.style, attrs?.style || '']}
       >
         {icon && (
           <div
@@ -87,7 +95,7 @@ export default defineComponent({
             style={this.iconStyle}
             role="none"
           >
-            {[icon]}
+            {icon}
           </div>
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">

@@ -3,12 +3,7 @@
 通过设定 `column.ellipsis.tooltip` 使得省略内容有弹出提示。`column.ellipsis` 接受的属性和 `n-ellipsis` 相同。
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-data-table :columns="columns" :data="data" :pagination="pagination" />
 ```
 
 ```js

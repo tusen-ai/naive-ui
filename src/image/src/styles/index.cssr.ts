@@ -3,8 +3,11 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 import fadeInzoomInTransiton from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --icon-color
-// --bezier
+// --n-toolbar-icon-color
+// --n-toolbar-color
+// --n-toolbar-border-radius
+// --n-toolbar-box-shadow
+// --n-bezier
 export default c([
   c('body >', [
     cB('image-container', 'position: fixed;')
@@ -33,13 +36,14 @@ export default c([
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 24px;
+    border-radius: var(--n-toolbar-border-radius);
     height: 48px;
     bottom: 40px;
     padding: 0 12px;
-    background: rgba(0, 0, 0, .35);
-    color: var(--icon-color);
-    transition: color .3s var(--bezier);
+    background: var(--n-toolbar-color);
+    box-shadow: var(--n-toolbar-box-shadow);
+    color: var(--n-toolbar-icon-color);
+    transition: color .3s var(--n-bezier);
     display: flex;
     align-items: center;
   `, [
@@ -67,7 +71,7 @@ export default c([
     margin: auto;
     max-height: 100vh;
     max-width: 100vw;
-    transition: transform .3s var(--bezier);
+    transition: transform .3s var(--n-bezier);
   `),
   cB('image', `
     display: inline-flex;

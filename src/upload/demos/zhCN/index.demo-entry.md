@@ -5,19 +5,19 @@
 ## 演示
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-download
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-retry-debug
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+download.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+retry-debug.vue
 ```
 
 ## API
@@ -38,6 +38,8 @@ retry-debug
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
+| image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
+| input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
@@ -52,11 +54,13 @@ retry-debug
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
-| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
+| on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
+| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 |  |
+| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 
 #### UploadFileInfo Type
 
@@ -65,7 +69,7 @@ retry-debug
 | id | `string \| number` | 文件 id，需要唯一 |
 | name | `string` | 文件名 |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |
-| percentage | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
+| percentage? | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
 | file? | `File \| null` | 文件对应的浏览器 File 对象 |
 | thumbnailUrl? | `string \| null` | 缩略图 URL |
 | type? | `string \| null` | MIME 类型 |
@@ -98,10 +102,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |
-| openOpenFileDialog | `() => void` | 打开文件选择对话框 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `() => void` | 清空上传列表 | 2.24.2 |
+| openOpenFileDialog | `() => void` | 打开文件选择对话框 |  |
+| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |  |
 
 ### Upload Slots
 

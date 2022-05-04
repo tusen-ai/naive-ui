@@ -6,11 +6,11 @@ Naive UI 是一个 Vue3 的组件库。
 
 要了解如何安装，参见[安装](installation)。
 
-它比较完整，主题可调，用 TypeScript 写的，不算太慢。
+它比较完整，主题可调，用 TypeScript 写的，快。
 
 ## 比较完整
 
-有超过 70 个组件，希望能帮你少写点代码。
+有超过 80 个组件，希望能帮你少写点代码。
 
 顺便一提，它们全都可以 treeshaking。
 
@@ -26,7 +26,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 顺便一提，你不需要导入任何 CSS 就能让组件正常工作。
 
-## 不算太慢
+## 快
 
 我尽力让它不要太慢。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
 
@@ -36,7 +36,8 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - 钉钉一群 33482509 (已满)
-- 钉钉二群 35886835
+- 钉钉二群 35886835 (已满)
+- 钉钉三群 32377370
 
 ## 贡献
 

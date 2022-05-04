@@ -18,8 +18,8 @@ const deDE: NLocale = {
       `Bitte laden Sie alle Unterpunkte von ${label}, bevor Sie es auswählen.`
   },
   Time: {
-    dateFormat: 'dd-MM-yyyy',
-    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss'
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
@@ -27,8 +27,8 @@ const deDE: NLocale = {
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
     monthTypeFormat: 'MM-yyyy',
-    dateFormat: 'dd-MM-yyyy',
-    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
     clear: 'Löschen',
     now: 'Jetzt',
@@ -38,9 +38,8 @@ const deDE: NLocale = {
     datePlaceholder: 'Datum auswählen',
     datetimePlaceholder: 'Datum und Uhrzeit auswählen',
     monthPlaceholder: 'Monat auswählen',
-    // FIXME: translation needed
-    yearPlaceholder: 'Select Year',
-    quarterPlaceholder: 'Select Quarter',
+    yearPlaceholder: 'Jahr auswählen',
+    quarterPlaceholder: 'Quartal auswählen',
     startDatePlaceholder: 'Anfangsdatum',
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
@@ -102,6 +101,15 @@ const deDE: NLocale = {
     import: 'Importieren',
     export: 'Exportieren',
     restore: 'Auf Standard zurücksetzen'
+  },
+  Image: {
+    tipPrevious: 'Vorheriges Bild (←)',
+    tipNext: 'Nächstes Bild (→)',
+    tipCounterclockwise: 'Gegen Uhrzeigersinn',
+    tipClockwise: 'Uhrzeigersinn',
+    tipZoomOut: 'Rauszoomen',
+    tipZoomIn: 'Reinzoomen',
+    tipClose: 'Schließen (Esc)'
   }
 }
 

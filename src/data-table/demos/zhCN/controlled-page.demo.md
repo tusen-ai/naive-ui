@@ -1,12 +1,7 @@
 # 受控的分页
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-data-table :columns="columns" :data="data" :pagination="pagination" />
 ```
 
 ```js
@@ -44,7 +39,7 @@ export default defineComponent({
       onChange: (page) => {
         paginationReactive.page = page
       },
-      onPageSizeChange: (pageSize) => {
+      onUpdatePageSize: (pageSize) => {
         paginationReactive.pageSize = pageSize
         paginationReactive.page = 1
       }

@@ -2,36 +2,36 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --color
-// --text-color
-// --border-radius
-// --panel-font-size
-// --font-size
-// --bezier
-// --height
-// --box-shadow
-// --divider-color
+// --n-color
+// --n-text-color
+// --n-border-radius
+// --n-panel-font-size
+// --n-font-size
+// --n-bezier
+// --n-height
+// --n-box-shadow
+// --n-divider-color
 export default c([
   cB('color-picker', `
     display: inline-block;
     box-sizing: border-box;
-    height: var(--height);
-    font-size: var(--font-size);
+    height: var(--n-height);
+    font-size: var(--n-font-size);
     width: 100%;
     position: relative;
   `),
   cB('color-picker-panel', `
     margin: 4px 0;
     width: 240px;
-    font-size: var(--panel-font-size);
-    color: var(--text-color);
-    background-color: var(--color);
+    font-size: var(--n-panel-font-size);
+    color: var(--n-text-color);
+    background-color: var(--n-color);
     transition:
-      box-shadow .3s var(--bezier),
-      color .3s var(--bezier),
-      background-color .3s var(--bezier);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+      box-shadow .3s var(--n-bezier),
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
+    border-radius: var(--n-border-radius);
+    box-shadow: var(--n-box-shadow);
   `, [
     fadeInScaleUpTransition(),
     cB('input', `
@@ -84,6 +84,7 @@ export default c([
     `)
   ]),
   cB('color-picker-handle', `
+    z-index: 1;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .45);
     position: absolute;
     background-color: white;
@@ -98,6 +99,7 @@ export default c([
     height: 180px;
     position: relative;
     margin-bottom: 8px;
+    cursor: crosshair;
   `, [
     cE('layer', `
       position: absolute;
@@ -160,18 +162,18 @@ export default c([
   cB('color-picker-action', `
     display: flex;
     margin-top: -4px;
-    border-top: 1px solid var(--divider-color);
+    border-top: 1px solid var(--n-divider-color);
     padding: 8px 12px;
     justify-content: flex-end;
   `, [
     cB('button', 'margin-left: 8px;')
   ]),
   cB('color-picker-trigger', `
-    border: var(--border);
+    border: var(--n-border);
     height: 100%;
     box-sizing: border-box;
-    border-radius: var(--border-radius);
-    transition: border-color .3s var(--bezier);
+    border-radius: var(--n-border-radius);
+    transition: border-color .3s var(--n-bezier);
     cursor: pointer;
   `, [
     cE('value', `
@@ -179,7 +181,7 @@ export default c([
       position: relative;
     `),
     cE('fill', `
-      border-radius: var(--border-radius);
+      border-radius: var(--n-border-radius);
       position: absolute;
       display: flex;
       align-items: center;
@@ -189,13 +191,14 @@ export default c([
       top: 4px;
       bottom: 4px;
     `),
+    cM('disabled', 'cursor: not-allowed'),
     cB('color-picker-checkboard', `
-      border-radius: var(--border-radius);
+      border-radius: var(--n-border-radius);
     `, [
       c('&::after', `
-        --block-size: calc((var(--height) - 8px) / 3);
-        background-size: calc(var(--block-size) * 2) calc(var(--block-size) * 2);
-        background-position: 0 0, 0 var(--block-size), var(--block-size) calc(-1 * var(--block-size)), calc(-1 * var(--block-size)) 0px;  
+        --n-block-size: calc((var(--n-height) - 8px) / 3);
+        background-size: calc(var(--n-block-size) * 2) calc(var(--n-block-size) * 2);
+        background-position: 0 0, 0 var(--n-block-size), var(--n-block-size) calc(-1 * var(--n-block-size)), calc(-1 * var(--n-block-size)) 0px;  
       `)
     ])
   ]),

@@ -11,7 +11,10 @@ export default defineComponent({
     feedback: String
   },
   render () {
-    const { feedback, clsPrefix } = this
+    const { $slots, feedback, clsPrefix } = this
+    if ($slots.default) {
+      return $slots.default()
+    }
     return feedback ? (
       <div key={feedback} class={`${clsPrefix}-form-item-feedback__line`}>
         {feedback}

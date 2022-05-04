@@ -3,7 +3,6 @@ import {
   defineComponent,
   computed,
   CSSProperties,
-  InjectionKey,
   PropType,
   provide,
   toRef,
@@ -19,7 +18,7 @@ import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
 import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
-import { defaultSpan } from './GridItem'
+import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
 
@@ -56,8 +55,6 @@ export interface NGridInjection {
   overflowRef: Ref<boolean>
 }
 
-export const gridInjectionKey: InjectionKey<NGridInjection> = Symbol('grid')
-
 export type GridProps = ExtractPublicPropTypes<typeof gridProps>
 
 export default defineComponent({
@@ -65,11 +62,11 @@ export default defineComponent({
   inheritAttrs: false,
   props: gridProps,
   setup (props) {
-    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
+    const { mergedClsPrefixRef, mergedBreakpointsRef } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
     const breakpointsRef = useBreakpoints(
-      NConfigProvider?.mergedBreakpointsRef.value || defaultBreakpoints
+      mergedBreakpointsRef?.value || defaultBreakpoints
     )
     const isResponsiveRef = useMemo(() => {
       if (props.itemResponsive) return true

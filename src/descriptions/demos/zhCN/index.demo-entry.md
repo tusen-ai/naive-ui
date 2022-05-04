@@ -7,12 +7,12 @@
 ## 演示
 
 ```demo
-basic
-columns
-span
-placement
-bordered
-size
+basic.vue
+columns.vue
+span.vue
+placement.vue
+bordered.vue
+size.vue
 ```
 
 ## API

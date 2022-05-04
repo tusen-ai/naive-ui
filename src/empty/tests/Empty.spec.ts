@@ -45,6 +45,14 @@ describe('n-empty', () => {
     expect(wrapper.find('.n-empty__description').exists()).toBe(false)
   })
 
+  it('should work with `show-icon` prop', async () => {
+    const wrapper = mount(NEmpty)
+    expect(wrapper.find('.n-empty__icon').exists()).toBe(true)
+
+    await wrapper.setProps({ showIcon: false })
+    expect(wrapper.find('.n-empty__icon').exists()).toBe(false)
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NEmpty)
 

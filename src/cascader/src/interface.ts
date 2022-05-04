@@ -2,7 +2,8 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey, Ref } from 'vue'
+import { Ref, VNodeChild } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -35,11 +36,11 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   Array<string | number> &
-  (string | null) &
-  (number | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (Array<string | number> | null),
+    (string | null) &
+    (number | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (Array<string | number> | null),
   option: null &
   CascaderOption &
   CascaderOption[] &
@@ -87,6 +88,10 @@ export interface CascaderInjection {
   closeMenu: (returnFocus?: boolean) => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
+  renderLabelRef: Ref<
+    ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
+  >
+  clearPattern: () => void
 }
 
 export interface CascaderSubmenuInstance {
@@ -108,5 +113,10 @@ export interface SelectMenuInstance {
   enter: () => boolean
 }
 
-export const cascaderInjectionKey: InjectionKey<CascaderInjection> =
-  Symbol('cascader')
+export const cascaderInjectionKey =
+  createInjectionKey<CascaderInjection>('n-cascader')
+
+export interface CascaderInst {
+  focus: () => void
+  blur: () => void
+}

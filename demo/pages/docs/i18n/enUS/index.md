@@ -2,9 +2,9 @@
 
 # Internationalization
 
-Naive-ui provide `n-config-provider` to customize the internationalization. By default, all components are in English.
+Naive-ui provides `n-config-provider` to customize the internationalization. By default, all components are in English.
 
-Learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
+To learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
 
 ## Configure
 
@@ -40,19 +40,31 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
 
 ## Supported languages
 
-PR is welcomed for locales that is not supported yet!
+PRs are welcomed for locales that are not supported yet!
 
-| Language                  | Config | Date config |
-| ------------------------- | ------ | ----------- |
-| English                   | enUS   | dateEnUS    |
-| Japanese                  | jaJP   | dateJaJP    |
-| Russian                   | ruRU   | dateRuRU    |
-| Ukrainian                 | ukUA   | dateUkUA    |
-| Chinese (Simplified)      | zhCN   | dateZhCN    |
-| Chinese (Traditional)     | zhTW   | dateZhTW    |
-| German - Germany          | deDE   | dateDeDe    |
-| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
-| French                    | frFR   | dateFrFR    |
+The following list is sorted by 'Config'.
+
+| Language                  | Config | Date config | Version |
+| ------------------------- | ------ | ----------- | ------- |
+| German (Germany)          | deDE   | dateDeDe    |         |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
+| English                   | enUS   | dateEnUS    |         |
+| Esperanto                 | eo     | dateEo      | 2.25.2  |
+| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| French                    | frFR   | dateFrFR    |         |
+| Bahasa Indonesia          | idID   | dateIdID    |         |
+| Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| Japanese                  | jaJP   | dateJaJP    |         |
+| Korean (South Korea)      | koKR   | dateKoKR    | 2.28.1  |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |         |
+| Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
+| Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1  |
+| Russian                   | ruRU   | dateRuRU    |         |
+| Slovak                    | skSK   | dateSkSK    | 2.25.3  |
+| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
+| Ukrainian                 | ukUA   | dateUkUA    |         |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |         |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |         |
 
 ## Customize the existing locale
 

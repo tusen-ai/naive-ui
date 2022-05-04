@@ -2,19 +2,19 @@ import { c, cB, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --bezier
-// --border-radius
-// --height
-// --width
-// --box-shadow
-// --box-shadow-hover
-// --box-shadow-pressed
-// --color
-// --icon-size
-// --icon-color
-// --icon-color-hover
-// --icon-color-pressed
-// --text-color
+// --n-bezier
+// --n-border-radius
+// --n-height
+// --n-width
+// --n-box-shadow
+// --n-box-shadow-hover
+// --n-box-shadow-pressed
+// --n-color
+// --n-icon-size
+// --n-icon-color
+// --n-icon-color-hover
+// --n-icon-color-pressed
+// --n-text-color
 export default cB('back-top', `
   position: fixed;
   right: 40px;
@@ -23,41 +23,41 @@ export default cB('back-top', `
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  color: var(--n-text-color);
   transition:
-    color .3s var(--bezier),
-    box-shadow .3s var(--bezier),
-    background-color .3s var(--bezier);
-  border-radius: var(--border-radius);
-  height: var(--height);
-  min-width: var(--width);
-  box-shadow: var(--box-shadow);
-  background-color: var(--color);
+    color .3s var(--n-bezier),
+    box-shadow .3s var(--n-bezier),
+    background-color .3s var(--n-bezier);
+  border-radius: var(--n-border-radius);
+  height: var(--n-height);
+  min-width: var(--n-width);
+  box-shadow: var(--n-box-shadow);
+  background-color: var(--n-color);
 `, [
   fadeInScaleUpTransition(),
   cM('transition-disabled', {
     transition: 'none !important'
   }),
   cB('base-icon', `
-    font-size: var(--icon-size);
-    color: var(--icon-color);
-    transition: color .3s var(--bezier);
+    font-size: var(--n-icon-size);
+    color: var(--n-icon-color);
+    transition: color .3s var(--n-bezier);
   `),
   c('svg', {
     pointerEvents: 'none'
   }),
   c('&:hover', {
-    boxShadow: 'var(--box-shadow-hover)'
+    boxShadow: 'var(--n-box-shadow-hover)'
   }, [
     cB('base-icon', {
-      color: 'var(--icon-color-hover)'
+      color: 'var(--n-icon-color-hover)'
     })
   ]),
   c('&:active', {
-    boxShadow: 'var(--box-shadow-pressed)'
+    boxShadow: 'var(--n-box-shadow-pressed)'
   }, [
     cB('base-icon', {
-      color: 'var(--icon-color-pressed)'
+      color: 'var(--n-icon-color-pressed)'
     })
   ])
 ])

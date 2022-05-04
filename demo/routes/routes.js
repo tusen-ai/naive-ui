@@ -63,6 +63,15 @@ export const enDocRoutes = [
   {
     path: 'import-on-demand',
     component: () => import('../pages/docs/import-on-demand/enUS/index.md')
+  },
+  {
+    path: 'style-position',
+    component: () => import('../pages/docs/style-position/enUS/index.md')
+  },
+  {
+    path: 'controlled-uncontrolled',
+    component: () =>
+      import('../pages/docs/controlled-uncontrolled/enUS/index.md')
   }
 ]
 
@@ -131,6 +140,15 @@ export const zhDocRoutes = [
   {
     path: 'import-on-demand',
     component: () => import('../pages/docs/import-on-demand/zhCN/index.md')
+  },
+  {
+    path: 'style-position',
+    component: () => import('../pages/docs/style-position/zhCN/index.md')
+  },
+  {
+    path: 'controlled-uncontrolled',
+    component: () =>
+      import('../pages/docs/controlled-uncontrolled/zhCN/index.md')
   }
 ]
 
@@ -480,6 +498,21 @@ export const enComponentRoutes = [
     path: 'scrollbar',
     component: () =>
       import('../../src/scrollbar/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'countdown',
+    component: () =>
+      import('../../src/countdown/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'number-animation',
+    component: () =>
+      import('../../src/number-animation/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'watermark',
+    component: () =>
+      import('../../src/watermark/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -829,6 +862,21 @@ export const zhComponentRoutes = [
     path: 'scrollbar',
     component: () =>
       import('../../src/scrollbar/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'countdown',
+    component: () =>
+      import('../../src/countdown/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'number-animation',
+    component: () =>
+      import('../../src/number-animation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'watermark',
+    component: () =>
+      import('../../src/watermark/demos/zhCN/index.demo-entry.md')
   }
 ]
 

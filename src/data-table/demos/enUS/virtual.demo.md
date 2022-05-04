@@ -6,7 +6,6 @@ Use `virtual-scroll` to deal with large date. Note that you need to set `max-hei
 
 ```html
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :max-height="250"

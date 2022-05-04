@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
@@ -11,28 +11,40 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<TypographyTheme>)
   },
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
-      'Hr',
+      '-hr',
       style,
       typographyLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: { hrColor }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-color': hrColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('hr', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        return {
-          '--color': themeRef.value.self.hrColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
+    this.onRender?.()
     return (
       <hr
-        class={`${this.mergedClsPrefix}-hr`}
+        class={[`${this.mergedClsPrefix}-hr`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       />
     )

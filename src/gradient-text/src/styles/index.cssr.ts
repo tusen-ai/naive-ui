@@ -1,20 +1,20 @@
 import { cB } from '../../../_utils/cssr'
 
 // vars:
-// --font-weight
-// --rotate
-// --bezier
-// --color-start
-// --color-end
+// --n-font-weight
+// --n-rotate
+// --n-bezier
+// --n-color-start
+// --n-color-end
 export default cB('gradient-text', `
   display: inline-block;
-  font-weight: var(--font-weight);
+  font-weight: var(--n-font-weight);
   -webkit-background-clip: text;
   background-clip: text;
   color: #0000;
   white-space: nowrap;
-  background-image: linear-gradient(var(--rotate), var(--color-start) 0%, var(--color-end) 100%);
+  background-image: linear-gradient(var(--n-rotate), var(--n-color-start) 0%, var(--n-color-end) 100%);
   transition:
-    --color-start .3s var(--bezier),
-    --color-end .3s var(--bezier);
+    --n-color-start .3s var(--n-bezier),
+    --n-color-end .3s var(--n-bezier);
 `)

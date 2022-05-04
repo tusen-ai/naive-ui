@@ -4,7 +4,7 @@
 
 像是通知组件这种东西优先级不那么高，所以我可以弄一堆没什么用的动画上去。
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert title="使用前提" type="warning">
   如果你想使用通知，你需要把调用其方法的组件放在 <n-text code>n-notification-provider</n-text> 内部并且使用 <n-text code>useNotification</n-text> 来获取 API。
 </n-alert>
@@ -39,28 +39,29 @@ export default defineComponent({
 ## 演示
 
 ```demo
-basic
-type
-change-content
-scrollable
-closable
-duration
-max
-placement
+basic.vue
+type.vue
+change-content.vue
+scrollable.vue
+closable.vue
+duration.vue
+max.vue
+placement.vue
 ```
 
 ## API
 
 ### NotificationProvider Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| max | `number` | `undefined` | 限制通知框显示的个数 |
-| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |
-| scrollable | `boolean` | `true` | 通知是否可滚动 |
-| to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| container-style | `string \| Object` | `undefined` | 容器的样式 | 2.25.0 |
+| max | `number` | `undefined` | 限制通知框显示的个数 |  |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |  |
+| scrollable | `boolean` | `true` | 通知是否可滚动 |  |
+| to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |  |
 
-### `notification` Injection Methods
+### notification Injection Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -76,7 +77,7 @@ placement
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | action | `string \| (() => VNodeChild)` | `undefined` | 操作区域的内容,可以是 render 函数 |
-| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容，可以是 render 函数 |
+| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容 |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 通知框内容，可以是 render 函数 |
 | description | `string \| (() => VNodeChild)` | `undefined` | 描述的内容，可以是 render 函数 |

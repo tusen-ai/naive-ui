@@ -59,6 +59,7 @@ export default defineComponent({
     } = this
     return (
       <div
+        role="none"
         class={[
           `${mergedClsPrefix}-drawer-content`,
           nativeScrollbar &&
@@ -66,8 +67,16 @@ export default defineComponent({
         ]}
       >
         {$slots.header || title || closable ? (
-          <div class={`${mergedClsPrefix}-drawer-header`} style={headerStyle}>
-            <div class={`${mergedClsPrefix}-drawer-header__main`}>
+          <div
+            class={`${mergedClsPrefix}-drawer-header`}
+            style={headerStyle}
+            role="none"
+          >
+            <div
+              class={`${mergedClsPrefix}-drawer-header__main`}
+              role="heading"
+              aria-level="1"
+            >
               {$slots.header !== undefined ? $slots.header() : title}
             </div>
             {closable && (
@@ -80,10 +89,15 @@ export default defineComponent({
           </div>
         ) : null}
         {nativeScrollbar ? (
-          <div class={`${mergedClsPrefix}-drawer-body`} style={bodyStyle}>
+          <div
+            class={`${mergedClsPrefix}-drawer-body`}
+            style={bodyStyle}
+            role="none"
+          >
             <div
               class={`${mergedClsPrefix}-drawer-body-content-wrapper`}
               style={bodyContentStyle}
+              role="none"
             >
               {$slots}
             </div>
@@ -101,7 +115,11 @@ export default defineComponent({
           </NScrollbar>
         )}
         {$slots.footer ? (
-          <div class={`${mergedClsPrefix}-drawer-footer`} style={footerStyle}>
+          <div
+            class={`${mergedClsPrefix}-drawer-footer`}
+            style={footerStyle}
+            role="none"
+          >
             {$slots.footer()}
           </div>
         ) : null}

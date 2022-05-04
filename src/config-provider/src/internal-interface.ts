@@ -4,6 +4,7 @@ import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
 import type { AvatarTheme } from '../../avatar/styles'
+import type { AvatarGroupTheme } from '../../avatar-group/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
@@ -31,6 +32,7 @@ import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
+import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { ImageTheme } from '../../image/styles'
 import type { InputTheme } from '../../input/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
@@ -73,29 +75,36 @@ import type { TreeTheme } from '../../tree/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
+import type { WatermarkTheme } from '../../watermark/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { Hljs } from '../../_mixins'
-import { Size as TimePickerSize } from '../../time-picker/src/interface'
-import { Size as InputSize } from '../../input/src/interface'
-import { Size as SelectSize } from '../../select/src/interface'
-import { Size as ButtonSize } from '../../button/src/interface'
-import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
-import { IconPlacement } from '../../dialog/src/interface'
+import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { Size as InputSize } from '../../input/src/interface'
+import type { Size as SelectSize } from '../../select/src/interface'
+import type { Size as ButtonSize } from '../../button/src/interface'
+import type {
+  DataTableRenderFilter,
+  DataTableRenderSorter
+} from '../../data-table'
+import type { IconPlacement } from '../../dialog/src/interface'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
-import { CollapseTransitionTheme } from '../../collapse-transition/styles'
+import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
+import type { ButtonGroupTheme } from '../../button-group/styles/light'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
   Anchor?: AnchorTheme
   AutoComplete?: AutoCompleteTheme
   Avatar?: AvatarTheme
+  AvatarGroup?: AvatarGroupTheme
   BackTop?: BackTopTheme
   Badge?: BadgeTheme
   Breadcrumb?: BreadcrumbTheme
   Button?: ButtonTheme
+  ButtonGroup?: ButtonGroupTheme
   Calendar?: CalendarTheme
   Card?: CardTheme
   Carousel?: CarouselTheme
@@ -120,6 +129,7 @@ export interface GlobalThemeWithoutCommon {
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
+  IconWrapper?: IconWrapperTheme
   Image?: ImageTheme
   Input?: InputTheme
   InputNumber?: InputNumberTheme
@@ -162,6 +172,7 @@ export interface GlobalThemeWithoutCommon {
   TreeSelect?: TreeSelectTheme
   Typography?: TypographyTheme
   Upload?: UploadTheme
+  Watermark?: WatermarkTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
@@ -212,6 +223,7 @@ export interface GlobalIconConfig {
 export interface RtlItem {
   name: keyof GlobalThemeWithoutCommon
   style: CNode
+  peers?: RtlItem[]
 }
 export type RtlProp = RtlItem[]
 
@@ -234,4 +246,7 @@ export interface ConfigProviderInjection {
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
+  mergedThemeHashRef: Ref<string>
+  // non-reactive
+  inlineThemeDisabled: boolean
 }

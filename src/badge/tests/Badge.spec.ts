@@ -19,7 +19,7 @@ describe('n-badge', () => {
   it('should work with `color` prop', async () => {
     const wrapper = mount(NBadge, { props: { value: 5, color: 'grey' } })
     expect(wrapper.find('.n-badge').attributes('style')).toContain(
-      '--color: grey;'
+      '--n-color: grey;'
     )
   })
 

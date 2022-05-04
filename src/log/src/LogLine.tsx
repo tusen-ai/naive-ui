@@ -8,7 +8,7 @@ import {
   toRef,
   computed
 } from 'vue'
-import { logInjectionKey } from './Log'
+import { logInjectionKey } from './context'
 
 export default defineComponent({
   props: {

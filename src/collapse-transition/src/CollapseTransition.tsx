@@ -6,7 +6,8 @@ import {
   PropType,
   watchEffect
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import useRtl from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warnOnce } from '../../_utils'
@@ -22,7 +23,7 @@ const collapseProps = {
     default: true
   },
   appear: Boolean,
-  // The collapsed is implemented will mistake, collapsed=true would make it show
+  // The collapsed is implemented with mistake, collapsed=true would make it show
   // However there's no possibility to change so I just let it deprecated and use
   // `show` prop instead.
   /** @deprecated */
@@ -51,13 +52,20 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const mergedThemeRef = useTheme(
       'CollapseTransition',
-      'CollapseTransition',
+      '-collapse-transition',
       style,
       collapseTransitionLight,
-      props
+      props,
+      mergedClsPrefixRef
+    )
+    const rtlEnabledRef = useRtl(
+      'CollapseTransition',
+      mergedRtlRef,
+      mergedClsPrefixRef
     )
     const mergedShowRef = computed(() => {
       if (props.collapsed !== undefined) {
@@ -66,37 +74,52 @@ export default defineComponent({
       }
       return props.show
     })
+
+    const cssVarsRef = computed(() => {
+      const {
+        self: { bezier }
+      } = mergedThemeRef.value
+      return {
+        '--n-bezier': bezier
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('collapse-transition', undefined, cssVarsRef, props)
+      : undefined
+
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedShow: mergedShowRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: { bezier }
-        } = mergedThemeRef.value
-        return {
-          '--bezier': bezier
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     return (
       <NFadeInExpandTransition appear={this.appear}>
         {{
-          default: () =>
-            this.mergedShow
-              ? h(
-                'div', // Don't use jsx since it would cause useless spread in each rendering
-                mergeProps(
-                  {
-                    class: `${this.mergedClsPrefix}-collapse-transition`,
-                    style: this.cssVars
-                  },
-                  this.$attrs
-                ),
-                this.$slots
-              )
-              : null
+          default: () => {
+            if (!this.mergedShow) return
+            this.onRender?.()
+            return h(
+              'div', // Don't use jsx since it would cause useless spread in each rendering
+              mergeProps(
+                {
+                  class: [
+                    `${this.mergedClsPrefix}-collapse-transition`,
+                    this.rtlEnabled &&
+                      `${this.mergedClsPrefix}-collapse-transition--rtl`,
+                    this.themeClass
+                  ],
+                  style: this.cssVars
+                },
+                this.$attrs
+              ),
+              this.$slots
+            )
+          }
         }}
       </NFadeInExpandTransition>
     )

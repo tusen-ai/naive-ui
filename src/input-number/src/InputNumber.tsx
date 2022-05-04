@@ -1,21 +1,48 @@
-import { h, defineComponent, ref, toRef, watch, computed, PropType } from 'vue'
+import {
+  h,
+  defineComponent,
+  ref,
+  toRef,
+  watch,
+  computed,
+  PropType,
+  watchEffect
+} from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
+import { on } from 'evtd'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { NButton } from '../../button'
+import { NxButton } from '../../button'
 import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { inputNumberLight, InputNumberTheme } from '../styles'
+import {
+  MaybeArray,
+  ExtractPublicPropTypes,
+  warnOnce,
+  call,
+  resolveSlot
+} from '../../_utils'
+import { inputNumberLight } from '../styles'
+import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
+import useRtl from '../../_mixins/use-rtl'
+
+const HOLDING_CHANGE_THRESHOLD = 800
+const HOLDING_CHANGE_INTERVAL = 100
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  autofocus: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   placeholder: String,
   defaultValue: {
     type: Number as PropType<number | null>,
@@ -55,25 +82,14 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'input-number',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 }
 
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
@@ -82,10 +98,21 @@ export default defineComponent({
   name: 'InputNumber',
   props: inputNumberProps,
   setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'input-number',
+            '`on-change` is deprecated, please use `on-update:value` instead'
+          )
+        }
+      })
+    }
+    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
-      'InputNumber',
+      '-input-number',
       style,
       inputNumberLight,
       props,
@@ -93,7 +120,7 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
@@ -268,7 +295,10 @@ export default defineComponent({
     }
     function doAdd (): void {
       const { value: addable } = addableRef
-      if (!addable) return
+      if (!addable) {
+        clearAddHoldTimeout()
+        return
+      }
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -281,7 +311,10 @@ export default defineComponent({
     }
     function doMinus (): void {
       const { value: minusable } = minusableRef
-      if (!minusable) return
+      if (!minusable) {
+        clearMinusHoldTimeout()
+        return
+      }
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
@@ -319,8 +352,58 @@ export default defineComponent({
       }
       inputInstRef.value?.activate()
     }
-    const handleAddClick = doAdd
-    const handleMinusClick = doMinus
+    let minusHoldStateIntervalId: number | null = null
+    let addHoldStateIntervalId: number | null = null
+    let firstMinusMousedownId: number | null = null
+    function clearMinusHoldTimeout (): void {
+      if (firstMinusMousedownId) {
+        window.clearTimeout(firstMinusMousedownId)
+        firstMinusMousedownId = null
+      }
+      if (minusHoldStateIntervalId) {
+        window.clearInterval(minusHoldStateIntervalId)
+        minusHoldStateIntervalId = null
+      }
+    }
+    function clearAddHoldTimeout (): void {
+      if (firstAddMousedownId) {
+        window.clearTimeout(firstAddMousedownId)
+        firstAddMousedownId = null
+      }
+      if (addHoldStateIntervalId) {
+        window.clearInterval(addHoldStateIntervalId)
+        addHoldStateIntervalId = null
+      }
+    }
+    function handleMinusMousedown (): void {
+      firstMinusMousedownId = window.setTimeout(() => {
+        minusHoldStateIntervalId = window.setInterval(() => {
+          doMinus()
+        }, HOLDING_CHANGE_INTERVAL)
+      }, HOLDING_CHANGE_THRESHOLD)
+      on('mouseup', document, () => {
+        window.setTimeout(clearMinusHoldTimeout, 0)
+      })
+    }
+    let firstAddMousedownId: number | null = null
+    function handleAddMousedown (): void {
+      firstAddMousedownId = window.setTimeout(() => {
+        addHoldStateIntervalId = window.setInterval(() => {
+          doAdd()
+        }, HOLDING_CHANGE_INTERVAL)
+      }, HOLDING_CHANGE_THRESHOLD)
+      on('mouseup', document, () => {
+        window.setTimeout(clearAddHoldTimeout, 0)
+      })
+    }
+    const handleAddClick = (): void => {
+      if (addHoldStateIntervalId) return
+      doAdd()
+    }
+    const handleMinusClick = (): void => {
+      if (minusHoldStateIntervalId) return
+      doMinus()
+    }
     function handleKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
@@ -361,8 +444,14 @@ export default defineComponent({
       focus: () => inputInstRef.value?.focus(),
       blur: () => inputInstRef.value?.blur()
     }
+    const rtlEnabledRef = useRtl(
+      'InputNumber',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     return {
       ...exposedMethods,
+      rtlEnabled: rtlEnabledRef,
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
@@ -377,12 +466,15 @@ export default defineComponent({
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,
+      mergedStatus: mergedStatusRef,
       handleFocus,
       handleBlur,
       handleClear,
       handleMouseDown,
       handleAddClick,
       handleMinusClick,
+      handleAddMousedown,
+      handleMinusMousedown,
       handleKeyDown,
       handleUpdateDisplayedValue,
       // theme
@@ -405,12 +497,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
-      <div class={`${mergedClsPrefix}-input-number`}>
+      <div
+        class={[
+          `${mergedClsPrefix}-input-number`,
+          this.rtlEnabled && `${mergedClsPrefix}-input-number--rtl`
+        ]}
+      >
         <NInput
           ref="inputInstRef"
+          autofocus={this.autofocus}
+          status={this.mergedStatus}
           bordered={this.mergedBordered}
+          loading={this.loading}
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
           theme={this.mergedTheme.peers.Input}
@@ -429,59 +529,64 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          internalLoadingBeforeSuffix
         >
           {{
-            _: 2, // input number has dynamic slots
-            prefix: this.$slots.prefix,
-            suffix: this.showButton
-              ? () => [
-                  this.$slots.suffix && (
-                    <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                      {{ default: this.$slots.suffix }}
-                    </span>
-                  ),
-                  <NButton
-                    text
-                    disabled={
-                      !this.minusable || this.mergedDisabled || this.readonly
-                    }
-                    focusable={false}
-                    builtinThemeOverrides={this.buttonThemeOverrides}
-                    onClick={this.handleMinusClick}
-                    ref="minusButtonInstRef"
-                  >
-                    {{
-                      default: () => (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => <RemoveIcon />
-                          }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NButton>,
-                  <NButton
-                    text
-                    disabled={
-                      !this.addable || this.mergedDisabled || this.readonly
-                    }
-                    focusable={false}
-                    builtinThemeOverrides={this.buttonThemeOverrides}
-                    onClick={this.handleAddClick}
-                    ref="addButtonInstRef"
-                  >
-                    {{
-                      default: () => (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => <AddIcon />
-                          }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NButton>
-                ]
-              : this.$slots.suffix
+            prefix: () => $slots.prefix?.(),
+            suffix: () =>
+              this.showButton
+                ? [
+                    $slots.suffix && (
+                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                        {{ default: $slots.suffix }}
+                      </span>
+                    ),
+                    <NxButton
+                      text
+                      disabled={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                      }
+                      focusable={false}
+                      builtinThemeOverrides={this.buttonThemeOverrides}
+                      onClick={this.handleMinusClick}
+                      onMousedown={this.handleMinusMousedown}
+                      ref="minusButtonInstRef"
+                    >
+                      {{
+                        icon: () =>
+                          resolveSlot($slots['minus-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <RemoveIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
+                      }}
+                    </NxButton>,
+                    <NxButton
+                      text
+                      disabled={
+                        !this.addable || this.mergedDisabled || this.readonly
+                      }
+                      focusable={false}
+                      builtinThemeOverrides={this.buttonThemeOverrides}
+                      onClick={this.handleAddClick}
+                      onMousedown={this.handleAddMousedown}
+                      ref="addButtonInstRef"
+                    >
+                      {{
+                        icon: () =>
+                          resolveSlot($slots['add-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <AddIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
+                      }}
+                    </NxButton>
+                  ]
+                : $slots.suffix?.()
           }}
         </NInput>
       </div>

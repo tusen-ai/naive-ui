@@ -209,7 +209,7 @@ function dateArray (
   let displayMonthIterator = getTime(startOfMonth(monthTs))
   // Last day of last month
   let lastMonthIterator = getTime(addDays(displayMonthIterator, -1))
-  const calendarDays = []
+  const calendarDays: DateItem[] = []
   let protectLastMonthDateIsShownFlag = !strip
   while (
     getDay(lastMonthIterator) !== startDay ||
@@ -248,7 +248,7 @@ function monthArray (
   valueTs: number | [number, number] | null,
   currentTs: number
 ): MonthItem[] {
-  const calendarMonths = []
+  const calendarMonths: MonthItem[] = []
   const yearStart = startOfYear(monthTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
@@ -263,7 +263,7 @@ function quarterArray (
   valueTs: number | [number, number] | null,
   currentTs: number
 ): QuarterItem[] {
-  const calendarQuarters = []
+  const calendarQuarters: QuarterItem[] = []
   const yearStart = startOfYear(quarterTs)
   for (let i = 0; i < 4; i++) {
     calendarQuarters.push(
@@ -278,7 +278,7 @@ function yearArray (
   valueTs: number | [number, number] | null,
   currentTs: number
 ): YearItem[] {
-  const calendarYears = []
+  const calendarYears: YearItem[] = []
   const time1900 = new Date(START_YEAR, 0, 1)
   // 1900 is not a round time, so we use 1911 as start...
   // new Date(1900, 0, 1)

@@ -1,36 +1,41 @@
-import { cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
-// --font-size
-// --icon-size
-// --icon-color
-// --bezier
-// --text-color
-// --extra-text-color
+// --n-font-size
+// --n-icon-size
+// --n-icon-color
+// --n-bezier
+// --n-text-color
+// --n-extra-text-color
 export default cB('empty', `
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: var(--font-size);
+  font-size: var(--n-font-size);
 `, [
   cE('icon', `
-    width: var(--icon-size);
-    height: var(--icon-size);
-    font-size: var(--icon-size);
-    line-height: var(--icon-size);
-    color: var(--icon-color);
+    width: var(--n-icon-size);
+    height: var(--n-icon-size);
+    font-size: var(--n-icon-size);
+    line-height: var(--n-icon-size);
+    color: var(--n-icon-color);
     transition:
-      color .3s var(--bezier);
-  `),
+      color .3s var(--n-bezier);
+  `, [
+    c('+', [
+      cE('description', `
+        margin-top: 8px;
+      `)
+    ])
+  ]),
   cE('description', `
-    margin-top: 8px;
-    transition: color .3s var(--bezier);
-    color: var(--text-color);
+    transition: color .3s var(--n-bezier);
+    color: var(--n-text-color);
   `),
   cE('extra', `
     text-align: center;
-    transition: color .3s var(--bezier);
+    transition: color .3s var(--n-bezier);
     margin-top: 12px;
-    color: var(--extra-text-color);
+    color: var(--n-extra-text-color);
   `)
 ])

@@ -7,7 +7,9 @@ interface FormatLengthOptions {
   attachPx?: boolean
 }
 
-function formatLength<T extends number | string | null | undefined | any> (
+export function formatLength<
+  T extends number | string | null | undefined | any
+> (
   length: T,
   { c = 1, offset = 0, attachPx = true }: FormatLengthOptions = {}
 ): T extends null
@@ -41,5 +43,3 @@ function formatLength<T extends number | string | null | undefined | any> (
   }
   return length as any
 }
-
-export default formatLength

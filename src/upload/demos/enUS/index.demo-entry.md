@@ -5,18 +5,18 @@ If latency didn't matter, I'd just fill trucks with hard disks.
 ## Demos
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-download
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+download.vue
 ```
 
 ## API
@@ -37,6 +37,8 @@ download
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
+| input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
+| image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |
 | method | `string` | `'POST'` | The HTTP request method. |  |
@@ -51,12 +53,13 @@ download
 | show-trigger | `boolean` | `true` | Show upload trigger. | 2.21.5 |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
-| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
-| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |  |
+| on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
+| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| undefined` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |  |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |  |
+| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
 
 #### UploadFileInfo Type
 
@@ -65,7 +68,7 @@ download
 | id | `string \| number` | Unique file ID. |
 | name | `string` | Filename. |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage | `number` | The progress percentage of the file being uploaded. |
+| percentage? | `number` | The progress percentage of the file being uploaded. |
 | file? | `File \| null` | The object of the file stored in the browser. |
 | thumbnailUrl? | `string \| null` | Thumbnail URL. |
 | type? | `string \| null` | MIME type. |
@@ -98,10 +101,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | Submit all files with pending status. |
-| openOpenFileDialog | `() => void` | Open the file dialog window. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| clear | `() => void` | Clear current upload list. | 2.24.2 |
+| openOpenFileDialog | `() => void` | Open the file dialog window. |  |
+| submit | `(fileId?: string \| number)` | Submit all files with pending status. |  |
 
 ### Upload Slots
 

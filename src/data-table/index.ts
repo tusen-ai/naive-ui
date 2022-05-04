@@ -3,6 +3,8 @@ export type { DataTableProps } from './src/DataTable'
 export type {
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,
+  RenderFilterIcon as DataTableRenderFilterIcon,
+  RenderSorterIcon as DataTableRenderSorterIcon,
   ColumnKey as DataTableColumnKey,
   TableColumn as DataTableColumn,
   TableColumns as DataTableColumns,
@@ -13,5 +15,7 @@ export type {
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
   DataTableInst,
-  CreateSummary as DataTableCreateSummary
+  CreateSummary as DataTableCreateSummary,
+  FilterState as DataTableFilterState,
+  SortState as DataTableSortState
 } from './src/interface'

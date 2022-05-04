@@ -1,12 +1,5 @@
-import {
-  h,
-  renderSlot,
-  defineComponent,
-  computed,
-  CSSProperties,
-  Fragment
-} from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { h, defineComponent, computed, CSSProperties, Fragment } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
@@ -31,10 +24,10 @@ export default defineComponent({
   name: 'Thing',
   props: thingProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Thing',
-      'Thing',
+      '-thing',
       style,
       thingLight,
       props,
@@ -46,23 +39,32 @@ export default defineComponent({
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--font-size': fontSize,
-        '--text-color': textColor,
-        '--title-font-weight': titleFontWeight,
-        '--title-text-color': titleTextColor
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-text-color': titleTextColor
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('thing', undefined, cssVarsRef, props)
+      : undefined
+
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      themeClassHandle?.onRender?.()
       return (
         <div
-          class={`${mergedClsPrefix}-thing`}
-          style={cssVarsRef.value as CSSProperties}
+          class={[`${mergedClsPrefix}-thing`, themeClassHandle?.themeClass]}
+          style={
+            inlineThemeDisabled
+              ? undefined
+              : (cssVarsRef.value as CSSProperties)
+          }
         >
           {slots.avatar && props.contentIndented ? (
             <div class={`${mergedClsPrefix}-thing-avatar`}>
-              {renderSlot(slots, 'avatar')}
+              {slots.avatar()}
             </div>
           ) : null}
           <div class={`${mergedClsPrefix}-thing-main`}>
@@ -75,7 +77,7 @@ export default defineComponent({
               <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                 {slots.avatar ? (
                   <div class={`${mergedClsPrefix}-thing-avatar`}>
-                    {renderSlot(slots, 'avatar')}
+                    {slots.avatar()}
                   </div>
                 ) : null}
                 {slots.header ||
@@ -86,24 +88,22 @@ export default defineComponent({
                     <div class={`${mergedClsPrefix}-thing-header`}>
                       {slots.header || props.title ? (
                         <div class={`${mergedClsPrefix}-thing-header__title`}>
-                          {renderSlot(slots, 'header', undefined, () => [
-                            props.title
-                          ])}
+                          {slots.header ? slots.header() : props.title}
                         </div>
                       ) : null}
                       {slots['header-extra'] || props.titleExtra ? (
                         <div class={`${mergedClsPrefix}-thing-header__extra`}>
-                          {renderSlot(slots, 'header-extra', undefined, () => [
-                            props.titleExtra
-                          ])}
+                          {slots['header-extra']
+                            ? slots['header-extra']()
+                            : props.titleExtra}
                         </div>
                       ) : null}
                     </div>
                     {slots.description || props.description ? (
                       <div class={`${mergedClsPrefix}-thing-main__description`}>
-                        {renderSlot(slots, 'description', undefined, () => [
-                          props.description
-                        ])}
+                        {slots.description
+                          ? slots.description()
+                          : props.description}
                       </div>
                     ) : null}
                   </div>
@@ -118,42 +118,40 @@ export default defineComponent({
                   <div class={`${mergedClsPrefix}-thing-header`}>
                     {slots.header || props.title ? (
                       <div class={`${mergedClsPrefix}-thing-header__title`}>
-                        {renderSlot(slots, 'header', undefined, () => [
-                          props.title
-                        ])}
+                        {slots.header ? slots.header() : props.title}
                       </div>
                     ) : null}
                     {slots['header-extra'] || props.titleExtra ? (
                       <div class={`${mergedClsPrefix}-thing-header__extra`}>
-                        {renderSlot(slots, 'header-extra', undefined, () => [
-                          props.titleExtra
-                        ])}
+                        {slots['header-extra']
+                          ? slots['header-extra']()
+                          : props.titleExtra}
                       </div>
                     ) : null}
                   </div>
                     ) : null}
                 {slots.description || props.description ? (
                   <div class={`${mergedClsPrefix}-thing-main__description`}>
-                    {renderSlot(slots, 'description', undefined, () => [
-                      props.description
-                    ])}
+                    {slots.description
+                      ? slots.description()
+                      : props.description}
                   </div>
                 ) : null}
               </>
                 )}
             {slots.default || props.content ? (
               <div class={`${mergedClsPrefix}-thing-main__content`}>
-                {renderSlot(slots, 'default', undefined, () => [props.content])}
+                {slots.default ? slots.default() : props.content}
               </div>
             ) : null}
             {slots.footer ? (
               <div class={`${mergedClsPrefix}-thing-main__footer`}>
-                {renderSlot(slots, 'footer')}
+                {slots.footer()}
               </div>
             ) : null}
             {slots.action ? (
               <div class={`${mergedClsPrefix}-thing-main__action`}>
-                {renderSlot(slots, 'action')}
+                {slots.action()}
               </div>
             ) : null}
           </div>

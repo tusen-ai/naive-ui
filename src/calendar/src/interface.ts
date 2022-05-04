@@ -5,3 +5,5 @@ export interface DateItem {
   month: number
   date: number
 }
+
+export type OnPanelChange = (info: { year: number, month: number }) => void

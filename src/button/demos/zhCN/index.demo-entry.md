@@ -5,25 +5,26 @@
 ## 演示
 
 ```demo
-basic
-secondary
-tertiary
-quaternary
-dashed
-size
-text
-tag
-disabled
-icon
-events
-shape
-ghost
-loading
-color
-group
-icon-button
-rtl-debug
-debug
+basic.vue
+secondary.vue
+tertiary.vue
+quaternary.vue
+dashed.vue
+size.vue
+text.vue
+tag.vue
+disabled.vue
+icon.vue
+events.vue
+shape.vue
+ghost.vue
+loading.vue
+color.vue
+group.vue
+icon-button.vue
+popover.vue
+rtl-debug.vue
+debug.vue
 ```
 
 ## API
@@ -39,6 +40,7 @@ debug
 | color | `string` | `undefined` | 按钮颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | dashed | `boolean` | `false` | 按钮边框是否为虚线 |
 | disabled | `boolean` | `false` | 按钮是否禁用 |
+| focusable | `boolean` | `true` | 按钮是否可以被聚焦 |
 | ghost | `boolean` | `false` | 按钮是否透明 |
 | icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |
@@ -51,7 +53,7 @@ debug
 | tertiary | `boolean` | `false` | 是否是三级按钮 |
 | text | `boolean` | `false` | 是否显示为文本按钮 |
 | text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
-| type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |
+| type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |
 | tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |
 
 ### ButtonGroup Props

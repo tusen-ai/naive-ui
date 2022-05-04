@@ -10,15 +10,16 @@ import {
   PropType,
   CSSProperties,
   computed,
-  renderSlot,
   Fragment
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst, VResizeObserver } from 'vueuc'
 import { CNode } from 'css-render'
+import { useMemo } from 'vooks'
+import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
-import { formatLength } from '../../../_utils'
+import { formatLength, resolveSlot } from '../../../_utils'
 import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
@@ -34,7 +35,6 @@ import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
-import { useMemo } from 'vooks'
 
 interface NormalRowRenderInfo {
   striped: boolean
@@ -164,13 +164,14 @@ export default defineComponent({
       componentId,
       scrollPartRef,
       mergedTableLayoutRef,
-      hasChildrenRef,
       firstContentfulColIndexRef,
       indentRef,
       rowPropsRef,
       maxHeightRef,
       stripedRef,
       loadingRef,
+      onLoadRef,
+      loadingKeySetRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -249,16 +250,41 @@ export default defineComponent({
       if (value) return value.containerRef
       return null
     }
-    function handleUpdateExpanded (key: RowKey): void {
+    // For table row with children, tmNode is non-nullable
+    // For table row is expandable but is not tree data, tmNode is null
+    function handleUpdateExpanded (key: RowKey, tmNode: TmNode | null): void {
+      if (loadingKeySetRef.value.has(key)) return
       const { value: mergedExpandedRowKeys } = mergedExpandedRowKeysRef
       const index = mergedExpandedRowKeys.indexOf(key)
       const nextExpandedKeys = Array.from(mergedExpandedRowKeys)
       if (~index) {
         nextExpandedKeys.splice(index, 1)
+        doUpdateExpandedRowKeys(nextExpandedKeys)
       } else {
-        nextExpandedKeys.push(key)
+        if (tmNode && !tmNode.isLeaf && !tmNode.shallowLoaded) {
+          loadingKeySetRef.value.add(key)
+          void onLoadRef
+            .value?.(tmNode.rawNode)
+            .then(() => {
+              const { value: futureMergedExpandedRowKeys } =
+                mergedExpandedRowKeysRef
+              const futureNextExpandedKeys = Array.from(
+                futureMergedExpandedRowKeys
+              )
+              const index = futureNextExpandedKeys.indexOf(key)
+              if (!~index) {
+                futureNextExpandedKeys.push(key)
+              }
+              doUpdateExpandedRowKeys(futureNextExpandedKeys)
+            })
+            .finally(() => {
+              loadingKeySetRef.value.delete(key)
+            })
+        } else {
+          nextExpandedKeys.push(key)
+          doUpdateExpandedRowKeys(nextExpandedKeys)
+        }
       }
-      doUpdateExpandedRowKeys(nextExpandedKeys)
     }
     function handleMouseleaveTable (): void {
       hoverKeyRef.value = null
@@ -304,7 +330,7 @@ export default defineComponent({
           if (leftActiveFixedColKey === null) return null
           return c(
             `[data-n-id="${cProps.componentId}"] [data-col-key="${leftActiveFixedColKey}"]::after`,
-            { boxShadow: 'var(--box-shadow-after)' }
+            { boxShadow: 'var(--n-box-shadow-after)' }
           )
         }
 
@@ -314,7 +340,7 @@ export default defineComponent({
           if (rightActiveFixedColKey === null) return null
           return c(
             `[data-n-id="${cProps.componentId}"] [data-col-key="${rightActiveFixedColKey}"]::before`,
-            { boxShadow: 'var(--box-shadow-before)' }
+            { boxShadow: 'var(--n-box-shadow-before)' }
           )
         }
 
@@ -356,7 +382,8 @@ export default defineComponent({
       style.mount({
         id: `n-${componentId}`,
         force: true,
-        props: cProps
+        props: cProps,
+        anchorMetaName: cssrAnchorMetaName
       })
       fixedStyleMounted = true
     })
@@ -380,11 +407,13 @@ export default defineComponent({
       bodyShowHeaderOnly: bodyShowHeaderOnlyRef,
       shouldDisplaySomeTablePart: shouldDisplaySomeTablePartRef,
       empty: emptyRef,
-      paginatedData: computed(() => {
+      paginatedDataAndInfo: computed(() => {
         const { value: striped } = stripedRef
-        return paginatedDataRef.value.map(
+        let hasChildren = false
+        const data = paginatedDataRef.value.map(
           striped
             ? (tmNode, index) => {
+                if (!tmNode.isLeaf) hasChildren = true
                 return {
                   tmNode,
                   key: tmNode.key,
@@ -392,6 +421,7 @@ export default defineComponent({
                 }
               }
             : (tmNode) => {
+                if (!tmNode.isLeaf) hasChildren = true
                 return {
                   tmNode,
                   key: tmNode.key,
@@ -399,6 +429,10 @@ export default defineComponent({
                 }
               }
         )
+        return {
+          data,
+          hasChildren
+        }
       }),
       rawPaginatedData: rawPaginatedDataRef,
       fixedColumnLeftMap: fixedColumnLeftMapRef,
@@ -411,11 +445,11 @@ export default defineComponent({
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
       mergedTableLayout: mergedTableLayoutRef,
-      hasChildren: hasChildrenRef,
       firstContentfulColIndex: firstContentfulColIndexRef,
       indent: indentRef,
       rowProps: rowPropsRef,
       maxHeight: maxHeightRef,
+      loadingKeySet: loadingKeySetRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -438,6 +472,7 @@ export default defineComponent({
       maxHeight,
       mergedTableLayout,
       flexHeight,
+      loadingKeySet,
       onResize,
       setHeaderScrollLeft
     } = this
@@ -460,7 +495,6 @@ export default defineComponent({
       <NScrollbar
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
-        showScrollbar={!this.bodyShowHeaderOnly}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
         style={this.bodyStyle}
         theme={mergedTheme.peers.Scrollbar}
@@ -483,7 +517,7 @@ export default defineComponent({
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
             const {
               cols,
-              paginatedData,
+              paginatedDataAndInfo,
               mergedTheme,
               fixedColumnLeftMap,
               fixedColumnRightMap,
@@ -492,7 +526,6 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeySet,
               componentId,
-              hasChildren,
               firstContentfulColIndex,
               rowProps,
               handleMouseenterTable,
@@ -507,6 +540,8 @@ export default defineComponent({
             let mergedData: RowRenderInfo[]
 
             // if there is children in data, we should expand mergedData first
+
+            const { data: paginatedData, hasChildren } = paginatedDataAndInfo
 
             const mergedPaginationData = hasChildren
               ? flatten(paginatedData, mergedExpandedRowKeySet)
@@ -553,7 +588,7 @@ export default defineComponent({
               if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
-                  key: rowInfo.key,
+                  key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row
                   tmNode: rowInfo.tmNode as TmNode
                 })
               } else {
@@ -677,21 +712,27 @@ export default defineComponent({
                       }
                     }
                     const hoverKey = isCrossRowTd ? this.hoverKey : null
-                    const { ellipsis } = column
+                    const { ellipsis, cellProps } = column
+                    const resolvedCellProps = cellProps?.(rowData, rowIndex)
                     return (
                       <td
+                        {...resolvedCellProps}
                         key={colKey}
-                        style={{
-                          textAlign: column.align || undefined,
-                          left: pxfy(fixedColumnLeftMap[colKey]?.start),
-                          right: pxfy(fixedColumnRightMap[colKey]?.start)
-                        }}
+                        style={[
+                          {
+                            textAlign: column.align || undefined,
+                            left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                            right: pxfy(fixedColumnRightMap[colKey]?.start)
+                          },
+                          resolvedCellProps?.style || ''
+                        ]}
                         colspan={mergedColSpan}
                         rowspan={isVirtual ? undefined : mergedRowSpan}
                         data-col-key={colKey}
                         class={[
                           `${mergedClsPrefix}-data-table-td`,
                           column.className,
+                          resolvedCellProps?.class,
                           isSummary &&
                             `${mergedClsPrefix}-data-table-td--summary`,
                           ((hoverKey !== null &&
@@ -727,7 +768,7 @@ export default defineComponent({
                                   style={indentStyle}
                                 />
                               ),
-                              isSummary || !rowInfo.tmNode.children ? (
+                              isSummary || rowInfo.tmNode.isLeaf ? (
                                 <div
                                   class={`${mergedClsPrefix}-data-table-expand-placeholder`}
                                 />
@@ -736,8 +777,9 @@ export default defineComponent({
                                   class={`${mergedClsPrefix}-data-table-expand-trigger`}
                                   clsPrefix={mergedClsPrefix}
                                   expanded={expanded}
+                                  loading={loadingKeySet.has(rowInfo.key)}
                                   onClick={() => {
-                                    handleUpdateExpanded(rowKey)
+                                    handleUpdateExpanded(rowKey, rowInfo.tmNode)
                                   }}
                                 />
                               )
@@ -765,7 +807,9 @@ export default defineComponent({
                               <ExpandTrigger
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
-                                onClick={() => handleUpdateExpanded(rowKey)}
+                                onClick={() =>
+                                  handleUpdateExpanded(rowKey, null)
+                                }
                               />
                                 ) : null
                           ) : null
@@ -862,7 +906,7 @@ export default defineComponent({
           style={this.bodyStyle}
           ref="emptyElRef"
         >
-          {renderSlot(this.dataTableSlots, 'empty', undefined, () => [
+          {resolveSlot(this.dataTableSlots.empty, () => [
             <NEmpty
               theme={this.mergedTheme.peers.Empty}
               themeOverrides={this.mergedTheme.peerOverrides.Empty}

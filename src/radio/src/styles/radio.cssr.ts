@@ -1,34 +1,38 @@
 import { c, cE, cM, cNotM, cB } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --box-shadow
-// --box-shadow-active
-// --box-shadow-disabled
-// --box-shadow-focus
-// --box-shadow-hover
-// --color
-// --color-disabled
-// --dot-color-active
-// --dot-color-disabled
-// --font-size
-// --radio-size
-// --text-color
-// --text-color-disabled
-// --label-padding
+// --n-bezier
+// --n-box-shadow
+// --n-box-shadow-active
+// --n-box-shadow-disabled
+// --n-box-shadow-focus
+// --n-box-shadow-hover
+// --n-color
+// --n-color-disabled
+// --n-dot-color-active
+// --n-dot-color-disabled
+// --n-font-size
+// --n-radio-size
+// --n-text-color
+// --n-text-color-disabled
+// --n-label-padding
+// --n-label-line-height
 export default cB('radio', `
-  line-height: 1;
+  line-height: var(--n-label-line-height);
   outline: none;
   position: relative;
   user-select: none;
   display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  font-size: var(--font-size);
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  font-size: var(--n-font-size);
+  word-break: break-word;
 `, [
-  cE('dot', `
-    height: var(--radio-size);
-    width: var(--radio-size);
+  cE('dot-wrapper', `
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: var(--n-radio-size);
   `),
   cB('radio-input', `
     position: absolute;
@@ -40,15 +44,21 @@ export default cB('radio', `
     bottom: 0;
     opacity: 0;
     z-index: 1;
+    cursor: pointer;
   `),
   cE('dot', `
-    background: var(--color);
-    box-shadow: var(--box-shadow);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: var(--n-radio-size);
+    width: var(--n-radio-size);
+    background: var(--n-color);
+    box-shadow: var(--n-box-shadow);
+    border-radius: 50%;
     transition:
-      background-color .3s var(--bezier),
-      box-shadow .3s var(--bezier);
-      position: relative;
-      border-radius: 50%;
+      background-color .3s var(--n-bezier),
+      box-shadow .3s var(--n-bezier);
   `, [
     c('&::before', `
       content: "";
@@ -60,14 +70,14 @@ export default cB('radio', `
       width: calc(100% - 8px);
       border-radius: 50%;
       transform: scale(.8);
-      background: var(--dot-color-active);
+      background: var(--n-dot-color-active);
       transition: 
-        opacity .3s var(--bezier),
-        background-color .3s var(--bezier),
-        transform .3s var(--bezier);
+        opacity .3s var(--n-bezier),
+        background-color .3s var(--n-bezier),
+        transform .3s var(--n-bezier);
     `),
     cM('checked', {
-      boxShadow: 'var(--box-shadow-active)'
+      boxShadow: 'var(--n-box-shadow-active)'
     }, [
       c('&::before', `
         opacity: 1;
@@ -76,24 +86,23 @@ export default cB('radio', `
     ])
   ]),
   cE('label', `
-    color: var(--text-color);
-    padding: var(--label-padding);
+    color: var(--n-text-color);
+    padding: var(--n-label-padding);
     display: inline-block;
-    white-space: nowrap;
-    transition: color .3s var(--bezier);
+    transition: color .3s var(--n-bezier);
   `),
   cNotM('disabled', `
     cursor: pointer;
   `, [
     c('&:hover', [
       cE('dot', {
-        boxShadow: 'var(--box-shadow-hover)'
+        boxShadow: 'var(--n-box-shadow-hover)'
       })
     ]),
     cM('focus', [
       c('&:not(:active)', [
         cE('dot', {
-          boxShadow: 'var(--box-shadow-focus)'
+          boxShadow: 'var(--n-box-shadow-focus)'
         })
       ])
     ])
@@ -102,19 +111,21 @@ export default cB('radio', `
     cursor: not-allowed;
   `, [
     cE('dot', {
-      boxShadow: 'var(--box-shadow-disabled)',
-      backgroundColor: 'var(--color-disabled)'
+      boxShadow: 'var(--n-box-shadow-disabled)',
+      backgroundColor: 'var(--n-color-disabled)'
     }, [
       c('&::before', {
-        backgroundColor: 'var(--dot-color-disabled)'
+        backgroundColor: 'var(--n-dot-color-disabled)'
       }),
       cM('checked', `
-        transform: scale(1);
         opacity: 1;
       `)
     ]),
     cE('label', {
-      color: 'var(--text-color-disabled)'
-    })
+      color: 'var(--n-text-color-disabled)'
+    }),
+    cB('radio-input', `
+      cursor: not-allowed;
+    `)
   ])
 ])

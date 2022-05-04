@@ -8,7 +8,9 @@
   >
     <div class="footer-links">
       <div class="footer-links-col">
-        <n-text depth="1" class="col-header">{{ t('resources') }}</n-text>
+        <n-text depth="1" class="col-header">
+          {{ t('resources') }}
+        </n-text>
         <n-button
           text
           tag="a"
@@ -17,21 +19,23 @@
         >
           {{ t('designResources') }}
         </n-button>
-        <n-button text tag="a" target="_blank" href="https://www.xicons.org">{{
-          t('icons')
-        }}</n-button>
+        <n-button text tag="a" target="_blank" href="https://www.xicons.org">
+          {{ t('icons') }}
+        </n-button>
         <n-button text @click="push('/docs/community')">
           {{ t('libraries') }}
         </n-button>
       </div>
       <div class="footer-links-col">
-        <n-text depth="1" class="col-header">{{ t('help') }}</n-text>
-        <n-button text @click="push('/docs/common-issues')">{{
-          t('commonIssues')
-        }}</n-button>
-        <n-button text @click="push('/docs/changelog')">{{
-          t('changelog')
-        }}</n-button>
+        <n-text depth="1" class="col-header">
+          {{ t('help') }}
+        </n-text>
+        <n-button text @click="push('/docs/common-issues')">
+          {{ t('commonIssues') }}
+        </n-button>
+        <n-button text @click="push('/docs/changelog')">
+          {{ t('changelog') }}
+        </n-button>
         <n-button
           text
           tag="a"
@@ -42,7 +46,9 @@
         </n-button>
       </div>
       <div class="footer-links-col">
-        <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
+        <n-text depth="1" class="col-header">
+          {{ t('community') }}
+        </n-text>
         <n-button text tag="a" target="_blank" :href="repoUrl">
           GitHub
         </n-button>
@@ -56,41 +62,46 @@
         </n-button>
         <n-tooltip>
           <template #trigger>
-            <n-button text>{{ t('dingTalk') }}</n-button>
+            <n-button text>
+              {{ t('dingTalk') }}
+            </n-button>
           </template>
           {{ t('dingTalkGroupChat') }} 1
-          {{ t('memberLimitReached') }} 33482509<br />
-          {{ t('dingTalkGroupChat') }} 2 35886835
+          {{ t('memberLimitReached') }} 33482509<br>
+          {{ t('dingTalkGroupChat') }} 2
+          {{ t('memberLimitReached') }} 35886835<br>
+          {{ t('dingTalkGroupChat') }} 3 32377370
         </n-tooltip>
       </div>
       <div class="footer-links-col footer-links-col--last">
-        <n-text depth="1" class="col-header">{{ t('contact') }}</n-text>
-        <n-button
-          text
-          tag="a"
-          target="_blank"
-          href="https://www.tusimple.com/"
-          >{{ t('tusimple') }}</n-button
-        >
-        <n-button text tag="a" target="_blank" :href="t('joinUsLink')">{{
-          t('joinUs')
-        }}</n-button>
+        <n-text depth="1" class="col-header">
+          {{ t('contact') }}
+        </n-text>
+        <n-button text tag="a" target="_blank" href="https://www.tusimple.com/">
+          {{ t('tusimple') }}
+        </n-button>
+        <n-button text tag="a" target="_blank" :href="t('joinUsLink')">
+          {{ t('joinUs') }}
+        </n-button>
       </div>
     </div>
     <n-divider class="footer-divider" />
     <div style="text-align: center; padding: 20px">
-      <n-text depth="3">Naive UI {{ version }} · Made by TuSimple</n-text>
+      <n-text depth="3">
+        Naive UI {{ version }} · Made by TuSimple
+      </n-text>
     </div>
   </n-layout-footer>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { version } from 'naive-ui'
 import { i18n } from '../../utils/composables'
 import { push } from '../../store'
 import { repoUrl } from '../../utils/github-url'
-import { version } from 'naive-ui'
 
-export default {
+export default defineComponent({
   props: {
     centered: Boolean
   },
@@ -140,7 +151,7 @@ export default {
       })
     }
   }
-}
+})
 </script>
 
 <style scoped>

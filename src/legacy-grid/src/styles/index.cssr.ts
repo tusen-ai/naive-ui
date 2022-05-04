@@ -4,7 +4,7 @@ const positionStyles = Array
   .apply(null, { length: 24 } as any)
   .map((_, index) => {
     const prefixIndex = index + 1
-    const percent = (1 / 24 * prefixIndex * 100).toFixed(2) + '%'
+    const percent = `calc(100% / 24 * ${prefixIndex})`
     return [
       cM(`${prefixIndex}-span`, {
         width: percent

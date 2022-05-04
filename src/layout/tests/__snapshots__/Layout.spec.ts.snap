@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`n-layout should work with \`embedded\` prop 1`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --color: rgb(250, 250, 252); --text-color: rgb(51, 54, 57);"`;
+exports[`n-layout should work with \`embedded\` prop 1`] = `"--n-bezier: cubic-bezier(.4, 0, .2, 1); --n-color: rgb(250, 250, 252); --n-text-color: rgb(51, 54, 57);"`;

@@ -39,7 +39,7 @@ describe('n-rate', () => {
 
     await wrapper.setProps({ size: 20 })
     expect(wrapper.find('.n-rate').attributes('style')).toContain(
-      '--item-size: 20px'
+      '--n-item-size: 20px'
     )
 
     for (const size of ['small', 'medium', 'large'] as const) {
@@ -55,7 +55,7 @@ describe('n-rate', () => {
 
     await wrapper.setProps({ color: '#4fb233' })
     expect(wrapper.find('.n-rate').attributes('style')).toContain(
-      '--item-color-active: #4fb233'
+      '--n-item-color-active: #4fb233'
     )
 
     wrapper.unmount()

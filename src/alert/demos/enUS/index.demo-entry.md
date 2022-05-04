@@ -5,10 +5,10 @@ According to my experience, the most frequent usage of it may be requesting for 
 ## Demos
 
 ```demo
-basic
-closable
-icon
-no-icon
+basic.vue
+closable.vue
+icon.vue
+no-icon.vue
 ```
 
 ## API

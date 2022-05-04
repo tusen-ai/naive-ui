@@ -7,36 +7,38 @@ The element to collect and validate data.
 ## Demos
 
 ```demo
-inline
-custom-rule
-custom-validation
-top
-left
-item-only
-async
-disabled
-show-label
-partially-apply-rules
+inline.vue
+custom-rule.vue
+custom-validation.vue
+top.vue
+left.vue
+item-only.vue
+async.vue
+disabled.vue
+show-label.vue
+partially-apply-rules.vue
+custom-messages.vue
 ```
 
 ## API
 
 ### Form Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| disabled | `boolean` | `false` | Whether to disable the form. |
-| inline | `boolean` | `false` | Whether to display as an inline form. |
-| label-width | `number \| string` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`. |
-| label-align | `'left' \| 'right'` | `-` | Label text alignment. |
-| label-placement | `'left' \| 'top'` | `'top'` | Label placement. |
-| model | `Object` | `{}` | The object to get/set form item values. |
-| rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |
-| show-feedback | `boolean` | `true` | Whether to show the feedback area. |
-| show-label | `boolean` | `true` | Whether to show the label. |
-| show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |
-| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | Whether to disable the form. |  |
+| inline | `boolean` | `false` | Whether to display as an inline form. |  |
+| label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |  |
+| label-align | `'left' \| 'right'` | `-` | Label text alignment. |  |
+| label-placement | `'left' \| 'top'` | `'top'` | Label placement. |  |
+| model | `Object` | `{}` | The object to get/set form item values. |  |
+| rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |  |
+| show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
+| show-label | `boolean` | `true` | Whether to show the label. |  |
+| show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | 2.27.0 |
 
 #### FormItemRule Type
 
@@ -52,28 +54,35 @@ partially-apply-rules
 | trigger | `string \| Array<string>` | Trigger type. |
 | message | `string` | Text to show when validation fails. |
 
+#### FormValidateMessages Type
+
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
+  Please see the default messages defined in <n-a href="https://github.com/yiminghe/async-validator/blob/master/src/messages.ts" target="_blank">async-validator</n-a> in order to see which messages you can override.
+</n-alert>
+
 ### FormItem Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |
-| first | `boolean` | `false` | Whether to only show the first validation error message. |
-| ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |
-| label | `string` | `undefined` | Label. |
-| label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |
-| label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |
-| label-style | `Object` | `{}` | Label style. |
-| label-width | `number \| string` | `undefined` | If not set, it will inherit the parent form's `label-width`. |
-| path | `string` | `undefined` | The path to use in the parent form's model object. |
-| required | `boolean` | `false` | Whether to show the "required" symbol. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. Validation still depends on rules. |
-| rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | The rule to validate this form item. It will be merged with the rules acquired by `rule-path` from the parent form's rules. It's recommended to set all rules on the parent form. |
-| rule-path | `string` | `undefined` | The path to get rules from the parent form's rule object. If not set, it will use the path of the parent form item instead. |
-| show-feedback | `boolean` | `true` | Whether to show the feedback area. |
-| show-label | `boolean` | `true` | Whether to show a label. If not set, it will inherit `show-label` from the parent form. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
+| first | `boolean` | `false` | Whether to only show the first validation error message. |  |
+| ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
+| label | `string` | `undefined` | Label. |  |
+| label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |  |
+| label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |  |
+| label-props | `LabelHTMLAttributes` | `undefined` | HTML attributes of the label element inside form item. | 2.24.0 |
+| label-style | `CSSProperties \| string` | `undefined` | Label style. |  |
+| label-width | `number \| string \| 'auto'` | `undefined` | If not set, it will inherit the parent form's `label-width`,`'auto'` means label width will be auto adjusted. |  |
+| path | `string` | `undefined` | The path to use in the parent form's model object. |  |
+| required | `boolean` | `false` | Whether to show the "required" symbol. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. Validation still depends on rules. |  |
+| rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | The rule to validate this form item. It will be merged with the rules acquired by `rule-path` from the parent form's rules. It's recommended to set all rules on the parent form. |  |
+| rule-path | `string` | `undefined` | The path to get rules from the parent form's rule object. If not set, it will use the path of the parent form item instead. |  |
+| show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
+| show-label | `boolean` | `true` | Whether to show a label. If not set, it will inherit `show-label` from the parent form. |  |
 | show-require-mark | `boolean` | `-` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
-| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. | `'right-hanging'` 2.24.0 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |  |
 
 ### FormItemGi Props
 
@@ -103,10 +112,11 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       | Content     |
+| default | `()`       | Content.    |
 
 ### FormItem, FormItemGi Slots
 
-| Name  | Parameters | Description   |
-| ----- | ---------- | ------------- |
-| label | `()`       | Label content |
+| Name     | Parameters | Description    | Version |
+| -------- | ---------- | -------------- | ------- |
+| feedback | `()`       | Feedback.      | 2.24.0  |
+| label    | `()`       | Label content. |         |

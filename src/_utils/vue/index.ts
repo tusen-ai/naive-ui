@@ -9,4 +9,11 @@ export { render } from './render'
 export { getFirstSlotVNode } from './get-first-slot-vnode'
 export { createDataKey } from './create-data-key'
 export { createRefSetter } from './create-ref-setter'
+export { createInjectionKey } from './create-injection-key'
+export {
+  resolveSlot,
+  resolveWrappedSlot,
+  resolveSlotWithProps,
+  isSlotEmpty
+} from './resolve-slot'
 export type { MaybeArray } from './call'

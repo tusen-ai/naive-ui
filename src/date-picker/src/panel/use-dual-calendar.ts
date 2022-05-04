@@ -96,16 +96,28 @@ function useDualCalendar (
   const isSelectingRef = ref(false)
   const memorizedStartDateTimeRef = ref<number>(0)
 
-  const { value, dateFormat } = props
+  const mergedDateFormatRef = computed(
+    () => props.dateFormat || localeRef.value.dateFormat
+  )
+
+  const { value } = props
 
   const startDateInput = ref(
     Array.isArray(value)
-      ? format(value[0], dateFormat, panelCommon.dateFnsOptions.value)
+      ? format(
+        value[0],
+        mergedDateFormatRef.value,
+        panelCommon.dateFnsOptions.value
+      )
       : ''
   )
   const endDateInputRef = ref(
     Array.isArray(value)
-      ? format(value[1], dateFormat, panelCommon.dateFnsOptions.value)
+      ? format(
+        value[1],
+        mergedDateFormatRef.value,
+        panelCommon.dateFnsOptions.value
+      )
       : ''
   )
 
@@ -224,15 +236,14 @@ function useDualCalendar (
     (value) => {
       if (value !== null && Array.isArray(value)) {
         const [startMoment, endMoment] = value
-        const { dateFormat } = props
         startDateInput.value = format(
           startMoment,
-          dateFormat,
+          mergedDateFormatRef.value,
           panelCommon.dateFnsOptions.value
         )
         endDateInputRef.value = format(
           endMoment,
-          dateFormat,
+          mergedDateFormatRef.value,
           panelCommon.dateFnsOptions.value
         )
         if (!isSelectingRef.value) {
@@ -314,6 +325,16 @@ function useDualCalendar (
     )
     adjustCalendarTimes(false)
   }
+  function onUpdateStartCalendarValue (value: number): void {
+    startCalendarDateTimeRef.value = value
+    adjustCalendarTimes(true)
+  }
+
+  function onUpdateEndCalendarValue (value: number): void {
+    endCalendarDateTimeRef.value = value
+    adjustCalendarTimes(false)
+  }
+
   // The function is used on date panel, not the date-picker value validation
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
@@ -466,7 +487,7 @@ function useDualCalendar (
   function handleStartDateInput (value: string): void {
     const date = strictParse(
       value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -494,7 +515,7 @@ function useDualCalendar (
     /** strict check when input */
     const date = strictParse(
       value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -521,7 +542,7 @@ function useDualCalendar (
   function handleStartDateInputBlur (): void {
     const date = strictParse(
       startDateInput.value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -549,7 +570,7 @@ function useDualCalendar (
   function handleEndDateInputBlur (): void {
     const date = strictParse(
       endDateInputRef.value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -583,18 +604,17 @@ function useDualCalendar (
       endDateInputRef.value = ''
       return
     }
-    const { dateFormat } = props
     if (times === undefined) {
       times = value
     }
     startDateInput.value = format(
       times[0],
-      dateFormat,
+      mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
     endDateInputRef.value = format(
       times[1],
-      dateFormat,
+      mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
   }
@@ -729,6 +749,11 @@ function useDualCalendar (
     timePickerSize: panelCommon.timePickerSize,
     startTimeValue: startTimeValueRef,
     endTimeValue: endTimeValueRef,
+    datePickerSlots,
+    shortcuts: shortcutsRef,
+    scrollbarInst: scrollbarInstRef,
+    startCalendarDateTime: startCalendarDateTimeRef,
+    endCalendarDateTime: endCalendarDateTimeRef,
     handleFocusDetectorFocus: panelCommon.handleFocusDetectorFocus,
     handleStartTimePickerChange,
     handleEndTimePickerChange,
@@ -736,12 +761,11 @@ function useDualCalendar (
     handleStartDateInputBlur,
     handleEndDateInput,
     handleEndDateInputBlur,
-    datePickerSlots,
-    shortcuts: shortcutsRef,
-    scrollbarInst: scrollbarInstRef,
     handleVirtualListScroll,
     virtualListContainer,
-    virtualListContent
+    virtualListContent,
+    onUpdateStartCalendarValue,
+    onUpdateEndCalendarValue
   }
 }
 

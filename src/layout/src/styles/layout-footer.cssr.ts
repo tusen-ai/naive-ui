@@ -1,18 +1,18 @@
 import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --color
-// --border-color
-// --text-color
+// --n-bezier
+// --n-color
+// --n-border-color
+// --n-text-color
 export default cB('layout-footer', `
   transition:
-    box-shadow .3s var(--bezier),
-    color .3s var(--bezier),
-    background-color .3s var(--bezier),
-    border-color .3s var(--bezier);
-  color: var(--text-color);
-  background-color: var(--color);
+    box-shadow .3s var(--n-bezier),
+    color .3s var(--n-bezier),
+    background-color .3s var(--n-bezier),
+    border-color .3s var(--n-bezier);
+  color: var(--n-text-color);
+  background-color: var(--n-color);
   box-sizing: border-box;
 `, [
   cM('absolute-positioned', `
@@ -22,6 +22,6 @@ export default cB('layout-footer', `
     bottom: 0;
   `),
   cM('bordered', `
-    border-top: solid 1px var(--border-color);
+    border-top: solid 1px var(--n-border-color);
   `)
 ])

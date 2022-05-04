@@ -9,32 +9,42 @@ import {
   PropType,
   ExtractPropTypes,
   provide,
-  InjectionKey,
   Ref,
-  renderSlot
+  CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, omit, Mutable } from '../../_utils'
+import {
+  ExtractPublicPropTypes,
+  omit,
+  Mutable,
+  createInjectionKey
+} from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
-import NotificationContainer from './NotificationContainer'
-import NotificationEnvironment, {
+import { NotificationContainer } from './NotificationContainer'
+import {
+  NotificationEnvironment,
   notificationEnvOptions
 } from './NotificationEnvironment'
+import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
+
+export type NotificationPlacement =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
 
 export type NotificationOptions = Partial<
 ExtractPropTypes<typeof notificationEnvOptions>
 >
 
 export interface NotificationProviderInjection {
+  props: ExtractPropTypes<typeof notificationProviderProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
-
-export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
-  Symbol('notificationProvider')
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -54,8 +64,10 @@ export interface NotificationApiInjection {
 
 export type NotificationProviderInst = NotificationApiInjection
 
-export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection> =
-  Symbol('notificationApi')
+export const notificationApiInjectionKey =
+  createInjectionKey<NotificationApiInjection>('n-notification-api')
+
+export type NotificationType = 'info' | 'success' | 'warning' | 'error'
 
 export type NotificationReactive = {
   readonly key: string
@@ -72,6 +84,7 @@ interface NotificationRef {
 
 const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
+  containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,
   scrollable: {
     type: Boolean,
@@ -79,9 +92,7 @@ const notificationProviderProps = {
   },
   max: Number,
   placement: {
-    type: String as PropType<
-    'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-    >,
+    type: String as PropType<NotificationPlacement>,
     default: 'top-right'
   }
 }
@@ -136,7 +147,7 @@ export default defineComponent({
       return notificationReactive
     }
     const apis = (['info', 'success', 'warning', 'error'] as const).map(
-      (type) => {
+      (type: NotificationType) => {
         return (options: Omit<NotificationOptions, 'type'>) =>
           create({ ...options, type })
       }
@@ -152,7 +163,7 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Notification',
-      'Notification',
+      '-notification',
       style,
       notificationLight,
       props,
@@ -169,6 +180,7 @@ export default defineComponent({
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
+      props,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef
     })
@@ -194,10 +206,11 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer
+              style={this.containerStyle}
               scrollable={this.scrollable}
               placement={this.placement}
             >

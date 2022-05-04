@@ -20,20 +20,20 @@ describe('n-time', () => {
     await wrapper.setProps({ time: date })
   })
 
-  // it('should work with `format` prop with timezone', async () => {
-  //   const wrapper = mount(NTime, {
-  //     props: {
-  //       time: date.valueOf(),
-  //       format: 'yyyy/MM/dd HH:mm:ss',
-  //       timezone: 'Asia/Shanghai'
-  //     }
-  //   })
-  //   expect(wrapper.find('time').text()).toContain('1970/01/01 08:00:00')
-  //   await wrapper.setProps({
-  //     timezone: 'America/New_York'
-  //   })
-  //   expect(wrapper.find('time').text()).toContain('1969/12/31 20:00:00')
-  // })
+  it('should work with `format` prop with timezone', async () => {
+    const wrapper = mount(NTime, {
+      props: {
+        time: date.valueOf(),
+        format: 'yyyy/MM/dd',
+        timezone: 'Asia/Shanghai'
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970/01/01')
+    await wrapper.setProps({
+      timezone: 'America/New_York'
+    })
+    expect(wrapper.find('time').text()).toContain('1969/12/31')
+  })
 
   it('should work with `type` `to` prop', async () => {
     Date.now = () => mockedNow
@@ -46,16 +46,15 @@ describe('n-time', () => {
       'github ci time zone',
       Intl.DateTimeFormat().resolvedOptions().timeZone
     )
-    // await wrapper.setProps({ time: date, type: 'datetime' })
-    // expect(wrapper.find('time').text()).toContain('1970-01-01 08:00:00')
+    await wrapper.setProps({ time: date, type: 'datetime' })
+    expect(wrapper.find('time').text().length).toBe(19)
     await wrapper.setProps({ time: date, type: 'relative' })
-    expect(wrapper.find('time').text()).toContain('about 50 years ago')
-
+    expect(wrapper.find('time').text()).toContain('50 years ago')
     Date.now = () => new Date('1972-01-01 00:00:00 UTC').getTime()
     const wrapper2 = mount(NTime, {
       props: { to: 0, type: 'relative', unix: true }
     })
-    expect(wrapper2.find('time').text()).toContain('in about 2 years')
+    expect(wrapper2.find('time').text()).toContain('in 2 years')
 
     Date.now = cachedDateNow
   })

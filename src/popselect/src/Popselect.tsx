@@ -10,11 +10,11 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
-import { popselectInjectionKey } from './interface'
+import { popselectInjectionKey, PopselectInst } from './interface'
 
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
-  ...popoverBaseProps,
+  ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {
     ...popoverBaseProps.placement,
     default: 'bottom'
@@ -23,7 +23,6 @@ const popselectProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  showArrow: Boolean,
   ...panelProps
 }
 
@@ -36,7 +35,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'Popselect',
-      'Popselect',
+      '-popselect',
       undefined,
       popselectLight,
       props
@@ -53,13 +52,18 @@ export default defineComponent({
       syncPosition,
       setShow
     })
+    const exposedMethods: PopselectInst = {
+      syncPosition,
+      setShow
+    }
     return {
+      ...exposedMethods,
       popoverInstRef,
       mergedTheme: themeRef
     }
   },
   render () {
-    const { mergedTheme, $attrs, $slots } = this
+    const { mergedTheme } = this
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
@@ -76,7 +80,7 @@ export default defineComponent({
       ) => {
         return (
           <NPopselectPanel
-            {...mergeProps($attrs, {
+            {...mergeProps(this.$attrs, {
               class: className,
               style
             })}
@@ -85,7 +89,10 @@ export default defineComponent({
             onMouseenter={onMouseenter}
             onMouseleave={onMouseleave}
           >
-            {$slots}
+            {{
+              action: () => this.$slots.action?.(),
+              empty: () => this.$slots.empty?.()
+            }}
           </NPopselectPanel>
         )
       }
@@ -93,8 +100,7 @@ export default defineComponent({
     return (
       <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
         {{
-          trigger: this.$slots.default,
-          _: 1
+          trigger: () => this.$slots.default?.()
         }}
       </NPopover>
     )

@@ -2,11 +2,11 @@ import {
   h,
   computed,
   defineComponent,
-  renderSlot,
   ref,
   Fragment,
   toRaw,
-  watch
+  watch,
+  inject
 } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { lightTheme } from '../../themes/light'
@@ -15,12 +15,13 @@ import {
   GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NPopover } from '../../popover'
 import { NScrollbar } from '../../_internal'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NInput } from '../../input'
 import { NSpace } from '../../space'
-import { useConfig, useLocale } from '../../_mixins'
+import { useLocale } from '../../_mixins'
 import { NElement } from '../../element'
 import { NDivider } from '../../divider'
 import { NButton } from '../../button'
@@ -55,7 +56,7 @@ const ColorWandIcon = (
 
 // button colorOpacitySecondary var is not color
 const showColorPicker = (key: string): boolean => {
-  if (key.includes('opacity')) return false
+  if (key.includes('pacity')) return false
   if (key.includes('color') || key.includes('Color')) return true
   return false
 }
@@ -65,7 +66,7 @@ export default defineComponent({
   inheritAttrs: false,
   setup () {
     const fileInputRef = ref<HTMLInputElement | null>(null)
-    const { NConfigProvider } = useConfig()
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const theme = computed(() => {
       const mergedTheme: GlobalTheme =
         NConfigProvider?.mergedThemeRef.value || lightTheme
@@ -81,7 +82,7 @@ export default defineComponent({
         common
       }
       for (const key of Object.keys(lightTheme) as Array<
-      keyof typeof lightTheme
+      Exclude<keyof typeof lightTheme, 'name'>
       >) {
         if (key === 'common') continue
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||
@@ -196,6 +197,7 @@ export default defineComponent({
         {{
           default: () => [
             <NPopover
+              arrowPointToCenter
               trigger="manual"
               show={this.showPanel}
               displayDirective="show"
@@ -230,7 +232,10 @@ export default defineComponent({
                       },
                       this.$attrs.style
                     ]}
-                    // @ts-expect-error
+                    // We use ts-ignore for vue-tsc, since it seems to patch
+                    // native event for vue components
+                    // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+                    // @ts-ignore
                     onClick={() => {
                       this.showPanel = !this.showPanel
                     }}
@@ -522,7 +527,7 @@ export default defineComponent({
                 )
               }}
             </NPopover>,
-            renderSlot(this.$slots, 'default')
+            this.$slots.default?.()
           ]
         }}
       </NConfigProvider>

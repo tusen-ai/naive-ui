@@ -1,11 +1,13 @@
-import { Ref, InjectionKey, CSSProperties } from 'vue'
+import { Ref, CSSProperties } from 'vue'
+import { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { UploadTheme } from '../styles'
 
 export interface FileInfo {
   id: string
   name: string
-  percentage: number
+  percentage?: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   url?: string | null
   file?: File | null
@@ -28,7 +30,7 @@ export type OnFinish = ({
   event
 }: {
   file: FileInfo
-  event?: Event
+  event?: ProgressEvent
 }) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
@@ -39,7 +41,8 @@ export type OnDownload = (file: FileInfo) => Promise<boolean> | boolean | any
 export interface UploadInternalInst {
   doChange: DoChange
   XhrMap: Map<string, XMLHttpRequest>
-  onFinish?: OnFinish
+  onError: OnError | undefined
+  onFinish: OnFinish | undefined
 }
 
 export type DoChange = (
@@ -68,22 +71,25 @@ export interface UploadInjection {
   doChange: DoChange
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
-  listTypeRef: Ref<listType>
+  listTypeRef: Ref<ListType>
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
   mergedDisabledRef: Ref<boolean>
   maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
-  cssVarsRef: Ref<CSSProperties>
+  imageGroupPropsRef: Ref<ImageGroupProps | undefined>
+  cssVarsRef: undefined | Ref<CSSProperties>
+  themeClassRef: undefined | Ref<string>
+  onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
   handleFileAddition: (files: FileList | null, e?: Event) => void
   openOpenFileDialog: () => void
 }
 
-export const uploadInjectionKey: InjectionKey<UploadInjection> =
-  Symbol('upload')
+export const uploadInjectionKey =
+  createInjectionKey<UploadInjection>('n-upload')
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void
@@ -95,6 +101,7 @@ export interface XhrHandlers {
 export interface UploadInst {
   openOpenFileDialog: () => void
   submit: () => void
+  clear: () => void
 }
 
 export type OnBeforeUpload = (data: {
@@ -102,7 +109,7 @@ export type OnBeforeUpload = (data: {
   fileList: FileInfo[]
 }) => Promise<unknown>
 
-export type listType = 'text' | 'image' | 'image-card'
+export type ListType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 
@@ -120,3 +127,11 @@ export interface CustomRequestOptions {
 }
 
 export type CustomRequest = (options: CustomRequestOptions) => void
+
+export type OnError = ({
+  file,
+  event
+}: {
+  file: FileInfo
+  event?: ProgressEvent
+}) => FileInfo | undefined

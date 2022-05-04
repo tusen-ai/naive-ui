@@ -1,8 +1,7 @@
 import { h, nextTick, VNode } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NSelect, SelectProps } from '../index'
+import { NSelect, SelectProps, SelectOption, SelectGroupOption } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
-import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
 import { SelectBaseOption } from '../src/interface'
 
@@ -275,11 +274,11 @@ describe('n-select', () => {
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NSelect)
 
-    expect(wrapper.find('.n-base-loading__icon').exists()).not.toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).not.toBe(true)
     await wrapper.setProps({
       loading: true
     })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
   })
 
   it('should work with `multiple` prop', async () => {
@@ -337,7 +336,7 @@ describe('n-select', () => {
       menuWrapper
         .find('.n-base-select-menu__empty .n-empty')
         .attributes('style')
-    ).toContain('--text-color: #4fb233;')
+    ).toContain('--n-text-color: #4fb233;')
   })
 
   it('should work with `menuProps` prop', () => {
@@ -354,7 +353,41 @@ describe('n-select', () => {
       }
     })
     const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
-    expect(menuWrapper.attributes('style')).toContain('background: rgb(79, 178, 51);')
+    expect(menuWrapper.attributes('style')).toContain(
+      'background: rgb(79, 178, 51);'
+    )
     expect(menuWrapper.classes()).toContain('menu-test')
+  })
+
+  it('should work with `action` slot', () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true
+      },
+      slots: {
+        action: () => 'test-action-slot'
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__action').exists()).toBe(true)
+    expect(menuWrapper.find('.n-base-select-menu__action').text()).toContain(
+      'test-action-slot'
+    )
+  })
+
+  it('should work with `empty` slot', () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true
+      },
+      slots: {
+        empty: () => 'test-empty-slot'
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__empty').exists()).toBe(true)
+    expect(menuWrapper.find('.n-base-select-menu__empty').text()).toContain(
+      'test-empty-slot'
+    )
   })
 })

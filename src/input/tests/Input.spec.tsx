@@ -20,17 +20,18 @@ describe('n-input', () => {
     wrapper.find('input').element.value = 'cool'
     await wrapper.find('input').trigger('input')
     expect(onUpdateValue).toHaveBeenCalledWith('cool')
+    wrapper.unmount()
   })
 
   it('`loading` prop', async () => {
     const wrapper = mount(NInput)
     expect(wrapper.find('.n-input__suffix').exists()).toBe(false)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: false })
     expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
     wrapper.unmount()
   })
 
@@ -103,6 +104,16 @@ describe('n-input', () => {
     })
   })
 
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NInput, { props: { status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `type` prop', async () => {
     const wrapper = mount(NInput)
     await wrapper.setProps({ type: 'text' })
@@ -111,6 +122,25 @@ describe('n-input', () => {
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should work with `show-password-on` prop', async () => {
+    let wrapper = mount(NInput, {
+      props: { type: 'password', showPasswordOn: 'click' }
+    })
+    expect(wrapper.find('input').attributes('type')).toBe('password')
+    await wrapper.find('.n-base-icon').trigger('click')
+    expect(wrapper.find('input').attributes('type')).toBe('text')
+
+    wrapper = mount(NInput, {
+      props: { type: 'password', showPasswordOn: 'mousedown' }
+    })
+    expect(wrapper.find('input').attributes('type')).toBe('password')
+    await wrapper.find('.n-base-icon').trigger('mousedown')
+    expect(wrapper.find('input').attributes('type')).toBe('text')
+
+    wrapper.unmount()
   })
 
   it('should work with `show-count` prop', async () => {

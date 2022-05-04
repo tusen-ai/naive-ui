@@ -3,10 +3,12 @@
 import { h, defineComponent, PropType, ref, CSSProperties } from 'vue'
 import NModal from '../../modal/src/Modal'
 import { keep } from '../../_utils'
-import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
+import { NDialog } from './Dialog'
+import { dialogProps, dialogPropKeys } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  closeOnEsc: { type: Boolean, default: true },
   internalStyle: [String, Object] as PropType<string | CSSProperties>,
   maskClosable: {
     type: Boolean,
@@ -22,7 +24,7 @@ export const exposedDialogEnvProps = {
   onMaskClick: Function as PropType<(e: MouseEvent) => void>
 } as const
 
-export default defineComponent({
+export const NDialogEnvironment = defineComponent({
   name: 'DialogEnvironment',
   props: {
     ...exposedDialogEnvProps,
@@ -116,11 +118,12 @@ export default defineComponent({
         show={show}
         onUpdateShow={handleUpdateShow}
         onMaskClick={handleMaskClick}
-        appear
-        dialog
         to={to}
         maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
+        closeOnEsc={this.closeOnEsc}
+        internalAppear
+        internalDialog
       >
         {{
           default: () => (

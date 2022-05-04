@@ -5,6 +5,7 @@ import {
   RtlEnabledState,
   RtlItem
 } from '../config-provider/src/internal-interface'
+import { cssrAnchorMetaName } from './common'
 
 export default function useRtl (
   mountId: string,
@@ -37,6 +38,7 @@ export default function useRtl (
       componentRtlState.style.mount({
         id,
         head: true,
+        anchorMetaName: cssrAnchorMetaName,
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },

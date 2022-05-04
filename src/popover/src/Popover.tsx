@@ -12,10 +12,12 @@ import {
   Ref,
   toRef,
   cloneVNode,
-  watchEffect
+  watchEffect,
+  withDirectives
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
+import { zindexable } from 'vdirs'
 import {
   call,
   keep,
@@ -31,8 +33,8 @@ import type {
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type { PopoverTheme } from '../styles'
 import type { PopoverTrigger, InternalRenderBody } from './interface'
+import type { PopoverTheme } from '../styles'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -89,6 +91,7 @@ export interface PopoverInjection {
   handleMouseEnter: (e: MouseEvent) => void
   handleMouseMoveOutside: (e: MouseEvent) => void
   handleClickOutside: (e: MouseEvent) => void
+  handleKeydown: (e: KeyboardEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
   zIndexRef: Ref<number | undefined>
@@ -127,6 +130,7 @@ export const popoverBaseProps = {
   },
   x: Number,
   y: Number,
+  arrowPointToCenter: Boolean,
   disabled: Boolean,
   getDisabled: Function as PropType<() => boolean>,
   displayDirective: {
@@ -147,41 +151,46 @@ export const popoverBaseProps = {
     default: undefined
   },
   overlap: Boolean,
-  internalExtraClass: {
-    type: Array as PropType<string[]>,
-    default: () => []
+  keepAliveOnHover: {
+    type: Boolean,
+    default: true
   },
-  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
+  zIndex: Number,
+  to: useAdjustedTo.propTo,
+  scrollable: Boolean,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: [Object, String] as PropType<CSSProperties | string>,
   // events
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  zIndex: Number,
-  to: useAdjustedTo.propTo,
+  // internal
   internalSyncTargetWithParent: Boolean,
   internalInheritedEventHandlers: {
     type: Array as PropType<TriggerEventHandlers[]>,
     default: () => []
   },
-  /** @deprecated */
+  internalTrapFocus: Boolean,
+  internalExtraClass: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  },
+  // deprecated
   onShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
-  /** @deprecated */
   onHide: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
-  /** @deprecated */
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  /** @deprecated */
   minWidth: Number,
-  /** @deprecated */
   maxWidth: Number
 }
 
@@ -383,6 +392,14 @@ export default defineComponent({
         doUpdateShow(nextShow)
       }
     }
+    function handleKeydown (e: KeyboardEvent): void {
+      if (!props.internalTrapFocus) return
+      if (e.code === 'Escape') {
+        clearShowTimer()
+        clearHideTimer()
+        doUpdateShow(false)
+      }
+    }
     function setShow (value: boolean): void {
       uncontrolledShowRef.value = value
     }
@@ -394,6 +411,7 @@ export default defineComponent({
     }
     provide<PopoverInjection>('NPopover', {
       getTriggerElement,
+      handleKeydown,
       handleMouseEnter,
       handleMouseLeave,
       handleClickOutside,
@@ -522,6 +540,20 @@ export default defineComponent({
             void this.mergedShowConsideringDisabledProp
             const mergedShow = this.getMergedShow()
             return [
+              this.internalTrapFocus && mergedShow
+                ? withDirectives(
+                    <div style={{ position: 'fixed', inset: 0 }} />,
+                    [
+                      [
+                        zindexable,
+                        {
+                          enabled: mergedShow,
+                          zIndex: this.zIndex
+                        }
+                      ]
+                    ]
+                )
+                : null,
               positionManually
                 ? null
                 : h(VTarget, null, {
@@ -534,7 +566,10 @@ export default defineComponent({
                   showArrow: this.mergedShowArrow,
                   show: mergedShow
                 }),
-                slots
+                {
+                  default: () => this.$slots.default?.(),
+                  header: () => this.$slots.header?.()
+                }
               )
             ]
           }

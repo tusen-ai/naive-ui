@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Usage
         if: github.event.label.name == 'Usage' || github.event.label.name == 'Question'
-        uses: actions-cool/issues-helper@v2.2.1
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment,close-issue'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -19,9 +19,10 @@ jobs:
             Hello @${{ github.event.issue.user.login }}, we use GitHub issues to trace bugs or discuss plans of Naive UI. So, please don't ask usage questions. You can join the community to ask questions:
             - [Discord](https://discord.gg/Pqv7Mev5Dd)
             - DingTalk Group 1 (Member limit reached) 33482509
-            - DingTalk Group 2 35886835
-
+            - DingTalk Group 2 (Member limit reached) 35886835
+            - DingTalk Group 3 32377370
             你好 @${{ github.event.issue.user.login }}，Naive UI Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。你可以加入社区进行提问：
             - [Discord](https://discord.gg/Pqv7Mev5Dd)
             - 钉钉一群 33482509 (已满)
-            - 钉钉二群 35886835
+            - 钉钉二群 35886835 (已满)
+            - 钉钉三群 32377370

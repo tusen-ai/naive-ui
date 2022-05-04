@@ -5,10 +5,10 @@ It could've been called `loading`, but why is it called `spin`? Because there is
 ## Demos
 
 ```demo
-basic
-wrap
-description
-customize-icon
+basic.vue
+wrap.vue
+description.vue
+customize-icon.vue
 ```
 
 ## API
@@ -20,7 +20,7 @@ customize-icon
 | description | `string` | `undefined` | Description of the spin. |
 | rotate | `boolean` | `true` | Specify whether icon rotates, only working for custom icon. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Size of the spin. |
-| show | `boolean` | `true` | Specify whether spin is active. |
+| show | `boolean` | `true` | Specify whether spin is active when spin has content inside. It won't work if you just use spin itself. |
 | stroke-width | `number` | `undefined` | Relative width of spin's stroke, assuming the outer radius of spin is 100. |
 | stroke | `string` | `undefined` | Color of the spin. |
 

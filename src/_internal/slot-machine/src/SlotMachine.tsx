@@ -33,13 +33,13 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseSlotMachine', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-slot-machine', style, toRef(props, 'clsPrefix'))
     const oldValueRef = ref<number>()
     const newValueRef = ref<number>()
     const numbersRef = computed(() => {
       if (typeof props.value === 'string') return []
       if (props.value < 1) return [0]
-      const numbers = []
+      const numbers: number[] = []
       let value = props.value
       if (props.max !== undefined) {
         value = Math.min(props.max, value)

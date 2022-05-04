@@ -3,6 +3,7 @@ import NBaseClear from '../../clear'
 import NBaseLoading from '../../loading'
 import NBaseIcon from '../../icon'
 import { ChevronDownIcon } from '../../icons'
+import { resolveSlot } from '../../../_utils/vue'
 
 export default defineComponent({
   name: 'InternalSelectionSuffix',
@@ -25,7 +26,7 @@ export default defineComponent({
     },
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props) {
+  setup (props, { slots }) {
     return () => {
       const { clsPrefix } = props
       return (
@@ -50,7 +51,12 @@ export default defineComponent({
                         clsPrefix={clsPrefix}
                         class={`${clsPrefix}-base-suffix__arrow`}
                       >
-                        {{ default: () => <ChevronDownIcon /> }}
+                        {{
+                          default: () =>
+                            resolveSlot(slots.default, () => [
+                              <ChevronDownIcon />
+                            ])
+                        }}
                       </NBaseIcon>
                     )
                   }}

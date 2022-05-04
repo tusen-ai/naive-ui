@@ -5,13 +5,15 @@ Yo, yo, check it out.
 ## Demos
 
 ```demo
-basic
-group
-grid
-indeterminate
-controlled
-event
-customize-value
+basic.vue
+size.vue
+group.vue
+grid.vue
+indeterminate.vue
+controlled.vue
+event.vue
+customize-value.vue
+focus.vue
 ```
 
 ## API
@@ -52,3 +54,10 @@ customize-value
 | Name    | Parameters | Description                    |
 | ------- | ---------- | ------------------------------ |
 | default | `()`       | Content of the checkbox group. |
+
+### Checkbox Methods
+
+| Name  | Type         | Description | Version |
+| ----- | ------------ | ----------- | ------- |
+| focus | `() => void` | Focus.      | 2.24.2  |
+| blur  | `() => void` | Blur.       | 2.24.2  |

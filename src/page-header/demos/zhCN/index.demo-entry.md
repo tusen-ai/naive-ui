@@ -7,8 +7,8 @@
 ## 演示
 
 ```demo
-basic
-rtl-debug
+basic.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -24,12 +24,13 @@ rtl-debug
 
 ### PageHeader Slots
 
-| 名称     | 参数 | 说明       |
-| -------- | ---- | ---------- |
-| avatar   | `()` | 图片信息   |
-| header   | `()` | 头部信息   |
-| default  | `()` | 内容       |
-| extra    | `()` | 额外信息   |
-| footer   | `()` | 底部信息   |
-| subtitle | `()` | 副标题信息 |
-| title    | `()` | 标题信息   |
+| 名称     | 参数 | 说明       | 版本   |
+| -------- | ---- | ---------- | ------ |
+| avatar   | `()` | 图片信息   |        |
+| header   | `()` | 头部信息   |        |
+| default  | `()` | 内容       |        |
+| extra    | `()` | 额外信息   |        |
+| footer   | `()` | 底部信息   |        |
+| subtitle | `()` | 副标题信息 |        |
+| title    | `()` | 标题信息   |        |
+| back     | `()` | 返回图标   | 2.24.2 |

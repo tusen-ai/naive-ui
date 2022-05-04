@@ -1,21 +1,21 @@
 import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --color
-// --text-color
+// --n-bezier
+// --n-color
+// --n-text-color
 export default cB('layout', `
-  color: var(--text-color);
-  background-color: var(--color);
+  color: var(--n-text-color);
+  background-color: var(--n-color);
   box-sizing: border-box;
   position: relative;
   z-index: auto;
   flex: auto;
   overflow: hidden;
   transition:
-    box-shadow .3s var(--bezier),
-    background-color .3s var(--bezier),
-    color .3s var(--bezier);
+    box-shadow .3s var(--n-bezier),
+    background-color .3s var(--n-bezier),
+    color .3s var(--n-bezier);
 `, [
   cB('layout-scroll-container', `
     overflow-x: hidden;

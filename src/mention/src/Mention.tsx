@@ -11,8 +11,15 @@ import {
   CSSProperties
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
-import { VBinder, VFollower, VTarget, FollowerInst } from 'vueuc'
+import {
+  VBinder,
+  VFollower,
+  VTarget,
+  FollowerInst,
+  FollowerPlacement
+} from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
@@ -26,7 +33,7 @@ import { NInternalSelectMenu } from '../../_internal'
 import type { InternalSelectMenuRef } from '../../_internal'
 import { call, useAdjustedTo, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { mentionLight } from '../styles'
 import type { MentionTheme } from '../styles'
@@ -78,11 +85,16 @@ const mentionProps = {
     type: String,
     default: ''
   },
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
+  },
   size: String as PropType<InputSize>,
+  renderLabel: Function as PropType<RenderLabel>,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
-  renderLabel: Function as PropType<RenderLabel>,
   onUpdateValue: [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
@@ -102,11 +114,15 @@ export default defineComponent({
   name: 'Mention',
   props: mentionProps,
   setup (props) {
-    const { namespaceRef, mergedClsPrefixRef, mergedBorderedRef } =
-      useConfig(props)
+    const {
+      namespaceRef,
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const themeRef = useTheme(
       'Mention',
-      'Mention',
+      '-mention',
       style,
       mentionLight,
       props,
@@ -158,6 +174,17 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: { menuBoxShadow }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('mention', undefined, cssVarsRef, props)
+      : undefined
     function doUpdateShowMenu (show: boolean): void {
       if (props.disabled) return
       if (!show) {
@@ -356,6 +383,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedSize: formItem.mergedSizeRef,
+      mergedStatus: formItem.mergedStatusRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,
       selectMenuInstRef,
@@ -374,14 +402,9 @@ export default defineComponent({
       handleInputMouseDown,
       focus,
       blur,
-      cssVars: computed(() => {
-        const {
-          self: { menuBoxShadow }
-        } = themeRef.value
-        return {
-          '--menu-box-shadow': menuBoxShadow
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -389,6 +412,7 @@ export default defineComponent({
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
+          status={this.mergedStatus}
           themeOverrides={mergedTheme.peerOverrides.Input}
           theme={mergedTheme.peers.Input}
           size={this.mergedSize}
@@ -427,7 +451,7 @@ export default defineComponent({
               </VTarget>,
               <VFollower
                 ref="followerRef"
-                placement="bottom-start"
+                placement={this.placement}
                 show={this.showMenu}
                 containerClass={this.namespace}
                 to={this.adjustedTo}
@@ -441,7 +465,8 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          const { mergedTheme } = this
+                          const { mergedTheme, onRender } = this
+                          onRender?.()
                           return this.showMenu ? (
                             <NInternalSelectMenu
                               clsPrefix={mergedClsPrefix}
@@ -451,11 +476,14 @@ export default defineComponent({
                               }
                               autoPending
                               ref="selectMenuInstRef"
-                              class={`${mergedClsPrefix}-mention-menu`}
+                              class={[
+                                `${mergedClsPrefix}-mention-menu`,
+                                this.themeClass
+                              ]}
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}
-                              style={this.cssVars as CSSProperties}
+                              style={this.cssVars as any}
                               onToggle={this.handleSelect}
                               renderLabel={this.renderLabel}
                             >

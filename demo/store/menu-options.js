@@ -32,11 +32,11 @@ const appendCounts = (item) => {
   }
 }
 
-const createDebugDemos = (item, mode) => {
-  if (__DEV__ && mode === 'debug') {
-    return [item]
-  } else return []
-}
+// const createDebugDemos = (item, mode) => {
+//   if (__DEV__ && mode === 'debug') {
+//     return [item]
+//   } else return []
+// }
 
 function createItems (lang, theme, prefix, items) {
   const isZh = lang === 'zh-CN'
@@ -106,6 +106,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Common Issues',
           zh: '常见问题',
           path: '/common-issues'
+        },
+        {
+          en: 'Controlled & Uncontrolled',
+          zh: '受控与非受控',
+          path: '/controlled-uncontrolled'
         }
       ]
     },
@@ -138,6 +143,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Create Themed Component',
           zh: '创建适配主题的组件',
           path: '/theme'
+        },
+        {
+          en: 'Style Element Position',
+          zh: '样式元素位置',
+          path: '/style-position'
         },
         {
           en: 'Third-Party Libraries',
@@ -255,6 +265,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '排印',
           enSuffix: true,
           path: '/typography'
+        },
+        {
+          en: 'Watermark',
+          zh: '水印',
+          enSuffix: true,
+          path: '/watermark'
         }
       ]
     }),
@@ -397,6 +413,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/calendar'
         },
         {
+          en: 'Countdown',
+          zh: '倒计时',
+          enSuffix: true,
+          path: '/countdown'
+        },
+        {
           en: 'Code',
           zh: '代码',
           enSuffix: true,
@@ -437,6 +459,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '日志',
           enSuffix: true,
           path: '/log'
+        },
+        {
+          en: 'Number Animation',
+          zh: '数值动画',
+          enSuffix: true,
+          path: '/number-animation'
         },
         {
           en: 'Statistic',
@@ -646,6 +674,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/layout'
         },
         {
+          en: 'Legacy Grid',
+          zh: '旧版栅格',
+          enSuffix: true,
+          path: '/legacy-grid'
+        },
+        {
           en: 'Grid',
           zh: '栅格',
           enSuffix: true,
@@ -702,75 +736,6 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/global-style'
         }
       ]
-    }),
-    {
-      zh: '废弃',
-      en: 'Deprecated',
-      type: 'group',
-      children: [
-        {
-          en: 'Legacy Grid',
-          zh: '旧版栅格',
-          enSuffix: true,
-          path: '/legacy-grid'
-        }
-      ]
-    },
-    ...createDebugDemos(
-      {
-        en: '--Debug',
-        children: [
-          {
-            en: 'SuffixDebug',
-            path: '/base-suffix-debug'
-          },
-          {
-            en: 'PopoverDebug',
-            path: '/popover-debug'
-          },
-          {
-            en: 'RouterDebug',
-            path: '/router-debug'
-          },
-          {
-            en: 'ModalDebug',
-            path: '/modal-debug'
-          },
-          {
-            en: 'ScrollbarDebug',
-            path: '/scrollbar-debug'
-          },
-          {
-            en: 'ScrollbarDebug2',
-            path: '/scrollbar-debug2'
-          },
-          {
-            en: 'DatePickerDebug',
-            path: '/date-picker-debug'
-          },
-          {
-            en: 'BackTopDebug',
-            path: '/back-top-debug'
-          },
-          {
-            en: 'CascaderDebug',
-            path: '/cascader-debug'
-          },
-          {
-            en: 'VerticalAlignDebug',
-            path: '/vertical-align-debug'
-          },
-          {
-            en: 'IconTransitionDebug',
-            path: '/icon-transition-debug'
-          },
-          {
-            en: 'SelectDebug',
-            path: '/select-debug'
-          }
-        ]
-      },
-      mode
-    )
+    })
   ])
 }

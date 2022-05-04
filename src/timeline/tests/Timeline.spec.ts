@@ -18,6 +18,17 @@ describe('n-timeline', () => {
     )
   })
 
+  it('should work with `icon-size` prop', async () => {
+    const iconSize = 50
+    const wrapper = mount(NTimeline, {
+      props: { iconSize },
+      slots: { default: () => h(NTimelineItem) }
+    })
+    expect(wrapper.find('.n-timeline-item').attributes('style')).toContain(
+      `--n-icon-size: ${iconSize}px`
+    )
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NTimeline)
     expect(wrapper.find('.n-timeline').classes()).toContain(
@@ -128,6 +139,21 @@ describe('n-timeline-item', () => {
         )
       }
     )
+  })
+
+  it('should work with `line-type` prop', () => {
+    ;(['default', 'dashed'] as const).forEach((lineType) => {
+      const wrapper = mount(NTimeline, {
+        slots: {
+          default: () =>
+            h(NTimelineItem, { title: 'test-title', lineType: lineType })
+        }
+      })
+
+      expect(wrapper.find('.n-timeline-item').classes()).toContain(
+        `n-timeline-item--${lineType}-line-type`
+      )
+    })
   })
 
   it('should work with `default`, `footer`, `header` slots', async () => {

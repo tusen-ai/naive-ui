@@ -1,4 +1,4 @@
-# Unbordered & single Line
+# Unbordered & no column border
 
 ```html
 <n-space vertical :size="12">

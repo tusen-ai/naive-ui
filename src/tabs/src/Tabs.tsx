@@ -15,29 +15,38 @@ import {
   vShow,
   watchEffect,
   ExtractPropTypes,
-  cloneVNode
+  cloneVNode,
+  TransitionGroup
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, call, flatten, warnOnce } from '../../_utils'
+import {
+  createKey,
+  call,
+  flatten,
+  warnOnce,
+  resolveWrappedSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
-import {
+import type {
   Addable,
   OnClose,
   OnCloseImpl,
   OnBeforeLeave,
-  tabsInjectionKey,
-  TabsType
+  TabsType,
+  TabsInst,
+  OnUpdateValue,
+  OnUpdateValueImpl
 } from './interface'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import style from './styles/index.cssr'
+import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { tabPaneProps } from './TabPane'
+import style from './styles/index.cssr'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -47,19 +56,29 @@ const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
+  trigger: {
+    type: String as PropType<'click' | 'hover'>,
+    default: 'click'
+  },
   type: {
     type: String as PropType<TabsType>,
     default: 'bar'
   },
   closable: Boolean,
   justifyContent: String as PropType<
-  'space-between' | 'space-around' | 'space-evenly'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'center'
+  | 'start'
+  | 'end'
   >,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  barWidth: Number,
   paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
@@ -67,6 +86,7 @@ const tabsProps = {
     type: Number,
     default: 0
   },
+  animated: Boolean,
   onBeforeLeave: Function as PropType<OnBeforeLeave>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -109,10 +129,10 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
-      'Tabs',
+      '-tabs',
       style,
       tabsLight,
       props,
@@ -136,7 +156,7 @@ export default defineComponent({
       compitableValueRef.value ??
         props.defaultValue ??
         (slots.default
-          ? ((flatten((slots as any).default())[0] as any).props.name as
+          ? ((flatten((slots as any).default())[0] as any)?.props?.name as
               | string
               | number)
           : null)
@@ -147,9 +167,6 @@ export default defineComponent({
     )
 
     const tabChangeIdRef = { id: 0 }
-    watch(mergedValueRef, () => {
-      tabChangeIdRef.id = 0
-    })
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -160,6 +177,7 @@ export default defineComponent({
     })
 
     watch(mergedValueRef, () => {
+      tabChangeIdRef.id = 0
       updateCurrentBarStyle()
     })
 
@@ -175,14 +193,22 @@ export default defineComponent({
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
+        const { barWidth } = props
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        barEl.style.left = `${tabEl.offsetLeft}px`
+        if (barWidth && tabEl.offsetWidth >= barWidth) {
+          const offsetDiffLeft =
+            Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
+          barEl.style.left = `${offsetDiffLeft}px`
+          barEl.style.maxWidth = `${barWidth}px`
+        } else {
+          barEl.style.left = `${tabEl.offsetLeft}px`
+          barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+        }
         barEl.style.width = '8192px'
-        barEl.style.maxWidth = `${tabEl.offsetWidth + 1}px`
       }
     }
     function updateCurrentBarStyle (): void {
@@ -192,7 +218,52 @@ export default defineComponent({
         updateBarStyle(tabEl)
       }
     }
-    function handleTabClick (panelName: string | number): void {
+
+    const tabsPaneWrapperRef = ref<HTMLElement | null>(null)
+    let currentHeight = 0
+    function onAnimationBeforeLeave (): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        currentHeight = tabsPaneWrapperEl.getBoundingClientRect().height
+        const currentHeightPx = `${currentHeight}px`
+        tabsPaneWrapperEl.style.height = currentHeightPx
+        tabsPaneWrapperEl.style.maxHeight = currentHeightPx
+      }
+    }
+    function onAnimationEnter (el: HTMLElement): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        const targetHeight = el.getBoundingClientRect().height
+        tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
+        tabsPaneWrapperEl.style.height = `${Math.max(
+          currentHeight,
+          targetHeight
+        )}px`
+      }
+    }
+    function onAnimationAfterEnter (): void {
+      const tabsPaneWrapperEl = tabsPaneWrapperRef.value
+      if (tabsPaneWrapperEl) {
+        tabsPaneWrapperEl.style.maxHeight = ''
+        tabsPaneWrapperEl.style.height = ''
+      }
+    }
+
+    const renderNameListRef: { value: Array<string | number> } = { value: [] }
+    const animationDirectionRef = ref<'next' | 'prev'>('next')
+    function activateTab (panelName: string | number): void {
+      const currentValue = mergedValueRef.value
+      let dir: 'next' | 'prev' = 'next'
+      for (const name of renderNameListRef.value) {
+        if (name === currentValue) {
+          break
+        }
+        if (name === panelName) {
+          dir = 'prev'
+          break
+        }
+      }
+      animationDirectionRef.value = dir
       doUpdateValue(panelName)
     }
     function doUpdateValue (panelName: string | number): void {
@@ -214,7 +285,17 @@ export default defineComponent({
     }
 
     let firstTimeUpdatePosition = true
-    const handleNavResize = throttle(function handleNavResize () {
+    let memorizedWidth = 0
+    const handleNavResize = throttle(function handleNavResize (
+      entry: ResizeObserverEntry
+    ) {
+      if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
+        return
+      }
+      if (memorizedWidth === entry.contentRect.width) {
+        return
+      }
+      memorizedWidth = entry.contentRect.width
       const { type } = props
       if (
         (type === 'line' || type === 'bar') &&
@@ -233,7 +314,8 @@ export default defineComponent({
       if (type !== 'segment') {
         deriveScrollShadow(xScrollInstRef.value?.$el)
       }
-    }, 64)
+    },
+    64)
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize (entry: ResizeObserverEntry): void {
@@ -284,6 +366,7 @@ export default defineComponent({
       deriveScrollShadow(e.target as HTMLElement)
     }, 64)
     provide(tabsInjectionKey, {
+      triggerRef: toRef(props, 'trigger'),
       tabStyleRef: toRef(props, 'tabStyle'),
       paneClassRef: toRef(props, 'paneClass'),
       paneStyleRef: toRef(props, 'paneStyle'),
@@ -293,7 +376,7 @@ export default defineComponent({
       valueRef: mergedValueRef,
       tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
-      handleTabClick,
+      activateTab,
       handleClose,
       handleAdd
     })
@@ -319,10 +402,93 @@ export default defineComponent({
         el.classList.add(shadowAfterClass)
       }
     })
+
+    const exposedMethods: TabsInst = {
+      syncBarPosition: () => {
+        updateCurrentBarStyle()
+      }
+    }
+
+    const cssVarsRef = computed(() => {
+      const { value: size } = compitableSizeRef
+      const { type } = props
+      const typeSuffix = (
+        {
+          card: 'Card',
+          bar: 'Bar',
+          line: 'Line',
+          segment: 'Segment'
+        } as const
+      )[type]
+      const sizeType = `${size}${typeSuffix}` as const
+      const {
+        self: {
+          barColor,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          tabColor,
+          tabBorderColor,
+          paneTextColor,
+          tabFontWeight,
+          tabBorderRadius,
+          tabFontWeightActive,
+          colorSegment,
+          fontWeightStrong,
+          tabColorSegment,
+          [createKey('panePadding', size)]: panePadding,
+          [createKey('tabPadding', sizeType)]: tabPadding,
+          [createKey('tabGap', sizeType)]: tabGap,
+          [createKey('tabTextColor', type)]: tabTextColor,
+          [createKey('tabTextColorActive', type)]: tabTextColorActive,
+          [createKey('tabTextColorHover', type)]: tabTextColorHover,
+          [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
+          [createKey('tabFontSize', size)]: tabFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-color-segment': colorSegment,
+        '--n-bar-color': barColor,
+        '--n-tab-font-size': tabFontSize,
+        '--n-tab-text-color': tabTextColor,
+        '--n-tab-text-color-active': tabTextColorActive,
+        '--n-tab-text-color-disabled': tabTextColorDisabled,
+        '--n-tab-text-color-hover': tabTextColorHover,
+        '--n-pane-text-color': paneTextColor,
+        '--n-tab-border-color': tabBorderColor,
+        '--n-tab-border-radius': tabBorderRadius,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-tab-color': tabColor,
+        '--n-tab-font-weight': tabFontWeight,
+        '--n-tab-font-weight-active': tabFontWeightActive,
+        '--n-tab-padding': tabPadding,
+        '--n-tab-gap': tabGap,
+        '--n-pane-padding': panePadding,
+        '--n-font-weight-strong': fontWeightStrong,
+        '--n-tab-color-segment': tabColorSegment
+      }
+    })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'tabs',
+        computed(() => {
+          return `${compitableSizeRef.value[0]}${props.type[0]}`
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
+      tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
       addTabInstRef,
@@ -334,69 +500,15 @@ export default defineComponent({
       mergedSize: compitableSizeRef,
       handleScroll,
       handleTabsResize,
-      cssVars: computed(() => {
-        const { value: size } = compitableSizeRef
-        const { type } = props
-        const typeSuffix = (
-          {
-            card: 'Card',
-            bar: 'Bar',
-            line: 'Line',
-            segment: 'Segment'
-          } as const
-        )[type]
-        const sizeType = `${size}${typeSuffix}` as const
-        const {
-          self: {
-            barColor,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            tabColor,
-            tabBorderColor,
-            paneTextColor,
-            tabFontWeight,
-            tabBorderRadius,
-            tabFontWeightActive,
-            colorSegment,
-            fontWeightStrong,
-            tabColorSegment,
-            [createKey('panePadding', size)]: panePadding,
-            [createKey('tabPadding', sizeType)]: tabPadding,
-            [createKey('tabGap', sizeType)]: tabGap,
-            [createKey('tabTextColor', type)]: tabTextColor,
-            [createKey('tabTextColorActive', type)]: tabTextColorActive,
-            [createKey('tabTextColorHover', type)]: tabTextColorHover,
-            [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
-            [createKey('tabFontSize', size)]: tabFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color-segment': colorSegment,
-          '--bar-color': barColor,
-          '--tab-font-size': tabFontSize,
-          '--tab-text-color': tabTextColor,
-          '--tab-text-color-active': tabTextColorActive,
-          '--tab-text-color-disabled': tabTextColorDisabled,
-          '--tab-text-color-hover': tabTextColorHover,
-          '--pane-text-color': paneTextColor,
-          '--tab-border-color': tabBorderColor,
-          '--tab-border-radius': tabBorderRadius,
-          '--close-color': closeColor,
-          '--close-color-hover': closeColorHover,
-          '--close-color-pressed': closeColorPressed,
-          '--tab-color': tabColor,
-          '--tab-font-weight': tabFontWeight,
-          '--tab-font-weight-active': tabFontWeightActive,
-          '--tab-padding': tabPadding,
-          '--tab-gap': tabGap,
-          '--pane-padding': panePadding,
-          '--font-weight-strong': fontWeightStrong,
-          '--tab-color-segment': tabColorSegment
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      animationDirection: animationDirectionRef,
+      renderNameListRef,
+      onAnimationBeforeLeave,
+      onAnimationEnter,
+      onAnimationAfterEnter,
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render () {
@@ -406,8 +518,12 @@ export default defineComponent({
       addTabFixed,
       addable,
       mergedSize,
+      renderNameListRef,
+      onRender,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
+
+    onRender?.()
 
     const tabPaneChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
@@ -420,15 +536,15 @@ export default defineComponent({
       })
       : []
     const showPane = !tabChildren.length
-    const prefix = prefixSlot ? prefixSlot() : null
-    const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
+    renderNameListRef.value = []
     return (
       <div
         class={[
           `${mergedClsPrefix}-tabs`,
+          this.themeClass,
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`
@@ -445,16 +561,24 @@ export default defineComponent({
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
-          {prefix ? (
-            <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
-          ) : null}
+          {resolveWrappedSlot(
+            prefixSlot,
+            (children) =>
+              children && (
+                <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>
+                  {children}
+                </div>
+              )
+          )}
           {isSegment ? (
             <div class={`${mergedClsPrefix}-tabs-rail`}>
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
+                  renderNameListRef.value.push(tabPaneVNode.props.name)
                   return (
                       <Tab
                         {...tabPaneVNode.props}
+                        internalCreatedByPane={true}
                         internalLeftPadded={index !== 0}
                       >
                         {tabPaneVNode.children
@@ -466,6 +590,7 @@ export default defineComponent({
                   )
                 })
                 : tabChildren.map((tabVNode: any, index: number) => {
+                  renderNameListRef.value.push(tabVNode.props.name)
                   if (index === 0) {
                     return tabVNode
                   } else {
@@ -498,9 +623,13 @@ export default defineComponent({
                               {showPane
                                 ? tabPaneChildren.map(
                                   (tabPaneVNode: any, index: number) => {
-                                    return (
+                                    renderNameListRef.value.push(
+                                      tabPaneVNode.props.name
+                                    )
+                                    return justifyTabDynamicProps(
                                         <Tab
                                           {...tabPaneVNode.props}
+                                          internalCreatedByPane={true}
                                           internalLeftPadded={
                                             index !== 0 && !mergedJustifyContent
                                           }
@@ -517,15 +646,18 @@ export default defineComponent({
                                 )
                                 : tabChildren.map(
                                   (tabVNode: any, index: number) => {
+                                    renderNameListRef.value.push(
+                                      tabVNode.props.name
+                                    )
                                     if (
                                       index !== 0 &&
                                         !mergedJustifyContent
                                     ) {
-                                      return createLeftPaddedTabVNode(
-                                        tabVNode
+                                      return justifyTabDynamicProps(
+                                        createLeftPaddedTabVNode(tabVNode)
                                       )
                                     } else {
-                                      return tabVNode
+                                      return justifyTabDynamicProps(tabVNode)
                                     }
                                   }
                                 )}
@@ -583,16 +715,39 @@ export default defineComponent({
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}
-          {suffix ? (
-            <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
-          ) : null}
+          {resolveWrappedSlot(
+            suffixSlot,
+            (children) =>
+              children && (
+                <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>
+                  {children}
+                </div>
+              )
+          )}
         </div>
         {showPane &&
-          filterMapTabPanes(
-            tabPaneChildren,
-            this.mergedValue,
-            this.renderedNames
-          )}
+          (this.animated ? (
+            <div
+              ref="tabsPaneWrapperRef"
+              class={`${mergedClsPrefix}-tabs-pane-wrapper`}
+            >
+              {filterMapTabPanes(
+                tabPaneChildren,
+                this.mergedValue,
+                this.renderedNames,
+                this.onAnimationBeforeLeave,
+                this.onAnimationEnter,
+                this.onAnimationAfterEnter,
+                this.animationDirection
+              )}
+            </div>
+          ) : (
+            filterMapTabPanes(
+              tabPaneChildren,
+              this.mergedValue,
+              this.renderedNames
+            )
+          ))}
       </div>
     )
   }
@@ -601,8 +756,12 @@ export default defineComponent({
 function filterMapTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null,
-  renderedNames: Set<string | number>
-): VNode[] {
+  renderedNames: Set<string | number>,
+  onBeforeLeave?: () => void,
+  onEnter?: (el: HTMLElement) => void,
+  onAfterEnter?: () => void,
+  animationDirection?: 'next' | 'prev'
+): VNode | VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
     const {
@@ -630,7 +789,19 @@ function filterMapTabPanes (
       children.push(useVShow ? withDirectives(vNode, [[vShow, show]]) : vNode)
     }
   })
-  return children
+  if (!animationDirection) {
+    return children
+  }
+  return (
+    <TransitionGroup
+      name={`${animationDirection}-transition`}
+      onBeforeLeave={onBeforeLeave}
+      onEnter={onEnter as (el: Element) => void}
+      onAfterEnter={onAfterEnter}
+    >
+      {{ default: () => children }}
+    </TransitionGroup>
+  )
 }
 
 function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
@@ -639,6 +810,7 @@ function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
       ref="addTabInstRef"
       key="__addable"
       name="__addable"
+      internalCreatedByPane
       internalAddable
       internalLeftPadded={internalLeftPadded}
       disabled={typeof addable === 'object' && addable.disabled}
@@ -656,4 +828,19 @@ function createLeftPaddedTabVNode (tabVNode: VNode): VNode {
     }
   }
   return modifiedVNode
+}
+
+function justifyTabDynamicProps (
+  tabVNode: {
+    dynamicProps?: string[]
+  } & VNode
+): VNode {
+  if (Array.isArray(tabVNode.dynamicProps)) {
+    if (!tabVNode.dynamicProps.includes('internalLeftPadded')) {
+      tabVNode.dynamicProps.push('internalLeftPadded')
+    }
+  } else {
+    tabVNode.dynamicProps = ['internalLeftPadded']
+  }
+  return tabVNode
 }

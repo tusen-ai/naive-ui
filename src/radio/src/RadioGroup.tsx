@@ -11,7 +11,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useTheme, useFormItem, useConfig } from '../../_mixins'
+import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { getSlot, warn, createKey, call, flatten } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -21,6 +21,7 @@ import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import useRtl from '../../_mixins/use-rtl'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -30,7 +31,7 @@ function mapSlot (
     children: VNodeChild[]
     isButtonGroup: boolean
   } {
-  const children = []
+  const children: VNode[] = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]
@@ -128,10 +129,11 @@ export default defineComponent({
       nTriggerFormBlur,
       nTriggerFormFocus
     } = useFormItem(props)
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Radio',
-      'RadioGroup',
+      '-radio-group',
       style,
       radioLight,
       props,
@@ -175,49 +177,62 @@ export default defineComponent({
       mergedSizeRef,
       doUpdateValue
     })
+    const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const { value: size } = mergedSizeRef
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          buttonBorderColor,
+          buttonBorderColorActive,
+          buttonBorderRadius,
+          buttonBoxShadow,
+          buttonBoxShadowFocus,
+          buttonBoxShadowHover,
+          buttonColorActive,
+          buttonTextColor,
+          buttonTextColorActive,
+          buttonTextColorHover,
+          opacityDisabled,
+          [createKey('buttonHeight', size)]: height,
+          [createKey('fontSize', size)]: fontSize
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-button-border-color': buttonBorderColor,
+        '--n-button-border-color-active': buttonBorderColorActive,
+        '--n-button-border-radius': buttonBorderRadius,
+        '--n-button-box-shadow': buttonBoxShadow,
+        '--n-button-box-shadow-focus': buttonBoxShadowFocus,
+        '--n-button-box-shadow-hover': buttonBoxShadowHover,
+        '--n-button-color-active': buttonColorActive,
+        '--n-button-text-color': buttonTextColor,
+        '--n-button-text-color-hover': buttonTextColorHover,
+        '--n-button-text-color-active': buttonTextColorActive,
+        '--n-height': height,
+        '--n-opacity-disabled': opacityDisabled
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'radio-group',
+        computed(() => mergedSizeRef.value[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       selfElRef,
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       handleFocusout,
       handleFocusin,
-      cssVars: computed(() => {
-        const { value: size } = mergedSizeRef
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            buttonBorderColor,
-            buttonBorderColorActive,
-            buttonBorderRadius,
-            buttonBoxShadow,
-            buttonBoxShadowFocus,
-            buttonBoxShadowHover,
-            buttonColorActive,
-            buttonTextColor,
-            buttonTextColorActive,
-            buttonTextColorHover,
-            opacityDisabled,
-            [createKey('buttonHeight', size)]: height,
-            [createKey('fontSize', size)]: fontSize
-          }
-        } = themeRef.value
-        return {
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--button-border-color': buttonBorderColor,
-          '--button-border-color-active': buttonBorderColorActive,
-          '--button-border-radius': buttonBorderRadius,
-          '--button-box-shadow': buttonBoxShadow,
-          '--button-box-shadow-focus': buttonBoxShadowFocus,
-          '--button-box-shadow-hover': buttonBoxShadowHover,
-          '--button-color-active': buttonColorActive,
-          '--button-text-color': buttonTextColor,
-          '--button-text-color-hover': buttonTextColorHover,
-          '--button-text-color-active': buttonTextColorActive,
-          '--height': height,
-          '--opacity-disabled': opacityDisabled
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -227,6 +242,7 @@ export default defineComponent({
       mergedValue,
       mergedClsPrefix
     )
+    this.onRender?.()
     return (
       <div
         onFocusin={handleFocusin}
@@ -234,6 +250,8 @@ export default defineComponent({
         ref="selfElRef"
         class={[
           `${mergedClsPrefix}-radio-group`,
+          this.rtlEnabled && `${mergedClsPrefix}-radio-group--rtl`,
+          this.themeClass,
           isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`
         ]}
         style={this.cssVars as CSSProperties}

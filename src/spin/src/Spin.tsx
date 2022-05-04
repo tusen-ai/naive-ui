@@ -10,7 +10,7 @@ import {
 import { useCompitable } from 'vooks'
 import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
@@ -65,15 +65,45 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Spin',
-      'Spin',
+      '-spin',
       style,
       spinLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { size: spinSize } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self
+      } = themeRef.value
+      const { opacitySpinning, color, textColor } = self
+      const size =
+        typeof spinSize === 'number'
+          ? pxfy(spinSize)
+          : self[createKey('size', spinSize)]
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-opacity-spinning': opacitySpinning,
+        '--n-size': size,
+        '--n-color': color,
+        '--n-text-color': textColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'spin',
+        computed(() => {
+          const { size } = props
+          return typeof size === 'number' ? String(size) : size[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       compitableShow: useCompitable(props, ['spinning', 'show']),
@@ -83,25 +113,9 @@ export default defineComponent({
         const { size } = props
         return STROKE_WIDTH[typeof size === 'number' ? 'medium' : size]
       }),
-      cssVars: computed(() => {
-        const { size: spinSize } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self
-        } = themeRef.value
-        const { opacitySpinning, color, textColor } = self
-        const size =
-          typeof spinSize === 'number'
-            ? pxfy(spinSize)
-            : self[createKey('size', spinSize)]
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--opacity-spinning': opacitySpinning,
-          '--size': size,
-          '--color': color,
-          '--text-color': textColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -113,7 +127,7 @@ export default defineComponent({
       </div>
     )
     const icon = $slots.icon ? (
-      <div class={`${mergedClsPrefix}-spin-body`}>
+      <div class={[`${mergedClsPrefix}-spin-body`, this.themeClass]}>
         <div
           class={[
             `${mergedClsPrefix}-spin`,
@@ -126,7 +140,7 @@ export default defineComponent({
         {descriptionNode}
       </div>
     ) : (
-      <div class={`${mergedClsPrefix}-spin-body`}>
+      <div class={[`${mergedClsPrefix}-spin-body`, this.themeClass]}>
         <NBaseLoading
           clsPrefix={mergedClsPrefix}
           style={$slots.default ? '' : (this.cssVars as CSSProperties)}
@@ -137,9 +151,10 @@ export default defineComponent({
         {descriptionNode}
       </div>
     )
+    this.onRender?.()
     return $slots.default ? (
       <div
-        class={`${mergedClsPrefix}-spin-container`}
+        class={[`${mergedClsPrefix}-spin-container`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
         <div

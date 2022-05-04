@@ -5,19 +5,18 @@ import {
   PropType,
   CSSProperties,
   ref,
-  InjectionKey,
   provide,
   ExtractPropTypes
 } from 'vue'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout.cssr'
 import { LayoutInst, positionProp } from './interface'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 const layoutProps = {
   embedded: Boolean,
@@ -41,9 +40,8 @@ const layoutProps = {
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey: InjectionKey<
-ExtractPropTypes<typeof layoutProps>
-> = Symbol('layout')
+export const layoutInjectionKey =
+  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLayoutComponent (isContent: boolean) {
@@ -56,10 +54,10 @@ export function createLayoutComponent (isContent: boolean) {
     setup (props) {
       const scrollableElRef = ref<HTMLElement | null>(null)
       const scrollbarInstRef = ref<ScrollbarInst | null>(null)
-      const { mergedClsPrefixRef } = useConfig(props)
+      const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
       const themeRef = useTheme(
         'Layout',
-        'Layout',
+        '-layout',
         style,
         layoutLight,
         props,
@@ -94,30 +92,38 @@ export function createLayoutComponent (isContent: boolean) {
       const exposedMethods: LayoutInst = {
         scrollTo
       }
+      const cssVarsRef = computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self
+        } = themeRef.value
+        return {
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-color': props.embedded ? self.colorEmbedded : self.color,
+          '--n-text-color': self.textColor
+        }
+      })
+      const themeClassHandle = inlineThemeDisabled
+        ? useThemeClass('layout', undefined, cssVarsRef, props)
+        : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,
         scrollableElRef,
         scrollbarInstRef,
         hasSiderStyle,
         mergedTheme: themeRef,
-        cssVars: computed(() => {
-          const {
-            common: { cubicBezierEaseInOut },
-            self
-          } = themeRef.value
-          return {
-            '--bezier': cubicBezierEaseInOut,
-            '--color': props.embedded ? self.colorEmbedded : self.color,
-            '--text-color': self.textColor
-          }
-        }),
+        cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+        themeClass: themeClassHandle?.themeClass,
+        onRender: themeClassHandle?.onRender,
         ...exposedMethods
       }
     },
     render () {
       const { mergedClsPrefix, hasSider } = this
+      this.onRender?.()
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
       const layoutClass = [
+        this.themeClass,
         isContent && `${mergedClsPrefix}-layout-content`,
         `${mergedClsPrefix}-layout`,
         `${mergedClsPrefix}-layout--${this.position}-positioned`

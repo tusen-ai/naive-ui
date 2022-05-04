@@ -4,9 +4,10 @@ import {
   provide,
   onBeforeUnmount,
   ComputedRef,
-  InjectionKey,
   Ref
 } from 'vue'
+import type { FormValidationStatus } from '../form/src/interface'
+import { createInjectionKey } from '../_utils'
 
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
@@ -15,6 +16,7 @@ export interface FormItemInjection {
   path: Ref<string | undefined>
   disabled: Ref<boolean>
   mergedSize: ComputedRef<FormItemSize>
+  mergedValidationStatus: ComputedRef<FormValidationStatus | undefined>
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void
@@ -22,8 +24,8 @@ export interface FormItemInjection {
   handleContentChange: () => void
 }
 
-export const formItemInjectionKey: InjectionKey<FormItemInjection> =
-  Symbol('formItem')
+export const formItemInjectionKey =
+  createInjectionKey<FormItemInjection>('n-form-item')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
@@ -34,11 +36,13 @@ interface UseFormItemOptions<T> {
 interface UseFormItemProps<T> {
   size?: T
   disabled?: boolean
+  status?: FormValidationStatus
 }
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>
   mergedDisabledRef: ComputedRef<boolean>
+  mergedStatusRef: ComputedRef<FormValidationStatus | undefined>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -84,6 +88,11 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
           return false
         }
   )
+  const mergedStatusRef = computed<FormValidationStatus | undefined>(() => {
+    const { status } = props
+    if (status) return status
+    return NFormItem?.mergedValidationStatus.value
+  })
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()
@@ -92,6 +101,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   return {
     mergedSizeRef,
     mergedDisabledRef,
+    mergedStatusRef,
     nTriggerFormBlur () {
       if (NFormItem) {
         NFormItem.handleContentBlur()
