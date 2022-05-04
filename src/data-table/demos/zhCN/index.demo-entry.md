@@ -19,6 +19,7 @@ size
 row-props
 merge-cell
 filter-and-sorter
+filter-page-state
 multiple-sorter
 select
 custom-select
@@ -69,6 +70,7 @@ height-debug
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
+| filter-page-state | `'first' \| 'current'` | `'current'` | 设置过滤后页面的状态 | NEXT_VERSION |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |

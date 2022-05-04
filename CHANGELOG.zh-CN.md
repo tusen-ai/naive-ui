@@ -16,6 +16,7 @@
 - `n-popover` 新增 `header-style` 属性
 - `n-popover` 新增 `scrollable` 属性
 - `n-select` 和 `n-cascader` 和 `n-tree-select` 的溢出计数 tag 弹出内容可以滚动
+- `n-data-table` 新增 `filter-page-state` 属性，关闭 [#2840](https://github.com/TuSimple/naive-ui/issues/2840)
 
 ## 2.28.2
 

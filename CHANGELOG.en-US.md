@@ -16,6 +16,7 @@
 - `n-popover` adds `header-style` prop.
 - `n-popover` adds `scrollable` prop.
 - `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
+- `n-data-table` adds `filter-page-state` prop, closes [#2840](https://github.com/TuSimple/naive-ui/issues/2840).
 
 ## 2.28.2
 
