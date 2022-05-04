@@ -281,10 +281,10 @@ function useCalendar (
         break
       case 'month':
         panelCommon.disableTransitionOneTick()
-        scrollPickerColumns(newValue)
+        justifyColumnsScrollState(newValue)
         break
       case 'quarter':
-        scrollPickerColumns(newValue)
+        justifyColumnsScrollState(newValue)
         break
     }
   }
@@ -305,7 +305,7 @@ function useCalendar (
         : setYear(newValue, dateItem.dateObject.year)
     )
     updatePanelValue(newValue)
-    scrollPickerColumns(newValue)
+    justifyColumnsScrollState(newValue)
   }
   function onUpdateCalendarValue (value: number): void {
     calendarValueRef.value = value
@@ -382,7 +382,7 @@ function useCalendar (
     handleConfirmClick()
   }
 
-  function scrollPickerColumns (value?: number): void {
+  function justifyColumnsScrollState (value?: number): void {
     const { value: mergedValue } = props
     if (monthScrollbarRef.value) {
       const monthIndex =
@@ -442,7 +442,7 @@ function useCalendar (
     dateInputValue: dateInputValueRef,
     datePickerSlots,
     handleQuickMonthClick,
-    scrollPickerColumns,
+    justifyColumnsScrollState,
     calendarValue: calendarValueRef,
     onUpdateCalendarValue
   }

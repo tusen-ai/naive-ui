@@ -4,7 +4,8 @@ import {
   renderSlot,
   watchEffect,
   PropType,
-  VNode
+  VNode,
+  onMounted
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NxButton } from '../../../button'
@@ -13,6 +14,7 @@ import { warnOnce } from '../../../_utils'
 import type { MonthItem, YearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import { IsRangeDateDisabled } from '../interface'
 
 export default defineComponent({
   name: 'MonthRangePanel',
@@ -43,7 +45,10 @@ export default defineComponent({
       mergedClsPrefix: string,
       type: 'start' | 'end'
     ): VNode => {
-      const { mergedIsDateDisabled, handleDateRangeClick } = useCalendarRef
+      const { isDateDisabled, handleColItemClick } = useCalendarRef
+      const disabled = (
+        isDateDisabled.value as IsRangeDateDisabled | undefined
+      )?.(item.ts, type, props.value as [number, number] | null)
       return (
         <div
           data-n-date
@@ -56,10 +61,16 @@ export default defineComponent({
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                mergedIsDateDisabled(item.ts)
+                disabled
             }
           ]}
-          onClick={() => handleDateRangeClick(item, type)}
+          onClick={
+            disabled
+              ? undefined
+              : () => {
+                  handleColItemClick(item, type)
+                }
+          }
         >
           {item.type === 'month'
             ? item.dateObject.month + 1
@@ -67,6 +78,9 @@ export default defineComponent({
         </div>
       )
     }
+    onMounted(() => {
+      useCalendarRef.justifyColumnsScrollState()
+    })
     return { ...useCalendarRef, renderItem }
   },
   render () {

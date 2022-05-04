@@ -26,11 +26,12 @@ import {
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
   datePickerInjectionKey,
-  PanelChildComponentRefs,
+  RangePanelChildComponentRefs,
   Shortcuts
 } from '../interface'
 import { VirtualListInst } from 'vueuc'
 import { ScrollbarInst } from '../../../_internal'
+import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useDualCalendarProps = {
   ...usePanelCommonProps,
@@ -43,7 +44,7 @@ const useDualCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useDualCalendar (
   props: ExtractPropTypes<typeof useDualCalendarProps>,
-  type = 'datetime'
+  type: 'daterange' | 'datetimerange' | 'monthrange'
 ) {
   const {
     isDateDisabledRef,
@@ -65,8 +66,7 @@ function useDualCalendar (
     closeOnSelectRef,
     updateValueOnCloseRef,
     firstDayOfWeekRef,
-    datePickerSlots,
-    scrollRangeYearMonth
+    datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -366,10 +366,8 @@ function useDualCalendar (
       endCalendarDateTimeRef.value = getTime(startOfMonth(endMoment))
     }
   }
+  // for daterange & datetimerange
   function handleDateClick (dateItem: DateItem): void {
-    if (mergedIsDateDisabled(dateItem.ts)) {
-      return
-    }
     if (!isSelectingRef.value) {
       isSelectingRef.value = true
       memorizedStartDateTimeRef.value = dateItem.ts
@@ -624,53 +622,101 @@ function useDualCalendar (
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
-  function handleDateRangeClick (
-    dateItem: DateItem | MonthItem | YearItem,
+  function justifyColumnsScrollState (
+    value: [number, number],
+    type: 'start' | 'end'
+  ): void
+  function justifyColumnsScrollState (): void
+  function justifyColumnsScrollState (
+    value?: [number, number] | undefined,
+    type?: 'start' | 'end' | undefined
+  ): void {
+    const mergedValue = value === undefined ? props.value : value
+    if (value === undefined || type === 'start') {
+      if (startMonthScrollbarRef.value) {
+        const monthIndex = !Array.isArray(mergedValue)
+          ? getMonth(Date.now())
+          : getMonth(mergedValue[0])
+        startMonthScrollbarRef.value.scrollTo({
+          debounce: false,
+          index: monthIndex,
+          elSize: MONTH_ITEM_HEIGHT
+        })
+      }
+      if (startYearVlRef.value) {
+        const yearIndex =
+          (!Array.isArray(mergedValue)
+            ? getYear(Date.now())
+            : getYear(mergedValue[0])) - START_YEAR
+        startYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
+      }
+    }
+    if (value === undefined || type === 'end') {
+      if (endMonthScrollbarRef.value) {
+        const monthIndex = !Array.isArray(mergedValue)
+          ? getMonth(Date.now())
+          : getMonth(mergedValue[1])
+        endMonthScrollbarRef.value.scrollTo({
+          debounce: false,
+          index: monthIndex,
+          elSize: MONTH_ITEM_HEIGHT
+        })
+      }
+      if (endYearVlRef.value) {
+        const yearIndex =
+          (!Array.isArray(mergedValue)
+            ? getYear(Date.now())
+            : getYear(mergedValue[1])) - START_YEAR
+        endYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
+      }
+    }
+  }
+  // only for monthrange
+  function handleColItemClick (
+    dateItem: MonthItem | YearItem,
     clickType: 'start' | 'end'
   ): void {
-    if (mergedIsDateDisabled(dateItem.ts)) {
-      return
-    }
     const { value } = props
-    if (value === null || !Array.isArray(value)) {
-      const newValue = sanitizeValue(
-        getTime(set(Date.now(), dateItem.dateObject))
-      )
-      panelCommon.doUpdateValue(
-        clickType === 'start' ? [newValue, newValue] : [newValue, newValue],
-        false
-      )
+    const noValue = !Array.isArray(value)
+    const itemTs =
+      dateItem.type === 'year'
+        ? noValue
+          ? set(dateItem.ts, { month: getMonth(new Date()) }).valueOf()
+          : set(dateItem.ts, {
+            month: getMonth(value[clickType === 'start' ? 0 : 1])
+          }).valueOf()
+        : dateItem.ts
+    if (noValue) {
+      const newValue = sanitizeValue(itemTs)
+      panelCommon.doUpdateValue([newValue, newValue], false)
       return
     }
-    let newValue = clickType === 'start' ? value[0] : value[1]
-    newValue = sanitizeValue(getTime(set(newValue, dateItem.dateObject)))
-    let needScrollAll = false
-    let otherDateValue = clickType === 'start' ? value[1] : value[0]
-    if (clickType === 'start' && newValue > value[1]) {
-      ;[newValue, otherDateValue] = [otherDateValue, newValue]
-      needScrollAll = true
-    }
-    if (clickType === 'end' && newValue < value[0]) {
-      ;[newValue, otherDateValue] = [otherDateValue, newValue]
-      needScrollAll = true
-    }
-    panelCommon.doUpdateValue(
-      clickType === 'start'
-        ? [newValue, otherDateValue]
-        : [otherDateValue, newValue],
-      false
-    )
-    if (needScrollAll) {
-      scrollRangeYearMonth(
-        clickType === 'start' ? newValue : otherDateValue,
-        'start'
-      )
-      scrollRangeYearMonth(
-        clickType === 'start' ? otherDateValue : newValue,
-        'end'
-      )
+    const nextValue: [number, number] = [value[0], value[1]]
+    let otherPartsChanged = false
+    if (clickType === 'start') {
+      nextValue[0] = sanitizeValue(itemTs)
+      if (nextValue[0] > nextValue[1]) {
+        nextValue[1] = nextValue[0]
+        otherPartsChanged = true
+      }
     } else {
-      scrollRangeYearMonth(newValue, clickType)
+      nextValue[1] = sanitizeValue(itemTs)
+      if (nextValue[0] > nextValue[1]) {
+        nextValue[0] = nextValue[1]
+        otherPartsChanged = true
+      }
+    }
+    panelCommon.doUpdateValue(nextValue, false)
+    switch (type) {
+      case 'monthrange':
+        panelCommon.disableTransitionOneTick()
+        if (otherPartsChanged) {
+          justifyColumnsScrollState(nextValue, 'start')
+          justifyColumnsScrollState(nextValue, 'end')
+        } else {
+          justifyColumnsScrollState(nextValue, clickType)
+        }
+        break
     }
   }
   function handleStartYearVlScroll (): void {
@@ -693,7 +739,7 @@ function useDualCalendar (
       return endYearVlRef.value?.itemsElRef as HTMLElement
     }
   }
-  const childComponentRefs: PanelChildComponentRefs = {
+  const childComponentRefs: RangePanelChildComponentRefs = {
     startYearVlRef,
     endYearVlRef,
     startMonthScrollbarRef,
@@ -706,6 +752,7 @@ function useDualCalendar (
     endDatesElRef,
     resetSelectingStatus,
     handleDateClick,
+    handleColItemClick,
     handleDateMouseEnter,
     handleConfirmClick,
     startCalendarPrevYear,
@@ -730,7 +777,6 @@ function useDualCalendar (
     startMonthArray: startMonthArrayRef,
     endYearArray: endYearArrayRef,
     endMonthArray: endMonthArrayRef,
-    handleDateRangeClick,
     handleRangeShortcutMouseenter,
     handleRangeShortcutClick,
     ...panelCommon,
@@ -746,6 +792,7 @@ function useDualCalendar (
     shortcuts: shortcutsRef,
     startCalendarDateTime: startCalendarDateTimeRef,
     endCalendarDateTime: endCalendarDateTimeRef,
+    justifyColumnsScrollState,
     handleFocusDetectorFocus: panelCommon.handleFocusDetectorFocus,
     handleStartTimePickerChange,
     handleEndTimePickerChange,

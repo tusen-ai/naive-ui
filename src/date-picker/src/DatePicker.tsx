@@ -12,12 +12,11 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect,
-  nextTick
+  watchEffect
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, getMonth, getYear, isValid } from 'date-fns'
+import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -44,7 +43,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { DatePickerType, MONTH_ITEM_HEIGHT, START_YEAR } from './config'
+import { DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -483,63 +482,6 @@ export default defineComponent({
       })
     }
 
-    function scrollRangeYearMonth (
-      value?: number,
-      type?: 'start' | 'end' | 'all'
-    ): void {
-      if (!panelInstRef.value) return
-      const {
-        startYearVlRef,
-        startMonthScrollbarRef,
-        endYearVlRef,
-        endMonthScrollbarRef
-      } = panelInstRef.value
-      const { value: mergedValue } = mergedValueRef
-      if (type === 'start' || type === 'all') {
-        if (startMonthScrollbarRef) {
-          const monthIndex =
-            value === undefined
-              ? mergedValue === null || !Array.isArray(mergedValue)
-                ? getMonth(Date.now())
-                : getMonth(mergedValue[0])
-              : getMonth(value)
-          startMonthScrollbarRef.scrollTo({
-            index: monthIndex,
-            elSize: MONTH_ITEM_HEIGHT
-          })
-        }
-        if (startYearVlRef) {
-          const yearIndex =
-            (value === undefined
-              ? mergedValue === null || !Array.isArray(mergedValue)
-                ? getYear(Date.now())
-                : getYear(mergedValue[0])
-              : getYear(value)) - START_YEAR
-          startYearVlRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
-        }
-      }
-      if (type === 'end' || type === 'all') {
-        if (endMonthScrollbarRef) {
-          const monthIndex =
-            value === undefined
-              ? mergedValue === null || !Array.isArray(mergedValue)
-                ? getMonth(Date.now())
-                : getMonth(mergedValue[1])
-              : getMonth(value)
-          endMonthScrollbarRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
-        }
-        if (endYearVlRef) {
-          const yearIndex =
-            (value === undefined
-              ? mergedValue === null || !Array.isArray(mergedValue)
-                ? getYear(Date.now())
-                : getYear(mergedValue[1])
-              : getYear(value)) - START_YEAR
-          endYearVlRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
-        }
-      }
-    }
-
     // --- Panel update value
     function handlePanelUpdateValue (
       value: Value | null,
@@ -681,11 +623,6 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'monthrange') {
-        void nextTick(() => {
-          scrollRangeYearMonth(undefined, 'all')
-        })
-      }
     }
     function closeCalendar ({
       returnFocus,
@@ -730,7 +667,6 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollRangeYearMonth,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,

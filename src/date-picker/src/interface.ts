@@ -73,20 +73,26 @@ export type OnPanelUpdateValueImpl = (
 
 export type OnClose = (disableUpdateOnClose: boolean) => void
 
-export interface PanelChildComponentRefs {
-  monthScrollbarRef?: Ref<ScrollbarInst | null> // Only exists when type is month
-  yearScrollbarRef?: Ref<ScrollbarInst | null>
-  startYearScrollbarRef?: Ref<ScrollbarInst | null>
-  endYearScrollbarRef?: Ref<ScrollbarInst | null>
-  startMonthScrollbarRef?: Ref<ScrollbarInst | null>
-  endMonthScrollbarRef?: Ref<ScrollbarInst | null>
-  // year, virtual scroll
-  yearVlRef?: Ref<VirtualListInst | null>
-  startYearVlRef?: Ref<VirtualListInst | null>
-  endYearVlRef?: Ref<VirtualListInst | null>
+export interface RangePanelChildComponentRefs {
+  startYearScrollbarRef: Ref<ScrollbarInst | null>
+  endYearScrollbarRef: Ref<ScrollbarInst | null>
+  startMonthScrollbarRef: Ref<ScrollbarInst | null>
+  endMonthScrollbarRef: Ref<ScrollbarInst | null>
+  startYearVlRef: Ref<VirtualListInst | null>
+  endYearVlRef: Ref<VirtualListInst | null>
 }
 
-export interface PanelRef extends UnwrapNestedRefs<PanelChildComponentRefs> {
+export interface PanelChildComponentRefs {
+  monthScrollbarRef: Ref<ScrollbarInst | null> // Only exists when type is month
+  yearScrollbarRef: Ref<ScrollbarInst | null>
+  // year, virtual scroll
+  yearVlRef: Ref<VirtualListInst | null>
+}
+
+export interface PanelRef
+  extends Partial<
+  UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+  > {
   $el: HTMLElement
 }
 
@@ -108,7 +114,6 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
-  scrollRangeYearMonth: (value?: number, type?: 'start' | 'end' | 'all') => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
