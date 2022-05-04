@@ -12,6 +12,10 @@
 - `n-menu` adds `node-props` prop.
 - `n-switch` adds `rubber-band` prop.
 - `n-space`'s `justify` prop supports `'space-evenly'`.
+- `n-popover` adds `content-style` prop.
+- `n-popover` adds `header-style` prop.
+- `n-popover` adds `scrollable` prop.
+- `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
 
 ## 2.28.2
 

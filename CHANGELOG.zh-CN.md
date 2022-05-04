@@ -12,6 +12,10 @@
 - `n-menu` 新增 `node-props` 属性
 - `n-switch` 新增 `rubber-band` 属性
 - `n-space` 的 `justify` 支持 `'space-evenly'`
+- `n-popover` 新增 `content-style` 属性
+- `n-popover` 新增 `header-style` 属性
+- `n-popover` 新增 `scrollable` 属性
+- `n-select` 和 `n-cascader` 和 `n-tree-select` 的溢出计数 tag 弹出内容可以滚动
 
 ## 2.28.2
 

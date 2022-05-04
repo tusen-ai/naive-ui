@@ -276,7 +276,6 @@ export default c([
     display: flex;
     flex-wrap: wrap;
     margin-right: -8px;
-    height: calc(var(--v-target-height) * 6.6);
   `),
   cB('base-selection-tag-wrapper', `
     max-width: 100%;
