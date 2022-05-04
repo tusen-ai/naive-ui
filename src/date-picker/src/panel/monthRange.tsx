@@ -14,7 +14,6 @@ import { warnOnce } from '../../../_utils'
 import type { MonthItem, YearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
-import { IsRangeDateDisabled } from '../interface'
 
 export default defineComponent({
   name: 'MonthRangePanel',
@@ -45,10 +44,9 @@ export default defineComponent({
       mergedClsPrefix: string,
       type: 'start' | 'end'
     ): VNode => {
-      const { isDateDisabled, handleColItemClick } = useCalendarRef
-      const disabled = (
-        isDateDisabled.value as IsRangeDateDisabled | undefined
-      )?.(item.ts, type, props.value as [number, number] | null)
+      const { handleColItemClick } = useCalendarRef
+      // TODO
+      const disabled = false
       return (
         <div
           data-n-date

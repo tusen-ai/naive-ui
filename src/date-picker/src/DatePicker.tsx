@@ -1018,41 +1018,42 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(
-                              this.type === 'datetime' ? (
-                                  <DatetimePanel {...commonPanelProps} />
-                              ) : this.type === 'daterange' ? (
-                                  <DaterangePanel {...commonPanelProps} />
-                              ) : this.type === 'datetimerange' ? (
-                                  <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ||
-                                  this.type === 'year' ||
-                                  this.type === 'quarter' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type={this.type}
-                                    key={this.type}
-                                  />
-                                  ) : this.type === 'monthrange' ? (
-                                  <MonthRangePanel
-                                    {...commonPanelProps}
-                                    type={this.type}
-                                  />
-                                  ) : (
-                                  <DatePanel {...commonPanelProps} />
-                                  ),
+                        default: () => {
+                          if (!this.mergedShow) return null
+                          const { type } = this
+                          return withDirectives(
+                            type === 'datetime' ? (
+                              <DatetimePanel {...commonPanelProps} />
+                            ) : type === 'daterange' ? (
+                              <DaterangePanel {...commonPanelProps} />
+                            ) : type === 'datetimerange' ? (
+                              <DatetimerangePanel {...commonPanelProps} />
+                            ) : type === 'month' ||
+                              type === 'year' ||
+                              type === 'quarter' ? (
+                              <MonthPanel
+                                {...commonPanelProps}
+                                type={type}
+                                key={type}
+                              />
+                                ) : type === 'monthrange' ? (
+                              <MonthRangePanel
+                                {...commonPanelProps}
+                                type={type}
+                              />
+                                ) : (
+                              <DatePanel {...commonPanelProps} />
+                                ),
+                            [
                               [
-                                [
-                                  clickoutside,
-                                  this.handleClickOutside,
-                                  undefined as unknown as string,
-                                  { capture: true }
-                                ]
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined as unknown as string,
+                                { capture: true }
                               ]
-                            )
-                            : null
+                            ]
+                          )
+                        }
                       }}
                     </Transition>
                   )
