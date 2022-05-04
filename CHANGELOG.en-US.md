@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
 ### Fixes
 
@@ -21,6 +21,7 @@
 - `n-data-table` adds `pagination-behavior-on-filter` prop.
 - `n-date-picker`'s `type` prop supports `monthrange` option.
 - `n-data-table`'s `columns`'s element supports `minWidth` prop.
+- `n-tree` adds `checkbox-placement` prop.
 
 ## 2.28.2
 

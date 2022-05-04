@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
 ### Fixes
 
@@ -21,6 +21,7 @@
 - `n-data-table` 新增 `pagination-behavior-on-filter` 属性
 - `n-date-picker` 属性 `type` 支持 `monthrange` 选项
 - `n-data-table` 的 `columns` 的元素支持 `minWidth` 属性
+- `n-tree` 新增 `checkbox-placement` 属性
 
 ## 2.28.2
 

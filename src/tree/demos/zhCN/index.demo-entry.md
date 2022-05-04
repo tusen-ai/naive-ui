@@ -20,6 +20,7 @@ prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
 node-props.vue
+checkboxPlacement.vue
 check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
@@ -57,6 +58,7 @@ scrollbar-debug.vue
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | NEXT_VERSION |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |

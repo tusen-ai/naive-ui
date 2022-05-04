@@ -182,6 +182,10 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  checkboxPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
   virtualScroll: Boolean,
   watchProps: Array as PropType<
   Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
@@ -1241,6 +1245,7 @@ export default defineComponent({
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
       cascadeRef: toRef(props, 'cascade'),
+      checkboxPlacementRef: props.checkboxPlacement,
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
