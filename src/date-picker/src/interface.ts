@@ -1,4 +1,4 @@
-import { Ref, Slots } from 'vue'
+import { Ref, Slots, UnwrapNestedRefs } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
@@ -73,15 +73,21 @@ export type OnPanelUpdateValueImpl = (
 
 export type OnClose = (disableUpdateOnClose: boolean) => void
 
-export interface PanelRef {
+export interface PanelChildComponentRefs {
+  monthScrollbarRef?: Ref<ScrollbarInst | null> // Only exists when type is month
+  yearScrollbarRef?: Ref<ScrollbarInst | null>
+  startYearScrollbarRef?: Ref<ScrollbarInst | null>
+  endYearScrollbarRef?: Ref<ScrollbarInst | null>
+  startMonthScrollbarRef?: Ref<ScrollbarInst | null>
+  endMonthScrollbarRef?: Ref<ScrollbarInst | null>
+  // year, virtual scroll
+  yearVlRef?: Ref<VirtualListInst | null>
+  startYearVlRef?: Ref<VirtualListInst | null>
+  endYearVlRef?: Ref<VirtualListInst | null>
+}
+
+export interface PanelRef extends UnwrapNestedRefs<PanelChildComponentRefs> {
   $el: HTMLElement
-  // Only exists when type is month
-  monthScrollRef?: ScrollbarInst | null
-  yearScrollRef?: VirtualListInst | null
-  startYearScroll?: VirtualListInst | null
-  endYearScroll?: VirtualListInst | null
-  startMonthScroll?: ScrollbarInst | null
-  endMonthScroll?: ScrollbarInst | null
 }
 
 // 0 is Monday

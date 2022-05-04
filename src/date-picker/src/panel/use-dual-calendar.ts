@@ -24,7 +24,11 @@ import {
   pluckValueFromRange
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
-import { datePickerInjectionKey, Shortcuts } from '../interface'
+import {
+  datePickerInjectionKey,
+  PanelChildComponentRefs,
+  Shortcuts
+} from '../interface'
 import { VirtualListInst } from 'vueuc'
 import { ScrollbarInst } from '../../../_internal'
 
@@ -84,8 +88,8 @@ function useDualCalendar (
   const panelCommon = usePanelCommon(props)
   const startDatesElRef = ref<HTMLElement | null>(null)
   const endDatesElRef = ref<HTMLElement | null>(null)
-  const startYearScrollbarInstRef = ref<ScrollbarInst | null>(null)
-  const endYearScrollbarInstRef = ref<ScrollbarInst | null>(null)
+  const startYearScrollbarRef = ref<ScrollbarInst | null>(null)
+  const endYearScrollbarRef = ref<ScrollbarInst | null>(null)
   const startYearVlRef = ref<VirtualListInst | null>(null)
   const endYearVlRef = ref<VirtualListInst | null>(null)
   const startMonthScrollbarRef = ref<ScrollbarInst | null>(null)
@@ -669,11 +673,11 @@ function useDualCalendar (
       scrollRangeYearMonth(newValue, clickType)
     }
   }
-  function handleStartYearVlScroll (e: Event): void {
-    startYearScrollbarInstRef.value?.sync()
+  function handleStartYearVlScroll (): void {
+    startYearScrollbarRef.value?.sync()
   }
-  function handleEndYearVlScroll (e: Event): void {
-    endYearScrollbarInstRef.value?.sync()
+  function handleEndYearVlScroll (): void {
+    endYearScrollbarRef.value?.sync()
   }
   function virtualListContainer (type: 'start' | 'end'): HTMLElement {
     if (type === 'start') {
@@ -688,6 +692,14 @@ function useDualCalendar (
     } else {
       return endYearVlRef.value?.itemsElRef as HTMLElement
     }
+  }
+  const childComponentRefs: PanelChildComponentRefs = {
+    startYearVlRef,
+    endYearVlRef,
+    startMonthScrollbarRef,
+    endMonthScrollbarRef,
+    startYearScrollbarRef,
+    endYearScrollbarRef
   }
   return {
     startDatesElRef,
@@ -711,10 +723,6 @@ function useDualCalendar (
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,
     endCalendarYear: endCalendarYearRef,
-    startYearScroll: startYearVlRef,
-    endYearScroll: endYearVlRef,
-    startMonthScroll: startMonthScrollbarRef,
-    endMonthScroll: endMonthScrollbarRef,
     weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,
@@ -727,6 +735,7 @@ function useDualCalendar (
     handleRangeShortcutClick,
     ...panelCommon,
     ...validation,
+    ...childComponentRefs,
     // datetimerangeonly
     startDateDisplayString: startDateInput,
     endDateInput: endDateInputRef,
@@ -737,8 +746,6 @@ function useDualCalendar (
     shortcuts: shortcutsRef,
     startCalendarDateTime: startCalendarDateTimeRef,
     endCalendarDateTime: endCalendarDateTimeRef,
-    startYearScrollbarInstRef,
-    endYearScrollbarInstRef,
     handleFocusDetectorFocus: panelCommon.handleFocusDetectorFocus,
     handleStartTimePickerChange,
     handleEndTimePickerChange,

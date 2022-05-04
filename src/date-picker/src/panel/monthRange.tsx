@@ -86,7 +86,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
             <NScrollbar
-              ref="startYearScrollbarInstRef"
+              ref="startYearScrollbarRef"
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               theme={mergedTheme.peers.Scrollbar}
               themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -98,7 +98,7 @@ export default defineComponent({
               {{
                 default: () => (
                   <VirtualList
-                    ref="startYearScroll"
+                    ref="startYearVlRef"
                     items={this.startYearArray}
                     itemSize={MONTH_ITEM_HEIGHT}
                     showScrollbar={false}
@@ -126,7 +126,7 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               >
                 <NScrollbar
-                  ref="startMonthScroll"
+                  ref="startMonthScrollbarRef"
                   theme={mergedTheme.peers.Scrollbar}
                   themeOverrides={mergedTheme.peerOverrides.Scrollbar}
                 >
@@ -152,7 +152,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
             <NScrollbar
-              ref="endYearScrollbarInstRef"
+              ref="endYearScrollbarRef"
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               theme={mergedTheme.peers.Scrollbar}
               themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -164,7 +164,7 @@ export default defineComponent({
               {{
                 default: () => (
                   <VirtualList
-                    ref="endYearScroll"
+                    ref="endYearVlRef"
                     items={this.endYearArray}
                     itemSize={MONTH_ITEM_HEIGHT}
                     showScrollbar={false}
@@ -192,7 +192,7 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               >
                 <NScrollbar
-                  ref="endMonthScroll"
+                  ref="endMonthScrollbarRef"
                   theme={mergedTheme.peers.Scrollbar}
                   themeOverrides={mergedTheme.peerOverrides.Scrollbar}
                 >

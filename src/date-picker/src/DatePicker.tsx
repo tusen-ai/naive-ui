@@ -489,53 +489,53 @@ export default defineComponent({
     ): void {
       if (!panelInstRef.value) return
       const {
-        startYearScroll,
-        startMonthScroll,
-        endYearScroll,
-        endMonthScroll
+        startYearVlRef,
+        startMonthScrollbarRef,
+        endYearVlRef,
+        endMonthScrollbarRef
       } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
       if (type === 'start' || type === 'all') {
-        if (startMonthScroll) {
+        if (startMonthScrollbarRef) {
           const monthIndex =
             value === undefined
               ? mergedValue === null || !Array.isArray(mergedValue)
                 ? getMonth(Date.now())
                 : getMonth(mergedValue[0])
               : getMonth(value)
-          startMonthScroll.scrollTo({
+          startMonthScrollbarRef.scrollTo({
             index: monthIndex,
             elSize: MONTH_ITEM_HEIGHT
           })
         }
-        if (startYearScroll) {
+        if (startYearVlRef) {
           const yearIndex =
             (value === undefined
               ? mergedValue === null || !Array.isArray(mergedValue)
                 ? getYear(Date.now())
                 : getYear(mergedValue[0])
               : getYear(value)) - START_YEAR
-          startYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+          startYearVlRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
         }
       }
       if (type === 'end' || type === 'all') {
-        if (endMonthScroll) {
+        if (endMonthScrollbarRef) {
           const monthIndex =
             value === undefined
               ? mergedValue === null || !Array.isArray(mergedValue)
                 ? getMonth(Date.now())
                 : getMonth(mergedValue[1])
               : getMonth(value)
-          endMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+          endMonthScrollbarRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
         }
-        if (endYearScroll) {
+        if (endYearVlRef) {
           const yearIndex =
             (value === undefined
               ? mergedValue === null || !Array.isArray(mergedValue)
                 ? getYear(Date.now())
                 : getYear(mergedValue[1])
               : getYear(value)) - START_YEAR
-          endYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+          endYearVlRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
         }
       }
     }

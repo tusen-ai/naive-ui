@@ -102,7 +102,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
           <NScrollbar
-            ref="scrollbarInstRef"
+            ref="yearScrollbarRef"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -114,7 +114,7 @@ export default defineComponent({
             {{
               default: () => (
                 <VirtualList
-                  ref="yearScrollRef"
+                  ref="yearVlRef"
                   items={this.yearArray}
                   itemSize={MONTH_ITEM_HEIGHT}
                   showScrollbar={false}
@@ -142,7 +142,7 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >
               <NScrollbar
-                ref="monthScrollRef"
+                ref="monthScrollbarRef"
                 theme={mergedTheme.peers.Scrollbar}
                 themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >
