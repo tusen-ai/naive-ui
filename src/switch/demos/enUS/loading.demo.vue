@@ -4,11 +4,23 @@
 
 <template>
   <n-space>
+    <n-switch :rubber-band="false" loading />
+    <n-switch
+      :rubber-band="false"
+      :value="active"
+      :loading="loading"
+      @update:value="handleUpdateValue"
+    />
+  </n-space>
+</template>
+
+<template>
+  <n-space>
     <n-switch loading />
     <n-switch
-      :value="activeValue"
+      :value="active"
       :loading="loading"
-      @update:value="handleChange"
+      @update:value="handleUpdateValue"
     />
   </n-space>
 </template>
@@ -18,16 +30,16 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const activeValue = ref(false)
-    const loading = ref(false)
+    const activeRef = ref(false)
+    const loadingRef = ref(false)
     return {
-      activeValue,
-      loading,
-      handleChange (value: boolean) {
-        loading.value = true
+      active: activeRef,
+      loading: loadingRef,
+      handleUpdateValue (value: boolean) {
+        loadingRef.value = true
         setTimeout(() => {
-          activeValue.value = value
-          loading.value = false
+          activeRef.value = value
+          loadingRef.value = false
         }, 2000)
       }
     }

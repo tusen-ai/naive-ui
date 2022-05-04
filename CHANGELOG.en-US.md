@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-menu` adds `node-props` prop.
+- `n-switch` adds `rubber-band` prop.
 
 ## 2.28.2
 

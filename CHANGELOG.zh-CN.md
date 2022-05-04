@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-menu` 新增 `node-props` 属性
+- `n-switch` 新增 `rubber-band` 属性
 
 ## 2.28.2
 
