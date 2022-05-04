@@ -275,6 +275,7 @@ export default c([
     margin-bottom: -3px;
     display: flex;
     flex-wrap: wrap;
+    margin-right: -8px;
   `),
   cB('base-selection-tag-wrapper', `
     max-width: 100%;

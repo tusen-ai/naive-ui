@@ -525,7 +525,7 @@ export default defineComponent({
     provide(carouselMethodsInjectionKey, carouselMethods)
 
     // Autoplay
-    let autoplayTimer: NodeJS.Timeout | null = null
+    let autoplayTimer: number | null = null
     function resetAutoplay (cleanOnly?: boolean): void {
       if (autoplayTimer) {
         clearInterval(autoplayTimer)
@@ -533,7 +533,7 @@ export default defineComponent({
       }
       const { autoplay, interval } = props
       if (autoplay && interval && !cleanOnly) {
-        autoplayTimer = setInterval(next, interval)
+        autoplayTimer = window.setInterval(next, interval)
       }
     }
     function mesureAutoplay (): void {

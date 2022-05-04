@@ -749,7 +749,7 @@ export default defineComponent({
         body = (
           <>
             {useMaxTagCount ? (
-              <NPopover {...popoverProps}>
+              <NPopover {...popoverProps} scrollable>
                 {{
                   trigger: () => popoverTrigger,
                   default: renderPopover
@@ -775,7 +775,11 @@ export default defineComponent({
         body = (
           <>
             {useMaxTagCount ? (
-              <NPopover {...popoverProps}>
+              <NPopover
+                {...popoverProps}
+                scrollable
+                style="height: calc(var(--v-target-height) * 6.6);"
+              >
                 {{
                   trigger: () => popoverTrigger,
                   default: renderPopover
