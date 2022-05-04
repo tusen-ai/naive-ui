@@ -64,6 +64,10 @@ const switchProps = {
   railStyle: Function as PropType<
   (params: { focused: boolean, checked: boolean }) => string | CSSProperties
   >,
+  rubberBand: {
+    type: Boolean,
+    default: true
+  },
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -281,7 +285,8 @@ export default defineComponent({
           mergedDisabled && `${mergedClsPrefix}-switch--disabled`,
           this.round && `${mergedClsPrefix}-switch--round`,
           this.loading && `${mergedClsPrefix}-switch--loading`,
-          this.pressed && `${mergedClsPrefix}-switch--pressed`
+          this.pressed && `${mergedClsPrefix}-switch--pressed`,
+          this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}

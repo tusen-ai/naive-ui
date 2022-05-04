@@ -2,8 +2,25 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-menu`'s `dropdown-props` prop can't override `n-dropdown`'s `size` prop, closes [#2868](https://github.com/TuSimple/naive-ui/issues/2868).
+- Fix `n-switch` abnormal loading animation when switching state, closes [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
+- Fix `n-data-table` doesn't show content when page is more than data's page, closes [#2840](https://github.com/TuSimple/naive-ui/issues/2840).
+- Fix `n-data-table`'s `cellProps` doesn't has correct generic type.
+
 ### Feats
 
+- `n-menu` adds `node-props` prop.
+- `n-switch` adds `rubber-band` prop.
+- `n-space`'s `justify` prop supports `'space-evenly'`.
+- `n-popover` adds `content-style` prop.
+- `n-popover` adds `header-style` prop.
+- `n-popover` adds `scrollable` prop.
+- `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
+- `n-data-table` adds `pagination-behavior-on-filter` prop.
+- `n-date-picker`'s `type` prop supports `monthrange` option.
+- `n-data-table`'s `columns`'s element supports `minWidth` prop.
 - `n-tree` adds `checkbox-placement` prop.
 
 ## 2.28.2

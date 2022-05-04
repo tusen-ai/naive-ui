@@ -97,7 +97,10 @@ export default defineComponent({
           isPrev ? this.prevSlideStyle : '',
           isNext ? this.nextSlideStyle : ''
         ]}
-        // @ts-expect-error
+        // We use ts-ignore for vue-tsc, since it seems to patch native event
+        // for vue components
+        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+        // @ts-ignore
         onClickCapture={this.handleClick}
       >
         {slots.default?.({

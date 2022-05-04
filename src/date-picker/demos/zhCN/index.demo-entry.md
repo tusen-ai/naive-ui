@@ -11,6 +11,7 @@ datetimeformat.vue
 daterange.vue
 datetimerange.vue
 month.vue
+monthrange.vue
 year.vue
 quarter.vue
 size.vue
@@ -43,7 +44,7 @@ status.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` NEXT_VERSION |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
@@ -118,6 +119,20 @@ status.vue
 | placeholder | `string` | `'选择月份'` | 自动填充的提示信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
+
+### MonthRange 类型的 Props
+
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | MonthRange 类型的 Date Picker 中支持的用户操作 | NEXT_VERSION |
+| end-placeholder | `string` | `'结束日期'` | MonthRange 中 end 选框的提示信息 | NEXT_VERSION |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
+| close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 | NEXT_VERSION |
+| separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 | NEXT_VERSION |
+| start-placeholder | `string` | `'开始日期'` | MonthRange 中 start 选框的提示信息 | NEXT_VERSION |
+| update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 | NEXT_VERSION |
+| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | NEXT_VERSION |
+| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | NEXT_VERSION |
 
 ### Year 类型的 Props
 

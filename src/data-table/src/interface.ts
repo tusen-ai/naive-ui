@@ -61,6 +61,7 @@ export type Ellipsis = boolean | EllipsisProps
 export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
   width?: number | string
+  minWidth?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
@@ -87,7 +88,7 @@ export type TableColumnGroup<T = InternalRowData> = {
 
   // to suppress type error in table header
   filterOptions?: never
-} & CommonColumnInfo
+} & CommonColumnInfo<T>
 
 export type TableBaseColumn<T = InternalRowData> = {
   title?: TableColumnTitle
@@ -118,7 +119,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   renderFilterMenu?: RenderFilterMenu
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
-} & CommonColumnInfo
+} & CommonColumnInfo<T>
 
 export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
@@ -133,7 +134,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   filterOptionValue?: never
   colSpan?: never
   rowSpan?: never
-} & CommonColumnInfo
+} & CommonColumnInfo<T>
 
 export type RenderExpand<T = InternalRowData> = (
   row: T,
@@ -214,6 +215,8 @@ export interface DataTableInjection {
   stripedRef: Ref<boolean>
   onLoadRef: Ref<DataTableOnLoad | undefined>
   loadingKeySetRef: Ref<Set<RowKey>>
+  paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
+  doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void

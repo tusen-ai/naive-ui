@@ -44,6 +44,9 @@ const skSK: NLocale = {
     endDatePlaceholder: 'Dátum ukončenia',
     startDatetimePlaceholder: 'Dátum a čas začiatku',
     endDatetimePlaceholder: 'Dátum a čas ukončenia ',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Dnes'

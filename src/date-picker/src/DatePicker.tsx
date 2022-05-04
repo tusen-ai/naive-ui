@@ -65,6 +65,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
+import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
 const datePickerProps = {
@@ -190,6 +191,7 @@ export default defineComponent({
         case 'year':
           return localeRef.value.yearTypeFormat
         case 'month':
+        case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
           return localeRef.value.quarterFormat
@@ -245,6 +247,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+
     // We don't change value unless blur or confirm is called
     const pendingValueRef: Ref<Value | null> = ref(null)
     watchEffect(() => {
@@ -267,7 +270,7 @@ export default defineComponent({
       )
     })
     const isRangeRef = computed(() => {
-      return ['daterange', 'datetimerange'].includes(props.type)
+      return ['daterange', 'datetimerange', 'monthrange'].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
@@ -297,6 +300,8 @@ export default defineComponent({
           return localeRef.value.startDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.startDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.startMonthPlaceholder
         }
         return ''
       } else {
@@ -309,6 +314,8 @@ export default defineComponent({
           return localeRef.value.endDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.endDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.endMonthPlaceholder
         }
         return ''
       } else {
@@ -340,6 +347,9 @@ export default defineComponent({
         }
         case 'quarter': {
           return ['clear', 'now', 'confirm']
+        }
+        case 'monthrange': {
+          return ['clear', 'confirm']
         }
         default: {
           warn(
@@ -1008,46 +1018,42 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(
-                              this.type === 'datetime' ? (
-                                  <DatetimePanel {...commonPanelProps} />
-                              ) : this.type === 'daterange' ? (
-                                  <DaterangePanel {...commonPanelProps} />
-                              ) : this.type === 'datetimerange' ? (
-                                  <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="month"
-                                    key="month"
-                                  />
-                              ) : this.type === 'year' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="year"
-                                    key="year"
-                                  />
-                              ) : this.type === 'quarter' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="quarter"
-                                    key="quarter"
-                                  />
-                              ) : (
-                                  <DatePanel {...commonPanelProps} />
-                              ),
+                        default: () => {
+                          if (!this.mergedShow) return null
+                          const { type } = this
+                          return withDirectives(
+                            type === 'datetime' ? (
+                              <DatetimePanel {...commonPanelProps} />
+                            ) : type === 'daterange' ? (
+                              <DaterangePanel {...commonPanelProps} />
+                            ) : type === 'datetimerange' ? (
+                              <DatetimerangePanel {...commonPanelProps} />
+                            ) : type === 'month' ||
+                              type === 'year' ||
+                              type === 'quarter' ? (
+                              <MonthPanel
+                                {...commonPanelProps}
+                                type={type}
+                                key={type}
+                              />
+                                ) : type === 'monthrange' ? (
+                              <MonthRangePanel
+                                {...commonPanelProps}
+                                type={type}
+                              />
+                                ) : (
+                              <DatePanel {...commonPanelProps} />
+                                ),
+                            [
                               [
-                                [
-                                  clickoutside,
-                                  this.handleClickOutside,
-                                  undefined as unknown as string,
-                                  { capture: true }
-                                ]
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined as unknown as string,
+                                { capture: true }
                               ]
-                            )
-                            : null
+                            ]
+                          )
+                        }
                       }}
                     </Transition>
                   )

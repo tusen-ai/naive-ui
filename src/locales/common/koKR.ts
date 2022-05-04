@@ -44,6 +44,9 @@ const koKR: NLocale = {
     endDatePlaceholder: '종료 날짜',
     startDatetimePlaceholder: '시작 날짜 및 시간',
     endDatetimePlaceholder: '종료 날짜 및 시간',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: false,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: '오늘'

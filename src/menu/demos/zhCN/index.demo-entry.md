@@ -25,35 +25,36 @@ expand-selected-option.vue
 
 ### Menu Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| accordion | `boolean` | `false` | 是否使用手风琴模式 |
-| children-field | `string` | `'children'` | children 的字段名 |
-| collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果未设定则使用 `icon-size` 代替 |
-| collapsed-width | `number` | `48` | 折叠后菜单的宽度 |
-| collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |
-| default-expand-all | `boolean` | `false` | 是否展开全部菜单 |
-| default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |
-| default-value | `string \| null` | `null` | 非受控模式下的默认值 |
-| dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |
-| dropdown-props | `DropdownProps` | `undefined` | 菜单折叠或 `mode='horizontal'` 模式时 Dropdown 的 props，请参考 [Dropdown Props](dropdown#Dropdown-Props) |
-| expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |
-| expand-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单展开图标的渲染 |
-| icon-size | `number` | `20` | 菜单未折叠时图标的大小 |
-| indent | `number` | `32` | 菜单每级的缩进 |
-| inverted | `boolean` | `false` | 使用反转样式 |
-| key-field | `string` | `'key'` | key 的字段名 |
-| label-field | `string` | `'label'` | label 的字段名 |
-| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
-| mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
-| render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |
-| render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |
-| render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |
-| root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
-| value | `string \| null` | `undefined` | 菜单当前的选中值 |
-| watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |
-| on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
-| on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | 是否使用手风琴模式 |  |
+| children-field | `string` | `'children'` | children 的字段名 |  |
+| collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果未设定则使用 `icon-size` 代替 |  |
+| collapsed-width | `number` | `48` | 折叠后菜单的宽度 |  |
+| collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |  |
+| default-expand-all | `boolean` | `false` | 是否展开全部菜单 |  |
+| default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |  |
+| default-value | `string \| null` | `null` | 非受控模式下的默认值 |  |
+| dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |  |
+| dropdown-props | `DropdownProps` | `undefined` | 菜单折叠或 `mode='horizontal'` 模式时 Dropdown 的 props，请参考 [Dropdown Props](dropdown#Dropdown-Props) |  |
+| expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |  |
+| expand-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单展开图标的渲染 |  |
+| icon-size | `number` | `20` | 菜单未折叠时图标的大小 |  |
+| indent | `number` | `32` | 菜单每级的缩进 |  |
+| inverted | `boolean` | `false` | 使用反转样式 |  |
+| key-field | `string` | `'key'` | key 的字段名 |  |
+| label-field | `string` | `'label'` | label 的字段名 |  |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |
+| node-props | `() => (MenuOption \| MenuGroupOption)` | `undefined` | 节点的 DOM 属性生成函数 | NEXT_VERSION |
+| mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |  |
+| render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |  |
+| render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |  |
+| render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |  |
+| root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |  |
+| value | `string \| null` | `undefined` | 菜单当前的选中值 |  |
+| watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
+| on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |  |
+| on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |  |
 
 #### MenuOption Properties
 
