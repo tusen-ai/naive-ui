@@ -12,6 +12,7 @@ import {
   getDate,
   getTime
 } from 'date-fns'
+import { VirtualListInst } from 'vueuc'
 import {
   dateArray,
   DateItem,
@@ -29,7 +30,6 @@ import {
   RangePanelChildComponentRefs,
   Shortcuts
 } from '../interface'
-import { VirtualListInst } from 'vueuc'
 import { ScrollbarInst } from '../../../_internal'
 import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
@@ -677,16 +677,16 @@ function useDualCalendar (
     clickType: 'start' | 'end'
   ): void {
     const { value } = props
-    const noValue = !Array.isArray(value)
+    const noCurrentValue = !Array.isArray(value)
     const itemTs =
       dateItem.type === 'year'
-        ? noValue
+        ? noCurrentValue
           ? set(dateItem.ts, { month: getMonth(new Date()) }).valueOf()
           : set(dateItem.ts, {
             month: getMonth(value[clickType === 'start' ? 0 : 1])
           }).valueOf()
         : dateItem.ts
-    if (noValue) {
+    if (noCurrentValue) {
       const newValue = sanitizeValue(itemTs)
       panelCommon.doUpdateValue([newValue, newValue], false)
       return
