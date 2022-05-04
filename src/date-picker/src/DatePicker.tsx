@@ -65,7 +65,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
-import MonthRangePanel from './panel/monthRange'
+import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
 const datePickerProps = {
