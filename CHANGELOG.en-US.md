@@ -11,6 +11,7 @@
 
 - `n-menu` adds `node-props` prop.
 - `n-switch` adds `rubber-band` prop.
+- `n-space`'s `justify` prop supports `'space-evenly'`.
 
 ## 2.28.2
 
