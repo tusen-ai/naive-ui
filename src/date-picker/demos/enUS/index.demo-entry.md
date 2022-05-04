@@ -82,7 +82,7 @@ status.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `daterange` type date picker. |  |
-| end-placeholder | `string` | `'End Date'` | Placeholder at the end of the input. |  |
+| end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
@@ -99,7 +99,7 @@ status.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `datetimerange` type. |  |
 | default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
-| end-placeholder | `string` | `'End Date and Time'` | Placeholder at the end of the input. |  |
+| end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
@@ -120,6 +120,20 @@ status.vue
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
+
+### MonthRange Type Props
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `monthrange` type date picker. | NEXT_VERSION |
+| end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. | NEXT_VERSION |
+| format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. | NEXT_VERSION |
+| separator | `string` | `'to'` | The separator between the start input and the end input. | NEXT_VERSION |
+| start-placeholder | `string` | `'Start Date'` | The prompt information at the beginning of the input. | NEXT_VERSION |
+| update-value-on-close | `boolean` | `false` | Whether to update the value on close. | NEXT_VERSION |
+| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | NEXT_VERSION |
+| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Range changed callback. | NEXT_VERSION |
 
 ### Year Type Props
 
