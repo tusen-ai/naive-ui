@@ -18,6 +18,7 @@
 - `n-popover` 新增 `scrollable` 属性
 - `n-select` 和 `n-cascader` 和 `n-tree-select` 的溢出计数 tag 弹出内容可以滚动
 - `n-data-table` 新增 `pagination-behavior-on-filter` 属性
+- `n-date-picker` 属性 `type` 支持 `monthrange` 选项
 
 ## 2.28.2
 

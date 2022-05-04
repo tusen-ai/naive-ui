@@ -18,6 +18,7 @@
 - `n-popover` adds `scrollable` prop.
 - `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
 - `n-data-table` adds `pagination-behavior-on-filter` prop.
+- `n-date-picker`'s `type` prop supports `monthrange` option.
 
 ## 2.28.2
 
