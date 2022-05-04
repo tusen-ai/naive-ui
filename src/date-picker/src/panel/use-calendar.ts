@@ -99,13 +99,24 @@ function useCalendar (
     )
   })
   const monthArrayRef = computed(() => {
-    return monthArray(calendarValueRef.value, props.value, nowRef.value)
+    const { value } = props
+    return monthArray(
+      calendarValueRef.value,
+      Array.isArray(value) ? null : value,
+      nowRef.value
+    )
   })
   const yearArrayRef = computed(() => {
-    return yearArray(props.value, nowRef.value)
+    const { value } = props
+    return yearArray(Array.isArray(value) ? null : value, nowRef.value)
   })
   const quarterArrayRef = computed(() => {
-    return quarterArray(calendarValueRef.value, props.value, nowRef.value)
+    const { value } = props
+    return quarterArray(
+      calendarValueRef.value,
+      Array.isArray(value) ? null : value,
+      nowRef.value
+    )
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {

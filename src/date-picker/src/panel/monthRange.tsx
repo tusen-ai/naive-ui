@@ -6,15 +6,13 @@ import {
   PropType,
   VNode
 } from 'vue'
-import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
-import { warnOnce } from '../../../_utils'
-
 import { VirtualList } from 'vueuc'
-
+import { NxButton } from '../../../button'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { warnOnce } from '../../../_utils'
 import type { MonthItem, YearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
   name: 'MonthRangePanel',
@@ -88,7 +86,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
             <NScrollbar
-              ref="scrollbarInst"
+              ref="startYearScrollbarInstRef"
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               theme={mergedTheme.peers.Scrollbar}
               themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -105,7 +103,7 @@ export default defineComponent({
                     itemSize={MONTH_ITEM_HEIGHT}
                     showScrollbar={false}
                     keyField="ts"
-                    onScroll={this.handleVirtualListScroll}
+                    onScroll={this.handleStartYearVlScroll}
                     paddingBottom={4}
                   >
                     {{
@@ -154,7 +152,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
             <NScrollbar
-              ref="scrollbarInst"
+              ref="endYearScrollbarInstRef"
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               theme={mergedTheme.peers.Scrollbar}
               themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -171,7 +169,7 @@ export default defineComponent({
                     itemSize={MONTH_ITEM_HEIGHT}
                     showScrollbar={false}
                     keyField="ts"
-                    onScroll={this.handleVirtualListScroll}
+                    onScroll={this.handleEndYearVlScroll}
                     paddingBottom={4}
                   >
                     {{
@@ -245,17 +243,17 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear') ? (
-                <NButton
+                <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   size="tiny"
                   onClick={this.handleClearClick}
                 >
                   {{ default: () => this.locale.clear }}
-                </NButton>
+                </NxButton>
               ) : null}
               {this.actions?.includes('confirm') ? (
-                <NButton
+                <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   size="tiny"
@@ -264,7 +262,7 @@ export default defineComponent({
                   onClick={this.handleConfirmClick}
                 >
                   {{ default: () => this.locale.confirm }}
-                </NButton>
+                </NxButton>
               ) : null}
             </div>
           </div>

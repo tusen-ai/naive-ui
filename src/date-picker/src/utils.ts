@@ -50,9 +50,9 @@ const matcherMap = {
 } as const
 
 function matchDate (
-  sourceTime: number[] | number,
+  sourceTime: number,
   patternTime: number | Date,
-  type: 'date' | 'month' | 'year' | 'quarter' = 'date'
+  type: 'date' | 'month' | 'year' | 'quarter'
 ): boolean {
   const matcher = matcherMap[type]
   if (Array.isArray(sourceTime)) {
@@ -110,6 +110,8 @@ export interface QuarterItem {
   ts: number
 }
 
+// date item's valueTs can be a tuple since two date may show in one panel, so
+// any matched value would make it shown as selected
 function dateItem (
   time: number,
   monthTs: number,
@@ -123,9 +125,15 @@ function dateItem (
     if (valueTs[0] < time && time < valueTs[1]) {
       inSpan = true
     }
-    if (matchDate(valueTs[0], time)) startOfSpan = true
-    if (matchDate(valueTs[1], time)) endOfSpan = true
+    if (matchDate(valueTs[0], time, 'date')) startOfSpan = true
+    if (matchDate(valueTs[1], time, 'date')) endOfSpan = true
   }
+  const selected =
+    valueTs !== null &&
+    (Array.isArray(valueTs)
+      ? matchDate(valueTs[0], time, 'date') ||
+        matchDate(valueTs[1], time, 'date')
+      : matchDate(valueTs, time, 'date'))
   return {
     type: 'date',
     dateObject: {
@@ -134,18 +142,18 @@ function dateItem (
       year: getYear(time)
     },
     inCurrentMonth: isSameMonth(time, monthTs),
-    isCurrentDate: matchDate(currentTs, time),
+    isCurrentDate: matchDate(currentTs, time, 'date'),
     inSpan,
     startOfSpan,
     endOfSpan,
-    selected: valueTs !== null && matchDate(valueTs, time),
+    selected,
     ts: getTime(time)
   }
 }
 
 function monthItem (
   monthTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: number | null,
   currentTs: number
 ): MonthItem {
   return {
@@ -162,7 +170,7 @@ function monthItem (
 
 function yearItem (
   yearTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: number | null,
   currentTs: number
 ): YearItem {
   return {
@@ -178,7 +186,7 @@ function yearItem (
 
 function quarterItem (
   quarterTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: number | null,
   currentTs: number
 ): QuarterItem {
   return {
@@ -245,7 +253,7 @@ function dateArray (
 
 function monthArray (
   yearAnchorTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: number | null,
   currentTs: number
 ): MonthItem[] {
   const calendarMonths: MonthItem[] = []
@@ -260,7 +268,7 @@ function monthArray (
 
 function quarterArray (
   quarterTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: number | null,
   currentTs: number
 ): QuarterItem[] {
   const calendarQuarters: QuarterItem[] = []
@@ -273,10 +281,7 @@ function quarterArray (
   return calendarQuarters
 }
 
-function yearArray (
-  valueTs: number | [number, number] | null,
-  currentTs: number
-): YearItem[] {
+function yearArray (valueTs: number | null, currentTs: number): YearItem[] {
   const calendarYears: YearItem[] = []
   const time1900 = new Date(START_YEAR, 0, 1)
   // 1900 is not a round time, so we use 1911 as start...

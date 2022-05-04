@@ -84,11 +84,12 @@ function useDualCalendar (
   const panelCommon = usePanelCommon(props)
   const startDatesElRef = ref<HTMLElement | null>(null)
   const endDatesElRef = ref<HTMLElement | null>(null)
-  const startYearScrollRef = ref<VirtualListInst | null>(null)
-  const endYearScrollRef = ref<VirtualListInst | null>(null)
-  const startMonthScrollRef = ref<ScrollbarInst | null>(null)
-  const endMonthScrollRef = ref<ScrollbarInst | null>(null)
-  const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+  const startYearScrollbarInstRef = ref<ScrollbarInst | null>(null)
+  const endYearScrollbarInstRef = ref<ScrollbarInst | null>(null)
+  const startYearVlRef = ref<VirtualListInst | null>(null)
+  const endYearVlRef = ref<VirtualListInst | null>(null)
+  const startMonthScrollbarRef = ref<ScrollbarInst | null>(null)
+  const endMonthScrollbarRef = ref<ScrollbarInst | null>(null)
   const startCalendarDateTimeRef = ref(Date.now())
   const endCalendarDateTimeRef = ref(getTime(addMonths(Date.now(), 1)))
   const nowRef = ref(Date.now())
@@ -668,21 +669,24 @@ function useDualCalendar (
       scrollRangeYearMonth(newValue, clickType)
     }
   }
-  function handleVirtualListScroll (e: Event): void {
-    scrollbarInstRef.value?.sync()
+  function handleStartYearVlScroll (e: Event): void {
+    startYearScrollbarInstRef.value?.sync()
+  }
+  function handleEndYearVlScroll (e: Event): void {
+    endYearScrollbarInstRef.value?.sync()
   }
   function virtualListContainer (type: 'start' | 'end'): HTMLElement {
     if (type === 'start') {
-      return startYearScrollRef.value?.listElRef as HTMLElement
+      return startYearVlRef.value?.listElRef as HTMLElement
     } else {
-      return endYearScrollRef.value?.listElRef as HTMLElement
+      return endYearVlRef.value?.listElRef as HTMLElement
     }
   }
   function virtualListContent (type: 'start' | 'end'): HTMLElement {
     if (type === 'start') {
-      return startYearScrollRef.value?.itemsElRef as HTMLElement
+      return startYearVlRef.value?.itemsElRef as HTMLElement
     } else {
-      return endYearScrollRef.value?.itemsElRef as HTMLElement
+      return endYearVlRef.value?.itemsElRef as HTMLElement
     }
   }
   return {
@@ -707,10 +711,10 @@ function useDualCalendar (
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,
     endCalendarYear: endCalendarYearRef,
-    startYearScroll: startYearScrollRef,
-    endYearScroll: endYearScrollRef,
-    startMonthScroll: startMonthScrollRef,
-    endMonthScroll: endMonthScrollRef,
+    startYearScroll: startYearVlRef,
+    endYearScroll: endYearVlRef,
+    startMonthScroll: startMonthScrollbarRef,
+    endMonthScroll: endMonthScrollbarRef,
     weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,
@@ -731,9 +735,10 @@ function useDualCalendar (
     endTimeValue: endTimeValueRef,
     datePickerSlots,
     shortcuts: shortcutsRef,
-    scrollbarInst: scrollbarInstRef,
     startCalendarDateTime: startCalendarDateTimeRef,
     endCalendarDateTime: endCalendarDateTimeRef,
+    startYearScrollbarInstRef,
+    endYearScrollbarInstRef,
     handleFocusDetectorFocus: panelCommon.handleFocusDetectorFocus,
     handleStartTimePickerChange,
     handleEndTimePickerChange,
@@ -741,7 +746,8 @@ function useDualCalendar (
     handleStartDateInputBlur,
     handleEndDateInput,
     handleEndDateInputBlur,
-    handleVirtualListScroll,
+    handleStartYearVlScroll,
+    handleEndYearVlScroll,
     virtualListContainer,
     virtualListContent,
     onUpdateStartCalendarValue,
