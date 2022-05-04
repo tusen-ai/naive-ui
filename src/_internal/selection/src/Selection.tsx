@@ -37,6 +37,7 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
+import { NScrollbar } from '../../scrollbar'
 
 export interface InternalSelectionInst {
   isCompositing: boolean
@@ -705,9 +706,11 @@ export default defineComponent({
       const renderPopover = useMaxTagCount
         ? (): JSX.Element => (
             <div class={`${clsPrefix}-base-selection-popover`}>
-              {maxTagCountResponsive
-                ? originalTags
-                : this.selectedOptions!.map(createTag)}
+              <NScrollbar>
+                {maxTagCountResponsive
+                  ? originalTags
+                  : this.selectedOptions!.map(createTag)}
+              </NScrollbar>
             </div>
           )
         : undefined
