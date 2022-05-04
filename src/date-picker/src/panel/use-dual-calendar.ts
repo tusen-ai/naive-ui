@@ -21,8 +21,7 @@ import {
   yearArray,
   monthArray,
   getDefaultTime,
-  getYearAndMonthOfMonthRange,
-  getYearAndMonthValue
+  pluckValueFromRange
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import { datePickerInjectionKey, Shortcuts } from '../interface'
@@ -198,38 +197,19 @@ function useDualCalendar (
     const { shortcuts } = props
     return shortcuts || rangesRef.value
   })
-
   const startYearArrayRef = computed(() => {
-    const { value } = props
-    return yearArray(
-      getYearAndMonthOfMonthRange(value, 'start'),
-      getYearAndMonthValue(value, 'start'),
-      nowRef.value
-    )
+    return yearArray(pluckValueFromRange(props.value, 'start'), nowRef.value)
   })
   const endYearArrayRef = computed(() => {
-    const { value } = props
-    return yearArray(
-      getYearAndMonthOfMonthRange(value, 'end'),
-      getYearAndMonthValue(value, 'end'),
-      nowRef.value
-    )
+    return yearArray(pluckValueFromRange(props.value, 'end'), nowRef.value)
   })
   const startMonthArrayRef = computed(() => {
-    const { value } = props
-    return monthArray(
-      getYearAndMonthOfMonthRange(value, 'start'),
-      getYearAndMonthValue(value, 'start'),
-      nowRef.value
-    )
+    const startValue = pluckValueFromRange(props.value, 'start')
+    return monthArray(startValue ?? Date.now(), startValue, nowRef.value)
   })
   const endMonthArrayRef = computed(() => {
-    const { value } = props
-    return monthArray(
-      getYearAndMonthOfMonthRange(value, 'end'),
-      getYearAndMonthValue(value, 'end'),
-      nowRef.value
-    )
+    const endValue = pluckValueFromRange(props.value, 'end')
+    return monthArray(endValue ?? Date.now(), endValue, nowRef.value)
   })
   watch(
     computed(() => props.value),

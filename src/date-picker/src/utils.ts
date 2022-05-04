@@ -244,12 +244,12 @@ function dateArray (
 }
 
 function monthArray (
-  monthTs: number,
+  yearAnchorTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
 ): MonthItem[] {
   const calendarMonths: MonthItem[] = []
-  const yearStart = startOfYear(monthTs)
+  const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
       monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs)
@@ -274,7 +274,6 @@ function quarterArray (
 }
 
 function yearArray (
-  yearTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
 ): YearItem[] {
@@ -325,16 +324,8 @@ function getDefaultTime (timeValue: string | undefined):
     seconds: Number(second)
   }
 }
-function getYearAndMonthOfMonthRange (
-  value: Value | null,
-  type: 'start' | 'end'
-): number {
-  return value === null || !Array.isArray(value)
-    ? Date.now()
-    : value[type === 'start' ? 0 : 1]
-}
 
-function getYearAndMonthValue (
+function pluckValueFromRange (
   value: Value | null,
   type: 'start' | 'end'
 ): number | null {
@@ -349,6 +340,5 @@ export {
   strictParse,
   getDerivedTimeFromKeyboardEvent,
   getDefaultTime,
-  getYearAndMonthOfMonthRange,
-  getYearAndMonthValue
+  pluckValueFromRange
 }

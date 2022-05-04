@@ -102,7 +102,7 @@ function useCalendar (
     return monthArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const yearArrayRef = computed(() => {
-    return yearArray(calendarValueRef.value, props.value, nowRef.value)
+    return yearArray(props.value, nowRef.value)
   })
   const quarterArrayRef = computed(() => {
     return quarterArray(calendarValueRef.value, props.value, nowRef.value)
