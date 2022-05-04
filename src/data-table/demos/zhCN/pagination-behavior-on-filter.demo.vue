@@ -1,34 +1,39 @@
-# Filter page state
+<markdown>
+# 过滤后页面状态
 
-Configure `filter-page-state` to control whether the filtered page stays on the current page or the first page.
+配置 `pagination-behavior-on-filter` 控制过滤后的页面停留在当前页还是首页。
 
-Note that: If the setting stays on the current page and the total amount of filtered data cannot reach the current page, the page will display no data.
+如果设置停留在当前页，过滤后的数据总数达不到当前页时，会展示最后一页的数据。
+</markdown>
 
-```html
-<n-space vertical :size="12">
+<template>
   <n-data-table
-    filter-page-state="first"
+    pagination-behavior-on-filter="first"
     :columns="columns"
     :data="data"
     :pagination="pagination"
   />
-</n-space>
-```
+</template>
 
-```js
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { DataTableColumns } from 'naive-ui'
 
-const columns = [
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const columns: DataTableColumns<RowData> = [
   {
     title: 'Name',
-    key: 'name',
-    defaultSortOrder: 'ascend',
-    sorter: 'default'
+    key: 'name'
   },
   {
     title: 'Age',
-    key: 'age',
-    sorter: (row1, row2) => row1.age - row2.age
+    key: 'age'
   },
   {
     title: 'Address',
@@ -45,12 +50,12 @@ const columns = [
       }
     ],
     filter (value, row) {
-      return ~row.address.indexOf(value)
+      return !!~row.address.indexOf(String(value))
     }
   }
 ]
 
-const data = [
+const data: RowData[] = [
   {
     key: 1,
     name: 'John Brown',
@@ -79,14 +84,11 @@ const data = [
 
 export default defineComponent({
   setup () {
-    const tableRef = ref(null)
-
     return {
-      table: tableRef,
       data,
       columns,
       pagination: { pageSize: 3 }
     }
   }
 })
-```
+</script>

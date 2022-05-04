@@ -6,6 +6,7 @@
 
 - Fix `n-menu`'s `dropdown-props` prop can't override `n-dropdown`'s `size` prop, closes [#2868](https://github.com/TuSimple/naive-ui/issues/2868).
 - Fix `n-switch` abnormal loading animation when switching state, closes [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
+- Fix `n-data-table` doesn't show content when page is more than data's page, closes [#2840](https://github.com/TuSimple/naive-ui/issues/2840).
 
 ### Feats
 
@@ -16,7 +17,7 @@
 - `n-popover` adds `header-style` prop.
 - `n-popover` adds `scrollable` prop.
 - `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
-- `n-data-table` adds `filter-page-state` prop, closes [#2840](https://github.com/TuSimple/naive-ui/issues/2840).
+- `n-data-table` adds `pagination-behavior-on-filter` prop.
 
 ## 2.28.2
 

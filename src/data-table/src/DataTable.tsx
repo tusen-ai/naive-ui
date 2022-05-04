@@ -123,7 +123,7 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
-  filterPageState: {
+  paginationBehaviorOnFilter: {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
@@ -249,6 +249,7 @@ export default defineComponent({
       mergedFilterStateRef,
       mergedSortStateRef,
       firstContentfulColIndexRef,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       filter,
@@ -375,7 +376,9 @@ export default defineComponent({
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
+      paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       syncScrollState,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       doCheck,

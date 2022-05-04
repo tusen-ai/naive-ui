@@ -9,7 +9,7 @@ DataTable is used to displays rows of structured data.
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
   <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
-  </n-alert>
+</n-alert>
 
 ```demo
 basic.vue
@@ -19,7 +19,7 @@ size
 row-props
 merge-cell
 filter-and-sorter
-filter-page-state
+pagination-behavior-on-filter.vue
 multiple-sorter
 select
 custom-select
@@ -65,7 +65,7 @@ async-expand.vue
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
-| filter-page-state | `'first' \| 'current'` | `'current'` | Set the status of the filtered page. | NEXT_VERSION |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | NEXT_VERSION |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |

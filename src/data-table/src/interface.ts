@@ -214,6 +214,8 @@ export interface DataTableInjection {
   stripedRef: Ref<boolean>
   onLoadRef: Ref<DataTableOnLoad | undefined>
   loadingKeySetRef: Ref<Set<RowKey>>
+  paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
+  doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void
