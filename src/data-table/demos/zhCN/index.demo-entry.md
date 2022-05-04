@@ -120,6 +120,7 @@ height-debug
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
+| minWidth | `number \| string` | `undefined` | 列的最小宽度 | NEXT_VERSION |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |  |

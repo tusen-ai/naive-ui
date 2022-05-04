@@ -7,6 +7,7 @@
 - 修复 `n-menu` 的 `dropdown-props` 无法覆盖 `n-dropdown` 的 `size` 属性，关闭 [#2868](https://github.com/TuSimple/naive-ui/issues/2868)
 - 修复 `n-switch` 切换状态时 loading 动画异常，关闭 [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
 - 修复 `n-data-table` 在页数设定超过数据内容时，不显示内容，关闭 [#2840](https://github.com/TuSimple/naive-ui/issues/2840)
+- 修复 `n-data-table` 的 `cellProps` 泛型类型不正确
 
 ### Feats
 
@@ -19,6 +20,7 @@
 - `n-select` 和 `n-cascader` 和 `n-tree-select` 的溢出计数 tag 弹出内容可以滚动
 - `n-data-table` 新增 `pagination-behavior-on-filter` 属性
 - `n-date-picker` 属性 `type` 支持 `monthrange` 选项
+- `n-data-table` 的 `columns` 的元素支持 `minWidth` 属性
 
 ## 2.28.2
 
