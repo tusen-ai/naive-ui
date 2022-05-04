@@ -6,13 +6,13 @@
 
 <template>
   <n-space>
-    <n-popover style="width: 500px">
+    <n-popover style="width: 500px" trigger="click">
       <template #trigger>
         <n-button>宽度 500px</n-button>
       </template>
       长得像根条一样
     </n-popover>
-    <n-popover style="max-width: 100px">
+    <n-popover style="max-width: 100px" trigger="click">
       <template #trigger>
         <n-button> 最大宽度 100px </n-button>
       </template>
@@ -72,7 +72,7 @@
       </template>
       上面就是分割线
     </n-popover>
-    <n-popover style="padding: 0">
+    <n-popover style="padding: 0" trigger="click">
       <template #trigger>
         <n-button>没有 padding</n-button>
       </template>
