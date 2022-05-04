@@ -20,7 +20,7 @@ prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
 node-props.vue
-checkboxPlacement.vue
+checkbox-placement.vue
 check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
@@ -40,6 +40,7 @@ scrollbar-debug.vue
 | cascade | `boolean` | `false` | 是否关联选项 |  |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定勾选回调返回的值，`all` 表示回调函数值为全部选中节点；`parent` 表示回调函数值为父节点（当父节点下所有子节点都选中时）；`child` 表示回调函数值为子节点 |  |
 | checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | NEXT_VERSION |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |  |
 | data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |  |
@@ -58,7 +59,6 @@ scrollbar-debug.vue
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
-| checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | NEXT_VERSION |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |

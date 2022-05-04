@@ -278,8 +278,10 @@ const TreeNode = defineComponent({
     // In non virtual mode, there's no evidence that which element should be
     // scrolled to, so we need data-key to query the target element.
     const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
+    const checkboxOnRight = checkboxPlacement === 'right'
     const checkboxNode = checkable ? (
       <NTreeNodeCheckbox
+        right={checkboxOnRight}
         focusable={this.checkboxFocusable}
         disabled={disabled || this.checkboxDisabled}
         clsPrefix={clsPrefix}
@@ -327,7 +329,7 @@ const TreeNode = defineComponent({
             hide={tmNode.isLeaf}
             onClick={this.handleSwitcherClick}
           />
-          {checkboxPlacement === 'left' ? checkboxNode : null}
+          {!checkboxOnRight ? checkboxNode : null}
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
@@ -362,7 +364,7 @@ const TreeNode = defineComponent({
                 })
                 : null
             : null}
-          {checkboxPlacement === 'right' ? checkboxNode : null}
+          {checkboxOnRight ? checkboxNode : null}
         </div>
       </div>
     )

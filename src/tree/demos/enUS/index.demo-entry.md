@@ -20,7 +20,7 @@ prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
 node-props.vue
-checkboxPlacement.vue
+checkbox-placement.vue
 ```
 
 ## API
@@ -37,6 +37,7 @@ checkboxPlacement.vue
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |  |
 | check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |  |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | NEXT_VERSION |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
@@ -56,7 +57,6 @@ checkboxPlacement.vue
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |
-| checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | NEXT_VERSION |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |

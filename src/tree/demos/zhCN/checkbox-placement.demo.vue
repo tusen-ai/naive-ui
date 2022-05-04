@@ -1,13 +1,11 @@
 <markdown>
-
 # 复选框位置
-
 </markdown>
 
 <template>
   <n-tree
     checkable
-    block-line
+    block-node
     checkbox-placement="right"
     :data="data"
     :default-expanded-keys="defaultExpandedKeys"

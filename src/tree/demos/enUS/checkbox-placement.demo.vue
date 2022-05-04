@@ -1,7 +1,5 @@
 <markdown>
-
 # Checkbox Placement
-
 </markdown>
 
 <template>
