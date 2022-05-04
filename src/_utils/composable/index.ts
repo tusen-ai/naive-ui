@@ -141,4 +141,7 @@ export function useDeferredTrue (
 export { useAdjustedTo } from './use-adjusted-to'
 export { useHoudini } from './use-houdini'
 export { useOnResize } from './use-resize'
-export { useLockHtmlScroll } from './use-lock-html-scroll'
+export {
+  useLockHtmlScroll,
+  lockHtmlScrollRightCompensationRef
+} from './use-lock-html-scroll'

@@ -9,13 +9,13 @@ import {
   inject
 } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { lightTheme } from '../../themes/light'
 import {
   GlobalTheme,
   GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NPopover } from '../../popover'
 import { NScrollbar } from '../../_internal'
 import { NCollapse, NCollapseItem } from '../../collapse'
@@ -27,6 +27,7 @@ import { NDivider } from '../../divider'
 import { NButton } from '../../button'
 import { NColorPicker } from '../../color-picker'
 import { NEmpty } from '../../empty'
+import { lockHtmlScrollRightCompensationRef } from '../../_utils'
 
 const ColorWandIcon = (
   <svg
@@ -216,7 +217,7 @@ export default defineComponent({
                         position: 'fixed',
                         zIndex: 10,
                         bottom: '40px',
-                        right: '40px',
+                        right: `calc(40px + ${lockHtmlScrollRightCompensationRef.value})`,
                         width: '44px',
                         height: '44px',
                         fontSize: '26px',
@@ -226,7 +227,8 @@ export default defineComponent({
                         borderRadius: '50%',
                         backgroundColor: 'var(--popover-color)',
                         color: 'var(--text-color-2)',
-                        transition: 'all .3s var(--cubic-bezier-ease-in-out)',
+                        transition:
+                          'color .3s var(--cubic-bezier-ease-in-out), background-color .3s var(--cubic-bezier-ease-in-out), box-shadow .3s var(--cubic-bezier-ease-in-out)',
                         boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
                         cursor: 'pointer'
                       },

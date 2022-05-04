@@ -1,10 +1,19 @@
-import { onBeforeUnmount, onMounted, WatchStopHandle, Ref, watch } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  WatchStopHandle,
+  Ref,
+  watch,
+  ref
+} from 'vue'
 
 let lockCount = 0
 let originalMarginRight: string = ''
 let originalOverflow: string = ''
 let originalOverflowX: string = ''
 let originalOverflowY: string = ''
+export const lockHtmlScrollRightCompensationRef = ref('0px')
+
 export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
   // not browser
   if (typeof document === 'undefined') return
@@ -20,6 +29,7 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
             if (scrollbarWidth > 0) {
               originalMarginRight = el.style.marginRight
               el.style.marginRight = `${scrollbarWidth}px`
+              lockHtmlScrollRightCompensationRef.value = `${scrollbarWidth}px`
             }
             originalOverflow = el.style.overflow
             originalOverflowX = el.style.overflowX
@@ -36,6 +46,7 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
             el.style.overflow = originalOverflow
             el.style.overflowX = originalOverflowX
             el.style.overflowY = originalOverflowY
+            lockHtmlScrollRightCompensationRef.value = '0px'
           }
         }
       },
