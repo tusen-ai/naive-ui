@@ -11,7 +11,7 @@ datetimeformat.vue
 daterange.vue
 datetimerange.vue
 month.vue
-monthrange
+monthrange.vue
 year.vue
 quarter.vue
 size.vue

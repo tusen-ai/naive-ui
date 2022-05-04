@@ -44,6 +44,9 @@ const ptBR: NLocale = {
     endDatePlaceholder: 'Selecione a data de término',
     startDatetimePlaceholder: 'Selecione a data e hora de início',
     endDatetimePlaceholder: 'Select a data e hora de término',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hoje'

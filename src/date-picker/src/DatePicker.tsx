@@ -12,11 +12,12 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect
+  watchEffect,
+  nextTick
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
+import { format, getTime, getMonth, getYear, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -43,7 +44,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { DatePickerType } from './config'
+import { DatePickerType, MONTH_ITEM_HEIGHT, START_YEAR } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -191,6 +192,7 @@ export default defineComponent({
         case 'year':
           return localeRef.value.yearTypeFormat
         case 'month':
+        case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
           return localeRef.value.quarterFormat
@@ -319,25 +321,6 @@ export default defineComponent({
         return ''
       } else {
         return props.endPlaceholder
-      }
-    })
-    const mergedFormatRef = computed(() => {
-      const { format } = props
-      if (format) return format
-      switch (props.type) {
-        case 'date':
-        case 'daterange':
-          return localeRef.value.dateFormat
-        case 'datetime':
-        case 'datetimerange':
-          return localeRef.value.dateTimeFormat
-        case 'year':
-          return localeRef.value.yearTypeFormat
-        case 'month':
-        case 'monthrange':
-          return localeRef.value.monthTypeFormat
-        case 'quarter':
-          return localeRef.value.quarterFormat
       }
     })
     const mergedActionsRef = computed(() => {
@@ -520,7 +503,10 @@ export default defineComponent({
                 ? getMonth(Date.now())
                 : getMonth(mergedValue[0])
               : getMonth(value)
-          startMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+          startMonthScroll.scrollTo({
+            index: monthIndex,
+            elSize: MONTH_ITEM_HEIGHT
+          })
         }
         if (startYearScroll) {
           const yearIndex =
@@ -695,10 +681,6 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      const { type } = props
-      if (type === 'month' || type === 'year' || type === 'quarter') {
-        void nextTick(scrollPickerColumns)
-      }
       if (props.type === 'monthrange') {
         void nextTick(() => {
           scrollRangeYearMonth(undefined, 'all')
@@ -748,7 +730,6 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollPickerColumns,
       scrollRangeYearMonth,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
