@@ -19,8 +19,8 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      handleConfirm () {
-        message.success('确认')
+      handleConfirm (value: number | null) {
+        message.success('确认' + value)
       }
     }
   }

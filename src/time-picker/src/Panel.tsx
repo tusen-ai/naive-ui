@@ -78,7 +78,7 @@ const timePickerPanelProps = {
   nowText: String,
   confirmText: String,
   transitionDisabled: Boolean,
-  onConfirmClick: Function as PropType<(e: MouseEvent) => void>,
+  onConfirmClick: Function as PropType<() => void>,
   onFocusin: Function as PropType<(e: FocusEvent) => void>,
   onFocusout: Function as PropType<(e: FocusEvent) => void>,
   onFocusDetectorFocus: Function as PropType<() => void>,
