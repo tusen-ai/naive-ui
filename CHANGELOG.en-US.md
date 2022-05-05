@@ -20,6 +20,8 @@
 - `n-select` & `n-cascader` & `n-tree-select`'s overflow count tag's popover is scrollable.
 - `n-data-table` adds `pagination-behavior-on-filter` prop.
 - `n-date-picker`'s `type` prop supports `monthrange` option.
+- `n-date-picker` adds `on-clear` prop.
+- `n-date-picker` adds `on-confirm` prop, closes [#2852](https://github.com/TuSimple/naive-ui/issues/2852).
 - `n-data-table`'s `columns`'s element supports `minWidth` prop.
 - `n-tree` adds `checkbox-placement` prop.
 - `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).

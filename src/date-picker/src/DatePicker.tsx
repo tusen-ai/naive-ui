@@ -119,6 +119,10 @@ const datePickerProps = {
   timePickerProps: [Object, Array] as PropType<
   TimePickerProps | [TimePickerProps, TimePickerProps]
   >,
+  onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onConfirm: [Function, Array] as PropType<
+  MaybeArray<(value: Value | null) => void>
+  >,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -425,6 +429,14 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
+    function doClear (): void {
+      const { onClear } = props
+      if (onClear) call(onClear)
+    }
+    function doConfirm (): void {
+      const { onConfirm } = props
+      if (onConfirm) call(onConfirm, pendingValueRef.value)
+    }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
@@ -459,6 +471,7 @@ export default defineComponent({
     function handleClear (): void {
       doUpdateShow(false)
       inputInstRef.value?.deactivate()
+      doClear()
     }
     function handlePanelTabOut (): void {
       closeCalendar({
@@ -495,6 +508,7 @@ export default defineComponent({
     }
     function handlePanelConfirm (): void {
       doUpdateValue(pendingValueRef.value)
+      doConfirm()
     }
     // --- Refresh
     function deriveInputState (): void {
@@ -898,6 +912,7 @@ export default defineComponent({
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
+      onClear: this.handleClear,
       onKeydown: this.handleKeyDown,
       onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',

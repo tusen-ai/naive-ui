@@ -20,6 +20,8 @@
 - `n-select` 和 `n-cascader` 和 `n-tree-select` 的溢出计数 tag 弹出内容可以滚动
 - `n-data-table` 新增 `pagination-behavior-on-filter` 属性
 - `n-date-picker` 属性 `type` 支持 `monthrange` 选项
+- `n-date-picker` 新增 `on-clear` 属性
+- `n-date-picker` 新增 `on-confirm` 属性，关闭 [#2852](https://github.com/TuSimple/naive-ui/issues/2852)
 - `n-data-table` 的 `columns` 的元素支持 `minWidth` 属性
 - `n-tree` 新增 `checkbox-placement` 属性
 - `n-modal` 新增 `block-scroll` 属性

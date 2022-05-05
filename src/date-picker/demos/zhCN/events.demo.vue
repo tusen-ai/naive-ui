@@ -32,6 +32,13 @@
       @blur="onBlur4"
       @update:value="onChange4"
     />
+    <n-date-picker
+      v-model:value="daterange"
+      :disabled="disabled"
+      type="daterange"
+      @clear="onClear"
+      @confirm="onConfirm"
+    />
     <n-switch v-model:value="disabled" />
   </n-space>
 </template>
@@ -72,6 +79,15 @@ export default defineComponent({
       },
       onChange4 (v: number) {
         message.success('Change-4 ' + v)
+      },
+      onChange5 (v: number) {
+        message.success('Change-5 ' + v)
+      },
+      onClear () {
+        message.info('Clear-5')
+      },
+      onConfirm (v: number | number[] | null) {
+        message.info('Confirm-5 ' + v)
       }
     }
   }
