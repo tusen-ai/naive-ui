@@ -120,6 +120,9 @@ const timePickerProps = {
   MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onConfirm: [Function, Array] as PropType<
+  MaybeArray<(value: number | null) => void>
+  >,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // private
   stateful: {
@@ -380,6 +383,10 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doConfirm (): void {
+      const { onConfirm } = props
+      if (onConfirm) call(onConfirm, mergedValueRef.value)
+    }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
@@ -613,6 +620,7 @@ export default defineComponent({
     }
     function handleConfirmClick (): void {
       deriveInputValue()
+      doConfirm()
       closePanel({
         returnFocus: true
       })

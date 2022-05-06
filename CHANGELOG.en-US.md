@@ -28,6 +28,10 @@
 - `useDialog` supports `autoFocus` option.
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).
 
+### Feats
+
+- `n-time-picker` adds `on-confirm` prop.
+
 ## 2.28.2
 
 ### Fixes
