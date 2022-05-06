@@ -29,10 +29,8 @@
 - `useDialog` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `useDialog` supports `autoFocus` option.
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).
-
-### Feats
-
 - `n-time-picker` adds `on-confirm` prop.
+- `n-time-picker` adds `on-clear` prop.
 
 ## 2.28.2
 

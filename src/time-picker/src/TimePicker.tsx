@@ -121,8 +121,9 @@ const timePickerProps = {
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onConfirm: [Function, Array] as PropType<
-  MaybeArray<(value: number | null) => void>
+  MaybeArray<(value: number & null, formattedValue: string & null) => void>
   >,
+  onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // private
   stateful: {
@@ -350,6 +351,11 @@ export default defineComponent({
         )
       }
     }
+    function createFormattedValue (value: number | null): string | null {
+      return value === null
+        ? null
+        : format(value, props.valueFormat || props.format)
+    }
     function doUpdateValue (value: number | null): void {
       const {
         onUpdateValue,
@@ -357,8 +363,7 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      const formattedValue =
-        value === null ? null : format(value, props.valueFormat || props.format)
+      const formattedValue = createFormattedValue(value)
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -385,12 +390,19 @@ export default defineComponent({
     }
     function doConfirm (): void {
       const { onConfirm } = props
-      if (onConfirm) call(onConfirm, mergedValueRef.value)
+      if (onConfirm) {
+        call(
+          onConfirm,
+          mergedValueRef.value as number & null,
+          createFormattedValue(mergedValueRef.value) as string & null
+        )
+      }
     }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
+      props.onClear?.()
     }
     function handleFocusDetectorFocus (): void {
       closePanel({

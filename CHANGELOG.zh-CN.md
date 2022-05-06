@@ -30,10 +30,8 @@
 - `useDialog` 支持 `blockScroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
 - `useDialog` 支持 `autoFocus` 属性
 - `n-button` 新增 `native-focus-behavior` 属性，关闭 [#2882](https://github.com/TuSimple/naive-ui/issues/2882)
-
-### Feats
-
 - `n-time-picker` 新增 `on-confirm` 属性
+- `n-time-picker` 新增 `on-clear` 属性
 
 ## 2.28.2
 
