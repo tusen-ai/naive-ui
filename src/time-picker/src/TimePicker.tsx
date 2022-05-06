@@ -113,6 +113,12 @@ const timePickerProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   onUpdateFormattedValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateFormattedValue>
   >,
@@ -544,6 +550,9 @@ export default defineComponent({
     }
     function doUpdateShow (value: boolean): void {
       uncontrolledShowRef.value = value
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
     }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(

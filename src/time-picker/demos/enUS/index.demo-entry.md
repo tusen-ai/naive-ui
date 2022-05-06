@@ -40,6 +40,7 @@ status.vue
 | is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | Callback function for disabling seconds. When value is empty, `hour` and `minute` are `null`. |  |
 | placeholder | `string` | `'Select Time'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
+| show | `boolean` | `undefined` | Whether to show panel | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
@@ -51,6 +52,7 @@ status.vue
 | on-confirm | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the click confirm button. | NEXT_VERSION |
 | on-focus | `() => void` | `undefined` | Callback when the selection box gets focus. |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | Callback when formatted value changes. | 2.24.0 |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | NEXT_VERSION |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the value changes. | `formattedValue` 2.24.0 |
 
 ### TimePicker Slots

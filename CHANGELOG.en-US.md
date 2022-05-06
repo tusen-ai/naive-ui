@@ -31,6 +31,8 @@
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).
 - `n-time-picker` adds `on-confirm` prop.
 - `n-time-picker` adds `on-clear` prop.
+- `n-time-picker` adds `on-update:show` prop.
+- `n-time-picker` adds `show` prop.
 
 ## 2.28.2
 

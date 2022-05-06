@@ -40,6 +40,7 @@ status.vue
 | is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | 用于禁用秒钟的回调函数，在没有选中值时，`minute` 和 `hour` 是 `null` |  |
 | placeholder | `string` | `'请选择时间'` | 选择框的占位符 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 时间选择器的面板的弹出位置 | 2.25.0 |
+| show | `boolean` | `undefined` | 是否展示面板 | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
@@ -51,6 +52,7 @@ status.vue
 | on-confirm | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 点击确认按钮时的回调 | NEXT_VERSION |
 | on-focus | `() => void` | `undefined` | 选择框获得焦点时的回调 |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | 2.24.0 |
+| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | NEXT_VERSION |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` 2.24.0 |
 
 ### TimePicker Slots
