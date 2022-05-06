@@ -234,6 +234,7 @@ function useCalendar (
     panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
     panelCommon.doClose(true)
+    panelCommon.handleClearClick()
   }
   function handleNowClick (): void {
     panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), true)

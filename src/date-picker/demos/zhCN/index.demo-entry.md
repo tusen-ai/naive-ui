@@ -47,6 +47,8 @@ status.vue
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` NEXT_VERSION |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
+| on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | NEXT_VERSION |
+| on-confirm | `(value: number \| number[] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | NEXT_VERSION |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
 
