@@ -26,6 +26,7 @@
 - `n-modal` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
 - `n-drawer` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
 - `useDialog` 支持 `blockScroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
+- `useDialog` 支持 `autoFocus` 属性
 
 ## 2.28.2
 
