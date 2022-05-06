@@ -146,7 +146,7 @@ const Button = defineComponent({
         return
       }
       if (mergedFocusableRef.value) {
-        // e.preventDefault()
+        e.preventDefault()
         selfElRef.value?.focus({ preventScroll: true })
       }
     }
