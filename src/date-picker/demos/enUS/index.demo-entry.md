@@ -42,6 +42,7 @@ status.vue
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
+| show | `boolean` | `undefined` | Whether to show panel. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |
@@ -52,6 +53,7 @@ status.vue
 | on-confirm | `(value: number \| number[] \| null) => void` | `undefined` | On confirm callback. | NEXT_VERSION |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | NEXT_VERSION |
 
 ### Date Type Props
 

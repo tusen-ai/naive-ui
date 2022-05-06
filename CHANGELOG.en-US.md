@@ -33,6 +33,8 @@
 - `n-time-picker` adds `on-clear` prop.
 - `n-time-picker` adds `on-update:show` prop.
 - `n-time-picker` adds `show` prop.
+- `n-date-picker` adds `on-update:show` prop.
+- `n-date-picker` adds `show` prop.
 
 ## 2.28.2
 

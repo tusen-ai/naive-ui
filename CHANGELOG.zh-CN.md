@@ -34,6 +34,8 @@
 - `n-time-picker` 新增 `on-clear` 属性
 - `n-time-picker` 新增 `on-update:show` 属性
 - `n-time-picker` 新增 `show` 属性
+- `n-date-picker` 新增 `on-update:show` 属性
+- `n-date-picker` 新增 `show` 属性
 
 ## 2.28.2
 

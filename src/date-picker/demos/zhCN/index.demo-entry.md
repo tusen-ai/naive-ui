@@ -41,6 +41,7 @@ status.vue
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
+| show | `boolean` | `undefined` | 是否展示面板 | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
@@ -51,6 +52,7 @@ status.vue
 | on-confirm | `(value: number \| number[] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | NEXT_VERSION |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | NEXT_VERSION |
 
 ### Date 类型的 Props
 
