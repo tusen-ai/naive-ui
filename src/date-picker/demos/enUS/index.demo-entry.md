@@ -86,6 +86,9 @@ status.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `daterange` type date picker. |  |
+| bind-panel-months | `boolean` | `false` | Whether months in panel calendar are consecutive. | NEXT_VERSION |
+| default-panel-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | NEXT_VERSION |
+| default-panel-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | NEXT_VERSION |
 | end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
@@ -102,6 +105,9 @@ status.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `datetimerange` type. |  |
+| bind-panel-months | `boolean` | `false` | Whether months in panel calendar are consecutive. | NEXT_VERSION |
+| default-panel-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | NEXT_VERSION |
+| default-panel-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | NEXT_VERSION |
 | default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |

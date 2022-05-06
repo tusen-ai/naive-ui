@@ -123,6 +123,9 @@ const datePickerProps = {
   onConfirm: [Function, Array] as PropType<
   MaybeArray<(value: Value | null) => void>
   >,
+  defaultPanelStartTime: Number,
+  defaultPanelEndTime: Number,
+  bindPanelMonths: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -1040,9 +1043,23 @@ export default defineComponent({
                             type === 'datetime' ? (
                               <DatetimePanel {...commonPanelProps} />
                             ) : type === 'daterange' ? (
-                              <DaterangePanel {...commonPanelProps} />
+                              <DaterangePanel
+                                {...commonPanelProps}
+                                defaultPanelStartTime={
+                                  this.defaultPanelStartTime
+                                }
+                                defaultPanelEndTime={this.defaultPanelEndTime}
+                                bindPanelMonths={this.bindPanelMonths}
+                              />
                             ) : type === 'datetimerange' ? (
-                              <DatetimerangePanel {...commonPanelProps} />
+                              <DatetimerangePanel
+                                {...commonPanelProps}
+                                defaultPanelStartTime={
+                                  this.defaultPanelStartTime
+                                }
+                                defaultPanelEndTime={this.defaultPanelEndTime}
+                                bindPanelMonths={this.bindPanelMonths}
+                              />
                             ) : type === 'month' ||
                               type === 'year' ||
                               type === 'quarter' ? (

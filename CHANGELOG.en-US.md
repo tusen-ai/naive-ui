@@ -35,6 +35,9 @@
 - `n-time-picker` adds `show` prop.
 - `n-date-picker` adds `on-update:show` prop.
 - `n-date-picker` adds `show` prop.
+- `n-date-picker` adds `default-panel-start-time` prop, closes [#2732](https://github.com/TuSimple/naive-ui/issues/2732).
+- `n-date-picker` adds `default-panel-end-time` prop, closes [#2732](https://github.com/TuSimple/naive-ui/issues/2732).
+- `n-date-picker` adds `bind-panel-months` prop, closes [#2751](https://github.com/TuSimple/naive-ui/issues/2751).
 
 ## 2.28.2
 
