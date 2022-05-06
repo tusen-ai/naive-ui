@@ -4,7 +4,12 @@
 </markdown>
 
 <template>
-  <n-popselect v-model:value="value" :options="options" trigger="click">
+  <n-popselect
+    v-model:value="value"
+    :options="options"
+    trigger="click"
+    width="trigger"
+  >
     <n-button>{{ value || '弹出选择' }}</n-button>
   </n-popselect>
 </template>
