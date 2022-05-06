@@ -60,6 +60,7 @@ action.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
+| auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | NEXT_VERSION |
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | NEXT_VERSION |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
