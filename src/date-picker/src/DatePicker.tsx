@@ -123,9 +123,9 @@ const datePickerProps = {
   onConfirm: [Function, Array] as PropType<
   MaybeArray<(value: Value | null) => void>
   >,
-  defaultPanelStartTime: Number,
-  defaultPanelEndTime: Number,
-  bindPanelMonths: Boolean,
+  defaultCalendarStartTime: Number,
+  defaultCalendarEndTime: Number,
+  bindCalendarMonths: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -1045,20 +1045,24 @@ export default defineComponent({
                             ) : type === 'daterange' ? (
                               <DaterangePanel
                                 {...commonPanelProps}
-                                defaultPanelStartTime={
-                                  this.defaultPanelStartTime
+                                defaultCalendarStartTime={
+                                  this.defaultCalendarStartTime
                                 }
-                                defaultPanelEndTime={this.defaultPanelEndTime}
-                                bindPanelMonths={this.bindPanelMonths}
+                                defaultCalendarEndTime={
+                                  this.defaultCalendarEndTime
+                                }
+                                bindCalendarMonths={this.bindCalendarMonths}
                               />
                             ) : type === 'datetimerange' ? (
                               <DatetimerangePanel
                                 {...commonPanelProps}
-                                defaultPanelStartTime={
-                                  this.defaultPanelStartTime
+                                defaultCalendarStartTime={
+                                  this.defaultCalendarStartTime
                                 }
-                                defaultPanelEndTime={this.defaultPanelEndTime}
-                                bindPanelMonths={this.bindPanelMonths}
+                                defaultCalendarEndTime={
+                                  this.defaultCalendarEndTime
+                                }
+                                bindCalendarMonths={this.bindCalendarMonths}
                               />
                             ) : type === 'month' ||
                               type === 'year' ||

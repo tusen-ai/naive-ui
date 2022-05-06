@@ -35,9 +35,9 @@ import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useDualCalendarProps = {
   ...usePanelCommonProps,
-  defaultPanelStartTime: Number,
-  defaultPanelEndTime: Number,
-  bindPanelMonths: Boolean,
+  defaultCalendarStartTime: Number,
+  defaultCalendarEndTime: Number,
+  bindCalendarMonths: Boolean,
   actions: {
     type: Array,
     default: () => ['clear', 'confirm']
@@ -97,12 +97,12 @@ function useDualCalendar (
   const endYearVlRef = ref<VirtualListInst | null>(null)
   const startMonthScrollbarRef = ref<ScrollbarInst | null>(null)
   const endMonthScrollbarRef = ref<ScrollbarInst | null>(null)
-  const defaultPanelStartTime = props.defaultPanelStartTime ?? Date.now()
-  const startCalendarDateTimeRef = ref(defaultPanelStartTime)
+  const defaultCalendarStartTime = props.defaultCalendarStartTime ?? Date.now()
+  const startCalendarDateTimeRef = ref(defaultCalendarStartTime)
   const endCalendarDateTimeRef = ref(
-    props.bindPanelMonths || props.defaultPanelEndTime === undefined
-      ? getTime(addMonths(defaultPanelStartTime, 1))
-      : props.defaultPanelEndTime
+    props.bindCalendarMonths || props.defaultCalendarEndTime === undefined
+      ? getTime(addMonths(defaultCalendarStartTime, 1))
+      : props.defaultCalendarEndTime
   )
   const nowRef = ref(Date.now())
   const isSelectingRef = ref(false)
@@ -262,7 +262,7 @@ function useDualCalendar (
   function adjustCalendarTimes (byStartCalendarTime: boolean): void {
     const startTime = startOfMonth(startCalendarDateTimeRef.value)
     const endTime = startOfMonth(endCalendarDateTimeRef.value)
-    if (props.bindPanelMonths || startTime >= endTime) {
+    if (props.bindCalendarMonths || startTime >= endTime) {
       if (byStartCalendarTime) {
         endCalendarDateTimeRef.value = getTime(addMonths(startTime, 1))
       } else {

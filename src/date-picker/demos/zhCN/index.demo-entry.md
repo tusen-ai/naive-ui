@@ -85,9 +85,9 @@ status.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | DateRange 类型的 Date Picker 中支持的用户操作 |  |
-| bind-panel-months | `boolean` | `false` | 面板月份是否连续 | NEXT_VERSION |
-| default-panel-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | NEXT_VERSION |
-| default-panel-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | NEXT_VERSION |
+| bind-calendar-months | `boolean` | `false` | 面板月份是否连续 | NEXT_VERSION |
+| default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | NEXT_VERSION |
+| default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
@@ -103,9 +103,9 @@ status.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | DateTimeRange 类型的 Date Picker 中支持的用户操作 |  |
-| bind-panel-months | `boolean` | `false` | 面板月份是否连续 | NEXT_VERSION |
-| default-panel-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | NEXT_VERSION |
-| default-panel-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | NEXT_VERSION |
+| bind-calendar-months | `boolean` | `false` | 面板月份是否连续 | NEXT_VERSION |
+| default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | NEXT_VERSION |
+| default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | NEXT_VERSION |
 | default-time | `string \| Array<string \| undefined>` | `undefined` | 默认时间，格式为 `HH:mm:ss` | 2.22.0 |
 | end-placeholder | `string` | `'结束日期时间'` | DateTimeRange 中 end 选框的提示信息 |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
