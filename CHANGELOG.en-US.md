@@ -24,6 +24,7 @@
 - `n-date-picker` adds `on-confirm` prop, closes [#2852](https://github.com/TuSimple/naive-ui/issues/2852).
 - `n-data-table`'s `columns`'s element supports `minWidth` prop.
 - `n-tree` adds `checkbox-placement` prop.
+- `n-tree-select` adds `loading` prop, closes [#2857](https://github.com/TuSimple/naive-ui/issues/2857).
 - `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `useDialog` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
