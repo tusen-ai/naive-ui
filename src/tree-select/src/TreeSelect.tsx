@@ -102,6 +102,7 @@ const props = {
     type: String as PropType<CheckStrategy>,
     default: 'all'
   },
+  loading: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   showPath: Boolean,
@@ -694,6 +695,7 @@ export default defineComponent({
                       placeholder={this.mergedPlaceholder}
                       disabled={this.mergedDisabled}
                       active={this.mergedShow}
+                      loading={this.loading}
                       multiple={this.multiple}
                       maxTagCount={this.maxTagCount}
                       showArrow={true}

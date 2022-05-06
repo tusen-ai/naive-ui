@@ -24,6 +24,7 @@
 - `n-date-picker` 新增 `on-confirm` 属性，关闭 [#2852](https://github.com/TuSimple/naive-ui/issues/2852)
 - `n-data-table` 的 `columns` 的元素支持 `minWidth` 属性
 - `n-tree` 新增 `checkbox-placement` 属性
+- `n-tree-select` 新增 `loading` 属性, 关闭 [#2857](https://github.com/TuSimple/naive-ui/issues/2857)
 - `n-modal` 新增 `block-scroll` 属性
 - `n-modal` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
 - `n-drawer` 新增 `block-scroll` 属性，关闭 [#2556](https://github.com/TuSimple/naive-ui/issues/2556)
