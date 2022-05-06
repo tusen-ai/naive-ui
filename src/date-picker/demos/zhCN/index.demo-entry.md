@@ -49,7 +49,7 @@ status.vue
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | NEXT_VERSION |
-| on-confirm | `(value: number \| number[] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | NEXT_VERSION |
+| on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | NEXT_VERSION |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | NEXT_VERSION |

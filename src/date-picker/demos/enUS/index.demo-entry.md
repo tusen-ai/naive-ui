@@ -50,7 +50,7 @@ status.vue
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | on-clear | `() => void` | `undefined` | On clear callback. | NEXT_VERSION |
-| on-confirm | `(value: number \| number[] \| null) => void` | `undefined` | On confirm callback. | NEXT_VERSION |
+| on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | On confirm callback. | NEXT_VERSION |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | NEXT_VERSION |

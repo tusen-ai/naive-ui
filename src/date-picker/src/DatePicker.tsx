@@ -57,7 +57,9 @@ import type {
   FormattedValue,
   OnUpdateFormattedValue,
   OnUpdateFormattedValueImpl,
-  DatePickerInst
+  DatePickerInst,
+  OnConfirmImpl,
+  OnConfirm
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -120,9 +122,7 @@ const datePickerProps = {
   TimePickerProps | [TimePickerProps, TimePickerProps]
   >,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onConfirm: [Function, Array] as PropType<
-  MaybeArray<(value: Value | null) => void>
-  >,
+  onConfirm: [Function, Array] as PropType<MaybeArray<OnConfirm>>,
   defaultCalendarStartTime: Number,
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
@@ -410,7 +410,12 @@ export default defineComponent({
         )
       }
     }
-    function doUpdateValue (value: Value | null): void {
+    function doUpdateValue (
+      value: Value | null,
+      options: {
+        doConfirm: boolean
+      }
+    ): void {
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
@@ -418,6 +423,9 @@ export default defineComponent({
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       const formattedValue = getFormattedValue(value)
+      if (options.doConfirm) {
+        doConfirm(value, formattedValue)
+      }
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -436,9 +444,12 @@ export default defineComponent({
       const { onClear } = props
       if (onClear) call(onClear)
     }
-    function doConfirm (): void {
+    function doConfirm (
+      value: Value | null,
+      formattedValue: FormattedValue | null
+    ): void {
       const { onConfirm } = props
-      if (onConfirm) call(onConfirm, pendingValueRef.value)
+      if (onConfirm) call(onConfirm as OnConfirmImpl, value, formattedValue)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -504,14 +515,13 @@ export default defineComponent({
       doUpdate: boolean
     ): void {
       if (doUpdate) {
-        doUpdateValue(value)
+        doUpdateValue(value, { doConfirm: false })
       } else {
         doUpdatePendingValue(value)
       }
     }
     function handlePanelConfirm (): void {
-      doUpdateValue(pendingValueRef.value)
-      doConfirm()
+      doUpdateValue(pendingValueRef.value, { doConfirm: true })
     }
     // --- Refresh
     function deriveInputState (): void {
@@ -581,7 +591,7 @@ export default defineComponent({
     function handleSingleUpdateValue (v: string): void {
       // TODO, fix conflict with clear
       if (v === '') {
-        doUpdateValue(null)
+        doUpdateValue(null, { doConfirm: false })
         return
       }
       const newSelectedDateTime = strictParse(
@@ -591,7 +601,7 @@ export default defineComponent({
         dateFnsOptionsRef.value
       )
       if (isValid(newSelectedDateTime)) {
-        doUpdateValue(getTime(newSelectedDateTime))
+        doUpdateValue(getTime(newSelectedDateTime), { doConfirm: false })
         deriveInputState()
       } else {
         singleInputValueRef.value = v
@@ -600,7 +610,7 @@ export default defineComponent({
     function handleRangeUpdateValue (v: [string, string]): void {
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
-        doUpdateValue(null)
+        doUpdateValue(null, { doConfirm: false })
         return
       }
       const [startTime, endTime] = v
@@ -617,7 +627,9 @@ export default defineComponent({
         dateFnsOptionsRef.value
       )
       if (isValid(newStartTime) && isValid(newEndTime)) {
-        doUpdateValue([getTime(newStartTime), getTime(newEndTime)])
+        doUpdateValue([getTime(newStartTime), getTime(newEndTime)], {
+          doConfirm: false
+        })
         deriveInputState()
       } else {
         ;[rangeStartInputValueRef.value, rangeEndInputValueRef.value] = v

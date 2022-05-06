@@ -37,6 +37,10 @@ export type OnUpdateValue = (
     ([string, string] | null)
 ) => void
 
+export type OnConfirm = OnUpdateValue
+
+export type OnConfirmImpl = OnUpdateValueImpl
+
 export type OnUpdateFormattedValue = (
   value: string &
     (string | null) &
