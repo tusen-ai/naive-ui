@@ -61,8 +61,8 @@ focus-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |  |
-| auto-focus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | NEXT_VERSION |
-| block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | NEXT_VERSION |
+| autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | NEXT_VERSION |
+| blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | NEXT_VERSION |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
