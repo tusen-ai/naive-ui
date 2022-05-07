@@ -131,7 +131,7 @@ export default defineComponent({
         content,
         key,
         destroy: () => {
-          messageRefs.value[key].hide()
+          messageRefs.value[key]?.hide()
         }
       })
       const { max } = props
