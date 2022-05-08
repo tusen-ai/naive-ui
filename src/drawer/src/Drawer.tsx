@@ -42,6 +42,10 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  showMask: {
+    type: Boolean,
+    default: true
+  },
   to: [String, Object] as PropType<string | HTMLElement>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -245,7 +249,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, showMask, handleMaskClick } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
         {{
@@ -261,18 +265,20 @@ export default defineComponent({
                 style={this.cssVars as CSSProperties}
                 role="none"
               >
-                <Transition name="fade-in-transition" appear={this.isMounted}>
-                  {{
-                    default: () =>
-                      this.show ? (
-                        <div
-                          aria-hidden
-                          class={`${mergedClsPrefix}-drawer-mask`}
-                          onClick={this.handleMaskClick}
-                        />
-                      ) : null
-                  }}
-                </Transition>
+                {showMask ? (
+                  <Transition name="fade-in-transition" appear={this.isMounted}>
+                    {{
+                      default: () =>
+                        this.show ? (
+                          <div
+                            aria-hidden
+                            class={`${mergedClsPrefix}-drawer-mask`}
+                            onClick={handleMaskClick}
+                          />
+                        ) : null
+                    }}
+                  </Transition>
+                ) : null}
                 <NDrawerBodyWrapper
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
@@ -289,6 +295,8 @@ export default defineComponent({
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
                   onEsc={this.handleEsc}
+                  showMask={showMask}
+                  onClickoutside={handleMaskClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>
