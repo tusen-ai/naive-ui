@@ -32,7 +32,7 @@ slot.vue
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | show | `boolean` | `false` | Whether to show drawer. |  |
-| show-mask | `boolean` | `false` | Whether to show mask. | NEXT_VERSION |
+| show-mask | `boolean` | `true` | Whether to show mask. | NEXT_VERSION |
 | style | `string \| Object` | `undefined` | Style of the drawer. |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside drawer. | 2.24.2 |
