@@ -10,6 +10,7 @@
 - Fix `n-data-table`'s `cellProps` doesn't has correct generic type.
 - Fix `n-data-table`'s `work-break` isn't `break-word`.
 - Fix `n-list`'s css variable `n-merged-color` is not correct.
+- Fix `MessageReactive`'s `destroy` method throws error if message has disappeared.
 
 ### Feats
 

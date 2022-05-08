@@ -10,6 +10,7 @@
 - 修复 `n-data-table` 的 `cellProps` 泛型类型不正确
 - 修复 `n-data-table` 的 `work-break` 样式为 `break-word`
 - 修复 `n-list` 的 `n-merged-color` 样式不正常
+- 修复 `MessageReactive` 的 `destroy` 方法在 message 消失后调用会抛错
 
 ### Feats
 
