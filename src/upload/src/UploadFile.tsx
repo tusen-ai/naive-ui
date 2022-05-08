@@ -16,6 +16,8 @@ import {
   DownloadIcon,
   EyeIcon
 } from '../../_internal/icons'
+import { ImageInst } from '../../image/src/Image'
+import { NImage } from '../../image'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
@@ -24,8 +26,6 @@ import { uploadInjectionKey } from './interface'
 import type { FileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { environmentSupportFile, isImageFile } from './utils'
-import { NImage } from '../../image'
-import { ImageInst } from '../../image/src/Image'
 
 export default defineComponent({
   name: 'UploadFile',
