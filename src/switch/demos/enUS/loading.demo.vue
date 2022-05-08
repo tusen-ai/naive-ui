@@ -14,17 +14,6 @@
   </n-space>
 </template>
 
-<template>
-  <n-space>
-    <n-switch loading />
-    <n-switch
-      :value="active"
-      :loading="loading"
-      @update:value="handleUpdateValue"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
