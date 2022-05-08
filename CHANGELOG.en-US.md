@@ -32,6 +32,7 @@
 - `n-tree-select` adds `loading` prop, closes [#2857](https://github.com/TuSimple/naive-ui/issues/2857).
 - `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
+- `n-drawer` adds `show-mask` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2846).
 - `useDialog` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `useDialog` supports `autoFocus` option.
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).

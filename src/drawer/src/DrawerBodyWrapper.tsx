@@ -11,7 +11,8 @@ import {
   withDirectives,
   vShow,
   mergeProps,
-  CSSProperties
+  CSSProperties,
+  DirectiveArguments
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
 import { NScrollbar } from '../../_internal'
@@ -20,6 +21,7 @@ import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 import { useLockHtmlScroll } from '../../_utils'
+import { clickoutside } from 'vdirs'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
 
@@ -54,6 +56,11 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    showMask: {
+      type: Boolean,
+      required: true
+    },
+    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
     onEsc: Function as PropType<() => void>
@@ -65,6 +72,19 @@ export default defineComponent({
     const NDrawer = inject(drawerInjectionKey)!
     watchEffect(() => {
       if (props.show) displayedRef.value = true
+    })
+    const directivesRef = computed<DirectiveArguments>(() => {
+      const { show, showMask, onClickoutside } = props
+      const directives: DirectiveArguments = [[vShow, show]]
+      if (!showMask) {
+        directives.push([
+          clickoutside,
+          onClickoutside,
+          undefined as unknown as string,
+          { capture: true }
+        ])
+      }
+      return directives
     })
     function handleAfterLeave (): void {
       displayedRef.value = false
@@ -88,7 +108,8 @@ export default defineComponent({
           bottom: 'slide-in-from-bottom-transition'
         }[props.placement]
       }),
-      handleAfterLeave
+      handleAfterLeave,
+      directives: directivesRef
     }
   },
   render () {
@@ -152,7 +173,7 @@ export default defineComponent({
                               )
                             ]
                           ),
-                          [[vShow, this.show]]
+                          this.directives
                         )
                     }}
                   </Transition>

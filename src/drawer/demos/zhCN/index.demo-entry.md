@@ -38,6 +38,7 @@ dark-4-debug.vue
 | native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |  |
 | show | `boolean` | `false` | 是否展示抽屉 |  |
+| show-mask | `boolean` | `true` | 是否显示遮罩 | NEXT_VERSION |
 | style | `string \| Object` | `undefined` | 抽屉的样式 |  |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |  |
 | trap-focus | `boolean` | `true` | 是否将焦点锁定在 Drawer 内部 | 2.24.2 |
