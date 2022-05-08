@@ -11,6 +11,7 @@
 - Fix `n-data-table`'s `work-break` isn't `break-word`.
 - Fix `n-list`'s css variable `n-merged-color` is not correct.
 - Fix `MessageReactive`'s `destroy` method throws error if message has disappeared.
+- Fix `n-ellpisis` can't show tooltip if content width is very close to container width, closes [#1393](https://github.com/TuSimple/naive-ui/issues/1393), [#2899](https://github.com/TuSimple/naive-ui/issues/2899).
 
 ### Feats
 

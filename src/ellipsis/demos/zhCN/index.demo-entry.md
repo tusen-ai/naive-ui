@@ -12,6 +12,7 @@ line-clamp.vue
 expand-trigger.vue
 custom-tooltip.vue
 dynamic-debug.vue
+width-debug.vue
 ```
 
 ## API
