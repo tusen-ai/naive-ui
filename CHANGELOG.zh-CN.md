@@ -12,6 +12,7 @@
 - 修复 `n-list` 的 `n-merged-color` 样式不正常
 - 修复 `MessageReactive` 的 `destroy` 方法在 message 消失后调用会抛错
 - 修复 `n-ellpisis` 在恰好触发省略的时候无法弹出 tooltip，关闭 [#1393](https://github.com/TuSimple/naive-ui/issues/1393)、[#2899](https://github.com/TuSimple/naive-ui/issues/2899)
+- 修复 `n-tree` 无法使用 `width: fit-content;` 的样式，关闭 [#2875](https://github.com/TuSimple/naive-ui/issues/2875)
 
 ### Feats
 

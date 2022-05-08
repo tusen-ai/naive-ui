@@ -29,6 +29,8 @@ export default cB('tree', `
     ])
   ]),
   cB('tree-node-indent', `
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 0;
   `),
   cB('tree-motion-wrapper', [
@@ -77,7 +79,8 @@ export default cB('tree', `
   ]),
   cM('block-node', [
     cB('tree-node-content', `
-      width: 100%;
+      flex-grow: 1;
+      flex-shrink: 0;
     `)
   ]),
   cNotM('block-line', [

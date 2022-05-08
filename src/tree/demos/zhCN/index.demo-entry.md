@@ -24,6 +24,7 @@ checkbox-placement.vue
 check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
+scroll-debug.vue
 ```
 
 ## API
