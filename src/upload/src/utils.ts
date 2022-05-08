@@ -78,13 +78,15 @@ export function isFileSystemFileEntry (
 }
 
 export async function getFilesFromEntries (
-  entries: Array<FileSystemEntry | null>,
+  entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>,
   directory: boolean
 ): Promise<File[]> {
   const files: File[] = []
   let _resolve: (files: File[]) => void
   let requestFileCount = 0
-  function _getFilesFromEntries (entries: Array<FileSystemEntry | null>): void {
+  function _getFilesFromEntries (
+    entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>
+  ): void {
     entries.forEach((entry) => {
       if (!entry) return
       if (directory && isFileSystemDirectoryEntry(entry)) {

@@ -41,7 +41,7 @@ import type {
   OnError
 } from './interface'
 import { uploadInjectionKey } from './interface'
-import { createImageDataUrl } from './utils'
+import { createImageDataUrl, getFilesFromEntries } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
 import style from './styles/index.cssr'
@@ -368,7 +368,15 @@ export default defineComponent({
     }
     function handleFileInputChange (e: Event): void {
       const target = e.target as HTMLInputElement
-      handleFileAddition(target.files, e)
+      if (target.webkitEntries) {
+        void getFilesFromEntries(target.webkitEntries, props.directory).then(
+          (files) => {
+            handleFileAddition(files, e)
+          }
+        )
+      } else {
+        handleFileAddition(target.files, e)
+      }
       // May have bug! set to null?
       target.value = ''
     }
