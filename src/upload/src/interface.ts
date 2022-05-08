@@ -81,10 +81,11 @@ export interface UploadInjection {
   imageGroupPropsRef: Ref<ImageGroupProps | undefined>
   cssVarsRef: undefined | Ref<CSSProperties>
   themeClassRef: undefined | Ref<string>
+  directoryRef: Ref<boolean>
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
-  handleFileAddition: (files: FileList | null, e?: Event) => void
+  handleFileAddition: (files: File[] | null, e?: Event) => void
   openOpenFileDialog: () => void
 }
 

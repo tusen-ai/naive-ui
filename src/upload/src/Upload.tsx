@@ -251,11 +251,7 @@ const uploadProps = {
   accept: String,
   action: String,
   customRequest: Function as PropType<CustomRequest>,
-  // to be impl
-  // directory: {
-  //   type: Boolean,
-  //   default: false
-  // },
+  directory: Boolean,
   method: {
     type: String,
     default: 'POST'
@@ -382,10 +378,14 @@ export default defineComponent({
       if (onUpdateFileList) call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
     }
-    function handleFileAddition (files: FileList | null, e?: Event): void {
+    function handleFileAddition (
+      files: File[] | FileList | null,
+      e?: Event
+    ): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-      let filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      let filesAsArray =
+        props.multiple || props.directory ? Array.from(files) : [files[0]]
       const { max } = props
       if (max) {
         filesAsArray = filesAsArray.slice(
@@ -604,7 +604,8 @@ export default defineComponent({
       themeClassRef: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       showTriggerRef: toRef(props, 'showTrigger'),
-      imageGroupPropsRef: toRef(props, 'imageGroupProps')
+      imageGroupPropsRef: toRef(props, 'imageGroupProps'),
+      directoryRef: toRef(props, 'directory')
     })
 
     const exposedMethods: UploadInst = {
@@ -646,6 +647,9 @@ export default defineComponent({
         accept={this.accept}
         multiple={this.multiple}
         onChange={this.handleFileInputChange}
+        // @ts-expect-error
+        webkitdirectory={this.directory}
+        directory={this.directory}
       />
     )
 

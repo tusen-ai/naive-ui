@@ -45,6 +45,7 @@
 - `n-date-picker` adds `default-calendar-start-time` prop, closes [#2732](https://github.com/TuSimple/naive-ui/issues/2732).
 - `n-date-picker` adds `default-calendar-end-time` prop, closes [#2732](https://github.com/TuSimple/naive-ui/issues/2732).
 - `n-date-picker` adds `bind-calendar-months` prop, closes [#2751](https://github.com/TuSimple/naive-ui/issues/2751).
+- `n-upload` adds `directory` prop.
 
 ## 2.28.2
 

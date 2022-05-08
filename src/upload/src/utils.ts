@@ -64,3 +64,55 @@ export const environmentSupportFile =
   typeof window !== 'undefined' &&
   window.FileReader &&
   window.File
+
+export function isFileSystemDirectoryEntry (
+  item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
+): item is FileSystemDirectoryEntry {
+  return item.isDirectory
+}
+
+export function isFileSystemFileEntry (
+  item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
+): item is FileSystemFileEntry {
+  return item.isFile
+}
+
+export async function getFilesFromEntries (
+  entries: Array<FileSystemEntry | null>,
+  directory: boolean
+): Promise<File[]> {
+  const files: File[] = []
+  let _resolve: (files: File[]) => void
+  let requestFileCount = 0
+  function _getFilesFromEntries (entries: Array<FileSystemEntry | null>): void {
+    entries.forEach((entry) => {
+      if (!entry) return
+      if (directory && isFileSystemDirectoryEntry(entry)) {
+        const directoryReader = entry.createReader()
+        directoryReader.readEntries(_getFilesFromEntries)
+      } else if (isFileSystemFileEntry(entry)) {
+        requestFileCount++
+        entry.file(
+          (file) => {
+            files.push(file)
+            requestFileCount--
+            if (!requestFileCount) {
+              _resolve(files)
+            }
+          },
+          () => {
+            requestFileCount--
+            if (!requestFileCount) {
+              _resolve(files)
+            }
+          }
+        )
+      }
+    })
+  }
+  _getFilesFromEntries(entries)
+  await new Promise<File[]>((resolve) => {
+    _resolve = resolve
+  })
+  return files
+}

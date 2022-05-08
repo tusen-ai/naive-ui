@@ -3,6 +3,7 @@ import { AddIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
+import { getFilesFromEntries } from './utils'
 import NUploadDragger from './UploadDragger'
 
 export default defineComponent({
@@ -27,7 +28,8 @@ export default defineComponent({
       dragOverRef,
       openOpenFileDialog,
       draggerInsideRef,
-      handleFileAddition
+      handleFileAddition,
+      directoryRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -59,12 +61,16 @@ export default defineComponent({
       ) {
         return
       }
-      const dataTransfer = e.dataTransfer
-      const files = dataTransfer?.files
-      if (files) {
-        handleFileAddition(files)
+      const dataTransferItems = e.dataTransfer?.items
+      if (dataTransferItems) {
+        void getFilesFromEntries(
+          Array.from(dataTransferItems).map((item) => item.webkitGetAsEntry()),
+          directoryRef.value
+        ).then((files) => {
+          handleFileAddition(files)
+          dragOverRef.value = false
+        })
       }
-      dragOverRef.value = false
     }
 
     return () => {
