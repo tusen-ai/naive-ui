@@ -8,6 +8,8 @@
 - 修复 `n-switch` 切换状态时 loading 动画异常，关闭 [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
 - 修复 `n-data-table` 在页数设定超过数据内容时，不显示内容，关闭 [#2840](https://github.com/TuSimple/naive-ui/issues/2840)
 - 修复 `n-data-table` 的 `cellProps` 泛型类型不正确
+- 修复 `n-data-table` 的 `work-break` 样式为 `break-word`
+- 修复 `n-list` 的 `n-merged-color` 样式不正常
 
 ### Feats
 

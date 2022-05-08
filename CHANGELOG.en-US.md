@@ -8,6 +8,8 @@
 - Fix `n-switch` abnormal loading animation when switching state, closes [#2870](https://github.com/TuSimple/naive-ui/issues/2870)
 - Fix `n-data-table` doesn't show content when page is more than data's page, closes [#2840](https://github.com/TuSimple/naive-ui/issues/2840).
 - Fix `n-data-table`'s `cellProps` doesn't has correct generic type.
+- Fix `n-data-table`'s `work-break` isn't `break-word`.
+- Fix `n-list`'s css variable `n-merged-color` is not correct.
 
 ### Feats
 

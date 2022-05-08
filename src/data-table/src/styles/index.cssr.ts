@@ -391,8 +391,7 @@ export default c([
     cB('data-table-table', `
       font-variant-numeric: tabular-nums;
       width: 100%;
-      word-wrap: break-word;
-      word-break: break-all;
+      word-break: break-word;
       transition: background-color .3s var(--n-bezier);
       border-collapse: separate;
       border-spacing: 0;
