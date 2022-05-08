@@ -43,7 +43,7 @@ const drawerProps = {
     default: true
   },
   showMask: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | 'transparent'>,
     default: true
   },
   to: [String, Object] as PropType<string | HTMLElement>,
@@ -249,7 +249,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, showMask, handleMaskClick } = this
+    const { mergedClsPrefix } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
         {{
@@ -265,15 +265,19 @@ export default defineComponent({
                 style={this.cssVars as CSSProperties}
                 role="none"
               >
-                {showMask ? (
+                {this.showMask ? (
                   <Transition name="fade-in-transition" appear={this.isMounted}>
                     {{
                       default: () =>
                         this.show ? (
                           <div
                             aria-hidden
-                            class={`${mergedClsPrefix}-drawer-mask`}
-                            onClick={handleMaskClick}
+                            class={[
+                              `${mergedClsPrefix}-drawer-mask`,
+                              this.showMask === 'transparent' &&
+                                `${mergedClsPrefix}-drawer-mask--invisible`
+                            ]}
+                            onClick={this.handleMaskClick}
                           />
                         ) : null
                     }}
@@ -294,9 +298,9 @@ export default defineComponent({
                   onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  showMask={this.showMask}
                   onEsc={this.handleEsc}
-                  showMask={showMask}
-                  onClickoutside={handleMaskClick}
+                  onClickoutside={this.handleMaskClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

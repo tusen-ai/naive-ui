@@ -15,13 +15,13 @@ import {
   DirectiveArguments
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
+import { clickoutside } from 'vdirs'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarProps } from '../../_internal'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 import { useLockHtmlScroll } from '../../_utils'
-import { clickoutside } from 'vdirs'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
 
@@ -57,7 +57,7 @@ export default defineComponent({
       default: true
     },
     showMask: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | 'transparent'>,
       required: true
     },
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
@@ -73,13 +73,13 @@ export default defineComponent({
     watchEffect(() => {
       if (props.show) displayedRef.value = true
     })
-    const directivesRef = computed<DirectiveArguments>(() => {
-      const { show, showMask, onClickoutside } = props
+    const bodyDirectivesRef = computed<DirectiveArguments>(() => {
+      const { show } = props
       const directives: DirectiveArguments = [[vShow, show]]
-      if (!showMask) {
+      if (!props.showMask) {
         directives.push([
           clickoutside,
-          onClickoutside,
+          props.onClickoutside,
           undefined as unknown as string,
           { capture: true }
         ])
@@ -109,7 +109,7 @@ export default defineComponent({
         }[props.placement]
       }),
       handleAfterLeave,
-      directives: directivesRef
+      bodyDirectives: bodyDirectivesRef
     }
   },
   render () {
@@ -120,7 +120,7 @@ export default defineComponent({
             Nor the detached content will disappear without transition */
           <div role="none">
             <VFocusTrap
-              disabled={!this.trapFocus}
+              disabled={!this.showMask || !this.trapFocus}
               active={this.show}
               autoFocus={this.autoFocus}
               onEsc={this.onEsc}
@@ -173,7 +173,7 @@ export default defineComponent({
                               )
                             ]
                           ),
-                          this.directives
+                          this.bodyDirectives
                         )
                     }}
                   </Transition>
