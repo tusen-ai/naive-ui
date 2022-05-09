@@ -1,4 +1,4 @@
-import { FileInfo } from './interface'
+import { FileInfo, SettledFileInfo } from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -117,4 +117,29 @@ export async function getFilesFromEntries (
     _resolve = resolve
   })
   return files
+}
+
+export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {
+  const {
+    id,
+    name,
+    percentage,
+    status,
+    url,
+    file,
+    thumbnailUrl,
+    type,
+    fullPath
+  } = fileInfo
+  return {
+    id,
+    name,
+    percentage: percentage ?? null,
+    status,
+    url: url ?? null,
+    file: file ?? null,
+    thumbnailUrl: thumbnailUrl ?? null,
+    type: type ?? null,
+    fullPath: fullPath ?? null
+  }
 }
