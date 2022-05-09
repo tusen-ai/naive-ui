@@ -8,9 +8,10 @@ import {
   toRef,
   provide,
   nextTick,
-  watch,
   WatchStopHandle,
-  CSSProperties
+  CSSProperties,
+  watch,
+  onBeforeUnmount
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -129,42 +130,54 @@ export default defineComponent({
     function initPendingNode (): void {
       const { treeMate } = props
       let defaultPendingNode: TreeNode<SelectOption> | null = null
-      if (props.autoPending) {
-        const { value } = props
-        if (value === null) {
-          defaultPendingNode = treeMate.getFirstAvailableNode()
+      const { value } = props
+      if (value === null) {
+        defaultPendingNode = treeMate.getFirstAvailableNode()
+      } else {
+        if (props.multiple) {
+          defaultPendingNode = treeMate.getNode(
+            ((value as Array<string | number> | null) || [])[
+              ((value as Array<string | number> | null) || []).length - 1
+            ]
+          )
         } else {
-          if (props.multiple) {
-            defaultPendingNode = treeMate.getNode(
-              ((value as Array<string | number> | null) || [])[
-                ((value as Array<string | number> | null) || []).length - 1
-              ]
-            )
-          } else {
-            defaultPendingNode = treeMate.getNode(value as string | number)
-          }
-          if (!defaultPendingNode || defaultPendingNode.disabled) {
-            defaultPendingNode = treeMate.getFirstAvailableNode()
-          }
+          defaultPendingNode = treeMate.getNode(value as string | number)
         }
-        if (defaultPendingNode) {
-          setPendingTmNode(defaultPendingNode)
+        if (!defaultPendingNode || defaultPendingNode.disabled) {
+          defaultPendingNode = treeMate.getFirstAvailableNode()
         }
+      }
+      if (defaultPendingNode) {
+        setPendingTmNode(defaultPendingNode)
+      } else {
+        setPendingTmNode(null)
+      }
+    }
+    function clearPendingNodeIfInvalid (): void {
+      const { value: pendingNode } = pendingNodeRef
+      if (pendingNode && !props.treeMate.getNode(pendingNode.key)) {
+        pendingNodeRef.value = null
       }
     }
 
     let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
     watch(
-      toRef(props, 'show'),
-      (value) => {
-        if (value) {
+      () => props.show,
+      (show) => {
+        if (show) {
           initPendingNodeWatchStopHandle = watch(
-            props.resetMenuOnOptionsChange
-              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
-              : [toRef(props, 'multiple')],
+            () => props.treeMate,
             () => {
-              initPendingNode()
-              void nextTick(scrollToPendingNode)
+              if (props.resetMenuOnOptionsChange) {
+                if (props.autoPending) {
+                  initPendingNode()
+                } else {
+                  clearPendingNodeIfInvalid()
+                }
+                void nextTick(scrollToPendingNode)
+              } else {
+                clearPendingNodeIfInvalid()
+              }
             },
             {
               immediate: true
@@ -178,6 +191,10 @@ export default defineComponent({
         immediate: true
       }
     )
+    onBeforeUnmount(() => {
+      initPendingNodeWatchStopHandle?.()
+    })
+
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
