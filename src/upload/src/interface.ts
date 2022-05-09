@@ -86,7 +86,7 @@ export interface UploadInjection {
   imageGroupPropsRef: Ref<ImageGroupProps | undefined>
   cssVarsRef: undefined | Ref<CSSProperties>
   themeClassRef: undefined | Ref<string>
-  directoryRef: Ref<boolean>
+  mergedDirectoryDndRef: Ref<boolean>
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>

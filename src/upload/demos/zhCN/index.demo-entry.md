@@ -35,7 +35,8 @@ debug.vue
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录，拖拽既支持目录也支持文件） | NEXT_VERSION |
+| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | NEXT_VERSION |
+| directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | NEXT_VERSION |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |

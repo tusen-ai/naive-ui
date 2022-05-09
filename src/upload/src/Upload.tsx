@@ -260,6 +260,7 @@ const uploadProps = {
   action: String,
   customRequest: Function as PropType<CustomRequest>,
   directory: Boolean,
+  directoryDnd: { type: Boolean, default: undefined },
   method: {
     type: String,
     default: 'POST'
@@ -281,7 +282,7 @@ const uploadProps = {
   onFinish: Function as PropType<OnFinish>,
   onError: Function as PropType<OnError>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
-  /** currently of no usage */
+  /** currently not used */
   onDownload: Function as PropType<OnDownload>,
   defaultUpload: {
     type: Boolean,
@@ -394,14 +395,14 @@ export default defineComponent({
       if (onUpdateFileList) call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
     }
+    const mergedMultipleRef = computed(() => props.multiple || props.directory)
     function handleFileAddition (
       fileAndEntries: FileAndEntry[] | null,
       e?: Event
     ): void {
       if (!fileAndEntries || fileAndEntries.length === 0) return
       const { onBeforeUpload } = props
-      fileAndEntries =
-        props.multiple || props.directory ? fileAndEntries : [fileAndEntries[0]]
+      fileAndEntries = mergedMultipleRef ? fileAndEntries : [fileAndEntries[0]]
       const { max } = props
       if (max) {
         fileAndEntries = fileAndEntries.slice(
@@ -622,7 +623,9 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender,
       showTriggerRef: toRef(props, 'showTrigger'),
       imageGroupPropsRef: toRef(props, 'imageGroupProps'),
-      directoryRef: toRef(props, 'directory')
+      mergedDirectoryDndRef: computed(() => {
+        return props.directoryDnd ?? props.directory
+      })
     })
 
     const exposedMethods: UploadInst = {
@@ -639,10 +642,11 @@ export default defineComponent({
       inputElRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
-      handleFileInputChange,
+      mergedMultiple: mergedMultipleRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
+      handleFileInputChange,
       ...exposedMethods
     }
   },
@@ -655,7 +659,6 @@ export default defineComponent({
         draggerInsideRef.value = true
       }
     }
-    const draggerInside = draggerInsideRef.value
 
     const inputNode = (
       <input
@@ -664,12 +667,12 @@ export default defineComponent({
         type="file"
         class={`${mergedClsPrefix}-upload-file-input`}
         accept={this.accept}
-        multiple={this.multiple || (draggerInside && directory)}
+        multiple={this.mergedMultiple}
         onChange={this.handleFileInputChange}
         // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
         // @ts-ignore // seems vue-tsc will add the prop, so we can't use expect-error
-        webkitdirectory={!draggerInside && directory}
-        directory={!draggerInside && directory}
+        webkitdirectory={directory}
+        directory={directory}
       />
     )
 

@@ -29,7 +29,7 @@ export default defineComponent({
       openOpenFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      directoryRef
+      mergedDirectoryDndRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -65,7 +65,7 @@ export default defineComponent({
       if (dataTransferItems) {
         void getFilesFromEntries(
           Array.from(dataTransferItems).map((item) => item.webkitGetAsEntry()),
-          directoryRef.value
+          mergedDirectoryDndRef.value
         ).then((files) => {
           handleFileAddition(files)
           dragOverRef.value = false
