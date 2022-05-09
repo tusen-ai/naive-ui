@@ -207,14 +207,29 @@ export function useTableData (
     return pagination.pageSize
   })
 
-  const mergedCurrentPageRef = useMergedState(
+  const _mergedCurrentPageRef = useMergedState(
     controlledCurrentPageRef,
     uncontrolledCurrentPageRef
   )
+
   const mergedPageSizeRef = useMergedState(
     controlledPageSizeRef,
     uncontrolledPageSizeRef
   )
+
+  const boundedMergedCurrentPageRef = useMemo<number>(() => {
+    const page = _mergedCurrentPageRef.value
+    return props.remote
+      ? page
+      : Math.max(
+        1,
+        Math.min(
+          Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
+          page
+        )
+      )
+  })
+
   const mergedPageCountRef = computed(() => {
     const { pagination } = props
     if (pagination) {
@@ -228,7 +243,7 @@ export function useTableData (
     if (props.remote) return treeMateRef.value.treeNodes
     if (!props.pagination) return sortedDataRef.value
     const pageSize = mergedPageSizeRef.value
-    const startIndex = (mergedCurrentPageRef.value - 1) * pageSize
+    const startIndex = (boundedMergedCurrentPageRef.value - 1) * pageSize
     return sortedDataRef.value.slice(startIndex, startIndex + pageSize)
   })
 
@@ -288,7 +303,7 @@ export function useTableData (
       // writing merged props after pagination to avoid
       // pagination[key] === undefined
       // key still exists but value is undefined
-      page: mergedCurrentPageRef.value,
+      page: boundedMergedCurrentPageRef.value,
       pageSize: mergedPageSizeRef.value,
       pageCount:
         mergedItemCountRef.value === undefined
@@ -354,7 +369,7 @@ export function useTableData (
   }
   return {
     treeMateRef,
-    mergedCurrentPageRef,
+    mergedCurrentPageRef: boundedMergedCurrentPageRef,
     mergedPaginationRef,
     paginatedDataRef,
     rawPaginatedDataRef,

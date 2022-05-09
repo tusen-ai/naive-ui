@@ -60,6 +60,7 @@ const modalProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: { type: Boolean, default: true },
   ...presetProps,
   // events
   onEsc: Function as PropType<() => void>,
@@ -308,6 +309,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}

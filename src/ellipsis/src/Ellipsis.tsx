@@ -44,6 +44,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const triggerRef = ref<HTMLElement | null>(null)
+    const triggerInnerRef = ref<HTMLElement | null>(null)
     const tooltipRef = ref<TooltipInst | null>(null)
     const expandedRef = ref(false)
     const ellipsisStyleRef = computed(() => {
@@ -74,7 +75,12 @@ export default defineComponent({
         if (lineClamp !== undefined) {
           tooltipDisabled = trigger.scrollHeight <= trigger.offsetHeight
         } else {
-          tooltipDisabled = trigger.scrollWidth <= trigger.offsetWidth
+          const { value: triggerInner } = triggerInnerRef
+          if (triggerInner) {
+            tooltipDisabled =
+              triggerInner.getBoundingClientRect().width <=
+              trigger.getBoundingClientRect().width
+          }
         }
         syncCursorStyle(trigger, tooltipDisabled)
       }
@@ -112,7 +118,7 @@ export default defineComponent({
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
         }
       >
-        {slots}
+        {props.lineClamp ? slots : <span ref="triggerInnerRef">{slots}</span>}
       </span>
     )
     function syncEllipsisStyle (trigger: HTMLElement): void {
@@ -160,6 +166,7 @@ export default defineComponent({
     return {
       mergedTheme,
       triggerRef,
+      triggerInnerRef,
       tooltipRef,
       handleClick: handleClickRef,
       renderTrigger,

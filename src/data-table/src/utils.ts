@@ -59,7 +59,7 @@ export function createCustomWidthStyle (
   const width = getStringColWidth(column)
   return {
     width,
-    minWidth: width
+    minWidth: formatLength(column.minWidth) || width
   }
 }
 

@@ -3,12 +3,7 @@
 Ellipsize cell content via setting `column.ellipsis`.
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-/>
+<n-data-table :columns="columns" :data="data" :pagination="pagination" />
 ```
 
 ```js

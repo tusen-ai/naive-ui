@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NButton, NButtonGroup, NxButton } from '../index'
+import { NButton, NxButton } from '../index'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 
@@ -17,6 +17,7 @@ describe('n-button', () => {
     })
     await inst.trigger('click')
     expect(onClick).toHaveBeenCalled()
+    inst.unmount()
   })
   it('keyboard', async () => {
     const onClick = jest.fn()
@@ -32,6 +33,7 @@ describe('n-button', () => {
     expect(onClick).toBeCalledTimes(1)
     await inst.trigger('keydown.enter')
     expect(onClick).toBeCalledTimes(1)
+    inst.unmount()
   })
   it('disabled', async () => {
     const onClick = jest.fn()
@@ -43,6 +45,7 @@ describe('n-button', () => {
     })
     await inst.trigger('click')
     expect(onClick).not.toHaveBeenCalled()
+    inst.unmount()
   })
   it('passed native event & attr tsx type checking', () => {
     ;<div>
@@ -65,6 +68,7 @@ describe('n-button', () => {
 
     await wrapper.setProps({ block: true })
     expect(wrapper.find('.n-button').classes()).toContain('n-button--block')
+    wrapper.unmount()
   })
 
   it('should work with `type` prop', async () => {
@@ -84,6 +88,7 @@ describe('n-button', () => {
 
     await wrapper.setProps({ dashed: true })
     expect(wrapper.find('button').classes()).toContain('n-button--dashed')
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -91,6 +96,7 @@ describe('n-button', () => {
 
     await wrapper.setProps({ bordered: false })
     expect(wrapper.find('.n-button__border').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -112,6 +118,7 @@ describe('n-button', () => {
     })
     expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
     expect(wrapper.find('.n-button__content').element.textContent).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `tag` prop', () => {
@@ -137,6 +144,7 @@ describe('n-button', () => {
     )
     expect(wrapper.find('a').attributes('target')).toContain('_blank')
     expect(wrapper.find('.n-button__content').element.textContent).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `icon` slot', async () => {
@@ -159,6 +167,7 @@ describe('n-button', () => {
 
     await wrapper.setProps({ iconPlacement: 'right' })
     expect(wrapper.find('button').element.children[0].textContent).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `shape` ', async () => {
@@ -198,6 +207,7 @@ describe('n-button', () => {
     ]
     buttonStyle = wrapper.find('button').attributes('style')
     expect(defaultStyle.every((i) => buttonStyle.includes(i))).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `ghost` prop', () => {
@@ -211,6 +221,7 @@ describe('n-button', () => {
     })
 
     expect(wrapper.find('button').classes()).toContain('n-button--ghost')
+    wrapper.unmount()
   })
 
   it('should work with `icon-placement` prop', async () => {
@@ -237,6 +248,7 @@ describe('n-button', () => {
     expect(wrapper.findAll('span')[1].attributes('class')).toContain(
       'n-button__icon'
     )
+    wrapper.unmount()
   })
 
   it('should work with `loading` prop', () => {
@@ -253,6 +265,7 @@ describe('n-button', () => {
     expect(wrapper.find('.n-icon-slot').attributes('aria-label')).toContain(
       'loading'
     )
+    wrapper.unmount()
   })
 
   it('should work with `color` prop', () => {
@@ -273,6 +286,7 @@ describe('n-button', () => {
     ]
     const buttonStyle = wrapper.find('button').attributes('style')
     expect(colorStyle.every((i) => buttonStyle.includes(i))).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `text-color` prop', () => {
@@ -294,31 +308,6 @@ describe('n-button', () => {
         ] as const
       ).every((i) => buttonStyle.includes(i))
     ).toBe(true)
-  })
-
-  it('should work with `button group`', async () => {
-    const wrapper = mount(NButtonGroup, {
-      slots: {
-        default: () => [
-          h(NButton, null, {
-            default: () => 'test1'
-          }),
-          h(NButton, null, {
-            default: () => 'test2'
-          }),
-          h(NButton, null, {
-            default: () => 'test3'
-          })
-        ]
-      }
-    })
-
-    expect(wrapper.find('[role="group"]').classes()).toContain('n-button-group')
-    expect(wrapper.findAll('button').length).toBe(3)
-
-    await wrapper.setProps({ vertical: true })
-    expect(wrapper.find('[role="group"]').classes()).toContain(
-      'n-button-group--vertical'
-    )
+    wrapper.unmount()
   })
 })

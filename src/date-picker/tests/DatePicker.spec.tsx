@@ -291,4 +291,16 @@ describe('n-date-picker', () => {
     await wrapper.setProps({ separator: '08akioni', type: 'datetimerange' })
     expect(wrapper.text().includes('08akioni')).toBe(true)
   })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NDatePicker, {
+        props: { status: status }
+      })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
 })

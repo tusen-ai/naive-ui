@@ -1,4 +1,4 @@
-import { FileInfo } from './interface'
+import { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -64,3 +64,94 @@ export const environmentSupportFile =
   typeof window !== 'undefined' &&
   window.FileReader &&
   window.File
+
+export function isFileSystemDirectoryEntry (
+  item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
+): item is FileSystemDirectoryEntry {
+  return item.isDirectory
+}
+
+export function isFileSystemFileEntry (
+  item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
+): item is FileSystemFileEntry {
+  return item.isFile
+}
+
+export async function getFilesFromEntries (
+  entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>,
+  directory: boolean
+): Promise<FileAndEntry[]> {
+  const fileAndEntries: FileAndEntry[] = []
+  let _resolve: (fileAndEntries: FileAndEntry[]) => void
+  let requestCallbackCount = 0
+  function lock (): void {
+    requestCallbackCount++
+  }
+  function unlock (): void {
+    requestCallbackCount--
+    if (!requestCallbackCount) {
+      _resolve(fileAndEntries)
+    }
+  }
+  function _getFilesFromEntries (
+    entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>
+  ): void {
+    entries.forEach((entry) => {
+      if (!entry) return
+      if (directory && isFileSystemDirectoryEntry(entry)) {
+        const directoryReader = entry.createReader()
+        lock()
+        directoryReader.readEntries(
+          (entries) => {
+            _getFilesFromEntries(entries)
+            unlock()
+          },
+          () => {
+            unlock()
+          }
+        )
+      } else if (isFileSystemFileEntry(entry)) {
+        lock()
+        entry.file(
+          (file) => {
+            fileAndEntries.push({ file, entry })
+            unlock()
+          },
+          () => {
+            unlock()
+          }
+        )
+      }
+    })
+  }
+  _getFilesFromEntries(entries)
+  await new Promise<FileAndEntry[]>((resolve) => {
+    _resolve = resolve
+  })
+  return fileAndEntries
+}
+
+export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {
+  const {
+    id,
+    name,
+    percentage,
+    status,
+    url,
+    file,
+    thumbnailUrl,
+    type,
+    fullPath
+  } = fileInfo
+  return {
+    id,
+    name,
+    percentage: percentage ?? null,
+    status,
+    url: url ?? null,
+    file: file ?? null,
+    thumbnailUrl: thumbnailUrl ?? null,
+    type: type ?? null,
+    fullPath: fullPath ?? null
+  }
+}

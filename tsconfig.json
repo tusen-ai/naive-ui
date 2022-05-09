@@ -17,9 +17,6 @@
     "composite": true,
     "target": "ES6",
     "esModuleInterop": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ]
+    "lib": ["ESNext", "DOM"]
   }
 }

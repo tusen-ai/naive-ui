@@ -33,7 +33,16 @@ option-format.vue
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |
 | on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | 2.27.0 |
-| on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
+| on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | Callback when the component's value changes. |  |
+
+#### DynamicTagsOption Type
+
+```ts
+export interface DynamicTagsOption {
+  label: string
+  value: string
+}
+```
 
 ### DynamicTags Slots
 

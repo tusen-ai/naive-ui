@@ -100,7 +100,8 @@ describe('n-breadcrumb', () => {
     })
 
     it('should add `aria-current` if the item is the current location', () => {
-      global.window = Object.create(window)
+      const originalWindow = window
+      globalThis.window = Object.create(window)
       const currentUrl = 'http://some-domaine/path2'
       const url = 'http://some-domaine/path1'
       Object.defineProperty(window, 'location', {
@@ -144,6 +145,7 @@ describe('n-breadcrumb', () => {
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
+      globalThis.window = originalWindow
     })
 
     it('should add `aria-hidden` to the separator', () => {

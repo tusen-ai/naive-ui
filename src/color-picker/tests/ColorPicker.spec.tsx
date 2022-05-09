@@ -223,4 +223,30 @@ describe('n-color-picker', () => {
       })
     })
   })
+
+  it('should work with `disabled` prop', async () => {
+    const wrapper = mount(NColorPicker)
+    expect(wrapper.find('.n-color-picker-trigger').classes()).not.toContain(
+      'n-color-picker-trigger--disabled'
+    )
+
+    await wrapper.setProps({ disabled: true })
+    expect(wrapper.find('.n-color-picker-trigger').classes()).toContain(
+      'n-color-picker-trigger--disabled'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `render-label` prop', async () => {
+    const wrapper = mount(NColorPicker)
+    expect(wrapper.find('.n-color-picker-trigger__value').text()).not.toBe(
+      'test-label'
+    )
+
+    await wrapper.setProps({ renderLabel: () => 'test-label' })
+    expect(wrapper.find('.n-color-picker-trigger__value').text()).toBe(
+      'test-label'
+    )
+    wrapper.unmount()
+  })
 })

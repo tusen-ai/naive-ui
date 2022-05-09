@@ -8,7 +8,12 @@ import { dialogProps, dialogPropKeys } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
+  autoFocus: {
+    type: Boolean,
+    default: true
+  },
   internalStyle: [String, Object] as PropType<string | CSSProperties>,
   maskClosable: {
     type: Boolean,
@@ -122,6 +127,8 @@ export const NDialogEnvironment = defineComponent({
         maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
         closeOnEsc={this.closeOnEsc}
+        blockScroll={this.blockScroll}
+        autoFocus={this.autoFocus}
         internalAppear
         internalDialog
       >

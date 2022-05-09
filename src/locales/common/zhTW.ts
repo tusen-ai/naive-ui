@@ -44,6 +44,8 @@ const zhTW: NLocale = {
     endDatePlaceholder: '結束日期',
     startDatetimePlaceholder: '開始日期時間',
     endDatetimePlaceholder: '結束日期時間',
+    startMonthPlaceholder: '開始月份',
+    endMonthPlaceholder: '結束月份',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今天'

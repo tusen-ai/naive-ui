@@ -86,7 +86,7 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  actions: Array as PropType<Array<'now' | 'confirm'>>,
+  actions: Array as PropType<Array<'now' | 'confirm'> | null>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -113,6 +113,12 @@ const timePickerProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   onUpdateFormattedValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateFormattedValue>
   >,
@@ -120,6 +126,10 @@ const timePickerProps = {
   MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onConfirm: [Function, Array] as PropType<
+  MaybeArray<(value: number & null, formattedValue: string & null) => void>
+  >,
+  onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // private
   stateful: {
@@ -347,6 +357,11 @@ export default defineComponent({
         )
       }
     }
+    function createFormattedValue (value: number | null): string | null {
+      return value === null
+        ? null
+        : format(value, props.valueFormat || props.format)
+    }
     function doUpdateValue (value: number | null): void {
       const {
         onUpdateValue,
@@ -354,8 +369,7 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      const formattedValue =
-        value === null ? null : format(value, props.valueFormat || props.format)
+      const formattedValue = createFormattedValue(value)
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -380,10 +394,21 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doConfirm (): void {
+      const { onConfirm } = props
+      if (onConfirm) {
+        call(
+          onConfirm,
+          mergedValueRef.value as number & null,
+          createFormattedValue(mergedValueRef.value) as string & null
+        )
+      }
+    }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
+      props.onClear?.()
     }
     function handleFocusDetectorFocus (): void {
       closePanel({
@@ -525,6 +550,9 @@ export default defineComponent({
     }
     function doUpdateShow (value: boolean): void {
       uncontrolledShowRef.value = value
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
     }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(
@@ -613,6 +641,7 @@ export default defineComponent({
     }
     function handleConfirmClick (): void {
       deriveInputValue()
+      doConfirm()
       closePanel({
         returnFocus: true
       })

@@ -19,7 +19,13 @@ import { getScrollParent, unwrapElement } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
-import { formatLength, resolveSlot, warn, warnOnce } from '../../_utils'
+import {
+  lockHtmlScrollRightCompensationRef,
+  formatLength,
+  resolveSlot,
+  warn,
+  warnOnce
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { backTopLight } from '../styles'
 import type { BackTopTheme } from '../styles'
@@ -114,7 +120,9 @@ export default defineComponent({
         bottom: string
       } => {
         return {
-          right: formatLength(props.right),
+          right: `calc(${formatLength(props.right)} + ${
+            lockHtmlScrollRightCompensationRef.value
+          })`,
           bottom: formatLength(props.bottom)
         }
       }

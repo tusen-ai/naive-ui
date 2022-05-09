@@ -6,19 +6,18 @@ Set the way to show checked options. `all` means showing all checked nodes. `par
 
 <template>
   <n-space vertical>
-    <n-space>
-      <n-radio-group v-model:value="checkStrategy">
-        <n-radio-button value="all">
-          All
-        </n-radio-button>
-        <n-radio-button value="parent">
-          Parent
-        </n-radio-button>
-        <n-radio-button value="child">
-          Child
-        </n-radio-button>
-      </n-radio-group>
-    </n-space>
+    <n-radio-group v-model:value="checkStrategy">
+      <n-radio-button value="all">
+        All
+      </n-radio-button>
+      <n-radio-button value="parent">
+        Parent
+      </n-radio-button>
+      <n-radio-button value="child">
+        Child
+      </n-radio-button>
+    </n-radio-group>
+
     <n-cascader
       multiple
       cascade

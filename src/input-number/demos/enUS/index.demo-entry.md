@@ -52,12 +52,12 @@ custom-icon.vue
 
 ### InputNumber Slots
 
-| Name       | Parameters | Description               | Version      |
-| ---------- | ---------- | ------------------------- | ------------ |
-| add-icon   | `()`       | icon of the add button.   | NEXT_VERSION |
-| minus-icon | `()`       | icon of the minus button. | NEXT_VERSION |
-| prefix     | `()`       | Prefix content slot.      |              |
-| suffix     | `()`       | Suffix content slot.      |              |
+| Name       | Parameters | Description               | Version |
+| ---------- | ---------- | ------------------------- | ------- |
+| add-icon   | `()`       | icon of the add button.   | 2.28.1  |
+| minus-icon | `()`       | icon of the minus button. | 2.28.1  |
+| prefix     | `()`       | Prefix content slot.      |         |
+| suffix     | `()`       | Suffix content slot.      |         |
 
 ### InputNumber Methods
 

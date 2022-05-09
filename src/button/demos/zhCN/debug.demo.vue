@@ -5,10 +5,10 @@
 </markdown>
 
 <template>
-  <div
+  <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+  <n-config-provider
     class="debug-zone"
-    n-light-theme-background-color-hint="#ececec"
-    n-dark-theme-background-color-hint="transparent"
+    :rtl="rtlEnabled ? rtlStyles : undefined"
   >
     <n-button type="default" round>
       <template #icon>
@@ -378,19 +378,27 @@
         苹果
       </n-button>
     </n-button-group>
-  </div>
+  </n-config-provider>
 </template>
 <script lang="ts">
 import { LogInOutline, CashOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { unstableButtonGroupRtl, unstableButtonRtl } from 'naive-ui'
 
 export default defineComponent({
   components: {
     CashOutline,
     LogInOutline
+  },
+  setup () {
+    return {
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableButtonGroupRtl, unstableButtonRtl]
+    }
   }
 })
 </script>
+
 <style>
 .n-button {
   margin-right: 12px;

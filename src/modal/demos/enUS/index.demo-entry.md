@@ -22,6 +22,7 @@ transform-origin.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.24.2 |
+| block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | NEXT_VERSION |
 | close-on-esc | `boolean` | `true` | Whether to close modal on Esc is pressed. | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
