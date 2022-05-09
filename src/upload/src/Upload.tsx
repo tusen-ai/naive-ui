@@ -421,7 +421,7 @@ export default defineComponent({
             url: null,
             type: file.type,
             thumbnailUrl: null,
-            fullPath: entry?.fullPath ?? null
+            fullPath: entry?.fullPath ?? file.webkitRelativePath ?? null
           }
           if (
             !onBeforeUpload ||
