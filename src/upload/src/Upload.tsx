@@ -418,11 +418,10 @@ export default defineComponent({
             status: 'pending',
             percentage: 0,
             file: file,
-            fullPath: props.directory ? file.webkitRelativePath : null,
             url: null,
             type: file.type,
             thumbnailUrl: null,
-            fullPath: entry?.fullPath ?? null
+            fullPath: entry?.fullPath ?? file.webkitRelativePath ?? null
           }
           if (
             !onBeforeUpload ||
