@@ -11,7 +11,6 @@ export interface FileInfo {
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   url?: string | null
   file?: File | null
-  fullPath?: string | null
   thumbnailUrl?: string | null
   type?: string | null
   fullPath?: string | null
