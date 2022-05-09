@@ -17,7 +17,7 @@ image-style.vue
 image-card-style.vue
 custom-request.vue
 abstract.vue
-retry-debug.vue
+debug.vue
 ```
 
 ## API
@@ -65,16 +65,17 @@ retry-debug.vue
 
 #### UploadFileInfo Type
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| id | `string \| number` | 文件 id，需要唯一 |
-| name | `string` | 文件名 |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |
-| percentage? | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
-| file? | `File \| null` | 文件对应的浏览器 File 对象 |
-| thumbnailUrl? | `string \| null` | 缩略图 URL |
-| type? | `string \| null` | MIME 类型 |
-| url? | `string \| null` | 文件下载 URL |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| id | `string \| number` | 文件 id，需要唯一 |  |
+| name | `string` | 文件名 |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
+| percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
+| file? | `File \| null` | 文件对应的浏览器 File 对象 |  |
+| fullPath? | `string \| null` | 上传文件的相对路径 | NEXT_VERSION |
+| thumbnailUrl? | `string \| null` | 缩略图 URL |  |
+| type? | `string \| null` | MIME 类型 |  |
+| url? | `string \| null` | 文件下载 URL |  |
 
 ### UploadTrigger Props
 

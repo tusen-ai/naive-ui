@@ -1,4 +1,4 @@
-import { FileInfo, SettledFileInfo } from './interface'
+import { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -80,10 +80,19 @@ export function isFileSystemFileEntry (
 export async function getFilesFromEntries (
   entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>,
   directory: boolean
-): Promise<File[]> {
-  const files: File[] = []
-  let _resolve: (files: File[]) => void
-  let requestFileCount = 0
+): Promise<FileAndEntry[]> {
+  const fileAndEntries: FileAndEntry[] = []
+  let _resolve: (fileAndEntries: FileAndEntry[]) => void
+  let requestCallbackCount = 0
+  function lock (): void {
+    requestCallbackCount++
+  }
+  function unlock (): void {
+    requestCallbackCount--
+    if (!requestCallbackCount) {
+      _resolve(fileAndEntries)
+    }
+  }
   function _getFilesFromEntries (
     entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>
   ): void {
@@ -91,32 +100,35 @@ export async function getFilesFromEntries (
       if (!entry) return
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
-        directoryReader.readEntries(_getFilesFromEntries)
-      } else if (isFileSystemFileEntry(entry)) {
-        requestFileCount++
-        entry.file(
-          (file) => {
-            files.push(file)
-            requestFileCount--
-            if (!requestFileCount) {
-              _resolve(files)
-            }
+        lock()
+        directoryReader.readEntries(
+          (entries) => {
+            _getFilesFromEntries(entries)
+            unlock()
           },
           () => {
-            requestFileCount--
-            if (!requestFileCount) {
-              _resolve(files)
-            }
+            unlock()
+          }
+        )
+      } else if (isFileSystemFileEntry(entry)) {
+        lock()
+        entry.file(
+          (file) => {
+            fileAndEntries.push({ file, entry })
+            unlock()
+          },
+          () => {
+            unlock()
           }
         )
       }
     })
   }
   _getFilesFromEntries(entries)
-  await new Promise<File[]>((resolve) => {
+  await new Promise<FileAndEntry[]>((resolve) => {
     _resolve = resolve
   })
-  return files
+  return fileAndEntries
 }
 
 export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {

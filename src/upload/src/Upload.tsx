@@ -39,14 +39,11 @@ import type {
   CreateThumbnailUrl,
   CustomRequest,
   OnError,
-  SettledFileInfo
+  SettledFileInfo,
+  FileAndEntry
 } from './interface'
 import { uploadInjectionKey } from './interface'
-import {
-  createImageDataUrl,
-  createSettledFileInfo,
-  getFilesFromEntries
-} from './utils'
+import { createImageDataUrl, createSettledFileInfo } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
 import style from './styles/index.cssr'
@@ -382,15 +379,12 @@ export default defineComponent({
     }
     function handleFileInputChange (e: Event): void {
       const target = e.target as HTMLInputElement
-      if (target.webkitEntries) {
-        void getFilesFromEntries(target.webkitEntries, props.directory).then(
-          (files) => {
-            handleFileAddition(files, e)
-          }
-        )
-      } else {
-        handleFileAddition(target.files, e)
-      }
+      handleFileAddition(
+        target.files
+          ? Array.from(target.files).map((file) => ({ file, entry: null }))
+          : null,
+        e
+      )
       // May have bug! set to null?
       target.value = ''
     }
@@ -401,23 +395,23 @@ export default defineComponent({
       uncontrolledFileListRef.value = files
     }
     function handleFileAddition (
-      files: File[] | FileList | null,
+      fileAndEntries: FileAndEntry[] | null,
       e?: Event
     ): void {
-      if (!files || files.length === 0) return
+      if (!fileAndEntries || fileAndEntries.length === 0) return
       const { onBeforeUpload } = props
-      let filesAsArray =
-        props.multiple || props.directory ? Array.from(files) : [files[0]]
+      fileAndEntries =
+        props.multiple || props.directory ? fileAndEntries : [fileAndEntries[0]]
       const { max } = props
       if (max) {
-        filesAsArray = filesAsArray.slice(
+        fileAndEntries = fileAndEntries.slice(
           0,
           max - mergedFileListRef.value.length
         )
       }
 
       void Promise.all(
-        filesAsArray.map(async (file) => {
+        fileAndEntries.map(async ({ file, entry }) => {
           const fileInfo: SettledFileInfo = {
             id: createId(),
             name: file.name,
@@ -427,7 +421,7 @@ export default defineComponent({
             url: null,
             type: file.type,
             thumbnailUrl: null,
-            fullPath: null
+            fullPath: entry?.fullPath ?? null
           }
           if (
             !onBeforeUpload ||
@@ -653,13 +647,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix, $slots, onRender } = this
+    const { draggerInsideRef, mergedClsPrefix, $slots, directory, onRender } =
+      this
     if ($slots.default && !this.abstract) {
       const firstChild = $slots.default()[0]
       if ((firstChild as any)?.type?.[uploadDraggerKey]) {
         draggerInsideRef.value = true
       }
     }
+    const draggerInside = draggerInsideRef.value
 
     const inputNode = (
       <input
@@ -668,12 +664,12 @@ export default defineComponent({
         type="file"
         class={`${mergedClsPrefix}-upload-file-input`}
         accept={this.accept}
-        multiple={this.multiple}
+        multiple={this.multiple || (draggerInside && directory)}
         onChange={this.handleFileInputChange}
         // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
         // @ts-ignore // seems vue-tsc will add the prop, so we can't use expect-error
-        webkitdirectory={this.directory}
-        directory={this.directory}
+        webkitdirectory={!draggerInside && directory}
+        directory={!draggerInside && directory}
       />
     )
 

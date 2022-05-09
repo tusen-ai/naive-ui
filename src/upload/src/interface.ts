@@ -90,7 +90,7 @@ export interface UploadInjection {
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
-  handleFileAddition: (files: File[] | null, e?: Event) => void
+  handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
 }
 
@@ -141,3 +141,8 @@ export type OnError = ({
   file: SettledFileInfo
   event?: ProgressEvent
 }) => FileInfo | undefined
+
+export interface FileAndEntry {
+  file: File
+  entry: FileSystemFileEntry | null
+}

@@ -64,16 +64,17 @@ download.vue
 
 #### UploadFileInfo Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| id | `string \| number` | Unique file ID. |
-| name | `string` | Filename. |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage? | `number` | The progress percentage of the file being uploaded. |
-| file? | `File \| null` | The object of the file stored in the browser. |
-| thumbnailUrl? | `string \| null` | Thumbnail URL. |
-| type? | `string \| null` | MIME type. |
-| url? | `string \| null` | File URL. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| id | `string \| number` | Unique file ID. |  |
+| name | `string` | Filename. |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
+| percentage? | `number` | The progress percentage of the file being uploaded. |  |
+| file? | `File \| null` | The object of the file stored in the browser. |  |
+| fullPath? | `string \| null` | Relative path of uploaded file. | NEXT_VERSION |
+| thumbnailUrl? | `string \| null` | Thumbnail URL. |  |
+| type? | `string \| null` | MIME type. |  |
+| url? | `string \| null` | File URL. |  |
 
 ### UploadTrigger Props
 
