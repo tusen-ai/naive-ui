@@ -130,8 +130,18 @@ describe('n-layout', () => {
     )
   })
 
-  it('should work with `absolute` prop', async () => {
-    const wrapper = mount(NLayout, {
+  it('should work with `position` prop', async () => {
+    let wrapper = mount(NLayout, {
+      slots: {
+        default: () => [
+          h(NLayoutHeader, null, { default: () => 'test-header' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-layout').classes()).toContain(
+      'n-layout--static-positioned'
+    )
+    wrapper = mount(NLayout, {
       props: {
         position: 'absolute'
       },
@@ -144,5 +154,6 @@ describe('n-layout', () => {
     expect(wrapper.find('.n-layout').classes()).toContain(
       'n-layout--absolute-positioned'
     )
+    wrapper.unmount()
   })
 })
