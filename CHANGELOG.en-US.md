@@ -13,6 +13,7 @@
 - Fix `MessageReactive`'s `destroy` method throws error if message has disappeared.
 - Fix `n-ellpisis` can't show tooltip if content width is very close to container width, closes [#1393](https://github.com/TuSimple/naive-ui/issues/1393), [#2899](https://github.com/TuSimple/naive-ui/issues/2899).
 - Fix `n-tree` can't use `width: fit-content;` style, closes [#2875](https://github.com/TuSimple/naive-ui/issues/2875).
+- Fix `n-dropdown`'s `on-update:show` prop will be triggered twice, closes [#2905](https://github.com/TuSimple/naive-ui/issues/2905).
 
 ### Feats
 
