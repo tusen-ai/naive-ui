@@ -68,12 +68,13 @@ debug.vue
 
 | 属性 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| id | `string \| number` | 文件 id，需要唯一 |  |
+| id | `string` | 文件 id，需要唯一 |  |
 | name | `string` | 文件名 |  |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
-| percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
+| batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | NEXT_VERSION |
 | file? | `File \| null` | 文件对应的浏览器 File 对象 |  |
 | fullPath? | `string \| null` | 上传文件的相对路径 | NEXT_VERSION |
+| percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
 | thumbnailUrl? | `string \| null` | 缩略图 URL |  |
 | type? | `string \| null` | MIME 类型 |  |
 | url? | `string \| null` | 文件下载 URL |  |

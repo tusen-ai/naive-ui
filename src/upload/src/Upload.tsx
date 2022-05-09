@@ -402,7 +402,9 @@ export default defineComponent({
     ): void {
       if (!fileAndEntries || fileAndEntries.length === 0) return
       const { onBeforeUpload } = props
-      fileAndEntries = mergedMultipleRef ? fileAndEntries : [fileAndEntries[0]]
+      fileAndEntries = mergedMultipleRef.value
+        ? fileAndEntries
+        : [fileAndEntries[0]]
       const { max } = props
       if (max) {
         fileAndEntries = fileAndEntries.slice(
@@ -411,10 +413,13 @@ export default defineComponent({
         )
       }
 
+      const batchId = createId()
+
       void Promise.all(
         fileAndEntries.map(async ({ file, entry }) => {
           const fileInfo: SettledFileInfo = {
             id: createId(),
+            batchId,
             name: file.name,
             status: 'pending',
             percentage: 0,
@@ -422,7 +427,8 @@ export default defineComponent({
             url: null,
             type: file.type,
             thumbnailUrl: null,
-            fullPath: entry?.fullPath ?? file.webkitRelativePath ?? null
+            fullPath:
+              entry?.fullPath ?? `/${file.webkitRelativePath || file.name}`
           }
           if (
             !onBeforeUpload ||

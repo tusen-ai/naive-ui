@@ -7,6 +7,7 @@ import type { UploadTheme } from '../styles'
 export interface FileInfo {
   id: string
   name: string
+  batchId?: string | null
   percentage?: number | null
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   url?: string | null

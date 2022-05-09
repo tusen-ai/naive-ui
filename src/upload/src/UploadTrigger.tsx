@@ -59,17 +59,23 @@ export default defineComponent({
         mergedDisabledRef.value ||
         maxReachedRef.value
       ) {
+        dragOverRef.value = false
         return
       }
       const dataTransferItems = e.dataTransfer?.items
-      if (dataTransferItems) {
+      if (dataTransferItems?.length) {
         void getFilesFromEntries(
           Array.from(dataTransferItems).map((item) => item.webkitGetAsEntry()),
           mergedDirectoryDndRef.value
-        ).then((files) => {
-          handleFileAddition(files)
-          dragOverRef.value = false
-        })
+        )
+          .then((files) => {
+            handleFileAddition(files)
+          })
+          .finally(() => {
+            dragOverRef.value = false
+          })
+      } else {
+        dragOverRef.value = false
       }
     }
 

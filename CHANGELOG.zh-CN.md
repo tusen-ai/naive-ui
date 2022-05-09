@@ -50,6 +50,7 @@
 - `n-date-picker` 新增 `bind-calendar-months` 属性，关闭 [#2751](https://github.com/TuSimple/naive-ui/issues/2751)
 - `n-upload` 新增 `directory` 属性
 - `n-upload` 新增 `directory-dnd` 属性
+- `UploadFileInfo` 新增 `fullPath` 和 `batchId` 属性
 
 ## 2.28.2
 

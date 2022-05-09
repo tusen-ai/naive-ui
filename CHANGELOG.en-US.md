@@ -49,6 +49,7 @@
 - `n-date-picker` adds `bind-calendar-months` prop, closes [#2751](https://github.com/TuSimple/naive-ui/issues/2751).
 - `n-upload` adds `directory` prop.
 - `n-upload` adds `directory-dnd` prop.
+- `UploadFileInfo` adds `fullPath` and `batchId` attrs.
 
 ## 2.28.2
 

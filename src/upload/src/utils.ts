@@ -1,4 +1,4 @@
-import { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
+import type { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -98,6 +98,7 @@ export async function getFilesFromEntries (
   ): void {
     entries.forEach((entry) => {
       if (!entry) return
+      lock()
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
         lock()
@@ -122,11 +123,12 @@ export async function getFilesFromEntries (
           }
         )
       }
+      unlock()
     })
   }
-  _getFilesFromEntries(entries)
   await new Promise<FileAndEntry[]>((resolve) => {
     _resolve = resolve
+    _getFilesFromEntries(entries)
   })
   return fileAndEntries
 }
@@ -141,7 +143,8 @@ export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {
     file,
     thumbnailUrl,
     type,
-    fullPath
+    fullPath,
+    batchId
   } = fileInfo
   return {
     id,
@@ -152,6 +155,7 @@ export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {
     file: file ?? null,
     thumbnailUrl: thumbnailUrl ?? null,
     type: type ?? null,
-    fullPath: fullPath ?? null
+    fullPath: fullPath ?? null,
+    batchId: batchId ?? null
   }
 }

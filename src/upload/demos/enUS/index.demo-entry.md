@@ -70,9 +70,10 @@ download.vue
 | id | `string \| number` | Unique file ID. |  |
 | name | `string` | Filename. |  |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
-| percentage? | `number` | The progress percentage of the file being uploaded. |  |
+| batchId? | `string \| null` | Batch id of uploaded file. The files selected in a same upload batch will have same `batchId`. | NEXT_VERSION |
 | file? | `File \| null` | The object of the file stored in the browser. |  |
 | fullPath? | `string \| null` | Relative path of uploaded file. | NEXT_VERSION |
+| percentage? | `number` | The progress percentage of the file being uploaded. |  |
 | thumbnailUrl? | `string \| null` | Thumbnail URL. |  |
 | type? | `string \| null` | MIME type. |  |
 | url? | `string \| null` | File URL. |  |
