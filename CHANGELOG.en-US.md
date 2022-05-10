@@ -15,6 +15,7 @@
 - Fix `n-tree` can't use `width: fit-content;` style, closes [#2875](https://github.com/TuSimple/naive-ui/issues/2875).
 - Fix `n-dropdown`'s `on-update:show` prop will be triggered twice, closes [#2905](https://github.com/TuSimple/naive-ui/issues/2905).
 - Fix `n-select` can select option by pressing enter after options are cleared.
+- Fix `n-data-table`'s `selection` and `expand` column can't set width.
 
 ### Feats
 

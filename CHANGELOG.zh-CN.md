@@ -15,6 +15,7 @@
 - 修复 `n-tree` 无法使用 `width: fit-content;` 的样式，关闭 [#2875](https://github.com/TuSimple/naive-ui/issues/2875)
 - 修复 `n-dropdown` 的 `on-update:show` 会被触发两次，关闭 [#2905](https://github.com/TuSimple/naive-ui/issues/2905)
 - 修复 `n-select` 在选情清空后依然可以通过 enter 键选中值
+- 修复 `n-data-table` 的 `selection` 和 `expand` 列不能设置宽度
 
 ### Feats
 
