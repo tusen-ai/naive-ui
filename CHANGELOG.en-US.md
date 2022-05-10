@@ -50,6 +50,7 @@
 - `n-upload` adds `directory` prop.
 - `n-upload` adds `directory-dnd` prop.
 - `UploadFileInfo` adds `fullPath` and `batchId` attrs.
+- `n-color-picker` adds `on-confirm` prop.
 
 ## 2.28.2
 

@@ -178,6 +178,7 @@
 - `n-dialog` 新增 `negative-button-props` 属性
 - `n-dialog` 新增 `positive-button-props` 属性
 - `n-tabs` 新增 `animated` 属性
+- `n-color-picker` 新增 `on-confirm` 方法
 
 ### i18n
 
