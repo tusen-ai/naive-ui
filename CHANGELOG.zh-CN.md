@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.28.4
+
+### Fixes
+
+- 修复 `n-theme-editor` 内容不能滚动
+
 ## 2.28.3
 
 ### Fixes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.28.4
+
+### Fixes
+
+- Fix `n-theme-editor`'s content can't be scrolled.
+
 ## 2.28.3
 
 ### Fixes
