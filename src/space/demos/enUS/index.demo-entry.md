@@ -22,7 +22,7 @@ center.vue
 | align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | Vertical arrangement. |  |
 | inline | `boolean` | `false` | Is it an inline element. |  |
 | item-style | `string \| object` | `undefined` | Node style. |  |
-| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between' \| 'space-evenly'` | `'start'` | Horizontal arrangement. | `'space-evenly'` NEXT_VERSION |
+| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between' \| 'space-evenly'` | `'start'` | Horizontal arrangement. | `'space-evenly'` 2.28.3 |
 | size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | When it's a number, it will be used as vertical and horizontal gap, or it is [horizontalGap, verticalGap]. |  |
 | vertical | `boolean` | `false` | Whether to lay out vertically. |  |
 | wrap | `boolean` | `true` | Whether to exceed the line break. |  |

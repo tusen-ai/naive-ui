@@ -45,7 +45,7 @@ expand-selected-option.vue
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |
-| node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | 节点的 DOM 属性生成函数 | NEXT_VERSION |
+| node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | 节点的 DOM 属性生成函数 | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |  |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |  |
