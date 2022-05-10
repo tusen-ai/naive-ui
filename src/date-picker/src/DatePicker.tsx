@@ -526,7 +526,13 @@ export default defineComponent({
       }
     }
     function handlePanelConfirm (): void {
-      doUpdateValue(pendingValueRef.value, { doConfirm: true })
+      const pendingValue = pendingValueRef.value
+      doUpdateValue(
+        Array.isArray(pendingValue)
+          ? [pendingValue[0], pendingValue[1]]
+          : pendingValue,
+        { doConfirm: true }
+      )
     }
     // --- Refresh
     function deriveInputState (): void {
