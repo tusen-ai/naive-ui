@@ -97,6 +97,8 @@ export type TableBaseColumn<T = InternalRowData> = {
   type?: never
   key: ColumnKey
 
+  tree?: boolean
+
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
@@ -165,7 +167,7 @@ export type DataTableSelectionOptions = Array<
 export interface DataTableInjection {
   slots: Slots
   indentRef: Ref<number>
-  firstContentfulColIndexRef: Ref<number>
+  childTriggerColIndexRef: Ref<number>
   componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
   hoverKeyRef: Ref<RowKey | null>

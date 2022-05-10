@@ -16,6 +16,7 @@
 - 修复 `n-dropdown` 的 `on-update:show` 会被触发两次，关闭 [#2905](https://github.com/TuSimple/naive-ui/issues/2905)
 - 修复 `n-select` 在选情清空后依然可以通过 enter 键选中值
 - 修复 `n-data-table` 的 `selection` 和 `expand` 列不能设置宽度
+- 修复 `n-checkbox` 中有可以被选中的空格
 
 ### Feats
 
@@ -52,6 +53,7 @@
 - `n-upload` 新增 `directory` 属性
 - `n-upload` 新增 `directory-dnd` 属性
 - `UploadFileInfo` 新增 `fullPath` 和 `batchId` 属性
+- `DataTableBaseColumn` 新增 `tree` 属性，关闭 [#2757](https://github.com/TuSimple/naive-ui/issues/2757)
 
 ## 2.28.2
 

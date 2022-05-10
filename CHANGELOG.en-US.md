@@ -16,6 +16,7 @@
 - Fix `n-dropdown`'s `on-update:show` prop will be triggered twice, closes [#2905](https://github.com/TuSimple/naive-ui/issues/2905).
 - Fix `n-select` can select option by pressing enter after options are cleared.
 - Fix `n-data-table`'s `selection` and `expand` column can't set width.
+- Fix `n-checkbox` contains selectable whitespace.
 
 ### Feats
 
@@ -51,6 +52,7 @@
 - `n-upload` adds `directory` prop.
 - `n-upload` adds `directory-dnd` prop.
 - `UploadFileInfo` adds `fullPath` and `batchId` attrs.
+- `DataTableBaseColumn` adds `tree` attr, closes [#2757](https://github.com/TuSimple/naive-ui/issues/2757).
 
 ## 2.28.2
 
