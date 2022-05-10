@@ -134,11 +134,11 @@ status.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | MonthRange 类型的 Date Picker 中支持的用户操作 | NEXT_VERSION |
-| end-placeholder | `string` | `'结束日期'` | MonthRange 中 end 选框的提示信息 | NEXT_VERSION |
+| end-placeholder | `string` | `'结束月份'` | MonthRange 中 end 选框的提示信息 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 | NEXT_VERSION |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 | NEXT_VERSION |
-| start-placeholder | `string` | `'开始日期'` | MonthRange 中 start 选框的提示信息 | NEXT_VERSION |
+| start-placeholder | `string` | `'开始月份'` | MonthRange 中 start 选框的提示信息 | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 | NEXT_VERSION |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | NEXT_VERSION |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | NEXT_VERSION |

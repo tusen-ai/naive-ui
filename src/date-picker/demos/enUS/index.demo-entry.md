@@ -136,11 +136,11 @@ status.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `monthrange` type date picker. | NEXT_VERSION |
-| end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. | NEXT_VERSION |
+| end-placeholder | `string` | `'End Month'` | Placeholder at end part of the input. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. | NEXT_VERSION |
 | separator | `string` | `'to'` | The separator between the start input and the end input. | NEXT_VERSION |
-| start-placeholder | `string` | `'Start Date'` | The prompt information at the beginning of the input. | NEXT_VERSION |
+| start-placeholder | `string` | `'Start Month'` | The prompt information at the beginning of the input. | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. | NEXT_VERSION |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | NEXT_VERSION |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Range changed callback. | NEXT_VERSION |
