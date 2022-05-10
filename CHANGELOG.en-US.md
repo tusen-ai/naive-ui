@@ -41,7 +41,7 @@
 - `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `show-mask` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2846).
-- `useDialog().xxx` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
+- `useDialog().xxx` supports `blockScroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `useDialog().xxx` supports `autoFocus` option.
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).
 - `n-time-picker` adds `on-confirm` prop.
