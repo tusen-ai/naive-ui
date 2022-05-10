@@ -1,12 +1,5 @@
 # CHANGELOG
 
-## Pending
-
-### Feats
-
-- `n-notification` add `top` prop.
-- `n-notification` add `bottom` prop.
-
 ## 2.24.5 (2022-01-25)
 
 ### Fixes

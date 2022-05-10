@@ -189,6 +189,7 @@ export default defineComponent({
       mergedClsPrefix
     } = this
 
+    console.log('action', $slots.action)
     return (
       <div
         class={[

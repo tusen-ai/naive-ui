@@ -47,8 +47,6 @@ closable
 duration
 max
 placement
-custom-top
-custom-bottom
 ```
 
 ## API
@@ -59,8 +57,6 @@ custom-bottom
 | --- | --- | --- | --- |
 | max | `number` | `undefined` | 限制通知框显示的个数 |
 | placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |
-| top | `string ` | `0px` | 顶部弹出时，距离顶部的位置，单位像素 |
-| bottom | `string ` | `0px` | 底部弹出时，距离底部的位置，单位像素 |
 | scrollable | `boolean` | `true` | 通知是否可滚动 |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |
 

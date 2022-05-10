@@ -14,14 +14,6 @@ export default defineComponent({
       'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
       >,
       required: true
-    },
-    top: {
-      type: String,
-      required: true
-    },
-    bottom: {
-      type: String,
-      required: true
     }
   },
   setup () {
@@ -35,16 +27,7 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      $slots,
-      scrollable,
-      mergedClsPrefix,
-      mergedTheme,
-      placement,
-      top,
-      bottom
-    } = this
-    const cssStyle = { top: `${parseInt(bottom) > 0 ? 'auto' : top}`, bottom }
+    const { $slots, scrollable, mergedClsPrefix, mergedTheme, placement } = this
     return (
       <div
         class={[
@@ -52,7 +35,6 @@ export default defineComponent({
           scrollable && `${mergedClsPrefix}-notification-container--scrollable`,
           `${mergedClsPrefix}-notification-container--${placement}`
         ]}
-        style={cssStyle}
       >
         {scrollable ? (
           <NScrollbar

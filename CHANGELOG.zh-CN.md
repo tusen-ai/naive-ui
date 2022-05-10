@@ -1,12 +1,5 @@
 # CHANGELOG
 
-## Pending
-
-### Feats
-
-- `n-notification` 新增 `top` 属性
-- `n-notification` 新增 `bottom` 属性
-
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
