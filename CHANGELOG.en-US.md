@@ -20,6 +20,7 @@
 - Fix `DescriptionsProps` is misspelled as `DescriptionProps`.
 - Fix `n-icon` misses `IconProps`.
 - Fix `n-icon-wrapper` misses `IconWrapperProps`.
+- Fix `n-countdown`'s display value is 1s faster than actual left time when `precision=0`, closes [#2910](https://github.com/TuSimple/naive-ui/issues/2910).
 
 ### Feats
 

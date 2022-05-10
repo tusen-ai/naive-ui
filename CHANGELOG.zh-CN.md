@@ -20,6 +20,7 @@
 - 修复 `DescriptionsProps` 拼错成了 `DescriptionProps`
 - 修复 `n-icon` 缺少 `IconProps`
 - 修复 `n-icon-wrapper` 缺少 `IconWrapperProps`
+- 修复 `n-countdown` 在 `precision=0` 时显示比实际快一秒，关闭 [#2910](https://github.com/TuSimple/naive-ui/issues/2910)
 
 ### Feats
 
