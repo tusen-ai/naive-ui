@@ -17,6 +17,9 @@
 - 修复 `n-select` 在选情清空后依然可以通过 enter 键选中值
 - 修复 `n-data-table` 的 `selection` 和 `expand` 列不能设置宽度
 - 修复 `n-checkbox` 中有可以被选中的空格
+- 修复 `DescriptionsProps` 拼错成了 `DescriptionProps`
+- 修复 `n-icon` 缺少 `IconProps`
+- 修复 `n-icon-wrapper` 缺少 `IconWrapperProps`
 
 ### Feats
 

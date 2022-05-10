@@ -17,6 +17,9 @@
 - Fix `n-select` can select option by pressing enter after options are cleared.
 - Fix `n-data-table`'s `selection` and `expand` column can't set width.
 - Fix `n-checkbox` contains selectable whitespace.
+- Fix `DescriptionsProps` is misspelled as `DescriptionProps`.
+- Fix `n-icon` misses `IconProps`.
+- Fix `n-icon-wrapper` misses `IconWrapperProps`.
 
 ### Feats
 
