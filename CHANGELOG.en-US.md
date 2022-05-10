@@ -51,6 +51,7 @@
 - `n-upload` adds `directory` prop.
 - `n-upload` adds `directory-dnd` prop.
 - `UploadFileInfo` adds `fullPath` and `batchId` attrs.
+- `n-input` adds `clear-icon` slots.
 
 ## 2.28.2
 

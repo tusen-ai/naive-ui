@@ -4,6 +4,7 @@ import { ClearIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
+import { resolveSlot } from '../../../_utils'
 
 export default defineComponent({
   name: 'BaseClear',
@@ -40,7 +41,10 @@ export default defineComponent({
                   data-clear
                 >
                   {{
-                    default: () => <ClearIcon />
+                    default: () =>
+                      resolveSlot(this.$slots['clear-icon'], () => [
+                        <ClearIcon />
+                      ])
                   }}
                 </NBaseIcon>
               ) : (

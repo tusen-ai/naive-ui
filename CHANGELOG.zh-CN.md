@@ -52,6 +52,7 @@
 - `n-upload` 新增 `directory` 属性
 - `n-upload` 新增 `directory-dnd` 属性
 - `UploadFileInfo` 新增 `fullPath` 和 `batchId` 属性
+- `n-input` 新增 `clear-icon` slot
 
 ## 2.28.2
 
