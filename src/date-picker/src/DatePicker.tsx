@@ -121,8 +121,8 @@ const datePickerProps = {
   timePickerProps: [Object, Array] as PropType<
   TimePickerProps | [TimePickerProps, TimePickerProps]
   >,
-  onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onConfirm: [Function, Array] as PropType<MaybeArray<OnConfirm>>,
+  onClear: Function as PropType<() => void>,
+  onConfirm: Function as PropType<OnConfirm>,
   defaultCalendarStartTime: Number,
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
@@ -442,14 +442,14 @@ export default defineComponent({
     }
     function doClear (): void {
       const { onClear } = props
-      if (onClear) call(onClear)
+      onClear?.()
     }
     function doConfirm (
       value: Value | null,
       formattedValue: FormattedValue | null
     ): void {
       const { onConfirm } = props
-      if (onConfirm) call(onConfirm as OnConfirmImpl, value, formattedValue)
+      if (onConfirm) (onConfirm as OnConfirmImpl)(value, formattedValue)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -484,6 +484,11 @@ export default defineComponent({
     }
     function handleClear (): void {
       doUpdateShow(false)
+      inputInstRef.value?.deactivate()
+      doClear()
+    }
+    function handlePanelClear (): void {
+      // close will be called inside panel
       inputInstRef.value?.deactivate()
       doClear()
     }
@@ -885,6 +890,7 @@ export default defineComponent({
       handleClickOutside,
       handleKeyDown,
       handleClear,
+      handlePanelClear,
       handleTriggerClick,
       handleInputActivate,
       handleInputDeactivate,
@@ -927,7 +933,7 @@ export default defineComponent({
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
-      onClear: this.handleClear,
+      onClear: this.handlePanelClear,
       onKeydown: this.handleKeyDown,
       onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',
