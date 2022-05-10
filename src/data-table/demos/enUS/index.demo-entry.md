@@ -33,7 +33,7 @@ fixed-header-column
 summary
 ellipsis
 ellipsis-tooltip
-expand
+expand.vue
 render-header
 custom-style
 ajax-usage

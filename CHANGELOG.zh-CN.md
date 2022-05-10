@@ -14,7 +14,7 @@
 - 修复 `n-ellpisis` 在恰好触发省略的时候无法弹出 tooltip，关闭 [#1393](https://github.com/TuSimple/naive-ui/issues/1393)、[#2899](https://github.com/TuSimple/naive-ui/issues/2899)
 - 修复 `n-tree` 无法使用 `width: fit-content;` 的样式，关闭 [#2875](https://github.com/TuSimple/naive-ui/issues/2875)
 - 修复 `n-dropdown` 的 `on-update:show` 会被触发两次，关闭 [#2905](https://github.com/TuSimple/naive-ui/issues/2905)
-- 修复 `n-select` 在选情清空后依然可以通过 enter 键选中值
+- 修复 `n-select` 在选框清空后依然可以通过 enter 键选中值
 - 修复 `n-data-table` 的 `selection` 和 `expand` 列不能设置宽度
 - 修复 `n-checkbox` 中有可以被选中的空格
 - 修复 `DescriptionsProps` 拼错成了 `DescriptionProps`
