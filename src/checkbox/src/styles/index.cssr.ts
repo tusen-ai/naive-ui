@@ -2,6 +2,7 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
+// --n-label-line-height
 // --n-bezier
 // --n-size
 // --n-border
@@ -12,8 +13,8 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 // --n-box-shadow-focus
 // --n-color
 // --n-color-checked
-// --n-color-table-header
-// --n-color-table-header-modal
+// --n-color-table
+// --n-color-table-modal
 // --n-color-disabled
 // --n-color-disabled-checked
 // --n-text-color
@@ -26,15 +27,15 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 // --n-label-padding
 export default c([
   cB('checkbox', `
-    line-height: 1;
+    line-height: var(--n-label-line-height);
     font-size: var(--n-font-size);
     outline: none;
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    --n-merged-color-table-header: var(--n-color-table-header);
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    word-break: break-word;
+    --n-merged-color-table: var(--n-color-table);
   `, [
     c('&:hover', [
       cB('checkbox-box', [
@@ -45,21 +46,21 @@ export default c([
     ]),
     c('&:focus:not(:active)', [
       cB('checkbox-box', [
-        cE('border', {
-          border: 'var(--n-border-focus)',
-          boxShadow: 'var(--n-box-shadow-focus)'
-        })
+        cE('border', `
+          border: var(--n-border-focus);
+          box-shadow: var(--n-box-shadow-focus);
+        `)
       ])
     ]),
-    cM('table-header', [
-      cB('checkbox-box', {
-        backgroundColor: 'var(--n-merged-color-table-header)'
-      })
+    cM('inside-table', [
+      cB('checkbox-box', `
+        background-color: var(--n-merged-color-table);
+      `)
     ]),
     cM('checked', [
-      cB('checkbox-box', {
-        backgroundColor: 'var(--n-color-checked)'
-      }, [
+      cB('checkbox-box', `
+        background-color: var(--n-color-checked);
+      `, [
         cB('checkbox-icon', [
           // if not set width to 100%, safari & old chrome won't display the icon
           c('.check-icon', `
@@ -86,10 +87,10 @@ export default c([
     cM('checked, indeterminate', [
       c('&:focus:not(:active)', [
         cB('checkbox-box', [
-          cE('border', {
-            border: 'var(--n-border-checked)',
-            boxShadow: 'var(--n-box-shadow-focus)'
-          })
+          cE('border', `
+            border: var(--n-border-checked);
+            box-shadow: var(--n-box-shadow-focus);
+          `)
         ])
       ]),
       cB('checkbox-box', `
@@ -135,16 +136,24 @@ export default c([
         color: 'var(--n-text-color-disabled)'
       })
     ]),
+    cB('checkbox-box-wrapper', `
+      position: relative;
+      width: var(--n-size);
+      flex-shrink: 0;
+      flex-grow: 0;
+    `),
     cB('checkbox-box', `
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
       height: var(--n-size);
       width: var(--n-size);
       display: inline-block;
       box-sizing: border-box;
       border-radius: var(--n-border-radius);
       background-color: var(--n-color);
-      position: relative;
-      transition:
-        background-color 0.3s var(--n-bezier);
+      transition: background-color 0.3s var(--n-bezier);
     `, [
       cE('border', `
         transition:
@@ -200,13 +209,13 @@ export default c([
   // modal table header checkbox
   insideModal(
     cB('checkbox', `
-      --n-merged-color-table-header: var(--n-color-table-header-modal);
+      --n-merged-color-table: var(--n-color-table-modal);
     `)
   ),
   // popover table header checkbox
   insidePopover(
     cB('checkbox', `
-      --n-merged-color-table-header: var(--n-color-table-header-popover);
+      --n-merged-color-table: var(--n-color-table-popover);
     `)
   )
 ])

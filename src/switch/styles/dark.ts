@@ -12,11 +12,13 @@ const switchDark: SwitchTheme = {
       opacityDisabled,
       borderRadius,
       primaryColor,
-      textColor2
+      textColor2,
+      baseColor
     } = vars
     const railOverlayColor = 'rgba(255, 255, 255, .20)'
     return {
       ...commonVars,
+      iconColor: baseColor,
       textColor: textColor2,
       loadingColor: primaryColorSuppl,
       opacityDisabled,

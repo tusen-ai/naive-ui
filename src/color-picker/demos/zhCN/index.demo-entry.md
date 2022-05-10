@@ -5,14 +5,15 @@
 ## 演示
 
 ```demo
-basic
-alpha
-size
-disabled
-modes
-form
-swatches
-native
+basic.vue
+alpha.vue
+size.vue
+disabled.vue
+modes.vue
+form.vue
+swatches.vue
+native.vue
+close-debug.vue
 ```
 
 ## API
@@ -24,6 +25,7 @@ native
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |  |
 | default-value | `string \| null` | 和第一个 mode 对应的黑色值 | 默认的颜色值 |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | render-label | `(color: string \| null) => VNodeChild` | `undefined` | 触发器的内容 | 2.24.0 |
 | show | `boolean` | `undefined` | 是否展示面板 |  |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |  |
@@ -31,7 +33,7 @@ native
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 颜色选择器的尺寸 |  |
 | disabled | `boolean` | `false` | 是否禁用 | 2.24.5 |
 | swatches | `string[]` | `undefined` | 色板的值 |  |
-| to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |  |
+| to | `string \| HTMLElement \| false` | `'body'` | 面板的卸载位置，`false` 会待在原地 |  |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |  |

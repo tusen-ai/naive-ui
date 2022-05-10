@@ -25,7 +25,7 @@ import {
   ZoomInIcon,
   ZoomOutIcon
 } from '../../_internal/icons'
-import { useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
@@ -54,7 +54,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'Image',
-      'Image',
+      '-image',
       style,
       imageLight,
       props,
@@ -338,6 +338,31 @@ export default defineComponent({
       }
     }
 
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          toolbarIconColor,
+          toolbarBorderRadius,
+          toolbarBoxShadow,
+          toolbarColor
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-toolbar-icon-color': toolbarIconColor,
+        '--n-toolbar-color': toolbarColor,
+        '--n-toolbar-border-radius': toolbarBorderRadius,
+        '--n-toolbar-box-shadow': toolbarBoxShadow
+      }
+    })
+
+    const { inlineThemeDisabled } = useConfig()
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('image-preview', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       previewRef,
       previewWrapperRef,
@@ -366,24 +391,9 @@ export default defineComponent({
       handleSwitchPrev,
       handleSwitchNext,
       withTooltip,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            toolbarIconColor,
-            toolbarBorderRadius,
-            toolbarBoxShadow,
-            toolbarColor
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-toolbar-icon-color': toolbarIconColor,
-          '--n-toolbar-color': toolbarColor,
-          '--n-toolbar-border-radius': toolbarBorderRadius,
-          '--n-toolbar-box-shadow': toolbarBoxShadow
-        }
-      }),
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       ...exposedMethods
     }
   },
@@ -394,156 +404,154 @@ export default defineComponent({
         {this.$slots.default?.()}
         <LazyTeleport show={this.show}>
           {{
-            default: () =>
-              this.show || this.displayed
-                ? withDirectives(
-                    <div
-                      class={`${clsPrefix}-image-preview-container`}
-                      style={this.cssVars as CSSProperties}
-                      onWheel={this.handleWheel}
-                    >
-                      <Transition
-                        name="fade-in-transition"
-                        appear={this.appear}
-                      >
-                        {{
-                          default: () =>
-                            this.show ? (
-                              <div
-                                class={`${clsPrefix}-image-preview-overlay`}
-                                onClick={this.toggleShow}
-                              />
-                            ) : null
-                        }}
-                      </Transition>
-                      {this.showToolbar ? (
-                        <Transition
-                          name="fade-in-transition"
-                          appear={this.appear}
-                        >
-                          {{
-                            default: () => {
-                              if (!this.show) return null
-                              const { withTooltip } = this
-                              return (
-                                <div
-                                  class={`${clsPrefix}-image-preview-toolbar`}
+            default: () => {
+              if (!(this.show || this.displayed)) {
+                return null
+              }
+              this.onRender?.()
+              return withDirectives(
+                <div
+                  class={[
+                    `${clsPrefix}-image-preview-container`,
+                    this.themeClass
+                  ]}
+                  style={this.cssVars as CSSProperties}
+                  onWheel={this.handleWheel}
+                >
+                  <Transition name="fade-in-transition" appear={this.appear}>
+                    {{
+                      default: () =>
+                        this.show ? (
+                          <div
+                            class={`${clsPrefix}-image-preview-overlay`}
+                            onClick={this.toggleShow}
+                          />
+                        ) : null
+                    }}
+                  </Transition>
+                  {this.showToolbar ? (
+                    <Transition name="fade-in-transition" appear={this.appear}>
+                      {{
+                        default: () => {
+                          if (!this.show) return null
+                          const { withTooltip } = this
+                          return (
+                            <div class={`${clsPrefix}-image-preview-toolbar`}>
+                              {this.onPrev ? (
+                                <>
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.handleSwitchPrev}
+                                    >
+                                      {{ default: () => prevIcon }}
+                                    </NBaseIcon>,
+                                    'tipPrevious'
+                                  )}
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.handleSwitchNext}
+                                    >
+                                      {{ default: () => nextIcon }}
+                                    </NBaseIcon>,
+                                    'tipNext'
+                                  )}
+                                </>
+                              ) : null}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.rotateCounterclockwise}
                                 >
-                                  {this.onPrev ? (
-                                    <>
-                                      {withTooltip(
-                                        <NBaseIcon
-                                          clsPrefix={clsPrefix}
-                                          onClick={this.handleSwitchPrev}
-                                        >
-                                          {{ default: () => prevIcon }}
-                                        </NBaseIcon>,
-                                        'tipPrevious'
-                                      )}
-                                      {withTooltip(
-                                        <NBaseIcon
-                                          clsPrefix={clsPrefix}
-                                          onClick={this.handleSwitchNext}
-                                        >
-                                          {{ default: () => nextIcon }}
-                                        </NBaseIcon>,
-                                        'tipNext'
-                                      )}
-                                    </>
-                                  ) : null}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.rotateCounterclockwise}
-                                    >
-                                      {{
-                                        default: () => (
-                                          <RotateCounterclockwiseIcon />
-                                        )
-                                      }}
-                                    </NBaseIcon>,
-                                    'tipCounterclockwise'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.rotateClockwise}
-                                    >
-                                      {{
-                                        default: () => <RotateClockwiseIcon />
-                                      }}
-                                    </NBaseIcon>,
-                                    'tipClockwise'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.zoomOut}
-                                    >
-                                      {{ default: () => <ZoomOutIcon /> }}
-                                    </NBaseIcon>,
-                                    'tipZoomOut'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.zoomIn}
-                                    >
-                                      {{ default: () => <ZoomInIcon /> }}
-                                    </NBaseIcon>,
-                                    'tipZoomIn'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.toggleShow}
-                                    >
-                                      {{ default: () => closeIcon }}
-                                    </NBaseIcon>,
-                                    'tipClose'
-                                  )}
-                                </div>
-                              )
-                            }
-                          }}
-                        </Transition>
-                      ) : null}
-                      <Transition
-                        name="fade-in-scale-up-transition"
-                        onAfterLeave={this.handleAfterLeave}
-                        appear={this.appear}
-                        // BUG:
-                        // onEnter will be called twice, I don't know why
-                        // Maybe it is a bug of vue
-                        onEnter={this.syncTransformOrigin}
-                        onBeforeLeave={this.syncTransformOrigin}
-                      >
-                        {{
-                          default: () =>
-                            withDirectives(
-                              <div
-                                class={`${clsPrefix}-image-preview-wrapper`}
-                                ref="previewWrapperRef"
-                              >
-                                <img
-                                  draggable={false}
-                                  onMousedown={this.handlePreviewMousedown}
-                                  onDblclick={this.handlePreviewDblclick}
-                                  class={`${clsPrefix}-image-preview`}
-                                  key={this.previewSrc}
-                                  src={this.previewSrc}
-                                  ref="previewRef"
-                                  onDragstart={this.handleDragStart}
-                                />
-                              </div>,
-                              [[vShow, this.show]]
-                            )
-                        }}
-                      </Transition>
-                    </div>,
-                    [[zindexable, { enabled: this.show }]]
-                )
-                : null
+                                  {{
+                                    default: () => (
+                                      <RotateCounterclockwiseIcon />
+                                    )
+                                  }}
+                                </NBaseIcon>,
+                                'tipCounterclockwise'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.rotateClockwise}
+                                >
+                                  {{
+                                    default: () => <RotateClockwiseIcon />
+                                  }}
+                                </NBaseIcon>,
+                                'tipClockwise'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.zoomOut}
+                                >
+                                  {{ default: () => <ZoomOutIcon /> }}
+                                </NBaseIcon>,
+                                'tipZoomOut'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.zoomIn}
+                                >
+                                  {{ default: () => <ZoomInIcon /> }}
+                                </NBaseIcon>,
+                                'tipZoomIn'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.toggleShow}
+                                >
+                                  {{ default: () => closeIcon }}
+                                </NBaseIcon>,
+                                'tipClose'
+                              )}
+                            </div>
+                          )
+                        }
+                      }}
+                    </Transition>
+                  ) : null}
+                  <Transition
+                    name="fade-in-scale-up-transition"
+                    onAfterLeave={this.handleAfterLeave}
+                    appear={this.appear}
+                    // BUG:
+                    // onEnter will be called twice, I don't know why
+                    // Maybe it is a bug of vue
+                    onEnter={this.syncTransformOrigin}
+                    onBeforeLeave={this.syncTransformOrigin}
+                  >
+                    {{
+                      default: () =>
+                        withDirectives(
+                          <div
+                            class={`${clsPrefix}-image-preview-wrapper`}
+                            ref="previewWrapperRef"
+                          >
+                            <img
+                              draggable={false}
+                              onMousedown={this.handlePreviewMousedown}
+                              onDblclick={this.handlePreviewDblclick}
+                              class={`${clsPrefix}-image-preview`}
+                              key={this.previewSrc}
+                              src={this.previewSrc}
+                              ref="previewRef"
+                              onDragstart={this.handleDragStart}
+                            />
+                          </div>,
+                          [[vShow, this.show]]
+                        )
+                    }}
+                  </Transition>
+                </div>,
+                [[zindexable, { enabled: this.show }]]
+              )
+            }
           }}
         </LazyTeleport>
       </>

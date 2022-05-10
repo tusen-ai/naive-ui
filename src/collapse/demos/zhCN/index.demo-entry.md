@@ -5,15 +5,16 @@
 ## 演示
 
 ```demo
-basic
-arrow-placement
-accordion
-nested
-display-directive
-item-header-click
-customize-icon
-default-expanded
-header-extra
+basic.vue
+arrow-placement.vue
+accordion.vue
+nested.vue
+display-directive.vue
+item-header-click.vue
+customize-icon.vue
+default-expanded.vue
+header-extra.vue
+rtl-debug.vue
 ```
 
 ## API

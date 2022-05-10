@@ -7,7 +7,7 @@
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 const createColumns = () => {
   return [
@@ -56,7 +56,11 @@ export default defineComponent({
       summary: (pageData) => {
         return {
           name: {
-            value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+            value: h(
+              'span',
+              { style: { color: 'red' } },
+              pageData.reduce((prevValue, row) => prevValue + row.age, 0)
+            ),
             colSpan: 3
           }
         }

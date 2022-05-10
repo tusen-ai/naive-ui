@@ -85,75 +85,26 @@ export default cB('carousel', `
     ])
   ]),
   cE('arrow', `
-    position: absolute;
-    transition: transform .3s var(--n-bezier);
-    transform: scale(1);
+    transition: background-color .3s var(--n-bezier);
     cursor: pointer;
-    height: 36px;
-    width: 36px;
+    height: 28px;
+    width: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(255, 255, 255, .2);
     color: var(--n-arrow-color);
+    border-radius: 8px;
     user-select: none;
+    font-size: 18px;
   `, [
-    cM('right', `
-      transform: translateY(-50%);
-      top: 50%;
-      right: -2px;
-    `, [
-      c('&:hover', {
-        transform: 'translateY(-50%) scale(1.1)'
-      }),
-      c('&:active', {
-        transform: 'translateY(-50%) scale(1)'
-      })
-    ]),
-    cM('left', `
-      transform: translateY(-50%);
-      top: 50%;
-      left: -2px;
-    `, [
-      c('&:hover', {
-        transform: 'translateY(-50%) scale(1.1)'
-      }),
-      c('&:active', {
-        transform: 'translateY(-50%) scale(1)'
-      })
-    ]),
-    cM('top', `
-      transform: translateX(-50%) rotate(90deg);
-      top:  -2px;
-      left: 50%;
-    `, [
-      c('&:hover', {
-        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
-      }),
-      c('&:active', {
-        transform: 'translateX(-50%) scale(1) rotate(90deg)'
-      })
-    ]),
-    cM('bottom', `
-      transform: translateX(-50%) rotate(90deg);
-      bottom: -2px;
-      left: 50%
-    `, [
-      c('&:hover', {
-        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
-      }),
-      c('&:active', {
-        transform: 'translateX(-50%) scale(1) rotate(90deg)'
-      })
-    ]),
-    cM('disabled', `
-      opacity: 0.6;
-      cursor: auto;
-      pointer-events: none;
+    c('svg', `
+      height: 1em;
+      width: 1em;
     `),
-    c('svg', {
-      height: '100%',
-      width: '100%'
-    })
+    c('&:hover', `
+      background-color: rgba(255, 255, 255, .3);
+    `)
   ]),
   cM('vertical', [
     cE('slides', `
@@ -225,6 +176,57 @@ export default cB('carousel', `
       margin: 4px 0;
     `)
   ]),
+  cE('arrow-group', `
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+  `),
+  cM('vertical', [
+    cE('arrow', `
+      transform: rotate(90deg);
+    `)
+  ]),
+  cM('show-arrow', [
+    cM('bottom', [
+      cE('dots', `
+        transform: translateX(0);
+        bottom: 18px;
+        left: 18px;
+      `)
+    ]),
+    cM('top', [
+      cE('dots', `
+        transform: translateX(0);
+        top: 18px;
+        left: 18px;
+      `)
+    ]),
+    cM('left', [
+      cE('dots', `
+        transform: translateX(0);
+        top: 18px;
+        left: 18px;
+      `)
+    ]),
+    cM('right', [
+      cE('dots', `
+        transform: translateX(0);
+        top: 18px;
+        right: 18px;
+      `)
+    ])
+  ]),
+  cM('left', [
+    cE('arrow-group', `
+      bottom: 12px;
+      left: 12px;
+      flex-direction: column;
+    `, [
+      c('> *:first-child', `
+        margin-bottom: 12px;
+      `)
+    ])
+  ]),
   cM('right', [
     cE('dots', `
       transform: translateY(-50%);
@@ -251,7 +253,16 @@ export default cB('carousel', `
     ]),
     cE('dot', `
       margin: 4px 0;
-    `)
+    `),
+    cE('arrow-group', `
+      bottom: 12px;
+      right: 12px;
+      flex-direction: column;
+    `, [
+      c('> *:first-child', `
+        margin-bottom: 12px;
+      `)
+    ])
   ]),
   cM('top', [
     cE('dots', `
@@ -267,7 +278,15 @@ export default cB('carousel', `
     ]),
     cE('dot', `
       margin: 0 4px;
-    `)
+    `),
+    cE('arrow-group', `
+      top: 12px;
+      right: 12px;
+    `, [
+      c('> *:first-child', `
+        margin-right: 12px;
+      `)
+    ])
   ]),
   cM('bottom', [
     cE('dots', `
@@ -283,14 +302,20 @@ export default cB('carousel', `
     ]),
     cE('dot', `
       margin: 0 4px;
-    `)
+    `),
+    cE('arrow-group', `
+      bottom: 12px;
+      right: 12px;
+    `, [
+      c('> *:first-child', `
+        margin-right: 12px;
+      `)
+    ])
   ]),
   cM('fade', [
     cE('slide', `
       position: absolute;
-      left: 50%;
       opacity: 0;
-      transform: translateX(-50%);
       transition-property: opacity;
     `, [
       cM('current', `
@@ -300,7 +325,7 @@ export default cB('carousel', `
   ]),
   cM('card', [
     cE('slides', `
-      perspective: 1200px;
+      perspective: 1000px;
     `),
     cE('slide', `
       position: absolute;

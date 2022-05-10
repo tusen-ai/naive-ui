@@ -1,4 +1,4 @@
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
@@ -19,6 +19,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-box-shadow-focus
 // --n-loading-color
 // --n-text-color
+// --n-icon-color
 export default cB('switch', `
   height: var(--n-height);
   min-width: var(--n-width);
@@ -54,7 +55,9 @@ export default cB('switch', `
     color: var(--n-loading-color);
     transition: color .3s var(--n-bezier);
   `, [
-    fadeInScaleUpTransition({
+    iconSwitchTransition({
+      left: '50%',
+      top: '50%',
       originalTransform: 'translateX(-50%) translateY(-50%)'
     })
   ]),
@@ -85,51 +88,41 @@ export default cB('switch', `
     `)
   ]),
   cM('round', [
-    cE('rail', {
-      borderRadius: 'calc(var(--n-rail-height) / 2)'
-    }, [
-      cE('button', {
-        borderRadius: 'calc(var(--n-button-height) / 2)'
-      })
+    cE('rail', 'border-radius: calc(var(--n-rail-height) / 2);', [
+      cE('button', 'border-radius: calc(var(--n-button-height) / 2);')
     ])
   ]),
   cNotM('disabled', [
-    cM('pressed', [
-      cE('rail', [
-        cE('button', {
-          maxWidth: 'var(--n-button-width-pressed)'
-        })
-      ])
-    ]),
-    cE('rail', [
-      c('&:active', [
-        cE('button', {
-          maxWidth: 'var(--n-button-width-pressed)'
-        })
-      ])
-    ]),
-    cM('active', [
-      cM('pressed', [
+    cNotM('icon', [
+      cM('rubber-band', [
+        cM('pressed', [
+          cE('rail', [
+            cE('button', 'max-width: var(--n-button-width-pressed);')
+          ])
+        ]),
         cE('rail', [
-          cE('button', {
-            left: 'calc(100% - var(--n-offset) - var(--n-button-width-pressed))'
-          })
-        ])
-      ]),
-      cE('rail', [
-        c('&:active', [
-          cE('button', {
-            left: 'calc(100% - var(--n-offset) - var(--n-button-width-pressed))'
-          })
+          c('&:active', [
+            cE('button', 'max-width: var(--n-button-width-pressed);')
+          ])
+        ]),
+        cM('active', [
+          cM('pressed', [
+            cE('rail', [
+              cE('button', 'left: calc(100% - var(--n-offset) - var(--n-button-width-pressed));')
+            ])
+          ]),
+          cE('rail', [
+            c('&:active', [
+              cE('button', 'left: calc(100% - var(--n-offset) - var(--n-button-width-pressed));')
+            ])
+          ])
         ])
       ])
     ])
   ]),
   cM('active', [
     cE('rail', [
-      cE('button', {
-        left: 'calc(100% - (var(--n-rail-height) + var(--n-button-width)) / 2)'
-      })
+      cE('button', 'left: calc(100% - (var(--n-rail-height) + var(--n-button-width)) / 2)')
     ])
   ]),
   cE('rail', `
@@ -144,7 +137,24 @@ export default cB('switch', `
       box-shadow .3s var(--n-bezier);
     background-color: var(--n-rail-color);
   `, [
+    cE('button-icon', `
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
+      font-size: calc(var(--n-button-height) - 4px);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+    `, [
+      iconSwitchTransition()
+    ]),
     cE('button', `
+      align-items: center;    
       top: var(--n-offset);
       left: var(--n-offset);
       height: var(--n-button-width);
@@ -166,19 +176,17 @@ export default cB('switch', `
     `)
   ]),
   cM('active', [
-    cE('rail', {
-      backgroundColor: 'var(--n-rail-color-active)'
-    })
+    cE('rail', 'background-color: var(--n-rail-color-active);')
+  ]),
+  cM('loading', [
+    cE('rail', `
+      cursor: wait;
+    `)
   ]),
   cM('disabled', [
     cE('rail', `
       cursor: not-allowed;
       opacity: .5;
-    `)
-  ]),
-  cM('loading', [
-    cE('rail', `
-      pointer-events: none;
     `)
   ])
 ])

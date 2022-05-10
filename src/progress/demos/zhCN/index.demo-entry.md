@@ -5,15 +5,16 @@
 ## 演示
 
 ```demo
-circle
-line
+circle.vue
+line.vue
 circle-offset.vue
-multiple-circle
-custom-indicator
-color
-no-indicator
-height
-processing
+multiple-circle.vue
+dashboard.vue
+custom-indicator.vue
+color.vue
+no-indicator.vue
+height.vue
+processing.vue
 ```
 
 ## API
@@ -26,8 +27,10 @@ processing
 | circle-gap | `number` | `1` | 当类型是 `'multiple-circle'` 的时候圈之间的距离，假设 `viewbox` 的尺寸是 `100` |  |
 | color | `string \| string[]` | `undefined` | 进度条颜色 |  |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` 类型进度条填充的圆角半径，不填写则维持 `border-radius` |  |
+| gap-degree | `number` | `75` | 仪表盘进度条缺口角度，取值范围 0 ~ 360 | 2.25.2 |
+| gap-offset-degree | `number` | `0` | 仪表盘进度条缺口位置 | 2.25.2 |
 | height | `number` | `undefined` | `'line'` 类型进度条的高度，不填写则维持默认高度 |  |
-| indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | 设置指标位置 |  |
+| indicator-placement | `'inside' \| 'outside'` | `'outside'` | 设置指标位置 |  |
 | indicator-text-color | `string` | `undefined` | 指标文本颜色 |  |
 | offset-degree | `number` | `0` | 进度的偏移角度，只对 `circle` 类型生效 | 2.24.0 |
 | percentage | `number \| number[]` | `0` | 百分比的值 |  |
@@ -37,7 +40,7 @@ processing
 | show-indicator | `boolean` | `true` | 是否显示指标 |  |
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 进度条状态 |  |
 | stroke-width | `number` | `7` | 进度条宽度 |  |
-| type | `'line' \| 'circle' \| 'multiple-circle'` | `line` | 进度条类型 |  |
+| type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `line` | 进度条类型 | `'dashboard'` 2.25.2 |
 | unit | `string` | `%` | 进度条单位 |  |
 
 ### Progress Slots

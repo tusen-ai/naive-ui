@@ -5,19 +5,19 @@
 ## 演示
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-download
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-retry-debug
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+download.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+debug.vue
 ```
 
 ## API
@@ -35,6 +35,8 @@ retry-debug
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | NEXT_VERSION |
+| directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | NEXT_VERSION |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
@@ -55,7 +57,7 @@ retry-debug
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
-| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
+| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
@@ -64,16 +66,18 @@ retry-debug
 
 #### UploadFileInfo Type
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| id | `string \| number` | 文件 id，需要唯一 |
-| name | `string` | 文件名 |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |
-| percentage | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
-| file? | `File \| null` | 文件对应的浏览器 File 对象 |
-| thumbnailUrl? | `string \| null` | 缩略图 URL |
-| type? | `string \| null` | MIME 类型 |
-| url? | `string \| null` | 文件下载 URL |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| id | `string` | 文件 id，需要唯一 |  |
+| name | `string` | 文件名 |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
+| batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | NEXT_VERSION |
+| file? | `File \| null` | 文件对应的浏览器 File 对象 |  |
+| fullPath? | `string \| null` | 上传文件的相对路径 | NEXT_VERSION |
+| percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
+| thumbnailUrl? | `string \| null` | 缩略图 URL |  |
+| type? | `string \| null` | MIME 类型 |  |
+| url? | `string \| null` | 文件下载 URL |  |
 
 ### UploadTrigger Props
 

@@ -31,6 +31,7 @@ export default c([
     border-spacing: 0;
     overflow: hidden;
     background-color: var(--n-td-color);
+    border-color: var(--n-merged-border-color);
     transition:
       background-color .3s var(--n-bezier),
       border-color .3s var(--n-bezier),
@@ -47,16 +48,15 @@ export default c([
       padding: var(--n-th-padding);
       vertical-align: inherit;
       text-transform: none;
-      border: none;
+      border: 0px solid var(--n-merged-border-color);
       font-weight: var(--n-th-font-weight);
       color: var(--n-th-text-color);
       background-color: var(--n-th-color);
-      border-color: var(--n-merged-border-color);
       border-bottom: 1px solid var(--n-merged-border-color);
       border-right: 1px solid var(--n-merged-border-color);
     `, [
       c('&:last-child', `
-        border-right: none;
+        border-right: 0px solid var(--n-merged-border-color);
       `)
     ]),
     c('td', `
@@ -67,11 +67,12 @@ export default c([
       padding: var(--n-td-padding);
       color: var(--n-td-text-color);
       background-color: var(--n-td-color);
+      border: 0px solid var(--n-merged-border-color);
       border-right: 1px solid var(--n-merged-border-color);
       border-bottom: 1px solid var(--n-merged-border-color);
     `, [
       c('&:last-child', `
-        border-right: none;
+        border-right: 0px solid var(--n-merged-border-color);
       `)
     ]),
     cM('bordered', `
@@ -81,24 +82,24 @@ export default c([
       c('tr', [
         c('&:last-child', [
           c('td', `
-            border-bottom: none;
+            border-bottom: 0 solid var(--n-merged-border-color);
           `)
         ])
       ])
     ]),
     cM('single-line', [
       c('th', `
-        border-right: none;
+        border-right: 0px solid var(--n-merged-border-color);
       `),
       c('td', `
-        border-right: none;
+        border-right: 0px solid var(--n-merged-border-color);
       `)
     ]),
     cM('single-column', [
       c('tr', [
         c('&:not(:last-child)', [
           c('td', `
-            border-bottom: none;
+            border-bottom: 0px solid var(--n-merged-border-color);
           `)
         ])
       ])
@@ -110,7 +111,7 @@ export default c([
       c('tr', [
         c('&:last-child', [
           c('td', `
-            border-bottom: none;
+            border-bottom: 0px solid var(--n-merged-border-color);
           `)
         ])
       ])

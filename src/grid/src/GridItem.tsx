@@ -1,8 +1,8 @@
 import { h, defineComponent, inject, getCurrentInstance, PropType } from 'vue'
 import { pxfy } from 'seemly'
-import { gridInjectionKey } from './Grid'
 import { keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { gridInjectionKey } from './config'
 
 export const defaultSpan = 1
 

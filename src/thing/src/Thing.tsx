@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, CSSProperties, Fragment } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
@@ -24,10 +24,10 @@ export default defineComponent({
   name: 'Thing',
   props: thingProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Thing',
-      'Thing',
+      '-thing',
       style,
       thingLight,
       props,
@@ -46,12 +46,21 @@ export default defineComponent({
         '--n-title-text-color': titleTextColor
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('thing', undefined, cssVarsRef, props)
+      : undefined
+
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      themeClassHandle?.onRender?.()
       return (
         <div
-          class={`${mergedClsPrefix}-thing`}
-          style={cssVarsRef.value as CSSProperties}
+          class={[`${mergedClsPrefix}-thing`, themeClassHandle?.themeClass]}
+          style={
+            inlineThemeDisabled
+              ? undefined
+              : (cssVarsRef.value as CSSProperties)
+          }
         >
           {slots.avatar && props.contentIndented ? (
             <div class={`${mergedClsPrefix}-thing-avatar`}>

@@ -5,7 +5,7 @@ As simple as it looks.
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

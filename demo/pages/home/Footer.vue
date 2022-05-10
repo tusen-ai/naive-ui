@@ -68,7 +68,9 @@
           </template>
           {{ t('dingTalkGroupChat') }} 1
           {{ t('memberLimitReached') }} 33482509<br>
-          {{ t('dingTalkGroupChat') }} 2 35886835
+          {{ t('dingTalkGroupChat') }} 2
+          {{ t('memberLimitReached') }} 35886835<br>
+          {{ t('dingTalkGroupChat') }} 3 32377370
         </n-tooltip>
       </div>
       <div class="footer-links-col footer-links-col--last">

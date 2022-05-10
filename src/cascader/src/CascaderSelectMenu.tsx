@@ -3,12 +3,9 @@ import {
   Transition,
   ref,
   inject,
-  toRef,
   defineComponent,
   PropType,
   computed,
-  watch,
-  nextTick,
   withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
@@ -68,7 +65,8 @@ export default defineComponent({
       closeMenu,
       handleSelectMenuClickOutside,
       doUncheck: cascaderDoUncheck,
-      doCheck: cascaderDoCheck
+      doCheck: cascaderDoCheck,
+      clearPattern
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
@@ -111,16 +109,9 @@ export default defineComponent({
       SelectIgnoredOption
       >(filteredSelectOptionsRef.value, tmOptions)
     })
-    watch(toRef(props, 'value'), () => {
-      void nextTick(() => {
-        syncSelectMenuPosition()
-      })
-    })
-    watch(filteredSelectOptionsRef, () => {
-      void nextTick(() => {
-        syncSelectMenuPosition()
-      })
-    })
+    function handleResize (): void {
+      syncSelectMenuPosition()
+    }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       doCheck(tmNode)
     }
@@ -137,6 +128,7 @@ export default defineComponent({
         } else if (mergedValue === null) {
           cascaderDoCheck(tmNode.key)
         }
+        clearPattern()
       } else {
         cascaderDoCheck(tmNode.key)
         // currently the select menu is set to focusable
@@ -174,6 +166,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       menuInstRef,
       selectTreeMate: selectTreeMateRef,
+      handleResize,
       handleToggle,
       handleClickOutside,
       ...exposedRef
@@ -189,6 +182,7 @@ export default defineComponent({
               ? withDirectives(
                   <NInternalSelectMenu
                     ref="menuInstRef"
+                    onResize={this.handleResize}
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-cascader-menu`}
                     autoPending
@@ -201,7 +195,14 @@ export default defineComponent({
                     value={this.value}
                     onToggle={this.handleToggle}
                   />,
-                  [[clickoutside, this.handleClickOutside]]
+                  [
+                    [
+                      clickoutside,
+                      this.handleClickOutside,
+                      undefined as unknown as string,
+                      { capture: true }
+                    ]
+                  ]
               )
               : null
         }}

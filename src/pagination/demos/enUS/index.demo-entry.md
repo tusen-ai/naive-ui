@@ -7,15 +7,15 @@ Long data's friend.
 ## Demos
 
 ```demo
-basic
-slot
-quick-jumper
-size-picker
-disabled
-item-count
-prev
-prefix
-page-size-option
+basic.vue
+slot.vue
+quick-jumper.vue
+size-picker.vue
+disabled.vue
+item-count.vue
+prev.vue
+prefix.vue
+page-size-option.vue
 ```
 
 ## API
@@ -26,6 +26,7 @@ page-size-option
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | Current page in uncontrolled mode. |  |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
+| disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |
@@ -77,6 +78,7 @@ interface PaginationInfo {
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
+| goto | `()` | Fast jump text before quick jumper. | 2.27.0 |
 | label | The same as `PaginationRenderLabel`'s parameters | Item content. | 2.24.0 |
 | next | `(info: PaginationInfo)` | Next page. |  |
 | prev | `(info: PaginationInfo)` | Previous page. |  |

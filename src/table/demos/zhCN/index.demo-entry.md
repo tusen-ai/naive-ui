@@ -7,12 +7,13 @@
 ## 演示
 
 ```demo
-basic
-bordered
-size
-single-column
-single-line
-striped
+basic.vue
+bordered.vue
+size.vue
+single-column.vue
+single-line.vue
+striped.vue
+rtl-debug.vue
 ```
 
 ## Components

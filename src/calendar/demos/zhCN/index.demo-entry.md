@@ -7,7 +7,7 @@
 ## 演示
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

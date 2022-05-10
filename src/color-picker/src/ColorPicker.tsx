@@ -11,11 +11,9 @@ import {
   Transition,
   CSSProperties,
   provide,
-  ComputedRef,
   Ref,
   watch,
-  nextTick,
-  Slots
+  nextTick
 } from 'vue'
 import {
   hsv2rgb,
@@ -40,24 +38,19 @@ import {
   toHslString
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'
 import {
-  MergedTheme,
   ThemeProps,
   useFormItem,
   useConfig,
   useTheme,
-  useLocale
+  useLocale,
+  useThemeClass
 } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  createKey,
-  useAdjustedTo
-} from '../../_utils'
+import { call, createKey, useAdjustedTo } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
 import HueSlider from './HueSlider'
@@ -70,24 +63,26 @@ import type { ColorPickerMode, ActionType } from './utils'
 import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
+import { colorPickerInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
-  value: String,
+  value: String as PropType<string | null>,
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
     default: () => ['rgb', 'hex', 'hsl']
+  },
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
   },
   to: useAdjustedTo.propTo,
   showAlpha: {
@@ -122,12 +117,6 @@ export type ColorPickerProps = ExtractPublicPropTypes<
   typeof colorPickerPanelProps
 >
 
-export const colorPickerInjectionKey = createInjectionKey<{
-  themeRef: ComputedRef<MergedTheme<ColorPickerTheme>>
-  colorPickerSlots: Slots
-  renderLabelRef: Ref<RenderLabel | undefined>
-}>('n-color-picker')
-
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerPanelProps,
@@ -138,11 +127,12 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
-      'ColorPicker',
+      '-color-picker',
       style,
       colorPickerLight,
       props,
@@ -508,6 +498,16 @@ export default defineComponent({
         '--n-divider-color': dividerColor
       }
     })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'color-picker',
+        computed(() => {
+          return mergedSizeRef.value[0]
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
 
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
@@ -517,11 +517,18 @@ export default defineComponent({
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
-          class={`${mergedClsPrefix}-color-picker-panel`}
+          class={[
+            `${mergedClsPrefix}-color-picker-panel`,
+            themeClassHandle?.themeClass.value
+          ]}
           onDragstart={(e) => {
             e.preventDefault()
           }}
-          style={cssVarsRef.value as CSSProperties}
+          style={
+            inlineThemeDisabled
+              ? undefined
+              : (cssVarsRef.value as CSSProperties)
+          }
         >
           <div class={`${mergedClsPrefix}-color-picker-control`}>
             <Pallete
@@ -645,14 +652,17 @@ export default defineComponent({
         doUpdateShow(false)
       },
       renderPanel,
-      cssVars: cssVarsRef
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-color-picker`}
+        class={[this.themeClass, `${mergedClsPrefix}-color-picker`]}
         ref="selfRef"
         style={this.cssVars as CSSProperties}
       >
@@ -677,7 +687,7 @@ export default defineComponent({
                 }}
               </VTarget>,
               <VFollower
-                placement="bottom-start"
+                placement={this.placement}
                 show={this.mergedShow}
                 containerClass={this.namespace}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
@@ -693,7 +703,12 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [clickoutside, this.handleClickOutside]
+                              [
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined as any as string,
+                                { capture: true }
+                              ]
                             ])
                             : null
                       }}

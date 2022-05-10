@@ -1,7 +1,7 @@
 import { VNodeChild } from 'vue'
-import type { SelectBaseOption } from '../../../select/src/interface'
+import type { SelectOption } from '../../../select/src/interface'
 
 export type RenderTag = (props: {
-  option: SelectBaseOption
+  option: SelectOption
   handleClose: () => void
 }) => VNodeChild

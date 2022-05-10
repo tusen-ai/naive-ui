@@ -39,17 +39,15 @@ export default c([
       ])
     ]),
     cM('dot', [
-      cB('badge-sup', {
-        height: '8px',
-        width: '8px',
-        padding: 0,
-        minWidth: '8px',
-        left: '100%',
-        bottom: 'calc(100% - 4px)'
-      }, [
-        c('::before', {
-          borderRadius: '4px'
-        })
+      cB('badge-sup', `
+        height: 8px;
+        width: 8px;
+        padding: 0;
+        min-width: 8px;
+        left: 100%;
+        bottom: calc(100% - 4px);
+      `, [
+        c('::before', 'border-radius: 4px;')
       ])
     ]),
     cB('badge-sup', `
@@ -70,6 +68,8 @@ export default c([
       bottom: calc(100% - 9px);
       font-variant-numeric: tabular-nums;
       z-index: 1;
+      display: flex;
+      align-items: center;
     `,
     [
       fadeInScaleUpTransition({

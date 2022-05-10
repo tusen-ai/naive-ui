@@ -7,11 +7,11 @@
 ## Demos
 
 ```demo
-basic
-size
-vertical
-content
-custom-icon
+basic.vue
+size.vue
+vertical.vue
+content.vue
+custom-icon.vue
 ```
 
 ## API
@@ -43,7 +43,8 @@ custom-icon
 
 ### Step Slots
 
-| Name    | Parameters | Description   |
-| ------- | ---------- | ------------- |
-| default | `()`       | Step content. |
-| title   | `()`       | Step title.   |
+| Name    | Parameters | Description   | Version |
+| ------- | ---------- | ------------- | ------- |
+| default | `()`       | Step content. |         |
+| icon    | `()`       | Step icon.    | 2.26.1  |
+| title   | `()`       | Step title.   |         |

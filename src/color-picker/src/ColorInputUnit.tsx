@@ -1,6 +1,6 @@
 import { defineComponent, h, inject, PropType, ref, watchEffect } from 'vue'
 import { NInput } from '../../input'
-import { colorPickerInjectionKey } from './ColorPicker'
+import { colorPickerInjectionKey } from './context'
 
 // 0 - 255
 function normalizeRgbUnit (value: string): number | false {
@@ -98,7 +98,7 @@ export default defineComponent({
           break
         case 'H':
           unit = normalizeHueUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -108,7 +108,7 @@ export default defineComponent({
         case 'L':
         case 'V':
           unit = normalizeSlvUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -116,7 +116,7 @@ export default defineComponent({
           break
         case 'A':
           unit = normalizeAlphaUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -126,7 +126,7 @@ export default defineComponent({
         case 'G':
         case 'B':
           unit = normalizeRgbUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)

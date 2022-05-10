@@ -1,5 +1,5 @@
 import { computed, defineComponent, h, PropType } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -28,50 +28,63 @@ export default defineComponent({
   name: 'InputGroupLabel',
   props: inputGroupLabelProps,
   setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'Input',
-      'InputGroupLabel',
+      '-input-group-label',
       style,
       inputLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          groupLabelColor,
+          borderRadius,
+          groupLabelTextColor,
+          lineHeight,
+          groupLabelBorder,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('height', size)]: height
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-group-label-color': groupLabelColor,
+        '--n-group-label-border': groupLabelBorder,
+        '--n-border-radius': borderRadius,
+        '--n-group-label-text-color': groupLabelTextColor,
+        '--n-font-size': fontSize,
+        '--n-line-height': lineHeight,
+        '--n-height': height
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'input-group-label',
+        computed(() => props.size[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            groupLabelColor,
-            borderRadius,
-            groupLabelTextColor,
-            lineHeight,
-            groupLabelBorder,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('height', size)]: height
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-group-label-color': groupLabelColor,
-          '--n-group-label-border': groupLabelBorder,
-          '--n-border-radius': borderRadius,
-          '--n-group-label-text-color': groupLabelTextColor,
-          '--n-font-size': fontSize,
-          '--n-line-height': lineHeight,
-          '--n-height': height
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedClsPrefix } = this
+    this.onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-input-group-label`}
+        class={[`${mergedClsPrefix}-input-group-label`, this.themeClass]}
         style={this.cssVars as any}
       >
         {this.$slots.default?.()}

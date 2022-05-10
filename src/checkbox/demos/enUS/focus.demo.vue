@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-space item-style="display: flex; align-item: center;">
+  <n-space item-style="display: flex; align-items: center;">
     <n-button @click="handleClick">
       Focus then blur in 1 second
     </n-button>

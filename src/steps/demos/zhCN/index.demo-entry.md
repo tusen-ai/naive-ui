@@ -7,11 +7,12 @@
 ## 演示
 
 ```demo
-basic
-size
-vertical
-content
-custom-icon
+basic.vue
+size.vue
+vertical.vue
+content.vue
+custom-icon.vue
+vertical-debug.vue
 ```
 
 ## API
@@ -43,7 +44,8 @@ custom-icon
 
 ### Step Slots
 
-| 名称    | 参数 | 说明         |
-| ------- | ---- | ------------ |
-| default | `()` | 步骤节点内容 |
-| title   | `()` | 步骤节点标题 |
+| 名称    | 参数 | 说明         | 版本   |
+| ------- | ---- | ------------ | ------ |
+| default | `()` | 步骤节点内容 |        |
+| icon    | `()` | 步骤节点图标 | 2.26.1 |
+| title   | `()` | 步骤节点标题 |        |

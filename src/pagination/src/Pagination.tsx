@@ -22,14 +22,14 @@ import {
   ForwardIcon,
   MoreIcon
 } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { paginationLight } from '../styles'
 import type { PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, warn, warnOnce } from '../../_utils'
+import { call, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
@@ -41,6 +41,7 @@ import {
   PaginationRenderLabel,
   PaginationSizeOption
 } from './interface'
+import useRtl from '../../_mixins/use-rtl'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -126,10 +127,15 @@ export default defineComponent({
         }
       })
     }
-    const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
+    const {
+      mergedComponentPropsRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
-      'Pagination',
+      '-pagination',
       style,
       paginationLight,
       props,
@@ -176,16 +182,10 @@ export default defineComponent({
       })
     })
     const inputSizeRef = computed<InputSize>(() => {
-      return (
-        NConfigProvider?.mergedComponentPropsRef.value?.Pagination?.inputSize ||
-        'small'
-      )
+      return mergedComponentPropsRef?.value?.Pagination?.inputSize || 'small'
     })
     const selectSizeRef = computed<SelectSize>(() => {
-      return (
-        NConfigProvider?.mergedComponentPropsRef.value?.Pagination
-          ?.selectSize || 'small'
-      )
+      return mergedComponentPropsRef?.value?.Pagination?.selectSize || 'small'
     })
     const startIndexRef = computed(() => {
       return (mergedPageRef.value - 1) * mergedPageSizeRef.value
@@ -203,6 +203,7 @@ export default defineComponent({
       if (itemCount !== undefined) return itemCount
       return (props.pageCount || 1) * mergedPageSizeRef.value
     })
+    const rtlEnabledRef = useRtl('Pagination', mergedRtlRef, mergedClsPrefixRef)
 
     const disableTransitionOneTick = (): void => {
       void nextTick(() => {
@@ -330,7 +331,105 @@ export default defineComponent({
       void mergedPageSizeRef.value
       disableTransitionOneTick()
     })
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          itemSize,
+          itemPadding,
+          itemMargin,
+          itemMarginRtl,
+          inputWidth,
+          selectWidth,
+          inputMargin,
+          inputMarginRtl,
+          selectMargin,
+          buttonBorder,
+          buttonBorderHover,
+          buttonBorderPressed,
+          buttonIconColor,
+          buttonIconColorHover,
+          buttonIconColorPressed,
+          buttonIconSize,
+          itemTextColor,
+          itemTextColorHover,
+          itemTextColorPressed,
+          itemTextColorActive,
+          itemTextColorDisabled,
+          itemColor,
+          itemColorHover,
+          itemColorPressed,
+          itemColorActive,
+          itemColorActiveHover,
+          itemColorDisabled,
+          itemBorder,
+          itemBorderHover,
+          itemBorderPressed,
+          itemBorderActive,
+          itemBorderDisabled,
+          itemBorderRadius,
+          itemFontSize,
+          jumperFontSize,
+          jumperTextColor,
+          jumperTextColorDisabled,
+          prefixMargin,
+          suffixMargin,
+          buttonColor,
+          buttonColorHover,
+          buttonColorPressed
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-prefix-margin': prefixMargin,
+        '--n-suffix-margin': suffixMargin,
+        '--n-item-font-size': itemFontSize,
+        '--n-select-width': selectWidth,
+        '--n-select-margin': selectMargin,
+        '--n-input-width': inputWidth,
+        '--n-input-margin': inputMargin,
+        '--n-input-margin-rtl': inputMarginRtl,
+        '--n-item-size': itemSize,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-disabled': itemTextColorDisabled,
+        '--n-item-text-color-hover': itemTextColorHover,
+        '--n-item-text-color-active': itemTextColorActive,
+        '--n-item-text-color-pressed': itemTextColorPressed,
+        '--n-item-color': itemColor,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-color-disabled': itemColorDisabled,
+        '--n-item-color-active': itemColorActive,
+        '--n-item-color-active-hover': itemColorActiveHover,
+        '--n-item-color-pressed': itemColorPressed,
+        '--n-item-border': itemBorder,
+        '--n-item-border-hover': itemBorderHover,
+        '--n-item-border-disabled': itemBorderDisabled,
+        '--n-item-border-active': itemBorderActive,
+        '--n-item-border-pressed': itemBorderPressed,
+        '--n-item-padding': itemPadding,
+        '--n-item-border-radius': itemBorderRadius,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-jumper-font-size': jumperFontSize,
+        '--n-jumper-text-color': jumperTextColor,
+        '--n-jumper-text-color-disabled': jumperTextColorDisabled,
+        '--n-item-margin': itemMargin,
+        '--n-item-margin-rtl': itemMarginRtl,
+        '--n-button-icon-size': buttonIconSize,
+        '--n-button-icon-color': buttonIconColor,
+        '--n-button-icon-color-hover': buttonIconColorHover,
+        '--n-button-icon-color-pressed': buttonIconColorPressed,
+        '--n-button-color-hover': buttonColorHover,
+        '--n-button-color': buttonColor,
+        '--n-button-color-pressed': buttonColorPressed,
+        '--n-button-border': buttonBorder,
+        '--n-button-border-hover': buttonBorderHover,
+        '--n-button-border-pressed': buttonBorderPressed
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('pagination', undefined, cssVarsRef, props)
+      : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
@@ -359,96 +458,9 @@ export default defineComponent({
       handleQuickJumperKeyUp,
       handlePageItemMouseEnter,
       handlePageItemMouseLeave,
-      cssVars: computed(() => {
-        const {
-          self: {
-            itemSize,
-            itemPadding,
-            itemMargin,
-            inputWidth,
-            selectWidth,
-            inputMargin,
-            selectMargin,
-            buttonBorder,
-            buttonBorderHover,
-            buttonBorderPressed,
-            buttonIconColor,
-            buttonIconColorHover,
-            buttonIconColorPressed,
-            buttonIconSize,
-            itemTextColor,
-            itemTextColorHover,
-            itemTextColorPressed,
-            itemTextColorActive,
-            itemTextColorDisabled,
-            itemColor,
-            itemColorHover,
-            itemColorPressed,
-            itemColorActive,
-            itemColorActiveHover,
-            itemColorDisabled,
-            itemBorder,
-            itemBorderHover,
-            itemBorderPressed,
-            itemBorderActive,
-            itemBorderDisabled,
-            itemBorderRadius,
-            itemFontSize,
-            jumperFontSize,
-            jumperTextColor,
-            jumperTextColorDisabled,
-            prefixMargin,
-            suffixMargin,
-            buttonColor,
-            buttonColorHover,
-            buttonColorPressed
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-prefix-margin': prefixMargin,
-          '--n-suffix-margin': suffixMargin,
-          '--n-item-font-size': itemFontSize,
-          '--n-select-width': selectWidth,
-          '--n-select-margin': selectMargin,
-          '--n-input-width': inputWidth,
-          '--n-input-margin': inputMargin,
-          '--n-item-size': itemSize,
-          '--n-item-text-color': itemTextColor,
-          '--n-item-text-color-disabled': itemTextColorDisabled,
-          '--n-item-text-color-hover': itemTextColorHover,
-          '--n-item-text-color-active': itemTextColorActive,
-          '--n-item-text-color-pressed': itemTextColorPressed,
-          '--n-item-color': itemColor,
-          '--n-item-color-hover': itemColorHover,
-          '--n-item-color-disabled': itemColorDisabled,
-          '--n-item-color-active': itemColorActive,
-          '--n-item-color-active-hover': itemColorActiveHover,
-          '--n-item-color-pressed': itemColorPressed,
-          '--n-item-border': itemBorder,
-          '--n-item-border-hover': itemBorderHover,
-          '--n-item-border-disabled': itemBorderDisabled,
-          '--n-item-border-active': itemBorderActive,
-          '--n-item-border-pressed': itemBorderPressed,
-          '--n-item-padding': itemPadding,
-          '--n-item-border-radius': itemBorderRadius,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-jumper-font-size': jumperFontSize,
-          '--n-jumper-text-color': jumperTextColor,
-          '--n-jumper-text-color-disabled': jumperTextColorDisabled,
-          '--n-item-margin': itemMargin,
-          '--n-button-icon-size': buttonIconSize,
-          '--n-button-icon-color': buttonIconColor,
-          '--n-button-icon-color-hover': buttonIconColorHover,
-          '--n-button-icon-color-pressed': buttonIconColorPressed,
-          '--n-button-color-hover': buttonColorHover,
-          '--n-button-color': buttonColor,
-          '--n-button-color-pressed': buttonColorPressed,
-          '--n-button-border': buttonBorder,
-          '--n-button-border-hover': buttonBorderHover,
-          '--n-button-border-pressed': buttonBorderPressed
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -484,8 +496,10 @@ export default defineComponent({
       handlePageItemMouseEnter,
       handlePageItemMouseLeave,
       handleForwardClick,
-      handleQuickJumperKeyUp
+      handleQuickJumperKeyUp,
+      onRender
     } = this
+    onRender?.()
     const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
     const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
     const renderPrev = prev || $slots.prev
@@ -496,6 +510,8 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${mergedClsPrefix}-pagination`,
+          this.themeClass,
+          this.rtlEnabled && `${mergedClsPrefix}-pagination--rtl`,
           disabled && `${mergedClsPrefix}-pagination--disabled`
         ]}
         style={cssVars as CSSProperties}
@@ -532,7 +548,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <BackwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <ForwardIcon /> : <BackwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
@@ -556,7 +575,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastForwardNode = showFastForward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastForwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastBackwardIcon />
+                      ) : (
+                        <FastForwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -577,7 +603,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastBackwardNode = showFastBackward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastBackwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastForwardIcon />
+                      ) : (
+                        <FastBackwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -636,7 +669,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <ForwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <BackwardIcon /> : <ForwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
@@ -654,7 +690,7 @@ export default defineComponent({
         ) : null}
         {showQuickJumper ? (
           <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-            {locale.goto}
+            {resolveSlot(this.$slots.goto, () => [locale.goto])}
             <NInput
               ref="jumperRef"
               value={jumperValue}

@@ -44,6 +44,9 @@ const frFR: NLocale = {
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
     endDatetimePlaceholder: 'Date et heure de fin',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 1,
     today: "Aujourd'hui"
@@ -90,7 +93,7 @@ const frFR: NLocale = {
     create: 'Créer'
   },
   ThemeEditor: {
-    title: 'Editeur de thème',
+    title: 'Éditeur de thème',
     clearAllVars: 'Effacer toutes les variables',
     clearSearch: 'Effacer la recherche',
     filterCompName: 'Filtrer par nom de composant',
@@ -99,15 +102,14 @@ const frFR: NLocale = {
     export: 'Exporter',
     restore: 'Réinitialiser'
   },
-  // TODO: translation
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
-    tipZoomOut: 'Zoom out',
-    tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)'
+    tipPrevious: 'Image précédente (←)',
+    tipNext: 'Image suivante (→)',
+    tipCounterclockwise: 'Sens antihoraire',
+    tipClockwise: 'Sens horaire',
+    tipZoomOut: 'Dézoomer',
+    tipZoomIn: 'Zoomer',
+    tipClose: 'Fermer (Échap.)'
   }
 }
 

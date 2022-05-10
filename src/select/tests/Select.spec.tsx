@@ -1,8 +1,7 @@
 import { h, nextTick, VNode } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NSelect, SelectProps } from '../index'
+import { NSelect, SelectProps, SelectOption, SelectGroupOption } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
-import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
 import { SelectBaseOption } from '../src/interface'
 
@@ -275,11 +274,11 @@ describe('n-select', () => {
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NSelect)
 
-    expect(wrapper.find('.n-base-loading__icon').exists()).not.toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).not.toBe(true)
     await wrapper.setProps({
       loading: true
     })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
   })
 
   it('should work with `multiple` prop', async () => {

@@ -3,8 +3,8 @@ import type { NLocale } from './enUS'
 const jaJP: NLocale = {
   name: 'ja-JP',
   global: {
-    undo: 'undo',
-    redo: 'redo',
+    undo: '元に戻す',
+    redo: 'やり直す',
     confirm: 'OK'
   },
   Popconfirm: {
@@ -38,13 +38,15 @@ const jaJP: NLocale = {
     datePlaceholder: '日付を選択',
     datetimePlaceholder: '選択',
     monthPlaceholder: '月を選択',
-    // FIXME: translation needed
-    yearPlaceholder: 'Select Year',
-    quarterPlaceholder: 'Select Quarter',
+    yearPlaceholder: '年を選択',
+    quarterPlaceholder: '四半期を選択',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',
     endDatetimePlaceholder: '終了時間',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今日'
@@ -72,7 +74,7 @@ const jaJP: NLocale = {
     now: '現在'
   },
   Pagination: {
-    goto: '',
+    goto: 'ページジャンプ',
     selectionSuffix: 'ページ'
   },
   DynamicTags: {
@@ -100,15 +102,14 @@ const jaJP: NLocale = {
     export: 'エクスポート',
     restore: 'デフォルト'
   },
-  // TODO: translation
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
-    tipZoomOut: 'Zoom out',
-    tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)'
+    tipPrevious: '前の画像 (←)',
+    tipNext: '次の画像 (→)',
+    tipCounterclockwise: '左に回転',
+    tipClockwise: '右に回転',
+    tipZoomOut: '縮小',
+    tipZoomIn: '拡大',
+    tipClose: '閉じる (Esc)'
   }
 }
 

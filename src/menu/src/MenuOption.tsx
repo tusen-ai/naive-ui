@@ -18,7 +18,7 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
-export default defineComponent({
+export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
   setup (props) {
@@ -77,14 +77,7 @@ export default defineComponent({
       menuProps: { renderLabel }
     } = this
     return (
-      <div
-        role="menuitem"
-        class={[
-          `${mergedClsPrefix}-menu-item`,
-          this.selected && `${mergedClsPrefix}-menu-item--selected`,
-          this.mergedDisabled && `${mergedClsPrefix}-menu-item--disabled`
-        ]}
-      >
+      <div role="menuitem" class={[`${mergedClsPrefix}-menu-item`]}>
         <NTooltip
           theme={mergedTheme.peers.Tooltip}
           themeOverrides={mergedTheme.peerOverrides.Tooltip}
@@ -104,6 +97,7 @@ export default defineComponent({
                 iconMarginRight={this.iconMarginRight}
                 maxIconSize={this.maxIconSize}
                 activeIconSize={this.activeIconSize}
+                selected={this.selected}
                 title={this.title}
                 extra={this.extra}
                 disabled={this.mergedDisabled}

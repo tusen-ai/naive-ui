@@ -12,7 +12,7 @@ import {
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
-import { useTheme, useConfig } from '../../_mixins'
+import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, call, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -42,6 +42,10 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  showMask: {
+    type: Boolean as PropType<boolean | 'transparent'>,
+    default: true
+  },
   to: [String, Object] as PropType<string | HTMLElement>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -68,12 +72,18 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   /** @deprecated */
   drawerStyle: [String, Object] as PropType<string | CSSProperties>,
   drawerClass: String,
@@ -120,11 +130,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
-      'Drawer',
+      '-drawer',
       style,
       drawerLight,
       props,
@@ -177,6 +188,53 @@ export default defineComponent({
       mergedClsPrefixRef,
       doUpdateShow
     })
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut, cubicBezierEaseIn, cubicBezierEaseOut },
+        self: {
+          color,
+          textColor,
+          boxShadow,
+          lineHeight,
+          headerPadding,
+          footerPadding,
+          bodyPadding,
+          titleFontSize,
+          titleTextColor,
+          titleFontWeight,
+          headerBorderBottom,
+          footerBorderTop,
+          closeColor,
+          closeColorHover,
+          closeColorPressed,
+          closeSize
+        }
+      } = themeRef.value
+      return {
+        '--n-line-height': lineHeight,
+        '--n-color': color,
+        '--n-text-color': textColor,
+        '--n-box-shadow': boxShadow,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-bezier-out': cubicBezierEaseOut,
+        '--n-bezier-in': cubicBezierEaseIn,
+        '--n-header-padding': headerPadding,
+        '--n-body-padding': bodyPadding,
+        '--n-footer-padding': footerPadding,
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-header-border-bottom': headerBorderBottom,
+        '--n-footer-border-top': footerBorderTop,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-close-size': closeSize
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('drawer', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -184,54 +242,9 @@ export default defineComponent({
       handleMaskClick,
       handleEsc,
       mergedTheme: themeRef,
-      cssVars: computed(() => {
-        const {
-          common: {
-            cubicBezierEaseInOut,
-            cubicBezierEaseIn,
-            cubicBezierEaseOut
-          },
-          self: {
-            color,
-            textColor,
-            boxShadow,
-            lineHeight,
-            headerPadding,
-            footerPadding,
-            bodyPadding,
-            titleFontSize,
-            titleTextColor,
-            titleFontWeight,
-            headerBorderBottom,
-            footerBorderTop,
-            closeColor,
-            closeColorHover,
-            closeColorPressed,
-            closeSize
-          }
-        } = themeRef.value
-        return {
-          '--n-line-height': lineHeight,
-          '--n-color': color,
-          '--n-text-color': textColor,
-          '--n-box-shadow': boxShadow,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-bezier-out': cubicBezierEaseOut,
-          '--n-bezier-in': cubicBezierEaseIn,
-          '--n-header-padding': headerPadding,
-          '--n-body-padding': bodyPadding,
-          '--n-footer-padding': footerPadding,
-          '--n-title-text-color': titleTextColor,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-header-border-bottom': headerBorderBottom,
-          '--n-footer-border-top': footerBorderTop,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-close-size': closeSize
-        }
-      }),
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       isMounted: isMountedRef
     }
   },
@@ -241,37 +254,53 @@ export default defineComponent({
       <VLazyTeleport to={this.to} show={this.show}>
         {{
           default: () => {
+            this.onRender?.()
             return withDirectives(
               <div
-                class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
+                class={[
+                  `${mergedClsPrefix}-drawer-container`,
+                  this.namespace,
+                  this.themeClass
+                ]}
                 style={this.cssVars as CSSProperties}
                 role="none"
               >
-                <Transition name="fade-in-transition" appear={this.isMounted}>
-                  {{
-                    default: () =>
-                      this.show ? (
-                        <div
-                          aria-hidden
-                          class={`${mergedClsPrefix}-drawer-mask`}
-                          onClick={this.handleMaskClick}
-                        />
-                      ) : null
-                  }}
-                </Transition>
+                {this.showMask ? (
+                  <Transition name="fade-in-transition" appear={this.isMounted}>
+                    {{
+                      default: () =>
+                        this.show ? (
+                          <div
+                            aria-hidden
+                            class={[
+                              `${mergedClsPrefix}-drawer-mask`,
+                              this.showMask === 'transparent' &&
+                                `${mergedClsPrefix}-drawer-mask--invisible`
+                            ]}
+                            onClick={this.handleMaskClick}
+                          />
+                        ) : null
+                    }}
+                  </Transition>
+                ) : null}
                 <NDrawerBodyWrapper
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
                   style={[this.mergedBodyStyle, this.$attrs.style]}
+                  blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}
                   displayDirective={this.displayDirective}
                   nativeScrollbar={this.nativeScrollbar}
+                  onAfterEnter={this.onAfterEnter}
+                  onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  showMask={this.showMask}
                   onEsc={this.handleEsc}
+                  onClickoutside={this.handleMaskClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

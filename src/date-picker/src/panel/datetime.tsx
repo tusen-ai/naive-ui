@@ -25,12 +25,23 @@ export default defineComponent({
     return useCalendar(props, 'datetime')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      timePickerProps,
+      onRender
+    } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--datetime`}
+        class={[
+          `${mergedClsPrefix}-date-panel`,
+          `${mergedClsPrefix}-date-panel--datetime`,
+          this.themeClass
+        ]}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
@@ -48,19 +59,20 @@ export default defineComponent({
             onUpdateValue={this.handleDateInput}
           />
           <NTimePicker
-            showIcon={false}
+            size={this.timePickerSize}
+            placeholder={this.locale.selectTime}
             format={this.timeFormat}
-            stateful={false}
+            {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
+            showIcon={false}
+            to={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
-            to={false}
-            size={this.timePickerSize}
             value={Array.isArray(this.value) ? null : this.value}
-            placeholder={this.locale.selectTime}
             isHourDisabled={this.isHourDisabled}
             isMinuteDisabled={this.isMinuteDisabled}
             isSecondDisabled={this.isSecondDisabled}
             onUpdateValue={this.handleTimePickerChange}
+            stateful={false}
           />
         </div>
         <div class={`${mergedClsPrefix}-date-panel-calendar`}>
@@ -128,6 +140,7 @@ export default defineComponent({
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
               >
+                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />

@@ -4,10 +4,12 @@ import { FollowerPlacement } from 'vueuc'
 import type { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import type { OnUpdateValueImpl } from './interface'
-import { menuInjectionKey } from './Menu'
+import {
+  menuInjectionKey,
+  submenuInjectionKey,
+  menuItemGroupInjectionKey
+} from './context'
 import type { MenuSetupProps } from './Menu'
-import { menuItemGroupInjectionKey } from './MenuOptionGroup'
-import { submenuInjectionKey } from './Submenu'
 import type { UseMenuChildProps } from './use-menu-child-props'
 
 const ICON_MARGIN_RIGHT = 8

@@ -40,18 +40,39 @@ module.exports = {
       'vooks',
       'vue',
       'vue-router',
-      'vueuc'
+      'vueuc',
+      '@css-render/vue3-ssr',
+      'date-fns-tz',
+      'codesandbox/lib/api/define',
+      'highlight.js/lib/core',
+      'highlight.js/lib/languages/javascript',
+      'highlight.js/lib/languages/python',
+      'highlight.js/lib/languages/cpp',
+      'highlight.js/lib/languages/xml',
+      '@vicons/ionicons5',
+      '@vicons/ionicons4',
+      'date-fns/locale/nb',
+      'date-fns/locale/fr',
+      'date-fns/locale/id',
+      'date-fns/locale/de',
+      'date-fns/locale/ja',
+      'date-fns/locale/zh-CN',
+      'date-fns/locale/en-US',
+      'date-fns/locale/ru',
+      'date-fns/locale/uk',
+      'date-fns/locale/zh-TW',
+      'date-fns/locale/es',
+      'date-fns/locale/it',
+      'date-fns/locale/en-GB',
+      'date-fns/locale/pl',
+      'date-fns/locale/eo',
+      'date-fns/locale/sk'
     ],
     exclude: ['__INDEX__']
   },
   build: {
     outDir: 'site',
     rollupOptions: {
-      output: {
-        manualChunks: {
-          axios: ['axios']
-        }
-      },
       plugins: [
         babel({
           babelHelpers: 'bundled'

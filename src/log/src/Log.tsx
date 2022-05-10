@@ -11,15 +11,24 @@ import {
   Ref
 } from 'vue'
 import { throttle } from 'lodash-es'
-import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
+import {
+  useTheme,
+  useHljs,
+  ThemeProps,
+  useConfig,
+  useThemeClass
+} from '../../_mixins'
 import type { Hljs } from '../../_mixins'
-import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { NCode } from '../../code'
-import { logLight, LogTheme } from '../styles'
+import type { LogTheme } from '../styles'
+import { logLight } from '../styles'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
+import { logInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export interface LogInjection {
@@ -29,7 +38,13 @@ export interface LogInjection {
   mergedHljsRef: Ref<Hljs | undefined>
 }
 
-export const logInjectionKey = createInjectionKey<LogInjection>('n-log')
+export interface LogInst {
+  scrollTo: ((options: {
+    slient?: boolean
+    position: 'top' | 'bottom'
+  }) => void) &
+    ((options: { slient?: boolean, top: number }) => void)
+}
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),
@@ -73,14 +88,15 @@ export default defineComponent({
   name: 'Log',
   props: logProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const slientRef = ref(false)
     const highlightRef = computed(() => {
       return props.language !== undefined
     })
     const styleHeightRef = computed(() => {
-      const lineHeight = Math.floor(props.fontSize * props.lineHeight)
-      return `calc(${props.rows * lineHeight}px)`
+      return `calc(${Math.round(
+        props.rows * props.lineHeight * props.fontSize
+      )}px)`
     })
     const mergedLinesRef = computed(() => {
       const { log } = props
@@ -92,7 +108,7 @@ export default defineComponent({
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme(
       'Log',
-      'Log',
+      '-log',
       style,
       logLight,
       props,
@@ -201,45 +217,58 @@ export default defineComponent({
       trimRef: toRef(props, 'trim'),
       highlightRef
     })
+
+    const exportedMethods: LogInst = {
+      scrollTo
+    }
+
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          loaderFontSize,
+          loaderTextColor,
+          loaderColor,
+          loaderBorder,
+          loadingColor
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-loader-font-size': loaderFontSize,
+        '--n-loader-border': loaderBorder,
+        '--n-loader-color': loaderColor,
+        '--n-loader-text-color': loaderTextColor,
+        '--n-loading-color': loadingColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('log', undefined, cssVarsRef, props)
+      : undefined
+
     return {
+      ...exportedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       scrollbarRef,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
       mergedLines: mergedLinesRef,
-      scrollTo,
       scrollToTop,
       scrollToBottom,
       handleWheel,
       handleScroll,
-      cssVars: computed(() => {
-        const {
-          self: {
-            loaderFontSize,
-            loaderTextColor,
-            loaderColor,
-            loaderBorder,
-            loadingColor
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-loader-font-size': loaderFontSize,
-          '--n-loader-border': loaderBorder,
-          '--n-loader-color': loaderColor,
-          '--n-loader-text-color': loaderTextColor,
-          '--n-loading-color': loadingColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme, onRender } = this
+    onRender?.()
     return h(
       'div',
       {
-        class: `${mergedClsPrefix}-log`,
+        class: [`${mergedClsPrefix}-log`, this.themeClass],
         style: [
           {
             lineHeight: this.lineHeight,

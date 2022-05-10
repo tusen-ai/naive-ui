@@ -5,7 +5,7 @@ Element has many theme variables provided by Naive UI.
 ## Demos
 
 ```demo
-basic
+basic.vue
 ```
 
 ## API

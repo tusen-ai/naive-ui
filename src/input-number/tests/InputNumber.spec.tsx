@@ -14,11 +14,11 @@ describe('n-input-number', () => {
 
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NInputNumber)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: false })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
     wrapper.unmount()
   })
 
@@ -84,6 +84,7 @@ describe('n-input-number', () => {
   })
   it('should work with decimal `step`', async () => {
     const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
       props: {
         defaultValue: 0.2,
         min: 0,
@@ -95,6 +96,7 @@ describe('n-input-number', () => {
     const buttons = wrapper.findAll('.n-input__suffix > button')
     const minusBtn = buttons[0]
     const addBtn = buttons[1]
+
     let arr = [0.1, 0]
     for (let i = 0; i < arr.length; i++) {
       await minusBtn.trigger('click')
@@ -132,12 +134,21 @@ describe('n-input-number', () => {
     await wrapper.find('input').trigger('blur')
     expect(wrapper.find('input').element.value).toEqual('0.3333')
     const addBtn = wrapper.findAll('.n-input__suffix > button')[1]
+    await addBtn.trigger('mousedown')
+    await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('0.3333')
     await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('2.3333')
     await wrapper.setProps({ step: 2.333333 })
+    await addBtn.trigger('mousedown')
+    await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('2.3333')
     await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('4.666633')
     await wrapper.setProps({ step: 2.33 })
+    await addBtn.trigger('mousedown')
+    await addBtn.trigger('mouseup')
+    expect(wrapper.find('input').element.value).toEqual('4.666633')
     await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('6.996633')
     wrapper.unmount()
@@ -251,5 +262,15 @@ describe('n-input-number', () => {
     await wrapper.find('input').trigger('input')
     expect(onUpdateValue).toHaveBeenCalledWith(10)
     wrapper.unmount()
+  })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NInputNumber, { props: { status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
   })
 })

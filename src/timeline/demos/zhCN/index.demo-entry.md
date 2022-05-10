@@ -5,11 +5,12 @@
 ## 演示
 
 ```demo
-basic
-size
-item-placement
-horizontal
-customize-icon
+basic.vue
+size.vue
+item-placement.vue
+horizontal.vue
+customize-icon.vue
+nested-debug.vue
 ```
 
 ## API
@@ -25,13 +26,14 @@ customize-icon
 
 ### TimelineItem Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| color | `string` | `undefined` | 选项的颜色 |
-| content | `string` | `undefined` | 选项内容 |
-| time | `string` | `undefined` | 选项时间 |
-| title | `string` | `undefined` | 选项标题 |
-| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| color | `string` | `undefined` | 选项的颜色 |  |
+| content | `string` | `undefined` | 选项内容 |  |
+| line-type | `'default' \| 'dashed'` | `'default'` | 线的类型 | 2.26.1 |
+| time | `string` | `undefined` | 选项时间 |  |
+| title | `string` | `undefined` | 选项标题 |  |
+| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |  |
 
 ### Timeline Slots
 

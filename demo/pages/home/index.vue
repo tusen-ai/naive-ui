@@ -85,15 +85,14 @@ export default defineComponent({
         'zh-CN': {
           start: '开始使用',
           intro1: '一个 Vue 3 组件库',
-          intro2: '比较完整，主题可调，使用 TypeScript，不算太慢',
+          intro2: '比较完整，主题可调，使用 TypeScript，快',
           intro3: '有点意思',
           intro4: '换个主题'
         },
         'en-US': {
           start: 'Get Started',
           intro1: 'A Vue 3 Component Library',
-          intro2:
-            'Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow',
+          intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
           intro3: 'Kinda Interesting',
           intro4: 'Change Theme'
         }

@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType, onMounted, nextTick } from 'vue'
+import { h, defineComponent, VNode, PropType, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
@@ -73,7 +73,7 @@ export default defineComponent({
       )
     }
     onMounted(() => {
-      void nextTick(useCalendarRef.scrollPickerColumns)
+      useCalendarRef.justifyColumnsScrollState()
     })
     return { ...useCalendarRef, renderItem }
   },
@@ -84,22 +84,25 @@ export default defineComponent({
       shortcuts,
       actions,
       renderItem,
-      type
+      type,
+      onRender
     } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--month`
+          `${mergedClsPrefix}-date-panel--month`,
+          this.themeClass
         ]}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
       >
         <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
           <NScrollbar
-            ref="scrollbarInstRef"
+            ref="yearScrollbarRef"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -111,7 +114,7 @@ export default defineComponent({
             {{
               default: () => (
                 <VirtualList
-                  ref="yearScrollRef"
+                  ref="yearVlRef"
                   items={this.yearArray}
                   itemSize={MONTH_ITEM_HEIGHT}
                   showScrollbar={false}
@@ -139,7 +142,7 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >
               <NScrollbar
-                ref="monthScrollRef"
+                ref="monthScrollbarRef"
                 theme={mergedTheme.peers.Scrollbar}
                 themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >

@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import style from './styles/blockquote.cssr'
 import { typographyLight } from '../styles'
@@ -17,43 +17,51 @@ export default defineComponent({
   name: 'Blockquote',
   props: blockquoteProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
-      'Blockquote',
+      '-blockquote',
       style,
       typographyLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          blockquoteTextColor,
+          blockquotePrefixColor,
+          blockquoteLineHeight,
+          blockquoteFontSize
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': blockquoteFontSize,
+        '--n-line-height': blockquoteLineHeight,
+        '--n-prefix-color': blockquotePrefixColor,
+        '--n-text-color': blockquoteTextColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('blockquote', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            blockquoteTextColor,
-            blockquotePrefixColor,
-            blockquoteLineHeight,
-            blockquoteFontSize
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-font-size': blockquoteFontSize,
-          '--n-line-height': blockquoteLineHeight,
-          '--n-prefix-color': blockquotePrefixColor,
-          '--n-text-color': blockquoteTextColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
     const { mergedClsPrefix } = this
+    this.onRender?.()
     return (
       <blockquote
         class={[
           `${mergedClsPrefix}-blockquote`,
+          this.themeClass,
           this.alignText && `${mergedClsPrefix}-blockquote--align-text`
         ]}
         style={this.cssVars as CSSProperties}

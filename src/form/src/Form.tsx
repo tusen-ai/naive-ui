@@ -12,7 +12,7 @@ import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
-import {
+import type {
   ShouldRuleBeApplied,
   FormItemInst,
   FormRules,
@@ -20,11 +20,11 @@ import {
   LabelAlign,
   LabelPlacement,
   FormInst,
-  formItemInstsInjectionKey,
-  formInjectionKey,
-  Size
+  Size,
+  FormValidateMessages
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
 const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -58,7 +58,8 @@ const formProps = {
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
-  }
+  },
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -69,7 +70,7 @@ export default defineComponent({
   props: formProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
+    useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     // for label-width = 'auto'

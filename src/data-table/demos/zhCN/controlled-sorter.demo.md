@@ -10,7 +10,6 @@
     <n-button @click="clearSorter">Clear Sorter</n-button>
   </n-space>
   <n-data-table
-    ref="table"
     :columns="columns"
     :data="data"
     :pagination="pagination"

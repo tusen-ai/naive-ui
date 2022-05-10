@@ -32,13 +32,16 @@ const usePanelCommonProps = {
   },
   shortcuts: Object as PropType<Shortcuts>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
-  onConfirm: Function,
+  onClear: Function,
+  onConfirm: Function as PropType<(value: Value | null) => void>,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
-  }
+  },
+  themeClass: String,
+  onRender: Function as PropType<(() => void) | undefined>
 } as const
 
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
@@ -48,6 +51,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   const {
     dateLocaleRef,
     timePickerSizeRef,
+    timePickerPropsRef,
     localeRef,
     mergedClsPrefixRef,
     mergedThemeRef
@@ -60,9 +64,13 @@ function usePanelCommon (props: UsePanelCommonProps) {
   })
   const selfRef = ref<HTMLElement | null>(null)
   const keyboardState = useKeyboard()
+  function doClear (): void {
+    const { onClear } = props
+    if (onClear) onClear()
+  }
   function doConfirm (): void {
-    const { onConfirm } = props
-    if (onConfirm) onConfirm()
+    const { onConfirm, value } = props
+    if (onConfirm) onConfirm(value)
   }
   function doUpdateValue (value: Value | null, doUpdate: boolean): void {
     const { onUpdateValue } = props
@@ -79,6 +87,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   function handleClearClick (): void {
     doUpdateValue(null, true)
     doClose(true)
+    doClear()
   }
   function handleFocusDetectorFocus (): void {
     doTabOut()
@@ -148,6 +157,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
+    timePickerProps: timePickerPropsRef,
     selfRef,
     locale: localeRef,
     doConfirm,

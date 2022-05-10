@@ -39,16 +39,17 @@ export default defineComponent({
 ## 演示
 
 ```demo
-basic
-icon
-timing
-closable
+basic.vue
+icon.vue
+timing.vue
+closable.vue
 modify-content.vue
-manually-close
-about-theme
-multiple-line
-placement
+manually-close.vue
+about-theme.vue
+multiple-line.vue
+placement.vue
 customize-message.vue
+no-icon.vue
 ```
 
 ## API
@@ -57,8 +58,8 @@ customize-message.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| closable | `boolean` | `false` |所有 Message 是否显示 close 图标 |  |
-| container-style | `string \| CSSProperties` | `undefined` | Message　容器的样式 |  |
+| closable | `boolean` | `false` | 所有 Message 是否显示 close 图标 |  |
+| container-style | `string \| CSSProperties` | `undefined` | Message 容器的样式 |  |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |  |
 | keep-alive-on-hover | `boolean` | `false` | 所有 Message 在悬浮信息上时是否不销毁 |  |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |  |
@@ -69,14 +70,15 @@ customize-message.vue
 
 #### MessageProvider Injection Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| destroyAll | `() => void` | 销毁所有弹出的信息 |
-| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 |
-| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 info 类型的信息 |
-| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 loading 类型的信息 |
-| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 success 类型的信息 |
-| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 warning 类型的信息 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| destroyAll | `() => void` | 销毁所有弹出的信息 |  |
+| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 | 2.25.7 |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 |  |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 info 类型的信息 |  |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 loading 类型的信息 |  |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 success 类型的信息 |  |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 warning 类型的信息 |  |
 
 #### MessageOption Properties
 
@@ -87,6 +89,8 @@ customize-message.vue
 | icon | `() => VNodeChild` | 信息图标 |  |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
 | render | `MessageRenderMessage` | 消息的渲染函数 | 2.24.0 |
+| showIcon | `boolean` | 是否展示图标 | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
 | onClose | `() => void` | 点击关闭图标的回调 |  |
 | onLeave | `() => void` | 信息开始消失的回调 |  |
@@ -105,16 +109,17 @@ type MessageRenderMessage = (props: {
 
 #### MessageReactive Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| closable | `boolean` | 是否显示 close 图标 |
-| content | `string \| (() => VNodeChild)` | 信息内容 |
-| destroy | `() => void` | 销毁信息的方法 |
-| icon | `() => VNodeChild` | 信息图标 |
-| keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
-| onAfterLeave | `() => void` | 信息消失动画结束的回调 |
-| onLeave | `() => void` | 信息开始消失的回调 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| closable | `boolean` | 是否显示 close 图标 |  |
+| content | `string \| (() => VNodeChild)` | 信息内容 |  |
+| destroy | `() => void` | 销毁信息的方法 |  |
+| icon | `() => VNodeChild` | 信息图标 |  |
+| keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
+| showIcon | `boolean` | 是否展示图标 | 2.25.7 |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` 2.25.7 |
+| onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
+| onLeave | `() => void` | 信息开始消失的回调 |  |
 
 #### MessageReactive Methods
 

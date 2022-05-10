@@ -14,7 +14,7 @@ import {
   watchEffect
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { happensIn } from 'seemly'
 import {
@@ -32,11 +32,18 @@ import {
   getHours,
   getSeconds
 } from 'date-fns'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
 import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
+import {
+  useConfig,
+  useTheme,
+  useLocale,
+  useFormItem,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
@@ -79,7 +86,7 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  actions: Array as PropType<Array<'now' | 'confirm'>>,
+  actions: Array as PropType<Array<'now' | 'confirm'> | null>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -87,7 +94,7 @@ const timePickerProps = {
   defaultFormattedValue: String,
   placeholder: String,
   placement: {
-    type: String,
+    type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
   value: Number as PropType<number | null>,
@@ -103,8 +110,15 @@ const timePickerProps = {
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   inputReadonly: Boolean,
   clearable: Boolean,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   onUpdateFormattedValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateFormattedValue>
   >,
@@ -112,6 +126,10 @@ const timePickerProps = {
   MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onConfirm: [Function, Array] as PropType<
+  MaybeArray<(value: number & null, formattedValue: string & null) => void>
+  >,
+  onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // private
   stateful: {
@@ -164,14 +182,18 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled
+    } = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
-      'TimePicker',
+      '-time-picker',
       style,
       timePickerLight,
       props,
@@ -335,6 +357,11 @@ export default defineComponent({
         )
       }
     }
+    function createFormattedValue (value: number | null): string | null {
+      return value === null
+        ? null
+        : format(value, props.valueFormat || props.format)
+    }
     function doUpdateValue (value: number | null): void {
       const {
         onUpdateValue,
@@ -342,8 +369,7 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      const formattedValue =
-        value === null ? null : format(value, props.valueFormat || props.format)
+      const formattedValue = createFormattedValue(value)
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -368,10 +394,21 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doConfirm (): void {
+      const { onConfirm } = props
+      if (onConfirm) {
+        call(
+          onConfirm,
+          mergedValueRef.value as number & null,
+          createFormattedValue(mergedValueRef.value) as string & null
+        )
+      }
+    }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
+      props.onClear?.()
     }
     function handleFocusDetectorFocus (): void {
       closePanel({
@@ -513,6 +550,9 @@ export default defineComponent({
     }
     function doUpdateShow (value: boolean): void {
       uncontrolledShowRef.value = value
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
     }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(
@@ -601,6 +641,7 @@ export default defineComponent({
     }
     function handleConfirmClick (): void {
       deriveInputValue()
+      doConfirm()
       closePanel({
         returnFocus: true
       })
@@ -634,8 +675,68 @@ export default defineComponent({
         inputInstRef.value?.blur()
       }
     }
+    const triggerCssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: { iconColor, iconColorDisabled }
+      } = themeRef.value
+      return {
+        '--n-icon-color': iconColor,
+        '--n-icon-color-disabled': iconColorDisabled,
+        '--n-bezier': cubicBezierEaseInOut
+      }
+    })
+    const triggerThemeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'time-picker-trigger',
+        undefined,
+        triggerCssVarsRef,
+        props
+      )
+      : undefined
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          panelColor,
+          itemTextColor,
+          itemTextColorActive,
+          itemColorHover,
+          panelDividerColor,
+          panelBoxShadow,
+          itemOpacityDisabled,
+          borderRadius,
+          itemFontSize,
+          itemWidth,
+          itemHeight,
+          panelActionPadding,
+          itemBorderRadius
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-font-size': itemFontSize,
+        '--n-item-height': itemHeight,
+        '--n-item-opacity-disabled': itemOpacityDisabled,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-active': itemTextColorActive,
+        '--n-item-width': itemWidth,
+        '--n-panel-action-padding': panelActionPadding,
+        '--n-panel-box-shadow': panelBoxShadow,
+        '--n-panel-color': panelColor,
+        '--n-panel-divider-color': panelDividerColor,
+        '--n-item-border-radius': itemBorderRadius
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('time-picker', undefined, cssVarsRef, props)
+      : undefined
     return {
-      ...exposedMethods,
+      focus: exposedMethods.focus,
+      blur: exposedMethods.blur,
+      mergedStatus: mergedStatusRef,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -685,60 +786,20 @@ export default defineComponent({
       handleMenuKeyDown,
       handleTriggerClick,
       mergedTheme: themeRef,
-      triggerCssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: { iconColor, iconColorDisabled }
-        } = themeRef.value
-        return {
-          '--n-icon-color': iconColor,
-          '--n-icon-color-disabled': iconColorDisabled,
-          '--n-bezier': cubicBezierEaseInOut
-        }
-      }),
-      cssVars: computed(() => {
-        const {
-          self: {
-            panelColor,
-            itemTextColor,
-            itemTextColorActive,
-            itemColorHover,
-            panelDividerColor,
-            panelBoxShadow,
-            itemOpacityDisabled,
-            borderRadius,
-            itemFontSize,
-            itemWidth,
-            itemHeight,
-            panelActionPadding,
-            itemBorderRadius
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-item-color-hover': itemColorHover,
-          '--n-item-font-size': itemFontSize,
-          '--n-item-height': itemHeight,
-          '--n-item-opacity-disabled': itemOpacityDisabled,
-          '--n-item-text-color': itemTextColor,
-          '--n-item-text-color-active': itemTextColorActive,
-          '--n-item-width': itemWidth,
-          '--n-panel-action-padding': panelActionPadding,
-          '--n-panel-box-shadow': panelBoxShadow,
-          '--n-panel-color': panelColor,
-          '--n-panel-divider-color': panelDividerColor,
-          '--n-item-border-radius': itemBorderRadius
-        }
-      })
+      triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
+      triggerThemeClass: triggerThemeClassHandle?.themeClass,
+      triggerOnRender: triggerThemeClassHandle?.onRender,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, $slots, triggerOnRender } = this
+    triggerOnRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-time-picker`}
+        class={[`${mergedClsPrefix}-time-picker`, this.triggerThemeClass]}
         style={this.triggerCssVars as CSSProperties}
       >
         <VBinder>
@@ -749,6 +810,7 @@ export default defineComponent({
                   default: () => (
                     <NInput
                       ref="inputInstRef"
+                      status={this.mergedStatus}
                       value={this.displayTimeString}
                       bordered={this.mergedBordered}
                       passivelyActivated
@@ -798,7 +860,7 @@ export default defineComponent({
                 show={this.mergedShow}
                 to={this.adjustedTo}
                 containerClass={this.namespace}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (
@@ -807,49 +869,60 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(
-                                <Panel
-                                  ref="panelInstRef"
-                                  actions={this.actions}
-                                  style={this.cssVars as CSSProperties}
-                                  seconds={this.seconds}
-                                  minutes={this.minutes}
-                                  hours={this.hours}
-                                  transitionDisabled={this.transitionDisabled}
-                                  hourValue={this.hourValue}
-                                  showHour={this.hourInFormat}
-                                  isHourInvalid={this.isHourInvalid}
-                                  isHourDisabled={this.isHourDisabled}
-                                  minuteValue={this.minuteValue}
-                                  showMinute={this.minuteInFormat}
-                                  isMinuteInvalid={this.isMinuteInvalid}
-                                  isMinuteDisabled={this.isMinuteDisabled}
-                                  secondValue={this.secondValue}
-                                  amPmValue={this.amPmValue}
-                                  showSecond={this.secondInFormat}
-                                  isSecondInvalid={this.isSecondInvalid}
-                                  isSecondDisabled={this.isSecondDisabled}
-                                  isValueInvalid={this.isValueInvalid}
-                                  nowText={this.localizedNow}
-                                  confirmText={this.localizedPositiveText}
-                                  use12Hours={this.use12Hours}
-                                  onFocusout={this.handleMenuFocusOut}
-                                  onKeydown={this.handleMenuKeyDown}
-                                  onHourClick={this.handleHourClick}
-                                  onMinuteClick={this.handleMinuteClick}
-                                  onSecondClick={this.handleSecondClick}
-                                  onAmPmClick={this.handleAmPmClick}
-                                  onNowClick={this.handleNowClick}
-                                  onConfirmClick={this.handleConfirmClick}
-                                  onFocusDetectorFocus={
-                                    this.handleFocusDetectorFocus
-                                  }
-                                />,
-                                [[clickoutside, this.handleClickOutside]]
+                        default: () => {
+                          if (this.mergedShow) {
+                            this.onRender?.()
+                            return withDirectives(
+                              <Panel
+                                ref="panelInstRef"
+                                actions={this.actions}
+                                class={this.themeClass}
+                                style={this.cssVars as CSSProperties}
+                                seconds={this.seconds}
+                                minutes={this.minutes}
+                                hours={this.hours}
+                                transitionDisabled={this.transitionDisabled}
+                                hourValue={this.hourValue}
+                                showHour={this.hourInFormat}
+                                isHourInvalid={this.isHourInvalid}
+                                isHourDisabled={this.isHourDisabled}
+                                minuteValue={this.minuteValue}
+                                showMinute={this.minuteInFormat}
+                                isMinuteInvalid={this.isMinuteInvalid}
+                                isMinuteDisabled={this.isMinuteDisabled}
+                                secondValue={this.secondValue}
+                                amPmValue={this.amPmValue}
+                                showSecond={this.secondInFormat}
+                                isSecondInvalid={this.isSecondInvalid}
+                                isSecondDisabled={this.isSecondDisabled}
+                                isValueInvalid={this.isValueInvalid}
+                                nowText={this.localizedNow}
+                                confirmText={this.localizedPositiveText}
+                                use12Hours={this.use12Hours}
+                                onFocusout={this.handleMenuFocusOut}
+                                onKeydown={this.handleMenuKeyDown}
+                                onHourClick={this.handleHourClick}
+                                onMinuteClick={this.handleMinuteClick}
+                                onSecondClick={this.handleSecondClick}
+                                onAmPmClick={this.handleAmPmClick}
+                                onNowClick={this.handleNowClick}
+                                onConfirmClick={this.handleConfirmClick}
+                                onFocusDetectorFocus={
+                                  this.handleFocusDetectorFocus
+                                }
+                              />,
+                              [
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ]
+                              ]
                             )
-                            : null
+                          }
+                          return null
+                        }
                       }}
                     </Transition>
                   )

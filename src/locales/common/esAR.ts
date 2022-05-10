@@ -1,4 +1,6 @@
-const esAR = {
+import type { NLocale } from './enUS'
+
+const esAR: NLocale = {
   name: 'es-AR',
   global: {
     undo: 'Deshacer',
@@ -10,7 +12,7 @@ const esAR = {
     negativeText: 'Cancelar'
   },
   Cascader: {
-    placeholder: 'Seleccionar por pavor',
+    placeholder: 'Seleccionar por favor',
     loading: 'Cargando',
     loadingRequiredMessage: (label: string): string =>
       `Por favor, cargue los descendientes de ${label} antes de marcarlo.`
@@ -43,6 +45,9 @@ const esAR = {
     startDatetimePlaceholder: 'Fecha y hora de inicio',
     endDatetimePlaceholder: 'Fecha y hora final',
     monthBeforeYear: true,
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     // 0 is Monday / 0 es Lunes
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hoy'
@@ -61,7 +66,7 @@ const esAR = {
     description: 'Sin datos'
   },
   Select: {
-    placeholder: 'Seleccionar por pavor'
+    placeholder: 'Seleccionar por favor'
   },
   TimePicker: {
     placeholder: 'Seleccionar hora',

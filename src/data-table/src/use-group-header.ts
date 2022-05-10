@@ -1,5 +1,5 @@
 import { CSSProperties, ComputedRef, computed } from 'vue'
-import { DataTableSetupProps } from './DataTable'
+import type { DataTableSetupProps } from './DataTable'
 import type {
   TableExpandColumn,
   TableSelectionColumn,

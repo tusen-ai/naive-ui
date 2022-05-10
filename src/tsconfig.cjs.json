@@ -5,6 +5,7 @@
     "rootDir": ".",
     "outDir": "../lib",
     "module": "CommonJS",
-    "target": "ES6"
+    "target": "ES6",
+    "jsx": "react"
   }
 }

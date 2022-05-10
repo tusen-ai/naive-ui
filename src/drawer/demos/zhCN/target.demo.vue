@@ -1,7 +1,7 @@
 <markdown>
 # 显示在指定区域
 
-你可以通过设定 `to` 属性来自定义显示区域。记得要设定 `:trap-focus="false"`，否则 drawer 外的内容将无法被聚焦。
+你可以通过设定 `to` 属性来自定义显示区域。记得要设定 `:trap-focus="false"` 和 `:block-scroll="false"`，否则 drawer 外的内容将无法被聚焦，body 也将无法滚动。
 </markdown>
 
 <template>
@@ -41,6 +41,7 @@
     :height="200"
     :placement="placement"
     :trap-focus="false"
+    :block-scroll="false"
     to="#drawer-target"
   >
     <n-drawer-content title="斯通纳">
@@ -51,12 +52,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { DrawerPlacement } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const active = ref(false)
-    const placement = ref('right')
-    const activate = (place) => {
+    const placement = ref<DrawerPlacement>('right')
+    const activate = (place: DrawerPlacement) => {
       active.value = true
       placement.value = place
     }

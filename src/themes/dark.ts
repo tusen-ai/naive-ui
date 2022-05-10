@@ -3,10 +3,12 @@ import { alertDark } from '../alert/styles'
 import { anchorDark } from '../anchor/styles'
 import { autoCompleteDark } from '../auto-complete/styles'
 import { avatarDark } from '../avatar/styles'
+import { avatarGroupDark } from '../avatar-group/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
 import { buttonDark } from '../button/styles'
+import { buttonGroupDark } from '../button-group/styles'
 import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
 import { carouselDark } from '../carousel/styles'
@@ -31,6 +33,7 @@ import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
+import { iconWrapperDark } from '../icon-wrapper/styles'
 import { imageDark } from '../image/styles'
 import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
@@ -73,18 +76,22 @@ import { treeSelectDark } from '../tree-select/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
+import { watermarkDark } from '../watermark/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
+  name: 'dark',
   common: commonDark,
   Alert: alertDark,
   Anchor: anchorDark,
   AutoComplete: autoCompleteDark,
   Avatar: avatarDark,
+  AvatarGroup: avatarGroupDark,
   BackTop: backTopDark,
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
+  ButtonGroup: buttonGroupDark,
   Calendar: calendarDark,
   Card: cardDark,
   Carousel: carouselDark,
@@ -109,6 +116,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
+  IconWrapper: iconWrapperDark,
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
@@ -150,5 +158,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Tree: treeDark,
   TreeSelect: treeSelectDark,
   Typography: typographyDark,
-  Upload: uploadDark
+  Upload: uploadDark,
+  Watermark: watermarkDark
 }

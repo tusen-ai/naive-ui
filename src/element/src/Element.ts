@@ -1,6 +1,6 @@
 import { computed, h, defineComponent } from 'vue'
 import { kebabCase } from 'lodash-es'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { elementLight } from '../styles'
@@ -21,35 +21,42 @@ export default defineComponent({
   alias: ['El'],
   props: elementProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Element',
-      'Element',
+      '-element',
       undefined,
       elementLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { common } = themeRef.value
+      return (
+        Object.keys(common) as unknown as Array<keyof typeof common>
+      ).reduce<Record<string, string>>((prevValue, key) => {
+        prevValue[`--${kebabCase(key)}`] = common[key]
+        return prevValue
+      }, {})
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('element', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const { common } = themeRef.value
-        return (
-          Object.keys(common) as unknown as Array<keyof typeof common>
-        ).reduce<Record<string, string | number>>((prevValue, key) => {
-          prevValue[`--${kebabCase(key)}`] = common[key]
-          return prevValue
-        }, {})
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { tag, mergedClsPrefix, cssVars, $slots } = this
+    const { tag, mergedClsPrefix, cssVars, themeClass, onRender, $slots } = this
+    onRender?.()
     return h(
       tag,
       {
         role: 'none',
-        class: `${mergedClsPrefix}-element`,
+        class: [`${mergedClsPrefix}-element`, themeClass],
         style: cssVars
       },
       $slots.default?.()

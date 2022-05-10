@@ -45,6 +45,23 @@ describe('n-card', () => {
     )
   })
 
+  it('should work with `segmented` prop', async () => {
+    const wrapper = mount(NCard)
+    expect(wrapper.find('.n-card').classes()).not.toContain(
+      'n-card--content-segmented'
+    )
+
+    await wrapper.setProps({
+      segmented: {
+        content: true,
+        footer: 'soft'
+      }
+    })
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--content-segmented'
+    )
+  })
+
   it('should work with `slots` ', async () => {
     const wrapper = mount(NCard, {
       slots: {
@@ -145,6 +162,23 @@ describe('n-card', () => {
     })
 
     expect(wrapper.find('.n-card__footer').attributes('style')).toContain(
+      testStyle
+    )
+  })
+
+  it('should work with `header-extra-style` prop', async () => {
+    const testStyle = 'padding: 0px;'
+    const wrapper = mount(NCard, {
+      props: {
+        headerExtraStyle: testStyle
+      },
+      slots: {
+        header: () => 'test-header',
+        'header-extra': () => 'test-header-extra'
+      }
+    })
+
+    expect(wrapper.find('.n-card-header__extra').attributes('style')).toContain(
       testStyle
     )
   })

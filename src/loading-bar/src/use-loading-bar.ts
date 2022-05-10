@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import { loadingBarApiInjectionKey } from './LoadingBarProvider'
+import { loadingBarApiInjectionKey } from './context'
 import type { LoadingBarApiInjection } from './LoadingBarProvider'
 import { throwError } from '../../_utils'
 

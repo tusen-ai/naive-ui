@@ -1,5 +1,5 @@
 import { CheckStrategy, TreeNode } from 'treemate'
-import { Ref, VNodeChild } from 'vue'
+import { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
@@ -39,6 +39,8 @@ export type RenderPrefix = RenderTreePart
 
 export type RenderSuffix = RenderTreePart
 
+export type TreeNodeProps = (info: { option: TreeOption }) => HTMLAttributes
+
 export interface TreeDragInfo {
   event: DragEvent
   node: TreeOption
@@ -74,13 +76,12 @@ export type RenderSwitcherIcon = () => VNodeChild
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>
-  highlightKeySetRef: Ref<Set<Key>>
+  highlightKeySetRef: Ref<Set<Key> | null>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
   mergedExpandedKeysRef: Ref<Key[]>
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
-  remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
@@ -104,6 +105,10 @@ export interface TreeInjection {
   renderSuffixRef: Ref<RenderSuffix | undefined>
   renderSwitcherIconRef: Ref<RenderSwitcherIcon | undefined>
   labelFieldRef: Ref<string>
+  nodePropsRef: Ref<TreeNodeProps | undefined>
+  multipleRef: Ref<boolean>
+  checkboxPlacementRef: 'left' | 'right'
+  internalTreeSelect: boolean
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

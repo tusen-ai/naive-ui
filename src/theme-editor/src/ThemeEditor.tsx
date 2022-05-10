@@ -1,5 +1,15 @@
-import { h, computed, defineComponent, ref, Fragment, toRaw, watch } from 'vue'
+import {
+  h,
+  computed,
+  defineComponent,
+  ref,
+  Fragment,
+  toRaw,
+  watch,
+  inject
+} from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { lightTheme } from '../../themes/light'
 import {
   GlobalTheme,
@@ -11,12 +21,13 @@ import { NScrollbar } from '../../_internal'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NInput } from '../../input'
 import { NSpace } from '../../space'
-import { useConfig, useLocale } from '../../_mixins'
+import { useLocale } from '../../_mixins'
 import { NElement } from '../../element'
 import { NDivider } from '../../divider'
 import { NButton } from '../../button'
 import { NColorPicker } from '../../color-picker'
 import { NEmpty } from '../../empty'
+import { lockHtmlScrollRightCompensationRef } from '../../_utils'
 
 const ColorWandIcon = (
   <svg
@@ -46,7 +57,7 @@ const ColorWandIcon = (
 
 // button colorOpacitySecondary var is not color
 const showColorPicker = (key: string): boolean => {
-  if (key.includes('opacity')) return false
+  if (key.includes('pacity')) return false
   if (key.includes('color') || key.includes('Color')) return true
   return false
 }
@@ -56,7 +67,7 @@ export default defineComponent({
   inheritAttrs: false,
   setup () {
     const fileInputRef = ref<HTMLInputElement | null>(null)
-    const { NConfigProvider } = useConfig()
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const theme = computed(() => {
       const mergedTheme: GlobalTheme =
         NConfigProvider?.mergedThemeRef.value || lightTheme
@@ -72,7 +83,7 @@ export default defineComponent({
         common
       }
       for (const key of Object.keys(lightTheme) as Array<
-      keyof typeof lightTheme
+      Exclude<keyof typeof lightTheme, 'name'>
       >) {
         if (key === 'common') continue
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||
@@ -187,6 +198,7 @@ export default defineComponent({
         {{
           default: () => [
             <NPopover
+              arrowPointToCenter
               trigger="manual"
               show={this.showPanel}
               displayDirective="show"
@@ -205,7 +217,7 @@ export default defineComponent({
                         position: 'fixed',
                         zIndex: 10,
                         bottom: '40px',
-                        right: '40px',
+                        right: `calc(40px + ${lockHtmlScrollRightCompensationRef.value})`,
                         width: '44px',
                         height: '44px',
                         fontSize: '26px',
@@ -215,13 +227,17 @@ export default defineComponent({
                         borderRadius: '50%',
                         backgroundColor: 'var(--popover-color)',
                         color: 'var(--text-color-2)',
-                        transition: 'all .3s var(--cubic-bezier-ease-in-out)',
+                        transition:
+                          'color .3s var(--cubic-bezier-ease-in-out), background-color .3s var(--cubic-bezier-ease-in-out), box-shadow .3s var(--cubic-bezier-ease-in-out)',
                         boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
                         cursor: 'pointer'
                       },
                       this.$attrs.style
                     ]}
-                    // @ts-expect-error
+                    // We use ts-ignore for vue-tsc, since it seems to patch
+                    // native event for vue components
+                    // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+                    // @ts-ignore
                     onClick={() => {
                       this.showPanel = !this.showPanel
                     }}

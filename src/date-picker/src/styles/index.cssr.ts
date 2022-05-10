@@ -154,9 +154,15 @@ export default c([
           ])
         ]),
         cM('disabled', `
-          background-color: var(--n-item-color-disabled);
+          color: var(--n-item-text-color-disabled);
           cursor: not-allowed;
-        `)
+        `, [
+          cM('selected', [
+            c('&::before', `
+              background-color: var(--n-item-color-disabled);
+            `)
+          ])
+        ])
       ])
     ]),
     cM('date', {
@@ -311,6 +317,13 @@ export default c([
           background-color .2s var(--n-bezier),
           color .2s var(--n-bezier);
       `, [
+        cE('trigger', `
+          position: absolute;
+          left: calc(var(--n-item-size) / 2 - var(--n-item-cell-width) / 2);
+          top: calc(var(--n-item-size) / 2 - var(--n-item-cell-height) / 2);
+          width:  var(--n-item-cell-width);
+          height:  var(--n-item-cell-height);
+        `),
         cNotM('disabled', [
           cNotM('selected', [
             c('&:hover', {

@@ -5,12 +5,7 @@ Row: Set `row-class-name` prop to assign a class name to certain rows.
 Column: Set `className` property on column object to assign a class name to a certain column.
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :row-class-name="rowClassName"
-/>
+<n-data-table :columns="columns" :data="data" :row-class-name="rowClassName" />
 ```
 
 ```js
@@ -60,7 +55,7 @@ export default defineComponent({
         if (row.age > 32) {
           return 'too-old'
         }
-        return null
+        return ''
       }
     }
   }

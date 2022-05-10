@@ -3,8 +3,7 @@ import {
   cB,
   cE,
   cM,
-  cNotM,
-  insideFormItem
+  cNotM
 } from '../../../../_utils/cssr'
 
 // vars:
@@ -51,9 +50,7 @@ export default c([
     cB('base-loading', `
       color: var(--n-loading-color);
     `),
-    cB('base-selection-tags', {
-      minHeight: 'var(--n-height)'
-    }),
+    cB('base-selection-tags', 'min-height: var(--n-height);'),
     cE('border, state-border', `
       position: absolute;
       left: 0;
@@ -185,17 +182,11 @@ export default c([
           box-shadow: var(--n-box-shadow-active);
           border: var(--n-border-active);
         `),
-        cB('base-selection-label', {
-          backgroundColor: 'var(--n-color-active)'
-        }),
-        cB('base-selection-tags', {
-          backgroundColor: 'var(--n-color-active)'
-        })
+        cB('base-selection-label', 'background-color: var(--n-color-active);'),
+        cB('base-selection-tags', 'background-color: var(--n-color-active);')
       ])
     ]),
-    cM('disabled', {
-      cursor: 'not-allowed'
-    }, [
+    cM('disabled', 'cursor: not-allowed;', [
       cE('arrow', `
         color: var(--n-arrow-color-disabled);
       `),
@@ -253,36 +244,9 @@ export default c([
         user-select: none;
         opacity: 0;
       `)
-    ])
-  ]),
-  cB('base-selection-popover', `
-    margin-bottom: -3px;
-    display: flex;
-    flex-wrap: wrap;
-  `),
-  cB('base-selection-tag-wrapper', `
-    max-width: 100%;
-    display: inline-flex;
-    padding: 0 7px 3px 0;
-  `, [
-    c('&:last-child', {
-      paddingRight: 0
-    }),
-    cB('tag', `
-      font-size: 14px;
-      max-width: 100%;
-    `, [
-      cE('content', `
-        text-overflow: ellipsis;
-        overflow: hidden;
-      `)
-    ])
-  ]),
-  ['warning', 'error'].map(status => insideFormItem(status,
-    cB('base-selection', [
-      cE('state-border', {
-        border: `var(--n-border-${status})`
-      }),
+    ]),
+    ['warning', 'error'].map(status => cM(`${status}-status`, [
+      cE('state-border', `border: var(--n-border-${status});`),
       cNotM('disabled', [
         c('&:hover', [
           cE('state-border', `
@@ -295,12 +259,8 @@ export default c([
             box-shadow: var(--n-box-shadow-active-${status});
             border: var(--n-border-active-${status});
           `),
-          cB('base-selection-label', {
-            backgroundColor: `var(--n-color-active-${status})`
-          }),
-          cB('base-selection-tags', {
-            backgroundColor: `var(--n-box-shadow-active-${status})`
-          })
+          cB('base-selection-label', `background-color: var(--n-color-active-${status});`),
+          cB('base-selection-tags', `background-color: var(--n-color-active-${status});`)
         ]),
         cM('focus', [
           cE('state-border', `
@@ -309,6 +269,29 @@ export default c([
           `)
         ])
       ])
+    ]))
+  ]),
+  cB('base-selection-popover', `
+    margin-bottom: -3px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -8px;
+  `),
+  cB('base-selection-tag-wrapper', `
+    max-width: 100%;
+    display: inline-flex;
+    padding: 0 7px 3px 0;
+  `, [
+    c('&:last-child', 'padding-right: 0;'),
+    cB('tag', `
+      font-size: 14px;
+      max-width: 100%;
+    `, [
+      cE('content', `
+        line-height: 1.25;
+        text-overflow: ellipsis;
+          overflow: hidden;
+      `)
     ])
-  ))
+  ])
 ])

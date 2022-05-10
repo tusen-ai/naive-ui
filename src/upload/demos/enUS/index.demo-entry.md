@@ -5,18 +5,18 @@ If latency didn't matter, I'd just fill trucks with hard disks.
 ## Demos
 
 ```demo
-basic
-drag
-submit-manually
-controlled
-on-finish
-default-files
-before-upload
-image-style
-image-card-style
-custom-request
-abstract
-download
+basic.vue
+drag.vue
+submit-manually.vue
+controlled.vue
+on-finish.vue
+default-files.vue
+before-upload.vue
+image-style.vue
+image-card-style.vue
+custom-request.vue
+abstract.vue
+download.vue
 ```
 
 ## API
@@ -33,6 +33,8 @@ download
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |  |
+| directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | NEXT_VERSION |
+| directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | NEXT_VERSION |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
@@ -54,7 +56,7 @@ download
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
-| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
+| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| undefined` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |  |
@@ -63,16 +65,18 @@ download
 
 #### UploadFileInfo Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| id | `string \| number` | Unique file ID. |
-| name | `string` | Filename. |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage | `number` | The progress percentage of the file being uploaded. |
-| file? | `File \| null` | The object of the file stored in the browser. |
-| thumbnailUrl? | `string \| null` | Thumbnail URL. |
-| type? | `string \| null` | MIME type. |
-| url? | `string \| null` | File URL. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| id | `string \| number` | Unique file ID. |  |
+| name | `string` | Filename. |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
+| batchId? | `string \| null` | Batch id of uploaded file. The files selected in a same upload batch will have same `batchId`. | NEXT_VERSION |
+| file? | `File \| null` | The object of the file stored in the browser. |  |
+| fullPath? | `string \| null` | Relative path of uploaded file. | NEXT_VERSION |
+| percentage? | `number` | The progress percentage of the file being uploaded. |  |
+| thumbnailUrl? | `string \| null` | Thumbnail URL. |  |
+| type? | `string \| null` | MIME type. |  |
+| url? | `string \| null` | File URL. |  |
 
 ### UploadTrigger Props
 

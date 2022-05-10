@@ -7,18 +7,20 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ## Demos
 
 ```demo
-basic
-custom-field
-cascade
-multiple
-filter
-drag-drop
-virtual
-async
-disabled
-prefix-and-suffix
-batch-render
+basic.vue
+custom-field.vue
+multiple.vue
+cascade.vue
+filter.vue
+drag-drop.vue
+virtual.vue
+async.vue
+disabled.vue
+prefix-and-suffix.vue
+batch-render.vue
 switcher-icon.vue
+node-props.vue
+checkbox-placement.vue
 ```
 
 ## API
@@ -27,6 +29,7 @@ switcher-icon.vue
 
 | Name | Type | default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
 | block-node | `boolean` | `false` | The node name is spread out in the whole row. |  |
@@ -34,6 +37,7 @@ switcher-icon.vue
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |  |
 | check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |  |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | NEXT_VERSION |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
@@ -44,15 +48,15 @@ switcher-icon.vue
 | draggable | `boolean` | `false` | Whether it can be dragged. |  |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
-| filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter | The function that filter tree nodes based on pattern. |  |
+| filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
+| show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |
-| leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |  |
+| node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |
-| remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load`. |  |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
@@ -80,6 +84,6 @@ switcher-icon.vue
 | checkboxDisabled? | `boolean` | Whether the checkbox is disabled. |
 | children? | `TreeOption[]` | Child nodes of the node. |
 | disabled? | `boolean` | Whether the node is disabled. |
-| isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in async expanding mode. |
 | prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
 | suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |

@@ -5,17 +5,17 @@
 ## 演示
 
 ```demo
-basic
-range
-mark
-restrict-selectable-values
-disabled
-disable-tooltip
-format
-reverse
-vertical
+basic.vue
+range.vue
+mark.vue
+restrict-selectable-values.vue
+disabled.vue
+disable-tooltip.vue
+format.vue
+reverse.vue
+vertical.vue
 show-tooltip.vue
-multiple-debug
+multiple-debug.vue
 ```
 
 ## API
@@ -30,6 +30,7 @@ multiple-debug
 | marks | `{ [markValue: number]: string }` | `undefined` | Slider 上的标记 |  |
 | max | `number` | `100` | 最大值 |  |
 | min | `number` | `0` | 最小值 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip 的弹出位置 | 2.25.0 |
 | range | `boolean` | `false` | 是否选择范围值 |  |
 | reverse | `boolean` | `false` | 是否倒转轨道 |  |
 | show-tooltip | `boolean` | `false` | 是否一直显示 tooltip，仅对非 range 生效 | 2.24.2 |

@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useLocale, useTheme } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
@@ -38,7 +38,8 @@ import type {
   DataTableInst,
   OnUpdateExpandedRowKeys,
   CreateSummary,
-  CreateRowProps
+  CreateRowProps,
+  DataTableOnLoad
 } from './interface'
 import { dataTableInjectionKey } from './interface'
 import { useGroupHeader } from './use-group-header'
@@ -50,6 +51,10 @@ export const dataTableProps = {
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
+  },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
   },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
@@ -104,6 +109,7 @@ export const dataTableProps = {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
   },
+  allowCheckingNotLoaded: Boolean,
   cascade: {
     type: Boolean,
     default: true
@@ -117,6 +123,11 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  paginationBehaviorOnFilter: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
+  onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
   >,
@@ -204,7 +215,8 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
+      useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -215,7 +227,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'DataTable',
-      'DataTable',
+      '-data-table',
       style,
       dataTableLight,
       props,
@@ -237,6 +249,7 @@ export default defineComponent({
       mergedFilterStateRef,
       mergedSortStateRef,
       firstContentfulColIndexRef,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       filter,
@@ -302,6 +315,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
@@ -345,9 +359,6 @@ export default defineComponent({
         return selectionColumn?.options
       }),
       rawPaginatedDataRef,
-      hasChildrenRef: computed(() => {
-        return treeMateRef.value.maxLevel > 0
-      }),
       filterMenuCssVarsRef: computed(() => {
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
@@ -359,12 +370,15 @@ export default defineComponent({
           '--n-action-divider-color': actionDividerColor
         } as CSSProperties
       }),
+      onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
+      paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       syncScrollState,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       doCheck,
@@ -385,6 +399,113 @@ export default defineComponent({
       sort,
       clearFilter
     }
+    const cssVarsRef = computed(() => {
+      const { size } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          borderColor,
+          tdColorHover,
+          thColor,
+          thColorHover,
+          tdColor,
+          tdTextColor,
+          thTextColor,
+          thFontWeight,
+          thButtonColorHover,
+          thIconColor,
+          thIconColorActive,
+          filterSize,
+          borderRadius,
+          lineHeight,
+          tdColorModal,
+          thColorModal,
+          borderColorModal,
+          thColorHoverModal,
+          tdColorHoverModal,
+          borderColorPopover,
+          thColorPopover,
+          tdColorPopover,
+          tdColorHoverPopover,
+          thColorHoverPopover,
+          paginationMargin,
+          emptyPadding,
+          boxShadowAfter,
+          boxShadowBefore,
+          sorterSize,
+          loadingColor,
+          loadingSize,
+          opacityLoading,
+          tdColorStriped,
+          tdColorStripedModal,
+          tdColorStripedPopover,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('thPadding', size)]: thPadding,
+          [createKey('tdPadding', size)]: tdPadding
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-th-padding': thPadding,
+        '--n-td-padding': tdPadding,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-line-height': lineHeight,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-th-color': thColor,
+        '--n-th-color-hover': thColorHover,
+        '--n-th-color-modal': thColorModal,
+        '--n-th-color-hover-modal': thColorHoverModal,
+        '--n-th-color-popover': thColorPopover,
+        '--n-th-color-hover-popover': thColorHoverPopover,
+        '--n-td-color': tdColor,
+        '--n-td-color-hover': tdColorHover,
+        '--n-td-color-modal': tdColorModal,
+        '--n-td-color-hover-modal': tdColorHoverModal,
+        '--n-td-color-popover': tdColorPopover,
+        '--n-td-color-hover-popover': tdColorHoverPopover,
+        '--n-th-text-color': thTextColor,
+        '--n-td-text-color': tdTextColor,
+        '--n-th-font-weight': thFontWeight,
+        '--n-th-button-color-hover': thButtonColorHover,
+        '--n-th-icon-color': thIconColor,
+        '--n-th-icon-color-active': thIconColorActive,
+        '--n-filter-size': filterSize,
+        '--n-pagination-margin': paginationMargin,
+        '--n-empty-padding': emptyPadding,
+        '--n-box-shadow-before': boxShadowBefore,
+        '--n-box-shadow-after': boxShadowAfter,
+        '--n-sorter-size': sorterSize,
+        '--n-loading-size': loadingSize,
+        '--n-loading-color': loadingColor,
+        '--n-opacity-loading': opacityLoading,
+        '--n-td-color-striped': tdColorStriped,
+        '--n-td-color-striped-modal': tdColorStripedModal,
+        '--n-td-color-striped-popover': tdColorStripedPopover
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'data-table',
+        computed(() => props.size[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
+    const mergedShowPaginationRef = computed(() => {
+      if (!props.pagination) return false
+      if (props.paginateSinglePage) return true
+      const mergedPagination = mergedPaginationRef.value
+      const { pageCount } = mergedPagination
+      if (pageCount !== undefined) return pageCount > 1
+      return (
+        mergedPagination.itemCount &&
+        mergedPagination.pageSize &&
+        mergedPagination.itemCount > mergedPagination.pageSize
+      )
+    })
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -393,102 +514,21 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
-      ...exposedMethods,
-      cssVars: computed(() => {
-        const { size } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            borderColor,
-            tdColorHover,
-            thColor,
-            thColorHover,
-            tdColor,
-            tdTextColor,
-            thTextColor,
-            thFontWeight,
-            thButtonColorHover,
-            thIconColor,
-            thIconColorActive,
-            filterSize,
-            borderRadius,
-            lineHeight,
-            tdColorModal,
-            thColorModal,
-            borderColorModal,
-            thColorHoverModal,
-            tdColorHoverModal,
-            borderColorPopover,
-            thColorPopover,
-            tdColorPopover,
-            tdColorHoverPopover,
-            thColorHoverPopover,
-            paginationMargin,
-            emptyPadding,
-            boxShadowAfter,
-            boxShadowBefore,
-            sorterSize,
-            loadingColor,
-            loadingSize,
-            opacityLoading,
-            tdColorStriped,
-            tdColorStripedModal,
-            tdColorStripedPopover,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('thPadding', size)]: thPadding,
-            [createKey('tdPadding', size)]: tdPadding
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-th-padding': thPadding,
-          '--n-td-padding': tdPadding,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-line-height': lineHeight,
-          '--n-border-color': borderColor,
-          '--n-border-color-modal': borderColorModal,
-          '--n-border-color-popover': borderColorPopover,
-          '--n-th-color': thColor,
-          '--n-th-color-hover': thColorHover,
-          '--n-th-color-modal': thColorModal,
-          '--n-th-color-hover-modal': thColorHoverModal,
-          '--n-th-color-popover': thColorPopover,
-          '--n-th-color-hover-popover': thColorHoverPopover,
-          '--n-td-color': tdColor,
-          '--n-td-color-hover': tdColorHover,
-          '--n-td-color-modal': tdColorModal,
-          '--n-td-color-hover-modal': tdColorHoverModal,
-          '--n-n-td-color-popover': tdColorPopover,
-          '--n-td-color-hover-popover': tdColorHoverPopover,
-          '--n-th-text-color': thTextColor,
-          '--n-td-text-color': tdTextColor,
-          '--n-th-font-weight': thFontWeight,
-          '--n-th-button-color-hover': thButtonColorHover,
-          '--n-th-icon-color': thIconColor,
-          '--n-th-icon-color-active': thIconColorActive,
-          '--n-filter-size': filterSize,
-          '--n-pagination-margin': paginationMargin,
-          '--n-empty-padding': emptyPadding,
-          '--n-box-shadow-before': boxShadowBefore,
-          '--n-box-shadow-after': boxShadowAfter,
-          '--n-sorter-size': sorterSize,
-          '--n-loading-size': loadingSize,
-          '--n-loading-color': loadingColor,
-          '--n-opacity-loading': opacityLoading,
-          '--n-td-color-striped': tdColorStriped,
-          '--n-td-color-striped-modal': tdColorStripedModal,
-          '--n-td-color-striped-popover': tdColorStripedPopover
-        }
-      })
+      mergedShowPagination: mergedShowPaginationRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, themeClass, onRender } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-data-table`,
+          themeClass,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,
             [`${mergedClsPrefix}-data-table--bottom-bordered`]:
@@ -504,7 +544,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />
         </div>
-        {this.pagination ? (
+        {this.mergedShowPagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>
             <NPagination
               theme={this.mergedTheme.peers.Pagination}

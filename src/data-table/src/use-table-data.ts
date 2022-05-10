@@ -2,7 +2,7 @@ import { computed, ref, ComputedRef } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { DataTableSetupProps } from './DataTable'
-import {
+import type {
   ColumnKey,
   Filter,
   FilterOptionValue,
@@ -15,7 +15,7 @@ import {
   RowKey
 } from './interface'
 import { createShallowClonedObject } from './utils'
-import { PaginationProps } from '../../pagination/src/Pagination'
+import type { PaginationProps } from '../../pagination/src/Pagination'
 import { call, warn } from '../../_utils'
 import { useSorter } from './use-sorter'
 // useTableData combines filter, sorter and pagination
@@ -32,14 +32,20 @@ export function useTableData (
   }
 ) {
   const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
-    return (
-      (props.columns.find((col) => {
-        if (col.type === 'selection') {
-          return true
+    const getSelectionColumn = (
+      cols: typeof props.columns
+    ): TableSelectionColumn | null => {
+      for (let i = 0; i < cols.length; ++i) {
+        const col = cols[i]
+        if ('children' in col) {
+          return getSelectionColumn(col.children)
+        } else if (col.type === 'selection') {
+          return col
         }
-        return false
-      }) as TableSelectionColumn | undefined) || null
-    )
+      }
+      return null
+    }
+    return getSelectionColumn(props.columns)
   })
 
   const treeMateRef = computed(() => {
@@ -84,8 +90,11 @@ export function useTableData (
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
       if (column.type === 'selection' || column.type === 'expand') return
-      controlledFilterState[column.key] =
-        column.filterOptionValues || column.filterOptionValue || null
+      if (column.filterOptionValues === undefined) {
+        controlledFilterState[column.key] = column.filterOptionValue ?? null
+      } else {
+        controlledFilterState[column.key] = column.filterOptionValues
+      }
     })
     const activeFilters = Object.assign(
       createShallowClonedObject(uncontrolledFilterStateRef.value),
@@ -198,14 +207,29 @@ export function useTableData (
     return pagination.pageSize
   })
 
-  const mergedCurrentPageRef = useMergedState(
+  const _mergedCurrentPageRef = useMergedState(
     controlledCurrentPageRef,
     uncontrolledCurrentPageRef
   )
+
   const mergedPageSizeRef = useMergedState(
     controlledPageSizeRef,
     uncontrolledPageSizeRef
   )
+
+  const boundedMergedCurrentPageRef = useMemo<number>(() => {
+    const page = _mergedCurrentPageRef.value
+    return props.remote
+      ? page
+      : Math.max(
+        1,
+        Math.min(
+          Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
+          page
+        )
+      )
+  })
+
   const mergedPageCountRef = computed(() => {
     const { pagination } = props
     if (pagination) {
@@ -219,7 +243,7 @@ export function useTableData (
     if (props.remote) return treeMateRef.value.treeNodes
     if (!props.pagination) return sortedDataRef.value
     const pageSize = mergedPageSizeRef.value
-    const startIndex = (mergedCurrentPageRef.value - 1) * pageSize
+    const startIndex = (boundedMergedCurrentPageRef.value - 1) * pageSize
     return sortedDataRef.value.slice(startIndex, startIndex + pageSize)
   })
 
@@ -279,7 +303,7 @@ export function useTableData (
       // writing merged props after pagination to avoid
       // pagination[key] === undefined
       // key still exists but value is undefined
-      page: mergedCurrentPageRef.value,
+      page: boundedMergedCurrentPageRef.value,
       pageSize: mergedPageSizeRef.value,
       pageCount:
         mergedItemCountRef.value === undefined
@@ -310,7 +334,7 @@ export function useTableData (
 
   function doUpdateFilters (
     filters: FilterState,
-    sourceColumn?: TableBaseColumn
+    sourceColumn: TableBaseColumn
   ): void {
     const {
       onUpdateFilters,
@@ -336,16 +360,16 @@ export function useTableData (
   }
   function filter (filters: FilterState | null): void {
     if (!filters) {
-      doUpdateFilters({})
+      uncontrolledFilterStateRef.value = {}
     } else if (filters) {
-      doUpdateFilters(createShallowClonedObject(filters))
+      uncontrolledFilterStateRef.value = createShallowClonedObject(filters)
     } else if (__DEV__) {
       warn('data-table', '`filters` is not an object')
     }
   }
   return {
     treeMateRef,
-    mergedCurrentPageRef,
+    mergedCurrentPageRef: boundedMergedCurrentPageRef,
     mergedPaginationRef,
     paginatedDataRef,
     rawPaginatedDataRef,

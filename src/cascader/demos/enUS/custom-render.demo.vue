@@ -47,15 +47,16 @@ function getOptions (depth = 3, iterator = 1, prefix = '') {
   }
   return options
 }
+
 export default defineComponent({
   setup () {
     return {
       value: ref(null),
       options: getOptions(),
-      handleUpdateValue (...args) {
+      handleUpdateValue (...args: unknown[]) {
         console.log(...args)
       },
-      renderLabel (option) {
+      renderLabel (option: { value?: string | number; label?: string }) {
         return `prefix ${option.label}`
       }
     }

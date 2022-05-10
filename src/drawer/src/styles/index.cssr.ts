@@ -146,6 +146,9 @@ export default c([
     top: 0;
     bottom: 0;
   `, [
+    cM('invisible', `
+      background-color: rgba(0, 0, 0, 0)
+    `),
     fadeInTransition({
       enterDuration: '0.2s',
       leaveDuration: '0.2s',

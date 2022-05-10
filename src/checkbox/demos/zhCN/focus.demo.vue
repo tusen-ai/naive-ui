@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-space item-style="display: flex; align-item: center;">
+  <n-space item-style="display: flex; align-items: center;">
     <n-button @click="handleClick">
       聚焦，一秒后失效
     </n-button>

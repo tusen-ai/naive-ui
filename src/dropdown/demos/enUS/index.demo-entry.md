@@ -5,17 +5,17 @@ When you have some functions to trigger.
 ## Demos
 
 ```demo
-basic
-icon
-trigger
-cascade
-arrow
-placement
-size
-manual-position
-batch-render
-render
-option-props
+basic.vue
+icon.vue
+trigger.vue
+cascade.vue
+arrow.vue
+placement.vue
+size.vue
+manual-position.vue
+batch-render.vue
+render.vue
+option-props.vue
 ```
 
 ## API
@@ -46,7 +46,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | children? | `Array<DropdownOption \| DropdownDividerOption>` | Child options. |
 | icon? | `() => VNodeChild` | Custom render function of an option icon. |
 | key | `string \| number` | Option ID (should be unique). |
-| label | `string` | Displayed label value. |
+| label | `string \| () => VNodeChild)` | Displayed label value. |
 | disabled | `boolean` | Whether to disable the option. |
 | props | `HTMLAttributes` | Customize option props. |
 

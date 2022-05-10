@@ -10,8 +10,10 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
-import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
+import { hash } from 'css-render'
+import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
+import { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalTheme,
   GlobalThemeOverrides,
@@ -19,15 +21,11 @@ import type {
   GlobalIconConfig
 } from './interface'
 import type {
-  ConfigProviderInjection,
   RtlProp,
   RtlEnabledState,
   Breakpoints
 } from './internal-interface'
-import { NDateLocale, NLocale } from '../../locales'
-
-export const configProviderInjectionKey =
-  createInjectionKey<ConfigProviderInjection>('n-config-provider')
+import { configProviderInjectionKey } from './context'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -50,6 +48,10 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
+  inlineThemeDisabled: {
+    type: Boolean,
+    default: undefined
+  },
   // deprecated
   as: {
     type: String as PropType<string | undefined>,
@@ -135,6 +137,11 @@ export default defineComponent({
         const rtlEnabledState: RtlEnabledState = {}
         for (const rtlInfo of rtl) {
           rtlEnabledState[rtlInfo.name] = markRaw(rtlInfo)
+          rtlInfo.peers?.forEach((peerRtlInfo) => {
+            if (!(peerRtlInfo.name in rtlEnabledState)) {
+              rtlEnabledState[peerRtlInfo.name] = markRaw(peerRtlInfo)
+            }
+          })
         }
         return rtlEnabledState
       }
@@ -142,7 +149,31 @@ export default defineComponent({
     const mergedBreakpointsRef = computed(() => {
       return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
     })
+    const inlineThemeDisabled =
+      props.inlineThemeDisabled || NConfigProvider?.inlineThemeDisabled
+
+    const mergedThemeHashRef = computed(() => {
+      const { value: theme } = mergedThemeRef
+      const { value: mergedThemeOverrides } = mergedThemeOverridesRef
+      const hasThemeOverrides =
+        mergedThemeOverrides && Object.keys(mergedThemeOverrides).length !== 0
+      const themeName = theme?.name
+      if (themeName) {
+        if (hasThemeOverrides) {
+          return `${themeName}-${hash(
+            JSON.stringify(mergedThemeOverridesRef.value)
+          )}`
+        }
+        return themeName
+      } else {
+        if (hasThemeOverrides) {
+          return hash(JSON.stringify(mergedThemeOverridesRef.value))
+        }
+        return ''
+      }
+    })
     provide(configProviderInjectionKey, {
+      mergedThemeHashRef,
       mergedBreakpointsRef,
       mergedRtlRef,
       mergedIconsRef,
@@ -169,7 +200,8 @@ export default defineComponent({
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
       }),
       mergedThemeRef,
-      mergedThemeOverridesRef
+      mergedThemeOverridesRef,
+      inlineThemeDisabled: inlineThemeDisabled || false
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

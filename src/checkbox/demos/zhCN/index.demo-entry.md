@@ -5,14 +5,16 @@
 ## 演示
 
 ```demo
-basic
-group
-grid
-indeterminate
-controlled
-event
-customize-value
+basic.vue
+size.vue
+group.vue
+grid.vue
+indeterminate.vue
+controlled.vue
+event.vue
+customize-value.vue
 focus.vue
+rtl-debug.vue
 ```
 
 ## API

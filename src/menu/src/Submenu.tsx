@@ -12,13 +12,12 @@ import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
+// eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { SubmenuInjection } from './use-menu-child'
 import { MenuMixedOption, TmNode } from './interface'
-import { menuItemGroupInjectionKey } from './MenuOptionGroup'
-import { createInjectionKey } from '../../_utils'
+import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -42,16 +41,13 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey =
-  createInjectionKey<SubmenuInjection>('n-submenu')
-
-export default defineComponent({
+export const NSubmenu = defineComponent({
   name: 'Submenu',
   props: submenuProps,
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild
-    const { props: menuProps, mergedCollapsedRef } = NMenu
+    const { props: menuProps, mergedCollapsedRef, mergedThemeRef } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
       if (NSubmenu?.mergedDisabledRef.value) return true
@@ -81,6 +77,7 @@ export default defineComponent({
     }
     return {
       menuProps,
+      mergedTheme: mergedThemeRef,
       doSelect: NMenu.doSelect,
       inverted: NMenu.invertedRef,
       isHorizontal: NMenu.isHorizontalRef,
@@ -171,13 +168,15 @@ export default defineComponent({
     }
     return this.root ? (
       <NDropdown
+        size="large"
         {...this.menuProps?.dropdownProps}
+        themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
+        theme={this.mergedTheme.peers.Dropdown}
         builtinThemeOverrides={{
           fontSizeLarge: '14px',
           optionIconSizeLarge: '18px'
         }}
         value={this.mergedValue}
-        size="large"
         trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}

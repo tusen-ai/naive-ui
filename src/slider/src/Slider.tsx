@@ -20,7 +20,13 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
-import { useTheme, useFormItem, useConfig, ThemeProps } from '../../_mixins'
+import {
+  useTheme,
+  useFormItem,
+  useConfig,
+  ThemeProps,
+  useThemeClass
+} from '../../_mixins'
 import {
   call,
   useAdjustedTo,
@@ -95,10 +101,11 @@ export default defineComponent({
   name: 'Slider',
   props: sliderProps,
   setup (props) {
-    const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
+      useConfig(props)
     const themeRef = useTheme(
       'Slider',
-      'Slider',
+      '-slider',
       style,
       sliderLight,
       props,
@@ -520,6 +527,86 @@ export default defineComponent({
       }
       void nextTick(syncPosition)
     })
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          railColor,
+          railColorHover,
+          fillColor,
+          fillColorHover,
+          handleColor,
+          opacityDisabled,
+          dotColor,
+          dotColorModal,
+          handleBoxShadow,
+          handleBoxShadowHover,
+          handleBoxShadowActive,
+          handleBoxShadowFocus,
+          dotBorder,
+          dotBoxShadow,
+          railHeight,
+          railWidthVertical,
+          handleSize,
+          dotHeight,
+          dotWidth,
+          dotBorderRadius,
+          fontSize,
+          dotBorderActive,
+          dotColorPopover
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-dot-border': dotBorder,
+        '--n-dot-border-active': dotBorderActive,
+        '--n-dot-border-radius': dotBorderRadius,
+        '--n-dot-box-shadow': dotBoxShadow,
+        '--n-dot-color': dotColor,
+        '--n-dot-color-modal': dotColorModal,
+        '--n-dot-color-popover': dotColorPopover,
+        '--n-dot-height': dotHeight,
+        '--n-dot-width': dotWidth,
+        '--n-fill-color': fillColor,
+        '--n-fill-color-hover': fillColorHover,
+        '--n-font-size': fontSize,
+        '--n-handle-box-shadow': handleBoxShadow,
+        '--n-handle-box-shadow-active': handleBoxShadowActive,
+        '--n-handle-box-shadow-focus': handleBoxShadowFocus,
+        '--n-handle-box-shadow-hover': handleBoxShadowHover,
+        '--n-handle-color': handleColor,
+        '--n-handle-size': handleSize,
+        '--n-opacity-disabled': opacityDisabled,
+        '--n-rail-color': railColor,
+        '--n-rail-color-hover': railColorHover,
+        '--n-rail-height': railHeight,
+        '--n-rail-width-vertical': railWidthVertical
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('slider', undefined, cssVarsRef, props)
+      : undefined
+    const indicatorCssVarsRef = computed(() => {
+      const {
+        self: {
+          fontSize,
+          indicatorColor,
+          indicatorBoxShadow,
+          indicatorTextColor,
+          indicatorBorderRadius
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-indicator-border-radius': indicatorBorderRadius,
+        '--n-indicator-box-shadow': indicatorBoxShadow,
+        '--n-indicator-color': indicatorColor,
+        '--n-indicator-text-color': indicatorTextColor
+      }
+    })
+    const indicatorThemeClassHandle = inlineThemeDisabled
+      ? useThemeClass('slider-indicator', undefined, indicatorCssVarsRef, props)
+      : undefined
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -548,88 +635,22 @@ export default defineComponent({
       handleHandleMouseEnter,
       handleHandleMouseLeave,
       handleRailKeyDown,
-      indicatorCssVars: computed(() => {
-        const {
-          self: {
-            fontSize,
-            indicatorColor,
-            indicatorBoxShadow,
-            indicatorTextColor,
-            indicatorBorderRadius
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-indicator-border-radius': indicatorBorderRadius,
-          '--n-indicator-box-shadow': indicatorBoxShadow,
-          '--n-indicator-color': indicatorColor,
-          '--n-indicator-text-color': indicatorTextColor
-        }
-      }),
-      cssVars: computed(() => {
-        const {
-          self: {
-            railColor,
-            railColorHover,
-            fillColor,
-            fillColorHover,
-            handleColor,
-            opacityDisabled,
-            dotColor,
-            dotColorModal,
-            handleBoxShadow,
-            handleBoxShadowHover,
-            handleBoxShadowActive,
-            handleBoxShadowFocus,
-            dotBorder,
-            dotBoxShadow,
-            railHeight,
-            railWidthVertical,
-            handleSize,
-            dotHeight,
-            dotWidth,
-            dotBorderRadius,
-            fontSize,
-            dotBorderActive,
-            dotColorPopover
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-dot-border': dotBorder,
-          '--n-dot-border-active': dotBorderActive,
-          '--n-dot-border-radius': dotBorderRadius,
-          '--n-dot-box-shadow': dotBoxShadow,
-          '--n-dot-color': dotColor,
-          '--n-dot-color-modal': dotColorModal,
-          '--n-dot-color-popover': dotColorPopover,
-          '--n-dot-height': dotHeight,
-          '--n-dot-width': dotWidth,
-          '--n-fill-color': fillColor,
-          '--n-fill-color-hover': fillColorHover,
-          '--n-font-size': fontSize,
-          '--n-handle-box-shadow': handleBoxShadow,
-          '--n-handle-box-shadow-active': handleBoxShadowActive,
-          '--n-handle-box-shadow-focus': handleBoxShadowFocus,
-          '--n-handle-box-shadow-hover': handleBoxShadowHover,
-          '--n-handle-color': handleColor,
-          '--n-handle-size': handleSize,
-          '--n-opacity-disabled': opacityDisabled,
-          '--n-rail-color': railColor,
-          '--n-rail-color-hover': railColorHover,
-          '--n-rail-height': railHeight,
-          '--n-rail-width-vertical': railWidthVertical
-        }
-      })
+      indicatorCssVars: inlineThemeDisabled ? undefined : indicatorCssVarsRef,
+      indicatorThemeClass: indicatorThemeClassHandle?.themeClass,
+      indicatorOnRender: indicatorThemeClassHandle?.onRender,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, formatTooltip } = this
+    const { mergedClsPrefix, themeClass, formatTooltip } = this
+    this.onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-slider`,
+          themeClass,
           {
             [`${mergedClsPrefix}-slider--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-slider--active`]: this.activeIndex !== -1,
@@ -652,10 +673,8 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-slider-dots`,
-                {
-                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]:
-                    this.dotTransitionDisabled
-                }
+                this.dotTransitionDisabled &&
+                  `${mergedClsPrefix}-slider-dots--transition-disabled`
               ]}
             >
               {this.markInfos.map((mark) => (
@@ -728,22 +747,29 @@ export default defineComponent({
                                 }
                               >
                                 {{
-                                  default: () =>
-                                    showTooltip ? (
-                                      <div
-                                        class={[
-                                          `${mergedClsPrefix}-slider-handle-indicator`,
-                                          `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
-                                        ]}
-                                        style={
-                                          this.indicatorCssVars as CSSProperties
-                                        }
-                                      >
-                                        {typeof formatTooltip === 'function'
-                                          ? formatTooltip(value)
-                                          : value}
-                                      </div>
-                                    ) : null
+                                  default: () => {
+                                    if (showTooltip) {
+                                      this.indicatorOnRender?.()
+                                      return (
+                                        <div
+                                          class={[
+                                            `${mergedClsPrefix}-slider-handle-indicator`,
+                                            this.indicatorThemeClass,
+                                            `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
+                                          ]}
+                                          style={
+                                            this
+                                              .indicatorCssVars as CSSProperties
+                                          }
+                                        >
+                                          {typeof formatTooltip === 'function'
+                                            ? formatTooltip(value)
+                                            : value}
+                                        </div>
+                                      )
+                                    }
+                                    return null
+                                  }
                                 }}
                               </Transition>
                             )

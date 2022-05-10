@@ -24,29 +24,33 @@ export default cB('timeline', `
   cM('horizontal', `
     flex-direction: row;
   `, [
-    cB('timeline-item', `
-      flex-shrink: 0;
-      padding-right: 40px;
-    `, [
-      cB('timeline-item-content', `
-        margin-top: calc(var(--n-icon-size) + 12px);
+    c('>', [
+      cB('timeline-item', `
+        flex-shrink: 0;
+        padding-right: 40px;
       `, [
-        cE('meta', `
-          margin-top: 6px;
-          margin-bottom: unset;
-        `)
-      ]),
-      cB('timeline-item-timeline', `
-        width: 100%;
-        height: calc(var(--n-icon-size) + 12px);
-      `, [
-        cE('line', `
-          left: var(--n-icon-size);
-          top: calc(var(--n-icon-size) / 2 - 1px);
-          right: 0px;
-          width: unset;
-          height: 2px;
-        `)
+        c('>', [
+          cB('timeline-item-content', `
+          margin-top: calc(var(--n-icon-size) + 12px);
+          `, [
+            cE('meta', `
+              margin-top: 6px;
+              margin-bottom: unset;
+            `)
+          ]),
+          cB('timeline-item-timeline', `
+            width: 100%;
+            height: calc(var(--n-icon-size) + 12px);
+          `, [
+            cE('line', `
+              left: var(--n-icon-size);
+              top: calc(var(--n-icon-size) / 2 - 1px);
+              right: 0px;
+              width: unset;
+              height: 2px;
+            `)
+          ])
+        ])
       ])
     ])
   ]),
@@ -108,6 +112,17 @@ export default cB('timeline', `
         margin-bottom: 20px;
         color: var(--n-meta-text-color);
       `)
+    ]),
+    cM('dashed-line-type', [
+      cB('timeline-item-timeline', [
+        cE('line', `
+          --n-color-start: var(--n-line-color);
+          transition: --n-color-start .3s var(--n-bezier);
+          background-color: transparent;
+          background-image: linear-gradient(180deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
+          background-size: 1px 10px;
+        `)
+      ])
     ]),
     cB('timeline-item-timeline', `
       width: calc(var(--n-icon-size) + 12px);

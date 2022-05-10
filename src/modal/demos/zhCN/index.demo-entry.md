@@ -5,27 +5,28 @@
 ## 演示
 
 ```demo
-basic
-controlled
-mask-closable
-custom-position
-preset-card
-preset-confirm
-preset-confirm-slot
-transform-origin
-a11y-debug
-raw-debug
-dark-1-debug
-dark-2-debug
-dark-3-debug
-dark-4-debug
-dark-5-debug
-drawer-debug
-dark-6-debug
-dark-7-debug
-dark-8-debug
-dark-9-debug
-dark-10-debug
+basic.vue
+controlled.vue
+mask-closable.vue
+custom-position.vue
+preset-card.vue
+preset-confirm.vue
+preset-confirm-slot.vue
+transform-origin.vue
+nested-debug.vue
+a11y-debug.vue
+raw-debug.vue
+dark-1-debug.vue
+dark-2-debug.vue
+dark-3-debug.vue
+dark-4-debug.vue
+dark-5-debug.vue
+drawer-debug.vue
+dark-6-debug.vue
+dark-7-debug.vue
+dark-8-debug.vue
+dark-9-debug.vue
+dark-10-debug.vue
 ```
 
 ## API
@@ -35,6 +36,7 @@ dark-10-debug
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | auto-focus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.24.2 |
+| block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | NEXT_VERSION |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Modal | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |

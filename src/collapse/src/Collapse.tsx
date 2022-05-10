@@ -11,7 +11,7 @@ import {
   Slots
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   call,
@@ -22,6 +22,7 @@ import {
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 import {
   OnItemHeaderClick,
   OnUpdateExpandedNames,
@@ -101,7 +102,8 @@ export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const uncontrolledExpandedNamesRef = ref<
     string | number | Array<string | number> | null
     >(props.defaultExpandedNames)
@@ -112,7 +114,7 @@ export default defineComponent({
     )
     const themeRef = useTheme(
       'Collapse',
-      'Collapse',
+      '-collapse',
       style,
       collapseLight,
       props,
@@ -188,39 +190,52 @@ export default defineComponent({
       slots,
       toggleItem
     })
+    const rtlEnabledRef = useRtl('Collapse', mergedRtlRef, mergedClsPrefixRef)
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          titleFontWeight,
+          dividerColor,
+          titleTextColor,
+          textColor,
+          arrowColor,
+          fontSize,
+          titleFontSize
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-divider-color': dividerColor,
+        '--n-title-font-size': titleFontSize,
+        '--n-title-text-color': titleTextColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-arrow-color': arrowColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('collapse', undefined, cssVarsRef, props)
+      : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            titleFontWeight,
-            dividerColor,
-            titleTextColor,
-            textColor,
-            arrowColor,
-            fontSize,
-            titleFontSize
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-text-color': textColor,
-          '--n-divider-color': dividerColor,
-          '--n-title-font-size': titleFontSize,
-          '--n-title-text-color': titleTextColor,
-          '--n-title-font-weight': titleFontWeight,
-          '--n-arrow-color': arrowColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
+    this.onRender?.()
     return (
       <div
-        class={`${this.mergedClsPrefix}-collapse`}
+        class={[
+          `${this.mergedClsPrefix}-collapse`,
+          this.rtlEnabled && `${this.mergedClsPrefix}-collapse--rtl`,
+          this.themeClass
+        ]}
         style={this.cssVars as CSSProperties}
       >
         {this.$slots}

@@ -22,14 +22,12 @@ export default cB('popconfirm', [
     `)
   ]),
   cE('action', `
-    margin-top: 8px;
     display: flex;
     justify-content: flex-end;
   `, [
+    c('&:not(:first-child)', 'margin-top: 8px'),
     cB('button', [
-      c('&:not(:last-child)', {
-        marginRight: '8px'
-      })
+      c('&:not(:last-child)', 'margin-right: 8px;')
     ])
   ])
 ])

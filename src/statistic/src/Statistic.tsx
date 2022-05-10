@@ -1,6 +1,7 @@
-import { defineComponent, computed, CSSProperties, h } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { defineComponent, computed, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import { resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { statisticLight } from '../styles'
 import type { StatisticTheme } from '../styles'
@@ -19,78 +20,109 @@ export default defineComponent({
   name: 'Statistic',
   props: statisticProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
-      'Statistic',
+      '-statistic',
       style,
       statisticLight,
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const {
+        self: {
+          labelFontWeight,
+          valueFontWeight,
+          valuePrefixTextColor,
+          labelTextColor,
+          valueSuffixTextColor,
+          valueTextColor,
+          labelFontSize
+        },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-label-font-size': labelFontSize,
+        '--n-label-font-weight': labelFontWeight,
+        '--n-label-text-color': labelTextColor,
+        '--n-value-font-weight': valueFontWeight,
+        '--n-value-prefix-text-color': valuePrefixTextColor,
+        '--n-value-suffix-text-color': valueSuffixTextColor,
+        '--n-value-text-color': valueTextColor
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('statistic', undefined, cssVarsRef, props)
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            labelFontWeight,
-            valueFontWeight,
-            valuePrefixTextColor,
-            labelTextColor,
-            valueSuffixTextColor,
-            valueTextColor,
-            labelFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-label-font-size': labelFontSize,
-          '--n-label-font-weight': labelFontWeight,
-          '--n-label-text-color': labelTextColor,
-          '--n-value-font-weight': valueFontWeight,
-          '--n-value-prefix-text-color': valuePrefixTextColor,
-          '--n-value-suffix-text-color': valueSuffixTextColor,
-          '--n-value-text-color': valueTextColor
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const {
+      mergedClsPrefix,
+      $slots: {
+        default: defaultSlot,
+        label: labelSlot,
+        prefix: prefixSlot,
+        suffix: suffixSlot
+      }
+    } = this
+    this.onRender?.()
     return (
       <div
-        class={`${mergedClsPrefix}-statistic`}
-        style={this.cssVars as CSSProperties}
+        class={[`${mergedClsPrefix}-statistic`, this.themeClass]}
+        style={this.cssVars as any}
       >
-        <div class={`${mergedClsPrefix}-statistic__label`}>
-          {this.label || $slots.label?.()}
-        </div>
+        {resolveWrappedSlot(labelSlot, (children) => (
+          <div class={`${mergedClsPrefix}-statistic__label`}>
+            {this.label || children}
+          </div>
+        ))}
         <div
           class={`${mergedClsPrefix}-statistic-value`}
           style={{
             fontVariantNumeric: this.tabularNums ? 'tabular-nums' : ''
           }}
         >
-          {$slots.prefix ? (
-            <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
-              {$slots.prefix()}
-            </span>
-          ) : null}
+          {resolveWrappedSlot(
+            prefixSlot,
+            (children) =>
+              children && (
+                <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
+                  {children}
+                </span>
+              )
+          )}
           {this.value !== undefined ? (
             <span class={`${mergedClsPrefix}-statistic-value__content`}>
               {this.value}
             </span>
           ) : (
-            <span class={`${mergedClsPrefix}-statistic-value__content`}>
-              {$slots}
-            </span>
+            resolveWrappedSlot(
+              defaultSlot,
+              (children) =>
+                children && (
+                  <span class={`${mergedClsPrefix}-statistic-value__content`}>
+                    {children}
+                  </span>
+                )
+            )
           )}
-          {$slots.suffix ? (
-            <span class={`${mergedClsPrefix}-statistic-value__suffix`}>
-              {$slots.suffix()}
-            </span>
-          ) : null}
+          {resolveWrappedSlot(
+            suffixSlot,
+            (children) =>
+              children && (
+                <span class={`${mergedClsPrefix}-statistic-value__suffix`}>
+                  {children}
+                </span>
+              )
+          )}
         </div>
       </div>
     )
