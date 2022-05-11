@@ -5,9 +5,16 @@ import {
   PropType,
   watchEffect,
   VNodeChild,
-  reactive
+  ref
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+
+interface TimeInfo {
+  hours: number
+  minutes: number
+  seconds: number
+  milliseconds: number
+}
 
 const countdownProps = {
   duration: {
@@ -22,14 +29,7 @@ const countdownProps = {
     type: Number as PropType<0 | 1 | 2 | 3>,
     default: 0
   },
-  render: Function as PropType<
-  (props: {
-    hours: number
-    minutes: number
-    seconds: number
-    milliseconds: number
-  }) => VNodeChild
-  >,
+  render: Function as PropType<(props: TimeInfo) => VNodeChild>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -44,37 +44,32 @@ export default defineComponent({
     let elapsed = 0
     let finished = false
 
-    const timeInfo = reactive({
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      milliseconds: 0
+    // in ms
+    const distanceRef = ref(0)
+    watchEffect(() => {
+      distanceRef.value = props.duration
     })
 
-    deriveDisplayValue(props.duration)
     let pnow = -1
 
     function getDistance (time: DOMHighResTimeStamp): number {
       return props.duration - elapsed + pnow - time
     }
 
-    function deriveDisplayValue (distance: number): void {
+    function getTimeInfo (distance: number): TimeInfo {
       const hours = Math.floor(distance / 3600000)
       const minutes = Math.floor((distance % 3600000) / 60000)
       const seconds = Math.floor((distance % 60000) / 1000)
       const milliseconds = Math.floor(distance % 1000)
-      timeInfo.hours = hours
-      timeInfo.minutes = minutes
-      timeInfo.seconds = seconds
-      timeInfo.milliseconds = milliseconds
+      return {
+        hours,
+        minutes,
+        seconds,
+        milliseconds
+      }
     }
 
-    function getDisplayValue (info: {
-      hours: number
-      minutes: number
-      seconds: number
-      milliseconds: number
-    }): string {
+    function getDisplayValue (info: TimeInfo): string {
       const { hours, minutes, seconds, milliseconds } = info
       const { precision } = props
       switch (precision) {
@@ -99,7 +94,7 @@ export default defineComponent({
       const { precision } = props
       const distance = getDistance(performance.now())
       if (distance <= 0) {
-        deriveDisplayValue(0)
+        distanceRef.value = 0
         stopTimer()
         if (!finished) {
           props.onFinish?.()
@@ -119,7 +114,7 @@ export default defineComponent({
         default:
           leftTime = distance % 1000
       }
-      deriveDisplayValue(distance)
+      distanceRef.value = distance
       timerId = window.setTimeout(() => {
         frame()
       }, leftTime)
@@ -153,7 +148,25 @@ export default defineComponent({
       stopTimer()
     })
     return () => {
-      const { render } = props
+      const { render, precision } = props
+      const { value: distance } = distanceRef
+      let timeInfo: TimeInfo
+      switch (precision) {
+        case 0:
+          timeInfo = getTimeInfo(distance + 999)
+          timeInfo.milliseconds = 0
+          break
+        case 1:
+          timeInfo = getTimeInfo(distance + 99)
+          timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 100) * 100
+          break
+        case 2:
+          timeInfo = getTimeInfo(distance + 9)
+          timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 10) * 10
+          break
+        case 3:
+          timeInfo = getTimeInfo(distance)
+      }
       if (render) {
         return render(timeInfo)
       } else {

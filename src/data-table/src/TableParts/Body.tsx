@@ -164,7 +164,7 @@ export default defineComponent({
       componentId,
       scrollPartRef,
       mergedTableLayoutRef,
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
       indentRef,
       rowPropsRef,
       maxHeightRef,
@@ -445,7 +445,7 @@ export default defineComponent({
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
       mergedTableLayout: mergedTableLayoutRef,
-      firstContentfulColIndex: firstContentfulColIndexRef,
+      childTriggerColIndex: childTriggerColIndexRef,
       indent: indentRef,
       rowProps: rowPropsRef,
       maxHeight: maxHeightRef,
@@ -526,7 +526,7 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeySet,
               componentId,
-              firstContentfulColIndex,
+              childTriggerColIndex,
               rowProps,
               handleMouseenterTable,
               handleMouseleaveTable,
@@ -759,7 +759,7 @@ export default defineComponent({
                           }
                         ]}
                       >
-                        {hasChildren && colIndex === firstContentfulColIndex
+                        {hasChildren && colIndex === childTriggerColIndex
                           ? [
                               repeat(
                                 isSummary ? 0 : rowInfo.tmNode.level,

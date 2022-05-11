@@ -142,9 +142,7 @@ export default c([
         })
       ])
     ]),
-    cM('loading', {
-      'pointer-events': 'none'
-    }),
+    cM('loading', 'cursor: wait;'),
     cB('base-wave', `
       pointer-events: none;
       top: 0;

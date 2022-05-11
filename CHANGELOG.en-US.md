@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.28.4
+
+### Fixes
+
+- Fix `n-theme-editor`'s content can't be scrolled.
+
+## 2.28.3
 
 ### Fixes
 
@@ -15,6 +21,12 @@
 - Fix `n-tree` can't use `width: fit-content;` style, closes [#2875](https://github.com/TuSimple/naive-ui/issues/2875).
 - Fix `n-dropdown`'s `on-update:show` prop will be triggered twice, closes [#2905](https://github.com/TuSimple/naive-ui/issues/2905).
 - Fix `n-select` can select option by pressing enter after options are cleared.
+- Fix `n-data-table`'s `selection` and `expand` column can't set width.
+- Fix `n-checkbox` contains selectable whitespace.
+- Fix `DescriptionsProps` is misspelled as `DescriptionProps`.
+- Fix `n-icon` misses `IconProps`.
+- Fix `n-icon-wrapper` misses `IconWrapperProps`.
+- Fix `n-countdown`'s display value is 1s faster than actual left time when `precision=0`, closes [#2910](https://github.com/TuSimple/naive-ui/issues/2910).
 
 ### Feats
 
@@ -35,8 +47,8 @@
 - `n-modal` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `block-scroll` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
 - `n-drawer` adds `show-mask` prop, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2846).
-- `useDialog` supports `block-scroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
-- `useDialog` supports `autoFocus` option.
+- `useDialog().xxx` supports `blockScroll` option, closes [#2556](https://github.com/TuSimple/naive-ui/issues/2556).
+- `useDialog().xxx` supports `autoFocus` option.
 - `n-button` adds `native-focus-behavior` prop, closes [#2882](https://github.com/TuSimple/naive-ui/issues/2882).
 - `n-time-picker` adds `on-confirm` prop.
 - `n-time-picker` adds `on-clear` prop.
@@ -50,7 +62,7 @@
 - `n-upload` adds `directory` prop.
 - `n-upload` adds `directory-dnd` prop.
 - `UploadFileInfo` adds `fullPath` and `batchId` attrs.
-- `n-color-picker` adds `on-confirm` prop.
+- `DataTableBaseColumn` adds `tree` attr, closes [#2757](https://github.com/TuSimple/naive-ui/issues/2757).
 
 ## 2.28.2
 

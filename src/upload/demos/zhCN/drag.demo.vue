@@ -1,10 +1,13 @@
 <markdown>
 # 拖拽上传
+
+你可以把 `directory-dnd` 设为 `true` 来允许拖拽上传文件夹。
 </markdown>
 
 <template>
   <n-upload
     multiple
+    directory-dnd
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   >
     <n-upload-dragger>

@@ -1,9 +1,10 @@
 {
   "name": "naive-ui",
-  "version": "2.28.2",
+  "version": "2.28.4",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "types": "es/index.d.ts",
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
@@ -122,7 +123,8 @@
     "vite": "^2.9.5",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14",
-    "vue-tsc": "0.34.11"
+    "vue-tsc": "0.34.12",
+    "vfonts": "^0.1.0"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
@@ -143,7 +145,6 @@
     "seemly": "^0.3.3",
     "treemate": "^0.3.11",
     "vdirs": "^0.1.8",
-    "vfonts": "^0.0.3",
     "vooks": "^0.2.12",
     "vueuc": "^0.4.32"
   },

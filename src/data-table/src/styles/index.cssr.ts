@@ -101,7 +101,6 @@ export default c([
         })
       ])
     ]),
-    cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
       margin-right: 8px;
       display: inline-block;
