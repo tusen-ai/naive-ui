@@ -61,6 +61,7 @@ describe('n-layout', () => {
         .element.children[3].getAttribute('class')
     ).toContain('n-layout-footer')
     expect(wrapper.find('.n-layout-footer').text()).toBe('test-footer')
+    wrapper.unmount()
   })
 
   it('should work with `content-style` prop', async () => {
@@ -85,6 +86,7 @@ describe('n-layout', () => {
     expect(
       wrapper.find('.n-layout-sider-scroll-container').attributes('style')
     ).toContain('padding: 24px')
+    wrapper.unmount()
   })
 
   it('should work with `embedded` prop', async () => {
@@ -100,6 +102,7 @@ describe('n-layout', () => {
       }
     })
     expect(wrapper.find('.n-layout').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -128,6 +131,7 @@ describe('n-layout', () => {
     expect(wrapper.find('.n-layout-footer').classes()).toContain(
       'n-layout-footer--bordered'
     )
+    wrapper.unmount()
   })
 
   it('should work with `position` prop', async () => {
