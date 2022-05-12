@@ -160,4 +160,27 @@ describe('n-layout', () => {
     )
     wrapper.unmount()
   })
+
+  it('should work with `sider-placement` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        hasSider: true
+      },
+      slots: {
+        default: () => [
+          h(NLayoutSider, null, { default: () => 'test-sider' }),
+          h(NLayoutContent, null, { default: () => 'test-footer' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-layout-sider').classes()).toContain(
+      'n-layout-sider--left-placement'
+    )
+
+    await wrapper.setProps({ siderPlacement: 'right' })
+    expect(wrapper.find('.n-layout-sider').classes()).toContain(
+      'n-layout-sider--right-placement'
+    )
+    wrapper.unmount()
+  })
 })
