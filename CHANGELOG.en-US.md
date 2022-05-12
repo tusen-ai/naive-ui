@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-menu` use `render-icon` function render incorrect when return true.
+
 ## 2.28.4
 
 ### Fixes
