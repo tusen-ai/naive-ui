@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
 ### Fixes
 
 - 修复 `n-menu` 使用 `render-icon` 函数返回值为 true 时渲染不正确
+
+### Feats
+
+- `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
 
 ## 2.28.4
 

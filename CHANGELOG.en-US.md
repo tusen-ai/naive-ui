@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
 ### Fixes
 
-- Fix `n-menu` use `render-icon` function render incorrect when return true.
+- Fix `n-menu` use `render-icon` function render incorrect when returns `true`.
+
+### Feats
+
+- `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
 
 ## 2.28.4
 
