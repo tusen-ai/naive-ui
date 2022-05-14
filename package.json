@@ -123,7 +123,7 @@
     "vite": "^2.9.5",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14",
-    "vue-tsc": "0.34.12",
+    "vue-tsc": "0.34.13",
     "vfonts": "^0.1.0"
   },
   "peerDependencies": {
