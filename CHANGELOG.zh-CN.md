@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-menu` 使用 `render-icon` 函数返回值为 true 时渲染不正确
+- 修复 `n-tabs` 的 `tabFontWeightActive` 主题变量应用在全部 tab 上了，关闭 [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
 
 ### Feats
 
