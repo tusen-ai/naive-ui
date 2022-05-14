@@ -134,6 +134,35 @@ describe('n-layout', () => {
     wrapper.unmount()
   })
 
+  it('should work with `inverted` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        'has-sider': true
+      },
+      slots: {
+        default: () => [
+          h(
+            NLayoutHeader,
+            { inverted: true },
+            { default: () => 'test-header' }
+          ),
+          h(NLayoutSider, { inverted: true }, { default: () => 'test-sider' }),
+          h(NLayoutFooter, { inverted: true }, { default: () => 'test-footer' })
+        ]
+      }
+    })
+    expect(
+      wrapper.find('.n-layout-header').attributes('style')
+    ).toMatchSnapshot()
+    expect(
+      wrapper.find('.n-layout-sider').attributes('style')
+    ).toMatchSnapshot()
+    expect(
+      wrapper.find('.n-layout-footer').attributes('style')
+    ).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
   it('should work with `position` prop', async () => {
     let wrapper = mount(NLayout, {
       slots: {
