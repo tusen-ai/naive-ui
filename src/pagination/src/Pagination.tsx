@@ -340,7 +340,6 @@ export default defineComponent({
       const { size } = props
       const {
         self: {
-          // itemSize,
           itemPadding,
           itemMargin,
           itemMarginRtl,
@@ -373,7 +372,6 @@ export default defineComponent({
           itemBorderActive,
           itemBorderDisabled,
           itemBorderRadius,
-          // itemFontSize,
           jumperFontSize,
           jumperTextColor,
           jumperTextColorDisabled,
