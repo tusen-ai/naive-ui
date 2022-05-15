@@ -1,4 +1,10 @@
-import { pagesToShow, mapPagesToPageItems, pageItems } from '../src/utils'
+import {
+  pagesToShow,
+  mapPagesToPageItems,
+  pageItems,
+  doQuickJump
+} from '../src/utils'
+import { computed, ref } from 'vue'
 
 describe('Pagination', function () {
   describe('utils', function () {
@@ -147,6 +153,24 @@ describe('Pagination', function () {
             active: false
           }
         ])
+      })
+    })
+    describe('#doQuickJump', function () {
+      it('should work as expected', () => {
+        const e: KeyboardEvent = new KeyboardEvent('Test', {
+          code: 'Enter'
+        })
+        const fn = (page: number): void => {}
+        const mergedPageCountRef = computed(() => 100)
+        expect(
+          doQuickJump(e, ref('5'), mergedPageCountRef, fn, ref(null))
+        ).toEqual(5)
+        expect(
+          doQuickJump(e, ref('120'), mergedPageCountRef, fn, ref(null))
+        ).toEqual(100)
+        expect(
+          doQuickJump(e, ref('0'), mergedPageCountRef, fn, ref(null))
+        ).toEqual(1)
       })
     })
   })

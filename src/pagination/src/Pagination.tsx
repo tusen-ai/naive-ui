@@ -1,45 +1,45 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  computed,
+  CSSProperties,
+  defineComponent,
   h,
   nextTick,
-  computed,
+  PropType,
   ref,
   toRef,
-  defineComponent,
-  PropType,
-  CSSProperties,
-  watchEffect,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
 import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
-  FastForwardIcon,
-  FastBackwardIcon,
   BackwardIcon,
+  FastBackwardIcon,
+  FastForwardIcon,
   ForwardIcon,
   MoreIcon
 } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { paginationLight } from '../styles'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
-import { pageItems } from './utils'
+import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
+import { doQuickJump, pageItems } from './utils'
 import style from './styles/index.cssr'
-import { call, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { call, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 import {
-  RenderPrefix,
-  RenderSuffix,
-  RenderPrev,
-  RenderNext,
   PaginationRenderLabel,
-  PaginationSizeOption
+  PaginationSizeOption,
+  RenderNext,
+  RenderPrefix,
+  RenderPrev,
+  RenderSuffix
 } from './interface'
 import useRtl from '../../_mixins/use-rtl'
 
@@ -268,18 +268,13 @@ export default defineComponent({
       doUpdatePageSize(value)
     }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-        const page = parseInt(jumperValueRef.value)
-        if (
-          !Number.isNaN(page) &&
-          page >= 1 &&
-          page <= mergedPageCountRef.value
-        ) {
-          doUpdatePage(page)
-          jumperValueRef.value = ''
-          jumperRef.value?.blur()
-        }
-      }
+      doQuickJump(
+        e,
+        jumperValueRef,
+        mergedPageCountRef,
+        doUpdatePage,
+        jumperRef
+      )
     }
     function handlePageItemClick (pageItem: PageItem): void {
       if (props.disabled) return
@@ -324,7 +319,7 @@ export default defineComponent({
       disableTransitionOneTick()
     }
     function handleJumperInput (value: string): void {
-      jumperValueRef.value = value
+      jumperValueRef.value = value.trim().replace(/\D+/g, '')
     }
     watchEffect(() => {
       void mergedPageRef.value

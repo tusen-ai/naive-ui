@@ -1,3 +1,6 @@
+import { InputInst } from 'naive-ui'
+import { ComputedRef, Ref, UnwrapRef } from 'vue'
+
 function pagesToShow (
   currentPage: number,
   pageCount: number,
@@ -98,4 +101,23 @@ function pageItems (
   return mapPagesToPageItems(pages, currentPage)
 }
 
-export { pagesToShow, mapPagesToPageItems, pageItems }
+function doQuickJump (
+  e: KeyboardEvent,
+  jumperValueRef: Ref<UnwrapRef<string>>,
+  mergedPageCountRef: ComputedRef<number>,
+  doUpdatePage: (page: number) => void,
+  jumperRef: Ref<UnwrapRef<InputInst | null>>
+): number | undefined {
+  if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+    let page = parseInt(jumperValueRef.value)
+    if (Number.isNaN(page)) return NaN
+    if (page < 1) page = 1
+    if (page > mergedPageCountRef.value) page = mergedPageCountRef.value
+    doUpdatePage(page)
+    jumperValueRef.value = ''
+    jumperRef.value?.blur()
+    return page
+  }
+}
+
+export { pagesToShow, mapPagesToPageItems, pageItems, doQuickJump }
