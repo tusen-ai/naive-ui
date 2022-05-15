@@ -9,6 +9,7 @@ exports.replaceDefine = async (dirs, defines) => {
   })
   for (const dir of dirs) {
     for await (const p of walk(dir)) {
+      if (p.endsWith('.vue')) continue
       const code = await fs.readFile(p, 'utf-8')
       for (const key of defineKeys) {
         const pattern = patterns[key]
