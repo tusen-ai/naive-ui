@@ -13,8 +13,10 @@ const { genWebTypes } = require('./gen-web-types')
   })
   await replaceDefine([srcDir], {
     "'lodash'": "'lodash-es'",
-    "'date-fns(.*)'": "'date-fns/esm$1'",
-    "'date-fns-tz(.*)'": "'date-fns-tz/esm$1'"
+    "'date-fns'": "'date-fns/esm'",
+    "'date-fns-tz'": "'date-fns-tz/esm'",
+    "'date-fns/(.*)'": "'date-fns/esm/$1'",
+    "'date-fns-tz/(.*)'": "'date-fns-tz/esm/$1'"
   })
 
   // generate web-types.json for webstorm & vetur
