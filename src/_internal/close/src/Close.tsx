@@ -1,5 +1,6 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
+import { resolveSlot } from '../../../_utils'
 import NBaseIcon from '../../icon'
 import { CloseIcon } from '../../icons'
 import style from './styles/index.cssr'
@@ -19,25 +20,26 @@ export default defineComponent({
   },
   setup (props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
-    return () => {
-      const { clsPrefix, disabled } = props
-      return (
-        <NBaseIcon
-          role="button"
-          ariaDisabled={disabled}
-          ariaLabel="close"
-          clsPrefix={clsPrefix}
-          class={[
-            `${clsPrefix}-base-close`,
-            disabled && `${clsPrefix}-base-close--disabled`
-          ]}
-          onClick={disabled ? undefined : props.onClick}
-        >
-          {{
-            default: () => <CloseIcon />
-          }}
-        </NBaseIcon>
-      )
-    }
+  },
+  render () {
+    const { clsPrefix, disabled } = this
+    return (
+      <NBaseIcon
+        role="button"
+        ariaDisabled={disabled}
+        ariaLabel="close"
+        clsPrefix={clsPrefix}
+        class={[
+          `${clsPrefix}-base-close`,
+          disabled && `${clsPrefix}-base-close--disabled`
+        ]}
+        onClick={disabled ? undefined : this.onClick}
+      >
+        {{
+          default: () =>
+            resolveSlot(this.$slots['close-icon'], () => [<CloseIcon />])
+        }}
+      </NBaseIcon>
+    )
   }
 })
