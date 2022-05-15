@@ -1,4 +1,4 @@
-import uk from 'date-fns/locale/uk'
+import uk from 'date-fns/esm/locale/uk'
 import { NDateLocale } from './enUS'
 
 const dateUkUA: NDateLocale = {

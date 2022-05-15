@@ -18,7 +18,7 @@ import {
   setQuarter,
   setYear,
   setMonth
-} from 'date-fns'
+} from 'date-fns/esm'
 import { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import {

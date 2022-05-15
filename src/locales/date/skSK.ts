@@ -1,4 +1,4 @@
-import sk from 'date-fns/locale/sk'
+import sk from 'date-fns/esm/locale/sk'
 import { NDateLocale } from './enUS'
 
 const dateSkSK: NDateLocale = {
