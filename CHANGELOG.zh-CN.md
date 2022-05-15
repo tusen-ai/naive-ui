@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
+- `n-pagination` 新增 `size` 属性，关闭 [#2888](https://github.com/TuSimple/naive-ui/issues/2888)
 
 ## 2.28.4
 

@@ -1,6 +1,8 @@
 import { VNode, VNodeChild } from 'vue'
 import { SelectBaseOption } from '../../select/src/interface'
 
+export type Size = 'small' | 'medium' | 'large'
+
 export type PaginationInfo = Parameters<RenderPrefix>[0]
 
 export type RenderPrefix = (info: {

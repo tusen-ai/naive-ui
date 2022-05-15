@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
+- `n-pagination` add `size` prop, closes [#2888](https://github.com/TuSimple/naive-ui/issues/2888).
 
 ## 2.28.4
 

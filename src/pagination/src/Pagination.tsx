@@ -29,11 +29,12 @@ import type { PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, resolveSlot, warn, warnOnce } from '../../_utils'
+import { call, resolveSlot, warn, warnOnce, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 import {
+  Size,
   RenderPrefix,
   RenderSuffix,
   RenderPrev,
@@ -69,6 +70,10 @@ const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
+  size: {
+    type: String as PropType<Size>,
+    default: 'medium'
+  },
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -332,9 +337,10 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
+      const { size } = props
       const {
         self: {
-          itemSize,
+          // itemSize,
           itemPadding,
           itemMargin,
           itemMarginRtl,
@@ -367,7 +373,7 @@ export default defineComponent({
           itemBorderActive,
           itemBorderDisabled,
           itemBorderRadius,
-          itemFontSize,
+          // itemFontSize,
           jumperFontSize,
           jumperTextColor,
           jumperTextColorDisabled,
@@ -375,7 +381,9 @@ export default defineComponent({
           suffixMargin,
           buttonColor,
           buttonColorHover,
-          buttonColorPressed
+          buttonColorPressed,
+          [createKey('itemSize', size)]: itemSize,
+          [createKey('itemFontSize', size)]: itemFontSize
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -426,7 +434,17 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('pagination', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'pagination',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
