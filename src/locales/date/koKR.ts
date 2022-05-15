@@ -1,4 +1,4 @@
-import ko from 'date-fns/locale/ko'
+import ko from 'date-fns/esm/locale/ko'
 import { NDateLocale } from './enUS'
 
 const dateKoKR: NDateLocale = {
