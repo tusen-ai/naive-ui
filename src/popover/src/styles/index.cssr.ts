@@ -33,7 +33,6 @@ export default c([
       box-shadow .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
-    transform-origin: inherit;
     position: relative;
     font-size: var(--n-font-size);
     color: var(--n-text-color);
@@ -45,25 +44,6 @@ export default c([
         max-height: inherit;
       `)
     ]),
-    // body transition
-    c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
-      opacity: 0;
-      transform: scale(.85);
-    `),
-    c('&.popover-transition-enter-to, &.popover-transition-leave-from', `
-      transform: scale(1);
-      opacity: 1;
-    `),
-    c('&.popover-transition-enter-active', `
-      transition:
-        opacity .15s var(--n-bezier-ease-out),
-        transform .15s var(--n-bezier-ease-out);
-    `),
-    c('&.popover-transition-leave-active', `
-      transition:
-        opacity .15s var(--n-bezier-ease-in),
-        transform .15s var(--n-bezier-ease-in);
-    `),
     cNotM('raw', `
       background-color: var(--n-color);
       border-radius: var(--n-border-radius);
@@ -99,6 +79,29 @@ export default c([
         pointer-events: all;
       `)
     ])
+  ]),
+  cB('popover-shared', `
+    transform-origin: inherit;
+  `, [
+    // body transition
+    c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
+      opacity: 0;
+      transform: scale(.85);
+    `),
+    c('&.popover-transition-enter-to, &.popover-transition-leave-from', `
+      transform: scale(1);
+      opacity: 1;
+    `),
+    c('&.popover-transition-enter-active', `
+      transition:
+        opacity .15s var(--n-bezier-ease-out),
+        transform .15s var(--n-bezier-ease-out);
+    `),
+    c('&.popover-transition-leave-active', `
+      transition:
+        opacity .15s var(--n-bezier-ease-in),
+        transform .15s var(--n-bezier-ease-in);
+    `)
   ]),
   placementStyle('top-start', `
     top: calc(${arrowSize} / -2 + 1px);
@@ -168,7 +171,7 @@ export default c([
         const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
         const offset = getArrowOffset(placement as FollowerPlacement)
         return c(`[v-placement="${placement}"] >`, [
-          cB('popover', [
+          cB('popover-shared', [
             cM('center-arrow', [
               cB(
                 'popover-arrow',
@@ -203,10 +206,9 @@ function placementStyle (
     ? 'height: var(--n-space-arrow);'
     : 'width: var(--n-space-arrow);'
   return c(`[v-placement="${placement}"] >`, [
-    cB('popover', [
-      cNotM('manual-trigger', `
-        margin-${oppositePlacement[position]}: var(--n-space);
-      `),
+    cB('popover-shared', `
+      margin-${oppositePlacement[position]}: var(--n-space);
+    `, [
       cM('show-arrow', `
         margin-${oppositePlacement[position]}: var(--n-space-arrow);
       `),

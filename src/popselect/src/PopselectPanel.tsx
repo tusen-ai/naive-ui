@@ -24,12 +24,14 @@ import {
   SelectIgnoredOption,
   ValueAtom
 } from '../../select/src/interface'
-import { useConfig } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { NInternalSelectMenu } from '../../_internal'
 import { call, keysOf, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
+import { popselectLight } from '../styles'
 import type { PopselectSize } from './interface'
 import { popselectInjectionKey } from './interface'
+import style from './styles/index.cssr'
 
 export const panelProps = {
   multiple: Boolean,
@@ -76,7 +78,16 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopselect = inject(popselectInjectionKey)!
 
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+
+    const themeRef = useTheme(
+      'Popselect',
+      '-pop-select',
+      style,
+      popselectLight,
+      NPopselect.props,
+      mergedClsPrefixRef
+    )
 
     const treeMateRef = computed(() => {
       return createTreeMate<
@@ -158,19 +169,36 @@ export default defineComponent({
         NPopselect.syncPosition()
       })
     })
+    const cssVarsRef = computed(() => {
+      const {
+        self: { menuBoxShadow }
+      } = themeRef.value
+      return {
+        '--n-menu-box-shadow': menuBoxShadow
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('select', undefined, cssVarsRef, NPopselect.props)
+      : undefined
     return {
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       treeMate: treeMateRef,
       handleToggle,
-      handleMenuMousedown
+      handleMenuMousedown,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
+    this.onRender?.()
     return (
       <NInternalSelectMenu
         clsPrefix={this.mergedClsPrefix}
         focusable
+        class={[`${this.mergedClsPrefix}-popselect-menu`, this.themeClass]}
+        style={this.cssVars}
         theme={this.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
