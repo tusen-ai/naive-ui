@@ -14,6 +14,10 @@
 
 - `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
 
+### i18n
+
+- Add nlNL locale.
+
 ## 2.28.4
 
 ### Fixes
