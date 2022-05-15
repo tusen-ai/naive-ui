@@ -27,7 +27,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
 import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
-import { doQuickJump, pageItems } from './utils'
+import { getQuickJumpPage, pageItems } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { call, resolveSlot, warn, warnOnce } from '../../_utils'
@@ -268,13 +268,13 @@ export default defineComponent({
       doUpdatePageSize(value)
     }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      doQuickJump(
+      const page = getQuickJumpPage(
         e,
         jumperValueRef,
         mergedPageCountRef,
-        doUpdatePage,
         jumperRef
       )
+      if (page) doUpdatePage(page)
     }
     function handlePageItemClick (pageItem: PageItem): void {
       if (props.disabled) return

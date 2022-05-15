@@ -2,7 +2,7 @@ import {
   pagesToShow,
   mapPagesToPageItems,
   pageItems,
-  doQuickJump
+  getQuickJumpPage
 } from '../src/utils'
 import { computed, ref } from 'vue'
 
@@ -160,16 +160,15 @@ describe('Pagination', function () {
         const e: KeyboardEvent = new KeyboardEvent('Test', {
           code: 'Enter'
         })
-        const fn = (page: number): void => {}
         const mergedPageCountRef = computed(() => 100)
         expect(
-          doQuickJump(e, ref('5'), mergedPageCountRef, fn, ref(null))
+          getQuickJumpPage(e, ref('5'), mergedPageCountRef, ref(null))
         ).toEqual(5)
         expect(
-          doQuickJump(e, ref('120'), mergedPageCountRef, fn, ref(null))
+          getQuickJumpPage(e, ref('120'), mergedPageCountRef, ref(null))
         ).toEqual(100)
         expect(
-          doQuickJump(e, ref('0'), mergedPageCountRef, fn, ref(null))
+          getQuickJumpPage(e, ref('0'), mergedPageCountRef, ref(null))
         ).toEqual(1)
       })
     })

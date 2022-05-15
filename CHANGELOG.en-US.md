@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- `quickJump` in `n-pagination` will be formatted as Int, close [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
+- `quickJump` in `n-pagination` will jump to the first page/last page when its value out of range, close [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - Fix `n-menu` use `render-icon` function render incorrect when returns `true`.
 - Fix `n-tabs`'s `tabFontWeightActive` theme varialbe applies to all tabs, closes [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
 

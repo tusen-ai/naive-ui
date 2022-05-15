@@ -101,11 +101,10 @@ function pageItems (
   return mapPagesToPageItems(pages, currentPage)
 }
 
-function doQuickJump (
+function getQuickJumpPage (
   e: KeyboardEvent,
   jumperValueRef: Ref<UnwrapRef<string>>,
   mergedPageCountRef: ComputedRef<number>,
-  doUpdatePage: (page: number) => void,
   jumperRef: Ref<UnwrapRef<InputInst | null>>
 ): number | undefined {
   if (e.code === 'Enter' || e.code === 'NumpadEnter') {
@@ -113,11 +112,10 @@ function doQuickJump (
     if (Number.isNaN(page)) return NaN
     if (page < 1) page = 1
     if (page > mergedPageCountRef.value) page = mergedPageCountRef.value
-    doUpdatePage(page)
     jumperValueRef.value = ''
     jumperRef.value?.blur()
     return page
   }
 }
 
-export { pagesToShow, mapPagesToPageItems, pageItems, doQuickJump }
+export { pagesToShow, mapPagesToPageItems, pageItems, getQuickJumpPage }
