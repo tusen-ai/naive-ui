@@ -412,7 +412,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     boxShadow: vars.SPECIAL_BOX_SHADOW_DARK_THEME
   },
   Pagination: {
-    itemSize: '32px',
+    itemSizeMedium: '32px',
     itemPadding: '0',
     // buttonFontSize: '24px',
     itemFontSizeMedium: '16px',
