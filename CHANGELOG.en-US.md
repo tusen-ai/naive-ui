@@ -5,7 +5,8 @@
 ### Fixes
 
 - Fix `n-menu` use `render-icon` function render incorrect when returns `true`.
-- Fix `n-tabs`'s `tabFontWeightActive` theme varialbe applies to all tabs, closes [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
+- Fix `n-tabs`'s `tabFontWeightActive` theme varialbe applies to all tabs, closes [#2926](https://github.com/TuSimple/naive-ui/issues/2926).
+- Fix `n-tree-select`'s `default-expand-all` not working.
 
 ### Feats
 
