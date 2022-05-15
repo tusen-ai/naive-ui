@@ -5,7 +5,12 @@
 </markdown>
 
 <template>
-  <n-form ref="formRef" :model="formValue" :rules="rules" :messages="messages">
+  <n-form
+    ref="formRef"
+    :model="formValue"
+    :rules="rules"
+    :validate-messages="messages"
+  >
     <n-form-item label="Name" path="user.name">
       <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
     </n-form-item>
