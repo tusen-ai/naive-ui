@@ -415,7 +415,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     itemSize: '32px',
     itemPadding: '0',
     // buttonFontSize: '24px',
-    itemFontSize: '16px',
+    itemFontSizeMedium: '16px',
     inputWidth: '80px',
     selectWidth: '100px',
     inputMargin: '0 20px',
