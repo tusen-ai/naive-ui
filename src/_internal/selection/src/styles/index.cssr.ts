@@ -222,6 +222,8 @@ export default c([
       vertical-align: bottom;
     `, [
       cE('input', `
+        font-size: inherit;
+        font-family: inherit;
         min-width: 1px;
         padding: 0;
         background-color: #0000;

@@ -1,4 +1,6 @@
-# Style Element Position
+# Potential Style Conflict
+
+## Style Element Position
 
 Sometimes you want to control where the style element should be inserted.
 
@@ -19,7 +21,7 @@ Also, naive-ui uses [vueuc](https://github.com/07akioni/vueuc). If you need, its
 </head>
 ```
 
-## About tailwind's style override
+## About tailwind's preflight style override
 
 You may find adding a meta tag to your static html files doesn't work (naive's style would still be overriden), since your toolchain may always insert tailwind's style at the end of the head tag. In this situation, you need to insert the meta tag dynamically right before the app is mounted.
 
@@ -29,4 +31,14 @@ meta.name = 'naive-ui-style'
 document.head.appendChild(meta)
 
 vueApp.mount('#app')
+```
+
+## Disable Preflight Style
+
+To make naive-ui work for most users out of box, mounting any component of naive would create global preflight style. However it may not be expected. If you want to disable it, using `n-config-provider` like this.
+
+```html
+<n-config-provider preflight-style-disabled>
+  <your-app />
+</n-config-provider>
 ```
