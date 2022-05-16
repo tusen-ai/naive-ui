@@ -88,6 +88,7 @@ export interface UploadInjection {
   cssVarsRef: undefined | Ref<CSSProperties>
   themeClassRef: undefined | Ref<string>
   mergedDirectoryDndRef: Ref<boolean>
+  acceptRef: Ref<string | undefined>
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
@@ -146,4 +147,5 @@ export type OnError = ({
 export interface FileAndEntry {
   file: File
   entry: FileSystemFileEntry | null
+  source: 'dnd' | 'input'
 }

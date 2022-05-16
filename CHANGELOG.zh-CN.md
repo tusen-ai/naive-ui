@@ -6,10 +6,17 @@
 
 - 修复 `n-menu` 使用 `render-icon` 函数返回值为 true 时渲染不正确
 - 修复 `n-tabs` 的 `tabFontWeightActive` 主题变量应用在全部 tab 上了，关闭 [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
+- 修复 `n-tree-select` 的 `default-expand-all` 不生效
+- 修复 `n-upload` 的 `accept` 属性对拖拽场景不生效，关闭 [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
+- 修复 `n-time` 在 SSR 下由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 
 ### Feats
 
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
+
+### i18n
+
+- Add nlNL locale.
 
 ## 2.28.4
 
