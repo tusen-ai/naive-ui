@@ -57,7 +57,7 @@ The following list is sorted by 'Config'.
 | Japanese                  | jaJP   | dateJaJP    |              |
 | Korean (South Korea)      | koKR   | dateKoKR    | 2.28.1       |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |              |
-| Dutch                     | nlNL   | dateNlNL    | NEXT_VERSION |
+| Dutch (Netherlands)       | nlNL   | dateNlNL    | NEXT_VERSION |
 | Polish (Poland)           | plPL   | datePlPL    | 2.25.2       |
 | Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1       |
 | Russian                   | ruRU   | dateRuRU    |              |
