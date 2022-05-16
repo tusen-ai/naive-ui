@@ -21,7 +21,7 @@ Also, naive-ui uses [vueuc](https://github.com/07akioni/vueuc). If you need, its
 </head>
 ```
 
-## About tailwind's preflight style override
+## About Tailwind's Preflight Style Override
 
 You may find adding a meta tag to your static html files doesn't work (naive's style would still be overriden), since your toolchain may always insert tailwind's style at the end of the head tag. In this situation, you need to insert the meta tag dynamically right before the app is mounted.
 
