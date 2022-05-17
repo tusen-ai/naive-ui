@@ -338,7 +338,7 @@ export default defineComponent({
       disableTransitionOneTick()
     }
     function handleJumperInput (value: string): void {
-      jumperValueRef.value = value.trim().replace(/\D+/g, '')
+      jumperValueRef.value = value.replace(/\D+/g, '')
     }
     watchEffect(() => {
       void mergedPageRef.value
