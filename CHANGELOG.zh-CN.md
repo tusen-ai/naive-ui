@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- 过滤 `n-pagination` 中快速跳转的输入字符为纯数字, 关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
+- `n-pagination` 快速跳转的页码超出范围时曲最大值/最小值, 关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - 修复 `n-menu` 使用 `render-icon` 函数返回值为 true 时渲染不正确
 - 修复 `n-tabs` 的 `tabFontWeightActive` 主题变量应用在全部 tab 上了，关闭 [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
 - 修复 `n-tree-select` 的 `default-expand-all` 不生效
