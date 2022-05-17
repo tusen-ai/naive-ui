@@ -27,7 +27,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
 import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
-import { getQuickJumpPage, pageItems } from './utils'
+import { pageItems } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import {
@@ -46,7 +46,7 @@ import {
   RenderNext,
   RenderPrefix,
   RenderPrev,
-  RenderSuffix，
+  RenderSuffix,
   Size
 } from './interface'
 import useRtl from '../../_mixins/use-rtl'
@@ -286,13 +286,17 @@ export default defineComponent({
       doUpdatePageSize(value)
     }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      const page = getQuickJumpPage(
-        e,
-        jumperValueRef,
-        mergedPageCountRef,
-        jumperRef
-      )
-      if (page) doUpdatePage(page)
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+        const page = parseInt(jumperValueRef.value)
+        if (
+          !Number.isNaN(page) &&
+          Math.max(1, Math.min(page, mergedPageCountRef.value))
+        ) {
+          doUpdatePage(page)
+          jumperValueRef.value = ''
+          jumperRef.value?.blur()
+        }
+      }
     }
     function handlePageItemClick (pageItem: PageItem): void {
       if (props.disabled) return
