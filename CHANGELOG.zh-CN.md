@@ -13,6 +13,7 @@
 - 修复 `n-tree-select` 的 `default-expand-all` 不生效
 - 修复 `n-upload` 的 `accept` 属性对拖拽场景不生效，关闭 [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
 - 修复 `n-time` 在 SSR 下由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
+- 修复 `n-transfer` 搜索框的 box-shadow 被切断
 
 ### Feats
 

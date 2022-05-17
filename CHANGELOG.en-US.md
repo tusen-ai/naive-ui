@@ -13,6 +13,7 @@
 - Fix `n-tree-select`'s `default-expand-all` not working.
 - Fix `n-upload`'s `accept` prop doesn't work in drag & drop mode, closes [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
 - Fix `n-time` throws error caused by `getTimezoneOffset` in SSR mode, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-transfer`'s search box's box-shadow is truncated.
 
 ### Feats
 
