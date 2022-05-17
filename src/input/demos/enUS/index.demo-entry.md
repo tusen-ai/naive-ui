@@ -63,7 +63,7 @@ status.vue
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| clear-icon | `()` | Custom clear icon. | NEXT_VERSION |
+| clear-icon | `()` | Custom clear icon. | 2.29.0 |
 | count | `(value: string)` | Word count. |  |
 | password-invisible-icon | `()` | Password toggle icon when password is invisible. | 2.27.0 |
 | password-visible-icon | `()` | Password toggle icon when password is visible. | 2.27.0 |

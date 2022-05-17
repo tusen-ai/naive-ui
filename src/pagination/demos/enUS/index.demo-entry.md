@@ -39,7 +39,7 @@ page-size-option.vue
 | page | `number` | `undefined` | Current page in controlled mode. |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |
