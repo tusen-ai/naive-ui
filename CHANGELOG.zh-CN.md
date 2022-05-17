@@ -12,7 +12,7 @@
 - 修复 `n-tabs` 的 `tabFontWeightActive` 主题变量应用在全部 tab 上了，关闭 [#2926](https://github.com/TuSimple/naive-ui/issues/2926)
 - 修复 `n-tree-select` 的 `default-expand-all` 不生效
 - 修复 `n-upload` 的 `accept` 属性对拖拽场景不生效，关闭 [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
-- Fix `n-calendar`'s `on-panel-change` returning wrong month value when clicking Today.
+- 修复 `n-calendar` 的 `on-panel-change` 在点击“今天”的时候返回的 `month` 不正确
 - 修复 `n-time` 在 SSR 下由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 - 修复 `n-transfer` 搜索框的 box-shadow 被切断
 - 修复 `n-time-picker` 在 blur 后输入框不合法的值不会被清除
