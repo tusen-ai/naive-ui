@@ -508,12 +508,14 @@ export default defineComponent({
       if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
         if (!panelEl?.contains(e.relatedTarget as Node)) {
+          deriveInputValue()
           doBlur(e)
           closePanel({
             returnFocus: false
           })
         }
       } else {
+        deriveInputValue()
         doBlur(e)
       }
     }
@@ -648,6 +650,7 @@ export default defineComponent({
     }
     function handleMenuFocusOut (e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
+      deriveInputValue()
       doBlur(e)
       closePanel({
         returnFocus: false
