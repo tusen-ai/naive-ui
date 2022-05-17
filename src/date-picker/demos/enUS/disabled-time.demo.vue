@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { startOfDay } from 'date-fns'
+import { startOfDay } from 'date-fns/esm'
 
 const d = 86400000
 const h = 3600000
