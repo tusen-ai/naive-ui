@@ -64,6 +64,7 @@ rtl-debug.vue
 
 | 属性 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
+| clear-icon | `()` | 自定义清除图标 | NEXT_VERSION |
 | count | `(value: string)` | 字数统计 |  |
 | password-invisible-icon | `()` | 密码关闭时的密码开关图标 | 2.27.0 |
 | password-visible-icon | `()` | 密码显示时的密码开关图标 | 2.27.0 |

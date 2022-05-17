@@ -22,6 +22,7 @@
 - `n-pagination` 快速跳转的页码超出范围时取最大值、最小值，关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - `n-pagination` 中快速跳转的输入字符只允许纯数字，关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - `n-color-picker` 新增 `on-confirm` 属性
+- `n-input` 新增 `clear-icon` slot
 
 ### i18n
 

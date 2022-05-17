@@ -1122,7 +1122,10 @@ export default defineComponent({
                             show={this.showClearButton}
                             onClear={this.handleClear}
                           >
-                            {{ default: () => children }}
+                            {{
+                              default: () => children,
+                              'clear-icon': this.$slots['clear-icon']
+                            }}
                           </NBaseClear>
                         )
                       )

@@ -22,6 +22,7 @@
 - `n-pagination`'s quick jumper only allow integer input, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
 - `n-pagination` will jump to the first / last page when its value is out of range, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
 - `n-color-picker` adds `on-confirm` prop.
+- `n-input` adds `clear-icon` slot.
 
 ### i18n
 
