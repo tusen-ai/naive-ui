@@ -16,9 +16,12 @@ export default cB('base-clear', `
   c('>', [
     cE('clear', `
       font-size: var(--n-clear-size);
+      height: 1em;
+      width: 1em;
       cursor: pointer;
       color: var(--n-clear-color);
       transition: color .3s var(--n-bezier);
+      display: flex;
     `, [
       c('&:hover', `
         color: var(--n-clear-color-hover)!important;

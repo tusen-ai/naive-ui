@@ -257,15 +257,7 @@ export default cB('input', `
       `),
       c('&:active', `
         color: var(--n-icon-color-pressed);
-      `),
-      cB('icon', [
-        c('&:hover', `
-          color: var(--n-icon-color-hover);
-        `),
-        c('&:active', `
-          color: var(--n-icon-color-pressed);
-        `)
-      ])
+      `)
     ]),
     c('&:hover', [
       cE('state-border', 'border: var(--n-border-hover);')

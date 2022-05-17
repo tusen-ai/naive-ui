@@ -1000,34 +1000,30 @@ export default defineComponent({
                       >
                         {{
                           separator: () =>
-                            this.separator === undefined ? (
-                              <NBaseIcon
-                                clsPrefix={mergedClsPrefix}
-                                class={`${mergedClsPrefix}-date-picker-icon`}
-                              >
-                                {{
-                                  default: () =>
-                                    resolveSlot($slots['to-icon'], () => [
-                                      <ToIcon />
-                                    ])
-                                }}
-                              </NBaseIcon>
-                            ) : (
-                              this.separator
-                            ),
-                          [clearable ? 'clear-icon-placeholder' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{
-                                default: () =>
-                                  resolveSlot($slots['date-icon'], () => [
-                                    <DateIcon />
-                                  ])
-                              }}
-                            </NBaseIcon>
-                          )
+                            this.separator === undefined
+                              ? resolveSlot($slots.separator, () => [
+                                  <NBaseIcon
+                                    clsPrefix={mergedClsPrefix}
+                                    class={`${mergedClsPrefix}-date-picker-icon`}
+                                  >
+                                    {{
+                                      default: () => <ToIcon />
+                                    }}
+                                  </NBaseIcon>
+                              ])
+                              : this.separator,
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () =>
+                              resolveSlot($slots['date-icon'], () => [
+                                <NBaseIcon
+                                  clsPrefix={mergedClsPrefix}
+                                  class={`${mergedClsPrefix}-date-picker-icon`}
+                                >
+                                  {{
+                                    default: () => <DateIcon />
+                                  }}
+                                </NBaseIcon>
+                              ])
                         }}
                       </NInput>
                     ) : (
@@ -1049,19 +1045,20 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          [clearable ? 'clear-icon-placeholder' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{
-                                default: () =>
-                                  resolveSlot($slots['date-icon'], () => [
-                                    <DateIcon />
-                                  ])
-                              }}
-                            </NBaseIcon>
-                          )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{
+                                  default: () =>
+                                    resolveSlot($slots['date-icon'], () => [
+                                      <DateIcon />
+                                    ])
+                                }}
+                              </NBaseIcon>
+                            )
                         }}
                       </NInput>
                     )

@@ -32,19 +32,21 @@ export default defineComponent({
           {{
             default: () => {
               return this.show ? (
-                <NBaseIcon
-                  clsPrefix={clsPrefix}
+                <div
                   key="dismiss"
                   class={`${clsPrefix}-base-clear__clear`}
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                   data-clear
                 >
-                  {{
-                    default: () =>
-                      resolveSlot(this.$slots.icon, () => [<ClearIcon />])
-                  }}
-                </NBaseIcon>
+                  {resolveSlot(this.$slots.icon, () => [
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{
+                        default: () => <ClearIcon />
+                      }}
+                    </NBaseIcon>
+                  ])}
+                </div>
               ) : (
                 <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
                   {this.$slots.placeholder?.()}

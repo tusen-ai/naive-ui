@@ -6,15 +6,15 @@
   <n-space vertical>
     <n-date-picker type="date">
       <template #date-icon>
-        <n-icon :size="16" :component="AccessibilityOutline" />
+        <n-icon :size="16" :component="RocketOutline" />
       </template>
     </n-date-picker>
     <n-date-picker type="daterange">
-      <template #date-icon>
-        <n-icon :size="16" :component="AccessibilityOutline" />
+      <template #separator>
+        <n-icon :size="16" :component="TrendingUpSharp" />
       </template>
-      <template #to-icon>
-        <n-icon :size="16" :component="AirplaneOutline" />
+      <template #date-icon>
+        <n-icon :size="16" :component="RocketOutline" />
       </template>
     </n-date-picker>
   </n-space>
@@ -22,13 +22,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { AccessibilityOutline, AirplaneOutline } from '@vicons/ionicons5'
+import { TrendingUpSharp, RocketOutline } from '@vicons/ionicons5'
 
 export default defineComponent({
   setup () {
     return {
-      AccessibilityOutline,
-      AirplaneOutline
+      TrendingUpSharp,
+      RocketOutline
     }
   }
 })

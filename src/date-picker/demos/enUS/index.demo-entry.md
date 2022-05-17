@@ -159,11 +159,11 @@ icon.vue
 
 ### DatePicker Slots
 
-| Name      | Parameters | Description            | Version      |
-| --------- | ---------- | ---------------------- | ------------ |
-| date-icon | `()`       | icon of the input.     | NEXT_VERSION |
-| footer    | `()`       | Extra Footer.          |              |
-| to-icon   | `()`       | icon of the daterange. | NEXT_VERSION |
+| Name      | Parameters | Description                 | Version      |
+| --------- | ---------- | --------------------------- | ------------ |
+| date-icon | `()`       | Date icon of the input box. | NEXT_VERSION |
+| footer    | `()`       | Extra Footer.               |              |
+| separator | `()`       | Separator of range picker.  | NEXT_VERSION |
 
 ### DatePicker Methods
 

@@ -1163,26 +1163,26 @@ export default defineComponent({
                       </WordCount>
                     ) : null,
                     this.mergedShowPasswordOn && this.type === 'password' ? (
-                      <NBaseIcon
-                        clsPrefix={mergedClsPrefix}
+                      <div
                         class={`${mergedClsPrefix}-input__eye`}
                         onMousedown={this.handlePasswordToggleMousedown}
                         onClick={this.handlePasswordToggleClick}
                       >
-                        {{
-                          default: () => {
-                            return this.passwordVisible
-                              ? resolveSlot(
-                                $slots['password-visible-icon'],
-                                () => [<EyeIcon />]
-                              )
-                              : resolveSlot(
-                                $slots['password-invisible-icon'],
-                                () => [<EyeOffIcon />]
-                              )
-                          }
-                        }}
-                      </NBaseIcon>
+                        {this.passwordVisible
+                          ? resolveSlot($slots['password-visible-icon'], () => [
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => <EyeIcon /> }}
+                              </NBaseIcon>
+                          ])
+                          : resolveSlot(
+                            $slots['password-invisible-icon'],
+                            () => [
+                                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                  {{ default: () => <EyeOffIcon /> }}
+                                </NBaseIcon>
+                            ]
+                          )}
+                      </div>
                     ) : null
                   ]}
                 </div>

@@ -161,7 +161,7 @@ icon.vue
 | --------- | ---- | ---------------- | ------------ |
 | date-icon | `()` | 日期输入框的图标 | NEXT_VERSION |
 | footer    | `()` | 添加额外的页脚   |              |
-| to-icon   | `()` | 日期范围的图标   | NEXT_VERSION |
+| separator | `()` | 日期范围分割符号 | NEXT_VERSION |
 
 ### DatePicker Methods
 

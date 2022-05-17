@@ -26,7 +26,8 @@
 - `n-pagination` will jump to the first / last page when its value is out of range, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
 - `n-color-picker` adds `on-confirm` prop.
 - `n-input` adds `clear-icon` slot.
-- `n-date-picker` adds `date-icon` and `to-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+- `n-date-picker` adds `date-icon` slot, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+- `n-date-picker` adds `separator` slot, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
 
 ### i18n
 
