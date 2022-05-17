@@ -3,11 +3,11 @@
 </markdown>
 
 <template>
-  <n-spce vertical>
+  <n-space vertical>
     <n-pagination v-model:page="page" :page-count="100" :size="'small'" />
     <n-pagination v-model:page="page" :page-count="100" :size="'medium'" />
     <n-pagination v-model:page="page" :page-count="100" :size="'large'" />
-  </n-spce>
+  </n-space>
 </template>
 
 <script lang="ts">

@@ -3,11 +3,29 @@
 </markdown>
 
 <template>
-  <n-spce vertical>
-    <n-pagination v-model:page="page" :page-count="100" :size="'small'" />
-    <n-pagination v-model:page="page" :page-count="100" :size="'medium'" />
-    <n-pagination v-model:page="page" :page-count="100" :size="'large'" />
-  </n-spce>
+  <n-space vertical>
+    <n-pagination
+      v-model:page="page"
+      :page-count="100"
+      :size="'small'"
+      show-quick-jumper
+      show-size-picker
+    />
+    <n-pagination
+      v-model:page="page"
+      :page-count="100"
+      :size="'medium'"
+      show-quick-jumper
+      show-size-picker
+    />
+    <n-pagination
+      v-model:page="page"
+      :page-count="100"
+      :size="'large'"
+      show-quick-jumper
+      show-size-picker
+    />
+  </n-space>
 </template>
 
 <script lang="ts">

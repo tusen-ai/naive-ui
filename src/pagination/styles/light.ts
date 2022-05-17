@@ -58,6 +58,9 @@ export const self = (vars: ThemeCommonVars) => {
     itemFontSizeSmall: fontSizeTiny,
     itemFontSizeMedium: fontSizeSmall,
     itemFontSizeLarge: fontSizeMedium,
+    jumperFontSizeSmall: fontSizeTiny,
+    jumperFontSizeMedium: fontSizeSmall,
+    jumperFontSizeLarge: fontSizeMedium,
     jumperTextColor: textColor2,
     jumperTextColorDisabled: textColorDisabled
   }
