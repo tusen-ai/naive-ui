@@ -7,21 +7,21 @@
     <n-pagination
       v-model:page="page"
       :page-count="100"
-      :size="'small'"
+      size="small"
       show-quick-jumper
       show-size-picker
     />
     <n-pagination
       v-model:page="page"
       :page-count="100"
-      :size="'medium'"
+      size="medium"
       show-quick-jumper
       show-size-picker
     />
     <n-pagination
       v-model:page="page"
       :page-count="100"
-      :size="'large'"
+      size="large"
       show-quick-jumper
       show-size-picker
     />

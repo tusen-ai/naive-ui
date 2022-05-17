@@ -16,20 +16,20 @@ Make the input clearable after a value is set.
     />
     <n-input type="text" placeholder="Custom clear icon" round clearable>
       <template #clear-icon>
-        <n-icon :component="Trash" />
+        <n-icon :component="TrashBinOutline" />
       </template>
     </n-input>
   </n-space>
 </template>
 
 <script lang="ts">
-import { Trash } from '@vicons/ionicons5'
+import { TrashBinOutline } from '@vicons/ionicons5'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      Trash
+      TrashBinOutline
     }
   }
 })
