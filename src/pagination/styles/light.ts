@@ -14,7 +14,14 @@ export const self = (vars: ThemeCommonVars) => {
     textColorDisabled,
     borderColor,
     borderRadius,
-    fontSize
+    // item font size
+    fontSizeTiny,
+    fontSizeSmall,
+    fontSizeMedium,
+    // item size
+    heightTiny,
+    heightSmall,
+    heightMedium
   } = vars
 
   return {
@@ -45,7 +52,12 @@ export const self = (vars: ThemeCommonVars) => {
     itemBorderActive: `1px solid ${primaryColor}`,
     itemBorderDisabled: `1px solid ${borderColor}`,
     itemBorderRadius: borderRadius,
-    itemFontSize: fontSize,
+    itemSizeSmall: heightTiny,
+    itemSizeMedium: heightSmall,
+    itemSizeLarge: heightMedium,
+    itemFontSizeSmall: fontSizeTiny,
+    itemFontSizeMedium: fontSizeSmall,
+    itemFontSizeLarge: fontSizeMedium,
     jumperTextColor: textColor2,
     jumperTextColorDisabled: textColorDisabled
   }

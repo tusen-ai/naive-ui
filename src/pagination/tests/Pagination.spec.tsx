@@ -6,6 +6,20 @@ describe('n-pagination', () => {
   it('should work with import on demand', () => {
     mount(NPagination)
   })
+  it('should work with `size` prop', async () => {
+    const wrapper = mount(NPagination, {
+      props: {
+        pageCount: 20
+      }
+    })
+    expect(wrapper.attributes('style')).toContain('--n-item-size: 28px;')
+
+    await wrapper.setProps({ size: 'small' })
+    expect(wrapper.attributes('style')).toContain('--n-item-size: 22px;')
+
+    await wrapper.setProps({ size: 'large' })
+    expect(wrapper.attributes('style')).toContain('--n-item-size: 34px;')
+  })
   it('props.itemCount', async () => {
     const wrapper = mount(NPagination, {
       props: {

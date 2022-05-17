@@ -10,6 +10,7 @@
 basic.vue
 slot.vue
 quick-jumper.vue
+size.vue
 size-picker.vue
 disabled.vue
 item-count.vue
@@ -38,6 +39,7 @@ rtl-debug.vue
 | page-slot | `number` | `9` | 页码显示的个数 |  |
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | NEXT_VERSION |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页后缀 |  |
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
