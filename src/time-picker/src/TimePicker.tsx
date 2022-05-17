@@ -31,7 +31,7 @@ import {
   getMinutes,
   getHours,
   getSeconds
-} from 'date-fns'
+} from 'date-fns/esm'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'

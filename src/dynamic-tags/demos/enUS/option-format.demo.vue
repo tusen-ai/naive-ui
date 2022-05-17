@@ -31,7 +31,7 @@ export default defineComponent({
     return {
       onCreate: (label: string) => {
         return {
-          label: label,
+          label,
           value: 'v' + label
         }
       },

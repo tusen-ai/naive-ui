@@ -5,10 +5,10 @@ import {
   onUnmounted,
   inject
 } from 'vue'
+import { merge } from 'lodash-es'
 import { warn } from '../../_utils'
 import { commonLight } from '../../_styles/common'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
-import { merge } from 'lodash-es'
 
 export default defineComponent({
   name: 'GlobalStyle',
@@ -36,6 +36,8 @@ export default defineComponent({
           )
           : commonLight
         if (styleApplied || !body.hasAttribute('n-styled')) {
+          style.setProperty('-webkit-text-size-adjust', '100%')
+          style.setProperty('-webkit-tap-highlight-color', 'transparent')
           style.backgroundColor = bodyColor
           style.color = textColor2
           style.fontSize = fontSize

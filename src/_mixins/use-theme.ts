@@ -93,6 +93,7 @@ function useTheme<N, T, R> (
   clsPrefixRef?: Ref<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   const ssrAdapter = useSsrAdapter()
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   if (style) {
     const mountStyle = (): void => {
       const clsPrefix = clsPrefixRef?.value
@@ -105,12 +106,14 @@ function useTheme<N, T, R> (
         anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter
       })
-      globalStyle.mount({
-        id: 'n-global',
-        head: true,
-        anchorMetaName: cssrAnchorMetaName,
-        ssr: ssrAdapter
-      })
+      if (!NConfigProvider?.preflightStyleDisabled) {
+        globalStyle.mount({
+          id: 'n-global',
+          head: true,
+          anchorMetaName: cssrAnchorMetaName,
+          ssr: ssrAdapter
+        })
+      }
     }
     if (ssrAdapter) {
       mountStyle()
@@ -118,7 +121,6 @@ function useTheme<N, T, R> (
       onBeforeMount(mountStyle)
     }
   }
-  const NConfigProvider = inject(configProviderInjectionKey, null)
   const mergedThemeRef = computed(() => {
     // keep props to make theme overrideable
     const {

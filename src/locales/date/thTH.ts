@@ -1,4 +1,4 @@
-import thTH from 'date-fns/locale/th'
+import thTH from 'date-fns/esm/locale/th'
 import { NDateLocale } from './enUS'
 
 const dateThTH: NDateLocale = {

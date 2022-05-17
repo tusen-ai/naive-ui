@@ -30,7 +30,14 @@ import type { PageItem } from './utils'
 import { getQuickJumpPage, pageItems } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { call, resolveSlot, warn, warnOnce } from '../../_utils'
+import {
+  call,
+  resolveSlot,
+  warn,
+  warnOnce,
+  createKey,
+  smallerSize
+} from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 import {
@@ -39,7 +46,8 @@ import {
   RenderNext,
   RenderPrefix,
   RenderPrev,
-  RenderSuffix
+  RenderSuffix，
+  Size
 } from './interface'
 import useRtl from '../../_mixins/use-rtl'
 
@@ -69,6 +77,10 @@ const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
+  size: {
+    type: String as PropType<Size>,
+    default: 'medium'
+  },
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -182,10 +194,16 @@ export default defineComponent({
       })
     })
     const inputSizeRef = computed<InputSize>(() => {
-      return mergedComponentPropsRef?.value?.Pagination?.inputSize || 'small'
+      return (
+        mergedComponentPropsRef?.value?.Pagination?.inputSize ||
+        smallerSize(props.size)
+      )
     })
     const selectSizeRef = computed<SelectSize>(() => {
-      return mergedComponentPropsRef?.value?.Pagination?.selectSize || 'small'
+      return (
+        mergedComponentPropsRef?.value?.Pagination?.selectSize ||
+        smallerSize(props.size)
+      )
     })
     const startIndexRef = computed(() => {
       return (mergedPageRef.value - 1) * mergedPageSizeRef.value
@@ -327,24 +345,15 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
+      const { size } = props
       const {
         self: {
-          itemSize,
-          itemPadding,
-          itemMargin,
-          itemMarginRtl,
-          inputWidth,
-          selectWidth,
-          inputMargin,
-          inputMarginRtl,
-          selectMargin,
           buttonBorder,
           buttonBorderHover,
           buttonBorderPressed,
           buttonIconColor,
           buttonIconColorHover,
           buttonIconColorPressed,
-          buttonIconSize,
           itemTextColor,
           itemTextColorHover,
           itemTextColorPressed,
@@ -362,15 +371,25 @@ export default defineComponent({
           itemBorderActive,
           itemBorderDisabled,
           itemBorderRadius,
-          itemFontSize,
-          jumperFontSize,
           jumperTextColor,
           jumperTextColorDisabled,
-          prefixMargin,
-          suffixMargin,
           buttonColor,
           buttonColorHover,
-          buttonColorPressed
+          buttonColorPressed,
+          [createKey('itemPadding', size)]: itemPadding,
+          [createKey('itemMargin', size)]: itemMargin,
+          [createKey('inputWidth', size)]: inputWidth,
+          [createKey('selectWidth', size)]: selectWidth,
+          [createKey('inputMargin', size)]: inputMargin,
+          [createKey('selectMargin', size)]: selectMargin,
+          [createKey('jumperFontSize', size)]: jumperFontSize,
+          [createKey('prefixMargin', size)]: prefixMargin,
+          [createKey('suffixMargin', size)]: suffixMargin,
+          [createKey('itemSize', size)]: itemSize,
+          [createKey('buttonIconSize', size)]: buttonIconSize,
+          [createKey('itemFontSize', size)]: itemFontSize,
+          [`${createKey('itemMargin', size)}Rtl` as const]: itemMarginRtl,
+          [`${createKey('inputMargin', size)}Rtl` as const]: inputMarginRtl
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -421,7 +440,17 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('pagination', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'pagination',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,

@@ -65,8 +65,8 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/import-on-demand/enUS/index.md')
   },
   {
-    path: 'style-position',
-    component: () => import('../pages/docs/style-position/enUS/index.md')
+    path: 'style-conflict',
+    component: () => import('../pages/docs/style-conflict/enUS/index.md')
   },
   {
     path: 'controlled-uncontrolled',
@@ -142,8 +142,8 @@ export const zhDocRoutes = [
     component: () => import('../pages/docs/import-on-demand/zhCN/index.md')
   },
   {
-    path: 'style-position',
-    component: () => import('../pages/docs/style-position/zhCN/index.md')
+    path: 'style-conflict',
+    component: () => import('../pages/docs/style-conflict/zhCN/index.md')
   },
   {
     path: 'controlled-uncontrolled',

@@ -70,7 +70,7 @@ SelectGroupOption,
 SelectIgnoredOption
 >
 
-export type Size = 'small' | 'medium' | 'large'
+export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 // Public interfaces
 export type SelectOption = SelectBaseOption<string | number>
