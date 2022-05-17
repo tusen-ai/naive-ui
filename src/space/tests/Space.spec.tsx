@@ -125,7 +125,8 @@ describe('n-space', () => {
       'end',
       'center',
       'space-around',
-      'space-between'
+      'space-between',
+      'space-evenly'
     ]
     justifyList.forEach((pos) => {
       const wrapper = mount({

@@ -306,19 +306,19 @@ export default defineComponent({
             {
               class: [
                 `${mergedClsPrefix}-popover`,
+                `${mergedClsPrefix}-popover-shared`,
                 themeClassHandle?.themeClass.value,
                 extraClass.map((v) => `${mergedClsPrefix}-${v}`),
                 {
                   [`${mergedClsPrefix}-popover--scrollable`]: props.scrollable,
-                  [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
-                  [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
                   [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
                     slots.header
                   ),
                   [`${mergedClsPrefix}-popover--raw`]: props.raw,
-                  [`${mergedClsPrefix}-popover--manual-trigger`]:
-                    props.trigger === 'manual',
-                  [`${mergedClsPrefix}-popover--center-arrow`]:
+                  [`${mergedClsPrefix}-popover-shared--overlap`]: props.overlap,
+                  [`${mergedClsPrefix}-popover-shared--show-arrow`]:
+                    props.showArrow,
+                  [`${mergedClsPrefix}-popover-shared--center-arrow`]:
                     props.arrowPointToCenter
                 }
               ],
@@ -344,9 +344,9 @@ export default defineComponent({
           // to place the body & transition animation.
           // Shadow class exists for reuse box-shadow.
           [
-            `${mergedClsPrefix}-popover`,
+            `${mergedClsPrefix}-popover-shared`,
             themeClassHandle?.themeClass.value,
-            props.overlap && `${mergedClsPrefix}-popover--overlap`
+            props.overlap && `${mergedClsPrefix}-popover-shared--overlap`
           ],
           bodyRef,
           styleRef.value as any,

@@ -1,4 +1,5 @@
 export default {
+  closeSizeTiny: '12px',
   closeSizeSmall: '14px',
   closeSizeMedium: '14px',
   closeSizeLarge: '14px',

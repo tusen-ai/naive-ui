@@ -8,6 +8,7 @@
 basic.vue
 precision.vue
 render.vue
+finish-debug.vue
 ```
 
 ## API

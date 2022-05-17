@@ -141,6 +141,7 @@ export default c([
       width: var(--n-size);
       flex-shrink: 0;
       flex-grow: 0;
+      user-select: none;
     `),
     cB('checkbox-box', `
       position: absolute;

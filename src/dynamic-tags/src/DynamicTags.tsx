@@ -42,6 +42,10 @@ import style from './styles/index.cssr'
 const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
   ...commonProps,
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
   closable: {
     type: Boolean,
     default: true

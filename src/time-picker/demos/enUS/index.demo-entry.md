@@ -40,7 +40,7 @@ status.vue
 | is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | Callback function for disabling seconds. When value is empty, `hour` and `minute` are `null`. |  |
 | placeholder | `string` | `'Select Time'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
-| show | `boolean` | `undefined` | Whether to show panel | NEXT_VERSION |
+| show | `boolean` | `undefined` | Whether to show panel | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
@@ -48,11 +48,11 @@ status.vue
 | value | `number \| null` | `undefined` | Value when being set manually. |  |
 | value-format | `string` | follows `format` | Format of formatted value. | 2.24.0 |
 | on-blur | `() => void` | `undefined` | Callback when the selection box loses focus. |  |
-| on-clear | `() => void` | `undefined` | Callback when value is cleared. | NEXT_VERSION |
-| on-confirm | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the click confirm button. | NEXT_VERSION |
+| on-clear | `() => void` | `undefined` | Callback when value is cleared. | 2.28.3 |
+| on-confirm | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the click confirm button. | 2.28.3 |
 | on-focus | `() => void` | `undefined` | Callback when the selection box gets focus. |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | Callback when formatted value changes. | 2.24.0 |
-| on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | NEXT_VERSION |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the value changes. | `formattedValue` 2.24.0 |
 
 ### TimePicker Slots

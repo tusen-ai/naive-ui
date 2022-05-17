@@ -23,7 +23,7 @@ slot.vue
 | Name | Parameters | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside drawer. | 2.24.2 |
-| block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | NEXT_VERSION |
+| block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close drawer on Esc is pressed. | 2.24.2 |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |  |
 | display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-drawer` is rendered. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |  |
@@ -32,7 +32,7 @@ slot.vue
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | show | `boolean` | `false` | Whether to show drawer. |  |
-| show-mask | `boolean` | `true` | Whether to show mask. If set to `'transparent'`, transparent mask would be shown. If set to false, `trap-focus` will be disabled. | NEXT_VERSION |
+| show-mask | `boolean` | `true` | Whether to show mask. If set to `'transparent'`, transparent mask would be shown. If set to false, `trap-focus` will be disabled. | 2.28.3 |
 | style | `string \| Object` | `undefined` | Style of the drawer. |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside drawer. | 2.24.2 |

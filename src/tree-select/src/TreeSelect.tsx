@@ -227,7 +227,7 @@ export default defineComponent({
     // function to reuse it.
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
-        ? [] // leave it, n-tree will handle it
+        ? undefined // leave it, n-tree will handle it
         : props.defaultExpandedKeys || props.expandedKeys
     )
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')

@@ -16,7 +16,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
+import { format, getTime, isValid } from 'date-fns/esm'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -121,8 +121,8 @@ const datePickerProps = {
   timePickerProps: [Object, Array] as PropType<
   TimePickerProps | [TimePickerProps, TimePickerProps]
   >,
-  onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onConfirm: [Function, Array] as PropType<MaybeArray<OnConfirm>>,
+  onClear: Function as PropType<() => void>,
+  onConfirm: Function as PropType<OnConfirm>,
   defaultCalendarStartTime: Number,
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
@@ -442,14 +442,14 @@ export default defineComponent({
     }
     function doClear (): void {
       const { onClear } = props
-      if (onClear) call(onClear)
+      onClear?.()
     }
     function doConfirm (
       value: Value | null,
       formattedValue: FormattedValue | null
     ): void {
       const { onConfirm } = props
-      if (onConfirm) call(onConfirm as OnConfirmImpl, value, formattedValue)
+      if (onConfirm) (onConfirm as OnConfirmImpl)(value, formattedValue)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -487,6 +487,11 @@ export default defineComponent({
       inputInstRef.value?.deactivate()
       doClear()
     }
+    function handlePanelClear (): void {
+      // close will be called inside panel
+      inputInstRef.value?.deactivate()
+      doClear()
+    }
     function handlePanelTabOut (): void {
       closeCalendar({
         returnFocus: true
@@ -521,7 +526,13 @@ export default defineComponent({
       }
     }
     function handlePanelConfirm (): void {
-      doUpdateValue(pendingValueRef.value, { doConfirm: true })
+      const pendingValue = pendingValueRef.value
+      doUpdateValue(
+        Array.isArray(pendingValue)
+          ? [pendingValue[0], pendingValue[1]]
+          : pendingValue,
+        { doConfirm: true }
+      )
     }
     // --- Refresh
     function deriveInputState (): void {
@@ -885,6 +896,7 @@ export default defineComponent({
       handleClickOutside,
       handleKeyDown,
       handleClear,
+      handlePanelClear,
       handleTriggerClick,
       handleInputActivate,
       handleInputDeactivate,
@@ -927,7 +939,7 @@ export default defineComponent({
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
-      onClear: this.handleClear,
+      onClear: this.handlePanelClear,
       onKeydown: this.handleKeyDown,
       onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',

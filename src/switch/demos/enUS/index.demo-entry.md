@@ -29,7 +29,7 @@ icon.vue
 | loading | `boolean` | `false` | Whether to show loading state. |  |
 | rail-style | `(info: { focused: boolean, checked: boolean }) => (CSSProperties \| string)` | `undefined` | Rail style generator. |  |
 | round | `boolean` | `true` | Whether the switch has rounded corners.   |  |
-| rubber-band | `boolean` | `true` | Whether the switch button has rubber band effect. | NEXT_VERSION |
+| rubber-band | `boolean` | `true` | Whether the switch button has rubber band effect. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the switch. |  |
 | value | `boolean` | `undefined` | Value when being set manually. |  |
 | unchecked-color | `string` | `undefined` | Background of unchecked state. |  |

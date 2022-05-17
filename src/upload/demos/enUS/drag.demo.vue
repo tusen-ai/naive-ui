@@ -1,10 +1,13 @@
 <markdown>
 # Drag to upload
+
+You can set `directory-dnd` to `true` to make directory drag and drop available.
 </markdown>
 
 <template>
   <n-upload
     multiple
+    directory-dnd
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   >
     <n-upload-dragger>

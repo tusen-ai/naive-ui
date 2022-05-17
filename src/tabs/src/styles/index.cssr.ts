@@ -235,16 +235,17 @@ export default cB('tabs', `
   `),
   cM('line-type, bar-type', [
     cB('tabs-tab', `
-      font-weight: var(--n-tab-font-weight-active);
+      font-weight: var(--n-tab-font-weight);
       box-sizing: border-box;
       vertical-align: bottom;
     `, [
       c('&:hover', {
         color: 'var(--n-tab-text-color-hover)'
       }),
-      cM('active', {
-        color: 'var(--n-tab-text-color-active)'
-      }),
+      cM('active', `
+        color: var(--n-tab-text-color-active);
+        font-weight: var(--n-tab-font-weight-active);
+      `),
       cM('disabled', {
         color: 'var(--n-tab-text-color-disabled)'
       })

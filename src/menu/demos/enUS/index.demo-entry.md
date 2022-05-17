@@ -45,7 +45,7 @@ expand-selected-option.vue
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
-| node-props | `() => (MenuOption \| MenuGroupOption)` | `undefined` | Node's DOM attrs generator. | NEXT_VERSION |
+| node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | Node's DOM attrs generator. | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |  |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |  |

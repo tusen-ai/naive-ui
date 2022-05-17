@@ -63,15 +63,20 @@ export function useTableData (
     })
   })
 
-  const firstContentfulColIndexRef = useMemo(() => {
+  const childTriggerColIndexRef = useMemo<number>(() => {
     const { columns } = props
     const { length } = columns
+    let firstContentfulColIndex: number | null = null
     for (let i = 0; i < length; ++i) {
-      if (!columns[i].type) {
+      const col = columns[i]
+      if (!col.type && firstContentfulColIndex === null) {
+        firstContentfulColIndex = i
+      }
+      if ('tree' in col && col.tree) {
         return i
       }
     }
-    return 0
+    return firstContentfulColIndex || 0
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
@@ -377,7 +382,7 @@ export function useTableData (
     mergedSortStateRef: mergedSortStateRef,
     hoverKeyRef: ref<RowKey | null>(null),
     selectionColumnRef,
-    firstContentfulColIndexRef,
+    childTriggerColIndexRef,
     doUpdateFilters,
     deriveNextSorter,
     doUpdatePageSize,

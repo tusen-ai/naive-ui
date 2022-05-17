@@ -1,14 +1,28 @@
+<markdown>
 # 可展开
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
-import { NTag, NButton, useMessage } from 'naive-ui'
+import { NTag, NButton, useMessage, DataTableColumns } from 'naive-ui'
 
-const createColumns = ({ sendMail }) => {
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+  tags: string[]
+}
+
+const createColumns = ({
+  sendMail
+}: {
+  sendMail: (rowData: RowData) => void
+}): DataTableColumns<RowData> => {
   return [
     {
       type: 'selection'
@@ -70,7 +84,7 @@ const createColumns = ({ sendMail }) => {
   ]
 }
 
-const createData = () => [
+const createData = (): RowData[] => [
   {
     key: 0,
     name: 'John Brown',
@@ -110,4 +124,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

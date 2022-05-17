@@ -61,6 +61,7 @@ describe('n-layout', () => {
         .element.children[3].getAttribute('class')
     ).toContain('n-layout-footer')
     expect(wrapper.find('.n-layout-footer').text()).toBe('test-footer')
+    wrapper.unmount()
   })
 
   it('should work with `content-style` prop', async () => {
@@ -85,6 +86,7 @@ describe('n-layout', () => {
     expect(
       wrapper.find('.n-layout-sider-scroll-container').attributes('style')
     ).toContain('padding: 24px')
+    wrapper.unmount()
   })
 
   it('should work with `embedded` prop', async () => {
@@ -100,6 +102,7 @@ describe('n-layout', () => {
       }
     })
     expect(wrapper.find('.n-layout').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -128,6 +131,36 @@ describe('n-layout', () => {
     expect(wrapper.find('.n-layout-footer').classes()).toContain(
       'n-layout-footer--bordered'
     )
+    wrapper.unmount()
+  })
+
+  it('should work with `inverted` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        'has-sider': true
+      },
+      slots: {
+        default: () => [
+          h(
+            NLayoutHeader,
+            { inverted: true },
+            { default: () => 'test-header' }
+          ),
+          h(NLayoutSider, { inverted: true }, { default: () => 'test-sider' }),
+          h(NLayoutFooter, { inverted: true }, { default: () => 'test-footer' })
+        ]
+      }
+    })
+    expect(
+      wrapper.find('.n-layout-header').attributes('style')
+    ).toMatchSnapshot()
+    expect(
+      wrapper.find('.n-layout-sider').attributes('style')
+    ).toMatchSnapshot()
+    expect(
+      wrapper.find('.n-layout-footer').attributes('style')
+    ).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `position` prop', async () => {
@@ -153,6 +186,29 @@ describe('n-layout', () => {
     })
     expect(wrapper.find('.n-layout').classes()).toContain(
       'n-layout--absolute-positioned'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `sider-placement` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        hasSider: true
+      },
+      slots: {
+        default: () => [
+          h(NLayoutSider, null, { default: () => 'test-sider' }),
+          h(NLayoutContent, null, { default: () => 'test-footer' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-layout-sider').classes()).toContain(
+      'n-layout-sider--left-placement'
+    )
+
+    await wrapper.setProps({ siderPlacement: 'right' })
+    expect(wrapper.find('.n-layout-sider').classes()).toContain(
+      'n-layout-sider--right-placement'
     )
     wrapper.unmount()
   })

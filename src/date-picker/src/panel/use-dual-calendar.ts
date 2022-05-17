@@ -11,7 +11,7 @@ import {
   set,
   getDate,
   getTime
-} from 'date-fns'
+} from 'date-fns/esm'
 import { VirtualListInst } from 'vueuc'
 import {
   dateArray,
@@ -97,13 +97,20 @@ function useDualCalendar (
   const endYearVlRef = ref<VirtualListInst | null>(null)
   const startMonthScrollbarRef = ref<ScrollbarInst | null>(null)
   const endMonthScrollbarRef = ref<ScrollbarInst | null>(null)
-  const defaultCalendarStartTime = props.defaultCalendarStartTime ?? Date.now()
+  const { value } = props
+  const defaultCalendarStartTime =
+    props.defaultCalendarStartTime ??
+    (Array.isArray(value) && typeof value[0] === 'number'
+      ? value[0]
+      : Date.now())
   const startCalendarDateTimeRef = ref(defaultCalendarStartTime)
   const endCalendarDateTimeRef = ref(
-    props.bindCalendarMonths || props.defaultCalendarEndTime === undefined
-      ? getTime(addMonths(defaultCalendarStartTime, 1))
-      : props.defaultCalendarEndTime
+    props.defaultCalendarEndTime ??
+      (Array.isArray(value) && typeof value[1] === 'number'
+        ? value[1]
+        : getTime(addMonths(defaultCalendarStartTime, 1)))
   )
+  adjustCalendarTimes(true)
   const nowRef = ref(Date.now())
   const isSelectingRef = ref(false)
   const memorizedStartDateTimeRef = ref<number>(0)
@@ -111,8 +118,6 @@ function useDualCalendar (
   const mergedDateFormatRef = computed(
     () => props.dateFormat || localeRef.value.dateFormat
   )
-
-  const { value } = props
 
   const startDateInput = ref(
     Array.isArray(value)
@@ -132,10 +137,6 @@ function useDualCalendar (
       )
       : ''
   )
-
-  if (Array.isArray(value)) {
-    syncCalendarTimeWithValue(value)
-  }
 
   // derived computed
   const selectingPhaseRef = computed(() => {

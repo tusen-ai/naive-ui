@@ -35,8 +35,8 @@ debug.vue
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | NEXT_VERSION |
-| directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | NEXT_VERSION |
+| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | 2.28.3 |
+| directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | 2.28.3 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
@@ -71,9 +71,9 @@ debug.vue
 | id | `string` | 文件 id，需要唯一 |  |
 | name | `string` | 文件名 |  |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
-| batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | NEXT_VERSION |
+| batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | 2.28.3 |
 | file? | `File \| null` | 文件对应的浏览器 File 对象 |  |
-| fullPath? | `string \| null` | 上传文件的相对路径 | NEXT_VERSION |
+| fullPath? | `string \| null` | 上传文件的相对路径 | 2.28.3 |
 | percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
 | thumbnailUrl? | `string \| null` | 缩略图 URL |  |
 | type? | `string \| null` | MIME 类型 |  |

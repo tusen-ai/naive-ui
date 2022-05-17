@@ -43,7 +43,7 @@ import type {
   FileAndEntry
 } from './interface'
 import { uploadInjectionKey } from './interface'
-import { createImageDataUrl, createSettledFileInfo } from './utils'
+import { createImageDataUrl, createSettledFileInfo, matchType } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
 import style from './styles/index.cssr'
@@ -382,7 +382,11 @@ export default defineComponent({
       const target = e.target as HTMLInputElement
       handleFileAddition(
         target.files
-          ? Array.from(target.files).map((file) => ({ file, entry: null }))
+          ? Array.from(target.files).map((file) => ({
+            file,
+            entry: null,
+            source: 'input'
+          }))
           : null,
         e
       )
@@ -405,7 +409,14 @@ export default defineComponent({
       fileAndEntries = mergedMultipleRef.value
         ? fileAndEntries
         : [fileAndEntries[0]]
-      const { max } = props
+      const { max, accept } = props
+      fileAndEntries = fileAndEntries.filter(({ file, source }) => {
+        if (source === 'dnd' && accept?.trim()) {
+          return matchType(file.name, file.type, accept)
+        } else {
+          return true
+        }
+      })
       if (max) {
         fileAndEntries = fileAndEntries.slice(
           0,
@@ -624,6 +635,7 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
+      acceptRef: toRef(props, 'accept'),
       cssVarsRef: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClassRef: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
