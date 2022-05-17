@@ -5,48 +5,72 @@
 </markdown>
 
 <template>
-  <n-tree-select :on-load="handleLoad" :options="options" />
+  <n-space vertical>
+    <n-space align="center">
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
+      <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
+      <n-space><n-switch v-model:value="cascade" />Cascade </n-space>
+    </n-space>
+    <n-tree-select
+      v-model:value="value"
+      multiple
+      checkable
+      :options="options"
+      :cascade="cascade"
+      :check-strategy="checkStrategy"
+      :show-path="showPath"
+      :allow-checking-not-loaded="cascade"
+      :on-load="handleLoad"
+    />
+  </n-space>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { TreeSelectOption } from 'naive-ui'
 
-function nextLabel (currentLabel?: string): string {
-  if (!currentLabel) return '道生一'
-  if (currentLabel === '道生一') return '一生二'
-  if (currentLabel === '一生二') return '二生三'
-  if (currentLabel === '二生三') return '三生万物'
-  if (currentLabel === '三生万物') return '道生一'
-  return ''
+function getChildren (option: TreeSelectOption) {
+  const children = []
+  for (let i = 0; i <= (option as { depth: number }).depth; ++i) {
+    children.push({
+      label: option.label + '-' + i,
+      key: option.label + '-' + i,
+      depth: (option as { depth: number }).depth + 1,
+      isLeaf: option.depth === 3
+    })
+  }
+  return children
 }
 
 export default defineComponent({
   setup () {
-    const optionsRef = ref([
-      {
-        label: nextLabel(),
-        key: 1,
-        isLeaf: false
-      },
-      {
-        label: nextLabel(),
-        key: 2,
-        isLeaf: false
-      }
-    ])
     return {
-      options: optionsRef,
-      handleLoad (node: TreeSelectOption) {
+      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
+      cascade: ref(false),
+      showPath: ref(true),
+      value: ref(null),
+      options: ref([
+        {
+          label: 'l-0',
+          key: 'v-0',
+          depth: 1,
+          isLeaf: false
+        }
+      ]),
+      handleLoad (option: TreeSelectOption) {
         return new Promise<void>((resolve) => {
-          setTimeout(() => {
-            node.children = [
-              {
-                label: nextLabel(node.label),
-                key: node.key + nextLabel(node.label),
-                isLeaf: false
-              }
-            ]
+          window.setTimeout(() => {
+            option.children = getChildren(option)
             resolve()
           }, 1000)
         })

@@ -3,10 +3,7 @@ import {
   ref,
   defineComponent,
   PropType,
-  watch,
-  toRef,
   inject,
-  nextTick,
   Transition,
   withDirectives
 } from 'vue'
@@ -14,7 +11,7 @@ import { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import FocusDetector from '../../_internal/focus-detector'
 import { MenuMaskRef } from '../../_internal/menu-mask'
-import { resolveSlot, resolveWrappedSlot } from '../../_utils'
+import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
 import { NEmpty } from '../../empty'
 import { NBaseMenuMask } from '../../_internal'
 import NCascaderSubmenu from './CascaderSubmenu'
@@ -74,16 +71,10 @@ export default defineComponent({
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
     const selfElRef = ref<HTMLElement | null>(null)
-    watch(toRef(props, 'value'), () => {
-      void nextTick(() => {
-        syncCascaderMenuPosition()
-      })
-    })
-    watch(toRef(props, 'menuModel'), () => {
-      void nextTick(() => {
-        syncCascaderMenuPosition()
-      })
-    })
+    function handleResize (): void {
+      syncCascaderMenuPosition()
+    }
+    useOnResize(selfElRef, handleResize)
     function showErrorMessage (label: string): void {
       const {
         value: { loadingRequiredMessage }
@@ -196,7 +187,14 @@ export default defineComponent({
                 )}
                 <FocusDetector onFocus={this.onTabout} />
               </div>,
-              [[clickoutside, this.handleClickOutside]]
+              [
+                [
+                  clickoutside,
+                  this.handleClickOutside,
+                  undefined as unknown as string,
+                  { capture: true }
+                ]
+              ]
             )
           }
         }}

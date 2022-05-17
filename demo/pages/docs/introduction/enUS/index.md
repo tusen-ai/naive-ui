@@ -14,7 +14,7 @@ There are more than 80 components. Hope they can help you write less code.
 
 What's more, they are all treeshakable.
 
-## Customizable Themes
+## Theme Customizable
 
 We provide an advanced type safe theme system that is built with typescript. All you need is to provide a theme overrides object in JS. Then all the stuffs will be done by us.
 
@@ -26,7 +26,7 @@ All the stuff in Naive UI is written in TypeScript. It can work with your typesc
 
 What's more, you don't need to import any CSS to use the components.
 
-## Not too Slow
+## Fast
 
 I try to make it not rather slow. At least select, tree, transfer, table and cascader work with virtual list.
 

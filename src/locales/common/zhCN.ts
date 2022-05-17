@@ -44,6 +44,8 @@ const zhCN: NLocale = {
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间',
+    startMonthPlaceholder: '开始月份',
+    endMonthPlaceholder: '结束月份',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今天'

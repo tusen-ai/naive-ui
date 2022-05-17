@@ -12,6 +12,7 @@ size.vue
 vertical.vue
 content.vue
 custom-icon.vue
+vertical-debug.vue
 ```
 
 ## API

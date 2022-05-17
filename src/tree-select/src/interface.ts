@@ -1,6 +1,6 @@
-import { TreeNode } from 'treemate'
+import { TreeMate, TreeNode } from 'treemate'
 import { Ref } from 'vue'
-import { TreeOptionBase } from '../../tree/src/interface'
+import type { TreeOptionBase, TreeOption } from '../../tree/src/interface'
 import { createInjectionKey } from '../../_utils'
 
 export type TreeSelectOption = Omit<
@@ -43,6 +43,7 @@ export type Value = string | number | Array<string | number> | null
 
 export interface TreeSelectInjection {
   pendingNodeKeyRef: Ref<string | number | null>
+  dataTreeMate: Ref<TreeMate<TreeOption>>
 }
 
 export const treeSelectInjectionKey =

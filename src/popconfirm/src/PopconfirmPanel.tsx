@@ -4,7 +4,8 @@ import {
   computed,
   inject,
   PropType,
-  CSSProperties
+  CSSProperties,
+  toRef
 } from 'vue'
 import { NButton } from '../../button'
 import { NBaseIcon } from '../../_internal'
@@ -14,8 +15,8 @@ import { keysOf, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { popconfirmInjectionKey } from './interface'
 
 export const panelProps = {
-  positiveText: String,
-  negativeText: String,
+  positiveText: String as PropType<string | null>,
+  negativeText: String as PropType<string | null>,
   showIcon: {
     type: Boolean,
     default: true
@@ -74,8 +75,8 @@ export default defineComponent({
       localizedNegativeText: computed(() => {
         return props.negativeText || localeRef.value.negativeText
       }),
-      positiveButtonProps: popconfirmProps.positiveButtonProps,
-      negativeButtonProps: popconfirmProps.negativeButtonProps,
+      positiveButtonProps: toRef(popconfirmProps, 'positiveButtonProps'),
+      negativeButtonProps: toRef(popconfirmProps, 'negativeButtonProps'),
       handlePositiveClick (e: MouseEvent) {
         props.onPositiveClick(e)
       },

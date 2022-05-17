@@ -11,6 +11,7 @@ basic.vue
 closable.vue
 icon.vue
 no-icon.vue
+rtl-debug.vue
 ```
 
 ## API

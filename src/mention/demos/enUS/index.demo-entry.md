@@ -39,6 +39,7 @@ Mention requires `v2.2.0` and above.
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |  |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box is focussed on. |  |

@@ -32,7 +32,7 @@ rtl-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 |  |
-| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 type="textarea" 有效，可传入对象，如 `{ minRows: 1, maxRows: 3 }` |  |
+| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如 `{ minRows: 1, maxRows: 3 }` |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -64,6 +64,7 @@ rtl-debug.vue
 
 | 属性 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
+| clear-icon | `()` | 自定义清除图标 | NEXT_VERSION |
 | count | `(value: string)` | 字数统计 |  |
 | password-invisible-icon | `()` | 密码关闭时的密码开关图标 | 2.27.0 |
 | password-visible-icon | `()` | 密码显示时的密码开关图标 | 2.27.0 |

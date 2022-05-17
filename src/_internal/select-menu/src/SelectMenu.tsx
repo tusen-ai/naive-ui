@@ -8,9 +8,10 @@ import {
   toRef,
   provide,
   nextTick,
-  watch,
   WatchStopHandle,
-  CSSProperties
+  CSSProperties,
+  watch,
+  onBeforeUnmount
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -25,7 +26,12 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
+import {
+  formatLength,
+  resolveSlot,
+  resolveWrappedSlot,
+  useOnResize
+} from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -95,6 +101,7 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    onResize: Function as PropType<() => void>,
     resetMenuOnOptionsChange: {
       type: Boolean,
       default: true
@@ -123,42 +130,54 @@ export default defineComponent({
     function initPendingNode (): void {
       const { treeMate } = props
       let defaultPendingNode: TreeNode<SelectOption> | null = null
-      if (props.autoPending) {
-        const { value } = props
-        if (value === null) {
-          defaultPendingNode = treeMate.getFirstAvailableNode()
+      const { value } = props
+      if (value === null) {
+        defaultPendingNode = treeMate.getFirstAvailableNode()
+      } else {
+        if (props.multiple) {
+          defaultPendingNode = treeMate.getNode(
+            ((value as Array<string | number> | null) || [])[
+              ((value as Array<string | number> | null) || []).length - 1
+            ]
+          )
         } else {
-          if (props.multiple) {
-            defaultPendingNode = treeMate.getNode(
-              ((value as Array<string | number> | null) || [])[
-                ((value as Array<string | number> | null) || []).length - 1
-              ]
-            )
-          } else {
-            defaultPendingNode = treeMate.getNode(value as string | number)
-          }
-          if (!defaultPendingNode || defaultPendingNode.disabled) {
-            defaultPendingNode = treeMate.getFirstAvailableNode()
-          }
+          defaultPendingNode = treeMate.getNode(value as string | number)
         }
-        if (defaultPendingNode) {
-          setPendingTmNode(defaultPendingNode)
+        if (!defaultPendingNode || defaultPendingNode.disabled) {
+          defaultPendingNode = treeMate.getFirstAvailableNode()
         }
+      }
+      if (defaultPendingNode) {
+        setPendingTmNode(defaultPendingNode)
+      } else {
+        setPendingTmNode(null)
+      }
+    }
+    function clearPendingNodeIfInvalid (): void {
+      const { value: pendingNode } = pendingNodeRef
+      if (pendingNode && !props.treeMate.getNode(pendingNode.key)) {
+        pendingNodeRef.value = null
       }
     }
 
     let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
     watch(
-      toRef(props, 'show'),
-      (value) => {
-        if (value) {
+      () => props.show,
+      (show) => {
+        if (show) {
           initPendingNodeWatchStopHandle = watch(
-            props.resetMenuOnOptionsChange
-              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
-              : [toRef(props, 'multiple')],
+            () => props.treeMate,
             () => {
-              initPendingNode()
-              void nextTick(scrollToPendingNode)
+              if (props.resetMenuOnOptionsChange) {
+                if (props.autoPending) {
+                  initPendingNode()
+                } else {
+                  clearPendingNodeIfInvalid()
+                }
+                void nextTick(scrollToPendingNode)
+              } else {
+                clearPendingNodeIfInvalid()
+              }
             },
             {
               immediate: true
@@ -172,6 +191,10 @@ export default defineComponent({
         immediate: true
       }
     )
+    onBeforeUnmount(() => {
+      initPendingNodeWatchStopHandle?.()
+    })
+
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -360,6 +383,7 @@ export default defineComponent({
       prev,
       getPendingTmNode
     }
+    useOnResize(selfRef, props.onResize)
     return {
       mergedTheme: themeRef,
       virtualListRef,
@@ -507,7 +531,7 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div class={`${clsPrefix}-base-select-menu__empty`}>
+          <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
             {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}

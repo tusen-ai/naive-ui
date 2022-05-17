@@ -1,6 +1,6 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --n-arrow-color
@@ -29,6 +29,8 @@ export default cB('tree', `
     ])
   ]),
   cB('tree-node-indent', `
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 0;
   `),
   cB('tree-motion-wrapper', [
@@ -77,7 +79,8 @@ export default cB('tree', `
   ]),
   cM('block-node', [
     cB('tree-node-content', `
-      width: 100%;
+      flex-grow: 1;
+      flex-shrink: 0;
     `)
   ]),
   cNotM('block-line', [
@@ -181,7 +184,9 @@ export default cB('tree', `
     align-items: center;
     justify-content: center;
     margin-right: 4px;
-  `),
+  `, [
+    cM('right', 'margin-left: 4px;')
+  ]),
   cM('checkable', [
     cB('tree-node-content', `
       padding: 0 6px;
@@ -222,5 +227,6 @@ export default cB('tree', `
     cE('suffix', `
       display: inline-flex;
     `)
-  ])
+  ]),
+  cE('empty', 'margin: auto;')
 ])

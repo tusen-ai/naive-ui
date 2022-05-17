@@ -11,7 +11,7 @@ Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `mul
     <n-button @click="clearSorter">Clear Sorter</n-button>
   </n-space>
   <n-data-table
-    ref="dataTableInstRef"
+    ref="dataTableInst"
     :columns="columns"
     :data="data"
     :pagination="pagination"
@@ -123,6 +123,7 @@ export default defineComponent({
     return {
       data,
       columns,
+      dataTableInst: dataTableInstRef,
       pagination: ref({ pageSize: 5 }),
       filterAddress () {
         dataTableInstRef.value.filter({

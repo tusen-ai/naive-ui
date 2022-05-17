@@ -14,6 +14,7 @@ export default {
   borderRadiusSmall: '2px',
 
   fontSize: '14px',
+  fontSizeMini: '12px',
   fontSizeTiny: '12px',
   fontSizeSmall: '14px',
   fontSizeMedium: '14px',
@@ -22,6 +23,7 @@ export default {
 
   lineHeight: '1.6',
 
+  heightMini: '16px', // private now, it's too small
   heightTiny: '22px',
   heightSmall: '28px',
   heightMedium: '34px',

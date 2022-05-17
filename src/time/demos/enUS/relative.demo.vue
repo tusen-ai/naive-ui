@@ -1,5 +1,9 @@
 <markdown>
 # Relative
+
+`n-time` uses `date-fns`'s [`formatDistanceStrict`](https://date-fns.org/v2.28.0/docs/formatDistanceStrict) to format relative time.
+
+If you don't need much customization, this is enough.
 </markdown>
 
 <template>

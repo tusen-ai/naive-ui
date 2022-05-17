@@ -10,12 +10,14 @@
 basic.vue
 slot.vue
 quick-jumper.vue
+size.vue
 size-picker.vue
 disabled.vue
 item-count.vue
 prev.vue
 prefix.vue
 page-size-option.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -38,6 +40,7 @@ page-size-option.vue
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | NEXT_VERSION |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页后缀 |  |
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |  |

@@ -35,6 +35,8 @@ render-debug.vue
 spin-debug.vue
 options-change-debug.vue
 filterable-debug.vue
+empty-debug.vue
+fullscreen-debug.vue
 ```
 
 ## API
@@ -70,6 +72,7 @@ filterable-debug.vue
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | `blur` 时执行的回调 |  |
 | on-clear | `() => void` | `undefined` | `clear` 时执行的回调 |  |

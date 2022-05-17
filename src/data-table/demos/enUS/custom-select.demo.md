@@ -9,7 +9,6 @@ Set `options` on a selection type column to create selection dropdown near heade
 </n-p>
 
 <n-data-table
-  ref="table"
   :columns="columns"
   :data="data"
   :pagination="pagination"

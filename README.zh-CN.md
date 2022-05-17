@@ -4,7 +4,7 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">一个 Vue 3 组件库</p>
-<p align="center"><b>比较完整，主题可调，使用 TypeScript，不算太慢</b></p>
+<p align="center"><b>比较完整，主题可调，使用 TypeScript，快</b></p>
 <p align="center">有点意思</p>
 
 <p align="center"><a href="README.md">English</a> | 中文</p>
@@ -43,7 +43,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 顺便一提，你不需要导入任何 CSS 就能让组件正常工作。
 
-### 不算太慢
+### 快
 
 我尽力让它不要太慢。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
 
