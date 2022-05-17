@@ -1,5 +1,5 @@
 import { c, cB, cE } from '../../../../_utils/cssr'
-import iconSwitchTransition from '../../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
 
 export default c([
   c('@keyframes loading-container-rotate', `

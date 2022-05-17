@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --n-bezier

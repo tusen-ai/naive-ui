@@ -13,7 +13,7 @@ interface IconSwitchTransitionOptions {
   transition?: string
 }
 
-export default function ({
+export function iconSwitchTransition ({
   originalTransform = '',
   left = 0,
   top = 0,

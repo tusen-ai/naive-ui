@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 const fixedColumnStyle = createFixedColumnStyle()
