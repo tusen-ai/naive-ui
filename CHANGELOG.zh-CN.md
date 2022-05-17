@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 由于 `n-pagination` 支持了 `size` 属性，因此 `n-pagination` 的部分主题变量名称进行了调整
+
 ### Fixes
 
 - 修复 `n-menu` 使用 `render-icon` 函数返回值为 true 时渲染不正确
@@ -9,10 +13,23 @@
 - 修复 `n-tree-select` 的 `default-expand-all` 不生效
 - 修复 `n-upload` 的 `accept` 属性对拖拽场景不生效，关闭 [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
 - Fix `n-calendar`'s `on-panel-change` returning wrong month value when clicking Today.
+- 修复 `n-time` 在 SSR 下由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
+- 修复 `n-transfer` 搜索框的 box-shadow 被切断
+- 修复 `n-time-picker` 在 blur 后输入框不合法的值不会被清除
 
 ### Feats
 
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
+- `n-pagination` 新增 `size` 属性，关闭 [#2888](https://github.com/TuSimple/naive-ui/issues/2888)
+- `n-config-provider` 新增 `preflight-style-disabled` 属性
+- `n-pagination` 快速跳转的页码超出范围时取最大值、最小值，关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
+- `n-pagination` 中快速跳转的输入字符只允许纯数字，关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
+- `n-color-picker` 新增 `on-confirm` 属性
+- `n-input` 新增 `clear-icon` slot
+
+### i18n
+
+- 新增 nlNL locale
 
 ## 2.28.4
 

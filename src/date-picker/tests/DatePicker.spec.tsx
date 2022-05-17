@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
+import { format } from 'date-fns/esm'
 import { NDatePicker } from '../index'
 import { Value } from '../src/interface'
-import { format } from 'date-fns'
 import { dateEnUS } from '../../locales'
 
 describe('n-date-picker', () => {

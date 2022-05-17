@@ -1,4 +1,5 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
+import { resolveSlot } from '../../../_utils'
 import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
 import NBaseIcon from '../../icon'
@@ -40,12 +41,13 @@ export default defineComponent({
                   data-clear
                 >
                   {{
-                    default: () => <ClearIcon />
+                    default: () =>
+                      resolveSlot(this.$slots.icon, () => [<ClearIcon />])
                   }}
                 </NBaseIcon>
               ) : (
                 <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
-                  {this.$slots.default?.()}
+                  {this.$slots.placeholder?.()}
                 </div>
               )
             }

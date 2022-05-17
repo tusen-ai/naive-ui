@@ -15,7 +15,7 @@ import {
   startOfDay,
   startOfMonth,
   getMonth
-} from 'date-fns'
+} from 'date-fns/esm'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'

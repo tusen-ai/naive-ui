@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Since `n-pagination` supports `size` prop, some theme variables of `n-pagination` are changed.
+
 ### Fixes
 
 - Fix `n-menu` use `render-icon` function render incorrect when returns `true`.
@@ -9,10 +13,23 @@
 - Fix `n-tree-select`'s `default-expand-all` not working.
 - Fix `n-upload`'s `accept` prop doesn't work in drag & drop mode, closes [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
 - Fix `n-calendar`'s `on-panel-change` returning wrong month value when clicking Today.
+- Fix `n-time` throws error caused by `getTimezoneOffset` in SSR mode, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
+- Fix `n-transfer`'s search box's box-shadow is truncated.
+- Fix `n-time-picker`'s input box's invalid value won't be cleared after blur.
 
 ### Feats
 
 - `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
+- `n-pagination` add `size` prop, closes [#2888](https://github.com/TuSimple/naive-ui/issues/2888).
+- `n-config-provider` adds `preflight-style-disabled` prop.
+- `n-pagination`'s quick jumper only allow integer input, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
+- `n-pagination` will jump to the first / last page when its value is out of range, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
+- `n-color-picker` adds `on-confirm` prop.
+- `n-input` adds `clear-icon` slot.
+
+### i18n
+
+- Add nlNL locale.
 
 ## 2.28.4
 
@@ -1072,6 +1089,7 @@
 
 - `n-cascader` provide all options paths in `update:value` callback function, closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
 - `n-layout` and `n-layout-sider` adds `on-scroll` prop, closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
+- `n-config-provider` adds `preflight-style-disabled` prop.
 
 ## 2.19.5 (2021-10-07)
 

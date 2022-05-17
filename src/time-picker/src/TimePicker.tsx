@@ -31,7 +31,7 @@ import {
   getMinutes,
   getHours,
   getSeconds
-} from 'date-fns'
+} from 'date-fns/esm'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
@@ -508,12 +508,14 @@ export default defineComponent({
       if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
         if (!panelEl?.contains(e.relatedTarget as Node)) {
+          deriveInputValue()
           doBlur(e)
           closePanel({
             returnFocus: false
           })
         }
       } else {
+        deriveInputValue()
         doBlur(e)
       }
     }
@@ -648,6 +650,7 @@ export default defineComponent({
     }
     function handleMenuFocusOut (e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
+      deriveInputValue()
       doBlur(e)
       closePanel({
         returnFocus: false
@@ -838,7 +841,9 @@ export default defineComponent({
                     >
                       {this.showIcon
                         ? {
-                            [this.clearable ? 'clear' : 'suffix']: () => (
+                            [this.clearable
+                              ? 'clear-icon-placeholder'
+                              : 'suffix']: () => (
                               <NBaseIcon
                                 clsPrefix={mergedClsPrefix}
                                 class={`${mergedClsPrefix}-time-picker-icon`}

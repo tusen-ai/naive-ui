@@ -1,5 +1,5 @@
 import { cB, c, cE } from '../../../../_utils/cssr'
-import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --n-bezier
@@ -36,7 +36,7 @@ export default cB('base-clear', `
       top: 50%;
       transform: translateX(-50%) translateY(-50%);
     `, [
-      createIconSwitchTransition({
+      iconSwitchTransition({
         originalTransform: 'translateX(-50%) translateY(-50%)',
         left: '50%',
         top: '50%'

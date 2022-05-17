@@ -12,7 +12,7 @@ interface FadeInTransitionOptions {
   leaveCubicBezier?: string
 }
 
-export default function ({
+export function fadeInTransition ({
   name = 'fade-in',
   enterDuration = '0.2s',
   leaveDuration = '0.2s',

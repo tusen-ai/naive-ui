@@ -77,7 +77,7 @@ export default defineComponent({
     clearable: Boolean,
     disabled: Boolean,
     size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
+      type: String as PropType<'tiny' | 'small' | 'medium' | 'large'>,
       default: 'medium'
     },
     loading: Boolean,

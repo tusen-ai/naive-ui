@@ -1,9 +1,9 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import slideInFromRightTransition from '../../../_styles/transitions/slide-in-from-right'
-import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
-import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
-import slideInFromBottomTransition from '../../../_styles/transitions/slide-in-from-bottom'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
+import { slideInFromRightTransition } from '../../../_styles/transitions/slide-in-from-right'
+import { slideInFromLeftTransition } from '../../../_styles/transitions/slide-in-from-left'
+import { slideInFromTopTransition } from '../../../_styles/transitions/slide-in-from-top'
+import { slideInFromBottomTransition } from '../../../_styles/transitions/slide-in-from-bottom'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --n-line-height

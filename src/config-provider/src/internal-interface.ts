@@ -249,4 +249,5 @@ export interface ConfigProviderInjection {
   mergedThemeHashRef: Ref<string>
   // non-reactive
   inlineThemeDisabled: boolean
+  preflightStyleDisabled: boolean
 }

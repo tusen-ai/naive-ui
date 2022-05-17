@@ -36,7 +36,7 @@ export default defineComponent({
   setup () {
     const data = ref(createData())
     return {
-      data: data,
+      data,
       columns: [
         {
           title: 'Name',
