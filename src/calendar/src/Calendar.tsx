@@ -101,7 +101,7 @@ export default defineComponent({
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
       const newMonthTs = startOfMonth(now).valueOf()
-      monthTsRef.value = monthTs
+      monthTsRef.value = newMonthTs
       const newYear = getYear(newMonthTs)
       const newMonth = getMonth(newMonthTs)
       if (oldYear !== newYear || oldMonth !== newMonth) {
@@ -110,7 +110,6 @@ export default defineComponent({
           month: getMonth(newMonthTs) + 1
         })
       }
-      monthTsRef.value = newMonthTs
     }
     const cssVarsRef = computed(() => {
       const {

@@ -7,7 +7,7 @@
   "types": "es/index.d.ts",
   "scripts": {
     "start": "pnpm run dev",
-    "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
+    "dev": "pnpm run clean && pnpm run gen-version && cross-env NODE_ENV=development vite",
     "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
