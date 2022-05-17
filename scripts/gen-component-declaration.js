@@ -1,8 +1,10 @@
-import { resolve } from 'path'
+// The file is not designed to run directly. `cwd` shoudl be project root.
+import path from 'path'
 import fs from 'fs-extra'
+import process from 'process'
 import * as globalComponents from '../src/components'
 
-const TYPE_ROOT = resolve(__dirname, '..')
+const TYPE_ROOT = process.cwd()
 
 // XButton is for tsx type checking, shouldn't be exported
 const excludeComponents = ['NxButton']
@@ -30,8 +32,8 @@ async function generateComponentsType () {
       components[key] = entry
     }
   })
-  const originalContent = exist(resolve(TYPE_ROOT, 'volar.d.ts'))
-    ? await fs.readFile(resolve(TYPE_ROOT, 'volar.d.ts'), 'utf-8')
+  const originalContent = exist(path.resolve(TYPE_ROOT, 'volar.d.ts'))
+    ? await fs.readFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), 'utf-8')
     : ''
 
   const originImports = parseComponentsDeclaration(originalContent)
@@ -58,7 +60,7 @@ declare module 'vue' {
 export {}
 `
   if (code !== originalContent) {
-    await fs.writeFile(resolve(TYPE_ROOT, 'volar.d.ts'), code, 'utf-8')
+    await fs.writeFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), code, 'utf-8')
   }
 }
 generateComponentsType()
