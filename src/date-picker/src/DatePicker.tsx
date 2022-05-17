@@ -1004,14 +1004,15 @@ export default defineComponent({
                             ) : (
                               this.separator
                             ),
-                          [clearable ? 'clear' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <DateIcon /> }}
-                            </NBaseIcon>
-                          )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{ default: () => <DateIcon /> }}
+                              </NBaseIcon>
+                            )
                         }}
                       </NInput>
                     ) : (
@@ -1033,14 +1034,15 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          [clearable ? 'clear' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <DateIcon /> }}
-                            </NBaseIcon>
-                          )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{ default: () => <DateIcon /> }}
+                              </NBaseIcon>
+                            )
                         }}
                       </NInput>
                     )

@@ -838,7 +838,9 @@ export default defineComponent({
                     >
                       {this.showIcon
                         ? {
-                            [this.clearable ? 'clear' : 'suffix']: () => (
+                            [this.clearable
+                              ? 'clear-icon-placeholder'
+                              : 'suffix']: () => (
                               <NBaseIcon
                                 clsPrefix={mergedClsPrefix}
                                 class={`${mergedClsPrefix}-time-picker-icon`}

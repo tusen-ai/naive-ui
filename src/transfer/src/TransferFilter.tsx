@@ -48,7 +48,7 @@ export default defineComponent({
           onBlur={this.onBlur}
         >
           {{
-            clear: () => (
+            'clear-icon-placeholder': () => (
               <NBaseIcon
                 clsPrefix={mergedClsPrefix}
                 class={`${mergedClsPrefix}-transfer-icon`}

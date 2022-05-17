@@ -46,7 +46,7 @@ export default defineComponent({
                   onClear={props.onClear}
                 >
                   {{
-                    default: () => (
+                    placeholder: () => (
                       <NBaseIcon
                         clsPrefix={clsPrefix}
                         class={`${clsPrefix}-base-suffix__arrow`}
