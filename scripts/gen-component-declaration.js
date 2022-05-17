@@ -1,6 +1,6 @@
-import * as globalComponents from '../src/components'
 import { resolve } from 'path'
 import fs from 'fs-extra'
+import * as globalComponents from '../src/components'
 
 const TYPE_ROOT = resolve(__dirname, '..')
 
