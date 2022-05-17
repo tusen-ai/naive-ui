@@ -2,10 +2,12 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Since `n-pagination` supports `size` prop, some theme variables of `n-pagination` are changed.
+
 ### Fixes
 
-- `quickJump` in `n-pagination` will be formatted as Int, close [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
-- `quickJump` in `n-pagination` will jump to the first page/last page when its value out of range, close [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - Fix `n-menu` use `render-icon` function render incorrect when returns `true`.
 - Fix `n-tabs`'s `tabFontWeightActive` theme varialbe applies to all tabs, closes [#2926](https://github.com/TuSimple/naive-ui/issues/2926).
 - Fix `n-tree-select`'s `default-expand-all` not working.
@@ -16,6 +18,9 @@
 
 - `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
 - `n-pagination` add `size` prop, closes [#2888](https://github.com/TuSimple/naive-ui/issues/2888).
+- `n-config-provider` adds `preflight-style-disabled` prop.
+- `n-pagination`'s quick jumper only allow integer input, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
+- `n-pagination` will jump to the first / last page when its value is out of range, closes [#2928](https://github.com/TuSimple/naive-ui/issues/2928).
 
 ### i18n
 
