@@ -288,11 +288,8 @@ export default defineComponent({
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         const page = parseInt(jumperValueRef.value)
-        if (
-          !Number.isNaN(page) &&
-          Math.max(1, Math.min(page, mergedPageCountRef.value))
-        ) {
-          doUpdatePage(page)
+        if (!Number.isNaN(page)) {
+          doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
           jumperValueRef.value = ''
           jumperRef.value?.blur()
         }
