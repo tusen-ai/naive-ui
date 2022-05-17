@@ -60,7 +60,12 @@ import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
-import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
+import {
+  OnConfirmImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  RenderLabel
+} from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
 import { colorPickerInjectionKey } from './context'
@@ -441,11 +446,9 @@ export default defineComponent({
 
     function handleConfirm (): void {
       const { value } = mergedValueRef
-      if (value) {
-        const { onConfirm } = props
-        if (onConfirm) {
-          ;(onConfirm as OnUpdateValueImpl)(value)
-        }
+      const { onConfirm } = props
+      if (onConfirm) {
+        ;(onConfirm as OnConfirmImpl)(value)
       }
       doUpdateShow(false)
     }

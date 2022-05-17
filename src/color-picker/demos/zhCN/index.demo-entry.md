@@ -36,7 +36,7 @@ close-debug.vue
 | to | `string \| HTMLElement \| false` | `'body'` | 面板的卸载位置，`false` 会待在原地 |  |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |  |
-| on-confirm | `(value: string) => void` | `undefined` | 点击确定按钮回调 |  |
+| on-confirm | `(value: string) => void` | `undefined` | 点击确定按钮的回调 | NEXT_VERSION |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |  |
 | actions | `Array<'confirm'> \| null` | `null` | 显示按钮 |  |
