@@ -8,6 +8,7 @@
 - Fix `n-tabs`'s `tabFontWeightActive` theme varialbe applies to all tabs, closes [#2926](https://github.com/TuSimple/naive-ui/issues/2926).
 - Fix `n-tree-select`'s `default-expand-all` not working.
 - Fix `n-upload`'s `accept` prop doesn't work in drag & drop mode, closes [#2919](https://github.com/TuSimple/naive-ui/issues/2919)
+- Fix `n-calendar`'s `on-panel-change` returning wrong month value when clicking Today.
 
 ### Feats
 
