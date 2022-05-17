@@ -106,7 +106,7 @@ export default defineComponent({
       if (oldYear !== newYear || oldMonth !== newMonth) {
         props.onPanelChange?.({
           year: newYear,
-          month: newMonthTs
+          month: getMonth(newMonthTs) + 1
         })
       }
       monthTsRef.value = newMonthTs
