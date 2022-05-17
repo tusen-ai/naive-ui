@@ -103,6 +103,7 @@ export const colorPickerPanelProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
+  onConfirm: Function as PropType<OnUpdateValue>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -439,6 +440,13 @@ export default defineComponent({
     }
 
     function handleConfirm (): void {
+      const { value } = mergedValueRef
+      if (value) {
+        const { onConfirm } = props
+        if (onConfirm) {
+          ;(onConfirm as OnUpdateValueImpl)(value)
+        }
+      }
       doUpdateShow(false)
     }
 
