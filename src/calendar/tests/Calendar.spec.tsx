@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { isYesterday, format, addMonths, getYear } from 'date-fns/esm'
 import { NCalendar } from '../index'
-import { isYesterday, format, addMonths, getYear } from 'date-fns'
 import { NButton } from '../../button'
 
 describe('n-calendar', () => {

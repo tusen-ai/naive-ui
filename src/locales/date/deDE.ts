@@ -1,4 +1,4 @@
-import de from 'date-fns/locale/de'
+import de from 'date-fns/esm/locale/de'
 import { NDateLocale } from './enUS'
 
 const dateDeDE: NDateLocale = {

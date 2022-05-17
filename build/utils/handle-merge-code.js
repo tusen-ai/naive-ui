@@ -23,7 +23,7 @@ ${tsToJs(parts.script)}
         mergedParts.tsCode += '\n\n'
         mergedParts.jsCode += '\n\n'
       }
-      const style = `<style>${parts.style}</style>`
+      const style = `<style scoped>${parts.style}</style>`
       mergedParts.tsCode += style
       mergedParts.jsCode += style
     }
@@ -50,8 +50,8 @@ ${parts.script}
         mergedParts.jsCode += '\n\n'
       }
       const style = isVue
-        ? `<style>${parts.style}</style>`
-        : `<style>
+        ? `<style scoped>${parts.style}</style>`
+        : `<style scoped>
 ${parts.style}
 </style>`
       mergedParts.jsCode += style

@@ -15,11 +15,11 @@ import {
   getDay,
   parse,
   format,
-  Locale,
   startOfYear,
   getQuarter,
   isSameQuarter
-} from 'date-fns'
+} from 'date-fns/esm'
+import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
 import { Value } from './interface'
 
@@ -300,7 +300,7 @@ function strictParse (
   pattern: string,
   backup: Date,
   option: {
-    locale: Locale
+    locale: NDateLocale['locale']
   }
 ): Date {
   const result = parse(string, pattern, backup, option)

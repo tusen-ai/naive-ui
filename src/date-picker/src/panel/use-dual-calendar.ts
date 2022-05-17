@@ -11,7 +11,7 @@ import {
   set,
   getDate,
   getTime
-} from 'date-fns'
+} from 'date-fns/esm'
 import { VirtualListInst } from 'vueuc'
 import {
   dateArray,
