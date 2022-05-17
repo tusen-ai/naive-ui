@@ -13,6 +13,7 @@ custom-validation.vue
 top.vue
 left.vue
 item-only.vue
+render-feedback.vue
 async.vue
 disabled.vue
 show-label.vue
@@ -57,14 +58,15 @@ custom-messages.vue
 ### FormItem Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
+| render-feedback | `(raw: string \| undefined) => string \| VNode` | `undefined` | 自定义 feedback 的渲染函数 |  |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
 | ignore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |  |
 | label | `string` | `undefined` | 标签信息 |  |
 | label-align | `'left' \| 'right'` | `undefined` | 标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align` |  |
 | label-placement | `'left' \| 'top'` | `undefined` | 如果没有被设定，使用外层表单的 `label-placement` |  |
-| label-style | `CSSProperties \| string` | `undefined` | 标签的样式 |  |
+| label-style | `CSSProperties \  | string` | `undefined` | 标签的样式 |  |
 | label-props | `LabelHTMLAttributes` | `undefined` | 标签元素的属性 | 2.24.0 |
 | label-width | `number \| string \| 'auto'` | `undefined` | 如果没有被设定，使用外层表单的 `label-width`，`'auto'` 意味着 label width 会被自动调整 |  |
 | path | `string` | `undefined` | 将值收集到外层表单 `model` 对象的路径 |  |
