@@ -1,4 +1,4 @@
-// The file is not designed to run directly. `cwd` shoudl be project root.
+// The file is not designed to run directly. `cwd` should be project root.
 import path from 'path'
 import fs from 'fs-extra'
 import process from 'process'
