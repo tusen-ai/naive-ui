@@ -35,7 +35,14 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo, createKey, warnOnce } from '../../_utils'
+import {
+  warn,
+  call,
+  useAdjustedTo,
+  createKey,
+  warnOnce,
+  resolveSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
@@ -919,7 +926,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clearable, triggerOnRender } = this
+    const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
     triggerOnRender?.()
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
@@ -952,7 +959,6 @@ export default defineComponent({
       themeClass: this.themeClass,
       onRender: this.onRender
     }
-    const { mergedClsPrefix } = this
     return (
       <div
         ref="triggerElRef"
@@ -999,20 +1005,29 @@ export default defineComponent({
                                 clsPrefix={mergedClsPrefix}
                                 class={`${mergedClsPrefix}-date-picker-icon`}
                               >
-                                {{ default: () => <ToIcon /> }}
+                                {{
+                                  default: () =>
+                                    resolveSlot($slots['to-icon'], () => [
+                                      <ToIcon />
+                                    ])
+                                }}
                               </NBaseIcon>
                             ) : (
                               this.separator
                             ),
-                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
-                            () => (
-                              <NBaseIcon
-                                clsPrefix={mergedClsPrefix}
-                                class={`${mergedClsPrefix}-date-picker-icon`}
-                              >
-                                {{ default: () => <DateIcon /> }}
-                              </NBaseIcon>
-                            )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']: () => (
+                            <NBaseIcon
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-date-picker-icon`}
+                            >
+                              {{
+                                default: () =>
+                                  resolveSlot($slots['date-icon'], () => [
+                                    <DateIcon />
+                                  ])
+                              }}
+                            </NBaseIcon>
+                          )
                         }}
                       </NInput>
                     ) : (
@@ -1034,15 +1049,19 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
-                            () => (
-                              <NBaseIcon
-                                clsPrefix={mergedClsPrefix}
-                                class={`${mergedClsPrefix}-date-picker-icon`}
-                              >
-                                {{ default: () => <DateIcon /> }}
-                              </NBaseIcon>
-                            )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']: () => (
+                            <NBaseIcon
+                              clsPrefix={mergedClsPrefix}
+                              class={`${mergedClsPrefix}-date-picker-icon`}
+                            >
+                              {{
+                                default: () =>
+                                  resolveSlot($slots['date-icon'], () => [
+                                    <DateIcon />
+                                  ])
+                              }}
+                            </NBaseIcon>
+                          )
                         }}
                       </NInput>
                     )

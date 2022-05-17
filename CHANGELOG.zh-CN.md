@@ -26,6 +26,7 @@
 - `n-pagination` 中快速跳转的输入字符只允许纯数字，关闭 [#2928](https://github.com/TuSimple/naive-ui/issues/2928)
 - `n-color-picker` 新增 `on-confirm` 属性
 - `n-input` 新增 `clear-icon` slot
+- `n-date-picker` 新增 `date-icon` 和 `to-icon` 插槽，关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668)
 
 ### i18n
 

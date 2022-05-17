@@ -24,6 +24,7 @@ events.vue
 format.vue
 footerslot.vue
 status.vue
+icon.vue
 ```
 
 ## API
@@ -156,9 +157,11 @@ status.vue
 
 ### DatePicker Slots
 
-| 名称   | 参数 | 说明           |
-| ------ | ---- | -------------- |
-| footer | `()` | 添加额外的页脚 |
+| 名称      | 参数 | 说明             | 版本         |
+| --------- | ---- | ---------------- | ------------ |
+| date-icon | `()` | 日期输入框的图标 | NEXT_VERSION |
+| footer    | `()` | 添加额外的页脚   |              |
+| to-icon   | `()` | 日期范围的图标   | NEXT_VERSION |
 
 ### DatePicker Methods
 
