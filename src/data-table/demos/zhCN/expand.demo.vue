@@ -8,7 +8,8 @@
 
 <script lang="ts">
 import { h, defineComponent } from 'vue'
-import { NTag, NButton, useMessage, DataTableColumns } from 'naive-ui'
+import { NTag, NButton, useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 type RowData = {
   key: number

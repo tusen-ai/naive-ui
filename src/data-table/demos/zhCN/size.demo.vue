@@ -1,28 +1,42 @@
-# 无边框 & 单行
+<markdown>
+# 尺寸
+</markdown>
 
-```html
-<n-space vertical :size="12">
-  <n-data-table
-    :bordered="false"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-  <n-data-table
-    :bordered="false"
-    :single-line="true"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</n-space>
-```
+<template>
+  <n-space vertical :size="12">
+    <n-data-table
+      size="small"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+    <n-data-table
+      size="large"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
 import { NTag, NButton, useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
-const createColumns = ({ sendMail }) => {
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+  tags: string[]
+}
+
+const createColumns = ({
+  sendMail
+}: {
+  sendMail: (rowData: RowData) => void
+}): DataTableColumns<RowData> => {
   return [
     {
       title: 'Name',
@@ -74,7 +88,7 @@ const createColumns = ({ sendMail }) => {
   ]
 }
 
-const createData = () => [
+const createData = (): RowData[] => [
   {
     key: 0,
     name: 'John Brown',
@@ -114,4 +128,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

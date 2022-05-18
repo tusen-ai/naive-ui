@@ -1,15 +1,25 @@
-# 总结栏
+<markdown>
+# 条纹
 
-使用 `summary` 属性渲染总结栏。
+使用 `striped` 属性渲染条纹，使得表格明暗交替。
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :summary="summary" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" striped />
+</template>
 
-```js
-import { defineComponent, h } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 
-const createColumns = () => {
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const createColumns = (): DataTableColumns<RowData> => {
   return [
     {
       type: 'selection'
@@ -29,7 +39,7 @@ const createColumns = () => {
   ]
 }
 
-const createData = () => [
+const createData = (): RowData[] => [
   {
     key: 0,
     name: 'John Brown',
@@ -53,21 +63,9 @@ const createData = () => [
 export default defineComponent({
   setup () {
     return {
-      summary: (pageData) => {
-        return {
-          name: {
-            value: h(
-              'span',
-              { style: { color: 'red' } },
-              pageData.reduce((prevValue, row) => prevValue + row.age, 0)
-            ),
-            colSpan: 3
-          }
-        }
-      },
       data: createData(),
       columns: createColumns()
     }
   }
 })
-```
+</script>

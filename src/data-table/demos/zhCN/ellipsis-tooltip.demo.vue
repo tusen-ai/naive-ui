@@ -1,12 +1,14 @@
+<markdown>
 # 带提示的省略
 
 通过设定 `column.ellipsis.tooltip` 使得省略内容有弹出提示。`column.ellipsis` 接受的属性和 `n-ellipsis` 相同。
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 const columns = [
@@ -69,4 +71,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

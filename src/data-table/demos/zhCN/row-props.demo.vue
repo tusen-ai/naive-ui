@@ -1,20 +1,28 @@
+<markdown>
 # 自定义行属性
 
 如果你想给行增加一些属性或者事件处理器，使用 `row-props` 属性。
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :row-props="rowProps" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" :row-props="rowProps" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
+type RowData = {
+  key: number
+  name: string
+  age: string
+  address: string
+}
 export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      rowProps: (row) => {
+      rowProps: (row: RowData) => {
         return {
           style: 'cursor: pointer;',
           onClick: () => {
@@ -59,4 +67,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

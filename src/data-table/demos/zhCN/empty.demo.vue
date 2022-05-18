@@ -1,10 +1,12 @@
+<markdown>
 # 空表格
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 const createColumns = () => {
@@ -40,4 +42,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

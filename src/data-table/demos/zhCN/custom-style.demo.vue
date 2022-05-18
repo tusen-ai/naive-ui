@@ -1,17 +1,28 @@
+<markdown>
 # 自定义样式
 
-行：设定 `row-class-name` 为某些行设定 class。
-
 列：在列对象上设定 `className` 属性为确定的列设定 class。
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :row-class-name="rowClassName" />
-```
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :row-class-name="rowClassName"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
-const data = [
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const data: RowData[] = [
   {
     key: 0,
     name: 'John Brown',
@@ -51,7 +62,7 @@ export default defineComponent({
           key: 'address'
         }
       ],
-      rowClassName (row, index) {
+      rowClassName (row: RowData) {
         if (row.age > 32) {
           return 'too-old'
         }
@@ -60,9 +71,9 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
 
-```css
+<style>
 :deep(.too-old td) {
   color: rgba(255, 0, 0, 0.75) !important;
 }
@@ -72,4 +83,4 @@ export default defineComponent({
 :deep(.too-old .age) {
   color: rgba(0, 0, 128, 0.75) !important;
 }
-```
+</style>

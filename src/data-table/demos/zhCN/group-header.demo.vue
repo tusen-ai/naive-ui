@@ -1,15 +1,17 @@
+<markdown>
 # 表头分组
+</markdown>
 
-```html
-<n-data-table
-  :data="data"
-  :columns="columns"
-  :single-line="false"
-  :pagination="pagination"
-/>
-```
+<template>
+  <n-data-table
+    :data="data"
+    :columns="columns"
+    :single-line="false"
+    :pagination="pagination"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 function createCols () {
@@ -50,7 +52,7 @@ function createCols () {
 }
 
 function createData () {
-  return Array.apply(null, { length: 50 }).map((_, i) => {
+  return Array.from({ length: 50 }).map((_, i) => {
     return {
       key: i,
       name: `name_${i}`,
@@ -73,4 +75,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
