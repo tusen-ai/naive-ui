@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { TreeOption } from 'naive-ui'
 
 const data: TreeOption[] = [
@@ -52,7 +52,8 @@ const data: TreeOption[] = [
     ]
   },
   {
-    label: '1',
+    // label: '1',
+    prefix: () => h('text', 'prefix'),
     key: '1',
     children: [
       {

@@ -449,9 +449,11 @@ export default defineComponent({
       const { labelField } = props
       return (pattern: string, node: TreeOption): boolean => {
         if (!pattern.length) return true
-        return ((node as any)[labelField] as string)
-          .toLowerCase()
-          .includes(pattern.toLowerCase())
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
       }
     })
 
