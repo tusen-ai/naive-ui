@@ -1,12 +1,14 @@
+<markdown>
 # Ellipsis with tooltip
 
 Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` accepts the same props as `n-ellipsis`.
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 const columns = [
@@ -69,4 +71,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

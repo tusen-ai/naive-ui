@@ -1,12 +1,14 @@
+<markdown>
 # Ellipsis
 
 Ellipsize cell content via setting `column.ellipsis`.
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 const columns = [
@@ -65,4 +67,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

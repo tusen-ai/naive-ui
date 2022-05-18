@@ -1,23 +1,32 @@
-# Large data
+<markdown>
+# Fixed header and column
 
-Use `virtual-scroll` to deal with large date. Note that you need to set `max-height` at the same time.
+Note that: If you have set fixed column, you should also set `scroll-x`.
+</markdown>
 
-**Tip: When `virtual-scroll` is `true`, `rowSpan` will not take effect.**
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :max-height="250"
+    :scroll-x="1800"
+  />
+</template>
 
-```html
-<n-data-table
-  :columns="columns"
-  :data="data"
-  :max-height="250"
-  :scroll-x="1800"
-  virtual-scroll
-/>
-```
-
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 
-const columns = [
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+  tags: string[]
+}
+
+const createColumns = (): DataTableColumns<RowData> => [
   {
     type: 'selection',
     fixed: 'left'
@@ -68,14 +77,15 @@ const columns = [
 export default defineComponent({
   setup () {
     return {
-      data: Array.apply(null, { length: 5000 }).map((_, index) => ({
+      data: Array.from({ length: 46 }).map((_, index) => ({
         key: index,
         name: `Edward King ${index}`,
         age: 32,
         address: `London, Park Lane no. ${index}`
       })),
-      columns
+      columns: createColumns(),
+      pagination: { pageSize: 10 }
     }
   }
 })
-```
+</script>

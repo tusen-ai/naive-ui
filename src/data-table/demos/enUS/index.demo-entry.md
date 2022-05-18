@@ -8,41 +8,41 @@ DataTable is used to displays rows of structured data.
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
-  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
+  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
 </n-alert>
 
 ```demo
 basic.vue
-empty
-border
-size
-row-props
+empty.vue
+border.vue
+size.vue
+row-props.vue
 merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
-select
+select.vue
 custom-select
-group-header
-controlled-page
+group-header.vue
+controlled-page.vue
 controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
-fixed-header
-fixed-header-column
-summary
-ellipsis
-ellipsis-tooltip
+fixed-header.vue
+fixed-header-column.vue
+summary.vue
+ellipsis.vue
+ellipsis-tooltip.vue
 expand.vue
 render-header
-custom-style
+custom-style.vue
 ajax-usage
-virtual
+virtual.vue
 custom-filter-menu.vue
 tree.vue
-flex-height
-striped
-simple-editable
+flex-height.vue
+striped.vue
+simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue

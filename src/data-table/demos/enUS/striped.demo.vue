@@ -1,15 +1,25 @@
+<markdown>
 # Striped
 
 Using `striped` prop to make it easier to distinguish rows.
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" striped />
-```
+<template>
+  <n-data-table :columns="columns" :data="data" striped />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 
-const createColumns = () => {
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const createColumns = (): DataTableColumns<RowData> => {
   return [
     {
       type: 'selection'
@@ -29,7 +39,7 @@ const createColumns = () => {
   ]
 }
 
-const createData = () => [
+const createData = (): RowData[] => [
   {
     key: 0,
     name: 'John Brown',
@@ -58,4 +68,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

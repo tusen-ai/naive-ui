@@ -1,24 +1,31 @@
-# Fixed header and column
+<markdown>
+# Large data
 
-A Solution for displaying large amounts of data with long columns.
+**Tip: When `virtual-scroll` is `true`, `rowSpan` will not take effect.**
+</markdown>
 
-Note that: If you have set fixed column, you should also set `scroll-x`.
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :max-height="250"
+    :scroll-x="1800"
+    virtual-scroll
+  />
+</template>
 
-```html
-<n-data-table
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  :max-height="250"
-  :scroll-x="1800"
-/>
-```
-
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
-const columns = [
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const columns: DataTableColumns<RowData> = [
   {
     type: 'selection',
     fixed: 'left'
@@ -68,20 +75,16 @@ const columns = [
 
 export default defineComponent({
   setup () {
-    const message = useMessage()
+    const data: RowData[] = Array.from({ length: 5000 }).map((_, index) => ({
+      key: index,
+      name: `Edward King ${index}`,
+      age: 32,
+      address: `London, Park Lane no. ${index}`
+    }))
     return {
-      data: Array.apply(null, { length: 46 }).map((_, index) => ({
-        key: index,
-        name: `Edward King ${index}`,
-        age: 32,
-        address: `London, Park Lane no. ${index}`
-      })),
-      columns,
-      pagination: { pageSize: 10 },
-      sendMail (rowData) {
-        message.info('send mail to ' + rowData.name)
-      }
+      data,
+      columns
     }
   }
 })
-```
+</script>

@@ -1,17 +1,28 @@
+<markdown>
 # Custom style
 
-Row: Set `row-class-name` prop to assign a class name to certain rows.
-
 Column: Set `className` property on column object to assign a class name to a certain column.
+</markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :row-class-name="rowClassName" />
-```
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :row-class-name="rowClassName"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
-const data = [
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const data: RowData[] = [
   {
     key: 0,
     name: 'John Brown',
@@ -51,7 +62,7 @@ export default defineComponent({
           key: 'address'
         }
       ],
-      rowClassName (row, index) {
+      rowClassName (row: RowData) {
         if (row.age > 32) {
           return 'too-old'
         }
@@ -60,9 +71,9 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
 
-```css
+<style>
 :deep(.too-old td) {
   color: rgba(255, 0, 0, 0.75) !important;
 }
@@ -72,4 +83,4 @@ export default defineComponent({
 :deep(.too-old .age) {
   color: rgba(0, 0, 128, 0.75) !important;
 }
-```
+</style>
