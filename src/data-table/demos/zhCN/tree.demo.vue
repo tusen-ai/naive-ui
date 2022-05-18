@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 type RowData = {
   name: string

@@ -30,7 +30,7 @@
     "gen-volar-dts": "esbuild scripts/gen-component-declaration.js --bundle --platform=node | node",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky install",
-    "transpile-docs": "node scripts/md-to-vue tree-select",
+    "transpile-docs": "node scripts/md-to-vue data-table",
     "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
   "author": "07akioni",

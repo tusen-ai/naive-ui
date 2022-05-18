@@ -1,9 +1,23 @@
 <markdown>
-# 可展开
+# Unbordered & no column border
 </markdown>
 
 <template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+  <n-space vertical :size="12">
+    <n-data-table
+      :bordered="false"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+    <n-data-table
+      :bordered="false"
+      :single-line="true"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -25,16 +39,6 @@ const createColumns = ({
   sendMail: (rowData: RowData) => void
 }): DataTableColumns<RowData> => {
   return [
-    {
-      type: 'selection'
-    },
-    {
-      type: 'expand',
-      expandable: (rowData) => rowData.name !== 'Jim Green',
-      renderExpand: (rowData) => {
-        return `${rowData.name} is a good guy.`
-      }
-    },
     {
       title: 'Name',
       key: 'name'

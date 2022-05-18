@@ -1,9 +1,22 @@
 <markdown>
-# 可展开
+# 尺寸
 </markdown>
 
 <template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+  <n-space vertical :size="12">
+    <n-data-table
+      size="small"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+    <n-data-table
+      size="large"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -25,16 +38,6 @@ const createColumns = ({
   sendMail: (rowData: RowData) => void
 }): DataTableColumns<RowData> => {
   return [
-    {
-      type: 'selection'
-    },
-    {
-      type: 'expand',
-      expandable: (rowData) => rowData.name !== 'Jim Green',
-      renderExpand: (rowData) => {
-        return `${rowData.name} is a good guy.`
-      }
-    },
     {
       title: 'Name',
       key: 'name'
