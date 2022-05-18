@@ -11,7 +11,7 @@
     :columns="columns"
     :data="data"
     :pagination="pagination"
-    :row-key="(row) => row.address"
+    :row-key="rowKey"
     @update:checked-row-keys="handleCheck"
   />
 </template>
@@ -65,6 +65,7 @@ export default defineComponent({
       pagination: {
         pageSize: 5
       },
+      rowKey: (row: RowData) => row.address,
       handleCheck (rowKeys: DataTableRowKey[]) {
         checkedRowKeysRef.value = rowKeys
       }
