@@ -3,6 +3,7 @@
 ### Fixes
 
 - Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].
+- Fix `n-watermark` not working when provided `cls-prefix`
 
 ## 2.29.0
 
