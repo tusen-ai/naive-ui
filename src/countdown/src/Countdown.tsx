@@ -9,7 +9,7 @@ import {
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-interface TimeInfo {
+export interface CountdownTimeInfo {
   hours: number
   minutes: number
   seconds: number
@@ -29,7 +29,7 @@ const countdownProps = {
     type: Number as PropType<0 | 1 | 2 | 3>,
     default: 0
   },
-  render: Function as PropType<(props: TimeInfo) => VNodeChild>,
+  render: Function as PropType<(props: CountdownTimeInfo) => VNodeChild>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -56,7 +56,7 @@ export default defineComponent({
       return props.duration - elapsed + pnow - time
     }
 
-    function getTimeInfo (distance: number): TimeInfo {
+    function getTimeInfo (distance: number): CountdownTimeInfo {
       const hours = Math.floor(distance / 3600000)
       const minutes = Math.floor((distance % 3600000) / 60000)
       const seconds = Math.floor((distance % 60000) / 1000)
@@ -69,7 +69,7 @@ export default defineComponent({
       }
     }
 
-    function getDisplayValue (info: TimeInfo): string {
+    function getDisplayValue (info: CountdownTimeInfo): string {
       const { hours, minutes, seconds, milliseconds } = info
       const { precision } = props
       switch (precision) {
@@ -150,7 +150,7 @@ export default defineComponent({
     return () => {
       const { render, precision } = props
       const { value: distance } = distanceRef
-      let timeInfo: TimeInfo
+      let timeInfo: CountdownTimeInfo
       switch (precision) {
         case 0:
           timeInfo = getTimeInfo(distance + 999)
