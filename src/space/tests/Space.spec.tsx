@@ -182,6 +182,24 @@ describe('n-space', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should work with `wrap` prop', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <NSpace>{{ default: () => [<div>1</div>, <div>2</div>] }}</NSpace>
+        )
+      }
+    })
+    expect(wrapper.find('.n-space').attributes('style')).toContain(
+      'flex-wrap: wrap'
+    )
+
+    await wrapper.setProps({ wrap: false })
+    expect(wrapper.find('.n-space').attributes('style')).toContain(
+      'flex-wrap: nowrap'
+    )
+  })
+
   it('should not render while slot is Comment', () => {
     const wrapper = mount({
       render () {
