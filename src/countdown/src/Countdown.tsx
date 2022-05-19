@@ -9,7 +9,7 @@ import {
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-interface TimeInfo {
+export interface TimeInfo {
   hours: number
   minutes: number
   seconds: number
