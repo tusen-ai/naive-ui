@@ -431,7 +431,6 @@ export default defineComponent({
         onMouseenter,
         onMouseleave
       }
-      console.log('dropdownProps: ', dropdownProps)
       return h(
         NDropdownMenu,
         mergeProps(this.$attrs, dropdownProps) as typeof dropdownProps

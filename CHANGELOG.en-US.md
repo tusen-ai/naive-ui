@@ -21,7 +21,7 @@
 - Fix `n-time` throws error caused by `getTimezoneOffset` in SSR mode, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
 - Fix `n-transfer`'s search box's box-shadow is truncated.
 - Fix `n-time-picker`'s input box's invalid value won't be cleared after blur.
-- 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[##2977](https://github.com/TuSimple/naive-ui/issues/2977)
+- Fix `n-dropdown`'s incorrect render arrow when props `show-arrow: true` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 
 ### Feats
 
