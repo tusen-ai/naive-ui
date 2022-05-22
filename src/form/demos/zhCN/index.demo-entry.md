@@ -18,6 +18,7 @@ disabled.vue
 show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
+dynamic.vue
 ```
 
 ## API
