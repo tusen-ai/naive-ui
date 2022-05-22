@@ -58,7 +58,7 @@ custom-messages.vue
 ### FormItem Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
 | render-feedback | `(raw: string \| undefined) => string \| VNode` | `undefined` | 自定义 feedback 的渲染函数 |  |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
