@@ -69,6 +69,10 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  justifyIcon: {
+    type: Boolean,
+    default: false
+  },
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -562,7 +566,7 @@ export default defineComponent({
                             </NBaseIcon>
                           ])
                       }}
-                    </NxButton>,
+                   </NxButton>,
                     <NxButton
                       text
                       disabled={
