@@ -3,6 +3,7 @@ function pagesToShow (
   pageCount: number,
   pageSlot: number = 9
 ): number[] {
+  if (pageCount <= 0) return [0]
   if (pageCount === 1) return [1]
   if (pageCount === 2) return [1, 2]
   const firstPage = 1
@@ -72,7 +73,7 @@ function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] 
           active: false
         }
       default:
-        if (page === currentPage) {
+        if (page !== 0 && page === currentPage) {
           return {
             type: 'page',
             label: page,

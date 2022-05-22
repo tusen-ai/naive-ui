@@ -3,6 +3,7 @@
 ### Fixes
 
 - Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].
+- Fix `n-pagination` render incorrect when `page-count` prop value is Less than or equal to 0，closes [#2970].
 
 ## 2.29.0
 
