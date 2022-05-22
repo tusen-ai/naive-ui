@@ -1,6 +1,6 @@
 import { cB, c } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier-ease-out

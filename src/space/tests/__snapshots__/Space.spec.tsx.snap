@@ -63,6 +63,17 @@ exports[`n-space render justify space 5`] = `
 </div>"
 `;
 
+exports[`n-space render justify space 6`] = `
+"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-evenly; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
 exports[`n-space render space number size 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -10px; margin-bottom: -10px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; padding-top: 10px; padding-bottom: 10px;\\">kirby</div>

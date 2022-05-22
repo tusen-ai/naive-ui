@@ -5,9 +5,12 @@ import {
   defineComponent,
   PropType,
   ref,
-  onMounted
+  onMounted,
+  ExtractPropTypes,
+  inject
 } from 'vue'
 import { keep } from '../../_utils'
+import { notificationProviderInjectionKey } from './context'
 import {
   Notification,
   notificationProps,
@@ -29,6 +32,10 @@ export const notificationEnvOptions = {
   onAfterHide: Function as PropType<() => void>
 } as const
 
+export type NotificationOptions = Partial<
+ExtractPropTypes<typeof notificationEnvOptions>
+>
+
 export const NotificationEnvironment = defineComponent({
   name: 'NotificationEnvironment',
   props: {
@@ -44,6 +51,10 @@ export const NotificationEnvironment = defineComponent({
     }
   },
   setup (props) {
+    const {
+      wipTransitionCountRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(notificationProviderInjectionKey)!
     const showRef = ref(true)
     let timerId: number | null = null
     function hide (): void {
@@ -53,6 +64,7 @@ export const NotificationEnvironment = defineComponent({
       }
     }
     function handleBeforeEnter (el: HTMLElement): void {
+      wipTransitionCountRef.value++
       void nextTick(() => {
         el.style.height = `${el.offsetHeight}px`
         el.style.maxHeight = '0'
@@ -63,6 +75,7 @@ export const NotificationEnvironment = defineComponent({
       })
     }
     function handleAfterEnter (el: HTMLElement): void {
+      wipTransitionCountRef.value--
       el.style.height = ''
       el.style.maxHeight = ''
       const { onAfterEnter, onAfterShow } = props
@@ -71,6 +84,7 @@ export const NotificationEnvironment = defineComponent({
       if (onAfterShow) onAfterShow()
     }
     function handleBeforeLeave (el: HTMLElement): void {
+      wipTransitionCountRef.value++
       el.style.maxHeight = `${el.offsetHeight}px`
       el.style.height = `${el.offsetHeight}px`
       void el.offsetHeight
@@ -82,6 +96,7 @@ export const NotificationEnvironment = defineComponent({
       void el.offsetHeight
     }
     function handleAfterLeave (): void {
+      wipTransitionCountRef.value--
       const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey } =
         props
       if (onAfterLeave) onAfterLeave()

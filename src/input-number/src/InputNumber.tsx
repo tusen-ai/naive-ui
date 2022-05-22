@@ -23,7 +23,8 @@ import {
   MaybeArray,
   ExtractPublicPropTypes,
   warnOnce,
-  call
+  call,
+  resolveSlot
 } from '../../_utils'
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
@@ -500,7 +501,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={[
@@ -535,12 +536,13 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            prefix: () =>
-              this.showButton && this.justifyIcon
+            prefix: () => $slots.prefix?.(),
+            suffix: () =>
+              this.showButton
                 ? [
-                    this.$slots.prefix && (
-                      <span class={`${mergedClsPrefix}-input-number-prefix`}>
-                        {{ default: this.$slots.prefix }}
+                    $slots.suffix && (
+                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                        {{ default: $slots.suffix }}
                       </span>
                     ),
                     <NxButton
@@ -555,16 +557,14 @@ export default defineComponent({
                       ref="minusButtonInstRef"
                     >
                       {{
-                        default: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            aria-disabled={true}
-                          >
-                            {{
-                              default: () => <RemoveIcon />
-                            }}
-                          </NBaseIcon>
-                        )
+                        icon: () =>
+                          resolveSlot($slots['minus-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <RemoveIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
                       }}
                     </NxButton>
                   ]
@@ -617,17 +617,18 @@ export default defineComponent({
                       ref="addButtonInstRef"
                     >
                       {{
-                        default: () => (
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
-                            {{
-                              default: () => <AddIcon />
-                            }}
-                          </NBaseIcon>
-                        )
+                        icon: () =>
+                          resolveSlot($slots['add-icon'], () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () => <AddIcon />
+                              }}
+                            </NBaseIcon>
+                          ])
                       }}
                     </NxButton>
                   ]
-                : this.$slots.suffix?.()
+                : $slots.suffix?.()
           }}
         </NInput>
       </div>

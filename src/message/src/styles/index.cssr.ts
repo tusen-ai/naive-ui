@@ -1,6 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
-import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --n-margin
@@ -32,7 +32,7 @@ export default c([
     transform-origin: top center;
     display: flex;
   `, [
-    fadeInHeightExpand({
+    fadeInHeightExpandTransition({
       overflow: 'visible',
       originalTransition: 'transform .3s var(--n-bezier)',
       enterToProps: {

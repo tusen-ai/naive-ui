@@ -9,6 +9,7 @@ export default defineComponent({
       type: String,
       required: true
     },
+    right: Boolean,
     focusable: Boolean,
     disabled: Boolean,
     checked: Boolean,
@@ -45,7 +46,13 @@ export default defineComponent({
       handleUpdateValue
     } = this
     return (
-      <span class={`${clsPrefix}-tree-node-checkbox`} data-checkbox>
+      <span
+        class={[
+          `${clsPrefix}-tree-node-checkbox`,
+          this.right && `${clsPrefix}-tree-node-checkbox--right`
+        ]}
+        data-checkbox
+      >
         <NCheckbox
           focusable={focusable}
           disabled={disabled}

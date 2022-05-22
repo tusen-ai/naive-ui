@@ -200,12 +200,18 @@ export default cB('tabs', `
     transition:
       color .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
-      opacity .2s var(--n-bezier),
-      transform .2s var(--n-bezier);
+      opacity .2s var(--n-bezier);
     left: 0;
     right: 0;
     top: 0;
   `, [
+    c('&.next-transition-leave-active, &.prev-transition-leave-active, &.next-transition-enter-active, &.prev-transition-enter-active', `
+      transition:
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      transform .2s var(--n-bezier),
+      opacity .2s var(--n-bezier);
+    `),
     c('&.next-transition-leave-active, &.prev-transition-leave-active', `
       position: absolute;
     `),
@@ -229,16 +235,17 @@ export default cB('tabs', `
   `),
   cM('line-type, bar-type', [
     cB('tabs-tab', `
-      font-weight: var(--n-tab-font-weight-active);
+      font-weight: var(--n-tab-font-weight);
       box-sizing: border-box;
       vertical-align: bottom;
     `, [
       c('&:hover', {
         color: 'var(--n-tab-text-color-hover)'
       }),
-      cM('active', {
-        color: 'var(--n-tab-text-color-active)'
-      }),
+      cM('active', `
+        color: var(--n-tab-text-color-active);
+        font-weight: var(--n-tab-font-weight-active);
+      `),
       cM('disabled', {
         color: 'var(--n-tab-text-color-disabled)'
       })

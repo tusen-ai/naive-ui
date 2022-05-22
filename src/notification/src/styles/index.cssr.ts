@@ -56,6 +56,63 @@ export default c([
         ])
       ])
     ]),
+    cM('top, top-right, top-left', `
+      top: 12px;
+    `, [
+      c('&.transitioning >', [
+        cB('scrollbar', [
+          c('>', [
+            cB('scrollbar-container', `
+              min-height: 100vh !important;
+            `)
+          ])
+        ])
+      ])
+    ]),
+    cM('bottom, bottom-right, bottom-left', `
+      bottom: 12px;
+    `, [
+      c('>', [
+        cB('scrollbar', [
+          c('>', [
+            cB('scrollbar-container', [
+              cB('scrollbar-content', `
+                padding-bottom: 12px;
+              `)
+            ])
+          ])
+        ])
+      ]),
+      cB('notification-wrapper', `
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 0;
+        margin-top: 12px;
+      `)
+    ]),
+    cM('top, bottom', `
+      left: 50%;
+      transform: translateX(-50%);
+    `, [
+      cB('notification-wrapper', [
+        c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
+          transform: scale(0.85);
+        `),
+        c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
+          transform: scale(1);
+        `)
+      ])
+    ]),
+    cM('top', [
+      cB('notification-wrapper', `
+        transform-origin: top center;
+      `)
+    ]),
+    cM('bottom', [
+      cB('notification-wrapper', `
+        transform-origin: bottom center;
+      `)
+    ]),
     cM('top-right, bottom-right', [
       cB('notification', `
         margin-left: 28px;
@@ -70,25 +127,21 @@ export default c([
     ]),
     cM('top-right', `
       right: 0;
-      top: 12px;
     `, [
       placementTransformStyle('top-right')
     ]),
     cM('top-left', `
       left: 0;
-      top: 12px;
     `, [
       placementTransformStyle('top-left')
     ]),
     cM('bottom-right', `
       right: 0;
-      bottom: 12px;
     `, [
       placementTransformStyle('bottom-right')
     ]),
     cM('bottom-left', `
       left: 0;
-      bottom: 12px;
     `, [
       placementTransformStyle('bottom-left')
     ]),
@@ -106,9 +159,12 @@ export default c([
         bottom: 0;
       `)
     ]),
-    cB('notification', [
+    cB('notification-wrapper', `
+      margin-bottom: 12px;
+    `, [
       c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
         opacity: 0;
+        margin-top: 0 !important;
         margin-bottom: 0 !important;
       `),
       c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
@@ -121,6 +177,18 @@ export default c([
           opacity .3s var(--n-bezier),
           transform .3s var(--n-bezier-ease-in),
           max-height .3s var(--n-bezier),
+          margin-top .3s linear,
+          margin-bottom .3s linear,
+          box-shadow .3s var(--n-bezier);
+      `),
+      c('&.notification-transition-enter-active', `
+        transition:
+          background-color .3s var(--n-bezier),
+          color .3s var(--n-bezier),
+          opacity .3s var(--n-bezier),
+          transform .3s var(--n-bezier-ease-out),
+          max-height .3s var(--n-bezier),
+          margin-top .3s linear,
           margin-bottom .3s linear,
           box-shadow .3s var(--n-bezier);
       `)
@@ -132,9 +200,6 @@ export default c([
         background-color .3s var(--n-bezier),
         color .3s var(--n-bezier),
         opacity .3s var(--n-bezier),
-        transform .3s var(--n-bezier-ease-out),
-        max-height .3s var(--n-bezier),
-        margin-bottom .3s linear,
         box-shadow .3s var(--n-bezier);
       font-family: inherit;
       font-size: var(--n-font-size);
@@ -143,7 +208,6 @@ export default c([
       display: flex;
       overflow: hidden;
       flex-shrink: 0;
-      margin-bottom: 12px;
       padding-left: var(--n-padding-left);
       padding-right: var(--n-padding-right);
       width: var(--n-width);
@@ -152,7 +216,6 @@ export default c([
       box-sizing: border-box;
       opacity: 1;
     `, [
-      // TODO: refactor type styles & transition
       cE('avatar', [
         cB('icon', {
           color: 'var(--n-icon-color)'
@@ -257,7 +320,7 @@ function placementTransformStyle (placement: string): CNode {
   const direction = placement.split('-')[1]
   const transformXEnter = direction === 'left' ? 'calc(-100%)' : 'calc(100%)'
   const transformXLeave = '0'
-  return cB('notification', [
+  return cB('notification-wrapper', [
     c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
       transform: translate(${transformXEnter}, 0);
     `),

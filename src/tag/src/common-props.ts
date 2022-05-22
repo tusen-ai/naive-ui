@@ -16,7 +16,7 @@ export default {
   },
   round: Boolean,
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: String as PropType<'tiny' | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   closable: Boolean,

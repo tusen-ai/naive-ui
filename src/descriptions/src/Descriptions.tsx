@@ -51,7 +51,9 @@ const descriptionProps = {
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
-export type DescriptionProps = ExtractPublicPropTypes<typeof descriptionProps>
+export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionProps>
+/** @deprecated You should use `DescriptionsProps` */
+export type DescriptionProps = DescriptionsProps
 
 export default defineComponent({
   name: 'Descriptions',

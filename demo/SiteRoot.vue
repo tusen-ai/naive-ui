@@ -3,6 +3,7 @@
     :is="configProvider"
     class="demo"
     namespace="naive-ui-doc"
+    preflight-style-disabled
     :theme-name="themeName"
     :theme="theme"
     :locale="locale"

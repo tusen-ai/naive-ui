@@ -15,14 +15,15 @@ import {
   startOfDay,
   startOfMonth,
   getMonth
-} from 'date-fns'
+} from 'date-fns/esm'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { call } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NButton, NButtonGroup } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
@@ -100,15 +101,15 @@ export default defineComponent({
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
       const newMonthTs = startOfMonth(now).valueOf()
+      monthTsRef.value = newMonthTs
       const newYear = getYear(newMonthTs)
       const newMonth = getMonth(newMonthTs)
       if (oldYear !== newYear || oldMonth !== newMonth) {
         props.onPanelChange?.({
           year: newYear,
-          month: newMonthTs
+          month: newMonth + 1
         })
       }
-      monthTsRef.value = newMonthTs
     }
     const cssVarsRef = computed(() => {
       const {
@@ -277,7 +278,9 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
+              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
+              const notInCurrentMonth = !inCurrentMonth
+              const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
@@ -285,11 +288,15 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    notInCurrentMonth &&
+                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
+                    if (disabled) return
                     this.doUpdateValue(ts, {
                       year,
                       month: month + 1,

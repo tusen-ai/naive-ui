@@ -8,40 +8,41 @@ DataTable is used to displays rows of structured data.
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
-  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
-  </n-alert>
+  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+</n-alert>
 
 ```demo
 basic.vue
-empty
-border
-size
-row-props
+empty.vue
+border.vue
+size.vue
+row-props.vue
 merge-cell
 filter-and-sorter
+pagination-behavior-on-filter.vue
 multiple-sorter
-select
+select.vue
 custom-select
-group-header
-controlled-page
+group-header.vue
+controlled-page.vue
 controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
-fixed-header
-fixed-header-column
-summary
-ellipsis
-ellipsis-tooltip
-expand
+fixed-header.vue
+fixed-header-column.vue
+summary.vue
+ellipsis.vue
+ellipsis-tooltip.vue
+expand.vue
 render-header
-custom-style
+custom-style.vue
 ajax-usage
-virtual
+virtual.vue
 custom-filter-menu.vue
-tree
-flex-height
-striped
-simple-editable
+tree.vue
+flex-height.vue
+striped.vue
+simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
@@ -53,6 +54,7 @@ async-expand.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. | 2.28.0 |
 | bordered | `boolean` | `true` | Whether to show border. |  |
 | bottom-bordered | `boolean` | `true` | Whether to show bottom border. |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |  |
@@ -63,11 +65,13 @@ async-expand.vue
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
+| paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
@@ -112,6 +116,7 @@ async-expand.vue
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
+| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |  |
@@ -123,6 +128,7 @@ async-expand.vue
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
+| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |

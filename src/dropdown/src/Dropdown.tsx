@@ -420,7 +420,8 @@ export default defineComponent({
           this.themeClass,
           this.trigger === 'manual' &&
             `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
+          this.showArrow &&
+            `${mergedClsPrefix}-popover ${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
@@ -441,7 +442,8 @@ export default defineComponent({
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
       internalRenderBody: renderPopoverBody,
-      onUpdateShow: this.doUpdateShow
+      onUpdateShow: this.doUpdateShow,
+      'onUpdate:show': undefined
     }
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>

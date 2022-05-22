@@ -12,7 +12,8 @@ import {
   watch,
   Transition,
   onMounted,
-  LabelHTMLAttributes
+  LabelHTMLAttributes,
+  VNode
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -46,7 +47,11 @@ import {
   FormItemInst,
   FormItemInternalValidate
 } from './interface'
-import { formInjectionKey, formItemInstsInjectionKey } from './context'
+import {
+  formInjectionKey,
+  formItemInstsInjectionKey,
+  formItemRenderFeedbackInjectionKey
+} from './context'
 import style from './styles/form-item.cssr'
 
 export const formItemProps = {
@@ -73,6 +78,9 @@ export const formItemProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
+  renderFeedback: Function as PropType<
+  (raw: string | undefined) => string | VNode
+  >,
   feedback: String,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
@@ -145,6 +153,7 @@ export default defineComponent({
       'formItems',
       toRef(props, 'path')
     )
+    provide(formItemRenderFeedbackInjectionKey, props.renderFeedback)
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)

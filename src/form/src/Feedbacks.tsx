@@ -1,4 +1,5 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, inject, VNode } from 'vue'
+import { formItemRenderFeedbackInjectionKey } from './context'
 
 export default defineComponent({
   name: 'FormItemFeedback',
@@ -15,14 +16,19 @@ export default defineComponent({
     if ($slots.default) {
       return $slots.default()
     }
+    const renderFeedback = inject(formItemRenderFeedbackInjectionKey)
+    const getRenderedFeedback = (
+      raw: string | undefined
+    ): string | VNode | undefined =>
+      renderFeedback ? renderFeedback(raw) : raw
     return feedback ? (
       <div key={feedback} class={`${clsPrefix}-form-item-feedback__line`}>
-        {feedback}
+        {getRenderedFeedback(feedback)}
       </div>
     ) : (
       this.explains?.map((explain) => (
         <div key={explain} class={`${clsPrefix}-form-item-feedback__line`}>
-          {explain}
+          {getRenderedFeedback(explain)}
         </div>
       ))
     )

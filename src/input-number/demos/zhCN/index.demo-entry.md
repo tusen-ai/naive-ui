@@ -18,6 +18,7 @@ show-button.vue
 disable-keyboard.vue
 change-timing.vue
 status.vue
+custom-icon.vue
 debug.vue
 rtl-debug.vue
 ```
@@ -53,10 +54,12 @@ rtl-debug.vue
 
 ### InputNumber Slots
 
-| 名称   | 参数 | 说明               |
-| ------ | ---- | ------------------ |
-| prefix | `()` | 输入框头部内容插槽 |
-| suffix | `()` | 输入框尾部内容插槽 |
+| 名称       | 参数 | 说明               | 版本   |
+| ---------- | ---- | ------------------ | ------ |
+| add-icon   | `()` | 增加按钮的图标     | 2.28.1 |
+| minus-icon | `()` | 减少按钮的图标     | 2.28.1 |
+| prefix     | `()` | 输入框头部内容插槽 |        |
+| suffix     | `()` | 输入框尾部内容插槽 |        |
 
 ### InputNumber Methods
 

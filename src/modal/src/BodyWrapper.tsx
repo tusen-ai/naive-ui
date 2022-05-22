@@ -14,7 +14,8 @@ import {
   VNode,
   ComponentPublicInstance,
   mergeProps,
-  cloneVNode
+  cloneVNode,
+  computed
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -25,7 +26,7 @@ import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { NCard } from '../../card'
-import { getFirstSlotVNode, keep, warn } from '../../_utils'
+import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 import { presetProps } from './presetProps'
 
@@ -50,6 +51,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    blockScroll: Boolean,
     ...presetProps,
     // events
     onClickoutside: {
@@ -88,6 +90,7 @@ export default defineComponent({
     watch(toRef(props, 'show'), (value) => {
       if (value) displayedRef.value = true
     })
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin (): string {
@@ -283,7 +286,12 @@ export default defineComponent({
                                     )) as any,
                                 [
                                   [vShow, this.show],
-                                  [clickoutside, handleClickOutside]
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
                               )
                           }}

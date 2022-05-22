@@ -5,7 +5,13 @@ Change data in `onLoad` prop.
 </markdown>
 
 <template>
-  <n-data-table :columns="columns" :data="data" @load="onLoad" />
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :cascade="false"
+    allow-checking-not-loaded
+    @load="onLoad"
+  />
 </template>
 
 <script lang="ts">
@@ -14,7 +20,10 @@ import { DataTableColumns } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const columns: DataTableColumns = [{ key: 'example', title: 'Example' }]
+    const columns: DataTableColumns = [
+      { type: 'selection' },
+      { key: 'example', title: 'Example' }
+    ]
     const dataRef = ref([
       { key: 'p1', example: 'p1', isLeaf: false },
       { key: 'p2', example: 'p2', isLeaf: false },

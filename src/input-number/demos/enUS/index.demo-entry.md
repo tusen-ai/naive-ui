@@ -19,6 +19,7 @@ show-button.vue
 disable-keyboard.vue
 change-timing.vue
 status.vue
+custom-icon.vue
 ```
 
 ## API
@@ -52,10 +53,12 @@ status.vue
 
 ### InputNumber Slots
 
-| Name   | Parameters | Description          |
-| ------ | ---------- | -------------------- |
-| prefix | `()`       | Prefix content slot. |
-| suffix | `()`       | Suffix content slot. |
+| Name       | Parameters | Description               | Version |
+| ---------- | ---------- | ------------------------- | ------- |
+| add-icon   | `()`       | icon of the add button.   | 2.28.1  |
+| minus-icon | `()`       | icon of the minus button. | 2.28.1  |
+| prefix     | `()`       | Prefix content slot.      |         |
+| suffix     | `()`       | Suffix content slot.      |         |
 
 ### InputNumber Methods
 

@@ -1,6 +1,6 @@
 import { CNode, CNodeChildren, CProperties } from 'css-render'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --n-color
@@ -124,14 +124,12 @@ export default c([
       ])
     ]),
     cM('collapsed', [
-      cB('menu-item', [
+      cB('menu-item-content', [
         cM('selected', [
           c('&::before', `
             background-color: var(--n-item-color-active-collapsed) !important;
           `)
-        ])
-      ]),
-      cB('menu-item-content', [
+        ]),
         cB('menu-item-content-header', 'opacity: 0;'),
         cE('arrow', 'opacity: 0;'),
         cE('icon', 'color: var(--n-item-icon-color-collapsed);')

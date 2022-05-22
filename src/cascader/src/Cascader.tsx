@@ -60,6 +60,7 @@ import style from './styles/index.cssr'
 
 const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
+  allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -236,7 +237,8 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade
+          cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
       } else {
         return {
@@ -332,7 +334,8 @@ export default defineComponent({
         try {
           const { checkedKeys } = check(key, mergedKeysRef.value.checkedKeys, {
             cascade,
-            checkStrategy: mergedCheckStrategyRef.value
+            checkStrategy: mergedCheckStrategyRef.value,
+            allowNotLoaded: props.allowCheckingNotLoaded
           })
           doUpdateValue(
             checkedKeys,
@@ -389,7 +392,8 @@ export default defineComponent({
         } = treeMateRef
         const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
         doUpdateValue(
           checkedKeys,
@@ -406,7 +410,8 @@ export default defineComponent({
         const { getCheckedKeys, getNode } = treeMateRef.value
         const value = getCheckedKeys(checkedKeysRef.value, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }).checkedKeys
         return value.map((key) => {
           const node = getNode(key)
@@ -762,6 +767,15 @@ export default defineComponent({
     function syncCascaderMenuPosition (): void {
       cascaderMenuFollowerRef.value?.syncPosition()
     }
+    function handleTriggerResize (): void {
+      if (mergedShowRef.value) {
+        if (showSelectMenuRef.value) {
+          syncSelectMenuPosition()
+        } else {
+          syncCascaderMenuPosition()
+        }
+      }
+    }
     provide(cascaderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -851,6 +865,7 @@ export default defineComponent({
       : undefined
     return {
       ...exposedMethods,
+      handleTriggerResize,
       mergedStatus: mergedStatusRef,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
@@ -904,6 +919,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      onResize={this.handleTriggerResize}
                       ref="triggerInstRef"
                       status={this.mergedStatus}
                       clsPrefix={mergedClsPrefix}

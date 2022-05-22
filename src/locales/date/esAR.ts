@@ -1,4 +1,4 @@
-import esAR from 'date-fns/locale/es'
+import esAR from 'date-fns/esm/locale/es'
 import { NDateLocale } from './enUS'
 
 const dateEsAR: NDateLocale = {

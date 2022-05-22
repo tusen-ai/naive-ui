@@ -1,9 +1,18 @@
 import { useMemo } from 'vooks'
-import { ComponentPublicInstance, ComputedRef, inject, PropType } from 'vue'
+import { on, off } from 'evtd'
+import {
+  ComponentPublicInstance,
+  ComputedRef,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  PropType,
+  ref
+} from 'vue'
+import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'
 
 interface UseAdjustedToProps {
   to?: string | HTMLElement | boolean
@@ -11,7 +20,6 @@ interface UseAdjustedToProps {
 }
 
 const teleportDisabled = '__disabled__'
-
 function useAdjustedTo (
   props: UseAdjustedToProps
 ): ComputedRef<HTMLElement | string> {
@@ -19,11 +27,26 @@ function useAdjustedTo (
   const drawer = inject(drawerBodyInjectionKey, null)
   const popover = inject(popoverBodyInjectionKey, null)
   const selectMenu = inject(internalSelectionMenuBodyInjectionKey, null)
+
+  const fullscreenElementRef = ref<null | Element>()
+  if (typeof document !== 'undefined') {
+    fullscreenElementRef.value = document.fullscreenElement
+    const handleFullscreenChange = (): void => {
+      fullscreenElementRef.value = document.fullscreenElement
+    }
+    onMounted(() => {
+      on('fullscreenchange', document, handleFullscreenChange)
+    })
+    onBeforeUnmount(() => {
+      off('fullscreenchange', document, handleFullscreenChange)
+    })
+  }
+
   return useMemo(() => {
     const { to } = props
     if (to !== undefined) {
       if (to === false) return teleportDisabled
-      if (to === true) return 'body'
+      if (to === true) return fullscreenElementRef.value || 'body'
       return to
     }
     if (modal?.value) {
@@ -32,7 +55,7 @@ function useAdjustedTo (
     if (drawer?.value) return drawer.value
     if (popover?.value) return popover.value
     if (selectMenu?.value) return selectMenu.value
-    return to ?? 'body'
+    return to ?? (fullscreenElementRef.value || 'body')
   })
 }
 

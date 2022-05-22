@@ -13,35 +13,36 @@
 
 ```demo
 basic.vue
-empty
-border
-size
-row-props
+empty.vue
+border.vue
+size.vue
+row-props.vue
 merge-cell
 filter-and-sorter
+pagination-behavior-on-filter.vue
 multiple-sorter
-select
+select.vue
 custom-select
-group-header
-controlled-page
+group-header.vue
+controlled-page.vue
 controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
-fixed-header
-fixed-header-column
-summary
-ellipsis
-ellipsis-tooltip
-expand
+fixed-header.vue
+fixed-header-column.vue
+summary.vue
+ellipsis.vue
+ellipsis-tooltip.vue
+expand.vue
 render-header
-custom-style
+custom-style.vue
 ajax-usage
-virtual
+virtual.vue
 custom-filter-menu.vue
-tree
-flex-height
-striped
-simple-editable
+tree.vue
+flex-height.vue
+striped.vue
+simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
@@ -57,6 +58,7 @@ height-debug
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的 | 2.28.0 |
 | bordered | `boolean` | `true` | 是否显示 border |  |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |  |
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |  |
@@ -68,10 +70,12 @@ height-debug
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |  |
+| paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
@@ -116,6 +120,7 @@ height-debug
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
+| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |  |
@@ -127,6 +132,7 @@ height-debug
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
+| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
 | titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
