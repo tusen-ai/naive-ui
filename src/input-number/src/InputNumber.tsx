@@ -566,45 +566,7 @@ export default defineComponent({
                             </NBaseIcon>
                           ])
                       }}
-                    </NxButton>
-                  ]
-                : this.$slots.prefix?.(),
-            suffix: () =>
-              this.showButton
-                ? [
-                    this.$slots.suffix && (
-                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                        {{ default: this.$slots.suffix }}
-                      </span>
-                    ),
-                    !this.justifyIcon && (
-                      <NxButton
-                        text
-                        disabled={
-                          !this.minusable ||
-                          this.mergedDisabled ||
-                          this.readonly
-                        }
-                        focusable={false}
-                        builtinThemeOverrides={this.buttonThemeOverrides}
-                        onClick={this.handleMinusClick}
-                        onMousedown={this.handleMinusMousedown}
-                        ref="minusButtonInstRef"
-                      >
-                        {{
-                          default: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              aria-disabled={true}
-                            >
-                              {{
-                                default: () => <RemoveIcon />
-                              }}
-                            </NBaseIcon>
-                          )
-                        }}
-                      </NxButton>
-                    ),
+                  </NxButton>,
                     <NxButton
                       text
                       disabled={
