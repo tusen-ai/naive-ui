@@ -587,11 +587,9 @@ export default defineComponent({
         >
           {{
             prefix: () =>
-              this.showButton
+              this.showButton && this.buttonPlacement === 'both'
                 ? [
-                    this.buttonPlacement === 'both'
-                      ? renderMinusButton()
-                      : null,
+                    renderMinusButton(),
                     resolveWrappedSlot($slots.prefix, (children) => {
                       if (children) {
                         return (
