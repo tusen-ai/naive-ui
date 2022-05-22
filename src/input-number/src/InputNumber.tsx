@@ -566,7 +566,7 @@ export default defineComponent({
                             </NBaseIcon>
                           ])
                       }}
-                  </NxButton>,
+                   </NxButton>,
                     <NxButton
                       text
                       disabled={
