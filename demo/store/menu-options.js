@@ -705,6 +705,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/collapse-transition'
         },
         {
+          en: 'Discrete API',
+          zh: '独立 API',
+          enSuffix: true,
+          path: '/discrete'
+        },
+        {
           en: 'Scrollbar',
           zh: '滚动条',
           enSuffix: true,

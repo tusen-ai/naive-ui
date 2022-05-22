@@ -513,6 +513,10 @@ export const enComponentRoutes = [
     path: 'watermark',
     component: () =>
       import('../../src/watermark/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'discrete',
+    component: () => import('../../src/discrete/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -877,6 +881,10 @@ export const zhComponentRoutes = [
     path: 'watermark',
     component: () =>
       import('../../src/watermark/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'discrete',
+    component: () => import('../../src/discrete/demos/zhCN/index.demo-entry.md')
   }
 ]
 

@@ -6,12 +6,13 @@ import {
   PropType,
   provide,
   ComputedRef,
-  markRaw
+  markRaw,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
 import { hash } from 'css-render'
-import { ExtractPublicPropTypes, warn } from '../../_utils'
+import { warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
 import { NDateLocale, NLocale } from '../../locales'
 import type {
@@ -64,8 +65,8 @@ export const configProviderProps = {
   }
 } as const
 
-export type ConfigProviderProps = ExtractPublicPropTypes<
-  typeof configProviderProps
+export type ConfigProviderProps = Partial<
+ExtractPropTypes<typeof configProviderProps>
 >
 
 export default defineComponent({

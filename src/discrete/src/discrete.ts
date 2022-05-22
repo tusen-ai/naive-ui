@@ -2,7 +2,7 @@ import { NMessageProvider, useMessage } from '../../message'
 import { NDialogProvider, useDialog } from '../../dialog'
 import { NNotificationProvider, useNotification } from '../../notification'
 import { NLoadingBarProvider, useLoadingBar } from '../../loading-bar'
-import { createDiscreteApp } from './discrete-app'
+import { createDiscreteApp } from './discreteApp'
 import {
   DialogApiOptions,
   DialogDiscreteApi,
