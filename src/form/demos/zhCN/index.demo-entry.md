@@ -66,7 +66,7 @@ custom-messages.vue
 | label | `string` | `undefined` | 标签信息 |  |
 | label-align | `'left' \| 'right'` | `undefined` | 标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align` |  |
 | label-placement | `'left' \| 'top'` | `undefined` | 如果没有被设定，使用外层表单的 `label-placement` |  |
-| label-style | `CSSProperties \  | string` | `undefined` | 标签的样式 |  |
+| label-style | `CSSProperties \| string` | `undefined` | 标签的样式 |  |
 | label-props | `LabelHTMLAttributes` | `undefined` | 标签元素的属性 | 2.24.0 |
 | label-width | `number \| string \| 'auto'` | `undefined` | 如果没有被设定，使用外层表单的 `label-width`，`'auto'` 意味着 label width 会被自动调整 |  |
 | path | `string` | `undefined` | 将值收集到外层表单 `model` 对象的路径 |  |
