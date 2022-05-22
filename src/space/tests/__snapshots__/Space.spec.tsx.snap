@@ -6,7 +6,7 @@ exports[`n-space render custom style space 1`] = `
 </div>"
 `;
 
-exports[`n-space render empty children 1`] = `"<!---->"`;
+exports[`n-space render empty children 1`] = `""`;
 
 exports[`n-space render justify space 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
@@ -97,9 +97,9 @@ exports[`n-space render vertical space 1`] = `
 </div>"
 `;
 
-exports[`n-space should not render while slot is Comment 1`] = `"<!---->"`;
+exports[`n-space should not render while slot is Comment 1`] = `""`;
 
-exports[`n-space should not render while v-if is false 1`] = `"<!---->"`;
+exports[`n-space should not render while v-if is false 1`] = `""`;
 
 exports[`n-space should render with invalidElement 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
