@@ -1,107 +1,64 @@
-import { NMessageProvider, useMessage } from '../../message'
-import { NDialogProvider, useDialog } from '../../dialog'
-import { NNotificationProvider, useNotification } from '../../notification'
-import { NLoadingBarProvider, useLoadingBar } from '../../loading-bar'
+import { NMessageProvider } from '../../message'
+import { NDialogProvider } from '../../dialog'
+import { NNotificationProvider } from '../../notification'
+import { NLoadingBarProvider } from '../../loading-bar'
 import { createDiscreteApp } from './discreteApp'
-import {
-  DialogApiOptions,
-  DialogDiscreteApi,
-  DiscreteApi,
-  DiscreteApiOptions,
-  LoadingBarApiOptions,
-  LoadingBarDiscreteApi,
-  MessageApiOptions,
-  MessageDiscreteApi,
-  NotificationApiOptions,
-  NotificationDiscreteApi
-} from './interface'
+import { DiscreteApi, DiscreteApiOptions, DiscreteApiType } from './interface'
+import { Component } from 'vue'
 
-export function createMessageApi ({
-  configProviderProps,
-  messageProviderProps
-}: MessageApiOptions = {}): MessageDiscreteApi {
-  return createDiscreteApp({
-    Provider: NMessageProvider,
-    providerProps: messageProviderProps,
-    configProviderProps: configProviderProps,
-    injectionFactory: useMessage
-  })
-}
-
-export function createDialogApi ({
-  configProviderProps,
-  dialogProviderProps
-}: DialogApiOptions = {}): DialogDiscreteApi {
-  return createDiscreteApp({
-    Provider: NDialogProvider,
-    providerProps: dialogProviderProps,
-    configProviderProps: configProviderProps,
-    injectionFactory: useDialog
-  })
-}
-
-export function createNotificationApi ({
-  configProviderProps,
-  notificationProviderProps
-}: NotificationApiOptions = {}): NotificationDiscreteApi {
-  return createDiscreteApp({
-    Provider: NNotificationProvider,
-    providerProps: notificationProviderProps,
-    configProviderProps: configProviderProps,
-    injectionFactory: useNotification
-  })
-}
-
-export function createLoadingBarApi ({
-  configProviderProps,
-  loadingBarProviderProps
-}: LoadingBarApiOptions = {}): LoadingBarDiscreteApi {
-  return createDiscreteApp({
-    Provider: NLoadingBarProvider,
-    providerProps: loadingBarProviderProps,
-    configProviderProps: configProviderProps,
-    injectionFactory: useLoadingBar
-  })
-}
-
-export function createDiscreteApi ({
-  configProviderProps,
-  messageProviderProps,
-  dialogProviderProps,
-  notificationProviderProps,
-  loadingBarProviderProps
-}: DiscreteApiOptions = {}): DiscreteApi {
-  const message = createMessageApi({
+export function createDiscreteApi<T extends DiscreteApiType> (
+  includes: T[],
+  {
     configProviderProps,
-    messageProviderProps
-  })
-
-  const dialog = createDialogApi({
-    configProviderProps,
-    dialogProviderProps
-  })
-
-  const notification = createNotificationApi({
-    configProviderProps,
-    notificationProviderProps
-  })
-
-  const loadingBar = createLoadingBarApi({
-    configProviderProps,
+    messageProviderProps,
+    dialogProviderProps,
+    notificationProviderProps,
     loadingBarProviderProps
+  }: DiscreteApiOptions = {}
+): DiscreteApi {
+  const providersAndProps: Array<{
+    type: DiscreteApiType
+    Provider: Component
+    props: any
+  }> = []
+
+  includes.forEach((type) => {
+    switch (type) {
+      case 'message':
+        providersAndProps.push({
+          type,
+          Provider: NMessageProvider,
+          props: messageProviderProps
+        })
+        break
+      case 'notification':
+        providersAndProps.push({
+          type,
+          Provider: NNotificationProvider,
+          props: notificationProviderProps
+        })
+        break
+      case 'dialog':
+        providersAndProps.push({
+          type,
+          Provider: NDialogProvider,
+          props: dialogProviderProps
+        })
+        break
+      case 'loadingbar':
+        providersAndProps.push({
+          type,
+          Provider: NLoadingBarProvider,
+          props: loadingBarProviderProps
+        })
+        break
+    }
   })
 
-  const unmountAll = (): void => {
-    message.unmount()
-    dialog.unmount()
-    notification.unmount()
-    loadingBar.unmount()
-  }
-  return {
-    message,
-    dialog,
-    notification,
-    loadingBar,
-    unmountAll
-  }
+  const discreteApp = createDiscreteApp({
+    providersAndProps,
+    configProviderProps
+  })
+
+  return discreteApp as any
 }

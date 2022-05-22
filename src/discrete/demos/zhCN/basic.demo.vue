@@ -38,9 +38,12 @@ const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
   theme: themeRef.value === 'light' ? lightTheme : darkTheme
 }))
 
-const { message, notification, dialog, loadingBar } = createDiscreteApi({
-  configProviderProps: configProviderPropsRef
-})
+const { message, notification, dialog, loadingBar } = createDiscreteApi(
+  ['message', 'dialog', 'notification', 'loadingBar'],
+  {
+    configProviderProps: configProviderPropsRef
+  }
+)
 
 export default defineComponent({
   setup () {

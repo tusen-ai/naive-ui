@@ -1,4 +1,4 @@
-import { h, Fragment, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export const NInjectionExtractor = defineComponent({
   name: 'InjectionExtractor',
@@ -7,6 +7,6 @@ export const NInjectionExtractor = defineComponent({
   },
   setup (props, { slots }) {
     props.onSetup?.()
-    return () => <>{slots}</>
+    return () => slots.default?.()
   }
 })

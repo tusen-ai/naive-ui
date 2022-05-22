@@ -6,6 +6,9 @@
 
 <template>
   <n-space>
+    <n-button @click="handleThemeChangeClick">
+      theme: {{ theme }}
+    </n-button>
     <n-button @click="handleMessageTriggerClick">
       message
     </n-button>
@@ -22,14 +25,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { createDiscreteApi } from 'naive-ui'
+import { computed, defineComponent, ref } from 'vue'
+import {
+  createDiscreteApi,
+  ConfigProviderProps,
+  darkTheme,
+  lightTheme
+} from 'naive-ui'
 
-const { message, notification, dialog, loadingBar } = createDiscreteApi()
+const themeRef = ref<'light' | 'dark'>('light')
+const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
+  theme: themeRef.value === 'light' ? lightTheme : darkTheme
+}))
+
+const { message, notification, dialog, loadingBar } = createDiscreteApi(
+  ['message', 'dialog', 'notification', 'loadingBar'],
+  {
+    configProviderProps: configProviderPropsRef
+  }
+)
 
 export default defineComponent({
   setup () {
     return {
+      theme: themeRef,
+      handleThemeChangeClick () {
+        if (themeRef.value === 'light') themeRef.value = 'dark'
+        else themeRef.value = 'light'
+      },
       handleMessageTriggerClick () {
         message.info('Message')
       },
