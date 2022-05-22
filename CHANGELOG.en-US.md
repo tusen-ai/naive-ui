@@ -5,6 +5,10 @@
 - Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].
 - Fix `n-watermark` not working when provided `cls-prefix`
 
+### Feats
+
+- `n-input-number` adds `button-placement` prop.
+
 ## 2.29.0
 
 ### Breaking Changes
@@ -152,8 +156,6 @@
 ### Breaking Changes
 
 - `n-time` uses `formatDistanceStrict` rather than `formatDistance` in `date-fns`, closes [#2703](https://github.com/TuSimple/naive-ui/issues/2703).
-
-- Fix `n-input-number` add `justify-icon` props for justify add,remove icon (like: [- 0 +])
 
 ### Fixes
 

@@ -7,6 +7,6 @@ export default c([
   `),
   cB('input-number-prefix', `
     display: inline-block;
-    margin-right: 4px;
+    margin-left: 10px;
   `)
 ])

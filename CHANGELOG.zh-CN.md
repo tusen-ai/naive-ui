@@ -5,6 +5,10 @@
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
 
+### Feats
+
+- `n-input-number` 新增 `button-placement` 属性
+
 ## 2.29.0
 
 ### Breaking Changes

@@ -6,7 +6,8 @@ import {
   watch,
   computed,
   PropType,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -24,7 +25,8 @@ import {
   ExtractPublicPropTypes,
   warnOnce,
   call,
-  resolveSlot
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
@@ -69,9 +71,9 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
-  justifyIcon: {
-    type: Boolean,
-    default: false
+  buttonPlacement: {
+    type: String as PropType<'right' | 'both'>,
+    default: 'right'
   },
   readonly: Boolean,
   clearable: Boolean,
@@ -502,6 +504,54 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix, $slots } = this
+    const renderMinusButton = (): VNode => {
+      return (
+        <NxButton
+          text
+          disabled={!this.minusable || this.mergedDisabled || this.readonly}
+          focusable={false}
+          builtinThemeOverrides={this.buttonThemeOverrides}
+          onClick={this.handleMinusClick}
+          onMousedown={this.handleMinusMousedown}
+          ref="minusButtonInstRef"
+        >
+          {{
+            icon: () =>
+              resolveSlot($slots['minus-icon'], () => [
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: () => <RemoveIcon />
+                  }}
+                </NBaseIcon>
+              ])
+          }}
+        </NxButton>
+      )
+    }
+    const renderAddButton = (): VNode => {
+      return (
+        <NxButton
+          text
+          disabled={!this.addable || this.mergedDisabled || this.readonly}
+          focusable={false}
+          builtinThemeOverrides={this.buttonThemeOverrides}
+          onClick={this.handleAddClick}
+          onMousedown={this.handleAddMousedown}
+          ref="addButtonInstRef"
+        >
+          {{
+            icon: () =>
+              resolveSlot($slots['add-icon'], () => [
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: () => <AddIcon />
+                  }}
+                </NBaseIcon>
+              ])
+          }}
+        </NxButton>
+      )
+    }
     return (
       <div
         class={[
@@ -536,59 +586,45 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            prefix: () => $slots.prefix?.(),
+            prefix: () =>
+              this.showButton
+                ? [
+                    this.buttonPlacement === 'both'
+                      ? renderMinusButton()
+                      : null,
+                    resolveWrappedSlot($slots.prefix, (children) => {
+                      if (children) {
+                        return (
+                          <span
+                            class={`${mergedClsPrefix}-input-number-prefix`}
+                          >
+                            {children}
+                          </span>
+                        )
+                      }
+                      return null
+                    })
+                  ]
+                : $slots.prefix?.(),
             suffix: () =>
               this.showButton
                 ? [
-                    $slots.suffix && (
-                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                        {{ default: $slots.suffix }}
-                      </span>
-                    ),
-                    <NxButton
-                      text
-                      disabled={
-                        !this.minusable || this.mergedDisabled || this.readonly
+                    resolveWrappedSlot($slots.suffix, (children) => {
+                      if (children) {
+                        return (
+                          <span
+                            class={`${mergedClsPrefix}-input-number-suffix`}
+                          >
+                            {children}
+                          </span>
+                        )
                       }
-                      focusable={false}
-                      builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleMinusClick}
-                      onMousedown={this.handleMinusMousedown}
-                      ref="minusButtonInstRef"
-                    >
-                      {{
-                        icon: () =>
-                          resolveSlot($slots['minus-icon'], () => [
-                            <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{
-                                default: () => <RemoveIcon />
-                              }}
-                            </NBaseIcon>
-                          ])
-                      }}
-                   </NxButton>,
-                    <NxButton
-                      text
-                      disabled={
-                        !this.addable || this.mergedDisabled || this.readonly
-                      }
-                      focusable={false}
-                      builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleAddClick}
-                      onMousedown={this.handleAddMousedown}
-                      ref="addButtonInstRef"
-                    >
-                      {{
-                        icon: () =>
-                          resolveSlot($slots['add-icon'], () => [
-                            <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{
-                                default: () => <AddIcon />
-                              }}
-                            </NBaseIcon>
-                          ])
-                      }}
-                    </NxButton>
+                      return null
+                    }),
+                    this.buttonPlacement === 'right'
+                      ? renderMinusButton()
+                      : null,
+                    renderAddButton()
                   ]
                 : $slots.suffix?.()
           }}
