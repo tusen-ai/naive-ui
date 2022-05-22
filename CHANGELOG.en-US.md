@@ -2,8 +2,9 @@
 
 ### Fixes
 
-- Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].
-- Fix `n-pagination` render incorrect when `page-count` prop value is Less than or equal to 0，closes [#2970].
+- Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960](https://github.com/TuSimple/naive-ui/issues/2960).
+- Fix `n-pagination` render incorrect when `page-count` prop value is Less than or equal to 0，closes [#2970](https://github.com/TuSimple/naive-ui/issues/2970).
+- Fix `n-watermark` not working when provided `cls-prefix`
 
 ## 2.29.0
 
@@ -21,6 +22,7 @@
 - Fix `n-time` throws error caused by `getTimezoneOffset` in SSR mode, closes [#2545](https://github.com/TuSimple/naive-ui/issues/2545).
 - Fix `n-transfer`'s search box's box-shadow is truncated.
 - Fix `n-time-picker`'s input box's invalid value won't be cleared after blur.
+- Fix `n-dropdown`'s incorrect render arrow when props `show-arrow: true` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 
 ### Feats
 

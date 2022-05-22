@@ -83,10 +83,10 @@
     "@vicons/ionicons4": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/compiler-sfc": "3.2.33",
     "@vue/eslint-config-standard": "^7.0.0",
     "@vue/eslint-config-typescript": "^10.0.0",
-    "@vue/server-renderer": "^3.2.31",
+    "@vue/server-renderer": "3.2.33",
     "@vue/test-utils": "2.0.0-rc.16",
     "autoprefixer": "^10.4.4",
     "babel-jest": "^28.0.2",
@@ -122,9 +122,9 @@
     "typescript": "^4.6.3",
     "vfonts": "^0.1.0",
     "vite": "^2.9.5",
-    "vue": "^3.2.33",
+    "vue": "3.2.33",
     "vue-router": "^4.0.14",
-    "vue-tsc": "0.34.15"
+    "vue-tsc": "^0.34.15"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
@@ -146,7 +146,7 @@
     "treemate": "^0.3.11",
     "vdirs": "^0.1.8",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.33"
+    "vueuc": "^0.4.37"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",

@@ -420,7 +420,8 @@ export default defineComponent({
           this.themeClass,
           this.trigger === 'manual' &&
             `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
+          this.showArrow &&
+            `${mergedClsPrefix}-popover ${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
