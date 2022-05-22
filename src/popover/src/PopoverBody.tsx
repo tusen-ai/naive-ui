@@ -346,7 +346,10 @@ export default defineComponent({
           [
             `${mergedClsPrefix}-popover-shared`,
             themeClassHandle?.themeClass.value,
-            props.overlap && `${mergedClsPrefix}-popover-shared--overlap`
+            props.overlap && `${mergedClsPrefix}-popover-shared--overlap`,
+            props.showArrow && `${mergedClsPrefix}-popover-shared--show-arrow`,
+            props.arrowPointToCenter &&
+              `${mergedClsPrefix}-popover-shared--center-arrow`
           ],
           bodyRef,
           styleRef.value as any,

@@ -4,6 +4,7 @@
 
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
+- 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 
 ### Feats
 
@@ -25,7 +26,6 @@
 - 修复 `n-time` 在 SSR 下由于无法导入 `getTimezoneOffset` 报错的问题，关闭 [#2545](https://github.com/TuSimple/naive-ui/issues/2545)
 - 修复 `n-transfer` 搜索框的 box-shadow 被切断
 - 修复 `n-time-picker` 在 blur 后输入框不合法的值不会被清除
-- 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 
 ### Feats
 

@@ -414,15 +414,7 @@ export default defineComponent({
       this.onRender?.()
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [
-          className,
-          `${mergedClsPrefix}-dropdown`,
-          this.themeClass,
-          this.trigger === 'manual' &&
-            `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow &&
-            `${mergedClsPrefix}-popover ${mergedClsPrefix}-popover--show-arrow`
-        ],
+        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as any],
