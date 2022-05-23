@@ -25,6 +25,7 @@ import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { useIsComposition } from '../../_mixins/use-is-composition'
 
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
@@ -136,6 +137,9 @@ export default defineComponent({
     const NDialogProvider = props.internalDialog
       ? inject(dialogProviderInjectionKey, null)
       : null
+
+    const { isComposition } = useIsComposition()
+
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
       if (onUpdateShow) call(onUpdateShow, show)
@@ -202,7 +206,7 @@ export default defineComponent({
     function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        doUpdateShow(false)
+        !isComposition.value && doUpdateShow(false)
       }
     }
     provide(modalInjectionKey, {
