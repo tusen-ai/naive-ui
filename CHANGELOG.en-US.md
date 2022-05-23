@@ -8,6 +8,7 @@
 
 ### Feats
 
+- `n-scrollbar` adds `always-show` prop.
 - `n-input-number` adds `button-placement` prop.
 
 ## 2.29.0

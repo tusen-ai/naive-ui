@@ -8,6 +8,7 @@
 
 ### Feats
 
+- `n-scrollbar` 新增 `always-show` 属性
 - `n-input-number` 新增 `button-placement` 属性
 
 ## 2.29.0
