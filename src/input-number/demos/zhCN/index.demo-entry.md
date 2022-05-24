@@ -9,6 +9,7 @@ basic.vue
 disabled.vue
 event.vue
 icon.vue
+button-placement.vue
 loading.vue
 min-max.vue
 size.vue
@@ -31,6 +32,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 | 2.26.1 |
 | bordered | `boolean` | `true` | 是否有边框 |  |
+| button-placement | `'both' \| 'right'` | `'right'` | 加减按钮的位置 | NEXT_VERSION |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |

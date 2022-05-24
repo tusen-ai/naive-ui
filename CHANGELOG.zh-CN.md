@@ -4,6 +4,11 @@
 
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
+- 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
+
+### Feats
+
+- `n-input-number` 新增 `button-placement` 属性
 
 ## 2.29.0
 
@@ -24,6 +29,7 @@
 
 ### Feats
 
+- `n-form-item` 新增 `render-feedback` 属性，用于自定义 `feedback` 的渲染方式，关闭 [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
 - `n-pagination` 新增 `size` 属性，关闭 [#2888](https://github.com/TuSimple/naive-ui/issues/2888)
 - `n-config-provider` 新增 `preflight-style-disabled` 属性

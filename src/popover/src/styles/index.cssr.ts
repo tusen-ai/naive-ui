@@ -61,7 +61,11 @@ export default c([
       cE('content', `
         padding: var(--n-padding);
       `)
-    ]),
+    ])
+  ]),
+  cB('popover-shared', `
+    transform-origin: inherit;
+  `, [
     cB('popover-arrow-wrapper', `
       position: absolute;
       overflow: hidden;
@@ -78,11 +82,7 @@ export default c([
         background-color: var(--n-color);
         pointer-events: all;
       `)
-    ])
-  ]),
-  cB('popover-shared', `
-    transform-origin: inherit;
-  `, [
+    ]),
     // body transition
     c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
       opacity: 0;
