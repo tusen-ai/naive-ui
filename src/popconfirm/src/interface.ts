@@ -11,6 +11,8 @@ export interface PopconfirmInjection {
   mergedThemeRef: Ref<MergedTheme<PopconfirmTheme>>
   mergedClsPrefixRef: Ref<string>
   props: PopconfirmSetupProps
+  positiveLoadingRef: Ref<boolean>
+  negativeLoadingRef: Ref<boolean>
 }
 
 export const popconfirmInjectionKey =

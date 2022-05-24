@@ -48,6 +48,13 @@ export type PopconfirmProps = ExtractPublicPropTypes<typeof popconfirmProps>
 
 export type PopconfirmSetupProps = ExtractPropTypes<typeof popconfirmProps>
 
+const isObject = (val: unknown): val is Record<any, any> =>
+  val !== null && typeof val === 'object'
+const isFunction = (val: unknown): val is Function => typeof val === 'function'
+const isPromise = <T = any>(val: unknown): val is Promise<T> => {
+  return isObject(val) && isFunction(val.then) && isFunction(val.catch)
+}
+
 export default defineComponent({
   name: 'Popconfirm',
   props: popconfirmProps,
@@ -63,30 +70,58 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
+    const positiveLoadingRef = ref(false)
+    const negativeLoadingRef = ref(false)
     function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick, 'onUpdate:show': onUpdateShow } = props
-      void Promise.resolve(onPositiveClick ? onPositiveClick(e) : true).then(
-        (value) => {
+      void Promise.resolve(
+        onPositiveClick
+          ? (() => {
+              const res = onPositiveClick(e)
+              if (isPromise(res)) {
+                positiveLoadingRef.value = true
+              }
+              return res
+            })()
+          : true
+      )
+        .then((value) => {
           if (value === false) return
           popoverInstRef.value?.setShow(false)
           if (onUpdateShow) call(onUpdateShow, false)
-        }
-      )
+        })
+        .finally(() => {
+          positiveLoadingRef.value = false
+        })
     }
     function handleNegativeClick (e: MouseEvent): void {
       const { onNegativeClick, 'onUpdate:show': onUpdateShow } = props
-      void Promise.resolve(onNegativeClick ? onNegativeClick(e) : true).then(
-        (value) => {
+      void Promise.resolve(
+        onNegativeClick
+          ? (() => {
+              const res = onNegativeClick(e)
+              if (isPromise(res)) {
+                negativeLoadingRef.value = true
+              }
+              return res
+            })()
+          : true
+      )
+        .then((value) => {
           if (value === false) return
           popoverInstRef.value?.setShow(false)
           if (onUpdateShow) call(onUpdateShow, false)
-        }
-      )
+        })
+        .finally(() => {
+          negativeLoadingRef.value = false
+        })
     }
     provide(popconfirmInjectionKey, {
       mergedThemeRef: themeRef,
       mergedClsPrefixRef,
-      props
+      props,
+      positiveLoadingRef,
+      negativeLoadingRef
     })
     const exposedMethods: PopconfirmInst = {
       setShow (value) {

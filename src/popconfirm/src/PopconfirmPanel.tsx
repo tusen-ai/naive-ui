@@ -42,7 +42,9 @@ export default defineComponent({
     const {
       mergedClsPrefixRef,
       mergedThemeRef,
-      props: popconfirmProps
+      props: popconfirmProps,
+      positiveLoadingRef,
+      negativeLoadingRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(popconfirmInjectionKey)!
     const cssVarsRef = computed(() => {
@@ -84,7 +86,9 @@ export default defineComponent({
         props.onNegativeClick(e)
       },
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      positiveLoading: positiveLoadingRef,
+      negativeLoading: negativeLoadingRef
     }
   },
   render () {
@@ -97,6 +101,9 @@ export default defineComponent({
               <NButton
                 size="small"
                 onClick={this.handleNegativeClick}
+                loading={
+                  this.negativeButtonProps?.loading || this.negativeLoading
+                }
                 {...this.negativeButtonProps}
               >
                 {{ default: () => this.localizedNegativeText }}
@@ -107,6 +114,9 @@ export default defineComponent({
                 size="small"
                 type="primary"
                 onClick={this.handlePositiveClick}
+                loading={
+                  this.positiveButtonProps?.loading || this.positiveLoading
+                }
                 {...this.positiveButtonProps}
               >
                 {{ default: () => this.localizedPositiveText }}
