@@ -604,12 +604,11 @@ export default defineComponent({
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
-      switch (e.code) {
+      switch (e.key) {
         case 'Escape':
           handleWrapperKeyDownEsc()
           break
         case 'Enter':
-        case 'NumpadEnter':
           handleWrapperKeyDownEnter(e)
           break
       }

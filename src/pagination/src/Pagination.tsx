@@ -286,7 +286,7 @@ export default defineComponent({
       doUpdatePageSize(value)
     }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      if (e.key === 'Enter') {
         const page = parseInt(jumperValueRef.value)
         if (!Number.isNaN(page)) {
           doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))

@@ -606,15 +606,14 @@ export default defineComponent({
     // keyboard events
     // also for menu keydown
     function handleKeydown (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
           if (props.filterable) break
           else {
             e.preventDefault()
           }
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
-        case 'NumpadEnter':
           if (!triggerRef.value?.isCompositing) {
             if (mergedShowRef.value) {
               const pendingTmNode = menuRef.value?.getPendingTmNode()

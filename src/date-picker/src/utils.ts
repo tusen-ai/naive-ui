@@ -29,7 +29,7 @@ function getDerivedTimeFromKeyboardEvent (
 ): number {
   const now = getTime(Date.now())
   if (typeof prevValue !== 'number') return now
-  switch (event.code) {
+  switch (event.key) {
     case 'ArrowUp':
       return getTime(addDays(prevValue, -7))
     case 'ArrowDown':
