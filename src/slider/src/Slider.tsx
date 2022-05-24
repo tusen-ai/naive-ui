@@ -714,7 +714,13 @@ export default defineComponent({
                               onMouseleave={() =>
                                 this.handleHandleMouseLeave(index)
                               }
-                            />
+                            >
+                              {this.$slots.identity?.() || (
+                                <div
+                                  class={`${mergedClsPrefix}-slider-handle-content`}
+                                ></div>
+                              )}
+                            </div>
                           )
                         }}
                       </VTarget>,

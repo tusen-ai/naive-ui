@@ -125,7 +125,7 @@ export default c([
       cursor: not-allowed;
       opacity: var(--n-opacity-disabled);
     `, [
-      cB('slider-handle', `
+      cB('slider-handle-content', `
         cursor: not-allowed;
       `)
     ]),
@@ -141,7 +141,7 @@ export default c([
           backgroundColor: 'var(--n-fill-color-hover)'
         })
       ]),
-      cB('slider-handle', {
+      cB('slider-handle-content', {
         boxShadow: 'var(--n-handle-box-shadow-hover)'
       })
     ]),
@@ -153,7 +153,7 @@ export default c([
           backgroundColor: 'var(--n-fill-color-hover)'
         })
       ]),
-      cB('slider-handle', {
+      cB('slider-handle-content', {
         boxShadow: 'var(--n-handle-box-shadow-hover)'
       })
     ]),
@@ -194,27 +194,30 @@ export default c([
     `, [
       cB('slider-handle', `
         outline: none;
-        height: var(--n-handle-size);
-        width: var(--n-handle-size);
-        border-radius: 50%;
-        transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
-        overflow: hidden;
         cursor: pointer;
-        background-color: var(--n-handle-color);
-        box-shadow: var(--n-handle-box-shadow);
       `, [
-        c('&:hover', {
-          boxShadow: 'var(--n-handle-box-shadow-hover)'
-        }),
-        c('&:hover:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-active)'
-        }),
-        c('&:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-focus)'
-        })
+        cB('slider-handle-content', `
+          height: var(--n-handle-size);
+          width: var(--n-handle-size);
+          border-radius: 50%;
+          overflow: hidden;
+          transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
+          background-color: var(--n-handle-color);
+          box-shadow: var(--n-handle-box-shadow);
+        `, [
+          c('&:hover', {
+            boxShadow: 'var(--n-handle-box-shadow-hover)'
+          }),
+          c('&:hover:focus', {
+            boxShadow: 'var(--n-handle-box-shadow-active)'
+          }),
+          c('&:focus', {
+            boxShadow: 'var(--n-handle-box-shadow-focus)'
+          })
+        ])
       ])
     ]),
     cB('slider-dots', `
