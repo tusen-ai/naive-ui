@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-input-number` 新增 `button-placement` 属性
+- `n-slider` 新增 `identity` 插槽
 
 ## 2.29.0
 

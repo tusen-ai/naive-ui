@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-input-number` adds `button-placement` prop.
+- `n-slider` adds `identity` slot.
 
 ## 2.29.0
 
