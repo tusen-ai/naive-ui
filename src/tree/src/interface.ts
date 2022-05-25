@@ -107,6 +107,7 @@ export interface TreeInjection {
   labelFieldRef: Ref<string>
   nodePropsRef: Ref<TreeNodeProps | undefined>
   multipleRef: Ref<boolean>
+  checkboxPlacementRef: 'left' | 'right'
   internalTreeSelect: boolean
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void

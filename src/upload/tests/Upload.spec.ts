@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import {
   NUpload,
   NUploadDragger,
@@ -8,9 +9,9 @@ import {
 import { sleep } from 'seemly'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { h } from 'vue'
 import { NCard } from '../../card'
 import { NImageGroup } from '../../image'
+import { matchType } from '../src/utils'
 
 const getMockFile = (element: Element, files: File[]): void => {
   Object.defineProperty(element, 'files', {
@@ -431,5 +432,33 @@ describe('n-upload-dragger', () => {
         'Error: [naive/upload-dragger]: `n-upload-dragger` must be placed inside `n-upload`.'
       )
     }
+  })
+})
+
+describe('match-type', () => {
+  it('works', () => {
+    expect(matchType('123', '', '*/*')).toEqual(true)
+    expect(matchType('123', '123/123', '*/*')).toEqual(true)
+    expect(matchType('123.gigig', '', '*/*')).toEqual(true)
+    expect(matchType('123.jpg', 'image/jpeg', 'image/*')).toEqual(true)
+    expect(matchType('123.jpg', 'image/jpeg', 'image/jpeg')).toEqual(true)
+    expect(matchType('123.jpg', 'image/jpeg', 'image/gif')).toEqual(false)
+    expect(matchType('123.jpeg', 'image/jpeg', 'image/*')).toEqual(true)
+    expect(matchType('123.jpeg', 'image/jpeg', 'image/jpeg')).toEqual(true)
+    expect(matchType('123.jpeg', 'image/jpeg', 'image/gif')).toEqual(false)
+    expect(matchType('123.vue', '', 'image/gif')).toEqual(false)
+    expect(matchType('123.vue', '', 'image/gif, .vue')).toEqual(true)
+    expect(matchType('123.vue', '', 'image/gif, .vUe')).toEqual(true)
+    expect(matchType('123.Vue', '', 'image/gif, .VUE')).toEqual(true)
+    expect(matchType('123.json', 'application/json', '.json')).toEqual(true)
+    expect(
+      matchType('123.json', 'application/json', 'application/json')
+    ).toEqual(true)
+    expect(
+      matchType('123.json', 'application/json', 'application/json , .json')
+    ).toEqual(true)
+    expect(
+      matchType('123.JSON', 'application/json', 'application/json , .json')
+    ).toEqual(true)
   })
 })

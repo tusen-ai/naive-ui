@@ -20,6 +20,7 @@ prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
 node-props.vue
+checkbox-placement.vue
 ```
 
 ## API
@@ -36,6 +37,7 @@ node-props.vue
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |  |
 | check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |  |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |  |
+| checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |

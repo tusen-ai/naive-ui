@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { computed, Ref } from 'vue'
-import { getHours, getMinutes, getSeconds } from 'date-fns'
+import { getHours, getMinutes, getSeconds } from 'date-fns/esm'
 import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeTimeDisabled,

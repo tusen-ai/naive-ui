@@ -33,6 +33,8 @@ download.vue
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |  |
+| directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | 2.28.3 |
+| directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | 2.28.3 |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
@@ -63,16 +65,18 @@ download.vue
 
 #### UploadFileInfo Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| id | `string \| number` | Unique file ID. |
-| name | `string` | Filename. |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage? | `number` | The progress percentage of the file being uploaded. |
-| file? | `File \| null` | The object of the file stored in the browser. |
-| thumbnailUrl? | `string \| null` | Thumbnail URL. |
-| type? | `string \| null` | MIME type. |
-| url? | `string \| null` | File URL. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| id | `string \| number` | Unique file ID. |  |
+| name | `string` | Filename. |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
+| batchId? | `string \| null` | Batch id of uploaded file. The files selected in a same upload batch will have same `batchId`. | 2.28.3 |
+| file? | `File \| null` | The object of the file stored in the browser. |  |
+| fullPath? | `string \| null` | Relative path of uploaded file. | 2.28.3 |
+| percentage? | `number` | The progress percentage of the file being uploaded. |  |
+| thumbnailUrl? | `string \| null` | Thumbnail URL. |  |
+| type? | `string \| null` | MIME type. |  |
+| url? | `string \| null` | File URL. |  |
 
 ### UploadTrigger Props
 

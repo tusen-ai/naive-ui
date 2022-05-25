@@ -19,6 +19,7 @@ import {
   plPL,
   ptBR,
   thTH,
+  nlNL,
   eo,
   dateEnUS,
   dateZhCN,
@@ -38,6 +39,7 @@ import {
   datePlPL,
   datePtBR,
   dateThTH,
+  dateNlNL,
   dateEo,
   NConfigProvider,
   NDateLocale,
@@ -271,6 +273,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateEo,
           locale: eo
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateNlNL,
+          locale: nlNL
         }
       }).html()
     ).toMatchSnapshot()

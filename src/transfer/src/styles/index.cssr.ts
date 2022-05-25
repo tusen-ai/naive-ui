@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 
 const animation = c([
   c('@keyframes transfer-slide-in-from-left', `
@@ -136,7 +136,6 @@ export default c([
         flex-basis: 0;
         flex-grow: 1;
         box-sizing: border-box;
-        overflow: hidden;
         position: relative;
         display: flex;
         flex-direction: column;

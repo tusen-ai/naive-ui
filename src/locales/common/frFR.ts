@@ -44,6 +44,9 @@ const frFR: NLocale = {
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
     endDatetimePlaceholder: 'Date et heure de fin',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 1,
     today: "Aujourd'hui"

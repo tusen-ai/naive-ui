@@ -123,6 +123,10 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  paginationBehaviorOnFilter: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -244,7 +248,8 @@ export default defineComponent({
       mergedPaginationRef,
       mergedFilterStateRef,
       mergedSortStateRef,
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       filter,
@@ -313,7 +318,7 @@ export default defineComponent({
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
       bodyWidthRef,
       componentId: createId(),
       hoverKeyRef,
@@ -371,7 +376,9 @@ export default defineComponent({
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
+      paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       syncScrollState,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       doCheck,

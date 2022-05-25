@@ -27,9 +27,15 @@ export function getNumberColWidth (col: TableColumn): number | undefined {
 }
 
 export function getStringColWidth (col: TableColumn): string | undefined {
-  if (col.type === 'selection') return formatLength(selectionColWidth)
-  if (col.type === 'expand') return formatLength(expandColWidth)
-  if ('children' in col) return undefined
+  if (col.type === 'selection') {
+    return formatLength(col.width ?? selectionColWidth)
+  }
+  if (col.type === 'expand') {
+    return formatLength(col.width ?? expandColWidth)
+  }
+  if ('children' in col) {
+    return undefined
+  }
   return formatLength(col.width)
 }
 
@@ -59,7 +65,7 @@ export function createCustomWidthStyle (
   const width = getStringColWidth(column)
   return {
     width,
-    minWidth: width
+    minWidth: formatLength(column.minWidth) || width
   }
 }
 

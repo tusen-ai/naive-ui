@@ -7,6 +7,7 @@ import {
   PropType
 } from 'vue'
 import { ThemeProps, useThemeClass, useConfig, useTheme } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { formatLength, warn } from '../../_utils'
 import type { IconTheme } from '../styles'
 import { iconLight } from '../styles'
@@ -14,17 +15,21 @@ import style from './styles/index.cssr'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
+const iconProps = {
+  ...(useTheme.props as ThemeProps<IconTheme>),
+  depth: [String, Number] as PropType<Depth>,
+  size: [Number, String] as PropType<number | string>,
+  color: String,
+  component: Object as PropType<Component>
+} as const
+
+export type IconProps = ExtractPublicPropTypes<typeof iconProps>
+
 export const NIcon = defineComponent({
   _n_icon__: true,
   name: 'Icon',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<IconTheme>),
-    depth: [String, Number] as PropType<Depth>,
-    size: [Number, String],
-    color: String,
-    component: Object as PropType<Component>
-  },
+  props: iconProps,
   setup (props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

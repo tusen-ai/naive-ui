@@ -57,6 +57,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 日语              | jaJP | dateJaJP |        |
 | 韩语              | koKR | dateKoKR | 2.28.1 |
 | 书面挪威语        | nbNO | dateNbNO |        |
+| 荷兰语（荷兰）    | nlNL | dateNlNL | 2.29.0 |
 | 波兰语（波兰）    | plPL | datePlPL | 2.25.2 |
 | 葡萄牙语 (巴西)   | ptBR | datePtBR | 2.28.1 |
 | 俄罗斯语          | ruRU | dateRuRU |        |

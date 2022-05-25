@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier
@@ -67,8 +67,15 @@ export default c([
       color: var(--n-icon-color);
       transition: color .3s var(--n-bezier);
     `),
+    cB('icon', `
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
+    `),
     cM('disabled', [
       cB('date-picker-icon', `
+        color: var(--n-icon-color-disabled);
+      `),
+      cB('icon', `
         color: var(--n-icon-color-disabled);
       `)
     ])

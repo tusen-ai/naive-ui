@@ -182,6 +182,10 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  checkboxPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  },
   virtualScroll: Boolean,
   watchProps: Array as PropType<
   Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
@@ -445,9 +449,11 @@ export default defineComponent({
       const { labelField } = props
       return (pattern: string, node: TreeOption): boolean => {
         if (!pattern.length) return true
-        return ((node as any)[labelField] as string)
-          .toLowerCase()
-          .includes(pattern.toLowerCase())
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
       }
     })
 
@@ -1241,6 +1247,7 @@ export default defineComponent({
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
       cascadeRef: toRef(props, 'cascade'),
+      checkboxPlacementRef: props.checkboxPlacement,
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,

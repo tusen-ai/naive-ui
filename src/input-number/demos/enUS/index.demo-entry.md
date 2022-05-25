@@ -9,6 +9,7 @@ basic.vue
 disabled.vue
 event.vue
 icon.vue
+button-placement.vue
 loading.vue
 min-max.vue
 size.vue
@@ -29,6 +30,7 @@ custom-icon.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
+| button-placement | `'both' \| 'right'` | `'right'` | Placement of add & minus button. | NEXT_VERSION |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |

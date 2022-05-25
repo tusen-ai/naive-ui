@@ -145,9 +145,9 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
-          en: 'Style Element Position',
-          zh: '样式元素位置',
-          path: '/style-position'
+          en: 'Potential Element Conflict',
+          zh: '潜在的样式冲突',
+          path: '/style-conflict'
         },
         {
           en: 'Third-Party Libraries',
@@ -703,6 +703,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '折叠渐变',
           enSuffix: true,
           path: '/collapse-transition'
+        },
+        {
+          en: 'Discrete API',
+          zh: '独立 API',
+          enSuffix: true,
+          path: '/discrete'
         },
         {
           en: 'Scrollbar',

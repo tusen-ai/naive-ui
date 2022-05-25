@@ -15,7 +15,7 @@ import {
   startOfDay,
   startOfMonth,
   getMonth
-} from 'date-fns'
+} from 'date-fns/esm'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
@@ -101,15 +101,15 @@ export default defineComponent({
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
       const newMonthTs = startOfMonth(now).valueOf()
+      monthTsRef.value = newMonthTs
       const newYear = getYear(newMonthTs)
       const newMonth = getMonth(newMonthTs)
       if (oldYear !== newYear || oldMonth !== newMonth) {
         props.onPanelChange?.({
           year: newYear,
-          month: newMonthTs
+          month: newMonth + 1
         })
       }
-      monthTsRef.value = newMonthTs
     }
     const cssVarsRef = computed(() => {
       const {

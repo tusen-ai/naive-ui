@@ -3,7 +3,6 @@ import {
   ref,
   computed,
   inject,
-  onMounted,
   defineComponent,
   PropType,
   CSSProperties,
@@ -85,7 +84,7 @@ const buttonProps = {
     default: true
   },
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-  internalAutoFocus: Boolean
+  nativeFocusBehavior: Boolean
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -111,17 +110,6 @@ const Button = defineComponent({
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
-    onMounted(() => {
-      const { value: selfEl } = selfElRef
-      if (
-        selfEl &&
-        !props.disabled &&
-        props.focusable &&
-        props.internalAutoFocus
-      ) {
-        selfEl.focus({ preventScroll: true })
-      }
-    })
     const showBorderRef = useMemo(() => {
       return (
         !props.quaternary &&
@@ -154,11 +142,11 @@ const Button = defineComponent({
       return props.focusable && !props.disabled
     })
     const handleMousedown = (e: MouseEvent): void => {
-      e.preventDefault()
-      if (props.disabled) {
+      if (props.disabled || props.nativeFocusBehavior) {
         return
       }
       if (mergedFocusableRef.value) {
+        e.preventDefault()
         selfElRef.value?.focus({ preventScroll: true })
       }
     }

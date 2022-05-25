@@ -15,7 +15,7 @@ interface FadeInScaleUpTransitionOptions {
   originalTransition?: string
 }
 
-export default function ({
+export function fadeInScaleUpTransition ({
   transformOrigin = 'inherit',
   duration = '.2s',
   enterScale = '.9',

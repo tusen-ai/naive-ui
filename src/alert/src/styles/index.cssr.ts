@@ -1,5 +1,5 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
 // --n-bezier
@@ -45,7 +45,7 @@ export default cB('alert', `
     })
   ]
   ),
-  fadeInHeightExpandTranstion({
+  fadeInHeightExpandTransition({
     originalTransition: 'transform .3s var(--n-bezier)',
     enterToProps: {
       transform: 'scale(1)'

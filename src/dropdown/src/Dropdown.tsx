@@ -414,14 +414,7 @@ export default defineComponent({
       this.onRender?.()
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [
-          className,
-          `${mergedClsPrefix}-dropdown`,
-          this.themeClass,
-          this.trigger === 'manual' &&
-            `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
-        ],
+        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as any],
@@ -441,7 +434,8 @@ export default defineComponent({
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
       internalRenderBody: renderPopoverBody,
-      onUpdateShow: this.doUpdateShow
+      onUpdateShow: this.doUpdateShow,
+      'onUpdate:show': undefined
     }
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
