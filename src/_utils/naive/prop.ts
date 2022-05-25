@@ -13,17 +13,30 @@ export function largerSize (
   }
 }
 
-export function smallerSize (
-  size: 'small' | 'medium' | 'large' | 'huge'
-): 'tiny' | 'small' | 'medium' | 'large' {
+interface SmallerSizeMap {
+  tiny: 'mini'
+  small: 'tiny'
+  medium: 'small'
+  large: 'medium'
+  huge: 'large'
+}
+
+type SmallerSize<T extends keyof SmallerSizeMap> = SmallerSizeMap[T]
+
+export function smallerSize<T extends keyof SmallerSizeMap> (
+  size: T
+): SmallerSize<T> {
   switch (size) {
+    case 'tiny':
+      return 'mini' as any
     case 'small':
-      return 'tiny'
+      return 'tiny' as any
     case 'medium':
-      return 'small'
+      return 'small' as any
     case 'large':
-      return 'medium'
+      return 'medium' as any
     case 'huge':
-      return 'large'
+      return 'large' as any
   }
+  throw Error(`${size} has no smaller size.`)
 }

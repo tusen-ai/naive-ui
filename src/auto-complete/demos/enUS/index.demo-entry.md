@@ -12,6 +12,7 @@ custom-input.vue
 after-select.vue
 show-options-by-value.vue
 customized-rendering.vue
+status.vue
 ```
 
 ## API
@@ -33,7 +34,9 @@ customized-rendering.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Autocomplete's placement. | 2.25.0 |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. | 2.24.0 |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |  |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |
@@ -64,3 +67,10 @@ customized-rendering.vue
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |
 | prefix | `()` | Input's prefix content. |
 | suffix | `()` | Input's suffix content. |
+
+### AutoComplete Methods
+
+| Name  | Type         | Description              | Version |
+| ----- | ------------ | ------------------------ | ------- |
+| blur  | `() => void` | Blur the input element.  | 2.26.2  |
+| focus | `() => void` | Focus the input element. | 2.26.2  |

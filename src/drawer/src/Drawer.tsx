@@ -43,6 +43,10 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  showMask: {
+    type: Boolean as PropType<boolean | 'transparent'>,
+    default: true
+  },
   to: [String, Object] as PropType<string | HTMLElement>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -69,12 +73,18 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   /** @deprecated */
   drawerStyle: [String, Object] as PropType<string | CSSProperties>,
   drawerClass: String,
@@ -259,31 +269,42 @@ export default defineComponent({
                 style={this.cssVars as CSSProperties}
                 role="none"
               >
-                <Transition name="fade-in-transition" appear={this.isMounted}>
-                  {{
-                    default: () =>
-                      this.show ? (
-                        <div
-                          aria-hidden
-                          class={`${mergedClsPrefix}-drawer-mask`}
-                          onClick={this.handleMaskClick}
-                        />
-                      ) : null
-                  }}
-                </Transition>
+                {this.showMask ? (
+                  <Transition name="fade-in-transition" appear={this.isMounted}>
+                    {{
+                      default: () =>
+                        this.show ? (
+                          <div
+                            aria-hidden
+                            class={[
+                              `${mergedClsPrefix}-drawer-mask`,
+                              this.showMask === 'transparent' &&
+                                `${mergedClsPrefix}-drawer-mask--invisible`
+                            ]}
+                            onClick={this.handleMaskClick}
+                          />
+                        ) : null
+                    }}
+                  </Transition>
+                ) : null}
                 <NDrawerBodyWrapper
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
                   style={[this.mergedBodyStyle, this.$attrs.style]}
+                  blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}
                   displayDirective={this.displayDirective}
                   nativeScrollbar={this.nativeScrollbar}
+                  onAfterEnter={this.onAfterEnter}
+                  onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  showMask={this.showMask}
                   onEsc={this.handleEsc}
+                  onClickoutside={this.handleMaskClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

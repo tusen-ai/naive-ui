@@ -9,6 +9,7 @@ basic.vue
 disabled.vue
 event.vue
 icon.vue
+button-placement.vue
 loading.vue
 min-max.vue
 size.vue
@@ -17,6 +18,8 @@ validator.vue
 show-button.vue
 disable-keyboard.vue
 change-timing.vue
+status.vue
+custom-icon.vue
 ```
 
 ## API
@@ -27,6 +30,7 @@ change-timing.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
+| button-placement | `'both' \| 'right'` | `'right'` | Placement of add & minus button. | NEXT_VERSION |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
@@ -38,6 +42,7 @@ change-timing.vue
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |  |
 | update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |  |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |  |
@@ -49,10 +54,12 @@ change-timing.vue
 
 ### InputNumber Slots
 
-| Name   | Parameters | Description          |
-| ------ | ---------- | -------------------- |
-| prefix | `()`       | Prefix content slot. |
-| suffix | `()`       | Suffix content slot. |
+| Name       | Parameters | Description               | Version |
+| ---------- | ---------- | ------------------------- | ------- |
+| add-icon   | `()`       | icon of the add button.   | 2.28.1  |
+| minus-icon | `()`       | icon of the minus button. | 2.28.1  |
+| prefix     | `()`       | Prefix content slot.      |         |
+| suffix     | `()`       | Suffix content slot.      |         |
 
 ### InputNumber Methods
 

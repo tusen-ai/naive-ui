@@ -3,10 +3,12 @@ import { alertDark } from '../alert/styles'
 import { anchorDark } from '../anchor/styles'
 import { autoCompleteDark } from '../auto-complete/styles'
 import { avatarDark } from '../avatar/styles'
+import { avatarGroupDark } from '../avatar-group/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
 import { buttonDark } from '../button/styles'
+import { buttonGroupDark } from '../button-group/styles'
 import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
 import { carouselDark } from '../carousel/styles'
@@ -84,10 +86,12 @@ export const darkTheme: BuiltInGlobalTheme = {
   Anchor: anchorDark,
   AutoComplete: autoCompleteDark,
   Avatar: avatarDark,
+  AvatarGroup: avatarGroupDark,
   BackTop: backTopDark,
   Badge: badgeDark,
   Breadcrumb: breadcrumbDark,
   Button: buttonDark,
+  ButtonGroup: buttonGroupDark,
   Calendar: calendarDark,
   Card: cardDark,
   Carousel: carouselDark,

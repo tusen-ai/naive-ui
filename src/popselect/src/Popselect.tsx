@@ -1,4 +1,12 @@
-import { h, ref, provide, defineComponent, PropType, mergeProps } from 'vue'
+import {
+  h,
+  ref,
+  provide,
+  defineComponent,
+  PropType,
+  mergeProps,
+  ExtractPropTypes
+} from 'vue'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import { NPopover } from '../../popover'
@@ -10,7 +18,7 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
-import { popselectInjectionKey } from './interface'
+import { popselectInjectionKey, PopselectInst } from './interface'
 
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
@@ -26,6 +34,7 @@ const popselectProps = {
   ...panelProps
 }
 
+export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>
 export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 
 export default defineComponent({
@@ -48,11 +57,17 @@ export default defineComponent({
       popoverInstRef.value?.setShow(value)
     }
     provide(popselectInjectionKey, {
+      props,
       mergedThemeRef: themeRef,
       syncPosition,
       setShow
     })
+    const exposedMethods: PopselectInst = {
+      syncPosition,
+      setShow
+    }
     return {
+      ...exposedMethods,
       popoverInstRef,
       mergedTheme: themeRef
     }

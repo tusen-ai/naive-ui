@@ -1,6 +1,11 @@
 import { h, createTextVNode, PropType, defineComponent, computed } from 'vue'
-import { format, formatDistance, fromUnixTime, getTime } from 'date-fns'
-import { getTimezoneOffset } from 'date-fns-tz'
+import {
+  format,
+  formatDistanceStrict,
+  fromUnixTime,
+  getTime
+} from 'date-fns/esm'
+import getTimezoneOffset from 'date-fns-tz/esm/getTimezoneOffset'
 import { useLocale } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
 
@@ -89,7 +94,7 @@ export default defineComponent({
           dateFnsOptionsRef.value
         )
       } else {
-        return formatDistance(mergedTimeRef.value, mergedToRef.value, {
+        return formatDistanceStrict(mergedTimeRef.value, mergedToRef.value, {
           addSuffix: true,
           locale: dateLocaleRef.value.locale
         })

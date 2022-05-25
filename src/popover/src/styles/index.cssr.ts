@@ -33,12 +33,56 @@ export default c([
       box-shadow .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
-    transform-origin: inherit;
     position: relative;
     font-size: var(--n-font-size);
     color: var(--n-text-color);
     box-shadow: var(--n-box-shadow);
   `, [
+    c('>', [
+      cB('scrollbar', `
+        height: inherit;
+        max-height: inherit;
+      `)
+    ]),
+    cNotM('raw', `
+      background-color: var(--n-color);
+      border-radius: var(--n-border-radius);
+    `, [
+      cNotM('scrollable', [
+        cNotM('show-header', 'padding: var(--n-padding);')
+      ])
+    ]),
+    cE('header', `
+      padding: var(--n-padding);
+      border-bottom: 1px solid var(--n-divider-color);
+      transition: border-color .3s var(--n-bezier);
+    `),
+    cM('scrollable, show-header', [
+      cE('content', `
+        padding: var(--n-padding);
+      `)
+    ])
+  ]),
+  cB('popover-shared', `
+    transform-origin: inherit;
+  `, [
+    cB('popover-arrow-wrapper', `
+      position: absolute;
+      overflow: hidden;
+      pointer-events: none;
+    `, [
+      cB('popover-arrow', `
+        transition: background-color .3s var(--n-bezier);
+        position: absolute;
+        display: block;
+        width: calc(${arrowSize});
+        height: calc(${arrowSize});
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
+        transform: rotate(45deg);
+        background-color: var(--n-color);
+        pointer-events: all;
+      `)
+    ]),
     // body transition
     c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
       opacity: 0;
@@ -57,38 +101,7 @@ export default c([
       transition:
         opacity .15s var(--n-bezier-ease-in),
         transform .15s var(--n-bezier-ease-in);
-    `),
-    cNotM('raw', `
-      background-color: var(--n-color);
-      border-radius: var(--n-border-radius);
-    `, [
-      cNotM('show-header', 'padding: var(--n-padding);')
-    ]),
-    cE('header', `
-      padding: var(--n-padding);
-      border-bottom: 1px solid var(--n-divider-color);
-      transition: border-color .3s var(--n-bezier);
-    `),
-    cE('content', `
-      padding: var(--n-padding);
-    `),
-    cB('popover-arrow-wrapper', `
-      position: absolute;
-      overflow: hidden;
-      pointer-events: none;
-    `, [
-      cB('popover-arrow', `
-        transition: background-color .3s var(--n-bezier);
-        position: absolute;
-        display: block;
-        width: calc(${arrowSize});
-        height: calc(${arrowSize});
-        box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
-        transform: rotate(45deg);
-        background-color: var(--n-color);
-        pointer-events: all;
-      `)
-    ])
+    `)
   ]),
   placementStyle('top-start', `
     top: calc(${arrowSize} / -2 + 1px);
@@ -158,7 +171,7 @@ export default c([
         const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
         const offset = getArrowOffset(placement as FollowerPlacement)
         return c(`[v-placement="${placement}"] >`, [
-          cB('popover', [
+          cB('popover-shared', [
             cM('center-arrow', [
               cB(
                 'popover-arrow',
@@ -193,10 +206,9 @@ function placementStyle (
     ? 'height: var(--n-space-arrow);'
     : 'width: var(--n-space-arrow);'
   return c(`[v-placement="${placement}"] >`, [
-    cB('popover', [
-      cNotM('manual-trigger', `
-        margin-${oppositePlacement[position]}: var(--n-space);
-      `),
+    cB('popover-shared', `
+      margin-${oppositePlacement[position]}: var(--n-space);
+    `, [
       cM('show-arrow', `
         margin-${oppositePlacement[position]}: var(--n-space-arrow);
       `),

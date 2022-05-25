@@ -6,6 +6,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, RadioTheme } from '../styles'
 import useRadio from './use-radio'
 import style from './styles/radio.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 export type RadioProps = ExtractPublicPropTypes<typeof useRadio.props>
 
@@ -68,7 +69,9 @@ export default defineComponent({
         '--n-label-padding': labelPadding
       }
     })
-    const { inlineThemeDisabled } = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'radio',
@@ -78,13 +81,14 @@ export default defineComponent({
       )
       : undefined
     return Object.assign(radio, {
+      rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     })
   },
   render () {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { $slots, mergedClsPrefix, onRender, label } = this
     onRender?.()
     return (
       <label
@@ -92,6 +96,7 @@ export default defineComponent({
           `${mergedClsPrefix}-radio`,
           this.themeClass,
           {
+            [`${mergedClsPrefix}-radio--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-radio--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-radio--checked`]: this.renderSafeChecked,
             [`${mergedClsPrefix}-radio--focus`]: this.focus
@@ -121,10 +126,10 @@ export default defineComponent({
           />
         </div>
         {resolveWrappedSlot($slots.default, (children) => {
-          if (!children) return null
+          if (!children && !label) return null
           return (
             <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
-              {children}
+              {children || label}
             </div>
           )
         })}

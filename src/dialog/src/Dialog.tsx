@@ -20,14 +20,12 @@ import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 
-const infoIcon = <InfoIcon />
-
-const iconMap = {
-  default: infoIcon,
-  info: infoIcon,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />
+const iconRenderMap = {
+  default: () => <InfoIcon />,
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />
 }
 
 export const NDialog = defineComponent({
@@ -157,6 +155,8 @@ export const NDialog = defineComponent({
       action,
       negativeText,
       positiveText,
+      positiveButtonProps,
+      negativeButtonProps,
       handlePositiveClick,
       handleNegativeClick,
       mergedTheme,
@@ -177,11 +177,54 @@ export const NDialog = defineComponent({
             resolveWrappedSlot(
               this.$slots.icon,
               (children) =>
-                children || (this.icon ? render(this.icon) : iconMap[this.type])
+                children ||
+                (this.icon ? render(this.icon) : iconRenderMap[this.type]())
             )
         }}
       </NBaseIcon>
     ) : null
+
+    const actionNode = resolveWrappedSlot(this.$slots.action, (children) =>
+      children || positiveText || negativeText || action ? (
+        <div class={`${mergedClsPrefix}-dialog__action`}>
+          {children ||
+            (action
+              ? [render(action)]
+              : [
+                  this.negativeText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      ghost
+                      size="small"
+                      onClick={handleNegativeClick}
+                      {...negativeButtonProps}
+                    >
+                      {{
+                        default: () => render(this.negativeText)
+                      }}
+                    </NButton>
+                  ),
+                  this.positiveText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      size="small"
+                      type={type === 'default' ? 'primary' : type}
+                      disabled={loading}
+                      loading={loading}
+                      onClick={handlePositiveClick}
+                      {...positiveButtonProps}
+                    >
+                      {{
+                        default: () => render(this.positiveText)
+                      }}
+                    </NButton>
+                  )
+                ])}
+        </div>
+      ) : null
+    )
 
     return (
       <div
@@ -208,48 +251,15 @@ export const NDialog = defineComponent({
           {showIcon && mergedIconPlacement === 'left' ? icon : null}
           {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
-        <div class={`${mergedClsPrefix}-dialog__content`}>
+        <div
+          class={[
+            `${mergedClsPrefix}-dialog__content`,
+            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`
+          ]}
+        >
           {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>
-        {resolveWrappedSlot(this.$slots.action, (children) =>
-          children || positiveText || negativeText || action ? (
-            <div class={`${mergedClsPrefix}-dialog__action`}>
-              {children ||
-                (action
-                  ? [render(action)]
-                  : [
-                      this.negativeText && (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          ghost
-                          size="small"
-                          onClick={handleNegativeClick}
-                        >
-                          {{
-                            default: () => render(this.negativeText)
-                          }}
-                        </NButton>
-                      ),
-                      this.positiveText && (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          disabled={loading}
-                          loading={loading}
-                          size="small"
-                          type={type === 'default' ? 'primary' : type}
-                          onClick={handlePositiveClick}
-                        >
-                          {{
-                            default: () => render(this.positiveText)
-                          }}
-                        </NButton>
-                      )
-                    ])}
-            </div>
-          ) : null
-        )}
+        {actionNode}
       </div>
     )
   }

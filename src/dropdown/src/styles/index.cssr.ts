@@ -1,5 +1,5 @@
 import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier
@@ -33,6 +33,7 @@ export default cB('dropdown-menu', `
   background-color: var(--n-color);
   border-radius: var(--n-border-radius);
   box-shadow: var(--n-box-shadow);
+  position: relative;
   transition:
     background-color .3s var(--n-bezier),
     box-shadow .3s var(--n-bezier);
@@ -144,9 +145,7 @@ export default cB('dropdown-menu', `
           fontSize: 'var(--n-option-icon-size)'
         })
       ]),
-      cB('dropdown-menu', {
-        pointerEvents: 'all'
-      })
+      cB('dropdown-menu', 'pointer-events: all;')
     ]),
     cB('dropdown-offset-container', `
       pointer-events: none;

@@ -13,7 +13,8 @@
 
 <script lang="ts">
 import { h, defineComponent } from 'vue'
-import { NButton, useMessage, DataTableColumns } from 'naive-ui'
+import { NButton, useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 type Song = {
   no: number

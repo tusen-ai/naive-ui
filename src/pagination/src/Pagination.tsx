@@ -1,46 +1,55 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  computed,
+  CSSProperties,
+  defineComponent,
   h,
   nextTick,
-  computed,
+  PropType,
   ref,
   toRef,
-  defineComponent,
-  PropType,
-  CSSProperties,
-  watchEffect,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
 import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
-  FastForwardIcon,
-  FastBackwardIcon,
   BackwardIcon,
+  FastBackwardIcon,
+  FastForwardIcon,
   ForwardIcon,
   MoreIcon
 } from '../../_internal/icons'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { paginationLight } from '../styles'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
-import { pageItems } from './utils'
+import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
+import { pageItems } from './utils'
 import style from './styles/index.cssr'
-import { call, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import {
+  call,
+  resolveSlot,
+  warn,
+  warnOnce,
+  createKey,
+  smallerSize
+} from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 import {
-  RenderPrefix,
-  RenderSuffix,
-  RenderPrev,
-  RenderNext,
   PaginationRenderLabel,
-  PaginationSizeOption
+  PaginationSizeOption,
+  RenderNext,
+  RenderPrefix,
+  RenderPrev,
+  RenderSuffix,
+  Size
 } from './interface'
+import useRtl from '../../_mixins/use-rtl'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -68,6 +77,10 @@ const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
+  size: {
+    type: String as PropType<Size>,
+    default: 'medium'
+  },
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -126,8 +139,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedComponentPropsRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
       '-pagination',
@@ -177,10 +194,16 @@ export default defineComponent({
       })
     })
     const inputSizeRef = computed<InputSize>(() => {
-      return mergedComponentPropsRef?.value?.Pagination?.inputSize || 'small'
+      return (
+        mergedComponentPropsRef?.value?.Pagination?.inputSize ||
+        smallerSize(props.size)
+      )
     })
     const selectSizeRef = computed<SelectSize>(() => {
-      return mergedComponentPropsRef?.value?.Pagination?.selectSize || 'small'
+      return (
+        mergedComponentPropsRef?.value?.Pagination?.selectSize ||
+        smallerSize(props.size)
+      )
     })
     const startIndexRef = computed(() => {
       return (mergedPageRef.value - 1) * mergedPageSizeRef.value
@@ -198,6 +221,7 @@ export default defineComponent({
       if (itemCount !== undefined) return itemCount
       return (props.pageCount || 1) * mergedPageSizeRef.value
     })
+    const rtlEnabledRef = useRtl('Pagination', mergedRtlRef, mergedClsPrefixRef)
 
     const disableTransitionOneTick = (): void => {
       void nextTick(() => {
@@ -264,12 +288,8 @@ export default defineComponent({
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         const page = parseInt(jumperValueRef.value)
-        if (
-          !Number.isNaN(page) &&
-          page >= 1 &&
-          page <= mergedPageCountRef.value
-        ) {
-          doUpdatePage(page)
+        if (!Number.isNaN(page)) {
+          doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
           jumperValueRef.value = ''
           jumperRef.value?.blur()
         }
@@ -318,7 +338,7 @@ export default defineComponent({
       disableTransitionOneTick()
     }
     function handleJumperInput (value: string): void {
-      jumperValueRef.value = value
+      jumperValueRef.value = value.replace(/\D+/g, '')
     }
     watchEffect(() => {
       void mergedPageRef.value
@@ -326,22 +346,15 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
+      const { size } = props
       const {
         self: {
-          itemSize,
-          itemPadding,
-          itemMargin,
-          inputWidth,
-          selectWidth,
-          inputMargin,
-          selectMargin,
           buttonBorder,
           buttonBorderHover,
           buttonBorderPressed,
           buttonIconColor,
           buttonIconColorHover,
           buttonIconColorPressed,
-          buttonIconSize,
           itemTextColor,
           itemTextColorHover,
           itemTextColorPressed,
@@ -359,15 +372,25 @@ export default defineComponent({
           itemBorderActive,
           itemBorderDisabled,
           itemBorderRadius,
-          itemFontSize,
-          jumperFontSize,
           jumperTextColor,
           jumperTextColorDisabled,
-          prefixMargin,
-          suffixMargin,
           buttonColor,
           buttonColorHover,
-          buttonColorPressed
+          buttonColorPressed,
+          [createKey('itemPadding', size)]: itemPadding,
+          [createKey('itemMargin', size)]: itemMargin,
+          [createKey('inputWidth', size)]: inputWidth,
+          [createKey('selectWidth', size)]: selectWidth,
+          [createKey('inputMargin', size)]: inputMargin,
+          [createKey('selectMargin', size)]: selectMargin,
+          [createKey('jumperFontSize', size)]: jumperFontSize,
+          [createKey('prefixMargin', size)]: prefixMargin,
+          [createKey('suffixMargin', size)]: suffixMargin,
+          [createKey('itemSize', size)]: itemSize,
+          [createKey('buttonIconSize', size)]: buttonIconSize,
+          [createKey('itemFontSize', size)]: itemFontSize,
+          [`${createKey('itemMargin', size)}Rtl` as const]: itemMarginRtl,
+          [`${createKey('inputMargin', size)}Rtl` as const]: inputMarginRtl
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -379,6 +402,7 @@ export default defineComponent({
         '--n-select-margin': selectMargin,
         '--n-input-width': inputWidth,
         '--n-input-margin': inputMargin,
+        '--n-input-margin-rtl': inputMarginRtl,
         '--n-item-size': itemSize,
         '--n-item-text-color': itemTextColor,
         '--n-item-text-color-disabled': itemTextColorDisabled,
@@ -403,6 +427,7 @@ export default defineComponent({
         '--n-jumper-text-color': jumperTextColor,
         '--n-jumper-text-color-disabled': jumperTextColorDisabled,
         '--n-item-margin': itemMargin,
+        '--n-item-margin-rtl': itemMarginRtl,
         '--n-button-icon-size': buttonIconSize,
         '--n-button-icon-color': buttonIconColor,
         '--n-button-icon-color-hover': buttonIconColorHover,
@@ -416,9 +441,20 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('pagination', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'pagination',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
@@ -500,6 +536,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-pagination`,
           this.themeClass,
+          this.rtlEnabled && `${mergedClsPrefix}-pagination--rtl`,
           disabled && `${mergedClsPrefix}-pagination--disabled`
         ]}
         style={cssVars as CSSProperties}
@@ -536,7 +573,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <BackwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <ForwardIcon /> : <BackwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
@@ -560,7 +600,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastForwardNode = showFastForward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastForwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastBackwardIcon />
+                      ) : (
+                        <FastForwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -581,7 +628,14 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastBackwardNode = showFastBackward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastBackwardIcon /> }}
+                  {{
+                    default: () =>
+                      this.rtlEnabled ? (
+                        <FastForwardIcon />
+                      ) : (
+                        <FastBackwardIcon />
+                      )
+                  }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -640,7 +694,10 @@ export default defineComponent({
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <ForwardIcon /> }}
+              {{
+                default: () =>
+                  this.rtlEnabled ? <BackwardIcon /> : <ForwardIcon />
+              }}
             </NBaseIcon>
           )}
         </div>
@@ -658,7 +715,7 @@ export default defineComponent({
         ) : null}
         {showQuickJumper ? (
           <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-            {locale.goto}
+            {resolveSlot(this.$slots.goto, () => [locale.goto])}
             <NInput
               ref="jumperRef"
               value={jumperValue}

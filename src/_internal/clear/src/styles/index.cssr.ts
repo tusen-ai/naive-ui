@@ -1,5 +1,5 @@
 import { cB, c, cE } from '../../../../_utils/cssr'
-import createIconSwitchTransition from '../../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --n-bezier
@@ -16,9 +16,12 @@ export default cB('base-clear', `
   c('>', [
     cE('clear', `
       font-size: var(--n-clear-size);
+      height: 1em;
+      width: 1em;
       cursor: pointer;
       color: var(--n-clear-color);
       transition: color .3s var(--n-bezier);
+      display: flex;
     `, [
       c('&:hover', `
         color: var(--n-clear-color-hover)!important;
@@ -36,7 +39,7 @@ export default cB('base-clear', `
       top: 50%;
       transform: translateX(-50%) translateY(-50%);
     `, [
-      createIconSwitchTransition({
+      iconSwitchTransition({
         originalTransform: 'translateX(-50%) translateY(-50%)',
         left: '50%',
         top: '50%'

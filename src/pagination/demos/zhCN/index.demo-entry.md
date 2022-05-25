@@ -10,12 +10,14 @@
 basic.vue
 slot.vue
 quick-jumper.vue
+size.vue
 size-picker.vue
 disabled.vue
 item-count.vue
 prev.vue
 prefix.vue
 page-size-option.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -26,6 +28,7 @@ page-size-option.vue
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | 非受控模式下的当前页 |  |
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
+| disabled | `boolean` | `false` | 是否禁用 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | item-count | `number` | `undefined` | 总条数 |  |
@@ -37,6 +40,7 @@ page-size-option.vue
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | 2.29.0 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页后缀 |  |
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |  |
@@ -75,10 +79,11 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| 名称   | 参数                            | 说明         | 版本   |
-| ------ | ------------------------------- | ------------ | ------ |
-| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容 | 2.24.0 |
-| next   | `(info: PaginationInfo)`        | 下一页       |        |
-| prev   | `(info: PaginationInfo)`        | 上一页       |        |
-| prefix | `(info: PaginationInfo)`        | 分页前缀     |        |
-| suffix | `(info: PaginationInfo)`        | 分页后缀     |        |
+| 名称   | 参数                            | 说明               | 版本   |
+| ------ | ------------------------------- | ------------------ | ------ |
+| goto   | `()`                            | 快速跳转的文本内容 | 2.27.0 |
+| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容       | 2.24.0 |
+| next   | `(info: PaginationInfo)`        | 下一页             |        |
+| prev   | `(info: PaginationInfo)`        | 上一页             |        |
+| prefix | `(info: PaginationInfo)`        | 分页前缀           |        |
+| suffix | `(info: PaginationInfo)`        | 分页后缀           |        |

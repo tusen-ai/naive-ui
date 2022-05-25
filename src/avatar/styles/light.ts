@@ -42,3 +42,4 @@ const avatarLight: Theme<'Avatar', AvatarThemeVars> = {
 
 export default avatarLight
 export type AvatarTheme = typeof avatarLight
+export type AvatarGroupTheme = typeof avatarLight

@@ -112,7 +112,8 @@ export default defineComponent({
       '-watermark',
       style,
       watermarkLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     const base64UrlRef = ref('')
     const canvas = document.createElement('canvas')

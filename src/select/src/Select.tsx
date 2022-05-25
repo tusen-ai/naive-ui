@@ -5,7 +5,6 @@ import {
   toRef,
   defineComponent,
   PropType,
-  nextTick,
   watch,
   Transition,
   withDirectives,
@@ -30,6 +29,7 @@ import {
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import { RenderTag } from '../../_internal/selection/src/interface'
+import type { FormValidationStatus } from '../../form/src/interface'
 import {
   useTheme,
   useConfig,
@@ -185,6 +185,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -596,7 +597,7 @@ export default defineComponent({
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action')) e.preventDefault()
+      if (!happensIn(e, 'action') && !happensIn(e, 'empty')) e.preventDefault()
     }
     // scroll events on menu
     function handleMenuScroll (e: Event): void {
@@ -676,19 +677,13 @@ export default defineComponent({
     function focusSelectionInput (): void {
       triggerRef.value?.focusInput()
     }
-    function syncPosition (): void {
+    function handleTriggerOrMenuResize (): void {
+      if (!mergedShowRef.value) return
       followerRef.value?.syncPosition()
     }
     updateMemorizedOptions()
     watch(toRef(props, 'options'), updateMemorizedOptions)
-    watch(filteredOptionsRef, () => {
-      if (!mergedShowRef.value) return
-      void nextTick(syncPosition)
-    })
-    watch(mergedValueRef, () => {
-      if (!mergedShowRef.value) return
-      void nextTick(syncPosition)
-    })
+
     const exposedMethods: SelectInst = {
       focus: () => {
         triggerRef.value?.focus()
@@ -735,6 +730,7 @@ export default defineComponent({
       inlineThemeDisabled,
       onTriggerInputFocus,
       onTriggerInputBlur,
+      handleTriggerOrMenuResize,
       handleMenuFocus,
       handleMenuBlur,
       handleMenuTabOut,
@@ -746,7 +742,6 @@ export default defineComponent({
       handleTriggerBlur,
       handleTriggerFocus,
       handleKeydown,
-      syncPosition,
       handleMenuAfterLeave,
       handleMenuClickOutside,
       handleMenuScroll,
@@ -843,6 +838,7 @@ export default defineComponent({
                             <NInternalSelectMenu
                               {...this.menuProps}
                               ref="menuRef"
+                              onResize={this.handleTriggerOrMenuResize}
                               inlineThemeDisabled={this.inlineThemeDisabled}
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
@@ -862,7 +858,7 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size={'medium'}
+                              size="medium"
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
@@ -887,9 +883,21 @@ export default defineComponent({
                             this.displayDirective === 'show'
                               ? [
                                   [vShow, this.mergedShow],
-                                  [clickoutside, this.handleMenuClickOutside]
+                                  [
+                                    clickoutside,
+                                    this.handleMenuClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
-                              : [[clickoutside, this.handleMenuClickOutside]]
+                              : [
+                                  [
+                                    clickoutside,
+                                    this.handleMenuClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
+                                ]
                           )
                         }
                       }}

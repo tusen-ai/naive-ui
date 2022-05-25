@@ -1,15 +1,16 @@
-import { Ref, Slots } from 'vue'
+import { Ref, Slots, UnwrapNestedRefs } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
-import {
+import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled
 } from '../../time-picker/src/interface'
-import { MergedTheme } from '../../_mixins'
+import type { TimePickerProps } from '../../time-picker/src/TimePicker'
+import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import { DatePickerTheme } from '../styles/light'
+import type { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -35,6 +36,10 @@ export type OnUpdateValue = (
   [string, string] &
     ([string, string] | null)
 ) => void
+
+export type OnConfirm = OnUpdateValue
+
+export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
   value: string &
@@ -72,11 +77,27 @@ export type OnPanelUpdateValueImpl = (
 
 export type OnClose = (disableUpdateOnClose: boolean) => void
 
-export interface PanelRef {
+export interface RangePanelChildComponentRefs {
+  startYearScrollbarRef: Ref<ScrollbarInst | null>
+  endYearScrollbarRef: Ref<ScrollbarInst | null>
+  startMonthScrollbarRef: Ref<ScrollbarInst | null>
+  endMonthScrollbarRef: Ref<ScrollbarInst | null>
+  startYearVlRef: Ref<VirtualListInst | null>
+  endYearVlRef: Ref<VirtualListInst | null>
+}
+
+export interface PanelChildComponentRefs {
+  monthScrollbarRef: Ref<ScrollbarInst | null> // Only exists when type is month
+  yearScrollbarRef: Ref<ScrollbarInst | null>
+  // year, virtual scroll
+  yearVlRef: Ref<VirtualListInst | null>
+}
+
+export interface PanelRef
+  extends Partial<
+  UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+  > {
   $el: HTMLElement
-  // Only exists when type is month
-  monthScrollRef?: ScrollbarInst | null
-  yearScrollRef?: VirtualListInst | null
 }
 
 // 0 is Monday
@@ -86,6 +107,9 @@ export type DatePickerInjection = {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
+  timePickerPropsRef: Ref<
+  undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
+  >
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>

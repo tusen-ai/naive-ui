@@ -1,6 +1,5 @@
 <markdown>
 # 弹出位置
-
 </markdown>
 
 <template>
@@ -30,7 +29,9 @@ const PlacementButtons = defineComponent({
       { placement: 'top-left', text: '左上' },
       { placement: 'top-right', text: '右上' },
       { placement: 'bottom-left', text: '左下' },
-      { placement: 'bottom-right', text: '右下' }
+      { placement: 'bottom-right', text: '右下' },
+      { placement: 'bottom', text: '下' },
+      { placement: 'top', text: '上' }
     ] as const
     return {
       notification,

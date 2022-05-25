@@ -19,12 +19,12 @@ import { NBaseIcon, NBaseClose } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
 import { useConfig, useThemeClass } from '../../_mixins'
 
-const iconMap = {
-  info: <InfoIcon />,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />,
-  default: null
+const iconRenderMap = {
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />,
+  default: () => null
 }
 
 export const notificationProps = {
@@ -142,68 +142,73 @@ export const Notification = defineComponent({
     this.onRender?.()
     return (
       <div
-        class={[
-          `${mergedClsPrefix}-notification`,
-          this.themeClass,
-          {
-            [`${mergedClsPrefix}-notification--closable`]: this.closable,
-            [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar
-          }
-        ]}
+        class={[`${mergedClsPrefix}-notification-wrapper`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
-        {this.showAvatar ? (
-          <div class={`${mergedClsPrefix}-notification__avatar`}>
-            {this.avatar ? (
-              render(this.avatar)
-            ) : this.type !== 'default' ? (
-              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                {{ default: () => iconMap[this.type] }}
-              </NBaseIcon>
+        <div
+          class={[
+            `${mergedClsPrefix}-notification`,
+            this.themeClass,
+            {
+              [`${mergedClsPrefix}-notification--closable`]: this.closable,
+              [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar
+            }
+          ]}
+          style={this.cssVars as CSSProperties}
+        >
+          {this.showAvatar ? (
+            <div class={`${mergedClsPrefix}-notification__avatar`}>
+              {this.avatar ? (
+                render(this.avatar)
+              ) : this.type !== 'default' ? (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => iconRenderMap[this.type]() }}
+                </NBaseIcon>
+              ) : null}
+            </div>
+          ) : null}
+          {this.closable ? (
+            <NBaseClose
+              clsPrefix={mergedClsPrefix}
+              class={`${mergedClsPrefix}-notification__close`}
+              onClick={this.handleCloseClick}
+            />
+          ) : null}
+          <div ref="bodyRef" class={`${mergedClsPrefix}-notification-main`}>
+            {this.title ? (
+              <div class={`${mergedClsPrefix}-notification-main__header`}>
+                {render(this.title)}
+              </div>
+            ) : null}
+            {this.description ? (
+              <div class={`${mergedClsPrefix}-notification-main__description`}>
+                {render(this.description)}
+              </div>
+            ) : null}
+            {this.content ? (
+              <pre class={`${mergedClsPrefix}-notification-main__content`}>
+                {render(this.content)}
+              </pre>
+            ) : null}
+            {this.meta || this.action ? (
+              <div class={`${mergedClsPrefix}-notification-main-footer`}>
+                {this.meta ? (
+                  <div
+                    class={`${mergedClsPrefix}-notification-main-footer__meta`}
+                  >
+                    {render(this.meta)}
+                  </div>
+                ) : null}
+                {this.action ? (
+                  <div
+                    class={`${mergedClsPrefix}-notification-main-footer__action`}
+                  >
+                    {render(this.action)}
+                  </div>
+                ) : null}
+              </div>
             ) : null}
           </div>
-        ) : null}
-        {this.closable ? (
-          <NBaseClose
-            clsPrefix={mergedClsPrefix}
-            class={`${mergedClsPrefix}-notification__close`}
-            onClick={this.handleCloseClick}
-          />
-        ) : null}
-        <div ref="bodyRef" class={`${mergedClsPrefix}-notification-main`}>
-          {this.title ? (
-            <div class={`${mergedClsPrefix}-notification-main__header`}>
-              {render(this.title)}
-            </div>
-          ) : null}
-          {this.description ? (
-            <div class={`${mergedClsPrefix}-notification-main__description`}>
-              {render(this.description)}
-            </div>
-          ) : null}
-          {this.content ? (
-            <pre class={`${mergedClsPrefix}-notification-main__content`}>
-              {render(this.content)}
-            </pre>
-          ) : null}
-          {this.meta || this.action ? (
-            <div class={`${mergedClsPrefix}-notification-main-footer`}>
-              {this.meta ? (
-                <div
-                  class={`${mergedClsPrefix}-notification-main-footer__meta`}
-                >
-                  {render(this.meta)}
-                </div>
-              ) : null}
-              {this.action ? (
-                <div
-                  class={`${mergedClsPrefix}-notification-main-footer__action`}
-                >
-                  {render(this.action)}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
         </div>
       </div>
     )

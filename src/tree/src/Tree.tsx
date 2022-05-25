@@ -11,29 +11,31 @@ import {
   CSSProperties,
   VNode,
   nextTick,
-  watchEffect
+  watchEffect,
+  VNodeChild,
+  inject
 } from 'vue'
 import {
   createTreeMate,
   flatten,
   createIndexGetter,
-  TreeMate,
   TreeMateOptions,
   CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createDataKey, warn } from '../../_utils'
+import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter, emptyImage } from './utils'
+import { keysWithFilter, emptyImage, filterTree } from './utils'
 import { useKeyboard } from './keyboard'
 import type {
   TreeDragInfo,
@@ -58,6 +60,7 @@ import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
+import { NEmpty } from '../../empty'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -93,6 +96,7 @@ export type OnUpdateKeysImpl = (
 type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
+  allowCheckingNotLoaded: Boolean,
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
   expandedKeys: Array as PropType<Key[]>,
@@ -127,6 +131,7 @@ export const treeSharedProps = {
 
 const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
+  showIrrelevantNodes: { type: Boolean, default: true },
   data: {
     type: Array as PropType<TreeOptions>,
     default: () => []
@@ -154,8 +159,6 @@ const treeProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
-  remote: Boolean,
-  leafOnly: Boolean,
   multiple: Boolean,
   pattern: {
     type: String,
@@ -178,6 +181,10 @@ const treeProps = {
   animated: {
     type: Boolean,
     default: true
+  },
+  checkboxPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
   },
   virtualScroll: Boolean,
   watchProps: Array as PropType<
@@ -214,15 +221,13 @@ const treeProps = {
   >,
   ...treeSharedProps,
   // internal props for tree-select
+  internalTreeSelect: Boolean,
   internalScrollable: Boolean,
   internalScrollablePadding: String,
-  // use it to do check
-  internalDataTreeMate: Object as PropType<TreeMate<TreeOption>>,
   // use it to display
-  internalDisplayTreeMate: Object as PropType<TreeMate<TreeOption>>,
-  internalHighlightKeySet: Object as PropType<Set<Key>>,
+  internalRenderEmpty: Function as PropType<() => VNodeChild>,
+  internalHighlightKeySet: Object as PropType<Set<Key> | null>,
   internalUnifySelectCheck: Boolean,
-  internalHideFilteredNode: Boolean, // I'm sure this won't work with draggable
   internalCheckboxFocusable: {
     type: Boolean,
     default: true
@@ -235,7 +240,11 @@ const treeProps = {
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
-  }
+  },
+  /**
+   * @deprecated
+   */
+  leafOnly: Boolean
 } as const
 
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
@@ -244,6 +253,16 @@ export default defineComponent({
   name: 'Tree',
   props: treeProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly) {
+          warnOnce(
+            'tree',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
@@ -262,17 +281,48 @@ export default defineComponent({
     function getScrollContent (): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
-    // We don't expect data source to change so we just determine it once
-    const displayTreeMateRef = props.internalDisplayTreeMate
-      ? toRef(props, 'internalDisplayTreeMate')
-      : computed(() =>
-        createTreeMate<TreeOption>(
-          props.data,
-          createTreeMateOptions(props.keyField, props.childrenField)
-        )
+
+    const filteredTreeInfoRef = computed<{
+      filteredTree: TreeOption[]
+      highlightKeySet: Set<Key> | null
+      expandedKeys: Key[] | undefined
+    }>(() => {
+      const { pattern } = props
+      if (!pattern) {
+        return {
+          filteredTree: props.data,
+          highlightKeySet: null,
+          expandedKeys: undefined
+        }
+      }
+      if (!pattern.length || !mergedFilterRef.value) {
+        return {
+          filteredTree: props.data,
+          highlightKeySet: null,
+          expandedKeys: undefined
+        }
+      }
+      return filterTree(
+        props.data,
+        mergedFilterRef.value,
+        pattern,
+        props.keyField,
+        props.childrenField
       )
-    const dataTreeMateRef = props.internalDataTreeMate
-      ? toRef(props, 'internalDataTreeMate')
+    })
+
+    // We don't expect data source to change so we just determine it once
+    const displayTreeMateRef = computed(() =>
+      createTreeMate<TreeOption>(
+        props.showIrrelevantNodes
+          ? props.data
+          : filteredTreeInfoRef.value.filteredTree,
+        createTreeMateOptions(props.keyField, props.childrenField)
+      )
+    )
+    const treeSelectInjection = inject(treeSelectInjectionKey, null)
+    const dataTreeMateRef = props.internalTreeSelect
+      ? treeSelectInjection!.dataTreeMate
       : displayTreeMateRef
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
@@ -289,10 +339,11 @@ export default defineComponent({
       uncontrolledCheckedKeysRef
     )
     const checkedStatusRef = computed(() => {
-      const value = dataTreeMateRef.value!.getCheckedKeys(
+      const value = dataTreeMateRef.value.getCheckedKeys(
         mergedCheckedKeysRef.value,
         {
-          cascade: props.cascade
+          cascade: props.cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }
       )
       return value
@@ -325,7 +376,7 @@ export default defineComponent({
 
     const initUncontrolledExpandedKeys = (keys: undefined | Key[]): void => {
       uncontrolledExpandedKeysRef.value = props.defaultExpandAll
-        ? dataTreeMateRef.value!.getNonLeafKeys()
+        ? dataTreeMateRef.value.getNonLeafKeys()
         : keys === undefined
           ? props.defaultExpandedKeys
           : keys
@@ -337,6 +388,7 @@ export default defineComponent({
       // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
       watchEffect(() => initUncontrolledExpandedKeys(props.defaultExpandedKeys))
     }
+
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
@@ -344,7 +396,7 @@ export default defineComponent({
     )
 
     const fNodesRef = computed(() =>
-      displayTreeMateRef.value!.getFlattenedNodes(mergedExpandedKeysRef.value)
+      displayTreeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
 
     const { pendingNodeKeyRef, handleKeyup, handleKeydown } = useKeyboard({
@@ -358,7 +410,12 @@ export default defineComponent({
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
     const uncontrolledHighlightKeySetRef = ref(new Set<Key>())
-    const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
+    const controlledHighlightKeySetRef = computed(() => {
+      return (
+        props.internalHighlightKeySet ||
+        filteredTreeInfoRef.value.highlightKeySet
+      )
+    })
     const mergedHighlightKeySetRef = useMergedState(
       controlledHighlightKeySetRef,
       uncontrolledHighlightKeySetRef
@@ -392,9 +449,11 @@ export default defineComponent({
       const { labelField } = props
       return (pattern: string, node: TreeOption): boolean => {
         if (!pattern.length) return true
-        return ((node as any)[labelField] as string)
-          .toLowerCase()
-          .includes(pattern.toLowerCase())
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
       }
     })
 
@@ -410,23 +469,44 @@ export default defineComponent({
         deep: false
       }
     )
-    watch(toRef(props, 'pattern'), (value) => {
-      if (value) {
-        const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
-          keysWithFilter(
-            props.data,
-            props.pattern,
-            props.keyField,
-            props.childrenField,
-            mergedFilterRef.value
+    let memorizedExpandedKeys: Key[] | undefined
+    watch(toRef(props, 'pattern'), (value, oldValue) => {
+      if (props.showIrrelevantNodes) {
+        memorizedExpandedKeys = undefined
+        if (value) {
+          const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
+            keysWithFilter(
+              props.data,
+              props.pattern,
+              props.keyField,
+              props.childrenField,
+              mergedFilterRef.value
+            )
+          uncontrolledHighlightKeySetRef.value = highlightKeySet
+          doUpdateExpandedKeys(
+            expandedKeysAfterChange,
+            getOptionsByKeys(expandedKeysAfterChange)
           )
-        uncontrolledHighlightKeySetRef.value = highlightKeySet
-        doUpdateExpandedKeys(
-          expandedKeysAfterChange,
-          getOptionsByKeys(expandedKeysAfterChange)
-        )
+        } else {
+          uncontrolledHighlightKeySetRef.value = new Set()
+        }
       } else {
-        uncontrolledHighlightKeySetRef.value = new Set()
+        if (!value.length) {
+          if (memorizedExpandedKeys !== undefined) {
+            doUpdateExpandedKeys(
+              memorizedExpandedKeys,
+              getOptionsByKeys(memorizedExpandedKeys)
+            )
+          }
+        } else {
+          if (!oldValue.length) {
+            memorizedExpandedKeys = mergedExpandedKeysRef.value
+          }
+          const { expandedKeys } = filteredTreeInfoRef.value
+          if (expandedKeys !== undefined) {
+            doUpdateExpandedKeys(expandedKeys, getOptionsByKeys(expandedKeys))
+          }
+        }
       }
     })
     async function triggerLoading (node: TmNode): Promise<void> {
@@ -513,7 +593,7 @@ export default defineComponent({
       if (addedKey !== null) {
         // play add animation
         aipRef.value = true
-        afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(prevValue)
+        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(prevValue)
         const expandedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === addedKey
         )
@@ -536,18 +616,20 @@ export default defineComponent({
         }
       }
       if (removedKey !== null) {
-        // play remove animation
-        aipRef.value = true
-        afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(value)
+        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(value)
         const collapsedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
         if (~collapsedNodeIndex) {
-          const collapsedChildren = flatten(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
-            value
-          )
+          const collapsedNodeChildren = (
+            afNodeRef.value[collapsedNodeIndex] as TmNode
+          ).children
+          // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
+          // but maybe children removed
+          if (!collapsedNodeChildren) return
+          // play remove animation
+          aipRef.value = true
+          const collapsedChildren = flatten(collapsedNodeChildren, value)
           afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
@@ -587,7 +669,7 @@ export default defineComponent({
     }
 
     function getOptionsByKeys (keys: Key[]): Array<TreeOption | null> {
-      const { getNode } = dataTreeMateRef.value!
+      const { getNode } = dataTreeMateRef.value
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
 
@@ -709,11 +791,12 @@ export default defineComponent({
         handleSelect(node)
         return
       }
-      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value![
+      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value[
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        checkStrategy: mergedCheckStrategyRef.value
+        checkStrategy: mergedCheckStrategyRef.value,
+        allowNotLoaded: props.allowCheckingNotLoaded
       })
       doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys))
       doUpdateIndeterminateKeys(
@@ -735,7 +818,7 @@ export default defineComponent({
           getOptionsByKeys(expandedKeysAfterChange)
         )
       } else {
-        const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
+        const nodeToBeExpanded = displayTreeMateRef.value.getNode(key)
         if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
@@ -748,12 +831,7 @@ export default defineComponent({
       toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
-      if (
-        props.disabled ||
-        node.disabled ||
-        !props.selectable ||
-        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
-      ) {
+      if (props.disabled || !props.selectable) {
         return
       }
       pendingNodeKeyRef.value = node.key
@@ -1164,12 +1242,12 @@ export default defineComponent({
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
       selectableRef: toRef(props, 'selectable'),
-      remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
       cascadeRef: toRef(props, 'cascade'),
+      checkboxPlacementRef: props.checkboxPlacement,
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
@@ -1179,11 +1257,13 @@ export default defineComponent({
       pendingNodeKeyRef,
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
+      internalTreeSelect: props.internalTreeSelect,
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
+      multipleRef: toRef(props, 'multiple'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -1254,6 +1334,10 @@ export default defineComponent({
     }
   },
   render () {
+    const { fNodes, internalRenderEmpty } = this
+    if (!fNodes.length && internalRenderEmpty) {
+      return internalRenderEmpty()
+    }
     const {
       mergedClsPrefix,
       blockNode,
@@ -1381,7 +1465,15 @@ export default defineComponent({
           onFocusout={mergedFocusable ? handleFocusout : undefined}
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         >
-          {this.fNodes.map(createNode)}
+          {!fNodes.length
+            ? resolveSlot(this.$slots.empty, () => [
+                <NEmpty
+                  class={`${mergedClsPrefix}-tree__empty`}
+                  theme={this.theme?.peers?.Empty}
+                  themeOverrides={this.themeOverrides?.peers?.Empty}
+                />
+            ])
+            : fNodes.map(createNode)}
         </div>
       )
     }

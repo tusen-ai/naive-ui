@@ -61,12 +61,15 @@ status.vue
 
 ### Input Slots
 
-| Name | Parameters | Description |
-| --- | --- | --- |
-| count | `(value: string)` | Word count. |
-| prefix | `()` | Prefix content slot. |
-| separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |
-| suffix | `()` | Suffix content slot. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| clear-icon | `()` | Custom clear icon. | 2.29.0 |
+| count | `(value: string)` | Word count. |  |
+| password-invisible-icon | `()` | Password toggle icon when password is invisible. | 2.27.0 |
+| password-visible-icon | `()` | Password toggle icon when password is visible. | 2.27.0 |
+| prefix | `()` | Prefix content slot. |  |
+| separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |  |
+| suffix | `()` | Suffix content slot. |  |
 
 ### InputGroup Slots
 

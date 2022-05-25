@@ -60,7 +60,9 @@ tag-input.vue
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the selection element is blurred. |  |

@@ -8,7 +8,7 @@ interface FadeUpWidthExpandTransition {
   duration?: string
 }
 
-export default function fadeUpWidthExpandTransition ({
+export function fadeUpWidthExpandTransition ({
   duration = '.2s'
 }: FadeUpWidthExpandTransition = {}): CNode[] {
   return [

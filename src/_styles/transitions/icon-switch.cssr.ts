@@ -3,8 +3,7 @@ import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
 const {
-  cubicBezierEaseInOut,
-  transformDebounceScale
+  cubicBezierEaseInOut
 } = commonVariables
 
 interface IconSwitchTransitionOptions {
@@ -14,7 +13,7 @@ interface IconSwitchTransitionOptions {
   transition?: string
 }
 
-export default function ({
+export function iconSwitchTransition ({
   originalTransform = '',
   left = 0,
   top = 0,
@@ -28,7 +27,7 @@ export default function ({
       opacity: 0
     }),
     c('&.icon-switch-transition-enter-to, &.icon-switch-transition-leave-from', {
-      transform: `${transformDebounceScale} ${originalTransform}`,
+      transform: `scale(1) ${originalTransform}`,
       left,
       top,
       opacity: 1

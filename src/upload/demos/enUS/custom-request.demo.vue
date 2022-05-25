@@ -21,8 +21,7 @@ User `custom-request` to customize upload request.
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import axios from 'axios'
-import type { AxiosRequestConfig } from 'axios'
+import { lyla } from 'lyla'
 import { useMessage } from 'naive-ui'
 import type { UploadCustomRequestOptions } from 'naive-ui'
 
@@ -49,16 +48,17 @@ export default defineComponent({
         })
       }
       formData.append(file.name, file.file as File)
-      axios
-        .post(action as string, formData, {
+      lyla
+        .post(action as string, {
           withCredentials,
-          headers,
-          onUploadProgress: ({ loaded, total }) => {
-            onProgress({ percent: Math.ceil((loaded / total) * 100) })
+          headers: headers as Record<string, string>,
+          body: formData,
+          onUploadProgress: ({ percent }) => {
+            onProgress({ percent: Math.ceil(percent) })
           }
-        } as AxiosRequestConfig)
-        .then((e) => {
-          message.success(e.data)
+        })
+        .then(({ json }) => {
+          message.success(json)
           onFinish()
         })
         .catch((error) => {

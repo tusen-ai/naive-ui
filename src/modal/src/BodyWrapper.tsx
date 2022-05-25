@@ -14,7 +14,8 @@ import {
   VNode,
   ComponentPublicInstance,
   mergeProps,
-  cloneVNode
+  cloneVNode,
+  computed
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -25,7 +26,7 @@ import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { NCard } from '../../card'
-import { getFirstSlotVNode, keep, warn } from '../../_utils'
+import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 import { presetProps } from './presetProps'
 
@@ -50,6 +51,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    blockScroll: Boolean,
     ...presetProps,
     // events
     onClickoutside: {
@@ -88,6 +90,7 @@ export default defineComponent({
     watch(toRef(props, 'show'), (value) => {
       if (value) displayedRef.value = true
     })
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin (): string {
@@ -153,6 +156,17 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       props.onClickoutside(e)
     }
+    const childNodeRef = ref<VNode | null>(null)
+    watch(childNodeRef, (node) => {
+      if (node) {
+        void nextTick(() => {
+          const el = node.el as HTMLElement | null
+          if (el && bodyRef.value !== el) {
+            bodyRef.value = el
+          }
+        })
+      }
+    })
     provide(modalBodyInjectionKey, bodyRef)
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, null)
@@ -164,6 +178,7 @@ export default defineComponent({
       bodyRef,
       scrollbarRef,
       displayed: displayedRef,
+      childNodeRef,
       handleClickOutside,
       handlePositiveClick,
       handleNegativeClick,
@@ -267,11 +282,16 @@ export default defineComponent({
                                     {$slots}
                                   </NCard>
                                     ) : (
-                                      childNode
+                                      (this.childNodeRef = childNode)
                                     )) as any,
                                 [
                                   [vShow, this.show],
-                                  [clickoutside, handleClickOutside]
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
                               )
                           }}

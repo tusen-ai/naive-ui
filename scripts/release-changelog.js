@@ -3,9 +3,9 @@ const fs = require('fs')
 const path = require('path')
 const inquirer = require('inquirer')
 
-const { DINGTALK_TOKEN, DINGTALK_TOKEN_2 } = process.env
+const { DINGTALK_TOKEN, DINGTALK_TOKEN_2, DINGTALK_TOKEN_3 } = process.env
 
-if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2) {
+if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2 || !DINGTALK_TOKEN_3) {
   console.log('No DINGTALK_TOKEN in your env.')
   process.exit(0)
 }
@@ -43,7 +43,11 @@ async function releaseChangelogToDingTalk () {
     ])
     .then(async (ans) => {
       if (ans['release-changelog']) {
-        for (const token of [DINGTALK_TOKEN, DINGTALK_TOKEN_2]) {
+        for (const token of [
+          DINGTALK_TOKEN,
+          DINGTALK_TOKEN_2,
+          DINGTALK_TOKEN_3
+        ]) {
           await request
             .post('https://oapi.dingtalk.com/robot/send')
             .query({

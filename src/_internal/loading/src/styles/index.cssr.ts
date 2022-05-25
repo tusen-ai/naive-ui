@@ -1,5 +1,5 @@
 import { c, cB, cE } from '../../../../_utils/cssr'
-import iconSwitchTransition from '../../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
 
 export default c([
   c('@keyframes loading-container-rotate', `
@@ -76,6 +76,13 @@ export default c([
     width: 1em;
     height: 1em;
   `, [
+    cE('transition-wrapper', `
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    `, [
+      iconSwitchTransition()
+    ]),
     cE('container', `
       display: inline-flex;
       position: relative;
@@ -86,7 +93,6 @@ export default c([
       letter-spacing: 0;
       white-space: nowrap;
       opacity: 1;
-      position: absolute;
       width: 100%;
       height: 100%;
     `, [
@@ -112,7 +118,7 @@ export default c([
         `, [
           cE('svg', `
             animation: loading-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-             width: 200%;
+            width: 200%;
           `)
         ]),
         cE('container-layer-patch', `
@@ -156,12 +162,6 @@ export default c([
         top: '50%',
         originalTransform: 'translateX(-50%) translateY(-50%)'
       })
-    ]),
-    cE('icon', `
-      height: 1em;
-      width: 1em;
-    `, [
-      iconSwitchTransition()
     ])
   ])
 ])

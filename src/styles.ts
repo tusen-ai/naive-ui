@@ -1,12 +1,17 @@
 export { commonDark, commonLight } from './_styles/common'
-export { alertDark } from './alert/styles'
+export { alertDark, alertRtl as unstableAlertRtl } from './alert/styles'
 export { anchorDark } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'
 export { avatarDark } from './avatar/styles'
+export { avatarGroupRtl as unstableAvatarGroupRtl } from './avatar-group/styles'
 export { backTopDark } from './back-top/styles'
-export { badgeDark } from './badge/styles'
+export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
+export {
+  buttonGroupDark,
+  buttonGroupRtl as unstableButtonGroupRtl
+} from './button-group/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
 export { cascaderDark } from './cascader/styles'
 export {
@@ -18,6 +23,7 @@ export {
   collapseDark,
   collapseRtl as unstableCollapseRtl
 } from './collapse/styles'
+export { collapseTransitionRtl as unstableCollapseTransitionRtl } from './collapse-transition/styles'
 export { dataTableDark } from './data-table/styles'
 export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
@@ -25,7 +31,10 @@ export { dialogDark } from './dialog/styles'
 export { dividerDark } from './divider/styles'
 export { drawerDark } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'
-export { dynamicInputDark } from './dynamic-input/styles'
+export {
+  dynamicInputDark,
+  dynamicInputRtl as unstableDynamicInputRtl
+} from './dynamic-input/styles'
 export { dynamicTagsDark } from './dynamic-tags/styles'
 export { elementDark } from './element/styles'
 export { emptyDark } from './empty/styles'
@@ -46,23 +55,26 @@ export { menuDark } from './menu/styles'
 export { messageDark } from './message/styles'
 export { modalDark } from './modal/styles'
 export { notificationDark } from './notification/styles'
-export { paginationDark } from './pagination/styles'
+export {
+  paginationDark,
+  paginationRtl as unstablePaginationRtl
+} from './pagination/styles'
 export { pageHeaderRtl as unstablePageHeaderRtl } from './page-header/styles'
 export { popconfirmDark } from './popconfirm/styles'
 export { popoverDark } from './popover/styles'
 export { popselectDark } from './popselect/styles'
 export { progressDark } from './progress/styles'
-export { radioDark } from './radio/styles'
+export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
 export { rateDark } from './rate/styles'
 export { resultDark } from './result/styles'
 export { selectDark } from './select/styles'
 export { sliderDark } from './slider/styles'
-export { spaceDark } from './space/styles'
+export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'
 export { spinDark } from './spin/styles'
 export { statisticDark } from './statistic/styles'
 export { stepsDark } from './steps/styles'
 export { switchDark } from './switch/styles'
-export { tableDark } from './table/styles'
+export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
 export { tabsDark } from './tabs/styles'
 export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'
 export { thingDark } from './thing/styles'

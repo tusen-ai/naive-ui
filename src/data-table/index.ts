@@ -1,6 +1,7 @@
 export { default as NDataTable } from './src/DataTable'
 export type { DataTableProps } from './src/DataTable'
 export type {
+  RowKey as DataTableRowKey,
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,
   RenderFilterIcon as DataTableRenderFilterIcon,
@@ -15,5 +16,7 @@ export type {
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
   DataTableInst,
-  CreateSummary as DataTableCreateSummary
+  CreateSummary as DataTableCreateSummary,
+  FilterState as DataTableFilterState,
+  SortState as DataTableSortState
 } from './src/interface'

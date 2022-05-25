@@ -12,6 +12,8 @@ checkbox.vue
 check-strategy.vue
 filterable.vue
 action.vue
+async.vue
+status.vue
 debug.vue
 ```
 
@@ -21,6 +23,7 @@ debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
@@ -38,6 +41,7 @@ debug.vue
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |  |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |  |
+| loading | `boolean` | `false` | Whether it's loading. | NEXT_VETSION |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.22.0 |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
@@ -47,22 +51,26 @@ debug.vue
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
+| on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |  |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function on indeterminate options changing. |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | Callback on value updated. |  |
 
 ### TreeSelectOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| key | `string \| number` | Unique option key. The field used can be set using `key-field`. |
-| label | `string` | Displayed content of the option. The field used can be set using `label-field`. |
-| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |
-| disabled? | `boolean` | Option disabled state. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| key | `string \| number` | Unique option key. The field used can be set using `key-field`. |  |
+| label | `string` | Displayed content of the option. The field used can be set using `label-field`. |  |
+| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |  |
+| disabled? | `boolean` | Option disabled state. |  |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in async mode. | 2.27.0 |
 
 ### TreeSelect Slots
 

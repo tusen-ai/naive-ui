@@ -60,7 +60,12 @@ import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
-import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
+import {
+  OnConfirmImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  RenderLabel
+} from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
 import { colorPickerInjectionKey } from './context'
@@ -68,15 +73,12 @@ import style from './styles/index.cssr'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
-  value: String,
+  value: String as PropType<string | null>,
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
@@ -106,6 +108,7 @@ export const colorPickerPanelProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
+  onConfirm: Function as PropType<OnUpdateValue>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -442,6 +445,11 @@ export default defineComponent({
     }
 
     function handleConfirm (): void {
+      const { value } = mergedValueRef
+      const { onConfirm } = props
+      if (onConfirm) {
+        ;(onConfirm as OnConfirmImpl)(value)
+      }
       doUpdateShow(false)
     }
 
@@ -706,7 +714,12 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [clickoutside, this.handleClickOutside]
+                              [
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined as any as string,
+                                { capture: true }
+                              ]
                             ])
                             : null
                       }}

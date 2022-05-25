@@ -263,4 +263,14 @@ describe('n-input-number', () => {
     expect(onUpdateValue).toHaveBeenCalledWith(10)
     wrapper.unmount()
   })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NInputNumber, { props: { status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
 })

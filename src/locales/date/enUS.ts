@@ -1,9 +1,8 @@
-import type { Locale } from 'date-fns'
-import enUS from 'date-fns/locale/en-US'
+import enUS from 'date-fns/esm/locale/en-US'
 
 interface NDateLocale {
   name: string
-  locale: Locale
+  locale: typeof enUS
 }
 
 const dateEnUs: NDateLocale = {

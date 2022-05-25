@@ -16,16 +16,16 @@ import {
   DownloadIcon,
   EyeIcon
 } from '../../_internal/icons'
+import { ImageInst } from '../../image/src/Image'
+import { NImage } from '../../image'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { uploadInjectionKey } from './interface'
-import type { FileInfo, ListType } from './interface'
+import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { environmentSupportFile, isImageFile } from './utils'
-import { NImage } from '../../image'
-import { ImageInst } from '../../image/src/Image'
 
 export default defineComponent({
   name: 'UploadFile',
@@ -35,7 +35,7 @@ export default defineComponent({
       required: true
     },
     file: {
-      type: Object as PropType<FileInfo>,
+      type: Object as PropType<SettledFileInfo>,
       required: true
     },
     listType: {
@@ -115,7 +115,7 @@ export default defineComponent({
       e.preventDefault()
       handleDownload(props.file)
     }
-    function handleRemove (file: FileInfo): void {
+    function handleRemove (file: SettledFileInfo): void {
       const {
         XhrMap,
         doChange,
@@ -140,7 +140,7 @@ export default defineComponent({
         })
       })
     }
-    function handleDownload (file: FileInfo): void {
+    function handleDownload (file: SettledFileInfo): void {
       const {
         onDownloadRef: { value: onDownload }
       } = NUpload
@@ -150,7 +150,7 @@ export default defineComponent({
         /** I haven't figure out its usage, so just leave it here */
       })
     }
-    function handleAbort (file: FileInfo): void {
+    function handleAbort (file: SettledFileInfo): void {
       const { XhrMap } = NUpload
       const XHR = XhrMap.get(file.id)
       XHR?.abort()

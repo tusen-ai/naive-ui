@@ -47,7 +47,7 @@ export const NSubmenu = defineComponent({
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild
-    const { props: menuProps, mergedCollapsedRef } = NMenu
+    const { props: menuProps, mergedCollapsedRef, mergedThemeRef } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
       if (NSubmenu?.mergedDisabledRef.value) return true
@@ -77,6 +77,7 @@ export const NSubmenu = defineComponent({
     }
     return {
       menuProps,
+      mergedTheme: mergedThemeRef,
       doSelect: NMenu.doSelect,
       inverted: NMenu.invertedRef,
       isHorizontal: NMenu.isHorizontalRef,
@@ -167,13 +168,15 @@ export const NSubmenu = defineComponent({
     }
     return this.root ? (
       <NDropdown
+        size="large"
         {...this.menuProps?.dropdownProps}
+        themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
+        theme={this.mergedTheme.peers.Dropdown}
         builtinThemeOverrides={{
           fontSizeLarge: '14px',
           optionIconSizeLarge: '18px'
         }}
         value={this.mergedValue}
-        size="large"
         trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}

@@ -9,6 +9,7 @@ basic.vue
 disabled.vue
 event.vue
 icon.vue
+button-placement.vue
 loading.vue
 min-max.vue
 size.vue
@@ -17,6 +18,8 @@ validator.vue
 show-button.vue
 disable-keyboard.vue
 change-timing.vue
+status.vue
+custom-icon.vue
 debug.vue
 rtl-debug.vue
 ```
@@ -29,6 +32,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 | 2.26.1 |
 | bordered | `boolean` | `true` | 是否有边框 |  |
+| button-placement | `'both' \| 'right'` | `'right'` | 加减按钮的位置 | NEXT_VERSION |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -40,6 +44,7 @@ rtl-debug.vue
 | readonly | `boolean` | `false` | 是否只读 |  |
 | show-button | `boolean` | `true` | 是否有按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |  |
 | update-value-on-input | `boolean` | `true` | 在输入的过程中，在输入值合法的情况下，是否改变值 |  |
 | validator | `(value) => boolean` | `undefined` | 设置自定义验证 |  |
@@ -51,10 +56,12 @@ rtl-debug.vue
 
 ### InputNumber Slots
 
-| 名称   | 参数 | 说明               |
-| ------ | ---- | ------------------ |
-| prefix | `()` | 输入框头部内容插槽 |
-| suffix | `()` | 输入框尾部内容插槽 |
+| 名称       | 参数 | 说明               | 版本   |
+| ---------- | ---- | ------------------ | ------ |
+| add-icon   | `()` | 增加按钮的图标     | 2.28.1 |
+| minus-icon | `()` | 减少按钮的图标     | 2.28.1 |
+| prefix     | `()` | 输入框头部内容插槽 |        |
+| suffix     | `()` | 输入框尾部内容插槽 |        |
 
 ### InputNumber Methods
 

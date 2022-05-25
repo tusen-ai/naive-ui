@@ -44,75 +44,83 @@ export default defineComponent({
             default: () =>
               this.show ? (
                 <div
-                  class={`${clsPrefix}-base-loading__container`}
-                  role="loading-container"
+                  key="icon"
+                  class={`${clsPrefix}-base-loading__transition-wrapper`}
                 >
-                  <div class={`${clsPrefix}-base-loading__container-layer`}>
-                    <div
-                      class={`${clsPrefix}-base-loading__container-layer-left`}
-                    >
-                      <svg
-                        class={`${clsPrefix}-base-loading__svg`}
-                        viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ color: stroke }}
+                  <div class={`${clsPrefix}-base-loading__container`}>
+                    <div class={`${clsPrefix}-base-loading__container-layer`}>
+                      <div
+                        class={`${clsPrefix}-base-loading__container-layer-left`}
                       >
-                        <circle
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width={strokeWidth}
-                          stroke-linecap="round"
-                          cx={scaledRadius}
-                          cy={scaledRadius}
-                          r={radius - strokeWidth / 2}
-                          stroke-dasharray={4.91 * radius}
-                          stroke-dashoffset={2.46 * radius}
-                        />
-                      </svg>
-                    </div>
-                    <div
-                      class={`${clsPrefix}-base-loading__container-layer-patch`}
-                    >
-                      <svg
-                        class={`${clsPrefix}-base-loading__svg`}
-                        viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ color: stroke }}
+                        <svg
+                          class={`${clsPrefix}-base-loading__svg`}
+                          viewBox={`0 0 ${2 * scaledRadius} ${
+                            2 * scaledRadius
+                          }`}
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ color: stroke }}
+                        >
+                          <circle
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width={strokeWidth}
+                            stroke-linecap="round"
+                            cx={scaledRadius}
+                            cy={scaledRadius}
+                            r={radius - strokeWidth / 2}
+                            stroke-dasharray={4.91 * radius}
+                            stroke-dashoffset={2.46 * radius}
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        class={`${clsPrefix}-base-loading__container-layer-patch`}
                       >
-                        <circle
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width={strokeWidth}
-                          stroke-linecap="round"
-                          cx={scaledRadius}
-                          cy={scaledRadius}
-                          r={radius - strokeWidth / 2}
-                          stroke-dasharray={4.91 * radius}
-                          stroke-dashoffset={2.46 * radius}
-                        />
-                      </svg>
-                    </div>
-                    <div
-                      class={`${clsPrefix}-base-loading__container-layer-right`}
-                    >
-                      <svg
-                        class={`${clsPrefix}-base-loading__svg`}
-                        viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ color: stroke }}
+                        <svg
+                          class={`${clsPrefix}-base-loading__svg`}
+                          viewBox={`0 0 ${2 * scaledRadius} ${
+                            2 * scaledRadius
+                          }`}
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ color: stroke }}
+                        >
+                          <circle
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width={strokeWidth}
+                            stroke-linecap="round"
+                            cx={scaledRadius}
+                            cy={scaledRadius}
+                            r={radius - strokeWidth / 2}
+                            stroke-dasharray={4.91 * radius}
+                            stroke-dashoffset={2.46 * radius}
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        class={`${clsPrefix}-base-loading__container-layer-right`}
                       >
-                        <circle
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width={strokeWidth}
-                          stroke-linecap="round"
-                          cx={scaledRadius}
-                          cy={scaledRadius}
-                          r={radius - strokeWidth / 2}
-                          stroke-dasharray={4.91 * radius}
-                          stroke-dashoffset={2.46 * radius}
-                        />
-                      </svg>
+                        <svg
+                          class={`${clsPrefix}-base-loading__svg`}
+                          viewBox={`0 0 ${2 * scaledRadius} ${
+                            2 * scaledRadius
+                          }`}
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ color: stroke }}
+                        >
+                          <circle
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width={strokeWidth}
+                            stroke-linecap="round"
+                            cx={scaledRadius}
+                            cy={scaledRadius}
+                            r={radius - strokeWidth / 2}
+                            stroke-dasharray={4.91 * radius}
+                            stroke-dashoffset={2.46 * radius}
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>

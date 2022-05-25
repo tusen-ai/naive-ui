@@ -11,11 +11,18 @@ import {
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
-import { color2Class, createKey, getTitleAttribute } from '../../_utils'
+import {
+  color2Class,
+  createKey,
+  getTitleAttribute,
+  isSlotEmpty,
+  resolveSlot
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
@@ -42,8 +49,9 @@ export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
 export default defineComponent({
   name: 'Badge',
   props: badgeProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+  setup (props, { slots }) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Badge',
       '-badge',
@@ -63,13 +71,16 @@ export default defineComponent({
       return (
         props.show &&
         (props.dot ||
-          (props.value !== undefined && !(!props.showZero && props.value <= 0)))
+          (props.value !== undefined &&
+            !(!props.showZero && props.value <= 0)) ||
+          !isSlotEmpty(slots.value))
       )
     })
     onMounted(() => {
       if (showBadgeRef.value) appearedRef.value = true
     })
 
+    const rtlEnabledRef = useRtl('Badge', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { type, color: propColor } = props
       const {
@@ -106,6 +117,7 @@ export default defineComponent({
       : undefined
 
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       appeared: appearedRef,
       showBadge: showBadgeRef,
@@ -124,6 +136,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-badge`,
+          this.rtlEnabled && `${mergedClsPrefix}-badge--rtl`,
           themeClass,
           {
             [`${mergedClsPrefix}-badge--dot`]: this.dot,
@@ -145,14 +158,16 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-badge-sup`}
                   title={getTitleAttribute(this.value)}
                 >
-                  {!this.dot ? (
-                    <NBaseSlotMachine
-                      clsPrefix={mergedClsPrefix}
-                      appeared={this.appeared}
-                      max={this.max}
-                      value={this.value}
-                    />
-                  ) : null}
+                  {resolveSlot($slots.value, () => [
+                    !this.dot ? (
+                      <NBaseSlotMachine
+                        clsPrefix={mergedClsPrefix}
+                        appeared={this.appeared}
+                        max={this.max}
+                        value={this.value}
+                      />
+                    ) : null
+                  ])}
                   {this.processing ? (
                     <NBaseWave clsPrefix={mergedClsPrefix} />
                   ) : null}

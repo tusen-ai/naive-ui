@@ -128,7 +128,7 @@ describe('n-steps', () => {
     expect(wrapper.find('.n-icon').text()).toBe('error')
   })
 
-  it("should show ErrorIcon with 'error' status", () => {
+  it('should show ErrorIcon with `error` status', () => {
     const wrapper = mount(NSteps, {
       slots: {
         default: () => h(NStep, { internalIndex: 1, status: 'error' })
@@ -136,5 +136,29 @@ describe('n-steps', () => {
     })
 
     expect(wrapper.findComponent(ErrorIcon).exists()).toBe(true)
+  })
+
+  it('step should work with `icon` slot', () => {
+    const wrapper = mount(NSteps, {
+      props: {
+        current: 1
+      },
+      slots: {
+        default: () =>
+          h(
+            NStep,
+            {
+              title: 'test',
+              description: 'test'
+            },
+            {
+              icon: () => h(NIcon, null, { default: () => 'icon' })
+            }
+          )
+      }
+    })
+
+    expect(wrapper.find('.n-icon').exists()).toBe(true)
+    expect(wrapper.find('.n-icon').text()).toBe('icon')
   })
 })
