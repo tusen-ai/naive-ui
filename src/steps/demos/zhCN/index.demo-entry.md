@@ -12,6 +12,7 @@ size.vue
 vertical.vue
 content.vue
 custom-icon.vue
+v-model.vue
 vertical-debug.vue
 ```
 
