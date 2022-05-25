@@ -45,7 +45,9 @@ const stepsProps = {
     type: String as PropType<'small' | 'medium'>,
     default: 'medium'
   },
-  vertical: Boolean
+  vertical: Boolean,
+  'onUpdate:current': Function as PropType<(current: number) => void>,
+  onUpdateCurrent: Function as PropType<(current: number) => void>
 }
 
 export interface StepsInjection {

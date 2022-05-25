@@ -12,6 +12,7 @@ import {
 } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import {
+  call,
   createKey,
   resolveSlot,
   resolveWrappedSlot,
@@ -120,6 +121,17 @@ export default defineComponent({
         stepsProps
       )
       : undefined
+
+    const handleStepClick = (): void => {
+      const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } =
+        stepsProps
+      if (onUpdateCurrent) {
+        call(onUpdateCurrent, props.internalIndex)
+      }
+      if (_onUpdateCurrent) {
+        call(_onUpdateCurrent, props.internalIndex)
+      }
+    }
     return {
       stepsSlots,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -127,11 +139,12 @@ export default defineComponent({
       mergedStatus: mergedStatusRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      handleStepClick
     }
   },
   render () {
-    const { mergedClsPrefix, onRender } = this
+    const { mergedClsPrefix, onRender, handleStepClick } = this
     const descriptionNode = resolveWrappedSlot(
       this.$slots.default,
       (children) => {
@@ -156,6 +169,7 @@ export default defineComponent({
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
         ]}
         style={this.cssVars as CSSProperties}
+        onClick={handleStepClick}
       >
         <div class={`${mergedClsPrefix}-step-indicator`}>
           <div class={`${mergedClsPrefix}-step-indicator-slot`}>
