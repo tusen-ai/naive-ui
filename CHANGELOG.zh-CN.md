@@ -10,6 +10,7 @@
 - 修复键盘操作在特定的老旧浏览器无法使用
 - 修复 `n-tabs` 的 `justify-content` 为 `'start'`、 `'end'` 和 `'center'` 时缺少 padding
 - 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
+- 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 
 ### Feats
 

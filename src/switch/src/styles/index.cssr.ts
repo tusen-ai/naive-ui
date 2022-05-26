@@ -133,6 +133,7 @@ export default cB('switch', `
     cursor: pointer;
     position: relative;
     transition:
+      opacity .3s var(--n-bezier),
       background .3s var(--n-bezier),
       box-shadow .3s var(--n-bezier);
     background-color: var(--n-rail-color);

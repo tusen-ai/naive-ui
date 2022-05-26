@@ -10,6 +10,7 @@
 - Fix keyboard operation doesn't work in some specific old browsers.
 - Fix `n-tabs` lacks tab padding when `justify-content` is `'start'`, `'end'` or `'center'`.
 - Fix `n-tabs` doesn't update bar's position after `justify-content` is updated.
+- Fix `n-switch` has no transition effect when toggle `disabled`.
 
 ### Feats
 
