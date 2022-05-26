@@ -328,7 +328,8 @@ const uploadProps = {
     default: true
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
-  inputProps: Object as PropType<InputHTMLAttributes>
+  inputProps: Object as PropType<InputHTMLAttributes>,
+  triggerStyle: [String, Object] as PropType<CSSProperties | string>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -619,7 +620,8 @@ export default defineComponent({
       showRetryButtonRef: toRef(props, 'showRetryButton'),
       onRemoveRef: toRef(props, 'onRemove'),
       onDownloadRef: toRef(props, 'onDownload'),
-      mergedFileListRef: mergedFileListRef,
+      mergedFileListRef,
+      triggerStyleRef: toRef(props, 'triggerStyle'),
       XhrMap,
       submit,
       doChange,

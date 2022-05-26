@@ -89,6 +89,7 @@ export interface UploadInjection {
   themeClassRef: undefined | Ref<string>
   mergedDirectoryDndRef: Ref<boolean>
   acceptRef: Ref<string | undefined>
+  triggerStyleRef: Ref<CSSProperties | string | undefined>
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
