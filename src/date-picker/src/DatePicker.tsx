@@ -477,7 +477,7 @@ export default defineComponent({
       uncontrolledShowRef.value = show
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
+      if (e.key === 'Escape') {
         closeCalendar({
           returnFocus: true
         })

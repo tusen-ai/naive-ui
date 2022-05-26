@@ -394,7 +394,7 @@ export default defineComponent({
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (!props.internalTrapFocus) return
-      if (e.code === 'Escape') {
+      if (e.key === 'Escape') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)

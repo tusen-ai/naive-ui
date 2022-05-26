@@ -7,6 +7,7 @@
 - Fix `n-dropdown`'s incorrect render arrow when props `show-arrow: true` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 - Fix `n-global-style` doesn't clear body element's padding and margin.
 - Fix `n-modal` won't clear document body's overflow style if it's unmounted when it is shown, closes [#3015](https://github.com/TuSimple/naive-ui/issues/3015).
+- Fix keyboard operation doesn't work in some specific old browsers.
 
 ### Feats
 

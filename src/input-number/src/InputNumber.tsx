@@ -411,7 +411,7 @@ export default defineComponent({
       doMinus()
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      if (e.key === 'Enter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
           // which means not activated
@@ -421,14 +421,14 @@ export default defineComponent({
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
-      } else if (e.code === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp') {
         if (props.keyboard.ArrowUp === false) return
         e.preventDefault()
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doAdd()
         }
-      } else if (e.code === 'ArrowDown') {
+      } else if (e.key === 'ArrowDown') {
         if (props.keyboard.ArrowDown === false) return
         e.preventDefault()
         const value = deriveValueFromDisplayedValue()
