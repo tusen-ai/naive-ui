@@ -12,6 +12,7 @@ describe('n-collapse', () => {
 
     await wrapper.setProps({ show: false })
     expect(wrapper.find('.n-collapse-transition').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `default` slot', async () => {
@@ -20,5 +21,6 @@ describe('n-collapse', () => {
     })
     expect(wrapper.find('.n-collapse-transition').exists()).toBe(true)
     expect(wrapper.find('.n-collapse-transition').text()).toBe('test')
+    wrapper.unmount()
   })
 })
