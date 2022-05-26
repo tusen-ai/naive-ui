@@ -38,6 +38,8 @@ export default defineComponent({
         if (styleApplied || !body.hasAttribute('n-styled')) {
           style.setProperty('-webkit-text-size-adjust', '100%')
           style.setProperty('-webkit-tap-highlight-color', 'transparent')
+          style.padding = '0'
+          style.margin = '0'
           style.backgroundColor = bodyColor
           style.color = textColor2
           style.fontSize = fontSize

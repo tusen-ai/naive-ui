@@ -5,7 +5,9 @@
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
 - 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
-- Fix `e.code` in keyboard events, now using `e.key` for better compatibility
+- 修复 `n-global-style` 没有清空 body 的 padding 和 margin
+- 修复 `n-modal` 在显示时被写在不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
+- 修复键盘操作在特定的老旧浏览器无法使用
 
 ### Feats
 
