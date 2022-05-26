@@ -147,6 +147,14 @@ const selectProps = {
     type: Boolean,
     default: true
   },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   renderLabel: Function as PropType<RenderLabel>,
   renderOption: Function as PropType<RenderOption>,
   renderTag: Function as PropType<RenderTag>,
@@ -384,13 +392,20 @@ export default defineComponent({
       if (remote) {
         const { value: memoValOptMap } = memoValOptMapRef
         if (multiple) {
+          const { valueField } = props
           selectedOptionsRef.value?.forEach((option) => {
-            memoValOptMap.set(option.value, option)
+            memoValOptMap.set(
+              option[valueField] as SelectOption['value'],
+              option
+            )
           })
         } else {
           const option = selectedOptionRef.value
           if (option) {
-            memoValOptMap.set(option.value, option)
+            memoValOptMap.set(
+              option[props.valueField] as SelectOption['value'],
+              option
+            )
           }
         }
       }
@@ -502,7 +517,7 @@ export default defineComponent({
     }
     function handleToggleByOption (option: SelectOption): void {
       if (mergedDisabledRef.value) return
-      const { tag, remote, clearFilterAfterSelect } = props
+      const { tag, remote, clearFilterAfterSelect, valueField } = props
       if (tag && !remote) {
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
@@ -512,30 +527,39 @@ export default defineComponent({
         }
       }
       if (remote) {
-        memoValOptMapRef.value.set(option.value, option)
+        memoValOptMapRef.value.set(
+          option[valueField] as SelectOption['value'],
+          option
+        )
       }
       if (props.multiple) {
         const changedValue = createClearedMultipleSelectValue(
           mergedValueRef.value
         )
-        const index = changedValue.findIndex((value) => value === option.value)
+        const index = changedValue.findIndex(
+          (value) => value === (option[valueField] as SelectOption['value'])
+        )
         if (~index) {
           changedValue.splice(index, 1)
           if (tag && !remote) {
-            const createdOptionIndex = getCreatedOptionIndex(option.value)
+            const createdOptionIndex = getCreatedOptionIndex(
+              option[valueField] as SelectOption['value']
+            )
             if (~createdOptionIndex) {
               createdOptionsRef.value.splice(createdOptionIndex, 1)
               if (clearFilterAfterSelect) patternRef.value = ''
             }
           }
         } else {
-          changedValue.push(option.value)
+          changedValue.push(option[valueField] as SelectOption['value'])
           if (clearFilterAfterSelect) patternRef.value = ''
         }
         doUpdateValue(changedValue, getMergedOptions(changedValue))
       } else {
         if (tag && !remote) {
-          const createdOptionIndex = getCreatedOptionIndex(option.value)
+          const createdOptionIndex = getCreatedOptionIndex(
+            option[valueField] as SelectOption['value']
+          )
           if (~createdOptionIndex) {
             createdOptionsRef.value = [
               createdOptionsRef.value[createdOptionIndex]
@@ -546,13 +570,15 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(option.value, option)
+        doUpdateValue(option[valueField] as SelectOption['value'], option)
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
       const createdOptions = createdOptionsRef.value
       return createdOptions.findIndex(
-        (createdOption) => createdOption.value === optionValue
+        (createdOption) =>
+          (createdOption[props.valueField] as SelectOption['value']) ===
+          optionValue
       )
     }
     function handlePatternInput (e: InputEvent): void {
@@ -569,12 +595,13 @@ export default defineComponent({
           return
         }
         const optionBeingCreated = props.onCreate(value)
+        const { valueField } = props
         if (
           compitableOptionsRef.value.some(
-            (option) => option.value === optionBeingCreated.value
+            (option) => option[valueField] === optionBeingCreated[valueField]
           ) ||
           createdOptionsRef.value.some(
-            (option) => option.value === optionBeingCreated.value
+            (option) => option[valueField] === optionBeingCreated[valueField]
           )
         ) {
           beingCreatedOptionsRef.value = []
@@ -628,7 +655,9 @@ export default defineComponent({
               if (props.tag && activeWithoutMenuOpenRef.value) {
                 const beingCreatedOption = beingCreatedOptionsRef.value[0]
                 if (beingCreatedOption) {
-                  const optionValue = beingCreatedOption.value
+                  const optionValue = beingCreatedOption[
+                    props.valueField
+                  ] as SelectOption['value']
                   const { value: mergedValue } = mergedValueRef
                   if (props.multiple) {
                     if (
@@ -849,6 +878,8 @@ export default defineComponent({
                               ]}
                               clsPrefix={this.mergedClsPrefix}
                               focusable
+                              labelField={this.labelField}
+                              valueField={this.valueField}
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}
                               themeOverrides={

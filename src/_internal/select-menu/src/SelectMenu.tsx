@@ -88,6 +88,14 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    labelField: {
+      type: String,
+      default: 'label'
+    },
+    valueField: {
+      type: String,
+      default: 'value'
+    },
     loading: Boolean,
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
@@ -311,7 +319,9 @@ export default defineComponent({
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
       renderOptionRef: toRef(props, 'renderOption'),
-      pendingTmNodeRef: pendingNodeRef
+      pendingTmNodeRef: pendingNodeRef,
+      labelFieldRef: toRef(props, 'labelField'),
+      valueFieldRef: toRef(props, 'valueField')
     })
     provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {
