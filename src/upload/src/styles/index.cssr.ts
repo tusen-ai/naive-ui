@@ -43,6 +43,7 @@ export default c([
     box-sizing: border-box;
     opacity: 1;
     transition: opacity .3s var(--n-bezier);
+    width: 100%;
   `, [
     c('+', [
       cB('upload-file-list', 'margin-top: 8px;')
