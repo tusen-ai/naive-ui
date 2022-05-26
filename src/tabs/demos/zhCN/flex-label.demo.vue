@@ -1,7 +1,7 @@
 <markdown>
 # Flex 布局的标签
 
-只对 `line` 类型的 Tabs 生效。
+只对 `'line'` 和 `'bar'` 类型的 Tabs 生效。
 </markdown>
 
 <template>

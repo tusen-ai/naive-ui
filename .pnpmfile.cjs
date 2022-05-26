@@ -1,3 +1,8 @@
+// We will lock vue version if there's regresion
+const lockVueVersion = false
+
+const vueVersion = '3.2.36'
+
 const isSameVersionVuePackage = (pkgName) =>
   [
     'vue',
@@ -13,14 +18,14 @@ const isSameVersionVuePackage = (pkgName) =>
 
 function readPackage(pkg) {
   if (isSameVersionVuePackage(pkg.name)) {
-    pkg.version = '3.2.33'
+    pkg.version = vueVersion
   }
 
   ;['dependencies', 'peerDependencies'].forEach((depsType) => {
     const deps = { ...pkg[depsType] }
     for (dep in pkg[depsType]) {
       if (isSameVersionVuePackage(dep)) {
-        deps[dep] = '3.2.33'
+        deps[dep] = vueVersion
       }
     }
     pkg[depsType] = deps
@@ -29,8 +34,10 @@ function readPackage(pkg) {
   return pkg
 }
 
-module.exports = {
-  hooks: {
-    readPackage
-  }
-}
+module.exports = lockVueVersion
+  ? {
+      hooks: {
+        readPackage
+      }
+    }
+  : {}

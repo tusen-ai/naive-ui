@@ -237,7 +237,7 @@ export default defineComponent({
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Backspace' && !isCompositingRef.value) {
+      if (e.key === 'Backspace' && !isCompositingRef.value) {
         if (!props.pattern.length) {
           const { selectedOptions } = props
           if (selectedOptions?.length) {

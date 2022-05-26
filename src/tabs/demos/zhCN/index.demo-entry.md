@@ -38,7 +38,7 @@ animationx-debug.vue
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |
-| justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式 |  |
+| justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式，只对 `'line'` 和 `'bar'` 类型生效 | `space-*` NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
 | pane-class | `string` | `undefined` | 面板的类名 |  |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |

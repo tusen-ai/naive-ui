@@ -416,7 +416,7 @@ export default defineComponent({
       })
     }
     function handleMenuKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Escape':
           closePanel({
             returnFocus: true

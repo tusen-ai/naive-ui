@@ -6,10 +6,18 @@
 - Fix `n-watermark` not working when provided `cls-prefix`
 - Fix `n-dropdown`'s incorrect render arrow when props `show-arrow: true` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 - Fix `n-upload` n-upload-trigger not expanded to full width
+- Fix `n-global-style` doesn't clear body element's padding and margin.
+- Fix `n-modal` won't clear document body's overflow style if it's unmounted when it is shown, closes [#3015](https://github.com/TuSimple/naive-ui/issues/3015).
+- Fix keyboard operation doesn't work in some specific old browsers.
+- Fix `n-tabs` lacks tab padding when `justify-content` is `'start'`, `'end'` or `'center'`.
+- Fix `n-tabs` doesn't update bar's position after `justify-content` is updated.
+- Fix `n-switch` has no transition effect when toggle `disabled`.
 
 ### Feats
 
 - `n-input-number` adds `button-placement` prop.
+- `n-select` adds `label-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
+- `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 
 ## 2.29.0
 
