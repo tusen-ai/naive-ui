@@ -8,6 +8,8 @@
 - 修复 `n-global-style` 没有清空 body 的 padding 和 margin
 - 修复 `n-modal` 在显示时被写在不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
 - 修复键盘操作在特定的老旧浏览器无法使用
+- 修复 `n-tabs` 的 `justify-content` 为 `'start'`、 `'end'` 和 `'center'` 时缺少 padding
+- 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
 
 ### Feats
 
