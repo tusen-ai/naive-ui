@@ -109,7 +109,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     }
   }
   function handlePanelKeyDown (e: KeyboardEvent): void {
-    if (e.code === 'Tab' && e.target === selfRef.value && keyboardState.shift) {
+    if (e.key === 'Tab' && e.target === selfRef.value && keyboardState.shift) {
       e.preventDefault()
       doTabOut()
     }

@@ -5,7 +5,7 @@ import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.c
 export default c([
   cB('upload', 'width: 100%;', [
     cM('dragger-inside', [
-      cE('trigger', `
+      cB('upload-trigger', `
         display: block;
       `)
     ]),

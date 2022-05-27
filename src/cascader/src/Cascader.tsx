@@ -606,12 +606,11 @@ export default defineComponent({
     }
     function handleKeyUp (e: KeyboardEvent): void {
       if (happensIn(e, 'action')) return
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
           if (props.filterable) return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
-        case 'NumpadEnter':
           if (!mergedShowRef.value) {
             openMenu()
           } else {
@@ -749,8 +748,8 @@ export default defineComponent({
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
         case 'ArrowDown':
         case 'ArrowUp':
           if (props.filterable && mergedShowRef.value) {

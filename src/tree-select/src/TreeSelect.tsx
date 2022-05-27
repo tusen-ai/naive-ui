@@ -532,7 +532,7 @@ export default defineComponent({
       }
     }
     function handleKeyup (e: KeyboardEvent): void {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      if (e.key === 'Enter') {
         if (mergedShowRef.value) {
           treeHandleKeyup(e)
           if (!props.multiple) {
@@ -543,13 +543,13 @@ export default defineComponent({
           openMenu()
         }
         e.preventDefault()
-      } else if (e.code === 'Escape') {
+      } else if (e.key === 'Escape') {
         closeMenu()
         focusSelection()
       } else {
         if (mergedShowRef.value) {
           treeHandleKeyup(e)
-        } else if (e.code === 'ArrowDown') {
+        } else if (e.key === 'ArrowDown') {
           openMenu()
         }
       }

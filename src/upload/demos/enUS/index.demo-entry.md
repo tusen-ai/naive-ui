@@ -53,6 +53,7 @@ download.vue
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |  |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |  |
 | show-trigger | `boolean` | `true` | Show upload trigger. | 2.21.5 |
+| trigger-style | `Object \| string` | `undefined` | Style of trigger area. | NEXT_VERSION |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
