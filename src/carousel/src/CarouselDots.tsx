@@ -36,10 +36,9 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NCarousel = inject(carouselMethodsInjectionKey, null)!
     function handleKeydown (e: KeyboardEvent, current: number): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
-        case 'Space':
+        case ' ':
           NCarousel.to(current)
           return
       }

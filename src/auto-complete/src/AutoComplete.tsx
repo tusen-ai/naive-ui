@@ -208,9 +208,8 @@ export default defineComponent({
       }, 0)
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!isComposingRef.value) {
             const pendingOptionTmNode = menuInstRef.value?.getPendingTmNode()
             if (pendingOptionTmNode) {

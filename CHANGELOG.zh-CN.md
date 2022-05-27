@@ -5,11 +5,21 @@
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
 - 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
+- 修复 `n-upload-dragger` 没有占据满宽度
+- 修复 `n-global-style` 没有清空 body 的 padding 和 margin
+- 修复 `n-modal` 在显示时被写在不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
+- 修复键盘操作在特定的老旧浏览器无法使用
+- 修复 `n-tabs` 的 `justify-content` 为 `'start'`、 `'end'` 和 `'center'` 时缺少 padding
+- 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
+- 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 
 ### Feats
 
 - `n-input-number` 新增 `button-placement` 属性
 - `n-slider` 新增 `identity` 插槽
+- `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- `n-upload` 新增 `trigger-style` 属性
 
 ## 2.29.0
 

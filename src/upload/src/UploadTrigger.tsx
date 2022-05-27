@@ -29,7 +29,8 @@ export default defineComponent({
       openOpenFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      mergedDirectoryDndRef
+      mergedDirectoryDndRef,
+      triggerStyleRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -98,6 +99,7 @@ export default defineComponent({
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-trigger--image-card`
           ]}
+          style={triggerStyleRef.value}
           onClick={handleTriggerClick}
           onDrop={handleTriggerDrop}
           onDragover={handleTriggerDragOver}

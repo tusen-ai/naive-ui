@@ -156,7 +156,7 @@ export default defineComponent({
     }
     function handleKeyup (e: KeyboardEvent): void {
       if (props.loading || mergedDisabledRef.value) return
-      if (e.code === 'Space') {
+      if (e.key === ' ') {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
         } else {
@@ -167,7 +167,7 @@ export default defineComponent({
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (props.loading || mergedDisabledRef.value) return
-      if (e.code === 'Space') {
+      if (e.key === ' ') {
         e.preventDefault()
         pressedRef.value = true
       }

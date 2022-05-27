@@ -79,7 +79,7 @@ export default defineComponent({
     }
 
     function handleKeydown (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'ArrowLeft':
           props.onPrev?.()
           break
