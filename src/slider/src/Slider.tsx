@@ -400,7 +400,7 @@ export default defineComponent({
     function handleRailKeyDown (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
       const { vertical, reverse } = props
-      switch (e.code) {
+      switch (e.key) {
         case 'ArrowUp':
           e.preventDefault()
           handleStepValue(vertical && reverse ? -1 : 1)

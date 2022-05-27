@@ -1,5 +1,5 @@
 <markdown>
-# Show / hide Label
+# Show / hide label
 
 If `show-label` will default to `true` if not set and inherit `n-form`'s `show-label`.
 </markdown>

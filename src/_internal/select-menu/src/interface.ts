@@ -43,6 +43,8 @@ export interface InternalSelectMenuInjection {
   valueRef: Ref<string | number | Array<string | number> | null>
   renderLabelRef: Ref<RenderLabel | undefined>
   renderOptionRef: Ref<RenderOption | undefined>
+  labelFieldRef: Ref<string>
+  valueFieldRef: Ref<string>
 }
 
 export interface InternalExposedProps {

@@ -1,7 +1,7 @@
 <markdown>
 # Flex tabs
 
-Only works with `line` typed tabs.
+Only works with `'line'` or `'bar'` typed tabs.
 </markdown>
 
 <template>

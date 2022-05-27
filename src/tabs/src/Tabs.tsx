@@ -285,10 +285,20 @@ export default defineComponent({
     }
 
     let firstTimeUpdatePosition = true
+    function updateBarPositionInstantly (): void {
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
+      const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
+      barEl.classList.add(disableTransitionClassName)
+      updateCurrentBarStyle()
+      // here we don't need to force layout after update bar style
+      // since deriveScrollShadow will force layout
+      barEl.classList.remove(disableTransitionClassName)
+    }
+
     let memorizedWidth = 0
-    const handleNavResize = throttle(function handleNavResize (
-      entry: ResizeObserverEntry
-    ) {
+    function _handleNavResize (entry: ResizeObserverEntry): void {
       if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
         return
       }
@@ -297,25 +307,30 @@ export default defineComponent({
       }
       memorizedWidth = entry.contentRect.width
       const { type } = props
-      if (
-        (type === 'line' || type === 'bar') &&
-        (firstTimeUpdatePosition || props.justifyContent)
-      ) {
-        const { value: barEl } = barElRef
-        if (!barEl) return
-        if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
-        const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
-        barEl.classList.add(disableTransitionClassName)
-        updateCurrentBarStyle()
-        // here we don't need to force layout after update bar style
-        // since deriveScrollShadow will force layout
-        barEl.classList.remove(disableTransitionClassName)
+      if (type === 'line' || type === 'bar') {
+        if (
+          firstTimeUpdatePosition ||
+          props.justifyContent?.startsWith('space')
+        ) {
+          updateBarPositionInstantly()
+        }
       }
       if (type !== 'segment') {
         deriveScrollShadow(xScrollInstRef.value?.$el)
       }
-    },
-    64)
+    }
+    const handleNavResize = throttle(_handleNavResize, 64)
+    watch(
+      () => props.justifyContent,
+      () => {
+        void nextTick(() => {
+          const { type } = props
+          if (type === 'line' || type === 'bar') {
+            updateBarPositionInstantly()
+          }
+        })
+      }
+    )
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize (entry: ResizeObserverEntry): void {
@@ -631,7 +646,13 @@ export default defineComponent({
                                           {...tabPaneVNode.props}
                                           internalCreatedByPane={true}
                                           internalLeftPadded={
-                                            index !== 0 && !mergedJustifyContent
+                                            index !== 0 &&
+                                            (!mergedJustifyContent ||
+                                              mergedJustifyContent ===
+                                                'center' ||
+                                              mergedJustifyContent ===
+                                                'start' ||
+                                              mergedJustifyContent === 'end')
                                           }
                                         >
                                           {tabPaneVNode.children

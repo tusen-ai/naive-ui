@@ -35,7 +35,7 @@ tag-input.vue
 ### Select Props
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as the select trigger element. Setting it to `false` will also disable `virtual-scroll`. |  |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
@@ -45,6 +45,7 @@ tag-input.vue
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
+| label-field | `string` | `'label'` | `string` | Field name of option label. | NEXT_VERSION |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |  |
@@ -64,6 +65,7 @@ tag-input.vue
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |  |
+| value-field | `string` | `'label'` | `string` | Field name of option value. | NEXT_VERSION |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the selection element is blurred. |  |
 | on-clear | `() => void` | `undefined` | Callback triggered when the selection element is cleared. |  |

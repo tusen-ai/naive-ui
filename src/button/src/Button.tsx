@@ -160,9 +160,8 @@ const Button = defineComponent({
       }
     }
     const handleKeyup = (e: KeyboardEvent): void => {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!props.keyboard) {
             return
           }
@@ -170,9 +169,8 @@ const Button = defineComponent({
       }
     }
     const handleKeydown = (e: KeyboardEvent): void => {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!props.keyboard || props.loading) {
             e.preventDefault()
             return

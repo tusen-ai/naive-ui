@@ -143,9 +143,8 @@ export default defineComponent({
       doChange(tags)
     }
     function handleInputKeyUp (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           handleInputConfirm()
       }
     }

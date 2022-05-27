@@ -280,23 +280,22 @@ export default defineComponent({
       }, 0)
     }
     function handleInputKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         if (inputInstRef.value?.isCompositing) return
         syncAfterCursorMove()
       } else if (
-        e.code === 'ArrowUp' ||
-        e.code === 'ArrowDown' ||
-        e.code === 'Enter' ||
-        e.code === 'NumpadEnter'
+        e.key === 'ArrowUp' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'Enter'
       ) {
         if (inputInstRef.value?.isCompositing) return
         const { value: selectMenuInst } = selectMenuInstRef
         if (showMenuRef.value) {
           if (selectMenuInst) {
             e.preventDefault()
-            if (e.code === 'ArrowUp') {
+            if (e.key === 'ArrowUp') {
               selectMenuInst.prev()
-            } else if (e.code === 'ArrowDown') {
+            } else if (e.key === 'ArrowDown') {
               selectMenuInst.next()
             } else {
               // Enter

@@ -19,6 +19,14 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
   if (typeof document === 'undefined') return
   const el = document.documentElement
   let watchStopHandle: WatchStopHandle | undefined
+  let activated = false
+  const unlock = (): void => {
+    el.style.marginRight = originalMarginRight
+    el.style.overflow = originalOverflow
+    el.style.overflowX = originalOverflowX
+    el.style.overflowY = originalOverflowY
+    lockHtmlScrollRightCompensationRef.value = '0px'
+  }
   onMounted(() => {
     watchStopHandle = watch(
       lockRef,
@@ -38,16 +46,14 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
             el.style.overflowX = 'hidden'
             el.style.overflowY = 'hidden'
           }
+          activated = true
           lockCount++
         } else {
           lockCount--
           if (!lockCount) {
-            el.style.marginRight = originalMarginRight
-            el.style.overflow = originalOverflow
-            el.style.overflowX = originalOverflowX
-            el.style.overflowY = originalOverflowY
-            lockHtmlScrollRightCompensationRef.value = '0px'
+            unlock()
           }
+          activated = false
         }
       },
       {
@@ -57,5 +63,12 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
   })
   onBeforeUnmount(() => {
     watchStopHandle?.()
+    if (activated) {
+      lockCount--
+      if (!lockCount) {
+        unlock()
+      }
+      activated = false
+    }
   })
 }
