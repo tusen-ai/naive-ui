@@ -25,7 +25,7 @@ import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { useIsComposition } from '../../_mixins/use-is-composition'
+import { useOnIsCompositing } from '../../_mixins/use-on-is-compositing'
 
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
@@ -139,7 +139,7 @@ export default defineComponent({
       ? inject(dialogProviderInjectionKey, null)
       : null
 
-    const { isComposition } = useIsComposition()
+    const { isComposition } = useOnIsCompositing()
 
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
