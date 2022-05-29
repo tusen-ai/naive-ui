@@ -22,6 +22,7 @@ export default cB('steps', `
     position: relative;
     display: flex;
     flex: 1;
+    cursor: pointer;
   `, [
     c('&:last-child', [
       cB('step-splitor', 'display: none;')
