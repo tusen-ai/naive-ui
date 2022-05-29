@@ -13,3 +13,26 @@ basic.vue
 ```
 
 ## API
+
+### createDiscreteApi
+
+```ts
+function createDiscreteApi(
+  includes: Array<'message' | 'dialog' | 'notification' | 'loadingBar'>,
+  options: {
+    configProviderProps: Ref<ConfigProviderProps> | ConfigProviderProps
+    messageProviderProps: Ref<MessageProviderProps> | MessageProviderProps
+    dialogProviderProps: Ref<DialogProviderProps> | DialogProviderProps
+    notificationProviderProps: Ref<NotificationProps> | NotificationProps
+    loadingBarProviderProps:
+      | Ref<LoadingBarProviderProps>
+      | LoadingBarProviderProps
+  }
+): {
+  // 只有 includes 中包含的 API 才会被创建
+  message: MessageApi
+  dialog: DialogApi
+  notification: NotificationApi
+  loadingBar: LoadingBarApi
+} {}
+```
