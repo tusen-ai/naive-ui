@@ -17,6 +17,7 @@
 
 ### Feats
 
+- `n-scrollbar` 新增 `always-show` 属性
 - `n-input-number` 新增 `button-placement` 属性
 - `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)

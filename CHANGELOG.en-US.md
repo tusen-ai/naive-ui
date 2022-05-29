@@ -17,6 +17,7 @@
 
 ### Feats
 
+- `n-scrollbar` adds `always-show` prop.
 - `n-input-number` adds `button-placement` prop.
 - `n-select` adds `label-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).

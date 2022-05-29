@@ -88,6 +88,7 @@ const scrollbarProps = {
     default: true
   },
   xScrollable: Boolean,
+  alwaysShow: Boolean,
   useUnifiedContainer: Boolean,
   triggerDisplayManually: Boolean,
   // If container is set, resize observer won't not attached
@@ -244,6 +245,14 @@ const Scrollbar = defineComponent({
         contentWidth !== null &&
         contentWidth > containerWidth
       )
+    })
+    const mergedShowXBarRef = computed(() => {
+      const { alwaysShow } = props
+      return alwaysShow || isShowXBarRef.value
+    })
+    const mergedShowYBarRef = computed(() => {
+      const { alwaysShow } = props
+      return alwaysShow || isShowYBarRef.value
     })
     const mergedContainerRef = computed(() => {
       const { container } = props
@@ -648,8 +657,8 @@ const Scrollbar = defineComponent({
       xBarSizePx: xBarSizePxRef,
       yBarTopPx: yBarTopPxRef,
       xBarLeftPx: xBarLeftPxRef,
-      isShowXBar: isShowXBarRef,
-      isShowYBar: isShowYBarRef,
+      isShowXBar: mergedShowXBarRef,
+      isShowYBar: mergedShowYBarRef,
       isIos,
       handleScroll,
       handleContentResize,

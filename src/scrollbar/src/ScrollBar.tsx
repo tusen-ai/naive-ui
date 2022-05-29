@@ -21,6 +21,7 @@ export interface ScrollbarInst {
 
 const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
+  alwaysShow: Boolean,
   xScrollable: Boolean,
   onScroll: Function as PropType<(e: Event) => void>
 } as const
