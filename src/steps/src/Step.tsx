@@ -122,25 +122,29 @@ export default defineComponent({
       )
       : undefined
 
-    const handleStepClick = (): void => {
+    const handleStepClick = computed((): undefined | (() => void) => {
       const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } =
         stepsProps
-      if (onUpdateCurrent) {
-        call(onUpdateCurrent, props.internalIndex)
-      }
-      if (_onUpdateCurrent) {
-        call(_onUpdateCurrent, props.internalIndex)
-      }
-    }
+      return onUpdateCurrent || _onUpdateCurrent
+        ? () => {
+            if (onUpdateCurrent) {
+              call(onUpdateCurrent, props.internalIndex)
+            }
+            if (_onUpdateCurrent) {
+              call(_onUpdateCurrent, props.internalIndex)
+            }
+          }
+        : undefined
+    })
     return {
       stepsSlots,
       mergedClsPrefix: mergedClsPrefixRef,
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
+      handleStepClick,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender,
-      handleStepClick
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
@@ -164,6 +168,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-step`,
+          handleStepClick && `${mergedClsPrefix}-step--clickable`,
           this.themeClass,
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
