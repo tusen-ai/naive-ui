@@ -14,6 +14,7 @@
 - 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 - 修复 `n-modal` & `n-drawer` 在输入法输入过程中按 Esc 会关闭，关闭 [#2989](https://github.com/TuSimple/naive-ui/issues/2989)
 - 修复 `n-date-picker` 在选择日期时间范围的过程中还可以选择时间，关闭 [#3004](https://github.com/TuSimple/naive-ui/issues/3004)
+- 修复 `n-pagination` 在 `:page-count="0"` 是显示有问题，关闭 [#2970](https://github.com/TuSimple/naive-ui/issues/2970)
 
 ### Feats
 
