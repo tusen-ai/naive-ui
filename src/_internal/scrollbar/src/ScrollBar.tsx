@@ -88,7 +88,10 @@ const scrollbarProps = {
     default: true
   },
   xScrollable: Boolean,
-  alwaysShow: Boolean,
+  trigger: {
+    type: String as PropType<'none' | 'hover'>,
+    default: 'hover'
+  },
   useUnifiedContainer: Boolean,
   triggerDisplayManually: Boolean,
   // If container is set, resize observer won't not attached
@@ -247,12 +250,12 @@ const Scrollbar = defineComponent({
       )
     })
     const mergedShowXBarRef = computed(() => {
-      const { alwaysShow } = props
-      return alwaysShow || isShowXBarRef.value
+      const { trigger } = props
+      return trigger === 'none' || isShowXBarRef.value
     })
     const mergedShowYBarRef = computed(() => {
-      const { alwaysShow } = props
-      return alwaysShow || isShowYBarRef.value
+      const { trigger } = props
+      return trigger === 'none' || isShowYBarRef.value
     })
     const mergedContainerRef = computed(() => {
       const { container } = props
