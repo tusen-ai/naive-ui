@@ -141,7 +141,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function getShortcutValue (
     shortcut: Shortcuts[string]
-  ): number | [number, number] {
+  ): number | [number, number] | readonly [number, number] {
     if (typeof shortcut === 'function') {
       return shortcut()
     }
