@@ -26,6 +26,7 @@ const stepProps = {
   status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
   title: String,
   description: String,
+  disabled: Boolean,
   // index will be filled by parent steps, not user
   internalIndex: {
     type: Number,
@@ -123,6 +124,7 @@ export default defineComponent({
       : undefined
 
     const handleStepClick = computed((): undefined | (() => void) => {
+      if (props.disabled) return undefined
       const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } =
         stepsProps
       return onUpdateCurrent || _onUpdateCurrent
@@ -168,7 +170,9 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-step`,
-          handleStepClick && `${mergedClsPrefix}-step--clickable`,
+          !this.disabled &&
+            handleStepClick &&
+            `${mergedClsPrefix}-step--clickable`,
           this.themeClass,
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`

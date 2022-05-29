@@ -19,6 +19,7 @@
       description="Here come old flat top He come grooving up slowly"
     />
     <n-step
+      disabled
       title="Something"
       description="Something in the way she moves Attracts me like no other lover"
     />

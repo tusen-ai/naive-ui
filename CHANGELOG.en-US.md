@@ -29,6 +29,7 @@
 - `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
 - `n-upload` adds `is-error-state` prop, closes [#2975](https://github.com/TuSimple/naive-ui/issues/2975).
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
+- `n-step` adds `disabled` prop.
 
 ## 2.29.0
 

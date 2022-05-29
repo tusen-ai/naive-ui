@@ -29,11 +29,12 @@ click.vue
 
 ### Step Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| description | `string` | `undefined` | Step description. |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | Step status. |
-| title | `string` | `undefined` | Step title. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| description | `string` | `undefined` | Step description. |  |
+| disabled | `boolean` | `false` | Whether it's clickable. | NEXT_VERSION |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | Step status. |  |
+| title | `string` | `undefined` | Step title. |  |
 
 ### Steps Slots
 

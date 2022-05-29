@@ -30,11 +30,12 @@ vertical-debug.vue
 
 ### Step Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| description | `string` | `undefined` | 节点描述 |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | 节点状态 |
-| title | `string` | `undefined` | 节点标题 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| description | `string` | `undefined` | 节点描述 |  |
+| disabled | `boolean` | `false` | 是否可点击 | NEXT_VERSION |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | 节点状态 |  |
+| title | `string` | `undefined` | 节点标题 |  |
 
 ### Steps Slots
 
