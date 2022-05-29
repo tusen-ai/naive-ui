@@ -632,6 +632,7 @@ export default defineComponent({
       onDownloadRef: toRef(props, 'onDownload'),
       mergedFileListRef,
       triggerStyleRef: toRef(props, 'triggerStyle'),
+      xhrMap,
       submit,
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),

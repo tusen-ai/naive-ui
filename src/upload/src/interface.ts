@@ -74,7 +74,7 @@ export interface UploadInjection {
   mergedFileListRef: Ref<SettledFileInfo[]>
   onRemoveRef: Ref<OnRemove | undefined>
   onDownloadRef: Ref<OnDownload | undefined>
-  doChange: DoChange
+  xhrMap: Map<string, XMLHttpRequest>
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   listTypeRef: Ref<ListType>
@@ -90,6 +90,7 @@ export interface UploadInjection {
   mergedDirectoryDndRef: Ref<boolean>
   acceptRef: Ref<string | undefined>
   triggerStyleRef: Ref<CSSProperties | string | undefined>
+  doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
