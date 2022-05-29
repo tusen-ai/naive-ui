@@ -156,6 +156,7 @@ export const dataTableProps = {
   onUpdateExpandedRowKeys: [Function, Array] as PropType<
   MaybeArray<OnUpdateExpandedRowKeys>
   >,
+  onScroll: Function as PropType<(e: Event) => void>,
   // deprecated
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   onPageSizeChange: [Function, Array] as PropType<

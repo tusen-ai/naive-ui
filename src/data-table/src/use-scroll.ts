@@ -183,7 +183,8 @@ export function useScroll (
       beforeNextFrameOnce(syncScrollState)
     }
   }
-  function handleTableBodyScroll (): void {
+  function handleTableBodyScroll (e: Event): void {
+    props.onScroll?.(e)
     if (scrollPartRef.value === 'body') {
       beforeNextFrameOnce(syncScrollState)
     }
