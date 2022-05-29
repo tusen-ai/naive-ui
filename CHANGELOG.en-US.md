@@ -25,6 +25,7 @@
 - `n-dropdown` adds `node-props` prop.
 - `n-dropdown` adds `render-option` prop.
 - `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
+- `n-upload` adds `is-error-state` prop, closes [#2975](https://github.com/TuSimple/naive-ui/issues/2975).
 
 ## 2.29.0
 

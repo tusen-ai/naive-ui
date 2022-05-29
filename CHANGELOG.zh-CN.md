@@ -25,6 +25,7 @@
 - `n-dropdown` 新增 `node-props` 属性
 - `n-dropdown` 新增 `render-option` 属性
 - `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
+- `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 
 ## 2.29.0
 

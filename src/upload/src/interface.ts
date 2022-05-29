@@ -46,7 +46,8 @@ export type OnDownload = (
 
 export interface UploadInternalInst {
   doChange: DoChange
-  XhrMap: Map<string, XMLHttpRequest>
+  xhrMap: Map<string, XMLHttpRequest>
+  isErrorState: ((xhr: XMLHttpRequest) => boolean) | undefined
   onError: OnError | undefined
   onFinish: OnFinish | undefined
 }
@@ -73,7 +74,6 @@ export interface UploadInjection {
   mergedFileListRef: Ref<SettledFileInfo[]>
   onRemoveRef: Ref<OnRemove | undefined>
   onDownloadRef: Ref<OnDownload | undefined>
-  XhrMap: Map<string, XMLHttpRequest>
   doChange: DoChange
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
