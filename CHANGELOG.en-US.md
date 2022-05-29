@@ -30,6 +30,7 @@
 - `n-upload` adds `is-error-state` prop, closes [#2975](https://github.com/TuSimple/naive-ui/issues/2975).
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
 - `n-step` adds `disabled` prop.
+- `n-date-picker` adds `panel` prop.
 
 ## 2.29.0
 

@@ -30,6 +30,7 @@
 - `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
 - `n-step` 新增 `disabled` 属性
+- `n-date-picker` 新增 `panel` 属性
 
 ## 2.29.0
 

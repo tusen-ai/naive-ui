@@ -41,7 +41,8 @@ const usePanelCommonProps = {
     required: true
   },
   themeClass: String,
-  onRender: Function as PropType<(() => void) | undefined>
+  onRender: Function as PropType<(() => void) | undefined>,
+  panel: Boolean
 } as const
 
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>

@@ -40,6 +40,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--datetime`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onKeydown={this.handlePanelKeyDown}

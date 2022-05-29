@@ -383,11 +383,16 @@ function useDualCalendar (
       changeStartEndTime(dateItem.ts, dateItem.ts, false)
     } else {
       isSelectingRef.value = false
-      if (closeOnSelectRef.value && type === 'daterange') {
-        if (updateValueOnCloseRef.value) {
-          closeCalendar()
-        } else {
-          handleConfirmClick()
+      const { value } = props
+      if (props.panel && Array.isArray(value)) {
+        changeStartEndTime(value[0], value[1], false)
+      } else {
+        if (closeOnSelectRef.value && type === 'daterange') {
+          if (updateValueOnCloseRef.value) {
+            closeCalendar()
+          } else {
+            handleConfirmClick()
+          }
         }
       }
     }
@@ -396,9 +401,9 @@ function useDualCalendar (
     if (isSelectingRef.value) {
       if (mergedIsDateDisabled(dateItem.ts)) return
       if (dateItem.ts >= memorizedStartDateTimeRef.value) {
-        changeStartEndTime(memorizedStartDateTimeRef.value, dateItem.ts, false)
+        changeStartEndTime(memorizedStartDateTimeRef.value, dateItem.ts, true)
       } else {
-        changeStartEndTime(dateItem.ts, memorizedStartDateTimeRef.value, false)
+        changeStartEndTime(dateItem.ts, memorizedStartDateTimeRef.value, true)
       }
     }
   }
@@ -420,9 +425,12 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time], false)
+      panelCommon.doUpdateValue([time, time], props.panel)
     } else if (Array.isArray(props.value)) {
-      panelCommon.doUpdateValue([time, Math.max(props.value[1], time)], false)
+      panelCommon.doUpdateValue(
+        [time, Math.max(props.value[1], time)],
+        props.panel
+      )
     }
   }
   function changeEndDateTime (time: number): void {
@@ -430,21 +438,24 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time], false)
+      panelCommon.doUpdateValue([time, time], props.panel)
     } else if (Array.isArray(props.value)) {
-      panelCommon.doUpdateValue([Math.min(props.value[0], time), time], false)
+      panelCommon.doUpdateValue(
+        [Math.min(props.value[0], time), time],
+        props.panel
+      )
     }
   }
   function changeStartEndTime (
     startTime: number,
     endTime: number,
-    fromShortcut: boolean
+    isPreview: boolean
   ): void {
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
 
-    if (!fromShortcut) {
+    if (!isPreview) {
       let startDefaultTime:
       | { hours: number, minutes: number, seconds: number }
       | undefined
@@ -469,7 +480,7 @@ function useDualCalendar (
       }
     }
 
-    panelCommon.doUpdateValue([startTime, endTime], false)
+    panelCommon.doUpdateValue([startTime, endTime], props.panel && !isPreview)
   }
   function sanitizeValue (datetime: number): number {
     if (type === 'datetimerange') {
@@ -702,7 +713,7 @@ function useDualCalendar (
         : dateItem.ts
     if (noCurrentValue) {
       const newValue = sanitizeValue(itemTs)
-      panelCommon.doUpdateValue([newValue, newValue], false)
+      panelCommon.doUpdateValue([newValue, newValue], props.panel)
       return
     }
     const nextValue: [number, number] = [value[0], value[1]]
@@ -720,7 +731,7 @@ function useDualCalendar (
         otherPartsChanged = true
       }
     }
-    panelCommon.doUpdateValue(nextValue, false)
+    panelCommon.doUpdateValue(nextValue, props.panel)
     switch (type) {
       case 'monthrange':
         panelCommon.disableTransitionOneTick()

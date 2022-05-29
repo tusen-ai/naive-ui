@@ -45,6 +45,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--datetimerange`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onClick={this.resetSelectingStatus}
