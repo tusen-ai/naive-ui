@@ -23,20 +23,22 @@ option-props.vue
 
 ### Dropdown Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| animated | `boolean` | `true` | 弹出弹窗时使用动画 |
-| children-field | `string` | `'key'` | key 的字段名 |
-| inverted | `boolean` | `false` | 使用反转样式 |
-| keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
-| key-field | `string` | `'key'` | key 的字段名 |
-| label-field | `string` | `'label'` | label 的字段名 |
-| options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | 下拉菜单传入的 options |
-| render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |
-| render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 |
-| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |
-| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |
-| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | select 选中时触发的回调函数 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| animated | `boolean` | `true` | 弹出弹窗时使用动画 |  |
+| children-field | `string` | `'key'` | key 的字段名 |  |
+| inverted | `boolean` | `false` | 使用反转样式 |  |
+| keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |  |
+| key-field | `string` | `'key'` | key 的字段名 |  |
+| label-field | `string` | `'label'` | label 的字段名 |  |
+| node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | 批量处理下拉菜单选项的 HTML 属性 | NEXT_VERSION |
+| options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | 下拉菜单传入的 options |  |
+| render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |  |
+| render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单标签渲染 |  |
+| render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 | NEXT_VERSION |
+| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |  |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |  |
+| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | select 选中时触发的回调函数 |  |
 
 对于其他 Props，例如 `placement`，请参考 [Popover Props](popover#Popover-Props)。注意 `raw` 属性不可用。
 

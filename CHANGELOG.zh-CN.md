@@ -20,6 +20,8 @@
 - `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-upload` 新增 `trigger-style` 属性
+- `n-dropdown` 新增 `node-props` 属性
+- `n-dropdown` 新增 `render-option` 属性
 
 ## 2.29.0
 

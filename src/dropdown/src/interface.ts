@@ -1,11 +1,12 @@
 import { TreeNode } from 'treemate'
-import { VNodeChild } from 'vue'
+import { VNode, VNodeChild } from 'vue'
 import type {
   MenuOption,
   MenuGroupOption,
   MenuDividerOption,
   MenuIgnoredOption,
-  MenuRenderOption
+  MenuRenderOption,
+  MenuNodeProps
 } from '../../menu/src/interface'
 
 export type Key = string | number
@@ -60,3 +61,15 @@ export type RenderLabel = (option: DropdownIntersectionOption) => VNodeChild
 export type RenderIconImpl = (option: DropdownMixedOption) => VNodeChild
 
 export type RenderIcon = (option: DropdownIntersectionOption) => VNodeChild
+
+export type RenderOption = (info: {
+  node: VNode
+  option: DropdownOption & DropdownGroupOption
+}) => VNodeChild
+
+export type RenderOptionImpl = (info: {
+  node: VNode
+  option: DropdownOption | DropdownGroupOption
+}) => VNodeChild
+
+export type NodeProps = MenuNodeProps
