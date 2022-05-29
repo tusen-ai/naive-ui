@@ -34,5 +34,6 @@ function createDiscreteApi(
   dialog: DialogApi
   notification: NotificationApi
   loadingBar: LoadingBarApi
+  unmount: () => void
 } {}
 ```
