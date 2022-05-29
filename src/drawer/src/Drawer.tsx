@@ -22,6 +22,7 @@ import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { useOnIsCompositing } from '../../_mixins/use-on-is-compositing'
 
 const drawerProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme>),
@@ -169,10 +170,13 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
+
+    const { isComposition } = useOnIsCompositing()
+
     function handleEsc (): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        doUpdateShow(false)
+        !isComposition.value && doUpdateShow(false)
       }
     }
     function doUpdateShow (show: boolean): void {
