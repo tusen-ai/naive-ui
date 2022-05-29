@@ -17,7 +17,7 @@ import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { keep, call, warnOnce } from '../../_utils'
+import { keep, call, warnOnce, useIsComposing } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
@@ -25,7 +25,6 @@ import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { useOnIsCompositing } from '../../_mixins/use-on-is-compositing'
 
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
@@ -139,7 +138,7 @@ export default defineComponent({
       ? inject(dialogProviderInjectionKey, null)
       : null
 
-    const { isComposition } = useOnIsCompositing()
+    const isComposingRef = useIsComposing()
 
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
@@ -207,7 +206,7 @@ export default defineComponent({
     function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        !isComposition.value && doUpdateShow(false)
+        !isComposingRef.value && doUpdateShow(false)
       }
     }
     provide(modalInjectionKey, {

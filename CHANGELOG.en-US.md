@@ -12,6 +12,7 @@
 - Fix `n-tabs` lacks tab padding when `justify-content` is `'start'`, `'end'` or `'center'`.
 - Fix `n-tabs` doesn't update bar's position after `justify-content` is updated.
 - Fix `n-switch` has no transition effect when toggle `disabled`.
+- Fix `n-modal` & `n-drawer` will be closed on esc pressed during IME input, closes [#2989](https://github.com/TuSimple/naive-ui/issues/2989).
 
 ### Feats
 

@@ -14,7 +14,7 @@ import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, call, warnOnce } from '../../_utils'
+import { formatLength, call, warnOnce, useIsComposing } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { ScrollbarProps } from '../../_internal'
 import { drawerLight, DrawerTheme } from '../styles'
@@ -22,7 +22,6 @@ import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { useOnIsCompositing } from '../../_mixins/use-on-is-compositing'
 
 const drawerProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme>),
@@ -171,12 +170,12 @@ export default defineComponent({
       if (onMaskClick) onMaskClick(e)
     }
 
-    const { isComposition } = useOnIsCompositing()
+    const isComposingRef = useIsComposing()
 
     function handleEsc (): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        !isComposition.value && doUpdateShow(false)
+        !isComposingRef.value && doUpdateShow(false)
       }
     }
     function doUpdateShow (show: boolean): void {
