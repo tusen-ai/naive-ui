@@ -786,6 +786,7 @@ function useDualCalendar (
     startMonthArray: startMonthArrayRef,
     endYearArray: endYearArrayRef,
     endMonthArray: endMonthArrayRef,
+    isSelecting: isSelectingRef,
     handleRangeShortcutMouseenter,
     handleRangeShortcutClick,
     ...panelCommon,

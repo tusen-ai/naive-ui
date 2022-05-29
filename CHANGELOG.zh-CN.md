@@ -13,6 +13,7 @@
 - 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
 - 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 - 修复 `n-modal` & `n-drawer` 在输入法输入过程中按 Esc 会关闭，关闭 [#2989](https://github.com/TuSimple/naive-ui/issues/2989)
+- 修复 `n-date-picker` 在选择日期时间范围的过程中还可以选择时间，关闭 [#3004](https://github.com/TuSimple/naive-ui/issues/3004)
 
 ### Feats
 

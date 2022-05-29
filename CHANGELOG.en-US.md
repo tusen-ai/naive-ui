@@ -13,6 +13,7 @@
 - Fix `n-tabs` doesn't update bar's position after `justify-content` is updated.
 - Fix `n-switch` has no transition effect when toggle `disabled`.
 - Fix `n-modal` & `n-drawer` will be closed on esc pressed during IME input, closes [#2989](https://github.com/TuSimple/naive-ui/issues/2989).
+- Fix `n-date-picker` can select time when is selecting date in date time range picker, closes [#3004](https://github.com/TuSimple/naive-ui/issues/3004).
 
 ### Feats
 
