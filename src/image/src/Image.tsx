@@ -77,7 +77,7 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      groupId: imageGroupHandle?.groupId,
+      groupId: imageGroupHandle?.groupIdRef,
       previewInstRef,
       imageRef,
       imgProps: imgPropsRef,

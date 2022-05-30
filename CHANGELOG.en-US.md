@@ -16,6 +16,7 @@
 - Fix `n-date-picker` can select time when is selecting date in date time range picker, closes [#3004](https://github.com/TuSimple/naive-ui/issues/3004).
 - Fix `n-pagination` has display issue when `:page-count="0"`, closes [#2970](https://github.com/TuSimple/naive-ui/issues/2970).
 - Fix `n-date-picker`'s `shortcuts` will be overrided by `default-time` when `type="datetimerange"`, closes [#3020](https://github.com/TuSimple/naive-ui/issues/3020).
+- Fix `n-image` switch pictures doesn't work in SSR mode.
 
 ### Feats
 
