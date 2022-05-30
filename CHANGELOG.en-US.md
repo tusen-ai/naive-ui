@@ -26,6 +26,7 @@
 - `n-input-number` adds `button-placement` prop.
 - `n-select` adds `label-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
+- `n-select` adds `children-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-upload` adds `trigger-style` prop.
 - `n-dropdown` adds `node-props` prop.
 - `n-dropdown` adds `render-option` prop.

@@ -48,10 +48,10 @@ import {
 import type { InternalSelectionInst } from '../../_internal'
 import { selectLight, SelectTheme } from '../styles'
 import {
-  tmOptions,
   createValOptMap,
   filterOptions,
-  defaultFilter
+  createTmOptions,
+  patternMatched
 } from './utils'
 import type {
   SelectInst,
@@ -65,7 +65,8 @@ import type {
   OnUpdateValueImpl,
   Value,
   Size,
-  ValueAtom
+  ValueAtom,
+  SelectBaseOption
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -101,12 +102,9 @@ const selectProps = {
   },
   remote: Boolean,
   loading: Boolean,
-  filter: {
-    type: Function as PropType<
-    (pattern: string, option: SelectOption) => boolean
-    >,
-    default: defaultFilter
-  },
+  filter: Function as PropType<
+  (pattern: string, option: SelectOption) => boolean
+  >,
   placement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
@@ -116,19 +114,12 @@ const selectProps = {
     default: 'trigger'
   },
   tag: Boolean,
-  onCreate: {
-    type: Function as PropType<(label: string) => SelectOption>,
-    default: (label: string) => ({
-      label: label,
-      value: label
-    })
-  },
+  onCreate: Function as PropType<(label: string) => SelectOption>,
   fallbackOption: {
-    type: [Function, Boolean] as PropType<SelectFallbackOption | false>,
-    default: () => (value: string | number) => ({
-      label: String(value),
-      value
-    })
+    type: [Function, Boolean] as PropType<
+    SelectFallbackOption | false | undefined
+    >,
+    default: undefined
   },
   show: {
     type: Boolean as PropType<boolean | undefined>,
@@ -154,6 +145,10 @@ const selectProps = {
   valueField: {
     type: String,
     default: 'value'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
   },
   renderLabel: Function as PropType<RenderLabel>,
   renderOption: Function as PropType<RenderOption>,
@@ -244,13 +239,22 @@ export default defineComponent({
     )
     const focusedRef = ref(false)
     const patternRef = ref('')
-    const treeMateRef = computed(() =>
-      createTreeMate<SelectOption, SelectGroupOption, SelectIgnoredOption>(
-        filteredOptionsRef.value,
-        tmOptions
+    const treeMateRef = computed(() => {
+      const { valueField, childrenField } = props
+      const options = createTmOptions(valueField, childrenField)
+      return createTreeMate<
+      SelectOption,
+      SelectGroupOption,
+      SelectIgnoredOption
+      >(filteredOptionsRef.value, options)
+    })
+    const valOptMapRef = computed(() =>
+      createValOptMap(
+        localOptionsRef.value,
+        props.valueField,
+        props.childrenField
       )
     )
-    const valOptMapRef = computed(() => createValOptMap(localOptionsRef.value))
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),
@@ -271,7 +275,14 @@ export default defineComponent({
 
     const wrappedFallbackOptionRef = computed(() => {
       const { fallbackOption } = props
-      if (!fallbackOption) return false
+      if (fallbackOption === undefined) {
+        const { labelField, valueField } = props
+        return (value: string | number) => ({
+          [labelField]: String(value),
+          [valueField]: value
+        })
+      }
+      if (fallbackOption === false) return false
       return (value: string | number) => {
         return Object.assign(
           (fallbackOption as SelectFallbackOptionImpl)(value),
@@ -288,6 +299,24 @@ export default defineComponent({
         ) as SelectMixedOption[]
       ).concat(compitableOptionsRef.value)
     })
+    const resolvedFilterRef = computed(() => {
+      const { labelField, valueField } = props
+      return (pattern: string, option: SelectBaseOption): boolean => {
+        if (!option) return false
+        const label = option[labelField]
+        if (typeof label === 'string') {
+          return patternMatched(pattern, label)
+        }
+        const value = option[valueField]
+        if (typeof value === 'string') {
+          return patternMatched(pattern, value)
+        }
+        if (typeof value === 'number') {
+          return patternMatched(pattern, String(value))
+        }
+        return false
+      }
+    })
     const filteredOptionsRef = computed(() => {
       if (props.remote) {
         return compitableOptionsRef.value
@@ -297,8 +326,12 @@ export default defineComponent({
         if (!pattern.length || !props.filterable) {
           return localOptions
         } else {
-          const { filter } = props
-          return filterOptions(localOptions, filter, pattern)
+          return filterOptions(
+            localOptions,
+            resolvedFilterRef.value,
+            pattern,
+            props.childrenField
+          )
         }
       }
     })
@@ -395,7 +428,7 @@ export default defineComponent({
           const { valueField } = props
           selectedOptionsRef.value?.forEach((option) => {
             memoValOptMap.set(
-              option[valueField] as SelectOption['value'],
+              option[valueField] as NonNullable<SelectOption['value']>,
               option
             )
           })
@@ -403,7 +436,7 @@ export default defineComponent({
           const option = selectedOptionRef.value
           if (option) {
             memoValOptMap.set(
-              option[props.valueField] as SelectOption['value'],
+              option[props.valueField] as NonNullable<SelectOption['value']>,
               option
             )
           }
@@ -528,7 +561,7 @@ export default defineComponent({
       }
       if (remote) {
         memoValOptMapRef.value.set(
-          option[valueField] as SelectOption['value'],
+          option[valueField] as NonNullable<SelectOption['value']>,
           option
         )
       }
@@ -537,13 +570,14 @@ export default defineComponent({
           mergedValueRef.value
         )
         const index = changedValue.findIndex(
-          (value) => value === (option[valueField] as SelectOption['value'])
+          (value) =>
+            value === (option[valueField] as NonNullable<SelectOption['value']>)
         )
         if (~index) {
           changedValue.splice(index, 1)
           if (tag && !remote) {
             const createdOptionIndex = getCreatedOptionIndex(
-              option[valueField] as SelectOption['value']
+              option[valueField] as NonNullable<SelectOption['value']>
             )
             if (~createdOptionIndex) {
               createdOptionsRef.value.splice(createdOptionIndex, 1)
@@ -551,14 +585,16 @@ export default defineComponent({
             }
           }
         } else {
-          changedValue.push(option[valueField] as SelectOption['value'])
+          changedValue.push(
+            option[valueField] as NonNullable<SelectOption['value']>
+          )
           if (clearFilterAfterSelect) patternRef.value = ''
         }
         doUpdateValue(changedValue, getMergedOptions(changedValue))
       } else {
         if (tag && !remote) {
           const createdOptionIndex = getCreatedOptionIndex(
-            option[valueField] as SelectOption['value']
+            option[valueField] as NonNullable<SelectOption['value']>
           )
           if (~createdOptionIndex) {
             createdOptionsRef.value = [
@@ -570,15 +606,19 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(option[valueField] as SelectOption['value'], option)
+        doUpdateValue(
+          option[valueField] as NonNullable<SelectOption['value']>,
+          option
+        )
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
       const createdOptions = createdOptionsRef.value
       return createdOptions.findIndex(
         (createdOption) =>
-          (createdOption[props.valueField] as SelectOption['value']) ===
-          optionValue
+          (createdOption[props.valueField] as NonNullable<
+          SelectOption['value']
+          >) === optionValue
       )
     }
     function handlePatternInput (e: InputEvent): void {
@@ -594,7 +634,10 @@ export default defineComponent({
           beingCreatedOptionsRef.value = []
           return
         }
-        const optionBeingCreated = props.onCreate(value)
+        const { onCreate } = props
+        const optionBeingCreated = onCreate
+          ? onCreate(value)
+          : { [props.labelField]: value, [props.valueField]: value }
         const { valueField } = props
         if (
           compitableOptionsRef.value.some(
@@ -657,7 +700,7 @@ export default defineComponent({
                 if (beingCreatedOption) {
                   const optionValue = beingCreatedOption[
                     props.valueField
-                  ] as SelectOption['value']
+                  ] as NonNullable<SelectOption['value']>
                   const { value: mergedValue } = mergedValueRef
                   if (props.multiple) {
                     if (
@@ -812,6 +855,8 @@ export default defineComponent({
                       disabled={this.mergedDisabled}
                       size={this.mergedSize}
                       theme={this.mergedTheme.peers.InternalSelection}
+                      labelField={this.labelField}
+                      valueField={this.valueField}
                       themeOverrides={
                         this.mergedTheme.peerOverrides.InternalSelection
                       }

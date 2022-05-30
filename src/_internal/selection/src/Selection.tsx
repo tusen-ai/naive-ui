@@ -72,6 +72,11 @@ export default defineComponent({
       type: Array as PropType<SelectBaseOption[] | null>,
       default: null
     },
+    labelField: { type: String, default: 'label' },
+    valueField: {
+      type: String,
+      default: 'value'
+    },
     multiple: Boolean,
     filterable: Boolean,
     clearable: Boolean,
@@ -142,13 +147,17 @@ export default defineComponent({
           })
           : props.renderLabel
             ? props.renderLabel(props.selectedOption as never, true)
-            : render(props.selectedOption.label, props.selectedOption, true)
+            : render(
+              props.selectedOption[props.labelField],
+              props.selectedOption,
+              true
+            )
         : props.placeholder
     })
     const labelRef = computed(() => {
       const option = props.selectedOption
       if (!option) return undefined
-      return option.label
+      return option[props.labelField]
     })
     const selectedRef = computed(() => {
       if (props.multiple) {
@@ -559,6 +568,7 @@ export default defineComponent({
     )
     let body: JSX.Element
     if (multiple) {
+      const { labelField } = this
       const createTag = (option: SelectBaseOption): JSX.Element => (
         <div
           class={`${clsPrefix}-base-selection-tag-wrapper`}
@@ -581,7 +591,7 @@ export default defineComponent({
                 default: () =>
                   renderLabel
                     ? renderLabel(option, true)
-                    : render(option.label, option, true)
+                    : render(option[labelField], option, true)
               }}
             </NTag>
           )}

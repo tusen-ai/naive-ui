@@ -15,6 +15,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
+import { createTmOptions } from '../../select/src/utils'
 import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
@@ -25,7 +26,6 @@ import {
   SelectMenuInstance,
   cascaderInjectionKey
 } from './interface'
-import { tmOptions } from '../../select/src/utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',
@@ -107,7 +107,7 @@ export default defineComponent({
       SelectBaseOption,
       SelectGroupOption,
       SelectIgnoredOption
-      >(filteredSelectOptionsRef.value, tmOptions)
+      >(filteredSelectOptionsRef.value, createTmOptions('value', 'children'))
     })
     function handleResize (): void {
       syncSelectMenuPosition()
