@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
 ### Fixes
 
 - Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].

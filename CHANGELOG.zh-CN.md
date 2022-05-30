@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
 ### Fixes
 
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].

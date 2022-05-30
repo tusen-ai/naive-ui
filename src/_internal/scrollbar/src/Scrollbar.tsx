@@ -24,6 +24,7 @@ import type {
 } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
+import { Wrapper } from './Wrapper'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {
@@ -678,6 +679,7 @@ const Scrollbar = defineComponent({
     if (!this.scrollable) return $slots.default?.()
     const createChildren = (): VNode => {
       this.onRender?.()
+      const triggerIsNone = this.trigger === 'none'
       return h(
         'div',
         mergeProps(this.$attrs, {
@@ -739,8 +741,10 @@ const Scrollbar = defineComponent({
             style={this.horizontalRailStyle}
             aria-hidden
           >
-            <Transition name="fade-in-transition">
-              {{
+            {h(
+              (triggerIsNone ? Wrapper : Transition) as any,
+              triggerIsNone ? null : { name: 'fade-in-transition' },
+              {
                 default: () =>
                   this.needYBar && this.isShowYBar && !this.isIos ? (
                     <div
@@ -752,8 +756,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleYScrollMouseDown}
                     />
                   ) : null
-              }}
-            </Transition>
+              }
+            )}
           </div>,
           <div
             ref="xRailRef"
@@ -761,8 +765,10 @@ const Scrollbar = defineComponent({
             style={this.verticalRailStyle}
             aria-hidden
           >
-            <Transition name="fade-in-transition">
-              {{
+            {
+              ((triggerIsNone ? Wrapper : Transition) as any,
+              triggerIsNone ? null : { name: 'fade-in-transition' },
+              {
                 default: () =>
                   this.needXBar && this.isShowXBar && !this.isIos ? (
                     <div
@@ -774,8 +780,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleXScrollMouseDown}
                     />
                   ) : null
-              }}
-            </Transition>
+              })
+            }
           </div>
         ]
       )

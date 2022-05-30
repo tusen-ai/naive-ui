@@ -7,6 +7,7 @@
 ```demo
 basic.vue
 x.vue
+trigger.vue
 ```
 
 ## API
