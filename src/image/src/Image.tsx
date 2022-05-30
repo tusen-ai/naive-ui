@@ -72,7 +72,10 @@ export default defineComponent({
       }
     }
     onMounted(() => {
-      imageRef.value?.setAttribute('data-img', imageGroupHandle?.groupId || '')
+      imageRef.value?.setAttribute(
+        'data-group-id',
+        imageGroupHandle?.groupId || ''
+      )
     })
     watchEffect(() => {
       void props.src

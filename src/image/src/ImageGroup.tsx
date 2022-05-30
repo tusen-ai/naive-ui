@@ -35,7 +35,7 @@ export default defineComponent({
       const container: HTMLElement = vm.proxy.$el.parentElement
       // use dom api since we can't get the correct order before all children are rendered
       const imgs: NodeListOf<HTMLImageElement> = container.querySelectorAll(
-        `[data-img=${groupId}]:not([data-error=true])`
+        `[data-group-id=${groupId}]:not([data-error=true])`
       )
 
       if (!imgs.length) return
