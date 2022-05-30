@@ -7,7 +7,10 @@ import type { ImagePreviewInst } from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
-ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
+ImagePreviewInst & {
+  groupId: string
+  mergedClsPrefixRef: Ref<string>
+}
 >('n-image-group')
 
 const imageGroupProps = imagePreviewSharedProps
@@ -26,12 +29,13 @@ export default defineComponent({
       currentSrc = src
       previewInstRef.value?.setPreviewSrc(src)
     }
+
     function go (step: 1 | -1): void {
       if (!vm?.proxy) return
       const container: HTMLElement = vm.proxy.$el.parentElement
       // use dom api since we can't get the correct order before all children are rendered
       const imgs: NodeListOf<HTMLImageElement> = container.querySelectorAll(
-        `.${groupId}:not([data-error=true])`
+        `[data-img=${groupId}]:not([data-error=true])`
       )
 
       if (!imgs.length) return

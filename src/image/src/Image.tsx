@@ -6,7 +6,8 @@ import {
   PropType,
   toRef,
   watchEffect,
-  ImgHTMLAttributes
+  ImgHTMLAttributes,
+  onMounted
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -70,6 +71,9 @@ export default defineComponent({
         previewInst.toggleShow()
       }
     }
+    onMounted(() => {
+      imageRef.value?.setAttribute('data-img', imageGroupHandle?.groupId || '')
+    })
     watchEffect(() => {
       void props.src
       void props.imgProps?.src
@@ -101,7 +105,7 @@ export default defineComponent({
     const imgNode = (
       <img
         {...imgProps}
-        class={[this.groupId, imgProps.class]}
+        class={imgProps.class}
         ref="imageRef"
         width={this.width || imgProps.width}
         height={this.height || imgProps.height}
