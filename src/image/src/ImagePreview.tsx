@@ -67,6 +67,7 @@ export default defineComponent({
     const showRef = ref(false)
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
+    const imageDisplayModeRef = ref<'full' | 'preview'>('preview')
 
     function syncTransformOrigin (): void {
       const { value: previewWrapper } = previewWrapperRef
@@ -303,6 +304,13 @@ export default defineComponent({
       showRef.value = !showRef.value
       displayedRef.value = true
     }
+    function switchThePictureDisplayMode (): void {
+      imageDisplayModeRef.value =
+        imageDisplayModeRef.value === 'full' ? 'preview' : 'full'
+      offsetX = 0
+      offsetY = 0
+      derivePreviewStyle()
+    }
     const exposedMethods: ImagePreviewInst = {
       setPreviewSrc: (src) => {
         previewSrcRef.value = src
@@ -370,6 +378,7 @@ export default defineComponent({
       show: showRef,
       appear: useIsMounted(),
       displayed: displayedRef,
+      imageDisplayModeRef,
       handleWheel (e: WheelEvent) {
         e.preventDefault()
       },
@@ -391,6 +400,7 @@ export default defineComponent({
       handleSwitchPrev,
       handleSwitchNext,
       withTooltip,
+      switchThePictureDisplayMode,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -486,6 +496,17 @@ export default defineComponent({
                               {withTooltip(
                                 <NBaseIcon
                                   clsPrefix={clsPrefix}
+                                  onClick={this.switchThePictureDisplayMode}
+                                >
+                                  {{
+                                    default: () => <RotateClockwiseIcon />
+                                  }}
+                                </NBaseIcon>,
+                                'tipClockwise'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
                                   onClick={this.zoomOut}
                                 >
                                   {{ default: () => <ZoomOutIcon /> }}
@@ -537,7 +558,11 @@ export default defineComponent({
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
                               onDblclick={this.handlePreviewDblclick}
-                              class={`${clsPrefix}-image-preview`}
+                              class={[
+                                `${clsPrefix}-image-preview`,
+                                this.imageDisplayModeRef === 'full' &&
+                                  `${clsPrefix}-image-preview--full`
+                              ]}
                               key={this.previewSrc}
                               src={this.previewSrc}
                               ref="previewRef"
