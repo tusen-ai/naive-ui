@@ -18,7 +18,7 @@
 - 修复 `n-date-picker` 在选择日期时间范围的过程中还可以选择时间，关闭 [#3004](https://github.com/TuSimple/naive-ui/issues/3004)
 - 修复 `n-pagination` 在 `:page-count="0"` 是显示有问题，关闭 [#2970](https://github.com/TuSimple/naive-ui/issues/2970)
 - 修复 `n-date-picker` 在 `type="datetimerange"` 时 `shortcuts` 会被 `default-time` 覆盖，关闭 [#3020](https://github.com/TuSimple/naive-ui/issues/3020)
-- 修复 `n-image-group` 在 SSR 下无法切换图片的
+- 修复 `n-image-group` 在 SSR 下无法切换图片
 
 ### Feats
 
