@@ -4,5 +4,6 @@ export type {
   DropdownOption,
   DropdownGroupOption,
   DropdownDividerOption,
-  DropdownRenderOption
+  DropdownRenderOption,
+  NodeProps as DropdownNodeProps
 } from './src/interface'

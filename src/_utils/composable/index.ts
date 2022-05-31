@@ -145,3 +145,4 @@ export {
   useLockHtmlScroll,
   lockHtmlScrollRightCompensationRef
 } from './use-lock-html-scroll'
+export { useIsComposing } from './use-is-composing'

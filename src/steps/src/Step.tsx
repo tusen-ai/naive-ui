@@ -12,6 +12,7 @@ import {
 } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import {
+  call,
   createKey,
   resolveSlot,
   resolveWrappedSlot,
@@ -25,6 +26,7 @@ const stepProps = {
   status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
   title: String,
   description: String,
+  disabled: Boolean,
   // index will be filled by parent steps, not user
   internalIndex: {
     type: Number,
@@ -120,18 +122,35 @@ export default defineComponent({
         stepsProps
       )
       : undefined
+
+    const handleStepClick = computed((): undefined | (() => void) => {
+      if (props.disabled) return undefined
+      const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } =
+        stepsProps
+      return onUpdateCurrent || _onUpdateCurrent
+        ? () => {
+            if (onUpdateCurrent) {
+              call(onUpdateCurrent, props.internalIndex)
+            }
+            if (_onUpdateCurrent) {
+              call(_onUpdateCurrent, props.internalIndex)
+            }
+          }
+        : undefined
+    })
     return {
       stepsSlots,
       mergedClsPrefix: mergedClsPrefixRef,
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
+      handleStepClick,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, onRender } = this
+    const { mergedClsPrefix, onRender, handleStepClick } = this
     const descriptionNode = resolveWrappedSlot(
       this.$slots.default,
       (children) => {
@@ -151,11 +170,15 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-step`,
+          !this.disabled &&
+            handleStepClick &&
+            `${mergedClsPrefix}-step--clickable`,
           this.themeClass,
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
         ]}
         style={this.cssVars as CSSProperties}
+        onClick={handleStepClick}
       >
         <div class={`${mergedClsPrefix}-step-indicator`}>
           <div class={`${mergedClsPrefix}-step-indicator-slot`}>

@@ -189,7 +189,10 @@ function useCalendar (
     )
     if (isValid(date)) {
       if (props.value === null) {
-        panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), false)
+        panelCommon.doUpdateValue(
+          getTime(sanitizeValue(Date.now())),
+          props.panel
+        )
       } else if (!Array.isArray(props.value)) {
         const newDateTime = set(props.value, {
           year: getYear(date),
@@ -198,7 +201,7 @@ function useCalendar (
         })
         panelCommon.doUpdateValue(
           getTime(sanitizeValue(getTime(newDateTime))),
-          false
+          props.panel
         )
       }
     } else {
@@ -273,7 +276,7 @@ function useCalendar (
     )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
-      type === 'date' || type === 'year'
+      props.panel || type === 'date' || type === 'year'
     )
     switch (type) {
       case 'date':
@@ -367,7 +370,7 @@ function useCalendar (
   }
   function handleTimePickerChange (value: number | null): void {
     if (value === null) return
-    panelCommon.doUpdateValue(value, false)
+    panelCommon.doUpdateValue(value, props.panel)
   }
   function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
     panelCommon.cachePendingValue()
@@ -378,7 +381,7 @@ function useCalendar (
   function handleSingleShortcutClick (shortcut: Shortcuts[string]): void {
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (typeof shortcutValue !== 'number') return
-    panelCommon.doUpdateValue(shortcutValue, false)
+    panelCommon.doUpdateValue(shortcutValue, props.panel)
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
