@@ -703,7 +703,7 @@ export default defineComponent({
                           default: () => (
                             <div
                               ref={this.setHandleRefs(index)}
-                              class={`${mergedClsPrefix}-slider-handle`}
+                              class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
                               style={this.getHandleStyle(value, index)}
                               onFocus={() => this.handleHandleFocus(index)}
@@ -715,10 +715,10 @@ export default defineComponent({
                                 this.handleHandleMouseLeave(index)
                               }
                             >
-                              {this.$slots.identity?.() || (
+                              {this.$slots.handle?.() || (
                                 <div
-                                  class={`${mergedClsPrefix}-slider-handle-content`}
-                                ></div>
+                                  class={`${mergedClsPrefix}-slider-handle`}
+                                />
                               )}
                             </div>
                           )

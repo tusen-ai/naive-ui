@@ -1,15 +1,15 @@
 <markdown>
 # 自定义标识
 
-可以使用identity插槽自定义标识点。
+可以使用`handle`插槽自定义标识点。
 </markdown>
 
 <template>
   <n-space vertical>
     <n-slider v-model:value="value" :step="10">
-      <template #identity>
-        <n-icon-wrapper :size="24" :border-radius="10">
-          <n-icon :size="18" :component="AirplaneTakeOff16Regular" />
+      <template #handle>
+        <n-icon-wrapper :size="24" :border-radius="12">
+          <n-icon :size="18" :component="AnimalCat24Regular" />
         </n-icon-wrapper>
       </template>
     </n-slider>
@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import AirplaneTakeOff16Regular from '@vicons/fluent/AirplaneTakeOff16Regular'
+import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
 export default defineComponent({
   setup () {
     return {
-      AirplaneTakeOff16Regular,
+      AnimalCat24Regular,
       value: ref(50)
     }
   }
