@@ -22,6 +22,7 @@
 - Fix `n-tabs`'s height transition sometimes not applied when `display-directive="show"` and `:animated="true"`, closes [#3035](https://github.com/TuSimple/naive-ui/issues/3035).
 - Fix `n-select`'s filter font size is a bit small in single select mode.
 - Fix `n-select`'s count tag's popover is too high when overflow tag's count is small.
+- Fix `n-date-picker`'s first time scroll state of items is not aligned when `type="monthrange"`.
 
 ### Feats
 

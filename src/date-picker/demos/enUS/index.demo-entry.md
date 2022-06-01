@@ -27,6 +27,7 @@ update-on-close.vue
 focus.vue
 status.vue
 icon.vue
+panel.vue
 ```
 
 ## API

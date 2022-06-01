@@ -147,8 +147,10 @@ function useCalendar (
     )
   })
   watch(calendarValueRef, (value, oldValue) => {
-    if (!isSameMonth(value, oldValue)) {
-      panelCommon.disableTransitionOneTick()
+    if (type === 'date' || type === 'datetime') {
+      if (!isSameMonth(value, oldValue)) {
+        panelCommon.disableTransitionOneTick()
+      }
     }
   })
   watch(
@@ -241,8 +243,16 @@ function useCalendar (
   }
   function handleNowClick (): void {
     panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), true)
-    calendarValueRef.value = Date.now()
+    const now = Date.now()
+    calendarValueRef.value = now
     panelCommon.doClose(true)
+    if (
+      props.panel &&
+      (type === 'month' || type === 'quarter' || type === 'year')
+    ) {
+      panelCommon.disableTransitionOneTick()
+      justifyColumnsScrollState(now)
+    }
   }
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
@@ -280,7 +290,12 @@ function useCalendar (
     )
     switch (type) {
       case 'date':
+        panelCommon.doClose()
+        break
       case 'year':
+        if (props.panel) {
+          panelCommon.disableTransitionOneTick()
+        }
         panelCommon.doClose()
         break
       case 'month':
@@ -288,6 +303,7 @@ function useCalendar (
         justifyColumnsScrollState(newValue)
         break
       case 'quarter':
+        panelCommon.disableTransitionOneTick()
         justifyColumnsScrollState(newValue)
         break
     }
