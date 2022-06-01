@@ -20,6 +20,7 @@
 - 修复 `n-date-picker` 在 `type="datetimerange"` 时 `shortcuts` 会被 `default-time` 覆盖，关闭 [#3020](https://github.com/TuSimple/naive-ui/issues/3020)
 - 修复 `n-image-group` 在 SSR 下无法切换图片
 - 修复 `n-tabs` 在 `display-directive="show"` 和 `:animated="true"` 的时候动画切换高度有时没有过渡，关闭 [#3035](https://github.com/TuSimple/naive-ui/issues/3035)
+- 修复 `n-select` 在单选时搜索时字体略小
 
 ### Feats
 
