@@ -22,10 +22,12 @@
 
 ### Feats
 
+- 🌟 `n-select` adds `label-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
+- 🌟 `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
+- 🌟 `n-steps` adds `on-update:current` prop.
+- 🌟 `n-date-picker` adds `panel` prop.
 - `n-scrollbar` adds `trigger` prop.
 - `n-input-number` adds `button-placement` prop.
-- `n-select` adds `label-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
-- `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-select` adds `children-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-upload` adds `trigger-style` prop.
 - `n-dropdown` adds `node-props` prop.
@@ -33,9 +35,7 @@
 - `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
 - `n-upload` adds `is-error-state` prop, closes [#2975](https://github.com/TuSimple/naive-ui/issues/2975).
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
-- `n-steps` adds `on-update:current` prop.
 - `n-step` adds `disabled` prop.
-- `n-date-picker` adds `panel` prop.
 
 ## 2.29.0
 

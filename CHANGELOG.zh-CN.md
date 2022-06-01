@@ -22,10 +22,12 @@
 
 ### Feats
 
+- 🌟 `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- 🌟 `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- 🌟 `n-steps` 新增 `on-update:current` 属性
+- 🌟 `n-date-picker` 新增 `panel` 属性
 - `n-scrollbar` 新增 `trigger` 属性
 - `n-input-number` 新增 `button-placement` 属性
-- `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
-- `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-select` 新增 `children-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-upload` 新增 `trigger-style` 属性
 - `n-dropdown` 新增 `node-props` 属性
@@ -33,9 +35,7 @@
 - `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
 - `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
-- `n-steps` 新增 `on-update:current` 属性
 - `n-step` 新增 `disabled` 属性
-- `n-date-picker` 新增 `panel` 属性
 
 ## 2.29.0
 
