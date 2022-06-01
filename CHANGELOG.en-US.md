@@ -12,7 +12,7 @@
 - Fix `n-modal` won't clear document body's overflow style if it's unmounted when it is shown, closes [#3015](https://github.com/TuSimple/naive-ui/issues/3015).
 - Fix keyboard operation doesn't work in some specific old browsers.
 - Fix `n-tabs` lacks tab padding when `justify-content` is `'start'`, `'end'` or `'center'`.
-- Fix `n-tabs` doesn't update bar's position after `justify-content` is updated.
+- Fix `n-tabs` doesn't update bar's position after `justify-content` or `size` is updated.
 - Fix `n-switch` has no transition effect when toggle `disabled`.
 - Fix `n-modal` & `n-drawer` will be closed on esc pressed during IME input, closes [#2989](https://github.com/TuSimple/naive-ui/issues/2989).
 - Fix `n-date-picker` can select time when is selecting date in date time range picker, closes [#3004](https://github.com/TuSimple/naive-ui/issues/3004).
@@ -27,13 +27,13 @@
 - 🌟 `n-select` adds `value-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - 🌟 `n-steps` adds `on-update:current` prop.
 - 🌟 `n-date-picker` adds `panel` prop.
+- 🌟 `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
 - `n-scrollbar` adds `trigger` prop.
 - `n-input-number` adds `button-placement` prop.
 - `n-select` adds `children-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-upload` adds `trigger-style` prop.
 - `n-dropdown` adds `node-props` prop.
 - `n-dropdown` adds `render-option` prop.
-- `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
 - `n-upload` adds `is-error-state` prop, closes [#2975](https://github.com/TuSimple/naive-ui/issues/2975).
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
 - `n-step` adds `disabled` prop.

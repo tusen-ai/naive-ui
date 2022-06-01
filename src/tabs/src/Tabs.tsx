@@ -209,6 +209,7 @@ export default defineComponent({
           barEl.style.maxWidth = `${tabEl.offsetWidth}px`
         }
         barEl.style.width = '8192px'
+        void barEl.offsetWidth
       }
     }
     function updateCurrentBarStyle (): void {
@@ -309,7 +310,7 @@ export default defineComponent({
       const { value: barEl } = barElRef
       if (!barEl) return
       if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
-      const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
+      const disableTransitionClassName = 'transition-disabled'
       barEl.classList.add(disableTransitionClassName)
       updateCurrentBarStyle()
       // here we don't need to force layout after update bar style
@@ -340,17 +341,14 @@ export default defineComponent({
       }
     }
     const handleNavResize = throttle(_handleNavResize, 64)
-    watch(
-      () => props.justifyContent,
-      () => {
-        void nextTick(() => {
-          const { type } = props
-          if (type === 'line' || type === 'bar') {
-            updateBarPositionInstantly()
-          }
-        })
-      }
-    )
+    watch([() => props.justifyContent, () => props.size], () => {
+      void nextTick(() => {
+        const { type } = props
+        if (type === 'line' || type === 'bar') {
+          updateBarPositionInstantly()
+        }
+      })
+    })
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize (entry: ResizeObserverEntry): void {
@@ -435,6 +433,20 @@ export default defineComponent({
         el.classList.remove(shadowAfterClass)
       } else {
         el.classList.add(shadowAfterClass)
+      }
+    })
+
+    const tabsRailElRef = ref<HTMLElement | null>(null)
+    watch(mergedValueRef, () => {
+      if (props.type === 'segment') {
+        const tabsRailEl = tabsRailElRef.value
+        if (tabsRailEl) {
+          void nextTick(() => {
+            tabsRailEl.classList.add('transition-disabled')
+            void tabsRailEl.offsetWidth
+            tabsRailEl.classList.remove('transition-disabled')
+          })
+        }
       }
     })
 
@@ -523,6 +535,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
+      tabsRailElRef,
       tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
@@ -606,7 +619,7 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div class={`${mergedClsPrefix}-tabs-rail`}>
+            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
                   renderNameListRef.value.push(tabPaneVNode.props.name)

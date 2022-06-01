@@ -30,6 +30,15 @@ export default cB('tabs', `
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
 `, [
+  cM('segment-type', [
+    cB('tabs-rail', [
+      c('&.transition-disabled', 'color: red;', [
+        cB('tabs-tab', `
+          transition: none;
+        `)
+      ])
+    ])
+  ]),
   cB('tabs-rail', `
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
@@ -181,7 +190,7 @@ export default cB('tabs', `
       max-width .2s var(--n-bezier),
       background-color .3s var(--n-bezier);
   `, [
-    cM('transition-disabled', `
+    c('&.transition-disabled', `
       transition: none;
     `),
     cM('disabled', `

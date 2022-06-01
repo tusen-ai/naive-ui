@@ -9,10 +9,10 @@
 - 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 - 修复 `n-upload-dragger` 没有占据满宽度
 - 修复 `n-global-style` 没有清空 body 的 padding 和 margin
-- 修复 `n-modal` 在显示时被写在不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
+- 修复 `n-modal` 在显示时被卸载不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
 - 修复键盘操作在特定的老旧浏览器无法使用
 - 修复 `n-tabs` 的 `justify-content` 为 `'start'`、 `'end'` 和 `'center'` 时缺少 padding
-- 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
+- 修复 `n-tabs` 在 `justify-content`、`size` 切换时指示条的位置没有更新
 - 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 - 修复 `n-modal` & `n-drawer` 在输入法输入过程中按 Esc 会关闭，关闭 [#2989](https://github.com/TuSimple/naive-ui/issues/2989)
 - 修复 `n-date-picker` 在选择日期时间范围的过程中还可以选择时间，关闭 [#3004](https://github.com/TuSimple/naive-ui/issues/3004)
@@ -27,13 +27,13 @@
 - 🌟 `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - 🌟 `n-steps` 新增 `on-update:current` 属性
 - 🌟 `n-date-picker` 新增 `panel` 属性
+- 🌟 `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
 - `n-scrollbar` 新增 `trigger` 属性
 - `n-input-number` 新增 `button-placement` 属性
 - `n-select` 新增 `children-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-upload` 新增 `trigger-style` 属性
 - `n-dropdown` 新增 `node-props` 属性
 - `n-dropdown` 新增 `render-option` 属性
-- `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
 - `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
 - `n-step` 新增 `disabled` 属性
