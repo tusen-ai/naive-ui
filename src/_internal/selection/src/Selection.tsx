@@ -788,7 +788,7 @@ export default defineComponent({
               <NPopover
                 {...popoverProps}
                 scrollable
-                style="height: calc(var(--v-target-height) * 6.6);"
+                style="max-height: calc(var(--v-target-height) * 6.6);"
               >
                 {{
                   trigger: () => popoverTrigger,

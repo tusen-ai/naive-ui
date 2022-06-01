@@ -21,6 +21,7 @@
 - Fix `n-image-group` switch pictures doesn't work in SSR mode.
 - Fix `n-tabs`'s height transition sometimes not applied when `display-directive="show"` and `:animated="true"`, closes [#3035](https://github.com/TuSimple/naive-ui/issues/3035).
 - Fix `n-select`'s filter font size is a bit small in single select mode.
+- Fix `n-select`'s count tag's popover is too high when overflow tag's count is small.
 
 ### Feats
 
