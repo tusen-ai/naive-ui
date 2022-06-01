@@ -23,6 +23,7 @@ export default cB('steps', `
     display: flex;
     flex: 1;
   `, [
+    cM('disabled', 'cursor: not-allowed'),
     cM('clickable', `
       cursor: pointer;
     `),

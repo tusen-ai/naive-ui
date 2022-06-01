@@ -150,7 +150,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, onRender, handleStepClick } = this
+    const { mergedClsPrefix, onRender, handleStepClick, disabled } = this
     const descriptionNode = resolveWrappedSlot(
       this.$slots.default,
       (children) => {
@@ -170,9 +170,8 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-step`,
-          !this.disabled &&
-            handleStepClick &&
-            `${mergedClsPrefix}-step--clickable`,
+          disabled && `${mergedClsPrefix}-step--disabled`,
+          !disabled && handleStepClick && `${mergedClsPrefix}-step--clickable`,
           this.themeClass,
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
