@@ -13,10 +13,11 @@ arrow.vue
 placement.vue
 size.vue
 group-debug.vue
-manual-position.vue
 batch-render.vue
+manual-position.vue
 render.vue
 option-props.vue
+render-option.vue
 ```
 
 ## API

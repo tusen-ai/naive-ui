@@ -1,23 +1,49 @@
 <markdown>
-# Basic
+# Add tooltip for option
 
-A basic dropdown.
+You can use `render-option` to add tooltip for option.
 </markdown>
 
 <template>
-  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+  <n-dropdown
+    trigger="hover"
+    :options="options"
+    :render-option="renderOption"
+    @select="handleSelect"
+  >
     <n-button>Go For a Trip</n-button>
   </n-dropdown>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
+import { defineComponent, h, VNode } from 'vue'
+import {
+  useMessage,
+  NTooltip,
+  DropdownOption,
+  DropdownGroupOption
+} from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
     return {
+      renderOption: ({
+        node,
+        option
+      }: {
+        node: VNode
+        option: DropdownOption | DropdownGroupOption
+      }) => {
+        return h(
+          NTooltip,
+          { keepAliveOnHover: false, style: { width: 'max-content' } },
+          {
+            trigger: () => [node],
+            default: () => option.key
+          }
+        )
+      },
       options: [
         {
           label: 'Marina Bay Sands',

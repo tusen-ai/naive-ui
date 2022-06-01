@@ -16,11 +16,14 @@ import {
   provide,
   CSSProperties,
   VNode,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { NxScrollbar } from '../../_internal/scrollbar'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -35,8 +38,6 @@ import type { PopoverInjection } from './Popover'
 import type { PopoverTrigger } from './interface'
 import { popoverBodyInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 
 export const popoverBodyProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
@@ -104,6 +105,13 @@ export default defineComponent({
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
+    const displayedRef = ref(false)
+    watchEffect(() => {
+      const { show } = props
+      if (show) {
+        displayedRef.value = true
+      }
+    })
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger, onClickoutside } = props
       const directives: DirectiveArguments = []
@@ -131,7 +139,10 @@ export default defineComponent({
           { capture: true }
         ])
       }
-      if (props.displayDirective === 'show') {
+      if (
+        props.displayDirective === 'show' ||
+        (props.animated && displayedRef.value)
+      ) {
         directives.push([vShow, props.show])
       }
       return directives
@@ -241,6 +252,13 @@ export default defineComponent({
 
     function renderContentNode (): VNode | null {
       themeClassHandle?.onRender()
+      const shouldRenderNode =
+        props.displayDirective === 'show' ||
+        props.show ||
+        (props.animated && displayedRef.value)
+      if (!shouldRenderNode) {
+        return null
+      }
       let contentNode: VNode
       const {
         internalRenderBodyRef: { value: renderBody }
@@ -357,12 +375,11 @@ export default defineComponent({
           handleMouseLeave
         )
       }
-      return props.displayDirective === 'show' || props.show
-        ? withDirectives(contentNode, directivesRef.value)
-        : null
+      return withDirectives(contentNode, directivesRef.value)
     }
 
     return {
+      displayed: displayedRef,
       namespace: namespaceRef,
       isMounted: NPopover.isMountedRef,
       zIndex: NPopover.zIndexRef,
@@ -402,6 +419,7 @@ export default defineComponent({
                 }}
                 onAfterLeave={() => {
                   this.followerEnabled = false
+                  this.displayed = false
                 }}
               >
                 {{
