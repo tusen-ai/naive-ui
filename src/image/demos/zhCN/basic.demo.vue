@@ -5,6 +5,6 @@
 <template>
   <n-image
     width="100"
-    src="https://tva1.sinaimg.cn/large/9448bbf8gy1h2mzox08tlj20g45xyh0q.jpg"
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
   />
 </template>

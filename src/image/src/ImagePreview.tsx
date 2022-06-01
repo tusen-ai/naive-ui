@@ -94,8 +94,10 @@ export default defineComponent({
     }
 
     watch(showRef, (value) => {
-      if (value) on('keydown', document, handleKeydown)
-      else off('keydown', document, handleKeydown)
+      if (value) {
+        on('keydown', document, handleKeydown)
+        imageDisplayModeRef.value = 'preview'
+      } else off('keydown', document, handleKeydown)
     })
 
     onBeforeUnmount(() => {
