@@ -36,6 +36,7 @@
 - `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
 - `n-step` 新增 `disabled` 属性
+- `n-calendar` 新增 `header` slot，关闭 [#3036](https://github.com/TuSimple/naive-ui/issues/3036)
 
 ## 2.29.0
 

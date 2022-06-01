@@ -20,7 +20,7 @@ import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { call } from '../../_utils'
+import { call, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
@@ -208,18 +208,27 @@ export default defineComponent({
     } = this
     onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
-    const localeMonth = format(monthTs, 'MMMM', { locale })
     const year = getYear(monthTs)
-    const title = monthBeforeYear
-      ? `${localeMonth} ${year}`
-      : `${year} ${localeMonth}`
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
-          <div class={`${mergedClsPrefix}-calendar-header__title`}>{title}</div>
+          <div class={`${mergedClsPrefix}-calendar-header__title`}>
+            {resolveSlotWithProps(
+              $slots.header,
+              { year, month: getMonth(monthTs) + 1 },
+              () => {
+                const localeMonth = format(monthTs, 'MMMM', { locale })
+                return [
+                  monthBeforeYear
+                    ? `${localeMonth} ${year}`
+                    : `${year} ${localeMonth}`
+                ]
+              }
+            )}
+          </div>
           <div class={`${mergedClsPrefix}-calendar-header__extra`}>
             <NButtonGroup>
               {{
