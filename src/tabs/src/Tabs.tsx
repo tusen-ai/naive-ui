@@ -220,25 +220,45 @@ export default defineComponent({
     }
 
     const tabsPaneWrapperRef = ref<HTMLElement | null>(null)
-    let currentHeight = 0
-    function onAnimationBeforeLeave (): void {
+    let fromHeight = 0
+    let hangingTransition: (() => void) | null = null
+    function onAnimationBeforeLeave (el: HTMLElement): void {
       const tabsPaneWrapperEl = tabsPaneWrapperRef.value
       if (tabsPaneWrapperEl) {
-        currentHeight = tabsPaneWrapperEl.getBoundingClientRect().height
-        const currentHeightPx = `${currentHeight}px`
-        tabsPaneWrapperEl.style.height = currentHeightPx
-        tabsPaneWrapperEl.style.maxHeight = currentHeightPx
+        fromHeight = el.getBoundingClientRect().height
+        const fromHeightPx = `${fromHeight}px`
+        const applyFromStyle = (): void => {
+          tabsPaneWrapperEl.style.height = fromHeightPx
+          tabsPaneWrapperEl.style.maxHeight = fromHeightPx
+        }
+        if (!hangingTransition) {
+          hangingTransition = applyFromStyle
+        } else {
+          applyFromStyle()
+          hangingTransition()
+          hangingTransition = null
+        }
       }
     }
     function onAnimationEnter (el: HTMLElement): void {
       const tabsPaneWrapperEl = tabsPaneWrapperRef.value
       if (tabsPaneWrapperEl) {
         const targetHeight = el.getBoundingClientRect().height
-        tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
-        tabsPaneWrapperEl.style.height = `${Math.max(
-          currentHeight,
-          targetHeight
-        )}px`
+        const applyTargetStyle = (): void => {
+          void document.body.offsetHeight
+          tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
+          tabsPaneWrapperEl.style.height = `${Math.max(
+            fromHeight,
+            targetHeight
+          )}px`
+        }
+        if (!hangingTransition) {
+          hangingTransition = applyTargetStyle
+        } else {
+          hangingTransition()
+          hangingTransition = null
+          applyTargetStyle()
+        }
       }
     }
     function onAnimationAfterEnter (): void {
@@ -778,7 +798,7 @@ function filterMapTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null,
   renderedNames: Set<string | number>,
-  onBeforeLeave?: () => void,
+  onBeforeLeave?: (el: HTMLElement) => void,
   onEnter?: (el: HTMLElement) => void,
   onAfterEnter?: () => void,
   animationDirection?: 'next' | 'prev'
@@ -816,7 +836,7 @@ function filterMapTabPanes (
   return (
     <TransitionGroup
       name={`${animationDirection}-transition`}
-      onBeforeLeave={onBeforeLeave}
+      onBeforeLeave={onBeforeLeave as (el: Element) => void}
       onEnter={onEnter as (el: Element) => void}
       onAfterEnter={onAfterEnter}
     >
