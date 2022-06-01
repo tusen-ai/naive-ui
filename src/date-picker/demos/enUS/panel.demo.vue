@@ -1,5 +1,7 @@
 <markdown>
 # Use panel only
+
+It may be useful sometimes.
 </markdown>
 
 <template>
