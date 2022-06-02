@@ -23,6 +23,7 @@
 - Fix `n-select`'s filter font size is a bit small in single select mode.
 - Fix `n-select`'s count tag's popover is too high when overflow tag's count is small.
 - Fix `n-date-picker`'s first time scroll state of items is not aligned when `type="monthrange"`.
+- Fix `n-form-item`'s asterisk in required mode can be selected 的必填星号可以被选中
 
 ### Feats
 

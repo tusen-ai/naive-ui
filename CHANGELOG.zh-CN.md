@@ -23,6 +23,7 @@
 - 修复 `n-select` 在单选时搜索时字体略小
 - 修复 `n-select` 的计数标签在溢出内容少的时候弹出内容过高
 - 修复 `n-date-picker` 在 `type="monthrange"` 时第一次选中时滚动状态没有对齐
+- 修复 `n-form-item` 的必填星号可以被选中
 
 ### Feats
 

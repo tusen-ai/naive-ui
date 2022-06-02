@@ -35,10 +35,12 @@ export default cB('form-item', {
     box-sizing: border-box;
   `, [
     cE('asterisk', `
+      user-select: none;
       color: var(--n-asterisk-color);
       transition: color .3s var(--n-bezier);
     `),
     cE('asterisk-placeholder', `
+      user-select: none;
       visibility: hidden;      
     `)
   ]),
