@@ -68,6 +68,7 @@ scroll-debug.vue
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
 | show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |  |
+| tree-node-height | `number` | `24` | 启用虚拟滚动时，如果你自定义了每个子节点的高度，那么需要将这个高度传给 tree |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |
 | on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点拖拽中的回调函数 |  |
