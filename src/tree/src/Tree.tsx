@@ -66,7 +66,7 @@ import { NEmpty } from '../../empty'
 // During expanding, some node are mis-applied with :active style
 // Async dnd has bug
 
-const ITEM_SIZE = 30 // 24 + 3 + 3
+// const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export function createTreeMateOptions<T> (
   keyField: string,
@@ -135,6 +135,10 @@ const treeProps = {
   data: {
     type: Array as PropType<TreeOptions>,
     default: () => []
+  },
+  treeNodeHeight: {
+    type: Number,
+    default: 24
   },
   expandOnDragenter: {
     type: Boolean,
@@ -263,6 +267,7 @@ export default defineComponent({
         }
       })
     }
+    const ITEM_SIZE = props.treeNodeHeight + 6
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
@@ -1312,6 +1317,7 @@ export default defineComponent({
       ? useThemeClass('tree', undefined, cssVarsRef, props)
       : undefined
     return {
+      ITEM_SIZE,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       fNodes: mergedFNodesRef,
@@ -1348,7 +1354,8 @@ export default defineComponent({
       checkable,
       handleKeyup,
       handleKeydown,
-      handleFocusout
+      handleFocusout,
+      ITEM_SIZE
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined

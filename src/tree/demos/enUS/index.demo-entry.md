@@ -64,6 +64,7 @@ checkbox-placement.vue
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |  |
+| tree-node-height | `number` | `24` | you need to pass your customized tree-node-height when enable virtual scroll and change each tree node height |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |  |
 | on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function in node drag and drop. |  |
