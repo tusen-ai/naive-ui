@@ -27,4 +27,4 @@ basic.vue
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | default | `(props: { year: number, month: number, date: number })` | 每个日期中渲染的内容 |  |
-| header | `(props: { year: number, month: number })` | 日历的标题，`month` 从 1 开始 | NEXT_VERSION |
+| header | `(props: { year: number, month: number })` | 日历的标题，`month` 从 1 开始 | 2.29.1 |

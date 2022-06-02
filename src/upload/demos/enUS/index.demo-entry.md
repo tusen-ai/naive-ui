@@ -41,7 +41,7 @@ download.vue
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
 | input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
-| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | NEXT_VERSION |
+| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |
 | method | `string` | `'POST'` | The HTTP request method. |  |
@@ -54,7 +54,7 @@ download.vue
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |  |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |  |
 | show-trigger | `boolean` | `true` | Show upload trigger. | 2.21.5 |
-| trigger-style | `Object \| string` | `undefined` | Style of trigger area. | NEXT_VERSION |
+| trigger-style | `Object \| string` | `undefined` | Style of trigger area. | 2.29.1 |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |

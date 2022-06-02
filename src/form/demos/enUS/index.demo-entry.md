@@ -53,7 +53,7 @@ dynamic.vue
 | --- | --- | --- | --- |
 | asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | Asynchronous validation in the form of a callback. |  |
 | message | `string` | Text to show when validation fails. |  |
-| renderMessage | `() => VNodeChild` | Render function or message. | NEXT_VERSION |
+| renderMessage | `() => VNodeChild` | Render function or message. | 2.29.1 |
 | required | `boolean` | Is it required. |  |
 | trigger | `string \| Array<string>` | Trigger type. |  |
 | validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validation rule. |  |

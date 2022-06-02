@@ -32,7 +32,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 | 2.26.1 |
 | bordered | `boolean` | `true` | 是否有边框 |  |
-| button-placement | `'both' \| 'right'` | `'right'` | 加减按钮的位置 | NEXT_VERSION |
+| button-placement | `'both' \| 'right'` | `'right'` | 加减按钮的位置 | 2.29.1 |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |

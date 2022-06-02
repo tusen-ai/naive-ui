@@ -53,7 +53,7 @@ dynamic.vue
 | --- | --- | --- | --- |
 | asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | 异步校验，支持定义回调函数 |  |
 | message | `string` | 校验失败时展示的信息 |  |
-| renderMessage | `() => VNodeChild` | 信息的渲染函数 | NEXT_VERSION |
+| renderMessage | `() => VNodeChild` | 信息的渲染函数 | 2.29.1 |
 | required | `boolean` | 是否必填 |  |
 | trigger | `string \| Array<string>` | 触发方式 |  |
 | validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |  |

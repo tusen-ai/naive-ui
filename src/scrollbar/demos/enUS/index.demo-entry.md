@@ -16,7 +16,7 @@ trigger.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| trigger | `'hover' \| 'none'` | `'hover'` | Trigger of show scrollbar. `'none'` means always show it. | NEXT_VERSION |
+| trigger | `'hover' \| 'none'` | `'hover'` | Trigger of show scrollbar. `'none'` means always show it. | 2.29.1 |
 | x-scrollable | `boolean` | `false` | Whether it can scroll horizontally. |  |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback on scroll |  |
 

@@ -42,7 +42,7 @@ debug.vue
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
 | image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
 | input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
-| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | NEXT_VERSION |
+| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
@@ -55,7 +55,7 @@ debug.vue
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
-| trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | NEXT_VERSION |
+| trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
