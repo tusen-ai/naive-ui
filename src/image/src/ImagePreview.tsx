@@ -23,7 +23,9 @@ import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
   ZoomInIcon,
-  ZoomOutIcon
+  ZoomOutIcon,
+  ResizeIcon,
+  ResizeSmallIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
@@ -501,7 +503,14 @@ export default defineComponent({
                                   onClick={this.switchThePictureDisplayMode}
                                 >
                                   {{
-                                    default: () => <RotateClockwiseIcon />
+                                    default: () => {
+                                      return this.imageDisplayModeRef ===
+                                        'full' ? (
+                                        <ResizeSmallIcon />
+                                          ) : (
+                                        <ResizeIcon />
+                                          )
+                                    }
                                   }}
                                 </NBaseIcon>,
                                 'tipClockwise'
