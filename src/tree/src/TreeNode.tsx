@@ -102,6 +102,9 @@ const TreeNode = defineComponent({
       if (!selectableRef.value) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       NTree.handleSelect(props.tmNode)
+      if (NTree.expandOnClickRef.value && !props.tmNode.isLeaf) {
+        NTree.handleSwitcherClick(props.tmNode)
+      }
     }
 
     function handleContentClick (e: MouseEvent): void {
