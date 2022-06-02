@@ -51,7 +51,7 @@ scroll-debug.vue
 | default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |  |
 | draggable | `boolean` | `false` | 是否可拖拽 |  |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |  |
-| expand-on-click | `boolean` | `false` | 是否在点击 tree node 后展开或收缩节点 |  |
+| expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |

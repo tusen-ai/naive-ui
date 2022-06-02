@@ -140,10 +140,7 @@ const treeProps = {
     type: Boolean,
     default: true
   },
-  expandOnClick: {
-    type: Boolean,
-    default: false
-  },
+  expandOnClick: Boolean,
   cancelable: {
     type: Boolean,
     default: true

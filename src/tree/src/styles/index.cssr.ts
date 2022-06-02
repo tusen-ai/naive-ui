@@ -70,7 +70,7 @@ export default cB('tree', `
       `)
     ]),
     cNotM('disabled', [
-      cM('selectable', [
+      cM('clickable', [
         cB('tree-node-content', `
           cursor: pointer;
         `)

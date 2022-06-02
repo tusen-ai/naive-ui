@@ -47,7 +47,7 @@ checkbox-placement.vue
 | default-selected-keys | `Array<string \| number>` | `[]` | Nodes selected by default. |  |
 | draggable | `boolean` | `false` | Whether it can be dragged. |  |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
-| expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. |  |
+| expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
