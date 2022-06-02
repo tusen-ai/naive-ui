@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-image` add a switch to display the original size of the picture, closes [#3023](https://github.com/TuSimple/naive-ui/issues/3023).
+
 ### Fixes
 
 - Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].

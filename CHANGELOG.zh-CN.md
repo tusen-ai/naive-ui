@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-image` 新增展示图片原始大小的开关，关闭[#3023](https://github.com/TuSimple/naive-ui/issues/3023)
+
 ### Fixes
 
 - 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
