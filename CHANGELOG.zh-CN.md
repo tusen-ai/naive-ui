@@ -42,6 +42,7 @@
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
 - `n-step` 新增 `disabled` 属性
 - `n-calendar` 新增 `header` slot，关闭 [#3036](https://github.com/TuSimple/naive-ui/issues/3036)
+- `n-tree` 新增 `expandOnClick` 属性， [#2949](https://github.com/TuSimple/naive-ui/issues/2949)
 
 ## 2.29.0
 
