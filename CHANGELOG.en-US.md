@@ -34,6 +34,7 @@
 - 🌟 `n-date-picker` adds `panel` prop.
 - 🌟 `n-data-table` adds `on-scroll` prop, closes [#3025](https://github.com/TuSimple/naive-ui/issues/3025).
 - 🌟 `FormItemRule` adds `renderMessage` prop, closes [#2525](https://github.com/TuSimple/naive-ui/issues/2525).
+- 🌟 Add `createDiscreteApi` to create message, notification, dialog, loading bar outside setup.
 - `n-scrollbar` adds `trigger` prop.
 - `n-input-number` adds `button-placement` prop.
 - `n-select` adds `children-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).

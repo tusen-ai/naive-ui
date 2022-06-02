@@ -131,6 +131,12 @@ type MessageRenderMessage = (props: {
 
 ### Use Message Outside Setup
 
+#### Option 1
+
+Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefully. You'd better not use `useMessage` and it together in a same app.
+
+#### Option 2
+
 <n-space vertical size="large">
 <n-alert type="warning">
   You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.

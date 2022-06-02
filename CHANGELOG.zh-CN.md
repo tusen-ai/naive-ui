@@ -34,6 +34,7 @@
 - 🌟 `n-date-picker` 新增 `panel` 属性
 - 🌟 `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
 - 🌟 `FormItemRule` 新增 `renderMessage` 属性，关闭 [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
+- 🌟 新增 `createDiscreteApi` 在 setup 外使用 message、notification、dialog、loading bar
 - `n-scrollbar` 新增 `trigger` 属性
 - `n-input-number` 新增 `button-placement` 属性
 - `n-select` 新增 `children-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
