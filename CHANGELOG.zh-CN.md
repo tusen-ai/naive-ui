@@ -61,7 +61,6 @@
 
 ### Feats
 
-- `n-form-item` 新增 `render-feedback` 属性，用于自定义 `feedback` 的渲染方式，关闭 [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
 - `n-pagination` 新增 `size` 属性，关闭 [#2888](https://github.com/TuSimple/naive-ui/issues/2888)
 - `n-config-provider` 新增 `preflight-style-disabled` 属性

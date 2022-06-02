@@ -13,7 +13,7 @@ import {
   Transition,
   onMounted,
   LabelHTMLAttributes,
-  VNode
+  VNodeChild
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -28,12 +28,12 @@ import {
   warn,
   createKey,
   useInjectionInstanceCollection,
-  keysOf
+  keysOf,
+  resolveWrappedSlot
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { formLight, FormTheme } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
-import Feedbacks from './Feedbacks'
 import {
   ShouldRuleBeApplied,
   FormItemRule,
@@ -47,11 +47,7 @@ import {
   FormItemInst,
   FormItemInternalValidate
 } from './interface'
-import {
-  formInjectionKey,
-  formItemInstsInjectionKey,
-  formItemRenderFeedbackInjectionKey
-} from './context'
+import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
 
 export const formItemProps = {
@@ -78,9 +74,6 @@ export const formItemProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
-  renderFeedback: Function as PropType<
-  (raw: string | undefined) => string | VNode
-  >,
   feedback: String,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
@@ -153,7 +146,6 @@ export default defineComponent({
       'formItems',
       toRef(props, 'path')
     )
-    provide(formItemRenderFeedbackInjectionKey, props.renderFeedback)
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
@@ -166,13 +158,13 @@ export default defineComponent({
       mergedLabelPlacement: labelPlacementRef,
       mergedLabelAlign: labelTextAlignRef
     } = formItemMiscRefs
-    const explainsRef = ref<string[]>([])
+    const renderExplainsRef = ref<
+    Array<{
+      key: string
+      render: () => VNodeChild
+    }>
+    >([])
     const feedbackIdRef = ref(createId())
-    const hasFeedbackRef = computed(() => {
-      const { feedback } = props
-      if (feedback !== undefined && feedback !== null) return true
-      return explainsRef.value.length
-    })
     const mergedDisabledRef = NForm
       ? toRef(NForm.props, 'disabled')
       : ref(false)
@@ -189,7 +181,7 @@ export default defineComponent({
       restoreValidation()
     })
     function restoreValidation (): void {
-      explainsRef.value = []
+      renderExplainsRef.value = []
       validationErroredRef.value = false
       if (props.feedback) {
         feedbackIdRef.value = createId()
@@ -274,7 +266,6 @@ export default defineComponent({
         !trigger
           ? rules
           : rules.filter((rule) => {
-            // if (rule.trigger === undefined) return true
             if (Array.isArray(rule.trigger)) {
               return rule.trigger.includes(trigger)
             } else {
@@ -300,9 +291,9 @@ export default defineComponent({
           return shallowClonedRule
         })
       if (!activeRules.length) {
-        return await Promise.resolve({
+        return {
           valid: true
-        })
+        }
       }
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
@@ -311,27 +302,24 @@ export default defineComponent({
         validator.messages(validateMessages)
       }
       return await new Promise((resolve) => {
-        void validator.validate(
-          { [mergedPath]: value },
-          options,
-          (errors, fields) => {
-            if (errors?.length) {
-              explainsRef.value = errors.map(
-                (error: ValidateError) => error?.message || ''
-              )
-              validationErroredRef.value = true
-              resolve({
-                valid: false,
-                errors
-              })
-            } else {
-              restoreValidation()
-              resolve({
-                valid: true
-              })
-            }
+        void validator.validate({ [mergedPath]: value }, options, (errors) => {
+          if (errors?.length) {
+            renderExplainsRef.value = errors.map((error: ValidateError) => ({
+              key: error?.message || '',
+              render: () => error?.message || ''
+            }))
+            validationErroredRef.value = true
+            resolve({
+              valid: false,
+              errors
+            })
+          } else {
+            restoreValidation()
+            resolve({
+              valid: true
+            })
           }
-        )
+        })
       })
     }
     provide(formItemInjectionKey, {
@@ -423,9 +411,8 @@ export default defineComponent({
       labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
-      hasFeedback: hasFeedbackRef,
       feedbackId: feedbackIdRef,
-      explains: explainsRef,
+      renderExplains: renderExplainsRef,
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
@@ -512,47 +499,59 @@ export default defineComponent({
             <Transition name="fade-down-transition" mode="out-in">
               {{
                 default: () => {
-                  const feedbacks = (
-                    <Feedbacks
-                      clsPrefix={mergedClsPrefix}
-                      explains={this.explains}
-                      feedback={this.feedback}
-                    >
-                      {{ default: $slots.feedback }}
-                    </Feedbacks>
-                  )
-                  const { hasFeedback, mergedValidationStatus } = this
-                  return hasFeedback || $slots.feedback ? (
-                    mergedValidationStatus === 'warning' ? (
-                      <div
-                        key="controlled-warning"
-                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--warning`}
-                      >
-                        {feedbacks}
-                      </div>
-                    ) : mergedValidationStatus === 'error' ? (
-                      <div
-                        key="controlled-error"
-                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--error`}
-                      >
-                        {feedbacks}
-                      </div>
-                    ) : mergedValidationStatus === 'success' ? (
-                      <div
-                        key="controlled-success"
-                        class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--success`}
-                      >
-                        {feedbacks}
-                      </div>
-                    ) : (
-                      <div
-                        key="controlled-default"
-                        class={`${mergedClsPrefix}-form-item-feedback`}
-                      >
-                        {feedbacks}
-                      </div>
-                    )
-                  ) : null
+                  const { mergedValidationStatus } = this
+                  return resolveWrappedSlot($slots.feedback, (children) => {
+                    const { feedback } = this
+                    const feedbackNodes =
+                      children || feedback ? (
+                        <div
+                          key="__feedback__"
+                          class={`${mergedClsPrefix}-form-item-feedback__line`}
+                        >
+                          {children || feedback}
+                        </div>
+                      ) : this.renderExplains.length ? (
+                        this.renderExplains?.map(({ key, render }) => (
+                          <div
+                            key={key}
+                            class={`${mergedClsPrefix}-form-item-feedback__line`}
+                          >
+                            {render()}
+                          </div>
+                        ))
+                      ) : null
+                    return feedbackNodes ? (
+                      mergedValidationStatus === 'warning' ? (
+                        <div
+                          key="controlled-warning"
+                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--warning`}
+                        >
+                          {feedbackNodes}
+                        </div>
+                      ) : mergedValidationStatus === 'error' ? (
+                        <div
+                          key="controlled-error"
+                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--error`}
+                        >
+                          {feedbackNodes}
+                        </div>
+                      ) : mergedValidationStatus === 'success' ? (
+                        <div
+                          key="controlled-success"
+                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--success`}
+                        >
+                          {feedbackNodes}
+                        </div>
+                      ) : (
+                        <div
+                          key="controlled-default"
+                          class={`${mergedClsPrefix}-form-item-feedback`}
+                        >
+                          {feedbackNodes}
+                        </div>
+                      )
+                    ) : null
+                  })
                 }
               }}
             </Transition>

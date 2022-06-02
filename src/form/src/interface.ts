@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import { Ref, VNodeChild } from 'vue'
 import {
   ValidateError,
   RuleItem,
@@ -33,6 +33,7 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
+  renderMessage?: (message: string) => VNodeChild
 }
 
 export interface FormItemValidateOptions {

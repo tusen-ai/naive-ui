@@ -61,7 +61,6 @@
 
 ### Feats
 
-- `n-form-item` add `render-feedback` prop to customize render of `feedback`，closes [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
 - `n-notification-provider`'s `placement` prop supports `'top'` and `'bottom'`, closes [#2930](https://github.com/TuSimple/naive-ui/issues/2930).
 - `n-pagination` add `size` prop, closes [#2888](https://github.com/TuSimple/naive-ui/issues/2888).
 - `n-config-provider` adds `preflight-style-disabled` prop.
