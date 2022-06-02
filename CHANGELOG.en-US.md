@@ -4,9 +4,9 @@
 
 ### Fixes
 
-- Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960].
-- Fix `n-watermark` not working when provided `cls-prefix`
-- Fix `n-dropdown`'s incorrect render arrow when props `show-arrow: true` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
+- Fix `n-tree` throw error when use `pattern` prop filter the tree node, closes [#2960](https://github.com/TuSimple/naive-ui/issues/2960).
+- Fix `n-watermark` not working when `cls-prefix` is set.
+- Fix `n-dropdown`'s incorrect render arrow when `:show-arrow="true"` [#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 - Fix `n-upload-dragger` doesn't take full width.
 - Fix `n-global-style` doesn't clear body element's padding and margin.
 - Fix `n-modal` won't clear document body's overflow style if it's unmounted when it is shown, closes [#3015](https://github.com/TuSimple/naive-ui/issues/3015).
@@ -23,7 +23,7 @@
 - Fix `n-select`'s filter font size is a bit small in single select mode.
 - Fix `n-select`'s count tag's popover is too high when overflow tag's count is small.
 - Fix `n-date-picker`'s first time scroll state of items is not aligned when `type="monthrange"`.
-- Fix `n-form-item`'s asterisk in required mode can be selected 的必填星号可以被选中
+- Fix `n-form-item`'s asterisk in required mode can be selected.
 - Fix `n-list`'s color is incorrect inside `n-popover` in dark mode.
 
 ### Feats
@@ -44,7 +44,7 @@
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
 - `n-step` adds `disabled` prop.
 - `n-calendar` adds `header` slot, closes [#3036](https://github.com/TuSimple/naive-ui/issues/3036).
-- `n-tree` add `expand-on-click` prop， [#2949](https://github.com/TuSimple/naive-ui/issues/2949)
+- `n-tree` adds `expand-on-click` prop， [#2949](https://github.com/TuSimple/naive-ui/issues/2949).
 
 ## 2.29.0
 
