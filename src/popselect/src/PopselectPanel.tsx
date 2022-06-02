@@ -13,7 +13,7 @@ import {
 import { createTreeMate, TreeNode } from 'treemate'
 import { happensIn } from 'seemly'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
-import { tmOptions } from '../../select/src/utils'
+import { createTmOptions } from '../../select/src/utils'
 import {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -94,7 +94,7 @@ export default defineComponent({
       SelectBaseOption,
       SelectGroupOption,
       SelectIgnoredOption
-      >(props.options, tmOptions)
+      >(props.options, createTmOptions('value', 'children'))
     })
 
     function doUpdateValue (

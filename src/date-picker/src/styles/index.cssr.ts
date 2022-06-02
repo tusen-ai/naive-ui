@@ -81,16 +81,19 @@ export default c([
     ])
   ]),
   cB('date-panel', `
+    width: fit-content;
     outline: none;
     margin: 4px 0;
     display: grid;
     grid-template-columns: 0fr;
     border-radius: var(--n-panel-border-radius);
     background-color: var(--n-panel-color);
-    box-shadow: var(--n-panel-box-shadow);
     color: var(--n-panel-text-color);
   `, [
     fadeInScaleUpTransition(),
+    cM('shadow', `
+      box-shadow: var(--n-panel-box-shadow);
+    `),
     cB('date-panel-calendar', {
       padding: 'var(--n-calendar-left-padding)',
       display: 'grid',

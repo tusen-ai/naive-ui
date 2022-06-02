@@ -117,7 +117,7 @@ export default defineComponent({
     }
     function handleRemove (file: SettledFileInfo): void {
       const {
-        XhrMap,
+        xhrMap,
         doChange,
         onRemoveRef: { value: onRemove },
         mergedFileListRef: { value: mergedFileList }
@@ -134,7 +134,7 @@ export default defineComponent({
         const fileAfterChange = Object.assign({}, file, {
           status: 'removed'
         })
-        XhrMap.delete(file.id)
+        xhrMap.delete(file.id)
         doChange(fileAfterChange, undefined, {
           remove: true
         })
@@ -151,9 +151,9 @@ export default defineComponent({
       })
     }
     function handleAbort (file: SettledFileInfo): void {
-      const { XhrMap } = NUpload
-      const XHR = XhrMap.get(file.id)
-      XHR?.abort()
+      const { xhrMap } = NUpload
+      const xhr = xhrMap.get(file.id)
+      xhr?.abort()
       handleRemove(Object.assign({}, file))
     }
     function handlePreviewClick (): void {

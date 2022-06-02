@@ -146,7 +146,10 @@ export default defineComponent({
         if (typeof option.label === 'string') {
           return option.label.startsWith(pattern)
         }
-        return option.value.startsWith(pattern)
+        if (typeof option.value === 'string') {
+          return option.value.startsWith(pattern)
+        }
+        return false
       })
     })
     const treeMateRef = computed(() => {
@@ -347,7 +350,7 @@ export default defineComponent({
         return
       }
       const {
-        rawNode: { value }
+        rawNode: { value = '' }
       } = tmNode
       const inputEl = getInputEl()
       const inputValue = inputEl.value

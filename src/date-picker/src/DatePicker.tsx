@@ -12,7 +12,8 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -120,6 +121,7 @@ const datePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  panel: Boolean,
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
@@ -927,21 +929,6 @@ export default defineComponent({
   },
   render () {
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
-    triggerOnRender?.()
-    const commonInputProps: InputProps = {
-      bordered: this.mergedBordered,
-      size: this.mergedSize,
-      passivelyActivated: true,
-      disabled: this.mergedDisabled,
-      readonly: this.inputReadonly || this.mergedDisabled,
-      clearable,
-      onClear: this.handleClear,
-      onClick: this.handleTriggerClick,
-      onActivate: this.handleInputActivate,
-      onDeactivate: this.handleInputDeactivate,
-      onFocus: this.handleInputFocus,
-      onBlur: this.handleInputBlur
-    }
     const commonPanelProps = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
@@ -957,7 +944,52 @@ export default defineComponent({
       style: this.cssVars as CSSProperties,
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
+      panel: this.panel,
       onRender: this.onRender
+    }
+    const renderPanel = (): VNode => {
+      const { type } = this
+      return type === 'datetime' ? (
+        <DatetimePanel {...commonPanelProps} />
+      ) : type === 'daterange' ? (
+        <DaterangePanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+          defaultCalendarEndTime={this.defaultCalendarEndTime}
+          bindCalendarMonths={this.bindCalendarMonths}
+        />
+      ) : type === 'datetimerange' ? (
+        <DatetimerangePanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+          defaultCalendarEndTime={this.defaultCalendarEndTime}
+          bindCalendarMonths={this.bindCalendarMonths}
+        />
+      ) : type === 'month' || type === 'year' || type === 'quarter' ? (
+        <MonthPanel {...commonPanelProps} type={type} key={type} />
+      ) : type === 'monthrange' ? (
+        <MonthRangePanel {...commonPanelProps} type={type} />
+      ) : (
+        <DatePanel {...commonPanelProps} />
+      )
+    }
+    if (this.panel) {
+      return renderPanel()
+    }
+    triggerOnRender?.()
+    const commonInputProps: InputProps = {
+      bordered: this.mergedBordered,
+      size: this.mergedSize,
+      passivelyActivated: true,
+      disabled: this.mergedDisabled,
+      readonly: this.inputReadonly || this.mergedDisabled,
+      clearable,
+      onClear: this.handleClear,
+      onClick: this.handleTriggerClick,
+      onActivate: this.handleInputActivate,
+      onDeactivate: this.handleInputDeactivate,
+      onFocus: this.handleInputFocus,
+      onBlur: this.handleInputBlur
     }
     return (
       <div
@@ -1080,57 +1112,14 @@ export default defineComponent({
                       {{
                         default: () => {
                           if (!this.mergedShow) return null
-                          const { type } = this
-                          return withDirectives(
-                            type === 'datetime' ? (
-                              <DatetimePanel {...commonPanelProps} />
-                            ) : type === 'daterange' ? (
-                              <DaterangePanel
-                                {...commonPanelProps}
-                                defaultCalendarStartTime={
-                                  this.defaultCalendarStartTime
-                                }
-                                defaultCalendarEndTime={
-                                  this.defaultCalendarEndTime
-                                }
-                                bindCalendarMonths={this.bindCalendarMonths}
-                              />
-                            ) : type === 'datetimerange' ? (
-                              <DatetimerangePanel
-                                {...commonPanelProps}
-                                defaultCalendarStartTime={
-                                  this.defaultCalendarStartTime
-                                }
-                                defaultCalendarEndTime={
-                                  this.defaultCalendarEndTime
-                                }
-                                bindCalendarMonths={this.bindCalendarMonths}
-                              />
-                            ) : type === 'month' ||
-                              type === 'year' ||
-                              type === 'quarter' ? (
-                              <MonthPanel
-                                {...commonPanelProps}
-                                type={type}
-                                key={type}
-                              />
-                                ) : type === 'monthrange' ? (
-                              <MonthRangePanel
-                                {...commonPanelProps}
-                                type={type}
-                              />
-                                ) : (
-                              <DatePanel {...commonPanelProps} />
-                                ),
+                          return withDirectives(renderPanel(), [
                             [
-                              [
-                                clickoutside,
-                                this.handleClickOutside,
-                                undefined as unknown as string,
-                                { capture: true }
-                              ]
+                              clickoutside,
+                              this.handleClickOutside,
+                              undefined as unknown as string,
+                              { capture: true }
                             ]
-                          )
+                          ])
                         }
                       }}
                     </Transition>

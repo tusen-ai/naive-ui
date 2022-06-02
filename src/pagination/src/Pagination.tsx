@@ -174,7 +174,7 @@ export default defineComponent({
         return Math.max(1, Math.ceil(itemCount / mergedPageSizeRef.value))
       }
       const { pageCount } = props
-      if (pageCount !== undefined) return pageCount
+      if (pageCount !== undefined) return Math.max(pageCount, 1)
       return 1
     })
     const showFastForwardRef = ref(false)

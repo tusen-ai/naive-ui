@@ -42,13 +42,18 @@ import {
   RenderLabel,
   RenderIcon,
   RenderLabelImpl,
-  RenderIconImpl
+  RenderIconImpl,
+  RenderOption,
+  NodeProps,
+  RenderOptionImpl
 } from './interface'
 import { dropdownInjectionKey } from './context'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
   renderIconRef: Ref<RenderIconImpl | undefined>
+  renderOptionRef: Ref<RenderOptionImpl | undefined>
+  nodePropsRef: Ref<NodeProps | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -88,6 +93,8 @@ const dropdownBaseProps = {
   showArrow: Boolean,
   renderLabel: Function as PropType<RenderLabel>,
   renderIcon: Function as PropType<RenderIcon>,
+  renderOption: Function as PropType<RenderOption>,
+  nodeProps: Function as PropType<NodeProps>,
   labelField: {
     type: String,
     default: 'label'
@@ -230,6 +237,10 @@ export default defineComponent({
       activeKeyPathRef: activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
       mergedShowRef: mergedShowRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
+      renderOptionRef: toRef(props, 'renderOption') as Ref<
+      RenderOptionImpl | undefined
+      >,
       doSelect,
       doUpdateShow
     })

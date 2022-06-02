@@ -24,6 +24,7 @@ import type {
 } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
+import { Wrapper } from './Wrapper'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {
@@ -88,6 +89,10 @@ const scrollbarProps = {
     default: true
   },
   xScrollable: Boolean,
+  trigger: {
+    type: String as PropType<'none' | 'hover'>,
+    default: 'hover'
+  },
   useUnifiedContainer: Boolean,
   triggerDisplayManually: Boolean,
   // If container is set, resize observer won't not attached
@@ -244,6 +249,14 @@ const Scrollbar = defineComponent({
         contentWidth !== null &&
         contentWidth > containerWidth
       )
+    })
+    const mergedShowXBarRef = computed(() => {
+      const { trigger } = props
+      return trigger === 'none' || isShowXBarRef.value
+    })
+    const mergedShowYBarRef = computed(() => {
+      const { trigger } = props
+      return trigger === 'none' || isShowYBarRef.value
     })
     const mergedContainerRef = computed(() => {
       const { container } = props
@@ -648,8 +661,8 @@ const Scrollbar = defineComponent({
       xBarSizePx: xBarSizePxRef,
       yBarTopPx: yBarTopPxRef,
       xBarLeftPx: xBarLeftPxRef,
-      isShowXBar: isShowXBarRef,
-      isShowYBar: isShowYBarRef,
+      isShowXBar: mergedShowXBarRef,
+      isShowYBar: mergedShowYBarRef,
       isIos,
       handleScroll,
       handleContentResize,
@@ -666,6 +679,7 @@ const Scrollbar = defineComponent({
     if (!this.scrollable) return $slots.default?.()
     const createChildren = (): VNode => {
       this.onRender?.()
+      const triggerIsNone = this.trigger === 'none'
       return h(
         'div',
         mergeProps(this.$attrs, {
@@ -727,8 +741,10 @@ const Scrollbar = defineComponent({
             style={this.horizontalRailStyle}
             aria-hidden
           >
-            <Transition name="fade-in-transition">
-              {{
+            {h(
+              (triggerIsNone ? Wrapper : Transition) as any,
+              triggerIsNone ? null : { name: 'fade-in-transition' },
+              {
                 default: () =>
                   this.needYBar && this.isShowYBar && !this.isIos ? (
                     <div
@@ -740,8 +756,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleYScrollMouseDown}
                     />
                   ) : null
-              }}
-            </Transition>
+              }
+            )}
           </div>,
           <div
             ref="xRailRef"
@@ -749,8 +765,10 @@ const Scrollbar = defineComponent({
             style={this.verticalRailStyle}
             aria-hidden
           >
-            <Transition name="fade-in-transition">
-              {{
+            {
+              ((triggerIsNone ? Wrapper : Transition) as any,
+              triggerIsNone ? null : { name: 'fade-in-transition' },
+              {
                 default: () =>
                   this.needXBar && this.isShowXBar && !this.isIos ? (
                     <div
@@ -762,8 +780,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleXScrollMouseDown}
                     />
                   ) : null
-              }}
-            </Transition>
+              })
+            }
           </div>
         ]
       )

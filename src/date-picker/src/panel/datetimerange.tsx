@@ -45,6 +45,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--datetimerange`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onClick={this.resetSelectingStatus}
@@ -74,6 +75,7 @@ export default defineComponent({
             value={this.startTimeValue}
             to={false}
             showIcon={false}
+            disabled={this.isSelecting}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
@@ -101,6 +103,7 @@ export default defineComponent({
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[1]
               : timePickerProps)}
+            disabled={this.isSelecting}
             showIcon={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}

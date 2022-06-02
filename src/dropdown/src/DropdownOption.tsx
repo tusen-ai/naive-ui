@@ -73,7 +73,9 @@ export default defineComponent({
       renderLabelRef,
       renderIconRef,
       labelFieldRef,
-      childrenFieldRef
+      childrenFieldRef,
+      renderOptionRef,
+      nodePropsRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -194,6 +196,8 @@ export default defineComponent({
         return index === activeKeyPath.length - 1
       }),
       mergedDisabled: mergedDisabledRef,
+      renderOption: renderOptionRef,
+      nodeProps: nodePropsRef,
       handleClick,
       handleMouseMove,
       handleMouseEnter,
@@ -212,6 +216,8 @@ export default defineComponent({
       siblingHasSubmenu,
       renderLabel,
       renderIcon,
+      renderOption,
+      nodeProps,
       props
     } = this
     const submenuVNode = mergedShowSubmenu ? (
@@ -234,8 +240,8 @@ export default defineComponent({
       onMouseleave: this.handleMouseLeave,
       onClick: this.handleClick
     }
-    return (
-      <div class={`${clsPrefix}-dropdown-option`}>
+    const node = (
+      <div class={`${clsPrefix}-dropdown-option`} {...nodeProps?.(rawNode)}>
         {h('div', mergeProps(builtinProps as any, props as any), [
           <div
             data-dropdown-option
@@ -325,5 +331,9 @@ export default defineComponent({
         ) : null}
       </div>
     )
+    if (renderOption) {
+      return renderOption({ node, option: rawNode })
+    }
+    return node
   }
 })

@@ -741,7 +741,11 @@ export default defineComponent({
     function handleDeleteOption (option: SelectBaseOption): void {
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
-      if (multiple && Array.isArray(mergedValue)) {
+      if (
+        multiple &&
+        Array.isArray(mergedValue) &&
+        option.value !== undefined
+      ) {
         doUncheck(option.value)
       } else {
         doUpdateValue(null, null, null)

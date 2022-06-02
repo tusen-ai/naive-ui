@@ -102,7 +102,7 @@ export default defineComponent({
         if (value === null) return false
         const optionValue = props.tmNode.rawNode[
           valueFieldRef.value
-        ] as SelectOption['value']
+        ] as NonNullable<SelectOption['value']>
         if (multiple) {
           const { value: valueSet } = valueSetRef
           return valueSet.has(optionValue)

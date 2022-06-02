@@ -41,7 +41,8 @@ const usePanelCommonProps = {
     required: true
   },
   themeClass: String,
-  onRender: Function as PropType<(() => void) | undefined>
+  onRender: Function as PropType<(() => void) | undefined>,
+  panel: Boolean
 } as const
 
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
@@ -93,7 +94,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     doTabOut()
   }
   function disableTransitionOneTick (): void {
-    if (props.active) {
+    if (props.active || props.panel) {
       void nextTick(() => {
         const { value: selfEl } = selfRef
         if (!selfEl) return
@@ -141,7 +142,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function getShortcutValue (
     shortcut: Shortcuts[string]
-  ): number | [number, number] {
+  ): number | [number, number] | readonly [number, number] {
     if (typeof shortcut === 'function') {
       return shortcut()
     }

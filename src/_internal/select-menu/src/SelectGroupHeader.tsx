@@ -23,10 +23,12 @@ export default defineComponent({
   setup () {
     const {
       renderLabelRef,
-      renderOptionRef
+      renderOptionRef,
+      labelFieldRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(internalSelectionMenuInjectionKey)!
     return {
+      labelField: labelFieldRef,
       renderLabel: renderLabelRef as Ref<RenderLabelImpl | undefined>,
       renderOption: renderOptionRef as Ref<RenderOptionImpl | undefined>
     }
@@ -40,7 +42,7 @@ export default defineComponent({
     } = this
     const children = renderLabel
       ? renderLabel(rawNode, false)
-      : render(rawNode.label, rawNode, false)
+      : render(rawNode[this.labelField], rawNode, false)
     const node = (
       <div class={`${clsPrefix}-base-select-group-header`}>{children}</div>
     )

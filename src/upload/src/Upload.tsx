@@ -54,32 +54,40 @@ import style from './styles/index.cssr'
 function createXhrHandlers (
   inst: UploadInternalInst,
   file: SettledFileInfo,
-  XHR: XMLHttpRequest
+  xhr: XMLHttpRequest
 ): XhrHandlers {
-  const { doChange, XhrMap } = inst
+  const { doChange, xhrMap } = inst
   let percentage = 0
   function handleXHRError (e: ProgressEvent<EventTarget>): void {
     let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
       status: 'error',
       percentage
     })
-    XhrMap.delete(file.id)
+    xhrMap.delete(file.id)
     fileAfterChange = createSettledFileInfo(
       inst.onError?.({ file: fileAfterChange, event: e }) || fileAfterChange
     )
     doChange(fileAfterChange, e)
   }
   function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
-    if (XHR.status < 200 || XHR.status >= 300) {
-      handleXHRError(e)
-      return
+    if (inst.isErrorState) {
+      if (inst.isErrorState(xhr)) {
+        handleXHRError(e)
+        return
+      }
+    } else {
+      if (xhr.status < 200 || xhr.status >= 300) {
+        handleXHRError(e)
+        return
+      }
     }
+
     let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
       status: 'finished',
       percentage,
       file: null
     })
-    XhrMap.delete(file.id)
+    xhrMap.delete(file.id)
     fileAfterChange = createSettledFileInfo(
       inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
     )
@@ -95,7 +103,7 @@ function createXhrHandlers (
         percentage
       })
 
-      XhrMap.delete(file.id)
+      xhrMap.delete(file.id)
       doChange(fileAfterChange, e)
     },
     handleXHRProgress (e) {
@@ -114,7 +122,7 @@ function createXhrHandlers (
 }
 
 function customSubmitImpl (options: {
-  inst: UploadInternalInst
+  inst: Omit<UploadInternalInst, 'isErrorState'>
   data?: FuncOrRecordOrUndef
   headers?: FuncOrRecordOrUndef
   action?: string
@@ -233,7 +241,7 @@ function submitImpl (
   }
 ): void {
   const request = new XMLHttpRequest()
-  inst.XhrMap.set(file.id, request)
+  inst.xhrMap.set(file.id, request)
   request.withCredentials = withCredentials
   const formData = new FormData()
   appendData(formData, data, file)
@@ -282,6 +290,7 @@ const uploadProps = {
   onFinish: Function as PropType<OnFinish>,
   onError: Function as PropType<OnError>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
+  isErrorState: Function as PropType<(xhr: XMLHttpRequest) => boolean>,
   /** currently not used */
   onDownload: Function as PropType<OnDownload>,
   defaultUpload: {
@@ -368,7 +377,7 @@ export default defineComponent({
       value: false
     }
     const dragOverRef = ref(false)
-    const XhrMap = new Map<string, XMLHttpRequest>()
+    const xhrMap = new Map<string, XMLHttpRequest>()
     const _mergedFileListRef = useMergedState(
       controlledFileListRef,
       uncontrolledFileListRef
@@ -494,7 +503,7 @@ export default defineComponent({
             customSubmitImpl({
               inst: {
                 doChange,
-                XhrMap,
+                xhrMap,
                 onFinish: props.onFinish,
                 onError: props.onError
               },
@@ -509,9 +518,10 @@ export default defineComponent({
             submitImpl(
               {
                 doChange,
-                XhrMap,
+                xhrMap,
                 onFinish: props.onFinish,
-                onError: props.onError
+                onError: props.onError,
+                isErrorState: props.isErrorState
               },
               fieldName,
               file,
@@ -622,7 +632,7 @@ export default defineComponent({
       onDownloadRef: toRef(props, 'onDownload'),
       mergedFileListRef,
       triggerStyleRef: toRef(props, 'triggerStyle'),
-      XhrMap,
+      xhrMap,
       submit,
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
