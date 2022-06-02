@@ -41,6 +41,7 @@
 - `n-date-picker`'s `shortcuts` prop supports readonly tuple type.
 - `n-step` adds `disabled` prop.
 - `n-calendar` adds `header` slot, closes [#3036](https://github.com/TuSimple/naive-ui/issues/3036).
+- `t-tree` adds `treeNodeHeight` prop. [#3036](https://github.com/TuSimple/naive-ui/issues/3011).
 
 ## 2.29.0
 
