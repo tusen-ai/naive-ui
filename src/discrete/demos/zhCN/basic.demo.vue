@@ -1,7 +1,7 @@
 <markdown>
 # 基础用法
 
-使用 `useDiscreteApi` 来创建一系列 API。
+使用 `createDiscreteApi` 来创建一系列 API。
 </markdown>
 
 <template>

@@ -1,7 +1,7 @@
 <markdown>
 # Basic
 
-Use `useDiscreteApi` to create series of API.
+Use `createDiscreteApi` to create series of API.
 </markdown>
 
 <template>
