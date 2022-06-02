@@ -123,7 +123,7 @@ interface UploadCustomRequestOptions {
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `()` | The placeholder of the upload dragger; For an example see <n-a href="#drag">Drag to Upload Demo</n-a>. |
+| default | `()` | The placeholder of the upload dragger; For an example see <n-a href="#drag.vue">Drag to Upload Demo</n-a>. |
 
 ### UploadTrigger Slots
 
