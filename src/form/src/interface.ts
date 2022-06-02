@@ -33,7 +33,7 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
-  renderMessage?: (message: string) => VNodeChild
+  renderMessage?: () => VNodeChild
 }
 
 export interface FormItemValidateOptions {

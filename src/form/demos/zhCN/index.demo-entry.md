@@ -10,6 +10,7 @@
 inline.vue
 custom-rule.vue
 custom-validation.vue
+i18n.vue
 top.vue
 left.vue
 item-only.vue
@@ -47,13 +48,14 @@ custom-messages.vue
   以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 </n-alert>
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| required | `boolean` | 是否必填 |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | 异步校验，支持定义回调函数 |
-| trigger | `string \| Array<string>` | 触发方式 |
-| message | `string` | 校验失败时展示的信息 |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | 异步校验，支持定义回调函数 |  |
+| message | `string` | 校验失败时展示的信息 |  |
+| renderMessage | `() => VNodeChild` | 信息的渲染函数 | NEXT_VERSION |
+| required | `boolean` | 是否必填 |  |
+| trigger | `string \| Array<string>` | 触发方式 |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |  |
 
 ### FormItem Props
 

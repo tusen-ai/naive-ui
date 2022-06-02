@@ -262,6 +262,8 @@ export default defineComponent({
       }
       const { value: rules } = mergedRulesRef
       const value = NForm ? get(NForm.props.model, path || '') : undefined
+      const messageRenderers: Record<string, () => VNodeChild> = {}
+      const originalMessageRendersMessage: Record<string, any> = {}
       const activeRules = (
         !trigger
           ? rules
@@ -274,7 +276,7 @@ export default defineComponent({
           })
       )
         .filter(shouldRuleBeApplied)
-        .map((rule) => {
+        .map((rule, i) => {
           const shallowClonedRule = Object.assign({}, rule)
           if (shallowClonedRule.validator) {
             shallowClonedRule.validator = wrapValidator(
@@ -287,6 +289,13 @@ export default defineComponent({
               shallowClonedRule.asyncValidator,
               true
             ) as any
+          }
+          if (shallowClonedRule.renderMessage) {
+            const rendererKey = `__renderMessage__${i}`
+            originalMessageRendersMessage[rendererKey] =
+              shallowClonedRule.message
+            shallowClonedRule.message = rendererKey
+            messageRenderers[rendererKey] = shallowClonedRule.renderMessage
           }
           return shallowClonedRule
         })
@@ -304,10 +313,23 @@ export default defineComponent({
       return await new Promise((resolve) => {
         void validator.validate({ [mergedPath]: value }, options, (errors) => {
           if (errors?.length) {
-            renderExplainsRef.value = errors.map((error: ValidateError) => ({
-              key: error?.message || '',
-              render: () => error?.message || ''
-            }))
+            renderExplainsRef.value = errors.map((error: ValidateError) => {
+              const transformedMessage = error?.message || ''
+              return {
+                key: transformedMessage,
+                render: () => {
+                  if (transformedMessage.startsWith('__renderMessage__')) {
+                    return messageRenderers[transformedMessage]()
+                  }
+                  return transformedMessage
+                }
+              }
+            })
+            errors.forEach((error) => {
+              if (error.message?.startsWith('__renderMessage__')) {
+                error.message = originalMessageRendersMessage[error.message]
+              }
+            })
             validationErroredRef.value = true
             resolve({
               valid: false,
