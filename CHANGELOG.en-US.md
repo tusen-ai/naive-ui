@@ -453,7 +453,7 @@
 - Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
 - Fix `n-log` doesn't export `LogInst` type.
 - Fix `n-popselect` action slot & empty slot now working.
-- Fix `n-data-table` can't use percent as column width.
+- Fix `n-data-table` can't use percent as column width
 - Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
 - Fix `n-select`'s being created option is not cleared after menu is closed.
 - Fix `n-select` can't input content when `show=false` and `filterable=true`, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
@@ -461,6 +461,7 @@
 - Fix `web-types.json`'s `n-h1` ~ `n-h6` name.
 - Fix `n-select` deletes option on backspace pressed while compisiting.
 - Fix `n-select` uses disabled option as pending option after menu is opened.
+- Fix `n-select` add proper tabindex when filterable.
 
 ### Feats
 

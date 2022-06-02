@@ -186,7 +186,10 @@ export default defineComponent({
     }
     function showInputTag (): void {
       const { value: inputTagEl } = inputTagElRef
-      if (inputTagEl) inputTagEl.style.display = 'inline-block'
+      if (inputTagEl) {
+        inputTagEl.style.display = 'inline-block'
+        inputTagEl.focus()
+      }
     }
     watch(toRef(props, 'active'), (value) => {
       if (!value) hideInputTag()
@@ -197,11 +200,13 @@ export default defineComponent({
       }
     })
     function doFocus (e: FocusEvent): void {
-      const { onFocus } = props
+      const { onFocus, filterable } = props
+      if (filterable) showInputTag()
       if (onFocus) onFocus(e)
     }
     function doBlur (e: FocusEvent): void {
-      const { onBlur } = props
+      const { onBlur, filterable } = props
+      if (filterable) hideInputTag()
       if (onBlur) onBlur(e)
     }
     function doDeleteOption (value: SelectBaseOption): void {
@@ -611,7 +616,7 @@ export default defineComponent({
           <input
             {...this.inputProps}
             ref="patternInputRef"
-            tabindex={-1}
+            tabindex={0}
             disabled={disabled}
             value={this.pattern}
             autofocus={this.autofocus}
@@ -750,6 +755,7 @@ export default defineComponent({
           <div
             ref="patternInputWrapperRef"
             class={`${clsPrefix}-base-selection-tags`}
+            onFocus={this.focusInput}
           >
             {tags}
             {maxTagCountResponsive ? null : input}
@@ -811,6 +817,7 @@ export default defineComponent({
           <div
             ref="patternInputWrapperRef"
             class={`${clsPrefix}-base-selection-label`}
+            onFocus={this.focusInput}
           >
             <input
               {...this.inputProps}
@@ -820,7 +827,7 @@ export default defineComponent({
               placeholder=""
               readonly={disabled}
               disabled={disabled}
-              tabindex={-1}
+              tabindex={0}
               autofocus={this.autofocus}
               onFocus={this.handlePatternInputFocus}
               onBlur={this.handlePatternInputBlur}
@@ -911,7 +918,8 @@ export default defineComponent({
             // focus is not controlled by selection itself since it always need
             // to be managed together with menu. provide :focus style will cause
             // many redundant codes.
-            [`${clsPrefix}-base-selection--focus`]: this.focused
+            [`${clsPrefix}-base-selection--focus`]:
+              this.focused || this.patternInputFocused
           }
         ]}
         style={this.cssVars as CSSProperties}
