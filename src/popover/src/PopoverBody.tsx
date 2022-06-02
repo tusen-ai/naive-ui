@@ -17,7 +17,8 @@ import {
   CSSProperties,
   VNode,
   VNodeChild,
-  watchEffect
+  watchEffect,
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -30,7 +31,8 @@ import {
   formatLength,
   isSlotEmpty,
   resolveWrappedSlot,
-  useAdjustedTo
+  useAdjustedTo,
+  isJsdom
 } from '../../_utils'
 import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
@@ -108,7 +110,7 @@ export default defineComponent({
     const displayedRef = ref(false)
     watchEffect(() => {
       const { show } = props
-      if (show) {
+      if (show && !isJsdom()) {
         displayedRef.value = true
       }
     })
@@ -217,7 +219,7 @@ export default defineComponent({
       followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
-      if (props.trigger === 'hover' && props.keepAliveOnHover) {
+      if (props.trigger === 'hover' && props.keepAliveOnHover && props.show) {
         NPopover.handleMouseEnter(e)
       }
     }
@@ -252,17 +254,15 @@ export default defineComponent({
 
     function renderContentNode (): VNode | null {
       themeClassHandle?.onRender()
-      const shouldRenderNode =
+      const shouldRenderDom =
         props.displayDirective === 'show' ||
         props.show ||
         (props.animated && displayedRef.value)
-      if (!shouldRenderNode) {
+      if (!shouldRenderDom) {
         return null
       }
       let contentNode: VNode
-      const {
-        internalRenderBodyRef: { value: renderBody }
-      } = NPopover
+      const renderBody = NPopover.internalRenderBodyRef.value
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       if (!renderBody) {
         const { value: extraClass } = NPopover.extraClassRef
@@ -270,20 +270,20 @@ export default defineComponent({
         const renderContentInnerNode = (): VNodeChild[] => {
           const content = resolveWrappedSlot(slots.header, (children) => {
             const body = children ? (
-              [
+              <>
                 <div
                   class={`${mergedClsPrefix}-popover__header`}
                   style={props.headerStyle}
                 >
                   {children}
-                </div>,
+                </div>
                 <div
                   class={`${mergedClsPrefix}-popover__content`}
                   style={props.contentStyle}
                 >
                   {slots}
                 </div>
-              ]
+              </>
             ) : props.scrollable ? (
               slots.default?.()
             ) : (
@@ -392,6 +392,7 @@ export default defineComponent({
   render () {
     return (
       <VFollower
+        ref="followerRef"
         zIndex={this.zIndex}
         show={this.show}
         enabled={this.followerEnabled}
@@ -401,7 +402,6 @@ export default defineComponent({
         flip={this.flip}
         placement={this.placement}
         containerClass={this.namespace}
-        ref="followerRef"
         overlap={this.overlap}
         width={this.width === 'trigger' ? 'target' : undefined}
         teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
