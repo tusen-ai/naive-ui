@@ -45,7 +45,7 @@ export function createDiscreteApi<T extends DiscreteApiType> (
           props: dialogProviderProps
         })
         break
-      case 'loadingbar':
+      case 'loadingBar':
         providersAndProps.push({
           type,
           Provider: NLoadingBarProvider,
