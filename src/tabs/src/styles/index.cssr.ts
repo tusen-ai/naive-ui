@@ -2,9 +2,13 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
-// --n-close-color
+// --n-close-size
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-size
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-bar-color
 // --n-tab-font-size
 // --n-tab-text-color
@@ -170,9 +174,10 @@ export default cB('tabs', `
       cursor: 'not-allowed'
     }),
     cE('close', `
-      margin-left: 8px;
-      font-size: 14px;
-      transition: color .3s var(--n-bezier);
+      margin-left: 6px;
+      transition:
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier);
     `),
     cE('label', `
       display: flex;

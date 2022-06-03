@@ -4,9 +4,9 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-border-radius
 // --n-border
-// --n-close-color
-// --n-close-color-hover
-// --n-close-color-pressed
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-close-margin
 // --n-close-size
 // --n-color
@@ -63,9 +63,10 @@ export default cB('tag', `
     margin-right: 6px;
   `),
   cE('close', `
-    font-size: var(--n-close-size);
     margin: var(--n-close-margin);
-    transition: color .3s var(--n-bezier);
+    transition:
+      background-color .3s var(--n-bezier),
+      color .3s var(--n-bezier);
     cursor: pointer;
   `),
   cM('round', `

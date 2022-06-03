@@ -21,12 +21,17 @@ import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 // --n-title-font-weight
 // --n-header-border-bottom
 // --n-footer-border-top
-// --n-close-color
+// --n-close-border-radius
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-close-size
+// --n-close-icon-size
 export default c([
   cB('drawer', `
+    word-break: break-word;
     line-height: var(--n-line-height);
     position: absolute;
     pointer-events: all;
@@ -85,8 +90,10 @@ export default c([
         align-items: center;
       `, [
         cE('close', `
-          transition: color .3s var(--n-bezier);
-          font-size: var(--n-close-size);
+          margin-left: 6px;
+          transition:
+            background-color .3s var(--n-bezier),
+            color .3s var(--n-bezier);
         `)
       ]),
       cB('drawer-footer', `

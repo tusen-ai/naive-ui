@@ -4,9 +4,11 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // vars:
 // --n-bezier
 // --n-color
-// --n-close-color
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-icon-color
 // --n-border
 // --n-title-text-color
@@ -18,6 +20,7 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-icon-size
 // --n-icon-margin
 // --n-close-size
+// --n-close-icon-size
 // --n-close-margin
 // --n-padding
 // --n-icon-margin-left
@@ -29,7 +32,15 @@ export default cB('alert', `
   transition: background-color .3s var(--n-bezier);
   background-color: var(--n-color);
   text-align: start;
+  word-break: break-word;
 `, [
+  cM('closable', [
+    cB('alert-body', [
+      cE('title', `
+        padding-right: 24px;
+      `)
+    ])
+  ]),
   cE('icon', {
     color: 'var(--n-icon-color)'
   }),
@@ -67,12 +78,13 @@ export default cB('alert', `
     margin: var(--n-icon-margin);
   `),
   cE('close', `
-    transition: color .3s var(--n-bezier);
+    transition:
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
     position: absolute;
     right: 0;
     top: 0;
     margin: var(--n-close-margin);
-    font-size: var(--n-close-size);
   `),
   cM('show-icon', [
     cB('alert-body', {

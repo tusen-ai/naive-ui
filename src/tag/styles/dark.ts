@@ -1,5 +1,5 @@
 import commonVariables from './_common'
-import { changeColor } from 'seemly'
+import { changeColor, scaleColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import type { TagTheme } from './light'
 
@@ -19,7 +19,9 @@ const tagDark: TagTheme = {
       baseColor,
       borderColor,
       opacityDisabled,
-      closeColor,
+      closeIconColor,
+      closeIconColorHover,
+      closeIconColorPressed,
       closeColorHover,
       closeColorPressed,
       borderRadiusSmall: borderRadius,
@@ -34,6 +36,7 @@ const tagDark: TagTheme = {
     } = vars
     return {
       ...commonVariables,
+      closeBorderRadius: borderRadius,
       heightTiny: heightMini,
       heightSmall: heightTiny,
       heightMedium: heightSmall,
@@ -59,39 +62,53 @@ const tagDark: TagTheme = {
       border: `1px solid ${borderColor}`,
       textColor: textColor2,
       color: '#0000',
-      closeColor: closeColor,
-      closeColorHover: closeColorHover,
-      closeColorPressed: closeColorPressed,
+      closeIconColor,
+      closeIconColorHover,
+      closeIconColorPressed,
+      closeColorHover,
+      closeColorPressed,
       borderPrimary: `1px solid ${changeColor(primaryColor, { alpha: 0.3 })}`,
       textColorPrimary: primaryColor,
       colorPrimary: '#0000',
-      closeColorPrimary: changeColor(primaryColor, { alpha: 0.7 }),
-      closeColorHoverPrimary: changeColor(primaryColor, { alpha: 0.85 }),
-      closeColorPressedPrimary: changeColor(primaryColor, { alpha: 0.57 }),
+      closeIconColorPrimary: scaleColor(primaryColor, { lightness: 0.7 }),
+      closeIconColorHoverPrimary: scaleColor(primaryColor, { lightness: 0.7 }),
+      closeIconColorPressedPrimary: scaleColor(primaryColor, {
+        lightness: 0.7
+      }),
+      closeColorHoverPrimary: changeColor(primaryColor, { alpha: 0.16 }),
+      closeColorPressedPrimary: changeColor(primaryColor, { alpha: 0.12 }),
       borderInfo: `1px solid ${changeColor(infoColor, { alpha: 0.3 })}`,
       textColorInfo: infoColor,
       colorInfo: '#0000',
-      closeColorInfo: changeColor(infoColor, { alpha: 0.7 }),
-      closeColorHoverInfo: changeColor(infoColor, { alpha: 0.85 }),
-      closeColorPressedInfo: changeColor(infoColor, { alpha: 0.57 }),
+      closeIconColorInfo: scaleColor(infoColor, { alpha: 0.7 }),
+      closeIconColorHoverInfo: scaleColor(infoColor, { alpha: 0.7 }),
+      closeIconColorPressedInfo: scaleColor(infoColor, { alpha: 0.7 }),
+      closeColorHoverInfo: changeColor(infoColor, { alpha: 0.16 }),
+      closeColorPressedInfo: changeColor(infoColor, { alpha: 0.12 }),
       borderSuccess: `1px solid ${changeColor(successColor, { alpha: 0.3 })}`,
       textColorSuccess: successColor,
       colorSuccess: '#0000',
-      closeColorSuccess: changeColor(successColor, { alpha: 0.7 }),
-      closeColorHoverSuccess: changeColor(successColor, { alpha: 0.85 }),
-      closeColorPressedSuccess: changeColor(successColor, { alpha: 0.57 }),
+      closeIconColorSuccess: scaleColor(successColor, { alpha: 0.7 }),
+      closeIconColorHoverSuccess: scaleColor(successColor, { alpha: 0.7 }),
+      closeIconColorPressedSuccess: scaleColor(successColor, { alpha: 0.7 }),
+      closeColorHoverSuccess: changeColor(successColor, { alpha: 0.16 }),
+      closeColorPressedSuccess: changeColor(successColor, { alpha: 0.12 }),
       borderWarning: `1px solid ${changeColor(warningColor, { alpha: 0.3 })}`,
       textColorWarning: warningColor,
       colorWarning: '#0000',
-      closeColorWarning: changeColor(warningColor, { alpha: 0.7 }),
-      closeColorHoverWarning: changeColor(warningColor, { alpha: 0.85 }),
-      closeColorPressedWarning: changeColor(warningColor, { alpha: 0.57 }),
+      closeIconColorWarning: scaleColor(warningColor, { alpha: 0.7 }),
+      closeIconColorHoverWarning: scaleColor(warningColor, { alpha: 0.7 }),
+      closeIconColorPressedWarning: scaleColor(warningColor, { alpha: 0.7 }),
+      closeColorHoverWarning: changeColor(warningColor, { alpha: 0.16 }),
+      closeColorPressedWarning: changeColor(warningColor, { alpha: 0.11 }),
       borderError: `1px solid ${changeColor(errorColor, { alpha: 0.3 })}`,
       textColorError: errorColor,
       colorError: '#0000',
-      closeColorError: changeColor(errorColor, { alpha: 0.7 }),
-      closeColorHoverError: changeColor(errorColor, { alpha: 0.85 }),
-      closeColorPressedError: changeColor(errorColor, { alpha: 0.57 })
+      closeIconColorError: scaleColor(errorColor, { alpha: 0.7 }),
+      closeIconColorHoverError: scaleColor(errorColor, { alpha: 0.7 }),
+      closeIconColorPressedError: scaleColor(errorColor, { alpha: 0.7 }),
+      closeColorHoverError: changeColor(errorColor, { alpha: 0.16 }),
+      closeColorPressedError: changeColor(errorColor, { alpha: 0.12 })
     }
   }
 }

@@ -9,6 +9,7 @@ import {
   provide,
   toRef
 } from 'vue'
+import useRtl from '../../_mixins/use-rtl'
 import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
@@ -25,7 +26,6 @@ import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
 export interface TagPublicMethods {
   setTextContent: (textContent: string) => void
@@ -148,13 +148,17 @@ export default defineComponent({
           colorChecked,
           colorCheckedHover,
           colorCheckedPressed,
+          closeBorderRadius,
           [createKey('closeSize', size)]: closeSize,
+          [createKey('closeIconSize', size)]: closeIconSize,
           [createKey('fontSize', size)]: fontSize,
           [createKey('height', size)]: height,
           [createKey('color', type)]: typedColor,
           [createKey('textColor', type)]: typeTextColor,
           [createKey('border', type)]: border,
-          [createKey('closeColor', type)]: closeColor,
+          [createKey('closeIconColor', type)]: closeIconColor,
+          [createKey('closeIconColorHover', type)]: closeIconColorHover,
+          [createKey('closeIconColorPressed', type)]: closeIconColorPressed,
           [createKey('closeColorHover', type)]: closeColorHover,
           [createKey('closeColorPressed', type)]: closeColorPressed
         }
@@ -164,10 +168,14 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-border': border,
-        '--n-close-color': closeColor,
-        '--n-close-color-hover': closeColorHover,
+        '--n-close-icon-size': closeIconSize,
         '--n-close-color-pressed': closeColorPressed,
-        '--n-close-color-disabled': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-border-radius': closeBorderRadius,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
+        '--n-close-icon-color-disabled': closeIconColor,
         '--n-close-margin': closeMargin,
         '--n-close-margin-rtl': closeMarginRtl,
         '--n-close-size': closeSize,
@@ -265,6 +273,7 @@ export default defineComponent({
             class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
+            absolute
           />
         ) : null}
         {!this.checkable && this.mergedBordered ? (

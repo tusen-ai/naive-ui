@@ -15,28 +15,32 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    onClick: Function as PropType<(e: MouseEvent) => void>
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    absolute: Boolean
   },
   setup (props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
-      const { clsPrefix, disabled } = props
+      const { clsPrefix, disabled, absolute } = props
       return (
-        <NBaseIcon
-          role="button"
-          ariaDisabled={disabled}
-          ariaLabel="close"
-          clsPrefix={clsPrefix}
+        <button
+          tabindex={disabled ? -1 : 0}
+          aria-disabled={disabled}
+          aria-label="close"
+          disabled={disabled}
           class={[
             `${clsPrefix}-base-close`,
+            absolute && `${clsPrefix}-base-close--absolute`,
             disabled && `${clsPrefix}-base-close--disabled`
           ]}
-          onClick={disabled ? undefined : props.onClick}
+          onClick={props.onClick}
         >
-          {{
-            default: () => <CloseIcon />
-          }}
-        </NBaseIcon>
+          <NBaseIcon clsPrefix={clsPrefix}>
+            {{
+              default: () => <CloseIcon />
+            }}
+          </NBaseIcon>
+        </button>
       )
     }
   }

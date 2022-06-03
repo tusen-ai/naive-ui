@@ -67,7 +67,7 @@ describe('n-dialog', () => {
 
   it("shouldn't useDialog display button if no text is set", () => {
     const wrapper = mount(NDialog)
-    expect(wrapper.find('button').exists()).toEqual(false)
+    expect(wrapper.find('.n-button').exists()).toEqual(false)
   })
 
   it('loading', async () => {

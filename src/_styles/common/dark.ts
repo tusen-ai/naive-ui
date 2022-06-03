@@ -143,10 +143,12 @@ const derived: ThemeCommonVars = {
   borderColor: overlay(base.alphaBorder),
 
   // close
-  closeColorHover: overlay(Number(base.alphaClose) * 1.25),
-  closeColor: overlay(Number(base.alphaClose)),
-  closeColorPressed: overlay(Number(base.alphaClose) * 0.8),
-  closeColorDisabled: overlay(base.alpha4),
+  closeIconColorHover: overlay(Number(base.alphaClose)),
+  closeIconColor: overlay(Number(base.alphaClose)),
+  closeIconColorPressed: overlay(Number(base.alphaClose)),
+  closeIconColorDisabled: overlay(base.alpha4),
+  closeColorHover: 'rgba(255, 255, 255, .16)',
+  closeColorPressed: 'rgba(255, 255, 255, .12)',
 
   // clear
   clearColor: overlay(base.alpha4),

@@ -153,13 +153,13 @@ export default defineComponent({
       const { height } = props
       return formatLength(height)
     })
-    const mergedBodyStyleRef = computed(() => {
+    const mergedBodyStyleRef = computed<Array<CSSProperties | string>>(() => {
       return [
         {
           width: styleWidthRef.value,
           height: styleHeightRef.value
         },
-        props.drawerStyle
+        props.drawerStyle || ''
       ]
     })
     function handleMaskClick (e: MouseEvent): void {
@@ -207,10 +207,14 @@ export default defineComponent({
           titleFontWeight,
           headerBorderBottom,
           footerBorderTop,
-          closeColor,
+          closeIconColor,
+          closeIconColorHover,
+          closeIconColorPressed,
           closeColorHover,
           closeColorPressed,
-          closeSize
+          closeIconSize,
+          closeSize,
+          closeBorderRadius
         }
       } = themeRef.value
       return {
@@ -229,10 +233,14 @@ export default defineComponent({
         '--n-title-font-weight': titleFontWeight,
         '--n-header-border-bottom': headerBorderBottom,
         '--n-footer-border-top': footerBorderTop,
-        '--n-close-color': closeColor,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
+        '--n-close-size': closeSize,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
-        '--n-close-size': closeSize
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius
       }
     })
     const themeClassHandle = inlineThemeDisabled

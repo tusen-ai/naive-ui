@@ -14,9 +14,11 @@ const self = (vars: ThemeCommonVars) => {
     actionColor,
     textColor1,
     textColor2,
-    closeColor,
     closeColorHover,
     closeColorPressed,
+    closeIconColor,
+    closeIconColorHover,
+    closeIconColorPressed,
     infoColor,
     successColor,
     warningColor,
@@ -34,9 +36,12 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColor: textColor1,
     iconColor: textColor2,
     contentTextColor: textColor2,
-    closeColor,
+    closeBorderRadius: borderRadius,
     closeColorHover,
     closeColorPressed,
+    closeIconColor,
+    closeIconColorHover,
+    closeIconColorPressed,
     borderInfo: `1px solid ${composite(
       baseColor,
       changeColor(infoColor, { alpha: 0.25 })
@@ -45,9 +50,11 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColorInfo: textColor1,
     iconColorInfo: infoColor,
     contentTextColorInfo: textColor2,
-    closeColorInfo: closeColor,
     closeColorHoverInfo: closeColorHover,
     closeColorPressedInfo: closeColorPressed,
+    closeIconColorInfo: closeIconColor,
+    closeIconColorHoverInfo: closeIconColorHover,
+    closeIconColorPressedInfo: closeIconColorPressed,
     borderSuccess: `1px solid ${composite(
       baseColor,
       changeColor(successColor, { alpha: 0.25 })
@@ -59,9 +66,11 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColorSuccess: textColor1,
     iconColorSuccess: successColor,
     contentTextColorSuccess: textColor2,
-    closeColorSuccess: closeColor,
     closeColorHoverSuccess: closeColorHover,
     closeColorPressedSuccess: closeColorPressed,
+    closeIconColorSuccess: closeIconColor,
+    closeIconColorHoverSuccess: closeIconColorHover,
+    closeIconColorPressedSuccess: closeIconColorPressed,
     borderWarning: `1px solid ${composite(
       baseColor,
       changeColor(warningColor, { alpha: 0.33 })
@@ -73,9 +82,11 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColorWarning: textColor1,
     iconColorWarning: warningColor,
     contentTextColorWarning: textColor2,
-    closeColorWarning: closeColor,
     closeColorHoverWarning: closeColorHover,
     closeColorPressedWarning: closeColorPressed,
+    closeIconColorWarning: closeIconColor,
+    closeIconColorHoverWarning: closeIconColorHover,
+    closeIconColorPressedWarning: closeIconColorPressed,
     borderError: `1px solid ${composite(
       baseColor,
       changeColor(errorColor, { alpha: 0.25 })
@@ -84,9 +95,11 @@ const self = (vars: ThemeCommonVars) => {
     titleTextColorError: textColor1,
     iconColorError: errorColor,
     contentTextColorError: textColor2,
-    closeColorError: closeColor,
     closeColorHoverError: closeColorHover,
-    closeColorPressedError: closeColorPressed
+    closeColorPressedError: closeColorPressed,
+    closeIconColorError: closeIconColor,
+    closeIconColorHoverError: closeIconColorHover,
+    closeIconColorPressedError: closeIconColorPressed
   }
 }
 

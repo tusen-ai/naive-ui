@@ -6,7 +6,8 @@ export default {
   contentMargin: '8px 0 16px 0',
   iconMargin: '0 4px 0 0',
   iconMarginIconTop: '4px 0 8px 0',
-  closeSize: '18px',
-  closeMargin: '22px 28px 0 0',
-  closeMarginIconTop: '12px 18px 0 0'
+  closeSize: '22px',
+  closeIconSize: '18px',
+  closeMargin: '20px 26px 0 0',
+  closeMarginIconTop: '10px 16px 0 0'
 }

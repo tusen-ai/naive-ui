@@ -8,7 +8,6 @@ Sometimes you may want to use a component.
   <n-dialog
     title="Dialog"
     content="Are you sure?"
-    :closable="false"
     negative-text="Cancel"
     positive-text="Submit"
     @positive-click="handlePositiveClick"

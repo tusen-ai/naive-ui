@@ -7,6 +7,8 @@ export default c([
   cB('mention-menu', `
     box-shadow: var(--n-menu-box-shadow);
   `, [
-    fadeInScaleUpTransition()
+    fadeInScaleUpTransition({
+      originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+    })
   ])
 ])

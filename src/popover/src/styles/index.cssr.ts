@@ -94,11 +94,17 @@ export default c([
     `),
     c('&.popover-transition-enter-active', `
       transition:
+        box-shadow .3s var(--n-bezier),
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier),
         opacity .15s var(--n-bezier-ease-out),
         transform .15s var(--n-bezier-ease-out);
     `),
     c('&.popover-transition-leave-active', `
       transition:
+        box-shadow .3s var(--n-bezier),
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier),
         opacity .15s var(--n-bezier-ease-in),
         transform .15s var(--n-bezier-ease-in);
     `)

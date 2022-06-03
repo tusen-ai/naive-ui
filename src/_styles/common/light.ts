@@ -16,7 +16,7 @@ const base = {
   alpha4: '0.24', // disabled text, placeholder, icon
   alpha5: '0.18', // disabled placeholder
 
-  alphaClose: '0.52',
+  alphaClose: '0.6',
 
   alphaDisabled: '0.5',
   alphaDisabledInput: '0.02',
@@ -141,10 +141,12 @@ const derived = {
   borderColor: 'rgb(224, 224, 230)',
 
   // close
-  closeColor: neutral(Number(base.alphaClose)),
-  closeColorHover: neutral(Number(base.alphaClose) * 1.25),
-  closeColorPressed: neutral(Number(base.alphaClose) * 0.8),
-  closeColorDisabled: neutral(base.alpha4),
+  closeIconColor: neutral(Number(base.alphaClose)),
+  closeIconColorHover: neutral(Number(base.alphaClose)),
+  closeIconColorPressed: neutral(Number(base.alphaClose)),
+  closeIconColorDisabled: neutral(base.alpha4),
+  closeColorHover: 'rgba(0, 0, 0, .08)',
+  closeColorPressed: 'rgba(0, 0, 0, .16)',
 
   // clear
   clearColor: neutral(base.alpha4),
