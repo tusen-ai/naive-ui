@@ -1,4 +1,4 @@
-# Discrete API
+# Discrete API（v2.29.0)
 
 If you want to use `useDialog`, `useMessage`, `useNotification`, `useLoadingBar` outside `setup`, you can use `createDiscreateApi` to create corresponding API.
 

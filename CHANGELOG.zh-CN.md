@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
+
 ## 2.29.1
 
 ### Fixes

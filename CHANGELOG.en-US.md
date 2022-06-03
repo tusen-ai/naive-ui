@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `createDiscreteApi` not working with `'loadingBar'`.
+
 ## 2.29.1
 
 ### Fixes
