@@ -149,6 +149,7 @@ export default defineComponent({
           colorCheckedHover,
           colorCheckedPressed,
           closeBorderRadius,
+          [createKey('colorBordered', type)]: colorBordered,
           [createKey('closeSize', size)]: closeSize,
           [createKey('closeIconSize', size)]: closeIconSize,
           [createKey('fontSize', size)]: fontSize,
@@ -179,7 +180,8 @@ export default defineComponent({
         '--n-close-margin': closeMargin,
         '--n-close-margin-rtl': closeMarginRtl,
         '--n-close-size': closeSize,
-        '--n-color': color || typedColor,
+        '--n-color':
+          color || (mergedBorderedRef.value ? colorBordered : typedColor),
         '--n-color-checkable': colorCheckable,
         '--n-color-checked': colorChecked,
         '--n-color-checked-hover': colorCheckedHover,
@@ -211,6 +213,9 @@ export default defineComponent({
           if (textColor) {
             hash += `b${color2Class(textColor)}`
           }
+          if (mergedBorderedRef.value) {
+            hash += 'c'
+          }
           return hash
         }),
         cssVarsRef,
@@ -239,6 +244,18 @@ export default defineComponent({
       $slots
     } = this
     onRender?.()
+    const avatarNode = resolveWrappedSlot(
+      $slots.avatar,
+      (children) =>
+        children && (
+          <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
+        )
+    )
+    const iconNode = resolveWrappedSlot(
+      $slots.icon,
+      (children) =>
+        children && <div class={`${mergedClsPrefix}-tag__icon`}>{children}</div>
+    )
     return (
       <div
         class={[
@@ -249,7 +266,9 @@ export default defineComponent({
             [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
             [`${mergedClsPrefix}-tag--checkable`]: this.checkable,
             [`${mergedClsPrefix}-tag--checked`]: this.checkable && this.checked,
-            [`${mergedClsPrefix}-tag--round`]: this.round
+            [`${mergedClsPrefix}-tag--round`]: this.round,
+            [`${mergedClsPrefix}-tag--avatar`]: avatarNode,
+            [`${mergedClsPrefix}-tag--icon`]: iconNode
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -257,13 +276,7 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {resolveWrappedSlot(
-          $slots.avatar,
-          (children) =>
-            children && (
-              <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
-            )
-        )}
+        {iconNode || avatarNode}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots.default?.()}
         </span>

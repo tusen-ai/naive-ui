@@ -5,6 +5,12 @@
 ### Fixes
 
 - 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
+- 修复 `n-popover` 在切换主题时关闭背景颜色突变
+- 修复 `n-select` 多选时选框大小改变时菜单位置没有同步
+
+### Feats
+
+- `n-tag` 新增 `icon` 插槽
 
 ## 2.29.1
 

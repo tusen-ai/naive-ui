@@ -58,9 +58,16 @@ export default cB('tag', `
     border: var(--n-border);
     transition: border-color .3s var(--n-bezier);
   `),
+  cE('icon', `
+    display: flex;
+    margin: 0 4px 0 0;
+    color: var(--n-text-color);
+    transition: color .3s var(--n-bezier);
+    font-size: var(--n-avatar-size-override);
+  `),
   cE('avatar', `
     display: flex;
-    margin-right: 6px;
+    margin: 0 6px 0 0;
   `),
   cE('close', `
     margin: var(--n-close-margin);
@@ -70,11 +77,19 @@ export default cB('tag', `
     cursor: pointer;
   `),
   cM('round', `
-    padding: 0 calc(var(--n-height) / 2);
+    padding: 0 calc(var(--n-height) / 3);
     border-radius: calc(var(--n-height) / 2);
   `, [
+    cE('icon', `
+      margin: 0 4px 0 calc((var(--n-height) - 8px) / -2);
+    `),
     cE('avatar', `
-      margin-left: calc((var(--n-height) - 8px) / -2);
+      margin: 0 6px 0 calc((var(--n-height) - 8px) / -2);
+    `)
+  ]),
+  cM('icon, avatar', [
+    cM('round', `
+      padding: 0 calc(var(--n-height) / 3) 0 calc(var(--n-height) / 2);
     `)
   ]),
   cM('disabled', `

@@ -871,6 +871,7 @@ export default defineComponent({
                       onKeydown={this.handleKeydown}
                       onPatternBlur={this.onTriggerInputBlur}
                       onPatternFocus={this.onTriggerInputFocus}
+                      onResize={this.handleTriggerOrMenuResize}
                     >
                       {{
                         arrow: () => [this.$slots.arrow?.()]

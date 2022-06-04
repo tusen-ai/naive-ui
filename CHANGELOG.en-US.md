@@ -5,6 +5,12 @@
 ### Fixes
 
 - Fix `createDiscreteApi` not working with `'loadingBar'`.
+- Fix `n-popover` background color shifts when closed on theme changing.
+- Fix `n-select`'s menu position doesn't sync with select box when select box's size is changed.
+
+### Feats
+
+- `n-tag` adds `icon` slot.
 
 ## 2.29.1
 

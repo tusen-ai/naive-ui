@@ -167,7 +167,7 @@ const derived = {
   cardColor: base.neutralCard,
   modalColor: base.neutralModal,
   bodyColor: base.neutralBody,
-  tagColor: 'rgb(250, 250, 252)',
+  tagColor: '#eee',
   avatarColor: neutral(base.alphaAvatar),
   invertedColor: 'rgb(0, 20, 40)',
 

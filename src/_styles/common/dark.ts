@@ -37,7 +37,7 @@ const base = {
   alphaScrollbar: '0.2',
   alphaScrollbarHover: '0.3',
   alphaCode: '0.12',
-  alphaTag: '0',
+  alphaTag: '0.2',
 
   // primary
   primaryHover: '#7fe7c4',

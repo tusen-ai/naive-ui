@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+bordered.vue
 closable.vue
 disabled.vue
 size.vue
@@ -13,6 +14,7 @@ checkable.vue
 shape.vue
 color.vue
 avatar.vue
+icon.vue
 rtl-debug.vue
 ```
 
@@ -36,7 +38,8 @@ rtl-debug.vue
 
 ### Tag Slots
 
-| 名称    | 参数 | 说明     |
-| ------- | ---- | -------- |
-| avatar  | `()` | 图片信息 |
-| default | `()` | 标签内容 |
+| 名称    | 参数 | 说明         |
+| ------- | ---- | ------------ |
+| avatar  | `()` | 标签中的头像 |
+| default | `()` | 标签内容     |
+| icon    | `()` | 标签中的图标 |

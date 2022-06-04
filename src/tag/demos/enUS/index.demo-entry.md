@@ -6,6 +6,7 @@ Tags are great for showing attributes; and sometimes toggle options.
 
 ```demo
 basic.vue
+bordered.vue
 closable.vue
 disabled.vue
 size.vue
@@ -13,6 +14,7 @@ checkable.vue
 shape.vue
 color.vue
 avatar.vue
+icon.vue
 ```
 
 ## API
@@ -35,7 +37,8 @@ avatar.vue
 
 ### Tag Slots
 
-| Name    | Parameters | Description        |
-| ------- | ---------- | ------------------ |
-| avatar  | `()`       | Image information. |
-| default | `()`       | Tag's content.     |
+| Name    | Parameters | Description    |
+| ------- | ---------- | -------------- |
+| avatar  | `()`       | Tag'a avatar.  |
+| default | `()`       | Tag's content. |
+| icon    | `()`       | Tag'a icon.    |
