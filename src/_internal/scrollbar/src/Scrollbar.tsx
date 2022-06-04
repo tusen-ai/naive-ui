@@ -738,7 +738,7 @@ const Scrollbar = defineComponent({
           <div
             ref="yRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={this.horizontalRailStyle}
+            style={this.verticalRailStyle}
             aria-hidden
           >
             {h(
@@ -762,11 +762,11 @@ const Scrollbar = defineComponent({
           <div
             ref="xRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={this.verticalRailStyle}
+            style={this.horizontalRailStyle}
             aria-hidden
           >
-            {
-              ((triggerIsNone ? Wrapper : Transition) as any,
+            {h(
+              (triggerIsNone ? Wrapper : Transition) as any,
               triggerIsNone ? null : { name: 'fade-in-transition' },
               {
                 default: () =>
@@ -780,8 +780,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleXScrollMouseDown}
                     />
                   ) : null
-              })
-            }
+              }
+            )}
           </div>
         ]
       )

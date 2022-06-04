@@ -7,6 +7,7 @@
 - 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
 - 修复 `n-popover` 在切换主题时关闭背景颜色突变
 - 修复 `n-select` 多选时选框大小改变时菜单位置没有同步
+- 修复 `n-scrollbar` 无法显示横向滚动条，关闭 [#3047](https://github.com/TuSimple/naive-ui/issues/3047)
 
 ### Feats
 
