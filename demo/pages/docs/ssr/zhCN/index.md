@@ -46,11 +46,10 @@ export default defineNuxtConfig({
 
 下列组件在 SSR 场景中存在一些 Bug，使用时请尽量规避，我们会逐步修复。
 
+- `n-scrollbar`（vue 版本 >= 3.2.36 后没有问题)
 - `n-anchor`
 - `n-avatar-group`
 - `n-back-top`
-- `n-scrollbar`
-- `n-image-group`
 - `n-data-table`
 - `n-watermark`
 - `n-affix`
