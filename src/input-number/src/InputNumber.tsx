@@ -88,6 +88,8 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  parse: Function as PropType<(input: string) => number | null>,
+  format: Function as PropType<(value: number | null) => string>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -189,16 +191,20 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    const deriveValueFromDisplayedValue = (
-      offset = 0,
-      doUpdateIfValid = true,
-      isInputing = false
-    ): null | number | false => {
+    const deriveValueFromDisplayedValue = ({
+      offset,
+      doUpdateIfValid,
+      isInputing
+    }: {
+      offset: number
+      doUpdateIfValid: boolean
+      isInputing: boolean
+    }): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       if (isInputing && isWipValue(displayedValue)) {
         return false
       }
-      const parsedValue = parse(displayedValue)
+      const parsedValue = (props.parse || parse)(displayedValue)
       if (parsedValue === null) {
         if (doUpdateIfValid) doUpdateValue(null)
         return null
@@ -229,7 +235,7 @@ export default defineComponent({
     const deriveDisplayedValueFromValue = (): void => {
       const { value: mergedValue } = mergedValueRef
       if (validator(mergedValue)) {
-        displayedValueRef.value = format(mergedValue)
+        displayedValueRef.value = (props.format || format)(mergedValue)
       } else {
         // null can pass the validator check
         // so mergedValue is a number
@@ -238,7 +244,11 @@ export default defineComponent({
     }
     deriveDisplayedValueFromValue()
     const displayedValueInvalidRef = useMemo(() => {
-      const derivedValue = deriveValueFromDisplayedValue(0, false)
+      const derivedValue = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: false,
+        isInputing: false
+      })
       return derivedValue === false
     })
     const minusableRef = useMemo(() => {
@@ -247,7 +257,11 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(-mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: -mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false
+      })
       return derivedNextValue !== false
     })
     const addableRef = useMemo(() => {
@@ -256,7 +270,11 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(+mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: +mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false
+      })
       return derivedNextValue !== false
     })
     function doFocus (e: FocusEvent): void {
@@ -271,7 +289,11 @@ export default defineComponent({
         // which means not activated
         return
       }
-      const value = deriveValueFromDisplayedValue()
+      const value = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: true,
+        isInputing: false
+      })
       // If valid, update event has been emitted
       // make sure e.target.value is correct in blur callback
       if (value !== false) {
@@ -312,7 +334,11 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false
+        })
       }
     }
     function doMinus (): void {
@@ -328,7 +354,11 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(-mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: -mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false
+        })
       }
     }
     const handleFocus = doFocus
@@ -417,21 +447,33 @@ export default defineComponent({
           // which means not activated
           return
         }
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false
+        })
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
       } else if (e.key === 'ArrowUp') {
         if (props.keyboard.ArrowUp === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false
+        })
         if (value !== false) {
           doAdd()
         }
       } else if (e.key === 'ArrowDown') {
         if (props.keyboard.ArrowDown === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false
+        })
         if (value !== false) {
           doMinus()
         }
@@ -439,8 +481,12 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
-      if (props.updateValueOnInput) {
-        deriveValueFromDisplayedValue(0, true, true)
+      if (props.updateValueOnInput && !props.format && !props.parse) {
+        deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: true
+        })
       }
     }
     watch(mergedValueRef, () => {

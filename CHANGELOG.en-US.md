@@ -12,6 +12,8 @@
 
 - `n-tag` adds `icon` slot.
 - `n-tag` adds `strong` prop.
+- `n-input-number` adds `parse` prop.
+- `n-input-number` adds `format` prop.
 
 ## 2.29.1
 

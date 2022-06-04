@@ -12,6 +12,8 @@
 
 - `n-tag` 新增 `icon` 插槽
 - `n-tag` 新增 `strong` 属性
+- `n-input-number` 新增 `parse` 属性
+- `n-input-number` 新增 `format` 属性
 
 ## 2.29.1
 

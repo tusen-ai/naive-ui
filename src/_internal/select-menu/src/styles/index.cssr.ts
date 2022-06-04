@@ -32,6 +32,7 @@ export default cB('base-select-menu', `
     align-items: center;
   `, [
     cE('content', `
+      z-index: 1;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;

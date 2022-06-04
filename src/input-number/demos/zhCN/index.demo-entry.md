@@ -7,6 +7,7 @@
 ```demo
 basic.vue
 disabled.vue
+parse.vue
 event.vue
 icon.vue
 button-placement.vue
@@ -36,10 +37,12 @@ rtl-debug.vue
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| format | `(value: number \| null) => string` | `undefined` | 格式化值的方法，设定后会禁用 `update-value-on-input` | NEXT_VERSION |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | 控制允许的键盘操作，属性值设为 `false` 的时候会禁用对应的键盘操作 |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |  |
 | max | `number` | `undefined` | 最大值 |  |
 | min | `number` | `undefined` | 最小值 |  |
+| parse | `(input: string) => number \| null` | `undefined` | 解析输入的字符串，设定后会禁用 `update-value-on-input` | NEXT_VERSION |
 | placeholder | `string` | `'请输入'` | 提示信息 |  |
 | readonly | `boolean` | `false` | 是否只读 |  |
 | show-button | `boolean` | `true` | 是否有按钮 |  |

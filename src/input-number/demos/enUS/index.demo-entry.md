@@ -7,6 +7,7 @@ If you just want a number, this is for you.
 ```demo
 basic.vue
 disabled.vue
+parse.vue
 event.vue
 icon.vue
 button-placement.vue
@@ -34,10 +35,12 @@ custom-icon.vue
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
+| format | `(value: number \| null) => string` | `undefined` | Method to format value. If it's set, `update-value-on-input` will be disabled. | NEXT_VERSION |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | Control the keyboard behavior. If you set corresponding to false, the keyboard behavior will be disabled. |  |
 | loading | `boolean` | `undefined` | Set loading state. If set (true/false), the element will always take up enough space for the loading indicator. |  |
 | max | `number` | `undefined` | The max value. |  |
 | min | `number` | `undefined` | The min value. |  |
+| parse | `(input: string) => number \| null` | `undefined` | Methof to parse input string. If it's set, `update-value-on-input` will be disabled. | NEXT_VERSION |
 | placeholder | `string` | `'Please Input'` | Placeholder. |  |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |

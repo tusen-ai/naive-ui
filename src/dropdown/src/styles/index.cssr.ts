@@ -130,10 +130,11 @@ export default cB('dropdown-menu', `
           fontSize: 'var(--n-option-icon-size)'
         })
       ]),
-      cE('label', {
-        whiteSpace: 'nowrap',
-        flex: 1
-      }),
+      cE('label', `
+        white-space: nowrap;
+        flex: 1;
+        z-index: 1;
+      `),
       cE('suffix', `
         box-sizing: border-box;
         flex-grow: 0;

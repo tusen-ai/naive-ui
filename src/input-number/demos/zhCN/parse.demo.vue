@@ -1,0 +1,31 @@
+<markdown>
+# 自定义解析
+
+你可以使用 `parse` 和 `formate` 来自定义解析和展示内容，例如增加千位分隔符。通常这两个要一起设定。
+
+使用 `parse` 和 `format` 会使 `update-value-on-input` 失效。
+</markdown>
+
+<template>
+  <n-input-number :default-value="1075" :parse="parse" :format="format" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup () {
+    return {
+      parse: (input: string) => {
+        const nums = input.replace(/,/g, '').trim()
+        if (/^\d+(\.(\d+)?)?$/.test(nums)) return Number(nums)
+        return nums === '' ? null : Number.NaN
+      },
+      format: (value: number | null) => {
+        if (value === null) return ''
+        return value.toLocaleString('en-US')
+      }
+    }
+  }
+})
+</script>
