@@ -15,6 +15,10 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
+    focusable: {
+      type: Boolean,
+      default: true
+    },
     onClick: Function as PropType<(e: MouseEvent) => void>,
     absolute: Boolean
   },
@@ -24,7 +28,7 @@ export default defineComponent({
       const { clsPrefix, disabled, absolute } = props
       return (
         <button
-          tabindex={disabled ? -1 : 0}
+          tabindex={disabled || !props.focusable ? -1 : 0}
           aria-disabled={disabled}
           aria-label="close"
           disabled={disabled}
@@ -33,6 +37,11 @@ export default defineComponent({
             absolute && `${clsPrefix}-base-close--absolute`,
             disabled && `${clsPrefix}-base-close--disabled`
           ]}
+          onMousedown={(e) => {
+            if (!props.focusable) {
+              e.preventDefault()
+            }
+          }}
           onClick={props.onClick}
         >
           <NBaseIcon clsPrefix={clsPrefix}>

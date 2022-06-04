@@ -584,8 +584,9 @@ export default defineComponent({
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              internalStopClickPropagation
               onClose={() => this.handleDeleteOption(option)}
+              internalCloseFocusable={false}
+              internalStopClickPropagation
             >
               {{
                 default: () =>

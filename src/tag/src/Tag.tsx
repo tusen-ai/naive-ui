@@ -50,6 +50,10 @@ const tagProps = {
   'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
   onUpdateChecked: Function as PropType<(checked: boolean) => void>,
   // private
+  internalCloseFocusable: {
+    type: Boolean,
+    default: true
+  },
   internalStopClickPropagation: Boolean,
   // deprecated
   onCheckedChange: {
@@ -290,6 +294,7 @@ export default defineComponent({
             class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
+            focusable={this.internalCloseFocusable}
             absolute
           />
         ) : null}
