@@ -49,7 +49,6 @@ The following components has some bugs in SSR scene, please avoid using them if 
 - `n-scrollbar`(It works after vue >= 3.2.36)
 - `n-anchor`
 - `n-back-top`
-- `n-scrollbar`
 - `n-image-group`
 - `n-data-table`
 - `n-watermark`
