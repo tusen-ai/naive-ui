@@ -16,6 +16,7 @@
 - `n-input-number` adds `parse` prop.
 - `n-input-number` adds `format` prop.
 - `n-input-number` adds `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068), [#1859](https://github.com/TuSimple/naive-ui/issues/1859)
+- `n-tag` adds background color in dark theme when `:bordered="false"`, closes [#1699](https://github.com/TuSimple/naive-ui/issues/1699).
 
 ## 2.29.1
 

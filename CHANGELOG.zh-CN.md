@@ -16,6 +16,7 @@
 - `n-input-number` 新增 `parse` 属性
 - `n-input-number` 新增 `format` 属性
 - `n-input-number` 新增 `precision` 属性，关闭 [#2068](https://github.com/TuSimple/naive-ui/issues/2068)、[#1859](https://github.com/TuSimple/naive-ui/issues/1859)
+- `n-tag` 在暗色背景下 `:bordered="false"` 时增加背景颜色，关闭 [#1699](https://github.com/TuSimple/naive-ui/issues/1699)
 
 ## 2.29.1
 
