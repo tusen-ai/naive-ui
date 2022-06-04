@@ -8,6 +8,7 @@
 basic.vue
 disabled.vue
 parse.vue
+precision.vue
 event.vue
 icon.vue
 button-placement.vue
@@ -44,6 +45,7 @@ rtl-debug.vue
 | min | `number` | `undefined` | 最小值 |  |
 | parse | `(input: string) => number \| null` | `undefined` | 解析输入的字符串，设定后会禁用 `update-value-on-input` | NEXT_VERSION |
 | placeholder | `string` | `'请输入'` | 提示信息 |  |
+| precision | `number` | `undefined` | 数值保留的精度值，设定后会禁用 `update-value-on-input` | NEXT_VERSION |
 | readonly | `boolean` | `false` | 是否只读 |  |
 | show-button | `boolean` | `true` | 是否有按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |  |

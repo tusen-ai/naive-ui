@@ -8,6 +8,7 @@ If you just want a number, this is for you.
 basic.vue
 disabled.vue
 parse.vue
+precision.vue
 event.vue
 icon.vue
 button-placement.vue
@@ -42,6 +43,7 @@ custom-icon.vue
 | min | `number` | `undefined` | The min value. |  |
 | parse | `(input: string) => number \| null` | `undefined` | Methof to parse input string. If it's set, `update-value-on-input` will be disabled. | NEXT_VERSION |
 | placeholder | `string` | `'Please Input'` | Placeholder. |  |
+| precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | NEXT_VERSION |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |

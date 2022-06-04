@@ -15,6 +15,7 @@
 - `n-tag` adds `strong` prop.
 - `n-input-number` adds `parse` prop.
 - `n-input-number` adds `format` prop.
+- `n-input-number` adds `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068), [#1859](https://github.com/TuSimple/naive-ui/issues/1859)
 
 ## 2.29.1
 

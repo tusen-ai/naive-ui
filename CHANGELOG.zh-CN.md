@@ -15,6 +15,7 @@
 - `n-tag` 新增 `strong` 属性
 - `n-input-number` 新增 `parse` 属性
 - `n-input-number` 新增 `format` 属性
+- `n-input-number` 新增 `precision` 属性，关闭 [#2068](https://github.com/TuSimple/naive-ui/issues/2068)、[#1859](https://github.com/TuSimple/naive-ui/issues/1859)
 
 ## 2.29.1
 
