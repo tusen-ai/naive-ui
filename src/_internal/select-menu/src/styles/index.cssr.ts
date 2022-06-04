@@ -77,26 +77,45 @@ export default cB('base-select-menu', `
     position: relative;
     padding: var(--n-option-padding);
     transition:
-      background-color .3s var(--n-bezier),
       color .3s var(--n-bezier),
       opacity .3s var(--n-bezier);
     box-sizing: border-box;
     color: var(--n-option-text-color);
     opacity: 1;
   `, [
+    c('&::before', `
+      content: "";
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      top: 0;
+      bottom: 0;
+      border-radius: var(--n-border-radius);
+      transition: background-color .3s var(--n-bezier);
+    `),
     c('&:active', `
       color: var(--n-option-text-color-pressed);
     `),
     cM('grouped', `
       padding-left: calc(var(--n-option-padding-left) * 1.5);
     `),
-    cM('pending', `
-      background-color: var(--n-option-color-pending);
-    `),
+    cM('pending', [
+      c('&::before', `
+        background-color: var(--n-option-color-pending);
+      `)
+    ]),
     cM('selected', `
       color: var(--n-option-text-color-active);
-      background-color: var(--n-option-color-active);
-    `),
+    `, [
+      c('&::before', `
+        background-color: var(--n-option-color-active);
+      `),
+      cM('pending', [
+        c('&::before', `
+          background-color: var(--n-option-color-active-pending);
+        `)
+      ])
+    ]),
     cM('disabled', `
       cursor: not-allowed;
     `, [

@@ -349,6 +349,7 @@ export default defineComponent({
           optionColorActive,
           loadingColor,
           loadingSize,
+          optionColorActivePending,
           [createKey('optionFontSize', size)]: fontSize,
           [createKey('optionHeight', size)]: optionHeight,
           [createKey('optionPadding', size)]: optionPadding
@@ -366,6 +367,7 @@ export default defineComponent({
         '--n-option-check-color': optionCheckColor,
         '--n-option-color-pending': optionColorPending,
         '--n-option-color-active': optionColorActive,
+        '--n-option-color-active-pending': optionColorActivePending,
         '--n-option-height': optionHeight,
         '--n-option-opacity-disabled': optionOpacityDisabled,
         '--n-option-text-color': optionTextColor,

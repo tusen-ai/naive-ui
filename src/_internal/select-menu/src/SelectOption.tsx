@@ -10,9 +10,9 @@ import {
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectOption } from '../../../select/src/interface'
+import { render } from '../../../_utils'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
-import { render } from '../../../_utils'
 import {
   RenderLabelImpl,
   internalSelectionMenuInjectionKey,
@@ -125,15 +125,13 @@ export default defineComponent({
       isSelected,
       isPending,
       isGrouped,
-      multiple,
       renderOption,
       renderLabel,
       handleClick,
       handleMouseEnter,
       handleMouseMove
     } = this
-    const showCheckMark = multiple && isSelected
-    const checkmark = renderCheckMark(showCheckMark, clsPrefix)
+    const checkmark = renderCheckMark(isSelected, clsPrefix)
     const children = renderLabel
       ? [renderLabel(rawNode, isSelected), checkmark]
       : [
