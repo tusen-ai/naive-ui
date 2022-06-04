@@ -376,6 +376,7 @@ export default defineComponent({
         '--n-option-text-color-pressed': optionTextColorPressed,
         '--n-option-padding': optionPadding,
         '--n-option-padding-left': getPadding(optionPadding, 'left'),
+        '--n-option-padding-right': getPadding(optionPadding, 'right'),
         '--n-loading-color': loadingColor,
         '--n-loading-size': loadingSize
       }

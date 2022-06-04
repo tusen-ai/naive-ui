@@ -3,6 +3,7 @@ import { fadeInScaleUpTransition } from '../../../../_styles/transitions/fade-in
 
 // --n-loading-color
 // --n-loading-size
+// --n-option-padding-right
 export default cB('base-select-menu', `
   line-height: 1.5;
   outline: none;
@@ -14,11 +15,6 @@ export default cB('base-select-menu', `
     box-shadow .3s var(--n-bezier);
   background-color: var(--n-color);
 `, [
-  cM('multiple', [
-    cB('base-select-option', `
-      padding-right: 28px;
-    `)
-  ]),
   cB('scrollbar', `
     max-height: var(--n-height);
   `),
@@ -77,6 +73,7 @@ export default cB('base-select-menu', `
     cursor: pointer;
     position: relative;
     padding: var(--n-option-padding);
+    padding-right: calc(var(--n-option-padding-right) + 20px);
     transition:
       color .3s var(--n-bezier),
       opacity .3s var(--n-bezier);
@@ -130,7 +127,7 @@ export default cB('base-select-menu', `
     cE('check', `
       font-size: 16px;
       position: absolute;
-      right: 8px;
+      right: calc(var(--n-option-padding-right) - 4px);
       top: calc(50% - 7px);
       color: var(--n-option-check-color);
       transition: color .3s var(--n-bezier);

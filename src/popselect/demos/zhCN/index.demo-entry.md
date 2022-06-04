@@ -6,6 +6,10 @@
 
 ```demo
 basic.vue
+size.vue
+scrollable.vue
+multiple.vue
+slot.vue
 ```
 
 ## API
