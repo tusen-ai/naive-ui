@@ -58,5 +58,10 @@ export default cB('base-close', `
     cursor: not-allowed!important;
     color: var(--n-close-icon-color-disabled);
     background-color: transparent;
-  `)
+  `),
+  cM('round', [
+    c('&::before', `
+      border-radius: 50%;
+    `)
+  ])
 ])

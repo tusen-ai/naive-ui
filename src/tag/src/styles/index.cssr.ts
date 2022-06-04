@@ -89,6 +89,9 @@ export default cB('tag', `
     `),
     cE('avatar', `
       margin: 0 6px 0 calc((var(--n-height) - 8px) / -2);
+    `),
+    cM('closable', `
+      padding: 0 calc(var(--n-height) / 4) 0 calc(var(--n-height) / 3);
     `)
   ]),
   cM('icon, avatar', [

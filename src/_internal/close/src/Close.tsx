@@ -19,13 +19,14 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    round: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>,
     absolute: Boolean
   },
   setup (props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
-      const { clsPrefix, disabled, absolute } = props
+      const { clsPrefix, disabled, absolute, round } = props
       return (
         <button
           tabindex={disabled || !props.focusable ? -1 : 0}
@@ -35,7 +36,8 @@ export default defineComponent({
           class={[
             `${clsPrefix}-base-close`,
             absolute && `${clsPrefix}-base-close--absolute`,
-            disabled && `${clsPrefix}-base-close--disabled`
+            disabled && `${clsPrefix}-base-close--disabled`,
+            round && `${clsPrefix}-base-close--round`
           ]}
           onMousedown={(e) => {
             if (!props.focusable) {

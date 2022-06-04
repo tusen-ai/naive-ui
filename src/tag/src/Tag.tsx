@@ -246,7 +246,9 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       rtlEnabled,
+      closable,
       color: { borderColor } = {},
+      round,
       onRender,
       $slots
     } = this
@@ -274,9 +276,10 @@ export default defineComponent({
             [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
             [`${mergedClsPrefix}-tag--checkable`]: this.checkable,
             [`${mergedClsPrefix}-tag--checked`]: this.checkable && this.checked,
-            [`${mergedClsPrefix}-tag--round`]: this.round,
+            [`${mergedClsPrefix}-tag--round`]: round,
             [`${mergedClsPrefix}-tag--avatar`]: avatarNode,
-            [`${mergedClsPrefix}-tag--icon`]: iconNode
+            [`${mergedClsPrefix}-tag--icon`]: iconNode,
+            [`${mergedClsPrefix}-tag--closable`]: closable
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -288,13 +291,14 @@ export default defineComponent({
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots.default?.()}
         </span>
-        {!this.checkable && this.closable ? (
+        {!this.checkable && closable ? (
           <NBaseClose
             clsPrefix={mergedClsPrefix}
             class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
             focusable={this.internalCloseFocusable}
+            round={round}
             absolute
           />
         ) : null}
