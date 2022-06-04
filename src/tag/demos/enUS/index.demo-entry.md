@@ -21,24 +21,25 @@ icon.vue
 
 ### Tag Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| bordered | `boolean` | `true` | Whether the tag has border. |
-| checkable | `boolean` | `false` | Whether the tag is checkable. Note: this nullifies the type property. |
-| checked | `boolean` | `false` | Whether the tag is checked. Note: used with `checkable`. |
-| closable | `boolean` | `false` | Whether the tag shows a close button. |
-| color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag. Note: this will override the type property's color. |
-| disabled | `boolean` | `false` | Whether the tag is disabled. |
-| round | `boolean` | `false` | Whether the tag has rounded corners. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
-| type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
-| on-close | `(e: MouseEvent) => void` | `undefined` | Close clicked callback. |
-| on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `true` | Whether the tag has border. |  |
+| checkable | `boolean` | `false` | Whether the tag is checkable. Note: this nullifies the type property. |  |
+| checked | `boolean` | `false` | Whether the tag is checked. Note: used with `checkable`. |  |
+| closable | `boolean` | `false` | Whether the tag shows a close button. |  |
+| color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag. Note: this will override the type property's color. |  |
+| disabled | `boolean` | `false` | Whether the tag is disabled. |  |
+| round | `boolean` | `false` | Whether the tag has rounded corners. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
+| strong | `boolean` | `false` | Whether to use strong text | NEXT_VERSION |
+| type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
+| on-close | `(e: MouseEvent) => void` | `undefined` | Close clicked callback. |  |
+| on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |  |
 
 ### Tag Slots
 
-| Name    | Parameters | Description    |
-| ------- | ---------- | -------------- |
-| avatar  | `()`       | Tag'a avatar.  |
-| default | `()`       | Tag's content. |
-| icon    | `()`       | Tag'a icon.    |
+| Name    | Parameters | Description    | Version      |
+| ------- | ---------- | -------------- | ------------ |
+| avatar  | `()`       | Tag'a avatar.  |              |
+| default | `()`       | Tag's content. |              |
+| icon    | `()`       | Tag'a icon.    | NEXT_VERSION |

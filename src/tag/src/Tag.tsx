@@ -43,6 +43,7 @@ const tagProps = {
   },
   checked: Boolean,
   checkable: Boolean,
+  strong: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
@@ -149,6 +150,7 @@ export default defineComponent({
           colorCheckedHover,
           colorCheckedPressed,
           closeBorderRadius,
+          fontWeightStrong,
           [createKey('colorBordered', type)]: colorBordered,
           [createKey('closeSize', size)]: closeSize,
           [createKey('closeIconSize', size)]: closeIconSize,
@@ -165,6 +167,7 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
+        '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
@@ -263,6 +266,7 @@ export default defineComponent({
           this.themeClass,
           {
             [`${mergedClsPrefix}-tag--rtl`]: rtlEnabled,
+            [`${mergedClsPrefix}-tag--strong`]: this.strong,
             [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
             [`${mergedClsPrefix}-tag--checkable`]: this.checkable,
             [`${mergedClsPrefix}-tag--checked`]: this.checkable && this.checked,

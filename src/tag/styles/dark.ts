@@ -35,7 +35,8 @@ const tagDark: TagTheme = {
       heightSmall,
       heightMedium,
       buttonColor2Hover,
-      buttonColor2Pressed
+      buttonColor2Pressed,
+      fontWeightStrong
     } = vars
     return {
       ...commonVariables,
@@ -50,6 +51,7 @@ const tagDark: TagTheme = {
       fontSizeSmall: fontSizeTiny,
       fontSizeMedium: fontSizeSmall,
       fontSizeLarge: fontSizeMedium,
+      fontWeightStrong,
       // checked
       textColorCheckable: textColor2,
       textColorHoverCheckable: textColor2,

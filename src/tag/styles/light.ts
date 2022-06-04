@@ -33,7 +33,8 @@ const self = (vars: ThemeCommonVars) => {
     closeColorHover,
     closeColorPressed,
     buttonColor2Hover,
-    buttonColor2Pressed
+    buttonColor2Pressed,
+    fontWeightStrong
   } = vars
   return {
     ...commonVariables,
@@ -48,6 +49,7 @@ const self = (vars: ThemeCommonVars) => {
     fontSizeSmall: fontSizeTiny,
     fontSizeMedium: fontSizeSmall,
     fontSizeLarge: fontSizeMedium,
+    fontWeightStrong,
     // checked
     textColorCheckable: textColor2,
     textColorHoverCheckable: textColor2,

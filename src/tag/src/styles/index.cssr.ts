@@ -25,6 +25,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-text-color-checked
 // --n-text-color-hover-checkable
 // --n-text-color-pressed-checkable
+// --n-font-weight-strong
 export default cB('tag', `
   white-space: nowrap;
   position: relative;
@@ -47,6 +48,9 @@ export default cB('tag', `
   height: var(--n-height);
   font-size: var(--n-font-size);
 `, [
+  cM('strong', `
+    font-weight: var(--n-font-weight-strong);
+  `),
   cE('border', `
     pointer-events: none;
     position: absolute;

@@ -11,6 +11,7 @@
 ### Feats
 
 - `n-tag` adds `icon` slot.
+- `n-tag` adds `strong` prop.
 
 ## 2.29.1
 
