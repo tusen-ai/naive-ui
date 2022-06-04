@@ -7,7 +7,14 @@
 </markdown>
 
 <template>
-  <n-input-number :default-value="1075" :parse="parse" :format="format" />
+  <n-space vertical>
+    <n-input-number :default-value="1075" :parse="parse" :format="format" />
+    <n-input-number
+      :default-value="1075"
+      :parse="parseCurrency"
+      :format="formatCurrency"
+    />
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -24,6 +31,15 @@ export default defineComponent({
       format: (value: number | null) => {
         if (value === null) return ''
         return value.toLocaleString('en-US')
+      },
+      parseCurrency: (input: string) => {
+        const nums = input.replace(/(,|¥|\s)/g, '').trim()
+        if (/^\d+(\.(\d+)?)?$/.test(nums)) return Number(nums)
+        return nums === '' ? null : Number.NaN
+      },
+      formatCurrency: (value: number | null) => {
+        if (value === null) return ''
+        return value.toLocaleString('en-US') + ' ¥'
       }
     }
   }
