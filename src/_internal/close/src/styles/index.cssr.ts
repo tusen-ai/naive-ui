@@ -1,4 +1,4 @@
-import { cB, cM, c } from '../../../../_utils/cssr'
+import { cB, cM, c, cNotM } from '../../../../_utils/cssr'
 
 // vars:
 // --n-close-border-radius
@@ -39,23 +39,25 @@ export default cB('base-close', `
     transition: inherit;
     border-radius: inherit;
   `),
-  c('&:hover', `
-    color: var(--n-close-icon-color-hover);
-  `),
-  c('&:hover::before', `
-    background-color: var(--n-close-color-hover);
-  `),
-  c('&:focus::before', `
-    background-color: var(--n-close-color-hover);
-  `),
-  c('&:active', `
-    color: var(--n-close-icon-color-pressed);
-  `),
-  c('&:active::before', `
-    background-color: var(--n-close-color-pressed);
-  `),
+  cNotM('disabled', [
+    c('&:hover', `
+      color: var(--n-close-icon-color-hover);
+    `),
+    c('&:hover::before', `
+      background-color: var(--n-close-color-hover);
+    `),
+    c('&:focus::before', `
+      background-color: var(--n-close-color-hover);
+    `),
+    c('&:active', `
+      color: var(--n-close-icon-color-pressed);
+    `),
+    c('&:active::before', `
+      background-color: var(--n-close-color-pressed);
+    `)
+  ]),
   cM('disabled', `
-    cursor: not-allowed!important;
+    cursor: not-allowed;
     color: var(--n-close-icon-color-disabled);
     background-color: transparent;
   `),
