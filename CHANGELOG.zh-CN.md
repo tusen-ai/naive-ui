@@ -10,6 +10,7 @@
 - 修复 `n-scrollbar` 无法显示横向滚动条，关闭 [#3047](https://github.com/TuSimple/naive-ui/issues/3047)
 - 修复 `n-tree` 在 `:block-line="true"` 并且 `:selectable="true"` 时节点的点击样式优先级高于激活样式
 - 修复 `n-slider` 在边界情况下可能泄露事件监听器
+- 修复 `n-data-table` 在 `keep-alive` 组件中使用重新激活时不会恢复滚动位置，关闭 [#2522](https://github.com/TuSimple/naive-ui/issues/2522)
 
 ### Feats
 

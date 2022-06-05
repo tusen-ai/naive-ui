@@ -279,8 +279,14 @@ const Scrollbar = defineComponent({
         activateStateInitialized = true
         return
       }
-      // remount
-      scrollTo({ top: scrollX, left: scrollY })
+      // Only restore for builtin container & content
+      if (!props.container) {
+        // remount
+        scrollTo({
+          top: containerScrollTopRef.value,
+          left: containerScrollLeftRef.value
+        })
+      }
     })
     onDeactivated(() => {
       isDeactivated = true
@@ -316,7 +322,7 @@ const Scrollbar = defineComponent({
     ): void => {
       if (!props.scrollable) return
       if (typeof options === 'number') {
-        scrollToPosition(options, y ?? 0, 0, false, 'auto')
+        scrollToPosition(y ?? 0, options, 0, false, 'auto')
         return
       }
       const {

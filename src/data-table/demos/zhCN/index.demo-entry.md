@@ -50,6 +50,7 @@ fixed-column-debug
 fixed-column2-debug
 scroll-debug
 height-debug
+keep-alive-debug.vue
 ```
 
 ## API

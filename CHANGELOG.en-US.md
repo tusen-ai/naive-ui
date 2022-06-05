@@ -10,6 +10,7 @@
 - Fix `n-scrollbar` can't show horizontal scrollbar, closes [#3047](https://github.com/TuSimple/naive-ui/issues/3047).
 - Fix `n-tree` node's pressed style is prior to selected style when `:block-line="true"` and `:selectable="true"`.
 - Fix `n-slider` may leak event handler on edga case.
+- Fix `n-data-table` doesn't restore scroll state when it's reactivated inside `keep-alive` component, closes [#2522](https://github.com/TuSimple/naive-ui/issues/2522).
 
 ### Feats
 
