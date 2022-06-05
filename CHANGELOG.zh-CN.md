@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-image` 新增展示图片原始大小的开关，关闭[#3023](https://github.com/TuSimple/naive-ui/issues/3023)
+
 ### Fixes
 
 - 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
