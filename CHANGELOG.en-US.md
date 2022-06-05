@@ -2,10 +2,6 @@
 
 ## NEXT_VERSION
 
-### Feats
-
-- `n-image` add a switch to display the original size of the picture, closes [#3023](https://github.com/TuSimple/naive-ui/issues/3023).
-
 ### Fixes
 
 - Fix `createDiscreteApi` not working with `'loadingBar'`.
@@ -26,6 +22,8 @@
 - `n-time-picker` adds `time-zone` prop, closes [#293](https://github.com/TuSimple/naive-ui/issues/293).
 - `n-time` adds `time-zone` prop.
 - `n-breadcrumb-item` adds `clickable` prop.
+- `n-image` adds a switch to display the original size of the picture, closes [#3023](https://github.com/TuSimple/naive-ui/issues/3023).
+- `n-image` optimizes zoom effect of ultra large image.
 
 ## 2.29.1
 

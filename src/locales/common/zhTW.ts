@@ -109,7 +109,9 @@ const zhTW: NLocale = {
     tipClockwise: '向右旋转',
     tipZoomOut: '缩小',
     tipZoomIn: '放大',
-    tipClose: '关闭（Esc）'
+    tipClose: '关闭（Esc）',
+    // TODO: translation
+    tipOriginalSize: '缩放到原始尺寸'
   }
 }
 

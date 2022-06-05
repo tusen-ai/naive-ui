@@ -2,10 +2,6 @@
 
 ## NEXT_VERSION
 
-### Feats
-
-- `n-image` 新增展示图片原始大小的开关，关闭[#3023](https://github.com/TuSimple/naive-ui/issues/3023)
-
 ### Fixes
 
 - 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
@@ -26,6 +22,8 @@
 - `n-time-picker` 新增 `time-zone` 属性，关闭 [#293](https://github.com/TuSimple/naive-ui/issues/293)
 - `n-time` 新增 `time-zone` 属性
 - `n-breadcrumb-item` 新增 `clickable` 属性
+- `n-image` 新增展示图片原始大小的开关，关闭 [#3023](https://github.com/TuSimple/naive-ui/issues/3023)
+- `n-image` 优化了图像过大时预览缩放的效果
 
 ## 2.29.1
 

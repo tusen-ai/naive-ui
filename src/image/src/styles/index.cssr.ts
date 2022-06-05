@@ -1,4 +1,4 @@
-import { c, cB, cNotM, cM } from '../../../_utils/cssr'
+import { c, cB, cNotM } from '../../../_utils/cssr'
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
@@ -69,15 +69,10 @@ export default c([
     user-select: none;
     pointer-events: all;
     margin: auto;
-    max-height: 100vh;
-    max-width: 100vw;
+    max-height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
     transition: transform .3s var(--n-bezier);
-  `, [
-    cM('full', `
-      max-height: unset;
-      max-width: unset;
-    `)
-  ]),
+  `),
   cB('image', `
     display: inline-flex;
     max-height: 100%;

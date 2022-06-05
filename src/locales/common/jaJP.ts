@@ -109,7 +109,9 @@ const jaJP: NLocale = {
     tipClockwise: '右に回転',
     tipZoomOut: '縮小',
     tipZoomIn: '拡大',
-    tipClose: '閉じる (Esc)'
+    tipClose: '閉じる (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

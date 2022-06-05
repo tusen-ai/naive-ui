@@ -24,7 +24,6 @@ import {
   RotateCounterclockwiseIcon,
   ZoomInIcon,
   ZoomOutIcon,
-  ResizeIcon,
   ResizeSmallIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -35,6 +34,8 @@ import { prevIcon, nextIcon, closeIcon } from './icons'
 import type { MoveStrategy } from './interface'
 import { imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
+
+const BLEEDING = 32
 
 export interface ImagePreviewInst {
   setThumbnailEl: (e: HTMLImageElement | null) => void
@@ -69,7 +70,6 @@ export default defineComponent({
     const showRef = ref(false)
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
-    const imageDisplayModeRef = ref<'full' | 'preview'>('preview')
 
     function syncTransformOrigin (): void {
       const { value: previewWrapper } = previewWrapperRef
@@ -98,7 +98,6 @@ export default defineComponent({
     watch(showRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
-        imageDisplayModeRef.value = 'preview'
       } else off('keydown', document, handleKeydown)
     })
 
@@ -242,19 +241,26 @@ export default defineComponent({
       on('mouseup', document, handleMouseUp)
     }
     function handlePreviewDblclick (): void {
-      scale = scale === 1 ? 2 : 1
+      const originalImageSizeScale = getOrignalImageSizeScale()
+      scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
       derivePreviewStyle()
     }
 
+    const scaleRadix = 1.5
+    let scaleExp = 0
     let scale = 1
     let rotate = 0
-    function handleSwitchPrev (): void {
+    function resetScale (): void {
       scale = 1
+      scaleExp = 0
+    }
+    function handleSwitchPrev (): void {
+      resetScale()
       rotate = 0
       props.onPrev?.()
     }
     function handleSwitchNext (): void {
-      scale = 1
+      resetScale()
       rotate = 0
       props.onNext?.()
     }
@@ -266,20 +272,50 @@ export default defineComponent({
       rotate += 90
       derivePreviewStyle()
     }
+    function getMaxScale (): number {
+      const { value: preview } = previewRef
+      if (!preview) return 1
+      const { innerWidth, innerHeight } = window
+      const heightMaxScale = Math.max(
+        1,
+        preview.naturalHeight / (innerHeight - BLEEDING)
+      )
+      const widthMaxScale = Math.max(
+        1,
+        preview.naturalWidth / (innerWidth - BLEEDING)
+      )
+      return Math.max(3, heightMaxScale * 2, widthMaxScale * 2)
+    }
+    function getOrignalImageSizeScale (): number {
+      const { value: preview } = previewRef
+      if (!preview) return 1
+      const { innerWidth, innerHeight } = window
+      const heightScale = preview.naturalHeight / (innerHeight - BLEEDING)
+      const widthScale = preview.naturalWidth / (innerWidth - BLEEDING)
+      if (heightScale < 1 && widthScale < 1) {
+        return 1
+      }
+      return Math.max(heightScale, widthScale)
+    }
     function zoomIn (): void {
-      if (scale < 3) {
-        scale += 0.5
+      const maxScale = getMaxScale()
+      if (scale < maxScale) {
+        scaleExp += 1
+        scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
         derivePreviewStyle()
       }
     }
     function zoomOut (): void {
       if (scale > 0.5) {
-        scale -= 0.5
+        const originalScale = scale
+        scaleExp -= 1
+        scale = Math.max(0.5, Math.pow(scaleRadix, scaleExp))
+        const diff = originalScale - scale
         derivePreviewStyle(false)
         const offset = getDerivedOffset()
-        scale += 0.5
+        scale += diff
         derivePreviewStyle(false)
-        scale -= 0.5
+        scale -= diff
         offsetX = offset.offsetX
         offsetY = offset.offsetY
         derivePreviewStyle()
@@ -308,9 +344,9 @@ export default defineComponent({
       showRef.value = !showRef.value
       displayedRef.value = true
     }
-    function switchThePictureDisplayMode (): void {
-      imageDisplayModeRef.value =
-        imageDisplayModeRef.value === 'full' ? 'preview' : 'full'
+    function resizeToOrignalImageSize (): void {
+      scale = getOrignalImageSizeScale()
+      scaleExp = Math.ceil(Math.log(scale) / Math.log(scaleRadix))
       offsetX = 0
       offsetY = 0
       derivePreviewStyle()
@@ -336,6 +372,7 @@ export default defineComponent({
             to={false}
             theme={theme.peers.Tooltip}
             themeOverrides={theme.peerOverrides.Tooltip}
+            keepAliveOnHover={false}
           >
             {{
               default: () => {
@@ -382,7 +419,6 @@ export default defineComponent({
       show: showRef,
       appear: useIsMounted(),
       displayed: displayedRef,
-      imageDisplayModeRef,
       handleWheel (e: WheelEvent) {
         e.preventDefault()
       },
@@ -390,8 +426,8 @@ export default defineComponent({
       handlePreviewDblclick,
       syncTransformOrigin,
       handleAfterLeave: () => {
+        resetScale()
         rotate = 0
-        scale = 1
         displayedRef.value = false
       },
       handleDragStart: (e: Event) => {
@@ -404,7 +440,7 @@ export default defineComponent({
       handleSwitchPrev,
       handleSwitchNext,
       withTooltip,
-      switchThePictureDisplayMode,
+      resizeToOrignalImageSize,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -500,20 +536,15 @@ export default defineComponent({
                               {withTooltip(
                                 <NBaseIcon
                                   clsPrefix={clsPrefix}
-                                  onClick={this.switchThePictureDisplayMode}
+                                  onClick={this.resizeToOrignalImageSize}
                                 >
                                   {{
                                     default: () => {
-                                      return this.imageDisplayModeRef ===
-                                        'full' ? (
-                                        <ResizeSmallIcon />
-                                          ) : (
-                                        <ResizeIcon />
-                                          )
+                                      return <ResizeSmallIcon />
                                     }
                                   }}
                                 </NBaseIcon>,
-                                'tipClockwise'
+                                'tipOriginalSize'
                               )}
                               {withTooltip(
                                 <NBaseIcon
@@ -569,11 +600,7 @@ export default defineComponent({
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
                               onDblclick={this.handlePreviewDblclick}
-                              class={[
-                                `${clsPrefix}-image-preview`,
-                                this.imageDisplayModeRef === 'full' &&
-                                  `${clsPrefix}-image-preview--full`
-                              ]}
+                              class={`${clsPrefix}-image-preview`}
                               key={this.previewSrc}
                               src={this.previewSrc}
                               ref="previewRef"

@@ -109,7 +109,9 @@ const deDE: NLocale = {
     tipClockwise: 'Uhrzeigersinn',
     tipZoomOut: 'Rauszoomen',
     tipZoomIn: 'Reinzoomen',
-    tipClose: 'Schließen (Esc)'
+    tipClose: 'Schließen (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 
