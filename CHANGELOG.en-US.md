@@ -19,6 +19,7 @@
 - `n-tag` adds background color in dark theme when `:bordered="false"`, closes [#1699](https://github.com/TuSimple/naive-ui/issues/1699).
 - `n-time-picker` adds `time-zone` prop, closes [#293](https://github.com/TuSimple/naive-ui/issues/293).
 - `n-time` adds `time-zone` prop.
+- `n-breadcrumb-item` adds `clickable` prop.
 
 ## 2.29.1
 

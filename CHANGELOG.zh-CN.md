@@ -19,6 +19,7 @@
 - `n-tag` 在暗色背景下 `:bordered="false"` 时增加背景颜色，关闭 [#1699](https://github.com/TuSimple/naive-ui/issues/1699)
 - `n-time-picker` 新增 `time-zone` 属性，关闭 [#293](https://github.com/TuSimple/naive-ui/issues/293)
 - `n-time` 新增 `time-zone` 属性
+- `n-breadcrumb-item` 新增 `clickable` 属性
 
 ## 2.29.1
 

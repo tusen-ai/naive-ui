@@ -7,14 +7,11 @@ Use separator prop to custom separator.
 <template>
   <n-breadcrumb separator=">">
     <n-breadcrumb-item>
-      <n-icon><md-cash /></n-icon> Home
-    </n-breadcrumb-item>
+      <n-icon><md-cash /></n-icon> Home</n-breadcrumb-item>
     <n-breadcrumb-item>
-      <n-icon><md-cash /></n-icon> Account
-    </n-breadcrumb-item>
+      <n-icon><md-cash /></n-icon> Account</n-breadcrumb-item>
     <n-breadcrumb-item>
-      <n-icon><md-cash /></n-icon> Category
-    </n-breadcrumb-item>
+      <n-icon><md-cash /></n-icon> Category</n-breadcrumb-item>
   </n-breadcrumb>
 </template>
 <script lang="ts">
