@@ -8,6 +8,7 @@
 - Fix `n-popover` background color shifts when closed on theme changing.
 - Fix `n-select`'s menu position doesn't sync with select box when select box's size is changed.
 - Fix `n-scrollbar` can't show horizontal scrollbar, closes [#3047](https://github.com/TuSimple/naive-ui/issues/3047).
+- Fix `n-tree` node's pressed style is prior to selected style when `:block-line="true"` and `:selectable="true"`.
 
 ### Feats
 
