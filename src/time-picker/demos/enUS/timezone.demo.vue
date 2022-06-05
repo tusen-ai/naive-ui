@@ -1,5 +1,5 @@
 <markdown>
-# time-zone
+# Time zone
 </markdown>
 
 <template>

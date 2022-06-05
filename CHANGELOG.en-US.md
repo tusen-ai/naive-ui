@@ -18,6 +18,7 @@
 - `n-input-number` adds `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068), [#1859](https://github.com/TuSimple/naive-ui/issues/1859)
 - `n-tag` adds background color in dark theme when `:bordered="false"`, closes [#1699](https://github.com/TuSimple/naive-ui/issues/1699).
 - `n-time-picker` adds `time-zone` prop, closes [#293](https://github.com/TuSimple/naive-ui/issues/293).
+- `n-time` adds `time-zone` prop.
 
 ## 2.29.1
 

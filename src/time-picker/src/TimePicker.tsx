@@ -32,7 +32,7 @@ import {
   getHours,
   getSeconds
 } from 'date-fns/esm'
-import { formatInTimeZone } from 'date-fns-tz/esm'
+import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone'
 import type { Locale } from 'date-fns'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
