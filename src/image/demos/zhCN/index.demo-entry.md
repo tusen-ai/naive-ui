@@ -11,7 +11,7 @@ error.vue
 preview-disabled.vue
 custom.vue
 tooltip.vue
-full.vue
+full-debug.vue
 ```
 
 ## API
