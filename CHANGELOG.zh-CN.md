@@ -9,6 +9,7 @@
 - 修复 `n-select` 多选时选框大小改变时菜单位置没有同步
 - 修复 `n-scrollbar` 无法显示横向滚动条，关闭 [#3047](https://github.com/TuSimple/naive-ui/issues/3047)
 - 修复 `n-tree` 在 `:block-line="true"` 并且 `:selectable="true"` 时节点的点击样式优先级高于激活样式
+- 修复 `n-slider` 在边界情况下可能泄露事件监听器
 
 ### Feats
 
