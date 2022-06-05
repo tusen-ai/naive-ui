@@ -18,7 +18,7 @@
 - 修复 `n-data-table` 在 `keep-alive` 组件中使用重新激活时不会恢复滚动位置，关闭 [#2522](https://github.com/TuSimple/naive-ui/issues/2522)
 - 修复 `n-image` 在图像过大时缩放比例不够大
 - 修复 `n-menu` 下拉菜单选项在选项后代被激活的状况下的文字样式
-- 修复 `n-input` 的 `inputProps` 设定 `class` 和 `style` 不生效
+- 修复 `n-input` 的 `input-props` 属性设定 `class` 和 `style` 不生效
 
 ### Feats
 
