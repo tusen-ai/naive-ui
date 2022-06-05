@@ -11,7 +11,9 @@ import {
   CSSProperties,
   watchEffect,
   VNode,
-  HTMLAttributes
+  HTMLAttributes,
+  onActivated,
+  onDeactivated
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -269,9 +271,31 @@ const Scrollbar = defineComponent({
       return contentRef.value
     })
 
+    let isDeactivated = false
+    let activateStateInitialized = false
+    onActivated(() => {
+      isDeactivated = false
+      if (!activateStateInitialized) {
+        activateStateInitialized = true
+        return
+      }
+      // remount
+      scrollTo({ top: scrollX, left: scrollY })
+    })
+    onDeactivated(() => {
+      isDeactivated = true
+      if (!activateStateInitialized) {
+        activateStateInitialized = true
+      }
+    })
+
     // methods
-    const handleContentResize = sync
+    const handleContentResize = (): void => {
+      if (isDeactivated) return
+      sync()
+    }
     const handleContainerResize = (e: ResizeObserverEntry): void => {
+      if (isDeactivated) return
       const { onResize } = props
       if (onResize) onResize(e)
       sync()
