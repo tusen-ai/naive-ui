@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 主题变量 `closeColor`、`closeColorHover`、`closeColorPressed` 重命名为 `closeIconColor`、`closeIconColorHover`、`closeIconColorPressed`，`closeColorHover`、`closeColorPressed` 仍然保留，控制关闭按钮的背景颜色
+- `n-tag` 的 `colorXxx` 主题变量重命名为 `colorBorderedXxx`，`colorXxx` 仍然保留，控制不带边框标签的颜色
+
 ### Fixes
 
 - 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
@@ -11,20 +16,28 @@
 - 修复 `n-tree` 在 `:block-line="true"` 并且 `:selectable="true"` 时节点的点击样式优先级高于激活样式
 - 修复 `n-slider` 在边界情况下可能泄露事件监听器
 - 修复 `n-data-table` 在 `keep-alive` 组件中使用重新激活时不会恢复滚动位置，关闭 [#2522](https://github.com/TuSimple/naive-ui/issues/2522)
+- 修复 `n-image` 在图像过大时缩放比例不够大
+- 修复 `n-menu` 下拉菜单选项在选项后代被激活的状况下的文字样式
 
 ### Feats
 
+- 🌟 `n-time-picker` 新增 `time-zone` 属性，关闭 [#293](https://github.com/TuSimple/naive-ui/issues/293)
+- 🌟 `n-input-number` 新增 `parse` 属性
+- 🌟 `n-input-number` 新增 `format` 属性
+- 🌟 `n-input-number` 新增 `precision` 属性，关闭 [#2068](https://github.com/TuSimple/naive-ui/issues/2068)、[#1859](https://github.com/TuSimple/naive-ui/issues/1859)
+- 🌟 `n-image` 新增展示图片原始大小的开关，关闭 [#3023](https://github.com/TuSimple/naive-ui/issues/3023)
+- 🌟 所有组件的关闭按钮使用了新样式、并且可以聚焦
+- 所有组件的选择菜单或下拉菜单使用了新的选项样式
 - `n-tag` 新增 `icon` 插槽
 - `n-tag` 新增 `strong` 属性
-- `n-input-number` 新增 `parse` 属性
-- `n-input-number` 新增 `format` 属性
-- `n-input-number` 新增 `precision` 属性，关闭 [#2068](https://github.com/TuSimple/naive-ui/issues/2068)、[#1859](https://github.com/TuSimple/naive-ui/issues/1859)
 - `n-tag` 在暗色背景下 `:bordered="false"` 时增加背景颜色，关闭 [#1699](https://github.com/TuSimple/naive-ui/issues/1699)
-- `n-time-picker` 新增 `time-zone` 属性，关闭 [#293](https://github.com/TuSimple/naive-ui/issues/293)
 - `n-time` 新增 `time-zone` 属性
 - `n-breadcrumb-item` 新增 `clickable` 属性
-- `n-image` 新增展示图片原始大小的开关，关闭 [#3023](https://github.com/TuSimple/naive-ui/issues/3023)
-- `n-image` 优化了图像过大时预览缩放的效果
+- `n-breadcrumb-item` 使用新样式，新增 `itemLineHeight`、`itemBorderRadius`、`itemColorHover`、`itemColorPressed` 主题变量
+- `n-notification` 优化标题过长时的样式
+- `n-drawer` 优化标题过长时的样式
+- `n-dialog` 优化标题过长时的样式
+- `n-card` 优化标题过长时的样式
 
 ## 2.29.1
 

@@ -144,9 +144,8 @@ const derived = {
   closeIconColor: neutral(Number(base.alphaClose)),
   closeIconColorHover: neutral(Number(base.alphaClose)),
   closeIconColorPressed: neutral(Number(base.alphaClose)),
-  closeIconColorDisabled: neutral(base.alpha4),
-  closeColorHover: 'rgba(0, 0, 0, .08)',
-  closeColorPressed: 'rgba(0, 0, 0, .16)',
+  closeColorHover: 'rgba(0, 0, 0, .09)',
+  closeColorPressed: 'rgba(0, 0, 0, .13)',
 
   // clear
   clearColor: neutral(base.alpha4),

@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Theme variable `closeColor`, `closeColorHover`, `closeColorPressed` are renamed to `closeIconColor`, `closeIconColorHover`,`closeIconColorPressed`. `closeColorHover`, `closeColorPressed` still exist, controlling background color of close button.
+- `n-tag`'s `colorXxx` theme variables are renamed to `colorBorderedXxx`. `colorXxx` still exists, controlling background color of borderless tag.
+
 ### Fixes
 
 - Fix `createDiscreteApi` not working with `'loadingBar'`.
@@ -11,20 +16,28 @@
 - Fix `n-tree` node's pressed style is prior to selected style when `:block-line="true"` and `:selectable="true"`.
 - Fix `n-slider` may leak event handler on edga case.
 - Fix `n-data-table` doesn't restore scroll state when it's reactivated inside `keep-alive` component, closes [#2522](https://github.com/TuSimple/naive-ui/issues/2522).
+- Fix `n-image` zoom level doesn't fit ultra large image.
+- Fix `n-menu`'s dropdown option text style when some of it's descendants is activated.
 
 ### Feats
 
+- 🌟 `n-time-picker` adds `time-zone` prop, closes [#293](https://github.com/TuSimple/naive-ui/issues/293).
+- 🌟 `n-input-number` adds `parse` prop.
+- 🌟 `n-input-number` adds `format` prop.
+- 🌟 `n-input-number` adds `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068), [#1859](https://github.com/TuSimple/naive-ui/issues/1859)
+- 🌟 `n-image` adds a switch to display the original size of the picture, closes [#3023](https://github.com/TuSimple/naive-ui/issues/3023).
+- 🌟 All components' close buttons use new style and are focusable.
+- All components' select menu & dropdown menu's options use new style.
 - `n-tag` adds `icon` slot.
 - `n-tag` adds `strong` prop.
-- `n-input-number` adds `parse` prop.
-- `n-input-number` adds `format` prop.
-- `n-input-number` adds `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068), [#1859](https://github.com/TuSimple/naive-ui/issues/1859)
 - `n-tag` adds background color in dark theme when `:bordered="false"`, closes [#1699](https://github.com/TuSimple/naive-ui/issues/1699).
-- `n-time-picker` adds `time-zone` prop, closes [#293](https://github.com/TuSimple/naive-ui/issues/293).
 - `n-time` adds `time-zone` prop.
 - `n-breadcrumb-item` adds `clickable` prop.
-- `n-image` adds a switch to display the original size of the picture, closes [#3023](https://github.com/TuSimple/naive-ui/issues/3023).
-- `n-image` optimizes zoom effect of ultra large image.
+- `n-breadcrumb-item` uses new style, adds `itemLineHeight`, `itemBorderRadius`, `itemColorHover`, `itemColorPressed` theme variables.
+- `n-notification` optimizes title style when it's too long.
+- `n-drawer` optimizes title style when it's too long.
+- `n-dialog` optimizes title style when it's too long.
+- `n-card` optimizes title style when it's too long.
 
 ## 2.29.1
 
