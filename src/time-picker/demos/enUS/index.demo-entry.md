@@ -16,6 +16,7 @@ hours12.vue
 formatted.vue
 focus.vue
 status.vue
+timezone.vue
 ```
 
 ## API
@@ -43,6 +44,7 @@ status.vue
 | show | `boolean` | `undefined` | Whether to show panel | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| time-zone | `string` | `undefined` | Time zone to be used to format the value. It follows [iana time zones](https://www.iana.org/time-zones). You can use `Intl.supportedValuesOf('timeZone')` to check supported values. | NEXT_VERSION |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | use-12-hours | `boolean` | `false` | Whether to use a 12-hour clock panel. |  |
 | value | `number \| null` | `undefined` | Value when being set manually. |  |

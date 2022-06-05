@@ -15,7 +15,7 @@ export default {
   labelHeightSmall: '24px',
   labelHeightMedium: '26px',
   labelHeightLarge: '28px',
-  labelPaddingVertical: '0 0 8px 2px',
+  labelPaddingVertical: '0 0 6px 2px',
   labelPaddingHorizontal: '0 12px 0 0',
   labelTextAlignVertical: 'left',
   labelTextAlignHorizontal: 'right'

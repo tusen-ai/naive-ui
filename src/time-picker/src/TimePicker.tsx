@@ -32,6 +32,8 @@ import {
   getHours,
   getSeconds
 } from 'date-fns/esm'
+import { formatInTimeZone } from 'date-fns-tz/esm'
+import type { Locale } from 'date-fns'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
@@ -131,11 +133,8 @@ const timePickerProps = {
   >,
   onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-  // private
-  stateful: {
-    type: Boolean,
-    default: true
-  },
+  // https://www.iana.org/time-zones
+  timeZone: String,
   showIcon: {
     type: Boolean,
     default: true
@@ -161,6 +160,11 @@ const timePickerProps = {
     validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   },
   use12Hours: Boolean,
+  // private
+  stateful: {
+    type: Boolean,
+    default: true
+  },
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
@@ -242,11 +246,40 @@ export default defineComponent({
       return uncontrolledValueRef.value
     })
 
+    const mergedFormatRef = computed(() => {
+      const { timeZone } = props
+      if (timeZone) {
+        return (
+          date: Date | number,
+          format: string,
+          options?: {
+            locale?: Locale
+          }
+        ) => {
+          return formatInTimeZone(date, timeZone, format, options)
+        }
+      } else {
+        return (
+          date: Date | number,
+          _format: string,
+          options?: {
+            locale?: Locale
+          }
+        ) => {
+          return format(date, _format, options)
+        }
+      }
+    })
+
     const { value: mergedValue } = mergedValueRef
     const displayTimeStringRef = ref(
       mergedValue === null
         ? ''
-        : format(mergedValue, props.format, dateFnsOptionsRef.value)
+        : mergedFormatRef.value(
+          mergedValue,
+          props.format,
+          dateFnsOptionsRef.value
+        )
     )
     const uncontrolledShowRef = ref(false)
     const controlledShowRef = toRef(props, 'show')
@@ -322,17 +355,17 @@ export default defineComponent({
     const hourValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'HH', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'HH', dateFnsOptionsRef.value))
     })
     const minuteValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'mm', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'mm', dateFnsOptionsRef.value))
     })
     const secondValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'ss', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'ss', dateFnsOptionsRef.value))
     })
     function doUpdateFormattedValue (
       value: string | null,
@@ -360,7 +393,7 @@ export default defineComponent({
     function createFormattedValue (value: number | null): string | null {
       return value === null
         ? null
-        : format(value, props.valueFormat || props.format)
+        : mergedFormatRef.value(value, props.valueFormat || props.format)
     }
     function doUpdateValue (value: number | null): void {
       const {
@@ -492,7 +525,7 @@ export default defineComponent({
       if (time === undefined) time = mergedValueRef.value
       if (time === null) displayTimeStringRef.value = ''
       else {
-        displayTimeStringRef.value = format(
+        displayTimeStringRef.value = mergedFormatRef.value(
           time,
           props.format,
           dateFnsOptionsRef.value
