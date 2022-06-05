@@ -21,11 +21,11 @@ separator-per-item.vue
 
 ### BreadcrumbItem Props
 
-| 名称      | 类型      | 默认值      | 说明                   | 版本         |
-| --------- | --------- | ----------- | ---------------------- | ------------ |
-| clickable | `boolean` | `true`      | 是否可点击             | NEXT_VERSION |
-| href      | `string`  | `undefined` | 链接地址               |              |
-| separator | `string`  | `'/'`       | 面包屑子项之间的分隔符 |              |
+| 名称      | 类型      | 默认值      | 说明                   | 版本   |
+| --------- | --------- | ----------- | ---------------------- | ------ |
+| clickable | `boolean` | `true`      | 是否可点击             | 2.30.0 |
+| href      | `string`  | `undefined` | 链接地址               |        |
+| separator | `string`  | `'/'`       | 面包屑子项之间的分隔符 |        |
 
 ### Breadcrumb Slots
 

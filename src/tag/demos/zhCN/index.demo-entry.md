@@ -32,15 +32,15 @@ rtl-debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
-| strong | `boolean` | `false` | 文字是否加粗 | NEXT_VERSION |
+| strong | `boolean` | `false` | 文字是否加粗 | 2.30.0 |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
 | on-close | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
 | on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
 
 ### Tag Slots
 
-| 名称    | 参数 | 说明         | 版本         |
-| ------- | ---- | ------------ | ------------ |
-| avatar  | `()` | 标签中的头像 |              |
-| default | `()` | 标签内容     |              |
-| icon    | `()` | 标签中的图标 | NEXT_VERSION |
+| 名称    | 参数 | 说明         | 版本   |
+| ------- | ---- | ------------ | ------ |
+| avatar  | `()` | 标签中的头像 |        |
+| default | `()` | 标签内容     |        |
+| icon    | `()` | 标签中的图标 | 2.30.0 |

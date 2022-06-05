@@ -31,15 +31,15 @@ icon.vue
 | disabled | `boolean` | `false` | Whether the tag is disabled. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
-| strong | `boolean` | `false` | Whether to use strong text | NEXT_VERSION |
+| strong | `boolean` | `false` | Whether to use strong text | 2.30.0 |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | on-close | `(e: MouseEvent) => void` | `undefined` | Close clicked callback. |  |
 | on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |  |
 
 ### Tag Slots
 
-| Name    | Parameters | Description    | Version      |
-| ------- | ---------- | -------------- | ------------ |
-| avatar  | `()`       | Tag'a avatar.  |              |
-| default | `()`       | Tag's content. |              |
-| icon    | `()`       | Tag'a icon.    | NEXT_VERSION |
+| Name    | Parameters | Description    | Version |
+| ------- | ---------- | -------------- | ------- |
+| avatar  | `()`       | Tag'a avatar.  |         |
+| default | `()`       | Tag's content. |         |
+| icon    | `()`       | Tag'a icon.    | 2.30.0  |
