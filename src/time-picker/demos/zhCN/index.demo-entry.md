@@ -17,6 +17,7 @@ formatted.vue
 focus.vue
 status.vue
 timezone.vue
+timezone-debug.vue
 ```
 
 ## API

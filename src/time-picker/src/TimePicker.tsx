@@ -271,20 +271,28 @@ export default defineComponent({
       }
     })
 
-    const { value: mergedValue } = mergedValueRef
-    const displayTimeStringRef = ref(
-      mergedValue === null
-        ? ''
-        : mergedFormatRef.value(
-          mergedValue,
-          props.format,
-          dateFnsOptionsRef.value
-        )
+    const displayTimeStringRef = ref('')
+    watch(
+      () => props.timeZone,
+      () => {
+        const mergedValue = mergedValueRef.value
+        displayTimeStringRef.value =
+          mergedValue === null
+            ? ''
+            : mergedFormatRef.value(
+              mergedValue,
+              props.format,
+              dateFnsOptionsRef.value
+            )
+      },
+      {
+        immediate: true
+      }
     )
     const uncontrolledShowRef = ref(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
-    const memorizedValueRef = ref(mergedValue)
+    const memorizedValueRef = ref(mergedValueRef.value)
     const transitionDisabledRef = ref(false)
 
     const localizedNowRef = computed(() => {

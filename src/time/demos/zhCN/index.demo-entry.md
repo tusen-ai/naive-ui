@@ -11,6 +11,7 @@ format.vue
 relative.vue
 unix.vue
 timezone.vue
+timezone-debug.vue
 ```
 
 ## API
