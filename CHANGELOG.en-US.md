@@ -18,6 +18,7 @@
 - Fix `n-data-table` doesn't restore scroll state when it's reactivated inside `keep-alive` component, closes [#2522](https://github.com/TuSimple/naive-ui/issues/2522).
 - Fix `n-image` zoom level doesn't fit ultra large image.
 - Fix `n-menu`'s dropdown option text style when some of it's descendants is activated.
+- Fix `n-input`'s `inputProps`'s `class` & `style` not working.
 
 ### Feats
 
