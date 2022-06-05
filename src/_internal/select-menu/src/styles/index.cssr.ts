@@ -73,7 +73,6 @@ export default cB('base-select-menu', `
     cursor: pointer;
     position: relative;
     padding: var(--n-option-padding);
-    padding-right: calc(var(--n-option-padding-right) + 20px);
     transition:
       color .3s var(--n-bezier),
       opacity .3s var(--n-bezier);
@@ -81,6 +80,9 @@ export default cB('base-select-menu', `
     color: var(--n-option-text-color);
     opacity: 1;
   `, [
+    cM('show-checkmark', `
+      padding-right: calc(var(--n-option-padding-right) + 20px);
+    `),
     c('&::before', `
       content: "";
       position: absolute;

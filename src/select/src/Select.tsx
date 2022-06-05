@@ -189,6 +189,10 @@ const selectProps = {
     default: true
   },
   status: String as PropType<FormValidationStatus>,
+  internalShowCheckmark: {
+    type: Boolean,
+    default: true
+  },
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -947,6 +951,7 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
+                              showCheckmark={this.internalShowCheckmark}
                               resetMenuOnOptionsChange={
                                 this.resetMenuOnOptionsChange
                               }
