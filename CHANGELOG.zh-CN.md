@@ -2,6 +2,10 @@
 
 ## 2.30.1
 
+### Feats
+
+- `n-menu` 新增 `arrowColorChildActiveHover`, `itemIconColorChildActiveHoverHorizontal`, `itemIconColorChildActiveHover`,`itemTextColorChildActiveHoverHorizontal`, `itemTextColorChildActiveHover`, `arrowColorChildActiveHoverInverted`, `itemIconColorChildActiveHoverHorizontalInverted`, `itemIconColorChildActiveHoverInverted`,`itemTextColorChildActiveHoverHorizontalInverted`, `itemTextColorChildActiveHoverInverted` 主题变量
+
 ### Fixes
 
 - 修复 `n-menu` `node-props` 属性没有添加到 `role="menuitem"` 的元素上，而是添加到了里层元素
