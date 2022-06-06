@@ -23,7 +23,12 @@ export default defineNuxtConfig({
       'vueuc',
       '@css-render/vue3-ssr',
       '@juggle/resize-observer'
-    ]
+    ],
+    vite: {
+      optimizeDeps: {
+        include: ['date-fns-tz/esm/formatInTimeZone']
+      }
+    }
   }
 })
 ```
@@ -53,3 +58,4 @@ The following components has some bugs in SSR scene, please avoid using them if 
 - `n-data-table`
 - `n-watermark`
 - `n-affix`
+- `n-transfer`
