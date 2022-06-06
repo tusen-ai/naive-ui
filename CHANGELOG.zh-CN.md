@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.30.1
+
+### Fixes
+
+- 修复 `n-menu` `node-props` 属性没有添加到 `role="menuitem"` 的元素上，而是添加到了里层元素
+- 修复 `n-menu` `node-props` 对 `type="group"` 的选项不生效
+
 ## 2.30.0
 
 ### Breaking Changes

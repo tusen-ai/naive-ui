@@ -64,7 +64,7 @@ export function itemRenderer (
     if (tmNode.isGroup) {
       return h(
         NMenuOptionGroup,
-        keep(props, groupPropKeys, { tmNodes: tmNode.children, key })
+        keep(props, groupPropKeys, { tmNode, tmNodes: tmNode.children, key })
       )
     }
     return h(

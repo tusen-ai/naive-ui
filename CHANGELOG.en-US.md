@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.30.1
+
+### Fixes
+
+- Fix `n-menu` `node-props` is not applied to element with `role="menuitem"` but a inner element.
+- Fix `n-menu` `node-props` doesn't work with `type="group"` option.
+
 ## 2.30.0
 
 ### Breaking Changes
