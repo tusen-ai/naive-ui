@@ -273,6 +273,7 @@ export default defineComponent({
     })
     const compitableOptionsRef = useCompitable(props, ['items', 'options'])
 
+    const emptyArray: SelectOption[] = []
     const createdOptionsRef = ref<SelectOption[]>([])
     const beingCreatedOptionsRef = ref<SelectOption[]>([])
     const memoValOptMapRef = ref(new Map<string | number, SelectOption>())
@@ -468,7 +469,7 @@ export default defineComponent({
     }
     function handleMenuAfterLeave (): void {
       patternRef.value = ''
-      beingCreatedOptionsRef.value = []
+      beingCreatedOptionsRef.value = emptyArray
     }
     const activeWithoutMenuOpenRef = ref(false)
     function onTriggerInputFocus (): void {
@@ -560,7 +561,7 @@ export default defineComponent({
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
           createdOptionsRef.value.push(beingCreatedOption)
-          beingCreatedOptionsRef.value = []
+          beingCreatedOptionsRef.value = emptyArray
         }
       }
       if (remote) {
@@ -605,7 +606,7 @@ export default defineComponent({
               createdOptionsRef.value[createdOptionIndex]
             ]
           } else {
-            createdOptionsRef.value = []
+            createdOptionsRef.value = emptyArray
           }
         }
         focusSelection()
@@ -635,7 +636,7 @@ export default defineComponent({
       doSearch(value)
       if (tag && !remote) {
         if (!value) {
-          beingCreatedOptionsRef.value = []
+          beingCreatedOptionsRef.value = emptyArray
           return
         }
         const { onCreate } = props
@@ -651,7 +652,7 @@ export default defineComponent({
             (option) => option[valueField] === optionBeingCreated[valueField]
           )
         ) {
-          beingCreatedOptionsRef.value = []
+          beingCreatedOptionsRef.value = emptyArray
         } else {
           beingCreatedOptionsRef.value = [optionBeingCreated]
         }

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.30.2
+
+### Fixes
+
+- Fix `n-select` recomputed options on menu close, improve performance.
+
 ## 2.30.1
 
 ### Feats
