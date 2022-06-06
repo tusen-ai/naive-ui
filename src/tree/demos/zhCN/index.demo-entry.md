@@ -25,6 +25,7 @@ check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
 scroll-debug.vue
+virtual-scroll-tree-node-height.vue
 ```
 
 ## API
