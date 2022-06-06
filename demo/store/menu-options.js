@@ -145,7 +145,7 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
-          en: 'Potential Element Conflict',
+          en: 'Potential Style Conflict',
           zh: '潜在的样式冲突',
           path: '/style-conflict'
         },

@@ -74,10 +74,15 @@ export const NMenuOption = defineComponent({
       mergedClsPrefix,
       mergedTheme,
       tmNode,
-      menuProps: { renderLabel }
+      menuProps: { renderLabel, nodeProps }
     } = this
+    const attrs = nodeProps?.(tmNode.rawNode)
     return (
-      <div role="menuitem" class={[`${mergedClsPrefix}-menu-item`]}>
+      <div
+        {...attrs}
+        role="menuitem"
+        class={[`${mergedClsPrefix}-menu-item`, attrs?.class]}
+      >
         <NTooltip
           theme={mergedTheme.peers.Tooltip}
           themeOverrides={mergedTheme.peerOverrides.Tooltip}

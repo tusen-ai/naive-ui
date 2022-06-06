@@ -23,7 +23,12 @@ export default defineNuxtConfig({
       'vueuc',
       '@css-render/vue3-ssr',
       '@juggle/resize-observer'
-    ]
+    ],
+    vite: {
+      optimizeDeps: {
+        include: ['date-fns-tz/esm/formatInTimeZone']
+      }
+    }
   }
 })
 ```
@@ -53,3 +58,4 @@ export default defineNuxtConfig({
 - `n-data-table`
 - `n-watermark`
 - `n-affix`
+- `n-transfer`

@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.30.1
+
+### Feats
+
+- `n-menu` adds `arrowColorChildActiveHover`, `itemIconColorChildActiveHoverHorizontal`, `itemIconColorChildActiveHover`,`itemTextColorChildActiveHoverHorizontal`, `itemTextColorChildActiveHover`, `arrowColorChildActiveHoverInverted`, `itemIconColorChildActiveHoverHorizontalInverted`, `itemIconColorChildActiveHoverInverted`,`itemTextColorChildActiveHoverHorizontalInverted`, `itemTextColorChildActiveHoverInverted` theme variables.
+
+### Fixes
+
+- Fix `n-menu` `node-props` is not applied to element with `role="menuitem"` but a inner element.
+- Fix `n-menu` `node-props` doesn't work with `type="group"` option.
+
 ## 2.30.0
 
 ### Breaking Changes
