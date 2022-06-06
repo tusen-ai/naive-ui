@@ -396,7 +396,12 @@ export default defineComponent({
                                             default: () =>
                                               varKeys.map((varKey) => {
                                                 return [
-                                                  <div key={`${varKey}Label`}>
+                                                  <div
+                                                    key={`${varKey}Label`}
+                                                    style={{
+                                                      wordBreak: 'break-word'
+                                                    }}
+                                                  >
                                                     {varKey}
                                                   </div>,
                                                   showColorPicker(varKey) ? (
