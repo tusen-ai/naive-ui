@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`n-skeleton should work with \`circle\` prop 1`] = `"border-radius: 50%; --n-bezier: cubic-bezier(.4, 0, .2, 1); --n-color-start: #eee; --n-color-end: #ddd;"`;
 

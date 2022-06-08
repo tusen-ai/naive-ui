@@ -76,6 +76,15 @@ module.exports = {
     ],
     exclude: ['__INDEX__']
   },
+  test: {
+    globals: true,
+    include: ['./src/**/*.(spec|test).(ts|tsx)'],
+    environment: 'jsdom',
+    threads: false,
+    transformMode: {
+      web: [/.[tj]sx$/]
+    }
+  },
   build: {
     outDir: 'site',
     rollupOptions: {

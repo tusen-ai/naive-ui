@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`n-blockquote should work with normal 1`] = `"--n-bezier: cubic-bezier(.4, 0, .2, 1); --n-font-size: 14px; --n-line-height: 1.6; --n-prefix-color: rgb(224, 224, 230); --n-text-color: rgb(51, 54, 57);"`;
 
