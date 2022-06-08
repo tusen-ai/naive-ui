@@ -11,7 +11,8 @@ import {
   isReactive,
   watchEffect,
   VNodeChild,
-  HTMLAttributes
+  HTMLAttributes,
+  nextTick
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -467,6 +468,39 @@ export default defineComponent({
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
     })
+    // init hover key
+    watch(
+      mergedShowRef,
+      (show) => {
+        if (!show) return
+        if (props.multiple) return
+        const { value } = mergedValueRef
+        if (!Array.isArray(value) && value !== null) {
+          keyboardKeyRef.value = value
+          hoverKeyRef.value = value
+          void nextTick(() => {
+            if (!mergedShowRef.value) return
+            const { value: hoverKey } = hoverKeyRef
+            if (mergedValueRef.value !== null) {
+              const node = treeMateRef.value.getNode(hoverKey)
+              if (node) {
+                cascaderMenuInstRef.value?.scroll(
+                  node.level,
+                  node.index,
+                  depx(optionHeightRef.value)
+                )
+              }
+            }
+          })
+        } else {
+          keyboardKeyRef.value = null
+          hoverKeyRef.value = null
+        }
+      },
+      {
+        immediate: true
+      }
+    )
     // --- methods
     function doBlur (e: FocusEvent): void {
       const { onBlur } = props
