@@ -1,4 +1,4 @@
-export { default } from './preset'
+export { default, install } from './preset'
 
 export { useOsTheme } from 'vooks'
 

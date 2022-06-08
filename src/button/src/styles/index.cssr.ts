@@ -1,6 +1,7 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { fadeInWidthExpandTransition } from '../../../_styles/transitions/fade-in-width-expand.cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { isBrowser } from '../../../_utils'
 
 // vars:
 // --n-bezier
@@ -158,7 +159,7 @@ export default c([
         animationName: 'button-wave-spread, button-wave-opacity'
       })
     ]),
-    (typeof window !== 'undefined' && 'MozBoxSizing' in document.createElement('div').style)
+    (isBrowser && 'MozBoxSizing' in document.createElement('div').style)
       ? c('&::moz-focus-inner', {
         border: 0
       })

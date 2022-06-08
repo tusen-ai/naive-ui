@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2.30.3
+
+### Fixes
+
+- 修复 `n-cascader` 溢出标签的 popover 在设定 `filterable` 后无法滚动，关闭 [#3061](https://github.com/TuSimple/naive-ui/issues/3061)
+- 修复 `n-drawer` 的 `show-mask` 传入 `'transparent'` 会报 warning
+- 修复 `n-calendar` 点击不在当前月份的日期不会调用 `on-panel-change`，关闭 [#3063](https://github.com/TuSimple/naive-ui/issues/3063)
+
+## Feats
+
+- 🌟 提供 UMD 打包
+- `n-cascader` 在单选状态下会展开选中的值，关闭 [#3058](https://github.com/TuSimple/naive-ui/issues/3058)
+- `n-space` 在可能的情况下会使用 `gap` CSS 属性，关闭 [#3053](https://github.com/TuSimple/naive-ui/issues/3053)
+
 ## 2.30.2
 
 ### Fixes

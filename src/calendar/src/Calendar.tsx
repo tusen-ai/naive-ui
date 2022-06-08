@@ -209,6 +209,7 @@ export default defineComponent({
     onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
     const year = getYear(monthTs)
+    const calendarMonth = getMonth(monthTs) + 1
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
@@ -218,7 +219,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-calendar-header__title`}>
             {resolveSlotWithProps(
               $slots.header,
-              { year, month: getMonth(monthTs) + 1 },
+              { year, month: calendarMonth },
               () => {
                 const localeMonth = format(monthTs, 'MMMM', { locale })
                 return [
@@ -293,7 +294,7 @@ export default defineComponent({
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
-                  key={isCurrentDate ? 'current' : index}
+                  key={`${calendarMonth}-${index}`}
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
@@ -306,32 +307,28 @@ export default defineComponent({
                   ]}
                   onClick={() => {
                     if (disabled) return
+                    const monthTs = startOfMonth(ts).valueOf()
+                    this.monthTs = monthTs
+                    if (notInCurrentMonth) {
+                      this.onPanelChange?.({
+                        year: getYear(monthTs),
+                        month: getMonth(monthTs) + 1
+                      })
+                    }
                     this.doUpdateValue(ts, {
                       year,
                       month: month + 1,
                       date
                     })
-                    this.monthTs = startOfMonth(ts).valueOf()
                   }}
                 >
                   <div class={`${mergedClsPrefix}-calendar-date`}>
-                    {disabled ? (
-                      <div
-                        class={`${mergedClsPrefix}-calendar-date__date`}
-                        title={fullDate}
-                        key="disabled"
-                      >
-                        {date}
-                      </div>
-                    ) : (
-                      <div
-                        class={`${mergedClsPrefix}-calendar-date__date`}
-                        title={fullDate}
-                        key="available"
-                      >
-                        {date}
-                      </div>
-                    )}
+                    <div
+                      class={`${mergedClsPrefix}-calendar-date__date`}
+                      title={fullDate}
+                    >
+                      {date}
+                    </div>
                     {index < 7 && (
                       <div
                         class={`${mergedClsPrefix}-calendar-date__day`}
@@ -348,10 +345,7 @@ export default defineComponent({
                     month: month + 1,
                     date
                   })}
-                  <div
-                    class={`${mergedClsPrefix}-calendar-cell__bar`}
-                    key={month}
-                  />
+                  <div class={`${mergedClsPrefix}-calendar-cell__bar`} />
                 </div>
               )
             }

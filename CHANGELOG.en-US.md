@@ -1,10 +1,24 @@
 # CHANGELOG
 
+## 2.30.3
+
+### Fixes
+
+- Fix `n-cascader`'s overflow count tag's popover can't scroll after `filterable` is set, closes [#3061](https://github.com/TuSimple/naive-ui/issues/3061).
+- Fix `n-drawer`'s `show-mask` prop will warn if `'transparent'` is passed.
+- Fix `n-calendar` doesn't call `on-panel-change` when date of other months is clicked, closes [#3063](https://github.com/TuSimple/naive-ui/issues/3063).
+
+## Feats
+
+- 🌟 UMD usage is supported.
+- `n-cascader` will expand menu to selected value, closes [#3058](https://github.com/TuSimple/naive-ui/issues/3058).
+- `n-space` will use `gap` CSS property if possible, closes [#3053](https://github.com/TuSimple/naive-ui/issues/3053).
+
 ## 2.30.2
 
 ### Fixes
 
-- Fix `n-select` recomputed options on menu close, improve performance.
+- Fix `n-select` recomputed options on menu close, improves performance.
 
 ## 2.30.1
 

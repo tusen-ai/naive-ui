@@ -5,6 +5,8 @@
  * Here I modified it to make it works when input is scrolled.
  */
 
+import { isBrowser } from '../../_utils'
+
 export interface Position {
   /**
    * position in pixel.
@@ -121,7 +123,6 @@ export function getRelativePosition (
   ]
   // Firefox 1.0+
   const isFirefox = navigator.userAgent.toLowerCase().includes('firefox')
-  const isBrowser = typeof window !== 'undefined'
   if (!isBrowser) {
     throw new Error(
       'textarea-caret-position#getCaretPosition should only be called in a browser'
