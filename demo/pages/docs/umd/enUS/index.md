@@ -6,7 +6,7 @@ If you want to use a minified version of naive, use `https://unpkg.com/naive-ui@
 
 You'd better lock version of the package, nor there may be some breaking changes.
 
-Here's a basic demo:
+Here's a basic [demo](https://jsbin.com/saxubitaki/1/edit?html,output):
 
 ```html
 <!DOCTYPE html>

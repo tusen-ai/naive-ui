@@ -6,7 +6,7 @@
 
 你最好锁定包的版本，不然可能会有不兼容变更。
 
-下面是给个基本 demo：
+下面是个基本 [demo](https://jsbin.com/saxubitaki/1/edit?html,output)：
 
 ```html
 <!DOCTYPE html>
