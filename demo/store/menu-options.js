@@ -88,6 +88,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/usage-sfc'
         },
         {
+          en: 'Using UMD',
+          zh: '使用 UMD',
+          path: '/umd'
+        },
+        {
           en: 'Configuring Fonts',
           zh: '配置字体',
           path: '/fonts'
