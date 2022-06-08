@@ -77,6 +77,9 @@ module.exports = {
     exclude: ['__INDEX__']
   },
   test: {
+    deps: {
+      inline: ['date-fns']
+    },
     globals: true,
     include: ['./src/**/*.(spec|test).(ts|tsx)'],
     environment: 'jsdom',
