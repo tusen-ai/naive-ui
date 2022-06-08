@@ -8,7 +8,7 @@
 - Fix `n-drawer`'s `show-mask` prop will warn if `'transparent'` is passed.
 - Fix `n-calendar` doesn't call `on-panel-change` when date of other months is clicked, closes [#3063](https://github.com/TuSimple/naive-ui/issues/3063).
 
-## Feats
+### Feats
 
 - 🌟 UMD usage is supported.
 - `n-cascader` will expand menu to selected value, closes [#3058](https://github.com/TuSimple/naive-ui/issues/3058).

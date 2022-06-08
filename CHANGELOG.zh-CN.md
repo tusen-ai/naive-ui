@@ -8,7 +8,7 @@
 - 修复 `n-drawer` 的 `show-mask` 传入 `'transparent'` 会报 warning
 - 修复 `n-calendar` 点击不在当前月份的日期不会调用 `on-panel-change`，关闭 [#3063](https://github.com/TuSimple/naive-ui/issues/3063)
 
-## Feats
+### Feats
 
 - 🌟 提供 UMD 打包
 - `n-cascader` 在单选状态下会展开选中的值，关闭 [#3058](https://github.com/TuSimple/naive-ui/issues/3058)
