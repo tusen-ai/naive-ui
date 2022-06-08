@@ -43,7 +43,7 @@ const drawerProps = {
     default: true
   },
   showMask: {
-    type: Boolean as PropType<boolean | 'transparent'>,
+    type: [Boolean, String] as PropType<boolean | 'transparent'>,
     default: true
   },
   to: [String, Object] as PropType<string | HTMLElement>,

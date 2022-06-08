@@ -5,12 +5,13 @@
 ### Fixes
 
 - Fix `n-cascader`'s overflow count tag's popover can't scroll after `filterable` is set, closes [#3061](https://github.com/TuSimple/naive-ui/issues/3061).
+- Fix `n-drawer`'s `show-mask` prop will warn if `'transparent'` is passed.
 
 ## 2.30.2
 
 ### Fixes
 
-- Fix `n-select` recomputed options on menu close, improve performance.
+- Fix `n-select` recomputed options on menu close, improves performance.
 
 ## 2.30.1
 
