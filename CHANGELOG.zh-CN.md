@@ -6,6 +6,7 @@
 
 - 修复 `n-cascader` 溢出标签的 popover 在设定 `filterable` 后无法滚动，关闭 [#3061](https://github.com/TuSimple/naive-ui/issues/3061)
 - 修复 `n-drawer` 的 `show-mask` 传入 `'transparent'` 会报 warning
+- 修复 `n-calendar` 点击不在当前月份的日期不会调用 `on-panel-change`，关闭 [#3063](https://github.com/TuSimple/naive-ui/issues/3063)
 
 ## 2.30.2
 

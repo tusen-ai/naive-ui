@@ -6,6 +6,7 @@
 
 - Fix `n-cascader`'s overflow count tag's popover can't scroll after `filterable` is set, closes [#3061](https://github.com/TuSimple/naive-ui/issues/3061).
 - Fix `n-drawer`'s `show-mask` prop will warn if `'transparent'` is passed.
+- Fix `n-calendar` doesn't call `on-panel-change` when date of other months is clicked, closes [#3063](https://github.com/TuSimple/naive-ui/issues/3063).
 
 ## 2.30.2
 
