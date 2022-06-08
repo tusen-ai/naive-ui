@@ -80,9 +80,9 @@ module.exports = {
     globals: true,
     include: ['./src/**/*.(spec|test).(ts|tsx)'],
     environment: 'jsdom',
-    threads: false,
+    setupFiles: ['vitest.setup.ts'],
     transformMode: {
-      web: [/.[tj]sx$/]
+      web: [/\.[tj]sx$/]
     }
   },
   build: {
