@@ -209,6 +209,7 @@ export default defineComponent({
     onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
     const year = getYear(monthTs)
+    const calendarMonth = getMonth(monthTs) + 1
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
@@ -218,7 +219,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-calendar-header__title`}>
             {resolveSlotWithProps(
               $slots.header,
-              { year, month: getMonth(monthTs) + 1 },
+              { year, month: calendarMonth },
               () => {
                 const localeMonth = format(monthTs, 'MMMM', { locale })
                 return [
@@ -293,7 +294,7 @@ export default defineComponent({
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
-                  key={`${month}-${date}`}
+                  key={`${calendarMonth}-${index}`}
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
