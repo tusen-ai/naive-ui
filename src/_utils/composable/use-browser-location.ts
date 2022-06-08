@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted, Ref, ref } from 'vue'
-import { hasWindow } from '../naive'
+import { isBrowser } from '../env/is-browser'
 
-const defaultWindow = hasWindow ? window : null
+const defaultWindow = isBrowser ? window : null
 
 export interface IWindowLocation {
   hash?: string

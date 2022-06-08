@@ -11,6 +11,7 @@
 ## Feats
 
 - `n-cascader` will expand menu to selected value, closes [#3058](https://github.com/TuSimple/naive-ui/issues/3058).
+- `n-space` will use `gap` CSS property if possible, closes [#3053](https://github.com/TuSimple/naive-ui/issues/3053).
 
 ## 2.30.2
 

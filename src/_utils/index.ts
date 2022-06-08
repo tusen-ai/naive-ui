@@ -33,4 +33,5 @@ export type {
 export { formatLength, color2Class } from './css'
 export { createKey } from './cssr'
 export { isJsdom } from './env/is-jsdom'
+export { isBrowser } from './env/is-browser'
 export * from './composable'

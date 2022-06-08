@@ -11,6 +11,7 @@
 ## Feats
 
 - `n-cascader` 在单选状态下会展开选中的值，关闭 [#3058](https://github.com/TuSimple/naive-ui/issues/3058)
+- `n-space` 在可能的情况下会使用 `gap` CSS 属性，关闭 [#3053](https://github.com/TuSimple/naive-ui/issues/3053)
 
 ## 2.30.2
 
