@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
-  "unpkg": "dist/index.prod.js",
-  "jsdelivr": "dist/index.prod.js",
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
