@@ -12,7 +12,7 @@ import { useMemo } from 'vooks'
 import type { SelectOption } from '../../../select/src/interface'
 import { render } from '../../../_utils'
 import { CheckmarkIcon } from '../../icons'
-import NBaseIcon from '../../icon'
+import { NBaseIcon } from '../../icon'
 import {
   RenderLabelImpl,
   internalSelectionMenuInjectionKey,

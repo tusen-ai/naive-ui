@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, toRef } from 'vue'
 import { resolveSlot } from '../../../_utils'
 import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
-import NBaseIcon from '../../icon'
+import { NBaseIcon } from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
 
