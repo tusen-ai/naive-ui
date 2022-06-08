@@ -46,7 +46,7 @@ const devConfig = defineConfig({
     })
   ],
   output: {
-    file: path.resolve('dist/naive.js')
+    file: path.resolve('dist/index.js')
   }
 })
 
@@ -62,7 +62,7 @@ const prodConfig = defineConfig({
     terser()
   ],
   output: {
-    file: path.resolve('dist/naive.prod.js')
+    file: path.resolve('dist/index.prod.js')
   }
 })
 

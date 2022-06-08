@@ -1,1 +1,1 @@
-export { default } from './src/Icon'
+export { default as NBaseIcon } from './src/Icon'
