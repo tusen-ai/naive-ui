@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.30.3
+
+### Fixes
+
+- 修复 `n-cascader` 溢出标签的 popover 在设定 `filterable` 后无法滚动，关闭 [#3061](https://github.com/TuSimple/naive-ui/issues/3061)
+
 ## 2.30.2
 
 ### Fixes
