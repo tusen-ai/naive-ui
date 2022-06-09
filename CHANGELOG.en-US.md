@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-dropdown` not working with `'scrollable'`
+
 ## 2.30.0
 
 ### Breaking Changes
