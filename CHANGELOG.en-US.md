@@ -35,8 +35,6 @@
 - `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
 - `n-slider` adds `thumb` slot.
 
--
-
 ## 2.30.3
 
 ### Fixes
