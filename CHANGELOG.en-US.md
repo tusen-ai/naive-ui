@@ -18,6 +18,7 @@
 - Fix `n-upload`'s inner anchor element may show focus-visible outline style.
 - Fix `n-upload` shows slot warning when `list-type="image-card"`.
 - Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
+- Fix `n-dropdown` not working with `'scrollable'`
 
 ### Feats
 
@@ -33,6 +34,8 @@
 - `n-popselect` adds `virtual-scroll` prop.
 - `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
 - `n-slider` adds `thumb` slot.
+
+-
 
 ## 2.30.3
 
