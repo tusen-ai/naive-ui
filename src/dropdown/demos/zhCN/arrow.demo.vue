@@ -7,6 +7,8 @@
     trigger="click"
     :options="options"
     :show-arrow="true"
+    scrollable
+    style="max-height: 100px"
     @select="handleSelect"
   >
     <n-button>找个地方休息</n-button>

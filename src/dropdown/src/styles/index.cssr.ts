@@ -174,5 +174,11 @@ export default cB('dropdown-menu', `
   cB('dropdown-menu-wrapper', `
     transform-origin: inherit;
     width: fit-content;
-  `)
+  `),
+  c('>', [
+    cB('scrollbar', `
+      height: inherit;
+      max-height: inherit;
+    `)
+  ])
 ])
