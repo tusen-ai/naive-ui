@@ -110,7 +110,9 @@ const thTH: NLocale = {
     tipClockwise: 'หมุน (↻)',
     tipZoomOut: 'ซูมออก',
     tipZoomIn: 'ซูมเข้า',
-    tipClose: 'ปิด (Esc)'
+    tipClose: 'ปิด (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

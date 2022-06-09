@@ -37,6 +37,7 @@ export interface InternalSelectMenuInjection {
     tmNode: TreeNode<SelectBaseOption>
   ) => void
   handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectBaseOption>) => void
+  showCheckmarkRef: Ref<boolean>
   valueSetRef: Ref<Set<number | string>>
   pendingTmNodeRef: Ref<TreeNode<SelectBaseOption> | null>
   multipleRef: Ref<boolean>

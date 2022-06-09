@@ -10,8 +10,6 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-font-size
 // --n-icon-margin
 // --n-icon-size
-// --n-close-size
-// --n-close-margin
 // --n-text-color
 // --n-color
 // --n-box-shadow
@@ -21,9 +19,15 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-icon-color-warning
 // --n-icon-color-error
 // --n-icon-color-loading
-// --n-close-color
-// --n-close-color-pressed
+// --n-close-size
+// --n-close-icon-size
+// --n-close-margin
 // --n-close-color-hover
+// --n-close-color-pressed
+// --n-close-border-radius
+// --n-close-icon-color
+// --n-close-icon-color-pressed
+// --n-close-icon-color-hover
 // --n-border-radius
 export default c([
   cB('message-wrapper', `
@@ -94,16 +98,17 @@ export default c([
       [iconSwitchTransition()])
     ]),
     cE('close', `
-      font-size: var(--n-close-size);
       margin: var(--n-close-margin);
-      transition: color .3s var(--n-bezier);
+      transition:
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier);
       flex-shrink: 0;
     `, [
       c('&:hover', `
-        color: var(--n-close-color-hover);
+        color: var(--n-close-icon-color-hover);
       `),
       c('&:active', `
-        color: var(--n-close-color-pressed);
+        color: var(--n-close-icon-color-pressed);
       `)
     ])
   ]),

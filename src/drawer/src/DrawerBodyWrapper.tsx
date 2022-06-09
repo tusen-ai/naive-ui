@@ -16,12 +16,12 @@ import {
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
-import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps } from '../../_internal'
 import { useLockHtmlScroll } from '../../_utils'
+import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
 

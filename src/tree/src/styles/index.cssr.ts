@@ -70,7 +70,7 @@ export default cB('tree', `
       `)
     ]),
     cNotM('disabled', [
-      cM('selectable', [
+      cM('clickable', [
         cB('tree-node-content', `
           cursor: pointer;
         `)
@@ -117,14 +117,16 @@ export default cB('tree', `
         c('&:hover', {
           backgroundColor: 'var(--n-node-color-hover)'
         }),
-        cM('selectable', [
-          c('&:active', {
-            backgroundColor: 'var(--n-node-color-pressed)'
-          })
-        ]),
         cM('pending', `
           background-color: var(--n-node-color-hover);
         `),
+        cM('selectable', [
+          cNotM('selected', [
+            c('&:active', {
+              backgroundColor: 'var(--n-node-color-pressed)'
+            })
+          ])
+        ]),
         cM('selected', {
           backgroundColor: 'var(--n-node-color-active)'
         })

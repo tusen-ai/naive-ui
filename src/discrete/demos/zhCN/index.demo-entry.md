@@ -1,4 +1,4 @@
-# 脱离上下文的 API
+# 脱离上下文的 API（v2.29.0）
 
 如果你用过想在 `setup` 外使用 `useDialog`、`useMessage`、`useNotification`、`useLoadingBar`，你可以通过 `createDiscreateApi` 来构建对应的 API。
 

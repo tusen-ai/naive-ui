@@ -64,15 +64,12 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon, nodeProps }
+      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
     } = this
     const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
-    const attrs = nodeProps?.(tmNode.rawNode)
     return (
       <div
-        {...attrs}
         onClick={(e) => {
-          attrs?.onClick?.(e)
           this.onClick?.(e)
         }}
         role="none"
@@ -84,10 +81,9 @@ export default defineComponent({
             [`${clsPrefix}-menu-item-content--child-active`]: this.childActive,
             [`${clsPrefix}-menu-item-content--disabled`]: this.disabled,
             [`${clsPrefix}-menu-item-content--hover`]: this.hover
-          },
-          attrs?.class
+          }
         ]}
-        style={[this.style, attrs?.style || '']}
+        style={this.style}
       >
         {icon && (
           <div

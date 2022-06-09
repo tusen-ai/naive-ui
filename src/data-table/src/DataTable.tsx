@@ -9,7 +9,8 @@ import {
   toRef,
   CSSProperties,
   Transition,
-  watchEffect
+  watchEffect,
+  onDeactivated
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -236,6 +237,9 @@ export default defineComponent({
     )
     const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
+    onDeactivated(() => {
+      scrollPartRef.value = 'body'
+    })
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props)

@@ -11,7 +11,9 @@ import {
   CSSProperties,
   watchEffect,
   VNode,
-  HTMLAttributes
+  HTMLAttributes,
+  onActivated,
+  onDeactivated
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -269,9 +271,37 @@ const Scrollbar = defineComponent({
       return contentRef.value
     })
 
+    let isDeactivated = false
+    let activateStateInitialized = false
+    onActivated(() => {
+      isDeactivated = false
+      if (!activateStateInitialized) {
+        activateStateInitialized = true
+        return
+      }
+      // Only restore for builtin container & content
+      if (!props.container) {
+        // remount
+        scrollTo({
+          top: containerScrollTopRef.value,
+          left: containerScrollLeftRef.value
+        })
+      }
+    })
+    onDeactivated(() => {
+      isDeactivated = true
+      if (!activateStateInitialized) {
+        activateStateInitialized = true
+      }
+    })
+
     // methods
-    const handleContentResize = sync
+    const handleContentResize = (): void => {
+      if (isDeactivated) return
+      sync()
+    }
     const handleContainerResize = (e: ResizeObserverEntry): void => {
+      if (isDeactivated) return
       const { onResize } = props
       if (onResize) onResize(e)
       sync()
@@ -292,7 +322,7 @@ const Scrollbar = defineComponent({
     ): void => {
       if (!props.scrollable) return
       if (typeof options === 'number') {
-        scrollToPosition(options, y ?? 0, 0, false, 'auto')
+        scrollToPosition(y ?? 0, options, 0, false, 'auto')
         return
       }
       const {
@@ -738,7 +768,7 @@ const Scrollbar = defineComponent({
           <div
             ref="yRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={this.horizontalRailStyle}
+            style={this.verticalRailStyle}
             aria-hidden
           >
             {h(
@@ -762,11 +792,11 @@ const Scrollbar = defineComponent({
           <div
             ref="xRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={this.verticalRailStyle}
+            style={this.horizontalRailStyle}
             aria-hidden
           >
-            {
-              ((triggerIsNone ? Wrapper : Transition) as any,
+            {h(
+              (triggerIsNone ? Wrapper : Transition) as any,
               triggerIsNone ? null : { name: 'fade-in-transition' },
               {
                 default: () =>
@@ -780,8 +810,8 @@ const Scrollbar = defineComponent({
                       onMousedown={this.handleXScrollMouseDown}
                     />
                   ) : null
-              })
-            }
+              }
+            )}
           </div>
         ]
       )

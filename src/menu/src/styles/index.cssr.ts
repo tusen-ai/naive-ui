@@ -2,6 +2,42 @@ import { CNode, CNodeChildren, CProperties } from 'css-render'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
+const hoverStyleChildren = [
+  c('&::before', 'background-color: var(--n-item-color-hover);'),
+  cE('arrow', `
+    color: var(--n-arrow-color-hover);
+  `),
+  cE('icon', `
+    color: var(--n-item-icon-color-hover);
+  `),
+  cB('menu-item-content-header', `
+    color: var(--n-item-text-color-hover);
+  `, [
+    c('a', `
+      color: var(--n-item-text-color-hover);
+    `),
+    cE('extra', `
+      color: var(--n-item-text-color-hover);
+    `)
+  ])
+]
+
+const horizontalHoverStyleChildren = [
+  cE('icon', `
+    color: var(--n-item-icon-color-hover-horizontal);
+  `),
+  cB('menu-item-content-header', `
+    color: var(--n-item-text-color-hover-horizontal);
+  `, [
+    c('a', `
+      color: var(--n-item-text-color-hover-horizontal);
+    `),
+    cE('extra', `
+      color: var(--n-item-text-color-hover-horizontal);
+    `)
+  ])
+]
+
 // vars:
 // --n-color
 // --n-group-text-color
@@ -18,27 +54,32 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-arrow-color-active
 // --n-arrow-color-active-hover
 // --n-arrow-color-child-active
+// --n-arrow-color-child-active-hover
 // --n-item-text-color
 // --n-item-text-color-hover
 // --n-item-text-color-active
 // --n-item-text-color-active-hover
 // --n-item-text-color-child-active
+// --n-item-text-color-child-active-hover
 // --n-item-text-color-horizontal
 // --n-item-text-color-hover-horizontal
 // --n-item-text-color-active-horizontal
 // --n-item-text-color-active-hover-horizontal
 // --n-item-text-color-child-active-horizontal
+// --n-item-text-color-child-active-hover-horizontal
 // --n-item-icon-color
 // --n-item-icon-color-hover
 // --n-item-icon-color-active
 // --n-item-icon-color-active-hover
 // --n-item-icon-color-child-active
+// --n-item-icon-color-child-active-hover
 // --n-item-icon-color-collapsed
 // --n-item-icon-color-horizontal
 // --n-item-icon-color-hover-horizontal
 // --n-item-icon-color-active-horizontal
 // --n-item-icon-color-active-hover-horizontal
 // --n-item-icon-color-child-active-horizontal
+// --n-item-icon-color-child-active-hover-horizontal
 // --n-item-height
 export default c([
   cB('menu', `
@@ -91,7 +132,10 @@ export default c([
           `)
         ]),
         cNotM('disabled', [
-          cM('selected, child-active', [
+          cNotM('selected, child-active', [
+            c('&:focus-within', horizontalHoverStyleChildren)
+          ]),
+          cM('selected', [
             hoverStyle(null, [
               cE('icon', 'color: var(--n-item-icon-color-active-hover-horizontal);'),
               cB('menu-item-content-header', `
@@ -102,21 +146,18 @@ export default c([
               ])
             ])
           ]),
-          hoverStyle('border-bottom: 2px solid var(--n-border-color-horizontal);', [
-            cE('icon', `
-              color: var(--n-item-icon-color-hover-horizontal);
-            `),
-            cB('menu-item-content-header', `
-              color: var(--n-item-text-color-hover-horizontal);
-            `, [
-              c('a', `
-                color: var(--n-item-text-color-hover-horizontal);
-              `),
-              cE('extra', `
-                color: var(--n-item-text-color-hover-horizontal);
-              `)
+          cM('child-active', [
+            hoverStyle(null, [
+              cE('icon', 'color: var(--n-item-icon-color-child-active-hover-horizontal);'),
+              cB('menu-item-content-header', `
+                color: var(--n-item-text-color-child-active-hover-horizontal);
+              `, [
+                c('a', 'color: var(--n-item-text-color-child-active-hover-horizontal);'),
+                cE('extra', 'color: var(--n-item-text-color-child-active-hover-horizontal);')
+              ])
             ])
-          ])
+          ]),
+          hoverStyle('border-bottom: 2px solid var(--n-border-color-horizontal);', horizontalHoverStyleChildren)
         ]),
         cB('menu-item-content-header', [
           c('a', 'color: var(--n-item-text-color-horizontal);')
@@ -207,7 +248,10 @@ export default c([
         `)
       ]),
       cNotM('disabled', [
-        cM('selected, child-active', [
+        cNotM('selected, child-active', [
+          c('&:focus-within', hoverStyleChildren)
+        ]),
+        cM('selected', [
           hoverStyle(null, [
             cE('arrow', 'color: var(--n-arrow-color-active-hover);'),
             cE('icon', 'color: var(--n-item-icon-color-active-hover);'),
@@ -219,30 +263,24 @@ export default c([
             ])
           ])
         ]),
+        cM('child-active', [
+          hoverStyle(null, [
+            cE('arrow', 'color: var(--n-arrow-color-child-active-hover);'),
+            cE('icon', 'color: var(--n-item-icon-color-child-active-hover);'),
+            cB('menu-item-content-header', `
+              color: var(--n-item-text-color-child-active-hover);
+            `, [
+              c('a', 'color: var(--n-item-text-color-child-active-hover);'),
+              cE('extra', 'color: var(--n-item-text-color-child-active-hover);')
+            ])
+          ])
+        ]),
         cM('selected', [
           hoverStyle(null, [
             c('&::before', 'background-color: var(--n-item-color-active-hover);')
           ])
         ]),
-        hoverStyle(null, [
-          c('&::before', 'background-color: var(--n-item-color-hover);'),
-          cE('arrow', `
-            color: var(--n-arrow-color-hover);
-          `),
-          cE('icon', `
-            color: var(--n-item-icon-color-hover);
-          `),
-          cB('menu-item-content-header', `
-            color: var(--n-item-text-color-hover);
-          `, [
-            c('a', `
-              color: var(--n-item-text-color-hover);
-            `),
-            cE('extra', `
-              color: var(--n-item-text-color-hover);
-            `)
-          ])
-        ])
+        hoverStyle(null, hoverStyleChildren)
       ]),
       cE('icon', `
         grid-area: icon;
@@ -279,6 +317,7 @@ export default c([
         color: var(--n-item-text-color);
       `, [
         c('a', `
+          outline: none;
           text-decoration: none;
           transition: color .3s var(--n-bezier);
           color: var(--n-item-text-color);

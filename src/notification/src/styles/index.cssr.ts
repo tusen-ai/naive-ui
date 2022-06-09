@@ -15,9 +15,12 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-box-shadow
 // --n-close-margin
 // --n-close-size
-// --n-close-color
+// --n-close-icon-size
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-line-height
 // --n-icon-color
 // --n-width
@@ -241,8 +244,9 @@ export default c([
           top: 0;
           right: 0;
           margin: var(--n-close-margin);
-          font-size: var(--n-close-size);
-          transition: color .3s var(--n-bezier);
+          transition:
+            background-color .3s var(--n-bezier),
+            color .3s var(--n-bezier);
         `)
       ]),
       cE('avatar', `

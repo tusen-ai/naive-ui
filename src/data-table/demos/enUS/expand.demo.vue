@@ -59,7 +59,8 @@ const createColumns = ({
               style: {
                 marginRight: '6px'
               },
-              type: 'info'
+              type: 'info',
+              bordered: false
             },
             {
               default: () => tagKey

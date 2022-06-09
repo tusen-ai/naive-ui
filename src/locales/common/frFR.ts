@@ -109,7 +109,9 @@ const frFR: NLocale = {
     tipClockwise: 'Sens horaire',
     tipZoomOut: 'Dézoomer',
     tipZoomIn: 'Zoomer',
-    tipClose: 'Fermer (Échap.)'
+    tipClose: 'Fermer (Échap.)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

@@ -703,6 +703,7 @@ export default defineComponent({
         </div>
         {showSizePicker ? (
           <NSelect
+            internalShowCheckmark={false}
             size={selectSize}
             placeholder=""
             options={pageSizeOptions}

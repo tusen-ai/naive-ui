@@ -7,5 +7,6 @@ export default {
   titleFontSizeMedium: '18px',
   titleFontSizeLarge: '18px',
   titleFontSizeHuge: '18px',
-  closeSize: '18px'
+  closeIconSize: '18px',
+  closeSize: '22px'
 }

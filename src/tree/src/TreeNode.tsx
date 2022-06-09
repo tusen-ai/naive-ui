@@ -99,9 +99,17 @@ const TreeNode = defineComponent({
     )
 
     function _handleClick (e: MouseEvent): void {
-      if (!selectableRef.value) return
+      const { value: expandOnClick } = NTree.expandOnClickRef
+      const { value: selectable } = selectableRef
+      if (!selectable && !expandOnClick) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
-      NTree.handleSelect(props.tmNode)
+      const { tmNode } = props
+      if (selectable) {
+        NTree.handleSelect(tmNode)
+      }
+      if (expandOnClick && !tmNode.isLeaf) {
+        NTree.handleSwitcherClick(tmNode)
+      }
     }
 
     function handleContentClick (e: MouseEvent): void {
@@ -222,6 +230,7 @@ const TreeNode = defineComponent({
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: selectableRef,
+      expandOnClick: NTree.expandOnClickRef,
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
       blockLine: blockLineRef,
@@ -250,6 +259,7 @@ const TreeNode = defineComponent({
       tmNode,
       clsPrefix,
       checkable,
+      expandOnClick,
       selectable,
       selected,
       checked,
@@ -302,7 +312,8 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--highlight`]: highlight,
               [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled,
-              [`${clsPrefix}-tree-node--selectable`]: selectable
+              [`${clsPrefix}-tree-node--selectable`]: selectable,
+              [`${clsPrefix}-tree-node--clickable`]: selectable || expandOnClick
             },
             nodeProps?.class
           ]}

@@ -1,3 +1,4 @@
+import { isBrowser } from '../../_utils'
 import type { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
 
 export const isImageFileType = (type: string): boolean =>
@@ -60,10 +61,7 @@ export async function createImageDataUrl (file: File): Promise<string> {
 }
 
 export const environmentSupportFile =
-  typeof document !== 'undefined' &&
-  typeof window !== 'undefined' &&
-  window.FileReader &&
-  window.File
+  isBrowser && window.FileReader && window.File
 
 export function isFileSystemDirectoryEntry (
   item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry

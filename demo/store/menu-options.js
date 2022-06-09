@@ -88,6 +88,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/usage-sfc'
         },
         {
+          en: 'Using UMD',
+          zh: '使用 UMD',
+          path: '/umd'
+        },
+        {
           en: 'Configuring Fonts',
           zh: '配置字体',
           path: '/fonts'
@@ -145,7 +150,7 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
-          en: 'Potential Element Conflict',
+          en: 'Potential Style Conflict',
           zh: '潜在的样式冲突',
           path: '/style-conflict'
         },

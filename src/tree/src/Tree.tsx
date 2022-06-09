@@ -140,6 +140,7 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  expandOnClick: Boolean,
   cancelable: {
     type: Boolean,
     default: true
@@ -1242,6 +1243,7 @@ export default defineComponent({
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
       selectableRef: toRef(props, 'selectable'),
+      expandOnClickRef: toRef(props, 'expandOnClick'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
       blockLineRef: toRef(props, 'blockLine'),

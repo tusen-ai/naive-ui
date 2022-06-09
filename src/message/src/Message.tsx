@@ -76,12 +76,16 @@ export default defineComponent({
           iconColorWarning,
           iconColorError,
           iconColorLoading,
+          closeIconSize,
+          closeBorderRadius,
           [createKey('textColor', type)]: textColor,
           [createKey('boxShadow', type)]: boxShadow,
           [createKey('color', type)]: color,
-          [createKey('closeColor', type)]: closeColor,
+          [createKey('closeColorHover', type)]: closeColorHover,
           [createKey('closeColorPressed', type)]: closeColorPressed,
-          [createKey('closeColorHover', type)]: closeColorHover
+          [createKey('closeIconColor', type)]: closeIconColor,
+          [createKey('closeIconColorPressed', type)]: closeIconColorPressed,
+          [createKey('closeIconColorHover', type)]: closeIconColorHover
         }
       } = themeRef.value
       return {
@@ -92,6 +96,8 @@ export default defineComponent({
         '--n-font-size': fontSize,
         '--n-icon-margin': iconMargin,
         '--n-icon-size': iconSize,
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius,
         '--n-close-size': closeSize,
         '--n-close-margin': closeMargin,
         '--n-text-color': textColor,
@@ -102,9 +108,11 @@ export default defineComponent({
         '--n-icon-color-warning': iconColorWarning,
         '--n-icon-color-error': iconColorError,
         '--n-icon-color-loading': iconColorLoading,
-        '--n-close-color': closeColor,
-        '--n-close-color-pressed': closeColorPressed,
         '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
+        '--n-close-icon-color-hover': closeIconColorHover,
         '--n-line-height': lineHeight,
         '--n-border-radius': borderRadius
       }
@@ -185,6 +193,7 @@ export default defineComponent({
                 clsPrefix={mergedClsPrefix}
                 class={`${mergedClsPrefix}-message__close`}
                 onClick={handleClose}
+                absolute
               />
             ) : null}
           </div>

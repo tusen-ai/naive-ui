@@ -129,7 +129,9 @@ export default c([
           cM('checkmark', {
             color: 'var(--n-option-check-mark-color)'
           }, [
-            fadeInScaleUpTransition()
+            fadeInScaleUpTransition({
+              originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+            })
           ]),
           cM('arrow', {
             color: 'var(--n-option-arrow-color)'

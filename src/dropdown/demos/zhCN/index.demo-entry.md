@@ -13,10 +13,11 @@ arrow.vue
 placement.vue
 size.vue
 group-debug.vue
-manual-position.vue
 batch-render.vue
+manual-position.vue
 render.vue
 option-props.vue
+render-option.vue
 ```
 
 ## API
@@ -31,11 +32,11 @@ option-props.vue
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |  |
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
-| node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | 批量处理下拉菜单选项的 HTML 属性 | NEXT_VERSION |
+| node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | 批量处理下拉菜单选项的 HTML 属性 | 2.29.1 |
 | options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | 下拉菜单传入的 options |  |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |  |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单标签渲染 |  |
-| render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 | NEXT_VERSION |
+| render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 | 2.29.1 |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |  |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |  |
 | on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | select 选中时触发的回调函数 |  |

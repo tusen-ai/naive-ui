@@ -1,11 +1,23 @@
-import { h, defineComponent, inject, ExtractPropTypes, computed } from 'vue'
-import { warn } from '../../_utils'
+import {
+  h,
+  defineComponent,
+  inject,
+  ExtractPropTypes,
+  computed,
+  PropType
+} from 'vue'
+import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
 import { breadcrumbInjectionKey } from './Breadcrumb'
 
 const breadcrumbItemProps = {
   separator: String,
-  href: String
+  href: String,
+  clickable: {
+    type: Boolean,
+    default: true
+  },
+  onClick: Function as PropType<(e: MouseEvent) => void>
 } as const
 
 export type BreadcrumbItemProps = Partial<
@@ -36,15 +48,20 @@ export default defineComponent({
 
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
-
       return (
-        <li class={`${mergedClsPrefix}-breadcrumb-item`}>
+        <li
+          class={[
+            `${mergedClsPrefix}-breadcrumb-item`,
+            props.clickable && `${mergedClsPrefix}-breadcrumb-item--clickable`
+          ]}
+        >
           {h(
             htmlTagRef.value,
             {
               class: `${mergedClsPrefix}-breadcrumb-item__link`,
               'aria-current': ariaCurrentRef.value,
-              href: props.href
+              href: props.href,
+              onClick: props.onClick
             },
             slots
           )}
@@ -52,9 +69,9 @@ export default defineComponent({
             class={`${mergedClsPrefix}-breadcrumb-item__separator`}
             aria-hidden="true"
           >
-            {slots.separator
-              ? slots.separator()
-              : props.separator ?? separatorRef.value}
+            {resolveSlot(slots.separator, () => [
+              props.separator ?? separatorRef.value
+            ])}
           </span>
         </li>
       )

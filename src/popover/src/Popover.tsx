@@ -32,9 +32,9 @@ import type {
 } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTrigger, InternalRenderBody } from './interface'
-import type { PopoverTheme } from '../styles'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps

@@ -14,7 +14,7 @@
         />
       </template>
     </n-tag>
-    <n-tag type="success" round>
+    <n-tag round :bordered="false">
       Anyway.FM
       <template #avatar>
         <n-avatar

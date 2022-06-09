@@ -1,40 +1,122 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.30.3
 
 ### Fixes
 
-- 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960].
+- 修复 `n-cascader` 溢出标签的 popover 在设定 `filterable` 后无法滚动，关闭 [#3061](https://github.com/TuSimple/naive-ui/issues/3061)
+- 修复 `n-drawer` 的 `show-mask` 传入 `'transparent'` 会报 warning
+- 修复 `n-calendar` 点击不在当前月份的日期不会调用 `on-panel-change`，关闭 [#3063](https://github.com/TuSimple/naive-ui/issues/3063)
+
+## Feats
+
+- 🌟 提供 UMD 打包
+- `n-cascader` 在单选状态下会展开选中的值，关闭 [#3058](https://github.com/TuSimple/naive-ui/issues/3058)
+- `n-space` 在可能的情况下会使用 `gap` CSS 属性，关闭 [#3053](https://github.com/TuSimple/naive-ui/issues/3053)
+
+## 2.30.2
+
+### Fixes
+
+- 修复 `n-select` 每次关闭菜单时会重新计算选项，提升了性能
+
+## 2.30.1
+
+### Feats
+
+- `n-menu` 新增 `arrowColorChildActiveHover`, `itemIconColorChildActiveHoverHorizontal`, `itemIconColorChildActiveHover`,`itemTextColorChildActiveHoverHorizontal`, `itemTextColorChildActiveHover`, `arrowColorChildActiveHoverInverted`, `itemIconColorChildActiveHoverHorizontalInverted`, `itemIconColorChildActiveHoverInverted`,`itemTextColorChildActiveHoverHorizontalInverted`, `itemTextColorChildActiveHoverInverted` 主题变量，关闭 [#2929](https://github.com/TuSimple/naive-ui/issues/2929)
+
+### Fixes
+
+- 修复 `n-menu` `node-props` 属性没有添加到 `role="menuitem"` 的元素上，而是添加到了里层元素
+- 修复 `n-menu` `node-props` 对 `type="group"` 的选项不生效
+
+## 2.30.0
+
+### Breaking Changes
+
+- 主题变量 `closeColor`、`closeColorHover`、`closeColorPressed` 重命名为 `closeIconColor`、`closeIconColorHover`、`closeIconColorPressed`，`closeColorHover`、`closeColorPressed` 仍然保留，控制关闭按钮的背景颜色
+- `n-tag` 的 `colorXxx` 主题变量重命名为 `colorBorderedXxx`，`colorXxx` 仍然保留，控制不带边框标签的颜色
+
+### Fixes
+
+- 修复 `createDiscreteApi` 中传入 `'loadingBar'` 不生效
+- 修复 `n-popover` 在切换主题时关闭背景颜色突变
+- 修复 `n-select` 多选时选框大小改变时菜单位置没有同步
+- 修复 `n-scrollbar` 无法显示横向滚动条，关闭 [#3047](https://github.com/TuSimple/naive-ui/issues/3047)
+- 修复 `n-tree` 在 `:block-line="true"` 并且 `:selectable="true"` 时节点的点击样式优先级高于激活样式
+- 修复 `n-slider` 在边界情况下可能泄露事件监听器
+- 修复 `n-data-table` 在 `keep-alive` 组件中使用重新激活时不会恢复滚动位置，关闭 [#2522](https://github.com/TuSimple/naive-ui/issues/2522)
+- 修复 `n-image` 在图像过大时缩放比例不够大
+- 修复 `n-menu` 下拉菜单选项在选项后代被激活的状况下的文字样式
+- 修复 `n-input` 的 `input-props` 属性设定 `class` 和 `style` 不生效
+
+### Feats
+
+- 🌟 `n-time-picker` 新增 `time-zone` 属性，关闭 [#293](https://github.com/TuSimple/naive-ui/issues/293)
+- 🌟 `n-input-number` 新增 `parse` 属性
+- 🌟 `n-input-number` 新增 `format` 属性
+- 🌟 `n-input-number` 新增 `precision` 属性，关闭 [#2068](https://github.com/TuSimple/naive-ui/issues/2068)、[#1859](https://github.com/TuSimple/naive-ui/issues/1859)
+- 🌟 `n-image` 新增展示图片原始大小的开关，关闭 [#3023](https://github.com/TuSimple/naive-ui/issues/3023)
+- 🌟 所有组件的关闭按钮使用了新样式、并且可以聚焦
+- 所有组件的选择菜单或下拉菜单使用了新的选项样式
+- `n-tag` 新增 `icon` 插槽
+- `n-tag` 新增 `strong` 属性
+- `n-tag` 在暗色背景下 `:bordered="false"` 时增加背景颜色，关闭 [#1699](https://github.com/TuSimple/naive-ui/issues/1699)
+- `n-time` 新增 `time-zone` 属性
+- `n-breadcrumb-item` 新增 `clickable` 属性
+- `n-breadcrumb-item` 使用新样式，新增 `itemLineHeight`、`itemBorderRadius`、`itemColorHover`、`itemColorPressed` 主题变量
+- `n-notification` 优化标题过长时的样式
+- `n-drawer` 优化标题过长时的样式
+- `n-dialog` 优化标题过长时的样式
+- `n-card` 优化标题过长时的样式
+
+## 2.29.1
+
+### Fixes
+
+- 修复 `n-tree` 使用 `pattern` 属性过滤树节点时报错, 关闭 [#2960](https://github.com/TuSimple/naive-ui/issues/2960)
 - 修复 `n-watermark` 在全局配置了 `cls-prefix` 时失效
-- 修复 `n-dropdown` 在 `show-arrow: true` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
+- 修复 `n-dropdown` 在 `:show-arrow="true"` 情况下不显示箭头的问题，关闭[#2977](https://github.com/TuSimple/naive-ui/issues/2977)
 - 修复 `n-upload-dragger` 没有占据满宽度
 - 修复 `n-global-style` 没有清空 body 的 padding 和 margin
-- 修复 `n-modal` 在显示时被写在不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
+- 修复 `n-modal` 在显示时被卸载不会清除 body 的 overflow，关闭 [#3015](https://github.com/TuSimple/naive-ui/issues/3015)
 - 修复键盘操作在特定的老旧浏览器无法使用
 - 修复 `n-tabs` 的 `justify-content` 为 `'start'`、 `'end'` 和 `'center'` 时缺少 padding
-- 修复 `n-tabs` 在 `justify-content` 切换时指示条的位置没有更新
+- 修复 `n-tabs` 在 `justify-content`、`size` 切换时指示条的位置没有更新
 - 修复 `n-switch` 在 `disabled` 切换时没有过渡效果
 - 修复 `n-modal` & `n-drawer` 在输入法输入过程中按 Esc 会关闭，关闭 [#2989](https://github.com/TuSimple/naive-ui/issues/2989)
 - 修复 `n-date-picker` 在选择日期时间范围的过程中还可以选择时间，关闭 [#3004](https://github.com/TuSimple/naive-ui/issues/3004)
 - 修复 `n-pagination` 在 `:page-count="0"` 是显示有问题，关闭 [#2970](https://github.com/TuSimple/naive-ui/issues/2970)
 - 修复 `n-date-picker` 在 `type="datetimerange"` 时 `shortcuts` 会被 `default-time` 覆盖，关闭 [#3020](https://github.com/TuSimple/naive-ui/issues/3020)
 - 修复 `n-image-group` 在 SSR 下无法切换图片
+- 修复 `n-tabs` 在 `display-directive="show"` 和 `:animated="true"` 的时候动画切换高度有时没有过渡，关闭 [#3035](https://github.com/TuSimple/naive-ui/issues/3035)
+- 修复 `n-select` 在单选时搜索时字体略小
+- 修复 `n-select` 的计数标签在溢出内容少的时候弹出内容过高
+- 修复 `n-date-picker` 在 `type="monthrange"` 时第一次选中时滚动状态没有对齐
+- 修复 `n-form-item` 的必填星号可以被选中
+- 修复 `n-list` 在暗色模式下的 `n-popover` 中颜色不正确
 
 ### Feats
 
+- 🌟 `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- 🌟 `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
+- 🌟 `n-steps` 新增 `on-update:current` 属性
+- 🌟 `n-date-picker` 新增 `panel` 属性
+- 🌟 `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
+- 🌟 `FormItemRule` 新增 `renderMessage` 属性，关闭 [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
+- 🌟 新增 `createDiscreteApi` 在 setup 外使用 message、notification、dialog、loading bar
 - `n-scrollbar` 新增 `trigger` 属性
 - `n-input-number` 新增 `button-placement` 属性
-- `n-select` 新增 `label-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
-- `n-select` 新增 `value-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-select` 新增 `children-field` 属性，关闭 [#3018](https://github.com/TuSimple/naive-ui/issues/3018)
 - `n-upload` 新增 `trigger-style` 属性
 - `n-dropdown` 新增 `node-props` 属性
 - `n-dropdown` 新增 `render-option` 属性
-- `n-data-table` 新增 `on-scroll` 属性，关闭 [#3025](https://github.com/TuSimple/naive-ui/issues/3025)
 - `n-upload` 新增 `is-error-state` 属性，关闭 [#2975](https://github.com/TuSimple/naive-ui/issues/2975)
 - `n-date-picker` 的 `shortcuts` 属性支持 readonly tuple 类型
 - `n-step` 新增 `disabled` 属性
-- `n-date-picker` 新增 `panel` 属性
+- `n-calendar` 新增 `header` slot，关闭 [#3036](https://github.com/TuSimple/naive-ui/issues/3036)
+- `n-tree` 新增 `expand-on-click` 属性， [#2949](https://github.com/TuSimple/naive-ui/issues/2949)
 
 ## 2.29.0
 
@@ -55,7 +137,6 @@
 
 ### Feats
 
-- `n-form-item` 新增 `render-feedback` 属性，用于自定义 `feedback` 的渲染方式，关闭 [#2525](https://github.com/TuSimple/naive-ui/issues/2525)
 - `n-notification-provider` 的 `placement` 属性支持 `'top'` 和 `'bottom'`，关闭 [#2930](https://github.com/TuSimple/naive-ui/issues/2930)
 - `n-pagination` 新增 `size` 属性，关闭 [#2888](https://github.com/TuSimple/naive-ui/issues/2888)
 - `n-config-provider` 新增 `preflight-style-disabled` 属性

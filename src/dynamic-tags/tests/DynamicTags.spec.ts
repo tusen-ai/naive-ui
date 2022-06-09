@@ -167,7 +167,7 @@ describe('n-dynamic-tags', () => {
         defaultValue: ['教师']
       }
     })
-    await wrapper.find('button').trigger('click')
+    await wrapper.find('.n-button').trigger('click')
     expect(wrapper.find('.n-input').classes()).not.toContain(
       'n-input--disabled'
     )
@@ -183,7 +183,7 @@ describe('n-dynamic-tags', () => {
         defaultValue: ['教师']
       }
     })
-    await wrapper.find('button').trigger('click')
+    await wrapper.find('.n-button').trigger('click')
     expect(wrapper.find('.n-input').attributes('style')).not.toContain(
       'color: red'
     )

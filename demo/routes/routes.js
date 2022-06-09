@@ -72,6 +72,10 @@ export const enDocRoutes = [
     path: 'controlled-uncontrolled',
     component: () =>
       import('../pages/docs/controlled-uncontrolled/enUS/index.md')
+  },
+  {
+    path: 'umd',
+    component: () => import('../pages/docs/umd/enUS/index.md')
   }
 ]
 
@@ -149,6 +153,10 @@ export const zhDocRoutes = [
     path: 'controlled-uncontrolled',
     component: () =>
       import('../pages/docs/controlled-uncontrolled/zhCN/index.md')
+  },
+  {
+    path: 'umd',
+    component: () => import('../pages/docs/umd/zhCN/index.md')
   }
 ]
 

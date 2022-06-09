@@ -59,7 +59,11 @@ export default defineComponent({
           itemTextColorPressed,
           itemTextColorActive,
           fontSize,
-          fontWeightActive
+          fontWeightActive,
+          itemBorderRadius,
+          itemColorHover,
+          itemColorPressed,
+          itemLineHeight
         }
       } = themeRef.value
       return {
@@ -70,7 +74,11 @@ export default defineComponent({
         '--n-item-text-color-pressed': itemTextColorPressed,
         '--n-item-text-color-active': itemTextColorActive,
         '--n-separator-color': separatorColor,
-        '--n-font-weight-active': fontWeightActive
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-color-pressed': itemColorPressed,
+        '--n-item-border-radius': itemBorderRadius,
+        '--n-font-weight-active': fontWeightActive,
+        '--n-item-line-height': itemLineHeight
       }
     })
     const themeClassHandle = inlineThemeDisabled

@@ -26,14 +26,14 @@ vertical-debug.vue
 | size | `'small' \| 'medium'` | `'medium'` | 步骤条大小 |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | 步骤条状态 |  |
 | vertical | `boolean` | `false` | 步骤条方向 |  |
-| on-update:current | `(index: number) => void` | `undefined` | 更新当前第几步的回调，设定后可点击切换步骤 | NEXT_VERSION |
+| on-update:current | `(index: number) => void` | `undefined` | 更新当前第几步的回调，设定后可点击切换步骤 | 2.29.1 |
 
 ### Step Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | description | `string` | `undefined` | 节点描述 |  |
-| disabled | `boolean` | `false` | 是否可点击 | NEXT_VERSION |
+| disabled | `boolean` | `false` | 是否可点击 | 2.29.1 |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | 节点状态 |  |
 | title | `string` | `undefined` | 节点标题 |  |
 

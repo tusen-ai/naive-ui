@@ -142,6 +142,7 @@ export default c([
       align-items: center;
     `, [
       cB('base-selection-input', `
+        font-size: inherit;
         line-height: inherit;
         outline: none;
         cursor: pointer;

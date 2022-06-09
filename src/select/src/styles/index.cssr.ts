@@ -13,6 +13,8 @@ export default c([
     margin: 4px 0;
     box-shadow: var(--n-menu-box-shadow);
   `, [
-    fadeInScaleUpTransition()
+    fadeInScaleUpTransition({
+      originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+    })
   ])
 ])

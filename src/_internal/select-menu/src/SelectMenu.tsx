@@ -100,6 +100,7 @@ export default defineComponent({
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
     renderOption: Function as PropType<RenderOption>,
+    showCheckmark: { type: Boolean, default: true },
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -315,6 +316,7 @@ export default defineComponent({
       handleOptionMouseEnter,
       handleOptionClick,
       valueSetRef,
+      showCheckmarkRef: toRef(props, 'showCheckmark'),
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
@@ -349,6 +351,7 @@ export default defineComponent({
           optionColorActive,
           loadingColor,
           loadingSize,
+          optionColorActivePending,
           [createKey('optionFontSize', size)]: fontSize,
           [createKey('optionHeight', size)]: optionHeight,
           [createKey('optionPadding', size)]: optionPadding
@@ -366,6 +369,7 @@ export default defineComponent({
         '--n-option-check-color': optionCheckColor,
         '--n-option-color-pending': optionColorPending,
         '--n-option-color-active': optionColorActive,
+        '--n-option-color-active-pending': optionColorActivePending,
         '--n-option-height': optionHeight,
         '--n-option-opacity-disabled': optionOpacityDisabled,
         '--n-option-text-color': optionTextColor,
@@ -374,6 +378,7 @@ export default defineComponent({
         '--n-option-text-color-pressed': optionTextColorPressed,
         '--n-option-padding': optionPadding,
         '--n-option-padding-left': getPadding(optionPadding, 'left'),
+        '--n-option-padding-right': getPadding(optionPadding, 'right'),
         '--n-loading-color': loadingColor,
         '--n-loading-size': loadingSize
       }

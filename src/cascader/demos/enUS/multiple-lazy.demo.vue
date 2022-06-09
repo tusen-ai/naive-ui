@@ -26,7 +26,7 @@
     <n-cascader
       v-model:value="value"
       multiple
-      placeholder="没啥用的值"
+      placeholder="Meaningless values"
       :options="options"
       :cascade="cascade"
       :check-strategy="checkStrategy"

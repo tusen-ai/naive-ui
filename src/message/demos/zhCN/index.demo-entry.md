@@ -131,6 +131,12 @@ type MessageRenderMessage = (props: {
 
 ### 在 setup 外使用
 
+#### 选择 1
+
+使用 [createDiscreteApi](discrete)。如果你想使用它，请认真阅读它的注意事项。你最好不要把它和 `useMessage` 在同一 App 中混用。
+
+#### 选择 2
+
 <n-space vertical size="large">
 <n-alert type="warning">
   如果你想在 setup 外使用信息，你需要在顶层 setup 中把 <n-text code>useMessage</n-text> 返回的 message 值挂载到 window 下然后再调用，调用前需要确保 message 已经挂载成功。

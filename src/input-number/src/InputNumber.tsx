@@ -88,6 +88,9 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  parse: Function as PropType<(input: string) => number | null>,
+  format: Function as PropType<(value: number | null) => string>,
+  precision: Number,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -139,11 +142,15 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
+    const getPrecision = (value: string | number): number => {
+      const fraction = String(value).split('.')[1]
+      return fraction ? fraction.length : 0
+    }
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
-        (item) => {
-          const fraction = String(item).split('.')[1]
-          return fraction ? fraction.length : 0
+        (value): number => {
+          if (value === undefined) return 0
+          return getPrecision(value)
         }
       )
       return Math.max(...precisions)
@@ -189,23 +196,41 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    const deriveValueFromDisplayedValue = (
-      offset = 0,
-      doUpdateIfValid = true,
-      isInputing = false
-    ): null | number | false => {
+    const deriveValueFromDisplayedValue = ({
+      offset,
+      doUpdateIfValid,
+      fixPrecision,
+      isInputing
+    }: {
+      offset: number
+      doUpdateIfValid: boolean
+      fixPrecision: boolean
+      isInputing: boolean
+    }): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       if (isInputing && isWipValue(displayedValue)) {
         return false
       }
-      const parsedValue = parse(displayedValue)
+      const parsedValue = (props.parse || parse)(displayedValue)
       if (parsedValue === null) {
         if (doUpdateIfValid) doUpdateValue(null)
         return null
       }
       if (validator(parsedValue)) {
-        const precision = getMaxPrecision(parsedValue)
-        let nextValue = parseFloat((parsedValue + offset).toFixed(precision))
+        const currentPrecision = getPrecision(parsedValue)
+        const { precision } = props
+        if (
+          precision !== undefined &&
+          precision < currentPrecision &&
+          !fixPrecision
+        ) {
+          return false
+        }
+        let nextValue = parseFloat(
+          (parsedValue + offset).toFixed(
+            precision ?? getMaxPrecision(parsedValue)
+          )
+        )
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
@@ -229,16 +254,35 @@ export default defineComponent({
     const deriveDisplayedValueFromValue = (): void => {
       const { value: mergedValue } = mergedValueRef
       if (validator(mergedValue)) {
-        displayedValueRef.value = format(mergedValue)
+        const { format: formatProp, precision } = props
+        if (formatProp) {
+          displayedValueRef.value = formatProp(mergedValue)
+        } else {
+          if (
+            mergedValue === null ||
+            precision === undefined ||
+            // precision overflow
+            getPrecision(mergedValue) > precision
+          ) {
+            displayedValueRef.value = format(mergedValue, undefined)
+          } else {
+            displayedValueRef.value = format(mergedValue, precision)
+          }
+        }
       } else {
         // null can pass the validator check
         // so mergedValue is a number
-        displayedValueRef.value = String(mergedValue as number)
+        displayedValueRef.value = String(mergedValue)
       }
     }
     deriveDisplayedValueFromValue()
     const displayedValueInvalidRef = useMemo(() => {
-      const derivedValue = deriveValueFromDisplayedValue(0, false)
+      const derivedValue = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedValue === false
     })
     const minusableRef = useMemo(() => {
@@ -247,7 +291,12 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(-mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: -mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedNextValue !== false
     })
     const addableRef = useMemo(() => {
@@ -256,7 +305,12 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(+mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: +mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedNextValue !== false
     })
     function doFocus (e: FocusEvent): void {
@@ -271,7 +325,12 @@ export default defineComponent({
         // which means not activated
         return
       }
-      const value = deriveValueFromDisplayedValue()
+      const value = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: true,
+        isInputing: false,
+        fixPrecision: true
+      })
       // If valid, update event has been emitted
       // make sure e.target.value is correct in blur callback
       if (value !== false) {
@@ -312,7 +371,12 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
       }
     }
     function doMinus (): void {
@@ -328,7 +392,12 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(-mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: -mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
       }
     }
     const handleFocus = doFocus
@@ -417,21 +486,38 @@ export default defineComponent({
           // which means not activated
           return
         }
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
       } else if (e.key === 'ArrowUp') {
+        if (!addableRef.value) return
         if (props.keyboard.ArrowUp === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           doAdd()
         }
       } else if (e.key === 'ArrowDown') {
+        if (!minusableRef.value) return
         if (props.keyboard.ArrowDown === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           doMinus()
         }
@@ -439,8 +525,18 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
-      if (props.updateValueOnInput) {
-        deriveValueFromDisplayedValue(0, true, true)
+      if (
+        props.updateValueOnInput &&
+        !props.format &&
+        !props.parse &&
+        props.precision === undefined
+      ) {
+        deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: true,
+          fixPrecision: false
+        })
       }
     }
     watch(mergedValueRef, () => {

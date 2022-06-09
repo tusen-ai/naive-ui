@@ -50,6 +50,7 @@ fixed-column-debug
 fixed-column2-debug
 scroll-debug
 height-debug
+keep-alive-debug.vue
 ```
 
 ## API
@@ -90,7 +91,7 @@ height-debug
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |  |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
-| on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | NEXT_VERSION |
+| on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |  |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |

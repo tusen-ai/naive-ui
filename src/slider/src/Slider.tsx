@@ -9,7 +9,8 @@ import {
   Transition,
   PropType,
   CSSProperties,
-  ComponentPublicInstance
+  ComponentPublicInstance,
+  onBeforeUnmount
 } from 'vue'
 import {
   VBinder,
@@ -526,6 +527,9 @@ export default defineComponent({
         })
       }
       void nextTick(syncPosition)
+    })
+    onBeforeUnmount(() => {
+      stopDragging()
     })
     const cssVarsRef = computed(() => {
       const {

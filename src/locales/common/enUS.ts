@@ -99,7 +99,6 @@ const enUS = {
     export: 'Export',
     restore: 'Reset to Default'
   },
-  // TODO: translation
   Image: {
     tipPrevious: 'Previous picture (←)',
     tipNext: 'Next picture (→)',
@@ -107,7 +106,9 @@ const enUS = {
     tipClockwise: 'Clockwise',
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)'
+    tipClose: 'Close (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

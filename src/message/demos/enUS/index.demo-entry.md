@@ -4,9 +4,9 @@ Oracle from the top(always) of the browser.
 
 <n-space vertical size="large">
 <n-alert title="Prerequisite" type="warning">
-  If you want use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
+  If you want to use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
   <br/>
-  If you want use it outside setup, please refer to Q & A part at the bottom of the page.
+  If you want to use it outside setup, please refer to Q & A part at the bottom of the page.
 </n-alert>
 For example:
 
@@ -130,6 +130,12 @@ type MessageRenderMessage = (props: {
 ## Q & A
 
 ### Use Message Outside Setup
+
+#### Option 1
+
+Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefully. You'd better not use `useMessage` and it together in a same app.
+
+#### Option 2
 
 <n-space vertical size="large">
 <n-alert type="warning">

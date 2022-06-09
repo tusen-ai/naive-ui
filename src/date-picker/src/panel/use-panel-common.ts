@@ -94,7 +94,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     doTabOut()
   }
   function disableTransitionOneTick (): void {
-    if (props.active) {
+    if (props.active || props.panel) {
       void nextTick(() => {
         const { value: selfEl } = selfRef
         if (!selfEl) return

@@ -69,8 +69,8 @@ export default c([
     user-select: none;
     pointer-events: all;
     margin: auto;
-    max-height: 100vh;
-    max-width: 100vw;
+    max-height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
     transition: transform .3s var(--n-bezier);
   `),
   cB('image', `

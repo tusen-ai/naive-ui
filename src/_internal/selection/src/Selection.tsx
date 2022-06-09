@@ -584,8 +584,9 @@ export default defineComponent({
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              internalStopClickPropagation
               onClose={() => this.handleDeleteOption(option)}
+              internalCloseFocusable={false}
+              internalStopClickPropagation
             >
               {{
                 default: () =>
@@ -745,63 +746,44 @@ export default defineComponent({
           {this.placeholder}
         </div>
       ) : null
-      if (filterable) {
-        const popoverTrigger = (
-          <div
-            ref="patternInputWrapperRef"
-            class={`${clsPrefix}-base-selection-tags`}
-          >
-            {tags}
-            {maxTagCountResponsive ? null : input}
-            {suffix}
-          </div>
-        )
-        body = (
-          <>
-            {useMaxTagCount ? (
-              <NPopover {...popoverProps} scrollable>
-                {{
-                  trigger: () => popoverTrigger,
-                  default: renderPopover
-                }}
-              </NPopover>
-            ) : (
-              popoverTrigger
-            )}
-            {placeholder}
-          </>
-        )
-      } else {
-        const popoverTrigger = (
-          <div
-            ref="multipleElRef"
-            class={`${clsPrefix}-base-selection-tags`}
-            tabindex={disabled ? undefined : 0}
-          >
-            {tags}
-            {suffix}
-          </div>
-        )
-        body = (
-          <>
-            {useMaxTagCount ? (
-              <NPopover
-                {...popoverProps}
-                scrollable
-                style="height: calc(var(--v-target-height) * 6.6);"
-              >
-                {{
-                  trigger: () => popoverTrigger,
-                  default: renderPopover
-                }}
-              </NPopover>
-            ) : (
-              popoverTrigger
-            )}
-            {placeholder}
-          </>
-        )
-      }
+      const popoverTrigger = filterable ? (
+        <div
+          ref="patternInputWrapperRef"
+          class={`${clsPrefix}-base-selection-tags`}
+        >
+          {tags}
+          {maxTagCountResponsive ? null : input}
+          {suffix}
+        </div>
+      ) : (
+        <div
+          ref="multipleElRef"
+          class={`${clsPrefix}-base-selection-tags`}
+          tabindex={disabled ? undefined : 0}
+        >
+          {tags}
+          {suffix}
+        </div>
+      )
+      body = (
+        <>
+          {useMaxTagCount ? (
+            <NPopover
+              {...popoverProps}
+              scrollable
+              style="max-height: calc(var(--v-target-height) * 6.6);"
+            >
+              {{
+                trigger: () => popoverTrigger,
+                default: renderPopover
+              }}
+            </NPopover>
+          ) : (
+            popoverTrigger
+          )}
+          {placeholder}
+        </>
+      )
     } else {
       if (filterable) {
         const hasInput = this.pattern || this.isCompositing

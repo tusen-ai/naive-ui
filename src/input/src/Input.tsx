@@ -1009,7 +1009,10 @@ export default defineComponent({
                       <textarea
                         {...this.inputProps}
                         ref="textareaElRef"
-                        class={`${mergedClsPrefix}-input__textarea-el`}
+                        class={[
+                          `${mergedClsPrefix}-input__textarea-el`,
+                          this.inputProps?.class
+                        ]}
                         autofocus={this.autofocus}
                         rows={Number(this.rows)}
                         placeholder={this.placeholder as string | undefined}
@@ -1025,6 +1028,7 @@ export default defineComponent({
                         }
                         style={[
                           this.textDecorationStyle[0] as any,
+                          this.inputProps?.style,
                           scrollContainerWidthStyle
                         ]}
                         onBlur={this.handleInputBlur}
@@ -1077,8 +1081,14 @@ export default defineComponent({
                 }
                 {...this.inputProps}
                 ref="inputElRef"
-                class={`${mergedClsPrefix}-input__input-el`}
-                style={this.textDecorationStyle[0] as any}
+                class={[
+                  `${mergedClsPrefix}-input__input-el`,
+                  this.inputProps?.class
+                ]}
+                style={[
+                  this.textDecorationStyle[0] as any,
+                  this.inputProps?.style
+                ]}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }

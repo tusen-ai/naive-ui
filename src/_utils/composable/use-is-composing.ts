@@ -1,4 +1,5 @@
 import { ref, Ref, onBeforeMount, onBeforeUnmount } from 'vue'
+import { isBrowser } from '../env/is-browser'
 
 const isComposingRef = ref(false)
 const compositionStartHandler = (): void => {
@@ -10,7 +11,7 @@ const compositionEndHandler = (): void => {
 let mountedCount = 0
 
 export const useIsComposing = (): Ref<boolean> => {
-  if (typeof window !== 'undefined') {
+  if (isBrowser) {
     onBeforeMount(() => {
       if (!mountedCount) {
         window.addEventListener('compositionstart', compositionStartHandler)

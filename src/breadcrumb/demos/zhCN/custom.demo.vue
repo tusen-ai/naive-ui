@@ -8,12 +8,16 @@
   <n-breadcrumb>
     <n-breadcrumb-item>
       <n-dropdown :options="options1">
-        I'm ok
+        <div class="trigger">
+          I'm ok
+        </div>
       </n-dropdown>
     </n-breadcrumb-item>
     <n-breadcrumb-item>
       <n-dropdown :options="options2">
-        I'm ok
+        <div class="trigger">
+          I'm ok
+        </div>
       </n-dropdown>
     </n-breadcrumb-item>
   </n-breadcrumb>
@@ -49,3 +53,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.trigger {
+  padding: 4px;
+  margin: -4px;
+  border-radius: inherit;
+}
+</style>
