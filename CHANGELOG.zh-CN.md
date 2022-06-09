@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-dropdown` 中传入 `'scrollable'` 不生效
+
 ## 2.30.3
 
 ### Fixes
