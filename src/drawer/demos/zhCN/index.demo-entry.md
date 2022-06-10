@@ -14,6 +14,7 @@ multiple.vue
 target.vue
 closable.vue
 slot.vue
+scroll.vue
 a11y-debug.vue
 custom-style-debug.vue
 dark-1-debug.vue

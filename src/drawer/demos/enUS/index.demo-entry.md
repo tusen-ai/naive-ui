@@ -14,6 +14,7 @@ multiple.vue
 target.vue
 closable.vue
 slot.vue
+scroll.vue
 ```
 
 ## API
