@@ -710,7 +710,11 @@ export default defineComponent({
                       onDeleteOption={this.handleDeleteOption}
                       onKeydown={this.handleKeydown}
                       onKeyup={this.handleKeyup}
-                    />
+                    >
+                      {{
+                        arrow: () => [this.$slots.arrow?.()]
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,

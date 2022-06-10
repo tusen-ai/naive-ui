@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree-select` 新增 `arrow` slot，关闭 [#3084](https://github.com/TuSimple/naive-ui/issues/3084)
+
 ## 2.30.3
 
 ### Fixes

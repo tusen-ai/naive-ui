@@ -74,7 +74,8 @@ debug.vue
 
 ### TreeSelect Slots
 
-| Name   | Parameters | Description                            | Version |
-| ------ | ---------- | -------------------------------------- | ------- |
-| action | `()`       | Options menu slot.                     | 2.22.0  |
-| empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| action | `()`       | Options menu slot.                     | 2.22.0       |
+| arrow  | `()`       | Arrow icon of trigger.                 | NEXT_VERSION |
+| empty  | `()`       | Empty state slot for the options menu. | 2.22.0       |
