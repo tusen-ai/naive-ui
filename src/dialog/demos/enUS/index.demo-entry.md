@@ -58,7 +58,7 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
