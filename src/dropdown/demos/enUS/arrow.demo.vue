@@ -9,6 +9,8 @@ Show an arrow with the dropdown.
     trigger="click"
     :options="options"
     :show-arrow="true"
+    scrollable
+    style="max-height: 100px"
     @select="handleSelect"
   >
     <n-button>Go For a Trip</n-button>
