@@ -142,11 +142,16 @@ const Button = defineComponent({
       return props.focusable && !props.disabled
     })
     const handleMousedown = (e: MouseEvent): void => {
-      if (props.disabled || props.nativeFocusBehavior) {
+      if (props.nativeFocusBehavior) {
+        return
+      }
+      e.preventDefault()
+      // normally this won't be called if disabled (when tag is button)
+      // if not, we try to make it behave like a button
+      if (props.disabled) {
         return
       }
       if (mergedFocusableRef.value) {
-        e.preventDefault()
         selfElRef.value?.focus({ preventScroll: true })
       }
     }
