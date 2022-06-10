@@ -348,6 +348,8 @@ export default defineComponent({
             )
           )
           if (filterable) focusSelectionInput()
+          keyboardKeyRef.value = key
+          hoverKeyRef.value = key
         } catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
             if (cascaderMenuInstRef.value) {
@@ -403,6 +405,8 @@ export default defineComponent({
             getRawNodePath(getPath(checkedKey)?.treeNodePath)
           )
         )
+        keyboardKeyRef.value = key
+        hoverKeyRef.value = key
       }
     }
     const selectedOptionsRef = computed(() => {

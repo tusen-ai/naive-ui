@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-tree-select` adds `arrow` slot, closes [#3084](https://github.com/TuSimple/naive-ui/issues/3084).
+- `n-cascader` will show corresponding submenu after checkbox is clicked, closes [#3079](https://github.com/TuSimple/naive-ui/issues/3079).
 
 ## 2.30.3
 

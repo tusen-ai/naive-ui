@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-tree-select` 新增 `arrow` slot，关闭 [#3084](https://github.com/TuSimple/naive-ui/issues/3084)
+- `n-cascader` 在点击 checkbox 后会显示对应的子菜单，关闭 [#3079](https://github.com/TuSimple/naive-ui/issues/3079)
 
 ## 2.30.3
 
