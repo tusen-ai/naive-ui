@@ -198,6 +198,7 @@ export default c([
         top: 50%;
         transform: translate(-50%, -50%);
         cursor: pointer;
+        display: flex;
       `, [
         cB('slider-handle', `
           height: var(--n-handle-size);
@@ -210,13 +211,16 @@ export default c([
         `, [
           c('&:hover', {
             boxShadow: 'var(--n-handle-box-shadow-hover)'
-          }),
-          c('&:hover:focus', {
-            boxShadow: 'var(--n-handle-box-shadow-active)'
-          }),
-          c('&:focus', {
-            boxShadow: 'var(--n-handle-box-shadow-focus)'
           })
+        ]),
+        c('&:focus-within', [
+          cB('slider-handle', {
+            boxShadow: 'var(--n-handle-box-shadow-focus)'
+          }, [
+            c('&:hover', {
+              boxShadow: 'var(--n-handle-box-shadow-active)'
+            })
+          ])
         ])
       ])
     ]),

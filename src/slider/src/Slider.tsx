@@ -31,7 +31,8 @@ import {
   call,
   useAdjustedTo,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  resolveSlot
 } from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
@@ -715,11 +716,11 @@ export default defineComponent({
                                 this.handleHandleMouseLeave(index)
                               }
                             >
-                              {this.$slots.handle?.() || (
+                              {resolveSlot(this.$slots.handle, () => [
                                 <div
                                   class={`${mergedClsPrefix}-slider-handle`}
                                 />
-                              )}
+                              ])}
                             </div>
                           )
                         }}
