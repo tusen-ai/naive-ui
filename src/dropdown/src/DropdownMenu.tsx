@@ -136,9 +136,14 @@ export default defineComponent({
       )
     })
     return (
-      <div class={`${clsPrefix}-dropdown-menu`} ref="bodyRef">
+      <div
+        class={`${clsPrefix}-dropdown-menu ${
+          scrollable ? clsPrefix + '-dropdown-menu--scrollable' : ''
+        } `}
+        ref="bodyRef"
+      >
         {scrollable ? (
-          <NxScrollbar>
+          <NxScrollbar contentClass={`${clsPrefix}-dropdown-menu__content`}>
             {{
               default: () => menuOptionsNode
             }}
