@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-button` 在设定 `:focusable="false"` 后点击仍然会聚焦，关闭 [#3071](https://github.com/TuSimple/naive-ui/issues/3071)
+- 修复 `n-data-table` 固定的选择列在设定了非默认宽度的情况下可能和其他列重叠，关闭 [#3067](https://github.com/TuSimple/naive-ui/issues/3067)
 
 ### Feats
 
