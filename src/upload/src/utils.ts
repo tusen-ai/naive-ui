@@ -40,23 +40,7 @@ export async function createImageDataUrl (file: File): Promise<string> {
       return
     }
 
-    const img = new Image()
-    img.src = window.URL.createObjectURL(file)
-    img.onload = () => {
-      const { width, height } = img
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      canvas.width = width
-      canvas.height = height
-      canvas.style.cssText = `position: fixed; left: 0; top: 0; width: ${width}px; height: ${height}px; z-index: 9999; display: none;`
-      document.body.appendChild(canvas)
-
-      ctx?.drawImage(img, 0, 0, width, height)
-      const dataURL = canvas.toDataURL()
-      document.body.removeChild(canvas)
-
-      resolve(dataURL)
-    }
+    resolve(window.URL.createObjectURL(file))
   })
 }
 
