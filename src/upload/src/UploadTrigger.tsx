@@ -1,7 +1,7 @@
 import { h, defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { throwError } from '../../_utils'
+import { resolveSlot, throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import { getFilesFromEntries } from './utils'
 import NUploadDragger from './UploadDragger'
@@ -109,13 +109,11 @@ export default defineComponent({
           {isImageCardTypeRef.value ? (
             <NUploadDragger>
               {{
-                default:
-                  slots.default ||
-                  (() => (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{ default: () => <AddIcon /> }}
-                    </NBaseIcon>
-                  ))
+                default: resolveSlot(slots.default, () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => <AddIcon /> }}
+                  </NBaseIcon>
+                ])
               }}
             </NUploadDragger>
           ) : (
