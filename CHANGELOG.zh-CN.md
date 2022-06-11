@@ -6,12 +6,18 @@
 
 - 修复 `n-button` 在设定 `:focusable="false"` 后点击仍然会聚焦，关闭 [#3071](https://github.com/TuSimple/naive-ui/issues/3071)
 - 修复 `n-data-table` 固定的选择列在设定了非默认宽度的情况下可能和其他列重叠，关闭 [#3067](https://github.com/TuSimple/naive-ui/issues/3067)
+- 修复 `n-popselect` 在选择完关闭菜单后没有触发 `on-update:show`
+- 修复 `n-popselect` 的宽度不能通过 `style` 配置
 
 ### Feats
 
+- 🌟 `n-pagination` 新增快速跳转的下拉菜单
 - `n-tree-select` 新增 `arrow` slot，关闭 [#3084](https://github.com/TuSimple/naive-ui/issues/3084)
 - `n-cascader` 在点击 checkbox 后会显示对应的子菜单，关闭 [#3079](https://github.com/TuSimple/naive-ui/issues/3079)
-- `n-upload` will disable dragger when maximum number of files was reached [#3088](https://github.com/TuSimple/naive-ui/issues/3088)
+- `n-upload` 在达到最大文件数量限制后会禁用 dragger
+- `n-select` 新增 `node-props` 属性
+- `n-popselect` 新增 `node-props` 属性
+- `n-popselect` 新增 `virtual-scroll` 属性
 
 ## 2.30.3
 

@@ -6,12 +6,18 @@
 
 - Fix `n-button` is focused after click with `:focusable="false"`, closes [#3071](https://github.com/TuSimple/naive-ui/issues/3071).
 - Fix `n-data-table` fixed selection may overlap with other fixed columns if it's width is not default, closes [#3067](https://github.com/TuSimple/naive-ui/issues/3067).
+- Fix `n-popselect` doesn't trigger `on-update:show` when it select value then menu is closed.
+- Fix `n-popselect`'s width can't be set via `style`.
 
 ### Feats
 
+- 🌟 `n-pagination` adds dropdown menu for fast jump button.
 - `n-tree-select` adds `arrow` slot, closes [#3084](https://github.com/TuSimple/naive-ui/issues/3084).
 - `n-cascader` will show corresponding submenu after checkbox is clicked, closes [#3079](https://github.com/TuSimple/naive-ui/issues/3079).
-- `n-upload` will disable dragger when maximum number of files was reached [#3088](https://github.com/TuSimple/naive-ui/issues/3088).
+- `n-upload` will disable dragger when maximum number of files was reached.
+- `n-select` adds `node-props` prop.
+- `n-popselect` adds `node-props` prop.
+- `n-popselect` adds `virtual-scroll` prop.
 
 ## 2.30.3
 

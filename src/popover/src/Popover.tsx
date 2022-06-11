@@ -169,6 +169,7 @@ export const popoverBaseProps = {
   MaybeArray<(value: boolean) => void>
   >,
   // internal
+  internalDeactivateImmediately: Boolean,
   internalSyncTargetWithParent: Boolean,
   internalInheritedEventHandlers: {
     type: Array as PropType<TriggerEventHandlers[]>,

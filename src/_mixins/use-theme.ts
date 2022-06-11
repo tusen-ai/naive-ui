@@ -167,7 +167,12 @@ function useTheme<N, T, R> (
       common: mergedCommon,
       self: mergedSelf,
       peers: merge({}, defaultTheme.peers, globalPeers, peers),
-      peerOverrides: merge({}, globalPeersOverrides, peersOverrides)
+      peerOverrides: merge(
+        {},
+        builtinOverrides.peers,
+        globalPeersOverrides,
+        peersOverrides
+      )
     }
   })
   return mergedThemeRef

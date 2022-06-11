@@ -1,4 +1,4 @@
-import { VNodeChild, Ref, UnwrapRef, VNode } from 'vue'
+import { VNodeChild, Ref, UnwrapRef, VNode, HTMLAttributes } from 'vue'
 import { TreeNode } from 'treemate'
 import type {
   SelectBaseOption,
@@ -31,6 +31,10 @@ export type RenderOptionImpl = (info: {
   selected: boolean
 }) => VNodeChild
 
+export type NodeProps = (
+  option: SelectBaseOption | SelectGroupOption
+) => HTMLAttributes & Record<string, unknown>
+
 export interface InternalSelectMenuInjection {
   handleOptionMouseEnter: (
     e: MouseEvent,
@@ -46,6 +50,7 @@ export interface InternalSelectMenuInjection {
   renderOptionRef: Ref<RenderOption | undefined>
   labelFieldRef: Ref<string>
   valueFieldRef: Ref<string>
+  nodePropsRef: Ref<NodeProps | undefined>
 }
 
 export interface InternalExposedProps {

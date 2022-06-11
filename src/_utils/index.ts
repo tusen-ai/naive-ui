@@ -14,7 +14,8 @@ export {
   resolveSlot,
   resolveSlotWithProps,
   resolveWrappedSlot,
-  isSlotEmpty
+  isSlotEmpty,
+  mergeEventHandlers
 } from './vue'
 export type { MaybeArray } from './vue'
 export {
