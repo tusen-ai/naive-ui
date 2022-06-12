@@ -13,6 +13,7 @@
 - Fix `n-layout-sider` won't keep scroll state in `keep-alive` component.
 - Fix `n-tree` may trigger loading multiple times.
 - Fix `n-tree` throws error on async expanding data with `:expand-on-click="true"`, closes [#3089](https://github.com/TuSimple/naive-ui/issues/3089).
+- Fix `n-slider`'s tooltip has no enter transition when it's triggered by keyboard.
 
 ### Feats
 

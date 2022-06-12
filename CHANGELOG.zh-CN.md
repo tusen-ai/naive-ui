@@ -13,6 +13,7 @@
 - 修复 `n-layout-sider` 在 `keep-alive` 中使用的时候不会维持滚动状态
 - 修复 `n-tree` 可能重复发送异步数据请求
 - 修复 `n-tree` 在设定 `expand-on-click` 之后异步展开报错，关闭 [#3089](https://github.com/TuSimple/naive-ui/issues/3089)
+- 修复 `n-slider` 使用键盘聚焦触发 toolip 的时候没有动画
 
 ### Feats
 
