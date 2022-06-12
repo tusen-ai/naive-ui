@@ -25,7 +25,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      validateOnlyNumber: (value: string) => /^\d+$/.test(value),
+      validateOnlyNumber: (value: string) => !value || /^\d+$/.test(value),
       validateEmpty: (value: string) => !/ /g.test(value)
     }
   }
