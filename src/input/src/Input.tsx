@@ -24,6 +24,7 @@ import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
+import useRtl from '../../_mixins/use-rtl'
 import {
   NBaseClear,
   NBaseIcon,
@@ -57,10 +58,9 @@ import type {
   InputWrappedRef
 } from './interface'
 import { inputInjectionKey } from './interface'
-import { isEmptyValue, useCursor } from './utils'
+import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -120,7 +120,7 @@ const inputProps = {
     type: Boolean,
     default: undefined
   },
-  pattern: Function as PropType<(value: string) => boolean>,
+  allowInput: Function as PropType<(value: string) => boolean>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -200,7 +200,7 @@ export default defineComponent({
     const currentFocusedInputRef = ref<
     HTMLInputElement | HTMLTextAreaElement | null
     >(null)
-    const focusedInputCorsurControl = useCursor(currentFocusedInputRef)
+    const focusedInputCursorControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
     // local
     const { localeRef } = useLocale('Input')
@@ -242,8 +242,8 @@ export default defineComponent({
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (isEmptyValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
+        (isEmptyInputValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -254,8 +254,8 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (isEmptyValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
+        (isEmptyInputValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
     // focus
@@ -437,7 +437,6 @@ export default defineComponent({
       } else {
         handleInput(e, 0)
       }
-      focusedInputCorsurControl.recordCursor()
     }
     function handleInput (
       e: InputEvent | CompositionEvent | Event,
@@ -446,7 +445,6 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
-      focusedInputCorsurControl.recordCursor()
       if (props.type === 'textarea') {
         const { value: textareaScrollbarInst } = textareaScrollbarInstRef
         if (textareaScrollbarInst) {
@@ -455,8 +453,9 @@ export default defineComponent({
       }
       syncSource = targetValue
       if (isComposingRef.value) return
-      const isValidInputValue = matches(targetValue)
-      if (isValidInputValue) {
+      focusedInputCursorControl.recordCursor()
+      const isIncomingValueValid = allowInput(targetValue)
+      if (isIncomingValueValid) {
         if (!props.pair) {
           event === 'input' ? doUpdateValue(targetValue) : doChange(targetValue)
         } else {
@@ -464,7 +463,7 @@ export default defineComponent({
           if (!Array.isArray(value)) {
             value = ['', '']
           } else {
-            value = [...value]
+            value = [value[0], value[1]]
           }
           value[index] = targetValue
           event === 'input' ? doUpdateValue(value) : doChange(value)
@@ -473,14 +472,14 @@ export default defineComponent({
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
       vm.$forceUpdate()
-      if (!isValidInputValue) {
-        void nextTick(focusedInputCorsurControl.restoreCursor)
+      if (!isIncomingValueValid) {
+        void nextTick(focusedInputCursorControl.restoreCursor)
       }
     }
-    function matches (value: string): boolean {
-      const { pattern } = props
-      if (typeof pattern === 'function') {
-        return pattern(value)
+    function allowInput (value: string): boolean {
+      const { allowInput } = props
+      if (typeof allowInput === 'function') {
+        return allowInput(value)
       }
       return true
     }
@@ -502,7 +501,7 @@ export default defineComponent({
       dealWithEvent(e, 'blur')
       currentFocusedInputRef.value = null
     }
-    function handleInputFocus (e: FocusEvent, index?: number): void {
+    function handleInputFocus (e: FocusEvent, index: number): void {
       doUpdateValueFocus(e)
       focusedRef.value = true
       activatedRef.value = true
@@ -512,7 +511,7 @@ export default defineComponent({
         currentFocusedInputRef.value = inputElRef.value
       } else if (index === 1) {
         currentFocusedInputRef.value = inputEl2Ref.value
-      } else {
+      } else if (index === 2) {
         currentFocusedInputRef.value = textareaElRef.value
       }
     }
@@ -1059,7 +1058,7 @@ export default defineComponent({
                           scrollContainerWidthStyle
                         ]}
                         onBlur={this.handleInputBlur}
-                        onFocus={this.handleInputFocus}
+                        onFocus={(e) => this.handleInputFocus(e, 2)}
                         onInput={this.handleInput}
                         onChange={this.handleChange}
                         onScroll={this.handleTextAreaScroll}

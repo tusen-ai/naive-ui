@@ -10,18 +10,17 @@ export function len (s: string): number {
   return count
 }
 
-export function isEmptyValue (value: any): boolean {
-  return ['', undefined, null].includes(value)
+export function isEmptyInputValue (value: unknown): boolean {
+  return value === '' || value == null
 }
 
 export interface UseCursorControl {
   recordCursor: () => void
   restoreCursor: () => void
-  clearRecord: () => void
 }
 
 export function useCursor (
-  inputRef: Ref<HTMLInputElement | HTMLTextAreaElement | null>
+  inputElRef: Ref<HTMLInputElement | HTMLTextAreaElement | null>
 ): UseCursorControl {
   const selectionRef = ref<{
     start: number
@@ -31,35 +30,32 @@ export function useCursor (
   } | null>(null)
 
   function recordCursor (): void {
-    const { value: input } = inputRef
+    const { value: input } = inputElRef
     if (!input || !input.focus) {
-      clearRecord()
+      reset()
       return
     }
     const { selectionStart, selectionEnd, value } = input
-    // eslint-disable-next-line eqeqeq
-    if (selectionStart == void 0 || selectionEnd == void 0) {
-      clearRecord()
+    if (selectionStart == null || selectionEnd == null) {
+      reset()
       return
     }
     selectionRef.value = {
       start: selectionStart,
       end: selectionEnd,
-      beforeText: value.substring(0, selectionStart),
-      afterText: value.substring(selectionEnd)
+      beforeText: value.slice(0, selectionStart),
+      afterText: value.slice(selectionEnd)
     }
   }
 
   function restoreCursor (): void {
     const { value: selection } = selectionRef
-    const { value: input } = inputRef
-    if (!selection || !input || !input.focus) {
+    const { value: inputEl } = inputElRef
+    if (!selection || !inputEl) {
       return
     }
-
-    const { value } = input
+    const { value } = inputEl
     const { start, beforeText, afterText } = selection
-
     let startPos = value.length
     if (value.endsWith(afterText)) {
       startPos = value.length - afterText.length
@@ -72,18 +68,16 @@ export function useCursor (
         startPos = newIndex + 1
       }
     }
-
-    input.setSelectionRange?.(startPos, startPos)
+    inputEl.setSelectionRange?.(startPos, startPos)
   }
 
-  function clearRecord (): void {
+  function reset (): void {
     selectionRef.value = null
   }
-  watch(inputRef, clearRecord)
+  watch(inputElRef, reset)
 
   return {
     recordCursor,
-    restoreCursor,
-    clearRecord
+    restoreCursor
   }
 }

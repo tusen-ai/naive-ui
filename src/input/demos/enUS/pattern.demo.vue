@@ -1,20 +1,20 @@
 <markdown>
-# Input intercept
+# Limit input format
 
-Control the entry format of the input.
+Use `allow-input` to limit input value to desired format. You can use it to achieve trim effect.
 </markdown>
 
 <template>
   <n-space vertical>
     <n-input
       type="text"
-      :pattern="validateOnlyNumber"
-      placeholder="Only enter the number."
+      :allow-input="onlyAllowNumber"
+      placeholder="Only allow number"
     />
     <n-input
       type="textarea"
-      :pattern="validateEmpty"
-      placeholder="Can't enter space."
+      :allow-input="noSideSpace"
+      placeholder="No leading or trailing space"
     />
   </n-space>
 </template>
@@ -25,8 +25,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      validateOnlyNumber: (value: string) => !value || /^\d+$/.test(value),
-      validateEmpty: (value: string) => !/ /g.test(value)
+      onlyAllowNumber: (value: string) => !value || /^\d+$/.test(value),
+      noSideSpace: (value: string) => !/ /g.test(value)
     }
   }
 })

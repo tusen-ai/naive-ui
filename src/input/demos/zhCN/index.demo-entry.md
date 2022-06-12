@@ -32,6 +32,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-input | `(value: string) => false` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如 `{ minRows: 1, maxRows: 3 }` |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
@@ -52,7 +53,6 @@ rtl-debug.vue
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.25.0 |
-| pattern | `(value: string) => false` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果 `pair` 是 `true`，`value` 是一个数组 |  |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |  |

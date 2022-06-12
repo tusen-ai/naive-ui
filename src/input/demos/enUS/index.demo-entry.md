@@ -31,6 +31,7 @@ pattern.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-input | `(value: string) => boolean` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
 | autofocus | `boolean` | `false` | Whether to autofocus. |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | Sizing property for when the input is of type `textarea`. e.g. `{ minRows: 1, maxRows: 3 }`. |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
@@ -51,7 +52,6 @@ pattern.vue
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | The event to show the password. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.25.0 |
-| pattern | `(value: string) => boolean` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |  |
 | value | `string \| [string, string] \| null` | `undefined` | Manually set the input value. When `pair` is `true`, this is an array. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the input is blurred. |  |

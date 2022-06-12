@@ -1,20 +1,20 @@
 <markdown>
 # 输入校验
 
-限制输入框的输入格式。
+使用 `allow-input` 限制输入框的输入格式，你可以使用它来达到 `trim` 的效果。
 </markdown>
 
 <template>
   <n-space vertical>
     <n-input
       type="text"
-      :pattern="validateOnlyNumber"
+      :allow-input="onlyAllowNumber"
       placeholder="只能输入数字"
     />
     <n-input
       type="textarea"
-      :pattern="validateEmpty"
-      placeholder="不能输入空格"
+      :allow-input="noSideSpace"
+      placeholder="没有前后空格"
     />
   </n-space>
 </template>
@@ -25,8 +25,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      validateOnlyNumber: (value: string) => !value || /^\d+$/.test(value),
-      validateEmpty: (value: string) => !/ /g.test(value)
+      onlyAllowNumber: (value: string) => !value || /^\d+$/.test(value),
+      noSideSpace: (value: string) =>
+        !value.startsWith(' ') && !value.endsWith(' ')
     }
   }
 })
