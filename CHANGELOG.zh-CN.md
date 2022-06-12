@@ -17,6 +17,7 @@
 - 修复 `n-slider` 在 mark 出现在最右侧的时候换行不正常
 - 修复 `n-upload` 内部的链接会出现原生 focus-visible 的 outline 样式
 - 修复 `n-upload` 在 `list-type="image-card"` 时会出现 slot 相关 warning
+- 修复 `n-upload` 在 `list-type="image-card"` 图片的边角会溢出列表项
 
 ### Feats
 

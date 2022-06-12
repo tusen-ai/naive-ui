@@ -8,6 +8,7 @@ import {
   watchEffect,
   VNode
 } from 'vue'
+import { ImageInst } from '../../image/src/Image'
 import {
   CancelIcon,
   TrashIcon,
@@ -16,7 +17,8 @@ import {
   DownloadIcon,
   EyeIcon
 } from '../../_internal/icons'
-import { ImageInst } from '../../image/src/Image'
+import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
+import { ButtonTheme } from '../../button/styles'
 import { NImage } from '../../image'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
@@ -26,6 +28,12 @@ import { uploadInjectionKey } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { environmentSupportFile, isImageFile } from './utils'
+
+const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
+  paddingMedium: '0 4px',
+  heightMedium: '24px',
+  iconSizeMedium: '16px'
+}
 
 export default defineComponent({
   name: 'UploadFile',
@@ -312,11 +320,12 @@ export default defineComponent({
             {this.showPreviewButton ? (
               <NButton
                 key="preview"
-                text
+                quaternary
                 type={this.buttonType}
                 onClick={this.handlePreviewClick}
                 theme={mergedTheme.peers.Button}
                 themeOverrides={mergedTheme.peerOverrides.Button}
+                builtinThemeOverrides={buttonThemeOverrides}
               >
                 {{
                   icon: () => (
@@ -333,7 +342,8 @@ export default defineComponent({
                   key="cancelOrTrash"
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  text
+                  quaternary
+                  builtinThemeOverrides={buttonThemeOverrides}
                   type={this.buttonType}
                   onClick={this.handleRemoveOrCancelClick}
                 >
@@ -360,11 +370,12 @@ export default defineComponent({
             {this.showRetryButton && !this.disabled && (
               <NButton
                 key="retry"
-                text
+                quaternary
                 type={this.buttonType}
                 onClick={this.handleRetryClick}
                 theme={mergedTheme.peers.Button}
                 themeOverrides={mergedTheme.peerOverrides.Button}
+                builtinThemeOverrides={buttonThemeOverrides}
               >
                 {{
                   icon: () => (
@@ -378,11 +389,12 @@ export default defineComponent({
             {this.showDownloadButton ? (
               <NButton
                 key="download"
-                text
+                quaternary
                 type={this.buttonType}
                 onClick={this.handleDownloadClick}
                 theme={mergedTheme.peers.Button}
                 themeOverrides={mergedTheme.peerOverrides.Button}
+                builtinThemeOverrides={buttonThemeOverrides}
               >
                 {{
                   icon: () => (

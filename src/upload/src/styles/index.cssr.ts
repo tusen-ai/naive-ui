@@ -164,6 +164,7 @@ export default c([
         justify-content: center;
         transition: border-color .3s var(--n-bezier), background-color .3s var(--n-bezier);
         border-radius: var(--n-border-radius);
+        overflow: hidden;
       `, [
         cB('progress', `
           position: absolute;

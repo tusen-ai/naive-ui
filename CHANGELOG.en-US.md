@@ -17,6 +17,7 @@
 - Fix `n-slider`'s mark line wrap isn't correct when it appears at right-most position.
 - Fix `n-upload`'s inner anchor element may show focus-visible outline style.
 - Fix `n-upload` shows slot warning when `list-type="image-card"`.
+- Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
 
 ### Feats
 
