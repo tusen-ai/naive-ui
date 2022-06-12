@@ -104,6 +104,7 @@ export const dataTableProps = {
     type: Array as PropType<RowKey[]>,
     default: []
   },
+  defaultExpandAll: Boolean,
   expandedRowKeys: Array as PropType<RowKey[]>,
   virtualScroll: Boolean,
   tableLayout: {
@@ -284,7 +285,7 @@ export default defineComponent({
       mergedExpandedRowKeysRef,
       renderExpandRef,
       doUpdateExpandedRowKeys
-    } = useExpand(props)
+    } = useExpand(props, treeMateRef)
     const {
       handleTableBodyScroll,
       handleTableHeaderScroll,

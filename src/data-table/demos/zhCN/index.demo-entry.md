@@ -69,6 +69,7 @@ keep-alive-debug.vue
 | data | `Array<object>` | `[]` | 需要展示的数据 |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
+| default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | NEXT_VERSION |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |

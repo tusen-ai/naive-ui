@@ -1,5 +1,5 @@
 <markdown>
-# 输入校验
+# 只允许输入特定值
 
 使用 `allow-input` 限制输入框的输入格式，你可以使用它来达到 `trim` 的效果。
 </markdown>

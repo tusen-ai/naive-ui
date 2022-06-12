@@ -145,7 +145,7 @@ export type RenderExpand<T = InternalRowData> = (
 ) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
-export type Expandable<T = InternalRowData> = (row: T, index: number) => boolean
+export type Expandable<T = InternalRowData> = (row: T) => boolean
 export interface TableExpandColumn<T = InternalRowData>
   extends Omit<TableSelectionColumn<T>, 'type'> {
   type: 'expand'

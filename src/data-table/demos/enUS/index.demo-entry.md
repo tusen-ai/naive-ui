@@ -64,6 +64,7 @@ async-expand.vue
 | data | `Array<object>` | `[]` | Data to display. |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
+| default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | NEXT_VERSION |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |

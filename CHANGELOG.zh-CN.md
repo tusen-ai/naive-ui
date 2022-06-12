@@ -15,6 +15,8 @@
 ### Feats
 
 - 🌟 `n-pagination` 新增快速跳转的下拉菜单
+- 🌟 `n-input` 新增 `allow-input` 属性
+- 🌟 `n-data-table` 新增 `default-expand-all` 属性，关闭 [#3073](https://github.com/TuSimple/naive-ui/issues/3073)
 - `n-tree-select` 新增 `arrow` slot，关闭 [#3084](https://github.com/TuSimple/naive-ui/issues/3084)
 - `n-cascader` 在点击 checkbox 后会显示对应的子菜单，关闭 [#3079](https://github.com/TuSimple/naive-ui/issues/3079)
 - `n-upload` 在达到最大文件数量限制后会禁用 dragger
@@ -22,7 +24,6 @@
 - `n-popselect` 新增 `node-props` 属性
 - `n-popselect` 新增 `virtual-scroll` 属性
 - `n-data-table` 新增 `scrollTo` 方法，关闭 [#2570](https://github.com/TuSimple/naive-ui/issues/2570)
-- `n-input` 新增 `allow-input` 属性
 
 ## 2.30.3
 

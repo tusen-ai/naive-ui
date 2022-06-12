@@ -1115,7 +1115,7 @@ describe('props.columns', () => {
     const columns: DataTableColumns = [
       {
         type: 'expand',
-        expandable: (_, index) => index === 0,
+        expandable: (rowData) => rowData.name === 0,
         renderExpand: (rowData: any) => {
           return `${String(rowData.name)} is a good guy.`
         }

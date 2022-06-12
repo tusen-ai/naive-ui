@@ -810,7 +810,7 @@ export default defineComponent({
                         ) : column.type === 'expand' ? (
                           !isSummary ? (
                             !column.expandable ||
-                            column.expandable?.(rowData, rowIndex) ? (
+                            column.expandable?.(rowData) ? (
                               <ExpandTrigger
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
