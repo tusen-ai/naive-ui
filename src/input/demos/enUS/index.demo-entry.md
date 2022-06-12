@@ -22,6 +22,7 @@ focus.vue
 event.vue
 input-props.vue
 status.vue
+trim.vue
 ```
 
 ## API
@@ -50,6 +51,7 @@ status.vue
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | The event to show the password. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.25.0 |
+| trim | `boolean` | `false` | Whether to trim the space before and after. | NEXT_VERSION |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |  |
 | value | `string \| [string, string] \| null` | `undefined` | Manually set the input value. When `pair` is `true`, this is an array. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the input is blurred. |  |
