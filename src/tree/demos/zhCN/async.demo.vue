@@ -31,6 +31,7 @@
       :check-strategy="checkStrategy"
       :allow-checking-not-loaded="cascade"
       :cascade="cascade"
+      expand-on-click
       @drop="handleDrop"
       @update:checked-keys="handleCheckedKeysChange"
       @update:expanded-keys="handleExpandedKeysChange"

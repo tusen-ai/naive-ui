@@ -11,6 +11,8 @@
 - 修复 `n-date-picker` 在设定了 `is-date-disabled` 后年月的快速跳转可能会被禁用，关闭 [#3068](https://github.com/TuSimple/naive-ui/issues/3068)
 - 修复 `n-layout` 在 `keep-alive` 中使用的时候不会维持滚动状态
 - 修复 `n-layout-sider` 在 `keep-alive` 中使用的时候不会维持滚动状态
+- 修复 `n-tree` 可能重复发送异步数据请求
+- 修复 `n-tree` 在设定 `expand-on-click` 之后异步展开报错，关闭 [#3089](https://github.com/TuSimple/naive-ui/issues/3089)
 
 ### Feats
 

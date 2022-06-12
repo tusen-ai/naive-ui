@@ -11,6 +11,8 @@
 - Fix `n-date-picker`'s year & month quick jump may be disabled after `is-date-disabled` is set, closes [#3068](https://github.com/TuSimple/naive-ui/issues/3068).
 - Fix `n-layout` won't keep scroll state in `keep-alive` component, closes [#3054](https://github.com/TuSimple/naive-ui/issues/3054).
 - Fix `n-layout-sider` won't keep scroll state in `keep-alive` component.
+- Fix `n-tree` may trigger loading multiple times.
+- Fix `n-tree` throws error on async expanding data with `:expand-on-click="true"`, closes [#3089](https://github.com/TuSimple/naive-ui/issues/3089).
 
 ### Feats
 
