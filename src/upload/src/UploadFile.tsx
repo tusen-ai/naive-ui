@@ -30,9 +30,9 @@ import { imageIcon, documentIcon } from './icons'
 import { environmentSupportFile, isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
-  paddingMedium: '0 4px',
+  paddingMedium: '0 3px',
   heightMedium: '24px',
-  iconSizeMedium: '16px'
+  iconSizeMedium: '18px'
 }
 
 export default defineComponent({
