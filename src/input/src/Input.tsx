@@ -500,6 +500,7 @@ export default defineComponent({
         activatedRef.value = false
       }
       dealWithEvent(e, 'blur')
+      currentFocusedInputRef.value = null
     }
     function handleInputFocus (e: FocusEvent, index?: number): void {
       doUpdateValueFocus(e)
@@ -520,7 +521,6 @@ export default defineComponent({
         doWrapperBlur(e)
         dealWithEvent(e, 'blur')
       }
-      focusedInputCorsurControl.clearRecord()
     }
     function handleWrapperFocus (e: FocusEvent): void {
       if (props.passivelyActivated) {
