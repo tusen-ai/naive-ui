@@ -109,11 +109,12 @@ export default defineComponent({
           {isImageCardTypeRef.value ? (
             <NUploadDragger>
               {{
-                default: resolveSlot(slots.default, () => [
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <AddIcon /> }}
-                  </NBaseIcon>
-                ])
+                default: () =>
+                  resolveSlot(slots.default, () => [
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <AddIcon /> }}
+                    </NBaseIcon>
+                  ])
               }}
             </NUploadDragger>
           ) : (

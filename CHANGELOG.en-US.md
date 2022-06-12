@@ -16,6 +16,7 @@
 - Fix `n-slider`'s tooltip has no enter transition when it's triggered by keyboard.
 - Fix `n-slider`'s mark line wrap isn't correct when it appears at right-most position.
 - Fix `n-upload`'s inner anchor element may show focus-visible outline style.
+- Fix `n-upload` shows slot warning when `list-type="image-card"`.
 
 ### Feats
 
