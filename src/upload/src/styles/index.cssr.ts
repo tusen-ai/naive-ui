@@ -73,6 +73,7 @@ export default c([
     opacity: 1;
     transition: opacity .3s var(--n-bezier);
   `, [
+    c('a, img', 'outline: none;'),
     cM('disabled', `
       opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
