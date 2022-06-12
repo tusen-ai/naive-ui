@@ -57,7 +57,7 @@ import type {
   InputWrappedRef
 } from './interface'
 import { inputInjectionKey } from './interface'
-import { isEmptyValue } from './utils'
+import { isEmptyValue, useCursor } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 import useRtl from '../../_mixins/use-rtl'
@@ -120,10 +120,7 @@ const inputProps = {
     type: Boolean,
     default: undefined
   },
-  trim: {
-    type: Boolean,
-    default: false
-  },
+  pattern: Function as PropType<(value: string) => boolean>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -200,6 +197,10 @@ export default defineComponent({
     const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
+    const currentFocusedInputRef = ref<
+    HTMLInputElement | HTMLTextAreaElement | null
+    >(null)
+    const focusedInputCorsurControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
     // local
     const { localeRef } = useLocale('Input')
@@ -436,6 +437,7 @@ export default defineComponent({
       } else {
         handleInput(e, 0)
       }
+      focusedInputCorsurControl.recordCursor()
     }
     function handleInput (
       e: InputEvent | CompositionEvent | Event,
@@ -444,6 +446,7 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      focusedInputCorsurControl.recordCursor()
       if (props.type === 'textarea') {
         const { value: textareaScrollbarInst } = textareaScrollbarInstRef
         if (textareaScrollbarInst) {
@@ -452,43 +455,34 @@ export default defineComponent({
       }
       syncSource = targetValue
       if (isComposingRef.value) return
-      const changedValue = props.trim
-        ? handleTrim(targetValue, index)
-        : targetValue
-
-      if (!props.pair) {
-        event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
-      } else {
-        let { value } = mergedValueRef
-        if (!Array.isArray(value)) {
-          value = ['', '']
+      const isValidInputValue = matches(targetValue)
+      if (isValidInputValue) {
+        if (!props.pair) {
+          event === 'input' ? doUpdateValue(targetValue) : doChange(targetValue)
         } else {
-          value = [...value]
+          let { value } = mergedValueRef
+          if (!Array.isArray(value)) {
+            value = ['', '']
+          } else {
+            value = [...value]
+          }
+          value[index] = targetValue
+          event === 'input' ? doUpdateValue(value) : doChange(value)
         }
-        value[index] = changedValue
-        event === 'input' ? doUpdateValue(value) : doChange(value)
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
       vm.$forceUpdate()
-    }
-    function handleTrim (value: string, index: number): string {
-      const inputElement =
-        props.type === 'textarea'
-          ? textareaElRef.value
-          : index === 0
-            ? inputElRef.value
-            : inputEl2Ref.value
-      const cursorPosition = inputElement?.selectionStart
-      const reg = /(^\s)|(\s$)/
-      if (reg.test(value) && cursorPosition === 1 && inputElement) {
-        inputElement.blur()
-        void setTimeout(() => {
-          inputElement.setSelectionRange(0, 0)
-          inputElement.focus()
-        })
+      if (!isValidInputValue) {
+        void nextTick(focusedInputCorsurControl.restoreCursor)
       }
-      return value.trim()
+    }
+    function matches (value: string): boolean {
+      const { pattern } = props
+      if (typeof pattern === 'function') {
+        return pattern(value)
+      }
+      return true
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
@@ -507,18 +501,26 @@ export default defineComponent({
       }
       dealWithEvent(e, 'blur')
     }
-    function handleInputFocus (e: FocusEvent): void {
+    function handleInputFocus (e: FocusEvent, index?: number): void {
       doUpdateValueFocus(e)
       focusedRef.value = true
       activatedRef.value = true
       doActivate()
       dealWithEvent(e, 'focus')
+      if (index === 0) {
+        currentFocusedInputRef.value = inputElRef.value
+      } else if (index === 1) {
+        currentFocusedInputRef.value = inputEl2Ref.value
+      } else {
+        currentFocusedInputRef.value = textareaElRef.value
+      }
     }
     function handleWrapperBlur (e: FocusEvent): void {
       if (props.passivelyActivated) {
         doWrapperBlur(e)
         dealWithEvent(e, 'blur')
       }
+      focusedInputCorsurControl.clearRecord()
     }
     function handleWrapperFocus (e: FocusEvent): void {
       if (props.passivelyActivated) {
@@ -1130,7 +1132,7 @@ export default defineComponent({
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
+                onFocus={(e) => this.handleInputFocus(e, 0)}
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
               />
@@ -1251,7 +1253,7 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
+                onFocus={(e) => this.handleInputFocus(e, 1)}
                 onInput={(e) => this.handleInput(e, 1)}
                 onChange={(e) => this.handleChange(e, 1)}
               />
