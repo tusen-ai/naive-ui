@@ -163,10 +163,11 @@ export default c([
       left: calc(var(--n-handle-size) / 2);
       right: calc(var(--n-handle-size) / 2);
     `, [
-      cB('slider-mark', {
-        position: 'absolute',
-        transform: 'translateX(-50%)'
-      })
+      cB('slider-mark', `
+        position: absolute;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      `)
     ]),
     cB('slider-rail', `
       width: 100%;

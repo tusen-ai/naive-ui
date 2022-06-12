@@ -14,6 +14,7 @@
 - 修复 `n-tree` 可能重复发送异步数据请求
 - 修复 `n-tree` 在设定 `expand-on-click` 之后异步展开报错，关闭 [#3089](https://github.com/TuSimple/naive-ui/issues/3089)
 - 修复 `n-slider` 使用键盘聚焦触发 toolip 的时候没有动画
+- 修复 `n-slider` 在 mark 出现在最右侧的时候换行不正常
 
 ### Feats
 
