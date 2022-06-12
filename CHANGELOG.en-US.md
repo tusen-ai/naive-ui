@@ -18,6 +18,7 @@
 - `n-select` adds `node-props` prop.
 - `n-popselect` adds `node-props` prop.
 - `n-popselect` adds `virtual-scroll` prop.
+- `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
 
 ## 2.30.3
 

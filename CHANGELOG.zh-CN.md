@@ -18,6 +18,7 @@
 - `n-select` 新增 `node-props` 属性
 - `n-popselect` 新增 `node-props` 属性
 - `n-popselect` 新增 `virtual-scroll` 属性
+- `n-data-table` 新增 `scrollTo` 方法，关闭 [#2570](https://github.com/TuSimple/naive-ui/issues/2570)
 
 ## 2.30.3
 

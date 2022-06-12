@@ -1,5 +1,6 @@
 import { TreeNode } from 'treemate'
 import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
+import type { ScrollTo } from '../../scrollbar/src/Scrollbar'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
@@ -282,10 +283,12 @@ export interface FilterState {
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
   getBodyElement: () => HTMLElement | null
+  scrollTo: ScrollTo
 }
 
 export interface MainTableBodyRef {
   getScrollContainer: () => HTMLElement | null
+  scrollTo: ScrollTo
 }
 
 export interface MainTableHeaderRef {
@@ -308,6 +311,7 @@ export interface DataTableInst {
   clearSorter: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
+  scrollTo: ScrollTo
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }

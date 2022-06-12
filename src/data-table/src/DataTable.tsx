@@ -402,7 +402,10 @@ export default defineComponent({
       clearSorter,
       page,
       sort,
-      clearFilter
+      clearFilter,
+      scrollTo: (arg0: any, arg1?: any) => {
+        mainTableInstRef.value?.scrollTo(arg0, arg1)
+      }
     }
     const cssVarsRef = computed(() => {
       const { size } = props
