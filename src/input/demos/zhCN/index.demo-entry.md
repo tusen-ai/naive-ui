@@ -22,7 +22,7 @@ focus.vue
 event.vue
 input-props.vue
 status.vue
-trim.vue
+pattern.vue
 rtl-debug.vue
 ```
 
@@ -52,7 +52,7 @@ rtl-debug.vue
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.25.0 |
-| trim | `boolean` | `false` | 是否过滤前后空格 | NEXT_VERSION |
+| pattern | `(value: string) => false` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果 `pair` 是 `true`，`value` 是一个数组 |  |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |  |
