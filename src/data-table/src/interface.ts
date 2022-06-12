@@ -1,13 +1,13 @@
 import { TreeNode } from 'treemate'
 import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
 import type { ScrollTo } from '../../scrollbar/src/Scrollbar'
-import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
-import { NLocale } from '../../locales'
-import { MergedTheme } from '../../_mixins'
-import { DataTableTheme } from '../styles'
+import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
+import type { NLocale } from '../../locales'
+import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
+import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
 import type { DataTableSelectionOption } from './TableParts/SelectionMenu'
-import { createInjectionKey } from '../../_utils'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
