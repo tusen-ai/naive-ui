@@ -204,16 +204,15 @@ export default defineComponent({
     }
     function handleKeyUp (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
         case 'Enter':
-        case 'NumpadEnter':
           toggle(e)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
           e.preventDefault()
       }
     }

@@ -3,12 +3,9 @@ import {
   Transition,
   ref,
   inject,
-  toRef,
   defineComponent,
   PropType,
   computed,
-  watch,
-  nextTick,
   withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
@@ -18,6 +15,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
+import { createTmOptions } from '../../select/src/utils'
 import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
 import {
@@ -28,7 +26,6 @@ import {
   SelectMenuInstance,
   cascaderInjectionKey
 } from './interface'
-import { tmOptions } from '../../select/src/utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',
@@ -110,18 +107,11 @@ export default defineComponent({
       SelectBaseOption,
       SelectGroupOption,
       SelectIgnoredOption
-      >(filteredSelectOptionsRef.value, tmOptions)
+      >(filteredSelectOptionsRef.value, createTmOptions('value', 'children'))
     })
-    watch(toRef(props, 'value'), () => {
-      void nextTick(() => {
-        syncSelectMenuPosition()
-      })
-    })
-    watch(filteredSelectOptionsRef, () => {
-      void nextTick(() => {
-        syncSelectMenuPosition()
-      })
-    })
+    function handleResize (): void {
+      syncSelectMenuPosition()
+    }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       doCheck(tmNode)
     }
@@ -176,6 +166,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       menuInstRef,
       selectTreeMate: selectTreeMateRef,
+      handleResize,
       handleToggle,
       handleClickOutside,
       ...exposedRef
@@ -191,6 +182,7 @@ export default defineComponent({
               ? withDirectives(
                   <NInternalSelectMenu
                     ref="menuInstRef"
+                    onResize={this.handleResize}
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-cascader-menu`}
                     autoPending

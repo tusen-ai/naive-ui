@@ -7,46 +7,53 @@ import type { UploadTheme } from '../styles'
 export interface FileInfo {
   id: string
   name: string
-  percentage?: number
+  batchId?: string | null
+  percentage?: number | null
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   url?: string | null
   file?: File | null
   thumbnailUrl?: string | null
   type?: string | null
+  fullPath?: string | null
 }
+
+export type SettledFileInfo = Required<FileInfo>
 
 export type FuncOrRecordOrUndef =
   | Record<string, string>
-  | (({ file }: { file: FileInfo }) => Record<string, string>)
+  | (({ file }: { file: SettledFileInfo }) => Record<string, string>)
   | undefined
 
 export type OnChange = (data: {
-  file: FileInfo
-  fileList: FileInfo[]
+  file: SettledFileInfo
+  fileList: SettledFileInfo[]
   event: ProgressEvent | Event | undefined
 }) => void
 export type OnFinish = ({
   file,
   event
 }: {
-  file: FileInfo
+  file: SettledFileInfo
   event?: ProgressEvent
 }) => FileInfo | undefined
 export type OnRemove = (data: {
-  file: FileInfo
-  fileList: FileInfo[]
+  file: SettledFileInfo
+  fileList: SettledFileInfo[]
 }) => Promise<boolean> | boolean | any
-export type OnDownload = (file: FileInfo) => Promise<boolean> | boolean | any
+export type OnDownload = (
+  file: SettledFileInfo
+) => Promise<boolean> | boolean | any
 
 export interface UploadInternalInst {
   doChange: DoChange
-  XhrMap: Map<string, XMLHttpRequest>
+  xhrMap: Map<string, XMLHttpRequest>
+  isErrorState: ((xhr: XMLHttpRequest) => boolean) | undefined
   onError: OnError | undefined
   onFinish: OnFinish | undefined
 }
 
 export type DoChange = (
-  fileAfterChange: FileInfo,
+  fileAfterChange: SettledFileInfo,
   event?: ProgressEvent | Event,
   options?: {
     append?: boolean
@@ -54,7 +61,7 @@ export type DoChange = (
   }
 ) => void
 
-export type OnUpdateFileList = (fileList: FileInfo[]) => void
+export type OnUpdateFileList = (fileList: SettledFileInfo[]) => void
 
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
@@ -64,11 +71,10 @@ export interface UploadInjection {
   showDownloadButtonRef: Ref<boolean>
   showRetryButtonRef: Ref<boolean>
   showTriggerRef: Ref<boolean>
-  mergedFileListRef: Ref<FileInfo[]>
+  mergedFileListRef: Ref<SettledFileInfo[]>
   onRemoveRef: Ref<OnRemove | undefined>
   onDownloadRef: Ref<OnDownload | undefined>
-  XhrMap: Map<string, XMLHttpRequest>
-  doChange: DoChange
+  xhrMap: Map<string, XMLHttpRequest>
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   listTypeRef: Ref<ListType>
@@ -81,10 +87,14 @@ export interface UploadInjection {
   imageGroupPropsRef: Ref<ImageGroupProps | undefined>
   cssVarsRef: undefined | Ref<CSSProperties>
   themeClassRef: undefined | Ref<string>
+  mergedDirectoryDndRef: Ref<boolean>
+  acceptRef: Ref<string | undefined>
+  triggerStyleRef: Ref<CSSProperties | string | undefined>
+  doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
-  getFileThumbnailUrl: (file: FileInfo) => Promise<string>
-  handleFileAddition: (files: FileList | null, e?: Event) => void
+  getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
+  handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
 }
 
@@ -105,18 +115,18 @@ export interface UploadInst {
 }
 
 export type OnBeforeUpload = (data: {
-  file: FileInfo
-  fileList: FileInfo[]
+  file: SettledFileInfo
+  fileList: SettledFileInfo[]
 }) => Promise<unknown>
 
 export type ListType = 'text' | 'image' | 'image-card'
 
-export type OnPreview = (file: FileInfo) => void
+export type OnPreview = (file: SettledFileInfo) => void
 
 export type CreateThumbnailUrl = (file: File) => Promise<string>
 
 export interface CustomRequestOptions {
-  file: FileInfo
+  file: SettledFileInfo
   action?: string
   withCredentials?: boolean
   data?: FuncOrRecordOrUndef
@@ -132,6 +142,12 @@ export type OnError = ({
   file,
   event
 }: {
-  file: FileInfo
+  file: SettledFileInfo
   event?: ProgressEvent
 }) => FileInfo | undefined
+
+export interface FileAndEntry {
+  file: File
+  entry: FileSystemFileEntry | null
+  source: 'dnd' | 'input'
+}

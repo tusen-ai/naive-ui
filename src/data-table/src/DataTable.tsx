@@ -9,7 +9,8 @@ import {
   toRef,
   CSSProperties,
   Transition,
-  watchEffect
+  watchEffect,
+  onDeactivated
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -123,6 +124,10 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  paginationBehaviorOnFilter: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -152,6 +157,7 @@ export const dataTableProps = {
   onUpdateExpandedRowKeys: [Function, Array] as PropType<
   MaybeArray<OnUpdateExpandedRowKeys>
   >,
+  onScroll: Function as PropType<(e: Event) => void>,
   // deprecated
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   onPageSizeChange: [Function, Array] as PropType<
@@ -231,6 +237,9 @@ export default defineComponent({
     )
     const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
+    onDeactivated(() => {
+      scrollPartRef.value = 'body'
+    })
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props)
@@ -244,7 +253,8 @@ export default defineComponent({
       mergedPaginationRef,
       mergedFilterStateRef,
       mergedSortStateRef,
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       filter,
@@ -313,7 +323,7 @@ export default defineComponent({
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
       bodyWidthRef,
       componentId: createId(),
       hoverKeyRef,
@@ -371,7 +381,9 @@ export default defineComponent({
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
+      paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       syncScrollState,
+      doUpdatePage,
       doUpdateFilters,
       deriveNextSorter,
       doCheck,
@@ -390,7 +402,10 @@ export default defineComponent({
       clearSorter,
       page,
       sort,
-      clearFilter
+      clearFilter,
+      scrollTo: (arg0: any, arg1?: any) => {
+        mainTableInstRef.value?.scrollTo(arg0, arg1)
+      }
     }
     const cssVarsRef = computed(() => {
       const { size } = props

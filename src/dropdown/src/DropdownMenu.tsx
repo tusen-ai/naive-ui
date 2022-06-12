@@ -6,7 +6,8 @@ import {
   PropType,
   provide,
   Ref,
-  CSSProperties
+  CSSProperties,
+  ref
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { renderArrow } from '../../popover/src/PopoverBody'
@@ -29,6 +30,9 @@ import {
   DropdownOption,
   DropdownRenderOption
 } from './interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
@@ -86,11 +90,18 @@ export default defineComponent({
         })
       })
     })
+    const bodyRef = ref<HTMLElement | null>(null)
+    provide(modalBodyInjectionKey, null)
+    provide(drawerBodyInjectionKey, null)
+    provide(popoverBodyInjectionKey, bodyRef)
+    return {
+      bodyRef
+    }
   },
   render () {
     const { parentKey, clsPrefix } = this
     return (
-      <div class={`${clsPrefix}-dropdown-menu`}>
+      <div class={`${clsPrefix}-dropdown-menu`} ref="bodyRef">
         {this.tmNodes.map((tmNode) => {
           const { rawNode } = tmNode
           if (isRenderNode(rawNode)) {

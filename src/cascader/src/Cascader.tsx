@@ -11,7 +11,8 @@ import {
   isReactive,
   watchEffect,
   VNodeChild,
-  HTMLAttributes
+  HTMLAttributes,
+  nextTick
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -60,6 +61,7 @@ import style from './styles/index.cssr'
 
 const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
+  allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -236,7 +238,8 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade
+          cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
       } else {
         return {
@@ -332,7 +335,8 @@ export default defineComponent({
         try {
           const { checkedKeys } = check(key, mergedKeysRef.value.checkedKeys, {
             cascade,
-            checkStrategy: mergedCheckStrategyRef.value
+            checkStrategy: mergedCheckStrategyRef.value,
+            allowNotLoaded: props.allowCheckingNotLoaded
           })
           doUpdateValue(
             checkedKeys,
@@ -344,6 +348,8 @@ export default defineComponent({
             )
           )
           if (filterable) focusSelectionInput()
+          keyboardKeyRef.value = key
+          hoverKeyRef.value = key
         } catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
             if (cascaderMenuInstRef.value) {
@@ -389,7 +395,8 @@ export default defineComponent({
         } = treeMateRef
         const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         })
         doUpdateValue(
           checkedKeys,
@@ -398,6 +405,8 @@ export default defineComponent({
             getRawNodePath(getPath(checkedKey)?.treeNodePath)
           )
         )
+        keyboardKeyRef.value = key
+        hoverKeyRef.value = key
       }
     }
     const selectedOptionsRef = computed(() => {
@@ -406,7 +415,8 @@ export default defineComponent({
         const { getCheckedKeys, getNode } = treeMateRef.value
         const value = getCheckedKeys(checkedKeysRef.value, {
           cascade,
-          checkStrategy: mergedCheckStrategyRef.value
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
         }).checkedKeys
         return value.map((key) => {
           const node = getNode(key)
@@ -462,6 +472,39 @@ export default defineComponent({
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
     })
+    // init hover key
+    watch(
+      mergedShowRef,
+      (show) => {
+        if (!show) return
+        if (props.multiple) return
+        const { value } = mergedValueRef
+        if (!Array.isArray(value) && value !== null) {
+          keyboardKeyRef.value = value
+          hoverKeyRef.value = value
+          void nextTick(() => {
+            if (!mergedShowRef.value) return
+            const { value: hoverKey } = hoverKeyRef
+            if (mergedValueRef.value !== null) {
+              const node = treeMateRef.value.getNode(hoverKey)
+              if (node) {
+                cascaderMenuInstRef.value?.scroll(
+                  node.level,
+                  node.index,
+                  depx(optionHeightRef.value)
+                )
+              }
+            }
+          })
+        } else {
+          keyboardKeyRef.value = null
+          hoverKeyRef.value = null
+        }
+      },
+      {
+        immediate: true
+      }
+    )
     // --- methods
     function doBlur (e: FocusEvent): void {
       const { onBlur } = props
@@ -601,12 +644,11 @@ export default defineComponent({
     }
     function handleKeyUp (e: KeyboardEvent): void {
       if (happensIn(e, 'action')) return
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
           if (props.filterable) return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
-        case 'NumpadEnter':
           if (!mergedShowRef.value) {
             openMenu()
           } else {
@@ -737,15 +779,19 @@ export default defineComponent({
     function handleDeleteOption (option: SelectBaseOption): void {
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
-      if (multiple && Array.isArray(mergedValue)) {
+      if (
+        multiple &&
+        Array.isArray(mergedValue) &&
+        option.value !== undefined
+      ) {
         doUncheck(option.value)
       } else {
         doUpdateValue(null, null, null)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'Space':
+      switch (e.key) {
+        case ' ':
         case 'ArrowDown':
         case 'ArrowUp':
           if (props.filterable && mergedShowRef.value) {
@@ -761,6 +807,15 @@ export default defineComponent({
     }
     function syncCascaderMenuPosition (): void {
       cascaderMenuFollowerRef.value?.syncPosition()
+    }
+    function handleTriggerResize (): void {
+      if (mergedShowRef.value) {
+        if (showSelectMenuRef.value) {
+          syncSelectMenuPosition()
+        } else {
+          syncCascaderMenuPosition()
+        }
+      }
     }
     provide(cascaderInjectionKey, {
       mergedClsPrefixRef,
@@ -851,6 +906,7 @@ export default defineComponent({
       : undefined
     return {
       ...exposedMethods,
+      handleTriggerResize,
       mergedStatus: mergedStatusRef,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
@@ -904,6 +960,7 @@ export default defineComponent({
                 {{
                   default: () => (
                     <NInternalSelection
+                      onResize={this.handleTriggerResize}
                       ref="triggerInstRef"
                       status={this.mergedStatus}
                       clsPrefix={mergedClsPrefix}

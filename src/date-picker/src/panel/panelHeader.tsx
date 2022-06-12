@@ -97,7 +97,7 @@ export default defineComponent({
                                   // month and year click show month type
                                   type="month"
                                   key="month"
-                                  useAsQuickJump={true}
+                                  useAsQuickJump
                                   value={this.value}
                                 />,
                                 [

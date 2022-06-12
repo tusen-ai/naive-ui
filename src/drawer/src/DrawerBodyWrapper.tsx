@@ -11,13 +11,16 @@ import {
   withDirectives,
   vShow,
   mergeProps,
-  CSSProperties
+  CSSProperties,
+  DirectiveArguments
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
+import { clickoutside } from 'vdirs'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps } from '../../_internal'
+import { useLockHtmlScroll } from '../../_utils'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
@@ -26,6 +29,7 @@ export default defineComponent({
   name: 'NDrawerContent',
   inheritAttrs: false,
   props: {
+    blockScroll: Boolean,
     show: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -52,22 +56,41 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    showMask: {
+      type: Boolean as PropType<boolean | 'transparent'>,
+      required: true
+    },
+    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
     onEsc: Function as PropType<() => void>
   },
   setup (props) {
-    const displayedRef = ref(props.show)
+    const displayedRef = ref(!!props.show)
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
     watchEffect(() => {
       if (props.show) displayedRef.value = true
     })
+    const bodyDirectivesRef = computed<DirectiveArguments>(() => {
+      const { show } = props
+      const directives: DirectiveArguments = [[vShow, show]]
+      if (!props.showMask) {
+        directives.push([
+          clickoutside,
+          props.onClickoutside,
+          undefined as unknown as string,
+          { capture: true }
+        ])
+      }
+      return directives
+    })
     function handleAfterLeave (): void {
       displayedRef.value = false
       props.onAfterLeave?.()
     }
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     provide(drawerBodyInjectionKey, bodyRef)
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
@@ -85,7 +108,8 @@ export default defineComponent({
           bottom: 'slide-in-from-bottom-transition'
         }[props.placement]
       }),
-      handleAfterLeave
+      handleAfterLeave,
+      bodyDirectives: bodyDirectivesRef
     }
   },
   render () {
@@ -96,7 +120,7 @@ export default defineComponent({
             Nor the detached content will disappear without transition */
           <div role="none">
             <VFocusTrap
-              disabled={!this.trapFocus}
+              disabled={!this.showMask || !this.trapFocus}
               active={this.show}
               autoFocus={this.autoFocus}
               onEsc={this.onEsc}
@@ -149,7 +173,7 @@ export default defineComponent({
                               )
                             ]
                           ),
-                          [[vShow, this.show]]
+                          this.bodyDirectives
                         )
                     }}
                   </Transition>

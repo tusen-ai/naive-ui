@@ -28,5 +28,7 @@ export default {
   tabGapLargeSegment: '0',
   panePaddingSmall: '8px 0 0 0',
   panePaddingMedium: '12px 0 0 0',
-  panePaddingLarge: '16px 0 0 0'
+  panePaddingLarge: '16px 0 0 0',
+  closeSize: '18px',
+  closeIconSize: '14px'
 }

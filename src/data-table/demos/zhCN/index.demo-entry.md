@@ -13,35 +13,36 @@
 
 ```demo
 basic.vue
-empty
-border
-size
-row-props
+empty.vue
+border.vue
+size.vue
+row-props.vue
 merge-cell
 filter-and-sorter
+pagination-behavior-on-filter.vue
 multiple-sorter
-select
+select.vue
 custom-select
-group-header
-controlled-page
+group-header.vue
+controlled-page.vue
 controlled-filter.vue
 controlled-sorter
 controlled-multiple-sorter
-fixed-header
-fixed-header-column
-summary
-ellipsis
-ellipsis-tooltip
-expand
+fixed-header.vue
+fixed-header-column.vue
+summary.vue
+ellipsis.vue
+ellipsis-tooltip.vue
+expand.vue
 render-header
-custom-style
+custom-style.vue
 ajax-usage
-virtual
+virtual.vue
 custom-filter-menu.vue
-tree
-flex-height
-striped
-simple-editable
+tree.vue
+flex-height.vue
+striped.vue
+simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
@@ -49,6 +50,7 @@ fixed-column-debug
 fixed-column2-debug
 scroll-debug
 height-debug
+keep-alive-debug.vue
 ```
 
 ## API
@@ -69,6 +71,7 @@ height-debug
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |
@@ -88,6 +91,7 @@ height-debug
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |  |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
+| on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |  |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
@@ -118,6 +122,7 @@ height-debug
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
+| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |  |
@@ -129,6 +134,7 @@ height-debug
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
+| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
 | titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
@@ -178,13 +184,14 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| clearFilters | `() => void` | 清空所有的 filter 状态 |
-| clearSorter | `() => void` | 清空所有的 sort 状态 |
-| filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |
-| page | `(page: number) => void` | 手动设置 page |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clearFilters | `() => void` | 清空所有的 filter 状态 |  |
+| clearSorter | `() => void` | 清空所有的 sort 状态 |  |
+| filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
+| page | `(page: number) => void` | 手动设置 page |  |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | NEXT_VERSION |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
 
 ### DataTable Slots
 

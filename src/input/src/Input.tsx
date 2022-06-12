@@ -15,7 +15,8 @@ import {
   provide,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  Fragment
+  Fragment,
+  VNode
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -628,12 +629,11 @@ export default defineComponent({
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
-      switch (e.code) {
+      switch (e.key) {
         case 'Escape':
           handleWrapperKeyDownEsc()
           break
         case 'Enter':
-        case 'NumpadEnter':
           handleWrapperKeyDownEnter(e)
           break
       }
@@ -953,7 +953,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedStatus, themeClass, onRender, $slots } = this
+    const { mergedClsPrefix, mergedStatus, themeClass, onRender } = this
+    const $slots = this.$slots as {
+      prefix?: () => VNode[]
+      suffix?: () => VNode[]
+      separator?: () => VNode[]
+      count?: (props: unknown) => VNode[]
+      ['clear-icon']?: () => VNode[]
+      ['clear-icon-placeholder']?: () => VNode[]
+      ['password-visible-icon']?: () => VNode[]
+      ['password-invisible-icon']?: () => VNode[]
+    }
     onRender?.()
     return (
       <div
@@ -1024,7 +1034,10 @@ export default defineComponent({
                       <textarea
                         {...this.inputProps}
                         ref="textareaElRef"
-                        class={`${mergedClsPrefix}-input__textarea-el`}
+                        class={[
+                          `${mergedClsPrefix}-input__textarea-el`,
+                          this.inputProps?.class
+                        ]}
                         autofocus={this.autofocus}
                         rows={Number(this.rows)}
                         placeholder={this.placeholder as string | undefined}
@@ -1040,6 +1053,7 @@ export default defineComponent({
                         }
                         style={[
                           this.textDecorationStyle[0] as any,
+                          this.inputProps?.style,
                           scrollContainerWidthStyle
                         ]}
                         onBlur={this.handleInputBlur}
@@ -1092,8 +1106,14 @@ export default defineComponent({
                 }
                 {...this.inputProps}
                 ref="inputElRef"
-                class={`${mergedClsPrefix}-input__input-el`}
-                style={this.textDecorationStyle[0] as any}
+                class={[
+                  `${mergedClsPrefix}-input__input-el`,
+                  this.inputProps?.class
+                ]}
+                style={[
+                  this.textDecorationStyle[0] as any,
+                  this.inputProps?.style
+                ]}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -1139,19 +1159,25 @@ export default defineComponent({
                 this.loading !== undefined ? (
                 <div class={`${mergedClsPrefix}-input__suffix`}>
                   {[
-                    resolveWrappedSlot($slots.clear, (children) => {
-                      return (
-                        (this.clearable || children) && (
-                          <NBaseClear
-                            clsPrefix={mergedClsPrefix}
-                            show={this.showClearButton}
-                            onClear={this.handleClear}
-                          >
-                            {{ default: () => children }}
-                          </NBaseClear>
+                    resolveWrappedSlot(
+                      $slots['clear-icon-placeholder'],
+                      (children) => {
+                        return (
+                          (this.clearable || children) && (
+                            <NBaseClear
+                              clsPrefix={mergedClsPrefix}
+                              show={this.showClearButton}
+                              onClear={this.handleClear}
+                            >
+                              {{
+                                placeholder: () => children,
+                                icon: () => this.$slots['clear-icon']?.()
+                              }}
+                            </NBaseClear>
+                          )
                         )
-                      )
-                    }),
+                      }
+                    ),
                     !this.internalLoadingBeforeSuffix ? children : null,
                     this.loading !== undefined ? (
                       <NBaseSuffix
@@ -1171,26 +1197,26 @@ export default defineComponent({
                       </WordCount>
                     ) : null,
                     this.mergedShowPasswordOn && this.type === 'password' ? (
-                      <NBaseIcon
-                        clsPrefix={mergedClsPrefix}
+                      <div
                         class={`${mergedClsPrefix}-input__eye`}
                         onMousedown={this.handlePasswordToggleMousedown}
                         onClick={this.handlePasswordToggleClick}
                       >
-                        {{
-                          default: () => {
-                            return this.passwordVisible
-                              ? resolveSlot(
-                                $slots['password-visible-icon'],
-                                () => [<EyeIcon />]
-                              )
-                              : resolveSlot(
-                                $slots['password-invisible-icon'],
-                                () => [<EyeOffIcon />]
-                              )
-                          }
-                        }}
-                      </NBaseIcon>
+                        {this.passwordVisible
+                          ? resolveSlot($slots['password-visible-icon'], () => [
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => <EyeIcon /> }}
+                              </NBaseIcon>
+                          ])
+                          : resolveSlot(
+                            $slots['password-invisible-icon'],
+                            () => [
+                                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                  {{ default: () => <EyeOffIcon /> }}
+                                </NBaseIcon>
+                            ]
+                          )}
+                      </div>
                     ) : null
                   ]}
                 </div>
@@ -1246,7 +1272,11 @@ export default defineComponent({
                           show={this.showClearButton}
                           onClear={this.handleClear}
                         >
-                          {{ default: () => $slots.clear?.() }}
+                          {{
+                            icon: () => $slots['clear-icon']?.(),
+                            placeholder: () =>
+                              $slots['clear-icon-placeholder']?.()
+                          }}
                         </NBaseClear>
                       ),
                       children

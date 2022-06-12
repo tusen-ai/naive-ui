@@ -1,5 +1,5 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-menu-border-radius
@@ -129,7 +129,9 @@ export default c([
           cM('checkmark', {
             color: 'var(--n-option-check-mark-color)'
           }, [
-            fadeInScaleUpTransition()
+            fadeInScaleUpTransition({
+              originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+            })
           ]),
           cM('arrow', {
             color: 'var(--n-option-arrow-color)'

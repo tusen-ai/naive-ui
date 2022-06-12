@@ -57,6 +57,16 @@ describe('n-cascader', () => {
     })
   })
 
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NCascader, { props: { status: status } })
+      expect(wrapper.find('.n-base-selection').classes()).toContain(
+        `n-base-selection--${status}-status`
+      )
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `placeholder` prop', async () => {
     const wrapper = mount(NCascader, {
       props: { placeholder: 'test-placeholder' }
@@ -64,6 +74,35 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-placeholder').text()).toBe(
       'test-placeholder'
     )
+  })
+
+  it('should work with `placement` prop', async () => {
+    ;(
+      [
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'
+      ] as const
+    ).forEach((placement) => {
+      const wrapper = mount(NCascader, { props: { placement: placement } })
+      setTimeout(() => {
+        expect(
+          document
+            .querySelector('.v-binder-follower-content')
+            ?.getAttribute('v-placement')
+        ).toBe(placement)
+        wrapper.unmount()
+      })
+    })
   })
 
   it('should work with `filterable` prop', async () => {

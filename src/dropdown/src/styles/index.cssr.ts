@@ -1,5 +1,5 @@
-import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { c, cB, cM, cE } from '../../../_utils/cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier
@@ -33,6 +33,7 @@ export default cB('dropdown-menu', `
   background-color: var(--n-color);
   border-radius: var(--n-border-radius);
   box-shadow: var(--n-box-shadow);
+  position: relative;
   transition:
     background-color .3s var(--n-bezier),
     box-shadow .3s var(--n-bezier);
@@ -44,6 +45,7 @@ export default cB('dropdown-menu', `
     c('a', `
       text-decoration: none;
       color: inherit;
+      outline: none;
     `, [
       c('&::before', `
         content: "";
@@ -57,31 +59,38 @@ export default cB('dropdown-menu', `
     cB('dropdown-option-body', `
       display: flex;
       cursor: pointer;
+      position: relative;
       height: var(--n-option-height);
       line-height: var(--n-option-height);
       font-size: var(--n-font-size);
       color: var(--n-option-text-color);
-      transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+      transition: color .3s var(--n-bezier);
     `, [
-      cM('pending', [
-        cNotM('disabled', {
-          color: 'var(--n-option-text-color-hover)',
-          backgroundColor: 'var(--n-option-color-hover)'
-        }),
+      c('&::before', `
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 4px;
+        right: 4px;
+        transition: background-color .3s var(--n-bezier);
+        border-radius: var(--n-border-radius);
+      `),
+      cM('pending', {
+        color: 'var(--n-option-text-color-hover)'
+      }, [
         cE('prefix, suffix', {
           color: 'var(--n-option-text-color-hover)'
-        })
-      ]),
-      cM('active', [
-        cNotM('disabled', {
-          color: 'var(--n-option-text-color-active)',
-          backgroundColor: 'var(--n-option-color-active)'
         }),
+        c('&::before', 'background-color: var(--n-option-color-hover);')
+      ]),
+      cM('active', {
+        color: 'var(--n-option-text-color-active)'
+      }, [
         cE('prefix, suffix', {
           color: 'var(--n-option-text-color-active)'
-        })
+        }),
+        c('&::before', 'background-color: var(--n-option-color-active);')
       ]),
       cM('disabled', {
         cursor: 'not-allowed',
@@ -121,10 +130,11 @@ export default cB('dropdown-menu', `
           fontSize: 'var(--n-option-icon-size)'
         })
       ]),
-      cE('label', {
-        whiteSpace: 'nowrap',
-        flex: 1
-      }),
+      cE('label', `
+        white-space: nowrap;
+        flex: 1;
+        z-index: 1;
+      `),
       cE('suffix', `
         box-sizing: border-box;
         flex-grow: 0;
@@ -144,9 +154,7 @@ export default cB('dropdown-menu', `
           fontSize: 'var(--n-option-icon-size)'
         })
       ]),
-      cB('dropdown-menu', {
-        pointerEvents: 'all'
-      })
+      cB('dropdown-menu', 'pointer-events: all;')
     ]),
     cB('dropdown-offset-container', `
       pointer-events: none;

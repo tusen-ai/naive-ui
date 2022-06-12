@@ -5,7 +5,7 @@
     },
     "strict": true,
     "strictNullChecks": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "noImplicitAny": true,
@@ -17,9 +17,6 @@
     "composite": true,
     "target": "ES6",
     "esModuleInterop": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ]
+    "lib": ["ESNext", "DOM"]
   }
 }

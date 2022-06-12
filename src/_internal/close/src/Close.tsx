@@ -1,6 +1,6 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
-import NBaseIcon from '../../icon'
+import { NBaseIcon } from '../../icon'
 import { CloseIcon } from '../../icons'
 import style from './styles/index.cssr'
 
@@ -15,28 +15,43 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    onClick: Function as PropType<(e: MouseEvent) => void>
+    focusable: {
+      type: Boolean,
+      default: true
+    },
+    round: Boolean,
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    absolute: Boolean
   },
   setup (props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
-      const { clsPrefix, disabled } = props
+      const { clsPrefix, disabled, absolute, round } = props
       return (
-        <NBaseIcon
-          role="button"
-          ariaDisabled={disabled}
-          ariaLabel="close"
-          clsPrefix={clsPrefix}
+        <button
+          tabindex={disabled || !props.focusable ? -1 : 0}
+          aria-disabled={disabled}
+          aria-label="close"
+          disabled={disabled}
           class={[
             `${clsPrefix}-base-close`,
-            disabled && `${clsPrefix}-base-close--disabled`
+            absolute && `${clsPrefix}-base-close--absolute`,
+            disabled && `${clsPrefix}-base-close--disabled`,
+            round && `${clsPrefix}-base-close--round`
           ]}
-          onClick={disabled ? undefined : props.onClick}
-        >
-          {{
-            default: () => <CloseIcon />
+          onMousedown={(e) => {
+            if (!props.focusable) {
+              e.preventDefault()
+            }
           }}
-        </NBaseIcon>
+          onClick={props.onClick}
+        >
+          <NBaseIcon clsPrefix={clsPrefix}>
+            {{
+              default: () => <CloseIcon />
+            }}
+          </NBaseIcon>
+        </button>
       )
     }
   }

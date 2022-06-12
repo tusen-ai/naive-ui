@@ -44,6 +44,8 @@ const zhCN: NLocale = {
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
     endDatetimePlaceholder: '结束日期时间',
+    startMonthPlaceholder: '开始月份',
+    endMonthPlaceholder: '结束月份',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今天'
@@ -106,7 +108,8 @@ const zhCN: NLocale = {
     tipClockwise: '向右旋转',
     tipZoomOut: '缩小',
     tipZoomIn: '放大',
-    tipClose: '关闭（Esc）'
+    tipClose: '关闭（Esc）',
+    tipOriginalSize: '缩放到原始尺寸'
   }
 }
 

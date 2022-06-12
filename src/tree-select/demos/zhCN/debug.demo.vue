@@ -10,6 +10,7 @@
       <n-switch v-model:value="cascade" />Cascade
       <n-switch v-model:value="filterable" />Filterable
       <n-switch v-model:value="showPath" />ShowPath
+      <n-switch v-model:value="loading" />Loading
     </n-space>
     <n-tree-select
       default-expand-all
@@ -19,6 +20,7 @@
       :cascade="cascade"
       :filterable="filterable"
       :show-path="showPath"
+      :loading="loading"
     />
   </n-space>
 </template>
@@ -47,7 +49,8 @@ export default defineComponent({
       cascade: ref(false),
       filterable: ref(false),
       options: createData(),
-      showPath: ref(false)
+      showPath: ref(false),
+      loading: ref(false)
     }
   }
 })

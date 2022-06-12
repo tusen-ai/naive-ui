@@ -112,7 +112,8 @@ export default defineComponent({
       '-watermark',
       style,
       watermarkLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     const base64UrlRef = ref('')
     const canvas = document.createElement('canvas')
@@ -203,7 +204,7 @@ export default defineComponent({
       }
     })
     return () => {
-      const watarmarkNode = (
+      const watermarkNode = (
         <div
           class={[
             `${mergedClsPrefixRef.value}-watermark`,
@@ -222,7 +223,7 @@ export default defineComponent({
           }}
         />
       )
-      if (props.fullscreen) return watarmarkNode
+      if (props.fullscreen) return watermarkNode
       return (
         <div
           class={[
@@ -232,7 +233,7 @@ export default defineComponent({
           ]}
         >
           {slots.default?.()}
-          {watarmarkNode}
+          {watermarkNode}
         </div>
       )
     }

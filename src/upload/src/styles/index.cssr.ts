@@ -1,11 +1,11 @@
 import { c, cM, cB, cE } from '../../../_utils/cssr'
-import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
-import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 
 export default c([
   cB('upload', 'width: 100%;', [
     cM('dragger-inside', [
-      cE('trigger', `
+      cB('upload-trigger', `
         display: block;
       `)
     ]),
@@ -93,9 +93,9 @@ export default c([
       transition: background-color .3s  var(--n-bezier);
       border-radius: var(--n-border-radius);
     `, [
-      fadeInHeightExpand(),
+      fadeInHeightExpandTransition(),
       cB('progress', [
-        fadeInHeightExpand({
+        fadeInHeightExpandTransition({
           foldPadding: true
         })
       ]),
@@ -274,7 +274,7 @@ export default c([
             }),
             cB('base-icon', [
               c('svg', [
-                createIconSwitchTransition()
+                iconSwitchTransition()
               ])
             ])
           ]),

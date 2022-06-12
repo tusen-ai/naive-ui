@@ -127,27 +127,36 @@ export const NSubmenu = defineComponent({
         childActive,
         icon,
         handleClick,
+        menuProps: { nodeProps },
         dropdownShow,
         iconMarginRight,
-        tmNode
+        tmNode,
+        mergedClsPrefix
       } = this
+      const attrs = nodeProps?.(tmNode.rawNode)
       return (
-        <NMenuOptionContent
-          tmNode={tmNode}
-          paddingLeft={paddingLeft}
-          collapsed={collapsed}
-          disabled={mergedDisabled}
-          iconMarginRight={iconMarginRight}
-          maxIconSize={maxIconSize}
-          activeIconSize={activeIconSize}
-          title={title}
-          showArrow={!isHorizontal}
-          childActive={childActive}
-          clsPrefix={mergedClsPrefix}
-          icon={icon}
-          hover={dropdownShow}
-          onClick={handleClick}
-        />
+        <div
+          {...attrs}
+          class={[`${mergedClsPrefix}-menu-item`, attrs?.class]}
+          role="menuitem"
+        >
+          <NMenuOptionContent
+            tmNode={tmNode}
+            paddingLeft={paddingLeft}
+            collapsed={collapsed}
+            disabled={mergedDisabled}
+            iconMarginRight={iconMarginRight}
+            maxIconSize={maxIconSize}
+            activeIconSize={activeIconSize}
+            title={title}
+            showArrow={!isHorizontal}
+            childActive={childActive}
+            clsPrefix={mergedClsPrefix}
+            icon={icon}
+            hover={dropdownShow}
+            onClick={handleClick}
+          />
+        </div>
       )
     }
     const createSubmenuChildren = (): VNode => {
@@ -168,6 +177,7 @@ export const NSubmenu = defineComponent({
     }
     return this.root ? (
       <NDropdown
+        size="large"
         {...this.menuProps?.dropdownProps}
         themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
         theme={this.mergedTheme.peers.Dropdown}
@@ -176,7 +186,6 @@ export const NSubmenu = defineComponent({
           optionIconSizeLarge: '18px'
         }}
         value={this.mergedValue}
-        size="large"
         trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}

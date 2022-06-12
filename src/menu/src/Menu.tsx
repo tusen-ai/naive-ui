@@ -13,6 +13,9 @@ import {
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
+import { FollowerPlacement } from 'vueuc'
+import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { DropdownProps } from '../../dropdown'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
@@ -30,11 +33,9 @@ import {
   OnUpdateKeys,
   OnUpdateValueImpl,
   OnUpdateKeysImpl,
-  MenuInst
+  MenuInst,
+  MenuNodeProps
 } from './interface'
-import { layoutSiderInjectionKey } from '../../layout/src/interface'
-import { FollowerPlacement } from 'vueuc'
-import { DropdownProps } from '../../dropdown'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
 
@@ -109,13 +110,9 @@ const menuProps = {
   renderExtra: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
-  /** TODO: deprecate it */
-  dropdownPlacement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom'
-  },
   dropdownProps: Object as PropType<DropdownProps>,
   accordion: Boolean,
+  nodeProps: Function as PropType<MenuNodeProps>,
   // deprecated
   items: Array as PropType<Array<MenuOption | MenuGroupOption>>,
   onOpenNamesChange: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
@@ -124,7 +121,11 @@ const menuProps = {
   MaybeArray<OnUpdateKeys>
   >,
   expandedNames: Array as PropType<Key[]>,
-  defaultExpandedNames: Array as PropType<Key[]>
+  defaultExpandedNames: Array as PropType<Key[]>,
+  dropdownPlacement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
+  }
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
@@ -350,6 +351,8 @@ export default defineComponent({
         vars['--n-item-text-color-active'] = self.itemTextColorActiveInverted
         vars['--n-item-text-color-child-active'] =
           self.itemTextColorChildActiveInverted
+        vars['--n-item-text-color-child-active-hover'] =
+          self.itemTextColorChildActiveInverted
         vars['--n-item-text-color-active-hover'] =
           self.itemTextColorActiveHoverInverted
         vars['--n-item-icon-color'] = self.itemIconColorInverted
@@ -359,6 +362,8 @@ export default defineComponent({
           self.itemIconColorActiveHoverInverted
         vars['--n-item-icon-color-child-active'] =
           self.itemIconColorChildActiveInverted
+        vars['--n-item-icon-color-child-active-hover'] =
+          self.itemIconColorChildActiveHoverInverted
         vars['--n-item-icon-color-collapsed'] =
           self.itemIconColorCollapsedInverted
         vars['--n-item-text-color-horizontal'] =
@@ -369,6 +374,8 @@ export default defineComponent({
           self.itemTextColorActiveHorizontalInverted
         vars['--n-item-text-color-child-active-horizontal'] =
           self.itemTextColorChildActiveHorizontalInverted
+        vars['--n-item-text-color-child-active-hover-horizontal'] =
+          self.itemTextColorChildActiveHoverHorizontalInverted
         vars['--n-item-text-color-active-hover-horizontal'] =
           self.itemTextColorActiveHoverHorizontalInverted
         vars['--n-item-icon-color-horizontal'] =
@@ -381,6 +388,8 @@ export default defineComponent({
           self.itemIconColorActiveHoverHorizontalInverted
         vars['--n-item-icon-color-child-active-horizontal'] =
           self.itemIconColorChildActiveHorizontalInverted
+        vars['--n-item-icon-color-child-active-hover-horizontal'] =
+          self.itemIconColorChildActiveHoverHorizontalInverted
         vars['--n-arrow-color'] = self.arrowColorInverted
         vars['--n-arrow-color-hover'] = self.arrowColorHoverInverted
         vars['--n-arrow-color-active'] = self.arrowColorActiveInverted
@@ -388,6 +397,8 @@ export default defineComponent({
           self.arrowColorActiveHoverInverted
         vars['--n-arrow-color-child-active'] =
           self.arrowColorChildActiveInverted
+        vars['--n-arrow-color-child-active-hover'] =
+          self.arrowColorChildActiveHoverInverted
         vars['--n-item-color-hover'] = self.itemColorHoverInverted
         vars['--n-item-color-active'] = self.itemColorActiveInverted
         vars['--n-item-color-active-hover'] = self.itemColorActiveHoverInverted
@@ -400,12 +411,16 @@ export default defineComponent({
         vars['--n-item-text-color-hover'] = self.itemTextColorHover
         vars['--n-item-text-color-active'] = self.itemTextColorActive
         vars['--n-item-text-color-child-active'] = self.itemTextColorChildActive
+        vars['--n-item-text-color-child-active-hover'] =
+          self.itemTextColorChildActiveHover
         vars['--n-item-text-color-active-hover'] = self.itemTextColorActiveHover
         vars['--n-item-icon-color'] = self.itemIconColor
         vars['--n-item-icon-color-hover'] = self.itemIconColorHover
         vars['--n-item-icon-color-active'] = self.itemIconColorActive
         vars['--n-item-icon-color-active-hover'] = self.itemIconColorActiveHover
         vars['--n-item-icon-color-child-active'] = self.itemIconColorChildActive
+        vars['--n-item-icon-color-child-active-hover'] =
+          self.itemIconColorChildActiveHover
         vars['--n-item-icon-color-collapsed'] = self.itemIconColorCollapsed
         vars['--n-item-text-color-horizontal'] = self.itemTextColorHorizontal
         vars['--n-item-text-color-hover-horizontal'] =
@@ -414,6 +429,8 @@ export default defineComponent({
           self.itemTextColorActiveHorizontal
         vars['--n-item-text-color-child-active-horizontal'] =
           self.itemTextColorChildActiveHorizontal
+        vars['--n-item-text-color-child-active-hover-horizontal'] =
+          self.itemTextColorChildActiveHoverHorizontal
         vars['--n-item-text-color-active-hover-horizontal'] =
           self.itemTextColorActiveHoverHorizontal
         vars['--n-item-icon-color-horizontal'] = self.itemIconColorHorizontal
@@ -425,11 +442,15 @@ export default defineComponent({
           self.itemIconColorActiveHoverHorizontal
         vars['--n-item-icon-color-child-active-horizontal'] =
           self.itemIconColorChildActiveHorizontal
+        vars['--n-item-icon-color-child-active-hover-horizontal'] =
+          self.itemIconColorChildActiveHoverHorizontal
         vars['--n-arrow-color'] = self.arrowColor
         vars['--n-arrow-color-hover'] = self.arrowColorHover
         vars['--n-arrow-color-active'] = self.arrowColorActive
         vars['--n-arrow-color-active-hover'] = self.arrowColorActiveHover
         vars['--n-arrow-color-child-active'] = self.arrowColorChildActive
+        vars['--n-arrow-color-child-active-hover'] =
+          self.arrowColorChildActiveHover
         vars['--n-item-color-hover'] = self.itemColorHover
         vars['--n-item-color-active'] = self.itemColorActive
         vars['--n-item-color-active-hover'] = self.itemColorActiveHover

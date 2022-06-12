@@ -76,6 +76,10 @@ export type OnUpdateKeysImpl = (
   keys: string[] | number[] | Array<string | number>
 ) => void
 
+export type MenuNodeProps = (
+  option: MenuOption | MenuGroupOption
+) => HTMLAttributes & Record<string, string | number | undefined>
+
 export interface MenuInst {
   showOption: (key?: Key) => void
 }

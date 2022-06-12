@@ -69,7 +69,9 @@ export default defineComponent({
     const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
     return (
       <div
-        onClick={this.onClick}
+        onClick={(e) => {
+          this.onClick?.(e)
+        }}
         role="none"
         class={[
           `${clsPrefix}-menu-item-content`,

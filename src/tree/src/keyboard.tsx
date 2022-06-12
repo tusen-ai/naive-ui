@@ -34,9 +34,7 @@ export function useKeyboard ({
   function handleKeyup (e: KeyboardEvent): void {
     const { value: pendingNodeKey } = pendingNodeKeyRef
     if (pendingNodeKey === null) {
-      if (
-        ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.code)
-      ) {
+      if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
         if (pendingNodeKey === null) {
           const { value: fNodes } = fNodesRef
           let fIndex = 0
@@ -53,9 +51,9 @@ export function useKeyboard ({
       const { value: fNodes } = fNodesRef
       let fIndex = fNodes.findIndex((tmNode) => tmNode.key === pendingNodeKey)
       if (!~fIndex) return
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      if (e.key === 'Enter') {
         handleSelect(fNodes[fIndex])
-      } else if (e.code === 'ArrowDown') {
+      } else if (e.key === 'ArrowDown') {
         fIndex += 1
         while (fIndex < fNodes.length) {
           if (!fNodes[fIndex].disabled) {
@@ -64,7 +62,7 @@ export function useKeyboard ({
           }
           fIndex += 1
         }
-      } else if (e.code === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp') {
         fIndex -= 1
         while (fIndex >= 0) {
           if (!fNodes[fIndex].disabled) {
@@ -73,7 +71,7 @@ export function useKeyboard ({
           }
           fIndex -= 1
         }
-      } else if (e.code === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft') {
         const pendingNode = fNodes[fIndex]
         if (
           pendingNode.isLeaf ||
@@ -86,7 +84,7 @@ export function useKeyboard ({
         } else {
           handleSwitcherClick(pendingNode)
         }
-      } else if (e.code === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         const pendingNode = fNodes[fIndex]
         if (pendingNode.isLeaf) return
         if (!mergedExpandedKeysRef.value.includes(pendingNodeKey)) {
@@ -106,7 +104,7 @@ export function useKeyboard ({
     }
   }
   function handleKeydown (e: KeyboardEvent): void {
-    switch (e.code) {
+    switch (e.key) {
       case 'ArrowUp':
       case 'ArrowDown':
         e.preventDefault()

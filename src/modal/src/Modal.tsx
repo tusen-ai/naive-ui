@@ -17,7 +17,7 @@ import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { keep, call, warnOnce } from '../../_utils'
+import { keep, call, warnOnce, useIsComposing } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
@@ -60,6 +60,7 @@ const modalProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: { type: Boolean, default: true },
   ...presetProps,
   // events
   onEsc: Function as PropType<() => void>,
@@ -136,6 +137,9 @@ export default defineComponent({
     const NDialogProvider = props.internalDialog
       ? inject(dialogProviderInjectionKey, null)
       : null
+
+    const isComposingRef = useIsComposing()
+
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
       if (onUpdateShow) call(onUpdateShow, show)
@@ -202,7 +206,7 @@ export default defineComponent({
     function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        doUpdateShow(false)
+        !isComposingRef.value && doUpdateShow(false)
       }
     }
     provide(modalInjectionKey, {
@@ -308,6 +312,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}

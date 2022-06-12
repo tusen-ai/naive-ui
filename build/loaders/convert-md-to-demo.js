@@ -43,10 +43,10 @@ function getPartsOfDemo (tokens) {
     }
   }
   return {
-    template: template,
-    script: script,
-    style: style,
-    title: title,
+    template,
+    script,
+    style,
+    title,
     content: marked.parser(contentTokens, {
       renderer: mdRenderer
     }),

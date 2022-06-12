@@ -5,7 +5,7 @@ const inquirer = require('inquirer')
 
 const { DINGTALK_TOKEN, DINGTALK_TOKEN_2, DINGTALK_TOKEN_3 } = process.env
 
-if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2 || DINGTALK_TOKEN_3) {
+if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2 || !DINGTALK_TOKEN_3) {
   console.log('No DINGTALK_TOKEN in your env.')
   process.exit(0)
 }

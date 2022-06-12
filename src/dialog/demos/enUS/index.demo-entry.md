@@ -3,7 +3,7 @@
 Before taking action, please confirm.
 
 <n-alert title="Prerequisite" type="warning">
-  If you want use dialog, you need to wrap the component where you call related methods inside <n-text code>n-dialog-provider</n-text> and use <n-text code>useDialog</n-text> to get the API.
+  If you want to use dialog, you need to wrap the component where you call related methods inside <n-text code>n-dialog-provider</n-text> and use <n-text code>useDialog</n-text> to get the API.
 </n-alert>
 
 For example:
@@ -58,8 +58,10 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
+| autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
+| blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |

@@ -1,6 +1,7 @@
 import { h, createTextVNode, PropType, defineComponent, computed } from 'vue'
-import { format, formatDistanceStrict, fromUnixTime, getTime } from 'date-fns'
-import { getTimezoneOffset } from 'date-fns-tz'
+import { format, formatDistanceStrict, fromUnixTime } from 'date-fns/esm'
+import type { Locale } from 'date-fns'
+import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone'
 import { useLocale } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
 
@@ -20,7 +21,7 @@ const timeProps = {
   unix: Boolean,
   format: String,
   text: Boolean,
-  timezone: String
+  timeZone: String
 } as const
 
 export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
@@ -32,18 +33,14 @@ export default defineComponent({
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
     const mergedFormatRef = computed(() => {
-      const { timezone } = props
-      if (timezone) {
-        return (time: number | Date, _format: string) => {
-          return format(
-            getTime(time) +
-              -getTimezoneOffset(
-                Intl.DateTimeFormat().resolvedOptions().timeZone,
-                time
-              ) +
-              getTimezoneOffset(timezone, time),
-            _format
-          )
+      const { timeZone } = props
+      if (timeZone) {
+        return (
+          time: number | Date,
+          _format: string,
+          options: { locale: Locale }
+        ) => {
+          return formatInTimeZone(time, timeZone, _format, options)
         }
       }
       return format

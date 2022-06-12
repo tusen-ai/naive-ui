@@ -16,6 +16,7 @@ action.vue
 async.vue
 status.vue
 debug.vue
+field-search-debug.vue
 ```
 
 ## API
@@ -24,6 +25,7 @@ debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `value` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |  |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |  |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点 |  |
@@ -41,7 +43,7 @@ debug.vue
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |  |
 | key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |  |
-| leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |  |
+| loading | `boolean` | `false` | 是否加载中 | NEXT_VETSION |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.22.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
@@ -52,6 +54,7 @@ debug.vue
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
@@ -73,7 +76,8 @@ debug.vue
 
 ### TreeSelect Slots
 
-| 名称   | 参数 | 说明                | 版本   |
-| ------ | ---- | ------------------- | ------ |
-| action | `()` | 菜单操作区域的 slot | 2.22.0 |
-| empty  | `()` | 菜单无数据时的 slot | 2.22.0 |
+| 名称   | 参数 | 说明                | 版本         |
+| ------ | ---- | ------------------- | ------------ |
+| action | `()` | 菜单操作区域的 slot | 2.22.0       |
+| arrow  | `()` | 选择箭头 slot       | NEXT_VERSION |
+| empty  | `()` | 菜单无数据时的 slot | 2.22.0       |

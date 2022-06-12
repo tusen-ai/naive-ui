@@ -12,6 +12,10 @@
 npm i -D naive-ui
 ```
 
+## UMD
+
+参考 [使用 UMD](umd)。
+
 ## 字体
 
 ```bash

@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
 // --n-bezier
@@ -23,6 +23,10 @@ export default cB('steps', `
     display: flex;
     flex: 1;
   `, [
+    cM('disabled', 'cursor: not-allowed'),
+    cM('clickable', `
+      cursor: pointer;
+    `),
     c('&:last-child', [
       cB('step-splitor', 'display: none;')
     ])

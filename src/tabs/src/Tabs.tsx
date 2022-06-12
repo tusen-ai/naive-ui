@@ -209,6 +209,7 @@ export default defineComponent({
           barEl.style.maxWidth = `${tabEl.offsetWidth}px`
         }
         barEl.style.width = '8192px'
+        void barEl.offsetWidth
       }
     }
     function updateCurrentBarStyle (): void {
@@ -220,25 +221,45 @@ export default defineComponent({
     }
 
     const tabsPaneWrapperRef = ref<HTMLElement | null>(null)
-    let currentHeight = 0
-    function onAnimationBeforeLeave (): void {
+    let fromHeight = 0
+    let hangingTransition: (() => void) | null = null
+    function onAnimationBeforeLeave (el: HTMLElement): void {
       const tabsPaneWrapperEl = tabsPaneWrapperRef.value
       if (tabsPaneWrapperEl) {
-        currentHeight = tabsPaneWrapperEl.getBoundingClientRect().height
-        const currentHeightPx = `${currentHeight}px`
-        tabsPaneWrapperEl.style.height = currentHeightPx
-        tabsPaneWrapperEl.style.maxHeight = currentHeightPx
+        fromHeight = el.getBoundingClientRect().height
+        const fromHeightPx = `${fromHeight}px`
+        const applyFromStyle = (): void => {
+          tabsPaneWrapperEl.style.height = fromHeightPx
+          tabsPaneWrapperEl.style.maxHeight = fromHeightPx
+        }
+        if (!hangingTransition) {
+          hangingTransition = applyFromStyle
+        } else {
+          applyFromStyle()
+          hangingTransition()
+          hangingTransition = null
+        }
       }
     }
     function onAnimationEnter (el: HTMLElement): void {
       const tabsPaneWrapperEl = tabsPaneWrapperRef.value
       if (tabsPaneWrapperEl) {
         const targetHeight = el.getBoundingClientRect().height
-        tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
-        tabsPaneWrapperEl.style.height = `${Math.max(
-          currentHeight,
-          targetHeight
-        )}px`
+        const applyTargetStyle = (): void => {
+          void document.body.offsetHeight
+          tabsPaneWrapperEl.style.maxHeight = `${targetHeight}px`
+          tabsPaneWrapperEl.style.height = `${Math.max(
+            fromHeight,
+            targetHeight
+          )}px`
+        }
+        if (!hangingTransition) {
+          hangingTransition = applyTargetStyle
+        } else {
+          hangingTransition()
+          hangingTransition = null
+          applyTargetStyle()
+        }
       }
     }
     function onAnimationAfterEnter (): void {
@@ -285,10 +306,20 @@ export default defineComponent({
     }
 
     let firstTimeUpdatePosition = true
+    function updateBarPositionInstantly (): void {
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
+      const disableTransitionClassName = 'transition-disabled'
+      barEl.classList.add(disableTransitionClassName)
+      updateCurrentBarStyle()
+      // here we don't need to force layout after update bar style
+      // since deriveScrollShadow will force layout
+      barEl.classList.remove(disableTransitionClassName)
+    }
+
     let memorizedWidth = 0
-    const handleNavResize = throttle(function handleNavResize (
-      entry: ResizeObserverEntry
-    ) {
+    function _handleNavResize (entry: ResizeObserverEntry): void {
       if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
         return
       }
@@ -297,25 +328,27 @@ export default defineComponent({
       }
       memorizedWidth = entry.contentRect.width
       const { type } = props
-      if (
-        (type === 'line' || type === 'bar') &&
-        (firstTimeUpdatePosition || props.justifyContent)
-      ) {
-        const { value: barEl } = barElRef
-        if (!barEl) return
-        if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
-        const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
-        barEl.classList.add(disableTransitionClassName)
-        updateCurrentBarStyle()
-        // here we don't need to force layout after update bar style
-        // since deriveScrollShadow will force layout
-        barEl.classList.remove(disableTransitionClassName)
+      if (type === 'line' || type === 'bar') {
+        if (
+          firstTimeUpdatePosition ||
+          props.justifyContent?.startsWith('space')
+        ) {
+          updateBarPositionInstantly()
+        }
       }
       if (type !== 'segment') {
         deriveScrollShadow(xScrollInstRef.value?.$el)
       }
-    },
-    64)
+    }
+    const handleNavResize = throttle(_handleNavResize, 64)
+    watch([() => props.justifyContent, () => props.size], () => {
+      void nextTick(() => {
+        const { type } = props
+        if (type === 'line' || type === 'bar') {
+          updateBarPositionInstantly()
+        }
+      })
+    })
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize (entry: ResizeObserverEntry): void {
@@ -403,6 +436,20 @@ export default defineComponent({
       }
     })
 
+    const tabsRailElRef = ref<HTMLElement | null>(null)
+    watch(mergedValueRef, () => {
+      if (props.type === 'segment') {
+        const tabsRailEl = tabsRailElRef.value
+        if (tabsRailEl) {
+          void nextTick(() => {
+            tabsRailEl.classList.add('transition-disabled')
+            void tabsRailEl.offsetWidth
+            tabsRailEl.classList.remove('transition-disabled')
+          })
+        }
+      }
+    })
+
     const exposedMethods: TabsInst = {
       syncBarPosition: () => {
         updateCurrentBarStyle()
@@ -424,9 +471,9 @@ export default defineComponent({
       const {
         self: {
           barColor,
-          closeColor,
-          closeColorHover,
-          closeColorPressed,
+          closeIconColor,
+          closeIconColorHover,
+          closeIconColorPressed,
           tabColor,
           tabBorderColor,
           paneTextColor,
@@ -436,6 +483,11 @@ export default defineComponent({
           colorSegment,
           fontWeightStrong,
           tabColorSegment,
+          closeSize,
+          closeIconSize,
+          closeColorHover,
+          closeColorPressed,
+          closeBorderRadius,
           [createKey('panePadding', size)]: panePadding,
           [createKey('tabPadding', sizeType)]: tabPadding,
           [createKey('tabGap', sizeType)]: tabGap,
@@ -459,9 +511,14 @@ export default defineComponent({
         '--n-pane-text-color': paneTextColor,
         '--n-tab-border-color': tabBorderColor,
         '--n-tab-border-radius': tabBorderRadius,
-        '--n-close-color': closeColor,
+        '--n-close-size': closeSize,
+        '--n-close-icon-size': closeIconSize,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
+        '--n-close-border-radius': closeBorderRadius,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-tab-color': tabColor,
         '--n-tab-font-weight': tabFontWeight,
         '--n-tab-font-weight-active': tabFontWeightActive,
@@ -488,6 +545,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
+      tabsRailElRef,
       tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
@@ -571,7 +629,7 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div class={`${mergedClsPrefix}-tabs-rail`}>
+            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
                   renderNameListRef.value.push(tabPaneVNode.props.name)
@@ -631,7 +689,13 @@ export default defineComponent({
                                           {...tabPaneVNode.props}
                                           internalCreatedByPane={true}
                                           internalLeftPadded={
-                                            index !== 0 && !mergedJustifyContent
+                                            index !== 0 &&
+                                            (!mergedJustifyContent ||
+                                              mergedJustifyContent ===
+                                                'center' ||
+                                              mergedJustifyContent ===
+                                                'start' ||
+                                              mergedJustifyContent === 'end')
                                           }
                                         >
                                           {tabPaneVNode.children
@@ -757,7 +821,7 @@ function filterMapTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null,
   renderedNames: Set<string | number>,
-  onBeforeLeave?: () => void,
+  onBeforeLeave?: (el: HTMLElement) => void,
   onEnter?: (el: HTMLElement) => void,
   onAfterEnter?: () => void,
   animationDirection?: 'next' | 'prev'
@@ -795,7 +859,7 @@ function filterMapTabPanes (
   return (
     <TransitionGroup
       name={`${animationDirection}-transition`}
-      onBeforeLeave={onBeforeLeave}
+      onBeforeLeave={onBeforeLeave as (el: Element) => void}
       onEnter={onEnter as (el: Element) => void}
       onAfterEnter={onAfterEnter}
     >

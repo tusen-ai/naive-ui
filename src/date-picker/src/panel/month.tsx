@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType, onMounted, nextTick } from 'vue'
+import { h, defineComponent, VNode, PropType, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
@@ -38,6 +38,7 @@ export default defineComponent({
           return `Q ${item.dateObject.quarter}`
       }
     }
+    const { useAsQuickJump } = props
     const renderItem = (
       item: YearItem | MonthItem | QuarterItem,
       i: number,
@@ -57,11 +58,11 @@ export default defineComponent({
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                mergedIsDateDisabled(item.ts)
+                !useAsQuickJump && mergedIsDateDisabled(item.ts)
             }
           ]}
           onClick={() => {
-            props.useAsQuickJump
+            useAsQuickJump
               ? handleQuickMonthClick(item, (value) =>
                 (props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
               )
@@ -73,7 +74,7 @@ export default defineComponent({
       )
     }
     onMounted(() => {
-      void nextTick(useCalendarRef.scrollPickerColumns)
+      useCalendarRef.justifyColumnsScrollState()
     })
     return { ...useCalendarRef, renderItem }
   },
@@ -95,6 +96,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--month`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onFocus={this.handlePanelFocus}
@@ -102,7 +104,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
           <NScrollbar
-            ref="scrollbarInstRef"
+            ref="yearScrollbarRef"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -114,7 +116,7 @@ export default defineComponent({
             {{
               default: () => (
                 <VirtualList
-                  ref="yearScrollRef"
+                  ref="yearVlRef"
                   items={this.yearArray}
                   itemSize={MONTH_ITEM_HEIGHT}
                   showScrollbar={false}
@@ -142,7 +144,7 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >
               <NScrollbar
-                ref="monthScrollRef"
+                ref="monthScrollbarRef"
                 theme={mergedTheme.peers.Scrollbar}
                 themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >

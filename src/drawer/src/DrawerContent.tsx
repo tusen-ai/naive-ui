@@ -84,6 +84,7 @@ export default defineComponent({
                 onClick={this.handleCloseClick}
                 clsPrefix={mergedClsPrefix}
                 class={`${mergedClsPrefix}-drawer-header__close`}
+                absolute
               />
             )}
           </div>

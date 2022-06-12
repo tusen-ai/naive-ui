@@ -76,7 +76,7 @@ export type RenderSwitcherIcon = () => VNodeChild
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>
-  highlightKeySetRef: Ref<Set<Key>>
+  highlightKeySetRef: Ref<Set<Key> | null>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
@@ -97,6 +97,7 @@ export interface TreeInjection {
   cascadeRef: Ref<boolean>
   mergedCheckStrategyRef: Ref<CheckStrategy>
   selectableRef: Ref<boolean>
+  expandOnClickRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
   internalCheckboxFocusableRef: Ref<boolean>
@@ -107,6 +108,7 @@ export interface TreeInjection {
   labelFieldRef: Ref<string>
   nodePropsRef: Ref<TreeNodeProps | undefined>
   multipleRef: Ref<boolean>
+  checkboxPlacementRef: 'left' | 'right'
   internalTreeSelect: boolean
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void

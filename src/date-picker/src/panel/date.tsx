@@ -43,6 +43,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--date`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onFocus={this.handlePanelFocus}

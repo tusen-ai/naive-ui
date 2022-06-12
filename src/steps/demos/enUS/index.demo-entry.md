@@ -12,26 +12,29 @@ size.vue
 vertical.vue
 content.vue
 custom-icon.vue
+click.vue
 ```
 
 ## API
 
 ### Steps Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| current | `number` | `undefined` | Currently selected in the first steps. |
-| size | `'small' \| 'medium'` | `'medium'` | Steps size. |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |
-| vertical | `boolean` | `false` | Steps vertical. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| current | `number` | `undefined` | Currently active step index. |  |
+| size | `'small' \| 'medium'` | `'medium'` | Steps size. |  |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |  |
+| vertical | `boolean` | `false` | Steps vertical. |  |
+| on-update:current | `(index: number) => void` | `undefined` | Callback on currently active step index changed. If it's set, step can be switched by click. | 2.29.1 |
 
 ### Step Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| description | `string` | `undefined` | Step description. |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | Step status. |
-| title | `string` | `undefined` | Step title. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| description | `string` | `undefined` | Step description. |  |
+| disabled | `boolean` | `false` | Whether it's clickable. | 2.29.1 |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | Step status. |  |
+| title | `string` | `undefined` | Step title. |  |
 
 ### Steps Slots
 

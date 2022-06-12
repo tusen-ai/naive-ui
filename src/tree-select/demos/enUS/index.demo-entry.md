@@ -23,6 +23,7 @@ debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `value` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |  |
@@ -40,6 +41,7 @@ debug.vue
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |  |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |  |
+| loading | `boolean` | `false` | Whether it's loading. | NEXT_VETSION |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.22.0 |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
@@ -50,6 +52,7 @@ debug.vue
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
@@ -71,7 +74,8 @@ debug.vue
 
 ### TreeSelect Slots
 
-| Name   | Parameters | Description                            | Version |
-| ------ | ---------- | -------------------------------------- | ------- |
-| action | `()`       | Options menu slot.                     | 2.22.0  |
-| empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| action | `()`       | Options menu slot.                     | 2.22.0       |
+| arrow  | `()`       | Arrow icon of trigger.                 | NEXT_VERSION |
+| empty  | `()`       | Empty state slot for the options menu. | 2.22.0       |

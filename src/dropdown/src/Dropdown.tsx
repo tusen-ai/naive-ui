@@ -42,13 +42,18 @@ import {
   RenderLabel,
   RenderIcon,
   RenderLabelImpl,
-  RenderIconImpl
+  RenderIconImpl,
+  RenderOption,
+  NodeProps,
+  RenderOptionImpl
 } from './interface'
 import { dropdownInjectionKey } from './context'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
   renderIconRef: Ref<RenderIconImpl | undefined>
+  renderOptionRef: Ref<RenderOptionImpl | undefined>
+  nodePropsRef: Ref<NodeProps | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -88,6 +93,8 @@ const dropdownBaseProps = {
   showArrow: Boolean,
   renderLabel: Function as PropType<RenderLabel>,
   renderIcon: Function as PropType<RenderIcon>,
+  renderOption: Function as PropType<RenderOption>,
+  nodeProps: Function as PropType<NodeProps>,
   labelField: {
     type: String,
     default: 'label'
@@ -230,6 +237,10 @@ export default defineComponent({
       activeKeyPathRef: activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
       mergedShowRef: mergedShowRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
+      renderOptionRef: toRef(props, 'renderOption') as Ref<
+      RenderOptionImpl | undefined
+      >,
       doSelect,
       doUpdateShow
     })
@@ -414,14 +425,7 @@ export default defineComponent({
       this.onRender?.()
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [
-          className,
-          `${mergedClsPrefix}-dropdown`,
-          this.themeClass,
-          this.trigger === 'manual' &&
-            `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
-        ],
+        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as any],
@@ -441,7 +445,8 @@ export default defineComponent({
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
       internalRenderBody: renderPopoverBody,
-      onUpdateShow: this.doUpdateShow
+      onUpdateShow: this.doUpdateShow,
+      'onUpdate:show': undefined
     }
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>

@@ -433,5 +433,6 @@ describe('n-carousel', () => {
     await sleep(100)
     await wrapper.findAll('.n-carousel__dot')[1].trigger('click')
     expect(onUpdate).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

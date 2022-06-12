@@ -36,6 +36,7 @@ status.vue
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. | 2.24.0 |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |  |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |

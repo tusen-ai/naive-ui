@@ -142,6 +142,7 @@ export default c([
       align-items: center;
     `, [
       cB('base-selection-input', `
+        font-size: inherit;
         line-height: inherit;
         outline: none;
         cursor: pointer;
@@ -222,6 +223,8 @@ export default c([
       vertical-align: bottom;
     `, [
       cE('input', `
+        font-size: inherit;
+        font-family: inherit;
         min-width: 1px;
         padding: 0;
         background-color: #0000;
@@ -275,6 +278,7 @@ export default c([
     margin-bottom: -3px;
     display: flex;
     flex-wrap: wrap;
+    margin-right: -8px;
   `),
   cB('base-selection-tag-wrapper', `
     max-width: 100%;

@@ -1,3 +1,4 @@
+import { popselectLight } from '../../popselect/styles'
 import { selectLight } from '../../select/styles'
 import { inputLight } from '../../input/styles'
 import { commonLight, ThemeCommonVars } from '../../_styles/common'
@@ -14,7 +15,14 @@ export const self = (vars: ThemeCommonVars) => {
     textColorDisabled,
     borderColor,
     borderRadius,
-    fontSize
+    // item font size
+    fontSizeTiny,
+    fontSizeSmall,
+    fontSizeMedium,
+    // item size
+    heightTiny,
+    heightSmall,
+    heightMedium
   } = vars
 
   return {
@@ -45,7 +53,15 @@ export const self = (vars: ThemeCommonVars) => {
     itemBorderActive: `1px solid ${primaryColor}`,
     itemBorderDisabled: `1px solid ${borderColor}`,
     itemBorderRadius: borderRadius,
-    itemFontSize: fontSize,
+    itemSizeSmall: heightTiny,
+    itemSizeMedium: heightSmall,
+    itemSizeLarge: heightMedium,
+    itemFontSizeSmall: fontSizeTiny,
+    itemFontSizeMedium: fontSizeSmall,
+    itemFontSizeLarge: fontSizeMedium,
+    jumperFontSizeSmall: fontSizeTiny,
+    jumperFontSizeMedium: fontSizeSmall,
+    jumperFontSizeLarge: fontSizeMedium,
     jumperTextColor: textColor2,
     jumperTextColorDisabled: textColorDisabled
   }
@@ -58,7 +74,8 @@ const paginationLight = createTheme({
   common: commonLight,
   peers: {
     Select: selectLight,
-    Input: inputLight
+    Input: inputLight,
+    Popselect: popselectLight
   },
   self
 })

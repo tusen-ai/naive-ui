@@ -10,14 +10,17 @@ The element to collect and validate data.
 inline.vue
 custom-rule.vue
 custom-validation.vue
+i18n.vue
 top.vue
 left.vue
 item-only.vue
+render-feedback.vue
 async.vue
 disabled.vue
 show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
+dynamic.vue
 ```
 
 ## API
@@ -46,13 +49,14 @@ custom-messages.vue
   The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 </n-alert>
 
-| Property | Type | Description |
-| --- | --- | --- |
-| required | `boolean` | Is it required. |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validation rule. |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | Asynchronous validation in the form of a callback. |
-| trigger | `string \| Array<string>` | Trigger type. |
-| message | `string` | Text to show when validation fails. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | Asynchronous validation in the form of a callback. |  |
+| message | `string` | Text to show when validation fails. |  |
+| renderMessage | `() => VNodeChild` | Render function or message. | 2.29.1 |
+| required | `boolean` | Is it required. |  |
+| trigger | `string \| Array<string>` | Trigger type. |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validation rule. |  |
 
 #### FormValidateMessages Type
 
@@ -65,6 +69,7 @@ custom-messages.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
+| render-feedback | `(raw: string \| undefined) => string \| VNode` | `undefined` | custom render of feedback |  |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |

@@ -22,7 +22,8 @@ import {
 } from '../../_internal/icons'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { NBaseIcon } from '../../_internal'
-import { NButton, NButtonGroup } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 import type { ButtonProps } from '../../button'
 import { useTheme, useLocale, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -35,6 +36,7 @@ import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
 import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
+import useRtl from '../../_mixins/use-rtl'
 
 const globalDataKeyMap = new WeakMap()
 
@@ -104,8 +106,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig()
+    const {
+      mergedComponentPropsRef,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      inlineThemeDisabled
+    } = useConfig()
     const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -251,13 +257,18 @@ export default defineComponent({
       valuePlaceholderRef: toRef(props, 'valuePlaceholder'),
       placeholderRef: toRef(props, 'placeholder')
     })
-
+    const rtlEnabledRef = useRtl(
+      'DynamicInput',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const cssVarsRef = computed(() => {
       const {
-        self: { actionMargin }
+        self: { actionMargin, actionMarginRtl }
       } = themeRef.value
       return {
-        '--action-margin': actionMargin
+        '--action-margin': actionMargin,
+        '--action-margin-rtl': actionMarginRtl
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -266,6 +277,7 @@ export default defineComponent({
 
     return {
       locale: useLocale('DynamicInput').localeRef,
+      rtlEnabled: rtlEnabledRef,
       buttonSize: buttonSizeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       NFormItem,
@@ -308,7 +320,11 @@ export default defineComponent({
     onRender?.()
     return (
       <div
-        class={[`${mergedClsPrefix}-dynamic-input`, this.themeClass]}
+        class={[
+          `${mergedClsPrefix}-dynamic-input`,
+          this.rtlEnabled && `${mergedClsPrefix}-dynamic-input--rtl`,
+          this.themeClass
+        ]}
         style={this.cssVars as CSSProperties}
       >
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (

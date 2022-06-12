@@ -14,7 +14,7 @@ import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, call, warnOnce } from '../../_utils'
+import { formatLength, call, warnOnce, useIsComposing } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { ScrollbarProps } from '../../_internal'
 import { drawerLight, DrawerTheme } from '../styles'
@@ -42,6 +42,10 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  showMask: {
+    type: [Boolean, String] as PropType<boolean | 'transparent'>,
+    default: true
+  },
   to: [String, Object] as PropType<string | HTMLElement>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -65,6 +69,10 @@ const drawerProps = {
     default: true
   },
   closeOnEsc: {
+    type: Boolean,
+    default: true
+  },
+  blockScroll: {
     type: Boolean,
     default: true
   },
@@ -145,13 +153,13 @@ export default defineComponent({
       const { height } = props
       return formatLength(height)
     })
-    const mergedBodyStyleRef = computed(() => {
+    const mergedBodyStyleRef = computed<Array<CSSProperties | string>>(() => {
       return [
         {
           width: styleWidthRef.value,
           height: styleHeightRef.value
         },
-        props.drawerStyle
+        props.drawerStyle || ''
       ]
     })
     function handleMaskClick (e: MouseEvent): void {
@@ -161,10 +169,13 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
+
+    const isComposingRef = useIsComposing()
+
     function handleEsc (): void {
       props.onEsc?.()
       if (props.closeOnEsc) {
-        doUpdateShow(false)
+        !isComposingRef.value && doUpdateShow(false)
       }
     }
     function doUpdateShow (show: boolean): void {
@@ -196,10 +207,14 @@ export default defineComponent({
           titleFontWeight,
           headerBorderBottom,
           footerBorderTop,
-          closeColor,
+          closeIconColor,
+          closeIconColorHover,
+          closeIconColorPressed,
           closeColorHover,
           closeColorPressed,
-          closeSize
+          closeIconSize,
+          closeSize,
+          closeBorderRadius
         }
       } = themeRef.value
       return {
@@ -218,10 +233,14 @@ export default defineComponent({
         '--n-title-font-weight': titleFontWeight,
         '--n-header-border-bottom': headerBorderBottom,
         '--n-footer-border-top': footerBorderTop,
-        '--n-close-color': closeColor,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
+        '--n-close-size': closeSize,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
-        '--n-close-size': closeSize
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -257,22 +276,29 @@ export default defineComponent({
                 style={this.cssVars as CSSProperties}
                 role="none"
               >
-                <Transition name="fade-in-transition" appear={this.isMounted}>
-                  {{
-                    default: () =>
-                      this.show ? (
-                        <div
-                          aria-hidden
-                          class={`${mergedClsPrefix}-drawer-mask`}
-                          onClick={this.handleMaskClick}
-                        />
-                      ) : null
-                  }}
-                </Transition>
+                {this.showMask ? (
+                  <Transition name="fade-in-transition" appear={this.isMounted}>
+                    {{
+                      default: () =>
+                        this.show ? (
+                          <div
+                            aria-hidden
+                            class={[
+                              `${mergedClsPrefix}-drawer-mask`,
+                              this.showMask === 'transparent' &&
+                                `${mergedClsPrefix}-drawer-mask--invisible`
+                            ]}
+                            onClick={this.handleMaskClick}
+                          />
+                        ) : null
+                    }}
+                  </Transition>
+                ) : null}
                 <NDrawerBodyWrapper
                   {...this.$attrs}
                   class={[this.drawerClass, this.$attrs.class]}
                   style={[this.mergedBodyStyle, this.$attrs.style]}
+                  blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
@@ -283,7 +309,9 @@ export default defineComponent({
                   onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  showMask={this.showMask}
                   onEsc={this.handleEsc}
+                  onClickoutside={this.handleMaskClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

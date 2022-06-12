@@ -10,7 +10,7 @@ interface SlideInFromLeftTransitionOptions {
   name?: string
 }
 
-export default function ({
+export function slideInFromLeftTransition ({
   duration = '0.3s',
   leaveDuration = '0.2s',
   name = 'slide-in-from-left'

@@ -5,7 +5,8 @@ import {
   defineComponent,
   PropType,
   mergeProps,
-  HTMLAttributes
+  HTMLAttributes,
+  watchEffect
 } from 'vue'
 import { getMargin } from 'seemly'
 import {
@@ -18,7 +19,12 @@ import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
 import useRtl from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
+import {
+  createKey,
+  resolveSlot,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
@@ -26,10 +32,7 @@ import style from './styles/index.cssr'
 
 const alertProps = {
   ...(useTheme.props as ThemeProps<AlertTheme>),
-  title: {
-    type: String,
-    default: undefined
-  },
+  title: String,
   showIcon: {
     type: Boolean,
     default: true
@@ -40,28 +43,11 @@ const alertProps = {
     >,
     default: 'default'
   },
-  closable: {
-    type: Boolean,
-    default: false
-  },
+  closable: Boolean,
   onClose: Function,
-  onAfterLeave: {
-    type: Function,
-    default: undefined
-  },
-  onAfterHide: {
-    type: Function,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'alert',
-          '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onAfterLeave: Function,
+  /** @deprecated */
+  onAfterHide: Function
 }
 
 export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
@@ -71,6 +57,16 @@ export default defineComponent({
   inheritAttrs: false,
   props: alertProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onAfterHide !== undefined) {
+          warnOnce(
+            'alert',
+            '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
       useConfig(props)
     const themeRef = useTheme(
@@ -95,6 +91,8 @@ export default defineComponent({
         iconSize,
         iconMargin,
         iconMarginRtl,
+        closeIconSize,
+        closeBorderRadius,
         closeSize,
         closeMargin,
         closeMarginRtl,
@@ -105,9 +103,15 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-color': self[createKey('color', type)],
-        '--n-close-color': self[createKey('closeColor', type)],
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius,
         '--n-close-color-hover': self[createKey('closeColorHover', type)],
         '--n-close-color-pressed': self[createKey('closeColorPressed', type)],
+        '--n-close-icon-color': self[createKey('closeIconColor', type)],
+        '--n-close-icon-color-hover':
+          self[createKey('closeIconColorHover', type)],
+        '--n-close-icon-color-pressed':
+          self[createKey('closeIconColorPressed', type)],
         '--n-icon-color': self[createKey('iconColor', type)],
         '--n-border': self[createKey('border', type)],
         '--n-title-text-color': self[createKey('titleTextColor', type)],
@@ -178,6 +182,7 @@ export default defineComponent({
               class: [
                 `${mergedClsPrefix}-alert`,
                 this.themeClass,
+                this.closable && `${mergedClsPrefix}-alert--closable`,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
                 this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`
               ],

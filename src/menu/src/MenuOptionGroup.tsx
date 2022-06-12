@@ -13,6 +13,10 @@ import {
 
 export const menuItemGroupProps = {
   ...useMenuChildProps,
+  tmNode: {
+    type: Object as PropType<TmNode>,
+    required: true
+  },
   tmNodes: {
     type: Array as PropType<TmNode[]>,
     required: true
@@ -33,19 +37,21 @@ export const NMenuOptionGroup = defineComponent({
     return function () {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
+      const { nodeProps } = menuProps
+      const attrs = nodeProps?.(props.tmNode.rawNode)
       return (
         <div class={`${mergedClsPrefix}-menu-item-group`} role="group">
-          <span
-            class={`${mergedClsPrefix}-menu-item-group-title`}
-            style={
-              paddingLeft !== undefined
-                ? `padding-left: ${paddingLeft}px;`
-                : undefined
-            }
+          <div
+            {...attrs}
+            class={[`${mergedClsPrefix}-menu-item-group-title`, attrs?.class]}
+            style={[
+              attrs?.style || '',
+              paddingLeft !== undefined ? `padding-left: ${paddingLeft}px;` : ''
+            ]}
           >
             {render(props.title)}
             {props.extra ? <> {render(props.extra)}</> : null}
-          </span>
+          </div>
           <div>
             {props.tmNodes.map((tmNode) => itemRenderer(tmNode, menuProps))}
           </div>

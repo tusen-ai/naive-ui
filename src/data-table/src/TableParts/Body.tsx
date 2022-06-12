@@ -164,7 +164,7 @@ export default defineComponent({
       componentId,
       scrollPartRef,
       mergedTableLayoutRef,
-      firstContentfulColIndexRef,
+      childTriggerColIndexRef,
       indentRef,
       rowPropsRef,
       maxHeightRef,
@@ -310,7 +310,14 @@ export default defineComponent({
       scrollbarInstRef.value?.sync()
     }
     const exposedMethods: MainTableBodyRef = {
-      getScrollContainer
+      getScrollContainer,
+      scrollTo (arg0: any, arg1?: any) {
+        if (virtualScrollRef.value) {
+          virtualListRef.value?.scrollTo(arg0, arg1)
+        } else {
+          scrollbarInstRef.value?.scrollTo(arg0, arg1)
+        }
+      }
     }
 
     interface StyleCProps {
@@ -445,7 +452,7 @@ export default defineComponent({
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
       mergedTableLayout: mergedTableLayoutRef,
-      firstContentfulColIndex: firstContentfulColIndexRef,
+      childTriggerColIndex: childTriggerColIndexRef,
       indent: indentRef,
       rowProps: rowPropsRef,
       maxHeight: maxHeightRef,
@@ -526,7 +533,7 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeySet,
               componentId,
-              firstContentfulColIndex,
+              childTriggerColIndex,
               rowProps,
               handleMouseenterTable,
               handleMouseleaveTable,
@@ -759,7 +766,7 @@ export default defineComponent({
                           }
                         ]}
                       >
-                        {hasChildren && colIndex === firstContentfulColIndex
+                        {hasChildren && colIndex === childTriggerColIndex
                           ? [
                               repeat(
                                 isSummary ? 0 : rowInfo.tmNode.level,

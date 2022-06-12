@@ -19,7 +19,7 @@ import {
   RenderOption,
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
-import { tmOptions } from '../../select/src/utils'
+import { createTmOptions } from '../../select/src/utils'
 import type { FormValidationStatus } from '../../form/src/interface'
 import type {
   SelectBaseOption,
@@ -167,7 +167,7 @@ export default defineComponent({
     const treeMateRef = computed(() =>
       createTreeMate<SelectBaseOption, SelectGroupOption, SelectIgnoredOption>(
         selectOptionsRef.value,
-        tmOptions
+        createTmOptions('value', 'children')
       )
     )
     function doUpdateValue (value: string | null): void {
@@ -208,9 +208,8 @@ export default defineComponent({
       }, 0)
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!isComposingRef.value) {
             const pendingOptionTmNode = menuInstRef.value?.getPendingTmNode()
             if (pendingOptionTmNode) {
@@ -228,11 +227,11 @@ export default defineComponent({
       }
     }
     function select (option: AutoCompleteOption): void {
-      if (option) {
+      if (option?.value !== undefined) {
         doSelect(option.value)
         if (props.clearAfterSelect) {
           doUpdateValue(null)
-        } else {
+        } else if (option.label !== undefined) {
           doUpdateValue(option.label)
         }
         canBeActivatedRef.value = false

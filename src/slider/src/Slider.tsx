@@ -9,7 +9,8 @@ import {
   Transition,
   PropType,
   CSSProperties,
-  ComponentPublicInstance
+  ComponentPublicInstance,
+  onBeforeUnmount
 } from 'vue'
 import {
   VBinder,
@@ -400,7 +401,7 @@ export default defineComponent({
     function handleRailKeyDown (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
       const { vertical, reverse } = props
-      switch (e.code) {
+      switch (e.key) {
         case 'ArrowUp':
           e.preventDefault()
           handleStepValue(vertical && reverse ? -1 : 1)
@@ -526,6 +527,9 @@ export default defineComponent({
         })
       }
       void nextTick(syncPosition)
+    })
+    onBeforeUnmount(() => {
+      stopDragging()
     })
     const cssVarsRef = computed(() => {
       const {

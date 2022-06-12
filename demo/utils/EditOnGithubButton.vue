@@ -1,7 +1,16 @@
 <template>
   <n-button
     class="edit-button"
-    text
+    :theme-overrides="
+      quaternary
+        ? {
+          paddingTiny: '4px',
+          heightTiny: '14px'
+        }
+        : undefined
+    "
+    :quaternary="quaternary"
+    :text="!quaternary"
     :size="size"
     tag="a"
     :href="url"
@@ -32,6 +41,7 @@ export default defineComponent({
       required: true
     },
     text: Boolean,
+    quaternary: Boolean,
     size: {
       type: String as PropType<ButtonProps['size']>,
       default: 'tiny'

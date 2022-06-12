@@ -36,10 +36,10 @@ export default defineComponent({
         Yesterday: () => new Date().getTime() - 24 * 60 * 60 * 1000
       },
       rangeShortcuts: {
-        'Happy holiday': [1629216000000, 1631203200000],
+        'Happy holiday': [1629216000000, 1631203200000] as const,
         'Last 2 hours': () => {
           const cur = new Date().getTime()
-          return [cur - 2 * 60 * 60 * 1000, cur]
+          return [cur - 2 * 60 * 60 * 1000, cur] as const
         }
       }
     }

@@ -10,6 +10,7 @@ import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
 import { buttonLight } from '../button/styles'
+import { buttonGroupLight } from '../button-group/styles'
 import { calendarLight } from '../calendar/styles'
 import { cardLight } from '../card/styles'
 import { carouselLight } from '../carousel/styles'
@@ -92,6 +93,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Badge: badgeLight,
   Breadcrumb: breadcrumbLight,
   Button: buttonLight,
+  ButtonGroup: buttonGroupLight,
   Calendar: calendarLight,
   Card: cardLight,
   Carousel: carouselLight,

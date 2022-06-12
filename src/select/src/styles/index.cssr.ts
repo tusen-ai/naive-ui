@@ -1,5 +1,5 @@
 import { cB, c } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // --n-menu-box-shadow
 export default c([
@@ -13,6 +13,8 @@ export default c([
     margin: 4px 0;
     box-shadow: var(--n-menu-box-shadow);
   `, [
-    fadeInScaleUpTransition()
+    fadeInScaleUpTransition({
+      originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+    })
   ])
 ])

@@ -1,7 +1,7 @@
 import { h, defineComponent, PropType } from 'vue'
 import NBaseClear from '../../clear'
 import NBaseLoading from '../../loading'
-import NBaseIcon from '../../icon'
+import { NBaseIcon } from '../../icon'
 import { ChevronDownIcon } from '../../icons'
 import { resolveSlot } from '../../../_utils/vue'
 
@@ -46,7 +46,7 @@ export default defineComponent({
                   onClear={props.onClear}
                 >
                   {{
-                    default: () => (
+                    placeholder: () => (
                       <NBaseIcon
                         clsPrefix={clsPrefix}
                         class={`${clsPrefix}-base-suffix__arrow`}

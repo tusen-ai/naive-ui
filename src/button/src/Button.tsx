@@ -3,7 +3,6 @@ import {
   ref,
   computed,
   inject,
-  onMounted,
   defineComponent,
   PropType,
   CSSProperties,
@@ -12,6 +11,7 @@ import {
   ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
+import { changeColor } from 'seemly'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -33,11 +33,10 @@ import {
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
-import { buttonGroupInjectionKey } from './ButtonGroup'
+import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import type { Type, Size } from './interface'
-import style from './styles/button.cssr'
+import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
-import { changeColor } from 'seemly'
 
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
@@ -85,7 +84,7 @@ const buttonProps = {
     default: true
   },
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-  internalAutoFocus: Boolean
+  nativeFocusBehavior: Boolean
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -111,17 +110,6 @@ const Button = defineComponent({
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
-    onMounted(() => {
-      const { value: selfEl } = selfElRef
-      if (
-        selfEl &&
-        !props.disabled &&
-        props.focusable &&
-        props.internalAutoFocus
-      ) {
-        selfEl.focus({ preventScroll: true })
-      }
-    })
     const showBorderRef = useMemo(() => {
       return (
         !props.quaternary &&
@@ -154,7 +142,12 @@ const Button = defineComponent({
       return props.focusable && !props.disabled
     })
     const handleMousedown = (e: MouseEvent): void => {
+      if (props.nativeFocusBehavior) {
+        return
+      }
       e.preventDefault()
+      // normally this won't be called if disabled (when tag is button)
+      // if not, we try to make it behave like a button
       if (props.disabled) {
         return
       }
@@ -172,9 +165,8 @@ const Button = defineComponent({
       }
     }
     const handleKeyup = (e: KeyboardEvent): void => {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!props.keyboard) {
             return
           }
@@ -182,9 +174,8 @@ const Button = defineComponent({
       }
     }
     const handleKeydown = (e: KeyboardEvent): void => {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           if (!props.keyboard || props.loading) {
             e.preventDefault()
             return

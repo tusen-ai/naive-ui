@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NDynamicTags } from '../index'
 import { NAutoComplete } from '../../auto-complete/index'
 import { NButton } from '../../button/index'
-import { h } from 'vue'
+import { NTag } from '../../tag'
 
 describe('n-dynamic-tags', () => {
   it('should work with import on demand', () => {
@@ -166,7 +167,7 @@ describe('n-dynamic-tags', () => {
         defaultValue: ['教师']
       }
     })
-    await wrapper.find('button').trigger('click')
+    await wrapper.find('.n-button').trigger('click')
     expect(wrapper.find('.n-input').classes()).not.toContain(
       'n-input--disabled'
     )
@@ -182,13 +183,28 @@ describe('n-dynamic-tags', () => {
         defaultValue: ['教师']
       }
     })
-    await wrapper.find('button').trigger('click')
+    await wrapper.find('.n-button').trigger('click')
     expect(wrapper.find('.n-input').attributes('style')).not.toContain(
       'color: red'
     )
 
     await wrapper.setProps({ inputStyle: { color: 'red' } })
     expect(wrapper.find('.n-input').attributes('style')).toContain('color: red')
+    wrapper.unmount()
+  })
+
+  it('should work with `render-tag` prop', async () => {
+    const wrapper = mount(NDynamicTags, {
+      props: {
+        value: ['教师'],
+        renderTag: (tag: string) =>
+          h(NTag, null, {
+            default: () => `test-${tag}`
+          })
+      }
+    })
+
+    expect(wrapper.find('.n-tag__content').text()).toContain('test-教师')
     wrapper.unmount()
   })
 

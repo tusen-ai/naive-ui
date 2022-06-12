@@ -2,11 +2,12 @@
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
-      <n-tooltip placement="right">
+      <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
           <edit-on-github-button
             text
             class="edit-button"
+            quaternary
             :relative-url="relativeUrl"
           />
         </template>
@@ -62,7 +63,7 @@ export default defineComponent({
 }
 
 .naive-doc-title .edit-button {
-  margin-left: 4px;
+  margin-left: 2px;
   display: inline-flex;
   align-items: center;
 }
