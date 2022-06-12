@@ -1,7 +1,7 @@
 <markdown>
-# 自定义标识
+# Customize handle
 
-可以使用`handle`插槽自定义标识点。
+You can use `handle` slot to customize handle button.
 </markdown>
 
 <template>
@@ -20,6 +20,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
+
 export default defineComponent({
   setup () {
     return {

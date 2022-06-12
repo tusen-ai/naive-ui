@@ -209,17 +209,17 @@ export default c([
           background-color: var(--n-handle-color);
           box-shadow: var(--n-handle-box-shadow);
         `, [
-          c('&:hover', {
-            boxShadow: 'var(--n-handle-box-shadow-hover)'
-          })
+          c('&:hover', `
+            box-shadow: var(--n-handle-box-shadow-hover);
+          `)
         ]),
-        c('&:focus-within', [
-          cB('slider-handle', {
-            boxShadow: 'var(--n-handle-box-shadow-focus)'
-          }, [
-            c('&:hover', {
-              boxShadow: 'var(--n-handle-box-shadow-active)'
-            })
+        c('&:focus', [
+          cB('slider-handle', `
+            box-shadow: var(--n-handle-box-shadow-focus);
+          `, [
+            c('&:hover', `
+              box-shadow: var(--n-handle-box-shadow-active);
+            `)
           ])
         ])
       ])
@@ -231,9 +231,7 @@ export default c([
       right: calc(var(--n-handle-size) / 2);
     `, [
       cM('transition-disabled', [
-        cB('slider-dot', {
-          transition: 'none'
-        })
+        cB('slider-dot', 'transition: none;')
       ]),
       cB('slider-dot', `
         transition:
@@ -250,9 +248,7 @@ export default c([
         border: var(--n-dot-border);
         background-color: var(--n-dot-color);
       `, [
-        cM('active', {
-          border: 'var(--n-dot-border-active)'
-        })
+        cM('active', 'border: var(--n-dot-border-active);')
       ])
     ])
   ]),
@@ -290,16 +286,12 @@ export default c([
   ]),
   insideModal(
     cB('slider', [
-      cB('slider-dot', {
-        backgroundColor: 'var(--n-dot-color-modal)'
-      })
+      cB('slider-dot', 'background-color: var(--n-dot-color-modal);')
     ])
   ),
   insidePopover(
     cB('slider', [
-      cB('slider-dot', {
-        backgroundColor: 'var(--n-dot-color-popover)'
-      })
+      cB('slider-dot', 'background-color: var(--n-dot-color-popover);')
     ])
   )
 ])

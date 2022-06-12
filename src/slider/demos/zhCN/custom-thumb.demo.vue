@@ -1,13 +1,13 @@
 <markdown>
-# Custom handle
+# 自定义标识
 
-You can use `handle` slots to customize identification.
+可以使用 `thumb` 插槽自定义滑块按钮。
 </markdown>
 
 <template>
   <n-space vertical>
     <n-slider v-model:value="value" :step="10">
-      <template #handle>
+      <template #thumb>
         <n-icon-wrapper :size="24" :border-radius="12">
           <n-icon :size="18" :component="AnimalCat24Regular" />
         </n-icon-wrapper>
@@ -20,6 +20,7 @@ You can use `handle` slots to customize identification.
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
+
 export default defineComponent({
   setup () {
     return {

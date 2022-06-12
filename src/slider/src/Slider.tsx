@@ -17,7 +17,7 @@ import {
   VTarget,
   VFollower,
   FollowerPlacement,
-  FollowerInst as _FollowerInst
+  FollowerInst
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
@@ -39,8 +39,6 @@ import { sliderLight, SliderTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
 import { isTouchEvent, useRefs } from './utils'
 import style from './styles/index.cssr'
-
-interface FollowerInst extends _FollowerInst, ComponentPublicInstance {}
 
 export interface ClosestMark {
   value: number
@@ -117,7 +115,9 @@ export default defineComponent({
     // dom ref
     const handleRailRef = ref<HTMLElement | null>(null)
     const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
-    const [followerRefs, setFollowerRefs] = useRefs<FollowerInst>()
+    const [followerRefs, setFollowerRefs] = useRefs<
+    FollowerInst & ComponentPublicInstance
+    >()
     const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
 
     // data ref
@@ -243,7 +243,8 @@ export default defineComponent({
         (activeIndexRef.value === index && draggingRef.value)
       )
     }
-    function isSkipCSSDetection (index: number): boolean {
+    function shouldKeepTooltipTransition (index: number): boolean {
+      if (!draggingRef.value) return true
       return !(
         activeIndexRef.value === index && previousIndexRef.value === index
       )
@@ -625,7 +626,7 @@ export default defineComponent({
       dotTransitionDisabled: dotTransitionDisabledRef,
       markInfos: markInfosRef,
       isShowTooltip,
-      isSkipCSSDetection,
+      shouldKeepTooltipTransition,
       handleRailRef,
       setHandleRefs,
       setFollowerRefs,
@@ -720,7 +721,7 @@ export default defineComponent({
                                 this.handleHandleMouseLeave(index)
                               }
                             >
-                              {resolveSlot(this.$slots.handle, () => [
+                              {resolveSlot(this.$slots.thumb, () => [
                                 <div
                                   class={`${mergedClsPrefix}-slider-handle`}
                                 />
@@ -749,13 +750,13 @@ export default defineComponent({
                               <Transition
                                 name="fade-in-scale-up-transition"
                                 appear={this.isMounted}
-                                css={this.isSkipCSSDetection(index)}
-                                onEnter={() =>
+                                css={this.shouldKeepTooltipTransition(index)}
+                                onEnter={() => {
                                   this.followerEnabledIndexSet.add(index)
-                                }
-                                onAfterLeave={() =>
+                                }}
+                                onAfterLeave={() => {
                                   this.followerEnabledIndexSet.delete(index)
-                                }
+                                }}
                               >
                                 {{
                                   default: () => {
