@@ -136,6 +136,7 @@
 - 🌟 Add `createDiscreteApi` to create message, notification, dialog, loading bar outside setup.
 - `n-scrollbar` adds `trigger` prop.
 - `n-input-number` adds `button-placement` prop.
+- `n-slider` adds `handle` slot.
 - `n-select` adds `children-field` prop, closes [#3018](https://github.com/TuSimple/naive-ui/issues/3018).
 - `n-upload` adds `trigger-style` prop.
 - `n-dropdown` adds `node-props` prop.

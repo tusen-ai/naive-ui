@@ -41,7 +41,7 @@ export default c([
   `, [
     cM('reverse', [
       cB('slider-handles', [
-        cB('slider-handle', `
+        cB('slider-handle-wrapper', `
           transform: translate(50%, -50%);
         `)
       ]),
@@ -52,7 +52,7 @@ export default c([
       ]),
       cM('vertical', [
         cB('slider-handles', [
-          cB('slider-handle', `
+          cB('slider-handle-wrapper', `
             transform: translate(-50%, -50%);
           `)
         ]),
@@ -79,7 +79,7 @@ export default c([
         bottom: calc(var(--n-handle-size) / 2);
         left: 0;
       `, [
-        cB('slider-handle', `
+        cB('slider-handle-wrapper', `
           top: unset;
           left: 50%;
           transform: translate(-50%, 50%);
@@ -192,29 +192,36 @@ export default c([
       bottom: 0;
       left: calc(var(--n-handle-size) / 2);
     `, [
-      cB('slider-handle', `
+      cB('slider-handle-wrapper', `
         outline: none;
-        height: var(--n-handle-size);
-        width: var(--n-handle-size);
-        border-radius: 50%;
-        transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
-        overflow: hidden;
         cursor: pointer;
-        background-color: var(--n-handle-color);
-        box-shadow: var(--n-handle-box-shadow);
+        display: flex;
       `, [
-        c('&:hover', {
-          boxShadow: 'var(--n-handle-box-shadow-hover)'
-        }),
-        c('&:hover:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-active)'
-        }),
-        c('&:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-focus)'
-        })
+        cB('slider-handle', `
+          height: var(--n-handle-size);
+          width: var(--n-handle-size);
+          border-radius: 50%;
+          overflow: hidden;
+          transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
+          background-color: var(--n-handle-color);
+          box-shadow: var(--n-handle-box-shadow);
+        `, [
+          c('&:hover', {
+            boxShadow: 'var(--n-handle-box-shadow-hover)'
+          })
+        ]),
+        c('&:focus-within', [
+          cB('slider-handle', {
+            boxShadow: 'var(--n-handle-box-shadow-focus)'
+          }, [
+            c('&:hover', {
+              boxShadow: 'var(--n-handle-box-shadow-active)'
+            })
+          ])
+        ])
       ])
     ]),
     cB('slider-dots', `

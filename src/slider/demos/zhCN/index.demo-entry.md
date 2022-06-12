@@ -16,6 +16,7 @@ reverse.vue
 vertical.vue
 show-tooltip.vue
 multiple-debug.vue
+custom-identification.vue
 ```
 
 ## API

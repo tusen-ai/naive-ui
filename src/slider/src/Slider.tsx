@@ -32,7 +32,8 @@ import {
   call,
   useAdjustedTo,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  resolveSlot
 } from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
@@ -707,7 +708,7 @@ export default defineComponent({
                           default: () => (
                             <div
                               ref={this.setHandleRefs(index)}
-                              class={`${mergedClsPrefix}-slider-handle`}
+                              class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
                               style={this.getHandleStyle(value, index)}
                               onFocus={() => this.handleHandleFocus(index)}
@@ -718,7 +719,13 @@ export default defineComponent({
                               onMouseleave={() =>
                                 this.handleHandleMouseLeave(index)
                               }
-                            />
+                            >
+                              {resolveSlot(this.$slots.handle, () => [
+                                <div
+                                  class={`${mergedClsPrefix}-slider-handle`}
+                                />
+                              ])}
+                            </div>
                           )
                         }}
                       </VTarget>,
