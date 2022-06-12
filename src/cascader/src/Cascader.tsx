@@ -36,7 +36,12 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
@@ -642,7 +647,17 @@ export default defineComponent({
           break
       }
     }
-    function handleKeyUp (e: KeyboardEvent): void {
+    function handleKeydown (e: KeyboardEvent): void {
+      switch (e.key) {
+        case ' ':
+        case 'ArrowDown':
+        case 'ArrowUp':
+          if (props.filterable && mergedShowRef.value) {
+            break
+          }
+          e.preventDefault()
+          break
+      }
       if (happensIn(e, 'action')) return
       switch (e.key) {
         case ' ':
@@ -711,11 +726,14 @@ export default defineComponent({
           }
           break
         case 'Escape':
-          closeMenu(true)
+          if (mergedShowRef.value) {
+            markEventEffectPerformed(e)
+            closeMenu(true)
+          }
       }
     }
-    function handleMenuKeyUp (e: KeyboardEvent): void {
-      handleKeyUp(e)
+    function handleMenuKeydown (e: KeyboardEvent): void {
+      handleKeydown(e)
     }
     // --- search
     function handleClear (e: MouseEvent): void {
@@ -787,18 +805,6 @@ export default defineComponent({
         doUncheck(option.value)
       } else {
         doUpdateValue(null, null, null)
-      }
-    }
-    function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.key) {
-        case ' ':
-        case 'ArrowDown':
-        case 'ArrowUp':
-          if (props.filterable && mergedShowRef.value) {
-            return
-          }
-          e.preventDefault()
-          break
       }
     }
     // sync position
@@ -931,7 +937,7 @@ export default defineComponent({
       handleMenuTabout,
       handleMenuFocus,
       handleMenuBlur,
-      handleMenuKeyUp,
+      handleMenuKeydown,
       handleMenuMousedown,
       handleTriggerFocus,
       handleTriggerBlur,
@@ -939,8 +945,7 @@ export default defineComponent({
       handleClear,
       handleDeleteOption,
       handlePatternInput,
-      handleKeyDown,
-      handleKeyUp,
+      handleKeydown,
       focused: focusedRef,
       optionHeight: optionHeightRef,
       mergedTheme: themeRef,
@@ -987,8 +992,7 @@ export default defineComponent({
                       onClear={this.handleClear}
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
-                      onKeydown={this.handleKeyDown}
-                      onKeyup={this.handleKeyUp}
+                      onKeydown={this.handleKeydown}
                     />
                   )
                 }}
@@ -1021,7 +1025,7 @@ export default defineComponent({
                         ]}
                         onFocus={this.handleMenuFocus}
                         onBlur={this.handleMenuBlur}
-                        onKeyup={this.handleMenuKeyUp}
+                        onKeydown={this.handleMenuKeydown}
                         onMousedown={this.handleMenuMousedown}
                         onTabout={this.handleMenuTabout}
                       >

@@ -628,23 +628,23 @@ export default defineComponent({
       }
       on('mouseup', document, hidePassword)
     }
-    function handleWrapperKeyDown (e: KeyboardEvent): void {
+    function handleWrapperKeydown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
       switch (e.key) {
         case 'Escape':
-          handleWrapperKeyDownEsc()
+          handleWrapperKeydownEsc()
           break
         case 'Enter':
-          handleWrapperKeyDownEnter(e)
+          handleWrapperKeydownEnter(e)
           break
       }
     }
-    function handleWrapperKeyDownEnter (e: KeyboardEvent): void {
+    function handleWrapperKeydownEnter (e: KeyboardEvent): void {
       if (props.passivelyActivated) {
         const { value: focused } = activatedRef
         if (focused) {
           if (props.internalDeactivateOnEnter) {
-            handleWrapperKeyDownEsc()
+            handleWrapperKeydownEsc()
           }
           return
         }
@@ -656,7 +656,7 @@ export default defineComponent({
         }
       }
     }
-    function handleWrapperKeyDownEsc (): void {
+    function handleWrapperKeydownEsc (): void {
       if (props.passivelyActivated) {
         activatedRef.value = false
         void nextTick(() => {
@@ -693,7 +693,7 @@ export default defineComponent({
         wrapperEl?.contains(document.activeElement) &&
         wrapperEl !== document.activeElement
       ) {
-        handleWrapperKeyDownEsc()
+        handleWrapperKeydownEsc()
       }
     }
     function syncMirror (value: string | null): void {
@@ -942,7 +942,7 @@ export default defineComponent({
       handleClear,
       handlePasswordToggleClick,
       handlePasswordToggleMousedown,
-      handleWrapperKeyDown,
+      handleWrapperKeydown,
       handleTextAreaMirrorResize,
       getTextareaScrollContainer: () => {
         return textareaElRef.value
@@ -1002,7 +1002,7 @@ export default defineComponent({
         onCompositionstart={this.handleCompositionStart}
         onCompositionend={this.handleCompositionEnd}
         onKeyup={this.onKeyup}
-        onKeydown={this.handleWrapperKeyDown}
+        onKeydown={this.handleWrapperKeydown}
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>

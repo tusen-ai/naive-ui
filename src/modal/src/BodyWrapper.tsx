@@ -79,7 +79,7 @@ export default defineComponent({
       required: true
     },
     onAfterEnter: Function as PropType<() => void>,
-    onEsc: Function as PropType<() => void>
+    onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)

@@ -63,7 +63,7 @@ export default defineComponent({
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
-    onEsc: Function as PropType<() => void>
+    onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
     const displayedRef = ref(!!props.show)

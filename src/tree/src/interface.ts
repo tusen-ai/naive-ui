@@ -133,6 +133,5 @@ export interface MotionData {
 }
 
 export interface InternalTreeInst {
-  handleKeyup: (e: KeyboardEvent) => void
   handleKeydown: (e: KeyboardEvent) => void
 }

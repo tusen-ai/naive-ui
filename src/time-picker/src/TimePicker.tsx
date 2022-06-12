@@ -47,7 +47,12 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
@@ -456,12 +461,21 @@ export default defineComponent({
         returnFocus: true
       })
     }
-    function handleMenuKeyDown (e: KeyboardEvent): void {
+    function handleInputKeydown (e: KeyboardEvent): void {
+      if (e.key === 'Escape' && mergedShowRef.value) {
+        markEventEffectPerformed(e)
+        // closePanel will be called in onDeactivated
+      }
+    }
+    function handleMenuKeydown (e: KeyboardEvent): void {
       switch (e.key) {
         case 'Escape':
-          closePanel({
-            returnFocus: true
-          })
+          if (mergedShowRef.value) {
+            markEventEffectPerformed(e)
+            closePanel({
+              returnFocus: true
+            })
+          }
           break
         case 'Tab':
           if (keyboardState.shift && e.target === panelInstRef.value?.$el) {
@@ -811,6 +825,7 @@ export default defineComponent({
       minuteValue: minuteValueRef,
       secondValue: secondValueRef,
       amPmValue: amPmValueRef,
+      handleInputKeydown,
       handleTimeInputFocus,
       handleTimeInputBlur,
       handleNowClick,
@@ -827,7 +842,7 @@ export default defineComponent({
       handleAmPmClick,
       handleTimeInputClear,
       handleFocusDetectorFocus,
-      handleMenuKeyDown,
+      handleMenuKeydown,
       handleTriggerClick,
       mergedTheme: themeRef,
       triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
@@ -879,6 +894,7 @@ export default defineComponent({
                       internalForceFocus={this.mergedShow}
                       readonly={this.inputReadonly || this.mergedDisabled}
                       onClick={this.handleTriggerClick}
+                      onKeydown={this.handleInputKeydown}
                     >
                       {this.showIcon
                         ? {
@@ -946,7 +962,7 @@ export default defineComponent({
                                 confirmText={this.localizedPositiveText}
                                 use12Hours={this.use12Hours}
                                 onFocusout={this.handleMenuFocusOut}
-                                onKeydown={this.handleMenuKeyDown}
+                                onKeydown={this.handleMenuKeydown}
                                 onHourClick={this.handleHourClick}
                                 onMinuteClick={this.handleMinuteClick}
                                 onSecondClick={this.handleSecondClick}

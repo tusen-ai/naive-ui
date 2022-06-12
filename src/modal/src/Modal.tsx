@@ -17,7 +17,13 @@ import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { keep, call, warnOnce, useIsComposing } from '../../_utils'
+import {
+  keep,
+  call,
+  warnOnce,
+  useIsComposing,
+  eventEffectNotPerformed
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
@@ -205,7 +211,7 @@ export default defineComponent({
     }
     function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
-      if (props.closeOnEsc) {
+      if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
         !isComposingRef.value && doUpdateShow(false)
       }
     }

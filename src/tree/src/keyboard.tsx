@@ -17,7 +17,6 @@ export function useKeyboard ({
   handleSwitcherClick: (node: TmNode) => void
 }): {
     pendingNodeKeyRef: Ref<null | Key>
-    handleKeyup: (e: KeyboardEvent) => void
     handleKeydown: (e: KeyboardEvent) => void
   } {
   const { value: mergedSelectedKeys } = mergedSelectedKeysRef
@@ -31,9 +30,12 @@ export function useKeyboard ({
         ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
         : null
     )
-  function handleKeyup (e: KeyboardEvent): void {
+  function handleKeydown (e: KeyboardEvent): void {
     const { value: pendingNodeKey } = pendingNodeKeyRef
     if (pendingNodeKey === null) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault()
+      }
       if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
         if (pendingNodeKey === null) {
           const { value: fNodes } = fNodesRef
@@ -54,6 +56,7 @@ export function useKeyboard ({
       if (e.key === 'Enter') {
         handleSelect(fNodes[fIndex])
       } else if (e.key === 'ArrowDown') {
+        e.preventDefault()
         fIndex += 1
         while (fIndex < fNodes.length) {
           if (!fNodes[fIndex].disabled) {
@@ -63,6 +66,7 @@ export function useKeyboard ({
           fIndex += 1
         }
       } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
         fIndex -= 1
         while (fIndex >= 0) {
           if (!fNodes[fIndex].disabled) {
@@ -103,16 +107,8 @@ export function useKeyboard ({
       }
     }
   }
-  function handleKeydown (e: KeyboardEvent): void {
-    switch (e.key) {
-      case 'ArrowUp':
-      case 'ArrowDown':
-        e.preventDefault()
-    }
-  }
   return {
     pendingNodeKeyRef,
-    handleKeyup,
     handleKeydown
   }
 }

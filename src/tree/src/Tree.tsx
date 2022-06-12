@@ -400,7 +400,7 @@ export default defineComponent({
       displayTreeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
 
-    const { pendingNodeKeyRef, handleKeyup, handleKeydown } = useKeyboard({
+    const { pendingNodeKeyRef, handleKeydown } = useKeyboard({
       mergedSelectedKeysRef,
       fNodesRef,
       mergedExpandedKeysRef,
@@ -1277,8 +1277,7 @@ export default defineComponent({
       handleCheck
     })
     const exposedMethods: InternalTreeInst = {
-      handleKeydown,
-      handleKeyup
+      handleKeydown
     }
     const cssVarsRef = computed(() => {
       const {
@@ -1329,7 +1328,6 @@ export default defineComponent({
       handleAfterEnter,
       handleResize,
       handleKeydown: exposedMethods.handleKeydown,
-      handleKeyup: exposedMethods.handleKeyup,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -1348,7 +1346,6 @@ export default defineComponent({
       disabled,
       internalFocusable,
       checkable,
-      handleKeyup,
       handleKeydown,
       handleFocusout
     } = this
@@ -1390,7 +1387,6 @@ export default defineComponent({
           theme={mergedTheme.peers.Scrollbar}
           themeOverrides={mergedTheme.peerOverrides.Scrollbar}
           tabindex={tabindex}
-          onKeyup={mergedFocusable ? handleKeyup : undefined}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
         >
@@ -1437,7 +1433,6 @@ export default defineComponent({
         <NxScrollbar
           class={treeClass}
           tabindex={tabindex}
-          onKeyup={mergedFocusable ? handleKeyup : undefined}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
           style={this.cssVars as CSSProperties}
@@ -1462,7 +1457,6 @@ export default defineComponent({
           tabindex={tabindex}
           ref="selfElRef"
           style={this.cssVars as CSSProperties}
-          onKeyup={mergedFocusable ? handleKeyup : undefined}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
