@@ -51,7 +51,7 @@ pattern.vue
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | The event to show the password. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.25.0 |
-| pattern | `(value: string) => void` | `undefined` | Check the current entry, if return the `False`, input will not respond this entry. | NEXT_VERSION |
+| pattern | `(value: string) => boolean` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |  |
 | value | `string \| [string, string] \| null` | `undefined` | Manually set the input value. When `pair` is `true`, this is an array. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the input is blurred. |  |
