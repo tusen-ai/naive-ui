@@ -9,6 +9,8 @@
 - 修复 `n-popselect` 在选择完关闭菜单后没有触发 `on-update:show`
 - 修复 `n-popselect` 的宽度不能通过 `style` 配置
 - 修复 `n-date-picker` 在设定了 `is-date-disabled` 后年月的快速跳转可能会被禁用，关闭 [#3068](https://github.com/TuSimple/naive-ui/issues/3068)
+- 修复 `n-layout` 在 `keep-alive` 中使用的时候不会维持滚动状态
+- 修复 `n-layout-sider` 在 `keep-alive` 中使用的时候不会维持滚动状态
 
 ### Feats
 

@@ -9,6 +9,8 @@
 - Fix `n-popselect` doesn't trigger `on-update:show` when it select value then menu is closed.
 - Fix `n-popselect`'s width can't be set via `style`.
 - Fix `n-date-picker`'s year & month quick jump may be disabled after `is-date-disabled` is set, closes [#3068](https://github.com/TuSimple/naive-ui/issues/3068).
+- Fix `n-layout` won't keep scroll state in `keep-alive` component, closes [#3054](https://github.com/TuSimple/naive-ui/issues/3054).
+- Fix `n-layout-sider` won't keep scroll state in `keep-alive` component.
 
 ### Feats
 

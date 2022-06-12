@@ -11,12 +11,14 @@ import {
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, useReactivated } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
+import type { LayoutInst } from './interface'
+import { positionProp } from './interface'
 import style from './styles/layout.cssr'
-import { LayoutInst, positionProp } from './interface'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 const layoutProps = {
   embedded: Boolean,
@@ -83,6 +85,23 @@ export function createLayoutComponent (isContent: boolean) {
         }
       }
       provide(layoutInjectionKey, props)
+      let scrollX = 0
+      let scrollY = 0
+      const handleNativeElScroll = (e: Event): void => {
+        const target = e.target as HTMLElement
+        scrollX = target.scrollLeft
+        scrollY = target.scrollTop
+        props.onScroll?.(e)
+      }
+      useReactivated(() => {
+        if (props.nativeScrollbar) {
+          const el = scrollableElRef.value
+          if (el) {
+            el.scrollTop = scrollY
+            el.scrollLeft = scrollX
+          }
+        }
+      })
       const hasSiderStyle: CSSProperties = {
         display: 'flex',
         flexWrap: 'nowrap',
@@ -112,6 +131,7 @@ export function createLayoutComponent (isContent: boolean) {
         scrollbarInstRef,
         hasSiderStyle,
         mergedTheme: themeRef,
+        handleNativeElScroll,
         cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
         themeClass: themeClassHandle?.themeClass,
         onRender: themeClassHandle?.onRender,
@@ -135,7 +155,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollableElRef"
               class={`${mergedClsPrefix}-layout-scroll-container`}
               style={[this.contentStyle, hasSiderStyle] as any}
-              onScroll={this.onScroll}
+              onScroll={this.handleNativeElScroll}
             >
               {this.$slots}
             </div>
