@@ -24,7 +24,6 @@ import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
-import type { DatePickerTheme } from '../styles/light'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
@@ -45,6 +44,7 @@ import {
   resolveSlot
 } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 import {

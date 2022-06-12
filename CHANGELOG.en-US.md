@@ -8,6 +8,7 @@
 - Fix `n-data-table` fixed selection may overlap with other fixed columns if it's width is not default, closes [#3067](https://github.com/TuSimple/naive-ui/issues/3067).
 - Fix `n-popselect` doesn't trigger `on-update:show` when it select value then menu is closed.
 - Fix `n-popselect`'s width can't be set via `style`.
+- Fix `n-date-picker`'s year & month quick jump may be disabled after `is-date-disabled` is set, closes [#3068](https://github.com/TuSimple/naive-ui/issues/3068).
 
 ### Feats
 

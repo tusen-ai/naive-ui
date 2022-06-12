@@ -8,6 +8,7 @@
 - 修复 `n-data-table` 固定的选择列在设定了非默认宽度的情况下可能和其他列重叠，关闭 [#3067](https://github.com/TuSimple/naive-ui/issues/3067)
 - 修复 `n-popselect` 在选择完关闭菜单后没有触发 `on-update:show`
 - 修复 `n-popselect` 的宽度不能通过 `style` 配置
+- 修复 `n-date-picker` 在设定了 `is-date-disabled` 后年月的快速跳转可能会被禁用，关闭 [#3068](https://github.com/TuSimple/naive-ui/issues/3068)
 
 ### Feats
 
