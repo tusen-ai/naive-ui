@@ -3,7 +3,12 @@
 </markdown>
 
 <template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    default-expand-all
+  />
 </template>
 
 <script lang="ts">

@@ -22,6 +22,7 @@ focus.vue
 event.vue
 input-props.vue
 status.vue
+pattern.vue
 ```
 
 ## API
@@ -30,6 +31,7 @@ status.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-input | `(value: string) => boolean` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
 | autofocus | `boolean` | `false` | Whether to autofocus. |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | Sizing property for when the input is of type `textarea`. e.g. `{ minRows: 1, maxRows: 3 }`. |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |

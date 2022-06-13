@@ -1,3 +1,4 @@
+import { popselectLight } from '../../popselect/styles'
 import { selectLight } from '../../select/styles'
 import { inputLight } from '../../input/styles'
 import { commonLight, ThemeCommonVars } from '../../_styles/common'
@@ -73,7 +74,8 @@ const paginationLight = createTheme({
   common: commonLight,
   peers: {
     Select: selectLight,
-    Input: inputLight
+    Input: inputLight,
+    Popselect: popselectLight
   },
   self
 })

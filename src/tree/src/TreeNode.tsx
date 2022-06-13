@@ -69,6 +69,8 @@ const TreeNode = defineComponent({
       if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
           NTree.loadingKeysRef.value.add(tmNode.key)
+        } else {
+          return
         }
         const {
           onLoadRef: { value: onLoad }
@@ -108,7 +110,7 @@ const TreeNode = defineComponent({
         NTree.handleSelect(tmNode)
       }
       if (expandOnClick && !tmNode.isLeaf) {
-        NTree.handleSwitcherClick(tmNode)
+        handleSwitcherClick()
       }
     }
 

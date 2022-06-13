@@ -9,6 +9,7 @@
     multiple
     directory-dnd
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :max="5"
   >
     <n-upload-dragger>
       <div style="margin-bottom: 12px">

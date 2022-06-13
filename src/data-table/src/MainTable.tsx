@@ -61,7 +61,10 @@ export default defineComponent({
     }
     const exposedMethods: MainTableRef = {
       getBodyElement,
-      getHeaderElement
+      getHeaderElement,
+      scrollTo (arg0: any, arg1?: any) {
+        bodyInstRef.value?.scrollTo(arg0, arg1)
+      }
     }
     watchEffect(() => {
       const { value: selfEl } = selfElRef

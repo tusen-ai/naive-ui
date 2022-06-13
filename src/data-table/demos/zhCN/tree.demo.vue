@@ -5,7 +5,12 @@
 </markdown>
 
 <template>
-  <n-data-table :columns="columns" :data="data" :row-key="rowKey" />
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :row-key="rowKey"
+    default-expand-all
+  />
 </template>
 
 <script lang="ts">

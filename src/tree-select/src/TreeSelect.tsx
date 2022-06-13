@@ -46,6 +46,7 @@ import type { ThemeProps } from '../../_mixins'
 import {
   call,
   ExtractPublicPropTypes,
+  markEventEffectPerformed,
   MaybeArray,
   resolveSlot,
   resolveWrappedSlot,
@@ -525,16 +526,16 @@ export default defineComponent({
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
     }
-    function handleKeydown (e: KeyboardEvent): void {
+    function treeHandleKeydown (e: KeyboardEvent): void {
       const { value: treeInst } = treeInstRef
       if (treeInst) {
         treeInst.handleKeydown(e)
       }
     }
-    function handleKeyup (e: KeyboardEvent): void {
+    function handleKeydown (e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (mergedShowRef.value) {
-          treeHandleKeyup(e)
+          treeHandleKeydown(e)
           if (!props.multiple) {
             closeMenu()
             focusSelection()
@@ -544,20 +545,17 @@ export default defineComponent({
         }
         e.preventDefault()
       } else if (e.key === 'Escape') {
-        closeMenu()
-        focusSelection()
+        if (mergedShowRef.value) {
+          markEventEffectPerformed(e)
+          closeMenu()
+          focusSelection()
+        }
       } else {
         if (mergedShowRef.value) {
-          treeHandleKeyup(e)
+          treeHandleKeydown(e)
         } else if (e.key === 'ArrowDown') {
           openMenu()
         }
-      }
-    }
-    function treeHandleKeyup (e: KeyboardEvent): void {
-      const { value: treeInst } = treeInstRef
-      if (treeInst) {
-        treeInst.handleKeyup(e)
       }
     }
     function handleTabOut (): void {
@@ -659,7 +657,6 @@ export default defineComponent({
       handleDeleteOption,
       handlePatternInput,
       handleKeydown,
-      handleKeyup,
       handleTabOut,
       handleMenuMousedown,
       mergedTheme: themeRef,
@@ -709,8 +706,11 @@ export default defineComponent({
                       onBlur={this.handleTriggerBlur}
                       onDeleteOption={this.handleDeleteOption}
                       onKeydown={this.handleKeydown}
-                      onKeyup={this.handleKeyup}
-                    />
+                    >
+                      {{
+                        arrow: () => [this.$slots.arrow?.()]
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,
@@ -757,7 +757,6 @@ export default defineComponent({
                               ]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
-                              onKeyup={this.handleKeyup}
                               onKeydown={this.handleKeydown}
                               onFocusin={this.handleMenuFocusin}
                               onFocusout={this.handleMenuFocusout}

@@ -45,7 +45,7 @@ export default defineComponent({
       type: Function as PropType<(e: FocusEvent) => void>,
       required: true
     },
-    onKeyup: {
+    onKeydown: {
       type: Function as PropType<(e: KeyboardEvent) => void>,
       required: true
     },
@@ -135,12 +135,7 @@ export default defineComponent({
                 onMousedown={this.onMousedown}
                 onFocusin={this.handleFocusin}
                 onFocusout={this.handleFocusout}
-                onKeyup={this.onKeyup}
-                style={
-                  {
-                    '--n-col-count': this.menuModel.length
-                  } as any
-                }
+                onKeydown={this.onKeydown}
               >
                 {this.menuModel[0].length ? (
                   <div class={`${mergedClsPrefix}-cascader-submenu-wrapper`}>

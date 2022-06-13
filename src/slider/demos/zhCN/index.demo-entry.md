@@ -16,6 +16,7 @@ reverse.vue
 vertical.vue
 show-tooltip.vue
 multiple-debug.vue
+custom-thumb.vue
 ```
 
 ## API
@@ -39,3 +40,9 @@ multiple-debug.vue
 | vertical | `boolean` | `false` | 是否启用垂直模式 |  |
 | value | `number \| [number, number] \| null` | `undefined` | 值 |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | 值更新的回调 |  |
+
+### Slider Slots
+
+| 名称  | 参数 | 说明     | 版本         |
+| ----- | ---- | -------- | ------------ |
+| thumb | `()` | 滑块按钮 | NEXT_VERSION |

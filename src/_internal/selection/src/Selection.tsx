@@ -94,7 +94,6 @@ export default defineComponent({
     inputProps: Object as PropType<InputHTMLAttributes>,
     focused: Boolean,
     renderTag: Function as PropType<RenderTag>,
-    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
@@ -900,7 +899,6 @@ export default defineComponent({
         onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
-        onKeyup={this.onKeyup}
         onKeydown={this.onKeydown}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}

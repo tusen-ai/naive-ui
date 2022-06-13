@@ -26,12 +26,7 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import {
-  formatLength,
-  resolveSlot,
-  resolveWrappedSlot,
-  useOnResize
-} from '../../../_utils'
+import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -44,7 +39,8 @@ import type {
   RenderLabel,
   Size,
   InternalExposedProps,
-  RenderOption
+  RenderOption,
+  NodeProps
 } from './interface'
 import {
   internalSelectionMenuInjectionKey,
@@ -77,7 +73,6 @@ export default defineComponent({
       type: [String, Number, Array] as PropType<Value | null>,
       default: null
     },
-    width: [Number, String],
     autoPending: Boolean,
     virtualScroll: {
       type: Boolean,
@@ -100,6 +95,7 @@ export default defineComponent({
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
     renderOption: Function as PropType<RenderOption>,
+    nodeProps: Function as PropType<NodeProps>,
     showCheckmark: { type: Boolean, default: true },
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
@@ -316,12 +312,13 @@ export default defineComponent({
       handleOptionMouseEnter,
       handleOptionClick,
       valueSetRef,
+      pendingTmNodeRef: pendingNodeRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
       showCheckmarkRef: toRef(props, 'showCheckmark'),
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
       renderOptionRef: toRef(props, 'renderOption'),
-      pendingTmNodeRef: pendingNodeRef,
       labelFieldRef: toRef(props, 'labelField'),
       valueFieldRef: toRef(props, 'valueField')
     })
@@ -448,10 +445,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={[
-          { width: formatLength(this.width) },
-          this.cssVars as CSSProperties
-        ]}
+        style={this.cssVars as CSSProperties}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}

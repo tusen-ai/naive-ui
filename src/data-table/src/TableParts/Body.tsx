@@ -310,7 +310,14 @@ export default defineComponent({
       scrollbarInstRef.value?.sync()
     }
     const exposedMethods: MainTableBodyRef = {
-      getScrollContainer
+      getScrollContainer,
+      scrollTo (arg0: any, arg1?: any) {
+        if (virtualScrollRef.value) {
+          virtualListRef.value?.scrollTo(arg0, arg1)
+        } else {
+          scrollbarInstRef.value?.scrollTo(arg0, arg1)
+        }
+      }
     }
 
     interface StyleCProps {
@@ -803,7 +810,7 @@ export default defineComponent({
                         ) : column.type === 'expand' ? (
                           !isSummary ? (
                             !column.expandable ||
-                            column.expandable?.(rowData, rowIndex) ? (
+                            column.expandable?.(rowData) ? (
                               <ExpandTrigger
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}

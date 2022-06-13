@@ -38,7 +38,12 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import {
   NInternalSelectMenu,
@@ -742,7 +747,10 @@ export default defineComponent({
           }
           break
         case 'Escape':
-          closeMenu()
+          if (mergedShowRef.value) {
+            markEventEffectPerformed(e)
+            closeMenu()
+          }
           triggerRef.value?.focus()
           break
       }

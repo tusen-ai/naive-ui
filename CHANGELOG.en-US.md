@@ -1,5 +1,39 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-button` is focused after click with `:focusable="false"`, closes [#3071](https://github.com/TuSimple/naive-ui/issues/3071).
+- Fix `n-data-table` fixed selection may overlap with other fixed columns if it's width is not default, closes [#3067](https://github.com/TuSimple/naive-ui/issues/3067).
+- Fix `n-popselect` doesn't trigger `on-update:show` when it select value then menu is closed.
+- Fix `n-popselect`'s width can't be set via `style`.
+- Fix `n-date-picker`'s year & month quick jump may be disabled after `is-date-disabled` is set, closes [#3068](https://github.com/TuSimple/naive-ui/issues/3068).
+- Fix `n-layout` won't keep scroll state in `keep-alive` component, closes [#3054](https://github.com/TuSimple/naive-ui/issues/3054).
+- Fix `n-layout-sider` won't keep scroll state in `keep-alive` component.
+- Fix `n-tree` may trigger loading multiple times.
+- Fix `n-tree` throws error on async expanding data with `:expand-on-click="true"`, closes [#3089](https://github.com/TuSimple/naive-ui/issues/3089).
+- Fix `n-slider`'s tooltip has no enter transition when it's triggered by keyboard.
+- Fix `n-slider`'s mark line wrap isn't correct when it appears at right-most position.
+- Fix `n-upload`'s inner anchor element may show focus-visible outline style.
+- Fix `n-upload` shows slot warning when `list-type="image-card"`.
+- Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
+
+### Feats
+
+- 🌟 `n-pagination` adds dropdown menu for fast jump button.
+- 🌟 `n-input` adds `allow-input` prop.
+- 🌟 `n-data-table` adds `default-expand-all` prop, closes [#3073](https://github.com/TuSimple/naive-ui/issues/3073).
+- 🌟 `n-modal` with inner popup component like `n-select` can handle esc key pressing correctly, closes [#2973](https://github.com/TuSimple/naive-ui/issues/2973).
+- `n-tree-select` adds `arrow` slot, closes [#3084](https://github.com/TuSimple/naive-ui/issues/3084).
+- `n-cascader` will show corresponding submenu after checkbox is clicked, closes [#3079](https://github.com/TuSimple/naive-ui/issues/3079).
+- `n-upload` will disable dragger when maximum number of files was reached.
+- `n-select` adds `node-props` prop.
+- `n-popselect` adds `node-props` prop.
+- `n-popselect` adds `virtual-scroll` prop.
+- `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
+- `n-slider` adds `thumb` slot.
+
 ## 2.30.3
 
 ### Fixes
@@ -8,7 +42,7 @@
 - Fix `n-drawer`'s `show-mask` prop will warn if `'transparent'` is passed.
 - Fix `n-calendar` doesn't call `on-panel-change` when date of other months is clicked, closes [#3063](https://github.com/TuSimple/naive-ui/issues/3063).
 
-## Feats
+### Feats
 
 - 🌟 UMD usage is supported.
 - `n-cascader` will expand menu to selected value, closes [#3058](https://github.com/TuSimple/naive-ui/issues/3058).

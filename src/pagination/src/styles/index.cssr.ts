@@ -1,5 +1,19 @@
 import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 
+const hoverStyleProps = `
+  background: var(--n-item-color-hover);
+  color: var(--n-item-text-color-hover);
+  border: var(--n-item-border-hover);
+`
+
+const hoverStyleChildren = [
+  cM('button', `
+    background: var(--n-button-color-hover);
+    border: var(--n-button-border-hover);
+    color: var(--n-button-icon-color-hover);
+  `)
+]
+
 // vars:
 // --n-item-font-size
 // --n-select-width
@@ -107,17 +121,8 @@ export default cB('pagination', `
       `)
     ]),
     cNotM('disabled', [
-      c('&:hover', `
-        background: var(--n-item-color-hover);
-        color: var(--n-item-text-color-hover);
-        border: var(--n-item-border-hover);
-      `, [
-        cM('button', `
-          background: var(--n-button-color-hover);
-          border: var(--n-button-border-hover);
-          color: var(--n-button-icon-color-hover);
-        `)
-      ]),
+      cM('hover', hoverStyleProps, hoverStyleChildren),
+      c('&:hover', hoverStyleProps, hoverStyleChildren),
       c('&:active', `
         background: var(--n-item-color-pressed);
         color: var(--n-item-text-color-pressed);

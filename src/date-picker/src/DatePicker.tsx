@@ -24,7 +24,6 @@ import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
-import type { DatePickerTheme } from '../styles/light'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
@@ -42,9 +41,11 @@ import {
   useAdjustedTo,
   createKey,
   warnOnce,
-  resolveSlot
+  resolveSlot,
+  markEventEffectPerformed
 } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 import {
@@ -478,11 +479,14 @@ export default defineComponent({
       if (onUpdateShow) call(onUpdateShow, show)
       uncontrolledShowRef.value = show
     }
-    function handleKeyDown (e: KeyboardEvent): void {
+    function handleKeydown (e: KeyboardEvent): void {
       if (e.key === 'Escape') {
-        closeCalendar({
-          returnFocus: true
-        })
+        if (mergedShowRef.value) {
+          markEventEffectPerformed(e)
+          closeCalendar({
+            returnFocus: true
+          })
+        }
       }
       // We need to handle the conflict with normal date value input
       // const { value: mergedValue } = mergedValueRef
@@ -490,6 +494,12 @@ export default defineComponent({
       //   const nextValue = getDerivedTimeFromKeyboardEvent(mergedValue, e)
       //   doUpdateValue(nextValue)
       // }
+    }
+    function handleInputKeydown (e: KeyboardEvent): void {
+      if (e.key === 'Escape' && mergedShowRef.value) {
+        markEventEffectPerformed(e)
+        // closeCalendar will be called in handleDeactivated
+      }
     }
     function handleClear (): void {
       doUpdateShow(false)
@@ -902,8 +912,9 @@ export default defineComponent({
       isValueInvalid: uniVaidation.isValueInvalidRef,
       isStartValueInvalid: dualValidation.isStartValueInvalidRef,
       isEndValueInvalid: dualValidation.isEndValueInvalidRef,
+      handleInputKeydown,
       handleClickOutside,
-      handleKeyDown,
+      handleKeydown,
       handleClear,
       handlePanelClear,
       handleTriggerClick,
@@ -934,7 +945,7 @@ export default defineComponent({
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
       onClear: this.handlePanelClear,
-      onKeydown: this.handleKeyDown,
+      onKeydown: this.handleKeydown,
       onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',
       value: this.pendingValue,
@@ -986,6 +997,7 @@ export default defineComponent({
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
+      onKeydown: this.handleInputKeydown,
       onActivate: this.handleInputActivate,
       onDeactivate: this.handleInputDeactivate,
       onFocus: this.handleInputFocus,
@@ -1001,7 +1013,7 @@ export default defineComponent({
           this.triggerThemeClass
         ]}
         style={this.triggerCssVars as CSSProperties}
-        onKeydown={this.handleKeyDown}
+        onKeydown={this.handleKeydown}
       >
         <VBinder>
           {{

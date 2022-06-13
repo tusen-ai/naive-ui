@@ -1,4 +1,5 @@
 import { changeColor } from 'seemly'
+import { popselectDark } from '../../popselect/styles'
 import { selectDark } from '../../select/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
@@ -10,7 +11,8 @@ const paginationDark: PaginationTheme = {
   common: commonDark,
   peers: {
     Select: selectDark,
-    Input: inputDark
+    Input: inputDark,
+    Popselect: popselectDark
   },
   self (vars) {
     const { primaryColor, opacity3 } = vars

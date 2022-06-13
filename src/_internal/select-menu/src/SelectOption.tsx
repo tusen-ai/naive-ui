@@ -10,7 +10,7 @@ import {
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectOption } from '../../../select/src/interface'
-import { render } from '../../../_utils'
+import { render, mergeEventHandlers } from '../../../_utils'
 import { CheckmarkIcon } from '../../icons'
 import { NBaseIcon } from '../../icon'
 import {
@@ -64,6 +64,7 @@ export default defineComponent({
       labelFieldRef,
       valueFieldRef,
       showCheckmarkRef,
+      nodePropsRef,
       handleOptionClick,
       handleOptionMouseEnter
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -97,6 +98,7 @@ export default defineComponent({
         return parent && parent.rawNode.type === 'group'
       }),
       showCheckmark: showCheckmarkRef,
+      nodeProps: nodePropsRef,
       isPending: isPendingRef,
       isSelected: useMemo(() => {
         const { value } = valueRef
@@ -128,6 +130,7 @@ export default defineComponent({
       isPending,
       isGrouped,
       showCheckmark,
+      nodeProps,
       renderOption,
       renderLabel,
       handleClick,
@@ -145,11 +148,14 @@ export default defineComponent({
           ),
           showCheckmark && checkmark
         ]
+    const attrs = nodeProps?.(rawNode)
     const node = (
       <div
+        {...attrs}
         class={[
           `${clsPrefix}-base-select-option`,
           rawNode.class,
+          attrs?.class,
           {
             [`${clsPrefix}-base-select-option--disabled`]: rawNode.disabled,
             [`${clsPrefix}-base-select-option--selected`]: isSelected,
@@ -158,10 +164,13 @@ export default defineComponent({
             [`${clsPrefix}-base-select-option--show-checkmark`]: showCheckmark
           }
         ]}
-        style={rawNode.style}
-        onClick={handleClick}
-        onMouseenter={handleMouseEnter}
-        onMousemove={handleMouseMove}
+        style={[attrs?.style || '', rawNode.style || '']}
+        onClick={mergeEventHandlers([handleClick, attrs?.onClick])}
+        onMouseenter={mergeEventHandlers([
+          handleMouseEnter,
+          attrs?.onMouseenter
+        ])}
+        onMousemove={mergeEventHandlers([handleMouseMove, attrs?.onMousemove])}
       >
         <div class={`${clsPrefix}-base-select-option__content`}>{children}</div>
       </div>

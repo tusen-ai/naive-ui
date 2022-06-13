@@ -38,6 +38,7 @@ export default defineComponent({
           return `Q ${item.dateObject.quarter}`
       }
     }
+    const { useAsQuickJump } = props
     const renderItem = (
       item: YearItem | MonthItem | QuarterItem,
       i: number,
@@ -57,11 +58,11 @@ export default defineComponent({
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                mergedIsDateDisabled(item.ts)
+                !useAsQuickJump && mergedIsDateDisabled(item.ts)
             }
           ]}
           onClick={() => {
-            props.useAsQuickJump
+            useAsQuickJump
               ? handleQuickMonthClick(item, (value) =>
                 (props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
               )

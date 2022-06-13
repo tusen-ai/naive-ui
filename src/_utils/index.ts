@@ -14,7 +14,8 @@ export {
   resolveSlot,
   resolveSlotWithProps,
   resolveWrappedSlot,
-  isSlotEmpty
+  isSlotEmpty,
+  mergeEventHandlers
 } from './vue'
 export type { MaybeArray } from './vue'
 export {
@@ -34,4 +35,5 @@ export { formatLength, color2Class } from './css'
 export { createKey } from './cssr'
 export { isJsdom } from './env/is-jsdom'
 export { isBrowser } from './env/is-browser'
+export { eventEffectNotPerformed, markEventEffectPerformed } from './event'
 export * from './composable'

@@ -69,6 +69,7 @@ keep-alive-debug.vue
 | data | `Array<object>` | `[]` | 需要展示的数据 |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
+| default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | NEXT_VERSION |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
@@ -184,13 +185,14 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| clearFilters | `() => void` | 清空所有的 filter 状态 |
-| clearSorter | `() => void` | 清空所有的 sort 状态 |
-| filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |
-| page | `(page: number) => void` | 手动设置 page |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clearFilters | `() => void` | 清空所有的 filter 状态 |  |
+| clearSorter | `() => void` | 清空所有的 sort 状态 |  |
+| filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
+| page | `(page: number) => void` | 手动设置 page |  |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | NEXT_VERSION |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
 
 ### DataTable Slots
 

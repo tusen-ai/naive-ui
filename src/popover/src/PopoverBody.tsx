@@ -64,6 +64,7 @@ export const popoverBodyProps = {
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   // private
+  internalDeactivateImmediately: Boolean,
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   internalTrapFocus: Boolean,
@@ -110,7 +111,7 @@ export default defineComponent({
     const displayedRef = ref(false)
     watchEffect(() => {
       const { show } = props
-      if (show && !isJsdom()) {
+      if (show && !isJsdom() && !props.internalDeactivateImmediately) {
         displayedRef.value = true
       }
     })
@@ -150,14 +151,23 @@ export default defineComponent({
       return directives
     })
     const styleRef = computed(() => {
-      return [
-        {
-          width: props.width === 'trigger' ? '' : formatLength(props.width)
-        },
-        props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
-        props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
-        inlineThemeDisabled ? undefined : cssVarsRef.value
-      ]
+      const width =
+        props.width === 'trigger' ? undefined : formatLength(props.width)
+      const style: CSSProperties[] = []
+      if (width) {
+        style.push({ width })
+      }
+      const { maxWidth, minWidth } = props
+      if (maxWidth) {
+        style.push({ maxWidth: formatLength(maxWidth) })
+      }
+      if (minWidth) {
+        style.push({ maxWidth: formatLength(minWidth) })
+      }
+      if (!inlineThemeDisabled) {
+        style.push(cssVarsRef.value)
+      }
+      return style
     })
     const cssVarsRef = computed(() => {
       const {

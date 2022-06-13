@@ -14,7 +14,13 @@ import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, call, warnOnce, useIsComposing } from '../../_utils'
+import {
+  formatLength,
+  call,
+  warnOnce,
+  useIsComposing,
+  eventEffectNotPerformed
+} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { ScrollbarProps } from '../../_internal'
 import { drawerLight, DrawerTheme } from '../styles'
@@ -172,9 +178,9 @@ export default defineComponent({
 
     const isComposingRef = useIsComposing()
 
-    function handleEsc (): void {
+    function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
-      if (props.closeOnEsc) {
+      if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
         !isComposingRef.value && doUpdateShow(false)
       }
     }

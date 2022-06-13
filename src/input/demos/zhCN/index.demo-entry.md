@@ -22,6 +22,7 @@ focus.vue
 event.vue
 input-props.vue
 status.vue
+pattern.vue
 rtl-debug.vue
 ```
 
@@ -31,6 +32,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| allow-input | `(value: string) => false` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
 | autofocus | `boolean` | `false` | 是否自动获取焦点 |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如 `{ minRows: 1, maxRows: 3 }` |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |

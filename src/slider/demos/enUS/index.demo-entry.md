@@ -16,6 +16,7 @@ reverse.vue
 vertical.vue
 show-tooltip.vue
 multiple-debug.vue
+custom-thumb.vue
 ```
 
 ## API
@@ -39,3 +40,9 @@ multiple-debug.vue
 | vertical | `boolean` | `false` | Whether to enable vertical mode. |  |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the slider. |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | Callback on value update. |  |
+
+### Slider Slots
+
+| Name  | Parameters | Description          | Version      |
+| ----- | ---------- | -------------------- | ------------ |
+| thumb | `()`       | Thumb of the slider. | NEXT_VERSION |

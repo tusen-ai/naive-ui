@@ -4,7 +4,6 @@ import {
   provide,
   defineComponent,
   PropType,
-  mergeProps,
   ExtractPropTypes
 } from 'vue'
 import { popoverBaseProps } from '../../popover/src/Popover'
@@ -12,7 +11,7 @@ import type { PopoverInternalProps } from '../../popover/src/Popover'
 import { NPopover } from '../../popover'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
-import { omit, keep, createRefSetter } from '../../_utils'
+import { omit, keep, createRefSetter, mergeEventHandlers } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -40,6 +39,7 @@ export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 export default defineComponent({
   name: 'Popselect',
   props: popselectProps,
+  inheritAttrs: false,
   __popover__: true,
   setup (props) {
     const themeRef = useTheme(
@@ -88,16 +88,22 @@ export default defineComponent({
         onMouseenter,
         onMouseleave
       ) => {
+        const { $attrs } = this
         return (
           <NPopselectPanel
-            {...mergeProps(this.$attrs, {
-              class: className,
-              style
-            })}
+            {...$attrs}
+            class={[$attrs.class, className]}
+            style={[$attrs.style, style]}
             {...keep(this.$props, panelPropKeys)}
             ref={createRefSetter(ref)}
-            onMouseenter={onMouseenter}
-            onMouseleave={onMouseleave}
+            onMouseenter={mergeEventHandlers([
+              onMouseenter,
+              $attrs.onMouseenter as any
+            ])}
+            onMouseleave={mergeEventHandlers([
+              onMouseleave,
+              $attrs.onMouseleave as any
+            ])}
           >
             {{
               action: () => this.$slots.action?.(),
@@ -108,7 +114,11 @@ export default defineComponent({
       }
     }
     return (
-      <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
+      <NPopover
+        {...omit(this.$props, panelPropKeys)}
+        {...popoverProps}
+        internalDeactivateImmediately
+      >
         {{
           trigger: () => this.$slots.default?.()
         }}

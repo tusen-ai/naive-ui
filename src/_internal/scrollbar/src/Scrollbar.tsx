@@ -11,9 +11,7 @@ import {
   CSSProperties,
   watchEffect,
   VNode,
-  HTMLAttributes,
-  onActivated,
-  onDeactivated
+  HTMLAttributes
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -24,6 +22,7 @@ import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
+import { useReactivated } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import { Wrapper } from './Wrapper'
@@ -271,14 +270,7 @@ const Scrollbar = defineComponent({
       return contentRef.value
     })
 
-    let isDeactivated = false
-    let activateStateInitialized = false
-    onActivated(() => {
-      isDeactivated = false
-      if (!activateStateInitialized) {
-        activateStateInitialized = true
-        return
-      }
+    const activateState = useReactivated(() => {
       // Only restore for builtin container & content
       if (!props.container) {
         // remount
@@ -288,20 +280,14 @@ const Scrollbar = defineComponent({
         })
       }
     })
-    onDeactivated(() => {
-      isDeactivated = true
-      if (!activateStateInitialized) {
-        activateStateInitialized = true
-      }
-    })
 
     // methods
     const handleContentResize = (): void => {
-      if (isDeactivated) return
+      if (activateState.isDeactivated) return
       sync()
     }
     const handleContainerResize = (e: ResizeObserverEntry): void => {
-      if (isDeactivated) return
+      if (activateState.isDeactivated) return
       const { onResize } = props
       if (onResize) onResize(e)
       sync()
