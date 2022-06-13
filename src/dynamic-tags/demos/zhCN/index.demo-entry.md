@@ -11,6 +11,7 @@ form.vue
 slot.vue
 render-tag.vue
 option-format.vue
+on-create.vue
 ```
 
 ## API
@@ -32,7 +33,7 @@ option-format.vue
 | tag-style | `string \| Object` | `undefined` | 自定义标签的样式 |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |  |
 | value | `string[] \| Array<{ label: string, value: string }>` | `undefined` | 受控模式下的值 |  |
-| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | 根据输入的值创造对应的选项 | 2.27.0 |
+| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | 根据输入的值创造对应的选项 | NEXT_VERSION |
 | on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | 组件值发生变化时的回调 |  |
 
 #### DynamicTagsOption Type

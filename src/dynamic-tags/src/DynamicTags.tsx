@@ -152,7 +152,7 @@ export default defineComponent({
       const nextValue = externalValue ?? inputValueRef.value
       if (nextValue) {
         const tags = mergedValueRef.value.slice(0)
-        tags.push(nextValue)
+        tags.push(props.onCreate(nextValue))
         doChange(tags)
       }
       showInputRef.value = false
