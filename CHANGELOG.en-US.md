@@ -19,6 +19,7 @@
 - Fix `n-upload` shows slot warning when `list-type="image-card"`.
 - Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
 - Fix `n-dynamic-tags`'s `on-create` prop not working.
+- Fix virtual scroll stucking issue introduced by Chrome 102, closes [#3048](https://github.com/TuSimple/naive-ui/issues/3048).
 
 ### Feats
 

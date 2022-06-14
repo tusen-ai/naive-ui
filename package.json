@@ -156,7 +156,7 @@
     "treemate": "^0.3.11",
     "vdirs": "^0.1.8",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.41"
+    "vueuc": "^0.4.42"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",
