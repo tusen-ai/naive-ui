@@ -19,6 +19,7 @@
 - 修复 `n-upload` 在 `list-type="image-card"` 时会出现 slot 相关 warning
 - 修复 `n-upload` 在 `list-type="image-card"` 图片的边角会溢出列表项
 - 修复 `n-dynamic-tags` 的 `on-create` 属性不生效
+- 修复 `n-dropdown` 中传入 `'scrollable'` 不生效
 
 ### Feats
 

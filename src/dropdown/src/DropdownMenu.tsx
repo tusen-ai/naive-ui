@@ -11,6 +11,7 @@ import {
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { renderArrow } from '../../popover/src/PopoverBody'
+import { NxScrollbar } from '../../_internal/scrollbar'
 import NDropdownDivider from './DropdownDivider'
 // eslint-disable-next-line import/no-cycle
 import NDropdownGroup from './DropdownGroup'
@@ -42,6 +43,7 @@ export interface NDropdownMenuInjection {
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
+    scrollable: Boolean,
     showArrow: Boolean,
     arrowStyle: [String, Object] as PropType<string | CSSProperties>,
     clsPrefix: {
@@ -99,42 +101,56 @@ export default defineComponent({
     }
   },
   render () {
-    const { parentKey, clsPrefix } = this
+    const { parentKey, clsPrefix, scrollable } = this
+    const menuOptionsNode = this.tmNodes.map((tmNode) => {
+      const { rawNode } = tmNode
+      if (isRenderNode(rawNode)) {
+        return (
+          <NDropdownRenderOption
+            tmNode={tmNode as unknown as TreeNode<DropdownRenderOption>}
+            key={tmNode.key}
+          />
+        )
+      }
+      if (isDividerNode(rawNode)) {
+        return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
+      }
+      if (isGroupNode(rawNode)) {
+        return (
+          <NDropdownGroup
+            clsPrefix={clsPrefix}
+            tmNode={tmNode}
+            parentKey={parentKey}
+            key={tmNode.key}
+          />
+        )
+      }
+      return (
+        <NDropdownOption
+          clsPrefix={clsPrefix}
+          tmNode={tmNode}
+          parentKey={parentKey}
+          key={tmNode.key}
+          props={rawNode.props}
+        />
+      )
+    })
     return (
-      <div class={`${clsPrefix}-dropdown-menu`} ref="bodyRef">
-        {this.tmNodes.map((tmNode) => {
-          const { rawNode } = tmNode
-          if (isRenderNode(rawNode)) {
-            return (
-              <NDropdownRenderOption
-                tmNode={tmNode as unknown as TreeNode<DropdownRenderOption>}
-                key={tmNode.key}
-              />
-            )
-          }
-          if (isDividerNode(rawNode)) {
-            return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
-          }
-          if (isGroupNode(rawNode)) {
-            return (
-              <NDropdownGroup
-                clsPrefix={clsPrefix}
-                tmNode={tmNode}
-                parentKey={parentKey}
-                key={tmNode.key}
-              />
-            )
-          }
-          return (
-            <NDropdownOption
-              clsPrefix={clsPrefix}
-              tmNode={tmNode}
-              parentKey={parentKey}
-              key={tmNode.key}
-              props={rawNode.props}
-            />
-          )
-        })}
+      <div
+        class={`${clsPrefix}-dropdown-menu ${
+          scrollable ? clsPrefix + '-dropdown-menu--scrollable' : ''
+        } `}
+        ref="bodyRef"
+      >
+        {scrollable ? (
+          <NxScrollbar contentClass={`${clsPrefix}-dropdown-menu__content`}>
+            {{
+              default: () => menuOptionsNode
+            }}
+          </NxScrollbar>
+        ) : (
+          menuOptionsNode
+        )}
         {this.showArrow
           ? renderArrow({
             clsPrefix,

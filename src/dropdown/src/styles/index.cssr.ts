@@ -1,4 +1,4 @@
-import { c, cB, cM, cE } from '../../../_utils/cssr'
+import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -29,7 +29,6 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 
 export default cB('dropdown-menu', `
   transform-origin: inherit;
-  padding: var(--n-padding);
   background-color: var(--n-color);
   border-radius: var(--n-border-radius);
   box-shadow: var(--n-box-shadow);
@@ -174,5 +173,19 @@ export default cB('dropdown-menu', `
   cB('dropdown-menu-wrapper', `
     transform-origin: inherit;
     width: fit-content;
-  `)
+  `),
+  c('>', [
+    cB('scrollbar', `
+      height: inherit;
+      max-height: inherit;
+    `)
+  ]),
+  cNotM('scrollable', `
+    padding: var(--n-padding);
+  `),
+  cM('scrollable', [
+    cE('content', `
+      padding: var(--n-padding);
+    `)
+  ])
 ])
