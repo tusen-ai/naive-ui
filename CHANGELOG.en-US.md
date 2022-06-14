@@ -18,6 +18,7 @@
 - Fix `n-upload`'s inner anchor element may show focus-visible outline style.
 - Fix `n-upload` shows slot warning when `list-type="image-card"`.
 - Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
+- Fix `n-dynamic-tags`'s `on-create` prop not working.
 
 ### Feats
 

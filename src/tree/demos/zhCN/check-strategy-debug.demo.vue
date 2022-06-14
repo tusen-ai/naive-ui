@@ -48,30 +48,43 @@
           Uncascade
         </template>
       </n-switch>
+      <n-switch v-model:value="disabled">
+        <template #checked>
+          Disabled
+        </template>
+        <template #unchecked>
+          Enabled
+        </template>
+      </n-switch>
     </n-space>
     <n-tree
+      v-model:checked-keys="checkedKeys"
       default-expand-all
+      :disabled="disabled"
       :selectable="selectable"
       :multiple="multiple"
       :cascade="cascade"
       :checkable="checkable"
       :check-strategy="checkStrategy"
       :data="options"
-      :default-checked-keys="['Dig It', 'go']"
     />
   </n-space>
+  {{ JSON.stringify(checkedKeys) }}
 </template>
+
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
+      disabled: ref(false),
       cascade: ref(false),
       multiple: ref(false),
       checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       checkable: ref(false),
       selectable: ref(false),
+      checkedKeys: ref(['Dig It', 'go']),
       options: [
         {
           label: 'Rubber Soul',
