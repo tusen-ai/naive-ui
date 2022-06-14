@@ -83,6 +83,9 @@ export default defineComponent({
     function handleMouseenter (): void {
       scrollPartRef.value = 'head'
     }
+    function handleMouseleave (): void {
+      scrollPartRef.value = 'body'
+    }
     return {
       componentId,
       mergedSortState: mergedSortStateRef,
@@ -100,6 +103,7 @@ export default defineComponent({
       mergedTableLayout: mergedTableLayoutRef,
       headerCheckboxDisabled: headerCheckboxDisabledRef,
       handleMouseenter,
+      handleMouseleave,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll
@@ -232,12 +236,18 @@ export default defineComponent({
     if (!discrete) {
       return theadVNode
     }
-    const { handleTableHeaderScroll, handleMouseenter, scrollX } = this
+    const {
+      handleTableHeaderScroll,
+      handleMouseenter,
+      handleMouseleave,
+      scrollX
+    } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
         onScroll={handleTableHeaderScroll}
         onMouseenter={handleMouseenter}
+        onMouseleave={handleMouseleave}
       >
         <table
           ref="body"
