@@ -2,8 +2,8 @@
 
 I think it is similar with modal, with a bit difference on placement.
 
-<n-alert title="提示" type="warning">
-  If you need to use `n-drawer-content`, you should keep `n-drawer`'s `native-scrollbar` prop as `true`.
+<n-alert title="Caveat" type="warning">
+  If you need to use <n-text code>n-drawer-content</n-text>, you should keep <n-text code>n-drawer</n-text>'s <n-text code>native-scrollbar</n-text> prop as <n-text code>true</n-text>.
 </n-alert>
 
 ## Demos
@@ -14,6 +14,7 @@ multiple.vue
 target.vue
 closable.vue
 slot.vue
+scroll.vue
 ```
 
 ## API
