@@ -20,6 +20,7 @@
 - 修复 `n-upload` 在 `list-type="image-card"` 图片的边角会溢出列表项
 - 修复 `n-dynamic-tags` 的 `on-create` 属性不生效
 - 修复 Chrome 102 版本引入的虚拟滚动卡顿问题，关闭 [#3048](https://github.com/TuSimple/naive-ui/issues/3048)
+- 修复 `n-upload-dragger` 在禁用状态下过于透明
 
 ### Feats
 
