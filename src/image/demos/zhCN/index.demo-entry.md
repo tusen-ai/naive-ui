@@ -12,6 +12,7 @@ preview-disabled.vue
 custom.vue
 tooltip.vue
 full-debug.vue
+lazyload-debug.vue
 ```
 
 ## API

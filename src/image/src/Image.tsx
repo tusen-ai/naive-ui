@@ -7,14 +7,17 @@ import {
   toRef,
   watchEffect,
   ImgHTMLAttributes,
-  onMounted
+  onMounted,
+  Fragment
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes, formatLength } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
+import { useInView } from '../../_utils/composable/use-in-view'
+import { NElement } from '../../element'
 
 export interface ImageInst {
   click: () => void
@@ -38,6 +41,7 @@ const imageProps = {
   loadDescription: String,
   onError: Function as PropType<(e: Event) => void>,
   onLoad: Function as PropType<(e: Event) => void>,
+  lazyload: Boolean,
   ...imagePreviewSharedProps
 }
 
@@ -82,6 +86,10 @@ export default defineComponent({
       void props.imgProps?.src
       showErrorRef.value = false
     })
+    const lazyloadRef = ref<HTMLElement>()
+    const isInView = useInView(lazyloadRef, (inView) => {}, {
+      triggerOnce: true
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
@@ -89,6 +97,8 @@ export default defineComponent({
       imageRef,
       imgProps: imgPropsRef,
       showError: showErrorRef,
+      isInView,
+      lazyloadRef,
       mergedOnError: (e: Event) => {
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
@@ -104,8 +114,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {}, $attrs } = this
-    const imgNode = (
+    const {
+      mergedClsPrefix,
+      imgProps = {},
+      $attrs,
+      lazyload,
+      isInView,
+      $slots
+    } = this
+    const _imgNode = (
       <img
         {...imgProps}
         class={imgProps.class}
@@ -121,7 +138,29 @@ export default defineComponent({
         style={[imgProps.style || '', { objectFit: this.objectFit }]}
         data-error={this.showError}
         data-preview-src={this.previewSrc || this.src}
+        // @ts-expect-error
+        loading={lazyload ? 'lazy' : 'eager'}
       />
+    )
+
+    const imgNode = lazyload ? (
+      <Fragment>
+        {!isInView && <div ref="lazyloadRef" />}
+        {!isInView
+          ? _imgNode
+          : $slots.placeholder?.() ?? (
+              <NElement
+                style={{
+                  width: formatLength(this.width || imgProps.width) || '100%',
+                  height: formatLength(this.height || imgProps.height),
+                  cursor: 'auto',
+                  backgroundColor: 'var(--n-placeholder-color)'
+                }}
+              ></NElement>
+          )}
+      </Fragment>
+    ) : (
+      _imgNode
     )
 
     return (
