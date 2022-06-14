@@ -64,7 +64,7 @@ async-expand.vue
 | data | `Array<object>` | `[]` | Data to display. |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
-| default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | NEXT_VERSION |
+| default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
@@ -186,7 +186,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearSorter | `() => void` | Clear all sort state. |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | NEXT_VERSION |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

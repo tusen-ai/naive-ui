@@ -61,7 +61,7 @@ custom-field.vue
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |  |
 | multiple | `boolean` | `false` | 是否为多选 |  |
-| node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | NEXT_VERSION |
+| node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.30.4 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 菜单的弹出位置 | 2.25.0 |
