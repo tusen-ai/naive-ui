@@ -15,8 +15,8 @@ Crowded people.
         {{ name }}
       </n-tooltip>
     </template>
-    <template #rest="{ options, rest }">
-      <n-dropdown :options="createDropdownOptions(options)" placement="top">
+    <template #rest="{ options: restOptions, rest }">
+      <n-dropdown :options="createDropdownOptions(restOptions)" placement="top">
         <n-avatar>+{{ rest }}</n-avatar>
       </n-dropdown>
     </template>
