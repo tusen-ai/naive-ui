@@ -15,6 +15,7 @@ fallback.vue
 group.vue
 v-show-debug.vue
 rtl-debug.vue
+lazyload-debug.vue
 ```
 
 ## API

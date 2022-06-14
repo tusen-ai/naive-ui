@@ -6,7 +6,8 @@ import {
   PropType,
   inject,
   watch,
-  VNodeChild
+  VNodeChild,
+  Fragment
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { avatarGroupInjectionKey } from './context'
@@ -19,6 +20,7 @@ import type { AvatarTheme } from '../styles'
 import { createKey, color2Class, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
+import { useInView } from '../../_utils/composable/use-in-view'
 
 export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -39,6 +41,7 @@ export const avatarProps = {
   },
   onError: Function as PropType<(e: Event) => void>,
   fallbackSrc: String,
+  lazyload: Boolean,
   /** @deprecated */
   color: String
 } as const
@@ -179,6 +182,11 @@ export default defineComponent({
         props
       )
       : undefined
+
+    const lazyloadRef = ref<HTMLElement>()
+    const isInView = useInView(lazyloadRef, () => {}, {
+      triggerOnce: true
+    })
     return {
       textRef,
       selfRef,
@@ -189,11 +197,13 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,
-      handleError
+      handleError,
+      isInView,
+      lazyloadRef
     }
   },
   render () {
-    const { $slots, src, mergedClsPrefix, onRender } = this
+    const { $slots, src, mergedClsPrefix, onRender, lazyload, isInView } = this
     onRender?.()
     let img: VNodeChild
     if (this.hasLoadError) {
@@ -214,11 +224,19 @@ export default defineComponent({
           )
         } else if (src) {
           return (
-            <img
-              src={src}
-              onError={this.handleError}
-              style={{ objectFit: this.objectFit }}
-            />
+            <Fragment>
+              {!isInView ? (
+                <div ref="lazyloadRef" />
+              ) : (
+                <img
+                  src={src}
+                  onError={this.handleError}
+                  style={{ objectFit: this.objectFit }}
+                  // @ts-expect-error
+                  loading={lazyload ? 'lazy' : 'eager'}
+                />
+              )}
+            </Fragment>
           )
         }
       })
