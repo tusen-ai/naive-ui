@@ -132,6 +132,7 @@ export default defineComponent({
           parentKey={parentKey}
           key={tmNode.key}
           props={rawNode.props}
+          scrollable={scrollable}
         />
       )
     })

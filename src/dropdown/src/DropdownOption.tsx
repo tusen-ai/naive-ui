@@ -57,7 +57,8 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    props: Object as PropType<HTMLAttributes>
+    props: Object as PropType<HTMLAttributes>,
+    scrollable: Boolean
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -218,7 +219,8 @@ export default defineComponent({
       renderIcon,
       renderOption,
       nodeProps,
-      props
+      props,
+      scrollable
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -290,7 +292,8 @@ export default defineComponent({
                         <VFollower
                           show={this.mergedShowSubmenu}
                           placement={this.placement}
-                          teleportDisabled
+                          to={scrollable ? '.n-dropdown-menu' : undefined}
+                          teleportDisabled={!scrollable}
                         >
                           {{
                             default: () => {

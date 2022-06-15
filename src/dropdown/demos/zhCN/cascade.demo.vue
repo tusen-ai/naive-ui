@@ -5,14 +5,27 @@
 </markdown>
 
 <template>
-  <n-dropdown
-    :options="options"
-    placement="bottom-start"
-    trigger="click"
-    @select="handleSelect"
-  >
-    <n-button>人物和食物</n-button>
-  </n-dropdown>
+  <n-space>
+    <n-dropdown
+      :options="options"
+      placement="bottom-start"
+      trigger="click"
+      @select="handleSelect"
+    >
+      <n-button>人物和食物</n-button>
+    </n-dropdown>
+
+    <n-dropdown
+      :options="options"
+      placement="bottom-start"
+      trigger="click"
+      scrollable
+      style="height: 100px"
+      @select="handleSelect"
+    >
+      <n-button>人物和食物-scrollable</n-button>
+    </n-dropdown>
+  </n-space>
 </template>
 
 <script lang="ts">
