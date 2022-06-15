@@ -2,7 +2,6 @@ let imgObserver: IntersectionObserver | null = null
 
 let imgObserverOptions: {
   root: HTMLElement | null
-  threshold: number
 } | null
 
 const imgObserverCallback: IntersectionObserverCallback = (entries) => {
@@ -18,20 +17,12 @@ const imgObserverCallback: IntersectionObserverCallback = (entries) => {
 
 export const imgObserverHandler: (
   el: HTMLImageElement | null,
-  unobserve: boolean,
   root?: string
-) => void = (el, unobserve = false, root = 'body') => {
+) => void = (el, root = 'body') => {
   if (el === null) return
-  if (unobserve) {
-    if (imgObserver) {
-      imgObserver.unobserve(el)
-    }
-    return
-  }
   if (imgObserver === null) {
     imgObserverOptions = {
-      root: document.querySelector(root),
-      threshold: 0.1
+      root: document.querySelector(root)
     }
     imgObserver = new IntersectionObserver(
       imgObserverCallback,
@@ -39,4 +30,13 @@ export const imgObserverHandler: (
     )
   }
   imgObserver.observe(el)
+}
+
+export const imgUnobserverHandler: (el: HTMLImageElement | null) => void = (
+  el
+) => {
+  if (el === null) return
+  if (imgObserver) {
+    imgObserver.unobserve(el)
+  }
 }

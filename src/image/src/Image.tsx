@@ -16,7 +16,7 @@ import { imageGroupInjectionKey } from './ImageGroup'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
-import { imgObserverHandler } from './utils'
+import { imgObserverHandler, imgUnobserverHandler } from './utils'
 
 export interface ImageInst {
   click: () => void
@@ -82,14 +82,19 @@ export default defineComponent({
         'data-group-id',
         imageGroupHandle?.groupId || ''
       )
+    })
+
+    watchEffect(() => {
       if (props.lazy) {
-        imgObserverHandler(imageRef.value, false, props.lazyOptions?.root)
+        imgObserverHandler(imageRef.value, props.lazyOptions?.root)
+      } else {
+        imgUnobserverHandler(imageRef.value)
       }
     })
 
     onBeforeUnmount(() => {
       if (props.lazy) {
-        imgObserverHandler(imageRef.value, true)
+        imgUnobserverHandler(imageRef.value)
       }
     })
 
@@ -143,7 +148,7 @@ export default defineComponent({
         style={[imgProps.style || '', { objectFit: this.objectFit }]}
         data-error={this.showError}
         data-preview-src={this.previewSrc || this.src}
-        data-src={this.showError ? this.fallbackSrc : this.src || imgProps.src}
+        data-src={this.src || imgProps.src}
       />
     )
 

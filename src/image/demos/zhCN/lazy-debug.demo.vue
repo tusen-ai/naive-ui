@@ -1,5 +1,5 @@
 <markdown>
-# 原始尺寸展示图片
+# 懒加载
 </markdown>
 
 <template>
