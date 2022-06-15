@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.30.4
 
 ### Fixes
 
@@ -14,11 +14,13 @@
 - Fix `n-tree` may trigger loading multiple times.
 - Fix `n-tree` throws error on async expanding data with `:expand-on-click="true"`, closes [#3089](https://github.com/TuSimple/naive-ui/issues/3089).
 - Fix `n-slider`'s tooltip has no enter transition when it's triggered by keyboard.
-- Fix `n-slider`'s mark line wrap isn't correct when it appears at right-most position.
+- Fix `n-slider` mark text's line wrap isn't correct when it appears at right-most position.
 - Fix `n-upload`'s inner anchor element may show focus-visible outline style.
 - Fix `n-upload` shows slot warning when `list-type="image-card"`.
 - Fix `n-upload` image's corner may overflow item when `list-type="image-card"`.
 - Fix `n-dynamic-tags`'s `on-create` prop not working.
+- Fix virtual scroll stucking issue introduced by Chrome 102, closes [#3048](https://github.com/TuSimple/naive-ui/issues/3048).
+- Fix `n-upload-dragger` is almost transparent if disabled.
 
 ### Feats
 

@@ -34,7 +34,6 @@ export default c([
       border: var(--n-dragger-border-hover);
     `),
     cM('disabled', `
-      opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
     `)
   ]),
