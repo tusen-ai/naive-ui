@@ -8,7 +8,8 @@ import {
   watchEffect,
   ImgHTMLAttributes,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  watchPostEffect
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -84,7 +85,7 @@ export default defineComponent({
       )
     })
 
-    watchEffect(() => {
+    watchPostEffect(() => {
       if (props.lazy) {
         imgObserverHandler(imageRef.value, props.lazyOptions?.root)
       } else {
