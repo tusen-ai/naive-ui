@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
+
 ## 2.30.4
 
 ### Fixes
