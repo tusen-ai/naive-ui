@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- 🌟 `n-image` adds `lazy` prop, closes [#3055](https://github.com/TuSimple/naive-ui/issues/3055).
+
 ## 2.30.4
 
 ### Fixes

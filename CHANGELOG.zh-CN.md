@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- 🌟 `n-image` 新增 `lazy` 属性，关闭 [#3055](https://github.com/TuSimple/naive-ui/issues/3055)
+
 ## 2.30.4
 
 ### Fixes
