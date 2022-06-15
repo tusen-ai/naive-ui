@@ -46,6 +46,7 @@ simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
+render-cell.vue
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
@@ -80,6 +81,7 @@ keep-alive-debug.vue
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
+| render-cell | `(value: any) => VNodeChild` | `undefined` | 自定义单元格渲染，可以被 `render` 覆盖 | NEXT_VERSION |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |

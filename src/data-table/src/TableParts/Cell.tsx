@@ -24,13 +24,15 @@ export default defineComponent({
     mergedTheme: {
       type: Object as PropType<MergedTheme<DataTableTheme>>,
       required: true
-    }
+    },
+    renderCell: Function as PropType<(value: any) => VNodeChild>
   },
   render () {
     const {
       isSummary,
       column: { render, key, ellipsis },
-      row
+      row,
+      renderCell
     } = this
     let cell: VNodeChild
     if (render && !isSummary) {
@@ -39,7 +41,7 @@ export default defineComponent({
       if (isSummary) {
         cell = (row[key] as SummaryCell).value
       } else {
-        cell = get(row, key) as any
+        cell = renderCell ? renderCell(get(row, key)) : (get(row, key) as any)
       }
     }
     if (ellipsis && typeof ellipsis === 'object') {

@@ -10,7 +10,8 @@ import {
   CSSProperties,
   Transition,
   watchEffect,
-  onDeactivated
+  onDeactivated,
+  VNodeChild
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -129,6 +130,7 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
+  renderCell: Function as PropType<(value: any) => VNodeChild>,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -394,7 +396,8 @@ export default defineComponent({
       doUpdateExpandedRowKeys,
       handleTableHeaderScroll,
       handleTableBodyScroll,
-      setHeaderScrollLeft
+      setHeaderScrollLeft,
+      renderCell: props.renderCell
     })
     const exposedMethods: DataTableInst = {
       filter,
