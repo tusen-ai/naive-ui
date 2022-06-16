@@ -20,7 +20,7 @@
       placement="bottom-start"
       trigger="click"
       scrollable
-      style="height: 100px"
+      style="max-height: 100px"
       @select="handleSelect"
     >
       <n-button>人物和食物-scrollable</n-button>

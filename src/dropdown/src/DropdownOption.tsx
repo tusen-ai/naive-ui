@@ -148,7 +148,10 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !happensIn({ target: relatedTarget }, 'dropdownOption')
+        !happensIn({ target: relatedTarget }, 'dropdownOption') &&
+        (relatedTarget as HTMLElement).className.indexOf(
+          'n-scrollbar-rail__scrollbar'
+        )
       ) {
         hoverKeyRef.value = null
       }
