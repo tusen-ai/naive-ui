@@ -36,6 +36,7 @@
 - `n-popselect` adds `virtual-scroll` prop.
 - `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
 - `n-slider` adds `thumb` slot.
+- `n-tree` under `checkable = true`, click the content to select it
 
 ## 2.30.3
 
