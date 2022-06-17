@@ -56,6 +56,7 @@
 - `n-popselect` adds `virtual-scroll` prop.
 - `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/TuSimple/naive-ui/issues/2570).
 - `n-slider` adds `thumb` slot.
+- `n-drawer` adds `adjustable` prop.
 
 ## 2.30.3
 
