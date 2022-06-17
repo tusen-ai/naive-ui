@@ -100,14 +100,16 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     const scrollTopRef = ref<number | null>(null)
-    const uncontrolledShowRef = computed(() => {
-      if (scrollTopRef.value === null) return false
-      return scrollTopRef.value >= props.visibilityHeight
+    const uncontrolledShowRef = ref(false)
+    watchEffect(() => {
+      if (scrollTopRef.value === null) uncontrolledShowRef.value = false
+      uncontrolledShowRef.value =
+        (scrollTopRef.value as number) >= props.visibilityHeight
     })
     const DomInfoReadyRef = ref(false)
     watch(uncontrolledShowRef, (value) => {
       if (DomInfoReadyRef.value) {
-        props['onUpdate:show'](value)
+        props['onUpdate:show']?.(value)
       }
     })
     const controlledShowRef = toRef(props, 'show')

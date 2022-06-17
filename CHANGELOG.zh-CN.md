@@ -3,6 +3,7 @@
 ## NEXT_VERSION
 
 - 修复 `n-input-group-label` 的内容在 `n-drawer-content` 嵌套中异常, 关闭 [#3115](https://github.com/TuSimple/naive-ui/issues/3115)
+- 修复 `n-back-top` 在使用 `show` 时控制台报警告, 关闭 [#3122](https://github.com/TuSimple/naive-ui/issues/3122)
 
 ## 2.30.4
 
