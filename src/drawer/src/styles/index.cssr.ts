@@ -30,6 +30,9 @@ import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 // --n-close-size
 // --n-close-icon-size
 export default c([
+  cB('no-select', `
+   user-select: none; 
+  `),
   cB('drawer', `
     word-break: break-word;
     line-height: var(--n-line-height);
@@ -53,6 +56,42 @@ export default c([
         overflow: auto;
         height: 100%;
       `)
+    ]),
+    cE('adjustable-line', `
+      position: absolute;
+    `, [
+      cM('top', `
+      width: 100%;
+      height: 10px;
+      background: transparent;
+      bottom: 0;
+      left: 0;
+      cursor: ns-resize;
+    `),
+      cM('bottom', `
+      width: 100%;
+      height: 10px;
+      background: transparent;
+      top: 0;
+      left: 0;
+      cursor: ns-resize;
+    `),
+      cM('left', `
+      width: 10px;
+      height: 100%;
+      background: transparent;
+      top: 0;
+      right: 0;
+      cursor: ew-resize;
+    `),
+      cM('right', `
+      width: 10px;
+      height: 100%;
+      background: transparent;
+      top: 0;
+      left: 0;
+      cursor: ew-resize;
+    `)
     ]),
     cB('drawer-content-wrapper', `
       box-sizing: border-box;
