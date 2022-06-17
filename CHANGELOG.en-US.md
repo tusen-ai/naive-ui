@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+- Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+
 ## 2.30.4
 
 ### Fixes
