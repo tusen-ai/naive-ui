@@ -2,7 +2,13 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
 - Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+
+### Feats
+
+- `n-space` adds `wrap-item` prop.
 
 ## 2.30.4
 
