@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.30.5
+
+### Fixes
+
+- `volar.d.ts` remove `[key: string]: any` to solve the code prompt problem in `vscode`.
+
+### Feats
+
 ## 2.30.4
 
 ### Fixes

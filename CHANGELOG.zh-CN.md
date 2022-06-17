@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.30.5
+
+### Fixes
+
+- `volar.d.ts` 去除 `[key: string]: any` ,解决 `vscode` 中代码提示问题
+
+### Feats
+
 ## 2.30.4
 
 ### Fixes
