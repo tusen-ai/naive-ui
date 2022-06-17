@@ -203,4 +203,154 @@ describe('n-drawer', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `adjustable` prop', async () => {
+    // placement top
+    let wrapper = await mountDrawer({
+      show: true,
+      drawerProps: { placement: 'top', adjustable: true, height: 251 }
+    })
+    expect(document.querySelector('.n-drawer')?.className).toContain(
+      'n-drawer--top-placement'
+    )
+    expect(
+      document.querySelector('.n-drawer__adjustable-line--top')
+    ).not.toEqual(null)
+
+    let mousedownEvent = new MouseEvent('mousedown', {
+      bubbles: true,
+      clientX: 0,
+      clientY: 251
+    })
+    let mousemoveEvent = new MouseEvent('mousemove', {
+      bubbles: true,
+      clientX: 0,
+      clientY: 600
+    })
+    let mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+
+    document
+      .querySelector('.n-drawer__adjustable-line--top')
+      ?.dispatchEvent(mousedownEvent)
+    document.body?.dispatchEvent(mousemoveEvent)
+    document.body?.dispatchEvent(mouseupEvent)
+
+    await nextTick()
+    expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
+      'height: 600px;'
+    )
+
+    wrapper.unmount()
+
+    // placement bottom
+    wrapper = await mountDrawer({
+      show: true,
+      drawerProps: { placement: 'bottom', adjustable: true, height: 251 }
+    })
+    expect(document.querySelector('.n-drawer')?.className).toContain(
+      'n-drawer--bottom-placement'
+    )
+    expect(
+      document.querySelector('.n-drawer__adjustable-line--bottom')
+    ).not.toEqual(null)
+
+    mousedownEvent = new MouseEvent('mousedown', {
+      bubbles: true,
+      clientX: 0,
+      clientY: 600
+    })
+    mousemoveEvent = new MouseEvent('mousemove', {
+      bubbles: true,
+      clientX: 0,
+      clientY: 251
+    })
+    mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+
+    document
+      .querySelector('.n-drawer__adjustable-line--bottom')
+      ?.dispatchEvent(mousedownEvent)
+    document.body?.dispatchEvent(mousemoveEvent)
+    document.body?.dispatchEvent(mouseupEvent)
+
+    await nextTick()
+    expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
+      'height: 600px;'
+    )
+
+    wrapper.unmount()
+
+    // placement left
+    wrapper = await mountDrawer({
+      show: true,
+      drawerProps: { placement: 'left', adjustable: true, width: 251 }
+    })
+    expect(document.querySelector('.n-drawer')?.className).toContain(
+      'n-drawer--left-placement'
+    )
+    expect(
+      document.querySelector('.n-drawer__adjustable-line--left')
+    ).not.toEqual(null)
+
+    mousedownEvent = new MouseEvent('mousedown', {
+      bubbles: true,
+      clientX: 251,
+      clientY: 0
+    })
+    mousemoveEvent = new MouseEvent('mousemove', {
+      bubbles: true,
+      clientX: 600,
+      clientY: 0
+    })
+    mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+
+    document
+      .querySelector('.n-drawer__adjustable-line--left')
+      ?.dispatchEvent(mousedownEvent)
+    document.body?.dispatchEvent(mousemoveEvent)
+    document.body?.dispatchEvent(mouseupEvent)
+
+    await nextTick()
+    expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
+      'width: 600px;'
+    )
+
+    wrapper.unmount()
+
+    // placement right
+    wrapper = await mountDrawer({
+      show: true,
+      drawerProps: { placement: 'right', adjustable: true, width: 251 }
+    })
+    expect(document.querySelector('.n-drawer')?.className).toContain(
+      'n-drawer--right-placement'
+    )
+    expect(
+      document.querySelector('.n-drawer__adjustable-line--right')
+    ).not.toEqual(null)
+
+    mousedownEvent = new MouseEvent('mousedown', {
+      bubbles: true,
+      clientX: 600,
+      clientY: 0
+    })
+    mousemoveEvent = new MouseEvent('mousemove', {
+      bubbles: true,
+      clientX: 251,
+      clientY: 0
+    })
+    mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+
+    document
+      .querySelector('.n-drawer__adjustable-line--right')
+      ?.dispatchEvent(mousedownEvent)
+    document.body?.dispatchEvent(mousemoveEvent)
+    document.body?.dispatchEvent(mouseupEvent)
+
+    await nextTick()
+    expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
+      'width: 600px;'
+    )
+
+    wrapper.unmount()
+  })
 })
