@@ -20,6 +20,7 @@ export default cB('input-group-label', `
   font-size: var(--n-font-size);
   line-height: var(--n-height);
   height: var(--n-height);
+  flex-shrink: 0;
   transition: 
     color .3s var(--n-bezier),
     background-color .3s var(--n-bezier),
