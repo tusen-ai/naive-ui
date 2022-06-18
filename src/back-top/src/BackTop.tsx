@@ -102,9 +102,12 @@ export default defineComponent({
     const scrollTopRef = ref<number | null>(null)
     const uncontrolledShowRef = ref(false)
     watchEffect(() => {
-      if (scrollTopRef.value === null) uncontrolledShowRef.value = false
-      uncontrolledShowRef.value =
-        (scrollTopRef.value as number) >= props.visibilityHeight
+      const { value: scrollTop } = scrollTopRef
+      if (scrollTop === null) {
+        uncontrolledShowRef.value = false
+        return
+      }
+      uncontrolledShowRef.value = scrollTop >= props.visibilityHeight
     })
     const DomInfoReadyRef = ref(false)
     watch(uncontrolledShowRef, (value) => {
