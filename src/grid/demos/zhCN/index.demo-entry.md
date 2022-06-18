@@ -5,10 +5,14 @@
 基于 CSS Grid，响应式，远离 IE。
 
 ```demo
-vshow-debug.vue
+basic.vue
+gap.vue
+offset.vue
+responsive.vue
+responsive-item.vue
+collapse.vue
+grid-basic-debug.vue
 ```
-
-basic.vue gap.vue offset.vue responsive.vue responsive-item.vue collapse.vue grid-basic-debug.vue
 
 ## API
 
