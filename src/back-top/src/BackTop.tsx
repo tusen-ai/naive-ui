@@ -23,6 +23,7 @@ import {
   lockHtmlScrollRightCompensationRef,
   formatLength,
   resolveSlot,
+  isDocument,
   warn,
   warnOnce
 } from '../../_utils'
@@ -132,7 +133,7 @@ export default defineComponent({
         }
       }
     )
-    let scrollElement: HTMLElement
+    let scrollElement: HTMLElement | Document
     let scrollListenerRegistered: boolean
     // deprecated
     watch(mergedShowRef, (value) => {
@@ -167,20 +168,19 @@ export default defineComponent({
         }
         return
       }
-      scrollElement = scrollEl
+      scrollElement =
+        scrollEl === document.documentElement ? document : scrollEl
       const { to } = props
       const target = typeof to === 'string' ? document.querySelector(to) : to
       if (__DEV__ && !target) {
         warn('back-top', 'Target is not found.')
       }
-      if (scrollEl) {
-        scrollEl.addEventListener('scroll', handleScroll)
-        handleScroll()
-      }
+      scrollElement.addEventListener('scroll', handleScroll)
+      handleScroll()
     }
     function handleClick (e: MouseEvent): void {
-      if (scrollElement.nodeName === '#document') {
-        ;(scrollElement as unknown as Document).documentElement.scrollTo({
+      if (isDocument(scrollElement)) {
+        scrollElement.documentElement.scrollTo({
           top: 0,
           behavior: 'smooth'
         })
@@ -192,10 +192,8 @@ export default defineComponent({
       }
     }
     function handleScroll (): void {
-      if (scrollElement.nodeName === '#document') {
-        scrollTopRef.value = (
-          scrollElement as unknown as Document
-        ).documentElement.scrollTop
+      if (isDocument(scrollElement)) {
+        scrollTopRef.value = scrollElement.documentElement.scrollTop
       } else {
         scrollTopRef.value = scrollElement.scrollTop
       }
