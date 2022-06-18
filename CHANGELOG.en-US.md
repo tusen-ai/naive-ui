@@ -2,7 +2,13 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
 - Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+- `volar.d.ts` remove `[key: string]: any` to solve the code prompt problem in `vscode`.
+
+### Feats
+
 
 ## 2.30.4
 
