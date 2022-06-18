@@ -21,6 +21,7 @@ export default cB('input-group-label', `
   line-height: var(--n-height);
   height: var(--n-height);
   flex-shrink: 0;
+  white-space: nowrap;
   transition: 
     color .3s var(--n-bezier),
     background-color .3s var(--n-bezier),
