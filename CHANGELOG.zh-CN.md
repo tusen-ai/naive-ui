@@ -11,6 +11,8 @@
 
 ### Feats
 
+- 导出 `NTooltipInst` 类型
+
 ## 2.30.4
 
 ### Fixes

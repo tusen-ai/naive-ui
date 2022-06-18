@@ -11,6 +11,8 @@
 
 ### Feats
 
+- Exports `NTooltipInst` type.
+
 ## 2.30.4
 
 ### Fixes
