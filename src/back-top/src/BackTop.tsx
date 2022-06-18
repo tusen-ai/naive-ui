@@ -178,25 +178,19 @@ export default defineComponent({
       scrollElement.addEventListener('scroll', handleScroll)
       handleScroll()
     }
-    function handleClick (e: MouseEvent): void {
-      if (isDocument(scrollElement)) {
-        scrollElement.documentElement.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      } else {
-        scrollElement.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }
+    function handleClick (): void {
+      ;(isDocument(scrollElement)
+        ? document.documentElement
+        : scrollElement
+      ).scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
     function handleScroll (): void {
-      if (isDocument(scrollElement)) {
-        scrollTopRef.value = scrollElement.documentElement.scrollTop
-      } else {
-        scrollTopRef.value = scrollElement.scrollTop
-      }
+      scrollTopRef.value = (
+        isDocument(scrollElement) ? document.documentElement : scrollElement
+      ).scrollTop
       if (!DomInfoReadyRef.value) {
         void nextTick(() => {
           DomInfoReadyRef.value = true

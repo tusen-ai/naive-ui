@@ -1,1 +1,1 @@
-export * from './check'
+export { isDocument } from './is-document'
