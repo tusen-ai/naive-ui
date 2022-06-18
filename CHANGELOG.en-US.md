@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+- Fix `n-back-top` has log warnings of console when use `show` prop, closes [#3122](https://github.com/TuSimple/naive-ui/issues/3122).
 - `volar.d.ts` remove `[key: string]: any` to solve the code prompt problem in `vscode`.
 
 ### Feats
