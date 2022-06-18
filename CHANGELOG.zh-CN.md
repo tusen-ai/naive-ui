@@ -13,6 +13,10 @@
 
 - 导出 `NTooltipInst` 类型
 
+### Feats
+
+- `n-space` 新增 `wrap-item` 属性
+
 ## 2.30.4
 
 ### Fixes

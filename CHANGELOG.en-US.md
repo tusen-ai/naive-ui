@@ -13,6 +13,10 @@
 
 - Exports `NTooltipInst` type.
 
+### Feats
+
+- `n-space` adds `wrap-item` prop.
+
 ## 2.30.4
 
 ### Fixes
