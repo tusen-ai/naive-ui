@@ -8,6 +8,7 @@
 - Fix `n-back-top` has log warnings of console when use `show` prop, closes [#3122](https://github.com/TuSimple/naive-ui/issues/3122).
 - `volar.d.ts` remove `[key: string]: any` to solve the code prompt problem in `vscode`.
 - Fix `n-grid-item` may not display correctly if `v-show` is used, closes [#3123](https://github.com/TuSimple/naive-ui/issues/3123).
+- Fix `n-select` abnormal display when clearable.
 
 ### Feats
 

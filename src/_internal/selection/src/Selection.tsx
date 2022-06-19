@@ -30,7 +30,8 @@ import {
   createKey,
   getTitleAttribute,
   render,
-  useOnResize
+  useOnResize,
+  Wrapper
 } from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
@@ -553,17 +554,23 @@ export default defineComponent({
     const maxTagCountNumeric = typeof maxTagCount === 'number'
     const useMaxTagCount = maxTagCountResponsive || maxTagCountNumeric
     const suffix = (
-      <Suffix
-        clsPrefix={clsPrefix}
-        loading={this.loading}
-        showArrow={this.showArrow}
-        showClear={this.mergedClearable && this.selected}
-        onClear={this.handleClear}
-      >
+      <Wrapper>
         {{
-          default: () => this.$slots.arrow?.()
+          default: () => (
+            <Suffix
+              clsPrefix={clsPrefix}
+              loading={this.loading}
+              showArrow={this.showArrow}
+              showClear={this.mergedClearable && this.selected}
+              onClear={this.handleClear}
+            >
+              {{
+                default: () => this.$slots.arrow?.()
+              }}
+            </Suffix>
+          )
         }}
-      </Suffix>
+      </Wrapper>
     )
     let body: JSX.Element
     if (multiple) {
