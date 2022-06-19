@@ -15,6 +15,7 @@
 - 导出 `NTooltipInst` 类型
 - `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
 - `n-space` 新增 `wrap-item` 属性
+- `n-data-table` 的 `on-update-checked-row-keys` 会传出行数据，关闭 [#2215](https://github.com/TuSimple/naive-ui/issues/2215)，关闭 [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
 
 ## 2.30.4
 

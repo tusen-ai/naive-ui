@@ -259,7 +259,11 @@ export type RenderSorterIcon = RenderSorter
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
+export type OnUpdateCheckedRowKeys = (
+  keys: RowKey[],
+  row: InternalRowData[]
+) => void
+
 // `null` only occurs when clearSorter is called
 export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
 export type OnUpdateSorterImpl = (
