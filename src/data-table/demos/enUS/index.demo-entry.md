@@ -4,12 +4,21 @@
 
 DataTable is used to displays rows of structured data.
 
-## Demos
-
-<n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
-  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+<n-alert type="warning" title="Caveat">
+  <n-ul align-text>
+    <li>
+      Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+    </li>
+    <li>
+      In non-async mode, page count is determined by data's count. Even if you pass a <n-text code>page-count</n-text> in, it won't change data table's displayed page count. If you want it behaves in this way, you should set <n-text code>remote</n-text> prop.
+    </li>
+    <li>
+      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+    </li>
+  </n-ul>
 </n-alert>
+
+## Demos
 
 ```demo
 basic.vue

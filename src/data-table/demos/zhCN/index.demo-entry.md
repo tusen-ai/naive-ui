@@ -4,12 +4,21 @@
 
 数据表格用来显示一些格式化信息。
 
-## 演示
-
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
-  <br>如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
+  <n-ul align-text>
+    <li>
+      传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
+    </li>
+    <li>
+      在非异步状况下，页面的数量是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望这么做，那么需要设定 `remote` 属性。
+    </li>
+    <li>
+    如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
+    </li>
+  </n-ul>
 </n-alert>
+
+## 演示
 
 ```demo
 basic.vue
