@@ -43,8 +43,14 @@ lazy.vue
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 
+### Image Slots
+
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| placeholder | `()` | Placeholder shown when image is not loaded. | NEXT_VERSION |
+
 ### ImageGroup Slots
 
-| Name    | Type | Description                             |
-| ------- | ---- | --------------------------------------- |
-| default | `()` | The default content of the image group. |
+| Name    | Parameters | Description                             |
+| ------- | ---------- | --------------------------------------- |
+| default | `()`       | The default content of the image group. |

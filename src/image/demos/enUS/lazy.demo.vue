@@ -7,7 +7,13 @@ You can use `lazy` to let image load after it enters viewport.
 <template>
   <div
     id="image-scroll-container"
-    style="overflow: auto; height: 100px; display: flex; flex-direction: column"
+    style="
+      overflow: auto;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    "
   >
     <n-image
       v-for="(src, index) in srcList"
@@ -19,7 +25,22 @@ You can use `lazy` to let image load after it enters viewport.
       :intersection-observer-options="{
         root: '#image-scroll-container'
       }"
-    />
+    >
+      <template #placeholder>
+        <div
+          style="
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #8882;
+          "
+        >
+          Loading
+        </div>
+      </template>
+    </n-image>
   </div>
 </template>
 

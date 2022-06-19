@@ -44,6 +44,12 @@ lazy.vue
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 
+### Image Slots
+
+| 名称        | 参数 | 说明                       | 版本         |
+| ----------- | ---- | -------------------------- | ------------ |
+| placeholder | `()` | 图像没有加载成功时候的占位 | NEXT_VERSION |
+
 ### ImageGroup Slots
 
 | 名称    | 参数 | 说明         |

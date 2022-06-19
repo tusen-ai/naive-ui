@@ -110,6 +110,8 @@ export default defineComponent({
       void props.imgProps?.src
       showErrorRef.value = false
     })
+
+    const loadedRef = ref(false)
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
@@ -118,6 +120,7 @@ export default defineComponent({
       imgProps: imgPropsRef,
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
+      loaded: loadedRef,
       mergedOnError: (e: Event) => {
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
@@ -128,12 +131,16 @@ export default defineComponent({
         const { onLoad, imgProps: { onLoad: imgPropsOnLoad } = {} } = props
         onLoad?.(e)
         imgPropsOnLoad?.(e)
+        loadedRef.value = true
       },
       ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {}, $attrs } = this
+    const { mergedClsPrefix, imgProps = {}, loaded, $attrs } = this
+
+    const placeholderNode = this.$slots.placeholder?.()
+
     const imgNode = (
       <img
         {...imgProps}
@@ -153,7 +160,13 @@ export default defineComponent({
         onClick={this.click}
         onError={this.mergedOnError}
         onLoad={this.mergedOnLoad}
-        style={[imgProps.style || '', { objectFit: this.objectFit }]}
+        style={[
+          imgProps.style || '',
+          placeholderNode && !loaded
+            ? { height: '0', width: '0', visibility: 'hidden' }
+            : '',
+          { objectFit: this.objectFit }
+        ]}
         data-error={this.showError}
         data-preview-src={this.previewSrc || this.src}
       />
@@ -186,6 +199,7 @@ export default defineComponent({
             }}
           </NImagePreview>
         )}
+        {!loaded && placeholderNode}
       </div>
     )
   }
