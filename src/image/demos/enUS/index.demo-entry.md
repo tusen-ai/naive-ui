@@ -11,6 +11,7 @@ error.vue
 preview-disabled.vue
 custom.vue
 tooltip.vue
+lazy.vue
 ```
 
 ## API

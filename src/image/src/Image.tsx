@@ -7,7 +7,9 @@ import {
   toRef,
   watchEffect,
   ImgHTMLAttributes,
-  onMounted
+  onMounted,
+  onBeforeUnmount,
+  watchPostEffect
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -15,6 +17,7 @@ import { imageGroupInjectionKey } from './ImageGroup'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
+import { imgObserverHandler, imgUnobserverHandler } from './utils'
 
 export interface ImageInst {
   click: () => void
@@ -24,6 +27,10 @@ const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
+  lazy: Boolean,
+  lazyOptions: Object as PropType<{
+    root: string
+  }>,
   objectFit: {
     type: String as PropType<
     'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
@@ -77,6 +84,21 @@ export default defineComponent({
         imageGroupHandle?.groupId || ''
       )
     })
+
+    watchPostEffect(() => {
+      if (props.lazy) {
+        imgObserverHandler(imageRef.value, props.lazyOptions?.root)
+      } else {
+        imgUnobserverHandler(imageRef.value)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (props.lazy) {
+        imgUnobserverHandler(imageRef.value)
+      }
+    })
+
     watchEffect(() => {
       void props.src
       void props.imgProps?.src
@@ -112,7 +134,13 @@ export default defineComponent({
         ref="imageRef"
         width={this.width || imgProps.width}
         height={this.height || imgProps.height}
-        src={this.showError ? this.fallbackSrc : this.src || imgProps.src}
+        src={
+          this.showError
+            ? this.fallbackSrc
+            : this.lazy
+              ? undefined
+              : this.src || imgProps.src
+        }
         alt={this.alt || imgProps.alt}
         aria-label={this.alt || imgProps.alt}
         onClick={this.click}
@@ -121,6 +149,7 @@ export default defineComponent({
         style={[imgProps.style || '', { objectFit: this.objectFit }]}
         data-error={this.showError}
         data-preview-src={this.previewSrc || this.src}
+        data-src={this.src || imgProps.src}
       />
     )
 
