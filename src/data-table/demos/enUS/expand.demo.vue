@@ -30,16 +30,14 @@ const createColumns = ({
 }): DataTableColumns<RowData> => {
   return [
     {
-      type: 'selection',
-      width: 120
+      type: 'selection'
     },
     {
       type: 'expand',
       expandable: (rowData) => rowData.name !== 'Jim Green',
       renderExpand: (rowData) => {
         return `${rowData.name} is a good guy.`
-      },
-      width: 120
+      }
     },
     {
       title: 'Name',

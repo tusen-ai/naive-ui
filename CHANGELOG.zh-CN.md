@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2.30.5
+
+### Fixes
+
+- 修复 `n-input-group-label` 的内容在 `n-drawer-content` 嵌套中异常，关闭 [#3115](https://github.com/TuSimple/naive-ui/issues/3115)
+- 修复 `n-back-top` 在使用 `show` 时控制台报警告，关闭 [#3122](https://github.com/TuSimple/naive-ui/issues/3122)
+- 修复 `volar.d.ts` 组件全局类型为 `any`
+- 修复 `n-grid-item` 使用 `v-show` 可能存在显示状态不正确的问题，关闭 [#3123](https://github.com/TuSimple/naive-ui/issues/3123)
+- 修复 `n-select` 在可清空状态下使用输入法输入，移入鼠标后输入文字会消失
+
+### Feats
+
+- 🌟 `n-image` 新增 `lazy` 属性，关闭 [#3055](https://github.com/TuSimple/naive-ui/issues/3055)
+- `n-image` 新增 `intersection-observer-options` 属性
+- `n-image` 新增 `placeholder` slot
+- 导出 `NTooltipInst` 类型
+- `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
+- `n-space` 新增 `wrap-item` 属性
+- `n-data-table` 的 `on-update:checked-row-keys` 会传出行数据，关闭 [#2215](https://github.com/TuSimple/naive-ui/issues/2215)，关闭 [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
+
 ## 2.30.4
 
 ### Fixes
