@@ -4,7 +4,7 @@
 
 <template>
   <n-image
-    v-for="(item, index) in Array(50)"
+    v-for="(item, index) in Array(10)"
     :key="index"
     width="100"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"

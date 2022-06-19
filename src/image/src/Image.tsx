@@ -8,8 +8,7 @@ import {
   watchEffect,
   ImgHTMLAttributes,
   onMounted,
-  onBeforeUnmount,
-  watchPostEffect
+  onBeforeUnmount
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -17,7 +16,8 @@ import { imageGroupInjectionKey } from './ImageGroup'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
-import { imgObserverHandler, imgUnobserverHandler } from './utils'
+import { observeIntersection } from './utils'
+import type { IntersectionObserverOptions } from './utils'
 
 export interface ImageInst {
   click: () => void
@@ -28,9 +28,7 @@ const imageProps = {
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
   lazy: Boolean,
-  lazyOptions: Object as PropType<{
-    root: string
-  }>,
+  intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   objectFit: {
     type: String as PropType<
     'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
@@ -85,18 +83,22 @@ export default defineComponent({
       )
     })
 
-    watchPostEffect(() => {
-      if (props.lazy) {
-        imgObserverHandler(imageRef.value, props.lazyOptions?.root)
-      } else {
-        imgUnobserverHandler(imageRef.value)
-      }
-    })
-
-    onBeforeUnmount(() => {
-      if (props.lazy) {
-        imgUnobserverHandler(imageRef.value)
-      }
+    onMounted(() => {
+      let unobserve: (() => void) | undefined
+      const stopWatchHandle = watchEffect(() => {
+        unobserve?.()
+        unobserve = undefined
+        if (props.lazy) {
+          unobserve = observeIntersection(
+            imageRef.value,
+            props.intersectionObserverOptions
+          )
+        }
+      })
+      onBeforeUnmount(() => {
+        stopWatchHandle()
+        unobserve?.()
+      })
     })
 
     watchEffect(() => {
