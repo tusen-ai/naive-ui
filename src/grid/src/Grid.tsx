@@ -10,7 +10,8 @@ import {
   ref,
   VNode,
   Ref,
-  cloneVNode
+  cloneVNode,
+  vShow
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
@@ -170,6 +171,10 @@ export default defineComponent({
           return
         }
 
+        // We don't want v-show to control display, so we need to stripe it
+        // here, nor it may mess child's style
+        child.dirs = child.dirs?.filter(({ dir }) => dir !== vShow) || null
+
         const clonedChild = cloneVNode(child)
 
         const rawChildSpan = Number(
@@ -216,10 +221,8 @@ export default defineComponent({
               responsiveQuery
             ) ?? 0
           )
-
-          const childSpan =
-            Math.min(rawChildSpan + childOffset, responsiveCols) || 1
-
+          // it could be 0 sometimes (v-show = false)
+          const childSpan = Math.min(rawChildSpan + childOffset, responsiveCols)
           if (!child.props) {
             child.props = {
               privateSpan: childSpan,
@@ -246,6 +249,7 @@ export default defineComponent({
         }
         if (done) {
           if (child.props) {
+            // suffix node's privateShow may be true
             if (child.props.privateShow !== true) {
               child.props.privateShow = false
             }
