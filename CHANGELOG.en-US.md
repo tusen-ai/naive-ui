@@ -8,7 +8,7 @@
 - Fix `n-back-top` has log warnings of console when use `show` prop, closes [#3122](https://github.com/TuSimple/naive-ui/issues/3122).
 - `volar.d.ts` remove `[key: string]: any` to solve the code prompt problem in `vscode`.
 - Fix `n-grid-item` may not display correctly if `v-show` is used, closes [#3123](https://github.com/TuSimple/naive-ui/issues/3123).
-- Fix `n-select` abnormal display when clearable.
+- Fix `n-select` clears input value on mouse enter when it's clearable and using IME.
 
 ### Feats
 
@@ -2405,7 +2405,7 @@ Update package.json & README.md.
 - `n-popover` adds `get-disabled` prop.
 - adds `n-ellipsis` component.
 - `n-popover`'s `width` prop adds `'trigger'` option.
-- `n-data-table`'s columns's `ellipsis` prop can be set as props of `n-ellipsis`.
+- `n-data-table`'s columns's `ellipsis` prop can be set as props of `n-ellipsis`. x
 
 ### Fixes
 
