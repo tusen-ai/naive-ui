@@ -22,10 +22,9 @@ import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { useReactivated } from '../../../_utils'
+import { useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
-import { Wrapper } from './Wrapper'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {

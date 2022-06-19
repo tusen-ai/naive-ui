@@ -231,6 +231,10 @@ export interface DataTableInjection {
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void
   setHeaderScrollLeft: (scrollLeft: number) => void
+  renderCell: Ref<
+  | undefined
+  | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
+  >
 }
 
 export const dataTableInjectionKey =
@@ -255,7 +259,11 @@ export type RenderSorterIcon = RenderSorter
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
+export type OnUpdateCheckedRowKeys = (
+  keys: RowKey[],
+  row: InternalRowData[]
+) => void
+
 // `null` only occurs when clearSorter is called
 export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
 export type OnUpdateSorterImpl = (
