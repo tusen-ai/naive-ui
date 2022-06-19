@@ -17,7 +17,12 @@ import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
-import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
+import {
+  getSlot,
+  flatten,
+  ExtractPublicPropTypes,
+  isNodeVShowFalse
+} from '../../_utils'
 import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
@@ -150,6 +155,21 @@ export default defineComponent({
 
       rawChildren.forEach((child) => {
         if ((child?.type as any)?.__GRID_ITEM__ !== true) return
+
+        if (isNodeVShowFalse(child)) {
+          const clonedNode = cloneVNode(child)
+          if (clonedNode.props) {
+            clonedNode.props.privateShow = false
+          } else {
+            clonedNode.props = { pirvateShow: false }
+          }
+          childrenAndRawSpan.push({
+            child: clonedNode,
+            rawChildSpan: 0
+          })
+          return
+        }
+
         const clonedChild = cloneVNode(child)
 
         const rawChildSpan = Number(
@@ -177,7 +197,8 @@ export default defineComponent({
           maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
-          maybeSuffixNode.props.privateShow = true
+          maybeSuffixNode.props.privateShow =
+            maybeSuffixNode.props.privateShow ?? true
         }
       }
 
