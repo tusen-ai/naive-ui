@@ -13,9 +13,7 @@
 ### Feats
 
 - Exports `NTooltipInst` type.
-
-### Feats
-
+- `n-data-table` adds `render-cell` prop, closes [#3095](https://github.com/TuSimple/naive-ui/issues/3095).
 - `n-space` adds `wrap-item` prop.
 
 ## 2.30.4

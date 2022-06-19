@@ -13,9 +13,7 @@
 ### Feats
 
 - 导出 `NTooltipInst` 类型
-
-### Feats
-
+- `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
 - `n-space` 新增 `wrap-item` 属性
 
 ## 2.30.4
