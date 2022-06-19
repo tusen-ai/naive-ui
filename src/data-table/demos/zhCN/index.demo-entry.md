@@ -90,7 +90,7 @@ keep-alive-debug.vue
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
-| render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于 `render` | NEXT_VERSION |
+| render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | NEXT_VERSION |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
@@ -104,7 +104,7 @@ keep-alive-debug.vue
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
-| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |  |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` NEXT_VERSION |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |  |
