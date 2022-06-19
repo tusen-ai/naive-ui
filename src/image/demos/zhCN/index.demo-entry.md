@@ -25,6 +25,8 @@ lazy.vue
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
 | img-props | `object` | `undefined` | 组件中 img 元素的属性 |  |
+| lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | NEXT_VERSION |
+| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | NEXT_VERSION |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 图片在容器内的的适应类型 |  |
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否可以点击图片进行预览 |  |

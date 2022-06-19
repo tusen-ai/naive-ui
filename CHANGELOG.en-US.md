@@ -13,6 +13,7 @@
 ### Feats
 
 - 🌟 `n-image` adds `lazy` prop, closes [#3055](https://github.com/TuSimple/naive-ui/issues/3055).
+- `n-image` adds `intersection-observer-options` prop.
 - Exports `NTooltipInst` type.
 - `n-data-table` adds `render-cell` prop, closes [#3095](https://github.com/TuSimple/naive-ui/issues/3095).
 - `n-space` adds `wrap-item` prop.

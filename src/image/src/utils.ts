@@ -1,3 +1,5 @@
+import { Ref } from 'vue'
+
 export type IntersectionObserverOptions = Omit<
 IntersectionObserverInit,
 'root'
@@ -33,10 +35,14 @@ Document | Element,
 Map<string, [IntersectionObserver, Set<Element | Document>]>
 >()
 
+const unobserveHandleMap = new WeakMap<HTMLImageElement, () => void>()
+const shouldStartLoadingRefMap = new WeakMap<HTMLImageElement, Ref<boolean>>()
+
 export const observeIntersection: (
   el: HTMLImageElement | null,
-  options: IntersectionObserverOptions | undefined
-) => () => void = (el, options) => {
+  options: IntersectionObserverOptions | undefined,
+  shouldStartLoadingRef: Ref<boolean>
+) => () => void = (el, options, shouldStartLoadingRef) => {
   if (!el) return () => {}
   const resolvedOptionsAndHash = resolveOptionsAndHash(options)
   const { root } = resolvedOptionsAndHash.options
@@ -69,14 +75,19 @@ export const observeIntersection: (
     observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          unobserve()
-          const img = entry.target as HTMLImageElement
-          if (!img.src) {
-            img.src = img.dataset.src || ''
+          const _unobserve = unobserveHandleMap.get(
+            entry.target as HTMLImageElement
+          )
+          const _shouldStartLoadingRef = shouldStartLoadingRefMap.get(
+            entry.target as HTMLImageElement
+          )
+          if (_unobserve) _unobserve()
+          if (_shouldStartLoadingRef) {
+            _shouldStartLoadingRef.value = true
           }
         }
       })
-    })
+    }, resolvedOptionsAndHash.options)
     observer.observe(el)
     observerAndObservedElements = [observer, new Set([el])]
     rootObservers.set(resolvedOptionsAndHash.hash, observerAndObservedElements)
@@ -84,6 +95,8 @@ export const observeIntersection: (
   let unobservered = false
   const unobserve = (): void => {
     if (unobservered) return
+    unobserveHandleMap.delete(el)
+    shouldStartLoadingRefMap.delete(el)
     unobservered = true
     if (observerAndObservedElements[1].has(el)) {
       observerAndObservedElements[0].unobserve(el)
@@ -96,5 +109,7 @@ export const observeIntersection: (
       observers.delete(root)
     }
   }
+  unobserveHandleMap.set(el, unobserve)
+  shouldStartLoadingRefMap.set(el, shouldStartLoadingRef)
   return unobserve
 }

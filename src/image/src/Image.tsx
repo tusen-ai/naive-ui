@@ -76,6 +76,9 @@ export default defineComponent({
         previewInst.toggleShow()
       }
     }
+
+    const shouldStartLoadingRef = ref(!props.lazy)
+
     onMounted(() => {
       imageRef.value?.setAttribute(
         'data-group-id',
@@ -91,7 +94,8 @@ export default defineComponent({
         if (props.lazy) {
           unobserve = observeIntersection(
             imageRef.value,
-            props.intersectionObserverOptions
+            props.intersectionObserverOptions,
+            shouldStartLoadingRef
           )
         }
       })
@@ -113,6 +117,7 @@ export default defineComponent({
       imageRef,
       imgProps: imgPropsRef,
       showError: showErrorRef,
+      shouldStartLoading: shouldStartLoadingRef,
       mergedOnError: (e: Event) => {
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
@@ -139,9 +144,9 @@ export default defineComponent({
         src={
           this.showError
             ? this.fallbackSrc
-            : this.lazy
-              ? undefined
-              : this.src || imgProps.src
+            : this.shouldStartLoading
+              ? this.src || imgProps.src
+              : undefined
         }
         alt={this.alt || imgProps.alt}
         aria-label={this.alt || imgProps.alt}
@@ -151,7 +156,6 @@ export default defineComponent({
         style={[imgProps.style || '', { objectFit: this.objectFit }]}
         data-error={this.showError}
         data-preview-src={this.previewSrc || this.src}
-        data-src={this.src || imgProps.src}
       />
     )
 
