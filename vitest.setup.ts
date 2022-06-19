@@ -25,6 +25,20 @@ if (typeof window !== 'undefined') {
     global.window[api] = canvasWindow[api]
   })
   HTMLDivElement.prototype.scrollTo = () => {}
+  // https://github.com/vitest-dev/vitest/issues/821
+  Object.defineProperty(global.window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn()
+    }))
+  })
 }
 
 afterAll(() => {
