@@ -2,8 +2,8 @@ import { defineComponent, PropType, VNodeChild, h } from 'vue'
 import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
-import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
 import type { DataTableTheme } from '../../styles'
+import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
 
 export default defineComponent({
   name: 'DataTableCell',
@@ -25,23 +25,23 @@ export default defineComponent({
       type: Object as PropType<MergedTheme<DataTableTheme>>,
       required: true
     },
-    renderCell: Function as PropType<(value: any) => VNodeChild>
+    renderCell: Function as PropType<
+    (value: any, rowData: object, column: any) => VNodeChild
+    >
   },
   render () {
-    const {
-      isSummary,
-      column: { render, key, ellipsis },
-      row,
-      renderCell
-    } = this
+    const { isSummary, column, row, renderCell } = this
     let cell: VNodeChild
+    const { render, key, ellipsis } = column
     if (render && !isSummary) {
       cell = render(row, this.index)
     } else {
       if (isSummary) {
         cell = (row[key] as SummaryCell).value
       } else {
-        cell = renderCell ? renderCell(get(row, key)) : (get(row, key) as any)
+        cell = renderCell
+          ? renderCell(get(row, key), row, column)
+          : (get(row, key) as any)
       }
     }
     if (ellipsis && typeof ellipsis === 'object') {

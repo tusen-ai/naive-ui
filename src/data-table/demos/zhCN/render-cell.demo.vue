@@ -1,8 +1,7 @@
 <markdown>
 # 自定义单元格
 
-日报比小说更玄幻
-
+你可以使用 `render-cell` 去渲染空状态。
 </markdown>
 
 <template>
@@ -11,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
+import { NText } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 type Song = {
@@ -51,11 +51,7 @@ export default defineComponent({
       pagination: false as const,
       renderCell: (value: string | number) => {
         if (!value) {
-          return h(
-            'span',
-            { style: 'color: #ccc;' },
-            { default: () => '该怎么编？' }
-          )
+          return h(NText, { depth: 3 }, { default: () => '未填写' })
         }
         return value
       }

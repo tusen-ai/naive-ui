@@ -76,7 +76,7 @@ render-cell.vue
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
-| render-cell | `(value: any) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by `render`. | NEXT_VERSION |
+| render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by `render`. | NEXT_VERSION |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |

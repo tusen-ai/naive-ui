@@ -41,7 +41,8 @@ import type {
   OnUpdateExpandedRowKeys,
   CreateSummary,
   CreateRowProps,
-  DataTableOnLoad
+  DataTableOnLoad,
+  TableBaseColumn
 } from './interface'
 import { dataTableInjectionKey } from './interface'
 import { useGroupHeader } from './use-group-header'
@@ -130,7 +131,9 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
-  renderCell: Function as PropType<(value: any) => VNodeChild>,
+  renderCell: Function as PropType<
+  (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
+  >,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -397,7 +400,7 @@ export default defineComponent({
       handleTableHeaderScroll,
       handleTableBodyScroll,
       setHeaderScrollLeft,
-      renderCell: props.renderCell
+      renderCell: toRef(props, 'renderCell')
     })
     const exposedMethods: DataTableInst = {
       filter,

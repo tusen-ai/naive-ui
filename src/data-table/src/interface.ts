@@ -231,7 +231,10 @@ export interface DataTableInjection {
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void
   setHeaderScrollLeft: (scrollLeft: number) => void
-  renderCell?: (value: any) => VNodeChild
+  renderCell: Ref<
+  | undefined
+  | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
+  >
 }
 
 export const dataTableInjectionKey =

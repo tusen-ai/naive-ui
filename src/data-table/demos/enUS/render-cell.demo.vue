@@ -1,6 +1,7 @@
 <markdown>
 # Customized cell rendering
 
+You may use `render-cell` to customize empty state.
 </markdown>
 
 <template>
@@ -9,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
+import { NText } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 type Song = {
@@ -19,15 +21,15 @@ type Song = {
 const createColumns = (): DataTableColumns<Song> => {
   return [
     {
-      title: 'week',
+      title: 'Date',
       key: 'no',
       width: 120,
       render: (_, index) => {
-        return `${index + 1}`
+        return index + 1
       }
     },
     {
-      title: 'note',
+      title: 'Note',
       key: 'note'
     }
   ]
@@ -49,7 +51,7 @@ export default defineComponent({
       pagination: false as const,
       renderCell: (value: string | number) => {
         if (!value) {
-          return h('span', { style: 'color: #ccc;' }, { default: () => 'null' })
+          return h(NText, { depth: 3 }, { default: () => 'Empty' })
         }
         return value
       }
