@@ -24,8 +24,8 @@ lazy.vue
 | fallback-src | `string` | `undefined` | URL to show when the image fails to load. |  |
 | height | `string \| number` | `undefined` | Image height. |  |
 | img-props | `object` | `undefined` | The props of the img element inside the component. |  |
-| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | NEXT_VERSION |
-| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | NEXT_VERSION |
+| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.30.5 |
+| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | Object-fit type of the image in the container. |  |
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
@@ -47,7 +47,7 @@ lazy.vue
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| placeholder | `()` | Placeholder shown when image is not loaded. | NEXT_VERSION |
+| placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
 
 ### ImageGroup Slots
 
