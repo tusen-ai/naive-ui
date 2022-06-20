@@ -1,7 +1,7 @@
 <markdown>
 # 快速跳跃
 
-也可以自定义跳至的内容。
+也可以自定义跳至的内容(按`Enter`进行快速跳跃)。
 </markdown>
 
 <template>
