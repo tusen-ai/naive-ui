@@ -54,7 +54,8 @@ import type {
   RenderPrefix,
   RenderSuffix,
   RenderSwitcherIcon,
-  TreeNodeProps
+  TreeNodeProps,
+  CheckOnClick
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -141,6 +142,10 @@ const treeProps = {
     default: true
   },
   expandOnClick: Boolean,
+  checkOnClick: {
+    type: [Boolean, Function] as PropType<CheckOnClick>,
+    default: true
+  },
   cancelable: {
     type: Boolean,
     default: true
@@ -1249,6 +1254,7 @@ export default defineComponent({
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
       cascadeRef: toRef(props, 'cascade'),
+      checkOnClickRef: toRef(props, 'checkOnClick'),
       checkboxPlacementRef: props.checkboxPlacement,
       droppingMouseNodeRef,
       droppingNodeParentRef,
