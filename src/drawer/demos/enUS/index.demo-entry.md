@@ -15,6 +15,7 @@ target.vue
 closable.vue
 slot.vue
 scroll.vue
+adjustable.vue
 ```
 
 ## API

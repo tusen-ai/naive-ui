@@ -21,6 +21,7 @@ dark-1-debug.vue
 dark-2-debug.vue
 dark-3-debug.vue
 dark-4-debug.vue
+adjustable.vue
 ```
 
 ## API
