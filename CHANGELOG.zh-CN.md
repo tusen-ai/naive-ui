@@ -8,7 +8,7 @@
 
 ### Feats
 
-- `n-tree` 在 `checkable = true ` 下，点击文字即可进行选中
+- `n-tree` 新增属性 `check-on-click` 来控制可选状态下的选中交互方式
 
 ## 2.30.4
 

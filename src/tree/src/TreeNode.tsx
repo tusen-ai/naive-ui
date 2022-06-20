@@ -41,7 +41,8 @@ const TreeNode = defineComponent({
       nodePropsRef,
       indentRef,
       blockLineRef,
-      checkboxPlacementRef
+      checkboxPlacementRef,
+      checkOnClickRef
     } = NTree
 
     const disabledRef = computed(
@@ -116,6 +117,13 @@ const TreeNode = defineComponent({
       NTree.displayedIndeterminateKeysRef.value.includes(props.tmNode.key)
     )
 
+    const checkOnClick = useMemo(() => {
+      if (typeof checkOnClickRef.value === 'boolean') {
+        return checkOnClickRef.value
+      }
+      return checkOnClickRef.value(props.tmNode.rawNode)
+    })
+
     function _handleClick (e: MouseEvent): void {
       const { value: expandOnClick } = NTree.expandOnClickRef
       const { value: selectable } = selectableRef
@@ -129,7 +137,7 @@ const TreeNode = defineComponent({
       if (expandOnClick && !tmNode.isLeaf) {
         handleSwitcherClick()
       }
-      if (checkable && !tmNode.children) {
+      if (checkable && checkOnClick.value && !tmNode.children) {
         handleCheck(!checkedRef.value)
       }
     }

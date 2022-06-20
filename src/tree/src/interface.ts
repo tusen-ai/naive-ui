@@ -39,6 +39,8 @@ export type RenderPrefix = RenderTreePart
 
 export type RenderSuffix = RenderTreePart
 
+export type CheckOnClick = (option: TreeOption) => void
+
 export type TreeNodeProps = (info: { option: TreeOption }) => HTMLAttributes
 
 export interface TreeDragInfo {
@@ -108,6 +110,7 @@ export interface TreeInjection {
   labelFieldRef: Ref<string>
   nodePropsRef: Ref<TreeNodeProps | undefined>
   multipleRef: Ref<boolean>
+  checkOnClickRef: Ref<boolean | CheckOnClick>
   checkboxPlacementRef: 'left' | 'right'
   internalTreeSelect: boolean
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void

@@ -54,7 +54,8 @@ import type {
   RenderPrefix,
   RenderSuffix,
   RenderSwitcherIcon,
-  TreeNodeProps
+  TreeNodeProps,
+  CheckOnClick
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -150,6 +151,10 @@ const treeProps = {
   blockNode: Boolean,
   blockLine: Boolean,
   disabled: Boolean,
+  checkOnClick: {
+    type: [Boolean, Function] as PropType<CheckOnClick>,
+    default: true
+  },
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
@@ -1266,6 +1271,7 @@ export default defineComponent({
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
       multipleRef: toRef(props, 'multiple'),
+      checkOnClickRef: toRef(props, 'checkOnClick'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { NTree } from '../index'
+import { NTree, TreeOption } from '../index'
 
 describe('n-tree', () => {
   it('should work with import on demand', () => {
@@ -480,12 +480,22 @@ describe('n-tree', () => {
     await node[0].trigger('click')
     await node[1].trigger('click')
     expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
+    await wrapper.setProps({ checkOnClick: false })
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
+    await node[1].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
   })
 
-  it('should work with `click line to checked when there is children data`', async () => {
+  it('should work with `click line to checked when checkOnClick is function`', async () => {
+    function checkOnClick (node: TreeOption): boolean {
+      return node.label === '1-1'
+    }
+
     const wrapper = mount(NTree, {
       props: {
         expandOnClick: true,
+        checkOnClick,
         cascade: true,
         checkable: true,
         data: [
@@ -529,6 +539,9 @@ describe('n-tree', () => {
     expect(wrapper.findAll('.n-checkbox--checked').length).toBe(0)
     const childNode = wrapper.findAll('.n-tree-node-content')
     await childNode[1].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(1)
+    expect(wrapper.findAll('.n-checkbox--indeterminate').length).toBe(1)
+    await childNode[2].trigger('click')
     expect(wrapper.findAll('.n-checkbox--checked').length).toBe(1)
     expect(wrapper.findAll('.n-checkbox--indeterminate').length).toBe(1)
   })
