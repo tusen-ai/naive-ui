@@ -21,6 +21,7 @@ dark-1-debug.vue
 dark-2-debug.vue
 dark-3-debug.vue
 dark-4-debug.vue
+adjustable.vue
 ```
 
 ## API
@@ -50,6 +51,7 @@ dark-4-debug.vue
 | on-esc | `() => void` | `undefined` | 焦点在 Drawer 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
+| adjustable | `boolean` | `false` | 抽屉是否可以调整宽度. |  |
 
 ### DrawerContent Props
 

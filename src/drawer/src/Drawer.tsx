@@ -1,5 +1,6 @@
 import {
   h,
+  ref,
   PropType,
   defineComponent,
   computed,
@@ -74,6 +75,7 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+
   closeOnEsc: {
     type: Boolean,
     default: true
@@ -81,6 +83,10 @@ const drawerProps = {
   blockScroll: {
     type: Boolean,
     default: true
+  },
+  adjustable: {
+    type: Boolean,
+    default: false
   },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -147,18 +153,34 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const styleWidthRef = computed(() => {
-      const { placement } = props
-      if (placement === 'top' || placement === 'bottom') return ''
-      const { width } = props
-      return formatLength(width)
+
+    const drawerWidth = ref('')
+    const drawerHeight = ref('')
+
+    const styleWidthRef = computed({
+      set (val: string) {
+        drawerWidth.value = val
+      },
+      get () {
+        const { placement } = props
+        if (placement === 'top' || placement === 'bottom') return ''
+        const { width } = props
+        return drawerWidth.value || formatLength(width)
+      }
     })
-    const styleHeightRef = computed(() => {
-      const { placement } = props
-      if (placement === 'left' || placement === 'right') return ''
-      const { height } = props
-      return formatLength(height)
+
+    const styleHeightRef = computed({
+      set (val: string) {
+        drawerHeight.value = val
+      },
+      get () {
+        const { placement } = props
+        if (placement === 'left' || placement === 'right') return ''
+        const { height } = props
+        return drawerHeight.value || formatLength(height)
+      }
     })
+
     const mergedBodyStyleRef = computed<Array<CSSProperties | string>>(() => {
       return [
         {
@@ -168,6 +190,7 @@ export default defineComponent({
         props.drawerStyle || ''
       ]
     })
+
     function handleMaskClick (e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (maskClosable) {
@@ -195,7 +218,9 @@ export default defineComponent({
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
       mergedClsPrefixRef,
-      doUpdateShow
+      doUpdateShow,
+      width: styleWidthRef,
+      height: styleHeightRef
     })
     const cssVarsRef = computed(() => {
       const {
@@ -315,6 +340,7 @@ export default defineComponent({
                   onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  adjustable={this.adjustable}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
                   onClickoutside={this.handleMaskClick}
