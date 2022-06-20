@@ -4,9 +4,12 @@
 
 ### Fixes
 
+- 修复 `n-color-picker` 手动输入alpha值时不生效的问题
+
 ### Feats
 
 - `n-tree` 新增属性 `check-on-click` 来控制可选状态下的选中交互方式
+
 
 ## 2.30.5
 

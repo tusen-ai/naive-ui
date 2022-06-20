@@ -37,7 +37,7 @@ function normalizeHexaUnit (value: string): boolean {
 // 0 - 100%
 function normalizeAlphaUnit (value: string): number | false {
   if (/^\d{1,3}\.?\d*%$/.test(value.trim())) {
-    return Math.max(0, Math.min(parseInt(value), 100))
+    return Math.max(0, Math.min(parseInt(value) / 100, 100))
   }
   return false
 }

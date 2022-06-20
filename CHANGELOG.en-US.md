@@ -4,9 +4,12 @@
 
 ### Fixes
 
+- Fix `n-color-picker` can't set alpha value correctly by hand
+
 ### Feats
 
 - `n-tree` adds `check-on-click` prop to control `checked` status
+
 
 ## 2.30.5
 
