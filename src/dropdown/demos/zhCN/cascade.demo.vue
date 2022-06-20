@@ -70,7 +70,6 @@ const options = [
       {
         label: '其他',
         key: 'others2',
-        disabled: true,
         children: [
           {
             label: '鸡肉',
