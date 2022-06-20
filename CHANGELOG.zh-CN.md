@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-transfer` 新增 `back-icon` and `forward-icon` 槽, 关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+
 ## 2.30.4
 
 ### Fixes
