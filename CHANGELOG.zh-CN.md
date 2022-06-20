@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+- 修复 `n-color-picker` 手动输入alpha值时不生效的问题
+
 ## 2.30.5
 
 ### Fixes

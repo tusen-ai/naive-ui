@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+- Fix `n-color-picker` can't set alpha value correctly by hand
+
 ## 2.30.5
 
 ### Fixes
