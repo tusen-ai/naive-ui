@@ -10,14 +10,20 @@ import {
   ref,
   VNode,
   Ref,
-  cloneVNode
+  cloneVNode,
+  vShow
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
-import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
+import {
+  getSlot,
+  flatten,
+  ExtractPublicPropTypes,
+  isNodeVShowFalse
+} from '../../_utils'
 import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
@@ -150,6 +156,25 @@ export default defineComponent({
 
       rawChildren.forEach((child) => {
         if ((child?.type as any)?.__GRID_ITEM__ !== true) return
+
+        if (isNodeVShowFalse(child)) {
+          const clonedNode = cloneVNode(child)
+          if (clonedNode.props) {
+            clonedNode.props.privateShow = false
+          } else {
+            clonedNode.props = { pirvateShow: false }
+          }
+          childrenAndRawSpan.push({
+            child: clonedNode,
+            rawChildSpan: 0
+          })
+          return
+        }
+
+        // We don't want v-show to control display, so we need to stripe it
+        // here, nor it may mess child's style
+        child.dirs = child.dirs?.filter(({ dir }) => dir !== vShow) || null
+
         const clonedChild = cloneVNode(child)
 
         const rawChildSpan = Number(
@@ -177,7 +202,8 @@ export default defineComponent({
           maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
-          maybeSuffixNode.props.privateShow = true
+          maybeSuffixNode.props.privateShow =
+            maybeSuffixNode.props.privateShow ?? true
         }
       }
 
@@ -195,10 +221,8 @@ export default defineComponent({
               responsiveQuery
             ) ?? 0
           )
-
-          const childSpan =
-            Math.min(rawChildSpan + childOffset, responsiveCols) || 1
-
+          // it could be 0 sometimes (v-show = false)
+          const childSpan = Math.min(rawChildSpan + childOffset, responsiveCols)
           if (!child.props) {
             child.props = {
               privateSpan: childSpan,
@@ -225,6 +249,7 @@ export default defineComponent({
         }
         if (done) {
           if (child.props) {
+            // suffix node's privateShow may be true
             if (child.props.privateShow !== true) {
               child.props.privateShow = false
             }

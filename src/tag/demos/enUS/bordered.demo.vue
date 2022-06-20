@@ -13,7 +13,7 @@
     <n-tag :bordered="false" type="warning">
       I'm Down
     </n-tag>
-    <n-tag type="error">
+    <n-tag :bordered="false" type="error">
       Yesterday
     </n-tag>
     <n-tag :bordered="false" type="info">

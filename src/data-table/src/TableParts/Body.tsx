@@ -176,7 +176,8 @@ export default defineComponent({
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doCheck,
-      doUncheck
+      doUncheck,
+      renderCell
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
@@ -467,6 +468,7 @@ export default defineComponent({
       handleTableBodyScroll,
       handleCheckboxUpdateChecked,
       handleUpdateExpanded,
+      renderCell,
       ...exposedMethods
     }
   },
@@ -827,6 +829,7 @@ export default defineComponent({
                             column={column}
                             isSummary={isSummary}
                             mergedTheme={mergedTheme}
+                            renderCell={this.renderCell}
                           />
                         )}
                       </td>

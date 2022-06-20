@@ -6,6 +6,26 @@
 
 - `n-transfer` adds `back-icon` and `forward-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
 
+## 2.30.5
+
+### Fixes
+
+- Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+- Fix `n-back-top` has log warnings of console when use `show` prop, closes [#3122](https://github.com/TuSimple/naive-ui/issues/3122).
+- Fix `volar.d.ts` components' type is `any`.
+- Fix `n-grid-item` may not display correctly if `v-show` is used, closes [#3123](https://github.com/TuSimple/naive-ui/issues/3123).
+- Fix `n-select` clears input value on mouse enter when it's clearable and using IME.
+
+### Feats
+
+- 🌟 `n-image` adds `lazy` prop, closes [#3055](https://github.com/TuSimple/naive-ui/issues/3055).
+- `n-image` adds `intersection-observer-options` prop.
+- `n-image` adds `placeholder` slot.
+- Exports `NTooltipInst` type.
+- `n-data-table` adds `render-cell` prop, closes [#3095](https://github.com/TuSimple/naive-ui/issues/3095).
+- `n-space` adds `wrap-item` prop.
+- `n-data-table`'s `on-update:checked-row-keys` will pass row data, closes [#2215](https://github.com/TuSimple/naive-ui/issues/2215), closes [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
+
 ## 2.30.4
 
 ### Fixes
