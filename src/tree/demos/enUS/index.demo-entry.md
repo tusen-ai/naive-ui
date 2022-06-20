@@ -40,6 +40,7 @@ checkbox-placement.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
+| check-on-click | `boolean \| (node: TreeOption) => boolean` | `true` | Allow to click the `label` node to checked it when 'checkable = true' | NEXT_VERSION |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all options. |  |
@@ -48,7 +49,6 @@ checkbox-placement.vue
 | draggable | `boolean` | `false` | Whether it can be dragged. |  |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
 | expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | 2.29.1 |
-| check-on-click | `boolean \| (node: TreeOption) => boolean` | `true` | Allow to click the `label` node to checked it when 'checkable = true' | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
