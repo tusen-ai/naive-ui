@@ -11,7 +11,8 @@ import {
   VNode,
   Ref,
   cloneVNode,
-  vShow
+  vShow,
+  onMounted
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
@@ -22,11 +23,14 @@ import {
   getSlot,
   flatten,
   ExtractPublicPropTypes,
+  isBrowser,
   isNodeVShowFalse
 } from '../../_utils'
 import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
+
+const ssrAttrName = 'data-ssr-key'
 
 const gridProps = {
   responsive: {
@@ -56,6 +60,7 @@ const gridProps = {
 } as const
 
 export interface NGridInjection {
+  isSSR: Ref<boolean>
   itemStyleRef: Ref<CSSProperties | string | undefined>
   xGapRef: Ref<string | undefined>
   overflowRef: Ref<boolean>
@@ -116,12 +121,32 @@ export default defineComponent({
         return undefined
       }
     )
+
+    // for SSR, fix bug https://github.com/TuSimple/naive-ui/issues/2462
+    const isSSRRef = ref(false)
+    const contentElRef = ref<HTMLElement>()
+    onMounted(() => {
+      const { value: contentEl } = contentElRef
+      if (contentEl) {
+        const ssrKey = contentEl.getAttribute(ssrAttrName)
+        /* istanbul ignore if */
+        if (ssrKey) {
+          contentEl.removeAttribute(ssrAttrName)
+          isSSRRef.value = true
+        }
+      }
+    })
+
     provide(gridInjectionKey, {
+      isSSR: isSSRRef,
       itemStyleRef: toRef(props, 'itemStyle'),
       xGapRef: responsiveXGapRef,
       overflowRef
     })
+
     return {
+      isSSR: !isBrowser,
+      contentEl: contentElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       style: computed<CSSProperties>(() => {
         return {
@@ -265,8 +290,10 @@ export default defineComponent({
         'div',
         mergeProps(
           {
+            ref: 'contentEl',
             class: `${this.mergedClsPrefix}-grid`,
-            style: this.style
+            style: this.style,
+            [ssrAttrName]: this.isSSR || null
           },
           this.$attrs
         ),
