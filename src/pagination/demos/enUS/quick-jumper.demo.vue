@@ -1,7 +1,7 @@
 <markdown>
 # Quick jumper
 
-You can also customize the content to jump to(press `Enter` to jump quickly).
+You can also customize the content to jump to (press `Enter` to jump quickly).
 </markdown>
 
 <template>
