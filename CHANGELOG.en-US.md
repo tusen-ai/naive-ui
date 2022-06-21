@@ -6,6 +6,7 @@
 
 - Fix `n-color-picker` can't input alpha value correctly manually.
 - Fix some components don't work correctly if `__VUE_OPTIONS_API__` is set to `false`, closes [#3146](https://github.com/TuSimple/naive-ui/issues/3146).
+- Fix `n-grid` doesn't adjust it's content to fit responsive config in SSR page, closes [#2462](https://github.com/TuSimple/naive-ui/issues/2462).
 
 ## 2.30.5
 
