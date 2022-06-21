@@ -9,6 +9,7 @@
 - 修复 `n-grid` 在 SSR 页面挂载后不会正确的适配响应式，关闭 [#2462](https://github.com/TuSimple/naive-ui/issues/2462)
 - 修复 `n-modal` 在同时打开多个的时候点击某个遮罩，`on-mask-click` 会对每一个都触发，关闭 [#3147](https://github.com/TuSimple/naive-ui/issues/3147)
 - 修复 `n-data-table` 的列的 `ellipsis` 属性类型不接受 `style` 属性
+- 修复 `n-data-table` 在列同时设为 `ellipsis` 和 `fixed` 时会丢失固定列的阴影
 
 ## 2.30.5
 
