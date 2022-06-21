@@ -15,7 +15,9 @@ import {
   ComponentPublicInstance,
   mergeProps,
   cloneVNode,
-  computed
+  computed,
+  DirectiveArguments,
+  VNodeChild
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -53,11 +55,9 @@ export default defineComponent({
     },
     blockScroll: Boolean,
     ...presetProps,
+    renderMask: Function as PropType<() => VNodeChild>,
     // events
-    onClickoutside: {
-      type: Function,
-      required: true
-    },
+    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onBeforeLeave: {
       type: Function,
       required: true
@@ -153,9 +153,6 @@ export default defineComponent({
     function handlePositiveClick (): void {
       props.onPositiveClick()
     }
-    function handleClickOutside (e: MouseEvent): void {
-      props.onClickoutside(e)
-    }
     const childNodeRef = ref<VNode | null>(null)
     watch(childNodeRef, (node) => {
       if (node) {
@@ -179,7 +176,6 @@ export default defineComponent({
       scrollbarRef,
       displayed: displayedRef,
       childNodeRef,
-      handleClickOutside,
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
@@ -195,7 +191,6 @@ export default defineComponent({
       handleEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleClickOutside,
       preset,
       mergedClsPrefix
     } = this
@@ -225,7 +220,8 @@ export default defineComponent({
               contentClass={`${mergedClsPrefix}-modal-scroll-content`}
             >
               {{
-                default: () => (
+                default: () => [
+                  this.renderMask?.(),
                   <VFocusTrap
                     disabled={!this.trapFocus}
                     active={this.show}
@@ -243,8 +239,20 @@ export default defineComponent({
                           onBeforeLeave={handleBeforeLeave as any}
                         >
                           {{
-                            default: () =>
-                              withDirectives(
+                            default: () => {
+                              const dirs: DirectiveArguments = [
+                                [vShow, this.show]
+                              ]
+                              const { onClickoutside } = this
+                              if (onClickoutside) {
+                                dirs.push([
+                                  clickoutside,
+                                  this.onClickoutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ])
+                              }
+                              return withDirectives(
                                 (this.preset === 'confirm' ||
                                 this.preset === 'dialog' ? (
                                   <NDialog
@@ -284,22 +292,15 @@ export default defineComponent({
                                     ) : (
                                       (this.childNodeRef = childNode)
                                     )) as any,
-                                [
-                                  [vShow, this.show],
-                                  [
-                                    clickoutside,
-                                    handleClickOutside,
-                                    undefined as unknown as string,
-                                    { capture: true }
-                                  ]
-                                ]
+                                dirs
                               )
+                            }
                           }}
                         </Transition>
                       )
                     }}
                   </VFocusTrap>
-                )
+                ]
               }}
             </NScrollbar>
           </div>,

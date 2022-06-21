@@ -27,6 +27,7 @@ dark-7-debug.vue
 dark-8-debug.vue
 dark-9-debug.vue
 dark-10-debug.vue
+mask-click-debug.vue
 ```
 
 ## API

@@ -279,6 +279,7 @@ export default defineComponent({
         {{
           default: () => {
             this.onRender?.()
+            const { unstableShowMask } = this
             return withDirectives(
               <div
                 role="none"
@@ -290,25 +291,6 @@ export default defineComponent({
                 ]}
                 style={this.cssVars as CSSProperties}
               >
-                {this.unstableShowMask ? (
-                  <Transition
-                    name="fade-in-transition"
-                    key="mask"
-                    appear={this.internalAppear ?? this.isMounted}
-                  >
-                    {{
-                      default: () => {
-                        return this.show ? (
-                          <div
-                            aria-hidden
-                            ref="containerRef"
-                            class={`${mergedClsPrefix}-modal-mask`}
-                          />
-                        ) : null
-                      }
-                    }}
-                  </Transition>
-                ) : null}
                 <NModalBodyWrapper
                   style={this.overlayStyle}
                   {...this.$attrs}
@@ -327,7 +309,33 @@ export default defineComponent({
                   onBeforeLeave={this.handleBeforeLeave}
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
-                  onClickoutside={this.handleClickoutside}
+                  onClickoutside={
+                    unstableShowMask ? undefined : this.handleClickoutside
+                  }
+                  renderMask={
+                    unstableShowMask
+                      ? () => (
+                          <Transition
+                            name="fade-in-transition"
+                            key="mask"
+                            appear={this.internalAppear ?? this.isMounted}
+                          >
+                            {{
+                              default: () => {
+                                return this.show ? (
+                                  <div
+                                    aria-hidden
+                                    ref="containerRef"
+                                    class={`${mergedClsPrefix}-modal-mask`}
+                                    onClick={this.handleClickoutside}
+                                  />
+                                ) : null
+                              }
+                            }}
+                          </Transition>
+                        )
+                      : undefined
+                  }
                 >
                   {this.$slots}
                 </NModalBodyWrapper>
