@@ -61,6 +61,7 @@ fixed-column2-debug
 scroll-debug
 height-debug
 keep-alive-debug.vue
+ellipsis-debug.vue
 ```
 
 ## API
