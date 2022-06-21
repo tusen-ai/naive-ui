@@ -137,7 +137,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {}, loaded, $attrs } = this
+    const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
 
@@ -160,6 +160,8 @@ export default defineComponent({
         onClick={this.click}
         onError={this.mergedOnError}
         onLoad={this.mergedOnLoad}
+        // @ts-expect-error
+        loading={lazy ? 'lazy' : 'eager'}
         style={[
           imgProps.style || '',
           placeholderNode && !loaded
@@ -199,6 +201,7 @@ export default defineComponent({
             }}
           </NImagePreview>
         )}
+
         {!loaded && placeholderNode}
       </div>
     )

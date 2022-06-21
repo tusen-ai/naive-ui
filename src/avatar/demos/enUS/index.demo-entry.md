@@ -13,6 +13,7 @@ icon.vue
 name-size.vue
 fallback.vue
 group.vue
+lazy.vue
 v-show-debug.vue
 ```
 
@@ -21,10 +22,12 @@ v-show-debug.vue
 ### Avatar Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to display a avatar with border. |
 | color | `string` | `undefined` | The background color of the avatar. |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |
+| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` |  |
+| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. |  |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |
