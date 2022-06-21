@@ -562,7 +562,8 @@ describe('n-tree', () => {
           {
             label: '3',
             key: '3'
-          }],
+          }
+        ],
         nodeProps: () => ({ class: testClass })
       }
     })
