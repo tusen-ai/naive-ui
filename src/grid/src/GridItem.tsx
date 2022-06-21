@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  getCurrentInstance,
-  PropType,
-  Ref
-} from 'vue'
+import { h, defineComponent, inject, getCurrentInstance, PropType } from 'vue'
 import { pxfy } from 'seemly'
 import { keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -44,10 +37,6 @@ export const gridItemPropKeys = keysOf(gridItemProps)
 
 export type GridItemProps = ExtractPublicPropTypes<typeof gridItemProps>
 
-const track = (target: Ref<unknown>): void => {
-  Reflect.get(target, 'value')
-}
-
 export default defineComponent({
   __GRID_ITEM__: true,
   name: 'GridItem',
@@ -55,7 +44,7 @@ export default defineComponent({
   props: gridItemProps,
   setup () {
     const {
-      isSSR,
+      isSsrRef,
       xGapRef,
       itemStyleRef,
       overflowRef
@@ -66,7 +55,7 @@ export default defineComponent({
       overflow: overflowRef,
       itemStyle: itemStyleRef,
       deriveStyle: () => {
-        track(isSSR)
+        void isSsrRef.value
         // Here is quite a hack, I hope there is a better way to solve it
         const {
           privateSpan = defaultSpan,
