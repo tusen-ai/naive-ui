@@ -2,8 +2,10 @@
 
 ## NEXT_VERSION
 
-### Feats
+### Fixes
+- Fix `n-color-picker` can't set alpha value correctly by hand
 
+### Feats
 - `n-transfer` adds `back-icon` and `forward-icon` slots, closes [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
 
 ## 2.30.5

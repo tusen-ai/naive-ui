@@ -2,9 +2,11 @@
 
 ## NEXT_VERSION
 
-### Feats
+### Fixes
+- 修复 `n-color-picker` 手动输入alpha值时不生效的问题
 
-- `n-transfer` 新增 `back-icon` and `forward-icon` 槽, 关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
+### Feats
+- `n-transfer` 新增 `back-icon` and `forward-icon` 插槽, 关闭 [#2668](https://github.com/TuSimple/naive-ui/issues/2668).
 
 ## 2.30.5
 
