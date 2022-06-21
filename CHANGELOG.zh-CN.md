@@ -3,7 +3,9 @@
 ## NEXT_VERSION
 
 ### Fixes
-- 修复 `n-color-picker` 手动输入alpha值时不生效的问题
+
+- 修复 `n-color-picker` 手动输入 alpha 值时不生效
+- 修复某些组件在 `__VUE_OPTIONS_API__` 设为 `false` 时工作不正常的问题，关闭 [#3146](https://github.com/TuSimple/naive-ui/issues/3146)
 
 ## 2.30.5
 
