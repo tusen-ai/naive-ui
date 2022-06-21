@@ -8,6 +8,7 @@
 - 修复某些组件在 `__VUE_OPTIONS_API__` 设为 `false` 时工作不正常的问题，关闭 [#3146](https://github.com/TuSimple/naive-ui/issues/3146)
 - 修复 `n-grid` 在 SSR 页面挂载后不会正确的适配响应式，关闭 [#2462](https://github.com/TuSimple/naive-ui/issues/2462)
 - 修复 `n-modal` 在同时打开多个的时候点击某个遮罩，`on-mask-click` 会对每一个都触发，关闭 [#3147](https://github.com/TuSimple/naive-ui/issues/3147)
+- 修复 `n-data-table` 的列的 `ellipsis` 属性类型不接受 `style` 属性
 
 ## 2.30.5
 
