@@ -57,7 +57,7 @@ export type TmNode = TreeNode<InternalRowData>
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
-export type Ellipsis = boolean | EllipsisProps
+export type Ellipsis = boolean | (EllipsisProps & { style?: CSSProperties })
 
 export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
