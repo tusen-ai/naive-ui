@@ -19,6 +19,7 @@
 - `n-data-table` adds `render-cell` prop, closes [#3095](https://github.com/TuSimple/naive-ui/issues/3095).
 - `n-space` adds `wrap-item` prop.
 - `n-data-table`'s `on-update:checked-row-keys` will pass row data, closes [#2215](https://github.com/TuSimple/naive-ui/issues/2215), closes [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
+- `n-drawer` adds `adjustable` prop.
 
 ## 2.30.4
 
