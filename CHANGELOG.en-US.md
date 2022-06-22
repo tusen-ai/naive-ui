@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.30.6
 
 ### Feats
 
@@ -8,7 +8,13 @@
 
 ### Fixes
 
-- Fix `n-color-picker` can't set alpha value correctly by hand
+- Fix `n-color-picker` can't input alpha value correctly manually.
+- Fix some components don't work correctly if `__VUE_OPTIONS_API__` is set to `false`, closes [#3146](https://github.com/TuSimple/naive-ui/issues/3146).
+- Fix `n-grid` doesn't adjust it's content to fit responsive config in SSR page, closes [#2462](https://github.com/TuSimple/naive-ui/issues/2462).
+- Fix `n-modal` when many instances are activated at same time, `on-mask-click` will be triggered on every modal even only one mask is clicked [#3147](https://github.com/TuSimple/naive-ui/issues/3147).
+- Fix `n-data-table`'s column `ellipsis` prop's type doesn't allow `style` prop.
+- Fix `n-data-table`'s column will lose box shadow when set to `ellipsis` & `fixed` simultaneously, closes [#3145](https://github.com/TuSimple/naive-ui/issues/3145).
+- Fix `n-image`'s `lazy` prop doesn't work on Safari & Firefox.
 
 ## 2.30.5
 

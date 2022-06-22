@@ -721,7 +721,7 @@ export default defineComponent({
                       }
                     }
                     const hoverKey = isCrossRowTd ? this.hoverKey : null
-                    const { ellipsis, cellProps } = column
+                    const { cellProps } = column
                     const resolvedCellProps = cellProps?.(rowData, rowIndex)
                     return (
                       <td
@@ -753,10 +753,6 @@ export default defineComponent({
                           column.align &&
                             `${mergedClsPrefix}-data-table-td--${column.align}-align`,
                           {
-                            [`${mergedClsPrefix}-data-table-td--ellipsis`]:
-                              ellipsis === true ||
-                              // don't add ellipsis class if tooltip exists
-                              (ellipsis && !ellipsis.tooltip),
                             [`${mergedClsPrefix}-data-table-td--selection`]:
                               column.type === 'selection',
                             [`${mergedClsPrefix}-data-table-td--expand`]:
@@ -824,6 +820,7 @@ export default defineComponent({
                           ) : null
                         ) : (
                           <Cell
+                            clsPrefix={mergedClsPrefix}
                             index={rowIndex}
                             row={rowData}
                             column={column}

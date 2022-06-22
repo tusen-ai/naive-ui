@@ -30,7 +30,7 @@ import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
 
-const ssrAttrName = 'data-ssr-key'
+const SSR_ATTR_NAME = '__ssr__'
 
 const gridProps = {
   responsive: {
@@ -60,7 +60,7 @@ const gridProps = {
 } as const
 
 export interface NGridInjection {
-  isSSR: Ref<boolean>
+  isSsrRef: Ref<boolean>
   itemStyleRef: Ref<CSSProperties | string | undefined>
   xGapRef: Ref<string | undefined>
   overflowRef: Ref<boolean>
@@ -123,29 +123,27 @@ export default defineComponent({
     )
 
     // for SSR, fix bug https://github.com/TuSimple/naive-ui/issues/2462
-    const isSSRRef = ref(false)
+    const isSsrRef = ref(false)
     const contentElRef = ref<HTMLElement>()
     onMounted(() => {
       const { value: contentEl } = contentElRef
       if (contentEl) {
-        const ssrKey = contentEl.getAttribute(ssrAttrName)
-        /* istanbul ignore if */
-        if (ssrKey) {
-          contentEl.removeAttribute(ssrAttrName)
-          isSSRRef.value = true
+        if (contentEl.hasAttribute(SSR_ATTR_NAME)) {
+          contentEl.removeAttribute(SSR_ATTR_NAME)
+          isSsrRef.value = true
         }
       }
     })
 
     provide(gridInjectionKey, {
-      isSSR: isSSRRef,
+      isSsrRef,
       itemStyleRef: toRef(props, 'itemStyle'),
       xGapRef: responsiveXGapRef,
       overflowRef
     })
 
     return {
-      isSSR: !isBrowser,
+      isSsr: !isBrowser,
       contentEl: contentElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       style: computed<CSSProperties>(() => {
@@ -293,7 +291,7 @@ export default defineComponent({
             ref: 'contentEl',
             class: `${this.mergedClsPrefix}-grid`,
             style: this.style,
-            [ssrAttrName]: this.isSSR || null
+            [SSR_ATTR_NAME]: this.isSsr || undefined
           },
           this.$attrs
         ),

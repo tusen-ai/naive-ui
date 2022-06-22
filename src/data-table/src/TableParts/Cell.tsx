@@ -8,6 +8,10 @@ import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
 export default defineComponent({
   name: 'DataTableCell',
   props: {
+    clsPrefix: {
+      type: String,
+      required: true
+    },
     row: {
       type: Object as PropType<InternalRowData>,
       required: true
@@ -44,17 +48,25 @@ export default defineComponent({
           : (get(row, key) as any)
       }
     }
-    if (ellipsis && typeof ellipsis === 'object') {
-      const { mergedTheme } = this
-      return (
-        <NEllipsis
-          {...ellipsis}
-          theme={mergedTheme.peers.Ellipsis}
-          themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-        >
-          {{ default: () => cell }}
-        </NEllipsis>
-      )
+    if (ellipsis) {
+      if (typeof ellipsis === 'object') {
+        const { mergedTheme } = this
+        return (
+          <NEllipsis
+            {...ellipsis}
+            theme={mergedTheme.peers.Ellipsis}
+            themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+          >
+            {{ default: () => cell }}
+          </NEllipsis>
+        )
+      } else {
+        return (
+          <span class={`${this.clsPrefix}-data-table-td__ellipsis`}>
+            {cell}
+          </span>
+        )
+      }
     }
     return cell
   }
