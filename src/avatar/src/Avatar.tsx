@@ -27,6 +27,7 @@ import {
   IntersectionObserverOptions,
   observeIntersection
 } from '../../image/src/utils'
+import { isNativeSupportLazyLoadingImage } from '../../_utils/env/is-native-lazy-load'
 
 export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -195,6 +196,9 @@ export default defineComponent({
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
+      if (isNativeSupportLazyLoadingImage) {
+        return
+      }
       let unobserve: (() => void) | undefined
       const stopWatchHandle = watchEffect(() => {
         unobserve?.()
@@ -228,6 +232,7 @@ export default defineComponent({
       imageRef: $imageRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
+
       mergedOnLoad: (e: Event) => {
         const { onLoad } = props
         onLoad?.(e)
@@ -271,7 +276,13 @@ export default defineComponent({
               // @ts-expect-error
               loading={lazy ? 'lazy' : 'eager'}
               ref="imageRef"
-              src={shouldStartLoading || loaded ? src : undefined}
+              src={
+                isNativeSupportLazyLoadingImage
+                  ? src
+                  : shouldStartLoading || loaded
+                    ? src
+                    : undefined
+              }
               onLoad={mergedOnLoad}
               data-image-src={src}
               onError={this.handleError}

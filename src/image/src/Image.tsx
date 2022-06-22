@@ -18,6 +18,7 @@ import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
 import type { IntersectionObserverOptions } from './utils'
+import { isNativeSupportLazyLoadingImage } from '../../_utils/env/is-native-lazy-load'
 
 export interface ImageInst {
   click: () => void
@@ -87,6 +88,10 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      if (isNativeSupportLazyLoadingImage) {
+        return
+      }
+
       let unobserve: (() => void) | undefined
       const stopWatchHandle = watchEffect(() => {
         unobserve?.()
@@ -141,7 +146,7 @@ export default defineComponent({
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
-
+    const loadSrc: string = this.src || (imageProps.src as any as string)
     const imgNode = (
       <img
         {...imgProps}
@@ -150,11 +155,13 @@ export default defineComponent({
         width={this.width || imgProps.width}
         height={this.height || imgProps.height}
         src={
-          this.showError
-            ? this.fallbackSrc
-            : this.shouldStartLoading
-              ? this.src || imgProps.src
-              : undefined
+          isNativeSupportLazyLoadingImage
+            ? loadSrc
+            : this.showError
+              ? this.fallbackSrc
+              : this.shouldStartLoading
+                ? loadSrc
+                : undefined
         }
         alt={this.alt || imgProps.alt}
         aria-label={this.alt || imgProps.alt}
