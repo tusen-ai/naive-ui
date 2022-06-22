@@ -26,8 +26,8 @@ v-show-debug.vue
 | bordered | `boolean` | `false` | Whether to display a avatar with border. |
 | color | `string` | `undefined` | The background color of the avatar. |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |
-| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.30.7 |
-| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.30.7 |
+| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | NEXT_VERSION |
+| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | NEXT_VERSION |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |
@@ -48,9 +48,9 @@ see [Avatar Props](avatar#Props)
 ### Avatar Slots
 
 | Name        | Parameters | Description                                 |
-| ----------- | ---------- | ------------------------------------------- | ------ |
+| ----------- | ---------- | ------------------------------------------- | ------------ |
 | default     | `()`       | The content of the avatar.                  |
-| placeholder | `()`       | Placeholder shown when image is not loaded. | 2.30.7 |
+| placeholder | `()`       | Placeholder shown when image is not loaded. | NEXT_VERSION |
 
 ### AvatarGroup Slots
 
