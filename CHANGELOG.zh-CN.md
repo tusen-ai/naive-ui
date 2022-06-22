@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+
 ## 2.30.6
 
 ### Fixes

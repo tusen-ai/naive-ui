@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).
+
 ## 2.30.6
 
 ### Fixes

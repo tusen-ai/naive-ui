@@ -40,6 +40,7 @@ interface NormalRowRenderInfo {
   striped: boolean
   tmNode: TmNode
   key: RowKey
+  num?: number
 }
 
 type RowRenderInfo =
@@ -50,12 +51,14 @@ type RowRenderInfo =
       rawNode: SummaryRowData
       disabled: boolean
     }
+    num?: number
   }
   | NormalRowRenderInfo
   | {
     isExpandedRow: true
     tmNode: TmNode
     key: RowKey
+    num?: number
   }
 
 function flatten (
@@ -593,15 +596,17 @@ export default defineComponent({
 
             // Tile the data of the expanded row
             const displayedData: RowRenderInfo[] = []
-            mergedData.forEach((rowInfo) => {
+            mergedData.forEach((rowInfo, idx) => {
+              const commonRowInfo = { ...rowInfo, num: idx }
               if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
-                displayedData.push(rowInfo, {
+                displayedData.push(commonRowInfo, {
                   isExpandedRow: true,
                   key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row
-                  tmNode: rowInfo.tmNode as TmNode
+                  tmNode: rowInfo.tmNode as TmNode,
+                  num: idx
                 })
               } else {
-                displayedData.push(rowInfo)
+                displayedData.push(commonRowInfo)
               }
             })
 
@@ -642,7 +647,7 @@ export default defineComponent({
               }
               const isSummary = 'isSummaryRow' in rowInfo
               const striped = !isSummary && rowInfo.striped
-              const { tmNode, key: rowKey } = rowInfo
+              const { tmNode, key: rowKey, num: rowNum } = rowInfo
               const { rawNode: rowData } = tmNode
               const expanded = mergedExpandedRowKeySet.has(rowKey)
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
@@ -821,7 +826,7 @@ export default defineComponent({
                         ) : (
                           <Cell
                             clsPrefix={mergedClsPrefix}
-                            index={rowIndex}
+                            index={rowNum || rowIndex}
                             row={rowData}
                             column={column}
                             isSummary={isSummary}
