@@ -71,11 +71,11 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ### 设计资源
 
-[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)。
+[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)
 
 ## 贡献
 
-请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)。
+请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)
 
 ## 许可
 
