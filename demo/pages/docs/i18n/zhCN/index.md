@@ -64,9 +64,9 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 斯洛伐克语        | skSK | dateSkSK | 2.25.3 |
 | 泰语（泰国）      | thTH | dateThTH | 2.27.0 |
 | 乌克兰语          | ukUA | dateUkUA |        |
+| 越南语            | viVN   | dateViVN   |        |
 | 简体中文          | zhCN | dateZhCN |        |
 | 繁体中文          | zhTW | dateZhTW |        |
-| 越南语            | vi   | dateVi   |        |
 
 ## 在现有国际化基础上调整
 
