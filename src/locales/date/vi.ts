@@ -1,4 +1,4 @@
-import vi from 'date-fns/esm/locale/vi'
+import viVN from 'date-fns/esm/locale/vi'
 import type { Locale } from 'date-fns'
 
 interface NDateLocale {
@@ -7,8 +7,8 @@ interface NDateLocale {
 }
 
 const dateVi: NDateLocale = {
-  name: 'vi',
-  locale: vi
+  name: 'viVN',
+  locale: viVN
 }
 
 export { NDateLocale }
