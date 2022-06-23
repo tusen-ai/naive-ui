@@ -1,7 +1,7 @@
 import type { NLocale } from './enUS'
 
 const viVN: NLocale = {
-  name: 'viVN',
+  name: 'vi-VN',
   global: {
     undo: 'Hoàn tác',
     redo: 'Làm lại',
