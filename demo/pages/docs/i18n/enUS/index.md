@@ -66,6 +66,7 @@ The following list is sorted by 'Config'.
 | Ukrainian                 | ukUA   | dateUkUA    |         |
 | Chinese (Simplified)      | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)     | zhTW   | dateZhTW    |         |
+| Vietnamese                | vi     | dateVi      |         |
 
 ## Customize the existing locale
 

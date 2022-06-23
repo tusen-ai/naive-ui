@@ -66,6 +66,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 乌克兰语          | ukUA | dateUkUA |        |
 | 简体中文          | zhCN | dateZhCN |        |
 | 繁体中文          | zhTW | dateZhTW |        |
+| 越南语            | vi   | dateVi   |        |
 
 ## 在现有国际化基础上调整
 
