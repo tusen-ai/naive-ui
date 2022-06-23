@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- `n-date-picker`'s `clearable` props can control `action` prop's `clear` when `action` prop's no `clear` set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+
 ## 2.30.6
 
 ### Fixes

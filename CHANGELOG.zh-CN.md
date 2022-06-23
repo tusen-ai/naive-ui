@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- `n-date-picker` 的 `clearable` 属性当 `action` 属性没有设置 `clear` 时，可以控制 `action` 属性的 `clear`，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+
 ## 2.30.6
 
 ### Fixes
