@@ -1,5 +1,7 @@
-const enUS = {
-  name: 'vi',
+import type { NLocale } from './enUS'
+
+const viVN: NLocale = {
+  name: 'viVN',
   global: {
     undo: 'Hoàn tác',
     redo: 'Làm lại',
@@ -112,5 +114,4 @@ const enUS = {
   }
 }
 
-export type NLocale = typeof enUS
-export default enUS
+export default viVN
