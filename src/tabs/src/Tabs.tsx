@@ -199,7 +199,7 @@ export default defineComponent({
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        if (barWidth && tabEl.offsetWidth >= barWidth) {
+        if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
           const offsetDiffLeft =
             Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
           barEl.style.left = `${offsetDiffLeft}px`
