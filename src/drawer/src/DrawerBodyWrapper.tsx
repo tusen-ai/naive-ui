@@ -236,9 +236,9 @@ export default defineComponent({
                                       ? `${mergedClsPrefix}-drawer__adjustable-line--hover`
                                       : ''
                                   ]}
-                                  onmouseenter={this.mouseenterHandler}
+                                  onMouseenter={this.mouseenterHandler}
                                   onMouseleave={this.mouseleaveHandler}
-                                  onmousedown={this.mousedownHandler}
+                                  onMousedown={this.mousedownHandler}
                                 ></div>
                               ) : null,
                               this.nativeScrollbar ? (
