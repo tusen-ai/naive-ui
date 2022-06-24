@@ -245,7 +245,8 @@ export default defineComponent({
           closeColorPressed,
           closeIconSize,
           closeSize,
-          closeBorderRadius
+          closeBorderRadius,
+          baseLineColor
         }
       } = themeRef.value
       return {
@@ -271,7 +272,8 @@ export default defineComponent({
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
         '--n-close-icon-size': closeIconSize,
-        '--n-close-border-radius': closeBorderRadius
+        '--n-close-border-radius': closeBorderRadius,
+        '--n-base-line-color': baseLineColor
       }
     })
     const themeClassHandle = inlineThemeDisabled

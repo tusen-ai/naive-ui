@@ -59,35 +59,41 @@ export default c([
     ]),
     cE('adjustable-line', `
       position: absolute;
+      background-color: transparent;
+      border-radius: 2px;
     `, [
+      fadeInTransition({
+        name: 'fade-in',
+        leaveDuration: '0.4s',
+        enterDuration: '0.4s'
+      }),
+      cM('hover', `
+      background-color: var(--n-base-line-color);
+    `),
       cM('top', `
       width: 100%;
-      height: 10px;
-      background: transparent;
+      height: 6px;
       bottom: 0;
       left: 0;
       cursor: ns-resize;
     `),
       cM('bottom', `
       width: 100%;
-      height: 10px;
-      background: transparent;
+      height: 6px;
       top: 0;
       left: 0;
       cursor: ns-resize;
     `),
       cM('left', `
-      width: 10px;
+      width: 6px;
       height: 100%;
-      background: transparent;
       top: 0;
       right: 0;
       cursor: ew-resize;
     `),
       cM('right', `
-      width: 10px;
+      width: 6px;
       height: 100%;
-      background: transparent;
       top: 0;
       left: 0;
       cursor: ew-resize;
