@@ -25,6 +25,7 @@
   >
     <n-drawer-content title="Stoner">
       Stoner is a 1965 novel by the American writer John Williams.
+      <div style="height: 1000px" />
     </n-drawer-content>
   </n-drawer>
 </template>

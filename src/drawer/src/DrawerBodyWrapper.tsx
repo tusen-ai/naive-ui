@@ -76,8 +76,10 @@ export default defineComponent({
     const NDrawer = inject(drawerInjectionKey)!
 
     let startPos = 0
-    let cacheCusor: string = ''
+    let cacheCusor = ''
+    let hoverTimer: ReturnType<typeof setTimeout>
     const isMousedown = ref(false)
+    const isHover = ref(false)
 
     const isVertical = computed<boolean>(() => {
       return props.placement === 'top' || props.placement === 'bottom'
@@ -94,22 +96,32 @@ export default defineComponent({
       document.body.addEventListener('mouseup', mouseupHandler)
     }
 
+    const mouseenterHandler = (e: MouseEvent): void => {
+      if (isMousedown.value) return
+      hoverTimer = setTimeout(() => {
+        isHover.value = true
+      }, 300)
+    }
+
+    const mouseleaveHandler = (e: MouseEvent): void => {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer)
+      }
+      isHover.value = false
+    }
+
     const mousemoveHandler = (e: MouseEvent): void => {
       if (isMousedown.value) {
         if (isVertical.value) {
           let height = removePx(NDrawer.height.value)
-          height +=
-            props.placement === 'bottom'
-              ? startPos - e.clientY
-              : e.clientY - startPos
+          const increment = startPos - e.clientY
+          height += props.placement === 'bottom' ? increment : -increment
           NDrawer.height.value = `${height}px`
           startPos = e.clientY
         } else {
           let width = removePx(NDrawer.width.value)
-          width +=
-            props.placement === 'right'
-              ? startPos - e.clientX
-              : e.clientX - startPos
+          const increment = startPos - e.clientX
+          width += props.placement === 'right' ? increment : -increment
           NDrawer.width.value = `${width}px`
           startPos = e.clientX
         }
@@ -154,7 +166,6 @@ export default defineComponent({
       isMounted: NDrawer.isMountedRef,
       mergedTheme: NDrawer.mergedThemeRef,
       displayed: displayedRef,
-      isMousedown,
       transitionName: computed(() => {
         return {
           right: 'slide-in-from-right-transition',
@@ -165,11 +176,15 @@ export default defineComponent({
       }),
       handleAfterLeave,
       bodyDirectives: bodyDirectivesRef,
-      mousedownHandler
+      mousedownHandler,
+      mouseenterHandler,
+      mouseleaveHandler,
+      isMousedown,
+      isHover
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, mousedownHandler } = this
+    const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
           /* Keep the wrapper dom. Make sure the drawer has a host.
@@ -216,9 +231,14 @@ export default defineComponent({
                                 <div
                                   class={[
                                     `${mergedClsPrefix}-drawer__adjustable-line`,
-                                    `${mergedClsPrefix}-drawer__adjustable-line--${this.placement}`
+                                    `${mergedClsPrefix}-drawer__adjustable-line--${this.placement}`,
+                                    this.isMousedown || this.isHover
+                                      ? `${mergedClsPrefix}-drawer__adjustable-line--hover`
+                                      : ''
                                   ]}
-                                  onMousedown={mousedownHandler}
+                                  onmouseenter={this.mouseenterHandler}
+                                  onMouseleave={this.mouseleaveHandler}
+                                  onmousedown={this.mousedownHandler}
                                 ></div>
                               ) : null,
                               this.nativeScrollbar ? (
