@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-drawer` 使用 `show-mask` 属性时控制台出现 warning，关闭 [#3172](https://github.com/TuSimple/naive-ui/issues/3172)
+
 ## 2.30.6
 
 ### Fixes
