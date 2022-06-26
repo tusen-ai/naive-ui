@@ -340,7 +340,7 @@ export default defineComponent({
         } else {
           return filterOptions(
             localOptions,
-            props.filter || resolvedFilterRef.value,
+            resolvedFilterRef.value,
             pattern,
             props.childrenField
           )
