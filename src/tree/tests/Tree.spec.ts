@@ -474,4 +474,51 @@ describe('n-tree', () => {
     })
     expect(wrapper.find('.n-tree-node').classes()).toContain(testClass)
   })
+
+  it('should work with `checkbox-placement` prop', async () => {
+    let wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ],
+        checkable: true
+      }
+    })
+    expect(wrapper.find('.n-tree-node-checkbox--right').exists()).toBe(false)
+
+    wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ],
+        checkable: true,
+        checkboxPlacement: 'right'
+      }
+    })
+    expect(wrapper.find('.n-tree-node-checkbox--right').exists()).toBe(true)
+
+    wrapper.unmount()
+  })
 })

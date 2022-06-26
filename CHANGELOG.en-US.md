@@ -4,7 +4,9 @@
 
 ### Fixes
 
-- Fix `n-button` content placeholder incorrect when displayed as block, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- Fix `n-button` doesn't omit content if content is wrapped in ellipsis container, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element.
+- Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
 
 ## 2.30.6
 
