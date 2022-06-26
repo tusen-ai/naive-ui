@@ -32,7 +32,7 @@ grid-basic-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| offset | `number \| ResponsiveDescription` | `0` | 栅格左侧的间隔格数， |
+| offset | `number \| ResponsiveDescription` | `0` | 栅格左侧的间隔格数 |
 | span | `number \| ResponsiveDescription` | `1` | 栅格占据的列数，为 0 的时候会隐藏 |
 | suffix | `boolean` | `false` | 栅格后缀 |
 
