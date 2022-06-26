@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element.
+- Fix `n-select`'s filter prop not working.
 
 ## 2.30.6
 
