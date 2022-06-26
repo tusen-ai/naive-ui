@@ -13,7 +13,9 @@ datetimerange.vue
 month.vue
 monthrange.vue
 year.vue
+yearrange.vue
 quarter.vue
+quarterrange.vue
 size.vue
 default-time.vue
 disabled.vue
@@ -133,7 +135,7 @@ panel-debug.vue
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
-### MonthRange 类型的 Props
+### MonthRange、QuarterRange、YearRange 类型的 Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |

@@ -10,6 +10,12 @@
 - Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element. Closes [#3169](https://github.com/TuSimple/naive-ui/issues/3169).
 - Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
 
+### Feats
+
+### Feats
+
+- `n-date-picker`'s `type` prop supports `'quarterrange'` and `'yearrange'`.
+
 ## 2.30.6
 
 ### Fixes
