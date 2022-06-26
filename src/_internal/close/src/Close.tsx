@@ -29,6 +29,7 @@ export default defineComponent({
       const { clsPrefix, disabled, absolute, round } = props
       return (
         <button
+          type="button"
           tabindex={disabled || !props.focusable ? -1 : 0}
           aria-disabled={disabled}
           aria-label="close"

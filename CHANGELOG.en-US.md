@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element.
+
 ## 2.30.6
 
 ### Fixes

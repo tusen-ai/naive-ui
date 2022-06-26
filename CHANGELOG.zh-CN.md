@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素 s 中按下 Enter 键会导致选项被清除
+
 ## 2.30.6
 
 ### Fixes
