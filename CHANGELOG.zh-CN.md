@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-select` 属性 `filter` 不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
+
 ## 2.30.6
 
 ### Fixes

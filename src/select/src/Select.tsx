@@ -338,7 +338,7 @@ export default defineComponent({
         } else {
           return filterOptions(
             localOptions,
-            resolvedFilterRef.value,
+            props.filter || resolvedFilterRef.value,
             pattern,
             props.childrenField
           )

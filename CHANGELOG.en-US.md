@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-select`'s `filter` prop invalid, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
+
 ## 2.30.6
 
 ### Fixes
