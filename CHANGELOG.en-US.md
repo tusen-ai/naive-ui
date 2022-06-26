@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-button` content placeholder incorrect when displayed as block, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+
 ## 2.30.6
 
 ### Fixes

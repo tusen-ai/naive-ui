@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-button` 显示为块级时内容占位不正确, 关闭 [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+
 ## 2.30.6
 
 ### Fixes
