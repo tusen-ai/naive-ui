@@ -5,7 +5,7 @@
 ### Fixes
 
 - 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素 s 中按下 Enter 键会导致选项被清除
-- 修复 `n-select` 的 `filter` 属性不生效
+- 修复 `n-select` 的 `filter` 属性不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
 
 ## 2.30.6
 
