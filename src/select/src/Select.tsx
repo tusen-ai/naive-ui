@@ -310,6 +310,8 @@ export default defineComponent({
       ).concat(compitableOptionsRef.value)
     })
     const resolvedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
       const { labelField, valueField } = props
       return (pattern: string, option: SelectBaseOption): boolean => {
         if (!option) return false

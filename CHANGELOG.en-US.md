@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- Fix `n-select`'s `filter` prop invalid, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
+- Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element.
+- Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
 
 ## 2.30.6
 
