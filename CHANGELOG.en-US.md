@@ -15,6 +15,7 @@
 ### Feats
 
 - `n-date-picker`'s `type` prop supports `'quarterrange'` and `'yearrange'`.
+- `n-input` in `type="textarea"` adds `placeholder` slot.
 
 ## 2.30.6
 

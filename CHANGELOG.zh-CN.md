@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-date-picker` `type` 属性支持 `'quarterrange'` 和 `'yearrange'`
+- `n-input` 在 `type="textarea"` 新增 `placeholder` slot
 
 ## 2.30.6
 
