@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tabs`'s `bar-width` props invalid when `0` set, closes [#3171](https://github.com/TuSimple/naive-ui/issues/3171).
+- Fix `n-drawer` has log warnings of console when use `show-mask` prop, closes [#3172](https://github.com/TuSimple/naive-ui/issues/3172).
+- Fix `n-button` doesn't omit content if content is wrapped in ellipsis container, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element. Closes [#3169](https://github.com/TuSimple/naive-ui/issues/3169).
+- Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
+
+### Feats
+
+### Feats
+
+- `n-date-picker`'s `type` prop supports `'quarterrange'` and `'yearrange'`.
+
 ## 2.30.6
 
 ### Fixes
