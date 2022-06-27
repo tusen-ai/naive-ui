@@ -11,7 +11,7 @@ import { VirtualList } from 'vueuc'
 import { NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
-import type { MonthItem, YearItem } from '../utils'
+import type { MonthItem, QuarterItem, YearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
@@ -20,7 +20,7 @@ export default defineComponent({
   props: {
     ...useDualCalendarProps,
     type: {
-      type: String as PropType<'monthrange'>,
+      type: String as PropType<'monthrange' | 'yearrange' | 'quarterrange'>,
       required: true
     }
   },
@@ -39,7 +39,7 @@ export default defineComponent({
     }
     const useCalendarRef = useDualCalendar(props, props.type)
     const renderItem = (
-      item: YearItem | MonthItem,
+      item: YearItem | MonthItem | QuarterItem,
       i: number,
       mergedClsPrefix: string,
       type: 'start' | 'end'
@@ -72,7 +72,9 @@ export default defineComponent({
         >
           {item.type === 'month'
             ? item.dateObject.month + 1
-            : item.dateObject.year}
+            : item.type === 'quarter'
+              ? item.dateObject.quarter
+              : item.dateObject.year}
         </div>
       )
     }
@@ -137,7 +139,7 @@ export default defineComponent({
                 )
               }}
             </NScrollbar>
-            {type === 'monthrange' ? (
+            {type === 'monthrange' || type === 'quarterrange' ? (
               <div
                 class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               >
@@ -148,12 +150,17 @@ export default defineComponent({
                 >
                   {{
                     default: () => [
-                      this.startMonthArray.map((monthItem, i) =>
-                        renderItem(monthItem, i, mergedClsPrefix, 'start')
+                      (type === 'monthrange'
+                        ? this.startMonthArray
+                        : this.startQuarterArray
+                      ).map((item, i) =>
+                        renderItem(item, i, mergedClsPrefix, 'start')
                       ),
-                      <div
-                        class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
-                      />
+                      type === 'monthrange' && (
+                        <div
+                          class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
+                        />
+                      )
                     ]
                   }}
                 </NScrollbar>
@@ -203,7 +210,7 @@ export default defineComponent({
                 )
               }}
             </NScrollbar>
-            {type === 'monthrange' ? (
+            {type === 'monthrange' || type === 'quarterrange' ? (
               <div
                 class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
               >
@@ -214,12 +221,17 @@ export default defineComponent({
                 >
                   {{
                     default: () => [
-                      this.endMonthArray.map((monthItem, i) =>
-                        renderItem(monthItem, i, mergedClsPrefix, 'end')
+                      (type === 'monthrange'
+                        ? this.endMonthArray
+                        : this.endQuarterArray
+                      ).map((item, i) =>
+                        renderItem(item, i, mergedClsPrefix, 'end')
                       ),
-                      <div
-                        class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
-                      />
+                      type === 'monthrange' && (
+                        <div
+                          class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
+                        />
+                      )
                     ]
                   }}
                 </NScrollbar>
