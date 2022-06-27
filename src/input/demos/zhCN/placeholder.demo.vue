@@ -43,7 +43,7 @@
       <template #placeholder>
         <n-space :size="0" vertical>
           <n-text depth="1">
-            最重新的是
+            最重要的是
           </n-text>
           <n-text depth="2">
             可以显示
