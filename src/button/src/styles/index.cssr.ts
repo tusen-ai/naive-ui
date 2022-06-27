@@ -210,6 +210,7 @@ export default c([
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
+      min-width: 0;
     `, [
       c('~', [
         cE('icon', {

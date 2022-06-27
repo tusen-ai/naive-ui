@@ -267,12 +267,12 @@ function monthArray (
 }
 
 function quarterArray (
-  quarterTs: number,
+  yearAnchorTs: number,
   valueTs: number | null,
   currentTs: number
 ): QuarterItem[] {
   const calendarQuarters: QuarterItem[] = []
-  const yearStart = startOfYear(quarterTs)
+  const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 4; i++) {
     calendarQuarters.push(
       quarterItem(getTime(addQuarters(yearStart, i)), valueTs, currentTs)
