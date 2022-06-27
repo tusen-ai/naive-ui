@@ -960,6 +960,7 @@ export default defineComponent({
       suffix?: () => VNode[]
       separator?: () => VNode[]
       count?: (props: unknown) => VNode[]
+      placeholder?: () => VNode[]
       ['clear-icon']?: () => VNode[]
       ['clear-icon-placeholder']?: () => VNode[]
       ['password-visible-icon']?: () => VNode[]
@@ -1064,16 +1065,30 @@ export default defineComponent({
                         onScroll={this.handleTextAreaScroll}
                       />
                       {this.showPlaceholder1 ? (
-                        <div
-                          class={`${mergedClsPrefix}-input__placeholder`}
-                          style={[
-                            this.placeholderStyle as any,
-                            scrollContainerWidthStyle
-                          ]}
-                          key="placeholder"
-                        >
-                          {this.mergedPlaceholder[0]}
-                        </div>
+                        $slots.placeholder ? (
+                          resolveWrappedSlot(
+                            $slots.placeholder,
+                            (children) =>
+                              children && (
+                                <div
+                                  class={`${mergedClsPrefix}-input__placeholder`}
+                                >
+                                  {children}
+                                </div>
+                              )
+                          )
+                        ) : (
+                          <div
+                            class={`${mergedClsPrefix}-input__placeholder`}
+                            style={[
+                              this.placeholderStyle as any,
+                              scrollContainerWidthStyle
+                            ]}
+                            key="placeholder"
+                          >
+                            {this.mergedPlaceholder[0]}
+                          </div>
+                        )
                       ) : null}
                       {this.autosize ? (
                         <VResizeObserver

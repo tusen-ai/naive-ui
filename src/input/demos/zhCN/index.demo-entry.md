@@ -24,6 +24,7 @@ input-props.vue
 status.vue
 pattern.vue
 rtl-debug.vue
+placeholder.vue
 ```
 
 ## API
@@ -73,6 +74,7 @@ rtl-debug.vue
 | prefix | `()` | 输入框头部内容 |  |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |  |
 | suffix | `()` | 输入框尾部内容 |  |
+| placeholder | `()` | 自定义 placeholder 展示，对 type="textarea" 有效 |  |
 
 ### InputGroup Slots
 
