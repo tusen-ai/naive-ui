@@ -71,7 +71,8 @@ import type {
   Value,
   Size,
   ValueAtom,
-  SelectBaseOption
+  SelectBaseOption,
+  SelectFilter
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -107,9 +108,7 @@ const selectProps = {
   },
   remote: Boolean,
   loading: Boolean,
-  filter: Function as PropType<
-  (pattern: string, option: SelectOption) => boolean
-  >,
+  filter: Function as PropType<SelectFilter>,
   placement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
