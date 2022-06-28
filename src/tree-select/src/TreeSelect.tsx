@@ -580,7 +580,7 @@ export default defineComponent({
     }
     const selectionRenderTagRef = computed(() => {
       const { renderTag } = props
-      if (!renderTag) return renderTag
+      if (!renderTag) return undefined
       return function selectionRenderTag ({
         option,
         handleClose
@@ -826,6 +826,7 @@ export default defineComponent({
                                 renderPrefix={this.renderPrefix}
                                 renderSuffix={this.renderSuffix}
                                 renderSwitcherIcon={this.renderSwitcherIcon}
+                                nodeProps={this.nodeProps}
                                 virtualScroll={
                                   this.consistentMenuWidth && this.virtualScroll
                                 }

@@ -53,6 +53,7 @@ debug.vue
 | render-prefix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. | NEXT_VERSION |
 | render-suffix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. | NEXT_VERSION |
 | render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | NEXT_VERSION |
+| render-tag | `(props: { option: TreeSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. | NEXT_VERSION |
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |

@@ -56,6 +56,7 @@ render-debug.vue
 | render-prefix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | NEXT_VERSION |
 | render-suffix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | NEXT_VERSION |
 | render-switcher-icon | `() => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | NEXT_VERSION |
+| render-tag | `(props: { option: TreeSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 | NEXT_VERSION |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |

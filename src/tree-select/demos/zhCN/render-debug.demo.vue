@@ -6,6 +6,7 @@
   <n-tree-select
     :options="options"
     default-value="Drive My Car"
+    multiple
     :node-props="nodeProps"
     :render-label="renderXxx"
     :render-prefix="renderXxx"
@@ -36,10 +37,21 @@ export default defineComponent({
     const renderXxx: TreeSelectRenderLabel = ({ option }) => {
       return option.label || ''
     }
-    const renderTag: TreeSelectRenderTag = ({ option }) => {
+    const renderTag: TreeSelectRenderTag = ({ option, handleClose }) => {
+      console.log('renderTag', option)
       return h(
         NTag,
-        { type: 'error' },
+        {
+          type: 'error',
+          closable: !option.disabled,
+          onMousedown: (e: FocusEvent) => {
+            e.preventDefault()
+          },
+          onClose: (e) => {
+            e.stopPropagation()
+            handleClose()
+          }
+        },
         {
           default: () => option.label || ''
         }

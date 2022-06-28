@@ -25,6 +25,9 @@ export default defineComponent({
         {
           type: option.type as 'success' | 'warning' | 'error',
           closable: true,
+          onMousedown: (e: FocusEvent) => {
+            e.preventDefault()
+          },
           onClose: (e: MouseEvent) => {
             e.stopPropagation()
             handleClose()
