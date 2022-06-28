@@ -373,7 +373,9 @@ export default defineComponent({
         case 'quarter': {
           return ['clear', 'now', 'confirm']
         }
-        case 'monthrange': {
+        case 'monthrange':
+        case 'yearrange':
+        case 'quarterrange': {
           return ['clear', 'confirm']
         }
         default: {
