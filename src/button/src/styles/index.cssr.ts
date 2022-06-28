@@ -200,6 +200,8 @@ export default c([
         top: 50%;
         transform: translateY(-50%);
         display: flex;
+        align-items: center;
+        justify-content: center;
       `, [
         iconSwitchTransition({
           top: '50%',
