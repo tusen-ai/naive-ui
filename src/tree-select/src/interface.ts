@@ -1,5 +1,5 @@
 import { TreeMate, TreeNode } from 'treemate'
-import { Ref } from 'vue'
+import { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { TreeOptionBase, TreeOption } from '../../tree/src/interface'
 import { createInjectionKey } from '../../_utils'
 
@@ -48,3 +48,30 @@ export interface TreeSelectInjection {
 
 export const treeSelectInjectionKey =
   createInjectionKey<TreeSelectInjection>('n-tree-select')
+
+export type TreeSelectRenderTag = (props: {
+  option: TreeSelectOption
+  handleClose: () => void
+}) => VNodeChild
+
+export interface TreeSelectRenderProps {
+  option: TreeSelectOption
+  checked: boolean
+  selected: boolean
+}
+
+export type TreeSelectRenderTreePart = ({
+  option,
+  checked,
+  selected
+}: TreeSelectRenderProps) => VNodeChild
+
+export type TreeSelectRenderLabel = TreeSelectRenderTreePart
+
+export type TreeSelectRenderPrefix = TreeSelectRenderTreePart
+
+export type TreeSelectRenderSuffix = TreeSelectRenderTreePart
+
+export type TreeSelectNodeProps = (info: {
+  option: TreeSelectOption
+}) => HTMLAttributes & Record<string, unknown>

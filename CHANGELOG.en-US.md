@@ -16,6 +16,12 @@
 ### Feats
 
 - `n-date-picker`'s `type` prop supports `'quarterrange'` and `'yearrange'`.
+- `n-tree-select` adds `render-prefix` prop.
+- `n-tree-select` adds `render-suffix` prop.
+- `n-tree-select` adds `render-switcher-icon` prop.
+- `n-tree-select` adds `node-props` prop.
+- `n-tree-select` adds `render-label` prop, closes [#3197](https://github.com/TuSimple/naive-ui/issues/3197).
+- `n-tree-select` adds `render-tag` prop.
 
 ## 2.30.6
 

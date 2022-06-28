@@ -14,6 +14,12 @@
 ### Feats
 
 - `n-date-picker` `type` 属性支持 `'quarterrange'` 和 `'yearrange'`
+- `n-tree-select` 新增 `render-prefix` 属性
+- `n-tree-select` 新增 `render-suffix` 属性
+- `n-tree-select` 新增 `render-switcher-icon` 属性
+- `n-tree-select` 新增 `node-props` 属性
+- `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
+- `n-tree-select` 新增 `render-tag` 属性
 
 ## 2.30.6
 

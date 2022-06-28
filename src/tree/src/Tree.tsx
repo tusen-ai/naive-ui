@@ -117,6 +117,7 @@ export const treeSharedProps = {
     default: () => []
   },
   indeterminateKeys: Array as PropType<Key[]>,
+  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
   >,
@@ -194,7 +195,6 @@ const treeProps = {
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
-  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   nodeProps: Function as PropType<TreeNodeProps>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
