@@ -756,6 +756,7 @@ function useDualCalendar (
       panelCommon.doUpdateValue(nextValue, props.panel)
       justifyColumnsScrollState(nextValue, 'start')
       justifyColumnsScrollState(nextValue, 'end')
+      panelCommon.disableTransitionOneTick()
       return
     }
     const nextValue: [number, number] = [value[0], value[1]]
