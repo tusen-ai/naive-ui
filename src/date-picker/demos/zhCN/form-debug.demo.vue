@@ -20,20 +20,23 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { FormRules } from 'naive-ui'
 
 export default defineComponent({
   setup () {
+    const rules: FormRules = {
+      date: {
+        type: 'number',
+        required: true,
+        trigger: ['blur', 'change'],
+        message: '请选择日期'
+      }
+    }
     return {
       model: ref({
         date: null
       }),
-      rules: {
-        date: {
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请选择日期'
-        }
-      }
+      rules
     }
   }
 })
