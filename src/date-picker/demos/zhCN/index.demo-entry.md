@@ -29,6 +29,7 @@ status.vue
 icon.vue
 panel.vue
 panel-debug.vue
+form-debug.vue
 ```
 
 ## API
