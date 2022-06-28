@@ -11,8 +11,7 @@
 - Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
 - Fix `n-modal`'s mask may overlay over content if no preset is used, closes [#3204](https://github.com/TuSimple/naive-ui/issues/3204).
 - Fix `n-button`'s icon doesn't align correctly if it's too big or small.
-
-### Feats
+- Fix `n-select`'s created options may repeat multiple times in menu, closes [#3206](https://github.com/TuSimple/naive-ui/issues/3206).
 
 ### Feats
 
