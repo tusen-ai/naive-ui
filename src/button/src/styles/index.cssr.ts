@@ -195,6 +195,10 @@ export default c([
       cB('icon-slot', `
         height: var(--n-icon-size);
         width: var(--n-icon-size);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
