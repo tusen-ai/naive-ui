@@ -9,6 +9,7 @@
 - Fix `n-button` doesn't omit content if content is wrapped in ellipsis container, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
 - Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element. Closes [#3169](https://github.com/TuSimple/naive-ui/issues/3169).
 - Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
+- Fix `n-modal`'s mask may overlay over content if no preset is used, closes [#3204](https://github.com/TuSimple/naive-ui/issues/3204).
 
 ### Feats
 
