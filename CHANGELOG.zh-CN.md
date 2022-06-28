@@ -21,6 +21,7 @@
 - `n-tree-select` 新增 `node-props` 属性
 - `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
 - `n-tree-select` 新增 `render-tag` 属性
+- `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
 
 ## 2.30.6
 

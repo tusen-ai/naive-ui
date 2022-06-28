@@ -88,6 +88,9 @@ export const Notification = defineComponent({
           closeBorderRadius,
           closeColorHover,
           closeColorPressed,
+          titleFontSize,
+          metaFontSize,
+          descriptionFontSize,
           [createKey('iconColor', type)]: iconColor
         },
         common: { cubicBezierEaseOut, cubicBezierEaseIn, cubicBezierEaseInOut }
@@ -121,7 +124,10 @@ export const Notification = defineComponent({
         '--n-padding-left': left,
         '--n-padding-right': right,
         '--n-padding-top': top,
-        '--n-padding-bottom': bottom
+        '--n-padding-bottom': bottom,
+        '--n-title-font-size': titleFontSize,
+        '--n-meta-font-size': metaFontSize,
+        '--n-description-font-size': descriptionFontSize
       }
     })
     const themeClassHandle = inlineThemeDisabled
