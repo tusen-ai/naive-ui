@@ -54,7 +54,6 @@ export default defineNuxtConfig({
 - `n-scrollbar`（vue 版本 >= 3.2.36 后没有问题)
 - `n-anchor`
 - `n-avatar-group`
-- `n-back-top`
 - `n-data-table`
 - `n-watermark`
 - `n-affix`
