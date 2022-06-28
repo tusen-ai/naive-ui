@@ -10,6 +10,7 @@
 - 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素中按下 Enter 键会导致选项被清除，关闭 [#3169](https://github.com/TuSimple/naive-ui/issues/3169)
 - 修复 `n-select` 的 `filter` 属性不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
 - 修复 `n-modal` 在不使用任何 preset 的时候遮罩可能覆盖住内容，关闭 [#3204](https://github.com/TuSimple/naive-ui/issues/3204)
+- 修复 `n-button` 在图标过大或者过小时未对齐
 
 ### Feats
 
