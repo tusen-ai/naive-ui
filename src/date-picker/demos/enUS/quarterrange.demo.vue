@@ -1,5 +1,5 @@
 <markdown>
-# 季度范围
+# Quarter range
 </markdown>
 
 <template>
