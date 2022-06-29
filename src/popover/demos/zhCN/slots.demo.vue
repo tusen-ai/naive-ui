@@ -1,7 +1,7 @@
 <markdown>
-# 带标题
+# 插槽
 
-使用 `header` slot 来自定义标题。
+使用 `header` `footer` 插槽来自定义标题和底部内容。
 </markdown>
 
 <template>
@@ -14,6 +14,11 @@
         下面就是分割线
       </n-text>
     </template>
-    上面就是分割线
+    内容
+    <template #footer>
+      <n-text strong depth="1">
+        上面就是分割线
+      </n-text>
+    </template>
   </n-popover>
 </template>

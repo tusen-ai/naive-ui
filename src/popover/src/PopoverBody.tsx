@@ -63,6 +63,7 @@ export const popoverBodyProps = {
   scrollable: Boolean,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // private
   internalDeactivateImmediately: Boolean,
   animated: Boolean,
@@ -278,6 +279,16 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => {
+          const footer = resolveWrappedSlot(slots.footer, (children) => {
+            return children ? (
+              <div
+                class={`${mergedClsPrefix}-popover__footer`}
+                style={props.footerStyle}
+              >
+                {children}
+              </div>
+            ) : null
+          })
           const content = resolveWrappedSlot(slots.header, (children) => {
             const body = children ? (
               <>
@@ -293,6 +304,7 @@ export default defineComponent({
                 >
                   {slots}
                 </div>
+                {footer}
               </>
             ) : props.scrollable ? (
               slots.default?.()
@@ -341,6 +353,9 @@ export default defineComponent({
                   [`${mergedClsPrefix}-popover--scrollable`]: props.scrollable,
                   [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
                     slots.header
+                  ),
+                  [`${mergedClsPrefix}-popover--show-footer`]: !isSlotEmpty(
+                    slots.footer
                   ),
                   [`${mergedClsPrefix}-popover--raw`]: props.raw,
                   [`${mergedClsPrefix}-popover-shared--overlap`]: props.overlap,

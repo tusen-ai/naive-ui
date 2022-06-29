@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
+- `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
+
 ## 2.30.7
 
 ### Fixes
