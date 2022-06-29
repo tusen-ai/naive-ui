@@ -1,7 +1,7 @@
 <markdown>
 # Slots
 
-Use `header` `footer` slot to customize header and footer.
+Use `header` or `footer` slot to customize header or footer.
 </markdown>
 
 <template>

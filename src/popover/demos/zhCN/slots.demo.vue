@@ -1,7 +1,7 @@
 <markdown>
 # 插槽
 
-使用 `header` `footer` 插槽来自定义标题和底部内容。
+使用 `header` 与 `footer` 插槽来自定义标题或底部内容。
 </markdown>
 
 <template>
