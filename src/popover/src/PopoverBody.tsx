@@ -279,32 +279,43 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => {
-          const footer = resolveWrappedSlot(slots.footer, (children) => {
-            return children ? (
-              <div
-                class={`${mergedClsPrefix}-popover__footer`}
-                style={props.footerStyle}
-              >
-                {children}
-              </div>
-            ) : null
-          })
-          const content = resolveWrappedSlot(slots.header, (children) => {
-            const body = children ? (
+          const content = (): VNodeChild => {
+            const hasContent =
+              !isSlotEmpty(slots.header) ||
+              !isSlotEmpty(slots.footer) ||
+              !isSlotEmpty(slots.default)
+            const body = hasContent ? (
               <>
-                <div
-                  class={`${mergedClsPrefix}-popover__header`}
-                  style={props.headerStyle}
-                >
-                  {children}
-                </div>
-                <div
-                  class={`${mergedClsPrefix}-popover__content`}
-                  style={props.contentStyle}
-                >
-                  {slots}
-                </div>
-                {footer}
+                {resolveWrappedSlot(slots.header, (children) => {
+                  return children ? (
+                    <div
+                      class={`${mergedClsPrefix}-popover__header`}
+                      style={props.headerStyle}
+                    >
+                      {children}
+                    </div>
+                  ) : null
+                })}
+                {resolveWrappedSlot(slots.default, (children) => {
+                  return children ? (
+                    <div
+                      class={`${mergedClsPrefix}-popover__content`}
+                      style={props.contentStyle}
+                    >
+                      {slots}
+                    </div>
+                  ) : null
+                })}
+                {resolveWrappedSlot(slots.footer, (children) => {
+                  return children ? (
+                    <div
+                      class={`${mergedClsPrefix}-popover__footer`}
+                      style={props.footerStyle}
+                    >
+                      {children}
+                    </div>
+                  ) : null
+                })}
               </>
             ) : props.scrollable ? (
               slots.default?.()
@@ -319,9 +330,11 @@ export default defineComponent({
             const maybeScrollableBody = props.scrollable ? (
               <NxScrollbar
                 contentClass={
-                  children ? undefined : `${mergedClsPrefix}-popover__content`
+                  !hasContent
+                    ? undefined
+                    : `${mergedClsPrefix}-popover__content`
                 }
-                contentStyle={children ? undefined : props.contentStyle}
+                contentStyle={!hasContent ? undefined : props.contentStyle}
               >
                 {{
                   default: () => body
@@ -331,14 +344,14 @@ export default defineComponent({
               body
             )
             return maybeScrollableBody
-          })
+          }
           const arrow = props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
               clsPrefix: mergedClsPrefix
             })
             : null
-          return [content, arrow]
+          return [content(), arrow]
         }
         contentNode = h(
           'div',
