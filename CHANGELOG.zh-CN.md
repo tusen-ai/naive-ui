@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-select` 菜单的 transition 样式，关闭 [#3211](https://github.com/TuSimple/naive-ui/issues/3211)
+
 ## 2.30.7
 
 ### Fixes
