@@ -1,7 +1,7 @@
 <markdown>
 # Selection(single)
 
-Set `singlecheck=true` to make the column of `type='selection` a single selection mode.
+Set `single=true` to make the column of `type='selection` a single selection mode.
 
 Note: if `checked-row-keys` or `default-checked-row-keys` is set for the single selection mode, only the first item will be selected.
 </markdown>
