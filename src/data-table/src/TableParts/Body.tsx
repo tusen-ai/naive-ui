@@ -205,9 +205,10 @@ export default defineComponent({
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
-      shiftKey: boolean
+      shiftKey: boolean,
+      single?: boolean
     ): void {
-      if (shiftKey) {
+      if (shiftKey && !single) {
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastSelectedKey
         )
@@ -234,9 +235,9 @@ export default defineComponent({
       }
 
       if (checked) {
-        doCheck(tmNode.key)
+        doCheck(tmNode.key, single)
       } else {
-        doUncheck(tmNode.key)
+        doUncheck(tmNode.key, single)
       }
       lastSelectedKey = tmNode.key
     }
@@ -823,7 +824,8 @@ export default defineComponent({
                                 handleCheckboxUpdateChecked(
                                   rowInfo.tmNode,
                                   checked,
-                                  e.shiftKey
+                                  e.shiftKey,
+                                  column.single
                                 )
                               }
                             />

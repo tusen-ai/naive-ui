@@ -59,6 +59,7 @@
 - `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
 - `n-tree-select` 新增 `render-tag` 属性
 - `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
+- `n-data-table` 的列属性增加 `single` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
 
 ## 2.30.6
 

@@ -186,15 +186,17 @@ export default defineComponent({
                   >
                     {column.type === 'selection' ? (
                       <>
-                        <NCheckbox
-                          key={currentPage}
-                          privateInsideTable
-                          checked={allRowsChecked}
-                          indeterminate={someRowsChecked}
-                          disabled={headerCheckboxDisabled}
-                          onUpdateChecked={handleCheckboxUpdateChecked}
-                        />
-                        {checkOptions ? (
+                        {!column.single ? (
+                          <NCheckbox
+                            key={currentPage}
+                            privateInsideTable
+                            checked={allRowsChecked}
+                            indeterminate={someRowsChecked}
+                            disabled={headerCheckboxDisabled}
+                            onUpdateChecked={handleCheckboxUpdateChecked}
+                          />
+                        ) : null}
+                        {checkOptions && !column.single ? (
                           <SelectionMenu clsPrefix={mergedClsPrefix} />
                         ) : null}
                       </>

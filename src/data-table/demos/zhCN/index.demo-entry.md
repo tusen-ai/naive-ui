@@ -31,6 +31,7 @@ filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
 select.vue
+select-single.vue
 custom-select
 group-header.vue
 controlled-page.vue
@@ -151,6 +152,7 @@ ellipsis-debug.vue
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
 | titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
+| single | `boolean` | `false` | 是否开启单选，仅在 `type` 为 `'selection'` 的时候生效 |  |
 | width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 
 下面的类型可以直接从包中引入。
