@@ -279,80 +279,77 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => {
-          const content = (): VNodeChild => {
-            const hasContent =
-              !isSlotEmpty(slots.header) ||
-              !isSlotEmpty(slots.footer) ||
-              !isSlotEmpty(slots.default)
-            const body = hasContent ? (
-              <>
-                {resolveWrappedSlot(slots.header, (children) => {
-                  return children ? (
-                    <div
-                      class={`${mergedClsPrefix}-popover__header`}
-                      style={props.headerStyle}
-                    >
-                      {children}
-                    </div>
-                  ) : null
-                })}
-                {resolveWrappedSlot(slots.default, (children) => {
-                  return children ? (
-                    <div
-                      class={`${mergedClsPrefix}-popover__content`}
-                      style={props.contentStyle}
-                    >
-                      {slots}
-                    </div>
-                  ) : null
-                })}
-                {resolveWrappedSlot(slots.footer, (children) => {
-                  return children ? (
-                    <div
-                      class={`${mergedClsPrefix}-popover__footer`}
-                      style={props.footerStyle}
-                    >
-                      {children}
-                    </div>
-                  ) : null
-                })}
-              </>
-            ) : props.scrollable ? (
-              slots.default?.()
-            ) : (
-              <div
-                class={`${mergedClsPrefix}-popover__content`}
-                style={props.contentStyle}
-              >
-                {slots}
-              </div>
-            )
-            const maybeScrollableBody = props.scrollable ? (
-              <NxScrollbar
-                contentClass={
-                  !hasContent
-                    ? undefined
-                    : `${mergedClsPrefix}-popover__content`
-                }
-                contentStyle={!hasContent ? undefined : props.contentStyle}
-              >
-                {{
-                  default: () => body
-                }}
-              </NxScrollbar>
-            ) : (
-              body
-            )
-            return maybeScrollableBody
-          }
+          const hasContent =
+            !isSlotEmpty(slots.header) ||
+            !isSlotEmpty(slots.footer) ||
+            !isSlotEmpty(slots.default)
+          const body = hasContent ? (
+            <>
+              {resolveWrappedSlot(slots.header, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__header`}
+                    style={props.headerStyle}
+                  >
+                    {children}
+                  </div>
+                ) : null
+              })}
+              {resolveWrappedSlot(slots.default, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__content`}
+                    style={props.contentStyle}
+                  >
+                    {slots}
+                  </div>
+                ) : null
+              })}
+              {resolveWrappedSlot(slots.footer, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__footer`}
+                    style={props.footerStyle}
+                  >
+                    {children}
+                  </div>
+                ) : null
+              })}
+            </>
+          ) : props.scrollable ? (
+            slots.default?.()
+          ) : (
+            <div
+              class={`${mergedClsPrefix}-popover__content`}
+              style={props.contentStyle}
+            >
+              {slots}
+            </div>
+          )
+          const maybeScrollableBody = props.scrollable ? (
+            <NxScrollbar
+              contentClass={
+                !hasContent ? undefined : `${mergedClsPrefix}-popover__content`
+              }
+              contentStyle={!hasContent ? undefined : props.contentStyle}
+            >
+              {{
+                default: () => body
+              }}
+            </NxScrollbar>
+          ) : (
+            body
+          )
           const arrow = props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
               clsPrefix: mergedClsPrefix
             })
             : null
-          return [content(), arrow]
+          return [maybeScrollableBody, arrow]
         }
+        const hasHeaderOrFooter =
+          !isSlotEmpty(slots.header) || !isSlotEmpty(slots.footer)
         contentNode = h(
           'div',
           mergeProps(
@@ -364,12 +361,8 @@ export default defineComponent({
                 extraClass.map((v) => `${mergedClsPrefix}-${v}`),
                 {
                   [`${mergedClsPrefix}-popover--scrollable`]: props.scrollable,
-                  [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
-                    slots.header
-                  ),
-                  [`${mergedClsPrefix}-popover--show-footer`]: !isSlotEmpty(
-                    slots.footer
-                  ),
+                  [`${mergedClsPrefix}-popover--show-header-or-footer`]:
+                    hasHeaderOrFooter,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw,
                   [`${mergedClsPrefix}-popover-shared--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover-shared--show-arrow`]:

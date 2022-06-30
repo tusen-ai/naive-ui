@@ -49,7 +49,7 @@ export default c([
       border-radius: var(--n-border-radius);
     `, [
       cNotM('scrollable', [
-        cNotM('show-header, show-footer', 'padding: var(--n-padding);')
+        cNotM('show-header-or-footer', 'padding: var(--n-padding);')
       ])
     ]),
     cE('header', `
@@ -62,7 +62,7 @@ export default c([
       border-top: 1px solid var(--n-divider-color);
       transition: border-color .3s var(--n-bezier);
     `),
-    cM('scrollable, show-header , show-footer', [
+    cM('scrollable, show-header-or-footer', [
       cE('content', `
         padding: var(--n-padding);
       `)
