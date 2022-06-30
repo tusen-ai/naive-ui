@@ -58,7 +58,7 @@ export default cB('base-select-menu', `
     padding: 8px var(--n-option-padding-left);
     font-size: var(--n-option-font-size);
     transition: 
-      color .3s var(--n-bezier);
+      color .3s var(--n-bezier),
       border-color .3s var(--n-bezier);
     border-top: 1px solid var(--n-action-divider-color);
     color: var(--n-action-text-color);
