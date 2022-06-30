@@ -59,6 +59,7 @@
 - `n-tree-select` adds `render-label` prop, closes [#3197](https://github.com/TuSimple/naive-ui/issues/3197).
 - `n-tree-select` adds `render-tag` prop.
 - `n-notification` adds `titleFontSize`, `metaFontSize`, `descriptionFontSize` theme variables.
+- `n-data-table` adds `single` prop. closes [#3056](https://github.com/TuSimple/naive-ui/issues/3056).
 
 ## 2.30.6
 
