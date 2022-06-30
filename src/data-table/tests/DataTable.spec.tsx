@@ -1256,8 +1256,13 @@ describe('props.columns', () => {
     expect(checkboxes[4].classes()).toContain('n-checkbox--checked')
     expect(checkboxes[1].classes()).not.toContain('n-checkbox--checked')
 
-    await checkboxes[0].trigger('click')
+    await checkboxes[4].trigger('click')
+    expect(checkboxes[4].classes()).not.toContain('n-checkbox--checked')
 
+    await checkboxes[4].trigger('click')
+    expect(checkboxes[4].classes()).toContain('n-checkbox--checked')
+
+    await checkboxes[0].trigger('click')
     expect(checkboxes[0].classes()).toContain('n-checkbox--checked')
 
     await checkboxes[1].trigger('click')
