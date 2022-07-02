@@ -6,6 +6,8 @@
 
 - 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
 - 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
 
 ## 2.30.8
 

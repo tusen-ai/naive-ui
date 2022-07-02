@@ -10,22 +10,6 @@ function getRawNodePath (
   return tmNodes.map((tmNode) => tmNode.rawNode)
 }
 
-function traverseWithCallback<T extends { children?: T[] }> (
-  options: T[],
-  beforeCallback: (node: T) => void,
-  afterCallback: (node: T) => void
-): void {
-  if (Array.isArray(options)) {
-    for (const option of options) {
-      if (beforeCallback) beforeCallback(option)
-      if (option.children) {
-        traverseWithCallback(option.children, beforeCallback, afterCallback)
-      }
-      if (afterCallback) afterCallback(option)
-    }
-  }
-}
-
 export { getRawNodePath }
 
 function createSelectOptions (
@@ -40,27 +24,26 @@ function createSelectOptions (
   SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
   > = []
   const path: CascaderOption[] = []
-  traverseWithCallback(
-    tmNodes,
-    (tmNode) => {
+  function traverse (_tmNodes: TmNode[]): void {
+    for (const tmNode of _tmNodes) {
+      if (tmNode.disabled) continue
+      const { rawNode } = tmNode
+      path.push(rawNode)
       if (tmNode.isLeaf || !checkStrategyIsChild) {
-        if (tmNode.disabled) return
-        const { rawNode } = tmNode
-        path.push(rawNode)
         selectOptions.push({
-          label: path
-            .map((rawNodeInPath) => rawNodeInPath[labelField])
-            .join(separator),
+          label: getPathLabel(tmNode, separator, labelField),
           value: tmNode.key,
           rawNode: tmNode.rawNode,
           path: Array.from(path)
         })
       }
-    },
-    () => {
+      if (!tmNode.isLeaf && tmNode.children) {
+        traverse(tmNode.children)
+      }
       path.pop()
     }
-  )
+  }
+  traverse(tmNodes)
   return selectOptions
 }
 
@@ -77,4 +60,4 @@ function getPathLabel (
   return path.reverse().join(separator)
 }
 
-export { traverseWithCallback, createSelectOptions, getPathLabel }
+export { createSelectOptions, getPathLabel }
