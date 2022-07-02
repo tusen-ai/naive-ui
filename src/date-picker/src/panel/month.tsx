@@ -35,7 +35,7 @@ export default defineComponent({
         case 'month':
           return item.dateObject.month + 1
         case 'quarter':
-          return `Q ${item.dateObject.quarter}`
+          return `Q${item.dateObject.quarter}`
       }
     }
     const { useAsQuickJump } = props

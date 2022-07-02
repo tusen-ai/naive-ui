@@ -8,6 +8,7 @@
 - Fix `n-data-table` doesn't show `summary` row in virtual scroll mode, closes [#3202](https://github.com/TuSimple/naive-ui/issues/3202).
 - Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
+- Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
 
 ## 2.30.8
 
