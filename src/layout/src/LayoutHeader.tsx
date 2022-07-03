@@ -7,7 +7,7 @@ import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
 import { ExtractPublicPropTypes } from '../../_utils'
 
-const headerProps = {
+export const headerProps = {
   position: positionProp,
   inverted: Boolean,
   bordered: {

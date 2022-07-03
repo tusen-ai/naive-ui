@@ -49,7 +49,7 @@ export interface ClosestMark {
 // ref: https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
 const eventButtonLeft = 0
 
-const sliderProps = {
+export const sliderProps = {
   ...(useTheme.props as ThemeProps<SliderTheme>),
   to: useAdjustedTo.propTo,
   defaultValue: {

@@ -10,7 +10,7 @@ import Line from './Line'
 import Circle from './Circle'
 import MultipleCircle from './MultipleCircle'
 
-const progressProps = {
+export const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
   processing: Boolean,
   type: {

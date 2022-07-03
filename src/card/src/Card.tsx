@@ -46,7 +46,7 @@ export const cardBaseProps = {
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
 
-const cardProps = {
+export const cardProps = {
   ...(useTheme.props as ThemeProps<CardTheme>),
   ...cardBaseProps
 }

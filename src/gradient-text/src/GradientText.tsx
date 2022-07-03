@@ -15,7 +15,7 @@ type Gradient =
     to: string
   }
 
-const gradientTextProps = {
+export const gradientTextProps = {
   ...(useTheme.props as ThemeProps<GradientTextTheme>),
   size: [String, Number] as PropType<string | number>,
   fontSize: [String, Number] as PropType<string | number>,

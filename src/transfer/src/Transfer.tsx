@@ -31,7 +31,7 @@ import {
   transferInjectionKey
 } from './interface'
 
-const transferProps = {
+export const transferProps = {
   ...(useTheme.props as ThemeProps<TransferTheme>),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {

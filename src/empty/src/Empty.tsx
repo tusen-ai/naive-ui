@@ -10,7 +10,7 @@ import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const emptyProps = {
+export const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
   description: String,
   showDescription: {

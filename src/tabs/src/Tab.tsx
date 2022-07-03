@@ -6,7 +6,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
-const typeProps = {
+export const typeProps = {
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
   internalCreatedByPane: Boolean,

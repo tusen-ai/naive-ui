@@ -22,7 +22,7 @@ import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
 
-const descriptionProps = {
+export const descriptionProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
   title: String,
   column: {

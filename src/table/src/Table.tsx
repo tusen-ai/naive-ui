@@ -8,7 +8,7 @@ import { tableLight } from '../styles'
 import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const tableProps = {
+export const tableProps = {
   ...(useTheme.props as ThemeProps<TableTheme>),
   bordered: {
     type: Boolean,

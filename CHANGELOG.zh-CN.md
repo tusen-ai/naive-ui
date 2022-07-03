@@ -15,6 +15,7 @@
 
 - `n-avatar` 新增 `lazy` 属性
 - `n-avatar` 新增 `intersection-observer-options` 属性
+- 导出所有组件的 `props` 属性对象定义
 
 ## 2.30.8
 

@@ -74,7 +74,7 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
   containerScrollTop: number
 }
 
-const scrollbarProps = {
+export const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
   size: {
     type: Number,

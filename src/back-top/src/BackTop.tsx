@@ -33,7 +33,7 @@ import type { BackTopTheme } from '../styles'
 import BackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
-const backTopProps = {
+export const backTopProps = {
   ...(useTheme.props as ThemeProps<BackTopTheme>),
   show: {
     type: Boolean as PropType<boolean | undefined>,

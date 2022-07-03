@@ -130,7 +130,7 @@ export const treeSharedProps = {
   >
 } as const
 
-const treeProps = {
+export const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
   showIrrelevantNodes: { type: Boolean, default: true },
   data: {

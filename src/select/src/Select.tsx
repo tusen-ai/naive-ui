@@ -76,7 +76,7 @@ import type {
 } from './interface'
 import style from './styles/index.cssr'
 
-const selectProps = {
+export const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
   to: useAdjustedTo.propTo,
   bordered: {

@@ -16,7 +16,7 @@ import style from './styles/index.cssr'
 import { collapseTransitionLight } from '../styles'
 import { NFadeInExpandTransition } from '../../_internal'
 
-const collapseProps = {
+export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
   show: {
     type: Boolean,

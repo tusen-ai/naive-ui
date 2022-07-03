@@ -52,7 +52,7 @@ type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
 }
 
-const tabsProps = {
+export const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,

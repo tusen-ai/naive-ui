@@ -19,7 +19,7 @@ import type { RateTheme } from '../styles'
 import style from './styles/index.cssr'
 import StarIcon from './StarIcon'
 
-const rateProps = {
+export const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
   allowHalf: Boolean,
   count: {

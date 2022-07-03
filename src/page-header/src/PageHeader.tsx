@@ -10,7 +10,7 @@ import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import useRtl from '../../_mixins/use-rtl'
 
-const pageHeaderProps = {
+export const pageHeaderProps = {
   ...(useTheme.props as ThemeProps<PageHeaderTheme>),
   title: String,
   subtitle: String,

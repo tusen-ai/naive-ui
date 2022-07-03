@@ -5,7 +5,7 @@ import { carouselMethodsInjectionKey } from './interface'
 import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const carouselDotsProps = {
+export const carouselDotsProps = {
   total: {
     type: Number,
     default: 0

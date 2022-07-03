@@ -6,7 +6,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { elementLight } from '../styles'
 import type { ElementTheme } from '../styles'
 
-const elementProps = {
+export const elementProps = {
   ...(useTheme.props as ThemeProps<ElementTheme>),
   tag: {
     type: String,

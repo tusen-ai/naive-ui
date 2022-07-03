@@ -1,12 +1,8 @@
-import {
-  defineComponent,
-  PropType,
-  CSSProperties
-} from 'vue'
+import { defineComponent, PropType, CSSProperties } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
-const descriptionItemProps = {
+export const descriptionItemProps = {
   label: String,
   span: {
     type: Number,
