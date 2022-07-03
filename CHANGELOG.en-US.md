@@ -15,6 +15,7 @@
 
 - `n-avatar` adds `lazy` prop.
 - `n-avatar` adds `intersection-observer-options` prop.
+- `n-number-animation` adds `on-finish` prop.
 
 ## 2.30.8
 

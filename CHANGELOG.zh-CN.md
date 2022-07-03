@@ -15,6 +15,7 @@
 
 - `n-avatar` 新增 `lazy` 属性
 - `n-avatar` 新增 `intersection-observer-options` 属性
+- `n-number-animation` 新增 `on-finish` 属性
 
 ## 2.30.8
 
