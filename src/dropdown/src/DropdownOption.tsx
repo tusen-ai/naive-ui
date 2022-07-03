@@ -9,7 +9,8 @@ import {
   PropType,
   Ref,
   mergeProps,
-  HTMLAttributes
+  HTMLAttributes,
+  VNodeChild
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
@@ -77,12 +78,14 @@ export default defineComponent({
       labelFieldRef,
       childrenFieldRef,
       renderOptionRef,
-      nodePropsRef
+      nodePropsRef,
+      menuPropsRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
-    const NPopoverBody = inject(popoverBodyInjectionKey) as Ref<HTMLElement>
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NPopoverBody = inject(popoverBodyInjectionKey)!
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
       const { value: childrenField } = childrenFieldRef
@@ -148,13 +151,10 @@ export default defineComponent({
     function handleMouseLeave (e: MouseEvent): void {
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
-      const { clsPrefix } = props
       if (
         relatedTarget &&
         !happensIn({ target: relatedTarget }, 'dropdownOption') &&
-        (relatedTarget as HTMLElement).className.indexOf(
-          `${clsPrefix}-scrollbar-rail__scrollbar`
-        )
+        !happensIn({ target: relatedTarget }, 'scrollbarRail')
       ) {
         hoverKeyRef.value = null
       }
@@ -178,6 +178,7 @@ export default defineComponent({
       renderIcon: renderIconRef,
       siblingHasIcon: NDropdownMenu.showIconRef,
       siblingHasSubmenu: NDropdownMenu.hasSubmenuRef,
+      menuProps: menuPropsRef,
       popoverBody: NPopoverBody,
       animated: animatedRef,
       mergedShowSubmenu: computed(() => {
@@ -228,16 +229,26 @@ export default defineComponent({
       renderOption,
       nodeProps,
       props,
-      scrollable,
-      popoverBody
+      scrollable
     } = this
-    const submenuVNode = mergedShowSubmenu ? (
-      <NDropdownMenu
-        clsPrefix={clsPrefix}
-        tmNodes={this.tmNode.children}
-        parentKey={this.tmNode.key}
-      />
-    ) : null
+    let submenuVNode: VNodeChild = null
+    if (mergedShowSubmenu) {
+      const submenuNodeProps = this.menuProps?.(
+        rawNode,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        rawNode.children as any
+      )
+      submenuVNode = (
+        <NDropdownMenu
+          {...submenuNodeProps}
+          clsPrefix={clsPrefix}
+          scrollable={this.scrollable}
+          tmNodes={this.tmNode.children}
+          parentKey={this.tmNode.key}
+        />
+      )
+    }
+
     const builtinProps: HTMLAttributes = {
       class: [
         `${clsPrefix}-dropdown-option-body`,
@@ -251,8 +262,12 @@ export default defineComponent({
       onMouseleave: this.handleMouseLeave,
       onClick: this.handleClick
     }
+    const optionNodeProps = nodeProps?.(rawNode)
     const node = (
-      <div class={`${clsPrefix}-dropdown-option`} {...nodeProps?.(rawNode)}>
+      <div
+        class={[`${clsPrefix}-dropdown-option`, optionNodeProps?.class]}
+        {...optionNodeProps}
+      >
         {h('div', mergeProps(builtinProps as any, props as any), [
           <div
             data-dropdown-option
@@ -301,7 +316,11 @@ export default defineComponent({
                         <VFollower
                           show={this.mergedShowSubmenu}
                           placement={this.placement}
-                          to={scrollable ? popoverBody : undefined}
+                          to={
+                            scrollable
+                              ? this.popoverBody || undefined
+                              : undefined
+                          }
                           teleportDisabled={!scrollable}
                         >
                           {{

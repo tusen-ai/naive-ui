@@ -21,6 +21,7 @@
 - 导出所有组件的 props 对象
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
+- `n-dropdown` 新增 `menu-props` 属性
 
 ## 2.30.8
 

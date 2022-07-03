@@ -5,27 +5,14 @@
 </markdown>
 
 <template>
-  <n-space>
-    <n-dropdown
-      :options="options"
-      placement="bottom-start"
-      trigger="click"
-      @select="handleSelect"
-    >
-      <n-button>人物和食物</n-button>
-    </n-dropdown>
-
-    <n-dropdown
-      :options="options"
-      placement="bottom-start"
-      trigger="click"
-      scrollable
-      style="max-height: 100px"
-      @select="handleSelect"
-    >
-      <n-button>人物和食物-scrollable</n-button>
-    </n-dropdown>
-  </n-space>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    @select="handleSelect"
+  >
+    <n-button>人物和食物</n-button>
+  </n-dropdown>
 </template>
 
 <script lang="ts">
@@ -70,6 +57,7 @@ const options = [
       {
         label: '其他',
         key: 'others2',
+        disabled: true,
         children: [
           {
             label: '鸡肉',

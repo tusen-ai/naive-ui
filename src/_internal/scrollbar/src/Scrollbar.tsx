@@ -752,7 +752,11 @@ const Scrollbar = defineComponent({
           ),
           <div
             ref="yRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
+            class={[
+              `${mergedClsPrefix}-scrollbar-rail`,
+              `${mergedClsPrefix}-scrollbar-rail--vertical`
+            ]}
+            data-scrollbar-rail
             style={this.verticalRailStyle}
             aria-hidden
           >
@@ -776,8 +780,12 @@ const Scrollbar = defineComponent({
           </div>,
           <div
             ref="xRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
+            class={[
+              `${mergedClsPrefix}-scrollbar-rail`,
+              `${mergedClsPrefix}-scrollbar-rail--horizontal`
+            ]}
             style={this.horizontalRailStyle}
+            data-scrollbar-rail
             aria-hidden
           >
             {h(
