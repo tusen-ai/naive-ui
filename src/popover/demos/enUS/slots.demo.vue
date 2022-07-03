@@ -1,7 +1,7 @@
 <markdown>
-# With header
+# Slots
 
-Use `header` slot to customize header.
+Use `header` or `footer` slot to customize header or footer.
 </markdown>
 
 <template>
@@ -14,6 +14,11 @@ Use `header` slot to customize header.
         Divider is on the bottom.
       </n-text>
     </template>
-    Divider is on the top.
+    Content.
+    <template #footer>
+      <n-text strong depth="1">
+        Divider is on the top.
+      </n-text>
+    </template>
   </n-popover>
 </template>

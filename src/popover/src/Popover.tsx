@@ -160,6 +160,7 @@ export const popoverBaseProps = {
   scrollable: Boolean,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // events
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -569,7 +570,8 @@ export default defineComponent({
                 }),
                 {
                   default: () => this.$slots.default?.(),
-                  header: () => this.$slots.header?.()
+                  header: () => this.$slots.header?.(),
+                  footer: () => this.$slots.footer?.()
                 }
               )
             ]
