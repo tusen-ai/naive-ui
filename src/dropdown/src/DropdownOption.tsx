@@ -137,6 +137,7 @@ export default defineComponent({
     }
     function handleMouseEnter (): void {
       const { parentKey, tmNode } = props
+      if (tmNode.disabled) return
       if (!mergedShowRef.value) return
       lastToggledSubmenuKeyRef.value = parentKey
       keyboardKeyRef.value = null
@@ -144,11 +145,13 @@ export default defineComponent({
     }
     function handleMouseMove (): void {
       const { tmNode } = props
+      if (tmNode.disabled) return
       if (!mergedShowRef.value) return
       if (hoverKeyRef.value === tmNode.key) return
       handleMouseEnter()
     }
     function handleMouseLeave (e: MouseEvent): void {
+      if (props.tmNode.disabled) return
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
       if (

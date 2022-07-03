@@ -15,6 +15,7 @@
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
 - Fix `n-notification`'s leave animation if content height overflows screen.
+- Fix `n-dropdown`'s disabled option has hover style.
 
 ### Feats
 

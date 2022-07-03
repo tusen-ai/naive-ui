@@ -15,6 +15,7 @@
 - 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
 - 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
 - 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
+- 修复 `n-dropdown` 禁用的选项有 hover 样式
 
 ### Feats
 
