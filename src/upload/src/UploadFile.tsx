@@ -8,6 +8,7 @@ import {
   watchEffect,
   VNode
 } from 'vue'
+import { useMemo } from 'vooks'
 import { ImageInst } from '../../image/src/Image'
 import {
   CancelIcon,
@@ -93,15 +94,18 @@ export default defineComponent({
       const { file } = props
       return ['error'].includes(file.status)
     })
+    const mergedThumbnailUrlRef = useMemo(() => {
+      return thumbnailUrlRef.value || props.file.thumbnailUrl || props.file.url
+    })
     const showPreviewButtonRef = computed(() => {
       if (!NUpload.showPreviewButtonRef.value) return false
       const {
-        file: { status, url },
+        file: { status },
         listType
       } = props
       return (
         ['finished'].includes(status) &&
-        (url || thumbnailUrlRef.value) &&
+        mergedThumbnailUrlRef.value &&
         listType === 'image-card'
       )
     })
@@ -204,7 +208,7 @@ export default defineComponent({
       showDownloadButton: showDownloadButtonRef,
       showRetryButton: showRetryButtonRef,
       showPreviewButton: showPreviewButtonRef,
-      thumbnailUrl: thumbnailUrlRef,
+      mergedThumbnailUrl: mergedThumbnailUrlRef,
       imageRef,
       handleRemoveOrCancelClick,
       handleDownloadClick,
@@ -228,8 +232,7 @@ export default defineComponent({
             {{ default: () => documentIcon }}
           </NBaseIcon>
         </span>
-      ) : (file.url || this.thumbnailUrl || file.thumbnailUrl) &&
-        file.status !== 'error' ? (
+      ) : this.mergedThumbnailUrl && file.status !== 'error' ? (
         <a
           rel="noopener noreferer"
           target="_blank"
@@ -239,29 +242,22 @@ export default defineComponent({
         >
           {listType === 'image-card' ? (
             <NImage
-              src={
-                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
-              }
+              src={this.mergedThumbnailUrl || undefined}
               previewSrc={file.url || undefined}
               alt={file.name}
               ref="imageRef"
             />
           ) : (
-            <img
-              src={
-                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
-              }
-              alt={file.name}
-            />
+            <img src={this.mergedThumbnailUrl || undefined} alt={file.name} />
           )}
         </a>
-          ) : (
+      ) : (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
           <NBaseIcon clsPrefix={clsPrefix}>
             {{ default: () => imageIcon }}
           </NBaseIcon>
         </span>
-          )
+      )
     } else {
       icon = (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
