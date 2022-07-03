@@ -21,6 +21,8 @@ export default {
   calendarLeftPaddingYear: '0',
   calendarLeftPaddingQuarter: '0',
   calendarLeftPaddingMonthrange: '0',
+  calendarLeftPaddingQuarterrange: '0',
+  calendarLeftPaddingYearrange: '0',
   calendarRightPaddingDate: '6px 12px 4px 12px',
   calendarRightPaddingDatetime: '4px 12px',
   calendarRightPaddingDaterange: '6px 12px 4px 12px',
@@ -28,5 +30,7 @@ export default {
   calendarRightPaddingMonth: '0',
   calendarRightPaddingYear: '0',
   calendarRightPaddingQuarter: '0',
-  calendarRightPaddingMonthrange: '0'
+  calendarRightPaddingMonthrange: '0',
+  calendarRightPaddingQuarterrange: '0',
+  calendarRightPaddingYearrange: '0'
 }

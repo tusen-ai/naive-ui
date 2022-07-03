@@ -71,7 +71,8 @@ import type {
   Value,
   Size,
   ValueAtom,
-  SelectBaseOption
+  SelectBaseOption,
+  SelectFilter
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -107,9 +108,7 @@ const selectProps = {
   },
   remote: Boolean,
   loading: Boolean,
-  filter: Function as PropType<
-  (pattern: string, option: SelectOption) => boolean
-  >,
+  filter: Function as PropType<SelectFilter>,
   placement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
@@ -310,6 +309,8 @@ export default defineComponent({
       ).concat(compitableOptionsRef.value)
     })
     const resolvedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
       const { labelField, valueField } = props
       return (pattern: string, option: SelectBaseOption): boolean => {
         if (!option) return false
@@ -565,7 +566,12 @@ export default defineComponent({
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
-          createdOptionsRef.value.push(beingCreatedOption)
+          const createdOptions = createdOptionsRef.value
+          if (!createdOptions.length) {
+            createdOptionsRef.value = [beingCreatedOption]
+          } else {
+            createdOptions.push(beingCreatedOption)
+          }
           beingCreatedOptionsRef.value = emptyArray
         }
       }

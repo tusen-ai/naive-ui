@@ -27,7 +27,9 @@ export default defineComponent({
     const notification = useNotification()
     return {
       warning () {
-        notification.warning('...')
+        notification.warning({
+          content: '...'
+        })
       }
     }
   }
@@ -47,6 +49,7 @@ closable.vue
 duration.vue
 max.vue
 placement.vue
+error-debug.vue
 ```
 
 ## API

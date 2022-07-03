@@ -3,7 +3,8 @@ export type { SelectProps } from './src/Select'
 export type {
   SelectGroupOption,
   SelectOption,
-  SelectInst
+  SelectInst,
+  SelectFilter
 } from './src/interface'
 export type {
   RenderLabelImpl as SelectRenderLabel,

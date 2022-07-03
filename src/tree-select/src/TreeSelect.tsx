@@ -10,7 +10,8 @@ import {
   CSSProperties,
   provide,
   watchEffect,
-  HTMLAttributes
+  HTMLAttributes,
+  VNodeChild
 } from 'vue'
 import {
   FollowerPlacement,
@@ -25,7 +26,7 @@ import { createTreeMate, CheckStrategy } from 'treemate'
 import { happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
-import type { SelectBaseOption } from '../../select/src/interface'
+import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateKeysImpl } from '../../tree/src/Tree'
 import {
@@ -58,7 +59,12 @@ import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
+  TreeSelectNodeProps,
   TreeSelectOption,
+  TreeSelectRenderLabel,
+  TreeSelectRenderPrefix,
+  TreeSelectRenderSuffix,
+  TreeSelectRenderTag,
   Value
 } from './interface'
 import { treeSelectInjectionKey } from './interface'
@@ -135,7 +141,12 @@ const props = {
     default: true
   },
   status: String as PropType<FormValidationStatus>,
+  renderTag: Function as PropType<TreeSelectRenderTag>,
   ...treeSharedProps,
+  renderLabel: Function as PropType<TreeSelectRenderLabel>,
+  renderPrefix: Function as PropType<TreeSelectRenderPrefix>,
+  renderSuffix: Function as PropType<TreeSelectRenderSuffix>,
+  nodeProps: Function as PropType<TreeSelectNodeProps>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
@@ -567,6 +578,27 @@ export default defineComponent({
       // in action panel
       if (!happensIn(e, 'action')) e.preventDefault()
     }
+    const selectionRenderTagRef = computed(() => {
+      const { renderTag } = props
+      if (!renderTag) return undefined
+      return function selectionRenderTag ({
+        option,
+        handleClose
+      }: {
+        option: SelectOption
+        handleClose: () => void
+      }): VNodeChild {
+        const { value } = option
+        if (value !== undefined) {
+          const treeOption = dataTreeMateRef.value.getNode(value)
+          if (treeOption) {
+            return renderTag({ option: treeOption.rawNode, handleClose })
+          }
+        }
+        return value
+      }
+    })
+
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef,
       dataTreeMate: dataTreeMateRef
@@ -642,6 +674,7 @@ export default defineComponent({
       pendingNodeKey: pendingNodeKeyRef,
       mergedCascade: mergedCascadeRef,
       mergedFilter: mergedFilterRef,
+      selectionRenderTag: selectionRenderTagRef,
       handleTriggerOrMenuResize,
       doUpdateExpandedKeys,
       handleMenuLeave,
@@ -685,6 +718,7 @@ export default defineComponent({
                       themeOverrides={
                         mergedTheme.peerOverrides.InternalSelection
                       }
+                      renderTag={this.selectionRenderTag}
                       selectedOption={this.selectedOption}
                       selectedOptions={this.selectedOptions}
                       size={this.mergedSize}
@@ -788,6 +822,11 @@ export default defineComponent({
                                 cascade={this.mergedCascade}
                                 leafOnly={this.leafOnly}
                                 multiple={this.multiple}
+                                renderLabel={this.renderLabel}
+                                renderPrefix={this.renderPrefix}
+                                renderSuffix={this.renderSuffix}
+                                renderSwitcherIcon={this.renderSwitcherIcon}
+                                nodeProps={this.nodeProps}
                                 virtualScroll={
                                   this.consistentMenuWidth && this.virtualScroll
                                 }

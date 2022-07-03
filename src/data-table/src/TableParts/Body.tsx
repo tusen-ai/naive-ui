@@ -30,11 +30,11 @@ import {
   TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
+import type { ColItem } from '../use-group-header'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
-import type { ColItem } from '../use-group-header'
 
 interface NormalRowRenderInfo {
   striped: boolean
@@ -670,7 +670,7 @@ export default defineComponent({
                   {...props}
                 >
                   {cols.map((col, colIndex) => {
-                    if (!isVirtual && rowIndex in cordToPass) {
+                    if (rowIndex in cordToPass) {
                       const cordOfRowToPass = cordToPass[rowIndex]
                       const indexInCordOfRowToPass =
                         cordOfRowToPass.indexOf(colIndex)

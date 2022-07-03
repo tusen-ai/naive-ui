@@ -5,6 +5,41 @@
 ### Fixes
 
 - 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+- 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
+- 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
+- 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+
+## 2.30.8
+
+### Fixes
+
+- 修复 `n-select` 菜单的 transition 样式，关闭 [#3211](https://github.com/TuSimple/naive-ui/issues/3211)
+
+## 2.30.7
+
+### Fixes
+
+- 修复 `n-tabs` 的 `bar-width` 属性在设置 `0` 时失效，关闭 [#3171](https://github.com/TuSimple/naive-ui/issues/3171)
+- 修复 `n-drawer` 使用 `show-mask` 属性时控制台出现 warning，关闭 [#3172](https://github.com/TuSimple/naive-ui/issues/3172)
+- 修复 `n-button` 放入 ellipsis 的容器中时不能正确显示，关闭 [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素中按下 Enter 键会导致选项被清除，关闭 [#3169](https://github.com/TuSimple/naive-ui/issues/3169)
+- 修复 `n-select` 的 `filter` 属性不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
+- 修复 `n-modal` 在不使用任何 preset 的时候遮罩可能覆盖住内容，关闭 [#3204](https://github.com/TuSimple/naive-ui/issues/3204)
+- 修复 `n-button` 在图标过大或者过小时未对齐
+- 修复 `n-select` 创建的选项可能出现多次，关闭 [#3206](https://github.com/TuSimple/naive-ui/issues/3206)
+
+### Feats
+
+- `n-date-picker` `type` 属性支持 `'quarterrange'` 和 `'yearrange'`
+- `n-tree-select` 新增 `render-prefix` 属性
+- `n-tree-select` 新增 `render-suffix` 属性
+- `n-tree-select` 新增 `render-switcher-icon` 属性
+- `n-tree-select` 新增 `node-props` 属性
+- `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
+- `n-tree-select` 新增 `render-tag` 属性
+- `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
 
 ## 2.30.6
 

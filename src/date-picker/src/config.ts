@@ -11,3 +11,5 @@ export type DatePickerType =
   | 'year'
   | 'quarter'
   | 'monthrange'
+  | 'quarterrange'
+  | 'yearrange'

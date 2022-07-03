@@ -1,49 +1,36 @@
 <markdown>
-# Filterable debug
+# Create debug
 </markdown>
 
 <template>
   <n-space vertical>
     <n-select
-      v-model:value="selectedValue"
-      style="width: 200px"
+      v-model:value="multipleSelectValue"
       filterable
-      placeholder="选择歌曲"
-      :filter="filter"
-      :consistent-menu-width="false"
-      :options="options"
-    />
-    <n-select
-      v-model:value="selectedValues"
-      style="width: 200px"
       multiple
-      filterable
-      placeholder="选择歌曲"
-      :filter="filter"
-      :consistent-menu-width="false"
+      tag
       :options="options"
     />
+    <n-select v-model:value="selectValue" filterable tag :options="options" />
   </n-space>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { SelectFilter } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const filter: SelectFilter = (pattern, option) => {
-      console.log(pattern, option)
-      return pattern === '1'
-    }
     return {
-      selectedValue: ref('song1'),
-      selectedValues: ref(['song1']),
-      filter,
+      multipleSelectValue: ref(null),
+      selectValue: ref(null),
       options: [
         {
-          label:
-            'Drive My Carfehjuwagheiuwhfiuawgheiawufhiuawghueiwahfaiuwgewiuafhw',
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
+        {
+          label: 'Drive My Car',
           value: 'song1'
         },
         {
@@ -52,7 +39,8 @@ export default defineComponent({
         },
         {
           label: "You Won't See",
-          value: 'song3'
+          value: 'song3',
+          disabled: true
         },
         {
           label: 'Nowhere Man',
@@ -68,7 +56,8 @@ export default defineComponent({
         },
         {
           label: 'Michelle',
-          value: 'song7'
+          value: 'song7',
+          disabled: true
         },
         {
           label: 'What goes on',

@@ -1,9 +1,9 @@
 <markdown>
-# Month range
+# Quarter range
 </markdown>
 
 <template>
-  <n-date-picker v-model:value="timestamp" type="monthrange" clearable />
+  <n-date-picker v-model:value="timestamp" type="quarterrange" clearable />
   <pre>{{ JSON.stringify(timestamp) }}</pre>
 </template>
 

@@ -13,7 +13,9 @@ datetimerange.vue
 month.vue
 monthrange.vue
 year.vue
+yearrange.vue
 quarter.vue
+quarterrange.vue
 size.vue
 default-time.vue
 disabled.vue
@@ -134,7 +136,7 @@ panel.vue
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
 
-### MonthRange Type Props
+### MonthRange, QuarterRange, YearRange Type Props
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |

@@ -185,7 +185,7 @@ export default defineComponent({
           if (clonedNode.props) {
             clonedNode.props.privateShow = false
           } else {
-            clonedNode.props = { pirvateShow: false }
+            clonedNode.props = { privateShow: false }
           }
           childrenAndRawSpan.push({
             child: clonedNode,

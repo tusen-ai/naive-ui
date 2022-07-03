@@ -206,11 +206,13 @@ export default defineComponent({
         case 'datetimerange':
           return localeRef.value.dateTimeFormat
         case 'year':
+        case 'yearrange':
           return localeRef.value.yearTypeFormat
         case 'month':
         case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
+        case 'quarterrange':
           return localeRef.value.quarterFormat
       }
     })
@@ -287,7 +289,13 @@ export default defineComponent({
       )
     })
     const isRangeRef = computed(() => {
-      return ['daterange', 'datetimerange', 'monthrange'].includes(props.type)
+      return [
+        'daterange',
+        'datetimerange',
+        'monthrange',
+        'quarterrange',
+        'yearrange'
+      ].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
@@ -365,7 +373,9 @@ export default defineComponent({
         case 'quarter': {
           return ['clear', 'now', 'confirm']
         }
-        case 'monthrange': {
+        case 'monthrange':
+        case 'yearrange':
+        case 'quarterrange': {
           return ['clear', 'confirm']
         }
         default: {
@@ -978,11 +988,13 @@ export default defineComponent({
         />
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
-      ) : type === 'monthrange' ? (
+      ) : type === 'monthrange' ||
+        type === 'yearrange' ||
+        type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
-      ) : (
+          ) : (
         <DatePanel {...commonPanelProps} />
-      )
+          )
     }
     if (this.panel) {
       return renderPanel()

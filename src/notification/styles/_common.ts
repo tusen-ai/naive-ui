@@ -3,5 +3,8 @@ export default {
   closeSize: '20px',
   closeIconSize: '16px',
   width: '365px',
-  padding: '16px'
+  padding: '16px',
+  titleFontSize: '16px',
+  metaFontSize: '12px',
+  descriptionFontSize: '12px'
 }

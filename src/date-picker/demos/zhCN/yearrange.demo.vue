@@ -1,9 +1,9 @@
 <markdown>
-# Month range
+# 年份范围
 </markdown>
 
 <template>
-  <n-date-picker v-model:value="timestamp" type="monthrange" clearable />
+  <n-date-picker v-model:value="timestamp" type="yearrange" clearable />
   <pre>{{ JSON.stringify(timestamp) }}</pre>
 </template>
 

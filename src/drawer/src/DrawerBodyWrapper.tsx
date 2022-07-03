@@ -57,7 +57,7 @@ export default defineComponent({
       default: true
     },
     showMask: {
-      type: Boolean as PropType<boolean | 'transparent'>,
+      type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
