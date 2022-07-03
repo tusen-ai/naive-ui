@@ -23,6 +23,7 @@ import {
   dropdownInjectionKey,
   dropdownOptionInjectionKey
 } from './context'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
@@ -57,7 +58,8 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    props: Object as PropType<HTMLAttributes>
+    props: Object as PropType<HTMLAttributes>,
+    scrollable: Boolean
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -80,6 +82,7 @@ export default defineComponent({
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
+    const NPopoverBody = inject(popoverBodyInjectionKey) as Ref<HTMLElement>
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
       const { value: childrenField } = childrenFieldRef
@@ -145,9 +148,13 @@ export default defineComponent({
     function handleMouseLeave (e: MouseEvent): void {
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
+      const { clsPrefix } = props
       if (
         relatedTarget &&
-        !happensIn({ target: relatedTarget }, 'dropdownOption')
+        !happensIn({ target: relatedTarget }, 'dropdownOption') &&
+        (relatedTarget as HTMLElement).className.indexOf(
+          `${clsPrefix}-scrollbar-rail__scrollbar`
+        )
       ) {
         hoverKeyRef.value = null
       }
@@ -164,12 +171,14 @@ export default defineComponent({
         NDropdown.doUpdateShow(false)
       }
     }
+
     return {
       labelField: labelFieldRef,
       renderLabel: renderLabelRef,
       renderIcon: renderIconRef,
       siblingHasIcon: NDropdownMenu.showIconRef,
       siblingHasSubmenu: NDropdownMenu.hasSubmenuRef,
+      popoverBody: NPopoverBody,
       animated: animatedRef,
       mergedShowSubmenu: computed(() => {
         return deferredShowSubmenuRef.value && !parentEnteringSubmenuRef.value
@@ -218,7 +227,9 @@ export default defineComponent({
       renderIcon,
       renderOption,
       nodeProps,
-      props
+      props,
+      scrollable,
+      popoverBody
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -290,7 +301,8 @@ export default defineComponent({
                         <VFollower
                           show={this.mergedShowSubmenu}
                           placement={this.placement}
-                          teleportDisabled
+                          to={scrollable ? popoverBody : undefined}
+                          teleportDisabled={!scrollable}
                         >
                           {{
                             default: () => {

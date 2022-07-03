@@ -431,6 +431,7 @@ export default defineComponent({
         style: [style, this.cssVars as any],
         showArrow: this.showArrow,
         arrowStyle: this.arrowStyle,
+        scrollable: this.scrollable,
         onMouseenter,
         onMouseleave
       }
