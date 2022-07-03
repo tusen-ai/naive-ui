@@ -16,18 +16,27 @@ If you are using Nuxt, please see [example](https://github.com/07akioni/naive-ui
 2. Add the following config in your `nuxt.config.ts`.
 
 ```ts
+import { defineNuxtConfig } from 'nuxt'
+
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   build: {
-    transpile: [
-      'naive-ui',
-      'vueuc',
-      '@css-render/vue3-ssr',
-      '@juggle/resize-observer'
-    ]
+    transpile:
+      process.env.NODE_ENV === 'production'
+        ? [
+            'naive-ui',
+            'vueuc',
+            '@css-render/vue3-ssr',
+            '@juggle/resize-observer'
+          ]
+        : ['@juggle/resize-observer']
   },
   vite: {
     optimizeDeps: {
-      include: ['date-fns-tz/esm/formatInTimeZone']
+      include:
+        process.env.NODE_ENV === 'development'
+          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
+          : []
     }
   }
 })
