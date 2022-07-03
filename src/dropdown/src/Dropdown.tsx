@@ -115,7 +115,7 @@ const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
 keyof typeof popoverBaseProps
 >
 
-const dropdownProps = {
+export const dropdownProps = {
   ...popoverBaseProps,
   ...dropdownBaseProps,
   ...(useTheme.props as ThemeProps<DropdownTheme>)

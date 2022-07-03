@@ -30,7 +30,7 @@ function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
   return steps.map((step, i) => stepWithIndex(step, i))
 }
 
-const stepsProps = {
+export const stepsProps = {
   ...(useTheme.props as ThemeProps<StepsTheme>),
   current: Number,
   status: {

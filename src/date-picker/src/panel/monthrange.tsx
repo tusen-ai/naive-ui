@@ -73,7 +73,7 @@ export default defineComponent({
           {item.type === 'month'
             ? item.dateObject.month + 1
             : item.type === 'quarter'
-              ? item.dateObject.quarter
+              ? `Q${item.dateObject.quarter}`
               : item.dateObject.year}
         </div>
       )

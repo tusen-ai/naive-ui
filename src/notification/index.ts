@@ -1,4 +1,7 @@
-export { default as NNotificationProvider } from './src/NotificationProvider'
+export {
+  default as NNotificationProvider,
+  notificationProviderProps
+} from './src/NotificationProvider'
 export type {
   NotificationProviderProps,
   NotificationProviderInst,

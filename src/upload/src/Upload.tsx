@@ -258,7 +258,7 @@ function submitImpl (
   }
 }
 
-const uploadProps = {
+export const uploadProps = {
   ...(useTheme.props as ThemeProps<UploadTheme>),
   name: {
     type: String,

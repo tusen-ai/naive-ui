@@ -14,10 +14,11 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
+import useRtl from '../../_mixins/use-rtl'
 import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
-import { notificationProviderInjectionKey } from './context'
 import { useConfig, useThemeClass } from '../../_mixins'
+import { notificationProviderInjectionKey } from './context'
 
 const iconRenderMap = {
   info: () => <InfoIcon />,
@@ -62,7 +63,12 @@ export const Notification = defineComponent({
       props: providerProps
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(notificationProviderInjectionKey)!
-    const { inlineThemeDisabled } = useConfig()
+    const { inlineThemeDisabled, mergedRtlRef } = useConfig()
+    const rtlEnabledRef = useRtl(
+      'Notification',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const cssVarsRef = computed(() => {
       const { type } = props
       const {
@@ -146,6 +152,7 @@ export const Notification = defineComponent({
       handleCloseClick () {
         props.onClose()
       },
+      rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -162,6 +169,7 @@ export const Notification = defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-notification`,
+            this.rtlEnabled && `${mergedClsPrefix}-notification--rtl`,
             this.themeClass,
             {
               [`${mergedClsPrefix}-notification--closable`]: this.closable,

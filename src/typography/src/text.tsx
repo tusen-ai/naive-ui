@@ -8,7 +8,7 @@ import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/text.cssr'
 
-const textProps = {
+export const textProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   code: Boolean,
   type: {

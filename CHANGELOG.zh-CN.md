@@ -4,8 +4,21 @@
 
 ### Fixes
 
+- 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+- 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
+- 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
+- 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+- 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
+
 ### Feats
 
+- `n-avatar` 新增 `lazy` 属性
+- `n-avatar` 新增 `intersection-observer-options` 属性
+- `n-number-animation` 新增 `on-finish` 属性
+- `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
 

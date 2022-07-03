@@ -21,7 +21,7 @@ function getRatio (context: any): number {
   return (window.devicePixelRatio || 1) / backingStore
 }
 
-const watermarkProps = {
+export const watermarkProps = {
   ...(useTheme.props as ThemeProps<WatermarkTheme>),
   debug: Boolean,
   cross: Boolean,

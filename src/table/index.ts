@@ -1,4 +1,4 @@
-export { default as NTable } from './src/Table'
+export { default as NTable, tableProps } from './src/Table'
 export { default as NTh } from './src/Th'
 export { default as NTr } from './src/Tr'
 export { default as NTd } from './src/Td'

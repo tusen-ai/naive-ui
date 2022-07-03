@@ -22,7 +22,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { stepsInjectionKey } from './Steps'
 import { useConfig, useThemeClass } from '../../_mixins'
 
-const stepProps = {
+export const stepProps = {
   status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
   title: String,
   description: String,

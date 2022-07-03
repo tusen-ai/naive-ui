@@ -79,7 +79,7 @@ import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
-const datePickerProps = {
+export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {

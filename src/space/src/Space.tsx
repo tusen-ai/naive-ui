@@ -26,7 +26,7 @@ export type Justify =
   | 'space-between'
   | 'space-evenly'
 
-const spaceProps = {
+export const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
   justify: {

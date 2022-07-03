@@ -22,7 +22,7 @@ import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
 
-const descriptionProps = {
+export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
   title: String,
   column: {
@@ -51,13 +51,13 @@ const descriptionProps = {
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
-export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionProps>
+export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
 /** @deprecated You should use `DescriptionsProps` */
 export type DescriptionProps = DescriptionsProps
 
 export default defineComponent({
   name: 'Descriptions',
-  props: descriptionProps,
+  props: descriptionsProps,
   setup (props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

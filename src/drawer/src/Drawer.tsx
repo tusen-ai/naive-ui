@@ -29,7 +29,7 @@ import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-const drawerProps = {
+export const drawerProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme>),
   show: Boolean,
   width: {

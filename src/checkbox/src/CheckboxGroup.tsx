@@ -27,7 +27,7 @@ export interface CheckboxGroupInjection {
 export const checkboxGroupInjectionKey =
   createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
 
-const checkboxGroupProps = {
+export const checkboxGroupProps = {
   min: Number,
   max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,

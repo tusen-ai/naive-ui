@@ -196,7 +196,7 @@ export const popoverBaseProps = {
   maxWidth: Number
 }
 
-const popoverProps = {
+export const popoverProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
   ...popoverBaseProps,
   internalRenderBody: Function as PropType<InternalRenderBody>

@@ -26,7 +26,7 @@ import type { SwitchTheme } from '../styles'
 import type { OnUpdateValueImpl, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
-const switchProps = {
+export const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,

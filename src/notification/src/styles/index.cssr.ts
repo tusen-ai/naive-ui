@@ -263,9 +263,7 @@ export default c([
         align-items: center;
         justify-content: center;
       `, [
-        cB('icon', {
-          transition: 'color .3s var(--n-bezier)'
-        })
+        cB('icon', 'transition: color .3s var(--n-bezier);')
       ]),
       cB('notification-main', `
         padding-top: var(--n-padding-top);

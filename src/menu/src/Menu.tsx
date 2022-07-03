@@ -39,7 +39,7 @@ import {
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
 
-const menuProps = {
+export const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
   options: {
     type: Array as PropType<MenuMixedOption[]>,
