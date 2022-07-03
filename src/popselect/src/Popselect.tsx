@@ -19,7 +19,7 @@ import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
 import { popselectInjectionKey, PopselectInst } from './interface'
 
-const popselectProps = {
+export const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
   ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {

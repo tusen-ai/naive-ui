@@ -34,7 +34,7 @@ export interface TagRef extends TagPublicMethods {
   $el: HTMLElement
 }
 
-const tagProps = {
+export const tagProps = {
   ...(useTheme.props as ThemeProps<TagTheme>),
   ...commonProps,
   bordered: {

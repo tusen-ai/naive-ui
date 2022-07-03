@@ -18,6 +18,7 @@
 - `n-avatar` adds `intersection-observer-options` prop.
 - `n-number-animation` adds `on-finish` prop.
 - `n-notification` supports RTL.
+- Export all components' props object.
 
 ## 2.30.8
 

@@ -11,7 +11,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { tween } from './utils'
 import { useLocale } from '../../_mixins'
 
-const numberAnimationProps = {
+export const numberAnimationProps = {
   to: {
     type: Number,
     default: 0

@@ -62,7 +62,7 @@ import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
-const inputProps = {
+export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
   bordered: {
     type: Boolean as PropType<boolean | undefined>,

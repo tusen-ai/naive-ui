@@ -18,6 +18,7 @@
 - `n-avatar` 新增 `intersection-observer-options` 属性
 - `n-number-animation` 新增 `on-finish` 属性
 - `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
 
 ## 2.30.8
 

@@ -76,7 +76,7 @@ import style from './styles/index.cssr'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
-const props = {
+export const treeSelectProps = {
   ...(useTheme.props as ThemeProps<TreeSelectTheme>),
   bordered: {
     type: Boolean,
@@ -164,11 +164,11 @@ const props = {
   leafOnly: Boolean
 } as const
 
-export type TreeSelectProps = ExtractPublicPropTypes<typeof props>
+export type TreeSelectProps = ExtractPublicPropTypes<typeof treeSelectProps>
 
 export default defineComponent({
   name: 'TreeSelect',
-  props,
+  props: treeSelectProps,
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {

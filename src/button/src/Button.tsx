@@ -38,7 +38,7 @@ import type { Type, Size } from './interface'
 import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
 
-const buttonProps = {
+export const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
   color: String,
   textColor: String,

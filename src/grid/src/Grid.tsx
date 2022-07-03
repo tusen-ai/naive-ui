@@ -32,7 +32,7 @@ const defaultCols = 24
 
 const SSR_ATTR_NAME = '__ssr__'
 
-const gridProps = {
+export const gridProps = {
   responsive: {
     type: [String, Boolean] as PropType<'self' | 'screen'>,
     default: 'self'

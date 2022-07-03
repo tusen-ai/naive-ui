@@ -16,7 +16,7 @@ export interface CountdownTimeInfo {
   milliseconds: number
 }
 
-const countdownProps = {
+export const countdownProps = {
   duration: {
     type: Number,
     default: 0

@@ -23,7 +23,7 @@ const STROKE_WIDTH = {
   large: 16
 }
 
-const spinProps = {
+export const spinProps = {
   ...(useTheme.props as ThemeProps<SpinTheme>),
   description: String,
   stroke: String,

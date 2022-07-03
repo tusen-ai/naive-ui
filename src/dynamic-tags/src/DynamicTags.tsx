@@ -39,7 +39,7 @@ import type {
 } from './interface'
 import style from './styles/index.cssr'
 
-const dynamicTagsProps = {
+export const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
   ...commonProps,
   size: {

@@ -13,7 +13,7 @@ import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { timelineLight } from '../styles'
 import style from './styles/index.cssr'
 
-const timelineProps = {
+export const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
   horizontal: Boolean,
   itemPlacement: {
