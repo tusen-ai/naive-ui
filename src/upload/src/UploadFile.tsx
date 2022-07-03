@@ -228,7 +228,8 @@ export default defineComponent({
             {{ default: () => documentIcon }}
           </NBaseIcon>
         </span>
-      ) : (file.url || this.thumbnailUrl) && file.status !== 'error' ? (
+      ) : (file.url || this.thumbnailUrl || file.thumbnailUrl) &&
+        file.status !== 'error' ? (
         <a
           rel="noopener noreferer"
           target="_blank"
@@ -254,13 +255,13 @@ export default defineComponent({
             />
           )}
         </a>
-      ) : (
+          ) : (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
           <NBaseIcon clsPrefix={clsPrefix}>
             {{ default: () => imageIcon }}
           </NBaseIcon>
         </span>
-      )
+          )
     } else {
       icon = (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
