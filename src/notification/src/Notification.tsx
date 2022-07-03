@@ -14,11 +14,11 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
+import useRtl from '../../_mixins/use-rtl'
 import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
-import { notificationProviderInjectionKey } from './context'
 import { useConfig, useThemeClass } from '../../_mixins'
-import useRtl from '../../_mixins/use-rtl'
+import { notificationProviderInjectionKey } from './context'
 
 const iconRenderMap = {
   info: () => <InfoIcon />,

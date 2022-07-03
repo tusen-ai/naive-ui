@@ -252,6 +252,7 @@ export default defineComponent({
     } = this
     onRender?.()
     let img: VNodeChild
+    const placeholderNode = this.$slots.placeholder?.()
     if (this.hasLoadError) {
       img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
     } else {
@@ -290,7 +291,6 @@ export default defineComponent({
         }
       })
     }
-    const placeholderNode = this.$slots.placeholder?.()
     return (
       <span
         ref="selfRef"

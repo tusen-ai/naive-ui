@@ -10,12 +10,14 @@
 - Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
+- Fix `n-notification`'s leave animation if content height overflows screen.
 
 ### Feats
 
 - `n-avatar` adds `lazy` prop.
 - `n-avatar` adds `intersection-observer-options` prop.
 - `n-number-animation` adds `on-finish` prop.
+- `n-notification` supports RTL.
 
 ## 2.30.8
 
