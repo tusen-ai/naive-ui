@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-date-picker`'s `clearable` will control visibility of clear button is no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+
 ### Fixes
 
 - Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).

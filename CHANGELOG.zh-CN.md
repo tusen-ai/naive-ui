@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-date-picker` 的 `clearable` 属性在 `action` 属性没有设置时，会控面板清空按钮的显隐，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196)
+
 ### Fixes
 
 - 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
