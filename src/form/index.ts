@@ -6,7 +6,7 @@ export {
   default as NFormItemGridItem,
   default as NFormItemGi,
   formItemGiProps,
-  formItemGiProps as formItemGridProps
+  formItemGiProps as formItemGridItemProps
 } from './src/FormItemGridItem'
 export type {
   FormItemGiProps,
