@@ -43,6 +43,10 @@
 
 ## 2.30.6
 
+### Feats
+
+- 头像的懒加载
+
 ### Fixes
 
 - 修复 `n-color-picker` 手动输入 alpha 值时不生效

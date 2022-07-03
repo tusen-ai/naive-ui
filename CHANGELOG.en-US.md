@@ -43,6 +43,10 @@
 
 ## 2.30.6
 
+### Feats
+
+- Avatar image lazyload.
+
 ### Fixes
 
 - Fix `n-color-picker` can't input alpha value correctly manually.
