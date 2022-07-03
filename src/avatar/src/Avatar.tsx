@@ -6,7 +6,10 @@ import {
   PropType,
   inject,
   watch,
-  VNodeChild
+  VNodeChild,
+  watchEffect,
+  onMounted,
+  onBeforeUnmount
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { avatarGroupInjectionKey } from './context'
@@ -19,6 +22,11 @@ import type { AvatarTheme } from '../styles'
 import { createKey, color2Class, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
+import {
+  IntersectionObserverOptions,
+  observeIntersection
+} from '../../image/src/utils'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 
 export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -39,6 +47,8 @@ export const avatarProps = {
   },
   onError: Function as PropType<(e: Event) => void>,
   fallbackSrc: String,
+  intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
+  lazy: Boolean,
   /** @deprecated */
   color: String
 } as const
@@ -105,6 +115,7 @@ export default defineComponent({
       return props.bordered || false
     })
     const handleError = (e: Event): void => {
+      if (!shouldStartLoadingRef.value) return
       hasLoadErrorRef.value = true
       const { onError } = props
       if (onError) {
@@ -179,6 +190,34 @@ export default defineComponent({
         props
       )
       : undefined
+
+    const imageRef = ref<HTMLImageElement | null>(null)
+
+    const shouldStartLoadingRef = ref(!props.lazy)
+
+    onMounted(() => {
+      if (isImageSupportNativeLazy) {
+        return
+      }
+      let unobserve: (() => void) | undefined
+      const stopWatchHandle = watchEffect(() => {
+        unobserve?.()
+        unobserve = undefined
+        if (props.lazy) {
+          unobserve = observeIntersection(
+            imageRef.value,
+            props.intersectionObserverOptions,
+            shouldStartLoadingRef
+          )
+        }
+      })
+      onBeforeUnmount(() => {
+        stopWatchHandle()
+        unobserve?.()
+      })
+    })
+    const loadedRef = ref(!props.lazy)
+
     return {
       textRef,
       selfRef,
@@ -189,13 +228,31 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,
-      handleError
+      handleError,
+      imageRef,
+      shouldStartLoading: shouldStartLoadingRef,
+      loaded: loadedRef,
+      mergedOnLoad: (e: Event) => {
+        const { onLoad } = props
+        onLoad?.(e)
+        loadedRef.value = true
+      }
     }
   },
   render () {
-    const { $slots, src, mergedClsPrefix, onRender } = this
+    const {
+      $slots,
+      src,
+      mergedClsPrefix,
+      lazy,
+      onRender,
+      mergedOnLoad,
+      shouldStartLoading,
+      loaded
+    } = this
     onRender?.()
     let img: VNodeChild
+    const placeholderNode = this.$slots.placeholder?.()
     if (this.hasLoadError) {
       img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
     } else {
@@ -213,13 +270,24 @@ export default defineComponent({
             </VResizeObserver>
           )
         } else if (src) {
-          return (
-            <img
-              src={src}
-              onError={this.handleError}
-              style={{ objectFit: this.objectFit }}
-            />
-          )
+          return h('img', {
+            loading: lazy ? 'lazy' : 'eager',
+            ref: 'imageRef',
+            src: isImageSupportNativeLazy
+              ? src
+              : shouldStartLoading || loaded
+                ? src
+                : undefined,
+            onLoad: mergedOnLoad,
+            'data-image-src': src,
+            onError: this.handleError,
+            style: [
+              { objectFit: this.objectFit },
+              placeholderNode && !loaded
+                ? { height: '0', width: '0', visibility: 'hidden' }
+                : ''
+            ]
+          })
         }
       })
     }
@@ -230,6 +298,7 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {img}
+        {lazy && !loaded && placeholderNode}
       </span>
     )
   }

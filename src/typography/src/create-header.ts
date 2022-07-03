@@ -6,7 +6,7 @@ import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import style from './styles/header.cssr'
 
-const headerProps = {
+export const headerProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   type: {
     type: String as PropType<

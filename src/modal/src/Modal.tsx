@@ -32,7 +32,7 @@ import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-const modalProps = {
+export const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
   show: Boolean,
   unstableShowMask: {

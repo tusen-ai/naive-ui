@@ -45,7 +45,8 @@ import {
   RenderIconImpl,
   RenderOption,
   NodeProps,
-  RenderOptionImpl
+  RenderOptionImpl,
+  DropdownMenuProps
 } from './interface'
 import { dropdownInjectionKey } from './context'
 
@@ -53,6 +54,7 @@ export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
   renderIconRef: Ref<RenderIconImpl | undefined>
   renderOptionRef: Ref<RenderOptionImpl | undefined>
+  menuPropsRef: Ref<DropdownMenuProps | undefined>
   nodePropsRef: Ref<NodeProps | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
@@ -90,6 +92,7 @@ const dropdownBaseProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
+  menuProps: Function as PropType<DropdownMenuProps>,
   showArrow: Boolean,
   renderLabel: Function as PropType<RenderLabel>,
   renderIcon: Function as PropType<RenderIcon>,
@@ -115,7 +118,7 @@ const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
 keyof typeof popoverBaseProps
 >
 
-const dropdownProps = {
+export const dropdownProps = {
   ...popoverBaseProps,
   ...dropdownBaseProps,
   ...(useTheme.props as ThemeProps<DropdownTheme>)
@@ -241,6 +244,7 @@ export default defineComponent({
       renderOptionRef: toRef(props, 'renderOption') as Ref<
       RenderOptionImpl | undefined
       >,
+      menuPropsRef: toRef(props, 'menuProps'),
       doSelect,
       doUpdateShow
     })
@@ -421,8 +425,13 @@ export default defineComponent({
       onMouseenter,
       onMouseleave
     ) => {
-      const { mergedClsPrefix } = this
+      const { mergedClsPrefix, menuProps } = this
       this.onRender?.()
+      const menuNodeProps =
+        menuProps?.(
+          undefined,
+          this.tmNodes.map((v) => v.rawNode)
+        ) || {}
       const dropdownProps = {
         ref: createRefSetter(ref),
         class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
@@ -431,12 +440,17 @@ export default defineComponent({
         style: [style, this.cssVars as any],
         showArrow: this.showArrow,
         arrowStyle: this.arrowStyle,
+        scrollable: this.scrollable,
         onMouseenter,
         onMouseleave
       }
       return h(
         NDropdownMenu,
-        mergeProps(this.$attrs, dropdownProps) as typeof dropdownProps
+        mergeProps(
+          this.$attrs,
+          dropdownProps,
+          menuNodeProps
+        ) as typeof dropdownProps
       )
     }
     const { mergedTheme } = this

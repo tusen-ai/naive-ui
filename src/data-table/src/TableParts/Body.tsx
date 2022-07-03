@@ -30,16 +30,17 @@ import {
   TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
+import type { ColItem } from '../use-group-header'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
-import type { ColItem } from '../use-group-header'
 
 interface NormalRowRenderInfo {
   striped: boolean
   tmNode: TmNode
   key: RowKey
+  index: number
 }
 
 type RowRenderInfo =
@@ -50,12 +51,14 @@ type RowRenderInfo =
       rawNode: SummaryRowData
       disabled: boolean
     }
+    index: number
   }
   | NormalRowRenderInfo
   | {
     isExpandedRow: true
     tmNode: TmNode
     key: RowKey
+    index: number
   }
 
 function flatten (
@@ -63,20 +66,22 @@ function flatten (
   expandedRowKeys: Set<RowKey>
 ): NormalRowRenderInfo[] {
   const fRows: NormalRowRenderInfo[] = []
-  function traverse (rs: TmNode[]): void {
+  function traverse (rs: TmNode[], rootIndex: number): void {
     rs.forEach((r) => {
       if (r.children && expandedRowKeys.has(r.key)) {
         fRows.push({
           tmNode: r,
           striped: false,
-          key: r.key
+          key: r.key,
+          index: rootIndex
         })
-        traverse(r.children)
+        traverse(r.children, rootIndex)
       } else {
         fRows.push({
           key: r.key,
           tmNode: r,
-          striped: false
+          striped: false,
+          index: rootIndex
         })
       }
     })
@@ -85,7 +90,7 @@ function flatten (
     fRows.push(rowInfo)
     const { children } = rowInfo.tmNode
     if (children && expandedRowKeys.has(rowInfo.key)) {
-      traverse(children)
+      traverse(children, rowInfo.index)
     }
   })
   return fRows
@@ -425,15 +430,17 @@ export default defineComponent({
                 return {
                   tmNode,
                   key: tmNode.key,
-                  striped: index % 2 === 1
+                  striped: index % 2 === 1,
+                  index
                 }
               }
-            : (tmNode) => {
+            : (tmNode, index) => {
                 if (!tmNode.isLeaf) hasChildren = true
                 return {
                   tmNode,
                   key: tmNode.key,
-                  striped: false
+                  striped: false,
+                  index
                 }
               }
         )
@@ -567,7 +574,8 @@ export default defineComponent({
                     tmNode: {
                       rawNode: row,
                       disabled: true
-                    }
+                    },
+                    index: -1
                   }))
                 ]
               } else {
@@ -579,7 +587,8 @@ export default defineComponent({
                     tmNode: {
                       rawNode: summaryRows,
                       disabled: true
-                    }
+                    },
+                    index: -1
                   }
                 ]
               }
@@ -598,7 +607,8 @@ export default defineComponent({
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
                   key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row
-                  tmNode: rowInfo.tmNode as TmNode
+                  tmNode: rowInfo.tmNode as TmNode,
+                  index: rowInfo.index
                 })
               } else {
                 displayedData.push(rowInfo)
@@ -614,9 +624,10 @@ export default defineComponent({
 
             const renderRow = (
               rowInfo: RowRenderInfo,
-              rowIndex: number,
+              displayedRowIndex: number,
               isVirtual: boolean
             ): VNode => {
+              const { index: actualRowIndex } = rowInfo
               if ('isExpandedRow' in rowInfo) {
                 const {
                   tmNode: { key, rawNode }
@@ -630,12 +641,12 @@ export default defineComponent({
                       class={[
                         `${mergedClsPrefix}-data-table-td`,
                         `${mergedClsPrefix}-data-table-td--last-col`,
-                        rowIndex + 1 === rowCount &&
+                        displayedRowIndex + 1 === rowCount &&
                           `${mergedClsPrefix}-data-table-td--last-row`
                       ]}
                       colspan={colCount}
                     >
-                      {renderExpand!(rawNode, rowIndex)}
+                      {renderExpand!(rawNode, actualRowIndex)}
                     </td>
                   </tr>
                 )
@@ -645,11 +656,13 @@ export default defineComponent({
               const { tmNode, key: rowKey } = rowInfo
               const { rawNode: rowData } = tmNode
               const expanded = mergedExpandedRowKeySet.has(rowKey)
-              const props = rowProps ? rowProps(rowData, rowIndex) : undefined
+              const props = rowProps
+                ? rowProps(rowData, actualRowIndex)
+                : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
                   ? rowClassName
-                  : createRowClassName(rowData, rowIndex, rowClassName)
+                  : createRowClassName(rowData, actualRowIndex, rowClassName)
               const row = (
                 <tr
                   onMouseenter={() => {
@@ -665,8 +678,8 @@ export default defineComponent({
                   {...props}
                 >
                   {cols.map((col, colIndex) => {
-                    if (!isVirtual && rowIndex in cordToPass) {
-                      const cordOfRowToPass = cordToPass[rowIndex]
+                    if (displayedRowIndex in cordToPass) {
+                      const cordOfRowToPass = cordToPass[displayedRowIndex]
                       const indexInCordOfRowToPass =
                         cordOfRowToPass.indexOf(colIndex)
                       if (~indexInCordOfRowToPass) {
@@ -682,36 +695,41 @@ export default defineComponent({
                     const mergedColSpan = isSummary
                       ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1 // optional for #1276
                       : colSpan
-                        ? colSpan(rowData, rowIndex)
+                        ? colSpan(rowData, actualRowIndex)
                         : 1
                     const mergedRowSpan = isSummary
                       ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                       : rowSpan
-                        ? rowSpan(rowData, rowIndex)
+                        ? rowSpan(rowData, actualRowIndex)
                         : 1
                     const isLastCol = colIndex + mergedColSpan === colCount
-                    const isLastRow = rowIndex + mergedRowSpan === rowCount
+                    const isLastRow =
+                      displayedRowIndex + mergedRowSpan === rowCount
                     const isCrossRowTd = mergedRowSpan > 1
                     if (isCrossRowTd) {
-                      cordKey[rowIndex] = {
+                      cordKey[displayedRowIndex] = {
                         [colIndex]: []
                       }
                     }
                     if (mergedColSpan > 1 || isCrossRowTd) {
                       for (
-                        let i = rowIndex;
-                        i < rowIndex + mergedRowSpan;
+                        let i = displayedRowIndex;
+                        i < displayedRowIndex + mergedRowSpan;
                         ++i
                       ) {
                         if (isCrossRowTd) {
-                          cordKey[rowIndex][colIndex].push(rowIndexToKey[i])
+                          cordKey[displayedRowIndex][colIndex].push(
+                            rowIndexToKey[i]
+                          )
                         }
                         for (
                           let j = colIndex;
                           j < colIndex + mergedColSpan;
                           ++j
                         ) {
-                          if (i === rowIndex && j === colIndex) continue
+                          if (i === displayedRowIndex && j === colIndex) {
+                            continue
+                          }
                           if (!(i in cordToPass)) {
                             cordToPass[i] = [j]
                           } else {
@@ -722,7 +740,10 @@ export default defineComponent({
                     }
                     const hoverKey = isCrossRowTd ? this.hoverKey : null
                     const { cellProps } = column
-                    const resolvedCellProps = cellProps?.(rowData, rowIndex)
+                    const resolvedCellProps = cellProps?.(
+                      rowData,
+                      actualRowIndex
+                    )
                     return (
                       <td
                         {...resolvedCellProps}
@@ -745,7 +766,9 @@ export default defineComponent({
                           isSummary &&
                             `${mergedClsPrefix}-data-table-td--summary`,
                           ((hoverKey !== null &&
-                            cordKey[rowIndex][colIndex].includes(hoverKey)) ||
+                            cordKey[displayedRowIndex][colIndex].includes(
+                              hoverKey
+                            )) ||
                             isColumnSorting(column, mergedSortState)) &&
                             `${mergedClsPrefix}-data-table-td--hover`,
                           column.fixed &&
@@ -821,7 +844,7 @@ export default defineComponent({
                         ) : (
                           <Cell
                             clsPrefix={mergedClsPrefix}
-                            index={rowIndex}
+                            index={actualRowIndex}
                             row={rowData}
                             column={column}
                             isSummary={isSummary}
@@ -859,8 +882,8 @@ export default defineComponent({
                       data-n-id={componentId}
                       class={`${mergedClsPrefix}-data-table-tbody`}
                     >
-                      {displayedData.map((rowInfo, rowIndex) => {
-                        return renderRow(rowInfo, rowIndex, false)
+                      {displayedData.map((rowInfo, displayedRowIndex) => {
+                        return renderRow(rowInfo, displayedRowIndex, false)
                       })}
                     </tbody>
                   ) : null}

@@ -6,7 +6,7 @@ import { iconWrapperLight } from '../styles'
 import type { IconWrapperTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const iconWrapperProps = {
+export const iconWrapperProps = {
   ...(useTheme.props as ThemeProps<IconWrapperTheme>),
   size: {
     type: Number,

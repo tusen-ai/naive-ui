@@ -14,7 +14,7 @@ import type { SkeletonTheme } from '../styles'
 import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'
 
-const skeletonProps = {
+export const skeletonProps = {
   ...(useTheme.props as ThemeProps<SkeletonTheme>),
   text: Boolean,
   round: Boolean,

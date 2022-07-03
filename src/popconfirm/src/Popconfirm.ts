@@ -21,7 +21,7 @@ import { popconfirmInjectionKey } from './interface'
 import type { PopconfirmInst } from './interface'
 import style from './styles/index.cssr'
 
-const popconfirmProps = {
+export const popconfirmProps = {
   ...(useTheme.props as ThemeProps<PopconfirmTheme>),
   ...popoverBaseProps,
   positiveText: String as PropType<string | null>,

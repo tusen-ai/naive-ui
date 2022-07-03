@@ -39,7 +39,9 @@ export type RenderPrefix = RenderTreePart
 
 export type RenderSuffix = RenderTreePart
 
-export type TreeNodeProps = (info: { option: TreeOption }) => HTMLAttributes
+export type TreeNodeProps = (info: {
+  option: TreeOption
+}) => HTMLAttributes & Record<string, unknown>
 
 export interface TreeDragInfo {
   event: DragEvent

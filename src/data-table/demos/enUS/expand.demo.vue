@@ -1,5 +1,8 @@
 <markdown>
 # Expand rows
+
+Note that: Expanded rows are not included in the `index` of `render`.
+
 </markdown>
 
 <template>
@@ -37,6 +40,13 @@ const createColumns = ({
       expandable: (rowData) => rowData.name !== 'Jim Green',
       renderExpand: (rowData) => {
         return `${rowData.name} is a good guy.`
+      }
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
       }
     },
     {

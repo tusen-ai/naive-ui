@@ -7,7 +7,7 @@ import { statisticLight } from '../styles'
 import type { StatisticTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const statisticProps = {
+export const statisticProps = {
   ...(useTheme.props as ThemeProps<StatisticTheme>),
   tabularNums: Boolean,
   label: String,

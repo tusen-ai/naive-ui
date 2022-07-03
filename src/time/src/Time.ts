@@ -5,7 +5,7 @@ import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone'
 import { useLocale } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
 
-const timeProps = {
+export const timeProps = {
   time: {
     type: [Number, Date] as PropType<number | Date>,
     default: undefined // For unix or non unix mode, it should be different default value

@@ -28,7 +28,7 @@ import {
 } from './interface'
 import { layoutInjectionKey } from './Layout'
 
-const layoutSiderProps = {
+export const layoutSiderProps = {
   position: positionProp,
   bordered: Boolean,
   collapsedWidth: {

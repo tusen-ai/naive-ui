@@ -19,7 +19,7 @@ export interface ScrollbarInst {
   scrollBy: ScrollBy
 }
 
-const scrollbarProps = {
+export const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
   trigger: String as PropType<'none' | 'hover'>,
   xScrollable: Boolean,

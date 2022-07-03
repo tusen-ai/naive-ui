@@ -8,7 +8,7 @@ import NFormItemCol, {
 } from './FormItemCol'
 import { FormItemColRef } from './interface'
 
-const formItemRowProps = {
+export const formItemRowProps = {
   ...rowProps,
   ...formItemColProps
 }

@@ -31,7 +31,7 @@ import {
   OnItemHeaderClickImpl
 } from './interface'
 
-const collapseProps = {
+export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<

@@ -64,6 +64,7 @@ The following list is sorted by 'Config'.
 | Slovak                    | skSK   | dateSkSK    | 2.25.3  |
 | Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
 | Ukrainian                 | ukUA   | dateUkUA    |         |
+| Vietnamese (Vietnam)      | viVN   | dateViVN    | 2.30.7  |
 | Chinese (Simplified)      | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)     | zhTW   | dateZhTW    |         |
 
