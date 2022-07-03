@@ -1,5 +1,8 @@
 <markdown>
 # 可展开
+
+注意：展开行不计入 `render` 的 `index` 内
+
 </markdown>
 
 <template>
@@ -32,6 +35,13 @@ const createColumns = ({
   return [
     {
       type: 'selection'
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
+      }
     },
     {
       type: 'expand',

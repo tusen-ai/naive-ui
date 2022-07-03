@@ -1,5 +1,8 @@
 <markdown>
 # Expand rows
+
+Note that: Expanded rows are not included in the `index` of `render`.
+
 </markdown>
 
 <template>
@@ -31,6 +34,13 @@ const createColumns = ({
   return [
     {
       type: 'selection'
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
+      }
     },
     {
       type: 'expand',
