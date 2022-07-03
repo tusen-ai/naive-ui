@@ -277,6 +277,11 @@ export default c([
         border-color .3s var(--n-bezier),
         color .3s var(--n-bezier);
     `, [
+      cM('expand', [
+        cB('data-table-expand-trigger', `
+          margin-right: 0;
+        `)
+      ]),
       cM('last-row', {
         borderBottom: '0 solid var(--n-merged-border-color)'
       }, [
@@ -290,15 +295,18 @@ export default c([
         })
       ]),
       cM('summary', `
-      background-color: var(--n-merged-th-color);
-    `),
+        background-color: var(--n-merged-th-color);
+      `),
       cM('hover', {
         backgroundColor: 'var(--n-merged-td-color-hover)'
       }),
-      cM('ellipsis', `
+      cE('ellipsis', `
+        display: inline-block;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        max-width: 100%;
+        vertical-align: bottom;
       `),
       cM('selection, expand', `
         text-align: center;

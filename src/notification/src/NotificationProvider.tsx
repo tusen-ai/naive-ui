@@ -79,7 +79,7 @@ interface NotificationRef {
   hide: () => void
 }
 
-const notificationProviderProps = {
+export const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,

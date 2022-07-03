@@ -43,6 +43,6 @@ custom-thumb.vue
 
 ### Slider Slots
 
-| Name  | Parameters | Description          | Version      |
-| ----- | ---------- | -------------------- | ------------ |
-| thumb | `()`       | Thumb of the slider. | NEXT_VERSION |
+| Name  | Parameters | Description          | Version |
+| ----- | ---------- | -------------------- | ------- |
+| thumb | `()`       | Thumb of the slider. | 2.30.4  |

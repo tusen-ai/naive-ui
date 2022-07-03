@@ -14,7 +14,7 @@ import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const listProps = {
+export const listProps = {
   ...(useTheme.props as ThemeProps<ListTheme>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,

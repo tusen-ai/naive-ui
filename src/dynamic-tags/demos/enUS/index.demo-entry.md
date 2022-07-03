@@ -33,7 +33,7 @@ on-create.vue
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |
-| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | NEXT_VERSION |
+| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | 2.30.4 |
 | on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | Callback when the component's value changes. |  |
 
 #### DynamicTagsOption Type

@@ -24,7 +24,7 @@ import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
 
-const badgeProps = {
+export const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
   value: [String, Number] as PropType<string | number>,
   max: Number,

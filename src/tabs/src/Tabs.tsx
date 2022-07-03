@@ -52,7 +52,7 @@ type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
 }
 
-const tabsProps = {
+export const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
@@ -199,7 +199,7 @@ export default defineComponent({
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        if (barWidth && tabEl.offsetWidth >= barWidth) {
+        if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
           const offsetDiffLeft =
             Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
           barEl.style.left = `${offsetDiffLeft}px`

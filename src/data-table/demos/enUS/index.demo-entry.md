@@ -4,12 +4,21 @@
 
 DataTable is used to displays rows of structured data.
 
-## Demos
-
-<n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
-  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+<n-alert type="warning" title="Caveat">
+  <n-ul align-text>
+    <li>
+      Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+    </li>
+    <li>
+      In non-async mode, page count is determined by data's count. Even if you pass a <n-text code>page-count</n-text> in, it won't change data table's displayed page count. If you want it behaves in this way, you should set <n-text code>remote</n-text> prop.
+    </li>
+    <li>
+      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+    </li>
+  </n-ul>
 </n-alert>
+
+## Demos
 
 ```demo
 basic.vue
@@ -46,6 +55,7 @@ simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
+render-cell.vue
 ```
 
 ## API
@@ -64,7 +74,7 @@ async-expand.vue
 | data | `Array<object>` | `[]` | Data to display. |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
-| default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | NEXT_VERSION |
+| default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
@@ -74,7 +84,8 @@ async-expand.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
-| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
+| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
+| render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
@@ -88,7 +99,7 @@ async-expand.vue
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
-| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |  |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |
@@ -186,7 +197,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearSorter | `() => void` | Clear all sort state. |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | NEXT_VERSION |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

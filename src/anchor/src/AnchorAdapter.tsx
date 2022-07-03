@@ -15,7 +15,7 @@ export interface AnchorInst {
   scrollTo: (href: string) => void
 }
 
-const anchorProps = {
+export const anchorProps = {
   ...(useTheme.props as ThemeProps<AnchorTheme>),
   affix: Boolean,
   ...affixProps,

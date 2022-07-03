@@ -1,5 +1,8 @@
 <markdown>
 # Expand rows
+
+Note that: Expanded rows are not included in the `index` of `render`.
+
 </markdown>
 
 <template>
@@ -30,16 +33,21 @@ const createColumns = ({
 }): DataTableColumns<RowData> => {
   return [
     {
-      type: 'selection',
-      width: 120
+      type: 'selection'
     },
     {
       type: 'expand',
       expandable: (rowData) => rowData.name !== 'Jim Green',
       renderExpand: (rowData) => {
         return `${rowData.name} is a good guy.`
-      },
-      width: 120
+      }
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
+      }
     },
     {
       title: 'Name',

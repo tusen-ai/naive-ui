@@ -10,7 +10,7 @@ export interface ButtonGroupInjection {
   size?: Size | undefined
 }
 
-const buttonGroupProps = {
+export const buttonGroupProps = {
   size: {
     type: String as PropType<Size | undefined>,
     default: undefined

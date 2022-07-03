@@ -38,7 +38,7 @@ import useRtl from '../../_mixins/use-rtl'
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
 
-const inputNumberProps = {
+export const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
   autofocus: Boolean,
   loading: {

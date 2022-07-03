@@ -45,9 +45,15 @@ debug.vue
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.22.0 |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
+| node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
+| render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. | 2.30.7 |
+| render-prefix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. | 2.30.7 |
+| render-suffix | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. | 2.30.7 |
+| render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.30.7 |
+| render-tag | `(props: { option: TreeSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. | 2.30.7 |
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
@@ -74,8 +80,8 @@ debug.vue
 
 ### TreeSelect Slots
 
-| Name   | Parameters | Description                            | Version      |
-| ------ | ---------- | -------------------------------------- | ------------ |
-| action | `()`       | Options menu slot.                     | 2.22.0       |
-| arrow  | `()`       | Arrow icon of trigger.                 | NEXT_VERSION |
-| empty  | `()`       | Empty state slot for the options menu. | 2.22.0       |
+| Name   | Parameters | Description                            | Version |
+| ------ | ---------- | -------------------------------------- | ------- |
+| action | `()`       | Options menu slot.                     | 2.22.0  |
+| arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4  |
+| empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |

@@ -6,7 +6,7 @@ import type { TypographyTheme } from '../styles'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/list.cssr'
 
-const olProps = {
+export const olProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   alignText: Boolean
 }

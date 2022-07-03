@@ -6,7 +6,7 @@ import type { TypographyTheme } from '../styles'
 import style from './styles/p.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const pProps = {
+export const pProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>
 }

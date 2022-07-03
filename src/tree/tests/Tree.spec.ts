@@ -450,4 +450,75 @@ describe('n-tree', () => {
     await node[0].trigger('click')
     expect(wrapper.findAll('.n-tree-node--selected').length).toBe(2)
   })
+
+  it('should work with `node-props` prop', async () => {
+    const testClass = 'menu-test'
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ],
+        nodeProps: () => ({ class: testClass })
+      }
+    })
+    expect(wrapper.find('.n-tree-node').classes()).toContain(testClass)
+  })
+
+  it('should work with `checkbox-placement` prop', async () => {
+    let wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ],
+        checkable: true
+      }
+    })
+    expect(wrapper.find('.n-tree-node-checkbox--right').exists()).toBe(false)
+
+    wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ],
+        checkable: true,
+        checkboxPlacement: 'right'
+      }
+    })
+    expect(wrapper.find('.n-tree-node-checkbox--right').exists()).toBe(true)
+
+    wrapper.unmount()
+  })
 })

@@ -200,6 +200,8 @@ export default c([
         top: 50%;
         transform: translateY(-50%);
         display: flex;
+        align-items: center;
+        justify-content: center;
       `, [
         iconSwitchTransition({
           top: '50%',
@@ -212,6 +214,7 @@ export default c([
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
+      min-width: 0;
     `, [
       c('~', [
         cE('icon', {

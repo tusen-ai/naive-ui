@@ -30,7 +30,7 @@ import { alertLight } from '../styles'
 import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const alertProps = {
+export const alertProps = {
   ...(useTheme.props as ThemeProps<AlertTheme>),
   title: String,
   showIcon: {

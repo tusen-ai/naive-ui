@@ -40,7 +40,7 @@ import useRtl from '../../_mixins/use-rtl'
 
 const globalDataKeyMap = new WeakMap()
 
-const dynamicInputProps = {
+export const dynamicInputProps = {
   ...(useTheme.props as ThemeProps<DynamicInputTheme>),
   max: Number,
   min: {

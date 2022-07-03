@@ -990,7 +990,7 @@ describe('props.columns', () => {
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
     ))
-    expect(wrapper.find('tbody .n-data-table-td--ellipsis').exists()).toBe(true)
+    expect(wrapper.find('tbody .n-data-table-td__ellipsis').exists()).toBe(true)
     expect(wrapper.find('tbody .n-ellipsis').exists()).toBe(true)
     expect(wrapper.find('tbody .n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis'

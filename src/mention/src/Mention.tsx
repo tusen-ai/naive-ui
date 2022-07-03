@@ -41,7 +41,7 @@ import { getRelativePosition } from './utils'
 import type { MentionOption } from './interface'
 import style from './styles/index.cssr'
 
-const mentionProps = {
+export const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),
   to: useAdjustedTo.propTo,
   autosize: [Boolean, Object] as PropType<

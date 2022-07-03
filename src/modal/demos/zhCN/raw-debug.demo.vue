@@ -8,6 +8,7 @@
   </n-button>
   <n-modal v-model:show="showModal">
     <div class="box1">
+      <input>
       <div class="box2">
         123
       </div>

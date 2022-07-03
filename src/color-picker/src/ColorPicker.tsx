@@ -71,7 +71,7 @@ import ColorPreview from './ColorPreview'
 import { colorPickerInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-export const colorPickerPanelProps = {
+export const colorPickerProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
   value: String as PropType<string | null>,
   show: {
@@ -119,13 +119,11 @@ export const colorPickerPanelProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
-export type ColorPickerProps = ExtractPublicPropTypes<
-  typeof colorPickerPanelProps
->
+export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 
 export default defineComponent({
   name: 'ColorPicker',
-  props: colorPickerPanelProps,
+  props: colorPickerProps,
   setup (props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null

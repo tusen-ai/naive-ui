@@ -4,12 +4,21 @@
 
 数据表格用来显示一些格式化信息。
 
-## 演示
-
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
-  <br>如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
+  <n-ul align-text>
+    <li>
+      传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
+    </li>
+    <li>
+      在非异步状况下，页面的数量是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望这么做，那么需要设定 `remote` 属性。
+    </li>
+    <li>
+    如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
+    </li>
+  </n-ul>
 </n-alert>
+
+## 演示
 
 ```demo
 basic.vue
@@ -46,11 +55,13 @@ simple-editable.vue
 switchable-editable
 context-menu.vue
 async-expand.vue
+render-cell.vue
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
 height-debug
 keep-alive-debug.vue
+ellipsis-debug.vue
 ```
 
 ## API
@@ -69,7 +80,7 @@ keep-alive-debug.vue
 | data | `Array<object>` | `[]` | 需要展示的数据 |  |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |  |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
-| default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | NEXT_VERSION |
+| default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
@@ -80,6 +91,7 @@ keep-alive-debug.vue
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
+| render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
@@ -93,7 +105,7 @@ keep-alive-debug.vue
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
-| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |  |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |  |
@@ -191,7 +203,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | NEXT_VERSION |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
 
 ### DataTable Slots

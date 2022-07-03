@@ -4,6 +4,90 @@
 
 ### Fixes
 
+- 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+- 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
+- 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
+- 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+- 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
+
+### Feats
+
+- `n-avatar` 新增 `lazy` 属性
+- `n-avatar` 新增 `intersection-observer-options` 属性
+- `n-number-animation` 新增 `on-finish` 属性
+- `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
+- `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
+- `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
+
+## 2.30.8
+
+### Fixes
+
+- 修复 `n-select` 菜单的 transition 样式，关闭 [#3211](https://github.com/TuSimple/naive-ui/issues/3211)
+
+## 2.30.7
+
+### Fixes
+
+- 修复 `n-tabs` 的 `bar-width` 属性在设置 `0` 时失效，关闭 [#3171](https://github.com/TuSimple/naive-ui/issues/3171)
+- 修复 `n-drawer` 使用 `show-mask` 属性时控制台出现 warning，关闭 [#3172](https://github.com/TuSimple/naive-ui/issues/3172)
+- 修复 `n-button` 放入 ellipsis 的容器中时不能正确显示，关闭 [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素中按下 Enter 键会导致选项被清除，关闭 [#3169](https://github.com/TuSimple/naive-ui/issues/3169)
+- 修复 `n-select` 的 `filter` 属性不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
+- 修复 `n-modal` 在不使用任何 preset 的时候遮罩可能覆盖住内容，关闭 [#3204](https://github.com/TuSimple/naive-ui/issues/3204)
+- 修复 `n-button` 在图标过大或者过小时未对齐
+- 修复 `n-select` 创建的选项可能出现多次，关闭 [#3206](https://github.com/TuSimple/naive-ui/issues/3206)
+
+### Feats
+
+- `n-date-picker` `type` 属性支持 `'quarterrange'` 和 `'yearrange'`
+- `n-tree-select` 新增 `render-prefix` 属性
+- `n-tree-select` 新增 `render-suffix` 属性
+- `n-tree-select` 新增 `render-switcher-icon` 属性
+- `n-tree-select` 新增 `node-props` 属性
+- `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
+- `n-tree-select` 新增 `render-tag` 属性
+- `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
+
+## 2.30.6
+
+### Fixes
+
+- 修复 `n-color-picker` 手动输入 alpha 值时不生效
+- 修复某些组件在 `__VUE_OPTIONS_API__` 设为 `false` 时工作不正常的问题，关闭 [#3146](https://github.com/TuSimple/naive-ui/issues/3146)
+- 修复 `n-grid` 在 SSR 页面挂载后不会正确的适配响应式，关闭 [#2462](https://github.com/TuSimple/naive-ui/issues/2462)
+- 修复 `n-modal` 在同时打开多个的时候点击某个遮罩，`on-mask-click` 会对每一个都触发，关闭 [#3147](https://github.com/TuSimple/naive-ui/issues/3147)
+- 修复 `n-data-table` 的列的 `ellipsis` 属性类型不接受 `style` 属性
+- 修复 `n-data-table` 在列同时设为 `ellipsis` 和 `fixed` 时会丢失固定列的阴影
+- 修复 `n-image` 的 `lazy` 属性在 Safari 和 Firefox 上工作不正常
+
+## 2.30.5
+
+### Fixes
+
+- 修复 `n-input-group-label` 的内容在 `n-drawer-content` 嵌套中异常，关闭 [#3115](https://github.com/TuSimple/naive-ui/issues/3115)
+- 修复 `n-back-top` 在使用 `show` 时控制台报警告，关闭 [#3122](https://github.com/TuSimple/naive-ui/issues/3122)
+- 修复 `volar.d.ts` 组件全局类型为 `any`
+- 修复 `n-grid-item` 使用 `v-show` 可能存在显示状态不正确的问题，关闭 [#3123](https://github.com/TuSimple/naive-ui/issues/3123)
+- 修复 `n-select` 在可清空状态下使用输入法输入，移入鼠标后输入文字会消失
+
+### Feats
+
+- 🌟 `n-image` 新增 `lazy` 属性，关闭 [#3055](https://github.com/TuSimple/naive-ui/issues/3055)
+- `n-image` 新增 `intersection-observer-options` 属性
+- `n-image` 新增 `placeholder` slot
+- 导出 `NTooltipInst` 类型
+- `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
+- `n-space` 新增 `wrap-item` 属性
+- `n-data-table` 的 `on-update:checked-row-keys` 会传出行数据，关闭 [#2215](https://github.com/TuSimple/naive-ui/issues/2215)，关闭 [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
+
+## 2.30.4
+
+### Fixes
+
 - 修复 `n-button` 在设定 `:focusable="false"` 后点击仍然会聚焦，关闭 [#3071](https://github.com/TuSimple/naive-ui/issues/3071)
 - 修复 `n-data-table` 固定的选择列在设定了非默认宽度的情况下可能和其他列重叠，关闭 [#3067](https://github.com/TuSimple/naive-ui/issues/3067)
 - 修复 `n-popselect` 在选择完关闭菜单后没有触发 `on-update:show`
@@ -13,14 +97,14 @@
 - 修复 `n-layout-sider` 在 `keep-alive` 中使用的时候不会维持滚动状态
 - 修复 `n-tree` 可能重复发送异步数据请求
 - 修复 `n-tree` 在设定 `expand-on-click` 之后异步展开报错，关闭 [#3089](https://github.com/TuSimple/naive-ui/issues/3089)
-- 修复 `n-slider` 使用键盘聚焦触发 toolip 的时候没有动画
+- 修复 `n-slider` 使用键盘聚焦触发 tooltip 的时候没有动画
 - 修复 `n-slider` 在 mark 出现在最右侧的时候换行不正常
 - 修复 `n-upload` 内部的链接会出现原生 focus-visible 的 outline 样式
 - 修复 `n-upload` 在 `list-type="image-card"` 时会出现 slot 相关 warning
 - 修复 `n-upload` 在 `list-type="image-card"` 图片的边角会溢出列表项
-- 修复 `n-dynamic-tags` 的 `on-create` 属性- 修复 Chrome 102 版本引入的虚拟滚动卡顿问题，关闭 [#3048](https://github.com/TuSimple/naive-ui/issues/3048)
-- 修复 `n-upload-dragger` 在禁用状态下过于透明不生效
-- 修复 `n-dropdown` 中传入 `'scrollable'` 不生效
+- 修复 `n-dynamic-tags` 的 `on-create` 属性不生效
+- 修复 Chrome 102 版本引入的虚拟滚动卡顿问题，关闭 [#3048](https://github.com/TuSimple/naive-ui/issues/3048)
+- 修复 `n-upload-dragger` 在禁用状态下过于透明
 
 ### Feats
 

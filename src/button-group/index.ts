@@ -1,2 +1,2 @@
-export { default as NButtonGroup } from './src/ButtonGroup'
+export { default as NButtonGroup, buttonGroupProps } from './src/ButtonGroup'
 export type { ButtonGroupProps } from './src/ButtonGroup'

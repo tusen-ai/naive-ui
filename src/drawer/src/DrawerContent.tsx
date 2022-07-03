@@ -5,7 +5,7 @@ import { throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
-const drawerContentProps = {
+export const drawerContentProps = {
   title: {
     type: String
   },

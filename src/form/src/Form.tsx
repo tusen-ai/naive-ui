@@ -26,7 +26,7 @@ import type {
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
-const formProps = {
+export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
   inline: Boolean,
   labelWidth: [Number, String] as PropType<number | string>,
