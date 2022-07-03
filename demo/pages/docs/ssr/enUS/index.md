@@ -51,11 +51,8 @@ By default, naive-ui bind inline theme style on components, it may increase SSR 
 
 The following components has some bugs in SSR scene, please avoid using them if possible. We will fix them gradually.
 
-- `n-scrollbar`(It works after vue >= 3.2.36)
+- `n-scrollbar`, `n-data-table` (It works after vue >= 3.2.36)
 - `n-anchor`
-- `n-back-top`
-- `n-image-group`
-- `n-data-table`
 - `n-watermark`
 - `n-affix`
 - `n-transfer`
