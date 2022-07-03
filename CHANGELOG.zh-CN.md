@@ -11,6 +11,11 @@
 - 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
 - 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
 
+### Feats
+
+- `n-avatar` 新增 `lazy` 属性
+- `n-avatar` 新增 `intersection-observer-options` 属性
+
 ## 2.30.8
 
 ### Fixes
@@ -42,10 +47,6 @@
 - `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
 
 ## 2.30.6
-
-### Feats
-
-- 头像的懒加载
 
 ### Fixes
 

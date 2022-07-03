@@ -11,6 +11,11 @@
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
 
+### Feats
+
+- `n-avatar` adds `lazy` prop.
+- `n-avatar` adds `intersection-observer-options` prop.
+
 ## 2.30.8
 
 ### Fixes
@@ -42,10 +47,6 @@
 - `n-notification` adds `titleFontSize`, `metaFontSize`, `descriptionFontSize` theme variables.
 
 ## 2.30.6
-
-### Feats
-
-- Avatar image lazyload.
 
 ### Fixes
 

@@ -1,2 +1,2 @@
-export const isNativeSupportLazyLoadingImage =
-  'document' in globalThis && 'loading' in document.createElement('img')
+export const isImageSupportNativeLazy =
+  typeof document !== 'undefined' && 'loading' in document.createElement('img')
