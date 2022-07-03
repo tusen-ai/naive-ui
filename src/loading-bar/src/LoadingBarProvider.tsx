@@ -30,7 +30,7 @@ export interface LoadingBarInst {
 export type LoadingBarProviderInst = LoadingBarInst
 export type LoadingBarApiInjection = LoadingBarInst
 
-export const loadingBarProps = {
+export const loadingBarProviderProps = {
   ...(useTheme.props as ThemeProps<LoadingBarTheme>),
   to: {
     type: [String, Object] as PropType<string | HTMLElement>,
@@ -45,16 +45,16 @@ export const loadingBarProps = {
 }
 
 export type LoadingBarProviderProps = ExtractPublicPropTypes<
-  typeof loadingBarProps
+  typeof loadingBarProviderProps
 >
 
 export type LoadingBarProviderSetupProps = ExtractPropTypes<
-  typeof loadingBarProps
+  typeof loadingBarProviderProps
 >
 
 export default defineComponent({
   name: 'LoadingBarProvider',
-  props: loadingBarProps,
+  props: loadingBarProviderProps,
   setup (props) {
     const isMountedRef = useIsMounted()
     const loadingBarRef = ref<LoadingBarInst | null>(null)

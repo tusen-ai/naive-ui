@@ -3,7 +3,7 @@ import { useConfig, useStyle } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/input-group.cssr'
 
-const inputGroupProps: { [key in any]: never } = {}
+export const inputGroupProps: { [key in any]: never } = {}
 
 export type InputGroupProps = ExtractPublicPropTypes<typeof inputGroupProps>
 
