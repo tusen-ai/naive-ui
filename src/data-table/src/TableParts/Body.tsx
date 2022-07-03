@@ -66,22 +66,22 @@ function flatten (
   expandedRowKeys: Set<RowKey>
 ): NormalRowRenderInfo[] {
   const fRows: NormalRowRenderInfo[] = []
-  function traverse (rs: TmNode[]): void {
+  function traverse (rs: TmNode[], rootIndex: number): void {
     rs.forEach((r) => {
       if (r.children && expandedRowKeys.has(r.key)) {
         fRows.push({
           tmNode: r,
           striped: false,
           key: r.key,
-          index: -1
+          index: rootIndex
         })
-        traverse(r.children)
+        traverse(r.children, rootIndex)
       } else {
         fRows.push({
           key: r.key,
           tmNode: r,
           striped: false,
-          index: -1
+          index: rootIndex
         })
       }
     })
@@ -90,7 +90,7 @@ function flatten (
     fRows.push(rowInfo)
     const { children } = rowInfo.tmNode
     if (children && expandedRowKeys.has(rowInfo.key)) {
-      traverse(children)
+      traverse(children, rowInfo.index)
     }
   })
   return fRows

@@ -36,17 +36,17 @@ const createColumns = ({
       type: 'selection'
     },
     {
-      title: '#',
-      key: 'key',
-      render: (_, index) => {
-        return `${index + 1}`
-      }
-    },
-    {
       type: 'expand',
       expandable: (rowData) => rowData.name !== 'Jim Green',
       renderExpand: (rowData) => {
         return `${rowData.name} is a good guy.`
+      }
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
       }
     },
     {
