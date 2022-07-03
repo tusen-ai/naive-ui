@@ -50,6 +50,7 @@ duration.vue
 max.vue
 placement.vue
 error-debug.vue
+rtl-debug.vue
 ```
 
 ## API

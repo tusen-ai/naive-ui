@@ -10,12 +10,15 @@
 - 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
 - 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
 - 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+- 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
 
 ### Feats
 
 - `n-avatar` 新增 `lazy` 属性
 - `n-avatar` 新增 `intersection-observer-options` 属性
-- 导出所有组件的 `props` 属性对象定义
+- `n-number-animation` 新增 `on-finish` 属性
+- `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
 
 ## 2.30.8
 
