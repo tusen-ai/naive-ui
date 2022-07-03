@@ -1,4 +1,11 @@
-import { defineComponent, computed, onMounted, ref, watchEffect } from 'vue'
+import {
+  defineComponent,
+  computed,
+  onMounted,
+  ref,
+  watchEffect,
+  PropType
+} from 'vue'
 import { round } from 'lodash-es'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { tween } from './utils'
@@ -23,7 +30,8 @@ const numberAnimationProps = {
   duration: {
     type: Number,
     default: 2000
-  }
+  },
+  onFinish: Function as PropType<() => void>
 }
 
 export type NumberAnimationProps = ExtractPublicPropTypes<
@@ -53,6 +61,7 @@ export default defineComponent({
     const onFinish = (): void => {
       displayedValueRef.value = props.to
       animating = false
+      props.onFinish?.()
     }
     const animate = (
       from: number = props.from,
