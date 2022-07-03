@@ -269,11 +269,11 @@ export default defineComponent({
     const node = (
       <div
         class={[`${clsPrefix}-dropdown-option`, optionNodeProps?.class]}
+        data-dropdown-option
         {...optionNodeProps}
       >
         {h('div', mergeProps(builtinProps as any, props as any), [
           <div
-            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
               siblingHasIcon &&

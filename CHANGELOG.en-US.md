@@ -16,6 +16,8 @@
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
 - Fix `n-notification`'s leave animation if content height overflows screen.
 - Fix `n-dropdown`'s disabled option has hover style.
+- Fix `n-dropdown`'s menu may shift when it's entering.
+- Fix `n-dropdown`'s transform origin may not be correct in Chrome.
 
 ### Feats
 

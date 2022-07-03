@@ -16,6 +16,8 @@
 - 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
 - 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
 - 修复 `n-dropdown` 禁用的选项有 hover 样式
+- 修复 `n-dropdown` 菜单出现可能会闪
+- 修复 `n-dropdown` 菜单的 transform origin 在 Chrome 上可能不正确
 
 ### Feats
 

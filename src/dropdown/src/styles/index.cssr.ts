@@ -28,7 +28,7 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 // --n-box-shadow
 
 export default cB('dropdown-menu', `
-  transform-origin: inherit;
+  transform-origin: var(--v-transform-origin);
   background-color: var(--n-color);
   border-radius: var(--n-border-radius);
   box-shadow: var(--n-box-shadow);
@@ -173,7 +173,7 @@ export default cB('dropdown-menu', `
     margin: 4px 0;
   `),
   cB('dropdown-menu-wrapper', `
-    transform-origin: inherit;
+    transform-origin: var(--v-transform-origin);
     width: fit-content;
   `),
   c('>', [
