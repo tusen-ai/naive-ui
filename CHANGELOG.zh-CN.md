@@ -28,7 +28,8 @@
 - 导出所有组件的 props 对象
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
-- `n-dropdown` 新增 `menu-props` 属性
+- `n-dropdown` 新增 `menu-props`
+- `n-data-table` 的列属性增加 `single` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
 
 ## 2.30.8
 
@@ -59,7 +60,6 @@
 - `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
 - `n-tree-select` 新增 `render-tag` 属性
 - `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
-- `n-data-table` 的列属性增加 `single` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
 
 ## 2.30.6
 

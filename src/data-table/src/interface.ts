@@ -227,7 +227,7 @@ export interface DataTableInjection {
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
   doCheck: (rowKey: RowKey | RowKey[], single?: boolean) => void
-  doUncheck: (rowKey: RowKey | RowKey[], single?: boolean) => void
+  doUncheck: (rowKey: RowKey | RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void

@@ -34,6 +34,7 @@ import type { ColItem } from '../use-group-header'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
+import RenderSafeRadio from './BodyRadio'
 import TableHeader from './Header'
 
 interface NormalRowRenderInfo {
@@ -205,10 +206,9 @@ export default defineComponent({
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
-      shiftKey: boolean,
-      single?: boolean
+      shiftKey: boolean
     ): void {
-      if (shiftKey && !single) {
+      if (shiftKey) {
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastSelectedKey
         )
@@ -235,12 +235,18 @@ export default defineComponent({
       }
 
       if (checked) {
-        doCheck(tmNode.key, single)
+        doCheck(tmNode.key)
       } else {
-        doUncheck(tmNode.key, single)
+        doUncheck(tmNode.key)
       }
       lastSelectedKey = tmNode.key
     }
+
+    function handleRadioUpdateChecked (tmNode: { key: RowKey }): void {
+      console.log('radio checked')
+      doCheck(tmNode.key, true)
+    }
+
     function getScrollContainer (): HTMLElement | null {
       if (!shouldDisplaySomeTablePartRef.value) {
         const { value: emptyEl } = emptyElRef
@@ -475,6 +481,7 @@ export default defineComponent({
       virtualListContent,
       handleTableBodyScroll,
       handleCheckboxUpdateChecked,
+      handleRadioUpdateChecked,
       handleUpdateExpanded,
       renderCell,
       ...exposedMethods
@@ -550,6 +557,7 @@ export default defineComponent({
               renderExpand,
               summary,
               handleCheckboxUpdateChecked,
+              handleRadioUpdateChecked,
               handleUpdateExpanded
             } = this
             const { length: colCount } = cols
@@ -816,19 +824,29 @@ export default defineComponent({
                           : null}
                         {column.type === 'selection' ? (
                           !isSummary ? (
-                            <RenderSafeCheckbox
-                              key={currentPage}
-                              rowKey={rowKey}
-                              disabled={rowInfo.tmNode.disabled}
-                              onUpdateChecked={(checked: boolean, e) =>
-                                handleCheckboxUpdateChecked(
-                                  rowInfo.tmNode,
-                                  checked,
-                                  e.shiftKey,
-                                  column.single
-                                )
-                              }
-                            />
+                            column.single ? (
+                              <RenderSafeRadio
+                                key={currentPage}
+                                rowKey={rowKey}
+                                disabled={rowInfo.tmNode.disabled}
+                                onUpdateChecked={(checked: boolean) =>
+                                  handleRadioUpdateChecked(rowInfo.tmNode)
+                                }
+                              />
+                            ) : (
+                              <RenderSafeCheckbox
+                                key={currentPage}
+                                rowKey={rowKey}
+                                disabled={rowInfo.tmNode.disabled}
+                                onUpdateChecked={(checked: boolean, e) =>
+                                  handleCheckboxUpdateChecked(
+                                    rowInfo.tmNode,
+                                    checked,
+                                    e.shiftKey
+                                  )
+                                }
+                              />
+                            )
                           ) : null
                         ) : column.type === 'expand' ? (
                           !isSummary ? (

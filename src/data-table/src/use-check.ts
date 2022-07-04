@@ -114,17 +114,13 @@ export function useCheck (
       ).checkedKeys
     )
   }
-  function doUncheck (rowKey: RowKey | RowKey[], single: boolean = false): void {
+  function doUncheck (rowKey: RowKey | RowKey[]): void {
     if (props.loading) return
     doUpdateCheckedRowKeys(
-      treeMateRef.value.uncheck(
-        rowKey,
-        single ? [] : mergedCheckedRowKeysRef.value,
-        {
-          cascade: props.cascade,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        }
-      ).checkedKeys
+      treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
+      }).checkedKeys
     )
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
