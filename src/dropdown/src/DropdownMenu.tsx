@@ -145,10 +145,7 @@ export default defineComponent({
         ref="bodyRef"
       >
         {scrollable ? (
-          <NxScrollbar
-            contentClass={`${clsPrefix}-dropdown-menu__content`}
-            contentStyle={{ overflow: 'hidden' }}
-          >
+          <NxScrollbar contentClass={`${clsPrefix}-dropdown-menu__content`}>
             {{
               default: () => menuOptionsNode
             }}
