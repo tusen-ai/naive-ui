@@ -29,6 +29,7 @@
 - `n-popover` adds `footer-style` prop.
 - `n-popover` adds `footer` slot, closes [#3188](https://github.com/TuSimple/naive-ui/issues/3188).
 - `n-dropdown` adds `menu-props` prop.
+- `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
 
 ## 2.30.8
 

@@ -29,6 +29,7 @@
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容, 关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
 - `n-dropdown` 新增 `menu-props` 属性
+- `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
 
 ## 2.30.8
 
