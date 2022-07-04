@@ -1218,11 +1218,11 @@ describe('props.columns', () => {
     )
   })
 
-  it('should work with `column.single` prop', async () => {
+  it('should work with `column.multiple` prop', async () => {
     const columns: DataTableColumns = [
       {
         type: 'selection',
-        single: true
+        multiple: false
       },
       {
         title: 'Name',

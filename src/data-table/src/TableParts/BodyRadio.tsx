@@ -21,13 +21,15 @@ export default defineComponent({
   },
   setup (props) {
     const {
-      mergedCheckedRowKeySetRef
+      mergedCheckedRowKeySetRef,
+      componentId
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     return () => {
       const { rowKey } = props
       return (
         <NRadio
+          name={componentId}
           disabled={props.disabled}
           checked={mergedCheckedRowKeySetRef.value.has(rowKey)}
           onUpdateChecked={props.onUpdateChecked}

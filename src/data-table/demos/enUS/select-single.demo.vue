@@ -1,9 +1,7 @@
 <markdown>
-# Selection(single)
+# Single selection
 
-Set `single=true` to make the column of `type='selection` a single selection mode.
-
-Note: if `checked-row-keys` or `default-checked-row-keys` is set for the single selection mode, only the first item will be selected.
+Set `multiple: true` to make the column of `type='selection` a single selection mode.
 </markdown>
 
 <template>
@@ -37,7 +35,7 @@ const createColumns = (): DataTableColumns<RowData> => {
   return [
     {
       type: 'selection',
-      single: true,
+      multiple: false,
       disabled (row: RowData) {
         return row.name === 'Edward King 3'
       }

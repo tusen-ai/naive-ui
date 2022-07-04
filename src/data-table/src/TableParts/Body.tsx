@@ -225,7 +225,7 @@ export default defineComponent({
             }
           })
           if (checked) {
-            doCheck(rowKeysToCheck)
+            doCheck(rowKeysToCheck, false)
           } else {
             doUncheck(rowKeysToCheck)
           }
@@ -235,7 +235,7 @@ export default defineComponent({
       }
 
       if (checked) {
-        doCheck(tmNode.key)
+        doCheck(tmNode.key, false)
       } else {
         doUncheck(tmNode.key)
       }
@@ -823,12 +823,12 @@ export default defineComponent({
                           : null}
                         {column.type === 'selection' ? (
                           !isSummary ? (
-                            column.single ? (
+                            column.multiple === false ? (
                               <RenderSafeRadio
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={(checked: boolean) =>
+                                onUpdateChecked={() =>
                                   handleRadioUpdateChecked(rowInfo.tmNode)
                                 }
                               />

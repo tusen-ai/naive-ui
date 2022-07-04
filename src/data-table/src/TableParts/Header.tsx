@@ -185,8 +185,8 @@ export default defineComponent({
                     }
                   >
                     {column.type === 'selection' ? (
-                      <>
-                        {!column.single ? (
+                      column.multiple !== false ? (
+                        <>
                           <NCheckbox
                             key={currentPage}
                             privateInsideTable
@@ -195,11 +195,11 @@ export default defineComponent({
                             disabled={headerCheckboxDisabled}
                             onUpdateChecked={handleCheckboxUpdateChecked}
                           />
-                        ) : null}
-                        {checkOptions && !column.single ? (
-                          <SelectionMenu clsPrefix={mergedClsPrefix} />
-                        ) : null}
-                      </>
+                          {checkOptions ? (
+                            <SelectionMenu clsPrefix={mergedClsPrefix} />
+                          ) : null}
+                        </>
+                      ) : null
                     ) : ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
                       <div class={`${mergedClsPrefix}-data-table-th__ellipsis`}>
                         {renderTitle(column)}

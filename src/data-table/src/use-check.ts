@@ -22,15 +22,17 @@ export function useCheck (
   const uncontrolledCheckedRowKeysRef = ref(props.defaultCheckedRowKeys)
   const mergedCheckState = computed(() => {
     const { checkedRowKeys } = props
-    let rowKeysToCheck =
+    const sourceKeys =
       checkedRowKeys === undefined
         ? uncontrolledCheckedRowKeysRef.value
         : checkedRowKeys
-
-    if (selectionColumnRef.value?.single) {
-      rowKeysToCheck = rowKeysToCheck.slice(0, 1)
+    if (selectionColumnRef.value?.multiple === false) {
+      return {
+        checkedKeys: sourceKeys.slice(0, 1),
+        indeterminateKeys: []
+      }
     }
-    return treeMateRef.value.getCheckedKeys(rowKeysToCheck, {
+    return treeMateRef.value.getCheckedKeys(sourceKeys, {
       cascade: props.cascade,
       allowNotLoaded: props.allowCheckingNotLoaded
     })
@@ -103,15 +105,17 @@ export function useCheck (
   }
   function doCheck (rowKey: RowKey | RowKey[], single: boolean = false): void {
     if (props.loading) return
+    if (single) {
+      doUpdateCheckedRowKeys(
+        Array.isArray(rowKey) ? rowKey.slice(0, 1) : [rowKey]
+      )
+      return
+    }
     doUpdateCheckedRowKeys(
-      treeMateRef.value.check(
-        rowKey,
-        single ? [] : mergedCheckedRowKeysRef.value,
-        {
-          cascade: props.cascade,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        }
-      ).checkedKeys
+      treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
+      }).checkedKeys
     )
   }
   function doUncheck (rowKey: RowKey | RowKey[]): void {

@@ -126,7 +126,7 @@ export type TableBaseColumn<T = InternalRowData> = {
 
 export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
-  single?: boolean
+  multiple?: boolean
   disabled?: (row: T) => boolean
   options?: DataTableSelectionOptions
 
@@ -226,7 +226,7 @@ export interface DataTableInjection {
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (rowKey: RowKey | RowKey[], single?: boolean) => void
+  doCheck: (rowKey: RowKey | RowKey[], single: boolean) => void
   doUncheck: (rowKey: RowKey | RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void

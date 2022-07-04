@@ -1,9 +1,7 @@
 <markdown>
 # 选中行(单选)
 
-在 `type='selection'` 的列，同时设置 `single=true` 来变成单选模式。
-
-注意: 单选模式如果有设置 `checked-row-keys` 或 `default-checked-row-keys`，只会取第一项。
+在 `type='selection'` 的列，同时设置 `multiple=false` 来变成单选模式。
 </markdown>
 
 <template>
@@ -37,7 +35,7 @@ const createColumns = (): DataTableColumns<RowData> => {
   return [
     {
       type: 'selection',
-      single: true,
+      multiple: false,
       disabled (row: RowData) {
         return row.name === 'Edward King 3'
       }
