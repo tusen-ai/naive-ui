@@ -133,6 +133,7 @@ export const treeSharedProps = {
 
 export const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
+  accordion: Boolean,
   showIrrelevantNodes: { type: Boolean, default: true },
   data: {
     type: Array as PropType<TreeOptions>,
@@ -810,8 +811,9 @@ export default defineComponent({
         getOptionsByKeys(indeterminateKeys)
       )
     }
-    function toggleExpand (key: Key): void {
+    function toggleExpand (node: TmNode): void {
       if (props.disabled) return
+      const { key } = node
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
         (expandNodeId) => expandNodeId === key
@@ -828,13 +830,24 @@ export default defineComponent({
         if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
-        const nextKeys = mergedExpandedKeys.concat(key)
+        let nextKeys: Key[]
+        if (props.accordion) {
+          const siblingKeySet = new Set<Key>(
+            node.siblings.map(({ key }) => key)
+          )
+          nextKeys = mergedExpandedKeys.filter((expandedKey) => {
+            return !siblingKeySet.has(expandedKey)
+          })
+          nextKeys.push(key)
+        } else {
+          nextKeys = mergedExpandedKeys.concat(key)
+        }
         doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
       if (props.disabled || aipRef.value) return
-      toggleExpand(node.key)
+      toggleExpand(node)
     }
     function handleSelect (node: TmNode): void {
       if (props.disabled || !props.selectable) {

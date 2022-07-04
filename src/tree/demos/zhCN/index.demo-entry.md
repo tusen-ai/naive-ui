@@ -33,6 +33,7 @@ scroll-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | 是否使用手风琴展开模式。需要注意的是这个属性会导致某些情况下展开动画的丢失，我们未来可能会修复这个问题，但是如果你要使用这个属性，请了解这一点 | NEXT_VERSION |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-keys` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |  |
 | block-line | `boolean` | `false` | 节点整行撑开 |  |
