@@ -146,7 +146,7 @@ export const treeProps = {
   expandOnClick: Boolean,
   checkOnClick: {
     type: [Boolean, Function] as PropType<boolean | CheckOnClick>,
-    default: true
+    default: false
   },
   cancelable: {
     type: Boolean,
@@ -557,7 +557,7 @@ export default defineComponent({
     // animation in progress
     const aipRef = ref(false)
     // animation flattened nodes
-    const afNodeRef = ref<Array<TmNode | MotionData>>([])
+    const afNodesRef = ref<Array<TmNode | MotionData>>([])
     // Note: Since the virtual list depends on min height, if there's a node
     // whose height starts from 0, the virtual list will have a wrong height
     // during animation. This will seldom cause wired scrollbar status. It is
@@ -584,10 +584,7 @@ export default defineComponent({
           removedKey = expandedKey
         }
       }
-      if (
-        (addedKey !== null && removedKey !== null) ||
-        (addedKey === null && removedKey === null)
-      ) {
+      if (addedKey === null && removedKey === null) {
         // 1. multi action, not triggered by click
         // 2. no action, don't know what happened
         return
@@ -597,20 +594,34 @@ export default defineComponent({
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
       const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
+      // play add animation
+      let baseExpandedKeys: Key[] | undefined
       if (addedKey !== null) {
-        // play add animation
-        aipRef.value = true
-        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(prevValue)
-        const expandedNodeIndex = afNodeRef.value.findIndex(
+        baseExpandedKeys = prevValue
+      }
+      if (removedKey !== null) {
+        if (baseExpandedKeys === undefined) {
+          baseExpandedKeys = value
+        } else {
+          baseExpandedKeys = baseExpandedKeys.filter(
+            (key) => key !== removedKey
+          )
+        }
+      }
+      aipRef.value = true
+      afNodesRef.value =
+        displayTreeMateRef.value.getFlattenedNodes(baseExpandedKeys)
+      if (addedKey !== null) {
+        const expandedNodeIndex = afNodesRef.value.findIndex(
           (node) => (node as any).key === addedKey
         )
         if (~expandedNodeIndex) {
           const expandedChildren = flatten(
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
+            (afNodesRef.value[expandedNodeIndex] as TmNode).children!,
             value
           )
-          afNodeRef.value.splice(expandedNodeIndex + 1, 0, {
+          afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'expand',
             height: virtualScroll
@@ -623,13 +634,12 @@ export default defineComponent({
         }
       }
       if (removedKey !== null) {
-        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(value)
-        const collapsedNodeIndex = afNodeRef.value.findIndex(
+        const collapsedNodeIndex = afNodesRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
         if (~collapsedNodeIndex) {
           const collapsedNodeChildren = (
-            afNodeRef.value[collapsedNodeIndex] as TmNode
+            afNodesRef.value[collapsedNodeIndex] as TmNode
           ).children
           // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
           // but maybe children removed
@@ -637,7 +647,7 @@ export default defineComponent({
           // play remove animation
           aipRef.value = true
           const collapsedChildren = flatten(collapsedNodeChildren, value)
-          afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
+          afNodesRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
             height: virtualScroll
@@ -656,7 +666,7 @@ export default defineComponent({
     })
 
     const mergedFNodesRef = computed(() => {
-      if (aipRef.value) return afNodeRef.value
+      if (aipRef.value) return afNodesRef.value
       else return fNodesRef.value
     })
 

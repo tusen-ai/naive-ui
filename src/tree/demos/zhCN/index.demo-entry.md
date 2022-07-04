@@ -33,7 +33,7 @@ scroll-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| accordion | `boolean` | `false` | 是否使用手风琴展开模式。需要注意的是这个属性会导致某些情况下展开动画的丢失，我们未来可能会修复这个问题，但是如果你要使用这个属性，请了解这一点 | NEXT_VERSION |
+| accordion | `boolean` | `false` | 是否使用手风琴展开模式 | NEXT_VERSION |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-keys` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |  |
 | block-line | `boolean` | `false` | 节点整行撑开 |  |
@@ -45,7 +45,7 @@ scroll-debug.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | 2.28.3 |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |  |
-| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `true` | 是否允许点击节点进行勾选，仅在 `checkable` 为 `true` 时生效 | NEXT_VERSION |
+| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `false` | 是否允许点击节点进行勾选，仅在 `checkable` 为 `true` 时生效 | NEXT_VERSION |
 | data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | 默认选中的多选项 |  |
 | default-expand-all | `boolean` | `false` | 展开全部选项 |  |
