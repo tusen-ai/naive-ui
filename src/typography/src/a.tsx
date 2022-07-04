@@ -6,7 +6,7 @@ import type { TypographyTheme } from '../styles'
 import style from './styles/a.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const aProps = {
+export const aProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>)
 } as const
 

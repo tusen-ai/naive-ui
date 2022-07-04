@@ -22,7 +22,7 @@ export interface AnchorInjection {
 export const anchorInjectionKey =
   createInjectionKey<AnchorInjection>('n-anchor')
 
-const anchorLinkProps = {
+export const anchorLinkProps = {
   title: String,
   href: String
 } as const

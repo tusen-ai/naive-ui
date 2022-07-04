@@ -8,6 +8,9 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-action-text-color
 // --n-title-text-color
 // --n-title-font-weight
+// --n-title-font-size
+// --n-meta-font-size
+// --n-description-font-size
 // --n-bezier
 // --n-bezier-ease-out
 // --n-bezier-ease-in
@@ -260,9 +263,7 @@ export default c([
         align-items: center;
         justify-content: center;
       `, [
-        cB('icon', {
-          transition: 'color .3s var(--n-bezier)'
-        })
+        cB('icon', 'transition: color .3s var(--n-bezier);')
       ]),
       cB('notification-main', `
         padding-top: var(--n-padding-top);
@@ -280,7 +281,7 @@ export default c([
           margin-top: 12px;
         `, [
           cE('meta', `
-            font-size: 12px;
+            font-size: var(--n-meta-font-size);
             transition: color .3s var(--n-bezier-ease-out);
             color: var(--n-description-text-color);
           `),
@@ -292,13 +293,13 @@ export default c([
         ]),
         cE('header', `
           font-weight: var(--n-title-font-weight);
-          font-size: 16px;
+          font-size: var(--n-title-font-size);
           transition: color .3s var(--n-bezier-ease-out);
           color: var(--n-title-text-color);
         `),
         cE('description', `
           margin-top: 8px;
-          font-size: 12px;
+          font-size: var(--n-description-font-size);
           transition: color .3s var(--n-bezier-ease-out);
           color: var(--n-description-text-color);
         `),

@@ -16,18 +16,27 @@ If you are using Nuxt, please see [example](https://github.com/07akioni/naive-ui
 2. Add the following config in your `nuxt.config.ts`.
 
 ```ts
+import { defineNuxtConfig } from 'nuxt'
+
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   build: {
-    transpile: [
-      'naive-ui',
-      'vueuc',
-      '@css-render/vue3-ssr',
-      '@juggle/resize-observer'
-    ]
+    transpile:
+      process.env.NODE_ENV === 'production'
+        ? [
+            'naive-ui',
+            'vueuc',
+            '@css-render/vue3-ssr',
+            '@juggle/resize-observer'
+          ]
+        : ['@juggle/resize-observer']
   },
   vite: {
     optimizeDeps: {
-      include: ['date-fns-tz/esm/formatInTimeZone']
+      include:
+        process.env.NODE_ENV === 'development'
+          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
+          : []
     }
   }
 })
@@ -51,11 +60,8 @@ By default, naive-ui bind inline theme style on components, it may increase SSR 
 
 The following components has some bugs in SSR scene, please avoid using them if possible. We will fix them gradually.
 
-- `n-scrollbar`(It works after vue >= 3.2.36)
+- `n-scrollbar`, `n-data-table` (It works after vue >= 3.2.36)
 - `n-anchor`
-- `n-back-top`
-- `n-image-group`
-- `n-data-table`
 - `n-watermark`
 - `n-affix`
 - `n-transfer`

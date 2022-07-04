@@ -10,7 +10,7 @@ import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
 import { breadcrumbInjectionKey } from './Breadcrumb'
 
-const breadcrumbItemProps = {
+export const breadcrumbItemProps = {
   separator: String,
   href: String,
   clickable: {

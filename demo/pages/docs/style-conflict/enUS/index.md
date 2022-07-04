@@ -33,7 +33,7 @@ document.head.appendChild(meta)
 vueApp.mount('#app')
 ```
 
-## Disable Preflight Style
+## Disable Preflight Style (CSS Reset)
 
 To make naive-ui work for most users out of box, mounting any component of naive would create global preflight style. However it may not be expected. If you want to disable it, using `n-config-provider` like this.
 

@@ -31,6 +31,7 @@ filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
 select.vue
+select-single.vue
 custom-select
 group-header.vue
 controlled-page.vue
@@ -84,7 +85,7 @@ render-cell.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
-| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |  |
+| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
@@ -130,6 +131,7 @@ render-cell.vue
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
 | minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
+| multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | NEXT_VERSION |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |  |

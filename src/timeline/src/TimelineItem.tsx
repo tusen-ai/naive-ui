@@ -18,7 +18,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { timelineInjectionKey } from './Timeline'
 import { useConfig, useThemeClass } from '../../_mixins'
 
-const timelineItemProps = {
+export const timelineItemProps = {
   time: [String, Number] as PropType<string | number>,
   title: String,
   content: String,

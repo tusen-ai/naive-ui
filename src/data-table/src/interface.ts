@@ -57,7 +57,7 @@ export type TmNode = TreeNode<InternalRowData>
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
-export type Ellipsis = boolean | EllipsisProps
+export type Ellipsis = boolean | (EllipsisProps & { style?: CSSProperties })
 
 export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
@@ -126,6 +126,7 @@ export type TableBaseColumn<T = InternalRowData> = {
 
 export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
+  multiple?: boolean
   disabled?: (row: T) => boolean
   options?: DataTableSelectionOptions
 
@@ -225,7 +226,7 @@ export interface DataTableInjection {
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (rowKey: RowKey | RowKey[]) => void
+  doCheck: (rowKey: RowKey | RowKey[], single: boolean) => void
   doUncheck: (rowKey: RowKey | RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void

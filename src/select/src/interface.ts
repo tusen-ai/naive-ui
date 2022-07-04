@@ -90,3 +90,4 @@ export interface SelectInst {
 
 export type SelectFallbackOption = (value: string & number) => SelectOption
 export type SelectFallbackOptionImpl = (value: string | number) => SelectOption
+export type SelectFilter = (pattern: string, option: SelectOption) => boolean

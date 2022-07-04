@@ -9,6 +9,7 @@
       style="width: 200px"
       filterable
       placeholder="选择歌曲"
+      :filter="filter"
       :consistent-menu-width="false"
       :options="options"
     />
@@ -18,6 +19,7 @@
       multiple
       filterable
       placeholder="选择歌曲"
+      :filter="filter"
       :consistent-menu-width="false"
       :options="options"
     />
@@ -26,12 +28,18 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { SelectFilter } from 'naive-ui'
 
 export default defineComponent({
   setup () {
+    const filter: SelectFilter = (pattern, option) => {
+      console.log(pattern, option)
+      return pattern === '1'
+    }
     return {
       selectedValue: ref('song1'),
       selectedValues: ref(['song1']),
+      filter,
       options: [
         {
           label:

@@ -79,7 +79,7 @@ import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
-const datePickerProps = {
+export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -206,11 +206,13 @@ export default defineComponent({
         case 'datetimerange':
           return localeRef.value.dateTimeFormat
         case 'year':
+        case 'yearrange':
           return localeRef.value.yearTypeFormat
         case 'month':
         case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
+        case 'quarterrange':
           return localeRef.value.quarterFormat
       }
     })
@@ -287,7 +289,13 @@ export default defineComponent({
       )
     })
     const isRangeRef = computed(() => {
-      return ['daterange', 'datetimerange', 'monthrange'].includes(props.type)
+      return [
+        'daterange',
+        'datetimerange',
+        'monthrange',
+        'quarterrange',
+        'yearrange'
+      ].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
@@ -340,33 +348,44 @@ export default defineComponent({
       }
     })
     const mergedActionsRef = computed(() => {
-      const { actions, type } = props
+      const { actions, type, clearable } = props
       if (actions === null) return []
       if (actions !== undefined) return actions
+      const result = clearable ? ['clear'] : []
       switch (type) {
         case 'date': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'datetime': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'daterange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'datetimerange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'month': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'year': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'quarter': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
-        case 'monthrange': {
-          return ['clear', 'confirm']
+        case 'monthrange':
+        case 'yearrange':
+        case 'quarterrange': {
+          result.push('confirm')
+          return result
         }
         default: {
           warn(
@@ -978,11 +997,13 @@ export default defineComponent({
         />
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
-      ) : type === 'monthrange' ? (
+      ) : type === 'monthrange' ||
+        type === 'yearrange' ||
+        type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
-      ) : (
+          ) : (
         <DatePanel {...commonPanelProps} />
-      )
+          )
     }
     if (this.panel) {
       return renderPanel()

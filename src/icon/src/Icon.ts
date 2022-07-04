@@ -15,7 +15,7 @@ import style from './styles/index.cssr'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
-const iconProps = {
+export const iconProps = {
   ...(useTheme.props as ThemeProps<IconTheme>),
   depth: [String, Number] as PropType<Depth>,
   size: [Number, String] as PropType<number | string>,

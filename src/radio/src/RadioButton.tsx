@@ -2,6 +2,7 @@ import { h, defineComponent } from 'vue'
 import { ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
 import useRadio from './use-radio'
 
+export const radioButtonProps = useRadio.props
 export type RadioButtonProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({

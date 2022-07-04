@@ -10,7 +10,8 @@ import {
   startOfDay,
   set,
   getDate,
-  getTime
+  getTime,
+  startOfQuarter
 } from 'date-fns/esm'
 import { VirtualListInst } from 'vueuc'
 import {
@@ -22,7 +23,9 @@ import {
   yearArray,
   monthArray,
   getDefaultTime,
-  pluckValueFromRange
+  pluckValueFromRange,
+  QuarterItem,
+  quarterArray
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
@@ -47,7 +50,12 @@ const useDualCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useDualCalendar (
   props: ExtractPropTypes<typeof useDualCalendarProps>,
-  type: 'daterange' | 'datetimerange' | 'monthrange'
+  type:
+  | 'daterange'
+  | 'datetimerange'
+  | 'monthrange'
+  | 'quarterrange'
+  | 'yearrange'
 ) {
   const {
     isDateDisabledRef,
@@ -216,6 +224,14 @@ function useDualCalendar (
   })
   const endYearArrayRef = computed(() => {
     return yearArray(pluckValueFromRange(props.value, 'end'), nowRef.value)
+  })
+  const startQuarterArrayRef = computed(() => {
+    const startValue = pluckValueFromRange(props.value, 'start')
+    return quarterArray(startValue ?? Date.now(), startValue, nowRef.value)
+  })
+  const endQuarterArrayRef = computed(() => {
+    const endValue = pluckValueFromRange(props.value, 'end')
+    return quarterArray(endValue ?? Date.now(), endValue, nowRef.value)
   })
   const startMonthArrayRef = computed(() => {
     const startValue = pluckValueFromRange(props.value, 'start')
@@ -711,17 +727,27 @@ function useDualCalendar (
   }
   // only for monthrange
   function handleColItemClick (
-    dateItem: MonthItem | YearItem,
+    dateItem: MonthItem | QuarterItem | YearItem,
     clickType: 'start' | 'end'
   ): void {
     const { value } = props
     const noCurrentValue = !Array.isArray(value)
     const itemTs =
-      dateItem.type === 'year'
+      dateItem.type === 'year' && type !== 'yearrange'
         ? noCurrentValue
-          ? set(dateItem.ts, { month: getMonth(new Date()) }).valueOf()
+          ? set(dateItem.ts, {
+            month: getMonth(
+              type === 'quarterrange'
+                ? startOfQuarter(new Date())
+                : new Date()
+            )
+          }).valueOf()
           : set(dateItem.ts, {
-            month: getMonth(value[clickType === 'start' ? 0 : 1])
+            month: getMonth(
+              type === 'quarterrange'
+                ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
+                : value[clickType === 'start' ? 0 : 1]
+            )
           }).valueOf()
         : dateItem.ts
     if (noCurrentValue) {
@@ -730,6 +756,7 @@ function useDualCalendar (
       panelCommon.doUpdateValue(nextValue, props.panel)
       justifyColumnsScrollState(nextValue, 'start')
       justifyColumnsScrollState(nextValue, 'end')
+      panelCommon.disableTransitionOneTick()
       return
     }
     const nextValue: [number, number] = [value[0], value[1]]
@@ -750,6 +777,7 @@ function useDualCalendar (
     panelCommon.doUpdateValue(nextValue, props.panel)
     switch (type) {
       case 'monthrange':
+      case 'quarterrange':
         panelCommon.disableTransitionOneTick()
         if (otherPartsChanged) {
           justifyColumnsScrollState(nextValue, 'start')
@@ -758,6 +786,10 @@ function useDualCalendar (
           justifyColumnsScrollState(nextValue, clickType)
         }
         break
+      case 'yearrange':
+        panelCommon.disableTransitionOneTick()
+        justifyColumnsScrollState(nextValue, 'start')
+        justifyColumnsScrollState(nextValue, 'end')
     }
   }
   function handleStartYearVlScroll (): void {
@@ -816,8 +848,10 @@ function useDualCalendar (
     endDateArray: endDateArrayRef,
     startYearArray: startYearArrayRef,
     startMonthArray: startMonthArrayRef,
+    startQuarterArray: startQuarterArrayRef,
     endYearArray: endYearArrayRef,
     endMonthArray: endMonthArrayRef,
+    endQuarterArray: endQuarterArrayRef,
     isSelecting: isSelectingRef,
     handleRangeShortcutMouseenter,
     handleRangeShortcutClick,

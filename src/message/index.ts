@@ -1,4 +1,7 @@
-export { default as NMessageProvider } from './src/MessageProvider'
+export {
+  default as NMessageProvider,
+  messageProviderProps
+} from './src/MessageProvider'
 export { useMessage } from './src/use-message'
 export type {
   MessageApiInjection as MessageApi,
