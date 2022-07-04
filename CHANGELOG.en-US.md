@@ -31,6 +31,7 @@
 - `n-dropdown` adds `menu-props` prop.
 - `n-data-table` adds `multiple` prop, closes [#3056](https://github.com/TuSimple/naive-ui/issues/3056).
 - `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
+- `n-tree` adds `check-on-click` prop to control `checked` status.
 
 ## 2.30.8
 
@@ -73,10 +74,6 @@
 - Fix `n-data-table`'s column `ellipsis` prop's type doesn't allow `style` prop.
 - Fix `n-data-table`'s column will lose box shadow when set to `ellipsis` & `fixed` simultaneously, closes [#3145](https://github.com/TuSimple/naive-ui/issues/3145).
 - Fix `n-image`'s `lazy` prop doesn't work on Safari & Firefox.
-
-### Feats
-
-- `n-tree` adds `check-on-click` prop to control `checked` status
 
 ## 2.30.5
 

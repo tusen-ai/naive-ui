@@ -76,7 +76,7 @@ export interface InternalDropInfo {
 
 export type RenderSwitcherIcon = () => VNodeChild
 
-export type CheckOnClick = (option: TreeOption) => void
+export type CheckOnClick = (option: TreeOption) => boolean
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>

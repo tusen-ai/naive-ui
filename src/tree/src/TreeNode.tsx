@@ -100,7 +100,7 @@ const TreeNode = defineComponent({
             props.tmNode.isLeaf
           : true)
     )
-    const checkableRef = computed(
+    const checkableRef = useMemo(
       () =>
         NTree.checkableRef.value &&
         (NTree.cascadeRef.value ||
@@ -112,21 +112,19 @@ const TreeNode = defineComponent({
       NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
     )
 
-    const indeterminateRef = useMemo(() =>
-      NTree.displayedIndeterminateKeysRef.value.includes(props.tmNode.key)
-    )
-
-    const checkOnClick = useMemo(() => {
-      if (typeof checkOnClickRef.value === 'boolean') {
-        return checkOnClickRef.value
+    const mergedCheckOnClickRef = useMemo(() => {
+      const { value: checkable } = checkableRef
+      if (!checkable) return false
+      const { value: checkOnClick } = checkOnClickRef
+      if (typeof checkOnClick === 'boolean') {
+        return checkOnClick
       }
-      return checkOnClickRef.value(props.tmNode.rawNode)
+      return checkOnClick(props.tmNode.rawNode)
     })
 
     function _handleClick (e: MouseEvent): void {
       const { value: expandOnClick } = NTree.expandOnClickRef
       const { value: selectable } = selectableRef
-      const { value: checkable } = checkableRef
       if (!selectable && !expandOnClick) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       const { tmNode } = props
@@ -136,7 +134,7 @@ const TreeNode = defineComponent({
       if (expandOnClick && !tmNode.isLeaf) {
         handleSwitcherClick()
       }
-      if (checkable && checkOnClick.value && !tmNode.children) {
+      if (mergedCheckOnClickRef.value) {
         handleCheck(!checkedRef.value)
       }
     }
@@ -238,7 +236,9 @@ const TreeNode = defineComponent({
         return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
       }),
       checked: checkedRef,
-      indeterminate: indeterminateRef,
+      indeterminate: useMemo(() =>
+        NTree.displayedIndeterminateKeysRef.value.includes(props.tmNode.key)
+      ),
       selected: useMemo(() =>
         NTree.mergedSelectedKeysRef.value.includes(props.tmNode.key)
       ),
