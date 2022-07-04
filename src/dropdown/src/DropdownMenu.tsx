@@ -138,9 +138,10 @@ export default defineComponent({
     })
     return (
       <div
-        class={`${clsPrefix}-dropdown-menu ${
-          scrollable ? clsPrefix + '-dropdown-menu--scrollable' : ''
-        } `}
+        class={[
+          `${clsPrefix}-dropdown-menu`,
+          scrollable && `${clsPrefix}-dropdown-menu--scrollable`
+        ]}
         ref="bodyRef"
       >
         {scrollable ? (
