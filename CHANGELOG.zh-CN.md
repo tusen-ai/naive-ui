@@ -35,6 +35,7 @@
 - `n-tree` 新增 `check-on-click` 属性来控制可选状态下的选中交互方式，关闭 [#2968](https://github.com/TuSimple/naive-ui/issues/2968)
 - `n-tree` 新增 `accrodion` 属性，关闭 [#3129](https://github.com/TuSimple/naive-ui/issues/3129)
 - `n-drawer` 新增 `adjustable` 属性
+- `n-countdown` 新增 `reset` 方法，关闭 [#3228](https://github.com/TuSimple/naive-ui/issues/3228)
 
 ## 2.30.8
 
