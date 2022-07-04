@@ -74,6 +74,10 @@
 - Fix `n-data-table`'s column will lose box shadow when set to `ellipsis` & `fixed` simultaneously, closes [#3145](https://github.com/TuSimple/naive-ui/issues/3145).
 - Fix `n-image`'s `lazy` prop doesn't work on Safari & Firefox.
 
+### Feats
+
+- `n-tree` adds `check-on-click` prop to control `checked` status
+
 ## 2.30.5
 
 ### Fixes

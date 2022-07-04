@@ -44,6 +44,7 @@ scroll-debug.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | 2.28.3 |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |  |
+| check-on-click | `boolean \| (node: TreeOption) => boolean` | `true` | 是否允许点击`label`节点进行选中，仅在`checkable = true`下生效 | NEXT_VERSION |
 | data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | 默认选中的多选项 |  |
 | default-expand-all | `boolean` | `false` | 展开全部选项 |  |

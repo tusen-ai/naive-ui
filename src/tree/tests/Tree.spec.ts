@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { NTree } from '../index'
+import { NTree, TreeOption } from '../index'
 
 describe('n-tree', () => {
   it('should work with import on demand', () => {
@@ -449,6 +449,101 @@ describe('n-tree', () => {
     await wrapper.setProps({ multiple: true })
     await node[0].trigger('click')
     expect(wrapper.findAll('.n-tree-node--selected').length).toBe(2)
+  })
+
+  it('should work with `click line to checked`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        cascade: true,
+        checkable: true,
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ]
+      }
+    })
+    const node = wrapper.findAll('.n-tree-node-content')
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(1)
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(0)
+    await node[0].trigger('click')
+    await node[1].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
+    await wrapper.setProps({ checkOnClick: false })
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
+    await node[1].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(2)
+  })
+
+  it('should work with `click line to checked when checkOnClick is function`', async () => {
+    function checkOnClick (node: TreeOption): boolean {
+      return node.label === '1-1'
+    }
+
+    const wrapper = mount(NTree, {
+      props: {
+        expandOnClick: true,
+        checkOnClick,
+        cascade: true,
+        checkable: true,
+        data: [
+          {
+            label: '1',
+            key: '1',
+            children: [
+              {
+                label: '1-1',
+                key: '1-1'
+              },
+              {
+                label: '1-2',
+                key: '1-2'
+              }
+            ]
+          },
+          {
+            label: '2',
+            key: '2',
+            children: [
+              {
+                label: '2-1',
+                key: '2-1'
+              },
+              {
+                label: '2-2',
+                key: '2-2'
+              }
+            ]
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ]
+      }
+    })
+    const node = wrapper.findAll('.n-tree-node-content')
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(0)
+    const childNode = wrapper.findAll('.n-tree-node-content')
+    await childNode[1].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(1)
+    expect(wrapper.findAll('.n-checkbox--indeterminate').length).toBe(1)
+    await childNode[2].trigger('click')
+    expect(wrapper.findAll('.n-checkbox--checked').length).toBe(1)
+    expect(wrapper.findAll('.n-checkbox--indeterminate').length).toBe(1)
   })
 
   it('should work with `node-props` prop', async () => {

@@ -75,6 +75,11 @@
 - 修复 `n-data-table` 在列同时设为 `ellipsis` 和 `fixed` 时会丢失固定列的阴影
 - 修复 `n-image` 的 `lazy` 属性在 Safari 和 Firefox 上工作不正常
 
+### Feats
+
+- `n-tree` 新增属性 `check-on-click` 来控制可选状态下的选中交互方式
+
+
 ## 2.30.5
 
 ### Fixes
