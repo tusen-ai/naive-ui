@@ -243,7 +243,6 @@ export default defineComponent({
     }
 
     function handleRadioUpdateChecked (tmNode: { key: RowKey }): void {
-      console.log('radio checked')
       doCheck(tmNode.key, true)
     }
 
