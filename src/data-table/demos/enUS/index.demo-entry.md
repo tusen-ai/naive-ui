@@ -31,6 +31,7 @@ filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
 select.vue
+select-single.vue
 custom-select
 group-header.vue
 controlled-page.vue
@@ -145,6 +146,7 @@ render-cell.vue
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
+| single | `boolean` | `false` | Whether to enable single selection mode. Only works when `type` is `'selection'`. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
 The following types can be imported from the package.
