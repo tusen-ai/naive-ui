@@ -144,7 +144,7 @@ export const treeProps = {
   },
   expandOnClick: Boolean,
   checkOnClick: {
-    type: [Boolean, Function] as PropType<CheckOnClick>,
+    type: [Boolean, Function] as PropType<boolean | CheckOnClick>,
     default: true
   },
   cancelable: {
