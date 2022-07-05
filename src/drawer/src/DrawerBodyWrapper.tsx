@@ -60,6 +60,10 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
+    adjustable: {
+      type: Boolean,
+      default: true
+    },
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
@@ -70,6 +74,68 @@ export default defineComponent({
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
+
+    let startPos = 0
+    let cacheCusor = ''
+    let hoverTimer: ReturnType<typeof setTimeout>
+    const isHover = ref(false)
+    const isMousedown = ref(false)
+
+    const isVertical = computed<boolean>(() => {
+      return props.placement === 'top' || props.placement === 'bottom'
+    })
+
+    const removePx = (str: string): number => Number(str.replace('px', ''))
+
+    const mousedownHandler = (e: MouseEvent): void => {
+      isMousedown.value = true
+      startPos = isVertical.value ? e.clientY : e.clientX
+      cacheCusor = document.body.style.cursor
+      document.body.style.cursor = isVertical.value ? 'ns-resize' : 'ew-resize'
+      document.body.addEventListener('mousemove', mousemoveHandler)
+      document.body.addEventListener('mouseup', mouseupHandler)
+    }
+
+    const mouseenterHandler = (e: MouseEvent): void => {
+      if (isMousedown.value) return
+      hoverTimer = setTimeout(() => {
+        isHover.value = true
+      }, 300)
+    }
+
+    const mouseleaveHandler = (e: MouseEvent): void => {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer)
+      }
+      isHover.value = false
+    }
+
+    const mousemoveHandler = (e: MouseEvent): void => {
+      if (isMousedown.value) {
+        if (isVertical.value) {
+          let height = removePx(NDrawer.height.value)
+          const increment = startPos - e.clientY
+          height += props.placement === 'bottom' ? increment : -increment
+          NDrawer.height.value = `${height}px`
+          startPos = e.clientY
+        } else {
+          let width = removePx(NDrawer.width.value)
+          const increment = startPos - e.clientX
+          width += props.placement === 'right' ? increment : -increment
+          NDrawer.width.value = `${width}px`
+          startPos = e.clientX
+        }
+      }
+    }
+
+    const mouseupHandler = (): void => {
+      startPos = 0
+      isMousedown.value = false
+      document.body.style.cursor = cacheCusor
+      document.body.removeEventListener('mousemove', mousemoveHandler)
+      document.body.removeEventListener('mouseup', mouseupHandler)
+    }
+
     watchEffect(() => {
       if (props.show) displayedRef.value = true
     })
@@ -109,7 +175,12 @@ export default defineComponent({
         }[props.placement]
       }),
       handleAfterLeave,
-      bodyDirectives: bodyDirectivesRef
+      bodyDirectives: bodyDirectivesRef,
+      mousedownHandler,
+      mouseenterHandler,
+      mouseleaveHandler,
+      isMousedown,
+      isHover
     }
   },
   render () {
@@ -145,11 +216,31 @@ export default defineComponent({
                               class: [
                                 `${mergedClsPrefix}-drawer`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
+                                /**
+                                 * When the mouse is pressed down to adjust the width/height,
+                                 * it is forbidden to select text to avoid bugs
+                                 */
+                                this.isMousedown &&
+                                  `${mergedClsPrefix}-no-select`,
                                 this.nativeScrollbar &&
                                   `${mergedClsPrefix}-drawer--native-scrollbar`
                               ]
                             }),
                             [
+                              this.adjustable ? (
+                                <div
+                                  class={[
+                                    `${mergedClsPrefix}-drawer__adjustable-line`,
+                                    `${mergedClsPrefix}-drawer__adjustable-line--${this.placement}`,
+                                    this.isMousedown || this.isHover
+                                      ? `${mergedClsPrefix}-drawer__adjustable-line--hover`
+                                      : ''
+                                  ]}
+                                  onMouseenter={this.mouseenterHandler}
+                                  onMouseleave={this.mouseleaveHandler}
+                                  onMousedown={this.mousedownHandler}
+                                ></div>
+                              ) : null,
                               this.nativeScrollbar ? (
                                 <div
                                   class={`${mergedClsPrefix}-drawer-content-wrapper`}

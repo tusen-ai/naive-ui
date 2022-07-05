@@ -34,6 +34,7 @@
 - `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
 - `n-tree` 新增 `check-on-click` 属性来控制可选状态下的选中交互方式，关闭 [#2968](https://github.com/TuSimple/naive-ui/issues/2968)
 - `n-tree` 新增 `accrodion` 属性，关闭 [#3129](https://github.com/TuSimple/naive-ui/issues/3129)
+- `n-drawer` 新增 `adjustable` 属性
 
 ## 2.30.8
 
