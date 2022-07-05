@@ -1,5 +1,7 @@
 <markdown>
 # 可调整宽高的抽屉
+
+记得使用 `resizable` 的时候配合 `default-width` 或者 `default-height`。
 </markdown>
 
 <template>
@@ -19,9 +21,9 @@
   </n-button-group>
   <n-drawer
     v-model:show="active"
-    :width="502"
+    :default-width="502"
     :placement="placement"
-    :adjustable="true"
+    resizable
   >
     <n-drawer-content title="斯通纳">
       《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
@@ -35,15 +37,15 @@ import type { DrawerPlacement } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
+    const activeRef = ref(false)
+    const placementRef = ref<DrawerPlacement>('right')
     const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
+      activeRef.value = true
+      placementRef.value = place
     }
     return {
-      active,
-      placement,
+      active: activeRef,
+      placement: placementRef,
       activate
     }
   }

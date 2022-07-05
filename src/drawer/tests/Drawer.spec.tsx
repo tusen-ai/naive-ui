@@ -204,18 +204,35 @@ describe('n-drawer', () => {
     wrapper.unmount()
   })
 
-  it('should work with `adjustable` prop', async () => {
+  it('should work with `resizable` prop', async () => {
+    const originalOffsetHeight = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      'offsetHeight'
+    )
+    const originalOffsetWidth = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      'offsetWidth'
+    )
+
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+      configurable: true,
+      value: 251
+    })
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      configurable: true,
+      value: 251
+    })
     // placement top
     let wrapper = await mountDrawer({
       show: true,
-      drawerProps: { placement: 'top', adjustable: true, height: 251 }
+      drawerProps: { placement: 'top', resizable: true, defaultHeight: 251 }
     })
     expect(document.querySelector('.n-drawer')?.className).toContain(
       'n-drawer--top-placement'
     )
-    expect(
-      document.querySelector('.n-drawer__adjustable-line--top')
-    ).not.toEqual(null)
+    expect(document.querySelector('.n-drawer__resize-trigger')).not.toEqual(
+      null
+    )
 
     let mousedownEvent = new MouseEvent('mousedown', {
       bubbles: true,
@@ -230,10 +247,10 @@ describe('n-drawer', () => {
     let mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
     document
-      .querySelector('.n-drawer__adjustable-line--top')
+      .querySelector('.n-drawer__resize-trigger')
       ?.dispatchEvent(mousedownEvent)
-    document.body?.dispatchEvent(mousemoveEvent)
-    document.body?.dispatchEvent(mouseupEvent)
+    document.body.dispatchEvent(mousemoveEvent)
+    document.body.dispatchEvent(mouseupEvent)
 
     await nextTick()
     expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
@@ -245,14 +262,14 @@ describe('n-drawer', () => {
     // placement bottom
     wrapper = await mountDrawer({
       show: true,
-      drawerProps: { placement: 'bottom', adjustable: true, height: 251 }
+      drawerProps: { placement: 'bottom', resizable: true, defaultHeight: 251 }
     })
     expect(document.querySelector('.n-drawer')?.className).toContain(
       'n-drawer--bottom-placement'
     )
-    expect(
-      document.querySelector('.n-drawer__adjustable-line--bottom')
-    ).not.toEqual(null)
+    expect(document.querySelector('.n-drawer__resize-trigger')).not.toEqual(
+      null
+    )
 
     mousedownEvent = new MouseEvent('mousedown', {
       bubbles: true,
@@ -267,10 +284,10 @@ describe('n-drawer', () => {
     mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
     document
-      .querySelector('.n-drawer__adjustable-line--bottom')
+      .querySelector('.n-drawer__resize-trigger')
       ?.dispatchEvent(mousedownEvent)
-    document.body?.dispatchEvent(mousemoveEvent)
-    document.body?.dispatchEvent(mouseupEvent)
+    document.body.dispatchEvent(mousemoveEvent)
+    document.body.dispatchEvent(mouseupEvent)
 
     await nextTick()
     expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
@@ -282,14 +299,14 @@ describe('n-drawer', () => {
     // placement left
     wrapper = await mountDrawer({
       show: true,
-      drawerProps: { placement: 'left', adjustable: true, width: 251 }
+      drawerProps: { placement: 'left', resizable: true, defaultWidth: 251 }
     })
     expect(document.querySelector('.n-drawer')?.className).toContain(
       'n-drawer--left-placement'
     )
-    expect(
-      document.querySelector('.n-drawer__adjustable-line--left')
-    ).not.toEqual(null)
+    expect(document.querySelector('.n-drawer__resize-trigger')).not.toEqual(
+      null
+    )
 
     mousedownEvent = new MouseEvent('mousedown', {
       bubbles: true,
@@ -304,10 +321,10 @@ describe('n-drawer', () => {
     mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
     document
-      .querySelector('.n-drawer__adjustable-line--left')
+      .querySelector('.n-drawer__resize-trigger')
       ?.dispatchEvent(mousedownEvent)
-    document.body?.dispatchEvent(mousemoveEvent)
-    document.body?.dispatchEvent(mouseupEvent)
+    document.body.dispatchEvent(mousemoveEvent)
+    document.body.dispatchEvent(mouseupEvent)
 
     await nextTick()
     expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
@@ -319,14 +336,14 @@ describe('n-drawer', () => {
     // placement right
     wrapper = await mountDrawer({
       show: true,
-      drawerProps: { placement: 'right', adjustable: true, width: 251 }
+      drawerProps: { placement: 'right', resizable: true, defaultWidth: 251 }
     })
     expect(document.querySelector('.n-drawer')?.className).toContain(
       'n-drawer--right-placement'
     )
-    expect(
-      document.querySelector('.n-drawer__adjustable-line--right')
-    ).not.toEqual(null)
+    expect(document.querySelector('.n-drawer__resize-trigger')).not.toEqual(
+      null
+    )
 
     mousedownEvent = new MouseEvent('mousedown', {
       bubbles: true,
@@ -341,10 +358,10 @@ describe('n-drawer', () => {
     mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
     document
-      .querySelector('.n-drawer__adjustable-line--right')
+      .querySelector('.n-drawer__resize-trigger')
       ?.dispatchEvent(mousedownEvent)
-    document.body?.dispatchEvent(mousemoveEvent)
-    document.body?.dispatchEvent(mouseupEvent)
+    document.body.dispatchEvent(mousemoveEvent)
+    document.body.dispatchEvent(mouseupEvent)
 
     await nextTick()
     expect(document.querySelector('.n-drawer')?.getAttribute('style')).toBe(
@@ -352,5 +369,18 @@ describe('n-drawer', () => {
     )
 
     wrapper.unmount()
+
+    Object.defineProperty(
+      HTMLElement.prototype,
+      'offsetHeight',
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      originalOffsetHeight!
+    )
+    Object.defineProperty(
+      HTMLElement.prototype,
+      'offsetWidth',
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      originalOffsetWidth!
+    )
   })
 })

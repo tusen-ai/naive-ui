@@ -1,5 +1,7 @@
 <markdown>
 # Adjustable drawer
+
+Remeber to use `default-width` or `default-height` with `resizable`.
 </markdown>
 
 <template>
@@ -19,9 +21,9 @@
   </n-button-group>
   <n-drawer
     v-model:show="active"
-    :width="502"
+    :default-width="502"
     :placement="placement"
-    :adjustable="true"
+    resizable
   >
     <n-drawer-content title="Stoner">
       Stoner is a 1965 novel by the American writer John Williams.
@@ -35,15 +37,15 @@ import type { DrawerPlacement } from 'naive-ui'
 
 export default defineComponent({
   setup () {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
+    const activeRef = ref(false)
+    const placementRef = ref<DrawerPlacement>('right')
     const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
+      activeRef.value = true
+      placementRef.value = place
     }
     return {
-      active,
-      placement,
+      active: activeRef,
+      placement: placementRef,
       activate
     }
   }
