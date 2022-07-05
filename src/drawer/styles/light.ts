@@ -18,7 +18,7 @@ export const self = (vars: ThemeCommonVars) => {
     closeIconColorHover,
     closeIconColorPressed,
     borderRadius,
-    drawerBaseLineColor
+    primaryColorHover
   } = vars
   return {
     bodyPadding: '16px 24px',
@@ -41,7 +41,7 @@ export const self = (vars: ThemeCommonVars) => {
     closeColorHover,
     closeColorPressed,
     closeBorderRadius: borderRadius,
-    baseLineColor: drawerBaseLineColor
+    resizableTriggerColorHover: primaryColorHover
   }
 }
 

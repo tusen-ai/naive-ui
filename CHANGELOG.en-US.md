@@ -33,7 +33,12 @@
 - `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
 - `n-tree` adds `check-on-click` prop to control `checked` status, closes [#2968](https://github.com/TuSimple/naive-ui/issues/2968).
 - `n-tree` adds `accrodion` prop, closes [#3129](https://github.com/TuSimple/naive-ui/issues/3129).
-- `n-drawer` adds `adjustable` prop.
+- `n-drawer` adds `resizable` prop.
+- `n-drawer` adds `default-width` prop.
+- `n-drawer` adds `default-height` prop.
+- `n-drawer` adds `on-update:width` prop.
+- `n-drawer` adds `on-update:height` prop.
+- Update ukUA locale.
 
 ## 2.30.8
 

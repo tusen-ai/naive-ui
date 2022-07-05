@@ -30,9 +30,6 @@ import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 // --n-close-size
 // --n-close-icon-size
 export default c([
-  cB('no-select', `
-   user-select: none; 
-  `),
   cB('drawer', `
     word-break: break-word;
     line-height: var(--n-line-height);
@@ -51,53 +48,23 @@ export default c([
     slideInFromLeftTransition(),
     slideInFromTopTransition(),
     slideInFromBottomTransition(),
+    cM('unselectable', `
+      user-select: none; 
+    `),
     cM('native-scrollbar', [
       cB('drawer-content-wrapper', `
         overflow: auto;
         height: 100%;
       `)
     ]),
-    cE('adjustable-line', `
+    cE('resize-trigger', `
       position: absolute;
-      background-color: transparent;
-      border-radius: 2px;
+      background-color: #0000;
+      transition: background-color .3s var(--n-bezier);
     `, [
-      fadeInTransition({
-        name: 'fade-in',
-        leaveDuration: '0.4s',
-        enterDuration: '0.4s'
-      }),
       cM('hover', `
-      background-color: var(--n-base-line-color);
-    `),
-      cM('top', `
-      width: 100%;
-      height: 6px;
-      bottom: 0;
-      left: 0;
-      cursor: ns-resize;
-    `),
-      cM('bottom', `
-      width: 100%;
-      height: 6px;
-      top: 0;
-      left: 0;
-      cursor: ns-resize;
-    `),
-      cM('left', `
-      width: 6px;
-      height: 100%;
-      top: 0;
-      right: 0;
-      cursor: ew-resize;
-    `),
-      cM('right', `
-      width: 6px;
-      height: 100%;
-      top: 0;
-      left: 0;
-      cursor: ew-resize;
-    `)
+        background-color: var(--n-resize-trigger-color-hover);
+      `)
     ]),
     cB('drawer-content-wrapper', `
       box-sizing: border-box;
@@ -153,22 +120,58 @@ export default c([
       top: 0;
       bottom: 0;
       right: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(-1.5px);
+        cursor: ew-resize;
+      `)
+    ]),
     cM('left-placement', `
       top: 0;
       bottom: 0;
       left: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 3px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        transform: translateX(1.5px);
+        cursor: ew-resize;
+      `)
+    ]),
     cM('top-placement', `
       top: 0;
       left: 0;
       right: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 100%;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        transform: translateY(1.5px);
+        cursor: ns-resize;
+      `)
+    ]),
     cM('bottom-placement', `
       left: 0;
       bottom: 0;
       right: 0;
-    `)
+    `, [
+      cE('resize-trigger', `
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        transform: translateY(-1.5px);
+        cursor: ns-resize;
+      `)
+    ])
   ]),
   c('body', [
     c('>', [

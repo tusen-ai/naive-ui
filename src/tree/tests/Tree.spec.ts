@@ -456,6 +456,7 @@ describe('n-tree', () => {
       props: {
         cascade: true,
         checkable: true,
+        checkOnClick: true,
         data: [
           {
             label: '1',

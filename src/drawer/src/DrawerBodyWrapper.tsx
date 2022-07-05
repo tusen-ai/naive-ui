@@ -12,7 +12,9 @@ import {
   vShow,
   mergeProps,
   CSSProperties,
-  DirectiveArguments
+  DirectiveArguments,
+  watch,
+  onBeforeUnmount
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -60,10 +62,7 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
-    adjustable: {
-      type: Boolean,
-      default: true
-    },
+    resizable: Boolean,
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
@@ -75,69 +74,90 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
 
-    let startPos = 0
-    let cacheCusor = ''
-    let hoverTimer: ReturnType<typeof setTimeout>
-    const isHover = ref(false)
-    const isMousedown = ref(false)
+    let startPosition = 0
+    let memoizedBodyStyleCursor = ''
+    let hoverTimerId: number | null = null
+    const isHoverOnResizeTriggerRef = ref(false)
+    const isDraggingRef = ref(false)
 
     const isVertical = computed<boolean>(() => {
       return props.placement === 'top' || props.placement === 'bottom'
     })
 
-    const removePx = (str: string): number => Number(str.replace('px', ''))
-
-    const mousedownHandler = (e: MouseEvent): void => {
-      isMousedown.value = true
-      startPos = isVertical.value ? e.clientY : e.clientX
-      cacheCusor = document.body.style.cursor
+    const handleMousedownResizeTrigger = (e: MouseEvent): void => {
+      isDraggingRef.value = true
+      startPosition = isVertical.value ? e.clientY : e.clientX
+      memoizedBodyStyleCursor = document.body.style.cursor
       document.body.style.cursor = isVertical.value ? 'ns-resize' : 'ew-resize'
-      document.body.addEventListener('mousemove', mousemoveHandler)
-      document.body.addEventListener('mouseup', mouseupHandler)
+      document.body.addEventListener('mousemove', handleBodyMousemove)
+      document.body.addEventListener('mouseleave', handleBodyMouseleave)
+      document.body.addEventListener('mouseup', handleBodyMouseup)
     }
 
-    const mouseenterHandler = (e: MouseEvent): void => {
-      if (isMousedown.value) return
-      hoverTimer = setTimeout(() => {
-        isHover.value = true
-      }, 300)
-    }
-
-    const mouseleaveHandler = (e: MouseEvent): void => {
-      if (hoverTimer) {
-        clearTimeout(hoverTimer)
+    const handleMouseenterResizeTrigger = (): void => {
+      if (hoverTimerId !== null) window.clearTimeout(hoverTimerId)
+      if (isDraggingRef.value) {
+        isHoverOnResizeTriggerRef.value = true
+      } else {
+        hoverTimerId = window.setTimeout(() => {
+          isHoverOnResizeTriggerRef.value = true
+        }, 300)
       }
-      isHover.value = false
     }
 
-    const mousemoveHandler = (e: MouseEvent): void => {
-      if (isMousedown.value) {
+    const handleMouseleaveResizeTrigger = (): void => {
+      if (hoverTimerId) {
+        window.clearTimeout(hoverTimerId)
+      }
+      isHoverOnResizeTriggerRef.value = false
+    }
+
+    const { doUpdateHeight, doUpdateWidth } = NDrawer
+
+    const handleBodyMousemove = (e: MouseEvent): void => {
+      if (isDraggingRef.value) {
         if (isVertical.value) {
-          let height = removePx(NDrawer.height.value)
-          const increment = startPos - e.clientY
+          let height = bodyRef.value?.offsetHeight || 0
+          const increment = startPosition - e.clientY
           height += props.placement === 'bottom' ? increment : -increment
-          NDrawer.height.value = `${height}px`
-          startPos = e.clientY
+          doUpdateHeight(height)
+          startPosition = e.clientY
         } else {
-          let width = removePx(NDrawer.width.value)
-          const increment = startPos - e.clientX
+          let width = bodyRef.value?.offsetWidth || 0
+          const increment = startPosition - e.clientX
           width += props.placement === 'right' ? increment : -increment
-          NDrawer.width.value = `${width}px`
-          startPos = e.clientX
+          doUpdateWidth(width)
+          startPosition = e.clientX
         }
       }
     }
 
-    const mouseupHandler = (): void => {
-      startPos = 0
-      isMousedown.value = false
-      document.body.style.cursor = cacheCusor
-      document.body.removeEventListener('mousemove', mousemoveHandler)
-      document.body.removeEventListener('mouseup', mouseupHandler)
+    const handleBodyMouseup = (): void => {
+      if (isDraggingRef.value) {
+        startPosition = 0
+        isDraggingRef.value = false
+        document.body.style.cursor = memoizedBodyStyleCursor
+        document.body.removeEventListener('mousemove', handleBodyMousemove)
+        document.body.removeEventListener('mouseup', handleBodyMouseup)
+        document.body.removeEventListener('mouseleave', handleBodyMouseleave)
+      }
     }
+
+    const handleBodyMouseleave = handleBodyMouseup
 
     watchEffect(() => {
       if (props.show) displayedRef.value = true
+    })
+    watch(
+      () => props.show,
+      (value) => {
+        if (!value) {
+          handleBodyMouseup()
+        }
+      }
+    )
+    onBeforeUnmount(() => {
+      handleBodyMouseup()
     })
     const bodyDirectivesRef = computed<DirectiveArguments>(() => {
       const { show } = props
@@ -176,11 +196,11 @@ export default defineComponent({
       }),
       handleAfterLeave,
       bodyDirectives: bodyDirectivesRef,
-      mousedownHandler,
-      mouseenterHandler,
-      mouseleaveHandler,
-      isMousedown,
-      isHover
+      handleMousedownResizeTrigger,
+      handleMouseenterResizeTrigger,
+      handleMouseleaveResizeTrigger,
+      isDragging: isDraggingRef,
+      isHoverOnResizeTrigger: isHoverOnResizeTriggerRef
     }
   },
   render () {
@@ -217,28 +237,33 @@ export default defineComponent({
                                 `${mergedClsPrefix}-drawer`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                                 /**
-                                 * When the mouse is pressed down to adjust the width/height,
-                                 * it is forbidden to select text to avoid bugs
+                                 * When the mouse is pressed to resize the drawer,
+                                 * disable text selection
                                  */
-                                this.isMousedown &&
-                                  `${mergedClsPrefix}-no-select`,
+                                this.isDragging &&
+                                  `${mergedClsPrefix}-drawer--unselectable`,
                                 this.nativeScrollbar &&
                                   `${mergedClsPrefix}-drawer--native-scrollbar`
                               ]
                             }),
                             [
-                              this.adjustable ? (
+                              this.resizable ? (
                                 <div
                                   class={[
-                                    `${mergedClsPrefix}-drawer__adjustable-line`,
-                                    `${mergedClsPrefix}-drawer__adjustable-line--${this.placement}`,
-                                    this.isMousedown || this.isHover
-                                      ? `${mergedClsPrefix}-drawer__adjustable-line--hover`
-                                      : ''
+                                    `${mergedClsPrefix}-drawer__resize-trigger`,
+                                    (this.isDragging ||
+                                      this.isHoverOnResizeTrigger) &&
+                                      `${mergedClsPrefix}-drawer__resize-trigger--hover`
                                   ]}
-                                  onMouseenter={this.mouseenterHandler}
-                                  onMouseleave={this.mouseleaveHandler}
-                                  onMousedown={this.mousedownHandler}
+                                  onMouseenter={
+                                    this.handleMouseenterResizeTrigger
+                                  }
+                                  onMouseleave={
+                                    this.handleMouseleaveResizeTrigger
+                                  }
+                                  onMousedown={
+                                    this.handleMousedownResizeTrigger
+                                  }
                                 ></div>
                               ) : null,
                               this.nativeScrollbar ? (
