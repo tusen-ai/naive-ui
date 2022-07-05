@@ -189,6 +189,7 @@ const derived: ThemeCommonVars = {
   buttonColor2: 'rgba(255, 255, 255, .08)',
   buttonColor2Hover: 'rgba(255, 255, 255, .12)',
   buttonColor2Pressed: 'rgba(255, 255, 255, .08)',
+  drawerBaseLineColor: 'rgba(255, 255, 255, 0.4)',
 
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .24), 0 3px 6px 0 rgba(0, 0, 0, .18), 0 5px 12px 4px rgba(0, 0, 0, .12)',
