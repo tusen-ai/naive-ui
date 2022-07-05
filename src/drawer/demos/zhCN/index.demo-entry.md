@@ -53,9 +53,9 @@ resizable.vue
 | on-after-leave | `() => void` | `undefined` | Drawer 关闭后的回调 | 2.28.0 |
 | on-esc | `() => void` | `undefined` | 焦点在 Drawer 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
+| on-update:height | `(height: number) => void` | `undefined` | 抽屉高度改变时执行的回调函数 | NEXT_VERSION |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
 | on-update:width | `(width: number) => void` | `undefined` | 抽屉宽度改变时执行的回调函数 | NEXT_VERSION |
-| on-update:height | `(height: number) => void` | `undefined` | 抽屉高度改变时执行的回调函数 | NEXT_VERSION |
 
 ### DrawerContent Props
 

@@ -95,7 +95,10 @@ export default defineComponent({
     }
 
     const handleMouseenterResizeTrigger = (): void => {
-      if (hoverTimerId !== null) window.clearTimeout(hoverTimerId)
+      if (hoverTimerId !== null) {
+        window.clearTimeout(hoverTimerId)
+        hoverTimerId = null
+      }
       if (isDraggingRef.value) {
         isHoverOnResizeTriggerRef.value = true
       } else {
@@ -106,8 +109,9 @@ export default defineComponent({
     }
 
     const handleMouseleaveResizeTrigger = (): void => {
-      if (hoverTimerId) {
+      if (hoverTimerId !== null) {
         window.clearTimeout(hoverTimerId)
+        hoverTimerId = null
       }
       isHoverOnResizeTriggerRef.value = false
     }
