@@ -1,7 +1,7 @@
-import { h, defineComponent, inject, ref, onBeforeUpdate } from 'vue'
+import { h, defineComponent, ref, onBeforeUpdate } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
-import { carouselMethodsInjectionKey } from './interface'
+import { useCarouselContext } from './CarouselContext'
 import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
@@ -33,8 +33,7 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const dotElsRef = ref<HTMLElement[]>([])
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const NCarousel = inject(carouselMethodsInjectionKey, null)!
+    const NCarousel = useCarouselContext()
     function handleKeydown (e: KeyboardEvent, current: number): void {
       switch (e.key) {
         case 'Enter':
@@ -57,26 +56,6 @@ export default defineComponent({
       }
     }
     function handleKeyboard (e: KeyboardEvent): void {
-      const { code: keycode } = e
-      const vertical = NCarousel.isVertical()
-      const isVerticalNext = keycode === 'PageUp' || keycode === 'ArrowUp'
-      const isVerticalPrev = keycode === 'PageDown' || keycode === 'ArrowDown'
-      const isHorizontalNext = keycode === 'PageUp' || keycode === 'ArrowRight'
-      const isHorizontalPrev = keycode === 'PageDown' || keycode === 'ArrowLeft'
-      if (
-        vertical &&
-        ((isVerticalNext && NCarousel.isNextDisabled()) ||
-          (isVerticalPrev && NCarousel.isPrevDisabled()))
-      ) {
-        return
-      }
-      if (
-        !vertical &&
-        ((isHorizontalNext && NCarousel.isNextDisabled()) ||
-          (isHorizontalPrev && NCarousel.isPrevDisabled()))
-      ) {
-        return
-      }
       if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
         return
       }
@@ -84,21 +63,26 @@ export default defineComponent({
       if (nodeName === 'input' || nodeName === 'textarea') {
         return
       }
-      if (vertical ? isVerticalNext : isHorizontalNext) {
+      const { code: keycode } = e
+      const isVerticalNext = keycode === 'PageUp' || keycode === 'ArrowUp'
+      const isVerticalPrev = keycode === 'PageDown' || keycode === 'ArrowDown'
+      const isHorizontalNext = keycode === 'PageUp' || keycode === 'ArrowRight'
+      const isHorizontalPrev = keycode === 'PageDown' || keycode === 'ArrowLeft'
+      const vertical = NCarousel.isVertical()
+      const wantToNext = vertical ? isVerticalNext : isHorizontalNext
+      const wantToPrev = vertical ? isVerticalPrev : isHorizontalPrev
+      if (wantToNext && !NCarousel.isNextDisabled()) {
         e.preventDefault()
         NCarousel.next()
         focusDot(NCarousel.getCurrentIndex())
-      } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
+      } else if (wantToPrev && !NCarousel.isPrevDisabled()) {
         e.preventDefault()
         NCarousel.prev()
         focusDot(NCarousel.getCurrentIndex())
       }
     }
-    function focusDot (index: number = props.currentIndex): void {
-      const { value: dotEls } = dotElsRef
-      if (index >= 0 && index < dotEls.length) {
-        dotEls[index].focus()
-      }
+    function focusDot (index: number): void {
+      dotElsRef.value[index]?.focus()
     }
     onBeforeUpdate(() => (dotElsRef.value.length = 0))
     return {
