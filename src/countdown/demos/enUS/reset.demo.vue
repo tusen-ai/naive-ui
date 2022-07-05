@@ -12,6 +12,7 @@ I want to borrow a time converter from Professor McGonagall.
     <n-button size="tiny" @click="handleReset">
       Reset
     </n-button>
+    <n-switch v-model:value="active" />
   </n-space>
 </template>
 

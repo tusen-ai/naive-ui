@@ -1,7 +1,7 @@
 <markdown>
 # 重置
 
-好想从麦格教授那里借一个时间转换器
+好想从麦格教授那里借一个时间转换器。
 </markdown>
 
 <template>
@@ -12,6 +12,7 @@
     <n-button size="tiny" @click="handleReset">
       重置
     </n-button>
+    <n-switch v-model:value="active" />
   </n-space>
 </template>
 

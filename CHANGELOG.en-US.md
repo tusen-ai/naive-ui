@@ -34,7 +34,7 @@
 - `n-tree` adds `check-on-click` prop to control `checked` status, closes [#2968](https://github.com/TuSimple/naive-ui/issues/2968).
 - `n-tree` adds `accrodion` prop, closes [#3129](https://github.com/TuSimple/naive-ui/issues/3129).
 - `n-drawer` adds `adjustable` prop.
-- `n-countdown` adds `reset` methods, closes [#3228](https://github.com/TuSimple/naive-ui/issues/3228).
+- `n-countdown` adds `reset` method, closes [#3228](https://github.com/TuSimple/naive-ui/issues/3228).
 
 ## 2.30.8
 
