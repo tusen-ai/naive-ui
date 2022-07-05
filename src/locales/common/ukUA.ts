@@ -37,24 +37,22 @@ const ukUA: NLocale = {
     selectDate: 'Обрати дату',
     datePlaceholder: 'Обрати дату',
     datetimePlaceholder: 'Обрати дату і час',
-    monthPlaceholder: 'Виберіть місяць',
-    // FIXME: translation needed
-    yearPlaceholder: 'Select Year',
-    quarterPlaceholder: 'Select Quarter',
+    monthPlaceholder: 'Оберіть місяць',
+    yearPlaceholder: 'Оберіть рік',
+    quarterPlaceholder: 'Оберіть квартал',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
     endDatetimePlaceholder: 'Дата і час завершення',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Перший місяць',
+    endMonthPlaceholder: 'Останній місяць',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Сьогодні'
   },
   DataTable: {
     checkTableAll: 'Обрати все в таблиці',
-    uncheckTableAll: 'Скасувати вибріу усього в таблиці',
+    uncheckTableAll: 'Скасувати вибір усього в таблиці',
     confirm: 'Підтвердити',
     clear: 'Стерти'
   },
@@ -103,17 +101,15 @@ const ukUA: NLocale = {
     export: 'Експорт',
     restore: 'Скинути'
   },
-  // TODO: translation
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
-    tipZoomOut: 'Zoom out',
-    tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipPrevious: 'Попереднє зображення (←)',
+    tipNext: 'Наступне зображення (→)',
+    tipCounterclockwise: 'Проти годинникової стрілки',
+    tipClockwise: 'За годинниковою стрілкою',
+    tipZoomOut: 'Віддалити',
+    tipZoomIn: 'Наблизити',
+    tipClose: 'Закрити (Esc)',
+    tipOriginalSize: 'Масштабувати до оригінального розміру'
   }
 }
 
