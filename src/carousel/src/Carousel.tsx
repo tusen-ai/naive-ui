@@ -236,8 +236,11 @@ export default defineComponent({
     const slideStylesRef = computed(() => {
       const { value: slidesEls } = slidesElsRef
       if (!slidesEls.length) return []
+      const useComputedSize = !(
+        autoSlideSizeRef.value || realSlidesPerViewRef.value === 1
+      )
       const getSlideSize = (index: number): Partial<Size> | undefined => {
-        if (!autoSlideSizeRef.value) {
+        if (useComputedSize) {
           const { value: axis } = sizeAxisRef
           return {
             [axis]: `${slideSizesRef.value[index][axis]}px`
