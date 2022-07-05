@@ -317,9 +317,11 @@ export default cB('carousel', `
       position: absolute;
       opacity: 0;
       transition-property: opacity;
+      pointer-events: none;
     `, [
       cM('current', `
         opacity: 1;
+        pointer-events: auto;
       `)
     ])
   ]),
