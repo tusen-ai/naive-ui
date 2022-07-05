@@ -45,7 +45,7 @@ adjustable.vue
 | on-esc | `() => void` | `undefined` | Callback fired when the escape key is pressed and focus is within drawer. | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | Callback triggered on mask clicked. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback triggered on drawer display status would change. |  |
-| adjustable | `boolean` | `false` | Whether to adjust the width of drawer. |  |
+| adjustable | `boolean` | `false` | Whether to adjust the width/height of drawer. |  |
 
 ### DrawerContent Props
 
