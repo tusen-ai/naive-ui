@@ -5,8 +5,9 @@ export * from './event'
 export { default as supportsPassive } from './supportsPassive'
 
 export function calculateSize (element: HTMLElement, innerOnly?: boolean): Size {
-  let width = element.clientWidth
-  let height = element.clientHeight
+  const rect = element.getBoundingClientRect()
+  let width = rect.width
+  let height = rect.height
   if (innerOnly) {
     const style = getComputedStyle(element)
     width =

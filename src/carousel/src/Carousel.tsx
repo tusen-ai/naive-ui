@@ -379,7 +379,11 @@ export default defineComponent({
 
     // Slide to
     function to (index: number): void {
-      const realIndex = getRealIndex(index, duplicatedableRef.value)
+      const realIndex = clampValue(
+        getRealIndex(index, duplicatedableRef.value),
+        0,
+        totalViewRef.value
+      )
       if (index !== displayIndexRef.value || realIndex !== realIndexRef.value) {
         toRealIndex(realIndex)
       }
@@ -728,8 +732,8 @@ export default defineComponent({
       (index) => index !== undefined && carouselContext.to(index)
     )
     watch(
-      duplicatedableRef,
-      () => void nextTick(() => carouselContext.to(displayIndexRef.value))
+      [duplicatedableRef, displaySlidesPerViewRef],
+      () => void nextTick(() => toRealIndex(realIndexRef.value))
     )
     watch(slideTranlatesRef, () => sequenceLayoutRef.value && fixTranslate(), {
       deep: true
