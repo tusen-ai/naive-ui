@@ -86,7 +86,7 @@ function mapSlot (
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
-        <div class={[`${clsPrefix}-radio-group__splitor`, splitorClass]}></div>,
+        <div class={[`${clsPrefix}-radio-group__splitor`, splitorClass]} />,
         wrappedInstance
       )
     }
