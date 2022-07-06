@@ -35,7 +35,7 @@ slots.vue
 | display-directive | `'if' \| 'show'` | `'if'` | The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content. |  |
 | duration | `number` | `100` | Popover vanish delay when trigger is `hover`. |  |
 | flip | `boolean` | `true` | Whether to flip the popover when there is no space for current placement. |  |
-| footer-style | `Object \| string` | `undefined` | Footer style of the popover. | NEXT_VERSION |
+| footer-style | `Object \| string` | `undefined` | Footer style of the popover. | 2.31.0 |
 | header-style | `Object \| string` | `undefined` | Header style of the popover. | 2.28.3 |
 | keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"`. | 2.25.0 |
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
@@ -59,7 +59,7 @@ slots.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | trigger | `()` | The element or component that triggers popover. |  |
-| footer | `()` | The footer content of the popover. | NEXT_VERSION |
+| footer | `()` | The footer content of the popover. | 2.31.0 |
 | header | `()` | The header content of the popover. | 2.28.3 |
 | default | `()` | The content inside popover. |  |
 

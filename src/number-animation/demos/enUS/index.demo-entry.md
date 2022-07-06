@@ -25,7 +25,7 @@ finish.vue
 | precision | `number` | `0` | Decimal precision of the displayed value. | 2.23.2 |
 | show-separator | `boolean` | `false` | Whether to show separator. | 2.23.2 |
 | to | `number` | `undefined` | Target value. | 2.23.2 |
-| on-finish | `() => void` | `undefined` | The callback on animation is finished. | NEXT_VERSION |
+| on-finish | `() => void` | `undefined` | The callback on animation is finished. | 2.31.0 |
 
 ### NumberAnimation Methods
 
