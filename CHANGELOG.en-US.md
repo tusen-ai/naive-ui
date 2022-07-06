@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- `n-date-picker`'s `clearable` will control visibility of clear button is no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-date-picker`'s `clearable` will control visibility of clear button if no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
 - `n-button`'s `native-focus-behavior` prop default value is changed to 'not on Safari'.
 
 ### Fixes
