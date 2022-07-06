@@ -86,7 +86,7 @@ export const buttonProps = {
   },
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   nativeFocusBehavior: {
-    Boolean,
+    type: Boolean,
     default: !isSafari
   }
 } as const
