@@ -153,6 +153,17 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       props.onClickoutside(e)
     }
+    const childNodeRef = ref<VNode | null>(null)
+    watch(childNodeRef, (node) => {
+      if (node) {
+        void nextTick(() => {
+          const el = node.el as HTMLElement | null
+          if (el && bodyRef.value !== el) {
+            bodyRef.value = el
+          }
+        })
+      }
+    })
     provide(modalBodyInjectionKey, bodyRef)
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, null)
@@ -164,6 +175,7 @@ export default defineComponent({
       bodyRef,
       scrollbarRef,
       displayed: displayedRef,
+      childNodeRef,
       handleClickOutside,
       handlePositiveClick,
       handleNegativeClick,
@@ -267,7 +279,7 @@ export default defineComponent({
                                     {$slots}
                                   </NCard>
                                     ) : (
-                                      childNode
+                                      (this.childNodeRef = childNode)
                                     )) as any,
                                 [
                                   [vShow, this.show],

@@ -10,7 +10,8 @@ import {
   CSSProperties,
   isReactive,
   watchEffect,
-  VNodeChild
+  VNodeChild,
+  HTMLAttributes
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -22,6 +23,7 @@ import {
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
+import type { FormValidationStatus } from '../../form/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { NInternalSelection } from '../../_internal'
 import type { InternalSelectionInst } from '../../_internal'
@@ -114,6 +116,8 @@ const cascaderProps = {
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  menuProps: Object as PropType<HTMLAttributes>,
+  filterMenuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -137,6 +141,7 @@ const cascaderProps = {
   renderLabel: Function as PropType<
   (option: CascaderOption, checked: boolean) => VNodeChild
   >,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -944,14 +949,19 @@ export default defineComponent({
                 {{
                   default: () => {
                     this.onRender?.()
+                    const { menuProps } = this
                     return (
                       <CascaderMenu
+                        {...menuProps}
                         ref="cascaderMenuInstRef"
-                        class={this.themeClass}
+                        class={[this.themeClass, menuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && !this.showSelectMenu}
                         menuModel={this.menuModel}
-                        style={this.cssVars as CSSProperties}
+                        style={[
+                          this.cssVars as CSSProperties,
+                          menuProps?.style
+                        ]}
                         onFocus={this.handleMenuFocus}
                         onBlur={this.handleMenuBlur}
                         onKeyup={this.handleMenuKeyUp}
@@ -980,10 +990,12 @@ export default defineComponent({
                 {{
                   default: () => {
                     this.onRender?.()
+                    const { filterMenuProps } = this
                     return (
                       <CascaderSelectMenu
+                        {...filterMenuProps}
                         ref="selectMenuInstRef"
-                        class={this.themeClass}
+                        class={[this.themeClass, filterMenuProps?.class]}
                         value={this.mergedValue}
                         show={this.mergedShow && this.showSelectMenu}
                         pattern={this.pattern}
@@ -992,7 +1004,10 @@ export default defineComponent({
                         filter={this.filter}
                         labelField={this.labelField}
                         separator={this.separator}
-                        style={this.cssVars as CSSProperties}
+                        style={[
+                          this.cssVars as CSSProperties,
+                          filterMenuProps?.style
+                        ]}
                       />
                     )
                   }

@@ -22,8 +22,7 @@ shortcuts.vue
 events.vue
 format.vue
 footerslot.vue
-update-on-close.vue
-focus.vue
+status.vue
 ```
 
 ## API
@@ -42,6 +41,7 @@ focus.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
@@ -69,6 +69,7 @@ focus.vue
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |  |
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |  |
+| time-picker-props | `TimePickerProps` | `undefined` | 面板中时间选择器的属性 | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
@@ -101,6 +102,7 @@ focus.vue
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |  |
 | separator | `string` | `'to'` | start 选框与 end 选框之间的分隔符 |  |
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |  |
+| time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | 面板中时间选择器的属性 | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |

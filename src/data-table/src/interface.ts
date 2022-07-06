@@ -29,6 +29,10 @@ export type CreateRowProps<T = InternalRowData> = (
   row: T,
   index: number
 ) => HTMLAttributes
+export type CreateCellProps<T = InternalRowData> = (
+  row: T,
+  index: number
+) => HTMLAttributes
 
 export type CompareFn<T = InternalRowData> = (row1: T, row2: T) => number
 export type Sorter<T = InternalRowData> = CompareFn<T> | SorterMultiple<T>
@@ -54,12 +58,13 @@ export type SortOrder = 'ascend' | 'descend' | false
 
 export type Ellipsis = boolean | EllipsisProps
 
-export interface CommonColumnInfo {
+export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
   width?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
+  cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
 }
 
 export type TableColumnTitle =
@@ -159,7 +164,6 @@ export type DataTableSelectionOptions = Array<
 export interface DataTableInjection {
   slots: Slots
   indentRef: Ref<number>
-  hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>
   componentId: string
   checkOptionsRef: Ref<DataTableSelectionOptions | undefined>
@@ -208,6 +212,8 @@ export interface DataTableInjection {
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
   stripedRef: Ref<boolean>
+  onLoadRef: Ref<DataTableOnLoad | undefined>
+  loadingKeySetRef: Ref<Set<RowKey>>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -316,3 +322,5 @@ export interface SummaryCell {
 export interface SummaryRowData {
   [key: string]: SummaryCell
 }
+
+export type DataTableOnLoad = (node: RowData) => Promise<void>

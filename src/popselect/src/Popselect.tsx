@@ -10,7 +10,7 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
-import { popselectInjectionKey } from './interface'
+import { popselectInjectionKey, PopselectInst } from './interface'
 
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
@@ -52,7 +52,12 @@ export default defineComponent({
       syncPosition,
       setShow
     })
+    const exposedMethods: PopselectInst = {
+      syncPosition,
+      setShow
+    }
     return {
+      ...exposedMethods,
       popoverInstRef,
       mergedTheme: themeRef
     }

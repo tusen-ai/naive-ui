@@ -14,7 +14,6 @@ declare module 'vue' {
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
     NButton: typeof import('naive-ui')['NButton']
     NButtonGroup: typeof import('naive-ui')['NButtonGroup']
-    NxButton: typeof import('naive-ui')['NxButton']
     NCalendar: typeof import('naive-ui')['NCalendar']
     NColorPicker: typeof import('naive-ui')['NColorPicker']
     NCard: typeof import('naive-ui')['NCard']

@@ -1,5 +1,6 @@
 import { changeColor } from 'seemly'
 import { tooltipLight } from '../../tooltip/styles'
+import { dropdownLight } from '../../dropdown/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
@@ -74,7 +75,8 @@ const menuLight = createTheme({
   name: 'Menu',
   common: commonLight,
   peers: {
-    Tooltip: tooltipLight
+    Tooltip: tooltipLight,
+    Dropdown: dropdownLight
   },
   self
 })

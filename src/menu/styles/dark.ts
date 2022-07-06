@@ -1,5 +1,6 @@
 import { changeColor } from 'seemly'
 import { tooltipDark } from '../../tooltip/styles'
+import { dropdownDark } from '../../dropdown/styles'
 import { commonDark } from '../../_styles/common'
 import { self } from './light'
 import type { MenuTheme } from './light'
@@ -8,7 +9,8 @@ const menuDark: MenuTheme = {
   name: 'Menu',
   common: commonDark,
   peers: {
-    Tooltip: tooltipDark
+    Tooltip: tooltipDark,
+    Dropdown: dropdownDark
   },
   self (vars) {
     const { primaryColor, primaryColorSuppl } = vars

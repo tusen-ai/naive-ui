@@ -1153,8 +1153,17 @@ export default defineComponent({
                         onClick={this.handlePasswordToggleClick}
                       >
                         {{
-                          default: () =>
-                            this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
+                          default: () => {
+                            return this.passwordVisible
+                              ? resolveSlot(
+                                $slots['password-visible-icon'],
+                                () => [<EyeIcon />]
+                              )
+                              : resolveSlot(
+                                $slots['password-invisible-icon'],
+                                () => [<EyeOffIcon />]
+                              )
+                          }
                         }}
                       </NBaseIcon>
                     ) : null

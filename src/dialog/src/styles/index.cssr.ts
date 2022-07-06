@@ -79,7 +79,7 @@ export default c([
       position: relative;
       word-break: break-word;
     `, [
-      c('&:last-child', 'margin-bottom: 0;')
+      cM('last', 'margin-bottom: 0;')
     ]),
     cE('action', `
       display: flex;

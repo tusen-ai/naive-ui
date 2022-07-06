@@ -20,6 +20,8 @@
 - 钉钉二群 35886835
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
+钉钉群加入方法：在**搜索框**中搜索群号，点击下拉框中更多分组内的**网络查找公开群组**
+
 ## 特性
 
 ### 比较完整

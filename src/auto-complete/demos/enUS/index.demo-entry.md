@@ -12,6 +12,7 @@ custom-input.vue
 after-select.vue
 show-options-by-value.vue
 customized-rendering.vue
+status.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ customized-rendering.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Autocomplete's placement. | 2.25.0 |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. | 2.24.0 |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |
@@ -65,7 +67,7 @@ customized-rendering.vue
 | prefix | `()` | Input's prefix content. |
 | suffix | `()` | Input's suffix content. |
 
-### Input Methods
+### AutoComplete Methods
 
 | Name  | Type         | Description              | Version |
 | ----- | ------------ | ------------------------ | ------- |

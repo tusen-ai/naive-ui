@@ -30,6 +30,7 @@ import {
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import { RenderTag } from '../../_internal/selection/src/interface'
+import type { FormValidationStatus } from '../../form/src/interface'
 import {
   useTheme,
   useConfig,
@@ -185,6 +186,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
+  status: String as PropType<FormValidationStatus>,
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>

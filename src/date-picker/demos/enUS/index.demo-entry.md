@@ -24,6 +24,7 @@ format.vue
 footerslot.vue
 update-on-close.vue
 focus.vue
+status.vue
 ```
 
 ## API
@@ -41,6 +42,7 @@ focus.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
@@ -68,6 +70,7 @@ focus.vue
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
 | placeholder | `string` | `'Select Date and Time'` | Placeholder. |  |
+| time-picker-props | `TimePickerProps` | `undefined` | Time picker props in the panel. | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | MEXT_VERSION |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
@@ -100,6 +103,7 @@ focus.vue
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
+| time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | Time picker props in the panel. | NEXT_VERSION |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
