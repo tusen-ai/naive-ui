@@ -1,8 +1,8 @@
 import { h, defineComponent, ref, onBeforeUpdate } from 'vue'
+import type { PropType } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
-import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselDotsProps = {
@@ -38,6 +38,7 @@ export default defineComponent({
       switch (e.key) {
         case 'Enter':
         case ' ':
+          e.preventDefault()
           NCarousel.to(current)
           return
       }
@@ -71,12 +72,14 @@ export default defineComponent({
       const vertical = NCarousel.isVertical()
       const wantToNext = vertical ? isVerticalNext : isHorizontalNext
       const wantToPrev = vertical ? isVerticalPrev : isHorizontalPrev
+      if (!wantToNext && !wantToPrev) {
+        return
+      }
+      e.preventDefault()
       if (wantToNext && !NCarousel.isNextDisabled()) {
-        e.preventDefault()
         NCarousel.next()
         focusDot(NCarousel.getCurrentIndex())
       } else if (wantToPrev && !NCarousel.isPrevDisabled()) {
-        e.preventDefault()
         NCarousel.prev()
         focusDot(NCarousel.getCurrentIndex())
       }
