@@ -49,6 +49,7 @@ export const NotificationContainer = defineComponent({
           <NScrollbar
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+            contentStyle={{ overflow: 'hidden' }}
           >
             {$slots}
           </NScrollbar>

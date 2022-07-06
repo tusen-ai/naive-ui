@@ -9,10 +9,10 @@ import { NBaseIcon } from '../../_internal'
 import { ExtractPublicPropTypes, throwError } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig } from '../../_mixins'
 
-const collapseItemProps = {
+export const collapseItemProps = {
   title: String,
   name: [String, Number] as PropType<string | number>,
   displayDirective: String as PropType<'if' | 'show'>

@@ -1,2 +1,2 @@
-export { default as NStatistic } from './src/Statistic'
+export { default as NStatistic, statisticProps } from './src/Statistic'
 export type { StatisticProps } from './src/Statistic'

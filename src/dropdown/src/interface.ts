@@ -1,5 +1,5 @@
 import { TreeNode } from 'treemate'
-import { VNode, VNodeChild } from 'vue'
+import { HTMLAttributes, VNode, VNodeChild } from 'vue'
 import type {
   MenuOption,
   MenuGroupOption,
@@ -73,3 +73,7 @@ export type RenderOptionImpl = (info: {
 }) => VNodeChild
 
 export type NodeProps = MenuNodeProps
+export type DropdownMenuProps = (
+  option: DropdownOption | undefined,
+  options: Array<DropdownOption | DropdownGroupOption>
+) => HTMLAttributes & Record<string, string | number | undefined>

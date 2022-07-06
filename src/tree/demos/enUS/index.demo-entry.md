@@ -29,6 +29,7 @@ checkbox-placement.vue
 
 | Name | Type | default | Description | Version |
 | --- | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | Whether to use accrodion expand mode. | 2.31.0 |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
@@ -40,6 +41,7 @@ checkbox-placement.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
+| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `false` | Allow node clicking to trigger check when `checkable` is `true`. | 2.31.0 |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all options. |  |

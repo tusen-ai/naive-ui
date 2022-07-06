@@ -7,7 +7,7 @@ import {
   watchEffect
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warnOnce } from '../../_utils'
@@ -16,7 +16,7 @@ import style from './styles/index.cssr'
 import { collapseTransitionLight } from '../styles'
 import { NFadeInExpandTransition } from '../../_internal'
 
-const collapseProps = {
+export const collapseTransitionProps = {
   ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
   show: {
     type: Boolean,
@@ -34,12 +34,12 @@ const collapseProps = {
 } as const
 
 export type CollapseTransitionProps = ExtractPublicPropTypes<
-  typeof collapseProps
+  typeof collapseTransitionProps
 >
 
 export default defineComponent({
   name: 'CollapseTransition',
-  props: collapseProps,
+  props: collapseTransitionProps,
   inheritAttrs: false,
   setup (props) {
     if (__DEV__) {

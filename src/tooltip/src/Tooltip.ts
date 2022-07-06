@@ -11,7 +11,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 export type TooltipInst = PopoverInst
 
-const tooltipProps = {
+export const tooltipProps = {
   ...popoverBaseProps,
   ...(useTheme.props as ThemeProps<TooltipTheme>)
 }

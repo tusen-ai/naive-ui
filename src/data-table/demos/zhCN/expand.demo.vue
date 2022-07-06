@@ -1,5 +1,8 @@
 <markdown>
 # 可展开
+
+注意：展开行不计入 `render` 的 `index` 内
+
 </markdown>
 
 <template>
@@ -38,6 +41,13 @@ const createColumns = ({
       expandable: (rowData) => rowData.name !== 'Jim Green',
       renderExpand: (rowData) => {
         return `${rowData.name} is a good guy.`
+      }
+    },
+    {
+      title: '#',
+      key: 'key',
+      render: (_, index) => {
+        return `${index + 1}`
       }
     },
     {

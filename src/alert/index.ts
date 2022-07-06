@@ -1,2 +1,2 @@
-export { default as NAlert } from './src/Alert'
+export { default as NAlert, alertProps } from './src/Alert'
 export type { AlertProps } from './src/Alert'

@@ -25,7 +25,7 @@ Tree accept `pattern` and `filter` to do searching.
 </template>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { TreeOption } from 'naive-ui'
 
 const data: TreeOption[] = [
@@ -45,15 +45,14 @@ const data: TreeOption[] = [
         label: '0-1',
         key: '0-1',
         children: [
-          { label: '0-0-0', key: '0-0-0' },
-          { label: '0-0-1', key: '0-0-1' }
+          { label: '0-1-0', key: '0-1-0' },
+          { label: '0-1-1', key: '0-1-1' }
         ]
       }
     ]
   },
   {
-    // label: '1',
-    prefix: () => h('text', 'prefix'),
+    label: '1',
     key: '1',
     children: [
       {

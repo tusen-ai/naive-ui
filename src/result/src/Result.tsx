@@ -29,7 +29,7 @@ const iconMap = {
   error: <ErrorIcon />
 }
 
-const resultProps = {
+export const resultProps = {
   ...(useTheme.props as ThemeProps<ResultTheme>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,

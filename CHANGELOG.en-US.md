@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## 2.31.0
+
+### Breaking Changes
+
+- `n-date-picker`'s `clearable` will control visibility of clear button is no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-button`'s `native-focus-behavior` prop default value is changed to 'not on Safari'.
+
+### Fixes
+
+- Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).
+- Fix `n-data-table` column's `colSpan` doesn't work correctly in virtual scroll mode, closes [#3052](https://github.com/TuSimple/naive-ui/issues/3052).
+- Fix `n-data-table` doesn't show `summary` row in virtual scroll mode, closes [#3202](https://github.com/TuSimple/naive-ui/issues/3202).
+- Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
+- Fix `n-cascader`'s `filter` prop may not get correct `path`.
+- Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
+- Fix `n-notification`'s leave animation if content height overflows screen.
+- Fix `n-dropdown`'s disabled option has hover style.
+- Fix `n-dropdown`'s menu may shift when it's entering.
+- Fix `n-dropdown`'s transform origin may not be correct in Chrome.
+- Fix `n-radio-button` may not have correct cursor style, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
+- Fix `n-input`'s text color is too shallow with disabled state in Safari, closes [#3241](https://github.com/TuSimple/naive-ui/issues/3241).
+- Fix `n-input`'s separator may have line wrap.
+- Fix all components' `user-select` style prop's effect on Safari.
+- Fix `n-data-table` will prevent page scroll in virtual scroll mode.
+- Fix `n-button` doesn't have pressed effect on Firefox.
+
+### Feats
+
+- `n-avatar` adds `lazy` prop.
+- `n-avatar` adds `intersection-observer-options` prop.
+- `n-number-animation` adds `on-finish` prop.
+- `n-notification` supports RTL.
+- Export all components' props object.
+- `n-popover` adds `footer-style` prop.
+- `n-popover` adds `footer` slot, closes [#3188](https://github.com/TuSimple/naive-ui/issues/3188).
+- `n-dropdown` adds `menu-props` prop, closes [#2885](https://github.com/TuSimple/naive-ui/issues/2885).
+- `n-data-table` adds `multiple` prop, closes [#3056](https://github.com/TuSimple/naive-ui/issues/3056).
+- `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
+- `n-tree` adds `check-on-click` prop to control `checked` status, closes [#2968](https://github.com/TuSimple/naive-ui/issues/2968).
+- `n-tree` adds `accrodion` prop, closes [#3129](https://github.com/TuSimple/naive-ui/issues/3129).
+- `n-countdown` adds `reset` method, closes [#3228](https://github.com/TuSimple/naive-ui/issues/3228).
+- `n-drawer` adds `resizable` prop.
+- `n-drawer` adds `default-width` prop.
+- `n-drawer` adds `default-height` prop.
+- `n-drawer` adds `on-update:width` prop.
+- `n-drawer` adds `on-update:height` prop.
+- Update ukUA locale.
+
 ## 2.30.8
 
 ### Fixes

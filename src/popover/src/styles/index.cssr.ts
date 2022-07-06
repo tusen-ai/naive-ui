@@ -49,7 +49,7 @@ export default c([
       border-radius: var(--n-border-radius);
     `, [
       cNotM('scrollable', [
-        cNotM('show-header', 'padding: var(--n-padding);')
+        cNotM('show-header-or-footer', 'padding: var(--n-padding);')
       ])
     ]),
     cE('header', `
@@ -57,7 +57,12 @@ export default c([
       border-bottom: 1px solid var(--n-divider-color);
       transition: border-color .3s var(--n-bezier);
     `),
-    cM('scrollable, show-header', [
+    cE('footer', `
+      padding: var(--n-padding);
+      border-top: 1px solid var(--n-divider-color);
+      transition: border-color .3s var(--n-bezier);
+    `),
+    cM('scrollable, show-header-or-footer', [
       cE('content', `
         padding: var(--n-padding);
       `)
@@ -110,55 +115,55 @@ export default c([
     `)
   ]),
   placementStyle('top-start', `
-    top: calc(${arrowSize} / -2 + 1px);
+    top: calc(${arrowSize} / -2);
     left: calc(${getArrowOffset('top-start')} - var(--v-offset-left));
   `),
   placementStyle('top', `
-    top: calc(${arrowSize} / -2 + 1px);
+    top: calc(${arrowSize} / -2);
     transform: translateX(calc(${arrowSize} / -2)) rotate(45deg);
     left: 50%;
   `),
   placementStyle('top-end', `
-    top: calc(${arrowSize} / -2 + 1px);
+    top: calc(${arrowSize} / -2);
     right: calc(${getArrowOffset('top-end')} + var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
-    bottom: calc(${arrowSize} / -2 + 1px);
+    bottom: calc(${arrowSize} / -2);
     left: calc(${getArrowOffset('bottom-start')} - var(--v-offset-left));
   `),
   placementStyle('bottom', `
-    bottom: calc(${arrowSize} / -2 + 1px);
+    bottom: calc(${arrowSize} / -2);
     transform: translateX(calc(${arrowSize} / -2)) rotate(45deg);
     left: 50%;
   `),
   placementStyle('bottom-end', `
-    bottom: calc(${arrowSize} / -2 + 1px);
+    bottom: calc(${arrowSize} / -2);
     right: calc(${getArrowOffset('bottom-end')} + var(--v-offset-left));
   `),
   placementStyle('left-start', `
-    left: calc(${arrowSize} / -2 + 1px);
+    left: calc(${arrowSize} / -2);
     top: calc(${getArrowOffset('left-start')} - var(--v-offset-top));
   `),
   placementStyle('left', `
-    left: calc(${arrowSize} / -2 + 1px);
+    left: calc(${arrowSize} / -2);
     transform: translateY(calc(${arrowSize} / -2)) rotate(45deg);
     top: 50%;
   `),
   placementStyle('left-end', `
-    left: calc(${arrowSize} / -2 + 1px);
+    left: calc(${arrowSize} / -2);
     bottom: calc(${getArrowOffset('left-end')} + var(--v-offset-top));
   `),
   placementStyle('right-start', `
-    right: calc(${arrowSize} / -2 + 1px);
+    right: calc(${arrowSize} / -2);
     top: calc(${getArrowOffset('right-start')} - var(--v-offset-top));
   `),
   placementStyle('right', `
-    right: calc(${arrowSize} / -2 + 1px);
+    right: calc(${arrowSize} / -2);
     transform: translateY(calc(${arrowSize} / -2)) rotate(45deg);
     top: 50%;
   `),
   placementStyle('right-end', `
-    right: calc(${arrowSize} / -2 + 1px);
+    right: calc(${arrowSize} / -2);
     bottom: calc(${getArrowOffset('right-end')} + var(--v-offset-top));
   `),
   ...map(
@@ -226,7 +231,7 @@ function placementStyle (
         left: 0;
         top: 0;
         bottom: 0;
-        ${position}: calc(100% - 1px);
+        ${position}: 100%;
         ${oppositePlacement[position]}: auto;
         ${sizeStyle}
       `, [

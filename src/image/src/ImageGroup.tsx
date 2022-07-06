@@ -13,7 +13,7 @@ ImagePreviewInst & {
 }
 >('n-image-group')
 
-const imageGroupProps = imagePreviewSharedProps
+export const imageGroupProps = imagePreviewSharedProps
 
 export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 

@@ -31,7 +31,7 @@ import type { CalendarTheme } from '../styles'
 import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
-const calendarProps = {
+export const calendarProps = {
   ...(useTheme.props as ThemeProps<CalendarTheme>),
   isDateDisabled: Function as PropType<(date: number) => boolean | undefined>,
   value: Number,

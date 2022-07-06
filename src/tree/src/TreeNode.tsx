@@ -41,7 +41,8 @@ const TreeNode = defineComponent({
       nodePropsRef,
       indentRef,
       blockLineRef,
-      checkboxPlacementRef
+      checkboxPlacementRef,
+      checkOnClickRef
     } = NTree
 
     const disabledRef = computed(
@@ -99,6 +100,27 @@ const TreeNode = defineComponent({
             props.tmNode.isLeaf
           : true)
     )
+    const checkableRef = useMemo(
+      () =>
+        NTree.checkableRef.value &&
+        (NTree.cascadeRef.value ||
+          NTree.mergedCheckStrategyRef.value !== 'child' ||
+          props.tmNode.isLeaf)
+    )
+
+    const checkedRef = useMemo(() =>
+      NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
+    )
+
+    const mergedCheckOnClickRef = useMemo(() => {
+      const { value: checkable } = checkableRef
+      if (!checkable) return false
+      const { value: checkOnClick } = checkOnClickRef
+      if (typeof checkOnClick === 'boolean') {
+        return checkOnClick
+      }
+      return checkOnClick(props.tmNode.rawNode)
+    })
 
     function _handleClick (e: MouseEvent): void {
       const { value: expandOnClick } = NTree.expandOnClickRef
@@ -111,6 +133,9 @@ const TreeNode = defineComponent({
       }
       if (expandOnClick && !tmNode.isLeaf) {
         handleSwitcherClick()
+      }
+      if (mergedCheckOnClickRef.value) {
+        handleCheck(!checkedRef.value)
       }
     }
 
@@ -210,9 +235,7 @@ const TreeNode = defineComponent({
       highlight: useMemo(() => {
         return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
       }),
-      checked: useMemo(() =>
-        NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
-      ),
+      checked: checkedRef,
       indeterminate: useMemo(() =>
         NTree.displayedIndeterminateKeysRef.value.includes(props.tmNode.key)
       ),
@@ -223,13 +246,7 @@ const TreeNode = defineComponent({
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
       disabled: disabledRef,
-      checkable: computed(
-        () =>
-          NTree.checkableRef.value &&
-          (NTree.cascadeRef.value ||
-            NTree.mergedCheckStrategyRef.value !== 'child' ||
-            props.tmNode.isLeaf)
-      ),
+      checkable: checkableRef,
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: selectableRef,
       expandOnClick: NTree.expandOnClickRef,

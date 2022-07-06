@@ -16,7 +16,11 @@ export interface CountdownTimeInfo {
   milliseconds: number
 }
 
-const countdownProps = {
+export interface CountdownInst {
+  reset: () => void
+}
+
+export const countdownProps = {
   duration: {
     type: Number,
     default: 0
@@ -147,31 +151,49 @@ export default defineComponent({
     onBeforeUnmount(() => {
       stopTimer()
     })
-    return () => {
-      const { render, precision } = props
-      const { value: distance } = distanceRef
-      let timeInfo: CountdownTimeInfo
-      switch (precision) {
-        case 0:
-          timeInfo = getTimeInfo(distance + 999)
-          timeInfo.milliseconds = 0
-          break
-        case 1:
-          timeInfo = getTimeInfo(distance + 99)
-          timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 100) * 100
-          break
-        case 2:
-          timeInfo = getTimeInfo(distance + 9)
-          timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 10) * 10
-          break
-        case 3:
-          timeInfo = getTimeInfo(distance)
+
+    function reset (): void {
+      distanceRef.value = props.duration
+      elapsed = 0
+      pnow = performance.now()
+      if (props.active && finished) {
+        frame()
       }
-      if (render) {
-        return render(timeInfo)
-      } else {
-        return getDisplayValue(timeInfo)
-      }
+      finished = false
+    }
+
+    const countdownExposedMethod: CountdownInst = {
+      reset
+    }
+    return Object.assign(countdownExposedMethod, {
+      distance: distanceRef,
+      getTimeInfo,
+      getDisplayValue
+    })
+  },
+  render () {
+    const { render, precision, distance, getTimeInfo, getDisplayValue } = this
+    let timeInfo: CountdownTimeInfo
+    switch (precision) {
+      case 0:
+        timeInfo = getTimeInfo(distance + 999)
+        timeInfo.milliseconds = 0
+        break
+      case 1:
+        timeInfo = getTimeInfo(distance + 99)
+        timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 100) * 100
+        break
+      case 2:
+        timeInfo = getTimeInfo(distance + 9)
+        timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 10) * 10
+        break
+      case 3:
+        timeInfo = getTimeInfo(distance)
+    }
+    if (render) {
+      return render(timeInfo)
+    } else {
+      return getDisplayValue(timeInfo)
     }
   }
 })

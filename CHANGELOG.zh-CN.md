@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## 2.31.0
+
+### Breaking Changes
+
+- `n-date-picker` 的 `clearable` 属性在 `action` 属性没有设置时，会控面板清空按钮的显隐，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196)
+- `n-button` 的 `native-focus-behavior` 属性默认值改为“不是 Safari”
+
+### Fixes
+
+- 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+- 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
+- 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
+- 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+- 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
+- 修复 `n-dropdown` 禁用的选项有 hover 样式
+- 修复 `n-dropdown` 菜单出现可能会闪
+- 修复 `n-dropdown` 菜单的 transform origin 在 Chrome 上可能不正确
+- 修复 `n-radio-button` 光标样式可能不正确，关闭 [#3243](https://github.com/TuSimple/naive-ui/issues/3243)
+- 修复 `n-input` 在 disabled 状态下在 Safari 上文本颜色过浅，关闭 [#3241](https://github.com/TuSimple/naive-ui/issues/3241)
+- 修复 `n-input` 的分割符可能折行
+- 修复所有组件的 `user-select` 样式属性在 Safari 的效果
+- 修复 `n-data-table` 在虚拟滚动模式下会阻止页面滚动
+- 修复 `n-button` 在 Firefox 下没有按下的效果
+
+### Feats
+
+- `n-avatar` 新增 `lazy` 属性
+- `n-avatar` 新增 `intersection-observer-options` 属性
+- `n-number-animation` 新增 `on-finish` 属性
+- `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
+- `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
+- `n-popover` 新增 `footer` 插槽，用于设置底部内容，关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
+- `n-dropdown` 新增 `menu-props`，关闭 [#2885](https://github.com/TuSimple/naive-ui/issues/2885)
+- `n-data-table` 的列属性增加 `multiple` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
+- `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
+- `n-tree` 新增 `check-on-click` 属性来控制可选状态下的选中交互方式，关闭 [#2968](https://github.com/TuSimple/naive-ui/issues/2968)
+- `n-tree` 新增 `accrodion` 属性，关闭 [#3129](https://github.com/TuSimple/naive-ui/issues/3129)
+- `n-countdown` 新增 `reset` 方法，关闭 [#3228](https://github.com/TuSimple/naive-ui/issues/3228)
+- `n-drawer` 新增 `resizable` 属性
+- `n-drawer` 新增 `default-height` 属性
+- `n-drawer` 新增 `default-width` 属性
+- `n-drawer` 新增 `on-update:height` 属性
+- `n-drawer` 新增 `on-update:width` 属性
+- 更新 ukUA locale
+
 ## 2.30.8
 
 ### Fixes

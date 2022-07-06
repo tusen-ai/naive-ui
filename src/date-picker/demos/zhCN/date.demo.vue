@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-date-picker v-model:value="timestamp" type="date" clearable />
+  <n-date-picker v-model:value="timestamp" type="date" />
   <pre>{{ JSON.stringify(timestamp) }}</pre>
 </template>
 

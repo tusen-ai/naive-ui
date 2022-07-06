@@ -76,6 +76,8 @@ export interface InternalDropInfo {
 
 export type RenderSwitcherIcon = () => VNodeChild
 
+export type CheckOnClick = (option: TreeOption) => boolean
+
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>
   highlightKeySetRef: Ref<Set<Key> | null>
@@ -112,6 +114,7 @@ export interface TreeInjection {
   multipleRef: Ref<boolean>
   checkboxPlacementRef: 'left' | 'right'
   internalTreeSelect: boolean
+  checkOnClickRef: Ref<boolean | CheckOnClick>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

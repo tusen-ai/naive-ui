@@ -52,7 +52,7 @@ import type {
 } from './interface'
 import style from './styles/index.cssr'
 
-const autoCompleteProps = {
+export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   bordered: {

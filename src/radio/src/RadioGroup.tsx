@@ -21,7 +21,7 @@ import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -86,7 +86,7 @@ function mapSlot (
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
-        <div class={[`${clsPrefix}-radio-group__splitor`, splitorClass]}></div>,
+        <div class={[`${clsPrefix}-radio-group__splitor`, splitorClass]} />,
         wrappedInstance
       )
     }
@@ -97,7 +97,7 @@ function mapSlot (
   }
 }
 
-const radioGroupProps = {
+export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
   value: [String, Number] as PropType<string | number | null>,

@@ -1,4 +1,7 @@
-export { default as NLoadingBarProvider } from './src/LoadingBarProvider'
+export {
+  default as NLoadingBarProvider,
+  loadingBarProviderProps
+} from './src/LoadingBarProvider'
 export type {
   LoadingBarProviderInst,
   LoadingBarProviderProps,

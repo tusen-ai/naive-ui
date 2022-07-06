@@ -22,7 +22,7 @@ import {
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   OnItemHeaderClick,
   OnUpdateExpandedNames,
@@ -31,7 +31,7 @@ import {
   OnItemHeaderClickImpl
 } from './interface'
 
-const collapseProps = {
+export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<

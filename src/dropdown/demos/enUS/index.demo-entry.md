@@ -32,6 +32,7 @@ render-option.vue
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
 | node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | Option HTML attributes generator. | 2.29.1 |
+| menu-props | `(option: DropdownOption \| undefined, options: (DropdownOption \| DropdownGroupOption)[]) => HTMLAttributes` | `undefined` | Menu HTML attributes generator. | 2.31.0 |
 | options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | Dropdown options. |  |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option icons. |  |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option labels. |  |

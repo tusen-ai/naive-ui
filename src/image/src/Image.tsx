@@ -10,20 +10,21 @@ import {
   onMounted,
   onBeforeUnmount
 } from 'vue'
-import NImagePreview from './ImagePreview'
-import type { ImagePreviewInst } from './ImagePreview'
-import { imageGroupInjectionKey } from './ImageGroup'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
 import type { IntersectionObserverOptions } from './utils'
+import type { ImagePreviewInst } from './ImagePreview'
+import { imageGroupInjectionKey } from './ImageGroup'
+import NImagePreview from './ImagePreview'
 
 export interface ImageInst {
   click: () => void
 }
 
-const imageProps = {
+export const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
@@ -87,6 +88,10 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      if (isImageSupportNativeLazy) {
+        return
+      }
+
       let unobserve: (() => void) | undefined
       const stopWatchHandle = watchEffect(() => {
         unobserve?.()
@@ -138,40 +143,39 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {}, loaded, $attrs } = this
+    const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
-
-    const imgNode = (
-      <img
-        {...imgProps}
-        class={imgProps.class}
-        ref="imageRef"
-        width={this.width || imgProps.width}
-        height={this.height || imgProps.height}
-        src={
-          this.showError
-            ? this.fallbackSrc
-            : this.shouldStartLoading
-              ? this.src || imgProps.src
-              : undefined
-        }
-        alt={this.alt || imgProps.alt}
-        aria-label={this.alt || imgProps.alt}
-        onClick={this.click}
-        onError={this.mergedOnError}
-        onLoad={this.mergedOnLoad}
-        style={[
-          imgProps.style || '',
-          placeholderNode && !loaded
-            ? { height: '0', width: '0', visibility: 'hidden' }
-            : '',
-          { objectFit: this.objectFit }
-        ]}
-        data-error={this.showError}
-        data-preview-src={this.previewSrc || this.src}
-      />
-    )
+    const loadSrc: string = this.src || imgProps.src || ''
+    const imgNode = h('img', {
+      ...imgProps,
+      class: imgProps.class,
+      ref: 'imageRef',
+      width: this.width || imgProps.width,
+      height: this.height || imgProps.height,
+      src: isImageSupportNativeLazy
+        ? loadSrc
+        : this.showError
+          ? this.fallbackSrc
+          : this.shouldStartLoading
+            ? loadSrc
+            : undefined,
+      alt: this.alt || imgProps.alt,
+      'aria-label': this.alt || imgProps.alt,
+      onClick: this.click,
+      onError: this.mergedOnError,
+      onLoad: this.mergedOnLoad,
+      loading: lazy ? 'lazy' : 'eager',
+      style: [
+        imgProps.style || '',
+        placeholderNode && !loaded
+          ? { height: '0', width: '0', visibility: 'hidden' }
+          : '',
+        { objectFit: this.objectFit }
+      ],
+      'data-error': this.showError,
+      'data-preview-src': this.previewSrc || this.src
+    })
 
     return (
       <div

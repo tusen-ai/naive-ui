@@ -6,7 +6,7 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { spaceLight } from '../styles'
 import type { SpaceTheme } from '../styles'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { ensureSupportFlexGap } from './utils'
 
 type Align =
@@ -26,7 +26,7 @@ export type Justify =
   | 'space-between'
   | 'space-evenly'
 
-const spaceProps = {
+export const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
   justify: {

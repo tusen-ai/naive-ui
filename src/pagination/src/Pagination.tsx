@@ -50,9 +50,9 @@ import {
   RenderSuffix,
   Size
 } from './interface'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
-const paginationProps = {
+export const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
   page: Number,
   defaultPage: {

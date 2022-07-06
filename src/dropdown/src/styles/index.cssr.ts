@@ -1,4 +1,4 @@
-import { c, cB, cM, cE } from '../../../_utils/cssr'
+import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -28,8 +28,7 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 // --n-box-shadow
 
 export default cB('dropdown-menu', `
-  transform-origin: inherit;
-  padding: var(--n-padding);
+  transform-origin: var(--v-transform-origin);
   background-color: var(--n-color);
   border-radius: var(--n-border-radius);
   box-shadow: var(--n-box-shadow);
@@ -76,33 +75,35 @@ export default cB('dropdown-menu', `
         transition: background-color .3s var(--n-bezier);
         border-radius: var(--n-border-radius);
       `),
-      cM('pending', {
-        color: 'var(--n-option-text-color-hover)'
-      }, [
-        cE('prefix, suffix', {
+      cNotM('disabled', [
+        cM('pending', {
           color: 'var(--n-option-text-color-hover)'
-        }),
-        c('&::before', 'background-color: var(--n-option-color-hover);')
-      ]),
-      cM('active', {
-        color: 'var(--n-option-text-color-active)'
-      }, [
-        cE('prefix, suffix', {
+        }, [
+          cE('prefix, suffix', {
+            color: 'var(--n-option-text-color-hover)'
+          }),
+          c('&::before', 'background-color: var(--n-option-color-hover);')
+        ]),
+        cM('active', {
           color: 'var(--n-option-text-color-active)'
-        }),
-        c('&::before', 'background-color: var(--n-option-color-active);')
+        }, [
+          cE('prefix, suffix', {
+            color: 'var(--n-option-text-color-active)'
+          }),
+          c('&::before', 'background-color: var(--n-option-color-active);')
+        ]),
+        cM('child-active', {
+          color: 'var(--n-option-text-color-child-active)'
+        }, [
+          cE('prefix, suffix', {
+            color: 'var(--n-option-text-color-child-active)'
+          })
+        ])
       ]),
       cM('disabled', {
         cursor: 'not-allowed',
         opacity: 'var(--n-option-opacity-disabled)'
       }),
-      cM('child-active', {
-        color: 'var(--n-option-text-color-child-active)'
-      }, [
-        cE('prefix, suffix', {
-          color: 'var(--n-option-text-color-child-active)'
-        })
-      ]),
       cM('group', {
         fontSize: 'calc(var(--n-font-size) - 1px)',
         color: 'var(--n-group-header-text-color)'
@@ -172,7 +173,21 @@ export default cB('dropdown-menu', `
     margin: 4px 0;
   `),
   cB('dropdown-menu-wrapper', `
-    transform-origin: inherit;
+    transform-origin: var(--v-transform-origin);
     width: fit-content;
-  `)
+  `),
+  c('>', [
+    cB('scrollbar', `
+      height: inherit;
+      max-height: inherit;
+    `)
+  ]),
+  cNotM('scrollable', `
+    padding: var(--n-padding);
+  `),
+  cM('scrollable', [
+    cE('content', `
+      padding: var(--n-padding);
+    `)
+  ])
 ])

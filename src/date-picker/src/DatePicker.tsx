@@ -79,7 +79,7 @@ import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
-const datePickerProps = {
+export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -348,35 +348,44 @@ export default defineComponent({
       }
     })
     const mergedActionsRef = computed(() => {
-      const { actions, type } = props
+      const { actions, type, clearable } = props
       if (actions === null) return []
       if (actions !== undefined) return actions
+      const result = clearable ? ['clear'] : []
       switch (type) {
         case 'date': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'datetime': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'daterange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'datetimerange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'month': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'year': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'quarter': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'monthrange':
         case 'yearrange':
         case 'quarterrange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         default: {
           warn(

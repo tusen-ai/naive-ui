@@ -1,6 +1,6 @@
 import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -8,7 +8,7 @@ import { tableLight } from '../styles'
 import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const tableProps = {
+export const tableProps = {
   ...(useTheme.props as ThemeProps<TableTheme>),
   bordered: {
     type: Boolean,

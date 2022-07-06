@@ -22,7 +22,7 @@ export interface BreadcrumbInjection {
 export const breadcrumbInjectionKey =
   createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
-const breadcrumbProps = {
+export const breadcrumbProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
   separator: {
     type: String,

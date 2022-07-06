@@ -24,7 +24,7 @@ import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   NBaseClear,
   NBaseIcon,
@@ -62,7 +62,7 @@ import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
-const inputProps = {
+export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
   bordered: {
     type: Boolean as PropType<boolean | undefined>,

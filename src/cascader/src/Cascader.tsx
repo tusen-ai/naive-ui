@@ -64,7 +64,7 @@ import type {
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-const cascaderProps = {
+export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
   allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,

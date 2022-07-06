@@ -13,6 +13,9 @@ import {
 import { useMemo } from 'vooks'
 import { changeColor } from 'seemly'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
+import { buttonGroupInjectionKey } from '../../button-group/src/context'
+import { useRtl } from '../../_mixins/use-rtl'
+import { isSafari } from '../../_utils/env/browser'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -33,12 +36,10 @@ import {
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
-import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import type { Type, Size } from './interface'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
-const buttonProps = {
+export const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
   color: String,
   textColor: String,
@@ -84,7 +85,10 @@ const buttonProps = {
     default: true
   },
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-  nativeFocusBehavior: Boolean
+  nativeFocusBehavior: {
+    type: Boolean,
+    default: !isSafari
+  }
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
