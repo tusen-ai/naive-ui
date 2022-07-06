@@ -30,7 +30,6 @@ import {
   clampValue,
   resolveSpeed,
   isTouchEvent,
-  supportsPassive,
   getNextIndex,
   getPrevIndex,
   getDisplayIndex,
@@ -752,8 +751,7 @@ export default defineComponent({
     })
     const slidesControlListenersRef = computed(() => {
       return {
-        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']:
-          props.touchable ? handleTouchstart : undefined,
+        onTouchstartPassive: props.touchable ? handleTouchstart : undefined,
         onMousedown: props.draggable ? handleTouchstart : undefined,
         onWheel: props.mousewheel ? handleMousewheel : undefined
       }
@@ -827,9 +825,7 @@ export default defineComponent({
       slideStyles: slideStylesRef,
       translateStyle: translateStyleRef,
       slidesControlListeners: slidesControlListenersRef,
-      handleTouchstart,
       handleTransitionEnd,
-      handleMousewheel,
       handleResize,
       handleSlideResize,
       isActive: isDisplayActive,

@@ -2,12 +2,9 @@ import { Size } from '../src/interface'
 
 export * from './duplicatedLogic'
 export * from './event'
-export { default as supportsPassive } from './supportsPassive'
 
 export function calculateSize (element: HTMLElement, innerOnly?: boolean): Size {
-  const rect = element.getBoundingClientRect()
-  let width = rect.width
-  let height = rect.height
+  let { width, height } = element.getBoundingClientRect()
   if (innerOnly) {
     const style = getComputedStyle(element)
     width =
@@ -18,7 +15,6 @@ export function calculateSize (element: HTMLElement, innerOnly?: boolean): Size 
       height -
       parseFloat(style.getPropertyValue('padding-top')) -
       parseFloat(style.getPropertyValue('padding-bottom'))
-    return { width, height }
   }
   return { width, height }
 }

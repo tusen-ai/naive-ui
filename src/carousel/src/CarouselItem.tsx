@@ -6,10 +6,10 @@ import {
   onMounted,
   onBeforeUnmount
 } from 'vue'
+import type { VNode } from 'vue'
 import { camelCase } from 'lodash-es'
 import { useCarouselContext } from './CarouselContext'
 import { useConfig } from '../../_mixins'
-import type { VNode } from 'vue'
 
 const CarouselItemName = 'CarouselItem'
 
