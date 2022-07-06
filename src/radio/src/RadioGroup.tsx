@@ -21,7 +21,7 @@ import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
 function mapSlot (
   defaultSlot: VNode[],

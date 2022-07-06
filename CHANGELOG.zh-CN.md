@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `n-date-picker` 的 `clearable` 属性在 `action` 属性没有设置时，会控面板清空按钮的显隐，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196)
+- `n-button` 的 `native-focus-behavior` 属性默认值改为“不是 Safari”
 
 ### Fixes
 
@@ -23,6 +24,7 @@
 - 修复 `n-input` 的分割符可能折行
 - 修复所有组件的 `user-select` 样式属性在 Safari 的效果
 - 修复 `n-data-table` 在虚拟滚动模式下会阻止页面滚动
+- 修复 `n-button` 在 Firefox 下没有按下的效果
 
 ### Feats
 
