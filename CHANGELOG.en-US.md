@@ -18,6 +18,7 @@
 - Fix `n-dropdown`'s disabled option has hover style.
 - Fix `n-dropdown`'s menu may shift when it's entering.
 - Fix `n-dropdown`'s transform origin may not be correct in Chrome.
+- Fix `n-radio-button` may not have correct cursor style in some versions of chrome, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
 
 ### Feats
 

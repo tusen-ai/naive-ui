@@ -18,6 +18,7 @@
 - 修复 `n-dropdown` 禁用的选项有 hover 样式
 - 修复 `n-dropdown` 菜单出现可能会闪
 - 修复 `n-dropdown` 菜单的 transform origin 在 Chrome 上可能不正确
+- 修复 `n-radio-button` 在某些版本 Chrome 光标样式不正确，关闭 [#3243](https://github.com/TuSimple/naive-ui/issues/3243)
 
 ### Feats
 

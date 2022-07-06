@@ -60,6 +60,7 @@ export default cB('radio-group', `
     border-bottom: 1px solid var(--n-button-border-color);
   `, [
     cB('radio-input', `
+      pointer-events: none;
       position: absolute;
       border: 0;
       border-radius: inherit;
