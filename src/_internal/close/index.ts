@@ -1,1 +1,1 @@
-export { default } from './src/Close'
+export { default as NBaseClose } from './src/Close'

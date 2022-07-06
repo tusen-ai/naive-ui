@@ -37,6 +37,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--daterange`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onClick={this.resetSelectingStatus}
@@ -261,7 +262,7 @@ export default defineComponent({
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   size="tiny"
                   type="primary"
-                  disabled={this.isRangeInvalid}
+                  disabled={this.isRangeInvalid || this.isSelecting}
                   onClick={this.handleConfirmClick}
                 >
                   {{ default: () => this.locale.confirm }}

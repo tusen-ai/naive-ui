@@ -1,10 +1,59 @@
-function pagesToShow (
+function createPageItemsInfo (
   currentPage: number,
   pageCount: number,
-  pageSlot: number = 9
-): number[] {
-  if (pageCount === 1) return [1]
-  if (pageCount === 2) return [1, 2]
+  pageSlot: number
+): {
+    hasFastBackward: boolean
+    hasFastForward: boolean
+    fastBackwardTo: number
+    fastForwardTo: number
+    items: PageItem[]
+  } {
+  let hasFastBackward = false
+  let hasFastForward = false
+  let fastBackwardTo = 1
+  let fastForwardTo = pageCount
+  if (pageCount === 1) {
+    return {
+      hasFastBackward: false,
+      hasFastForward: false,
+      fastForwardTo,
+      fastBackwardTo,
+      items: [
+        {
+          type: 'page',
+          label: 1,
+          active: currentPage === 1,
+          mayBeFastBackward: false,
+          mayBeFastForward: false
+        }
+      ]
+    }
+  }
+  if (pageCount === 2) {
+    return {
+      hasFastBackward: false,
+      hasFastForward: false,
+      fastForwardTo,
+      fastBackwardTo,
+      items: [
+        {
+          type: 'page',
+          label: 1,
+          active: currentPage === 1,
+          mayBeFastBackward: false,
+          mayBeFastForward: false
+        },
+        {
+          type: 'page',
+          label: 2,
+          active: currentPage === 2,
+          mayBeFastBackward: true,
+          mayBeFastForward: false
+        }
+      ]
+    }
+  }
   const firstPage = 1
   const lastPage = pageCount
   let middleStart = currentPage
@@ -24,78 +73,107 @@ function pagesToShow (
   let rightSplit = false
   if (middleStart > firstPage + 2) leftSplit = true
   if (middleEnd < lastPage - 2) rightSplit = true
-  const items: number[] = []
-  items.push(firstPage)
+  const items: PageItem[] = []
+  items.push({
+    type: 'page',
+    label: 1,
+    active: currentPage === 1,
+    mayBeFastBackward: false,
+    mayBeFastForward: false
+  })
   if (leftSplit) {
-    items.push(-2)
+    hasFastBackward = true
+    fastBackwardTo = middleStart - 1
+    items.push({
+      type: 'fast-backward',
+      active: false,
+      label: undefined,
+      options: createRange(firstPage + 1, middleStart - 1)
+    })
   } else if (lastPage >= firstPage + 1) {
-    items.push(firstPage + 1)
+    items.push({
+      type: 'page',
+      label: firstPage + 1,
+      mayBeFastBackward: true,
+      mayBeFastForward: false,
+      active: currentPage === firstPage + 1
+    })
   }
   for (let i = middleStart; i <= middleEnd; ++i) {
-    items.push(i)
+    items.push({
+      type: 'page',
+      label: i,
+      mayBeFastBackward: false,
+      mayBeFastForward: false,
+      active: currentPage === i
+    })
   }
   if (rightSplit) {
-    items.push(-1)
+    hasFastForward = true
+    fastForwardTo = middleEnd + 1
+    items.push({
+      type: 'fast-forward',
+      active: false,
+      label: undefined,
+      options: createRange(middleEnd + 1, lastPage - 1)
+    })
   } else if (
     middleEnd === lastPage - 2 &&
-    items[items.length - 1] !== lastPage - 1
+    items[items.length - 1].label !== lastPage - 1
   ) {
-    items.push(lastPage - 1)
+    items.push({
+      type: 'page',
+      mayBeFastForward: true,
+      mayBeFastBackward: false,
+      label: lastPage - 1,
+      active: currentPage === lastPage - 1
+    })
   }
-  if (items[items.length - 1] !== lastPage) items.push(lastPage)
-  return items
+  if (items[items.length - 1].label !== lastPage) {
+    items.push({
+      type: 'page',
+      mayBeFastForward: false,
+      mayBeFastBackward: false,
+      label: lastPage,
+      active: currentPage === lastPage
+    })
+  }
+  return {
+    hasFastBackward,
+    hasFastForward,
+    fastBackwardTo,
+    fastForwardTo,
+    items
+  }
 }
 
 export type PageItem =
   | {
     type: 'fast-backward' | 'fast-forward'
-    label?: undefined
+    label: undefined
     active: false
+    options: Array<{ label: string, value: number }>
   }
   | {
     type: 'page'
     label: number
     active: boolean
+    mayBeFastForward: boolean
+    mayBeFastBackward: boolean
   }
 
-function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] {
-  return pages.map((page) => {
-    switch (page) {
-      case -2:
-        return {
-          type: 'fast-backward',
-          active: false
-        }
-      case -1:
-        return {
-          type: 'fast-forward',
-          active: false
-        }
-      default:
-        if (page === currentPage) {
-          return {
-            type: 'page',
-            label: page,
-            active: true
-          }
-        } else {
-          return {
-            type: 'page',
-            label: page,
-            active: false
-          }
-        }
-    }
-  })
+function createRange (
+  from: number,
+  to: number
+): Array<{ label: string, value: number }> {
+  const range: Array<{ label: string, value: number }> = []
+  for (let i = from; i <= to; ++i) {
+    range.push({
+      label: `${i}`,
+      value: i
+    })
+  }
+  return range
 }
 
-function pageItems (
-  currentPage: number,
-  pageCount: number,
-  pageSlot?: number
-): PageItem[] {
-  const pages = pagesToShow(currentPage, pageCount, pageSlot)
-  return mapPagesToPageItems(pages, currentPage)
-}
-
-export { pagesToShow, mapPagesToPageItems, pageItems }
+export { createPageItemsInfo }

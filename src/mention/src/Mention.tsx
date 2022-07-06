@@ -41,7 +41,7 @@ import { getRelativePosition } from './utils'
 import type { MentionOption } from './interface'
 import style from './styles/index.cssr'
 
-const mentionProps = {
+export const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),
   to: useAdjustedTo.propTo,
   autosize: [Boolean, Object] as PropType<
@@ -146,7 +146,10 @@ export default defineComponent({
         if (typeof option.label === 'string') {
           return option.label.startsWith(pattern)
         }
-        return option.value.startsWith(pattern)
+        if (typeof option.value === 'string') {
+          return option.value.startsWith(pattern)
+        }
+        return false
       })
     })
     const treeMateRef = computed(() => {
@@ -280,23 +283,22 @@ export default defineComponent({
       }, 0)
     }
     function handleInputKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         if (inputInstRef.value?.isCompositing) return
         syncAfterCursorMove()
       } else if (
-        e.code === 'ArrowUp' ||
-        e.code === 'ArrowDown' ||
-        e.code === 'Enter' ||
-        e.code === 'NumpadEnter'
+        e.key === 'ArrowUp' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'Enter'
       ) {
         if (inputInstRef.value?.isCompositing) return
         const { value: selectMenuInst } = selectMenuInstRef
         if (showMenuRef.value) {
           if (selectMenuInst) {
             e.preventDefault()
-            if (e.code === 'ArrowUp') {
+            if (e.key === 'ArrowUp') {
               selectMenuInst.prev()
-            } else if (e.code === 'ArrowDown') {
+            } else if (e.key === 'ArrowDown') {
               selectMenuInst.next()
             } else {
               // Enter
@@ -348,7 +350,7 @@ export default defineComponent({
         return
       }
       const {
-        rawNode: { value }
+        rawNode: { value = '' }
       } = tmNode
       const inputEl = getInputEl()
       const inputValue = inputEl.value

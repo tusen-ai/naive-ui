@@ -39,9 +39,13 @@ import type {
 } from './interface'
 import style from './styles/index.cssr'
 
-const dynamicTagsProps = {
+export const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
   ...commonProps,
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
   closable: {
     type: Boolean,
     default: true
@@ -139,9 +143,8 @@ export default defineComponent({
       doChange(tags)
     }
     function handleInputKeyUp (e: KeyboardEvent): void {
-      switch (e.code) {
+      switch (e.key) {
         case 'Enter':
-        case 'NumpadEnter':
           handleInputConfirm()
       }
     }
@@ -149,7 +152,7 @@ export default defineComponent({
       const nextValue = externalValue ?? inputValueRef.value
       if (nextValue) {
         const tags = mergedValueRef.value.slice(0)
-        tags.push(nextValue)
+        tags.push(props.onCreate(nextValue))
         doChange(tags)
       }
       showInputRef.value = false

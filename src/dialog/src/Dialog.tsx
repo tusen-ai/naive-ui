@@ -20,14 +20,12 @@ import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 
-const infoIcon = <InfoIcon />
-
-const iconMap = {
-  default: infoIcon,
-  info: infoIcon,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />
+const iconRenderMap = {
+  default: () => <InfoIcon />,
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />
 }
 
 export const NDialog = defineComponent({
@@ -83,9 +81,13 @@ export const NDialog = defineComponent({
           titleTextColor,
           textColor,
           color,
-          closeColor,
+          closeBorderRadius,
           closeColorHover,
           closeColorPressed,
+          closeIconColor,
+          closeIconColorHover,
+          closeIconColorPressed,
+          closeIconSize,
           borderRadius,
           titleFontWeight,
           titleFontSize,
@@ -109,9 +111,13 @@ export const NDialog = defineComponent({
         '--n-icon-margin': iconMargin,
         '--n-icon-size': iconSize,
         '--n-close-size': closeSize,
-        '--n-close-color': closeColor,
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-color': color,
         '--n-text-color': textColor,
         '--n-border-radius': borderRadius,
@@ -157,6 +163,8 @@ export const NDialog = defineComponent({
       action,
       negativeText,
       positiveText,
+      positiveButtonProps,
+      negativeButtonProps,
       handlePositiveClick,
       handleNegativeClick,
       mergedTheme,
@@ -177,7 +185,8 @@ export const NDialog = defineComponent({
             resolveWrappedSlot(
               this.$slots.icon,
               (children) =>
-                children || (this.icon ? render(this.icon) : iconMap[this.type])
+                children ||
+                (this.icon ? render(this.icon) : iconRenderMap[this.type]())
             )
         }}
       </NBaseIcon>
@@ -197,6 +206,7 @@ export const NDialog = defineComponent({
                       ghost
                       size="small"
                       onClick={handleNegativeClick}
+                      {...negativeButtonProps}
                     >
                       {{
                         default: () => render(this.negativeText)
@@ -207,11 +217,12 @@ export const NDialog = defineComponent({
                     <NButton
                       theme={mergedTheme.peers.Button}
                       themeOverrides={mergedTheme.peerOverrides.Button}
-                      disabled={loading}
-                      loading={loading}
                       size="small"
                       type={type === 'default' ? 'primary' : type}
+                      disabled={loading}
+                      loading={loading}
                       onClick={handlePositiveClick}
+                      {...positiveButtonProps}
                     >
                       {{
                         default: () => render(this.positiveText)
@@ -228,6 +239,7 @@ export const NDialog = defineComponent({
         class={[
           `${mergedClsPrefix}-dialog`,
           this.themeClass,
+          this.closable && `${mergedClsPrefix}-dialog--closable`,
           `${mergedClsPrefix}-dialog--icon-${mergedIconPlacement}`,
           bordered && `${mergedClsPrefix}-dialog--bordered`
         ]}

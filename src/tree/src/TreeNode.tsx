@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   inject,
@@ -41,7 +40,9 @@ const TreeNode = defineComponent({
       droppingOffsetLevelRef,
       nodePropsRef,
       indentRef,
-      blockLineRef
+      blockLineRef,
+      checkboxPlacementRef,
+      checkOnClickRef
     } = NTree
 
     const disabledRef = computed(
@@ -60,14 +61,17 @@ const TreeNode = defineComponent({
     const contentElRef: { value: HTMLElement | null } = { value: null }
 
     onMounted(() => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       contentElRef.value = contentInstRef.value!.$el as HTMLElement
     })
 
     function handleSwitcherClick (): void {
       const { tmNode } = props
-      if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
+      if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
           NTree.loadingKeysRef.value.add(tmNode.key)
+        } else {
+          return
         }
         const {
           onLoadRef: { value: onLoad }
@@ -86,9 +90,53 @@ const TreeNode = defineComponent({
       }
     }
 
+    const selectableRef = useMemo(
+      () =>
+        !props.tmNode.disabled &&
+        NTree.selectableRef.value &&
+        (NTree.internalTreeSelect
+          ? NTree.mergedCheckStrategyRef.value !== 'child' ||
+            (NTree.multipleRef.value && NTree.cascadeRef.value) ||
+            props.tmNode.isLeaf
+          : true)
+    )
+    const checkableRef = useMemo(
+      () =>
+        NTree.checkableRef.value &&
+        (NTree.cascadeRef.value ||
+          NTree.mergedCheckStrategyRef.value !== 'child' ||
+          props.tmNode.isLeaf)
+    )
+
+    const checkedRef = useMemo(() =>
+      NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
+    )
+
+    const mergedCheckOnClickRef = useMemo(() => {
+      const { value: checkable } = checkableRef
+      if (!checkable) return false
+      const { value: checkOnClick } = checkOnClickRef
+      if (typeof checkOnClick === 'boolean') {
+        return checkOnClick
+      }
+      return checkOnClick(props.tmNode.rawNode)
+    })
+
     function _handleClick (e: MouseEvent): void {
+      const { value: expandOnClick } = NTree.expandOnClickRef
+      const { value: selectable } = selectableRef
+      if (!selectable && !expandOnClick) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
-      NTree.handleSelect(props.tmNode)
+      const { tmNode } = props
+      if (selectable) {
+        NTree.handleSelect(tmNode)
+      }
+      if (expandOnClick && !tmNode.isLeaf) {
+        handleSwitcherClick()
+      }
+      if (mergedCheckOnClickRef.value) {
+        handleCheck(!checkedRef.value)
+      }
     }
 
     function handleContentClick (e: MouseEvent): void {
@@ -184,12 +232,10 @@ const TreeNode = defineComponent({
         () => NTree.pendingNodeKeyRef.value === props.tmNode.key
       ),
       loading: useMemo(() => NTree.loadingKeysRef.value.has(props.tmNode.key)),
-      highlight: useMemo(() =>
-        NTree.highlightKeySetRef.value.has(props.tmNode.key)
-      ),
-      checked: useMemo(() =>
-        NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
-      ),
+      highlight: useMemo(() => {
+        return NTree.highlightKeySetRef.value?.has(props.tmNode.key)
+      }),
+      checked: checkedRef,
       indeterminate: useMemo(() =>
         NTree.displayedIndeterminateKeysRef.value.includes(props.tmNode.key)
       ),
@@ -200,25 +246,10 @@ const TreeNode = defineComponent({
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
       disabled: disabledRef,
-      checkable: computed(
-        () =>
-          NTree.checkableRef.value &&
-          (NTree.cascadeRef.value ||
-            NTree.mergedCheckStrategyRef.value !== 'child' ||
-            props.tmNode.isLeaf)
-      ),
+      checkable: checkableRef,
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
-      selectable: computed(
-        () =>
-          NTree.selectableRef.value &&
-          (NTree.internalTreeSelect
-            ? NTree.multipleRef.value
-              ? true
-              : NTree.mergedCheckStrategyRef.value === 'child'
-                ? props.tmNode.isLeaf
-                : true
-            : true)
-      ),
+      selectable: selectableRef,
+      expandOnClick: NTree.expandOnClickRef,
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
       blockLine: blockLineRef,
@@ -227,6 +258,7 @@ const TreeNode = defineComponent({
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
+      checkboxPlacement: checkboxPlacementRef,
       contentInstRef,
       contentElRef,
       handleCheck,
@@ -246,6 +278,7 @@ const TreeNode = defineComponent({
       tmNode,
       clsPrefix,
       checkable,
+      expandOnClick,
       selectable,
       selected,
       checked,
@@ -256,7 +289,8 @@ const TreeNode = defineComponent({
       disabled,
       pending,
       internalScrollable,
-      nodeProps
+      nodeProps,
+      checkboxPlacement
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -273,6 +307,18 @@ const TreeNode = defineComponent({
     // In non virtual mode, there's no evidence that which element should be
     // scrolled to, so we need data-key to query the target element.
     const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
+    const checkboxOnRight = checkboxPlacement === 'right'
+    const checkboxNode = checkable ? (
+      <NTreeNodeCheckbox
+        right={checkboxOnRight}
+        focusable={this.checkboxFocusable}
+        disabled={disabled || this.checkboxDisabled}
+        clsPrefix={clsPrefix}
+        checked={this.checked}
+        indeterminate={this.indeterminate}
+        onCheck={this.handleCheck}
+      />
+    ) : null
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
@@ -285,7 +331,8 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--highlight`]: highlight,
               [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled,
-              [`${clsPrefix}-tree-node--selectable`]: selectable
+              [`${clsPrefix}-tree-node--selectable`]: selectable,
+              [`${clsPrefix}-tree-node--clickable`]: selectable || expandOnClick
             },
             nodeProps?.class
           ]}
@@ -300,10 +347,9 @@ const TreeNode = defineComponent({
         >
           {repeat(
             tmNode.level,
-            <div
-              class={`${clsPrefix}-tree-node-indent`}
-              style={{ flex: `0 0 ${indent}px` }}
-            />
+            <div class={`${clsPrefix}-tree-node-indent`}>
+              <div style={{ width: `${indent}px` }} />
+            </div>
           )}
           <NTreeNodeSwitcher
             clsPrefix={clsPrefix}
@@ -312,16 +358,7 @@ const TreeNode = defineComponent({
             hide={tmNode.isLeaf}
             onClick={this.handleSwitcherClick}
           />
-          {checkable ? (
-            <NTreeNodeCheckbox
-              focusable={this.checkboxFocusable}
-              disabled={disabled || this.checkboxDisabled}
-              clsPrefix={clsPrefix}
-              checked={this.checked}
-              indeterminate={this.indeterminate}
-              onCheck={this.handleCheck}
-            />
-          ) : null}
+          {!checkboxOnRight ? checkboxNode : null}
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
@@ -339,13 +376,16 @@ const TreeNode = defineComponent({
           {draggable
             ? this.showDropMark
               ? renderDropMark({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 el: this.contentElRef.value!,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 position: this.droppingPosition!,
                 offsetLevel: this.droppingOffsetLevel,
                 indent
               })
               : this.showDropMarkAsParent
                 ? renderDropMark({
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                   el: this.contentElRef.value!,
                   position: 'inside',
                   offsetLevel: this.droppingOffsetLevel,
@@ -353,6 +393,7 @@ const TreeNode = defineComponent({
                 })
                 : null
             : null}
+          {checkboxOnRight ? checkboxNode : null}
         </div>
       </div>
     )

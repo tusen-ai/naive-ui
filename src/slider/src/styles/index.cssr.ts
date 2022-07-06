@@ -1,5 +1,5 @@
 import { cB, c, cM, cE, insideModal, insidePopover } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier
@@ -41,7 +41,7 @@ export default c([
   `, [
     cM('reverse', [
       cB('slider-handles', [
-        cB('slider-handle', `
+        cB('slider-handle-wrapper', `
           transform: translate(50%, -50%);
         `)
       ]),
@@ -52,7 +52,7 @@ export default c([
       ]),
       cM('vertical', [
         cB('slider-handles', [
-          cB('slider-handle', `
+          cB('slider-handle-wrapper', `
             transform: translate(-50%, -50%);
           `)
         ]),
@@ -79,7 +79,7 @@ export default c([
         bottom: calc(var(--n-handle-size) / 2);
         left: 0;
       `, [
-        cB('slider-handle', `
+        cB('slider-handle-wrapper', `
           top: unset;
           left: 50%;
           transform: translate(-50%, 50%);
@@ -163,10 +163,11 @@ export default c([
       left: calc(var(--n-handle-size) / 2);
       right: calc(var(--n-handle-size) / 2);
     `, [
-      cB('slider-mark', {
-        position: 'absolute',
-        transform: 'translateX(-50%)'
-      })
+      cB('slider-mark', `
+        position: absolute;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      `)
     ]),
     cB('slider-rail', `
       width: 100%;
@@ -192,29 +193,36 @@ export default c([
       bottom: 0;
       left: calc(var(--n-handle-size) / 2);
     `, [
-      cB('slider-handle', `
+      cB('slider-handle-wrapper', `
         outline: none;
-        height: var(--n-handle-size);
-        width: var(--n-handle-size);
-        border-radius: 50%;
-        transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
-        overflow: hidden;
         cursor: pointer;
-        background-color: var(--n-handle-color);
-        box-shadow: var(--n-handle-box-shadow);
+        display: flex;
       `, [
-        c('&:hover', {
-          boxShadow: 'var(--n-handle-box-shadow-hover)'
-        }),
-        c('&:hover:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-active)'
-        }),
-        c('&:focus', {
-          boxShadow: 'var(--n-handle-box-shadow-focus)'
-        })
+        cB('slider-handle', `
+          height: var(--n-handle-size);
+          width: var(--n-handle-size);
+          border-radius: 50%;
+          overflow: hidden;
+          transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
+          background-color: var(--n-handle-color);
+          box-shadow: var(--n-handle-box-shadow);
+        `, [
+          c('&:hover', `
+            box-shadow: var(--n-handle-box-shadow-hover);
+          `)
+        ]),
+        c('&:focus', [
+          cB('slider-handle', `
+            box-shadow: var(--n-handle-box-shadow-focus);
+          `, [
+            c('&:hover', `
+              box-shadow: var(--n-handle-box-shadow-active);
+            `)
+          ])
+        ])
       ])
     ]),
     cB('slider-dots', `
@@ -224,9 +232,7 @@ export default c([
       right: calc(var(--n-handle-size) / 2);
     `, [
       cM('transition-disabled', [
-        cB('slider-dot', {
-          transition: 'none'
-        })
+        cB('slider-dot', 'transition: none;')
       ]),
       cB('slider-dot', `
         transition:
@@ -243,9 +249,7 @@ export default c([
         border: var(--n-dot-border);
         background-color: var(--n-dot-color);
       `, [
-        cM('active', {
-          border: 'var(--n-dot-border-active)'
-        })
+        cM('active', 'border: var(--n-dot-border-active);')
       ])
     ])
   ]),
@@ -283,16 +287,12 @@ export default c([
   ]),
   insideModal(
     cB('slider', [
-      cB('slider-dot', {
-        backgroundColor: 'var(--n-dot-color-modal)'
-      })
+      cB('slider-dot', 'background-color: var(--n-dot-color-modal);')
     ])
   ),
   insidePopover(
     cB('slider', [
-      cB('slider-dot', {
-        backgroundColor: 'var(--n-dot-color-popover)'
-      })
+      cB('slider-dot', 'background-color: var(--n-dot-color-popover);')
     ])
   )
 ])

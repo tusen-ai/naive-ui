@@ -257,15 +257,7 @@ export default cB('input', `
       `),
       c('&:active', `
         color: var(--n-icon-color-pressed);
-      `),
-      cB('icon', [
-        c('&:hover', `
-          color: var(--n-icon-color-hover);
-        `),
-        c('&:active', `
-          color: var(--n-icon-color-pressed);
-        `)
-      ])
+      `)
     ]),
     c('&:hover', [
       cE('state-border', 'border: var(--n-border-hover);')
@@ -326,11 +318,13 @@ export default cB('input', `
         `)
       ])
     ]),
-    cB('icon', `
-      transition: color .3s var(--n-bezier);
-      color: var(--n-icon-color);
-      font-size: var(--n-icon-size);
-    `),
+    c('>', [
+      cB('icon', `
+        transition: color .3s var(--n-bezier);
+        color: var(--n-icon-color);
+        font-size: var(--n-icon-size);
+      `)
+    ]),
     cB('base-icon', `
       font-size: var(--n-icon-size);
     `)

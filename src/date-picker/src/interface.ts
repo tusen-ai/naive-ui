@@ -1,4 +1,4 @@
-import { Ref, Slots } from 'vue'
+import { Ref, Slots, UnwrapNestedRefs } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
@@ -24,7 +24,12 @@ export type FormattedValue = string | [string, string]
 
 export type Shortcuts =
   | Record<string, number | (() => number)>
-  | Record<string, [number, number] | (() => [number, number])>
+  | Record<
+  string,
+  | [number, number]
+  | readonly [number, number]
+  | (() => [number, number] | readonly [number, number])
+  >
 
 export type OnUpdateValue = (
   value: number &
@@ -36,6 +41,10 @@ export type OnUpdateValue = (
   [string, string] &
     ([string, string] | null)
 ) => void
+
+export type OnConfirm = OnUpdateValue
+
+export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
   value: string &
@@ -73,11 +82,27 @@ export type OnPanelUpdateValueImpl = (
 
 export type OnClose = (disableUpdateOnClose: boolean) => void
 
-export interface PanelRef {
+export interface RangePanelChildComponentRefs {
+  startYearScrollbarRef: Ref<ScrollbarInst | null>
+  endYearScrollbarRef: Ref<ScrollbarInst | null>
+  startMonthScrollbarRef: Ref<ScrollbarInst | null>
+  endMonthScrollbarRef: Ref<ScrollbarInst | null>
+  startYearVlRef: Ref<VirtualListInst | null>
+  endYearVlRef: Ref<VirtualListInst | null>
+}
+
+export interface PanelChildComponentRefs {
+  monthScrollbarRef: Ref<ScrollbarInst | null> // Only exists when type is month
+  yearScrollbarRef: Ref<ScrollbarInst | null>
+  // year, virtual scroll
+  yearVlRef: Ref<VirtualListInst | null>
+}
+
+export interface PanelRef
+  extends Partial<
+  UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+  > {
   $el: HTMLElement
-  // Only exists when type is month
-  monthScrollRef?: ScrollbarInst | null
-  yearScrollRef?: VirtualListInst | null
 }
 
 // 0 is Monday

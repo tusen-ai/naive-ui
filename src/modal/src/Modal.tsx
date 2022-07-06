@@ -17,7 +17,13 @@ import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { keep, call, warnOnce } from '../../_utils'
+import {
+  keep,
+  call,
+  warnOnce,
+  useIsComposing,
+  eventEffectNotPerformed
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
@@ -26,7 +32,7 @@ import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-const modalProps = {
+export const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
   show: Boolean,
   unstableShowMask: {
@@ -60,6 +66,7 @@ const modalProps = {
     type: Boolean,
     default: true
   },
+  blockScroll: { type: Boolean, default: true },
   ...presetProps,
   // events
   onEsc: Function as PropType<() => void>,
@@ -136,6 +143,9 @@ export default defineComponent({
     const NDialogProvider = props.internalDialog
       ? inject(dialogProviderInjectionKey, null)
       : null
+
+    const isComposingRef = useIsComposing()
+
     function doUpdateShow (show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
       if (onUpdateShow) call(onUpdateShow, show)
@@ -201,8 +211,8 @@ export default defineComponent({
     }
     function handleEsc (e: KeyboardEvent): void {
       props.onEsc?.()
-      if (props.closeOnEsc) {
-        doUpdateShow(false)
+      if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
+        !isComposingRef.value && doUpdateShow(false)
       }
     }
     provide(modalInjectionKey, {
@@ -269,6 +279,7 @@ export default defineComponent({
         {{
           default: () => {
             this.onRender?.()
+            const { unstableShowMask } = this
             return withDirectives(
               <div
                 role="none"
@@ -280,25 +291,6 @@ export default defineComponent({
                 ]}
                 style={this.cssVars as CSSProperties}
               >
-                {this.unstableShowMask ? (
-                  <Transition
-                    name="fade-in-transition"
-                    key="mask"
-                    appear={this.internalAppear ?? this.isMounted}
-                  >
-                    {{
-                      default: () => {
-                        return this.show ? (
-                          <div
-                            aria-hidden
-                            ref="containerRef"
-                            class={`${mergedClsPrefix}-modal-mask`}
-                          />
-                        ) : null
-                      }
-                    }}
-                  </Transition>
-                ) : null}
                 <NModalBodyWrapper
                   style={this.overlayStyle}
                   {...this.$attrs}
@@ -308,6 +300,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
@@ -316,7 +309,33 @@ export default defineComponent({
                   onBeforeLeave={this.handleBeforeLeave}
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
-                  onClickoutside={this.handleClickoutside}
+                  onClickoutside={
+                    unstableShowMask ? undefined : this.handleClickoutside
+                  }
+                  renderMask={
+                    unstableShowMask
+                      ? () => (
+                          <Transition
+                            name="fade-in-transition"
+                            key="mask"
+                            appear={this.internalAppear ?? this.isMounted}
+                          >
+                            {{
+                              default: () => {
+                                return this.show ? (
+                                  <div
+                                    aria-hidden
+                                    ref="containerRef"
+                                    class={`${mergedClsPrefix}-modal-mask`}
+                                    onClick={this.handleClickoutside}
+                                  />
+                                ) : null
+                              }
+                            }}
+                          </Transition>
+                        )
+                      : undefined
+                  }
                 >
                   {this.$slots}
                 </NModalBodyWrapper>

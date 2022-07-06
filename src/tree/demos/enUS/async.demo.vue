@@ -1,23 +1,42 @@
 <markdown>
 # Async loading
 
-After set `remote`, use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
+Use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 </markdown>
 
 <template>
-  <n-tree
-    block-line
-    checkable
-    remote
-    draggable
-    :data="data"
-    :checked-keys="checkedKeys"
-    :on-load="handleLoad"
-    :expanded-keys="expandedKeys"
-    @drop="handleDrop"
-    @update:checked-keys="handleCheckedKeysChange"
-    @update:expanded-keys="handleExpandedKeysChange"
-  />
+  <n-space vertical>
+    <n-space align="center">
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
+      <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
+    </n-space>
+    <n-tree
+      block-line
+      checkable
+      draggable
+      :data="data"
+      :checked-keys="checkedKeys"
+      :on-load="handleLoad"
+      :expanded-keys="expandedKeys"
+      :check-strategy="checkStrategy"
+      :allow-checking-not-loaded="cascade"
+      :cascade="cascade"
+      @drop="handleDrop"
+      @update:checked-keys="handleCheckedKeysChange"
+      @update:expanded-keys="handleExpandedKeysChange"
+    />
+    {{ JSON.stringify(checkedKeys) }}
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -73,6 +92,8 @@ export default defineComponent({
     const dataRef = ref(createData())
 
     return {
+      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
+      cascade: ref(true),
       data: dataRef,
       expandedKeys: expandedKeysRef,
       checkedKeys: checkedKeysRef,

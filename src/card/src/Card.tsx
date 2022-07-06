@@ -1,5 +1,6 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
+import useRtl from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
@@ -8,7 +9,6 @@ import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
 export interface Segmented {
   content?: boolean | 'soft'
@@ -46,7 +46,7 @@ export const cardBaseProps = {
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
 
-const cardProps = {
+export const cardProps = {
   ...(useTheme.props as ThemeProps<CardTheme>),
   ...cardBaseProps
 }
@@ -85,10 +85,14 @@ export default defineComponent({
           borderColor,
           actionColor,
           borderRadius,
-          closeColor,
+          lineHeight,
+          closeIconColor,
+          closeIconColorHover,
+          closeIconColorPressed,
           closeColorHover,
           closeColorPressed,
-          lineHeight,
+          closeBorderRadius,
+          closeIconSize,
           closeSize,
           boxShadow,
           colorPopover,
@@ -116,7 +120,9 @@ export default defineComponent({
         '--n-action-color': actionColor,
         '--n-title-text-color': titleTextColor,
         '--n-title-font-weight': titleFontWeight,
-        '--n-close-color': closeColor,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
         '--n-border-color': borderColor,
@@ -127,7 +133,9 @@ export default defineComponent({
         '--n-padding-left': paddingLeft,
         '--n-font-size': fontSize,
         '--n-title-font-size': titleFontSize,
-        '--n-close-size': closeSize
+        '--n-close-size': closeSize,
+        '--n-close-icon-size': closeIconSize,
+        '--n-close-border-radius': closeBorderRadius
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -227,6 +235,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
+                  absolute
                 />
               ) : null}
             </div>

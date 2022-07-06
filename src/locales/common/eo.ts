@@ -1,4 +1,6 @@
-const eo = {
+import type { NLocale } from './enUS'
+
+const eo: NLocale = {
   name: 'eo',
   global: {
     undo: 'Malfari',
@@ -42,6 +44,9 @@ const eo = {
     endDatePlaceholder: 'Fina dato',
     startDatetimePlaceholder: 'Komencaj dato kaj tempo',
     endDatetimePlaceholder: 'Finaj dato kaj tempo',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hodiaŭ'
@@ -104,7 +109,8 @@ const eo = {
     tipClockwise: 'Dekstrume',
     tipZoomOut: 'Malzomi',
     tipZoomIn: 'Zomi',
-    tipClose: 'Fermi (Esc)'
+    tipClose: 'Fermi (Esc)',
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

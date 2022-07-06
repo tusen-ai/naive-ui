@@ -88,6 +88,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/usage-sfc'
         },
         {
+          en: 'Using UMD',
+          zh: '使用 UMD',
+          path: '/umd'
+        },
+        {
           en: 'Configuring Fonts',
           zh: '配置字体',
           path: '/fonts'
@@ -106,6 +111,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Common Issues',
           zh: '常见问题',
           path: '/common-issues'
+        },
+        {
+          en: 'Controlled & Uncontrolled',
+          zh: '受控与非受控',
+          path: '/controlled-uncontrolled'
         }
       ]
     },
@@ -140,9 +150,9 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
-          en: 'Style Element Position',
-          zh: '样式元素位置',
-          path: '/style-position'
+          en: 'Potential Style Conflict',
+          zh: '潜在的样式冲突',
+          path: '/style-conflict'
         },
         {
           en: 'Third-Party Libraries',
@@ -698,6 +708,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '折叠渐变',
           enSuffix: true,
           path: '/collapse-transition'
+        },
+        {
+          en: 'Discrete API',
+          zh: '独立 API',
+          enSuffix: true,
+          path: '/discrete'
         },
         {
           en: 'Scrollbar',

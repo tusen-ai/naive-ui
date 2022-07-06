@@ -28,6 +28,7 @@ const radioProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  label: String,
   size: String as PropType<'small' | 'medium' | 'large'>,
   onUpdateChecked: [Function, Array] as PropType<
   undefined | MaybeArray<(value: boolean) => void>

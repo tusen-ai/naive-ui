@@ -11,15 +11,11 @@ import {
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
+import { createInjectionKey, flatten, getSlot } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { StepsTheme } from '../styles'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
-import {
-  createInjectionKey,
-  ExtractPublicPropTypes,
-  flatten,
-  getSlot
-} from '../../_utils'
-import type { StepsTheme } from '../styles'
 
 function stepWithIndex (step: VNodeChild, i: number): VNode | null {
   if (typeof step !== 'object' || step === null || Array.isArray(step)) {
@@ -34,7 +30,7 @@ function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
   return steps.map((step, i) => stepWithIndex(step, i))
 }
 
-const stepsProps = {
+export const stepsProps = {
   ...(useTheme.props as ThemeProps<StepsTheme>),
   current: Number,
   status: {
@@ -45,7 +41,13 @@ const stepsProps = {
     type: String as PropType<'small' | 'medium'>,
     default: 'medium'
   },
-  vertical: Boolean
+  vertical: Boolean,
+  'onUpdate:current': [Function, Array] as PropType<
+  MaybeArray<(current: number) => void>
+  >,
+  onUpdateCurrent: [Function, Array] as PropType<
+  MaybeArray<(current: number) => void>
+  >
 }
 
 export interface StepsInjection {

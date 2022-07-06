@@ -19,10 +19,10 @@ actions.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| negative-button-props | `HTMLAttributes` | `undefined` | 取消按钮的 DOM 属性 | NEXT_VERSION |
-| negative-text | `string` | `'取消'` | 取消按钮文字 |  |
-| positive-button-props | `HTMLAttributes` | `undefined` | 确定按钮的 DOM 属性 | NEXT_VERSION |
-| positive-text | `string` | `'确认'` | 确定按钮文字 |  |
+| negative-button-props | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
+| negative-text | `string \| null` | `'取消'` | 取消按钮文字 | NEXT_VERISON |
+| positive-button-props | `ButtonProps` | `undefined` | 确定按钮的属性 | 2.27.0 |
+| positive-text | `string \| null` | `'确认'` | 确定按钮文字 | NEXT_VERISON |
 | show-icon | `boolean` | `true` | 是否显示图标 |  |
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击确定的回调函数 |  |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击取消的回调函数 |  |

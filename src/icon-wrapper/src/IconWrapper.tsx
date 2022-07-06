@@ -1,12 +1,12 @@
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength } from '../../_utils'
+import { ExtractPublicPropTypes, formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
 import type { IconWrapperTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const iconWrapperProps = {
+export const iconWrapperProps = {
   ...(useTheme.props as ThemeProps<IconWrapperTheme>),
   size: {
     type: Number,
@@ -19,6 +19,8 @@ const iconWrapperProps = {
   color: String,
   iconColor: String
 } as const
+
+export type IconWrapperProps = ExtractPublicPropTypes<typeof iconWrapperProps>
 
 export const NIconWrapper = defineComponent({
   name: 'IconWrapper',

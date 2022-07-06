@@ -1,6 +1,42 @@
 import { CNode, CNodeChildren, CProperties } from 'css-render'
+import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
+
+const hoverStyleChildren = [
+  c('&::before', 'background-color: var(--n-item-color-hover);'),
+  cE('arrow', `
+    color: var(--n-arrow-color-hover);
+  `),
+  cE('icon', `
+    color: var(--n-item-icon-color-hover);
+  `),
+  cB('menu-item-content-header', `
+    color: var(--n-item-text-color-hover);
+  `, [
+    c('a', `
+      color: var(--n-item-text-color-hover);
+    `),
+    cE('extra', `
+      color: var(--n-item-text-color-hover);
+    `)
+  ])
+]
+
+const horizontalHoverStyleChildren = [
+  cE('icon', `
+    color: var(--n-item-icon-color-hover-horizontal);
+  `),
+  cB('menu-item-content-header', `
+    color: var(--n-item-text-color-hover-horizontal);
+  `, [
+    c('a', `
+      color: var(--n-item-text-color-hover-horizontal);
+    `),
+    cE('extra', `
+      color: var(--n-item-text-color-hover-horizontal);
+    `)
+  ])
+]
 
 // vars:
 // --n-color
@@ -9,21 +45,41 @@ import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-h
 // --n-font-size
 // --n-border-color-horizontal
 // --n-border-radius
+// --n-item-color-hover
 // --n-item-color-active
+// --n-item-color-active-hover
 // --n-item-color-active-collapsed
 // --n-arrow-color
 // --n-arrow-color-hover
 // --n-arrow-color-active
+// --n-arrow-color-active-hover
 // --n-arrow-color-child-active
+// --n-arrow-color-child-active-hover
 // --n-item-text-color
 // --n-item-text-color-hover
 // --n-item-text-color-active
+// --n-item-text-color-active-hover
 // --n-item-text-color-child-active
+// --n-item-text-color-child-active-hover
+// --n-item-text-color-horizontal
+// --n-item-text-color-hover-horizontal
+// --n-item-text-color-active-horizontal
+// --n-item-text-color-active-hover-horizontal
+// --n-item-text-color-child-active-horizontal
+// --n-item-text-color-child-active-hover-horizontal
 // --n-item-icon-color
 // --n-item-icon-color-hover
 // --n-item-icon-color-active
-// --n-item-icon-color-collapsed
+// --n-item-icon-color-active-hover
 // --n-item-icon-color-child-active
+// --n-item-icon-color-child-active-hover
+// --n-item-icon-color-collapsed
+// --n-item-icon-color-horizontal
+// --n-item-icon-color-hover-horizontal
+// --n-item-icon-color-active-horizontal
+// --n-item-icon-color-active-hover-horizontal
+// --n-item-icon-color-child-active-horizontal
+// --n-item-icon-color-child-active-hover-horizontal
 // --n-item-height
 export default c([
   cB('menu', `
@@ -40,52 +96,108 @@ export default c([
       padding-bottom: 0;
     `, [
       cB('submenu', 'margin: 0;'),
-      cB('menu-item', 'margin: 0;', [
-        c('&::before', {
-          backgroundColor: '#0000 !important'
-        }),
-        cM('selected', [
-          cB('menu-item-content', {
-            borderBottom: '2px solid var(--n-border-color-horizontal)'
-          })
-        ])
-      ]),
+      cB('menu-item', 'margin: 0;'),
       cB('menu-item-content', `
         padding: 0 20px;
         border-bottom: 2px solid #0000;
       `, [
+        c('&::before', 'display: none;'),
+        cM('selected', 'border-bottom: 2px solid var(--n-border-color-horizontal)')
+      ]),
+      cB('menu-item-content', [
+        cM('selected', [
+          cE('icon', 'color: var(--n-item-icon-color-active-horizontal);'),
+          cB('menu-item-content-header', `
+            color: var(--n-item-text-color-active-horizontal);
+          `, [
+            c('a', 'color: var(--n-item-text-color-active-horizontal);'),
+            cE('extra', 'color: var(--n-item-text-color-active-horizontal);')
+          ])
+        ]),
         cM('child-active', `
           border-bottom: 2px solid var(--n-border-color-horizontal);
-        `),
+        `, [
+          cB('menu-item-content-header', `
+            color: var(--n-item-text-color-child-active-horizontal);
+          `, [
+            c('a', `
+              color: var(--n-item-text-color-child-active-horizontal);
+            `),
+            cE('extra', `
+              color: var(--n-item-text-color-child-active-horizontal);
+            `)
+          ]),
+          cE('icon', `
+            color: var(--n-item-icon-color-child-active-horizontal);
+          `)
+        ]),
         cNotM('disabled', [
-          hoverStyle(
-            'border-bottom: 2px solid var(--n-border-color-horizontal);',
-            null
-          )
+          cNotM('selected, child-active', [
+            c('&:focus-within', horizontalHoverStyleChildren)
+          ]),
+          cM('selected', [
+            hoverStyle(null, [
+              cE('icon', 'color: var(--n-item-icon-color-active-hover-horizontal);'),
+              cB('menu-item-content-header', `
+                color: var(--n-item-text-color-active-hover-horizontal);
+              `, [
+                c('a', 'color: var(--n-item-text-color-active-hover-horizontal);'),
+                cE('extra', 'color: var(--n-item-text-color-active-hover-horizontal);')
+              ])
+            ])
+          ]),
+          cM('child-active', [
+            hoverStyle(null, [
+              cE('icon', 'color: var(--n-item-icon-color-child-active-hover-horizontal);'),
+              cB('menu-item-content-header', `
+                color: var(--n-item-text-color-child-active-hover-horizontal);
+              `, [
+                c('a', 'color: var(--n-item-text-color-child-active-hover-horizontal);'),
+                cE('extra', 'color: var(--n-item-text-color-child-active-hover-horizontal);')
+              ])
+            ])
+          ]),
+          hoverStyle('border-bottom: 2px solid var(--n-border-color-horizontal);', horizontalHoverStyleChildren)
+        ]),
+        cB('menu-item-content-header', [
+          c('a', 'color: var(--n-item-text-color-horizontal);')
         ])
       ])
-    ]
-    ),
+    ]),
     cM('collapsed', [
-      cB('menu-item', [
+      cB('menu-item-content', [
         cM('selected', [
           c('&::before', `
             background-color: var(--n-item-color-active-collapsed) !important;
           `)
-        ])
-      ]),
-      cB('menu-item-content', [
+        ]),
         cB('menu-item-content-header', 'opacity: 0;'),
         cE('arrow', 'opacity: 0;'),
         cE('icon', 'color: var(--n-item-icon-color-collapsed);')
       ])
     ]),
     cB('menu-item', `
-      transition: background-color .3s var(--n-bezier);
       height: var(--n-item-height);
       margin-top: 6px;
       position: relative;
+    `),
+    cB('menu-item-content', `
+      box-sizing: border-box;
+      line-height: 1.75;
+      height: 100%;
+      display: grid;
+      grid-template-areas: "icon content arrow";
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      padding-right: 18px;
+      transition:
+        background-color .3s var(--n-bezier),
+        padding-left .3s var(--n-bezier),
+        border-color .3s var(--n-bezier);
     `, [
+      c('> *', 'z-index: 1;'),
       c('&::before', `
         z-index: auto;
         content: "";
@@ -99,46 +211,23 @@ export default c([
         border-radius: var(--n-border-radius);
         transition: background-color .3s var(--n-bezier);
       `),
-      cNotM('disabled', [
-        c('&:active::before', 'background-color: var(--n-item-color-active);')
-      ]),
-      cM('selected', [
-        c('&::before', 'background-color: var(--n-item-color-active);'),
-        cB('menu-item-content', [
-          cE('arrow', 'color: var(--n-arrow-color-active);'),
-          cE('icon', 'color: var(--n-item-icon-color-active);'),
-          cB('menu-item-content-header', `
-            color: var(--n-item-text-color-active);
-          `, [
-            c('a', 'color: var(--n-item-text-color-active);'),
-            cE('extra', 'color: var(--n-item-text-color-active);')
-          ])
-        ])
-      ])
-    ]),
-    cB('menu-item-content', `
-      box-sizing: border-box;
-      line-height: 1.75;
-      height: 100%;
-      display: grid;
-      grid-template-areas: "icon content arrow";
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      z-index: auto;
-      padding-right: 18px;
-      transition:
-        background-color .3s var(--n-bezier),
-        padding-left .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
-    `, [
       cM('disabled', `
         opacity: .45;
         cursor: not-allowed;
       `),
       cM('collapsed', [
         cE('arrow', 'transform: rotate(0);')
+      ]),
+      cM('selected', [
+        c('&::before', 'background-color: var(--n-item-color-active);'),
+        cE('arrow', 'color: var(--n-arrow-color-active);'),
+        cE('icon', 'color: var(--n-item-icon-color-active);'),
+        cB('menu-item-content-header', `
+          color: var(--n-item-text-color-active);
+        `, [
+          c('a', 'color: var(--n-item-text-color-active);'),
+          cE('extra', 'color: var(--n-item-text-color-active);')
+        ])
       ]),
       cM('child-active', [
         cB('menu-item-content-header', `
@@ -159,24 +248,39 @@ export default c([
         `)
       ]),
       cNotM('disabled', [
-        hoverStyle(null, [
-          cE('arrow', `
-            color: var(--n-arrow-color-hover);
-          `),
-          cE('icon', `
-            color: var(--n-item-icon-color-hover);
-          `),
-          cB('menu-item-content-header', `
-            color: var(--n-item-text-color-hover);
-          `, [
-            c('a', `
-              color: var(--n-item-text-color-hover);
-            `),
-            cE('extra', `
-              color: var(--n-item-text-color-hover);
-            `)
+        cNotM('selected, child-active', [
+          c('&:focus-within', hoverStyleChildren)
+        ]),
+        cM('selected', [
+          hoverStyle(null, [
+            cE('arrow', 'color: var(--n-arrow-color-active-hover);'),
+            cE('icon', 'color: var(--n-item-icon-color-active-hover);'),
+            cB('menu-item-content-header', `
+              color: var(--n-item-text-color-active-hover);
+            `, [
+              c('a', 'color: var(--n-item-text-color-active-hover);'),
+              cE('extra', 'color: var(--n-item-text-color-active-hover);')
+            ])
           ])
-        ])
+        ]),
+        cM('child-active', [
+          hoverStyle(null, [
+            cE('arrow', 'color: var(--n-arrow-color-child-active-hover);'),
+            cE('icon', 'color: var(--n-item-icon-color-child-active-hover);'),
+            cB('menu-item-content-header', `
+              color: var(--n-item-text-color-child-active-hover);
+            `, [
+              c('a', 'color: var(--n-item-text-color-child-active-hover);'),
+              cE('extra', 'color: var(--n-item-text-color-child-active-hover);')
+            ])
+          ])
+        ]),
+        cM('selected', [
+          hoverStyle(null, [
+            c('&::before', 'background-color: var(--n-item-color-active-hover);')
+          ])
+        ]),
+        hoverStyle(null, hoverStyleChildren)
       ]),
       cE('icon', `
         grid-area: icon;
@@ -213,6 +317,7 @@ export default c([
         color: var(--n-item-text-color);
       `, [
         c('a', `
+          outline: none;
           text-decoration: none;
           transition: color .3s var(--n-bezier);
           color: var(--n-item-text-color);

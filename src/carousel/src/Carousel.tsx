@@ -51,7 +51,7 @@ type TransitionStyle = Partial<
 Pick<CSSProperties, ElementOf<typeof transitionProperties>>
 >
 
-const carouselProps = {
+export const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
   defaultIndex: {
     type: Number,
@@ -109,6 +109,8 @@ const carouselProps = {
   },
   transitionProps: Object as PropType<TransitionProps>,
   draggable: Boolean,
+  prevSlideStyle: [Object, String] as PropType<CSSProperties | string>,
+  nextSlideStyle: [Object, String] as PropType<CSSProperties | string>,
   touchable: {
     type: Boolean,
     default: true
@@ -516,12 +518,14 @@ export default defineComponent({
       getSlideStyle,
       addSlide,
       removeSlide,
-      onCarouselItemClick
+      onCarouselItemClick,
+      prevSlideStyleRef: toRef(props, 'prevSlideStyle'),
+      nextSlideStyleRef: toRef(props, 'nextSlideStyle')
     }
     provide(carouselMethodsInjectionKey, carouselMethods)
 
     // Autoplay
-    let autoplayTimer: NodeJS.Timeout | null = null
+    let autoplayTimer: number | null = null
     function resetAutoplay (cleanOnly?: boolean): void {
       if (autoplayTimer) {
         clearInterval(autoplayTimer)
@@ -529,7 +533,7 @@ export default defineComponent({
       }
       const { autoplay, interval } = props
       if (autoplay && interval && !cleanOnly) {
-        autoplayTimer = setInterval(next, interval)
+        autoplayTimer = window.setInterval(next, interval)
       }
     }
     function mesureAutoplay (): void {

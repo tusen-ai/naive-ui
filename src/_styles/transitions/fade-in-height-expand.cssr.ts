@@ -19,7 +19,7 @@ interface FadeInHeightExpandTransitionOption {
   reverse?: boolean
 }
 
-export default function ({
+export function fadeInHeightExpandTransition ({
   overflow = 'hidden',
   duration = '.3s',
   originalTransition = '',

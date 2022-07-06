@@ -1,7 +1,7 @@
 <markdown>
 # Flex tabs
 
-Only works with `line` typed tabs.
+Only works with `'line'` or `'bar'` typed tabs.
 </markdown>
 
 <template>
@@ -33,7 +33,7 @@ Only works with `line` typed tabs.
           Sign In
         </n-button>
       </n-tab-pane>
-      <n-tab-pane name="signup" tab="Sign Up">
+      <n-tab-pane name="signup" tab="Sign up">
         <n-form>
           <n-form-item-row label="Username">
             <n-input />
@@ -46,7 +46,7 @@ Only works with `line` typed tabs.
           </n-form-item-row>
         </n-form>
         <n-button type="primary" block secondary strong>
-          Sign Up
+          Sign up
         </n-button>
       </n-tab-pane>
     </n-tabs>

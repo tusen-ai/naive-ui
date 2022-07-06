@@ -10,6 +10,7 @@ Long data's friend.
 basic.vue
 slot.vue
 quick-jumper.vue
+size.vue
 size-picker.vue
 disabled.vue
 item-count.vue
@@ -26,6 +27,7 @@ page-size-option.vue
 | --- | --- | --- | --- | --- |
 | default-page | `number` | `1` | Current page in uncontrolled mode. |  |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
+| disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |
@@ -37,6 +39,7 @@ page-size-option.vue
 | page | `number` | `undefined` | Current page in controlled mode. |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |
@@ -77,7 +80,7 @@ interface PaginationInfo {
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| goto | `()` | Fast jump text before quick jumper. | NEXT_VERSION |
+| goto | `()` | Fast jump text before quick jumper. | 2.27.0 |
 | label | The same as `PaginationRenderLabel`'s parameters | Item content. | 2.24.0 |
 | next | `(info: PaginationInfo)` | Next page. |  |
 | prev | `(info: PaginationInfo)` | Previous page. |  |

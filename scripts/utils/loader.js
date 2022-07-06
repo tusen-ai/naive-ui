@@ -72,7 +72,7 @@ async function loadAllMdFile (filePathArr) {
           return {
             path: `${filePath}/${file}`,
             dir: filePath,
-            file: file,
+            file,
             name: file.slice(0, index)
           }
         })

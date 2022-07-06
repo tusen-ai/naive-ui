@@ -204,6 +204,7 @@ describe('n-dropdown', () => {
       writable: false,
       value: options[1]
     })
+    options[1].dispatchEvent(mouseEnter)
     options[3].dispatchEvent(mouseLeave)
     await nextTick(() => {
       expect(options[3].className).not.toEqual(pendingOptionClassName)

@@ -44,6 +44,9 @@ const deDE: NLocale = {
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
     endDatetimePlaceholder: 'Enddatum und Uhrzeit',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Heute'
@@ -106,7 +109,9 @@ const deDE: NLocale = {
     tipClockwise: 'Uhrzeigersinn',
     tipZoomOut: 'Rauszoomen',
     tipZoomIn: 'Reinzoomen',
-    tipClose: 'Schließen (Esc)'
+    tipClose: 'Schließen (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

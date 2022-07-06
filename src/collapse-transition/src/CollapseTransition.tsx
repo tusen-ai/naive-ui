@@ -7,6 +7,7 @@ import {
   watchEffect
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import useRtl from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warnOnce } from '../../_utils'
@@ -15,7 +16,7 @@ import style from './styles/index.cssr'
 import { collapseTransitionLight } from '../styles'
 import { NFadeInExpandTransition } from '../../_internal'
 
-const collapseProps = {
+export const collapseTransitionProps = {
   ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
   show: {
     type: Boolean,
@@ -33,12 +34,12 @@ const collapseProps = {
 } as const
 
 export type CollapseTransitionProps = ExtractPublicPropTypes<
-  typeof collapseProps
+  typeof collapseTransitionProps
 >
 
 export default defineComponent({
   name: 'CollapseTransition',
-  props: collapseProps,
+  props: collapseTransitionProps,
   inheritAttrs: false,
   setup (props) {
     if (__DEV__) {
@@ -51,13 +52,19 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const mergedThemeRef = useTheme(
       'CollapseTransition',
       '-collapse-transition',
       style,
       collapseTransitionLight,
       props,
+      mergedClsPrefixRef
+    )
+    const rtlEnabledRef = useRtl(
+      'CollapseTransition',
+      mergedRtlRef,
       mergedClsPrefixRef
     )
     const mergedShowRef = computed(() => {
@@ -81,6 +88,7 @@ export default defineComponent({
       : undefined
 
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedShow: mergedShowRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -101,6 +109,8 @@ export default defineComponent({
                 {
                   class: [
                     `${this.mergedClsPrefix}-collapse-transition`,
+                    this.rtlEnabled &&
+                      `${this.mergedClsPrefix}-collapse-transition--rtl`,
                     this.themeClass
                   ],
                   style: this.cssVars

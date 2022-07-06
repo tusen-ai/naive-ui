@@ -5,11 +5,22 @@ import {
   PropType,
   watchEffect,
   VNodeChild,
-  reactive
+  ref
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const countdownProps = {
+export interface CountdownTimeInfo {
+  hours: number
+  minutes: number
+  seconds: number
+  milliseconds: number
+}
+
+export interface CountdownInst {
+  reset: () => void
+}
+
+export const countdownProps = {
   duration: {
     type: Number,
     default: 0
@@ -22,14 +33,7 @@ const countdownProps = {
     type: Number as PropType<0 | 1 | 2 | 3>,
     default: 0
   },
-  render: Function as PropType<
-  (props: {
-    hours: number
-    minutes: number
-    seconds: number
-    milliseconds: number
-  }) => VNodeChild
-  >,
+  render: Function as PropType<(props: CountdownTimeInfo) => VNodeChild>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -44,37 +48,32 @@ export default defineComponent({
     let elapsed = 0
     let finished = false
 
-    const timeInfo = reactive({
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      milliseconds: 0
+    // in ms
+    const distanceRef = ref(0)
+    watchEffect(() => {
+      distanceRef.value = props.duration
     })
 
-    deriveDisplayValue(props.duration)
     let pnow = -1
 
     function getDistance (time: DOMHighResTimeStamp): number {
       return props.duration - elapsed + pnow - time
     }
 
-    function deriveDisplayValue (distance: number): void {
+    function getTimeInfo (distance: number): CountdownTimeInfo {
       const hours = Math.floor(distance / 3600000)
       const minutes = Math.floor((distance % 3600000) / 60000)
       const seconds = Math.floor((distance % 60000) / 1000)
       const milliseconds = Math.floor(distance % 1000)
-      timeInfo.hours = hours
-      timeInfo.minutes = minutes
-      timeInfo.seconds = seconds
-      timeInfo.milliseconds = milliseconds
+      return {
+        hours,
+        minutes,
+        seconds,
+        milliseconds
+      }
     }
 
-    function getDisplayValue (info: {
-      hours: number
-      minutes: number
-      seconds: number
-      milliseconds: number
-    }): string {
+    function getDisplayValue (info: CountdownTimeInfo): string {
       const { hours, minutes, seconds, milliseconds } = info
       const { precision } = props
       switch (precision) {
@@ -99,7 +98,7 @@ export default defineComponent({
       const { precision } = props
       const distance = getDistance(performance.now())
       if (distance <= 0) {
-        deriveDisplayValue(0)
+        distanceRef.value = 0
         stopTimer()
         if (!finished) {
           props.onFinish?.()
@@ -119,7 +118,7 @@ export default defineComponent({
         default:
           leftTime = distance % 1000
       }
-      deriveDisplayValue(distance)
+      distanceRef.value = distance
       timerId = window.setTimeout(() => {
         frame()
       }, leftTime)
@@ -152,13 +151,43 @@ export default defineComponent({
     onBeforeUnmount(() => {
       stopTimer()
     })
-    return () => {
-      const { render } = props
-      if (render) {
-        return render(timeInfo)
-      } else {
-        return getDisplayValue(timeInfo)
-      }
+
+    function reset (): void {
+      distanceRef.value = props.duration
+    }
+
+    const countdownExposedMethod: CountdownInst = {
+      reset
+    }
+    return Object.assign(countdownExposedMethod, {
+      distance: distanceRef,
+      getTimeInfo,
+      getDisplayValue
+    })
+  },
+  render () {
+    const { render, precision, distance, getTimeInfo, getDisplayValue } = this
+    let timeInfo: CountdownTimeInfo
+    switch (precision) {
+      case 0:
+        timeInfo = getTimeInfo(distance + 999)
+        timeInfo.milliseconds = 0
+        break
+      case 1:
+        timeInfo = getTimeInfo(distance + 99)
+        timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 100) * 100
+        break
+      case 2:
+        timeInfo = getTimeInfo(distance + 9)
+        timeInfo.milliseconds = Math.floor(timeInfo.milliseconds / 10) * 10
+        break
+      case 3:
+        timeInfo = getTimeInfo(distance)
+    }
+    if (render) {
+      return render(timeInfo)
+    } else {
+      return getDisplayValue(timeInfo)
     }
   }
 })

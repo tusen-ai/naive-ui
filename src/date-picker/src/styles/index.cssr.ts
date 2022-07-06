@@ -1,5 +1,5 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-bezier
@@ -67,23 +67,33 @@ export default c([
       color: var(--n-icon-color);
       transition: color .3s var(--n-bezier);
     `),
+    cB('icon', `
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
+    `),
     cM('disabled', [
       cB('date-picker-icon', `
+        color: var(--n-icon-color-disabled);
+      `),
+      cB('icon', `
         color: var(--n-icon-color-disabled);
       `)
     ])
   ]),
   cB('date-panel', `
+    width: fit-content;
     outline: none;
     margin: 4px 0;
     display: grid;
     grid-template-columns: 0fr;
     border-radius: var(--n-panel-border-radius);
     background-color: var(--n-panel-color);
-    box-shadow: var(--n-panel-box-shadow);
     color: var(--n-panel-text-color);
   `, [
     fadeInScaleUpTransition(),
+    cM('shadow', `
+      box-shadow: var(--n-panel-box-shadow);
+    `),
     cB('date-panel-calendar', {
       padding: 'var(--n-calendar-left-padding)',
       display: 'grid',
@@ -154,9 +164,15 @@ export default c([
           ])
         ]),
         cM('disabled', `
-          background-color: var(--n-item-color-disabled);
+          color: var(--n-item-text-color-disabled);
           cursor: not-allowed;
-        `)
+        `, [
+          cM('selected', [
+            c('&::before', `
+              background-color: var(--n-item-color-disabled);
+            `)
+          ])
+        ])
       ])
     ]),
     cM('date', {

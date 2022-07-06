@@ -1,2 +1,6 @@
-export { default as NCountdown } from './src/Countdown'
-export type { CountdownProps } from './src/Countdown'
+export { default as NCountdown, countdownProps } from './src/Countdown'
+export type {
+  CountdownProps,
+  CountdownTimeInfo,
+  CountdownInst
+} from './src/Countdown'

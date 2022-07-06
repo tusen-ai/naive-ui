@@ -61,6 +61,8 @@ export default defineComponent({
       isActive: isActiveRef,
       index: indexRef,
       style: styleRef,
+      prevSlideStyle: NCarousel.prevSlideStyleRef,
+      nextSlideStyle: NCarousel.nextSlideStyleRef,
       handleClick
     }
   },
@@ -90,8 +92,15 @@ export default defineComponent({
         tabindex="-1"
         data-index={index}
         aria-hidden={!isActive}
-        style={style}
-        // @ts-expect-error
+        style={[
+          style,
+          isPrev ? this.prevSlideStyle : '',
+          isNext ? this.nextSlideStyle : ''
+        ]}
+        // We use ts-ignore for vue-tsc, since it seems to patch native event
+        // for vue components
+        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+        // @ts-ignore
         onClickCapture={this.handleClick}
       >
         {slots.default?.({

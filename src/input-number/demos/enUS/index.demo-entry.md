@@ -7,8 +7,11 @@ If you just want a number, this is for you.
 ```demo
 basic.vue
 disabled.vue
+parse.vue
+precision.vue
 event.vue
 icon.vue
+button-placement.vue
 loading.vue
 min-max.vue
 size.vue
@@ -18,6 +21,7 @@ show-button.vue
 disable-keyboard.vue
 change-timing.vue
 status.vue
+custom-icon.vue
 ```
 
 ## API
@@ -28,18 +32,22 @@ status.vue
 | --- | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. | 2.26.1 |
 | bordered | `boolean` | `true` | Whether to show a border. |  |
+| button-placement | `'both' \| 'right'` | `'right'` | Placement of add & minus button. | 2.29.1 |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
 | default-value | `number \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
+| format | `(value: number \| null) => string` | `undefined` | Method to format value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | Control the keyboard behavior. If you set corresponding to false, the keyboard behavior will be disabled. |  |
 | loading | `boolean` | `undefined` | Set loading state. If set (true/false), the element will always take up enough space for the loading indicator. |  |
 | max | `number` | `undefined` | The max value. |  |
 | min | `number` | `undefined` | The min value. |  |
+| parse | `(input: string) => number \| null` | `undefined` | Methof to parse input string. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | placeholder | `string` | `'Please Input'` | Placeholder. |  |
+| precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |  |
 | update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |  |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |  |
@@ -51,10 +59,12 @@ status.vue
 
 ### InputNumber Slots
 
-| Name   | Parameters | Description          |
-| ------ | ---------- | -------------------- |
-| prefix | `()`       | Prefix content slot. |
-| suffix | `()`       | Suffix content slot. |
+| Name       | Parameters | Description               | Version |
+| ---------- | ---------- | ------------------------- | ------- |
+| add-icon   | `()`       | icon of the add button.   | 2.28.1  |
+| minus-icon | `()`       | icon of the minus button. | 2.28.1  |
+| prefix     | `()`       | Prefix content slot.      |         |
+| suffix     | `()`       | Suffix content slot.      |         |
 
 ### InputNumber Methods
 

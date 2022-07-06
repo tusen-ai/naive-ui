@@ -37,7 +37,7 @@ function normalizeHexaUnit (value: string): boolean {
 // 0 - 100%
 function normalizeAlphaUnit (value: string): number | false {
   if (/^\d{1,3}\.?\d*%$/.test(value.trim())) {
-    return Math.max(0, Math.min(parseInt(value), 100))
+    return Math.max(0, Math.min(parseInt(value) / 100, 100))
   }
   return false
 }
@@ -98,7 +98,7 @@ export default defineComponent({
           break
         case 'H':
           unit = normalizeHueUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -108,7 +108,7 @@ export default defineComponent({
         case 'L':
         case 'V':
           unit = normalizeSlvUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -116,7 +116,7 @@ export default defineComponent({
           break
         case 'A':
           unit = normalizeAlphaUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)
@@ -126,7 +126,7 @@ export default defineComponent({
         case 'G':
         case 'B':
           unit = normalizeRgbUnit(value)
-          if (!unit) {
+          if (unit === false) {
             inputValueRef.value = getInputString()
           } else {
             props.onUpdateValue(unit)

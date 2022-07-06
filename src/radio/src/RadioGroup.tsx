@@ -97,7 +97,7 @@ function mapSlot (
   }
 }
 
-const radioGroupProps = {
+export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
   value: [String, Number] as PropType<string | number | null>,

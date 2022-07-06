@@ -8,12 +8,16 @@ It is possible to pass a custom template when you want to customize the item lin
   <n-breadcrumb>
     <n-breadcrumb-item>
       <n-dropdown :options="options1">
-        I'm ok
+        <div class="trigger">
+          I'm ok
+        </div>
       </n-dropdown>
     </n-breadcrumb-item>
     <n-breadcrumb-item>
       <n-dropdown :options="options2">
-        I'm ok
+        <div class="trigger">
+          I'm ok
+        </div>
       </n-dropdown>
     </n-breadcrumb-item>
   </n-breadcrumb>
@@ -49,3 +53,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.trigger::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+}
+</style>

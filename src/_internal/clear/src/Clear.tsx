@@ -1,7 +1,8 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
+import { resolveSlot } from '../../../_utils'
 import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
-import NBaseIcon from '../../icon'
+import { NBaseIcon } from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
 
@@ -31,21 +32,24 @@ export default defineComponent({
           {{
             default: () => {
               return this.show ? (
-                <NBaseIcon
-                  clsPrefix={clsPrefix}
+                <div
                   key="dismiss"
                   class={`${clsPrefix}-base-clear__clear`}
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                   data-clear
                 >
-                  {{
-                    default: () => <ClearIcon />
-                  }}
-                </NBaseIcon>
+                  {resolveSlot(this.$slots.icon, () => [
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{
+                        default: () => <ClearIcon />
+                      }}
+                    </NBaseIcon>
+                  ])}
+                </div>
               ) : (
                 <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
-                  {this.$slots.default?.()}
+                  {this.$slots.placeholder?.()}
                 </div>
               )
             }

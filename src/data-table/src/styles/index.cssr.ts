@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 const fixedColumnStyle = createFixedColumnStyle()
@@ -101,7 +101,6 @@ export default c([
         })
       ])
     ]),
-    cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
       margin-right: 8px;
       display: inline-block;
@@ -278,6 +277,11 @@ export default c([
         border-color .3s var(--n-bezier),
         color .3s var(--n-bezier);
     `, [
+      cM('expand', [
+        cB('data-table-expand-trigger', `
+          margin-right: 0;
+        `)
+      ]),
       cM('last-row', {
         borderBottom: '0 solid var(--n-merged-border-color)'
       }, [
@@ -291,15 +295,18 @@ export default c([
         })
       ]),
       cM('summary', `
-      background-color: var(--n-merged-th-color);
-    `),
+        background-color: var(--n-merged-th-color);
+      `),
       cM('hover', {
         backgroundColor: 'var(--n-merged-td-color-hover)'
       }),
-      cM('ellipsis', `
+      cE('ellipsis', `
+        display: inline-block;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        max-width: 100%;
+        vertical-align: bottom;
       `),
       cM('selection, expand', `
         text-align: center;
@@ -391,8 +398,7 @@ export default c([
     cB('data-table-table', `
       font-variant-numeric: tabular-nums;
       width: 100%;
-      word-wrap: break-word;
-      word-break: break-all;
+      word-break: break-word;
       transition: background-color .3s var(--n-bezier);
       border-collapse: separate;
       border-spacing: 0;

@@ -33,12 +33,15 @@ download.vue
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |  |
+| directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | 2.28.3 |
+| directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | 2.28.3 |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
 | input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
+| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |
 | method | `string` | `'POST'` | The HTTP request method. |  |
@@ -51,6 +54,7 @@ download.vue
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |  |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |  |
 | show-trigger | `boolean` | `true` | Show upload trigger. | 2.21.5 |
+| trigger-style | `Object \| string` | `undefined` | Style of trigger area. | 2.29.1 |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
@@ -63,16 +67,18 @@ download.vue
 
 #### UploadFileInfo Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| id | `string \| number` | Unique file ID. |
-| name | `string` | Filename. |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage? | `number` | The progress percentage of the file being uploaded. |
-| file? | `File \| null` | The object of the file stored in the browser. |
-| thumbnailUrl? | `string \| null` | Thumbnail URL. |
-| type? | `string \| null` | MIME type. |
-| url? | `string \| null` | File URL. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| id | `string \| number` | Unique file ID. |  |
+| name | `string` | Filename. |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
+| batchId? | `string \| null` | Batch id of uploaded file. The files selected in a same upload batch will have same `batchId`. | 2.28.3 |
+| file? | `File \| null` | The object of the file stored in the browser. |  |
+| fullPath? | `string \| null` | Relative path of uploaded file. | 2.28.3 |
+| percentage? | `number` | The progress percentage of the file being uploaded. |  |
+| thumbnailUrl? | `string \| null` | Thumbnail URL. |  |
+| type? | `string \| null` | MIME type. |  |
+| url? | `string \| null` | File URL. |  |
 
 ### UploadTrigger Props
 
@@ -117,7 +123,7 @@ interface UploadCustomRequestOptions {
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `()` | The placeholder of the upload dragger; For an example see <n-a href="#drag">Drag to Upload Demo</n-a>. |
+| default | `()` | The placeholder of the upload dragger; For an example see <n-a href="#drag.vue">Drag to Upload Demo</n-a>. |
 
 ### UploadTrigger Slots
 

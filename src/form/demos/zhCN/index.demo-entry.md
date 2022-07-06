@@ -4,20 +4,27 @@
 
 收集、验证信息。
 
+<n-alert type="warning" title="注意">
+  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: number`</n-text>。
+</n-alert>
+
 ## 演示
 
 ```demo
 inline.vue
 custom-rule.vue
 custom-validation.vue
+i18n.vue
 top.vue
 left.vue
 item-only.vue
+render-feedback.vue
 async.vue
 disabled.vue
 show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
+dynamic.vue
 ```
 
 ## API
@@ -38,7 +45,7 @@ custom-messages.vue
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号 |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
-| validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | NEXT_VERSION |
+| validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | 2.27.0 |
 
 #### FormItemRule Type
 
@@ -46,19 +53,21 @@ custom-messages.vue
   以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 </n-alert>
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| required | `boolean` | 是否必填 |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | 异步校验，支持定义回调函数 |
-| trigger | `string \| Array<string>` | 触发方式 |
-| message | `string` | 校验失败时展示的信息 |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | 异步校验，支持定义回调函数 |  |
+| message | `string` | 校验失败时展示的信息 |  |
+| renderMessage | `() => VNodeChild` | 信息的渲染函数 | 2.29.1 |
+| required | `boolean` | 是否必填 |  |
+| trigger | `string \| Array<string>` | 触发方式 |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |  |
 
 ### FormItem Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
+| render-feedback | `(raw: string \| undefined) => string \| VNode` | `undefined` | 自定义 feedback 的渲染函数 |  |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
 | ignore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |  |
 | label | `string` | `undefined` | 标签信息 |  |

@@ -56,7 +56,7 @@ interface PrivateMessageRef extends MessageReactive {
 
 export type MessageProviderInst = MessageApiInjection
 
-const messageProviderProps = {
+export const messageProviderProps = {
   ...(useTheme.props as ThemeProps<MessageTheme>),
   to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
@@ -131,7 +131,7 @@ export default defineComponent({
         content,
         key,
         destroy: () => {
-          messageRefs.value[key].hide()
+          messageRefs.value[key]?.hide()
         }
       })
       const { max } = props

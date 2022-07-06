@@ -58,7 +58,7 @@ export default defineComponent({
     const message = useMessage()
     return {
       formRef,
-      size: ref('medium'),
+      size: ref<'small' | 'medium' | 'large'>('medium'),
       formValue: ref({
         user: {
           name: '',

@@ -61,22 +61,26 @@ focus-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |  |
+| autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.28.3 |
+| blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
-| icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
+| iconPlacement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
-| mask-closable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
-| negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |  |
-| positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |  |
-| show-icon | `boolean` | `true` | 是否显示 `icon` |  |
+| maskClosable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
+| negativeButtonProps | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
+| negativeText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
+| positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |  |
 
 ### DialogReactive API
@@ -95,15 +99,17 @@ focus-debug.vue
 | icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |  |
 | loading | `boolean` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |  |
+| negativeButtonProps | `ButtonProps` | 取消按钮的属性 | 2.27.0 |
 | negativeText | `string` | 不填对应的按钮不会出现 |  |
+| positiveButtonProps | `ButtonProps` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
-| onNegativeClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
-| onPositiveClick | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
+| onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 
 #### DialogReactive Methods
 
@@ -113,22 +119,24 @@ focus-debug.vue
 
 ### Dialog Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| bordered | `boolean` | `false` | 是否显示 `border` |
-| closable | `boolean` | `true` | 是否显示 `close` 图标 |
-| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |
-| icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |
-| icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |
-| loading | `boolean` | `false` | 是否显示 `loading` 状态 |
-| negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |
-| positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |
-| show-icon | `boolean` | `true` | 是否显示 `icon` |
-| title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |
-| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |
-| on-close | `() => void` | `undefined` | 关闭时执行的回调函数,默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| on-negative-click | `() => void` | `undefined` | 执行 `negative` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-| on-positive-click | `() => void` | `undefined` | 执行 `positive` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `false` | 是否显示 `border` |  |
+| closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
+| icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |  |
+| icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |  |
+| loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
+| negative-button-props | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
+| negative-text | `string` | `undefined` | 取消按钮的文字，不填对应的按钮不会出现 |  |
+| positive-button-props | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
+| positive-text | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
+| show-icon | `boolean` | `true` | 是否显示 `icon` |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |  |
+| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |  |
+| on-close | `() => void` | `undefined` | 点击关闭时执行的回调函数 |  |
+| on-negative-click | `(e: MouseEvent) => void` | `undefined` | 执行 `negative` 时执行的回调函数 |  |
+| on-positive-click | `(e: MouseEvent) => void` | `undefined` | 执行 `positive` 时执行的回调函数 |  |
 
 ### Dialog Slots
 

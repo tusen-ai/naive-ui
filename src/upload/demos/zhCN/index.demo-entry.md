@@ -17,7 +17,7 @@ image-style.vue
 image-card-style.vue
 custom-request.vue
 abstract.vue
-retry-debug.vue
+debug.vue
 ```
 
 ## API
@@ -35,11 +35,14 @@ retry-debug.vue
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | 2.28.3 |
+| directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | 2.28.3 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
 | image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
 | input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
+| is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
@@ -52,6 +55,7 @@ retry-debug.vue
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
+| trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
@@ -64,16 +68,18 @@ retry-debug.vue
 
 #### UploadFileInfo Type
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| id | `string \| number` | 文件 id，需要唯一 |
-| name | `string` | 文件名 |
-| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |
-| percentage? | `number` | 文件上传进度百分比，在 uploading 状态下生效 |
-| file? | `File \| null` | 文件对应的浏览器 File 对象 |
-| thumbnailUrl? | `string \| null` | 缩略图 URL |
-| type? | `string \| null` | MIME 类型 |
-| url? | `string \| null` | 文件下载 URL |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| id | `string` | 文件 id，需要唯一 |  |
+| name | `string` | 文件名 |  |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
+| batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | 2.28.3 |
+| file? | `File \| null` | 文件对应的浏览器 File 对象 |  |
+| fullPath? | `string \| null` | 上传文件的相对路径 | 2.28.3 |
+| percentage? | `number \| null` | 文件上传进度百分比，在 uploading 状态下生效 |  |
+| thumbnailUrl? | `string \| null` | 缩略图 URL |  |
+| type? | `string \| null` | MIME 类型 |  |
+| url? | `string \| null` | 文件下载 URL |  |
 
 ### UploadTrigger Props
 

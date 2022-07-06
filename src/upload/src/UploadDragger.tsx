@@ -18,13 +18,14 @@ export default defineComponent({
     return () => {
       const {
         mergedClsPrefixRef: { value: mergedClsPrefix },
-        mergedDisabledRef: { value: mergedDisabled }
+        mergedDisabledRef: { value: mergedDisabled },
+        maxReachedRef: { value: maxReached }
       } = NUpload
       return (
         <div
           class={[
             `${mergedClsPrefix}-upload-dragger`,
-            mergedDisabled && `${mergedClsPrefix}-upload-dragger--disabled`
+            (mergedDisabled || maxReached) && `${mergedClsPrefix}-upload-dragger--disabled`
           ]}
         >
           {slots}

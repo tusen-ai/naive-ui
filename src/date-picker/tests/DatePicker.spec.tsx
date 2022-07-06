@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
+import { format } from 'date-fns/esm'
 import { NDatePicker } from '../index'
 import { Value } from '../src/interface'
-import { format } from 'date-fns'
 import { dateEnUS } from '../../locales'
 
 describe('n-date-picker', () => {
@@ -290,5 +290,17 @@ describe('n-date-picker', () => {
     expect(wrapper.text().includes('07akioni')).toBe(true)
     await wrapper.setProps({ separator: '08akioni', type: 'datetimerange' })
     expect(wrapper.text().includes('08akioni')).toBe(true)
+  })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NDatePicker, {
+        props: { status: status }
+      })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
   })
 })

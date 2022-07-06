@@ -3,7 +3,7 @@
 ## Prequisites
 
 <n-alert title="Note" type="warning" style="margin-bottom: 16px;">
-  Due to package size, Naive UI doesn't include highlight.js. If you want use Code, make sure you have set highlightjs before using it.
+  Due to package size, Naive UI doesn't include highlight.js. If you want to use Code, make sure you have set highlightjs before using it.
 </n-alert>
 
 The following code shows how to set hljs of Code. Importing highlight.js on demand is recommonded, because it can significantly reduce bundle size of your app.

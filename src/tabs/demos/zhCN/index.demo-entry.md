@@ -2,6 +2,10 @@
 
 在同一块区域切换内容。
 
+<n-alert type="warning" title="注意">
+  <n-text code>n-tabs</n-text> 默认情况下会从 slot 获取默认展示的 tab 值，因此会产生一个 vue slot 的 warning。如果你不想看到这个 warning，请设定一个 <n-text code>default-value</n-text>。
+</n-alert>
+
 ## 演示
 
 ```demo
@@ -9,19 +13,22 @@ basic.vue
 segment.vue
 card.vue
 flex-label.vue
-size.vue
 prefix.vue
+size.vue
 display-directive.vue
 addable.vue
 before-leave.vue
 no-pane.vue
 update-bar-manually.vue
 bar-width.vue
+trigger.vue
 line-debug.vue
 style-inherit-debug.vue
 shadow-debug.vue
 unkeyed-debug.vue
 addable-debug.vue
+animation-debug.vue
+animationx-debug.vue
 ```
 
 ## API
@@ -31,15 +38,17 @@ addable-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否允许添加标签，只在标签的 `type` 为 `card` 时生效 |  |
+| animated | `boolean` | `false` | 标签页切换是否使用动画 | 2.27.0 |
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |
-| justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式 |  |
+| justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式，只对 `'line'` 和 `'bar'` 类型生效 | `space-*` 2.29.1 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
 | pane-class | `string` | `undefined` | 面板的类名 |  |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
+| trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |  |
 | value | `string \| number` | `undefined` | 受控模式下的值 |  |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |  |

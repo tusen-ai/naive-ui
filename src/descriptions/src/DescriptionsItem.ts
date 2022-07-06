@@ -1,12 +1,8 @@
-import {
-  defineComponent,
-  PropType,
-  CSSProperties
-} from 'vue'
+import { defineComponent, PropType, CSSProperties } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
-const descriptionItemProps = {
+export const descriptionsItemProps = {
   label: String,
   span: {
     type: Number,
@@ -17,13 +13,13 @@ const descriptionItemProps = {
 } as const
 
 export type DescriptionItemProps = ExtractPublicPropTypes<
-  typeof descriptionItemProps
+  typeof descriptionsItemProps
 >
 
 export default defineComponent({
   name: 'DescriptionsItem',
   [DESCRIPTION_ITEM_FLAG]: true,
-  props: descriptionItemProps,
+  props: descriptionsItemProps,
   render () {
     return null
   }

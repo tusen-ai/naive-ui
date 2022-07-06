@@ -11,6 +11,7 @@ form.vue
 slot.vue
 render-tag.vue
 option-format.vue
+on-create.vue
 ```
 
 ## API
@@ -27,13 +28,22 @@ option-format.vue
 | input-style | `string \| Object` | `undefined` | 自定义输入框的样式 |  |
 | max | `number` | `undefined` | tag 的最大数量 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
-| render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | 自定义渲染 tag | NEXT_VERSION |
+| render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | 自定义渲染 tag | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸大小 |  |
 | tag-style | `string \| Object` | `undefined` | 自定义标签的样式 |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |  |
 | value | `string[] \| Array<{ label: string, value: string }>` | `undefined` | 受控模式下的值 |  |
-| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | 根据输入的值创造对应的选项 | NEXT_VERSION |
-| on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化时的回调 |  |
+| on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | 根据输入的值创造对应的选项 | 2.30.4 |
+| on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | 组件值发生变化时的回调 |  |
+
+#### DynamicTagsOption Type
+
+```ts
+export interface DynamicTagsOption {
+  label: string
+  value: string
+}
+```
 
 ### DynamicTags Slots
 

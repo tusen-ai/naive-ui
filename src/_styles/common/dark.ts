@@ -37,7 +37,7 @@ const base = {
   alphaScrollbar: '0.2',
   alphaScrollbarHover: '0.3',
   alphaCode: '0.12',
-  alphaTag: '0',
+  alphaTag: '0.2',
 
   // primary
   primaryHover: '#7fe7c4',
@@ -143,10 +143,11 @@ const derived: ThemeCommonVars = {
   borderColor: overlay(base.alphaBorder),
 
   // close
-  closeColorHover: overlay(Number(base.alphaClose) * 1.25),
-  closeColor: overlay(Number(base.alphaClose)),
-  closeColorPressed: overlay(Number(base.alphaClose) * 0.8),
-  closeColorDisabled: overlay(base.alpha4),
+  closeIconColorHover: overlay(Number(base.alphaClose)),
+  closeIconColor: overlay(Number(base.alphaClose)),
+  closeIconColorPressed: overlay(Number(base.alphaClose)),
+  closeColorHover: 'rgba(255, 255, 255, .12)',
+  closeColorPressed: 'rgba(255, 255, 255, .08)',
 
   // clear
   clearColor: overlay(base.alpha4),
@@ -185,9 +186,9 @@ const derived: ThemeCommonVars = {
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: overlay(base.alphaDisabledInput),
 
-  buttonColor2: 'rgba(255, 255, 255, .06)',
-  buttonColor2Hover: 'rgba(255, 255, 255, .09)',
-  buttonColor2Pressed: 'rgba(255, 255, 255, .05)',
+  buttonColor2: 'rgba(255, 255, 255, .08)',
+  buttonColor2Hover: 'rgba(255, 255, 255, .12)',
+  buttonColor2Pressed: 'rgba(255, 255, 255, .08)',
 
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .24), 0 3px 6px 0 rgba(0, 0, 0, .18), 0 5px 12px 4px rgba(0, 0, 0, .12)',

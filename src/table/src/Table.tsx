@@ -1,5 +1,6 @@
 import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import useRtl from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -7,7 +8,7 @@ import { tableLight } from '../styles'
 import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const tableProps = {
+export const tableProps = {
   ...(useTheme.props as ThemeProps<TableTheme>),
   bordered: {
     type: Boolean,
@@ -35,7 +36,8 @@ export default defineComponent({
   name: 'Table',
   props: tableProps,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Table',
       '-table',
@@ -44,6 +46,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Table', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
@@ -106,6 +109,7 @@ export default defineComponent({
       )
       : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
@@ -121,6 +125,7 @@ export default defineComponent({
           `${mergedClsPrefix}-table`,
           this.themeClass,
           {
+            [`${mergedClsPrefix}-table--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-table--bottom-bordered`]: this.bottomBordered,
             [`${mergedClsPrefix}-table--bordered`]: this.bordered,
             [`${mergedClsPrefix}-table--single-line`]: this.singleLine,

@@ -7,17 +7,22 @@ export const self = (vars: ThemeCommonVars) => {
   const {
     fontSize,
     textColor3,
-    primaryColorHover,
-    primaryColorPressed,
-    textColor2
+    textColor2,
+    borderRadius,
+    buttonColor2Hover,
+    buttonColor2Pressed
   } = vars
   return {
     ...commonVariables,
     fontSize: fontSize,
+    itemLineHeight: '1.25',
     itemTextColor: textColor3,
-    itemTextColorHover: primaryColorHover,
-    itemTextColorPressed: primaryColorPressed,
+    itemTextColorHover: textColor2,
+    itemTextColorPressed: textColor2,
     itemTextColorActive: textColor2,
+    itemBorderRadius: borderRadius,
+    itemColorHover: buttonColor2Hover,
+    itemColorPressed: buttonColor2Pressed,
     separatorColor: textColor3
   }
 }

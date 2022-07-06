@@ -6,7 +6,7 @@ A basic dropdown.
 
 <template>
   <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <n-button> Go For a Trip </n-button>
+    <n-button>Go For a Trip</n-button>
   </n-dropdown>
 </template>
 

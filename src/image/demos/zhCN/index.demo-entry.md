@@ -11,6 +11,8 @@ error.vue
 preview-disabled.vue
 custom.vue
 tooltip.vue
+full-debug.vue
+lazy.vue
 ```
 
 ## API
@@ -23,6 +25,8 @@ tooltip.vue
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
 | img-props | `object` | `undefined` | 组件中 img 元素的属性 |  |
+| lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | 2.30.5 |
+| intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 图片在容器内的的适应类型 |  |
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否可以点击图片进行预览 |  |
@@ -39,6 +43,12 @@ tooltip.vue
 | --- | --- | --- | --- | --- |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
+
+### Image Slots
+
+| 名称        | 参数 | 说明                       | 版本   |
+| ----------- | ---- | -------------------------- | ------ |
+| placeholder | `()` | 图像没有加载成功时候的占位 | 2.30.5 |
 
 ### ImageGroup Slots
 

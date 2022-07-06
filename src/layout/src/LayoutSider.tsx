@@ -12,7 +12,7 @@ import {
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, call, warn } from '../../_utils'
+import { formatLength, call, warn, useReactivated } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
@@ -28,7 +28,7 @@ import {
 } from './interface'
 import { layoutInjectionKey } from './Layout'
 
-const layoutSiderProps = {
+export const layoutSiderProps = {
   position: positionProp,
   bordered: Boolean,
   collapsedWidth: {
@@ -171,6 +171,23 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
+    let scrollX = 0
+    let scrollY = 0
+    const handleNativeElScroll = (e: Event): void => {
+      const target = e.target as HTMLElement
+      scrollX = target.scrollLeft
+      scrollY = target.scrollTop
+      props.onScroll?.(e)
+    }
+    useReactivated(() => {
+      if (props.nativeScrollbar) {
+        const el = scrollableElRef.value
+        if (el) {
+          el.scrollTop = scrollY
+          el.scrollLeft = scrollX
+        }
+      }
+    })
     provide(layoutSiderInjectionKey, {
       collapsedRef: mergedCollapsedRef,
       collapseModeRef: toRef(props, 'collapseMode')
@@ -249,6 +266,7 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement: siderPlacementRef,
+      handleNativeElScroll,
       handleTransitionend,
       handleTriggerClick,
       inlineThemeDisabled,
@@ -307,13 +325,13 @@ export default defineComponent({
         ) : (
           <div
             class={`${mergedClsPrefix}-layout-sider-scroll-container`}
-            onScroll={this.onScroll}
+            onScroll={this.handleNativeElScroll}
             style={[
               this.scrollContainerStyle,
-              this.contentStyle,
               {
                 overflow: 'auto'
-              }
+              },
+              this.contentStyle
             ]}
             ref="scrollableElRef"
           >

@@ -44,6 +44,8 @@ const zhTW: NLocale = {
     endDatePlaceholder: '結束日期',
     startDatetimePlaceholder: '開始日期時間',
     endDatetimePlaceholder: '結束日期時間',
+    startMonthPlaceholder: '開始月份',
+    endMonthPlaceholder: '結束月份',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今天'
@@ -107,7 +109,9 @@ const zhTW: NLocale = {
     tipClockwise: '向右旋转',
     tipZoomOut: '缩小',
     tipZoomIn: '放大',
-    tipClose: '关闭（Esc）'
+    tipClose: '关闭（Esc）',
+    // TODO: translation
+    tipOriginalSize: '缩放到原始尺寸'
   }
 }
 

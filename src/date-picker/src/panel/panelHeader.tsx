@@ -97,10 +97,17 @@ export default defineComponent({
                                   // month and year click show month type
                                   type="month"
                                   key="month"
-                                  useAsQuickJump={true}
+                                  useAsQuickJump
                                   value={this.value}
                                 />,
-                                [[clickoutside, handleClickOutside]]
+                                [
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
+                                ]
                             )
                             : null
                       }}

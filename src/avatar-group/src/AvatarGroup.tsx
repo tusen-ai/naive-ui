@@ -24,7 +24,7 @@ interface AvatarOption {
   src: string
 }
 
-const avatarGroupProps = {
+export const avatarGroupProps = {
   ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,

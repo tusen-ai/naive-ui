@@ -1,4 +1,4 @@
-import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:

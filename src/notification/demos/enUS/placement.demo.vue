@@ -29,7 +29,9 @@ const PlacementButtons = defineComponent({
       { placement: 'top-left', text: 'Top left' },
       { placement: 'top-right', text: 'Top right' },
       { placement: 'bottom-left', text: 'Bottom left' },
-      { placement: 'bottom-right', text: 'Bottom right' }
+      { placement: 'bottom-right', text: 'Bottom right' },
+      { placement: 'bottom', text: 'Bottom' },
+      { placement: 'top', text: 'Top' }
     ] as const
     return {
       notification,

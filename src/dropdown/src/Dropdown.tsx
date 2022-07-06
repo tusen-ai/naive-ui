@@ -42,13 +42,20 @@ import {
   RenderLabel,
   RenderIcon,
   RenderLabelImpl,
-  RenderIconImpl
+  RenderIconImpl,
+  RenderOption,
+  NodeProps,
+  RenderOptionImpl,
+  DropdownMenuProps
 } from './interface'
 import { dropdownInjectionKey } from './context'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
   renderIconRef: Ref<RenderIconImpl | undefined>
+  renderOptionRef: Ref<RenderOptionImpl | undefined>
+  menuPropsRef: Ref<DropdownMenuProps | undefined>
+  nodePropsRef: Ref<NodeProps | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -85,9 +92,12 @@ const dropdownBaseProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
+  menuProps: Function as PropType<DropdownMenuProps>,
   showArrow: Boolean,
   renderLabel: Function as PropType<RenderLabel>,
   renderIcon: Function as PropType<RenderIcon>,
+  renderOption: Function as PropType<RenderOption>,
+  nodeProps: Function as PropType<NodeProps>,
   labelField: {
     type: String,
     default: 'label'
@@ -108,7 +118,7 @@ const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
 keyof typeof popoverBaseProps
 >
 
-const dropdownProps = {
+export const dropdownProps = {
   ...popoverBaseProps,
   ...dropdownBaseProps,
   ...(useTheme.props as ThemeProps<DropdownTheme>)
@@ -230,6 +240,11 @@ export default defineComponent({
       activeKeyPathRef: activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
       mergedShowRef: mergedShowRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
+      renderOptionRef: toRef(props, 'renderOption') as Ref<
+      RenderOptionImpl | undefined
+      >,
+      menuPropsRef: toRef(props, 'menuProps'),
       doSelect,
       doUpdateShow
     })
@@ -243,7 +258,8 @@ export default defineComponent({
       if (onSelect) call(onSelect as OnUpdateValueImpl, key, node)
     }
     function doUpdateShow (value: boolean): void {
-      const { 'onUpdate:show': onUpdateShow } = props
+      const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
+      if (_onUpdateShow) call(_onUpdateShow, value)
       if (onUpdateShow) call(onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
@@ -409,29 +425,32 @@ export default defineComponent({
       onMouseenter,
       onMouseleave
     ) => {
-      const { mergedClsPrefix } = this
+      const { mergedClsPrefix, menuProps } = this
       this.onRender?.()
+      const menuNodeProps =
+        menuProps?.(
+          undefined,
+          this.tmNodes.map((v) => v.rawNode)
+        ) || {}
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [
-          className,
-          `${mergedClsPrefix}-dropdown`,
-          this.themeClass,
-          this.trigger === 'manual' &&
-            `${mergedClsPrefix}-popover--manual-trigger`,
-          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
-        ],
+        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as any],
         showArrow: this.showArrow,
         arrowStyle: this.arrowStyle,
+        scrollable: this.scrollable,
         onMouseenter,
         onMouseleave
       }
       return h(
         NDropdownMenu,
-        mergeProps(this.$attrs, dropdownProps) as typeof dropdownProps
+        mergeProps(
+          this.$attrs,
+          dropdownProps,
+          menuNodeProps
+        ) as typeof dropdownProps
       )
     }
     const { mergedTheme } = this
@@ -440,7 +459,8 @@ export default defineComponent({
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
       internalRenderBody: renderPopoverBody,
-      onUpdateShow: this.doUpdateShow
+      onUpdateShow: this.doUpdateShow,
+      'onUpdate:show': undefined
     }
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>

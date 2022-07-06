@@ -8,6 +8,7 @@ import useRadio from './use-radio'
 import style from './styles/radio.cssr'
 import useRtl from '../../_mixins/use-rtl'
 
+export const radioProps = useRadio.props
 export type RadioProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({
@@ -88,7 +89,7 @@ export default defineComponent({
     })
   },
   render () {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { $slots, mergedClsPrefix, onRender, label } = this
     onRender?.()
     return (
       <label
@@ -126,10 +127,10 @@ export default defineComponent({
           />
         </div>
         {resolveWrappedSlot($slots.default, (children) => {
-          if (!children) return null
+          if (!children && !label) return null
           return (
             <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
-              {children}
+              {children || label}
             </div>
           )
         })}

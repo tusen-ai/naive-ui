@@ -1,5 +1,5 @@
+import enUS from 'date-fns/esm/locale/en-US'
 import type { Locale } from 'date-fns'
-import enUS from 'date-fns/locale/en-US'
 
 interface NDateLocale {
   name: string

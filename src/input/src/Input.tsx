@@ -15,7 +15,8 @@ import {
   provide,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  Fragment
+  Fragment,
+  VNode
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -23,6 +24,7 @@ import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
+import useRtl from '../../_mixins/use-rtl'
 import {
   NBaseClear,
   NBaseIcon,
@@ -56,12 +58,11 @@ import type {
   InputWrappedRef
 } from './interface'
 import { inputInjectionKey } from './interface'
-import { isEmptyValue } from './utils'
+import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
-const inputProps = {
+export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -119,6 +120,7 @@ const inputProps = {
     type: Boolean,
     default: undefined
   },
+  allowInput: Function as PropType<(value: string) => boolean>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -195,6 +197,10 @@ export default defineComponent({
     const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
+    const currentFocusedInputRef = ref<
+    HTMLInputElement | HTMLTextAreaElement | null
+    >(null)
+    const focusedInputCursorControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
     // local
     const { localeRef } = useLocale('Input')
@@ -236,8 +242,8 @@ export default defineComponent({
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (isEmptyValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
+        (isEmptyInputValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -248,8 +254,8 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (isEmptyValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
+        (isEmptyInputValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
     // focus
@@ -447,22 +453,35 @@ export default defineComponent({
       }
       syncSource = targetValue
       if (isComposingRef.value) return
-      const changedValue = targetValue
-      if (!props.pair) {
-        event === 'input' ? doUpdateValue(changedValue) : doChange(changedValue)
-      } else {
-        let { value } = mergedValueRef
-        if (!Array.isArray(value)) {
-          value = ['', '']
+      focusedInputCursorControl.recordCursor()
+      const isIncomingValueValid = allowInput(targetValue)
+      if (isIncomingValueValid) {
+        if (!props.pair) {
+          event === 'input' ? doUpdateValue(targetValue) : doChange(targetValue)
         } else {
-          value = [...value]
+          let { value } = mergedValueRef
+          if (!Array.isArray(value)) {
+            value = ['', '']
+          } else {
+            value = [value[0], value[1]]
+          }
+          value[index] = targetValue
+          event === 'input' ? doUpdateValue(value) : doChange(value)
         }
-        value[index] = changedValue
-        event === 'input' ? doUpdateValue(value) : doChange(value)
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
       vm.$forceUpdate()
+      if (!isIncomingValueValid) {
+        void nextTick(focusedInputCursorControl.restoreCursor)
+      }
+    }
+    function allowInput (value: string): boolean {
+      const { allowInput } = props
+      if (typeof allowInput === 'function') {
+        return allowInput(value)
+      }
+      return true
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
@@ -480,13 +499,21 @@ export default defineComponent({
         activatedRef.value = false
       }
       dealWithEvent(e, 'blur')
+      currentFocusedInputRef.value = null
     }
-    function handleInputFocus (e: FocusEvent): void {
+    function handleInputFocus (e: FocusEvent, index: number): void {
       doUpdateValueFocus(e)
       focusedRef.value = true
       activatedRef.value = true
       doActivate()
       dealWithEvent(e, 'focus')
+      if (index === 0) {
+        currentFocusedInputRef.value = inputElRef.value
+      } else if (index === 1) {
+        currentFocusedInputRef.value = inputEl2Ref.value
+      } else if (index === 2) {
+        currentFocusedInputRef.value = textareaElRef.value
+      }
     }
     function handleWrapperBlur (e: FocusEvent): void {
       if (props.passivelyActivated) {
@@ -601,24 +628,23 @@ export default defineComponent({
       }
       on('mouseup', document, hidePassword)
     }
-    function handleWrapperKeyDown (e: KeyboardEvent): void {
+    function handleWrapperKeydown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
-      switch (e.code) {
+      switch (e.key) {
         case 'Escape':
-          handleWrapperKeyDownEsc()
+          handleWrapperKeydownEsc()
           break
         case 'Enter':
-        case 'NumpadEnter':
-          handleWrapperKeyDownEnter(e)
+          handleWrapperKeydownEnter(e)
           break
       }
     }
-    function handleWrapperKeyDownEnter (e: KeyboardEvent): void {
+    function handleWrapperKeydownEnter (e: KeyboardEvent): void {
       if (props.passivelyActivated) {
         const { value: focused } = activatedRef
         if (focused) {
           if (props.internalDeactivateOnEnter) {
-            handleWrapperKeyDownEsc()
+            handleWrapperKeydownEsc()
           }
           return
         }
@@ -630,7 +656,7 @@ export default defineComponent({
         }
       }
     }
-    function handleWrapperKeyDownEsc (): void {
+    function handleWrapperKeydownEsc (): void {
       if (props.passivelyActivated) {
         activatedRef.value = false
         void nextTick(() => {
@@ -667,7 +693,7 @@ export default defineComponent({
         wrapperEl?.contains(document.activeElement) &&
         wrapperEl !== document.activeElement
       ) {
-        handleWrapperKeyDownEsc()
+        handleWrapperKeydownEsc()
       }
     }
     function syncMirror (value: string | null): void {
@@ -916,7 +942,7 @@ export default defineComponent({
       handleClear,
       handlePasswordToggleClick,
       handlePasswordToggleMousedown,
-      handleWrapperKeyDown,
+      handleWrapperKeydown,
       handleTextAreaMirrorResize,
       getTextareaScrollContainer: () => {
         return textareaElRef.value
@@ -928,7 +954,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedStatus, themeClass, onRender, $slots } = this
+    const { mergedClsPrefix, mergedStatus, themeClass, onRender } = this
+    const $slots = this.$slots as {
+      prefix?: () => VNode[]
+      suffix?: () => VNode[]
+      separator?: () => VNode[]
+      count?: (props: unknown) => VNode[]
+      ['clear-icon']?: () => VNode[]
+      ['clear-icon-placeholder']?: () => VNode[]
+      ['password-visible-icon']?: () => VNode[]
+      ['password-invisible-icon']?: () => VNode[]
+    }
     onRender?.()
     return (
       <div
@@ -966,7 +1002,7 @@ export default defineComponent({
         onCompositionstart={this.handleCompositionStart}
         onCompositionend={this.handleCompositionEnd}
         onKeyup={this.onKeyup}
-        onKeydown={this.handleWrapperKeyDown}
+        onKeydown={this.handleWrapperKeydown}
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
@@ -999,7 +1035,10 @@ export default defineComponent({
                       <textarea
                         {...this.inputProps}
                         ref="textareaElRef"
-                        class={`${mergedClsPrefix}-input__textarea-el`}
+                        class={[
+                          `${mergedClsPrefix}-input__textarea-el`,
+                          this.inputProps?.class
+                        ]}
                         autofocus={this.autofocus}
                         rows={Number(this.rows)}
                         placeholder={this.placeholder as string | undefined}
@@ -1015,10 +1054,11 @@ export default defineComponent({
                         }
                         style={[
                           this.textDecorationStyle[0] as any,
+                          this.inputProps?.style,
                           scrollContainerWidthStyle
                         ]}
                         onBlur={this.handleInputBlur}
-                        onFocus={this.handleInputFocus}
+                        onFocus={(e) => this.handleInputFocus(e, 2)}
                         onInput={this.handleInput}
                         onChange={this.handleChange}
                         onScroll={this.handleTextAreaScroll}
@@ -1067,8 +1107,14 @@ export default defineComponent({
                 }
                 {...this.inputProps}
                 ref="inputElRef"
-                class={`${mergedClsPrefix}-input__input-el`}
-                style={this.textDecorationStyle[0] as any}
+                class={[
+                  `${mergedClsPrefix}-input__input-el`,
+                  this.inputProps?.class
+                ]}
+                style={[
+                  this.textDecorationStyle[0] as any,
+                  this.inputProps?.style
+                ]}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -1085,7 +1131,7 @@ export default defineComponent({
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
+                onFocus={(e) => this.handleInputFocus(e, 0)}
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
               />
@@ -1114,19 +1160,25 @@ export default defineComponent({
                 this.loading !== undefined ? (
                 <div class={`${mergedClsPrefix}-input__suffix`}>
                   {[
-                    resolveWrappedSlot($slots.clear, (children) => {
-                      return (
-                        (this.clearable || children) && (
-                          <NBaseClear
-                            clsPrefix={mergedClsPrefix}
-                            show={this.showClearButton}
-                            onClear={this.handleClear}
-                          >
-                            {{ default: () => children }}
-                          </NBaseClear>
+                    resolveWrappedSlot(
+                      $slots['clear-icon-placeholder'],
+                      (children) => {
+                        return (
+                          (this.clearable || children) && (
+                            <NBaseClear
+                              clsPrefix={mergedClsPrefix}
+                              show={this.showClearButton}
+                              onClear={this.handleClear}
+                            >
+                              {{
+                                placeholder: () => children,
+                                icon: () => this.$slots['clear-icon']?.()
+                              }}
+                            </NBaseClear>
+                          )
                         )
-                      )
-                    }),
+                      }
+                    ),
                     !this.internalLoadingBeforeSuffix ? children : null,
                     this.loading !== undefined ? (
                       <NBaseSuffix
@@ -1146,26 +1198,26 @@ export default defineComponent({
                       </WordCount>
                     ) : null,
                     this.mergedShowPasswordOn && this.type === 'password' ? (
-                      <NBaseIcon
-                        clsPrefix={mergedClsPrefix}
+                      <div
                         class={`${mergedClsPrefix}-input__eye`}
                         onMousedown={this.handlePasswordToggleMousedown}
                         onClick={this.handlePasswordToggleClick}
                       >
-                        {{
-                          default: () => {
-                            return this.passwordVisible
-                              ? resolveSlot(
-                                $slots['password-visible-icon'],
-                                () => [<EyeIcon />]
-                              )
-                              : resolveSlot(
-                                $slots['password-invisible-icon'],
-                                () => [<EyeOffIcon />]
-                              )
-                          }
-                        }}
-                      </NBaseIcon>
+                        {this.passwordVisible
+                          ? resolveSlot($slots['password-visible-icon'], () => [
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => <EyeIcon /> }}
+                              </NBaseIcon>
+                          ])
+                          : resolveSlot(
+                            $slots['password-invisible-icon'],
+                            () => [
+                                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                  {{ default: () => <EyeOffIcon /> }}
+                                </NBaseIcon>
+                            ]
+                          )}
+                      </div>
                     ) : null
                   ]}
                 </div>
@@ -1200,7 +1252,7 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
+                onFocus={(e) => this.handleInputFocus(e, 1)}
                 onInput={(e) => this.handleInput(e, 1)}
                 onChange={(e) => this.handleChange(e, 1)}
               />
@@ -1221,7 +1273,11 @@ export default defineComponent({
                           show={this.showClearButton}
                           onClear={this.handleClear}
                         >
-                          {{ default: () => $slots.clear?.() }}
+                          {{
+                            icon: () => $slots['clear-icon']?.(),
+                            placeholder: () =>
+                              $slots['clear-icon-placeholder']?.()
+                          }}
                         </NBaseClear>
                       ),
                       children

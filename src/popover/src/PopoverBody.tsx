@@ -16,26 +16,30 @@ import {
   provide,
   CSSProperties,
   VNode,
-  VNodeChild
+  VNodeChild,
+  watchEffect,
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
+import { NxScrollbar } from '../../_internal/scrollbar'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   formatLength,
   isSlotEmpty,
   resolveWrappedSlot,
-  useAdjustedTo
+  useAdjustedTo,
+  isJsdom
 } from '../../_utils'
 import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
-import style from './styles/index.cssr'
 import type { PopoverInjection } from './Popover'
 import type { PopoverTrigger } from './interface'
 import { popoverBodyInjectionKey } from './interface'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
+import style from './styles/index.cssr'
 
 export const popoverBodyProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
@@ -56,11 +60,16 @@ export const popoverBodyProps = {
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
   keepAliveOnHover: Boolean,
-  internalTrapFocus: Boolean,
+  scrollable: Boolean,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // private
+  internalDeactivateImmediately: Boolean,
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
-  /** @deprecated */
+  internalTrapFocus: Boolean,
+  // deprecated
   minWidth: Number,
   maxWidth: Number
 }
@@ -100,6 +109,13 @@ export default defineComponent({
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
+    const displayedRef = ref(false)
+    watchEffect(() => {
+      const { show } = props
+      if (show && !isJsdom() && !props.internalDeactivateImmediately) {
+        displayedRef.value = true
+      }
+    })
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger, onClickoutside } = props
       const directives: DirectiveArguments = []
@@ -108,29 +124,51 @@ export default defineComponent({
       } = NPopover
       if (!positionManually) {
         if (trigger === 'click' && !onClickoutside) {
-          directives.push([clickoutside, handleClickOutside])
+          directives.push([
+            clickoutside,
+            handleClickOutside,
+            undefined as unknown as string,
+            { capture: true }
+          ])
         }
         if (trigger === 'hover') {
           directives.push([mousemoveoutside, handleMouseMoveOutside])
         }
       }
       if (onClickoutside) {
-        directives.push([clickoutside, handleClickOutside])
+        directives.push([
+          clickoutside,
+          handleClickOutside,
+          undefined as unknown as string,
+          { capture: true }
+        ])
       }
-      if (props.displayDirective === 'show') {
+      if (
+        props.displayDirective === 'show' ||
+        (props.animated && displayedRef.value)
+      ) {
         directives.push([vShow, props.show])
       }
       return directives
     })
     const styleRef = computed(() => {
-      return [
-        {
-          width: props.width === 'trigger' ? '' : formatLength(props.width)
-        },
-        props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
-        props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
-        inlineThemeDisabled ? undefined : cssVarsRef.value
-      ]
+      const width =
+        props.width === 'trigger' ? undefined : formatLength(props.width)
+      const style: CSSProperties[] = []
+      if (width) {
+        style.push({ width })
+      }
+      const { maxWidth, minWidth } = props
+      if (maxWidth) {
+        style.push({ maxWidth: formatLength(maxWidth) })
+      }
+      if (minWidth) {
+        style.push({ maxWidth: formatLength(minWidth) })
+      }
+      if (!inlineThemeDisabled) {
+        style.push(cssVarsRef.value)
+      }
+      return style
     })
     const cssVarsRef = computed(() => {
       const {
@@ -192,7 +230,7 @@ export default defineComponent({
       followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
-      if (props.trigger === 'hover' && props.keepAliveOnHover) {
+      if (props.trigger === 'hover' && props.keepAliveOnHover && props.show) {
         NPopover.handleMouseEnter(e)
       }
     }
@@ -227,50 +265,109 @@ export default defineComponent({
 
     function renderContentNode (): VNode | null {
       themeClassHandle?.onRender()
+      const shouldRenderDom =
+        props.displayDirective === 'show' ||
+        props.show ||
+        (props.animated && displayedRef.value)
+      if (!shouldRenderDom) {
+        return null
+      }
       let contentNode: VNode
-      const {
-        internalRenderBodyRef: { value: renderBody }
-      } = NPopover
+      const renderBody = NPopover.internalRenderBodyRef.value
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       if (!renderBody) {
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
-        const renderContentInnerNode = (): VNodeChild[] => [
-          resolveWrappedSlot(
-            slots.header,
-            (children) =>
-              children && [
-                <div class={`${mergedClsPrefix}-popover__header`}>
-                  {children}
-                </div>,
-                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
-              ]
-          ) || slots.default?.(),
-          props.showArrow
+        const renderContentInnerNode = (): VNodeChild[] => {
+          const hasContent =
+            !isSlotEmpty(slots.header) ||
+            !isSlotEmpty(slots.footer) ||
+            !isSlotEmpty(slots.default)
+          const body = hasContent ? (
+            <>
+              {resolveWrappedSlot(slots.header, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__header`}
+                    style={props.headerStyle}
+                  >
+                    {children}
+                  </div>
+                ) : null
+              })}
+              {resolveWrappedSlot(slots.default, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__content`}
+                    style={props.contentStyle}
+                  >
+                    {slots}
+                  </div>
+                ) : null
+              })}
+              {resolveWrappedSlot(slots.footer, (children) => {
+                return children ? (
+                  <div
+                    class={`${mergedClsPrefix}-popover__footer`}
+                    style={props.footerStyle}
+                  >
+                    {children}
+                  </div>
+                ) : null
+              })}
+            </>
+          ) : props.scrollable ? (
+            slots.default?.()
+          ) : (
+            <div
+              class={`${mergedClsPrefix}-popover__content`}
+              style={props.contentStyle}
+            >
+              {slots}
+            </div>
+          )
+          const maybeScrollableBody = props.scrollable ? (
+            <NxScrollbar
+              contentClass={
+                !hasContent ? undefined : `${mergedClsPrefix}-popover__content`
+              }
+              contentStyle={!hasContent ? undefined : props.contentStyle}
+            >
+              {{
+                default: () => body
+              }}
+            </NxScrollbar>
+          ) : (
+            body
+          )
+          const arrow = props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
               clsPrefix: mergedClsPrefix
             })
             : null
-        ]
+          return [maybeScrollableBody, arrow]
+        }
+        const hasHeaderOrFooter =
+          !isSlotEmpty(slots.header) || !isSlotEmpty(slots.footer)
         contentNode = h(
           'div',
           mergeProps(
             {
               class: [
                 `${mergedClsPrefix}-popover`,
+                `${mergedClsPrefix}-popover-shared`,
                 themeClassHandle?.themeClass.value,
                 extraClass.map((v) => `${mergedClsPrefix}-${v}`),
                 {
-                  [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
-                  [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
-                  [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
-                    slots.header
-                  ),
+                  [`${mergedClsPrefix}-popover--scrollable`]: props.scrollable,
+                  [`${mergedClsPrefix}-popover--show-header-or-footer`]:
+                    hasHeaderOrFooter,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw,
-                  [`${mergedClsPrefix}-popover--manual-trigger`]:
-                    props.trigger === 'manual',
-                  [`${mergedClsPrefix}-popover--center-arrow`]:
+                  [`${mergedClsPrefix}-popover-shared--overlap`]: props.overlap,
+                  [`${mergedClsPrefix}-popover-shared--show-arrow`]:
+                    props.showArrow,
+                  [`${mergedClsPrefix}-popover-shared--center-arrow`]:
                     props.arrowPointToCenter
                 }
               ],
@@ -296,9 +393,12 @@ export default defineComponent({
           // to place the body & transition animation.
           // Shadow class exists for reuse box-shadow.
           [
-            `${mergedClsPrefix}-popover`,
+            `${mergedClsPrefix}-popover-shared`,
             themeClassHandle?.themeClass.value,
-            props.overlap && `${mergedClsPrefix}-popover--overlap`
+            props.overlap && `${mergedClsPrefix}-popover-shared--overlap`,
+            props.showArrow && `${mergedClsPrefix}-popover-shared--show-arrow`,
+            props.arrowPointToCenter &&
+              `${mergedClsPrefix}-popover-shared--center-arrow`
           ],
           bodyRef,
           styleRef.value as any,
@@ -306,12 +406,11 @@ export default defineComponent({
           handleMouseLeave
         )
       }
-      return props.displayDirective === 'show' || props.show
-        ? withDirectives(contentNode, directivesRef.value)
-        : null
+      return withDirectives(contentNode, directivesRef.value)
     }
 
     return {
+      displayed: displayedRef,
       namespace: namespaceRef,
       isMounted: NPopover.isMountedRef,
       zIndex: NPopover.zIndexRef,
@@ -324,6 +423,7 @@ export default defineComponent({
   render () {
     return (
       <VFollower
+        ref="followerRef"
         zIndex={this.zIndex}
         show={this.show}
         enabled={this.followerEnabled}
@@ -333,7 +433,6 @@ export default defineComponent({
         flip={this.flip}
         placement={this.placement}
         containerClass={this.namespace}
-        ref="followerRef"
         overlap={this.overlap}
         width={this.width === 'trigger' ? 'target' : undefined}
         teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
@@ -351,6 +450,7 @@ export default defineComponent({
                 }}
                 onAfterLeave={() => {
                   this.followerEnabled = false
+                  this.displayed = false
                 }}
               >
                 {{

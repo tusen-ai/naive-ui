@@ -45,6 +45,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--datetimerange`,
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
         onClick={this.resetSelectingStatus}
@@ -74,6 +75,7 @@ export default defineComponent({
             value={this.startTimeValue}
             to={false}
             showIcon={false}
+            disabled={this.isSelecting}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
@@ -101,6 +103,7 @@ export default defineComponent({
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[1]
               : timePickerProps)}
+            disabled={this.isSelecting}
             showIcon={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
@@ -163,39 +166,47 @@ export default defineComponent({
           </div>
           <div class={`${mergedClsPrefix}-date-panel__divider`} />
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
-            {this.startDateArray.map((dateItem, i) => (
-              <div
-                data-n-date
-                key={i}
-                class={[
-                  `${mergedClsPrefix}-date-panel-date`,
-                  {
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
-                      !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--current`]:
-                      dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]:
-                      dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--covered`]:
-                      dateItem.inSpan,
-                    [`${mergedClsPrefix}-date-panel-date--start`]:
-                      dateItem.startOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--end`]:
-                      dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+            {this.startDateArray.map((dateItem, i) => {
+              const disabled = this.mergedIsDateDisabled(dateItem.ts)
+              return (
+                <div
+                  data-n-date
+                  key={i}
+                  class={[
+                    `${mergedClsPrefix}-date-panel-date`,
+                    {
+                      [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                        !dateItem.inCurrentMonth,
+                      [`${mergedClsPrefix}-date-panel-date--current`]:
+                        dateItem.isCurrentDate,
+                      [`${mergedClsPrefix}-date-panel-date--selected`]:
+                        dateItem.selected,
+                      [`${mergedClsPrefix}-date-panel-date--covered`]:
+                        dateItem.inSpan,
+                      [`${mergedClsPrefix}-date-panel-date--start`]:
+                        dateItem.startOfSpan,
+                      [`${mergedClsPrefix}-date-panel-date--end`]:
+                        dateItem.endOfSpan,
+                      [`${mergedClsPrefix}-date-panel-date--disabled`]: disabled
+                    }
+                  ]}
+                  onClick={
+                    disabled ? undefined : () => this.handleDateClick(dateItem)
                   }
-                ]}
-                onClick={() => this.handleDateClick(dateItem)}
-                onMouseenter={() => this.handleDateMouseEnter(dateItem)}
-              >
-                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {dateItem.dateObject.date}
-                {dateItem.isCurrentDate ? (
-                  <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-                ) : null}
-              </div>
-            ))}
+                  onMouseenter={
+                    disabled
+                      ? undefined
+                      : () => this.handleDateMouseEnter(dateItem)
+                  }
+                >
+                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+                  {dateItem.dateObject.date}
+                  {dateItem.isCurrentDate ? (
+                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+                  ) : null}
+                </div>
+              )
+            })}
           </div>
         </div>
         <div class={`${mergedClsPrefix}-date-panel__vertical-divider`} />
@@ -249,39 +260,47 @@ export default defineComponent({
           </div>
           <div class={`${mergedClsPrefix}-date-panel__divider`} />
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
-            {this.endDateArray.map((dateItem, i) => (
-              <div
-                data-n-date
-                key={i}
-                class={[
-                  `${mergedClsPrefix}-date-panel-date`,
-                  {
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
-                      !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--current`]:
-                      dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]:
-                      dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--covered`]:
-                      dateItem.inSpan,
-                    [`${mergedClsPrefix}-date-panel-date--start`]:
-                      dateItem.startOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--end`]:
-                      dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+            {this.endDateArray.map((dateItem, i) => {
+              const disabled = this.mergedIsDateDisabled(dateItem.ts)
+              return (
+                <div
+                  data-n-date
+                  key={i}
+                  class={[
+                    `${mergedClsPrefix}-date-panel-date`,
+                    {
+                      [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                        !dateItem.inCurrentMonth,
+                      [`${mergedClsPrefix}-date-panel-date--current`]:
+                        dateItem.isCurrentDate,
+                      [`${mergedClsPrefix}-date-panel-date--selected`]:
+                        dateItem.selected,
+                      [`${mergedClsPrefix}-date-panel-date--covered`]:
+                        dateItem.inSpan,
+                      [`${mergedClsPrefix}-date-panel-date--start`]:
+                        dateItem.startOfSpan,
+                      [`${mergedClsPrefix}-date-panel-date--end`]:
+                        dateItem.endOfSpan,
+                      [`${mergedClsPrefix}-date-panel-date--disabled`]: disabled
+                    }
+                  ]}
+                  onClick={
+                    disabled ? undefined : () => this.handleDateClick(dateItem)
                   }
-                ]}
-                onClick={() => this.handleDateClick(dateItem)}
-                onMouseenter={() => this.handleDateMouseEnter(dateItem)}
-              >
-                <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {dateItem.dateObject.date}
-                {dateItem.isCurrentDate ? (
-                  <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-                ) : null}
-              </div>
-            ))}
+                  onMouseenter={
+                    disabled
+                      ? undefined
+                      : () => this.handleDateMouseEnter(dateItem)
+                  }
+                >
+                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+                  {dateItem.dateObject.date}
+                  {dateItem.isCurrentDate ? (
+                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+                  ) : null}
+                </div>
+              )
+            })}
           </div>
         </div>
         {this.datePickerSlots.footer ? (
@@ -331,7 +350,7 @@ export default defineComponent({
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   size="tiny"
                   type="primary"
-                  disabled={this.isRangeInvalid}
+                  disabled={this.isRangeInvalid || this.isSelecting}
                   onClick={this.handleConfirmClick}
                 >
                   {{ default: () => this.locale.confirm }}

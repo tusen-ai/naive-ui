@@ -31,7 +31,9 @@ import {
   getMinutes,
   getHours,
   getSeconds
-} from 'date-fns'
+} from 'date-fns/esm'
+import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone'
+import type { Locale } from 'date-fns'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
@@ -45,7 +47,12 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
@@ -79,14 +86,14 @@ function validateUnits (value: MaybeArray<number>, max: number): boolean {
   }
 }
 
-const timePickerProps = {
+export const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  actions: Array as PropType<Array<'now' | 'confirm'>>,
+  actions: Array as PropType<Array<'now' | 'confirm'> | null>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -113,6 +120,12 @@ const timePickerProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   onUpdateFormattedValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateFormattedValue>
   >,
@@ -120,12 +133,13 @@ const timePickerProps = {
   MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onConfirm: [Function, Array] as PropType<
+  MaybeArray<(value: number & null, formattedValue: string & null) => void>
+  >,
+  onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
-  // private
-  stateful: {
-    type: Boolean,
-    default: true
-  },
+  // https://www.iana.org/time-zones
+  timeZone: String,
   showIcon: {
     type: Boolean,
     default: true
@@ -151,6 +165,11 @@ const timePickerProps = {
     validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   },
   use12Hours: Boolean,
+  // private
+  stateful: {
+    type: Boolean,
+    default: true
+  },
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
@@ -232,16 +251,53 @@ export default defineComponent({
       return uncontrolledValueRef.value
     })
 
-    const { value: mergedValue } = mergedValueRef
-    const displayTimeStringRef = ref(
-      mergedValue === null
-        ? ''
-        : format(mergedValue, props.format, dateFnsOptionsRef.value)
+    const mergedFormatRef = computed(() => {
+      const { timeZone } = props
+      if (timeZone) {
+        return (
+          date: Date | number,
+          format: string,
+          options?: {
+            locale?: Locale
+          }
+        ) => {
+          return formatInTimeZone(date, timeZone, format, options)
+        }
+      } else {
+        return (
+          date: Date | number,
+          _format: string,
+          options?: {
+            locale?: Locale
+          }
+        ) => {
+          return format(date, _format, options)
+        }
+      }
+    })
+
+    const displayTimeStringRef = ref('')
+    watch(
+      () => props.timeZone,
+      () => {
+        const mergedValue = mergedValueRef.value
+        displayTimeStringRef.value =
+          mergedValue === null
+            ? ''
+            : mergedFormatRef.value(
+              mergedValue,
+              props.format,
+              dateFnsOptionsRef.value
+            )
+      },
+      {
+        immediate: true
+      }
     )
     const uncontrolledShowRef = ref(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
-    const memorizedValueRef = ref(mergedValue)
+    const memorizedValueRef = ref(mergedValueRef.value)
     const transitionDisabledRef = ref(false)
 
     const localizedNowRef = computed(() => {
@@ -312,17 +368,17 @@ export default defineComponent({
     const hourValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'HH', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'HH', dateFnsOptionsRef.value))
     })
     const minuteValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'mm', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'mm', dateFnsOptionsRef.value))
     })
     const secondValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
-      return Number(format(value, 'ss', dateFnsOptionsRef.value))
+      return Number(mergedFormatRef.value(value, 'ss', dateFnsOptionsRef.value))
     })
     function doUpdateFormattedValue (
       value: string | null,
@@ -347,6 +403,11 @@ export default defineComponent({
         )
       }
     }
+    function createFormattedValue (value: number | null): string | null {
+      return value === null
+        ? null
+        : mergedFormatRef.value(value, props.valueFormat || props.format)
+    }
     function doUpdateValue (value: number | null): void {
       const {
         onUpdateValue,
@@ -354,8 +415,7 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      const formattedValue =
-        value === null ? null : format(value, props.valueFormat || props.format)
+      const formattedValue = createFormattedValue(value)
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -380,22 +440,42 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doConfirm (): void {
+      const { onConfirm } = props
+      if (onConfirm) {
+        call(
+          onConfirm,
+          mergedValueRef.value as number & null,
+          createFormattedValue(mergedValueRef.value) as string & null
+        )
+      }
+    }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
+      props.onClear?.()
     }
     function handleFocusDetectorFocus (): void {
       closePanel({
         returnFocus: true
       })
     }
-    function handleMenuKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
+    function handleInputKeydown (e: KeyboardEvent): void {
+      if (e.key === 'Escape' && mergedShowRef.value) {
+        markEventEffectPerformed(e)
+        // closePanel will be called in onDeactivated
+      }
+    }
+    function handleMenuKeydown (e: KeyboardEvent): void {
+      switch (e.key) {
         case 'Escape':
-          closePanel({
-            returnFocus: true
-          })
+          if (mergedShowRef.value) {
+            markEventEffectPerformed(e)
+            closePanel({
+              returnFocus: true
+            })
+          }
           break
         case 'Tab':
           if (keyboardState.shift && e.target === panelInstRef.value?.$el) {
@@ -467,7 +547,7 @@ export default defineComponent({
       if (time === undefined) time = mergedValueRef.value
       if (time === null) displayTimeStringRef.value = ''
       else {
-        displayTimeStringRef.value = format(
+        displayTimeStringRef.value = mergedFormatRef.value(
           time,
           props.format,
           dateFnsOptionsRef.value
@@ -483,12 +563,14 @@ export default defineComponent({
       if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
         if (!panelEl?.contains(e.relatedTarget as Node)) {
+          deriveInputValue()
           doBlur(e)
           closePanel({
             returnFocus: false
           })
         }
       } else {
+        deriveInputValue()
         doBlur(e)
       }
     }
@@ -525,6 +607,9 @@ export default defineComponent({
     }
     function doUpdateShow (value: boolean): void {
       uncontrolledShowRef.value = value
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
     }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(
@@ -613,12 +698,14 @@ export default defineComponent({
     }
     function handleConfirmClick (): void {
       deriveInputValue()
+      doConfirm()
       closePanel({
         returnFocus: true
       })
     }
     function handleMenuFocusOut (e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
+      deriveInputValue()
       doBlur(e)
       closePanel({
         returnFocus: false
@@ -738,6 +825,7 @@ export default defineComponent({
       minuteValue: minuteValueRef,
       secondValue: secondValueRef,
       amPmValue: amPmValueRef,
+      handleInputKeydown,
       handleTimeInputFocus,
       handleTimeInputBlur,
       handleNowClick,
@@ -754,7 +842,7 @@ export default defineComponent({
       handleAmPmClick,
       handleTimeInputClear,
       handleFocusDetectorFocus,
-      handleMenuKeyDown,
+      handleMenuKeydown,
       handleTriggerClick,
       mergedTheme: themeRef,
       triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
@@ -806,10 +894,13 @@ export default defineComponent({
                       internalForceFocus={this.mergedShow}
                       readonly={this.inputReadonly || this.mergedDisabled}
                       onClick={this.handleTriggerClick}
+                      onKeydown={this.handleInputKeydown}
                     >
                       {this.showIcon
                         ? {
-                            [this.clearable ? 'clear' : 'suffix']: () => (
+                            [this.clearable
+                              ? 'clear-icon-placeholder'
+                              : 'suffix']: () => (
                               <NBaseIcon
                                 clsPrefix={mergedClsPrefix}
                                 class={`${mergedClsPrefix}-time-picker-icon`}
@@ -871,7 +962,7 @@ export default defineComponent({
                                 confirmText={this.localizedPositiveText}
                                 use12Hours={this.use12Hours}
                                 onFocusout={this.handleMenuFocusOut}
-                                onKeydown={this.handleMenuKeyDown}
+                                onKeydown={this.handleMenuKeydown}
                                 onHourClick={this.handleHourClick}
                                 onMinuteClick={this.handleMinuteClick}
                                 onSecondClick={this.handleSecondClick}
@@ -882,7 +973,14 @@ export default defineComponent({
                                   this.handleFocusDetectorFocus
                                 }
                               />,
-                              [[clickoutside, this.handleClickOutside]]
+                              [
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ]
+                              ]
                             )
                           }
                           return null

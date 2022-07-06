@@ -26,11 +26,7 @@ function insideModal (style: CNode): CNode {
 }
 
 function insidePopover (style: CNode): CNode {
-  return c(
-    ({ props: { bPrefix } }) =>
-      `${bPrefix || prefix}popover:not(${bPrefix || prefix}tooltip)`,
-    [style]
-  )
+  return c(({ props: { bPrefix } }) => `${bPrefix || prefix}popover`, [style])
 }
 
 function asModal (style: CProperties): CNode {

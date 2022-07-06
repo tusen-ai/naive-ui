@@ -13,12 +13,16 @@ import type {
   TableExpandColumn
 } from './interface'
 
-export const selectionColWidth = 40
-export const expandColWidth = 40
+export const SELECTION_COL_WIDTH = 40
+export const EXPAND_COL_WIDTH = 40
 
 export function getNumberColWidth (col: TableColumn): number | undefined {
-  if (col.type === 'selection') return selectionColWidth
-  if (col.type === 'expand') return expandColWidth
+  if (col.type === 'selection') {
+    return col.width === undefined ? SELECTION_COL_WIDTH : depx(col.width)
+  }
+  if (col.type === 'expand') {
+    return col.width === undefined ? EXPAND_COL_WIDTH : depx(col.width)
+  }
   if ('children' in col) return undefined
   if (typeof col.width === 'string') {
     return depx(col.width)
@@ -27,9 +31,15 @@ export function getNumberColWidth (col: TableColumn): number | undefined {
 }
 
 export function getStringColWidth (col: TableColumn): string | undefined {
-  if (col.type === 'selection') return formatLength(selectionColWidth)
-  if (col.type === 'expand') return formatLength(expandColWidth)
-  if ('children' in col) return undefined
+  if (col.type === 'selection') {
+    return formatLength(col.width ?? SELECTION_COL_WIDTH)
+  }
+  if (col.type === 'expand') {
+    return formatLength(col.width ?? EXPAND_COL_WIDTH)
+  }
+  if ('children' in col) {
+    return undefined
+  }
   return formatLength(col.width)
 }
 
@@ -59,7 +69,7 @@ export function createCustomWidthStyle (
   const width = getStringColWidth(column)
   return {
     width,
-    minWidth: width
+    minWidth: formatLength(column.minWidth) || width
   }
 }
 

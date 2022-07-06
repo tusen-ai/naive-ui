@@ -14,7 +14,10 @@ import {
   VNode,
   ComponentPublicInstance,
   mergeProps,
-  cloneVNode
+  cloneVNode,
+  computed,
+  DirectiveArguments,
+  VNodeChild
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -25,7 +28,7 @@ import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { NCard } from '../../card'
-import { getFirstSlotVNode, keep, warn } from '../../_utils'
+import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 import { presetProps } from './presetProps'
 
@@ -50,12 +53,11 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    blockScroll: Boolean,
     ...presetProps,
+    renderMask: Function as PropType<() => VNodeChild>,
     // events
-    onClickoutside: {
-      type: Function,
-      required: true
-    },
+    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onBeforeLeave: {
       type: Function,
       required: true
@@ -77,7 +79,7 @@ export default defineComponent({
       required: true
     },
     onAfterEnter: Function as PropType<() => void>,
-    onEsc: Function as PropType<() => void>
+    onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
@@ -88,6 +90,7 @@ export default defineComponent({
     watch(toRef(props, 'show'), (value) => {
       if (value) displayedRef.value = true
     })
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin (): string {
@@ -150,9 +153,6 @@ export default defineComponent({
     function handlePositiveClick (): void {
       props.onPositiveClick()
     }
-    function handleClickOutside (e: MouseEvent): void {
-      props.onClickoutside(e)
-    }
     const childNodeRef = ref<VNode | null>(null)
     watch(childNodeRef, (node) => {
       if (node) {
@@ -176,7 +176,6 @@ export default defineComponent({
       scrollbarRef,
       displayed: displayedRef,
       childNodeRef,
-      handleClickOutside,
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
@@ -192,7 +191,6 @@ export default defineComponent({
       handleEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleClickOutside,
       preset,
       mergedClsPrefix
     } = this
@@ -222,7 +220,8 @@ export default defineComponent({
               contentClass={`${mergedClsPrefix}-modal-scroll-content`}
             >
               {{
-                default: () => (
+                default: () => [
+                  this.renderMask?.(),
                   <VFocusTrap
                     disabled={!this.trapFocus}
                     active={this.show}
@@ -240,8 +239,20 @@ export default defineComponent({
                           onBeforeLeave={handleBeforeLeave as any}
                         >
                           {{
-                            default: () =>
-                              withDirectives(
+                            default: () => {
+                              const dirs: DirectiveArguments = [
+                                [vShow, this.show]
+                              ]
+                              const { onClickoutside } = this
+                              if (onClickoutside) {
+                                dirs.push([
+                                  clickoutside,
+                                  this.onClickoutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
+                                ])
+                              }
+                              return withDirectives(
                                 (this.preset === 'confirm' ||
                                 this.preset === 'dialog' ? (
                                   <NDialog
@@ -281,17 +292,15 @@ export default defineComponent({
                                     ) : (
                                       (this.childNodeRef = childNode)
                                     )) as any,
-                                [
-                                  [vShow, this.show],
-                                  [clickoutside, handleClickOutside]
-                                ]
+                                dirs
                               )
+                            }
                           }}
                         </Transition>
                       )
                     }}
                   </VFocusTrap>
-                )
+                ]
               }}
             </NScrollbar>
           </div>,

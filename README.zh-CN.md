@@ -4,7 +4,7 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">一个 Vue 3 组件库</p>
-<p align="center"><b>比较完整，主题可调，使用 TypeScript，不算太慢</b></p>
+<p align="center"><b>比较完整，主题可调，使用 TypeScript，快</b></p>
 <p align="center">有点意思</p>
 
 <p align="center"><a href="README.md">English</a> | 中文</p>
@@ -17,7 +17,8 @@
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - 钉钉一群 33482509 (已满)
-- 钉钉二群 35886835
+- 钉钉二群 35886835 (已满)
+- 钉钉三群 32377370
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 钉钉群加入方法：在**搜索框**中搜索群号，点击下拉框中更多分组内的**网络查找公开群组**
@@ -42,7 +43,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 顺便一提，你不需要导入任何 CSS 就能让组件正常工作。
 
-### 不算太慢
+### 快
 
 我尽力让它不要太慢。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
 
@@ -70,11 +71,11 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ### 设计资源
 
-[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)。
+[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)
 
 ## 贡献
 
-请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)。
+请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)
 
 ## 许可
 
