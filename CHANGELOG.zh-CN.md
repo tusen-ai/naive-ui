@@ -21,7 +21,7 @@
 - 修复 `n-radio-button` 光标样式可能不正确，关闭 [#3243](https://github.com/TuSimple/naive-ui/issues/3243)
 - 修复 `n-input` 在 disabled 状态下在 Safari 上文本颜色过浅，关闭 [#3241](https://github.com/TuSimple/naive-ui/issues/3241)
 - 修复 `n-input` 的分割符可能折行
-- 修复所有组件的 `user-select` 样式属性在 safari 的效果
+- 修复所有组件的 `user-select` 样式属性在 Safari 的效果
 
 ### Feats
 
