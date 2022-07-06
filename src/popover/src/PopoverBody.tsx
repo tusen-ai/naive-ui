@@ -69,6 +69,7 @@ export const popoverBodyProps = {
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   internalTrapFocus: Boolean,
+  internalOnAfterLeave: Function as PropType<() => void>,
   // deprecated
   minWidth: Number,
   maxWidth: Number
@@ -447,6 +448,7 @@ export default defineComponent({
                   this.followerEnabled = true
                 }}
                 onAfterLeave={() => {
+                  this.internalOnAfterLeave?.()
                   this.followerEnabled = false
                   this.displayed = false
                 }}
