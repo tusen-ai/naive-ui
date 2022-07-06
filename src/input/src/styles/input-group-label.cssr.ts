@@ -11,6 +11,7 @@ import { cB, cE } from '../../../_utils/cssr'
 export default cB('input-group-label', `
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   box-sizing: border-box;
   padding: 0 12px;
   display: inline-block;

@@ -50,6 +50,7 @@ export default c([
     slideInFromBottomTransition(),
     cM('unselectable', `
       user-select: none; 
+      -webkit-user-select: none;
     `),
     cM('native-scrollbar', [
       cB('drawer-content-wrapper', `

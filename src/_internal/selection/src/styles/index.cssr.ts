@@ -245,6 +245,7 @@ export default c([
         white-space: pre;
         visibility: hidden;
         user-select: none;
+        -webkit-user-select: none;
         opacity: 0;
       `)
     ]),

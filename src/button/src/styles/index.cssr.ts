@@ -60,6 +60,7 @@ export default c([
     align-items: center;
     justify-content: center;
     user-select: none;
+    -webkit-user-select: none;
     text-align: center;
     cursor: pointer;
     text-decoration: none;

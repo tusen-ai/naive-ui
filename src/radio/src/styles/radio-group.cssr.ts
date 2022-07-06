@@ -45,6 +45,7 @@ export default cB('radio-group', `
     outline: none;
     position: relative;
     user-select: none;
+    -webkit-user-select: none;
     display: inline-block;
     box-sizing: border-box;
     padding-left: 14px;

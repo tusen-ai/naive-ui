@@ -25,6 +25,7 @@ export default cB('switch', `
   min-width: var(--n-width);
   vertical-align: middle;
   user-select: none;
+  -webkit-user-select: none;
   display: inline-flex;
   outline: none;
   justify-content: center;

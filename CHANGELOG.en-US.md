@@ -18,9 +18,10 @@
 - Fix `n-dropdown`'s disabled option has hover style.
 - Fix `n-dropdown`'s menu may shift when it's entering.
 - Fix `n-dropdown`'s transform origin may not be correct in Chrome.
-- Fix `n-radio-button` may not have correct cursor style in some versions of chrome, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
+- Fix `n-radio-button` may not have correct cursor style, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
 - Fix `n-input`'s text color is too shallow with disabled state in Safari, closes [#3241](https://github.com/TuSimple/naive-ui/issues/3241).
 - Fix `n-input`'s separator may have line wrap.
+- Fix all components' `user-select` style prop's effect on safari.
 
 ### Feats
 

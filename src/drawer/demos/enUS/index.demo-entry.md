@@ -11,8 +11,8 @@ I think it is similar with modal, with a bit difference on placement.
 ```demo
 basic.vue
 multiple.vue
-target.vue
 closable.vue
+target.vue
 slot.vue
 scroll.vue
 resizable.vue
