@@ -22,6 +22,7 @@
 - Fix `n-input`'s text color is too shallow with disabled state in Safari, closes [#3241](https://github.com/TuSimple/naive-ui/issues/3241).
 - Fix `n-input`'s separator may have line wrap.
 - Fix all components' `user-select` style prop's effect on Safari.
+- Fix `n-data-table` will prevent page scroll in virtual scroll mode.
 
 ### Feats
 
