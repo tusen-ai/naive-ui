@@ -12,21 +12,21 @@ import {
   onBeforeUnmount
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { avatarGroupInjectionKey } from './context'
-import type { Size, ObjectFit } from './interface'
-import { tagInjectionKey } from '../../tag/src/Tag'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { avatarLight } from '../styles'
-import type { AvatarTheme } from '../styles'
-import { createKey, color2Class, resolveWrappedSlot } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/index.cssr'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import {
   IntersectionObserverOptions,
   observeIntersection
 } from '../../image/src/utils'
-import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
+import { tagInjectionKey } from '../../tag/src/Tag'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
+import { createKey, color2Class, resolveWrappedSlot } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { avatarLight } from '../styles'
+import type { AvatarTheme } from '../styles'
+import { avatarGroupInjectionKey } from './context'
+import type { Size, ObjectFit } from './interface'
+import style from './styles/index.cssr'
 
 export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),

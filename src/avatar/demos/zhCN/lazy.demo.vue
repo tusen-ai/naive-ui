@@ -9,8 +9,10 @@
     id="image-scroll-container"
     style="overflow: auto; height: 100px; gap: 8px"
   >
-    <div v-for="i of range" :key="i">
+    <n-space vertical>
       <n-avatar
+        v-for="i of range"
+        :key="i"
         size="small"
         :src="
           'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg?t=' + i
@@ -20,7 +22,7 @@
           root: '#image-scroll-container'
         }"
       />
-    </div>
+    </n-space>
   </div>
 </template>
 
