@@ -29,7 +29,7 @@
 - 导出所有组件的 props 对象
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容，关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
-- `n-dropdown` 新增 `menu-props`
+- `n-dropdown` 新增 `menu-props`，关闭 [#2885](https://github.com/TuSimple/naive-ui/issues/2885)
 - `n-data-table` 的列属性增加 `multiple` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
 - `n-dropdown` 新增 `menu-props` 属性
 - `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
