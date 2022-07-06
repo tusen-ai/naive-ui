@@ -41,7 +41,7 @@ checkbox-placement.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
-| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `false` | Allow node clicking to trigger check when `checkable` is `true` | NEXT_VERSION |
+| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `false` | Allow node clicking to trigger check when `checkable` is `true`. | NEXT_VERSION |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all options. |  |
