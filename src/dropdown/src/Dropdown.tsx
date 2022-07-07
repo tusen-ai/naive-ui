@@ -250,7 +250,9 @@ export default defineComponent({
     })
     // watch
     watch(mergedShowRef, (value) => {
-      if (!value) clearPendingState()
+      if (!props.animated && !value) {
+        clearPendingState()
+      }
     })
     // methods
     function doSelect (key: Key, node: DropdownOption): void {
@@ -411,6 +413,10 @@ export default defineComponent({
       // show
       mergedShow: mergedShowRef,
       // methods
+      handleAfterLeave: () => {
+        if (!props.animated) return
+        clearPendingState()
+      },
       doUpdateShow,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
@@ -458,6 +464,7 @@ export default defineComponent({
       show: this.mergedShow,
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
+      internalOnAfterLeave: this.handleAfterLeave,
       internalRenderBody: renderPopoverBody,
       onUpdateShow: this.doUpdateShow,
       'onUpdate:show': undefined

@@ -154,6 +154,12 @@ export default defineComponent({
 
     function reset (): void {
       distanceRef.value = props.duration
+      elapsed = 0
+      pnow = performance.now()
+      if (props.active && finished) {
+        frame()
+      }
+      finished = false
     }
 
     const countdownExposedMethod: CountdownInst = {

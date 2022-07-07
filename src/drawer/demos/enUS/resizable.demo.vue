@@ -1,5 +1,5 @@
 <markdown>
-# Adjustable drawer
+# Resizable drawer
 
 Remeber to use `default-width` or `default-height` with `resizable`.
 </markdown>

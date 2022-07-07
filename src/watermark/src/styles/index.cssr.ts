@@ -4,7 +4,10 @@ export default c([
   cB('watermark-container', `
     position: relative;
   `, [
-    cNotM('selectable', 'user-select: none;')
+    cNotM('selectable', `
+      user-select: none;
+      -webkit-user-select: none;
+    `)
   ]),
   cB('watermark', `
     position: absolute;

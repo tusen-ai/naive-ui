@@ -1,11 +1,9 @@
 <markdown>
-# Finish
-
-When the number stops, you will leave, and so will I.
+# Finish callback
 </markdown>
 
 <template>
-  <n-statistic tabular-nums>
+  <n-statistic label="Post message on finish" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       show-separator
@@ -22,18 +20,19 @@ When the number stops, you will leave, and so will I.
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
+import { NumberAnimationInst, useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    const message = useMessage()
     return {
       numberAnimationInstRef,
       handleClick () {
         numberAnimationInstRef.value?.play()
       },
       handleFinish () {
-        console.log('finish')
+        message.success('Finished')
       }
     }
   }

@@ -1,11 +1,9 @@
 <markdown>
-# 结束
-
-数字停下来，你将离场，我也只能这样。
+# 结束的回调
 </markdown>
 
 <template>
-  <n-statistic tabular-nums>
+  <n-statistic label="完成之后发个消息" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       show-separator
@@ -16,24 +14,25 @@
     />
   </n-statistic>
   <n-button @click="handleClick">
-    播放
+    开始
   </n-button>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
+import { NumberAnimationInst, useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    const message = useMessage()
     return {
       numberAnimationInstRef,
       handleClick () {
         numberAnimationInstRef.value?.play()
       },
       handleFinish () {
-        console.log('finish')
+        message.success('Finished')
       }
     }
   }

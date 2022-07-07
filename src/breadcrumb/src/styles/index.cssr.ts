@@ -82,6 +82,7 @@ export default cB('breadcrumb', `
       color: var(--n-separator-color);
       transition: color .3s var(--n-bezier);
       user-select: none;
+      -webkit-user-select: none;
     `),
     c('&:last-child', [
       cE('link', `

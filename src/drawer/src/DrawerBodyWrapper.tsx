@@ -268,7 +268,7 @@ export default defineComponent({
                                   onMousedown={
                                     this.handleMousedownResizeTrigger
                                   }
-                                ></div>
+                                />
                               ) : null,
                               this.nativeScrollbar ? (
                                 <div

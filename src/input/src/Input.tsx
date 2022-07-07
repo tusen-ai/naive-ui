@@ -24,7 +24,7 @@ import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   NBaseClear,
   NBaseIcon,

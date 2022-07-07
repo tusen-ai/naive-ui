@@ -113,6 +113,7 @@ export default c([
         min-width: var(--n-scroll-item-width);
         height: calc(var(--n-scroll-item-height) * 6);
         user-select: none;
+        -webkit-user-select: none;
       `, [
         c('&:first-child', `
           min-width: calc(var(--n-scroll-item-width) + 4px);
@@ -261,6 +262,7 @@ export default c([
       `),
       cE('month-year', `
         user-select: none;
+        -webkit-user-select: none;
         flex-grow: 1;
         position: relative;
       `, [
@@ -296,6 +298,7 @@ export default c([
     `, [
       cE('day', `
         user-select: none;
+        -webkit-user-select: none;
         line-height: 15px;
         width: var(--n-item-size);
         text-align: center;
@@ -314,6 +317,7 @@ export default c([
     `, [
       cB('date-panel-date', `
         user-select: none;
+        -webkit-user-select: none;
         position: relative;
         width: var(--n-item-size);
         height: var(--n-item-size);

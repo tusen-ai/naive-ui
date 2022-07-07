@@ -1,7 +1,5 @@
 <markdown>
 # Reset
-
-I want to borrow a time converter from Professor McGonagall.
 </markdown>
 
 <template>

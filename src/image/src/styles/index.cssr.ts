@@ -67,6 +67,7 @@ export default c([
   ]),
   cB('image-preview', `
     user-select: none;
+    -webkit-user-select: none;
     pointer-events: all;
     margin: auto;
     max-height: calc(100vh - 32px);

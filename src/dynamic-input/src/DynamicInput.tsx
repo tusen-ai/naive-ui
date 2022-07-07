@@ -36,7 +36,7 @@ import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
 import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
 const globalDataKeyMap = new WeakMap()
 

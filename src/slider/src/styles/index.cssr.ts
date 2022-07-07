@@ -38,6 +38,7 @@ export default c([
     width: 100%;
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
   `, [
     cM('reverse', [
       cB('slider-handles', [
