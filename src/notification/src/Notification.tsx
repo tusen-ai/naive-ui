@@ -150,7 +150,7 @@ export const Notification = defineComponent({
         return props.avatar || props.type !== 'default'
       }),
       handleCloseClick () {
-        props.onClose()
+        props.onClose?.()
       },
       rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,

@@ -100,7 +100,7 @@ export const NotificationEnvironment = defineComponent({
       const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey } =
         props
       if (onAfterLeave) onAfterLeave()
-      onInternalAfterLeave(internalKey)
+      if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
       // deprecated
       if (onAfterHide) onAfterHide()
     }
