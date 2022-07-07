@@ -71,10 +71,7 @@ export default defineComponent({
     // reference: https://www.yangdx.com/2020/04/144.html
     const addLineNumbersForCode = (html: string): string => {
       let num = 1
-      // console.log(html)
-      // if (/\r|\n$/.test(html)) {
       html += '<span class="ln-eof"></span>'
-      // }
       html = html.replace(/\r\n|\r|\n/g, function (a) {
         num++
         const text = ('  ' + String(num)).slice(-4) // 最大支持到千位数
@@ -96,9 +93,11 @@ export default defineComponent({
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {
-          codeEl.innerHTML = props.inline ? html : `<pre ${props.lineNumbers ? 'class="hljsln"' : ''}>${
-            props.lineNumbers ? addLineNumbersForCode(html) : html
-          }</pre>`
+          codeEl.innerHTML = props.inline
+            ? html
+            : `<pre ${props.lineNumbers ? 'class="hljsln"' : ''}>${
+                props.lineNumbers ? addLineNumbersForCode(html) : html
+              }</pre>`
           return
         }
       }
