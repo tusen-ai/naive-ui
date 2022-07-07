@@ -13,6 +13,7 @@ export default cB('carousel', `
   position: relative;
   width: 100%;
   height: 100%;
+  touch-action: pan-y;
   overflow: hidden;
 `, [
   cE('slides', `
@@ -21,7 +22,6 @@ export default cB('carousel', `
     height: 100%;
     transition-timing-function: var(--n-bezier);
     transition-property: transform;
-    touch-action: pan-y;
   `, [
     cE('slide', `
       flex-shrink: 0;
@@ -106,10 +106,11 @@ export default cB('carousel', `
       background-color: rgba(255, 255, 255, .3);
     `)
   ]),
-  cM('vertical', [
+  cM('vertical', `
+    touch-action: pan-x;
+  `, [
     cE('slides', `
       flex-direction: column;
-      touch-action: pan-x;
     `),
     cM('fade', [
       cE('slide', `

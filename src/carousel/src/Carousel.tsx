@@ -144,7 +144,8 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     // Dom
     const selfElRef = ref<HTMLDivElement | null>(null)
-    const slidesElsRef = ref<HTMLElement[]>([])
+    const slidesElRef = ref<HTMLDivElement | null>(null)
+    const slideElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
     const sequenceLayoutRef = computed(() => props.effect === 'slide')
@@ -193,7 +194,7 @@ export default defineComponent({
     const perViewSizeRef = ref({ width: 0, height: 0 })
 
     const slideSizesRef = computed(() => {
-      const { value: slidesEls } = slidesElsRef
+      const { value: slidesEls } = slideElsRef
       if (!slidesEls.length) return []
       const { value: autoSlideSize } = autoSlideSizeRef
       if (autoSlideSize) {
@@ -233,7 +234,7 @@ export default defineComponent({
 
     const isMountedRef = ref(false)
     const slideStylesRef = computed(() => {
-      const { value: slidesEls } = slidesElsRef
+      const { value: slidesEls } = slideElsRef
       if (!slidesEls.length) return []
       const useComputedSize = !(
         autoSlideSizeRef.value || realSlidesPerViewRef.value === 1
@@ -269,7 +270,7 @@ export default defineComponent({
     // Total
     const totalViewRef = computed(() => {
       const { value: slidesPerView } = displaySlidesPerViewRef
-      const { length: totalSlides } = slidesElsRef.value
+      const { length: totalSlides } = slideElsRef.value
       if (slidesPerView !== 'auto') {
         return Math.max(totalSlides - slidesPerView, 0) + 1
       } else {
@@ -486,20 +487,20 @@ export default defineComponent({
     provideCarouselContext(carouselContext)
     function addSlide (slide?: HTMLElement): void {
       if (!slide) return
-      slidesElsRef.value.push(slide)
+      slideElsRef.value.push(slide)
     }
     function removeSlide (slide?: HTMLElement): void {
       if (!slide) return
       const index = getSlideIndex(slide)
       if (index !== -1) {
-        slidesElsRef.value.splice(index, 1)
+        slideElsRef.value.splice(index, 1)
       }
     }
     function getSlideIndex (slideOrIndex?: HTMLElement | number): number {
       return typeof slideOrIndex === 'number'
         ? slideOrIndex
         : slideOrIndex
-          ? slidesElsRef.value.indexOf(slideOrIndex)
+          ? slideElsRef.value.indexOf(slideOrIndex)
           : -1
     }
     function getSlideStyle (
@@ -555,6 +556,7 @@ export default defineComponent({
     let dragging = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
+      if (!slidesElRef.value?.contains(event.target as HTMLElement)) return
       globalDragging = true
       dragging = true
       dragStartTime = Date.now()
@@ -711,7 +713,7 @@ export default defineComponent({
     })
     // Fix index when remounting
     onUpdated(() => {
-      const { value: slidesEls } = slidesElsRef
+      const { value: slidesEls } = slideElsRef
       const { value: slideVNodes } = slideVNodesRef
       const indexMap = new Map<HTMLElement, number>()
       const getDisplayIndex = (el: HTMLElement): number =>
@@ -816,6 +818,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
+      slidesElRef,
       slideVNodes: slideVNodesRef,
       duplicatedable: duplicatedableRef,
       userWantsControl: userWantsControlRef,
@@ -893,16 +896,17 @@ export default defineComponent({
           userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
         ]}
         style={this.cssVars as CSSProperties}
+        {...slidesControlListeners}
       >
         <VResizeObserver onResize={this.handleResize}>
           {{
             default: () => (
               <div
+                ref="slidesElRef"
                 class={`${mergedClsPrefix}-carousel__slides`}
                 role="listbox"
                 style={this.translateStyle}
                 onTransitionend={this.handleTransitionEnd}
-                {...slidesControlListeners}
               >
                 {userWantsControl
                   ? slides.map((slide, i) => (
