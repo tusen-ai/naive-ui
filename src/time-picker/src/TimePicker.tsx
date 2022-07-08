@@ -86,7 +86,7 @@ function validateUnits (value: MaybeArray<number>, max: number): boolean {
   }
 }
 
-const timePickerProps = {
+export const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {

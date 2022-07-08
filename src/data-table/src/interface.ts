@@ -57,7 +57,7 @@ export type TmNode = TreeNode<InternalRowData>
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
 
-export type Ellipsis = boolean | EllipsisProps
+export type Ellipsis = boolean | (EllipsisProps & { style?: CSSProperties })
 
 export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
@@ -126,6 +126,7 @@ export type TableBaseColumn<T = InternalRowData> = {
 
 export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
+  multiple?: boolean
   disabled?: (row: T) => boolean
   options?: DataTableSelectionOptions
 
@@ -225,12 +226,16 @@ export interface DataTableInjection {
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (rowKey: RowKey | RowKey[]) => void
+  doCheck: (rowKey: RowKey | RowKey[], single: boolean) => void
   doUncheck: (rowKey: RowKey | RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void
   setHeaderScrollLeft: (scrollLeft: number) => void
+  renderCell: Ref<
+  | undefined
+  | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
+  >
 }
 
 export const dataTableInjectionKey =
@@ -255,7 +260,11 @@ export type RenderSorterIcon = RenderSorter
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
+export type OnUpdateCheckedRowKeys = (
+  keys: RowKey[],
+  row: InternalRowData[]
+) => void
+
 // `null` only occurs when clearSorter is called
 export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
 export type OnUpdateSorterImpl = (

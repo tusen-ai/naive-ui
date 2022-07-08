@@ -22,6 +22,7 @@ export default cB('radio', `
   outline: none;
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   display: inline-flex;
   align-items: flex-start;
   flex-wrap: nowrap;

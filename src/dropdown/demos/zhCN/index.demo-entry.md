@@ -18,6 +18,7 @@ manual-position.vue
 render.vue
 option-props.vue
 render-option.vue
+scrollable-debug.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ render-option.vue
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
 | node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | 批量处理下拉菜单选项的 HTML 属性 | 2.29.1 |
+| menu-props | `(option: DropdownOption \| undefined, options: (DropdownOption \| DropdownGroupOption)[]) => HTMLAttributes` | `undefined` | 批量处理下拉菜单的 HTML 属性 | 2.31.0 |
 | options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | 下拉菜单传入的 options |  |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |  |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单标签渲染 |  |

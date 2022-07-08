@@ -13,7 +13,7 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { avatarGroupLight, AvatarGroupTheme } from '../styles'
 
 export interface AvatarGroupInjection {
@@ -24,7 +24,7 @@ interface AvatarOption {
   src: string
 }
 
-const avatarGroupProps = {
+export const avatarGroupProps = {
   ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,

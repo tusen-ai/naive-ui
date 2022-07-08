@@ -33,9 +33,9 @@ import type {
   CheckboxInst
 } from './interface'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
-const checkboxProps = {
+export const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
   size: String as PropType<'small' | 'medium' | 'large'>,
   checked: {

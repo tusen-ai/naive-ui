@@ -29,6 +29,7 @@ checkbox-placement.vue
 
 | Name | Type | default | Description | Version |
 | --- | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | Whether to use accrodion expand mode. | 2.31.0 |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
@@ -40,6 +41,7 @@ checkbox-placement.vue
 | checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
+| check-on-click | `boolean \| ((node: TreeOption) => boolean)` | `false` | Allow node clicking to trigger check when `checkable` is `true`. | 2.31.0 |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |  |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |  |
 | default-expand-all | `boolean` | `false` | Expand all options. |  |
@@ -58,9 +60,9 @@ checkbox-placement.vue
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
 | pattern | `string` | `''` | What to search by default. |  |
-| render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
-| render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
-| render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
+| render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
+| render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
+| render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
 | render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0 |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |

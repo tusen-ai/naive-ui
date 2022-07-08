@@ -6,7 +6,7 @@ import { thingLight } from '../styles'
 import type { ThingTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const thingProps = {
+export const thingProps = {
   ...(useTheme.props as ThemeProps<ThingTheme>),
   title: String,
   titleExtra: String,

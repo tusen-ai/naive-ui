@@ -7,7 +7,7 @@ import { positionProp } from './interface'
 import style from './styles/layout-footer.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const layoutFooterProps = {
+export const layoutFooterProps = {
   ...(useTheme.props as ThemeProps<LayoutTheme>),
   inverted: Boolean,
   position: positionProp,

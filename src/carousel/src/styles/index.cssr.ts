@@ -96,6 +96,7 @@ export default cB('carousel', `
     color: var(--n-arrow-color);
     border-radius: 8px;
     user-select: none;
+    -webkit-user-select: none;
     font-size: 18px;
   `, [
     c('svg', `

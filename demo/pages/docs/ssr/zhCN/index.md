@@ -16,18 +16,27 @@
 2. 在 `nuxt.config.ts` 增添下列配置
 
 ```ts
+import { defineNuxtConfig } from 'nuxt'
+
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   build: {
-    transpile: [
-      'naive-ui',
-      'vueuc',
-      '@css-render/vue3-ssr',
-      '@juggle/resize-observer'
-    ],
-    vite: {
-      optimizeDeps: {
-        include: ['date-fns-tz/esm/formatInTimeZone']
-      }
+    transpile:
+      process.env.NODE_ENV === 'production'
+        ? [
+            'naive-ui',
+            'vueuc',
+            '@css-render/vue3-ssr',
+            '@juggle/resize-observer'
+          ]
+        : ['@juggle/resize-observer']
+  },
+  vite: {
+    optimizeDeps: {
+      include:
+        process.env.NODE_ENV === 'development'
+          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
+          : []
     }
   }
 })
@@ -51,11 +60,9 @@ export default defineNuxtConfig({
 
 下列组件在 SSR 场景中存在一些 Bug，使用时请尽量规避，我们会逐步修复。
 
-- `n-scrollbar`（vue 版本 >= 3.2.36 后没有问题)
+- `n-scrollbar`, `n-data-table`（vue 版本 >= 3.2.36 后没有问题)
 - `n-anchor`
 - `n-avatar-group`
-- `n-back-top`
-- `n-data-table`
 - `n-watermark`
 - `n-affix`
 - `n-transfer`

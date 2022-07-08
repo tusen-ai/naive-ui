@@ -1,5 +1,5 @@
 <markdown>
-# Month Range
+# Month range
 </markdown>
 
 <template>

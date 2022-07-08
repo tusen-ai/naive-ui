@@ -8,7 +8,7 @@ import type { InputTheme } from '../styles'
 import style from './styles/input-group-label.cssr'
 import type { Size } from './interface'
 
-const inputGroupLabelProps = {
+export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
   size: {
     type: String as PropType<Size>,

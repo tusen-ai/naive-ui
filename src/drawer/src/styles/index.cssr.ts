@@ -48,10 +48,23 @@ export default c([
     slideInFromLeftTransition(),
     slideInFromTopTransition(),
     slideInFromBottomTransition(),
+    cM('unselectable', `
+      user-select: none; 
+      -webkit-user-select: none;
+    `),
     cM('native-scrollbar', [
       cB('drawer-content-wrapper', `
         overflow: auto;
         height: 100%;
+      `)
+    ]),
+    cE('resize-trigger', `
+      position: absolute;
+      background-color: #0000;
+      transition: background-color .3s var(--n-bezier);
+    `, [
+      cM('hover', `
+        background-color: var(--n-resize-trigger-color-hover);
       `)
     ]),
     cB('drawer-content-wrapper', `
@@ -108,22 +121,58 @@ export default c([
       top: 0;
       bottom: 0;
       right: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(-1.5px);
+        cursor: ew-resize;
+      `)
+    ]),
     cM('left-placement', `
       top: 0;
       bottom: 0;
       left: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 3px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        transform: translateX(1.5px);
+        cursor: ew-resize;
+      `)
+    ]),
     cM('top-placement', `
       top: 0;
       left: 0;
       right: 0;
-    `),
+    `, [
+      cE('resize-trigger', `
+        width: 100%;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        transform: translateY(1.5px);
+        cursor: ns-resize;
+      `)
+    ]),
     cM('bottom-placement', `
       left: 0;
       bottom: 0;
       right: 0;
-    `)
+    `, [
+      cE('resize-trigger', `
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        transform: translateY(-1.5px);
+        cursor: ns-resize;
+      `)
+    ])
   ]),
   c('body', [
     c('>', [

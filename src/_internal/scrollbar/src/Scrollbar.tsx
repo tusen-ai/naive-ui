@@ -22,10 +22,9 @@ import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { useReactivated } from '../../../_utils'
+import { useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
-import { Wrapper } from './Wrapper'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {
@@ -753,7 +752,11 @@ const Scrollbar = defineComponent({
           ),
           <div
             ref="yRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
+            class={[
+              `${mergedClsPrefix}-scrollbar-rail`,
+              `${mergedClsPrefix}-scrollbar-rail--vertical`
+            ]}
+            data-scrollbar-rail
             style={this.verticalRailStyle}
             aria-hidden
           >
@@ -777,8 +780,12 @@ const Scrollbar = defineComponent({
           </div>,
           <div
             ref="xRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
+            class={[
+              `${mergedClsPrefix}-scrollbar-rail`,
+              `${mergedClsPrefix}-scrollbar-rail--horizontal`
+            ]}
             style={this.horizontalRailStyle}
+            data-scrollbar-rail
             aria-hidden
           >
             {h(

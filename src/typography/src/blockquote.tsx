@@ -6,7 +6,7 @@ import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const blockquoteProps = {
+export const blockquoteProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   alignText: Boolean
 } as const

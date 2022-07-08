@@ -60,6 +60,7 @@ export default c([
   `, [
     cM('spinning', `
       user-select: none;
+      -webkit-user-select: none;
       pointer-events: none;
       opacity: var(--n-opacity-spinning);
     `)

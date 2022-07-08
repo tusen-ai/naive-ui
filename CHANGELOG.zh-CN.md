@@ -1,12 +1,117 @@
 # CHANGELOG
 
+## 2.31.0
+
+### Breaking Changes
+
+- `n-date-picker` 的 `clearable` 属性在 `action` 属性没有设置时，会控面板清空按钮的显隐，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196)
+- `n-button` 的 `native-focus-behavior` 属性默认值改为“不是 Safari”
+
+### Fixes
+
+- 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
+- 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
+- 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-carousel` 在 `effect` 为 `fade` 时幻灯片之间的层级关系错误问题，关闭 [#3227](https://github.com/TuSimple/naive-ui/issues/3227)
+- 修复 `n-carousel` 在 IOS 下无法滑动问题，关闭 [#3106](https://github.com/TuSimple/naive-ui/issues/3106)
+- 修复 `n-carousel` 在渲染时丢失内容元素大小问题，关闭 [#3078](https://github.com/TuSimple/naive-ui/issues/3078)
+- 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
+- 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
+- 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
+- 修复 `n-notification` 在内容高度超过屏幕后的关闭动画
+- 修复 `n-dropdown` 禁用的选项有 hover 样式
+- 修复 `n-dropdown` 菜单出现可能会闪
+- 修复 `n-dropdown` 菜单的 transform origin 在 Chrome 上可能不正确
+- 修复 `n-radio-button` 光标样式可能不正确，关闭 [#3243](https://github.com/TuSimple/naive-ui/issues/3243)
+- 修复 `n-input` 在 disabled 状态下在 Safari 上文本颜色过浅，关闭 [#3241](https://github.com/TuSimple/naive-ui/issues/3241)
+- 修复 `n-input` 的分割符可能折行
+- 修复所有组件的 `user-select` 样式属性在 Safari 的效果
+- 修复 `n-data-table` 在虚拟滚动模式下会阻止页面滚动
+- 修复 `n-button` 在 Firefox 下没有按下的效果
+
+### Feats
+
+- `n-avatar` 新增 `lazy` 属性
+- `n-avatar` 新增 `intersection-observer-options` 属性
+- `n-number-animation` 新增 `on-finish` 属性
+- `n-notification` 支持 RTL
+- 导出所有组件的 props 对象
+- `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
+- `n-popover` 新增 `footer` 插槽，用于设置底部内容，关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
+- `n-dropdown` 新增 `menu-props`，关闭 [#2885](https://github.com/TuSimple/naive-ui/issues/2885)
+- `n-data-table` 的列属性增加 `multiple` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
+- `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
+- `n-tree` 新增 `check-on-click` 属性来控制可选状态下的选中交互方式，关闭 [#2968](https://github.com/TuSimple/naive-ui/issues/2968)
+- `n-tree` 新增 `accrodion` 属性，关闭 [#3129](https://github.com/TuSimple/naive-ui/issues/3129)
+- `n-countdown` 新增 `reset` 方法，关闭 [#3228](https://github.com/TuSimple/naive-ui/issues/3228)
+- `n-drawer` 新增 `resizable` 属性
+- `n-drawer` 新增 `default-height` 属性
+- `n-drawer` 新增 `default-width` 属性
+- `n-drawer` 新增 `on-update:height` 属性
+- `n-drawer` 新增 `on-update:width` 属性
+- 更新 ukUA locale
+
+## 2.30.8
+
+### Fixes
+
+- 修复 `n-select` 菜单的 transition 样式，关闭 [#3211](https://github.com/TuSimple/naive-ui/issues/3211)
+
+## 2.30.7
+
+### Fixes
+
+- 修复 `n-tabs` 的 `bar-width` 属性在设置 `0` 时失效，关闭 [#3171](https://github.com/TuSimple/naive-ui/issues/3171)
+- 修复 `n-drawer` 使用 `show-mask` 属性时控制台出现 warning，关闭 [#3172](https://github.com/TuSimple/naive-ui/issues/3172)
+- 修复 `n-button` 放入 ellipsis 的容器中时不能正确显示，关闭 [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- 修复 `n-select` 在 `form` 中，多选的情况下，在 input 元素中按下 Enter 键会导致选项被清除，关闭 [#3169](https://github.com/TuSimple/naive-ui/issues/3169)
+- 修复 `n-select` 的 `filter` 属性不生效，关闭 [#3175](https://github.com/TuSimple/naive-ui/issues/3175)
+- 修复 `n-modal` 在不使用任何 preset 的时候遮罩可能覆盖住内容，关闭 [#3204](https://github.com/TuSimple/naive-ui/issues/3204)
+- 修复 `n-button` 在图标过大或者过小时未对齐
+- 修复 `n-select` 创建的选项可能出现多次，关闭 [#3206](https://github.com/TuSimple/naive-ui/issues/3206)
+
+### Feats
+
+- `n-date-picker` `type` 属性支持 `'quarterrange'` 和 `'yearrange'`
+- `n-tree-select` 新增 `render-prefix` 属性
+- `n-tree-select` 新增 `render-suffix` 属性
+- `n-tree-select` 新增 `render-switcher-icon` 属性
+- `n-tree-select` 新增 `node-props` 属性
+- `n-tree-select` 新增 `render-label` 属性，关闭 [#3197](https://github.com/TuSimple/naive-ui/issues/3197)
+- `n-tree-select` 新增 `render-tag` 属性
+- `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
+
+## 2.30.6
+
+### Fixes
+
+- 修复 `n-color-picker` 手动输入 alpha 值时不生效
+- 修复某些组件在 `__VUE_OPTIONS_API__` 设为 `false` 时工作不正常的问题，关闭 [#3146](https://github.com/TuSimple/naive-ui/issues/3146)
+- 修复 `n-grid` 在 SSR 页面挂载后不会正确的适配响应式，关闭 [#2462](https://github.com/TuSimple/naive-ui/issues/2462)
+- 修复 `n-modal` 在同时打开多个的时候点击某个遮罩，`on-mask-click` 会对每一个都触发，关闭 [#3147](https://github.com/TuSimple/naive-ui/issues/3147)
+- 修复 `n-data-table` 的列的 `ellipsis` 属性类型不接受 `style` 属性
+- 修复 `n-data-table` 在列同时设为 `ellipsis` 和 `fixed` 时会丢失固定列的阴影
+- 修复 `n-image` 的 `lazy` 属性在 Safari 和 Firefox 上工作不正常
+
 ## 2.30.5
 
 ### Fixes
 
-- 修复 `n-carousel` 在 `effect` 为 `fade` 时幻灯片之间的层级关系错误问题，关闭 [#3227](https://github.com/TuSimple/naive-ui/issues/3227)
-- 修复 `n-carousel` 在 IOS 下无法滑动问题，关闭 [#3106](https://github.com/TuSimple/naive-ui/issues/3106)
-- 修复 `n-carousel` 在渲染时丢失内容元素大小问题，关闭 [#3078](https://github.com/TuSimple/naive-ui/issues/3078)
+- 修复 `n-input-group-label` 的内容在 `n-drawer-content` 嵌套中异常，关闭 [#3115](https://github.com/TuSimple/naive-ui/issues/3115)
+- 修复 `n-back-top` 在使用 `show` 时控制台报警告，关闭 [#3122](https://github.com/TuSimple/naive-ui/issues/3122)
+- 修复 `volar.d.ts` 组件全局类型为 `any`
+- 修复 `n-grid-item` 使用 `v-show` 可能存在显示状态不正确的问题，关闭 [#3123](https://github.com/TuSimple/naive-ui/issues/3123)
+- 修复 `n-select` 在可清空状态下使用输入法输入，移入鼠标后输入文字会消失
+
+### Feats
+
+- 🌟 `n-image` 新增 `lazy` 属性，关闭 [#3055](https://github.com/TuSimple/naive-ui/issues/3055)
+- `n-image` 新增 `intersection-observer-options` 属性
+- `n-image` 新增 `placeholder` slot
+- 导出 `NTooltipInst` 类型
+- `n-data-table` 新增 `render-cell` 属性，关闭 [#3095](https://github.com/TuSimple/naive-ui/issues/3095)
+- `n-space` 新增 `wrap-item` 属性
+- `n-data-table` 的 `on-update:checked-row-keys` 会传出行数据，关闭 [#2215](https://github.com/TuSimple/naive-ui/issues/2215)，关闭 [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
 
 ## 2.30.4
 

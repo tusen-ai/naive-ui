@@ -1,12 +1,117 @@
 # CHANGELOG
 
+## 2.31.0
+
+### Breaking Changes
+
+- `n-date-picker`'s `clearable` will control visibility of clear button if no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-button`'s `native-focus-behavior` prop default value is changed to 'not on Safari'.
+
+### Fixes
+
+- Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).
+- Fix `n-data-table` column's `colSpan` doesn't work correctly in virtual scroll mode, closes [#3052](https://github.com/TuSimple/naive-ui/issues/3052).
+- Fix `n-data-table` doesn't show `summary` row in virtual scroll mode, closes [#3202](https://github.com/TuSimple/naive-ui/issues/3202).
+- Fix `n-carousel` has wrong hierarchical relationship between when `effect` is `fade`, closes [#3227](https://github.com/TuSimple/naive-ui/issues/3227).
+- Fix `n-carousel` cannot slide under IOS, closes [#3106](https://github.com/TuSimple/naive-ui/issues/3106).
+- Fix `n-carousel` losing the size of content elements when rendering, closes [#3078](https://github.com/TuSimple/naive-ui/issues/3078).
+- Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
+- Fix `n-cascader`'s `filter` prop may not get correct `path`.
+- Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
+- Fix `n-notification`'s leave animation if content height overflows screen.
+- Fix `n-dropdown`'s disabled option has hover style.
+- Fix `n-dropdown`'s menu may shift when it's entering.
+- Fix `n-dropdown`'s transform origin may not be correct in Chrome.
+- Fix `n-radio-button` may not have correct cursor style, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
+- Fix `n-input`'s text color is too shallow with disabled state in Safari, closes [#3241](https://github.com/TuSimple/naive-ui/issues/3241).
+- Fix `n-input`'s separator may have line wrap.
+- Fix all components' `user-select` style prop's effect on Safari.
+- Fix `n-data-table` will prevent page scroll in virtual scroll mode.
+- Fix `n-button` doesn't have pressed effect on Firefox.
+
+### Feats
+
+- `n-avatar` adds `lazy` prop.
+- `n-avatar` adds `intersection-observer-options` prop.
+- `n-number-animation` adds `on-finish` prop.
+- `n-notification` supports RTL.
+- Export all components' props object.
+- `n-popover` adds `footer-style` prop.
+- `n-popover` adds `footer` slot, closes [#3188](https://github.com/TuSimple/naive-ui/issues/3188).
+- `n-dropdown` adds `menu-props` prop, closes [#2885](https://github.com/TuSimple/naive-ui/issues/2885).
+- `n-data-table` adds `multiple` prop, closes [#3056](https://github.com/TuSimple/naive-ui/issues/3056).
+- `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
+- `n-tree` adds `check-on-click` prop to control `checked` status, closes [#2968](https://github.com/TuSimple/naive-ui/issues/2968).
+- `n-tree` adds `accrodion` prop, closes [#3129](https://github.com/TuSimple/naive-ui/issues/3129).
+- `n-countdown` adds `reset` method, closes [#3228](https://github.com/TuSimple/naive-ui/issues/3228).
+- `n-drawer` adds `resizable` prop.
+- `n-drawer` adds `default-width` prop.
+- `n-drawer` adds `default-height` prop.
+- `n-drawer` adds `on-update:width` prop.
+- `n-drawer` adds `on-update:height` prop.
+- Update ukUA locale.
+
+## 2.30.8
+
+### Fixes
+
+- Fix `n-select`'s menu transition style, closes [#3211](https://github.com/TuSimple/naive-ui/issues/3211).
+
+## 2.30.7
+
+### Fixes
+
+- Fix `n-tabs`'s `bar-width` props invalid when `0` set, closes [#3171](https://github.com/TuSimple/naive-ui/issues/3171).
+- Fix `n-drawer` has log warnings of console when use `show-mask` prop, closes [#3172](https://github.com/TuSimple/naive-ui/issues/3172).
+- Fix `n-button` doesn't omit content if content is wrapped in ellipsis container, closes [#3178](https://github.com/TuSimple/naive-ui/issues/3178).
+- Fix `n-select` will remove select value in multiple mode in `form` if Enter key is pressed in input element. Closes [#3169](https://github.com/TuSimple/naive-ui/issues/3169).
+- Fix `n-select`'s filter prop not working, closes [#3175](https://github.com/TuSimple/naive-ui/issues/3175).
+- Fix `n-modal`'s mask may overlay over content if no preset is used, closes [#3204](https://github.com/TuSimple/naive-ui/issues/3204).
+- Fix `n-button`'s icon doesn't align correctly if it's too big or small.
+- Fix `n-select`'s created options may repeat multiple times in menu, closes [#3206](https://github.com/TuSimple/naive-ui/issues/3206).
+
+### Feats
+
+- `n-date-picker`'s `type` prop supports `'quarterrange'` and `'yearrange'`.
+- `n-tree-select` adds `render-prefix` prop.
+- `n-tree-select` adds `render-suffix` prop.
+- `n-tree-select` adds `render-switcher-icon` prop.
+- `n-tree-select` adds `node-props` prop.
+- `n-tree-select` adds `render-label` prop, closes [#3197](https://github.com/TuSimple/naive-ui/issues/3197).
+- `n-tree-select` adds `render-tag` prop.
+- `n-notification` adds `titleFontSize`, `metaFontSize`, `descriptionFontSize` theme variables.
+
+## 2.30.6
+
+### Fixes
+
+- Fix `n-color-picker` can't input alpha value correctly manually.
+- Fix some components don't work correctly if `__VUE_OPTIONS_API__` is set to `false`, closes [#3146](https://github.com/TuSimple/naive-ui/issues/3146).
+- Fix `n-grid` doesn't adjust it's content to fit responsive config in SSR page, closes [#2462](https://github.com/TuSimple/naive-ui/issues/2462).
+- Fix `n-modal` when many instances are activated at same time, `on-mask-click` will be triggered on every modal even only one mask is clicked [#3147](https://github.com/TuSimple/naive-ui/issues/3147).
+- Fix `n-data-table`'s column `ellipsis` prop's type doesn't allow `style` prop.
+- Fix `n-data-table`'s column will lose box shadow when set to `ellipsis` & `fixed` simultaneously, closes [#3145](https://github.com/TuSimple/naive-ui/issues/3145).
+- Fix `n-image`'s `lazy` prop doesn't work on Safari & Firefox.
+
 ## 2.30.5
 
 ### Fixes
 
-- Fix `n-carousel` has wrong hierarchical relationship between when `effect` is `fade`, closes [#3227](https://github.com/TuSimple/naive-ui/issues/3227).
-- Fix `n-carousel` cannot slide under IOS, closes [#3106](https://github.com/TuSimple/naive-ui/issues/3106).
-- Fixed `n-carousel` losing the size of content elements when rendering, closes [#3078](https://github.com/TuSimple/naive-ui/issues/3078).
+- Fix `n-input-group-label`'s content is abnormal in `n-drawer-content`, closes [#3115](https://github.com/TuSimple/naive-ui/issues/3115).
+- Fix `n-back-top` has log warnings of console when use `show` prop, closes [#3122](https://github.com/TuSimple/naive-ui/issues/3122).
+- Fix `volar.d.ts` components' type is `any`.
+- Fix `n-grid-item` may not display correctly if `v-show` is used, closes [#3123](https://github.com/TuSimple/naive-ui/issues/3123).
+- Fix `n-select` clears input value on mouse enter when it's clearable and using IME.
+
+### Feats
+
+- 🌟 `n-image` adds `lazy` prop, closes [#3055](https://github.com/TuSimple/naive-ui/issues/3055).
+- `n-image` adds `intersection-observer-options` prop.
+- `n-image` adds `placeholder` slot.
+- Exports `NTooltipInst` type.
+- `n-data-table` adds `render-cell` prop, closes [#3095](https://github.com/TuSimple/naive-ui/issues/3095).
+- `n-space` adds `wrap-item` prop.
+- `n-data-table`'s `on-update:checked-row-keys` will pass row data, closes [#2215](https://github.com/TuSimple/naive-ui/issues/2215), closes [#2265](https://github.com/TuSimple/naive-ui/pull/2265)
 
 ## 2.30.4
 
@@ -2395,7 +2500,7 @@ Update package.json & README.md.
 - `n-popover` adds `get-disabled` prop.
 - adds `n-ellipsis` component.
 - `n-popover`'s `width` prop adds `'trigger'` option.
-- `n-data-table`'s columns's `ellipsis` prop can be set as props of `n-ellipsis`.
+- `n-data-table`'s columns's `ellipsis` prop can be set as props of `n-ellipsis`. x
 
 ### Fixes
 

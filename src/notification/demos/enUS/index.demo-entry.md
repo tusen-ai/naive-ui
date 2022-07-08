@@ -28,7 +28,9 @@ export default defineComponent({
     const notification = useNotification()
     return {
       warning () {
-        notification.warning('...')
+        notification.warning({
+          content: '...'
+        })
       }
     }
   }

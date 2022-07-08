@@ -350,7 +350,7 @@ export default defineComponent({
                   themeOverrides={mergedTheme.peerOverrides.Button}
                   size="tiny"
                   type="primary"
-                  disabled={this.isRangeInvalid}
+                  disabled={this.isRangeInvalid || this.isSelecting}
                   onClick={this.handleConfirmClick}
                 >
                   {{ default: () => this.locale.confirm }}

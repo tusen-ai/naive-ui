@@ -17,7 +17,7 @@ function createCursorClass (clsPrefix: string, cursor: string): string {
   return `${clsPrefix}-ellipsis--cursor-${cursor}`
 }
 
-const ellipsisProps = {
+export const ellipsisProps = {
   ...(useTheme.props as ThemeProps<EllipsisTheme>),
   expandTrigger: String as PropType<'click'>,
   lineClamp: [Number, String] as PropType<string | number>,

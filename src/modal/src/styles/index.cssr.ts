@@ -46,6 +46,7 @@ export default c([
     `)
   ]),
   cB('modal', `
+    position: relative;
     align-self: center;
     color: var(--n-text-color);
     margin: auto;

@@ -54,7 +54,8 @@ import type {
   RenderPrefix,
   RenderSuffix,
   RenderSwitcherIcon,
-  TreeNodeProps
+  TreeNodeProps,
+  CheckOnClick
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -117,6 +118,7 @@ export const treeSharedProps = {
     default: () => []
   },
   indeterminateKeys: Array as PropType<Key[]>,
+  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
   >,
@@ -129,8 +131,9 @@ export const treeSharedProps = {
   >
 } as const
 
-const treeProps = {
+export const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
+  accordion: Boolean,
   showIrrelevantNodes: { type: Boolean, default: true },
   data: {
     type: Array as PropType<TreeOptions>,
@@ -141,6 +144,10 @@ const treeProps = {
     default: true
   },
   expandOnClick: Boolean,
+  checkOnClick: {
+    type: [Boolean, Function] as PropType<boolean | CheckOnClick>,
+    default: false
+  },
   cancelable: {
     type: Boolean,
     default: true
@@ -194,7 +201,6 @@ const treeProps = {
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
-  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   nodeProps: Function as PropType<TreeNodeProps>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
@@ -551,7 +557,7 @@ export default defineComponent({
     // animation in progress
     const aipRef = ref(false)
     // animation flattened nodes
-    const afNodeRef = ref<Array<TmNode | MotionData>>([])
+    const afNodesRef = ref<Array<TmNode | MotionData>>([])
     // Note: Since the virtual list depends on min height, if there's a node
     // whose height starts from 0, the virtual list will have a wrong height
     // during animation. This will seldom cause wired scrollbar status. It is
@@ -578,10 +584,7 @@ export default defineComponent({
           removedKey = expandedKey
         }
       }
-      if (
-        (addedKey !== null && removedKey !== null) ||
-        (addedKey === null && removedKey === null)
-      ) {
+      if (addedKey === null && removedKey === null) {
         // 1. multi action, not triggered by click
         // 2. no action, don't know what happened
         return
@@ -591,20 +594,34 @@ export default defineComponent({
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
       const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
+      // play add animation
+      let baseExpandedKeys: Key[] | undefined
       if (addedKey !== null) {
-        // play add animation
-        aipRef.value = true
-        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(prevValue)
-        const expandedNodeIndex = afNodeRef.value.findIndex(
+        baseExpandedKeys = prevValue
+      }
+      if (removedKey !== null) {
+        if (baseExpandedKeys === undefined) {
+          baseExpandedKeys = value
+        } else {
+          baseExpandedKeys = baseExpandedKeys.filter(
+            (key) => key !== removedKey
+          )
+        }
+      }
+      aipRef.value = true
+      afNodesRef.value =
+        displayTreeMateRef.value.getFlattenedNodes(baseExpandedKeys)
+      if (addedKey !== null) {
+        const expandedNodeIndex = afNodesRef.value.findIndex(
           (node) => (node as any).key === addedKey
         )
         if (~expandedNodeIndex) {
           const expandedChildren = flatten(
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
+            (afNodesRef.value[expandedNodeIndex] as TmNode).children!,
             value
           )
-          afNodeRef.value.splice(expandedNodeIndex + 1, 0, {
+          afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'expand',
             height: virtualScroll
@@ -617,13 +634,12 @@ export default defineComponent({
         }
       }
       if (removedKey !== null) {
-        afNodeRef.value = displayTreeMateRef.value.getFlattenedNodes(value)
-        const collapsedNodeIndex = afNodeRef.value.findIndex(
+        const collapsedNodeIndex = afNodesRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
         if (~collapsedNodeIndex) {
           const collapsedNodeChildren = (
-            afNodeRef.value[collapsedNodeIndex] as TmNode
+            afNodesRef.value[collapsedNodeIndex] as TmNode
           ).children
           // Sometime the whole tree is change, remove a key doesn't mean it is collapsed,
           // but maybe children removed
@@ -631,7 +647,7 @@ export default defineComponent({
           // play remove animation
           aipRef.value = true
           const collapsedChildren = flatten(collapsedNodeChildren, value)
-          afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
+          afNodesRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
             height: virtualScroll
@@ -650,7 +666,7 @@ export default defineComponent({
     })
 
     const mergedFNodesRef = computed(() => {
-      if (aipRef.value) return afNodeRef.value
+      if (aipRef.value) return afNodesRef.value
       else return fNodesRef.value
     })
 
@@ -805,8 +821,9 @@ export default defineComponent({
         getOptionsByKeys(indeterminateKeys)
       )
     }
-    function toggleExpand (key: Key): void {
+    function toggleExpand (node: TmNode): void {
       if (props.disabled) return
+      const { key } = node
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
         (expandNodeId) => expandNodeId === key
@@ -823,13 +840,24 @@ export default defineComponent({
         if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
-        const nextKeys = mergedExpandedKeys.concat(key)
+        let nextKeys: Key[]
+        if (props.accordion) {
+          const siblingKeySet = new Set<Key>(
+            node.siblings.map(({ key }) => key)
+          )
+          nextKeys = mergedExpandedKeys.filter((expandedKey) => {
+            return !siblingKeySet.has(expandedKey)
+          })
+          nextKeys.push(key)
+        } else {
+          nextKeys = mergedExpandedKeys.concat(key)
+        }
         doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
       if (props.disabled || aipRef.value) return
-      toggleExpand(node.key)
+      toggleExpand(node)
     }
     function handleSelect (node: TmNode): void {
       if (props.disabled || !props.selectable) {
@@ -1249,6 +1277,7 @@ export default defineComponent({
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
       cascadeRef: toRef(props, 'cascade'),
+      checkOnClickRef: toRef(props, 'checkOnClick'),
       checkboxPlacementRef: props.checkboxPlacement,
       droppingMouseNodeRef,
       droppingNodeParentRef,

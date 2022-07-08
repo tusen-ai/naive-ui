@@ -21,7 +21,7 @@ import type { CodeTheme } from '../styles'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const codeProps = {
+export const codeProps = {
   ...(useTheme.props as ThemeProps<CodeTheme>),
   language: String,
   code: {

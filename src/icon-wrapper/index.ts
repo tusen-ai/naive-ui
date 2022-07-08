@@ -1,2 +1,2 @@
-export { NIconWrapper } from './src/IconWrapper'
+export { NIconWrapper, iconWrapperProps } from './src/IconWrapper'
 export type { IconWrapperProps } from './src/IconWrapper'

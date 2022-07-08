@@ -58,7 +58,7 @@ type TransitionStyle = Partial<
 Pick<CSSProperties, typeof transitionProperties[number]>
 >
 
-const carouselProps = {
+export const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
   defaultIndex: {
     type: Number,

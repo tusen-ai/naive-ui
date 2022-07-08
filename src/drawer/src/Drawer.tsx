@@ -1,5 +1,6 @@
 import {
   h,
+  ref,
   PropType,
   defineComponent,
   computed,
@@ -7,11 +8,12 @@ import {
   CSSProperties,
   withDirectives,
   Transition,
-  watchEffect
+  watchEffect,
+  toRef
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useMergedState } from 'vooks'
 import { useTheme, useConfig, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -29,17 +31,11 @@ import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
-const drawerProps = {
+export const drawerProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme>),
   show: Boolean,
-  width: {
-    type: [Number, String] as PropType<string | number>,
-    default: 251
-  },
-  height: {
-    type: [Number, String] as PropType<string | number>,
-    default: 251
-  },
+  width: [Number, String] as PropType<string | number>,
+  height: [Number, String] as PropType<string | number>,
   placement: {
     type: String as PropType<Placement>,
     default: 'right'
@@ -82,6 +78,27 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  resizable: Boolean,
+  defaultWidth: {
+    type: Number,
+    default: 251
+  },
+  defaultHeight: {
+    type: Number,
+    default: 251
+  },
+  onUpdateWidth: [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
+  onUpdateHeight: [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
+  'onUpdate:width': [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
+  'onUpdate:height': [Function, Array] as PropType<
+  MaybeArray<(value: number) => void>
+  >,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -147,18 +164,44 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const uncontrolledWidthRef = ref<string | number>(props.defaultWidth)
+    const uncontrolledHeightRef = ref<string | number>(props.defaultHeight)
+
+    const mergedWidthRef = useMergedState(
+      toRef(props, 'width'),
+      uncontrolledWidthRef
+    )
+    const mergedHeightRef = useMergedState(
+      toRef(props, 'height'),
+      uncontrolledHeightRef
+    )
+
     const styleWidthRef = computed(() => {
       const { placement } = props
       if (placement === 'top' || placement === 'bottom') return ''
-      const { width } = props
-      return formatLength(width)
+      return formatLength(mergedWidthRef.value)
     })
+
     const styleHeightRef = computed(() => {
       const { placement } = props
       if (placement === 'left' || placement === 'right') return ''
-      const { height } = props
-      return formatLength(height)
+      return formatLength(mergedHeightRef.value)
     })
+
+    const doUpdateWidth = (value: number): void => {
+      const { onUpdateWidth, 'onUpdate:width': _onUpdateWidth } = props
+      if (onUpdateWidth) call(onUpdateWidth, value)
+      if (_onUpdateWidth) call(_onUpdateWidth, value)
+      uncontrolledWidthRef.value = value
+    }
+    const doUpdateHeight = (value: number): void => {
+      const { onUpdateHeight, 'onUpdate:width': _onUpdateHeight } = props
+      if (onUpdateHeight) call(onUpdateHeight, value)
+      if (_onUpdateHeight) call(_onUpdateHeight, value)
+      uncontrolledHeightRef.value = value
+    }
+
     const mergedBodyStyleRef = computed<Array<CSSProperties | string>>(() => {
       return [
         {
@@ -168,6 +211,7 @@ export default defineComponent({
         props.drawerStyle || ''
       ]
     })
+
     function handleMaskClick (e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (maskClosable) {
@@ -195,7 +239,9 @@ export default defineComponent({
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
       mergedClsPrefixRef,
-      doUpdateShow
+      doUpdateShow,
+      doUpdateHeight,
+      doUpdateWidth
     })
     const cssVarsRef = computed(() => {
       const {
@@ -220,7 +266,8 @@ export default defineComponent({
           closeColorPressed,
           closeIconSize,
           closeSize,
-          closeBorderRadius
+          closeBorderRadius,
+          resizableTriggerColorHover
         }
       } = themeRef.value
       return {
@@ -246,7 +293,8 @@ export default defineComponent({
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
         '--n-close-icon-size': closeIconSize,
-        '--n-close-border-radius': closeBorderRadius
+        '--n-close-border-radius': closeBorderRadius,
+        '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -315,6 +363,7 @@ export default defineComponent({
                   onAfterLeave={this.onAfterLeave}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  resizable={this.resizable}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
                   onClickoutside={this.handleMaskClick}

@@ -6,8 +6,9 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, RadioTheme } from '../styles'
 import useRadio from './use-radio'
 import style from './styles/radio.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
+export const radioProps = useRadio.props
 export type RadioProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({

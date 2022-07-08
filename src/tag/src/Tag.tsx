@@ -9,7 +9,7 @@ import {
   provide,
   toRef
 } from 'vue'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { NBaseClose } from '../../_internal/close'
 import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -34,7 +34,7 @@ export interface TagRef extends TagPublicMethods {
   $el: HTMLElement
 }
 
-const tagProps = {
+export const tagProps = {
   ...(useTheme.props as ThemeProps<TagTheme>),
   ...commonProps,
   bordered: {

@@ -44,6 +44,7 @@ export default defineComponent({
   props: gridItemProps,
   setup () {
     const {
+      isSsrRef,
       xGapRef,
       itemStyleRef,
       overflowRef
@@ -54,6 +55,7 @@ export default defineComponent({
       overflow: overflowRef,
       itemStyle: itemStyleRef,
       deriveStyle: () => {
+        void isSsrRef.value
         // Here is quite a hack, I hope there is a better way to solve it
         const {
           privateSpan = defaultSpan,

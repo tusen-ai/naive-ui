@@ -6,20 +6,20 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
-const typeProps = {
+export const tabProps = {
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
   internalCreatedByPane: Boolean,
   ...omit(tabPaneProps, ['displayDirective'])
 } as const
 
-export type TabProps = ExtractPublicPropTypes<typeof typeProps>
+export type TabProps = ExtractPublicPropTypes<typeof tabProps>
 
 export default defineComponent({
   __TAB__: true,
   inheritAttrs: false,
   name: 'Tab',
-  props: typeProps,
+  props: tabProps,
   setup (props) {
     const {
       mergedClsPrefixRef,
@@ -95,7 +95,7 @@ export default defineComponent({
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
         {this.internalLeftPadded ? (
-          <div class={`${clsPrefix}-tabs-tab-pad`}></div>
+          <div class={`${clsPrefix}-tabs-tab-pad`} />
         ) : null}
         <div
           key={name}

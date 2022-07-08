@@ -20,7 +20,7 @@ import type { LayoutInst } from './interface'
 import { positionProp } from './interface'
 import style from './styles/layout.cssr'
 
-const layoutProps = {
+export const layoutProps = {
   embedded: Boolean,
   position: positionProp,
   nativeScrollbar: {

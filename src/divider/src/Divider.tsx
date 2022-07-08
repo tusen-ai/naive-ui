@@ -13,7 +13,7 @@ import { dividerLight } from '../styles'
 import type { DividerTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const dividerProps = {
+export const dividerProps = {
   ...(useTheme.props as ThemeProps<DividerTheme>),
   titlePlacement: {
     type: String as PropType<'left' | 'center' | 'right'>,

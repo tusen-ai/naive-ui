@@ -56,7 +56,7 @@ interface PrivateMessageRef extends MessageReactive {
 
 export type MessageProviderInst = MessageApiInjection
 
-const messageProviderProps = {
+export const messageProviderProps = {
   ...(useTheme.props as ThemeProps<MessageTheme>),
   to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
