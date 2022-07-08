@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.30.5
+
+### Fixes
+
+- 修复 `n-carousel` 在 `effect` 为 `fade` 时幻灯片之间的层级关系错误问题，关闭 [#3227](https://github.com/TuSimple/naive-ui/issues/3227)
+- 修复 `n-carousel` 在 IOS 下无法滑动问题，关闭 [#3106](https://github.com/TuSimple/naive-ui/issues/3106)
+- 修复 `n-carousel` 在渲染时丢失内容元素大小问题，关闭 [#3078](https://github.com/TuSimple/naive-ui/issues/3078)
+
 ## 2.30.4
 
 ### Fixes

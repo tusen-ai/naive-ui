@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.30.5
+
+### Fixes
+
+- Fix `n-carousel` has wrong hierarchical relationship between when `effect` is `fade`, closes [#3227](https://github.com/TuSimple/naive-ui/issues/3227).
+- Fix `n-carousel` cannot slide under IOS, closes [#3106](https://github.com/TuSimple/naive-ui/issues/3106).
+- Fixed `n-carousel` losing the size of content elements when rendering, closes [#3078](https://github.com/TuSimple/naive-ui/issues/3078).
+
 ## 2.30.4
 
 ### Fixes
