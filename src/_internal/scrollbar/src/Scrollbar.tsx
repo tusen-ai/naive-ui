@@ -16,7 +16,7 @@ import {
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -26,7 +26,6 @@ import { useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
-import useRtl from '../../../_mixins/use-rtl'
 
 export interface ScrollTo {
   (x: number, y: number): void
