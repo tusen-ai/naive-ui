@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.31.0
 
 ### Breaking Changes
 
 - `n-date-picker` 的 `clearable` 属性在 `action` 属性没有设置时，会控面板清空按钮的显隐，关闭 [#1196](https://github.com/TuSimple/naive-ui/issues/1196)
+- `n-button` 的 `native-focus-behavior` 属性默认值改为“不是 Safari”
 
 ### Fixes
 
@@ -18,6 +19,12 @@
 - 修复 `n-dropdown` 禁用的选项有 hover 样式
 - 修复 `n-dropdown` 菜单出现可能会闪
 - 修复 `n-dropdown` 菜单的 transform origin 在 Chrome 上可能不正确
+- 修复 `n-radio-button` 光标样式可能不正确，关闭 [#3243](https://github.com/TuSimple/naive-ui/issues/3243)
+- 修复 `n-input` 在 disabled 状态下在 Safari 上文本颜色过浅，关闭 [#3241](https://github.com/TuSimple/naive-ui/issues/3241)
+- 修复 `n-input` 的分割符可能折行
+- 修复所有组件的 `user-select` 样式属性在 Safari 的效果
+- 修复 `n-data-table` 在虚拟滚动模式下会阻止页面滚动
+- 修复 `n-button` 在 Firefox 下没有按下的效果
 
 ### Feats
 
@@ -28,9 +35,8 @@
 - 导出所有组件的 props 对象
 - `n-popover` 新增 `footer-style` 属性，用于设置底部内容的样式
 - `n-popover` 新增 `footer` 插槽，用于设置底部内容，关闭 [#3188](https://github.com/TuSimple/naive-ui/issues/3188)
-- `n-dropdown` 新增 `menu-props`
+- `n-dropdown` 新增 `menu-props`，关闭 [#2885](https://github.com/TuSimple/naive-ui/issues/2885)
 - `n-data-table` 的列属性增加 `multiple` 属性使得表格选择支持单选模式，关闭 [#3056](https://github.com/TuSimple/naive-ui/issues/3056)
-- `n-dropdown` 新增 `menu-props` 属性
 - `n-date-picker` 在选择结束日期过程中禁止点击确认按钮，关闭 [#3226](https://github.com/TuSimple/naive-ui/issues/3226)
 - `n-tree` 新增 `check-on-click` 属性来控制可选状态下的选中交互方式，关闭 [#2968](https://github.com/TuSimple/naive-ui/issues/2968)
 - `n-tree` 新增 `accrodion` 属性，关闭 [#3129](https://github.com/TuSimple/naive-ui/issues/3129)

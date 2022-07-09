@@ -9,7 +9,7 @@ import { NBaseIcon } from '../../_internal'
 import { ExtractPublicPropTypes, throwError } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig } from '../../_mixins'
 
 export const collapseItemProps = {

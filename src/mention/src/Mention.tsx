@@ -447,7 +447,7 @@ export default defineComponent({
                       style.height = '1px'
                       style.background = 'red'
                     }
-                    return <div style={style} ref="cursorRef"></div>
+                    return <div style={style} ref="cursorRef" />
                   }
                 }}
               </VTarget>,

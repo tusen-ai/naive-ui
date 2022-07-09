@@ -36,11 +36,13 @@ export default cB('form-item', {
   `, [
     cE('asterisk', `
       user-select: none;
+      -webkit-user-select: none;
       color: var(--n-asterisk-color);
       transition: color .3s var(--n-bezier);
     `),
     cE('asterisk-placeholder', `
       user-select: none;
+      -webkit-user-select: none;
       visibility: hidden;      
     `)
   ]),

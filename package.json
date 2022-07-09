@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.30.8",
+  "version": "2.31.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -156,7 +156,7 @@
     "treemate": "^0.3.11",
     "vdirs": "^0.1.8",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.46"
+    "vueuc": "^0.4.47"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",

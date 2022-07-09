@@ -95,7 +95,7 @@ export default defineComponent({
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
         {this.internalLeftPadded ? (
-          <div class={`${clsPrefix}-tabs-tab-pad`}></div>
+          <div class={`${clsPrefix}-tabs-tab-pad`} />
         ) : null}
         <div
           key={name}

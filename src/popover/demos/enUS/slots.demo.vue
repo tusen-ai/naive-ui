@@ -16,9 +16,7 @@ Use `header` or `footer` slot to customize header or footer.
     </template>
     Content.
     <template #footer>
-      <n-text strong depth="1">
-        Divider is on the top.
-      </n-text>
+      Divider is on the top.
     </template>
   </n-popover>
 </template>

@@ -25,6 +25,6 @@ reset.vue
 
 ### Countdown Methods
 
-| Name  | Type         | Description      | Version      |
-| ----- | ------------ | ---------------- | ------------ |
-| reset | `() => void` | Reset countdown. | NEXT_VERSION |
+| Name  | Type         | Description      | Version |
+| ----- | ------------ | ---------------- | ------- |
+| reset | `() => void` | Reset countdown. | 2.31.0  |
