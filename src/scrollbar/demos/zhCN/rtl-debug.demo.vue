@@ -40,13 +40,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { scrollbarRtl } from '../../../_internal/scrollbar/styles'
+import { unstableScrollbarRtl } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
       rtlEnabled: ref(true),
-      rtlStyles: [scrollbarRtl]
+      rtlStyles: [unstableScrollbarRtl]
     }
   }
 })
