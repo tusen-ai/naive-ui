@@ -14,7 +14,7 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import { useConfig, useThemeClass } from '../../_mixins'

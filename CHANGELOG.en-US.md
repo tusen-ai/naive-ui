@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.31.0
 
 ### Breaking Changes
 
-- `n-date-picker`'s `clearable` will control visibility of clear button is no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-date-picker`'s `clearable` will control visibility of clear button if no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-button`'s `native-focus-behavior` prop default value is changed to 'not on Safari'.
 
 ### Fixes
 
@@ -18,6 +19,12 @@
 - Fix `n-dropdown`'s disabled option has hover style.
 - Fix `n-dropdown`'s menu may shift when it's entering.
 - Fix `n-dropdown`'s transform origin may not be correct in Chrome.
+- Fix `n-radio-button` may not have correct cursor style, closes [#3243](https://github.com/TuSimple/naive-ui/issues/3243).
+- Fix `n-input`'s text color is too shallow with disabled state in Safari, closes [#3241](https://github.com/TuSimple/naive-ui/issues/3241).
+- Fix `n-input`'s separator may have line wrap.
+- Fix all components' `user-select` style prop's effect on Safari.
+- Fix `n-data-table` will prevent page scroll in virtual scroll mode.
+- Fix `n-button` doesn't have pressed effect on Firefox.
 
 ### Feats
 
@@ -28,7 +35,7 @@
 - Export all components' props object.
 - `n-popover` adds `footer-style` prop.
 - `n-popover` adds `footer` slot, closes [#3188](https://github.com/TuSimple/naive-ui/issues/3188).
-- `n-dropdown` adds `menu-props` prop.
+- `n-dropdown` adds `menu-props` prop, closes [#2885](https://github.com/TuSimple/naive-ui/issues/2885).
 - `n-data-table` adds `multiple` prop, closes [#3056](https://github.com/TuSimple/naive-ui/issues/3056).
 - `n-date-picker` would disable confirm button if end date is not selected, closes [#3226](https://github.com/TuSimple/naive-ui/issues/3226).
 - `n-tree` adds `check-on-click` prop to control `checked` status, closes [#2968](https://github.com/TuSimple/naive-ui/issues/2968).

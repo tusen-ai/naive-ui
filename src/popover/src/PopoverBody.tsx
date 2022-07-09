@@ -69,6 +69,7 @@ export const popoverBodyProps = {
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   internalTrapFocus: Boolean,
+  internalOnAfterLeave: Function as PropType<() => void>,
   // deprecated
   minWidth: Number,
   maxWidth: Number
@@ -278,12 +279,10 @@ export default defineComponent({
       if (!renderBody) {
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
+        const hasHeaderOrFooter =
+          !isSlotEmpty(slots.header) || !isSlotEmpty(slots.footer)
         const renderContentInnerNode = (): VNodeChild[] => {
-          const hasContent =
-            !isSlotEmpty(slots.header) ||
-            !isSlotEmpty(slots.footer) ||
-            !isSlotEmpty(slots.default)
-          const body = hasContent ? (
+          const body = hasHeaderOrFooter ? (
             <>
               {resolveWrappedSlot(slots.header, (children) => {
                 return children ? (
@@ -329,9 +328,11 @@ export default defineComponent({
           const maybeScrollableBody = props.scrollable ? (
             <NxScrollbar
               contentClass={
-                !hasContent ? undefined : `${mergedClsPrefix}-popover__content`
+                hasHeaderOrFooter
+                  ? undefined
+                  : `${mergedClsPrefix}-popover__content`
               }
-              contentStyle={!hasContent ? undefined : props.contentStyle}
+              contentStyle={hasHeaderOrFooter ? undefined : props.contentStyle}
             >
               {{
                 default: () => body
@@ -348,8 +349,6 @@ export default defineComponent({
             : null
           return [maybeScrollableBody, arrow]
         }
-        const hasHeaderOrFooter =
-          !isSlotEmpty(slots.header) || !isSlotEmpty(slots.footer)
         contentNode = h(
           'div',
           mergeProps(
@@ -449,6 +448,7 @@ export default defineComponent({
                   this.followerEnabled = true
                 }}
                 onAfterLeave={() => {
+                  this.internalOnAfterLeave?.()
                   this.followerEnabled = false
                   this.displayed = false
                 }}

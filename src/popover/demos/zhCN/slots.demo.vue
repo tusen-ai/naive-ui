@@ -16,9 +16,7 @@
     </template>
     内容
     <template #footer>
-      <n-text strong depth="1">
-        上面就是分割线
-      </n-text>
+      上面就是分割线
     </template>
   </n-popover>
 </template>

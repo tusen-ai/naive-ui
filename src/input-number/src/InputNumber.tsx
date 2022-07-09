@@ -33,7 +33,7 @@ import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
-import useRtl from '../../_mixins/use-rtl'
+import { useRtl } from '../../_mixins/use-rtl'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100

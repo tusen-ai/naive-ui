@@ -142,6 +142,7 @@ export default c([
       flex-shrink: 0;
       flex-grow: 0;
       user-select: none;
+      -webkit-user-select: none;
     `),
     cB('checkbox-box', `
       position: absolute;
@@ -200,6 +201,7 @@ export default c([
       color: var(--n-text-color);
       transition: color .3s var(--n-bezier);
       user-select: none;
+      -webkit-user-select: none;
       padding: var(--n-label-padding);
     `, [
       c('&:empty', {

@@ -73,7 +73,7 @@ no-icon.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | destroyAll | `() => void` | Destroy all popup messages. |  |
-| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. | 2.25.7 |
+| create | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use create type message. | 2.25.7 |
 | error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. |  |
 | info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use info type message. |  |
 | loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use loading type message. |  |

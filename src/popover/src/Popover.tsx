@@ -199,6 +199,7 @@ export const popoverBaseProps = {
 export const popoverProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
   ...popoverBaseProps,
+  internalOnAfterLeave: Function as PropType<() => void>,
   internalRenderBody: Function as PropType<InternalRenderBody>
 }
 

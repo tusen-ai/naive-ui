@@ -39,6 +39,7 @@ export default cB('scrollbar', `
       position: absolute;
       pointer-events: none;
       user-select: none;
+      -webkit-user-select: none;
     `, [
       cM('horizontal', `
         left: 2px;

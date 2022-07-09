@@ -7,7 +7,7 @@ import {
 } from '../config-provider/src/internal-interface'
 import { cssrAnchorMetaName } from './common'
 
-export default function useRtl (
+export function useRtl (
   mountId: string,
   rtlStateRef: Ref<RtlEnabledState | undefined> | undefined,
   clsPrefixRef: Ref<string>

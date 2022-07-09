@@ -11,8 +11,8 @@
 ```demo
 basic.vue
 multiple.vue
-target.vue
 closable.vue
+target.vue
 slot.vue
 scroll.vue
 a11y-debug.vue
@@ -34,14 +34,14 @@ resizable.vue
 | block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Drawer | 2.24.2 |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |  |
-| default-width | `number \| string` | `251` | 抽屉的默认宽度，在位置是 `left` 和 `right` 时生效 | NEXT_VERSION |
-| default-height | `number \| string` | `251` | 抽屉的默认高度，在位置是 `top` 和 `bottom` 时生效 | NEXT_VERSION |
+| default-width | `number \| string` | `251` | 抽屉的默认宽度，在位置是 `left` 和 `right` 时生效 | 2.31.0 |
+| default-height | `number \| string` | `251` | 抽屉的默认高度，在位置是 `top` 和 `bottom` 时生效 | 2.31.0 |
 | display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |
 | height | `number \| string` | `undefined` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |  |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |  |
-| resizable | `boolean` | `false` | 抽屉是否可以调整宽度、高度 | NEXT_VERSION |
+| resizable | `boolean` | `false` | 抽屉是否可以调整宽度、高度 | 2.31.0 |
 | show | `boolean` | `false` | 是否展示抽屉 |  |
 | show-mask | `boolean \| 'transparent'` | `true` | 是否显示遮罩，如果设为 `'transparent'` 会展示透明遮罩，如果设为 `false` 会禁用 `trap-focus` | 2.28.3 |
 | style | `string \| Object` | `undefined` | 抽屉的样式 |  |
@@ -53,9 +53,9 @@ resizable.vue
 | on-after-leave | `() => void` | `undefined` | Drawer 关闭后的回调 | 2.28.0 |
 | on-esc | `() => void` | `undefined` | 焦点在 Drawer 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
-| on-update:height | `(height: number) => void` | `undefined` | 抽屉高度改变时执行的回调函数 | NEXT_VERSION |
+| on-update:height | `(height: number) => void` | `undefined` | 抽屉高度改变时执行的回调函数 | 2.31.0 |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
-| on-update:width | `(width: number) => void` | `undefined` | 抽屉宽度改变时执行的回调函数 | NEXT_VERSION |
+| on-update:width | `(width: number) => void` | `undefined` | 抽屉宽度改变时执行的回调函数 | 2.31.0 |
 
 ### DrawerContent Props
 
