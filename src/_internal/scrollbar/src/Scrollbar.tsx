@@ -16,7 +16,7 @@ import {
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -120,7 +120,9 @@ const Scrollbar = defineComponent({
   props: scrollbarProps,
   inheritAttrs: false,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('Scrollbar', mergedRtlRef, mergedClsPrefixRef)
 
     // dom ref
     const wrapperRef = ref<HTMLElement | null>(null)
@@ -426,7 +428,8 @@ const Scrollbar = defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value = container.scrollLeft
+        containerScrollLeftRef.value =
+          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
       }
     }
     function syncPositionState (): void {
@@ -459,7 +462,8 @@ const Scrollbar = defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value = container.scrollLeft
+        containerScrollLeftRef.value =
+          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         containerHeightRef.value = container.offsetHeight
         containerWidthRef.value = container.offsetWidth
         contentHeightRef.value = container.scrollHeight
@@ -493,7 +497,9 @@ const Scrollbar = defineComponent({
       on('mousemove', window, handleXScrollMouseMove, true)
       on('mouseup', window, handleXScrollMouseUp, true)
       memoXLeft = containerScrollLeftRef.value
-      memoMouseX = e.clientX
+      memoMouseX = rtlEnabledRef?.value
+        ? window.innerWidth - e.clientX
+        : e.clientX
     }
     function handleXScrollMouseMove (e: MouseEvent): void {
       if (!xBarPressed) return
@@ -507,7 +513,10 @@ const Scrollbar = defineComponent({
       const { value: contentWidth } = contentWidthRef
       const { value: xBarSize } = xBarSizeRef
       if (containerWidth === null || contentWidth === null) return
-      const dX = e.clientX - memoMouseX
+      const dX = rtlEnabledRef?.value
+        ? window.innerWidth - e.clientX - memoMouseX
+        : e.clientX - memoMouseX
+
       const dScrollLeft =
         (dX * (contentWidth - containerWidth)) / (containerWidth - xBarSize)
       const toScrollLeftUpperBound = contentWidth - containerWidth
@@ -516,7 +525,7 @@ const Scrollbar = defineComponent({
       toScrollLeft = Math.max(toScrollLeft, 0)
       const { value: container } = mergedContainerRef
       if (container) {
-        container.scrollLeft = toScrollLeft
+        container.scrollLeft = toScrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         const { internalOnUpdateScrollLeft } = props
         if (internalOnUpdateScrollLeft) internalOnUpdateScrollLeft(toScrollLeft)
       }
@@ -664,6 +673,7 @@ const Scrollbar = defineComponent({
     return {
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnable: rtlEnabledRef,
       containerScrollTop: containerScrollTopRef,
       wrapperRef,
       containerRef,
@@ -690,7 +700,7 @@ const Scrollbar = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, triggerDisplayManually } = this
+    const { $slots, mergedClsPrefix, triggerDisplayManually, rtlEnable } = this
     if (!this.scrollable) return $slots.default?.()
     const createChildren = (): VNode => {
       this.onRender?.()
@@ -700,7 +710,11 @@ const Scrollbar = defineComponent({
         mergeProps(this.$attrs, {
           role: 'none',
           ref: 'wrapperRef',
-          class: [`${mergedClsPrefix}-scrollbar`, this.themeClass],
+          class: [
+            `${mergedClsPrefix}-scrollbar`,
+            this.themeClass,
+            rtlEnable && `${mergedClsPrefix}-scrollbar--rtl`
+          ],
           style: this.cssVars,
           onMouseenter: triggerDisplayManually
             ? undefined
@@ -798,7 +812,8 @@ const Scrollbar = defineComponent({
                       class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                       style={{
                         width: this.xBarSizePx,
-                        left: this.xBarLeftPx
+                        right: !rtlEnable ? 'unset' : this.xBarLeftPx,
+                        left: rtlEnable ? 'unset' : this.xBarLeftPx
                       }}
                       onMousedown={this.handleXScrollMouseDown}
                     />

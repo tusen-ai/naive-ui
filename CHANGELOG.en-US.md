@@ -46,6 +46,7 @@
 - `n-drawer` adds `default-height` prop.
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
+- `n-scrollbar` supports RTL.
 - Update ukUA locale.
 
 ## 2.30.8

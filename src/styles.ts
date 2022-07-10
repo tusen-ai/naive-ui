@@ -8,6 +8,7 @@ export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
+export { notificationRtl as unstableNotificationRtl } from './notification/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
@@ -92,3 +93,4 @@ export { watermarkDark } from './watermark/styles'
 export { scrollbarDark } from './_internal/scrollbar/styles'
 export { internalSelectMenuDark } from './_internal/select-menu/styles'
 export { internalSelectionDark } from './_internal/selection/styles'
+export { scrollbarRtl as unstableScrollbarRtl } from './_internal/scrollbar/styles'

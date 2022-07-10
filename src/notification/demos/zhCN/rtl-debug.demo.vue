@@ -16,8 +16,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue'
-import { useNotification, NButton, NAvatar } from 'naive-ui'
-import { notificationRtl } from '../../styles'
+import {
+  useNotification,
+  NButton,
+  NAvatar,
+  unstableNotificationRtl
+} from 'naive-ui'
 
 const NotificationButton = defineComponent({
   setup () {
@@ -96,7 +100,7 @@ export default defineComponent({
   setup () {
     return {
       rtlEnabled: ref(true),
-      rtlStyles: [notificationRtl]
+      rtlStyles: [unstableNotificationRtl]
     }
   }
 })
