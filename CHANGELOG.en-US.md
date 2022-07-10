@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-date-picker`’s selection status is abnormally, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
+
 ## 2.31.0
 
 ### Breaking Changes

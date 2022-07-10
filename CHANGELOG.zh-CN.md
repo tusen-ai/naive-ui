@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-date-picker` 的选中状态判断异常，关闭 [#3254](https://github.com/TuSimple/naive-ui/issues/3254)
+
 ## 2.31.0
 
 ### Breaking Changes

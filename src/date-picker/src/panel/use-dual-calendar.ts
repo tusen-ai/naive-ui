@@ -373,6 +373,11 @@ function useDualCalendar (
   }
   function resetSelectingStatus (e: MouseEvent): void {
     if (
+      (e.target as HTMLDivElement).className !== 'n-date-panel-date__trigger'
+    ) {
+      return
+    }
+    if (
       startDatesElRef.value?.contains(e.target as Node) ||
       endDatesElRef.value?.contains(e.target as Node)
     ) {
@@ -432,6 +437,10 @@ function useDualCalendar (
         )
       }
     }
+  }
+
+  function handleDateMouseLeave (dateItem: DateItem): void {
+    console.log('12321321321')
   }
   function handleConfirmClick (): void {
     if (isRangeInvalidRef.value) {
@@ -827,6 +836,7 @@ function useDualCalendar (
     handleDateClick,
     handleColItemClick,
     handleDateMouseEnter,
+    handleDateMouseLeave,
     handleConfirmClick,
     startCalendarPrevYear,
     startCalendarPrevMonth,
