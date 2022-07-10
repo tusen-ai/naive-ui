@@ -36,6 +36,7 @@ export const codeProps = {
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
+  lineNumbers: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalFontSize: Number,
   internalNoHighlight: Boolean
@@ -67,6 +68,20 @@ export default defineComponent({
         language
       }).value
     }
+    // reference: https://www.yangdx.com/2020/04/144.html
+    const addLineNumbersForCode = (html: string): string => {
+      let num = 1
+      html += '<span class="ln-eof"></span>'
+      html = html.replace(/\r\n|\r|\n/g, function (a) {
+        num++
+        const text = ('  ' + String(num)).slice(-4) // 最大支持到千位数
+        return a + '<span class="ln-num" data-num="' + text + '"></span>'
+      })
+      html = '<span class="ln-num" data-num="  1"></span>' + html
+      html = '<span class="ln-bg"></span>' + html
+      return html
+    }
+
     const setCode = (): void => {
       if (slots.default) return
       const { value: codeEl } = codeRef
@@ -78,7 +93,11 @@ export default defineComponent({
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {
-          codeEl.innerHTML = props.inline ? html : `<pre>${html}</pre>`
+          codeEl.innerHTML = props.inline
+            ? html
+            : `<pre ${props.lineNumbers ? 'class="hljsln"' : ''}>${
+                props.lineNumbers ? addLineNumbersForCode(html) : html
+              }</pre>`
           return
         }
       }
@@ -88,10 +107,20 @@ export default defineComponent({
       }
       const maybePreEl = codeEl.children[0]
       if (maybePreEl && maybePreEl.tagName === 'PRE') {
-        maybePreEl.textContent = code
+        if (props.lineNumbers) {
+          maybePreEl.classList.add('hljsln')
+          maybePreEl.innerHTML = addLineNumbersForCode(code)
+        } else {
+          maybePreEl.textContent = code
+        }
       } else {
         const warp = document.createElement('pre')
-        warp.textContent = code
+        if (props.lineNumbers) {
+          warp.classList.add('hljsln')
+          warp.innerHTML = code
+        } else {
+          warp.textContent = code
+        }
         codeEl.innerHTML = ''
         codeEl.appendChild(warp)
       }
@@ -124,7 +153,9 @@ export default defineComponent({
           'hue-5': $6,
           'hue-5-2': $7,
           'hue-6': $8,
-          'hue-6-2': $9
+          'hue-6-2': $9,
+          'padding-color': $10,
+          'line-number-color': $11
         }
       } = themeRef.value
       const { internalFontSize } = props
@@ -142,7 +173,9 @@ export default defineComponent({
         '--n-hue-5': $6,
         '--n-hue-5-2': $7,
         '--n-hue-6': $8,
-        '--n-hue-6-2': $9
+        '--n-hue-6-2': $9,
+        '--n-padding-color': $10,
+        '--n-line-number-color': $11
       }
     })
     const themeClassHandle = inlineThemeDisabled
