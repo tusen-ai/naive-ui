@@ -1,6 +1,6 @@
-import { h, defineComponent, inject } from 'vue'
+import { h, defineComponent } from 'vue'
 import { useConfig } from '../../_mixins'
-import { carouselMethodsInjectionKey } from './interface'
+import { useCarouselContext } from './CarouselContext'
 
 const backwardIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -28,14 +28,8 @@ export default defineComponent({
   name: 'CarouselArrow',
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const {
-      isVertical,
-      isPrevDisabled,
-      isNextDisabled,
-      prev,
-      next
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(carouselMethodsInjectionKey, null)!
+    const { isVertical, isPrevDisabled, isNextDisabled, prev, next } =
+      useCarouselContext()
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       isVertical,

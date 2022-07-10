@@ -12,6 +12,9 @@
 - 修复 `n-data-table` 的列的 `render` 属性的 `index` 参数当使用产开行时序列异常，关闭 [#3153](https://github.com/TuSimple/naive-ui/issues/3153)
 - 修复 `n-data-table` 在虚拟滚动模式下列 `colSpan` 没有正确生效，关闭 [#3052](https://github.com/TuSimple/naive-ui/issues/3052)
 - 修复 `n-data-table` 在虚拟滚动模式下 `summary` 行不显示，关闭 [#3202](https://github.com/TuSimple/naive-ui/issues/3202)
+- 修复 `n-carousel` 在 `effect` 为 `fade` 时幻灯片之间的层级关系错误问题，关闭 [#3227](https://github.com/TuSimple/naive-ui/issues/3227)
+- 修复 `n-carousel` 在 IOS 下无法滑动问题，关闭 [#3106](https://github.com/TuSimple/naive-ui/issues/3106)
+- 修复 `n-carousel` 在渲染时丢失内容元素大小问题，关闭 [#3078](https://github.com/TuSimple/naive-ui/issues/3078)
 - 修复 `n-cascader` 的搜索菜单没有显示节点路径，关闭 [#3220](https://github.com/TuSimple/naive-ui/issues/3220)
 - 修复 `n-cascader` 的 `filter` 属性接收到的 `path` 可能有误
 - 修复 `n-date-picker` 在 `type="quarterrange"` 和 `type="quarter"` 时菜单季度文案不一致，关闭 [#3217](https://github.com/TuSimple/naive-ui/issues/3217)
