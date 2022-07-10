@@ -438,10 +438,6 @@ function useDualCalendar (
       }
     }
   }
-
-  function handleDateMouseLeave (dateItem: DateItem): void {
-    console.log('12321321321')
-  }
   function handleConfirmClick (): void {
     if (isRangeInvalidRef.value) {
       return
@@ -836,7 +832,6 @@ function useDualCalendar (
     handleDateClick,
     handleColItemClick,
     handleDateMouseEnter,
-    handleDateMouseLeave,
     handleConfirmClick,
     startCalendarPrevYear,
     startCalendarPrevMonth,
