@@ -776,6 +776,9 @@ export default defineComponent({
     }
 
     const rtlEnabledRef = useRtl('Input', mergedRtlRef, mergedClsPrefixRef)
+    const textareaLeftStyleRef = ref({
+      left: '0'
+    })
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -829,6 +832,9 @@ export default defineComponent({
         }
       } = themeRef.value
       const { left: paddingLeft, right: paddingRight } = getPadding(padding)
+      textareaLeftStyleRef.value.left = `calc(${paddingLeft} + ${
+        (prefixElRef.value?.offsetWidth ?? -4) + 4
+      }px)` // prefix's margin-right
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-count-text-color': countTextColor,
@@ -837,9 +843,6 @@ export default defineComponent({
         '--n-border-radius': borderRadius,
         '--n-height': height,
         '--n-padding-left': paddingLeft,
-        '--n-padding-left-with-prefix': `calc(${paddingLeft} + ${
-          (prefixElRef.value?.offsetWidth ?? -4) + 4
-        }px)`,
         '--n-padding-right': paddingRight,
         '--n-text-color': textColor,
         '--n-caret-color': caretColor,
@@ -928,6 +931,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       placeholderStyle: placeholderStyleRef,
+      textareaLeftStyle: textareaLeftStyleRef,
       mergedStatus: mergedStatusRef,
       textAreaScrollContainerWidth: textAreaScrollContainerWidthRef,
       // methods
@@ -1065,7 +1069,8 @@ export default defineComponent({
                         style={[
                           this.textDecorationStyle[0] as any,
                           this.inputProps?.style,
-                          scrollContainerWidthStyle
+                          scrollContainerWidthStyle,
+                          this.textareaLeftStyle
                         ]}
                         onBlur={this.handleInputBlur}
                         onFocus={(e) => this.handleInputFocus(e, 2)}
@@ -1078,6 +1083,7 @@ export default defineComponent({
                           class={`${mergedClsPrefix}-input__placeholder`}
                           style={[
                             this.placeholderStyle as any,
+                            this.textareaLeftStyle,
                             scrollContainerWidthStyle
                           ]}
                           key="placeholder"

@@ -175,7 +175,7 @@ export default cB('input', `
     `),
     cE('textarea-el, textarea-mirror, placeholder', `
       height: 100%;
-      left: var(--n-padding-left-with-prefix);
+      left: var(--n-padding-left);
       right: var(--n-padding-right);
       padding-left: 0;
       padding-right: 0;
