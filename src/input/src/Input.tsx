@@ -202,6 +202,7 @@ export default defineComponent({
     >(null)
     const focusedInputCursorControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
+    const prefixElRef = ref<HTMLDivElement | null>(null)
     // local
     const { localeRef } = useLocale('Input')
     // value
@@ -836,6 +837,9 @@ export default defineComponent({
         '--n-border-radius': borderRadius,
         '--n-height': height,
         '--n-padding-left': paddingLeft,
+        '--n-padding-left-with-prefix': `calc(${paddingLeft} + ${
+          (prefixElRef.value?.offsetWidth ?? 0) + 4
+        }px)`,
         '--n-padding-right': paddingRight,
         '--n-text-color': textColor,
         '--n-caret-color': caretColor,
@@ -904,6 +908,7 @@ export default defineComponent({
       textareaElRef,
       textareaMirrorElRef,
       textareaScrollbarInstRef,
+      prefixElRef,
       // value
       rtlEnabled: rtlEnabledRef,
       uncontrolledValue: uncontrolledValueRef,
@@ -1010,7 +1015,12 @@ export default defineComponent({
             $slots.prefix,
             (children) =>
               children && (
-                <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
+                <div
+                  class={`${mergedClsPrefix}-input__prefix`}
+                  ref="prefixElRef"
+                >
+                  {children}
+                </div>
               )
           )}
           {this.type === 'textarea' ? (

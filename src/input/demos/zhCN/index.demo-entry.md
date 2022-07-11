@@ -24,6 +24,7 @@ input-props.vue
 status.vue
 pattern.vue
 rtl-debug.vue
+indent-debug.vue
 ```
 
 ## API
