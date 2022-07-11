@@ -68,18 +68,23 @@ export default defineComponent({
         language
       }).value
     }
+    const numberCount = ref<number>(0)
+
     // reference: https://www.yangdx.com/2020/04/144.html
-    const addLineNumbersForCode = (html: string): string => {
-      let num = 1
+    const addLineNumbersForCode = (
+      html: string
+    ): { html: string, linesCount: number } => {
       html += '<span class="ln-eof"></span>'
-      html = html.replace(/\r\n|\r|\n/g, function (a) {
-        num++
-        const text = ('  ' + String(num)).slice(-4) // 最大支持到千位数
-        return a + '<span class="ln-num" data-num="' + text + '"></span>'
+      const htmlList: string[] = html.replaceAll('\r', '').split('\n')
+      const linesCount = htmlList.length
+      const digitsCount = linesCount.toString().length
+      htmlList.map((item, index) => {
+        const text = ('  ' + String(index + 1)).slice(-digitsCount)
+        return item + '<span class="ln-num" data-num="' + text + '"></span>'
       })
       html = '<span class="ln-num" data-num="  1"></span>' + html
       html = '<span class="ln-bg"></span>' + html
-      return html
+      return { html, linesCount: linesCount }
     }
 
     const setCode = (): void => {
@@ -96,7 +101,14 @@ export default defineComponent({
           codeEl.innerHTML = props.inline
             ? html
             : `<pre ${props.lineNumbers ? 'class="hljsln"' : ''}>${
-                props.lineNumbers ? addLineNumbersForCode(html) : html
+                props.lineNumbers
+                  ? (() => {
+                      const { html: htmlWithLines, linesCount } =
+                        addLineNumbersForCode(html)
+                      numberCount.value = linesCount
+                      return htmlWithLines
+                    })()
+                  : html
               }</pre>`
           return
         }
@@ -109,7 +121,9 @@ export default defineComponent({
       if (maybePreEl && maybePreEl.tagName === 'PRE') {
         if (props.lineNumbers) {
           maybePreEl.classList.add('hljsln')
-          maybePreEl.innerHTML = addLineNumbersForCode(code)
+          const { html, linesCount } = addLineNumbersForCode(code)
+          maybePreEl.innerHTML = html
+          numberCount.value = linesCount
         } else {
           maybePreEl.textContent = code
         }
@@ -175,7 +189,13 @@ export default defineComponent({
         '--n-hue-6': $8,
         '--n-hue-6-2': $9,
         '--n-padding-color': $10,
-        '--n-line-number-color': $11
+        '--n-line-number-color': $11,
+        '--n-line-number-length': `${
+          (numberCount.value.toString().length + 1) * 14
+        }px`,
+        '--n-line-number-padding-left': `${
+          (numberCount.value.toString().length + 1) * 14 + 2
+        }px`
       }
     })
     const themeClassHandle = inlineThemeDisabled

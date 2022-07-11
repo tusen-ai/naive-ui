@@ -102,7 +102,7 @@ export default c([
       `.hljsln {
         position: relative;
         display: block;
-        padding-left: 3.1em !important;
+        padding-left: var(--n-line-number-padding-left) !important;
       }`,
       `.hljsln::-webkit-scrollbar {
         height: 15px;
@@ -121,7 +121,7 @@ export default c([
         z-index: 1;
         top: 0;
         left: 0;
-        width: 2.4em;
+        width: var(--n-line-number-length);
         height: 100%;
         background: var(--n-padding-color);
       }`,
@@ -129,7 +129,7 @@ export default c([
         position: absolute;
         z-index: 2;
         left: 0;
-        width: 2.4em;
+        width: var(--n-line-number-length);
         height: 1em;
         text-align: center;
         display: inline-block;
