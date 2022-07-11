@@ -205,11 +205,11 @@ export default defineComponent({
         '--n-padding-color': $10,
         '--n-line-number-color': $11,
         '--n-line-number-length': `${
-          numberCount.value.toString().length *
+          (numberCount.value.toString().length + 1) *
           (internalFontSize || Number.parseInt(fontSize))
         }px`,
         '--n-line-number-padding-left': `${
-          (numberCount.value.toString().length + 1) *
+          (numberCount.value.toString().length + 2) *
           (internalFontSize || Number.parseInt(fontSize))
         }px`
       }
