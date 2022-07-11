@@ -74,17 +74,31 @@ export default defineComponent({
     const addLineNumbersForCode = (
       html: string
     ): { html: string, linesCount: number } => {
-      html += '<span class="ln-eof"></span>'
-      const htmlList: string[] = html.replaceAll('\r', '').split('\n')
+      let htmlStr = html
+      htmlStr += '<span class="ln-eof"></span>'
+      const htmlList: string[] = htmlStr.replaceAll('\r', '').split('\n')
       const linesCount = htmlList.length
       const digitsCount = linesCount.toString().length
-      htmlList.map((item, index) => {
-        const text = ('  ' + String(index + 1)).slice(-digitsCount)
-        return item + '<span class="ln-num" data-num="' + text + '"></span>'
-      })
-      html = '<span class="ln-num" data-num="  1"></span>' + html
-      html = '<span class="ln-bg"></span>' + html
-      return { html, linesCount: linesCount }
+      htmlStr =
+        `<span class="ln-num" data-num="${'1'.padStart(
+          digitsCount,
+          ' '
+        )}"></span>` +
+        htmlList
+          .map((item, index) => {
+            if (index === linesCount - 1) return item
+            const text = (index + 2).toString().padStart(digitsCount, ' ')
+            return (
+              item +
+              '\n' +
+              '<span class="ln-num" data-num="' +
+              text +
+              '"></span>'
+            )
+          })
+          .join('')
+      htmlStr = '<span class="ln-bg"></span>' + htmlStr
+      return { html: htmlStr, linesCount: linesCount }
     }
 
     const setCode = (): void => {
@@ -191,10 +205,12 @@ export default defineComponent({
         '--n-padding-color': $10,
         '--n-line-number-color': $11,
         '--n-line-number-length': `${
-          (numberCount.value.toString().length + 1) * 14
+          numberCount.value.toString().length *
+          (internalFontSize || Number.parseInt(fontSize))
         }px`,
         '--n-line-number-padding-left': `${
-          (numberCount.value.toString().length + 1) * 14 + 2
+          (numberCount.value.toString().length + 1) *
+          (internalFontSize || Number.parseInt(fontSize))
         }px`
       }
     })

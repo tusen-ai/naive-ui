@@ -15,6 +15,11 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // --n-hue-5-2
 // --n-hue-6
 // --n-hue-6-2
+// --n-padding-color
+// --n-line-number-color
+// --n-line-number-length
+// --n-line-number-padding-left
+
 export default c([
   cB('code', `
     font-size: var(--n-font-size);
@@ -130,7 +135,8 @@ export default c([
         z-index: 2;
         left: 0;
         width: var(--n-line-number-length);
-        height: 1em;
+        /* height: var(--n-font-size); */
+        height: auto;
         text-align: center;
         display: inline-block;
         -webkit-touch-callout: none;
@@ -144,6 +150,8 @@ export default c([
         color: var(--n-line-number-color);
         font-style: normal;
         font-weight: normal;
+        font-size: var(--n-font-size);
+        height: auto; 
         content: attr(data-num);
       }`,
       `.hljsln .ln-eof {
