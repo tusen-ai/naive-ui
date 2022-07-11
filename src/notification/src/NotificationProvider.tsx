@@ -91,7 +91,8 @@ export const notificationProviderProps = {
   placement: {
     type: String as PropType<NotificationPlacement>,
     default: 'top-right'
-  }
+  },
+  keepAliveOnHover: Boolean
 }
 
 export type NotificationProviderProps = ExtractPublicPropTypes<
@@ -236,6 +237,11 @@ export default defineComponent({
                         ])}
                         internalKey={notification.key}
                         onInternalAfterLeave={this.handleAfterLeave}
+                        keepAliveOnHover={
+                          notification.keepAliveOnHover === undefined
+                            ? this.keepAliveOnHover
+                            : notification.keepAliveOnHover
+                        }
                       />
                     )
                   })

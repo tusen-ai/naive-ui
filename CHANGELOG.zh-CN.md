@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-notification` 新增 `keepAliveOnHover` 属性，用于设置鼠标移入时是否保持通知框显示，关闭 [#3249](https://github.com/TuSimple/naive-ui/issues/3249)
+
 ## 2.31.0
 
 ### Breaking Changes

@@ -47,7 +47,8 @@ export const notificationProps = {
   onClose: {
     type: Function as PropType<() => void>,
     required: true
-  }
+  },
+  keepAliveOnHover: Boolean
 } as const
 
 export const notificationPropKeys = keysOf(notificationProps)

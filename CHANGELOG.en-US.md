@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
+
 ## 2.31.0
 
 ### Breaking Changes
