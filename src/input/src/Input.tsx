@@ -838,7 +838,7 @@ export default defineComponent({
         '--n-height': height,
         '--n-padding-left': paddingLeft,
         '--n-padding-left-with-prefix': `calc(${paddingLeft} + ${
-          (prefixElRef.value?.offsetWidth ?? 0) + 4
+          (prefixElRef.value?.offsetWidth ?? -4) + 4
         }px)`,
         '--n-padding-right': paddingRight,
         '--n-text-color': textColor,
