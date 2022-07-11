@@ -12,6 +12,9 @@
 - Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).
 - Fix `n-data-table` column's `colSpan` doesn't work correctly in virtual scroll mode, closes [#3052](https://github.com/TuSimple/naive-ui/issues/3052).
 - Fix `n-data-table` doesn't show `summary` row in virtual scroll mode, closes [#3202](https://github.com/TuSimple/naive-ui/issues/3202).
+- Fix `n-carousel` has wrong hierarchical relationship between when `effect` is `fade`, closes [#3227](https://github.com/TuSimple/naive-ui/issues/3227).
+- Fix `n-carousel` cannot slide under IOS, closes [#3106](https://github.com/TuSimple/naive-ui/issues/3106).
+- Fix `n-carousel` losing the size of content elements when rendering, closes [#3078](https://github.com/TuSimple/naive-ui/issues/3078).
 - Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).
@@ -46,6 +49,7 @@
 - `n-drawer` adds `default-height` prop.
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
+- `n-scrollbar` supports RTL.
 - Update ukUA locale.
 
 ## 2.30.8

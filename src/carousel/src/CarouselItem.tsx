@@ -1,47 +1,41 @@
 import {
   h,
   defineComponent,
-  inject,
   computed,
   ref,
   onMounted,
   onBeforeUnmount
 } from 'vue'
+import type { VNode } from 'vue'
+import { camelCase } from 'lodash-es'
+import { useCarouselContext } from './CarouselContext'
 import { useConfig } from '../../_mixins'
-import { throwError } from '../../_utils'
-import { carouselMethodsInjectionKey } from './interface'
+
+const CarouselItemName = 'CarouselItem'
+
+export const isCarouselItem = (child: VNode): boolean =>
+  (child.type as any)?.name === CarouselItemName
 
 export default defineComponent({
-  name: 'CarouselItem',
+  name: CarouselItemName,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const NCarousel = inject(carouselMethodsInjectionKey, null)
-    if (!NCarousel) {
-      throwError(
-        'carousel-item',
-        '`n-carousel-item` must be placed inside `n-carousel`.'
-      )
-    }
+    const NCarousel = useCarouselContext(
+      camelCase(CarouselItemName),
+      `n-${camelCase(CarouselItemName)}`
+    )
     const selfElRef = ref<HTMLElement>()
-    const isPrevRef = computed(() => {
-      const { value: selfEl } = selfElRef
-      return Boolean(selfEl && NCarousel.isPrev(selfEl))
-    })
-    const isNextRef = computed(() => {
-      const { value: selfEl } = selfElRef
-      return Boolean(selfEl && NCarousel.isNext(selfEl))
-    })
-    const isActiveRef = computed(() => {
-      const { value: selfEl } = selfElRef
-      return Boolean(selfEl && NCarousel.isActive(selfEl))
-    })
-    const styleRef = computed(() => {
-      const { value: selfEl } = selfElRef
-      return selfEl && NCarousel.getSlideStyle(selfEl)
-    })
     const indexRef = computed(() => {
       const { value: selfEl } = selfElRef
-      return selfEl && NCarousel.getSlideIndex(selfEl)
+      return selfEl ? NCarousel.getSlideIndex(selfEl) : -1
+    })
+    const isPrevRef = computed(() => NCarousel.isPrev(indexRef.value))
+    const isNextRef = computed(() => NCarousel.isNext(indexRef.value))
+    const isActiveRef = computed(() => NCarousel.isActive(indexRef.value))
+    const styleRef = computed(() => NCarousel.getSlideStyle(indexRef.value))
+    onMounted(() => NCarousel.addSlide(selfElRef.value))
+    onBeforeUnmount(() => {
+      NCarousel.removeSlide(selfElRef.value)
     })
     function handleClick (event: MouseEvent): void {
       const { value: index } = indexRef
@@ -49,10 +43,6 @@ export default defineComponent({
         NCarousel?.onCarouselItemClick(index, event)
       }
     }
-    onMounted(() => NCarousel.addSlide(selfElRef.value))
-    onBeforeUnmount(() => {
-      NCarousel.removeSlide(selfElRef.value)
-    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
@@ -61,8 +51,6 @@ export default defineComponent({
       isActive: isActiveRef,
       index: indexRef,
       style: styleRef,
-      prevSlideStyle: NCarousel.prevSlideStyleRef,
-      nextSlideStyle: NCarousel.nextSlideStyleRef,
       handleClick
     }
   },
@@ -92,11 +80,7 @@ export default defineComponent({
         tabindex="-1"
         data-index={index}
         aria-hidden={!isActive}
-        style={[
-          style,
-          isPrev ? this.prevSlideStyle : '',
-          isNext ? this.nextSlideStyle : ''
-        ]}
+        style={style}
         // We use ts-ignore for vue-tsc, since it seems to patch native event
         // for vue components
         // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
