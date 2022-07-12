@@ -92,7 +92,7 @@ function useTheme<N, T, R> (
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
   clsPrefixRef?: Ref<string | undefined>,
-  rtlEnabled?: Ref<RtlItem | undefined>
+  rtlEnabledRef?: Ref<RtlItem | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   const ssrAdapter = useSsrAdapter()
   const NConfigProvider = inject(configProviderInjectionKey, null)
@@ -165,7 +165,7 @@ function useTheme<N, T, R> (
       globalSelfOverrides,
       selfOverrides
     )
-    if (rtlEnabled?.value?.name) {
+    if (rtlEnabledRef?.value?.name) {
       Object.entries(mergedSelf).forEach(([key, val]) => {
         if (
           typeof val === 'string' &&
