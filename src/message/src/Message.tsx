@@ -55,7 +55,8 @@ export default defineComponent({
       style,
       messageLight,
       messageProviderProps,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      rtlEnabledRef
     )
     const cssVarsRef = computed(() => {
       const { type } = props
