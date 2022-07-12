@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-select` focus loss when click `action` slot in `filterable` and `multiple`, closes [#3247](https://github.com/TuSimple/naive-ui/issues/3247).
+
 ## 2.31.0
 
 ### Breaking Changes

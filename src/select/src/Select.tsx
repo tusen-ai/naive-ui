@@ -517,6 +517,10 @@ export default defineComponent({
     }
     function handleMenuFocus (e: FocusEvent): void {
       focusedRef.value = true
+      const { filterable, multiple } = props
+      if (filterable && multiple) {
+        focusSelectionInput()
+      }
     }
     function handleMenuBlur (e: FocusEvent): void {
       if (triggerRef.value?.$el.contains(e.relatedTarget as any)) return

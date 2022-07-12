@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-select` 当在同时设置 `filterable` 和 `multiple` 时点击 `action` 焦点丢失的问题，关闭 [#3247](https://github.com/TuSimple/naive-ui/issues/3247)
+
 ## 2.31.0
 
 ### Breaking Changes
