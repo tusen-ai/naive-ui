@@ -38,7 +38,7 @@ rtl-debug.vue
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| input-props | `HTMLInputAttributes` | `undefined` | Input 组建内部 input 元素的属性，对 `pair` 类型不生效，[在这里查看原生属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)。注意：input-props 不会覆盖内部 input 元素的已经存在的属性（除了 `type`） |  |
+| input-props | `HTMLInputAttributes` | `undefined` | Input 组件内部 input 元素的属性，对 `pair` 类型不生效，[在这里查看原生属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)。注意：input-props 不会覆盖内部 input 元素的已经存在的属性（除了 `type`） |  |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |  |
 | maxlength | `number` | `undefined` | 最大输入长度 |  |
 | minlength | `number` | `undefined` | 最小输入长度 |  |
