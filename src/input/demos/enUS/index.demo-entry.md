@@ -87,8 +87,9 @@ pattern.vue
 
 ### Input Methods
 
-| Name   | Type         | Description               |
-| ------ | ------------ | ------------------------- |
-| blur   | `() => void` | Blur the input element.   |
-| focus  | `() => void` | Focus the input element.  |
-| select | `() => void` | Select the input element. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur the input element. |  |
+| focus | `() => void` | Focus the input element. |  |
+| select | `() => void` | Select the input element. |  |
+| scrollToEnd | `(animated?: boolean) => void` | scroll to end input element. | NEXT_VERSION |
