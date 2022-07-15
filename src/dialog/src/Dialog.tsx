@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { h, ref, defineComponent, computed, CSSProperties } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -19,6 +19,7 @@ import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
+import { useDraggable } from './useDraggable'
 
 const iconRenderMap = {
   default: () => <InfoIcon />,
@@ -49,6 +50,10 @@ export const NDialog = defineComponent({
         'left'
       )
     })
+    const dialogRef = ref<HTMLElement>()
+    const headerRef = ref<HTMLElement>()
+    const draggable = computed(() => props.draggable)
+    useDraggable(dialogRef, headerRef, draggable)
     function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick } = props
       if (onPositiveClick) onPositiveClick(e)
@@ -139,6 +144,7 @@ export const NDialog = defineComponent({
         props
       )
       : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIconPlacement: mergedIconPlacementRef,
@@ -148,7 +154,9 @@ export const NDialog = defineComponent({
       handleCloseClick,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      dialogRef,
+      headerRef
     }
   },
   render () {
@@ -170,11 +178,10 @@ export const NDialog = defineComponent({
       mergedTheme,
       loading,
       type,
-      mergedClsPrefix
+      mergedClsPrefix,
+      draggable
     } = this
-
     this.onRender?.()
-
     const icon = showIcon ? (
       <NBaseIcon
         clsPrefix={mergedClsPrefix}
@@ -245,6 +252,7 @@ export const NDialog = defineComponent({
         ]}
         style={cssVars as CSSProperties}
         role="dialog"
+        ref="dialogRef"
       >
         {closable ? (
           <NBaseClose
@@ -256,9 +264,13 @@ export const NDialog = defineComponent({
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}
-        <div class={`${mergedClsPrefix}-dialog__title`}>
+        <div
+          class={`${mergedClsPrefix}-dialog__title`}
+          ref="headerRef"
+          style={{ cursor: draggable ? 'move' : 'default' }}
+        >
           {showIcon && mergedIconPlacement === 'left' ? icon : null}
-          {resolveSlot(this.$slots.header, () => [render(title)])}
+          {resolveSlot(this.$slots.header, () => [render(title)])}111
         </div>
         <div
           class={[

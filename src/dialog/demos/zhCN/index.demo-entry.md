@@ -41,6 +41,7 @@ use-component.vue
 mask.vue
 action.vue
 focus-debug.vue
+draggable.vue
 ```
 
 ## API
@@ -76,6 +77,7 @@ focus-debug.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
+| draggable | `boolean` | `false` | 是否可拖拽弹框 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
@@ -104,6 +106,7 @@ focus-debug.vue
 | positiveButtonProps | `ButtonProps` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | 是否显示 `icon` |  |
+| draggable | `boolean` | 是否可拖拽弹框 |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
