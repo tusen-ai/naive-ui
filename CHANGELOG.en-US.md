@@ -50,6 +50,7 @@
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
 - `n-scrollbar` supports RTL.
+- `n-dialog` 新增 `draggable` 属性
 - Update ukUA locale.
 
 ## 2.30.8
