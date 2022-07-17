@@ -371,14 +371,6 @@ function useDualCalendar (
       }
     }
   }
-  function resetSelectingStatus (e: MouseEvent): void {
-    if (
-      startDatesElRef.value?.contains(e.target as Node) ||
-      endDatesElRef.value?.contains(e.target as Node)
-    ) {
-      // do nothing
-    }
-  }
   function syncCalendarTimeWithValue (value: [number, number] | null): void {
     if (value === null) return
     const [startMoment, endMoment] = value
@@ -821,7 +813,6 @@ function useDualCalendar (
   return {
     startDatesElRef,
     endDatesElRef,
-    resetSelectingStatus,
     handleDateClick,
     handleColItemClick,
     handleDateMouseEnter,

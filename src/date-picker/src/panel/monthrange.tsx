@@ -94,7 +94,6 @@ export default defineComponent({
           `${mergedClsPrefix}-date-panel--daterange`,
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`
         ]}
-        onClick={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >
