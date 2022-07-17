@@ -7,11 +7,12 @@ import {
   toRef,
   ref,
   Ref,
-  ComputedRef
+  ComputedRef,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
-import { warn, call, MaybeArray, createInjectionKey } from '../../_utils'
+import { call, MaybeArray, createInjectionKey, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
@@ -41,27 +42,36 @@ export const checkboxGroupProps = {
     default: undefined
   },
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: Array<string | number>) => void>
+  MaybeArray<
+  (
+    value: Array<string | number>,
+    meta: {
+      checkedValue: string | number | undefined
+      uncheckedValue: string | number | undefined
+    }
+  ) => void
+  >
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: Array<string | number>) => void>
+  MaybeArray<
+  (
+    value: Array<string | number>,
+    meta:
+    | {
+      checkedValue: string | number
+      uncheckedValue: undefined
+    }
+    | {
+      checkedValue: undefined
+      uncheckedValue: string | number
+    }
+  ) => void
+  >
   >,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: Array<string | number>) => void> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'checkbox-group',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<
+  MaybeArray<(value: Array<string | number>) => void> | undefined
+  >
 } as const
 
 export type CheckboxGroupProps = ExtractPublicPropTypes<
@@ -72,6 +82,16 @@ export default defineComponent({
   name: 'CheckboxGroup',
   props: checkboxGroupProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'checkbox-group',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
@@ -108,8 +128,18 @@ export default defineComponent({
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
-            if (onUpdateValue) call(onUpdateValue, groupValue)
-            if (_onUpdateValue) call(_onUpdateValue, groupValue)
+            if (onUpdateValue) {
+              call(onUpdateValue, groupValue, {
+                checkedValue: checkboxValue,
+                uncheckedValue: undefined
+              })
+            }
+            if (_onUpdateValue) {
+              call(_onUpdateValue, groupValue, {
+                checkedValue: checkboxValue,
+                uncheckedValue: undefined
+              })
+            }
             nTriggerFormInput()
             nTriggerFormChange()
             uncontrolledValueRef.value = groupValue
@@ -119,8 +149,18 @@ export default defineComponent({
         } else {
           if (~index) {
             groupValue.splice(index, 1)
-            if (onUpdateValue) call(onUpdateValue, groupValue)
-            if (_onUpdateValue) call(_onUpdateValue, groupValue)
+            if (onUpdateValue) {
+              call(onUpdateValue, groupValue, {
+                checkedValue: undefined,
+                uncheckedValue: checkboxValue
+              })
+            }
+            if (_onUpdateValue) {
+              call(_onUpdateValue, groupValue, {
+                checkedValue: undefined,
+                uncheckedValue: checkboxValue
+              })
+            }
             if (onChange) call(onChange, groupValue) // deprecated
             uncontrolledValueRef.value = groupValue
             nTriggerFormInput()
@@ -129,15 +169,35 @@ export default defineComponent({
         }
       } else {
         if (checked) {
-          if (onUpdateValue) call(onUpdateValue, [checkboxValue])
-          if (_onUpdateValue) call(_onUpdateValue, [checkboxValue])
+          if (onUpdateValue) {
+            call(onUpdateValue, [checkboxValue], {
+              checkedValue: checkboxValue,
+              uncheckedValue: undefined
+            })
+          }
+          if (_onUpdateValue) {
+            call(_onUpdateValue, [checkboxValue], {
+              checkedValue: checkboxValue,
+              uncheckedValue: undefined
+            })
+          }
           if (onChange) call(onChange, [checkboxValue]) // deprecated
           uncontrolledValueRef.value = [checkboxValue]
           nTriggerFormInput()
           nTriggerFormChange()
         } else {
-          if (onUpdateValue) call(onUpdateValue, [])
-          if (_onUpdateValue) call(_onUpdateValue, [])
+          if (onUpdateValue) {
+            call(onUpdateValue, [], {
+              checkedValue: undefined,
+              uncheckedValue: checkboxValue
+            })
+          }
+          if (_onUpdateValue) {
+            call(_onUpdateValue, [], {
+              checkedValue: undefined,
+              uncheckedValue: checkboxValue
+            })
+          }
           if (onChange) call(onChange, []) // deprecated
           uncontrolledValueRef.value = []
           nTriggerFormInput()

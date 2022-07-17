@@ -6,6 +6,10 @@
 
 - 修复 `n-date-picker` 在范围模式下点击禁用的确认按钮会取消选择中的状态，关闭 [#3254](https://github.com/TuSimple/naive-ui/issues/3254)
 
+### Feats
+
+- `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
+
 ## 2.31.0
 
 ### Breaking Changes

@@ -2,7 +2,13 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
 - Fix `n-date-picker` will cancel selecting in range mode if click at disabled confirm button, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
+
+### Feats
+
+- `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 
 ## 2.31.0
 

@@ -34,14 +34,14 @@ focus.vue
 
 ### CheckboxGroup Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| disabled | `boolean` | `false` | Whether the checkbox group is disabled. |
-| default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |
-| max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |
-| min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |
-| value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |
-| on-update:value | `(value: string \| number)` | `undefined` | Callback when the checkbox group's value changes. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | Whether the checkbox group is disabled. |  |
+| default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |  |
+| max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |  |
+| min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |  |
+| value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |  |
+| on-update:value | `(value: string \| number, meta: { checkedValue: string \| number \| undefined, uncheckedValue: string \| number \| unefined }) => void` | `undefined` | Callback when the checkbox group's value changes. If you check a checkbox, `meta.uncheckedValue` would be `undefined`. If you uncheck a checkbo, `meta.checkedValue` would be `undefined`. | `meta` NEXT_VERSION |
 
 ### Checkbox Slots
 
