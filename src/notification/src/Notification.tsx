@@ -47,7 +47,10 @@ export const notificationProps = {
   onClose: {
     type: Function as PropType<() => void>,
     required: true
-  }
+  },
+  keepAliveOnHover: Boolean,
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const
 
 export const notificationPropKeys = keysOf(notificationProps)
@@ -163,6 +166,8 @@ export const Notification = defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-notification-wrapper`, this.themeClass]}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
         style={this.cssVars as CSSProperties}
       >
         <div
