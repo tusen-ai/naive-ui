@@ -377,8 +377,6 @@ function useDualCalendar (
       endDatesElRef.value?.contains(e.target as Node)
     ) {
       // do nothing
-    } else {
-      isSelectingRef.value = false
     }
   }
   function syncCalendarTimeWithValue (value: [number, number] | null): void {

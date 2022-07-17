@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+- Fix `n-date-picker` will cancel selecting in range mode if click at disabled confirm button, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
+
 ## 2.31.0
 
 ### Breaking Changes
