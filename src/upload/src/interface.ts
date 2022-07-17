@@ -29,17 +29,21 @@ export type OnChange = (data: {
   fileList: SettledFileInfo[]
   event: ProgressEvent | Event | undefined
 }) => void
+
 export type OnFinish = ({
   file,
   event
 }: {
   file: SettledFileInfo
   event?: ProgressEvent
-}) => FileInfo | undefined
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+}) => FileInfo | undefined | void
+
 export type OnRemove = (data: {
   file: SettledFileInfo
   fileList: SettledFileInfo[]
 }) => Promise<boolean> | boolean | any
+
 export type OnDownload = (
   file: SettledFileInfo
 ) => Promise<boolean> | boolean | any
@@ -144,7 +148,8 @@ export type OnError = ({
 }: {
   file: SettledFileInfo
   event?: ProgressEvent
-}) => FileInfo | undefined
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+}) => FileInfo | undefined | void
 
 export interface FileAndEntry {
   file: File
