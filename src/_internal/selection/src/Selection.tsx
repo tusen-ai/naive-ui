@@ -749,7 +749,9 @@ export default defineComponent({
         <div
           class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
         >
-          {this.placeholder}
+          <div class={`${clsPrefix}-base-selection-placeholder__inner`}>
+            {this.placeholder}
+          </div>
         </div>
       ) : null
       const popoverTrigger = filterable ? (
@@ -875,7 +877,9 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
-                {this.placeholder}
+                <div class={`${clsPrefix}-base-selection-placeholder__inner`}>
+                  {this.placeholder}
+                </div>
               </div>
             )}
             {suffix}
