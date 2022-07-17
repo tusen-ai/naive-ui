@@ -1,6 +1,9 @@
 const path = require('path')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
+const dns = require('dns')
+
+dns.setDefaultResultOrder('verbatim')
 
 /**
  * @type {import('vite').UserConfig}
