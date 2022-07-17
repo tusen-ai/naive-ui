@@ -146,6 +146,9 @@ const Button = defineComponent({
       return props.focusable && !props.disabled
     })
     const handleMousedown = (e: MouseEvent): void => {
+      if (!mergedFocusableRef.value) {
+        e.preventDefault()
+      }
       if (props.nativeFocusBehavior) {
         return
       }

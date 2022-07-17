@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-date-picker` 在范围模式下点击禁用的确认按钮会取消选择中的状态，关闭 [#3254](https://github.com/TuSimple/naive-ui/issues/3254)
+- 修复 `n-button` 的 `focusable` 属性不生效，关闭 [#3292](https://github.com/TuSimple/naive-ui/issues/3292)
 
 ### Feats
 
