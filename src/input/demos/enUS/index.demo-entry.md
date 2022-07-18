@@ -92,4 +92,5 @@ pattern.vue
 | blur | `() => void` | Blur the input element. |  |
 | focus | `() => void` | Focus the input element. |  |
 | select | `() => void` | Select the input element. |  |
-| scrollToEnd | `(animated?: boolean) => void` | scroll to end input element. | NEXT_VERSION |
+| scrollToEnd | `(animated?: boolean) => void` | Scroll to end input element. | NEXT_VERSION |
+| scrollTo | `(options?: ScrollToOptions) => void` | Scroll To. | NEXT_VERSION |
