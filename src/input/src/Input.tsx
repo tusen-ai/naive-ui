@@ -696,25 +696,31 @@ export default defineComponent({
         handleWrapperKeydownEsc()
       }
     }
+
+    function scrollTo (options?: ScrollToOptions | undefined): void {
+      const { value: textareaEl } = textareaElRef
+      if (!textareaEl) {
+        return
+      }
+
+      textareaEl.scrollTo(options)
+    }
+
     function scrollToEnd (animated = true): void {
       const { value: textareaEl } = textareaElRef
       if (!textareaEl) {
         return
       }
 
-      if (animated) {
-        const { scrollHeight, scrollTop, clientHeight } = textareaEl
-
-        const scrollTo = scrollHeight - clientHeight
-        if (scrollTop !== scrollTo) {
-          textareaEl.scrollTo({
-            top: scrollTo,
-            behavior: 'smooth'
-          })
-        }
-      } else {
-        textareaEl.scrollTop = textareaEl.scrollHeight
+      const { scrollHeight, scrollTop, clientHeight } = textareaEl
+      const end = scrollHeight - clientHeight
+      if (end === scrollTop) {
+        return
       }
+      scrollTo({
+        top: end,
+        behavior: animated ? 'smooth' : 'auto'
+      })
     }
     function syncMirror (value: string | null): void {
       const { type, pair, autosize } = props
@@ -792,7 +798,8 @@ export default defineComponent({
       select,
       deactivate,
       activate,
-      scrollToEnd
+      scrollToEnd,
+      scrollTo
     }
 
     const rtlEnabledRef = useRtl('Input', mergedRtlRef, mergedClsPrefixRef)
