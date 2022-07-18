@@ -221,7 +221,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       >
         <div
           class="v-binder-follower-content"
-          style="--v-target-width: 0px; --v-target-height: 0px; --v-offset-left: 0px; --v-offset-top: 0px; transform: translateX(0px) translateY(0px) ; --v-transform-origin: top left; transform-origin: top left;"
+          style="--v-target-width: 0px; --v-target-height: 0px; --v-offset-left: 0px; --v-offset-top: 0px; transform: translateX(0px) translateY(0px) ; transform-origin: top left;"
           v-placement="right-start"
         >
           <div
