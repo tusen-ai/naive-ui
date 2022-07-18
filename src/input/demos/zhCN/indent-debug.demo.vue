@@ -40,7 +40,6 @@ import { FlashOutline } from '@vicons/ionicons5'
 import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
-    console.log('debug--------')
     return {
       FlashOutline
     }
