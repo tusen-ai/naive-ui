@@ -9,6 +9,7 @@
 - 修复 `n-button` 的 `focusable` 属性不生效，关闭 [#3292](https://github.com/TuSimple/naive-ui/issues/3292)
 - 修复 `n-upload` 的 `on-error` 和 `on-finish` 属性不允许 `() => void` 类型，关闭 [#3290](https://github.com/TuSimple/naive-ui/issues/3290)
 - 修复 `n-select` 的 placeholder 过长时可能溢出
+- 修复 `n-input` 在 `type="textarea"` 并且 `:autosize="true"` 时添加 prefix 后内容没有对齐，关闭 [#3238](https://github.com/TuSimple/naive-ui/issues/3238)
 
 ### Feats
 

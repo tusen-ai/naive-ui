@@ -954,7 +954,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedStatus, themeClass, onRender } = this
+    const { mergedClsPrefix, mergedStatus, themeClass, type, onRender } = this
     const $slots = this.$slots as {
       prefix?: () => VNode[]
       suffix?: () => VNode[]
@@ -976,12 +976,12 @@ export default defineComponent({
           {
             [`${mergedClsPrefix}-input--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
+            [`${mergedClsPrefix}-input--textarea`]: type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
               this.resizable && !this.autosize,
             [`${mergedClsPrefix}-input--autosize`]: this.autosize,
             [`${mergedClsPrefix}-input--round`]:
-              this.round && !(this.type === 'textarea'),
+              this.round && !(type === 'textarea'),
             [`${mergedClsPrefix}-input--pair`]: this.pair,
             [`${mergedClsPrefix}-input--focus`]: this.mergedFocus,
             [`${mergedClsPrefix}-input--stateful`]: this.stateful
@@ -1013,13 +1013,14 @@ export default defineComponent({
                 <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
               )
           )}
-          {this.type === 'textarea' ? (
+          {type === 'textarea' ? (
             <NScrollbar
               ref="textareaScrollbarInstRef"
               class={`${mergedClsPrefix}-input__textarea`}
               container={this.getTextareaScrollContainer}
               triggerDisplayManually
               useUnifiedContainer
+              internalHoistYRail
             >
               {{
                 default: () => {
@@ -1099,11 +1100,11 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 type={
-                  this.type === 'password' &&
+                  type === 'password' &&
                   this.mergedShowPasswordOn &&
                   this.passwordVisible
                     ? 'text'
-                    : this.type
+                    : type
                 }
                 {...this.inputProps}
                 ref="inputElRef"
@@ -1295,7 +1296,7 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
-        {this.showCount && this.type === 'textarea' ? (
+        {this.showCount && type === 'textarea' ? (
           <WordCount>
             {{ default: (props: unknown) => $slots.count?.(props) }}
           </WordCount>
