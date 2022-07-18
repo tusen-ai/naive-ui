@@ -26,7 +26,7 @@ import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -270,7 +270,9 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('Tree', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Tree',
       '-tree',
@@ -1344,6 +1346,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      rtlEnabled: rtlEnabledRef,
       fNodes: mergedFNodesRef,
       aip: aipRef,
       selfElRef,
@@ -1376,12 +1379,14 @@ export default defineComponent({
       internalFocusable,
       checkable,
       handleKeydown,
+      rtlEnabled,
       handleFocusout
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined
     const treeClass: Array<string | boolean | undefined> = [
       `${mergedClsPrefix}-tree`,
+      rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
       blockLine && `${mergedClsPrefix}-tree--block-line`
