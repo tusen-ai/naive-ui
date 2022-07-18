@@ -2,6 +2,7 @@
 
 ## Urgent
 
+- message fullscreen
 - use resolve slot!!!
 - manual trigger style
 

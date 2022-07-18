@@ -462,3 +462,10 @@ describe('match-type', () => {
     ).toEqual(true)
   })
 })
+
+describe('test type', () => {
+  it('works', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const _ = <NUpload onError={() => {}} onFinish={() => {}} />
+  })
+})
