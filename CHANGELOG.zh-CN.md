@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
+- `n-tree` 支持 RTL
 
 ## 2.31.0
 
