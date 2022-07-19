@@ -702,7 +702,6 @@ export default defineComponent({
       if (!textareaEl) {
         return
       }
-
       textareaEl.scrollTo(options)
     }
 

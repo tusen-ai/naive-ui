@@ -51,7 +51,7 @@ export default defineComponent({
       handleScrollEnd () {
         inputInstRef.value?.scrollTo({
           behavior: 'smooth',
-          top: inputInstRef.value?.textareaElRef?.scrollHeight
+          top: 10000
         })
       }
     }
