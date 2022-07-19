@@ -452,6 +452,7 @@ export default defineComponent({
 
     // Provide
     const carouselContext: CarouselContextValue = {
+      currentIndexRef: mergedDisplayIndexRef,
       to,
       prev: prevIfSlideTransitionEnd,
       next: nextIfSlideTransitionEnd,
@@ -462,7 +463,6 @@ export default defineComponent({
       isActive: isRealActive,
       isPrevDisabled,
       isNextDisabled,
-      getCurrentIndex: () => mergedDisplayIndexRef.value,
       getSlideIndex,
       getSlideStyle,
       addSlide,
