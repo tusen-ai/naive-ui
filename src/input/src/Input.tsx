@@ -697,12 +697,14 @@ export default defineComponent({
       }
     }
 
-    function scrollTo (options?: ScrollToOptions | undefined): void {
-      const { value: textareaEl } = textareaElRef
-      if (!textareaEl) {
-        return
+    function scrollTo (options: ScrollToOptions): void {
+      if (props.type === 'textarea') {
+        const { value: textareaEl } = textareaElRef
+        textareaEl?.scrollTo(options)
+      } else {
+        const { value: inputEl } = inputElRef
+        inputEl?.scrollTo(options)
       }
-      textareaEl.scrollTo(options)
     }
 
     function syncMirror (value: string | null): void {

@@ -20,12 +20,7 @@
         ScrollToEnd
       </n-button>
     </n-space>
-    <n-input
-      ref="inputInstRef"
-      v-model:value="inputValue"
-      type="textarea"
-      :rows="3"
-    />
+    <n-input ref="inputInstRef" v-model:value="inputValue" />
   </n-space>
 </template>
 
@@ -38,7 +33,7 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     return {
       inputInstRef,
-      inputValue: ref('马儿乖，马儿好，马儿光跑不吃草\n'.repeat(4)),
+      inputValue: ref('马儿乖，马儿好，马儿光跑不吃草。'.repeat(4)),
       handleFocus () {
         inputInstRef.value?.focus()
       },
@@ -51,7 +46,7 @@ export default defineComponent({
       handleScrollEnd () {
         inputInstRef.value?.scrollTo({
           behavior: 'smooth',
-          top: 10000
+          left: 10000
         })
       }
     }
