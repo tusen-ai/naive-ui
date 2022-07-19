@@ -48,7 +48,6 @@ export default defineComponent({
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
-        onClick={this.resetSelectingStatus}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}
       >

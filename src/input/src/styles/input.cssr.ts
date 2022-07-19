@@ -169,14 +169,8 @@ export default cB('input', `
         min-height: var(--n-height);
       `)
     ]),
-    // override scrollbar relative position
-    cE('textarea', `
-      position: static;
-    `),
     cE('textarea-el, textarea-mirror, placeholder', `
       height: 100%;
-      left: var(--n-padding-left);
-      right: var(--n-padding-right);
       padding-left: 0;
       padding-right: 0;
       padding-top: var(--n-padding-vertical);

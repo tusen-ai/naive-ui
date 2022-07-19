@@ -2,7 +2,21 @@
 
 ## NEXT_VERSION
 
-- `n-input` 增加 'scrollTo' 方法 (type="textarea") [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
+### Fixes
+
+- `n-notification` 新增 `keepAliveOnHover` 属性，用于设置鼠标移入时是否保持通知框显示，关闭 [#3249](https://github.com/TuSimple/naive-ui/issues/3249)
+- 修复 `n-date-picker` 在范围模式下点击禁用的确认按钮会取消选择中的状态，关闭 [#3254](https://github.com/TuSimple/naive-ui/issues/3254)
+- 修复 `n-button` 的 `focusable` 属性不生效，关闭 [#3292](https://github.com/TuSimple/naive-ui/issues/3292)
+- 修复 `n-upload` 的 `on-error` 和 `on-finish` 属性不允许 `() => void` 类型，关闭 [#3290](https://github.com/TuSimple/naive-ui/issues/3290)
+- 修复 `n-select` 的 placeholder 过长时可能溢出
+- 修复 `n-input` 在 `type="textarea"` 并且 `:autosize="true"` 时添加 prefix 后内容没有对齐，关闭 [#3238](https://github.com/TuSimple/naive-ui/issues/3238)
+- 修复 `n-carousel` 在 `autoplay` 为 `true` 时 `hover` 不停止播放，关闭 [#3304](https://github.com/TuSimple/naive-ui/issues/3304)
+
+### Feats
+
+- `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
+- `n-tree` 支持 RTL
+- `n-input` 新增 `scrollTo` 方法，关闭 [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
 
 ## 2.31.0
 

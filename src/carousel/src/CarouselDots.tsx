@@ -78,10 +78,10 @@ export default defineComponent({
       e.preventDefault()
       if (wantToNext && !NCarousel.isNextDisabled()) {
         NCarousel.next()
-        focusDot(NCarousel.getCurrentIndex())
+        focusDot(NCarousel.currentIndexRef.value)
       } else if (wantToPrev && !NCarousel.isPrevDisabled()) {
         NCarousel.prev()
-        focusDot(NCarousel.getCurrentIndex())
+        focusDot(NCarousel.currentIndexRef.value)
       }
     }
     function focusDot (index: number): void {
