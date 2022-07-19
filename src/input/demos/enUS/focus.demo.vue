@@ -47,7 +47,10 @@ export default defineComponent({
         inputInstRef.value?.select()
       },
       handleScrollEnd () {
-        inputInstRef.value?.scrollToEnd()
+        inputInstRef.value?.scrollTo({
+          behavior: 'smooth',
+          top: inputInstRef.value?.textareaElRef?.scrollHeight
+        })
       }
     }
   }

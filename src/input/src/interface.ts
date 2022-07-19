@@ -16,7 +16,7 @@ export interface InputWrappedRef {
   select: () => void
   activate: () => void
   deactivate: () => void
-  scrollToEnd: (animated?: boolean) => void
+
   scrollTo: (options: ScrollToOptions) => void
 }
 

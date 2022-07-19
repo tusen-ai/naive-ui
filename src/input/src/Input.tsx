@@ -706,22 +706,6 @@ export default defineComponent({
       textareaEl.scrollTo(options)
     }
 
-    function scrollToEnd (animated = true): void {
-      const { value: textareaEl } = textareaElRef
-      if (!textareaEl) {
-        return
-      }
-
-      const { scrollHeight, scrollTop, clientHeight } = textareaEl
-      const end = scrollHeight - clientHeight
-      if (end === scrollTop) {
-        return
-      }
-      scrollTo({
-        top: end,
-        behavior: animated ? 'smooth' : 'auto'
-      })
-    }
     function syncMirror (value: string | null): void {
       const { type, pair, autosize } = props
       if (!pair && autosize) {
@@ -798,7 +782,6 @@ export default defineComponent({
       select,
       deactivate,
       activate,
-      scrollToEnd,
       scrollTo
     }
 

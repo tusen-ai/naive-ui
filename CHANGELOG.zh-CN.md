@@ -2,7 +2,7 @@
 
 ## NEXT_VERSION
 
-- `n-input` 增加 'scrollToEnd' 方法 (type="textarea") [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
+- `n-input` 增加 'scrollTo' 方法 (type="textarea") [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
 
 ## 2.31.0
 

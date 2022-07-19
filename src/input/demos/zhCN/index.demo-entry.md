@@ -93,5 +93,4 @@ rtl-debug.vue
 | blur | `() => void` | Blur input 元素 |  |
 | focus | `() => void` | Focus input 元素 |  |
 | select | `() => void` | Select input 元素 |  |
-| scrollToEnd | `(animated?: boolean) => void` | 滚动到底 | NEXT_VERSION |
 | scrollTo | `(options?: ScrollToOptions) => void` | 滚动到 | NEXT_VERSION |

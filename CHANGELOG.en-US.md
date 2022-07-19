@@ -2,7 +2,7 @@
 
 ## NEXT_VERSION
 
-- Add 'scrollToEnd' methods for n-input (type="textarea") [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
+- Add 'scrollTo' methods for n-input (type="textarea") [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
 
 ## 2.31.0
 
