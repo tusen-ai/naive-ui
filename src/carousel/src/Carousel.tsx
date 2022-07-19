@@ -702,7 +702,16 @@ export default defineComponent({
         slideSizesRef.effect.run()
       }
     }
-
+    function handleMouseenter (): void {
+      if (props.autoplay) {
+        stopAutoplay()
+      }
+    }
+    function handleMouseleave (): void {
+      if (props.autoplay) {
+        resetAutoplay()
+      }
+    }
     onMounted(() => {
       watchEffect(resetAutoplay)
       requestAnimationFrame(() => (isMountedRef.value = true))
@@ -831,6 +840,8 @@ export default defineComponent({
       handleTransitionEnd,
       handleResize,
       handleSlideResize,
+      handleMouseenter,
+      handleMouseleave,
       isActive: isDisplayActive,
       arrowSlotProps: arrowSlotPropsRef,
       dotSlotProps: dotSlotPropsRef,
@@ -897,6 +908,8 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
         {...slidesControlListeners}
+        onMouseenter={this.handleMouseenter}
+        onMouseleave={this.handleMouseleave}
       >
         <VResizeObserver onResize={this.handleResize}>
           {{
