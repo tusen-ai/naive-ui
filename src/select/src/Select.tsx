@@ -499,6 +499,8 @@ export default defineComponent({
         if (!props.filterable) {
           // already focused, don't need to return focus
           closeMenu()
+        } else {
+          focusSelectionInput()
         }
       }
     }
