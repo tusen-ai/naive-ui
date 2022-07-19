@@ -696,6 +696,15 @@ export default defineComponent({
         handleWrapperKeydownEsc()
       }
     }
+
+    function scrollTo (options?: ScrollToOptions | undefined): void {
+      const { value: textareaEl } = textareaElRef
+      if (!textareaEl) {
+        return
+      }
+      textareaEl.scrollTo(options)
+    }
+
     function syncMirror (value: string | null): void {
       const { type, pair, autosize } = props
       if (!pair && autosize) {
@@ -771,7 +780,8 @@ export default defineComponent({
       blur,
       select,
       deactivate,
-      activate
+      activate,
+      scrollTo
     }
 
     const rtlEnabledRef = useRtl('Input', mergedRtlRef, mergedClsPrefixRef)
