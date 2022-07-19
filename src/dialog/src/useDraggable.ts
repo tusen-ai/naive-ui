@@ -56,9 +56,8 @@ export const useDraggable = (
         offsetX: moveX,
         offsetY: moveY
       }
-      ;(targetRef.value as HTMLElement).style.transform = `translate(${addUnit(
-        moveX
-      )}, ${addUnit(moveY)})`
+      ;(targetRef.value as HTMLElement).style.left = `${addUnit(moveX)}`
+      ;(targetRef.value as HTMLElement).style.top = `${addUnit(moveY)}`
     }
 
     const onMouseup = (): void => {
