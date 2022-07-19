@@ -2,7 +2,7 @@
 // we need to add duplicates to the left and right of the carousel
 // slot    [ 0 1 2 ]
 // display 2 0 1 2 0
-// index   0 1 2 3 4
+// real    0 1 2 3 4
 
 import { cloneVNode } from 'vue'
 import type { VNode } from 'vue'

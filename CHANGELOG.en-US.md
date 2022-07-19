@@ -11,11 +11,13 @@
 - Fix `n-select`'s placeholder may overflow if it's long.
 - Fix `n-input` has is no indent at the prefix if `type="textarea"` and `:autosize="true"`, closes [#3238](https://github.com/TuSimple/naive-ui/issues/3238).
 - Fix `n-select` focus loss when click `action` slot in `filterable` and `multiple`, closes [#3247](https://github.com/TuSimple/naive-ui/issues/3247).
+- Fix `n-carousel`'s `autoplay` prop be `true` `hover` can't stop the play, closes [#3304](https://github.com/TuSimple/naive-ui/issues/3304).
 
 ### Feats
 
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 - `n-tree` supports RTL.
+- `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).
 
 ## 2.31.0
 
