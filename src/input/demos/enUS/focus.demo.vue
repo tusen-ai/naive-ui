@@ -1,5 +1,7 @@
 <markdown>
-# Focus & blur & select & scrollToEnd manually
+# Imperative handle
+
+ Focus. Blur. Selection. Scroll.
 </markdown>
 
 <template>
