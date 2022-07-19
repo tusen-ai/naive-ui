@@ -1,7 +1,9 @@
 import { inject, provide } from 'vue'
+import type { ComputedRef } from 'vue'
 import { createInjectionKey, throwError } from '../../_utils'
 
 export interface CarouselContextValue {
+  currentIndexRef: ComputedRef<number>
   to: (index: number) => void
   prev: () => void
   next: () => void
@@ -12,7 +14,6 @@ export interface CarouselContextValue {
   isActive: (slideOrIndex: HTMLElement | number) => boolean
   isPrevDisabled: () => boolean
   isNextDisabled: () => boolean
-  getCurrentIndex: () => number
   getSlideIndex: (slideOrIndex?: HTMLElement | number) => number
   getSlideStyle: (
     slideOrIndex: HTMLElement | number
