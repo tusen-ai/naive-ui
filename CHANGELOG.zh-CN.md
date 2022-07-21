@@ -12,6 +12,7 @@
 - 修复 `n-input` 在 `type="textarea"` 并且 `:autosize="true"` 时添加 prefix 后内容没有对齐，关闭 [#3238](https://github.com/TuSimple/naive-ui/issues/3238)
 - 修复 `n-select` 当在同时设置 `filterable` 和 `multiple` 时点击 `action` 焦点丢失的问题，关闭 [#3247](https://github.com/TuSimple/naive-ui/issues/3247)
 - 修复 `n-carousel` 在 `autoplay` 为 `true` 时 `hover` 不停止播放，关闭 [#3304](https://github.com/TuSimple/naive-ui/issues/3304)
+- 修复 `n-tree` 在选中节点时设定 `expanded-keys` 时可能会抛出异常，关闭 [#3319](https://github.com/TuSimple/naive-ui/issues/3319)
 
 ### Feats
 

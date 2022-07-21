@@ -618,21 +618,21 @@ export default defineComponent({
           (node) => (node as any).key === addedKey
         )
         if (~expandedNodeIndex) {
-          const expandedChildren = flatten(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (afNodesRef.value[expandedNodeIndex] as TmNode).children!,
-            value
-          )
-          afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
-            __motion: true,
-            mode: 'expand',
-            height: virtualScroll
-              ? expandedChildren.length * ITEM_SIZE
-              : undefined,
-            nodes: virtualScroll
-              ? expandedChildren.slice(0, viewportItemCount)
-              : expandedChildren
-          })
+          const children = // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (afNodesRef.value[expandedNodeIndex] as TmNode).children
+          if (children) {
+            const expandedChildren = flatten(children, value)
+            afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
+              __motion: true,
+              mode: 'expand',
+              height: virtualScroll
+                ? expandedChildren.length * ITEM_SIZE
+                : undefined,
+              nodes: virtualScroll
+                ? expandedChildren.slice(0, viewportItemCount)
+                : expandedChildren
+            })
+          }
         }
       }
       if (removedKey !== null) {
