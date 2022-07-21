@@ -620,6 +620,7 @@ export default defineComponent({
         if (~expandedNodeIndex) {
           const children = // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             (afNodesRef.value[expandedNodeIndex] as TmNode).children
+          // sometimes user will pass leaf keys in
           if (children) {
             const expandedChildren = flatten(children, value)
             afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
