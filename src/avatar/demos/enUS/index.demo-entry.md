@@ -26,12 +26,12 @@ v-show-debug.vue
 | bordered | `boolean` | `false` | Whether to display a avatar with border. |  |
 | color | `string` | `undefined` | The background color of the avatar. |  |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |  |
-| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.31.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.31.0 |
+| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |  |
+| round | `boolean` | `false` | Whether to display a rounded avatar. |  |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |  |
-| round | `boolean` | `false` | Whether to display a rounded avatar. |  |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |  |
 
 ### AvatarGroup Props
