@@ -27,7 +27,7 @@ actions.vue
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击确定的回调函数 |  |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击取消的回调函数 |  |
 
-更多 props 请参考 [Popover](popover#Popover-Props).
+更多 props 请参考 [popover](popover#Popover-Props).
 
 ### Popconfirm Slots
 
@@ -36,3 +36,6 @@ actions.vue
 | action  | `()` | 自定义操作     |
 | default | `()` | 弹出确认的内容 |
 | icon    | `()` | 弹出确认的图标 |
+
+### Popconfirm Methods
+See [popover](popover#Popover-Methods)
