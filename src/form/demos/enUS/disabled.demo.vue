@@ -38,7 +38,7 @@
         />
       </n-form-item>
       <n-form-item label="Dynamic Tags" path="dynamicTagsValue">
-        <n-dynamic-tags :value="model.dynamicTagsValue" />
+        <n-dynamic-tags v-model:value="model.dynamicTagsValue" />
       </n-form-item>
       <n-form-item label="Tree Select" path="treeSelectValue">
         <n-tree-select
@@ -48,7 +48,7 @@
       </n-form-item>
       <n-form-item label="Cascader" path="cascaderValue">
         <n-cascader
-          :value="model.cascaderValue"
+          v-model:value="model.cascaderValue"
           placeholder="Cascader"
           :options="options"
           check-strategy="child"
