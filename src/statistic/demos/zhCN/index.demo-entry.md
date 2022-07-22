@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+rtl-debug.vue
 ```
 
 ## API

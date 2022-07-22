@@ -72,7 +72,10 @@ export { selectDark } from './select/styles'
 export { sliderDark } from './slider/styles'
 export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'
 export { spinDark } from './spin/styles'
-export { statisticDark } from './statistic/styles'
+export {
+  statisticDark,
+  statisticRtl as unstableStatisticRtl
+} from './statistic/styles'
 export { stepsDark } from './steps/styles'
 export { switchDark } from './switch/styles'
 export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
