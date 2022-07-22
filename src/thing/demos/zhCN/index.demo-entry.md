@@ -9,6 +9,7 @@
 ```demo
 basic.vue
 indent.vue
+rtl-debug.vue
 ```
 
 ## API
