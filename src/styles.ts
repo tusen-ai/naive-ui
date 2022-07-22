@@ -88,6 +88,7 @@ export { treeSelectDark } from './tree-select/styles'
 export { typographyDark } from './typography/styles'
 export { uploadDark } from './upload/styles'
 export { watermarkDark } from './watermark/styles'
+export { rowRtl as unstableRowRtl } from './legacy-grid/styles'
 
 // danger zone, internal styles
 export { scrollbarDark } from './_internal/scrollbar/styles'
