@@ -24,6 +24,7 @@ input-props.vue
 status.vue
 pattern.vue
 rtl-debug.vue
+prefix-debug.vue
 ```
 
 ## API
@@ -88,8 +89,9 @@ rtl-debug.vue
 
 ### Input Methods
 
-| 名称   | 类型         | 说明              |
-| ------ | ------------ | ----------------- |
-| blur   | `() => void` | Blur input 元素   |
-| focus  | `() => void` | Focus input 元素  |
-| select | `() => void` | Select input 元素 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur input 元素 |  |
+| focus | `() => void` | Focus input 元素 |  |
+| select | `() => void` | Select input 元素 |  |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | 滚动到 | NEXT_VERSION |

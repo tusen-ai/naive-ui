@@ -11,7 +11,8 @@ import {
   CSSProperties,
   watchEffect,
   VNode,
-  HTMLAttributes
+  HTMLAttributes,
+  Fragment
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
@@ -107,7 +108,10 @@ const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
-  internalOnUpdateScrollLeft: Function as PropType<(scrollLeft: number) => void>
+  internalOnUpdateScrollLeft: Function as PropType<
+  (scrollLeft: number) => void
+  >,
+  internalHoistYRail: Boolean
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -700,11 +704,49 @@ const Scrollbar = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, triggerDisplayManually, rtlEnable } = this
+    const {
+      $slots,
+      mergedClsPrefix,
+      triggerDisplayManually,
+      rtlEnable,
+      internalHoistYRail
+    } = this
     if (!this.scrollable) return $slots.default?.()
+    const triggerIsNone = this.trigger === 'none'
+    const createYRail = (): VNode => {
+      return (
+        <div
+          ref="yRailRef"
+          class={[
+            `${mergedClsPrefix}-scrollbar-rail`,
+            `${mergedClsPrefix}-scrollbar-rail--vertical`
+          ]}
+          data-scrollbar-rail
+          style={this.verticalRailStyle}
+          aria-hidden
+        >
+          {h(
+            (triggerIsNone ? Wrapper : Transition) as any,
+            triggerIsNone ? null : { name: 'fade-in-transition' },
+            {
+              default: () =>
+                this.needYBar && this.isShowYBar && !this.isIos ? (
+                  <div
+                    class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                    style={{
+                      height: this.yBarSizePx,
+                      top: this.yBarTopPx
+                    }}
+                    onMousedown={this.handleYScrollMouseDown}
+                  />
+                ) : null
+            }
+          )}
+        </div>
+      )
+    }
     const createChildren = (): VNode => {
       this.onRender?.()
-      const triggerIsNone = this.trigger === 'none'
       return h(
         'div',
         mergeProps(this.$attrs, {
@@ -764,67 +806,42 @@ const Scrollbar = defineComponent({
               </VResizeObserver>
             </div>
           ),
-          <div
-            ref="yRailRef"
-            class={[
-              `${mergedClsPrefix}-scrollbar-rail`,
-              `${mergedClsPrefix}-scrollbar-rail--vertical`
-            ]}
-            data-scrollbar-rail
-            style={this.verticalRailStyle}
-            aria-hidden
-          >
-            {h(
-              (triggerIsNone ? Wrapper : Transition) as any,
-              triggerIsNone ? null : { name: 'fade-in-transition' },
-              {
-                default: () =>
-                  this.needYBar && this.isShowYBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        height: this.yBarSizePx,
-                        top: this.yBarTopPx
-                      }}
-                      onMousedown={this.handleYScrollMouseDown}
-                    />
-                  ) : null
-              }
-            )}
-          </div>,
-          <div
-            ref="xRailRef"
-            class={[
-              `${mergedClsPrefix}-scrollbar-rail`,
-              `${mergedClsPrefix}-scrollbar-rail--horizontal`
-            ]}
-            style={this.horizontalRailStyle}
-            data-scrollbar-rail
-            aria-hidden
-          >
-            {h(
-              (triggerIsNone ? Wrapper : Transition) as any,
-              triggerIsNone ? null : { name: 'fade-in-transition' },
-              {
-                default: () =>
-                  this.needXBar && this.isShowXBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        width: this.xBarSizePx,
-                        right: !rtlEnable ? 'unset' : this.xBarLeftPx,
-                        left: rtlEnable ? 'unset' : this.xBarLeftPx
-                      }}
-                      onMousedown={this.handleXScrollMouseDown}
-                    />
-                  ) : null
-              }
-            )}
-          </div>
+          internalHoistYRail ? null : createYRail(),
+          this.xScrollable && (
+            <div
+              ref="xRailRef"
+              class={[
+                `${mergedClsPrefix}-scrollbar-rail`,
+                `${mergedClsPrefix}-scrollbar-rail--horizontal`
+              ]}
+              style={this.horizontalRailStyle}
+              data-scrollbar-rail
+              aria-hidden
+            >
+              {h(
+                (triggerIsNone ? Wrapper : Transition) as any,
+                triggerIsNone ? null : { name: 'fade-in-transition' },
+                {
+                  default: () =>
+                    this.needXBar && this.isShowXBar && !this.isIos ? (
+                      <div
+                        class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                        style={{
+                          width: this.xBarSizePx,
+                          right: !rtlEnable ? 'unset' : this.xBarLeftPx,
+                          left: rtlEnable ? 'unset' : this.xBarLeftPx
+                        }}
+                        onMousedown={this.handleXScrollMouseDown}
+                      />
+                    ) : null
+                }
+              )}
+            </div>
+          )
         ]
       )
     }
-    return this.container ? (
+    const scrollbarNode = this.container ? (
       createChildren()
     ) : (
       <VResizeObserver onResize={this.handleContainerResize}>
@@ -833,6 +850,16 @@ const Scrollbar = defineComponent({
         }}
       </VResizeObserver>
     )
+    if (internalHoistYRail) {
+      return (
+        <Fragment>
+          {scrollbarNode}
+          {createYRail()}
+        </Fragment>
+      )
+    } else {
+      return scrollbarNode
+    }
   }
 })
 
