@@ -16,18 +16,23 @@ import { c, cE, cM, cNotM, cB } from '../../../_utils/cssr'
 // --n-text-color
 // --n-text-color-disabled
 // --n-label-padding
+// --n-label-line-height
 export default cB('radio', `
-  line-height: 1;
+  line-height: var(--n-label-line-height);
   outline: none;
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   font-size: var(--n-font-size);
+  word-break: break-word;
 `, [
-  cE('dot', `
-    height: var(--n-radio-size);
+  cE('dot-wrapper', `
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
     width: var(--n-radio-size);
   `),
   cB('radio-input', `
@@ -43,13 +48,18 @@ export default cB('radio', `
     cursor: pointer;
   `),
   cE('dot', `
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: var(--n-radio-size);
+    width: var(--n-radio-size);
     background: var(--n-color);
     box-shadow: var(--n-box-shadow);
+    border-radius: 50%;
     transition:
       background-color .3s var(--n-bezier),
       box-shadow .3s var(--n-bezier);
-      position: relative;
-      border-radius: 50%;
   `, [
     c('&::before', `
       content: "";
@@ -80,7 +90,6 @@ export default cB('radio', `
     color: var(--n-text-color);
     padding: var(--n-label-padding);
     display: inline-block;
-    white-space: nowrap;
     transition: color .3s var(--n-bezier);
   `),
   cNotM('disabled', `
@@ -110,7 +119,6 @@ export default cB('radio', `
         backgroundColor: 'var(--n-dot-color-disabled)'
       }),
       cM('checked', `
-        transform: scale(1);
         opacity: 1;
       `)
     ]),

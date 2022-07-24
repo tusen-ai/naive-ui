@@ -27,7 +27,9 @@ export default defineComponent({
     const notification = useNotification()
     return {
       warning () {
-        notification.warning('...')
+        notification.warning({
+          content: '...'
+        })
       }
     }
   }
@@ -47,6 +49,8 @@ closable.vue
 duration.vue
 max.vue
 placement.vue
+error-debug.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -57,8 +61,8 @@ placement.vue
 | --- | --- | --- | --- | --- |
 | container-style | `string \| Object` | `undefined` | 容器的样式 | 2.25.0 |
 | max | `number` | `undefined` | 限制通知框显示的个数 |  |
-| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |  |
-| scrollable | `boolean` | `true` | 通知是否可滚动 |  |
+| placement | `'top' \| 'bottom' \| 'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 | `'top' \| 'bottom'` 2.29.0 |
+| scrollable | `boolean` | `true` | 通知是否可滚动，对于 `placement` 为 `'top'` 和 `'bottom'` 不生效 |  |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |  |
 
 ### notification Injection Methods
@@ -74,20 +78,21 @@ placement.vue
 
 ### NotificationOption Properties
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| action | `string \| (() => VNodeChild)` | `undefined` | 操作区域的内容,可以是 render 函数 |
-| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容，可以是 render 函数 |
-| closable | `boolean` | `true` | 是否显示 close 图标 |
-| content | `string \| (() => VNodeChild)` | `undefined` | 通知框内容，可以是 render 函数 |
-| description | `string \| (() => VNodeChild)` | `undefined` | 描述的内容，可以是 render 函数 |
-| duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| action | `string \| (() => VNodeChild)` | `undefined` | 操作区域的内容,可以是 render 函数 |  |
+| avatar | `() => VNodeChild` | `undefined` | 头像区域的内容 |  |
+| closable | `boolean` | `true` | 是否显示 close 图标 |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | 通知框内容，可以是 render 函数 |  |
+| description | `string \| (() => VNodeChild)` | `undefined` | 描述的内容，可以是 render 函数 |  |
+| duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |  |
+| keepAliveOnHover | `boolean` | `undefined` | 当鼠标移入时是否保持通知框显示 | NEXT_VERSION |
 | meta | `string \| (() => VNodeChild)` | `undefined` | `meta` 信息，可以是 render 函数 |
 | title | `string \| (() => VNodeChild)` | `undefined` | `title` 信息，可以是 render 函数 |
-| onAfterEnter | `Function` | `undefined` | 过渡动画进入执行完后执行的回调 |
-| onAfterLeave | `Function` | `undefined` | 过渡动画离开执行完后执行的回调 |
-| onClose | `() => boolean \| Promise<boolean>` | `undefined` | 关闭通知的回调，返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭 |
-| onLeave | `Function` | `undefined` | 过渡动画离开时执行的回调 |
+| onAfterEnter | `Function` | `undefined` | 过渡动画进入执行完后执行的回调 |  |
+| onAfterLeave | `Function` | `undefined` | 过渡动画离开执行完后执行的回调 |  |
+| onClose | `() => boolean \| Promise<boolean>` | `undefined` | 关闭通知的回调，返回 `false`、Promise resolve `false` 或者 reject 会取消这次关闭 |  |
+| onLeave | `Function` | `undefined` | 过渡动画离开时执行的回调 |  |
 
 ### NotificationReactive API
 

@@ -34,7 +34,7 @@
     <n-dropdown
       placement="bottom-start"
       trigger="click"
-      size="large"
+      size="huge"
       :options="options"
       @select="handleSelect"
     >

@@ -8,8 +8,10 @@ import {
   toRef,
   provide,
   nextTick,
+  WatchStopHandle,
+  CSSProperties,
   watch,
-  WatchStopHandle
+  onBeforeUnmount
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -24,7 +26,7 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
+import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -37,7 +39,8 @@ import type {
   RenderLabel,
   Size,
   InternalExposedProps,
-  RenderOption
+  RenderOption,
+  NodeProps
 } from './interface'
 import {
   internalSelectionMenuInjectionKey,
@@ -70,7 +73,6 @@ export default defineComponent({
       type: [String, Number, Array] as PropType<Value | null>,
       default: null
     },
-    width: [Number, String],
     autoPending: Boolean,
     virtualScroll: {
       type: Boolean,
@@ -81,10 +83,20 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    labelField: {
+      type: String,
+      default: 'label'
+    },
+    valueField: {
+      type: String,
+      default: 'value'
+    },
     loading: Boolean,
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
     renderOption: Function as PropType<RenderOption>,
+    nodeProps: Function as PropType<NodeProps>,
+    showCheckmark: { type: Boolean, default: true },
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -94,6 +106,7 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    onResize: Function as PropType<() => void>,
     resetMenuOnOptionsChange: {
       type: Boolean,
       default: true
@@ -122,42 +135,54 @@ export default defineComponent({
     function initPendingNode (): void {
       const { treeMate } = props
       let defaultPendingNode: TreeNode<SelectOption> | null = null
-      if (props.autoPending) {
-        const { value } = props
-        if (value === null) {
-          defaultPendingNode = treeMate.getFirstAvailableNode()
+      const { value } = props
+      if (value === null) {
+        defaultPendingNode = treeMate.getFirstAvailableNode()
+      } else {
+        if (props.multiple) {
+          defaultPendingNode = treeMate.getNode(
+            ((value as Array<string | number> | null) || [])[
+              ((value as Array<string | number> | null) || []).length - 1
+            ]
+          )
         } else {
-          if (props.multiple) {
-            defaultPendingNode = treeMate.getNode(
-              ((value as Array<string | number> | null) || [])[
-                ((value as Array<string | number> | null) || []).length - 1
-              ]
-            )
-          } else {
-            defaultPendingNode = treeMate.getNode(value as string | number)
-          }
-          if (!defaultPendingNode || defaultPendingNode.disabled) {
-            defaultPendingNode = treeMate.getFirstAvailableNode()
-          }
+          defaultPendingNode = treeMate.getNode(value as string | number)
         }
-        if (defaultPendingNode) {
-          setPendingTmNode(defaultPendingNode)
+        if (!defaultPendingNode || defaultPendingNode.disabled) {
+          defaultPendingNode = treeMate.getFirstAvailableNode()
         }
+      }
+      if (defaultPendingNode) {
+        setPendingTmNode(defaultPendingNode)
+      } else {
+        setPendingTmNode(null)
+      }
+    }
+    function clearPendingNodeIfInvalid (): void {
+      const { value: pendingNode } = pendingNodeRef
+      if (pendingNode && !props.treeMate.getNode(pendingNode.key)) {
+        pendingNodeRef.value = null
       }
     }
 
     let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
     watch(
-      toRef(props, 'show'),
-      (value) => {
-        if (value) {
+      () => props.show,
+      (show) => {
+        if (show) {
           initPendingNodeWatchStopHandle = watch(
-            props.resetMenuOnOptionsChange
-              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
-              : [toRef(props, 'multiple')],
+            () => props.treeMate,
             () => {
-              initPendingNode()
-              void nextTick(scrollToPendingNode)
+              if (props.resetMenuOnOptionsChange) {
+                if (props.autoPending) {
+                  initPendingNode()
+                } else {
+                  clearPendingNodeIfInvalid()
+                }
+                void nextTick(scrollToPendingNode)
+              } else {
+                clearPendingNodeIfInvalid()
+              }
             },
             {
               immediate: true
@@ -171,6 +196,10 @@ export default defineComponent({
         immediate: true
       }
     )
+    onBeforeUnmount(() => {
+      initPendingNodeWatchStopHandle?.()
+    })
+
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -283,11 +312,15 @@ export default defineComponent({
       handleOptionMouseEnter,
       handleOptionClick,
       valueSetRef,
+      pendingTmNodeRef: pendingNodeRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
+      showCheckmarkRef: toRef(props, 'showCheckmark'),
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
       renderOptionRef: toRef(props, 'renderOption'),
-      pendingTmNodeRef: pendingNodeRef
+      labelFieldRef: toRef(props, 'labelField'),
+      valueFieldRef: toRef(props, 'valueField')
     })
     provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {
@@ -315,6 +348,7 @@ export default defineComponent({
           optionColorActive,
           loadingColor,
           loadingSize,
+          optionColorActivePending,
           [createKey('optionFontSize', size)]: fontSize,
           [createKey('optionHeight', size)]: optionHeight,
           [createKey('optionPadding', size)]: optionPadding
@@ -332,6 +366,7 @@ export default defineComponent({
         '--n-option-check-color': optionCheckColor,
         '--n-option-color-pending': optionColorPending,
         '--n-option-color-active': optionColorActive,
+        '--n-option-color-active-pending': optionColorActivePending,
         '--n-option-height': optionHeight,
         '--n-option-opacity-disabled': optionOpacityDisabled,
         '--n-option-text-color': optionTextColor,
@@ -340,6 +375,7 @@ export default defineComponent({
         '--n-option-text-color-pressed': optionTextColorPressed,
         '--n-option-padding': optionPadding,
         '--n-option-padding-left': getPadding(optionPadding, 'left'),
+        '--n-option-padding-right': getPadding(optionPadding, 'right'),
         '--n-loading-color': loadingColor,
         '--n-loading-size': loadingSize
       }
@@ -359,6 +395,7 @@ export default defineComponent({
       prev,
       getPendingTmNode
     }
+    useOnResize(selfRef, props.onResize)
     return {
       mergedTheme: themeRef,
       virtualListRef,
@@ -383,7 +420,7 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef.value,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       ...exposedProps
@@ -408,7 +445,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={[{ width: formatLength(this.width) }, this.cssVars as any]}
+        style={this.cssVars as CSSProperties}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}
@@ -503,7 +540,7 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div class={`${clsPrefix}-base-select-menu__empty`}>
+          <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
             {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}

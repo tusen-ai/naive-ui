@@ -108,7 +108,7 @@ describe('n-slider', () => {
       }
     })
 
-    expect(wrapper.findAll('.n-slider-handle').length).toBe(2)
+    expect(wrapper.findAll('.n-slider-handle-wrapper').length).toBe(2)
 
     const sliderRailFill = wrapper.find('.n-slider-rail__fill')
     const element = sliderRailFill.element as HTMLElement
@@ -141,7 +141,7 @@ describe('n-slider', () => {
     })
 
     const sliderRailFill = wrapper.find('.n-slider-rail__fill')
-    const firstHandle = wrapper.find('.n-slider-handle')
+    const firstHandle = wrapper.find('.n-slider-handle-wrapper')
     expect((sliderRailFill.element as HTMLElement).style.height).toEqual('77%')
     expect((firstHandle.element as HTMLElement).style.bottom).toEqual('77%')
   })
@@ -160,10 +160,10 @@ describe('n-slider', () => {
     expect(element.style.bottom).toEqual('24%')
     expect(element.style.height).toEqual('25%')
     expect(
-      wrapper.findAll('.n-slider-handle')[0].attributes('style')
+      wrapper.findAll('.n-slider-handle-wrapper')[0].attributes('style')
     ).toContain('bottom: 24%')
     expect(
-      wrapper.findAll('.n-slider-handle')[1].attributes('style')
+      wrapper.findAll('.n-slider-handle-wrapper')[1].attributes('style')
     ).toContain('bottom: 49%')
   })
 
@@ -193,7 +193,7 @@ describe('n-slider', () => {
       clientX: 25
     })
     const slider = wrapper.find('.n-slider')
-    const handle = wrapper.find('.n-slider-handle')
+    const handle = wrapper.find('.n-slider-handle-wrapper')
     ;(slider.element as HTMLElement).style.width = '100px'
     await (slider.element as HTMLElement).dispatchEvent(mouseDown)
     expect((handle.element as HTMLElement).style.left).toEqual('30%')

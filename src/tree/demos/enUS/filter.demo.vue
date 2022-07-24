@@ -7,7 +7,20 @@ Tree accept `pattern` and `filter` to do searching.
 <template>
   <n-space vertical :size="12">
     <n-input v-model:value="pattern" placeholder="Search" />
-    <n-tree :pattern="pattern" :data="data" block-line />
+    <n-switch v-model:value="showIrrelevantNodes">
+      <template #checked>
+        Show irrelevant nodes
+      </template>
+      <template #unchecked>
+        Hide irrelevant nodes
+      </template>
+    </n-switch>
+    <n-tree
+      :show-irrelevant-nodes="showIrrelevantNodes"
+      :pattern="pattern"
+      :data="data"
+      block-line
+    />
   </n-space>
 </template>
 
@@ -15,31 +28,59 @@ Tree accept `pattern` and `filter` to do searching.
 import { defineComponent, ref } from 'vue'
 import { TreeOption } from 'naive-ui'
 
-function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
-  if (!level) return undefined
-  return [0, 1].map((_, index) => {
-    const key = '' + baseKey + level + index
-    return {
-      label: createLabel(level),
-      key,
-      children: createData(level - 1, key)
-    }
-  })
-}
-
-function createLabel (level: number): string {
-  if (level === 4) return 'Out of Tao, One is born'
-  if (level === 3) return 'Out of One, Two'
-  if (level === 2) return 'Out of Two, Three'
-  if (level === 1) return 'Out of Three, the created universe'
-  return ''
-}
+const data: TreeOption[] = [
+  {
+    label: '0',
+    key: '0',
+    children: [
+      {
+        label: '0-0',
+        key: '0-0',
+        children: [
+          { label: '0-0-0', key: '0-0-0' },
+          { label: '0-0-1', key: '0-0-1' }
+        ]
+      },
+      {
+        label: '0-1',
+        key: '0-1',
+        children: [
+          { label: '0-1-0', key: '0-1-0' },
+          { label: '0-1-1', key: '0-1-1' }
+        ]
+      }
+    ]
+  },
+  {
+    label: '1',
+    key: '1',
+    children: [
+      {
+        label: '1-0',
+        key: '1-0',
+        children: [
+          { label: '1-0-0', key: '1-0-0' },
+          { label: '1-0-1', key: '1-0-1' }
+        ]
+      },
+      {
+        label: '1-1',
+        key: '1-1',
+        children: [
+          { label: '1-1-0', key: '1-1-0' },
+          { label: '1-1-1', key: '1-1-1' }
+        ]
+      }
+    ]
+  }
+]
 
 export default defineComponent({
   setup () {
     return {
-      data: createData(),
-      pattern: ref('')
+      data,
+      pattern: ref(''),
+      showIrrelevantNodes: ref(false)
     }
   }
 })

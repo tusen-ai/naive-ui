@@ -14,6 +14,7 @@ manual.vue
 custom-content.vue
 color.vue
 raw.vue
+rtl-debug.vue
 ```
 
 ## API

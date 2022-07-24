@@ -17,6 +17,7 @@ export default defineComponent({
     childActive: Boolean,
     hover: Boolean,
     paddingLeft: Number,
+    selected: Boolean,
     maxIconSize: {
       type: Number,
       required: true
@@ -68,11 +69,14 @@ export default defineComponent({
     const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
     return (
       <div
-        onClick={this.onClick}
+        onClick={(e) => {
+          this.onClick?.(e)
+        }}
         role="none"
         class={[
           `${clsPrefix}-menu-item-content`,
           {
+            [`${clsPrefix}-menu-item-content--selected`]: this.selected,
             [`${clsPrefix}-menu-item-content--collapsed`]: this.collapsed,
             [`${clsPrefix}-menu-item-content--child-active`]: this.childActive,
             [`${clsPrefix}-menu-item-content--disabled`]: this.disabled,

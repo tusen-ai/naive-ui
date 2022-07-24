@@ -1,2 +1,2 @@
-export { default as NScrollbar } from './src/ScrollBar'
-export type { ScrollbarInst, ScrollbarProps } from './src/ScrollBar'
+export { default as NScrollbar, scrollbarProps } from './src/Scrollbar'
+export type { ScrollbarInst, ScrollbarProps } from './src/Scrollbar'

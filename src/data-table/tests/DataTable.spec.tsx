@@ -2,7 +2,8 @@ import { h, HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { DataTableInst, NDataTable } from '../index'
 import type { DataTableColumns } from '../index'
-import { NButton, NButtonGroup } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {
@@ -989,7 +990,7 @@ describe('props.columns', () => {
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
     ))
-    expect(wrapper.find('tbody .n-data-table-td--ellipsis').exists()).toBe(true)
+    expect(wrapper.find('tbody .n-data-table-td__ellipsis').exists()).toBe(true)
     expect(wrapper.find('tbody .n-ellipsis').exists()).toBe(true)
     expect(wrapper.find('tbody .n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis'
@@ -1114,7 +1115,7 @@ describe('props.columns', () => {
     const columns: DataTableColumns = [
       {
         type: 'expand',
-        expandable: (_, index) => index === 0,
+        expandable: (rowData) => rowData.name === 0,
         renderExpand: (rowData: any) => {
           return `${String(rowData.name)} is a good guy.`
         }
@@ -1215,5 +1216,51 @@ describe('props.columns', () => {
     expect(trList[2].attributes('class')).not.toContain(
       'n-data-table-tr--striped'
     )
+  })
+
+  it('should work with `column.multiple` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        type: 'selection',
+        multiple: false
+      },
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        key: index
+      }
+    })
+
+    const checkedRowKeys = ref([4, 1])
+
+    const handleCheck = (e: any): void => {
+      checkedRowKeys.value = e
+    }
+
+    const wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        onUpdateCheckedRowKeys={handleCheck}
+        checked-row-keys={checkedRowKeys.value}
+      />
+    ))
+
+    const radios = wrapper.findAll('.n-radio')
+
+    expect(radios[4].classes()).toContain('n-radio--checked')
+    expect(radios[1].classes()).not.toContain('n-radio--checked')
+
+    await radios[1].trigger('click')
+
+    setTimeout(() => {
+      expect(radios[1].classes()).toContain('n-radio--checked')
+      expect(radios[4].classes()).not.toContain('n-radio--checked')
+    }, 0)
   })
 })

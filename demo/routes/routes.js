@@ -65,8 +65,17 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/import-on-demand/enUS/index.md')
   },
   {
-    path: 'style-position',
-    component: () => import('../pages/docs/style-position/enUS/index.md')
+    path: 'style-conflict',
+    component: () => import('../pages/docs/style-conflict/enUS/index.md')
+  },
+  {
+    path: 'controlled-uncontrolled',
+    component: () =>
+      import('../pages/docs/controlled-uncontrolled/enUS/index.md')
+  },
+  {
+    path: 'umd',
+    component: () => import('../pages/docs/umd/enUS/index.md')
   }
 ]
 
@@ -137,8 +146,17 @@ export const zhDocRoutes = [
     component: () => import('../pages/docs/import-on-demand/zhCN/index.md')
   },
   {
-    path: 'style-position',
-    component: () => import('../pages/docs/style-position/zhCN/index.md')
+    path: 'style-conflict',
+    component: () => import('../pages/docs/style-conflict/zhCN/index.md')
+  },
+  {
+    path: 'controlled-uncontrolled',
+    component: () =>
+      import('../pages/docs/controlled-uncontrolled/zhCN/index.md')
+  },
+  {
+    path: 'umd',
+    component: () => import('../pages/docs/umd/zhCN/index.md')
   }
 ]
 
@@ -314,6 +332,11 @@ export const enComponentRoutes = [
   {
     path: 'transfer',
     component: () => import('../../src/transfer/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'legacy-transfer',
+    component: () =>
+      import('../../src/legacy-transfer/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'spin',
@@ -503,6 +526,10 @@ export const enComponentRoutes = [
     path: 'watermark',
     component: () =>
       import('../../src/watermark/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'discrete',
+    component: () => import('../../src/discrete/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -678,6 +705,11 @@ export const zhComponentRoutes = [
   {
     path: 'transfer',
     component: () => import('../../src/transfer/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'legacy-transfer',
+    component: () =>
+      import('../../src/legacy-transfer/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'spin',
@@ -867,6 +899,10 @@ export const zhComponentRoutes = [
     path: 'watermark',
     component: () =>
       import('../../src/watermark/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'discrete',
+    component: () => import('../../src/discrete/demos/zhCN/index.demo-entry.md')
   }
 ]
 

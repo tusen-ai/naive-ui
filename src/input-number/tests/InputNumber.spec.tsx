@@ -14,11 +14,11 @@ describe('n-input-number', () => {
 
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NInputNumber)
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: false })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
     await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
     wrapper.unmount()
   })
 
@@ -262,5 +262,15 @@ describe('n-input-number', () => {
     await wrapper.find('input').trigger('input')
     expect(onUpdateValue).toHaveBeenCalledWith(10)
     wrapper.unmount()
+  })
+
+  it('should work with `status` prop', async () => {
+    ;(['success', 'warning', 'error'] as const).forEach((status) => {
+      const wrapper = mount(NInputNumber, { props: { status } })
+      expect(wrapper.find('.n-input').classes()).toContain(
+        `n-input--${status}-status`
+      )
+      wrapper.unmount()
+    })
   })
 })

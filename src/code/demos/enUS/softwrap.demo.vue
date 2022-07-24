@@ -5,7 +5,7 @@ Code can wrap content if it overflows.
 </markdown>
 
 <template>
-  <n-code :code="code" language="js" />
+  <n-code :code="code" language="js" word-wrap />
 </template>
 
 <script lang="ts">

@@ -1,7 +1,8 @@
 import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
-import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
+// --n-label-line-height
 // --n-bezier
 // --n-size
 // --n-border
@@ -26,14 +27,14 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 // --n-label-padding
 export default c([
   cB('checkbox', `
-    line-height: 1;
+    line-height: var(--n-label-line-height);
     font-size: var(--n-font-size);
     outline: none;
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-    vertical-align: middle;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    word-break: break-word;
     --n-merged-color-table: var(--n-color-table);
   `, [
     c('&:hover', [
@@ -135,16 +136,26 @@ export default c([
         color: 'var(--n-text-color-disabled)'
       })
     ]),
+    cB('checkbox-box-wrapper', `
+      position: relative;
+      width: var(--n-size);
+      flex-shrink: 0;
+      flex-grow: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    `),
     cB('checkbox-box', `
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
       height: var(--n-size);
       width: var(--n-size);
       display: inline-block;
       box-sizing: border-box;
       border-radius: var(--n-border-radius);
       background-color: var(--n-color);
-      position: relative;
-      transition:
-        background-color 0.3s var(--n-bezier);
+      transition: background-color 0.3s var(--n-bezier);
     `, [
       cE('border', `
         transition:
@@ -190,6 +201,7 @@ export default c([
       color: var(--n-text-color);
       transition: color .3s var(--n-bezier);
       user-select: none;
+      -webkit-user-select: none;
       padding: var(--n-label-padding);
     `, [
       c('&:empty', {

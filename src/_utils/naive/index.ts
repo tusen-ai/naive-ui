@@ -6,4 +6,3 @@ export type {
   ExtractInternalPropTypes
 } from './extract-public-props'
 export type { Mutable } from './mutable'
-export * from './window'

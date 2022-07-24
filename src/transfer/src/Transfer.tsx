@@ -31,7 +31,7 @@ import {
 } from './interface'
 import { NScrollbar } from '../../_internal'
 
-const transferProps = {
+export const transferProps = {
   ...(useTheme.props as ThemeProps<TransferTheme>),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {

@@ -23,10 +23,8 @@ import {
 } from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
 import { NotificationContainer } from './NotificationContainer'
-import {
-  NotificationEnvironment,
-  notificationEnvOptions
-} from './NotificationEnvironment'
+import { NotificationEnvironment } from './NotificationEnvironment'
+import type { NotificationOptions } from './NotificationEnvironment'
 import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
@@ -35,14 +33,14 @@ export type NotificationPlacement =
   | 'top-right'
   | 'bottom-left'
   | 'bottom-right'
-
-export type NotificationOptions = Partial<
-ExtractPropTypes<typeof notificationEnvOptions>
->
+  | 'top'
+  | 'bottom'
 
 export interface NotificationProviderInjection {
+  props: ExtractPropTypes<typeof notificationProviderProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
+  wipTransitionCountRef: Ref<number>
 }
 
 type Create = (options: NotificationOptions) => NotificationReactive
@@ -81,7 +79,7 @@ interface NotificationRef {
   hide: () => void
 }
 
-const notificationProviderProps = {
+export const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,
@@ -93,7 +91,8 @@ const notificationProviderProps = {
   placement: {
     type: String as PropType<NotificationPlacement>,
     default: 'top-right'
-  }
+  },
+  keepAliveOnHover: Boolean
 }
 
 export type NotificationProviderProps = ExtractPublicPropTypes<
@@ -177,10 +176,13 @@ export default defineComponent({
       open,
       destroyAll
     }
+    const wipTransitionCountRef = ref(0)
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
+      props,
       mergedClsPrefixRef,
-      mergedThemeRef: themeRef
+      mergedThemeRef: themeRef,
+      wipTransitionCountRef
     })
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {
@@ -202,6 +204,7 @@ export default defineComponent({
     )
   },
   render () {
+    const { placement } = this
     return (
       <>
         {this.$slots.default?.()}
@@ -209,8 +212,10 @@ export default defineComponent({
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer
               style={this.containerStyle}
-              scrollable={this.scrollable}
-              placement={this.placement}
+              scrollable={
+                this.scrollable && placement !== 'top' && placement !== 'bottom'
+              }
+              placement={placement}
             >
               {{
                 default: () => {
@@ -232,6 +237,11 @@ export default defineComponent({
                         ])}
                         internalKey={notification.key}
                         onInternalAfterLeave={this.handleAfterLeave}
+                        keepAliveOnHover={
+                          notification.keepAliveOnHover === undefined
+                            ? this.keepAliveOnHover
+                            : notification.keepAliveOnHover
+                        }
                       />
                     )
                   })

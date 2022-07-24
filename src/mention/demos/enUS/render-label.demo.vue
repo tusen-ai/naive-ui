@@ -1,5 +1,5 @@
 <markdown>
-# Render Label
+# Render label
 
 If the `option.label` property is not a string, the `option.value` property will be used for matching by default.
 </markdown>

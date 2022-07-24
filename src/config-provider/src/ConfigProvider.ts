@@ -6,12 +6,13 @@ import {
   PropType,
   provide,
   ComputedRef,
-  markRaw
+  markRaw,
+  ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
 import { hash } from 'css-render'
-import { ExtractPublicPropTypes, warn } from '../../_utils'
+import { warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
 import { NDateLocale, NLocale } from '../../locales'
 import type {
@@ -48,6 +49,7 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
+  preflightStyleDisabled: Boolean,
   inlineThemeDisabled: {
     type: Boolean,
     default: undefined
@@ -63,8 +65,8 @@ export const configProviderProps = {
   }
 } as const
 
-export type ConfigProviderProps = ExtractPublicPropTypes<
-  typeof configProviderProps
+export type ConfigProviderProps = Partial<
+ExtractPropTypes<typeof configProviderProps>
 >
 
 export default defineComponent({
@@ -137,6 +139,11 @@ export default defineComponent({
         const rtlEnabledState: RtlEnabledState = {}
         for (const rtlInfo of rtl) {
           rtlEnabledState[rtlInfo.name] = markRaw(rtlInfo)
+          rtlInfo.peers?.forEach((peerRtlInfo) => {
+            if (!(peerRtlInfo.name in rtlEnabledState)) {
+              rtlEnabledState[peerRtlInfo.name] = markRaw(peerRtlInfo)
+            }
+          })
         }
         return rtlEnabledState
       }
@@ -146,7 +153,8 @@ export default defineComponent({
     })
     const inlineThemeDisabled =
       props.inlineThemeDisabled || NConfigProvider?.inlineThemeDisabled
-
+    const preflightStyleDisabled =
+      props.preflightStyleDisabled || NConfigProvider?.preflightStyleDisabled
     const mergedThemeHashRef = computed(() => {
       const { value: theme } = mergedThemeRef
       const { value: mergedThemeOverrides } = mergedThemeOverridesRef
@@ -196,7 +204,8 @@ export default defineComponent({
       }),
       mergedThemeRef,
       mergedThemeOverridesRef,
-      inlineThemeDisabled: inlineThemeDisabled || false
+      inlineThemeDisabled: inlineThemeDisabled || false,
+      preflightStyleDisabled: preflightStyleDisabled || false
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

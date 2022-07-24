@@ -1,4 +1,4 @@
-import plPL from 'date-fns/locale/pl'
+import plPL from 'date-fns/esm/locale/pl'
 import { NDateLocale } from './enUS'
 
 const datePlPL: NDateLocale = {

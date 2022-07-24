@@ -1,7 +1,8 @@
 import { h, defineComponent } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
 import useRadio from './use-radio'
 
+export const radioButtonProps = useRadio.props
 export type RadioButtonProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({
@@ -37,7 +38,14 @@ export default defineComponent({
           onBlur={this.handleRadioInputBlur}
         />
         <div class={`${mergedClsPrefix}-radio-button__state-border`} />
-        <span ref="labelRef">{this.$slots}</span>
+        {resolveWrappedSlot(this.$slots.default, (children) => {
+          if (!children && !this.label) return null
+          return (
+            <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
+              {children || this.label}
+            </div>
+          )
+        })}
       </label>
     )
   }

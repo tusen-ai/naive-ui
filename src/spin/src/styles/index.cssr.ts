@@ -1,5 +1,5 @@
 import { c, cM, cB } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --n-bezier
@@ -60,6 +60,7 @@ export default c([
   `, [
     cM('spinning', `
       user-select: none;
+      -webkit-user-select: none;
       pointer-events: none;
       opacity: var(--n-opacity-spinning);
     `)

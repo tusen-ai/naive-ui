@@ -22,6 +22,7 @@ focus.vue
 event.vue
 input-props.vue
 status.vue
+pattern.vue
 ```
 
 ## API
@@ -30,6 +31,7 @@ status.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| allow-input | `(value: string) => boolean` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | 2.30.4 |
 | autofocus | `boolean` | `false` | Whether to autofocus. |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | Sizing property for when the input is of type `textarea`. e.g. `{ minRows: 1, maxRows: 3 }`. |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
@@ -61,12 +63,15 @@ status.vue
 
 ### Input Slots
 
-| Name | Parameters | Description |
-| --- | --- | --- |
-| count | `(value: string)` | Word count. |
-| prefix | `()` | Prefix content slot. |
-| separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |
-| suffix | `()` | Suffix content slot. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| clear-icon | `()` | Custom clear icon. | 2.29.0 |
+| count | `(value: string)` | Word count. |  |
+| password-invisible-icon | `()` | Password toggle icon when password is invisible. | 2.27.0 |
+| password-visible-icon | `()` | Password toggle icon when password is visible. | 2.27.0 |
+| prefix | `()` | Prefix content slot. |  |
+| separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |  |
+| suffix | `()` | Suffix content slot. |  |
 
 ### InputGroup Slots
 
@@ -82,8 +87,9 @@ status.vue
 
 ### Input Methods
 
-| Name   | Type         | Description               |
-| ------ | ------------ | ------------------------- |
-| blur   | `() => void` | Blur the input element.   |
-| focus  | `() => void` | Focus the input element.  |
-| select | `() => void` | Select the input element. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur the input element. |  |
+| focus | `() => void` | Focus the input element. |  |
+| select | `() => void` | Select the input element. |  |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | Scroll To. | NEXT_VERSION |

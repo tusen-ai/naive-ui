@@ -5,7 +5,7 @@ import { throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
-const drawerContentProps = {
+export const drawerContentProps = {
   title: {
     type: String
   },
@@ -84,6 +84,7 @@ export default defineComponent({
                 onClick={this.handleCloseClick}
                 clsPrefix={mergedClsPrefix}
                 class={`${mergedClsPrefix}-drawer-header__close`}
+                absolute
               />
             )}
           </div>

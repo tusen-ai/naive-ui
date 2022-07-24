@@ -1,5 +1,5 @@
 <markdown>
-# Select & Routing
+# Select & routing
 
 Usually you can use vue-router here to accomplish routing. Also, you can render `label` as `<router-link />` or `<a />` to set route.
 </markdown>

@@ -19,6 +19,7 @@ import {
   FollowerPlacement
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
@@ -40,7 +41,7 @@ import { getRelativePosition } from './utils'
 import type { MentionOption } from './interface'
 import style from './styles/index.cssr'
 
-const mentionProps = {
+export const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),
   to: useAdjustedTo.propTo,
   autosize: [Boolean, Object] as PropType<
@@ -89,10 +90,11 @@ const mentionProps = {
     default: 'bottom-start'
   },
   size: String as PropType<InputSize>,
+  renderLabel: Function as PropType<RenderLabel>,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
-  renderLabel: Function as PropType<RenderLabel>,
   onUpdateValue: [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
@@ -144,7 +146,10 @@ export default defineComponent({
         if (typeof option.label === 'string') {
           return option.label.startsWith(pattern)
         }
-        return option.value.startsWith(pattern)
+        if (typeof option.value === 'string') {
+          return option.value.startsWith(pattern)
+        }
+        return false
       })
     })
     const treeMateRef = computed(() => {
@@ -278,23 +283,22 @@ export default defineComponent({
       }, 0)
     }
     function handleInputKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         if (inputInstRef.value?.isCompositing) return
         syncAfterCursorMove()
       } else if (
-        e.code === 'ArrowUp' ||
-        e.code === 'ArrowDown' ||
-        e.code === 'Enter' ||
-        e.code === 'NumpadEnter'
+        e.key === 'ArrowUp' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'Enter'
       ) {
         if (inputInstRef.value?.isCompositing) return
         const { value: selectMenuInst } = selectMenuInstRef
         if (showMenuRef.value) {
           if (selectMenuInst) {
             e.preventDefault()
-            if (e.code === 'ArrowUp') {
+            if (e.key === 'ArrowUp') {
               selectMenuInst.prev()
-            } else if (e.code === 'ArrowDown') {
+            } else if (e.key === 'ArrowDown') {
               selectMenuInst.next()
             } else {
               // Enter
@@ -346,7 +350,7 @@ export default defineComponent({
         return
       }
       const {
-        rawNode: { value }
+        rawNode: { value = '' }
       } = tmNode
       const inputEl = getInputEl()
       const inputValue = inputEl.value
@@ -443,7 +447,7 @@ export default defineComponent({
                       style.height = '1px'
                       style.background = 'red'
                     }
-                    return <div style={style} ref="cursorRef"></div>
+                    return <div style={style} ref="cursorRef" />
                   }
                 }}
               </VTarget>,

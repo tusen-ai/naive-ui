@@ -1,12 +1,14 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
+import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, RadioTheme } from '../styles'
 import useRadio from './use-radio'
 import style from './styles/radio.cssr'
+import { useRtl } from '../../_mixins/use-rtl'
 
+export const radioProps = useRadio.props
 export type RadioProps = ExtractPublicPropTypes<typeof useRadio.props>
 
 export default defineComponent({
@@ -44,12 +46,14 @@ export default defineComponent({
           dotColorActive,
           dotColorDisabled,
           labelPadding,
+          labelLineHeight,
           [createKey('fontSize', size)]: fontSize,
           [createKey('radioSize', size)]: radioSize
         }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-label-line-height': labelLineHeight,
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-active': boxShadowActive,
         '--n-box-shadow-disabled': boxShadowDisabled,
@@ -66,7 +70,9 @@ export default defineComponent({
         '--n-label-padding': labelPadding
       }
     })
-    const { inlineThemeDisabled } = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'radio',
@@ -76,13 +82,14 @@ export default defineComponent({
       )
       : undefined
     return Object.assign(radio, {
+      rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     })
   },
   render () {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { $slots, mergedClsPrefix, onRender, label } = this
     onRender?.()
     return (
       <label
@@ -90,6 +97,7 @@ export default defineComponent({
           `${mergedClsPrefix}-radio`,
           this.themeClass,
           {
+            [`${mergedClsPrefix}-radio--rtl`]: this.rtlEnabled,
             [`${mergedClsPrefix}-radio--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-radio--checked`]: this.renderSafeChecked,
             [`${mergedClsPrefix}-radio--focus`]: this.focus
@@ -109,17 +117,23 @@ export default defineComponent({
           onFocus={this.handleRadioInputFocus}
           onBlur={this.handleRadioInputBlur}
         />
-        <div
-          class={[
-            `${mergedClsPrefix}-radio__dot`,
-            this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
-          ]}
-        />
-        {$slots.default ? (
-          <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
-            {$slots.default()}
-          </div>
-        ) : null}
+        <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
+          &nbsp;
+          <div
+            class={[
+              `${mergedClsPrefix}-radio__dot`,
+              this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
+            ]}
+          />
+        </div>
+        {resolveWrappedSlot($slots.default, (children) => {
+          if (!children && !label) return null
+          return (
+            <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
+              {children || label}
+            </div>
+          )
+        })}
       </label>
     )
   }

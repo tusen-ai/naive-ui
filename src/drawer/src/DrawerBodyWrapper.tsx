@@ -11,13 +11,18 @@ import {
   withDirectives,
   vShow,
   mergeProps,
-  CSSProperties
+  CSSProperties,
+  DirectiveArguments,
+  watch,
+  onBeforeUnmount
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
+import { clickoutside } from 'vdirs'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps } from '../../_internal'
+import { useLockHtmlScroll } from '../../_utils'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
@@ -26,6 +31,7 @@ export default defineComponent({
   name: 'NDrawerContent',
   inheritAttrs: false,
   props: {
+    blockScroll: Boolean,
     show: {
       type: Boolean as PropType<boolean | undefined>,
       default: undefined
@@ -52,19 +58,129 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    onEsc: Function as PropType<() => void>
+    showMask: {
+      type: [Boolean, String] as PropType<boolean | 'transparent'>,
+      required: true
+    },
+    resizable: Boolean,
+    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
+    onAfterLeave: Function as PropType<() => void>,
+    onAfterEnter: Function as PropType<() => void>,
+    onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup (props) {
-    const displayedRef = ref(props.show)
+    const displayedRef = ref(!!props.show)
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
+
+    let startPosition = 0
+    let memoizedBodyStyleCursor = ''
+    let hoverTimerId: number | null = null
+    const isHoverOnResizeTriggerRef = ref(false)
+    const isDraggingRef = ref(false)
+
+    const isVertical = computed<boolean>(() => {
+      return props.placement === 'top' || props.placement === 'bottom'
+    })
+
+    const handleMousedownResizeTrigger = (e: MouseEvent): void => {
+      isDraggingRef.value = true
+      startPosition = isVertical.value ? e.clientY : e.clientX
+      memoizedBodyStyleCursor = document.body.style.cursor
+      document.body.style.cursor = isVertical.value ? 'ns-resize' : 'ew-resize'
+      document.body.addEventListener('mousemove', handleBodyMousemove)
+      document.body.addEventListener('mouseleave', handleBodyMouseleave)
+      document.body.addEventListener('mouseup', handleBodyMouseup)
+    }
+
+    const handleMouseenterResizeTrigger = (): void => {
+      if (hoverTimerId !== null) {
+        window.clearTimeout(hoverTimerId)
+        hoverTimerId = null
+      }
+      if (isDraggingRef.value) {
+        isHoverOnResizeTriggerRef.value = true
+      } else {
+        hoverTimerId = window.setTimeout(() => {
+          isHoverOnResizeTriggerRef.value = true
+        }, 300)
+      }
+    }
+
+    const handleMouseleaveResizeTrigger = (): void => {
+      if (hoverTimerId !== null) {
+        window.clearTimeout(hoverTimerId)
+        hoverTimerId = null
+      }
+      isHoverOnResizeTriggerRef.value = false
+    }
+
+    const { doUpdateHeight, doUpdateWidth } = NDrawer
+
+    const handleBodyMousemove = (e: MouseEvent): void => {
+      if (isDraggingRef.value) {
+        if (isVertical.value) {
+          let height = bodyRef.value?.offsetHeight || 0
+          const increment = startPosition - e.clientY
+          height += props.placement === 'bottom' ? increment : -increment
+          doUpdateHeight(height)
+          startPosition = e.clientY
+        } else {
+          let width = bodyRef.value?.offsetWidth || 0
+          const increment = startPosition - e.clientX
+          width += props.placement === 'right' ? increment : -increment
+          doUpdateWidth(width)
+          startPosition = e.clientX
+        }
+      }
+    }
+
+    const handleBodyMouseup = (): void => {
+      if (isDraggingRef.value) {
+        startPosition = 0
+        isDraggingRef.value = false
+        document.body.style.cursor = memoizedBodyStyleCursor
+        document.body.removeEventListener('mousemove', handleBodyMousemove)
+        document.body.removeEventListener('mouseup', handleBodyMouseup)
+        document.body.removeEventListener('mouseleave', handleBodyMouseleave)
+      }
+    }
+
+    const handleBodyMouseleave = handleBodyMouseup
+
     watchEffect(() => {
       if (props.show) displayedRef.value = true
     })
+    watch(
+      () => props.show,
+      (value) => {
+        if (!value) {
+          handleBodyMouseup()
+        }
+      }
+    )
+    onBeforeUnmount(() => {
+      handleBodyMouseup()
+    })
+    const bodyDirectivesRef = computed<DirectiveArguments>(() => {
+      const { show } = props
+      const directives: DirectiveArguments = [[vShow, show]]
+      if (!props.showMask) {
+        directives.push([
+          clickoutside,
+          props.onClickoutside,
+          undefined as unknown as string,
+          { capture: true }
+        ])
+      }
+      return directives
+    })
     function handleAfterLeave (): void {
       displayedRef.value = false
+      props.onAfterLeave?.()
     }
+    useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     provide(drawerBodyInjectionKey, bodyRef)
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
@@ -82,7 +198,13 @@ export default defineComponent({
           bottom: 'slide-in-from-bottom-transition'
         }[props.placement]
       }),
-      handleAfterLeave
+      handleAfterLeave,
+      bodyDirectives: bodyDirectivesRef,
+      handleMousedownResizeTrigger,
+      handleMouseenterResizeTrigger,
+      handleMouseleaveResizeTrigger,
+      isDragging: isDraggingRef,
+      isHoverOnResizeTrigger: isHoverOnResizeTriggerRef
     }
   },
   render () {
@@ -93,7 +215,7 @@ export default defineComponent({
             Nor the detached content will disappear without transition */
           <div role="none">
             <VFocusTrap
-              disabled={!this.trapFocus}
+              disabled={!this.showMask || !this.trapFocus}
               active={this.show}
               autoFocus={this.autoFocus}
               onEsc={this.onEsc}
@@ -103,6 +225,7 @@ export default defineComponent({
                   <Transition
                     name={this.transitionName}
                     appear={this.isMounted}
+                    onAfterEnter={this.onAfterEnter}
                     onAfterLeave={this.handleAfterLeave}
                   >
                     {{
@@ -117,11 +240,36 @@ export default defineComponent({
                               class: [
                                 `${mergedClsPrefix}-drawer`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
+                                /**
+                                 * When the mouse is pressed to resize the drawer,
+                                 * disable text selection
+                                 */
+                                this.isDragging &&
+                                  `${mergedClsPrefix}-drawer--unselectable`,
                                 this.nativeScrollbar &&
                                   `${mergedClsPrefix}-drawer--native-scrollbar`
                               ]
                             }),
                             [
+                              this.resizable ? (
+                                <div
+                                  class={[
+                                    `${mergedClsPrefix}-drawer__resize-trigger`,
+                                    (this.isDragging ||
+                                      this.isHoverOnResizeTrigger) &&
+                                      `${mergedClsPrefix}-drawer__resize-trigger--hover`
+                                  ]}
+                                  onMouseenter={
+                                    this.handleMouseenterResizeTrigger
+                                  }
+                                  onMouseleave={
+                                    this.handleMouseleaveResizeTrigger
+                                  }
+                                  onMousedown={
+                                    this.handleMousedownResizeTrigger
+                                  }
+                                />
+                              ) : null,
                               this.nativeScrollbar ? (
                                 <div
                                   class={`${mergedClsPrefix}-drawer-content-wrapper`}
@@ -145,7 +293,7 @@ export default defineComponent({
                               )
                             ]
                           ),
-                          [[vShow, this.show]]
+                          this.bodyDirectives
                         )
                     }}
                   </Transition>

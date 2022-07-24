@@ -3,12 +3,12 @@
     :is="configProvider"
     class="demo"
     namespace="naive-ui-doc"
+    preflight-style-disabled
     :theme-name="themeName"
     :theme="theme"
     :locale="locale"
     :date-locale="dateLocale"
     :hljs="hljs"
-    inline-theme-disabled
   >
     <n-theme-editor :style="themeEditorStyle">
       <n-loading-bar-provider>

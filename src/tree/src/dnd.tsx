@@ -36,7 +36,7 @@ export function renderDropMark ({
     style.transform =
       position === 'before' ? 'translateY(-4px)' : 'translateY(4px)'
   }
-  return <div style={style}></div>
+  return <div style={style} />
 }
 
 export function defaultAllowDrop ({

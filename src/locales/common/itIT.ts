@@ -44,6 +44,9 @@ const itIT: NLocale = {
     endDatePlaceholder: 'Data fine',
     startDatetimePlaceholder: 'Data e ora di inizio',
     endDatetimePlaceholder: 'Data e ora di fine',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Oggi'
@@ -106,7 +109,9 @@ const itIT: NLocale = {
     tipClockwise: 'Ruota a destra',
     tipZoomOut: 'Ingrandisci',
     tipZoomIn: 'Riduci',
-    tipClose: 'Chiudi (Esc)'
+    tipClose: 'Chiudi (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

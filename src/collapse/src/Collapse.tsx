@@ -22,6 +22,7 @@ import {
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   OnItemHeaderClick,
   OnUpdateExpandedNames,
@@ -30,7 +31,7 @@ import {
   OnItemHeaderClickImpl
 } from './interface'
 
-const collapseProps = {
+export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<
@@ -101,7 +102,8 @@ export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const uncontrolledExpandedNamesRef = ref<
     string | number | Array<string | number> | null
     >(props.defaultExpandedNames)
@@ -188,6 +190,7 @@ export default defineComponent({
       slots,
       toggleItem
     })
+    const rtlEnabledRef = useRtl('Collapse', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
@@ -216,6 +219,7 @@ export default defineComponent({
       ? useThemeClass('collapse', undefined, cssVarsRef, props)
       : undefined
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -227,7 +231,11 @@ export default defineComponent({
     this.onRender?.()
     return (
       <div
-        class={[`${this.mergedClsPrefix}-collapse`, this.themeClass]}
+        class={[
+          `${this.mergedClsPrefix}-collapse`,
+          this.rtlEnabled && `${this.mergedClsPrefix}-collapse--rtl`,
+          this.themeClass
+        ]}
         style={this.cssVars as CSSProperties}
       >
         {this.$slots}

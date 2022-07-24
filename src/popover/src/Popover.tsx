@@ -17,6 +17,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
+import { zindexable } from 'vdirs'
 import {
   call,
   keep,
@@ -31,10 +32,9 @@ import type {
 } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTheme } from '../styles'
+import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTrigger, InternalRenderBody } from './interface'
-import { zindexable } from 'vdirs'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -130,6 +130,7 @@ export const popoverBaseProps = {
   },
   x: Number,
   y: Number,
+  arrowPointToCenter: Boolean,
   disabled: Boolean,
   getDisabled: Function as PropType<() => boolean>,
   displayDirective: {
@@ -154,48 +155,51 @@ export const popoverBaseProps = {
     type: Boolean,
     default: true
   },
-  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
-  internalExtraClass: {
-    type: Array as PropType<string[]>,
-    default: () => []
-  },
+  zIndex: Number,
+  to: useAdjustedTo.propTo,
+  scrollable: Boolean,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // events
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  zIndex: Number,
-  to: useAdjustedTo.propTo,
+  // internal
+  internalDeactivateImmediately: Boolean,
   internalSyncTargetWithParent: Boolean,
   internalInheritedEventHandlers: {
     type: Array as PropType<TriggerEventHandlers[]>,
     default: () => []
   },
   internalTrapFocus: Boolean,
-  /** @deprecated */
+  internalExtraClass: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  },
+  // deprecated
   onShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
-  /** @deprecated */
   onHide: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
   >,
-  /** @deprecated */
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  /** @deprecated */
   minWidth: Number,
-  /** @deprecated */
   maxWidth: Number
 }
 
-const popoverProps = {
+export const popoverProps = {
   ...(useTheme.props as ThemeProps<PopoverTheme>),
   ...popoverBaseProps,
+  internalOnAfterLeave: Function as PropType<() => void>,
   internalRenderBody: Function as PropType<InternalRenderBody>
 }
 
@@ -393,7 +397,7 @@ export default defineComponent({
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (!props.internalTrapFocus) return
-      if (e.code === 'Escape') {
+      if (e.key === 'Escape') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)
@@ -567,7 +571,8 @@ export default defineComponent({
                 }),
                 {
                   default: () => this.$slots.default?.(),
-                  header: () => this.$slots.header?.()
+                  header: () => this.$slots.header?.(),
+                  footer: () => this.$slots.footer?.()
                 }
               )
             ]

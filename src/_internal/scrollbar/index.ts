@@ -1,5 +1,5 @@
 export {
   default as NScrollbar,
   XScrollbar as NxScrollbar
-} from './src/ScrollBar'
-export type { ScrollbarInst, ScrollbarProps } from './src/ScrollBar'
+} from './src/Scrollbar'
+export type { ScrollbarInst, ScrollbarProps } from './src/Scrollbar'

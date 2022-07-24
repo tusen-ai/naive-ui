@@ -14,6 +14,7 @@ item-header-click.vue
 customize-icon.vue
 default-expanded.vue
 header-extra.vue
+rtl-debug.vue
 ```
 
 ## API

@@ -148,4 +148,39 @@ describe('n-grid', () => {
     }
     expect(len1).toBe(3)
   })
+
+  it('should work with `item-responsive` prop', async () => {
+    const wrapper = mount(NGrid, {
+      slots: {
+        default: () => [
+          <NGi class="n-gi-1" span="0 400:2 600:3 800:4">
+            {{
+              default: () => <div>1</div>
+            }}
+          </NGi>,
+          <NGi class="n-gi-2">
+            {{
+              default: () => <div>2</div>
+            }}
+          </NGi>
+        ]
+      },
+      props: {
+        cols: 4,
+        responsive: 'self',
+        itemResponsive: true
+      }
+    })
+
+    expect(wrapper.find('.n-gi-1').exists()).toBeFalsy()
+
+    const instance = wrapper.getCurrentComponent().proxy
+    ;(instance as any).handleResize({ contentRect: { width: 500 } })
+
+    await new Promise((resolve) => requestAnimationFrame(resolve))
+
+    expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
+      'grid-column: span 2 / span 2;'
+    )
+  })
 })

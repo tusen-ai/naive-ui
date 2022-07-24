@@ -1,5 +1,5 @@
 <markdown>
-# About Setting Padding
+# About setting padding
 
 If you still want to do so, please make sure you know about their DOM structure.
 </markdown>

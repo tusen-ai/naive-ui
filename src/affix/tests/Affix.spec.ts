@@ -44,6 +44,7 @@ describe('n-affix', () => {
     expect(wrapper.find('.n-affix--fixed').exists()).toBe(false)
     await makeScroll(document.documentElement, 'scrollTop', 200)
     expect(wrapper.attributes('style')).toContain('top: 120px;')
+    wrapper.unmount()
   })
 
   it('should work with `position` prop', async () => {
@@ -61,5 +62,6 @@ describe('n-affix', () => {
     expect(wrapper.find('.n-affix--absolute-positioned').exists()).not.toBe(
       null
     )
+    wrapper.unmount()
   })
 })

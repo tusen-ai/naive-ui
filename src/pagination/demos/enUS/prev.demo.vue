@@ -1,5 +1,5 @@
 <markdown>
-# Customize the Previous and Next Button
+# Customize the previous and next button
 </markdown>
 
 <template>

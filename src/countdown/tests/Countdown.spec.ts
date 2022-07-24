@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { sleep } from 'seemly'
 import { CountdownProps, NCountdown } from '../index'
 
 describe('n-countdown', () => {
@@ -45,5 +46,17 @@ describe('n-countdown', () => {
       }
     })
     expect(wrapper.text()).not.toBe('1:1:1:1')
+  })
+  it('should work with `on-finish` prop', async () => {
+    const onFinish = jest.fn()
+    const wrapper = mount(NCountdown, {
+      props: {
+        duration: 1,
+        onFinish
+      }
+    })
+    await sleep(100)
+    expect(onFinish).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

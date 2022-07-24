@@ -15,6 +15,10 @@ import {
   InputHTMLAttributes
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
+import type {
+  RenderLabel,
+  RenderLabelImpl
+} from '../../select-menu/src/interface'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
@@ -22,16 +26,18 @@ import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
-import { createKey, getTitleAttribute, render } from '../../../_utils'
+import {
+  createKey,
+  getTitleAttribute,
+  render,
+  useOnResize,
+  Wrapper
+} from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
-import type {
-  RenderLabel,
-  RenderLabelImpl
-} from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
   isCompositing: boolean
@@ -67,12 +73,17 @@ export default defineComponent({
       type: Array as PropType<SelectBaseOption[] | null>,
       default: null
     },
+    labelField: { type: String, default: 'label' },
+    valueField: {
+      type: String,
+      default: 'value'
+    },
     multiple: Boolean,
     filterable: Boolean,
     clearable: Boolean,
     disabled: Boolean,
     size: {
-      type: String as PropType<'small' | 'medium' | 'large'>,
+      type: String as PropType<'tiny' | 'small' | 'medium' | 'large'>,
       default: 'medium'
     },
     loading: Boolean,
@@ -84,7 +95,6 @@ export default defineComponent({
     inputProps: Object as PropType<InputHTMLAttributes>,
     focused: Boolean,
     renderTag: Function as PropType<RenderTag>,
-    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
@@ -97,7 +107,8 @@ export default defineComponent({
     onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
     renderLabel: Function as PropType<RenderLabel>,
     status: String as PropType<FormValidationStatus>,
-    inlineThemeDisabled: Boolean
+    inlineThemeDisabled: Boolean,
+    onResize: Function as PropType<() => void>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -136,13 +147,17 @@ export default defineComponent({
           })
           : props.renderLabel
             ? props.renderLabel(props.selectedOption as never, true)
-            : render(props.selectedOption.label, props.selectedOption, true)
+            : render(
+              props.selectedOption[props.labelField],
+              props.selectedOption,
+              true
+            )
         : props.placeholder
     })
     const labelRef = computed(() => {
       const option = props.selectedOption
       if (!option) return undefined
-      return option.label
+      return option[props.labelField]
     })
     const selectedRef = computed(() => {
       if (props.multiple) {
@@ -231,7 +246,7 @@ export default defineComponent({
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Backspace' && !isCompositingRef.value) {
+      if (e.key === 'Backspace' && !isCompositingRef.value) {
         if (!props.pattern.length) {
           const { selectedOptions } = props
           if (selectedOptions?.length) {
@@ -351,6 +366,7 @@ export default defineComponent({
           props.disabled || patternInputFocusedRef.value ? -1 : 0
       })
     })
+    useOnResize(selfRef, props.onResize)
     const { inlineThemeDisabled } = props
     const cssVarsRef = computed(() => {
       const { size } = props
@@ -407,6 +423,7 @@ export default defineComponent({
           [createKey('fontSize', size)]: fontSize
         }
       } = themeRef.value
+
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border': border,
@@ -537,20 +554,27 @@ export default defineComponent({
     const maxTagCountNumeric = typeof maxTagCount === 'number'
     const useMaxTagCount = maxTagCountResponsive || maxTagCountNumeric
     const suffix = (
-      <Suffix
-        clsPrefix={clsPrefix}
-        loading={this.loading}
-        showArrow={this.showArrow}
-        showClear={this.mergedClearable && this.selected}
-        onClear={this.handleClear}
-      >
+      <Wrapper>
         {{
-          default: () => this.$slots.arrow?.()
+          default: () => (
+            <Suffix
+              clsPrefix={clsPrefix}
+              loading={this.loading}
+              showArrow={this.showArrow}
+              showClear={this.mergedClearable && this.selected}
+              onClear={this.handleClear}
+            >
+              {{
+                default: () => this.$slots.arrow?.()
+              }}
+            </Suffix>
+          )
         }}
-      </Suffix>
+      </Wrapper>
     )
     let body: JSX.Element
     if (multiple) {
+      const { labelField } = this
       const createTag = (option: SelectBaseOption): JSX.Element => (
         <div
           class={`${clsPrefix}-base-selection-tag-wrapper`}
@@ -566,14 +590,15 @@ export default defineComponent({
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              internalStopClickPropagation
               onClose={() => this.handleDeleteOption(option)}
+              internalCloseFocusable={false}
+              internalStopClickPropagation
             >
               {{
                 default: () =>
                   renderLabel
                     ? renderLabel(option, true)
-                    : render(option.label, option, true)
+                    : render(option[labelField], option, true)
               }}
             </NTag>
           )}
@@ -724,62 +749,49 @@ export default defineComponent({
         <div
           class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
         >
-          {this.placeholder}
+          <div class={`${clsPrefix}-base-selection-placeholder__inner`}>
+            {this.placeholder}
+          </div>
         </div>
       ) : null
-      if (filterable) {
-        const popoverTrigger = (
-          <div
-            ref="patternInputWrapperRef"
-            class={`${clsPrefix}-base-selection-tags`}
-          >
-            {tags}
-            {maxTagCountResponsive ? null : input}
-            {suffix}
-          </div>
-        )
-        body = (
-          <>
-            {useMaxTagCount ? (
-              <NPopover {...popoverProps}>
-                {{
-                  trigger: () => popoverTrigger,
-                  default: renderPopover
-                }}
-              </NPopover>
-            ) : (
-              popoverTrigger
-            )}
-            {placeholder}
-          </>
-        )
-      } else {
-        const popoverTrigger = (
-          <div
-            ref="multipleElRef"
-            class={`${clsPrefix}-base-selection-tags`}
-            tabindex={disabled ? undefined : 0}
-          >
-            {tags}
-            {suffix}
-          </div>
-        )
-        body = (
-          <>
-            {useMaxTagCount ? (
-              <NPopover {...popoverProps}>
-                {{
-                  trigger: () => popoverTrigger,
-                  default: renderPopover
-                }}
-              </NPopover>
-            ) : (
-              popoverTrigger
-            )}
-            {placeholder}
-          </>
-        )
-      }
+      const popoverTrigger = filterable ? (
+        <div
+          ref="patternInputWrapperRef"
+          class={`${clsPrefix}-base-selection-tags`}
+        >
+          {tags}
+          {maxTagCountResponsive ? null : input}
+          {suffix}
+        </div>
+      ) : (
+        <div
+          ref="multipleElRef"
+          class={`${clsPrefix}-base-selection-tags`}
+          tabindex={disabled ? undefined : 0}
+        >
+          {tags}
+          {suffix}
+        </div>
+      )
+      body = (
+        <>
+          {useMaxTagCount ? (
+            <NPopover
+              {...popoverProps}
+              scrollable
+              style="max-height: calc(var(--v-target-height) * 6.6);"
+            >
+              {{
+                trigger: () => popoverTrigger,
+                default: renderPopover
+              }}
+            </NPopover>
+          ) : (
+            popoverTrigger
+          )}
+          {placeholder}
+        </>
+      )
     } else {
       if (filterable) {
         const hasInput = this.pattern || this.isCompositing
@@ -865,7 +877,9 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
-                {this.placeholder}
+                <div class={`${clsPrefix}-base-selection-placeholder__inner`}>
+                  {this.placeholder}
+                </div>
               </div>
             )}
             {suffix}
@@ -896,7 +910,6 @@ export default defineComponent({
         onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}
-        onKeyup={this.onKeyup}
         onKeydown={this.onKeydown}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}

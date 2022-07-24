@@ -46,7 +46,7 @@ export interface LogInst {
   ((options: { slient?: boolean, top: number }) => void)
 }
 
-const logProps = {
+export const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),
   loading: Boolean,
   trim: Boolean,

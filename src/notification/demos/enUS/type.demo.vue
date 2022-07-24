@@ -1,6 +1,6 @@
 <markdown>
 # Type
-
+Won't disappear on hover
 </markdown>
 
 <template>
@@ -31,7 +31,9 @@ export default defineComponent({
       notify (type: NotificationType) {
         notification[type]({
           content: 'What to say?',
-          meta: "I don't know"
+          meta: "I don't know",
+          duration: 2500,
+          keepAliveOnHover: true
         })
       }
     }

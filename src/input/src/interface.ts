@@ -3,10 +3,7 @@ import { createInjectionKey } from '../../_utils'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
-// null is for clearable
-export type OnUpdateValue = <T extends string & [string, string]>(
-  value: T
-) => void
+export type OnUpdateValue = (value: string & [string, string]) => void
 export type OnUpdateValueImpl = (value: string | [string, string]) => void
 
 export interface InputWrappedRef {
@@ -19,6 +16,7 @@ export interface InputWrappedRef {
   select: () => void
   activate: () => void
   deactivate: () => void
+  scrollTo: (options: ScrollToOptions) => void
 }
 
 export type InputInst = UnwrapRef<InputWrappedRef>

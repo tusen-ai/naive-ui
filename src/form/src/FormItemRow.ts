@@ -8,7 +8,7 @@ import NFormItemCol, {
 } from './FormItemCol'
 import { FormItemColRef } from './interface'
 
-const formItemRowProps = {
+export const formItemRowProps = {
   ...rowProps,
   ...formItemColProps
 }
@@ -45,7 +45,7 @@ export default defineComponent({
         return h(
           NFormItemCol,
           {
-            ref: 'formItemColRef',
+            ref: 'formItemColInstRef',
             ...colProps,
             span: 24
           },

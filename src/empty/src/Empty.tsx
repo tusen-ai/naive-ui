@@ -1,16 +1,16 @@
 import { h, defineComponent, computed, PropType, inject, VNodeChild } from 'vue'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
+import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const emptyProps = {
+export const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
   description: String,
   showDescription: {

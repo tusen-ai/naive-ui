@@ -1,5 +1,5 @@
 <markdown>
-# Prefix & Suffix
+# Prefix & suffix
 
 You may want to add something before and after.
 </markdown>

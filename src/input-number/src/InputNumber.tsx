@@ -6,11 +6,13 @@ import {
   watch,
   computed,
   PropType,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import { on } from 'evtd'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'
@@ -22,19 +24,23 @@ import {
   MaybeArray,
   ExtractPublicPropTypes,
   warnOnce,
-  call
+  call,
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
+import { useRtl } from '../../_mixins/use-rtl'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
 
-const inputNumberProps = {
+export const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  autofocus: Boolean,
   loading: {
     type: Boolean,
     default: undefined
@@ -65,6 +71,10 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  buttonPlacement: {
+    type: String as PropType<'right' | 'both'>,
+    default: 'right'
+  },
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -78,6 +88,10 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  parse: Function as PropType<(input: string) => number | null>,
+  format: Function as PropType<(value: number | null) => string>,
+  precision: Number,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -103,7 +117,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       '-input-number',
@@ -127,11 +142,15 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
+    const getPrecision = (value: string | number): number => {
+      const fraction = String(value).split('.')[1]
+      return fraction ? fraction.length : 0
+    }
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
-        (item) => {
-          const fraction = String(item).split('.')[1]
-          return fraction ? fraction.length : 0
+        (value): number => {
+          if (value === undefined) return 0
+          return getPrecision(value)
         }
       )
       return Math.max(...precisions)
@@ -177,23 +196,41 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    const deriveValueFromDisplayedValue = (
-      offset = 0,
-      doUpdateIfValid = true,
-      isInputing = false
-    ): null | number | false => {
+    const deriveValueFromDisplayedValue = ({
+      offset,
+      doUpdateIfValid,
+      fixPrecision,
+      isInputing
+    }: {
+      offset: number
+      doUpdateIfValid: boolean
+      fixPrecision: boolean
+      isInputing: boolean
+    }): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       if (isInputing && isWipValue(displayedValue)) {
         return false
       }
-      const parsedValue = parse(displayedValue)
+      const parsedValue = (props.parse || parse)(displayedValue)
       if (parsedValue === null) {
         if (doUpdateIfValid) doUpdateValue(null)
         return null
       }
       if (validator(parsedValue)) {
-        const precision = getMaxPrecision(parsedValue)
-        let nextValue = parseFloat((parsedValue + offset).toFixed(precision))
+        const currentPrecision = getPrecision(parsedValue)
+        const { precision } = props
+        if (
+          precision !== undefined &&
+          precision < currentPrecision &&
+          !fixPrecision
+        ) {
+          return false
+        }
+        let nextValue = parseFloat(
+          (parsedValue + offset).toFixed(
+            precision ?? getMaxPrecision(parsedValue)
+          )
+        )
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
@@ -217,16 +254,35 @@ export default defineComponent({
     const deriveDisplayedValueFromValue = (): void => {
       const { value: mergedValue } = mergedValueRef
       if (validator(mergedValue)) {
-        displayedValueRef.value = format(mergedValue)
+        const { format: formatProp, precision } = props
+        if (formatProp) {
+          displayedValueRef.value = formatProp(mergedValue)
+        } else {
+          if (
+            mergedValue === null ||
+            precision === undefined ||
+            // precision overflow
+            getPrecision(mergedValue) > precision
+          ) {
+            displayedValueRef.value = format(mergedValue, undefined)
+          } else {
+            displayedValueRef.value = format(mergedValue, precision)
+          }
+        }
       } else {
         // null can pass the validator check
         // so mergedValue is a number
-        displayedValueRef.value = String(mergedValue as number)
+        displayedValueRef.value = String(mergedValue)
       }
     }
     deriveDisplayedValueFromValue()
     const displayedValueInvalidRef = useMemo(() => {
-      const derivedValue = deriveValueFromDisplayedValue(0, false)
+      const derivedValue = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedValue === false
     })
     const minusableRef = useMemo(() => {
@@ -235,7 +291,12 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(-mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: -mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedNextValue !== false
     })
     const addableRef = useMemo(() => {
@@ -244,7 +305,12 @@ export default defineComponent({
         return false
       }
       const { value: mergedStep } = mergedStepRef
-      const derivedNextValue = deriveValueFromDisplayedValue(+mergedStep, false)
+      const derivedNextValue = deriveValueFromDisplayedValue({
+        offset: +mergedStep,
+        doUpdateIfValid: false,
+        isInputing: false,
+        fixPrecision: false
+      })
       return derivedNextValue !== false
     })
     function doFocus (e: FocusEvent): void {
@@ -259,7 +325,12 @@ export default defineComponent({
         // which means not activated
         return
       }
-      const value = deriveValueFromDisplayedValue()
+      const value = deriveValueFromDisplayedValue({
+        offset: 0,
+        doUpdateIfValid: true,
+        isInputing: false,
+        fixPrecision: true
+      })
       // If valid, update event has been emitted
       // make sure e.target.value is correct in blur callback
       if (value !== false) {
@@ -300,7 +371,12 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
       }
     }
     function doMinus (): void {
@@ -316,7 +392,12 @@ export default defineComponent({
         }
       } else {
         const { value: mergedStep } = mergedStepRef
-        deriveValueFromDisplayedValue(-mergedStep)
+        deriveValueFromDisplayedValue({
+          offset: -mergedStep,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
       }
     }
     const handleFocus = doFocus
@@ -399,27 +480,44 @@ export default defineComponent({
       doMinus()
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+      if (e.key === 'Enter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
           // which means not activated
           return
         }
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
-      } else if (e.code === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp') {
+        if (!addableRef.value) return
         if (props.keyboard.ArrowUp === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           doAdd()
         }
-      } else if (e.code === 'ArrowDown') {
+      } else if (e.key === 'ArrowDown') {
+        if (!minusableRef.value) return
         if (props.keyboard.ArrowDown === false) return
         e.preventDefault()
-        const value = deriveValueFromDisplayedValue()
+        const value = deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: false,
+          fixPrecision: true
+        })
         if (value !== false) {
           doMinus()
         }
@@ -427,8 +525,18 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
-      if (props.updateValueOnInput) {
-        deriveValueFromDisplayedValue(0, true, true)
+      if (
+        props.updateValueOnInput &&
+        !props.format &&
+        !props.parse &&
+        props.precision === undefined
+      ) {
+        deriveValueFromDisplayedValue({
+          offset: 0,
+          doUpdateIfValid: true,
+          isInputing: true,
+          fixPrecision: false
+        })
       }
     }
     watch(mergedValueRef, () => {
@@ -438,8 +546,14 @@ export default defineComponent({
       focus: () => inputInstRef.value?.focus(),
       blur: () => inputInstRef.value?.blur()
     }
+    const rtlEnabledRef = useRtl(
+      'InputNumber',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     return {
       ...exposedMethods,
+      rtlEnabled: rtlEnabledRef,
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,
@@ -485,11 +599,65 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
+    const renderMinusButton = (): VNode => {
+      return (
+        <NxButton
+          text
+          disabled={!this.minusable || this.mergedDisabled || this.readonly}
+          focusable={false}
+          builtinThemeOverrides={this.buttonThemeOverrides}
+          onClick={this.handleMinusClick}
+          onMousedown={this.handleMinusMousedown}
+          ref="minusButtonInstRef"
+        >
+          {{
+            icon: () =>
+              resolveSlot($slots['minus-icon'], () => [
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: () => <RemoveIcon />
+                  }}
+                </NBaseIcon>
+              ])
+          }}
+        </NxButton>
+      )
+    }
+    const renderAddButton = (): VNode => {
+      return (
+        <NxButton
+          text
+          disabled={!this.addable || this.mergedDisabled || this.readonly}
+          focusable={false}
+          builtinThemeOverrides={this.buttonThemeOverrides}
+          onClick={this.handleAddClick}
+          onMousedown={this.handleAddMousedown}
+          ref="addButtonInstRef"
+        >
+          {{
+            icon: () =>
+              resolveSlot($slots['add-icon'], () => [
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: () => <AddIcon />
+                  }}
+                </NBaseIcon>
+              ])
+          }}
+        </NxButton>
+      )
+    }
     return (
-      <div class={`${mergedClsPrefix}-input-number`}>
+      <div
+        class={[
+          `${mergedClsPrefix}-input-number`,
+          this.rtlEnabled && `${mergedClsPrefix}-input-number--rtl`
+        ]}
+      >
         <NInput
           ref="inputInstRef"
+          autofocus={this.autofocus}
           status={this.mergedStatus}
           bordered={this.mergedBordered}
           loading={this.loading}
@@ -514,62 +682,45 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            prefix: () => this.$slots.prefix?.(),
+            prefix: () =>
+              this.showButton && this.buttonPlacement === 'both'
+                ? [
+                    renderMinusButton(),
+                    resolveWrappedSlot($slots.prefix, (children) => {
+                      if (children) {
+                        return (
+                          <span
+                            class={`${mergedClsPrefix}-input-number-prefix`}
+                          >
+                            {children}
+                          </span>
+                        )
+                      }
+                      return null
+                    })
+                  ]
+                : $slots.prefix?.(),
             suffix: () =>
               this.showButton
                 ? [
-                    this.$slots.suffix && (
-                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                        {{ default: this.$slots.suffix }}
-                      </span>
-                    ),
-                    <NxButton
-                      text
-                      disabled={
-                        !this.minusable || this.mergedDisabled || this.readonly
-                      }
-                      focusable={false}
-                      builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleMinusClick}
-                      onMousedown={this.handleMinusMousedown}
-                      ref="minusButtonInstRef"
-                    >
-                      {{
-                        default: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            aria-disabled={true}
+                    resolveWrappedSlot($slots.suffix, (children) => {
+                      if (children) {
+                        return (
+                          <span
+                            class={`${mergedClsPrefix}-input-number-suffix`}
                           >
-                            {{
-                              default: () => <RemoveIcon />
-                            }}
-                          </NBaseIcon>
+                            {children}
+                          </span>
                         )
-                      }}
-                    </NxButton>,
-                    <NxButton
-                      text
-                      disabled={
-                        !this.addable || this.mergedDisabled || this.readonly
                       }
-                      focusable={false}
-                      builtinThemeOverrides={this.buttonThemeOverrides}
-                      onClick={this.handleAddClick}
-                      onMousedown={this.handleAddMousedown}
-                      ref="addButtonInstRef"
-                    >
-                      {{
-                        default: () => (
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
-                            {{
-                              default: () => <AddIcon />
-                            }}
-                          </NBaseIcon>
-                        )
-                      }}
-                    </NxButton>
+                      return null
+                    }),
+                    this.buttonPlacement === 'right'
+                      ? renderMinusButton()
+                      : null,
+                    renderAddButton()
                   ]
-                : this.$slots.suffix?.()
+                : $slots.suffix?.()
           }}
         </NInput>
       </div>

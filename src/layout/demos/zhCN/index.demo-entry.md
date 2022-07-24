@@ -22,6 +22,7 @@ collapse-right.vue
 inverted.vue
 show-sider-content.vue
 scroll-to.vue
+keep-alive-debug.vue
 ```
 
 ## API

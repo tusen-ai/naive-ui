@@ -1,5 +1,5 @@
 import { cB, c, cM, cE } from '../../../../_utils/cssr'
-import fadeInTransition from '../../../../_styles/transitions/fade-in.cssr'
+import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --n-scrollbar-bezier
@@ -34,11 +34,14 @@ export default cB('scrollbar', `
           min-width: 100%;
         `)
       ])
-    ]),
+    ])
+  ]),
+  c('>, +', [
     cB('scrollbar-rail', `
       position: absolute;
       pointer-events: none;
       user-select: none;
+      -webkit-user-select: none;
     `, [
       cM('horizontal', `
         left: 2px;

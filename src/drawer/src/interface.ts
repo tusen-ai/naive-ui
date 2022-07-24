@@ -12,6 +12,8 @@ export interface DrawerInjection {
   mergedThemeRef: Ref<MergedTheme<DrawerTheme>>
   mergedClsPrefixRef: Ref<string>
   doUpdateShow: (show: boolean) => void
+  doUpdateWidth: (value: number) => void
+  doUpdateHeight: (value: number) => void
 }
 export const drawerInjectionKey =
   createInjectionKey<DrawerInjection>('n-drawer')

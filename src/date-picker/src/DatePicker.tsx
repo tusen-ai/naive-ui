@@ -12,15 +12,18 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
+import { format, getTime, isValid } from 'date-fns/esm'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import type { DatePickerTheme } from '../styles/light'
+import type { TimePickerProps } from '../../time-picker/src/TimePicker'
+import type { FormValidationStatus } from '../../form/src/interface'
+import { DateIcon, ToIcon } from '../../_internal/icons'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
@@ -32,9 +35,17 @@ import {
   useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { DateIcon, ToIcon } from '../../_internal/icons'
-import { warn, call, useAdjustedTo, createKey, warnOnce } from '../../_utils'
+import {
+  warn,
+  call,
+  useAdjustedTo,
+  createKey,
+  warnOnce,
+  resolveSlot,
+  markEventEffectPerformed
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 import {
@@ -55,7 +66,9 @@ import type {
   FormattedValue,
   OnUpdateFormattedValue,
   OnUpdateFormattedValueImpl,
-  DatePickerInst
+  DatePickerInst,
+  OnConfirmImpl,
+  OnConfirm
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -63,9 +76,10 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
+import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 
-const datePickerProps = {
+export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
   bordered: {
@@ -100,7 +114,7 @@ const datePickerProps = {
   format: String,
   dateFormat: String,
   timeFormat: String,
-  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'>>,
+  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
@@ -108,10 +122,20 @@ const datePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  panel: Boolean,
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
   closeOnSelect: Boolean,
+  status: String as PropType<FormValidationStatus>,
+  timePickerProps: [Object, Array] as PropType<
+  TimePickerProps | [TimePickerProps, TimePickerProps]
+  >,
+  onClear: Function as PropType<() => void>,
+  onConfirm: Function as PropType<OnConfirm>,
+  defaultCalendarStartTime: Number,
+  defaultCalendarEndTime: Number,
+  bindCalendarMonths: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -182,10 +206,13 @@ export default defineComponent({
         case 'datetimerange':
           return localeRef.value.dateTimeFormat
         case 'year':
+        case 'yearrange':
           return localeRef.value.yearTypeFormat
         case 'month':
+        case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
+        case 'quarterrange':
           return localeRef.value.quarterFormat
       }
     })
@@ -239,6 +266,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+
     // We don't change value unless blur or confirm is called
     const pendingValueRef: Ref<Value | null> = ref(null)
     watchEffect(() => {
@@ -261,7 +289,13 @@ export default defineComponent({
       )
     })
     const isRangeRef = computed(() => {
-      return ['daterange', 'datetimerange'].includes(props.type)
+      return [
+        'daterange',
+        'datetimerange',
+        'monthrange',
+        'quarterrange',
+        'yearrange'
+      ].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
@@ -291,6 +325,8 @@ export default defineComponent({
           return localeRef.value.startDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.startDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.startMonthPlaceholder
         }
         return ''
       } else {
@@ -303,6 +339,8 @@ export default defineComponent({
           return localeRef.value.endDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.endDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.endMonthPlaceholder
         }
         return ''
       } else {
@@ -310,29 +348,44 @@ export default defineComponent({
       }
     })
     const mergedActionsRef = computed(() => {
-      const { actions, type } = props
+      const { actions, type, clearable } = props
+      if (actions === null) return []
       if (actions !== undefined) return actions
+      const result = clearable ? ['clear'] : []
       switch (type) {
         case 'date': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'datetime': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'daterange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'datetimerange': {
-          return ['clear', 'confirm']
+          result.push('confirm')
+          return result
         }
         case 'month': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
         }
         case 'year': {
-          return ['clear', 'now']
+          result.push('now')
+          return result
         }
         case 'quarter': {
-          return ['clear', 'now', 'confirm']
+          result.push('now', 'confirm')
+          return result
+        }
+        case 'monthrange':
+        case 'yearrange':
+        case 'quarterrange': {
+          result.push('confirm')
+          return result
         }
         default: {
           warn(
@@ -386,7 +439,12 @@ export default defineComponent({
         )
       }
     }
-    function doUpdateValue (value: Value | null): void {
+    function doUpdateValue (
+      value: Value | null,
+      options: {
+        doConfirm: boolean
+      }
+    ): void {
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
@@ -394,6 +452,9 @@ export default defineComponent({
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       const formattedValue = getFormattedValue(value)
+      if (options.doConfirm) {
+        doConfirm(value, formattedValue)
+      }
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
@@ -407,6 +468,17 @@ export default defineComponent({
 
       nTriggerFormChange()
       nTriggerFormInput()
+    }
+    function doClear (): void {
+      const { onClear } = props
+      onClear?.()
+    }
+    function doConfirm (
+      value: Value | null,
+      formattedValue: FormattedValue | null
+    ): void {
+      const { onConfirm } = props
+      if (onConfirm) (onConfirm as OnConfirmImpl)(value, formattedValue)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -426,11 +498,14 @@ export default defineComponent({
       if (onUpdateShow) call(onUpdateShow, show)
       uncontrolledShowRef.value = show
     }
-    function handleKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
-        closeCalendar({
-          returnFocus: true
-        })
+    function handleKeydown (e: KeyboardEvent): void {
+      if (e.key === 'Escape') {
+        if (mergedShowRef.value) {
+          markEventEffectPerformed(e)
+          closeCalendar({
+            returnFocus: true
+          })
+        }
       }
       // We need to handle the conflict with normal date value input
       // const { value: mergedValue } = mergedValueRef
@@ -439,9 +514,21 @@ export default defineComponent({
       //   doUpdateValue(nextValue)
       // }
     }
+    function handleInputKeydown (e: KeyboardEvent): void {
+      if (e.key === 'Escape' && mergedShowRef.value) {
+        markEventEffectPerformed(e)
+        // closeCalendar will be called in handleDeactivated
+      }
+    }
     function handleClear (): void {
       doUpdateShow(false)
       inputInstRef.value?.deactivate()
+      doClear()
+    }
+    function handlePanelClear (): void {
+      // close will be called inside panel
+      inputInstRef.value?.deactivate()
+      doClear()
     }
     function handlePanelTabOut (): void {
       closeCalendar({
@@ -471,13 +558,19 @@ export default defineComponent({
       doUpdate: boolean
     ): void {
       if (doUpdate) {
-        doUpdateValue(value)
+        doUpdateValue(value, { doConfirm: false })
       } else {
         doUpdatePendingValue(value)
       }
     }
     function handlePanelConfirm (): void {
-      doUpdateValue(pendingValueRef.value)
+      const pendingValue = pendingValueRef.value
+      doUpdateValue(
+        Array.isArray(pendingValue)
+          ? [pendingValue[0], pendingValue[1]]
+          : pendingValue,
+        { doConfirm: true }
+      )
     }
     // --- Refresh
     function deriveInputState (): void {
@@ -547,7 +640,7 @@ export default defineComponent({
     function handleSingleUpdateValue (v: string): void {
       // TODO, fix conflict with clear
       if (v === '') {
-        doUpdateValue(null)
+        doUpdateValue(null, { doConfirm: false })
         return
       }
       const newSelectedDateTime = strictParse(
@@ -557,7 +650,7 @@ export default defineComponent({
         dateFnsOptionsRef.value
       )
       if (isValid(newSelectedDateTime)) {
-        doUpdateValue(getTime(newSelectedDateTime))
+        doUpdateValue(getTime(newSelectedDateTime), { doConfirm: false })
         deriveInputState()
       } else {
         singleInputValueRef.value = v
@@ -566,7 +659,7 @@ export default defineComponent({
     function handleRangeUpdateValue (v: [string, string]): void {
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
-        doUpdateValue(null)
+        doUpdateValue(null, { doConfirm: false })
         return
       }
       const [startTime, endTime] = v
@@ -583,7 +676,9 @@ export default defineComponent({
         dateFnsOptionsRef.value
       )
       if (isValid(newStartTime) && isValid(newEndTime)) {
-        doUpdateValue([getTime(newStartTime), getTime(newEndTime)])
+        doUpdateValue([getTime(newStartTime), getTime(newEndTime)], {
+          doConfirm: false
+        })
         deriveInputState()
       } else {
         ;[rangeStartInputValueRef.value, rangeEndInputValueRef.value] = v
@@ -658,6 +753,7 @@ export default defineComponent({
       firstDayOfWeekRef: toRef(props, 'firstDayOfWeek'),
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
+      timePickerPropsRef: toRef(props, 'timePickerProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
       ...uniVaidation,
@@ -835,9 +931,11 @@ export default defineComponent({
       isValueInvalid: uniVaidation.isValueInvalidRef,
       isStartValueInvalid: dualValidation.isStartValueInvalidRef,
       isEndValueInvalid: dualValidation.isEndValueInvalidRef,
+      handleInputKeydown,
       handleClickOutside,
-      handleKeyDown,
+      handleKeydown,
       handleClear,
+      handlePanelClear,
       handleTriggerClick,
       handleInputActivate,
       handleInputDeactivate,
@@ -860,7 +958,56 @@ export default defineComponent({
     }
   },
   render () {
-    const { clearable, triggerOnRender } = this
+    const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
+    const commonPanelProps = {
+      onUpdateValue: this.handlePanelUpdateValue,
+      onTabOut: this.handlePanelTabOut,
+      onClose: this.handlePanelClose,
+      onClear: this.handlePanelClear,
+      onKeydown: this.handleKeydown,
+      onConfirm: this.handlePanelConfirm,
+      ref: 'panelInstRef',
+      value: this.pendingValue,
+      active: this.mergedShow,
+      actions: this.actions,
+      shortcuts: this.shortcuts,
+      style: this.cssVars as CSSProperties,
+      defaultTime: this.defaultTime,
+      themeClass: this.themeClass,
+      panel: this.panel,
+      onRender: this.onRender
+    }
+    const renderPanel = (): VNode => {
+      const { type } = this
+      return type === 'datetime' ? (
+        <DatetimePanel {...commonPanelProps} />
+      ) : type === 'daterange' ? (
+        <DaterangePanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+          defaultCalendarEndTime={this.defaultCalendarEndTime}
+          bindCalendarMonths={this.bindCalendarMonths}
+        />
+      ) : type === 'datetimerange' ? (
+        <DatetimerangePanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+          defaultCalendarEndTime={this.defaultCalendarEndTime}
+          bindCalendarMonths={this.bindCalendarMonths}
+        />
+      ) : type === 'month' || type === 'year' || type === 'quarter' ? (
+        <MonthPanel {...commonPanelProps} type={type} key={type} />
+      ) : type === 'monthrange' ||
+        type === 'yearrange' ||
+        type === 'quarterrange' ? (
+        <MonthRangePanel {...commonPanelProps} type={type} />
+          ) : (
+        <DatePanel {...commonPanelProps} />
+          )
+    }
+    if (this.panel) {
+      return renderPanel()
+    }
     triggerOnRender?.()
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
@@ -871,28 +1018,12 @@ export default defineComponent({
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
+      onKeydown: this.handleInputKeydown,
       onActivate: this.handleInputActivate,
       onDeactivate: this.handleInputDeactivate,
       onFocus: this.handleInputFocus,
       onBlur: this.handleInputBlur
     }
-    const commonPanelProps = {
-      onUpdateValue: this.handlePanelUpdateValue,
-      onTabOut: this.handlePanelTabOut,
-      onClose: this.handlePanelClose,
-      onKeydown: this.handleKeyDown,
-      onConfirm: this.handlePanelConfirm,
-      ref: 'panelInstRef',
-      value: this.pendingValue,
-      active: this.mergedShow,
-      actions: this.actions,
-      shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties,
-      defaultTime: this.defaultTime,
-      themeClass: this.themeClass,
-      onRender: this.onRender
-    }
-    const { mergedClsPrefix } = this
     return (
       <div
         ref="triggerElRef"
@@ -903,7 +1034,7 @@ export default defineComponent({
           this.triggerThemeClass
         ]}
         style={this.triggerCssVars as CSSProperties}
-        onKeydown={this.handleKeyDown}
+        onKeydown={this.handleKeydown}
       >
         <VBinder>
           {{
@@ -934,24 +1065,30 @@ export default defineComponent({
                       >
                         {{
                           separator: () =>
-                            this.separator === undefined ? (
-                              <NBaseIcon
-                                clsPrefix={mergedClsPrefix}
-                                class={`${mergedClsPrefix}-date-picker-icon`}
-                              >
-                                {{ default: () => <ToIcon /> }}
-                              </NBaseIcon>
-                            ) : (
-                              this.separator
-                            ),
-                          [clearable ? 'clear' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <DateIcon /> }}
-                            </NBaseIcon>
-                          )
+                            this.separator === undefined
+                              ? resolveSlot($slots.separator, () => [
+                                  <NBaseIcon
+                                    clsPrefix={mergedClsPrefix}
+                                    class={`${mergedClsPrefix}-date-picker-icon`}
+                                  >
+                                    {{
+                                      default: () => <ToIcon />
+                                    }}
+                                  </NBaseIcon>
+                              ])
+                              : this.separator,
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () =>
+                              resolveSlot($slots['date-icon'], () => [
+                                <NBaseIcon
+                                  clsPrefix={mergedClsPrefix}
+                                  class={`${mergedClsPrefix}-date-picker-icon`}
+                                >
+                                  {{
+                                    default: () => <DateIcon />
+                                  }}
+                                </NBaseIcon>
+                              ])
                         }}
                       </NInput>
                     ) : (
@@ -973,14 +1110,20 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          [clearable ? 'clear' : 'suffix']: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <DateIcon /> }}
-                            </NBaseIcon>
-                          )
+                          [clearable ? 'clear-icon-placeholder' : 'suffix']:
+                            () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{
+                                  default: () =>
+                                    resolveSlot($slots['date-icon'], () => [
+                                      <DateIcon />
+                                    ])
+                                }}
+                              </NBaseIcon>
+                            )
                         }}
                       </NInput>
                     )
@@ -1000,39 +1143,17 @@ export default defineComponent({
                       appear={this.isMounted}
                     >
                       {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(
-                              this.type === 'datetime' ? (
-                                  <DatetimePanel {...commonPanelProps} />
-                              ) : this.type === 'daterange' ? (
-                                  <DaterangePanel {...commonPanelProps} />
-                              ) : this.type === 'datetimerange' ? (
-                                  <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="month"
-                                    key="month"
-                                  />
-                              ) : this.type === 'year' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="year"
-                                    key="year"
-                                  />
-                              ) : this.type === 'quarter' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="quarter"
-                                    key="quarter"
-                                  />
-                              ) : (
-                                  <DatePanel {...commonPanelProps} />
-                              ),
-                              [[clickoutside, this.handleClickOutside]]
-                            )
-                            : null
+                        default: () => {
+                          if (!this.mergedShow) return null
+                          return withDirectives(renderPanel(), [
+                            [
+                              clickoutside,
+                              this.handleClickOutside,
+                              undefined as unknown as string,
+                              { capture: true }
+                            ]
+                          ])
+                        }
                       }}
                     </Transition>
                   )

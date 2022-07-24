@@ -8,7 +8,6 @@
   <n-dialog
     title="确认"
     content="你确定"
-    :closable="false"
     negative-text="不确认"
     positive-text="确认"
     @positive-click="handlePositiveClick"

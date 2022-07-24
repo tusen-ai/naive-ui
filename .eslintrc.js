@@ -13,6 +13,7 @@ module.exports = {
       files: ['*.vue', '*.js'],
       extends: ['plugin:vue/essential', '@vue/standard'],
       rules: {
+        'vue/multiline-html-element-content-newline': 0,
         'vue/multi-word-component-names': 0,
         'vue/max-attributes-per-line': [
           2,

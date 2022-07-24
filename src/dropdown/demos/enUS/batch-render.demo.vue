@@ -1,5 +1,5 @@
 <markdown>
-# Batch Render
+# Batch rendering
 
 Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.
 </markdown>

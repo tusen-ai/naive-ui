@@ -97,6 +97,57 @@ export default c([
       }`,
       `${codeClass} .hljs-link {
         text-decoration: underline;
+      }`,
+      // 行号显示
+      `.hljsln {
+        position: relative;
+        display: block;
+        padding-left: 3.1em !important;
+      }`,
+      `.hljsln::-webkit-scrollbar {
+        height: 15px;
+      }`,
+      `.hljsln::-webkit-scrollbar-thumb {
+        background: #666;
+      }`,
+      `.hljsln::-webkit-scrollbar-thumb:hover {
+        background: #797979;
+      }`,
+      `.hljsln::-webkit-scrollbar-thumb:active {
+        background: #949494;
+      }`,
+      `.hljsln .ln-bg {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 2.4em;
+        height: 100%;
+        background: var(--n-padding-color);
+      }`,
+      `.hljsln .ln-num {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        width: 2.4em;
+        height: 1em;
+        text-align: center;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }`,
+      `.hljsln .ln-num::before {
+        color: var(--n-line-number-color);
+        font-style: normal;
+        font-weight: normal;
+        content: attr(data-num);
+      }`,
+      `.hljsln .ln-eof {
+        display: inline-block;
       }`
     ]
   }

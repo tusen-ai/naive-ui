@@ -4,7 +4,7 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">A Vue 3 Component Library</p>
-<p align="center"><b>Fairly Complete, Customizable Themes, Uses TypeScript, Not too Slow</b></p>
+<p align="center"><b>Fairly Complete, Theme Customizable, Uses TypeScript, Fast</b></p>
 <p align="center">Kinda Interesting</p>
 
 <p align="center">English | <a href="README.zh-CN.md">中文</a></p>
@@ -17,7 +17,8 @@
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - DingTalk Group 1 (Member limit reached) 33482509
-- DingTalk Group 2 35886835
+- DingTalk Group 2 (Member limit reached) 35886835
+- DingTalk Group 3 32377370
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
@@ -28,7 +29,7 @@ There are more than 80 components. Hope they can help you write less code.
 
 What's more, they are all treeshakable.
 
-### Customizable Themes
+### Theme Customizable
 
 We provide an advanced type safe theme system built using TypeScript. All you need is to provide a theme overrides object in JS. Then all the stuff will be done by us.
 
@@ -40,7 +41,7 @@ All the stuff in Naive UI is written in TypeScript. It can work with your typesc
 
 What's more, you don't need to import any CSS to use the components.
 
-### Not too Slow
+### Fast
 
 I try to make it not rather slow. At least select, tree, transfer, table and cascader work with virtual list.
 

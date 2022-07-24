@@ -65,6 +65,7 @@ export default cB('input', `
     background-color: #0000;
     text-align: inherit;
     transition:
+      -webkit-text-fill-color .3s var(--n-bezier),
       caret-color .3s var(--n-bezier),
       color .3s var(--n-bezier),
       text-decoration-color .3s var(--n-bezier);
@@ -168,14 +169,8 @@ export default cB('input', `
         min-height: var(--n-height);
       `)
     ]),
-    // override scrollbar relative position
-    cE('textarea', `
-      position: static;
-    `),
     cE('textarea-el, textarea-mirror, placeholder', `
       height: 100%;
-      left: var(--n-padding-left);
-      right: var(--n-padding-right);
       padding-left: 0;
       padding-right: 0;
       padding-top: var(--n-padding-vertical);
@@ -190,6 +185,7 @@ export default cB('input', `
       white-space: pre-wrap;
     `),
     cE('textarea-mirror', `
+      width: 100%;
       pointer-events: none;
       overflow: hidden;
       visibility: hidden;
@@ -206,6 +202,7 @@ export default cB('input', `
       align-items: center;
       transition: color .3s var(--n-bezier);
       color: var(--n-text-color);
+      white-space: nowrap;
     `, [
       cB('icon', `
         color: var(--n-icon-color);
@@ -224,6 +221,7 @@ export default cB('input', `
       cursor: not-allowed;
       color: var(--n-text-color-disabled);
       text-decoration-color: var(--n-text-color-disabled);
+      -webkit-text-fill-color: var(--n-text-color-disabled);
     `),
     cE('placeholder', 'color: var(--n-placeholder-color-disabled);'),
     cE('separator', 'color: var(--n-text-color-disabled);', [
@@ -245,6 +243,9 @@ export default cB('input', `
   ]),
   cNotM('disabled', [
     cE('eye', `
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--n-icon-color);
       cursor: pointer;
     `, [
@@ -314,11 +315,13 @@ export default cB('input', `
         `)
       ])
     ]),
-    cB('icon', `
-      transition: color .3s var(--n-bezier);
-      color: var(--n-icon-color);
-      font-size: var(--n-icon-size);
-    `),
+    c('>', [
+      cB('icon', `
+        transition: color .3s var(--n-bezier);
+        color: var(--n-icon-color);
+        font-size: var(--n-icon-size);
+      `)
+    ]),
     cB('base-icon', `
       font-size: var(--n-icon-size);
     `)

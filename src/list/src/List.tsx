@@ -7,14 +7,14 @@ import {
   Ref,
   provide
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
 
-const listProps = {
+export const listProps = {
   ...(useTheme.props as ThemeProps<ListTheme>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
@@ -38,7 +38,7 @@ export default defineComponent({
   name: 'List',
   props: listProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'List',
       '-list',
@@ -50,45 +50,54 @@ export default defineComponent({
     provide(listInjectionKey, {
       mergedClsPrefixRef
     })
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          fontSize,
+          textColor,
+          color,
+          colorModal,
+          colorPopover,
+          borderColor,
+          borderColorModal,
+          borderColorPopover,
+          borderRadius
+        }
+      } = themeRef.value
+      return {
+        '--n-font-size': fontSize,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-color': color,
+        '--n-border-radius': borderRadius,
+        '--n-border-color': borderColor,
+        '--n-border-color-modal': borderColorModal,
+        '--n-border-color-popover': borderColorPopover,
+        '--n-color-modal': colorModal,
+        '--n-color-popover': colorPopover
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('list', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            fontSize,
-            textColor,
-            color,
-            colorModal,
-            colorPopover,
-            borderColor,
-            borderColorModal,
-            borderColorPopover,
-            borderRadius
-          }
-        } = themeRef.value
-        return {
-          '--n-font-size': fontSize,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-text-color': textColor,
-          '--n-color': color,
-          '--n-border-radius': borderRadius,
-          '--n-border-color': borderColor,
-          '--n-border-color-modal': borderColorModal,
-          '--n-border-color-popover': borderColorPopover,
-          '--n-color-modal': colorModal,
-          '--n-color-popover': colorPopover
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <ul
         class={[
           `${mergedClsPrefix}-list`,
-          this.bordered && `${mergedClsPrefix}-list--bordered`
+          this.bordered && `${mergedClsPrefix}-list--bordered`,
+          this.themeClass
         ]}
         style={this.cssVars as CSSProperties}
       >

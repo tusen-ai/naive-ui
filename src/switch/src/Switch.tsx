@@ -26,7 +26,7 @@ import type { SwitchTheme } from '../styles'
 import type { OnUpdateValueImpl, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
-const switchProps = {
+export const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
@@ -64,6 +64,10 @@ const switchProps = {
   railStyle: Function as PropType<
   (params: { focused: boolean, checked: boolean }) => string | CSSProperties
   >,
+  rubberBand: {
+    type: Boolean,
+    default: true
+  },
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -152,7 +156,7 @@ export default defineComponent({
     }
     function handleKeyup (e: KeyboardEvent): void {
       if (props.loading || mergedDisabledRef.value) return
-      if (e.code === 'Space') {
+      if (e.key === ' ') {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
         } else {
@@ -163,7 +167,7 @@ export default defineComponent({
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (props.loading || mergedDisabledRef.value) return
-      if (e.code === 'Space') {
+      if (e.key === ' ') {
         e.preventDefault()
         pressedRef.value = true
       }
@@ -281,7 +285,8 @@ export default defineComponent({
           mergedDisabled && `${mergedClsPrefix}-switch--disabled`,
           this.round && `${mergedClsPrefix}-switch--round`,
           this.loading && `${mergedClsPrefix}-switch--loading`,
-          this.pressed && `${mergedClsPrefix}-switch--pressed`
+          this.pressed && `${mergedClsPrefix}-switch--pressed`,
+          this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}

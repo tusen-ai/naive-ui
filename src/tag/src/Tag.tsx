@@ -9,9 +9,10 @@ import {
   provide,
   toRef
 } from 'vue'
+import { useRtl } from '../../_mixins/use-rtl'
+import { NBaseClose } from '../../_internal/close'
 import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NBaseClose } from '../../_internal'
 import {
   warn,
   createKey,
@@ -25,7 +26,6 @@ import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
-import useRtl from '../../_mixins/use-rtl'
 
 export interface TagPublicMethods {
   setTextContent: (textContent: string) => void
@@ -34,7 +34,7 @@ export interface TagRef extends TagPublicMethods {
   $el: HTMLElement
 }
 
-const tagProps = {
+export const tagProps = {
   ...(useTheme.props as ThemeProps<TagTheme>),
   ...commonProps,
   bordered: {
@@ -43,12 +43,17 @@ const tagProps = {
   },
   checked: Boolean,
   checkable: Boolean,
+  strong: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
   onUpdateChecked: Function as PropType<(checked: boolean) => void>,
   // private
+  internalCloseFocusable: {
+    type: Boolean,
+    default: true
+  },
   internalStopClickPropagation: Boolean,
   // deprecated
   onCheckedChange: {
@@ -148,30 +153,42 @@ export default defineComponent({
           colorChecked,
           colorCheckedHover,
           colorCheckedPressed,
+          closeBorderRadius,
+          fontWeightStrong,
+          [createKey('colorBordered', type)]: colorBordered,
           [createKey('closeSize', size)]: closeSize,
+          [createKey('closeIconSize', size)]: closeIconSize,
           [createKey('fontSize', size)]: fontSize,
           [createKey('height', size)]: height,
           [createKey('color', type)]: typedColor,
           [createKey('textColor', type)]: typeTextColor,
           [createKey('border', type)]: border,
-          [createKey('closeColor', type)]: closeColor,
+          [createKey('closeIconColor', type)]: closeIconColor,
+          [createKey('closeIconColorHover', type)]: closeIconColorHover,
+          [createKey('closeIconColorPressed', type)]: closeIconColorPressed,
           [createKey('closeColorHover', type)]: closeColorHover,
           [createKey('closeColorPressed', type)]: closeColorPressed
         }
       } = themeRef.value
       return {
+        '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-border': border,
-        '--n-close-color': closeColor,
-        '--n-close-color-hover': closeColorHover,
+        '--n-close-icon-size': closeIconSize,
         '--n-close-color-pressed': closeColorPressed,
-        '--n-close-color-disabled': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-border-radius': closeBorderRadius,
+        '--n-close-icon-color': closeIconColor,
+        '--n-close-icon-color-hover': closeIconColorHover,
+        '--n-close-icon-color-pressed': closeIconColorPressed,
+        '--n-close-icon-color-disabled': closeIconColor,
         '--n-close-margin': closeMargin,
         '--n-close-margin-rtl': closeMarginRtl,
         '--n-close-size': closeSize,
-        '--n-color': color || typedColor,
+        '--n-color':
+          color || (mergedBorderedRef.value ? colorBordered : typedColor),
         '--n-color-checkable': colorCheckable,
         '--n-color-checked': colorChecked,
         '--n-color-checked-hover': colorCheckedHover,
@@ -203,6 +220,9 @@ export default defineComponent({
           if (textColor) {
             hash += `b${color2Class(textColor)}`
           }
+          if (mergedBorderedRef.value) {
+            hash += 'c'
+          }
           return hash
         }),
         cssVarsRef,
@@ -226,11 +246,25 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       rtlEnabled,
+      closable,
       color: { borderColor } = {},
+      round,
       onRender,
       $slots
     } = this
     onRender?.()
+    const avatarNode = resolveWrappedSlot(
+      $slots.avatar,
+      (children) =>
+        children && (
+          <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
+        )
+    )
+    const iconNode = resolveWrappedSlot(
+      $slots.icon,
+      (children) =>
+        children && <div class={`${mergedClsPrefix}-tag__icon`}>{children}</div>
+    )
     return (
       <div
         class={[
@@ -238,10 +272,14 @@ export default defineComponent({
           this.themeClass,
           {
             [`${mergedClsPrefix}-tag--rtl`]: rtlEnabled,
+            [`${mergedClsPrefix}-tag--strong`]: this.strong,
             [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
             [`${mergedClsPrefix}-tag--checkable`]: this.checkable,
             [`${mergedClsPrefix}-tag--checked`]: this.checkable && this.checked,
-            [`${mergedClsPrefix}-tag--round`]: this.round
+            [`${mergedClsPrefix}-tag--round`]: round,
+            [`${mergedClsPrefix}-tag--avatar`]: avatarNode,
+            [`${mergedClsPrefix}-tag--icon`]: iconNode,
+            [`${mergedClsPrefix}-tag--closable`]: closable
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -249,22 +287,19 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {resolveWrappedSlot(
-          $slots.avatar,
-          (children) =>
-            children && (
-              <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
-            )
-        )}
+        {iconNode || avatarNode}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots.default?.()}
         </span>
-        {!this.checkable && this.closable ? (
+        {!this.checkable && closable ? (
           <NBaseClose
             clsPrefix={mergedClsPrefix}
             class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
+            focusable={this.internalCloseFocusable}
+            round={round}
+            absolute
           />
         ) : null}
         {!this.checkable && this.mergedBordered ? (

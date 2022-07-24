@@ -51,7 +51,7 @@
           :value="model.cascaderValue"
           placeholder="Cascader"
           :options="options"
-          :leaf-only="false"
+          check-strategy="child"
           size="medium"
         />
       </n-form-item>
@@ -141,7 +141,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
 
-function genOptions (depth = 2, iterator = 1, prefix = ''): unknown {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function genOptions (depth = 2, iterator = 1, prefix = ''): any {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -180,7 +181,7 @@ export default defineComponent({
       cascaderValue: null,
       datetimeValue: null,
       switchValue: false,
-      checkboxValue: null,
+      checkboxValue: false,
       checkboxGroupValue: null,
       radioValue: 'Definitely Maybe',
       radioGroupValue: null,

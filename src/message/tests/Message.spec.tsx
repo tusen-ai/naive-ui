@@ -8,6 +8,12 @@ const Provider = defineComponent({
   }
 })
 
+const NoMaxProvider = defineComponent({
+  render () {
+    return <NMessageProvider>{this.$slots}</NMessageProvider>
+  }
+})
+
 describe('n-message', () => {
   it('should work with import on demand', () => {
     mount(NMessageProvider)
@@ -28,6 +34,32 @@ describe('n-message', () => {
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
     wrapper.unmount()
+  })
+  it('should work with showIcon', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+
+        message.info('string')
+        message.info('string', {
+          showIcon: false
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(() => (
+      <NoMaxProvider>{{ default: () => <Test /> }}</NoMaxProvider>
+    ))
+
+    void nextTick(() => {
+      expect(document.querySelectorAll('.n-message__icon').length).toBe(1)
+      expect(document.querySelectorAll('.n-message').length).toBe(2)
+
+      wrapper.unmount()
+      done()
+    })
   })
 })
 

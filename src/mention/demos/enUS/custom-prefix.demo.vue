@@ -1,5 +1,5 @@
 <markdown>
-# Custom Trigger Prefix
+# Custom trigger prefix
 
 Use `prefix` to set the trigger character(s).
 </markdown>

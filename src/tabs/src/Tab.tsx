@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, computed, mergeProps } from 'vue'
+import { h, defineComponent, inject, computed, mergeProps, Fragment } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render, omit } from '../../_utils'
@@ -6,20 +6,20 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
-const typeProps = {
+export const tabProps = {
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
   internalCreatedByPane: Boolean,
   ...omit(tabPaneProps, ['displayDirective'])
 } as const
 
-export type TabProps = ExtractPublicPropTypes<typeof typeProps>
+export type TabProps = ExtractPublicPropTypes<typeof tabProps>
 
 export default defineComponent({
   __TAB__: true,
   inheritAttrs: false,
   name: 'Tab',
-  props: typeProps,
+  props: tabProps,
   setup (props) {
     const {
       mergedClsPrefixRef,
@@ -29,12 +29,14 @@ export default defineComponent({
       tabStyleRef,
       tabChangeIdRef,
       onBeforeLeaveRef,
+      triggerRef,
       handleAdd,
-      handleTabClick,
+      activateTab,
       handleClose
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
     return {
+      trigger: triggerRef,
       mergedClosable: computed(() => {
         if (props.internalAddable) return false
         const { closable } = props
@@ -50,7 +52,7 @@ export default defineComponent({
         if (props.disabled) return
         handleClose(props.name)
       },
-      handleClick () {
+      activateTab () {
         if (props.disabled) return
         if (props.internalAddable) {
           handleAdd()
@@ -61,13 +63,13 @@ export default defineComponent({
         if (nameProp !== valueRef.value) {
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {
-            handleTabClick(nameProp)
+            activateTab(nameProp)
           } else {
             void Promise.resolve(
               (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
             ).then((allowLeave) => {
               if (allowLeave && tabChangeIdRef.id === id) {
-                handleTabClick(nameProp)
+                activateTab(nameProp)
               }
             })
           }
@@ -86,13 +88,14 @@ export default defineComponent({
       value,
       mergedClosable,
       style,
+      trigger,
       $slots: { default: defaultSlot }
     } = this
     const mergedTab = label ?? tab
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
         {this.internalLeftPadded ? (
-          <div class={`${clsPrefix}-tabs-tab-pad`}></div>
+          <div class={`${clsPrefix}-tabs-tab-pad`} />
         ) : null}
         <div
           key={name}
@@ -107,7 +110,8 @@ export default defineComponent({
                 mergedClosable && `${clsPrefix}-tabs-tab--closable`,
                 internalAddable && `${clsPrefix}-tabs-tab--addable`
               ],
-              onClick: this.handleClick,
+              onClick: trigger === 'click' ? this.activateTab : undefined,
+              onMouseenter: trigger === 'hover' ? this.activateTab : undefined,
               style: internalAddable ? undefined : style
             },
             this.internalCreatedByPane
@@ -117,11 +121,16 @@ export default defineComponent({
         >
           <span class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (
-              <NBaseIcon clsPrefix={clsPrefix}>
-                {{
-                  default: () => <AddIcon />
-                }}
-              </NBaseIcon>
+              <>
+                <div class={`${clsPrefix}-tabs-tab__height-placeholder`}>
+                  &nbsp;
+                </div>
+                <NBaseIcon clsPrefix={clsPrefix}>
+                  {{
+                    default: () => <AddIcon />
+                  }}
+                </NBaseIcon>
+              </>
             ) : defaultSlot ? (
               defaultSlot()
             ) : typeof mergedTab === 'object' ? (

@@ -38,10 +38,10 @@ export default defineComponent({
         昨天: () => new Date().getTime() - 24 * 60 * 60 * 1000
       },
       rangeShortcuts: {
-        快乐假期: [1629216000000, 1631203200000],
+        快乐假期: [1629216000000, 1631203200000] as const,
         近2小时: () => {
           const cur = new Date().getTime()
-          return [cur - 2 * 60 * 60 * 1000, cur]
+          return [cur - 2 * 60 * 60 * 1000, cur] as const
         }
       }
     }

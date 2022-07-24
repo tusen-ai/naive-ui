@@ -19,14 +19,21 @@ import { getScrollParent, unwrapElement } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
-import { formatLength, resolveSlot, warn, warnOnce } from '../../_utils'
+import {
+  lockHtmlScrollRightCompensationRef,
+  formatLength,
+  resolveSlot,
+  isDocument,
+  warn,
+  warnOnce
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { backTopLight } from '../styles'
 import type { BackTopTheme } from '../styles'
 import BackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
-const backTopProps = {
+export const backTopProps = {
   ...(useTheme.props as ThemeProps<BackTopTheme>),
   show: {
     type: Boolean as PropType<boolean | undefined>,
@@ -94,14 +101,19 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     const scrollTopRef = ref<number | null>(null)
-    const uncontrolledShowRef = computed(() => {
-      if (scrollTopRef.value === null) return false
-      return scrollTopRef.value >= props.visibilityHeight
+    const uncontrolledShowRef = ref(false)
+    watchEffect(() => {
+      const { value: scrollTop } = scrollTopRef
+      if (scrollTop === null) {
+        uncontrolledShowRef.value = false
+        return
+      }
+      uncontrolledShowRef.value = scrollTop >= props.visibilityHeight
     })
     const DomInfoReadyRef = ref(false)
     watch(uncontrolledShowRef, (value) => {
       if (DomInfoReadyRef.value) {
-        props['onUpdate:show'](value)
+        props['onUpdate:show']?.(value)
       }
     })
     const controlledShowRef = toRef(props, 'show')
@@ -114,12 +126,14 @@ export default defineComponent({
         bottom: string
       } => {
         return {
-          right: formatLength(props.right),
+          right: `calc(${formatLength(props.right)} + ${
+            lockHtmlScrollRightCompensationRef.value
+          })`,
           bottom: formatLength(props.bottom)
         }
       }
     )
-    let scrollElement: HTMLElement
+    let scrollElement: HTMLElement | Document
     let scrollListenerRegistered: boolean
     // deprecated
     watch(mergedShowRef, (value) => {
@@ -154,38 +168,29 @@ export default defineComponent({
         }
         return
       }
-      scrollElement = scrollEl
+      scrollElement =
+        scrollEl === document.documentElement ? document : scrollEl
       const { to } = props
       const target = typeof to === 'string' ? document.querySelector(to) : to
       if (__DEV__ && !target) {
         warn('back-top', 'Target is not found.')
       }
-      if (scrollEl) {
-        scrollEl.addEventListener('scroll', handleScroll)
-        handleScroll()
-      }
+      scrollElement.addEventListener('scroll', handleScroll)
+      handleScroll()
     }
-    function handleClick (e: MouseEvent): void {
-      if (scrollElement.nodeName === '#document') {
-        ;(scrollElement as unknown as Document).documentElement.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      } else {
-        scrollElement.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }
+    function handleClick (): void {
+      ;(isDocument(scrollElement)
+        ? document.documentElement
+        : scrollElement
+      ).scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
     function handleScroll (): void {
-      if (scrollElement.nodeName === '#document') {
-        scrollTopRef.value = (
-          scrollElement as unknown as Document
-        ).documentElement.scrollTop
-      } else {
-        scrollTopRef.value = scrollElement.scrollTop
-      }
+      scrollTopRef.value = (
+        isDocument(scrollElement) ? document.documentElement : scrollElement
+      ).scrollTop
       if (!DomInfoReadyRef.value) {
         void nextTick(() => {
           DomInfoReadyRef.value = true

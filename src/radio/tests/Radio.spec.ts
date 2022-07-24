@@ -43,6 +43,38 @@ describe('n-radio', () => {
     expect(radio.attributes('name')).toEqual('randomName222')
   })
 
+  it('should render default slot content', async () => {
+    const wrapper = mount(NRadio, { slots: { default: 'MySlotContent' } })
+
+    const radio = wrapper.find('.n-radio__label')
+
+    expect(radio.text()).toContain('MySlotContent')
+  })
+
+  it('should work with `label` prop', async () => {
+    const wrapper = mount(NRadio, { props: { label: 'MyRandomLabel' } })
+
+    const radio = wrapper.find('.n-radio__label')
+
+    expect(radio.text()).toContain('MyRandomLabel')
+
+    await wrapper.setProps({ label: 'MyNewRandomLabel' })
+
+    expect(radio.text()).toContain('MyNewRandomLabel')
+  })
+
+  it('should render default slot content in priority of label', async () => {
+    const wrapper = mount(NRadio, {
+      props: { label: 'MyRandomLabel' },
+      slots: { default: 'MySlotContent' }
+    })
+
+    const radio = wrapper.find('.n-radio__label')
+
+    expect(radio.text()).not.toContain('MyRandomLabel')
+    expect(radio.text()).toContain('MySlotContent')
+  })
+
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NRadio, { props: { size: size } })

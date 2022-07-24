@@ -153,7 +153,6 @@ export default c([
         flex-basis: 0;
         flex-grow: 1;
         box-sizing: border-box;
-        overflow: hidden;
         position: relative;
         display: flex;
         flex-direction: column;

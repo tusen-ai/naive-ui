@@ -2,9 +2,13 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
-// --n-close-color
+// --n-close-size
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-size
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-bar-color
 // --n-tab-font-size
 // --n-tab-text-color
@@ -30,6 +34,15 @@ export default cB('tabs', `
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
 `, [
+  cM('segment-type', [
+    cB('tabs-rail', [
+      c('&.transition-disabled', 'color: red;', [
+        cB('tabs-tab', `
+          transition: none;
+        `)
+      ])
+    ])
+  ]),
   cB('tabs-rail', `
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
@@ -161,9 +174,10 @@ export default cB('tabs', `
       cursor: 'not-allowed'
     }),
     cE('close', `
-      margin-left: 8px;
-      font-size: 14px;
-      transition: color .3s var(--n-bezier);
+      margin-left: 6px;
+      transition:
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier);
     `),
     cE('label', `
       display: flex;
@@ -181,21 +195,53 @@ export default cB('tabs', `
       max-width .2s var(--n-bezier),
       background-color .3s var(--n-bezier);
   `, [
-    cM('transition-disabled', `
+    c('&.transition-disabled', `
       transition: none;
     `),
     cM('disabled', `
       background-color: var(--n-tab-text-color-disabled)
     `)
   ]),
+  cB('tabs-pane-wrapper', `
+    position: relative;
+    overflow: hidden;
+    transition: max-height .2s var(--n-bezier);
+  `),
   cB('tab-pane', `
     color: var(--n-pane-text-color);
     width: 100%;
     padding: var(--n-pane-padding);
     transition:
       color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
-  `),
+      background-color .3s var(--n-bezier),
+      opacity .2s var(--n-bezier);
+    left: 0;
+    right: 0;
+    top: 0;
+  `, [
+    c('&.next-transition-leave-active, &.prev-transition-leave-active, &.next-transition-enter-active, &.prev-transition-enter-active', `
+      transition:
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      transform .2s var(--n-bezier),
+      opacity .2s var(--n-bezier);
+    `),
+    c('&.next-transition-leave-active, &.prev-transition-leave-active', `
+      position: absolute;
+    `),
+    c('&.next-transition-enter-from, &.prev-transition-leave-to', `
+      transform: translateX(32px);
+      opacity: 0;
+    `),
+    c('&.next-transition-leave-to, &.prev-transition-enter-from', `
+      transform: translateX(-32px);
+      opacity: 0;
+    `),
+    c('&.next-transition-leave-from, &.next-transition-enter-to, &.prev-transition-leave-from, &.prev-transition-enter-to', `
+      transform: translateX(0);
+      opacity: 1;
+    `)
+  ]),
   cB('tabs-tab-pad', `
     width: var(--n-tab-gap);
     flex-grow: 0;
@@ -203,16 +249,17 @@ export default cB('tabs', `
   `),
   cM('line-type, bar-type', [
     cB('tabs-tab', `
-      font-weight: var(--n-tab-font-weight-active);
+      font-weight: var(--n-tab-font-weight);
       box-sizing: border-box;
       vertical-align: bottom;
     `, [
       c('&:hover', {
         color: 'var(--n-tab-text-color-hover)'
       }),
-      cM('active', {
-        color: 'var(--n-tab-text-color-active)'
-      }),
+      cM('active', `
+        color: var(--n-tab-text-color-active);
+        font-weight: var(--n-tab-font-weight-active);
+      `),
       cM('disabled', {
         color: 'var(--n-tab-text-color-disabled)'
       })
@@ -266,6 +313,10 @@ export default cB('tabs', `
           padding-right: 8px;
           font-size: 16px;
         `, [
+          cE('height-placeholder', `
+            width: 0;
+            font-size: var(--n-tab-font-size);
+          `),
           cNotM('disabled', [
             c('&:hover', `
               color: var(--n-tab-text-color-hover);

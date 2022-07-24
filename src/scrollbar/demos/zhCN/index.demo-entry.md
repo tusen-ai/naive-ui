@@ -7,15 +7,19 @@
 ```demo
 basic.vue
 x.vue
+trigger.vue
+rtl-debug.vue
 ```
 
 ## API
 
 ### Scrollbar Props
 
-| 名称         | 类型      | 默认值  | 说明             |
-| ------------ | --------- | ------- | ---------------- |
-| x-scrollable | `boolean` | `false` | 是否可以横向滚动 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| trigger | `'hover' \| 'none'` | `'hover'` | 显示滚动条的时机，`'none'` 表示一直显示 | 2.29.1 |
+| x-scrollable | `boolean` | `false` | 是否可以横向滚动 |  |
+| on-scroll | `(e: Event) => void` | `undefined` | 滚动的回调 |  |
 
 ### Scrollbar Slots
 

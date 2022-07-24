@@ -12,30 +12,34 @@ cascade.vue
 arrow.vue
 placement.vue
 size.vue
-manual-position.vue
 batch-render.vue
+manual-position.vue
 render.vue
 option-props.vue
+render-option.vue
 ```
 
 ## API
 
 ### Dropdown Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| animated | `boolean` | `true` | Use an animation when showing options. |
-| inverted | `boolean` | `false` | Use the inverted style. |
-| children-field | `string` | `'children'` | Field name of children. |
-| keyboard | `boolean` | `true` | Whether the component supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
-| key-field | `string` | `'key'` | Field name of key. |
-| label-field | `string` | `'label'` | Field name of label. |
-| options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | Dropdown options. |
-| render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option icons. |
-| render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option labels. |
-| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
-| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |
-| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | Callback function for after an option is selected. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| animated | `boolean` | `true` | Use an animation when showing options. |  |
+| inverted | `boolean` | `false` | Use the inverted style. |  |
+| children-field | `string` | `'children'` | Field name of children. |  |
+| keyboard | `boolean` | `true` | Whether the component supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |  |
+| key-field | `string` | `'key'` | Field name of key. |  |
+| label-field | `string` | `'label'` | Field name of label. |  |
+| node-props | `(option: DropdownOption \| DropdownGroupOption) => HTMLAttributes` | `undefined` | Option HTML attributes generator. | 2.29.1 |
+| menu-props | `(option: DropdownOption \| undefined, options: (DropdownOption \| DropdownGroupOption)[]) => HTMLAttributes` | `undefined` | Menu HTML attributes generator. | 2.31.0 |
+| options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | Dropdown options. |  |
+| render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option icons. |  |
+| render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option labels. |  |
+| render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | Render function that renders option itself. | 2.29.1 |
+| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |  |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |  |
+| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | Callback function for after an option is selected. |  |
 
 For other props, for example `placement`, please see [Popover Props](popover#Popover-Props). Note that `raw` is not available.
 

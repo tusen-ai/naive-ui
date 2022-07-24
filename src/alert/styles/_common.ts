@@ -1,7 +1,10 @@
 export default {
-  iconMargin: '12px 8px 0 12px',
-  iconSize: '26px',
-  closeSize: '16px',
-  closeMargin: '14px 16px 0 0',
-  padding: '15px'
+  iconMargin: '11px 8px 0 12px',
+  iconMarginRtl: '11px 12px 0 8px',
+  iconSize: '24px',
+  closeIconSize: '16px',
+  closeSize: '20px',
+  closeMargin: '13px 14px 0 0',
+  closeMarginRtl: '13px 0 0 14px',
+  padding: '13px'
 }

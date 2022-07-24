@@ -1,2 +1,2 @@
-export { default as NDynamicTags } from './src/DynamicTags'
+export { default as NDynamicTags, dynamicTagsProps } from './src/DynamicTags'
 export type { DynamicTagsProps } from './src/DynamicTags'

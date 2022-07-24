@@ -7,6 +7,7 @@ import {
   enUS,
   ukUA,
   jaJP,
+  koKR,
   idID,
   deDE,
   nbNO,
@@ -16,6 +17,9 @@ import {
   skSK,
   enGB,
   plPL,
+  ptBR,
+  thTH,
+  nlNL,
   eo,
   dateEnUS,
   dateZhCN,
@@ -23,6 +27,7 @@ import {
   dateRuRU,
   dateUkUA,
   dateJaJP,
+  dateKoKR,
   dateIdID,
   dateDeDE,
   dateNbNO,
@@ -32,6 +37,9 @@ import {
   dateSkSK,
   dateEnGB,
   datePlPL,
+  datePtBR,
+  dateThTH,
+  dateNlNL,
   dateEo,
   NConfigProvider,
   NDateLocale,
@@ -163,6 +171,15 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
+          dateLocale: dateKoKR,
+          locale: koKR,
+          onMounted: (date: string) => expect(date).toMatchSnapshot()
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
           dateLocale: dateIdID,
           locale: idID,
           onMounted: (date: string) => expect(date).toMatchSnapshot()
@@ -238,8 +255,32 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
+          dateLocale: datePtBR,
+          locale: ptBR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateThTH,
+          locale: thTH
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
           dateLocale: dateEo,
           locale: eo
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateNlNL,
+          locale: nlNL
         }
       }).html()
     ).toMatchSnapshot()

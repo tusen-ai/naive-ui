@@ -20,12 +20,13 @@ import type {
   LabelAlign,
   LabelPlacement,
   FormInst,
-  Size
+  Size,
+  FormValidateMessages
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
-const formProps = {
+export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
   inline: Boolean,
   labelWidth: [Number, String] as PropType<number | string>,
@@ -57,7 +58,8 @@ const formProps = {
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
-  }
+  },
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>

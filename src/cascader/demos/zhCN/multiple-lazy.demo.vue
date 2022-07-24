@@ -4,12 +4,24 @@
 
 <template>
   <n-space vertical>
-    <n-space>
-      <n-space>
-        <n-switch v-model:value="checkStrategyIsChild" />Child Check Strategy
-      </n-space>
+    <n-space align="center">
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
       <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
       <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
+      <n-space>
+        <n-switch v-model:value="allowCheckingNotLoaded" />Allow Checking Not
+        Loaded
+      </n-space>
     </n-space>
     <n-cascader
       v-model:value="value"
@@ -17,8 +29,9 @@
       placeholder="没啥用的值"
       :options="options"
       :cascade="cascade"
-      :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
+      :check-strategy="checkStrategy"
       :show-path="showPath"
+      :allow-checking-not-loaded="allowCheckingNotLoaded"
       remote
       :on-load="handleLoad"
     />
@@ -45,7 +58,8 @@ function getChildren (option: CascaderOption) {
 export default defineComponent({
   setup () {
     return {
-      checkStrategyIsChild: ref(true),
+      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
+      allowCheckingNotLoaded: ref(false),
       cascade: ref(true),
       showPath: ref(true),
       value: ref(null),

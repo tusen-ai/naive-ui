@@ -1,5 +1,5 @@
 <markdown>
-# Button Group
+# Button group
 
 Sometimes a radio button group can look more elegant.
 </markdown>
@@ -15,9 +15,8 @@ Sometimes a radio button group can look more elegant.
           (song.label === 'Live Forever' && disabled1) ||
             (song.label === 'Shakermaker' && disabled2)
         "
-      >
-        {{ song.label }}
-      </n-radio-button>
+        :label="song.label"
+      />
     </n-radio-group>
     <n-space>
       <n-checkbox v-model:checked="disabled2" style="margin-right: 12px">

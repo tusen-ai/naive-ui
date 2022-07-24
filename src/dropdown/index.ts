@@ -1,8 +1,10 @@
-export { default as NDropdown } from './src/Dropdown'
+export { default as NDropdown, dropdownProps } from './src/Dropdown'
 export type { DropdownProps } from './src/Dropdown'
 export type {
   DropdownOption,
   DropdownGroupOption,
   DropdownDividerOption,
-  DropdownRenderOption
+  DropdownRenderOption,
+  NodeProps as DropdownNodeProps,
+  DropdownMenuProps
 } from './src/interface'

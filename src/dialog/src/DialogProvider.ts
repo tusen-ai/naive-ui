@@ -58,7 +58,7 @@ interface DialogInst {
 
 export type DialogProviderInst = DialogApiInjection
 
-const dialogProviderProps = {
+export const dialogProviderProps = {
   injectionKey: String,
   to: [String, Object] as PropType<string | HTMLElement>
 }

@@ -14,32 +14,35 @@ describe('n-time', () => {
 
   it('should work with `unix` prop', async () => {
     const wrapper = mount(NTime, {
-      props: { time: 3600, unix: true, timezone: 'Asia/Shanghai' }
+      props: { time: 3600, unix: true, timeZone: 'Asia/Shanghai' }
     })
     expect(wrapper.find('time').text()).toContain('1970-01-01 09:00:00')
     await wrapper.setProps({ time: date })
   })
 
   it('should work with `format` prop with timezone', async () => {
+    // 上海 2022-06-06 02:09:12
+    // 匹兹堡 2022-06-05 14:09:12
+    // UTC 2022-06-05 18:09:12
     const wrapper = mount(NTime, {
       props: {
-        time: date.valueOf(),
+        time: 1654452568216,
         format: 'yyyy/MM/dd',
-        timezone: 'Asia/Shanghai'
+        timeZone: 'Asia/Shanghai'
       }
     })
-    expect(wrapper.find('time').text()).toContain('1970/01/01')
+    expect(wrapper.find('time').text()).toContain('2022/06/06')
     await wrapper.setProps({
-      timezone: 'America/New_York'
+      timeZone: 'America/New_York'
     })
-    expect(wrapper.find('time').text()).toContain('1969/12/31')
+    expect(wrapper.find('time').text()).toContain('2022/06/05')
   })
 
   it('should work with `type` `to` prop', async () => {
     Date.now = () => mockedNow
 
     const wrapper = mount(NTime, {
-      props: { time: date, type: 'date', timezone: 'Asia/Shanghai' }
+      props: { time: date, type: 'date', timeZone: 'Asia/Shanghai' }
     })
     expect(wrapper.find('time').text()).toContain('1970-01-01')
     console.log(
@@ -49,13 +52,12 @@ describe('n-time', () => {
     await wrapper.setProps({ time: date, type: 'datetime' })
     expect(wrapper.find('time').text().length).toBe(19)
     await wrapper.setProps({ time: date, type: 'relative' })
-    expect(wrapper.find('time').text()).toContain('about 50 years ago')
-
+    expect(wrapper.find('time').text()).toContain('50 years ago')
     Date.now = () => new Date('1972-01-01 00:00:00 UTC').getTime()
     const wrapper2 = mount(NTime, {
       props: { to: 0, type: 'relative', unix: true }
     })
-    expect(wrapper2.find('time').text()).toContain('in about 2 years')
+    expect(wrapper2.find('time').text()).toContain('in 2 years')
 
     Date.now = cachedDateNow
   })

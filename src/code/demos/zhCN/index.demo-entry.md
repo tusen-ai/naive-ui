@@ -3,7 +3,7 @@
 ## 预备条件
 
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;">
-  由于尺寸原因，Naive UI 并不把 highlight.js 内置。如果你需要使用代码组件，请确保你在使用之前已经设定了 highlight.js。
+  由于包体积原因，Naive UI 不内置 highlight.js。如果你需要使用代码组件，请确保你在使用之前已经设定了 highlight.js。
 </n-alert>
 
 下面的代码展示了如何为 Code 设定 hljs。比较推荐的方式是按需引入，因为它可以极大地减小打包尺寸。
@@ -39,6 +39,7 @@ basic.vue
 inline.vue
 softwrap.vue
 loop-debug.vue
+line-numbers.vue
 ```
 
 ## API
@@ -53,3 +54,4 @@ loop-debug.vue
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
 | inline | `boolean` | `false` | 使用行内样式 |  |
 | word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | 2.24.0 |
+| line-numbers | `boolean` | `false` | 是否显示行号 |  |

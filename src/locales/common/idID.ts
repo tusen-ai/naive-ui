@@ -45,6 +45,9 @@ const idID: NLocale = {
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
     endDatetimePlaceholder: 'Tanggal dan Waktu Selesai',
+    // FIXME: translation needed
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hari ini'
@@ -100,7 +103,6 @@ const idID: NLocale = {
     export: 'Ekspor',
     restore: 'Setel ulang ke awal'
   },
-  // TODO: translation
   Image: {
     tipPrevious: 'Previous picture (←)',
     tipNext: 'Next picture (→)',
@@ -108,7 +110,9 @@ const idID: NLocale = {
     tipClockwise: 'Clockwise',
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)'
+    tipClose: 'Close (Esc)',
+    // TODO: translation
+    tipOriginalSize: 'Zoom to original size'
   }
 }
 

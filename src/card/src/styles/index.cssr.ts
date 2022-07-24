@@ -16,11 +16,14 @@ import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_ut
 // --n-title-font-weight
 // --n-title-font-size
 // --n-title-text-color
-// --n-close-color
+// --n-close-size
+// --n-close-icon-size
 // --n-close-color-hover
 // --n-close-color-pressed
+// --n-close-icon-color
+// --n-close-icon-color-hover
+// --n-close-icon-color-pressed
 // --n-border-color
-// --n-close-size
 // --n-box-shadow
 export default c([
   cB('card', `
@@ -34,6 +37,7 @@ export default c([
     border-radius: var(--n-border-radius);
     background-color: var(--n-color);
     color: var(--n-text-color);
+    word-break: break-word;
     transition: 
       color .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
@@ -100,8 +104,10 @@ export default c([
           color: var(--n-text-color);
         `),
         cE('close', `
-          font-size: var(--n-close-size);
-          transition: color .3s var(--n-bezier);
+          margin: 0 0 0 8px;
+          transition:
+            background-color .3s var(--n-bezier),
+            color .3s var(--n-bezier);
         `)
       ]),
       cE('action', `

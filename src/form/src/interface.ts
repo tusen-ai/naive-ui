@@ -1,5 +1,10 @@
-import { Ref } from 'vue'
-import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
+import { Ref, VNodeChild } from 'vue'
+import {
+  ValidateError,
+  RuleItem,
+  ValidateOption,
+  ValidateMessages
+} from 'async-validator'
 import { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -28,6 +33,7 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
+  renderMessage?: () => VNodeChild
 }
 
 export interface FormItemValidateOptions {
@@ -90,3 +96,5 @@ export interface FormInst {
 }
 
 export type FormValidationStatus = 'success' | 'error' | 'warning'
+
+export interface FormValidateMessages extends ValidateMessages {}

@@ -1,5 +1,5 @@
-import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { defineComponent, computed, h, PropType } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, formatLength, useHoudini } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -15,7 +15,7 @@ type Gradient =
     to: string
   }
 
-const gradientTextProps = {
+export const gradientTextProps = {
   ...(useTheme.props as ThemeProps<GradientTextTheme>),
   size: [String, Number] as PropType<string | number>,
   fontSize: [String, Number] as PropType<string | number>,
@@ -36,7 +36,7 @@ export default defineComponent({
   props: gradientTextProps,
   setup (props) {
     useHoudini()
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const compatibleTypeRef = computed<
     'info' | 'success' | 'warning' | 'error' | 'primary'
     >(() => {
@@ -69,46 +69,59 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const cssVarsRef = computed(() => {
+      const { value: type } = compatibleTypeRef
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          rotate,
+          [createKey('colorStart', type)]: colorStart,
+          [createKey('colorEnd', type)]: colorEnd,
+          fontWeight
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-rotate': rotate,
+        '--n-color-start': colorStart,
+        '--n-color-end': colorEnd,
+        '--n-font-weight': fontWeight
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'gradient-text',
+        computed(() => compatibleTypeRef.value[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       compatibleType: compatibleTypeRef,
       styleFontSize: styleFontSizeRef,
       styleBgImage: styleBgImageRef,
-      cssVars: computed(() => {
-        const { value: type } = compatibleTypeRef
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            rotate,
-            [createKey('colorStart', type)]: colorStart,
-            [createKey('colorEnd', type)]: colorEnd,
-            fontWeight
-          }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-rotate': rotate,
-          '--n-color-start': colorStart,
-          '--n-color-end': colorEnd,
-          '--n-font-weight': fontWeight
-        }
-      })
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, onRender } = this
+    onRender?.()
     return (
       <span
         class={[
           `${mergedClsPrefix}-gradient-text`,
-          `${mergedClsPrefix}-gradient-text--${this.compatibleType}-type`
+          `${mergedClsPrefix}-gradient-text--${this.compatibleType}-type`,
+          this.themeClass
         ]}
         style={[
           {
             fontSize: this.styleFontSize,
             backgroundImage: this.styleBgImage
           },
-          this.cssVars as CSSProperties
+          this.cssVars as any
         ]}
       >
         {this.$slots}

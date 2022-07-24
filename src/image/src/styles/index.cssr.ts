@@ -1,6 +1,6 @@
 import { c, cB, cNotM } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
-import fadeInzoomInTransiton from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
+import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
 // --n-toolbar-icon-color
@@ -63,14 +63,15 @@ export default c([
     display: flex;
     pointer-events: none;
   `, [
-    fadeInzoomInTransiton()
+    fadeInScaleUpTransition()
   ]),
   cB('image-preview', `
     user-select: none;
+    -webkit-user-select: none;
     pointer-events: all;
     margin: auto;
-    max-height: 100vh;
-    max-width: 100vw;
+    max-height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
     transition: transform .3s var(--n-bezier);
   `),
   cB('image', `

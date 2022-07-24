@@ -15,14 +15,15 @@ import {
   startOfDay,
   startOfMonth,
   getMonth
-} from 'date-fns'
+} from 'date-fns/esm'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { call } from '../../_utils'
+import { call, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NButton, NButtonGroup } from '../../button'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
@@ -30,7 +31,7 @@ import type { CalendarTheme } from '../styles'
 import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
-const calendarProps = {
+export const calendarProps = {
   ...(useTheme.props as ThemeProps<CalendarTheme>),
   isDateDisabled: Function as PropType<(date: number) => boolean | undefined>,
   value: Number,
@@ -100,15 +101,15 @@ export default defineComponent({
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
       const newMonthTs = startOfMonth(now).valueOf()
+      monthTsRef.value = newMonthTs
       const newYear = getYear(newMonthTs)
       const newMonth = getMonth(newMonthTs)
       if (oldYear !== newYear || oldMonth !== newMonth) {
         props.onPanelChange?.({
           year: newYear,
-          month: newMonthTs
+          month: newMonth + 1
         })
       }
-      monthTsRef.value = newMonthTs
     }
     const cssVarsRef = computed(() => {
       const {
@@ -207,18 +208,28 @@ export default defineComponent({
     } = this
     onRender?.()
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
-    const localeMonth = format(monthTs, 'MMMM', { locale })
     const year = getYear(monthTs)
-    const title = monthBeforeYear
-      ? `${localeMonth} ${year}`
-      : `${year} ${localeMonth}`
+    const calendarMonth = getMonth(monthTs) + 1
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
-          <div class={`${mergedClsPrefix}-calendar-header__title`}>{title}</div>
+          <div class={`${mergedClsPrefix}-calendar-header__title`}>
+            {resolveSlotWithProps(
+              $slots.header,
+              { year, month: calendarMonth },
+              () => {
+                const localeMonth = format(monthTs, 'MMMM', { locale })
+                return [
+                  monthBeforeYear
+                    ? `${localeMonth} ${year}`
+                    : `${year} ${localeMonth}`
+                ]
+              }
+            )}
+          </div>
           <div class={`${mergedClsPrefix}-calendar-header__extra`}>
             <NButtonGroup>
               {{
@@ -277,45 +288,47 @@ export default defineComponent({
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
               const fullDate = format(ts, 'yyyy-MM-dd')
-              const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
+              // 'notInCurrentMonth' and 'disabled' are both disabled styles, but 'disabled''s cursor are not-allowed
+              const notInCurrentMonth = !inCurrentMonth
+              const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
                 <div
-                  key={isCurrentDate ? 'current' : index}
+                  key={`${calendarMonth}-${index}`}
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
+                    notInCurrentMonth &&
+                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
                     isCurrentDate &&
                       `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
+                    if (disabled) return
+                    const monthTs = startOfMonth(ts).valueOf()
+                    this.monthTs = monthTs
+                    if (notInCurrentMonth) {
+                      this.onPanelChange?.({
+                        year: getYear(monthTs),
+                        month: getMonth(monthTs) + 1
+                      })
+                    }
                     this.doUpdateValue(ts, {
                       year,
                       month: month + 1,
                       date
                     })
-                    this.monthTs = startOfMonth(ts).valueOf()
                   }}
                 >
                   <div class={`${mergedClsPrefix}-calendar-date`}>
-                    {disabled ? (
-                      <div
-                        class={`${mergedClsPrefix}-calendar-date__date`}
-                        title={fullDate}
-                        key="disabled"
-                      >
-                        {date}
-                      </div>
-                    ) : (
-                      <div
-                        class={`${mergedClsPrefix}-calendar-date__date`}
-                        title={fullDate}
-                        key="available"
-                      >
-                        {date}
-                      </div>
-                    )}
+                    <div
+                      class={`${mergedClsPrefix}-calendar-date__date`}
+                      title={fullDate}
+                    >
+                      {date}
+                    </div>
                     {index < 7 && (
                       <div
                         class={`${mergedClsPrefix}-calendar-date__day`}
@@ -332,10 +345,7 @@ export default defineComponent({
                     month: month + 1,
                     date
                   })}
-                  <div
-                    class={`${mergedClsPrefix}-calendar-cell__bar`}
-                    key={month}
-                  />
+                  <div class={`${mergedClsPrefix}-calendar-cell__bar`} />
                 </div>
               )
             }
