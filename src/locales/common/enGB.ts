@@ -56,9 +56,16 @@ const enGB: NLocale = {
     confirm: 'Confirm',
     clear: 'Clear'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: 'Source',
     targetTitle: 'Target'
+  },
+  Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
+    total: (num: number): string => `Total ${num} items`,
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'No Data'

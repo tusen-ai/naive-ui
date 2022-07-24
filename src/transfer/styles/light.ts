@@ -12,45 +12,52 @@ import { createTheme } from '../../_mixins'
 const self = (vars: ThemeCommonVars) => {
   const {
     fontWeight,
-    iconColorDisabled,
-    iconColor,
     fontSizeLarge,
     fontSizeMedium,
     fontSizeSmall,
     heightLarge,
     heightMedium,
-    heightSmall,
     borderRadius,
     cardColor,
     tableHeaderColor,
     textColor1,
     textColorDisabled,
     textColor2,
+    textColor3,
     borderColor,
-    hoverColor
+    hoverColor,
+    closeColorHover,
+    closeColorPressed,
+    closeIconColor,
+    closeIconColorHover,
+    closeIconColorPressed
   } = vars
   return {
     ...commonVariables,
-    itemHeightSmall: heightSmall,
+    itemHeightSmall: heightMedium,
     itemHeightMedium: heightMedium,
     itemHeightLarge: heightLarge,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
     borderRadius,
+    dividerColor: borderColor,
     borderColor,
     listColor: cardColor,
     headerColor: composite(cardColor, tableHeaderColor),
     titleTextColor: textColor1,
     titleTextColorDisabled: textColorDisabled,
-    extraTextColor: textColor2,
-    filterDividerColor: borderColor,
+    extraTextColor: textColor3,
+    extraTextColorDisabled: textColorDisabled,
     itemTextColor: textColor2,
     itemTextColorDisabled: textColorDisabled,
     itemColorPending: hoverColor,
     titleFontWeight: fontWeight,
-    iconColor,
-    iconColorDisabled
+    closeColorHover,
+    closeColorPressed,
+    closeIconColor,
+    closeIconColorHover,
+    closeIconColorPressed
   }
 }
 

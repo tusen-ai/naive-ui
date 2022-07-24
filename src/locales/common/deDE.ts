@@ -57,9 +57,17 @@ const deDE: NLocale = {
     confirm: 'Bestätigen',
     clear: 'Löschen'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: 'Quelle',
     targetTitle: 'Ziel'
+  },
+  // TODO: translation
+  Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
+    total: (num: number): string => `Total ${num} items`,
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'Keine Daten'

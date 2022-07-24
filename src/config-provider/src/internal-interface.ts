@@ -37,6 +37,7 @@ import type { ImageTheme } from '../../image/styles'
 import type { InputTheme } from '../../input/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
 import type { LayoutTheme } from '../../layout/styles'
+import type { LegacyTransferTheme } from '../../legacy-transfer/styles'
 import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { LogTheme } from '../../log/styles'
@@ -135,6 +136,7 @@ export interface GlobalThemeWithoutCommon {
   Input?: InputTheme
   InputNumber?: InputNumberTheme
   Layout?: LayoutTheme
+  LegacyTransfer?: LegacyTransferTheme
   List?: ListTheme
   LoadingBar?: LoadingBarTheme
   Log?: LogTheme

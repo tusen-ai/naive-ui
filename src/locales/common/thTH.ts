@@ -57,9 +57,17 @@ const thTH: NLocale = {
     confirm: 'ยืนยัน',
     clear: 'ล้างข้อมูล'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: 'Source',
     targetTitle: 'Target'
+  },
+  // TODO: translation
+  Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
+    total: (num: number): string => `Total ${num} items`,
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'ไม่มีข้อมูล'

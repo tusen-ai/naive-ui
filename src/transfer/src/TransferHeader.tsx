@@ -1,66 +1,82 @@
-import { h, computed, defineComponent, inject, PropType } from 'vue'
-import { NCheckbox } from '../../checkbox'
+import { h, defineComponent, inject, PropType } from 'vue'
+import { NButton } from '../../button'
+import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'TransferHeader',
   props: {
-    source: {
-      type: Boolean,
-      default: false
-    },
-    onChange: {
-      type: Function as PropType<(value: boolean) => void>,
+    size: {
+      type: String as PropType<'small' | 'medium' | 'large'>,
       required: true
     },
+    source: Boolean,
+    onCheckedAll: Function as PropType<() => void>,
+    onClearAll: Function as PropType<() => void>,
     title: String
   },
   setup (props) {
     const {
-      srcOptsRef,
-      tgtOptsRef,
-      srcCheckedStatusRef,
-      tgtCheckedStatusRef,
-      srcCheckedValuesRef,
-      tgtCheckedValuesRef,
+      targetOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
       mergedThemeRef,
       disabledRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      srcOptionsLengthRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
-    const checkboxPropsRef = computed(() => {
-      const { source } = props
-      if (source) {
-        return srcCheckedStatusRef.value
-      } else {
-        return tgtCheckedStatusRef.value
-      }
-    })
+    const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source } = props
-      const { value: checkboxProps } = checkboxPropsRef
+      const { source, onClearAll, onCheckedAll } = props
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const { value: locale } = localeRef
+      const buttonSize = props.size === 'large' ? 'small' : 'tiny'
+      const { title } = props
       return (
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
-          <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
-            <NCheckbox
-              theme={mergedTheme.peers.Checkbox}
-              themeOverrides={mergedTheme.peerOverrides.Checkbox}
-              checked={checkboxProps.checked}
-              indeterminate={checkboxProps.indeterminate}
-              disabled={checkboxProps.disabled || disabledRef.value}
-              onUpdateChecked={props.onChange}
-            />
-          </div>
-          <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
-            {props.title}
-          </div>
+          {title && (
+            <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
+              {title}
+            </div>
+          )}
+          {source && (
+            <NButton
+              class={`${mergedClsPrefix}-transfer-list-header__button`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              size={buttonSize}
+              tertiary
+              onClick={allCheckedRef.value ? onClearAll : onCheckedAll}
+              disabled={canNotSelectAnythingRef.value || disabledRef.value}
+            >
+              {{
+                default: () =>
+                  allCheckedRef.value ? locale.unselectAll : locale.selectAll
+              }}
+            </NButton>
+          )}
+          {!source && canBeClearedRef.value && (
+            <NButton
+              class={`${mergedClsPrefix}-transfer-list-header__button`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              size={buttonSize}
+              tertiary
+              onClick={onClearAll}
+              disabled={disabledRef.value}
+            >
+              {{
+                default: () => locale.clearAll
+              }}
+            </NButton>
+          )}
           <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
             {source
-              ? srcCheckedValuesRef.value.length
-              : tgtCheckedValuesRef.value.length}
-            /{source ? srcOptsRef.value.length : tgtOptsRef.value.length}
+              ? locale.total(srcOptionsLengthRef.value)
+              : locale.selected(targetOptionsRef.value.length)}
           </div>
         </div>
       )

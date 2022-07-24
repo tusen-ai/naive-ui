@@ -43,7 +43,7 @@ export interface LogInst {
     slient?: boolean
     position: 'top' | 'bottom'
   }) => void) &
-    ((options: { slient?: boolean, top: number }) => void)
+  ((options: { slient?: boolean, top: number }) => void)
 }
 
 export const logProps = {

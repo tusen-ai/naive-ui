@@ -38,6 +38,7 @@ import { imageDark } from '../image/styles'
 import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
 import { layoutDark } from '../layout/styles'
+import { legacyTransferDark } from '../legacy-transfer/styles'
 import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
@@ -120,6 +121,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
+  LegacyTransfer: legacyTransferDark,
   Layout: layoutDark,
   List: listDark,
   LoadingBar: loadingBarDark,

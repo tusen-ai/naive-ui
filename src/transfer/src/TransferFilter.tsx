@@ -10,14 +10,6 @@ export default defineComponent({
     value: String,
     placeholder: String,
     disabled: Boolean,
-    onFocus: {
-      type: Function as PropType<() => void>,
-      required: true
-    },
-    onBlur: {
-      type: Function as PropType<() => void>,
-      required: true
-    },
     onUpdateValue: {
       type: Function as PropType<(value: string | null) => void>,
       required: true
@@ -39,20 +31,15 @@ export default defineComponent({
           value={this.value}
           onUpdateValue={this.onUpdateValue}
           disabled={this.disabled}
+          placeholder={this.placeholder}
           theme={mergedTheme.peers.Input}
           themeOverrides={mergedTheme.peerOverrides.Input}
           clearable
           size="small"
-          placeholder={this.placeholder}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
         >
           {{
             'clear-icon-placeholder': () => (
-              <NBaseIcon
-                clsPrefix={mergedClsPrefix}
-                class={`${mergedClsPrefix}-transfer-icon`}
-              >
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => <SearchIcon /> }}
               </NBaseIcon>
             )

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-transfer` 的 UI 完全重构，原本的 transfer 组件被重命名为 `n-legacy-transfer`，并将在下个主版本被移除。
+
 ### Fixes
 
 - `n-notification` 新增 `keepAliveOnHover` 属性，用于设置鼠标移入时是否保持通知框显示，关闭 [#3249](https://github.com/TuSimple/naive-ui/issues/3249)
@@ -14,6 +18,7 @@
 - 修复 `n-carousel` 在 `autoplay` 为 `true` 时 `hover` 不停止播放，关闭 [#3304](https://github.com/TuSimple/naive-ui/issues/3304)
 - 修复 `n-tree` 在选中节点时设定 `expanded-keys` 时可能会抛出异常，关闭 [#3319](https://github.com/TuSimple/naive-ui/issues/3319)
 - 修复 `n-avatar` 加载失败时依然显示 placeholder，关闭 [#3315](https://github.com/TuSimple/naive-ui/issues/3315)
+- 修复 `n-input-number` 按住按钮时重复注册 `mouseup` 事件
 
 ### Feats
 
@@ -23,6 +28,9 @@
 - `n-legacy-grid` 支持 RTL
 - `n-statistic` 支持 RTL
 - `n-thing` 支持 RTL
+- `n-transfer` 新增 `render-source-label` 属性
+- `n-transfer` 新增 `render-target-label` 属性
+- `n-transfer` 新增 `render-source-list` 属性
 
 ## 2.31.0
 
