@@ -94,6 +94,7 @@ import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
+import type { RowTheme } from '../../legacy-grid/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -175,6 +176,7 @@ export interface GlobalThemeWithoutCommon {
   Typography?: TypographyTheme
   Upload?: UploadTheme
   Watermark?: WatermarkTheme
+  Row?: RowTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme

@@ -72,13 +72,16 @@ export { selectDark } from './select/styles'
 export { sliderDark } from './slider/styles'
 export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'
 export { spinDark } from './spin/styles'
-export { statisticDark } from './statistic/styles'
+export {
+  statisticDark,
+  statisticRtl as unstableStatisticRtl
+} from './statistic/styles'
 export { stepsDark } from './steps/styles'
 export { switchDark } from './switch/styles'
 export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
 export { tabsDark } from './tabs/styles'
 export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'
-export { thingDark } from './thing/styles'
+export { thingDark, thingRtl as unstableThingRtl } from './thing/styles'
 export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
 export { tooltipDark } from './tooltip/styles'
@@ -88,6 +91,7 @@ export { treeSelectDark } from './tree-select/styles'
 export { typographyDark } from './typography/styles'
 export { uploadDark } from './upload/styles'
 export { watermarkDark } from './watermark/styles'
+export { rowRtl as unstableRowRtl } from './legacy-grid/styles'
 
 // danger zone, internal styles
 export { scrollbarDark } from './_internal/scrollbar/styles'

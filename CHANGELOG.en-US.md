@@ -25,6 +25,9 @@
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 - `n-tree` supports RTL.
 - `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).
+- `n-legacy-grid` supports RTL.
+- `n-statistic` supports RTL.
+- `n-thing` supports RTL.
 - `n-transfer` add `render-source-label` prop.
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.
