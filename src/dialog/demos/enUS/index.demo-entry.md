@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+draggable.vue
 ```
 
 ## API
@@ -58,7 +59,7 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
@@ -74,6 +75,7 @@ action.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
+| draggable | `boolean` | `false` | enable dragging feature for Dialog. |  |
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
@@ -89,7 +91,7 @@ action.vue
 All the properties can be modified dynamically.
 
 | Name | Type | Description | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
@@ -103,6 +105,7 @@ All the properties can be modified dynamically.
 | positiveButtonProps | `ButtonProps` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
+| draggable | `boolean` | `false` | enable dragging feature for Dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
