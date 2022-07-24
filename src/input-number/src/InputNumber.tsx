@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
-import { on } from 'evtd'
+import { off, on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
@@ -450,13 +450,24 @@ export default defineComponent({
         addHoldStateIntervalId = null
       }
     }
+    function once<K extends keyof HTMLElementEventMap> (
+      type: K,
+      el: EventTarget,
+      handler: EventListener
+    ): void {
+      function _hanlder (e: Event): void {
+        handler(e)
+        off(type, el, _hanlder)
+      }
+      on(type, el, _hanlder)
+    }
     function handleMinusMousedown (): void {
       firstMinusMousedownId = window.setTimeout(() => {
         minusHoldStateIntervalId = window.setInterval(() => {
           doMinus()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on('mouseup', document, () => {
+      once('mouseup', document, () => {
         window.setTimeout(clearMinusHoldTimeout, 0)
       })
     }
@@ -467,7 +478,7 @@ export default defineComponent({
           doAdd()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on('mouseup', document, () => {
+      once('mouseup', document, () => {
         window.setTimeout(clearAddHoldTimeout, 0)
       })
     }
