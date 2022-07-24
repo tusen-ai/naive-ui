@@ -57,8 +57,8 @@ const zhCN: NLocale = {
     clear: '重置'
   },
   Transfer: {
-    sourceTitle: '源项',
-    targetTitle: '目标项'
+    total: (num: number): string => `共 ${num} 项`,
+    selectedTotal: (num: number): string => `已选 ${num} 项`
   },
   Empty: {
     description: '无数据'

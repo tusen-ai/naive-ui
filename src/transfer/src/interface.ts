@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import { Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TransferTheme } from '../styles'
@@ -12,8 +12,8 @@ export interface Option {
 
 export interface CheckedStatus {
   checked: boolean
-  indeterminate: boolean
-  disabled?: boolean
+  allChecked: boolean
+  disabled: boolean
 }
 
 export type Filter = (
@@ -22,19 +22,31 @@ export type Filter = (
   from: 'source' | 'target'
 ) => boolean
 
+export interface RenderLabelProps {
+  from: 'source' | 'target'
+  option: Option
+}
+
+export type RenderLabelType = (props: RenderLabelProps) => VNodeChild
+
+export interface RenderListProps {
+  onCheck: (checkedValueList: OptionValue[]) => void
+  checkedOptions: Option[]
+  pattern: string
+}
+
+export type RenderSourceListType = (props: RenderListProps) => VNodeChild
+
 export interface TransferInjection {
+  tgtValueSetRef: Ref<Set<OptionValue>>
   mergedClsPrefixRef: Ref<string>
-  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>
-  srcCheckedValuesRef: Ref<OptionValue[]>
-  tgtCheckedValuesRef: Ref<OptionValue[]>
   srcOptsRef: Ref<Option[]>
   tgtOptsRef: Ref<Option[]>
-  srcCheckedStatusRef: Ref<CheckedStatus>
-  tgtCheckedStatusRef: Ref<CheckedStatus>
-  handleSrcCheckboxClick: (checked: boolean, value: OptionValue) => void
-  handleTgtCheckboxClick: (checked: boolean, value: OptionValue) => void
+  headerBtnStatusRef: Ref<CheckedStatus>
+  handleItemCheck: (checked: boolean, value: OptionValue) => void
+  renderLabel: RenderLabelType | undefined
 }
 
 export const transferInjectionKey =

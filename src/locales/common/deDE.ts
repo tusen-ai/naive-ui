@@ -58,8 +58,8 @@ const deDE: NLocale = {
     clear: 'Löschen'
   },
   Transfer: {
-    sourceTitle: 'Quelle',
-    targetTitle: 'Ziel'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Keine Daten'

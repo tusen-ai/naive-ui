@@ -59,8 +59,8 @@ const nbNO: NLocale = {
     clear: 'Tøm'
   },
   Transfer: {
-    sourceTitle: 'Kilde',
-    targetTitle: 'Mål'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Ingen data'

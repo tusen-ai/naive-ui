@@ -1,5 +1,6 @@
-import { h, computed, defineComponent, inject, PropType } from 'vue'
-import { NCheckbox } from '../../checkbox'
+import { h, defineComponent, inject, PropType } from 'vue'
+import { NButton } from '../../button'
+import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({
@@ -9,9 +10,11 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    onChange: {
-      type: Function as PropType<(value: boolean) => void>,
-      required: true
+    onCheckedAll: {
+      type: Function as PropType<() => void>
+    },
+    onClearAll: {
+      type: Function as PropType<() => void>
     },
     title: String
   },
@@ -19,48 +22,61 @@ export default defineComponent({
     const {
       srcOptsRef,
       tgtOptsRef,
-      srcCheckedStatusRef,
-      tgtCheckedStatusRef,
-      srcCheckedValuesRef,
-      tgtCheckedValuesRef,
+      headerBtnStatusRef,
       mergedThemeRef,
       disabledRef,
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
-    const checkboxPropsRef = computed(() => {
-      const { source } = props
-      if (source) {
-        return srcCheckedStatusRef.value
-      } else {
-        return tgtCheckedStatusRef.value
-      }
-    })
+    const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source } = props
-      const { value: checkboxProps } = checkboxPropsRef
+      const { source, onClearAll, onCheckedAll } = props
+      const { value: headerBtnStatus } = headerBtnStatusRef
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const { value: locale } = localeRef
       return (
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
-          <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
-            <NCheckbox
-              theme={mergedTheme.peers.Checkbox}
-              themeOverrides={mergedTheme.peerOverrides.Checkbox}
-              checked={checkboxProps.checked}
-              indeterminate={checkboxProps.indeterminate}
-              disabled={checkboxProps.disabled || disabledRef.value}
-              onUpdateChecked={props.onChange}
-            />
-          </div>
-          <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
+          {source && (
+            <div class={`${mergedClsPrefix}-transfer-list-header__button`}>
+              <NButton
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                size="tiny"
+                tertiary
+                onClick={headerBtnStatus.allChecked ? onClearAll : onCheckedAll}
+                disabled={headerBtnStatus.disabled || disabledRef.value}
+              >
+                {{
+                  default: () =>
+                    headerBtnStatus.allChecked ? '取消全选' : '全选'
+                }}
+              </NButton>
+            </div>
+          )}
+          {!source && headerBtnStatus.checked && (
+            <div class={`${mergedClsPrefix}-transfer-list-header__button`}>
+              <NButton
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                size="tiny"
+                tertiary
+                onClick={onClearAll}
+                disabled={headerBtnStatus.disabled || disabledRef.value}
+              >
+                {{
+                  default: () => '清空'
+                }}
+              </NButton>
+            </div>
+          )}
+          {/* <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
             {props.title}
-          </div>
+          </div> */}
           <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
             {source
-              ? srcCheckedValuesRef.value.length
-              : tgtCheckedValuesRef.value.length}
-            /{source ? srcOptsRef.value.length : tgtOptsRef.value.length}
+              ? locale.total(srcOptsRef.value.length)
+              : locale.selectedTotal(tgtOptsRef.value.length)}
           </div>
         </div>
       )

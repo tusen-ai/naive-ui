@@ -57,8 +57,8 @@ const ukUA: NLocale = {
     clear: 'Стерти'
   },
   Transfer: {
-    sourceTitle: 'Джерело',
-    targetTitle: 'Ціль'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Немає даних'

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-transfer` 的样式及代码被重构
+
 ### Fixes
 
 - `n-notification` 新增 `keepAliveOnHover` 属性，用于设置鼠标移入时是否保持通知框显示，关闭 [#3249](https://github.com/TuSimple/naive-ui/issues/3249)
@@ -20,6 +24,8 @@
 - `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
 - `n-tree` 支持 RTL
 - `n-input` 新增 `scrollTo` 方法，关闭 [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
+- `n-transfer` 新增 `render-label` 属性
+- `n-transfer` 新增 `render-source-list` 属性
 
 ## 2.31.0
 

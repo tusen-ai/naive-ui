@@ -58,8 +58,8 @@ const plPL: NLocale = {
     clear: 'Wyczyść'
   },
   Transfer: {
-    sourceTitle: 'Źródło',
-    targetTitle: 'Cel'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Brak danych'

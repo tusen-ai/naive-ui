@@ -2,7 +2,9 @@
 
 <!--single-column-->
 
-Left, right, right, left... I'm a simple man, and I can play this all day.
+~~Left, right, right, left... I'm a simple man, and I can play this all day.~~
+
+Now, the transfer's style is simple and efficient. I can't continue to play.
 
 ## Demos
 
@@ -11,6 +13,8 @@ basic.vue
 large-data.vue
 size.vue
 filterable.vue
+render-label
+render-source-list
 ```
 
 ## API
@@ -24,6 +28,8 @@ filterable.vue
 | filterable | `boolean` | `false` | Filterable state. |
 | filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. |
 | options | `Array<TransferOption>` | `[]` | For configuration options, see the TransferOption Type below. |
+| render-label | `({ from, option }: { from: 'source' \| 'target', option: TransferOption }) => VNodeChild` | `undefined` | Customize label rendering. |
+| render-source-list | `({ onCheck, checkedOptions, pattern }: { onCheck: (checkedValueList: Array<OptionValue>) => void, checkedOptions: Array<Option>, pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. |
 | source-title | `string` | `'Source'` | Source items title. |

@@ -55,8 +55,8 @@ const enUS = {
     clear: 'Clear'
   },
   Transfer: {
-    sourceTitle: 'Source',
-    targetTitle: 'Target'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'No Data'

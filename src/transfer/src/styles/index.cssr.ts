@@ -1,5 +1,4 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 
 const animation = c([
   c('@keyframes transfer-slide-in-from-left', `
@@ -81,6 +80,35 @@ export default c([
       border-radius: var(--n-border-radius);
       background-color: var(--n-list-color);
     `, [
+      c('&:first-child', `
+        border-top-right-radius: 0!important;
+        border-bottom-right-radius: 0!important;
+      `),
+      c('&:last-child', `
+        margin-left: -1px!important;
+        border-top-left-radius: 0!important;
+        border-bottom-left-radius: 0!important;
+      `, [
+        cB('transfer-list-header', null, [
+          cE('header', `
+            flex: 1;
+            line-height: 1;
+            font-weight: var(--n-header-font-weight);
+            transition: color .3s var(--n-bezier);
+            color: var(--n-header-text-color);
+            padding-left: 14px;
+        `, [
+            cM('disabled', {
+              color: 'var(--n-header-text-color-disabled)'
+            })
+          ])
+        ]),
+        cB('transfer-list-item', null, [
+          cE('label', `
+            padding-left: 14px;
+          `)
+        ])
+      ]),
       cE('border', `
         border: 1px solid var(--n-border-color);
         transition: border-color .3s var(--n-bezier);
@@ -95,38 +123,27 @@ export default c([
       cB('transfer-list-header', `
         height: calc(var(--n-item-height) + 4px);
         box-sizing: border-box;
-        display: flex;
+        display: grid;
+        grid-template-areas: "button . extra";
+        grid-template-columns: auto 1fr auto;
         align-items: center;
         background-clip: padding-box;
         border-radius: inherit;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        background-color: var(--n-header-color);
         transition:
           border-color .3s var(--n-bezier),
           background-color .3s var(--n-bezier);
       `, [
-        cE('checkbox', `
-          display: flex;
-          align-items: center;
+        cE('button', `
+          grid-area: button;
           position: relative;
           padding: 0 9px 0 14px;
         `),
-        cE('header', `
-          flex: 1;
-          line-height: 1;
-          font-weight: var(--n-header-font-weight);
-          transition: color .3s var(--n-bezier);
-          color: var(--n-header-text-color);
-        `, [
-          cM('disabled', {
-            color: 'var(--n-header-text-color-disabled)'
-          })
-        ]),
         cE('extra', `
+          grid-area: extra;
           transition: color .3s var(--n-bezier);
           font-size: var(--n-extra-font-size);
-          justify-self: flex-end;
           margin-right: 14px;
           white-space: nowrap;
           color: var(--n-header-extra-text-color);
@@ -144,13 +161,11 @@ export default c([
         border-top-right-radius: 0;
       `, [
         cB('transfer-filter', `
-          padding: 0 8px 8px 8px;
+          padding: 2px 8px 8px 8px;
           box-sizing: border-box;
-          background-color: var(--n-header-color);
           transition:
             border-color .3s var(--n-bezier),
             background-color .3s var(--n-bezier);
-          border-bottom: 1px solid var(--n-filter-divider-color);
         `),
         cB('transfer-list-flex-container', `
           flex: 1;
@@ -173,9 +188,7 @@ export default c([
             left: 50%;
             top: 50%;
             transform: translateY(-50%) translateX(-50%);
-          `, [
-            fadeInTransition()
-          ]),
+          `),
           cB('transfer-list-content', `
             padding: 0;
             margin: 0;
@@ -187,14 +200,10 @@ export default c([
               })
             ]),
             cB('transfer-list-item', `
-              height: var(--n-item-height);
-              max-height: var(--n-item-height);
-                transition:
-                  background-color .3s var(--n-bezier),
-                  color .3s var(--n-bezier);
-              position: relative;
-              cursor: pointer;
-              display: flex;
+              min-height: var(--n-item-height);
+              display: grid;
+              grid-template-areas: "checkbox label suffix";
+              grid-template-columns: auto 1fr auto;
               align-items: center;
               color: var(--n-item-text-color);
             `, [
@@ -203,75 +212,29 @@ export default c([
                   backgroundColor: 'var(--n-item-color-pending)'
                 })
               ]),
-              cE('extra', `
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                padding-right: 4px;
-              `),
               cE('checkbox', `
-                display: flex;
-                align-items: center;
-                position: relative;
+                grid-area: checkbox;
                 padding: 0 9px 0 14px;
+              `),
+              cE('close', `
+                grid-area: suffix;
+                padding: 4px 14px 0 9px;
               `),
               cM('disabled', `
                 cursor: not-allowed
                 background-color: #0000;
                 color: var(--n-item-text-color-disabled);
               `),
-              cM('source', {
-                animationFillMode: 'forwards'
-              }, [
-                c('&.item-enter-active', `
-                  transform: translateX(150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
-                  animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-right;
-                `),
-                c('&.item-leave-active', `
-                  transform: translateX(-150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
-                  animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
-                `)
-              ]),
-              cM('target', {
-                animationFillMode: 'forwards'
-              }, [
-                c('&.item-enter-active', `
-                  transform: translateX(-150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
-                  animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-left;
-                `),
-                c('&.item-leave-active', `
-                  transform: translateX(150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
-                  animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-left;
-                `)
-              ])
+              cM('source', `
+                cursor: pointer;
+              `),
+              cM('target', `
+                cursor: default;
+              `)
             ])
           ])
         ])
       ])
-    ]),
-    cB('transfer-gap', {
-      width: '72px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column'
-    }),
-    cB('button', [
-      c('&:first-child', {
-        marginBottom: '12px'
-      })
     ])
   ]),
   animation

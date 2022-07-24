@@ -59,8 +59,8 @@ const ruRu: NLocale = {
     clear: 'Очистить'
   },
   Transfer: {
-    sourceTitle: 'Источник',
-    targetTitle: 'Назначение'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Нет данных'

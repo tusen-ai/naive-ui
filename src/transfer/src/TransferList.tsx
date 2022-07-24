@@ -111,6 +111,7 @@ export default defineComponent({
                           value={item.value}
                           disabled={item.disabled || disabled}
                           label={item.label}
+                          option={item}
                         />
                       )
                     }
@@ -133,6 +134,7 @@ export default defineComponent({
                             value={option.value}
                             disabled={option.disabled || disabled}
                             label={option.label}
+                            option={option}
                           />
                         ))
                       }
