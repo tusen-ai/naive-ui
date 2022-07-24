@@ -334,6 +334,11 @@ export const enComponentRoutes = [
     component: () => import('../../src/transfer/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'legacy-transfer',
+    component: () =>
+      import('../../src/legacy-transfer/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'spin',
     component: () => import('../../src/spin/demos/enUS/index.demo-entry.md')
   },
@@ -700,6 +705,11 @@ export const zhComponentRoutes = [
   {
     path: 'transfer',
     component: () => import('../../src/transfer/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'legacy-transfer',
+    component: () =>
+      import('../../src/legacy-transfer/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'spin',
