@@ -44,7 +44,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const scrollContainerRef = ref<HTMLElement>(null as unknown as HTMLElement)
+    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
     return {
       scrollContainer: scrollContainerRef,
       target: () => scrollContainerRef.value
