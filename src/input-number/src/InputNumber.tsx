@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
-import { off, on } from 'evtd'
+import { on } from 'evtd'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
 import { NInput } from '../../input'
@@ -450,26 +450,22 @@ export default defineComponent({
         addHoldStateIntervalId = null
       }
     }
-    function once<K extends keyof HTMLElementEventMap> (
-      type: K,
-      el: EventTarget,
-      handler: EventListener
-    ): void {
-      function _hanlder (e: Event): void {
-        handler(e)
-        off(type, el, _hanlder)
-      }
-      on(type, el, _hanlder)
-    }
     function handleMinusMousedown (): void {
       firstMinusMousedownId = window.setTimeout(() => {
         minusHoldStateIntervalId = window.setInterval(() => {
           doMinus()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      once('mouseup', document, () => {
-        window.setTimeout(clearMinusHoldTimeout, 0)
-      })
+      on(
+        'mouseup',
+        document,
+        () => {
+          window.setTimeout(clearMinusHoldTimeout, 0)
+        },
+        {
+          once: true
+        }
+      )
     }
     let firstAddMousedownId: number | null = null
     function handleAddMousedown (): void {
@@ -478,9 +474,16 @@ export default defineComponent({
           doAdd()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      once('mouseup', document, () => {
-        window.setTimeout(clearAddHoldTimeout, 0)
-      })
+      on(
+        'mouseup',
+        document,
+        () => {
+          window.setTimeout(clearAddHoldTimeout, 0)
+        },
+        {
+          once: true
+        }
+      )
     }
     const handleAddClick = (): void => {
       if (addHoldStateIntervalId) return
