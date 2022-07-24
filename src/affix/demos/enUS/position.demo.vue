@@ -37,7 +37,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const containerRef = ref<HTMLElement>(null as unknown as HTMLElement)
+    const containerRef = ref<HTMLElement | undefined>(undefined)
     return {
       containerRef
     }
