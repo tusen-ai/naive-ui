@@ -62,15 +62,15 @@ export default defineComponent({
     return (
       <div
         class={[
-          `${mergedClsPrefix}-transfer-list-item`,
-          disabled && `${mergedClsPrefix}-transfer-list-item--disabled`,
+          `${mergedClsPrefix}-legacy-transfer-list-item`,
+          disabled && `${mergedClsPrefix}-legacy-transfer-list-item--disabled`,
           source
-            ? `${mergedClsPrefix}-transfer-list-item--source`
-            : `${mergedClsPrefix}-transfer-list-item--target`
+            ? `${mergedClsPrefix}-legacy-transfer-list-item--source`
+            : `${mergedClsPrefix}-legacy-transfer-list-item--target`
         ]}
         onClick={this.handleClick}
       >
-        <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
+        <div class={`${mergedClsPrefix}-legacy-transfer-list-item__checkbox`}>
           <NCheckbox
             theme={mergedTheme.peers.Checkbox}
             themeOverrides={mergedTheme.peerOverrides.Checkbox}
@@ -79,7 +79,7 @@ export default defineComponent({
           />
         </div>
         <div
-          class={`${mergedClsPrefix}-transfer-list-item__label`}
+          class={`${mergedClsPrefix}-legacy-transfer-list-item__label`}
           title={getTitleAttribute(label)}
         >
           {label}

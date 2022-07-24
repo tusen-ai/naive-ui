@@ -42,8 +42,10 @@ export default defineComponent({
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
-        <div class={`${mergedClsPrefix}-transfer-list-header`}>
-          <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
+        <div class={`${mergedClsPrefix}-legacy-transfer-list-header`}>
+          <div
+            class={`${mergedClsPrefix}-legacy-transfer-list-header__checkbox`}
+          >
             <NCheckbox
               theme={mergedTheme.peers.Checkbox}
               themeOverrides={mergedTheme.peerOverrides.Checkbox}
@@ -53,10 +55,10 @@ export default defineComponent({
               onUpdateChecked={props.onChange}
             />
           </div>
-          <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
+          <div class={`${mergedClsPrefix}-legacy-transfer-list-header__header`}>
             {props.title}
           </div>
-          <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
+          <div class={`${mergedClsPrefix}-legacy-transfer-list-header__extra`}>
             {source
               ? srcCheckedValuesRef.value.length
               : tgtCheckedValuesRef.value.length}

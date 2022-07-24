@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-transfer`'s UI is totally refactored. The original transfer component is renamed as `n-legacy-transfer` and will be removed in next major version.
+
 ### Fixes
 
 - `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
@@ -20,7 +24,8 @@
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 - `n-tree` supports RTL.
 - `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).
-- `n-transfer` add `render-label` prop.
+- `n-transfer` add `render-source-label` prop.
+- `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.
 
 ## 2.31.0

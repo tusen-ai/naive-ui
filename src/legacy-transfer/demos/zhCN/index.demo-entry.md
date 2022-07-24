@@ -2,8 +2,10 @@
 
 <!--single-column-->
 
-<n-alert title="警告">
-  这个穿梭框组件已经被废弃，并将在下一个大版本中彻底移除。
+<n-alert title="警告" type="warning">
+  这个穿梭框组件已经被废弃，不会迭代任何新的功能，并将在下一个大版本中彻底移除。推荐使用新的 <router-link to="transfer" custom v-slot="{ href, navigate }">
+    <n-a :href="href" @click="navigate">穿梭框</n-a>
+  </router-link>。
 </n-alert>
 
 左、右、左、右...像我这么无聊的人能玩一整天。
@@ -27,7 +29,7 @@ filterable.vue
 | disabled | `boolean` | `true` | 是否禁用 |
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 |
-| options | `Array<TransferOption>` | `[]` | 配置选项内容，详情见 TransferOption Type |
+| options | `TransferOption[]` | `[]` | 配置选项内容，详情见 TransferOption Type |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 |
 | source-title | `string` | `'源项'` | 源项标题 |

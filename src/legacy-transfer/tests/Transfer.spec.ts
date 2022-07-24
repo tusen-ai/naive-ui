@@ -1,23 +1,23 @@
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { NTransfer } from '../index'
+import { NLegacyTransfer } from '../index'
 
-describe('n-transfer', () => {
+describe('n-legacy-transfer', () => {
   it('should work with import on demand', () => {
-    mount(NTransfer)
+    mount(NLegacyTransfer)
   })
 
   it('should work with `disabled` prop', () => {
-    const wrapper = mount(NTransfer, { props: { disabled: true } })
-    expect(wrapper.find('.n-transfer').attributes('class')).toContain(
-      'n-transfer--disabled'
+    const wrapper = mount(NLegacyTransfer, { props: { disabled: true } })
+    expect(wrapper.find('.n-legacy-transfer').attributes('class')).toContain(
+      'n-legacy-transfer--disabled'
     )
   })
 
   it('should work with `filterable` prop', () => {
-    const wrapper = mount(NTransfer, { props: { filterable: true } })
-    expect(wrapper.find('.n-transfer').attributes('class')).toContain(
-      'n-transfer--filterable'
+    const wrapper = mount(NLegacyTransfer, { props: { filterable: true } })
+    expect(wrapper.find('.n-legacy-transfer').attributes('class')).toContain(
+      'n-legacy-transfer--filterable'
     )
   })
 
@@ -29,7 +29,7 @@ describe('n-transfer', () => {
       }
     ]
     const onFilter = jest.fn()
-    const wrapper = mount(NTransfer, {
+    const wrapper = mount(NLegacyTransfer, {
       props: { filterable: true, filter: onFilter, options: options }
     })
     await wrapper.find('input').setValue('1')
@@ -39,15 +39,17 @@ describe('n-transfer', () => {
 
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((i) => {
-      const wrapper = mount(NTransfer, {
+      const wrapper = mount(NLegacyTransfer, {
         props: { size: i }
       })
-      expect(wrapper.find('.n-transfer').attributes('style')).toMatchSnapshot()
+      expect(
+        wrapper.find('.n-legacy-transfer').attributes('style')
+      ).toMatchSnapshot()
     })
   })
 
   it('should work with `source-filter-placeholder`、`target-filter-placeholder` props', async () => {
-    const wrapper = mount(NTransfer, {
+    const wrapper = mount(NLegacyTransfer, {
       props: {
         filterable: true,
         'source-filter-placeholder': 'test-source',
@@ -63,17 +65,17 @@ describe('n-transfer', () => {
   })
 
   it('should work with `source-title`、`target-title` props', async () => {
-    const wrapper = mount(NTransfer, {
+    const wrapper = mount(NLegacyTransfer, {
       props: {
         'source-title': 'test-source',
         'target-title': 'test-target'
       }
     })
-    expect(wrapper.findAll('.n-transfer-list-header__header')[0].text()).toBe(
-      'test-source'
-    )
-    expect(wrapper.findAll('.n-transfer-list-header__header')[1].text()).toBe(
-      'test-target'
-    )
+    expect(
+      wrapper.findAll('.n-legacy-transfer-list-header__header')[0].text()
+    ).toBe('test-source')
+    expect(
+      wrapper.findAll('.n-legacy-transfer-list-header__header')[1].text()
+    ).toBe('test-target')
   })
 })

@@ -34,7 +34,7 @@ export default defineComponent({
   render () {
     const { mergedTheme, mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-transfer-filter`}>
+      <div class={`${mergedClsPrefix}-legacy-transfer-filter`}>
         <NInput
           value={this.value}
           onUpdateValue={this.onUpdateValue}
@@ -51,7 +51,7 @@ export default defineComponent({
             'clear-icon-placeholder': () => (
               <NBaseIcon
                 clsPrefix={mergedClsPrefix}
-                class={`${mergedClsPrefix}-transfer-icon`}
+                class={`${mergedClsPrefix}-legacy-transfer-icon`}
               >
                 {{ default: () => <SearchIcon /> }}
               </NBaseIcon>

@@ -10,24 +10,14 @@ export interface Option {
   disabled?: boolean
 }
 
-export interface CheckedStatus {
-  checked: boolean
-  allChecked: boolean
-  disabled: boolean
-}
-
-export type Filter = (
-  pattern: string,
-  option: Option,
-  from: 'source' | 'target'
-) => boolean
+export type Filter = (pattern: string, option: Option) => boolean
 
 export interface RenderLabelProps {
-  from: 'source' | 'target'
   option: Option
 }
 
-export type RenderLabelType = (props: RenderLabelProps) => VNodeChild
+export type TransferRenderTargetLabel = (props: RenderLabelProps) => VNodeChild
+export type TransferRenderSourceLabel = (props: RenderLabelProps) => VNodeChild
 
 export interface RenderListProps {
   onCheck: (checkedValueList: OptionValue[]) => void
@@ -38,15 +28,18 @@ export interface RenderListProps {
 export type RenderSourceListType = (props: RenderListProps) => VNodeChild
 
 export interface TransferInjection {
-  tgtValueSetRef: Ref<Set<OptionValue>>
+  targetValueSetRef: Ref<Set<OptionValue>>
   mergedClsPrefixRef: Ref<string>
   disabledRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>
-  srcOptsRef: Ref<Option[]>
-  tgtOptsRef: Ref<Option[]>
-  headerBtnStatusRef: Ref<CheckedStatus>
+  targetOptionsRef: Ref<Option[]>
+  canNotSelectAnythingRef: Ref<boolean>
+  canBeClearedRef: Ref<boolean>
+  allCheckedRef: Ref<boolean>
+  srcOptionsLengthRef: Ref<number>
   handleItemCheck: (checked: boolean, value: OptionValue) => void
-  renderLabel: RenderLabelType | undefined
+  renderSourceLabelRef: Ref<TransferRenderSourceLabel | undefined>
+  renderTargetLabelRef: Ref<TransferRenderTargetLabel | undefined>
 }
 
 export const transferInjectionKey =

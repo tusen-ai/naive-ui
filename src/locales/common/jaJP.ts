@@ -57,9 +57,17 @@ const jaJP: NLocale = {
     confirm: 'OK',
     clear: 'リセット'
   },
+  LegacyTransfer: {
+    sourceTitle: '元',
+    targetTitle: '先'
+  },
+  // TODO: translation
   Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
     total: (num: number): string => `Total ${num} items`,
-    selectedTotal: (num: number): string => `Selected ${num} items`
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'データなし'

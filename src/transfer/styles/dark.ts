@@ -19,45 +19,53 @@ const transferDark: TransferTheme = {
   },
   self (vars) {
     const {
-      iconColorDisabled,
-      iconColor,
       fontWeight,
       fontSizeLarge,
       fontSizeMedium,
       fontSizeSmall,
       heightLarge,
       heightMedium,
-      heightSmall,
       borderRadius,
       inputColor,
       tableHeaderColor,
       textColor1,
       textColorDisabled,
       textColor2,
-      hoverColor
+      textColor3,
+      hoverColor,
+      closeColorHover,
+      closeColorPressed,
+      closeIconColor,
+      closeIconColorHover,
+      closeIconColorPressed,
+      dividerColor
     } = vars
     return {
       ...commonVariables,
-      itemHeightSmall: heightSmall,
+      itemHeightSmall: heightMedium,
       itemHeightMedium: heightMedium,
       itemHeightLarge: heightLarge,
       fontSizeSmall,
       fontSizeMedium,
       fontSizeLarge,
       borderRadius,
+      dividerColor,
       borderColor: '#0000',
       listColor: inputColor,
       headerColor: tableHeaderColor,
       titleTextColor: textColor1,
       titleTextColorDisabled: textColorDisabled,
-      extraTextColor: textColor2,
-      filterDividerColor: '#0000',
+      extraTextColor: textColor3,
+      extraTextColorDisabled: textColorDisabled,
       itemTextColor: textColor2,
       itemTextColorDisabled: textColorDisabled,
       itemColorPending: hoverColor,
       titleFontWeight: fontWeight,
-      iconColor,
-      iconColorDisabled
+      closeColorHover,
+      closeColorPressed,
+      closeIconColor,
+      closeIconColorHover,
+      closeIconColorPressed
     }
   }
 }

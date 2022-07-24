@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-transfer
+  <n-legacy-transfer
     ref="transfer"
     v-model:value="value"
     virtual-scroll

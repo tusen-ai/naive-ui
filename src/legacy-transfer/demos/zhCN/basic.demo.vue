@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-transfer ref="transfer" v-model:value="value" :options="options" />
+  <n-legacy-transfer ref="transfer" v-model:value="value" :options="options" />
 </template>
 
 <script lang="ts">

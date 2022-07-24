@@ -1,3 +1,6 @@
-export { default as transferDark } from './dark'
-export { default as transferLight } from './light'
-export type { TransferTheme, TransferThemeVars } from './light'
+export { default as legacyTransferDark } from './dark'
+export { default as legacyTransferLight } from './light'
+export type {
+  TransferTheme as LegacyTransferTheme,
+  TransferThemeVars as LegacyTransferThemeVars
+} from './light'

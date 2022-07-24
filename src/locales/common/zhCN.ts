@@ -56,9 +56,16 @@ const zhCN: NLocale = {
     confirm: '确认',
     clear: '重置'
   },
+  LegacyTransfer: {
+    sourceTitle: '源项',
+    targetTitle: '目标项'
+  },
   Transfer: {
+    selectAll: '全选',
+    clearAll: '清除',
+    unselectAll: '取消全选',
     total: (num: number): string => `共 ${num} 项`,
-    selectedTotal: (num: number): string => `已选 ${num} 项`
+    selected: (num: number): string => `已选 ${num} 项`
   },
   Empty: {
     description: '无数据'

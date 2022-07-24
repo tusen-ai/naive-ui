@@ -1,7 +1,7 @@
 import { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import type { TransferTheme } from '../styles'
+import type { LegacyTransferTheme } from '../styles'
 
 export type OptionValue = string | number
 export interface Option {
@@ -26,7 +26,7 @@ export interface TransferInjection {
   mergedClsPrefixRef: Ref<string>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
-  mergedThemeRef: Ref<MergedTheme<TransferTheme>>
+  mergedThemeRef: Ref<MergedTheme<LegacyTransferTheme>>
   srcCheckedValuesRef: Ref<OptionValue[]>
   tgtCheckedValuesRef: Ref<OptionValue[]>
   srcOptsRef: Ref<Option[]>

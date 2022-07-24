@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- `n-transfer` 的样式及代码被重构
+- `n-transfer` 的 UI 完全重构，原本的 transfer 组件被重命名为 `n-legacy-transfer`，并将在下个主版本被移除。
 
 ### Fixes
 
@@ -24,7 +24,8 @@
 - `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
 - `n-tree` 支持 RTL
 - `n-input` 新增 `scrollTo` 方法，关闭 [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
-- `n-transfer` 新增 `render-label` 属性
+- `n-transfer` 新增 `render-source-label` 属性
+- `n-transfer` 新增 `render-target-label` 属性
 - `n-transfer` 新增 `render-source-list` 属性
 
 ## 2.31.0

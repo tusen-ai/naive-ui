@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-transfer
+  <n-legacy-transfer
     ref="transfer"
     v-model:value="value"
     :options="options"

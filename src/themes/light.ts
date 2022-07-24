@@ -40,6 +40,7 @@ import { imageLight } from '../image/styles'
 import { inputLight } from '../input/styles'
 import { inputNumberLight } from '../input-number/styles'
 import { layoutLight } from '../layout/styles'
+import { legacyTransferLight } from '../legacy-transfer/styles'
 import { listLight } from '../list/styles'
 import { loadingBarLight } from '../loading-bar/styles'
 import { logLight } from '../log/styles'
@@ -123,6 +124,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Input: inputLight,
   InputNumber: inputNumberLight,
   Layout: layoutLight,
+  LegacyTransfer: legacyTransferLight,
   List: listLight,
   LoadingBar: loadingBarLight,
   Log: logLight,

@@ -2,8 +2,10 @@
 
 <!--single-column-->
 
-<n-alert title="Warning">
-  The transfer component is deprecated and will be removed in the next major version.
+<n-alert title="Warning" type="warning">
+  The transfer component is deprecated. It won't have any new feature and will be removed in the next major version. It's recommended to use new  <router-link to="transfer" custom v-slot="{ href, navigate }">
+    <n-a :href="href" @click="navigate">Transfer</n-a>
+  </router-link>.
 </n-alert>
 
 Left, right, right, left... I'm a simple man, and I can play this all day.
@@ -27,7 +29,7 @@ filterable.vue
 | disabled | `boolean` | `true` | Disabled state. |
 | filterable | `boolean` | `false` | Filterable state. |
 | filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. |
-| options | `Array<TransferOption>` | `[]` | For configuration options, see the TransferOption Type below. |
+| options | `TransferOption[]` | `[]` | For configuration options, see the TransferOption Type below. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. |
 | source-title | `string` | `'Source'` | Source items title. |

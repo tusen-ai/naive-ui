@@ -93,7 +93,7 @@ export default defineComponent({
                 <VirtualList
                   ref="vlInstRef"
                   style={{ height: '100%' }}
-                  class={`${mergedClsPrefix}-transfer-list-content`}
+                  class={`${mergedClsPrefix}-legacy-transfer-list-content`}
                   items={this.options}
                   itemSize={this.itemSize}
                   showScrollbar={false}
@@ -117,7 +117,7 @@ export default defineComponent({
                   }}
                 </VirtualList>
               ) : (
-                <div class={`${mergedClsPrefix}-transfer-list-content`}>
+                <div class={`${mergedClsPrefix}-legacy-transfer-list-content`}>
                   <TransitionGroup
                     name="item"
                     appear={this.isMounted}

@@ -6,77 +6,77 @@ import { transferInjectionKey } from './interface'
 export default defineComponent({
   name: 'TransferHeader',
   props: {
-    source: {
-      type: Boolean,
-      default: false
+    size: {
+      type: String as PropType<'small' | 'medium' | 'large'>,
+      required: true
     },
-    onCheckedAll: {
-      type: Function as PropType<() => void>
-    },
-    onClearAll: {
-      type: Function as PropType<() => void>
-    },
+    source: Boolean,
+    onCheckedAll: Function as PropType<() => void>,
+    onClearAll: Function as PropType<() => void>,
     title: String
   },
   setup (props) {
     const {
-      srcOptsRef,
-      tgtOptsRef,
-      headerBtnStatusRef,
+      targetOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
       mergedThemeRef,
       disabledRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      srcOptionsLengthRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const { localeRef } = useLocale('Transfer')
     return () => {
       const { source, onClearAll, onCheckedAll } = props
-      const { value: headerBtnStatus } = headerBtnStatusRef
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const { value: locale } = localeRef
+      const buttonSize = props.size === 'large' ? 'small' : 'tiny'
+      const { title } = props
       return (
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
+          {title && (
+            <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
+              {title}
+            </div>
+          )}
           {source && (
-            <div class={`${mergedClsPrefix}-transfer-list-header__button`}>
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                tertiary
-                onClick={headerBtnStatus.allChecked ? onClearAll : onCheckedAll}
-                disabled={headerBtnStatus.disabled || disabledRef.value}
-              >
-                {{
-                  default: () =>
-                    headerBtnStatus.allChecked ? '取消全选' : '全选'
-                }}
-              </NButton>
-            </div>
+            <NButton
+              class={`${mergedClsPrefix}-transfer-list-header__button`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              size={buttonSize}
+              tertiary
+              onClick={allCheckedRef.value ? onClearAll : onCheckedAll}
+              disabled={canNotSelectAnythingRef.value || disabledRef.value}
+            >
+              {{
+                default: () =>
+                  allCheckedRef.value ? locale.unselectAll : locale.selectAll
+              }}
+            </NButton>
           )}
-          {!source && headerBtnStatus.checked && (
-            <div class={`${mergedClsPrefix}-transfer-list-header__button`}>
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                tertiary
-                onClick={onClearAll}
-                disabled={headerBtnStatus.disabled || disabledRef.value}
-              >
-                {{
-                  default: () => '清空'
-                }}
-              </NButton>
-            </div>
+          {!source && canBeClearedRef.value && (
+            <NButton
+              class={`${mergedClsPrefix}-transfer-list-header__button`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              size={buttonSize}
+              tertiary
+              onClick={onClearAll}
+              disabled={disabledRef.value}
+            >
+              {{
+                default: () => locale.clearAll
+              }}
+            </NButton>
           )}
-          {/* <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
-            {props.title}
-          </div> */}
           <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
             {source
-              ? locale.total(srcOptsRef.value.length)
-              : locale.selectedTotal(tgtOptsRef.value.length)}
+              ? locale.total(srcOptionsLengthRef.value)
+              : locale.selected(targetOptionsRef.value.length)}
           </div>
         </div>
       )

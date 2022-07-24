@@ -2,7 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 
 const animation = c([
-  c('@keyframes transfer-slide-in-from-left', `
+  c('@keyframes legacy-transfer-slide-in-from-left', `
     0% {
       transform: translateX(-150%);
     }
@@ -10,7 +10,7 @@ const animation = c([
       transform: translateX(0);
     }
   `),
-  c('@keyframes transfer-slide-out-to-right', `
+  c('@keyframes legacy-transfer-slide-out-to-right', `
     0% {
       transform: translateX(0);
     }
@@ -18,7 +18,7 @@ const animation = c([
       transform: translateX(150%);
     }
   `),
-  c('@keyframes transfer-slide-in-from-right', `
+  c('@keyframes legacy-transfer-slide-in-from-right', `
     0% {
       transform: translateX(150%);
     }
@@ -26,7 +26,7 @@ const animation = c([
       transform: translateX(0);
     }
   `),
-  c('@keyframes transfer-slide-out-to-left', `
+  c('@keyframes legacy-transfer-slide-out-to-left', `
     0% {
       transform: translateX(0);
     }
@@ -34,7 +34,7 @@ const animation = c([
       transform: translateX(-150%);
     }
   `),
-  c('@keyframes transfer-height-collapse', `
+  c('@keyframes legacy-transfer-height-collapse', `
     0% {
       max-height: var(--n-item-height);
     }
@@ -42,7 +42,7 @@ const animation = c([
       max-height: 0;
     }
   `),
-  c('@keyframes transfer-height-expand', `
+  c('@keyframes legacy-transfer-height-expand', `
     0% {
       max-height: 0;
     }
@@ -53,7 +53,7 @@ const animation = c([
 ])
 
 export default c([
-  cB('transfer', `
+  cB('legacy-transfer', `
     display: flex;
     width: var(--n-width);
     font-size: var(--n-font-size);
@@ -61,16 +61,16 @@ export default c([
     display: flex;
     flex-wrap: nowrap;
   `, [
-    cB('transfer-icon', `
+    cB('legacy-transfer-icon', `
       color: var(--n-icon-color);
       transition: color .3s var(--n-bezier);
     `),
     cM('disabled', [
-      cB('transfer-icon', {
+      cB('legacy-transfer-icon', {
         color: 'var(--n-icon-color-disabled)'
       })
     ]),
-    cB('transfer-list', `
+    cB('legacy-transfer-list', `
       height: inherit;
       display: flex;
       flex-direction: column;
@@ -92,7 +92,7 @@ export default c([
         top: 0;
         bottom: 0;
       `),
-      cB('transfer-list-header', `
+      cB('legacy-transfer-list-header', `
         height: calc(var(--n-item-height) + 4px);
         box-sizing: border-box;
         display: flex;
@@ -132,7 +132,7 @@ export default c([
           color: var(--n-header-extra-text-color);
         `)
       ]),
-      cB('transfer-list-body', `
+      cB('legacy-transfer-list-body', `
         flex-basis: 0;
         flex-grow: 1;
         box-sizing: border-box;
@@ -143,7 +143,7 @@ export default c([
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       `, [
-        cB('transfer-filter', `
+        cB('legacy-transfer-filter', `
           padding: 0 8px 8px 8px;
           box-sizing: border-box;
           background-color: var(--n-header-color);
@@ -152,7 +152,7 @@ export default c([
             background-color .3s var(--n-bezier);
           border-bottom: 1px solid var(--n-filter-divider-color);
         `),
-        cB('transfer-list-flex-container', `
+        cB('legacy-transfer-list-flex-container', `
           flex: 1;
           position: relative;
         `, [
@@ -176,17 +176,17 @@ export default c([
           `, [
             fadeInTransition()
           ]),
-          cB('transfer-list-content', `
+          cB('legacy-transfer-list-content', `
             padding: 0;
             margin: 0;
             position: relative;
           `, [
             cM('transition-disabled', [
-              cB('transfer-list-item', {
+              cB('legacy-transfer-list-item', {
                 animation: 'none !important'
               })
             ]),
-            cB('transfer-list-item', `
+            cB('legacy-transfer-list-item', `
               height: var(--n-item-height);
               max-height: var(--n-item-height);
                 transition:
@@ -228,14 +228,14 @@ export default c([
                   animation-duration: .25s, .25s;
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
                   animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-right;
+                  animation-name: legacy-transfer-height-expand, legacy-transfer-slide-in-from-right;
                 `),
                 c('&.item-leave-active', `
                   transform: translateX(-150%);
                   animation-duration: .25s, .25s;
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
                   animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
+                  animation-name: legacy-transfer-height-collapse, legacy-transfer-slide-out-to-right;
                 `)
               ]),
               cM('target', {
@@ -246,14 +246,14 @@ export default c([
                   animation-duration: .25s, .25s;
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
                   animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-left;
+                  animation-name: legacy-transfer-height-expand, legacy-transfer-slide-in-from-left;
                 `),
                 c('&.item-leave-active', `
                   transform: translateX(150%);
                   animation-duration: .25s, .25s;
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
                   animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-left;
+                  animation-name: legacy-transfer-height-collapse, legacy-transfer-slide-out-to-left;
                 `)
               ])
             ])
@@ -261,7 +261,7 @@ export default c([
         ])
       ])
     ]),
-    cB('transfer-gap', {
+    cB('legacy-transfer-gap', {
       width: '72px',
       display: 'flex',
       alignItems: 'center',

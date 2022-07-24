@@ -57,9 +57,17 @@ const itIT: NLocale = {
     confirm: 'Conferma',
     clear: 'Cancella'
   },
+  LegacyTransfer: {
+    sourceTitle: 'Fonte',
+    targetTitle: 'Destinazione'
+  },
+  // TODO: translation
   Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
     total: (num: number): string => `Total ${num} items`,
-    selectedTotal: (num: number): string => `Selected ${num} items`
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'Nessun Dato'

@@ -5,7 +5,7 @@ If you have tons of data, you may need to speed the transfer up! Set `virtual-sc
 </markdown>
 
 <template>
-  <n-transfer
+  <n-legacy-transfer
     ref="transfer"
     v-model:value="value"
     :options="options"

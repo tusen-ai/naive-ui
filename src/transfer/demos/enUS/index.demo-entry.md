@@ -1,43 +1,41 @@
 # Transfer
 
-<!--single-column-->
+A more efficient transfer.
 
-~~Left, right, right, left... I'm a simple man, and I can play this all day.~~
-
-Now, the transfer's style is simple and efficient. I can't continue to play.
+If you want to use original transfer, please refer to [Legacy Transfer](legacy-transfer). Please note that the legacy transfer will be removed in the next major version. It's not recommended to to use it.
 
 ## Demos
 
 ```demo
 basic.vue
 large-data.vue
-size.vue
 filterable.vue
-render-label
-render-source-list
+render-label.vue
+render-source-list.vue
 ```
 
 ## API
 
 ### Transfer Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| default-value | `Array<string \| number> \| null` | `null` | Default value. |
-| disabled | `boolean` | `true` | Disabled state. |
-| filterable | `boolean` | `false` | Filterable state. |
-| filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. |
-| options | `Array<TransferOption>` | `[]` | For configuration options, see the TransferOption Type below. |
-| render-label | `({ from, option }: { from: 'source' \| 'target', option: TransferOption }) => VNodeChild` | `undefined` | Customize label rendering. |
-| render-source-list | `({ onCheck, checkedOptions, pattern }: { onCheck: (checkedValueList: Array<OptionValue>) => void, checkedOptions: Array<Option>, pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. |
-| source-title | `string` | `'Source'` | Source items title. |
-| target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. |
-| target-title | `string` | `'Target'` | Target items title. |
-| value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. |
-| on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. |
-| virtual-scroll | `boolean` | `false` | Enable virtual scrolling. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| default-value | `Array<string \| number> \| null` | `null` | Default value. |  |
+| disabled | `boolean` | `true` | Disabled state. |  |
+| filterable | `boolean` | `false` | Filterable state. |  |
+| filter | `(pattern: string, option: TransferOption) => boolean` | A basic label string match function. |  |
+| options | `TransferOption[]` | `[]` | For configuration options, see the TransferOption Type below. |  |
+| render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize source label rendering. | NEXT_VERSION |
+| render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize target label rendering. | NEXT_VERSION |
+| render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. |  |
+| source-title | `string` | `'Source'` | Source items title. |  |
+| target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. |  |
+| target-title | `string` | `'Target'` | Target items title. |  |
+| value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. |  |
+| on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. |  |
+| virtual-scroll | `boolean` | `false` | Enable virtual scrolling. |  |
 
 #### TransferOption Type
 

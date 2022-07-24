@@ -1,6 +1,6 @@
 import { ref, computed, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import type { Option, OptionValue, Filter, CheckedStatus } from './interface'
+import type { Option, OptionValue, Filter } from './interface'
 
 interface UseTransferDataProps {
   defaultValue: OptionValue[] | null
@@ -13,87 +13,91 @@ interface UseTransferDataProps {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useTransferData (props: UseTransferDataProps) {
   const uncontrolledValueRef = ref(props.defaultValue)
-  const controlledValueRef = toRef(props, 'value')
-
   const mergedValueRef = useMergedState(
-    controlledValueRef,
+    toRef(props, 'value'),
     uncontrolledValueRef
   )
 
-  // map 化的 options
-  const optMapRef = computed(() => {
+  const optionsMapRef = computed(() => {
     const map = new Map()
     ;(props.options || []).forEach((opt) => map.set(opt.value, opt))
     return map as Map<OptionValue, Option>
   })
 
-  // set 化的 value
-  const tgtValueSetRef = computed(() => new Set(mergedValueRef.value || []))
+  const targetValueSetRef = computed(() => new Set(mergedValueRef.value || []))
 
-  // 用于展示源项列表数目
-  const srcOptsRef = computed(() => props.options)
-
-  // 用于展示目标项列表数目
-  const tgtOptsRef = computed(() => {
-    const optMap = optMapRef.value
-    return (mergedValueRef.value || []).map((v) => optMap.get(v)) as Option[]
+  const targetOptionsRef = computed(() => {
+    const optionMap = optionsMapRef.value
+    return (mergedValueRef.value || []).map((v) => optionMap.get(v)) as Option[]
   })
 
-  // 源项过滤输入的值
   const srcPatternRef = ref('')
 
-  // 被过滤后的源项列表
-  const filteredSrcOptsRef = computed(() => {
+  const filteredSrcOptionsRef = computed(() => {
     if (!props.filterable) return props.options
     const { filter } = props
-    return props.options.filter((opt) =>
-      filter(srcPatternRef.value, opt, 'source')
+    return props.options.filter((opt) => filter(srcPatternRef.value, opt))
+  })
+
+  const mergedValueSetRef = computed<Set<string | number>>(() => {
+    const { value } = mergedValueRef
+    if (value === null) return new Set()
+    return new Set(value)
+  })
+
+  const valueSetForSelectAllRef = computed(() => {
+    const mergedValueSet = mergedValueSetRef.value
+    return new Set(
+      filteredSrcOptionsRef.value
+        .filter(
+          (option) => !option.disabled || mergedValueSet.has(option.value)
+        )
+        .map((option) => option.value)
     )
   })
 
-  // 没有被禁用的源项列表
-  const avlSrcValueSetRef = computed(
+  const valueSetForUnselectAllRef = computed(
     () =>
       new Set(
-        filteredSrcOptsRef.value
-          .filter((opt) => !opt.disabled)
-          .map((opt) => opt.value)
+        targetOptionsRef.value
+          .filter((option) => option.disabled)
+          .map((option) => option.value)
       )
   )
 
-  // 用于头部按钮状态
-  const headerBtnStatusRef = computed<CheckedStatus>(() => {
-    const checkedLength = mergedValueRef.value?.length
-    const avlValueCount = avlSrcValueSetRef.value.size
-    return {
-      checked: !!checkedLength,
-      allChecked: checkedLength === avlValueCount,
-      disabled: !avlValueCount
-    }
+  const canNotSelectAnythingRef = computed(() => {
+    return filteredSrcOptionsRef.value.every((option) => option.disabled)
   })
-  const isInputingRef = ref(false)
-  function handleInputFocus (): void {
-    isInputingRef.value = true
-  }
-  function handleInputBlur (): void {
-    isInputingRef.value = false
-  }
+
+  const allCheckedRef = computed(() => {
+    if (!filteredSrcOptionsRef.value.length) {
+      return false
+    }
+    const mergedValueSet = mergedValueSetRef.value
+    return filteredSrcOptionsRef.value.every(
+      (option) => option.disabled || mergedValueSet.has(option.value)
+    )
+  })
+
+  const canBeClearedRef = computed(() => {
+    return targetOptionsRef.value.some((option) => !option.disabled)
+  })
+
   function handleSrcFilterUpdateValue (value: string | null): void {
     srcPatternRef.value = value ?? ''
   }
   return {
-    uncontrolledValue: uncontrolledValueRef,
-    mergedValue: mergedValueRef,
-    tgtValueSet: tgtValueSetRef,
-    avlSrcValueSet: avlSrcValueSetRef,
-    tgtOpts: tgtOptsRef,
-    srcOpts: srcOptsRef,
-    filteredSrcOpts: filteredSrcOptsRef,
-    headerBtnStatus: headerBtnStatusRef,
-    srcPattern: srcPatternRef,
-    isInputing: isInputingRef,
-    handleInputFocus,
-    handleInputBlur,
+    uncontrolledValueRef,
+    mergedValueRef,
+    targetValueSetRef,
+    valueSetForSelectAllRef,
+    valueSetForUnselectAllRef,
+    targetOptionsRef,
+    filteredSrcOptionsRef,
+    canNotSelectAnythingRef,
+    canBeClearedRef,
+    allCheckedRef,
+    srcPatternRef,
     handleSrcFilterUpdateValue
   }
 }

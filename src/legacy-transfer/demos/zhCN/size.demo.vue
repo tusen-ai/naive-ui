@@ -6,13 +6,13 @@
 
 <template>
   <n-space vertical>
-    <n-transfer
+    <n-legacy-transfer
       ref="transfer"
       v-model:value="value"
       :options="options"
       size="small"
     />
-    <n-transfer
+    <n-legacy-transfer
       ref="transfer"
       v-model:value="value"
       :options="options"

@@ -1,17 +1,14 @@
-import { h, inject, defineComponent, ref, PropType } from 'vue'
+import { h, inject, defineComponent, PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
-import { transferInjectionKey, Option } from './interface'
 import { getTitleAttribute } from '../../_utils'
 import { NBaseClose } from '../../_internal'
+import { transferInjectionKey, Option } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',
   props: {
-    source: {
-      type: Boolean,
-      default: false
-    },
+    source: Boolean,
     label: {
       type: String,
       required: true
@@ -20,10 +17,7 @@ export default defineComponent({
       type: [String, Number],
       required: true
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
     option: {
       type: Object as PropType<Option>,
       required: true
@@ -31,35 +25,27 @@ export default defineComponent({
   },
   setup (props) {
     const {
-      tgtValueSetRef,
+      targetValueSetRef,
       mergedClsPrefixRef,
       mergedThemeRef,
       handleItemCheck,
-      renderLabel
+      renderSourceLabelRef,
+      renderTargetLabelRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
-    const checkedRef = useMemo(() => tgtValueSetRef.value.has(props.value))
-    const hasItemHoverRef = ref(false)
+    const checkedRef = useMemo(() => targetValueSetRef.value.has(props.value))
     function handleClick (): void {
       if (!props.disabled) {
         handleItemCheck(!checkedRef.value, props.value)
       }
     }
-    function handleMouseEnter (): void {
-      hasItemHoverRef.value = true
-    }
-    function handleMouseLeave (): void {
-      hasItemHoverRef.value = false
-    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
       checked: checkedRef,
-      hasItemHover: hasItemHoverRef,
       handleClick,
-      handleMouseEnter,
-      handleMouseLeave,
-      renderLabel
+      renderSourceLabel: renderSourceLabelRef,
+      renderTargetLabel: renderTargetLabelRef
     }
   },
   render () {
@@ -70,7 +56,8 @@ export default defineComponent({
       label,
       checked,
       source,
-      renderLabel
+      renderSourceLabel,
+      renderTargetLabel
     } = this
     return (
       <div
@@ -81,10 +68,9 @@ export default defineComponent({
             ? `${mergedClsPrefix}-transfer-list-item--source`
             : `${mergedClsPrefix}-transfer-list-item--target`
         ]}
-        onClick={() => (source ? this.handleClick() : null)}
-        onMouseenter={this.handleMouseEnter}
-        onMouseleave={this.handleMouseLeave}
+        onClick={source ? this.handleClick : undefined}
       >
+        <div class={`${mergedClsPrefix}-transfer-list-item__background`} />
         {source && (
           <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
             <NCheckbox
@@ -99,20 +85,25 @@ export default defineComponent({
           class={`${mergedClsPrefix}-transfer-list-item__label`}
           title={getTitleAttribute(label)}
         >
-          {renderLabel
-            ? renderLabel({
-              from: source ? 'source' : 'target',
-              option: this.option
-            })
-            : label}
+          {source
+            ? renderSourceLabel
+              ? renderSourceLabel({
+                option: this.option
+              })
+              : label
+            : renderTargetLabel
+              ? renderTargetLabel({
+                option: this.option
+              })
+              : label}
         </div>
-        {!source && this.hasItemHover && !disabled && (
-          <div class={`${mergedClsPrefix}-transfer-list-item__close`}>
-            <NBaseClose
-              clsPrefix={mergedClsPrefix}
-              onClick={this.handleClick}
-            />
-          </div>
+        {!source && !disabled && (
+          <NBaseClose
+            focusable={false}
+            class={`${mergedClsPrefix}-transfer-list-item__close`}
+            clsPrefix={mergedClsPrefix}
+            onClick={this.handleClick}
+          />
         )}
       </div>
     )

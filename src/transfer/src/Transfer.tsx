@@ -4,14 +4,17 @@ import {
   h,
   provide,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect,
+  toRef
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
+import { NScrollbar } from '../../_internal'
 import { useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { warn, call, ExtractPublicPropTypes } from '../../_utils'
+import { call, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { transferLight } from '../styles'
 import type { TransferTheme } from '../styles'
@@ -19,17 +22,17 @@ import NTransferHeader from './TransferHeader'
 import NTransferList from './TransferList'
 import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
-import style from './styles/index.cssr'
 import {
   OptionValue,
   Option,
   Filter,
   OnUpdateValue,
   transferInjectionKey,
-  RenderLabelType,
-  RenderSourceListType
+  TransferRenderTargetLabel,
+  RenderSourceListType,
+  TransferRenderSourceLabel
 } from './interface'
-import { NScrollbar } from '../../_internal'
+import style from './styles/index.cssr'
 
 export const transferProps = {
   ...(useTheme.props as ThemeProps<TransferTheme>),
@@ -62,23 +65,12 @@ export const transferProps = {
     }
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
-  renderLabel: Function as PropType<RenderLabelType>,
+  renderSourceLabel: Function as PropType<TransferRenderSourceLabel>,
+  renderTargetLabel: Function as PropType<TransferRenderTargetLabel>,
   renderSourceList: Function as PropType<RenderSourceListType>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'transfer',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
@@ -87,6 +79,16 @@ export default defineComponent({
   name: 'Transfer',
   props: transferProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'transfer',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
@@ -106,18 +108,17 @@ export default defineComponent({
       return depx(itemSize)
     })
     const {
-      uncontrolledValue: uncontrolledValueRef,
-      mergedValue: mergedValueRef,
-      tgtValueSet: tgtValueSetRef,
-      avlSrcValueSet: avlSrcValueSetRef,
-      tgtOpts: tgtOptsRef,
-      srcOpts: srcOptsRef,
-      filteredSrcOpts: filteredSrcOptsRef,
-      headerBtnStatus: headerBtnStatusRef,
-      srcPattern: srcPatternRef,
-      isInputing: isInputingRef,
-      handleInputFocus,
-      handleInputBlur,
+      uncontrolledValueRef,
+      mergedValueRef,
+      targetValueSetRef,
+      valueSetForSelectAllRef,
+      valueSetForUnselectAllRef,
+      targetOptionsRef,
+      filteredSrcOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
+      srcPatternRef,
       handleSrcFilterUpdateValue
     } = useTransferData(props)
     function doUpdateValue (value: OptionValue[]): void {
@@ -136,11 +137,11 @@ export default defineComponent({
     }
 
     function handleClearAll (): void {
-      doUpdateValue([])
+      doUpdateValue([...valueSetForUnselectAllRef.value])
     }
 
     function handleCheckedAll (): void {
-      doUpdateValue([...avlSrcValueSetRef.value])
+      doUpdateValue([...valueSetForSelectAllRef.value])
     }
 
     function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
@@ -161,28 +162,29 @@ export default defineComponent({
     }
 
     provide(transferInjectionKey, {
-      tgtValueSetRef,
+      targetValueSetRef,
       mergedClsPrefixRef,
       disabledRef: mergedDisabledRef,
       mergedThemeRef: themeRef,
-      srcOptsRef,
-      tgtOptsRef,
-      headerBtnStatusRef,
+      targetOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
+      srcOptionsLengthRef: computed(() => props.options.length),
       handleItemCheck,
-      renderLabel: props.renderLabel
+      renderSourceLabelRef: toRef(props, 'renderSourceLabel'),
+      renderTargetLabelRef: toRef(props, 'renderTargetLabel')
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
-      isInputing: isInputingRef,
       mergedTheme: themeRef,
-      filteredSrcOpts: filteredSrcOptsRef,
-      tgtOpts: tgtOptsRef,
+      filteredSrcOpts: filteredSrcOptionsRef,
+      tgtOpts: targetOptionsRef,
       srcPattern: srcPatternRef,
-      handleInputFocus,
-      handleInputBlur,
+      mergedSize: mergedSizeRef,
       handleSrcFilterUpdateValue,
       handleCheckedAll,
       handleClearAll,
@@ -193,7 +195,6 @@ export default defineComponent({
         const {
           common: { cubicBezierEaseInOut },
           self: {
-            width,
             borderRadius,
             borderColor,
             listColor,
@@ -203,12 +204,21 @@ export default defineComponent({
             itemTextColor,
             itemColorPending,
             itemTextColorDisabled,
-            extraFontSize,
             titleFontWeight,
-            iconColor,
-            iconColorDisabled,
+            closeColorHover,
+            closeColorPressed,
+            closeIconColor,
+            closeIconColorHover,
+            closeIconColorPressed,
+            closeIconSize,
+            closeSize,
+            dividerColor,
+            extraTextColorDisabled,
+            [createKey('extraFontSize', size)]: extraFontSize,
             [createKey('fontSize', size)]: fontSize,
-            [createKey('itemHeight', size)]: itemHeight
+            [createKey('titleFontSize', size)]: titleFontSize,
+            [createKey('itemHeight', size)]: itemHeight,
+            [createKey('headerHeight', size)]: headerHeight
           }
         } = themeRef.value
         return {
@@ -217,7 +227,9 @@ export default defineComponent({
           '--n-border-radius': borderRadius,
           '--n-extra-font-size': extraFontSize,
           '--n-font-size': fontSize,
+          '--n-header-font-size': titleFontSize,
           '--n-header-extra-text-color': extraTextColor,
+          '--n-header-extra-text-color-disabled': extraTextColorDisabled,
           '--n-header-font-weight': titleFontWeight,
           '--n-header-text-color': titleTextColor,
           '--n-header-text-color-disabled': titleTextColorDisabled,
@@ -226,9 +238,15 @@ export default defineComponent({
           '--n-item-text-color': itemTextColor,
           '--n-item-text-color-disabled': itemTextColorDisabled,
           '--n-list-color': listColor,
-          '--n-width': width,
-          '--n-icon-color': iconColor,
-          '--n-icon-color-disabled': iconColorDisabled
+          '--n-header-height': headerHeight,
+          '--n-close-size': closeSize,
+          '--n-close-icon-size': closeIconSize,
+          '--n-close-color-hover': closeColorHover,
+          '--n-close-color-pressed': closeColorPressed,
+          '--n-close-icon-color': closeIconColor,
+          '--n-close-icon-color-hover': closeIconColorHover,
+          '--n-close-icon-color-pressed': closeIconColorPressed,
+          '--n-divider-color': dividerColor
         }
       })
     }
@@ -244,12 +262,15 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--source`}
+        >
           <NTransferHeader
             source
+            title={this.sourceTitle}
             onCheckedAll={this.handleCheckedAll}
             onClearAll={this.handleClearAll}
-            title={this.sourceTitle}
+            size={this.mergedSize}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
             {this.filterable ? (
@@ -258,8 +279,6 @@ export default defineComponent({
                 value={this.srcPattern}
                 disabled={this.mergedDisabled}
                 placeholder={this.sourceFilterPlaceholder}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
               />
             ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
@@ -283,8 +302,6 @@ export default defineComponent({
                   options={this.filteredSrcOpts}
                   disabled={this.mergedDisabled}
                   virtualScroll={this.virtualScroll}
-                  isMounted={this.isMounted}
-                  isInputing={this.isInputing}
                   itemSize={this.itemSize}
                 />
               )}
@@ -292,10 +309,13 @@ export default defineComponent({
           </div>
           <div class={`${mergedClsPrefix}-transfer-list__border`} />
         </div>
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--target`}
+        >
           <NTransferHeader
-            title={this.targetTitle}
             onClearAll={this.handleClearAll}
+            size={this.mergedSize}
+            title={this.targetTitle}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
@@ -303,8 +323,6 @@ export default defineComponent({
                 options={this.tgtOpts}
                 disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
-                isMounted={this.isMounted}
-                isInputing={this.isInputing}
                 itemSize={this.itemSize}
               />
             </div>

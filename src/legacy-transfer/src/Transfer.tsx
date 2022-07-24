@@ -4,7 +4,8 @@ import {
   h,
   provide,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
@@ -14,10 +15,10 @@ import { NButton } from '../../button'
 import { useLocale, useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { warn, call, ExtractPublicPropTypes } from '../../_utils'
+import { call, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { transferLight } from '../styles'
-import type { TransferTheme } from '../styles'
+import { legacyTransferLight } from '../styles'
+import type { LegacyTransferTheme } from '../styles'
 import NTransferHeader from './TransferHeader'
 import NTransferList from './TransferList'
 import NTransferFilter from './TransferFilter'
@@ -32,7 +33,7 @@ import {
 } from './interface'
 
 export const transferProps = {
-  ...(useTheme.props as ThemeProps<TransferTheme>),
+  ...(useTheme.props as ThemeProps<LegacyTransferTheme>),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {
     type: Array as PropType<OptionValue[] | null>,
@@ -64,33 +65,31 @@ export const transferProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'transfer',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
 
 export default defineComponent({
-  name: 'Transfer',
+  name: 'LegacyTransfer',
   props: transferProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'legacy-transfer',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
-      'Transfer',
-      '-transfer',
+      'LegacyTransfer',
+      '-legacy-transfer',
       style,
-      transferLight,
+      legacyTransferLight,
       props,
       mergedClsPrefixRef
     )
@@ -217,7 +216,7 @@ export default defineComponent({
       handleSrcCheckboxClick,
       handleTgtCheckboxClick
     })
-    const { localeRef } = useLocale('Transfer')
+    const { localeRef } = useLocale('LegacyTransfer')
     return {
       locale: localeRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -300,19 +299,19 @@ export default defineComponent({
     return (
       <div
         class={[
-          `${mergedClsPrefix}-transfer`,
-          this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`,
-          this.filterable && `${mergedClsPrefix}-transfer--filterable`
+          `${mergedClsPrefix}-legacy-transfer`,
+          this.mergedDisabled && `${mergedClsPrefix}-legacy-transfer--disabled`,
+          this.filterable && `${mergedClsPrefix}-legacy-transfer--filterable`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div class={`${mergedClsPrefix}-legacy-transfer-list`}>
           <NTransferHeader
             source
             onChange={this.handleSrcHeaderCheck}
             title={this.sourceTitle || this.locale.sourceTitle}
           />
-          <div class={`${mergedClsPrefix}-transfer-list-body`}>
+          <div class={`${mergedClsPrefix}-legacy-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleSrcFilterUpdateValue}
@@ -323,7 +322,9 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
+            <div
+              class={`${mergedClsPrefix}-legacy-transfer-list-flex-container`}
+            >
               <NTransferList
                 source
                 options={this.filteredSrcOpts}
@@ -335,9 +336,9 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class={`${mergedClsPrefix}-transfer-list__border`} />
+          <div class={`${mergedClsPrefix}-legacy-transfer-list__border`} />
         </div>
-        <div class={`${mergedClsPrefix}-transfer-gap`}>
+        <div class={`${mergedClsPrefix}-legacy-transfer-gap`}>
           <NButton
             disabled={this.toButtonDisabled || this.mergedDisabled}
             theme={this.mergedTheme.peers.Button}
@@ -367,12 +368,12 @@ export default defineComponent({
             }}
           </NButton>
         </div>
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div class={`${mergedClsPrefix}-legacy-transfer-list`}>
           <NTransferHeader
             onChange={this.handleTgtHeaderCheck}
             title={this.targetTitle || this.locale.targetTitle}
           />
-          <div class={`${mergedClsPrefix}-transfer-list-body`}>
+          <div class={`${mergedClsPrefix}-legacy-transfer-list-body`}>
             {this.filterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleTgtFilterUpdateValue}
@@ -383,7 +384,9 @@ export default defineComponent({
                 onBlur={this.handleInputBlur}
               />
             ) : null}
-            <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
+            <div
+              class={`${mergedClsPrefix}-legacy-transfer-list-flex-container`}
+            >
               <NTransferList
                 options={this.filteredTgtOpts}
                 disabled={this.mergedDisabled}
@@ -394,7 +397,7 @@ export default defineComponent({
               />
             </div>
           </div>
-          <div class={`${mergedClsPrefix}-transfer-list__border`} />
+          <div class={`${mergedClsPrefix}-legacy-transfer-list__border`} />
         </div>
       </div>
     )
