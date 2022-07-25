@@ -42,7 +42,7 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
 
 PRs are welcomed for locales that are not supported yet!
 
-The following list is sorted by 'Config'.
+The following list is sorted by 'Config' column.
 
 | Language                  | Config | Date config | Version |
 | ------------------------- | ------ | ----------- | ------- |
@@ -87,7 +87,7 @@ You can use `createLocale` to customize the existing locale.
   const customizedLocale = createLocale(
     {
       Input: {
-        placeholder: '不提申请不构成加班'
+        placeholder: 'Okay'
       }
     },
     enUS
