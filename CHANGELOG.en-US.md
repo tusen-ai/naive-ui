@@ -19,6 +19,7 @@
 - Fix `n-tree` may throw error on node selection `expanded-keys`, closes [#3319](https://github.com/TuSimple/naive-ui/issues/3319).
 - Fix `n-avatar` shows placeholder after load fails, closes [#3315](https://github.com/TuSimple/naive-ui/issues/3315).
 - Fix `n-input-number` register `mouseup` event multiple times when hold on button.
+- Fix all components' exported props type's prop is `readonly`.
 
 ### Feats
 
