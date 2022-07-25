@@ -8,8 +8,8 @@ import {
 } from 'vue'
 import type { VNode } from 'vue'
 import { camelCase } from 'lodash-es'
-import { useCarouselContext } from './CarouselContext'
 import { useConfig } from '../../_mixins'
+import { useCarouselContext } from './CarouselContext'
 
 const CarouselItemName = 'CarouselItem'
 

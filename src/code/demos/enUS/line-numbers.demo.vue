@@ -1,5 +1,5 @@
 <markdown>
-# Line Numbers
+# Line numbers
 
 It can show line numbers in the code block.
 </markdown>

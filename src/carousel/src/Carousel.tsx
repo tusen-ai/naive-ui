@@ -37,7 +37,7 @@ import {
   getRealIndex,
   getDisplayTotalView,
   addDuplicateSlides
-} from '../utils'
+} from './utils'
 import { provideCarouselContext, CarouselContextValue } from './CarouselContext'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
@@ -149,7 +149,7 @@ export default defineComponent({
     const slideElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
-    // Compute states
+    // Computed states
     const verticalRef = computed(() => props.direction === 'vertical')
     const sizeAxisRef = computed(() => (verticalRef.value ? 'height' : 'width'))
     const spaceAxisRef = computed(() =>
