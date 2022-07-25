@@ -663,12 +663,6 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/layout'
         },
         {
-          en: 'Legacy Grid',
-          zh: '旧版栅格',
-          enSuffix: true,
-          path: '/legacy-grid'
-        },
-        {
           en: 'Grid',
           zh: '栅格',
           enSuffix: true,
@@ -737,6 +731,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       en: 'Deprecated Components',
       type: 'group',
       children: [
+        {
+          en: 'Legacy Grid',
+          zh: '旧版栅格',
+          enSuffix: true,
+          path: '/legacy-grid'
+        },
         {
           en: 'Legacy Transfer',
           zh: '旧版穿梭框',
