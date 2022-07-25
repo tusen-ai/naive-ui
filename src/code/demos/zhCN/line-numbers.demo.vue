@@ -6,7 +6,7 @@
 
 <template>
   <div style="overflow: auto">
-    <n-code :code="code" language="cpp" line-numbers />
+    <n-code :code="code" language="cpp" show-line-numbers />
   </div>
 </template>
 
@@ -20,7 +20,14 @@ export default defineComponent({
 using namespace std;
 
 int main() {
-  cout << "最孤独的人最亲切，受过伤的人总是笑的最灿烂。" << "—— 素媛" << endl;
+  cout <<"你" << endl;
+  cout <<"觉" << endl;
+  cout <<"得" << endl;
+  cout <<"恨" << endl;
+  cout <<"却" << endl;
+  cout <<"离" << endl;
+  cout <<"不" << endl;
+  cout <<"开" << endl;
   return 0;
 }`
     }

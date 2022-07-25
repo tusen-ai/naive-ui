@@ -1,4 +1,4 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
@@ -15,11 +15,23 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // --n-hue-5-2
 // --n-hue-6
 // --n-hue-6-2
+// --n-line-number-color
+// --n-line-number-text-color
 export default c([
   cB('code', `
     font-size: var(--n-font-size);
     font-family: var(--n-font-family);
   `, [
+    cM('show-line-numbers', `
+      display: flex;
+    `),
+    cE('line-numbers', `
+      user-select: none;
+      padding-right: 12px;
+      text-align: right;
+      transition: color .3s var(--n-bezier);
+      color: var(--n-line-number-text-color);
+    `),
     cM('word-wrap', [
       c('pre', `
         white-space: pre-wrap;
@@ -28,6 +40,8 @@ export default c([
     ]),
     c('pre', `
       margin: 0;
+      line-height: inherit;
+      font-size: inherit;
       font-family: inherit;
     `),
     c('[class^=hljs]', `
@@ -97,57 +111,6 @@ export default c([
       }`,
       `${codeClass} .hljs-link {
         text-decoration: underline;
-      }`,
-      // 行号显示
-      `.hljsln {
-        position: relative;
-        display: block;
-        padding-left: 3.1em !important;
-      }`,
-      `.hljsln::-webkit-scrollbar {
-        height: 15px;
-      }`,
-      `.hljsln::-webkit-scrollbar-thumb {
-        background: #666;
-      }`,
-      `.hljsln::-webkit-scrollbar-thumb:hover {
-        background: #797979;
-      }`,
-      `.hljsln::-webkit-scrollbar-thumb:active {
-        background: #949494;
-      }`,
-      `.hljsln .ln-bg {
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        width: 2.4em;
-        height: 100%;
-        background: var(--n-padding-color);
-      }`,
-      `.hljsln .ln-num {
-        position: absolute;
-        z-index: 2;
-        left: 0;
-        width: 2.4em;
-        height: 1em;
-        text-align: center;
-        display: inline-block;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }`,
-      `.hljsln .ln-num::before {
-        color: var(--n-line-number-color);
-        font-style: normal;
-        font-weight: normal;
-        content: attr(data-num);
-      }`,
-      `.hljsln .ln-eof {
-        display: inline-block;
       }`
     ]
   }

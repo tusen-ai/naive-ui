@@ -6,7 +6,7 @@ It can show line numbers in the code block.
 
 <template>
   <div style="overflow: auto">
-    <n-code :code="code" language="cpp" line-numbers />
+    <n-code :code="code" language="cpp" show-line-numbers />
   </div>
 </template>
 
@@ -20,7 +20,16 @@ export default defineComponent({
 using namespace std;
 
 int main() {
-  cout << "It is always morning somewhere in the world." << endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
+  cout <<"\\n" <<endl;
   return 0;
 }`
     }
