@@ -31,6 +31,7 @@
 - `n-transfer` add `render-source-label` prop.
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.
+- `n-scrollbar` supports RTL.
 
 ## 2.31.0
 
@@ -81,7 +82,6 @@
 - `n-drawer` adds `default-height` prop.
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
-- `n-scrollbar` supports RTL.
 - Update ukUA locale.
 
 ## 2.30.8

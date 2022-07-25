@@ -31,6 +31,7 @@
 - `n-transfer` 新增 `render-source-label` 属性
 - `n-transfer` 新增 `render-target-label` 属性
 - `n-transfer` 新增 `render-source-list` 属性
+- `n-scrollbar` 支持 RTL
 
 ## 2.31.0
 
@@ -81,7 +82,6 @@
 - `n-drawer` 新增 `default-width` 属性
 - `n-drawer` 新增 `on-update:height` 属性
 - `n-drawer` 新增 `on-update:width` 属性
-- `n-scrollbar` 支持 RTL
 - 更新 ukUA locale
 
 ## 2.30.8
