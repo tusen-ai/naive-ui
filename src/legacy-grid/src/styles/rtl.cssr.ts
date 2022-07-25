@@ -27,8 +27,6 @@ export default cB('row', [
   cM('rtl', `
     direction: rtl;
   `, [
-    cB('col', [
-      positionStyles
-    ])
+    cB('col', positionStyles)
   ])
 ])
