@@ -1,6 +1,5 @@
 <markdown>
 # Type
-Won't disappear on hover
 </markdown>
 
 <template>

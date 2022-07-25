@@ -86,7 +86,7 @@ rtl-debug.vue
 | content | `string \| (() => VNodeChild)` | `undefined` | 通知框内容，可以是 render 函数 |  |
 | description | `string \| (() => VNodeChild)` | `undefined` | 描述的内容，可以是 render 函数 |  |
 | duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |  |
-| keepAliveOnHover | `boolean` | `undefined` | 当鼠标移入时是否保持通知框显示 | NEXT_VERSION |
+| keepAliveOnHover | `boolean` | `false` | 当鼠标移入时是否保持通知框显示 | NEXT_VERSION |
 | meta | `string \| (() => VNodeChild)` | `undefined` | `meta` 信息，可以是 render 函数 |
 | title | `string \| (() => VNodeChild)` | `undefined` | `title` 信息，可以是 render 函数 |
 | onAfterEnter | `Function` | `undefined` | 过渡动画进入执行完后执行的回调 |  |

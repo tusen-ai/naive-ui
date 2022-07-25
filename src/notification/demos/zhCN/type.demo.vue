@@ -1,6 +1,5 @@
 <markdown>
 # 类型
-Hover 不消失
 </markdown>
 
 <template>
