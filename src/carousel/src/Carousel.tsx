@@ -408,6 +408,9 @@ export default defineComponent({
       if (sequenceLayoutRef.value) {
         translateTo(realIndexRef.value, speed)
       } else if (previousTranslate !== 0) {
+        if (!inTransition && speed > 0) {
+          inTransition = true
+        }
         updateTranslate((previousTranslate = 0), speed)
       }
     }
@@ -619,12 +622,17 @@ export default defineComponent({
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
         toRealIndex(currentIndex)
+        void nextTick(() => {
+          if (
+            !duplicatedableRef.value ||
+            uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
+          ) {
+            fixTranslate(speedRef.value)
+          }
+        })
+      } else {
+        fixTranslate(speedRef.value)
       }
-      void nextTick(() => {
-        if (uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value) {
-          fixTranslate(speedRef.value)
-        }
-      })
       resetDragStatus()
       resetAutoplay()
     }
@@ -744,9 +752,6 @@ export default defineComponent({
           }
           translateTo(realIndex, speedRef.value)
         } else {
-          if (!userWantsControlRef.value && speedRef.value > 0) {
-            inTransition = true
-          }
           fixTranslate()
         }
       },
