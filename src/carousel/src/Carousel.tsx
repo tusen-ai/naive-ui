@@ -509,7 +509,7 @@ export default defineComponent({
       }
     }
     function onCarouselItemClick (index: number, event: MouseEvent): void {
-      let allowClick = !inTransition && !dragging
+      let allowClick = !inTransition && !dragging && !isEffectiveDrag
       if (props.effect === 'card' && allowClick && !isRealActive(index)) {
         to(index)
         allowClick = false
@@ -542,11 +542,13 @@ export default defineComponent({
     let dragOffset = 0
     let dragStartTime = 0
     let dragging = false
+    let isEffectiveDrag = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
       if (!slidesElRef.value?.contains(event.target as HTMLElement)) return
       globalDragging = true
       dragging = true
+      isEffectiveDrag = false
       dragStartTime = Date.now()
       stopAutoplay()
       if (
@@ -621,6 +623,7 @@ export default defineComponent({
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
+        isEffectiveDrag = true
         toRealIndex(currentIndex)
         void nextTick(() => {
           if (
@@ -744,11 +747,13 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          const { value: length } = totalViewRef
-          if (realIndex === length - 2 && lastRealIndex === 1) {
-            realIndex = 0
-          } else if (realIndex === 1 && lastRealIndex === length - 2) {
-            realIndex = length - 1
+          if (duplicatedableRef.value) {
+            const { value: length } = totalViewRef
+            if (realIndex === length - 2 && lastRealIndex === 1) {
+              realIndex = 0
+            } else if (realIndex === 1 && lastRealIndex === length - 2) {
+              realIndex = length - 1
+            }
           }
           translateTo(realIndex, speedRef.value)
         } else {
