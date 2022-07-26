@@ -744,11 +744,13 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          const { value: length } = totalViewRef
-          if (realIndex === length - 2 && lastRealIndex === 1) {
-            realIndex = 0
-          } else if (realIndex === 1 && lastRealIndex === length - 2) {
-            realIndex = length - 1
+          if (duplicatedableRef.value) {
+            const { value: length } = totalViewRef
+            if (realIndex === length - 2 && lastRealIndex === 1) {
+              realIndex = 0
+            } else if (realIndex === 1 && lastRealIndex === length - 2) {
+              realIndex = length - 1
+            }
           }
           translateTo(realIndex, speedRef.value)
         } else {
