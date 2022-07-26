@@ -408,6 +408,9 @@ export default defineComponent({
       if (sequenceLayoutRef.value) {
         translateTo(realIndexRef.value, speed)
       } else if (previousTranslate !== 0) {
+        if (!inTransition && speed > 0) {
+          inTransition = true
+        }
         updateTranslate((previousTranslate = 0), speed)
       }
     }
@@ -739,7 +742,6 @@ export default defineComponent({
       realIndexRef,
       (realIndex, lastRealIndex) => {
         if (realIndex === lastRealIndex) return
-        console.log(realIndex)
         resetAutoplay()
         if (sequenceLayoutRef.value) {
           const { value: length } = totalViewRef
@@ -750,9 +752,6 @@ export default defineComponent({
           }
           translateTo(realIndex, speedRef.value)
         } else {
-          if (!userWantsControlRef.value && speedRef.value > 0) {
-            inTransition = true
-          }
           fixTranslate()
         }
       },
