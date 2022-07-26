@@ -69,7 +69,7 @@ default-value-debug.vue
 | label | `string` | label 标签，用于展示信息 |  |
 | value | `string \| number` | 对应 label 的 value 值 |  |
 | disabled? | `boolean` | 该项是否禁用 |  |
-| disable-field? | `boolean` | 该项是否禁用 | NEXT_VERSION |
+| disabled-field? | `boolean` | 该项是否禁用 | NEXT_VERSION |
 | children? | `CascaderOption` | 该项的子项数据 |  |
 
 ### Cascader Slots

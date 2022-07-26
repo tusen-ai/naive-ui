@@ -68,7 +68,7 @@ status.vue
 | label | `string` | Label of the option. |  |
 | value | `string \| number` | Value of the option. |  |
 | disabled? | `boolean` | Whether this option is disabled. |  |
-| disable-field? | `boolean` | Whether this option is disabled. | NEXT_VERSION |
+| disabled-field? | `boolean` | Whether this option is disabled. | NEXT_VERSION |
 | children? | `CascaderOption` | The children options of this option. |  |
 
 ### Cascader Slots

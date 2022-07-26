@@ -28,7 +28,7 @@ function getOptions (depth = 2, iterator = 1, prefix = '') {
       options.push({
         value: `${i}`,
         label: `${i}`,
-        disableField: i % 5 === 0,
+        disabledField: i % 5 === 0,
         children: getOptions(depth, iterator + 1, '' + String(i))
       })
     } else if (iterator === depth) {

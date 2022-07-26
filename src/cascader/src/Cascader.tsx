@@ -232,7 +232,7 @@ export default defineComponent({
       const { valueField, childrenField } = props
       return createTreeMate(props.options, {
         getDisabled (node) {
-          return !!node.disabled || !!node.disableField
+          return !!node.disabledField || !!node.disabled
         },
         getKey (node) {
           return (node as any)[valueField]
