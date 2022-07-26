@@ -44,6 +44,7 @@ export const tagProps = {
   checked: Boolean,
   checkable: Boolean,
   strong: Boolean,
+  stopClickPropagation: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
@@ -54,7 +55,6 @@ export const tagProps = {
     type: Boolean,
     default: true
   },
-  internalStopClickPropagation: Boolean,
   // deprecated
   onCheckedChange: {
     type: Function as PropType<(checked: boolean) => void>,
@@ -118,7 +118,7 @@ export default defineComponent({
       }
     }
     function handleCloseClick (e: MouseEvent): void {
-      if (props.internalStopClickPropagation) {
+      if (props.stopClickPropagation) {
         e.stopPropagation()
       }
       if (!props.disabled) {

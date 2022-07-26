@@ -29,6 +29,7 @@
 - `n-legacy-grid` supports RTL.
 - `n-statistic` supports RTL.
 - `n-thing` supports RTL.
+- `n-tag` add `stop-click-propagation` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-transfer` add `render-source-label` prop.
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.

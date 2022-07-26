@@ -16,7 +16,13 @@
     <n-tag type="error" closable @close="handleClose">
       手写的从前
     </n-tag>
-    <n-tag type="info" closable @close="handleClose">
+    <n-tag
+      type="info"
+      closable
+      stop-click-propagation
+      @click="handleClick"
+      @close="handleClose"
+    >
       哪里都是你
     </n-tag>
   </n-space>
@@ -32,6 +38,9 @@ export default defineComponent({
     return {
       handleClose () {
         message.info('tag close')
+      },
+      handleClick () {
+        message.info('tag click')
       }
     }
   }

@@ -28,6 +28,7 @@ rtl-debug.vue
 | checkable | `boolean` | `false` | 是否可以选择，使用后 type 将不生效 |  |
 | checked | `boolean` | `false` | 是否被选中，配合 checkable 一起使用 |  |
 | closable | `boolean` | `false` | 是否可关闭 |  |
+| stop-click-propagation | `boolean` | `false` | 是否阻止点击事件冒泡 | NEXT_VERSION |
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后　`type` 无效 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
