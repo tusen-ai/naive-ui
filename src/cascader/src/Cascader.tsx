@@ -231,6 +231,9 @@ export default defineComponent({
     const treeMateRef = computed(() => {
       const { valueField, childrenField } = props
       return createTreeMate(props.options, {
+        getDisabled (node) {
+          return !!node.disabled || !!node.disableField
+        },
         getKey (node) {
           return (node as any)[valueField]
         },

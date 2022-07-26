@@ -64,12 +64,13 @@ default-value-debug.vue
 
 #### CascaderOption Properties
 
-| 名称      | 类型               | 描述                     |
-| --------- | ------------------ | ------------------------ |
-| label     | `string`           | label 标签，用于展示信息 |
-| value     | `string \| number` | 对应 label 的 value 值   |
-| disabled? | `boolean`          | 该项是否禁用             |
-| children? | `CascaderOption`   | 该项的子项数据           |
+| 名称 | 类型 | 描述 | 版本 |
+| --- | --- | --- | --- |
+| label | `string` | label 标签，用于展示信息 |  |
+| value | `string \| number` | 对应 label 的 value 值 |  |
+| disabled? | `boolean` | 该项是否禁用 |  |
+| disable-field? | `boolean` | 该项是否禁用 | NEXT_VERSION |
+| children? | `CascaderOption` | 该项的子项数据 |  |
 
 ### Cascader Slots
 

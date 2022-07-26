@@ -14,6 +14,7 @@ export interface CascaderOption {
   label?: string
   value?: ValueAtom
   disabled?: boolean
+  disableField?: boolean
   children?: CascaderOption[]
   [key: string]: unknown
 }
@@ -36,11 +37,11 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   Array<string | number> &
-  (string | null) &
-  (number | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (Array<string | number> | null),
+    (string | null) &
+    (number | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (Array<string | number> | null),
   option: null &
   CascaderOption &
   CascaderOption[] &
@@ -89,7 +90,7 @@ export interface CascaderInjection {
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
   renderLabelRef: Ref<
-  ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
+    ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
   clearPattern: () => void
 }
