@@ -26,6 +26,7 @@ image.vue
 | font-weight | `number` | `400` | Font weight. | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | 2.25.3 |
 | fullscreen | `boolean` | `false` | Whether to show fullscreen watermark. | 2.25.3 |
+| global-rotate | `number` | `0` | Global rotate degree of the watermark. | NEXT_VERSION |
 | line-height | `number` | `14` | Line height. | 2.25.3 |
 | height | `number` | `32` | Height of watermark area. | 2.25.3 |
 | image | `string` | `undefined` | The URI of watermark image. | 2.25.3 |

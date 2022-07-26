@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, ref, watchEffect } from 'vue'
 import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { ExtractPublicPropTypes, isBrowser, warnOnce } from '../../_utils'
 import { watermarkLight, WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
@@ -97,6 +97,10 @@ export const watermarkProps = {
   lineHeight: {
     type: Number,
     default: 14
+  },
+  globalRotate: {
+    type: Number,
+    default: 0
   }
 } as const
 
@@ -116,11 +120,12 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const base64UrlRef = ref('')
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
+    const canvas = isBrowser ? document.createElement('canvas') : null
+    const ctx = canvas ? canvas.getContext('2d') : null
     const fontsReadyRef = ref(false)
     onFontsReady(() => (fontsReadyRef.value = true))
     watchEffect(() => {
+      if (!canvas) return
       void fontsReadyRef.value
       const ratio = getRatio(ctx)
       const {
@@ -204,33 +209,55 @@ export default defineComponent({
       }
     })
     return () => {
+      const { globalRotate, fullscreen, zIndex } = props
+      const mergedClsPrefix = mergedClsPrefixRef.value
+      const isFullScreenGlobalRotate = globalRotate !== 0 && fullscreen
+      const rotatedImageOffset = 'max(200vh, 200vw)'
       const watermarkNode = (
         <div
           class={[
-            `${mergedClsPrefixRef.value}-watermark`,
-            props.fullscreen &&
-              `${mergedClsPrefixRef.value}-watermark--fullscreen`
+            `${mergedClsPrefix}-watermark`,
+            globalRotate !== 0 && `${mergedClsPrefix}-watermark--global-rotate`,
+            fullscreen && `${mergedClsPrefix}-watermark--fullscreen`
           ]}
           style={{
-            zIndex: props.zIndex,
+            transform: globalRotate
+              ? `translateX(-50%) translateY(-50%) rotate(${globalRotate}deg)`
+              : undefined,
+            zIndex: isFullScreenGlobalRotate ? undefined : zIndex,
             backgroundSize: `${props.xGap + props.width}px`,
-            backgroundPosition: props.cross
-              ? `${props.width / 2}px ${props.height / 2}px, 0 0`
-              : '',
+            backgroundPosition:
+              globalRotate === 0
+                ? props.cross
+                  ? `${props.width / 2}px ${props.height / 2}px, 0 0`
+                  : ''
+                : props.cross
+                  ? `calc(${rotatedImageOffset} + ${
+                    props.width / 2
+                  }px) calc(${rotatedImageOffset} + ${
+                    props.height / 2
+                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                  : rotatedImageOffset,
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
               : `url(${base64UrlRef.value})`
           }}
         />
       )
-      if (props.fullscreen) return watermarkNode
+      if (props.fullscreen && !globalRotate) return watermarkNode
       return (
         <div
           class={[
-            `${mergedClsPrefixRef.value}-watermark-container`,
+            `${mergedClsPrefix}-watermark-container`,
+            globalRotate !== 0 &&
+              `${mergedClsPrefix}-watermark-container--global-rotate`,
+            fullscreen && `${mergedClsPrefix}-watermark-container--fullscreen`,
             props.selectable &&
-              `${mergedClsPrefixRef.value}-watermark-container--selectable`
+              `${mergedClsPrefix}-watermark-container--selectable`
           ]}
+          style={{
+            zIndex: isFullScreenGlobalRotate ? zIndex : undefined
+          }}
         >
           {slots.default?.()}
           {watermarkNode}

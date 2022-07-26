@@ -34,6 +34,7 @@
 - `n-transfer` add `render-source-list` prop.
 - `n-scrollbar` supports RTL.
 - `useDialog` supports `onEsc` prop.
+- `n-watermark` adds `global-rotate` prop.
 
 ## 2.31.0
 

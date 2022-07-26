@@ -7,6 +7,17 @@ export default c([
     cNotM('selectable', `
       user-select: none;
       -webkit-user-select: none;
+    `),
+    cM('global-rotate', `
+      overflow: hidden;
+    `),
+    cM('fullscreen', `
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      position: fixed;
     `)
   ]),
   cB('watermark', `
@@ -20,6 +31,11 @@ export default c([
   `, [
     cM('fullscreen', `
       position: fixed;
+    `),
+    cM('global-rotate', `
+      position: absolute;
+      height: max(400vh, 400vw);
+      width: max(400vh, 400vw);
     `)
   ])
 ])

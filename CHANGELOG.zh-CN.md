@@ -34,6 +34,7 @@
 - `n-transfer` 新增 `render-source-list` 属性
 - `n-scrollbar` 支持 RTL
 - `useDialog` 支持 `onEsc` 属性
+- `n-watermark` 新增 `global-rotate` 属性
 
 ## 2.31.0
 
