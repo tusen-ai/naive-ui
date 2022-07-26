@@ -619,12 +619,17 @@ export default defineComponent({
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
         toRealIndex(currentIndex)
+        void nextTick(() => {
+          if (
+            !duplicatedableRef.value ||
+            uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
+          ) {
+            fixTranslate(speedRef.value)
+          }
+        })
+      } else {
+        fixTranslate(speedRef.value)
       }
-      void nextTick(() => {
-        if (uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value) {
-          fixTranslate(speedRef.value)
-        }
-      })
       resetDragStatus()
       resetAutoplay()
     }
@@ -734,6 +739,7 @@ export default defineComponent({
       realIndexRef,
       (realIndex, lastRealIndex) => {
         if (realIndex === lastRealIndex) return
+        console.log(realIndex)
         resetAutoplay()
         if (sequenceLayoutRef.value) {
           const { value: length } = totalViewRef
