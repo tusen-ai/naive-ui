@@ -10,6 +10,7 @@ export const exposedDialogEnvProps = {
   ...dialogProps,
   blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
+  onEsc: Function as PropType<() => void>,
   autoFocus: {
     type: Boolean,
     default: true

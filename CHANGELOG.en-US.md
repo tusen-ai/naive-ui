@@ -33,6 +33,7 @@
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.
 - `n-scrollbar` supports RTL.
+- `useDialog` supports `onEsc` prop.
 
 ## 2.31.0
 
