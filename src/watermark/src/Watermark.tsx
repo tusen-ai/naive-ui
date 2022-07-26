@@ -212,7 +212,7 @@ export default defineComponent({
       const { globalRotate, fullscreen, zIndex } = props
       const mergedClsPrefix = mergedClsPrefixRef.value
       const isFullScreenGlobalRotate = globalRotate !== 0 && fullscreen
-      const rotatedImageOffset = 'max(200vh, 200vw)'
+      const rotatedImageOffset = 'max(142vh, 142vw)'
       const watermarkNode = (
         <div
           class={[

@@ -34,8 +34,8 @@ export default c([
     `),
     cM('global-rotate', `
       position: absolute;
-      height: max(400vh, 400vw);
-      width: max(400vh, 400vw);
+      height: max(284vh, 284vw);
+      width: max(284vh, 284vw);
     `)
   ])
 ])
