@@ -8,7 +8,6 @@
 
 ### Fixes
 
-- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
 - Fix `n-date-picker` will cancel selecting in range mode if click at disabled confirm button, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
 - Fix `n-button`'s `focusable` prop doesn't work, closes [#3292](https://github.com/TuSimple/naive-ui/issues/3292).
 - Fix `n-upload`'s `on-error` & `on-finish` props don't allow `() => void` type, closes [#3290](https://github.com/TuSimple/naive-ui/issues/3290).
@@ -35,6 +34,7 @@
 - `n-scrollbar` supports RTL.
 - `useDialog` supports `onEsc` prop.
 - `n-watermark` adds `global-rotate` prop.
+- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
 
 ## 2.31.0
 
