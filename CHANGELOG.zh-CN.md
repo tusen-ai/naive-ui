@@ -24,6 +24,7 @@
 ### Feats
 
 - `n-checkbox-group` 的 `on-update:value` 属性增加触发变更的 checkbox 的值到参数中，关闭 [#3277](https://github.com/TuSimple/naive-ui/issues/3277)
+- `n-dialog` 的 `DialogOptions` 新增 `on-esc` 属性
 - `n-tree` 支持 RTL
 - `n-input` 新增 `scrollTo` 方法，关闭 [#3280](https://github.com/TuSimple/naive-ui/issues/3280)
 - `n-legacy-grid` 支持 RTL

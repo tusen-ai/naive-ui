@@ -69,7 +69,7 @@ export const modalProps = {
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
   // events
-  onEsc: Function as PropType<() => void>,
+  onEsc: Function as PropType<(e: KeyboardEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -210,7 +210,7 @@ export default defineComponent({
       }
     }
     function handleEsc (e: KeyboardEvent): void {
-      props.onEsc?.()
+      props.onEsc?.(e)
       if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
         !isComposingRef.value && doUpdateShow(false)
       }

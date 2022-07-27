@@ -81,7 +81,8 @@ focus-debug.vue
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
-| onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |  |
+| onMaskClick | `(e: MouseEvent) => void` | `undefined` | 点击蒙层后执行的回调 |  |
+| onEsc | `(e: KeyboardEvent) => void` | `undefined` | 通过 `esc` 关闭时执行的回调 | NEXT_VERSION |
 
 ### DialogReactive API
 

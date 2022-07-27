@@ -29,6 +29,9 @@ export default defineComponent({
           maskClosable: false,
           onMaskClick: () => {
             message.success('不能关闭')
+          },
+          onEsc: () => {
+            message.success('通过 ESC 关闭')
           }
         })
       }
