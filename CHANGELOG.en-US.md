@@ -23,6 +23,7 @@
 
 ### Feats
 
+- `n-dialog` adds `onEscPress` method.
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 - `n-tree` supports RTL.
 - `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).

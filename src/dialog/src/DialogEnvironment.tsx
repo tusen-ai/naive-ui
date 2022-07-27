@@ -10,7 +10,6 @@ export const exposedDialogEnvProps = {
   ...dialogProps,
   blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
-  onEsc: Function as PropType<() => void>,
   autoFocus: {
     type: Boolean,
     default: true
@@ -24,6 +23,9 @@ export const exposedDialogEnvProps = {
   (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onNegativeClick: Function as PropType<
+  (e: MouseEvent) => Promise<unknown> | unknown
+  >,
+  onEscPress: Function as PropType<
   (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
@@ -83,6 +85,12 @@ export const NDialogEnvironment = defineComponent({
         hide()
       }
     }
+    function handleEscPress (): void {
+      const { onEscPress } = props
+      if (onEscPress) {
+        onEscPress()
+      }
+    }
     function handleMaskClick (e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (onMaskClick) {
@@ -104,7 +112,8 @@ export const NDialogEnvironment = defineComponent({
       handleCloseClick,
       handleNegativeClick,
       handlePositiveClick,
-      handleMaskClick
+      handleMaskClick,
+      handleEscPress
     }
   },
   render () {
@@ -115,6 +124,7 @@ export const NDialogEnvironment = defineComponent({
       handleCloseClick,
       handleAfterLeave,
       handleMaskClick,
+      handleEscPress,
       to,
       maskClosable,
       show
@@ -127,6 +137,7 @@ export const NDialogEnvironment = defineComponent({
         to={to}
         maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
+        onEsc={handleEscPress}
         closeOnEsc={this.closeOnEsc}
         blockScroll={this.blockScroll}
         autoFocus={this.autoFocus}

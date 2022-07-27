@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+esc.vue
 ```
 
 ## API
@@ -81,6 +82,7 @@ action.vue
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |  |
+| onEscPress | `() => void` | `undefined` | Callback triggered when press down ESC. | 2.31.1 |
 
 ### DialogReactive API
 
