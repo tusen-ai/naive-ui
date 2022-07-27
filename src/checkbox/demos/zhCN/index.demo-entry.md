@@ -42,7 +42,7 @@ rtl-debug.vue
 | max | `number` | `undefined` | 可被勾选的 checkbox 的最大数量 |  |
 | min | `number` | `undefined` | 可被勾选的 checkbox 的最小数量 |  |
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |  |
-| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | 选项组的值改变时的回调 | `meta` NEXT_VERSION |
+| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | 选项组的值改变时的回调 | `meta` 2.32.0 |
 
 ### Checkbox Slots
 

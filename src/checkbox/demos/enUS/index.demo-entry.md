@@ -41,7 +41,7 @@ focus.vue
 | max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |  |
 | min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |  |
 | value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |  |
-| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` NEXT_VERSION |
+| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` 2.32.0 |
 
 ### Checkbox Slots
 

@@ -26,7 +26,7 @@ image.vue
 | font-weight | `number` | `400` | 字重 | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | 字体颜色 | 2.25.3 |
 | fullscreen | `boolean` | `false` | 是否展示全屏 | 2.25.3 |
-| global-rotate | `number` | `0` | 水印整体的旋转 | NEXT_VERSION |
+| global-rotate | `number` | `0` | 水印整体的旋转 | 2.32.0 |
 | line-height | `number` | `14` | 行高 | 2.25.3 |
 | height | `number` | `32` | 高度 | 2.25.3 |
 | image | `string` | `undefined` | 图片路径 | 2.25.3 |
