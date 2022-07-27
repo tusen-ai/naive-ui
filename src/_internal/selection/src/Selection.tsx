@@ -592,7 +592,6 @@ export default defineComponent({
               disabled={disabled}
               onClose={() => this.handleDeleteOption(option)}
               internalCloseFocusable={false}
-              triggerClickOnClose={false}
             >
               {{
                 default: () =>

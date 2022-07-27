@@ -44,10 +44,7 @@ export const tagProps = {
   checked: Boolean,
   checkable: Boolean,
   strong: Boolean,
-  triggerClickOnClose: {
-    type: Boolean,
-    default: true
-  },
+  triggerClickOnClose: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
