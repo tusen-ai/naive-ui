@@ -14,7 +14,6 @@ export interface CascaderOption {
   label?: string
   value?: ValueAtom
   disabled?: boolean
-  disabledField?: boolean
   children?: CascaderOption[]
   [key: string]: unknown
 }

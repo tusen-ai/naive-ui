@@ -89,6 +89,10 @@ export const cascaderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  disabledField: {
+    type: String,
+    default: 'disabled'
+  },
   expandTrigger: {
     type: String as PropType<ExpandTrigger>,
     default: 'click'
@@ -229,10 +233,10 @@ export default defineComponent({
       loadingKeySetRef.value.delete(key)
     }
     const treeMateRef = computed(() => {
-      const { valueField, childrenField } = props
+      const { valueField, childrenField, disabledField } = props
       return createTreeMate(props.options, {
         getDisabled (node) {
-          return !!node.disabledField || !!node.disabled
+          return (node as any)[disabledField]
         },
         getKey (node) {
           return (node as any)[valueField]
