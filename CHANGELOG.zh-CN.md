@@ -29,7 +29,7 @@
 - `n-legacy-grid` 支持 RTL
 - `n-statistic` 支持 RTL
 - `n-thing` 支持 RTL
-- `n-tag` 新增 `stop-click-propagation` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
+- `n-tag` 新增 `trigger-click-on-close` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
 - `n-transfer` 新增 `render-source-label` 属性
 - `n-transfer` 新增 `render-target-label` 属性
 - `n-transfer` 新增 `render-source-list` 属性

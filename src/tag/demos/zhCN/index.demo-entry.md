@@ -28,12 +28,12 @@ rtl-debug.vue
 | checkable | `boolean` | `false` | 是否可以选择，使用后 type 将不生效 |  |
 | checked | `boolean` | `false` | 是否被选中，配合 checkable 一起使用 |  |
 | closable | `boolean` | `false` | 是否可关闭 |  |
-| stop-click-propagation | `boolean` | `false` | 是否阻止点击事件冒泡 | NEXT_VERSION |
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后　`type` 无效 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | strong | `boolean` | `false` | 文字是否加粗 | 2.30.0 |
+| trigger-click-on-close | `boolean` | `true` | 关闭时是非触发点击事件 | NEXT_VERSION |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
 | on-close | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
 | on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
