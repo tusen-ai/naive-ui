@@ -19,6 +19,7 @@
 - 修复 `n-avatar` 加载失败时依然显示 placeholder，关闭 [#3315](https://github.com/TuSimple/naive-ui/issues/3315)
 - 修复 `n-input-number` 按住按钮时重复注册 `mouseup` 事件
 - 修复所有组件导出的 props 类型属性都是 `readonly` 的
+- 修复 `n-tree` 的 `check-on-click` 属性有时不生效
 
 ### Feats
 

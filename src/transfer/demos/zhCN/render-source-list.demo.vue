@@ -64,8 +64,12 @@ export default defineComponent({
       pattern
     }) {
       return h(NTree, {
+        style: 'margin: 0 4px;',
         keyField: 'value',
         checkable: true,
+        selectable: false,
+        blockLine: true,
+        checkOnClick: true,
         data: treeData,
         pattern,
         checkedKeys: valueRef.value,

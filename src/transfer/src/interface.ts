@@ -25,7 +25,7 @@ export interface RenderListProps {
   pattern: string
 }
 
-export type RenderSourceListType = (props: RenderListProps) => VNodeChild
+export type TransferRenderSourceList = (props: RenderListProps) => VNodeChild
 
 export interface TransferInjection {
   targetValueSetRef: Ref<Set<OptionValue>>

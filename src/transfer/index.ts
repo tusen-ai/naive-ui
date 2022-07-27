@@ -4,5 +4,5 @@ export type {
   Option as TransferOption,
   TransferRenderSourceLabel,
   TransferRenderTargetLabel,
-  RenderSourceListType as TransferRenderSourceList
+  TransferRenderSourceList
 } from './src/interface'
