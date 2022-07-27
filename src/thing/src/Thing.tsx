@@ -1,5 +1,5 @@
 import { h, defineComponent, computed, CSSProperties, Fragment } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
@@ -24,7 +24,8 @@ export default defineComponent({
   name: 'Thing',
   props: thingProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Thing',
       '-thing',
@@ -33,6 +34,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Thing', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const {
         self: { titleTextColor, textColor, titleFontWeight, fontSize },
@@ -52,10 +54,15 @@ export default defineComponent({
 
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const rtlEnabled = rtlEnabledRef ? rtlEnabledRef.value : false
       themeClassHandle?.onRender?.()
       return (
         <div
-          class={[`${mergedClsPrefix}-thing`, themeClassHandle?.themeClass]}
+          class={[
+            `${mergedClsPrefix}-thing`,
+            themeClassHandle?.themeClass,
+            rtlEnabled && `${mergedClsPrefix}-thing--rtl`
+          ]}
           style={
             inlineThemeDisabled
               ? undefined

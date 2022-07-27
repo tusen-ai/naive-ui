@@ -57,9 +57,17 @@ const eo: NLocale = {
     confirm: 'Konfirmi',
     clear: 'Malplenigi'
   },
+  LegacyTransfer: {
+    sourceTitle: 'Source',
+    targetTitle: 'Target'
+  },
+  // TODO: translation
   Transfer: {
-    sourceTitle: 'Fonto',
-    targetTitle: 'Celo'
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
+    total: (num: number): string => `Total ${num} items`,
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'Neniu datumo'

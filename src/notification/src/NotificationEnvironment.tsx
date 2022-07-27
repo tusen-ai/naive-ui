@@ -104,6 +104,23 @@ export const NotificationEnvironment = defineComponent({
       // deprecated
       if (onAfterHide) onAfterHide()
     }
+    function setHideTimeout (): void {
+      const { duration } = props
+      if (duration) {
+        timerId = window.setTimeout(hide, duration)
+      }
+    }
+    function handleMouseenter (e: MouseEvent): void {
+      if (e.currentTarget !== e.target) return
+      if (timerId !== null) {
+        window.clearTimeout(timerId)
+        timerId = null
+      }
+    }
+    function handleMouseleave (e: MouseEvent): void {
+      if (e.currentTarget !== e.target) return
+      setHideTimeout()
+    }
     function handleClose (): void {
       const { onClose } = props
       if (onClose) {
@@ -128,7 +145,9 @@ export const NotificationEnvironment = defineComponent({
       handleLeave,
       handleBeforeLeave,
       handleAfterEnter,
-      handleBeforeEnter
+      handleBeforeEnter,
+      handleMouseenter,
+      handleMouseleave
     }
   },
   render () {
@@ -149,6 +168,16 @@ export const NotificationEnvironment = defineComponent({
               <Notification
                 {...keep(this.$props, notificationPropKeys)}
                 onClose={this.handleClose}
+                onMouseenter={
+                  this.duration && this.keepAliveOnHover
+                    ? this.handleMouseenter
+                    : undefined
+                }
+                onMouseleave={
+                  this.duration && this.keepAliveOnHover
+                    ? this.handleMouseleave
+                    : undefined
+                }
               />
             ) : null
           }

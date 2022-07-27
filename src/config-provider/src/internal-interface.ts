@@ -37,6 +37,7 @@ import type { ImageTheme } from '../../image/styles'
 import type { InputTheme } from '../../input/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
 import type { LayoutTheme } from '../../layout/styles'
+import type { LegacyTransferTheme } from '../../legacy-transfer/styles'
 import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { LogTheme } from '../../log/styles'
@@ -93,6 +94,7 @@ import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
+import type { RowTheme } from '../../legacy-grid/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -134,6 +136,7 @@ export interface GlobalThemeWithoutCommon {
   Input?: InputTheme
   InputNumber?: InputNumberTheme
   Layout?: LayoutTheme
+  LegacyTransfer?: LegacyTransferTheme
   List?: ListTheme
   LoadingBar?: LoadingBarTheme
   Log?: LogTheme
@@ -173,6 +176,7 @@ export interface GlobalThemeWithoutCommon {
   Typography?: TypographyTheme
   Upload?: UploadTheme
   Watermark?: WatermarkTheme
+  Row?: RowTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme

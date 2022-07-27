@@ -6,12 +6,12 @@
 
 <template>
   <n-space>
-    <n-progress type="dashboard" gap-position="bottom" :percentage="50" />
+    <n-progress type="dashboard" gap-position="bottom" :percentage="80" />
     <n-progress
       type="dashboard"
-      :gap-offset-degree="90"
-      :gap-degree="90"
-      :percentage="50"
+      :gap-offset-degree="120"
+      :gap-degree="120"
+      :percentage="80"
     />
   </n-space>
 </template>

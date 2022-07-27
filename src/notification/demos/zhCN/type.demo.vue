@@ -1,6 +1,5 @@
 <markdown>
 # 类型
-
 </markdown>
 
 <template>
@@ -31,7 +30,9 @@ export default defineComponent({
       notify (type: NotificationType) {
         notification[type]({
           content: '说点啥呢',
-          meta: '想不出来'
+          meta: '想不出来',
+          duration: 2500,
+          keepAliveOnHover: true
         })
       }
     }

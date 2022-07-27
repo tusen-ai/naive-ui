@@ -1,7 +1,7 @@
 <markdown>
 # Basic
 
-Basic example of the Transfer component. If you have tons of data, see below for virtualised lists.
+Basic example of the Transfer component. If you have tons of data, see below for virtualized list.
 </markdown>
 
 <template>
@@ -19,15 +19,11 @@ function createOptions () {
   }))
 }
 
-function createValues () {
-  return Array.from({ length: 50 }).map((v, i) => i)
-}
-
 export default defineComponent({
   setup () {
     return {
       options: createOptions(),
-      value: ref(createValues())
+      value: ref([])
     }
   }
 })

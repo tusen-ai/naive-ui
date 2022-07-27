@@ -40,7 +40,7 @@ If you want to customize the transition effect, you can use `transition-props` a
 :deep(.creative-enter-from),
 :deep(.creative-leave-to) {
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(0.8);
 }
 
 :deep(.creative-enter-active),

@@ -9,6 +9,7 @@
 # open the dev server, please note that hot module reload doesn't work well
 # if you find anything doesn't work, just refresh the page
 # if you aren't able to open the page at the first time, try to refresh a couple of times
+# pnpm version 7.0.0 and above is required
 pnpm run dev
 
 # testing
@@ -89,6 +90,7 @@ your changelog
 # 开启开发服务器，注意热更新不是很好用
 # 如果你觉得哪里有问题，刷新页面即可
 # 第一次运行打不开时，你可以试试刷新几次浏览器
+# 需要 pnpm 在 7.0.0 及以上版本
 pnpm run dev
 
 # 测试

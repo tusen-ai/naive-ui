@@ -56,9 +56,17 @@ const viVN: NLocale = {
     confirm: 'Xác nhận',
     clear: 'Xóa'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: 'Nguồn',
     targetTitle: 'Đích'
+  },
+  // TODO: translation
+  Transfer: {
+    selectAll: 'Select all',
+    unselectAll: 'Unselect all',
+    clearAll: 'Clear',
+    total: (num: number): string => `Total ${num} items`,
+    selected: (num: number): string => `${num} items selected`
   },
   Empty: {
     description: 'Không có dữ liệu'

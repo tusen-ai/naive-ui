@@ -1,10 +1,48 @@
 # CHANGELOG
 
+## 2.32.0
+
+### Breaking Changes
+
+- `n-transfer`'s UI is totally refactored. The original transfer component is renamed as `n-legacy-transfer` and will be removed in next major version.
+
+### Fixes
+
+- Fix `n-date-picker` will cancel selecting in range mode if click at disabled confirm button, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
+- Fix `n-button`'s `focusable` prop doesn't work, closes [#3292](https://github.com/TuSimple/naive-ui/issues/3292).
+- Fix `n-upload`'s `on-error` & `on-finish` props don't allow `() => void` type, closes [#3290](https://github.com/TuSimple/naive-ui/issues/3290).
+- Fix `n-select`'s placeholder may overflow if it's long.
+- Fix `n-input` has is no indent at the prefix if `type="textarea"` and `:autosize="true"`, closes [#3238](https://github.com/TuSimple/naive-ui/issues/3238).
+- Fix `n-select` focus loss when click `action` slot in `filterable` and `multiple`, closes [#3247](https://github.com/TuSimple/naive-ui/issues/3247).
+- Fix `n-carousel`'s `autoplay` prop be `true` `hover` can't stop the play, closes [#3304](https://github.com/TuSimple/naive-ui/issues/3304).
+- Fix `n-tree` may throw error on node selection `expanded-keys`, closes [#3319](https://github.com/TuSimple/naive-ui/issues/3319).
+- Fix `n-avatar` shows placeholder after load fails, closes [#3315](https://github.com/TuSimple/naive-ui/issues/3315).
+- Fix `n-input-number` register `mouseup` event multiple times when hold on button.
+- Fix all components' exported props type's prop is `readonly`.
+- Fix `n-tree`'s `check-on-click` prop sometimes doesn't work.
+- Fix `n-progress`'s `offset-degree` prop behaves incorrectly.
+
+### Feats
+
+- `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
+- `n-tree` supports RTL.
+- `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).
+- `n-legacy-grid` supports RTL.
+- `n-statistic` supports RTL.
+- `n-thing` supports RTL.
+- `n-transfer` add `render-source-label` prop.
+- `n-transfer` add `render-target-label` prop.
+- `n-transfer` add `render-source-list` prop.
+- `n-scrollbar` supports RTL.
+- `useDialog` supports `onEsc` prop.
+- `n-watermark` adds `global-rotate` prop.
+- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
+
 ## 2.31.0
 
 ### Breaking Changes
 
-- `n-date-picker`'s `clearable` will control visibility of clear button is no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
+- `n-date-picker`'s `clearable` will control visibility of clear button if no `action` is set, closes [#1196](https://github.com/TuSimple/naive-ui/issues/1196).
 - `n-button`'s `native-focus-behavior` prop default value is changed to 'not on Safari'.
 
 ### Fixes
@@ -12,6 +50,9 @@
 - Fix `n-data-table`'s column `render` prop's `index` param sequence exception when in expandable row, closes [#3153](https://github.com/TuSimple/naive-ui/issues/3153).
 - Fix `n-data-table` column's `colSpan` doesn't work correctly in virtual scroll mode, closes [#3052](https://github.com/TuSimple/naive-ui/issues/3052).
 - Fix `n-data-table` doesn't show `summary` row in virtual scroll mode, closes [#3202](https://github.com/TuSimple/naive-ui/issues/3202).
+- Fix `n-carousel` has wrong hierarchical relationship between when `effect` is `fade`, closes [#3227](https://github.com/TuSimple/naive-ui/issues/3227).
+- Fix `n-carousel` cannot slide under IOS, closes [#3106](https://github.com/TuSimple/naive-ui/issues/3106).
+- Fix `n-carousel` losing the size of content elements when rendering, closes [#3078](https://github.com/TuSimple/naive-ui/issues/3078).
 - Fix `n-cascader`'s filter menu doesn't show option path, closes [#3220](https://github.com/TuSimple/naive-ui/issues/3220).
 - Fix `n-cascader`'s `filter` prop may not get correct `path`.
 - Fix `n-date-picker` menu's quarter text isn't same having `type="quarterrange"` and `type="quarter"`, closes [#3217](https://github.com/TuSimple/naive-ui/issues/3217).

@@ -35,14 +35,14 @@ rtl-debug.vue
 
 ### CheckboxGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| disabled | `boolean` | `false` | 选项组是否禁用 |
-| default-value | `Array<string \| number>` | `null` | 选项组非受控模式下的默认值 |
-| max | `number` | `undefined` | 可被勾选的 checkbox 的最大数量 |
-| min | `number` | `undefined` | 可被勾选的 checkbox 的最小数量 |
-| value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |
-| on-update:value | `(value: string \| number)` | `undefined` | 选项组的值改变时的回调 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | 选项组是否禁用 |  |
+| default-value | `Array<string \| number>` | `null` | 选项组非受控模式下的默认值 |  |
+| max | `number` | `undefined` | 可被勾选的 checkbox 的最大数量 |  |
+| min | `number` | `undefined` | 可被勾选的 checkbox 的最小数量 |  |
+| value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |  |
+| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | 选项组的值改变时的回调 | `meta` 2.32.0 |
 
 ### Checkbox Slots
 

@@ -8,6 +8,7 @@
 basic.vue
 x.vue
 trigger.vue
+rtl-debug.vue
 ```
 
 ## API

@@ -14,10 +14,9 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
-import { useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useThemeClass, useRtl } from '../../_mixins'
 import { notificationProviderInjectionKey } from './context'
 
 const iconRenderMap = {
@@ -48,7 +47,10 @@ export const notificationProps = {
   onClose: {
     type: Function as PropType<() => void>,
     required: true
-  }
+  },
+  keepAliveOnHover: Boolean,
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const
 
 export const notificationPropKeys = keysOf(notificationProps)
@@ -164,6 +166,8 @@ export const Notification = defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-notification-wrapper`, this.themeClass]}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
         style={this.cssVars as CSSProperties}
       >
         <div

@@ -1,4 +1,4 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
@@ -15,11 +15,23 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // --n-hue-5-2
 // --n-hue-6
 // --n-hue-6-2
+// --n-line-number-color
+// --n-line-number-text-color
 export default c([
   cB('code', `
     font-size: var(--n-font-size);
     font-family: var(--n-font-family);
   `, [
+    cM('show-line-numbers', `
+      display: flex;
+    `),
+    cE('line-numbers', `
+      user-select: none;
+      padding-right: 12px;
+      text-align: right;
+      transition: color .3s var(--n-bezier);
+      color: var(--n-line-number-text-color);
+    `),
     cM('word-wrap', [
       c('pre', `
         white-space: pre-wrap;
@@ -28,6 +40,8 @@ export default c([
     ]),
     c('pre', `
       margin: 0;
+      line-height: inherit;
+      font-size: inherit;
       font-family: inherit;
     `),
     c('[class^=hljs]', `

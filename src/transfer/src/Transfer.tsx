@@ -4,17 +4,17 @@ import {
   h,
   provide,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect,
+  toRef
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
-import { NButton } from '../../button'
-import { useLocale, useFormItem, useTheme, useConfig } from '../../_mixins'
+import { NScrollbar } from '../../_internal'
+import { useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { warn, call, ExtractPublicPropTypes } from '../../_utils'
+import { call, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { transferLight } from '../styles'
 import type { TransferTheme } from '../styles'
@@ -22,14 +22,17 @@ import NTransferHeader from './TransferHeader'
 import NTransferList from './TransferList'
 import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
-import style from './styles/index.cssr'
 import {
   OptionValue,
   Option,
   Filter,
   OnUpdateValue,
-  transferInjectionKey
+  transferInjectionKey,
+  TransferRenderTargetLabel,
+  TransferRenderSourceList,
+  TransferRenderSourceLabel
 } from './interface'
+import style from './styles/index.cssr'
 
 export const transferProps = {
   ...(useTheme.props as ThemeProps<TransferTheme>),
@@ -62,21 +65,12 @@ export const transferProps = {
     }
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
+  renderSourceLabel: Function as PropType<TransferRenderSourceLabel>,
+  renderTargetLabel: Function as PropType<TransferRenderTargetLabel>,
+  renderSourceList: Function as PropType<TransferRenderSourceList>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'transfer',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
@@ -85,6 +79,16 @@ export default defineComponent({
   name: 'Transfer',
   props: transferProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'transfer',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
@@ -104,28 +108,19 @@ export default defineComponent({
       return depx(itemSize)
     })
     const {
-      uncontrolledValue: uncontrolledValueRef,
-      mergedValue: mergedValueRef,
-      avlSrcValueSet: avlSrcValueSetRef,
-      avlTgtValueSet: avlTgtValueSetRef,
-      tgtOpts: tgtOptsRef,
-      srcOpts: srcOptsRef,
-      filteredSrcOpts: filteredSrcOptsRef,
-      filteredTgtOpts: filteredTgtOptsRef,
-      srcCheckedValues: srcCheckedValuesRef,
-      tgtCheckedValues: tgtCheckedValuesRef,
-      srcCheckedStatus: srcCheckedStatusRef,
-      tgtCheckedStatus: tgtCheckedStatusRef,
-      srcPattern: srcPatternRef,
-      tgtPattern: tgtPatternRef,
-      isInputing: isInputingRef,
-      fromButtonDisabled: fromButtonDisabledRef,
-      toButtonDisabled: toButtonDisabledRef,
-      handleInputFocus,
-      handleInputBlur,
-      handleTgtFilterUpdateValue,
+      uncontrolledValueRef,
+      mergedValueRef,
+      targetValueSetRef,
+      valueSetForSelectAllRef,
+      valueSetForUnselectAllRef,
+      targetOptionsRef,
+      filteredSrcOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
+      srcPatternRef,
       handleSrcFilterUpdateValue
-    } = useTransferData(props, mergedDisabledRef)
+    } = useTransferData(props)
     function doUpdateValue (value: OptionValue[]): void {
       const {
         onUpdateValue,
@@ -140,146 +135,101 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function handleSrcHeaderCheck (value: boolean): void {
-      const {
-        value: { checked, indeterminate }
-      } = srcCheckedStatusRef
-      if (indeterminate || checked) {
-        srcCheckedValuesRef.value = []
-      } else {
-        srcCheckedValuesRef.value = Array.from(avlSrcValueSetRef.value)
-      }
+
+    function handleClearAll (): void {
+      doUpdateValue([...valueSetForUnselectAllRef.value])
     }
-    function handleTgtHeaderCheck (): void {
-      const {
-        value: { checked, indeterminate }
-      } = tgtCheckedStatusRef
-      if (indeterminate || checked) {
-        tgtCheckedValuesRef.value = []
-      } else {
-        tgtCheckedValuesRef.value = Array.from(avlTgtValueSetRef.value)
-      }
+
+    function handleCheckedAll (): void {
+      doUpdateValue([...valueSetForSelectAllRef.value])
     }
-    function handleTgtCheckboxClick (
-      checked: boolean,
-      optionValue: OptionValue
-    ): void {
+
+    function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
       if (checked) {
-        tgtCheckedValuesRef.value.push(optionValue)
+        doUpdateValue([...(mergedValueRef.value || []), optionValue])
       } else {
-        const index = tgtCheckedValuesRef.value.findIndex(
+        const index = (mergedValueRef.value || []).findIndex(
           (v) => v === optionValue
         )
         if (~index) {
-          tgtCheckedValuesRef.value.splice(index, 1)
+          ;(mergedValueRef.value || []).splice(index, 1)
         }
       }
     }
-    function handleSrcCheckboxClick (
-      checked: boolean,
-      optionValue: OptionValue
-    ): void {
-      if (checked) {
-        srcCheckedValuesRef.value.push(optionValue)
-      } else {
-        const index = srcCheckedValuesRef.value.findIndex(
-          (v) => v === optionValue
-        )
-        if (~index) {
-          srcCheckedValuesRef.value.splice(index, 1)
-        }
-      }
+
+    function handleChecked (optionValueList: OptionValue[]): void {
+      doUpdateValue(optionValueList)
     }
-    function handleToTgtClick (): void {
-      doUpdateValue(
-        srcCheckedValuesRef.value.concat(mergedValueRef.value || [])
-      )
-      srcCheckedValuesRef.value = []
-    }
-    function handleToSrcClick (): void {
-      const tgtCheckedValueSet = new Set(tgtCheckedValuesRef.value)
-      doUpdateValue(
-        (mergedValueRef.value || []).filter((v) => !tgtCheckedValueSet.has(v))
-      )
-      tgtCheckedValuesRef.value = []
-    }
+
     provide(transferInjectionKey, {
+      targetValueSetRef,
       mergedClsPrefixRef,
-      mergedSizeRef,
       disabledRef: mergedDisabledRef,
       mergedThemeRef: themeRef,
-      srcCheckedValuesRef,
-      tgtCheckedValuesRef,
-      srcOptsRef,
-      tgtOptsRef,
-      srcCheckedStatusRef,
-      tgtCheckedStatusRef,
-      handleSrcCheckboxClick,
-      handleTgtCheckboxClick
+      targetOptionsRef,
+      canNotSelectAnythingRef,
+      canBeClearedRef,
+      allCheckedRef,
+      srcOptionsLengthRef: computed(() => props.options.length),
+      handleItemCheck,
+      renderSourceLabelRef: toRef(props, 'renderSourceLabel'),
+      renderTargetLabelRef: toRef(props, 'renderTargetLabel')
     })
-    const { localeRef } = useLocale('Transfer')
     return {
-      locale: localeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
-      isInputing: isInputingRef,
       mergedTheme: themeRef,
-      filteredSrcOpts: filteredSrcOptsRef,
-      filteredTgtOpts: filteredTgtOptsRef,
+      filteredSrcOpts: filteredSrcOptionsRef,
+      tgtOpts: targetOptionsRef,
       srcPattern: srcPatternRef,
-      tgtPattern: tgtPatternRef,
-      toButtonDisabled: toButtonDisabledRef,
-      fromButtonDisabled: fromButtonDisabledRef,
-      handleSrcHeaderCheck,
-      handleTgtHeaderCheck,
-      handleToSrcClick,
-      handleToTgtClick,
-      handleInputFocus,
-      handleInputBlur,
-      handleTgtFilterUpdateValue,
+      mergedSize: mergedSizeRef,
       handleSrcFilterUpdateValue,
+      handleCheckedAll,
+      handleClearAll,
+      handleItemCheck,
+      handleChecked,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
-          common: {
-            cubicBezierEaseInOut,
-            cubicBezierEaseIn,
-            cubicBezierEaseOut
-          },
+          common: { cubicBezierEaseInOut },
           self: {
-            width,
             borderRadius,
             borderColor,
             listColor,
-            headerColor,
             titleTextColor,
             titleTextColorDisabled,
             extraTextColor,
-            filterDividerColor,
             itemTextColor,
             itemColorPending,
             itemTextColorDisabled,
-            extraFontSize,
             titleFontWeight,
-            iconColor,
-            iconColorDisabled,
+            closeColorHover,
+            closeColorPressed,
+            closeIconColor,
+            closeIconColorHover,
+            closeIconColorPressed,
+            closeIconSize,
+            closeSize,
+            dividerColor,
+            extraTextColorDisabled,
+            [createKey('extraFontSize', size)]: extraFontSize,
             [createKey('fontSize', size)]: fontSize,
-            [createKey('itemHeight', size)]: itemHeight
+            [createKey('titleFontSize', size)]: titleFontSize,
+            [createKey('itemHeight', size)]: itemHeight,
+            [createKey('headerHeight', size)]: headerHeight
           }
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
-          '--n-bezier-ease-in': cubicBezierEaseIn,
-          '--n-bezier-ease-out': cubicBezierEaseOut,
           '--n-border-color': borderColor,
           '--n-border-radius': borderRadius,
           '--n-extra-font-size': extraFontSize,
-          '--n-filter-divider-color': filterDividerColor,
           '--n-font-size': fontSize,
-          '--n-header-color': headerColor,
+          '--n-header-font-size': titleFontSize,
           '--n-header-extra-text-color': extraTextColor,
+          '--n-header-extra-text-color-disabled': extraTextColorDisabled,
           '--n-header-font-weight': titleFontWeight,
           '--n-header-text-color': titleTextColor,
           '--n-header-text-color-disabled': titleTextColorDisabled,
@@ -288,15 +238,21 @@ export default defineComponent({
           '--n-item-text-color': itemTextColor,
           '--n-item-text-color-disabled': itemTextColorDisabled,
           '--n-list-color': listColor,
-          '--n-width': width,
-          '--n-icon-color': iconColor,
-          '--n-icon-color-disabled': iconColorDisabled
+          '--n-header-height': headerHeight,
+          '--n-close-size': closeSize,
+          '--n-close-icon-size': closeIconSize,
+          '--n-close-color-hover': closeColorHover,
+          '--n-close-color-pressed': closeColorPressed,
+          '--n-close-icon-color': closeIconColor,
+          '--n-close-icon-color-hover': closeIconColorHover,
+          '--n-close-icon-color-pressed': closeIconColorPressed,
+          '--n-divider-color': dividerColor
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, renderSourceList, mergedTheme } = this
     return (
       <div
         class={[
@@ -306,11 +262,15 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--source`}
+        >
           <NTransferHeader
             source
-            onChange={this.handleSrcHeaderCheck}
-            title={this.sourceTitle || this.locale.sourceTitle}
+            title={this.sourceTitle}
+            onCheckedAll={this.handleCheckedAll}
+            onClearAll={this.handleClearAll}
+            size={this.mergedSize}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
             {this.filterable ? (
@@ -319,77 +279,50 @@ export default defineComponent({
                 value={this.srcPattern}
                 disabled={this.mergedDisabled}
                 placeholder={this.sourceFilterPlaceholder}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
               />
             ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
-              <NTransferList
-                source
-                options={this.filteredSrcOpts}
-                disabled={this.mergedDisabled}
-                virtualScroll={this.virtualScroll}
-                isMounted={this.isMounted}
-                isInputing={this.isInputing}
-                itemSize={this.itemSize}
-              />
+              {renderSourceList ? (
+                <NScrollbar
+                  theme={mergedTheme.peers.Scrollbar}
+                  themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                >
+                  {{
+                    default: () =>
+                      renderSourceList({
+                        onCheck: this.handleChecked,
+                        checkedOptions: this.tgtOpts,
+                        pattern: this.srcPattern
+                      })
+                  }}
+                </NScrollbar>
+              ) : (
+                <NTransferList
+                  source
+                  options={this.filteredSrcOpts}
+                  disabled={this.mergedDisabled}
+                  virtualScroll={this.virtualScroll}
+                  itemSize={this.itemSize}
+                />
+              )}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-transfer-list__border`} />
         </div>
-        <div class={`${mergedClsPrefix}-transfer-gap`}>
-          <NButton
-            disabled={this.toButtonDisabled || this.mergedDisabled}
-            theme={this.mergedTheme.peers.Button}
-            themeOverrides={this.mergedTheme.peerOverrides.Button}
-            onClick={this.handleToTgtClick}
-          >
-            {{
-              icon: () => (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <ChevronRightIcon /> }}
-                </NBaseIcon>
-              )
-            }}
-          </NButton>
-          <NButton
-            disabled={this.fromButtonDisabled || this.mergedDisabled}
-            theme={this.mergedTheme.peers.Button}
-            themeOverrides={this.mergedTheme.peerOverrides.Button}
-            onClick={this.handleToSrcClick}
-          >
-            {{
-              icon: () => (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <ChevronLeftIcon /> }}
-                </NBaseIcon>
-              )
-            }}
-          </NButton>
-        </div>
-        <div class={`${mergedClsPrefix}-transfer-list`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--target`}
+        >
           <NTransferHeader
-            onChange={this.handleTgtHeaderCheck}
-            title={this.targetTitle || this.locale.targetTitle}
+            onClearAll={this.handleClearAll}
+            size={this.mergedSize}
+            title={this.targetTitle}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
-            {this.filterable ? (
-              <NTransferFilter
-                onUpdateValue={this.handleTgtFilterUpdateValue}
-                value={this.tgtPattern}
-                disabled={this.mergedDisabled}
-                placeholder={this.targetFilterPlaceholder}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
-              />
-            ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList
-                options={this.filteredTgtOpts}
+                options={this.tgtOpts}
                 disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
-                isMounted={this.isMounted}
-                isInputing={this.isInputing}
                 itemSize={this.itemSize}
               />
             </div>

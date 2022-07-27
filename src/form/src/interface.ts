@@ -55,7 +55,7 @@ export type FormItemInternalValidate = (
 export type FormItemValidate = ((
   options: FormItemValidateOptions
 ) => Promise<void>) &
-  ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
 export interface FormItemInst {
   validate: FormItemValidate

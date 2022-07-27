@@ -45,35 +45,4 @@ describe('n-transfer', () => {
       expect(wrapper.find('.n-transfer').attributes('style')).toMatchSnapshot()
     })
   })
-
-  it('should work with `source-filter-placeholder`、`target-filter-placeholder` props', async () => {
-    const wrapper = mount(NTransfer, {
-      props: {
-        filterable: true,
-        'source-filter-placeholder': 'test-source',
-        'target-filter-placeholder': 'test-target'
-      }
-    })
-    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe(
-      'test-source'
-    )
-    expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe(
-      'test-target'
-    )
-  })
-
-  it('should work with `source-title`、`target-title` props', async () => {
-    const wrapper = mount(NTransfer, {
-      props: {
-        'source-title': 'test-source',
-        'target-title': 'test-target'
-      }
-    })
-    expect(wrapper.findAll('.n-transfer-list-header__header')[0].text()).toBe(
-      'test-source'
-    )
-    expect(wrapper.findAll('.n-transfer-list-header__header')[1].text()).toBe(
-      'test-target'
-    )
-  })
 })

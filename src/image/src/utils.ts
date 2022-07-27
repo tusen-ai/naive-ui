@@ -35,11 +35,11 @@ Document | Element,
 Map<string, [IntersectionObserver, Set<Element | Document>]>
 >()
 
-const unobserveHandleMap = new WeakMap<HTMLImageElement, () => void>()
-const shouldStartLoadingRefMap = new WeakMap<HTMLImageElement, Ref<boolean>>()
+const unobserveHandleMap = new WeakMap<HTMLElement, () => void>()
+const shouldStartLoadingRefMap = new WeakMap<HTMLElement, Ref<boolean>>()
 
 export const observeIntersection: (
-  el: HTMLImageElement | null,
+  el: HTMLElement | null,
   options: IntersectionObserverOptions | undefined,
   shouldStartLoadingRef: Ref<boolean>
 ) => () => void = (el, options, shouldStartLoadingRef) => {

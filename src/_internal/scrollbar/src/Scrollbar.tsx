@@ -11,12 +11,13 @@ import {
   CSSProperties,
   watchEffect,
   VNode,
-  HTMLAttributes
+  HTMLAttributes,
+  Fragment
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -107,7 +108,10 @@ const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
-  internalOnUpdateScrollLeft: Function as PropType<(scrollLeft: number) => void>
+  internalOnUpdateScrollLeft: Function as PropType<
+  (scrollLeft: number) => void
+  >,
+  internalHoistYRail: Boolean
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -120,7 +124,9 @@ const Scrollbar = defineComponent({
   props: scrollbarProps,
   inheritAttrs: false,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('Scrollbar', mergedRtlRef, mergedClsPrefixRef)
 
     // dom ref
     const wrapperRef = ref<HTMLElement | null>(null)
@@ -426,7 +432,8 @@ const Scrollbar = defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value = container.scrollLeft
+        containerScrollLeftRef.value =
+          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
       }
     }
     function syncPositionState (): void {
@@ -459,7 +466,8 @@ const Scrollbar = defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value = container.scrollLeft
+        containerScrollLeftRef.value =
+          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         containerHeightRef.value = container.offsetHeight
         containerWidthRef.value = container.offsetWidth
         contentHeightRef.value = container.scrollHeight
@@ -493,7 +501,9 @@ const Scrollbar = defineComponent({
       on('mousemove', window, handleXScrollMouseMove, true)
       on('mouseup', window, handleXScrollMouseUp, true)
       memoXLeft = containerScrollLeftRef.value
-      memoMouseX = e.clientX
+      memoMouseX = rtlEnabledRef?.value
+        ? window.innerWidth - e.clientX
+        : e.clientX
     }
     function handleXScrollMouseMove (e: MouseEvent): void {
       if (!xBarPressed) return
@@ -507,7 +517,10 @@ const Scrollbar = defineComponent({
       const { value: contentWidth } = contentWidthRef
       const { value: xBarSize } = xBarSizeRef
       if (containerWidth === null || contentWidth === null) return
-      const dX = e.clientX - memoMouseX
+      const dX = rtlEnabledRef?.value
+        ? window.innerWidth - e.clientX - memoMouseX
+        : e.clientX - memoMouseX
+
       const dScrollLeft =
         (dX * (contentWidth - containerWidth)) / (containerWidth - xBarSize)
       const toScrollLeftUpperBound = contentWidth - containerWidth
@@ -516,7 +529,7 @@ const Scrollbar = defineComponent({
       toScrollLeft = Math.max(toScrollLeft, 0)
       const { value: container } = mergedContainerRef
       if (container) {
-        container.scrollLeft = toScrollLeft
+        container.scrollLeft = toScrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         const { internalOnUpdateScrollLeft } = props
         if (internalOnUpdateScrollLeft) internalOnUpdateScrollLeft(toScrollLeft)
       }
@@ -664,6 +677,7 @@ const Scrollbar = defineComponent({
     return {
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       containerScrollTop: containerScrollTopRef,
       wrapperRef,
       containerRef,
@@ -690,17 +704,59 @@ const Scrollbar = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, triggerDisplayManually } = this
+    const {
+      $slots,
+      mergedClsPrefix,
+      triggerDisplayManually,
+      rtlEnabled,
+      internalHoistYRail
+    } = this
     if (!this.scrollable) return $slots.default?.()
+    const triggerIsNone = this.trigger === 'none'
+    const createYRail = (): VNode => {
+      return (
+        <div
+          ref="yRailRef"
+          class={[
+            `${mergedClsPrefix}-scrollbar-rail`,
+            `${mergedClsPrefix}-scrollbar-rail--vertical`
+          ]}
+          data-scrollbar-rail
+          style={this.verticalRailStyle}
+          aria-hidden
+        >
+          {h(
+            (triggerIsNone ? Wrapper : Transition) as any,
+            triggerIsNone ? null : { name: 'fade-in-transition' },
+            {
+              default: () =>
+                this.needYBar && this.isShowYBar && !this.isIos ? (
+                  <div
+                    class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                    style={{
+                      height: this.yBarSizePx,
+                      top: this.yBarTopPx
+                    }}
+                    onMousedown={this.handleYScrollMouseDown}
+                  />
+                ) : null
+            }
+          )}
+        </div>
+      )
+    }
     const createChildren = (): VNode => {
       this.onRender?.()
-      const triggerIsNone = this.trigger === 'none'
       return h(
         'div',
         mergeProps(this.$attrs, {
           role: 'none',
           ref: 'wrapperRef',
-          class: [`${mergedClsPrefix}-scrollbar`, this.themeClass],
+          class: [
+            `${mergedClsPrefix}-scrollbar`,
+            this.themeClass,
+            rtlEnabled && `${mergedClsPrefix}-scrollbar--rtl`
+          ],
           style: this.cssVars,
           onMouseenter: triggerDisplayManually
             ? undefined
@@ -750,66 +806,42 @@ const Scrollbar = defineComponent({
               </VResizeObserver>
             </div>
           ),
-          <div
-            ref="yRailRef"
-            class={[
-              `${mergedClsPrefix}-scrollbar-rail`,
-              `${mergedClsPrefix}-scrollbar-rail--vertical`
-            ]}
-            data-scrollbar-rail
-            style={this.verticalRailStyle}
-            aria-hidden
-          >
-            {h(
-              (triggerIsNone ? Wrapper : Transition) as any,
-              triggerIsNone ? null : { name: 'fade-in-transition' },
-              {
-                default: () =>
-                  this.needYBar && this.isShowYBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        height: this.yBarSizePx,
-                        top: this.yBarTopPx
-                      }}
-                      onMousedown={this.handleYScrollMouseDown}
-                    />
-                  ) : null
-              }
-            )}
-          </div>,
-          <div
-            ref="xRailRef"
-            class={[
-              `${mergedClsPrefix}-scrollbar-rail`,
-              `${mergedClsPrefix}-scrollbar-rail--horizontal`
-            ]}
-            style={this.horizontalRailStyle}
-            data-scrollbar-rail
-            aria-hidden
-          >
-            {h(
-              (triggerIsNone ? Wrapper : Transition) as any,
-              triggerIsNone ? null : { name: 'fade-in-transition' },
-              {
-                default: () =>
-                  this.needXBar && this.isShowXBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        width: this.xBarSizePx,
-                        left: this.xBarLeftPx
-                      }}
-                      onMousedown={this.handleXScrollMouseDown}
-                    />
-                  ) : null
-              }
-            )}
-          </div>
+          internalHoistYRail ? null : createYRail(),
+          this.xScrollable && (
+            <div
+              ref="xRailRef"
+              class={[
+                `${mergedClsPrefix}-scrollbar-rail`,
+                `${mergedClsPrefix}-scrollbar-rail--horizontal`
+              ]}
+              style={this.horizontalRailStyle}
+              data-scrollbar-rail
+              aria-hidden
+            >
+              {h(
+                (triggerIsNone ? Wrapper : Transition) as any,
+                triggerIsNone ? null : { name: 'fade-in-transition' },
+                {
+                  default: () =>
+                    this.needXBar && this.isShowXBar && !this.isIos ? (
+                      <div
+                        class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                        style={{
+                          width: this.xBarSizePx,
+                          right: rtlEnabled ? this.xBarLeftPx : undefined,
+                          left: rtlEnabled ? undefined : this.xBarLeftPx
+                        }}
+                        onMousedown={this.handleXScrollMouseDown}
+                      />
+                    ) : null
+                }
+              )}
+            </div>
+          )
         ]
       )
     }
-    return this.container ? (
+    const scrollbarNode = this.container ? (
       createChildren()
     ) : (
       <VResizeObserver onResize={this.handleContainerResize}>
@@ -818,6 +850,16 @@ const Scrollbar = defineComponent({
         }}
       </VResizeObserver>
     )
+    if (internalHoistYRail) {
+      return (
+        <Fragment>
+          {scrollbarNode}
+          {createYRail()}
+        </Fragment>
+      )
+    } else {
+      return scrollbarNode
+    }
   }
 })
 

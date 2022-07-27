@@ -44,9 +44,8 @@ const deDE: NLocale = {
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
     endDatetimePlaceholder: 'Enddatum und Uhrzeit',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Anfangsmonat',
+    endMonthPlaceholder: 'Endmonat',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Heute'
@@ -57,9 +56,16 @@ const deDE: NLocale = {
     confirm: 'Bestätigen',
     clear: 'Löschen'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: 'Quelle',
     targetTitle: 'Ziel'
+  },
+  Transfer: {
+    selectAll: 'Alle auswählen',
+    unselectAll: 'Alle abwählen',
+    clearAll: 'Leeren',
+    total: (num: number): string => `Insgesamt ${num} Einträge`,
+    selected: (num: number): string => `${num} Einträge ausgewählt`
   },
   Empty: {
     description: 'Keine Daten'
@@ -110,8 +116,7 @@ const deDE: NLocale = {
     tipZoomOut: 'Rauszoomen',
     tipZoomIn: 'Reinzoomen',
     tipClose: 'Schließen (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Zoom zurücksetzen'
   }
 }
 

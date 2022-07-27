@@ -25,6 +25,8 @@ check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
 scroll-debug.vue
+rtl-debug.vue
+expand-debug.vue
 ```
 
 ## API

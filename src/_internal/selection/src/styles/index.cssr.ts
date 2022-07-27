@@ -103,7 +103,12 @@ export default c([
     ]),
     cB('base-selection-placeholder', `
       color: var(--n-placeholder-color);
-    `),
+    `, [
+      cE('inner', `
+        max-width: 100%;
+        overflow: hidden;
+      `)
+    ]),
     cB('base-selection-tags', `
       cursor: pointer;
       outline: none;

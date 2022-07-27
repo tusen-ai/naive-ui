@@ -191,8 +191,6 @@ export default defineComponent({
       )
       : undefined
 
-    const imageRef = ref<HTMLImageElement | null>(null)
-
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
@@ -205,7 +203,7 @@ export default defineComponent({
         unobserve = undefined
         if (props.lazy) {
           unobserve = observeIntersection(
-            imageRef.value,
+            selfRef.value,
             props.intersectionObserverOptions,
             shouldStartLoadingRef
           )
@@ -229,7 +227,6 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,
       handleError,
-      imageRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnLoad: (e: Event) => {
@@ -248,11 +245,13 @@ export default defineComponent({
       onRender,
       mergedOnLoad,
       shouldStartLoading,
-      loaded
+      loaded,
+      hasLoadError
     } = this
     onRender?.()
     let img: VNodeChild
-    const placeholderNode = this.$slots.placeholder?.()
+    const placeholderNode =
+      !loaded && !hasLoadError && this.$slots.placeholder?.()
     if (this.hasLoadError) {
       img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
     } else {
@@ -271,8 +270,7 @@ export default defineComponent({
           )
         } else if (src) {
           return h('img', {
-            loading: lazy ? 'lazy' : 'eager',
-            ref: 'imageRef',
+            loading: isImageSupportNativeLazy && lazy ? 'lazy' : 'eager',
             src: isImageSupportNativeLazy
               ? src
               : shouldStartLoading || loaded
@@ -283,8 +281,13 @@ export default defineComponent({
             onError: this.handleError,
             style: [
               { objectFit: this.objectFit },
-              placeholderNode && !loaded
-                ? { height: '0', width: '0', visibility: 'hidden' }
+              placeholderNode
+                ? {
+                    height: '0',
+                    width: '0',
+                    visibility: 'hidden',
+                    position: 'absolute'
+                  }
                 : ''
             ]
           })
@@ -298,7 +301,7 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {img}
-        {lazy && !loaded && placeholderNode}
+        {lazy && placeholderNode}
       </span>
     )
   }

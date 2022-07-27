@@ -125,7 +125,8 @@ const TreeNode = defineComponent({
     function _handleClick (e: MouseEvent): void {
       const { value: expandOnClick } = NTree.expandOnClickRef
       const { value: selectable } = selectableRef
-      if (!selectable && !expandOnClick) return
+      const { value: mergedCheckOnClick } = mergedCheckOnClickRef
+      if (!selectable && !expandOnClick && !mergedCheckOnClick) return
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       const { tmNode } = props
       if (selectable) {
@@ -134,7 +135,7 @@ const TreeNode = defineComponent({
       if (expandOnClick && !tmNode.isLeaf) {
         handleSwitcherClick()
       }
-      if (mergedCheckOnClickRef.value) {
+      if (mergedCheckOnClick) {
         handleCheck(!checkedRef.value)
       }
     }
@@ -247,6 +248,7 @@ const TreeNode = defineComponent({
       ),
       disabled: disabledRef,
       checkable: checkableRef,
+      mergedCheckOnClick: mergedCheckOnClickRef,
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: selectableRef,
       expandOnClick: NTree.expandOnClickRef,
@@ -332,7 +334,8 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled,
               [`${clsPrefix}-tree-node--selectable`]: selectable,
-              [`${clsPrefix}-tree-node--clickable`]: selectable || expandOnClick
+              [`${clsPrefix}-tree-node--clickable`]:
+                selectable || expandOnClick || this.mergedCheckOnClick
             },
             nodeProps?.class
           ]}

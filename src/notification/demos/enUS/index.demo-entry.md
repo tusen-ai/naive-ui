@@ -77,20 +77,21 @@ placement.vue
 
 ### NotificationOption Properties
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| action | `string \| (() => VNodeChild)` | `undefined` | Content of the operation area,, can be a render function. |
-| avatar | `() => VNodeChild` | `undefined` | Content of the `avatar`. |
-| closable | `boolean` | `true` | Whether to show close icon. |
-| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
-| description | `string \| (() => VNodeChild)` | `undefined` | Content of the `description`, can be a render function. |
-| duration | `number` | `undefined` | If not set, it won't automatically close. Unit is millisecond. |
-| meta | `string \| (() => VNodeChild)` | `undefined` | Content of the `meta`, can be a render function. |
-| title | `string \| (() => VNodeChild)` | `undefined` | Content of the `title`, can be a render function. |
-| onAfterEnter | `Function` | `undefined` | Callback triggered after Transition's enter animation executed. |
-| onAfterLeave | `Function` | `undefined` | Callback triggered after Transition's leave animation executed. |
-| onClose | `() => boolean \| Promise<boolean>` | `undefined` | The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing. |
-| onLeave | `Function` | `undefined` | Callback triggered when Transition's leave animation executed. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| action | `string \| (() => VNodeChild)` | `undefined` | Content of the operation area,, can be a render function. |  |
+| avatar | `() => VNodeChild` | `undefined` | Content of the `avatar`. |  |
+| closable | `boolean` | `true` | Whether to show close icon. |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
+| description | `string \| (() => VNodeChild)` | `undefined` | Content of the `description`, can be a render function. |  |
+| duration | `number` | `undefined` | If not set, it won't automatically close. Unit is millisecond. |  |
+| keepAliveOnHover | `boolean` | `false` | Whether to keep the notification when mouse hover. | 2.32.0 |
+| meta | `string \| (() => VNodeChild)` | `undefined` | Content of the `meta`, can be a render function. |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Content of the `title`, can be a render function. |  |
+| onAfterEnter | `Function` | `undefined` | Callback triggered after Transition's enter animation executed. |  |
+| onAfterLeave | `Function` | `undefined` | Callback triggered after Transition's leave animation executed. |  |
+| onClose | `() => boolean \| Promise<boolean>` | `undefined` | The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing. |  |
+| onLeave | `Function` | `undefined` | Callback triggered when Transition's leave animation executed. |  |
 
 ### NotificationReactive API
 

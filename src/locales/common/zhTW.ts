@@ -56,9 +56,17 @@ const zhTW: NLocale = {
     confirm: '確認',
     clear: '重置'
   },
-  Transfer: {
+  LegacyTransfer: {
     sourceTitle: '源項',
     targetTitle: '目標項'
+  },
+  Transfer: {
+    // TODO: translation
+    selectAll: '全选',
+    unselectAll: '取消全选',
+    clearAll: '清除',
+    total: (num: number): string => `共 ${num} 項`,
+    selected: (num: number): string => `已選 ${num} 項`
   },
   Empty: {
     description: '無數據'

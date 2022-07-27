@@ -456,9 +456,16 @@ export default defineComponent({
           doMinus()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on('mouseup', document, () => {
-        window.setTimeout(clearMinusHoldTimeout, 0)
-      })
+      on(
+        'mouseup',
+        document,
+        () => {
+          window.setTimeout(clearMinusHoldTimeout, 0)
+        },
+        {
+          once: true
+        }
+      )
     }
     let firstAddMousedownId: number | null = null
     function handleAddMousedown (): void {
@@ -467,9 +474,16 @@ export default defineComponent({
           doAdd()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on('mouseup', document, () => {
-        window.setTimeout(clearAddHoldTimeout, 0)
-      })
+      on(
+        'mouseup',
+        document,
+        () => {
+          window.setTimeout(clearAddHoldTimeout, 0)
+        },
+        {
+          once: true
+        }
+      )
     }
     const handleAddClick = (): void => {
       if (addHoldStateIntervalId) return

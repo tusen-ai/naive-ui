@@ -16,6 +16,7 @@ export interface InputWrappedRef {
   select: () => void
   activate: () => void
   deactivate: () => void
+  scrollTo: (options: ScrollToOptions) => void
 }
 
 export type InputInst = UnwrapRef<InputWrappedRef>

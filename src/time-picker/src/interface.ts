@@ -29,7 +29,7 @@ export interface PanelRef {
 }
 
 export type OnUpdateValue = ((value: number, formattedValue: string) => void) &
-  ((value: number | null, formattedValue: string | null) => void)
+((value: number | null, formattedValue: string | null) => void)
 export type OnUpdateValueImpl = (
   value: number | null,
   formattedValue: string | null
@@ -39,7 +39,7 @@ export type OnUpdateFormattedValue = ((
   value: string,
   timestampValue: number
 ) => void) &
-  ((value: string | null, timestampValue: number | null) => void)
+((value: string | null, timestampValue: number | null) => void)
 export type OnUpdateFormattedValueImpl = (
   value: string | null,
   timestampValue: number | null

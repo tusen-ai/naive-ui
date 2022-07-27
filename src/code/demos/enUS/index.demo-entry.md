@@ -38,6 +38,7 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 basic.vue
 inline.vue
 softwrap.vue
+line-numbers.vue
 ```
 
 ## API
@@ -48,7 +49,8 @@ softwrap.vue
 | --- | --- | --- | --- | --- |
 | code | `string` | `''` | Incoming code string. |  |
 | hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |  |
-| language | `string` | `undefined` | Code language in highlightjs. |  |
-| trim | `boolean` | `true` | Whether to display trimmed code. |  |
 | inline | `boolean` | `false` | Whether the code is displayed as inline. |  |
+| language | `string` | `undefined` | Code language in highlightjs. |  |
+| show-line-numbers | `boolean` | `false` | Whether to show line numbers. Won't work if `inline` or `word-wrap` is `true`. | 2.32.0 |
+| trim | `boolean` | `true` | Whether to display trimmed code. |  |
 | word-wrap | `boolean` | `false` | Whether to display word-wrapped code. | 2.24.0 |

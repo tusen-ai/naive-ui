@@ -1,5 +1,7 @@
 <markdown>
-# Focus & blur & select manually
+# Imperative handle
+
+ Focus. Blur. Selection. Scroll.
 </markdown>
 
 <template>
@@ -13,6 +15,9 @@
       </n-button>
       <n-button :focusable="false" @click="handleSelect">
         Select
+      </n-button>
+      <n-button :focusable="false" @click="handleScrollEnd">
+        ScrollToEnd
       </n-button>
     </n-space>
     <n-input ref="inputInstRef" v-model:value="inputValue" />
@@ -28,7 +33,7 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     return {
       inputInstRef,
-      inputValue: ref("I heard you're going to select all?"),
+      inputValue: ref("I heard you're going to select all? ".repeat(4).trim()),
       handleFocus () {
         inputInstRef.value?.focus()
       },
@@ -37,6 +42,12 @@ export default defineComponent({
       },
       handleSelect () {
         inputInstRef.value?.select()
+      },
+      handleScrollEnd () {
+        inputInstRef.value?.scrollTo({
+          behavior: 'smooth',
+          left: 10000
+        })
       }
     }
   }

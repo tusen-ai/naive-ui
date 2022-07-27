@@ -1,7 +1,5 @@
 <markdown>
 # 一大堆数据
-
-如果你有一大堆数据，你可能想让它快一点。设定 `virtual-scroll` 来使用一个飞快的穿梭框（会关掉那个傻乎乎的动画）。
 </markdown>
 
 <template>

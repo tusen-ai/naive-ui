@@ -1,7 +1,7 @@
 <markdown>
 # Caveat about theme
 
-If you don't specified the theme, the theme of created message will be the same as its `n-message-provider`.
+If you don't specify the theme, the theme of created message will be the same as its `n-message-provider`.
 </markdown>
 
 <template>

@@ -38,6 +38,7 @@ import { imageDark } from '../image/styles'
 import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
 import { layoutDark } from '../layout/styles'
+import { legacyTransferDark } from '../legacy-transfer/styles'
 import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
@@ -55,6 +56,7 @@ import { progressDark } from '../progress/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
+import { rowDark } from '../legacy-grid/styles'
 import { scrollbarDark } from '../_internal/scrollbar/styles'
 import { selectDark } from '../select/styles'
 import { skeletonDark } from '../skeleton/styles'
@@ -120,6 +122,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
+  LegacyTransfer: legacyTransferDark,
   Layout: layoutDark,
   List: listDark,
   LoadingBar: loadingBarDark,
@@ -138,6 +141,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
+  Row: rowDark,
   Scrollbar: scrollbarDark,
   Select: selectDark,
   Skeleton: skeletonDark,

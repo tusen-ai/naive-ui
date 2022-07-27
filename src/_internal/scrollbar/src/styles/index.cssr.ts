@@ -34,7 +34,9 @@ export default cB('scrollbar', `
           min-width: 100%;
         `)
       ])
-    ]),
+    ])
+  ]),
+  c('>, +', [
     cB('scrollbar-rail', `
       position: absolute;
       pointer-events: none;
