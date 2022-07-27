@@ -25,9 +25,7 @@ export const exposedDialogEnvProps = {
   onNegativeClick: Function as PropType<
   (e: MouseEvent) => Promise<unknown> | unknown
   >,
-  onEscPress: Function as PropType<
-  (e: MouseEvent) => Promise<unknown> | unknown
-  >,
+  onEscPress: Function as PropType<() => void>,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>
 } as const
