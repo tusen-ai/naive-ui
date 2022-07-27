@@ -91,10 +91,9 @@ export const NDialogEnvironment = defineComponent({
       }
     }
     function handleEsc (): void {
-      const { onEsc, closeOnEsc } = props
+      const { onEsc } = props
       if (onEsc) {
         onEsc()
-        closeOnEsc && hide()
       }
     }
     function hide (): void {
