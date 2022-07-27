@@ -28,6 +28,9 @@ export default defineComponent({
           maskClosable: false,
           onMaskClick: () => {
             message.success('cannot close')
+          },
+          onEsc: () => {
+            message.success('close by esc')
           }
         })
       }
