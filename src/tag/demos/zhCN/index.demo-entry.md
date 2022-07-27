@@ -33,7 +33,7 @@ rtl-debug.vue
 | round | `boolean` | `false` | 是否圆角 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | strong | `boolean` | `false` | 文字是否加粗 | 2.30.0 |
-| trigger-click-on-close | `boolean` | `true` | 关闭时是非触发点击事件 | NEXT_VERSION |
+| trigger-click-on-close | `boolean` | `true` | 关闭时是否触发点击事件 | NEXT_VERSION |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
 | on-close | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
 | on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
