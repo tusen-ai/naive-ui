@@ -20,6 +20,7 @@
 - 修复 `n-input-number` 按住按钮时重复注册 `mouseup` 事件
 - 修复所有组件导出的 props 类型属性都是 `readonly` 的
 - 修复 `n-tree` 的 `check-on-click` 属性有时不生效
+- 修复 `n-progress` 的 `offset-degree` 表现不正确
 
 ### Feats
 

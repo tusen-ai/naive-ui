@@ -20,6 +20,7 @@
 - Fix `n-input-number` register `mouseup` event multiple times when hold on button.
 - Fix all components' exported props type's prop is `readonly`.
 - Fix `n-tree`'s `check-on-click` prop sometimes doesn't work.
+- Fix `n-progress`'s `offset-degree` prop behaves incorrectly.
 
 ### Feats
 
