@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { getCodeSandboxParams } from './codesandbox'
 
 export default defineComponent({
@@ -47,18 +47,7 @@ export default defineComponent({
     size: String
   },
   setup (props) {
-    const parameters = ref('')
-
-    watch(
-      () => props.code,
-      (value) => {
-        parameters.value = getCodeSandboxParams(value)
-      },
-      {
-        immediate: true
-      }
-    )
-
+    const parameters = computed(() => getCodeSandboxParams(props.code))
     return {
       parameters
     }
