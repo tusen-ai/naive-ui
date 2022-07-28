@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-alert` 新增 `bordered` 属性，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
+
 ## 2.32.0
 
 ### Breaking Changes
