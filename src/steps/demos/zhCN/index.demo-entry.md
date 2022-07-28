@@ -14,6 +14,7 @@ content.vue
 custom-icon.vue
 click.vue
 vertical-debug.vue
+rtl-debug.vue
 ```
 
 ## API

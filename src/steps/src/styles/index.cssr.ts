@@ -138,7 +138,7 @@ export default cB('steps', `
                 width: 1px;
                 margin: 0 !important;
                 left: calc(var(--n-indicator-size) / 2);
-                  height: calc(100% - var(--n-indicator-size));
+                height: calc(100% - var(--n-indicator-size));
               `)
             ])
           ]),

@@ -6,6 +6,10 @@
 
 - Fix `n-drawer`'s warning when using `string` in `default-height` prop, closes [#3377](https://github.com/TuSimple/naive-ui/issues/3377).
 
+### Feats
+
+- `n-steps` supports RTL.
+
 ## 2.32.0
 
 ### Breaking Changes
