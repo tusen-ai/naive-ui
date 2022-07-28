@@ -58,12 +58,13 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
 | iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
