@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-drawer` 的 `default-height` 属性在使用 `string` 传参时控制台出现 warning，关闭 [#3377](https://github.com/TuSimple/naive-ui/issues/3377)
+
 ## 2.32.0
 
 ### Breaking Changes
