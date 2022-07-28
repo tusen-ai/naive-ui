@@ -95,6 +95,11 @@ describe('n-alert', () => {
     expect(wrapper.find('.n-alert__icon').exists()).toBe(false)
   })
 
+  it('should hide border when designated', () => {
+    const wrapper = mount(NAlert, { props: { showBorder: false } })
+    expect(wrapper.find('.n-alert-body-border').exists()).toBe(false)
+  })
+
   it("shouldn't closed when on-close prop returns false", async () => {
     const wrapper = mount(NAlert, {
       props: { closable: true, onClose: () => false }

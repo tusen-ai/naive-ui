@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-alert` 新增 `show-border` 属性, 用于设置 alert 边框是否显示，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
+
 ## 2.32.0
 
 ### Breaking Changes

@@ -12,6 +12,7 @@ closable.vue
 icon.vue
 no-icon.vue
 rtl-debug.vue
+no-border.vue
 empty-debug.vue
 ```
 
@@ -23,6 +24,7 @@ empty-debug.vue
 | --- | --- | --- | --- |
 | closable | `boolean` | `false` | alert 信息是否可以关掉 |
 | show-icon | `boolean` | `true` | alert 是否展示 icon |
+| show-border | `boolean` | `true` | alert 是否展示边框 |
 | title | `string` | `undefined` | alert 的 title 信息 |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | alert 的类型 |
 | on-after-leave | `Function` | `undefined` | alert 消失时执行的回调函数 |

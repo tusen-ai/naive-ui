@@ -9,6 +9,7 @@ basic.vue
 closable.vue
 icon.vue
 no-icon.vue
+no-border.vue
 ```
 
 ## API
@@ -19,6 +20,7 @@ no-icon.vue
 | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether the alert can be closed. |
 | show-icon | `boolean` | `true` | Whether to show the icon of alert. |
+| show-border | `boolean` | `true` | Whether to show the border of alert. |
 | title | `string` | `undefined` | Title of the alert. |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Alert type. |
 | on-after-leave | `Function` | `undefined` | Callback function executed when the alert disappears. |

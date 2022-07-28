@@ -44,8 +44,10 @@ export default cB('alert', `
   cE('icon', {
     color: 'var(--n-icon-color)'
   }),
+  cB('alert-body-border', {
+    border: 'var(--n-border)'
+  }),
   cB('alert-body', {
-    border: 'var(--n-border)',
     padding: 'var(--n-padding)'
   }, [
     cE('title', {

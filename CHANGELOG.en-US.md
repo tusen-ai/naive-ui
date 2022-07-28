@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+### Feats
+
+- `n-alert` add `show-border` prop to set whether the Alert border is displayed, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
+
 ## 2.32.0
 
 ### Breaking Changes

@@ -37,6 +37,10 @@ export const alertProps = {
     type: Boolean,
     default: true
   },
+  showBorder: {
+    type: Boolean,
+    default: true
+  },
   type: {
     type: String as PropType<
     'info' | 'warning' | 'error' | 'success' | 'default'
@@ -225,7 +229,12 @@ export default defineComponent({
                     ])}
                   </div>
                 )}
-                <div class={`${mergedClsPrefix}-alert-body`}>
+                <div
+                  class={[
+                    `${mergedClsPrefix}-alert-body`,
+                    this.showBorder && `${mergedClsPrefix}-alert-body-border`
+                  ]}
+                >
                   {resolveWrappedSlot($slots.header, (children) => {
                     const mergedChildren = children || this.title
                     return mergedChildren ? (
