@@ -75,7 +75,6 @@ action.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
-| style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -104,6 +103,7 @@ All the properties can be modified dynamically.
 | positiveButtonProps | `ButtonProps` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
+| style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
