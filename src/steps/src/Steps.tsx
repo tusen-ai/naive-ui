@@ -10,7 +10,7 @@ import {
   Slots
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useRtl } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { StepsTheme } from '../styles'
@@ -65,7 +65,8 @@ export default defineComponent({
   name: 'Steps',
   props: stepsProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const rtlEnabledRef = useRtl('Steps', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Steps',
       '-steps',
@@ -81,7 +82,8 @@ export default defineComponent({
       stepsSlots: slots
     })
     return {
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef
     }
   },
   render () {
@@ -90,6 +92,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-steps`,
+          this.rtlEnabled && `${mergedClsPrefix}-steps--rtl`,
           this.vertical && `${mergedClsPrefix}-steps--vertical`
         ]}
       >
