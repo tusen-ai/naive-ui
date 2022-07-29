@@ -37,7 +37,7 @@ import {
   getRealIndex,
   getDisplayTotalView,
   addDuplicateSlides
-} from '../utils'
+} from './utils'
 import { provideCarouselContext, CarouselContextValue } from './CarouselContext'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
@@ -149,7 +149,7 @@ export default defineComponent({
     const slideElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
-    // Compute states
+    // Computed states
     const verticalRef = computed(() => props.direction === 'vertical')
     const sizeAxisRef = computed(() => (verticalRef.value ? 'height' : 'width'))
     const spaceAxisRef = computed(() =>
@@ -408,6 +408,9 @@ export default defineComponent({
       if (sequenceLayoutRef.value) {
         translateTo(realIndexRef.value, speed)
       } else if (previousTranslate !== 0) {
+        if (!inTransition && speed > 0) {
+          inTransition = true
+        }
         updateTranslate((previousTranslate = 0), speed)
       }
     }
@@ -506,7 +509,7 @@ export default defineComponent({
       }
     }
     function onCarouselItemClick (index: number, event: MouseEvent): void {
-      let allowClick = !inTransition && !dragging
+      let allowClick = !inTransition && !dragging && !isEffectiveDrag
       if (props.effect === 'card' && allowClick && !isRealActive(index)) {
         to(index)
         allowClick = false
@@ -539,11 +542,13 @@ export default defineComponent({
     let dragOffset = 0
     let dragStartTime = 0
     let dragging = false
+    let isEffectiveDrag = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
       if (!slidesElRef.value?.contains(event.target as HTMLElement)) return
       globalDragging = true
       dragging = true
+      isEffectiveDrag = false
       dragStartTime = Date.now()
       stopAutoplay()
       if (
@@ -618,13 +623,19 @@ export default defineComponent({
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
+        isEffectiveDrag = true
         toRealIndex(currentIndex)
+        void nextTick(() => {
+          if (
+            !duplicatedableRef.value ||
+            uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
+          ) {
+            fixTranslate(speedRef.value)
+          }
+        })
+      } else {
+        fixTranslate(speedRef.value)
       }
-      void nextTick(() => {
-        if (uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value) {
-          fixTranslate(speedRef.value)
-        }
-      })
       resetDragStatus()
       resetAutoplay()
     }
@@ -736,17 +747,16 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          const { value: length } = totalViewRef
-          if (realIndex === length - 2 && lastRealIndex === 1) {
-            realIndex = 0
-          } else if (realIndex === 1 && lastRealIndex === length - 2) {
-            realIndex = length - 1
+          if (duplicatedableRef.value) {
+            const { value: length } = totalViewRef
+            if (realIndex === length - 2 && lastRealIndex === 1) {
+              realIndex = 0
+            } else if (realIndex === 1 && lastRealIndex === length - 2) {
+              realIndex = length - 1
+            }
           }
           translateTo(realIndex, speedRef.value)
         } else {
-          if (!userWantsControlRef.value && speedRef.value > 0) {
-            inTransition = true
-          }
           fixTranslate()
         }
       },

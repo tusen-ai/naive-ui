@@ -85,7 +85,7 @@ placement.vue
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
 | description | `string \| (() => VNodeChild)` | `undefined` | Content of the `description`, can be a render function. |  |
 | duration | `number` | `undefined` | If not set, it won't automatically close. Unit is millisecond. |  |
-| keepAliveOnHover | `boolean` | `undefined` | Whether to keep the notification when mouse hover. | NEXT_VERSION |
+| keepAliveOnHover | `boolean` | `false` | Whether to keep the notification when mouse hover. | 2.32.0 |
 | meta | `string \| (() => VNodeChild)` | `undefined` | Content of the `meta`, can be a render function. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Content of the `title`, can be a render function. |  |
 | onAfterEnter | `Function` | `undefined` | Callback triggered after Transition's enter animation executed. |  |

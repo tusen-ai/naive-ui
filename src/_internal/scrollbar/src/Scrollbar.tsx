@@ -677,7 +677,7 @@ const Scrollbar = defineComponent({
     return {
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
-      rtlEnable: rtlEnabledRef,
+      rtlEnabled: rtlEnabledRef,
       containerScrollTop: containerScrollTopRef,
       wrapperRef,
       containerRef,
@@ -708,7 +708,7 @@ const Scrollbar = defineComponent({
       $slots,
       mergedClsPrefix,
       triggerDisplayManually,
-      rtlEnable,
+      rtlEnabled,
       internalHoistYRail
     } = this
     if (!this.scrollable) return $slots.default?.()
@@ -755,7 +755,7 @@ const Scrollbar = defineComponent({
           class: [
             `${mergedClsPrefix}-scrollbar`,
             this.themeClass,
-            rtlEnable && `${mergedClsPrefix}-scrollbar--rtl`
+            rtlEnabled && `${mergedClsPrefix}-scrollbar--rtl`
           ],
           style: this.cssVars,
           onMouseenter: triggerDisplayManually
@@ -828,8 +828,8 @@ const Scrollbar = defineComponent({
                         class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                         style={{
                           width: this.xBarSizePx,
-                          right: !rtlEnable ? 'unset' : this.xBarLeftPx,
-                          left: rtlEnable ? 'unset' : this.xBarLeftPx
+                          right: rtlEnabled ? this.xBarLeftPx : undefined,
+                          left: rtlEnabled ? undefined : this.xBarLeftPx
                         }}
                         onMousedown={this.handleXScrollMouseDown}
                       />

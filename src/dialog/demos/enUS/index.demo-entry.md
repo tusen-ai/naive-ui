@@ -58,7 +58,7 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
@@ -106,6 +106,7 @@ All the properties can be modified dynamically.
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
+| onEsc | `() => void` | Callback fired when the escape key is pressed and focus is within dialog. | 2.32.0 |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
 

@@ -56,6 +56,7 @@ import { progressDark } from '../progress/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
+import { rowDark } from '../legacy-grid/styles'
 import { scrollbarDark } from '../_internal/scrollbar/styles'
 import { selectDark } from '../select/styles'
 import { skeletonDark } from '../skeleton/styles'
@@ -140,6 +141,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
+  Row: rowDark,
   Scrollbar: scrollbarDark,
   Select: selectDark,
   Skeleton: skeletonDark,

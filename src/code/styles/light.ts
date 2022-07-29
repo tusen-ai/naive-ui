@@ -19,8 +19,7 @@ const self = (vars: ThemeCommonVars) => {
     'hue-6': '#986801',
     'hue-6-2': '#c18401',
     // line-number styles
-    'padding-color': 'rgb(243, 243, 243)',
-    'line-number-color': textColor3
+    lineNumberTextColor: textColor3
   }
 }
 

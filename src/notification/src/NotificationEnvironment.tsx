@@ -169,10 +169,14 @@ export const NotificationEnvironment = defineComponent({
                 {...keep(this.$props, notificationPropKeys)}
                 onClose={this.handleClose}
                 onMouseenter={
-                  this.keepAliveOnHover ? this.handleMouseenter : undefined
+                  this.duration && this.keepAliveOnHover
+                    ? this.handleMouseenter
+                    : undefined
                 }
                 onMouseleave={
-                  this.keepAliveOnHover ? this.handleMouseleave : undefined
+                  this.duration && this.keepAliveOnHover
+                    ? this.handleMouseleave
+                    : undefined
                 }
               />
             ) : null

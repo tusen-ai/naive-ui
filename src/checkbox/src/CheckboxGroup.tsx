@@ -46,8 +46,8 @@ export const checkboxGroupProps = {
   (
     value: Array<string | number>,
     meta: {
-      checkedValue: string | number | undefined
-      uncheckedValue: string | number | undefined
+      actionType: 'check' | 'uncheck'
+      value: string | number
     }
   ) => void
   >
@@ -56,14 +56,9 @@ export const checkboxGroupProps = {
   MaybeArray<
   (
     value: Array<string | number>,
-    meta:
-    | {
-      checkedValue: string | number
-      uncheckedValue: undefined
-    }
-    | {
-      checkedValue: undefined
-      uncheckedValue: string | number
+    meta: {
+      actionType: 'check' | 'uncheck'
+      value: string | number
     }
   ) => void
   >
@@ -130,14 +125,14 @@ export default defineComponent({
             groupValue.push(checkboxValue)
             if (onUpdateValue) {
               call(onUpdateValue, groupValue, {
-                checkedValue: checkboxValue,
-                uncheckedValue: undefined
+                actionType: 'check',
+                value: checkboxValue
               })
             }
             if (_onUpdateValue) {
               call(_onUpdateValue, groupValue, {
-                checkedValue: checkboxValue,
-                uncheckedValue: undefined
+                actionType: 'check',
+                value: checkboxValue
               })
             }
             nTriggerFormInput()
@@ -151,14 +146,14 @@ export default defineComponent({
             groupValue.splice(index, 1)
             if (onUpdateValue) {
               call(onUpdateValue, groupValue, {
-                checkedValue: undefined,
-                uncheckedValue: checkboxValue
+                actionType: 'uncheck',
+                value: checkboxValue
               })
             }
             if (_onUpdateValue) {
               call(_onUpdateValue, groupValue, {
-                checkedValue: undefined,
-                uncheckedValue: checkboxValue
+                actionType: 'uncheck',
+                value: checkboxValue
               })
             }
             if (onChange) call(onChange, groupValue) // deprecated
@@ -171,14 +166,14 @@ export default defineComponent({
         if (checked) {
           if (onUpdateValue) {
             call(onUpdateValue, [checkboxValue], {
-              checkedValue: checkboxValue,
-              uncheckedValue: undefined
+              actionType: 'check',
+              value: checkboxValue
             })
           }
           if (_onUpdateValue) {
             call(_onUpdateValue, [checkboxValue], {
-              checkedValue: checkboxValue,
-              uncheckedValue: undefined
+              actionType: 'check',
+              value: checkboxValue
             })
           }
           if (onChange) call(onChange, [checkboxValue]) // deprecated
@@ -188,14 +183,14 @@ export default defineComponent({
         } else {
           if (onUpdateValue) {
             call(onUpdateValue, [], {
-              checkedValue: undefined,
-              uncheckedValue: checkboxValue
+              actionType: 'uncheck',
+              value: checkboxValue
             })
           }
           if (_onUpdateValue) {
             call(_onUpdateValue, [], {
-              checkedValue: undefined,
-              uncheckedValue: checkboxValue
+              actionType: 'uncheck',
+              value: checkboxValue
             })
           }
           if (onChange) call(onChange, []) // deprecated

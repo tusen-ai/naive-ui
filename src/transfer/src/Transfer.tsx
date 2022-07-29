@@ -29,7 +29,7 @@ import {
   OnUpdateValue,
   transferInjectionKey,
   TransferRenderTargetLabel,
-  RenderSourceListType,
+  TransferRenderSourceList,
   TransferRenderSourceLabel
 } from './interface'
 import style from './styles/index.cssr'
@@ -67,7 +67,7 @@ export const transferProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   renderSourceLabel: Function as PropType<TransferRenderSourceLabel>,
   renderTargetLabel: Function as PropType<TransferRenderTargetLabel>,
-  renderSourceList: Function as PropType<RenderSourceListType>,
+  renderSourceList: Function as PropType<TransferRenderSourceList>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>

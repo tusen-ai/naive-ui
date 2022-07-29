@@ -81,7 +81,9 @@ export default defineComponent({
         strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
-        strokeDashoffset: `-${gapDegree / 2 + (Math.PI / 3.6) * offsetDegree}px`
+        strokeDashoffset: `-${gapDegree / 2}px`,
+        transformOrigin: offsetDegree ? 'center' : undefined,
+        transform: offsetDegree ? `rotate(${offsetDegree}deg)` : undefined
       }
       return {
         pathString,

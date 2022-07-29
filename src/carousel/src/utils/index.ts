@@ -1,4 +1,4 @@
-import { Size } from '../src/interface'
+import { Size } from '../interface'
 
 export * from './duplicatedLogic'
 export * from './event'

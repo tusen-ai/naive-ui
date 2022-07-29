@@ -36,7 +36,7 @@ export const codeProps = {
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
-  lineNumbers: Boolean,
+  showLineNumbers: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalFontSize: Number,
   internalNoHighlight: Boolean
@@ -68,20 +68,10 @@ export default defineComponent({
         language
       }).value
     }
-    // reference: https://www.yangdx.com/2020/04/144.html
-    const addLineNumbersForCode = (html: string): string => {
-      let num = 1
-      html += '<span class="ln-eof"></span>'
-      html = html.replace(/\r\n|\r|\n/g, function (a) {
-        num++
-        const text = ('  ' + String(num)).slice(-4) // 最大支持到千位数
-        return a + '<span class="ln-num" data-num="' + text + '"></span>'
-      })
-      html = '<span class="ln-num" data-num="  1"></span>' + html
-      html = '<span class="ln-bg"></span>' + html
-      return html
-    }
-
+    const mergedShowLineNumbersRef = computed(() => {
+      if (props.inline || props.wordWrap) return false
+      return props.showLineNumbers
+    })
     const setCode = (): void => {
       if (slots.default) return
       const { value: codeEl } = codeRef
@@ -93,11 +83,16 @@ export default defineComponent({
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {
-          codeEl.innerHTML = props.inline
-            ? html
-            : `<pre ${props.lineNumbers ? 'class="hljsln"' : ''}>${
-                props.lineNumbers ? addLineNumbersForCode(html) : html
-              }</pre>`
+          if (props.inline) {
+            codeEl.innerHTML = html
+          } else {
+            const prevPreEl = codeEl.querySelector('.__code__')
+            if (prevPreEl) codeEl.removeChild(prevPreEl)
+            const preEl = document.createElement('pre')
+            preEl.className = '__code__'
+            preEl.innerHTML = html
+            codeEl.appendChild(preEl)
+          }
           return
         }
       }
@@ -105,24 +100,15 @@ export default defineComponent({
         codeEl.textContent = code
         return
       }
-      const maybePreEl = codeEl.children[0]
-      if (maybePreEl && maybePreEl.tagName === 'PRE') {
-        if (props.lineNumbers) {
-          maybePreEl.classList.add('hljsln')
-          maybePreEl.innerHTML = addLineNumbersForCode(code)
-        } else {
-          maybePreEl.textContent = code
-        }
+      const maybePreEl = codeEl.querySelector('.__code__')
+      if (maybePreEl) {
+        maybePreEl.textContent = code
       } else {
-        const warp = document.createElement('pre')
-        if (props.lineNumbers) {
-          warp.classList.add('hljsln')
-          warp.innerHTML = code
-        } else {
-          warp.textContent = code
-        }
+        const wrap = document.createElement('pre')
+        wrap.className = '__code__'
+        wrap.textContent = code
         codeEl.innerHTML = ''
-        codeEl.appendChild(warp)
+        codeEl.appendChild(wrap)
       }
     }
     onMounted(setCode)
@@ -144,6 +130,7 @@ export default defineComponent({
           textColor,
           fontSize,
           fontWeightStrong,
+          lineNumberTextColor,
           // extracted from hljs atom-one-light.scss
           'mono-3': $1,
           'hue-1': $2,
@@ -153,9 +140,7 @@ export default defineComponent({
           'hue-5': $6,
           'hue-5-2': $7,
           'hue-6': $8,
-          'hue-6-2': $9,
-          'padding-color': $10,
-          'line-number-color': $11
+          'hue-6-2': $9
         }
       } = themeRef.value
       const { internalFontSize } = props
@@ -174,8 +159,7 @@ export default defineComponent({
         '--n-hue-5-2': $7,
         '--n-hue-6': $8,
         '--n-hue-6-2': $9,
-        '--n-padding-color': $10,
-        '--n-line-number-color': $11
+        '--n-line-number-text-color': lineNumberTextColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -191,25 +175,49 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       codeRef,
+      mergedShowLineNumbers: mergedShowLineNumbersRef,
+      lineNumbers: computed(() => {
+        let number = 1
+        const numbers: number[] = []
+        let lastIsLineWrap = false
+        for (const char of props.code) {
+          if (char === '\n') {
+            lastIsLineWrap = true
+            numbers.push(number++)
+          } else {
+            lastIsLineWrap = false
+          }
+        }
+        if (!lastIsLineWrap) {
+          numbers.push(number++)
+        }
+        return numbers.join('\n')
+      }),
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, wordWrap, onRender } = this
+    const { mergedClsPrefix, wordWrap, mergedShowLineNumbers, onRender } = this
     onRender?.()
     return (
       <code
         class={[
           `${mergedClsPrefix}-code`,
           this.themeClass,
-          wordWrap && `${mergedClsPrefix}-code--word-wrap`
+          wordWrap && `${mergedClsPrefix}-code--word-wrap`,
+          mergedShowLineNumbers && `${mergedClsPrefix}-code--show-line-numbers`
         ]}
         style={this.cssVars as any}
         ref="codeRef"
       >
-        {this.$slots}
+        {mergedShowLineNumbers ? (
+          <pre class={`${mergedClsPrefix}-code__line-numbers`}>
+            {this.lineNumbers}
+          </pre>
+        ) : null}
+        {this.$slots.default?.()}
       </code>
     )
   }

@@ -58,6 +58,7 @@ import { progressLight } from '../progress/styles'
 import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
+import { rowLight } from '../legacy-grid/styles'
 import { scrollbarLight } from '../_internal/scrollbar/styles'
 import { selectLight } from '../select/styles'
 import { skeletonLight } from '../skeleton/styles'
@@ -141,6 +142,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Progress: progressLight,
   Radio: radioLight,
   Rate: rateLight,
+  Row: rowLight,
   Result: resultLight,
   Scrollbar: scrollbarLight,
   Skeleton: skeletonLight,

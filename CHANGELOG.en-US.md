@@ -2,13 +2,18 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-drawer`'s warning when using `string` in `default-height` prop, closes [#3377](https://github.com/TuSimple/naive-ui/issues/3377).
+
+## 2.32.0
+
 ### Breaking Changes
 
 - `n-transfer`'s UI is totally refactored. The original transfer component is renamed as `n-legacy-transfer` and will be removed in next major version.
 
 ### Fixes
 
-- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
 - Fix `n-date-picker` will cancel selecting in range mode if click at disabled confirm button, closes [#3254](https://github.com/TuSimple/naive-ui/issues/3254).
 - Fix `n-button`'s `focusable` prop doesn't work, closes [#3292](https://github.com/TuSimple/naive-ui/issues/3292).
 - Fix `n-upload`'s `on-error` & `on-finish` props don't allow `() => void` type, closes [#3290](https://github.com/TuSimple/naive-ui/issues/3290).
@@ -19,6 +24,9 @@
 - Fix `n-tree` may throw error on node selection `expanded-keys`, closes [#3319](https://github.com/TuSimple/naive-ui/issues/3319).
 - Fix `n-avatar` shows placeholder after load fails, closes [#3315](https://github.com/TuSimple/naive-ui/issues/3315).
 - Fix `n-input-number` register `mouseup` event multiple times when hold on button.
+- Fix all components' exported props type's prop is `readonly`.
+- Fix `n-tree`'s `check-on-click` prop sometimes doesn't work.
+- Fix `n-progress`'s `offset-degree` prop behaves incorrectly.
 
 ### Feats
 
@@ -31,6 +39,10 @@
 - `n-transfer` add `render-source-label` prop.
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.
+- `n-scrollbar` supports RTL.
+- `useDialog` supports `onEsc` prop.
+- `n-watermark` adds `global-rotate` prop.
+- `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/TuSimple/naive-ui/issues/3249).
 
 ## 2.31.0
 
@@ -81,7 +93,6 @@
 - `n-drawer` adds `default-height` prop.
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
-- `n-scrollbar` supports RTL.
 - Update ukUA locale.
 
 ## 2.30.8
