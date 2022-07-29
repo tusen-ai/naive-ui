@@ -19,6 +19,7 @@ events.vue
 shape.vue
 ghost.vue
 loading.vue
+use-async.vue
 color.vue
 group.vue
 icon-button.vue
@@ -45,6 +46,7 @@ popover.vue
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |  |
 | quaternary | `boolean` | `false` | Whether the button is quaternary button. |  |
 | loading | `boolean` | `false` | Whether the button shows the loading status. |  |
+| useAsync | `boolean` | `true` | Whether to use asynchronous mode. If the incoming `onclick` is an asynchronous event, the button will automatically trigger the loading state. |  |
 | round | `boolean` | `false` | Whether the button shows rounded corners. |  |
 | secondary | `boolean` | `false` | Whether the button is secondary button. |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |  |

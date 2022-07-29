@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-steps` 支持 RTL
+- `n-button` 新增 `useAsync` 属性
 
 ## 2.32.0
 

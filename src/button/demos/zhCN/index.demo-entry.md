@@ -19,6 +19,7 @@ events.vue
 shape.vue
 ghost.vue
 loading.vue
+use-async.vue
 color.vue
 group.vue
 icon-button.vue
@@ -46,6 +47,7 @@ debug.vue
 | icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |  |
 | loading | `boolean` | `false` | 按钮是否显示加载状态 |  |
+| useAsync | `boolean` | `true` | 是否使用异步模式，如果传入的`onClick`是异步事件，按钮自动触发加载状态 |  |
 | quaternary | `boolean` | `false` | 是否是四级按钮 |  |
 | round | `boolean` | `false` | 按钮是否显示圆角 |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |  |

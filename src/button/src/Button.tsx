@@ -55,6 +55,10 @@ export const buttonProps = {
   tertiary: Boolean,
   quaternary: Boolean,
   strong: Boolean,
+  useAsync: {
+    type: Boolean,
+    default: true
+  },
   focusable: {
     type: Boolean,
     default: true
@@ -114,6 +118,7 @@ const Button = defineComponent({
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
+    const asyncLoading = ref(false)
     const showBorderRef = useMemo(() => {
       return (
         !props.quaternary &&
@@ -162,10 +167,23 @@ const Button = defineComponent({
         selfElRef.value?.focus({ preventScroll: true })
       }
     }
+    const realLoading = computed(() => {
+      return props.loading || asyncLoading.value
+    })
     const handleClick = (e: MouseEvent): void => {
-      if (!props.disabled && !props.loading) {
+      if (!props.disabled && !realLoading.value) {
         const { onClick } = props
-        if (onClick) call(onClick, e)
+        if (onClick) {
+          if (props.useAsync) {
+            asyncLoading.value = true
+            const ret = Array.isArray(onClick)
+              ? Promise.resolve(Promise.all(onClick.map((fn) => call(fn, e))))
+              : Promise.resolve(call(onClick, e))
+            ret.finally(() => {
+              asyncLoading.value = false
+            })
+          } else call(onClick, e)
+        }
         if (!props.text) {
           waveElRef.value?.play()
         }
@@ -183,7 +201,7 @@ const Button = defineComponent({
     const handleKeydown = (e: KeyboardEvent): void => {
       switch (e.key) {
         case 'Enter':
-          if (!props.keyboard || props.loading) {
+          if (!props.keyboard || !realLoading.value) {
             e.preventDefault()
             return
           }
@@ -522,6 +540,7 @@ const Button = defineComponent({
       showBorder: showBorderRef,
       enterPressed: enterPressedRef,
       rtlEnabled: rtlEnabledRef,
+      realLoading,
       handleMousedown,
       handleKeydown,
       handleBlur,
@@ -569,7 +588,7 @@ const Button = defineComponent({
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
           this.color && `${mergedClsPrefix}-button--color`,
           this.secondary && `${mergedClsPrefix}-button--secondary`,
-          this.loading && `${mergedClsPrefix}-button--loading`,
+          this.realLoading && `${mergedClsPrefix}-button--loading`,
           this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
@@ -589,7 +608,7 @@ const Button = defineComponent({
               resolveWrappedSlot(
                 this.$slots.icon,
                 (children) =>
-                  (this.loading || children) && (
+                  (this.realLoading || children) && (
                     <span
                       class={`${mergedClsPrefix}-button__icon`}
                       style={{
@@ -599,7 +618,7 @@ const Button = defineComponent({
                       <NIconSwitchTransition>
                         {{
                           default: () =>
-                            this.loading ? (
+                            this.realLoading ? (
                               <NBaseLoading
                                 clsPrefix={mergedClsPrefix}
                                 key="loading"
