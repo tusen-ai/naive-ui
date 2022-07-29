@@ -54,7 +54,7 @@ default-value-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
-| value | `string \| number \| Array<number \| string>` | `undefined` | 级联选择的数据受控 |  |
+| value | `string \| number \| Array<number \| string> \| null` | `undefined` | 级联选择的数据受控 |  |
 | virtual-scroll | `boolean` | `true` | 是否支持虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |

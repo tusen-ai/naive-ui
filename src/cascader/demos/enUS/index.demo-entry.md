@@ -42,7 +42,7 @@ status.vue
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.27.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
-| options | `CascaderOption[]` | required | Options of the cascader. |  |
+| options | `CascaderOption[]` | `[]` | Options of the cascader. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Cascader placement. | 2.25.0 |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |  |
