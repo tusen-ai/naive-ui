@@ -58,7 +58,7 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
@@ -70,7 +70,7 @@ action.vue
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
 | maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the `mask`. |  |
-| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |  |
+| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |
 | negativeText | `string` | `undefined` | Cancel button text. Corresponding button won't show if not set. |  |
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
