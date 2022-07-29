@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.32.1
+
+### Fixes
+
+- Fix `n-drawer`'s warning when using `string` in `default-height` prop, closes [#3377](https://github.com/TuSimple/naive-ui/issues/3377).
+- Fix `n-transfer`'s `on-update:value` is not triggered when uncheck options, closes [#3393](https://github.com/TuSimple/naive-ui/issues/3393).
+
+### Feats
+
+- `n-steps` supports RTL.
+
 ## 2.32.0
 
 ### Breaking Changes

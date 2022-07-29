@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.32.1
+
+### Fixes
+
+- 修复 `n-drawer` 的 `default-height` 属性在使用 `string` 传参时控制台出现 warning，关闭 [#3377](https://github.com/TuSimple/naive-ui/issues/3377)
+- 修复 `n-transfer` 的 `on-update:value` 在取消选择时不会触发，关闭 [#3393](https://github.com/TuSimple/naive-ui/issues/3393)
+
+### Feats
+
+- `n-steps` 支持 RTL
+
 ## 2.32.0
 
 ### Breaking Changes
