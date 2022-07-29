@@ -49,7 +49,7 @@ scrollable-debug.vue
 
 | 属性 | 类型 | 说明 |
 | --- | --- | --- |
-| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOptionOption>` | 子菜单的 children 项 |
+| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOption>` | 子菜单的 children 项 |
 | icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
 | key? | `string \| number` | 需要唯一 |
 | label? | `string \| () => VNodeChild` | 显示的 label 值 |
