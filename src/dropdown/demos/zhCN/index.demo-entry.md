@@ -62,17 +62,16 @@ scrollable-debug.vue
 | ---- | ------------------ | ------------ |
 | type | `'divider'`        | 分割线的类型 |
 | key?  | `string \| number` | 需要唯一     |
-| props? | `HTMLAttributes` | Customize divider props. |
 
 #### DropdownGroupOption Type
 
 | 属性 | 类型 | 说明 |
 | --- | --- | --- |
 | type | `'group'` | DropdownGroupOption 的类型 |
-| label | `string` | 显示的 label 值 |
+| label? | `string` | 显示的 label 值 |
 | icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
-| key | `string \| number` | 需要唯一 |
-| children | `Array<DropdownOption \| DropdownDividerOption>` | DropdownGroupOption 的 children 项 |
+| key? | `string \| number` | 需要唯一 |
+| children? | `Array<DropdownOption \| DropdownDividerOption>` | DropdownGroupOption 的 children 项 |
 
 #### DropdownRenderOption Type
 
