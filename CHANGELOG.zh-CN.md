@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-steps` 支持 RTL
+- `n-list` 支持 RTL
 
 ## 2.32.0
 

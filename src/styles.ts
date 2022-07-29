@@ -48,7 +48,7 @@ export {
   inputNumberRtl as unstableInputNumberRtl
 } from './input-number/styles'
 export { layoutDark } from './layout/styles'
-export { listDark } from './list/styles'
+export { listDark, listRtl as unstableListRtl } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'
 export { logDark } from './log/styles'
 export { mentionDark } from './mention/styles'
