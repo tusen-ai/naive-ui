@@ -83,6 +83,7 @@ export const paginationProps = {
     default: 'medium'
   },
   disabled: Boolean,
+  triggerQuickJumpOnBlur: Boolean,
   pageSlot: {
     type: Number,
     default: 9
@@ -327,14 +328,23 @@ export default defineComponent({
     function handleSizePickerChange (value: number): void {
       doUpdatePageSize(value)
     }
+    function doQuikJump (): void {
+      const page = parseInt(jumperValueRef.value)
+      if (!Number.isNaN(page)) {
+        doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
+        jumperValueRef.value = ''
+      }
+    }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
       if (e.key === 'Enter') {
-        const page = parseInt(jumperValueRef.value)
-        if (!Number.isNaN(page)) {
-          doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
-          jumperValueRef.value = ''
-          jumperRef.value?.blur()
-        }
+        doQuikJump()
+        jumperRef.value?.blur()
+      }
+    }
+    function handleQuickJumperOnBlur (): void {
+      const { triggerQuickJumpOnBlur } = props
+      if (triggerQuickJumpOnBlur) {
+        doQuikJump()
       }
     }
     function handlePageItemClick (pageItem: PageItem): void {
@@ -502,6 +512,7 @@ export default defineComponent({
       handlePageItemClick,
       handleSizePickerChange,
       handleQuickJumperKeyUp,
+      handleQuickJumperOnBlur,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -537,6 +548,7 @@ export default defineComponent({
       handlePageItemClick,
       handleForwardClick,
       handleQuickJumperKeyUp,
+      handleQuickJumperOnBlur,
       onRender
     } = this
     onRender?.()
@@ -814,6 +826,7 @@ export default defineComponent({
               theme={mergedTheme.peers.Input}
               themeOverrides={mergedTheme.peerOverrides.Input}
               onKeyup={handleQuickJumperKeyUp}
+              onBlur={handleQuickJumperOnBlur}
             />
           </div>
         ) : null}
