@@ -146,14 +146,11 @@ export default defineComponent({
 
     function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
       if (checked) {
-        doUpdateValue([...(mergedValueRef.value || []), optionValue])
+        doUpdateValue((mergedValueRef.value || []).concat(optionValue))
       } else {
-        const index = (mergedValueRef.value || []).findIndex(
-          (v) => v === optionValue
+        doUpdateValue(
+          (mergedValueRef.value || []).filter((v) => v !== optionValue)
         )
-        if (~index) {
-          ;(mergedValueRef.value || []).splice(index, 1)
-        }
       }
     }
 
