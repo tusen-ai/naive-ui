@@ -59,7 +59,8 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | Property | Type               | Description                            |
 | -------- | ------------------ | -------------------------------------- |
 | type     | `'divider'`        | The type of the DropdownDividerOption. |
-| key      | `string \| number` | Divider ID (should be unique).         |
+| key?     | `string \| number` | Divider ID (should be unique).         |
+| props?   | `HTMLAttributes`   | Customize divider props.               |
 
 #### DropdownGroupOption Type
 
