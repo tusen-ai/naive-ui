@@ -61,7 +61,8 @@ scrollable-debug.vue
 | 属性 | 类型               | 说明         |
 | ---- | ------------------ | ------------ |
 | type | `'divider'`        | 分割线的类型 |
-| key  | `string \| number` | 需要唯一     |
+| key?  | `string \| number` | 需要唯一     |
+| props? | `HTMLAttributes` | Customize divider props. |
 
 #### DropdownGroupOption Type
 
