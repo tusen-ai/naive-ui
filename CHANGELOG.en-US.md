@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-menu` extra not work in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
+- Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
+- Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 
 ### Feats
 
