@@ -34,7 +34,7 @@ default-value-debug.vue
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.3 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| disabled-field | `string` | `disabled` | 配置设置 `disabled` 的字段 | NEXT_VERSION |
+| disabled-field | `string` | `'disabled'` | 替代 `CascaderOption` 中的 disabled 字段名 | NEXT_VERSION |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |  |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
