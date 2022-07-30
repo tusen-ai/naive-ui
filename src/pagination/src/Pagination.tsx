@@ -67,10 +67,7 @@ export const paginationProps = {
   },
   showSizePicker: Boolean,
   pageSize: Number,
-  defaultPageSize: {
-    type: Number,
-    default: 10
-  },
+  defaultPageSize: Number,
   pageSizes: {
     type: Array as PropType<Array<number | PaginationSizeOption>>,
     default () {
@@ -159,7 +156,9 @@ export default defineComponent({
     const jumperRef = ref<InputInst | null>(null)
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(props.defaultPageSize)
+    const uncontrolledPageSizeRef = ref(
+      props.defaultPageSize ?? props.pageSizes[0]
+    )
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef

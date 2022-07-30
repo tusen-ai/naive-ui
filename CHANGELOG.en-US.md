@@ -6,13 +6,13 @@
 
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
+- Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
 
 ### Feats
 
 - `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
 - `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
-
 
 ## 2.32.1
 
