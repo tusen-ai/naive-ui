@@ -47,9 +47,8 @@ export default defineComponent({
     size: String
   },
   setup (props) {
-    const parameters = computed(() => getCodeSandboxParams(props.code))
     return {
-      parameters
+      parameters: computed(() => getCodeSandboxParams(props.code))
     }
   }
 })
