@@ -143,12 +143,7 @@ export default defineComponent({
       ? useThemeClass(
         'alert',
         computed(() => {
-          let hash = ''
-          hash += props.type[0]
-          if (mergedBorderedRef.value) {
-            hash += 'a'
-          }
-          return hash
+          return props.type[0]
         }),
         cssVarsRef,
         props
