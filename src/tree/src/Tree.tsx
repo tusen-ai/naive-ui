@@ -74,6 +74,9 @@ export function createTreeMateOptions<T> (
   childrenField: string
 ): TreeMateOptions<T, T, T> {
   return {
+    getIsGroup () {
+      return false
+    },
     getKey (node: T) {
       return (node as any)[keyField]
     },
