@@ -19,7 +19,6 @@
     <n-tag
       type="info"
       closable
-      :trigger-click-on-close="false"
       @click="handleClick"
       @close="handleClose"
     >

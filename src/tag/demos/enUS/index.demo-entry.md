@@ -32,7 +32,7 @@ icon.vue
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
 | strong | `boolean` | `false` | Whether to use strong text | 2.30.0 |
-| trigger-click-on-close | `boolean` | `false` | Whether the tag trigger click on close. | NEXT_VERSION |
+| trigger-click-on-close | `boolean` | `false` | Whether the tag triggers click on close. | NEXT_VERSION |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | on-close | `(e: MouseEvent) => void` | `undefined` | Close clicked callback. |  |
 | on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |  |
