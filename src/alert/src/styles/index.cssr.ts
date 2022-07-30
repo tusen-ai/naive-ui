@@ -34,7 +34,7 @@ export default cB('alert', `
   text-align: start;
   word-break: break-word;
 `, [
-  cE('border', `
+  cM('border', `
     border: var(--n-border);
   `),
   cM('closable', [
