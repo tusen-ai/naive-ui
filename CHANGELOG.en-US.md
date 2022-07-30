@@ -9,6 +9,11 @@
 
 ### Feats
 
+- `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
+- `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
+- `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
+
+
 ## 2.32.1
 
 ### Fixes
@@ -44,14 +49,12 @@
 
 ### Feats
 
-- `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
 - `n-checkbox-group`'s `on-update:value` prop adds trigger checkbox's value to params, closes [#3277](https://github.com/TuSimple/naive-ui/issues/3277).
 - `n-tree` supports RTL.
 - `n-input` adds `scrollTo` method, closes [#3280](https://github.com/TuSimple/naive-ui/issues/3280).
 - `n-legacy-grid` supports RTL.
 - `n-statistic` supports RTL.
 - `n-thing` supports RTL.
-- `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-transfer` add `render-source-label` prop.
 - `n-transfer` add `render-target-label` prop.
 - `n-transfer` add `render-source-list` prop.

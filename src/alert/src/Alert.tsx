@@ -43,6 +43,10 @@ export const alertProps = {
     >,
     default: 'default'
   },
+  bordered: {
+    type: Boolean,
+    default: true
+  },
   closable: Boolean,
   onClose: Function,
   onAfterLeave: Function,
@@ -67,8 +71,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Alert',
       '-alert',
@@ -162,6 +170,7 @@ export default defineComponent({
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedBordered: mergedBorderedRef,
       visible: visibleRef,
       handleCloseClick,
       handleAfterLeave,
@@ -225,7 +234,12 @@ export default defineComponent({
                     ])}
                   </div>
                 )}
-                <div class={`${mergedClsPrefix}-alert-body`}>
+                <div
+                  class={[
+                    `${mergedClsPrefix}-alert-body`,
+                    this.mergedBordered && `${mergedClsPrefix}-alert--bordered`
+                  ]}
+                >
                   {resolveWrappedSlot($slots.header, (children) => {
                     const mergedChildren = children || this.title
                     return mergedChildren ? (

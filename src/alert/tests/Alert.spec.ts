@@ -41,6 +41,13 @@ describe('n-alert', () => {
     })
   })
 
+  it('should work with `bordered` prop', async () => {
+    const wrapper = mount(NAlert)
+    expect(wrapper.find('.n-alert--bordered').exists()).toBe(true)
+    await wrapper.setProps({ bordered: false })
+    expect(wrapper.find('.n-alert--bordered').exists()).toBe(false)
+  })
+
   it('should work with `default` slot', () => {
     const wrapper = mount(NAlert, {
       slots: {
