@@ -33,6 +33,7 @@ status.vue
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.3 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |  |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |  |
+| disabled-field | `string` | `'disabled'` | The disabled field in `CascaderOption`. | NEXT_VERSION |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
@@ -63,12 +64,12 @@ status.vue
 
 #### CascaderOption Properties
 
-| Name      | Type               | Description                          |
-| --------- | ------------------ | ------------------------------------ |
-| label     | `string`           | Label of the option.                 |
-| value     | `string \| number` | Value of the option.                 |
-| disabled? | `boolean`          | Whether this option is disabled.     |
-| children? | `CascaderOption`   | The children options of this option. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| label | `string` | Label of the option. |  |
+| value | `string \| number` | Value of the option. |  |
+| disabled? | `boolean` | Whether this option is disabled. |  |
+| children? | `CascaderOption` | The children options of this option. |  |
 
 ### Cascader Slots
 
