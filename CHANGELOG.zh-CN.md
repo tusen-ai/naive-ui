@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
+
+### Feats
+
 ## 2.32.1
 
 ### Fixes
