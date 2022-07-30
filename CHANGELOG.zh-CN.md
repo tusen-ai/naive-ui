@@ -4,9 +4,25 @@
 
 ### Fixes
 
+- 修复 `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
+- 修复 `n-tree` 在传入的节点数据中包含 `type='group'` 时无法展开，关闭 [#3388](https://github.com/TuSimple/naive-ui/issues/3388)
+
 ### Feats
 
 - `n-alert` 新增 `bordered` 属性，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
+- `n-tag` 新增 `trigger-click-on-close` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
+- `n-cascader` 新增 `disabled-field` 属性，关闭 [#3338](https://github.com/TuSimple/naive-ui/issues/3338)
+
+## 2.32.1
+
+### Fixes
+
+- 修复 `n-drawer` 的 `default-height` 属性在使用 `string` 传参时控制台出现 warning，关闭 [#3377](https://github.com/TuSimple/naive-ui/issues/3377)
+- 修复 `n-transfer` 的 `on-update:value` 在取消选择时不会触发，关闭 [#3393](https://github.com/TuSimple/naive-ui/issues/3393)
+
+### Feats
+
+- `n-steps` 支持 RTL
 
 ## 2.32.0
 

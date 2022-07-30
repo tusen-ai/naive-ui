@@ -52,15 +52,15 @@ For more info about theming, see [Customizing Theme](customize-theme).
 
 ## Auto Import
 
-If you develop using SFC, you can use the `unplugin-vue-components` plugin to automatically import components on demand.
+you can use the `unplugin-auto-import` plugin to automatically import API.
 
-The plugin will automatically parse the components used in the template and import the components.
+If you develop using SFC, you can use the `unplugin-vue-components` plugin to automatically import components on demand.The plugin will automatically parse the components used in the template and import the components.
 
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite'
-
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
@@ -68,14 +68,20 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
+    AutoImport({
+      imports: [
+        'vue',
+        {
+          'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
+        },
+      ],
+    }),
     Components({
       resolvers: [NaiveUiResolver()]
     })
   ]
 })
 ```
-
-Note: This method does not work with composables such as `useMessage`, and you still need to import the corresponding composable manually. For example `import { useMessage } from 'naive-ui'`.
 
 ## Install on Demand Globally
 

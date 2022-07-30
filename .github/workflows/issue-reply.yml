@@ -21,6 +21,7 @@ jobs:
             - DingTalk Group 1 (Member limit reached) 33482509
             - DingTalk Group 2 (Member limit reached) 35886835
             - DingTalk Group 3 32377370
+
             你好 @${{ github.event.issue.user.login }}，Naive UI Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。你可以加入社区进行提问：
             - [Discord](https://discord.gg/Pqv7Mev5Dd)
             - 钉钉一群 33482509 (已满)

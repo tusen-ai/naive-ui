@@ -36,3 +36,6 @@ For more props, see [popover](popover#Popover-Props).
 | action  | `()`       | Custom action.      |
 | default | `()`       | Popconfirm content. |
 | icon    | `()`       | Popconfirm icon.    |
+
+### Popconfirm Methods
+See [popover](popover#Popover-Methods).
