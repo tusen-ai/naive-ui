@@ -6,6 +6,7 @@ import {
   h,
   nextTick,
   PropType,
+  Ref,
   ref,
   toRef,
   VNodeChild,
@@ -156,9 +157,14 @@ export default defineComponent({
     const jumperRef = ref<InputInst | null>(null)
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(
-      props.defaultPageSize ?? props.pageSizes[0]
-    )
+    const getUncontrolledPageSizeRef = (): Ref<number> => {
+      const pageSizeRef = ref()
+      const { defaultPageSize, pageSizes } = props
+      if (defaultPageSize) pageSizeRef.value = defaultPageSize
+      else if (typeof pageSizes[0] === 'number') { pageSizeRef.value = pageSizes[0] } else pageSizeRef.value = pageSizes[0].value
+      return pageSizeRef
+    }
+    const uncontrolledPageSizeRef = getUncontrolledPageSizeRef()
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
