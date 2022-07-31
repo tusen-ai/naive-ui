@@ -156,9 +156,14 @@ export default defineComponent({
     const jumperRef = ref<InputInst | null>(null)
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(
-      props.defaultPageSize ?? props.pageSizes[0]
-    )
+    const getDefaultPageSize = (): number => {
+      const { defaultPageSize } = props
+      if (defaultPageSize !== undefined) return defaultPageSize
+      const pageSizeOption = props.pageSizes[0]
+      if (typeof pageSizeOption === 'number') return pageSizeOption
+      return pageSizeOption.value || 10
+    }
+    const uncontrolledPageSizeRef = ref(getDefaultPageSize())
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
