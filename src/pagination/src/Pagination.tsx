@@ -83,7 +83,10 @@ export const paginationProps = {
     default: 'medium'
   },
   disabled: Boolean,
-  triggerQuickJumpOnBlur: Boolean,
+  triggerQuickJumpOn: {
+    type: Array as PropType<Array<'change' | 'blur'>>,
+    default: () => ['change']
+  },
   pageSlot: {
     type: Number,
     default: 9
@@ -342,8 +345,8 @@ export default defineComponent({
       }
     }
     function handleQuickJumperOnBlur (): void {
-      const { triggerQuickJumpOnBlur } = props
-      if (triggerQuickJumpOnBlur) {
+      const { triggerQuickJumpOn } = props
+      if (triggerQuickJumpOn.includes('blur')) {
         doQuikJump()
       }
     }

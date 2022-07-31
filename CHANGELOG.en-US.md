@@ -8,7 +8,7 @@
 
 ### Feats
 
-- `n-pagination` adds `trigger-quick-jump-on-blur` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 - `n-steps` supports RTL.
 
 ## 2.32.0

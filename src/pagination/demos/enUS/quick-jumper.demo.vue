@@ -3,24 +3,21 @@
 
 You can customize the content to jump to (press `Enter` to jump quickly),
 
-and also can customize whether to trigger the quick jump on blur through `trigger-quick-jump-on-blur`.
+and also can customize whether to trigger the quick jump on blur through `trigger-quick-jump-on`.
 </markdown>
 
 <template>
   <n-space>
-    <n-switch v-model:value="trigger">
-      <template #checked>
-        Quick jump on blur
+    <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
+      <template #goto>
+        Go!
       </template>
-      <template #unchecked>
-        Won't jump on blur
-      </template>
-    </n-switch>
+    </n-pagination>
     <n-pagination
       v-model:page="page"
       :page-count="100"
       show-quick-jumper
-      :trigger-quick-jump-on-blur="trigger"
+      :trigger-quick-jump-on="['change', 'blur']"
     >
       <template #goto>
         Go!
@@ -35,8 +32,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      page: ref(2),
-      trigger: ref(false)
+      page: ref(2)
     }
   }
 })
