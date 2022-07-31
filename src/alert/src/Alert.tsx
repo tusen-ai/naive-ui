@@ -207,6 +207,9 @@ export default defineComponent({
                     onClick={this.handleCloseClick}
                   />
                 )}
+                {this.bordered && (
+                  <div class={`${mergedClsPrefix}-alert__border`} />
+                )}
                 {this.showIcon && (
                   <div
                     class={`${mergedClsPrefix}-alert__icon`}
@@ -237,7 +240,8 @@ export default defineComponent({
                 <div
                   class={[
                     `${mergedClsPrefix}-alert-body`,
-                    this.mergedBordered && `${mergedClsPrefix}-alert--bordered`
+                    this.mergedBordered &&
+                      `${mergedClsPrefix}-alert-body--bordered`
                   ]}
                 >
                   {resolveWrappedSlot($slots.header, (children) => {

@@ -5,7 +5,7 @@ List 可以控制边框。
 </markdown>
 
 <template>
-  <n-list>
+  <n-list bordered>
     <template #header>
       hhh
     </template>

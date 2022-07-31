@@ -13,6 +13,11 @@
 - `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
 - `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
+- `n-list` adds `clickable` prop.
+- `n-list` adds `hoverable` prop.
+- `n-list` adds `show-divider` prop.
+- `n-thing` adds `content-style` prop.
+- `n-thing` adds `description-style` prop.
 
 ## 2.32.1
 

@@ -5,7 +5,8 @@ import {
   PropType,
   CSSProperties,
   Ref,
-  provide
+  provide,
+  toRef
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -20,15 +21,19 @@ export const listProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  bordered: {
+  bordered: Boolean,
+  clickable: Boolean,
+  hoverable: Boolean,
+  showDivider: {
     type: Boolean,
-    default: false
+    default: true
   }
 }
 
 export type ListProps = ExtractPublicPropTypes<typeof listProps>
 
 interface ListInjection {
+  showDividerRef: Ref<boolean>
   mergedClsPrefixRef: Ref<string>
 }
 
@@ -48,6 +53,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     provide(listInjectionKey, {
+      showDividerRef: toRef(props, 'showDivider'),
       mergedClsPrefixRef
     })
     const cssVarsRef = computed(() => {
@@ -62,7 +68,10 @@ export default defineComponent({
           borderColor,
           borderColorModal,
           borderColorPopover,
-          borderRadius
+          borderRadius,
+          colorHover,
+          colorHoverModal,
+          colorHoverPopover
         }
       } = themeRef.value
       return {
@@ -75,7 +84,10 @@ export default defineComponent({
         '--n-border-color-modal': borderColorModal,
         '--n-border-color-popover': borderColorPopover,
         '--n-color-modal': colorModal,
-        '--n-color-popover': colorPopover
+        '--n-color-popover': colorPopover,
+        '--n-color-hover': colorHover,
+        '--n-color-hover-modal': colorHoverModal,
+        '--n-color-hover-popover': colorHoverPopover
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -97,6 +109,9 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-list`,
           this.bordered && `${mergedClsPrefix}-list--bordered`,
+          this.showDivider && `${mergedClsPrefix}-list--show-divider`,
+          this.hoverable && `${mergedClsPrefix}-list--hoverable`,
+          this.clickable && `${mergedClsPrefix}-list--clickable`,
           this.themeClass
         ]}
         style={this.cssVars as CSSProperties}

@@ -15,11 +15,13 @@ indent.vue
 
 ### Thing Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
 | content-indented | `boolean` | `false` | Whether to enable content indentation. |
 | content | `string` | `undefined` | Content area. |
+| content-style | `string \| Object` | `undefined` | Content area style. | NEXT_VERSION |
 | description | `string` | `undefined` | Description information. |
+| description-style | `string \| Object` | `undefined` | Description area style. | NEXT_VERSION |
 | title-extra | `string` | `undefined` | Additional information for the title. |
 | title | `string` | `undefined` | Title information. |
 

@@ -8,6 +8,7 @@
 
 ```demo
 basic.vue
+hoverable.vue
 border.vue
 ```
 
@@ -15,9 +16,12 @@ border.vue
 
 ### List Props
 
-| 名称     | 类型      | 默认值  | 说明         |
-| -------- | --------- | ------- | ------------ |
-| bordered | `boolean` | `false` | 是否显示边框 |
+| 名称         | 类型      | 默认值  | 说明                     | 版本         |
+| ------------ | --------- | ------- | ------------------------ | ------------ |
+| bordered     | `boolean` | `false` | 是否显示边框             |              |
+| clickable    | `boolean` | `false` | 列表项是否有可点击样式   | NEXT_VERSION |
+| hoverable    | `boolean` | `false` | 列表项是否有悬浮样式     | NEXT_VERSION |
+| show-divider | `boolean` | `true`  | 是否显示标项之间的分割线 | NEXT_VERSION |
 
 ### List Slots
 

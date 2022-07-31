@@ -34,8 +34,16 @@ export default cB('alert', `
   text-align: start;
   word-break: break-word;
 `, [
-  cM('border', `
+  cE('border', `
+    border-radius: inherit;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: border-color .3s var(--n-bezier);
     border: var(--n-border);
+    pointer-events: none;
   `),
   cM('closable', [
     cB('alert-body', [

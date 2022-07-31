@@ -13,6 +13,11 @@
 - `n-alert` 新增 `bordered` 属性，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
 - `n-tag` 新增 `trigger-click-on-close` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
 - `n-cascader` 新增 `disabled-field` 属性，关闭 [#3338](https://github.com/TuSimple/naive-ui/issues/3338)
+- `n-list` 新增 `clickable` 属性
+- `n-list` 新增 `hoverable` 属性
+- `n-list` 新增 `show-divider` 属性
+- `n-thing` 新增 `content-style` 属性
+- `n-thing` 新增 `description-style` 属性
 
 ## 2.32.1
 
