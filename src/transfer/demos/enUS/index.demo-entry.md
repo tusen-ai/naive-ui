@@ -30,9 +30,9 @@ render-source-list.vue
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. | 2.32.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. | 2.32.0 |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. | 2.32.0 |
-| source-title | `string` | `'Source'` | Source items title. | 2.32.0 |
+| source-title | `string` | `undefined` | Source items title. | 2.32.0 |
 | target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. | 2.32.0 |
-| target-title | `string` | `'Target'` | Target items title. | 2.32.0 |
+| target-title | `string` | `undefined` | Target items title. | 2.32.0 |
 | value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | Enable virtual scrolling. | 2.32.0 |

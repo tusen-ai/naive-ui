@@ -30,9 +30,9 @@ render-source-list.vue
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |
-| source-title | `string` | `'源项'` | 源项标题 | 2.32.0 |
+| source-title | `string` | `undefined` | 源项标题 | 2.32.0 |
 | target-filter-placeholder | `string` | `undefined` | 目标项搜索框中的占位符 | 2.32.0 |
-| target-title | `string` | `'目标项'` | 目标项标题 | 2.32.0 |
+| target-title | `string` | `undefined` | 目标项标题 | 2.32.0 |
 | value | `Array<string \| number> \| null` | `undefined` | 受控模式下的值 | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | 值发生改变时的回调 | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 | 2.32.0 |
