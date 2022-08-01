@@ -118,6 +118,7 @@
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
 - Update ukUA locale.
+- `async-validator` close `suppressWarning` prop.
 
 ## 2.30.8
 
