@@ -18,6 +18,7 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
+- `n-pagination` adds `hide-on-single-page` prop.
 
 ## 2.32.1
 

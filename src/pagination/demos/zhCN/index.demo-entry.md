@@ -45,6 +45,7 @@ rtl-debug.vue
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | 当前分页大小发生改变时的回调函数 |  |
+| hide-on-single-page | `boolean` | `false` | 只有一页时是否隐藏 |  |
 
 #### PaginationRenderLabel Type
 

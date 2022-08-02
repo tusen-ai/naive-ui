@@ -66,6 +66,7 @@ export const paginationProps = {
     default: 1
   },
   showSizePicker: Boolean,
+  hideOnSinglePage: Boolean,
   pageSize: Number,
   defaultPageSize: Number,
   pageSizes: {
@@ -522,6 +523,7 @@ export default defineComponent({
       mergedPageCount,
       pageItems,
       showSizePicker,
+      hideOnSinglePage,
       showQuickJumper,
       mergedTheme,
       locale,
@@ -549,6 +551,9 @@ export default defineComponent({
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
     const renderLabel = label || $slots.label
+    if (hideOnSinglePage && mergedPageCount <= 1) {
+      return null
+    }
     return (
       <div
         ref="selfRef"

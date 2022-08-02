@@ -18,6 +18,7 @@
 - `n-list` 新增 `show-divider` 属性
 - `n-thing` 新增 `content-style` 属性
 - `n-thing` 新增 `description-style` 属性
+- `n-pagination` 新增 `hide-on-single-page` 属性
 
 ## 2.32.1
 

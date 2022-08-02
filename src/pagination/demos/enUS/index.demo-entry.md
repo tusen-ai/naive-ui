@@ -44,6 +44,7 @@ page-size-option.vue
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function when the current page size changes. |  |
+| hide-on-single-page | `boolean` | `false` | whether to hide when there's only one page |  |
 
 #### PaginationRenderLabel Type
 
