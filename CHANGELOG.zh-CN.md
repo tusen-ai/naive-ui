@@ -7,6 +7,7 @@
 - 修复 `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
 - 修复 `n-tree` 在传入的节点数据中包含 `type='group'` 时无法展开，关闭 [#3388](https://github.com/TuSimple/naive-ui/issues/3388)
 - 修复 `n-pagination` 的 `default-page-size` 没有跟随 `page-sizes` prop，关闭 [#3369](https://github.com/TuSimple/naive-ui/issues/3369)
+- 修复 `n-carousel` 在 `loop='true'` 和 `effect='slide'` 下，只有两个元素时轮播过渡切换效果相反，关闭 [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
 
 ### Feats
 
