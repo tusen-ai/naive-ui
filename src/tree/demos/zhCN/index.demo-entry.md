@@ -79,10 +79,10 @@ expand-debug.vue
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 拖拽一个节点，该节点离开其它节点后的回调函数 |  |
 | on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 开始拖拽某一个节点的回调函数 |  |
 | on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |
-| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | 节点勾选项发生变化时的回调函数 |  |
-| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | 节点展开项发生变化时的回调函数 |  |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | 节点选中项发生变化时的回调函数 |  |
+| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点勾选项发生变化时的回调函数 |  |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
+| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点展开项发生变化时的回调函数 |  |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点选中项发生变化时的回调函数 |  |
 
 ### TreeOption Properties
 
