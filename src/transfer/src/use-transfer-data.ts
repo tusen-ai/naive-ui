@@ -80,7 +80,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const canBeClearedRef = computed(() => {
-    return targetOptionsRef.value.some((option) => !option.disabled)
+    return targetOptionsRef.value.some((option) => !option?.disabled)
   })
 
   function handleSrcFilterUpdateValue (value: string | null): void {
