@@ -28,7 +28,9 @@ export function useTransferData (props: UseTransferDataProps) {
 
   const targetOptionsRef = computed(() => {
     const optionMap = optionsMapRef.value
-    return (mergedValueRef.value || []).map((v) => optionMap.get(v)) as Option[]
+    return (mergedValueRef.value || [])
+      .map((v) => optionMap.get(v))
+      .filter(Boolean) as Option[]
   })
 
   const srcPatternRef = ref('')
@@ -80,7 +82,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const canBeClearedRef = computed(() => {
-    return targetOptionsRef.value.some((option) => !option?.disabled)
+    return targetOptionsRef.value.some((option) => !option.disabled)
   })
 
   function handleSrcFilterUpdateValue (value: string | null): void {

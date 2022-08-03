@@ -7,6 +7,7 @@
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
+- Fix `n-transfer`'s error when passing asynchronous options，closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 
 ### Feats
 
