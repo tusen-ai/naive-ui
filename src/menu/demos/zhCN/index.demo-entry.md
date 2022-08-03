@@ -20,6 +20,7 @@ router-link.vue
 customize-field.vue
 expand-selected-option.vue
 show.vue
+debug.vue
 ```
 
 ## API

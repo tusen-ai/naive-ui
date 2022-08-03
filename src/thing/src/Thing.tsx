@@ -1,4 +1,11 @@
-import { h, defineComponent, computed, CSSProperties, Fragment } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  CSSProperties,
+  Fragment,
+  PropType
+} from 'vue'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
@@ -11,11 +18,10 @@ export const thingProps = {
   title: String,
   titleExtra: String,
   description: String,
+  descriptionStyle: [String, Object] as PropType<string | CSSProperties>,
   content: String,
-  contentIndented: {
-    type: Boolean,
-    default: false
-  }
+  contentStyle: [String, Object] as PropType<string | CSSProperties>,
+  contentIndented: Boolean
 }
 
 export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
@@ -107,7 +113,10 @@ export default defineComponent({
                       ) : null}
                     </div>
                     {slots.description || props.description ? (
-                      <div class={`${mergedClsPrefix}-thing-main__description`}>
+                      <div
+                        class={`${mergedClsPrefix}-thing-main__description`}
+                        style={props.descriptionStyle}
+                      >
                         {slots.description
                           ? slots.description()
                           : props.description}
@@ -138,7 +147,10 @@ export default defineComponent({
                   </div>
                     ) : null}
                 {slots.description || props.description ? (
-                  <div class={`${mergedClsPrefix}-thing-main__description`}>
+                  <div
+                    class={`${mergedClsPrefix}-thing-main__description`}
+                    style={props.descriptionStyle}
+                  >
                     {slots.description
                       ? slots.description()
                       : props.description}
@@ -147,7 +159,10 @@ export default defineComponent({
               </>
                 )}
             {slots.default || props.content ? (
-              <div class={`${mergedClsPrefix}-thing-main__content`}>
+              <div
+                class={`${mergedClsPrefix}-thing-main__content`}
+                style={props.contentStyle}
+              >
                 {slots.default ? slots.default() : props.content}
               </div>
             ) : null}

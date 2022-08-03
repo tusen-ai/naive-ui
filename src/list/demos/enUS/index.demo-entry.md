@@ -8,6 +8,7 @@ It is hard to make it looks elegant. However things should be done.
 
 ```demo
 basic.vue
+hoverable.vue
 border.vue
 ```
 
@@ -15,9 +16,12 @@ border.vue
 
 ### List Props
 
-| Name     | Type      | Default | Description                 |
-| -------- | --------- | ------- | --------------------------- |
-| bordered | `boolean` | `false` | Whether to show the border. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `false` | Whether to show the border. |  |
+| clickable | `boolean` | `false` | Whether item has clickable style. | NEXT_VERSION |
+| hoverable | `boolean` | `false` | Whether item has hoverable style. | NEXT_VERSION |
+| show-divider | `boolean` | `true` | Whether to show item divider. | NEXT_VERSION |
 
 ### List Slots
 

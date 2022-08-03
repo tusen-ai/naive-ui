@@ -11,13 +11,17 @@ export const self = (vars: ThemeCommonVars) => {
     popoverColor,
     dividerColor,
     borderRadius,
-    fontSize
+    fontSize,
+    hoverColor
   } = vars
   return {
     textColor: textColor2,
     color: cardColor,
+    colorHover: hoverColor,
     colorModal: modalColor,
+    colorHoverModal: composite(modalColor, hoverColor),
     colorPopover: popoverColor,
+    colorHoverPopover: composite(popoverColor, hoverColor),
     borderColor: dividerColor,
     borderColorModal: composite(modalColor, dividerColor),
     borderColorPopover: composite(popoverColor, dividerColor),

@@ -57,7 +57,7 @@ status.vue
 | -------- | ------------------------------------- | ----------------------- |
 | children | `Array<string \| AutoCompleteOption>` | Group children options. |
 | label    | `string`                              | Group label.            |
-| key      | `key`                                 | Unique group key.       |
+| key      | `string \| number`                    | Unique group key.       |
 | type     | `'group'`                             | Required group type.    |
 
 ### AutoComplete Slots

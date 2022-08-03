@@ -6,7 +6,7 @@
 
 <template>
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="__HTTP__://naive-upload.free.beeceptor.com/"
     :headers="{
       'naive-info': 'hello!'
     }"
@@ -57,7 +57,7 @@ export default defineComponent({
           }
         })
         .then(({ json }) => {
-          message.success(json)
+          message.success(JSON.stringify(json))
           onFinish()
         })
         .catch((error) => {

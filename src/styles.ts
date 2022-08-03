@@ -76,7 +76,7 @@ export {
   statisticDark,
   statisticRtl as unstableStatisticRtl
 } from './statistic/styles'
-export { stepsDark } from './steps/styles'
+export { stepsDark, stepsRtl as unstableStepsRtl } from './steps/styles'
 export { switchDark } from './switch/styles'
 export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
 export { tabsDark } from './tabs/styles'

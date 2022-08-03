@@ -149,6 +149,7 @@ export const NSubmenu = defineComponent({
             maxIconSize={maxIconSize}
             activeIconSize={activeIconSize}
             title={title}
+            extra={this.extra}
             showArrow={!isHorizontal}
             childActive={childActive}
             clsPrefix={mergedClsPrefix}
