@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, VNodeChild } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
 import {
   NBaseIcon,
@@ -18,6 +18,9 @@ export default defineComponent({
     onClick: {
       type: Function as PropType<() => void>,
       required: true
+    },
+    renderExpandIcon: {
+      type: Function as PropType<(expanded: boolean) => VNodeChild>
     }
   },
   render () {
@@ -40,6 +43,8 @@ export default defineComponent({
                         strokeWidth={15}
                         scale={0.88}
                       />
+                    ) : this.renderExpandIcon ? (
+                      this.renderExpandIcon(this.expanded)
                     ) : (
                       <ChevronRightIcon
                         class={`${this.clsPrefix}-data-table-expand-trigger__icon`}

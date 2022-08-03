@@ -19,6 +19,7 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
+- `n-data-table`'s col adds `renderExpandIcon` prop.
 
 ## 2.32.1
 
