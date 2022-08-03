@@ -36,8 +36,8 @@ export function itemRenderer (
   menuProps: MenuSetupProps
 ): VNode | undefined {
   const { rawNode } = tmNode
-  const { hidden } = rawNode
-  if (hidden) {
+  const { show } = rawNode
+  if (typeof show === 'boolean' && !show) {
     return undefined
   }
   if (isIgnoredNode(rawNode)) {

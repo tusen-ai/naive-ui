@@ -19,7 +19,7 @@ accordion.vue
 router-link.vue
 customize-field.vue
 expand-selected-option.vue
-hidden.vue
+show.vue
 ```
 
 ## API
@@ -63,7 +63,7 @@ hidden.vue
 | --- | --- | --- |
 | children? | `Array<MenuOption \| MenuGroupOption>` | Child menu options. |
 | disabled? | `boolean` | Whether to disable the menu item. |
-| hidden? | `boolean` | Whether to hidden the menu item. |
+| show? | `boolean` | Whether to show the menu item. |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
 | icon? | `() => VNodeChild` | The icon for the menu item. |
 | key | `string` | The indentifier of the menu item. |

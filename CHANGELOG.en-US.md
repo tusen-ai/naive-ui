@@ -6,7 +6,7 @@
 
 ### Feats
 
-- `n-menu` add `hidden` prop to set whether the Menu item is hidden, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
+- `n-menu` add `show` prop to set whether the Menu item is show, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
 
 ## 2.32.0
 

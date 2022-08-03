@@ -48,7 +48,7 @@ export default defineComponent({
         label: '摸鱼宝典',
         key: '3',
         icon: renderIcon(BookIcon),
-        hidden: accordionRef.value,
+        show: !accordionRef.value,
         children: [
           {
             label: '你摸鱼',

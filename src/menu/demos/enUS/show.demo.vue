@@ -48,7 +48,7 @@ export default defineComponent({
         label: 'parent 2',
         key: '3',
         icon: renderIcon(BookIcon),
-        hidden: accordionRef.value,
+        show: !accordionRef.value,
         children: [
           {
             label: '2.1',

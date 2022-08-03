@@ -412,7 +412,7 @@ describe('n-menu', () => {
       {
         label: 'fantasy',
         key: 'fantasy',
-        hidden: true
+        show: false
       },
       {
         label: 'mojito',

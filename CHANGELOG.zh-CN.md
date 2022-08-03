@@ -6,7 +6,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `hidden` 属性，用于隐藏菜单，关闭 [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
+- `n-menu` 新增 `show` 属性，用于是否显示菜单，关闭 [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
 
 ## 2.32.0
 

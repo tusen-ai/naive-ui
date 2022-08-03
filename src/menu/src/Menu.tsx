@@ -95,7 +95,10 @@ export const menuProps = {
     default: undefined
   },
   disabled: Boolean,
-  hidden: Boolean,
+  show: {
+    type: Boolean,
+    defalut: true
+  },
   inverted: Boolean,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
