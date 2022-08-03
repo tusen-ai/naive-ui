@@ -750,9 +750,10 @@ export default defineComponent({
           if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
             if (realIndex === length - 2 && lastRealIndex === 1) {
-              realIndex = length === 4 ? realIndex : 0
+              realIndex = displayTotalViewRef.value === 2 ? realIndex : 0
             } else if (realIndex === 1 && lastRealIndex === length - 2) {
-              realIndex = length === 4 ? realIndex : length - 1
+              realIndex =
+                displayTotalViewRef.value === 2 ? realIndex : length - 1
             }
           }
           translateTo(realIndex, speedRef.value)
