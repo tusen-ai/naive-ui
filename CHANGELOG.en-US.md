@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-transfer`'s `filterable` prop will be obsolete, please use `source-filterable` and `target-filterable` props.
+
 ### Fixes
 
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
@@ -35,6 +39,8 @@
 - `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 - `n-pagination` adds `simple` prop.
 - `n-cascader` adds `arrow` slot, closes [#3459](https://github.com/TuSimple/naive-ui/issues/3459).
+- `n-transfer` adds `source-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
+- `n-transfer` adds `target-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
 - `n-list` supports RTL.
 - `n-drawer` supports RTL.
 

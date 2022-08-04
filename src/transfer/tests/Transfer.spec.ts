@@ -14,13 +14,6 @@ describe('n-transfer', () => {
     )
   })
 
-  it('should work with `filterable` prop', () => {
-    const wrapper = mount(NTransfer, { props: { filterable: true } })
-    expect(wrapper.find('.n-transfer').attributes('class')).toContain(
-      'n-transfer--filterable'
-    )
-  })
-
   it('should work with `filter` prop', async () => {
     const options = [
       {

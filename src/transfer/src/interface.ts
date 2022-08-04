@@ -10,7 +10,11 @@ export interface Option {
   disabled?: boolean
 }
 
-export type Filter = (pattern: string, option: Option) => boolean
+export type Filter = (
+  pattern: string,
+  option: Option,
+  from: 'source' | 'target'
+) => boolean
 
 export interface RenderLabelProps {
   option: Option

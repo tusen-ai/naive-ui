@@ -22,8 +22,10 @@ render-source-list.vue
 | --- | --- | --- | --- | --- |
 | default-value | `Array<string \| number> \| null` | `null` | Default value. | 2.32.0 |
 | disabled | `boolean` | `true` | Disabled state. | 2.32.0 |
-| filterable | `boolean` | `false` | Filterable state. | 2.32.0 |
-| filter | `(pattern: string, option: TransferOption) => boolean` | A basic label string match function. | 2.32.0 |
+| filterable | `boolean` | `false` | Filterable state (control source only, will be obsolete). | 2.32.0 |
+| source-filterable | `boolean` | `false` | The source filterable state. | NEXT_VERSION |
+| target-filterable | `boolean` | `false` | The target filterable state. | NEXT_VERSION |
+| filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. | 2.32.0, `from` NEXT_VERSION |
 | options | `TransferOption[]` | `[]` | For configuration options, see the TransferOption Type below. | 2.32.0 |
 | render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize source label rendering. | 2.32.0 |
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize target label rendering. | 2.32.0 |

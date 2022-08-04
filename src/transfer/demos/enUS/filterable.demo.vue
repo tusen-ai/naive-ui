@@ -3,13 +3,22 @@
 </markdown>
 
 <template>
-  <n-transfer
-    ref="transfer"
-    v-model:value="value"
-    virtual-scroll
-    :options="options"
-    filterable
-  />
+  <n-space vertical>
+    <n-transfer
+      ref="transfer"
+      v-model:value="value1"
+      virtual-scroll
+      :options="options1"
+      source-filterable
+    />
+    <n-transfer
+      ref="transfer"
+      v-model:value="value2"
+      virtual-scroll
+      :options="options2"
+      target-filterable
+    />
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -30,8 +39,10 @@ function createValues () {
 export default defineComponent({
   setup () {
     return {
-      options: createOptions(),
-      value: ref(createValues())
+      options1: createOptions(),
+      value1: ref(createValues()),
+      options2: createOptions(),
+      value2: ref(createValues())
     }
   }
 })
