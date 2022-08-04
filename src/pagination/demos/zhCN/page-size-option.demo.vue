@@ -32,7 +32,7 @@ export default defineComponent({
       },
       {
         label: '40 每页',
-        value: 50
+        value: 40
       }
     ]
     return {
