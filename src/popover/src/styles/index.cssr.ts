@@ -37,6 +37,9 @@ export default c([
     font-size: var(--n-font-size);
     color: var(--n-text-color);
     box-shadow: var(--n-box-shadow);
+    width: max-content;
+    width: intrinsic;
+    max-width: var(--n-tooltip-max-width);
   `, [
     c('>', [
       cB('scrollbar', `

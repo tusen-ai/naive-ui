@@ -4,5 +4,6 @@ export default {
   arrowOffset: '10px',
   arrowOffsetVertical: '10px',
   arrowHeight: '6px',
-  padding: '8px 14px'
+  padding: '8px 14px',
+  tooltipMaxwidth: '250px'
 }

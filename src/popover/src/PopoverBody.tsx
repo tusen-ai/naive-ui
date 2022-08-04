@@ -186,7 +186,8 @@ export default defineComponent({
           borderRadius,
           arrowHeight,
           arrowOffset,
-          arrowOffsetVertical
+          arrowOffsetVertical,
+          tooltipMaxwidth
         }
       } = themeRef.value
 
@@ -205,7 +206,8 @@ export default defineComponent({
         '--n-arrow-offset-vertical': arrowOffsetVertical,
         '--n-padding': padding,
         '--n-space': space,
-        '--n-space-arrow': spaceArrow
+        '--n-space-arrow': spaceArrow,
+        '--n-tooltip-max-width': tooltipMaxwidth
       }
     })
     const themeClassHandle = inlineThemeDisabled
