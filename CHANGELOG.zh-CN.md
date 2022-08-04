@@ -19,6 +19,7 @@
 - `n-list` 新增 `show-divider` 属性
 - `n-thing` 新增 `content-style` 属性
 - `n-thing` 新增 `description-style` 属性
+- `n-popover` popover 组件增加默认最大宽度
 
 ## 2.32.1
 
