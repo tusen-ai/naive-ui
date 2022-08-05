@@ -130,6 +130,8 @@ describe('n-alert', () => {
 
     expect(handleCloseClick).toHaveBeenCalled()
 
-    expect(handleOnAfterLeave).toHaveBeenCalled()
+    setTimeout(() => {
+      expect(handleOnAfterLeave).toBeCalled()
+    }, 0)
   })
 })
