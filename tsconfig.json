@@ -16,6 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "composite": true,
     "target": "ES6",
+    "types": ["vitest/globals"],
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"]
   }

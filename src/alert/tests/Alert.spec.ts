@@ -113,8 +113,8 @@ describe('n-alert', () => {
   })
 
   it('should trigger callback when closed', async () => {
-    const handleCloseClick = jest.fn()
-    const handleOnAfterLeave = jest.fn()
+    const handleCloseClick = vi.fn()
+    const handleOnAfterLeave = vi.fn()
     const wrapper = mount(NAlert, {
       props: {
         closable: true,
@@ -130,8 +130,6 @@ describe('n-alert', () => {
 
     expect(handleCloseClick).toHaveBeenCalled()
 
-    setTimeout(() => {
-      expect(handleOnAfterLeave).toHaveBeenCalled()
-    }, 0)
+    expect(handleOnAfterLeave).toHaveBeenCalled()
   })
 })

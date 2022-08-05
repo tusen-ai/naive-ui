@@ -24,7 +24,7 @@ describe('n-space', () => {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    expect(wrapper.find('.n-space').exists()).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

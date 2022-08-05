@@ -28,6 +28,18 @@ module.exports = {
     'process.env.TUSIMPLE': !!process.env.TUSIMPLE,
     __DEV__: process.env.NODE_ENV !== 'production'
   },
+  test: {
+    deps: {
+      inline: ['date-fns']
+    },
+    globals: true,
+    include: ['./src/**/*.(spec|test).(ts|tsx)'],
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
+    transformMode: {
+      web: [/\.[tj]sx$/]
+    }
+  },
   optimizeDeps: {
     include: [
       '@css-render/plugin-bem',

@@ -121,7 +121,7 @@ describe('n-dropdown', () => {
   })
 
   it('keyboard event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     let wrapper = mountDropdown({ onSelect })
 
     let triggerNodeWrapper = wrapper.find('span')
@@ -175,7 +175,7 @@ describe('n-dropdown', () => {
   })
 
   it('option mouse event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -212,7 +212,7 @@ describe('n-dropdown', () => {
   })
 
   it('dropdown disabled', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -235,7 +235,7 @@ describe('n-dropdown', () => {
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
-    const onClickoutside = jest.fn()
+    const onClickoutside = vi.fn()
     const wrapper = mountDropdown({ onClickoutside })
 
     const triggerNodeWrapper = wrapper.find('span')

@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`n-space render custom style space 1`] = `
+exports[`n-space > render custom style space 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"background-color: red; color: yellow; max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">div</div>
 </div>"
 `;
 
-exports[`n-space render empty children 1`] = `""`;
+exports[`n-space > render empty children 1`] = `""`;
 
-exports[`n-space render justify space 1`] = `
+exports[`n-space > render justify space 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -19,7 +19,7 @@ exports[`n-space render justify space 1`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 2`] = `
+exports[`n-space > render justify space 2`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-end; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -30,7 +30,7 @@ exports[`n-space render justify space 2`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 3`] = `
+exports[`n-space > render justify space 3`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -41,7 +41,7 @@ exports[`n-space render justify space 3`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 4`] = `
+exports[`n-space > render justify space 4`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -52,7 +52,7 @@ exports[`n-space render justify space 4`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 5`] = `
+exports[`n-space > render justify space 5`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -63,7 +63,7 @@ exports[`n-space render justify space 5`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 6`] = `
+exports[`n-space > render justify space 6`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-evenly; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
     <div>1</div>
@@ -74,7 +74,7 @@ exports[`n-space render justify space 6`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 7`] = `
+exports[`n-space > render justify space 7`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 12px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -87,7 +87,7 @@ exports[`n-space render justify space 7`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 8`] = `
+exports[`n-space > render justify space 8`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: flex-end; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 12px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -100,7 +100,7 @@ exports[`n-space render justify space 8`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 9`] = `
+exports[`n-space > render justify space 9`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 12px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -113,7 +113,7 @@ exports[`n-space render justify space 9`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 10`] = `
+exports[`n-space > render justify space 10`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 6px; margin-right: 6px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -126,7 +126,7 @@ exports[`n-space render justify space 10`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 11`] = `
+exports[`n-space > render justify space 11`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -139,7 +139,7 @@ exports[`n-space render justify space 11`] = `
 </div>"
 `;
 
-exports[`n-space render justify space 12`] = `
+exports[`n-space > render justify space 12`] = `
 "<div class=\\"n-config-provider\\">
   <div role=\\"none\\" class=\\"n-space n-space--rtl\\" style=\\"display: flex; flex-direction: row; justify-content: space-evenly; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
     <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 6px; margin-right: 6px; padding-top: 4px; padding-bottom: 4px;\\">
@@ -152,19 +152,19 @@ exports[`n-space render justify space 12`] = `
 </div>"
 `;
 
-exports[`n-space render space number size 1`] = `
+exports[`n-space > render space number size 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -10px; margin-bottom: -10px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; padding-top: 10px; padding-bottom: 10px;\\">kirby</div>
 </div>"
 `;
 
-exports[`n-space render space string size 1`] = `
+exports[`n-space > render space string size 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -6px; margin-bottom: -6px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; padding-top: 6px; padding-bottom: 6px;\\">kirby</div>
 </div>"
 `;
 
-exports[`n-space render vertical space 1`] = `
+exports[`n-space > render vertical space 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: column; justify-content: flex-start; flex-wrap: nowrap;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-bottom: 8px;\\">
     <div>1</div>
@@ -175,11 +175,11 @@ exports[`n-space render vertical space 1`] = `
 </div>"
 `;
 
-exports[`n-space should not render while slot is Comment 1`] = `""`;
+exports[`n-space > should not render while slot is Comment 1`] = `""`;
 
-exports[`n-space should not render while v-if is false 1`] = `""`;
+exports[`n-space > should not render while v-if is false 1`] = `""`;
 
-exports[`n-space should render with invalidElement 1`] = `
+exports[`n-space > should render with invalidElement 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">text1</div>
   <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\"><span>text1</span></div>
@@ -187,7 +187,7 @@ exports[`n-space should render with invalidElement 1`] = `
 </div>"
 `;
 
-exports[`n-space shound not render a container to wrap child elements 1`] = `
+exports[`n-space > shound not render a container to wrap child elements 1`] = `
 "<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
   <div>1</div>
   <div>2</div>
