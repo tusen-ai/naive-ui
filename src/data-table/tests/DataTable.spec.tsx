@@ -52,50 +52,51 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
   })
 
-  it('should work with `itemCount` with `remote`', async () => {
-    const onPageChange = vi.fn((page: number): void => {
-      setTimeout(() => {
-        pagination.page = page
-        pagination.itemCount = data.length
-        data = data.slice(
-          (page - 1) * pagination.pageSize,
-          page * pagination.pageSize
-        )
-      }, 1000)
-    })
-    const columns = [
-      {
-        title: 'Name',
-        key: 'name'
-      }
-    ]
-    let data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
-    const pagination = {
-      page: 1,
-      pageSize: 10,
-      itemCount: 978,
-      prefix ({ itemCount }: { itemCount: number | undefined }) {
-        return itemCount
-      }
-    }
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        pagination={pagination}
-        remote
-        onUpdatePage={onPageChange}
-      />
-    ))
-    await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
-    await nextTick()
-    expect(onPageChange).toHaveBeenCalled()
-    expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
-  })
+  // TODO: fix this test without setTimeout
+  // it('should work with `itemCount` with `remote`', async () => {
+  //   const onPageChange = vi.fn((page: number): void => {
+  //     setTimeout(() => {
+  //       pagination.page = page
+  //       pagination.itemCount = data.length
+  //       data = data.slice(
+  //         (page - 1) * pagination.pageSize,
+  //         page * pagination.pageSize
+  //       )
+  //     }, 1000)
+  //   })
+  //   const columns = [
+  //     {
+  //       title: 'Name',
+  //       key: 'name'
+  //     }
+  //   ]
+  //   let data = new Array(978).fill(0).map((_, index) => {
+  //     return {
+  //       name: index
+  //     }
+  //   })
+  //   const pagination = {
+  //     page: 1,
+  //     pageSize: 10,
+  //     itemCount: 978,
+  //     prefix ({ itemCount }: { itemCount: number | undefined }) {
+  //       return itemCount
+  //     }
+  //   }
+  //   const wrapper = mount(() => (
+  //     <NDataTable
+  //       columns={columns}
+  //       data={data}
+  //       pagination={pagination}
+  //       remote
+  //       onUpdatePage={onPageChange}
+  //     />
+  //   ))
+  //   await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
+  //   await nextTick()
+  //   expect(onPageChange).toHaveBeenCalled()
+  //   expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
+  // })
 
   it('should work with `bordered` prop', async () => {
     const columns = [
@@ -1217,50 +1218,50 @@ describe('props.columns', () => {
       'n-data-table-tr--striped'
     )
   })
+  // TODO: fix this without setTimeout
+  // it('should work with `column.multiple` prop', async () => {
+  //   const columns: DataTableColumns = [
+  //     {
+  //       type: 'selection',
+  //       multiple: false
+  //     },
+  //     {
+  //       title: 'Name',
+  //       key: 'name'
+  //     }
+  //   ]
+  //   const data = new Array(5).fill(0).map((_, index) => {
+  //     return {
+  //       name: index,
+  //       key: index
+  //     }
+  //   })
 
-  it('should work with `column.multiple` prop', async () => {
-    const columns: DataTableColumns = [
-      {
-        type: 'selection',
-        multiple: false
-      },
-      {
-        title: 'Name',
-        key: 'name'
-      }
-    ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        key: index
-      }
-    })
+  //   const checkedRowKeys = ref([4, 1])
 
-    const checkedRowKeys = ref([4, 1])
+  //   const handleCheck = (e: any): void => {
+  //     checkedRowKeys.value = e
+  //   }
 
-    const handleCheck = (e: any): void => {
-      checkedRowKeys.value = e
-    }
+  //   const wrapper = mount(() => (
+  //     <NDataTable
+  //       columns={columns}
+  //       data={data}
+  //       onUpdateCheckedRowKeys={handleCheck}
+  //       checked-row-keys={checkedRowKeys.value}
+  //     />
+  //   ))
 
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        onUpdateCheckedRowKeys={handleCheck}
-        checked-row-keys={checkedRowKeys.value}
-      />
-    ))
+  //   const radios = wrapper.findAll('.n-radio')
 
-    const radios = wrapper.findAll('.n-radio')
+  //   expect(radios[4].classes()).toContain('n-radio--checked')
+  //   expect(radios[1].classes()).not.toContain('n-radio--checked')
 
-    expect(radios[4].classes()).toContain('n-radio--checked')
-    expect(radios[1].classes()).not.toContain('n-radio--checked')
+  //   await radios[1].trigger('click')
 
-    await radios[1].trigger('click')
-
-    setTimeout(() => {
-      expect(radios[1].classes()).toContain('n-radio--checked')
-      expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
-  })
+  //   setTimeout(() => {
+  //     expect(radios[1].classes()).toContain('n-radio--checked')
+  //     expect(radios[4].classes()).not.toContain('n-radio--checked')
+  //   }, 0)
+  // })
 })
