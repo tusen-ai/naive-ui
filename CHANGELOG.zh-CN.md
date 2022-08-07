@@ -21,6 +21,7 @@
 - `n-list` 新增 `show-divider` 属性
 - `n-thing` 新增 `content-style` 属性
 - `n-thing` 新增 `description-style` 属性
+- `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
 
 ## 2.32.1
 
