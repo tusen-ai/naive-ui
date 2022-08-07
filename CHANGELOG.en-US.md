@@ -22,6 +22,7 @@
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
 - `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
+- `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
 
 ## 2.32.1
 
