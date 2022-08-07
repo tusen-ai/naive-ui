@@ -16,7 +16,7 @@ import {
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { happensIn } from 'seemly'
+import { getPreciseEventTarget, happensIn } from 'seemly'
 import {
   isValid,
   startOfSecond,
@@ -625,7 +625,9 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       if (
         mergedShowRef.value &&
-        !inputInstRef.value?.wrapperElRef?.contains(e.target as Node)
+        !inputInstRef.value?.wrapperElRef?.contains(
+          getPreciseEventTarget(e) as Node | null
+        )
       ) {
         closePanel({
           returnFocus: false

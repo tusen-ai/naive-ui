@@ -17,6 +17,7 @@ import {
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
+import { getPreciseEventTarget } from 'seemly'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
@@ -492,7 +493,9 @@ const Scrollbar = defineComponent({
       }
     }
     function isMouseUpAway (e: MouseEvent): boolean {
-      return !wrapperRef.value?.contains(e.target as any)
+      return !wrapperRef.value?.contains(
+        getPreciseEventTarget(e) as Node | null
+      )
     }
     function handleXScrollMouseDown (e: MouseEvent): void {
       e.preventDefault()

@@ -14,6 +14,7 @@ import {
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
+import { getPreciseEventTarget } from 'seemly'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -204,7 +205,9 @@ export default defineComponent({
         onMaskClick(e)
       }
       if (props.maskClosable) {
-        if (containerRef.value?.contains(e.target as Node)) {
+        if (
+          containerRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+        ) {
           doUpdateShow(false)
         }
       }

@@ -13,6 +13,7 @@
 - Added `exports` field in package.json.
 - Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
 - Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- Fix some components works abnormally in open mode shadow DOM, closes [#3281](https://github.com/TuSimple/naive-ui/issues/3281).
 
 ### Feats
 

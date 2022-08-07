@@ -22,6 +22,7 @@ import {
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
+import { getPreciseEventTarget } from 'seemly'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
@@ -243,7 +244,7 @@ export default defineComponent({
     function handleMouseMoveOutside (e: MouseEvent): void {
       if (
         props.trigger === 'hover' &&
-        !getTriggerElement().contains(e.target as Node)
+        !getTriggerElement().contains(getPreciseEventTarget(e) as Node | null)
       ) {
         NPopover.handleMouseMoveOutside(e)
       }
@@ -251,7 +252,9 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       if (
         (props.trigger === 'click' &&
-          !getTriggerElement().contains(e.target as Node)) ||
+          !getTriggerElement().contains(
+            getPreciseEventTarget(e) as Node | null
+          )) ||
         props.onClickoutside
       ) {
         NPopover.handleClickOutside(e)

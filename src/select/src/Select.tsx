@@ -13,7 +13,7 @@ import {
   HTMLAttributes,
   watchEffect
 } from 'vue'
-import { happensIn } from 'seemly'
+import { getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
 import {
   VBinder,
@@ -533,7 +533,11 @@ export default defineComponent({
     }
     function handleMenuClickOutside (e: MouseEvent): void {
       if (mergedShowRef.value) {
-        if (!triggerRef.value?.$el.contains(e.target as Node)) {
+        if (
+          !triggerRef.value?.$el.contains(
+            getPreciseEventTarget(e) as Node | null
+          )
+        ) {
           // outside select, don't need to return focus
           closeMenu()
         }
