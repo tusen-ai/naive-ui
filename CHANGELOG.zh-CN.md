@@ -12,6 +12,7 @@
 - 修复 `n-input-number` 中配置 peers 主题不生效，关闭 [#3422](https://github.com/TuSimple/naive-ui/issues/3422)
 - 修复 `n-transfer` 在传入异步的 `options` 报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 - 修复 `n-data-table` column `onSelect` 的类型，关闭 [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
+- 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
 
 ### Feats
 
