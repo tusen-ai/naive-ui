@@ -131,7 +131,8 @@ module.exports = {
   // Options that will be passed to the testEnvironment
   testEnvironmentOptions: {
     // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
-    url: 'http://localhost'
+    url: 'http://localhost',
+    customExportConditions: ['node']
   },
 
   // Adds a location field to test results
