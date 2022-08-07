@@ -32,7 +32,7 @@ export default defineComponent({
       },
       {
         label: '40 per page',
-        value: 50
+        value: 40
       }
     ]
     return {
