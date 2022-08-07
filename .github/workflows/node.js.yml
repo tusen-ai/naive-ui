@@ -19,7 +19,7 @@ jobs:
       matrix:
         # currently set it to 18 to let vitest work
         # node-version: [14.x, 16.x]
-        node-version: [18.x]
+        node-version: [18.7]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
