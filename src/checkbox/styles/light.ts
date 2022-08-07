@@ -45,7 +45,7 @@ export const self = (vars: ThemeCommonVars) => {
     borderFocus: `1px solid ${primaryColor}`,
     boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
     textColor: textColor2,
-    textColorDisabled: textColorDisabled
+    textColorDisabled
   }
 }
 

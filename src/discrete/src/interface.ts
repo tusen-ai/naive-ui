@@ -24,6 +24,6 @@ export type DiscreteApiType =
 export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   unmount: () => void
 } & ('message' extends T ? { message: MessageApi } : {}) &
-  ('notification' extends T ? { notification: NotificationApi } : {}) &
-  ('dialog' extends T ? { dialog: DialogApi } : {}) &
-  ('loadingBar' extends T ? { loadingBar: LoadingBarApi } : {})
+('notification' extends T ? { notification: NotificationApi } : {}) &
+('dialog' extends T ? { dialog: DialogApi } : {}) &
+('loadingBar' extends T ? { loadingBar: LoadingBarApi } : {})

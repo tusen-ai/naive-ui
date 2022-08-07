@@ -57,8 +57,8 @@ export default defineComponent({
     provide(rowInjectionKey, {
       mergedClsPrefixRef,
       gutterRef: toRef(props, 'gutter'),
-      verticalGutterRef: verticalGutterRef,
-      horizontalGutterRef: horizontalGutterRef
+      verticalGutterRef,
+      horizontalGutterRef
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

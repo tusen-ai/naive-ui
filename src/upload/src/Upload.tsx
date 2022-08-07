@@ -444,7 +444,7 @@ export default defineComponent({
             name: file.name,
             status: 'pending',
             percentage: 0,
-            file: file,
+            file,
             url: null,
             type: file.type,
             thumbnailUrl: null,

@@ -8,6 +8,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
+import { getPreciseEventTarget } from 'seemly'
 import MonthPanel from './month'
 
 export default defineComponent({
@@ -39,7 +40,10 @@ export default defineComponent({
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
     function handleClickOutside (e: MouseEvent): void {
-      if (showRef.value && !triggerRef.value?.contains(e.target as Node)) {
+      if (
+        showRef.value &&
+        !triggerRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+      ) {
         showRef.value = false
       }
     }

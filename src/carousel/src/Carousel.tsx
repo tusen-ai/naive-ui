@@ -20,6 +20,7 @@ import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useMergedState } from 'vooks'
 import { on, off } from 'evtd'
+import { getPreciseEventTarget } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { flatten, keep, resolveSlotWithProps } from '../../_utils'
@@ -545,7 +546,13 @@ export default defineComponent({
     let isEffectiveDrag = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
-      if (!slidesElRef.value?.contains(event.target as HTMLElement)) return
+      if (
+        !slidesElRef.value?.contains(
+          getPreciseEventTarget(event) as Node | null
+        )
+      ) {
+        return
+      }
       globalDragging = true
       dragging = true
       isEffectiveDrag = false
@@ -803,9 +810,9 @@ export default defineComponent({
     }))
     const caroulseExposedMethod: CarouselInst = {
       getCurrentIndex: () => mergedDisplayIndexRef.value,
-      to: to,
-      prev: prev,
-      next: next
+      to,
+      prev,
+      next
     }
     const themeRef = useTheme(
       'Carousel',

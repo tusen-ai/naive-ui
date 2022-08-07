@@ -69,7 +69,7 @@ download.vue
 
 | Property | Type | Description | Version |
 | --- | --- | --- | --- |
-| id | `string \| number` | Unique file ID. |  |
+| id | `string \| number` | Unique file ID. Please note that do not change it, if you need to save some corresponding data, you can use a Map object outside component. |  |
 | name | `string` | Filename. |  |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |  |
 | batchId? | `string \| null` | Batch id of uploaded file. The files selected in a same upload batch will have same `batchId`. | 2.28.3 |
