@@ -12,6 +12,7 @@
 - Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
 - Added `exports` field in package.json.
 - Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
+- Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 
 ### Feats
 
@@ -25,7 +26,6 @@
 - `n-thing` adds `description-style` prop.
 - `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
 - `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
-- `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 
 ## 2.32.1
 

@@ -2,8 +2,6 @@
 # Quick jumper
 
 You can customize the content to jump to (press `Enter` to jump quickly).
-
-Also you can customize the timing of quick jump through `input-trigger-quick-jump-on`.
 </markdown>
 
 <template>

@@ -2,8 +2,6 @@
 # 快速跳跃
 
 自定义跳至的内容（按 `Enter` 进行快速跳跃）。
-
-你也可以通过 `input-trigger-quick-jump-on` 自定义快速跳跃的处罚时机。
 </markdown>
 
 <template>
