@@ -14,7 +14,7 @@ export const self = (vars: ThemeCommonVars) => {
   return {
     titleFontSize: fontSize,
     titleFontWeight: fontWeight,
-    dividerColor: dividerColor,
+    dividerColor,
     titleTextColor: textColor1,
     titleTextColorDisabled: textColorDisabled,
     fontSize,

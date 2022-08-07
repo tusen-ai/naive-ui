@@ -412,7 +412,7 @@ describe('n-tree', () => {
         ],
         'expanded-keys': [1],
         remote: true,
-        onLoad: onLoad
+        onLoad
       }
     })
     setTimeout(() => {

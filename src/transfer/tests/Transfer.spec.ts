@@ -30,7 +30,7 @@ describe('n-transfer', () => {
     ]
     const onFilter = jest.fn()
     const wrapper = mount(NTransfer, {
-      props: { filterable: true, filter: onFilter, options: options }
+      props: { filterable: true, filter: onFilter, options }
     })
     await wrapper.find('input').setValue('1')
     await sleep(300)

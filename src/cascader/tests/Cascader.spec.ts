@@ -59,7 +59,7 @@ describe('n-cascader', () => {
 
   it('should work with `status` prop', async () => {
     ;(['success', 'warning', 'error'] as const).forEach((status) => {
-      const wrapper = mount(NCascader, { props: { status: status } })
+      const wrapper = mount(NCascader, { props: { status } })
       expect(wrapper.find('.n-base-selection').classes()).toContain(
         `n-base-selection--${status}-status`
       )
@@ -93,7 +93,7 @@ describe('n-cascader', () => {
         'left-end'
       ] as const
     ).forEach((placement) => {
-      const wrapper = mount(NCascader, { props: { placement: placement } })
+      const wrapper = mount(NCascader, { props: { placement } })
       setTimeout(() => {
         expect(
           document
@@ -182,7 +182,7 @@ describe('n-cascader', () => {
   it('should work with `on-blur` prop', async () => {
     const onBlur = jest.fn()
     const wrapper = mount(NCascader, {
-      props: { options: getOptions(), onBlur: onBlur }
+      props: { options: getOptions(), onBlur }
     })
     await wrapper.find('.n-base-selection').trigger('focusout')
     expect(onBlur).toHaveBeenCalled()
@@ -192,7 +192,7 @@ describe('n-cascader', () => {
   it('should work with `on-focus` prop', async () => {
     const onFocus = jest.fn()
     const wrapper = mount(NCascader, {
-      props: { options: getOptions(), onFocus: onFocus }
+      props: { options: getOptions(), onFocus }
     })
     await wrapper.find('.n-base-selection').trigger('focusin')
     expect(onFocus).toHaveBeenCalled()

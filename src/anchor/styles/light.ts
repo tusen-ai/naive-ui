@@ -16,7 +16,7 @@ export const self = (vars: ThemeCommonVars) => {
   return {
     ...commonVars,
     borderRadius,
-    railColor: railColor,
+    railColor,
     railColorActive: primaryColor,
     linkColor: changeColor(primaryColor, { alpha: 0.15 }),
     linkTextColor: textColor2,

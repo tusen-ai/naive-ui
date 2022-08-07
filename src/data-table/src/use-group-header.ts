@@ -100,7 +100,7 @@ function getRowsAndCols (columns: TableColumns): {
         const isLast = currentLeafIndex + colSpan === totalRowSpan
         const rowItem: RowItem = {
           column,
-          colSpan: colSpan,
+          colSpan,
           rowSpan: maxDepth - currentDepth + 1,
           isLast
         }

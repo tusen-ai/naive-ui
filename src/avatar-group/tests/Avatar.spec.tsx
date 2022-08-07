@@ -23,7 +23,7 @@ describe('n-avatar-group', () => {
     ]
     const wrapper = mount(NAvatarGroup, {
       props: {
-        options: options,
+        options,
         max: 2
       }
     })
