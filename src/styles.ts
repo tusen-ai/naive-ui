@@ -31,7 +31,7 @@ export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
 export { dialogDark } from './dialog/styles'
 export { dividerDark } from './divider/styles'
-export { drawerDark } from './drawer/styles'
+export { drawerDark, drawerRtl as unstableDrawerRtl } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'
 export {
   dynamicInputDark,
