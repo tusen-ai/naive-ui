@@ -80,7 +80,7 @@ export const paginationProps = {
     default: 'medium'
   },
   disabled: Boolean,
-  triggerQuickJumpOn: {
+  inputTriggerQuickJumpOn: {
     type: Array as PropType<Array<'change' | 'blur'>>,
     default: () => ['change']
   },
@@ -335,23 +335,22 @@ export default defineComponent({
     function handleSizePickerChange (value: number): void {
       doUpdatePageSize(value)
     }
-    function doQuikJump (): void {
+    function doQuickJump (): void {
       const page = parseInt(jumperValueRef.value)
-      if (!Number.isNaN(page)) {
-        doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
-        jumperValueRef.value = ''
-      }
+      if (Number.isNaN(page)) return
+      doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
+      jumperValueRef.value = ''
     }
-    function handleQuickJumperKeyUp (e: KeyboardEvent): void {
+    function handleQuickJumperKeydown (e: KeyboardEvent): void {
       if (e.key === 'Enter') {
-        doQuikJump()
+        doQuickJump()
         jumperRef.value?.blur()
       }
     }
     function handleQuickJumperOnBlur (): void {
-      const { triggerQuickJumpOn } = props
-      if (triggerQuickJumpOn.includes('blur')) {
-        doQuikJump()
+      const { inputTriggerQuickJumpOn } = props
+      if (inputTriggerQuickJumpOn.includes('blur')) {
+        doQuickJump()
       }
     }
     function handlePageItemClick (pageItem: PageItem): void {
@@ -518,7 +517,7 @@ export default defineComponent({
       handleForwardClick: forward,
       handlePageItemClick,
       handleSizePickerChange,
-      handleQuickJumperKeyUp,
+      handleQuickJumperKeydown,
       handleQuickJumperOnBlur,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
@@ -554,7 +553,7 @@ export default defineComponent({
       handleBackwardClick,
       handlePageItemClick,
       handleForwardClick,
-      handleQuickJumperKeyUp,
+      handleQuickJumperKeydown,
       handleQuickJumperOnBlur,
       onRender
     } = this
@@ -832,7 +831,7 @@ export default defineComponent({
               disabled={disabled}
               theme={mergedTheme.peers.Input}
               themeOverrides={mergedTheme.peerOverrides.Input}
-              onKeyup={handleQuickJumperKeyUp}
+              onKeyup={handleQuickJumperKeydown}
               onBlur={handleQuickJumperOnBlur}
             />
           </div>
