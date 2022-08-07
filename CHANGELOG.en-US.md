@@ -31,6 +31,7 @@
 - `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
 - `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
 - `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- `n-list` supports RTL.
 - `n-drawer` supports RTL.
 
 ## 2.32.1
@@ -43,11 +44,6 @@
 ### Feats
 
 - `n-steps` supports RTL.
-
-### Feats
-
-- `n-steps` supports RTL.
-- `n-list` supports RTL.
 
 ## 2.32.0
 

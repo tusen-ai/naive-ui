@@ -31,6 +31,7 @@
 - `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `trigger-quick-jump-on` 属性，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
+- `n-list` 支持 RTL
 - `n-drawer` 支持 RTL
 
 ## 2.32.1
@@ -43,11 +44,6 @@
 ### Feats
 
 - `n-steps` 支持 RTL
-
-### Feats
-
-- `n-steps` 支持 RTL
-- `n-list` 支持 RTL
 
 ## 2.32.0
 
