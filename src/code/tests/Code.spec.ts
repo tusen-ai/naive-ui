@@ -6,11 +6,11 @@ import javascript from 'highlight.js/lib/languages/javascript'
 hljs.registerLanguage('javascript', javascript)
 
 describe('n-code', () => {
-  // it('should warn when no hljs is set', () => {
-  //   const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
-  //   mount(NCode)
-  //   expect(spy).toHaveBeenCalled()
-  // })
+  it('should warn when no hljs is set', () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    mount(NCode)
+    expect(spy).toHaveBeenCalled()
+  })
   it('should work with `code` prop', () => {
     const wrapper = mount(NCode, {
       props: {
