@@ -38,7 +38,7 @@ export function itemRenderer (
   const { rawNode } = tmNode
   const { show } = rawNode
   if (typeof show === 'boolean' && !show) {
-    return undefined
+    return null
   }
   if (isIgnoredNode(rawNode)) {
     if (isDividerNode(rawNode)) {

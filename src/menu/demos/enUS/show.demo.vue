@@ -1,7 +1,7 @@
 <markdown>
-# hidden prop
+# Control option display
 
-In some cases, different characters will see different menus. You can use the 'hidden' prop to hide the menu.
+In some cases, different characters will see different menus. You can use the `show` prop to hide the menu.
 </markdown>
 
 <template>
