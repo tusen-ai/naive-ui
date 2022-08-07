@@ -754,7 +754,7 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value) {
+          if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
             const { value: length } = totalViewRef
             if (realIndex === length - 2 && lastRealIndex === 1) {
               realIndex = 0
