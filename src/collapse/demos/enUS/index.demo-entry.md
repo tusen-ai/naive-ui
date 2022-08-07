@@ -14,6 +14,7 @@ item-header-click.vue
 customize-icon.vue
 default-expanded.vue
 header-extra.vue
+disabled.vue
 ```
 
 ## API
@@ -32,11 +33,12 @@ header-extra.vue
 
 ### CollapseItem Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |
-| name | `string \| number` | random string | Item identifier (should be unique). |
-| title | `string` | `undefined` | Title. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | Whether the item is disabled. | NEXT_VERSION |
+| display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |  |
+| name | `string \| number` | random string | Item identifier (should be unique). |  |
+| title | `string` | `undefined` | Title. |  |
 
 ### Collapse Slots
 
