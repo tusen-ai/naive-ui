@@ -9,6 +9,7 @@
 - 修复 `n-pagination` 的 `default-page-size` 没有跟随 `page-sizes` prop，关闭 [#3369](https://github.com/TuSimple/naive-ui/issues/3369)
 - 在 package.json 中新增 `exports` [3410](https://github.com/TuSimple/naive-ui/pull/3410)
 - 修复 `n-dropdown` 选项 prefix & suffix 的 z-index，关闭 [#3433](https://github.com/TuSimple/naive-ui/issues/3433)
+- 修复 `n-input-number` 中配置 peers 主题不生效，关闭 [#3422](https://github.com/TuSimple/naive-ui/issues/3422)
 
 ### Feats
 

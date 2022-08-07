@@ -620,6 +620,8 @@ export default defineComponent({
           text
           disabled={!this.minusable || this.mergedDisabled || this.readonly}
           focusable={false}
+          theme={this.mergedTheme.peers.Button}
+          themeOverrides={this.mergedTheme.peerOverrides.Button}
           builtinThemeOverrides={this.buttonThemeOverrides}
           onClick={this.handleMinusClick}
           onMousedown={this.handleMinusMousedown}
@@ -644,6 +646,8 @@ export default defineComponent({
           text
           disabled={!this.addable || this.mergedDisabled || this.readonly}
           focusable={false}
+          theme={this.mergedTheme.peers.Button}
+          themeOverrides={this.mergedTheme.peerOverrides.Button}
           builtinThemeOverrides={this.buttonThemeOverrides}
           onClick={this.handleAddClick}
           onMousedown={this.handleAddMousedown}
