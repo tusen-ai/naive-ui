@@ -104,7 +104,7 @@ export default defineComponent({
       mergeProps(
         {
           class: `${mergedClsPrefix}-skeleton`,
-          style: style
+          style
         },
         $attrs
       )

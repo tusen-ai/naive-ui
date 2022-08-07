@@ -187,7 +187,7 @@ describe('n-select', () => {
     const wrapper = mount(NSelect, {
       props: {
         defaultValue: ['test'],
-        options: options,
+        options,
         multiple: true,
         virtualScroll: false,
         renderTag: ({
@@ -229,7 +229,7 @@ describe('n-select', () => {
       attachTo: document.body,
       props: {
         defaultValue: 'test',
-        options: options,
+        options,
         virtualScroll: false,
         renderLabel: (option: SelectOption) => {
           return 'render-' + String(option.label)
@@ -348,7 +348,7 @@ describe('n-select', () => {
     }
     const wrapper = mount(NSelect, {
       props: {
-        menuProps: menuProps,
+        menuProps,
         show: true
       }
     })

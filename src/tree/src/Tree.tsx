@@ -74,6 +74,9 @@ export function createTreeMateOptions<T> (
   childrenField: string
 ): TreeMateOptions<T, T, T> {
   return {
+    getIsGroup () {
+      return false
+    },
     getKey (node: T) {
       return (node as any)[keyField]
     },
@@ -202,6 +205,10 @@ export const treeProps = {
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
   nodeProps: Function as PropType<TreeNodeProps>,
+  keyboard: {
+    type: Boolean,
+    default: true
+  },
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -409,6 +416,7 @@ export default defineComponent({
     )
 
     const { pendingNodeKeyRef, handleKeydown } = useKeyboard({
+      props,
       mergedSelectedKeysRef,
       fNodesRef,
       mergedExpandedKeysRef,
@@ -1500,8 +1508,8 @@ export default defineComponent({
             ? resolveSlot(this.$slots.empty, () => [
                 <NEmpty
                   class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.theme?.peers?.Empty}
-                  themeOverrides={this.themeOverrides?.peers?.Empty}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
                 />
             ])
             : fNodes.map(createNode)}

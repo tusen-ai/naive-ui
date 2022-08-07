@@ -28,7 +28,7 @@ import NUploadProgress from './UploadProgress'
 import { uploadInjectionKey } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
-import { environmentSupportFile, isImageFile } from './utils'
+import { download, environmentSupportFile, isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
   paddingMedium: '0 3px',
@@ -159,7 +159,9 @@ export default defineComponent({
       void Promise.resolve(
         onDownload ? onDownload(Object.assign({}, file)) : true
       ).then((res) => {
-        /** I haven't figure out its usage, so just leave it here */
+        if (res !== false) {
+          download(file.url, file.name)
+        }
       })
     }
     function handleAbort (file: SettledFileInfo): void {

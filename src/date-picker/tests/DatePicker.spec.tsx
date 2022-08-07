@@ -295,7 +295,7 @@ describe('n-date-picker', () => {
   it('should work with `status` prop', async () => {
     ;(['success', 'warning', 'error'] as const).forEach((status) => {
       const wrapper = mount(NDatePicker, {
-        props: { status: status }
+        props: { status }
       })
       expect(wrapper.find('.n-input').classes()).toContain(
         `n-input--${status}-status`

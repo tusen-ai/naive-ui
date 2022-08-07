@@ -8,6 +8,7 @@
 
 ```demo
 basic.vue
+bordered.vue
 closable.vue
 icon.vue
 no-icon.vue
@@ -19,14 +20,15 @@ empty-debug.vue
 
 ### Alert Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| closable | `boolean` | `false` | alert 信息是否可以关掉 |
-| show-icon | `boolean` | `true` | alert 是否展示 icon |
-| title | `string` | `undefined` | alert 的 title 信息 |
-| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | alert 的类型 |
-| on-after-leave | `Function` | `undefined` | alert 消失时执行的回调函数 |
-| on-close | `() => boolean \| Promise<boolean> \| any` | `() => true` | 点击 close icon 时执行的回调函数 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `true` | alert 是否显示边框 | NEXT_VERSION |
+| closable | `boolean` | `false` | alert 信息是否可以关掉 |  |
+| show-icon | `boolean` | `true` | alert 是否展示 icon |  |
+| title | `string` | `undefined` | alert 的 title 信息 |  |
+| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | alert 的类型 |  |
+| on-after-leave | `Function` | `undefined` | alert 消失时执行的回调函数 |  |
+| on-close | `() => boolean \| Promise<boolean> \| any` | `() => true` | 点击 close icon 时执行的回调函数 |  |
 
 ### Alert Slots
 

@@ -58,23 +58,23 @@ action.vue
 ### DialogOptions Properties
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
 | iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
 | maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the `mask`. |  |
-| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |  |
+| negativeButtonProps | `ButtonProps` | `undefined` | Cancel button's DOM props | 2.27.0 |
 | negativeText | `string` | `undefined` | Cancel button text. Corresponding button won't show if not set. |  |
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
-| style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -103,6 +103,7 @@ All the properties can be modified dynamically.
 | positiveButtonProps | `ButtonProps` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
+| style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
@@ -122,7 +123,6 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
-| closeOnEsc | `boolean` | `true` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Can be a `render` function. |  |
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |

@@ -145,8 +145,7 @@ describe('n-timeline-item', () => {
     ;(['default', 'dashed'] as const).forEach((lineType) => {
       const wrapper = mount(NTimeline, {
         slots: {
-          default: () =>
-            h(NTimelineItem, { title: 'test-title', lineType: lineType })
+          default: () => h(NTimelineItem, { title: 'test-title', lineType })
         }
       })
 

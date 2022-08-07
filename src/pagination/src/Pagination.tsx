@@ -14,7 +14,7 @@ import {
 import { useMergedState } from 'vooks'
 import { NPopselect } from '../../popselect'
 import { NSelect } from '../../select'
-import { InputInst, NInput } from '../../input'
+import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
   BackwardIcon,
@@ -67,10 +67,7 @@ export const paginationProps = {
   },
   showSizePicker: Boolean,
   pageSize: Number,
-  defaultPageSize: {
-    type: Number,
-    default: 10
-  },
+  defaultPageSize: Number,
   pageSizes: {
     type: Array as PropType<Array<number | PaginationSizeOption>>,
     default () {
@@ -156,10 +153,16 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
-    const jumperRef = ref<InputInst | null>(null)
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(props.defaultPageSize)
+    const getDefaultPageSize = (): number => {
+      const { defaultPageSize } = props
+      if (defaultPageSize !== undefined) return defaultPageSize
+      const pageSizeOption = props.pageSizes[0]
+      if (typeof pageSizeOption === 'number') return pageSizeOption
+      return pageSizeOption.value || 10
+    }
+    const uncontrolledPageSizeRef = ref(getDefaultPageSize())
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
@@ -327,15 +330,14 @@ export default defineComponent({
     function handleSizePickerChange (value: number): void {
       doUpdatePageSize(value)
     }
-    function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      if (e.key === 'Enter') {
-        const page = parseInt(jumperValueRef.value)
-        if (!Number.isNaN(page)) {
-          doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
-          jumperValueRef.value = ''
-          jumperRef.value?.blur()
-        }
-      }
+    function doQuickJump (): void {
+      const page = parseInt(jumperValueRef.value)
+      if (Number.isNaN(page)) return
+      doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
+      jumperValueRef.value = ''
+    }
+    function handleQuickJumperChange (): void {
+      doQuickJump()
     }
     function handlePageItemClick (pageItem: PageItem): void {
       if (props.disabled) return
@@ -472,7 +474,6 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
-      jumperRef,
       mergedPage: mergedPageRef,
       pageItems: computed(() => {
         return pageItemsInfo.value.items
@@ -501,7 +502,7 @@ export default defineComponent({
       handleForwardClick: forward,
       handlePageItemClick,
       handleSizePickerChange,
-      handleQuickJumperKeyUp,
+      handleQuickJumperChange,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -536,7 +537,7 @@ export default defineComponent({
       handleBackwardClick,
       handlePageItemClick,
       handleForwardClick,
-      handleQuickJumperKeyUp,
+      handleQuickJumperChange,
       onRender
     } = this
     onRender?.()
@@ -805,7 +806,6 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
             {resolveSlot(this.$slots.goto, () => [locale.goto])}
             <NInput
-              ref="jumperRef"
               value={jumperValue}
               onUpdateValue={handleJumperInput}
               size={inputSize}
@@ -813,7 +813,7 @@ export default defineComponent({
               disabled={disabled}
               theme={mergedTheme.peers.Input}
               themeOverrides={mergedTheme.peerOverrides.Input}
-              onKeyup={handleQuickJumperKeyUp}
+              onChange={handleQuickJumperChange}
             />
           </div>
         ) : null}

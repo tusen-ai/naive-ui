@@ -35,7 +35,8 @@ import {
   toHsvString,
   toRgbString,
   toHexString,
-  toHslString
+  toHslString,
+  getPreciseEventTarget
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import { VBinder, VFollower, VTarget, FollowerPlacement } from 'vueuc'
@@ -657,7 +658,9 @@ export default defineComponent({
         doUpdateShow(true)
       },
       handleClickOutside (e: MouseEvent) {
-        if (selfRef.value?.contains(e.target as Node)) return
+        if (selfRef.value?.contains(getPreciseEventTarget(e) as Node | null)) {
+          return
+        }
         doUpdateShow(false)
       },
       renderPanel,

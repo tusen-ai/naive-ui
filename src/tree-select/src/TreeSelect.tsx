@@ -23,7 +23,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
-import { happensIn } from 'seemly'
+import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
@@ -409,7 +409,11 @@ export default defineComponent({
     }
     function handleMenuClickoutside (e: MouseEvent): void {
       if (mergedShowRef.value) {
-        if (!triggerInstRef.value?.$el.contains(e.target as Node)) {
+        if (
+          !triggerInstRef.value?.$el.contains(
+            getPreciseEventTarget(e) as Node | null
+          )
+        ) {
           // outside select, don't need to return focus
           closeMenu()
         }
