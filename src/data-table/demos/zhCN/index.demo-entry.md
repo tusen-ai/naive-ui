@@ -32,7 +32,7 @@ pagination-behavior-on-filter.vue
 multiple-sorter
 select.vue
 select-single.vue
-custom-select
+custom-select.vue
 group-header.vue
 controlled-page.vue
 controlled-filter.vue
