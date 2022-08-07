@@ -7,8 +7,10 @@
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
+- Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
+- Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
+- Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
 - Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
-- Fix `n-transfer`'s error when passing asynchronous options，closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 
 ### Feats
 
@@ -20,6 +22,8 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
+- `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
+- `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
 
 ## 2.32.1
 

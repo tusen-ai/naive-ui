@@ -15,6 +15,7 @@ import { useConfig } from '../../_mixins'
 export const collapseItemProps = {
   title: String,
   name: [String, Number] as PropType<string | number>,
+  disabled: Boolean,
   displayDirective: String as PropType<'if' | 'show'>
 } as const
 
@@ -75,7 +76,7 @@ export default defineComponent({
         return collapseProps.arrowPlacement
       }),
       handleClick (e: MouseEvent) {
-        if (NCollapse) {
+        if (NCollapse && !props.disabled) {
           NCollapse.toggleItem(collapsedRef.value, mergedNameRef.value, e)
         }
       }
@@ -88,7 +89,8 @@ export default defineComponent({
       arrowPlacement,
       collapsed,
       mergedDisplayDirective,
-      mergedClsPrefix
+      mergedClsPrefix,
+      disabled
     } = this
     const headerNode = $slots.header ? $slots.header() : this.title
     const headerExtraSlot =
@@ -99,6 +101,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-collapse-item`,
           `${mergedClsPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
+          disabled && `${mergedClsPrefix}-collapse-item--disabled`,
           !collapsed && `${mergedClsPrefix}-collapse-item--active`
         ]}
       >
