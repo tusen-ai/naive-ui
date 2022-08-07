@@ -34,7 +34,7 @@ const MessageButton = defineComponent({
             "I don't know why nobody told you how to unfold your love",
             {
               closable: true,
-              duration: 5000
+              duration: 0
             }
           )
         }
