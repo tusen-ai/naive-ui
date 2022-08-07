@@ -31,6 +31,7 @@ rtl-debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
+| input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | input 出发自动跳转的时机 | NEXT_VERSION |
 | item-count | `number` | `undefined` | 总条数 |  |
 | label | `PaginationRenderLabel` | `undefined` | 每一项的内容 | 2.24.0 |
 | page-count | `number` | `1` | 总页数 |  |
@@ -43,7 +44,6 @@ rtl-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | 2.29.0 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页后缀 |  |
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
-| trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | input 出发自动跳转的时机 | NEXT_VERSION |
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | 当前分页大小发生改变时的回调函数 |  |
 

@@ -30,6 +30,7 @@ page-size-option.vue
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
+| input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | Quick jump trigger event of input. | NEXT_VERSION |
 | item-count | `number` | `undefined` | Total number. |  |
 | label | `PaginationRenderLabel` | `undefined` | Item content. | 2.24.0 |
 | page-count | `number` | `1` | Total pages. |  |
@@ -42,7 +43,6 @@ page-size-option.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
-| trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | Quick jump trigger event of input. | NEXT_VERSION |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function when the current page size changes. |  |
 

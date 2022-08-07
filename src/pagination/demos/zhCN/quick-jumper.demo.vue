@@ -3,7 +3,7 @@
 
 自定义跳至的内容（按 `Enter` 进行快速跳跃）。
 
-也可以通过 `trigger-quick-jump-on` 自定义失焦是否触发快速跳跃。
+你也可以通过 `input-trigger-quick-jump-on` 自定义快速跳跃的处罚时机。
 </markdown>
 
 <template>
@@ -16,7 +16,7 @@
     <n-pagination
       v-model:page="page"
       :page-count="100"
-      :trigger-quick-jump-on="['change', 'blur']"
+      :input-trigger-quick-jump-on="['change', 'blur']"
       show-quick-jumper
     >
       <template #goto>
