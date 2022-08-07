@@ -42,7 +42,7 @@ describe('n-auto-complete', () => {
     })
     const wrapper = mount(NAutoComplete, {
       props: {
-        options: options
+        options
       }
     })
     expect(wrapper.find('.n-base-loading__container').exists()).toBe(false)
@@ -65,7 +65,7 @@ describe('n-auto-complete', () => {
 
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
-      const wrapper = mount(NAutoComplete, { props: { size: size } })
+      const wrapper = mount(NAutoComplete, { props: { size } })
       expect(wrapper.find('.n-input').attributes('style')).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -91,7 +91,7 @@ describe('n-auto-complete', () => {
         }
         return false
       },
-      options: options
+      options
     })
     expect(document.querySelector('.n-auto-complete-menu')).toEqual(null)
     wrapper.find('input').setValue('a')
@@ -116,7 +116,7 @@ describe('n-auto-complete', () => {
   it('should work with `on-blur` prop', async () => {
     const onBlur = jest.fn()
     const wrapper = mount(NAutoComplete, {
-      props: { onBlur: onBlur }
+      props: { onBlur }
     })
     await wrapper.find('input').trigger('focus')
     await wrapper.find('input').trigger('blur')
@@ -127,7 +127,7 @@ describe('n-auto-complete', () => {
   it('should work with `on-focus` prop', async () => {
     const onFocus = jest.fn()
     const wrapper = mount(NAutoComplete, {
-      props: { onFocus: onFocus }
+      props: { onFocus }
     })
     await wrapper.find('input').trigger('focus')
     await wrapper.find('input').trigger('blur')
@@ -137,7 +137,7 @@ describe('n-auto-complete', () => {
 
   it('should work with `status` prop', async () => {
     ;(['success', 'warning', 'error'] as const).forEach((status) => {
-      const wrapper = mount(NAutoComplete, { props: { status: status } })
+      const wrapper = mount(NAutoComplete, { props: { status } })
       expect(wrapper.find('.n-input').classes()).toContain(
         `n-input--${status}-status`
       )
@@ -162,7 +162,7 @@ describe('n-auto-complete', () => {
         'left-end'
       ] as const
     ).forEach((placement) => {
-      const wrapper = mount(NAutoComplete, { props: { placement: placement } })
+      const wrapper = mount(NAutoComplete, { props: { placement } })
       setTimeout(() => {
         expect(
           document

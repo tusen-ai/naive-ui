@@ -15,6 +15,7 @@ import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
+import { getPreciseEventTarget } from 'seemly'
 import {
   RenderOption,
   RenderLabel
@@ -259,7 +260,9 @@ export default defineComponent({
       select(option.rawNode as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
-      if (!triggerElRef.value?.contains(e.target as Node)) {
+      if (
+        !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+      ) {
         canBeActivatedRef.value = false
       }
     }

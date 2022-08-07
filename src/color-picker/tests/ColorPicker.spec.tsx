@@ -154,7 +154,7 @@ describe('n-color-picker', () => {
         props: {
           swatches: ['black'],
           modes,
-          onUpdateValue: onUpdateValue
+          onUpdateValue
         }
       })
       await wrapper.find('.n-color-picker-trigger').trigger('click')
@@ -212,7 +212,7 @@ describe('n-color-picker', () => {
         'left-end'
       ] as const
     ).forEach((placement) => {
-      const wrapper = mount(NColorPicker, { props: { placement: placement } })
+      const wrapper = mount(NColorPicker, { props: { placement } })
       setTimeout(() => {
         expect(
           document

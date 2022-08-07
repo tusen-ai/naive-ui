@@ -129,7 +129,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
   multiple?: boolean
   disabled?: (row: T) => boolean
-  options?: DataTableSelectionOptions
+  options?: DataTableSelectionOptions<T>
 
   // to suppress type error in utils
   sorter?: never
@@ -165,9 +165,9 @@ export type TableColumn<T = InternalRowData> =
   | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
-export type DataTableSelectionOptions = Array<
+export type DataTableSelectionOptions<T = InternalRowData> = Array<
 | DataTableSelectionOption
-| { label: string, key: string | number, onSelect: () => void }
+| { label: string, key: string | number, onSelect: (pageData: T[]) => void }
 >
 export interface DataTableInjection {
   slots: Slots

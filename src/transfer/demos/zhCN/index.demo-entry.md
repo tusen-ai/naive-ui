@@ -12,6 +12,7 @@ large-data.vue
 filterable.vue
 render-label.vue
 render-source-list.vue
+asynchronous-options-debug.vue
 ```
 
 ## API

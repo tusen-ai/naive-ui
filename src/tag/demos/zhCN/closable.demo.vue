@@ -16,12 +16,7 @@
     <n-tag type="error" closable @close="handleClose">
       手写的从前
     </n-tag>
-    <n-tag
-      type="info"
-      closable
-      @click="handleClick"
-      @close="handleClose"
-    >
+    <n-tag type="info" closable @click="handleClick" @close="handleClose">
       哪里都是你
     </n-tag>
   </n-space>

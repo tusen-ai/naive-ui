@@ -38,7 +38,7 @@ export const self = (vars: ThemeCommonVars) => {
     borderColor: composite(cardColor, dividerColor),
     borderColorModal: composite(modalColor, dividerColor),
     borderColorPopover: composite(popoverColor, dividerColor),
-    borderRadius: borderRadius
+    borderRadius
   }
 }
 

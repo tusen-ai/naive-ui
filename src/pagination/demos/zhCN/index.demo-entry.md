@@ -31,6 +31,7 @@ rtl-debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
+| input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | input 出发自动跳转的时机 | NEXT_VERSION |
 | item-count | `number` | `undefined` | 总条数 |  |
 | label | `PaginationRenderLabel` | `undefined` | 每一项的内容 | 2.24.0 |
 | page-count | `number` | `1` | 总页数 |  |

@@ -14,7 +14,7 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     ...commonVariables,
-    fontSize: fontSize,
+    fontSize,
     itemLineHeight: '1.25',
     itemTextColor: textColor3,
     itemTextColorHover: textColor2,

@@ -420,8 +420,8 @@ export default defineComponent({
       handleClickOutside,
       handleMouseMoveOutside,
       setBodyInstance,
-      positionManuallyRef: positionManuallyRef,
-      isMountedRef: isMountedRef,
+      positionManuallyRef,
+      isMountedRef,
       zIndexRef: toRef(props, 'zIndex'),
       extraClassRef: toRef(props, 'internalExtraClass'),
       internalRenderBodyRef: toRef(props, 'internalRenderBody')

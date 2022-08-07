@@ -85,7 +85,7 @@ describe('n-menu', () => {
     }
     const wrapper = mount(NMenu, {
       props: {
-        options: options,
+        options,
         renderIcon: renderMenuIcon
       }
     })
@@ -128,13 +128,13 @@ describe('n-menu', () => {
     }
     const wrapper = mount(NMenu, {
       props: {
-        options: options
+        options
       }
     })
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(false)
 
-    await wrapper.setProps({ renderLabel: renderLabel })
+    await wrapper.setProps({ renderLabel })
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
@@ -181,9 +181,9 @@ describe('n-menu', () => {
     }
     const wrapper = mount(NMenu, {
       props: {
-        options: options,
+        options,
         collapsed: true,
-        renderLabel: renderLabel
+        renderLabel
       }
     })
     expect(wrapper.find('.n-submenu').exists()).toBe(true)
@@ -228,7 +228,7 @@ describe('n-menu', () => {
     }
     const wrapper = mount(NMenu, {
       props: {
-        options: options,
+        options,
         collapsed: true,
         renderIcon: renderMenuIcon
       }
@@ -274,7 +274,7 @@ describe('n-menu', () => {
     }
     const wrapper = mount(NMenu, {
       props: {
-        options: options,
+        options,
         expandIcon: renderExpandIcon
       }
     })
@@ -315,7 +315,7 @@ describe('n-menu', () => {
     const wrapper = mount(NMenu, {
       props: {
         defaultExpandAll: true,
-        options: options,
+        options,
         renderExtra: renderMenuExtra
       }
     })
@@ -405,5 +405,29 @@ describe('n-menu', () => {
         ]}
       />
     )
+  })
+
+  it('should work with `hidden` prop', async () => {
+    const options = [
+      {
+        label: 'fantasy',
+        key: 'fantasy',
+        show: false
+      },
+      {
+        label: 'mojito',
+        key: 'mojito'
+      },
+      {
+        label: 'initialj',
+        key: 'initialj'
+      }
+    ]
+    const wrapper = mount(NMenu, {
+      props: {
+        options
+      }
+    })
+    expect(wrapper.findAll('.n-menu-item-content').length).toBe(2)
   })
 })

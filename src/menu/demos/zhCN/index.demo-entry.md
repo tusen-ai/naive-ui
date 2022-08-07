@@ -19,6 +19,7 @@ accordion.vue
 router-link.vue
 customize-field.vue
 expand-selected-option.vue
+show.vue
 debug.vue
 ```
 
@@ -63,6 +64,7 @@ debug.vue
 | --------- | -------------------------------------- | ---------------- |
 | children? | `Array<MenuOption \| MenuGroupOption>` | 子选项           |
 | disabled? | `boolean`                              | 是否禁用菜单项   |
+| show?     | `boolean`                              | 是否显示菜单项   |
 | extra?    | `string \| (() => VNodeChild)`         | 菜单项的额外部分 |
 | icon?     | `() => VNode`                          | 菜单项的图标     |
 | key       | `string`                               | 菜单项的标识符   |

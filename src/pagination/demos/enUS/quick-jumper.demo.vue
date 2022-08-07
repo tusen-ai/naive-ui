@@ -1,15 +1,27 @@
 <markdown>
 # Quick jumper
 
-You can also customize the content to jump to (press `Enter` to jump quickly).
+You can customize the content to jump to (press `Enter` to jump quickly).
 </markdown>
 
 <template>
-  <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
-    <template #goto>
-      Go!
-    </template>
-  </n-pagination>
+  <n-space>
+    <n-pagination :page-count="100" show-quick-jumper>
+      <template #goto>
+        Go!
+      </template>
+    </n-pagination>
+    <n-pagination
+      v-model:page="page"
+      :page-count="100"
+      show-quick-jumper
+      :input-trigger-quick-jump-on="['change', 'blur']"
+    >
+      <template #goto>
+        Go!
+      </template>
+    </n-pagination>
+  </n-space>
 </template>
 
 <script lang="ts">

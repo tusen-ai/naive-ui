@@ -36,7 +36,7 @@ export const self = (vars: ThemeCommonVars) => {
     optionHeightMedium: heightMedium,
     optionHeightLarge: heightLarge,
     optionHeightHuge: heightHuge,
-    borderRadius: borderRadius,
+    borderRadius,
     color: popoverColor,
     groupHeaderTextColor: textColor3,
     actionDividerColor: dividerColor,

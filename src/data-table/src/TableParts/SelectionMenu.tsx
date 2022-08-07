@@ -50,7 +50,11 @@ function createDropdownOptions (
   options:
   | Array<
   | DataTableSelectionOption
-  | { label: string, key: string | number, onSelect: () => void }
+  | {
+    label: string
+    key: string | number
+    onSelect: (pageData: InternalRowData[]) => void
+  }
   >
   | undefined,
   localeRef: NLocale['DataTable']

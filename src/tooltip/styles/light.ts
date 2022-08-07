@@ -9,7 +9,7 @@ const self = (vars: ThemeCommonVars) => {
   const { borderRadius, boxShadow2, baseColor } = vars
   return {
     ...commonVars,
-    borderRadius: borderRadius,
+    borderRadius,
     boxShadow: boxShadow2,
     color: composite(baseColor, 'rgba(0, 0, 0, .85)'),
     textColor: baseColor
