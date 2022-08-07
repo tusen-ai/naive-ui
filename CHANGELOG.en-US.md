@@ -17,7 +17,7 @@
 
 ### Feats
 
-- `n-menu` add `show` prop to set whether the Menu item is show, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
+- `n-menu`'s `MenuOption` add `show` prop to set whether the Menu option is displayed, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334).
 - `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
 - `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).

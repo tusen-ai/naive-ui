@@ -34,7 +34,7 @@ export function isDividerNode (
 export function itemRenderer (
   tmNode: TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>,
   menuProps: MenuSetupProps
-): VNode | undefined {
+): VNode | null {
   const { rawNode } = tmNode
   const { show } = rawNode
   if (typeof show === 'boolean' && !show) {
@@ -44,7 +44,7 @@ export function itemRenderer (
     if (isDividerNode(rawNode)) {
       return <NMenuDivider key={tmNode.key} {...rawNode.props} />
     }
-    return undefined
+    return null
   }
 
   const { labelField } = menuProps
