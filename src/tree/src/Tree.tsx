@@ -1503,8 +1503,8 @@ export default defineComponent({
             ? resolveSlot(this.$slots.empty, () => [
                 <NEmpty
                   class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.theme?.peers?.Empty}
-                  themeOverrides={this.themeOverrides?.peers?.Empty}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
                 />
             ])
             : fNodes.map(createNode)}
