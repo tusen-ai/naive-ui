@@ -115,6 +115,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   filterMultiple?: boolean
 
   render?: (rowData: T, rowIndex: number) => VNodeChild
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
   renderFilter?: RenderFilter
   renderFilterIcon?: RenderFilterIcon
   renderSorter?: RenderSorter
@@ -138,6 +139,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   filterOptionValue?: never
   colSpan?: never
   rowSpan?: never
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 } & CommonColumnInfo<T>
 
 export type RenderExpand<T = InternalRowData> = (
@@ -153,6 +155,7 @@ export interface TableExpandColumn<T = InternalRowData>
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>
   expandable?: Expandable<T>
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 }
 
 export type TableColumn<T = InternalRowData> =
