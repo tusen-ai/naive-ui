@@ -13,7 +13,7 @@ const tooltipDark: TooltipTheme = {
     const { borderRadius, boxShadow2, popoverColor, textColor2 } = vars
     return {
       ...commonVars,
-      borderRadius: borderRadius,
+      borderRadius,
       boxShadow: boxShadow2,
       color: popoverColor,
       textColor: textColor2

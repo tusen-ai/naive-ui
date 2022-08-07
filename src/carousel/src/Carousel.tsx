@@ -810,9 +810,9 @@ export default defineComponent({
     }))
     const caroulseExposedMethod: CarouselInst = {
       getCurrentIndex: () => mergedDisplayIndexRef.value,
-      to: to,
-      prev: prev,
-      next: next
+      to,
+      prev,
+      next
     }
     const themeRef = useTheme(
       'Carousel',

@@ -225,7 +225,7 @@ export function useSorter (
       deriveNextSorter({
         columnKey,
         sorter,
-        order: order
+        order
       })
     }
   }

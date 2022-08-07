@@ -73,7 +73,7 @@ export default defineComponent({
         tween({
           from,
           to,
-          duration: duration,
+          duration,
           onUpdate,
           onFinish
         })
