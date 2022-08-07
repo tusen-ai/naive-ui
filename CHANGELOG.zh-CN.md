@@ -13,6 +13,7 @@
 - 修复 `n-transfer` 在传入异步的 `options` 报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 - 修复 `n-data-table` column `onSelect` 的类型，关闭 [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
 - 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
+- 修复部分组件在 open 模式的 shadow DOM 内运行不正常，关闭 [#3281](https://github.com/TuSimple/naive-ui/issues/3281)
 
 ### Feats
 
