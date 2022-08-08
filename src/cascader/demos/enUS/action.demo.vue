@@ -1,5 +1,5 @@
 <markdown>
-# Action slot
+# Slots
 
 Is there anybody who needs slots on a cascader menu?
 </markdown>
