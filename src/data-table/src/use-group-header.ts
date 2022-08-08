@@ -1,11 +1,13 @@
 import { CSSProperties, ComputedRef, computed } from 'vue'
+import { formatLength } from '../../_utils'
 import type { DataTableSetupProps } from './DataTable'
 import type {
   TableExpandColumn,
   TableSelectionColumn,
   TableColumn,
   TableBaseColumn,
-  TableColumns
+  TableColumns,
+  ColumnKey
 } from './interface'
 import { getColKey, createCustomWidthStyle } from './utils'
 
@@ -22,14 +24,17 @@ export interface ColItem {
 }
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
-function getRowsAndCols (columns: TableColumns): {
-  hasEllipsis: boolean
-  rows: RowItem[][]
-  cols: ColItem[]
-  dataRelatedCols: Array<
-  TableSelectionColumn | TableBaseColumn | TableExpandColumn
-  >
-} {
+function getRowsAndCols (
+  columns: TableColumns,
+  getResizableWidth: (key: ColumnKey) => number | undefined
+): {
+    hasEllipsis: boolean
+    rows: RowItem[][]
+    cols: ColItem[]
+    dataRelatedCols: Array<
+    TableSelectionColumn | TableBaseColumn | TableExpandColumn
+    >
+  } {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
@@ -48,9 +53,13 @@ function getRowsAndCols (columns: TableColumns): {
       if ('children' in column) {
         ensureMaxDepth(column.children, currentDepth + 1)
       } else {
+        const key = 'key' in column ? column.key : undefined
         cols.push({
           key: getColKey(column),
-          style: createCustomWidthStyle(column),
+          style: createCustomWidthStyle(
+            column,
+            key !== undefined ? formatLength(getResizableWidth(key)) : undefined
+          ),
           column
         })
         totalRowSpan += 1
@@ -120,15 +129,20 @@ function getRowsAndCols (columns: TableColumns): {
   }
 }
 
-export function useGroupHeader (props: DataTableSetupProps): {
-  rowsRef: ComputedRef<RowItem[][]>
-  colsRef: ComputedRef<ColItem[]>
-  hasEllipsisRef: ComputedRef<boolean>
-  dataRelatedColsRef: ComputedRef<
-  Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
-  >
-} {
-  const rowsAndCols = computed(() => getRowsAndCols(props.columns))
+export function useGroupHeader (
+  props: DataTableSetupProps,
+  getResizableWidth: (key: ColumnKey) => number | undefined
+): {
+    rowsRef: ComputedRef<RowItem[][]>
+    colsRef: ComputedRef<ColItem[]>
+    hasEllipsisRef: ComputedRef<boolean>
+    dataRelatedColsRef: ComputedRef<
+    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+    >
+  } {
+  const rowsAndCols = computed(() =>
+    getRowsAndCols(props.columns, getResizableWidth)
+  )
   return {
     rowsRef: computed(() => rowsAndCols.value.rows),
     colsRef: computed(() => rowsAndCols.value.cols),

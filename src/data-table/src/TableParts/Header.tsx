@@ -1,22 +1,35 @@
-import { h, defineComponent, inject, VNodeChild, Fragment } from 'vue'
+import {
+  h,
+  defineComponent,
+  inject,
+  VNodeChild,
+  Fragment,
+  VNode,
+  ref,
+  onBeforeUpdate
+} from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
 import { NEllipsis } from '../../../ellipsis'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
+import ResizeButton from '../HeaderButton/ResizeButton'
 import {
   isColumnSortable,
   isColumnFilterable,
   createNextSorter,
   getColKey,
-  isColumnSorting
+  isColumnSorting,
+  isColumnResizable
 } from '../utils'
 import {
   TableExpandColumn,
   TableColumnGroup,
   TableBaseColumn,
-  dataTableInjectionKey
+  dataTableInjectionKey,
+  TableColumn,
+  ColumnKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
 
@@ -54,12 +67,14 @@ export default defineComponent({
       scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
+      doUpdateResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
       doUncheckAll,
       doCheckAll
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
+    const thElsRef = ref<Record<ColumnKey, HTMLElement>>({})
     function handleCheckboxUpdateChecked (): void {
       if (allRowsCheckedRef.value) {
         doUncheckAll()
@@ -71,7 +86,12 @@ export default defineComponent({
       e: MouseEvent,
       column: TableBaseColumn
     ): void {
-      if (happensIn(e, 'dataTableFilter')) return
+      if (
+        happensIn(e, 'dataTableFilter') ||
+        happensIn(e, 'dataTableResizable')
+      ) {
+        return
+      }
       if (!isColumnSortable(column)) return
       const activeSorter =
         mergedSortStateRef.value.find(
@@ -86,7 +106,12 @@ export default defineComponent({
     function handleMouseleave (): void {
       scrollPartRef.value = 'body'
     }
+    function handleColumnResize (column: TableColumn, width: number): void {
+      doUpdateResizableWidth(column, width)
+    }
+    onBeforeUpdate(() => (thElsRef.value = {}))
     return {
+      thElsRef,
       componentId,
       mergedSortState: mergedSortStateRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -106,11 +131,13 @@ export default defineComponent({
       handleMouseleave,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
-      handleTableHeaderScroll
+      handleTableHeaderScroll,
+      handleColumnResize
     }
   },
   render () {
     const {
+      thElsRef,
       mergedClsPrefix,
       fixedColumnLeftMap,
       fixedColumnRightMap,
@@ -127,7 +154,8 @@ export default defineComponent({
       headerCheckboxDisabled,
       mergedSortState,
       handleColHeaderClick,
-      handleCheckboxUpdateChecked
+      handleCheckboxUpdateChecked,
+      handleColumnResize
     } = this
     let hasEllipsis = false
     const theadVNode = (
@@ -142,10 +170,73 @@ export default defineComponent({
                 const key = getColKey(column)
                 const { ellipsis } = column
                 if (!hasEllipsis && ellipsis) hasEllipsis = true
+                const createColumnVNode = (): VNode | null => {
+                  if (column.type === 'selection') {
+                    return column.multiple !== false ? (
+                      <>
+                        <NCheckbox
+                          key={currentPage}
+                          privateInsideTable
+                          checked={allRowsChecked}
+                          indeterminate={someRowsChecked}
+                          disabled={headerCheckboxDisabled}
+                          onUpdateChecked={handleCheckboxUpdateChecked}
+                        />
+                        {checkOptions ? (
+                          <SelectionMenu clsPrefix={mergedClsPrefix} />
+                        ) : null}
+                      </>
+                    ) : null
+                  }
+                  return (
+                    <>
+                      {ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
+                        <div
+                          class={`${mergedClsPrefix}-data-table-th__ellipsis`}
+                        >
+                          {renderTitle(column)}
+                        </div>
+                      ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+                        : ellipsis && typeof ellipsis === 'object' ? (
+                        <NEllipsis
+                          {...ellipsis}
+                          theme={mergedTheme.peers.Ellipsis}
+                          themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+                        >
+                          {{
+                            default: () => renderTitle(column)
+                          }}
+                        </NEllipsis>
+                        ) : (
+                          renderTitle(column)
+                        )}
+                      {isColumnSortable(column) ? (
+                        <SortButton column={column as TableBaseColumn} />
+                      ) : null}
+                      {isColumnFilterable(column) ? (
+                        <FilterButton
+                          column={column as TableBaseColumn}
+                          options={column.filterOptions}
+                        />
+                      ) : null}
+                      {isColumnResizable(column) ? (
+                        <ResizeButton
+                          getCurrentWidth={() =>
+                            thElsRef[key]?.getBoundingClientRect().width ?? 0
+                          }
+                          onResize={(distance: number) =>
+                            handleColumnResize(column, distance)
+                          }
+                        />
+                      ) : null}
+                    </>
+                  )
+                }
                 const leftFixed = key in fixedColumnLeftMap
                 const rightFixed = key in fixedColumnRightMap
                 return (
                   <th
+                    ref={(el) => (thElsRef[key] = el as HTMLElement)}
                     key={key}
                     style={{
                       textAlign: column.align,
@@ -184,49 +275,7 @@ export default defineComponent({
                         : undefined
                     }
                   >
-                    {column.type === 'selection' ? (
-                      column.multiple !== false ? (
-                        <>
-                          <NCheckbox
-                            key={currentPage}
-                            privateInsideTable
-                            checked={allRowsChecked}
-                            indeterminate={someRowsChecked}
-                            disabled={headerCheckboxDisabled}
-                            onUpdateChecked={handleCheckboxUpdateChecked}
-                          />
-                          {checkOptions ? (
-                            <SelectionMenu clsPrefix={mergedClsPrefix} />
-                          ) : null}
-                        </>
-                      ) : null
-                    ) : ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
-                      <div class={`${mergedClsPrefix}-data-table-th__ellipsis`}>
-                        {renderTitle(column)}
-                      </div>
-                    ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                      : ellipsis && typeof ellipsis === 'object' ? (
-                      <NEllipsis
-                        {...ellipsis}
-                        theme={mergedTheme.peers.Ellipsis}
-                        themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-                      >
-                        {{
-                          default: () => renderTitle(column)
-                        }}
-                      </NEllipsis>
-                      ) : (
-                        renderTitle(column)
-                      )}
-                    {isColumnSortable(column) ? (
-                      <SortButton column={column as TableBaseColumn} />
-                    ) : null}
-                    {isColumnFilterable(column) ? (
-                      <FilterButton
-                        column={column as TableBaseColumn}
-                        options={column.filterOptions}
-                      />
-                    ) : null}
+                    {createColumnVNode()}
                   </th>
                 )
               })}

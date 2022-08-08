@@ -63,6 +63,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
   width?: number | string
   minWidth?: number | string
+  maxWidth?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
@@ -88,6 +89,7 @@ export type TableColumnGroup<T = InternalRowData> = {
   children: Array<TableBaseColumn<T>>
 
   // to suppress type error in table header
+  resizable?: boolean
   filterOptions?: never
 } & CommonColumnInfo<T>
 
@@ -103,6 +105,10 @@ export type TableBaseColumn<T = InternalRowData> = {
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
+
+  resizable?: boolean
+  minWidth?: string | number
+  maxWidth?: string | number
 
   filter?: 'default' | boolean | Filter<T>
   filterOptions?: FilterOption[]
@@ -132,6 +138,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
 
   // to suppress type error in utils
   sorter?: never
+  resizable?: boolean
   filter?: never
   filterOptions?: never
   filterOptionValues?: never
@@ -223,6 +230,9 @@ export interface DataTableInjection {
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
+  getResizableWidth: (key: ColumnKey) => number | undefined
+  clearResizableWidth: () => void
+  doUpdateResizableWidth: (column: TableColumn, width: number) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void

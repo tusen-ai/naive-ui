@@ -30,6 +30,7 @@ merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
+column-draggable.vue
 select.vue
 select-single.vue
 custom-select
@@ -128,9 +129,11 @@ render-cell.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters). |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
+| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | NEXT_VERSION |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
 | minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
+| maxWidth | `number \| string` | `undefined` | Max width of the column. | NEXT_VERSION |
 | multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |

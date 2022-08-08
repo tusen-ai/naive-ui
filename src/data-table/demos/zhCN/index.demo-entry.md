@@ -30,6 +30,7 @@ merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
+column-draggable.vue
 select.vue
 select-single.vue
 custom-select
@@ -134,9 +135,11 @@ ellipsis-debug.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
+| resizable | `boolean` | `undefined` | 列宽是否可以拖拽 | NEXT_VERSION |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
 | minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
+| maxWidth | `number \| string` | `undefined` | 列的最大宽度 | NEXT_VERSION |
 | multiple | `boolean` | `true` | 是否开启多选，仅在 `type` 为 `'selection'` 的时候生效 | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |

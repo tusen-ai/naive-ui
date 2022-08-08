@@ -64,12 +64,14 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 export function createCustomWidthStyle (
-  column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
+  column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
+  resizedWidth?: string
 ): CSSProperties {
-  const width = getStringColWidth(column)
+  const width = resizedWidth || getStringColWidth(column)
   return {
     width,
-    minWidth: formatLength(column.minWidth) || width
+    minWidth: formatLength(column.minWidth) || width,
+    maxWidth: formatLength(column.maxWidth)
   }
 }
 
@@ -96,6 +98,11 @@ export function shouldUseArrayInSingleMode (column: TableBaseColumn): boolean {
 export function isColumnSortable (column: TableColumn): boolean {
   if ('children' in column) return false
   return !!column.sorter
+}
+
+export function isColumnResizable (column: TableColumn): boolean {
+  if ('children' in column && !!column.children.length) return false
+  return !!column.resizable
 }
 
 export function isColumnFilterable (column: TableColumn): boolean {
