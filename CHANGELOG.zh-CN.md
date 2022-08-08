@@ -8,7 +8,7 @@
 - 修复 `n-tree` 在传入的节点数据中包含 `type='group'` 时无法展开，关闭 [#3388](https://github.com/TuSimple/naive-ui/issues/3388)
 - 修复 `n-pagination` 的 `default-page-size` 没有跟随 `page-sizes` prop，关闭 [#3369](https://github.com/TuSimple/naive-ui/issues/3369)
 - Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
-- `n-input` 字数与输入文本重叠
+- `n-input` 输入字数与输入文本重叠
 
 ### Feats
 
