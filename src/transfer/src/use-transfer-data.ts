@@ -28,7 +28,9 @@ export function useTransferData (props: UseTransferDataProps) {
 
   const targetOptionsRef = computed(() => {
     const optionMap = optionsMapRef.value
-    return (mergedValueRef.value || []).map((v) => optionMap.get(v)) as Option[]
+    return (mergedValueRef.value || [])
+      .map((v) => optionMap.get(v))
+      .filter((item) => item !== undefined) as Option[]
   })
 
   const srcPatternRef = ref('')
