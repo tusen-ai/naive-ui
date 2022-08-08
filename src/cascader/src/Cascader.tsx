@@ -1004,7 +1004,11 @@ export default defineComponent({
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onKeydown={this.handleKeydown}
-                    />
+                    >
+                      {{
+                        arrow: () => [this.$slots.arrow?.()]
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,

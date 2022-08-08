@@ -31,6 +31,7 @@
 - `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `trigger-quick-jump-on` 属性，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
+- `n-cascader` 新增 `arrow` 插槽，关闭 [#3459](https://github.com/TuSimple/naive-ui/issues/3459)
 
 ## 2.32.1
 
