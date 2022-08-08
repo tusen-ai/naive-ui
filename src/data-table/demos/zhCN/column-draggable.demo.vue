@@ -1,5 +1,7 @@
 <markdown>
 # 列宽拖拽
+
+仅支持叶子结点。
 </markdown>
 
 <template>
