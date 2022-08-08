@@ -162,6 +162,7 @@ export default cB('input', `
       position: absolute;
       right: var(--n-padding-right);
       bottom: var(--n-padding-vertical);
+      background-color: var(--n-color);
     `),
     cM('resizable', [
       cB('input-wrapper', `
