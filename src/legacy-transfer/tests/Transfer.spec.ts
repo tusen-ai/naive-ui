@@ -30,7 +30,7 @@ describe('n-legacy-transfer', () => {
     ]
     const onFilter = jest.fn()
     const wrapper = mount(NLegacyTransfer, {
-      props: { filterable: true, filter: onFilter, options: options }
+      props: { filterable: true, filter: onFilter, options }
     })
     await wrapper.find('input').setValue('1')
     await sleep(300)

@@ -98,7 +98,7 @@ describe('n-input', () => {
 
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
-      const wrapper = mount(NInput, { props: { size: size } })
+      const wrapper = mount(NInput, { props: { size } })
       expect(wrapper.find('.n-input').attributes('style')).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -178,7 +178,7 @@ describe('n-input', () => {
   it('should work with `on-blur` prop', async () => {
     const onBlur = jest.fn()
     const wrapper = mount(NInput, {
-      props: { onBlur: onBlur }
+      props: { onBlur }
     })
     await wrapper.find('input').trigger('focus')
     await wrapper.find('input').trigger('blur')
@@ -189,7 +189,7 @@ describe('n-input', () => {
   it('should work with `on-change` prop', async () => {
     const onChange = jest.fn()
     const wrapper = mount(NInput, {
-      props: { onChange: onChange }
+      props: { onChange }
     })
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')
@@ -201,7 +201,7 @@ describe('n-input', () => {
   it('should work with `on-focus` prop', async () => {
     const onFocus = jest.fn()
     const wrapper = mount(NInput, {
-      props: { onFocus: onFocus }
+      props: { onFocus }
     })
     await wrapper.find('input').trigger('focus')
     expect(onFocus).toHaveBeenCalled()
@@ -211,7 +211,7 @@ describe('n-input', () => {
   it('should work with `on-input` prop', async () => {
     const onInput = jest.fn()
     const wrapper = mount(NInput, {
-      props: { onInput: onInput }
+      props: { onInput }
     })
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')
@@ -222,7 +222,7 @@ describe('n-input', () => {
   it('should work with `on-update:value` prop', async () => {
     const onUpdateValue = jest.fn()
     const wrapper = mount(NInput, {
-      props: { onUpdateValue: onUpdateValue }
+      props: { onUpdateValue }
     })
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')

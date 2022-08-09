@@ -8,6 +8,7 @@ Long data's friend.
 
 ```demo
 basic.vue
+simple.vue
 slot.vue
 quick-jumper.vue
 size.vue
@@ -30,6 +31,7 @@ page-size-option.vue
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
+| input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | Quick jump trigger event of input. | NEXT_VERSION |
 | item-count | `number` | `undefined` | Total number. |  |
 | label | `PaginationRenderLabel` | `undefined` | Item content. | 2.24.0 |
 | page-count | `number` | `1` | Total pages. |  |
@@ -40,6 +42,7 @@ page-size-option.vue
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
+| simple | `boolean` | `false` | Whether to use simple mode. | NEXT_VERSION |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |

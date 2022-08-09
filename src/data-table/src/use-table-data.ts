@@ -379,7 +379,7 @@ export function useTableData (
     paginatedDataRef,
     rawPaginatedDataRef,
     mergedFilterStateRef,
-    mergedSortStateRef: mergedSortStateRef,
+    mergedSortStateRef,
     hoverKeyRef: ref<RowKey | null>(null),
     selectionColumnRef,
     childTriggerColIndexRef,

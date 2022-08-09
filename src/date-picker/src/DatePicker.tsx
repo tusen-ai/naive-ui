@@ -19,7 +19,7 @@ import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns/esm'
 import { useIsMounted, useMergedState } from 'vooks'
-import { happensIn } from 'seemly'
+import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { FormValidationStatus } from '../../form/src/interface'
@@ -538,7 +538,7 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       if (
         mergedShowRef.value &&
-        !triggerElRef.value?.contains(e.target as Node)
+        !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
         closeCalendar({
           returnFocus: false

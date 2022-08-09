@@ -4,12 +4,16 @@ import { Key, TmNode, TreeOption } from './interface'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 
 export function useKeyboard ({
+  props,
   fNodesRef,
   mergedExpandedKeysRef,
   mergedSelectedKeysRef,
   handleSelect,
   handleSwitcherClick
 }: {
+  props: {
+    keyboard: boolean
+  }
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   mergedExpandedKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
@@ -31,6 +35,7 @@ export function useKeyboard ({
         : null
     )
   function handleKeydown (e: KeyboardEvent): void {
+    if (!props.keyboard) return
     const { value: pendingNodeKey } = pendingNodeKeyRef
     if (pendingNodeKey === null) {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {

@@ -61,7 +61,7 @@ scrollable-debug.vue
 | 属性 | 类型               | 说明         |
 | ---- | ------------------ | ------------ |
 | type | `'divider'`        | 分割线的类型 |
-| key?  | `string \| number` | 需要唯一     |
+| key? | `string \| number` | 需要唯一     |
 
 #### DropdownGroupOption Type
 
@@ -75,8 +75,8 @@ scrollable-debug.vue
 
 #### DropdownRenderOption Type
 
-| 属性   | 类型               | 说明                        |
-| ------ | ------------------ | --------------------------- |
-| type   | `'render'`         | DropdownRenderOption 的类型 |
+| 属性    | 类型               | 说明                        |
+| ------- | ------------------ | --------------------------- |
+| type    | `'render'`         | DropdownRenderOption 的类型 |
 | key?    | `string \| number` | 渲染选项 ID（应该是唯一的） |
 | render? | `() => VNodeChild` | 选项内容的渲染功能          |

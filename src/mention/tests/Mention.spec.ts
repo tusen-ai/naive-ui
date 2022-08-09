@@ -34,7 +34,7 @@ describe('n-mention', () => {
   it('should work with `options` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
 
     wrapper.find('input').element.focus()
@@ -47,7 +47,7 @@ describe('n-mention', () => {
   it('should work with `autosize` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, autosize: true }
+      props: { options, autosize: true }
     })
 
     expect(wrapper.find('.n-input').classes()).toContain('n-input--autosize')
@@ -56,7 +56,7 @@ describe('n-mention', () => {
   it('should work with `type` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
 
     expect(wrapper.find('.n-input').classes()).not.toContain(
@@ -75,7 +75,7 @@ describe('n-mention', () => {
   it('should work with `bordered` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
 
     expect(wrapper.find('.n-input__border').exists()).toBe(true)
@@ -89,7 +89,7 @@ describe('n-mention', () => {
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
 
     expect(wrapper.find('.n-input').classes()).not.toContain(
@@ -103,7 +103,7 @@ describe('n-mention', () => {
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, loading: true }
+      props: { options, loading: true }
     })
 
     wrapper.find('input').element.focus()
@@ -117,7 +117,7 @@ describe('n-mention', () => {
   it('should work with `loading` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, loading: true }
+      props: { options, loading: true }
     })
 
     wrapper.find('input').element.focus()
@@ -131,7 +131,7 @@ describe('n-mention', () => {
   it('should work with `prefix` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, prefix: '#' }
+      props: { options, prefix: '#' }
     })
 
     wrapper.find('input').element.focus()
@@ -145,7 +145,7 @@ describe('n-mention', () => {
     const onUpdate = jest.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, 'on-update:value': onUpdate }
+      props: { options, 'on-update:value': onUpdate }
     })
 
     wrapper.find('input').element.focus()
@@ -158,7 +158,7 @@ describe('n-mention', () => {
     const onFocus = jest.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, 'on-focus': onFocus }
+      props: { options, 'on-focus': onFocus }
     })
 
     wrapper.find('input').element.focus()
@@ -169,7 +169,7 @@ describe('n-mention', () => {
     const onSearch = jest.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, 'on-search': onSearch }
+      props: { options, 'on-search': onSearch }
     })
 
     wrapper.find('input').element.focus()
@@ -182,7 +182,7 @@ describe('n-mention', () => {
     const onBlur = jest.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options, 'on-blur': onBlur }
+      props: { options, 'on-blur': onBlur }
     })
 
     await wrapper.find('input').element.focus()
@@ -193,7 +193,7 @@ describe('n-mention', () => {
   it('should work with `focus` method', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
     await wrapper.vm.focus()
     expect(wrapper.find('.n-input').classes()).toContain('n-input--focus')
@@ -202,7 +202,7 @@ describe('n-mention', () => {
   it('should work with `blur` method', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
-      props: { options: options }
+      props: { options }
     })
     await wrapper.vm.focus()
     await wrapper.vm.blur()

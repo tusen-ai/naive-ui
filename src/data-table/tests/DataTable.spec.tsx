@@ -913,7 +913,7 @@ describe('props.columns', () => {
         {
           title: 'Name',
           key: 'name',
-          align: align
+          align
         },
         {
           title: 'Age',
