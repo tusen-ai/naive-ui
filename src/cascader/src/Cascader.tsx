@@ -1006,7 +1006,7 @@ export default defineComponent({
                       onKeydown={this.handleKeydown}
                     >
                       {{
-                        arrow: () => [this.$slots.arrow?.()]
+                        arrow: () => this.$slots.arrow?.()
                       }}
                     </NInternalSelection>
                   )
