@@ -113,7 +113,7 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-markdown": "^2.2.1",
+    "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
@@ -141,7 +141,7 @@
     "vite": "3.0.0",
     "vue": "^3.2.36",
     "vue-router": "^4.0.14",
-    "vue-tsc": "^0.35.0"
+    "vue-tsc": "^0.39.5"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
