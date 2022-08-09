@@ -18,6 +18,7 @@ import {
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
 import { clickoutside } from 'vdirs'
+import { useConfig, useRtl } from '../../_mixins'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { NScrollbar } from '../../_internal'
@@ -83,6 +84,9 @@ export default defineComponent({
     const isVertical = computed<boolean>(() => {
       return props.placement === 'top' || props.placement === 'bottom'
     })
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+
+    const rtlEnabledRef = useRtl('Drawer', mergedRtlRef, mergedClsPrefixRef)
 
     const handleMousedownResizeTrigger = (e: MouseEvent): void => {
       isDraggingRef.value = true
@@ -186,6 +190,7 @@ export default defineComponent({
     provide(modalBodyInjectionKey, null)
     return {
       bodyRef,
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: NDrawer.mergedClsPrefixRef,
       isMounted: NDrawer.isMountedRef,
       mergedTheme: NDrawer.mergedThemeRef,
@@ -239,6 +244,8 @@ export default defineComponent({
                               'aria-modal': 'true',
                               class: [
                                 `${mergedClsPrefix}-drawer`,
+                                this.rtlEnabled &&
+                                  `${mergedClsPrefix}-drawer--rtl`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                                 /**
                                  * When the mouse is pressed to resize the drawer,

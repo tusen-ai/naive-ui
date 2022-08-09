@@ -10,6 +10,7 @@
 basic.vue
 hoverable.vue
 border.vue
+rtl-debug.vue
 ```
 
 ## API
