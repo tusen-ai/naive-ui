@@ -1,7 +1,7 @@
 <markdown>
-# 操作插槽
+# 插槽
 
-有人要在级联菜单里用这个插槽吗？
+有人要在级联菜单里用这些插槽吗？
 </markdown>
 
 <template>
@@ -9,12 +9,16 @@
     <template #action>
       站在能分割世界的桥
     </template>
+    <template #arrow>
+      <flash16-regular />
+    </template>
   </n-cascader>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { CascaderOption } from 'naive-ui'
+import Flash16Regular from '@vicons/fluent/Flash16Regular'
 
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
@@ -46,6 +50,9 @@ function getOptions (depth = 2, iterator = 1, prefix = '') {
 }
 
 export default defineComponent({
+  components: {
+    Flash16Regular
+  },
   setup () {
     return {
       value: ref(null),

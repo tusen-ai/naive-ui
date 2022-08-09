@@ -51,4 +51,10 @@ describe('n-transfer', () => {
     const wrapper = mount(NTransfer, { props: { sourceTitle: test } })
     expect(wrapper.find('.n-transfer-list-header__title').text()).toBe(test)
   })
+
+  it('should work with `target-title` prop', async () => {
+    const test = 'target-title-test'
+    const wrapper = mount(NTransfer, { props: { targetTitle: test } })
+    expect(wrapper.find('.n-transfer-list-header__title').text()).toBe(test)
+  })
 })

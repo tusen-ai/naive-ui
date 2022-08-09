@@ -8,7 +8,7 @@ import {
   provide,
   toRef
 } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
@@ -43,7 +43,9 @@ export default defineComponent({
   name: 'List',
   props: listProps,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
+    const rtlEnabledRef = useRtl('List', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'List',
       '-list',
@@ -96,6 +98,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -108,6 +111,7 @@ export default defineComponent({
       <ul
         class={[
           `${mergedClsPrefix}-list`,
+          this.rtlEnabled && `${mergedClsPrefix}-list--rtl`,
           this.bordered && `${mergedClsPrefix}-list--bordered`,
           this.showDivider && `${mergedClsPrefix}-list--show-divider`,
           this.hoverable && `${mergedClsPrefix}-list--hoverable`,
