@@ -107,7 +107,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.7",
     "deepmerge": "^4.2.2",
-    "esbuild": "0.14.42",
+    "esbuild": "0.14.54",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
