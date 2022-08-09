@@ -65,7 +65,6 @@ export default cB('input', `
     background-color: #0000;
     text-align: inherit;
     transition:
-      -webkit-text-fill-color .3s var(--n-bezier),
       caret-color .3s var(--n-bezier),
       color .3s var(--n-bezier),
       text-decoration-color .3s var(--n-bezier);
@@ -221,7 +220,6 @@ export default cB('input', `
       cursor: not-allowed;
       color: var(--n-text-color-disabled);
       text-decoration-color: var(--n-text-color-disabled);
-      -webkit-text-fill-color: var(--n-text-color-disabled);
     `),
     cE('placeholder', 'color: var(--n-placeholder-color-disabled);'),
     cE('separator', 'color: var(--n-text-color-disabled);', [
