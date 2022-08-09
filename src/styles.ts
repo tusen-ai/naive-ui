@@ -31,7 +31,7 @@ export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
 export { dialogDark } from './dialog/styles'
 export { dividerDark } from './divider/styles'
-export { drawerDark } from './drawer/styles'
+export { drawerDark, drawerRtl as unstableDrawerRtl } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'
 export {
   dynamicInputDark,
@@ -49,7 +49,7 @@ export {
   inputNumberRtl as unstableInputNumberRtl
 } from './input-number/styles'
 export { layoutDark } from './layout/styles'
-export { listDark } from './list/styles'
+export { listDark, listRtl as unstableListRtl } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'
 export { logDark } from './log/styles'
 export { mentionDark } from './mention/styles'
