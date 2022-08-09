@@ -8,6 +8,7 @@
   "unpkg": "dist/index.js",
   "jsdelivr": "dist/index.js",
   "scripts": {
+    "scripts": "better-scripts",
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
     "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
@@ -103,6 +104,7 @@
     "@vue/test-utils": "^2.0.2",
     "autoprefixer": "^10.4.4",
     "babel-jest": "^28.1.3",
+    "better-scripts": "^0.2.1",
     "codesandbox": "^2.2.3",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.7",

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://raw.githubusercontent.com/iamyoki/better-scripts/main/lib/schema.json",
+  "dev": {
+    "alias": "✨ Dev",
+    "desc": "Start a development server",
+    "command": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite"
+  },
+  "builds": {
+    "alias": "📦️ Builds",
+    "desc": "Select what to build",
+    "scripts": {
+      "package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+      "site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
+      "site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
+      "gen-version": "node scripts/gen-version",
+      "gen-volar-dts": "esbuild scripts/gen-component-declaration.js --bundle --platform=node | node",
+      "transpile-docs": "node scripts/md-to-vue data-table"
+    }
+  },
+  "clean": {
+    "alias": "🗑️  Clean",
+    "desc": "Clean previous built",
+    "command": "rimraf site lib es dist node_modules/naive-ui themes/**/es themes/**/lib"
+  },
+  "releases": {
+    "alias": "🔥 Releases",
+    "desc": "Select what to release",
+    "scripts": {
+      "package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
+      "changelog": "node scripts/release-changelog"
+    }
+  },
+  "lints": {
+    "alias": "🧐 Lints",
+    "desc": "Select a lint script to run",
+    "scripts": {
+      "code&type": "pnpm run lint:code && pnpm run lint:type",
+      "type": "pnpm run lint:src-type && pnpm run lint:demo-type",
+      "code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
+      "fix": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
+      "src-type": "tsc -b --force tsconfig.esm.json",
+      "demo-type": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vue-tsc -p src/tsconfig.demo.json"
+    }
+  },
+  "formats": {
+    "alias": "📝 Formats",
+    "desc": "Select a format script to run",
+    "scripts": {
+      "all": "pnpm run format:code && pnpm run format:md && pnpm run lint:fix",
+      "code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
+      "md": "prettier --write --parser markdown --prose-wrap never \"(src|demo)/**/*.md\""
+    }
+  },
+  "tests": {
+    "alias": "🧪 Tests",
+    "desc": "Select a test script to run",
+    "scripts": {
+      "test": "cross-env NODE_ENV=test jest --collectCoverage=false",
+      "update": "cross-env NODE_ENV=test jest -u --collectCoverage=false",
+      "cov": "cross-env NODE_ENV=test NODE_OPTIONS=--unhandled-rejections=warn jest",
+      "watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage"
+    }
+  },
+  "release:site": {
+    "alias": "🚀 Release site",
+    "desc": "Build and deploy and release",
+    "command": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
+  }
+}
