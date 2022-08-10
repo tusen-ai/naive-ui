@@ -74,7 +74,7 @@ describe('n-button', () => {
   it('should work with `type` prop', async () => {
     ;(['primary', 'info', 'success', 'warning', 'error'] as const).forEach(
       (type) => {
-        const wrapper = mount(NButton, { props: { type: type } })
+        const wrapper = mount(NButton, { props: { type } })
         expect(wrapper.find('button').classes()).toContain(
           `n-button--${type}-type`
         )
@@ -101,7 +101,7 @@ describe('n-button', () => {
 
   it('should work with `size` prop', async () => {
     ;(['tiny', 'small', 'medium', 'large'] as const).forEach((size) => {
-      const wrapper = mount(NButton, { props: { size: size } })
+      const wrapper = mount(NButton, { props: { size } })
       expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
       wrapper.unmount()
     })

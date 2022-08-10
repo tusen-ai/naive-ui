@@ -32,7 +32,7 @@ pagination-behavior-on-filter.vue
 multiple-sorter
 select.vue
 select-single.vue
-custom-select
+custom-select.vue
 group-header.vue
 controlled-page.vue
 controlled-filter.vue
@@ -63,6 +63,7 @@ scroll-debug
 height-debug
 keep-alive-debug.vue
 ellipsis-debug.vue
+custom-expand-icon.vue
 ```
 
 ## API

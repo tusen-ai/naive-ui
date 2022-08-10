@@ -233,13 +233,13 @@ export default defineComponent({
       renderIconRef: toRef(props, 'renderIcon') as Ref<
       RenderIconImpl | undefined
       >,
-      hoverKeyRef: hoverKeyRef,
-      keyboardKeyRef: keyboardKeyRef,
-      lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,
-      pendingKeyPathRef: pendingKeyPathRef,
-      activeKeyPathRef: activeKeyPathRef,
+      hoverKeyRef,
+      keyboardKeyRef,
+      lastToggledSubmenuKeyRef,
+      pendingKeyPathRef,
+      activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
-      mergedShowRef: mergedShowRef,
+      mergedShowRef,
       nodePropsRef: toRef(props, 'nodeProps'),
       renderOptionRef: toRef(props, 'renderOption') as Ref<
       RenderOptionImpl | undefined

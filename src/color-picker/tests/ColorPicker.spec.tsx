@@ -154,7 +154,7 @@ describe('n-color-picker', () => {
         props: {
           swatches: ['black'],
           modes,
-          onUpdateValue: onUpdateValue
+          onUpdateValue
         }
       })
       await wrapper.find('.n-color-picker-trigger').trigger('click')

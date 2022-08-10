@@ -127,7 +127,7 @@ export default defineComponent({
             return children ? (
               <div
                 class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
-                style={{ color: color }}
+                style={{ color }}
               >
                 {children}
               </div>

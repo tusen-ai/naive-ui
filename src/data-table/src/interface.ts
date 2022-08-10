@@ -115,6 +115,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   filterMultiple?: boolean
 
   render?: (rowData: T, rowIndex: number) => VNodeChild
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
   renderFilter?: RenderFilter
   renderFilterIcon?: RenderFilterIcon
   renderSorter?: RenderSorter
@@ -128,7 +129,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
   multiple?: boolean
   disabled?: (row: T) => boolean
-  options?: DataTableSelectionOptions
+  options?: DataTableSelectionOptions<T>
 
   // to suppress type error in utils
   sorter?: never
@@ -138,6 +139,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
   filterOptionValue?: never
   colSpan?: never
   rowSpan?: never
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 } & CommonColumnInfo<T>
 
 export type RenderExpand<T = InternalRowData> = (
@@ -153,6 +155,7 @@ export interface TableExpandColumn<T = InternalRowData>
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>
   expandable?: Expandable<T>
+  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 }
 
 export type TableColumn<T = InternalRowData> =
@@ -162,9 +165,9 @@ export type TableColumn<T = InternalRowData> =
   | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
-export type DataTableSelectionOptions = Array<
+export type DataTableSelectionOptions<T = InternalRowData> = Array<
 | DataTableSelectionOption
-| { label: string, key: string | number, onSelect: () => void }
+| { label: string, key: string | number, onSelect: (pageData: T[]) => void }
 >
 export interface DataTableInjection {
   slots: Slots

@@ -35,7 +35,7 @@ export const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColor,
-    actionColor: actionColor,
+    actionColor,
     titleFontWeight: fontWeightStrong,
     closeColorHover,
     closeColorPressed,

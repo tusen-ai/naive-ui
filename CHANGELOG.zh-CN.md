@@ -7,10 +7,18 @@
 - 修复 `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
 - 修复 `n-tree` 在传入的节点数据中包含 `type='group'` 时无法展开，关闭 [#3388](https://github.com/TuSimple/naive-ui/issues/3388)
 - 修复 `n-pagination` 的 `default-page-size` 没有跟随 `page-sizes` prop，关闭 [#3369](https://github.com/TuSimple/naive-ui/issues/3369)
-- Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
+- 在 package.json 中新增 `exports` 字段
+- 修复 `n-dropdown` 选项 prefix & suffix 的 z-index，关闭 [#3433](https://github.com/TuSimple/naive-ui/issues/3433)
+- 修复 `n-input-number` 中配置 peers 主题不生效，关闭 [#3422](https://github.com/TuSimple/naive-ui/issues/3422)
+- 修复 `n-transfer` 在传入异步的 `options` 报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
+- 修复 `n-data-table` column `onSelect` 的类型，关闭 [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
+- 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
+- 修复部分组件在 open 模式的 shadow DOM 内运行不正常，关闭 [#3281](https://github.com/TuSimple/naive-ui/issues/3281)
+- 修复 `n-carousel` 在 `loop='true'` 和 `effect='slide'` 下，只有两个元素时轮播过渡切换效果相反，关闭 [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
 
 ### Feats
 
+- `n-menu` 的 `MenuOption` 新增 `show` 属性，用于是否显示菜单，关闭 [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
 - `n-alert` 新增 `bordered` 属性，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
 - `n-tag` 新增 `trigger-click-on-close` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
 - `n-cascader` 新增 `disabled-field` 属性，关闭 [#3338](https://github.com/TuSimple/naive-ui/issues/3338)
@@ -19,6 +27,10 @@
 - `n-list` 新增 `show-divider` 属性
 - `n-thing` 新增 `content-style` 属性
 - `n-thing` 新增 `description-style` 属性
+- `n-data-table` 列属性新增 `renderExpandIcon`属性
+- `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
+- `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
+- `n-pagination` 新增 `trigger-quick-jump-on` 属性，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
 
 ## 2.32.1
 
@@ -119,6 +131,7 @@
 - `n-drawer` 新增 `on-update:height` 属性
 - `n-drawer` 新增 `on-update:width` 属性
 - 更新 ukUA locale
+- `n-message` 支持 RTL
 
 ## 2.30.8
 

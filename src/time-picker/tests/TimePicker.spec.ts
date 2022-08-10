@@ -106,7 +106,7 @@ describe('n-time-picker', () => {
   it('should work with `on-blur` prop', async () => {
     const onBlur = vi.fn()
     const wrapper = mount(NTimePicker, {
-      props: { onBlur: onBlur }
+      props: { onBlur }
     })
     await wrapper.find('input').trigger('focus')
     await wrapper.find('input').trigger('blur')
@@ -148,7 +148,7 @@ describe('n-time-picker', () => {
   it('should work with `on-focus` prop', async () => {
     const onFocus = vi.fn()
     const wrapper = mount(NTimePicker, {
-      props: { onFocus: onFocus }
+      props: { onFocus }
     })
     await wrapper.find('input').trigger('focus')
     expect(onFocus).toHaveBeenCalled()

@@ -21,7 +21,7 @@ const self = (vars: ThemeCommonVars) => {
   return {
     ...sizeVariables,
     fontSize,
-    railColor: railColor,
+    railColor,
     railColorHover: railColor,
     fillColor: primaryColor,
     fillColorHover: primaryColor,
@@ -38,7 +38,7 @@ const self = (vars: ThemeCommonVars) => {
       '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
     handleBoxShadowFocus:
       '0 1px 4px 0 rgba(0, 0, 0, 0.3), inset 0 0 1px 0 rgba(0, 0, 0, 0.05)',
-    indicatorColor: indicatorColor,
+    indicatorColor,
     indicatorBoxShadow: boxShadow,
     indicatorTextColor: baseColor,
     indicatorBorderRadius: borderRadius,

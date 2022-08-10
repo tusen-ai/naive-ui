@@ -813,6 +813,7 @@ export default defineComponent({
                                   class={`${mergedClsPrefix}-data-table-expand-trigger`}
                                   clsPrefix={mergedClsPrefix}
                                   expanded={expanded}
+                                  renderExpandIcon={column.renderExpandIcon}
                                   loading={loadingKeySet.has(rowInfo.key)}
                                   onClick={() => {
                                     handleUpdateExpanded(rowKey, rowInfo.tmNode)
@@ -854,6 +855,7 @@ export default defineComponent({
                               <ExpandTrigger
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
+                                renderExpandIcon={column.renderExpandIcon}
                                 onClick={() =>
                                   handleUpdateExpanded(rowKey, null)
                                 }

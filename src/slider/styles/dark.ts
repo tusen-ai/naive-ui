@@ -21,7 +21,7 @@ const sliderDark: SliderTheme = {
     return {
       ...sizeVariables,
       fontSize,
-      railColor: railColor,
+      railColor,
       railColorHover: railColor,
       fillColor: primaryColorSuppl,
       fillColorHover: primaryColorSuppl,

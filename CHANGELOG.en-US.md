@@ -7,10 +7,18 @@
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
-- Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
+- Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
+- Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
+- Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
+- Added `exports` field in package.json.
+- Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
+- Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- Fix some components works abnormally in open mode shadow DOM, closes [#3281](https://github.com/TuSimple/naive-ui/issues/3281).
+- Fix `n-carousel` in `loop='true'` and `effect='slide'`, When there are only two elements, the transition switching effect of the rotation is opposite, closes [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
 
 ### Feats
 
+- `n-menu`'s `MenuOption` add `show` prop to set whether the Menu option is displayed, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334).
 - `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
 - `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
@@ -19,6 +27,10 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
+- `n-data-table`'s col adds `renderExpandIcon` prop.
+- `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
+- `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
+- `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 
 ## 2.32.1
 
@@ -119,6 +131,7 @@
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
 - Update ukUA locale.
+- `n-message` supports RTL.
 
 ## 2.30.8
 
