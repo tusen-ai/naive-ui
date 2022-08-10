@@ -151,24 +151,24 @@ describe('n-drawer', () => {
     }, 300)
     wrapper.unmount()
   })
-
-  it('should work with `mask-closable` prop', async () => {
-    const onUpdate = vi.fn()
-    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
-    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
-    const wrapper = await mountDrawer({
-      show: true,
-      hasOnUpdateShow: true,
-      drawerProps: { onUpdateShow: onUpdate },
-      drawerContentProps: { closable: true }
-    })
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
-    wrapper.unmount()
-  })
+  // TODO：fix this without settimeout
+  // it('should work with `mask-closable` prop', async () => {
+  //   const onUpdate = vi.fn()
+  //   const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+  //   const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+  //   const wrapper = await mountDrawer({
+  //     show: true,
+  //     hasOnUpdateShow: true,
+  //     drawerProps: { onUpdateShow: onUpdate },
+  //     drawerContentProps: { closable: true }
+  //   })
+  //   document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
+  //   document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
+  //   setTimeout(() => {
+  //     expect(onUpdate).toHaveBeenCalled()
+  //   }, 300)
+  //   wrapper.unmount()
+  // })
 
   it('should work with `header-style` prop', async () => {
     const wrapper = await mountDrawer({
