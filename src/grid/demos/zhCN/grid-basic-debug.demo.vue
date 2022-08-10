@@ -77,11 +77,9 @@
         8
       </div>
     </n-grid-item>
-    <n-grid-item>
-      <div class="green">
-        9
-      </div>
-    </n-grid-item><n-grid-item>
+    <n-grid-item> <div class="green">
+      9
+    </div> </n-grid-item><n-grid-item>
       <div class="light-green">
         10
       </div>

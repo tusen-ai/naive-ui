@@ -8,10 +8,7 @@
       Checkbox
     </n-checkbox>
     <n-checkbox v-model:checked="value" />
-    <n-checkbox
-      v-model:checked="value"
-      :disabled="disabled"
-    >
+    <n-checkbox v-model:checked="value" :disabled="disabled">
       Checkbox
     </n-checkbox>
     <n-button size="small" @click="disabled = !disabled">

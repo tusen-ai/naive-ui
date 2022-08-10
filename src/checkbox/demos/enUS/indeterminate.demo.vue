@@ -4,10 +4,7 @@
 
 <template>
   <n-space item-style="display: flex;" align="center">
-    <n-checkbox
-      v-model:checked="value"
-      :indeterminate="indeterminate"
-    >
+    <n-checkbox v-model:checked="value" :indeterminate="indeterminate">
       checkbox
     </n-checkbox>
     <n-checkbox v-model:checked="value" :indeterminate="indeterminate" />
@@ -19,10 +16,7 @@
     <n-button size="small" @click="value = !value">
       Check
     </n-button>
-    <n-button
-      size="small"
-      @click="indeterminate = !indeterminate"
-    >
+    <n-button size="small" @click="indeterminate = !indeterminate">
       Indeterminate
     </n-button>
   </n-space>
