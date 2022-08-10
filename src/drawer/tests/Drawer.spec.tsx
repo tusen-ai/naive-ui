@@ -137,20 +137,20 @@ describe('n-drawer', () => {
     expect(document.querySelector('.n-drawer')).not.toEqual(null)
     wrapper2.unmount()
   })
-
-  it('should work with `on-update:show` prop', async () => {
-    const onUpdate = vi.fn()
-    const wrapper = mountDrawer({
-      hasOnUpdateShow: true,
-      drawerProps: { onUpdateShow: onUpdate },
-      drawerContentProps: { closable: true }
-    })
-    await wrapper.find('button').trigger('click')
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
-    wrapper.unmount()
-  })
+  // TODO：fix this without settimeout
+  // it('should work with `on-update:show` prop', async () => {
+  //   const onUpdate = vi.fn()
+  //   const wrapper = mountDrawer({
+  //     hasOnUpdateShow: true,
+  //     drawerProps: { onUpdateShow: onUpdate },
+  //     drawerContentProps: { closable: true }
+  //   })
+  //   await wrapper.find('button').trigger('click')
+  //   setTimeout(() => {
+  //     expect(onUpdate).toHaveBeenCalled()
+  //   }, 300)
+  //   wrapper.unmount()
+  // })
   // TODO：fix this without settimeout
   // it('should work with `mask-closable` prop', async () => {
   //   const onUpdate = vi.fn()
@@ -164,9 +164,9 @@ describe('n-drawer', () => {
   //   })
   //   document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
   //   document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-  //   setTimeout(() => {
-  //     expect(onUpdate).toHaveBeenCalled()
-  //   }, 300)
+  // setTimeout(() => {
+  //   expect(onUpdate).toHaveBeenCalled()
+  // }, 300)
   //   wrapper.unmount()
   // })
 
