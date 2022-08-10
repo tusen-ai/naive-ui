@@ -10,7 +10,8 @@
 - 在 package.json 中新增 `exports` 字段
 - 修复 `n-dropdown` 选项 prefix & suffix 的 z-index，关闭 [#3433](https://github.com/TuSimple/naive-ui/issues/3433)
 - 修复 `n-input-number` 中配置 peers 主题不生效，关闭 [#3422](https://github.com/TuSimple/naive-ui/issues/3422)
-- 修复 `n-transfer` 在传入异步的 `options` 报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
+- 修复 `n-transfer`
+- 修复 `n-transfer` 中初始值不在选项列表报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 - 修复 `n-data-table` column `onSelect` 的类型，关闭 [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
 - 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
 - 修复部分组件在 open 模式的 shadow DOM 内运行不正常，关闭 [#3281](https://github.com/TuSimple/naive-ui/issues/3281)
@@ -31,6 +32,10 @@
 - `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `trigger-quick-jump-on` 属性，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
+- `n-pagination` 新增 `simple` 属性
+- `n-cascader` 新增 `arrow` 插槽，关闭 [#3459](https://github.com/TuSimple/naive-ui/issues/3459)
+- `n-list` 支持 RTL
+- `n-drawer` 支持 RTL
 
 ## 2.32.1
 

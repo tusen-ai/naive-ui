@@ -88,7 +88,7 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-replace": "^4.0.0",
-    "@types/estree": "^0.0.51",
+    "@types/estree": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "@vicons/fluent": "^0.12.0",
@@ -112,7 +112,7 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-markdown": "^2.2.1",
+    "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
@@ -132,14 +132,14 @@
     "rollup": "^2.75.6",
     "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-terser": "^7.0.2",
-    "superagent": "^7.1.3",
+    "superagent": "^8.0.0",
     "typescript": "~4.6.3",
     "vfonts": "^0.1.0",
     "vite": "3.0.0",
     "vitest": "^0.21.1",
     "vue": "^3.2.36",
     "vue-router": "^4.0.14",
-    "vue-tsc": "^0.35.0"
+    "vue-tsc": "^0.39.5"
   },
   "peerDependencies": {
     "vue": "^3.0.0"

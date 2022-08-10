@@ -7,9 +7,11 @@
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
+- Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
 - Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
 - Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
 - Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
+- Fix `n-transfer` throws error if value has no corresponding option, closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406).
 - Added `exports` field in package.json.
 - Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
 - Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
@@ -31,6 +33,10 @@
 - `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
 - `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
 - `n-pagination` adds `trigger-quick-jump-on` prop, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- `n-pagination` adds `simple` prop.
+- `n-cascader` adds `arrow` slot, closes [#3459](https://github.com/TuSimple/naive-ui/issues/3459).
+- `n-list` supports RTL.
+- `n-drawer` supports RTL.
 
 ## 2.32.1
 
