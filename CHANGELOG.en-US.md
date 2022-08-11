@@ -17,6 +17,7 @@
 - Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 - Fix some components works abnormally in open mode shadow DOM, closes [#3281](https://github.com/TuSimple/naive-ui/issues/3281).
 - Fix `n-carousel` in `loop='true'` and `effect='slide'`, When there are only two elements, the transition switching effect of the rotation is opposite, closes [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
+- Fix `n-input-number` type for `size` was missing `tiny`
 
 ### Feats
 
