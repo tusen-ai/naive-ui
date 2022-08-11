@@ -63,7 +63,7 @@ custom-field.vue
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |

@@ -1,11 +1,10 @@
 <markdown>
 # Size
-
-`n-select` comes in different sizes.
 </markdown>
 
 <template>
   <n-space vertical>
+    <n-select v-model:value="value" size="tiny" :options="options" />
     <n-select v-model:value="value" size="small" :options="options" />
     <n-select v-model:value="value" size="medium" :options="options" />
     <n-select v-model:value="value" size="large" :options="options" />
