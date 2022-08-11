@@ -73,7 +73,7 @@ create-debug.vue
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |
