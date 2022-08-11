@@ -31,7 +31,7 @@ import {
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
-import type { OnUpdateValue, InputNumberInst } from './interface'
+import type { OnUpdateValue, InputNumberInst, Size } from './interface'
 import style from './styles/input-number.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
 
@@ -57,7 +57,7 @@ export const inputNumberProps = {
   },
   min: [Number, String],
   max: [Number, String],
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<Size>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
