@@ -147,6 +147,7 @@ export default defineComponent({
   setup (props) {
     const {
       slots: dataTableSlots,
+      bodyWidthRef,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -413,6 +414,7 @@ export default defineComponent({
       })
     })
     return {
+      bodyWidthRef,
       dataTableSlots,
       componentId,
       scrollbarInstRef,
@@ -498,6 +500,7 @@ export default defineComponent({
       mergedTableLayout,
       flexHeight,
       loadingKeySet,
+      bodyWidthRef,
       onResize,
       setHeaderScrollLeft
     } = this
@@ -661,7 +664,14 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      {renderExpand!(rawNode, actualRowIndex)}
+                      <div
+                        class={`${mergedClsPrefix}-data-table-expand`}
+                        style={{
+                          width: bodyWidthRef ? `${bodyWidthRef}px` : undefined
+                        }}
+                      >
+                        {renderExpand!(rawNode, actualRowIndex)}
+                      </div>
                     </td>
                   </tr>
                 )
