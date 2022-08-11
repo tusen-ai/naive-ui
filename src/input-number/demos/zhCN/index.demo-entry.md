@@ -48,7 +48,7 @@ rtl-debug.vue
 | precision | `number` | `undefined` | 数值保留的精度值，设定后会禁用 `update-value-on-input` | 2.30.0 |
 | readonly | `boolean` | `false` | 是否只读 |  |
 | show-button | `boolean` | `true` | 是否有按钮 |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |  |
 | update-value-on-input | `boolean` | `true` | 在输入的过程中，在输入值合法的情况下，是否改变值 |  |
