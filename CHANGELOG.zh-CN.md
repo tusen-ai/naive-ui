@@ -19,6 +19,8 @@
 - 修复 `n-input` 在中文输入过程中如果被重渲染打断可能无法输入，关闭 [#3503](https://github.com/tusen-ai/naive-ui/issues/3503)
 - 修复 `n-layout` 的 `embedded` 属性在 `n-config-provider` 设置 `inline-theme-disabled` 后不生效，关闭 [#3500](https://github.com/tusen-ai/naive-ui/issues/3500)
 - 修复 `n-input` 在禁用状态下有两层 placeholder，关闭 [#3467](https://github.com/tusen-ai/naive-ui/issues/3467)
+- 修复 `n-date-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
+- 修复 `n-time-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
 
 ### Feats
 

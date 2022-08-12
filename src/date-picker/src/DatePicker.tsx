@@ -777,8 +777,8 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
-        '--n-icon-color': iconColor,
-        '--n-icon-color-disabled': iconColorDisabled
+        '--n-icon-color-override': iconColor,
+        '--n-icon-color-disabled-override': iconColorDisabled
       }
     })
     const triggerThemeClassHandle = inlineThemeDisabled

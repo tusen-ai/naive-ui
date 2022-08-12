@@ -21,6 +21,8 @@
 - Fix `n-input` can't input value after compositing is interrupted by rerender, closes [#3503](https://github.com/tusen-ai/naive-ui/issues/3503).
 - Fix `n-layout`'s `embedded` prop not working after `n-config-provider` has set `inline-theme-disabled`, closes [#3500](https://github.com/tusen-ai/naive-ui/issues/3500).
 - Fix `n-input` has duplicate placeholder if disabled, closes [#3467](https://github.com/tusen-ai/naive-ui/issues/3467).
+- Fix `n-date-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
+- Fix `n-time-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
 
 ### Feats
 

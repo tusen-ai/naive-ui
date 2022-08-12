@@ -741,8 +741,8 @@ export default defineComponent({
         self: { iconColor, iconColorDisabled }
       } = themeRef.value
       return {
-        '--n-icon-color': iconColor,
-        '--n-icon-color-disabled': iconColorDisabled,
+        '--n-icon-color-override': iconColor,
+        '--n-icon-color-disabled-override': iconColorDisabled,
         '--n-bezier': cubicBezierEaseInOut
       }
     })
