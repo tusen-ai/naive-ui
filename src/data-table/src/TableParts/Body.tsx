@@ -666,9 +666,7 @@ export default defineComponent({
                     >
                       <div
                         class={`${mergedClsPrefix}-data-table-expand`}
-                        style={{
-                          width: bodyWidthRef ? `${bodyWidthRef}px` : undefined
-                        }}
+                        style={{ width: `${bodyWidthRef!}px` }}
                       >
                         {renderExpand!(rawNode, actualRowIndex)}
                       </div>
