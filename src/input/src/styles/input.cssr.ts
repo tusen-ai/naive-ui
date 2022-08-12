@@ -85,7 +85,10 @@ export default cB('input', `
       height: 0;
       display: none;
     `),
-    c('&::placeholder', 'color: #0000;'),
+    c('&::placeholder', `
+      color: #0000;
+      -webkit-text-fill-color: transparent !important;
+    `),
     c('&:-webkit-autofill ~', [
       cE('placeholder', 'display: none;')
     ])

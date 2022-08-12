@@ -19,6 +19,7 @@
 - Fix `n-carousel` in `loop='true'` and `effect='slide'`, When there are only two elements, the transition switching effect of the rotation is opposite, closes [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
 - Fix `n-input` can't input value after compositing is interrupted by rerender, closes [#3503](https://github.com/tusen-ai/naive-ui/issues/3503).
 - Fix `n-layout`'s `embedded` prop not working after `n-config-provider` has set `inline-theme-disabled`, closes [#3500](https://github.com/tusen-ai/naive-ui/issues/3500).
+- Fix `n-input` has duplicate placeholder if disabled, closes [#3467](https://github.com/tusen-ai/naive-ui/issues/3467).
 
 ### Feats
 
