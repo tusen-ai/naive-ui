@@ -11,6 +11,7 @@
 - Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
 - Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
 - Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
+- Fix `n-tag` pointer should be not allow when disabled, closes [#3494](https://github.com/tusen-ai/naive-ui/issues/3494).
 - Fix `n-transfer` throws error if value has no corresponding option, closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406).
 - Added `exports` field in package.json.
 - Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
