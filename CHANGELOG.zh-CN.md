@@ -31,6 +31,7 @@
 - `n-thing` 新增 `description-style` 属性
 - `n-data-table` 列属性新增 `renderExpandIcon`属性
 - `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
+- `n-tree` 新增 `disabled-field` 属性
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `trigger-quick-jump-on` 属性，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
 - `n-pagination` 新增 `simple` 属性

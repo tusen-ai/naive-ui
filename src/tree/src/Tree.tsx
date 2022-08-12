@@ -71,7 +71,8 @@ const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export function createTreeMateOptions<T> (
   keyField: string,
-  childrenField: string
+  childrenField: string,
+  disabledField: string
 ): TreeMateOptions<T, T, T> {
   return {
     getIsGroup () {
@@ -84,7 +85,7 @@ export function createTreeMateOptions<T> (
       return (node as any)[childrenField]
     },
     getDisabled (node: T) {
-      return !!((node as any).disabled || (node as any).checkboxDisabled)
+      return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
     }
   }
 }
@@ -115,6 +116,10 @@ export const treeSharedProps = {
   childrenField: {
     type: String,
     default: 'children'
+  },
+  disabledField: {
+    type: String,
+    default: 'disabled'
   },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
@@ -333,7 +338,11 @@ export default defineComponent({
         props.showIrrelevantNodes
           ? props.data
           : filteredTreeInfoRef.value.filteredTree,
-        createTreeMateOptions(props.keyField, props.childrenField)
+        createTreeMateOptions(
+          props.keyField,
+          props.childrenField,
+          props.disabledField
+        )
       )
     )
     const treeSelectInjection = inject(treeSelectInjectionKey, null)
