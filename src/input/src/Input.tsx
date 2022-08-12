@@ -16,7 +16,8 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   Fragment,
-  VNode
+  VNode,
+  VNodeChild
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -121,6 +122,7 @@ export const inputProps = {
     default: undefined
   },
   allowInput: Function as PropType<(value: string) => boolean>,
+  renderCount: Function as PropType<(props: { value: string }) => VNodeChild>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -445,6 +447,9 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      if (e instanceof InputEvent && !e.isComposing) {
+        isComposingRef.value = false
+      }
       if (props.type === 'textarea') {
         const { value: textareaScrollbarInst } = textareaScrollbarInstRef
         if (textareaScrollbarInst) {
@@ -1310,7 +1315,15 @@ export default defineComponent({
         ) : null}
         {this.showCount && type === 'textarea' ? (
           <WordCount>
-            {{ default: (props: unknown) => $slots.count?.(props) }}
+            {{
+              default: (props: unknown) => {
+                const { renderCount } = this
+                if (renderCount) {
+                  return renderCount(props as { value: string })
+                }
+                $slots.count?.(props)
+              }
+            }}
           </WordCount>
         ) : null}
       </div>

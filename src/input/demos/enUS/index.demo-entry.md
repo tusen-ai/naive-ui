@@ -45,6 +45,7 @@ pattern.vue
 | passively-activated | `boolean` | `false` | Whether to passively activate the input. |  |
 | placeholder | `string \| [string, string]` | `undefined` | Placeholder of input. When `pair` is `true`, this is an array. |  |
 | readonly | `boolean` | `false` | Set the readonly state. |  |
+| render-count | `(props: { value: string }) => void` | `undefined` | Render function of word count. | NEXT_VERSION |
 | round | `boolean` | `false` | Use a rounded input style. |  |
 | rows | `number` | `3` | Rows property for when the input is of type `textarea`. |  |
 | separator | `string` | `undefined` | The separator between pairwise inputs. |  |
@@ -66,7 +67,7 @@ pattern.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | clear-icon | `()` | Custom clear icon. | 2.29.0 |
-| count | `(value: string)` | Word count. |  |
+| count | `(props: { value: string })` | Word count. |  |
 | password-invisible-icon | `()` | Password toggle icon when password is invisible. | 2.27.0 |
 | password-visible-icon | `()` | Password toggle icon when password is visible. | 2.27.0 |
 | prefix | `()` | Prefix content slot. |  |

@@ -25,6 +25,7 @@ status.vue
 pattern.vue
 rtl-debug.vue
 prefix-debug.vue
+modal-debug.vue
 ```
 
 ## API
@@ -47,6 +48,7 @@ prefix-debug.vue
 | passively-activated | `boolean` | `false` | 是否被动激活输入框 |  |
 | placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果 `pair` 是 `true`，`placeholder`是一个数组 |  |
 | readonly | `boolean` | `false` | 是否只读 |  |
+| render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | NEXT_VERSION |
 | round | `boolean` | `false` | 输入框是否圆角 |  |
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |  |
 | separator | `string` | `undefined` | 成对输入框中间的分隔符 |  |
@@ -68,7 +70,7 @@ prefix-debug.vue
 | 属性 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | clear-icon | `()` | 自定义清除图标 | 2.29.0 |
-| count | `(value: string)` | 字数统计 |  |
+| count | `(props: { value: string })` | 字数统计 |  |
 | password-invisible-icon | `()` | 密码关闭时的密码开关图标 | 2.27.0 |
 | password-visible-icon | `()` | 密码显示时的密码开关图标 | 2.27.0 |
 | prefix | `()` | 输入框头部内容 |  |

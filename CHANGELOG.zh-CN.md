@@ -16,7 +16,7 @@
 - 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
 - 修复部分组件在 open 模式的 shadow DOM 内运行不正常，关闭 [#3281](https://github.com/TuSimple/naive-ui/issues/3281)
 - 修复 `n-carousel` 在 `loop='true'` 和 `effect='slide'` 下，只有两个元素时轮播过渡切换效果相反，关闭 [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
-- Fix `n-input-number` type for `size` was missing `tiny`
+- 修复 `n-input` 在中文输入过程中如果被重渲染打断可能无法输入，关闭 [#3503](https://github.com/tusen-ai/naive-ui/issues/3503)
 
 ### Feats
 
@@ -37,6 +37,8 @@
 - `n-cascader` 新增 `arrow` 插槽，关闭 [#3459](https://github.com/TuSimple/naive-ui/issues/3459)
 - `n-list` 支持 RTL
 - `n-drawer` 支持 RTL
+- `n-input` 新增 `render-count` 属性
+- `n-input-number` 的 `size` 属性支持 `'tiny'`
 
 ## 2.32.1
 
