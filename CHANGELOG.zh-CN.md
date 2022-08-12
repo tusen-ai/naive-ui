@@ -17,6 +17,7 @@
 - 修复部分组件在 open 模式的 shadow DOM 内运行不正常，关闭 [#3281](https://github.com/TuSimple/naive-ui/issues/3281)
 - 修复 `n-carousel` 在 `loop='true'` 和 `effect='slide'` 下，只有两个元素时轮播过渡切换效果相反，关闭 [#3414](https://github.com/TuSimple/naive-ui/issues/3413)
 - 修复 `n-input` 在中文输入过程中如果被重渲染打断可能无法输入，关闭 [#3503](https://github.com/tusen-ai/naive-ui/issues/3503)
+- 修复 `n-layout` 的 `embedded` 属性在 `n-config-provider` 设置 `inline-theme-disabled` 后不生效，关闭 [#3500](https://github.com/tusen-ai/naive-ui/issues/3500)
 
 ### Feats
 
