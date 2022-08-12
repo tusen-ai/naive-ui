@@ -43,6 +43,7 @@
 - `n-drawer` supports RTL.
 - `n-input` adds `render-count` prop.
 - `n-input-number`'s `size` supports `'tiny'`.
+- `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
 
 ## 2.32.1
 

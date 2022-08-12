@@ -834,6 +834,7 @@ export default defineComponent({
           iconColorDisabled,
           suffixTextColor,
           countTextColor,
+          countTextColorDisabled,
           iconColorHover,
           iconColorPressed,
           loadingColor,
@@ -848,6 +849,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-count-text-color': countTextColor,
+        '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,
         '--n-font-size': fontSize,
         '--n-border-radius': borderRadius,
