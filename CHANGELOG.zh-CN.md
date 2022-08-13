@@ -21,6 +21,7 @@
 - 修复 `n-input` 在禁用状态下有两层 placeholder，关闭 [#3467](https://github.com/tusen-ai/naive-ui/issues/3467)
 - 修复 `n-date-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
 - 修复 `n-time-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
+- 修复 `n-select` 的 `node-props` 属性不生效
 
 ### Feats
 

@@ -23,6 +23,7 @@
 - Fix `n-input` has duplicate placeholder if disabled, closes [#3467](https://github.com/tusen-ai/naive-ui/issues/3467).
 - Fix `n-date-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
 - Fix `n-time-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
+- Fix `n-select`'s `node-props` prop doesn't work.
 
 ### Feats
 
