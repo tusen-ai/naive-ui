@@ -24,6 +24,7 @@
 - 修复 `n-select` 的 `node-props` 属性不生效
 - 修复 Nuxt 的 `CSSRender is not a function` 报错，关闭 [#3506](https://github.com/tusen-ai/naive-ui/issues/3506)
 - 修复 `n-data-table` 用 `column.expandable` 禁用展开后依然可以渲染展开的行，关闭 [#3373](https://github.com/tusen-ai/naive-ui/issues/3373)
+- 修复 `n-input-number` 快速点击按钮可能触发变化无限循环，关闭 [#3329](https://github.com/tusen-ai/naive-ui/issues/3329)
 
 ### Feats
 
