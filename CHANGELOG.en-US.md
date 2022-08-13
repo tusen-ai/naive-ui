@@ -24,6 +24,7 @@
 - Fix `n-date-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
 - Fix `n-time-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
 - Fix `n-select`'s `node-props` prop doesn't work.
+- Fix Nuxt report `CSSRender is not a function` error on preview, closes [#3506](https://github.com/tusen-ai/naive-ui/issues/3506).
 
 ### Feats
 

@@ -22,6 +22,7 @@
 - 修复 `n-date-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
 - 修复 `n-time-picker` 的 `iconColor` 主题变量不生效，关闭 [#3501](https://github.com/tusen-ai/naive-ui/issues/3501)
 - 修复 `n-select` 的 `node-props` 属性不生效
+- 修复 Nuxt 的 `CSSRender is not a function` 报错，关闭 [#3506](https://github.com/tusen-ai/naive-ui/issues/3506)
 
 ### Feats
 
