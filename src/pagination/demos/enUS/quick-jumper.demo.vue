@@ -5,7 +5,7 @@ You can customize the content to jump to (press `Enter` to jump quickly).
 </markdown>
 
 <template>
-  <n-space>
+  <n-space vertical>
     <n-pagination :page-count="100" show-quick-jumper>
       <template #goto>
         Go!

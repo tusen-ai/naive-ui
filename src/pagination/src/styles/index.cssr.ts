@@ -162,17 +162,15 @@ export default cB('pagination', `
       color: var(--n-jumper-text-color-disabled);
     `)
   ]),
-  cB('pagination-simple', `
+  cM('simple', `
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
   `, [
     cB('pagination-quick-jumper', [
       cB('input', `
         margin: 0;
       `)
-    ]),
-    cB('pagination-simple-slash', `
-      margin: 0 10px;
-    `)
+    ])
   ])
 ])

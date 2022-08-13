@@ -18,6 +18,7 @@ item-count.vue
 prev.vue
 prefix.vue
 page-size-option.vue
+display-order.vue
 rtl-debug.vue
 ```
 
@@ -30,6 +31,7 @@ rtl-debug.vue
 | default-page | `number` | `1` | 非受控模式下的当前页 |  |
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | 不同部分的展示顺序 | NEXT_VERSION |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | input 出发自动跳转的时机 | NEXT_VERSION |

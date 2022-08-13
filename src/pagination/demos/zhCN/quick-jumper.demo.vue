@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-space>
+  <n-space vertical>
     <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
       <template #goto>
         请回答

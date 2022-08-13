@@ -29,6 +29,7 @@ page-size-option.vue
 | default-page | `number` | `1` | Current page in uncontrolled mode. |  |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
+| display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | NEXT_VERSION |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | Quick jump trigger event of input. | NEXT_VERSION |
