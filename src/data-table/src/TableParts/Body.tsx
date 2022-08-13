@@ -27,7 +27,8 @@ import {
   ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode
+  TmNode,
+  Expandable
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -64,12 +65,17 @@ type RowRenderInfo =
 
 function flatten (
   rowInfos: NormalRowRenderInfo[],
-  expandedRowKeys: Set<RowKey>
+  expandedRowKeys: Set<RowKey>,
+  expandable: Expandable<any> | undefined
 ): NormalRowRenderInfo[] {
   const fRows: NormalRowRenderInfo[] = []
   function traverse (rs: TmNode[], rootIndex: number): void {
     rs.forEach((r) => {
-      if (r.children && expandedRowKeys.has(r.key)) {
+      if (
+        r.children &&
+        expandedRowKeys.has(r.key) &&
+        (!expandable || expandable(r.rawNode))
+      ) {
         fRows.push({
           tmNode: r,
           striped: false,
@@ -178,6 +184,7 @@ export default defineComponent({
       loadingRef,
       onLoadRef,
       loadingKeySetRef,
+      expandableRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -471,6 +478,7 @@ export default defineComponent({
       rowProps: rowPropsRef,
       maxHeight: maxHeightRef,
       loadingKeySet: loadingKeySetRef,
+      expandable: expandableRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -568,7 +576,7 @@ export default defineComponent({
             const { data: paginatedData, hasChildren } = paginatedDataAndInfo
 
             const mergedPaginationData = hasChildren
-              ? flatten(paginatedData, mergedExpandedRowKeySet)
+              ? flatten(paginatedData, mergedExpandedRowKeySet, this.expandable)
               : paginatedData
 
             if (summary) {
@@ -783,16 +791,14 @@ export default defineComponent({
                             `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
                           column.align &&
                             `${mergedClsPrefix}-data-table-td--${column.align}-align`,
-                          {
-                            [`${mergedClsPrefix}-data-table-td--selection`]:
-                              column.type === 'selection',
-                            [`${mergedClsPrefix}-data-table-td--expand`]:
-                              column.type === 'expand',
-                            [`${mergedClsPrefix}-data-table-td--last-col`]:
-                              isLastCol,
-                            [`${mergedClsPrefix}-data-table-td--last-row`]:
-                              isLastRow
-                          }
+                          column.type === 'selection' &&
+                            `${mergedClsPrefix}-data-table-td--selection`,
+                          column.type === 'expand' &&
+                            `${mergedClsPrefix}-data-table-td--expand`,
+                          isLastCol &&
+                            `${mergedClsPrefix}-data-table-td--last-col`,
+                          isLastRow &&
+                            `${mergedClsPrefix}-data-table-td--last-row`
                         ]}
                       >
                         {hasChildren && colIndex === childTriggerColIndex

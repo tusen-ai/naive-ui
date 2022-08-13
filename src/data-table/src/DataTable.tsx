@@ -289,6 +289,7 @@ export default defineComponent({
     const {
       mergedExpandedRowKeysRef,
       renderExpandRef,
+      expandableRef,
       doUpdateExpandedRowKeys
     } = useExpand(props, treeMateRef)
     const {
@@ -359,6 +360,7 @@ export default defineComponent({
       mergedInderminateRowKeySetRef,
       localeRef,
       scrollPartRef,
+      expandableRef,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),

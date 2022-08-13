@@ -223,6 +223,7 @@ export interface DataTableInjection {
   onLoadRef: Ref<DataTableOnLoad | undefined>
   loadingKeySetRef: Ref<Set<RowKey>>
   paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
+  expandableRef: Ref<Expandable<any> | undefined>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void

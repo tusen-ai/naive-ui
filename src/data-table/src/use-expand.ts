@@ -23,21 +23,25 @@ export function useExpand (
       }
     }
   })
-  // It's not reactive
-  let expandable: Expandable<any> | undefined
-  for (const col of props.columns) {
-    if (col.type === 'expand') {
-      expandable = col.expandable
-      break
+  const expandableRef = useMemo(() => {
+    // It's not reactive
+    let expandable: Expandable<any> | undefined
+    for (const col of props.columns) {
+      if (col.type === 'expand') {
+        expandable = col.expandable
+        break
+      }
     }
-  }
+    return expandable
+  })
+
   const uncontrolledExpandedRowKeysRef = ref(
     props.defaultExpandAll
       ? renderExpandRef?.value
         ? (() => {
             const expandedKeys: RowKey[] = []
             treeMateRef.value.treeNodes.forEach((tmNode) => {
-              if (expandable?.(tmNode.rawNode)) {
+              if (expandableRef.value?.(tmNode.rawNode)) {
                 expandedKeys.push(tmNode.key)
               }
             })
@@ -67,6 +71,7 @@ export function useExpand (
   return {
     mergedExpandedRowKeysRef,
     renderExpandRef,
+    expandableRef,
     doUpdateExpandedRowKeys
   }
 }

@@ -49,6 +49,7 @@
 - `n-input-number`'s `size` supports `'tiny'`.
 - `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
+- Fix `n-data-table`'s rows disabled by `column.expandable` can still be expanded, closes [#3373](https://github.com/tusen-ai/naive-ui/issues/3373).
 
 ## 2.32.1
 
