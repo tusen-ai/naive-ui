@@ -91,3 +91,11 @@ checkbox-placement.vue
 | isLeaf? | `boolean` | Whether the node is leaf. Required in async expanding mode. |
 | prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
 | suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |
+
+## Methods
+
+### Tree Methods
+
+| Name | Paramaters | Description | Version |
+| --- | --- | --- | --- |
+| scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | NEXT_VERSION |

@@ -46,6 +46,7 @@
 - `n-input` 新增 `render-count` 属性
 - `n-input-number` 的 `size` 属性支持 `'tiny'`
 - `n-input` 新增 `countTextColorDisabled` 主题变量，关闭 [#3481](https://github.com/tusen-ai/naive-ui/issues/3481)
+- `n-tree` 新增 `scrollTo` 方法，关闭 [#3480](https://github.com/tusen-ai/naive-ui/issues/3480)
 
 ## 2.32.1
 

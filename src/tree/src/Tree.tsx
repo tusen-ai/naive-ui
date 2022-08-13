@@ -55,7 +55,8 @@ import type {
   RenderSuffix,
   RenderSwitcherIcon,
   TreeNodeProps,
-  CheckOnClick
+  CheckOnClick,
+  TreeInst
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -1316,8 +1317,12 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    const exposedMethods: InternalTreeInst = {
-      handleKeydown
+    function scrollTo (options: { key: Key }): void {
+      virtualListInstRef.value?.scrollTo(options)
+    }
+    const exposedMethods: InternalTreeInst & TreeInst = {
+      handleKeydown,
+      scrollTo
     }
     const cssVarsRef = computed(() => {
       const {
@@ -1369,6 +1374,7 @@ export default defineComponent({
       handleAfterEnter,
       handleResize,
       handleKeydown: exposedMethods.handleKeydown,
+      scrollTo: exposedMethods.scrollTo,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender

@@ -97,3 +97,11 @@ expand-debug.vue
 | isLeaf? | `boolean` | 节点是否是叶节点，在异步展开状态下是必须的 |
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
+
+## Methods
+
+### Tree Methods
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | NEXT_VERSION |
