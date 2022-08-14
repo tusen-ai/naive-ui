@@ -56,6 +56,7 @@ checkbox-placement.vue
 | keyboard | `boolean` | `true` | Whether to support keyboard operation. | NEXT_VERSION |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |
+| disabled-field | `string` | `'disabled'` | The disabled field in `TreeOption`. | NEXT_VERSION |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |

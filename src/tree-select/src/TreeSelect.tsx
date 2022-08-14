@@ -221,7 +221,11 @@ export default defineComponent({
     const dataTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         props.options,
-        createTreeMateOptions(props.keyField, props.childrenField)
+        createTreeMateOptions(
+          props.keyField,
+          props.childrenField,
+          props.disabledField
+        )
       )
     )
     const { value: initMergedValue } = mergedValueRef
@@ -813,6 +817,7 @@ export default defineComponent({
                                 cancelable={multiple}
                                 labelField={this.labelField}
                                 keyField={this.keyField}
+                                disabledField={this.disabledField}
                                 childrenField={this.childrenField}
                                 theme={mergedTheme.peers.Tree}
                                 themeOverrides={mergedTheme.peerOverrides.Tree}
