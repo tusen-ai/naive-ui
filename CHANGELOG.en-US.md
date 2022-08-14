@@ -25,6 +25,8 @@
 - Fix `n-time-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
 - Fix `n-select`'s `node-props` prop doesn't work.
 - Fix Nuxt report `CSSRender is not a function` error on preview, closes [#3506](https://github.com/tusen-ai/naive-ui/issues/3506).
+- Fix `n-data-table`'s rows disabled by `column.expandable` can still be expanded, closes [#3373](https://github.com/tusen-ai/naive-ui/issues/3373).
+- Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
 
 ### Feats
 
@@ -51,9 +53,8 @@
 - `n-input-number`'s `size` supports `'tiny'`.
 - `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
-- Fix `n-data-table`'s rows disabled by `column.expandable` can still be expanded, closes [#3373](https://github.com/tusen-ai/naive-ui/issues/3373).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
-- Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
+- `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
 
 ## 2.32.1
 
