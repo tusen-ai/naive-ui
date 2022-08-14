@@ -57,4 +57,12 @@ describe('n-transfer', () => {
     const wrapper = mount(NTransfer, { props: { targetTitle: test } })
     expect(wrapper.find('.n-transfer-list-header__title').text()).toBe(test)
   })
+
+  it('should work with `source-filter-placeholder` prop', async () => {
+    const test = 'source-filter-placeholder-test'
+    const wrapper = mount(NTransfer, {
+      props: { filterable: true, sourceFilterPlaceholder: test }
+    })
+    expect(wrapper.find('.n-input__placeholder').text()).toBe(test)
+  })
 })
