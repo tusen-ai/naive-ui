@@ -180,6 +180,7 @@ export default defineComponent({
       onLoadRef,
       loadingKeySetRef,
       expandableRef,
+      expandedRowRemainStickyRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -475,6 +476,7 @@ export default defineComponent({
       maxHeight: maxHeightRef,
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
+      expandedRowRemainSticky: expandedRowRemainStickyRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -553,6 +555,7 @@ export default defineComponent({
               rowClassName,
               mergedSortState,
               mergedExpandedRowKeySet,
+              expandedRowRemainSticky,
               componentId,
               childTriggerColIndex,
               expandable,
@@ -664,12 +667,16 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      <div
-                        class={`${mergedClsPrefix}-data-table-expand`}
-                        style={{ width: `${bodyWidthRef!}px` }}
-                      >
-                        {renderExpand!(rawNode, actualRowIndex)}
-                      </div>
+                      {expandedRowRemainSticky ? (
+                        <div
+                          class={`${mergedClsPrefix}-data-table-expand`}
+                          style={{ width: `${bodyWidthRef!}px` }}
+                        >
+                          {renderExpand!(rawNode, actualRowIndex)}
+                        </div>
+                      ) : (
+                        renderExpand!(rawNode, actualRowIndex)
+                      )}
                     </td>
                   </tr>
                 )
