@@ -1,7 +1,6 @@
 import {
   h,
   defineComponent,
-  Fragment,
   ref,
   withDirectives,
   Transition,
@@ -12,7 +11,8 @@ import {
   PropType,
   toRef,
   onBeforeUnmount,
-  VNode
+  VNode,
+  ImgHTMLAttributes
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -47,6 +47,7 @@ export default defineComponent({
   name: 'ImagePreview',
   props: {
     ...imagePreviewSharedProps,
+    imgProps: Object as PropType<ImgHTMLAttributes>,
     onNext: Function as PropType<() => void>,
     onPrev: Function as PropType<() => void>,
     clsPrefix: {
@@ -448,7 +449,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, imgProps } = this
     return (
       <>
         {this.$slots.default?.()}
@@ -605,6 +606,7 @@ export default defineComponent({
                               src={this.previewSrc}
                               ref="previewRef"
                               onDragstart={this.handleDragStart}
+                              {...imgProps}
                             />
                           </div>,
                           [[vShow, this.show]]
