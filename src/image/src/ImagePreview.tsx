@@ -1,6 +1,7 @@
 import {
   h,
   defineComponent,
+  Fragment,
   ref,
   withDirectives,
   Transition,
