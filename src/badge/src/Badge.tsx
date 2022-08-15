@@ -24,6 +24,12 @@ import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
 
+export type BadgePlacement =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+
 export const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
   value: [String, Number] as PropType<string | number>,
@@ -41,6 +47,10 @@ export const badgeProps = {
   },
   showZero: Boolean,
   processing: Boolean,
+  placement: {
+    type: String as PropType<BadgePlacement>,
+    default: 'top-right'
+  },
   color: String
 } as const
 
@@ -129,7 +139,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, onRender, themeClass, $slots } = this
+    const { mergedClsPrefix, onRender, themeClass, placement, $slots } = this
     onRender?.()
     const children = $slots.default?.()
     return (
@@ -154,8 +164,11 @@ export default defineComponent({
           {{
             default: () =>
               this.showBadge ? (
-                <sup
-                  class={`${mergedClsPrefix}-badge-sup`}
+                <span
+                  class={[
+                    `${mergedClsPrefix}-badge-content`,
+                    `${mergedClsPrefix}-badge-content--${placement}`
+                  ]}
                   title={getTitleAttribute(this.value)}
                 >
                   {resolveSlot($slots.value, () => [
@@ -171,7 +184,7 @@ export default defineComponent({
                   {this.processing ? (
                     <NBaseWave clsPrefix={mergedClsPrefix} />
                   ) : null}
-                </sup>
+                </span>
               ) : null
           }}
         </Transition>

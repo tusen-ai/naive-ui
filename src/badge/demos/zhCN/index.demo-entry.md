@@ -14,6 +14,7 @@ manual.vue
 custom-content.vue
 color.vue
 raw.vue
+placement.vue
 rtl-debug.vue
 ```
 
@@ -21,16 +22,27 @@ rtl-debug.vue
 
 ### Badge Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| color | `string` | `undefined` | 标记的颜色 |
-| dot | `boolean` | `false` | 标记是否显示为点 |
-| max | `number` | `undefined` | 标记最大数来处理溢出情况 |
-| processing | `boolean` | `false` | 标记显示进度 |
-| show-zero | `boolean` | `false` | 标记为 0 时是否显示 |
-| show | `boolean` | `true` | 标记受控显示 |
-| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |
-| value | `string \| number` | `undefined` | 标记数量 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| color | `string` | `undefined` | 标记的颜色 |  |
+| dot | `boolean` | `false` | 标记是否显示为点 |  |
+| max | `number` | `undefined` | 标记最大数来处理溢出情况 |  |
+| processing | `boolean` | `false` | 标记显示进度 |  |
+| placement | `BadgePlacement` | `'top-right'` | 标记的位置 | NEXT_VERSION |
+| show-zero | `boolean` | `false` | 标记为 0 时是否显示 |  |
+| show | `boolean` | `true` | 标记受控显示 |  |
+| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |  |
+| value | `string \| number` | `undefined` | 标记数量 |  |
+
+#### BadgePlacement Type
+
+```ts
+export type BadgePlacement =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+```
 
 ### Badge Slots
 
