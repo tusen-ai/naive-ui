@@ -13,6 +13,7 @@ custom.vue
 tooltip.vue
 full-debug.vue
 lazy.vue
+img-props.vue
 ```
 
 ## API
@@ -24,7 +25,7 @@ lazy.vue
 | alt | `string` | `undefined` | 图片说明 |  |
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
-| img-props | `object` | `undefined` | 组件中 img 元素的属性 |  |
+| img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 |  |
 | lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 图片在容器内的的适应类型 |  |
