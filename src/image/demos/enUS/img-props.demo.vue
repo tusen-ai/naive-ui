@@ -1,7 +1,7 @@
 <markdown>
 # Image Props
 
-You can set e.g. `aspect-ratio` or `referrerpolicy` via `:img-props`
+You can set e.g. `aspect-ratio` via `:img-props`
 </markdown>
 
 <template>
@@ -9,8 +9,7 @@ You can set e.g. `aspect-ratio` or `referrerpolicy` via `:img-props`
     width="100"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
     :img-props="{
-      style: { 'aspect-ratio': '16 / 9' },
-      referrerpolicy: 'no-referrer'
+      style: { 'aspect-ratio': '16 / 9' }
     }"
   />
 </template>
