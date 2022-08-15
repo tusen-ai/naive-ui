@@ -6,11 +6,11 @@
 
 - Fix `n-drawer`'s warning when using `string` in `default-height` prop, closes [#3377](https://github.com/TuSimple/naive-ui/issues/3377).
 - Fix `n-transfer`'s `on-update:value` is not triggered when uncheck options, closes [#3393](https://github.com/TuSimple/naive-ui/issues/3393).
-- Fix `n-image`'s `img-props` is not applied to `n-image-preview`.
 
 ### Feats
 
 - `n-steps` supports RTL.
+- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.0
 

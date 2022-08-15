@@ -11,6 +11,7 @@
 ### Feats
 
 - `n-steps` 支持 RTL
+- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.0
 
