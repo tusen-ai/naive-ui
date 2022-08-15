@@ -74,7 +74,7 @@ export function useTransferData (props: UseTransferDataProps) {
     const mergedValueSet = mergedValueSetRef.value
     const values: Array<string | number> = []
     filteredSrcOptionsRef.value.forEach((option) => {
-      if (!option.disabled || !mergedValueSet.has(option.value)) {
+      if (!option.disabled && !mergedValueSet.has(option.value)) {
         values.push(option.value)
       }
     })
@@ -83,7 +83,7 @@ export function useTransferData (props: UseTransferDataProps) {
 
   const valueSetForUnselectAllRef = computed(() => {
     const values: Array<string | number> = []
-    targetOptionsRef.value.forEach((option) => {
+    filteredSrcOptionsRef.value.forEach((option) => {
       if (!option.disabled) {
         values.push(option.value)
       }
