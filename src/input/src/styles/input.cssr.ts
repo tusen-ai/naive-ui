@@ -225,7 +225,6 @@ export default cB('input', `
       cursor: not-allowed;
       color: var(--n-text-color-disabled);
       text-decoration-color: var(--n-text-color-disabled);
-      -webkit-text-fill-color: var(--n-text-color-disabled);
     `),
     cE('placeholder', 'color: var(--n-placeholder-color-disabled);'),
     cE('separator', 'color: var(--n-text-color-disabled);', [
@@ -376,4 +375,12 @@ export default cB('input', `
       ])
     ])
   ]))
+])
+
+export const safariStyle = cB('input', [
+  cM('disabled', [
+    cE('input-el, textarea-el', `
+      -webkit-text-fill-color: var(--n-text-color-disabled);
+    `)
+  ])
 ])

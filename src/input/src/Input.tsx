@@ -23,6 +23,7 @@ import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
+import { isSafari } from '../../_utils/env/browser'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -38,7 +39,8 @@ import {
   useLocale,
   useFormItem,
   useConfig,
-  useThemeClass
+  useThemeClass,
+  useStyle
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -61,7 +63,7 @@ import type {
 import { inputInjectionKey } from './interface'
 import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
-import style from './styles/input.cssr'
+import style, { safariStyle } from './styles/input.cssr'
 
 export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -192,6 +194,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    if (isSafari) {
+      useStyle('-input-safari', safariStyle, mergedClsPrefixRef)
+    }
     // dom refs
     const wrapperElRef = ref<HTMLElement | null>(null)
     const textareaElRef = ref<HTMLTextAreaElement | null>(null)

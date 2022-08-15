@@ -430,4 +430,26 @@ describe('n-menu', () => {
     })
     expect(wrapper.findAll('.n-menu-item-content').length).toBe(2)
   })
+
+  it('should work submenu extra', async () => {
+    const options: MenuOption[] = [
+      {
+        label: 'fantasy',
+        key: 'fantasy',
+        extra: 'bar',
+        children: [
+          {
+            label: 'foo',
+            key: 'foo'
+          }
+        ]
+      }
+    ]
+    const wrapper = mount(NMenu, {
+      props: {
+        options
+      }
+    })
+    expect(wrapper.html()).toContain('bar')
+  })
 })

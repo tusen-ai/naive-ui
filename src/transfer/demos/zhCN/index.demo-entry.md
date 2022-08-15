@@ -13,6 +13,7 @@ filterable.vue
 render-label.vue
 render-source-list.vue
 asynchronous-options-debug.vue
+value-debug.vue
 ```
 
 ## API

@@ -24,6 +24,7 @@ status.vue
 custom-icon.vue
 debug.vue
 rtl-debug.vue
+theme-debug.vue
 ```
 
 ## API

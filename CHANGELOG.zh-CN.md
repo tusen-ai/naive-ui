@@ -10,7 +10,7 @@
 - 在 package.json 中新增 `exports` 字段
 - 修复 `n-dropdown` 选项 prefix & suffix 的 z-index，关闭 [#3433](https://github.com/TuSimple/naive-ui/issues/3433)
 - 修复 `n-input-number` 中配置 peers 主题不生效，关闭 [#3422](https://github.com/TuSimple/naive-ui/issues/3422)
-- 修复 `n-tag` 当 tag 为 disabled 时，pointer 应该为 not allow, 关闭 [#3494](https://github.com/tusen-ai/naive-ui/issues/3494)
+- 修复 `n-tag` 当 tag 为 disabled 时，pointer 应该为 not allow，关闭 [#3494](https://github.com/tusen-ai/naive-ui/issues/3494)
 - 修复 `n-transfer` 中初始值不在选项列表报错，关闭 [#3406](https://github.com/TuSimple/naive-ui/issues/3406)
 - 修复 `n-data-table` column `onSelect` 的类型，关闭 [#3430](https://github.com/TuSimple/naive-ui/issues/3430)
 - 修复 `n-pagination` 的快速跳转在失焦时不会触发，关闭 [#3387](https://github.com/TuSimple/naive-ui/issues/3387)
