@@ -198,6 +198,7 @@ export default defineComponent({
             ref="previewInstRef"
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
+            imgProps={this.imgProps}
           >
             {{
               default: () => imgNode
