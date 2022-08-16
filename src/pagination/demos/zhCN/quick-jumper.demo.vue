@@ -11,12 +11,7 @@
         请回答
       </template>
     </n-pagination>
-    <n-pagination
-      v-model:page="page"
-      :page-count="100"
-      :input-trigger-quick-jump-on="['change', 'blur']"
-      show-quick-jumper
-    >
+    <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
       <template #goto>
         请回答
       </template>

@@ -27,8 +27,7 @@ import {
   ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode,
-  Expandable
+  TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -65,17 +64,12 @@ type RowRenderInfo =
 
 function flatten (
   rowInfos: NormalRowRenderInfo[],
-  expandedRowKeys: Set<RowKey>,
-  expandable: Expandable<any> | undefined
+  expandedRowKeys: Set<RowKey>
 ): NormalRowRenderInfo[] {
   const fRows: NormalRowRenderInfo[] = []
   function traverse (rs: TmNode[], rootIndex: number): void {
     rs.forEach((r) => {
-      if (
-        r.children &&
-        expandedRowKeys.has(r.key) &&
-        (!expandable || expandable(r.rawNode))
-      ) {
+      if (r.children && expandedRowKeys.has(r.key)) {
         fRows.push({
           tmNode: r,
           striped: false,
@@ -558,6 +552,7 @@ export default defineComponent({
               mergedExpandedRowKeySet,
               componentId,
               childTriggerColIndex,
+              expandable,
               rowProps,
               handleMouseenterTable,
               handleMouseleaveTable,
@@ -576,7 +571,7 @@ export default defineComponent({
             const { data: paginatedData, hasChildren } = paginatedDataAndInfo
 
             const mergedPaginationData = hasChildren
-              ? flatten(paginatedData, mergedExpandedRowKeySet, this.expandable)
+              ? flatten(paginatedData, mergedExpandedRowKeySet)
               : paginatedData
 
             if (summary) {
@@ -619,7 +614,11 @@ export default defineComponent({
             // Tile the data of the expanded row
             const displayedData: RowRenderInfo[] = []
             mergedData.forEach((rowInfo) => {
-              if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
+              if (
+                renderExpand &&
+                mergedExpandedRowKeySet.has(rowInfo.key) &&
+                (!expandable || expandable(rowInfo.tmNode.rawNode))
+              ) {
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
                   key: `${rowInfo.key}-expand`, // solve key repeat of the expanded row

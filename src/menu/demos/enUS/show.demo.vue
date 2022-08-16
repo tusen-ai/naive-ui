@@ -1,17 +1,17 @@
 <markdown>
-# Control option display
+# Control option visibility
 
-In some cases, different characters will see different menus. You can use the `show` prop to hide the menu.
+In some cases, different roles will see different options. You can use the `show` field to control the visibility of menu options.
 </markdown>
 
 <template>
   <n-space vertical>
     <n-switch v-model:value="accordion">
       <template #checked>
-        hidden menu
+        Hide menu
       </template>
       <template #unchecked>
-        show menu
+        Show menu
       </template>
     </n-switch>
     <n-menu :options="options" />

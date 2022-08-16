@@ -32,7 +32,6 @@ page-size-option.vue
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | NEXT_VERSION |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
-| input-trigger-quick-jump-on | `Array<'change' \| 'blur'>` | `['change']` | Quick jump trigger event of input. | NEXT_VERSION |
 | item-count | `number` | `undefined` | Total number. |  |
 | label | `PaginationRenderLabel` | `undefined` | Item content. | 2.24.0 |
 | page-count | `number` | `1` | Total pages. |  |

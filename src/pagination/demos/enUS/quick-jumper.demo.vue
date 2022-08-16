@@ -11,12 +11,7 @@ You can customize the content to jump to (press `Enter` to jump quickly).
         Go!
       </template>
     </n-pagination>
-    <n-pagination
-      v-model:page="page"
-      :page-count="100"
-      show-quick-jumper
-      :input-trigger-quick-jump-on="['change', 'blur']"
-    >
+    <n-pagination v-model:page="page" :page-count="100" show-quick-jumper>
       <template #goto>
         Go!
       </template>

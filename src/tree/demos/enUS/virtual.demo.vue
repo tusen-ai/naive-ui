@@ -10,6 +10,7 @@ Set `virtual-scroll` to use virtual scroll. Note that you should set the height 
       Scroll
     </n-button>
     <n-tree
+      ref="treeInstRef"
       block-line
       :data="data"
       default-expand-all

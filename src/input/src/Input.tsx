@@ -1328,7 +1328,7 @@ export default defineComponent({
                 if (renderCount) {
                   return renderCount(props as { value: string })
                 }
-                $slots.count?.(props)
+                return $slots.count?.(props)
               }
             }}
           </WordCount>

@@ -64,6 +64,7 @@ height-debug
 keep-alive-debug.vue
 ellipsis-debug.vue
 custom-expand-icon.vue
+expandable-debug.vue
 ```
 
 ## API
