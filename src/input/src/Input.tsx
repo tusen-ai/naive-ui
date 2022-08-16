@@ -588,7 +588,7 @@ export default defineComponent({
             const resizeHandleSize = 14
             if (
               left + width - resizeHandleSize < e.clientX &&
-              e.clientY < left + width &&
+              e.clientX < left + width &&
               top + height - resizeHandleSize < e.clientY &&
               e.clientY < top + height
             ) {

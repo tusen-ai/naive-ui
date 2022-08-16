@@ -26,6 +26,7 @@ pattern.vue
 rtl-debug.vue
 prefix-debug.vue
 modal-debug.vue
+textarea-resize-debug.vue
 ```
 
 ## API

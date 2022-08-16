@@ -28,6 +28,7 @@
 - Fix `n-data-table`'s rows disabled by `column.expandable` can still be expanded, closes [#3373](https://github.com/tusen-ai/naive-ui/issues/3373).
 - Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
 - Fix `n-switch` some theme variables can't use non-px value, closes [#2938](https://github.com/tusen-ai/naive-ui/issues/2938).
+- Fix `n-textarea` can't resize in some cases，closes [#3479](https://github.com/tusen-ai/naive-ui/issues/3479)
 
 ### Feats
 
