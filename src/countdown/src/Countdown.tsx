@@ -101,8 +101,8 @@ export default defineComponent({
         distanceRef.value = 0
         stopTimer()
         if (!finished) {
-          props.onFinish?.()
           finished = true
+          props.onFinish?.()
         }
         return
       }
