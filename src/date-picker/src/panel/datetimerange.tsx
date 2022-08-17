@@ -12,6 +12,7 @@ import { NBaseFocusDetector } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 import PanelHeader from './panelHeader'
+import { isPlainObject } from 'lodash'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
@@ -313,7 +314,7 @@ export default defineComponent({
               {shortcuts &&
                 Object.keys(shortcuts).map((key) => {
                   const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
+                  return isPlainObject(shortcut) ||
                     typeof shortcut === 'function' ? (
                     <NxButton
                       size="tiny"

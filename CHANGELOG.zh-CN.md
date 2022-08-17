@@ -53,6 +53,7 @@
 - `n-tree` 新增 `scrollTo` 方法，关闭 [#3480](https://github.com/tusen-ai/naive-ui/issues/3480)
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
+- `n-date-picker` 新增 `multiple` 属性，关闭 [#3357](https://github.com/tusen-ai/naive-ui/issues/3357)，同时这次修改会影响到 `type=daterange` 的 `value` 的格式，由 `[0, 0]` 变成 `{from: 0, to: 0}`
 
 ## 2.32.1
 

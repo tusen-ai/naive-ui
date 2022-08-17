@@ -5,12 +5,16 @@ import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeTimeDisabled,
   IsSingleTimeDisabled,
-  IsSingleDateDisabled
+  IsSingleDateDisabled,
+  Value
 } from './interface'
+import { isNumber } from 'lodash'
+// eslint-disable-next-line import/no-cycle
+import { isRangeValue } from './utils'
 
 export function uniCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: Ref<number | [number, number] | null>
+  mergedValueRef: Ref<Value>
 ) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
@@ -18,7 +22,7 @@ export function uniCalendarValidation (
       isTimeDisabled?: IsSingleTimeDisabled
     }
     const { value } = mergedValueRef
-    if (value === null || Array.isArray(value)) return undefined
+    if (!isNumber(value)) return undefined
     return isTimeDisabled?.(value)
   })
   const isHourDisabledRef = computed(() => {
@@ -36,6 +40,7 @@ export function uniCalendarValidation (
     if (
       value === null ||
       Array.isArray(value) ||
+      isRangeValue(value) ||
       !['date', 'datetime'].includes(type) ||
       !isDateDisabled
     ) {
@@ -46,7 +51,12 @@ export function uniCalendarValidation (
   const isTimeInvalidRef = computed(() => {
     const { type } = props
     const { value } = mergedValueRef
-    if (value === null || !(type !== 'datetime') || Array.isArray(value)) {
+    if (
+      value === null ||
+      !(type !== 'datetime') ||
+      Array.isArray(value) ||
+      isRangeValue(value)
+    ) {
       return false
     }
     const time = new Date(value)
@@ -87,38 +97,39 @@ export function uniCalendarValidation (
 
 export function dualCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: Ref<number | [number, number] | null>
+  mergedValueRef: Ref<Value>
 ) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {
     const { isTimeDisabled } = props as { isTimeDisabled?: IsRangeTimeDisabled }
     const { value } = mergedValueRef
-    if (!Array.isArray(value) || !isTimeDisabled) {
-      return [undefined, undefined]
+    if (!isRangeValue(value) || !isTimeDisabled) {
+      return { from: undefined, to: undefined }
     }
-    return [
-      isTimeDisabled?.(value[0], 'start', value),
-      isTimeDisabled?.(value[1], 'end', value)
-    ]
+    return {
+      from: isTimeDisabled?.(value.from, 'start', value),
+      to: isTimeDisabled?.(value.to, 'end', value)
+    }
   })
+
   const timeValidator = {
     isStartHourDisabledRef: computed(
-      () => timePickerValidatorRef.value[0]?.isHourDisabled
+      () => timePickerValidatorRef.value.from?.isHourDisabled
     ),
     isEndHourDisabledRef: computed(
-      () => timePickerValidatorRef.value[1]?.isHourDisabled
+      () => timePickerValidatorRef.value.to?.isHourDisabled
     ),
     isStartMinuteDisabledRef: computed(
-      () => timePickerValidatorRef.value[0]?.isMinuteDisabled
+      () => timePickerValidatorRef.value.from?.isMinuteDisabled
     ),
     isEndMinuteDisabledRef: computed(
-      () => timePickerValidatorRef.value[1]?.isMinuteDisabled
+      () => timePickerValidatorRef.value.to?.isMinuteDisabled
     ),
     isStartSecondDisabledRef: computed(
-      () => timePickerValidatorRef.value[0]?.isSecondDisabled
+      () => timePickerValidatorRef.value.from?.isSecondDisabled
     ),
     isEndSecondDisabledRef: computed(
-      () => timePickerValidatorRef.value[1]?.isSecondDisabled
+      () => timePickerValidatorRef.value.to?.isSecondDisabled
     )
   }
   const isStartDateInvalidRef = computed(() => {
@@ -126,26 +137,26 @@ export function dualCalendarValidation (
     const { value } = mergedValueRef
     if (
       value === null ||
-      !Array.isArray(value) ||
+      !isRangeValue(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {
       return false
     }
-    return isDateDisabled(value[0], 'start', value)
+    return isDateDisabled(value.from, 'start', value)
   })
   const isEndDateInvalidRef = computed(() => {
     const { type, isDateDisabled } = props
     const { value } = mergedValueRef
     if (
       value === null ||
-      !Array.isArray(value) ||
+      !isRangeValue(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {
       return false
     }
-    return isDateDisabled(value[1], 'end', value)
+    return isDateDisabled(value.to, 'end', value)
   })
   const isStartTimeInvalidRef = computed(() => {
     const { type } = props

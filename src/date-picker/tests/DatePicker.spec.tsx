@@ -11,12 +11,12 @@ describe('n-date-picker', () => {
   })
 
   it('date type should work with shortcuts prop', async () => {
-    const test = ref<[number, number]>([0, 0])
+    const test = ref<number>(0)
     const wrapper = mount(NDatePicker, {
       props: {
         value: test.value,
         type: 'date',
-        onUpdateValue: (value: [number, number]) => {
+        onUpdateValue: (value: number) => {
           test.value = value
         },
         shortcuts: {
@@ -30,7 +30,7 @@ describe('n-date-picker', () => {
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual(1631203200000)
-    test.value = [0, 0]
+    test.value = 0
     await wrapper.setProps({
       type: 'datetime'
     })
@@ -53,7 +53,7 @@ describe('n-date-picker', () => {
           test.value = value
         },
         shortcuts: {
-          'Honey birthday': [1629216000000, 1631203200000]
+          'Honey birthday': { from: 1629216000000, to: 1631203200000 }
         }
       }
     })
@@ -62,7 +62,7 @@ describe('n-date-picker', () => {
       .querySelector('.n-date-panel-actions')
       ?.querySelector('.n-button') as HTMLElement
     button.click()
-    expect(test.value).toEqual([1629216000000, 1631203200000])
+    expect(test.value).toEqual({ from: 1629216000000, to: 1631203200000 })
     test.value = 0
     await wrapper.setProps({
       type: 'datetimerange'
@@ -72,7 +72,7 @@ describe('n-date-picker', () => {
       .querySelector('.n-date-panel-actions')
       ?.querySelector('.n-button') as HTMLElement
     rangeButton.click()
-    expect(test.value).toEqual([1629216000000, 1631203200000])
+    expect(test.value).toEqual({ from: 1629216000000, to: 1631203200000 })
     wrapper.unmount()
   })
 
@@ -110,18 +110,17 @@ describe('n-date-picker', () => {
   })
 
   it('range type should work with shortcuts prop with function value', async () => {
-    const test = ref<[number, number]>([0, 0])
+    const test = ref<{ from: number, to: number }>({ from: 0, to: 0 })
 
     const wrapper = mount(NDatePicker, {
       props: {
         value: test.value,
         type: 'daterange',
-        onUpdateValue: (value: [number, number]) => {
+        onUpdateValue: (value: { from: number, to: number }) => {
           test.value = value
         },
         shortcuts: {
-          'Honey birthday': () =>
-            [1629216000000, 1631203200000] as [number, number]
+          'Honey birthday': () => ({ from: 1629216000000, to: 1631203200000 })
         }
       }
     })
@@ -130,8 +129,8 @@ describe('n-date-picker', () => {
       .querySelector('.n-date-panel-actions')
       ?.querySelector('.n-button') as HTMLElement
     button.click()
-    expect(test.value).toEqual([1629216000000, 1631203200000])
-    test.value = [0, 0]
+    expect(test.value).toEqual({ from: 1629216000000, to: 1631203200000 })
+    test.value = { from: 0, to: 0 }
     await wrapper.setProps({
       type: 'datetimerange'
     })
@@ -140,7 +139,38 @@ describe('n-date-picker', () => {
       .querySelector('.n-date-panel-actions')
       ?.querySelector('.n-button') as HTMLElement
     rangeButton.click()
-    expect(test.value).toEqual([1629216000000, 1631203200000])
+    expect(test.value).toEqual({ from: 1629216000000, to: 1631203200000 })
+    wrapper.unmount()
+  })
+
+  it('date type should work with multiple prop', async () => {
+    const test = ref<Value>([1660299411358])
+    const wrapper = mount(NDatePicker, {
+      props: {
+        value: test.value,
+        multiple: true,
+        maxTagCount: 4,
+        type: 'date',
+        onUpdateValue: (value: Value) => {
+          test.value = value
+        },
+        shortcuts: {
+          'Honey birthday': 1631203200000
+        }
+      }
+    })
+    const input = wrapper.find('.n-multiple-input')
+    await input.trigger('click')
+    const shortcutButton: HTMLElement = document
+      .querySelector('.n-date-panel-actions__prefix')
+      ?.querySelector('.n-button') as HTMLElement
+    shortcutButton.click()
+
+    const confrimButton: HTMLElement = document
+      .querySelector('.n-date-panel-actions__suffix')
+      ?.querySelector('.n-button') as HTMLElement
+    confrimButton.click()
+    expect(test.value).toEqual([1660299411358, 1631203200000])
     wrapper.unmount()
   })
 

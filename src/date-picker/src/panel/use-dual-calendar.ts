@@ -25,12 +25,15 @@ import {
   getDefaultTime,
   pluckValueFromRange,
   QuarterItem,
-  quarterArray
+  quarterArray,
+  isRangeValue,
+  isDefaultRangeTime
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
   datePickerInjectionKey,
   RangePanelChildComponentRefs,
+  RangeValue,
   Shortcuts
 } from '../interface'
 import { ScrollbarInst } from '../../../_internal'
@@ -108,14 +111,14 @@ function useDualCalendar (
   const { value } = props
   const defaultCalendarStartTime =
     props.defaultCalendarStartTime ??
-    (Array.isArray(value) && typeof value[0] === 'number'
-      ? value[0]
+    (isRangeValue(value) && typeof value.from === 'number'
+      ? value.from
       : Date.now())
   const startCalendarDateTimeRef = ref(defaultCalendarStartTime)
   const endCalendarDateTimeRef = ref(
     props.defaultCalendarEndTime ??
-      (Array.isArray(value) && typeof value[1] === 'number'
-        ? value[1]
+      (isRangeValue(value) && typeof value.to === 'number'
+        ? value.to
         : getTime(addMonths(defaultCalendarStartTime, 1)))
   )
   adjustCalendarTimes(true)
@@ -128,18 +131,18 @@ function useDualCalendar (
   )
 
   const startDateInput = ref(
-    Array.isArray(value)
+    isRangeValue(value)
       ? format(
-        value[0],
+        value.from,
         mergedDateFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
       : ''
   )
   const endDateInputRef = ref(
-    Array.isArray(value)
+    isRangeValue(value)
       ? format(
-        value[1],
+        value.to,
         mergedDateFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
@@ -207,12 +210,12 @@ function useDualCalendar (
   })
   const startTimeValueRef = computed(() => {
     const { value } = props
-    if (Array.isArray(value)) return value[0]
+    if (isRangeValue(value)) return value.from
     return null
   })
   const endTimeValueRef = computed(() => {
     const { value } = props
-    if (Array.isArray(value)) return value[1]
+    if (isRangeValue(value)) return value.to
     return null
   })
   const shortcutsRef = computed(() => {
@@ -244,8 +247,8 @@ function useDualCalendar (
   watch(
     computed(() => props.value),
     (value) => {
-      if (value !== null && Array.isArray(value)) {
-        const [startMoment, endMoment] = value
+      if (value !== null && isRangeValue(value)) {
+        const { from: startMoment, to: endMoment } = value
         startDateInput.value = format(
           startMoment,
           mergedDateFormatRef.value,
@@ -351,7 +354,7 @@ function useDualCalendar (
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) return isDateDisabled(ts, 'start', null)
+    if (!isRangeValue(props.value)) return isDateDisabled(ts, 'start', null)
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
       return isDateDisabled(ts, 'start', null)
@@ -359,21 +362,21 @@ function useDualCalendar (
       const { value: memorizedStartDateTime } = memorizedStartDateTimeRef
       // after you starting to select
       if (ts < memorizedStartDateTimeRef.value) {
-        return isDateDisabled(ts, 'start', [
-          memorizedStartDateTime,
-          memorizedStartDateTime
-        ])
+        return isDateDisabled(ts, 'start', {
+          from: memorizedStartDateTime,
+          to: memorizedStartDateTime
+        })
       } else {
-        return isDateDisabled(ts, 'end', [
-          memorizedStartDateTime,
-          memorizedStartDateTime
-        ])
+        return isDateDisabled(ts, 'end', {
+          from: memorizedStartDateTime,
+          to: memorizedStartDateTime
+        })
       }
     }
   }
-  function syncCalendarTimeWithValue (value: [number, number] | null): void {
+  function syncCalendarTimeWithValue (value: RangeValue | null): void {
     if (value === null) return
-    const [startMoment, endMoment] = value
+    const { from: startMoment, to: endMoment } = value
     startCalendarDateTimeRef.value = startMoment
     if (startOfMonth(endMoment) <= startOfMonth(startMoment)) {
       endCalendarDateTimeRef.value = getTime(
@@ -392,8 +395,8 @@ function useDualCalendar (
     } else {
       isSelectingRef.value = false
       const { value } = props
-      if (props.panel && Array.isArray(value)) {
-        changeStartEndTime(value[0], value[1], 'done')
+      if (props.panel && isRangeValue(value)) {
+        changeStartEndTime(value.from, value.to, 'done')
       } else {
         if (closeOnSelectRef.value && type === 'daterange') {
           if (updateValueOnCloseRef.value) {
@@ -441,10 +444,10 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time], props.panel)
-    } else if (Array.isArray(props.value)) {
+      panelCommon.doUpdateValue({ from: time, to: time }, props.panel)
+    } else if (isRangeValue(props.value)) {
       panelCommon.doUpdateValue(
-        [time, Math.max(props.value[1], time)],
+        { from: time, to: Math.max(props.value.from, time) },
         props.panel
       )
     }
@@ -454,10 +457,12 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time], props.panel)
+      panelCommon.doUpdateValue({ from: time, to: time }, props.panel)
     } else if (Array.isArray(props.value)) {
+      // todo multiply
+    } else if (isRangeValue(props.value)) {
       panelCommon.doUpdateValue(
-        [Math.min(props.value[0], time), time],
+        { from: Math.min(props.value.from, time), to: time },
         props.panel
       )
     }
@@ -480,9 +485,11 @@ function useDualCalendar (
       | undefined
       if (type === 'datetimerange') {
         const { defaultTime } = props
-        if (Array.isArray(defaultTime)) {
-          startDefaultTime = getDefaultTime(defaultTime[0])
-          endDefaultTime = getDefaultTime(defaultTime[1])
+        if (isDefaultRangeTime(defaultTime)) {
+          startDefaultTime = getDefaultTime(defaultTime.from)
+          endDefaultTime = getDefaultTime(defaultTime.to)
+        } else if (Array.isArray(defaultTime)) {
+          // todo multiply
         } else {
           startDefaultTime = getDefaultTime(defaultTime)
           endDefaultTime = startDefaultTime
@@ -497,7 +504,7 @@ function useDualCalendar (
     }
 
     panelCommon.doUpdateValue(
-      [startTime, endTime],
+      { from: startTime, to: endTime },
       props.panel && source === 'done'
     )
   }
@@ -526,8 +533,8 @@ function useDualCalendar (
           date: getDate(date)
         })
         changeStartDateTime(sanitizeValue(getTime(newValue)))
-      } else if (Array.isArray(props.value)) {
-        const newValue = set(props.value[0], {
+      } else if (isRangeValue(props.value)) {
+        const newValue = set(props.value.from, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
@@ -554,8 +561,8 @@ function useDualCalendar (
           date: getDate(date)
         })
         changeEndDateTime(sanitizeValue(getTime(newValue)))
-      } else if (Array.isArray(props.value)) {
-        const newValue = set(props.value[1], {
+      } else if (isRangeValue(props.value)) {
+        const newValue = set(props.value.to, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
@@ -582,8 +589,8 @@ function useDualCalendar (
           date: getDate(date)
         })
         changeStartDateTime(sanitizeValue(getTime(newValue)))
-      } else if (Array.isArray(value)) {
-        const newValue = set(value[0], {
+      } else if (isRangeValue(value)) {
+        const newValue = set(value.from, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
@@ -610,8 +617,8 @@ function useDualCalendar (
           date: getDate(date)
         })
         changeEndDateTime(sanitizeValue(getTime(newValue)))
-      } else if (Array.isArray(value)) {
-        const newValue = set(value[1], {
+      } else if (isRangeValue(value)) {
+        const newValue = set(value.to, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
@@ -622,11 +629,11 @@ function useDualCalendar (
       refreshDisplayDateString()
     }
   }
-  function refreshDisplayDateString (times?: [number, number]): void {
+  function refreshDisplayDateString (times?: RangeValue): void {
     // If not selected, display nothing,
     // else update datetime related string
     const { value } = props
-    if (value === null || !Array.isArray(value)) {
+    if (value === null || !isRangeValue(value)) {
       startDateInput.value = ''
       endDateInputRef.value = ''
       return
@@ -635,12 +642,12 @@ function useDualCalendar (
       times = value
     }
     startDateInput.value = format(
-      times[0],
+      times.from,
       mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
     endDateInputRef.value = format(
-      times[1],
+      times.to,
       mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
@@ -656,31 +663,31 @@ function useDualCalendar (
   function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
     panelCommon.cachePendingValue()
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (!Array.isArray(shortcutValue)) return
-    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutPreview')
+    if (!isRangeValue(shortcutValue)) return
+    changeStartEndTime(shortcutValue.from, shortcutValue.to, 'shortcutPreview')
   }
   function handleRangeShortcutClick (shortcut: Shortcuts[string]): void {
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (!Array.isArray(shortcutValue)) return
-    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'done')
+    if (!isRangeValue(shortcutValue)) return
+    changeStartEndTime(shortcutValue.from, shortcutValue.to, 'done')
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
   function justifyColumnsScrollState (
-    value: [number, number],
+    value: RangeValue,
     type: 'start' | 'end'
   ): void
   function justifyColumnsScrollState (): void
   function justifyColumnsScrollState (
-    value?: [number, number] | undefined,
+    value?: RangeValue | undefined,
     type?: 'start' | 'end' | undefined
   ): void {
     const mergedValue = value === undefined ? props.value : value
     if (value === undefined || type === 'start') {
       if (startMonthScrollbarRef.value) {
-        const monthIndex = !Array.isArray(mergedValue)
+        const monthIndex = !isRangeValue(mergedValue)
           ? getMonth(Date.now())
-          : getMonth(mergedValue[0])
+          : getMonth(mergedValue.from)
         startMonthScrollbarRef.value.scrollTo({
           debounce: false,
           index: monthIndex,
@@ -689,17 +696,17 @@ function useDualCalendar (
       }
       if (startYearVlRef.value) {
         const yearIndex =
-          (!Array.isArray(mergedValue)
+          (!isRangeValue(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[0])) - START_YEAR
+            : getYear(mergedValue.from)) - START_YEAR
         startYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
     if (value === undefined || type === 'end') {
       if (endMonthScrollbarRef.value) {
-        const monthIndex = !Array.isArray(mergedValue)
+        const monthIndex = !isRangeValue(mergedValue)
           ? getMonth(Date.now())
-          : getMonth(mergedValue[1])
+          : getMonth(mergedValue.to)
         endMonthScrollbarRef.value.scrollTo({
           debounce: false,
           index: monthIndex,
@@ -708,9 +715,9 @@ function useDualCalendar (
       }
       if (endYearVlRef.value) {
         const yearIndex =
-          (!Array.isArray(mergedValue)
+          (!isRangeValue(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[1])) - START_YEAR
+            : getYear(mergedValue.to)) - START_YEAR
         endYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
@@ -721,7 +728,7 @@ function useDualCalendar (
     clickType: 'start' | 'end'
   ): void {
     const { value } = props
-    const noCurrentValue = !Array.isArray(value)
+    const noCurrentValue = !isRangeValue(value)
     const itemTs =
       dateItem.type === 'year' && type !== 'yearrange'
         ? noCurrentValue
@@ -735,32 +742,32 @@ function useDualCalendar (
           : set(dateItem.ts, {
             month: getMonth(
               type === 'quarterrange'
-                ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
-                : value[clickType === 'start' ? 0 : 1]
+                ? startOfQuarter(value[clickType === 'start' ? 'from' : 'to'])
+                : value[clickType === 'start' ? 'from' : 'to']
             )
           }).valueOf()
         : dateItem.ts
     if (noCurrentValue) {
       const partialValue = sanitizeValue(itemTs)
-      const nextValue: [number, number] = [partialValue, partialValue]
+      const nextValue: RangeValue = { from: partialValue, to: partialValue }
       panelCommon.doUpdateValue(nextValue, props.panel)
       justifyColumnsScrollState(nextValue, 'start')
       justifyColumnsScrollState(nextValue, 'end')
       panelCommon.disableTransitionOneTick()
       return
     }
-    const nextValue: [number, number] = [value[0], value[1]]
+    const nextValue: RangeValue = { from: value.from, to: value.to }
     let otherPartsChanged = false
     if (clickType === 'start') {
-      nextValue[0] = sanitizeValue(itemTs)
-      if (nextValue[0] > nextValue[1]) {
-        nextValue[1] = nextValue[0]
+      nextValue.from = sanitizeValue(itemTs)
+      if (nextValue.from > nextValue.to) {
+        nextValue.to = nextValue.from
         otherPartsChanged = true
       }
     } else {
-      nextValue[1] = sanitizeValue(itemTs)
-      if (nextValue[0] > nextValue[1]) {
-        nextValue[0] = nextValue[1]
+      nextValue.to = sanitizeValue(itemTs)
+      if (nextValue.from > nextValue.to) {
+        nextValue.from = nextValue.to
         otherPartsChanged = true
       }
     }

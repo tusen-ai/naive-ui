@@ -20,20 +20,20 @@
     At least 7 days
     <n-date-picker
       type="daterange"
-      :default-value="[Date.now(), Date.now() + 86400000]"
+      :default-value="{ from: Date.now(), to: Date.now() + 86400000 }"
       :is-date-disabled="isRangeDateDisabled"
     />
     At least 7 days
     <n-date-picker
       type="datetimerange"
-      :default-value="[Date.now(), Date.now() + 86400000]"
+      :default-value="{ from: Date.now(), to: Date.now() + 86400000 }"
       :is-date-disabled="isRangeDateDisabled"
       :is-time-disabled="isRangeTimeDisabled"
     />
     Only allow previous date
     <n-date-picker
       type="daterange"
-      :default-value="[Date.now(), Date.now() + 86400000]"
+      :default-value="{ from: Date.now(), to: Date.now() + 86400000 }"
       :is-date-disabled="disablePreviousDate"
     />
   </n-space>
@@ -66,16 +66,16 @@ export default defineComponent({
       isRangeDateDisabled (
         ts: number,
         type: 'start' | 'end',
-        range: [number, number] | null
+        range: { from: number; to: number } | null
       ) {
         if (type === 'start' && range !== null) {
           return (
-            startOfDay(range[1]).valueOf() - startOfDay(ts).valueOf() <= d * 6
+            startOfDay(range.to).valueOf() - startOfDay(ts).valueOf() <= d * 6
           )
         }
         if (type === 'end' && range !== null) {
           return (
-            startOfDay(ts).valueOf() - startOfDay(range[0]).valueOf() <= d * 6
+            startOfDay(ts).valueOf() - startOfDay(range.from).valueOf() <= d * 6
           )
         }
         return false
@@ -83,20 +83,20 @@ export default defineComponent({
       isRangeTimeDisabled (
         current: number,
         type: 'start' | 'end',
-        range: [number, number]
+        range: { from: number; to: number }
       ) {
         if (type === 'start') {
           return {
             isHourDisabled: (hour: number) => {
               return (
-                range[1] - startOfDay(range[0]).valueOf() - hour * h < d * 7
+                range.to - startOfDay(range.from).valueOf() - hour * h < d * 7
               )
             },
             isMinuteDisabled: (minute: number, hour: number | null) => {
               if (hour === null) return false
               return (
-                range[1] -
-                  startOfDay(range[0]).valueOf() -
+                range.to -
+                  startOfDay(range.from).valueOf() -
                   hour * h -
                   minute * m <
                 d * 7
@@ -109,8 +109,8 @@ export default defineComponent({
             ) => {
               if (hour === null || minute === null) return false
               return (
-                range[1] -
-                  startOfDay(range[0]).valueOf() -
+                range.to -
+                  startOfDay(range.from).valueOf() -
                   hour * h -
                   minute * m -
                   second * s <
@@ -122,18 +122,20 @@ export default defineComponent({
           return {
             isHourDisabled: (hour: number) => {
               return (
-                startOfDay(range[1]).valueOf() + hour * h + (h - s) - range[0] <
+                startOfDay(range.to).valueOf() +
+                  hour * h +
+                  (h - s) -
+                  range.from <
                 d * 7
               )
             },
             isMinuteDisabled: (minute: number, hour: number | null) => {
-              if (hour === null) return false
               return (
-                startOfDay(range[1]).valueOf() +
-                  hour * h +
+                startOfDay(range.to).valueOf() +
+                  Number(hour) * h +
                   minute * m +
                   (m - s) -
-                  range[0] <
+                  range.from <
                 d * 7
               )
             },
@@ -144,11 +146,11 @@ export default defineComponent({
             ) => {
               if (hour === null || minute === null) return false
               return (
-                startOfDay(range[1]).valueOf() +
+                startOfDay(range.to).valueOf() +
                   hour * h +
                   minute * m +
                   second * s -
-                  range[0] <
+                  range.from <
                 d * 7
               )
             }

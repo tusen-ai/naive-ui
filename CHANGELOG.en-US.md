@@ -55,6 +55,7 @@
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
+- `n-date-picker` adds `multiple` prop, closes[#3357](https://github.com/tusen-ai/naive-ui/issues/3357), at the same time, this modification will affect the format of 'value' of 'type = daterange', from '[0, 0]' to '{from: 0, to: 0}'`.
 
 ## 2.32.1
 

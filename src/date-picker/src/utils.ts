@@ -19,9 +19,18 @@ import {
   getQuarter,
   isSameQuarter
 } from 'date-fns/esm'
+import { isPlainObject } from 'lodash'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import { Value } from './interface'
+// eslint-disable-next-line import/no-cycle
+import {
+  RangeValue,
+  Value,
+  FormattedRangeValue,
+  FormattedValue,
+  DefaultTime,
+  DefaultRangeTime
+} from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -49,8 +58,8 @@ const matcherMap = {
   quarter: isSameQuarter
 } as const
 
-function matchDate (
-  sourceTime: number,
+export function matchDate (
+  sourceTime: number | number[],
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter'
 ): boolean {
@@ -112,27 +121,28 @@ export interface QuarterItem {
 
 // date item's valueTs can be a tuple since two date may show in one panel, so
 // any matched value would make it shown as selected
+// multiple todo
 function dateItem (
   time: number,
   monthTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: Value,
   currentTs: number
 ): DateItem {
   let inSpan = false
   let startOfSpan = false
   let endOfSpan = false
-  if (Array.isArray(valueTs)) {
-    if (valueTs[0] < time && time < valueTs[1]) {
+  if (isRangeValue(valueTs)) {
+    if (valueTs.from < time && time < valueTs.to) {
       inSpan = true
     }
-    if (matchDate(valueTs[0], time, 'date')) startOfSpan = true
-    if (matchDate(valueTs[1], time, 'date')) endOfSpan = true
+    if (matchDate(valueTs.from, time, 'date')) startOfSpan = true
+    if (matchDate(valueTs.to, time, 'date')) endOfSpan = true
   }
   const selected =
     valueTs !== null &&
-    (Array.isArray(valueTs)
-      ? matchDate(valueTs[0], time, 'date') ||
-        matchDate(valueTs[1], time, 'date')
+    (isRangeValue(valueTs)
+      ? matchDate(valueTs.from, time, 'date') ||
+        matchDate(valueTs.to, time, 'date')
       : matchDate(valueTs, time, 'date'))
   return {
     type: 'date',
@@ -207,7 +217,7 @@ function quarterItem (
  */
 function dateArray (
   monthTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: Value,
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
   strip: boolean = false
@@ -331,10 +341,26 @@ function getDefaultTime (timeValue: string | undefined):
 }
 
 function pluckValueFromRange (
-  value: Value | null,
+  value: Value,
   type: 'start' | 'end'
 ): number | null {
-  return Array.isArray(value) ? value[type === 'start' ? 0 : 1] : null
+  return isRangeValue(value) ? value[type === 'start' ? 'from' : 'to'] : null
+}
+
+export function isRangeValue (value: Value): value is RangeValue {
+  return isPlainObject(value)
+}
+
+export function isFormattedRangeValue (
+  value: FormattedValue
+): value is FormattedRangeValue {
+  return isPlainObject(value)
+}
+
+export function isDefaultRangeTime (
+  value: DefaultTime | undefined
+): value is DefaultRangeTime {
+  return isPlainObject(value)
 }
 
 export {

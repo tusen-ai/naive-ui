@@ -31,10 +31,10 @@ export default defineComponent({
         console.log('value', ...args)
       },
       rangeShortcuts: {
-        快乐假期: [1629216000000, 1631203200000] as const,
+        快乐假期: { from: 1629216000000, to: 1631203200000 } as const,
         近2小时: () => {
           const cur = new Date().getTime()
-          return [cur - 2 * 60 * 60 * 1000, cur] as const
+          return { from: cur - 2 * 60 * 60 * 1000, to: cur } as const
         }
       }
     }

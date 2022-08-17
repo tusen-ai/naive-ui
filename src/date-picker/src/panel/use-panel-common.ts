@@ -14,8 +14,11 @@ import {
   OnPanelUpdateValueImpl,
   OnClose,
   Shortcuts,
-  DefaultTime
+  DefaultTime,
+  RangeValue
 } from '../interface'
+import { isNumber } from 'lodash'
+import { isSameDay } from 'date-fns'
 
 const TIME_FORMAT = 'HH:mm:ss'
 
@@ -27,13 +30,13 @@ const usePanelCommonProps = {
     value: TIME_FORMAT
   },
   value: {
-    type: [Array, Number] as PropType<Value | null>,
+    type: [Array, Number, Object] as PropType<Value>,
     default: null
   },
   shortcuts: Object as PropType<Shortcuts>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   onClear: Function,
-  onConfirm: Function as PropType<(value: Value | null) => void>,
+  onConfirm: Function as PropType<(value: Value) => void>,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
   onUpdateValue: {
@@ -55,7 +58,8 @@ function usePanelCommon (props: UsePanelCommonProps) {
     timePickerPropsRef,
     localeRef,
     mergedClsPrefixRef,
-    mergedThemeRef
+    mergedThemeRef,
+    multipleRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const dateFnsOptionsRef = computed(() => {
@@ -73,8 +77,27 @@ function usePanelCommon (props: UsePanelCommonProps) {
     const { onConfirm, value } = props
     if (onConfirm) onConfirm(value)
   }
-  function doUpdateValue (value: Value | null, doUpdate: boolean): void {
-    const { onUpdateValue } = props
+  function doUpdateValue (value: Value, doUpdate: boolean): void {
+    const { onUpdateValue, value: propsValue } = props
+
+    if (multipleRef.value && isNumber(value)) {
+      const values = Array.isArray(propsValue)
+        ? propsValue.slice(0)
+        : isNumber(propsValue)
+          ? [propsValue]
+          : []
+
+      const index = values.findIndex((val) => {
+        return isSameDay(val, value)
+      })
+      if (index > -1) {
+        values.splice(index, 1)
+      } else {
+        values.push(value)
+      }
+      ;(onUpdateValue as OnPanelUpdateValueImpl)(values, false)
+      return
+    }
     ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
   function doClose (disableUpdateOnClose: boolean = false): void {
@@ -140,9 +163,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
       cached = false
     }
   }
-  function getShortcutValue (
-    shortcut: Shortcuts[string]
-  ): number | [number, number] | readonly [number, number] {
+  function getShortcutValue (shortcut: Shortcuts[string]): number | RangeValue {
     if (typeof shortcut === 'function') {
       return shortcut()
     }
@@ -174,7 +195,10 @@ function usePanelCommon (props: UsePanelCommonProps) {
     clearPendingValue,
     restorePendingValue,
     getShortcutValue,
-    handleShortcutMouseleave: restorePendingValue,
+    handleShortcutMouseleave: () => {
+      if (multipleRef.value) return
+      restorePendingValue()
+    },
     showMonthYearPanel,
     handleOpenQuickSelectMonthPanel
   }

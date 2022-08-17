@@ -13,7 +13,10 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      timestamp: ref<[number, number]>([1183135260000, Date.now()])
+      timestamp: ref<{ from: number; to: number }>({
+        from: 1183135260000,
+        to: Date.now()
+      })
     }
   }
 })
