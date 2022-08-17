@@ -35,6 +35,7 @@ export default defineComponent({
       const {
         self: {
           labelFontWeight,
+          valueFontSize,
           valueFontWeight,
           valuePrefixTextColor,
           labelTextColor,
@@ -50,6 +51,7 @@ export default defineComponent({
         '--n-label-font-weight': labelFontWeight,
         '--n-label-text-color': labelTextColor,
         '--n-value-font-weight': valueFontWeight,
+        '--n-value-font-size': valueFontSize,
         '--n-value-prefix-text-color': valuePrefixTextColor,
         '--n-value-suffix-text-color': valueSuffixTextColor,
         '--n-value-text-color': valueTextColor

@@ -52,6 +52,7 @@
 - `n-drawer` supports RTL.
 - `n-input` adds `render-count` prop.
 - `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
+- `n-statistic` adds `valueFontSize` theme variable, closes [#3510](https://github.com/tusen-ai/naive-ui/issues/3510).
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
