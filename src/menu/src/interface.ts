@@ -7,7 +7,9 @@ export interface MenuOptionSharedPart {
   key?: Key
   disabled?: boolean
   icon?: () => VNodeChild
-  children?: Array<MenuOption | MenuGroupOption | MenuDividerOption>
+  children?: Array<
+  MenuOption | MenuGroupOption | MenuDividerOption | MenuSpacerOption
+  >
   extra?: string | (() => VNodeChild)
   props?: HTMLAttributes
   [key: string]: unknown
@@ -18,7 +20,17 @@ export interface MenuOptionSharedPart {
 /**
  * @private
  */
-export type MenuIgnoredOption = MenuDividerOption | MenuRenderOption
+export type MenuIgnoredOption =
+  | MenuDividerOption
+  | MenuSpacerOption
+  | MenuRenderOption
+
+export interface MenuSpacerOption {
+  type: 'spacer'
+  key?: Key
+  props?: HTMLAttributes
+  [key: string]: unknown
+}
 
 export interface MenuDividerOption {
   type: 'divider'
@@ -37,7 +49,7 @@ export interface MenuRenderOption {
 
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   type: 'group'
-  children: Array<MenuOption | MenuDividerOption>
+  children: Array<MenuOption | MenuDividerOption | MenuSpacerOption>
 }
 
 export type MenuOption =
@@ -54,7 +66,11 @@ export type MenuGroupOption =
   })
   | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
-export type MenuMixedOption = MenuDividerOption | MenuOption | MenuGroupOption
+export type MenuMixedOption =
+  | MenuDividerOption
+  | MenuSpacerOption
+  | MenuOption
+  | MenuGroupOption
 
 export type TmNode = TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>
 
