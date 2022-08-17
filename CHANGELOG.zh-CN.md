@@ -27,6 +27,7 @@
 - 修复 `n-input-number` 快速点击按钮可能触发变化无限循环，关闭 [#3329](https://github.com/tusen-ai/naive-ui/issues/3329)
 - 修复 `n-switch` 部分主题变量不能使用非 `px` 单位的值，关闭 [#2938](https://github.com/tusen-ai/naive-ui/issues/2938)
 - 修复 `n-input` 在 `resizable` 和 `type="textarea"` 时某些情况不能调整大小，关闭 [#3479](https://github.com/tusen-ai/naive-ui/issues/3479)
+- 修复 `n-countdown` 在 `onFinish` 回调中使用 `reset` 方法时出现异常，关闭 [#3536](https://github.com/tusen-ai/naive-ui/issues/3536)
 
 ### Feats
 

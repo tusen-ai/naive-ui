@@ -29,6 +29,7 @@
 - Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
 - Fix `n-switch` some theme variables can't use non-px value, closes [#2938](https://github.com/tusen-ai/naive-ui/issues/2938).
 - Fix `n-input` with `resize` & `type="textarea"` set can't be resized in some cases, closes [#3479](https://github.com/tusen-ai/naive-ui/issues/3479).
+- Fix `n-countdown` error when using `reset` method in `onFinish` callback, closes [#3536](https://github.com/tusen-ai/naive-ui/issues/3536).
 
 ### Feats
 
