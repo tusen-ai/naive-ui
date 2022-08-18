@@ -25,8 +25,8 @@ render-source-list.vue
 | filterable | `boolean` | `false` | 是否可过滤 | 2.32.0 |
 | filter | `(pattern: string, option: TransferOption) => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 | 2.32.0 |
 | options | `TransferOption[]` | `[]` | 配置选项内容，详情见 TransferOption Type | 2.32.0 |
-| render-source-label | `(props: { from: 'source' \| 'target', option: TransferOption }) => VNodeChild` | `undefined` | 自定义源标签 | 2.32.0 |
-| render-target-label | `(props: { from: 'source' \| 'target', option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
+| render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义源标签 | 2.32.0 |
+| render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |
