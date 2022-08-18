@@ -27,6 +27,7 @@
 - 修复 `n-input-number` 快速点击按钮可能触发变化无限循环，关闭 [#3329](https://github.com/tusen-ai/naive-ui/issues/3329)
 - 修复 `n-switch` 部分主题变量不能使用非 `px` 单位的值，关闭 [#2938](https://github.com/tusen-ai/naive-ui/issues/2938)
 - 修复 `n-input` 在 `resizable` 和 `type="textarea"` 时某些情况不能调整大小，关闭 [#3479](https://github.com/tusen-ai/naive-ui/issues/3479)
+- 修复 `n-countdown` 在 `onFinish` 回调中使用 `reset` 方法时出现异常，关闭 [#3536](https://github.com/tusen-ai/naive-ui/issues/3536)
 
 ### Feats
 
@@ -54,6 +55,7 @@
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
 - `n-date-picker` 新增 `multiple` 属性，关闭 [#3357](https://github.com/tusen-ai/naive-ui/issues/3357)，同时这次修改会影响到 `type=daterange` 的 `value` 的格式，由 `[0, 0]` 变成 `{from: 0, to: 0}`
+- `n-data-table` 新增 `expanded-row-remain-sticky` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 
 ## 2.32.1
 

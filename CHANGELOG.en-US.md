@@ -29,6 +29,7 @@
 - Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
 - Fix `n-switch` some theme variables can't use non-px value, closes [#2938](https://github.com/tusen-ai/naive-ui/issues/2938).
 - Fix `n-input` with `resize` & `type="textarea"` set can't be resized in some cases, closes [#3479](https://github.com/tusen-ai/naive-ui/issues/3479).
+- Fix `n-countdown` error when using `reset` method in `onFinish` callback, closes [#3536](https://github.com/tusen-ai/naive-ui/issues/3536).
 
 ### Feats
 
@@ -52,6 +53,7 @@
 - `n-drawer` supports RTL.
 - `n-input` adds `render-count` prop.
 - `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
+- `n-data-table` adds `expanded-row-remain-sticky` to allow expanded content remains sticky, closes [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).

@@ -147,6 +147,7 @@ export default defineComponent({
   setup (props) {
     const {
       slots: dataTableSlots,
+      bodyWidthRef,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -179,6 +180,7 @@ export default defineComponent({
       onLoadRef,
       loadingKeySetRef,
       expandableRef,
+      expandedRowRemainStickyRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -413,6 +415,7 @@ export default defineComponent({
       })
     })
     return {
+      bodyWidthRef,
       dataTableSlots,
       componentId,
       scrollbarInstRef,
@@ -473,6 +476,7 @@ export default defineComponent({
       maxHeight: maxHeightRef,
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
+      expandedRowRemainSticky: expandedRowRemainStickyRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -498,6 +502,7 @@ export default defineComponent({
       mergedTableLayout,
       flexHeight,
       loadingKeySet,
+      bodyWidthRef,
       onResize,
       setHeaderScrollLeft
     } = this
@@ -550,6 +555,7 @@ export default defineComponent({
               rowClassName,
               mergedSortState,
               mergedExpandedRowKeySet,
+              expandedRowRemainSticky,
               componentId,
               childTriggerColIndex,
               expandable,
@@ -661,7 +667,16 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      {renderExpand!(rawNode, actualRowIndex)}
+                      {expandedRowRemainSticky ? (
+                        <div
+                          class={`${mergedClsPrefix}-data-table-expand`}
+                          style={{ width: `${bodyWidthRef!}px` }}
+                        >
+                          {renderExpand!(rawNode, actualRowIndex)}
+                        </div>
+                      ) : (
+                        renderExpand!(rawNode, actualRowIndex)
+                      )}
                     </td>
                   </tr>
                 )
