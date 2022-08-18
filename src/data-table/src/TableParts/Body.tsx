@@ -180,7 +180,7 @@ export default defineComponent({
       onLoadRef,
       loadingKeySetRef,
       expandableRef,
-      expandedRowRemainStickyRef,
+      stickyExpandedRowsRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -415,7 +415,7 @@ export default defineComponent({
       })
     })
     return {
-      bodyWidthRef,
+      bodyWidth: bodyWidthRef,
       dataTableSlots,
       componentId,
       scrollbarInstRef,
@@ -476,7 +476,7 @@ export default defineComponent({
       maxHeight: maxHeightRef,
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
-      expandedRowRemainSticky: expandedRowRemainStickyRef,
+      stickyExpandedRows: stickyExpandedRowsRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -502,7 +502,6 @@ export default defineComponent({
       mergedTableLayout,
       flexHeight,
       loadingKeySet,
-      bodyWidthRef,
       onResize,
       setHeaderScrollLeft
     } = this
@@ -555,7 +554,7 @@ export default defineComponent({
               rowClassName,
               mergedSortState,
               mergedExpandedRowKeySet,
-              expandedRowRemainSticky,
+              stickyExpandedRows,
               componentId,
               childTriggerColIndex,
               expandable,
@@ -643,6 +642,10 @@ export default defineComponent({
               rowIndexToKey[rowIndex] = tmNode.key
             })
 
+            const bodyWidth = stickyExpandedRows ? this.bodyWidth : null
+            const bodyWidthPx =
+              bodyWidth === null ? undefined : `${bodyWidth}px`
+
             const renderRow = (
               rowInfo: RowRenderInfo,
               displayedRowIndex: number,
@@ -667,10 +670,12 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      {expandedRowRemainSticky ? (
+                      {stickyExpandedRows ? (
                         <div
                           class={`${mergedClsPrefix}-data-table-expand`}
-                          style={{ width: `${bodyWidthRef!}px` }}
+                          style={{
+                            width: bodyWidthPx
+                          }}
                         >
                           {renderExpand!(rawNode, actualRowIndex)}
                         </div>

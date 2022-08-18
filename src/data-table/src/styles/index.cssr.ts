@@ -143,10 +143,10 @@ export default c([
         iconSwitchTransition()
       ])
     ]),
-    cB('data-table-thead', {
-      transition: 'background-color .3s var(--n-bezier)',
-      backgroundColor: 'var(--n-merged-th-color)'
-    }),
+    cB('data-table-thead', `
+      transition: background-color .3s var(--n-bezier);
+      background-color: var(--n-merged-th-color);
+    `),
     cB('data-table-tr', `
       box-sizing: border-box;
       background-clip: padding-box;
@@ -158,6 +158,7 @@ export default c([
         overflow: hidden;
         margin: calc(var(--n-th-padding) * -1);
         padding: var(--n-th-padding);
+        box-sizing: border-box;
       `),
       cM('striped', 'background-color: var(--n-merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--n-merged-td-color-striped);')

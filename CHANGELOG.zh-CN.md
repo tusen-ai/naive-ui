@@ -55,7 +55,7 @@
 - `n-tree` 新增 `scrollTo` 方法，关闭 [#3480](https://github.com/tusen-ai/naive-ui/issues/3480)
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
-- `n-data-table` 新增 `expanded-row-remain-sticky` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
+- `n-data-table` 新增 `sticky-expanded-rows` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 
 ## 2.32.1
 

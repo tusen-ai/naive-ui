@@ -77,7 +77,6 @@ render-cell.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
-| expanded-row-remain-sticky | `boolean` | `false` | Expanded row content remains sticky. | 2.33 |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
@@ -95,6 +94,7 @@ render-cell.vue
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
+| sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | NEXT_VERSION |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
