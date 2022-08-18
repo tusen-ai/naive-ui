@@ -51,6 +51,7 @@
 - `n-drawer` 支持 RTL
 - `n-input` 新增 `render-count` 属性
 - `n-input` 新增 `countTextColorDisabled` 主题变量，关闭 [#3481](https://github.com/tusen-ai/naive-ui/issues/3481)
+- `n-statistic` 新增 `valueFontSize` 主题变量，关闭 [#3510](https://github.com/tusen-ai/naive-ui/issues/3510)
 - `n-tree` 新增 `scrollTo` 方法，关闭 [#3480](https://github.com/tusen-ai/naive-ui/issues/3480)
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
