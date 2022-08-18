@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <NTransfer v-model:value="values" :options="options" filterable />
+  <NTransfer v-model:value="values" :options="options" source-filterable />
 </template>
 
 <script lang="ts">

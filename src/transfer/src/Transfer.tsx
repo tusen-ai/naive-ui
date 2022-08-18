@@ -52,7 +52,10 @@ export const transferProps = {
   virtualScroll: Boolean,
   sourceTitle: String,
   targetTitle: String,
-  filterable: Boolean,
+  filterable: {
+    type: Boolean,
+    default: undefined
+  },
   sourceFilterable: Boolean,
   targetFilterable: Boolean,
   sourceFilterPlaceholder: String,
@@ -89,6 +92,12 @@ export default defineComponent({
             '`on-change` is deprecated, please use `on-update:value` instead.'
           )
         }
+        if (props.filterable !== undefined) {
+          warnOnce(
+            'transfer',
+            '`filterable` is deprecated, please use `source-filterable` or `target-filterable` instead.'
+          )
+        }
       })
     }
     const { mergedClsPrefixRef } = useConfig(props)
@@ -113,9 +122,9 @@ export default defineComponent({
       uncontrolledValueRef,
       mergedValueRef,
       targetValueSetRef,
-      valueForSelectAllRef,
-      valueSetForUnselectAllRef,
-      valueForClearRef,
+      valueSetForCheckAllRef,
+      valueSetForUncheckAllRef,
+      valueSetForClearRef,
       filteredTgtOptionsRef,
       filteredSrcOptionsRef,
       targetOptionsRef,
@@ -143,23 +152,16 @@ export default defineComponent({
       nTriggerFormChange()
     }
 
-    function handleCheckedAll (): void {
-      doUpdateValue([
-        ...targetOptionsRef.value.map((i) => i.value),
-        ...valueForSelectAllRef.value
-      ])
+    function handleSourceCheckAll (): void {
+      doUpdateValue([...valueSetForCheckAllRef.value])
     }
 
-    function handleUnCheckedAll (): void {
-      doUpdateValue(
-        targetOptionsRef.value
-          .filter((i) => !valueSetForUnselectAllRef.value.has(i.value))
-          .map((i) => i.value)
-      )
+    function handleSourceUncheckAll (): void {
+      doUpdateValue([...valueSetForUncheckAllRef.value])
     }
 
-    function handleClearAll (): void {
-      doUpdateValue([...valueForClearRef.value])
+    function handleTargetClearAll (): void {
+      doUpdateValue([...valueSetForClearRef.value])
     }
 
     function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
@@ -204,9 +206,9 @@ export default defineComponent({
       mergedSrcFilterable: mergedSrcFilterableRef,
       handleSrcFilterUpdateValue,
       handleTgtFilterUpdateValue,
-      handleCheckedAll,
-      handleUnCheckedAll,
-      handleClearAll,
+      handleSourceCheckAll,
+      handleSourceUncheckAll,
+      handleTargetClearAll,
       handleItemCheck,
       handleChecked,
       cssVars: computed(() => {
@@ -292,8 +294,8 @@ export default defineComponent({
           <NTransferHeader
             source
             title={this.sourceTitle}
-            onCheckedAll={this.handleCheckedAll}
-            onClearAll={this.handleUnCheckedAll}
+            onCheckedAll={this.handleSourceCheckAll}
+            onClearAll={this.handleSourceUncheckAll}
             size={this.mergedSize}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
@@ -337,7 +339,7 @@ export default defineComponent({
           class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--target`}
         >
           <NTransferHeader
-            onClearAll={this.handleClearAll}
+            onClearAll={this.handleTargetClearAll}
             size={this.mergedSize}
             title={this.targetTitle}
           />
