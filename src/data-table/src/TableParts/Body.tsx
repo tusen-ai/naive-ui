@@ -181,6 +181,7 @@ export default defineComponent({
       loadingKeySetRef,
       expandableRef,
       stickyExpandedRowsRef,
+      renderExpandIconRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -477,6 +478,7 @@ export default defineComponent({
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
       stickyExpandedRows: stickyExpandedRowsRef,
+      renderExpandIcon: renderExpandIconRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -838,7 +840,7 @@ export default defineComponent({
                                   class={`${mergedClsPrefix}-data-table-expand-trigger`}
                                   clsPrefix={mergedClsPrefix}
                                   expanded={expanded}
-                                  renderExpandIcon={column.renderExpandIcon}
+                                  renderExpandIcon={this.renderExpandIcon}
                                   loading={loadingKeySet.has(rowInfo.key)}
                                   onClick={() => {
                                     handleUpdateExpanded(rowKey, rowInfo.tmNode)
@@ -880,7 +882,7 @@ export default defineComponent({
                               <ExpandTrigger
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
-                                renderExpandIcon={column.renderExpandIcon}
+                                renderExpandIcon={this.renderExpandIcon}
                                 onClick={() =>
                                   handleUpdateExpanded(rowKey, null)
                                 }
