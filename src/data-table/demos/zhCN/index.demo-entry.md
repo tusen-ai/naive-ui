@@ -85,6 +85,7 @@ expandable-debug.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
+| expanded-row-remain-sticky | `boolean` | `false` | 展开行是否不随表格横向滚动 | 2.33 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |

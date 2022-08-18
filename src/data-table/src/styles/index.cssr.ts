@@ -152,6 +152,13 @@ export default c([
       background-clip: padding-box;
       transition: background-color .3s var(--n-bezier);
     `, [
+      cB('data-table-expand', `
+        position: sticky;
+        left: 0;
+        overflow: hidden;
+        margin: calc(var(--n-th-padding) * -1);
+        padding: var(--n-th-padding);
+      `),
       cM('striped', 'background-color: var(--n-merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--n-merged-td-color-striped);')
       ]),
