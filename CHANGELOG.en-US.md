@@ -57,6 +57,7 @@
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
+- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.1
 
@@ -68,7 +69,6 @@
 ### Feats
 
 - `n-steps` supports RTL.
-- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.0
 

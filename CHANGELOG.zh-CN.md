@@ -55,6 +55,7 @@
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
 - `n-data-table` 新增 `expanded-row-remain-sticky` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
+- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.1
 
@@ -62,12 +63,10 @@
 
 - 修复 `n-drawer` 的 `default-height` 属性在使用 `string` 传参时控制台出现 warning，关闭 [#3377](https://github.com/TuSimple/naive-ui/issues/3377)
 - 修复 `n-transfer` 的 `on-update:value` 在取消选择时不会触发，关闭 [#3393](https://github.com/TuSimple/naive-ui/issues/3393)
-- Fix `n-image`'s `img-props` is not applied to `n-image-preview`.
 
 ### Feats
 
 - `n-steps` 支持 RTL
-- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.0
 
