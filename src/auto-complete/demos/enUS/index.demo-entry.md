@@ -29,6 +29,7 @@ status.vue
 | get-show | `(value: string) => boolean` | `undefined` | Use the input to determine whether to show options on focus. |  |
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in autocomplete. |  |
 | loading | `boolean` | `false` | Whether to show a loading status. |  |
+| menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.32.2 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options to autocomplete from. |  |
 | placeholder | `string` | `'Please Input'` | Autocomplete's placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Autocomplete's placement. | 2.25.0 |

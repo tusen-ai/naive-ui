@@ -31,7 +31,7 @@ import {
 import { inputNumberLight } from '../styles'
 import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
-import type { OnUpdateValue, InputNumberInst } from './interface'
+import type { OnUpdateValue, InputNumberInst, Size } from './interface'
 import style from './styles/input-number.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
 
@@ -57,7 +57,7 @@ export const inputNumberProps = {
   },
   min: [Number, String],
   max: [Number, String],
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<Size>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -451,39 +451,27 @@ export default defineComponent({
       }
     }
     function handleMinusMousedown (): void {
+      clearMinusHoldTimeout()
       firstMinusMousedownId = window.setTimeout(() => {
         minusHoldStateIntervalId = window.setInterval(() => {
           doMinus()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on(
-        'mouseup',
-        document,
-        () => {
-          window.setTimeout(clearMinusHoldTimeout, 0)
-        },
-        {
-          once: true
-        }
-      )
+      on('mouseup', document, clearMinusHoldTimeout, {
+        once: true
+      })
     }
     let firstAddMousedownId: number | null = null
     function handleAddMousedown (): void {
+      clearAddHoldTimeout()
       firstAddMousedownId = window.setTimeout(() => {
         addHoldStateIntervalId = window.setInterval(() => {
           doAdd()
         }, HOLDING_CHANGE_INTERVAL)
       }, HOLDING_CHANGE_THRESHOLD)
-      on(
-        'mouseup',
-        document,
-        () => {
-          window.setTimeout(clearAddHoldTimeout, 0)
-        },
-        {
-          once: true
-        }
-      )
+      on('mouseup', document, clearAddHoldTimeout, {
+        once: true
+      })
     }
     const handleAddClick = (): void => {
       if (addHoldStateIntervalId) return
@@ -620,6 +608,8 @@ export default defineComponent({
           text
           disabled={!this.minusable || this.mergedDisabled || this.readonly}
           focusable={false}
+          theme={this.mergedTheme.peers.Button}
+          themeOverrides={this.mergedTheme.peerOverrides.Button}
           builtinThemeOverrides={this.buttonThemeOverrides}
           onClick={this.handleMinusClick}
           onMousedown={this.handleMinusMousedown}
@@ -644,6 +634,8 @@ export default defineComponent({
           text
           disabled={!this.addable || this.mergedDisabled || this.readonly}
           focusable={false}
+          theme={this.mergedTheme.peers.Button}
+          themeOverrides={this.mergedTheme.peerOverrides.Button}
           builtinThemeOverrides={this.buttonThemeOverrides}
           onClick={this.handleAddClick}
           onMousedown={this.handleAddMousedown}

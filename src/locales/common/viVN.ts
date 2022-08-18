@@ -27,7 +27,7 @@ const viVN: NLocale = {
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
     monthTypeFormat: 'MM-yyyy',
-    dateFormat: 'đ-MM-yyyy',
+    dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'HH:mm:ss dd-MM-yyyy',
     quarterFormat: 'qqq-yyyy',
     clear: 'Xóa',
@@ -60,13 +60,12 @@ const viVN: NLocale = {
     sourceTitle: 'Nguồn',
     targetTitle: 'Đích'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Chọn tất cả',
+    unselectAll: 'Bỏ chọn tất cả',
+    clearAll: 'Xoá tất cả',
+    total: (num: number): string => `Tổng cộng ${num} mục`,
+    selected: (num: number): string => `${num} mục được chọn`
   },
   Empty: {
     description: 'Không có dữ liệu'
@@ -117,8 +116,7 @@ const viVN: NLocale = {
     tipZoomOut: 'Thu nhỏ',
     tipZoomIn: 'Phóng to',
     tipClose: 'Đóng (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Xem kích thớc gốc'
+    tipOriginalSize: 'Xem kích thước gốc'
   }
 }
 

@@ -32,6 +32,7 @@ import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-icon-color-pressed
 // --n-icon-color-disabled
 // --n-count-text-color
+// --n-count-text-color-disabled
 // --n-loading-color
 // ...form item vars
 export default cB('input', `
@@ -85,7 +86,10 @@ export default cB('input', `
       height: 0;
       display: none;
     `),
-    c('&::placeholder', 'color: #0000;'),
+    c('&::placeholder', `
+      color: #0000;
+      -webkit-text-fill-color: transparent !important;
+    `),
     c('&:-webkit-autofill ~', [
       cE('placeholder', 'display: none;')
     ])
@@ -221,7 +225,6 @@ export default cB('input', `
       cursor: not-allowed;
       color: var(--n-text-color-disabled);
       text-decoration-color: var(--n-text-color-disabled);
-      -webkit-text-fill-color: var(--n-text-color-disabled);
     `),
     cE('placeholder', 'color: var(--n-placeholder-color-disabled);'),
     cE('separator', 'color: var(--n-text-color-disabled);', [
@@ -232,6 +235,9 @@ export default cB('input', `
         color: var(--n-icon-color-disabled);
       `)
     ]),
+    cB('input-word-count', `
+      color: var(--n-count-text-color-disabled);
+    `),
     cE('suffix, prefix', 'color: var(--n-text-color-disabled);', [
       cB('icon', `
         color: var(--n-icon-color-disabled);
@@ -369,4 +375,12 @@ export default cB('input', `
       ])
     ])
   ]))
+])
+
+export const safariStyle = cB('input', [
+  cM('disabled', [
+    cE('input-el, textarea-el', `
+      -webkit-text-fill-color: var(--n-text-color-disabled);
+    `)
+  ])
 ])

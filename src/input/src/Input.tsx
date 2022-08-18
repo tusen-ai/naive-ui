@@ -16,12 +16,14 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   Fragment,
-  VNode
+  VNode,
+  VNodeChild
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
+import { isSafari } from '../../_utils/env/browser'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -37,7 +39,8 @@ import {
   useLocale,
   useFormItem,
   useConfig,
-  useThemeClass
+  useThemeClass,
+  useStyle
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -60,7 +63,7 @@ import type {
 import { inputInjectionKey } from './interface'
 import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
-import style from './styles/input.cssr'
+import style, { safariStyle } from './styles/input.cssr'
 
 export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -121,6 +124,7 @@ export const inputProps = {
     default: undefined
   },
   allowInput: Function as PropType<(value: string) => boolean>,
+  renderCount: Function as PropType<(props: { value: string }) => VNodeChild>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -190,6 +194,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    if (isSafari) {
+      useStyle('-input-safari', safariStyle, mergedClsPrefixRef)
+    }
     // dom refs
     const wrapperElRef = ref<HTMLElement | null>(null)
     const textareaElRef = ref<HTMLTextAreaElement | null>(null)
@@ -445,6 +452,9 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      if (e instanceof InputEvent && !e.isComposing) {
+        isComposingRef.value = false
+      }
       if (props.type === 'textarea') {
         const { value: textareaScrollbarInst } = textareaScrollbarInstRef
         if (textareaScrollbarInst) {
@@ -578,7 +588,7 @@ export default defineComponent({
             const resizeHandleSize = 14
             if (
               left + width - resizeHandleSize < e.clientX &&
-              e.clientY < left + width &&
+              e.clientX < left + width &&
               top + height - resizeHandleSize < e.clientY &&
               e.clientY < top + height
             ) {
@@ -829,6 +839,7 @@ export default defineComponent({
           iconColorDisabled,
           suffixTextColor,
           countTextColor,
+          countTextColorDisabled,
           iconColorHover,
           iconColorPressed,
           loadingColor,
@@ -843,6 +854,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-count-text-color': countTextColor,
+        '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,
         '--n-font-size': fontSize,
         '--n-border-radius': borderRadius,
@@ -1310,7 +1322,15 @@ export default defineComponent({
         ) : null}
         {this.showCount && type === 'textarea' ? (
           <WordCount>
-            {{ default: (props: unknown) => $slots.count?.(props) }}
+            {{
+              default: (props: unknown) => {
+                const { renderCount } = this
+                if (renderCount) {
+                  return renderCount(props as { value: string })
+                }
+                return $slots.count?.(props)
+              }
+            }}
           </WordCount>
         ) : null}
       </div>

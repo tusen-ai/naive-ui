@@ -46,7 +46,7 @@ custom-icon.vue
 | precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |  |
 | update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |  |

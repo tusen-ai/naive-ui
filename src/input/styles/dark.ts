@@ -41,6 +41,7 @@ const inputDark: InputTheme = {
     } = vars
     return {
       ...commonVariables,
+      countTextColorDisabled: textColorDisabled,
       countTextColor: textColor3,
       heightTiny,
       heightSmall,

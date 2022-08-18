@@ -5,7 +5,7 @@ List can be bordered or unbordered.
 </markdown>
 
 <template>
-  <n-list>
+  <n-list bordered>
     <template #header>
       hhh
     </template>

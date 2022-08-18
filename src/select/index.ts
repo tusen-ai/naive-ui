@@ -8,6 +8,7 @@ export type {
 } from './src/interface'
 export type {
   RenderLabelImpl as SelectRenderLabel,
-  RenderOptionImpl as SelectRenderOption
+  RenderOptionImpl as SelectRenderOption,
+  NodeProps as SelectNodeProps
 } from '../_internal/select-menu/src/interface'
 export type { RenderTag as SelectRenderTag } from '../_internal/selection/src/interface'

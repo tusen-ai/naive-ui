@@ -108,7 +108,7 @@ export default defineComponent({
               </VirtualList>
             ) : (
               <div class={`${mergedClsPrefix}-transfer-list-content`}>
-                {this.options.map((option) => (
+                {options.map((option) => (
                   <NTransferListItem
                     source={source}
                     key={option.value}

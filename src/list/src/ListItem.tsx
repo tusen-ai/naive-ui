@@ -10,6 +10,7 @@ export default defineComponent({
       throwError('list-item', '`n-list-item` must be placed in `n-list`.')
     }
     return {
+      showDivider: listInjection.showDividerRef,
       mergedClsPrefix: listInjection.mergedClsPrefixRef
     }
   },
@@ -30,6 +31,9 @@ export default defineComponent({
             {$slots.suffix()}
           </div>
         ) : null}
+        {this.showDivider && (
+          <div class={`${mergedClsPrefix}-list-item__divider`} />
+        )}
       </li>
     )
   }

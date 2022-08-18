@@ -20,7 +20,7 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     fontSizeHuge,
     textColor: textColorDisabled,
-    iconColor: iconColor,
+    iconColor,
     extraTextColor: textColor2
   }
 }

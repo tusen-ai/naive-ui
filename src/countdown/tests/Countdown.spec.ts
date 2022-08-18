@@ -42,7 +42,7 @@ describe('n-countdown', () => {
     }
     const wrapper = mount(NCountdown, {
       props: {
-        render: render
+        render
       }
     })
     expect(wrapper.text()).not.toBe('1:1:1:1')

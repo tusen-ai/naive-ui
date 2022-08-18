@@ -4,8 +4,8 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 // vars:
 // --n-bezier
 
-// --n-icon-color
-// --n-icon-color-disabled
+// --n-icon-color-override
+// --n-icon-color-disabled-override
 
 // --n-panel-border-radius
 // --n-panel-color
@@ -64,19 +64,19 @@ export default c([
     z-index: auto;
   `, [
     cB('date-picker-icon', `
-      color: var(--n-icon-color);
+      color: var(--n-icon-color-override);
       transition: color .3s var(--n-bezier);
     `),
     cB('icon', `
-      color: var(--n-icon-color);
+      color: var(--n-icon-color-override);
       transition: color .3s var(--n-bezier);
     `),
     cM('disabled', [
       cB('date-picker-icon', `
-        color: var(--n-icon-color-disabled);
+        color: var(--n-icon-color-disabled-override);
       `),
       cB('icon', `
-        color: var(--n-icon-color-disabled);
+        color: var(--n-icon-color-disabled-override);
       `)
     ])
   ]),

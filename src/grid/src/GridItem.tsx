@@ -1,4 +1,11 @@
-import { h, defineComponent, inject, getCurrentInstance, PropType } from 'vue'
+import {
+  h,
+  defineComponent,
+  inject,
+  getCurrentInstance,
+  PropType,
+  computed
+} from 'vue'
 import { pxfy } from 'seemly'
 import { keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -47,13 +54,18 @@ export default defineComponent({
       isSsrRef,
       xGapRef,
       itemStyleRef,
-      overflowRef
+      overflowRef,
+      layoutShiftDisabledRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(gridInjectionKey)!
     const self = getCurrentInstance()
     return {
       overflow: overflowRef,
       itemStyle: itemStyleRef,
+      layoutShiftDisabled: layoutShiftDisabledRef,
+      mergedXGap: computed(() => {
+        return pxfy(xGapRef.value || 0)
+      }),
       deriveStyle: () => {
         void isSsrRef.value
         // Here is quite a hack, I hope there is a better way to solve it
@@ -79,6 +91,21 @@ export default defineComponent({
     }
   },
   render () {
+    if (this.layoutShiftDisabled) {
+      const { span, offset, mergedXGap } = this
+      return (
+        <div
+          style={{
+            gridColumn: `span ${span} / span ${span}`,
+            marginLeft: offset
+              ? `calc((100% - (${span} - 1) * ${mergedXGap}) / ${span} * ${offset} + ${mergedXGap} * ${offset})`
+              : ''
+          }}
+        >
+          {this.$slots}
+        </div>
+      )
+    }
     return (
       <div style={[this.itemStyle as any, this.deriveStyle()]}>
         {this.$slots.default?.({ overflow: this.overflow })}

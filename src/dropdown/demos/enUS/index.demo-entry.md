@@ -76,5 +76,5 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | Property | Type               | Description                            |
 | -------- | ------------------ | -------------------------------------- |
 | type     | `'render'`         | The type of the DropdownRenderOption.  |
-| key?      | `string \| number` | Render option ID (should be unique).   |
-| render?   | `() => VNodeChild` | Render function of the option content. |
+| key?     | `string \| number` | Render option ID (should be unique).   |
+| render?  | `() => VNodeChild` | Render function of the option content. |

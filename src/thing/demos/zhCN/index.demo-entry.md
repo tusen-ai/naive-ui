@@ -16,13 +16,15 @@ rtl-debug.vue
 
 ### Thing Props
 
-| 名称             | 类型      | 默认值      | 说明             |
-| ---------------- | --------- | ----------- | ---------------- |
-| content-indented | `boolean` | `false`     | 是否启用内容缩进 |
-| content          | `string`  | `undefined` | 内容区域         |
-| description      | `string`  | `undefined` | 描述信息         |
-| title-extra      | `string`  | `undefined` | 标题的附加信息   |
-| title            | `string`  | `undefined` | 标题             |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| content-indented | `boolean` | `false` | 是否启用内容缩进 |  |
+| content | `string` | `undefined` | 内容区域 |  |
+| content-style | `string \| Object` | `undefined` | 内容区域样式 | 2.32.2 |
+| description | `string` | `undefined` | 描述信息 |  |
+| description-style | `string \| Object` | `undefined` | 描述信息区域样式 | 2.32.2 |
+| title-extra | `string` | `undefined` | 标题的附加信息 |  |
+| title | `string` | `undefined` | 标题 |  |
 
 ### Thing Slots
 

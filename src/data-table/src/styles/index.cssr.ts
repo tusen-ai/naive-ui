@@ -112,6 +112,7 @@ export default c([
       height: 1px;
     `),
     cB('data-table-expand-trigger', `
+      display: inline-flex;
       margin-right: 8px;
       cursor: pointer;
       font-size: 16px;
@@ -122,6 +123,18 @@ export default c([
       color: var(--n-td-text-color);
       transition: color .3s var(--n-bezier);
     `, [
+      cM('expanded', [
+        cB('icon', 'transform: rotate(90deg);', [
+          iconSwitchTransition({
+            originalTransform: 'rotate(90deg)'
+          })
+        ]),
+        cB('base-icon', 'transform: rotate(90deg);', [
+          iconSwitchTransition({
+            originalTransform: 'rotate(90deg)'
+          })
+        ])
+      ]),
       cB('base-loading', `
         color: var(--n-loading-color);
         transition: color .3s var(--n-bezier);
@@ -133,7 +146,16 @@ export default c([
       `, [
         iconSwitchTransition()
       ]),
-      cE('icon', `
+      cB('icon', `
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      `, [
+        iconSwitchTransition()
+      ]),
+      cB('base-icon', `
         position: absolute;
         left: 0;
         right: 0;
@@ -143,15 +165,23 @@ export default c([
         iconSwitchTransition()
       ])
     ]),
-    cB('data-table-thead', {
-      transition: 'background-color .3s var(--n-bezier)',
-      backgroundColor: 'var(--n-merged-th-color)'
-    }),
+    cB('data-table-thead', `
+      transition: background-color .3s var(--n-bezier);
+      background-color: var(--n-merged-th-color);
+    `),
     cB('data-table-tr', `
       box-sizing: border-box;
       background-clip: padding-box;
       transition: background-color .3s var(--n-bezier);
     `, [
+      cB('data-table-expand', `
+        position: sticky;
+        left: 0;
+        overflow: hidden;
+        margin: calc(var(--n-th-padding) * -1);
+        padding: var(--n-th-padding);
+        box-sizing: border-box;
+      `),
       cM('striped', 'background-color: var(--n-merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--n-merged-td-color-striped);')
       ]),

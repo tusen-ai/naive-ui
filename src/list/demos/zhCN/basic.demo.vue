@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-list bordered>
+  <n-list>
     <template #header>
       hhh
     </template>

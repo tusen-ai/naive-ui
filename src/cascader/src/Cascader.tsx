@@ -22,7 +22,7 @@ import {
   FollowerPlacement,
   FollowerInst
 } from 'vueuc'
-import { depx, changeColor, happensIn } from 'seemly'
+import { depx, changeColor, happensIn, getPreciseEventTarget } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
@@ -88,6 +88,10 @@ export const cascaderProps = {
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
+  },
+  disabledField: {
+    type: String,
+    default: 'disabled'
   },
   expandTrigger: {
     type: String as PropType<ExpandTrigger>,
@@ -229,8 +233,11 @@ export default defineComponent({
       loadingKeySetRef.value.delete(key)
     }
     const treeMateRef = computed(() => {
-      const { valueField, childrenField } = props
+      const { valueField, childrenField, disabledField } = props
       return createTreeMate(props.options, {
+        getDisabled (node) {
+          return (node as any)[disabledField]
+        },
         getKey (node) {
           return (node as any)[valueField]
         },
@@ -548,7 +555,11 @@ export default defineComponent({
     function handleCascaderMenuClickOutside (e: MouseEvent): void {
       if (showSelectMenuRef.value) return
       if (mergedShowRef.value) {
-        if (!triggerInstRef.value?.$el.contains(e.target as Node)) {
+        if (
+          !triggerInstRef.value?.$el.contains(
+            getPreciseEventTarget(e) as Node | null
+          )
+        ) {
           closeMenu()
         }
       }
@@ -993,7 +1004,11 @@ export default defineComponent({
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onKeydown={this.handleKeydown}
-                    />
+                    >
+                      {{
+                        arrow: () => this.$slots.arrow?.()
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,

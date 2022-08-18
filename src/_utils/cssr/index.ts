@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import CSSRender, { CNode, CProperties } from 'css-render'
-import BEMPlugin from '@css-render/plugin-bem'
+import { CssRender, CNode, CProperties } from 'css-render'
+import BemPlugin from '@css-render/plugin-bem'
 
 const namespace = 'n'
 const prefix = `.${namespace}-`
 const elementPrefix = '__'
 const modifierPrefix = '--'
 
-const cssr = CSSRender()
-const plugin = BEMPlugin({
+const cssr = CssRender()
+const plugin = BemPlugin({
   blockPrefix: prefix,
   elementPrefix,
   modifierPrefix

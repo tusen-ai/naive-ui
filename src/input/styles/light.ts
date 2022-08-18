@@ -41,6 +41,7 @@ const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     ...commonVariables,
+    countTextColorDisabled: textColorDisabled,
     countTextColor: textColor3,
     heightTiny,
     heightSmall,

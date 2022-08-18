@@ -14,13 +14,6 @@ describe('n-transfer', () => {
     )
   })
 
-  it('should work with `filterable` prop', () => {
-    const wrapper = mount(NTransfer, { props: { filterable: true } })
-    expect(wrapper.find('.n-transfer').attributes('class')).toContain(
-      'n-transfer--filterable'
-    )
-  })
-
   it('should work with `filter` prop', async () => {
     const options = [
       {
@@ -30,7 +23,7 @@ describe('n-transfer', () => {
     ]
     const onFilter = jest.fn()
     const wrapper = mount(NTransfer, {
-      props: { filterable: true, filter: onFilter, options: options }
+      props: { filterable: true, filter: onFilter, options }
     })
     await wrapper.find('input').setValue('1')
     await sleep(300)
@@ -44,5 +37,25 @@ describe('n-transfer', () => {
       })
       expect(wrapper.find('.n-transfer').attributes('style')).toMatchSnapshot()
     })
+  })
+
+  it('should work with `source-title` prop', async () => {
+    const test = 'source-title-test'
+    const wrapper = mount(NTransfer, { props: { sourceTitle: test } })
+    expect(wrapper.find('.n-transfer-list-header__title').text()).toBe(test)
+  })
+
+  it('should work with `target-title` prop', async () => {
+    const test = 'target-title-test'
+    const wrapper = mount(NTransfer, { props: { targetTitle: test } })
+    expect(wrapper.find('.n-transfer-list-header__title').text()).toBe(test)
+  })
+
+  it('should work with `source-filter-placeholder` prop', async () => {
+    const test = 'source-filter-placeholder-test'
+    const wrapper = mount(NTransfer, {
+      props: { filterable: true, sourceFilterPlaceholder: test }
+    })
+    expect(wrapper.find('.n-input__placeholder').text()).toBe(test)
   })
 })
