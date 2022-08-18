@@ -108,6 +108,7 @@ export const dataTableProps = {
   },
   defaultExpandAll: Boolean,
   expandedRowKeys: Array as PropType<RowKey[]>,
+  expandedRowRemainSticky: Boolean,
   virtualScroll: Boolean,
   tableLayout: {
     type: String as PropType<'auto' | 'fixed'>,
@@ -287,6 +288,7 @@ export default defineComponent({
       paginatedDataRef
     })
     const {
+      expandedRowRemainStickyRef,
       mergedExpandedRowKeysRef,
       renderExpandRef,
       expandableRef,
@@ -361,6 +363,7 @@ export default defineComponent({
       localeRef,
       scrollPartRef,
       expandableRef,
+      expandedRowRemainStickyRef,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
