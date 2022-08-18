@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-transfer` 的 `filterable` 属性将会废弃，请使用 `source-filterable` 和 `target-filterable` 属性
+
 ### Fixes
 
 - 修复 `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
@@ -47,6 +51,8 @@
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `simple` 属性
 - `n-cascader` 新增 `arrow` 插槽，关闭 [#3459](https://github.com/TuSimple/naive-ui/issues/3459)
+- `n-transfer` 新增 `source-filterable` 属性，关闭 [#3407](https://github.com/TuSimple/naive-ui/issues/3407)
+- `n-transfer` 新增 `target-filterable` 属性，关闭 [#3407](https://github.com/TuSimple/naive-ui/issues/3407)
 - `n-list` 支持 RTL
 - `n-drawer` 支持 RTL
 - `n-input` 新增 `render-count` 属性
