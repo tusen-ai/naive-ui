@@ -59,10 +59,10 @@ expand-debug.vue
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
-| keyboard | `boolean` | `true` | 是否支持键盘操作 | NEXT_VERSION |
+| keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.32.2 |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |  |
-| disabled-field | `string` | `'disabled'` | 替代 `TreeOption` 中的 disabled 字段名 | NEXT_VERSION |
+| disabled-field | `string` | `'disabled'` | 替代 `TreeOption` 中的 disabled 字段名 | 2.32.2 |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.25.0 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
@@ -105,4 +105,4 @@ expand-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | NEXT_VERSION |
+| scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |

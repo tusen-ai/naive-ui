@@ -29,7 +29,7 @@ page-size-option.vue
 | default-page | `number` | `1` | Current page in uncontrolled mode. |  |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
-| display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | NEXT_VERSION |
+| display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | 2.32.2 |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |
@@ -42,7 +42,7 @@ page-size-option.vue
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
-| simple | `boolean` | `false` | Whether to use simple mode. | NEXT_VERSION |
+| simple | `boolean` | `false` | Whether to use simple mode. | 2.32.2 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |

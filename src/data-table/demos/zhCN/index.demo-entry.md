@@ -95,7 +95,7 @@ expandable-debug.vue
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
-| render-expand-icon | `() => VNodeChild` | `undefined` | 自定义渲染展开图标 | NEXT_VERSION |
+| render-expand-icon | `() => VNodeChild` | `undefined` | 自定义渲染展开图标 | 2.32.2 |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
@@ -103,7 +103,7 @@ expandable-debug.vue
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
-| sticky-expanded-rows | `boolean` | `false` | 展开行是否不随表格横向滚动 | NEXT_VERSION |
+| sticky-expanded-rows | `boolean` | `false` | 展开行是否不随表格横向滚动 | 2.32.2 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |  |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |  |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |  |

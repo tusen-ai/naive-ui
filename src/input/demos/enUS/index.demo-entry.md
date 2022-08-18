@@ -45,7 +45,7 @@ pattern.vue
 | passively-activated | `boolean` | `false` | Whether to passively activate the input. |  |
 | placeholder | `string \| [string, string]` | `undefined` | Placeholder of input. When `pair` is `true`, this is an array. |  |
 | readonly | `boolean` | `false` | Set the readonly state. |  |
-| render-count | `(props: { value: string }) => void` | `undefined` | Render function of word count. | NEXT_VERSION |
+| render-count | `(props: { value: string }) => void` | `undefined` | Render function of word count. | 2.32.2 |
 | round | `boolean` | `false` | Use a rounded input style. |  |
 | rows | `number` | `3` | Rows property for when the input is of type `textarea`. |  |
 | separator | `string` | `undefined` | The separator between pairwise inputs. |  |

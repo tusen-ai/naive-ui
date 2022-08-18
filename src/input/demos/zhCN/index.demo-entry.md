@@ -49,7 +49,7 @@ textarea-resize-debug.vue
 | passively-activated | `boolean` | `false` | 是否被动激活输入框 |  |
 | placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果 `pair` 是 `true`，`placeholder`是一个数组 |  |
 | readonly | `boolean` | `false` | 是否只读 |  |
-| render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | NEXT_VERSION |
+| render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | 2.32.2 |
 | round | `boolean` | `false` | 输入框是否圆角 |  |
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |  |
 | separator | `string` | `undefined` | 成对输入框中间的分隔符 |  |

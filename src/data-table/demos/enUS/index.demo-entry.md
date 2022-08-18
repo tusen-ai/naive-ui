@@ -87,7 +87,7 @@ render-cell.vue
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
-| render-expand-icon | `() => VNodeChild` | `undefined` | Render function of expand icon. | NEXT_VERSION |
+| render-expand-icon | `() => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2 |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
@@ -95,7 +95,7 @@ render-cell.vue
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
-| sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | NEXT_VERSION |
+| sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | 2.32.2 |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
