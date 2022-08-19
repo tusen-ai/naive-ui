@@ -44,9 +44,8 @@ const frFR: NLocale = {
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
     endDatetimePlaceholder: 'Date et heure de fin',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Mois de début',
+    endMonthPlaceholder: 'Mois de fin',
     monthBeforeYear: true,
     firstDayOfWeek: 1,
     today: "Aujourd'hui"
@@ -61,13 +60,12 @@ const frFR: NLocale = {
     sourceTitle: 'Source',
     targetTitle: 'Cible'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Sélectionner tout',
+    unselectAll: 'Désélectionner tout',
+    clearAll: 'Effacer',
+    total: (num: number): string => `Total ${num} éléments`,
+    selected: (num: number): string => `${num} éléments sélectionnés`
   },
   Empty: {
     description: 'Aucune donnée'
@@ -118,8 +116,7 @@ const frFR: NLocale = {
     tipZoomOut: 'Dézoomer',
     tipZoomIn: 'Zoomer',
     tipClose: 'Fermer (Échap.)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Zoom à la taille originale'
   }
 }
 
