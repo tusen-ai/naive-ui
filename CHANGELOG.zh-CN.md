@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VETSION
+
+### Fixes
+
+### Feats
+
+- `n-menu` 新增 `disabledField` 属性
+
 ## 2.32.2
 
 ### Fixes
