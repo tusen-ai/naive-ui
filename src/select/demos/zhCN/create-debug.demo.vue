@@ -10,6 +10,7 @@
       multiple
       tag
       :options="options"
+      :on-create="onCreate"
     />
     <n-select v-model:value="selectValue" filterable tag :options="options" />
   </n-space>
@@ -17,9 +18,21 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-
+import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
+    const message = useMessage()
+    function onCreate (label: string) {
+      console.log(label)
+      if (isNaN(parseFloat(label)) || isNaN(Number(label))) {
+        message.warning('only allow number !')
+        return
+      }
+      return {
+        label,
+        value: label
+      }
+    }
     return {
       multipleSelectValue: ref(null),
       selectValue: ref(null),
@@ -79,7 +92,8 @@ export default defineComponent({
           label: 'Wait',
           value: 'song12'
         }
-      ]
+      ],
+      onCreate
     }
   }
 })
