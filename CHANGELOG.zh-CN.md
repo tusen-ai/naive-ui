@@ -7,6 +7,7 @@
 ### Feats
 
 - `n-menu` 新增 `disabledField` 属性
+- `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 
 ## 2.32.2
 

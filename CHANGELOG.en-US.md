@@ -7,6 +7,7 @@
 ### Feats
 
 - `n-menu` adds `disabledField` prop.
+- `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
 
 ## 2.32.2
 
