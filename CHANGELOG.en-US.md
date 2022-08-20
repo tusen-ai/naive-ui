@@ -7,6 +7,7 @@
 ### Feats
 
 - `n-menu` adds `disabledField` prop.
+- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
 
 ## 2.32.2
 
