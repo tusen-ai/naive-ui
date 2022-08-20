@@ -25,7 +25,7 @@ size.vue
 | label | `string` | `undefined` | Radio label. If not set, render default slot content, if both, use default slot content first. | 2.28.0 |
 | name | `string` | `undefined` | The name attribute of the radio element. If not set, name of `radio-group` will be used. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
-| value | `string \| number` | `'on'` | Checked value. |  |
+| value | `string \| number \| boolean` | `'on'` | Checked value. |  |
 | on-update:checked | `(check: boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |  |
 
 ### RadioGroup Props
@@ -35,6 +35,6 @@ size.vue
 | disabled | `boolean` | `false` | Disabled state. |
 | name | `string` | `undefined` | The name attribute of the radio elements inside the group. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| value | `string \| number \| null` | `null` | Checked value. |
-| default-value | `string \| number \| null` | `null` | Default checked value. |
+| value | `string \| number \| boolean \| null` | `null` | Checked value. |
+| default-value | `string \| number \| boolean \| null` | `null` | Default checked value. |
 | on-update:value | `(value: string) => void` | `undefined` | Callback method triggered when a selection change occurs. |

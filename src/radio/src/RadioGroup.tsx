@@ -25,7 +25,7 @@ import { useRtl } from '../../_mixins/use-rtl'
 
 function mapSlot (
   defaultSlot: VNode[],
-  value: string | number | null,
+  value: string | number | boolean | null,
   clsPrefix: string
 ): {
     children: VNodeChild[]
@@ -100,9 +100,13 @@ function mapSlot (
 export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
-  value: [String, Number] as PropType<string | number | null>,
+  value: [String, Number, Boolean] as PropType<
+  string | number | boolean | null
+  >,
   defaultValue: {
-    type: [String, Number] as PropType<string | number | null>,
+    type: [String, Number, Boolean] as PropType<
+    string | number | boolean | null
+    >,
     default: null
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -145,7 +149,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    function doUpdateValue (value: string | number): void {
+    function doUpdateValue (value: string | number | boolean): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value)
