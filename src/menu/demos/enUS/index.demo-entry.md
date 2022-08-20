@@ -43,6 +43,7 @@ show.vue
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |  |
 | indent | `number` | `32` | The indent of menu. |  |
 | inverted | `boolean` | `false` | Use inverted style. |  |
+| disabledField | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
