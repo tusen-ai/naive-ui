@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VETSION
+
+### Fixes
+
+### Feats
+
+- `n-menu` adds `disabledField` prop.
+
 ## 2.32.2
 
 ### Fixes

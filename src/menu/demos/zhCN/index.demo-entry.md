@@ -44,6 +44,7 @@ debug.vue
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |  |
 | indent | `number` | `32` | 菜单每级的缩进 |  |
 | inverted | `boolean` | `false` | 使用反转样式 |  |
+| disabledField | `string` | `'disabled'` | disabled 的字段名 | NEXT_VETSION |
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |
