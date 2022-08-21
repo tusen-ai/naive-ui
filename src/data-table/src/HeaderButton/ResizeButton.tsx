@@ -11,7 +11,7 @@ export default defineComponent({
       required: true
     },
     onResize: {
-      type: Function as PropType<(distanceFromLast: number) => void>,
+      type: Function as PropType<(width: number) => void>,
       required: true
     }
   },
@@ -33,7 +33,7 @@ export default defineComponent({
     }
     function handleMousemove (e: MouseEvent): void {
       const distanceX = getMouseX(e) - startX
-      props.onResize(startWidth + distanceX)
+      props.onResize?.(startWidth + distanceX)
     }
     function handleMouseup (): void {
       activeRef.value = false

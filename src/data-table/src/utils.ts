@@ -63,26 +63,35 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
   return 0
 }
 
+// priority: min-width > max-width > width
 export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
   resizedWidth?: string
 ): CSSProperties {
-  let width = resizedWidth || getStringColWidth(column)
+  const width = resizedWidth || getStringColWidth(column)
   const minWidth = formatLength(column.minWidth)
   const maxWidth = formatLength(column.maxWidth)
-  // priority: min-width > max-width > width
-  if (
-    maxWidth !== undefined &&
-    (minWidth === undefined || parseFloat(minWidth) < parseFloat(maxWidth))
-  ) {
-    width =
-      width === undefined
-        ? maxWidth
-        : formatLength(Math.min(parseFloat(width), parseFloat(maxWidth)))
+  if (width === undefined) {
+    return {
+      minWidth,
+      maxWidth
+    }
+  }
+  let finalWidth: string | undefined = width
+  if (maxWidth !== undefined) {
+    finalWidth = formatLength(
+      Math.min(parseFloat(finalWidth), parseFloat(maxWidth))
+    )
+  }
+  if (minWidth !== undefined) {
+    finalWidth = formatLength(
+      Math.max(parseFloat(finalWidth), parseFloat(minWidth))
+    )
   }
   return {
-    width,
-    minWidth: minWidth || width
+    width: finalWidth,
+    minWidth: finalWidth,
+    maxWidth: finalWidth
   }
 }
 

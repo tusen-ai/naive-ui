@@ -224,8 +224,8 @@ export default defineComponent({
                           getCurrentWidth={() =>
                             thElsRef[key]?.getBoundingClientRect().width ?? 0
                           }
-                          onResize={(distance: number) =>
-                            handleColumnResize(column, distance)
+                          onResize={(width: number) =>
+                            handleColumnResize(column, width)
                           }
                         />
                       ) : null}

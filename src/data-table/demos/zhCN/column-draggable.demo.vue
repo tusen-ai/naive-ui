@@ -41,11 +41,11 @@ const createColumns = ({
       resizable: true
     },
     {
-      title: 'Length',
+      title: 'Length (minWidth: 100, maxWidth: 500)',
       key: 'length',
       resizable: true,
-      minWidth: 50,
-      maxWidth: 100
+      minWidth: 100,
+      maxWidth: 500
     },
     {
       title: 'Action',
