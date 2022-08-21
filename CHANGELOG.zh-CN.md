@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VETSION
+## NEXT_VERSION
 
 ### Fixes
 
