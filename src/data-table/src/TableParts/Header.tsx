@@ -236,7 +236,7 @@ export default defineComponent({
                             limitedWidth: number
                           ) =>
                             handleColumnResize(
-                              column,
+                              column as TableBaseColumn,
                               resizedWidth,
                               limitedWidth
                             )
