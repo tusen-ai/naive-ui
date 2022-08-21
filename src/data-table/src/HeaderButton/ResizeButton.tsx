@@ -6,12 +6,16 @@ import { dataTableInjectionKey } from '../interface'
 export default defineComponent({
   name: 'ColumnResizeButton',
   props: {
+    minWidth: [String, Number],
+    maxWidth: [String, Number],
     getCurrentWidth: {
       type: Function as PropType<() => number>,
       required: true
     },
     onResize: {
-      type: Function as PropType<(width: number) => void>,
+      type: Function as PropType<
+      (resizedWidth: number, limitedWidth: number) => void
+      >,
       required: true
     }
   },
@@ -21,6 +25,22 @@ export default defineComponent({
     const activeRef = ref(false)
     let startX = 0
     let startWidth = 0
+    function getLimitedWidth (width: number): number {
+      const { minWidth, maxWidth } = props
+      if (maxWidth !== undefined) {
+        width = Math.min(
+          width,
+          typeof maxWidth === 'number' ? maxWidth : parseFloat(maxWidth)
+        )
+      }
+      if (minWidth !== undefined) {
+        width = Math.max(
+          width,
+          typeof minWidth === 'number' ? minWidth : parseFloat(minWidth)
+        )
+      }
+      return width
+    }
     function getMouseX (e: MouseEvent): number {
       return e.clientX
     }
@@ -32,8 +52,9 @@ export default defineComponent({
       on('mouseup', window, handleMouseup)
     }
     function handleMousemove (e: MouseEvent): void {
-      const distanceX = getMouseX(e) - startX
-      props.onResize?.(startWidth + distanceX)
+      const resizedWidth = startWidth + getMouseX(e) - startX
+      const limitedWidth = getLimitedWidth(resizedWidth)
+      props.onResize?.(resizedWidth, limitedWidth)
     }
     function handleMouseup (): void {
       activeRef.value = false

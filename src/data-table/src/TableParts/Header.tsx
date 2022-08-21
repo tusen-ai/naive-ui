@@ -28,7 +28,6 @@ import {
   TableColumnGroup,
   TableBaseColumn,
   dataTableInjectionKey,
-  TableColumn,
   ColumnKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
@@ -67,6 +66,7 @@ export default defineComponent({
       scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
+      onResizeColumn,
       doUpdateResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
@@ -106,8 +106,13 @@ export default defineComponent({
     function handleMouseleave (): void {
       scrollPartRef.value = 'body'
     }
-    function handleColumnResize (column: TableColumn, width: number): void {
-      doUpdateResizableWidth(column, width)
+    function handleColumnResize (
+      column: TableBaseColumn,
+      resizedWidth: number,
+      limitedWidth: number
+    ): void {
+      onResizeColumn(resizedWidth, limitedWidth, column)
+      doUpdateResizableWidth(column, limitedWidth)
     }
     onBeforeUpdate(() => (thElsRef.value = {}))
     return {
@@ -221,11 +226,20 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
+                          minWidth={column.minWidth}
+                          maxWidth={column.maxWidth}
                           getCurrentWidth={() =>
                             thElsRef[key]?.getBoundingClientRect().width ?? 0
                           }
-                          onResize={(width: number) =>
-                            handleColumnResize(column, width)
+                          onResize={(
+                            resizedWidth: number,
+                            limitedWidth: number
+                          ) =>
+                            handleColumnResize(
+                              column,
+                              resizedWidth,
+                              limitedWidth
+                            )
                           }
                         />
                       ) : null}

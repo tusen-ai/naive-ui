@@ -107,6 +107,7 @@ ellipsis-debug.vue
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
+| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn) => void` | `undefined` | 列宽拖动时的回调函数 | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
@@ -135,7 +136,7 @@ ellipsis-debug.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
-| resizable | `boolean` | `undefined` | 列宽是否可以拖拽 | NEXT_VERSION |
+| resizable | `boolean` | `undefined` | 列宽是否可以拖动 | NEXT_VERSION |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
 | minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |

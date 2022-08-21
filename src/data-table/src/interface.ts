@@ -230,6 +230,11 @@ export interface DataTableInjection {
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
+  onResizeColumn: (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn
+  ) => void
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
   doUpdateResizableWidth: (column: TableColumn, width: number) => void

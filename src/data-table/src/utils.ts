@@ -68,30 +68,20 @@ export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
   resizedWidth?: string
 ): CSSProperties {
-  const width = resizedWidth || getStringColWidth(column)
-  const minWidth = formatLength(column.minWidth)
-  const maxWidth = formatLength(column.maxWidth)
-  if (width === undefined) {
+  if (resizedWidth !== undefined) {
     return {
-      minWidth,
-      maxWidth
+      width: resizedWidth,
+      minWidth: resizedWidth,
+      maxWidth: resizedWidth
     }
   }
-  let finalWidth: string | undefined = width
-  if (maxWidth !== undefined) {
-    finalWidth = formatLength(
-      Math.min(parseFloat(finalWidth), parseFloat(maxWidth))
-    )
-  }
-  if (minWidth !== undefined) {
-    finalWidth = formatLength(
-      Math.max(parseFloat(finalWidth), parseFloat(minWidth))
-    )
-  }
+  const width = getStringColWidth(column)
+  const minWidth = formatLength(column.minWidth)
+  const maxWidth = formatLength(column.maxWidth)
   return {
-    width: finalWidth,
-    minWidth: finalWidth,
-    maxWidth: finalWidth
+    width,
+    minWidth: minWidth,
+    maxWidth: maxWidth
   }
 }
 

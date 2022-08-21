@@ -178,6 +178,13 @@ export const dataTableProps = {
   >,
   onCheckedRowKeysChange: [Function, Array] as PropType<
   MaybeArray<OnUpdateCheckedRowKeys> | undefined
+  >,
+  onResizeColumn: Function as PropType<
+  (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn
+  ) => void
   >
 } as const
 
@@ -265,6 +272,7 @@ export default defineComponent({
       childTriggerColIndexRef,
       doUpdatePage,
       doUpdateFilters,
+      onResizeColumn,
       deriveNextSorter,
       filter,
       filters,
@@ -395,6 +403,7 @@ export default defineComponent({
       doUpdatePage,
       doUpdateFilters,
       getResizableWidth,
+      onResizeColumn,
       clearResizableWidth,
       doUpdateResizableWidth,
       deriveNextSorter,
