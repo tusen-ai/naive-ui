@@ -556,7 +556,7 @@ export default defineComponent({
               loadingKeys.delete(node.key)
               resolve()
             })
-            .catch((loadError) => {
+            .catch((loadError: Error) => {
               console.error(loadError)
               resetDragExpandState()
             })
