@@ -11,6 +11,7 @@ color.vue
 icon.vue
 allow-half.vue
 readonly.vue
+clearable.vue
 ```
 
 ## API

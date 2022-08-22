@@ -36,6 +36,7 @@ export const rateProps = {
     type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  clearable: Boolean,
   color: String,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -64,9 +65,19 @@ export default defineComponent({
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
+    const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
     function doUpdateValue (value: number): void {
-      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
+      const {
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue,
+        clearable
+      } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
+
+      if (clearable && value === mergedValue.value) {
+        value = 0
+      }
+
       if (_onUpdateValue) {
         call(_onUpdateValue, value)
       }
@@ -145,7 +156,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
+      mergedValue,
       hoverIndex: hoverIndexRef,
       handleMouseMove,
       handleClick,
