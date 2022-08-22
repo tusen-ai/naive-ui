@@ -93,7 +93,7 @@ export function createCustomWidthStyle (
   const { minWidth, maxWidth } = column
   return {
     width,
-    minWidth: formatLength(minWidth),
+    minWidth: formatLength(minWidth) || width,
     maxWidth: formatLength(maxWidth)
   }
 }

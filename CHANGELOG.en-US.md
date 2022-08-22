@@ -4,13 +4,47 @@
 
 ### Fixes
 
+### Feats
+
+- `n-menu` adds `disabledField` prop.
+- `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
+- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
+- `n-data-table` column adds `resizable` prop, closes [#3165](https://github.com/TuSimple/naive-ui/issues/3165).
+
+## 2.32.2
+
+### Fixes
+
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
 - Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
+- Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
+- Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
+- Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
+- Fix `n-tag` pointer should be not allow when disabled, closes [#3494](https://github.com/tusen-ai/naive-ui/issues/3494).
+- Fix `n-transfer` throws error if value has no corresponding option, closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406).
+- Added `exports` field in package.json.
+- Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430).
+- Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
+- Fix some components works abnormally in open mode shadow DOM, closes [#3281](https://github.com/TuSimple/naive-ui/issues/3281).
+- Fix `n-carousel` in `loop='true'` and `effect='slide'`, When there are only two elements, the transition switching effect of the rotation is opposite, closes [#3414](https://github.com/TuSimple/naive-ui/issues/3413).
+- Fix `n-input` can't input value after compositing is interrupted by rerender, closes [#3503](https://github.com/tusen-ai/naive-ui/issues/3503).
+- Fix `n-layout`'s `embedded` prop not working after `n-config-provider` has set `inline-theme-disabled`, closes [#3500](https://github.com/tusen-ai/naive-ui/issues/3500).
+- Fix `n-input` has duplicate placeholder if disabled, closes [#3467](https://github.com/tusen-ai/naive-ui/issues/3467).
+- Fix `n-date-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
+- Fix `n-time-picker`'s `iconColor` theme variable not working, closes [#3501](https://github.com/tusen-ai/naive-ui/issues/3501).
+- Fix `n-select`'s `node-props` prop doesn't work.
+- Fix Nuxt report `CSSRender is not a function` error on preview, closes [#3506](https://github.com/tusen-ai/naive-ui/issues/3506).
+- Fix `n-data-table`'s rows disabled by `column.expandable` can still be expanded, closes [#3373](https://github.com/tusen-ai/naive-ui/issues/3373).
+- Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
+- Fix `n-switch` some theme variables can't use non-px value, closes [#2938](https://github.com/tusen-ai/naive-ui/issues/2938).
+- Fix `n-input` with `resize` & `type="textarea"` set can't be resized in some cases, closes [#3479](https://github.com/tusen-ai/naive-ui/issues/3479).
+- Fix `n-countdown`'s `reset` method doesn't work in `onFinish` callback, closes [#3536](https://github.com/tusen-ai/naive-ui/issues/3536).
 
 ### Feats
 
+- `n-menu`'s `MenuOption` add `show` prop to set whether the Menu option is displayed, closes [#3334](https://github.com/TuSimple/naive-ui/issues/3334).
 - `n-alert` adds `bordered` prop, closes [#3358](https://github.com/TuSimple/naive-ui/issues/3358).
 - `n-tag` add `trigger-click-on-close` prop, closes [#3343](https://github.com/TuSimple/naive-ui/issues/3343).
 - `n-cascader` adds `disabled-field` prop, closes [#3338](https://github.com/TuSimple/naive-ui/issues/3338).
@@ -19,6 +53,25 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
+- `n-data-table` adds `render-expand-icon` prop.
+- `n-tree` adds `disabled-field` prop.
+- `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
+- `n-tree-select` adds `disabled-field` prop.
+- `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
+- `n-pagination` adds `simple` prop.
+- `n-cascader` adds `arrow` slot, closes [#3459](https://github.com/TuSimple/naive-ui/issues/3459).
+- `n-transfer` adds `source-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
+- `n-transfer` adds `target-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
+- `n-transfer`'s `filter` prop adds `from` param.
+- `n-list` supports RTL.
+- `n-drawer` supports RTL.
+- `n-input` adds `render-count` prop.
+- `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
+- `n-statistic` adds `valueFontSize` theme variable, closes [#3510](https://github.com/tusen-ai/naive-ui/issues/3510).
+- `n-data-table` adds `sticky-expanded-rows` to allow expanded content remains sticky, closes [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
+- `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
+- `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
+- `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
 
 ## 2.32.1
 
@@ -119,6 +172,7 @@
 - `n-drawer` adds `on-update:width` prop.
 - `n-drawer` adds `on-update:height` prop.
 - Update ukUA locale.
+- `n-message` supports RTL.
 
 ## 2.30.8
 
