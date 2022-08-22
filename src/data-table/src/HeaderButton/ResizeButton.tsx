@@ -1,4 +1,4 @@
-import { defineComponent, h, inject, nextTick, onMounted, ref } from 'vue'
+import { defineComponent, h, inject, ref } from 'vue'
 import type { PropType } from 'vue'
 import { off, on } from 'evtd'
 import { dataTableInjectionKey } from '../interface'
@@ -63,14 +63,6 @@ export default defineComponent({
       off('mousemove', window, handleMousemove)
       off('mouseup', window, handleMouseup)
     }
-    onMounted(() => {
-      void nextTick(() => {
-        const currentWidth = props.getCurrentWidth()
-        if (currentWidth !== undefined) {
-          props.onResize?.(currentWidth, getLimitedWidth(currentWidth))
-        }
-      })
-    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       active: activeRef,
