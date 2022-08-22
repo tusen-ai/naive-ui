@@ -64,6 +64,20 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 // priority: min-width > max-width > width
+export function clampValueByCSSRules (
+  value: number,
+  min?: number,
+  max?: number
+): number {
+  if (max !== undefined) {
+    value = Math.min(value, typeof max === 'number' ? max : parseFloat(max))
+  }
+  if (min !== undefined) {
+    value = Math.max(value, typeof min === 'number' ? min : parseFloat(min))
+  }
+  return value
+}
+
 export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
   resizedWidth?: string
@@ -76,12 +90,11 @@ export function createCustomWidthStyle (
     }
   }
   const width = getStringColWidth(column)
-  const minWidth = formatLength(column.minWidth)
-  const maxWidth = formatLength(column.maxWidth)
+  const { minWidth, maxWidth } = column
   return {
     width,
-    minWidth: minWidth,
-    maxWidth: maxWidth
+    minWidth: formatLength(minWidth),
+    maxWidth: formatLength(maxWidth)
   }
 }
 

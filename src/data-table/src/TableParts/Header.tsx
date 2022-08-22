@@ -229,7 +229,7 @@ export default defineComponent({
                           minWidth={column.minWidth}
                           maxWidth={column.maxWidth}
                           getCurrentWidth={() =>
-                            thElsRef[key]?.getBoundingClientRect().width ?? 0
+                            thElsRef[key]?.getBoundingClientRect().width
                           }
                           onResize={(
                             resizedWidth: number,
