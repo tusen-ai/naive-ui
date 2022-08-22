@@ -2,8 +2,8 @@ import { c, cE, cM, cB, cNotM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --n-icon-color
-// --n-icon-color-disabled
+// --n-icon-color-override
+// --n-icon-color-disabled-override
 // --n-bezier
 // --n-border-radius
 // --n-item-color-hover
@@ -24,13 +24,13 @@ export default c([
     position: relative;
   `, [
     cB('time-picker-icon', `
-      color: var(--n-icon-color);
+      color: var(--n-icon-color-override);
       transition: color .3s var(--n-bezier);
     `),
     cM('disabled', [
-      cB('time-picker-icon', {
-        color: 'var(--n-icon-color-disabled)'
-      })
+      cB('time-picker-icon', `
+        color: var(--n-icon-color-disabled-override);
+      `)
     ])
   ]),
   cB('time-picker-panel', `
@@ -72,9 +72,9 @@ export default c([
           c('&::before', 'transition: none;')
         ])
       ]),
-      cE('padding', {
-        height: 'calc(var(--n-item-height) * 5)'
-      }),
+      cE('padding', `
+        height: calc(var(--n-item-height) * 5);
+      `),
       c('&:first-child', 'min-width: calc(var(--n-item-width) + 4px);', [
         cE('item', [
           c('&::before', 'left: 4px;')
@@ -111,9 +111,9 @@ export default c([
           border-radius: var(--n-item-border-radius);
         `),
         cNotM('disabled', [
-          c('&:hover::before', {
-            backgroundColor: 'var(--n-item-color-hover)'
-          })
+          c('&:hover::before', `
+            background-color: var(--n-item-color-hover);
+          `)
         ]),
         cM('active', `
           color: var(--n-item-text-color-active);

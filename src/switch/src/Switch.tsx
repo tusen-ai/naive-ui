@@ -74,6 +74,8 @@ export const switchProps = {
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
+let supportCssMax: boolean | undefined
+
 export default defineComponent({
   name: 'Switch',
   props: switchProps,
@@ -87,6 +89,19 @@ export default defineComponent({
           )
         }
       })
+    }
+    if (supportCssMax === undefined) {
+      if (typeof CSS !== 'undefined') {
+        if (typeof CSS.supports !== 'undefined') {
+          supportCssMax = CSS.supports('width', 'max(1px)')
+        } else {
+          supportCssMax = false
+        }
+      } else {
+        // If you are using SSR, we assume that you are targeting browsers with
+        // recent versions
+        supportCssMax = true
+      }
     }
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
@@ -195,12 +210,22 @@ export default defineComponent({
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
-      const offset = pxfy((depx(railHeight) - depx(buttonHeight)) / 2)
-      const height = pxfy(Math.max(depx(railHeight), depx(buttonHeight)))
-      const width =
-        depx(railHeight) > depx(buttonHeight)
-          ? railWidth
-          : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
+
+      let offset: string
+      let height: string
+      let width: string
+      if (supportCssMax) {
+        offset = `calc((${railHeight} - ${buttonHeight}) / 2)`
+        height = `max(${railHeight}, ${buttonHeight})`
+        width = `max(${railWidth}, calc(${railWidth} + ${buttonHeight} - ${railHeight}))`
+      } else {
+        offset = pxfy((depx(railHeight) - depx(buttonHeight)) / 2)
+        height = pxfy(Math.max(depx(railHeight), depx(buttonHeight)))
+        width =
+          depx(railHeight) > depx(buttonHeight)
+            ? railWidth
+            : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
+      }
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-button-border-radius': buttonBorderRadius,

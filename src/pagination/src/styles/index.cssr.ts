@@ -161,5 +161,16 @@ export default cB('pagination', `
     cB('pagination-quick-jumper', `
       color: var(--n-jumper-text-color-disabled);
     `)
+  ]),
+  cM('simple', `
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  `, [
+    cB('pagination-quick-jumper', [
+      cB('input', `
+        margin: 0;
+      `)
+    ])
   ])
 ])

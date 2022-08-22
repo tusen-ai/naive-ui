@@ -22,7 +22,7 @@ import {
   FollowerPlacement,
   FollowerInst
 } from 'vueuc'
-import { depx, changeColor, happensIn } from 'seemly'
+import { depx, changeColor, happensIn, getPreciseEventTarget } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
@@ -555,7 +555,11 @@ export default defineComponent({
     function handleCascaderMenuClickOutside (e: MouseEvent): void {
       if (showSelectMenuRef.value) return
       if (mergedShowRef.value) {
-        if (!triggerInstRef.value?.$el.contains(e.target as Node)) {
+        if (
+          !triggerInstRef.value?.$el.contains(
+            getPreciseEventTarget(e) as Node | null
+          )
+        ) {
           closeMenu()
         }
       }
@@ -1000,7 +1004,11 @@ export default defineComponent({
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onKeydown={this.handleKeydown}
-                    />
+                    >
+                      {{
+                        arrow: () => this.$slots.arrow?.()
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,

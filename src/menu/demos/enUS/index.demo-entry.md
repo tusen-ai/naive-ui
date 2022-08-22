@@ -19,6 +19,7 @@ accordion.vue
 router-link.vue
 customize-field.vue
 expand-selected-option.vue
+show.vue
 ```
 
 ## API
@@ -42,6 +43,7 @@ expand-selected-option.vue
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |  |
 | indent | `number` | `32` | The indent of menu. |  |
 | inverted | `boolean` | `false` | Use inverted style. |  |
+| disabledField | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
@@ -62,6 +64,7 @@ expand-selected-option.vue
 | --- | --- | --- |
 | children? | `Array<MenuOption \| MenuGroupOption>` | Child menu options. |
 | disabled? | `boolean` | Whether to disable the menu item. |
+| show? | `boolean` | Whether to show the menu item. |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
 | icon? | `() => VNodeChild` | The icon for the menu item. |
 | key | `string` | The indentifier of the menu item. |

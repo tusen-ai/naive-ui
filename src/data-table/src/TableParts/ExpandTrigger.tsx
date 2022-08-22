@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, VNodeChild } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
 import {
   NBaseIcon,
@@ -18,44 +18,45 @@ export default defineComponent({
     onClick: {
       type: Function as PropType<() => void>,
       required: true
+    },
+    renderExpandIcon: {
+      type: Function as PropType<() => VNodeChild>
     }
   },
   render () {
+    const { clsPrefix } = this
     return (
-      <NBaseIcon
-        class={`${this.clsPrefix}-data-table-expand-trigger`}
-        clsPrefix={this.clsPrefix}
+      <div
+        class={[
+          `${clsPrefix}-data-table-expand-trigger`,
+          this.expanded && `${clsPrefix}-data-table-expand-trigger--expanded`
+        ]}
         onClick={this.onClick}
       >
-        {{
-          default: () => {
-            return (
-              <NIconSwitchTransition>
-                {{
-                  default: () =>
-                    this.loading ? (
-                      <NBaseLoading
-                        clsPrefix={this.clsPrefix}
-                        radius={85}
-                        strokeWidth={15}
-                        scale={0.88}
-                      />
-                    ) : (
-                      <ChevronRightIcon
-                        class={`${this.clsPrefix}-data-table-expand-trigger__icon`}
-                        style={
-                          this.expanded
-                            ? 'transform: rotate(90deg);'
-                            : undefined
-                        }
-                      />
-                    )
-                }}
-              </NIconSwitchTransition>
-            )
-          }
-        }}
-      </NBaseIcon>
+        <NIconSwitchTransition>
+          {{
+            default: () => {
+              return this.loading ? (
+                <NBaseLoading
+                  key="loading"
+                  clsPrefix={this.clsPrefix}
+                  radius={85}
+                  strokeWidth={15}
+                  scale={0.88}
+                />
+              ) : this.renderExpandIcon ? (
+                this.renderExpandIcon()
+              ) : (
+                <NBaseIcon clsPrefix={clsPrefix} key="base-icon">
+                  {{
+                    default: () => <ChevronRightIcon />
+                  }}
+                </NBaseIcon>
+              )
+            }
+          }}
+        </NIconSwitchTransition>
+      </div>
     )
   }
 })

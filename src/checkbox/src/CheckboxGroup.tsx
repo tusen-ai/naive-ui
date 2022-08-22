@@ -204,9 +204,9 @@ export default defineComponent({
       checkedCountRef: checkedCount,
       maxRef: toRef(props, 'max'),
       minRef: toRef(props, 'min'),
-      valueSetRef: valueSetRef,
+      valueSetRef,
       disabledRef: mergedDisabledRef,
-      mergedSizeRef: mergedSizeRef,
+      mergedSizeRef,
       toggleCheckbox
     })
     return {

@@ -8,6 +8,7 @@ export const self = (vars: ThemeCommonVars) => {
     labelFontSize: fontSize,
     labelFontWeight: fontWeight,
     valueFontWeight: fontWeight,
+    valueFontSize: '24px',
     labelTextColor: textColor3,
     valuePrefixTextColor: textColor2,
     valueSuffixTextColor: textColor2,

@@ -9,12 +9,14 @@ import {
   withDirectives,
   CSSProperties,
   InputHTMLAttributes,
-  watchEffect
+  watchEffect,
+  HTMLAttributes
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
+import { getPreciseEventTarget } from 'seemly'
 import {
   RenderOption,
   RenderLabel
@@ -55,6 +57,7 @@ import style from './styles/index.cssr'
 export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
+  menuProps: Object as PropType<HTMLAttributes>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -259,7 +262,9 @@ export default defineComponent({
       select(option.rawNode as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
-      if (!triggerElRef.value?.contains(e.target as Node)) {
+      if (
+        !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+      ) {
         canBeActivatedRef.value = false
       }
     }
@@ -395,41 +400,44 @@ export default defineComponent({
                       {{
                         default: () => {
                           this.onRender?.()
-                          return this.active
-                            ? withDirectives(
-                                <NInternalSelectMenu
-                                  clsPrefix={mergedClsPrefix}
-                                  ref="menuInstRef"
-                                  theme={
-                                    this.mergedTheme.peers.InternalSelectMenu
-                                  }
-                                  themeOverrides={
-                                    this.mergedTheme.peerOverrides
-                                      .InternalSelectMenu
-                                  }
-                                  auto-pending
-                                  class={[
-                                    `${mergedClsPrefix}-auto-complete-menu`,
-                                    this.themeClass
-                                  ]}
-                                  style={this.cssVars as CSSProperties}
-                                  treeMate={this.treeMate}
-                                  multiple={false}
-                                  renderLabel={this.renderLabel}
-                                  renderOption={this.renderOption}
-                                  size="medium"
-                                  onToggle={this.handleToggle}
-                                />,
-                                [
-                                  [
-                                    clickoutside,
-                                    this.handleClickOutsideMenu,
-                                    undefined as unknown as string,
-                                    { capture: true }
-                                  ]
-                                ]
-                            )
-                            : null
+                          if (!this.active) return null
+                          const { menuProps } = this
+                          return withDirectives(
+                            <NInternalSelectMenu
+                              {...(menuProps as any)}
+                              clsPrefix={mergedClsPrefix}
+                              ref="menuInstRef"
+                              theme={this.mergedTheme.peers.InternalSelectMenu}
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides
+                                  .InternalSelectMenu
+                              }
+                              auto-pending
+                              class={[
+                                `${mergedClsPrefix}-auto-complete-menu`,
+                                this.themeClass,
+                                menuProps?.class
+                              ]}
+                              style={[
+                                menuProps?.style,
+                                this.cssVars as CSSProperties
+                              ]}
+                              treeMate={this.treeMate}
+                              multiple={false}
+                              renderLabel={this.renderLabel}
+                              renderOption={this.renderOption}
+                              size="medium"
+                              onToggle={this.handleToggle}
+                            />,
+                            [
+                              [
+                                clickoutside,
+                                this.handleClickOutsideMenu,
+                                undefined as unknown as string,
+                                { capture: true }
+                              ]
+                            ]
+                          )
                         }
                       }}
                     </Transition>

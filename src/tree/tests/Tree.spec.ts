@@ -100,6 +100,7 @@ describe('n-tree', () => {
         defaultExpandedKeys: ['1'],
         data: [
           {
+            type: 'group',
             label: 'test1',
             key: '1',
             children: [
@@ -110,10 +111,12 @@ describe('n-tree', () => {
             ]
           },
           {
+            type: 'group',
             label: 'test2',
             key: '2',
             children: [
               {
+                type: 'group',
                 label: 'test2-1',
                 key: '2-1'
               }
@@ -412,7 +415,7 @@ describe('n-tree', () => {
         ],
         'expanded-keys': [1],
         remote: true,
-        onLoad: onLoad
+        onLoad
       }
     })
     setTimeout(() => {

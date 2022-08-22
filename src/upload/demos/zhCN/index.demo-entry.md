@@ -70,7 +70,7 @@ debug.vue
 
 | 属性 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| id | `string` | 文件 id，需要唯一 |  |
+| id | `string` | 文件 id，需要唯一。请注意不要修改它，如果你需要保存一些对应的数据，可以建立一个 Map 对象来保存 |  |
 | name | `string` | 文件名 |  |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | 上传的状态 |  |
 | batchId? | `string \| null` | 上传批次的 id，在同一次上传被选择的文件会拥有一样的 `batchId` | 2.28.3 |

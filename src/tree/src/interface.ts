@@ -140,3 +140,7 @@ export interface MotionData {
 export interface InternalTreeInst {
   handleKeydown: (e: KeyboardEvent) => void
 }
+
+export interface TreeInst {
+  scrollTo: (options: { key: Key }) => void
+}

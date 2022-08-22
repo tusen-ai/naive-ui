@@ -13,7 +13,7 @@ import {
   HTMLAttributes,
   watchEffect
 } from 'vue'
-import { happensIn } from 'seemly'
+import { getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
 import {
   VBinder,
@@ -26,7 +26,8 @@ import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
 import {
   RenderLabel,
-  RenderOption
+  RenderOption,
+  NodeProps
 } from '../../_internal/select-menu/src/interface'
 import { RenderTag } from '../../_internal/selection/src/interface'
 import type { FormValidationStatus } from '../../form/src/interface'
@@ -161,6 +162,7 @@ export const selectProps = {
   MaybeArray<OnUpdateValue> | undefined
   >,
   inputProps: Object as PropType<InputHTMLAttributes>,
+  nodeProps: Function as PropType<NodeProps>,
   // for jsx
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -533,7 +535,11 @@ export default defineComponent({
     }
     function handleMenuClickOutside (e: MouseEvent): void {
       if (mergedShowRef.value) {
-        if (!triggerRef.value?.$el.contains(e.target as Node)) {
+        if (
+          !triggerRef.value?.$el.contains(
+            getPreciseEventTarget(e) as Node | null
+          )
+        ) {
           // outside select, don't need to return focus
           closeMenu()
         }
@@ -948,6 +954,7 @@ export default defineComponent({
                               labelField={this.labelField}
                               valueField={this.valueField}
                               autoPending={true}
+                              nodeProps={this.nodeProps}
                               theme={this.mergedTheme.peers.InternalSelectMenu}
                               themeOverrides={
                                 this.mergedTheme.peerOverrides

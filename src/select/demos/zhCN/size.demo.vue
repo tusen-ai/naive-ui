@@ -1,11 +1,10 @@
 <markdown>
 # 尺寸
-
-选择器有不同的尺寸。
 </markdown>
 
 <template>
   <n-space vertical>
+    <n-select v-model:value="value" size="tiny" :options="options" />
     <n-select v-model:value="value" size="small" :options="options" />
     <n-select v-model:value="value" size="medium" :options="options" />
     <n-select v-model:value="value" size="large" :options="options" />

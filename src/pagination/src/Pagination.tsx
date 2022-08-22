@@ -3,6 +3,7 @@ import {
   computed,
   CSSProperties,
   defineComponent,
+  Fragment,
   h,
   nextTick,
   PropType,
@@ -14,7 +15,7 @@ import {
 import { useMergedState } from 'vooks'
 import { NPopselect } from '../../popselect'
 import { NSelect } from '../../select'
-import { InputInst, NInput } from '../../input'
+import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
   BackwardIcon,
@@ -54,6 +55,7 @@ import { useRtl } from '../../_mixins/use-rtl'
 
 export const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
+  simple: Boolean,
   page: Number,
   defaultPage: {
     type: Number,
@@ -89,6 +91,10 @@ export const paginationProps = {
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
   label: Function as PropType<PaginationRenderLabel>,
+  displayOrder: {
+    type: Array as PropType<Array<'pages' | 'size-picker' | 'quick-jumper'>>,
+    default: ['pages', 'size-picker', 'quick-jumper']
+  },
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -153,8 +159,6 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
-    const jumperRef = ref<InputInst | null>(null)
-    const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
     const getDefaultPageSize = (): number => {
       const { defaultPageSize } = props
@@ -181,6 +185,11 @@ export default defineComponent({
       const { pageCount } = props
       if (pageCount !== undefined) return Math.max(pageCount, 1)
       return 1
+    })
+    const jumperValueRef = ref('')
+    watchEffect(() => {
+      void props.simple
+      jumperValueRef.value = String(mergedPageRef.value)
     })
 
     const fastForwardActiveRef = ref(false)
@@ -280,12 +289,20 @@ export default defineComponent({
     }
     function doUpdatePage (page: number): void {
       if (page === mergedPageRef.value) return
-      const { 'onUpdate:page': _onUpdatePage, onUpdatePage, onChange } = props
+      const {
+        'onUpdate:page': _onUpdatePage,
+        onUpdatePage,
+        onChange,
+        simple
+      } = props
       if (_onUpdatePage) call(_onUpdatePage, page)
       if (onUpdatePage) call(onUpdatePage, page)
       // deprecated
       if (onChange) call(onChange, page)
       uncontrolledPageRef.value = page
+      if (simple) {
+        jumperValueRef.value = String(page)
+      }
     }
     function doUpdatePageSize (pageSize: number): void {
       if (pageSize === mergedPageSizeRef.value) return
@@ -331,15 +348,16 @@ export default defineComponent({
     function handleSizePickerChange (value: number): void {
       doUpdatePageSize(value)
     }
-    function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      if (e.key === 'Enter') {
-        const page = parseInt(jumperValueRef.value)
-        if (!Number.isNaN(page)) {
-          doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
-          jumperValueRef.value = ''
-          jumperRef.value?.blur()
-        }
+    function doQuickJump (): void {
+      const page = parseInt(jumperValueRef.value)
+      if (Number.isNaN(page)) return
+      doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
+      if (!props.simple) {
+        jumperValueRef.value = ''
       }
+    }
+    function handleQuickJumperChange (): void {
+      doQuickJump()
     }
     function handlePageItemClick (pageItem: PageItem): void {
       if (props.disabled) return
@@ -476,7 +494,6 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       locale: localeRef,
       selfRef,
-      jumperRef,
       mergedPage: mergedPageRef,
       pageItems: computed(() => {
         return pageItemsInfo.value.items
@@ -505,7 +522,7 @@ export default defineComponent({
       handleForwardClick: forward,
       handlePageItemClick,
       handleSizePickerChange,
-      handleQuickJumperKeyUp,
+      handleQuickJumperChange,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -530,6 +547,7 @@ export default defineComponent({
       mergedPageSize,
       pageSizeOptions,
       jumperValue,
+      simple,
       prev,
       next,
       prefix,
@@ -540,7 +558,7 @@ export default defineComponent({
       handleBackwardClick,
       handlePageItemClick,
       handleForwardClick,
-      handleQuickJumperKeyUp,
+      handleQuickJumperChange,
       onRender
     } = this
     onRender?.()
@@ -556,7 +574,8 @@ export default defineComponent({
           `${mergedClsPrefix}-pagination`,
           this.themeClass,
           this.rtlEnabled && `${mergedClsPrefix}-pagination--rtl`,
-          disabled && `${mergedClsPrefix}-pagination--disabled`
+          disabled && `${mergedClsPrefix}-pagination--disabled`,
+          simple && `${mergedClsPrefix}-pagination--simple`
         ]}
         style={cssVars as CSSProperties}
       >
@@ -572,255 +591,302 @@ export default defineComponent({
             })}
           </div>
         ) : null}
-        <div
-          class={[
-            `${mergedClsPrefix}-pagination-item`,
-            !renderPrev && `${mergedClsPrefix}-pagination-item--button`,
-            (mergedPage <= 1 || mergedPage > mergedPageCount || disabled) &&
-              `${mergedClsPrefix}-pagination-item--disabled`
-          ]}
-          onClick={handleBackwardClick}
-        >
-          {renderPrev ? (
-            renderPrev({
-              page: mergedPage,
-              pageSize: mergedPageSize,
-              pageCount: mergedPageCount,
-              startIndex: this.startIndex,
-              endIndex: this.endIndex,
-              itemCount: this.mergedItemCount
-            })
-          ) : (
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{
-                default: () =>
-                  this.rtlEnabled ? <ForwardIcon /> : <BackwardIcon />
-              }}
-            </NBaseIcon>
-          )}
-        </div>
-        {pageItems.map((pageItem, index) => {
-          let contentNode: VNodeChild
-          let onMouseenter: undefined | (() => void)
-          let onMouseleave: undefined | (() => void)
-          const { type } = pageItem
-          switch (type) {
-            case 'page':
-              // eslint-disable-next-line no-case-declarations
-              const pageNode = pageItem.label
-              if (renderLabel) {
-                contentNode = renderLabel({
-                  type: 'page',
-                  node: pageNode,
-                  active: pageItem.active
-                })
-              } else {
-                contentNode = pageNode
-              }
-              break
-            case 'fast-forward':
-              // eslint-disable-next-line no-case-declarations
-              const fastForwardNode = this.fastForwardActive ? (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: () =>
-                      this.rtlEnabled ? (
-                        <FastBackwardIcon />
-                      ) : (
-                        <FastForwardIcon />
+        {this.displayOrder.map((part) => {
+          switch (part) {
+            case 'pages':
+              return (
+                <Fragment>
+                  <div
+                    class={[
+                      `${mergedClsPrefix}-pagination-item`,
+                      !renderPrev &&
+                        `${mergedClsPrefix}-pagination-item--button`,
+                      (mergedPage <= 1 ||
+                        mergedPage > mergedPageCount ||
+                        disabled) &&
+                        `${mergedClsPrefix}-pagination-item--disabled`
+                    ]}
+                    onClick={handleBackwardClick}
+                  >
+                    {renderPrev ? (
+                      renderPrev({
+                        page: mergedPage,
+                        pageSize: mergedPageSize,
+                        pageCount: mergedPageCount,
+                        startIndex: this.startIndex,
+                        endIndex: this.endIndex,
+                        itemCount: this.mergedItemCount
+                      })
+                    ) : (
+                      <NBaseIcon clsPrefix={mergedClsPrefix}>
+                        {{
+                          default: () =>
+                            this.rtlEnabled ? <ForwardIcon /> : <BackwardIcon />
+                        }}
+                      </NBaseIcon>
+                    )}
+                  </div>
+                  {simple ? (
+                    <Fragment>
+                      <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
+                        <NInput
+                          value={jumperValue}
+                          onUpdateValue={handleJumperInput}
+                          size={inputSize}
+                          placeholder=""
+                          disabled={disabled}
+                          theme={mergedTheme.peers.Input}
+                          themeOverrides={mergedTheme.peerOverrides.Input}
+                          onChange={handleQuickJumperChange}
+                        />
+                      </div>
+                      &nbsp;/ {mergedPageCount}
+                    </Fragment>
+                  ) : (
+                    pageItems.map((pageItem, index) => {
+                      let contentNode: VNodeChild
+                      let onMouseenter: undefined | (() => void)
+                      let onMouseleave: undefined | (() => void)
+                      const { type } = pageItem
+                      switch (type) {
+                        case 'page':
+                          // eslint-disable-next-line no-case-declarations
+                          const pageNode = pageItem.label
+                          if (renderLabel) {
+                            contentNode = renderLabel({
+                              type: 'page',
+                              node: pageNode,
+                              active: pageItem.active
+                            })
+                          } else {
+                            contentNode = pageNode
+                          }
+                          break
+                        case 'fast-forward':
+                          // eslint-disable-next-line no-case-declarations
+                          const fastForwardNode = this.fastForwardActive ? (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () =>
+                                  this.rtlEnabled ? (
+                                    <FastBackwardIcon />
+                                  ) : (
+                                    <FastForwardIcon />
+                                  )
+                              }}
+                            </NBaseIcon>
+                          ) : (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: () => <MoreIcon /> }}
+                            </NBaseIcon>
+                          )
+                          if (renderLabel) {
+                            contentNode = renderLabel({
+                              type: 'fast-forward',
+                              node: fastForwardNode,
+                              active:
+                                this.fastForwardActive ||
+                                this.showFastForwardMenu
+                            })
+                          } else {
+                            contentNode = fastForwardNode
+                          }
+                          onMouseenter = this.handleFastForwardMouseenter
+                          onMouseleave = this.handleFastForwardMouseleave
+                          break
+                        case 'fast-backward':
+                          // eslint-disable-next-line no-case-declarations
+                          const fastBackwardNode = this.fastBackwardActive ? (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{
+                                default: () =>
+                                  this.rtlEnabled ? (
+                                    <FastForwardIcon />
+                                  ) : (
+                                    <FastBackwardIcon />
+                                  )
+                              }}
+                            </NBaseIcon>
+                          ) : (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: () => <MoreIcon /> }}
+                            </NBaseIcon>
+                          )
+                          if (renderLabel) {
+                            contentNode = renderLabel({
+                              type: 'fast-backward',
+                              node: fastBackwardNode,
+                              active:
+                                this.fastBackwardActive ||
+                                this.showFastBackwardMenu
+                            })
+                          } else {
+                            contentNode = fastBackwardNode
+                          }
+                          onMouseenter = this.handleFastBackwardMouseenter
+                          onMouseleave = this.handleFastBackwardMouseleave
+                          break
+                      }
+                      const itemNode = (
+                        <div
+                          key={index}
+                          class={[
+                            `${mergedClsPrefix}-pagination-item`,
+                            pageItem.active &&
+                              `${mergedClsPrefix}-pagination-item--active`,
+                            type !== 'page' &&
+                              ((type === 'fast-backward' &&
+                                this.showFastBackwardMenu) ||
+                                (type === 'fast-forward' &&
+                                  this.showFastForwardMenu)) &&
+                              `${mergedClsPrefix}-pagination-item--hover`,
+                            disabled &&
+                              `${mergedClsPrefix}-pagination-item--disabled`,
+                            type === 'page' &&
+                              `${mergedClsPrefix}-pagination-item--clickable`
+                          ]}
+                          onClick={() => handlePageItemClick(pageItem)}
+                          onMouseenter={onMouseenter}
+                          onMouseleave={onMouseleave}
+                        >
+                          {contentNode}
+                        </div>
                       )
-                  }}
-                </NBaseIcon>
-              ) : (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <MoreIcon /> }}
-                </NBaseIcon>
+                      if (
+                        type === 'page' &&
+                        !pageItem.mayBeFastBackward &&
+                        !pageItem.mayBeFastForward
+                      ) {
+                        return itemNode
+                      } else {
+                        const key =
+                          pageItem.type === 'page'
+                            ? pageItem.mayBeFastBackward
+                              ? 'fast-backward'
+                              : 'fast-forward'
+                            : pageItem.type
+                        return (
+                          <NPopselect
+                            key={key}
+                            trigger="hover"
+                            virtualScroll
+                            style={{ width: '60px' }}
+                            theme={mergedTheme.peers.Popselect}
+                            themeOverrides={mergedTheme.peerOverrides.Popselect}
+                            builtinThemeOverrides={{
+                              peers: {
+                                InternalSelectMenu: {
+                                  height: 'calc(var(--n-option-height) * 4.6)'
+                                }
+                              }
+                            }}
+                            nodeProps={() => ({
+                              style: {
+                                justifyContent: 'center'
+                              }
+                            })}
+                            show={
+                              type === 'page'
+                                ? false
+                                : type === 'fast-backward'
+                                  ? this.showFastBackwardMenu
+                                  : this.showFastForwardMenu
+                            }
+                            onUpdateShow={(value) => {
+                              if (type === 'page') return
+                              if (value) {
+                                if (type === 'fast-backward') {
+                                  this.showFastBackwardMenu = value
+                                } else {
+                                  this.showFastForwardMenu = value
+                                }
+                              } else {
+                                this.showFastBackwardMenu = false
+                                this.showFastForwardMenu = false
+                              }
+                            }}
+                            options={
+                              pageItem.type !== 'page' ? pageItem.options : []
+                            }
+                            onUpdateValue={this.handleMenuSelect}
+                            scrollable
+                            internalShowCheckmark={false}
+                          >
+                            {{ default: () => itemNode }}
+                          </NPopselect>
+                        )
+                      }
+                    })
+                  )}
+                  <div
+                    class={[
+                      `${mergedClsPrefix}-pagination-item`,
+                      !renderNext &&
+                        `${mergedClsPrefix}-pagination-item--button`,
+                      {
+                        [`${mergedClsPrefix}-pagination-item--disabled`]:
+                          mergedPage < 1 ||
+                          mergedPage >= mergedPageCount ||
+                          disabled
+                      }
+                    ]}
+                    onClick={handleForwardClick}
+                  >
+                    {renderNext ? (
+                      renderNext({
+                        page: mergedPage,
+                        pageSize: mergedPageSize,
+                        pageCount: mergedPageCount,
+                        itemCount: this.mergedItemCount,
+                        startIndex: this.startIndex,
+                        endIndex: this.endIndex
+                      })
+                    ) : (
+                      <NBaseIcon clsPrefix={mergedClsPrefix}>
+                        {{
+                          default: () =>
+                            this.rtlEnabled ? <BackwardIcon /> : <ForwardIcon />
+                        }}
+                      </NBaseIcon>
+                    )}
+                  </div>
+                </Fragment>
               )
-              if (renderLabel) {
-                contentNode = renderLabel({
-                  type: 'fast-forward',
-                  node: fastForwardNode,
-                  active: this.fastForwardActive || this.showFastForwardMenu
-                })
-              } else {
-                contentNode = fastForwardNode
-              }
-              onMouseenter = this.handleFastForwardMouseenter
-              onMouseleave = this.handleFastForwardMouseleave
-              break
-            case 'fast-backward':
-              // eslint-disable-next-line no-case-declarations
-              const fastBackwardNode = this.fastBackwardActive ? (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: () =>
-                      this.rtlEnabled ? (
-                        <FastForwardIcon />
-                      ) : (
-                        <FastBackwardIcon />
-                      )
-                  }}
-                </NBaseIcon>
-              ) : (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <MoreIcon /> }}
-                </NBaseIcon>
-              )
-              if (renderLabel) {
-                contentNode = renderLabel({
-                  type: 'fast-backward',
-                  node: fastBackwardNode,
-                  active: this.fastBackwardActive || this.showFastBackwardMenu
-                })
-              } else {
-                contentNode = fastBackwardNode
-              }
-              onMouseenter = this.handleFastBackwardMouseenter
-              onMouseleave = this.handleFastBackwardMouseleave
-              break
-          }
-          const itemNode = (
-            <div
-              key={index}
-              class={[
-                `${mergedClsPrefix}-pagination-item`,
-                pageItem.active && `${mergedClsPrefix}-pagination-item--active`,
-                type !== 'page' &&
-                  ((type === 'fast-backward' && this.showFastBackwardMenu) ||
-                    (type === 'fast-forward' && this.showFastForwardMenu)) &&
-                  `${mergedClsPrefix}-pagination-item--hover`,
-                disabled && `${mergedClsPrefix}-pagination-item--disabled`,
-                type === 'page' &&
-                  `${mergedClsPrefix}-pagination-item--clickable`
-              ]}
-              onClick={() => handlePageItemClick(pageItem)}
-              onMouseenter={onMouseenter}
-              onMouseleave={onMouseleave}
-            >
-              {contentNode}
-            </div>
-          )
-          if (
-            type === 'page' &&
-            !pageItem.mayBeFastBackward &&
-            !pageItem.mayBeFastForward
-          ) {
-            return itemNode
-          } else {
-            const key =
-              pageItem.type === 'page'
-                ? pageItem.mayBeFastBackward
-                  ? 'fast-backward'
-                  : 'fast-forward'
-                : pageItem.type
-            return (
-              <NPopselect
-                key={key}
-                trigger="hover"
-                virtualScroll
-                style={{ width: '60px' }}
-                theme={mergedTheme.peers.Popselect}
-                themeOverrides={mergedTheme.peerOverrides.Popselect}
-                builtinThemeOverrides={{
-                  peers: {
-                    InternalSelectMenu: {
-                      height: 'calc(var(--n-option-height) * 4.6)'
-                    }
-                  }
-                }}
-                nodeProps={() => ({
-                  style: {
-                    justifyContent: 'center'
-                  }
-                })}
-                show={
-                  type === 'page'
-                    ? false
-                    : type === 'fast-backward'
-                      ? this.showFastBackwardMenu
-                      : this.showFastForwardMenu
-                }
-                onUpdateShow={(value) => {
-                  if (type === 'page') return
-                  if (value) {
-                    if (type === 'fast-backward') {
-                      this.showFastBackwardMenu = value
-                    } else {
-                      this.showFastForwardMenu = value
-                    }
-                  } else {
-                    this.showFastBackwardMenu = false
-                    this.showFastForwardMenu = false
-                  }
-                }}
-                options={pageItem.type !== 'page' ? pageItem.options : []}
-                onUpdateValue={this.handleMenuSelect}
-                scrollable
-                internalShowCheckmark={false}
-              >
-                {{ default: () => itemNode }}
-              </NPopselect>
-            )
+            case 'size-picker': {
+              return !simple && showSizePicker ? (
+                <NSelect
+                  internalShowCheckmark={false}
+                  size={selectSize}
+                  placeholder=""
+                  options={pageSizeOptions}
+                  value={mergedPageSize}
+                  disabled={disabled}
+                  theme={mergedTheme.peers.Select}
+                  themeOverrides={mergedTheme.peerOverrides.Select}
+                  onUpdateValue={handleSizePickerChange}
+                />
+              ) : null
+            }
+            case 'quick-jumper':
+              return !simple && showQuickJumper ? (
+                <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
+                  {resolveSlot(this.$slots.goto, () => [locale.goto])}
+                  <NInput
+                    value={jumperValue}
+                    onUpdateValue={handleJumperInput}
+                    size={inputSize}
+                    placeholder=""
+                    disabled={disabled}
+                    theme={mergedTheme.peers.Input}
+                    themeOverrides={mergedTheme.peerOverrides.Input}
+                    onChange={handleQuickJumperChange}
+                  />
+                </div>
+              ) : null
+            default:
+              return null
           }
         })}
-        <div
-          class={[
-            `${mergedClsPrefix}-pagination-item`,
-            !renderNext && `${mergedClsPrefix}-pagination-item--button`,
-            {
-              [`${mergedClsPrefix}-pagination-item--disabled`]:
-                mergedPage < 1 || mergedPage >= mergedPageCount || disabled
-            }
-          ]}
-          onClick={handleForwardClick}
-        >
-          {renderNext ? (
-            renderNext({
-              page: mergedPage,
-              pageSize: mergedPageSize,
-              pageCount: mergedPageCount,
-              itemCount: this.mergedItemCount,
-              startIndex: this.startIndex,
-              endIndex: this.endIndex
-            })
-          ) : (
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{
-                default: () =>
-                  this.rtlEnabled ? <BackwardIcon /> : <ForwardIcon />
-              }}
-            </NBaseIcon>
-          )}
-        </div>
-        {showSizePicker ? (
-          <NSelect
-            internalShowCheckmark={false}
-            size={selectSize}
-            placeholder=""
-            options={pageSizeOptions}
-            value={mergedPageSize}
-            disabled={disabled}
-            theme={mergedTheme.peers.Select}
-            themeOverrides={mergedTheme.peerOverrides.Select}
-            onUpdateValue={handleSizePickerChange}
-          />
-        ) : null}
-        {showQuickJumper ? (
-          <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-            {resolveSlot(this.$slots.goto, () => [locale.goto])}
-            <NInput
-              ref="jumperRef"
-              value={jumperValue}
-              onUpdateValue={handleJumperInput}
-              size={inputSize}
-              placeholder=""
-              disabled={disabled}
-              theme={mergedTheme.peers.Input}
-              themeOverrides={mergedTheme.peerOverrides.Input}
-              onKeyup={handleQuickJumperKeyUp}
-            />
-          </div>
-        ) : null}
         {renderSuffix ? (
           <div class={`${mergedClsPrefix}-pagination-suffix`}>
             {renderSuffix({

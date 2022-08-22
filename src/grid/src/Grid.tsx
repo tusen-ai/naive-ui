@@ -33,6 +33,7 @@ const defaultCols = 24
 const SSR_ATTR_NAME = '__ssr__'
 
 export const gridProps = {
+  layoutShiftDisabled: Boolean,
   responsive: {
     type: [String, Boolean] as PropType<'self' | 'screen'>,
     default: 'self'
@@ -64,6 +65,7 @@ export interface NGridInjection {
   itemStyleRef: Ref<CSSProperties | string | undefined>
   xGapRef: Ref<string | undefined>
   overflowRef: Ref<boolean>
+  layoutShiftDisabledRef: Ref<boolean>
 }
 
 export type GridProps = ExtractPublicPropTypes<typeof gridProps>
@@ -136,6 +138,7 @@ export default defineComponent({
     })
 
     provide(gridInjectionKey, {
+      layoutShiftDisabledRef: toRef(props, 'layoutShiftDisabled'),
       isSsrRef,
       itemStyleRef: toRef(props, 'itemStyle'),
       xGapRef: responsiveXGapRef,
@@ -147,6 +150,15 @@ export default defineComponent({
       contentEl: contentElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       style: computed<CSSProperties>(() => {
+        if (props.layoutShiftDisabled) {
+          return {
+            width: '100%',
+            display: 'grid',
+            gridTemplateColumns: `repeat(${props.cols}, minmax(0, 1fr))`,
+            columnGap: pxfy(props.xGap),
+            rowGap: pxfy(props.yGap)
+          }
+        }
         return {
           width: '100%',
           display: 'grid',
@@ -163,6 +175,21 @@ export default defineComponent({
     }
   },
   render () {
+    if (this.layoutShiftDisabled) {
+      return h(
+        'div',
+        mergeProps(
+          {
+            ref: 'contentEl',
+            class: `${this.mergedClsPrefix}-grid`,
+            style: this.style
+          },
+          this.$attrs
+        ),
+        this.$slots
+      )
+    }
+
     const renderContent = (): VNode => {
       this.overflow = false
 

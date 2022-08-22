@@ -78,6 +78,10 @@ export const menuProps = {
     type: String,
     default: 'children'
   },
+  disabledField: {
+    type: String,
+    default: 'disabled'
+  },
   defaultExpandAll: Boolean,
   defaultExpandedKeys: Array as PropType<Key[]>,
   expandedKeys: Array as PropType<Key[]>,
@@ -95,6 +99,10 @@ export const menuProps = {
     default: undefined
   },
   disabled: Boolean,
+  show: {
+    type: Boolean,
+    defalut: true
+  },
   inverted: Boolean,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
@@ -164,12 +172,15 @@ export default defineComponent({
     })
 
     const treeMateRef = computed(() => {
-      const { keyField, childrenField } = props
+      const { keyField, childrenField, disabledField } = props
       return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
         props.items || props.options,
         {
           getChildren (node) {
             return node[childrenField]
+          },
+          getDisabled (node) {
+            return (node as any)[disabledField]
           },
           getKey (node) {
             return (node[keyField] as Key) ?? node.name

@@ -123,7 +123,7 @@ export default cB('switch', `
   ]),
   cM('active', [
     cE('rail', [
-      cE('button', 'left: calc(100% - (var(--n-rail-height) + var(--n-button-width)) / 2)')
+      cE('button', 'left: calc(100% - var(--n-button-width) - var(--n-offset))')
     ])
   ]),
   cE('rail', `
@@ -159,7 +159,7 @@ export default cB('switch', `
       align-items: center;    
       top: var(--n-offset);
       left: var(--n-offset);
-      height: var(--n-button-width);
+      height: var(--n-button-height);
       width: var(--n-button-width-pressed);
       max-width: var(--n-button-width);
       border-radius: var(--n-button-border-radius);

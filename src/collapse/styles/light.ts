@@ -3,15 +3,24 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins/use-theme'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { fontWeight, textColor1, textColor2, dividerColor, fontSize } = vars
+  const {
+    fontWeight,
+    textColor1,
+    textColor2,
+    textColorDisabled,
+    dividerColor,
+    fontSize
+  } = vars
   return {
     titleFontSize: fontSize,
     titleFontWeight: fontWeight,
-    dividerColor: dividerColor,
+    dividerColor,
     titleTextColor: textColor1,
+    titleTextColorDisabled: textColorDisabled,
     fontSize,
     textColor: textColor2,
-    arrowColor: textColor2
+    arrowColor: textColor2,
+    arrowColorDisabled: textColorDisabled
   }
 }
 

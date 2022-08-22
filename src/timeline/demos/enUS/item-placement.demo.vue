@@ -5,7 +5,7 @@ Left. .thgiR
 </markdown>
 
 <template>
-  <n-timeline item-placement="left">
+  <n-timeline item-placement="right">
     <n-timeline-item content="Oops" />
     <n-timeline-item
       type="success"

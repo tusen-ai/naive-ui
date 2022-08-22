@@ -22,6 +22,7 @@ dark-2-debug.vue
 dark-3-debug.vue
 dark-4-debug.vue
 resizable.vue
+rtl-debug.vue
 ```
 
 ## API

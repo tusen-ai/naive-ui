@@ -1,11 +1,10 @@
 <markdown>
 # Size
-
-`small`, `medium`, `large`.
 </markdown>
 
 <template>
   <n-space vertical>
+    <n-input-number v-model:value="value" size="tiny" />
     <n-input-number v-model:value="value" size="small" />
     <n-input-number v-model:value="value" size="medium" />
     <n-input-number v-model:value="value" size="large" />

@@ -55,7 +55,8 @@ import type {
   RenderSuffix,
   RenderSwitcherIcon,
   TreeNodeProps,
-  CheckOnClick
+  CheckOnClick,
+  TreeInst
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -71,7 +72,8 @@ const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export function createTreeMateOptions<T> (
   keyField: string,
-  childrenField: string
+  childrenField: string,
+  disabledField: string
 ): TreeMateOptions<T, T, T> {
   return {
     getIsGroup () {
@@ -84,7 +86,7 @@ export function createTreeMateOptions<T> (
       return (node as any)[childrenField]
     },
     getDisabled (node: T) {
-      return !!((node as any).disabled || (node as any).checkboxDisabled)
+      return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
     }
   }
 }
@@ -115,6 +117,10 @@ export const treeSharedProps = {
   childrenField: {
     type: String,
     default: 'children'
+  },
+  disabledField: {
+    type: String,
+    default: 'disabled'
   },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
@@ -205,6 +211,10 @@ export const treeProps = {
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
   nodeProps: Function as PropType<TreeNodeProps>,
+  keyboard: {
+    type: Boolean,
+    default: true
+  },
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -329,7 +339,11 @@ export default defineComponent({
         props.showIrrelevantNodes
           ? props.data
           : filteredTreeInfoRef.value.filteredTree,
-        createTreeMateOptions(props.keyField, props.childrenField)
+        createTreeMateOptions(
+          props.keyField,
+          props.childrenField,
+          props.disabledField
+        )
       )
     )
     const treeSelectInjection = inject(treeSelectInjectionKey, null)
@@ -412,6 +426,7 @@ export default defineComponent({
     )
 
     const { pendingNodeKeyRef, handleKeydown } = useKeyboard({
+      props,
       mergedSelectedKeysRef,
       fNodesRef,
       mergedExpandedKeysRef,
@@ -1311,8 +1326,12 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    const exposedMethods: InternalTreeInst = {
-      handleKeydown
+    function scrollTo (options: { key: Key }): void {
+      virtualListInstRef.value?.scrollTo(options)
+    }
+    const exposedMethods: InternalTreeInst & TreeInst = {
+      handleKeydown,
+      scrollTo
     }
     const cssVarsRef = computed(() => {
       const {
@@ -1364,6 +1383,7 @@ export default defineComponent({
       handleAfterEnter,
       handleResize,
       handleKeydown: exposedMethods.handleKeydown,
+      scrollTo: exposedMethods.scrollTo,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -1503,8 +1523,8 @@ export default defineComponent({
             ? resolveSlot(this.$slots.empty, () => [
                 <NEmpty
                   class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.theme?.peers?.Empty}
-                  themeOverrides={this.themeOverrides?.peers?.Empty}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
                 />
             ])
             : fNodes.map(createNode)}

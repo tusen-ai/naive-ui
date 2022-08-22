@@ -52,6 +52,14 @@ describe('n-pagination', () => {
       ]}
     />
   })
+  it('has currect default page size', () => {
+    const wrapper = mount(() => (
+      <NPagination pageSizes={[23, 22]} showSizePicker />
+    ))
+    expect(wrapper.find('.n-base-selection-input__content').text()).toContain(
+      '23'
+    )
+  })
 })
 it('should work with label slot', async () => {
   const labelSlot: PaginationRenderLabel = (props) => {

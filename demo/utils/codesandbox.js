@@ -71,7 +71,8 @@ export function getCodeSandboxParams (code) {
             'naive-ui': 'latest'
           },
           devDependencies: {
-            '@vue/cli-plugin-babel': '~4.5.0'
+            '@vue/cli-plugin-babel': '~4.5.0',
+            typescript: '~4.6.3'
           }
         }
       },

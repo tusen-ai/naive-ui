@@ -78,7 +78,6 @@ export default cB('tag', `
     transition:
       background-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
-    cursor: pointer;
   `),
   cM('round', `
     padding: 0 calc(var(--n-height) / 3);
