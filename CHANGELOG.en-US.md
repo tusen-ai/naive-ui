@@ -4,11 +4,13 @@
 
 ### Fixes
 
+- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
+
 ### Feats
 
 - `n-menu` adds `disabledField` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
-- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
+- `n-image` add `preview-img-props` prop.
 
 ## 2.32.2
 
@@ -71,7 +73,6 @@
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
-- `n-image` add `imgPropsPreview` prop.
 
 ## 2.32.1
 

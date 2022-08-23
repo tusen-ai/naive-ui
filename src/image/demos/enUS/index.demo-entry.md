@@ -25,7 +25,7 @@ img-props.vue
 | fallback-src | `string` | `undefined` | URL to show when the image fails to load. |  |
 | height | `string \| number` | `undefined` | Image height. |  |
 | img-props | `ImgHTMLAttributes` | `undefined` | The props of the img element inside the component. |  |
-| img-props-preview | `ImgHTMLAttributes` | `undefined` | The props of the img element inside the preview component. | NEXT_VERSION |
+| preview-img-props | `ImgHTMLAttributes` | `undefined` | The props of the img element inside the preview component. | NEXT_VERSION |
 | lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | Object-fit type of the image in the container. |  |

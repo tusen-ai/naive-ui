@@ -28,7 +28,7 @@ export const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
-  imgPropsPreview: Object as PropType<ImgHTMLAttributes>,
+  previewImgProps: Object as PropType<ImgHTMLAttributes>,
   lazy: Boolean,
   intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   objectFit: {
@@ -199,7 +199,7 @@ export default defineComponent({
             ref="previewInstRef"
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
-            imgProps={this.imgPropsPreview}
+            imgProps={this.previewImgProps}
           >
             {{
               default: () => imgNode
