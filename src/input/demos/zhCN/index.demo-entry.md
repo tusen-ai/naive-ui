@@ -49,13 +49,13 @@ textarea-resize-debug.vue
 | passively-activated | `boolean` | `false` | 是否被动激活输入框 |  |
 | placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果 `pair` 是 `true`，`placeholder`是一个数组 |  |
 | readonly | `boolean` | `false` | 是否只读 |  |
-| render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | NEXT_VERSION |
+| render-count | `(props: { value: string }) => void` | `undefined` | 字数统计的渲染函数 | 2.32.2 |
 | round | `boolean` | `false` | 输入框是否圆角 |  |
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |  |
 | separator | `string` | `undefined` | 成对输入框中间的分隔符 |  |
 | show-count | `boolean` | `false` | 是否显示字数统计 |  |
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.25.0 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果 `pair` 是 `true`，`value` 是一个数组 |  |

@@ -4,6 +4,17 @@
 
 ### Fixes
 
+### Feats
+
+- `n-menu` 新增 `disabledField` 属性
+- `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
+- 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
+- `n-image` add `imgPropsPreview` prop.
+
+## 2.32.2
+
+### Fixes
+
 - 修复 `n-menu` extra 在 submenu 中无效，关闭 [#3390](https://github.com/TuSimple/naive-ui/issues/3390)
 - 修复 `n-tree` 在传入的节点数据中包含 `type='group'` 时无法展开，关闭 [#3388](https://github.com/TuSimple/naive-ui/issues/3388)
 - 修复 `n-pagination` 的 `default-page-size` 没有跟随 `page-sizes` prop，关闭 [#3369](https://github.com/TuSimple/naive-ui/issues/3369)
@@ -27,7 +38,7 @@
 - 修复 `n-input-number` 快速点击按钮可能触发变化无限循环，关闭 [#3329](https://github.com/tusen-ai/naive-ui/issues/3329)
 - 修复 `n-switch` 部分主题变量不能使用非 `px` 单位的值，关闭 [#2938](https://github.com/tusen-ai/naive-ui/issues/2938)
 - 修复 `n-input` 在 `resizable` 和 `type="textarea"` 时某些情况不能调整大小，关闭 [#3479](https://github.com/tusen-ai/naive-ui/issues/3479)
-- 修复 `n-countdown` 在 `onFinish` 回调中使用 `reset` 方法时出现异常，关闭 [#3536](https://github.com/tusen-ai/naive-ui/issues/3536)
+- 修复 `n-countdown` 在 `onFinish` 回调中使用 `reset` 方法时不生效，关闭 [#3536](https://github.com/tusen-ai/naive-ui/issues/3536)
 
 ### Feats
 
@@ -40,22 +51,25 @@
 - `n-list` 新增 `show-divider` 属性
 - `n-thing` 新增 `content-style` 属性
 - `n-thing` 新增 `description-style` 属性
-- `n-data-table` 列属性新增 `renderExpandIcon`属性
+- `n-data-table` 新增 `render-expand-icon`属性
 - `n-tree` 新增 `keyboard` 属性，关闭 [#3438](https://github.com/TuSimple/naive-ui/issues/3438)
 - `n-tree` 新增 `disabled-field` 属性
 - `n-tree-select` 新增 `disabled-field` 属性
 - `n-collapse-item` 新增 `disabled` 属性，关闭 [#3408](https://github.com/TuSimple/naive-ui/issues/3408)
 - `n-pagination` 新增 `simple` 属性
 - `n-cascader` 新增 `arrow` 插槽，关闭 [#3459](https://github.com/TuSimple/naive-ui/issues/3459)
+- `n-transfer` 新增 `source-filterable` 属性，关闭 [#3407](https://github.com/TuSimple/naive-ui/issues/3407)
+- `n-transfer` 新增 `target-filterable` 属性，关闭 [#3407](https://github.com/TuSimple/naive-ui/issues/3407)
+- `n-transfer` 的 `filter` 属性新增 `from` 参数
 - `n-list` 支持 RTL
 - `n-drawer` 支持 RTL
 - `n-input` 新增 `render-count` 属性
 - `n-input` 新增 `countTextColorDisabled` 主题变量，关闭 [#3481](https://github.com/tusen-ai/naive-ui/issues/3481)
+- `n-statistic` 新增 `valueFontSize` 主题变量，关闭 [#3510](https://github.com/tusen-ai/naive-ui/issues/3510)
 - `n-tree` 新增 `scrollTo` 方法，关闭 [#3480](https://github.com/tusen-ai/naive-ui/issues/3480)
 - `n-pagination` 新增 `display-order` 属性，关闭 [#3466](https://github.com/tusen-ai/naive-ui/issues/3466)
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
-- `n-data-table` 新增 `expanded-row-remain-sticky` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
-- `n-image` add `imgPropsPreview` prop.
+- `n-data-table` 新增 `sticky-expanded-rows` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 
 ## 2.32.1
 

@@ -51,7 +51,7 @@ export function useExpand (
       : props.defaultExpandedRowKeys
   )
   const controlledExpandedRowKeysRef = toRef(props, 'expandedRowKeys')
-  const expandedRowRemainStickyRef = toRef(props, 'expandedRowRemainSticky')
+  const stickyExpandedRowsRef = toRef(props, 'stickyExpandedRows')
   const mergedExpandedRowKeysRef = useMergedState(
     controlledExpandedRowKeysRef,
     uncontrolledExpandedRowKeysRef
@@ -70,7 +70,7 @@ export function useExpand (
     uncontrolledExpandedRowKeysRef.value = expandedKeys
   }
   return {
-    expandedRowRemainStickyRef,
+    stickyExpandedRowsRef,
     mergedExpandedRowKeysRef,
     renderExpandRef,
     expandableRef,

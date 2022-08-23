@@ -12,6 +12,7 @@ restrict-selectable-values.vue
 disabled.vue
 disable-tooltip.vue
 format.vue
+keyboard.vue
 reverse.vue
 vertical.vue
 show-tooltip.vue
@@ -28,6 +29,7 @@ custom-thumb.vue
 | default-value | `number \| [number, number] \| null` | `null` | 默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | format-tooltip | `(value: number) => string \| number` | `undefined` | 格式化 tooltip |  |
+| keyboard | `boolean` | `true` | 是否可键盘控制 | NEXT_VERSION |
 | marks | `{ [markValue: number]: string }` | `undefined` | Slider 上的标记 |  |
 | max | `number` | `100` | 最大值 |  |
 | min | `number` | `0` | 最小值 |  |

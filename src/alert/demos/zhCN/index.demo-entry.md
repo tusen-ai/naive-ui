@@ -22,7 +22,7 @@ empty-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| bordered | `boolean` | `true` | alert 是否显示边框 | NEXT_VERSION |
+| bordered | `boolean` | `true` | alert 是否显示边框 | 2.32.2 |
 | closable | `boolean` | `false` | alert 信息是否可以关掉 |  |
 | show-icon | `boolean` | `true` | alert 是否展示 icon |  |
 | title | `string` | `undefined` | alert 的 title 信息 |  |

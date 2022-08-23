@@ -19,9 +19,9 @@ border.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to show the border. |  |
-| clickable | `boolean` | `false` | Whether item has clickable style. | NEXT_VERSION |
-| hoverable | `boolean` | `false` | Whether item has hoverable style. | NEXT_VERSION |
-| show-divider | `boolean` | `true` | Whether to show item divider. | NEXT_VERSION |
+| clickable | `boolean` | `false` | Whether item has clickable style. | 2.32.2 |
+| hoverable | `boolean` | `false` | Whether item has hoverable style. | 2.32.2 |
+| show-divider | `boolean` | `true` | Whether to show item divider. | 2.32.2 |
 
 ### List Slots
 

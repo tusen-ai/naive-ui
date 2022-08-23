@@ -115,7 +115,6 @@ export type TableBaseColumn<T = InternalRowData> = {
   filterMultiple?: boolean
 
   render?: (rowData: T, rowIndex: number) => VNodeChild
-  renderExpandIcon?: (expanded: Boolean) => VNodeChild
   renderFilter?: RenderFilter
   renderFilterIcon?: RenderFilterIcon
   renderSorter?: RenderSorter
@@ -139,7 +138,6 @@ export type TableSelectionColumn<T = InternalRowData> = {
   filterOptionValue?: never
   colSpan?: never
   rowSpan?: never
-  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 } & CommonColumnInfo<T>
 
 export type RenderExpand<T = InternalRowData> = (
@@ -155,7 +153,6 @@ export interface TableExpandColumn<T = InternalRowData>
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>
   expandable?: Expandable<T>
-  renderExpandIcon?: (expanded: Boolean) => VNodeChild
 }
 
 export type TableColumn<T = InternalRowData> =
@@ -224,7 +221,8 @@ export interface DataTableInjection {
   loadingKeySetRef: Ref<Set<RowKey>>
   paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
   expandableRef: Ref<Expandable<any> | undefined>
-  expandedRowRemainStickyRef: Ref<boolean>
+  stickyExpandedRowsRef: Ref<boolean>
+  renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void

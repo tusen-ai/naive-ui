@@ -18,7 +18,6 @@ i18n.vue
 top.vue
 left.vue
 item-only.vue
-render-feedback.vue
 async.vue
 disabled.vue
 show-label.vue
@@ -73,7 +72,6 @@ dynamic.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
-| render-feedback | `(raw: string \| undefined) => string \| VNode` | `undefined` | custom render of feedback |  |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |

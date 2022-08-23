@@ -16,7 +16,7 @@ import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 const radioProps = {
   name: String,
   value: {
-    type: [String, Number] as PropType<string | number>,
+    type: [String, Number, Boolean] as PropType<string | number | boolean>,
     default: 'on'
   },
   checked: {
@@ -53,7 +53,7 @@ const radioProps = {
 export interface RadioGroupInjection {
   mergedClsPrefixRef: Ref<string>
   nameRef: Ref<string | undefined>
-  valueRef: Ref<string | number | null>
+  valueRef: Ref<string | number | boolean | null>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
   doUpdateValue: OnUpdateValue

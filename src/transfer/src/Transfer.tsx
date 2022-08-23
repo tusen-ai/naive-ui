@@ -52,7 +52,12 @@ export const transferProps = {
   virtualScroll: Boolean,
   sourceTitle: String,
   targetTitle: String,
-  filterable: Boolean,
+  filterable: {
+    type: Boolean,
+    default: undefined
+  },
+  sourceFilterable: Boolean,
+  targetFilterable: Boolean,
   sourceFilterPlaceholder: String,
   targetFilterPlaceholder: String,
   filter: {
@@ -87,6 +92,12 @@ export default defineComponent({
             '`on-change` is deprecated, please use `on-update:value` instead.'
           )
         }
+        if (props.filterable !== undefined) {
+          warnOnce(
+            'transfer',
+            '`filterable` is deprecated, please use `source-filterable` or `target-filterable` instead.'
+          )
+        }
       })
     }
     const { mergedClsPrefixRef } = useConfig(props)
@@ -111,15 +122,20 @@ export default defineComponent({
       uncontrolledValueRef,
       mergedValueRef,
       targetValueSetRef,
-      valueSetForSelectAllRef,
-      valueSetForUnselectAllRef,
-      targetOptionsRef,
+      valueSetForCheckAllRef,
+      valueSetForUncheckAllRef,
+      valueSetForClearRef,
+      filteredTgtOptionsRef,
       filteredSrcOptionsRef,
+      targetOptionsRef,
       canNotSelectAnythingRef,
       canBeClearedRef,
       allCheckedRef,
       srcPatternRef,
-      handleSrcFilterUpdateValue
+      tgtPatternRef,
+      mergedSrcFilterableRef,
+      handleSrcFilterUpdateValue,
+      handleTgtFilterUpdateValue
     } = useTransferData(props)
     function doUpdateValue (value: OptionValue[]): void {
       const {
@@ -136,12 +152,16 @@ export default defineComponent({
       nTriggerFormChange()
     }
 
-    function handleClearAll (): void {
-      doUpdateValue([...valueSetForUnselectAllRef.value])
+    function handleSourceCheckAll (): void {
+      doUpdateValue([...valueSetForCheckAllRef.value])
     }
 
-    function handleCheckedAll (): void {
-      doUpdateValue([...valueSetForSelectAllRef.value])
+    function handleSourceUncheckAll (): void {
+      doUpdateValue([...valueSetForUncheckAllRef.value])
+    }
+
+    function handleTargetClearAll (): void {
+      doUpdateValue([...valueSetForClearRef.value])
     }
 
     function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
@@ -179,12 +199,16 @@ export default defineComponent({
       isMounted: useIsMounted(),
       mergedTheme: themeRef,
       filteredSrcOpts: filteredSrcOptionsRef,
-      tgtOpts: targetOptionsRef,
+      filteredTgtOpts: filteredTgtOptionsRef,
       srcPattern: srcPatternRef,
+      tgtPattern: tgtPatternRef,
       mergedSize: mergedSizeRef,
+      mergedSrcFilterable: mergedSrcFilterableRef,
       handleSrcFilterUpdateValue,
-      handleCheckedAll,
-      handleClearAll,
+      handleTgtFilterUpdateValue,
+      handleSourceCheckAll,
+      handleSourceUncheckAll,
+      handleTargetClearAll,
       handleItemCheck,
       handleChecked,
       cssVars: computed(() => {
@@ -249,13 +273,18 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, renderSourceList, mergedTheme } = this
+    const {
+      mergedClsPrefix,
+      renderSourceList,
+      mergedTheme,
+      mergedSrcFilterable,
+      targetFilterable
+    } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-transfer`,
-          this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`,
-          this.filterable && `${mergedClsPrefix}-transfer--filterable`
+          this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -265,12 +294,12 @@ export default defineComponent({
           <NTransferHeader
             source
             title={this.sourceTitle}
-            onCheckedAll={this.handleCheckedAll}
-            onClearAll={this.handleClearAll}
+            onCheckedAll={this.handleSourceCheckAll}
+            onClearAll={this.handleSourceUncheckAll}
             size={this.mergedSize}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
-            {this.filterable ? (
+            {mergedSrcFilterable ? (
               <NTransferFilter
                 onUpdateValue={this.handleSrcFilterUpdateValue}
                 value={this.srcPattern}
@@ -288,7 +317,7 @@ export default defineComponent({
                     default: () =>
                       renderSourceList({
                         onCheck: this.handleChecked,
-                        checkedOptions: this.tgtOpts,
+                        checkedOptions: this.filteredTgtOpts,
                         pattern: this.srcPattern
                       })
                   }}
@@ -310,14 +339,22 @@ export default defineComponent({
           class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--target`}
         >
           <NTransferHeader
-            onClearAll={this.handleClearAll}
+            onClearAll={this.handleTargetClearAll}
             size={this.mergedSize}
             title={this.targetTitle}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
+            {targetFilterable ? (
+              <NTransferFilter
+                onUpdateValue={this.handleTgtFilterUpdateValue}
+                value={this.tgtPattern}
+                disabled={this.mergedDisabled}
+                placeholder={this.sourceFilterPlaceholder}
+              />
+            ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList
-                options={this.tgtOpts}
+                options={this.filteredTgtOpts}
                 disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
                 itemSize={this.itemSize}

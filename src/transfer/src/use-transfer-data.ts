@@ -6,7 +6,9 @@ interface UseTransferDataProps {
   defaultValue: OptionValue[] | null
   value?: OptionValue[] | null
   options: Option[]
-  filterable: boolean
+  filterable: boolean | undefined
+  sourceFilterable: Boolean
+  targetFilterable: Boolean
   filter: Filter
 }
 
@@ -39,11 +41,26 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const srcPatternRef = ref('')
+  const tgtPatternRef = ref('')
+
+  const mergedSrcFilterableRef = computed(() => {
+    return props.sourceFilterable || !!props.filterable
+  })
 
   const filteredSrcOptionsRef = computed(() => {
-    if (!props.filterable) return props.options
+    if (!mergedSrcFilterableRef.value) return props.options
     const { filter } = props
-    return props.options.filter((opt) => filter(srcPatternRef.value, opt))
+    return props.options.filter((opt) =>
+      filter(srcPatternRef.value, opt, 'source')
+    )
+  })
+
+  const filteredTgtOptionsRef = computed(() => {
+    if (!props.targetFilterable) return targetOptionsRef.value
+    const { filter } = props
+    return targetOptionsRef.value.filter((opt) =>
+      filter(tgtPatternRef.value, opt, 'target')
+    )
   })
 
   const mergedValueSetRef = computed<Set<string | number>>(() => {
@@ -52,25 +69,34 @@ export function useTransferData (props: UseTransferDataProps) {
     return new Set(value)
   })
 
-  const valueSetForSelectAllRef = computed(() => {
-    const mergedValueSet = mergedValueSetRef.value
-    const values: Array<string | number> = []
+  const valueSetForCheckAllRef = computed(() => {
+    const values: Set<string | number> = new Set(mergedValueSetRef.value)
     filteredSrcOptionsRef.value.forEach((option) => {
-      if (!option.disabled || mergedValueSet.has(option.value)) {
-        values.push(option.value)
+      if (!option.disabled && !values.has(option.value)) {
+        values.add(option.value)
       }
     })
-    return new Set(values)
+    return values
   })
 
-  const valueSetForUnselectAllRef = computed(() => {
-    const values: Array<string | number> = []
-    targetOptionsRef.value.forEach((option) => {
-      if (option.disabled) {
-        values.push(option.value)
+  const valueSetForUncheckAllRef = computed(() => {
+    const values: Set<string | number> = new Set(mergedValueSetRef.value)
+    filteredSrcOptionsRef.value.forEach((option) => {
+      if (!option.disabled && values.has(option.value)) {
+        values.delete(option.value)
       }
     })
-    return new Set(values)
+    return values
+  })
+
+  const valueSetForClearRef = computed(() => {
+    const values: Set<string | number> = new Set(mergedValueSetRef.value)
+    filteredTgtOptionsRef.value.forEach((option) => {
+      if (!option.disabled) {
+        values.delete(option.value)
+      }
+    })
+    return values
   })
 
   const canNotSelectAnythingRef = computed(() => {
@@ -88,24 +114,34 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const canBeClearedRef = computed(() => {
-    return targetOptionsRef.value.some((option) => !option.disabled)
+    return filteredTgtOptionsRef.value.some((option) => !option.disabled)
   })
 
   function handleSrcFilterUpdateValue (value: string | null): void {
     srcPatternRef.value = value ?? ''
   }
+
+  function handleTgtFilterUpdateValue (value: string | null): void {
+    tgtPatternRef.value = value ?? ''
+  }
+
   return {
     uncontrolledValueRef,
     mergedValueRef,
     targetValueSetRef,
-    valueSetForSelectAllRef,
-    valueSetForUnselectAllRef,
-    targetOptionsRef,
+    valueSetForCheckAllRef,
+    valueSetForUncheckAllRef,
+    valueSetForClearRef,
+    filteredTgtOptionsRef,
     filteredSrcOptionsRef,
+    targetOptionsRef,
     canNotSelectAnythingRef,
     canBeClearedRef,
     allCheckedRef,
     srcPatternRef,
-    handleSrcFilterUpdateValue
+    tgtPatternRef,
+    mergedSrcFilterableRef,
+    handleSrcFilterUpdateValue,
+    handleTgtFilterUpdateValue
   }
 }

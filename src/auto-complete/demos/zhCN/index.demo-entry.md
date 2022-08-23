@@ -29,7 +29,7 @@ status.vue
 | get-show | `(value: string) => boolean` | `undefined` | 根据输入值在聚焦的状态中决定是否显示菜单 |  |
 | input-props | `HTMLInputAttributes` | `undefined` | 自动填充中 input 元素的属性 |  |
 | loading | `boolean` | `false` | 是否展示加载状态 |  |
-| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | NEXT_VERSION |
+| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.32.2 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |  |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 自动填充的弹出位置 | 2.25.0 |

@@ -4,6 +4,16 @@
 
 ### Fixes
 
+### Feats
+
+- `n-menu` adds `disabledField` prop.
+- `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
+- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
+
+## 2.32.2
+
+### Fixes
+
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
@@ -29,7 +39,7 @@
 - Fix `n-input-number` click add or minus button quickly may trigger value change loop, closes [#3329](https://github.com/tusen-ai/naive-ui/issues/3329).
 - Fix `n-switch` some theme variables can't use non-px value, closes [#2938](https://github.com/tusen-ai/naive-ui/issues/2938).
 - Fix `n-input` with `resize` & `type="textarea"` set can't be resized in some cases, closes [#3479](https://github.com/tusen-ai/naive-ui/issues/3479).
-- Fix `n-countdown` error when using `reset` method in `onFinish` callback, closes [#3536](https://github.com/tusen-ai/naive-ui/issues/3536).
+- Fix `n-countdown`'s `reset` method doesn't work in `onFinish` callback, closes [#3536](https://github.com/tusen-ai/naive-ui/issues/3536).
 
 ### Feats
 
@@ -42,18 +52,22 @@
 - `n-list` adds `show-divider` prop.
 - `n-thing` adds `content-style` prop.
 - `n-thing` adds `description-style` prop.
-- `n-data-table`'s col adds `renderExpandIcon` prop.
+- `n-data-table` adds `render-expand-icon` prop.
 - `n-tree` adds `disabled-field` prop.
 - `n-tree` adds `keyboard` prop, closes [#3438](https://github.com/TuSimple/naive-ui/issues/3438).
 - `n-tree-select` adds `disabled-field` prop.
 - `n-collapse-item` adds `disabled` prop, closes [#3408](https://github.com/TuSimple/naive-ui/issues/3408).
 - `n-pagination` adds `simple` prop.
 - `n-cascader` adds `arrow` slot, closes [#3459](https://github.com/TuSimple/naive-ui/issues/3459).
+- `n-transfer` adds `source-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
+- `n-transfer` adds `target-filterable` prop, closes [#3407](https://github.com/TuSimple/naive-ui/issues/3407).
+- `n-transfer`'s `filter` prop adds `from` param.
 - `n-list` supports RTL.
 - `n-drawer` supports RTL.
 - `n-input` adds `render-count` prop.
 - `n-input` adds `countTextColorDisabled` theme variable, closes [#3481](https://github.com/tusen-ai/naive-ui/issues/3481).
-- `n-data-table` adds `expanded-row-remain-sticky` to allow expanded content remains sticky, closes [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
+- `n-statistic` adds `valueFontSize` theme variable, closes [#3510](https://github.com/tusen-ai/naive-ui/issues/3510).
+- `n-data-table` adds `sticky-expanded-rows` to allow expanded content remains sticky, closes [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 - `n-tree` adds `scrollTo` method, closes [#3480](https://github.com/tusen-ai/naive-ui/issues/3480).
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).

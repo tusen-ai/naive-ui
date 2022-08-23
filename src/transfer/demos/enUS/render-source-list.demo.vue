@@ -8,7 +8,7 @@
     v-model:value="value"
     :options="options"
     :render-source-list="renderSourceList"
-    filterable
+    source-filterable
   />
 </template>
 

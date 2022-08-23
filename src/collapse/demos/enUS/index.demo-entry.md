@@ -35,7 +35,7 @@ disabled.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| disabled | `boolean` | `false` | Whether the item is disabled. | NEXT_VERSION |
+| disabled | `boolean` | `false` | Whether the item is disabled. | 2.32.2 |
 | display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |  |
 | name | `string \| number` | random string | Item identifier (should be unique). |  |
 | title | `string` | `undefined` | Title. |  |

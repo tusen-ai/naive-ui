@@ -108,7 +108,7 @@ export const dataTableProps = {
   },
   defaultExpandAll: Boolean,
   expandedRowKeys: Array as PropType<RowKey[]>,
-  expandedRowRemainSticky: Boolean,
+  stickyExpandedRows: Boolean,
   virtualScroll: Boolean,
   tableLayout: {
     type: String as PropType<'auto' | 'fixed'>,
@@ -135,6 +135,7 @@ export const dataTableProps = {
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
+  renderExpandIcon: Function as PropType<() => VNodeChild>,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -288,7 +289,7 @@ export default defineComponent({
       paginatedDataRef
     })
     const {
-      expandedRowRemainStickyRef,
+      stickyExpandedRowsRef,
       mergedExpandedRowKeysRef,
       renderExpandRef,
       expandableRef,
@@ -329,6 +330,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      renderExpandIconRef: toRef(props, 'renderExpandIcon'),
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),
@@ -363,7 +365,7 @@ export default defineComponent({
       localeRef,
       scrollPartRef,
       expandableRef,
-      expandedRowRemainStickyRef,
+      stickyExpandedRowsRef,
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),

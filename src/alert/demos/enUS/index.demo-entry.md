@@ -18,7 +18,7 @@ no-icon.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| bordered | `boolean` | `true` | Whether the alert can show border. | NEXT_VERSION |
+| bordered | `boolean` | `true` | Whether the alert can show border. | 2.32.2 |
 | closable | `boolean` | `false` | Whether the alert can be closed. |  |
 | show-icon | `boolean` | `true` | Whether to show the icon of alert. |  |
 | title | `string` | `undefined` | Title of the alert. |  |

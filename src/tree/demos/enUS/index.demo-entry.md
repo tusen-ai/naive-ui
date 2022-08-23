@@ -53,10 +53,10 @@ checkbox-placement.vue
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
-| keyboard | `boolean` | `true` | Whether to support keyboard operation. | NEXT_VERSION |
+| keyboard | `boolean` | `true` | Whether to support keyboard operation. | 2.32.2 |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |
-| disabled-field | `string` | `'disabled'` | The disabled field in `TreeOption`. | NEXT_VERSION |
+| disabled-field | `string` | `'disabled'` | The disabled field in `TreeOption`. | 2.32.2 |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
@@ -99,4 +99,4 @@ checkbox-placement.vue
 
 | Name | Paramaters | Description | Version |
 | --- | --- | --- | --- |
-| scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | NEXT_VERSION |
+| scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | 2.32.2 |
