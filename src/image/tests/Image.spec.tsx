@@ -175,4 +175,33 @@ describe('n-image', () => {
     expect(document.querySelector('.n-image-preview-overlay')).toEqual(null)
     wrapper.unmount()
   })
+
+  it('should work with `img-props` prop', () => {
+    const wrapper = mount(NImage, {
+      props: {
+        imgProps: {
+          id: 'myVeryCoolImageId'
+        }
+      }
+    })
+
+    expect(wrapper.find('img').attributes('id')).toEqual('myVeryCoolImageId')
+    wrapper.unmount()
+  })
+
+  it('should work with `preview-img-props` prop', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        previewImgProps: {
+          id: 'myVeryCoolImageId'
+        }
+      }
+    })
+
+    await wrapper.find('img').trigger('click')
+    expect(document.querySelector('img.n-image-preview')?.id).toEqual(
+      'myVeryCoolImageId'
+    )
+    wrapper.unmount()
+  })
 })
