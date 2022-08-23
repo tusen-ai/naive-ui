@@ -67,16 +67,8 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
     function doUpdateValue (value: number): void {
-      const {
-        'onUpdate:value': _onUpdateValue,
-        onUpdateValue,
-        clearable
-      } = props
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-
-      if (clearable && value === mergedValue.value) {
-        value = 0
-      }
 
       if (_onUpdateValue) {
         call(_onUpdateValue, value)
@@ -87,6 +79,13 @@ export default defineComponent({
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
+    }
+    function getResetJudgeValue (value: number): number {
+      const { clearable } = props
+      if (clearable && value === mergedValue.value) {
+        return 0
+      }
+      return value
     }
     function getDerivedValue (index: number, e: MouseEvent): number {
       if (props.allowHalf) {
@@ -109,7 +108,7 @@ export default defineComponent({
       hoverIndexRef.value = null
     }
     function handleClick (index: number, e: MouseEvent): void {
-      doUpdateValue(getDerivedValue(index, e))
+      doUpdateValue(getResetJudgeValue(getDerivedValue(index, e)))
     }
 
     const mergedSizeRef = computed(() => {

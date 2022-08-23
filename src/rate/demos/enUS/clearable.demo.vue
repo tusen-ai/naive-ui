@@ -1,5 +1,5 @@
 <markdown>
-# 重置
+# Reset
 </markdown>
 
 <template>
