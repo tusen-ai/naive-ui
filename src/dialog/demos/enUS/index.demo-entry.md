@@ -82,6 +82,8 @@ use-dialog-reactive-list.vue
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
+| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | NEXT_VERSION |
+| onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -94,7 +96,7 @@ use-dialog-reactive-list.vue
 All the properties can be modified dynamically.
 
 | Name | Type | Description | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
@@ -111,6 +113,8 @@ All the properties can be modified dynamically.
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
+| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | NEXT_VERSION |
+| onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
 | onEsc | `() => void` | Callback fired when the escape key is pressed and focus is within dialog. | 2.32.0 |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |

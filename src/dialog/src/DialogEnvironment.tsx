@@ -8,6 +8,7 @@ import { dialogProps, dialogPropKeys } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  onAfterEnter: Function as PropType<() => void>,
   blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
   onEsc: Function as PropType<() => void>,
@@ -135,6 +136,7 @@ export const NDialogEnvironment = defineComponent({
         onEsc={handleEsc}
         to={to}
         maskClosable={maskClosable}
+        onAfterEnter={this.onAfterEnter}
         onAfterLeave={handleAfterLeave}
         closeOnEsc={this.closeOnEsc}
         blockScroll={this.blockScroll}

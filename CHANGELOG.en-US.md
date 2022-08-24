@@ -11,7 +11,8 @@
 - `n-menu` adds `disabledField` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
 - Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
-- Add `useDialogReactiveList` method, closes [#3569](https://github.com/tusen-ai/naive-ui/issues/3569), [#2041](https://github.com/tusen-ai/naive-ui/issues/2041).
+- Add `useDialogReactiveList` method, closes [#2041](https://github.com/tusen-ai/naive-ui/issues/2041).
+- `DialogReactive` supports `onAfterEnter` prop, closes [#3569](https://github.com/tusen-ai/naive-ui/issues/3569).
 
 ## 2.32.2
 
