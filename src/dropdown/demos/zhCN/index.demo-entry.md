@@ -29,7 +29,7 @@ scrollable-debug.vue
 | --- | --- | --- | --- | --- |
 | animated | `boolean` | `true` | 弹出弹窗时使用动画 |  |
 | inverted | `boolean` | `false` | 使用反转样式 |  |
-| children-field | `string` | `'children'` | key 的字段名 |  |
+| children-field | `string` | `'children'` | children 的字段名 |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |  |
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
