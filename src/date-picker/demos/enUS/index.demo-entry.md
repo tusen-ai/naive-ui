@@ -6,6 +6,7 @@ People have too many ideas on how to set the time.
 
 ```demo
 date.vue
+multiple.vue
 datetime.vue
 datetimeformat.vue
 daterange.vue
@@ -68,6 +69,8 @@ panel.vue
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
+| multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
+| max-tag-count | `number \| 'responsive' \| undefined` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
 

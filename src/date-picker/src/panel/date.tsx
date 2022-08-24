@@ -34,7 +34,8 @@ export default defineComponent({
     return useCalendar(props, 'date')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, multipleRef } =
+      this
     onRender?.()
     return (
       <div
@@ -163,7 +164,7 @@ export default defineComponent({
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('now') ? (
+              {this.actions?.includes('now') && !multipleRef ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -171,6 +172,18 @@ export default defineComponent({
                   onClick={this.handleNowClick}
                 >
                   {{ default: () => this.locale.now }}
+                </NButton>
+              ) : null}
+              {multipleRef ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  type="primary"
+                  disabled={this.isDateInvalid}
+                  onClick={this.handleConfirmClick}
+                >
+                  {{ default: () => this.locale.confirm }}
                 </NButton>
               ) : null}
               {/** we don't need a confirm button for date picking */}

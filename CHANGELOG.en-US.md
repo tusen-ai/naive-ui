@@ -9,6 +9,7 @@
 - `n-menu` adds `disabledField` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
 - Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
+- `n-date-picker` adds `multiple` prop, closes[#3357](https://github.com/tusen-ai/naive-ui/issues/3357).
 
 ## 2.32.2
 
