@@ -36,6 +36,7 @@ export const rateProps = {
     type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  clearable: Boolean,
   color: String,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -64,9 +65,11 @@ export default defineComponent({
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
+    const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
     function doUpdateValue (value: number): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
+
       if (_onUpdateValue) {
         call(_onUpdateValue, value)
       }
@@ -76,6 +79,13 @@ export default defineComponent({
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
+    }
+    function getResetJudgeValue (value: number): number {
+      const { clearable } = props
+      if (clearable && value === mergedValue.value) {
+        return 0
+      }
+      return value
     }
     function getDerivedValue (index: number, e: MouseEvent): number {
       if (props.allowHalf) {
@@ -98,7 +108,7 @@ export default defineComponent({
       hoverIndexRef.value = null
     }
     function handleClick (index: number, e: MouseEvent): void {
-      doUpdateValue(getDerivedValue(index, e))
+      doUpdateValue(getResetJudgeValue(getDerivedValue(index, e)))
     }
 
     const mergedSizeRef = computed(() => {
@@ -145,7 +155,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
+      mergedValue,
       hoverIndex: hoverIndexRef,
       handleMouseMove,
       handleClick,
