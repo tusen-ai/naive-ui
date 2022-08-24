@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+use-dialog-reactive-list.vue
 focus-debug.vue
 ```
 
@@ -55,6 +56,10 @@ focus-debug.vue
 | info | `(options: DialogOptions) => DialogReactive` | 调用 `info` 类型的对话框 |
 | success | `(options: DialogOptions) => DialogReactive` | 调用 `success` 类型的对话框 |
 | warning | `(options: DialogOptions) => DialogReactive` | 调用 `warning` 类型的对话框 |
+
+### useDialogReactiveList API
+
+`() => Ref<readonly DialogReactive[]>`
 
 ### DialogOptions Properties
 

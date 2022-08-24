@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+use-dialog-reactive-list.vue
 ```
 
 ## API
@@ -54,6 +55,10 @@ action.vue
 | info | `(options: DialogOptions) => DialogReactive` | Use `info` type dialog. |
 | success | `(options: DialogOptions) => DialogReactive` | Use `success` type dialog. |
 | warning | `(options: DialogOptions) => DialogReactive` | Use `warning` type dialog. |
+
+### useDialogReactiveList API
+
+`() => Ref<readonly DialogReactive[]>`
 
 ### DialogOptions Properties
 
