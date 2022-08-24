@@ -31,7 +31,7 @@ export function useCursor (
 
   function recordCursor (): void {
     const { value: input } = inputElRef
-    if (!input || !input.focus) {
+    if (!input?.focus) {
       reset()
       return
     }
