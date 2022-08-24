@@ -24,8 +24,10 @@ import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
+import InternalMultipleInput from '../../_internal/multiple-input'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
+import { OnUpdateValue as OnInputUpdateValue } from '../../input/src/interface'
 import { NBaseIcon } from '../../_internal'
 import {
   useFormItem,
@@ -47,7 +49,7 @@ import {
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
-import { strictParse } from './utils'
+import { strictParse, isRangeValue, isFormattedRangeValue } from './utils'
 import {
   uniCalendarValidation,
   dualCalendarValidation
@@ -68,7 +70,9 @@ import type {
   OnUpdateFormattedValueImpl,
   DatePickerInst,
   OnConfirmImpl,
-  OnConfirm
+  OnConfirm,
+  RangeValue,
+  FormattedRangeValue
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -78,6 +82,7 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
+import { isNumber } from 'lodash'
 
 export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
@@ -88,7 +93,7 @@ export const datePickerProps = {
   },
   clearable: Boolean,
   updateValueOnClose: Boolean,
-  defaultValue: [Number, Array] as PropType<Value | null>,
+  defaultValue: [Number, Array] as PropType<Value>,
   defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
@@ -99,7 +104,7 @@ export const datePickerProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
-  value: [Number, Array] as PropType<Value | null>,
+  value: [Number, Array] as PropType<Value>,
   formattedValue: [String, Array] as PropType<FormattedValue | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
@@ -136,6 +141,8 @@ export const datePickerProps = {
   defaultCalendarStartTime: Number,
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
+  multiple: Boolean,
+  maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -220,11 +227,15 @@ export default defineComponent({
       return props.valueFormat ?? mergedFormatRef.value
     })
 
-    function getTimestampValue (value: FormattedValue | null): Value | null {
+    const isMultipleRef = computed(() => {
+      return props.type === 'date' && props.multiple
+    })
+
+    function getTimestampValue (value: FormattedValue | null): Value {
       if (value === null) return null
       const { value: mergedValueFormat } = mergedValueFormatRef
       const { value: dateFnsOptions } = dateFnsOptionsRef
-      if (Array.isArray(value)) {
+      if (isFormattedRangeValue(value, isMultipleRef.value)) {
         return [
           strictParse(
             value[0],
@@ -240,12 +251,23 @@ export default defineComponent({
           ).getTime()
         ]
       }
-      return strictParse(
-        value,
-        mergedValueFormat,
-        new Date(),
-        dateFnsOptions
-      ).getTime()
+      if (Array.isArray(value)) {
+        return value.map((item) =>
+          strictParse(
+            item,
+            mergedValueFormat,
+            new Date(),
+            dateFnsOptions
+          ).getTime()
+        )
+      } else {
+        return strictParse(
+          value,
+          mergedValueFormat,
+          new Date(),
+          dateFnsOptions
+        ).getTime()
+      }
     }
 
     const { defaultFormattedValue, defaultValue } = props
@@ -266,13 +288,15 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    console.log(props.value)
 
     // We don't change value unless blur or confirm is called
-    const pendingValueRef: Ref<Value | null> = ref(null)
+    const pendingValueRef: Ref<Value> = ref(null)
     watchEffect(() => {
       pendingValueRef.value = mergedValueRef.value
     })
     const singleInputValueRef = ref('')
+    const multipleInputValueRef = ref<string[]>([])
     const rangeStartInputValueRef = ref('')
     const rangeEndInputValueRef = ref('')
     const themeRef = useTheme(
@@ -297,6 +321,7 @@ export default defineComponent({
         'yearrange'
       ].includes(props.type)
     })
+
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
       if (placeholder === undefined) {
@@ -396,29 +421,33 @@ export default defineComponent({
         }
       }
     })
-    function getFormattedValue (value: Value | null): FormattedValue | null {
+    function getFormattedValue (value: Value): FormattedValue | null {
       if (value === null) return null
-      if (Array.isArray(value)) {
+      if (isRangeValue(value, isMultipleRef.value)) {
         const { value: mergedValueFormat } = mergedValueFormatRef
         const { value: dateFnsOptions } = dateFnsOptionsRef
         return [
           format(value[0], mergedValueFormat, dateFnsOptions),
           format(value[1], mergedValueFormat, dateFnsOptionsRef.value)
         ]
-      } else {
+      } else if (isNumber(value)) {
         return format(
           value,
           mergedValueFormatRef.value,
           dateFnsOptionsRef.value
         )
+      } else {
+        return value.map((item) =>
+          format(item, mergedValueFormatRef.value, dateFnsOptionsRef.value)
+        )
       }
     }
-    function doUpdatePendingValue (value: Value | null): void {
+    function doUpdatePendingValue (value: Value): void {
       pendingValueRef.value = value
     }
     function doUpdateFormattedValue (
       value: FormattedValue | null,
-      timestampValue: Value | null
+      timestampValue: Value
     ): void {
       const {
         'onUpdate:formattedValue': _onUpdateFormattedValue,
@@ -440,7 +469,7 @@ export default defineComponent({
       }
     }
     function doUpdateValue (
-      value: Value | null,
+      value: Value,
       options: {
         doConfirm: boolean
       }
@@ -450,6 +479,7 @@ export default defineComponent({
         onUpdateValue,
         onChange
       } = props
+
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       const formattedValue = getFormattedValue(value)
       if (options.doConfirm) {
@@ -474,7 +504,7 @@ export default defineComponent({
       onClear?.()
     }
     function doConfirm (
-      value: Value | null,
+      value: Value,
       formattedValue: FormattedValue | null
     ): void {
       const { onConfirm } = props
@@ -553,10 +583,7 @@ export default defineComponent({
     }
 
     // --- Panel update value
-    function handlePanelUpdateValue (
-      value: Value | null,
-      doUpdate: boolean
-    ): void {
+    function handlePanelUpdateValue (value: Value, doUpdate: boolean): void {
       if (doUpdate) {
         doUpdateValue(value, { doConfirm: false })
       } else {
@@ -565,19 +592,18 @@ export default defineComponent({
     }
     function handlePanelConfirm (): void {
       const pendingValue = pendingValueRef.value
-      doUpdateValue(
-        Array.isArray(pendingValue)
-          ? [pendingValue[0], pendingValue[1]]
-          : pendingValue,
-        { doConfirm: true }
-      )
+      doUpdateValue(pendingValue, { doConfirm: true })
     }
     // --- Refresh
     function deriveInputState (): void {
       const { value } = pendingValueRef
       if (isRangeRef.value) {
-        if (Array.isArray(value) || value === null) {
+        if (isRangeValue(value, isMultipleRef.value) || value === null) {
           deriveRangeInputState(value)
+        }
+      } else if (isMultipleRef.value) {
+        if (Array.isArray(value) || value === null) {
+          deriveMultipleInputState(value)
         }
       } else {
         if (!Array.isArray(value)) {
@@ -585,6 +611,17 @@ export default defineComponent({
         }
       }
     }
+
+    function deriveMultipleInputState (values: number[] | null): void {
+      if (values === null) {
+        multipleInputValueRef.value = []
+      } else {
+        multipleInputValueRef.value = values.map((item) =>
+          format(item, mergedFormatRef.value, dateFnsOptionsRef.value)
+        )
+      }
+    }
+
     function deriveSingleInputState (value: number | null): void {
       if (value === null) {
         singleInputValueRef.value = ''
@@ -596,7 +633,7 @@ export default defineComponent({
         )
       }
     }
-    function deriveRangeInputState (values: [number, number] | null): void {
+    function deriveRangeInputState (values: RangeValue | null): void {
       if (values === null) {
         rangeStartInputValueRef.value = ''
         rangeEndInputValueRef.value = ''
@@ -656,7 +693,7 @@ export default defineComponent({
         singleInputValueRef.value = v
       }
     }
-    function handleRangeUpdateValue (v: [string, string]): void {
+    function handleRangeUpdateValue (v: FormattedRangeValue): void {
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
         doUpdateValue(null, { doConfirm: false })
@@ -723,6 +760,14 @@ export default defineComponent({
         }
       }
     }
+
+    function handleTagClose (index: number): void {
+      const pendingValue = (pendingValueRef.value as number[]).slice(0)
+      pendingValue.splice(index, 1)
+      doUpdateValue(pendingValue, { doConfirm: true })
+      deriveInputState()
+    }
+
     // If new value is valid, set calendarTime and refresh display strings.
     // If new value is invalid, do nothing.
     watch(pendingValueRef, () => {
@@ -756,6 +801,7 @@ export default defineComponent({
       timePickerPropsRef: toRef(props, 'timePickerProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
+      multipleRef: isMultipleRef,
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots
@@ -918,6 +964,7 @@ export default defineComponent({
       inputInstRef,
       isMounted: useIsMounted(),
       displayTime: singleInputValueRef,
+      displayTimes: multipleInputValueRef,
       displayStartTime: rangeStartInputValueRef,
       displayEndTime: rangeEndInputValueRef,
       mergedShow: mergedShowRef,
@@ -954,7 +1001,8 @@ export default defineComponent({
       triggerOnRender: triggerThemeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      handleTagClose
     }
   },
   render () {
@@ -1056,7 +1104,10 @@ export default defineComponent({
                           this.isEndValueInvalid ? 'line-through' : ''
                         ]}
                         pair
-                        onUpdateValue={this.handleRangeUpdateValue}
+                        onUpdateValue={
+                          this
+                            .handleRangeUpdateValue as unknown as OnInputUpdateValue
+                        }
                         theme={this.mergedTheme.peers.Input}
                         themeOverrides={this.mergedTheme.peerOverrides.Input}
                         internalForceFocus={this.mergedShow}
@@ -1091,7 +1142,7 @@ export default defineComponent({
                               ])
                         }}
                       </NInput>
-                    ) : (
+                    ) : !this.multiple ? (
                       <NInput
                         ref="inputInstRef"
                         status={this.mergedStatus}
@@ -1126,6 +1177,27 @@ export default defineComponent({
                             )
                         }}
                       </NInput>
+                    ) : (
+                      <InternalMultipleInput
+                        ref="inputInstRef"
+                        clsPrefix={mergedClsPrefix}
+                        max-tag-count={this.maxTagCount}
+                        onTagClose={this.handleTagClose}
+                        data={this.displayTimes}
+                        status={this.mergedStatus}
+                        placeholder={this.localizedPlacehoder}
+                        themeOverrides={this.mergedTheme.peerOverrides.Input}
+                        theme={this.mergedTheme.peers.Input}
+                        focus={this.mergedShow}
+                        {...commonInputProps}
+                      >
+                        {$slots.tag
+                          ? {
+                              tag: (scope: Record<string, any>) =>
+                                $slots.tag?.(scope)
+                            }
+                          : null}
+                      </InternalMultipleInput>
                     )
                 }}
               </VTarget>,

@@ -11,6 +11,7 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
+import { isNumber } from 'lodash'
 
 /**
  * DateTime Panel
@@ -68,7 +69,7 @@ export default defineComponent({
             to={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
-            value={Array.isArray(this.value) ? null : this.value}
+            value={!isNumber(this.value) ? null : this.value}
             isHourDisabled={this.isHourDisabled}
             isMinuteDisabled={this.isMinuteDisabled}
             isSecondDisabled={this.isSecondDisabled}

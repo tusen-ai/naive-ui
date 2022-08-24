@@ -21,7 +21,16 @@ import {
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import { Value } from './interface'
+// eslint-disable-next-line import/no-cycle
+import {
+  RangeValue,
+  Value,
+  FormattedRangeValue,
+  FormattedValue,
+  DefaultTime,
+  DefaultRangeTime,
+  ReadonlyRangeValue
+} from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -49,8 +58,8 @@ const matcherMap = {
   quarter: isSameQuarter
 } as const
 
-function matchDate (
-  sourceTime: number,
+export function matchDate (
+  sourceTime: number | number[],
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter'
 ): boolean {
@@ -115,13 +124,15 @@ export interface QuarterItem {
 function dateItem (
   time: number,
   monthTs: number,
-  valueTs: number | [number, number] | null,
-  currentTs: number
+  valueTs: Value,
+  currentTs: number,
+  isMulitple = false
 ): DateItem {
   let inSpan = false
   let startOfSpan = false
   let endOfSpan = false
-  if (Array.isArray(valueTs)) {
+
+  if (isRangeValue(valueTs, isMulitple)) {
     if (valueTs[0] < time && time < valueTs[1]) {
       inSpan = true
     }
@@ -130,7 +141,7 @@ function dateItem (
   }
   const selected =
     valueTs !== null &&
-    (Array.isArray(valueTs)
+    (isRangeValue(valueTs, isMulitple)
       ? matchDate(valueTs[0], time, 'date') ||
         matchDate(valueTs[1], time, 'date')
       : matchDate(valueTs, time, 'date'))
@@ -207,10 +218,11 @@ function quarterItem (
  */
 function dateArray (
   monthTs: number,
-  valueTs: number | [number, number] | null,
+  valueTs: Value,
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
-  strip: boolean = false
+  strip: boolean = false,
+  isMulitple = false
 ): DateItem[] {
   const displayMonth = getMonth(monthTs)
   // First day of current month
@@ -224,14 +236,14 @@ function dateArray (
     protectLastMonthDateIsShownFlag
   ) {
     calendarDays.unshift(
-      dateItem(lastMonthIterator, monthTs, valueTs, currentTs)
+      dateItem(lastMonthIterator, monthTs, valueTs, currentTs, isMulitple)
     )
     lastMonthIterator = getTime(addDays(lastMonthIterator, -1))
     protectLastMonthDateIsShownFlag = false
   }
   while (getMonth(displayMonthIterator) === displayMonth) {
     calendarDays.push(
-      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
+      dateItem(displayMonthIterator, monthTs, valueTs, currentTs, isMulitple)
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
@@ -244,7 +256,7 @@ function dateArray (
     : 42
   while (calendarDays.length < endIndex) {
     calendarDays.push(
-      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
+      dateItem(displayMonthIterator, monthTs, valueTs, currentTs, isMulitple)
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
@@ -331,10 +343,31 @@ function getDefaultTime (timeValue: string | undefined):
 }
 
 function pluckValueFromRange (
-  value: Value | null,
+  value: Value,
   type: 'start' | 'end'
 ): number | null {
-  return Array.isArray(value) ? value[type === 'start' ? 0 : 1] : null
+  return isRangeValue(value) ? value[type === 'start' ? 0 : 1] : null
+}
+
+export function isRangeValue (
+  value: Value | ReadonlyRangeValue,
+  isMulitple = false
+): value is RangeValue {
+  return Array.isArray(value) && !isMulitple
+}
+
+export function isFormattedRangeValue (
+  value: FormattedValue,
+  isMulitple = false
+): value is FormattedRangeValue {
+  return Array.isArray(value) && !isMulitple
+}
+
+export function isDefaultRangeTime (
+  value: DefaultTime | undefined,
+  isMulitple = false
+): value is DefaultRangeTime {
+  return Array.isArray(value) && !isMulitple
 }
 
 export {
