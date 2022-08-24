@@ -288,8 +288,6 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    console.log(props.value)
-
     // We don't change value unless blur or confirm is called
     const pendingValueRef: Ref<Value> = ref(null)
     watchEffect(() => {
