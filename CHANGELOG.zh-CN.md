@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+
 ### Feats
 
 - `n-menu` 新增 `disabledField` 属性
