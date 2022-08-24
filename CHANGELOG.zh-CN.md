@@ -6,6 +6,7 @@
 
 ### Feats
 
+- `n-transfer` 新增 `render-target-list` 属性
 - `n-menu` 新增 `disabledField` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)

@@ -27,6 +27,7 @@ render-source-list.vue
 | render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize source label rendering. | 2.32.0 |
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize target label rendering. | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. | 2.32.0 |
+| render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize target list rendering. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. | 2.32.0 |
 | source-filterable | `boolean` | `false` | The source filterable state. | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. | 2.32.0 |
