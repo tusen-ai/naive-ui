@@ -73,15 +73,14 @@ export default defineComponent({
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
 
-    const internalImgStyle = ref<any>({})
-
     function syncTransformOrigin (): void {
       const { value: previewWrapper } = previewWrapperRef
       if (!thumbnailEl || !previewWrapper) return
+      const { style } = previewWrapper
       const tbox = thumbnailEl.getBoundingClientRect()
       const tx = tbox.left + tbox.width / 2
       const ty = tbox.top + tbox.height / 2
-      internalImgStyle.value.transformOrigin = `${tx}px ${ty}px`
+      style.transformOrigin = `${tx}px ${ty}px`
     }
 
     function handleKeydown (e: KeyboardEvent): void {
@@ -328,16 +327,15 @@ export default defineComponent({
     function derivePreviewStyle (transition: boolean = true): void {
       const { value: preview } = previewRef
       if (!preview) return
-      internalImgStyle.value.transformOrigin = 'center'
-      internalImgStyle.value.transform = `translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale})`
+      const { style } = preview
+      const transformStyle = `transform-origin: center; transform: translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale});`
       if (dragging) {
-        internalImgStyle.value.cursor = 'grabbing'
-        internalImgStyle.value.transition = 'none'
+        style.cssText = 'cursor: grabbing; transition: none;' + transformStyle
       } else {
-        internalImgStyle.value.cursor = 'grab'
-        internalImgStyle.value.transition = transition
-          ? ''
-          : 'transition: none;'
+        style.cssText =
+          'cursor: grab;' +
+          transformStyle +
+          (transition ? '' : 'transition: none;')
       }
       if (!transition) {
         void preview.offsetHeight
@@ -420,7 +418,6 @@ export default defineComponent({
       previewRef,
       previewWrapperRef,
       previewSrc: previewSrcRef,
-      internalImgStyle,
       show: showRef,
       appear: useIsMounted(),
       displayed: displayedRef,
@@ -434,7 +431,6 @@ export default defineComponent({
         resetScale()
         rotate = 0
         displayedRef.value = false
-        internalImgStyle.value = {}
       },
       handleDragStart: (e: Event) => {
         e.preventDefault()
@@ -454,7 +450,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, imgProps } = this
     return (
       <>
         {this.$slots.default?.()}
@@ -603,7 +599,6 @@ export default defineComponent({
                             ref="previewWrapperRef"
                           >
                             <img
-                              {...this.imgProps}
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
                               onDblclick={this.handlePreviewDblclick}
@@ -612,10 +607,7 @@ export default defineComponent({
                               src={this.previewSrc}
                               ref="previewRef"
                               onDragstart={this.handleDragStart}
-                              style={[
-                                this.imgProps?.style,
-                                this.internalImgStyle
-                              ]}
+                              {...imgProps}
                             />
                           </div>,
                           [[vShow, this.show]]
