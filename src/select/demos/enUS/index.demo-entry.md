@@ -86,7 +86,7 @@ custom-field.vue
 | class | `string` | Customize the option's class. |
 | disabled | `boolean` | Whether to disable the option. |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using the `render` function, the default filter will filter the option. |
-| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
 | style | `string` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
@@ -97,7 +97,7 @@ custom-field.vue
 | children | `Array<SelectOption>` | Child select options. |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group. |
 | key | `string \| number` | Should be unique for each option. |
-| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
 | type | `'group'` | Type of the group option. |
 
 ### Select Slots
