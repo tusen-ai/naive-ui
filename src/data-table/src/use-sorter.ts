@@ -220,7 +220,7 @@ export function useSorter (
           column.type !== 'expand' &&
           column.key === columnKey
       )
-      if (!columnToSort || !columnToSort.sorter) return
+      if (!columnToSort?.sorter) return
       const sorter = columnToSort.sorter
       deriveNextSorter({
         columnKey,

@@ -40,6 +40,7 @@ async.vue
 use-component.vue
 mask.vue
 action.vue
+use-dialog-reactive-list.vue
 focus-debug.vue
 ```
 
@@ -55,6 +56,10 @@ focus-debug.vue
 | info | `(options: DialogOptions) => DialogReactive` | 调用 `info` 类型的对话框 |
 | success | `(options: DialogOptions) => DialogReactive` | 调用 `success` 类型的对话框 |
 | warning | `(options: DialogOptions) => DialogReactive` | 调用 `warning` 类型的对话框 |
+
+### useDialogReactiveList API
+
+`() => Ref<readonly DialogReactive[]>`
 
 ### DialogOptions Properties
 
@@ -78,6 +83,8 @@ focus-debug.vue
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
+| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | NEXT_VERSION |
+| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
@@ -90,7 +97,7 @@ focus-debug.vue
 下列属性都可以被动态修改。
 
 | 名称 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 `border` |  |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
@@ -107,6 +114,8 @@ focus-debug.vue
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
+| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | NEXT_VERSION |
+| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onEsc | `() => void` | 焦点在 dialog 内部时按下 Esc 键的回调 | 2.32.0 |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |

@@ -366,7 +366,7 @@ export default defineComponent({
       markValues = markValuesRef.value,
       buffer?: number
     ): ClosestMark | null {
-      if (!markValues || !markValues.length) return null
+      if (!markValues?.length) return null
       let closestMark: ClosestMark | null = null
       let index = -1
       while (++index < markValues.length) {

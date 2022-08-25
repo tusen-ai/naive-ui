@@ -22,6 +22,7 @@ readonly.vue
 | allow-half | `boolean` | `false` | Allow activating half of the icon. |
 | color | `string` | `undefined` | Activated icon color. This supports the formats: `#FFF`, `#FFFFFF`, `yellow`, `rgb(0, 0, 0)`. |
 | count | `number` | `5` | Number of icons (max rating). |
+| clearable | `boolean` | `false` | Whether the rate is clearable. |
 | default-value | `number` | `0` | Default value of activated icons. |
 | readonly | `boolean` | `false` | Readonly state. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Icon size. |

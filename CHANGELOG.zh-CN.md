@@ -4,11 +4,16 @@
 
 ### Fixes
 
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+
 ### Feats
 
 - `n-menu` 新增 `disabledField` 属性
+- `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
+- 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)
+- `DialogReactive` 支持 `onAfterEnter` 属性，关闭 [#3569](https://github.com/tusen-ai/naive-ui/issues/3569)
 - `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
 
 ## 2.32.2
