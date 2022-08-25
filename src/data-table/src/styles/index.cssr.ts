@@ -289,9 +289,9 @@ export default c([
         `),
         c('&.is-active, &:hover', [
           c('&::after', `
-          height: 100%;
-          background-color: var(--n-th-icon-color-active);
-        `)
+            height: 100%;
+            background-color: var(--n-th-icon-color-active);
+          `)
         ])
       ]),
       cB('data-table-filter', `

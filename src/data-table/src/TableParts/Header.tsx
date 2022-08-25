@@ -5,8 +5,7 @@ import {
   VNodeChild,
   Fragment,
   VNode,
-  ref,
-  onBeforeUpdate
+  ref
 } from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
@@ -114,7 +113,6 @@ export default defineComponent({
       onResizeColumn(resizedWidth, limitedWidth, column)
       doUpdateResizableWidth(column, limitedWidth)
     }
-    onBeforeUpdate(() => (thElsRef.value = {}))
     return {
       thElsRef,
       componentId,

@@ -1,4 +1,4 @@
-import { defineComponent, h, inject, ref } from 'vue'
+import { defineComponent, h, inject, ref, onBeforeUnmount } from 'vue'
 import type { PropType } from 'vue'
 import { off, on } from 'evtd'
 import { dataTableInjectionKey } from '../interface'
@@ -63,6 +63,10 @@ export default defineComponent({
       off('mousemove', window, handleMousemove)
       off('mouseup', window, handleMouseup)
     }
+    onBeforeUnmount(() => {
+      off('mousemove', window, handleMousemove)
+      off('mouseup', window, handleMouseup)
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       active: activeRef,
