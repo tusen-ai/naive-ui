@@ -112,7 +112,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-color': props.embedded ? colorEmbedded : color,
-        '--n-color-modal': colorModal,
+        '--n-color-modal': props.embedded ? colorEmbedded : colorModal,
         '--n-color-popover': colorPopover,
         '--n-color-target': colorTarget,
         '--n-text-color': textColor,
