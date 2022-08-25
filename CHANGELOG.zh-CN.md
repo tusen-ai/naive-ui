@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
 
 ### Feats
 

@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-select`'s menu missing option check mark in SSR mode, closes https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- Fix `n-card`'s `embedded` prop not work in `n-dialog`, closes [#3592](https://github.com/tusen-ai/naive-ui/issues/3592).
 
 ### Feats
 

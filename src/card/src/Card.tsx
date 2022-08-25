@@ -142,7 +142,7 @@ export default defineComponent({
       ? useThemeClass(
         'card',
         computed(() => {
-          return props.size[0]
+          return props.size[0] + (props.embedded ? 'e' : '')
         }),
         cssVarsRef,
         props
