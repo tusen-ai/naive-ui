@@ -236,7 +236,11 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
                   absolute
-                />
+                >
+                  {{
+                    default: $slots['close-icon']
+                  }}
+                </NBaseClose>
               ) : null}
             </div>
           ) : null

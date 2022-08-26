@@ -5,7 +5,10 @@ Card has many slots to help you write less code.
 </markdown>
 
 <template>
-  <n-card title="Card Slots Demo">
+  <n-card title="Card Slots Demo" closable>
+    <template #close-icon>
+      <n-icon :component="CloseCircle" />
+    </template>
     <template #header-extra>
       #header-extra
     </template>
@@ -18,3 +21,16 @@ Card has many slots to help you write less code.
     </template>
   </n-card>
 </template>
+
+<script lang="ts">
+import { CloseCircle } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup () {
+    return {
+      CloseCircle
+    }
+  }
+})
+</script>

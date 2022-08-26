@@ -8,6 +8,7 @@
 
 ### Feats
 
+- `n-card` adds `close-icon` slot, closes [#3597](https://github.com/tusen-ai/naive-ui/issues/3597).
 - `n-menu` adds `disabledField` prop.
 - `n-rate` adds `clearable` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
