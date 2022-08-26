@@ -27,6 +27,7 @@ embedded.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether to show the card border. |  |
 | closable | `boolean` | `false` | Is it allowed to close. |  |
+| close-style | ``Object \| string` | The style of the close button. | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | The style of the card content area. |  |
 | embedded | `boolean` | `false` | >>>使用更深的背景色展现嵌入效果，只对亮色主题生效<<< |  |
 | footer-style | `Object \| string` | `undefined` | The style of the bottom area of the card. |  |

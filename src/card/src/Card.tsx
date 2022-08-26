@@ -39,6 +39,7 @@ export const cardBaseProps = {
     type: Boolean,
     default: false as boolean
   },
+  closeStyle: [Object, String] as PropType<CSSProperties | string>,
   hoverable: Boolean,
   role: String,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
@@ -234,6 +235,7 @@ export default defineComponent({
                 <NBaseClose
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
+                  style={this.closeStyle}
                   onClick={this.handleCloseClick}
                   absolute
                 >

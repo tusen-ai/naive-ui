@@ -28,6 +28,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | 是否显示卡片边框 |  |
 | closable | `boolean` | `false` | 是否允许关闭 |  |
+| close-style | ``Object \| string` | 关闭按钮的样式 | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |  |
 | embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |  |
 | footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |  |

@@ -5,7 +5,7 @@ Card has many slots to help you write less code.
 </markdown>
 
 <template>
-  <n-card title="Card Slots Demo" closable>
+  <n-card title="Card Slots Demo" closable close-style="border-radius: 50%">
     <template #close-icon>
       <n-icon :component="CloseCircle" />
     </template>

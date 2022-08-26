@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-card title="卡片插槽示例" closable>
+  <n-card title="卡片插槽示例" closable close-style="border-radius: 50%">
     <template #close-icon>
       <n-icon :component="CloseCircle" />
     </template>
