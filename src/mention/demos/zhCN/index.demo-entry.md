@@ -14,6 +14,7 @@ render-label.vue
 custom-prefix.vue
 manual-trigger.vue
 status.vue
+input-props.vue
 ```
 
 ## API
@@ -40,6 +41,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
+| input-props | `InputProps` | `undefined` | Set input props. See [Input props](input#Input-Props). | NEXT_VERSION |
 | on-update:value | `(value: string) => void` | `undefined` | 输入框值发生更新时触发 |  |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | 输入框的选中时触发 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | 输入框获得焦点时触发 |  |
