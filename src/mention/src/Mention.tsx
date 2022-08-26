@@ -22,7 +22,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
-import { NInput } from '../../input'
+import { InputProps, NInput } from '../../input'
 import type { InputInst } from '../../input'
 import type {
   SelectBaseOption,
@@ -104,6 +104,7 @@ export const mentionProps = {
   >,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
+  inputProps: Object as PropType<InputProps>,
   // private
   internalDebug: Boolean
 } as const
@@ -414,6 +415,7 @@ export default defineComponent({
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
+          {...this.inputProps}
           status={this.mergedStatus}
           themeOverrides={mergedTheme.peerOverrides.Input}
           theme={mergedTheme.peers.Input}
