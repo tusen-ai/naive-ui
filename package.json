@@ -125,7 +125,7 @@
     "inquirer": "^8.2.2",
     "jest": "^28.0.3",
     "jest-canvas-mock": "^2.3.1",
-    "jest-environment-jsdom": "^28.0.2",
+    "jest-environment-jsdom": "^29.0.0",
     "lint-staged": "^13.0.3",
     "lyla": "^0.6.8",
     "marked": "^4.0.13",
