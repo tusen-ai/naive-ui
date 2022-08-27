@@ -68,6 +68,7 @@ use-dialog-reactive-list.vue
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
+| class | `any` | `undefined` | Class name of the dialog. | NEXT_VERSION |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
@@ -80,6 +81,7 @@ use-dialog-reactive-list.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
+| style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | NEXT_VERSION |
@@ -98,6 +100,7 @@ All the properties can be modified dynamically.
 | Name | Type | Description | Version |
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
+| class | `any` | `undefined` | 类名 | NEXT_VERSION |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a `render` function. |  |

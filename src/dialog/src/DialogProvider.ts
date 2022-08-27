@@ -26,6 +26,7 @@ Omit<
 Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
 'internalStyle'
 > & {
+  class?: any
   style?: string | CSSProperties
 }
 >
@@ -39,6 +40,7 @@ export type DialogReactive = {
 // If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
 // Fxxx
 type TypeSafeDialogReactive = DialogReactive & {
+  class?: any
   style?: any
 }
 

@@ -69,6 +69,7 @@ focus-debug.vue
 | autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.28.3 |
 | blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
+| class | `any` | `undefined` | 类名 | NEXT_VERSION |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
@@ -81,6 +82,7 @@ focus-debug.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
+| style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | NEXT_VERSION |
