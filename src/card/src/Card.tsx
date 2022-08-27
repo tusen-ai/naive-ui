@@ -112,7 +112,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-color': props.embedded ? colorEmbedded : color,
-        '--n-color-modal': colorModal,
+        '--n-color-modal': props.embedded ? colorEmbedded : colorModal,
         '--n-color-popover': colorPopover,
         '--n-color-target': colorTarget,
         '--n-text-color': textColor,
@@ -142,7 +142,7 @@ export default defineComponent({
       ? useThemeClass(
         'card',
         computed(() => {
-          return props.size[0]
+          return props.size[0] + (props.embedded ? 'e' : '')
         }),
         cssVarsRef,
         props
