@@ -14,6 +14,7 @@
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 - 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)
 - `DialogReactive` 支持 `onAfterEnter` 属性，关闭 [#3569](https://github.com/tusen-ai/naive-ui/issues/3569)
+- `DialogOptions` 支持 `class` 属性，关闭 [#3591](https://github.com/tusen-ai/naive-ui/issues/3591)
 
 ## 2.32.2
 
