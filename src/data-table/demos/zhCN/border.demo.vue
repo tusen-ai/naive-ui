@@ -1,25 +1,26 @@
 <markdown>
-# 无边框 & 有边框 & 其他
+# 无边框 & 无列分隔 & 无行分隔
 </markdown>
 
 <template>
   <n-space vertical :size="12">
     <n-data-table
       :bordered="false"
+      :single-line="false"
       :columns="columns"
       :data="data"
       :pagination="pagination"
     />
-    <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+    <n-data-table
+      :bordered="false"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
     <n-data-table
       :bordered="false"
       :single-line="false"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-    />
-    <n-data-table
-      :single-line="false"
+      single-column
       :columns="columns"
       :data="data"
       :pagination="pagination"

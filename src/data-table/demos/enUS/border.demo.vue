@@ -1,25 +1,26 @@
 <markdown>
-# Unbordered & bordered & all between
+# Unbordered & no row divider & no column divider
 </markdown>
 
 <template>
   <n-space vertical :size="12">
     <n-data-table
       :bordered="false"
+      :single-line="false"
       :columns="columns"
       :data="data"
       :pagination="pagination"
     />
-    <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+    <n-data-table
+      :bordered="false"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
     <n-data-table
       :bordered="false"
       :single-line="false"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-    />
-    <n-data-table
-      :single-line="false"
+      single-column
       :columns="columns"
       :data="data"
       :pagination="pagination"
