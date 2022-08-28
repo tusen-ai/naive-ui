@@ -79,8 +79,8 @@ export default cB('tree', `
   ]),
   cM('block-node', [
     cB('tree-node-content', `
-        flex: 1;
-        min-width: 0;
+      flex: 1;
+      min-width: 0;
     `)
   ]),
   cNotM('block-line', [
