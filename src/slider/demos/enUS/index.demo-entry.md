@@ -28,7 +28,7 @@ custom-thumb.vue
 | default-value | `number \| [number, number] \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether the slider is disabled. |  |
 | format-tooltip | `(value: number) => string \| number` | `undefined` | Format tooltip. |  |
-| keyboard | `boolean` | `true` | Whether the slider can be controlled keyboard. | NEXT_VERSION |
+| keyboard | `boolean` | `true` | Whether the slider can be controlled keyboard. | 2.33.0 |
 | marks | `{ [markValue: number]: string }` | `undefined` | Marks of the slider. |  |
 | max | `number` | `100` | Max value of the slider. |  |
 | min | `number` | `0` | Min value of the slider. |  |

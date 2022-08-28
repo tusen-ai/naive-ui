@@ -68,7 +68,7 @@ use-dialog-reactive-list.vue
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
-| class | `any` | `undefined` | Class name of the dialog. | NEXT_VERSION |
+| class | `any` | `undefined` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
@@ -84,7 +84,7 @@ use-dialog-reactive-list.vue
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
-| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | NEXT_VERSION |
+| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -100,7 +100,7 @@ All the properties can be modified dynamically.
 | Name | Type | Description | Version |
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
-| class | `any` | `undefined` | 类名 | NEXT_VERSION |
+| class | `any` | `undefined` | 类名 | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a `render` function. |  |
@@ -116,7 +116,7 @@ All the properties can be modified dynamically.
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
-| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | NEXT_VERSION |
+| onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. |  |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
 | onEsc | `() => void` | Callback fired when the escape key is pressed and focus is within dialog. | 2.32.0 |
