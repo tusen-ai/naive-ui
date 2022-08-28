@@ -8,6 +8,8 @@
 - 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 - 修复 `n-pagination` 被禁用时，快速跳转菜单还会触发并可进行分页跳转
+- 修复 `n-tree` 节点的内容长度可能超过容器宽度，关闭 [#3561](https://github.com/tusen-ai/naive-ui/issues/3561)
+- 修复 `n-form-item` 标签在放在左侧时文字可能溢出，关闭 [#3593](https://github.com/tusen-ai/naive-ui/issues/3593)
 
 ### Feats
 
