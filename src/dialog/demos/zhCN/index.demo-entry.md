@@ -101,6 +101,7 @@ focus-debug.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 `border` |  |
+| class | `any` | `undefined` | 类名 | NEXT_VERSION |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |  |
