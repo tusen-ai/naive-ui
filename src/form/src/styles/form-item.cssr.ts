@@ -18,23 +18,24 @@ import { fadeDownTransition } from '../../../_styles/transitions/fade-down.cssr'
 // --n-feedback-text-color-error
 // --n-label-text-align
 // --n-label-padding
-export default cB('form-item', {
-  display: 'grid',
-  lineHeight: 'var(--n-line-height)'
-}, [
+export default cB('form-item', `
+  display: grid;
+  line-height: var(--n-line-height);
+`, [
   cB('form-item-label', `
     grid-area: label;
     align-items: center;
     line-height: 1.25;
     text-align: var(--n-label-text-align);
     font-size: var(--n-label-font-size);
-    height: var(--n-label-height);
+    min-height: var(--n-label-height);
     padding: var(--n-label-padding);
     color: var(--n-label-text-color);
     transition: color .3s var(--n-bezier);
     box-sizing: border-box;
   `, [
     cE('asterisk', `
+      white-space: nowrap;
       user-select: none;
       -webkit-user-select: none;
       color: var(--n-asterisk-color);
@@ -46,10 +47,13 @@ export default cB('form-item', {
       visibility: hidden;      
     `)
   ]),
-  cB('form-item-blank', {
-    gridArea: 'blank',
-    minHeight: 'var(--n-blank-height)'
-  }),
+  cB('form-item-blank', `
+    grid-area: blank;
+    min-height: var(--n-blank-height);
+  `),
+  cM('auto-label-width', [
+    cB('form-item-label', 'white-space: nowrap;')
+  ]),
   cM('left-labelled', `
     grid-template-areas:
       "label blank"
@@ -84,7 +88,7 @@ export default cB('form-item', {
       "label"
       "blank"
       "feedback";
-    grid-template-rows: var(--n-label-height) 1fr;
+    grid-template-rows: minmax(var(--n-label-height), auto) 1fr;
     grid-template-columns: minmax(0, 100%);
   `, [
     cM('no-label', `
@@ -93,11 +97,11 @@ export default cB('form-item', {
         "feedback";
         grid-template-rows: 1fr;
     `),
-    cB('form-item-label', {
-      display: 'flex',
-      alignItems: 'flex-end',
-      justifyContent: 'var(--n-label-text-align)'
-    })
+    cB('form-item-label', `
+      display: flex;
+      align-items: flex-start;
+      justify-content: var(--n-label-text-align);
+    `)
   ]),
   cB('form-item-blank', `
     box-sizing: border-box;

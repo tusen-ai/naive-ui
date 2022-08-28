@@ -21,6 +21,18 @@ export function formItemSize (props: FormItemSetupProps): {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function formItemMisc (props: FormItemSetupProps) {
   const NForm = inject(formInjectionKey, null)
+  const mergedLabelPlacementRef = computed(() => {
+    const { labelPlacement } = props
+    if (labelPlacement !== undefined) return labelPlacement
+    if (NForm?.props.labelPlacement) return NForm.props.labelPlacement
+    return 'top'
+  })
+  const isAutoLabelWidthRef = computed(() => {
+    return (
+      mergedLabelPlacementRef.value === 'left' &&
+      (props.labelWidth === 'auto' || NForm?.props.labelWidth === 'auto')
+    )
+  })
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
@@ -29,7 +41,7 @@ export function formItemMisc (props: FormItemSetupProps) {
       return formatLength(labelWidth)
     }
 
-    if (labelWidth === 'auto' || NForm?.props.labelWidth === 'auto') {
+    if (isAutoLabelWidthRef.value) {
       const autoComputedWidth = NForm?.maxChildLabelWidthRef.value
       if (autoComputedWidth !== undefined) {
         return formatLength(autoComputedWidth)
@@ -42,12 +54,6 @@ export function formItemMisc (props: FormItemSetupProps) {
       return formatLength(NForm.props.labelWidth)
     }
     return undefined
-  })
-  const mergedLabelPlacementRef = computed(() => {
-    const { labelPlacement } = props
-    if (labelPlacement !== undefined) return labelPlacement
-    if (NForm?.props.labelPlacement) return NForm.props.labelPlacement
-    return 'top'
   })
   const mergedLabelAlignRef = computed(() => {
     const { labelAlign } = props
@@ -102,7 +108,8 @@ export function formItemMisc (props: FormItemSetupProps) {
     mergedRequireMarkPlacement: mergedRequireMarkPlacementRef,
     mergedValidationStatus: mergedValidationStatusRef,
     mergedShowFeedback: mergedShowFeedbackRef,
-    mergedShowLabel: mergedShowLabelRef
+    mergedShowLabel: mergedShowLabelRef,
+    isAutoLabelWidth: isAutoLabelWidthRef
   }
 }
 

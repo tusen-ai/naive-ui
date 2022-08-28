@@ -361,11 +361,17 @@ export default defineComponent({
       internalValidate
     }
     const labelElementRef = ref<null | HTMLLabelElement>(null)
-    onMounted(() => {
-      if (labelElementRef.value !== null) {
+    onMounted((): void => {
+      if (!formItemMiscRefs.isAutoLabelWidth.value) return
+      const labelElement = labelElementRef.value
+      if (labelElement !== null) {
+        const memoizedWhitespace = labelElement.style.whiteSpace
+        labelElement.style.whiteSpace = 'nowrap'
+        labelElement.style.width = ''
         NForm?.deriveMaxChildLabelWidth(
-          Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
+          Number(getComputedStyle(labelElement).width.slice(0, -2))
         )
+        labelElement.style.whiteSpace = memoizedWhitespace
       }
     })
     const cssVarsRef = computed(() => {
@@ -485,10 +491,11 @@ export default defineComponent({
       } else {
         labelContent = [textNode, markNode]
       }
+      const { labelProps } = this
       return (
         <label
-          {...this.labelProps}
-          class={[this.labelProps?.class, `${mergedClsPrefix}-form-item-label`]}
+          {...labelProps}
+          class={[labelProps?.class, `${mergedClsPrefix}-form-item-label`]}
           style={this.mergedLabelStyle as any}
           ref="labelElementRef"
         >
@@ -504,6 +511,8 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
+          this.isAutoLabelWidth &&
+            `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
