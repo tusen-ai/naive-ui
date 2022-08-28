@@ -37,4 +37,4 @@ size.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | value | `string \| number \| boolean \| null` | `null` | Checked value. |
 | default-value | `string \| number \| boolean \| null` | `null` | Default checked value. |
-| on-update:value | `(value: string) => void` | `undefined` | Callback method triggered when a selection change occurs. |
+| on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | Callback method triggered when a selection change occurs. |

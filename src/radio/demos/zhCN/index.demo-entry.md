@@ -39,4 +39,4 @@ rtl-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
 | value | `string \| number \| boolean \| null` | `null` | 选中的值 |
 | default-value | `string \| number \| boolean \| null` | `null` | 默认选中的值 |
-| on-update:value | `(value: string) => void` | `undefined` | 发生变化时触发的回调方法 |
+| on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |
