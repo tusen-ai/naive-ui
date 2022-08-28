@@ -12,12 +12,12 @@ restrict-selectable-values.vue
 disabled.vue
 disable-tooltip.vue
 format.vue
-keyboard.vue
 reverse.vue
 vertical.vue
 show-tooltip.vue
 multiple-debug.vue
 custom-thumb.vue
+keyboard-debug.vue
 ```
 
 ## API
