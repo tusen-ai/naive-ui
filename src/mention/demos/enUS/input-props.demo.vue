@@ -2,7 +2,7 @@
 # Input props
 
 <n-alert type="warning">
-Props and defaults from <n-code>n-mention</n-code> will override props set with <n-code>input-props</n-code>. To set <n-code>placeholder</n-code> or <n-code>disabled</n-code>, set it directly on <n-code>n-mention</n-code>.
+Props and defaults from `n-mention` will override props set with `input-props`. To set `placeholder` or `disabled`, set it directly on `n-mention`.
 </n-alert>
 </markdown>
 
