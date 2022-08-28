@@ -1,5 +1,5 @@
 <markdown>
-# 无边框 & 单行
+# 无边框 & 有边框 & 其他
 </markdown>
 
 <template>
@@ -10,9 +10,16 @@
       :data="data"
       :pagination="pagination"
     />
+    <n-data-table :columns="columns" :data="data" :pagination="pagination" />
     <n-data-table
       :bordered="false"
-      :single-line="true"
+      :single-line="false"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+    <n-data-table
+      :single-line="false"
       :columns="columns"
       :data="data"
       :pagination="pagination"

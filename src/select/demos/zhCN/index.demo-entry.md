@@ -107,7 +107,7 @@ create-debug.vue
 | children | `Array<SelectOption>` | 子选项组 |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | 选项组的标签 |
 | key | `string \| number` | 在选项中应该是唯一的 |
-| render | `(info: { node: VNode, option: SelectOption, selected: boolean } }) => VNodeChild` | 渲染整个选项 |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | 渲染整个选项 |
 | type | `'group'` | 选项组的类型 |
 
 ### Select Slots
