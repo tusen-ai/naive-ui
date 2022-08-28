@@ -7,7 +7,7 @@
 - Fix `n-select`'s menu missing option check mark in SSR mode, closes https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
 - Fix `n-card`'s `embedded` prop not work in `n-dialog`, closes [#3592](https://github.com/tusen-ai/naive-ui/issues/3592).
 - Fix `n-radio` warning when value prop type is boolean, closes [#3540](https://github.com/tusen-ai/naive-ui/issues/3540).
-- Fix `n-tree` content width may exceed container width, closes [#3561](https://github.com/tusen-ai/naive-ui/issues/3561).
+- Fix `n-tree` content width may overflow container, closes [#3561](https://github.com/tusen-ai/naive-ui/issues/3561).
 - Fix `n-form-item` label text may overflow when it's left placement, closes [#3593](https://github.com/tusen-ai/naive-ui/issues/3593).
 
 ### Feats

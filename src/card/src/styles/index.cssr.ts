@@ -25,6 +25,9 @@ import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_ut
 // --n-close-icon-color-pressed
 // --n-border-color
 // --n-box-shadow
+// --n-color-embedded
+// --n-color-embedded-modal
+// --n-color-embedded-popover
 export default c([
   cB('card', `
     font-size: var(--n-font-size);
@@ -44,6 +47,9 @@ export default c([
       box-shadow .3s var(--n-bezier),
       border-color .3s var(--n-bezier);
   `, [
+    asModal({
+      background: 'var(--n-color-modal)'
+    }),
     cM('hoverable', [
       c('&:hover', 'box-shadow: var(--n-box-shadow);')
     ]),
@@ -180,17 +186,23 @@ export default c([
           })
         ])
       ])
-    ])
+    ]),
+    cM('embedded', `
+      background-color: var(--n-color-embedded);
+    `)
   ]),
-  insideModal(cB('card', {
-    background: 'var(--n-color-modal)'
-  })),
-  insidePopover(cB('card', {
-    background: 'var(--n-color-popover)'
-  })),
-  cB('card', [
-    asModal({
-      background: 'var(--n-color-modal)'
-    })
-  ])
+  insideModal(cB('card', `
+    background: var(--n-color-modal);
+  `, [
+    cM('embedded', `
+      background-color: var(--n-color-embedded-modal);
+    `)
+  ])),
+  insidePopover(cB('card', `
+    background: var(--n-color-popover);
+  `, [
+    cM('embedded', `
+      background-color: var(--n-color-embedded-popover);
+    `)
+  ]))
 ])
