@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `n-rate`'s `default-value` prop's default value is changed from `0` to `null`.
+
 ### Fixes
 
 - Fix `n-select`'s menu missing option check mark in SSR mode, closes https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
