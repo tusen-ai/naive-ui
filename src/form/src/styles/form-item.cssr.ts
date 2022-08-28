@@ -55,15 +55,29 @@ export default cB('form-item', {
       "label blank"
       "label feedback";
     grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    align-items: start;
   `, [
     cB('form-item-label', `
-      height: var(--n-blank-height);
-      line-height: var(--n-blank-height);
+      display: grid;
+      grid-template-areas:
+        "text star"
+        "text .";
+      grid-template-columns: 1fr auto;
+      min-height: var(--n-blank-height);
+      height: auto;
       box-sizing: border-box;
-      white-space: nowrap;
       flex-shrink: 0;
       flex-grow: 0;
-    `)
+    `, [
+      cE('text', `
+        grid-area: text;      
+      `),
+      cE('asterisk', `
+        grid-area: star;      
+        align-self: end;
+      `)
+    ])
   ]),
   cM('top-labelled', `
     grid-template-areas:

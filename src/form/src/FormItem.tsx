@@ -457,6 +457,46 @@ export default defineComponent({
         ? mergedShowRequireMark
         : this.mergedRequired
     onRender?.()
+
+    const renderLabel = (): JSX.Element | null => {
+      const labelText = this.$slots.label ? this.$slots.label() : this.label
+      if (!labelText) return null
+      const textNode = (
+        <span class={`${mergedClsPrefix}-form-item-label__text`}>
+          {labelText}
+        </span>
+      )
+      const markNode = renderedShowRequireMark ? (
+        <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
+          {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
+        </span>
+      ) : (
+        mergedRequireMarkPlacement === 'right-hanging' && (
+          <span
+            class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
+          >
+            {'\u00A0*'}
+          </span>
+        )
+      )
+      let labelContent
+      if (mergedRequireMarkPlacement === 'left') {
+        labelContent = [markNode, textNode]
+      } else {
+        labelContent = [textNode, markNode]
+      }
+      return (
+        <label
+          {...this.labelProps}
+          class={[this.labelProps?.class, `${mergedClsPrefix}-form-item-label`]}
+          style={this.mergedLabelStyle as any}
+          ref="labelElementRef"
+        >
+          {labelContent}
+        </label>
+      )
+    }
+
     return (
       <div
         class={[
@@ -468,42 +508,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {mergedShowLabel && (this.label || $slots.label) ? (
-          <label
-            {...this.labelProps}
-            class={[
-              this.labelProps?.class,
-              `${mergedClsPrefix}-form-item-label`
-            ]}
-            style={this.mergedLabelStyle as any}
-            ref="labelElementRef"
-          >
-            {/* 'left' | 'right' | undefined */}
-            {mergedRequireMarkPlacement !== 'left'
-              ? $slots.label
-                ? $slots.label()
-                : this.label
-              : null}
-            {renderedShowRequireMark ? (
-              <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
-              </span>
-            ) : (
-              mergedRequireMarkPlacement === 'right-hanging' && (
-                <span
-                  class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
-                >
-                  {'\u00A0*'}
-                </span>
-              )
-            )}
-            {mergedRequireMarkPlacement === 'left'
-              ? $slots.label
-                ? $slots.label()
-                : this.label
-              : null}
-          </label>
-        ) : null}
+        {mergedShowLabel && renderLabel()}
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,
