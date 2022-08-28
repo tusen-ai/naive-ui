@@ -5,7 +5,10 @@
 </markdown>
 
 <template>
-  <n-card title="卡片插槽示例">
+  <n-card title="卡片插槽示例" closable close-style="border-radius: 50%">
+    <template #close-icon>
+      <n-icon :component="CloseCircle" />
+    </template>
     <template #header-extra>
       #header-extra
     </template>
@@ -18,3 +21,15 @@
     </template>
   </n-card>
 </template>
+<script lang="ts">
+import { CloseCircle } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup () {
+    return {
+      CloseCircle
+    }
+  }
+})
+</script>

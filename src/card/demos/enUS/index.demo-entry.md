@@ -27,8 +27,9 @@ embedded.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether to show the card border. |  |
 | closable | `boolean` | `false` | Is it allowed to close. |  |
+| close-style | ``Object \| string` | The style of the close button. | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | The style of the card content area. |  |
-| embedded | `boolean` | `false` | 	>>>使用更深的背景色展现嵌入效果，只对亮色主题生效<<< |  |
+| embedded | `boolean` | `false` | >>>使用更深的背景色展现嵌入效果，只对亮色主题生效<<< |  |
 | footer-style | `Object \| string` | `undefined` | The style of the bottom area of the card. |  |
 | header-style | `Object \| string` | `undefined` | The style of the card head area. |  |
 | header-extra-style | `Object \| string` | `undefined` | The style of the card head extra area. | 2.25.0 |
@@ -40,11 +41,12 @@ embedded.vue
 
 ### Card Slots
 
-| Name         | Parameters | Description             |
-| ------------ | ---------- | ----------------------- |
-| cover        | `()`       | Cover content.          |
-| header       | `()`       | Header content.         |
-| header-extra | `()`       | Header extra content.   |
-| default      | `()`       | Card content.           |
-| footer       | `()`       | Footer content.         |
-| action       | `()`       | Operating area content. |
+| Name         | Parameters | Description             | Version      |
+| ------------ | ---------- | ----------------------- | ------------ |
+| cover        | `()`       | Cover content.          |              |
+| close-icon   | `()`       | Close icon.             | NEXT_VERSION |
+| header       | `()`       | Header content.         |              |
+| header-extra | `()`       | Header extra content.   |              |
+| default      | `()`       | Card content.           |              |
+| footer       | `()`       | Footer content.         |              |
+| action       | `()`       | Operating area content. |              |

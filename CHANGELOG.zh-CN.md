@@ -11,6 +11,8 @@
 
 ### Feats
 
+- `n-card` 新增 `close-icon` 插槽，关闭 [#3597](https://github.com/tusen-ai/naive-ui/issues/3597)
+- `n-card` 新增 `close-style` 属性
 - `n-menu` 新增 `disabledField` 属性
 - `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)

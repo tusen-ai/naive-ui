@@ -1,5 +1,6 @@
 import { h, defineComponent, PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
+import { resolveSlot } from '../../../_utils'
 import { NBaseIcon } from '../../icon'
 import { CloseIcon } from '../../icons'
 import style from './styles/index.cssr'
@@ -23,7 +24,7 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>,
     absolute: Boolean
   },
-  setup (props) {
+  setup (props, { slots }) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
       const { clsPrefix, disabled, absolute, round } = props
@@ -47,11 +48,13 @@ export default defineComponent({
           }}
           onClick={props.onClick}
         >
-          <NBaseIcon clsPrefix={clsPrefix}>
-            {{
-              default: () => <CloseIcon />
-            }}
-          </NBaseIcon>
+          {resolveSlot(slots.default, () => [
+            <NBaseIcon clsPrefix={clsPrefix}>
+              {{
+                default: () => <CloseIcon />
+              }}
+            </NBaseIcon>
+          ])}
         </button>
       )
     }

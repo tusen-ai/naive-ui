@@ -29,6 +29,7 @@ embedded-debug.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | 是否显示卡片边框 |  |
 | closable | `boolean` | `false` | 是否允许关闭 |  |
+| close-style | ``Object \| string` | 关闭按钮的样式 | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |  |
 | embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |  |
 | footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |  |
@@ -42,11 +43,12 @@ embedded-debug.vue
 
 ### Card Slots
 
-| 名称         | 参数 | 说明         |
-| ------------ | ---- | ------------ |
-| cover        | `()` | 覆盖内容     |
-| header       | `()` | 头部内容     |
-| header-extra | `()` | 头部额外内容 |
-| default      | `()` | 卡片内容     |
-| footer       | `()` | 底部内容     |
-| action       | `()` | 操作区域内容 |
+| 名称         | 参数 | 说明         | 版本         |
+| ------------ | ---- | ------------ | ------------ |
+| cover        | `()` | 覆盖内容     |              |
+| close-icon   | `()` | 关闭图标     | NEXT_VERSION |
+| header       | `()` | 头部内容     |              |
+| header-extra | `()` | 头部额外内容 |              |
+| default      | `()` | 卡片内容     |              |
+| footer       | `()` | 底部内容     |              |
+| action       | `()` | 操作区域内容 |              |

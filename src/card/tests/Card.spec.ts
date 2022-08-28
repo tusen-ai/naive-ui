@@ -64,7 +64,11 @@ describe('n-card', () => {
 
   it('should work with `slots` ', async () => {
     const wrapper = mount(NCard, {
+      props: {
+        closable: true
+      },
       slots: {
+        'close-icon': () => 'close',
         cover: () => 'cover',
         header: () => 'header',
         'header-extra': () => 'header-extra',
@@ -73,6 +77,9 @@ describe('n-card', () => {
         action: () => 'action'
       }
     })
+
+    expect(wrapper.find('.n-card-header__close').exists()).toBe(true)
+    expect(wrapper.find('.n-card-header__close').text()).toBe('close')
 
     expect(wrapper.find('.n-card-cover').exists()).toBe(true)
     expect(wrapper.find('.n-card-cover').text()).toBe('cover')
