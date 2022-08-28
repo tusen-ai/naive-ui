@@ -25,23 +25,23 @@ export default cB('rate', {
     font-size: var(--n-item-size);
     color: var(--n-item-color);
   `, [
-    c('&:not(:first-child)', {
-      marginLeft: '6px'
-    }),
-    cM('active', {
-      color: 'var(--n-item-color-active)'
-    })
+    c('&:not(:first-child)', `
+      margin-left: 6px;
+    `),
+    cM('active', `
+      color: var(--n-item-color-active);
+    `)
   ]),
   cNotM('readonly', `
     cursor: pointer;
   `, [
     cE('item', [
-      c('&:hover', {
-        transform: 'scale(1.05)'
-      }),
-      c('&:active', {
-        transform: 'scale(0.96)'
-      })
+      c('&:hover', `
+        transform: scale(1.05);
+      `),
+      c('&:active', `
+        transform: scale(0.96);
+      `)
     ])
   ]),
   cE('half', `
@@ -55,8 +55,8 @@ export default cB('rate', {
     overflow: hidden;
     color: rgba(255, 255, 255, 0);
   `, [
-    cM('active', {
-      color: 'var(--n-item-color-active)'
-    })
+    cM('active', `
+      color: var(--n-item-color-active);
+    `)
   ])
 ])

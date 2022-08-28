@@ -1,24 +1,24 @@
 import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, RadioTheme } from '../styles'
-import useRadio from './use-radio'
+import { setup, radioProps } from './use-radio'
 import style from './styles/radio.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
 
-export const radioProps = useRadio.props
-export type RadioProps = ExtractPublicPropTypes<typeof useRadio.props>
+export { radioProps }
+export type RadioProps = ExtractPublicPropTypes<typeof radioProps>
 
 export default defineComponent({
   name: 'Radio',
   props: {
     ...(useTheme.props as ThemeProps<RadioTheme>),
-    ...useRadio.props
+    ...radioProps
   },
   setup (props) {
-    const radio = useRadio(props)
+    const radio = setup(props)
     const themeRef = useTheme(
       'Radio',
       '-radio',

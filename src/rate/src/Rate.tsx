@@ -16,8 +16,9 @@ import { call, color2Class, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
 import type { RateTheme } from '../styles'
-import style from './styles/index.cssr'
+import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import StarIcon from './StarIcon'
+import style from './styles/index.cssr'
 
 export const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
@@ -28,8 +29,8 @@ export const rateProps = {
   },
   value: Number,
   defaultValue: {
-    type: Number,
-    default: 0
+    type: Number as PropType<number | null>,
+    default: null
   },
   readonly: Boolean,
   size: {
@@ -38,12 +39,11 @@ export const rateProps = {
   },
   clearable: Boolean,
   color: String,
+  onClear: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+  MaybeArray<RateOnUpdateValue>
   >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
-  >
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>
 } as const
 
 export type RateProps = ExtractPublicPropTypes<typeof rateProps>
@@ -66,26 +66,18 @@ export default defineComponent({
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
     const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
-    function doUpdateValue (value: number): void {
+    function doUpdateValue (value: number | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-
       if (_onUpdateValue) {
-        call(_onUpdateValue, value)
+        call(_onUpdateValue as RateOnUpdateValueImpl, value)
       }
       if (onUpdateValue) {
-        call(onUpdateValue, value)
+        call(onUpdateValue as RateOnUpdateValueImpl, value)
       }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
-    }
-    function getResetJudgeValue (value: number): number {
-      const { clearable } = props
-      if (clearable && value === mergedValue.value) {
-        return 0
-      }
-      return value
     }
     function getDerivedValue (index: number, e: MouseEvent): number {
       if (props.allowHalf) {
@@ -101,16 +93,29 @@ export default defineComponent({
         return index + 1
       }
     }
+    let cleared = false
     function handleMouseMove (index: number, e: MouseEvent): void {
+      if (cleared) return
       hoverIndexRef.value = getDerivedValue(index, e)
     }
     function handleMouseLeave (): void {
       hoverIndexRef.value = null
     }
     function handleClick (index: number, e: MouseEvent): void {
-      doUpdateValue(getResetJudgeValue(getDerivedValue(index, e)))
+      const { clearable } = props
+      const derivedValue = getDerivedValue(index, e)
+      if (clearable && derivedValue === mergedValue.value) {
+        cleared = true
+        props.onClear?.()
+        hoverIndexRef.value = null
+        doUpdateValue(null)
+      } else {
+        doUpdateValue(derivedValue)
+      }
     }
-
+    function handleMouseEnterSomeStar (): void {
+      cleared = false
+    }
     const mergedSizeRef = computed(() => {
       const { size } = props
       const { self } = themeRef.value
@@ -126,10 +131,11 @@ export default defineComponent({
         self
       } = themeRef.value
       const { itemColor, itemColorActive } = self
+      const { color } = props
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-item-color': itemColor,
-        '--n-item-color-active': props.color || itemColorActive,
+        '--n-item-color-active': color || itemColorActive,
         '--n-item-size': mergedSizeRef.value
       }
     })
@@ -160,6 +166,7 @@ export default defineComponent({
       handleMouseMove,
       handleClick,
       handleMouseLeave,
+      handleMouseEnterSomeStar,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -195,16 +202,16 @@ export default defineComponent({
               {{ default: () => StarIcon }}
             </NBaseIcon>
           )
-          const fullStarActive =
+          const entireStarActive =
             hoverIndex !== null
               ? index + 1 <= hoverIndex
-              : index + 1 <= mergedValue
+              : index + 1 <= (mergedValue || 0)
           return (
             <div
               key={index}
               class={[
                 `${mergedClsPrefix}-rate__item`,
-                fullStarActive && `${mergedClsPrefix}-rate__item--active`
+                entireStarActive && `${mergedClsPrefix}-rate__item--active`
               ]}
               onClick={
                 readonly
@@ -213,6 +220,7 @@ export default defineComponent({
                       this.handleClick(index, e)
                     }
               }
+              onMouseenter={this.handleMouseEnterSomeStar}
               onMousemove={
                 readonly
                   ? undefined
@@ -228,9 +236,9 @@ export default defineComponent({
                     `${mergedClsPrefix}-rate__half`,
                     {
                       [`${mergedClsPrefix}-rate__half--active`]:
-                        !fullStarActive && hoverIndex !== null
+                        !entireStarActive && hoverIndex !== null
                           ? index + 0.5 <= hoverIndex
-                          : index + 0.5 <= mergedValue
+                          : index + 0.5 <= (mergedValue || 0)
                     }
                   ]}
                 >

@@ -5,15 +5,16 @@ import {
   ExtractPropTypes,
   PropType,
   Ref,
-  ComputedRef
+  ComputedRef,
+  watchEffect
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
-import { warn, call, createInjectionKey } from '../../_utils'
+import { call, createInjectionKey, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
-const radioProps = {
+export const radioProps = {
   name: String,
   value: {
     type: [String, Number, Boolean] as PropType<string | number | boolean>,
@@ -39,13 +40,6 @@ const radioProps = {
   // deprecated
   checkedValue: {
     type: Boolean as PropType<boolean | undefined>,
-    validator: () => {
-      warn(
-        'radio',
-        '`checked-value` is deprecated, please use `checked` instead.'
-      )
-      return true
-    },
     default: undefined
   }
 } as const
@@ -78,6 +72,16 @@ export interface UseRadio {
 }
 
 function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
+  if (__DEV__) {
+    watchEffect(() => {
+      if (props.checkedValue !== undefined) {
+        warnOnce(
+          'radio',
+          '`checked-value` is deprecated, please use `checked` instead.'
+        )
+      }
+    })
+  }
   const formItem = useFormItem(props, {
     mergedSize (NFormItem) {
       const { size } = props
@@ -170,7 +174,5 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   }
 }
 
-setup.props = radioProps
-
 export type RadioProps = ExtractPropTypes<typeof radioProps>
-export default setup
+export { setup }

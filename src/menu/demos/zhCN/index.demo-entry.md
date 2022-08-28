@@ -37,6 +37,7 @@ debug.vue
 | default-expand-all | `boolean` | `false` | 是否展开全部菜单 |  |
 | default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |  |
 | default-value | `string \| null` | `null` | 非受控模式下的默认值 |  |
+| disabled-field | `string` | `'disabled'` | disabled 的字段名 | NEXT_VETSION |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |  |
 | dropdown-props | `DropdownProps` | `undefined` | 菜单折叠或 `mode='horizontal'` 模式时 Dropdown 的 props，请参考 [Dropdown Props](dropdown#Dropdown-Props) |  |
 | expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |  |
@@ -44,7 +45,6 @@ debug.vue
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |  |
 | indent | `number` | `32` | 菜单每级的缩进 |  |
 | inverted | `boolean` | `false` | 使用反转样式 |  |
-| disabledField | `string` | `'disabled'` | disabled 的字段名 | NEXT_VETSION |
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |

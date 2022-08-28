@@ -36,6 +36,7 @@ show.vue
 | default-expand-all | `boolean` | `false` | Whether to expand all menus. |  |
 | default-expanded-keys | `Array<string>` | `[]` | The default expanded submenu keys of menu in uncontrolled manner. |  |
 | default-value | `string \| null` | `null` | Whether selected by default in uncontrolled mode. |  |
+| disabled-field | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Only effective in horizontal mode. |  |
 | dropdown-props | `DropdownProps` | `undefined` | The dropdown's props when menu is collapsed or horizontal mode，please see [Dropdown Props](dropdown#Dropdown-Props) |  |
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |  |
@@ -43,7 +44,6 @@ show.vue
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |  |
 | indent | `number` | `32` | The indent of menu. |  |
 | inverted | `boolean` | `false` | Use inverted style. |  |
-| disabledField | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |

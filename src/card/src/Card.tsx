@@ -73,7 +73,7 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const { size, embedded } = props
       const {
         self: {
           color,
@@ -111,8 +111,8 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
-        '--n-color': props.embedded ? colorEmbedded : color,
-        '--n-color-modal': props.embedded ? colorEmbedded : colorModal,
+        '--n-color': embedded ? colorEmbedded : color,
+        '--n-color-modal': embedded ? colorEmbedded : colorModal,
         '--n-color-popover': colorPopover,
         '--n-color-target': colorTarget,
         '--n-text-color': textColor,
@@ -216,7 +216,7 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-card-header__main`}
                 role="heading"
               >
-                {children || [this.title]}
+                {children || this.title}
               </div>
               {resolveWrappedSlot(
                 $slots['header-extra'],
