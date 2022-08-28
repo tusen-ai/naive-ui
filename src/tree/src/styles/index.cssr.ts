@@ -79,8 +79,8 @@ export default cB('tree', `
   ]),
   cM('block-node', [
     cB('tree-node-content', `
-      flex-grow: 1;
-      flex-shrink: 0;
+      flex: 1;
+      min-width: 0;
     `)
   ]),
   cNotM('block-line', [
@@ -224,7 +224,8 @@ export default cB('tree', `
     cE('text', `
       border-bottom: 1px solid #0000;
       transition: border-color .3s var(--n-bezier);
-      flex-grow:1;
+      flex-grow: 1;
+      max-width: 100%;
     `),
     cE('suffix', `
       display: inline-flex;
