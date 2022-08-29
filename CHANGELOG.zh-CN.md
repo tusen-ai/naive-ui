@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 Could not resolve "@vicons/ionicons5" 异常，关闭 [#3616](https://github.com/tusen-ai/naive-ui/issues/3616)
+
 ## 2.33.0
 
 ### Breaking Changes
