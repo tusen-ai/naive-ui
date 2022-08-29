@@ -14,7 +14,7 @@
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
-    "release:changelog": "node scripts/release-changelog",
+    "release:changelog": "node scripts/release-changelog.mjs",
     "lint": "pnpm run lint:code && pnpm run lint:type",
     "lint:type": "pnpm run lint:src-type && pnpm run lint:demo-type",
     "lint:code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",

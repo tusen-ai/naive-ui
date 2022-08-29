@@ -1,7 +1,10 @@
-const request = require('superagent')
-const fs = require('fs')
-const path = require('path')
-const inquirer = require('inquirer')
+import request from 'superagent'
+import url from 'url'
+import fs from 'fs'
+import path from 'path'
+import inquirer from 'inquirer'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const { DINGTALK_TOKEN, DINGTALK_TOKEN_2, DINGTALK_TOKEN_3 } = process.env
 
