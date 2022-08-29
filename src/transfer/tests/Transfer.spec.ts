@@ -14,6 +14,15 @@ describe('n-transfer', () => {
     )
   })
 
+  it('should work with `source-filterable` prop', async () => {
+    const wrapper = mount(NTransfer, {
+      props: { sourceFilterable: true }
+    })
+    expect(
+      wrapper.find('.n-transfer-list--source .n-transfer-filter').exists()
+    ).toBe(true)
+  })
+
   it('should work with `filter` prop', async () => {
     const options = [
       {
@@ -23,7 +32,7 @@ describe('n-transfer', () => {
     ]
     const onFilter = jest.fn()
     const wrapper = mount(NTransfer, {
-      props: { filterable: true, filter: onFilter, options }
+      props: { sourceFilterable: true, filter: onFilter, options }
     })
     await wrapper.find('input').setValue('1')
     await sleep(300)
@@ -54,7 +63,7 @@ describe('n-transfer', () => {
   it('should work with `source-filter-placeholder` prop', async () => {
     const test = 'source-filter-placeholder-test'
     const wrapper = mount(NTransfer, {
-      props: { filterable: true, sourceFilterPlaceholder: test }
+      props: { sourceFilterable: true, sourceFilterPlaceholder: test }
     })
     expect(wrapper.find('.n-input__placeholder').text()).toBe(test)
   })
