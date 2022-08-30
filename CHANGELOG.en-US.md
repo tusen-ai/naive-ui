@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-radio` adds `colorActive` theme variable, closes [#3610](https://github.com/tusen-ai/naive-ui/issues/3610).
+
+### Fixes
+
+- Fix `n-form-item`'s `require-mark-placement` prop not working when set to `left`, closes [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+
 ## 2.33.1
 
 ### Fixes

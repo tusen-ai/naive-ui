@@ -486,16 +486,23 @@ export default defineComponent({
         )
       )
       let labelContent
+      let markClass
       if (mergedRequireMarkPlacement === 'left') {
         labelContent = [markNode, textNode]
+        markClass = 'left-mark'
       } else {
         labelContent = [textNode, markNode]
+        markClass = 'right-mark'
       }
       const { labelProps } = this
       return (
         <label
           {...labelProps}
-          class={[labelProps?.class, `${mergedClsPrefix}-form-item-label`]}
+          class={[
+            labelProps?.class,
+            `${mergedClsPrefix}-form-item-label`,
+            markClass
+          ]}
           style={this.mergedLabelStyle as any}
           ref="labelElementRef"
         >
