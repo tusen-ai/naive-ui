@@ -55,6 +55,8 @@ export default c([
     fadeInScaleUpTransition({
       duration: '.25s',
       enterScale: '.5'
+    }, {
+      pointerEvents: 'none'
     })
   ])
 ])

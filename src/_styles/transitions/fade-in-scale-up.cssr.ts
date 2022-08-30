@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import { CNode, CPlainProperties } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
@@ -21,13 +21,14 @@ export function fadeInScaleUpTransition ({
   enterScale = '.9',
   originalTransform = '',
   originalTransition = ''
-}: FadeInScaleUpTransitionOptions = {}): CNode[] {
+}: FadeInScaleUpTransitionOptions = {}, leaveActiveProps: CPlainProperties = {}): CNode[] {
   return [
     c('&.fade-in-scale-up-transition-leave-active', {
       transformOrigin,
       transition: `opacity ${duration} ${cubicBezierEaseIn}, transform ${duration} ${cubicBezierEaseIn} ${
         originalTransition && ',' + originalTransition
-      }`
+      }`,
+      ...leaveActiveProps
     }),
     c('&.fade-in-scale-up-transition-enter-active', {
       transformOrigin,
