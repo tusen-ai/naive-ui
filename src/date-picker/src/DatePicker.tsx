@@ -552,12 +552,12 @@ export default defineComponent({
     }
     function handleClear (): void {
       doUpdateShow(false)
-      inputInstRef.value?.deactivate()
+      inputInstRef.value?.deactivate?.()
       doClear()
     }
     function handlePanelClear (): void {
       // close will be called inside panel
-      inputInstRef.value?.deactivate()
+      inputInstRef.value?.deactivate?.()
       doClear()
     }
     function handlePanelTabOut (): void {

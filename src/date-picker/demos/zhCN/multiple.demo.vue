@@ -10,6 +10,8 @@
       multiple
       :shortcuts="shortcuts"
       :actions="['clear']"
+      clearable
+      @clear="handleClear"
     />
     <div>{{ JSON.stringify(timestamp1) }}</div>
     <n-date-picker
@@ -29,8 +31,13 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
+    const timestamp1 = ref([1660299411358])
+    const handleClear = () => {
+      timestamp1.value = []
+    }
     return {
-      timestamp1: ref([1660299411358]),
+      timestamp1,
+      handleClear,
       timestamp2: ref([1660299411358]),
       shortcuts: {
         亲爱的生日: 1631203200000,
