@@ -35,7 +35,6 @@
 - `DialogReactive` supports `onAfterEnter` prop, closes [#3569](https://github.com/tusen-ai/naive-ui/issues/3569).
 - `DialogOptions` supports `class` prop, closes [#3591](https://github.com/tusen-ai/naive-ui/issues/3591).
 - Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
-- `n-date-picker` adds `multiple` prop, closes[#3357](https://github.com/tusen-ai/naive-ui/issues/3357).
 
 ## 2.32.2
 
