@@ -42,7 +42,7 @@ custom-icon.vue
 | max | `number` | `undefined` | The max value. |  |
 | min | `number` | `undefined` | The min value. |  |
 | parse | `(input: string) => number \| null` | `undefined` | Methof to parse input string. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
-| placeholder | `string` | `'Please Input'` | Placeholder. |  |
+| placeholder | `string` | `undefined` | Placeholder. |  |
 | precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |

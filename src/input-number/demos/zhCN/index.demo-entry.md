@@ -45,7 +45,7 @@ theme-debug.vue
 | max | `number` | `undefined` | 最大值 |  |
 | min | `number` | `undefined` | 最小值 |  |
 | parse | `(input: string) => number \| null` | `undefined` | 解析输入的字符串，设定后会禁用 `update-value-on-input` | 2.30.0 |
-| placeholder | `string` | `'请输入'` | 提示信息 |  |
+| placeholder | `string` | `undefined` | 提示信息 |  |
 | precision | `number` | `undefined` | 数值保留的精度值，设定后会禁用 `update-value-on-input` | 2.30.0 |
 | readonly | `boolean` | `false` | 是否只读 |  |
 | show-button | `boolean` | `true` | 是否有按钮 |  |
