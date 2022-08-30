@@ -22,7 +22,6 @@ icon.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| checked-style | `string` | `undefined` | Style of the checked state. |  |
 | checked-value | `string \| boolean \| number` | `true` | Value of checked state. |  |
 | default-value | `boolean` | `false` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the switch. |  |
@@ -31,9 +30,8 @@ icon.vue
 | round | `boolean` | `true` | Whether the switch has rounded corners.   |  |
 | rubber-band | `boolean` | `true` | Whether the switch button has rubber band effect. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the switch. |  |
-| value | `boolean` | `undefined` | Value when being set manually. |  |
-| unchecked-color | `string` | `undefined` | Background of unchecked state. |  |
-| unchecked-style | `string \| boolean \| number` | `false` | Style of the unchecked state. |  |
+| unchecked-value | `string \| boolean \| number` | `false` | Value of checked state. |  |
+| value | `string \| number \| boolean \| undefined` | `undefined` | Value when being set manually. |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
 
 ### Switch Slots

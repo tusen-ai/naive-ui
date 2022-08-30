@@ -31,7 +31,7 @@ icon.vue
 | rubber-band | `boolean` | `true` | 按钮是否有橡皮筋效果 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 开关大小 |  |
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |  |
-| value | `boolean` | `undefined` | 受控模式下的值 |  |
+| value | `string \| number \| boolean \| undefined` | `undefined` | 受控模式下的值 |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |  |
 
 ### Switch Slots
