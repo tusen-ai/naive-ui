@@ -6,6 +6,7 @@
 
 ```demo
 date.vue
+multiple.vue
 datetime.vue
 datetimeformat.vue
 daterange.vue
@@ -69,6 +70,9 @@ form-debug.vue
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | placeholder | `string` | `'选择日期'` | 自动填充的提示信息 |  |
+| multiple | `boolean` | `false` | 多选 |  |
+| max-tag-count | `number \| 'responsive'\| undefined` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
+| render-tag | `(props: { option: DatePickerSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 

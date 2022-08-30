@@ -6,6 +6,7 @@ import { timePickerDark } from '../../time-picker/styles'
 import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import type { DatePickerTheme } from './light'
 import { self } from './light'
+import { internalSelectionDark } from '../../_internal/selection/styles'
 
 const datePickerDark: DatePickerTheme = {
   name: 'DatePicker',
@@ -14,7 +15,8 @@ const datePickerDark: DatePickerTheme = {
     Input: inputDark,
     Button: buttonDark,
     TimePicker: timePickerDark,
-    Scrollbar: scrollbarDark
+    Scrollbar: scrollbarDark,
+    InternalSelection: internalSelectionDark
   },
   self (vars) {
     const { popoverColor, hoverColor, primaryColor } = vars

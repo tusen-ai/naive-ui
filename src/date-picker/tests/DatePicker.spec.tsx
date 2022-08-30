@@ -303,4 +303,35 @@ describe('n-date-picker', () => {
       wrapper.unmount()
     })
   })
+
+  it('date type should work with multiple prop', async () => {
+    const test = ref<Value>([1660299411358])
+    const wrapper = mount(NDatePicker, {
+      props: {
+        value: test.value,
+        multiple: true,
+        maxTagCount: 4,
+        type: 'date',
+        onUpdateValue: (value: Value) => {
+          test.value = value
+        },
+        shortcuts: {
+          'Honey birthday': 1631203200000
+        }
+      }
+    })
+    const input = wrapper.find('.n-base-selection--multiple')
+    await input.trigger('click')
+    const shortcutButton: HTMLElement = document
+      .querySelector('.n-date-panel-actions__prefix')
+      ?.querySelector('.n-button') as HTMLElement
+    shortcutButton.click()
+
+    const confrimButton: HTMLElement = document
+      .querySelector('.n-date-panel-actions__suffix')
+      ?.querySelector('.n-button') as HTMLElement
+    confrimButton.click()
+    expect(test.value).toEqual([1660299411358, 1631203200000])
+    wrapper.unmount()
+  })
 })

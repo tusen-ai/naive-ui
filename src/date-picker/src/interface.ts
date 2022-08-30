@@ -1,4 +1,4 @@
-import { Ref, Slots, UnwrapNestedRefs } from 'vue'
+import { Ref, Slots, UnwrapNestedRefs, VNodeChild } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
@@ -11,35 +11,45 @@ import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
+// eslint-disable-next-line import/no-cycle
 import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
+import { SelectBaseOption } from '../../select/src/interface'
 
-export type Value = number | [number, number]
+export type RangeValue = [number, number]
+export type ReadonlyRangeValue = readonly [number, number]
 
-export type DefaultTime = string | [string | undefined, string | undefined]
+export type FormattedRangeValue = [string, string]
+export type DefaultRangeTime = [string, string]
 
-export type FormattedValue = string | [string, string]
+export type Value = number | RangeValue | number[] | null
+
+export type DefaultTime = string | string[] | DefaultRangeTime
+
+export type FormattedValue = string | string[] | FormattedRangeValue
 
 export type Shortcuts =
   | Record<string, number | (() => number)>
-  | Record<
-  string,
-  | [number, number]
-  | readonly [number, number]
-  | (() => [number, number] | readonly [number, number])
-  >
+  | Record<string, RangeValue | (() => RangeValue)>
+  | Record<string, ReadonlyRangeValue | (() => ReadonlyRangeValue)>
 
 export type OnUpdateValue = (
   value: number &
   (number | null) &
-  [number, number] &
-  ([number, number] | null),
+  number[] &
+  (number[] | null) &
+  RangeValue &
+  (RangeValue | null) &
+  ReadonlyRangeValue &
+  (ReadonlyRangeValue | null),
   formattedValue: string &
   (string | null) &
-  [string, string] &
-  ([string, string] | null)
+  string[] &
+  (string[] | null) &
+  FormattedRangeValue &
+  (FormattedRangeValue | null)
 ) => void
 
 export type OnConfirm = OnUpdateValue
@@ -49,36 +59,39 @@ export type OnConfirmImpl = OnUpdateValueImpl
 export type OnUpdateFormattedValue = (
   value: string &
   (string | null) &
-  [string, string] &
-  ([string, string] | null),
+  string[] &
+  (string[] | null) &
+  FormattedRangeValue &
+  (FormattedRangeValue | null),
   timestampValue: number &
   (number | null) &
-  [number, number] &
-  ([number, number] | null)
+  number[] &
+  (number[] | null) &
+  RangeValue &
+  (RangeValue | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
-  value: string | [string, string] | null,
-  timestampValue: number | [number, number] | null
+  value: FormattedValue | null,
+  timestampValue: Value
 ) => void
 
 export type OnUpdateValueImpl = (
-  value: Value | null,
-  formattedValue: string | [string, string] | null
+  value: Value,
+  formattedValue: FormattedValue | null
 ) => void
 
 export type OnPanelUpdateValue = (
   value: number &
   (number | null) &
-  [number, number] &
-  ([number, number] | null),
+  number[] &
+  (number[] | null) &
+  RangeValue &
+  (RangeValue | null),
   doUpdate: boolean
 ) => void
 
-export type OnPanelUpdateValueImpl = (
-  value: Value | null,
-  doUpdate: boolean
-) => void
+export type OnPanelUpdateValueImpl = (value: Value, doUpdate: boolean) => void
 
 export type OnClose = (disableUpdateOnClose: boolean) => void
 
@@ -123,6 +136,7 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
+  multipleRef: Ref<boolean>
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
@@ -134,7 +148,7 @@ export type IsSingleDateDisabled = (date: number) => boolean
 export type IsRangeDateDisabled = (
   date: number,
   position: 'start' | 'end',
-  value: [number, number] | null
+  value: RangeValue | null
 ) => boolean
 
 export interface TimeValidator {
@@ -148,10 +162,17 @@ export type IsSingleTimeDisabled = (date: number) => TimeValidator
 export type IsRangeTimeDisabled = (
   date: number,
   position: 'start' | 'end',
-  value: [number, number] // date must exist to have time validation
+  value: RangeValue // date must exist to have time validation
 ) => TimeValidator
 
 export interface DatePickerInst {
   focus: () => void
   blur: () => void
 }
+
+export type DatePickerSelectOption = Pick<SelectBaseOption, 'label' | 'value'>
+
+export type DatePickerSelectRenderTag = (props: {
+  option: DatePickerSelectOption
+  handleClose: () => void
+}) => VNodeChild

@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-radio` 新增 `colorActive` 主题变量，关闭 [#3610](https://github.com/tusen-ai/naive-ui/issues/3610)
+- `n-date-picker` 新增 `multiple` 属性, 关闭[#3357](https://github.com/tusen-ai/naive-ui/issues/3357)
 
 ## 2.33.1
 
@@ -32,9 +33,7 @@
 - `n-menu` 新增 `disabledField` 属性
 - `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
-- 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)
-- `DialogReactive` 支持 `onAfterEnter` 属性，关闭 [#3569](https://github.com/tusen-ai/naive-ui/issues/3569)
-- `DialogOptions` 支持 `class` 属性，关闭 [#3591](https://github.com/tusen-ai/naive-ui/issues/3591)
+- 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 
 ## 2.32.2
 

@@ -5,12 +5,16 @@ import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeTimeDisabled,
   IsSingleTimeDisabled,
-  IsSingleDateDisabled
+  IsSingleDateDisabled,
+  Value
 } from './interface'
+import { isNumber } from 'lodash'
+// eslint-disable-next-line import/no-cycle
+import { isRangeValue } from './utils'
 
 export function uniCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: Ref<number | [number, number] | null>
+  mergedValueRef: Ref<Value>
 ) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
@@ -18,7 +22,7 @@ export function uniCalendarValidation (
       isTimeDisabled?: IsSingleTimeDisabled
     }
     const { value } = mergedValueRef
-    if (value === null || Array.isArray(value)) return undefined
+    if (!isNumber(value)) return undefined
     return isTimeDisabled?.(value)
   })
   const isHourDisabledRef = computed(() => {
@@ -36,6 +40,7 @@ export function uniCalendarValidation (
     if (
       value === null ||
       Array.isArray(value) ||
+      isRangeValue(value) ||
       !['date', 'datetime'].includes(type) ||
       !isDateDisabled
     ) {
@@ -46,7 +51,12 @@ export function uniCalendarValidation (
   const isTimeInvalidRef = computed(() => {
     const { type } = props
     const { value } = mergedValueRef
-    if (value === null || !(type !== 'datetime') || Array.isArray(value)) {
+    if (
+      value === null ||
+      !(type !== 'datetime') ||
+      Array.isArray(value) ||
+      isRangeValue(value)
+    ) {
       return false
     }
     const time = new Date(value)
@@ -87,13 +97,13 @@ export function uniCalendarValidation (
 
 export function dualCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: Ref<number | [number, number] | null>
+  mergedValueRef: Ref<Value>
 ) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {
     const { isTimeDisabled } = props as { isTimeDisabled?: IsRangeTimeDisabled }
     const { value } = mergedValueRef
-    if (!Array.isArray(value) || !isTimeDisabled) {
+    if (!isRangeValue(value) || !isTimeDisabled) {
       return [undefined, undefined]
     }
     return [
@@ -101,6 +111,7 @@ export function dualCalendarValidation (
       isTimeDisabled?.(value[1], 'end', value)
     ]
   })
+
   const timeValidator = {
     isStartHourDisabledRef: computed(
       () => timePickerValidatorRef.value[0]?.isHourDisabled
@@ -126,7 +137,7 @@ export function dualCalendarValidation (
     const { value } = mergedValueRef
     if (
       value === null ||
-      !Array.isArray(value) ||
+      !isRangeValue(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {
@@ -139,7 +150,7 @@ export function dualCalendarValidation (
     const { value } = mergedValueRef
     if (
       value === null ||
-      !Array.isArray(value) ||
+      !isRangeValue(value) ||
       !['daterange', 'datetimerange'].includes(type) ||
       !isDateDisabled
     ) {

@@ -7,6 +7,7 @@ import { timePickerLight } from '../../time-picker/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import commonVars from './_common'
 import { createTheme } from '../../_mixins'
+import { internalSelectionLight } from '../../_internal/selection/styles'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
@@ -67,7 +68,8 @@ const datePickerLight = createTheme({
     Input: inputLight,
     Button: buttonLight,
     TimePicker: timePickerLight,
-    Scrollbar: scrollbarLight
+    Scrollbar: scrollbarLight,
+    InternalSelection: internalSelectionLight
   },
   self
 })
