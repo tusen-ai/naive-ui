@@ -42,6 +42,7 @@ export default cB('form-item', `
       transition: color .3s var(--n-bezier);
     `),
     cE('asterisk-placeholder', `
+      grid-area: mark;
       user-select: none;
       -webkit-user-select: none;
       visibility: hidden;      
@@ -77,6 +78,11 @@ export default cB('form-item', `
           ".    text";
       `),
       cM('right-mark', `
+        grid-template-areas: 
+          "text mark"
+          "text .";
+      `),
+      cM('right-hanging-mark', `
         grid-template-areas: 
           "text mark"
           "text .";
