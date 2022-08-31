@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix UMD bundle doesn't work, closes [#3642](https://github.com/tusen-ai/naive-ui/issues/3642).
+- Fix `n-calendar`'s displayed month doesn't follow `default-value`, closes [#3645](https://github.com/tusen-ai/naive-ui/issues/3645).
 
 ### Feats
 
