@@ -121,7 +121,8 @@ export interface UploadInst {
 export type OnBeforeUpload = (data: {
   file: SettledFileInfo
   fileList: SettledFileInfo[]
-}) => Promise<unknown>
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+}) => Promise<boolean | void> | boolean | void
 
 export type ListType = 'text' | 'image' | 'image-card'
 

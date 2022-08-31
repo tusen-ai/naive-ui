@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.33.1",
+  "version": "2.33.2",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && cross-env NODE_ENV=development vite",
-    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run test:umd && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
@@ -28,6 +28,7 @@
     "test:update": "cross-env NODE_ENV=test jest -u --collectCoverage=false",
     "test:cov": "cross-env NODE_ENV=test NODE_OPTIONS=--unhandled-rejections=warn jest",
     "test:watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage",
+    "test:umd": "jest --collectCoverage=false --testMatch=\"<rootDir>/umd-test/index.spec.js\"",
     "gen-version": "node scripts/gen-version",
     "gen-volar-dts": "esbuild scripts/gen-component-declaration.js --bundle --platform=node --tsconfig=tsconfig.esbuild.json | node",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
@@ -107,7 +108,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.7",
     "deepmerge": "^4.2.2",
-    "esbuild": "0.15.5",
+    "esbuild": "0.15.6",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",

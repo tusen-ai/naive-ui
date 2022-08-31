@@ -42,6 +42,7 @@ export default cB('form-item', `
       transition: color .3s var(--n-bezier);
     `),
     cE('asterisk-placeholder', `
+      grid-area: mark;
       user-select: none;
       -webkit-user-select: none;
       visibility: hidden;      
@@ -64,9 +65,6 @@ export default cB('form-item', `
   `, [
     cB('form-item-label', `
       display: grid;
-      grid-template-areas:
-        "text star"
-        "text .";
       grid-template-columns: 1fr auto;
       min-height: var(--n-blank-height);
       height: auto;
@@ -74,11 +72,26 @@ export default cB('form-item', `
       flex-shrink: 0;
       flex-grow: 0;
     `, [
+      cM('left-mark', `
+        grid-template-areas:
+          "mark text"
+          ".    text";
+      `),
+      cM('right-mark', `
+        grid-template-areas: 
+          "text mark"
+          "text .";
+      `),
+      cM('right-hanging-mark', `
+        grid-template-areas: 
+          "text mark"
+          "text .";
+      `),
       cE('text', `
         grid-area: text;      
       `),
       cE('asterisk', `
-        grid-area: star;      
+        grid-area: mark;      
         align-self: end;
       `)
     ])
