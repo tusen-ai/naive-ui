@@ -24,6 +24,12 @@ describe('n-calendar', () => {
     />
   })
 
+  it('should follow `default-value` to display month', () => {
+    // May 19 2022
+    const wrapper = mount(NCalendar, { props: { defaultValue: 1652956953562 } })
+    expect(wrapper.find('.n-calendar-header__title').text()).toContain('May')
+  })
+
   it('should work with `default-value` prop', async () => {
     const wrapper = mount(NCalendar, { props: { defaultValue: now } })
     expect(wrapper.find('.n-calendar-cell--selected').exists()).toBe(true)
