@@ -49,6 +49,7 @@ export const avatarProps = {
   fallbackSrc: String,
   intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   lazy: Boolean,
+  onLoad: Function as PropType<(e: Event) => void>,
   /** @deprecated */
   color: String
 } as const
