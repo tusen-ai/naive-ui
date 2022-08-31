@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 UMD 构建产物不能正常工作，关闭 [#3642](https://github.com/tusen-ai/naive-ui/issues/3642)
+
 ### Feats
 
 - `n-radio` 新增 `colorActive` 主题变量，关闭 [#3610](https://github.com/tusen-ai/naive-ui/issues/3610)
