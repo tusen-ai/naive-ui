@@ -7,6 +7,7 @@
 - 修复 UMD 构建产物不能正常工作，关闭 [#3642](https://github.com/tusen-ai/naive-ui/issues/3642)
 - 修复 `n-calendar` 在设定了 `default-value` 后默认显示月份没有跟随，关闭 [#3645](https://github.com/tusen-ai/naive-ui/issues/3645)
 - 修复 `n-form-item` 属性 `require-mark-placement` 值为 `left` 时不生效, 关闭 [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+- 修复 `n-upload` `OnBeforeUpload` 类型返回值只能为 `Promise<boolean>`
 
 ### Feats
 

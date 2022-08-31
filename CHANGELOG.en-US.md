@@ -7,6 +7,7 @@
 - Fix UMD bundle doesn't work, closes [#3642](https://github.com/tusen-ai/naive-ui/issues/3642).
 - Fix `n-calendar`'s displayed month doesn't follow `default-value`, closes [#3645](https://github.com/tusen-ai/naive-ui/issues/3645).
 - Fix `n-form-item`'s `require-mark-placement` prop not working when set to `left`, closes [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+- Fix `n-upload`'s `OnBeforeUpload` return type can only be `Promise<boolean>`.
 
 ### Feats
 
