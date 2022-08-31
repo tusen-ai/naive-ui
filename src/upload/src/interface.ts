@@ -121,7 +121,7 @@ export interface UploadInst {
 export type OnBeforeUpload = (data: {
   file: SettledFileInfo
   fileList: SettledFileInfo[]
-}) => Promise<unknown>
+}) => Promise<boolean> | boolean | void
 
 export type ListType = 'text' | 'image' | 'image-card'
 
