@@ -15,7 +15,6 @@ const baseConfig = defineConfig({
   plugins: [
     nodeResolve({ extensions }),
     esbuild({
-      tsconfig: path.resolve(__dirname, 'tsconfig.esbuild.json'),
       target: 'esnext',
       sourceMap: true
     }),
