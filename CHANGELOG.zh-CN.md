@@ -11,6 +11,10 @@
 
 - `n-radio` 新增 `colorActive` 主题变量，关闭 [#3610](https://github.com/tusen-ai/naive-ui/issues/3610)
 
+### Fixes
+
+- 修复 `n-form-item` 属性 `require-mark-placement` 值为 `left` 时不生效, 关闭 [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+
 ## 2.33.1
 
 ### Fixes

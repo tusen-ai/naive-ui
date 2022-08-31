@@ -64,9 +64,6 @@ export default cB('form-item', `
   `, [
     cB('form-item-label', `
       display: grid;
-      grid-template-areas:
-        "text star"
-        "text .";
       grid-template-columns: 1fr auto;
       min-height: var(--n-blank-height);
       height: auto;
@@ -74,11 +71,21 @@ export default cB('form-item', `
       flex-shrink: 0;
       flex-grow: 0;
     `, [
+      c('&.left-mark', `
+        grid-template-areas:
+          "mark text"
+          ".    text";
+      `),
+      c('&.right-mark', `
+        grid-template-areas: 
+          "text mark"
+          "text .";
+      `),
       cE('text', `
         grid-area: text;      
       `),
       cE('asterisk', `
-        grid-area: star;      
+        grid-area: mark;      
         align-self: end;
       `)
     ])
