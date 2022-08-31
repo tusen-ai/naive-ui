@@ -71,12 +71,12 @@ export default cB('form-item', `
       flex-shrink: 0;
       flex-grow: 0;
     `, [
-      c('&.left-mark', `
+      cM('left-mark', `
         grid-template-areas:
           "mark text"
           ".    text";
       `),
-      c('&.right-mark', `
+      cM('right-mark', `
         grid-template-areas: 
           "text mark"
           "text .";
