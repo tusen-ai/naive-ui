@@ -217,7 +217,7 @@ export default defineComponent({
             includeSelf: false
           }).keyPath
     }
-    if (watchProps?.includes('defaultExpandedKeys')) {
+    if (props.defaultExpandAll || watchProps?.includes('defaultExpandedKeys')) {
       watchEffect(initUncontrolledExpandedKeys)
     } else {
       initUncontrolledExpandedKeys()
