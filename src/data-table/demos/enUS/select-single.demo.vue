@@ -1,7 +1,7 @@
 <markdown>
 # Single selection
 
-Set `multiple: true` to make the column of `type='selection` a single selection mode.
+Set `multiple: false` to make the column of `type='selection` a single selection mode.
 </markdown>
 
 <template>
