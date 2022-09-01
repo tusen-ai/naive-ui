@@ -181,7 +181,7 @@ export default defineComponent({
         <NTooltip
           ref="tooltipRef"
           placement="top"
-          {...tooltip}
+          {...(tooltip as PopoverProps)}
           getDisabled={this.getTooltipDisabled}
           theme={mergedTheme.peers.Tooltip}
           themeOverrides={mergedTheme.peerOverrides.Tooltip}
