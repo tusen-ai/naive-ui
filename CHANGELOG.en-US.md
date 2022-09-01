@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-radio` adds `colorActive` theme variable, closes [#3610](https://github.com/tusen-ai/naive-ui/issues/3610).
+
+## 2.33.1
+
+### Fixes
+
+- Fix could not resolve "@vicons/ionicons5" error, closes [#3616](https://github.com/tusen-ai/naive-ui/issues/3616).
+
 ## 2.33.0
 
 ### Breaking Changes

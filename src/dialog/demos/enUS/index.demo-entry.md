@@ -98,9 +98,9 @@ use-dialog-reactive-list.vue
 All the properties can be modified dynamically.
 
 | Name | Type | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
-| class | `any` | `undefined` | 类名 | 2.33.0 |
+| class | `any` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a `render` function. |  |
