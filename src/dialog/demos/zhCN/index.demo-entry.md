@@ -99,7 +99,7 @@ focus-debug.vue
 下列属性都可以被动态修改。
 
 | 名称 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 `border` |  |
 | class | `any` | 类名 | 2.33.0 |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
@@ -117,8 +117,8 @@ focus-debug.vue
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
-| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
-| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | NEXT_VERSION |
+| onAfterEnter | `() => void \| undefined` | 出现动画完成执行的回调 | 2.33.0 |
+| onAfterLeave | `() => void \| undefined` | 关闭动画完成执行的回调 | NEXT_VERSION |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onEsc | `() => void` | 焦点在 dialog 内部时按下 Esc 键的回调 | 2.32.0 |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
