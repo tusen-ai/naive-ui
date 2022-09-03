@@ -85,7 +85,7 @@ use-dialog-reactive-list.vue
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
-| onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. |  |
+| onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. | NEXT_VERSION |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -98,7 +98,7 @@ use-dialog-reactive-list.vue
 All the properties can be modified dynamically.
 
 | Name | Type | Description | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show `border`. |  |
 | class | `any` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
