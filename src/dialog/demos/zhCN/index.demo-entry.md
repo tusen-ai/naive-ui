@@ -86,7 +86,7 @@ focus-debug.vue
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
-| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 |  |
+| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | NEXT_VERSION |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
