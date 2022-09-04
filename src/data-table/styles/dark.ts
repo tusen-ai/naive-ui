@@ -6,6 +6,7 @@ import { paginationDark } from '../../pagination/styles'
 import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { popoverDark } from '../../popover/styles'
 import { emptyDark } from '../../empty/styles'
+import { dropdownDark } from '../../dropdown/styles'
 import { commonDark } from '../../_styles/common'
 import type { DataTableTheme } from './light'
 import { self } from './light'
@@ -21,7 +22,8 @@ const dataTableDark: DataTableTheme = {
     Scrollbar: scrollbarDark,
     Empty: emptyDark,
     Popover: popoverDark,
-    Ellipsis: ellipsisDark
+    Ellipsis: ellipsisDark,
+    Dropdown: dropdownDark
   },
   self (vars) {
     const commonSelf = self(vars)

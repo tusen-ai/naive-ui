@@ -1,8 +1,12 @@
 import { toRef, ref, Ref } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { TreeMate } from 'treemate'
-import type { DataTableSetupProps } from './DataTable'
-import type { Expandable, InternalRowData, RowKey } from './interface'
+import type {
+  Expandable,
+  InternalRowData,
+  RowKey,
+  DataTableSetupProps
+} from './interface'
 import { call, warn } from '../../_utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
