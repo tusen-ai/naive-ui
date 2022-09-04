@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-dialog` 新增 `onAfterLeave` 在 DialogOptions Properties 中，关闭 [#3662](https://github.com/tusen-ai/naive-ui/issues/3662)
 - `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
 
 ### Performance
