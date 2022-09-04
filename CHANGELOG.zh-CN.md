@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
+
 ### Performance
 
 - 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
