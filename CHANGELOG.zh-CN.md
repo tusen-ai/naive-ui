@@ -10,6 +10,7 @@
 ### Performance
 
 - 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+- 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
 
 ## 2.33.2
 

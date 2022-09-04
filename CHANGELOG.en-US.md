@@ -10,6 +10,7 @@
 ### Performance
 
 - Fix `n-menu`'s `value` will cause useless rendering of menu item, closes [#3670](https://github.com/tusen-ai/naive-ui/issues/3670).
+- Fix `n-date-picker`'s style is unexpected in `inline-theme-disabled` mode, closes [#3655](https://github.com/tusen-ai/naive-ui/issues/3655).
 
 ## 2.33.2
 
