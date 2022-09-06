@@ -179,20 +179,16 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       tabChangeIdRef.id = 0
       updateCurrentBarStyle()
-      void nextTick(() => {
-        const currentEl = getCurrentEl()
-        const { value: xScrollInst } = xScrollInstRef
-        if (!currentEl || !xScrollInst || !xScrollInst.$el) return
-        xScrollInst.scrollTo({
-          left:
-            currentEl.clientWidth +
-            currentEl.offsetLeft -
-            xScrollInst.$el.offsetWidth / 2,
-          top: 0,
-          behavior: 'smooth'
-        })
-      })
     })
+
+    watchEffect(
+      () => {
+        updateCurrentBarPosition()
+      },
+      {
+        flush: 'post'
+      }
+    )
 
     function getCurrentEl (): HTMLElement | null {
       const { value } = mergedValueRef
@@ -231,6 +227,19 @@ export default defineComponent({
       if (tabEl) {
         updateBarStyle(tabEl)
       }
+    }
+    function updateCurrentBarPosition (): void {
+      const currentEl = getCurrentEl()
+      const { value: xScrollInst } = xScrollInstRef
+      if (!currentEl || !xScrollInst || !xScrollInst.$el) return
+      xScrollInst.scrollTo({
+        left:
+          currentEl.clientWidth +
+          currentEl.offsetLeft -
+          xScrollInst.$el.offsetWidth / 2,
+        top: 0,
+        behavior: 'smooth'
+      })
     }
 
     const tabsPaneWrapperRef = ref<HTMLElement | null>(null)
@@ -418,6 +427,7 @@ export default defineComponent({
     })
     onFontsReady(() => {
       updateCurrentBarStyle()
+      updateCurrentBarPosition()
     })
 
     // avoid useless rerender
@@ -456,6 +466,7 @@ export default defineComponent({
     const exposedMethods: TabsInst = {
       syncBarPosition: () => {
         updateCurrentBarStyle()
+        updateCurrentBarPosition()
       }
     }
 
