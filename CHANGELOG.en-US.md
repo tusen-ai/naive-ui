@@ -6,7 +6,7 @@
 
 - `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
 - `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
-- `n-tabs` Automatically scrolls to the currently active Tab after a change in the selected item, closes [#3683](https://github.com/tusen-ai/naive-ui/issues/3683)
+- `n-tabs` automatically scrolls to the currently active Tab after a change in the selected item, closes [#3683](https://github.com/tusen-ai/naive-ui/issues/3683).
 
 ### Performance
 
