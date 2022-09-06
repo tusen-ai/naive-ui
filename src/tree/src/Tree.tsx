@@ -877,7 +877,7 @@ export default defineComponent({
       }
     }
     function handleSwitcherClick (node: TmNode): void {
-      if (props.disabled || aipRef.value) return
+      if (props.disabled || (aipRef.value && !props.pattern)) return
       toggleExpand(node)
     }
     function handleSelect (node: TmNode): void {
