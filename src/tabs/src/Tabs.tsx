@@ -179,6 +179,19 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       tabChangeIdRef.id = 0
       updateCurrentBarStyle()
+      void nextTick(() => {
+        const currentEl = getCurrentEl()
+        const { value: xScrollInst } = xScrollInstRef
+        if (!currentEl || !xScrollInst || !xScrollInst.$el) return
+        xScrollInst.scrollTo({
+          left:
+            currentEl.clientWidth +
+            currentEl.offsetLeft -
+            xScrollInst.$el.offsetWidth / 2,
+          top: 0,
+          behavior: 'smooth'
+        })
+      })
     })
 
     function getCurrentEl (): HTMLElement | null {
@@ -376,16 +389,6 @@ export default defineComponent({
     function handleAdd (): void {
       const { onAdd } = props
       if (onAdd) onAdd()
-      void nextTick(() => {
-        const currentEl = getCurrentEl()
-        const { value: xScrollInst } = xScrollInstRef
-        if (!currentEl || !xScrollInst) return
-        xScrollInst.scrollTo({
-          left: currentEl.offsetLeft,
-          top: 0,
-          behavior: 'smooth'
-        })
-      })
     }
 
     function deriveScrollShadow (el: HTMLElement | null): void {
