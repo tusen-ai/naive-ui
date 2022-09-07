@@ -207,11 +207,18 @@ export default defineComponent({
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
+    function getRowInfo (key): object {
+      const currentIndex = paginatedDataRef.value.findIndex(
+        (item) => item.key === key
+      )
+      return paginatedDataRef.value[currentIndex].rawNode
+    }
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
       shiftKey: boolean
     ): void {
+      const rowInfo = getRowInfo(tmNode.key)
       if (shiftKey) {
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastSelectedKey
@@ -229,25 +236,25 @@ export default defineComponent({
             }
           })
           if (checked) {
-            doCheck(rowKeysToCheck, false)
+            doCheck(rowKeysToCheck, false, rowInfo)
           } else {
-            doUncheck(rowKeysToCheck)
+            doUncheck(rowKeysToCheck, rowInfo)
           }
           lastSelectedKey = tmNode.key
           return
         }
       }
-
       if (checked) {
-        doCheck(tmNode.key, false)
+        doCheck(tmNode.key, false, rowInfo)
       } else {
-        doUncheck(tmNode.key)
+        doUncheck(tmNode.key, rowInfo)
       }
       lastSelectedKey = tmNode.key
     }
 
     function handleRadioUpdateChecked (tmNode: { key: RowKey }): void {
-      doCheck(tmNode.key, true)
+      const rowInfo = getRowInfo(tmNode.key)
+      doCheck(tmNode.key, true, rowInfo)
     }
 
     function getScrollContainer (): HTMLElement | null {
