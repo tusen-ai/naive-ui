@@ -48,7 +48,7 @@ create-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | 菜单宽度是否和选择触发器一致，设为 `false` 会使 `virtual-scroll` 失效 |  |
-| children-field | `string` | `'label'` | 选项组 children 的字段名 | 2.29.1 |
+| children-field | `string` | `'children'` | 选项组 children 的字段名 | 2.29.1 |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
@@ -76,9 +76,9 @@ create-debug.vue
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
+| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |
 | value-field | `string` | `'value'` | 选项 value 的字段名 | 2.29.1 |
-| to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | `blur` 时执行的回调 |  |
 | on-clear | `() => void` | `undefined` | `clear` 时执行的回调 |  |
@@ -97,7 +97,7 @@ create-debug.vue
 | disabled | `boolean` | 是否禁用一个选项 |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |
 | render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | 渲染整个选项 |
-| style | `string \| object` | 自定义一个选项的样式 |
+| style | `string \| CSSProperties` | 自定义一个选项的样式 |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
 #### SelectGroupOption Properties
