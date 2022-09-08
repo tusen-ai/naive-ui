@@ -38,7 +38,7 @@ custom-field.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as the select trigger element. Setting it to `false` will also disable `virtual-scroll`. |  |
-| children-field | `string` | `'label'` | Field name of group option children. | 2.29.1 |
+| children-field | `string` | `'children'` | Field name of group option children. | 2.29.1 |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
@@ -68,7 +68,7 @@ custom-field.vue
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |  |
-| value-field | `string` | `'label'` | Field name of option value. | 2.29.1 |
+| value-field | `string` | `'value'` | Field name of option value. | 2.29.1 |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the selection element is blurred. |  |
 | on-clear | `() => void` | `undefined` | Callback triggered when the selection element is cleared. |  |
@@ -87,7 +87,7 @@ custom-field.vue
 | disabled | `boolean` | Whether to disable the option. |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using the `render` function, the default filter will filter the option. |
 | render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
-| style | `string` | Customize the option's style. |
+| style | `string \| CSSProperties` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
 #### SelectGroupOption Properties
