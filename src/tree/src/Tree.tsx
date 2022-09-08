@@ -532,6 +532,7 @@ export default defineComponent({
           const { expandedKeys } = filteredTreeInfoRef.value
           if (expandedKeys !== undefined) {
             doUpdateExpandedKeys(expandedKeys, getOptionsByKeys(expandedKeys))
+            aipRef.value = false
           }
         }
       }
