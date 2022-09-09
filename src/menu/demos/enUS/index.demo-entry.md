@@ -33,7 +33,7 @@ show.vue
 | collapsed-icon-size | `number` | `24` | The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it. |  |
 | collapsed-width | `number` | `48` | The menu width after collapsed. |  |
 | collapsed | `boolean` | `false` | The collapsed status of menu, only works when menu is vertical. |  |
-| default-expand-all | `boolean` | `false` | Whether to expand all menus. |  |
+| default-expand-all | `boolean` | `false` | Whether to expand all menus,when get options by async method, need to set `watch-props` to be `['defaultExpandedKeys']` |  |
 | default-expanded-keys | `Array<string>` | `[]` | The default expanded submenu keys of menu in uncontrolled manner. |  |
 | default-value | `string \| null` | `null` | Whether selected by default in uncontrolled mode. |  |
 | disabled-field | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |

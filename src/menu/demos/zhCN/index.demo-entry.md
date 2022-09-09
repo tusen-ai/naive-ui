@@ -34,7 +34,7 @@ debug.vue
 | collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果未设定则使用 `icon-size` 代替 |  |
 | collapsed-width | `number` | `48` | 折叠后菜单的宽度 |  |
 | collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |  |
-| default-expand-all | `boolean` | `false` | 是否展开全部菜单 |  |
+| default-expand-all | `boolean` | `false` | 是否展开全部菜单，`options`为异步获取时，`watch-pops`需要设置为`['defaultExpandedKeys']` |  |
 | default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |  |
 | default-value | `string \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled-field | `string` | `'disabled'` | disabled 的字段名 | NEXT_VETSION |
