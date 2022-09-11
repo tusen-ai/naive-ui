@@ -9,6 +9,7 @@
 - `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
 - `n-dropdown` `DropdownOption` 新增 `show` 属性，关闭 [#3703](https://github.com/tusen-ai/naive-ui/issues/3703)
 - `n-data-table` 新增 `summary-placement` 属性，关闭 [#3681](https://github.com/tusen-ai/naive-ui/issues/3681)
+- `n-tabs` 会滚动到激活的标签，关闭 [#3683](https://github.com/tusen-ai/naive-ui/issues/3683)
 
 ### Performance
 

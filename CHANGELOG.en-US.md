@@ -9,6 +9,7 @@
 - `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
 - `n-dropdown`'s `DropdownOption` adds `show` prop, closes [#3703](https://github.com/tusen-ai/naive-ui/issues/3703).
 - `n-data-table` adds `summary-placement` prop, closes [#3681](https://github.com/tusen-ai/naive-ui/issues/3681).
+- `n-tabs` will scroll to active tab, closes [#3683](https://github.com/tusen-ai/naive-ui/issues/3683).
 
 ### Performance
 
