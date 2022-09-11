@@ -8,6 +8,7 @@
 - `n-dynamic-tags` 导出类型 `DynamicTagsOption`，关闭 [#3677](https://github.com/tusen-ai/naive-ui/issues/3677)
 - `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
 - `n-dropdown` `DropdownOption` 新增 `show` 属性，关闭 [#3703](https://github.com/tusen-ai/naive-ui/issues/3703)
+- `n-data-table` 新增 `summary-placement` 属性，关闭 [#3681](https://github.com/tusen-ai/naive-ui/issues/3681)
 
 ### Performance
 
