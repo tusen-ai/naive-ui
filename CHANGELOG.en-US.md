@@ -7,6 +7,7 @@
 - `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
 - `n-daynamic-tags` export `DynamicTagsOption` type, closes [#3677](https://github.com/tusen-ai/naive-ui/issues/3677).
 - `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
+- `n-dropdown`'s `DropdownOption` adds `show` prop, closes [#3703](https://github.com/tusen-ai/naive-ui/issues/3703).
 
 ### Performance
 
@@ -49,7 +50,7 @@
 
 ### Feats
 
-- `n-menu` adds `disabledField` prop.
+- `n-menu` adds `disabled-field` prop.
 - `n-rate` adds `clearable` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
 - Add `useDialogReactiveList` method, closes [#2041](https://github.com/tusen-ai/naive-ui/issues/2041).

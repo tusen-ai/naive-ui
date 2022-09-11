@@ -104,6 +104,7 @@ export default defineComponent({
     const { parentKey, clsPrefix, scrollable } = this
     const menuOptionsNode = this.tmNodes.map((tmNode) => {
       const { rawNode } = tmNode
+      if (rawNode.show === false) return null
       if (isRenderNode(rawNode)) {
         return (
           <NDropdownRenderOption

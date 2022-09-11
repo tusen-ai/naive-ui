@@ -7,6 +7,7 @@
 - `n-dialog` 新增 `onAfterLeave` 在 DialogOptions Properties 中，关闭 [#3662](https://github.com/tusen-ai/naive-ui/issues/3662)
 - `n-dynamic-tags` 导出类型 `DynamicTagsOption`，关闭 [#3677](https://github.com/tusen-ai/naive-ui/issues/3677)
 - `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
+- `n-dropdown` `DropdownOption` 新增 `show` 属性，关闭 [#3703](https://github.com/tusen-ai/naive-ui/issues/3703)
 
 ### Performance
 
@@ -50,7 +51,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `disabledField` 属性
+- `n-menu` 新增 `disabled-field` 属性
 - `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 - 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)

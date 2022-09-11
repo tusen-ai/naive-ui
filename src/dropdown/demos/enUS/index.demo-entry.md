@@ -45,36 +45,40 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 
 #### DropdownOption Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOption>` | Child options. |
-| icon? | `() => VNodeChild` | Custom render function of an option icon. |
-| key? | `string \| number` | Option ID (should be unique). |
-| label? | `string \| () => VNodeChild` | Displayed label value. |
-| disabled? | `boolean` | Whether to disable the option. |
-| props? | `HTMLAttributes` | Customize option props. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOption>` | Child options. |  |
+| disabled? | `boolean` | Whether to disable the option. |  |
+| icon? | `() => VNodeChild` | Custom render function of an option icon. |  |
+| key? | `string \| number` | Option ID (should be unique). |  |
+| label? | `string \| () => VNodeChild` | Displayed label value. |  |
+| props? | `HTMLAttributes` | Customize option props. |  |
+| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
 
 #### DropdownDividerOption Type
 
-| Property | Type               | Description                            |
-| -------- | ------------------ | -------------------------------------- |
-| type     | `'divider'`        | The type of the DropdownDividerOption. |
-| key?     | `string \| number` | Divider ID (should be unique).         |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| key? | `string \| number` | Divider ID (should be unique). |  |
+| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| type | `'divider'` | The type of the DropdownDividerOption. |  |
 
 #### DropdownGroupOption Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| type | `'group'` | The type of the DropdownGroupOption. |
-| label? | `string` | Group label value. |
-| icon? | `() => VNodeChild` | Custom rendering function of the group icon. |
-| key? | `string \| number` | Group ID (should be unique). |
-| children? | `Array<DropdownOption \| DropdownDividerOption>` | Children options of DropdownGroupOption. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| children? | `Array<DropdownOption \| DropdownDividerOption>` | Children options of DropdownGroupOption. |  |
+| icon? | `() => VNodeChild` | Custom rendering function of the group icon. |  |
+| label? | `string` | Group label value. |  |
+| key? | `string \| number` | Group ID (should be unique). |  |
+| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| type | `'group'` | The type of the DropdownGroupOption. |  |
 
 #### DropdownRenderOption Type
 
-| Property | Type               | Description                            |
-| -------- | ------------------ | -------------------------------------- |
-| type     | `'render'`         | The type of the DropdownRenderOption.  |
-| key?     | `string \| number` | Render option ID (should be unique).   |
-| render?  | `() => VNodeChild` | Render function of the option content. |
+| Property | Type | Description | Version |
+| --- | --- | --- | --- |
+| key? | `string \| number` | Render option ID (should be unique). |  |
+| render? | `() => VNodeChild` | Render function of the option content. |  |
+| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| type | `'render'` | The type of the DropdownRenderOption. |  |
