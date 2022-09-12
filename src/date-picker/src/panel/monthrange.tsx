@@ -84,7 +84,15 @@ export default defineComponent({
     return { ...useCalendarRef, renderItem }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, type, renderItem } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      type,
+      renderItem,
+      onRender
+    } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
@@ -92,7 +100,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--daterange`,
-          !this.panel && `${mergedClsPrefix}-date-panel--shadow`
+          !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
+          this.themeClass
         ]}
         onKeydown={this.handlePanelKeyDown}
         onFocus={this.handlePanelFocus}

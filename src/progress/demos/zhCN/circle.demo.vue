@@ -7,7 +7,7 @@
 <template>
   <n-space vertical>
     <n-space>
-      <n-progress type="circle" :percentage="percentage" :stroke-width="20" />
+      <n-progress type="circle" :percentage="percentage" />
       <n-progress type="circle" status="info" :percentage="percentage" />
       <n-progress type="circle" status="success" :percentage="percentage" />
       <n-progress type="circle" status="warning" :percentage="percentage" />
