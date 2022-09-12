@@ -1,6 +1,6 @@
 import { computed, ComputedRef, ref } from 'vue'
-import type { DataTableSetupProps } from './DataTable'
 import type {
+  DataTableSetupProps,
   RowKey,
   TableSelectionColumn,
   InternalRowData,

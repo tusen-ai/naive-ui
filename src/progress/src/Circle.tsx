@@ -66,13 +66,14 @@ export default defineComponent({
       offsetDegree: number,
       strokeColor?: string
     ): { pathString: string, pathStyle: CSSProperties } {
-      const { gapDegree, viewBoxWidth } = props
+      const { gapDegree, viewBoxWidth, strokeWidth } = props
       const radius = 50
       const beginPositionX = 0
       const beginPositionY = radius
       const endPositionX = 0
       const endPositionY = 2 * radius
-      const pathString = `M 55,55 m ${beginPositionX},${beginPositionY}
+      const centerX = 50 + strokeWidth / 2
+      const pathString = `M ${centerX},${centerX} m ${beginPositionX},${beginPositionY}
       a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
@@ -108,6 +109,7 @@ export default defineComponent({
         getPathStyles(100, 0, railColor)
       const { pathString: fillPathString, pathStyle: fillPathStyle } =
         getPathStyles(percentage, offsetDegree, fillColor)
+      const viewBoxSize = 100 + strokeWidth
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
@@ -119,7 +121,7 @@ export default defineComponent({
                   : undefined
               }}
             >
-              <svg viewBox="0 0 110 110">
+              <svg viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}>
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}

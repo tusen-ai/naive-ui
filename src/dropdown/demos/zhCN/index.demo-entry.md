@@ -47,36 +47,40 @@ scrollable-debug.vue
 
 #### DropdownOption Type
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOption>` | 子菜单的 children 项 |
-| icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
-| key? | `string \| number` | 需要唯一 |
-| label? | `string \| () => VNodeChild` | 显示的 label 值 |
-| disabled? | `boolean` | 是否禁用 |
-| props? | `HTMLAttributes` | 自定义选项属性 |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOption>` | 子菜单的 children 项 |  |
+| disabled? | `boolean` | 是否禁用 |  |
+| icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |  |
+| key? | `string \| number` | 需要唯一 |  |
+| label? | `string \| () => VNodeChild` | 显示的 label 值 |  |
+| props? | `HTMLAttributes` | 自定义选项属性 |  |
+| show? | `boolean` | 是否展示选项 | 2.33.3 |
 
 #### DropdownDividerOption Type
 
-| 属性 | 类型               | 说明         |
-| ---- | ------------------ | ------------ |
-| type | `'divider'`        | 分割线的类型 |
-| key? | `string \| number` | 需要唯一     |
+| 属性  | 类型               | 说明         | 版本   |
+| ----- | ------------------ | ------------ | ------ |
+| key?  | `string \| number` | 需要唯一     |        |
+| show? | `boolean`          | 是否展示选项 | 2.33.3 |
+| type  | `'divider'`        | 分割线的类型 |        |
 
 #### DropdownGroupOption Type
 
-| 属性 | 类型 | 说明 |
-| --- | --- | --- |
-| type | `'group'` | DropdownGroupOption 的类型 |
-| label? | `string` | 显示的 label 值 |
-| icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
-| key? | `string \| number` | 需要唯一 |
-| children? | `Array<DropdownOption \| DropdownDividerOption>` | DropdownGroupOption 的 children 项 |
+| 属性 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| children? | `Array<DropdownOption \| DropdownDividerOption>` | `DropdownGroupOption` 的 children 项 |  |
+| icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |  |
+| key? | `string \| number` | 需要唯一 |  |
+| label? | `string` | 显示的 label 值 |  |
+| show? | `boolean` | 是否展示选项 | 2.33.3 |
+| type | `'group'` | `DropdownGroupOption` 的类型 |  |
 
 #### DropdownRenderOption Type
 
-| 属性    | 类型               | 说明                        |
-| ------- | ------------------ | --------------------------- |
-| type    | `'render'`         | DropdownRenderOption 的类型 |
-| key?    | `string \| number` | 渲染选项 ID（应该是唯一的） |
-| render? | `() => VNodeChild` | 选项内容的渲染功能          |
+| 属性    | 类型               | 说明                          | 版本   |
+| ------- | ------------------ | ----------------------------- | ------ |
+| key?    | `string \| number` | 渲染选项 ID（应该是唯一的）   |        |
+| render? | `() => VNodeChild` | 选项内容的渲染功能            |        |
+| show?   | `boolean`          | 是否展示选项                  | 2.33.3 |
+| type    | `'render'`         | `DropdownRenderOption` 的类型 |        |

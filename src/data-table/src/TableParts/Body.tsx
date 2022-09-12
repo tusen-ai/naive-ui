@@ -182,6 +182,7 @@ export default defineComponent({
       expandableRef,
       stickyExpandedRowsRef,
       renderExpandIconRef,
+      summaryPlacementRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -417,6 +418,7 @@ export default defineComponent({
     })
     return {
       bodyWidth: bodyWidthRef,
+      summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
       scrollbarInstRef,
@@ -584,31 +586,33 @@ export default defineComponent({
             if (summary) {
               const summaryRows = summary(this.rawPaginatedData)
               if (Array.isArray(summaryRows)) {
-                mergedData = [
-                  ...mergedPaginationData,
-                  ...summaryRows.map((row, i) => ({
-                    isSummaryRow: true as const,
-                    key: `__n_summary__${i}`,
-                    tmNode: {
-                      rawNode: row,
-                      disabled: true
-                    },
-                    index: -1
-                  }))
-                ]
+                const summaryRowData = summaryRows.map((row, i) => ({
+                  isSummaryRow: true as const,
+                  key: `__n_summary__${i}`,
+                  tmNode: {
+                    rawNode: row,
+                    disabled: true
+                  },
+                  index: -1
+                }))
+                mergedData =
+                  this.summaryPlacement === 'top'
+                    ? [...summaryRowData, ...mergedPaginationData]
+                    : [...mergedPaginationData, ...summaryRowData]
               } else {
-                mergedData = [
-                  ...mergedPaginationData,
-                  {
-                    isSummaryRow: true,
-                    key: '__n_summary__',
-                    tmNode: {
-                      rawNode: summaryRows,
-                      disabled: true
-                    },
-                    index: -1
-                  }
-                ]
+                const summaryRowData = {
+                  isSummaryRow: true as const,
+                  key: '__n_summary__',
+                  tmNode: {
+                    rawNode: summaryRows,
+                    disabled: true
+                  },
+                  index: -1
+                }
+                mergedData =
+                  this.summaryPlacement === 'top'
+                    ? [summaryRowData, ...mergedPaginationData]
+                    : [...mergedPaginationData, summaryRowData]
               }
             } else {
               mergedData = mergedPaginationData

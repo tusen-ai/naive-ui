@@ -20,10 +20,9 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { itemRenderer } from './utils'
+import { isIgnoredNode, itemRenderer } from './utils'
 import { menuLight } from '../styles'
 import type { MenuTheme } from '../styles'
-import style from './styles/index.cssr'
 import {
   MenuOption,
   MenuGroupOption,
@@ -38,6 +37,7 @@ import {
 } from './interface'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
+import style from './styles/index.cssr'
 
 export const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -176,6 +176,9 @@ export default defineComponent({
       return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
         props.items || props.options,
         {
+          getIgnored (node) {
+            return isIgnoredNode(node)
+          },
           getChildren (node) {
             return node[childrenField]
           },

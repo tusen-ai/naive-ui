@@ -5,20 +5,22 @@ Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `
 </markdown>
 
 <template>
-  <n-space>
-    <n-progress type="circle" :percentage="percentage" />
-    <n-progress type="circle" status="info" :percentage="percentage" />
-    <n-progress type="circle" status="success" :percentage="percentage" />
-    <n-progress type="circle" status="warning" :percentage="percentage" />
-    <n-progress type="circle" status="error" :percentage="percentage" />
-  </n-space>
-  <n-space>
-    <n-button @click="minus">
-      Minus 10%
-    </n-button>
-    <n-button @click="add">
-      Add 10%
-    </n-button>
+  <n-space vertical>
+    <n-space>
+      <n-progress type="circle" :percentage="percentage" />
+      <n-progress type="circle" status="info" :percentage="percentage" />
+      <n-progress type="circle" status="success" :percentage="percentage" />
+      <n-progress type="circle" status="warning" :percentage="percentage" />
+      <n-progress type="circle" status="error" :percentage="percentage" />
+    </n-space>
+    <n-space>
+      <n-button @click="minus">
+        Minus 10%
+      </n-button>
+      <n-button @click="add">
+        Add 10%
+      </n-button>
+    </n-space>
   </n-space>
 </template>
 

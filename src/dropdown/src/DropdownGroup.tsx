@@ -41,7 +41,9 @@ export default defineComponent({
           key={tmNode.key}
         />
         {children?.map((child) => {
-          if (isDividerNode(child.rawNode)) {
+          const { rawNode } = child
+          if (rawNode.show === false) return null
+          if (isDividerNode(rawNode)) {
             return h(NDropdownDivider, {
               clsPrefix,
               key: child.key

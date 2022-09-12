@@ -3,12 +3,12 @@ import { h, ref, defineComponent, inject, computed, watchEffect } from 'vue'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
-import {
-  dataTableInjectionKey,
+import type {
   MainTableBodyRef,
   MainTableHeaderRef,
   MainTableRef
 } from './interface'
+import { dataTableInjectionKey } from './interface'
 
 export default defineComponent({
   setup () {

@@ -154,7 +154,7 @@ describe('n-dropdown', () => {
       key: 'ArrowUp'
     })
     expect(options[1].className).toEqual(pendingOptionClassName)
-    await triggerNodeWrapper.trigger('keyup', {
+    await triggerNodeWrapper.trigger('keydown', {
       key: 'Enter'
     })
     expect(onSelect).toHaveBeenCalledWith('jay gatsby', {

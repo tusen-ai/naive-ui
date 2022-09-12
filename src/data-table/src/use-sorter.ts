@@ -1,4 +1,5 @@
 import { computed, ref, ComputedRef } from 'vue'
+import { call } from '../../_utils'
 import type {
   ColumnKey,
   InternalRowData,
@@ -9,11 +10,10 @@ import type {
   TableExpandColumn,
   TableSelectionColumn,
   CompareFn,
-  OnUpdateSorterImpl
+  OnUpdateSorterImpl,
+  DataTableSetupProps
 } from './interface'
 import { getFlagOfOrder } from './utils'
-import { call } from '../../_utils'
-import type { DataTableSetupProps } from './DataTable'
 
 function getMultiplePriority (
   sorter: TableBaseColumn['sorter']

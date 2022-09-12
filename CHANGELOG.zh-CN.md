@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 2.33.3
+
+### Feats
+
+- `n-dialog` 新增 `onAfterLeave` 在 DialogOptions Properties 中，关闭 [#3662](https://github.com/tusen-ai/naive-ui/issues/3662)
+- `n-dynamic-tags` 导出类型 `DynamicTagsOption`，关闭 [#3677](https://github.com/tusen-ai/naive-ui/issues/3677)
+- `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
+- `n-dropdown` `DropdownOption` 新增 `show` 属性，关闭 [#3703](https://github.com/tusen-ai/naive-ui/issues/3703)
+- `n-data-table` 新增 `summary-placement` 属性，关闭 [#3681](https://github.com/tusen-ai/naive-ui/issues/3681)
+- `n-tabs` 会滚动到激活的标签，关闭 [#3683](https://github.com/tusen-ai/naive-ui/issues/3683)
+
+### Performance
+
+- 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+- 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
+- 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
+- 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)
+- 修复 `n-tree` 的节点在设定 `checkboxDisabled` 后会被整体禁用，关闭 [#3620](https://github.com/tusen-ai/naive-ui/issues/3620)
+- 修复 `n-tree` 在设定 `:show-irrelevant-nodes="false"` 并搜索后展开关闭按钮失效，关闭 [#3647](https://github.com/tusen-ai/naive-ui/issues/3647)
+- 修复 `n-progress` 在 `type="circle"` 并且 `stroke-width` 过大时，圆圈可能溢出，关闭 [#3638](https://github.com/tusen-ai/naive-ui/issues/3638)
+
 ## 2.33.2
 
 ### Fixes
@@ -36,7 +57,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `disabledField` 属性
+- `n-menu` 新增 `disabled-field` 属性
 - `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
 - 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)

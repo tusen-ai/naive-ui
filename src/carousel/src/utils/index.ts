@@ -4,7 +4,7 @@ export * from './duplicatedLogic'
 export * from './event'
 
 export function calculateSize (element: HTMLElement, innerOnly?: boolean): Size {
-  let { width, height } = element.getBoundingClientRect()
+  let { offsetWidth: width, offsetHeight: height } = element
   if (innerOnly) {
     const style = getComputedStyle(element)
     width =

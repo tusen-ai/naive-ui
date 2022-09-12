@@ -190,24 +190,25 @@ export default defineComponent({
         keydown: {
           ArrowUp: {
             prevent: true,
-            handler: handleKeyDownUp
+            handler: handleKeydownUp
           },
           ArrowRight: {
             prevent: true,
-            handler: handleKeyDownRight
+            handler: handleKeydownRight
           },
           ArrowDown: {
             prevent: true,
-            handler: handleKeyDownDown
+            handler: handleKeydownDown
           },
           ArrowLeft: {
             prevent: true,
-            handler: handleKeyDownLeft
+            handler: handleKeydownLeft
           },
-          Escape: handleKeyDownEsc
-        },
-        keyup: {
-          Enter: handleKeyUpEnter
+          Enter: {
+            prevent: true,
+            handler: handleKeydownEnter
+          },
+          Escape: handleKeydownEsc
         }
       },
       keyboardEnabledRef
@@ -270,24 +271,24 @@ export default defineComponent({
       keyboardKeyRef.value = null
       lastToggledSubmenuKeyRef.value = null
     }
-    function handleKeyDownEsc (): void {
+    function handleKeydownEsc (): void {
       doUpdateShow(false)
     }
-    function handleKeyDownLeft (): void {
-      handleKeyDown('left')
+    function handleKeydownLeft (): void {
+      handleKeydown('left')
     }
-    function handleKeyDownRight (): void {
-      handleKeyDown('right')
+    function handleKeydownRight (): void {
+      handleKeydown('right')
     }
-    function handleKeyDownUp (): void {
-      handleKeyDown('up')
+    function handleKeydownUp (): void {
+      handleKeydown('up')
     }
-    function handleKeyDownDown (): void {
-      handleKeyDown('down')
+    function handleKeydownDown (): void {
+      handleKeydown('down')
     }
-    function handleKeyUpEnter (): void {
+    function handleKeydownEnter (): void {
       const pendingNode = getPendingNode()
-      if (pendingNode?.isLeaf) {
+      if (pendingNode?.isLeaf && mergedShowRef.value) {
         doSelect(pendingNode.key, pendingNode.rawNode)
         doUpdateShow(false)
       }
@@ -298,7 +299,7 @@ export default defineComponent({
       if (!treeMate || pendingKey === null) return null
       return treeMate.getNode(pendingKey) ?? null
     }
-    function handleKeyDown (direction: 'up' | 'right' | 'down' | 'left'): void {
+    function handleKeydown (direction: 'up' | 'right' | 'down' | 'left'): void {
       const { value: pendingKey } = pendingKeyRef
       const {
         value: { getFirstAvailableNode }
