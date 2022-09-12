@@ -35,7 +35,7 @@ import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter, emptyImage, filterTree } from './utils'
+import { keysWithFilter, emptyImage, filterTree, isNodeDisabled } from './utils'
 import { useKeyboard } from './keyboard'
 import type {
   TreeDragInfo,
@@ -822,7 +822,7 @@ export default defineComponent({
     }
     function handleCheck (node: TmNode, checked: boolean): void {
       // We don't guard for leaf only since we have done it in view layer
-      if (props.disabled || node.disabled) {
+      if (props.disabled || isNodeDisabled(node, props.disabledField)) {
         return
       }
       if (props.internalUnifySelectCheck && !props.multiple) {
@@ -962,12 +962,20 @@ export default defineComponent({
     // Dnd
     function handleDragEnter ({ event, node }: InternalDragInfo): void {
       // node should be a tmNode
-      if (!props.draggable || props.disabled || node.disabled) return
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) { return }
       handleDragOver({ event, node }, false)
       doDragEnter({ event, node: node.rawNode })
     }
     function handleDragLeave ({ event, node }: InternalDragInfo): void {
-      if (!props.draggable || props.disabled || node.disabled) return
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) { return }
       doDragLeave({ event, node: node.rawNode })
     }
     function handleDragLeaveTree (e: DragEvent): void {
@@ -977,11 +985,19 @@ export default defineComponent({
     // Dragend is ok, we don't need to add global listener to reset drag status
     function handleDragEnd ({ event, node }: InternalDragInfo): void {
       resetDndState()
-      if (!props.draggable || props.disabled || node.disabled) return
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) { return }
       doDragEnd({ event, node: node.rawNode })
     }
     function handleDragStart ({ event, node }: InternalDragInfo): void {
-      if (!props.draggable || props.disabled || node.disabled) return
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) { return }
       // Most of time, the image will block user's view
       emptyImage && event.dataTransfer?.setDragImage(emptyImage, 0, 0)
       dragStartX = event.clientX
@@ -992,7 +1008,11 @@ export default defineComponent({
       { event, node }: InternalDragInfo,
       emit: boolean = true
     ): void {
-      if (!props.draggable || props.disabled || node.disabled) return
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) { return }
       const { value: draggingNode } = draggingNodeRef
       if (!draggingNode) return
       const { allowDrop, indent } = props
@@ -1189,7 +1209,11 @@ export default defineComponent({
       droppingNodeRef.value = finalDropNode
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
-      if (!props.draggable || props.disabled || node.disabled) {
+      if (
+        !props.draggable ||
+        props.disabled ||
+        isNodeDisabled(node, props.disabledField)
+      ) {
         return
       }
       const { value: draggingNode } = draggingNodeRef
@@ -1307,6 +1331,7 @@ export default defineComponent({
       droppingOffsetLevelRef,
       fNodesRef,
       pendingNodeKeyRef,
+      disabledFieldRef: toRef(props, 'disabledField'),
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
       internalTreeSelect: props.internalTreeSelect,
