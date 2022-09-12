@@ -5,7 +5,7 @@
 ### Feats
 
 - `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
-- `n-daynamic-tags` export `DynamicTagsOption` type, closes [#3677](https://github.com/tusen-ai/naive-ui/issues/3677).
+- `n-dynamic-tags` export `DynamicTagsOption` type, closes [#3677](https://github.com/tusen-ai/naive-ui/issues/3677).
 - `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
 - `n-dropdown`'s `DropdownOption` adds `show` prop, closes [#3703](https://github.com/tusen-ai/naive-ui/issues/3703).
 - `n-data-table` adds `summary-placement` prop, closes [#3681](https://github.com/tusen-ai/naive-ui/issues/3681).
