@@ -53,14 +53,14 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | key? | `string \| number` | Option ID (should be unique). |  |
 | label? | `string \| () => VNodeChild` | Displayed label value. |  |
 | props? | `HTMLAttributes` | Customize option props. |  |
-| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| show? | `boolean` | Whether to show the option. | 2.33.3 |
 
 #### DropdownDividerOption Type
 
 | Property | Type | Description | Version |
 | --- | --- | --- | --- |
 | key? | `string \| number` | Divider ID (should be unique). |  |
-| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| show? | `boolean` | Whether to show the option. | 2.33.3 |
 | type | `'divider'` | The type of the DropdownDividerOption. |  |
 
 #### DropdownGroupOption Type
@@ -71,7 +71,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | icon? | `() => VNodeChild` | Custom rendering function of the group icon. |  |
 | label? | `string` | Group label value. |  |
 | key? | `string \| number` | Group ID (should be unique). |  |
-| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| show? | `boolean` | Whether to show the option. | 2.33.3 |
 | type | `'group'` | The type of the DropdownGroupOption. |  |
 
 #### DropdownRenderOption Type
@@ -80,5 +80,5 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | --- | --- | --- | --- |
 | key? | `string \| number` | Render option ID (should be unique). |  |
 | render? | `() => VNodeChild` | Render function of the option content. |  |
-| show? | `boolean` | Whether to show the option. | NEXT_VERSION |
+| show? | `boolean` | Whether to show the option. | 2.33.3 |
 | type | `'render'` | The type of the DropdownRenderOption. |  |
