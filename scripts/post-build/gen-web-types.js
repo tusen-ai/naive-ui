@@ -297,13 +297,7 @@ exports.genWebTypes = function genWebTypes () {
     if (!docs) return
     if (docs.parameters) {
       // For slot
-      let type = docs.parameters
-      if (type && type.startsWith('`') && type.endsWith('`')) {
-        type = type.substring(1, type.length - 1).trim()
-      }
-      if (type && type.startsWith('(') && type.endsWith(')')) {
-        type = type.substring(1, type.length - 1).trim()
-      }
+      const type = strip(strip(docs.parameters, '`'), '(', ')')
       const objDefStart = type ? type.indexOf('{') : -1
       if (objDefStart >= 0) {
         target.type = type.substring(objDefStart).replaceAll('\\|', '|')
@@ -311,21 +305,26 @@ exports.genWebTypes = function genWebTypes () {
     }
     if (docs.type) {
       // For props and events
-      let type = docs.type
-      if (type && type.startsWith('`') && type.endsWith('`')) {
-        type = type.substring(1, type.length - 1).trim()
-      }
-      target.type = type.replaceAll('\\|', '|')
+      target.type = strip(docs.type, '`').replaceAll('\\|', '|')
     }
     if (docs.description) {
       target.description = docs.description
     }
     if (docs.default) {
-      target.default = docs.default
+      target.default = strip(docs.default, '`')
     }
     if (docs.version) {
       target['description-sections'] = { since: docs.version }
     }
+  }
+
+  function strip (str, prefix, suffix) {
+    if (!str) return str
+    if (!suffix) suffix = prefix
+    if (str.startsWith(prefix) && str.endsWith(suffix)) {
+      return str.substring(1, str.length - 1).trim()
+    }
+    return str
   }
 }
 
