@@ -496,10 +496,17 @@ export default defineComponent({
         deep: false
       }
     )
-    let memorizedExpandedKeys: Key[] | undefined
+    let expandAnimationDisabled = false
+    const disableExpandAnimationForOneTick = (): void => {
+      expandAnimationDisabled = true
+      void nextTick(() => {
+        expandAnimationDisabled = false
+      })
+    }
+    let memoizedExpandedKeys: Key[] | undefined
     watch(toRef(props, 'pattern'), (value, oldValue) => {
       if (props.showIrrelevantNodes) {
-        memorizedExpandedKeys = undefined
+        memoizedExpandedKeys = undefined
         if (value) {
           const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
             keysWithFilter(
@@ -510,6 +517,7 @@ export default defineComponent({
               mergedFilterRef.value
             )
           uncontrolledHighlightKeySetRef.value = highlightKeySet
+          disableExpandAnimationForOneTick()
           doUpdateExpandedKeys(
             expandedKeysAfterChange,
             getOptionsByKeys(expandedKeysAfterChange)
@@ -519,18 +527,20 @@ export default defineComponent({
         }
       } else {
         if (!value.length) {
-          if (memorizedExpandedKeys !== undefined) {
+          if (memoizedExpandedKeys !== undefined) {
+            disableExpandAnimationForOneTick()
             doUpdateExpandedKeys(
-              memorizedExpandedKeys,
-              getOptionsByKeys(memorizedExpandedKeys)
+              memoizedExpandedKeys,
+              getOptionsByKeys(memoizedExpandedKeys)
             )
           }
         } else {
           if (!oldValue.length) {
-            memorizedExpandedKeys = mergedExpandedKeysRef.value
+            memoizedExpandedKeys = mergedExpandedKeysRef.value
           }
           const { expandedKeys } = filteredTreeInfoRef.value
           if (expandedKeys !== undefined) {
+            disableExpandAnimationForOneTick()
             doUpdateExpandedKeys(expandedKeys, getOptionsByKeys(expandedKeys))
           }
         }
@@ -584,7 +594,7 @@ export default defineComponent({
     // fixable and need some changes in vueuc, I've no time so I just leave it
     // here. Maybe the bug won't be fixed during the life time of the project.
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
-      if (!props.animated) {
+      if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
         return
       }
@@ -966,7 +976,9 @@ export default defineComponent({
         !props.draggable ||
         props.disabled ||
         isNodeDisabled(node, props.disabledField)
-      ) { return }
+      ) {
+        return
+      }
       handleDragOver({ event, node }, false)
       doDragEnter({ event, node: node.rawNode })
     }
@@ -975,7 +987,9 @@ export default defineComponent({
         !props.draggable ||
         props.disabled ||
         isNodeDisabled(node, props.disabledField)
-      ) { return }
+      ) {
+        return
+      }
       doDragLeave({ event, node: node.rawNode })
     }
     function handleDragLeaveTree (e: DragEvent): void {
@@ -989,7 +1003,9 @@ export default defineComponent({
         !props.draggable ||
         props.disabled ||
         isNodeDisabled(node, props.disabledField)
-      ) { return }
+      ) {
+        return
+      }
       doDragEnd({ event, node: node.rawNode })
     }
     function handleDragStart ({ event, node }: InternalDragInfo): void {
@@ -997,7 +1013,9 @@ export default defineComponent({
         !props.draggable ||
         props.disabled ||
         isNodeDisabled(node, props.disabledField)
-      ) { return }
+      ) {
+        return
+      }
       // Most of time, the image will block user's view
       emptyImage && event.dataTransfer?.setDragImage(emptyImage, 0, 0)
       dragStartX = event.clientX
@@ -1012,7 +1030,9 @@ export default defineComponent({
         !props.draggable ||
         props.disabled ||
         isNodeDisabled(node, props.disabledField)
-      ) { return }
+      ) {
+        return
+      }
       const { value: draggingNode } = draggingNodeRef
       if (!draggingNode) return
       const { allowDrop, indent } = props

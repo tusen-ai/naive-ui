@@ -18,6 +18,7 @@
 - Fix `n-data-table` can't set `n-dropdown`'s `theme-overrides`, closes [#3613](https://github.com/tusen-ai/naive-ui/issues/3613).
 - Fix `n-carousel` displays abnoramlly if `transform: scale` style is set, closes [#3684](https://github.com/tusen-ai/naive-ui/issues/3684).
 - Fix `n-tree`'s node is disabled after `checkboxDisabled` is set, closes [#3620](https://github.com/tusen-ai/naive-ui/issues/3620).
+- Fix `n-tree`'s switcher won't work when `:show-irrelevant-nodes="false"` is set & being searched, closes [#3647](https://github.com/tusen-ai/naive-ui/issues/3647).
 
 ## 2.33.2
 

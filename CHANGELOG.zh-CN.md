@@ -18,6 +18,7 @@
 - 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
 - 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)
 - 修复 `n-tree` 的节点在设定 `checkboxDisabled` 后会被整体禁用，关闭 [#3620](https://github.com/tusen-ai/naive-ui/issues/3620)
+- 修复 `n-tree` 在设定 `:show-irrelevant-nodes="false"` 并搜索后展开关闭按钮失效，关闭 [#3647](https://github.com/tusen-ai/naive-ui/issues/3647)
 
 ## 2.33.2
 
