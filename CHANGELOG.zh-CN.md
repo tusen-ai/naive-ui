@@ -19,6 +19,7 @@
 - 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)
 - 修复 `n-tree` 的节点在设定 `checkboxDisabled` 后会被整体禁用，关闭 [#3620](https://github.com/tusen-ai/naive-ui/issues/3620)
 - 修复 `n-tree` 在设定 `:show-irrelevant-nodes="false"` 并搜索后展开关闭按钮失效，关闭 [#3647](https://github.com/tusen-ai/naive-ui/issues/3647)
+- 修复 `n-progress` 在 `type="circle"` 并且 `stroke-width` 过大时，圆圈可能溢出，关闭 [#3638](https://github.com/tusen-ai/naive-ui/issues/3638)
 
 ## 2.33.2
 
