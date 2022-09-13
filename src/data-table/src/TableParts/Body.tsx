@@ -209,7 +209,7 @@ export default defineComponent({
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
-    function getRowInfo (key: string): RowData {
+    function getRowInfo (key: RowKey): RowData {
       const currentIndex = paginatedDataRef.value.findIndex(
         (item) => item.key === key
       )
