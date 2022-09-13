@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-date-picker` 新增 `panel-next` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `panel-next-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `panel-prev-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+
 ## 2.33.3
 
 ### Feats
