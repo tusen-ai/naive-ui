@@ -84,7 +84,11 @@ export function useCheck (
   const headerCheckboxDisabledRef = computed(() => {
     return paginatedDataRef.value.length === 0
   })
-  function doUpdateCheckedRowKeys (keys: RowKey[], row?: RowData): void {
+  function doUpdateCheckedRowKeys (
+    keys: RowKey[],
+    row?: RowData,
+    isCheck?: boolean
+  ): void {
     const {
       'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
       onUpdateCheckedRowKeys,
@@ -99,9 +103,9 @@ export function useCheck (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rows.push(row!)
     })
-    if (_onUpdateCheckedRowKeys) call(_onUpdateCheckedRowKeys, keys, rows, row)
-    if (onUpdateCheckedRowKeys) call(onUpdateCheckedRowKeys, keys, rows, row)
-    if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys, rows, row)
+    if (_onUpdateCheckedRowKeys) { call(_onUpdateCheckedRowKeys, keys, rows, row, isCheck) }
+    if (onUpdateCheckedRowKeys) { call(onUpdateCheckedRowKeys, keys, rows, row, isCheck) }
+    if (onCheckedRowKeysChange) { call(onCheckedRowKeysChange, keys, rows, row, isCheck) }
     uncontrolledCheckedRowKeysRef.value = keys
   }
   function doCheck (
@@ -113,7 +117,8 @@ export function useCheck (
     if (single) {
       doUpdateCheckedRowKeys(
         Array.isArray(rowKey) ? rowKey.slice(0, 1) : [rowKey],
-        rowInfo
+        rowInfo,
+        true
       )
       return
     }
@@ -122,7 +127,8 @@ export function useCheck (
         cascade: props.cascade,
         allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys,
-      rowInfo
+      rowInfo,
+      true
     )
   }
   function doUncheck (rowKey: RowKey | RowKey[], rowInfo: RowData): void {
@@ -132,7 +138,8 @@ export function useCheck (
         cascade: props.cascade,
         allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys,
-      rowInfo
+      rowInfo,
+      false
     )
   }
   function doCheckAll (checkWholeTable: boolean = false): void {

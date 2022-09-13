@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-data-table`'s `on-update:checked-row-keys` will pass current row data, closes [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态, 关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
 
 ## 2.33.3
 

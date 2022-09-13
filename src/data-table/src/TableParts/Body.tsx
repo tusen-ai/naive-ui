@@ -27,7 +27,8 @@ import {
   ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode
+  TmNode,
+  RowData
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -208,7 +209,7 @@ export default defineComponent({
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
-    function getRowInfo (key): object {
+    function getRowInfo (key: string): RowData {
       const currentIndex = paginatedDataRef.value.findIndex(
         (item) => item.key === key
       )
