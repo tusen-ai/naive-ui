@@ -48,7 +48,7 @@ debug.vue
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |  |
-| response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | `n-upload` 使用的 `XMLHttpRequest` 的 `responseType` | NEXT_VERSION |
+| response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | `n-upload` 使用的 `XMLHttpRequest` 的 `responseType` | 2.33.3 |
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |  |
 | show-download-button | `boolean` | `false` | 是否显示下载按钮（在 finished 后展示） |  |
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 后时候展示），点击删除按钮会触发 `on-remove` 回调 |  |

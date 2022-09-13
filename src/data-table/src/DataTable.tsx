@@ -237,6 +237,7 @@ export default defineComponent({
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
+      summaryPlacementRef: toRef(props, 'summaryPlacement'),
       syncScrollState,
       doUpdatePage,
       doUpdateFilters,

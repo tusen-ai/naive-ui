@@ -4,15 +4,28 @@
 
 ### Feats
 
-- `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
-- `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
 - `n-data-table`'s `on-update:checked-row-keys` will pass current row data, closes [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+
+## 2.33.3
+
+### Feats
+
+- `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
+- `n-dynamic-tags` export `DynamicTagsOption` type, closes [#3677](https://github.com/tusen-ai/naive-ui/issues/3677).
+- `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
+- `n-dropdown`'s `DropdownOption` adds `show` prop, closes [#3703](https://github.com/tusen-ai/naive-ui/issues/3703).
+- `n-data-table` adds `summary-placement` prop, closes [#3681](https://github.com/tusen-ai/naive-ui/issues/3681).
+- `n-tabs` will scroll to active tab, closes [#3683](https://github.com/tusen-ai/naive-ui/issues/3683).
 
 ### Performance
 
 - Fix `n-menu`'s `value` will cause useless rendering of menu item, closes [#3670](https://github.com/tusen-ai/naive-ui/issues/3670).
 - Fix `n-date-picker`'s style is unexpected in `inline-theme-disabled` mode, closes [#3655](https://github.com/tusen-ai/naive-ui/issues/3655).
 - Fix `n-data-table` can't set `n-dropdown`'s `theme-overrides`, closes [#3613](https://github.com/tusen-ai/naive-ui/issues/3613).
+- Fix `n-carousel` displays abnoramlly if `transform: scale` style is set, closes [#3684](https://github.com/tusen-ai/naive-ui/issues/3684).
+- Fix `n-tree`'s node is disabled after `checkboxDisabled` is set, closes [#3620](https://github.com/tusen-ai/naive-ui/issues/3620).
+- Fix `n-tree`'s switcher won't work when `:show-irrelevant-nodes="false"` is set & being searched, closes [#3647](https://github.com/tusen-ai/naive-ui/issues/3647).
+- Fix `n-progress`'s graph may overflow if `type="circle"` and `stroke-width` is too large, closes [#3638](https://github.com/tusen-ai/naive-ui/issues/3638).
 
 ## 2.33.2
 
@@ -49,7 +62,7 @@
 
 ### Feats
 
-- `n-menu` adds `disabledField` prop.
+- `n-menu` adds `disabled-field` prop.
 - `n-rate` adds `clearable` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
 - Add `useDialogReactiveList` method, closes [#2041](https://github.com/tusen-ai/naive-ui/issues/2041).

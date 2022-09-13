@@ -36,7 +36,7 @@ show.vue
 | default-expand-all | `boolean` | `false` | Whether to expand all menus. |  |
 | default-expanded-keys | `Array<string>` | `[]` | The default expanded submenu keys of menu in uncontrolled manner. |  |
 | default-value | `string \| null` | `null` | Whether selected by default in uncontrolled mode. |  |
-| disabled-field | `string` | `'disabled'` | Field name of disabled. | NEXT_VETSION |
+| disabled-field | `string` | `'disabled'` | Field name of disabled. | 2.33.0 |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Only effective in horizontal mode. |  |
 | dropdown-props | `DropdownProps` | `undefined` | The dropdown's props when menu is collapsed or horizontal mode，please see [Dropdown Props](dropdown#Dropdown-Props) |  |
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |  |
@@ -60,32 +60,34 @@ show.vue
 
 ### MenuOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| children? | `Array<MenuOption \| MenuGroupOption>` | Child menu options. |
-| disabled? | `boolean` | Whether to disable the menu item. |
-| show? | `boolean` | Whether to show the menu item. |
-| extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
-| icon? | `() => VNodeChild` | The icon for the menu item. |
-| key | `string` | The indentifier of the menu item. |
-| label | `string \| (() => VNodeChild)` | The label of the menu item. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| children? | `Array<MenuOption \| MenuGroupOption>` | Child menu options. |  |
+| disabled? | `boolean` | Whether to disable the menu item. |  |
+| extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |  |
+| icon? | `() => VNodeChild` | The icon for the menu item. |  |
+| key | `string` | The indentifier of the menu item. |  |
+| label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
+| show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 
 ### MenuGroupOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |
-| key | `string` | The indentifier of the menu group. |
-| label | `string \| (() => VNodeChild)` | The label of the menu item. |
-| type | `'group'` | The type of the menu item, **required!** |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |  |
+| key | `string` | The indentifier of the menu group. |  |
+| label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
+| show? | `boolean` | Whether to show the menu item. | 2.32.2 |
+| type | `'group'` | The type of the menu item, **required!** |  |
 
 ### MenuDividerOption Properties
 
-| Name  | Type             | Description                              |
-| ----- | ---------------- | ---------------------------------------- |
-| key   | `string`         | The indentifier of the menu group.       |
-| props | `HTMLAttributes` | Attributes of the divider.               |
-| type  | `'divider'`      | The type of the menu item, **required!** |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| key | `string` | The indentifier of the menu group. |  |
+| props | `HTMLAttributes` | Attributes of the divider. |  |
+| show? | `boolean` | Whether to show the menu item. | 2.32.2 |
+| type | `'divider'` | The type of the menu item, **required!** |  |
 
 ### Menu Methods
 

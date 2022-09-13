@@ -45,7 +45,7 @@ render-debug.vue
 | key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |  |
 | disabled-field | `string` | `'disabled'` | 替代 `TreeSelectOption` 中的 disabled 字段名 | 2.32.2 |
-| loading | `boolean` | `false` | 是否加载中 | NEXT_VETSION |
+| loading | `boolean` | `false` | 是否加载中 | 2.28.3 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.22.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |

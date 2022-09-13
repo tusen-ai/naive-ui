@@ -16,6 +16,7 @@ import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
 import { TmNode, treeInjectionKey } from './interface'
 import { renderDropMark } from './dnd'
+import { isNodeDisabled } from './utils'
 
 const TreeNode = defineComponent({
   name: 'TreeNode',
@@ -42,11 +43,20 @@ const TreeNode = defineComponent({
       indentRef,
       blockLineRef,
       checkboxPlacementRef,
-      checkOnClickRef
+      checkOnClickRef,
+      disabledFieldRef
     } = NTree
 
-    const disabledRef = computed(
-      () => NTree.disabledRef.value || props.tmNode.disabled
+    const checkboxDisabledRef = useMemo(
+      () => !!props.tmNode.rawNode.checkboxDisabled
+    )
+
+    const nodeIsDisabledRef = useMemo(() => {
+      return isNodeDisabled(props.tmNode, disabledFieldRef.value)
+    })
+
+    const disabledRef = useMemo(
+      () => NTree.disabledRef.value || nodeIsDisabledRef.value
     )
 
     const resolvedNodePropsRef = computed(() => {
@@ -92,7 +102,7 @@ const TreeNode = defineComponent({
 
     const selectableRef = useMemo(
       () =>
-        !props.tmNode.disabled &&
+        !nodeIsDisabledRef.value &&
         NTree.selectableRef.value &&
         (NTree.internalTreeSelect
           ? NTree.mergedCheckStrategyRef.value !== 'child' ||
@@ -249,7 +259,7 @@ const TreeNode = defineComponent({
       disabled: disabledRef,
       checkable: checkableRef,
       mergedCheckOnClick: mergedCheckOnClickRef,
-      checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
+      checkboxDisabled: checkboxDisabledRef,
       selectable: selectableRef,
       expandOnClick: NTree.expandOnClickRef,
       internalScrollable: NTree.internalScrollableRef,

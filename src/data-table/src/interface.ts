@@ -98,6 +98,10 @@ export const dataTableProps = {
     default: 16
   },
   flexHeight: Boolean,
+  summaryPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  },
   paginationBehaviorOnFilter: {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
@@ -367,6 +371,7 @@ export interface DataTableInjection {
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
+  summaryPlacementRef: Ref<'top' | 'bottom'>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void

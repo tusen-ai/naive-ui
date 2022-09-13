@@ -47,7 +47,7 @@ download.vue
 | method | `string` | `'POST'` | The HTTP request method. |  |
 | multiple | `boolean` | `false` | Allow multiple files to be selected. |  |
 | name | `string` | `'file'` | The field name for the file(s) in the HTTP request's form data. |  |
-| response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | Response type of `XMLHttpRequest` used by `n-upload` | NEXT_VERSION |
+| response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | Response type of `XMLHttpRequest` used by `n-upload` | 2.33.3 |
 | show-cancel-button | `boolean` | `true` | Show a cancel button (while uploading). Use the `on-remove` callback for this event. |  |
 | show-download-button | `boolean` | `false` | Show a download button (after upload is finished). |  |
 | show-file-list | `boolean` | `true` | Show a file list. |  |
