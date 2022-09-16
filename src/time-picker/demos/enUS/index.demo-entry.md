@@ -43,7 +43,7 @@ timezone.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Time picker panel's placement. | 2.25.0 |
 | show | `boolean` | `undefined` | Whether to show panel | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | time-zone | `string` | `undefined` | Time zone to be used to format the value. It follows [iana time zones](https://www.iana.org/time-zones). You can use `Intl.supportedValuesOf('timeZone')` to check supported values. | 2.30.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | use-12-hours | `boolean` | `false` | Whether to use a 12-hour clock panel. |  |

@@ -47,7 +47,7 @@ custom-icon.vue
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.27.0 |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |  |
 | update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |  |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |  |
