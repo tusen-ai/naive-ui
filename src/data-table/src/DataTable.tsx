@@ -20,6 +20,24 @@ import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
+import { useResizable } from './use-resizable'
+import type {
+  CreateRowClassName,
+  CreateRowKey,
+  OnUpdateCheckedRowKeys,
+  OnUpdateSorter,
+  RowKey,
+  TableColumns,
+  RowData,
+  OnUpdateFilters,
+  MainTableRef,
+  DataTableInst,
+  OnUpdateExpandedRowKeys,
+  CreateSummary,
+  CreateRowProps,
+  DataTableOnLoad,
+  TableBaseColumn
+} from './interface'
 import type { RowKey, MainTableRef, DataTableInst } from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
@@ -90,8 +108,10 @@ export default defineComponent({
       scrollPartRef.value = 'body'
     })
     const mainTableInstRef = ref<MainTableRef | null>(null)
+    const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth } =
+      useResizable()
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
-      useGroupHeader(props)
+      useGroupHeader(props, getResizableWidth)
     const {
       treeMateRef,
       mergedCurrentPageRef,
@@ -105,6 +125,7 @@ export default defineComponent({
       childTriggerColIndexRef,
       doUpdatePage,
       doUpdateFilters,
+      onResizeColumn,
       deriveNextSorter,
       filter,
       filters,
@@ -241,6 +262,10 @@ export default defineComponent({
       syncScrollState,
       doUpdatePage,
       doUpdateFilters,
+      getResizableWidth,
+      onResizeColumn,
+      clearResizableWidth,
+      doUpdateResizableWidth,
       deriveNextSorter,
       doCheck,
       doUncheck,
@@ -298,6 +323,8 @@ export default defineComponent({
           boxShadowAfter,
           boxShadowBefore,
           sorterSize,
+          resizableContainerSize,
+          resizableSize,
           loadingColor,
           loadingSize,
           opacityLoading,
@@ -343,6 +370,8 @@ export default defineComponent({
         '--n-box-shadow-before': boxShadowBefore,
         '--n-box-shadow-after': boxShadowAfter,
         '--n-sorter-size': sorterSize,
+        '--n-resizable-container-size': resizableContainerSize,
+        '--n-resizable-size': resizableSize,
         '--n-loading-size': loadingSize,
         '--n-loading-color': loadingColor,
         '--n-opacity-loading': opacityLoading,

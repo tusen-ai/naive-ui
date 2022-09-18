@@ -13,6 +13,7 @@
 - `n-collapse-item`'s `header-extra` & `header` slots supports `collapsed` param, closes [#3723](https://github.com/tusen-ai/naive-ui/issues/3723).
 - `n-loading-bar-provider` adds `to` prop, closes [#3724](https://github.com/tusen-ai/naive-ui/issues/3724).
 - `n-data-table`'s `on-update:checked-row-keys` will pass current row data and state, closes [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` column adds `resizable` prop, closes [#3165](https://github.com/TuSimple/naive-ui/issues/3165).
 
 ## 2.33.3
 

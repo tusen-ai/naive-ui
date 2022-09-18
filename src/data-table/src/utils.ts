@@ -63,13 +63,38 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
   return 0
 }
 
+// priority: min-width > max-width > width
+export function clampValueByCSSRules (
+  value: number,
+  min?: number,
+  max?: number
+): number {
+  if (max !== undefined) {
+    value = Math.min(value, typeof max === 'number' ? max : parseFloat(max))
+  }
+  if (min !== undefined) {
+    value = Math.max(value, typeof min === 'number' ? min : parseFloat(min))
+  }
+  return value
+}
+
 export function createCustomWidthStyle (
-  column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
+  column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
+  resizedWidth?: string
 ): CSSProperties {
+  if (resizedWidth !== undefined) {
+    return {
+      width: resizedWidth,
+      minWidth: resizedWidth,
+      maxWidth: resizedWidth
+    }
+  }
   const width = getStringColWidth(column)
+  const { minWidth, maxWidth } = column
   return {
     width,
-    minWidth: formatLength(column.minWidth) || width
+    minWidth: formatLength(minWidth) || width,
+    maxWidth: formatLength(maxWidth)
   }
 }
 
@@ -96,6 +121,11 @@ export function shouldUseArrayInSingleMode (column: TableBaseColumn): boolean {
 export function isColumnSortable (column: TableColumn): boolean {
   if ('children' in column) return false
   return !!column.sorter
+}
+
+export function isColumnResizable (column: TableColumn): boolean {
+  if ('children' in column && !!column.children.length) return false
+  return !!column.resizable
 }
 
 export function isColumnFilterable (column: TableColumn): boolean {
