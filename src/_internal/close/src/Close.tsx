@@ -7,6 +7,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'BaseClose',
   props: {
+    isButtonTag: {
+      type: Boolean,
+      default: true
+    },
     clsPrefix: {
       type: String,
       required: true
@@ -26,13 +30,15 @@ export default defineComponent({
   setup (props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
-      const { clsPrefix, disabled, absolute, round } = props
+      const { clsPrefix, disabled, absolute, round, isButtonTag } = props
+      const Tag = isButtonTag ? 'button' : 'div'
       return (
-        <button
-          type="button"
+        <Tag
+          type={isButtonTag ? 'button' : undefined}
           tabindex={disabled || !props.focusable ? -1 : 0}
           aria-disabled={disabled}
           aria-label="close"
+          role={isButtonTag ? undefined : 'button'}
           disabled={disabled}
           class={[
             `${clsPrefix}-base-close`,
@@ -52,7 +58,7 @@ export default defineComponent({
               default: () => <CloseIcon />
             }}
           </NBaseIcon>
-        </button>
+        </Tag>
       )
     }
   }

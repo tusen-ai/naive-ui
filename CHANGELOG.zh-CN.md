@@ -2,8 +2,17 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
+- 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
+- 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
+
 ### Feats
 
+- `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
+- `n-loading-bar-provider` 新增 `container-style` 属性
+- `n-loading-bar-provider` 新增 `to` 属性，关闭 [#3724](https://github.com/tusen-ai/naive-ui/issues/3724)
 - `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态, 关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
 
 ## 2.33.3
@@ -20,6 +29,9 @@
 ### Performance
 
 - 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+
+### Fixes
+
 - 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
 - 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
 - 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)

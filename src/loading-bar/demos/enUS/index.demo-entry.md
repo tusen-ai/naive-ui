@@ -38,15 +38,18 @@ export default defineComponent({
 
 ```demo
 basic.vue
+container.vue
 ```
 
 ## API
 
 ### LoadingBarProvider Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| container-style | `string \| object` | `undefined` | Style of the loading bar container. | NEXT_VERSION |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |  |
+| to | `string \| HTMLElement \| false` | `undefined` | Mount target of loading bar. | NEXT_VERSION |
 
 ### loadingBar Injection Methods
 
