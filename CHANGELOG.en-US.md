@@ -4,17 +4,82 @@
 
 ### Fixes
 
-- Fix `n-select`'s menu missing option check mark in SSR mode, closes https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- Fix `n-timeline-item`'s `title`'s `margin-bottom` can't be set by theme variable, closes [#3722](https://github.com/tusen-ai/naive-ui/issues/3722).
+- Fix `n-timeline-item`'s `meta` part's `margin-bottom` is overrided when nested in horizontal and vertical mode.
+- Fix `n-tree-select` would remove selected first option if it's clicked when placed in `label` tag, closes [#3715](https://github.com/tusen-ai/naive-ui/issues/3715).
 
 ### Feats
 
-- `n-menu` adds `disabledField` prop.
+- `n-collapse-item`'s `header-extra` & `header` slots supports `collapsed` param, closes [#3723](https://github.com/tusen-ai/naive-ui/issues/3723).
+- `n-loading-bar-provider` adds `to` prop, closes [#3724](https://github.com/tusen-ai/naive-ui/issues/3724).
+- `n-data-table`'s `on-update:checked-row-keys` will pass current row data and state, closes [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` column adds `resizable` prop, closes [#3165](https://github.com/TuSimple/naive-ui/issues/3165).
+
+## 2.33.3
+
+### Feats
+
+- `n-dialog` adds `onAfterLeave` in DialogOptions Properties, closes [#3662](https://github.com/tusen-ai/naive-ui/issues/3662).
+- `n-dynamic-tags` export `DynamicTagsOption` type, closes [#3677](https://github.com/tusen-ai/naive-ui/issues/3677).
+- `n-upload` adds `responseType` prop, closes [#3666](https://github.com/tusen-ai/naive-ui/issues/3666).
+- `n-dropdown`'s `DropdownOption` adds `show` prop, closes [#3703](https://github.com/tusen-ai/naive-ui/issues/3703).
+- `n-data-table` adds `summary-placement` prop, closes [#3681](https://github.com/tusen-ai/naive-ui/issues/3681).
+- `n-tabs` will scroll to active tab, closes [#3683](https://github.com/tusen-ai/naive-ui/issues/3683).
+
+### Performance
+
+- Fix `n-menu`'s `value` will cause useless rendering of menu item, closes [#3670](https://github.com/tusen-ai/naive-ui/issues/3670).
+
+### Fixes
+
+- Fix `n-date-picker`'s style is unexpected in `inline-theme-disabled` mode, closes [#3655](https://github.com/tusen-ai/naive-ui/issues/3655).
+- Fix `n-data-table` can't set `n-dropdown`'s `theme-overrides`, closes [#3613](https://github.com/tusen-ai/naive-ui/issues/3613).
+- Fix `n-carousel` displays abnoramlly if `transform: scale` style is set, closes [#3684](https://github.com/tusen-ai/naive-ui/issues/3684).
+- Fix `n-tree`'s node is disabled after `checkboxDisabled` is set, closes [#3620](https://github.com/tusen-ai/naive-ui/issues/3620).
+- Fix `n-tree`'s switcher won't work when `:show-irrelevant-nodes="false"` is set & being searched, closes [#3647](https://github.com/tusen-ai/naive-ui/issues/3647).
+- Fix `n-progress`'s graph may overflow if `type="circle"` and `stroke-width` is too large, closes [#3638](https://github.com/tusen-ai/naive-ui/issues/3638).
+
+## 2.33.2
+
+### Fixes
+
+- Fix UMD bundle doesn't work, closes [#3642](https://github.com/tusen-ai/naive-ui/issues/3642).
+- Fix `n-calendar`'s displayed month doesn't follow `default-value`, closes [#3645](https://github.com/tusen-ai/naive-ui/issues/3645).
+- Fix `n-form-item`'s `require-mark-placement` prop not working when set to `left`, closes [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+- Fix `n-upload`'s `OnBeforeUpload` return type can only be `Promise<boolean>`.
+
+### Feats
+
+- `n-radio` adds `colorActive` theme variable, closes [#3610](https://github.com/tusen-ai/naive-ui/issues/3610).
+
+## 2.33.1
+
+### Fixes
+
+- Fix could not resolve "@vicons/ionicons5" error, closes [#3616](https://github.com/tusen-ai/naive-ui/issues/3616).
+
+## 2.33.0
+
+### Breaking Changes
+
+- `n-rate`'s `default-value` prop's default value is changed from `0` to `null`.
+
+### Fixes
+
+- Fix `n-select`'s menu missing option check mark in SSR mode, closes https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- Fix `n-card`'s `embedded` prop not work in `n-dialog`, closes [#3592](https://github.com/tusen-ai/naive-ui/issues/3592).
+- Fix `n-radio` warning when value prop type is boolean, closes [#3540](https://github.com/tusen-ai/naive-ui/issues/3540).
+- Fix `n-tree` content width may overflow container, closes [#3561](https://github.com/tusen-ai/naive-ui/issues/3561).
+- Fix `n-form-item` label text may overflow when it's left placement, closes [#3593](https://github.com/tusen-ai/naive-ui/issues/3593).
+
+### Feats
+
+- `n-menu` adds `disabled-field` prop.
 - `n-rate` adds `clearable` prop.
 - `n-slider` adds `keyboard` prop, closes [#3528](https://github.com/TuSimple/naive-ui/issues/3528).
-- Fix `n-radio` fix warning when value prop type is boolean, close (#3540)[https://github.com/tusen-ai/naive-ui/issues/3540].
 - Add `useDialogReactiveList` method, closes [#2041](https://github.com/tusen-ai/naive-ui/issues/2041).
 - `DialogReactive` supports `onAfterEnter` prop, closes [#3569](https://github.com/tusen-ai/naive-ui/issues/3569).
-- `n-data-table` column adds `resizable` prop, closes [#3165](https://github.com/TuSimple/naive-ui/issues/3165).
+- `DialogOptions` supports `class` prop, closes [#3591](https://github.com/tusen-ai/naive-ui/issues/3591).
 
 ## 2.32.2
 
@@ -23,13 +88,11 @@
 - Fix `n-menu` extra not working in submenu, closes [#3390](https://github.com/TuSimple/naive-ui/issues/3390).
 - Fix `n-tree` can't expand node with `type='group'`, closes [#3388](https://github.com/TuSimple/naive-ui/issues/3388).
 - Fix `n-pagination`'s' `default-page-size` prop doesn't follows `page-sizes` prop, closes [#3369](https://github.com/TuSimple/naive-ui/issues/3369).
-- Added `exports` field in package.json [3410](https://github.com/TuSimple/naive-ui/pull/3410)
 - Added `exports` field in package.json [#3410](https://github.com/TuSimple/naive-ui/pull/3410).
 - Fix `n-dropdown` option prefix & suffix's z-index, closes [#3433](https://github.com/TuSimple/naive-ui/issues/3433).
 - Fix `n-input-number`'s peers theme can't be configured, closes [#3422](https://github.com/TuSimple/naive-ui/issues/3422).
 - Fix `n-tag` pointer should be not allow when disabled, closes [#3494](https://github.com/tusen-ai/naive-ui/issues/3494).
 - Fix `n-transfer` throws error if value has no corresponding option, closes [#3406](https://github.com/TuSimple/naive-ui/issues/3406).
-- Added `exports` field in package.json.
 - Fix `n-data-table` column `onSelect`'s type, closes [#3430](https://github.com/TuSimple/naive-ui/issues/3430).
 - Fix `n-pagination` don't trigger quick jumper on quick jumper blur, closes [#3387](https://github.com/TuSimple/naive-ui/issues/3387).
 - Fix some components works abnormally in open mode shadow DOM, closes [#3281](https://github.com/TuSimple/naive-ui/issues/3281).

@@ -105,8 +105,8 @@ describe('n-form', () => {
         </NForm>
       ))
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
-      const nextSibling = requireMark.element.nextSibling as Text
-      expect(nextSibling.wholeText).toEqual('star kirby')
+      const nextSibling = requireMark.element.nextSibling as HTMLElement
+      expect(nextSibling.textContent).toEqual('star kirby')
     })
 
     it('show require mark placement left when set require-mark-placement is "right"', () => {
@@ -126,8 +126,8 @@ describe('n-form', () => {
         </NForm>
       ))
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
-      const previousSibling = requireMark.element.previousSibling as Text
-      expect(previousSibling.wholeText).toEqual('star kirby')
+      const previousSibling = requireMark.element.previousSibling as HTMLElement
+      expect(previousSibling.textContent).toEqual('star kirby')
     })
 
     it('show require mark placement left when set require-mark-placement is "right" in form-item', () => {
@@ -147,8 +147,8 @@ describe('n-form', () => {
         </NForm>
       ))
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
-      const previousSibling = requireMark.element.previousSibling as Text
-      expect(previousSibling.wholeText).toEqual('star kirby')
+      const previousSibling = requireMark.element.previousSibling as HTMLElement
+      expect(previousSibling.textContent).toEqual('star kirby')
     })
   })
 

@@ -9,6 +9,7 @@ import { dialogProps, dialogPropKeys } from './dialogProps'
 export const exposedDialogEnvProps = {
   ...dialogProps,
   onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
   onEsc: Function as PropType<() => void>,
@@ -49,7 +50,9 @@ export const NDialogEnvironment = defineComponent({
   setup (props) {
     const showRef = ref(true)
     function handleAfterLeave (): void {
-      props.onInternalAfterLeave(props.internalKey)
+      const { onInternalAfterLeave, internalKey, onAfterLeave } = props
+      if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
+      if (onAfterLeave) onAfterLeave()
     }
     function handlePositiveClick (e: MouseEvent): void {
       const { onPositiveClick } = props

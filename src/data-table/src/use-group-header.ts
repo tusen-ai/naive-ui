@@ -1,13 +1,13 @@
 import { CSSProperties, ComputedRef, computed } from 'vue'
 import { formatLength } from '../../_utils'
-import type { DataTableSetupProps } from './DataTable'
 import type {
   TableExpandColumn,
   TableSelectionColumn,
   TableColumn,
   TableBaseColumn,
   TableColumns,
-  ColumnKey
+  ColumnKey,
+  DataTableSetupProps
 } from './interface'
 import { getColKey, createCustomWidthStyle } from './utils'
 

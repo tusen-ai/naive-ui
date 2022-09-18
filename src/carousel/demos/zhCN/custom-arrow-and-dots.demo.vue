@@ -22,10 +22,10 @@
     >
     <template #arrow="{ prev, next }">
       <div class="custom-arrow">
-        <button type="button" class="curtom-arrow--left" @click="prev">
+        <button type="button" class="custom-arrow--left" @click="prev">
           <n-icon><ArrowBack /></n-icon>
         </button>
-        <button type="button" class="curtom-arrow--right" @click="next">
+        <button type="button" class="custom-arrow--right" @click="next">
           <n-icon><ArrowForward /></n-icon>
         </button>
       </div>

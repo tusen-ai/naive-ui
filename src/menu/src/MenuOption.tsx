@@ -58,10 +58,7 @@ export const NMenuOption = defineComponent({
           !mergedDisabledRef.value
         )
       }),
-      // Vue has bug when using vooks.useMemo
-      // menu item state won't be updated...
-      // a minimal reproduction is needed
-      selected: computed(() => {
+      selected: useMemo(() => {
         if (NMenu.mergedValueRef.value === props.internalKey) return true
         return false
       }),

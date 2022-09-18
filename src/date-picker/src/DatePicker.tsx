@@ -902,7 +902,14 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('date-picker', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'date-picker',
+        computed(() => {
+          return props.type
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
 
     return {

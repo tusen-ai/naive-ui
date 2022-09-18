@@ -97,6 +97,8 @@ export default defineComponent({
           boxShadow,
           colorPopover,
           colorEmbedded,
+          colorEmbeddedModal,
+          colorEmbeddedPopover,
           [createKey('padding', size)]: padding,
           [createKey('fontSize', size)]: fontSize,
           [createKey('titleFontSize', size)]: titleFontSize
@@ -111,9 +113,12 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
-        '--n-color': props.embedded ? colorEmbedded : color,
+        '--n-color': color,
         '--n-color-modal': colorModal,
         '--n-color-popover': colorPopover,
+        '--n-color-embedded': colorEmbedded,
+        '--n-color-embedded-modal': colorEmbeddedModal,
+        '--n-color-embedded-popover': colorEmbeddedPopover,
         '--n-color-target': colorTarget,
         '--n-text-color': textColor,
         '--n-line-height': lineHeight,
@@ -166,6 +171,7 @@ export default defineComponent({
       mergedClsPrefix,
       rtlEnabled,
       onRender,
+      embedded,
       $slots
     } = this
     onRender?.()
@@ -174,6 +180,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-card`,
           this.themeClass,
+          embedded && `${mergedClsPrefix}-card--embedded`,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
             [`${mergedClsPrefix}-card--content${
@@ -216,7 +223,7 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-card-header__main`}
                 role="heading"
               >
-                {children || [this.title]}
+                {children || this.title}
               </div>
               {resolveWrappedSlot(
                 $slots['header-extra'],

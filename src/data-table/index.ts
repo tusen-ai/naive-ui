@@ -1,6 +1,7 @@
-export { default as NDataTable, dataTableProps } from './src/DataTable'
-export type { DataTableProps } from './src/DataTable'
+export { default as NDataTable } from './src/DataTable'
+export { dataTableProps } from './src/interface'
 export type {
+  DataTableProps,
   RowKey as DataTableRowKey,
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,

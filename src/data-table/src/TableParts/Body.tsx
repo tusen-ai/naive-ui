@@ -27,7 +27,8 @@ import {
   ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode
+  TmNode,
+  RowData
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -182,6 +183,7 @@ export default defineComponent({
       expandableRef,
       stickyExpandedRowsRef,
       renderExpandIconRef,
+      summaryPlacementRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -207,11 +209,18 @@ export default defineComponent({
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
+    function getRowInfo (key: RowKey): RowData {
+      const currentIndex = paginatedDataRef.value.findIndex(
+        (item) => item.key === key
+      )
+      return paginatedDataRef.value[currentIndex].rawNode
+    }
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
       shiftKey: boolean
     ): void {
+      const rowInfo = getRowInfo(tmNode.key)
       if (shiftKey) {
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastSelectedKey
@@ -229,25 +238,25 @@ export default defineComponent({
             }
           })
           if (checked) {
-            doCheck(rowKeysToCheck, false)
+            doCheck(rowKeysToCheck, false, rowInfo)
           } else {
-            doUncheck(rowKeysToCheck)
+            doUncheck(rowKeysToCheck, rowInfo)
           }
           lastSelectedKey = tmNode.key
           return
         }
       }
-
       if (checked) {
-        doCheck(tmNode.key, false)
+        doCheck(tmNode.key, false, rowInfo)
       } else {
-        doUncheck(tmNode.key)
+        doUncheck(tmNode.key, rowInfo)
       }
       lastSelectedKey = tmNode.key
     }
 
     function handleRadioUpdateChecked (tmNode: { key: RowKey }): void {
-      doCheck(tmNode.key, true)
+      const rowInfo = getRowInfo(tmNode.key)
+      doCheck(tmNode.key, true, rowInfo)
     }
 
     function getScrollContainer (): HTMLElement | null {
@@ -417,6 +426,7 @@ export default defineComponent({
     })
     return {
       bodyWidth: bodyWidthRef,
+      summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
       scrollbarInstRef,
@@ -584,31 +594,33 @@ export default defineComponent({
             if (summary) {
               const summaryRows = summary(this.rawPaginatedData)
               if (Array.isArray(summaryRows)) {
-                mergedData = [
-                  ...mergedPaginationData,
-                  ...summaryRows.map((row, i) => ({
-                    isSummaryRow: true as const,
-                    key: `__n_summary__${i}`,
-                    tmNode: {
-                      rawNode: row,
-                      disabled: true
-                    },
-                    index: -1
-                  }))
-                ]
+                const summaryRowData = summaryRows.map((row, i) => ({
+                  isSummaryRow: true as const,
+                  key: `__n_summary__${i}`,
+                  tmNode: {
+                    rawNode: row,
+                    disabled: true
+                  },
+                  index: -1
+                }))
+                mergedData =
+                  this.summaryPlacement === 'top'
+                    ? [...summaryRowData, ...mergedPaginationData]
+                    : [...mergedPaginationData, ...summaryRowData]
               } else {
-                mergedData = [
-                  ...mergedPaginationData,
-                  {
-                    isSummaryRow: true,
-                    key: '__n_summary__',
-                    tmNode: {
-                      rawNode: summaryRows,
-                      disabled: true
-                    },
-                    index: -1
-                  }
-                ]
+                const summaryRowData = {
+                  isSummaryRow: true as const,
+                  key: '__n_summary__',
+                  tmNode: {
+                    rawNode: summaryRows,
+                    disabled: true
+                  },
+                  index: -1
+                }
+                mergedData =
+                  this.summaryPlacement === 'top'
+                    ? [summaryRowData, ...mergedPaginationData]
+                    : [...mergedPaginationData, summaryRowData]
               }
             } else {
               mergedData = mergedPaginationData

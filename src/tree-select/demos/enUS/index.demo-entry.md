@@ -42,7 +42,7 @@ debug.vue
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |  |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |  |
 | disabled-field | `string` | `'disabled'` | The disabled field used for `TreeSelectOption`. | 2.32.2 |
-| loading | `boolean` | `false` | Whether it's loading. | NEXT_VETSION |
+| loading | `boolean` | `false` | Whether it's loading. | 2.28.3 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.22.0 |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |

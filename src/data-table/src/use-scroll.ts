@@ -1,8 +1,12 @@
 import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
-import type { DataTableSetupProps } from './DataTable'
-import type { ColumnKey, MainTableRef, TableColumn } from './interface'
+import type {
+  ColumnKey,
+  MainTableRef,
+  TableColumn,
+  DataTableSetupProps
+} from './interface'
 import { getNumberColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

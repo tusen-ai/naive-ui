@@ -4,17 +4,84 @@
 
 ### Fixes
 
-- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
+- 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
+- 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
 
 ### Feats
 
-- `n-menu` 新增 `disabledField` 属性
+- `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
+- `n-loading-bar-provider` 新增 `container-style` 属性
+- `n-loading-bar-provider` 新增 `to` 属性，关闭 [#3724](https://github.com/tusen-ai/naive-ui/issues/3724)
+- `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态, 关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
+
+## 2.33.3
+
+### Feats
+
+- `n-dialog` 新增 `onAfterLeave` 在 DialogOptions Properties 中，关闭 [#3662](https://github.com/tusen-ai/naive-ui/issues/3662)
+- `n-dynamic-tags` 导出类型 `DynamicTagsOption`，关闭 [#3677](https://github.com/tusen-ai/naive-ui/issues/3677)
+- `n-upload` 新增 `responseType` 属性，关闭 [#3666](https://github.com/tusen-ai/naive-ui/issues/3666)
+- `n-dropdown` `DropdownOption` 新增 `show` 属性，关闭 [#3703](https://github.com/tusen-ai/naive-ui/issues/3703)
+- `n-data-table` 新增 `summary-placement` 属性，关闭 [#3681](https://github.com/tusen-ai/naive-ui/issues/3681)
+- `n-tabs` 会滚动到激活的标签，关闭 [#3683](https://github.com/tusen-ai/naive-ui/issues/3683)
+
+### Performance
+
+- 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+
+### Fixes
+
+- 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
+- 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
+- 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)
+- 修复 `n-tree` 的节点在设定 `checkboxDisabled` 后会被整体禁用，关闭 [#3620](https://github.com/tusen-ai/naive-ui/issues/3620)
+- 修复 `n-tree` 在设定 `:show-irrelevant-nodes="false"` 并搜索后展开关闭按钮失效，关闭 [#3647](https://github.com/tusen-ai/naive-ui/issues/3647)
+- 修复 `n-progress` 在 `type="circle"` 并且 `stroke-width` 过大时，圆圈可能溢出，关闭 [#3638](https://github.com/tusen-ai/naive-ui/issues/3638)
+
+## 2.33.2
+
+### Fixes
+
+- 修复 UMD 构建产物不能正常工作，关闭 [#3642](https://github.com/tusen-ai/naive-ui/issues/3642)
+- 修复 `n-calendar` 在设定了 `default-value` 后默认显示月份没有跟随，关闭 [#3645](https://github.com/tusen-ai/naive-ui/issues/3645)
+- 修复 `n-form-item` 属性 `require-mark-placement` 值为 `left` 时不生效, 关闭 [#3628](https://github.com/tusen-ai/naive-ui/issues/3628).
+- 修复 `n-upload` `OnBeforeUpload` 类型返回值只能为 `Promise<boolean>`
+
+### Feats
+
+- `n-radio` 新增 `colorActive` 主题变量，关闭 [#3610](https://github.com/tusen-ai/naive-ui/issues/3610)
+
+## 2.33.1
+
+### Fixes
+
+- 修复 Could not resolve "@vicons/ionicons5" 异常，关闭 [#3616](https://github.com/tusen-ai/naive-ui/issues/3616)
+
+## 2.33.0
+
+### Breaking Changes
+
+- `n-rate` 的 `default-value` 默认值从 `0` 设为 `null`
+
+### Fixes
+
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
+- 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
+- 修复 `n-pagination` 被禁用时，快速跳转菜单还会触发并可进行分页跳转
+- 修复 `n-tree` 节点的内容长度可能超过容器溢出，关闭 [#3561](https://github.com/tusen-ai/naive-ui/issues/3561)
+- 修复 `n-form-item` 标签在放在左侧时文字可能溢出，关闭 [#3593](https://github.com/tusen-ai/naive-ui/issues/3593)
+
+### Feats
+
+- `n-menu` 新增 `disabled-field` 属性
 - `n-rate` 新增 `clearable` 属性
 - `n-slider` 新增 `keyboard` 属性，关闭 [#3528](https://github.com/TuSimple/naive-ui/issues/3528)
-- 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 - 新增 `useDialogReactiveList` 方法，关闭 [#2041](https://github.com/tusen-ai/naive-ui/issues/2041)
 - `DialogReactive` 支持 `onAfterEnter` 属性，关闭 [#3569](https://github.com/tusen-ai/naive-ui/issues/3569)
-- `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
+- `DialogOptions` 支持 `class` 属性，关闭 [#3591](https://github.com/tusen-ai/naive-ui/issues/3591)
 
 ## 2.32.2
 

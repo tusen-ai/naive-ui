@@ -7,8 +7,10 @@ const cardDark: CardTheme = {
   common: commonDark,
   self (vars) {
     const commonSelf = self(vars)
-    const { cardColor } = vars
+    const { cardColor, modalColor, popoverColor } = vars
     commonSelf.colorEmbedded = cardColor
+    commonSelf.colorEmbeddedModal = modalColor
+    commonSelf.colorEmbeddedPopover = popoverColor
     return commonSelf
   }
 }

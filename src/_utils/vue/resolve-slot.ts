@@ -58,6 +58,18 @@ export function resolveWrappedSlot (
   return wrapper(children || null)
 }
 
+/*
+ * Resolve slot with wrapper if content exists, no fallback
+ */
+export function resolveWrappedSlotWithProps (
+  slot: Slot | undefined,
+  props: any,
+  wrapper: (children: VNodeArrayChildren | null) => VNodeChild
+): VNodeChild {
+  const children = slot && ensureValidVNode(slot(props))
+  return wrapper(children || null)
+}
+
 export function isSlotEmpty (slot: Slot | undefined): boolean {
   return !(slot && ensureValidVNode(slot()))
 }

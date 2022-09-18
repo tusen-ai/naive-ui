@@ -45,13 +45,13 @@ disabled.vue
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `()` | The contents of the collapsible panel. |
-| arrow | `(options: { collapsed: boolean })` | Custom icons for folding panels. |
+| arrow | `(props: { collapsed: boolean })` | Custom icons for folding panels. |
 
 ### CollapseItem Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `()` | The contents of the collapsible panel node. |
-| header | `()` | The content of the header of the collapsed panel node. |
-| header-extra | `()` | The extra content of the header of the collapsed panel node. |
-| arrow | `(options: { collapsed: boolean })` | The custom icon of the node header of the collapsible panel. |
+| header | `(props: { collapsed: boolean })` | The content of the header of the collapsed panel node. |
+| header-extra | `(props: { collapsed: boolean })` | The extra content of the header of the collapsed panel node. |
+| arrow | `(props: { collapsed: boolean })` | The custom icon of the node header of the collapsible panel. |

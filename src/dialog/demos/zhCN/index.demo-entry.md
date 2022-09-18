@@ -69,6 +69,7 @@ focus-debug.vue
 | autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.28.3 |
 | blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
+| class | `any` | `undefined` | 类名 | 2.33.0 |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
@@ -81,10 +82,11 @@ focus-debug.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
+| style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
-| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | NEXT_VERSION |
-| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 |  |
+| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
+| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onPositiveClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
@@ -97,8 +99,9 @@ focus-debug.vue
 下列属性都可以被动态修改。
 
 | 名称 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 `border` |  |
+| class | `any` | 类名 | 2.33.0 |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |  |
@@ -114,8 +117,8 @@ focus-debug.vue
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
-| onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | NEXT_VERSION |
-| onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 |  |
+| onAfterEnter | `() => void \| undefined` | 出现动画完成执行的回调 | 2.33.0 |
+| onAfterLeave | `() => void \| undefined` | 关闭动画完成执行的回调 | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
 | onEsc | `() => void` | 焦点在 dialog 内部时按下 Esc 键的回调 | 2.32.0 |
 | onNegativeClick | `(e: MouseEvent) => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |

@@ -230,17 +230,20 @@ function submitImpl (
     method,
     action,
     withCredentials,
+    responseType,
     headers,
     data
   }: {
     method: string
     action?: string
     withCredentials: boolean
+    responseType: XMLHttpRequestResponseType
     headers: FuncOrRecordOrUndef
     data: FuncOrRecordOrUndef
   }
 ): void {
   const request = new XMLHttpRequest()
+  request.responseType = responseType
   inst.xhrMap.set(file.id, request)
   request.withCredentials = withCredentials
   const formData = new FormData()
@@ -281,6 +284,10 @@ export const uploadProps = {
   data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
+  responseType: {
+    type: String as PropType<XMLHttpRequestResponseType>,
+    default: ''
+  },
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -529,6 +536,7 @@ export default defineComponent({
                 method,
                 action,
                 withCredentials,
+                responseType: props.responseType,
                 headers,
                 data
               }

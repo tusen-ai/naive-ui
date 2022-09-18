@@ -28,7 +28,7 @@ embedded.vue
 | bordered | `boolean` | `true` | Whether to show the card border. |  |
 | closable | `boolean` | `false` | Is it allowed to close. |  |
 | content-style | `Object \| string` | `undefined` | The style of the card content area. |  |
-| embedded | `boolean` | `false` | 	>>>使用更深的背景色展现嵌入效果，只对亮色主题生效<<< |  |
+| embedded | `boolean` | `false` | Use a darker background color to show the embedding effect (only for bright themes) |  |
 | footer-style | `Object \| string` | `undefined` | The style of the bottom area of the card. |  |
 | header-style | `Object \| string` | `undefined` | The style of the card head area. |  |
 | header-extra-style | `Object \| string` | `undefined` | The style of the card head extra area. | 2.25.0 |

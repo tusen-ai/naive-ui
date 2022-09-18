@@ -361,11 +361,17 @@ export default defineComponent({
       internalValidate
     }
     const labelElementRef = ref<null | HTMLLabelElement>(null)
-    onMounted(() => {
-      if (labelElementRef.value !== null) {
+    onMounted((): void => {
+      if (!formItemMiscRefs.isAutoLabelWidth.value) return
+      const labelElement = labelElementRef.value
+      if (labelElement !== null) {
+        const memoizedWhitespace = labelElement.style.whiteSpace
+        labelElement.style.whiteSpace = 'nowrap'
+        labelElement.style.width = ''
         NForm?.deriveMaxChildLabelWidth(
-          Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
+          Number(getComputedStyle(labelElement).width.slice(0, -2))
         )
+        labelElement.style.whiteSpace = memoizedWhitespace
       }
     })
     const cssVarsRef = computed(() => {
@@ -457,6 +463,47 @@ export default defineComponent({
         ? mergedShowRequireMark
         : this.mergedRequired
     onRender?.()
+
+    const renderLabel = (): JSX.Element | null => {
+      const labelText = this.$slots.label ? this.$slots.label() : this.label
+      if (!labelText) return null
+      const textNode = (
+        <span class={`${mergedClsPrefix}-form-item-label__text`}>
+          {labelText}
+        </span>
+      )
+      const markNode = renderedShowRequireMark ? (
+        <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
+          {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
+        </span>
+      ) : (
+        mergedRequireMarkPlacement === 'right-hanging' && (
+          <span
+            class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
+          >
+            {'\u00A0*'}
+          </span>
+        )
+      )
+      const { labelProps } = this
+      return (
+        <label
+          {...labelProps}
+          class={[
+            labelProps?.class,
+            `${mergedClsPrefix}-form-item-label`,
+            `${mergedClsPrefix}-form-item-label--${mergedRequireMarkPlacement}-mark`
+          ]}
+          style={this.mergedLabelStyle as any}
+          ref="labelElementRef"
+        >
+          {mergedRequireMarkPlacement === 'left'
+            ? [markNode, textNode]
+            : [textNode, markNode]}
+        </label>
+      )
+    }
+
     return (
       <div
         class={[
@@ -464,46 +511,13 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
+          this.isAutoLabelWidth &&
+            `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {mergedShowLabel && (this.label || $slots.label) ? (
-          <label
-            {...this.labelProps}
-            class={[
-              this.labelProps?.class,
-              `${mergedClsPrefix}-form-item-label`
-            ]}
-            style={this.mergedLabelStyle as any}
-            ref="labelElementRef"
-          >
-            {/* 'left' | 'right' | undefined */}
-            {mergedRequireMarkPlacement !== 'left'
-              ? $slots.label
-                ? $slots.label()
-                : this.label
-              : null}
-            {renderedShowRequireMark ? (
-              <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
-              </span>
-            ) : (
-              mergedRequireMarkPlacement === 'right-hanging' && (
-                <span
-                  class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
-                >
-                  {'\u00A0*'}
-                </span>
-              )
-            )}
-            {mergedRequireMarkPlacement === 'left'
-              ? $slots.label
-                ? $slots.label()
-                : this.label
-              : null}
-          </label>
-        ) : null}
+        {mergedShowLabel && renderLabel()}
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,
