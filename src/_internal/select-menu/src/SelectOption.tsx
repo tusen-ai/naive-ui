@@ -19,8 +19,6 @@ import {
   RenderOptionImpl
 } from './interface'
 
-const checkMarkIcon = h(CheckmarkIcon)
-
 function renderCheckMark (show: boolean, clsPrefix: string): VNode {
   return (
     <Transition name="fade-in-scale-up-transition">
@@ -32,7 +30,7 @@ function renderCheckMark (show: boolean, clsPrefix: string): VNode {
               class={`${clsPrefix}-base-select-option__check`}
             >
               {{
-                default: () => checkMarkIcon
+                default: () => h(CheckmarkIcon)
               }}
             </NBaseIcon>
           ) : null

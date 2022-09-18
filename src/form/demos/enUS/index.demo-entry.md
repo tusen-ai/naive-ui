@@ -54,7 +54,7 @@ dynamic.vue
 
 | Property | Type | Description | Version |
 | --- | --- | --- | --- |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | Asynchronous validation in the form of a callback. |  |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | Asynchronous validation in the form of a callback. |  |
 | message | `string` | Text to show when validation fails. |  |
 | renderMessage | `() => VNodeChild` | Render function or message. | 2.29.1 |
 | required | `boolean` | Is it required. |  |

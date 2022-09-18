@@ -198,10 +198,12 @@ export default defineComponent({
     const showFastBackwardMenuRef = ref(false)
 
     const handleFastForwardMouseenter = (): void => {
+      if (props.disabled) return
       fastForwardActiveRef.value = true
       disableTransitionOneTick()
     }
     const handleFastForwardMouseleave = (): void => {
+      if (props.disabled) return
       fastForwardActiveRef.value = false
       disableTransitionOneTick()
     }
@@ -768,6 +770,7 @@ export default defineComponent({
                         return (
                           <NPopselect
                             key={key}
+                            disabled={disabled}
                             trigger="hover"
                             virtualScroll
                             style={{ width: '60px' }}

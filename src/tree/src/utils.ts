@@ -1,5 +1,9 @@
 import { isBrowser } from '../../_utils'
-import { Key, TreeOption } from './interface'
+import { Key, TmNode, TreeOption } from './interface'
+
+export function isNodeDisabled (node: TmNode, disabledField: string): boolean {
+  return !!(node.rawNode as any)[disabledField]
+}
 
 function traverse (
   nodes: TreeOption[] | undefined,

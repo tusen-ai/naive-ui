@@ -17,6 +17,7 @@ import { c, cE, cM, cNotM, cB } from '../../../_utils/cssr'
 // --n-text-color-disabled
 // --n-label-padding
 // --n-label-line-height
+// --n-color-active
 export default cB('radio', `
   line-height: var(--n-label-line-height);
   outline: none;
@@ -29,6 +30,11 @@ export default cB('radio', `
   font-size: var(--n-font-size);
   word-break: break-word;
 `, [
+  cM('checked', [
+    cE('dot', `
+      background-color: var(--n-color-active);
+    `)
+  ]),
   cE('dot-wrapper', `
     position: relative;
     flex-shrink: 0;

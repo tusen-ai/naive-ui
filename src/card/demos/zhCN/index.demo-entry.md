@@ -18,6 +18,7 @@ loading.vue
 custom-style.vue
 embedded.vue
 rtl-debug.vue
+embedded-debug.vue
 ```
 
 ## API

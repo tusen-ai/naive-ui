@@ -32,6 +32,8 @@ export const self = (vars: ThemeCommonVars) => {
     colorPopover: popoverColor,
     colorTarget: primaryColor,
     colorEmbedded: actionColor,
+    colorEmbeddedModal: actionColor,
+    colorEmbeddedPopover: actionColor,
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColor,

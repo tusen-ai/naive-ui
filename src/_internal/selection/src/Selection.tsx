@@ -591,6 +591,7 @@ export default defineComponent({
               closable={!option.disabled}
               disabled={disabled}
               onClose={() => this.handleDeleteOption(option)}
+              internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >
               {{

@@ -179,6 +179,7 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       tabChangeIdRef.id = 0
       updateCurrentBarStyle()
+      updateCurrentScrollPosition(true)
     })
 
     function getCurrentEl (): HTMLElement | null {
@@ -217,6 +218,34 @@ export default defineComponent({
       const tabEl = getCurrentEl()
       if (tabEl) {
         updateBarStyle(tabEl)
+      }
+    }
+    function updateCurrentScrollPosition (smooth: boolean): void {
+      const scrollWrapperEl: HTMLElement | undefined = xScrollInstRef.value?.$el
+      if (!scrollWrapperEl) return
+      const tabEl = getCurrentEl()
+      if (!tabEl) return
+      const {
+        scrollLeft: scrollWrapperElScrollLeft,
+        offsetWidth: scrollWrapperElOffsetWidth
+      } = scrollWrapperEl
+      const { offsetLeft: tabElOffsetLeft, offsetWidth: tabElOffsetWidth } =
+        tabEl
+      if (scrollWrapperElScrollLeft > tabElOffsetLeft) {
+        scrollWrapperEl.scrollTo({
+          top: 0,
+          left: tabElOffsetLeft,
+          behavior: 'smooth'
+        })
+      } else if (
+        tabElOffsetLeft + tabElOffsetWidth >
+        scrollWrapperElScrollLeft + scrollWrapperElOffsetWidth
+      ) {
+        scrollWrapperEl.scrollTo({
+          top: 0,
+          left: tabElOffsetLeft + tabElOffsetWidth - scrollWrapperElOffsetWidth,
+          behavior: 'smooth'
+        })
       }
     }
 
@@ -415,6 +444,7 @@ export default defineComponent({
     })
     onFontsReady(() => {
       updateCurrentBarStyle()
+      updateCurrentScrollPosition(true)
     })
 
     // avoid useless rerender

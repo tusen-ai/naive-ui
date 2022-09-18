@@ -37,7 +37,7 @@ export function itemRenderer (
 ): VNode | null {
   const { rawNode } = tmNode
   const { show } = rawNode
-  if (typeof show === 'boolean' && !show) {
+  if (show === false) {
     return null
   }
   if (isIgnoredNode(rawNode)) {

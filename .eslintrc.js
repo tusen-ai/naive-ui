@@ -71,7 +71,7 @@ module.exports = {
       }
     },
     {
-      files: '*.spec.ts',
+      files: ['*.spec.ts', '*.spec.js'],
       globals: {
         describe: 'readonly',
         it: 'readonly',

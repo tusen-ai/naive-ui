@@ -1,6 +1,6 @@
 import { VNodeChild } from 'vue'
 
-export const DESCRIPTION_ITEM_FLAG = Symbol('DESCRIPTION_ITEM_FLAG')
+export const DESCRIPTION_ITEM_FLAG = 'DESCRIPTION_ITEM_FLAG'
 
 export function isDescriptionsItem (vNode: VNodeChild): boolean {
   if (typeof vNode === 'object' && vNode && !Array.isArray(vNode)) {

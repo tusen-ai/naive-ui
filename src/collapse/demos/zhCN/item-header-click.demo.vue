@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-collapse @item-header-click="handleItemHeaderClick;">
+  <n-collapse @item-header-click="handleItemHeaderClick">
     <n-collapse-item name="1">
       <template #header>
         青铜

@@ -9,4 +9,4 @@ export type {
   DialogReactive,
   DialogApiInjection as DialogApi
 } from './src/DialogProvider'
-export { useDialog } from './src/use-dialog'
+export { useDialog, useDialogReactiveList } from './src/composables'
