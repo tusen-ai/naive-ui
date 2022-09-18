@@ -33,9 +33,10 @@ export type LoadingBarApiInjection = LoadingBarInst
 export const loadingBarProviderProps = {
   ...(useTheme.props as ThemeProps<LoadingBarTheme>),
   to: {
-    type: [String, Object] as PropType<string | HTMLElement>,
+    type: [String, Object, Boolean] as PropType<string | HTMLElement | false>,
     default: undefined
   },
+  containerStyle: [String, Object] as PropType<string | CSSProperties>,
   loadingBarStyle: {
     type: Object as PropType<{
       loading?: string | CSSProperties
@@ -100,8 +101,11 @@ export default defineComponent({
   render () {
     return (
       <>
-        <Teleport to={this.to ?? 'body'}>
-          <NLoadingBar ref="loadingBarRef" />
+        <Teleport disabled={this.to === false} to={this.to || 'body'}>
+          <NLoadingBar
+            ref="loadingBarRef"
+            containerStyle={this.containerStyle}
+          />
         </Teleport>
         {this.$slots.default?.()}
       </>

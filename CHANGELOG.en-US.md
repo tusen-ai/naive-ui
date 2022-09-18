@@ -11,6 +11,7 @@
 ### Feats
 
 - `n-collapse-item`'s `header-extra` & `header` slots supports `collapsed` param, closes [#3723](https://github.com/tusen-ai/naive-ui/issues/3723).
+- `n-loading-bar-provider` adds `to` prop, closes [#3724](https://github.com/tusen-ai/naive-ui/issues/3724).
 
 ## 2.33.3
 
