@@ -40,6 +40,8 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --n-pagination-margin
 // --n-empty-padding
 // --n-sorter-size
+// --n-resizable-container-size
+// --n-resizable-size
 // --n-loading-size
 // --n-loading-color
 // --n-opacity-loading
@@ -263,6 +265,34 @@ export default c([
         cM('asc, desc', {
           color: 'var(--n-th-icon-color-active)'
         })
+      ]),
+      cB('data-table-resizable', `
+        width: var(--n-resizable-container-size);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        cursor: col-resize;
+        user-select: none;
+      `, [
+        c('&::after', `
+          width: var(--n-resizable-size);
+          height: 50%;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          bottom: 0;
+          background-color: var(--n-merged-border-color);
+          transform: translateY(-50%);
+          z-index: 1;
+          content: '';
+        `),
+        c('&.is-active, &:hover', [
+          c('&::after', `
+            height: 100%;
+            background-color: var(--n-th-icon-color-active);
+          `)
+        ])
       ]),
       cB('data-table-filter', `
         position: absolute;
