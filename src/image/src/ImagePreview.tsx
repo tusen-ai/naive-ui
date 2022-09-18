@@ -13,7 +13,8 @@ import {
   toRef,
   onBeforeUnmount,
   VNode,
-  ImgHTMLAttributes
+  ImgHTMLAttributes,
+  normalizeStyle
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -337,6 +338,13 @@ export default defineComponent({
           transformStyle +
           (transition ? '' : 'transition: none;')
       }
+      if (props.imgProps?.style) {
+        Object.entries(
+          normalizeStyle([props.imgProps?.style]) as Record<string, string>
+        ).forEach(([k, v]) => {
+          style[k] = v
+        })
+      }
       if (!transition) {
         void preview.offsetHeight
       }
@@ -599,6 +607,7 @@ export default defineComponent({
                             ref="previewWrapperRef"
                           >
                             <img
+                              {...imgProps}
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
                               onDblclick={this.handlePreviewDblclick}
@@ -607,7 +616,6 @@ export default defineComponent({
                               src={this.previewSrc}
                               ref="previewRef"
                               onDragstart={this.handleDragStart}
-                              {...imgProps}
                             />
                           </div>,
                           [[vShow, this.show]]
