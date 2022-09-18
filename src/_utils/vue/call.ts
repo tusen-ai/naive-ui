@@ -5,12 +5,18 @@ function call<A1, A2> (
   a1: A1,
   a2: A2
 ): void
-function call<A1, A2, A3, A4> (
+function call<A1, A2, A3> (
   funcs: MaybeArray<(a1: A1, a2: A2, a3: A3) => void>,
   a1: A1,
   a2: A2,
+  a3: A3
+): void
+function call<A1, A2, A3, A4> (
+  funcs: MaybeArray<(a1: A1, a2: A2, a3: A3, a4: A4) => void>,
+  a1: A1,
+  a2: A2,
   a3: A3,
-  a4?: A4
+  a4: A4
 ): void
 function call<A extends any[]> (funcs: Function[] | Function, ...args: A): void {
   if (Array.isArray(funcs)) {

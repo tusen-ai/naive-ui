@@ -21,6 +21,13 @@ import type { RowItem, ColItem } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
+  onResizeColumn: Function as PropType<
+  (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn
+  ) => void
+  >,
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false

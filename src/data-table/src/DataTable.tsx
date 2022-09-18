@@ -21,23 +21,6 @@ import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
 import { useResizable } from './use-resizable'
-import type {
-  CreateRowClassName,
-  CreateRowKey,
-  OnUpdateCheckedRowKeys,
-  OnUpdateSorter,
-  RowKey,
-  TableColumns,
-  RowData,
-  OnUpdateFilters,
-  MainTableRef,
-  DataTableInst,
-  OnUpdateExpandedRowKeys,
-  CreateSummary,
-  CreateRowProps,
-  DataTableOnLoad,
-  TableBaseColumn
-} from './interface'
 import type { RowKey, MainTableRef, DataTableInst } from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
