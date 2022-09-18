@@ -1,5 +1,14 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-timeline-item`'s `title`'s `margin-bottom` can't be set by theme variable, closes [#3722](https://github.com/tusen-ai/naive-ui/issues/3722).
+- Fix `n-timeline-item`'s `meta` part's `margin-bottom` is overrided when nested in horizontal and vertical mode.
+
 ## 2.33.3
 
 ### Feats
@@ -14,6 +23,9 @@
 ### Performance
 
 - 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+
+### Fixes
+
 - 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
 - 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
 - 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)

@@ -33,10 +33,12 @@ export default cB('timeline', `
           cB('timeline-item-content', `
           margin-top: calc(var(--n-icon-size) + 12px);
           `, [
-            cE('meta', `
-              margin-top: 6px;
-              margin-bottom: unset;
-            `)
+            c('>', [
+              cE('meta', `
+                margin-top: 6px;
+                margin-bottom: unset;
+              `)
+            ])
           ]),
           cB('timeline-item-timeline', `
             width: 100%;
@@ -97,7 +99,6 @@ export default cB('timeline', `
         font-size: var(--n-title-font-size);
         transition: color .3s var(--n-bezier);
         font-weight: var(--n-title-font-weight);
-        margin-bottom: 6px;
         color: var(--n-title-text-color);
       `),
       cE('content', `
