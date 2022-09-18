@@ -1,13 +1,15 @@
 # CHANGELOG
 
-### NEXT_VERSION
-
 ## NEXT_VERSION
 
 ### Fixes
 
-- Fix `n-timeline-item`'s `title`'s `margin-bottom` can't be set by theme variable, closes [#3722](https://github.com/tusen-ai/naive-ui/issues/3722).
-- Fix `n-timeline-item`'s `meta` part's `margin-bottom` is overrided when nested in horizontal and vertical mode.
+- 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
+- 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
+
+### Feats
+
+- `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
 
 ## 2.33.3
 

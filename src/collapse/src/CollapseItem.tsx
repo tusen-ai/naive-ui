@@ -6,7 +6,12 @@ import {
   ChevronLeftIcon as ArrowLeftIcon
 } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { ExtractPublicPropTypes, throwError } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import {
+  throwError,
+  resolveSlotWithProps,
+  resolveWrappedSlotWithProps
+} from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -92,7 +97,11 @@ export default defineComponent({
       mergedClsPrefix,
       disabled
     } = this
-    const headerNode = $slots.header ? $slots.header() : this.title
+    const headerNode = resolveSlotWithProps(
+      $slots.header,
+      { collapsed },
+      () => [this.title]
+    )
     const headerExtraSlot =
       $slots['header-extra'] || collapseSlots['header-extra']
     const arrowSlot = $slots.arrow || collapseSlots.arrow
@@ -120,9 +129,7 @@ export default defineComponent({
               class={`${mergedClsPrefix}-collapse-item-arrow`}
               key={this.rtlEnabled ? 0 : 1}
             >
-              {arrowSlot ? (
-                arrowSlot({ collapsed })
-              ) : (
+              {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
                     default:
@@ -135,17 +142,21 @@ export default defineComponent({
                         ))
                   }}
                 </NBaseIcon>
-              )}
+              ])}
             </div>
             {arrowPlacement === 'left' && headerNode}
           </div>
-          {headerExtraSlot && (
-            <div
-              class={`${mergedClsPrefix}-collapse-item__header-extra`}
-              onClick={this.handleClick}
-            >
-              {{ default: headerExtraSlot }}
-            </div>
+          {resolveWrappedSlotWithProps(
+            headerExtraSlot,
+            { collapsed },
+            (children) => (
+              <div
+                class={`${mergedClsPrefix}-collapse-item__header-extra`}
+                onClick={this.handleClick}
+              >
+                {children}
+              </div>
+            )
           )}
         </div>
         <NCollapseItemContent
