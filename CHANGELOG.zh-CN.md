@@ -17,6 +17,7 @@
 - `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
 - `createDiscreteApi` 会返回 Vue app
 - 导出 `LayoutContentInst` 类型，关闭 [#3743](https://github.com/tusen-ai/naive-ui/issues/3743)
+- 导出 `CarouselInst` 类型，关闭 [#3742](https://github.com/tusen-ai/naive-ui/issues/3742)
 
 ## 2.33.3
 
