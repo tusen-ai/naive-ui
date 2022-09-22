@@ -1,6 +1,6 @@
 # 图标 Icon
 
-naive-ui 推荐使用 [xicons](https://www.xicons.org) 作为图标库。
+naive-ui 推荐使用 [xicons](https://xicons.org) 作为图标库。
 
 ## 演示
 
