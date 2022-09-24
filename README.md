@@ -18,7 +18,8 @@
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - DingTalk Group 1 (Member limit reached) 33482509
 - DingTalk Group 2 (Member limit reached) 35886835
-- DingTalk Group 3 32377370
+- DingTalk Group 3 (Member limit reached) 32377370
+- DingTalk Group 4 8165002788
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
