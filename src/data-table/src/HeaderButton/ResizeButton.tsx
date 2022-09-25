@@ -79,11 +79,11 @@ export default defineComponent({
       <span
         data-data-table-resizable
         class={[
-          `${mergedClsPrefix}-data-table-resizable`,
-          this.active && 'is-active'
+          `${mergedClsPrefix}-data-table-resize-button`,
+          this.active && `${mergedClsPrefix}-data-table-resize-button--active`
         ]}
         onMousedown={this.handleMousedown}
-      ></span>
+      />
     )
   }
 })
