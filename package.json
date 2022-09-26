@@ -50,6 +50,9 @@
     ".": {
       "import": "./es/index.js",
       "require": "./lib/index.js"
+    },
+    "./es/*": {
+      "import": "./es/*.js"
     }
   },
   "web-types": "./web-types.json",
