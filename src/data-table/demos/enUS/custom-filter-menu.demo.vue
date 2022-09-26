@@ -1,11 +1,15 @@
 <markdown>
-# Customize filter & sorter
+# Customize Icons
 
-You can customize filter & filter menu & sorter.
+You can customize filter & filter menu & sorter & expand icon.
 </markdown>
 
 <template>
-  <n-data-table :columns="cols" :data="data" />
+  <n-data-table
+    :columns="cols"
+    :data="data"
+    :render-expand-icon="renderExpandIcon"
+  />
 </template>
 
 <script lang="ts">
@@ -17,7 +21,7 @@ import {
   DataTableColumns,
   DataTableBaseColumn
 } from 'naive-ui'
-import { SearchOutline } from '@vicons/ionicons5'
+import { SearchOutline, PawOutline } from '@vicons/ionicons5'
 
 const data = [
   {
@@ -32,6 +36,9 @@ const data = [
 
 export default defineComponent({
   setup () {
+    const renderExpandIcon = () => {
+      return h(NIcon, null, { default: () => h(PawOutline) })
+    }
     const filterColumn = reactive<DataTableBaseColumn>({
       title: 'Right',
       key: 'Right',
@@ -81,6 +88,9 @@ export default defineComponent({
     })
     const colsReactive = reactive<DataTableColumns>([
       {
+        type: 'expand'
+      },
+      {
         title: 'Left',
         key: 'Left',
         sorter: 'default',
@@ -96,7 +106,8 @@ export default defineComponent({
 
     return {
       cols: colsReactive,
-      data
+      data,
+      renderExpandIcon
     }
   }
 })

@@ -1,11 +1,15 @@
 <markdown>
-# 自定义过滤 & 排序
+# Customize Icons
 
-你可以自定过滤图标、过滤菜单、排序图标的样式。
+You can customize filter & filter menu & sorter & expand icon.
 </markdown>
 
 <template>
-  <n-data-table :columns="cols" :data="data" />
+  <n-data-table
+    :columns="cols"
+    :data="data"
+    :render-expand-icon="renderExpandIcon"
+  />
 </template>
 
 <script lang="ts">
@@ -17,7 +21,7 @@ import {
   DataTableColumns,
   DataTableBaseColumn
 } from 'naive-ui'
-import { SearchOutline } from '@vicons/ionicons5'
+import { PawOutline, SearchOutline } from '@vicons/ionicons5'
 
 const data = [
   {
@@ -32,6 +36,9 @@ const data = [
 
 export default defineComponent({
   setup () {
+    const renderExpandIcon = () => {
+      return h(NIcon, null, { default: () => h(PawOutline) })
+    }
     const filterColumn = reactive<DataTableBaseColumn>({
       title: 'Right',
       key: 'Right',
@@ -96,7 +103,8 @@ export default defineComponent({
 
     return {
       cols: colsReactive,
-      data
+      data,
+      renderExpandIcon
     }
   }
 })
