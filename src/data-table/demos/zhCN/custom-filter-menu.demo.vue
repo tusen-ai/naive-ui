@@ -1,7 +1,7 @@
 <markdown>
-# Customize Icons
+# 自定义图标
 
-You can customize filter & filter menu & sorter & expand icon.
+你可以自定义过滤图标、过滤菜单、排序图标、展开图标的样式。
 </markdown>
 
 <template>
