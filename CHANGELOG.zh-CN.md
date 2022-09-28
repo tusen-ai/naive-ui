@@ -7,6 +7,7 @@
 - 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
 - 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
 - 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
+- 修复 `n-popover` 在已经弹出的状态下 `disabled` 被置为 `true` ，之后又被置为 `false` 时，错误地重新弹出的行为
 
 ### Feats
 

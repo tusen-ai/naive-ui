@@ -426,6 +426,12 @@ export default defineComponent({
       extraClassRef: toRef(props, 'internalExtraClass'),
       internalRenderBodyRef: toRef(props, 'internalRenderBody')
     })
+    watchEffect(() => {
+      const disabled = getMergedDisabled()
+      if (mergedShowWithoutDisabledRef.value && disabled) {
+        doUpdateShow(false)
+      }
+    })
     return {
       binderInstRef,
       positionManually: positionManuallyRef,
