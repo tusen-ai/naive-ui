@@ -64,10 +64,10 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 }
 
 // priority: min-width > max-width > width
-export function clampValueByCSSRules (
+export function clampValueFollowCSSRules (
   value: number,
-  min?: number,
-  max?: number
+  min?: number | string,
+  max?: number | string
 ): number {
   if (max !== undefined) {
     value = Math.min(value, typeof max === 'number' ? max : parseFloat(max))

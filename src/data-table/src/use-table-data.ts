@@ -355,9 +355,10 @@ export function useTableData (
   function onResizeColumn (
     resizedWidth: number,
     limitedWidth: number,
-    column: TableBaseColumn
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
   ): void {
-    props.onResizeColumn?.(resizedWidth, limitedWidth, column)
+    props.onResizeColumn?.(resizedWidth, limitedWidth, column, getColumnWidth)
   }
 
   function page (page: number): void {

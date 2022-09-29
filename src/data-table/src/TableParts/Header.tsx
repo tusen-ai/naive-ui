@@ -20,7 +20,8 @@ import {
   createNextSorter,
   getColKey,
   isColumnSorting,
-  isColumnResizable
+  isColumnResizable,
+  clampValueFollowCSSRules
 } from '../utils'
 import {
   TableExpandColumn,
@@ -73,7 +74,11 @@ export default defineComponent({
       doCheckAll
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
-    const thElsRef = ref<Record<ColumnKey, HTMLElement>>({})
+    const cellElsRef = ref<Record<ColumnKey, HTMLTableCellElement>>({})
+    function getCellActualWidth (key: ColumnKey): number | undefined {
+      const element = cellElsRef.value[key]
+      return element?.getBoundingClientRect().width
+    }
     function handleCheckboxUpdateChecked (): void {
       if (allRowsCheckedRef.value) {
         doUncheckAll()
@@ -105,16 +110,29 @@ export default defineComponent({
     function handleMouseleave (): void {
       scrollPartRef.value = 'body'
     }
+    const resizeStartWidthMap: Map<ColumnKey, number | undefined> = new Map()
+    function handleColumnResizeStart (column: TableBaseColumn): void {
+      resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
+    }
     function handleColumnResize (
       column: TableBaseColumn,
-      resizedWidth: number,
-      limitedWidth: number
+      displacementX: number
     ): void {
-      onResizeColumn(resizedWidth, limitedWidth, column)
-      doUpdateResizableWidth(column, limitedWidth)
+      const startWidth = resizeStartWidthMap.get(column.key)
+      if (startWidth === undefined) {
+        return
+      }
+      const widthAfterResize = startWidth + displacementX
+      const limitWidth = clampValueFollowCSSRules(
+        widthAfterResize,
+        column.minWidth,
+        column.maxWidth
+      )
+      onResizeColumn(widthAfterResize, limitWidth, column, getCellActualWidth)
+      doUpdateResizableWidth(column, limitWidth)
     }
     return {
-      thElsRef,
+      cellElsRef,
       componentId,
       mergedSortState: mergedSortStateRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -135,12 +153,13 @@ export default defineComponent({
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,
+      handleColumnResizeStart,
       handleColumnResize
     }
   },
   render () {
     const {
-      thElsRef,
+      cellElsRef,
       mergedClsPrefix,
       fixedColumnLeftMap,
       fixedColumnRightMap,
@@ -158,6 +177,7 @@ export default defineComponent({
       mergedSortState,
       handleColHeaderClick,
       handleCheckboxUpdateChecked,
+      handleColumnResizeStart,
       handleColumnResize
     } = this
     let hasEllipsis = false
@@ -224,19 +244,13 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          minWidth={column.minWidth}
-                          maxWidth={column.maxWidth}
-                          getCurrentWidth={() =>
-                            thElsRef[key]?.getBoundingClientRect().width
+                          onResizeStart={() =>
+                            handleColumnResizeStart(column as TableBaseColumn)
                           }
-                          onResize={(
-                            resizedWidth: number,
-                            limitedWidth: number
-                          ) =>
+                          onResize={(displacementX) =>
                             handleColumnResize(
                               column as TableBaseColumn,
-                              resizedWidth,
-                              limitedWidth
+                              displacementX
                             )
                           }
                         />
@@ -248,7 +262,7 @@ export default defineComponent({
                 const rightFixed = key in fixedColumnRightMap
                 return (
                   <th
-                    ref={(el) => (thElsRef[key] = el as HTMLElement)}
+                    ref={(el) => (cellElsRef[key] = el as HTMLTableCellElement)}
                     key={key}
                     style={{
                       textAlign: column.align,

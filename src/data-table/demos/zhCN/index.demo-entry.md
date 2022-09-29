@@ -112,7 +112,7 @@ expandable-debug.vue
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
-| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn) => void` | `undefined` | 列宽拖动时的回调函数 | NEXT_VERSION |
+| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn, getColumnWidth: (key: ColumnKey) => number \| undefined) => void` | `undefined` | 列宽拖动时的回调函数 | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], row: object, isCheck: boolean) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |

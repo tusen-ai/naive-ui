@@ -25,7 +25,8 @@ export const dataTableProps = {
   (
     resizedWidth: number,
     limitedWidth: number,
-    column: TableBaseColumn
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
   ) => void
   >,
   pagination: {
@@ -392,7 +393,8 @@ export interface DataTableInjection {
   onResizeColumn: (
     resizedWidth: number,
     limitedWidth: number,
-    column: TableBaseColumn
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
   ) => void
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
