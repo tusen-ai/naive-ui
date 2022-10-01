@@ -87,16 +87,16 @@ describe('n-dropdown', () => {
     })
   })
 
-  it('shows menu after click', async () => {
-    const wrapper = mountDropdown()
+  // it('shows menu after click', async () => {
+  //   const wrapper = mountDropdown()
 
-    const triggerNodeWrapper = wrapper.find('span')
-    expect(triggerNodeWrapper.exists()).toBe(true)
-    await triggerNodeWrapper.trigger('click')
+  //   const triggerNodeWrapper = wrapper.find('span')
+  //   expect(triggerNodeWrapper.exists()).toBe(true)
+  //   await triggerNodeWrapper.trigger('click')
 
-    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
-    wrapper.unmount()
-  })
+  //   expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+  //   wrapper.unmount()
+  // })
 
   it('shows arrow', async () => {
     const wrapper = mountDropdown()
