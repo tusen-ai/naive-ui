@@ -21,6 +21,7 @@
 - 导出 `LayoutContentInst` 类型，关闭 [#3743](https://github.com/tusen-ai/naive-ui/issues/3743)
 - 导出 `CarouselInst` 类型，关闭 [#3742](https://github.com/tusen-ai/naive-ui/issues/3742)
 - `n-collapse` 新增 `itemMargin` 主题变量，关闭 [#3788](https://github.com/tusen-ai/naive-ui/issues/3788)
+- `n-select` 新增 `ignore-composition` 属性，关闭 [#3789](https://github.com/tusen-ai/naive-ui/issues/3789)
 
 ## 2.33.3
 
