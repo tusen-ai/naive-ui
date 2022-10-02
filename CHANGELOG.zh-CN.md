@@ -8,6 +8,7 @@
 - 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
 - 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
 - 修复 `n-select` 在 `maxTagCount="responsive"` 的情况下，在弹层删除掉所有已选中项后，弹层不会消失，关闭 [#3801](https://github.com/tusen-ai/naive-ui/issues/3801)
+- 修复 `n-upload` 在 Firefox 浏览器可能只能选择目录，关闭 [#3798](https://github.com/tusen-ai/naive-ui/issues/3798)
 
 ### Feats
 

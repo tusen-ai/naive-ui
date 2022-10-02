@@ -709,8 +709,8 @@ export default defineComponent({
         onChange={this.handleFileInputChange}
         // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
         // @ts-ignore // seems vue-tsc will add the prop, so we can't use expect-error
-        webkitdirectory={directory}
-        directory={directory}
+        webkitdirectory={directory || undefined}
+        directory={directory || undefined}
       />
     )
 
