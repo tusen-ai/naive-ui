@@ -346,7 +346,9 @@ export default defineComponent({
       if (props.disabled || props.active) return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
-        showTagsPopoverRef.value = true
+        if (selectedRef.value) {
+          showTagsPopoverRef.value = true
+        }
       }, 100)
     }
     function handleMouseLeaveCounter (): void {
@@ -358,6 +360,11 @@ export default defineComponent({
         showTagsPopoverRef.value = false
       }
     }
+    watch(selectedRef, (value) => {
+      if (!value) {
+        showTagsPopoverRef.value = false
+      }
+    })
     onMounted(() => {
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
