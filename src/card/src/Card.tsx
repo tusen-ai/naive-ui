@@ -10,7 +10,7 @@ import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
 
-export interface Segmented {
+export interface CardSegmented {
   content?: boolean | 'soft'
   footer?: boolean | 'soft'
   action?: boolean | 'soft'
@@ -24,7 +24,7 @@ export const cardBaseProps = {
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
   embedded: Boolean,
   segmented: {
-    type: [Boolean, Object] as PropType<boolean | Segmented>,
+    type: [Boolean, Object] as PropType<boolean | CardSegmented>,
     default: false
   },
   size: {

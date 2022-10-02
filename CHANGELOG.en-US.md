@@ -21,6 +21,7 @@
 - Export `CarouselInst` type, closes [#3742](https://github.com/tusen-ai/naive-ui/issues/3742).
 - `n-collapse` adds `itemMargin` theme variable, closes [#3788](https://github.com/tusen-ai/naive-ui/issues/3788).
 - `n-select` adds `ignore-composition` prop, closes [#3789](https://github.com/tusen-ai/naive-ui/issues/3789).
+- `n-card` exports `CardSegmented` type, closes [#3775](https://github.com/tusen-ai/naive-ui/issues/3775).
 
 ## 2.33.3
 
