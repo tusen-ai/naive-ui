@@ -20,6 +20,7 @@
 - `createDiscreteApi` 会返回 Vue app
 - 导出 `LayoutContentInst` 类型，关闭 [#3743](https://github.com/tusen-ai/naive-ui/issues/3743)
 - 导出 `CarouselInst` 类型，关闭 [#3742](https://github.com/tusen-ai/naive-ui/issues/3742)
+- `n-collapse` 新增 `itemMargin` 主题变量，关闭 [#3788](https://github.com/tusen-ai/naive-ui/issues/3788)
 
 ## 2.33.3
 

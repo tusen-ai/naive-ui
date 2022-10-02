@@ -19,6 +19,7 @@
 - `createDiscreteApi` contains Vue app in returned value.
 - Export `LayoutContentInst` type, closes [#3743](https://github.com/tusen-ai/naive-ui/issues/3743).
 - Export `CarouselInst` type, closes [#3742](https://github.com/tusen-ai/naive-ui/issues/3742).
+- `n-collapse` adds `itemMargin` theme variable, closes [#3788](https://github.com/tusen-ai/naive-ui/issues/3788).
 
 ## 2.33.3
 
