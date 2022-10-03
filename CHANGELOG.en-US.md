@@ -11,7 +11,7 @@
 - Fix `n-select`'s overflow popover won't hide after removing all options in it when `maxTagCount="responsive"`, closes [#3801](https://github.com/tusen-ai/naive-ui/issues/3801).
 - Fix `n-upload` may only allow selecting directory in Firefox, closes [#3798](https://github.com/tusen-ai/naive-ui/issues/3798).
 - Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
-- `n-tree` adds `animated` prop, closes [#3784](https://github.com/tusen-ai/naive-ui/issues/3784).
+- Fix `createDiscreteApi` throws error in SSR environment, closes [#3813](https://github.com/tusen-ai/naive-ui/issues/3813).
 
 ### Feats
 
@@ -35,6 +35,7 @@
 - `n-avatar` adds `fallback` slot
 - `n-transfer` adds `render-target-list` prop.
 - `n-select` adds `show-checkmark` prop, closes [#3749](https://github.com/tusen-ai/naive-ui/issues/3749).
+- `n-tree` adds `animated` prop, closes [#3784](https://github.com/tusen-ai/naive-ui/issues/3784).
 
 ## 2.33.3
 

@@ -4,7 +4,7 @@ import { DialogApi, useDialog } from '../../dialog'
 import { LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { MessageApi, useMessage } from '../../message'
 import { NotificationApi, useNotification } from '../../notification'
-import { warn } from '../../_utils'
+import { isBrowser, warn } from '../../_utils'
 import { NInjectionExtractor } from './InjectionExtractor'
 import { DiscreteApiType, MaybeRef } from './interface'
 
@@ -61,10 +61,13 @@ export function createDiscreteApp ({
     app
   }
 
-  let hostEl: Element | null = document.createElement('div')
-  document.body.appendChild(hostEl)
+  let hostEl: Element | null
+  if (isBrowser) {
+    hostEl = document.createElement('div')
+    document.body.appendChild(hostEl)
 
-  app.mount(hostEl)
+    app.mount(hostEl)
+  }
 
   const unmount = (): void => {
     if (app === null || hostEl === null) {

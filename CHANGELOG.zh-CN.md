@@ -11,6 +11,7 @@
 - 修复 `n-select` 在 `maxTagCount="responsive"` 的情况下，在弹层删除掉所有已选中项后，弹层不会消失，关闭 [#3801](https://github.com/tusen-ai/naive-ui/issues/3801)
 - 修复 `n-upload` 在 Firefox 浏览器可能只能选择目录，关闭 [#3798](https://github.com/tusen-ai/naive-ui/issues/3798)
 - 移除 `package.json` 中的 `exports` 字段，因为其兼容性还比较差，关闭 [#3786](https://github.com/tusen-ai/naive-ui/issues/3786)
+- 修复 `createDiscreteApi` 在 SSR 环境下报错，关闭 [#3813](https://github.com/tusen-ai/naive-ui/issues/3813)
 
 ### Feats
 
@@ -25,7 +26,6 @@
 - `n-collapse` 新增 `itemMargin` 主题变量，关闭 [#3788](https://github.com/tusen-ai/naive-ui/issues/3788)
 - `n-select` 新增 `ignore-composition` 属性，关闭 [#3789](https://github.com/tusen-ai/naive-ui/issues/3789)
 - `n-card` 导出 `CardSegmented` 类型，关闭 [#3775](https://github.com/tusen-ai/naive-ui/issues/3775)
-- `n-tree` 新增 `animated` 属性，关闭 [#3784](https://github.com/tusen-ai/naive-ui/issues/3784)
 - `n-date-picker` 新增 `panel-next` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-next-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
@@ -36,6 +36,7 @@
 - `n-avatar` 新增 `fallback` slot
 - `n-transfer` 新增 `render-target-list` 属性
 - `n-select` 新增 `show-checkmark` 属性，关闭 [#3749](https://github.com/tusen-ai/naive-ui/issues/3749)
+- `n-tree` 新增 `animated` 属性，关闭 [#3784](https://github.com/tusen-ai/naive-ui/issues/3784)
 
 ## 2.33.3
 
