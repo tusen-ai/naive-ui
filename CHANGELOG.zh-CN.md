@@ -7,6 +7,7 @@
 - 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
 - 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
 - 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
+- 修复 `n-popover` 在已经弹出的状态下 `disabled` 被置为 `true`，之后又被置为 `false` 时，错误地重新弹出的行为
 - 修复 `n-select` 在 `maxTagCount="responsive"` 的情况下，在弹层删除掉所有已选中项后，弹层不会消失，关闭 [#3801](https://github.com/tusen-ai/naive-ui/issues/3801)
 - 修复 `n-upload` 在 Firefox 浏览器可能只能选择目录，关闭 [#3798](https://github.com/tusen-ai/naive-ui/issues/3798)
 - 移除 `package.json` 中的 `exports` 字段，因为其兼容性还比较差，关闭 [#3786](https://github.com/tusen-ai/naive-ui/issues/3786)
