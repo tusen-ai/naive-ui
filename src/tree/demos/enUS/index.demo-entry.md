@@ -32,6 +32,7 @@ checkbox-placement.vue
 | accordion | `boolean` | `false` | Whether to use accrodion expand mode. | 2.31.0 |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
+| animated | `boolean` | `true` | Whether to show expand animation. | NEXT_VERSION |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
 | block-node | `boolean` | `false` | The node name is spread out in the whole row. |  |
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |  |

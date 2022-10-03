@@ -23,6 +23,7 @@ export interface DiscreteAppOptions {
 
 export interface DiscreteApp {
   unmount: () => void
+  app: App
   message?: MessageApi
   notification?: NotificationApi
   dialog?: DialogApi
@@ -40,7 +41,6 @@ export function createDiscreteApp ({
   providersAndProps,
   configProviderProps
 }: DiscreteAppOptions): DiscreteApp {
-  const extractedApi: Omit<DiscreteApp, 'unmount'> = {}
   const App = (): VNode => {
     return h(NConfigProvider, unref(configProviderProps), {
       default: () =>
@@ -57,6 +57,9 @@ export function createDiscreteApp ({
   }
 
   let app: App<Element> | null = createApp(App)
+  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
+    app
+  }
 
   let hostEl: Element | null = document.createElement('div')
   document.body.appendChild(hostEl)

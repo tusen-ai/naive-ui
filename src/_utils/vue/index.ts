@@ -14,6 +14,7 @@ export {
   resolveSlot,
   resolveWrappedSlot,
   resolveSlotWithProps,
+  resolveWrappedSlotWithProps,
   isSlotEmpty
 } from './resolve-slot'
 export type { MaybeArray } from './call'

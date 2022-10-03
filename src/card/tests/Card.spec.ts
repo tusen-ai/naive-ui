@@ -41,7 +41,7 @@ describe('n-card', () => {
     )
     await wrapper.setProps({ embedded: true })
     expect(wrapper.find('.n-card').attributes('style')).toContain(
-      '--n-color: rgb(250, 250, 252)'
+      '--n-color-embedded: rgb(250, 250, 252)'
     )
   })
 

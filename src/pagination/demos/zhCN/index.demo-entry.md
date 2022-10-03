@@ -47,6 +47,7 @@ rtl-debug.vue
 | simple | `boolean` | `false` | 是否显示为简单分页 | 2.32.2 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页后缀 |  |
 | show-size-picker | `boolean` | `false` | 是否显示每页条数的选择器 |  |
+| to | `string \| HTMLElement \| false` | `body` | 弹出菜单的容器节点，`false` 会待在原地 | NEXT_VERSION |
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | 当前分页大小发生改变时的回调函数 |  |
 

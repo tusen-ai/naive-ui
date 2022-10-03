@@ -8,6 +8,7 @@ import { paginationLight } from '../../pagination/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { popoverLight } from '../../popover/styles'
 import { emptyLight } from '../../empty/styles'
+import { dropdownLight } from '../../dropdown/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
@@ -99,7 +100,8 @@ const dataTableLight = createTheme({
     Scrollbar: scrollbarLight,
     Empty: emptyLight,
     Popover: popoverLight,
-    Ellipsis: ellipsisLight
+    Ellipsis: ellipsisLight,
+    Dropdown: dropdownLight
   },
   self
 })

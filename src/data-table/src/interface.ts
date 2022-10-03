@@ -1,13 +1,168 @@
 import { TreeNode } from 'treemate'
-import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
+import {
+  CSSProperties,
+  Ref,
+  HTMLAttributes,
+  Slots,
+  PropType,
+  ExtractPropTypes,
+  VNodeChild
+} from 'vue'
 import type { ScrollTo } from '../../scrollbar/src/Scrollbar'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import type { NLocale } from '../../locales'
-import type { MergedTheme } from '../../_mixins'
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
+import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
-import type { DataTableSelectionOption } from './TableParts/SelectionMenu'
+
+export const dataTableProps = {
+  ...(useTheme.props as ThemeProps<DataTableTheme>),
+  onResizeColumn: Function as PropType<
+  (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
+  ) => void
+  >,
+  pagination: {
+    type: [Object, Boolean] as PropType<false | PaginationProps>,
+    default: false
+  },
+  paginateSinglePage: {
+    type: Boolean,
+    default: true
+  },
+  minHeight: [Number, String] as PropType<string | number>,
+  maxHeight: [Number, String] as PropType<string | number>,
+  // Use any type as row data to make prop data acceptable
+  columns: {
+    type: Array as PropType<TableColumns<any>>,
+    default: () => []
+  },
+  rowClassName: [String, Function] as PropType<
+  string | CreateRowClassName<any>
+  >,
+  rowProps: Function as PropType<CreateRowProps<any>>,
+  rowKey: Function as PropType<CreateRowKey<any>>,
+  summary: [Function] as PropType<CreateSummary<any>>,
+  data: {
+    type: Array as PropType<RowData[]>,
+    default: () => []
+  },
+  loading: Boolean,
+  bordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  bottomBordered: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  striped: Boolean,
+  scrollX: [Number, String] as PropType<string | number>,
+  defaultCheckedRowKeys: {
+    type: Array as PropType<RowKey[]>,
+    default: () => []
+  },
+  checkedRowKeys: Array as PropType<RowKey[]>,
+  singleLine: {
+    type: Boolean,
+    default: true
+  },
+  singleColumn: Boolean,
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
+  remote: Boolean,
+  defaultExpandedRowKeys: {
+    type: Array as PropType<RowKey[]>,
+    default: []
+  },
+  defaultExpandAll: Boolean,
+  expandedRowKeys: Array as PropType<RowKey[]>,
+  stickyExpandedRows: Boolean,
+  virtualScroll: Boolean,
+  tableLayout: {
+    type: String as PropType<'auto' | 'fixed'>,
+    default: 'auto'
+  },
+  allowCheckingNotLoaded: Boolean,
+  cascade: {
+    type: Boolean,
+    default: true
+  },
+  childrenKey: {
+    type: String,
+    default: 'children'
+  },
+  indent: {
+    type: Number,
+    default: 16
+  },
+  flexHeight: Boolean,
+  summaryPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  },
+  paginationBehaviorOnFilter: {
+    type: String as PropType<'first' | 'current'>,
+    default: 'current'
+  },
+  renderCell: Function as PropType<
+  (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
+  >,
+  renderExpandIcon: Function as PropType<() => VNodeChild>,
+  onLoad: Function as PropType<DataTableOnLoad>,
+  'onUpdate:page': [Function, Array] as PropType<
+  PaginationProps['onUpdate:page']
+  >,
+  onUpdatePage: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
+  'onUpdate:pageSize': [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
+  onUpdatePageSize: [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
+  'onUpdate:sorter': [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
+  onUpdateSorter: [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
+  'onUpdate:filters': [Function, Array] as PropType<
+  MaybeArray<OnUpdateFilters>
+  >,
+  onUpdateFilters: [Function, Array] as PropType<MaybeArray<OnUpdateFilters>>,
+  'onUpdate:checkedRowKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys>
+  >,
+  onUpdateCheckedRowKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys>
+  >,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedRowKeys>
+  >,
+  onUpdateExpandedRowKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateExpandedRowKeys>
+  >,
+  onScroll: Function as PropType<(e: Event) => void>,
+  // deprecated
+  onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
+  onPageSizeChange: [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
+  onSorterChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateSorter> | undefined
+  >,
+  onFiltersChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFilters> | undefined
+  >,
+  onCheckedRowKeysChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys> | undefined
+  >
+} as const
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -63,6 +218,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   fixed?: 'left' | 'right'
   width?: number | string
   minWidth?: number | string
+  maxWidth?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
@@ -88,6 +244,7 @@ export type TableColumnGroup<T = InternalRowData> = {
   children: Array<TableBaseColumn<T>>
 
   // to suppress type error in table header
+  resizable?: boolean
   filterOptions?: never
 } & CommonColumnInfo<T>
 
@@ -103,6 +260,10 @@ export type TableBaseColumn<T = InternalRowData> = {
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
+
+  resizable?: boolean
+  minWidth?: string | number
+  maxWidth?: string | number
 
   filter?: 'default' | boolean | Filter<T>
   filterOptions?: FilterOption[]
@@ -132,6 +293,7 @@ export type TableSelectionColumn<T = InternalRowData> = {
 
   // to suppress type error in utils
   sorter?: never
+  resizable?: boolean
   filter?: never
   filterOptions?: never
   filterOptionValues?: never
@@ -167,6 +329,7 @@ export type DataTableSelectionOptions<T = InternalRowData> = Array<
 | { label: string, key: string | number, onSelect: (pageData: T[]) => void }
 >
 export interface DataTableInjection {
+  props: DataTableSetupProps
   slots: Slots
   indentRef: Ref<number>
   childTriggerColIndexRef: Ref<number>
@@ -223,14 +386,28 @@ export interface DataTableInjection {
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
+  summaryPlacementRef: Ref<'top' | 'bottom'>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
+  onResizeColumn: (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
+  ) => void
+  getResizableWidth: (key: ColumnKey) => number | undefined
+  clearResizableWidth: () => void
+  doUpdateResizableWidth: (column: TableColumn, width: number) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (rowKey: RowKey | RowKey[], single: boolean) => void
-  doUncheck: (rowKey: RowKey | RowKey[]) => void
+  doCheck: (
+    rowKey: RowKey | RowKey[],
+    single: boolean,
+    rowInfo: RowData
+  ) => void
+  doUncheck: (rowKey: RowKey | RowKey[], rowInfo: RowData) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void
@@ -342,3 +519,8 @@ export interface SummaryRowData {
 }
 
 export type DataTableOnLoad = (node: RowData) => Promise<void>
+
+export type DataTableSelectionOption = 'all' | 'none'
+
+export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
+export type DataTableSetupProps = ExtractPropTypes<typeof dataTableProps>

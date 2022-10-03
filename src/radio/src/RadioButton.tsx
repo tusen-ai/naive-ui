@@ -1,28 +1,23 @@
 import { h, defineComponent } from 'vue'
 import { ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
-import useRadio from './use-radio'
+import { setup, radioProps } from './use-radio'
 
-export const radioButtonProps = useRadio.props
-export type RadioButtonProps = ExtractPublicPropTypes<typeof useRadio.props>
+export const radioButtonProps = radioProps
+export type RadioButtonProps = ExtractPublicPropTypes<typeof radioProps>
 
 export default defineComponent({
   name: 'RadioButton',
-  props: useRadio.props,
-  setup (props) {
-    return useRadio(props)
-  },
+  props: radioProps,
+  setup,
   render () {
     const { mergedClsPrefix } = this
     return (
       <label
         class={[
           `${mergedClsPrefix}-radio-button`,
-          {
-            [`${mergedClsPrefix}-radio-button--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-radio-button--checked`]:
-              this.renderSafeChecked,
-            [`${mergedClsPrefix}-radio-button--focus`]: this.focus
-          }
+          this.mergedDisabled && `${mergedClsPrefix}-radio-button--disabled`,
+          this.renderSafeChecked && `${mergedClsPrefix}-radio-button--checked`,
+          this.focus && [`${mergedClsPrefix}-radio-button--focus`]
         ]}
       >
         <input

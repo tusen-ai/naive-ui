@@ -20,7 +20,8 @@ export const self = (vars: ThemeCommonVars) => {
     fontSize,
     textColor: textColor2,
     arrowColor: textColor2,
-    arrowColorDisabled: textColorDisabled
+    arrowColorDisabled: textColorDisabled,
+    itemMargin: '16px 0 0 0'
   }
 }
 

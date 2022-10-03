@@ -1,7 +1,8 @@
 import { createInjectionKey } from '../../_utils'
 import type {
   DialogApiInjection,
-  DialogProviderInjection
+  DialogProviderInjection,
+  DialogReactiveListInjection
 } from './DialogProvider'
 
 export const dialogProviderInjectionKey =
@@ -9,3 +10,6 @@ export const dialogProviderInjectionKey =
 
 export const dialogApiInjectionKey =
   createInjectionKey<DialogApiInjection>('n-dialog-api')
+
+export const dialogReactiveListInjectionKey =
+  createInjectionKey<DialogReactiveListInjection>('n-dialog-reactive-list')

@@ -43,16 +43,16 @@ rtl-debug.vue
 
 ### Collapse Slots
 
-| 名称    | 参数                                | 说明                 |
-| ------- | ----------------------------------- | -------------------- |
-| default | `()`                                | 折叠面板的内容       |
-| arrow   | `(options: { collapsed: boolean })` | 折叠面板的自定义图标 |
+| 名称    | 参数                              | 说明                 |
+| ------- | --------------------------------- | -------------------- |
+| default | `()`                              | 折叠面板的内容       |
+| arrow   | `(props: { collapsed: boolean })` | 折叠面板的自定义图标 |
 
 ### CollapseItem Slots
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `()` | 折叠面板节点的内容 |
-| header | `()` | 折叠面板节点头部的内容 |
-| header-extra | `()` | 折叠面板节点头部的额外内容 |
-| arrow | `(options: { collapsed: boolean })` | 折叠面板节点头部的自定义图标 |
+| header | `(props: { collapsed: boolean })` | 折叠面板节点头部的内容 |
+| header-extra | `(props: { collapsed: boolean })` | 折叠面板节点头部的额外内容 |
+| arrow | `(props: { collapsed: boolean })` | 折叠面板节点头部的自定义图标 |

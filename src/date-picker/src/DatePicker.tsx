@@ -902,7 +902,14 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('date-picker', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'date-picker',
+        computed(() => {
+          return props.type
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
 
     return {
@@ -980,21 +987,25 @@ export default defineComponent({
     const renderPanel = (): VNode => {
       const { type } = this
       return type === 'datetime' ? (
-        <DatetimePanel {...commonPanelProps} />
+        <DatetimePanel {...commonPanelProps}>{$slots}</DatetimePanel>
       ) : type === 'daterange' ? (
         <DaterangePanel
           {...commonPanelProps}
           defaultCalendarStartTime={this.defaultCalendarStartTime}
           defaultCalendarEndTime={this.defaultCalendarEndTime}
           bindCalendarMonths={this.bindCalendarMonths}
-        />
+        >
+          {$slots}
+        </DaterangePanel>
       ) : type === 'datetimerange' ? (
         <DatetimerangePanel
           {...commonPanelProps}
           defaultCalendarStartTime={this.defaultCalendarStartTime}
           defaultCalendarEndTime={this.defaultCalendarEndTime}
           bindCalendarMonths={this.bindCalendarMonths}
-        />
+        >
+          {$slots}
+        </DatetimerangePanel>
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
       ) : type === 'monthrange' ||
@@ -1002,7 +1013,7 @@ export default defineComponent({
         type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps} />
+        <DatePanel {...commonPanelProps}>{$slots}</DatePanel>
           )
     }
     if (this.panel) {

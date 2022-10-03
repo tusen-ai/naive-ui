@@ -203,7 +203,8 @@ export default defineComponent({
           arrowColor,
           fontSize,
           titleFontSize,
-          arrowColorDisabled
+          arrowColorDisabled,
+          itemMargin
         }
       } = themeRef.value
       return {
@@ -216,7 +217,8 @@ export default defineComponent({
         '--n-title-text-color-disabled': titleTextColorDisabled,
         '--n-title-font-weight': titleFontWeight,
         '--n-arrow-color': arrowColor,
-        '--n-arrow-color-disabled': arrowColorDisabled
+        '--n-arrow-color-disabled': arrowColorDisabled,
+        '--n-item-margin': itemMargin
       }
     })
     const themeClassHandle = inlineThemeDisabled

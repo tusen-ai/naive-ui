@@ -10,6 +10,7 @@ export interface MenuOptionSharedPart {
   children?: Array<MenuOption | MenuGroupOption | MenuDividerOption>
   extra?: string | (() => VNodeChild)
   props?: HTMLAttributes
+  show?: boolean
   [key: string]: unknown
   /** @deprecated */
   titleExtra?: string | (() => VNodeChild)

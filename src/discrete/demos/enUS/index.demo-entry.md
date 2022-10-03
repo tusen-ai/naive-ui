@@ -34,6 +34,8 @@ function createDiscreteApi(
   dialog: DialogApi
   notification: NotificationApi
   loadingBar: LoadingBarApi
+  // Vue app
+  app: App
   unmount: () => void
 } {}
 ```

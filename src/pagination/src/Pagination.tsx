@@ -33,6 +33,7 @@ import { createPageItemsInfo } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import {
+  useAdjustedTo,
   call,
   resolveSlot,
   warn,
@@ -95,6 +96,7 @@ export const paginationProps = {
     type: Array as PropType<Array<'pages' | 'size-picker' | 'quick-jumper'>>,
     default: ['pages', 'size-picker', 'quick-jumper']
   },
+  to: useAdjustedTo.propTo,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -198,10 +200,12 @@ export default defineComponent({
     const showFastBackwardMenuRef = ref(false)
 
     const handleFastForwardMouseenter = (): void => {
+      if (props.disabled) return
       fastForwardActiveRef.value = true
       disableTransitionOneTick()
     }
     const handleFastForwardMouseleave = (): void => {
+      if (props.disabled) return
       fastForwardActiveRef.value = false
       disableTransitionOneTick()
     }
@@ -767,7 +771,9 @@ export default defineComponent({
                             : pageItem.type
                         return (
                           <NPopselect
+                            to={this.to}
                             key={key}
+                            disabled={disabled}
                             trigger="hover"
                             virtualScroll
                             style={{ width: '60px' }}
@@ -855,9 +861,10 @@ export default defineComponent({
             case 'size-picker': {
               return !simple && showSizePicker ? (
                 <NSelect
+                  to={this.to}
+                  placeholder=""
                   internalShowCheckmark={false}
                   size={selectSize}
-                  placeholder=""
                   options={pageSizeOptions}
                   value={mergedPageSize}
                   disabled={disabled}

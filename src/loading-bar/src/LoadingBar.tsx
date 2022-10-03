@@ -7,7 +7,9 @@ import {
   withDirectives,
   vShow,
   ref,
-  nextTick
+  nextTick,
+  PropType,
+  CSSProperties
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'
@@ -23,7 +25,10 @@ function createClassName (
 
 export default defineComponent({
   name: 'LoadingBar',
-  setup (props) {
+  props: {
+    containerStyle: [String, Object] as PropType<string | CSSProperties>
+  },
+  setup () {
     const { inlineThemeDisabled } = useConfig()
     const {
       props: providerProps,
@@ -176,6 +181,7 @@ export default defineComponent({
                   `${mergedClsPrefix}-loading-bar-container`,
                   this.themeClass
                 ]}
+                style={this.containerStyle}
               >
                 <div
                   ref="loadingBarRef"

@@ -17,4 +17,8 @@ export type {
 export type { LayoutHeaderProps } from './src/LayoutHeader'
 export type { LayoutFooterProps } from './src/LayoutFooter'
 export type { LayoutSiderProps } from './src/LayoutSider'
-export type { LayoutInst, LayoutSiderInst } from './src/interface'
+export type {
+  LayoutInst,
+  LayoutInst as LayoutContentInst,
+  LayoutSiderInst
+} from './src/interface'

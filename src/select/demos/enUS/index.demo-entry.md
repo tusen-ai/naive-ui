@@ -46,6 +46,7 @@ custom-field.vue
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
+| ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | NEXT_VERSION |
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
@@ -86,7 +87,7 @@ custom-field.vue
 | class | `string` | Customize the option's class. |
 | disabled | `boolean` | Whether to disable the option. |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using the `render` function, the default filter will filter the option. |
-| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
 | style | `string` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
@@ -97,7 +98,7 @@ custom-field.vue
 | children | `Array<SelectOption>` | Child select options. |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group. |
 | key | `string \| number` | Should be unique for each option. |
-| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
 | type | `'group'` | Type of the group option. |
 
 ### Select Slots

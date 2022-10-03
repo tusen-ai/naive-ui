@@ -20,7 +20,12 @@ import {
 import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, color2Class, resolveWrappedSlot } from '../../_utils'
+import {
+  createKey,
+  color2Class,
+  resolveWrappedSlot,
+  resolveSlot
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { avatarLight } from '../styles'
 import type { AvatarTheme } from '../styles'
@@ -49,6 +54,9 @@ export const avatarProps = {
   fallbackSrc: String,
   intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   lazy: Boolean,
+  onLoad: Function as PropType<(e: Event) => void>,
+  renderPlaceholder: Function as PropType<() => VNodeChild>,
+  renderFallback: Function as PropType<() => VNodeChild>,
   /** @deprecated */
   color: String
 } as const
@@ -251,9 +259,17 @@ export default defineComponent({
     onRender?.()
     let img: VNodeChild
     const placeholderNode =
-      !loaded && !hasLoadError && this.$slots.placeholder?.()
+      !loaded &&
+      !hasLoadError &&
+      (this.renderPlaceholder
+        ? this.renderPlaceholder()
+        : this.$slots.placeholder?.())
     if (this.hasLoadError) {
-      img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+      img = this.renderFallback
+        ? this.renderFallback()
+        : resolveSlot($slots.fallback, () => [
+            <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+        ])
     } else {
       img = resolveWrappedSlot($slots.default, (children) => {
         if (children) {

@@ -4,186 +4,28 @@ import {
   defineComponent,
   ref,
   provide,
-  PropType,
-  ExtractPropTypes,
   toRef,
   CSSProperties,
   Transition,
   watchEffect,
-  onDeactivated,
-  VNodeChild
+  onDeactivated
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import type { PaginationProps } from '../../pagination'
 import { createKey, warnOnce } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dataTableLight } from '../styles'
-import type { DataTableTheme } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
-import type {
-  CreateRowClassName,
-  CreateRowKey,
-  OnUpdateCheckedRowKeys,
-  OnUpdateSorter,
-  RowKey,
-  TableColumns,
-  RowData,
-  OnUpdateFilters,
-  MainTableRef,
-  DataTableInst,
-  OnUpdateExpandedRowKeys,
-  CreateSummary,
-  CreateRowProps,
-  DataTableOnLoad,
-  TableBaseColumn
-} from './interface'
-import { dataTableInjectionKey } from './interface'
+import { useResizable } from './use-resizable'
+import type { RowKey, MainTableRef, DataTableInst } from './interface'
+import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
 import style from './styles/index.cssr'
-
-export const dataTableProps = {
-  ...(useTheme.props as ThemeProps<DataTableTheme>),
-  pagination: {
-    type: [Object, Boolean] as PropType<false | PaginationProps>,
-    default: false
-  },
-  paginateSinglePage: {
-    type: Boolean,
-    default: true
-  },
-  minHeight: [Number, String] as PropType<string | number>,
-  maxHeight: [Number, String] as PropType<string | number>,
-  // Use any type as row data to make prop data acceptable
-  columns: {
-    type: Array as PropType<TableColumns<any>>,
-    default: () => []
-  },
-  rowClassName: [String, Function] as PropType<
-  string | CreateRowClassName<any>
-  >,
-  rowProps: Function as PropType<CreateRowProps<any>>,
-  rowKey: Function as PropType<CreateRowKey<any>>,
-  summary: [Function] as PropType<CreateSummary<any>>,
-  data: {
-    type: Array as PropType<RowData[]>,
-    default: () => []
-  },
-  loading: Boolean,
-  bordered: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  bottomBordered: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  striped: Boolean,
-  scrollX: [Number, String] as PropType<string | number>,
-  defaultCheckedRowKeys: {
-    type: Array as PropType<RowKey[]>,
-    default: () => []
-  },
-  checkedRowKeys: Array as PropType<RowKey[]>,
-  singleLine: {
-    type: Boolean,
-    default: true
-  },
-  singleColumn: Boolean,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
-  remote: Boolean,
-  defaultExpandedRowKeys: {
-    type: Array as PropType<RowKey[]>,
-    default: []
-  },
-  defaultExpandAll: Boolean,
-  expandedRowKeys: Array as PropType<RowKey[]>,
-  stickyExpandedRows: Boolean,
-  virtualScroll: Boolean,
-  tableLayout: {
-    type: String as PropType<'auto' | 'fixed'>,
-    default: 'auto'
-  },
-  allowCheckingNotLoaded: Boolean,
-  cascade: {
-    type: Boolean,
-    default: true
-  },
-  childrenKey: {
-    type: String,
-    default: 'children'
-  },
-  indent: {
-    type: Number,
-    default: 16
-  },
-  flexHeight: Boolean,
-  paginationBehaviorOnFilter: {
-    type: String as PropType<'first' | 'current'>,
-    default: 'current'
-  },
-  renderCell: Function as PropType<
-  (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
-  >,
-  renderExpandIcon: Function as PropType<() => VNodeChild>,
-  onLoad: Function as PropType<DataTableOnLoad>,
-  'onUpdate:page': [Function, Array] as PropType<
-  PaginationProps['onUpdate:page']
-  >,
-  onUpdatePage: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
-  'onUpdate:pageSize': [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
-  >,
-  onUpdatePageSize: [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
-  >,
-  'onUpdate:sorter': [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
-  onUpdateSorter: [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
-  'onUpdate:filters': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFilters>
-  >,
-  onUpdateFilters: [Function, Array] as PropType<MaybeArray<OnUpdateFilters>>,
-  'onUpdate:checkedRowKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys>
-  >,
-  onUpdateCheckedRowKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys>
-  >,
-  'onUpdate:expandedRowKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedRowKeys>
-  >,
-  onUpdateExpandedRowKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedRowKeys>
-  >,
-  onScroll: Function as PropType<(e: Event) => void>,
-  // deprecated
-  onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
-  onPageSizeChange: [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
-  >,
-  onSorterChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateSorter> | undefined
-  >,
-  onFiltersChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFilters> | undefined
-  >,
-  onCheckedRowKeysChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys> | undefined
-  >
-} as const
-
-export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
-export type DataTableSetupProps = ExtractPropTypes<typeof dataTableProps>
 
 export default defineComponent({
   name: 'DataTable',
@@ -249,8 +91,10 @@ export default defineComponent({
       scrollPartRef.value = 'body'
     })
     const mainTableInstRef = ref<MainTableRef | null>(null)
+    const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth } =
+      useResizable()
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
-      useGroupHeader(props)
+      useGroupHeader(props, getResizableWidth)
     const {
       treeMateRef,
       mergedCurrentPageRef,
@@ -264,6 +108,7 @@ export default defineComponent({
       childTriggerColIndexRef,
       doUpdatePage,
       doUpdateFilters,
+      onResizeColumn,
       deriveNextSorter,
       filter,
       filters,
@@ -330,6 +175,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      props,
       renderExpandIconRef: toRef(props, 'renderExpandIcon'),
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
@@ -395,9 +241,14 @@ export default defineComponent({
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
+      summaryPlacementRef: toRef(props, 'summaryPlacement'),
       syncScrollState,
       doUpdatePage,
       doUpdateFilters,
+      getResizableWidth,
+      onResizeColumn,
+      clearResizableWidth,
+      doUpdateResizableWidth,
       deriveNextSorter,
       doCheck,
       doUncheck,
@@ -455,6 +306,8 @@ export default defineComponent({
           boxShadowAfter,
           boxShadowBefore,
           sorterSize,
+          resizableContainerSize,
+          resizableSize,
           loadingColor,
           loadingSize,
           opacityLoading,
@@ -500,6 +353,8 @@ export default defineComponent({
         '--n-box-shadow-before': boxShadowBefore,
         '--n-box-shadow-after': boxShadowAfter,
         '--n-sorter-size': sorterSize,
+        '--n-resizable-container-size': resizableContainerSize,
+        '--n-resizable-size': resizableSize,
         '--n-loading-size': loadingSize,
         '--n-loading-color': loadingColor,
         '--n-opacity-loading': opacityLoading,

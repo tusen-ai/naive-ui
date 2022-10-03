@@ -62,7 +62,7 @@ export default defineComponent({
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const now = Date.now()
     // ts => timestamp
-    const monthTsRef = ref(startOfMonth(now).valueOf())
+    const monthTsRef = ref(startOfMonth(props.defaultValue ?? now).valueOf())
     const uncontrolledValueRef = ref<number | null>(props.defaultValue || null)
     const mergedValueRef = useMergedState(
       toRef(props, 'value'),

@@ -41,6 +41,7 @@ const self = (vars: ThemeCommonVars) => {
     boxShadowDisabled: `inset 0 0 0 1px ${borderColor}`,
     color: baseColor,
     colorDisabled: inputColorDisabled,
+    colorActive: '#0000',
     textColor: textColor2,
     textColorDisabled,
     dotColorActive: primaryColor,

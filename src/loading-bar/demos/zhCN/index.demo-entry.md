@@ -38,15 +38,18 @@ export default defineComponent({
 
 ```demo
 basic.vue
+container.vue
 ```
 
 ## API
 
 ### LoadingBarProvider Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| container-style | `string \| object` | `undefined` | 加载条容器的样式 | NEXT_VERSION |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |  |
+| to | `string \| HTMLElement \| false` | `undefined` | 加载条的挂载位置 | NEXT_VERSION |
 
 ### loadingBar Injection Methods
 

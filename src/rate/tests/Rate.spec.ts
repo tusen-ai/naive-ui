@@ -117,4 +117,21 @@ describe('n-rate', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `clearable` prop', async () => {
+    const wrapper = mount(NRate)
+    await wrapper.setProps({ clearable: true })
+
+    const testNumber = 2
+
+    await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
+    expect(wrapper.findAll('.n-rate__item--active').length).toEqual(
+      testNumber + 1
+    )
+
+    await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
+    expect(wrapper.findAll('.n-rate__item--active').length).toEqual(0)
+
+    wrapper.unmount()
+  })
 })

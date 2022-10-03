@@ -15,13 +15,18 @@ import { useClicked, useClickPosition } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import { NDialogEnvironment, exposedDialogEnvProps } from './DialogEnvironment'
-import { dialogApiInjectionKey, dialogProviderInjectionKey } from './context'
+import {
+  dialogApiInjectionKey,
+  dialogProviderInjectionKey,
+  dialogReactiveListInjectionKey
+} from './context'
 
 export type DialogOptions = Mutable<
 Omit<
 Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
 'internalStyle'
 > & {
+  class?: any
   style?: string | CSSProperties
 }
 >
@@ -35,6 +40,7 @@ export type DialogReactive = {
 // If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
 // Fxxx
 type TypeSafeDialogReactive = DialogReactive & {
+  class?: any
   style?: any
 }
 
@@ -51,6 +57,8 @@ export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
   clickPositionRef: Ref<{ x: number, y: number } | null>
 }
+
+export type DialogReactiveListInjection = Ref<DialogReactive[]>
 
 interface DialogInst {
   hide: () => void
@@ -120,6 +128,7 @@ export const NDialogProvider = defineComponent({
       clickedRef: useClicked(64),
       clickPositionRef: useClickPosition()
     })
+    provide(dialogReactiveListInjectionKey, dialogListRef)
     return {
       ...api,
       dialogList: dialogListRef,

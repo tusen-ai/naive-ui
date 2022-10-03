@@ -45,6 +45,7 @@ page-size-option.vue
 | simple | `boolean` | `false` | Whether to use simple mode. | 2.32.2 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |
 | show-size-picker | `boolean` | `false` | Whether to show the selector of the number of items per page. |  |
+| to | `string \| HTMLElement \| false` | `body` | Container node of the pop menu. `false` will keep it not detached. | NEXT_VERSION |
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function when the current page size changes. |  |
 

@@ -1,7 +1,8 @@
 import { computed, ref, ComputedRef } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
-import type { DataTableSetupProps } from './DataTable'
+import type { PaginationProps } from '../../pagination/src/Pagination'
+import { call, warn } from '../../_utils'
 import type {
   ColumnKey,
   Filter,
@@ -12,14 +13,13 @@ import type {
   InternalRowData,
   TmNode,
   TableExpandColumn,
-  RowKey
+  RowKey,
+  DataTableSetupProps
 } from './interface'
 import { createShallowClonedObject } from './utils'
-import type { PaginationProps } from '../../pagination/src/Pagination'
-import { call, warn } from '../../_utils'
 import { useSorter } from './use-sorter'
-// useTableData combines filter, sorter and pagination
 
+// useTableData combines filter, sorter and pagination
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useTableData (
   props: DataTableSetupProps,
@@ -351,6 +351,16 @@ export function useTableData (
     if (onFiltersChange) call(onFiltersChange, filters, sourceColumn)
     uncontrolledFilterStateRef.value = filters
   }
+
+  function onResizeColumn (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
+  ): void {
+    props.onResizeColumn?.(resizedWidth, limitedWidth, column, getColumnWidth)
+  }
+
   function page (page: number): void {
     doUpdatePage(page)
   }
@@ -387,6 +397,7 @@ export function useTableData (
     deriveNextSorter,
     doUpdatePageSize,
     doUpdatePage,
+    onResizeColumn,
     // exported methods
     filter,
     filters,
