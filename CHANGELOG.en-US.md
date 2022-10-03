@@ -29,6 +29,7 @@
 - `n-date-picker` adds `panel-next-fast` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
 - `n-date-picker` adds `panel-prev` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
 - `n-date-picker` adds `panel-prev-fast` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
+- `n-pagination` adds `to` prop, closes [#3773](https://github.com/tusen-ai/naive-ui/issues/3773).
 
 ## 2.33.3
 

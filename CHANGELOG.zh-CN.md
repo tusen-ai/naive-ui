@@ -30,6 +30,7 @@
 - `n-date-picker` 新增 `panel-next-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-prev-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-pagination` 新增 `to` 属性，关闭 [#3773](https://github.com/tusen-ai/naive-ui/issues/3773)
 
 ## 2.33.3
 
