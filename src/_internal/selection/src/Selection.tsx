@@ -40,7 +40,7 @@ import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 
 export interface InternalSelectionInst {
-  isCompositing: boolean
+  isComposing: boolean
   focus: () => void
   focusInput: () => void
   blur: () => void
@@ -108,6 +108,7 @@ export default defineComponent({
     renderLabel: Function as PropType<RenderLabel>,
     status: String as PropType<FormValidationStatus>,
     inlineThemeDisabled: Boolean,
+    ignoreComposition: { type: Boolean, default: true },
     onResize: Function as PropType<() => void>
   },
   setup (props) {
@@ -246,7 +247,7 @@ export default defineComponent({
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
-      if (e.key === 'Backspace' && !isCompositingRef.value) {
+      if (e.key === 'Backspace' && !isComposingRef.value) {
         if (!props.pattern.length) {
           const { selectedOptions } = props
           if (selectedOptions?.length) {
@@ -255,7 +256,7 @@ export default defineComponent({
         }
       }
     }
-    const isCompositingRef = ref(false)
+    const isComposingRef = ref(false)
     // the composition end is later than its input so we can cached the event
     // and return the input event
     let cachedInputEvent: InputEvent | null = null
@@ -267,18 +268,24 @@ export default defineComponent({
         patternInputMirrorEl.textContent = inputText
         syncMirrorWidth()
       }
-      if (!isCompositingRef.value) {
-        doPatternInput(e)
+      if (props.ignoreComposition) {
+        if (!isComposingRef.value) {
+          doPatternInput(e)
+        } else {
+          cachedInputEvent = e
+        }
       } else {
-        cachedInputEvent = e
+        doPatternInput(e)
       }
     }
     function handleCompositionStart (): void {
-      isCompositingRef.value = true
+      isComposingRef.value = true
     }
     function handleCompositionEnd (): void {
-      isCompositingRef.value = false
-      doPatternInput(cachedInputEvent!)
+      isComposingRef.value = false
+      if (props.ignoreComposition) {
+        doPatternInput(cachedInputEvent!)
+      }
       cachedInputEvent = null
     }
     function handlePatternInputFocus (e: FocusEvent): void {
@@ -346,7 +353,9 @@ export default defineComponent({
       if (props.disabled || props.active) return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
-        showTagsPopoverRef.value = true
+        if (selectedRef.value) {
+          showTagsPopoverRef.value = true
+        }
       }, 100)
     }
     function handleMouseLeaveCounter (): void {
@@ -358,6 +367,11 @@ export default defineComponent({
         showTagsPopoverRef.value = false
       }
     }
+    watch(selectedRef, (value) => {
+      if (!value) {
+        showTagsPopoverRef.value = false
+      }
+    })
     onMounted(() => {
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
@@ -494,7 +508,7 @@ export default defineComponent({
       label: labelRef,
       selected: selectedRef,
       showTagsPanel: showTagsPopoverRef,
-      isCompositing: isCompositingRef,
+      isComposing: isComposingRef,
       // dom ref
       counterRef,
       counterWrapperRef,
@@ -591,6 +605,7 @@ export default defineComponent({
               closable={!option.disabled}
               disabled={disabled}
               onClose={() => this.handleDeleteOption(option)}
+              internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >
               {{
@@ -742,7 +757,7 @@ export default defineComponent({
       const showPlaceholder = this.selected
         ? false
         : this.active
-          ? !this.pattern && !this.isCompositing
+          ? !this.pattern && !this.isComposing
           : true
       const placeholder = showPlaceholder ? (
         <div
@@ -793,7 +808,7 @@ export default defineComponent({
       )
     } else {
       if (filterable) {
-        const hasInput = this.pattern || this.isCompositing
+        const hasInput = this.pattern || this.isComposing
         const showPlaceholder = this.active ? !hasInput : !this.selected
         const showSelectedLabel = this.active ? false : this.selected
         body = (

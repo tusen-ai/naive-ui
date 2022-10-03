@@ -56,6 +56,7 @@ create-debug.vue
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
 | filterable | `boolean` | `false` | 是否可以过滤 |  |
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
+| ignore-composition | `boolean` | `true` | 忽略输入法 Composition 状态，默认情况下 `filter` 在输入法输入的过程中不会触发 | NEXT_VERSION |
 | input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |

@@ -30,6 +30,7 @@ merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
+column-draggable.vue
 select.vue
 select-single.vue
 custom-select.vue
@@ -103,7 +104,8 @@ render-cell.vue
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
-| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[]) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5 |
+| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn, getColumnWidth: (key: ColumnKey) => number \| undefined) => void) => void` | `undefined` | The callback function triggered when the column width is dragged. | NEXT_VERSION |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], row: object, isCheck: boolean) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |
@@ -131,9 +133,11 @@ render-cell.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters). |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
+| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | NEXT_VERSION |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
 | minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
+| maxWidth | `number \| string` | `undefined` | Max width of the column. Only works when `resizable` is `true`. | NEXT_VERSION |
 | multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |

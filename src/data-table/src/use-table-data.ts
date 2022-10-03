@@ -351,6 +351,16 @@ export function useTableData (
     if (onFiltersChange) call(onFiltersChange, filters, sourceColumn)
     uncontrolledFilterStateRef.value = filters
   }
+
+  function onResizeColumn (
+    resizedWidth: number,
+    limitedWidth: number,
+    column: TableBaseColumn,
+    getColumnWidth: (key: ColumnKey) => number | undefined
+  ): void {
+    props.onResizeColumn?.(resizedWidth, limitedWidth, column, getColumnWidth)
+  }
+
   function page (page: number): void {
     doUpdatePage(page)
   }
@@ -387,6 +397,7 @@ export function useTableData (
     deriveNextSorter,
     doUpdatePageSize,
     doUpdatePage,
+    onResizeColumn,
     // exported methods
     filter,
     filters,

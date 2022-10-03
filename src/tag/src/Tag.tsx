@@ -7,19 +7,20 @@ import {
   ref,
   Ref,
   provide,
-  toRef
+  toRef,
+  watchEffect
 } from 'vue'
 import { useRtl } from '../../_mixins/use-rtl'
 import { NBaseClose } from '../../_internal/close'
 import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  warn,
   createKey,
   call,
   createInjectionKey,
   color2Class,
-  resolveWrappedSlot
+  resolveWrappedSlot,
+  warnOnce
 } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tagLight } from '../styles'
@@ -55,20 +56,12 @@ export const tagProps = {
     type: Boolean,
     default: true
   },
+  internalCloseIsButtonTag: {
+    type: Boolean,
+    default: true
+  },
   // deprecated
-  onCheckedChange: {
-    type: Function as PropType<(checked: boolean) => void>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'tag',
-          '`on-checked-change` is deprecated, please use `on-update:checked` instead'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onCheckedChange: Function as PropType<(checked: boolean) => void>
 }
 
 interface TagInjection {
@@ -83,6 +76,16 @@ export default defineComponent({
   name: 'Tag',
   props: tagProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onCheckedChange !== undefined) {
+          warnOnce(
+            'tag',
+            '`on-checked-change` is deprecated, please use `on-update:checked` instead'
+          )
+        }
+      })
+    }
     const contentRef = ref<HTMLElement | null>(null)
     const {
       mergedBorderedRef,
@@ -299,6 +302,7 @@ export default defineComponent({
             onClick={this.handleCloseClick}
             focusable={this.internalCloseFocusable}
             round={round}
+            isButtonTag={this.internalCloseIsButtonTag}
             absolute
           />
         ) : null}

@@ -2,8 +2,30 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-timeline-item` 的 `title` 的 `margin-bottom` 无法通过主题变量设置，关闭 [#3722](https://github.com/tusen-ai/naive-ui/issues/3722)
+- 修复 `n-timeline-item` 的 `meta` 在水平垂直嵌套时 `margin-bottom` 被覆盖
+- 修复 `n-tree-select` 在放置于 `label` 标签内时点击会删除掉第一个选中的选项，关闭 [#3715](https://github.com/tusen-ai/naive-ui/issues/3715)
+- 修复 `n-popover` 在已经弹出的状态下 `disabled` 被置为 `true`，之后又被置为 `false` 时，错误地重新弹出的行为
+- 修复 `n-select` 在 `maxTagCount="responsive"` 的情况下，在弹层删除掉所有已选中项后，弹层不会消失，关闭 [#3801](https://github.com/tusen-ai/naive-ui/issues/3801)
+- 修复 `n-upload` 在 Firefox 浏览器可能只能选择目录，关闭 [#3798](https://github.com/tusen-ai/naive-ui/issues/3798)
+- 移除 `package.json` 中的 `exports` 字段，因为其兼容性还比较差，关闭 [#3786](https://github.com/tusen-ai/naive-ui/issues/3786)
+
 ### Feats
 
+- `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
+- `n-loading-bar-provider` 新增 `container-style` 属性
+- `n-loading-bar-provider` 新增 `to` 属性，关闭 [#3724](https://github.com/tusen-ai/naive-ui/issues/3724)
+- `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态, 关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
+- `createDiscreteApi` 会返回 Vue app
+- 导出 `LayoutContentInst` 类型，关闭 [#3743](https://github.com/tusen-ai/naive-ui/issues/3743)
+- 导出 `CarouselInst` 类型，关闭 [#3742](https://github.com/tusen-ai/naive-ui/issues/3742)
+- `n-collapse` 新增 `itemMargin` 主题变量，关闭 [#3788](https://github.com/tusen-ai/naive-ui/issues/3788)
+- `n-select` 新增 `ignore-composition` 属性，关闭 [#3789](https://github.com/tusen-ai/naive-ui/issues/3789)
+- `n-card` 导出 `CardSegmented` 类型，关闭 [#3775](https://github.com/tusen-ai/naive-ui/issues/3775)
+- `n-tree` 新增 `animated` 属性，关闭 [#3784](https://github.com/tusen-ai/naive-ui/issues/3784)
 - `n-date-picker` 新增 `panel-next` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-next-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
@@ -23,6 +45,9 @@
 ### Performance
 
 - 修复 `n-menu` 在 `value` 改变时会引发菜单项无用的渲染，关闭 [#3670](https://github.com/tusen-ai/naive-ui/issues/3670)
+
+### Fixes
+
 - 修复 `n-date-picker` 在 `inline-theme-disabled` 模式下样式不正常，关闭 [#3655](https://github.com/tusen-ai/naive-ui/issues/3655)
 - 修复 `n-data-table` 无法设定 `n-dropdown` 的 `theme-overrides`，关闭 [#3613](https://github.com/tusen-ai/naive-ui/issues/3613)
 - 修复 `n-carousel` 在设定了 `transform: scale` 后显示不正常，关闭 [#3684](https://github.com/tusen-ai/naive-ui/issues/3684)

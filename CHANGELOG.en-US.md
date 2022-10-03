@@ -2,8 +2,29 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-timeline-item`'s `title`'s `margin-bottom` can't be set by theme variable, closes [#3722](https://github.com/tusen-ai/naive-ui/issues/3722).
+- Fix `n-timeline-item`'s `meta` part's `margin-bottom` is overrided when nested in horizontal and vertical mode.
+- Fix `n-tree-select` would remove selected first option if it's clicked when placed in `label` tag, closes [#3715](https://github.com/tusen-ai/naive-ui/issues/3715).
+- Fix `n-popover` will show after `disabled` is set to `true` then `false` if it's shown at first.
+- Fix `n-select`'s overflow popover won't hide after removing all options in it when `maxTagCount="responsive"`, closes [#3801](https://github.com/tusen-ai/naive-ui/issues/3801).
+- Fix `n-upload` may only allow selecting directory in Firefox, closes [#3798](https://github.com/tusen-ai/naive-ui/issues/3798).
+- Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
+- `n-tree` adds `animated` prop, closes [#3784](https://github.com/tusen-ai/naive-ui/issues/3784).
+
 ### Feats
 
+- `n-collapse-item`'s `header-extra` & `header` slots supports `collapsed` param, closes [#3723](https://github.com/tusen-ai/naive-ui/issues/3723).
+- `n-loading-bar-provider` adds `to` prop, closes [#3724](https://github.com/tusen-ai/naive-ui/issues/3724).
+- `n-data-table`'s `on-update:checked-row-keys` will pass current row data and state, closes [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` column adds `resizable` prop, closes [#3165](https://github.com/TuSimple/naive-ui/issues/3165).
+- `createDiscreteApi` contains Vue app in returned value.
+- Export `LayoutContentInst` type, closes [#3743](https://github.com/tusen-ai/naive-ui/issues/3743).
+- Export `CarouselInst` type, closes [#3742](https://github.com/tusen-ai/naive-ui/issues/3742).
+- `n-collapse` adds `itemMargin` theme variable, closes [#3788](https://github.com/tusen-ai/naive-ui/issues/3788).
+- `n-select` adds `ignore-composition` prop, closes [#3789](https://github.com/tusen-ai/naive-ui/issues/3789).
+- `n-card` exports `CardSegmented` type, closes [#3775](https://github.com/tusen-ai/naive-ui/issues/3775).
 - `n-date-picker` adds `panel-next` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
 - `n-date-picker` adds `panel-next-fast` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
 - `n-date-picker` adds `panel-prev` slot, closes [#3570](https://github.com/tusen-ai/naive-ui/issues/3570).
@@ -23,6 +44,9 @@
 ### Performance
 
 - Fix `n-menu`'s `value` will cause useless rendering of menu item, closes [#3670](https://github.com/tusen-ai/naive-ui/issues/3670).
+
+### Fixes
+
 - Fix `n-date-picker`'s style is unexpected in `inline-theme-disabled` mode, closes [#3655](https://github.com/tusen-ai/naive-ui/issues/3655).
 - Fix `n-data-table` can't set `n-dropdown`'s `theme-overrides`, closes [#3613](https://github.com/tusen-ai/naive-ui/issues/3613).
 - Fix `n-carousel` displays abnoramlly if `transform: scale` style is set, closes [#3684](https://github.com/tusen-ai/naive-ui/issues/3684).
