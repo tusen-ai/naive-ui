@@ -33,6 +33,7 @@
 - `n-avatar` adds `render-placeholder` prop, closes [#3751](https://github.com/tusen-ai/naive-ui/issues/3751).
 - `n-avatar` adds `render-fallback` prop, closes [#3751](https://github.com/tusen-ai/naive-ui/issues/3751).
 - `n-avatar` adds `fallback` slot
+- `n-transfer` adds `render-target-list` prop.
 
 ## 2.33.3
 

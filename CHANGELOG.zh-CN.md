@@ -34,6 +34,7 @@
 - `n-avatar` 新增 `render-placeholder` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
 - `n-avatar` 新增 `render-fallback` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
 - `n-avatar` 新增 `fallback` slot
+- `n-transfer` 新增 `render-target-list` 属性
 
 ## 2.33.3
 
