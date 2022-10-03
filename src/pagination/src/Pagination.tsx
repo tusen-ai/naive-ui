@@ -816,7 +816,7 @@ export default defineComponent({
                             }
                             onUpdateValue={this.handleMenuSelect}
                             scrollable
-                            internalShowCheckmark={false}
+                            showCheckmark={false}
                           >
                             {{ default: () => itemNode }}
                           </NPopselect>
@@ -863,7 +863,7 @@ export default defineComponent({
                 <NSelect
                   to={this.to}
                   placeholder=""
-                  internalShowCheckmark={false}
+                  showCheckmark={false}
                   size={selectSize}
                   options={pageSizeOptions}
                   value={mergedPageSize}

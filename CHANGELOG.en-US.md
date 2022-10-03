@@ -34,6 +34,7 @@
 - `n-avatar` adds `render-fallback` prop, closes [#3751](https://github.com/tusen-ai/naive-ui/issues/3751).
 - `n-avatar` adds `fallback` slot
 - `n-transfer` adds `render-target-list` prop.
+- `n-select` adds `show-checkmark` prop, closes [#3749](https://github.com/tusen-ai/naive-ui/issues/3749).
 
 ## 2.33.3
 

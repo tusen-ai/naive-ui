@@ -57,7 +57,7 @@ export const panelProps = {
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   renderLabel: Function as PropType<RenderLabel>,
-  internalShowCheckmark: {
+  showCheckmark: {
     type: Boolean,
     default: undefined
   },
@@ -226,7 +226,7 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
         onMousedown={this.handleMenuMousedown}
-        showCheckmark={this.internalShowCheckmark}
+        showCheckmark={this.showCheckmark}
       >
         {{
           action: () => this.$slots.action?.() || [],

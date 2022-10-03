@@ -196,7 +196,7 @@ export const selectProps = {
     default: true
   },
   status: String as PropType<FormValidationStatus>,
-  internalShowCheckmark: {
+  showCheckmark: {
     type: Boolean,
     default: true
   },
@@ -977,7 +977,7 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
-                              showCheckmark={this.internalShowCheckmark}
+                              showCheckmark={this.showCheckmark}
                               resetMenuOnOptionsChange={
                                 this.resetMenuOnOptionsChange
                               }

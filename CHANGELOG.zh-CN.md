@@ -35,6 +35,7 @@
 - `n-avatar` 新增 `render-fallback` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
 - `n-avatar` 新增 `fallback` slot
 - `n-transfer` 新增 `render-target-list` 属性
+- `n-select` 新增 `show-checkmark` 属性，关闭 [#3749](https://github.com/tusen-ai/naive-ui/issues/3749)
 
 ## 2.33.3
 
