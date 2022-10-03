@@ -9,6 +9,7 @@
 - Fix `n-tree-select` would remove selected first option if it's clicked when placed in `label` tag, closes [#3715](https://github.com/tusen-ai/naive-ui/issues/3715).
 - Fix `n-select`'s overflow popover won't hide after removing all options in it when `maxTagCount="responsive"`, closes [#3801](https://github.com/tusen-ai/naive-ui/issues/3801).
 - Fix `n-upload` may only allow selecting directory in Firefox, closes [#3798](https://github.com/tusen-ai/naive-ui/issues/3798).
+- Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
 
 ### Feats
 
