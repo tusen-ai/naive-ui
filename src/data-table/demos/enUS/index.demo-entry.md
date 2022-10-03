@@ -104,7 +104,7 @@ render-cell.vue
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
-| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn) => void` | `undefined` | The callback function triggered when the column width is dragged. | NEXT_VERSION |
+| on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn, getColumnWidth: (key: ColumnKey) => number \| undefined) => void) => void` | `undefined` | The callback function triggered when the column width is dragged. | NEXT_VERSION |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], row: object, isCheck: boolean) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
