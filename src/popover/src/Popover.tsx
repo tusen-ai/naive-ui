@@ -427,8 +427,7 @@ export default defineComponent({
       internalRenderBodyRef: toRef(props, 'internalRenderBody')
     })
     watchEffect(() => {
-      const disabled = getMergedDisabled()
-      if (mergedShowWithoutDisabledRef.value && disabled) {
+      if (mergedShowWithoutDisabledRef.value && getMergedDisabled()) {
         doUpdateShow(false)
       }
     })
