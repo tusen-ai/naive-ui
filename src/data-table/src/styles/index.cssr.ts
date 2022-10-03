@@ -266,11 +266,11 @@ export default c([
           color: 'var(--n-th-icon-color-active)'
         })
       ]),
-      cB('data-table-resizable', `
+      cB('data-table-resize-button', `
         width: var(--n-resizable-container-size);
         position: absolute;
         top: 0;
-        right: 0;
+        right: calc(var(--n-resizable-container-size) / 2);
         bottom: 0;
         cursor: col-resize;
         user-select: none;
@@ -280,19 +280,22 @@ export default c([
           height: 50%;
           position: absolute;
           top: 50%;
-          right: 0;
+          left: calc(var(--n-resizable-container-size) / 2);
           bottom: 0;
           background-color: var(--n-merged-border-color);
           transform: translateY(-50%);
+          transition: background-color .3s var(--n-bezier);
           z-index: 1;
           content: '';
         `),
-        c('&.is-active, &:hover', [
-          c('&::after', `
-            height: 100%;
+        cM('active', [
+          c('&::after', `          
             background-color: var(--n-th-icon-color-active);
           `)
-        ])
+        ]),
+        c('&:hover::after', `
+          background-color: var(--n-th-icon-color-active);
+        `)
       ]),
       cB('data-table-filter', `
         position: absolute;

@@ -163,6 +163,7 @@ export const selectProps = {
   >,
   inputProps: Object as PropType<InputHTMLAttributes>,
   nodeProps: Function as PropType<NodeProps>,
+  ignoreComposition: { type: Boolean, default: true },
   // for jsx
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -708,7 +709,7 @@ export default defineComponent({
           }
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
-          if (!triggerRef.value?.isCompositing) {
+          if (!triggerRef.value?.isComposing) {
             if (mergedShowRef.value) {
               const pendingTmNode = menuRef.value?.getPendingTmNode()
               if (pendingTmNode) {
@@ -899,6 +900,7 @@ export default defineComponent({
                       onPatternBlur={this.onTriggerInputBlur}
                       onPatternFocus={this.onTriggerInputFocus}
                       onResize={this.handleTriggerOrMenuResize}
+                      ignoreComposition={this.ignoreComposition}
                     >
                       {{
                         arrow: () => [this.$slots.arrow?.()]

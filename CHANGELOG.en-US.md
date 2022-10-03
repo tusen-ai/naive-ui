@@ -7,6 +7,10 @@
 - Fix `n-timeline-item`'s `title`'s `margin-bottom` can't be set by theme variable, closes [#3722](https://github.com/tusen-ai/naive-ui/issues/3722).
 - Fix `n-timeline-item`'s `meta` part's `margin-bottom` is overrided when nested in horizontal and vertical mode.
 - Fix `n-tree-select` would remove selected first option if it's clicked when placed in `label` tag, closes [#3715](https://github.com/tusen-ai/naive-ui/issues/3715).
+- Fix `n-select`'s overflow popover won't hide after removing all options in it when `maxTagCount="responsive"`, closes [#3801](https://github.com/tusen-ai/naive-ui/issues/3801).
+- Fix `n-upload` may only allow selecting directory in Firefox, closes [#3798](https://github.com/tusen-ai/naive-ui/issues/3798).
+- Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
+- `n-tree` adds `animated` prop, closes [#3784](https://github.com/tusen-ai/naive-ui/issues/3784).
 
 ### Feats
 
@@ -17,6 +21,9 @@
 - `createDiscreteApi` contains Vue app in returned value.
 - Export `LayoutContentInst` type, closes [#3743](https://github.com/tusen-ai/naive-ui/issues/3743).
 - Export `CarouselInst` type, closes [#3742](https://github.com/tusen-ai/naive-ui/issues/3742).
+- `n-collapse` adds `itemMargin` theme variable, closes [#3788](https://github.com/tusen-ai/naive-ui/issues/3788).
+- `n-select` adds `ignore-composition` prop, closes [#3789](https://github.com/tusen-ai/naive-ui/issues/3789).
+- `n-card` exports `CardSegmented` type, closes [#3775](https://github.com/tusen-ai/naive-ui/issues/3775).
 
 ## 2.33.3
 

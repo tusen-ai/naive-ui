@@ -46,12 +46,6 @@
     "web-types.json",
     "README.md"
   ],
-  "exports": {
-    ".": {
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
-    }
-  },
   "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [

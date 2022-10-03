@@ -5,6 +5,8 @@ import {
   ChevronRightIcon as ArrowRightIcon,
   ChevronLeftIcon as ArrowLeftIcon
 } from '../../_internal/icons'
+import { useRtl } from '../../_mixins/use-rtl'
+import { useConfig } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
@@ -14,8 +16,6 @@ import {
 } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig } from '../../_mixins'
 
 export const collapseItemProps = {
   title: String,
