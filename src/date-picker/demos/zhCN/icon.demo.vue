@@ -8,6 +8,18 @@
       <template #date-icon>
         <n-icon :size="16" :component="RocketOutline" />
       </template>
+      <template #panel-prev-fast>
+        <n-icon :size="16" :component="ChevronBackCircle" />
+      </template>
+      <template #panel-prev>
+        <n-icon :size="16" :component="ChevronBackCircleOutline" />
+      </template>
+      <template #panel-next>
+        <n-icon :size="16" :component="ChevronForwardCircleOutline" />
+      </template>
+      <template #panel-next-fast>
+        <n-icon :size="16" :component="ChevronForwardCircle" />
+      </template>
     </n-date-picker>
     <n-date-picker type="daterange">
       <template #separator>
@@ -22,13 +34,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { TrendingUpSharp, RocketOutline } from '@vicons/ionicons5'
+import {
+  TrendingUpSharp,
+  RocketOutline,
+  ChevronBackCircle,
+  ChevronBackCircleOutline,
+  ChevronForwardCircle,
+  ChevronForwardCircleOutline
+} from '@vicons/ionicons5'
 
 export default defineComponent({
   setup () {
     return {
       TrendingUpSharp,
-      RocketOutline
+      RocketOutline,
+      ChevronBackCircle,
+      ChevronBackCircleOutline,
+      ChevronForwardCircle,
+      ChevronForwardCircleOutline
     }
   }
 })

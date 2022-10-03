@@ -163,11 +163,15 @@ panel.vue
 
 ### DatePicker Slots
 
-| Name      | Parameters | Description                 | Version |
-| --------- | ---------- | --------------------------- | ------- |
-| date-icon | `()`       | Date icon of the input box. | 2.29.0  |
-| footer    | `()`       | Extra Footer.               |         |
-| separator | `()`       | Separator of range picker.  | 2.29.0  |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| date-icon | `()` | Date icon of the input box. | 2.29.0 |
+| footer | `()` | Extra Footer. |  |
+| panel-next | `()` | Next icon of the date panel. | NEXT_VERSION |
+| panel-next-fast | `()` | Fast next icon of the date panel. | NEXT_VERSION |
+| panel-prev | `()` | Prev icon of the date panel. | NEXT_VERSION |
+| panel-prev-fast | `()` | Fast prev icon of the date panel. | NEXT_VERSION |
+| separator | `()` | Separator of range picker. | 2.29.0 |
 
 ### DatePicker Methods
 
