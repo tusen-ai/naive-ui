@@ -31,6 +31,9 @@
 - `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-date-picker` 新增 `panel-prev-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-pagination` 新增 `to` 属性，关闭 [#3773](https://github.com/tusen-ai/naive-ui/issues/3773)
+- `n-avatar` 新增 `render-placeholder` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
+- `n-avatar` 新增 `render-fallback` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
+- `n-avatar` 新增 `fallback` slot
 
 ## 2.33.3
 
