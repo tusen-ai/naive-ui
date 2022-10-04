@@ -53,6 +53,7 @@ import {
   Size
 } from './interface'
 import { useRtl } from '../../_mixins/use-rtl'
+import { isObject } from 'lodash-es'
 
 export const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -96,7 +97,7 @@ export const paginationProps = {
     type: Array as PropType<Array<'pages' | 'size-picker' | 'quick-jumper'>>,
     default: ['pages', 'size-picker', 'quick-jumper']
   },
-  to: useAdjustedTo.propTo,
+  to: useAdjustedTo.propToFn<'compressedQuickJumper' | 'sizePicker'>(),
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -557,6 +558,7 @@ export default defineComponent({
       prefix,
       suffix,
       label,
+      to,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -571,6 +573,16 @@ export default defineComponent({
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
     const renderLabel = label || $slots.label
+    const renderCompressedQuickJumperTo = isObject(to)
+      ? to instanceof HTMLElement
+        ? to
+        : to.compressedQuickJumper
+      : to
+    const renderSizePickerTo = isObject(to)
+      ? to instanceof HTMLElement
+        ? to
+        : to.sizePicker
+      : to
     return (
       <div
         ref="selfRef"
@@ -771,7 +783,7 @@ export default defineComponent({
                             : pageItem.type
                         return (
                           <NPopselect
-                            to={this.to}
+                            to={renderCompressedQuickJumperTo}
                             key={key}
                             disabled={disabled}
                             trigger="hover"
@@ -861,7 +873,7 @@ export default defineComponent({
             case 'size-picker': {
               return !simple && showSizePicker ? (
                 <NSelect
-                  to={this.to}
+                  to={renderSizePickerTo}
                   placeholder=""
                   showCheckmark={false}
                   size={selectSize}

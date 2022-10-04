@@ -65,5 +65,15 @@ useAdjustedTo.propTo = {
   type: [String, Object, Boolean] as PropType<HTMLElement | string | boolean>,
   default: undefined
 }
-
+useAdjustedTo.propToFn = <K extends string>() => {
+  return {
+    type: [String, Object, Boolean] as PropType<
+    | HTMLElement
+    | string
+    | boolean
+    | { [key in K]?: HTMLElement | string | boolean }
+    >,
+    default: undefined
+  }
+}
 export { useAdjustedTo }
