@@ -19,6 +19,7 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NInternalSelectMenu).isVisible()).toEqual(
       false
     )
+    wrapper.unmount()
   })
   it('props.show', () => {
     const wrapper = mount(NSelect, {
@@ -27,6 +28,7 @@ describe('n-select', () => {
       }
     })
     expect(wrapper.findComponent(NInternalSelectMenu).exists()).toEqual(true)
+    wrapper.unmount()
   })
   describe('props.option', () => {
     it('has correct type', () => {
@@ -80,6 +82,7 @@ describe('n-select', () => {
           menuWrapper.text().includes(label)
         )
       ).toEqual(true)
+      wrapper.unmount()
     })
     it('option.render', () => {
       const options: SelectProps['options'] = [
@@ -215,6 +218,7 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
     await wrapper.find('.n-tag__close').trigger('click')
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `render-label` prop', async () => {
@@ -243,6 +247,7 @@ describe('n-select', () => {
     expect(
       document.querySelector('.n-base-select-option--selected')?.innerHTML
     ).toContain('render-test')
+    wrapper.unmount()
   })
 
   it('should work with `disabled` prop', async () => {
@@ -257,6 +262,7 @@ describe('n-select', () => {
     expect(wrapper.find('.n-base-selection').classes()).toContain(
       'n-base-selection--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `filterable` prop', async () => {
@@ -269,6 +275,7 @@ describe('n-select', () => {
     })
     expect(wrapper.find('input').exists()).toBe(true)
     expect(wrapper.find('.n-base-selection-input').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `loading` prop', async () => {
@@ -279,6 +286,7 @@ describe('n-select', () => {
       loading: true
     })
     expect(wrapper.find('.n-base-loading__container').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `multiple` prop', async () => {
@@ -293,6 +301,7 @@ describe('n-select', () => {
     expect(wrapper.find('.n-base-selection').classes()).toContain(
       'n-base-selection--multiple'
     )
+    wrapper.unmount()
   })
 
   it('should work with `placeholder` prop', async () => {
@@ -302,6 +311,7 @@ describe('n-select', () => {
       }
     })
     expect(wrapper.find('.n-base-selection-placeholder').text()).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -310,6 +320,7 @@ describe('n-select', () => {
       expect(
         wrapper.find('.n-base-selection').attributes('style')
       ).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -337,6 +348,7 @@ describe('n-select', () => {
         .find('.n-base-select-menu__empty .n-empty')
         .attributes('style')
     ).toContain('--n-text-color: #4fb233;')
+    wrapper.unmount()
   })
 
   it('should work with `menuProps` prop', () => {
@@ -357,6 +369,7 @@ describe('n-select', () => {
       'background: rgb(79, 178, 51);'
     )
     expect(menuWrapper.classes()).toContain('menu-test')
+    wrapper.unmount()
   })
 
   it('should work with `action` slot', () => {
@@ -373,6 +386,7 @@ describe('n-select', () => {
     expect(menuWrapper.find('.n-base-select-menu__action').text()).toContain(
       'test-action-slot'
     )
+    wrapper.unmount()
   })
 
   it('should work with `empty` slot', () => {
@@ -389,5 +403,6 @@ describe('n-select', () => {
     expect(menuWrapper.find('.n-base-select-menu__empty').text()).toContain(
       'test-empty-slot'
     )
+    wrapper.unmount()
   })
 })
