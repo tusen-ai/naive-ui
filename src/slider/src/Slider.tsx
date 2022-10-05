@@ -540,6 +540,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const {
         self: {
+          markFontSize,
           railColor,
           railColorHover,
           fillColor,
@@ -590,7 +591,8 @@ export default defineComponent({
         '--n-rail-color': railColor,
         '--n-rail-color-hover': railColorHover,
         '--n-rail-height': railHeight,
-        '--n-rail-width-vertical': railWidthVertical
+        '--n-rail-width-vertical': railWidthVertical,
+        '--n-mark-font-size': markFontSize
       }
     })
     const themeClassHandle = inlineThemeDisabled

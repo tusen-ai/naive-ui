@@ -37,6 +37,7 @@
 - `n-transfer` 新增 `render-target-list` 属性
 - `n-select` 新增 `show-checkmark` 属性，关闭 [#3749](https://github.com/tusen-ai/naive-ui/issues/3749)
 - `n-tree` 新增 `animated` 属性，关闭 [#3784](https://github.com/tusen-ai/naive-ui/issues/3784)
+- `n-slider` 新增 `markFontSize` 主题变量，关闭 [#3820](https://github.com/tusen-ai/naive-ui/issues/3820)
 
 ## 2.33.3
 

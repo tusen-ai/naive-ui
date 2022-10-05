@@ -21,6 +21,7 @@ const self = (vars: ThemeCommonVars) => {
   return {
     ...sizeVariables,
     fontSize,
+    markFontSize: fontSize,
     railColor,
     railColorHover: railColor,
     fillColor: primaryColor,
