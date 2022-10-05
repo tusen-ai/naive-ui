@@ -49,18 +49,32 @@ describe('n-badge', () => {
 
   it('should work with `show-zero` prop', async () => {
     const wrapper = mount(NBadge, { props: { value: 0 } })
-    expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
+    expect(wrapper.find('.n-badge-contenxt').exists()).not.toBe(true)
 
     await wrapper.setProps({ 'show-zero': true })
-    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    expect(wrapper.find('.n-badge-content').exists()).toBe(true)
   })
 
   it('should work with `show` prop', async () => {
     const wrapper = mount(NBadge, { props: { value: 7 } })
-    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    expect(wrapper.find('.n-badge-content').exists()).toBe(true)
 
     await wrapper.setProps({ show: false })
-    expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
+    expect(wrapper.find('.n-badge-content').exists()).not.toBe(true)
+  })
+
+  it('should work with `placement` prop', async () => {
+    const wrapper = mount(NBadge, { props: { value: 7 } })
+    expect(wrapper.find('.n-badge-content--top-right').exists()).toBe(true)
+
+    await wrapper.setProps({ placement: 'top-left' })
+    expect(wrapper.find('.n-badge-content--top-left').exists()).toBe(true)
+
+    await wrapper.setProps({ placement: 'bottom-right' })
+    expect(wrapper.find('.n-badge-content--bottom-right').exists()).toBe(true)
+
+    await wrapper.setProps({ placement: 'bottom-left' })
+    expect(wrapper.find('.n-badge-content--bottom-left').exists()).toBe(true)
   })
 
   it('should work with `type` prop', () => {

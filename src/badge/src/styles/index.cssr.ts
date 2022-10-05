@@ -28,7 +28,7 @@ export default c([
     font-family: var(--n-font-family);
   `, [
     cM('as-is', [
-      cB('badge-sup', {
+      cB('badge-content', {
         position: 'static',
         transform: 'translateX(0)'
       }, [
@@ -39,18 +39,16 @@ export default c([
       ])
     ]),
     cM('dot', [
-      cB('badge-sup', `
+      cB('badge-content', `
         height: 8px;
         width: 8px;
         padding: 0;
         min-width: 8px;
-        left: 100%;
-        bottom: calc(100% - 4px);
       `, [
         c('::before', 'border-radius: 4px;')
       ])
     ]),
-    cB('badge-sup', `
+    cB('badge-content', `
       background: var(--n-color);
       transition:
         background-color .3s var(--n-bezier),
@@ -63,15 +61,33 @@ export default c([
       padding: 0 6px;
       text-align: center;
       font-size: var(--n-font-size);
-      transform: translateX(-50%);
-      left: 100%;
-      bottom: calc(100% - 9px);
       font-variant-numeric: tabular-nums;
       z-index: 1;
       display: flex;
       align-items: center;
+      transform-origin: 100%;
     `,
     [
+      cM('top-right', `
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+      `),
+      cM('top-left', `
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+      `),
+      cM('bottom-right', `
+        right: 0;
+        bottom: 0;
+        transform: translate(50%, 50%);
+      `),
+      cM('bottom-left', `
+        bottom: 0;
+        left: 0;
+        transform: translate(-50%, 50%);
+      `),
       fadeInScaleUpTransition({
         transformOrigin: 'left bottom',
         originalTransform: 'translateX(-50%)'

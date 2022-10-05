@@ -138,6 +138,7 @@
 
 - `n-menu` 的 `MenuOption` 新增 `show` 属性，用于是否显示菜单，关闭 [#3334](https://github.com/TuSimple/naive-ui/issues/3334)
 - `n-alert` 新增 `bordered` 属性，关闭 [#3358](https://github.com/TuSimple/naive-ui/issues/3358)
+- `n-badge` 新增 `placement` 属性
 - `n-tag` 新增 `trigger-click-on-close` 属性，关闭 [#3343](https://github.com/TuSimple/naive-ui/issues/3343)
 - `n-cascader` 新增 `disabled-field` 属性，关闭 [#3338](https://github.com/TuSimple/naive-ui/issues/3338)
 - `n-list` 新增 `clickable` 属性
