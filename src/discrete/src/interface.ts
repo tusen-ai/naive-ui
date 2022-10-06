@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import { App, Ref } from 'vue'
 import { ConfigProviderProps } from '../../config-provider'
 import { DialogApi, DialogProviderProps } from '../../dialog'
 import { LoadingBarApi, LoadingBarProviderProps } from '../../loading-bar'
@@ -23,6 +23,7 @@ export type DiscreteApiType =
 
 export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   unmount: () => void
+  app: App
 } & ('message' extends T ? { message: MessageApi } : {}) &
 ('notification' extends T ? { notification: NotificationApi } : {}) &
 ('dialog' extends T ? { dialog: DialogApi } : {}) &

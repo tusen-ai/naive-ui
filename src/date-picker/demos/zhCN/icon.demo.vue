@@ -8,16 +8,16 @@
       <template #date-icon>
         <n-icon :size="16" :component="RocketOutline" />
       </template>
-      <template #panel-prev-fast>
+      <template #prev-year>
         <n-icon :size="16" :component="ChevronBackCircle" />
       </template>
-      <template #panel-prev>
+      <template #prev-month>
         <n-icon :size="16" :component="ChevronBackCircleOutline" />
       </template>
-      <template #panel-next>
+      <template #next-month>
         <n-icon :size="16" :component="ChevronForwardCircleOutline" />
       </template>
-      <template #panel-next-fast>
+      <template #next-year>
         <n-icon :size="16" :component="ChevronForwardCircle" />
       </template>
     </n-date-picker>

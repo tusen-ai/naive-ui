@@ -125,15 +125,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.startCalendarPrevYear}
             >
-              {resolveSlot($slots['panel-prev-fast'], () => [
-                <FastBackwardIcon />
-              ])}
+              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.startCalendarPrevMonth}
             >
-              {resolveSlot($slots['panel-prev'], () => [<BackwardIcon />])}
+              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
               monthBeforeYear={this.locale.monthBeforeYear}
@@ -147,15 +145,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.startCalendarNextMonth}
             >
-              {resolveSlot($slots['panel-next'], () => [<ForwardIcon />])}
+              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.startCalendarNextYear}
             >
-              {resolveSlot($slots['panel-next-fast'], () => [
-                <FastForwardIcon />
-              ])}
+              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
@@ -223,15 +219,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.endCalendarPrevYear}
             >
-              {resolveSlot($slots['panel-prev-fast'], () => [
-                <FastBackwardIcon />
-              ])}
+              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.endCalendarPrevMonth}
             >
-              {resolveSlot($slots['panel-prev'], () => [<BackwardIcon />])}
+              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
               monthBeforeYear={this.locale.monthBeforeYear}
@@ -245,15 +239,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.endCalendarNextMonth}
             >
-              {resolveSlot($slots['panel-next'], () => [<ForwardIcon />])}
+              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.endCalendarNextYear}
             >
-              {resolveSlot($slots['panel-next-fast'], () => [
-                <FastForwardIcon />
-              ])}
+              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>

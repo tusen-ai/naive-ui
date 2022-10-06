@@ -10,7 +10,6 @@
       v-model:value="selectedValue"
       filterable
       placeholder="选择歌曲"
-      :ignore-composition="false"
       :options="options"
     />
     <n-select

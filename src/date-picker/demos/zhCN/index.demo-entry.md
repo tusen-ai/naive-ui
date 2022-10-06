@@ -163,15 +163,15 @@ form-debug.vue
 
 ### DatePicker Slots
 
-| 名称            | 参数 | 说明                         | 版本         |
-| --------------- | ---- | ---------------------------- | ------------ |
-| date-icon       | `()` | 日期输入框的图标             | 2.29.0       |
-| footer          | `()` | 添加额外的页脚               |              |
-| panel-next      | `()` | 日期面板的 `下一个` 图标     | NEXT_VERSION |
-| panel-next-fast | `()` | 日期面板的 `快速下一个` 图标 | NEXT_VERSION |
-| panel-prev      | `()` | 日期面板的 `上一个` 图标     | NEXT_VERSION |
-| panel-prev-fast | `()` | 日期面板的 `快速上一个` 图标 | NEXT_VERSION |
-| separator       | `()` | 日期范围分隔符号             | 2.29.0       |
+| 名称       | 参数 | 说明                         | 版本         |
+| ---------- | ---- | ---------------------------- | ------------ |
+| date-icon  | `()` | 日期输入框的图标             | 2.29.0       |
+| footer     | `()` | 添加额外的页脚               |              |
+| next-month | `()` | 日期面板的 `下一个` 图标     | NEXT_VERSION |
+| next-year  | `()` | 日期面板的 `快速下一个` 图标 | NEXT_VERSION |
+| prev-month | `()` | 日期面板的 `上一个` 图标     | NEXT_VERSION |
+| prev-year  | `()` | 日期面板的 `快速上一个` 图标 | NEXT_VERSION |
+| separator  | `()` | 日期范围分隔符号             | 2.29.0       |
 
 ### DatePicker Methods
 

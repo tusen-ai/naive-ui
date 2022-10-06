@@ -20,7 +20,7 @@
 - `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
 - `n-loading-bar-provider` 新增 `container-style` 属性
 - `n-loading-bar-provider` 新增 `to` 属性，关闭 [#3724](https://github.com/tusen-ai/naive-ui/issues/3724)
-- `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态, 关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
+- `n-data-table` 新增 `on-update:checked-row-keys` 传递当前行数据和状态，关闭 [#3626](https://github.com/TuSimple/naive-ui/issues/3626)
 - `n-data-table` column 新增 `resizable` 属性，关闭 [#3165](https://github.com/TuSimple/naive-ui/issues/3165)
 - `createDiscreteApi` 会返回 Vue app
 - 导出 `LayoutContentInst` 类型，关闭 [#3743](https://github.com/tusen-ai/naive-ui/issues/3743)
@@ -28,10 +28,10 @@
 - `n-collapse` 新增 `itemMargin` 主题变量，关闭 [#3788](https://github.com/tusen-ai/naive-ui/issues/3788)
 - `n-select` 新增 `ignore-composition` 属性，关闭 [#3789](https://github.com/tusen-ai/naive-ui/issues/3789)
 - `n-card` 导出 `CardSegmented` 类型，关闭 [#3775](https://github.com/tusen-ai/naive-ui/issues/3775)
-- `n-date-picker` 新增 `panel-next` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
-- `n-date-picker` 新增 `panel-next-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
-- `n-date-picker` 新增 `panel-prev` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
-- `n-date-picker` 新增 `panel-prev-fast` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `next-month` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `next-year` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `prev-month` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
+- `n-date-picker` 新增 `prev-year` 插槽，关闭 [#3570](https://github.com/tusen-ai/naive-ui/issues/3570)
 - `n-pagination` 新增 `to` 属性，关闭 [#3773](https://github.com/tusen-ai/naive-ui/issues/3773)
 - `n-avatar` 新增 `render-placeholder` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
 - `n-avatar` 新增 `render-fallback` 属性，关闭 [#3751](https://github.com/tusen-ai/naive-ui/issues/3751)
