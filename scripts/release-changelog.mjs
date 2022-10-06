@@ -13,7 +13,7 @@ if (
   !DINGTALK_TOKEN ||
   !DINGTALK_TOKEN_2 ||
   !DINGTALK_TOKEN_3 ||
-  DINGTALK_TOKEN_4
+  !DINGTALK_TOKEN_4
 ) {
   console.log('No DINGTALK_TOKEN in your env.')
   process.exit(0)
