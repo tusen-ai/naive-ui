@@ -6,9 +6,15 @@ import inquirer from 'inquirer'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
-const { DINGTALK_TOKEN, DINGTALK_TOKEN_2, DINGTALK_TOKEN_3 } = process.env
+const { DINGTALK_TOKEN, DINGTALK_TOKEN_2, DINGTALK_TOKEN_3, DINGTALK_TOKEN_4 } =
+  process.env
 
-if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2 || !DINGTALK_TOKEN_3) {
+if (
+  !DINGTALK_TOKEN ||
+  !DINGTALK_TOKEN_2 ||
+  !DINGTALK_TOKEN_3 ||
+  DINGTALK_TOKEN_4
+) {
   console.log('No DINGTALK_TOKEN in your env.')
   process.exit(0)
 }
@@ -20,7 +26,7 @@ if (!DISCORD_TOKEN) {
   process.exit(0)
 }
 
-async function releaseChangelogToDingTalk () {
+async function releaseChangelogToDingTalk() {
   const allLog = fs
     .readFileSync(path.resolve(__dirname, '../CHANGELOG.zh-CN.md'), 'utf-8')
     .split(/^## /gm)[1]
@@ -49,7 +55,8 @@ async function releaseChangelogToDingTalk () {
         for (const token of [
           DINGTALK_TOKEN,
           DINGTALK_TOKEN_2,
-          DINGTALK_TOKEN_3
+          DINGTALK_TOKEN_3,
+          DINGTALK_TOKEN_4
         ]) {
           await request
             .post('https://oapi.dingtalk.com/robot/send')
@@ -72,7 +79,7 @@ async function releaseChangelogToDingTalk () {
     })
 }
 
-async function releaseChangelogToDiscord () {
+async function releaseChangelogToDiscord() {
   const changelog = fs
     .readFileSync(path.resolve(__dirname, '../CHANGELOG.en-US.md'), 'utf-8')
     .split(/^## /gm)[1]
