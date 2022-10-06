@@ -12,6 +12,7 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-arrow-color
 // --n-arrow-color-disabled
 // --n-title-text-color-disabled
+// --n-item-margin
 export default cB('collapse', 'width: 100%;', [
   cB('collapse-item', `
     font-size: var(--n-font-size);
@@ -19,7 +20,7 @@ export default cB('collapse', 'width: 100%;', [
     transition:
       color .3s var(--n-bezier),
       border-color .3s var(--n-bezier);
-    margin: 16px 0 0 0;
+    margin: var(--n-item-margin);
   `, [
     cM('disabled', [
       cE('header', 'cursor: not-allowed;', [

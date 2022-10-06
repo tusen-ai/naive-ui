@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.33.3",
+  "version": "2.33.4",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -46,12 +46,6 @@
     "web-types.json",
     "README.md"
   ],
-  "exports": {
-    ".": {
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
-    }
-  },
   "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [
@@ -90,7 +84,7 @@
     "@rollup/plugin-node-resolve": "^14.0.1",
     "@rollup/plugin-replace": "^4.0.0",
     "@types/estree": "^1.0.0",
-    "@types/jest": "^28.1.3",
+    "@types/jest": "^29.0.2",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "@vicons/fluent": "^0.12.0",
@@ -111,7 +105,7 @@
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-n": "^15.2.0",
@@ -138,7 +132,7 @@
     "ts-jest": "^28.0.1",
     "typescript": "~4.8.3",
     "vfonts": "^0.1.0",
-    "vite": "3.1.0",
+    "vite": "3.1.1",
     "vue": "^3.2.39",
     "vue-router": "^4.0.14",
     "vue-tsc": "^0.40.5"
@@ -169,7 +163,7 @@
   "homepage": "https://www.naiveui.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TuSimple/naive-ui"
+    "url": "https://github.com/tusen-ai/naive-ui"
   },
   "keywords": [
     "naive-ui",

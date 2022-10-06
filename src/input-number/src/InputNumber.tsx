@@ -7,7 +7,8 @@ import {
   computed,
   PropType,
   watchEffect,
-  VNode
+  VNode,
+  nextTick
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -353,6 +354,11 @@ export default defineComponent({
       const { nTriggerFormBlur } = formItem
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
+      // User may change value in blur callback, we make sure it will be
+      // displayed. Sometimes mergedValue won't be viewed as changed
+      void nextTick(() => {
+        deriveDisplayedValueFromValue()
+      })
     }
     function doClear (e: MouseEvent): void {
       const { onClear } = props

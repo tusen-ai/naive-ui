@@ -31,6 +31,8 @@ rtl-debug.vue
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.31.0 |
 | lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |  |
+| render-fallback | `() => VNodeChild` | `undefined` | 加载失败的渲染函数 | 2.33.4 |
+| render-placeholder | `() => VNodeChild` | `undefined` | 占位的渲染函数 | 2.33.4 |
 | round | `boolean` | `false` | 头像是否圆形 |  |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 |
 | src | `string` | `undefined` | 头像的地址 |  |
@@ -52,6 +54,7 @@ rtl-debug.vue
 | 名称        | 参数 | 说明                       | 版本   |
 | ----------- | ---- | -------------------------- | ------ |
 | default     | `()` | 头像内填充的内容           |        |
+| fallback    | `()` | 加载失败的内容             | 2.33.4 |
 | placeholder | `()` | 图像没有完成加载时候的占位 | 2.31.0 |
 
 ### AvatarGroup Slots

@@ -6,6 +6,8 @@ export default {
   tdPaddingMedium: '12px',
   tdPaddingLarge: '12px',
   sorterSize: '15px',
+  resizableContainerSize: '8px',
+  resizableSize: '2px',
   filterSize: '15px',
   paginationMargin: '12px 0 0 0',
   emptyPadding: '48px 0',

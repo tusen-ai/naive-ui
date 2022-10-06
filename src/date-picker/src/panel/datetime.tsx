@@ -11,6 +11,7 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
+import { resolveSlot } from '../../../_utils'
 
 /**
  * DateTime Panel
@@ -30,7 +31,8 @@ export default defineComponent({
       mergedTheme,
       shortcuts,
       timePickerProps,
-      onRender
+      onRender,
+      $slots
     } = this
     onRender?.()
     return (
@@ -82,13 +84,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.prevYear}
             >
-              <FastBackwardIcon />
+              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.prevMonth}
             >
-              <BackwardIcon />
+              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
               monthBeforeYear={this.locale.monthBeforeYear}
@@ -102,13 +104,13 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
             >
-              <ForwardIcon />
+              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.nextYear}
             >
-              <FastForwardIcon />
+              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>

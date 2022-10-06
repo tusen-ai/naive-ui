@@ -1,5 +1,6 @@
 import { c, cB, cM, cNotM } from '../../../_utils/cssr'
 
+// --n-gap
 export default cB('avatar-group', [
   cM('rtl', `
     direction: rtl;
@@ -9,7 +10,7 @@ export default cB('avatar-group', [
     `, [
       cB('avatar', [
         c('&:not(:first-child)', `
-          margin-right: -12px;
+          margin-right: var(--n-gap);
           margin-left: 0;
         `)
       ])

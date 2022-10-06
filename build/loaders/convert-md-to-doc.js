@@ -61,7 +61,7 @@ function genAnchorTemplate (
       internal-scrollable
       :bound="16"
       type="block"
-      style="width: 128px; position: sticky; top: 32px; max-height: calc(100vh - 32px - 64px); height: auto;"
+      style="width: 192px; position: sticky; top: 32px; max-height: calc(100vh - 32px - 64px); height: auto;"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"
     >
@@ -153,7 +153,7 @@ export default {
       }),
       contentStyle: computed(() => {
         return showAnchorRef.value
-          ? 'width: calc(100% - 164px); margin-right: 36px;'
+          ? 'width: calc(100% - 228px); margin-right: 36px;'
           : 'width: 100%; padding-right: 12px;'; 
       }),
       url: ${JSON.stringify(url)}
@@ -234,7 +234,7 @@ async function convertMd2ComponentDocumentation (
     <div :style="contentStyle">
       ${docMainTemplate}
     </div>
-    <div style="width: 128px;" v-if="showAnchor">
+    <div style="width: 192px;" v-if="showAnchor">
       ${
         demoInfos.length
           ? genDemosAnchorTemplate(demoInfos, hasApi, tokens)

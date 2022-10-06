@@ -124,7 +124,7 @@ export default defineComponent({
       }
     )
 
-    // for SSR, fix bug https://github.com/TuSimple/naive-ui/issues/2462
+    // for SSR, fix bug https://github.com/tusen-ai/naive-ui/issues/2462
     const isSsrRef = ref(false)
     const contentElRef = ref<HTMLElement>()
     onMounted(() => {

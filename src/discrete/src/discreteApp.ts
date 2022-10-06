@@ -4,7 +4,7 @@ import { DialogApi, useDialog } from '../../dialog'
 import { LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { MessageApi, useMessage } from '../../message'
 import { NotificationApi, useNotification } from '../../notification'
-import { warn } from '../../_utils'
+import { isBrowser, warn } from '../../_utils'
 import { NInjectionExtractor } from './InjectionExtractor'
 import { DiscreteApiType, MaybeRef } from './interface'
 
@@ -23,6 +23,7 @@ export interface DiscreteAppOptions {
 
 export interface DiscreteApp {
   unmount: () => void
+  app: App
   message?: MessageApi
   notification?: NotificationApi
   dialog?: DialogApi
@@ -40,7 +41,6 @@ export function createDiscreteApp ({
   providersAndProps,
   configProviderProps
 }: DiscreteAppOptions): DiscreteApp {
-  const extractedApi: Omit<DiscreteApp, 'unmount'> = {}
   const App = (): VNode => {
     return h(NConfigProvider, unref(configProviderProps), {
       default: () =>
@@ -57,11 +57,17 @@ export function createDiscreteApp ({
   }
 
   let app: App<Element> | null = createApp(App)
+  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
+    app
+  }
 
-  let hostEl: Element | null = document.createElement('div')
-  document.body.appendChild(hostEl)
+  let hostEl: Element | null
+  if (isBrowser) {
+    hostEl = document.createElement('div')
+    document.body.appendChild(hostEl)
 
-  app.mount(hostEl)
+    app.mount(hostEl)
+  }
 
   const unmount = (): void => {
     if (app === null || hostEl === null) {

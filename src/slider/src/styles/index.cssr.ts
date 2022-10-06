@@ -29,6 +29,7 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 // --n-rail-color-hover
 // --n-rail-height
 // --n-rail-width-vertical
+// --n-mark-font-size
 export default c([
   cB('slider', `
     display: block;
@@ -105,6 +106,7 @@ export default c([
         right: unset;
         bottom: calc(var(--n-handle-size) / 2);
         left: 22px;
+        font-size: var(--n-mark-font-size);
       `, [
         cB('slider-mark', `
           transform: translateY(50%);

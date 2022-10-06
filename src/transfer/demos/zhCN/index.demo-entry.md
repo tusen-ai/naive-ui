@@ -29,6 +29,7 @@ value-debug.vue
 | render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义源标签 | 2.32.0 |
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
+| render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义目标列表 | 2.33.4 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |

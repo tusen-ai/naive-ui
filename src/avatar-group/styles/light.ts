@@ -5,12 +5,19 @@ import { avatarLight } from '../../avatar/styles'
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type AvatarGroupThemeVars = {}
 
+export const self = () => {
+  return {
+    gap: '-12px'
+  }
+}
+
 const avatarGroupLight = createTheme({
   name: 'AvatarGroup',
   common: commonLight,
   peers: {
     Avatar: avatarLight
-  }
+  },
+  self
 })
 
 export default avatarGroupLight

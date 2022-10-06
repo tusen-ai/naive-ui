@@ -80,11 +80,12 @@ const mountDropdown = ({
 
 describe('n-dropdown', () => {
   it('should work with import on demand', () => {
-    mount(NDropdown, {
+    const wrapper = mount(NDropdown, {
       slots: {
         default: () => 'star kirby'
       }
     })
+    wrapper.unmount()
   })
 
   it('shows menu after click', async () => {
@@ -162,6 +163,7 @@ describe('n-dropdown', () => {
       label: '杰·盖茨比'
     })
 
+    wrapper.unmount()
     wrapper = mountDropdown({ onSelect })
 
     triggerNodeWrapper = wrapper.find('span')
@@ -209,6 +211,7 @@ describe('n-dropdown', () => {
     await nextTick(() => {
       expect(options[3].className).not.toEqual(pendingOptionClassName)
     })
+    wrapper.unmount()
   })
 
   it('dropdown disabled', async () => {
@@ -231,6 +234,7 @@ describe('n-dropdown', () => {
 
     wrapper.unmount()
   })
+
   it('dropdown clickoutside', async () => {
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })

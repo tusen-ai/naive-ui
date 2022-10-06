@@ -18,7 +18,8 @@
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - 钉钉一群 33482509 (已满)
 - 钉钉二群 35886835 (已满)
-- 钉钉三群 32377370
+- 钉钉三群 32377370 (已满)
+- 钉钉四群 8165002788
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 钉钉群加入方法：在**搜索框**中搜索群号，点击下拉框中更多分组内的**网络查找公开群组**
@@ -75,7 +76,7 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ## 贡献
 
-请参考 [CONTRIBUTING.zh-CN.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)
+请参考 [CONTRIBUTING.zh-CN.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)
 
 ## 许可
 

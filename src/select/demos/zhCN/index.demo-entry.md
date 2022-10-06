@@ -56,6 +56,7 @@ create-debug.vue
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
 | filterable | `boolean` | `false` | 是否可以过滤 |  |
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
+| ignore-composition | `boolean` | `true` | 忽略输入法 Composition 状态，默认情况下 `filter` 在输入法输入的过程中不会触发 | 2.33.4 |
 | input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
@@ -73,6 +74,7 @@ create-debug.vue
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
+| show-checkmark | `boolean` | `true` | 多选情况下是否展示对勾 | 2.33.4 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |

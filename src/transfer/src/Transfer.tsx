@@ -73,6 +73,7 @@ export const transferProps = {
   renderSourceLabel: Function as PropType<TransferRenderSourceLabel>,
   renderTargetLabel: Function as PropType<TransferRenderTargetLabel>,
   renderSourceList: Function as PropType<TransferRenderSourceList>,
+  renderTargetList: Function as PropType<TransferRenderSourceList>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
@@ -276,6 +277,7 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       renderSourceList,
+      renderTargetList,
       mergedTheme,
       mergedSrcFilterable,
       targetFilterable
@@ -353,12 +355,28 @@ export default defineComponent({
               />
             ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
-              <NTransferList
-                options={this.filteredTgtOpts}
-                disabled={this.mergedDisabled}
-                virtualScroll={this.virtualScroll}
-                itemSize={this.itemSize}
-              />
+              {renderTargetList ? (
+                <NScrollbar
+                  theme={mergedTheme.peers.Scrollbar}
+                  themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                >
+                  {{
+                    default: () =>
+                      renderTargetList({
+                        onCheck: this.handleChecked,
+                        checkedOptions: this.filteredTgtOpts,
+                        pattern: this.tgtPattern
+                      })
+                  }}
+                </NScrollbar>
+              ) : (
+                <NTransferList
+                  options={this.filteredTgtOpts}
+                  disabled={this.mergedDisabled}
+                  virtualScroll={this.virtualScroll}
+                  itemSize={this.itemSize}
+                />
+              )}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-transfer-list__border`} />

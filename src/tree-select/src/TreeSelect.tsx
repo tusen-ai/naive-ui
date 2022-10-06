@@ -444,20 +444,18 @@ export default defineComponent({
       const options = getOptionsByKeys(keys)
       if (props.multiple) {
         doUpdateValue(keys, options)
+        if (props.filterable) {
+          focusSelectionInput()
+          if (props.clearFilterAfterSelect) patternRef.value = ''
+        }
       } else {
         keys.length
           ? doUpdateValue(keys[0], options[0] || null)
           : doUpdateValue(null, null)
         closeMenu()
-        if (!props.filterable) {
-          // Currently it is not necessary. However if there is an action slot,
-          // it will be useful. So just leave it here.
-          focusSelection()
-        }
-      }
-      if (props.filterable) {
-        focusSelectionInput()
-        if (props.clearFilterAfterSelect) patternRef.value = ''
+        // Currently it is not necessary. However if there is an action slot,
+        // it will be useful. So just leave it here.
+        focusSelection()
       }
     }
     function handleUpdateIndeterminateKeys (keys: Key[]): void {

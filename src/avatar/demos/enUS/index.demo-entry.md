@@ -29,6 +29,8 @@ v-show-debug.vue
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.31.0 |
 | lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |  |
+| render-fallback | `() => VNodeChild` | `undefined` | Render function of fallback content. | 2.33.4 |
+| render-placeholder | `() => VNodeChild` | `undefined` | Render function of placeholder. | 2.33.4 |
 | round | `boolean` | `false` | Whether to display a rounded avatar. |  |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |  |
@@ -50,6 +52,7 @@ see [Avatar Props](avatar#Props)
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | default | `()` | The content of the avatar. |  |
+| fallback | `()` | Content if avatar load fails. | 2.33.4 |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.31.0 |
 
 ### AvatarGroup Slots

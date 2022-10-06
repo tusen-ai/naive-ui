@@ -35,7 +35,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
     data-dropdown-option="true"
   >
     <div
-      class="n-dropdown-option-body n-dropdown-option-body--pending"
+      class="n-dropdown-option-body"
     >
       <div
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
@@ -214,26 +214,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
     <div
       class="n-dropdown-offset-container"
     >
-      
-      <div
-        class="v-binder-follower-container"
-        style="z-index: 2000;"
-      >
-        <div
-          class="v-binder-follower-content"
-          style="--v-target-width: 0px; --v-target-height: 0px; --v-offset-left: 0px; --v-offset-top: 0px; transform: translateX(0px) translateY(0px) ; --v-transform-origin: top left; transform-origin: top left;"
-          v-placement="right-start"
-        >
-          <div
-            class="n-dropdown-menu-wrapper"
-          >
-            <transition-stub>
-              <!---->
-            </transition-stub>
-          </div>
-        </div>
-      </div>
-      
+      <!---->
     </div>
     
   </div>
