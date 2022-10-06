@@ -66,7 +66,7 @@ export default defineComponent({
       scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
-      onResizeColumn,
+      onUnstableColumnResize,
       doUpdateResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
@@ -128,7 +128,12 @@ export default defineComponent({
         column.minWidth,
         column.maxWidth
       )
-      onResizeColumn(widthAfterResize, limitWidth, column, getCellActualWidth)
+      onUnstableColumnResize(
+        widthAfterResize,
+        limitWidth,
+        column,
+        getCellActualWidth
+      )
       doUpdateResizableWidth(column, limitWidth)
     }
     return {

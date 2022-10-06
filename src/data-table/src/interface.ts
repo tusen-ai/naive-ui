@@ -21,7 +21,7 @@ import type { RowItem, ColItem } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
-  onResizeColumn: Function as PropType<
+  onUnstableColumnResize: Function as PropType<
   (
     resizedWidth: number,
     limitedWidth: number,
@@ -390,7 +390,7 @@ export interface DataTableInjection {
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
-  onResizeColumn: (
+  onUnstableColumnResize: (
     resizedWidth: number,
     limitedWidth: number,
     column: TableBaseColumn,

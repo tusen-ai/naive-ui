@@ -352,13 +352,18 @@ export function useTableData (
     uncontrolledFilterStateRef.value = filters
   }
 
-  function onResizeColumn (
+  function onUnstableColumnResize (
     resizedWidth: number,
     limitedWidth: number,
     column: TableBaseColumn,
     getColumnWidth: (key: ColumnKey) => number | undefined
   ): void {
-    props.onResizeColumn?.(resizedWidth, limitedWidth, column, getColumnWidth)
+    props.onUnstableColumnResize?.(
+      resizedWidth,
+      limitedWidth,
+      column,
+      getColumnWidth
+    )
   }
 
   function page (page: number): void {
@@ -397,7 +402,7 @@ export function useTableData (
     deriveNextSorter,
     doUpdatePageSize,
     doUpdatePage,
-    onResizeColumn,
+    onUnstableColumnResize,
     // exported methods
     filter,
     filters,
