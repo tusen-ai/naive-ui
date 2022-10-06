@@ -14,7 +14,8 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
-import { avatarGroupLight, AvatarGroupTheme } from '../styles'
+import { avatarGroupLight } from '../styles'
+import type { AvatarGroupTheme } from '../styles'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
@@ -76,7 +77,12 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       restOptions: restOptionsRef,
-      displayedOptions: displayedOptionsRef
+      displayedOptions: displayedOptionsRef,
+      cssVars: computed(() => {
+        return {
+          '--n-gap': mergedThemeRef.value.self.gap
+        }
+      })
     }
   },
   render () {
@@ -94,6 +100,7 @@ export default defineComponent({
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`
         ]}
+        style={this.cssVars}
         role="group"
       >
         {displayedOptions.map((option) => {

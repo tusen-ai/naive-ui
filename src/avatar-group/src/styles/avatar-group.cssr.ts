@@ -1,5 +1,6 @@
 import { c, cB, cM, cNotM } from '../../../_utils/cssr/index'
 
+// --n-gap
 export default cB('avatar-group', `
   flex-wrap: nowrap;
   display: inline-flex;
@@ -10,7 +11,7 @@ export default cB('avatar-group', `
   }, [
     cB('avatar', [
       c('&:not(:first-child)', `
-         margin-left: -12px;
+         margin-left: var(--n-gap);
       `)
     ])
   ]),
@@ -19,7 +20,7 @@ export default cB('avatar-group', `
   }, [
     cB('avatar', [
       c('&:not(:first-child)', `
-         margin-top: -12px;
+         margin-top: var(--n-gap);
       `)
     ])
   ])

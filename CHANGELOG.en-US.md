@@ -39,6 +39,7 @@
 - `n-select` adds `show-checkmark` prop, closes [#3749](https://github.com/tusen-ai/naive-ui/issues/3749).
 - `n-tree` adds `animated` prop, closes [#3784](https://github.com/tusen-ai/naive-ui/issues/3784).
 - `n-slider` adds `markFontSize` theme variable, closes [#3820](https://github.com/tusen-ai/naive-ui/issues/3820).
+- `n-avatar-group` adds `gap` theme variable, closes [#3819](https://github.com/tusen-ai/naive-ui/issues/3819).
 
 ## 2.33.3
 
