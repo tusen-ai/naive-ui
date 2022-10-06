@@ -163,7 +163,7 @@
   "homepage": "https://www.naiveui.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TuSimple/naive-ui"
+    "url": "https://github.com/tusen-ai/naive-ui"
   },
   "keywords": [
     "naive-ui",

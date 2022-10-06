@@ -34,7 +34,7 @@ async function releaseChangelogToDingTalk () {
 
   const title = `变更日志 ${number.trim()}`
 
-  const text = `${changelog.trim()}\n\n完整信息见 https://github.com/TuSimple/naive-ui/blob/main/CHANGELOG.zh-CN.md\n`
+  const text = `${changelog.trim()}\n\n完整信息见 https://github.com/tusen-ai/naive-ui/blob/main/CHANGELOG.zh-CN.md\n`
 
   await inquirer
     .prompt([
@@ -79,7 +79,7 @@ async function releaseChangelogToDiscord () {
     .replace(/^##/gm, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '[$1]')
 
-  const message = `Changelog ${changelog.trim()}\n\nSee https://github.com/TuSimple/naive-ui/blob/main/CHANGELOG.en-US.md for details.\n`
+  const message = `Changelog ${changelog.trim()}\n\nSee https://github.com/tusen-ai/naive-ui/blob/main/CHANGELOG.en-US.md for details.\n`
 
   await inquirer
     .prompt([

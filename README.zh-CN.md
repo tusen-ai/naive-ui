@@ -76,7 +76,7 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ## 贡献
 
-请参考 [CONTRIBUTING.zh-CN.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)
+请参考 [CONTRIBUTING.zh-CN.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)
 
 ## 许可
 

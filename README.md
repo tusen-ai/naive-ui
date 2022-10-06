@@ -74,7 +74,7 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
 
 ## License
 

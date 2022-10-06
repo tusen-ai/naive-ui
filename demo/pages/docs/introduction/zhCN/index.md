@@ -42,7 +42,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 ## 贡献
 
-请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)。
+请参考 [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md)。
 
 ## 许可
 

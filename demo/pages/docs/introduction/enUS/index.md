@@ -42,7 +42,7 @@ What's more, ..., no more. Just enjoy it.
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
 
 ## License
 
