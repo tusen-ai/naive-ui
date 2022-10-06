@@ -65,7 +65,7 @@ render-cell.vue
 ### DataTable Props
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-row-keys` may be incomplete. | 2.28.0 |
 | bordered | `boolean` | `true` | Whether to show border. |  |
 | bottom-bordered | `boolean` | `true` | Whether to show bottom border. |  |
@@ -105,7 +105,7 @@ render-cell.vue
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
 | on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn, getColumnWidth: (key: ColumnKey) => number \| undefined) => void) => void` | `undefined` | The callback function triggered when the column width is dragged. | NEXT_VERSION |
-| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], row: object, isCheck: boolean) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5 |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object | undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5, `meta` NEXT_VERSION |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | The callback function triggered when the filters data changes. |  |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |

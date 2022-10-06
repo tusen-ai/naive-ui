@@ -73,7 +73,7 @@ expandable-debug.vue
 ### DataTable Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的 | 2.28.0 |
 | bordered | `boolean` | `true` | 是否显示 border |  |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |  |
@@ -113,7 +113,7 @@ expandable-debug.vue
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
 | on-resize-column | `(resizedWidth: number, limitedWidth: number, column: DataTableBaseColumn, getColumnWidth: (key: ColumnKey) => number \| undefined) => void` | `undefined` | 列宽拖动时的回调函数 | NEXT_VERSION |
-| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], row: object, isCheck: boolean) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5 |
+| on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object | undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5, `meta` NEXT_VERSION |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
 | on-update:filters | `(filters: DataTableFilterState, initiatorColumn: DataTableBaseColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |  |

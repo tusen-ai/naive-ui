@@ -86,8 +86,8 @@ export function useCheck (
   })
   function doUpdateCheckedRowKeys (
     keys: RowKey[],
-    row?: RowData,
-    isCheck?: boolean
+    row: RowData | undefined,
+    action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll'
   ): void {
     const {
       'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
@@ -103,9 +103,15 @@ export function useCheck (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rows.push(row!)
     })
-    if (_onUpdateCheckedRowKeys) { call(_onUpdateCheckedRowKeys, keys, rows, row, isCheck) }
-    if (onUpdateCheckedRowKeys) { call(onUpdateCheckedRowKeys, keys, rows, row, isCheck) }
-    if (onCheckedRowKeysChange) { call(onCheckedRowKeysChange, keys, rows, row, isCheck) }
+    if (_onUpdateCheckedRowKeys) {
+      call(_onUpdateCheckedRowKeys, keys, rows, { row, action })
+    }
+    if (onUpdateCheckedRowKeys) {
+      call(onUpdateCheckedRowKeys, keys, rows, { row, action })
+    }
+    if (onCheckedRowKeysChange) {
+      call(onCheckedRowKeysChange, keys, rows, { row, action })
+    }
     uncontrolledCheckedRowKeysRef.value = keys
   }
   function doCheck (
@@ -118,7 +124,7 @@ export function useCheck (
       doUpdateCheckedRowKeys(
         Array.isArray(rowKey) ? rowKey.slice(0, 1) : [rowKey],
         rowInfo,
-        true
+        'check'
       )
       return
     }
@@ -128,7 +134,7 @@ export function useCheck (
         allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys,
       rowInfo,
-      true
+      'check'
     )
   }
   function doUncheck (rowKey: RowKey | RowKey[], rowInfo: RowData): void {
@@ -139,7 +145,7 @@ export function useCheck (
         allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys,
       rowInfo,
-      false
+      'uncheck'
     )
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
@@ -159,7 +165,9 @@ export function useCheck (
       treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
         cascade: true,
         allowNotLoaded: props.allowCheckingNotLoaded
-      }).checkedKeys
+      }).checkedKeys,
+      undefined,
+      'checkAll'
     )
   }
   function doUncheckAll (checkWholeTable: boolean = false): void {
@@ -183,7 +191,9 @@ export function useCheck (
           cascade: true,
           allowNotLoaded: props.allowCheckingNotLoaded
         }
-      ).checkedKeys
+      ).checkedKeys,
+      undefined,
+      'uncheckAll'
     )
   }
   return {

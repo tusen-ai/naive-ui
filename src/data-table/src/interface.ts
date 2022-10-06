@@ -442,7 +442,11 @@ export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (
   keys: RowKey[],
-  row: InternalRowData[]
+  rows: InternalRowData[],
+  meta: {
+    row: InternalRowData | undefined
+    action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll'
+  }
 ) => void
 
 // `null` only occurs when clearSorter is called
