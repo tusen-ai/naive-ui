@@ -38,7 +38,7 @@ expand-debug.vue
 | accordion | `boolean` | `false` | 是否使用手风琴展开模式 | 2.31.0 |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-keys` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |  |
-| animated | `boolean` | `true` | 是否有展开动画 | NEXT_VERSION |
+| animated | `boolean` | `true` | 是否有展开动画 | 2.33.4 |
 | block-line | `boolean` | `false` | 节点整行撑开 |  |
 | block-node | `boolean` | `false` | 节点名称整行撑开 |  |
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |  |
