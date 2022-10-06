@@ -86,9 +86,12 @@ export default defineComponent({
         )
       }
     })
-    const colsReactive = reactive<DataTableColumns>([
+    const colsReactive: DataTableColumns = reactive([
       {
-        type: 'expand'
+        type: 'expand',
+        renderExpand: () => {
+          return 'Expand content'
+        }
       },
       {
         title: 'Left',
