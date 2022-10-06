@@ -12,6 +12,7 @@
 - 修复 `n-upload` 在 Firefox 浏览器可能只能选择目录，关闭 [#3798](https://github.com/tusen-ai/naive-ui/issues/3798)
 - 移除 `package.json` 中的 `exports` 字段，因为其兼容性还比较差，关闭 [#3786](https://github.com/tusen-ai/naive-ui/issues/3786)
 - 修复 `createDiscreteApi` 在 SSR 环境下报错，关闭 [#3813](https://github.com/tusen-ai/naive-ui/issues/3813)
+- 修复 `n-tree-select` 在单选并且 `filterable` 的情况下菜单关闭时聚焦状态有问题
 
 ### Feats
 

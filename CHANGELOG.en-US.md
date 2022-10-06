@@ -12,6 +12,7 @@
 - Fix `n-upload` may only allow selecting directory in Firefox, closes [#3798](https://github.com/tusen-ai/naive-ui/issues/3798).
 - Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
 - Fix `createDiscreteApi` throws error in SSR environment, closes [#3813](https://github.com/tusen-ai/naive-ui/issues/3813).
+- Fix `n-tree-select` has wrong focus behavior when `filterable` and in single select mode.
 
 ### Feats
 
