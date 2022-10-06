@@ -13,6 +13,7 @@
 - Remove `package.json`'s `exports` field due to its poor compatibility, closes [#3786](https://github.com/tusen-ai/naive-ui/issues/3786).
 - Fix `createDiscreteApi` throws error in SSR environment, closes [#3813](https://github.com/tusen-ai/naive-ui/issues/3813).
 - Fix `n-tree-select` has wrong focus behavior when `filterable` and in single select mode.
+- Fix `n-input-number` may not update input when value is set in `on-blur` callback.
 
 ### Feats
 
