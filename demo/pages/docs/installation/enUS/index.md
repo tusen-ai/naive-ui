@@ -35,7 +35,7 @@ naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
   <template #footer>
     <n-button
       tag="a"
-      href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch"
+      href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-en-US.sketch"
       text
       target="_blank"
       icon-placement="right"
