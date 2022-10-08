@@ -13,7 +13,7 @@ DataTable is used to displays rows of structured data.
       In non-async mode, page count is determined by data's count. Even if you pass a <n-text code>page-count</n-text> in, it won't change data table's displayed page count. If you want it behaves in this way, you should set <n-text code>remote</n-text> prop.
     </li>
     <li>
-      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
     </li>
   </n-ul>
 </n-alert>
