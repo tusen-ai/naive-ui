@@ -58,6 +58,7 @@ export const transferProps = {
   },
   sourceFilterable: Boolean,
   targetFilterable: Boolean,
+  hideSelected: Boolean,
   sourceFilterPlaceholder: String,
   targetFilterPlaceholder: String,
   filter: {

@@ -9,6 +9,7 @@ interface UseTransferDataProps {
   filterable: boolean | undefined
   sourceFilterable: Boolean
   targetFilterable: Boolean
+  hideSelected: Boolean
   filter: Filter
 }
 
@@ -48,9 +49,15 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const filteredSrcOptionsRef = computed(() => {
-    if (!mergedSrcFilterableRef.value) return props.options
-    const { filter } = props
-    return props.options.filter((opt) =>
+    const { hideSelected, filter } = props
+    let newOptions = props.options
+    if (hideSelected) {
+      newOptions = newOptions.filter(
+        (option) => !targetValueSetRef.value.has(option.value)
+      )
+    }
+    if (!mergedSrcFilterableRef.value) return newOptions
+    return newOptions.filter((opt) =>
       filter(srcPatternRef.value, opt, 'source')
     )
   })

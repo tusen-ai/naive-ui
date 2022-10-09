@@ -6,6 +6,10 @@
 
 - Fix `n-data-table` throws error on tree data check action.
 
+### Feats
+
+- `n-transfer` adds `hide-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
+
 ## 2.33.4
 
 ### Fixes
