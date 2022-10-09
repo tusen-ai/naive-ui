@@ -16,9 +16,7 @@
 2. 在 `nuxt.config.ts` 增添下列配置
 
 ```ts
-import { defineNuxtConfig } from 'nuxt'
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// https://v3.nuxtjs.org/api/configuration/nuxt-config
 export default defineNuxtConfig({
   build: {
     transpile:

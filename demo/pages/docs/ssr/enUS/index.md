@@ -16,9 +16,7 @@ If you are using Nuxt, please see [example](https://github.com/07akioni/naive-ui
 2. Add the following config in your `nuxt.config.ts`.
 
 ```ts
-import { defineNuxtConfig } from 'nuxt'
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// https://v3.nuxtjs.org/api/configuration/nuxt-config
 export default defineNuxtConfig({
   build: {
     transpile:
