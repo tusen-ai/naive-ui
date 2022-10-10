@@ -9,7 +9,7 @@ interface UseTransferDataProps {
   filterable: boolean | undefined
   sourceFilterable: Boolean
   targetFilterable: Boolean
-  hideSelected: Boolean
+  showSelected: Boolean
   filter: Filter
 }
 
@@ -49,9 +49,9 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const filteredSrcOptionsRef = computed(() => {
-    const { hideSelected, filter } = props
+    const { showSelected, filter } = props
     let newOptions = props.options
-    if (hideSelected) {
+    if (!showSelected) {
       newOptions = newOptions.filter(
         (option) => !targetValueSetRef.value.has(option.value)
       )

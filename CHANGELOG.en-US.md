@@ -8,7 +8,7 @@
 
 ### Feats
 
-- `n-transfer` adds `hide-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
+- `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 
 ## 2.33.4
 
