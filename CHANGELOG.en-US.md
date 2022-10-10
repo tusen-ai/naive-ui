@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `n-data-table` in `on-update:checked-row-keys` Error reported in tree table.
+- Fix `n-data-table` throws error on tree data check action.
 
 ## 2.33.4
 
