@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` in `on-update:checked-row-keys` Error reported in tree table.
+
 ## 2.33.4
 
 ### Fixes

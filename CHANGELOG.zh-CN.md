@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 在 `on-update:checked-row-keys` 树形表格报错
+
 ## 2.33.4
 
 ### Fixes
