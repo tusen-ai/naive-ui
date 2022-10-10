@@ -210,10 +210,16 @@ export default defineComponent({
       return new Set(mergedExpandedRowKeysRef.value)
     })
     function getRowInfo (key: RowKey): RowData {
-      const currentIndex = paginatedDataRef.value.findIndex(
-        (item) => item.key === key
-      )
-      return paginatedDataRef.value[currentIndex].rawNode
+      const tableData = paginatedDataRef.value
+      let result: RowData = []
+      function rowTree (data: RowData[]): void {
+        data.forEach((item) => {
+          if (item.key === key) result = item.rawNode
+          else item.children?.length && rowTree(item.children)
+        })
+      }
+      rowTree(tableData)
+      return result
     }
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
