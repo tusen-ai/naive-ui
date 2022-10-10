@@ -184,6 +184,7 @@ export default defineComponent({
       stickyExpandedRowsRef,
       renderExpandIconRef,
       summaryPlacementRef,
+      treeMateRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -209,23 +210,8 @@ export default defineComponent({
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
-    function getRowInfo (key: RowKey): RowData | null {
-      const tableData = paginatedDataRef.value
-      let result: RowData | null = null
-      function traverse (rows: TmNode[]): void {
-        if (result !== null) return
-        for (const row of rows) {
-          if (row.key === key) {
-            result = row.rawNode
-            break
-          }
-          if (row.children) {
-            traverse(row.children)
-          }
-        }
-      }
-      traverse(tableData)
-      return result
+    function getRowInfo (key: RowKey): RowData | undefined {
+      return treeMateRef.value.getNode(key)?.rawNode
     }
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },

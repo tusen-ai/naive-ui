@@ -1,4 +1,4 @@
-import { TreeNode } from 'treemate'
+import { TreeMate, TreeNode } from 'treemate'
 import {
   CSSProperties,
   Ref,
@@ -387,6 +387,7 @@ export interface DataTableInjection {
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
   summaryPlacementRef: Ref<'top' | 'bottom'>
+  treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
