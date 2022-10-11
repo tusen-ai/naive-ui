@@ -23,6 +23,7 @@
 
 ### Feats
 
+- `n-upload` 的 `props` 增加 `trigger` 参数用于控制相关交互功能元素的展示，关闭 [#3843](https://github.com/tusen-ai/naive-ui/issues/3843)
 - `n-collapse-item` 的 `header-extra` 和 `header` 插槽支持 `collapsed` 参数，关闭 [#3723](https://github.com/tusen-ai/naive-ui/issues/3723)
 - `n-loading-bar-provider` 新增 `container-style` 属性
 - `n-loading-bar-provider` 新增 `to` 属性，关闭 [#3724](https://github.com/tusen-ai/naive-ui/issues/3724)
@@ -99,7 +100,7 @@
 
 ### Fixes
 
-- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 https://github.com/07akioni/naive-ui-nuxt-demo/issues/4
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 <https://github.com/07akioni/naive-ui-nuxt-demo/issues/4>
 - 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告, 关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 - 修复 `n-pagination` 被禁用时，快速跳转菜单还会触发并可进行分页跳转
