@@ -176,6 +176,7 @@ export default defineComponent({
     })
     provide(dataTableInjectionKey, {
       props,
+      treeMateRef,
       renderExpandIconRef: toRef(props, 'renderExpandIcon'),
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,

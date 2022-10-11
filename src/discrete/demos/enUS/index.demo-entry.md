@@ -3,7 +3,7 @@
 If you want to use `useDialog`, `useMessage`, `useNotification`, `useLoadingBar` outside `setup`, you can use `createDiscreteApi` to create corresponding API.
 
 <n-alert title="Caveat" type="warning">
-Discrete API won't be affected by <n-text code>n-xxx-provider</n-text> in current app. If you need to share config, you should sync them manually. Also, you'd better not using discrete API and normal API together.
+1. Discrete API won't be affected by <n-text code>n-xxx-provider</n-text> in current app. If you need to share config, you should sync them manually. Also, you'd better not using discrete API and normal API together. 2. Do not call <n-text code>createDiscreteApi</n-text> in <n-text code>setup</n-text> since it may cause some unexpected behaviors.
 </n-alert>
 
 ## Demo

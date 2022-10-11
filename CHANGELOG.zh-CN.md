@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.33.5
+
+### Fixes
+
+- 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
+
 ## 2.33.4
 
 ### Fixes
