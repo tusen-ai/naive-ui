@@ -348,7 +348,7 @@ export const uploadProps = {
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
   trigger: {
     type: String as PropType<'none' | 'hover' | 'click'>,
-    default: 'click'
+    default: 'hover'
   }
 } as const
 
