@@ -12,6 +12,7 @@ describe('n-alert', () => {
   it('should have a role of "alert"', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-alert').attributes('role')).toBe('alert')
+    wrapper.unmount()
   })
 
   it('should add the right aria', () => {
@@ -19,11 +20,13 @@ describe('n-alert', () => {
     expect(wrapper.find('.n-alert__icon').attributes('aria-hidden')).toBe(
       'true'
     )
+    wrapper.unmount()
   })
 
   it('shouldnt have default title', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-alert-body__title').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should have designated title', () => {
@@ -32,12 +35,14 @@ describe('n-alert', () => {
       props: { title }
     })
     expect(wrapper.find('.n-alert-body__title').text()).toBe(title)
+    wrapper.unmount()
   })
 
   it('should work with type prop', async () => {
     ;(['info', 'success', 'warning', 'error'] as const).forEach((type) => {
       const wrapper = mount(NAlert, { props: { type } })
       expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -46,6 +51,7 @@ describe('n-alert', () => {
     expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(true)
     await wrapper.setProps({ bordered: false })
     expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `default` slot', () => {
@@ -57,6 +63,7 @@ describe('n-alert', () => {
 
     expect(wrapper.find('.n-alert-body__content').exists()).toBe(true)
     expect(wrapper.find('.n-alert-body__content').text()).toBe('default')
+    wrapper.unmount()
   })
 
   it('should work with `icon` slot', async () => {
@@ -70,6 +77,7 @@ describe('n-alert', () => {
     })
 
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `header` slot', async () => {
@@ -80,26 +88,31 @@ describe('n-alert', () => {
     })
 
     expect(wrapper.find('.n-alert-body__title').text()).toBe('test-header')
+    wrapper.unmount()
   })
 
   it('shouldnt be closable by default', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should be closable when designated', () => {
     const wrapper = mount(NAlert, { props: { closable: true } })
     expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should show icon by default', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-alert__icon').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should hide icon when designated', () => {
     const wrapper = mount(NAlert, { props: { showIcon: false } })
     expect(wrapper.find('.n-alert__icon').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it("shouldn't closed when on-close prop returns false", async () => {
@@ -110,6 +123,7 @@ describe('n-alert', () => {
     await closeBtn.trigger('click')
 
     expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should trigger callback when closed', async () => {
@@ -132,6 +146,7 @@ describe('n-alert', () => {
 
     setTimeout(() => {
       expect(handleOnAfterLeave).toHaveBeenCalled()
+      wrapper.unmount()
     }, 0)
   })
 })
