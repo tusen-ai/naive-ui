@@ -58,6 +58,7 @@ export default defineComponent({
 
     const imageRef = ref<ImageInst | null>(null)
     const thumbnailUrlRef = ref<string>('')
+    const showTriggerRef = ref<boolean>(NUpload.triggerRef.value === 'none')
 
     const progressStatusRef = computed(() => {
       const { file } = props
@@ -183,7 +184,23 @@ export default defineComponent({
         value.click()
       }
     }
-
+    function handleTriggerClick (): void {
+      if (NUpload.triggerRef.value === 'click') {
+        showTriggerRef.value = !showTriggerRef.value
+      }
+    }
+    function handlerMouseEnterWrapper (): void {
+      if (NUpload.triggerRef.value !== 'hover') {
+        return
+      }
+      showTriggerRef.value = true
+    }
+    function handleMouseLeaveWrapper (): void {
+      if (NUpload.triggerRef.value !== 'hover') {
+        return
+      }
+      showTriggerRef.value = false
+    }
     const deriveFileThumbnailUrl = async (): Promise<void> => {
       const { listType } = props
       if (listType !== 'image' && listType !== 'image-card') {
@@ -215,11 +232,26 @@ export default defineComponent({
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,
-      handlePreviewClick
+      handlePreviewClick,
+      handleTriggerClick,
+      handlerMouseEnterWrapper,
+      handleMouseLeaveWrapper,
+      showTriggerRef,
+      triggerRef: NUpload.triggerRef
     }
   },
   render () {
-    const { clsPrefix, mergedTheme, listType, file } = this
+    const {
+      clsPrefix,
+      mergedTheme,
+      listType,
+      file,
+      handleTriggerClick,
+      handlerMouseEnterWrapper,
+      handleMouseLeaveWrapper,
+      showTriggerRef,
+      triggerRef
+    } = this
 
     // if there is text list type, show file icon
     let icon: VNode
@@ -289,8 +321,18 @@ export default defineComponent({
             file.status !== 'error' &&
             listType !== 'image-card' &&
             `${clsPrefix}-upload-file--with-url`,
-          `${clsPrefix}-upload-file--${listType}-type`
+          `${clsPrefix}-upload-file--${listType}-type`,
+
+          showTriggerRef &&
+            `${clsPrefix}-upload-file--hover ${clsPrefix}-upload-file--${listType}-type--hover`
         ]}
+        onMouseenter={
+          triggerRef === 'hover' ? handlerMouseEnterWrapper : undefined
+        }
+        onMouseleave={
+          triggerRef === 'hover' ? handleMouseLeaveWrapper : undefined
+        }
+        onClick={triggerRef === 'click' ? handleTriggerClick : undefined}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
           {icon}

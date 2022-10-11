@@ -100,6 +100,8 @@ export interface UploadInjection {
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
   handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
+
+  triggerRef: Ref<'none' | 'hover' | 'click'>
 }
 
 export const uploadInjectionKey =

@@ -345,7 +345,11 @@ export const uploadProps = {
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
-  triggerStyle: [String, Object] as PropType<CSSProperties | string>
+  triggerStyle: [String, Object] as PropType<CSSProperties | string>,
+  trigger: {
+    type: String as PropType<'none' | 'hover' | 'click'>,
+    default: 'click'
+  }
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -663,7 +667,9 @@ export default defineComponent({
       imageGroupPropsRef: toRef(props, 'imageGroupProps'),
       mergedDirectoryDndRef: computed(() => {
         return props.directoryDnd ?? props.directory
-      })
+      }),
+
+      triggerRef: toRef(props, 'trigger')
     })
 
     const exposedMethods: UploadInst = {
