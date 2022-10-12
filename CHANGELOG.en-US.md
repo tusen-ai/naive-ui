@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.33.5
 
 ### Fixes
 
-- Fix `n-data-table` throws error on tree data check action.
+- Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
 
 ## 2.33.4
 
