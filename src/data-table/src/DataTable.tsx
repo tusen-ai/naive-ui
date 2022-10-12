@@ -216,6 +216,7 @@ export default defineComponent({
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
+      summaryHeaderRef: toRef(props, 'summaryHeader'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
       rowPropsRef: toRef(props, 'rowProps'),
       stripedRef: toRef(props, 'striped'),
