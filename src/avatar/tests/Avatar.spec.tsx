@@ -53,6 +53,7 @@ describe('n-avatar', () => {
     const wrapper = mount(NAvatar, { props: { size: 'medium' } })
     expect(wrapper.attributes('style')).toContain('--n-merged-size')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('size is number', () => {
@@ -61,18 +62,21 @@ describe('n-avatar', () => {
       '--n-merged-size: var(--n-avatar-size-override, 50px);'
     )
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('round avatar', () => {
     const wrapper = mount(NAvatar, { props: { round: true } })
     expect(wrapper.attributes('style')).toContain('--n-border-radius: 50%;')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('bordered avatar', () => {
     const wrapper = mount(NAvatar, { props: { bordered: true } })
     expect(wrapper.attributes('style')).toContain('--n-border: 2px solid #fff;')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('custom style', () => {
@@ -81,6 +85,7 @@ describe('n-avatar', () => {
     })
     expect(wrapper.attributes('style')).toContain('background-color: red;')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('image avatar', () => {
@@ -91,6 +96,7 @@ describe('n-avatar', () => {
     })
     expect(wrapper.find('img').exists()).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('icon avatar', () => {
@@ -104,6 +110,7 @@ describe('n-avatar', () => {
     })
     expect(wrapper.find('i').classes()).toContain('n-icon')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('avatar adjust text', async () => {
@@ -124,6 +131,7 @@ describe('n-avatar', () => {
     await nextTick()
     expect(textNode.exists()).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('image avatar error handle when load failed', async () => {
@@ -136,6 +144,7 @@ describe('n-avatar', () => {
     })
     await wrapper.find('img').trigger('error')
     expect(onError).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with `objectFit` prop', () => {
@@ -148,5 +157,6 @@ describe('n-avatar', () => {
     expect(wrapper.find('img').attributes('style')).toContain(
       'object-fit: contain;'
     )
+    wrapper.unmount()
   })
 })
