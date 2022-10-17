@@ -110,6 +110,8 @@ export default cB('input', `
     c('span', `
       width: 100%;
       display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
     `)
   ]),
   cM('textarea', [

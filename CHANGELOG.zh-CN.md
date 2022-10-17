@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input` 的 `placeholder` css 支持内容溢出裁剪，显示 `…`
+
 ## 2.33.5
 
 ### Fixes
