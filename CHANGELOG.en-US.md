@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- Export `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
+
 ## 2.33.5
 
 ### Fixes
