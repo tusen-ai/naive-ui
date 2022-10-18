@@ -39,5 +39,6 @@ describe('n-avatar-group', () => {
 
     await wrapper.setProps({ options: [] })
     expect(wrapper.findAll('.n-avatar').length).toBe(0)
+    wrapper.unmount()
   })
 })
