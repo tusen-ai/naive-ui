@@ -270,13 +270,13 @@ export default c([
         width: var(--n-resizable-container-size);
         position: absolute;
         top: 0;
-        right: calc(var(--n-resizable-container-size) / 2);
+        right: calc(-1 * var(--n-resizable-container-size) / 2);
         bottom: 0;
         cursor: col-resize;
         user-select: none;
       `, [
         c('&::after', `
-          width: var(--n-resizable-size);
+          width: 1px;
           height: 50%;
           position: absolute;
           top: 50%;
@@ -289,11 +289,13 @@ export default c([
           content: '';
         `),
         cM('active', [
-          c('&::after', `          
+          c('&::after', ` 
+            width: var(--n-resizable-size);         
             background-color: var(--n-th-icon-color-active);
           `)
         ]),
         c('&:hover::after', `
+          width: var(--n-resizable-size);
           background-color: var(--n-th-icon-color-active);
         `)
       ]),

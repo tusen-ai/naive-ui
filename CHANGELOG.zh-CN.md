@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- 修复 `n-data-table` `resizable` 按钮位置错位的问题，关闭 [#3890](https://github.com/tusen-ai/naive-ui/issues/3890)
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
 
 ### Feats

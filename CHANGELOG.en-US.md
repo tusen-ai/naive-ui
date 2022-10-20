@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-data-table` `resizable` button position style is misplaced, closes [#3890](https://github.com/tusen-ai/naive-ui/issues/3890).
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
 
 ### Feats
