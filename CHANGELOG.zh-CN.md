@@ -2,6 +2,10 @@
 
 ## 2.33.5
 
+### Breaking Changes
+
+- 在 `n-data-table` 的列外包裹一层 `DIV` 容器用以优化过滤按钮的布局，关闭 [#3853](https://github.com/tusen-ai/naive-ui/issues/3853)
+
 ### Fixes
 
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)

@@ -210,7 +210,11 @@ export default c([
     `, [
       cM('filterable', {
         paddingRight: '36px'
-      }),
+      }, [
+        cM('sortable', {
+          paddingRight: 'calc(var(--n-th-padding) + 36px)'
+        })
+      ]),
       fixedColumnStyle,
       cM('selection', `
         padding: 0;
@@ -218,6 +222,13 @@ export default c([
         line-height: 0;
         z-index: 3;
       `),
+      cE('title', {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 'auto',
+        maxWidth: '100%'
+      }),
       cE('ellipsis', `
         display: inline-block;
         vertical-align: bottom;
