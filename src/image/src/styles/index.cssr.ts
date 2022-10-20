@@ -73,6 +73,7 @@ export default c([
     max-height: calc(100vh - 32px);
     max-width: calc(100vw - 32px);
     transition: transform .3s var(--n-bezier);
+    box-shadow: 0 0 0 8px #fff;
   `),
   cB('image', `
     display: inline-flex;
