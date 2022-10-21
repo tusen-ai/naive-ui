@@ -96,6 +96,9 @@ export const sliderProps = {
   >,
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<(value: number & number[]) => void>
+  >,
+  onChange: [Function, Array] as PropType<
+  MaybeArray<(value: number & number[]) => void>
   >
 } as const
 
@@ -472,13 +475,17 @@ export default defineComponent({
         on('mousemove', document, handleMouseMove)
       }
     }
-    function stopDragging (): void {
+    function stopDragging (emitChange?: boolean): void {
       if (draggingRef.value) {
         draggingRef.value = false
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
         off('mousemove', document, handleMouseMove)
+        if (emitChange) {
+          const { onChange } = props
+          if (onChange) { call(onChange as OnUpdateValueImpl, uncontrolledValueRef.value) }
+        }
       }
     }
     function handleMouseMove (event: MouseEvent | TouchEvent): void {
@@ -494,7 +501,7 @@ export default defineComponent({
       )
     }
     function handleMouseUp (): void {
-      stopDragging()
+      stopDragging(true)
     }
     function handleHandleFocus (index: number): void {
       activeIndexRef.value = index
@@ -506,7 +513,7 @@ export default defineComponent({
     function handleHandleBlur (index: number): void {
       if (activeIndexRef.value === index) {
         activeIndexRef.value = -1
-        stopDragging()
+        stopDragging(true)
       }
       if (hoverIndexRef.value === index) {
         hoverIndexRef.value = -1

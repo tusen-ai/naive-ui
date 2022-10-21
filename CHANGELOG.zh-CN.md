@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
+- `n-slider` 新增 `on-change` 属性，关闭 [#3850](https://github.com/tusen-ai/naive-ui/issues/3850)
 
 ## 2.33.4
 

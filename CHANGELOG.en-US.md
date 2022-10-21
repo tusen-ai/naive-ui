@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
+- `n-slider` adds `on-change` prop, closes [#3850](https://github.com/tusen-ai/naive-ui/issues/3850).
 
 ## 2.33.4
 
