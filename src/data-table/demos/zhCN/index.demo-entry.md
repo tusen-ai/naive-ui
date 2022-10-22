@@ -218,6 +218,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 ### DataTable Slots
 
-| 名称  | 参数 | 说明                 |
-| ----- | ---- | -------------------- |
-| empty | `()` | 表格数据为空时的展示 |
+| 名称    | 参数 | 说明                  | 版本         |
+| ------- | ---- | --------------------- | ------------ |
+| empty   | `()` | 表格数据为空时的展示  |              |
+| loading | `()` | 表格 loading 时的展示 | NEXT_VERSION |

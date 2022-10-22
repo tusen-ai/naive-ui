@@ -1,14 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
+- `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+
 ## 2.33.5
 
 ### Fixes
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
-
-### Feats
-
-- `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 
 ## 2.33.4
 
