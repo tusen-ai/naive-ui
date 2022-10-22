@@ -51,6 +51,8 @@ export default cB('tree', `
     padding: 3px 0;
   `),
   cB('tree-node', `
+    transform: translate(0, 0);
+    z-index: 0;
     position: relative;
     display: flex;
     border-radius: var(--n-node-border-radius);
