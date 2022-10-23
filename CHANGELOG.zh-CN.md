@@ -1,14 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
+- `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+
 ## 2.33.5
 
 ### Fixes
 
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
-
-### Feats
-
-- `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 
 ## 2.33.4
 
