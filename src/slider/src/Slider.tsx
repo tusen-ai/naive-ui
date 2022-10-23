@@ -267,38 +267,53 @@ export default defineComponent({
         if (isShowTooltip(index)) inst.syncPosition()
       })
     }
-    function doUpdateValue (value: number | number[]): void {
-      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
+    function doUpdateValue (
+      value: number | number[],
+      emitChange?: boolean
+    ): void {
+      const {
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue,
+        onChange
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (emitChange && onChange) call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function dispatchValueUpdate (value: number | number[]): void {
+    function dispatchValueUpdate (
+      value: number | number[],
+      emitChange?: boolean
+    ): void {
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
           const { value: oldValues } = arrifiedValueRef
           if (value.join() !== oldValues.join()) {
-            doUpdateValue(value)
+            doUpdateValue(value, emitChange)
           }
         }
       } else if (!Array.isArray(value)) {
         const oldValue = arrifiedValueRef.value[0]
         if (oldValue !== value) {
-          doUpdateValue(value)
+          doUpdateValue(value, emitChange)
         }
       }
     }
-    function doDispatchValue (value: number, index: number): void {
+    function doDispatchValue (
+      value: number,
+      index: number,
+      emitChange?: boolean
+    ): void {
       if (props.range) {
         const values = arrifiedValueRef.value.slice()
         values.splice(index, 1, value)
-        dispatchValueUpdate(values)
+        dispatchValueUpdate(values, emitChange)
       } else {
-        dispatchValueUpdate(value)
+        dispatchValueUpdate(value, emitChange)
       }
     }
 
@@ -441,7 +456,8 @@ export default defineComponent({
       doDispatchValue(
         // Avoid the number of value does not change when `step` is null
         sanitizeValue(nextValue, currentValue, ratio > 0 ? 1 : -1),
-        activeIndex
+        activeIndex,
+        true
       )
     }
     function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
@@ -484,7 +500,9 @@ export default defineComponent({
         off('mousemove', document, handleMouseMove)
         if (emitChange) {
           const { onChange } = props
-          if (onChange) { call(onChange as OnUpdateValueImpl, uncontrolledValueRef.value) }
+          if (onChange) {
+            call(onChange as OnUpdateValueImpl, uncontrolledValueRef.value)
+          }
         }
       }
     }
