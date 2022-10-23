@@ -14,7 +14,7 @@ import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import { createKey, warnOnce } from '../../_utils'
+import { createKey, resolveSlot, warnOnce } from '../../_utils'
 import { dataTableLight } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
@@ -400,7 +400,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, themeClass, onRender } = this
+    const { mergedClsPrefix, themeClass, onRender, $slots } = this
     onRender?.()
     return (
       <div
@@ -435,9 +435,14 @@ export default defineComponent({
         <Transition name="fade-in-scale-up-transition">
           {{
             default: () => {
-              return this.loading ? (
-                <NBaseLoading clsPrefix={mergedClsPrefix} strokeWidth={20} />
-              ) : null
+              return this.loading
+                ? resolveSlot($slots.loading, () => [
+                    <NBaseLoading
+                      clsPrefix={mergedClsPrefix}
+                      strokeWidth={20}
+                    />
+                ])
+                : null
             }
           }}
         </Transition>
