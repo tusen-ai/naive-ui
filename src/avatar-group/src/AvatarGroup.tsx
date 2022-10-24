@@ -21,7 +21,7 @@ export interface AvatarGroupInjection {
   size?: Size | undefined
 }
 
-interface AvatarOption {
+export interface AvatarOption {
   src: string
 }
 

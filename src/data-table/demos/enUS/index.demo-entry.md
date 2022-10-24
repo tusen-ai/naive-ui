@@ -210,6 +210,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ### DataTable Slots
 
-| Name  | Type | Description                                     |
-| ----- | ---- | ----------------------------------------------- |
-| empty | `()` | Custom description when data of table is empty. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| empty | `()` | Custom description when data of table is empty. |  |
+| loading | `()` | Custom description when data of table is loading. | NEXT_VERSION |

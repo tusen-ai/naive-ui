@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
+- `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
+- `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+
 ## 2.33.5
 
 ### Fixes
@@ -7,10 +15,6 @@
 - Fix `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
-
-### Feats
-
-- `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 
 ## 2.33.4
 

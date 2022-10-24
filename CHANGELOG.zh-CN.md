@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
+- `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
+- `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+
 ## 2.33.5
 
 ### Fixes
@@ -7,10 +15,6 @@
 - 修复 `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
 
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
-
-### Feats
-
-- `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 
 ## 2.33.4
 
