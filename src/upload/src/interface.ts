@@ -95,6 +95,8 @@ export interface UploadInjection {
   acceptRef: Ref<string | undefined>
   triggerStyleRef: Ref<CSSProperties | string | undefined>
   doChange: DoChange
+  doRemove: (file: SettledFileInfo) => void
+  doAbort: (fileId?: string) => void
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
@@ -114,8 +116,9 @@ export interface XhrHandlers {
 
 export interface UploadInst {
   openOpenFileDialog: () => void
-  submit: () => void
+  submit: (fileId?: string) => void
   clear: () => void
+  abort: (fileId?: string) => void
 }
 
 export type OnBeforeUpload = (data: {

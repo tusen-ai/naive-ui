@@ -579,6 +579,43 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    function doRemove (file: SettledFileInfo): void {
+      void Promise.resolve(
+        props.onRemove
+          ? props.onRemove({
+            file: Object.assign({}, file),
+            fileList: mergedFileListRef.value
+          })
+          : true
+      ).then((result) => {
+        if (result === false) return
+        const fileAfterChange = Object.assign({}, file, {
+          status: 'removed'
+        })
+        xhrMap.delete(file.id)
+        doChange(fileAfterChange, undefined, {
+          remove: true
+        })
+      })
+    }
+    function doAbort (fileId?: string): void {
+      const fileIdsToBeRemoved: string[] = []
+      if (fileId === undefined) {
+        xhrMap.forEach((xhr, key) => {
+          xhr.abort()
+          fileIdsToBeRemoved.push(key)
+        })
+      } else {
+        xhrMap.get(fileId)?.abort()
+        fileIdsToBeRemoved.push(fileId)
+      }
+      const fileList = mergedFileListRef.value.filter((file) =>
+        fileIdsToBeRemoved.includes(file.id)
+      )
+      fileList.forEach((file) => {
+        doRemove(file)
+      })
+    }
     async function getFileThumbnailUrl (file: FileInfo): Promise<string> {
       const { createThumbnailUrl } = props
 
@@ -643,6 +680,8 @@ export default defineComponent({
       xhrMap,
       submit,
       doChange,
+      doRemove,
+      doAbort,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrl,
@@ -671,7 +710,8 @@ export default defineComponent({
         uncontrolledFileListRef.value = []
       },
       submit,
-      openOpenFileDialog
+      openOpenFileDialog,
+      abort: doAbort
     }
 
     return {
