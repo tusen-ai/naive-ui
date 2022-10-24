@@ -9,6 +9,10 @@
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
 - `n-image` 新增支持鼠标,键盘事件的滚轮缩放，关闭 [#3902](https://github.com/tusen-ai/naive-ui/issues/3902)
 
+### Fixes
+
+- `n-image` 预览图片时空格，浏览器滚动，关闭 [#3919](https://github.com/tusen-ai/naive-ui/issues/3919)
+
 ## 2.33.5
 
 ### Fixes
