@@ -7,6 +7,7 @@
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+- `n-image` 新增支持鼠标,键盘事件的滚轮缩放，关闭 [#3902](https://github.com/tusen-ai/naive-ui/issues/3902)
 
 ## 2.33.5
 
