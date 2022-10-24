@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix `n-image` mouse click error in preview, closes [#3903](https://github.com/tusen-ai/naive-ui/issues/3903).
+
 ### Feats
 
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).

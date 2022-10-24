@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-image` 在预览状态下鼠标点击异常，关闭 [#3903](https://github.com/tusen-ai/naive-ui/issues/3903)
+
 ### Feats
 
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)

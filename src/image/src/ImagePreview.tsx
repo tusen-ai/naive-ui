@@ -226,6 +226,8 @@ export default defineComponent({
       derivePreviewStyle()
     }
     function handlePreviewMousedown (e: MouseEvent): void {
+      // Right click without logic.
+      if (e.button === 2) return
       const { clientX, clientY } = e
       dragging = true
       startX = clientX - offsetX
