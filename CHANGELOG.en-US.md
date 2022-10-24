@@ -14,6 +14,9 @@
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
 
+- Fix `n-tree` Drag the tree in Google and Edge browser version 106, and the white screen appears. Close [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
+
+
 ## 2.33.4
 
 ### Fixes

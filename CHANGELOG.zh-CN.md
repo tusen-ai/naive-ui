@@ -14,6 +14,8 @@
 
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
 
+- 修复 `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
+
 ## 2.33.4
 
 ### Fixes
