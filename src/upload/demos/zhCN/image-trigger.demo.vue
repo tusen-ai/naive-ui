@@ -16,7 +16,7 @@
   <n-divider />
   <n-upload
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="previewFileList"
+    :default-file-list="fileList"
     list-type="image-card"
     trigger="hover"
     @preview="handlePreview"
@@ -24,7 +24,7 @@
   <n-divider />
   <n-upload
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="previewFileList"
+    :default-file-list="fileList"
     list-type="image-card"
     trigger="click"
     @preview="handlePreview"
@@ -58,39 +58,8 @@ export default defineComponent({
       previewImageUrl: previewImageUrlRef,
       fileList: ref<UploadFileInfo[]>([
         {
-          id: 'a',
-          name: '我是上传出错的普通文件.png',
-          status: 'error'
-        },
-        {
-          id: 'b',
-          name: '我是普通文本.doc',
-          status: 'finished',
-          type: 'text/plain'
-        },
-        {
-          id: 'c',
-          name: '我是自带url的图片.png',
-          status: 'finished',
-          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          id: 'd',
-          name: '我是上传进度99%的文本.doc',
-          status: 'uploading',
-          percentage: 99
-        }
-      ]),
-      previewFileList: ref<UploadFileInfo[]>([
-        {
           id: 'react',
           name: '我是react.png',
-          status: 'finished',
-          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          id: 'vue',
-          name: '我是vue.png',
           status: 'finished',
           url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
         }
