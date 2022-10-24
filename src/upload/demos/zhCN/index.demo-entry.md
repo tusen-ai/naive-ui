@@ -26,7 +26,7 @@ debug.vue
 ### Upload Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |  |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |  |
 | action | `string` | `undefined` | 请求提交的地址 |  |
@@ -57,7 +57,7 @@ debug.vue
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
-| trigger | `none | hover | click` | `hover` | 显示触发元素的时机 | NEXT_VERSION |
+| trigger | `none \| hover \| click` | `hover` | 显示触发元素的时机 | NEXT_VERSION |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
