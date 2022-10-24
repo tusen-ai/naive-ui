@@ -19,7 +19,7 @@ import { useMemo } from 'vooks'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
-import { formatLength, resolveSlot, warn } from '../../../_utils'
+import { formatLength, resolveSlot } from '../../../_utils'
 import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
@@ -27,8 +27,7 @@ import {
   ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode,
-  RowData
+  TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -184,12 +183,13 @@ export default defineComponent({
       stickyExpandedRowsRef,
       renderExpandIconRef,
       summaryPlacementRef,
-      treeMateRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
       doCheck,
       doUncheck,
+      doShiftCheck,
+      doShiftUncheck,
       renderCell
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
@@ -206,24 +206,17 @@ export default defineComponent({
     const bodyShowHeaderOnlyRef = useMemo(() => {
       return props.showHeader || emptyRef.value
     })
-    let lastSelectedKey: string | number = ''
+    let lastSelectedKey: RowKey | undefined
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
-    function getRowInfo (key: RowKey): RowData | undefined {
-      return treeMateRef.value.getNode(key)?.rawNode
-    }
+
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
       shiftKey: boolean
     ): void {
-      const rowInfo = getRowInfo(tmNode.key)
-      if (!rowInfo) {
-        warn('data-table', `fail to get row data with key ${tmNode.key}`)
-        return
-      }
-      if (shiftKey) {
+      if (shiftKey && lastSelectedKey !== undefined) {
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastSelectedKey
         )
@@ -240,29 +233,24 @@ export default defineComponent({
             }
           })
           if (checked) {
-            doCheck(rowKeysToCheck, false, rowInfo)
+            doShiftCheck(rowKeysToCheck)
           } else {
-            doUncheck(rowKeysToCheck, rowInfo)
+            doShiftUncheck(rowKeysToCheck)
           }
           lastSelectedKey = tmNode.key
           return
         }
       }
       if (checked) {
-        doCheck(tmNode.key, false, rowInfo)
+        doCheck(tmNode.key, false)
       } else {
-        doUncheck(tmNode.key, rowInfo)
+        doUncheck(tmNode.key)
       }
       lastSelectedKey = tmNode.key
     }
 
     function handleRadioUpdateChecked (tmNode: { key: RowKey }): void {
-      const rowInfo = getRowInfo(tmNode.key)
-      if (!rowInfo) {
-        warn('data-table', `fail to get row data with key ${tmNode.key}`)
-        return
-      }
-      doCheck(tmNode.key, true, rowInfo)
+      doCheck(tmNode.key, true)
     }
 
     function getScrollContainer (): HTMLElement | null {
