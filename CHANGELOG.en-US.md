@@ -7,10 +7,17 @@
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+- `n-image` adds wheel zoom support for mouse and keyboard events, closes [#3902](https://github.com/tusen-ai/naive-ui/issues/3902)
+
+### Fixes
+
+- `n-image` 预览图片时空格，浏览器滚动，关闭 [#3919](https://github.com/tusen-ai/naive-ui/issues/3919)
 
 ## 2.33.5
 
 ### Fixes
+
+- Fix `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
 
