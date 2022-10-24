@@ -25,7 +25,7 @@ import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import { uploadInjectionKey } from './interface'
+import { uploadInjectionKey, UploadTrigger } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { download, environmentSupportFile, isImageFile } from './utils'
@@ -58,7 +58,11 @@ export default defineComponent({
 
     const imageRef = ref<ImageInst | null>(null)
     const thumbnailUrlRef = ref<string>('')
-    const showTriggerRef = ref<boolean>(NUpload.triggerRef.value === 'none')
+    const showTriggerRef = ref<undefined | UploadTrigger>(
+      NUpload.triggerRef.value === 'click'
+        ? undefined
+        : NUpload.triggerRef.value
+    )
 
     const progressStatusRef = computed(() => {
       const { file } = props
@@ -186,20 +190,9 @@ export default defineComponent({
     }
     function handleTriggerClick (): void {
       if (NUpload.triggerRef.value === 'click') {
-        showTriggerRef.value = !showTriggerRef.value
+        showTriggerRef.value =
+          showTriggerRef.value === 'click' ? undefined : 'click'
       }
-    }
-    function handlerMouseEnterWrapper (): void {
-      if (NUpload.triggerRef.value !== 'hover') {
-        return
-      }
-      showTriggerRef.value = true
-    }
-    function handleMouseLeaveWrapper (): void {
-      if (NUpload.triggerRef.value !== 'hover') {
-        return
-      }
-      showTriggerRef.value = false
     }
     const deriveFileThumbnailUrl = async (): Promise<void> => {
       const { listType } = props
@@ -234,8 +227,6 @@ export default defineComponent({
       handleRetryClick,
       handlePreviewClick,
       handleTriggerClick,
-      handlerMouseEnterWrapper,
-      handleMouseLeaveWrapper,
       showTriggerRef,
       triggerRef: NUpload.triggerRef
     }
@@ -247,8 +238,6 @@ export default defineComponent({
       listType,
       file,
       handleTriggerClick,
-      handlerMouseEnterWrapper,
-      handleMouseLeaveWrapper,
       showTriggerRef,
       triggerRef
     } = this
@@ -322,16 +311,12 @@ export default defineComponent({
             listType !== 'image-card' &&
             `${clsPrefix}-upload-file--with-url`,
           `${clsPrefix}-upload-file--${listType}-type`,
-
           showTriggerRef &&
+            ['click', 'none'].includes(showTriggerRef) &&
+            `${clsPrefix}-upload-file--click ${clsPrefix}-upload-file--${listType}-type--click`,
+          showTriggerRef === 'hover' &&
             `${clsPrefix}-upload-file--hover ${clsPrefix}-upload-file--${listType}-type--hover`
         ]}
-        onMouseenter={
-          triggerRef === 'hover' ? handlerMouseEnterWrapper : undefined
-        }
-        onMouseleave={
-          triggerRef === 'hover' ? handleMouseLeaveWrapper : undefined
-        }
         onClick={triggerRef === 'click' ? handleTriggerClick : undefined}
       >
         <div class={`${clsPrefix}-upload-file-info`}>

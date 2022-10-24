@@ -99,7 +99,7 @@ export default c([
           foldPadding: true
         })
       ]),
-      cM('hover', `
+      cM('click', `
           background-color: var(--n-item-color-hover);
         `, [
         cB('upload-file-info', [
@@ -110,6 +110,20 @@ export default c([
             cM('image-card-type', `
               z-index: 2;
             `)
+          ])
+        ])
+      ]),
+      cM('hover:hover', `
+        background-color: var(--n-item-color-hover);
+      `, [
+        cB('upload-file-info', [
+          cE('action', `
+            opacity: 1;
+            z-index: 2;
+            `, [
+            cM('image-card-type', `
+                z-index: 2;
+              `)
           ])
         ])
       ]),
@@ -208,7 +222,13 @@ export default c([
           transition: opacity .2s var(--n-bezier);
           content: "";
         `),
-        cM('hover', [
+        cM('click', [
+          c('&::before', 'opacity: 1;'),
+          cB('upload-file-info', [
+            cE('thumbnail', 'opacity: .12;')
+          ])
+        ]),
+        cM('hover:hover', [
           c('&::before', 'opacity: 1;'),
           cB('upload-file-info', [
             cE('thumbnail', 'opacity: .12;')

@@ -40,7 +40,8 @@ import type {
   CustomRequest,
   OnError,
   SettledFileInfo,
-  FileAndEntry
+  FileAndEntry,
+  UploadTrigger
 } from './interface'
 import { uploadInjectionKey } from './interface'
 import { createImageDataUrl, createSettledFileInfo, matchType } from './utils'
@@ -347,7 +348,7 @@ export const uploadProps = {
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
   trigger: {
-    type: String as PropType<'none' | 'hover' | 'click'>,
+    type: String as PropType<UploadTrigger>,
     default: 'hover'
   }
 } as const
