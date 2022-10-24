@@ -84,6 +84,7 @@ focus-debug.vue
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
+| transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |  |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | 2.33.3 |

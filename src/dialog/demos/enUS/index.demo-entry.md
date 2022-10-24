@@ -145,6 +145,7 @@ All the properties can be modified dynamically.
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
+| transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
 | on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |
