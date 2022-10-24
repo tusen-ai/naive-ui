@@ -14,6 +14,7 @@ import {
   onBeforeUnmount,
   VNode
 } from 'vue'
+import { throttle } from 'lodash-es'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
@@ -34,6 +35,8 @@ import { prevIcon, nextIcon, closeIcon } from './icons'
 import type { MoveStrategy } from './interface'
 import { imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
+import { isFirefox } from '../../_utils/env/browser'
+
 
 const BLEEDING = 32
 
@@ -89,20 +92,48 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'ArrowUp':
+          e.preventDefault()
+          zoomIn()
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          zoomOut()
+          break
+        case ' ':
+          e.preventDefault()
+          toggleShow()
+          break
         case 'Escape':
+          e.preventDefault()
           toggleShow()
           break
       }
     }
 
+    const mousewheelHandler = throttle((e: WheelEvent | any) => {
+      const delta = e.wheelDelta ? e.wheelDelta : -e.detail
+      if (delta > 0) {
+        zoomIn()
+      } else {
+        zoomOut()
+      }
+    }, 128)
+
+    const mousewheelEventName = isFirefox ? 'DOMMouseScroll' : 'mousewheel'
     watch(showRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
-      } else off('keydown', document, handleKeydown)
+        on('mousewheel', document, mousewheelHandler)
+      } else {
+        off('keydown', document, handleKeydown)
+        off(mousewheelEventName, document, mousewheelHandler)
+      }
     })
 
     onBeforeUnmount(() => {
       off('keydown', document, handleKeydown)
+      off('mousewheel', document, mousewheelHandler)
     })
 
     let startX = 0
