@@ -37,7 +37,6 @@ import { imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
 import { isFirefox } from '../../_utils/env/browser'
 
-
 const BLEEDING = 32
 
 export interface ImagePreviewInst {
@@ -111,7 +110,7 @@ export default defineComponent({
       }
     }
 
-    const mousewheelHandler = throttle((e: WheelEvent | any) => {
+    const handlerMousewheel = throttle((e: WheelEvent | any) => {
       const delta = e.wheelDelta ? e.wheelDelta : -e.detail
       if (delta > 0) {
         zoomIn()
@@ -124,16 +123,16 @@ export default defineComponent({
     watch(showRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
-        on('mousewheel', document, mousewheelHandler)
+        on('mousewheel', document, handlerMousewheel)
       } else {
         off('keydown', document, handleKeydown)
-        off(mousewheelEventName, document, mousewheelHandler)
+        off(mousewheelEventName, document, handlerMousewheel)
       }
     })
 
     onBeforeUnmount(() => {
       off('keydown', document, handleKeydown)
-      off('mousewheel', document, mousewheelHandler)
+      off('mousewheel', document, handlerMousewheel)
     })
 
     let startX = 0
