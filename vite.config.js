@@ -75,7 +75,8 @@ module.exports = {
       'date-fns/esm/locale/pt-BR',
       'date-fns/esm/locale/th',
       'date-fns/esm/locale/ko',
-      'date-fns/esm/locale/nl'
+      'date-fns/esm/locale/nl',
+      'date-fns/esm/locale/ar'
     ],
     exclude: ['__INDEX__']
   },
