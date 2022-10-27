@@ -42,6 +42,7 @@ keyboard-debug.vue
 | vertical | `boolean` | `false` | 是否启用垂直模式 |  |
 | value | `number \| [number, number] \| null` | `undefined` | 值 |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | 值更新的回调 |  |
+| on-change | `(value: number \| [number, number]) => void` | `undefined` | 拖拽结束后的回调 |  |
 
 ### Slider Slots
 
