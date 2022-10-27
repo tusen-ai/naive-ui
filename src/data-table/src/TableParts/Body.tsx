@@ -320,7 +320,7 @@ export default defineComponent({
     function handleMouseleaveTable (): void {
       hoverKeyRef.value = null
     }
-    function handleMouseenterTable (): void {
+    function handleClickTable (): void {
       scrollPartRef.value = 'body'
     }
     function virtualListContainer (): HTMLElement {
@@ -496,7 +496,7 @@ export default defineComponent({
       stickyExpandedRows: stickyExpandedRowsRef,
       renderExpandIcon: renderExpandIconRef,
       setHeaderScrollLeft,
-      handleMouseenterTable,
+      handleClickTable,
       handleVirtualListScroll,
       handleVirtualListResize,
       handleMouseleaveTable,
@@ -577,7 +577,7 @@ export default defineComponent({
               childTriggerColIndex,
               expandable,
               rowProps,
-              handleMouseenterTable,
+              handleClickTable,
               handleMouseleaveTable,
               renderExpand,
               summary,
@@ -932,7 +932,7 @@ export default defineComponent({
                 <table
                   class={`${mergedClsPrefix}-data-table-table`}
                   onMouseleave={handleMouseleaveTable}
-                  onMouseenter={handleMouseenterTable}
+                  onClick={handleClickTable}
                   style={{
                     tableLayout: this.mergedTableLayout
                   }}
@@ -966,8 +966,7 @@ export default defineComponent({
                     clsPrefix: mergedClsPrefix,
                     id: componentId,
                     cols,
-                    onMouseenter: handleMouseenterTable,
-                    onMouseleave: handleMouseleaveTable
+                    onClick: handleClickTable
                   }}
                   showScrollbar={false}
                   onResize={this.handleVirtualListResize}

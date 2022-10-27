@@ -8,6 +8,10 @@
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
 
+### Fixes
+
+- 修复 `n-data-table` 特殊操作下，表头表体不跟手，关闭 [#3941](https://github.com/tusen-ai/naive-ui/issues/3941)
+
 ## 2.33.5
 
 ### Fixes
