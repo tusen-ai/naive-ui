@@ -7,6 +7,7 @@
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+- `n-tree` 为回调函数添加数据行信息, 关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
 
 ## 2.33.5
 
