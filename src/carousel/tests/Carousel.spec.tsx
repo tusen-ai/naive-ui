@@ -23,30 +23,17 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
-      if (i === 1) {
-        // todo: There will be problems in different environments here, https://github.com/tusen-ai/naive-ui/runs/5484107206?check_suite_focus=true
-        // expect(
-        //   wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
-        // ).toBe('false')
-      } else {
-        expect(
-          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
-        ).toBe('true')
-      }
-    })
+    // Because `autoplay` is `true`, `[data-index="${0}"]` `aria-hidden` must not be `false` at the moment
+    expect(wrapper.find(`[data-index="${0}"]`).attributes('aria-hidden')).toBe(
+      'true'
+    )
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
-      if (i === 2) {
-        expect(
-          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
-        ).toBe('false')
-      } else {
-        expect(
-          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
-        ).toBe('true')
-      }
+    // Because `autoplay` is `true` and `interval` is `50`, both `[data-index="${0}"]` and `[data-index="${0}"]` `aria-hidden` must not be `false` at the moment
+    ;([0, 1] as const).forEach((i) => {
+      expect(
+        wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+      ).toBe('true')
     })
     wrapper.unmount()
   })
