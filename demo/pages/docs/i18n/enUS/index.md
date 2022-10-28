@@ -67,6 +67,7 @@ The following list is sorted by 'Config' column.
 | Vietnamese (Vietnam)      | viVN   | dateViVN    | 2.30.7  |
 | Chinese (Simplified)      | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)     | zhTW   | dateZhTW    |         |
+| Arabic (العربية)          | arDZ   | dateArDZ    | 2.33.6  |
 
 ## Customize the existing locale
 
