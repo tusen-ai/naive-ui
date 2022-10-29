@@ -82,7 +82,9 @@ default-value-debug.vue
 
 ### Cascader Methods
 
-| 名称  | 类型         | 说明 | 版本   |
-| ----- | ------------ | ---- | ------ |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| blur | `() => void` | 失焦 | 2.24.2 |
 | focus | `() => void` | 聚焦 | 2.24.2 |
-| blur  | `() => void` | 失焦 | 2.24.2 |
+| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |

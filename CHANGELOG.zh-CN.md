@@ -7,6 +7,14 @@
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+- `n-tree` 新增 `getCheckedKeys` 方法
+- `n-tree` 新增 `getIndeterminateKeys` 方法
+- `n-tree-select` 新增 `getCheckedKeys` 方法
+- `n-tree-select` 新增 `getIndeterminateKeys` 方法
+- `n-tree-select` 新增 `focus` 方法
+- `n-tree-select` 新增 `blur` 方法
+- `n-cascader` 新增 `getCheckedKeys` 方法
+- `n-cascader` 新增 `getIndeterminateKeys` 方法
 
 ### i18n
 

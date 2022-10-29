@@ -77,6 +77,7 @@ export interface CascaderInjection {
   virtualScrollRef: Ref<boolean>
   optionHeightRef: Ref<string>
   labelFieldRef: Ref<string>
+  showCheckboxRef: Ref<boolean>
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void
@@ -119,4 +120,6 @@ export const cascaderInjectionKey =
 export interface CascaderInst {
   focus: () => void
   blur: () => void
+  getCheckedKeys: () => Key[]
+  getIndeterminateKeys: () => Key[]
 }

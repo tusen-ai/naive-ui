@@ -81,7 +81,9 @@ status.vue
 
 ### Cascader Methods
 
-| Name  | Type         | Description | Version |
-| ----- | ------------ | ----------- | ------- |
-| focus | `() => void` | Focus.      | 2.24.2  |
-| blur  | `() => void` | Blur.       | 2.24.2  |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur. | 2.24.2 |
+| focus | `() => void` | Focus. | 2.24.2 |
+| getCheckedKeys | `() => Array<string \| number>` | Get checked keys. | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | Get indeterminate keys. | NEXT_VERSION |

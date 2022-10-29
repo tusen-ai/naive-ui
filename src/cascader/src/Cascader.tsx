@@ -834,6 +834,11 @@ export default defineComponent({
         }
       }
     }
+    const showCheckboxRef = computed(() => {
+      if (props.multiple && props.cascade) return true
+      if (mergedCheckStrategyRef.value !== 'child') return true
+      return false
+    })
     provide(cascaderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -842,6 +847,7 @@ export default defineComponent({
       indeterminateKeysRef,
       hoverKeyPathRef,
       mergedCheckStrategyRef,
+      showCheckboxRef,
       cascadeRef: toRef(props, 'cascade'),
       multipleRef: toRef(props, 'multiple'),
       keyboardKeyRef,
@@ -875,7 +881,10 @@ export default defineComponent({
       },
       blur: () => {
         triggerInstRef.value?.blur()
-      }
+      },
+      getCheckedKeys: () => (showCheckboxRef.value ? checkedKeysRef.value : []),
+      getIndeterminateKeys: () =>
+        showCheckboxRef.value ? indeterminateKeysRef.value : []
     }
     const cssVarsRef = computed(() => {
       const {
