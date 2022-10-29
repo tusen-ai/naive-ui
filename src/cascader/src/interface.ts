@@ -2,7 +2,7 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { Ref, VNodeChild } from 'vue'
+import { Ref, Slots, VNodeChild } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
@@ -57,6 +57,7 @@ export type OnUpdateValueImpl = (
 export type MenuModel = TmNode[][]
 
 export interface CascaderInjection {
+  slots: Slots
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<CascaderTheme>>
   mergedValueRef: Ref<Value | null>

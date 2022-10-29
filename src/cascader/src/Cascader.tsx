@@ -172,7 +172,7 @@ export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
-  setup (props) {
+  setup (props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -840,6 +840,7 @@ export default defineComponent({
       return false
     })
     provide(cascaderInjectionKey, {
+      slots,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       mergedValueRef,

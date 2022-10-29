@@ -16,6 +16,7 @@
 - `n-cascader` 新增 `getCheckedKeys` 方法
 - `n-cascader` 新增 `getIndeterminateKeys` 方法
 - `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
+- `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 
 ### Fixes
 

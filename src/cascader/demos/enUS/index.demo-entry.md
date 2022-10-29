@@ -78,6 +78,7 @@ status.vue
 | action | `()` | Action content displayed in the cascading menu. |  |
 | arrow | `()` | Arrow content displayed in the cascading menu. | 2.32.2 |
 | empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
+| not-found | `()` | Data not found slot when searching. | NEXT_VERSION |
 
 ### Cascader Methods
 
