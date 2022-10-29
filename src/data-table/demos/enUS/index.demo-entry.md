@@ -82,6 +82,8 @@ render-cell.vue
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |
+| stroke | `string` | `undefined` | Color of the spin. |  |
+| stroke-width | `number` | `20` | Relative width of spin's stroke. |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |

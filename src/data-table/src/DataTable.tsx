@@ -439,7 +439,8 @@ export default defineComponent({
                 ? resolveSlot($slots.loading, () => [
                     <NBaseLoading
                       clsPrefix={mergedClsPrefix}
-                      strokeWidth={20}
+                      stroke={this.stroke}
+                      strokeWidth={this.strokeWidth}
                     />
                 ])
                 : null

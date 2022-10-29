@@ -90,6 +90,8 @@ expandable-debug.vue
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
+| stroke | `string` | `undefined` | Spin 的颜色 |  |
+| stroke-width | `number` | `20` | Spin 边缘的相对宽度 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |  |
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |

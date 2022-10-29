@@ -55,6 +55,14 @@ export const dataTableProps = {
     default: () => []
   },
   loading: Boolean,
+  stroke: {
+    type: String,
+    default: undefined
+  },
+  strokeWidth: {
+    type: Number,
+    default: 20
+  },
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
