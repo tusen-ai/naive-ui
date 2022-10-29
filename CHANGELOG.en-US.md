@@ -21,6 +21,7 @@
 
 - Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
 - Fix `n-form-item`'s label text is in wrong position when `label-align="left"` and `require-mark-placement="left"` and `label-placement="left"`, closes [#3871](https://github.com/tusen-ai/naive-ui/issues/3871).
+- Fix `n-tree` Drag the tree in Google and Edge browser version 106, and the white screen appears. Close [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
 
 ### i18n
 
@@ -31,9 +32,6 @@
 ### Fixes
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
-
-- Fix `n-tree` Drag the tree in Google and Edge browser version 106, and the white screen appears. Close [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
-
 
 ## 2.33.4
 
