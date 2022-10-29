@@ -333,6 +333,15 @@ export default cB('tabs', `
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
+    ]),
+    cM('segment-type', [
+      cB('tabs-rail', [
+        cB('tabs-tab', `
+          transition: 
+            background-color .3s var(--n-bezier),
+            color .3s var(--n-bezier);
+        `)
+      ])
     ])
   ])
 ])

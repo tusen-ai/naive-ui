@@ -7,6 +7,7 @@
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
+- `n-tabs` 添加 `type: 'segment'` 的过渡效果，关闭 [#3910](https://github.com/tusen-ai/naive-ui/issues/3910)
 
 ### i18n
 
