@@ -48,6 +48,7 @@ module.exports = {
       '@css-render/vue3-ssr',
       'date-fns-tz',
       'codesandbox/lib/api/define',
+      'grapheme-splitter',
       'highlight.js/lib/core',
       'highlight.js/lib/languages/javascript',
       'highlight.js/lib/languages/python',
@@ -82,6 +83,11 @@ module.exports = {
   },
   build: {
     outDir: 'site',
+    output: {
+      manualChunks: {
+        'grapheme-splitter': ['grapheme-splitter']
+      }
+    },
     rollupOptions: {
       plugins: [
         babel({

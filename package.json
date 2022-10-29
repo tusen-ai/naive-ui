@@ -115,6 +115,7 @@
     "express": "^4.17.3",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
+    "grapheme-splitter": "^1.0.4",
     "husky": "^8.0.1",
     "inquirer": "^9.1.0",
     "jest": "^28.0.3",

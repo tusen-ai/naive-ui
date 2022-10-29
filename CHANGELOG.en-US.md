@@ -15,6 +15,7 @@
 - `n-tree-select` adds `blur` method.
 - `n-cascader` adds `getCheckedKeys` method.
 - `n-cascader` adds `getIndeterminateKeys` method.
+- `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 
 ### i18n
 

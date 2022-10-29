@@ -15,6 +15,7 @@
 - `n-tree-select` 新增 `blur` 方法
 - `n-cascader` 新增 `getCheckedKeys` 方法
 - `n-cascader` 新增 `getIndeterminateKeys` 方法
+- `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
 
 ### i18n
 
