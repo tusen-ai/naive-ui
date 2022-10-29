@@ -12,7 +12,8 @@ import {
   PropType,
   toRef,
   onBeforeUnmount,
-  VNode
+  VNode,
+  withModifiers
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -598,7 +599,10 @@ export default defineComponent({
                           >
                             <img
                               draggable={false}
-                              onMousedown={this.handlePreviewMousedown}
+                              onMousedown={withModifiers(
+                                this.handlePreviewMousedown,
+                                ['left']
+                              )}
                               onDblclick={this.handlePreviewDblclick}
                               class={`${clsPrefix}-image-preview`}
                               key={this.previewSrc}

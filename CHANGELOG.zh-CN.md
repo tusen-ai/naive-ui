@@ -17,6 +17,10 @@
 - `n-cascader` 新增 `getIndeterminateKeys` 方法
 - `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
 
+### Fixes
+
+- 修复 `n-image` 进行图片预览只可以按住鼠标左键拖拽，关闭 [#3950](https://github.com/tusen-ai/naive-ui/issues/3950)
+
 ### i18n
 
 - 新增 arDZ locale

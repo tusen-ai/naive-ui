@@ -17,6 +17,10 @@
 - `n-cascader` adds `getIndeterminateKeys` method.
 - `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 
+### Fixes
+
+- Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
+
 ### i18n
 
 - Add arDZ locale.
