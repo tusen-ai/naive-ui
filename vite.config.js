@@ -85,7 +85,8 @@ module.exports = {
     outDir: 'site',
     output: {
       manualChunks: {
-        'grapheme-splitter': ['grapheme-splitter']
+        'grapheme-splitter': ['grapheme-splitter'],
+        katex: ['katex']
       }
     },
     rollupOptions: {
