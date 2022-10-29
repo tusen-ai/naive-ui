@@ -20,6 +20,7 @@
 ### Fixes
 
 - 修复 `n-image` 进行图片预览只可以按住鼠标左键拖拽，关闭 [#3950](https://github.com/tusen-ai/naive-ui/issues/3950)
+- 修复 `n-form-item` 在 `label-align="left"` 并且 `require-mark-placement="left"` 并且 `label-placement="left"` 时标签文本显示位置有问题，关闭 [#3871](https://github.com/tusen-ai/naive-ui/issues/3871)
 
 ### i18n
 
