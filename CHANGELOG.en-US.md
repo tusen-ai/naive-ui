@@ -8,6 +8,10 @@
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
 
+### Fixes
+
+- Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
+
 ### i18n
 
 - Add arDZ locale.

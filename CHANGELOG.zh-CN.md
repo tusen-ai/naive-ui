@@ -8,6 +8,10 @@
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
 
+### Fixes
+
+- 修复 `n-image` 进行图片预览只可以按住鼠标左键拖拽，关闭 [#3950](https://github.com/tusen-ai/naive-ui/issues/3950)
+
 ### i18n
 
 - 新增 arDZ locale
