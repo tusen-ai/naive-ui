@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Chores
+
+- output format adds esm
+
 ### Feats
 
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Chores
+
+- 打包产物格式添加`esm`
+
 ### Feats
 
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
