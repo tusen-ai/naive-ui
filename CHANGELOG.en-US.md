@@ -45,6 +45,7 @@
 - Fix `n-popover` doesn't wrap line if word is too long.
 - Fix `n-date-picker` can't delete all input content in some cases, closes [#3922](https://github.com/tusen-ai/naive-ui/issues/3922).
 - Fix `n-input`'s `autosize` prop doesn't work properly if there are multiple spaces, closes [#4027](https://github.com/tusen-ai/naive-ui/issues/4027).
+- Fix `n-upload`'s `onBeforeUpload` not serializable when uploading multiple files.
 
 ### i18n
 

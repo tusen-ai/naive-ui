@@ -459,8 +459,9 @@ export default defineComponent({
 
       const batchId = createId()
 
-      void Promise.all(
-        fileAndEntries.map(async ({ file, entry }) => {
+      void (async (): Promise<Array<Required<FileInfo>>> => {
+        const fileInfos: Array<Required<FileInfo>> = []
+        for (const { file, entry } of fileAndEntries) {
           const fileInfo: SettledFileInfo = {
             id: createId(),
             batchId,
@@ -478,14 +479,14 @@ export default defineComponent({
             !onBeforeUpload ||
             (await onBeforeUpload({
               file: fileInfo,
-              fileList: mergedFileListRef.value
+              fileList: mergedFileListRef.value.concat(fileInfos)
             })) !== false
           ) {
-            return fileInfo
+            fileInfos.push(fileInfo)
           }
-          return null
-        })
-      )
+        }
+        return fileInfos
+      })()
         .then(async (fileInfos) => {
           let nextTickChain = Promise.resolve()
 
