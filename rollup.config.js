@@ -67,4 +67,14 @@ const prodConfig = defineConfig({
   }
 })
 
-module.exports = [merge(baseConfig, devConfig), merge(baseConfig, prodConfig)]
+const esmConfig = defineConfig({
+  output: {
+    file: path.resolve('dist/index.prod.mjs'),
+    format: 'es'
+  }
+})
+module.exports = [
+  merge(baseConfig, devConfig),
+  merge(baseConfig, prodConfig),
+  merge(baseConfig, prodConfig, esmConfig)
+]
