@@ -113,9 +113,9 @@ export default defineComponent({
     const handlerMousewheel = throttle((e: WheelEvent | any) => {
       const delta = e.wheelDelta ? e.wheelDelta : -e.detail
       if (delta > 0) {
-        zoomIn()
+        zoomIn(e)
       } else {
-        zoomOut()
+        zoomOut(e)
       }
     }, 128)
 
@@ -327,15 +327,30 @@ export default defineComponent({
       }
       return Math.max(heightScale, widthScale)
     }
-    function zoomIn (): void {
+    function zoomIn (e?: WheelEvent | any): void {
       const maxScale = getMaxScale()
       if (scale < maxScale) {
+        const originalScale = scale
         scaleExp += 1
         scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
+        if (e.target.tagName === 'IMG') {
+          const { value: preview } = previewRef
+          if (!preview) return
+          const pbox = preview.getBoundingClientRect()
+          const diff = scale - originalScale
+          const origin = {
+            x: diff * pbox.width * 0.5,
+            y: diff * pbox.height * 0.5
+          }
+          const x = (window.innerWidth - pbox.width) * 0.5
+          const y = (window.innerHeight - pbox.height) * 0.5
+          offsetX -= (e.clientX - x) * diff - origin.x
+          offsetY -= (e.clientY - y) * diff - origin.y
+        }
         derivePreviewStyle()
       }
     }
-    function zoomOut (): void {
+    function zoomOut (e: WheelEvent | any): void {
       if (scale > 0.5) {
         const originalScale = scale
         scaleExp -= 1
@@ -353,6 +368,7 @@ export default defineComponent({
     }
 
     function derivePreviewStyle (transition: boolean = true): void {
+      console.log(offsetX, offsetY)
       const { value: preview } = previewRef
       if (!preview) return
       const { style } = preview
