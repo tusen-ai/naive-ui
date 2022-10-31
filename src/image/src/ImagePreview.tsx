@@ -115,7 +115,7 @@ export default defineComponent({
       if (delta > 0) {
         zoomIn(e)
       } else {
-        zoomOut(e)
+        zoomOut()
       }
     }, 128)
 
@@ -335,7 +335,8 @@ export default defineComponent({
         const originalScale = scale
         scaleExp += 1
         scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
-        if (e.target.tagName === 'IMG') {
+        console.log(e)
+        if (e?.target.tagName === 'IMG') {
           const { value: preview } = previewRef
           if (!preview) return
           const pbox = preview.getBoundingClientRect()
@@ -352,7 +353,7 @@ export default defineComponent({
         derivePreviewStyle()
       }
     }
-    function zoomOut (e: WheelEvent | any): void {
+    function zoomOut (): void {
       if (scale > 0.5) {
         const originalScale = scale
         scaleExp -= 1
