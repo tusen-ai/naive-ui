@@ -335,7 +335,6 @@ export default defineComponent({
         const originalScale = scale
         scaleExp += 1
         scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
-        console.log(e)
         if (e?.target.tagName === 'IMG') {
           const { value: preview } = previewRef
           if (!preview) return
