@@ -7,7 +7,30 @@
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+- `n-tree` adds `getCheckedKeys` method.
+- `n-tree` adds `getIndeterminateKeys` method.
+- `n-tree-select` adds `getCheckedKeys` method.
+- `n-tree-select` adds `getIndeterminateKeys` method.
+- `n-tree-select` adds `focus` method.
+- `n-tree-select` adds `blur` method.
+- `n-cascader` adds `getCheckedKeys` method.
+- `n-cascader` adds `getIndeterminateKeys` method.
+- `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
+- `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
+- `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
 - `n-image` adds wheel zoom support for mouse and keyboard events, closes [#3902](https://github.com/tusen-ai/naive-ui/issues/3902)
+
+### Fixes
+
+- Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
+- Fix `n-form-item`'s label text is in wrong position when `label-align="left"` and `require-mark-placement="left"` and `label-placement="left"`, closes [#3871](https://github.com/tusen-ai/naive-ui/issues/3871).
+- Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
+- Fix `n-select` shows wrong value in select box after `value-field` is set and `max-tag-count="responsive"` and remove selected option in overflow tag's popover, closes [#3869](https://github.com/tusen-ai/naive-ui/issues/3869).
+- Fix `n-ellipsis` won't overflow in `n-card`'s title, closes [#3935](https://github.com/tusen-ai/naive-ui/issues/3935).
+
+### i18n
+
+- Add arDZ locale.
 
 ## 2.33.5
 

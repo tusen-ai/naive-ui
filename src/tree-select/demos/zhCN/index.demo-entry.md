@@ -89,3 +89,12 @@ render-debug.vue
 | action | `()` | 菜单操作区域的 slot | 2.22.0 |
 | arrow  | `()` | 选择箭头 slot       | 2.30.4 |
 | empty  | `()` | 菜单无数据时的 slot | 2.22.0 |
+
+### TreeSelect Methods
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| blur | `() => void` | 失焦 | NEXT_VERSION |
+| focus | `() => void` | 聚焦 | NEXT_VERSION |
+| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |

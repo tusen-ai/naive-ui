@@ -256,6 +256,8 @@ export default defineComponent({
       derivePreviewStyle()
     }
     function handlePreviewMousedown (e: MouseEvent): void {
+      if (e.button !== 0) return
+
       const { clientX, clientY } = e
       dragging = true
       startX = clientX - offsetX
