@@ -270,7 +270,7 @@ export default defineComponent({
                     ref={(el) => (cellElsRef[key] = el as HTMLTableCellElement)}
                     key={key}
                     style={{
-                      textAlign: column.align,
+                      textAlign: column.headerAlign || column.align,
                       left: pxfy(fixedColumnLeftMap[key]?.start),
                       right: pxfy(fixedColumnRightMap[key]?.start)
                     }}
