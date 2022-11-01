@@ -140,6 +140,7 @@ declare module 'vue' {
     NUploadFileList: typeof import('naive-ui')['NUploadFileList']
     NUploadTrigger: typeof import('naive-ui')['NUploadTrigger']
     NWatermark: typeof import('naive-ui')['NWatermark']
+    NEquation: typeof import('naive-ui')['NEquation']
   }
 }
 export {}

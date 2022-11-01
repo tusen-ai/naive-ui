@@ -14,6 +14,7 @@ describe('n-badge', () => {
     await wrapper.setProps({ dot: true })
     expect(wrapper.find('.n-badge').classes('n-badge--dot')).toBe(true)
     expect(wrapper.find('.n-base-slot-machine').exists()).not.toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `color` prop', async () => {
@@ -21,6 +22,7 @@ describe('n-badge', () => {
     expect(wrapper.find('.n-badge').attributes('style')).toContain(
       '--n-color: grey;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `max` prop', async () => {
@@ -37,6 +39,7 @@ describe('n-badge', () => {
         .find('.n-base-slot-machine-current-number__inner--not-number')
         .exists()
     ).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `processing` prop', async () => {
@@ -45,6 +48,7 @@ describe('n-badge', () => {
 
     await wrapper.setProps({ processing: true })
     expect(wrapper.find('.n-base-wave').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `show-zero` prop', async () => {
@@ -53,6 +57,7 @@ describe('n-badge', () => {
 
     await wrapper.setProps({ 'show-zero': true })
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `show` prop', async () => {
@@ -61,6 +66,7 @@ describe('n-badge', () => {
 
     await wrapper.setProps({ show: false })
     expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `type` prop', () => {
@@ -81,6 +87,7 @@ describe('n-badge', () => {
       })
 
       expect(wrapper.find('.n-badge').attributes('style')).toContain(item.color)
+      wrapper.unmount()
     })
   })
 })

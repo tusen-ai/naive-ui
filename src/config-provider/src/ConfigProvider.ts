@@ -27,6 +27,7 @@ import type {
   Breakpoints
 } from './internal-interface'
 import { configProviderInjectionKey } from './context'
+import type { Katex } from './katex'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -44,6 +45,7 @@ export const configProviderProps = {
     default: 'div'
   },
   hljs: Object as PropType<Hljs>,
+  katex: Object as PropType<Katex>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
   componentOptions: Object as PropType<GlobalComponentConfig>,
@@ -201,6 +203,12 @@ export default defineComponent({
       mergedHljsRef: computed(() => {
         const { hljs } = props
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
+      }),
+      mergedKatexRef: computed(() => {
+        const { katex } = props
+        return katex === undefined
+          ? NConfigProvider?.mergedKatexRef.value
+          : katex
       }),
       mergedThemeRef,
       mergedThemeOverridesRef,

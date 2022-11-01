@@ -95,6 +95,7 @@ import type { EmptyProps } from '../../empty'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { RowTheme } from '../../legacy-grid/styles'
+import type { Katex } from './katex'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -245,6 +246,7 @@ export interface ConfigProviderInjection {
   mergedLocaleRef: Ref<NLocale | undefined>
   mergedDateLocaleRef: Ref<NDateLocale | undefined>
   mergedHljsRef: Ref<Hljs | undefined>
+  mergedKatexRef: Ref<Katex | undefined>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>
   mergedThemeRef: Ref<GlobalTheme | undefined>

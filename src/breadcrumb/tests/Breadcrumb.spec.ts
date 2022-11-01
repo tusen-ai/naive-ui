@@ -15,6 +15,7 @@ describe('n-breadcrumb', () => {
     expect(mockErrorLogger).toBeCalledWith(
       '[naive/breadcrumb]: `n-breadcrumb-item` must be placed inside `n-breadcrumb`.'
     )
+    wrapper.unmount()
   })
 
   it('should work with Breadcrumb, BreadcrumbItem slots', async () => {
@@ -34,6 +35,7 @@ describe('n-breadcrumb', () => {
     const itemList = wrapper.findAll('.n-breadcrumb-item__link')
     expect(itemList[0].text()).toBe('test-item1')
     expect(itemList[1].text()).toBe('test-item2')
+    wrapper.unmount()
   })
 
   it("should work with Breadcrumb's `separator` prop", async () => {
@@ -52,6 +54,7 @@ describe('n-breadcrumb', () => {
         .findAll('.n-breadcrumb-item__separator')
         .every((i) => i.text() === '@')
     ).toBe(true)
+    wrapper.unmount()
   })
 
   it("should work with BreadcrumbItem's `separator` prop", async () => {
@@ -70,6 +73,7 @@ describe('n-breadcrumb', () => {
 
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[0].text()).toBe('@')
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[1].text()).toBe('/')
+    wrapper.unmount()
   })
 
   it('should be possible to pass `href` props to NBreadcrumbItem', () => {
@@ -89,6 +93,7 @@ describe('n-breadcrumb', () => {
     expect(firstBreadcrumbItem.text()).toMatch('Home')
     expect(secondBreadcrumbItem.exists()).toBe(true)
     expect(secondBreadcrumbItem.attributes('href')).toMatch('/path1')
+    wrapper.unmount()
   })
 
   describe('accessibility', () => {
@@ -97,6 +102,7 @@ describe('n-breadcrumb', () => {
       expect(wrapper.find('.n-breadcrumb').attributes('aria-label')).toBe(
         'Breadcrumb'
       )
+      wrapper.unmount()
     })
 
     it('should add `aria-current` if the item is the current location', () => {
@@ -146,6 +152,7 @@ describe('n-breadcrumb', () => {
           .attributes('aria-current')
       ).toBe('location')
       globalThis.window = originalWindow
+      wrapper.unmount()
     })
 
     it('should add `aria-hidden` to the separator', () => {
@@ -165,6 +172,7 @@ describe('n-breadcrumb', () => {
       expect(
         wrapper.find('.n-breadcrumb-item__separator').attributes('aria-hidden')
       ).toBe('true')
+      wrapper.unmount()
     })
   })
 })

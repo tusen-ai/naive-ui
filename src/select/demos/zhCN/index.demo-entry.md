@@ -84,7 +84,7 @@ create-debug.vue
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |  |
 | on-blur | `() => void` | `undefined` | `blur` 时执行的回调 |  |
 | on-clear | `() => void` | `undefined` | `clear` 时执行的回调 |  |
-| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复 |  |
+| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复，应该和 `tag` 属性一起被使用 |  |
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |  |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |

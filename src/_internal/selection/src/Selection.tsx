@@ -12,7 +12,8 @@ import {
   CSSProperties,
   watchEffect,
   onMounted,
-  InputHTMLAttributes
+  InputHTMLAttributes,
+  VNode
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type {
@@ -618,11 +619,11 @@ export default defineComponent({
           )}
         </div>
       )
-      const originalTags = (
-        maxTagCountNumeric
+      const createOriginalTagNodes = (): VNode[] =>
+        (maxTagCountNumeric
           ? this.selectedOptions!.slice(0, maxTagCount)
           : this.selectedOptions!
-      ).map(createTag)
+        ).map(createTag)
       const input = filterable ? (
         <div
           class={`${clsPrefix}-base-selection-input-tag`}
@@ -706,7 +707,7 @@ export default defineComponent({
             }}
           >
             {{
-              default: () => originalTags,
+              default: createOriginalTagNodes,
               counter: renderCounter,
               tail: () => input
             }}
@@ -723,21 +724,21 @@ export default defineComponent({
             }}
           >
             {{
-              default: () => originalTags,
+              default: createOriginalTagNodes,
               counter: renderCounter
             }}
           </VOverflow>
         )
       ) : maxTagCountNumeric ? (
-        originalTags.concat(counter as JSX.Element)
+        createOriginalTagNodes().concat(counter as JSX.Element)
       ) : (
-        originalTags
+        createOriginalTagNodes()
       )
       const renderPopover = useMaxTagCount
         ? (): JSX.Element => (
             <div class={`${clsPrefix}-base-selection-popover`}>
               {maxTagCountResponsive
-                ? originalTags
+                ? createOriginalTagNodes()
                 : this.selectedOptions!.map(createTag)}
             </div>
           )

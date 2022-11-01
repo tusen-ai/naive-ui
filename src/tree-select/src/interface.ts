@@ -75,3 +75,10 @@ export type TreeSelectRenderSuffix = TreeSelectRenderTreePart
 export type TreeSelectNodeProps = (info: {
   option: TreeSelectOption
 }) => HTMLAttributes & Record<string, unknown>
+
+export interface TreeSelectInst {
+  getCheckedKeys: () => Array<string | number>
+  getIndeterminateKeys: () => Array<string | number>
+  focus: () => void
+  blur: () => void
+}

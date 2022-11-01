@@ -59,6 +59,7 @@ import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
+  TreeSelectInst,
   TreeSelectNodeProps,
   TreeSelectOption,
   TreeSelectRenderLabel,
@@ -73,6 +74,7 @@ import {
   treeOption2SelectOptionWithPath
 } from './utils'
 import style from './styles/index.cssr'
+import { useMergedCheckStrategy } from '../../tree/src/utils'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
@@ -617,6 +619,40 @@ export default defineComponent({
 
     useOnResize(menuElRef, handleTriggerOrMenuResize)
 
+    const mergedCheckStrategyRef = useMergedCheckStrategy(props)
+    const exposedCheckedStatusRef = computed(() => {
+      if (props.checkable) {
+        const mergedValue = mergedValueRef.value
+        if (props.multiple && Array.isArray(mergedValue)) {
+          return dataTreeMateRef.value.getCheckedKeys(mergedValue, {
+            cascade: props.cascade,
+            checkStrategy: mergedCheckStrategyRef.value,
+            allowNotLoaded: props.allowCheckingNotLoaded
+          })
+        } else {
+          return {
+            checkedKeys:
+              Array.isArray(mergedValue) || mergedValue === null
+                ? []
+                : [mergedValue],
+            indeterminateKeys: []
+          }
+        }
+      }
+      return {
+        checkedKeys: [],
+        indeterminateKeys: []
+      }
+    })
+
+    const exposedMethods: TreeSelectInst = {
+      getCheckedKeys: () => exposedCheckedStatusRef.value.checkedKeys,
+      getIndeterminateKeys: () =>
+        exposedCheckedStatusRef.value.indeterminateKeys,
+      focus: () => triggerInstRef.value?.focus(),
+      blur: () => triggerInstRef.value?.blur()
+    }
+
     const themeRef = useTheme(
       'TreeSelect',
       '-tree-select',
@@ -655,6 +691,7 @@ export default defineComponent({
       : undefined
 
     return {
+      ...exposedMethods,
       menuElRef,
       mergedStatus: mergedStatusRef,
       triggerInstRef,

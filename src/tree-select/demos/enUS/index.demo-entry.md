@@ -86,3 +86,12 @@ debug.vue
 | action | `()`       | Options menu slot.                     | 2.22.0  |
 | arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4  |
 | empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
+
+### TreeSelect Methods
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur. | NEXT_VERSION |
+| focus | `() => void` | Focus. | NEXT_VERSIONs |
+| getCheckedKeys | `() => Array<string \| number>` | Get checked keys. | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | Get indeterminate keys. | NEXT_VERSION |

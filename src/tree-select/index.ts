@@ -6,5 +6,6 @@ export type {
   TreeSelectRenderLabel,
   TreeSelectRenderPrefix,
   TreeSelectRenderSuffix,
-  TreeSelectRenderTag
+  TreeSelectRenderTag,
+  TreeSelectInst
 } from './src/interface'

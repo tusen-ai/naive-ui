@@ -107,3 +107,5 @@ expand-debug.vue
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
+| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |

@@ -28,16 +28,19 @@ describe('n-calendar', () => {
     // May 19 2022
     const wrapper = mount(NCalendar, { props: { defaultValue: 1652956953562 } })
     expect(wrapper.find('.n-calendar-header__title').text()).toContain('May')
+    wrapper.unmount()
   })
 
   it('should work with `default-value` prop', async () => {
     const wrapper = mount(NCalendar, { props: { defaultValue: now } })
     expect(wrapper.find('.n-calendar-cell--selected').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `value` prop', async () => {
     const wrapper = mount(NCalendar, { props: { value: now } })
     expect(wrapper.find('.n-calendar-cell--selected').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `is-date-disabled` prop', async () => {
@@ -48,6 +51,7 @@ describe('n-calendar', () => {
       props: { 'is-date-disabled': disableFunction }
     })
     expect(wrapper.find('.n-calendar-cell--disabled').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `on-update:value` prop', async () => {
@@ -56,6 +60,7 @@ describe('n-calendar', () => {
 
     await wrapper.findAll('.n-calendar-date')[1].trigger('click')
     expect(onUpdate).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with clicked `prev` and `next`', async () => {
@@ -84,5 +89,6 @@ describe('n-calendar', () => {
     expect(wrapper.find('.n-calendar-header__title').text()).toBe(
       `${format(nextDate, 'MMMM')} ${getYear(nextDate)}`
     )
+    wrapper.unmount()
   })
 })

@@ -1,5 +1,14 @@
+import { computed, ComputedRef } from 'vue'
+import { CheckStrategy } from 'treemate'
 import { isBrowser } from '../../_utils'
 import { Key, TmNode, TreeOption } from './interface'
+
+export function useMergedCheckStrategy (props: {
+  leafOnly: boolean
+  checkStrategy: CheckStrategy
+}): ComputedRef<CheckStrategy> {
+  return computed(() => (props.leafOnly ? 'child' : props.checkStrategy))
+}
 
 export function isNodeDisabled (node: TmNode, disabledField: string): boolean {
   return !!(node.rawNode as any)[disabledField]

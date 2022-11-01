@@ -6,13 +6,18 @@ import { len } from './utils'
 export default defineComponent({
   name: 'InputWordCount',
   setup (_, { slots }) {
-    const { mergedValueRef, maxlengthRef, mergedClsPrefixRef } =
+    const {
+      mergedValueRef,
+      maxlengthRef,
+      mergedClsPrefixRef,
+      countGraphemesRef
+    } =
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       inject(inputInjectionKey)!
     const wordCountRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null || Array.isArray(mergedValue)) return 0
-      return len(mergedValue)
+      return (countGraphemesRef.value || len)(mergedValue)
     })
     return () => {
       const { value: maxlength } = maxlengthRef

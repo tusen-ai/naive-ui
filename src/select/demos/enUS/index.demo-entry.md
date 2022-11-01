@@ -74,7 +74,7 @@ custom-field.vue
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the selection element is blurred. |  |
 | on-clear | `() => void` | `undefined` | Callback triggered when the selection element is cleared. |  |
-| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create an option when you type in a custom option. Note that `filter` will be applied to the created option too. And you'd better make sure that the value of the created option is not the same as any other option. |  |
+| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create an option when you type in a custom option. Note that `filter` will be applied to the created option too. And you'd better make sure that the value of the created option is not the same as any other option. Should be used with `tag` prop. |  |
 | on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |  |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |

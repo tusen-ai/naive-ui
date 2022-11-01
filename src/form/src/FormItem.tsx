@@ -156,7 +156,8 @@ export default defineComponent({
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
     const {
       mergedLabelPlacement: labelPlacementRef,
-      mergedLabelAlign: labelTextAlignRef
+      mergedLabelAlign: labelTextAlignRef,
+      mergedRequireMarkPlacement: mergedRequireMarkPlacementRef
     } = formItemMiscRefs
     const renderExplainsRef = ref<
     Array<{
@@ -425,22 +426,40 @@ export default defineComponent({
       }
       return cssVars
     })
-    const themeClassHandle = useThemeClass(
-      'form-item',
-      computed(() => {
-        return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
-          labelTextAlignRef.value?.[0] || ''
-        }`
-      }),
-      cssVarsRef,
-      props
-    )
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'form-item',
+        computed(() => {
+          return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
+              labelTextAlignRef.value?.[0] || ''
+            }`
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
+    const reverseColSpaceRef = computed(() => {
+      // label placement left
+      // require-mark-placement | label align | areas (1fr auto)
+      // left                   | left        | mark text (need reverse)
+      // left                   | right       | mark text (okay)
+      // right                  | left        | mark text (okay)
+      // right                  | right       | mark text (okay)
+      // right-hanging          | left        | text mark (okay)
+      // right-hanging          | right       | text mark (okay)
+      return (
+        labelPlacementRef.value === 'left' &&
+        mergedRequireMarkPlacementRef.value === 'left' &&
+        labelTextAlignRef.value === 'left'
+      )
+    })
     return {
       labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
       feedbackId: feedbackIdRef,
       renderExplains: renderExplainsRef,
+      reverseColSpace: reverseColSpaceRef,
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
@@ -492,7 +511,9 @@ export default defineComponent({
           class={[
             labelProps?.class,
             `${mergedClsPrefix}-form-item-label`,
-            `${mergedClsPrefix}-form-item-label--${mergedRequireMarkPlacement}-mark`
+            `${mergedClsPrefix}-form-item-label--${mergedRequireMarkPlacement}-mark`,
+            this.reverseColSpace &&
+              `${mergedClsPrefix}-form-item-label--reverse-columns-space`
           ]}
           style={this.mergedLabelStyle as any}
           ref="labelElementRef"

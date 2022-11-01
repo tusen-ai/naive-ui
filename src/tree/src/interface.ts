@@ -144,4 +144,6 @@ export interface InternalTreeInst {
 
 export interface TreeInst {
   scrollTo: (options: { key: Key }) => void
+  getCheckedKeys: () => Key[]
+  getIndeterminateKeys: () => Key[]
 }

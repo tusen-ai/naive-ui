@@ -99,6 +99,7 @@ export default c([
           font-weight: var(--n-title-font-weight);
           transition: color .3s var(--n-bezier);
           flex: 1;
+          min-width: 0;
           color: var(--n-title-text-color);
         `),
         cE('extra', `
@@ -124,7 +125,7 @@ export default c([
         background-clip: padding-box;
         background-color: var(--n-action-color);
       `),
-      cE('content', 'flex: 1;'),
+      cE('content', 'flex: 1; min-width: 0;'),
       cE('content, footer', `
         box-sizing: border-box;
         padding: 0 var(--n-padding-left) var(--n-padding-bottom) var(--n-padding-left);
