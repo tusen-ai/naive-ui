@@ -400,7 +400,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, themeClass, onRender, $slots } = this
+    const { mergedClsPrefix, themeClass, onRender, $slots, spinProps } = this
     onRender?.()
     return (
       <div
@@ -440,6 +440,7 @@ export default defineComponent({
                     <NBaseLoading
                       clsPrefix={mergedClsPrefix}
                       strokeWidth={20}
+                      {...spinProps}
                     />
                 ])
                 : null
