@@ -74,6 +74,11 @@ export interface InternalDropInfo {
   dropPosition: DropPosition
 }
 
+export interface TreeCheckInfo {
+  option: TreeOption
+  action: 'check' | 'uncheck'
+}
+
 export type RenderSwitcherIcon = () => VNodeChild
 
 export type CheckOnClick = (option: TreeOption) => boolean

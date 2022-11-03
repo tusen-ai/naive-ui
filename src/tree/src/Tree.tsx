@@ -62,7 +62,8 @@ import type {
   RenderSwitcherIcon,
   TreeNodeProps,
   CheckOnClick,
-  TreeInst
+  TreeInst,
+  TreeCheckInfo
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -101,6 +102,11 @@ export type OnUpdateKeys = (
   value: Array<string & number>,
   option: Array<TreeOption | null>
 ) => void
+export type OnUpdateCheckedKeys = (
+  value: Array<string & number>,
+  option: Array<TreeOption | null>,
+  info: TreeCheckInfo
+) => void
 export type OnUpdateKeysImpl = (
   value: Key[],
   option: Array<TreeOption | null>
@@ -138,7 +144,7 @@ export const treeSharedProps = {
   MaybeArray<OnUpdateKeys>
   >,
   'onUpdate:indeterminateKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<OnUpdateCheckedKeys>
   >,
   onUpdateExpandedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
@@ -237,9 +243,11 @@ export const treeProps = {
   MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDropInfo) => void>>,
-  onUpdateCheckedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+  onUpdateCheckedKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedKeys>
+  >,
   'onUpdate:checkedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<OnUpdateCheckedKeys>
   >,
   onUpdateSelectedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
@@ -743,7 +751,8 @@ export default defineComponent({
     }
     function doUpdateCheckedKeys (
       value: Key[],
-      option: Array<TreeOption | null>
+      option: Array<TreeOption | null>,
+      info: TreeCheckInfo
     ): void {
       const {
         'onUpdate:checkedKeys': _onUpdateCheckedKeys,
@@ -751,10 +760,10 @@ export default defineComponent({
       } = props
       uncontrolledCheckedKeysRef.value = value
       if (onUpdateCheckedKeys) {
-        call(onUpdateCheckedKeys as OnUpdateKeysImpl, value, option)
+        call(onUpdateCheckedKeys as OnUpdateKeysImpl, value, option, info)
       }
       if (_onUpdateCheckedKeys) {
-        call(_onUpdateCheckedKeys as OnUpdateKeysImpl, value, option)
+        call(_onUpdateCheckedKeys as OnUpdateKeysImpl, value, option, info)
       }
     }
     function doUpdateIndeterminateKeys (
@@ -843,14 +852,22 @@ export default defineComponent({
         handleSelect(node)
         return
       }
-      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value[
-        checked ? 'check' : 'uncheck'
-      ](node.key, displayedCheckedKeysRef.value, {
-        cascade: props.cascade,
-        checkStrategy: mergedCheckStrategyRef.value,
-        allowNotLoaded: props.allowCheckingNotLoaded
+      const action = checked ? 'check' : 'uncheck'
+      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value[action](
+        node.key,
+        displayedCheckedKeysRef.value,
+        {
+          cascade: props.cascade,
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
+        }
+      )
+      const option = dataTreeMateRef.value.getNode(node.key)
+        ?.rawNode as TreeOption
+      doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys), {
+        action,
+        option
       })
-      doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys))
       doUpdateIndeterminateKeys(
         indeterminateKeys,
         getOptionsByKeys(indeterminateKeys)
@@ -912,7 +929,12 @@ export default defineComponent({
             )
           )
         } else {
-          doUpdateCheckedKeys([node.key], getOptionsByKeys([node.key]))
+          const option = dataTreeMateRef.value.getNode(node.key)
+            ?.rawNode as TreeOption
+          doUpdateCheckedKeys([node.key], getOptionsByKeys([node.key]), {
+            action: 'check',
+            option
+          })
         }
       }
       if (props.multiple) {
