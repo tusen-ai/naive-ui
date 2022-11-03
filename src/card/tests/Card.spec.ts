@@ -14,6 +14,7 @@ describe('n-card', () => {
     await wrapper.setProps({ title: 'test' })
     expect(wrapper.find('.n-card-header').exists()).toBe(true)
     expect(wrapper.find('.n-card-header__main').text()).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -21,6 +22,7 @@ describe('n-card', () => {
 
     await wrapper.setProps({ size: 'small' })
     expect(wrapper.find('.n-card').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `hoverable` prop', async () => {
@@ -31,6 +33,7 @@ describe('n-card', () => {
     })
 
     expect(wrapper.find('.n-card').classes()).toContain('n-card--hoverable')
+    wrapper.unmount()
   })
 
   it('should work with `embedded` prop', async () => {
@@ -43,6 +46,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card').attributes('style')).toContain(
       '--n-color-embedded: rgb(250, 250, 252)'
     )
+    wrapper.unmount()
   })
 
   it('should work with `segmented` prop', async () => {
@@ -60,6 +64,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card').classes()).toContain(
       'n-card--content-segmented'
     )
+    wrapper.unmount()
   })
 
   it('should work with `slots` ', async () => {
@@ -91,6 +96,7 @@ describe('n-card', () => {
 
     expect(wrapper.find('.n-card__action').exists()).toBe(true)
     expect(wrapper.find('.n-card__action').text()).toBe('action')
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -101,6 +107,7 @@ describe('n-card', () => {
     })
 
     expect(wrapper.find('.n-card--bordered').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `closable` and `on-close` prop', async () => {
@@ -115,6 +122,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card-header__close').exists()).toBe(true)
     await wrapper.find('.n-card-header__close').trigger('click')
     expect(onClose).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with `header-style` prop', async () => {
@@ -132,6 +140,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card-header').attributes('style')).toContain(
       testStyle
     )
+    wrapper.unmount()
   })
 
   it('should work with `content-style` prop', async () => {
@@ -148,6 +157,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card__content').attributes('style')).toContain(
       testStyle
     )
+    wrapper.unmount()
   })
 
   it('should work with `footer-style` prop', async () => {
@@ -164,6 +174,7 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card__footer').attributes('style')).toContain(
       testStyle
     )
+    wrapper.unmount()
   })
 
   it('should work with `header-extra-style` prop', async () => {
@@ -181,5 +192,6 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card-header__extra').attributes('style')).toContain(
       testStyle
     )
+    wrapper.unmount()
   })
 })
