@@ -5,7 +5,8 @@ const skSK: NLocale = {
   global: {
     undo: 'Späť',
     redo: 'Obnoviť',
-    confirm: 'Potvrdiť'
+    confirm: 'Potvrdiť',
+    clear: 'Vyčistiť'
   },
   Popconfirm: {
     positiveText: 'Potvrdiť',

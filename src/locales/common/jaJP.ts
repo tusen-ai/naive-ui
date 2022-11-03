@@ -5,7 +5,8 @@ const jaJP: NLocale = {
   global: {
     undo: '元に戻す',
     redo: 'やり直す',
-    confirm: 'OK'
+    confirm: 'OK',
+    clear: 'クリア'
   },
   Popconfirm: {
     positiveText: 'OK',

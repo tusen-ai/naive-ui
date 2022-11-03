@@ -105,7 +105,7 @@ export const colorPickerProps = {
     type: Array as PropType<ActionType[]>,
     default: null
   },
-  internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
+  internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo' | 'clear'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
@@ -443,6 +443,11 @@ export default defineComponent({
       valueIndexRef.value = valueIndex + 1
     }
 
+    function clear (): void {
+      doUpdateValue(null, 'input')
+      doUpdateShow(false)
+    }
+
     function handleConfirm (): void {
       const { value } = mergedValueRef
       const { onConfirm } = props
@@ -635,6 +640,17 @@ export default defineComponent({
                   themeOverrides={mergedTheme.peerOverrides.Button}
                 >
                   {{ default: () => localeRef.value.redo }}
+                </NButton>
+              )}
+              {internalActions.includes('clear') && (
+                <NButton
+                  size="small"
+                  onClick={clear}
+                  disabled={!mergedValueRef.value}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                >
+                  {{ default: () => localeRef.value.clear }}
                 </NButton>
               )}
             </div>
