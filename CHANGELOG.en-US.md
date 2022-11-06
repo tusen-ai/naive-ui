@@ -21,7 +21,6 @@
 
 ### Fixes
 
-- Fix `n-slider` custom thumb demo not rendering custom thumb/handle, closes [#3992](https://github.com/tusen-ai/naive-ui/issues/3992).
 - Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
 - Fix `n-form-item`'s label text is in wrong position when `label-align="left"` and `require-mark-placement="left"` and `label-placement="left"`, closes [#3871](https://github.com/tusen-ai/naive-ui/issues/3871).
 - Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
