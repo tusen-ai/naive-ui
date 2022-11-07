@@ -5,7 +5,12 @@
 </markdown>
 
 <template>
-  <n-dynamic-input v-model:value="value" placeholder="请输入" :min="3" :max="6">
+  <n-dynamic-input
+    v-model:value="value"
+    placeholder="让知识来的更猛烈些"
+    :min="3"
+    :max="6"
+  >
     <template #action="{ index, create, remove, move }">
       <n-space style="margin-left: 20px">
         <n-button @click="() => create(index)">

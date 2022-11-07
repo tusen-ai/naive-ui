@@ -5,7 +5,12 @@ The knowledge I want to learn is like my shopping cart -- only adding not remove
 </markdown>
 
 <template>
-  <n-dynamic-input v-model:value="value" placeholder="请输入" :min="3" :max="6">
+  <n-dynamic-input
+    v-model:value="value"
+    placeholder="Come on"
+    :min="3"
+    :max="6"
+  >
     <template #action="{ index, create, remove, move }">
       <n-space style="margin-left: 20px">
         <n-button @click="() => create(index)">
