@@ -18,6 +18,7 @@
 - `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
+- `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
 
 ### Fixes
 

@@ -16,6 +16,7 @@ pair.vue
 custom.vue
 form.vue
 move.vue
+custom-action.vue
 rtl-debug.vue
 ```
 
@@ -57,6 +58,7 @@ rtl-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
+| action | `(options: { value: any, index: number, create: (index: number) => void, remove: (index: number) => void, move: (type: 'up' \| 'down', index: number) => void })` | 自定义操作，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引 | NEXT_VERSION |
 | default | `(options: { value: any, index: number })` | 每一项的渲染方式，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引 |  |
 | create-button-default | `()` | 新建项按钮的内容 | 2.25.0 |
 | create-button-icon | `()` | 新建项按钮的图标 | 2.25.0 |
