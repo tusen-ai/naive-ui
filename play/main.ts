@@ -10,7 +10,6 @@ import { createApp } from 'vue'
   }
   const App = (await file()).default
   const app = createApp(App)
-  console.log(App)
 
   app.mount('#app')
 })()
