@@ -10,6 +10,7 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && NODE_ENV=development vite",
+    "play": "pnpm -C play dev",
     "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run test:umd && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/tusimple/es themes/tusimple/lib",
