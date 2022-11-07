@@ -15,11 +15,6 @@ export default defineConfig({
     ]
   },
   esbuild: {
-    tsconfigRaw: {
-      compilerOptions: {
-        module: 'esnext'
-      }
-    },
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   },
