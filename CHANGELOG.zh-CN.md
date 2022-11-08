@@ -27,6 +27,8 @@
 - 修复 `n-select` 在设定了 `value-field` 和 `max-tag-count="responsive"` 之后在溢出标签的弹框中移除选中选项之后选框会显示错误的值，关闭 [#3869](https://github.com/tusen-ai/naive-ui/issues/3869)
 - 修复 `n-ellipsis` 在 `n-card` 标题中使用不会溢出，关闭 [#3935](https://github.com/tusen-ai/naive-ui/issues/3935)
 
+- 修复 `n-carousel`，在轮播两张图片时，第二张与回到第一张交互不流畅，存在向左拉动效果,关闭 [#3937](https://github.com/tusen-ai/naive-ui/issues/3937)
+
 ### i18n
 
 - 新增 arDZ locale

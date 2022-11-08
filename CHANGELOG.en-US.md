@@ -26,6 +26,7 @@
 - Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
 - Fix `n-select` shows wrong value in select box after `value-field` is set and `max-tag-count="responsive"` and remove selected option in overflow tag's popover, closes [#3869](https://github.com/tusen-ai/naive-ui/issues/3869).
 - Fix `n-ellipsis` won't overflow in `n-card`'s title, closes [#3935](https://github.com/tusen-ai/naive-ui/issues/3935).
+- Fix `n-carousel`，When rotating two pictures，The interaction between the second and the first one is not fluent,closes [#3937](https://github.com/tusen-ai/naive-ui/issues/3937)
 
 ### i18n
 
