@@ -762,6 +762,9 @@ export default defineComponent({
               realIndex = length - 1
             }
           }
+          if (displayTotalViewRef.value === 2 && lastRealIndex === 2) {
+            realIndex = 3
+          }
           translateTo(realIndex, speedRef.value)
         } else {
           fixTranslate()
