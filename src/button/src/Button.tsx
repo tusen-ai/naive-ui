@@ -8,7 +8,8 @@ import {
   CSSProperties,
   ButtonHTMLAttributes,
   watchEffect,
-  ExtractPropTypes
+  ExtractPropTypes,
+  Component
 } from 'vue'
 import { useMemo } from 'vooks'
 import { changeColor } from 'seemly'
@@ -72,6 +73,7 @@ export const buttonProps = {
     default: 'default'
   },
   dashed: Boolean,
+  icon: Object as PropType<Component>,
   iconPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -545,7 +547,7 @@ const Button = defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, tag: Component, onRender } = this
+    const { mergedClsPrefix, tag: Component, icon, onRender } = this
     onRender?.()
     const children = resolveWrappedSlot(
       this.$slots.default,
@@ -589,7 +591,7 @@ const Button = defineComponent({
               resolveWrappedSlot(
                 this.$slots.icon,
                 (children) =>
-                  (this.loading || children) && (
+                  (this.loading || icon || children) && (
                     <span
                       class={`${mergedClsPrefix}-button__icon`}
                       style={{
@@ -612,7 +614,7 @@ const Button = defineComponent({
                                 class={`${mergedClsPrefix}-icon-slot`}
                                 role="none"
                               >
-                                {children}
+                                {icon ? h(icon) : children}
                               </div>
                             )
                         }}

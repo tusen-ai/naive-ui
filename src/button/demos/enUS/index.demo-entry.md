@@ -41,6 +41,7 @@ popover.vue
 | focusable | `boolean` | `true` | Whether the button is focusable. |  |
 | ghost | `boolean` | `false` | Whether the button is ghost. |  |
 | native-focus-behavior | `boolean` | Browser is not Safari | Whether to follow button's native focus behavior. Since safari's button can't be focused by click, naive-ui uses some tricks to make it focusable on safari. If you don't need the behavior or need the button to be draggable, you can enable the prop. | 2.28.3 |
+| icon | `Component` | `undefined` | The icon component of button | NEXT_VERSION |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |  |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |  |
 | quaternary | `boolean` | `false` | Whether the button is quaternary button. |  |
