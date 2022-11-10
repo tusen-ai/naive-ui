@@ -48,7 +48,7 @@ export default defineComponent({
                   }
                   const { value: renderSwitcherIcon } = renderSwitcherIconRef
                   return renderSwitcherIcon ? (
-                    renderSwitcherIcon()
+                    renderSwitcherIcon({ expanded: props.expanded })
                   ) : (
                     <NBaseIcon clsPrefix={clsPrefix} key="switcher">
                       {{ default: () => <SwitcherIcon /> }}

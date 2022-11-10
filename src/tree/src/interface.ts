@@ -74,7 +74,7 @@ export interface InternalDropInfo {
   dropPosition: DropPosition
 }
 
-export type RenderSwitcherIcon = () => VNodeChild
+export type RenderSwitcherIcon = (options: { expanded: boolean }) => VNodeChild
 
 export type CheckOnClick = (option: TreeOption) => boolean
 

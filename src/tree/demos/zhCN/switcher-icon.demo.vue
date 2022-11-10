@@ -12,13 +12,20 @@
     :render-switcher-icon="renderSwitcherIcon"
     selectable
   />
+  <n-tree
+    block-line
+    :data="data"
+    :default-expanded-keys="defaultExpandedKeys"
+    :render-switcher-icon="renderSwitcherIconWithExpaned"
+    selectable
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue'
 import { repeat } from 'seemly'
 import { NIcon, TreeOption } from 'naive-ui'
-import { ChevronForward } from '@vicons/ionicons5'
+import { ChevronForward, SunnyOutline, PlanetOutline } from '@vicons/ionicons5'
 
 function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level) return undefined
@@ -46,7 +53,11 @@ export default defineComponent({
       data: createData(),
       defaultExpandedKeys: ref(['40', '41']),
       renderSwitcherIcon: () =>
-        h(NIcon, null, { default: () => h(ChevronForward) })
+        h(NIcon, null, { default: () => h(ChevronForward) }),
+      renderSwitcherIconWithExpaned: ({ expanded }: { expanded: boolean }) =>
+        h(NIcon, null, {
+          default: () => h(expanded ? SunnyOutline : PlanetOutline)
+        })
     }
   }
 })
