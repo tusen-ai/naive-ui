@@ -18,6 +18,7 @@
 - `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
 - `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
+- `n-image` 新增支持鼠标,键盘事件的滚轮缩放，关闭 [#3902](https://github.com/tusen-ai/naive-ui/issues/3902)
 
 ### Fixes
 
