@@ -2,7 +2,6 @@ import { computed, ComputedRef, ref } from 'vue'
 import type {
   DataTableSetupProps,
   RowKey,
-  RowData,
   TableSelectionColumn,
   InternalRowData,
   TmNode
@@ -86,8 +85,14 @@ export function useCheck (
   })
   function doUpdateCheckedRowKeys (
     keys: RowKey[],
-    row: RowData | undefined,
-    action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll'
+    actionKeys: RowKey[] | undefined,
+    action:
+    | 'check'
+    | 'uncheck'
+    | 'checkAll'
+    | 'uncheckAll'
+    | 'shiftCheck'
+    | 'shiftUncheck'
   ): void {
     const {
       'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
@@ -95,57 +100,96 @@ export function useCheck (
       onCheckedRowKeysChange
     } = props
     const rows: InternalRowData[] = []
-    const {
-      value: { getNode }
-    } = treeMateRef
+    const { getNode } = treeMateRef.value
     keys.forEach((key) => {
       const row = getNode(key)?.rawNode
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rows.push(row!)
     })
+    const actionRows: InternalRowData[] = []
+    actionKeys?.forEach((key) => {
+      const row = getNode(key)?.rawNode
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      actionRows.push(row!)
+    })
+    let row: InternalRowData | undefined
+    let shiftRows: InternalRowData[] = []
+    if (action === 'shiftCheck' || action === 'shiftUncheck') {
+      shiftRows = actionRows
+    } else {
+      row = actionKeys ? actionRows[0] : undefined
+    }
     if (_onUpdateCheckedRowKeys) {
-      call(_onUpdateCheckedRowKeys, keys, rows, { row, action })
+      call(_onUpdateCheckedRowKeys, keys, rows, {
+        row,
+        shiftRows,
+        action
+      })
     }
     if (onUpdateCheckedRowKeys) {
-      call(onUpdateCheckedRowKeys, keys, rows, { row, action })
+      call(onUpdateCheckedRowKeys, keys, rows, {
+        row,
+        shiftRows,
+        action
+      })
     }
     if (onCheckedRowKeysChange) {
-      call(onCheckedRowKeysChange, keys, rows, { row, action })
+      call(onCheckedRowKeysChange, keys, rows, {
+        row,
+        shiftRows,
+        action
+      })
     }
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheck (
-    rowKey: RowKey | RowKey[],
-    single: boolean = false,
-    rowInfo: RowData
-  ): void {
+  function doCheck (rowKey: RowKey, single: boolean = false): void {
     if (props.loading) return
+    let checkedKeys: RowKey[] = []
     if (single) {
-      doUpdateCheckedRowKeys(
-        Array.isArray(rowKey) ? rowKey.slice(0, 1) : [rowKey],
-        rowInfo,
-        'check'
-      )
-      return
+      checkedKeys = [rowKey]
+    } else {
+      checkedKeys = treeMateRef.value.check(
+        rowKey,
+        mergedCheckedRowKeysRef.value,
+        {
+          cascade: props.cascade,
+          allowNotLoaded: props.allowCheckingNotLoaded
+        }
+      ).checkedKeys
     }
-    doUpdateCheckedRowKeys(
-      treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
-        cascade: props.cascade,
-        allowNotLoaded: props.allowCheckingNotLoaded
-      }).checkedKeys,
-      rowInfo,
-      'check'
-    )
+    doUpdateCheckedRowKeys(checkedKeys, [rowKey], 'check')
   }
-  function doUncheck (rowKey: RowKey | RowKey[], rowInfo: RowData): void {
+  function doUncheck (rowKey: RowKey): void {
     if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade,
         allowNotLoaded: props.allowCheckingNotLoaded
       }).checkedKeys,
-      rowInfo,
+      [rowKey],
       'uncheck'
+    )
+  }
+  function doShiftCheck (rowKeys: RowKey[]): void {
+    if (props.loading) return
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.check(rowKeys, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
+      }).checkedKeys,
+      rowKeys,
+      'shiftCheck'
+    )
+  }
+  function doShiftUncheck (rowKeys: RowKey[]): void {
+    if (props.loading) return
+    doUpdateCheckedRowKeys(
+      treeMateRef.value.uncheck(rowKeys, mergedCheckedRowKeysRef.value, {
+        cascade: props.cascade,
+        allowNotLoaded: props.allowCheckingNotLoaded
+      }).checkedKeys,
+      rowKeys,
+      'shiftUncheck'
     )
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
@@ -207,6 +251,8 @@ export function useCheck (
     doCheckAll,
     doUncheckAll,
     doCheck,
-    doUncheck
+    doUncheck,
+    doShiftCheck,
+    doShiftUncheck
   }
 }

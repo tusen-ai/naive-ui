@@ -403,12 +403,10 @@ export interface DataTableInjection {
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (
-    rowKey: RowKey | RowKey[],
-    single: boolean,
-    rowInfo: RowData
-  ) => void
-  doUncheck: (rowKey: RowKey | RowKey[], rowInfo: RowData) => void
+  doCheck: (rowKey: RowKey, single: boolean) => void
+  doUncheck: (rowKey: RowKey) => void
+  doShiftCheck: (rowKeys: RowKey[]) => void
+  doShiftUncheck: (rowKeys: RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void
@@ -446,7 +444,14 @@ export type OnUpdateCheckedRowKeys = (
   rows: InternalRowData[],
   meta: {
     row: InternalRowData | undefined
-    action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll'
+    shiftRows: InternalRowData[]
+    action:
+    | 'check'
+    | 'uncheck'
+    | 'checkAll'
+    | 'uncheckAll'
+    | 'shiftCheck'
+    | 'shiftUncheck'
   }
 ) => void
 
