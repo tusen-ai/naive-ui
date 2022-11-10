@@ -64,6 +64,7 @@ The following list is sorted by 'Config' column.
 | Russian                   | ruRU   | dateRuRU    |              |
 | Slovak                    | skSK   | dateSkSK    | 2.25.3       |
 | Thai (Thailand)           | thTH   | dateThTH    | 2.27.0       |
+| Turkish                   | trTR   | dateTrTR    | NEXT_VERSION |
 | Ukrainian                 | ukUA   | dateUkUA    |              |
 | Vietnamese (Vietnam)      | viVN   | dateViVN    | 2.30.7       |
 | Chinese (Simplified)      | zhCN   | dateZhCN    |              |
