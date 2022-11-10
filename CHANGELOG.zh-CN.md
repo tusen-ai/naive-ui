@@ -30,6 +30,7 @@
 ### i18n
 
 - 新增 arDZ locale
+- 新增 trTR locale
 
 ## 2.33.5
 

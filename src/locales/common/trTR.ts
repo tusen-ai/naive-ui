@@ -1,4 +1,5 @@
-const trTR = {
+import type { NLocale } from './enUS'
+const trTR: NLocale = {
   name: 'tr-TR',
   global: {
     undo: 'Vazgeç',
@@ -119,5 +120,4 @@ const trTR = {
   }
 }
 
-export type NLocale = typeof trTR
 export default trTR

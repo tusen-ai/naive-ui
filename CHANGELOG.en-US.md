@@ -30,6 +30,7 @@
 ### i18n
 
 - Add arDZ locale.
+- Add trTR locale.
 
 ## 2.33.5
 
