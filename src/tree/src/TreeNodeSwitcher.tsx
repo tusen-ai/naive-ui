@@ -11,6 +11,7 @@ export default defineComponent({
       required: true
     },
     expanded: Boolean,
+    selected: Boolean,
     hide: Boolean,
     loading: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>
@@ -19,7 +20,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {
-      const { clsPrefix } = props
+      const { clsPrefix, selected, expanded } = props
       return (
         <span
           data-switcher
@@ -48,7 +49,7 @@ export default defineComponent({
                   }
                   const { value: renderSwitcherIcon } = renderSwitcherIconRef
                   return renderSwitcherIcon ? (
-                    renderSwitcherIcon({ expanded: props.expanded })
+                    renderSwitcherIcon({ expanded, selected })
                   ) : (
                     <NBaseIcon clsPrefix={clsPrefix} key="switcher">
                       {{ default: () => <SwitcherIcon /> }}
