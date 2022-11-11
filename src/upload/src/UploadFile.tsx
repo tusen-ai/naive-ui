@@ -25,7 +25,7 @@ import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import { uploadInjectionKey } from './interface'
+import { uploadInjectionKey, UploadTrigger } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
 import { download, environmentSupportFile, isImageFile } from './utils'
@@ -58,6 +58,11 @@ export default defineComponent({
 
     const imageRef = ref<ImageInst | null>(null)
     const thumbnailUrlRef = ref<string>('')
+    const showTriggerRef = ref<undefined | UploadTrigger>(
+      NUpload.triggerRef.value === 'click'
+        ? undefined
+        : NUpload.triggerRef.value
+    )
 
     const progressStatusRef = computed(() => {
       const { file } = props
@@ -183,7 +188,12 @@ export default defineComponent({
         value.click()
       }
     }
-
+    function handleTriggerClick (): void {
+      if (NUpload.triggerRef.value === 'click') {
+        showTriggerRef.value =
+          showTriggerRef.value === 'click' ? undefined : 'click'
+      }
+    }
     const deriveFileThumbnailUrl = async (): Promise<void> => {
       const { listType } = props
       if (listType !== 'image' && listType !== 'image-card') {
@@ -215,11 +225,22 @@ export default defineComponent({
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,
-      handlePreviewClick
+      handlePreviewClick,
+      handleTriggerClick,
+      showTriggerRef,
+      triggerRef: NUpload.triggerRef
     }
   },
   render () {
-    const { clsPrefix, mergedTheme, listType, file } = this
+    const {
+      clsPrefix,
+      mergedTheme,
+      listType,
+      file,
+      handleTriggerClick,
+      showTriggerRef,
+      triggerRef
+    } = this
 
     // if there is text list type, show file icon
     let icon: VNode
@@ -289,8 +310,14 @@ export default defineComponent({
             file.status !== 'error' &&
             listType !== 'image-card' &&
             `${clsPrefix}-upload-file--with-url`,
-          `${clsPrefix}-upload-file--${listType}-type`
+          `${clsPrefix}-upload-file--${listType}-type`,
+          showTriggerRef &&
+            ['click', 'none'].includes(showTriggerRef) &&
+            `${clsPrefix}-upload-file--click ${clsPrefix}-upload-file--${listType}-type--click`,
+          showTriggerRef === 'hover' &&
+            `${clsPrefix}-upload-file--hover ${clsPrefix}-upload-file--${listType}-type--hover`
         ]}
+        onClick={triggerRef === 'click' ? handleTriggerClick : undefined}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
           {icon}

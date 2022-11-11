@@ -4,6 +4,7 @@ import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { UploadTheme } from '../styles'
 
+export type UploadTrigger = 'none' | 'hover' | 'click'
 export interface FileInfo {
   id: string
   name: string
@@ -100,6 +101,8 @@ export interface UploadInjection {
   getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
   handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
+
+  triggerRef: Ref<UploadTrigger>
 }
 
 export const uploadInjectionKey =

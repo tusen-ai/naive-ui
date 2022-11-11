@@ -99,13 +99,32 @@ export default c([
           foldPadding: true
         })
       ]),
-      c('&:hover', `
+      cM('click', `
+          background-color: var(--n-item-color-hover);
+        `, [
+        cB('upload-file-info', [
+          cE('action', `
+              opacity: 1;
+              z-index: 2;
+            `, [
+            cM('image-card-type', `
+              z-index: 2;
+            `)
+          ])
+        ])
+      ]),
+      cM('hover:hover', `
         background-color: var(--n-item-color-hover);
       `, [
         cB('upload-file-info', [
           cE('action', `
             opacity: 1;
-          `)
+            z-index: 2;
+            `, [
+            cM('image-card-type', `
+                z-index: 2;
+              `)
+          ])
         ])
       ]),
       cM('image-type', `
@@ -203,7 +222,13 @@ export default c([
           transition: opacity .2s var(--n-bezier);
           content: "";
         `),
-        c('&:hover', [
+        cM('click', [
+          c('&::before', 'opacity: 1;'),
+          cB('upload-file-info', [
+            cE('thumbnail', 'opacity: .12;')
+          ])
+        ]),
+        cM('hover:hover', [
           c('&::before', 'opacity: 1;'),
           cB('upload-file-info', [
             cE('thumbnail', 'opacity: .12;')
@@ -214,6 +239,9 @@ export default c([
         c('&:hover', `
           background-color: var(--n-item-color-hover-error);
         `),
+        //   c('&-action', `
+        //   background-color: var(--n-item-color-hover-error);
+        // `),
         cB('upload-file-info', [
           cE('name', 'color: var(--n-item-text-color-error);'),
           cE('thumbnail', 'color: var(--n-item-text-color-error);')
@@ -268,6 +296,7 @@ export default c([
           transition: opacity .2s var(--n-bezier);
           justify-content: flex-end;
           opacity: 0;
+          z-index: -1;
         `, [
           cB('button', [
             c('&:not(:last-child)', {
@@ -285,7 +314,7 @@ export default c([
             width: auto;
           `),
           cM('image-card-type', `
-            z-index: 2;
+            z-index: -1;
             position: absolute;
             width: 100%;
             height: 100%;

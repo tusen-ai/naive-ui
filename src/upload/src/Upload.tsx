@@ -40,7 +40,8 @@ import type {
   CustomRequest,
   OnError,
   SettledFileInfo,
-  FileAndEntry
+  FileAndEntry,
+  UploadTrigger
 } from './interface'
 import { uploadInjectionKey } from './interface'
 import { createImageDataUrl, createSettledFileInfo, matchType } from './utils'
@@ -345,7 +346,11 @@ export const uploadProps = {
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
-  triggerStyle: [String, Object] as PropType<CSSProperties | string>
+  triggerStyle: [String, Object] as PropType<CSSProperties | string>,
+  trigger: {
+    type: String as PropType<UploadTrigger>,
+    default: 'hover'
+  }
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -663,7 +668,9 @@ export default defineComponent({
       imageGroupPropsRef: toRef(props, 'imageGroupProps'),
       mergedDirectoryDndRef: computed(() => {
         return props.directoryDnd ?? props.directory
-      })
+      }),
+
+      triggerRef: toRef(props, 'trigger')
     })
 
     const exposedMethods: UploadInst = {
