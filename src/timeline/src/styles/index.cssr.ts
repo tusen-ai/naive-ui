@@ -29,6 +29,14 @@ export default cB('timeline', `
         flex-shrink: 0;
         padding-right: 40px;
       `, [
+        cM('dashed-line-type', [
+          cB('timeline-item-timeline', [
+            cE('line', `
+          background-image: linear-gradient(90deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
+          background-size: 10px 1px;
+        `)
+          ])
+        ]),
         c('>', [
           cB('timeline-item-content', `
           margin-top: calc(var(--n-icon-size) + 12px);
@@ -118,7 +126,7 @@ export default cB('timeline', `
       cB('timeline-item-timeline', [
         cE('line', `
           --n-color-start: var(--n-line-color);
-          transition: --n-color-start .3s var(--n-bezier);
+          transition: --n-color-start .3s ;
           background-color: transparent;
           background-image: linear-gradient(180deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
           background-size: 1px 10px;
