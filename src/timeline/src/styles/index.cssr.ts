@@ -126,7 +126,7 @@ export default cB('timeline', `
       cB('timeline-item-timeline', [
         cE('line', `
           --n-color-start: var(--n-line-color);
-          transition: --n-color-start .3s ;
+          transition: --n-color-start .3s var(--n-bezier);
           background-color: transparent;
           background-image: linear-gradient(180deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
           background-size: 1px 10px;
