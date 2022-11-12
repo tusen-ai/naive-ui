@@ -189,7 +189,9 @@ export default c([
       ]),
       cNotM('summary', [
         c('&:hover', 'background-color: var(--n-merged-td-color-hover);', [
-          cB('data-table-td', 'background-color: var(--n-merged-td-color-hover);')
+          c('>', [
+            cB('data-table-td', 'background-color: var(--n-merged-td-color-hover);')
+          ])
         ])
       ])
     ]),
