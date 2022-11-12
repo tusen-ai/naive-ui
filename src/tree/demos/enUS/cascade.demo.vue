@@ -20,7 +20,6 @@ Set `cascade` to use cascade check.
 import { defineComponent, ref } from 'vue'
 import { repeat } from 'seemly'
 import { TreeOption } from 'naive-ui'
-import { RawNode } from 'treemate'
 
 function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level) return undefined
@@ -52,15 +51,8 @@ export default defineComponent({
         keys: Array<string | number>,
         options: Array<TreeOption | null>,
         meta: {
-          node: RawNode | null
-          action:
-            | 'check'
-            | 'uncheck'
-            | 'select'
-            | 'unselect'
-            | 'expand'
-            | 'collapse'
-            | 'filter'
+          node: TreeOption | null
+          action: 'check' | 'uncheck'
         }
       ) => {
         console.log('updateCheckedKeys', keys, options, meta)

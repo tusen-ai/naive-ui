@@ -22,13 +22,13 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate, CheckStrategy, RawNode } from 'treemate'
+import { createTreeMate, CheckStrategy } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
-import { Key, InternalTreeInst } from '../../tree/src/interface'
+import { Key, InternalTreeInst, TreeOption } from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
-import type { OnUpdateKeysImpl } from '../../tree/src/Tree'
+import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
 import {
   NInternalSelection,
   InternalSelectionInst,
@@ -57,6 +57,7 @@ import {
 } from '../../_utils'
 import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
+  OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
   OnUpdateValueImpl,
   TreeSelectInst,
@@ -345,12 +346,27 @@ export default defineComponent({
     }
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
-      option: TreeSelectOption | null | Array<TreeSelectOption | null>
+      option: TreeSelectOption | null | Array<TreeSelectOption | null>,
+      meta:
+      | {
+        node: TreeSelectOption
+        action: 'select' | 'unselect'
+      }
+      | {
+        node: TreeSelectOption | null
+        action: 'delete'
+      }
+      | {
+        node: null
+        action: 'clear'
+      }
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, value, option, meta)
+      }
       if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+        call(_onUpdateValue as OnUpdateValueImpl, value, option, meta)
       }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
@@ -365,25 +381,31 @@ export default defineComponent({
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys
       } = props
       if (onUpdateIndeterminateKeys) {
-        call(onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+        call(
+          onUpdateIndeterminateKeys as OnUpdateIndeterminateKeysImpl,
+          value,
+          option
+        )
       }
       if (_onUpdateIndeterminateKeys) {
-        call(_onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+        call(
+          _onUpdateIndeterminateKeys as OnUpdateIndeterminateKeysImpl,
+          value,
+          option
+        )
       }
     }
     function doUpdateExpandedKeys (
       keys: Key[],
       option: Array<TreeSelectOption | null>,
-      meta: {
-        node: RawNode | null
-        action:
-        | 'check'
-        | 'uncheck'
-        | 'select'
-        | 'unselect'
-        | 'expand'
-        | 'collapse'
-        | 'filter'
+      meta:
+      | {
+        node: TreeSelectOption
+        action: 'expand' | 'collapse'
+      }
+      | {
+        node: null
+        action: 'filter'
       }
     ): void {
       const {
@@ -391,10 +413,20 @@ export default defineComponent({
         'onUpdate:expandedKeys': _onUpdateExpandedKeys
       } = props
       if (onUpdateExpandedKeys) {
-        call(onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option, meta)
+        call(
+          onUpdateExpandedKeys as OnUpdateExpandedKeysImpl,
+          keys,
+          option,
+          meta
+        )
       }
       if (_onUpdateExpandedKeys) {
-        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option, meta)
+        call(
+          _onUpdateExpandedKeys as OnUpdateExpandedKeysImpl,
+          keys,
+          option,
+          meta
+        )
       }
       uncontrolledExpandedKeysRef.value = keys
     }
@@ -453,18 +485,27 @@ export default defineComponent({
       } = dataTreeMateRef
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
-    function handleUpdateCheckedKeys (keys: Key[]): void {
+    function handleUpdateCheckedKeys (
+      keys: Key[],
+      _: unknown,
+      meta: { node: TreeOption | null, action: 'check' | 'uncheck' }
+    ): void {
       const options = getOptionsByKeys(keys)
+      const action = meta.action === 'check' ? 'select' : 'unselect'
+      const node = meta.node as TreeSelectOption
       if (props.multiple) {
-        doUpdateValue(keys, options)
+        doUpdateValue(keys, options, { node, action })
         if (props.filterable) {
           focusSelectionInput()
           if (props.clearFilterAfterSelect) patternRef.value = ''
         }
       } else {
         keys.length
-          ? doUpdateValue(keys[0], options[0] || null)
-          : doUpdateValue(null, null)
+          ? doUpdateValue(keys[0], options[0] || null, {
+            node,
+            action
+          })
+          : doUpdateValue(null, null, { node, action })
         closeMenu()
         // Currently it is not necessary. However if there is an action slot,
         // it will be useful. So just leave it here.
@@ -513,9 +554,9 @@ export default defineComponent({
         closeMenu()
       }
       if (multiple) {
-        doUpdateValue([], [])
+        doUpdateValue([], [], { node: null, action: 'clear' })
       } else {
-        doUpdateValue(null, null)
+        doUpdateValue(null, null, { node: null, action: 'clear' })
       }
     }
     function handleDeleteOption (option: SelectBaseOption): void {
@@ -533,6 +574,10 @@ export default defineComponent({
         )
         const index = checkedKeysValue.findIndex((key) => key === option.value)
         if (~index) {
+          const checkedKeyToBeRemoved = checkedKeysValue[index]
+          const checkOptionToBeRemoved = getOptionsByKeys([
+            checkedKeyToBeRemoved
+          ])[0]
           if (props.checkable) {
             const { checkedKeys } = treeMate.uncheck(
               option.value,
@@ -543,11 +588,17 @@ export default defineComponent({
                 allowNotLoaded: props.allowCheckingNotLoaded
               }
             )
-            doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
+            doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys), {
+              node: checkOptionToBeRemoved,
+              action: 'delete'
+            })
           } else {
             const nextValue = Array.from(checkedKeysValue)
             nextValue.splice(index, 1)
-            doUpdateValue(nextValue, getOptionsByKeys(nextValue))
+            doUpdateValue(nextValue, getOptionsByKeys(nextValue), {
+              node: checkOptionToBeRemoved,
+              action: 'delete'
+            })
           }
         }
       }

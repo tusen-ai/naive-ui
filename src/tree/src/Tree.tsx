@@ -20,8 +20,7 @@ import {
   flatten,
   createIndexGetter,
   TreeMateOptions,
-  CheckStrategy,
-  RawNode
+  CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
@@ -98,34 +97,70 @@ export function createTreeMateOptions<T> (
   }
 }
 
-export type OnUpdateKeys = (
+export type OnUpdateCheckedKeys = (
   value: Array<string & number>,
   option: Array<TreeOption | null>,
   meta: {
-    node: RawNode | null
-    action:
-    | 'check'
-    | 'uncheck'
-    | 'select'
-    | 'unselect'
-    | 'expand'
-    | 'collapse'
-    | 'filter'
+    node: TreeOption | null
+    action: 'check' | 'uncheck'
   }
 ) => void
-export type OnUpdateKeysImpl = (
+export type OnUpdateCheckedKeysImpl = (
   value: Key[],
   option: Array<TreeOption | null>,
   meta: {
-    node: RawNode | null
-    action:
-    | 'check'
-    | 'uncheck'
-    | 'select'
-    | 'unselect'
-    | 'expand'
-    | 'collapse'
-    | 'filter'
+    node: TreeOption | null
+    action: 'check' | 'uncheck'
+  }
+) => void
+export type OnUpdateIndeterminateKeys = (
+  value: Array<string & number>,
+  option: Array<TreeOption | null>
+) => void
+export type OnUpdateIndeterminateKeysImpl = (
+  value: Key[],
+  option: Array<TreeOption | null>
+) => void
+export type OnUpdateSelectedKeys = (
+  value: Array<string & number>,
+  option: Array<TreeOption | null>,
+  meta: {
+    node: TreeOption | null
+    action: 'select' | 'unselect'
+  }
+) => void
+export type OnUpdateSelectedKeysImpl = (
+  value: Key[],
+  option: Array<TreeOption | null>,
+  meta: {
+    node: TreeOption | null
+    action: 'select' | 'unselect'
+  }
+) => void
+export type onUpdateExpandedKeys = (
+  value: Key[],
+  option: Array<TreeOption | null>,
+  meta:
+  | {
+    node: TreeOption
+    action: 'expand' | 'collapse'
+  }
+  | {
+    node: null
+    action: 'filter'
+  }
+) => void
+export type OnUpdateExpandedKeysImpl = (
+  value: Key[],
+  option: Array<TreeOption | null>,
+  meta:
+  | {
+    node: TreeOption
+    action: 'expand' | 'collapse'
+  }
+  | {
+    node: null
+    action: 'filter'
   }
 ) => void
 type OnLoad = (node: TreeOption) => Promise<void>
@@ -158,14 +193,16 @@ export const treeSharedProps = {
   indeterminateKeys: Array as PropType<Key[]>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<OnUpdateIndeterminateKeys>
   >,
   'onUpdate:indeterminateKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<OnUpdateIndeterminateKeys>
   >,
-  onUpdateExpandedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+  onUpdateExpandedKeys: [Function, Array] as PropType<
+  MaybeArray<onUpdateExpandedKeys>
+  >,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<onUpdateExpandedKeys>
   >
 } as const
 
@@ -260,13 +297,17 @@ export const treeProps = {
   MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDropInfo) => void>>,
-  onUpdateCheckedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
-  'onUpdate:checkedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  onUpdateCheckedKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedKeys>
   >,
-  onUpdateSelectedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+  'onUpdate:checkedKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedKeys>
+  >,
+  onUpdateSelectedKeys: [Function, Array] as PropType<
+  MaybeArray<OnUpdateSelectedKeys>
+  >,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+  MaybeArray<OnUpdateSelectedKeys>
   >,
   ...treeSharedProps,
   // internal props for tree-select
@@ -756,16 +797,14 @@ export default defineComponent({
     function doUpdateExpandedKeys (
       value: Key[],
       option: Array<TreeOption | null>,
-      meta: {
-        node: RawNode | null
-        action:
-        | 'check'
-        | 'uncheck'
-        | 'select'
-        | 'unselect'
-        | 'expand'
-        | 'collapse'
-        | 'filter'
+      meta:
+      | {
+        node: TreeOption
+        action: 'expand' | 'collapse'
+      }
+      | {
+        node: null
+        action: 'filter'
       }
     ): void {
       const {
@@ -774,25 +813,28 @@ export default defineComponent({
       } = props
       uncontrolledExpandedKeysRef.value = value
       if (_onUpdateExpandedKeys) {
-        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          _onUpdateExpandedKeys as OnUpdateExpandedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
       if (onUpdateExpandedKeys) {
-        call(onUpdateExpandedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          onUpdateExpandedKeys as OnUpdateExpandedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
     }
     function doUpdateCheckedKeys (
       value: Key[],
       option: Array<TreeOption | null>,
       meta: {
-        node: RawNode | null
-        action:
-        | 'check'
-        | 'uncheck'
-        | 'select'
-        | 'unselect'
-        | 'expand'
-        | 'collapse'
-        | 'filter'
+        node: TreeOption | null
+        action: 'check' | 'uncheck'
       }
     ): void {
       const {
@@ -801,26 +843,25 @@ export default defineComponent({
       } = props
       uncontrolledCheckedKeysRef.value = value
       if (onUpdateCheckedKeys) {
-        call(onUpdateCheckedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          onUpdateCheckedKeys as OnUpdateCheckedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
       if (_onUpdateCheckedKeys) {
-        call(_onUpdateCheckedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          _onUpdateCheckedKeys as OnUpdateCheckedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
     }
     function doUpdateIndeterminateKeys (
       value: Key[],
-      option: Array<TreeOption | null>,
-      meta: {
-        node: RawNode | null
-        action:
-        | 'check'
-        | 'uncheck'
-        | 'select'
-        | 'unselect'
-        | 'expand'
-        | 'collapse'
-        | 'filter'
-      }
+      option: Array<TreeOption | null>
     ): void {
       const {
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
@@ -828,29 +869,25 @@ export default defineComponent({
       } = props
       if (_onUpdateIndeterminateKeys) {
         call(
-          _onUpdateIndeterminateKeys as OnUpdateKeysImpl,
+          _onUpdateIndeterminateKeys as OnUpdateIndeterminateKeysImpl,
           value,
-          option,
-          meta
+          option
         )
       }
       if (onUpdateIndeterminateKeys) {
-        call(onUpdateIndeterminateKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          onUpdateIndeterminateKeys as OnUpdateIndeterminateKeysImpl,
+          value,
+          option
+        )
       }
     }
     function doUpdateSelectedKeys (
       value: Key[],
       option: Array<TreeOption | null>,
       meta: {
-        node: RawNode | null
-        action:
-        | 'check'
-        | 'uncheck'
-        | 'select'
-        | 'unselect'
-        | 'expand'
-        | 'collapse'
-        | 'filter'
+        node: TreeOption | null
+        action: 'select' | 'unselect'
       }
     ): void {
       const {
@@ -859,10 +896,20 @@ export default defineComponent({
       } = props
       uncontrolledSelectedKeysRef.value = value
       if (onUpdateSelectedKeys) {
-        call(onUpdateSelectedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          onUpdateSelectedKeys as OnUpdateSelectedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
       if (_onUpdateSelectedKeys) {
-        call(_onUpdateSelectedKeys as OnUpdateKeysImpl, value, option, meta)
+        call(
+          _onUpdateSelectedKeys as OnUpdateSelectedKeysImpl,
+          value,
+          option,
+          meta
+        )
       }
     }
     // Drag & Drop
@@ -934,11 +981,7 @@ export default defineComponent({
       })
       doUpdateIndeterminateKeys(
         indeterminateKeys,
-        getOptionsByKeys(indeterminateKeys),
-        {
-          node: node.rawNode,
-          action: checkedAction
-        }
+        getOptionsByKeys(indeterminateKeys)
       )
     }
     function toggleExpand (node: TmNode): void {
@@ -1030,13 +1073,13 @@ export default defineComponent({
           if (props.cancelable) {
             doUpdateSelectedKeys([], [], {
               node: node.rawNode,
-              action: 'uncheck'
+              action: 'unselect'
             })
           }
         } else {
           doUpdateSelectedKeys([node.key], getOptionsByKeys([node.key]), {
             node: node.rawNode,
-            action: 'check'
+            action: 'select'
           })
         }
       }
@@ -1061,7 +1104,7 @@ export default defineComponent({
           const nextKeys = mergedExpandedKeysRef.value.concat(node.key)
           doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys), {
             node: node.rawNode,
-            action: 'check'
+            action: 'expand'
           })
         }
         expandTimerId = null
