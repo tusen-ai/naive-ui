@@ -26,6 +26,7 @@ import {
   SelectMenuInstance,
   cascaderInjectionKey
 } from './interface'
+import { resolveSlot } from '../../_utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',
@@ -61,6 +62,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedThemeRef,
       mergedCheckStrategyRef,
+      slots: cascaderSlots,
       syncSelectMenuPosition,
       closeMenu,
       handleSelectMenuClickOutside,
@@ -169,11 +171,12 @@ export default defineComponent({
       handleResize,
       handleToggle,
       handleClickOutside,
+      cascaderSlots,
       ...exposedRef
     }
   },
   render () {
-    const { mergedClsPrefix, isMounted, mergedTheme } = this
+    const { mergedClsPrefix, isMounted, mergedTheme, cascaderSlots } = this
     return (
       <Transition name="fade-in-scale-up-transition" appear={isMounted}>
         {{
@@ -194,7 +197,12 @@ export default defineComponent({
                     multiple={this.multiple}
                     value={this.value}
                     onToggle={this.handleToggle}
-                  />,
+                  >
+                    {{
+                      empty: () =>
+                        resolveSlot(cascaderSlots['not-found'], () => [])
+                    }}
+                  </NInternalSelectMenu>,
                   [
                     [
                       clickoutside,

@@ -5,7 +5,8 @@ const idID: NLocale = {
   global: {
     undo: 'Membatalkan',
     redo: 'Mem-perbarui',
-    confirm: 'Setuju'
+    confirm: 'Setuju',
+    clear: 'Bersihkan'
   },
   Popconfirm: {
     positiveText: 'Setuju',

@@ -2,7 +2,7 @@
 
 ## 预备条件
 
-<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
+<n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
   由于包体积原因，Naive UI 不内置 highlight.js。如果你需要使用代码组件，请确保你在使用之前已经设定了 highlight.js。
 </n-alert>
 

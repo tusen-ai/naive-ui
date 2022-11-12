@@ -5,7 +5,8 @@ const ukUA: NLocale = {
   global: {
     undo: 'Відмінити',
     redo: 'Повторити',
-    confirm: 'Підтвердити'
+    confirm: 'Підтвердити',
+    clear: 'Стерти'
   },
   Popconfirm: {
     positiveText: 'Підтвердити',

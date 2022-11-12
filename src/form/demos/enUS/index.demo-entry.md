@@ -4,7 +4,7 @@
 
 The element to collect and validate data.
 
-<n-alert type="warning" title="Caveat">
+<n-alert type="warning" title="Caveat" :bordered="false">
   If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: number`</n-text> in the rule object.
 </n-alert>
 
@@ -48,7 +48,7 @@ dynamic.vue
 
 #### FormItemRule Type
 
-<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;" :bordered="false">
   The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 </n-alert>
 
@@ -97,7 +97,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 
 ### Form Methods
 
-<n-alert type="warning" title="Caveat on Validate Method" style="margin-bottom: 16px;">
+<n-alert type="warning" title="Caveat on Validate Method" style="margin-bottom: 16px;" :bordered="false">
   By default, validation will use all rules regardless of the triggers of the rules.
 </n-alert>
 

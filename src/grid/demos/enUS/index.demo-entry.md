@@ -4,6 +4,12 @@
 
 Based on CSS Grid. Responsive. Keep away from IE.
 
+<n-alert type="warning" title="Caveats" :bordered="false">
+Due to technical limitation, <n-text code>n-grid-item</n-text> can't be encapsulated in another component.
+</n-alert>
+
+## Demos
+
 ```demo
 basic.vue
 gap.vue
