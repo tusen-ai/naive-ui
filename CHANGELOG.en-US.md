@@ -11,6 +11,7 @@
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+- `n-mention` adds `on-update:show` prop, closes [#3882](https://github.com/tusen-ai/naive-ui/issues/3882).
 - `n-tree` adds trigger node information for `on-update:expanded-keys`, `on-update:checked-keys` and `on-update:selected-keys` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
 - `n-tree-select` adds trigger node information for `on-update:expanded-keys` and `on-update:value` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
 - `n-tree` adds `getCheckedKeys` method.
