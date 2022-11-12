@@ -5,7 +5,8 @@ const eo: NLocale = {
   global: {
     undo: 'Malfari',
     redo: 'Refari',
-    confirm: 'Konfirmi'
+    confirm: 'Konfirmi',
+    clear: 'Malplenigi'
   },
   Popconfirm: {
     positiveText: 'Konfirmi',
