@@ -251,6 +251,7 @@
 - 修复所有组件导出的 props 类型属性都是 `readonly` 的
 - 修复 `n-tree` 的 `check-on-click` 属性有时不生效
 - 修复 `n-progress` 的 `offset-degree` 表现不正确
+- 修复 `n-date-picker` 在某些情况下不能删除全部输入，关闭 [#3922](https://github.com/tusen-ai/naive-ui/issues/3922)
 
 ### Feats
 

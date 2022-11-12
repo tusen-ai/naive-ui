@@ -38,6 +38,7 @@
 - Fix `n-ellipsis` won't overflow in `n-card`'s title, closes [#3935](https://github.com/tusen-ai/naive-ui/issues/3935).
 - Fix `n-timeline-item`'s `line-type="dashed"` not working when `n-timeline`'s `horizontal` is set, closes [#4014](https://github.com/tusen-ai/naive-ui/issues/4014).
 - Fix `n-popover` doesn't wrap line if word is too long.
+- Fix `n-date-picker` can't delete all input content in some cases, closes [#3922](https://github.com/tusen-ai/naive-ui/issues/3922).
 
 ### i18n
 
