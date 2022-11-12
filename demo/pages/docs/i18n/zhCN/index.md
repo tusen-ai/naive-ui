@@ -46,8 +46,8 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 
 | 语言              | 配置 | 日期配置 | 版本         |
 | ----------------- | ---- | -------- | ------------ |
-| 德语              | deDE | dateDeDe |              |
 | 阿拉伯语          | arDZ | dateArDZ | NEXT_VERSION |
+| 德语              | deDE | dateDeDe |              |
 | 英国英语          | enGB | dateEnGB | 2.25.1       |
 | 英语              | enUS | dateEnUS |              |
 | 世界语            | eo   | dateEo   | 2.25.2       |
@@ -64,6 +64,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 俄罗斯语          | ruRU | dateRuRU |              |
 | 斯洛伐克语        | skSK | dateSkSK | 2.25.3       |
 | 泰语（泰国）      | thTH | dateThTH | 2.27.0       |
+| 土耳其语          | trTR | dateTrTR | NEXT_VERSION |
 | 乌克兰语          | ukUA | dateUkUA |              |
 | 越南语（越南）    | viVN | dateViVN | 2.30.7       |
 | 简体中文          | zhCN | dateZhCN |              |

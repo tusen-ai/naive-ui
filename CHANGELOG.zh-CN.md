@@ -19,6 +19,9 @@
 - `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
 - `n-button` 新增 `render-icon` 属性，关闭 [#4007](https://github.com/tusen-ai/naive-ui/issues/4007)
+- 新增 `n-equation` 组件
+- `n-image` 新增 `previewed-img-props` 属性
+- `n-data-table` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4021)
 
 ### Fixes
 
@@ -27,10 +30,12 @@
 - 修复 `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
 - 修复 `n-select` 在设定了 `value-field` 和 `max-tag-count="responsive"` 之后在溢出标签的弹框中移除选中选项之后选框会显示错误的值，关闭 [#3869](https://github.com/tusen-ai/naive-ui/issues/3869)
 - 修复 `n-ellipsis` 在 `n-card` 标题中使用不会溢出，关闭 [#3935](https://github.com/tusen-ai/naive-ui/issues/3935)
+- 修复 `n-timeline-item` 在 `n-timeline` 设定 `horizontal` 之后，`line-type="dashed"` 不生效，关闭 [#4014](https://github.com/tusen-ai/naive-ui/issues/4014)
 
 ### i18n
 
 - 新增 arDZ locale
+- 新增 trTR locale
 
 ## 2.33.5
 

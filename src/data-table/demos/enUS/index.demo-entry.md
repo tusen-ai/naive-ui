@@ -4,7 +4,7 @@
 
 DataTable is used to displays rows of structured data.
 
-<n-alert type="warning" title="Caveat">
+<n-alert type="warning" title="Caveat" :bordered="false">
   <n-ul align-text>
     <li>
       Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.

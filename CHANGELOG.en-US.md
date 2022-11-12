@@ -18,7 +18,10 @@
 - `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
-- `n-button` adds `render-icon` prop，closes [#4007](https://github.com/tusen-ai/naive-ui/issues/4007)
+- `n-button` adds `render-icon` prop，closes [#4007](https://github.com/tusen-ai/naive-ui/issues/4007).
+- Add `n-equation` component.
+- `n-image` adds `previewed-img-props` prop.
+- `n-data-table` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4021).
 
 ### Fixes
 
@@ -27,10 +30,12 @@
 - Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
 - Fix `n-select` shows wrong value in select box after `value-field` is set and `max-tag-count="responsive"` and remove selected option in overflow tag's popover, closes [#3869](https://github.com/tusen-ai/naive-ui/issues/3869).
 - Fix `n-ellipsis` won't overflow in `n-card`'s title, closes [#3935](https://github.com/tusen-ai/naive-ui/issues/3935).
+- Fix `n-timeline-item`'s `line-type="dashed"` not working when `n-timeline`'s `horizontal` is set, closes [#4014](https://github.com/tusen-ai/naive-ui/issues/4014).
 
 ### i18n
 
 - Add arDZ locale.
+- Add trTR locale.
 
 ## 2.33.5
 
