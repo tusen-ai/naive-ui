@@ -21,7 +21,7 @@ import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
-import { kebabCase } from 'lodash'
+import { kebabCase } from 'lodash-es'
 import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
