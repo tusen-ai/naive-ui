@@ -641,6 +641,8 @@ export default defineComponent({
       // TODO, fix conflict with clear
       if (v === '') {
         doUpdateValue(null, { doConfirm: false })
+        pendingValueRef.value = null
+        singleInputValueRef.value = ''
         return
       }
       const newSelectedDateTime = strictParse(
@@ -660,6 +662,9 @@ export default defineComponent({
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
         doUpdateValue(null, { doConfirm: false })
+        pendingValueRef.value = null
+        rangeStartInputValueRef.value = ''
+        rangeEndInputValueRef.value = ''
         return
       }
       const [startTime, endTime] = v

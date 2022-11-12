@@ -2,11 +2,17 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Wrap a `DIV` container around the columns of `n-data-table` to optimize the layout of filter button, closes [#3853](https://github.com/tusen-ai/naive-ui/issues/3853).
+
 ### Feats
 
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
+- `n-tree` adds trigger node information for `on-update:expanded-keys`, `on-update:checked-keys` and `on-update:selected-keys` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
+- `n-tree-select` adds trigger node information for `on-update:expanded-keys` and `on-update:value` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
 - `n-tree` adds `getCheckedKeys` method.
 - `n-tree` adds `getIndeterminateKeys` method.
 - `n-tree-select` adds `getCheckedKeys` method.
@@ -19,6 +25,12 @@
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
 - `n-data-table` adds `spin-props` prop, closes [#3649](https://github.com/tusen-ai/naive-ui/issues/3649).
+- `n-button` adds `render-icon` prop, closes [#4007](https://github.com/tusen-ai/naive-ui/issues/4007).
+- Add `n-equation` component.
+- `n-image` adds `previewed-img-props` prop.
+- `n-data-table` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4021).
+- `n-upload` adds `should-use-thumbnail-url` prop, closes [#3861](https://github.com/tusen-ai/naive-ui/issues/3861).
+- `n-upload` adds `render-icon` prop.
 
 ### Fixes
 
@@ -27,10 +39,15 @@
 - Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
 - Fix `n-select` shows wrong value in select box after `value-field` is set and `max-tag-count="responsive"` and remove selected option in overflow tag's popover, closes [#3869](https://github.com/tusen-ai/naive-ui/issues/3869).
 - Fix `n-ellipsis` won't overflow in `n-card`'s title, closes [#3935](https://github.com/tusen-ai/naive-ui/issues/3935).
+- Fix `n-timeline-item`'s `line-type="dashed"` not working when `n-timeline`'s `horizontal` is set, closes [#4014](https://github.com/tusen-ai/naive-ui/issues/4014).
+- Fix `n-popover` doesn't wrap line if word is too long.
+- Fix `n-date-picker` can't delete all input content in some cases, closes [#3922](https://github.com/tusen-ai/naive-ui/issues/3922).
+- Fix `n-input`'s `autosize` prop doesn't work properly if there are multiple spaces, closes [#4027](https://github.com/tusen-ai/naive-ui/issues/4027).
 
 ### i18n
 
 - Add arDZ locale.
+- Add trTR locale.
 
 ## 2.33.5
 

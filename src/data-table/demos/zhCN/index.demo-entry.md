@@ -4,7 +4,7 @@
 
 数据表格用来显示一些格式化信息。
 
-<n-alert type="warning" title="注意" style="margin-bottom: 16px;">
+<n-alert type="warning" title="注意" style="margin-bottom: 16px;" :bordered="false">
   <n-ul align-text>
     <li>
       传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。

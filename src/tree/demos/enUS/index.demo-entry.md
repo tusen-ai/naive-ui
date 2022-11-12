@@ -76,10 +76,10 @@ checkbox-placement.vue
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Drag a node, the callback function after the node leaves other nodes. |  |
 | on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function to start dragging a certain node. |  |
 | on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |  |
-| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | Callback function when node checked options change. |  |
-| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | Callback function when node indeterminate options change. |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | The callback function when the node expansion item changes. |  |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | The callback function when the selected item of the node changes. |  |
+| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | Callback function when node checked options change. | `meta` NEXT_VERSION |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | Callback function when node indeterminate options change. |  |
+| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | The callback function when the node expansion item changes. | `meta` NEXT_VERSION |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'select' \| 'unselect' }) => void` | `undefined` | The callback function when the selected item of the node changes. | `meta` NEXT_VERSION |
 
 ### TreeOption Properties
 

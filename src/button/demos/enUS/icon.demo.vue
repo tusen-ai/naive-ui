@@ -1,17 +1,12 @@
 <markdown>
 # Icon
 
-Icons can be used in buttons.
+Icons can be used in buttons. You can use `render-icon` prop or `icon` slot.
 </markdown>
 
 <template>
   <n-space>
-    <n-button>
-      <template #icon>
-        <n-icon>
-          <cash-icon />
-        </n-icon>
-      </template>
+    <n-button :render-icon="renderIcon">
       +100$
     </n-button>
     <n-button icon-placement="right">
@@ -27,11 +22,18 @@ Icons can be used in buttons.
 
 <script lang="ts">
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   components: {
     CashIcon
+  },
+  setup () {
+    return {
+      renderIcon () {
+        return h(CashIcon)
+      }
+    }
   }
 })
 </script>

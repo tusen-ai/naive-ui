@@ -3,7 +3,9 @@
 </markdown>
 
 <template>
-  <n-equation :value="equation" :katex="katex" />
+  <n-config-provider :katex="katex">
+    <n-equation :value="equation" />
+  </n-config-provider>
 </template>
 
 <script lang="ts">

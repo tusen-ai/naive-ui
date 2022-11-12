@@ -243,6 +243,7 @@ export default defineComponent({
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       summaryPlacementRef: toRef(props, 'summaryPlacement'),
+      scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       syncScrollState,
       doUpdatePage,
       doUpdateFilters,

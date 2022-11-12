@@ -5,7 +5,8 @@ const nbNO: NLocale = {
   global: {
     undo: 'Angre',
     redo: 'Utfør likevel',
-    confirm: 'Bekreft'
+    confirm: 'Bekreft',
+    clear: 'Tøm'
   },
   Popconfirm: {
     positiveText: 'Bekreft',
