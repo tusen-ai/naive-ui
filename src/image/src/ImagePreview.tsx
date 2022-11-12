@@ -231,7 +231,7 @@ export default defineComponent({
       offsetY = offset.offsetY
       derivePreviewStyle()
     }
-    const imageContext = inject(imageContextKey)
+    const imageContext = inject(imageContextKey, null)
 
     function handlePreviewMousedown (e: MouseEvent): void {
       imageContext?.previewedImgPropsRef.value.onMousedown?.(e)
