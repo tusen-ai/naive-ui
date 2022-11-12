@@ -20,6 +20,7 @@
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
 - Add `n-equation` component.
 - `n-image` adds `previewed-img-props` prop.
+- `n-data-table` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4021).
 
 ### Fixes
 

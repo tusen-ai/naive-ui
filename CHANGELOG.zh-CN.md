@@ -20,6 +20,7 @@
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
 - 新增 `n-equation` 组件
 - `n-image` 新增 `previewed-img-props` 属性
+- `n-data-table` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4021)
 
 ### Fixes
 

@@ -8,7 +8,7 @@ import {
   ExtractPropTypes,
   VNodeChild
 } from 'vue'
-import type { ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import type { NLocale } from '../../locales'
@@ -114,6 +114,7 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
@@ -388,6 +389,7 @@ export interface DataTableInjection {
   renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
+  scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
