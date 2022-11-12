@@ -3,7 +3,7 @@
 A kind of good placebo for anxiety.
 
 <n-space vertical size="large">
-<n-alert title="Prerequisite" type="warning">
+<n-alert title="Prerequisite" type="warning" :bordered="false">
   If you want to use loading bar, you need to wrap the component where you call related methods inside <n-text code>n-loading-bar-provider</n-text> and inject <n-text code>loadingBar</n-text>.
 </n-alert>
 For example:

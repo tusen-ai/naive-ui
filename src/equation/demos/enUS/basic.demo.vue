@@ -1,9 +1,11 @@
 <markdown>
-# Basic
+# Basic usage
 </markdown>
 
 <template>
-  <n-equation :value="equation" :katex="katex" />
+  <n-config-provider :katex="katex">
+    <n-equation :value="equation" />
+  </n-config-provider>
 </template>
 
 <script lang="ts">
@@ -14,8 +16,8 @@ export default defineComponent({
   setup () {
     const equation = '\\displaystyle= \\frac{k(k+1)}{2}+k+1'
     return {
-      katex,
-      equation
+      equation,
+      katex
     }
   }
 })

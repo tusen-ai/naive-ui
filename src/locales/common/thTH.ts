@@ -5,7 +5,8 @@ const thTH: NLocale = {
   global: {
     undo: 'เลิกทำ',
     redo: 'ทำซ้ำ',
-    confirm: 'ยืนยัน'
+    confirm: 'ยืนยัน',
+    clear: 'ล้าง'
   },
   Popconfirm: {
     positiveText: 'ยืนยัน',

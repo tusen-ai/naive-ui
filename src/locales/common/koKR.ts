@@ -5,7 +5,8 @@ const koKR: NLocale = {
   global: {
     undo: '실행 취소',
     redo: '다시 실행',
-    confirm: '확인'
+    confirm: '확인',
+    clear: '지우기'
   },
   Popconfirm: {
     positiveText: '확인',

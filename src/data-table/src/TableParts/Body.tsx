@@ -185,6 +185,7 @@ export default defineComponent({
       renderExpandIconRef,
       summaryPlacementRef,
       treeMateRef,
+      scrollbarPropsRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -495,6 +496,7 @@ export default defineComponent({
       expandable: expandableRef,
       stickyExpandedRows: stickyExpandedRowsRef,
       renderExpandIcon: renderExpandIconRef,
+      scrollbarProps: scrollbarPropsRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -540,6 +542,7 @@ export default defineComponent({
 
     const tableNode = (
       <NScrollbar
+        {...this.scrollbarProps}
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
         class={`${mergedClsPrefix}-data-table-base-table-body`}

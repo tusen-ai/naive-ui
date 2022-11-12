@@ -40,6 +40,14 @@
           Uncascade
         </template>
       </n-switch>
+      <n-switch v-model:value="filterable">
+        <template #checked>
+          Filterable
+        </template>
+        <template #unchecked>
+          Unfilterable
+        </template>
+      </n-switch>
     </n-space>
     <n-tree-select
       default-expand-all
@@ -48,7 +56,7 @@
       :checkable="checkable"
       :check-strategy="checkStrategy"
       :options="options"
-      :default-value="['Dig It', 'go']"
+      :default-value="['Rubber Soul']"
       @update:value="handleUpdateValue"
     />
   </n-space>
@@ -65,6 +73,7 @@ export default defineComponent({
       multiple: ref(false),
       checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
       checkable: ref(false),
+      filterable: ref(false),
       options: [
         {
           label: 'Rubber Soul',

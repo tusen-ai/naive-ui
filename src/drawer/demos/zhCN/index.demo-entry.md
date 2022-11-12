@@ -2,7 +2,7 @@
 
 我感觉和 Modal 功能差不太多，位置有点差别。
 
-<n-alert title="提示" type="warning">
+<n-alert title="提示" type="warning" :bordered="false">
   如果你需要使用 <n-text code>n-drawer-content</n-text>，<n-text code>n-drawer</n-text> 的 <n-text code>native-scrollbar</n-text> 需要保持为 <n-text code>true</n-text>。
 </n-alert>
 
