@@ -11,6 +11,7 @@ export default defineComponent({
       required: true
     },
     expanded: Boolean,
+    selected: Boolean,
     hide: Boolean,
     loading: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>
@@ -25,10 +26,8 @@ export default defineComponent({
           data-switcher
           class={[
             `${clsPrefix}-tree-node-switcher`,
-            {
-              [`${clsPrefix}-tree-node-switcher--expanded`]: props.expanded,
-              [`${clsPrefix}-tree-node-switcher--hide`]: props.hide
-            }
+            props.expanded && `${clsPrefix}-tree-node-switcher--expanded`,
+            props.hide && `${clsPrefix}-tree-node-switcher--hide`
           ]}
           onClick={props.onClick}
         >
@@ -48,7 +47,10 @@ export default defineComponent({
                   }
                   const { value: renderSwitcherIcon } = renderSwitcherIconRef
                   return renderSwitcherIcon ? (
-                    renderSwitcherIcon()
+                    renderSwitcherIcon({
+                      expanded: props.expanded,
+                      selected: props.selected
+                    })
                   ) : (
                     <NBaseIcon clsPrefix={clsPrefix} key="switcher">
                       {{ default: () => <SwitcherIcon /> }}

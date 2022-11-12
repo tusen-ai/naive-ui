@@ -8,10 +8,9 @@
       v-model:value="urlToAnalyse"
       placeholder="URL website to analyse"
     />
-    <n-button
-      class="w-100"
-      @click="analyzeWebsite(urlToAnalyse)"
-    >Analyse</n-button>
+    <n-button class="w-100" @click="analyzeWebsite()">
+      Analyse
+    </n-button>
   </n-card>
 </template>
 

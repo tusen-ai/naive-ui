@@ -3,7 +3,7 @@
 （一般是）从浏览器顶部降下来的神谕。
 
 <n-space vertical size="large">
-<n-alert title="使用前提" type="warning">
+<n-alert title="使用前提" type="warning" :bordered="false">
   如果你想使用信息，你需要把调用其方法的组件放在 <n-text code>n-message-provider</n-text> 内部并且使用 <n-text code>useMessage</n-text> 去获取 API。
   <br/>
   如果你想知道如何在 setup 外使用，请参考页面最下方的 Q & A。
@@ -139,7 +139,7 @@ type MessageRenderMessage = (props: {
 #### 选择 2
 
 <n-space vertical size="large">
-<n-alert type="warning">
+<n-alert type="warning" :bordered="false">
   如果你想在 setup 外使用信息，你需要在顶层 setup 中把 <n-text code>useMessage</n-text> 返回的 message 值挂载到 window 下然后再调用，调用前需要确保 message 已经挂载成功。
 </n-alert>
 

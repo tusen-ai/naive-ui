@@ -3,7 +3,8 @@ const enUS = {
   global: {
     undo: 'Undo',
     redo: 'Redo',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    clear: 'Clear'
   },
   Popconfirm: {
     positiveText: 'Confirm',

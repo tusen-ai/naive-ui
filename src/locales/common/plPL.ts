@@ -5,7 +5,8 @@ const plPL: NLocale = {
   global: {
     undo: 'Cofnij',
     redo: 'Ponów',
-    confirm: 'Potwierdź'
+    confirm: 'Potwierdź',
+    clear: 'Wyczyść'
   },
   Popconfirm: {
     positiveText: 'Potwierdź',

@@ -3,7 +3,7 @@
 Oracle from the top(always) of the browser.
 
 <n-space vertical size="large">
-<n-alert title="Prerequisite" type="warning">
+<n-alert title="Prerequisite" type="warning" :bordered="false">
   If you want to use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
   <br/>
   If you want to use it outside setup, please refer to Q & A part at the bottom of the page.
@@ -138,7 +138,7 @@ Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefu
 #### Option 2
 
 <n-space vertical size="large">
-<n-alert type="warning">
+<n-alert type="warning" :bordered="false">
   You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.
 </n-alert>
 

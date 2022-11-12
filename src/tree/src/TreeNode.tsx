@@ -367,6 +367,7 @@ const TreeNode = defineComponent({
           <NTreeNodeSwitcher
             clsPrefix={clsPrefix}
             expanded={this.expanded}
+            selected={selected}
             loading={this.loading}
             hide={tmNode.isLeaf}
             onClick={this.handleSwitcherClick}
