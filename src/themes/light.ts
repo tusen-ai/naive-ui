@@ -32,6 +32,7 @@ import { dynamicTagsLight } from '../dynamic-tags/styles'
 import { elementLight } from '../element/styles'
 import { ellipsisLight } from '../ellipsis/styles'
 import { emptyLight } from '../empty/styles'
+import { equationLight } from '../equation/styles'
 import { formLight } from '../form/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
@@ -116,6 +117,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   DynamicTags: dynamicTagsLight,
   Element: elementLight,
   Empty: emptyLight,
+  Equation: equationLight,
   Ellipsis: ellipsisLight,
   Form: formLight,
   GradientText: gradientTextLight,

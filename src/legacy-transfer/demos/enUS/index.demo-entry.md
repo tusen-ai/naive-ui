@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-<n-alert title="Warning" type="warning">
+<n-alert title="Warning" type="warning" :bordered="false">
   The transfer component is deprecated. It won't have any new feature and will be removed in the next major version. It's recommended to use new  <router-link to="transfer" custom v-slot="{ href, navigate }">
     <n-a :href="href" @click="navigate">Transfer</n-a>
   </router-link>.

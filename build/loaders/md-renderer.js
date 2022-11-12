@@ -42,7 +42,7 @@ function createRenderer (wrapCodeWithCard = true) {
       const highlighted = hljs.highlight(code, { language }).value
       const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`
       return wrapCodeWithCard
-        ? `<n-card size="small" class="md-card" content-style="padding: 0;">
+        ? `<n-card embedded :bordered="false" class="md-card" content-style="padding: 0;">
             <n-scrollbar x-scrollable content-style="padding: 12px; 16px;">
               ${content}
             </n-scrollbar>

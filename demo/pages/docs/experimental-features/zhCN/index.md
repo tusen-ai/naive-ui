@@ -2,7 +2,7 @@
 
 # 试验性特性
 
-<n-alert type="warning" title="注意">
+<n-alert type="warning" title="注意" :bordered="false">
   下列的所有功能都是<n-text strong>不稳定</n-text>的。只在真的需要的时候再使用他们，API 有可能在未来被改变。
 </n-alert>
 
