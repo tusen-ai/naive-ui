@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Wrap a `DIV` container around the columns of `n-data-table` to optimize the layout of filter button, closes [#3853](https://github.com/tusen-ai/naive-ui/issues/3853).
+
 ### Feats
 
 - `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
@@ -41,10 +45,6 @@
 - Add trTR locale.
 
 ## 2.33.5
-
-### Breaking Changes
-
-- Wrap a `DIV` container around the columns of `n-data-table` to optimize the layout of filter button, closes [#3853](https://github.com/tusen-ai/naive-ui/issues/3853).
 
 ### Fixes
 
