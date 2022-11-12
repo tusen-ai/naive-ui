@@ -1,5 +1,10 @@
 import { isBrowser } from '../../_utils'
-import type { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
+import type {
+  FileAndEntry,
+  FileInfo,
+  SettledFileInfo,
+  ShouldUseThumbnailUrl
+} from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -11,7 +16,7 @@ const getExtname = (url: string = ''): string => {
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
 }
 
-export const isImageFile = (file: FileInfo): boolean => {
+export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (file.type) {
     return isImageFileType(file.type)
   }

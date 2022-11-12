@@ -28,6 +28,8 @@
 - Add `n-equation` component.
 - `n-image` adds `previewed-img-props` prop.
 - `n-data-table` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4021).
+- `n-upload` adds `should-use-thumbnail-url` prop, closes [#3861](https://github.com/tusen-ai/naive-ui/issues/3861).
+- `n-upload` adds `render-icon` prop.
 
 ### Fixes
 

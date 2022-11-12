@@ -192,7 +192,11 @@ export default defineComponent({
       if (!environmentSupportFile || !(props.file.file instanceof File)) {
         return
       }
-      thumbnailUrlRef.value = await NUpload.getFileThumbnailUrl(props.file)
+      if (NUpload.shouldUseThumbnailUrlRef.value(props.file)) {
+        thumbnailUrlRef.value = await NUpload.getImageTypedFileThumbnailUrl(
+          props.file
+        )
+      }
     }
 
     watchEffect(() => {
@@ -211,6 +215,8 @@ export default defineComponent({
       showRetryButton: showRetryButtonRef,
       showPreviewButton: showPreviewButtonRef,
       mergedThumbnailUrl: mergedThumbnailUrlRef,
+      shouldUseThumbnailUrl: NUpload.shouldUseThumbnailUrlRef,
+      renderIcon: NUpload.renderIconRef,
       imageRef,
       handleRemoveOrCancelClick,
       handleDownloadClick,
@@ -219,7 +225,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix, mergedTheme, listType, file } = this
+    const { clsPrefix, mergedTheme, listType, file, renderIcon } = this
 
     // if there is text list type, show file icon
     let icon: VNode
@@ -228,44 +234,51 @@ export default defineComponent({
     const isImageCardType = listType === 'image-card'
 
     if (isImageType || isImageCardType) {
-      icon = !isImageFile(file) ? (
-        <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
-          <NBaseIcon clsPrefix={clsPrefix}>
-            {{ default: () => documentIcon }}
-          </NBaseIcon>
-        </span>
-      ) : this.mergedThumbnailUrl && file.status !== 'error' ? (
-        <a
-          rel="noopener noreferer"
-          target="_blank"
-          href={file.url || undefined}
-          class={`${clsPrefix}-upload-file-info__thumbnail`}
-          onClick={this.handlePreviewClick}
-        >
-          {listType === 'image-card' ? (
-            <NImage
-              src={this.mergedThumbnailUrl || undefined}
-              previewSrc={file.url || undefined}
-              alt={file.name}
-              ref="imageRef"
-            />
-          ) : (
-            <img src={this.mergedThumbnailUrl || undefined} alt={file.name} />
-          )}
-        </a>
-      ) : (
-        <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
-          <NBaseIcon clsPrefix={clsPrefix}>
-            {{ default: () => imageIcon }}
-          </NBaseIcon>
-        </span>
-      )
+      icon =
+        !this.shouldUseThumbnailUrl(file) || !this.mergedThumbnailUrl ? (
+          <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
+            {renderIcon ? (
+              renderIcon(file)
+            ) : isImageFile(file) ? (
+              <NBaseIcon clsPrefix={clsPrefix}>
+                {{ default: () => imageIcon }}
+              </NBaseIcon>
+            ) : (
+              <NBaseIcon clsPrefix={clsPrefix}>
+                {{ default: () => documentIcon }}
+              </NBaseIcon>
+            )}
+          </span>
+        ) : (
+          <a
+            rel="noopener noreferer"
+            target="_blank"
+            href={file.url || undefined}
+            class={`${clsPrefix}-upload-file-info__thumbnail`}
+            onClick={this.handlePreviewClick}
+          >
+            {listType === 'image-card' ? (
+              <NImage
+                src={this.mergedThumbnailUrl || undefined}
+                previewSrc={file.url || undefined}
+                alt={file.name}
+                ref="imageRef"
+              />
+            ) : (
+              <img src={this.mergedThumbnailUrl || undefined} alt={file.name} />
+            )}
+          </a>
+        )
     } else {
       icon = (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
-          <NBaseIcon clsPrefix={clsPrefix}>
-            {{ default: () => <AttachIcon /> }}
-          </NBaseIcon>
+          {renderIcon ? (
+            renderIcon(file)
+          ) : (
+            <NBaseIcon clsPrefix={clsPrefix}>
+              {{ default: () => <AttachIcon /> }}
+            </NBaseIcon>
+          )}
         </span>
       )
     }
