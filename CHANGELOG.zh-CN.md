@@ -38,6 +38,7 @@
 - 修复 `n-ellipsis` 在 `n-card` 标题中使用不会溢出，关闭 [#3935](https://github.com/tusen-ai/naive-ui/issues/3935)
 - 修复 `n-timeline-item` 在 `n-timeline` 设定 `horizontal` 之后，`line-type="dashed"` 不生效，关闭 [#4014](https://github.com/tusen-ai/naive-ui/issues/4014)
 - 修复 `n-popover` 在英文和数字过长时不断行
+- 修复 `n-input` 的属性 `autosize` 在输入包含多个空格的时候表现不正确，关闭 [#4027](https://github.com/tusen-ai/naive-ui/issues/4027)
 
 ### i18n
 
