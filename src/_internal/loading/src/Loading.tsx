@@ -4,15 +4,7 @@ import { ExtractPublicPropTypes } from '../../../_utils'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
 
-const baseLoadingProps = {
-  scale: {
-    type: Number,
-    default: 1
-  },
-  radius: {
-    type: Number,
-    default: 100
-  },
+const exposedLoadingProps = {
   strokeWidth: {
     type: Number,
     default: 28
@@ -23,7 +15,9 @@ const baseLoadingProps = {
   }
 }
 
-export type BaseLoadingProps = ExtractPublicPropTypes<typeof baseLoadingProps>
+export type BaseLoadingExposedProps = ExtractPublicPropTypes<
+  typeof exposedLoadingProps
+>
 
 export default defineComponent({
   name: 'BaseLoading',
@@ -36,7 +30,15 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    ...baseLoadingProps
+    scale: {
+      type: Number,
+      default: 1
+    },
+    radius: {
+      type: Number,
+      default: 100
+    },
+    ...exposedLoadingProps
   },
   setup (props) {
     useStyle('-base-loading', style, toRef(props, 'clsPrefix'))

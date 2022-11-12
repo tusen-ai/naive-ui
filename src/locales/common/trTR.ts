@@ -4,7 +4,8 @@ const trTR: NLocale = {
   global: {
     undo: 'Vazgeç',
     redo: 'Tekrar Dene',
-    confirm: 'Kabul Et'
+    confirm: 'Kabul Et',
+    clear: 'Temizle'
   },
   Popconfirm: {
     positiveText: 'Kabul Et',

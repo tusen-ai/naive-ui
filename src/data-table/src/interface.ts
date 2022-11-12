@@ -18,7 +18,7 @@ import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
-import { BaseLoadingProps } from '../../_internal'
+import { BaseLoadingExposedProps } from '../../_internal'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -120,7 +120,7 @@ export const dataTableProps = {
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<() => VNodeChild>,
-  spinProps: { type: Object as PropType<BaseLoadingProps>, default: {} },
+  spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
