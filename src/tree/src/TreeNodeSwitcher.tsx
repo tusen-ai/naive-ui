@@ -20,16 +20,14 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {
-      const { clsPrefix, selected, expanded } = props
+      const { clsPrefix } = props
       return (
         <span
           data-switcher
           class={[
             `${clsPrefix}-tree-node-switcher`,
-            {
-              [`${clsPrefix}-tree-node-switcher--expanded`]: props.expanded,
-              [`${clsPrefix}-tree-node-switcher--hide`]: props.hide
-            }
+            props.expanded && `${clsPrefix}-tree-node-switcher--expanded`,
+            props.hide && `${clsPrefix}-tree-node-switcher--hide`
           ]}
           onClick={props.onClick}
         >
@@ -49,7 +47,10 @@ export default defineComponent({
                   }
                   const { value: renderSwitcherIcon } = renderSwitcherIconRef
                   return renderSwitcherIcon ? (
-                    renderSwitcherIcon({ expanded, selected })
+                    renderSwitcherIcon({
+                      expanded: props.expanded,
+                      selected: props.selected
+                    })
                   ) : (
                     <NBaseIcon clsPrefix={clsPrefix} key="switcher">
                       {{ default: () => <SwitcherIcon /> }}

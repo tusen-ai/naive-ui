@@ -22,7 +22,7 @@ debug.vue
 ### TreeSelect Props
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `value` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | cascade | `boolean` | `false` | Whether to link the selection of parent and child nodes. |  |
 | checkable | `boolean` | `false` | Whether to use a checkbox to select values. |  |
@@ -67,7 +67,7 @@ debug.vue
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
 | on-update:expanded-keys | `(value: Array<string \| number>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | Callback on expanded keys updated. | `meta` NEXT_VERSION |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function on indeterminate options changing. |  |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' | 'clear' }) => void) => void` | `undefined` | Callback on value updated. |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' \| 'clear' }) => void) => void` | `undefined` | Callback on value updated. |  |
 
 ### TreeSelectOption Properties
 

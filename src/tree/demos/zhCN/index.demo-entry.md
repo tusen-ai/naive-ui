@@ -71,7 +71,7 @@ expand-debug.vue
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
 | render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |
-| render-switcher-icon | `(options: { expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0, `optimize`: NEXT_VERSION |
+| render-switcher-icon | `(props: { expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0, `optimize` NEXT_VERSION |
 | selectable | `boolean` | `true` | 节点是否可以被选中 |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
 | show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
