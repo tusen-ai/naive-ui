@@ -96,6 +96,7 @@ render-cell.vue
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
+| spin-props | `{ scale?: number, radius?: number, strokeWidth?: number, stroke?: string }` | `undefined` | Table spin's props. | NEXT_VERSION |
 | sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | 2.32.2 |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
