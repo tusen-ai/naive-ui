@@ -5,7 +5,8 @@ const arDZ: NLocale = {
   global: {
     undo: 'تراجع',
     redo: 'إعادة',
-    confirm: 'تأكيد'
+    confirm: 'تأكيد',
+    clear: 'مسح'
   },
   Popconfirm: {
     positiveText: 'تأكيد',

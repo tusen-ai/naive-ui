@@ -5,7 +5,8 @@ const viVN: NLocale = {
   global: {
     undo: 'Hoàn tác',
     redo: 'Làm lại',
-    confirm: 'Xác nhận'
+    confirm: 'Xác nhận',
+    clear: 'xóa'
   },
   Popconfirm: {
     positiveText: 'Xác nhận',
