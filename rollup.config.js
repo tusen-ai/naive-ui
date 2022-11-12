@@ -73,6 +73,7 @@ const esmConfig = defineConfig({
     format: 'es'
   }
 })
+
 module.exports = [
   merge(baseConfig, devConfig),
   merge(baseConfig, prodConfig),
