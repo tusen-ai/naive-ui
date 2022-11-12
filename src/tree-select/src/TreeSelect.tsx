@@ -22,7 +22,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate, CheckStrategy } from 'treemate'
+import { createTreeMate, CheckStrategy, RawNode } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
@@ -373,17 +373,28 @@ export default defineComponent({
     }
     function doUpdateExpandedKeys (
       keys: Key[],
-      option: Array<TreeSelectOption | null>
+      option: Array<TreeSelectOption | null>,
+      meta: {
+        node: RawNode | null
+        action:
+        | 'check'
+        | 'uncheck'
+        | 'select'
+        | 'unselect'
+        | 'expand'
+        | 'collapse'
+        | 'filter'
+      }
     ): void {
       const {
         onUpdateExpandedKeys,
         'onUpdate:expandedKeys': _onUpdateExpandedKeys
       } = props
       if (onUpdateExpandedKeys) {
-        call(onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option)
+        call(onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option, meta)
       }
       if (_onUpdateExpandedKeys) {
-        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option)
+        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option, meta)
       }
       uncontrolledExpandedKeysRef.value = keys
     }
