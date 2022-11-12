@@ -2,12 +2,52 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 在 `n-data-table` 的列外包裹一层 `DIV` 容器用以优化过滤按钮的布局，关闭 [#3853](https://github.com/tusen-ai/naive-ui/issues/3853)
+
 ### Feats
 
 - `n-avatar` 导出 `AvatarOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
 - `n-mention` 新增 `on-update:show` 属性，关闭 [#3882](https://github.com/tusen-ai/naive-ui/issues/3882)
+- `n-tree` 为 `on-update:expanded-keys`、`on-update:checked-keys`、`on-update:selected-keys` 属性添加触发节点信息, 关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
+- `n-tree-select` 为 `on-update:expanded-keys`、`on-update:value` 属性添加触发节点信息, 关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
+- `n-tree` 新增 `getCheckedKeys` 方法
+- `n-tree` 新增 `getIndeterminateKeys` 方法
+- `n-tree-select` 新增 `getCheckedKeys` 方法
+- `n-tree-select` 新增 `getIndeterminateKeys` 方法
+- `n-tree-select` 新增 `focus` 方法
+- `n-tree-select` 新增 `blur` 方法
+- `n-cascader` 新增 `getCheckedKeys` 方法
+- `n-cascader` 新增 `getIndeterminateKeys` 方法
+- `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
+- `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
+- `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
+- `n-data-table` 新增 `spin-props` 属性，关闭 [#3649](https://github.com/tusen-ai/naive-ui/issues/3649)
+- `n-button` 新增 `render-icon` 属性，关闭 [#4007](https://github.com/tusen-ai/naive-ui/issues/4007)
+- 新增 `n-equation` 组件
+- `n-image` 新增 `previewed-img-props` 属性
+- `n-data-table` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4021)
+- `n-upload` 新增 `should-use-thumbnail-url` 属性，关闭 [#3861](https://github.com/tusen-ai/naive-ui/issues/3861)
+- `n-upload` 新增 `render-icon` 属性
+
+### Fixes
+
+- 修复 `n-image` 进行图片预览只可以按住鼠标左键拖拽，关闭 [#3950](https://github.com/tusen-ai/naive-ui/issues/3950)
+- 修复 `n-form-item` 在 `label-align="left"` 并且 `require-mark-placement="left"` 并且 `label-placement="left"` 时标签文本显示位置有问题，关闭 [#3871](https://github.com/tusen-ai/naive-ui/issues/3871)
+- 修复 `n-tree` 在谷歌、edge 浏览器 106 版本下拖动 tree，出现白屏现象，关闭 [#3909](https://github.com/tusen-ai/naive-ui/issues/3909)
+- 修复 `n-select` 在设定了 `value-field` 和 `max-tag-count="responsive"` 之后在溢出标签的弹框中移除选中选项之后选框会显示错误的值，关闭 [#3869](https://github.com/tusen-ai/naive-ui/issues/3869)
+- 修复 `n-ellipsis` 在 `n-card` 标题中使用不会溢出，关闭 [#3935](https://github.com/tusen-ai/naive-ui/issues/3935)
+- 修复 `n-timeline-item` 在 `n-timeline` 设定 `horizontal` 之后，`line-type="dashed"` 不生效，关闭 [#4014](https://github.com/tusen-ai/naive-ui/issues/4014)
+- 修复 `n-popover` 在英文和数字过长时不断行
+- 修复 `n-input` 的属性 `autosize` 在输入包含多个空格的时候表现不正确，关闭 [#4027](https://github.com/tusen-ai/naive-ui/issues/4027)
+
+### i18n
+
+- 新增 arDZ locale
+- 新增 trTR locale
 
 ## 2.33.5
 
@@ -216,6 +256,7 @@
 - 修复所有组件导出的 props 类型属性都是 `readonly` 的
 - 修复 `n-tree` 的 `check-on-click` 属性有时不生效
 - 修复 `n-progress` 的 `offset-degree` 表现不正确
+- 修复 `n-date-picker` 在某些情况下不能删除全部输入，关闭 [#3922](https://github.com/tusen-ai/naive-ui/issues/3922)
 
 ### Feats
 

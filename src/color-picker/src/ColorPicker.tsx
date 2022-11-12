@@ -443,6 +443,11 @@ export default defineComponent({
       valueIndexRef.value = valueIndex + 1
     }
 
+    function handleClear (): void {
+      doUpdateValue(null, 'input')
+      doUpdateShow(false)
+    }
+
     function handleConfirm (): void {
       const { value } = mergedValueRef
       const { onConfirm } = props
@@ -605,6 +610,17 @@ export default defineComponent({
                   themeOverrides={mergedTheme.peerOverrides.Button}
                 >
                   {{ default: () => localeRef.value.confirm }}
+                </NButton>
+              )}
+              {actions.includes('clear') && (
+                <NButton
+                  size="small"
+                  onClick={handleClear}
+                  disabled={!mergedValueRef.value}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                >
+                  {{ default: () => localeRef.value.clear }}
                 </NButton>
               )}
             </div>

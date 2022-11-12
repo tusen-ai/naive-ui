@@ -5,7 +5,8 @@ const nlNL: NLocale = {
   global: {
     undo: 'Ongedaan Maken',
     redo: 'Opnieuw Doen',
-    confirm: 'Bevestig'
+    confirm: 'Bevestig',
+    clear: 'Wis'
   },
   Popconfirm: {
     positiveText: 'Bevestig',

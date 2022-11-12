@@ -134,6 +134,7 @@ export const inputProps = {
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onChange: [Function, Array] as PropType<OnUpdateValue>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  countGraphemes: Function as PropType<(value: string) => number>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -487,6 +488,22 @@ export default defineComponent({
       }
     }
     function allowInput (value: string): boolean {
+      const { countGraphemes, maxlength, minlength } = props
+      if (countGraphemes) {
+        let graphemesCount: number | undefined
+        if (maxlength !== undefined) {
+          if (graphemesCount === undefined) {
+            graphemesCount = countGraphemes(value)
+          }
+          if (graphemesCount > Number(maxlength)) return false
+        }
+        if (minlength !== undefined) {
+          if (graphemesCount === undefined) {
+            graphemesCount = countGraphemes(value)
+          }
+          if (graphemesCount < Number(maxlength)) return false
+        }
+      }
       const { allowInput } = props
       if (typeof allowInput === 'function') {
         return allowInput(value)
@@ -780,7 +797,8 @@ export default defineComponent({
     provide(inputInjectionKey, {
       mergedValueRef,
       maxlengthRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      countGraphemesRef: toRef(props, 'countGraphemes')
     })
 
     const exposedProps: InputWrappedRef = {
@@ -978,7 +996,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedStatus, themeClass, type, onRender } = this
+    const {
+      mergedClsPrefix,
+      mergedStatus,
+      themeClass,
+      type,
+      countGraphemes,
+      onRender
+    } = this
     const $slots = this.$slots as {
       prefix?: () => VNode[]
       suffix?: () => VNode[]
@@ -1069,8 +1094,8 @@ export default defineComponent({
                         placeholder={this.placeholder as string | undefined}
                         value={this.mergedValue as string | undefined}
                         disabled={this.mergedDisabled}
-                        maxlength={this.maxlength as any}
-                        minlength={this.minlength as any}
+                        maxlength={countGraphemes ? undefined : this.maxlength}
+                        minlength={countGraphemes ? undefined : this.minlength}
                         readonly={this.readonly as any}
                         tabindex={
                           this.passivelyActivated && !this.activated
@@ -1145,8 +1170,8 @@ export default defineComponent({
                 }
                 placeholder={this.mergedPlaceholder[0]}
                 disabled={this.mergedDisabled}
-                maxlength={this.maxlength as any}
-                minlength={this.minlength as any}
+                maxlength={countGraphemes ? undefined : this.maxlength}
+                minlength={countGraphemes ? undefined : this.minlength}
                 value={
                   Array.isArray(this.mergedValue)
                     ? this.mergedValue[0]
@@ -1267,8 +1292,8 @@ export default defineComponent({
                 }
                 placeholder={this.mergedPlaceholder[1]}
                 disabled={this.mergedDisabled}
-                maxlength={this.maxlength as any}
-                minlength={this.minlength as any}
+                maxlength={countGraphemes ? undefined : this.maxlength}
+                minlength={countGraphemes ? undefined : this.minlength}
                 value={
                   Array.isArray(this.mergedValue)
                     ? this.mergedValue[1]

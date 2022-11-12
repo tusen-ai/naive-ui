@@ -139,7 +139,7 @@ export default cB('input', `
     overflow: hidden;
     visibility: hidden;
     position: static;
-    white-space: nowrap;
+    white-space: pre;
     pointer-events: none;
   `),
   cE('input-el', `

@@ -25,7 +25,7 @@ render-debug.vue
 ### TreeSelect Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `value` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |  |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |  |
@@ -68,9 +68,9 @@ render-debug.vue
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | 2.27.0 |
-| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |  |
+| on-update:expanded-keys | `(value: Array<string \| number>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | 展开节点更新的回调 | `meta` NEXT_VERSION |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | 更新值的回调 |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' | 'clear' }) => void` | `undefined` | 更新值的回调 | `meta` NEXT_VERSION |
 
 ### TreeSelectOption Properties
 
@@ -89,3 +89,12 @@ render-debug.vue
 | action | `()` | 菜单操作区域的 slot | 2.22.0 |
 | arrow  | `()` | 选择箭头 slot       | 2.30.4 |
 | empty  | `()` | 菜单无数据时的 slot | 2.22.0 |
+
+### TreeSelect Methods
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| blur | `() => void` | 失焦 | NEXT_VERSION |
+| focus | `() => void` | 聚焦 | NEXT_VERSION |
+| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |

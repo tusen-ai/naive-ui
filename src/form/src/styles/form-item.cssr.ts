@@ -72,6 +72,9 @@ export default cB('form-item', `
       flex-shrink: 0;
       flex-grow: 0;
     `, [
+      cM('reverse-columns-space', `
+        grid-template-columns: auto 1fr;
+      `),
       cM('left-mark', `
         grid-template-areas:
           "mark text"

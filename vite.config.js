@@ -48,6 +48,7 @@ module.exports = {
       '@css-render/vue3-ssr',
       'date-fns-tz',
       'codesandbox/lib/api/define',
+      'grapheme-splitter',
       'highlight.js/lib/core',
       'highlight.js/lib/languages/javascript',
       'highlight.js/lib/languages/python',
@@ -75,12 +76,19 @@ module.exports = {
       'date-fns/esm/locale/pt-BR',
       'date-fns/esm/locale/th',
       'date-fns/esm/locale/ko',
-      'date-fns/esm/locale/nl'
+      'date-fns/esm/locale/nl',
+      'date-fns/esm/locale/ar'
     ],
     exclude: ['__INDEX__']
   },
   build: {
     outDir: 'site',
+    output: {
+      manualChunks: {
+        'grapheme-splitter': ['grapheme-splitter'],
+        katex: ['katex']
+      }
+    },
     rollupOptions: {
       plugins: [
         babel({
