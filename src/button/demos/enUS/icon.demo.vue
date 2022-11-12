@@ -1,7 +1,7 @@
 <markdown>
 # Icon
 
-Icons can be used in buttons, can use `renderIcon` prop or `icon` slot.
+Icons can be used in buttons. You can use `render-icon` prop or `icon` slot.
 </markdown>
 
 <template>

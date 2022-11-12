@@ -1,7 +1,7 @@
 <markdown>
 # 图标
 
-在按钮上使用图标，可以使用 `renderIcon` 属性或 `icon` 插槽。
+在按钮上使用图标，可以使用 `render-icon` 属性或 `icon` 插槽。
 </markdown>
 
 <template>
