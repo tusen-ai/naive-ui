@@ -19,6 +19,7 @@
 - `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
 - 新增 `n-equation` 组件
+- `n-image` 新增 `previewed-img-props` 属性
 
 ### Fixes
 

@@ -4,16 +4,17 @@ import {
   inject,
   ref,
   PropType,
-  toRef,
   watchEffect,
   ImgHTMLAttributes,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  provide,
+  toRef
 } from 'vue'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
-import { imagePreviewSharedProps } from './interface'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
 import type { IntersectionObserverOptions } from './utils'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -28,6 +29,7 @@ export const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<ImgHTMLAttributes>,
+  previewedImgProps: Object as PropType<ImgHTMLAttributes>,
   lazy: Boolean,
   intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   objectFit: {
@@ -56,7 +58,6 @@ export default defineComponent({
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
     const showErrorRef = ref(false)
-    const imgPropsRef = toRef(props, 'imgProps')
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
@@ -91,7 +92,6 @@ export default defineComponent({
       if (isImageSupportNativeLazy) {
         return
       }
-
       let unobserve: (() => void) | undefined
       const stopWatchHandle = watchEffect(() => {
         unobserve?.()
@@ -117,15 +117,22 @@ export default defineComponent({
     })
 
     const loadedRef = ref(false)
+
+    provide(imageContextKey, {
+      previewedImgPropsRef: toRef(props, 'previewedImgProps')
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
-      imgProps: imgPropsRef,
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
+      mergedOnClick: (e: MouseEvent) => {
+        exposedMethods.click()
+        props.imgProps?.onClick?.(e)
+      },
       mergedOnError: (e: Event) => {
         if (!shouldStartLoadingRef.value) return
         showErrorRef.value = true
@@ -149,7 +156,6 @@ export default defineComponent({
     const loadSrc: string = this.src || imgProps.src || ''
     const imgNode = h('img', {
       ...imgProps,
-      class: imgProps.class,
       ref: 'imageRef',
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
@@ -162,7 +168,7 @@ export default defineComponent({
             : undefined,
       alt: this.alt || imgProps.alt,
       'aria-label': this.alt || imgProps.alt,
-      onClick: this.click,
+      onClick: this.mergedOnClick,
       onError: this.mergedOnError,
       onLoad: this.mergedOnLoad,
       loading: lazy ? 'lazy' : 'eager',
@@ -176,7 +182,6 @@ export default defineComponent({
       'data-error': this.showError,
       'data-preview-src': this.previewSrc || this.src
     })
-
     return (
       <div
         {...$attrs}

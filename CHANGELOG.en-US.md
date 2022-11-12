@@ -19,6 +19,7 @@
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
 - Add `n-equation` component.
+- `n-image` adds `previewed-img-props` prop.
 
 ### Fixes
 
