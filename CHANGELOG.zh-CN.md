@@ -18,6 +18,7 @@
 - `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
 - `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)
+- `n-button` 新增 `render-icon` 属性，关闭 [#4007](https://github.com/tusen-ai/naive-ui/issues/4007)
 - 新增 `n-equation` 组件
 - `n-image` 新增 `previewed-img-props` 属性
 - `n-data-table` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4021)
