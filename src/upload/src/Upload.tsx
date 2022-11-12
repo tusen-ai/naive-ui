@@ -48,6 +48,7 @@ import { uploadInjectionKey } from './interface'
 import {
   createImageDataUrl,
   createSettledFileInfo,
+  environmentSupportFile,
   isImageFile,
   matchType
 } from './utils'
@@ -345,7 +346,10 @@ export const uploadProps = {
   onPreview: Function as PropType<OnPreview>,
   shouldUseThumbnailUrl: {
     type: Function as PropType<ShouldUseThumbnailUrl>,
-    default: isImageFile
+    default: (file: SettledFileInfo) => {
+      if (!environmentSupportFile || !(file.file instanceof File)) return false
+      return isImageFile(file)
+    }
   },
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
   abstract: Boolean,
@@ -591,14 +595,11 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    async function getImageTypedFileThumbnailUrl (
-      file: FileInfo
-    ): Promise<string> {
+    async function getFileThumbnailUrl (file: SettledFileInfo): Promise<string> {
       const { createThumbnailUrl } = props
-
       return createThumbnailUrl
-        ? await createThumbnailUrl(file.file as File)
-        : await createImageDataUrl(file.file as File)
+        ? await createThumbnailUrl(file.file, file)
+        : await createImageDataUrl(file.file)
     }
     const cssVarsRef = computed(() => {
       const {
@@ -661,7 +662,7 @@ export default defineComponent({
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
-      getImageTypedFileThumbnailUrl,
+      getFileThumbnailUrl,
       listTypeRef: toRef(props, 'listType'),
       dragOverRef,
       openOpenFileDialog,

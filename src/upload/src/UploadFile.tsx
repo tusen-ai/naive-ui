@@ -28,7 +28,7 @@ import NUploadProgress from './UploadProgress'
 import { uploadInjectionKey } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
-import { download, environmentSupportFile, isImageFile } from './utils'
+import { download, isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
   paddingMedium: '0 3px',
@@ -189,13 +189,8 @@ export default defineComponent({
       if (listType !== 'image' && listType !== 'image-card') {
         return
       }
-      if (!environmentSupportFile || !(props.file.file instanceof File)) {
-        return
-      }
       if (NUpload.shouldUseThumbnailUrlRef.value(props.file)) {
-        thumbnailUrlRef.value = await NUpload.getImageTypedFileThumbnailUrl(
-          props.file
-        )
+        thumbnailUrlRef.value = await NUpload.getFileThumbnailUrl(props.file)
       }
     }
 

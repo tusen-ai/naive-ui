@@ -38,7 +38,8 @@ export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   return true
 }
 
-export async function createImageDataUrl (file: File): Promise<string> {
+export async function createImageDataUrl (file: File | null): Promise<string> {
+  if (!file) return ''
   return await new Promise((resolve) => {
     if (!file.type || !isImageFileType(file.type)) {
       resolve('')
