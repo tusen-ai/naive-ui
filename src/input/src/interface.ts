@@ -22,6 +22,7 @@ export interface InputWrappedRef {
 export type InputInst = UnwrapRef<InputWrappedRef>
 
 export const inputInjectionKey = createInjectionKey<{
+  countGraphemesRef: Ref<((input: string) => number) | undefined>
   mergedValueRef: Ref<string | [string, string] | null>
   maxlengthRef: Ref<number | undefined>
   mergedClsPrefixRef: Ref<string>

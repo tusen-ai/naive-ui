@@ -36,7 +36,13 @@ import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter, emptyImage, filterTree, isNodeDisabled } from './utils'
+import {
+  keysWithFilter,
+  emptyImage,
+  filterTree,
+  isNodeDisabled,
+  useMergedCheckStrategy
+} from './utils'
 import { useKeyboard } from './keyboard'
 import type {
   TreeDragInfo,
@@ -397,9 +403,7 @@ export default defineComponent({
       )
       return value
     })
-    const mergedCheckStrategyRef = computed(() =>
-      props.leafOnly ? 'child' : props.checkStrategy
-    )
+    const mergedCheckStrategyRef = useMergedCheckStrategy(props)
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys
     })
@@ -1483,7 +1487,15 @@ export default defineComponent({
     }
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
-      scrollTo
+      scrollTo,
+      getCheckedKeys: () => {
+        if (!props.checkable) return []
+        return checkedStatusRef.value.checkedKeys
+      },
+      getIndeterminateKeys: () => {
+        if (!props.checkable) return []
+        return checkedStatusRef.value.indeterminateKeys
+      }
     }
     const cssVarsRef = computed(() => {
       const {

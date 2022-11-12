@@ -101,3 +101,5 @@ checkbox-placement.vue
 | Name | Paramaters | Description | Version |
 | --- | --- | --- | --- |
 | scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | 2.32.2 |
+| getCheckedKeys | `() => Array<string \| number>` | Get checked keys. | NEXT_VERSION |
+| getIndeterminateKeys | `() => Array<string \| number>` | Get indeterminate keys. | NEXT_VERSION |

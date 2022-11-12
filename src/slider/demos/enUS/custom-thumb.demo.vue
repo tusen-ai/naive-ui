@@ -7,7 +7,7 @@ You can use `handle` slot to customize handle button.
 <template>
   <n-space vertical>
     <n-slider v-model:value="value" :step="10">
-      <template #handle>
+      <template #thumb>
         <n-icon-wrapper :size="24" :border-radius="12">
           <n-icon :size="18" :component="AnimalCat24Regular" />
         </n-icon-wrapper>

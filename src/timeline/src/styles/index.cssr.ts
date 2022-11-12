@@ -29,6 +29,16 @@ export default cB('timeline', `
         flex-shrink: 0;
         padding-right: 40px;
       `, [
+        cM('dashed-line-type', [
+          c('>', [
+            cB('timeline-item-timeline', [
+              cE('line', `
+                background-image: linear-gradient(90deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
+                background-size: 10px 1px;
+              `)
+            ])
+          ])
+        ]),
         c('>', [
           cB('timeline-item-content', `
           margin-top: calc(var(--n-icon-size) + 12px);
