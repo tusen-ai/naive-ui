@@ -544,6 +544,7 @@ export default defineComponent({
     let dragStartTime = 0
     let dragging = false
     let isEffectiveDrag = false
+    let currentIndex: number | null = 0
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
       if (
@@ -598,7 +599,7 @@ export default defineComponent({
     }
     function handleTouchend (): void {
       const { value: realIndex } = realIndexRef
-      let currentIndex: number | null = realIndex
+      currentIndex = realIndex
       if (!inTransition && dragOffset !== 0 && sequenceLayoutRef.value) {
         const currentTranslate = previousTranslate - dragOffset
         const translates = [
@@ -762,8 +763,13 @@ export default defineComponent({
               realIndex = length - 1
             }
           }
-          if (displayTotalViewRef.value === 2 && lastRealIndex === 2) {
-            realIndex = 3
+          if (displayTotalViewRef.value === 2) {
+            if (currentIndex === 0 && realIndex === 2 && lastRealIndex === 1) {
+              realIndex = 0
+            }
+            if (currentIndex === 3 && realIndex === 1 && lastRealIndex === 2) {
+              realIndex = 3
+            }
           }
           translateTo(realIndex, speedRef.value)
         } else {
