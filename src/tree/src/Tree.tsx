@@ -1515,6 +1515,7 @@ export default defineComponent({
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
       multipleRef: toRef(props, 'multiple'),
+      triggerLoading,
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

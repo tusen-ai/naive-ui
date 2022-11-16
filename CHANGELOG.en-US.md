@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tree` use `on-load` will cause infinite loop when not add `children` into parent tree node，closes [#4038](https://github.com/tusen-ai/naive-ui/issues/4038).
+
 ## 2.34.2
 
 ### Fixes

@@ -44,7 +44,8 @@ const TreeNode = defineComponent({
       blockLineRef,
       checkboxPlacementRef,
       checkOnClickRef,
-      disabledFieldRef
+      disabledFieldRef,
+      triggerLoading
     } = NTree
 
     const checkboxDisabledRef = useMemo(
@@ -78,23 +79,9 @@ const TreeNode = defineComponent({
     function handleSwitcherClick (): void {
       const { tmNode } = props
       if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
-        if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
-          NTree.loadingKeysRef.value.add(tmNode.key)
-        } else {
-          return
-        }
-        const {
-          onLoadRef: { value: onLoad }
-        } = NTree
-        if (onLoad) {
-          void onLoad(tmNode.rawNode)
-            .then(() => {
-              NTree.handleSwitcherClick(tmNode)
-            })
-            .finally(() => {
-              NTree.loadingKeysRef.value.delete(tmNode.key)
-            })
-        }
+        void triggerLoading(tmNode).then(() => {
+          NTree.handleSwitcherClick(tmNode)
+        })
       } else {
         NTree.handleSwitcherClick(tmNode)
       }

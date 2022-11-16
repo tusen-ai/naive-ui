@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-tree` 使用 `on-load` 未添加子节点 `children` 到父节点时会造成死循环，关闭 [#4038](https://github.com/tusen-ai/naive-ui/issues/4038)
+
 ## 2.34.2
 
 ### Fixes
