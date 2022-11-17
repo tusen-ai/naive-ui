@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` header and body's scrolling are not sync when using the keyboard, closes [#3941](https://github.com/tusen-ai/naive-ui/issues/3941).
+
 ## 2.34.2
 
 ### Fixes

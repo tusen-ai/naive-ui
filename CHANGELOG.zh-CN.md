@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 使用按键滚动时 header 和 body 不同步，关闭 [#3941](https://github.com/tusen-ai/naive-ui/issues/3941)
+
+
 ## 2.34.2
 
 ### Fixes

@@ -63,7 +63,6 @@ export default defineComponent({
       checkOptionsRef,
       mergedSortStateRef,
       componentId,
-      scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
       onUnstableColumnResize,
@@ -103,12 +102,6 @@ export default defineComponent({
         ) || null
       const nextSorter = createNextSorter(column, activeSorter)
       deriveNextSorter(nextSorter)
-    }
-    function handleMouseenter (): void {
-      scrollPartRef.value = 'head'
-    }
-    function handleMouseleave (): void {
-      scrollPartRef.value = 'body'
     }
     const resizeStartWidthMap: Map<ColumnKey, number | undefined> = new Map()
     function handleColumnResizeStart (column: TableBaseColumn): void {
@@ -153,8 +146,6 @@ export default defineComponent({
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
       headerCheckboxDisabled: headerCheckboxDisabledRef,
-      handleMouseenter,
-      handleMouseleave,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,
@@ -327,18 +318,11 @@ export default defineComponent({
     if (!discrete) {
       return theadVNode
     }
-    const {
-      handleTableHeaderScroll,
-      handleMouseenter,
-      handleMouseleave,
-      scrollX
-    } = this
+    const { handleTableHeaderScroll, scrollX } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
         onScroll={handleTableHeaderScroll}
-        onMouseenter={handleMouseenter}
-        onMouseleave={handleMouseleave}
       >
         <table
           ref="body"
