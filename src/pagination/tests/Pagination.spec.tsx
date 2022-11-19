@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPagination, PaginationRenderLabel } from '../index'
+import { NPagination, PaginationRenderLabel, PaginationInfo } from '../index'
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {
@@ -32,6 +32,36 @@ describe('n-pagination', () => {
       itemCount: 11
     })
     expect(wrapper.findAll('.n-pagination-item').length).toEqual(4)
+  })
+  it('should work with corrent pagination info', async () => {
+    let paginationInfo: PaginationInfo | undefined
+    const wrapper = mount(NPagination, {
+      props: {
+        itemCount: 1,
+        pageSize: 10,
+        prefix: (info: PaginationInfo) => {
+          paginationInfo = info
+        }
+      }
+    })
+    expect(wrapper.findAll('.n-pagination-item').length).toEqual(3)
+    expect(paginationInfo?.itemCount).toBe(1)
+    expect(paginationInfo?.page).toBe(1)
+    expect(paginationInfo?.pageCount).toBe(1)
+    expect(paginationInfo?.pageSize).toBe(10)
+    expect(paginationInfo?.startIndex).toBe(0)
+    expect(paginationInfo?.endIndex).toBe(0)
+    await wrapper.setProps({
+      itemCount: 12,
+      pageSize: 5,
+      page: 3
+    })
+    expect(paginationInfo?.itemCount).toBe(12)
+    expect(paginationInfo?.pageSize).toBe(5)
+    expect(paginationInfo?.page).toBe(3)
+    expect(paginationInfo?.pageCount).toBe(3)
+    expect(paginationInfo?.startIndex).toBe(10)
+    expect(paginationInfo?.endIndex).toBe(11)
   })
   it('should work with prev slot', async () => {
     const wrapper = mount(NPagination, {
