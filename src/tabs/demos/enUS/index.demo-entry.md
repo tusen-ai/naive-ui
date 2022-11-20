@@ -2,7 +2,7 @@
 
 Switch contents in same area.
 
-<n-alert type="warning" title="Note">
+<n-alert type="warning" title="Note" :bordered="false">
   <n-text code>n-tabs</n-text> will extract default tab value from default slot, so there would be a vue slot warning. If you don't want to see the warning, you should give component a  <n-text code>default-value</n-text>.
 </n-alert>
 

@@ -78,10 +78,13 @@ status.vue
 | action | `()` | Action content displayed in the cascading menu. |  |
 | arrow | `()` | Arrow content displayed in the cascading menu. | 2.32.2 |
 | empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
+| not-found | `()` | Data not found slot when searching. | 2.34.0 |
 
 ### Cascader Methods
 
-| Name  | Type         | Description | Version |
-| ----- | ------------ | ----------- | ------- |
-| focus | `() => void` | Focus.      | 2.24.2  |
-| blur  | `() => void` | Blur.       | 2.24.2  |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur. | 2.24.2 |
+| focus | `() => void` | Focus. | 2.24.2 |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

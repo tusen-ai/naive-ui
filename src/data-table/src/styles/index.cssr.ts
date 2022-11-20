@@ -89,7 +89,7 @@ export default c([
       ])
     ]),
     c('>', [
-      cB('base-loading', `
+      cB('data-table-loading-wrapper', `
         color: var(--n-loading-color);
         font-size: var(--n-loading-size);
         position: absolute;
@@ -97,6 +97,9 @@ export default c([
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
         transition: color .3s var(--n-bezier);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `, [
         fadeInScaleUpTransition({
           originalTransform: 'translateX(-50%) translateY(-50%)'
@@ -189,7 +192,9 @@ export default c([
       ]),
       cNotM('summary', [
         c('&:hover', 'background-color: var(--n-merged-td-color-hover);', [
-          cB('data-table-td', 'background-color: var(--n-merged-td-color-hover);')
+          c('>', [
+            cB('data-table-td', 'background-color: var(--n-merged-td-color-hover);')
+          ])
         ])
       ])
     ]),
@@ -210,7 +215,11 @@ export default c([
     `, [
       cM('filterable', {
         paddingRight: '36px'
-      }),
+      }, [
+        cM('sortable', {
+          paddingRight: 'calc(var(--n-th-padding) + 36px)'
+        })
+      ]),
       fixedColumnStyle,
       cM('selection', `
         padding: 0;
@@ -218,6 +227,13 @@ export default c([
         line-height: 0;
         z-index: 3;
       `),
+      cE('title', {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 'auto',
+        maxWidth: '100%'
+      }),
       cE('ellipsis', `
         display: inline-block;
         vertical-align: bottom;

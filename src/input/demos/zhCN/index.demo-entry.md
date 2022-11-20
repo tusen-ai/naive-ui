@@ -23,6 +23,7 @@ event.vue
 input-props.vue
 status.vue
 pattern.vue
+graphemes.vue
 rtl-debug.vue
 prefix-debug.vue
 modal-debug.vue
@@ -40,6 +41,7 @@ textarea-resize-debug.vue
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如 `{ minRows: 1, maxRows: 3 }` |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |  |
+| count-graphemes | `(value: string) => number` | `undefined` | 计算输入的字数。如果设定了，那么原生的 `maxlength` 和 `minlength` 属性将不再被使用 | 2.34.0 |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | input-props | `HTMLInputAttributes` | `undefined` | Input 组件内部 input 元素的属性，对 `pair` 类型不生效，[在这里查看原生属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)。注意：input-props 不会覆盖内部 input 元素的已经存在的属性（除了 `type`） |  |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |  |

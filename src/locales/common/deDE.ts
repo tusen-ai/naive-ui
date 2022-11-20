@@ -5,7 +5,8 @@ const deDE: NLocale = {
   global: {
     undo: 'Rückgängig',
     redo: 'Wiederholen',
-    confirm: 'Bestätigen'
+    confirm: 'Bestätigen',
+    clear: 'Löschen'
   },
   Popconfirm: {
     positiveText: 'Bestätigen',

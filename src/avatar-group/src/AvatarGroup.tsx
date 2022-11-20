@@ -21,7 +21,7 @@ export interface AvatarGroupInjection {
   size?: Size | undefined
 }
 
-interface AvatarOption {
+export interface AvatarGroupOption {
   src: string
 }
 
@@ -30,7 +30,7 @@ export const avatarGroupProps = {
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,
   options: {
-    type: Array as PropType<AvatarOption[]>,
+    type: Array as PropType<AvatarGroupOption[]>,
     default: () => []
   },
   vertical: Boolean,

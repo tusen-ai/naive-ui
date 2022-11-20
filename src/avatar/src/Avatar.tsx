@@ -9,7 +9,8 @@ import {
   VNodeChild,
   watchEffect,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  ImgHTMLAttributes
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
@@ -57,6 +58,7 @@ export const avatarProps = {
   onLoad: Function as PropType<(e: Event) => void>,
   renderPlaceholder: Function as PropType<() => VNodeChild>,
   renderFallback: Function as PropType<() => VNodeChild>,
+  imgProps: Object as PropType<ImgHTMLAttributes>,
   /** @deprecated */
   color: String
 } as const
@@ -125,7 +127,8 @@ export default defineComponent({
     const handleError = (e: Event): void => {
       if (!shouldStartLoadingRef.value) return
       hasLoadErrorRef.value = true
-      const { onError } = props
+      const { onError, imgProps } = props
+      imgProps?.onError?.(e)
       if (onError) {
         onError(e)
       }
@@ -238,8 +241,9 @@ export default defineComponent({
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnLoad: (e: Event) => {
-        const { onLoad } = props
+        const { onLoad, imgProps } = props
         onLoad?.(e)
+        imgProps?.onLoad?.(e)
         loadedRef.value = true
       }
     }
@@ -285,7 +289,9 @@ export default defineComponent({
             </VResizeObserver>
           )
         } else if (src) {
+          const { imgProps } = this
           return h('img', {
+            ...imgProps,
             loading: isImageSupportNativeLazy && lazy ? 'lazy' : 'eager',
             src: isImageSupportNativeLazy
               ? src
@@ -296,6 +302,7 @@ export default defineComponent({
             'data-image-src': src,
             onError: this.handleError,
             style: [
+              imgProps?.style,
               { objectFit: this.objectFit },
               placeholderNode
                 ? {

@@ -65,7 +65,7 @@ checkbox-placement.vue
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
-| render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0 |
+| render-switcher-icon | `(props: { expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0, `props` 2.34.0 |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
@@ -76,10 +76,10 @@ checkbox-placement.vue
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Drag a node, the callback function after the node leaves other nodes. |  |
 | on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function to start dragging a certain node. |  |
 | on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |  |
-| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | Callback function when node checked options change. |  |
-| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | Callback function when node indeterminate options change. |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | The callback function when the node expansion item changes. |  |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>)) => void` | `undefined` | The callback function when the selected item of the node changes. |  |
+| on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | Callback function when node checked options change. | `meta` 2.34.0 |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | Callback function when node indeterminate options change. |  |
+| on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | The callback function when the node expansion item changes. | `meta` 2.34.0 |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption, action: 'select' \| 'unselect' }) => void` | `undefined` | The callback function when the selected item of the node changes. | `meta` 2.34.0 |
 
 ### TreeOption Properties
 
@@ -101,3 +101,5 @@ checkbox-placement.vue
 | Name | Paramaters | Description | Version |
 | --- | --- | --- | --- |
 | scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | 2.32.2 |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

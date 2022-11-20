@@ -5,7 +5,7 @@ If something is to be telled to somebody.
 Notification component is always with low piority so I can make a lot of useless animations on it.
 
 <n-space vertical size="large">
-<n-alert title="Prerequisite" type="warning">
+<n-alert title="Prerequisite" type="warning" :bordered="false">
   If you want to use notification, you need to wrap the component where you call related methods inside <n-text code>n-notification-provider</n-text> and use <n-text code>useNotification</n-text> to get the API.
 </n-alert>
 

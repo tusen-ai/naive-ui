@@ -29,7 +29,7 @@ debug.vue
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |  |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |  |
 | action | `string` | `undefined` | 请求提交的地址 |  |
-| create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |  |
+| create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | 自定义文件缩略图，如果返回了 `undefined`，会使用默认的缩略图展示逻辑 | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
@@ -48,7 +48,9 @@ debug.vue
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |  |
+| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | 文件图标的渲染函数，在 `list-type="image"` 时生效 | 2.34.0 |
 | response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | `n-upload` 使用的 `XMLHttpRequest` 的 `responseType` | 2.33.3 |
+| should-use-thumbnail-url | `(file: UploadSettledFileInfo) => boolean` | 只对图片类文件返回 `true` 的函数 | 是否要对文件使用预览图的判定函数，只在 `list-type="image"` 或 `list-type="image-card"` 时生效 | 2.34.0 |
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |  |
 | show-download-button | `boolean` | `false` | 是否显示下载按钮（在 finished 后展示） |  |
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 后时候展示），点击删除按钮会触发 `on-remove` 回调 |  |

@@ -4,7 +4,7 @@
 
 DataTable is used to displays rows of structured data.
 
-<n-alert type="warning" title="Caveat">
+<n-alert type="warning" title="Caveat" :bordered="false">
   <n-ul align-text>
     <li>
       Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
@@ -96,6 +96,7 @@ render-cell.vue
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
+| spin-props | `{ strokeWidth?: number, stroke?: string }` | `undefined` | Table spin's props. | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | 2.32.2 |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
@@ -210,6 +211,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ### DataTable Slots
 
-| Name  | Type | Description                                     |
-| ----- | ---- | ----------------------------------------------- |
-| empty | `()` | Custom description when data of table is empty. |
+| Name    | Type | Description                                       | Version |
+| ------- | ---- | ------------------------------------------------- | ------- |
+| empty   | `()` | Custom description when data of table is empty.   |         |
+| loading | `()` | Custom description when data of table is loading. | 2.34.0  |

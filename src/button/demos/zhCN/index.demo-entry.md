@@ -47,6 +47,7 @@ debug.vue
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |  |
 | loading | `boolean` | `false` | 按钮是否显示加载状态 |  |
 | quaternary | `boolean` | `false` | 是否是四级按钮 |  |
+| render-icon | `() => VNodeChild` | `undefined` | 按钮图标的渲染函数 | 2.34.0 |
 | round | `boolean` | `false` | 按钮是否显示圆角 |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |  |
 | secondary | `boolean` | `false` | 是否是次要按钮 |  |

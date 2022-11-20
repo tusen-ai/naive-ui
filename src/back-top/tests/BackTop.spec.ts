@@ -25,5 +25,6 @@ describe('n-back-top', () => {
     wrapper.element.scrollTop = 1000
     await wrapper.trigger('scroll')
     expect(wrapper.html()).toContain('teleport start')
+    wrapper.unmount()
   })
 })

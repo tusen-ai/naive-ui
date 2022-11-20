@@ -6,5 +6,6 @@ export type { UploadProps } from './src/Upload'
 export type {
   UploadInst,
   FileInfo as UploadFileInfo,
-  CustomRequestOptions as UploadCustomRequestOptions
+  CustomRequestOptions as UploadCustomRequestOptions,
+  SettledFileInfo as UploadSettledFileInfo
 } from './src/interface'

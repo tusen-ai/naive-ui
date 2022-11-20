@@ -30,6 +30,7 @@ import { dynamicTagsDark } from '../dynamic-tags/styles'
 import { elementDark } from '../element/styles'
 import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
+import { equationDark } from '../equation/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
@@ -115,6 +116,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Element: elementDark,
   Empty: emptyDark,
   Ellipsis: ellipsisDark,
+  Equation: equationDark,
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,

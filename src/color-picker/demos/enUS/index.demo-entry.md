@@ -10,6 +10,7 @@ alpha.vue
 size.vue
 disabled.vue
 modes.vue
+actions.vue
 form.vue
 swatches.vue
 native.vue
@@ -39,6 +40,7 @@ native.vue
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |  |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |  |
 | actions | `Array<'confirm'> \| null` | `null` | The types of buttons to be shown in the panel. |  |
+| internal-actions | `Array<'redo' \| 'undo' \| 'clear'>` | `undefined` | Set of built-in operations. |  |
 
 ### ColorPicker Slots
 

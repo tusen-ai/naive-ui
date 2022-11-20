@@ -19,6 +19,7 @@ describe('n-anchor', () => {
     await wrapper.setProps({ showBackground: true })
 
     expect(wrapper.find('.n-anchor-link-background').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `affix` prop', () => {
@@ -29,6 +30,7 @@ describe('n-anchor', () => {
     })
 
     expect(wrapper.find('.n-affix').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `type` prop', async () => {
@@ -43,6 +45,7 @@ describe('n-anchor', () => {
     await wrapper.setProps({ type: 'block' })
 
     expect(wrapper.find('.n-anchor--block').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `title` and `href` prop', async () => {
@@ -66,6 +69,7 @@ describe('n-anchor', () => {
     expect(wrapper.find('.n-anchor-link__title').attributes('title')).toBe(
       'testTitle'
     )
+    wrapper.unmount()
   })
 
   it('should work with `naive-scrollbar` and `max-height` prop', async () => {
@@ -87,5 +91,6 @@ describe('n-anchor', () => {
     })
 
     expect(wrapper.find('.n-scrollbar')).toBeTruthy()
+    wrapper.unmount()
   })
 })

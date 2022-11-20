@@ -4,6 +4,12 @@
 
 基于 CSS Grid，响应式，远离 IE。
 
+<n-alert type="warning" title="注意" :bordered="false">
+  由于技术限制，<n-text code>n-grid-item</n-text> 是无法被二次封装的。
+</n-alert>
+
+## 演示
+
 ```demo
 basic.vue
 gap.vue

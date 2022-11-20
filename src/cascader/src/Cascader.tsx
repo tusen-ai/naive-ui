@@ -172,7 +172,7 @@ export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
-  setup (props) {
+  setup (props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -338,6 +338,12 @@ export default defineComponent({
     function updateHoverKey (key: Key | null): void {
       hoverKeyRef.value = key
     }
+    function getOptionsByKeys (keys: Key[]): Array<CascaderOption | null> {
+      const {
+        value: { getNode }
+      } = treeMateRef
+      return keys.map((keys) => getNode(keys)?.rawNode || null)
+    }
     function doCheck (key: Key): boolean {
       const { cascade, multiple, filterable } = props
       const {
@@ -352,9 +358,7 @@ export default defineComponent({
           })
           doUpdateValue(
             checkedKeys,
-            checkedKeys.map(
-              (checkedKey) => getNode(checkedKey)?.rawNode || null
-            ),
+            getOptionsByKeys(checkedKeys),
             checkedKeys.map((checkedKey) =>
               getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
@@ -834,7 +838,13 @@ export default defineComponent({
         }
       }
     }
+    const showCheckboxRef = computed(() => {
+      if (props.multiple && props.cascade) return true
+      if (mergedCheckStrategyRef.value !== 'child') return true
+      return false
+    })
     provide(cascaderInjectionKey, {
+      slots,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       mergedValueRef,
@@ -842,6 +852,7 @@ export default defineComponent({
       indeterminateKeysRef,
       hoverKeyPathRef,
       mergedCheckStrategyRef,
+      showCheckboxRef,
       cascadeRef: toRef(props, 'cascade'),
       multipleRef: toRef(props, 'multiple'),
       keyboardKeyRef,
@@ -875,6 +886,32 @@ export default defineComponent({
       },
       blur: () => {
         triggerInstRef.value?.blur()
+      },
+      getCheckedData: () => {
+        if (showCheckboxRef.value) {
+          const checkedKeys = checkedKeysRef.value
+          return {
+            keys: checkedKeys,
+            options: getOptionsByKeys(checkedKeys)
+          }
+        }
+        return {
+          keys: [],
+          options: []
+        }
+      },
+      getIndeterminateData: () => {
+        if (showCheckboxRef.value) {
+          const indeterminateKeys = indeterminateKeysRef.value
+          return {
+            keys: indeterminateKeys,
+            options: getOptionsByKeys(indeterminateKeys)
+          }
+        }
+        return {
+          keys: [],
+          options: []
+        }
       }
     }
     const cssVarsRef = computed(() => {

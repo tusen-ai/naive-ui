@@ -1,5 +1,10 @@
 import { isBrowser } from '../../_utils'
-import type { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
+import type {
+  FileAndEntry,
+  FileInfo,
+  SettledFileInfo,
+  ShouldUseThumbnailUrl
+} from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -11,7 +16,8 @@ const getExtname = (url: string = ''): string => {
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
 }
 
-export const isImageFile = (file: FileInfo): boolean => {
+// Do not need File object
+export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (file.type) {
     return isImageFileType(file.type)
   }
@@ -29,8 +35,7 @@ export const isImageFile = (file: FileInfo): boolean => {
   if (extension) {
     return false
   }
-
-  return true
+  return false
 }
 
 export async function createImageDataUrl (file: File): Promise<string> {
@@ -39,7 +44,6 @@ export async function createImageDataUrl (file: File): Promise<string> {
       resolve('')
       return
     }
-
     resolve(window.URL.createObjectURL(file))
   })
 }

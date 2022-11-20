@@ -92,6 +92,12 @@ export const mentionProps = {
   size: String as PropType<InputSize>,
   renderLabel: Function as PropType<RenderLabel>,
   status: String as PropType<FormValidationStatus>,
+  'onUpdate:show': [Array, Function] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Array, Function] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   'onUpdate:value': [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
@@ -190,6 +196,9 @@ export default defineComponent({
       : undefined
     function doUpdateShowMenu (show: boolean): void {
       if (props.disabled) return
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, show)
+      if (_onUpdateShow) call(_onUpdateShow, show)
       if (!show) {
         cachedPrefix = null
         cachedPartialPatternStart = null

@@ -31,6 +31,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedThemeRef,
       labelFieldRef,
+      showCheckboxRef,
       updateHoverKey,
       updateKeyboardKey,
       addLoadingKey,
@@ -81,10 +82,6 @@ export default defineComponent({
         return loadingKeySetRef.value.has(valueRef.value)
       }
       return false
-    })
-    const showCheckboxRef = computed(() => {
-      if (multipleRef.value && cascadeRef.value) return true
-      if (mergedCheckStrategyRef.value !== 'child') return true
     })
     const isLeafRef = computed(() => props.tmNode.isLeaf)
     const disabledRef = computed(() => props.tmNode.disabled)

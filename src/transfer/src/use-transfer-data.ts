@@ -9,6 +9,7 @@ interface UseTransferDataProps {
   filterable: boolean | undefined
   sourceFilterable: Boolean
   targetFilterable: Boolean
+  showSelected: Boolean
   filter: Filter
 }
 
@@ -48,11 +49,22 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const filteredSrcOptionsRef = computed(() => {
-    if (!mergedSrcFilterableRef.value) return props.options
-    const { filter } = props
-    return props.options.filter((opt) =>
-      filter(srcPatternRef.value, opt, 'source')
-    )
+    const { showSelected, options, filter } = props
+    if (!mergedSrcFilterableRef.value) {
+      if (showSelected) {
+        return options
+      } else {
+        return options.filter(
+          (option) => !targetValueSetRef.value.has(option.value)
+        )
+      }
+    }
+    return options.filter((option) => {
+      return (
+        filter(srcPatternRef.value, option, 'source') &&
+        (showSelected || !targetValueSetRef.value.has(option.value))
+      )
+    })
   })
 
   const filteredTgtOptionsRef = computed(() => {

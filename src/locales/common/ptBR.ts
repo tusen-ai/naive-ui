@@ -5,7 +5,8 @@ const ptBR: NLocale = {
   global: {
     undo: 'Desfazer',
     redo: 'Refazer',
-    confirm: 'Confirmar'
+    confirm: 'Confirmar',
+    clear: 'Limpar'
   },
   Popconfirm: {
     positiveText: 'Confirmar',

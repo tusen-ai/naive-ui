@@ -4,7 +4,7 @@
 
 如果你有一些日志要展示，可以使用 Log。
 
-<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
+<n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
   由于尺寸原因，Naive UI 不内置 highlight.js。如果你需要高亮日志，请确保你在使用之前已经设定了 highlight.js。
 </n-alert>
 

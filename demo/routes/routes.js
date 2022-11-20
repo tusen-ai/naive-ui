@@ -530,6 +530,10 @@ export const enComponentRoutes = [
   {
     path: 'discrete',
     component: () => import('../../src/discrete/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'equation',
+    component: () => import('../../src/equation/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -903,6 +907,10 @@ export const zhComponentRoutes = [
   {
     path: 'discrete',
     component: () => import('../../src/discrete/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'equation',
+    component: () => import('../../src/equation/demos/zhCN/index.demo-entry.md')
   }
 ]
 

@@ -432,6 +432,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/empty'
         },
         {
+          en: 'Equation',
+          zh: '公式',
+          enSuffix: true,
+          path: '/equation'
+        },
+        {
           en: 'Image',
           zh: '图像',
           enSuffix: true,

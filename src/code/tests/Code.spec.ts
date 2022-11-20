@@ -29,6 +29,7 @@ describe('n-code', () => {
       }
     })
     expect(wrapper.find('.hljs-variable').text()).toBe('console')
+    wrapper.unmount()
   })
   it('should work with `hljs` prop', () => {
     const wrapper = mount(NCode, {
@@ -39,6 +40,7 @@ describe('n-code', () => {
       }
     })
     expect(wrapper.find('.function_').text()).toBe('log')
+    wrapper.unmount()
   })
   it('should work with `trim` prop', () => {
     const wrapper = mount(NCode, {
@@ -50,6 +52,7 @@ describe('n-code', () => {
     expect(wrapper.find('pre').element.textContent).toContain(
       '    console.log( a )  '
     )
+    wrapper.unmount()
   })
   it('should work with `default` slot', () => {
     const wrapper = mount(NCode, {
@@ -58,5 +61,6 @@ describe('n-code', () => {
       }
     })
     expect(wrapper.text()).toBe('console.log(a)')
+    wrapper.unmount()
   })
 })

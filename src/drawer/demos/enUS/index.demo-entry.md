@@ -2,7 +2,7 @@
 
 I think it is similar with modal, with a bit difference on placement.
 
-<n-alert title="Caveat" type="warning">
+<n-alert title="Caveat" type="warning" :bordered="false">
   If you need to use <n-text code>n-drawer-content</n-text>, you should keep <n-text code>n-drawer</n-text>'s <n-text code>native-scrollbar</n-text> prop as <n-text code>true</n-text>.
 </n-alert>
 

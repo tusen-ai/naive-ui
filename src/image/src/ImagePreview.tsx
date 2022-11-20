@@ -12,13 +12,16 @@ import {
   PropType,
   toRef,
   onBeforeUnmount,
-  VNode
+  VNode,
+  inject,
+  normalizeStyle
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
+import { kebabCase } from 'lodash-es'
 import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
@@ -31,8 +34,11 @@ import { NBaseIcon } from '../../_internal'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
-import type { MoveStrategy } from './interface'
-import { imagePreviewSharedProps } from './interface'
+import {
+  imageContextKey,
+  MoveStrategy,
+  imagePreviewSharedProps
+} from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32
@@ -83,6 +89,9 @@ export default defineComponent({
 
     function handleKeydown (e: KeyboardEvent): void {
       switch (e.key) {
+        case ' ':
+          e.preventDefault()
+          break
         case 'ArrowLeft':
           props.onPrev?.()
           break
@@ -225,7 +234,12 @@ export default defineComponent({
       offsetY = offset.offsetY
       derivePreviewStyle()
     }
+    const imageContext = inject(imageContextKey, null)
+
     function handlePreviewMousedown (e: MouseEvent): void {
+      imageContext?.previewedImgPropsRef.value.onMousedown?.(e)
+      if (e.button !== 0) return
+
       const { clientX, clientY } = e
       dragging = true
       startX = clientX - offsetX
@@ -240,7 +254,8 @@ export default defineComponent({
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
     }
-    function handlePreviewDblclick (): void {
+    function handlePreviewDblclick (e: MouseEvent): void {
+      imageContext?.previewedImgPropsRef.value.onDblclick?.(e)
       const originalImageSizeScale = getOrignalImageSizeScale()
       scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
       derivePreviewStyle()
@@ -326,11 +341,26 @@ export default defineComponent({
       const { value: preview } = previewRef
       if (!preview) return
       const { style } = preview
+      const controlledStyle = normalizeStyle(
+        imageContext?.previewedImgPropsRef.value.style
+      )
+      let controlledStyleString = ''
+      if (typeof controlledStyle === 'string') {
+        controlledStyleString = controlledStyle + ';'
+      } else {
+        for (const key in controlledStyle) {
+          controlledStyleString += `${kebabCase(key)}: ${controlledStyle[key]};`
+        }
+      }
       const transformStyle = `transform-origin: center; transform: translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale});`
       if (dragging) {
-        style.cssText = 'cursor: grabbing; transition: none;' + transformStyle
+        style.cssText =
+          controlledStyleString +
+          'cursor: grabbing; transition: none;' +
+          transformStyle
       } else {
         style.cssText =
+          controlledStyleString +
           'cursor: grab;' +
           transformStyle +
           (transition ? '' : 'transition: none;')
@@ -419,6 +449,7 @@ export default defineComponent({
       show: showRef,
       appear: useIsMounted(),
       displayed: displayedRef,
+      previewedImgProps: imageContext?.previewedImgPropsRef,
       handleWheel (e: WheelEvent) {
         e.preventDefault()
       },
@@ -430,7 +461,8 @@ export default defineComponent({
         rotate = 0
         displayedRef.value = false
       },
-      handleDragStart: (e: Event) => {
+      handleDragStart: (e: DragEvent) => {
+        imageContext?.previewedImgPropsRef.value.onDragstart?.(e)
         e.preventDefault()
       },
       zoomIn,
@@ -590,17 +622,22 @@ export default defineComponent({
                     onBeforeLeave={this.syncTransformOrigin}
                   >
                     {{
-                      default: () =>
-                        withDirectives(
+                      default: () => {
+                        const { previewedImgProps = {} } = this
+                        return withDirectives(
                           <div
                             class={`${clsPrefix}-image-preview-wrapper`}
                             ref="previewWrapperRef"
                           >
                             <img
+                              {...previewedImgProps}
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
                               onDblclick={this.handlePreviewDblclick}
-                              class={`${clsPrefix}-image-preview`}
+                              class={[
+                                `${clsPrefix}-image-preview`,
+                                previewedImgProps.class
+                              ]}
                               key={this.previewSrc}
                               src={this.previewSrc}
                               ref="previewRef"
@@ -609,6 +646,7 @@ export default defineComponent({
                           </div>,
                           [[vShow, this.show]]
                         )
+                      }
                     }}
                   </Transition>
                 </div>,

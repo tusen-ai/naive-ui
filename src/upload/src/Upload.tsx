@@ -40,10 +40,18 @@ import type {
   CustomRequest,
   OnError,
   SettledFileInfo,
-  FileAndEntry
+  FileAndEntry,
+  ShouldUseThumbnailUrl,
+  RenderIcon
 } from './interface'
 import { uploadInjectionKey } from './interface'
-import { createImageDataUrl, createSettledFileInfo, matchType } from './utils'
+import {
+  createImageDataUrl,
+  createSettledFileInfo,
+  environmentSupportFile,
+  isImageFile,
+  matchType
+} from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
 import style from './styles/index.cssr'
@@ -336,6 +344,13 @@ export const uploadProps = {
     default: 'text'
   },
   onPreview: Function as PropType<OnPreview>,
+  shouldUseThumbnailUrl: {
+    type: Function as PropType<ShouldUseThumbnailUrl>,
+    default: (file: SettledFileInfo) => {
+      if (!environmentSupportFile) return false
+      return isImageFile(file)
+    }
+  },
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
   abstract: Boolean,
   max: Number,
@@ -345,7 +360,8 @@ export const uploadProps = {
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
-  triggerStyle: [String, Object] as PropType<CSSProperties | string>
+  triggerStyle: [String, Object] as PropType<CSSProperties | string>,
+  renderIcon: Object as PropType<RenderIcon>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -579,12 +595,20 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    async function getFileThumbnailUrl (file: FileInfo): Promise<string> {
+    function getFileThumbnailUrlResolver (
+      file: SettledFileInfo
+    ): Promise<string> | string {
+      if (file.thumbnailUrl) return file.thumbnailUrl
       const { createThumbnailUrl } = props
-
-      return createThumbnailUrl
-        ? await createThumbnailUrl(file.file as File)
-        : await createImageDataUrl(file.file as File)
+      if (createThumbnailUrl) {
+        return createThumbnailUrl(file.file, file) ?? (file.url || '')
+      }
+      if (file.url) {
+        return file.url
+      } else if (file.file) {
+        return createImageDataUrl(file.file)
+      }
+      return ''
     }
     const cssVarsRef = computed(() => {
       const {
@@ -640,12 +664,14 @@ export default defineComponent({
       onDownloadRef: toRef(props, 'onDownload'),
       mergedFileListRef,
       triggerStyleRef: toRef(props, 'triggerStyle'),
+      shouldUseThumbnailUrlRef: toRef(props, 'shouldUseThumbnailUrl'),
+      renderIconRef: toRef(props, 'renderIcon'),
       xhrMap,
       submit,
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
-      getFileThumbnailUrl,
+      getFileThumbnailUrlResolver,
       listTypeRef: toRef(props, 'listType'),
       dragOverRef,
       openOpenFileDialog,
