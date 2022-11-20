@@ -8,6 +8,7 @@
 
 ### Feats
 
+- `themeOverRides` 为`n-form`,`n-radio`,`n-checkbox` 提供 `labelFontWeight`,关闭[#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
 - `n-avatar-group` 导出 `AvatarGroupOption` 类型，关闭 [#3879](https://github.com/tusen-ai/naive-ui/issues/3879)
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
