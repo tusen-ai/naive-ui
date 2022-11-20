@@ -21,6 +21,7 @@
 ## 演示
 
 ```demo
+debug.vue
 basic.vue
 empty.vue
 border.vue
