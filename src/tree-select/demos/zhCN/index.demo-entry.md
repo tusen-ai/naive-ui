@@ -96,5 +96,5 @@ render-debug.vue
 | --- | --- | --- | --- |
 | blur | `() => void` | 失焦 | NEXT_VERSION |
 | focus | `() => void` | 聚焦 | NEXT_VERSION |
-| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
-| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | NEXT_VERSION |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | NEXT_VERSION |

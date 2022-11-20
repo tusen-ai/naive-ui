@@ -93,5 +93,5 @@ debug.vue
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur. | NEXT_VERSION |
 | focus | `() => void` | Focus. | NEXT_VERSIONs |
-| getCheckedKeys | `() => Array<string \| number>` | Get checked keys. | NEXT_VERSION |
-| getIndeterminateKeys | `() => Array<string \| number>` | Get indeterminate keys. | NEXT_VERSION |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | NEXT_VERSION |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | NEXT_VERSION |

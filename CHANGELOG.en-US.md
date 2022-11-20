@@ -14,14 +14,14 @@
 - `n-mention` adds `on-update:show` prop, closes [#3882](https://github.com/tusen-ai/naive-ui/issues/3882).
 - `n-tree` adds trigger node information for `on-update:expanded-keys`, `on-update:checked-keys` and `on-update:selected-keys` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
 - `n-tree-select` adds trigger node information for `on-update:expanded-keys` and `on-update:value` props, closes [#3885](https://github.com/tusen-ai/naive-ui/issues/3885).
-- `n-tree` adds `getCheckedKeys` method.
-- `n-tree` adds `getIndeterminateKeys` method.
-- `n-tree-select` adds `getCheckedKeys` method.
-- `n-tree-select` adds `getIndeterminateKeys` method.
+- `n-tree` adds `getCheckedData` method.
+- `n-tree` adds `getIndeterminateData` method.
+- `n-tree-select` adds `getCheckedData` method.
+- `n-tree-select` adds `getIndeterminateData` method.
 - `n-tree-select` adds `focus` method.
 - `n-tree-select` adds `blur` method.
-- `n-cascader` adds `getCheckedKeys` method.
-- `n-cascader` adds `getIndeterminateKeys` method.
+- `n-cascader` adds `getCheckedData` method.
+- `n-cascader` adds `getIndeterminateData` method.
 - `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).

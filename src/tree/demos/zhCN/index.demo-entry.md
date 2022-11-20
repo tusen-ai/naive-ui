@@ -85,7 +85,7 @@ expand-debug.vue
 | on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | 节点勾选项发生变化时的回调函数 | `meta` NEXT_VERSION |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | 节点展开项发生变化时的回调函数 | `meta` NEXT_VERSION |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` NEXT_VERSION |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` NEXT_VERSION |
 
 ### TreeOption Properties
 
@@ -107,5 +107,5 @@ expand-debug.vue
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
-| getCheckedKeys | `() => Array<string \| number>` | 获取选中的 key | NEXT_VERSION |
-| getIndeterminateKeys | `() => Array<string \| number>` | 获取半选的 key | NEXT_VERSION |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | NEXT_VERSION |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | NEXT_VERSION |

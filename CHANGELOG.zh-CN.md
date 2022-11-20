@@ -12,16 +12,16 @@
 - `n-transfer` 新增 `show-selected` 属性，关闭 [#3711](https://github.com/tusen-ai/naive-ui/issues/3711)
 - `n-data-table` 新增 `loading` 插槽，关闭 [#3865](https://github.com/tusen-ai/naive-ui/issues/3865)
 - `n-mention` 新增 `on-update:show` 属性，关闭 [#3882](https://github.com/tusen-ai/naive-ui/issues/3882)
-- `n-tree` 为 `on-update:expanded-keys`、`on-update:checked-keys`、`on-update:selected-keys` 属性添加触发节点信息, 关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
-- `n-tree-select` 为 `on-update:expanded-keys`、`on-update:value` 属性添加触发节点信息, 关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
-- `n-tree` 新增 `getCheckedKeys` 方法
-- `n-tree` 新增 `getIndeterminateKeys` 方法
-- `n-tree-select` 新增 `getCheckedKeys` 方法
-- `n-tree-select` 新增 `getIndeterminateKeys` 方法
+- `n-tree` 为 `on-update:expanded-keys`、`on-update:checked-keys`、`on-update:selected-keys` 属性添加触发节点信息，关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
+- `n-tree-select` 为 `on-update:expanded-keys`、`on-update:value` 属性添加触发节点信息，关闭 [#3885](https://github.com/tusen-ai/naive-ui/issues/3885)
+- `n-tree` 新增 `getCheckedData` 方法
+- `n-tree` 新增 `getIndeterminateData` 方法
+- `n-tree-select` 新增 `getCheckedData` 方法
+- `n-tree-select` 新增 `getIndeterminateData` 方法
 - `n-tree-select` 新增 `focus` 方法
 - `n-tree-select` 新增 `blur` 方法
-- `n-cascader` 新增 `getCheckedKeys` 方法
-- `n-cascader` 新增 `getIndeterminateKeys` 方法
+- `n-cascader` 新增 `getCheckedData` 方法
+- `n-cascader` 新增 `getIndeterminateData` 方法
 - `n-input` 新增 `count-graphemes` 属性，关闭 [#3967](https://github.com/tusen-ai/naive-ui/issues/3967)
 - `n-cascader` 新增 `not-found` slot，关闭 [#3862](https://github.com/tusen-ai/naive-ui/issues/3862)
 - `n-avatar` 新增 `img-props` 属性，关闭 [#3963](https://github.com/tusen-ai/naive-ui/issues/3963)

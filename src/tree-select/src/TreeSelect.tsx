@@ -708,9 +708,17 @@ export default defineComponent({
     })
 
     const exposedMethods: TreeSelectInst = {
-      getCheckedKeys: () => exposedCheckedStatusRef.value.checkedKeys,
-      getIndeterminateKeys: () =>
-        exposedCheckedStatusRef.value.indeterminateKeys,
+      getCheckedData: () => {
+        const { checkedKeys } = exposedCheckedStatusRef.value
+        return { keys: checkedKeys, options: getOptionsByKeys(checkedKeys) }
+      },
+      getIndeterminateData: () => {
+        const { indeterminateKeys } = exposedCheckedStatusRef.value
+        return {
+          keys: indeterminateKeys,
+          options: getOptionsByKeys(indeterminateKeys)
+        }
+      },
       focus: () => triggerInstRef.value?.focus(),
       blur: () => triggerInstRef.value?.blur()
     }
