@@ -41,8 +41,8 @@ katex-options.vue
 
 ### Equation Props
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
-| katex | `object` | `undefined` | Katex | NEXT_VERSION |
-| katex-options | `object` | `undefined` | Katex 公式的配置 | NEXT_VERSION |
-| value | `string` | `undefined` | Latex 格式的公式表达式 | NEXT_VERSION |
+| 名称          | 类型     | 默认值      | 说明                   | 版本   |
+| ------------- | -------- | ----------- | ---------------------- | ------ |
+| katex         | `object` | `undefined` | Katex                  | 2.34.0 |
+| katex-options | `object` | `undefined` | Katex 公式的配置       | 2.34.0 |
+| value         | `string` | `undefined` | Latex 格式的公式表达式 | 2.34.0 |

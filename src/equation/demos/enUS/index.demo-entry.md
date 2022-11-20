@@ -43,6 +43,6 @@ katex-options.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| katex | `object` | `undefined` | Katex | NEXT_VERSION |
-| katex-options | `object` | `undefined` | Katex options for the equation. | NEXT_VERSION |
-| value | `string` | `undefined` | Latex expression of the equation. | NEXT_VERSION |
+| katex | `object` | `undefined` | Katex | 2.34.0 |
+| katex-options | `object` | `undefined` | Katex options for the equation. | 2.34.0 |
+| value | `string` | `undefined` | Latex expression of the equation. | 2.34.0 |

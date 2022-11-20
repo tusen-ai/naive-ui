@@ -83,7 +83,7 @@ use-dialog-reactive-list.vue
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
-| transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | NEXT_VERSION |
+| transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. | 2.33.3 |
@@ -116,7 +116,7 @@ All the properties can be modified dynamically.
 | show-icon | `boolean` | Whether to show `icon`. |  |
 | style | `string \| Object` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
-| transformOrigin | `'mouse' \| 'center'` | The transform origin of the dialog's display animation. | NEXT_VERSION |
+| transformOrigin | `'mouse' \| 'center'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void \| undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void \| undefined` | Callback on leave animation ends. | 2.33.3 |

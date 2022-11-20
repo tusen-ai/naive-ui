@@ -105,7 +105,7 @@ expandable-debug.vue
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
-| spin-props | `{ strokeWidth?: number, stroke?: string }` | `undefined` | 表格 spin 的属性 | NEXT_VERSION |
+| spin-props | `{ strokeWidth?: number, stroke?: string }` | `undefined` | 表格 spin 的属性 | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | 展开行是否不随表格横向滚动 | 2.32.2 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |  |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |  |
@@ -220,7 +220,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 ### DataTable Slots
 
-| 名称    | 参数 | 说明                  | 版本         |
-| ------- | ---- | --------------------- | ------------ |
-| empty   | `()` | 表格数据为空时的展示  |              |
-| loading | `()` | 表格 loading 时的展示 | NEXT_VERSION |
+| 名称    | 参数 | 说明                  | 版本   |
+| ------- | ---- | --------------------- | ------ |
+| empty   | `()` | 表格数据为空时的展示  |        |
+| loading | `()` | 表格 loading 时的展示 | 2.34.0 |

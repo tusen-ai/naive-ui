@@ -74,12 +74,12 @@ default-value-debug.vue
 
 ### Cascader Slots
 
-| 名称      | 参数 | 描述                             | 版本         |
-| --------- | ---- | -------------------------------- | ------------ |
-| action    | `()` | 级联菜单中显示的 action 填充内容 |              |
-| arrow     | `()` | 箭头的 slot                      | 2.32.2       |
-| empty     | `()` | 级联菜单无数据时的 slot          | 2.22.0       |
-| not-found | `()` | 搜索不到数据时候的 slot          | NEXT_VERSION |
+| 名称      | 参数 | 描述                             | 版本   |
+| --------- | ---- | -------------------------------- | ------ |
+| action    | `()` | 级联菜单中显示的 action 填充内容 |        |
+| arrow     | `()` | 箭头的 slot                      | 2.32.2 |
+| empty     | `()` | 级联菜单无数据时的 slot          | 2.22.0 |
+| not-found | `()` | 搜索不到数据时候的 slot          | 2.34.0 |
 
 ### Cascader Methods
 
@@ -87,5 +87,5 @@ default-value-debug.vue
 | --- | --- | --- | --- |
 | blur | `() => void` | 失焦 | 2.24.2 |
 | focus | `() => void` | 聚焦 | 2.24.2 |
-| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | NEXT_VERSION |
-| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | NEXT_VERSION |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
