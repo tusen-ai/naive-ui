@@ -347,7 +347,7 @@ export const uploadProps = {
   shouldUseThumbnailUrl: {
     type: Function as PropType<ShouldUseThumbnailUrl>,
     default: (file: SettledFileInfo) => {
-      if (!environmentSupportFile || !(file.file instanceof File)) return false
+      if (!environmentSupportFile) return false
       return isImageFile(file)
     }
   },
@@ -595,11 +595,20 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    async function getFileThumbnailUrl (file: SettledFileInfo): Promise<string> {
+    function getFileThumbnailUrlResolver (
+      file: SettledFileInfo
+    ): Promise<string> | string {
+      if (file.thumbnailUrl) return file.thumbnailUrl
       const { createThumbnailUrl } = props
-      return createThumbnailUrl
-        ? await createThumbnailUrl(file.file, file)
-        : await createImageDataUrl(file.file)
+      if (createThumbnailUrl) {
+        return createThumbnailUrl(file.file, file) ?? (file.url || '')
+      }
+      if (file.url) {
+        return file.url
+      } else if (file.file) {
+        return createImageDataUrl(file.file)
+      }
+      return ''
     }
     const cssVarsRef = computed(() => {
       const {
@@ -662,7 +671,7 @@ export default defineComponent({
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
-      getFileThumbnailUrl,
+      getFileThumbnailUrlResolver,
       listTypeRef: toRef(props, 'listType'),
       dragOverRef,
       openOpenFileDialog,

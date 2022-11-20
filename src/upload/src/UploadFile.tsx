@@ -190,7 +190,9 @@ export default defineComponent({
         return
       }
       if (NUpload.shouldUseThumbnailUrlRef.value(props.file)) {
-        thumbnailUrlRef.value = await NUpload.getFileThumbnailUrl(props.file)
+        thumbnailUrlRef.value = await NUpload.getFileThumbnailUrlResolver(
+          props.file
+        )
       }
     }
 

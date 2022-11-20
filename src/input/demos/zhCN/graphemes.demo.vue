@@ -1,7 +1,7 @@
 <markdown>
 # 字素计数
 
-浏览器默认的 `maxlength` 和 `minlength` 以及 naive-ui 自带的字数统计功能并不能准确的拆分所有的字符串，你可以使用 `count-graphemes` 属性来精确的测量文字长度。
+浏览器默认的 `maxlength` 和 `minlength` 以及 naive-ui 自带的字数统计功能并不能准确地拆分所有的字符串，你可以使用 `count-graphemes` 属性来精确的测量文字长度。
 </markdown>
 
 <template>

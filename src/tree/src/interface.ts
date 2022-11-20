@@ -74,7 +74,7 @@ export interface InternalDropInfo {
   dropPosition: DropPosition
 }
 
-export type RenderSwitcherIcon = (options: {
+export type RenderSwitcherIcon = (props: {
   expanded: boolean
   selected: boolean
 }) => VNodeChild

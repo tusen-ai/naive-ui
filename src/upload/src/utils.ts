@@ -16,6 +16,7 @@ const getExtname = (url: string = ''): string => {
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
 }
 
+// Do not need File object
 export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (file.type) {
     return isImageFileType(file.type)
@@ -34,18 +35,15 @@ export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (extension) {
     return false
   }
-
-  return true
+  return false
 }
 
-export async function createImageDataUrl (file: File | null): Promise<string> {
-  if (!file) return ''
+export async function createImageDataUrl (file: File): Promise<string> {
   return await new Promise((resolve) => {
     if (!file.type || !isImageFileType(file.type)) {
       resolve('')
       return
     }
-
     resolve(window.URL.createObjectURL(file))
   })
 }

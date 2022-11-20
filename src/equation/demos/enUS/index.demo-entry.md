@@ -1,6 +1,6 @@
 # Equation
 
-No one will think of that a component library should have this component. however a friend of me need this.
+No one will think of that a component library should have this component. However a friend of me need this.
 
 <n-alert title="Note" type="warning" style="margin-bottom: 16px;" :bordered="false">
   Due to package size, Naive UI doesn't include katex. If you want to use Equation, make sure you have setup katex before using it.

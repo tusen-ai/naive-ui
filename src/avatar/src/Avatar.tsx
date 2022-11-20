@@ -127,7 +127,8 @@ export default defineComponent({
     const handleError = (e: Event): void => {
       if (!shouldStartLoadingRef.value) return
       hasLoadErrorRef.value = true
-      const { onError } = props
+      const { onError, imgProps } = props
+      imgProps?.onError?.(e)
       if (onError) {
         onError(e)
       }
@@ -240,8 +241,9 @@ export default defineComponent({
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnLoad: (e: Event) => {
-        const { onLoad } = props
+        const { onLoad, imgProps } = props
         onLoad?.(e)
+        imgProps?.onLoad?.(e)
         loadedRef.value = true
       }
     }
@@ -287,8 +289,9 @@ export default defineComponent({
             </VResizeObserver>
           )
         } else if (src) {
+          const { imgProps } = this
           return h('img', {
-            ...this.imgProps,
+            ...imgProps,
             loading: isImageSupportNativeLazy && lazy ? 'lazy' : 'eager',
             src: isImageSupportNativeLazy
               ? src
@@ -299,6 +302,7 @@ export default defineComponent({
             'data-image-src': src,
             onError: this.handleError,
             style: [
+              imgProps?.style,
               { objectFit: this.objectFit },
               placeholderNode
                 ? {
