@@ -49,17 +49,22 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const filteredSrcOptionsRef = computed(() => {
-    const { showSelected, filter } = props
-    let newOptions = props.options
-    if (!showSelected) {
-      newOptions = newOptions.filter(
-        (option) => !targetValueSetRef.value.has(option.value)
-      )
+    const { showSelected, options, filter } = props
+    if (!mergedSrcFilterableRef.value) {
+      if (showSelected) {
+        return options
+      } else {
+        return options.filter(
+          (option) => !targetValueSetRef.value.has(option.value)
+        )
+      }
     }
-    if (!mergedSrcFilterableRef.value) return newOptions
-    return newOptions.filter((opt) =>
-      filter(srcPatternRef.value, opt, 'source')
-    )
+    return options.filter((option) => {
+      return (
+        filter(srcPatternRef.value, option, 'source') &&
+        (showSelected || !targetValueSetRef.value.has(option.value))
+      )
+    })
   })
 
   const filteredTgtOptionsRef = computed(() => {

@@ -4,11 +4,11 @@
 
 ### Breaking Changes
 
-- Wrap a `DIV` container around the columns of `n-data-table` to optimize the layout of filter button, closes [#3853](https://github.com/tusen-ai/naive-ui/issues/3853).
+- Wrap a `div` container around the columns of `n-data-table` to optimize the layout of filter button, closes [#3853](https://github.com/tusen-ai/naive-ui/issues/3853).
 
 ### Feats
 
-- `n-avatar` exports `AvatarOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
+- `n-avatar-group` exports `AvatarGroupOption` type, closes [#3879](https://github.com/tusen-ai/naive-ui/issues/3879).
 - `n-transfer` adds `show-selected` prop, closes [#3711](https://github.com/tusen-ai/naive-ui/issues/3711).
 - `n-data-table` adds `loading` slot, closes [#3865](https://github.com/tusen-ai/naive-ui/issues/3865).
 - `n-mention` adds `on-update:show` prop, closes [#3882](https://github.com/tusen-ai/naive-ui/issues/3882).

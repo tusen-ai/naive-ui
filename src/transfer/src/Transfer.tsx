@@ -195,7 +195,8 @@ export default defineComponent({
       srcOptionsLengthRef: computed(() => props.options.length),
       handleItemCheck,
       renderSourceLabelRef: toRef(props, 'renderSourceLabel'),
-      renderTargetLabelRef: toRef(props, 'renderTargetLabel')
+      renderTargetLabelRef: toRef(props, 'renderTargetLabel'),
+      showSelectedRef: toRef(props, 'showSelected')
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
