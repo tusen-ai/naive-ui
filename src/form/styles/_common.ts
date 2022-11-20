@@ -18,5 +18,6 @@ export default {
   labelPaddingVertical: '0 0 6px 2px',
   labelPaddingHorizontal: '0 12px 0 0',
   labelTextAlignVertical: 'left',
-  labelTextAlignHorizontal: 'right'
+  labelTextAlignHorizontal: 'right',
+  labelFontWeight: '400'
 }
