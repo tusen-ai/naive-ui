@@ -547,7 +547,7 @@ const Button = defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, renderIcon, tag: Component, onRender } = this
+    const { mergedClsPrefix, tag: Component, onRender } = this
     onRender?.()
     const children = resolveWrappedSlot(
       this.$slots.default,
@@ -591,7 +591,7 @@ const Button = defineComponent({
               resolveWrappedSlot(
                 this.$slots.icon,
                 (children) =>
-                  (this.loading || renderIcon || children) && (
+                  (this.loading || this.renderIcon || children) && (
                     <span
                       class={`${mergedClsPrefix}-button__icon`}
                       style={{
@@ -614,7 +614,7 @@ const Button = defineComponent({
                                 class={`${mergedClsPrefix}-icon-slot`}
                                 role="none"
                               >
-                                {renderIcon ? renderIcon() : children}
+                                {this.renderIcon ? this.renderIcon() : children}
                               </div>
                             )
                         }}

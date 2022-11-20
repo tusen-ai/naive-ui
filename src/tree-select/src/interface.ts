@@ -115,8 +115,14 @@ export type TreeSelectNodeProps = (info: {
 }) => HTMLAttributes & Record<string, unknown>
 
 export interface TreeSelectInst {
-  getCheckedKeys: () => Array<string | number>
-  getIndeterminateKeys: () => Array<string | number>
+  getCheckedData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
+  getIndeterminateData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
   focus: () => void
   blur: () => void
 }

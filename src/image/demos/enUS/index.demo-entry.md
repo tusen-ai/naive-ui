@@ -30,7 +30,7 @@ previewed-img-props.vue
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | Object-fit type of the image in the container. |  |
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
-| previewed-img-props | `object` | `undefined` | DOM attributes of img element in preview mode. | NEXT_VERSION |
+| previewed-img-props | `object` | `undefined` | DOM attributes of img element in preview mode. | 2.34.0 |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 | src | `string` | `undefined` | Image source. |  |

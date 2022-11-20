@@ -50,7 +50,8 @@ export default defineComponent({
     ])
     return {
       fileList: fileListRef,
-      createThumbnailUrl (file: File): Promise<string> {
+      createThumbnailUrl (file: File | null): Promise<string> | undefined {
+        if (!file) return undefined
         message.info(() => [
           '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
           h('br'),

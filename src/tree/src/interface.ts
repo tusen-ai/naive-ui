@@ -74,7 +74,7 @@ export interface InternalDropInfo {
   dropPosition: DropPosition
 }
 
-export type RenderSwitcherIcon = (options: {
+export type RenderSwitcherIcon = (props: {
   expanded: boolean
   selected: boolean
 }) => VNodeChild
@@ -147,6 +147,6 @@ export interface InternalTreeInst {
 
 export interface TreeInst {
   scrollTo: (options: { key: Key }) => void
-  getCheckedKeys: () => Key[]
-  getIndeterminateKeys: () => Key[]
+  getCheckedData: () => { keys: Key[], options: Array<TreeOption | null> }
+  getIndeterminateData: () => { keys: Key[], options: Array<TreeOption | null> }
 }

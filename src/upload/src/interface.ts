@@ -102,7 +102,9 @@ export interface UploadInjection {
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
-  getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
+  getFileThumbnailUrlResolver: (
+    file: SettledFileInfo
+  ) => Promise<string> | string
   renderIconRef: Ref<RenderIcon | undefined>
   handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
@@ -137,7 +139,7 @@ export type OnPreview = (file: SettledFileInfo) => void
 export type CreateThumbnailUrl = (
   file: File | null,
   fileInfo: SettledFileInfo
-) => Promise<string>
+) => Promise<string> | string | undefined
 
 export interface CustomRequestOptions {
   file: SettledFileInfo

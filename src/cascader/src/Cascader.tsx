@@ -338,6 +338,12 @@ export default defineComponent({
     function updateHoverKey (key: Key | null): void {
       hoverKeyRef.value = key
     }
+    function getOptionsByKeys (keys: Key[]): Array<CascaderOption | null> {
+      const {
+        value: { getNode }
+      } = treeMateRef
+      return keys.map((keys) => getNode(keys)?.rawNode || null)
+    }
     function doCheck (key: Key): boolean {
       const { cascade, multiple, filterable } = props
       const {
@@ -352,9 +358,7 @@ export default defineComponent({
           })
           doUpdateValue(
             checkedKeys,
-            checkedKeys.map(
-              (checkedKey) => getNode(checkedKey)?.rawNode || null
-            ),
+            getOptionsByKeys(checkedKeys),
             checkedKeys.map((checkedKey) =>
               getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
@@ -883,9 +887,32 @@ export default defineComponent({
       blur: () => {
         triggerInstRef.value?.blur()
       },
-      getCheckedKeys: () => (showCheckboxRef.value ? checkedKeysRef.value : []),
-      getIndeterminateKeys: () =>
-        showCheckboxRef.value ? indeterminateKeysRef.value : []
+      getCheckedData: () => {
+        if (showCheckboxRef.value) {
+          const checkedKeys = checkedKeysRef.value
+          return {
+            keys: checkedKeys,
+            options: getOptionsByKeys(checkedKeys)
+          }
+        }
+        return {
+          keys: [],
+          options: []
+        }
+      },
+      getIndeterminateData: () => {
+        if (showCheckboxRef.value) {
+          const indeterminateKeys = indeterminateKeysRef.value
+          return {
+            keys: indeterminateKeys,
+            options: getOptionsByKeys(indeterminateKeys)
+          }
+        }
+        return {
+          keys: [],
+          options: []
+        }
+      }
     }
     const cssVarsRef = computed(() => {
       const {

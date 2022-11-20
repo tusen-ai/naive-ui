@@ -23,6 +23,7 @@ describe('n-checkbox', () => {
       expectChecked(wrapper, true)
       await wrapper.trigger('click')
       expectChecked(wrapper, false)
+      wrapper.unmount()
     })
     it('props.defaultChecked', () => {
       const wrapper = mount(NCheckbox, {
@@ -31,6 +32,7 @@ describe('n-checkbox', () => {
         }
       })
       expectChecked(wrapper, true)
+      wrapper.unmount()
     })
   })
 
@@ -49,6 +51,7 @@ describe('n-checkbox', () => {
     expect(onUpdateChecked.mock.calls[1][0]).toEqual('barr')
     await wrapper.trigger('click')
     expect(onUpdateChecked.mock.calls[2][0]).toEqual('fooo')
+    wrapper.unmount()
   })
 
   it('should work with `checked-value` prop in type layer', () => {
@@ -92,6 +95,7 @@ describe('n-checkbox', () => {
       'n-checkbox--indeterminate'
     )
     expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe('mixed')
+    wrapper.unmount()
   })
 
   it('should work with `disabled` prop', () => {
@@ -106,6 +110,7 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox').classes()).toContain(
       'n-checkbox--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `focusable` prop', async () => {
@@ -122,6 +127,7 @@ describe('n-checkbox', () => {
     await wrapper.setProps({ focusable: true })
     expect(wrapper.find('[tabindex]').exists()).toBe(true)
     expect(wrapper.find('.n-checkbox').attributes('tabindex')).toContain('0')
+    wrapper.unmount()
   })
 
   it('should work with `label` prop', async () => {
@@ -131,6 +137,7 @@ describe('n-checkbox', () => {
       }
     })
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
+    wrapper.unmount()
   })
 
   it('should work with `on-update:checked` & `onUpdateChecked` prop', async () => {
@@ -147,6 +154,7 @@ describe('n-checkbox', () => {
 
     await wrapper.trigger('click')
     expect(onClick).toHaveBeenCalledTimes(2)
+    wrapper.unmount()
   })
 
   it('should work with default slots', async () => {
@@ -157,12 +165,14 @@ describe('n-checkbox', () => {
     })
 
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', () => {
     ;(['small', 'medium', 'large'] as const).forEach((i) => {
       const wrapper = mount(NCheckbox, { props: { size: i } })
       expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -184,12 +194,14 @@ describe('n-checkbox', () => {
     ))
 
     expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   describe('accessibility', () => {
     it('should have a role of "checkbox"', () => {
       const wrapper = mount(NCheckbox)
       expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
+      wrapper.unmount()
     })
 
     it('should set a default aria-labelledby', () => {
@@ -198,6 +210,7 @@ describe('n-checkbox', () => {
       expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toMatch(
         labelId
       )
+      wrapper.unmount()
     })
 
     it('should allow to set aria-labelledby from outside', () => {
@@ -206,6 +219,7 @@ describe('n-checkbox', () => {
       expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
         labelId
       )
+      wrapper.unmount()
     })
   })
 })
@@ -218,6 +232,7 @@ describe('n-checkbox-group', () => {
   it('should have a role of "group"', () => {
     const wrapper = mount(NCheckboxGroup)
     expect(wrapper.find('.n-checkbox-group').attributes('role')).toBe('group')
+    wrapper.unmount()
   })
 
   it('should work with `disabled` prop', () => {
@@ -230,6 +245,7 @@ describe('n-checkbox-group', () => {
       }
     })
     expect(wrapper.find('.n-checkbox--disabled').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `on-update:value` prop', async () => {
@@ -244,6 +260,7 @@ describe('n-checkbox-group', () => {
     })
     await wrapper.findComponent(NCheckbox).trigger('click')
     expect(onClick).toBeCalled()
+    wrapper.unmount()
   })
 
   it('should work with default slots', async () => {
@@ -256,6 +273,7 @@ describe('n-checkbox-group', () => {
       }
     })
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
+    wrapper.unmount()
   })
 
   it('should work with `min` prop', async () => {
@@ -286,6 +304,7 @@ describe('n-checkbox-group', () => {
     expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
       'n-checkbox--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `max` prop', async () => {
@@ -322,6 +341,7 @@ describe('n-checkbox-group', () => {
     expect(wrapper.findAll('.n-checkbox')[2].classes()).toContain(
       'n-checkbox--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `max` and `min` prop', async () => {
@@ -384,5 +404,6 @@ describe('n-checkbox-group', () => {
     expect(wrapper.findAll('.n-checkbox')[2].classes()).toContain(
       'n-checkbox--disabled'
     )
+    wrapper.unmount()
   })
 })

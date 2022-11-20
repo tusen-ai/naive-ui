@@ -89,6 +89,9 @@ export default defineComponent({
 
     function handleKeydown (e: KeyboardEvent): void {
       switch (e.key) {
+        case ' ':
+          e.preventDefault()
+          break
         case 'ArrowLeft':
           props.onPrev?.()
           break

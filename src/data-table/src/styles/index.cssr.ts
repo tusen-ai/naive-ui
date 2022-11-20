@@ -89,7 +89,7 @@ export default c([
       ])
     ]),
     c('>', [
-      cB('base-loading', `
+      cB('data-table-loading-wrapper', `
         color: var(--n-loading-color);
         font-size: var(--n-loading-size);
         position: absolute;
@@ -97,6 +97,9 @@ export default c([
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
         transition: color .3s var(--n-bezier);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `, [
         fadeInScaleUpTransition({
           originalTransform: 'translateX(-50%) translateY(-50%)'

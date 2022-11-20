@@ -1,6 +1,6 @@
 # Equation
 
-No one will think of that a component library should have this component. however a friend of me need this.
+No one will think of that a component library should have this component. However a friend of me need this.
 
 <n-alert title="Note" type="warning" style="margin-bottom: 16px;" :bordered="false">
   Due to package size, Naive UI doesn't include katex. If you want to use Equation, make sure you have setup katex before using it.
@@ -43,6 +43,6 @@ katex-options.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| katex | `object` | `undefined` | Katex | NEXT_VERSION |
-| katex-options | `object` | `undefined` | Katex options for the equation. | NEXT_VERSION |
-| value | `string` | `undefined` | Latex expression of the equation. | NEXT_VERSION |
+| katex | `object` | `undefined` | Katex | 2.34.0 |
+| katex-options | `object` | `undefined` | Katex options for the equation. | 2.34.0 |
+| value | `string` | `undefined` | Latex expression of the equation. | 2.34.0 |

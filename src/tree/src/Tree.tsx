@@ -886,7 +886,7 @@ export default defineComponent({
       value: Key[],
       option: Array<TreeOption | null>,
       meta: {
-        node: TreeOption | null
+        node: TreeOption
         action: 'select' | 'unselect'
       }
     ): void {
@@ -1531,13 +1531,21 @@ export default defineComponent({
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
       scrollTo,
-      getCheckedKeys: () => {
-        if (!props.checkable) return []
-        return checkedStatusRef.value.checkedKeys
+      getCheckedData: () => {
+        if (!props.checkable) return { keys: [], options: [] }
+        const { checkedKeys } = checkedStatusRef.value
+        return {
+          keys: checkedKeys,
+          options: getOptionsByKeys(checkedKeys)
+        }
       },
-      getIndeterminateKeys: () => {
-        if (!props.checkable) return []
-        return checkedStatusRef.value.indeterminateKeys
+      getIndeterminateData: () => {
+        if (!props.checkable) return { keys: [], options: [] }
+        const { indeterminateKeys } = checkedStatusRef.value
+        return {
+          keys: indeterminateKeys,
+          options: getOptionsByKeys(indeterminateKeys)
+        }
       }
     }
     const cssVarsRef = computed(() => {

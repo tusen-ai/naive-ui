@@ -436,15 +436,17 @@ export default defineComponent({
         <Transition name="fade-in-scale-up-transition">
           {{
             default: () => {
-              return this.loading
-                ? resolveSlot($slots.loading, () => [
+              return this.loading ? (
+                <div class={`${mergedClsPrefix}-data-table-loading-wrapper`}>
+                  {resolveSlot($slots.loading, () => [
                     <NBaseLoading
                       clsPrefix={mergedClsPrefix}
                       strokeWidth={20}
                       {...spinProps}
                     />
-                ])
-                : null
+                  ])}
+                </div>
+              ) : null
             }
           }}
         </Transition>

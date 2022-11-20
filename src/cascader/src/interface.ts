@@ -121,6 +121,9 @@ export const cascaderInjectionKey =
 export interface CascaderInst {
   focus: () => void
   blur: () => void
-  getCheckedKeys: () => Key[]
-  getIndeterminateKeys: () => Key[]
+  getCheckedData: () => { keys: Key[], options: Array<CascaderOption | null> }
+  getIndeterminateData: () => {
+    keys: Key[]
+    options: Array<CascaderOption | null>
+  }
 }

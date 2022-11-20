@@ -44,6 +44,7 @@ export interface TransferInjection {
   handleItemCheck: (checked: boolean, value: OptionValue) => void
   renderSourceLabelRef: Ref<TransferRenderSourceLabel | undefined>
   renderTargetLabelRef: Ref<TransferRenderTargetLabel | undefined>
+  showSelectedRef: Ref<boolean>
 }
 
 export const transferInjectionKey =

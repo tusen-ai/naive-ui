@@ -25,12 +25,12 @@ value-debug.vue
 | default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 | 2.32.0 |
 | disabled | `boolean` | `true` | 是否禁用 | 2.32.0 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 | 2.32.0，`from` 2.32.2 |
-| show-selected | `boolean` | `true` | 是否显示源列表中选中的项 | NEXT_VERSION |
 | options | `TransferOption[]` | `[]` | 配置选项内容，详情见 TransferOption Type | 2.32.0 |
 | render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义源标签 | 2.32.0 |
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
 | render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义目标列表 | 2.33.4 |
+| show-selected | `boolean` | `true` | 是否显示源列表中选中的项 | 2.34.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |
