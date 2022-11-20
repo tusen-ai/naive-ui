@@ -33,6 +33,7 @@
 - `n-upload` adds `should-use-thumbnail-url` prop, closes [#3861](https://github.com/tusen-ai/naive-ui/issues/3861).
 - `n-upload` adds `render-icon` prop.
 - `n-tree`'s `render-switcher-icon` prop is passed with `expanded` & `selected` state.
+- `useDialog`'s option support `transformOrigin`, closes [#3901](https://github.com/tusen-ai/naive-ui/issues/3901).
 
 ### Fixes
 

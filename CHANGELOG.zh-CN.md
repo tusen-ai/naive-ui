@@ -33,6 +33,7 @@
 - `n-upload` 新增 `should-use-thumbnail-url` 属性，关闭 [#3861](https://github.com/tusen-ai/naive-ui/issues/3861)
 - `n-upload` 新增 `render-icon` 属性
 - `n-tree` 的 `render-switcher-icon` 属性传入 `expanded` 和 `selected` 字段
+- `useDialog` 的选项 option 支持 `transformOrigin`，关闭 [#3901](https://github.com/tusen-ai/naive-ui/issues/3901)
 
 ### Fixes
 
