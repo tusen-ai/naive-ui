@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { h, defineComponent, ref } from 'vue'
-import { NButton, useMessage } from 'naive-ui'
+import { NButton, useMessage, PaginationProps } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
 type Song = {
@@ -77,6 +77,11 @@ const data: Song[] = [
 export default defineComponent({
   setup () {
     const message = useMessage()
+    const pagination: PaginationProps = {
+      prefix: ({ startIndex, endIndex }) => {
+        return ['startIndex', startIndex, 'endIndex', endIndex]
+      }
+    }
     return {
       data,
       columns: createColumns({
@@ -85,7 +90,7 @@ export default defineComponent({
         }
       }),
       loading: ref(false),
-      pagination: false as const
+      pagination
     }
   }
 })

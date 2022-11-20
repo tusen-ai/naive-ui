@@ -44,7 +44,7 @@
 - 修复 `n-timeline-item` 在 `n-timeline` 设定 `horizontal` 之后，`line-type="dashed"` 不生效，关闭 [#4014](https://github.com/tusen-ai/naive-ui/issues/4014)
 - 修复 `n-popover` 在英文和数字过长时不断行
 - 修复 `n-input` 的属性 `autosize` 在输入包含多个空格的时候表现不正确，关闭 [#4027](https://github.com/tusen-ai/naive-ui/issues/4027)
-- 修复 `n-pagination` 的 `endIndex` 计算错误，关闭 [#4057](https://github.com/tusen-ai/naive-ui/issues/4057)
+- 修复 `n-pagination` 的 `endIndex` 在最后一页计算错误，关闭 [#4057](https://github.com/tusen-ai/naive-ui/issues/4057)
 
 ### i18n
 
