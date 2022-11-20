@@ -36,7 +36,7 @@
 
 ### Fixes
 
-- Fix `n-image` to preview the image, press and drag the left mouse click,closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
+- Fix `n-image` can be dragged by any button on mouse in preview mode, closes [#3950](https://github.com/tusen-ai/naive-ui/issues/3950).
 - Fix `n-form-item`'s label text is in wrong position when `label-align="left"` and `require-mark-placement="left"` and `label-placement="left"`, closes [#3871](https://github.com/tusen-ai/naive-ui/issues/3871).
 - Fix `n-tree`'s dragging causes partial white screen in Chrome and Edge with version 106, closes [#3909](https://github.com/tusen-ai/naive-ui/issues/3909).
 - Fix `n-select` shows wrong value in select box after `value-field` is set and `max-tag-count="responsive"` and remove selected option in overflow tag's popover, closes [#3869](https://github.com/tusen-ai/naive-ui/issues/3869).
