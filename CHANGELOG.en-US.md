@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-image-group` adds `loop` prop.
+
 ## 2.34.0
 
 ### Breaking Changes

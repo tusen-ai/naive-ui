@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-image-group` 新增 `loop` 属性
+
 ## 2.34.0
 
 ### Breaking Changes
