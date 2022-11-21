@@ -43,11 +43,13 @@ const createColumns = ({
     },
     {
       title: 'Title',
-      key: 'title'
+      key: 'title',
+      align: 'right'
     },
     {
       title: 'Length',
-      key: 'length'
+      key: 'length',
+      align: 'center'
     },
     {
       title: 'Action',
