@@ -21,6 +21,7 @@
 ## 演示
 
 ```demo
+summary-debug.vue
 debug.vue
 basic.vue
 empty.vue
