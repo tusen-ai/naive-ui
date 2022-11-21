@@ -6,6 +6,7 @@
 
 - 修复 `n-select` 在多选模式下会在控制台打印无用内容
 - 修复 `n-tree` 缺少 `getCheckedData` 和 `getIndeterminateData` 方法，关闭 [#4064](https://github.com/tusen-ai/naive-ui/issues/4064)
+- 修复 `n-data-table` 列的 `align` 配置对表头不生效，关闭 [#4063](https://github.com/tusen-ai/naive-ui/issues/4063)
 
 ## 2.34.0
 

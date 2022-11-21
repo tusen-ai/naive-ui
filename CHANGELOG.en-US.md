@@ -6,6 +6,7 @@
 
 - Fix `n-select` will print useless content in console in multiple select mode.
 - Fix `n-tree` misses `getCheckedData` and `getIndeterminateData` methods, closes [#4064](https://github.com/tusen-ai/naive-ui/issues/4064).
+- Fix `n-data-table`'s column's `align` doesn't work for table header, closes [#4063](https://github.com/tusen-ai/naive-ui/issues/4063).
 
 ## 2.34.0
 
