@@ -47,6 +47,7 @@
 - 修复 `n-input` 的属性 `autosize` 在输入包含多个空格的时候表现不正确，关闭 [#4027](https://github.com/tusen-ai/naive-ui/issues/4027)
 - 修复 `n-pagination` 的 `endIndex` 在最后一页计算错误，关闭 [#4057](https://github.com/tusen-ai/naive-ui/issues/4057)
 - 修复 `n-image` 在预览时按空格会使页面滚动，关闭 [#3919](https://github.com/tusen-ai/naive-ui/issues/3919)
+- 修复 `n-button` 文本过长的不居中
 
 ### i18n
 
