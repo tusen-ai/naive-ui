@@ -46,7 +46,7 @@ export default defineComponent({
         setPreviewSrc(
           imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
         )
-      } else {
+      } else if (props.loop) {
         setPreviewSrc(imgs[0].dataset.previewSrc)
       }
     }
