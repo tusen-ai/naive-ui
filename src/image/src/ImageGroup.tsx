@@ -42,11 +42,15 @@ export default defineComponent({
       const index = Array.from(imgs).findIndex(
         (img) => img.dataset.previewSrc === currentSrc
       )
+      if (!props.loop) {
+        if (index === 0 && step === -1) return
+        if (index === imgs.length - 1 && step === 1) return
+      }
       if (~index) {
         setPreviewSrc(
           imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
         )
-      } else if (props.loop) {
+      } else {
         setPreviewSrc(imgs[0].dataset.previewSrc)
       }
     }
