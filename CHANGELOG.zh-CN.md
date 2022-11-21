@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-select` 在多选模式下会在控制台打印无用内容
+
 ## 2.34.0
 
 ### Breaking Changes

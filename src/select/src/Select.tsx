@@ -374,7 +374,6 @@ export default defineComponent({
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { value: values } = mergedValueRef
-        console.log('values', values)
         if (!Array.isArray(values)) return []
         return getMergedOptions(values)
       }

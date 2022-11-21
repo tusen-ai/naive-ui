@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-select` will print useless content in console in multiple select mode.
+
 ## 2.34.0
 
 ### Breaking Changes
