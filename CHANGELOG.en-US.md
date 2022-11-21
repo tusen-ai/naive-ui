@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-select` will print useless content in console in multiple select mode.
+- Fix `n-tree` misses `getCheckedData` and `getIndeterminateData` methods, closes [#4064](https://github.com/tusen-ai/naive-ui/issues/4064).
 
 ## 2.34.0
 
