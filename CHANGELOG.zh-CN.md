@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.34.2
+
+### Fixes
+
+- 修复 `n-config-provider` 的 katex 的类型问题
+
 ## 2.34.1
 
 ### Fixes
