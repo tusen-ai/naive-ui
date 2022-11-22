@@ -93,6 +93,7 @@ render-cell.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
+| scrollbar-props | `Scrollbar Props` | `undefined` | Table Scrollbar's props. | 2.34.0 |
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
