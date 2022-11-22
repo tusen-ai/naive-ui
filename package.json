@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.34.1",
+  "version": "2.34.2",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
