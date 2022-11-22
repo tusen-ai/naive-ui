@@ -1582,6 +1582,7 @@ export default defineComponent({
       ? useThemeClass('tree', undefined, cssVarsRef, props)
       : undefined
     return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       rtlEnabled: rtlEnabledRef,
@@ -1597,8 +1598,6 @@ export default defineComponent({
       getScrollContent,
       handleAfterEnter,
       handleResize,
-      handleKeydown: exposedMethods.handleKeydown,
-      scrollTo: exposedMethods.scrollTo,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender

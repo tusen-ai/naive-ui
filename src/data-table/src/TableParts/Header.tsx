@@ -218,28 +218,34 @@ export default defineComponent({
                   }
                   return (
                     <>
-                      <div class={`${mergedClsPrefix}-data-table-th__title`}>
-                        {ellipsis === true ||
-                        (ellipsis && !ellipsis.tooltip) ? (
-                          <div
-                            class={`${mergedClsPrefix}-data-table-th__ellipsis`}
-                          >
-                            {renderTitle(column)}
-                          </div>
-                            ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                          : ellipsis && typeof ellipsis === 'object' ? (
-                          <NEllipsis
-                            {...ellipsis}
-                            theme={mergedTheme.peers.Ellipsis}
-                            themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-                          >
-                            {{
-                              default: () => renderTitle(column)
-                            }}
-                          </NEllipsis>
-                          ) : (
-                            renderTitle(column)
-                          )}
+                      <div
+                        class={`${mergedClsPrefix}-data-table-th__title-wrapper`}
+                      >
+                        <div class={`${mergedClsPrefix}-data-table-th__title`}>
+                          {ellipsis === true ||
+                          (ellipsis && !ellipsis.tooltip) ? (
+                            <div
+                              class={`${mergedClsPrefix}-data-table-th__ellipsis`}
+                            >
+                              {renderTitle(column)}
+                            </div>
+                              ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+                            : ellipsis && typeof ellipsis === 'object' ? (
+                            <NEllipsis
+                              {...ellipsis}
+                              theme={mergedTheme.peers.Ellipsis}
+                              themeOverrides={
+                                mergedTheme.peerOverrides.Ellipsis
+                              }
+                            >
+                              {{
+                                default: () => renderTitle(column)
+                              }}
+                            </NEllipsis>
+                            ) : (
+                              renderTitle(column)
+                            )}
+                        </div>
                         {isColumnSortable(column) ? (
                           <SortButton column={column as TableBaseColumn} />
                         ) : null}
