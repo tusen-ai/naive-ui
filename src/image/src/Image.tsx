@@ -80,6 +80,7 @@ export default defineComponent({
     }
 
     const shouldStartLoadingRef = ref(!props.lazy)
+    const isImagePreLoad = ref(props.intersectionObserverOptions)
 
     onMounted(() => {
       imageRef.value?.setAttribute(
@@ -126,6 +127,7 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
+      isImagePreLoad,
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
@@ -150,7 +152,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
+    const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy, isImagePreLoad } = this
 
     const placeholderNode = this.$slots.placeholder?.()
     const loadSrc: string = this.src || imgProps.src || ''
@@ -171,7 +173,7 @@ export default defineComponent({
       onClick: this.mergedOnClick,
       onError: this.mergedOnError,
       onLoad: this.mergedOnLoad,
-      loading: lazy ? 'lazy' : 'eager',
+      loading: lazy && !isImagePreLoad ? 'lazy' : 'eager',
       style: [
         imgProps.style || '',
         placeholderNode && !loaded
