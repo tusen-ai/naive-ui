@@ -46,6 +46,9 @@ export default defineComponent({
     ): VNode => {
       const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } =
         useCalendarRef
+      const isDisabled =
+        mergedIsDateDisabled(item.ts) &&
+        !(props.type !== 'year' && item.type === 'year' && item.isCurrent)
       return (
         <div
           data-n-date
@@ -58,7 +61,7 @@ export default defineComponent({
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                !useAsQuickJump && mergedIsDateDisabled(item.ts)
+                !useAsQuickJump && isDisabled
             }
           ]}
           onClick={() => {
