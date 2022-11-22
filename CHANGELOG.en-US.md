@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.34.2
+
+### Fixes
+
+- Fix `n-config-provider`'s katex type issue.
+
 ## 2.34.1
 
 ### Fixes
