@@ -167,7 +167,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel__divider`} />
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.startDateArray.map((dateItem, i) => {
-              const disabled = this.mergedIsDateDisabled(dateItem.ts)
+              const disabled = this.mergedIsDateDisabled(dateItem)
               return (
                 <div
                   data-n-date
@@ -261,7 +261,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel__divider`} />
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
             {this.endDateArray.map((dateItem, i) => {
-              const disabled = this.mergedIsDateDisabled(dateItem.ts)
+              const disabled = this.mergedIsDateDisabled(dateItem)
               return (
                 <div
                   data-n-date

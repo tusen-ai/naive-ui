@@ -348,7 +348,7 @@ function useDualCalendar (
   }
 
   // The function is used on date panel, not the date-picker value validation
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled ({ ts }: DateItem): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
     if (!Array.isArray(props.value)) return isDateDisabled(ts, 'start', null)
@@ -407,7 +407,7 @@ function useDualCalendar (
   }
   function handleDateMouseEnter (dateItem: DateItem): void {
     if (isSelectingRef.value) {
-      if (mergedIsDateDisabled(dateItem.ts)) return
+      if (mergedIsDateDisabled(dateItem)) return
       if (dateItem.ts >= memorizedStartDateTimeRef.value) {
         changeStartEndTime(
           memorizedStartDateTimeRef.value,
