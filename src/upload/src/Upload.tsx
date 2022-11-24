@@ -93,7 +93,7 @@ function createXhrHandlers (
     let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
       status: 'finished',
       percentage,
-      file: null
+      file
     })
     xhrMap.delete(file.id)
     fileAfterChange = createSettledFileInfo(
@@ -161,7 +161,7 @@ function customSubmitImpl (options: {
       let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
         status: 'finished',
         percentage,
-        file: null
+        file
       })
       fileAfterChange = createSettledFileInfo(
         inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
