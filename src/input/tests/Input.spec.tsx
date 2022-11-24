@@ -322,4 +322,18 @@ describe('n-input', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `insideLabel` prop', async () => {
+    const wrapper = mount(NInput, {
+      props: {
+        insideLabel: '账户',
+        clearable: true
+      }
+    })
+    wrapper.find('input').element.focus()
+    expect(wrapper.find('.n-input--inside-label').exists()).toBe(true)
+    expect(wrapper.find('.n-base-clear').exists()).toBe(true)
+    expect(wrapper.find('.n-input__label').exists()).toBe(true)
+    wrapper.unmount()
+  })
 })

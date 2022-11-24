@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input` 新增`insideLabel`属性
+
 ## 2.34.2
 
 ### Fixes

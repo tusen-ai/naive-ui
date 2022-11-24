@@ -269,7 +269,14 @@ export default cB('input', `
       cE('state-border', `
         border: var(--n-border-focus);
         box-shadow: var(--n-box-shadow-focus);
-      `)
+      `),
+      cE('label', `
+        color: var(--n-icon-color);
+        top: 4px;
+        left: var(--n-padding-left);
+        font-size: calc(var(--n-font-size) / 1.2);
+      `),
+      cE('suffix', 'align-items:flex-start')
     ])
   ]),
   cE('border, state-border', `
@@ -374,7 +381,34 @@ export default cB('input', `
         `)
       ])
     ])
-  ]))
+  ])),
+  cM('inside-label', `
+    position:relative;
+    height:50px;
+  `, [
+    cB('input-wrapper', `
+      padding-top: var(--n-padding-top);
+    `),
+    cE('label', `
+      position: absolute;
+      color: var(--n-icon-color);
+      left: calc(var(--n-padding-left) * 1.5);
+      top: calc(var(--n-padding-top) - 6px);
+      font-size: var(--n-icon-size);
+      transition: all .3s var(--n-bezier);
+    `)
+  ]),
+  cM('show-label', '',
+    [
+      cE('label', `
+        color: var(--n-icon-color);
+        top: 4px;
+        left: var(--n-padding-left);
+        font-size: calc(var(--n-font-size) / 1.2);
+      `),
+      cE('suffix', 'align-items:flex-start')
+    ]
+  )
 ])
 
 export const safariStyle = cB('input', [

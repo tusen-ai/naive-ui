@@ -24,6 +24,7 @@ input-props.vue
 status.vue
 pattern.vue
 graphemes.vue
+inside-label.vue
 ```
 
 ## API
@@ -40,6 +41,7 @@ graphemes.vue
 | default-value | `string \| [string, string] \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
 | input-props | `HTMLInputAttributes` | `undefined` | The dom props of the input element inside the component. This is disabled if the `pair` property is true. For avaiable attributes, [see here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). Warning：It won't override internal props with the same name (except `type`). |  |
+| insideLabel | `string` | `undefined` | Set Inside label. When focusing, the prompt text will transition to the top of the input box | NEXT_VERSION |
 | loading | `boolean` | `undefined` | Set loading state. If set (true/false), the element will always take up enough space for the loading indicator. |  |
 | maxlength | `number` | `undefined` | Maximum input length. |  |
 | minlength | `number` | `undefined` | Minimum input length. |  |

@@ -123,6 +123,10 @@ export const inputProps = {
     type: Boolean,
     default: undefined
   },
+  insideLabel: {
+    type: String,
+    default: undefined
+  },
   allowInput: Function as PropType<(value: string) => boolean>,
   renderCount: Function as PropType<(props: { value: string }) => VNodeChild>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
@@ -1033,7 +1037,10 @@ export default defineComponent({
               this.round && !(type === 'textarea'),
             [`${mergedClsPrefix}-input--pair`]: this.pair,
             [`${mergedClsPrefix}-input--focus`]: this.mergedFocus,
-            [`${mergedClsPrefix}-input--stateful`]: this.stateful
+            [`${mergedClsPrefix}-input--stateful`]: this.stateful,
+            [`${mergedClsPrefix}-input--inside-label`]: this.insideLabel,
+            [`${mergedClsPrefix}-input--show-label`]:
+              this.insideLabel && this.mergedValue
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -1055,13 +1062,16 @@ export default defineComponent({
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
-          {resolveWrappedSlot(
-            $slots.prefix,
-            (children) =>
-              children && (
-                <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
-              )
-          )}
+          {!this.insideLabel &&
+            resolveWrappedSlot(
+              $slots.prefix,
+              (children) =>
+                children && (
+                  <div class={`${mergedClsPrefix}-input__prefix`}>
+                    {children}
+                  </div>
+                )
+            )}
           {type === 'textarea' ? (
             <NScrollbar
               ref="textareaScrollbarInstRef"
@@ -1113,7 +1123,7 @@ export default defineComponent({
                         onChange={this.handleChange}
                         onScroll={this.handleTextAreaScroll}
                       />
-                      {this.showPlaceholder1 ? (
+                      {this.showPlaceholder1 && !this.insideLabel ? (
                         <div
                           class={`${mergedClsPrefix}-input__placeholder`}
                           style={[
@@ -1185,7 +1195,7 @@ export default defineComponent({
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
               />
-              {this.showPlaceholder1 ? (
+              {this.showPlaceholder1 && !this.insideLabel ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>
                   <span>{this.mergedPlaceholder[0]}</span>
                 </div>
@@ -1274,6 +1284,11 @@ export default defineComponent({
                   ) : null
             })}
         </div>
+        {this.insideLabel && (
+          <div class={`${mergedClsPrefix}-input__label`}>
+            {this.insideLabel}
+          </div>
+        )}
         {/* pair input */}
         {this.pair ? (
           <span class={`${mergedClsPrefix}-input__separator`}>
@@ -1290,7 +1305,7 @@ export default defineComponent({
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
-                placeholder={this.mergedPlaceholder[1]}
+                placeholder={this.insideLabel ? '' : this.mergedPlaceholder[1]}
                 disabled={this.mergedDisabled}
                 maxlength={countGraphemes ? undefined : this.maxlength}
                 minlength={countGraphemes ? undefined : this.minlength}
@@ -1306,7 +1321,7 @@ export default defineComponent({
                 onInput={(e) => this.handleInput(e, 1)}
                 onChange={(e) => this.handleChange(e, 1)}
               />
-              {this.showPlaceholder2 ? (
+              {this.showPlaceholder2 && !this.insideLabel ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>
                   <span>{this.mergedPlaceholder[1]}</span>
                 </div>

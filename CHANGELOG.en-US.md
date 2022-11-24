@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-input` adds `insideLabel` prop.
+
 ## 2.34.2
 
 ### Fixes
