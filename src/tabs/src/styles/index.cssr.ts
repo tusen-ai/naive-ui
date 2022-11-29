@@ -30,6 +30,7 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 export default cB('tabs', `
   box-sizing: border-box;
   width: 100%;
+  display: flex;
   transition:
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
@@ -42,6 +43,18 @@ export default cB('tabs', `
         `)
       ])
     ])
+  ]),
+  cM('left-position, right-position', `
+    flex-direction: row;
+  `, [
+    cB('tabs-bar', `
+      width: 2px;
+      right: 0;
+      transition:
+      top .2s var(--n-bezier),
+      max-height .2s var(--n-bezier),
+      background-color .3s var(--n-bezier);
+    `)
   ]),
   cB('tabs-rail', `
     padding: 3px;
@@ -333,6 +346,20 @@ export default cB('tabs', `
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
+    ]),
+    cM('left-position', [
+      cB('tabs-wrapper', `
+        flex-direction: column;
+      `, [
+        cB('tabs-tab-wrapper', `
+          flex-direction: column;
+        `, [
+          cB('tabs-tab-pad', `
+            height: var(--n-tab-gap);
+            width: 100%;
+          `)
+        ])
+      ])
     ])
   ])
 ])

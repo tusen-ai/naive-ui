@@ -77,6 +77,10 @@ export const tabsProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  position: {
+    type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
+    default: 'top'
+  },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
   barWidth: Number,
   paneClass: String,
@@ -194,23 +198,37 @@ export default defineComponent({
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
-        const { barWidth } = props
+        const { barWidth, position } = props
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
-          const offsetDiffLeft =
-            Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
-          barEl.style.left = `${offsetDiffLeft}px`
-          barEl.style.maxWidth = `${barWidth}px`
+        if (['top', 'bottom'].includes(position)) {
+          if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
+            const offsetDiffLeft =
+              Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
+            barEl.style.left = `${offsetDiffLeft}px`
+            barEl.style.maxWidth = `${barWidth}px`
+          } else {
+            barEl.style.left = `${tabEl.offsetLeft}px`
+            barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+          }
+          barEl.style.width = '8192px'
+          void barEl.offsetWidth
         } else {
-          barEl.style.left = `${tabEl.offsetLeft}px`
-          barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+          if (typeof barWidth === 'number' && tabEl.offsetHeight >= barWidth) {
+            const offsetDiffTop =
+              Math.floor((tabEl.offsetHeight - barWidth) / 2) + tabEl.offsetTop
+            barEl.style.top = `${offsetDiffTop}px`
+            barEl.style.maxHeight = `${barWidth}px`
+          } else {
+            barEl.style.top = `${tabEl.offsetTop}px`
+            barEl.style.maxHeight = `${tabEl.offsetHeight}px`
+          }
+          barEl.style.height = '8192px'
+          void barEl.offsetHeight
         }
-        barEl.style.width = '8192px'
-        void barEl.offsetWidth
       }
     }
     function updateCurrentBarStyle (): void {
@@ -603,6 +621,7 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       type,
+      position,
       addTabFixed,
       addable,
       mergedSize,
@@ -635,7 +654,8 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
-          mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`
+          mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`,
+          `${mergedClsPrefix}-tabs--${position}-position`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -646,6 +666,7 @@ export default defineComponent({
             // other. adding a class will make it easy to write the
             // style.
             `${mergedClsPrefix}-tabs-nav--${type}-type`,
+            `${mergedClsPrefix}-tabs-nav--${position}-position`,
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
@@ -700,7 +721,7 @@ export default defineComponent({
                           const rawWrappedTabs = (
                             <div
                               style={this.tabWrapperStyle}
-                              class={`${mergedClsPrefix}-tabs-wrapper`}
+                              class={[`${mergedClsPrefix}-tabs-wrapper`]}
                             >
                               {mergedJustifyContent ? null : (
                                 <div
