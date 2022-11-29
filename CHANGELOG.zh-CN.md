@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
+- 修复 `n-anchor` 的 demo 无滚动
 
 ## 2.34.1
 

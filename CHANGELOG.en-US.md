@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-config-provider`'s katex type issue.
+- Fix `n-anchor` demo not scrolling
 
 ## 2.34.1
 

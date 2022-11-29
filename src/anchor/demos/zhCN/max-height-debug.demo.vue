@@ -10,23 +10,23 @@
       style="width: 128px; max-height: 100px"
       native-scrollbar
     >
-      <n-anchor-link title="非常长的 TOC, 固定" href="#basic" />
-      <n-anchor-link title="很长很长" href="#basic" />
+      <n-anchor-link title="非常长的 TOC, 固定" href="#basic.vue" />
+      <n-anchor-link title="很长很长" href="#basic.vue" />
 
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
-      <n-anchor-link title="长到放不下" href="#ignore-gap" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
+      <n-anchor-link title="长到放不下" href="#ignore-gap.vue" />
     </n-anchor>
   </div>
 </template>
