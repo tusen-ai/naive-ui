@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-input` 新增`insideLabel`属性
+- `n-input` 新增`inside-label`属性
 
 ## 2.34.2
 

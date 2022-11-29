@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-input` adds `insideLabel` prop.
+- `n-input` adds `inside-label` prop.
 
 ## 2.34.2
 
