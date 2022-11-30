@@ -30,6 +30,7 @@ move.vue
 | key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |  |
 | min | `number` | `0` | Minimum number of items. |  |
 | max | `number` | `undefined` | Maximum number of items. |  |
+| disabled | `boolean` | `false` | Whether to disable the dynamic-input. |  |
 | preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |  |
 | show-sort-button | `boolean` | `false` | Whether to show sort button. | 2.25.0 |
 | value | `unknown[]` | `undefined` | Value in controlled mode. |  |

@@ -16,6 +16,7 @@ export default defineComponent({
         value: ''
       })
     },
+    disabled: Boolean,
     parentPath: String,
     path: String,
     onUpdateValue: {
@@ -54,7 +55,8 @@ export default defineComponent({
       keyPlaceholder,
       valuePlaceholder,
       value,
-      clsPrefix
+      clsPrefix,
+      disabled
     } = this
     return (
       <div class={`${clsPrefix}-dynamic-input-preset-pair`}>
@@ -65,6 +67,7 @@ export default defineComponent({
           class={`${clsPrefix}-dynamic-input-pair-input`}
           placeholder={keyPlaceholder}
           onUpdateValue={this.handleKeyInput}
+          disabled={disabled}
         />
         <NInput
           theme={mergedTheme.peers.Input}
@@ -73,6 +76,7 @@ export default defineComponent({
           class={`${clsPrefix}-dynamic-input-pair-input`}
           placeholder={valuePlaceholder}
           onUpdateValue={this.handleValueInput}
+          disabled={disabled}
         />
       </div>
     )

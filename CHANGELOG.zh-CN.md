@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
+- `n-dynamic-input` 新增 `disabled` 属性
 
 ## 2.34.1
 
