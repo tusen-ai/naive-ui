@@ -43,6 +43,7 @@ rtl-debug.vue
 | native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |  |
 | resizable | `boolean` | `false` | 抽屉是否可以调整宽度、高度 | 2.31.0 |
+| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | show | `boolean` | `false` | 是否展示抽屉 |  |
 | show-mask | `boolean \| 'transparent'` | `true` | 是否显示遮罩，如果设为 `'transparent'` 会展示透明遮罩，如果设为 `false` 会禁用 `trap-focus` | 2.28.3 |
 | style | `string \| Object` | `undefined` | 抽屉的样式 |  |
@@ -68,6 +69,7 @@ rtl-debug.vue
 | footer-style | `string \| Object` | `undefined` | 主体 footer 的样式 |
 | header-style | `string \| Object` | `undefined` | 主体 header 的样式 |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |
+| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |
 | title | `string` | `undefined` | 主体的标题 |
 
 ### Drawer Slots

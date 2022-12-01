@@ -35,6 +35,7 @@ scroll-to.vue
 | has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content. |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |
 | sider-placement | `'left' \| 'right'` | `left` | The sidebar is displayed on the left or the right side. |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 
@@ -68,6 +69,7 @@ scroll-to.vue
 | inverted | `boolean` | `false` | Whether to use inverted background. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content. |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |
 | show-collapsed-content | `boolean` | `true` | Whether to show content in sider after it is collapsed. |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
 | trigger-style | `string \| Object` | `undefined` | Trigger style. |
