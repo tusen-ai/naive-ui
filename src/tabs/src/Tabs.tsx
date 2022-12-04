@@ -205,6 +205,7 @@ export default defineComponent({
           barEl.classList.remove(disabledClassName)
         }
         if (['top', 'bottom'].includes(position)) {
+          clearBarStyle(['top', 'maxHeight', 'height'])
           if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
             const offsetDiffLeft =
               Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
@@ -217,6 +218,7 @@ export default defineComponent({
           barEl.style.width = '8192px'
           void barEl.offsetWidth
         } else {
+          clearBarStyle(['left', 'maxWidth', 'width'])
           if (typeof barWidth === 'number' && tabEl.offsetHeight >= barWidth) {
             const offsetDiffTop =
               Math.floor((tabEl.offsetHeight - barWidth) / 2) + tabEl.offsetTop
@@ -229,6 +231,13 @@ export default defineComponent({
           barEl.style.height = '8192px'
           void barEl.offsetHeight
         }
+      }
+    }
+    function clearBarStyle (styleProps: string[]): void {
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      for (const prop of styleProps) {
+        barEl.style[prop] = ''
       }
     }
     function updateCurrentBarStyle (): void {
@@ -468,7 +477,7 @@ export default defineComponent({
     // avoid useless rerender
     watchEffect(() => {
       const { value: el } = scrollWrapperElRef
-      if (!el) return
+      if (!el || ['left', 'right'].includes(props.position)) return
       const { value: clsPrefix } = mergedClsPrefixRef
       const shadowBeforeClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-before`
       const shadowAfterClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-after`
@@ -538,6 +547,7 @@ export default defineComponent({
           closeBorderRadius,
           [createKey('panePadding', size)]: panePadding,
           [createKey('tabPadding', sizeType)]: tabPadding,
+          [createKey('verticalTabPadding', sizeType)]: verticalTabPadding,
           [createKey('tabGap', sizeType)]: tabGap,
           [createKey('tabTextColor', type)]: tabTextColor,
           [createKey('tabTextColorActive', type)]: tabTextColorActive,
@@ -571,6 +581,7 @@ export default defineComponent({
         '--n-tab-font-weight': tabFontWeight,
         '--n-tab-font-weight-active': tabFontWeightActive,
         '--n-tab-padding': tabPadding,
+        '--n-vertical-tab-padding': verticalTabPadding,
         '--n-tab-gap': tabGap,
         '--n-pane-padding': panePadding,
         '--n-font-weight-strong': fontWeightStrong,

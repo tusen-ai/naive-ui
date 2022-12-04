@@ -31,6 +31,7 @@ export default cB('tabs', `
   box-sizing: border-box;
   width: 100%;
   display: flex;
+  flex-direction: column;
   transition:
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
@@ -54,6 +55,23 @@ export default cB('tabs', `
       top .2s var(--n-bezier),
       max-height .2s var(--n-bezier),
       background-color .3s var(--n-bezier);
+    `),
+    cB('tabs-tab', `
+      padding: var(--n-vertical-tab-padding); 
+    `)
+  ]),
+  cM('right-position', `
+    flex-direction: row-reverse;
+  `, [
+    cB('tabs-bar', `
+      left: 0;
+    `)
+  ]),
+  cM('bottom-position', `
+    flex-direction: column-reverse;
+  `, [
+    cB('tabs-bar', `
+      top: 0;
     `)
   ]),
   cB('tabs-rail', `
@@ -216,6 +234,7 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-pane-wrapper', `
+    flex:1;
     position: relative;
     overflow: hidden;
     transition: max-height .2s var(--n-bezier);
@@ -347,7 +366,7 @@ export default cB('tabs', `
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ]),
-    cM('left-position', [
+    cM('left-position,right-position', [
       cB('tabs-wrapper', `
         flex-direction: column;
       `, [
@@ -359,7 +378,27 @@ export default cB('tabs', `
             width: 100%;
           `)
         ])
-      ])
+      ]),
+      cB('tabs-nav-scroll-content', `
+        border-bottom: none;
+      `)
+    ]),
+    cM('left-position', [
+      cB('tabs-nav-scroll-content', `
+        border-right: 1px solid var(--n-tab-border-color);
+      `)
+    ]),
+    cM('right-position', [
+      cB('tabs-nav-scroll-content', `
+        border-left: 1px solid var(--n-tab-border-color);
+      `)
+    ]),
+    cM('bottom-position', [
+      cB('tabs-nav-scroll-content', `
+        border-top: 1px solid var(--n-tab-border-color);
+        border-bottom: none;
+      `)
     ])
+
   ])
 ])
