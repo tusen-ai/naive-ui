@@ -237,7 +237,7 @@ export default defineComponent({
       const { value: barEl } = barElRef
       if (!barEl) return
       for (const prop of styleProps) {
-        barEl.style[prop] = ''
+        barEl.style[prop as any] = ''
       }
     }
     function updateCurrentBarStyle (): void {
@@ -658,6 +658,88 @@ export default defineComponent({
     const isSegment = type === 'segment'
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
     renderNameListRef.value = []
+    const scrollContent = (): JSX.Element => {
+      const rawWrappedTabs = (
+        <div
+          style={this.tabWrapperStyle}
+          class={[`${mergedClsPrefix}-tabs-wrapper`]}
+        >
+          {mergedJustifyContent ? null : (
+            <div
+              class={`${mergedClsPrefix}-tabs-scroll-padding`}
+              style={{ width: `${this.tabsPadding}px` }}
+            />
+          )}
+          {showPane
+            ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
+              renderNameListRef.value.push(tabPaneVNode.props.name)
+              return justifyTabDynamicProps(
+                  <Tab
+                    {...tabPaneVNode.props}
+                    internalCreatedByPane={true}
+                    internalLeftPadded={
+                      index !== 0 &&
+                      (!mergedJustifyContent ||
+                        mergedJustifyContent === 'center' ||
+                        mergedJustifyContent === 'start' ||
+                        mergedJustifyContent === 'end')
+                    }
+                  >
+                    {tabPaneVNode.children
+                      ? {
+                          default: tabPaneVNode.children.tab
+                        }
+                      : undefined}
+                  </Tab>
+              )
+            })
+            : tabChildren.map((tabVNode: any, index: number) => {
+              renderNameListRef.value.push(tabVNode.props.name)
+              if (index !== 0 && !mergedJustifyContent) {
+                return justifyTabDynamicProps(
+                  createLeftPaddedTabVNode(tabVNode)
+                )
+              } else {
+                return justifyTabDynamicProps(tabVNode)
+              }
+            })}
+          {!addTabFixed && addable && isCard
+            ? createAddTag(
+              addable,
+              (showPane ? tabPaneChildren.length : tabChildren.length) !== 0
+            )
+            : null}
+          {mergedJustifyContent ? null : (
+            <div
+              class={`${mergedClsPrefix}-tabs-scroll-padding`}
+              style={{ width: `${this.tabsPadding}px` }}
+            />
+          )}
+        </div>
+      )
+      let wrappedTabs = rawWrappedTabs
+      if (isCard && addable) {
+        wrappedTabs = (
+          <VResizeObserver onResize={this.handleTabsResize}>
+            {{
+              default: () => rawWrappedTabs
+            }}
+          </VResizeObserver>
+        )
+      }
+      return (
+        <div
+          ref="tabsElRef"
+          class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
+        >
+          {wrappedTabs}
+          {isCard ? <div class={`${mergedClsPrefix}-tabs-pad`} /> : null}
+          {isCard ? null : (
+            <div ref="barElRef" class={`${mergedClsPrefix}-tabs-bar`} />
+          )}
+        </div>
+      )
+    }
     return (
       <div
         class={[
@@ -726,113 +808,20 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
                     ref="scrollWrapperElRef"
                   >
-                    <VXScroll ref="xScrollInstRef" onScroll={this.handleScroll}>
-                      {{
-                        default: () => {
-                          const rawWrappedTabs = (
-                            <div
-                              style={this.tabWrapperStyle}
-                              class={[`${mergedClsPrefix}-tabs-wrapper`]}
-                            >
-                              {mergedJustifyContent ? null : (
-                                <div
-                                  class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                                  style={{ width: `${this.tabsPadding}px` }}
-                                />
-                              )}
-                              {showPane
-                                ? tabPaneChildren.map(
-                                  (tabPaneVNode: any, index: number) => {
-                                    renderNameListRef.value.push(
-                                      tabPaneVNode.props.name
-                                    )
-                                    return justifyTabDynamicProps(
-                                        <Tab
-                                          {...tabPaneVNode.props}
-                                          internalCreatedByPane={true}
-                                          internalLeftPadded={
-                                            index !== 0 &&
-                                            (!mergedJustifyContent ||
-                                              mergedJustifyContent ===
-                                                'center' ||
-                                              mergedJustifyContent ===
-                                                'start' ||
-                                              mergedJustifyContent === 'end')
-                                          }
-                                        >
-                                          {tabPaneVNode.children
-                                            ? {
-                                                default:
-                                                  tabPaneVNode.children.tab
-                                              }
-                                            : undefined}
-                                        </Tab>
-                                    )
-                                  }
-                                )
-                                : tabChildren.map(
-                                  (tabVNode: any, index: number) => {
-                                    renderNameListRef.value.push(
-                                      tabVNode.props.name
-                                    )
-                                    if (
-                                      index !== 0 &&
-                                        !mergedJustifyContent
-                                    ) {
-                                      return justifyTabDynamicProps(
-                                        createLeftPaddedTabVNode(tabVNode)
-                                      )
-                                    } else {
-                                      return justifyTabDynamicProps(tabVNode)
-                                    }
-                                  }
-                                )}
-                              {!addTabFixed && addable && isCard
-                                ? createAddTag(
-                                  addable,
-                                  (showPane
-                                    ? tabPaneChildren.length
-                                    : tabChildren.length) !== 0
-                                )
-                                : null}
-                              {mergedJustifyContent ? null : (
-                                <div
-                                  class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                                  style={{ width: `${this.tabsPadding}px` }}
-                                />
-                              )}
-                            </div>
-                          )
-                          let wrappedTabs = rawWrappedTabs
-                          if (isCard && addable) {
-                            wrappedTabs = (
-                              <VResizeObserver onResize={this.handleTabsResize}>
-                                {{
-                                  default: () => rawWrappedTabs
-                                }}
-                              </VResizeObserver>
-                            )
-                          }
-                          return (
-                            <div
-                              ref="tabsElRef"
-                              class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
-                            >
-                              {wrappedTabs}
-                              {isCard ? (
-                                <div class={`${mergedClsPrefix}-tabs-pad`} />
-                              ) : null}
-                              {isCard ? null : (
-                                <div
-                                  ref="barElRef"
-                                  class={`${mergedClsPrefix}-tabs-bar`}
-                                />
-                              )}
-                            </div>
-                          )
-                        }
-                      }}
-                    </VXScroll>
+                    {['top', 'bottom'].includes(position) ? (
+                      <VXScroll
+                        ref="xScrollInstRef"
+                        onScroll={this.handleScroll}
+                      >
+                        {{
+                          default: scrollContent
+                        }}
+                      </VXScroll>
+                    ) : (
+                      <div class={`${mergedClsPrefix}-tabs-nav-yScroll`}>
+                        {scrollContent()}
+                      </div>
+                    )}
                   </div>
                 )
               }}

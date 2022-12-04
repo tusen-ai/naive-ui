@@ -151,6 +151,11 @@ export default cB('tabs', `
         box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
       `)
     ]),
+    cB('tabs-nav-yScroll', `
+      height: 100%;
+      width: 100%;
+      overflow-y: auto; 
+    `),
     c('&::before, &::after', `
       transition: box-shadow .3s var(--n-bezier);
       pointer-events: none;
@@ -385,6 +390,7 @@ export default cB('tabs', `
     ]),
     cM('left-position', [
       cB('tabs-nav-scroll-content', `
+        box-sizing: border-box;
         border-right: 1px solid var(--n-tab-border-color);
       `)
     ]),
