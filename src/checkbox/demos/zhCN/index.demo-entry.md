@@ -8,6 +8,7 @@
 basic.vue
 size.vue
 group.vue
+button-group.vue
 grid.vue
 indeterminate.vue
 controlled.vue
@@ -19,7 +20,7 @@ rtl-debug.vue
 
 ## API
 
-### Checkbox Props
+### Checkbox Props, CheckboxButton Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
