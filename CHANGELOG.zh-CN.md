@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
+- 修复 `n-data-table` 的 resizable 和 ellipsis 同时存在导致无法出现滚动条问题，关闭 [#3889](https://github.com/tusen-ai/naive-ui/issues/3889)
 
 ## 2.34.1
 

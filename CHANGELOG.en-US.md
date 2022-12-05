@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-config-provider`'s katex type issue.
+- Fix `n-data-table` scrollbar cannot appear because of the presence of both resizable and ellipsis, closes [#3889](https://github.com/tusen-ai/naive-ui/issues/3889)
 
 ## 2.34.1
 
