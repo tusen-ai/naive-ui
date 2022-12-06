@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `trigger` dropdown prop getting overridden with `hover` on `NMenu`.
+
 ## 2.34.2
 
 ### Fixes
