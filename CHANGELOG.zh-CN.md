@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.34.3
+
+- 修复 `indicator-placement` 为 `inside` 时，`indicator-text-color` 不生效的问题
+
 ## 2.34.2
 
 ### Fixes
