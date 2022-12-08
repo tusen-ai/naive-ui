@@ -5,9 +5,7 @@ export default cB('badge', [
     direction: rtl;
   `, [
     cB('badge-sup', `
-      right: 100%;
-      left: unset;
-      transform: translateX(50%);
+      transform: translate(-50%, -50%);
       direction: initial;
     `)
   ])

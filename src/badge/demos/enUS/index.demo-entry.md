@@ -9,6 +9,7 @@ basic.vue
 type.vue
 processing.vue
 show-zero.vue
+offset.vue
 overflow.vue
 manual.vue
 custom-content.vue
@@ -25,6 +26,7 @@ raw.vue
 | color | `string` | `undefined` | Badge color. |
 | dot | `boolean` | `false` | Show badge as dot. |
 | max | `number` | `undefined` | The maximum number of the badge when its value overflows. |
+| offset | `Array<string \| number>` | `[0, 0]` | Set offset of the badge dot, the format is `[left, top]`. |
 | processing | `boolean` | `false` | Show processing status. |
 | show-zero | `boolean` | `false` | Whether to display the badge, even if provided value equals 0. |
 | show | `boolean` | `true` | Whether the badge should be shown altogether. |

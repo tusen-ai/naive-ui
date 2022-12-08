@@ -44,8 +44,9 @@ export default c([
         width: 8px;
         padding: 0;
         min-width: 8px;
-        left: 100%;
-        bottom: calc(100% - 4px);
+        transform: translate(50%, -50%);
+        right: 0;
+        top: 0;
       `, [
         c('::before', 'border-radius: 4px;')
       ])
@@ -63,9 +64,7 @@ export default c([
       padding: 0 6px;
       text-align: center;
       font-size: var(--n-font-size);
-      transform: translateX(-50%);
-      left: 100%;
-      bottom: calc(100% - 9px);
+      transform: translate(50%, -50%);
       font-variant-numeric: tabular-nums;
       z-index: 1;
       display: flex;
@@ -74,7 +73,7 @@ export default c([
     [
       fadeInScaleUpTransition({
         transformOrigin: 'left bottom',
-        originalTransform: 'translateX(-50%)'
+        originalTransform: 'translate(50%, -50%)'
       }),
       cB('base-wave', {
         zIndex: 1,
@@ -90,9 +89,6 @@ export default c([
         border-radius: 9px;
         content: "";
         position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
         bottom: 0;
       `)
     ])

@@ -9,6 +9,7 @@ basic.vue
 type.vue
 processing.vue
 show-zero.vue
+offset.vue
 overflow.vue
 manual.vue
 custom-content.vue
@@ -26,6 +27,7 @@ rtl-debug.vue
 | color | `string` | `undefined` | 标记的颜色 |
 | dot | `boolean` | `false` | 标记是否显示为点 |
 | max | `number` | `undefined` | 标记最大数来处理溢出情况 |
+| offset | `Array<string \| number>` | `[0, 0]` | 设置状态点的位置偏移，格式为 `[left, top]` |
 | processing | `boolean` | `false` | 标记显示进度 |
 | show-zero | `boolean` | `false` | 标记为 0 时是否显示 |
 | show | `boolean` | `true` | 标记受控显示 |

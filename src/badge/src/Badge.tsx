@@ -41,7 +41,11 @@ export const badgeProps = {
   },
   showZero: Boolean,
   processing: Boolean,
-  color: String
+  color: String,
+  offset: {
+    type: Array as PropType<Array<string | number>>,
+    default: () => [0, 0]
+  }
 } as const
 
 export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
@@ -129,7 +133,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, onRender, themeClass, $slots } = this
+    const { mergedClsPrefix, onRender, themeClass, $slots, offset } = this
     onRender?.()
     const children = $slots.default?.()
     return (
@@ -157,6 +161,14 @@ export default defineComponent({
                 <sup
                   class={`${mergedClsPrefix}-badge-sup`}
                   title={getTitleAttribute(this.value)}
+                  style={[
+                    this.rtlEnabled
+                      ? { left: `-${parseInt(offset?.at(0) as string)}px` }
+                      : { right: `-${parseInt(offset?.at(0) as string)}px` },
+                    {
+                      top: `${parseInt(offset?.at(1) as string)}px`
+                    }
+                  ]}
                 >
                   {resolveSlot($slots.value, () => [
                     !this.dot ? (
