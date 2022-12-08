@@ -11,6 +11,7 @@
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
+- 修复 `n-image` 预览工具栏操作报错，关闭 [#4144](https://github.com/tusen-ai/naive-ui/issues/4144)
 
 ## 2.34.1
 

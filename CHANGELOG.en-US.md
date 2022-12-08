@@ -11,6 +11,7 @@
 ### Fixes
 
 - Fix `n-config-provider`'s katex type issue.
+- Fix `n-image` error in toolbar operation during preview, closes [#4144](https://github.com/tusen-ai/naive-ui/issues/4144).
 
 ## 2.34.1
 
