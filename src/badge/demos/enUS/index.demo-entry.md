@@ -14,6 +14,7 @@ manual.vue
 custom-content.vue
 color.vue
 raw.vue
+offset.vue
 ```
 
 ## API
@@ -30,6 +31,7 @@ raw.vue
 | show | `boolean` | `true` | Whether the badge should be shown altogether. |
 | type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Type of the badge. |
 | value | `string \| number` | `undefined` | Badge's value. |
+| offset | `[string \| number,string \| number]` | `undefined` | offset of the from the left and top of the default position. |
 
 ### Badge Slots
 

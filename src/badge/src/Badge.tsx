@@ -41,7 +41,8 @@ export const badgeProps = {
   },
   showZero: Boolean,
   processing: Boolean,
-  color: String
+  color: String,
+  offset: Array as unknown as PropType<[number | string, number | string]>
 } as const
 
 export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
@@ -116,6 +117,20 @@ export default defineComponent({
       )
       : undefined
 
+    const offsetStyleRef = computed<CSSProperties | undefined>(() => {
+      if (!props.offset) return
+      const [x, y] = props.offset
+
+      const left = rtlEnabledRef?.value
+        ? -Number.parseInt(x as string, 10)
+        : Number.parseInt(x as string, 10)
+      const translateX = rtlEnabledRef?.value ? '50%' : '-50%'
+
+      return {
+        transform: `translate(calc(${translateX} + ${left}px),${y}px)`
+      }
+    })
+
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -125,7 +140,8 @@ export default defineComponent({
       handleAfterLeave,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      offsetStyle: offsetStyleRef
     }
   },
   render () {
@@ -157,6 +173,7 @@ export default defineComponent({
                 <sup
                   class={`${mergedClsPrefix}-badge-sup`}
                   title={getTitleAttribute(this.value)}
+                  style={this.offsetStyle}
                 >
                   {resolveSlot($slots.value, () => [
                     !this.dot ? (
