@@ -42,6 +42,10 @@ export const cardBaseProps = {
   hoverable: Boolean,
   role: String,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
+  tag: {
+    type: String as PropType<keyof HTMLElementTagNameMap>,
+    default: 'div'
+  },
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -172,11 +176,12 @@ export default defineComponent({
       rtlEnabled,
       onRender,
       embedded,
+      tag: Component,
       $slots
     } = this
     onRender?.()
     return (
-      <div
+      <Component
         class={[
           `${mergedClsPrefix}-card`,
           this.themeClass,
@@ -283,7 +288,7 @@ export default defineComponent({
               </div>
             )
         )}
-      </div>
+      </Component>
     )
   }
 })
