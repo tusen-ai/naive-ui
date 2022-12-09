@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-checkbox-group v-model:value="cities" is-button-group>
+  <n-checkbox-group v-model:value="cities">
     <n-checkbox-button value="Beijing" label="北京" />
     <n-checkbox-button value="Shanghai" label="上海" />
     <n-checkbox-button value="Guangzhou" label="广州" />

@@ -123,7 +123,6 @@ export const checkboxGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  isButtonGroup: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<
   (

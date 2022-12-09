@@ -6,7 +6,7 @@ Sometimes a radio button group can look more elegant.
 </markdown>
 
 <template>
-  <n-checkbox-group v-model:value="cities" is-button-group>
+  <n-checkbox-group v-model:value="cities">
     <n-checkbox-button value="Beijing" label="Beijing" />
     <n-checkbox-button value="Shanghai" label="Shanghai" />
     <n-checkbox-button value="Guangzhou" label="Guangzhou" />
