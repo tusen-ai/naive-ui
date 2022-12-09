@@ -1,6 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
 - 修复 `indicator-placement` 为 `inside` 时，`indicator-text-color` 不生效的问题
+
+- 修复 `n-image` 的预览工具栏报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
 
 ## 2.34.2
 
