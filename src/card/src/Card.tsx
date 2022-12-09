@@ -41,11 +41,11 @@ export const cardBaseProps = {
   },
   hoverable: Boolean,
   role: String,
-  onClose: [Function, Array] as PropType<MaybeArray<() => void>>
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
   tag: {
     type: String as PropType<keyof HTMLElementTagNameMap>,
     default: 'div'
-  },
+  }
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
