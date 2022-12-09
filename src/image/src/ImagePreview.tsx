@@ -342,7 +342,7 @@ export default defineComponent({
       if (!preview) return
       const { style } = preview
       const controlledStyle = normalizeStyle(
-        imageContext?.previewedImgPropsRef.value.style
+        imageContext?.previewedImgPropsRef?.value?.style
       )
       let controlledStyleString = ''
       if (typeof controlledStyle === 'string') {
