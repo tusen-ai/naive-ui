@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-image` 的预览工具栏报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
+- 修复 `n-upload` 属性 `default-file-list` 未响应变化，管理 [#4151](https://github.com/tusen-ai/naive-ui/issues/4151)
 
 ## 2.34.2
 

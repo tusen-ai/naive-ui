@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- Fix 'n-image' preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix `n-image` preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix `n-upload` make prop `default-file-list` reactively, close [#4151](https://github.com/tusen-ai/naive-ui/issues/4151).
 
 ## 2.34.2
 

@@ -393,8 +393,9 @@ export default defineComponent({
       }
       return false
     })
-    const uncontrolledFileListRef = ref(props.defaultFileList)
+    const _uncontrolledFileListRef = computed(() => props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
+    const uncontrolledFileListRef = ref(_uncontrolledFileListRef)
     const inputElRef = ref<HTMLInputElement | null>(null)
     const draggerInsideRef = {
       value: false
@@ -403,7 +404,7 @@ export default defineComponent({
     const xhrMap = new Map<string, XMLHttpRequest>()
     const _mergedFileListRef = useMergedState(
       controlledFileListRef,
-      uncontrolledFileListRef
+      _uncontrolledFileListRef
     )
     const mergedFileListRef = computed(() =>
       _mergedFileListRef.value.map(createSettledFileInfo)
