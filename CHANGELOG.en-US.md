@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix 'n-image' preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix 'n-image' error while operating the previewed image, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
 
 ## 2.34.2
 
