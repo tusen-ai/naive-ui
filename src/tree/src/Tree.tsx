@@ -79,7 +79,8 @@ const ITEM_SIZE = 30 // 24 + 3 + 3
 export function createTreeMateOptions<T> (
   keyField: string,
   childrenField: string,
-  disabledField: string
+  disabledField: string,
+  ignoreEmptyChildren: boolean
 ): TreeMateOptions<T, T, T> {
   return {
     getIsGroup () {
@@ -89,7 +90,12 @@ export function createTreeMateOptions<T> (
       return (node as any)[keyField]
     },
     getChildren (node: T) {
-      return (node as any)[childrenField]
+      const children = (node as any)[childrenField]
+      return ignoreEmptyChildren
+        ? children.length
+          ? children
+          : undefined
+        : children
     },
     getDisabled (node: T) {
       return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
@@ -281,6 +287,10 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ignoreEmptyChildren: {
+    type: Boolean,
+    default: false
+  },
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -412,7 +422,8 @@ export default defineComponent({
         createTreeMateOptions(
           props.keyField,
           props.childrenField,
-          props.disabledField
+          props.disabledField,
+          props.ignoreEmptyChildren
         )
       )
     )

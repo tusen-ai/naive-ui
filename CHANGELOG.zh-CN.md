@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-tree` 新增 `ignore-empty-children` 属性，关闭 [#4128](https://github.com/tusen-ai/naive-ui/issues/4128)
+
 ### Fixes
 
 - 修复 `n-image` 的预览工具栏报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-tree` adds `ignore-empty-children` prop, close [#4128](https://github.com/tusen-ai/naive-ui/issues/4128)
+
 ### Fixes
 
 - Fix 'n-image' preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
