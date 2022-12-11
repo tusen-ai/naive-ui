@@ -6,7 +6,7 @@ const babel = require('@rollup/plugin-babel').default
 const replace = require('@rollup/plugin-replace')
 const commonjs = require('@rollup/plugin-commonjs')
 const esbuild = require('rollup-plugin-esbuild').default
-const { terser } = require('rollup-plugin-terser')
+const terser = require('@rollup/plugin-terser')
 
 const extensions = ['.mjs', '.js', '.json', '.ts']
 
