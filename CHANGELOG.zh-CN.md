@@ -2,9 +2,16 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-badge` 新增 `offset` 属性，关闭 [#4149](https://github.com/tusen-ai/naive-ui/issues/4149)
+- `n-card` 新增 `tag` 属性
+
 ### Fixes
 
 - 修复 `n-image` 操作预览图片时报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
+- 修复 `n-tree` 的`cannot access 'mergedFilterRef' before initialization`报错，关闭 [#4134](https://github.com/tusen-ai/naive-ui/issues/4134)
+- 修复 `n-menu` 无法通过 `dropdown-props` 覆盖子菜单 dropdown 的 `trigger`，关闭 [#4147](https://github.com/tusen-ai/naive-ui/issues/4147)
 
 ## 2.34.2
 
