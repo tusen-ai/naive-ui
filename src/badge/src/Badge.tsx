@@ -42,7 +42,9 @@ export const badgeProps = {
   showZero: Boolean,
   processing: Boolean,
   color: String,
-  offset: Array as unknown as PropType<[number | string, number | string]>
+  offset: Array as unknown as PropType<
+  readonly [number | string, number | string]
+  >
 } as const
 
 export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
@@ -117,17 +119,16 @@ export default defineComponent({
       )
       : undefined
 
-    const offsetStyleRef = computed<CSSProperties | undefined>(() => {
-      if (!props.offset) return
-      const [x, y] = props.offset
-
-      const left = rtlEnabledRef?.value
-        ? -Number.parseInt(x as string, 10)
-        : Number.parseInt(x as string, 10)
-      const translateX = rtlEnabledRef?.value ? '50%' : '-50%'
-
+    const offsetStyleRef = computed(() => {
+      const { offset } = props
+      if (!offset) return undefined
+      const [x, y] = offset
+      const reslovedOffsetX = typeof x === 'number' ? `${x}px` : x
+      const reslovedOffsetY = typeof y === 'number' ? `${y}px` : y
       return {
-        transform: `translate(calc(${translateX} + ${left}px),${y}px)`
+        transform: `translate(calc(${
+          rtlEnabledRef?.value ? '50%' : '-50%'
+        } + ${reslovedOffsetX}), ${reslovedOffsetY})`
       }
     })
 

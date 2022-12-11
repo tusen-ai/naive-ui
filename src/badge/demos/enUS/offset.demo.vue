@@ -15,7 +15,7 @@ export default defineComponent({
   setup () {
     return {
       value: ref(5),
-      offset: ref<[string | number, string | number]>(['10', '10'])
+      offset: [-16, 16] as const
     }
   }
 })
