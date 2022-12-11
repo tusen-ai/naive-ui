@@ -374,6 +374,20 @@ export default defineComponent({
       return virtualListInstRef.value?.itemsElRef
     }
 
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeOption): boolean => {
+        if (!pattern.length) return true
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
+      }
+    })
+
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeOption[]
       highlightKeySet: Set<Key> | null
@@ -536,20 +550,6 @@ export default defineComponent({
       //   return null
       // }
       return droppingNode.parent
-    })
-
-    const mergedFilterRef = computed(() => {
-      const { filter } = props
-      if (filter) return filter
-      const { labelField } = props
-      return (pattern: string, node: TreeOption): boolean => {
-        if (!pattern.length) return true
-        const label = node[labelField]
-        if (typeof label === 'string') {
-          return label.toLowerCase().includes(pattern.toLowerCase())
-        }
-        return false
-      }
     })
 
     // shallow watch data
