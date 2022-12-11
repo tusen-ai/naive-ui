@@ -15,6 +15,7 @@ custom-content.vue
 color.vue
 raw.vue
 rtl-debug.vue
+offset.vue
 ```
 
 ## API
@@ -31,6 +32,7 @@ rtl-debug.vue
 | show | `boolean` | `true` | 标记受控显示 |
 | type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |
 | value | `string \| number` | `undefined` | 标记数量 |
+| offset | `[string \| number,string \| number]` | `undefined` | 距默认位置左侧、上方的偏移量 |
 
 ### Badge Slots
 

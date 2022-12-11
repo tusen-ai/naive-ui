@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-badge` 新增 `offset` 属性，关闭 [#4149](https://github.com/tusen-ai/naive-ui/issues/4149)
 - `n-card` 新增 `tag` 属性
 
 ### Fixes
