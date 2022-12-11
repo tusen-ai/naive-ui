@@ -35,10 +35,7 @@ export const cardBaseProps = {
     type: Boolean,
     default: true as boolean
   },
-  closable: {
-    type: Boolean,
-    default: false as boolean
-  },
+  closable: Boolean,
   hoverable: Boolean,
   role: String,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>,

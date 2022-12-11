@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-card` 新增 `tag` 属性
+
 ### Fixes
 
 - 修复 `n-image` 的预览工具栏报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
