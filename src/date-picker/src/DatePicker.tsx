@@ -167,7 +167,7 @@ export default defineComponent({
       watchEffect(() => {
         if (props.onChange !== undefined) {
           warnOnce(
-            'data-picker',
+            'date-picker',
             '`on-change` is deprecated, please use `on-update:value` instead.'
           )
         }
@@ -389,7 +389,7 @@ export default defineComponent({
         }
         default: {
           warn(
-            'data-picker',
+            'date-picker',
             "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
           )
           break
