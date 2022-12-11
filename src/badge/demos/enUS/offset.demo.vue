@@ -15,7 +15,7 @@ export default defineComponent({
   setup () {
     return {
       value: ref(5),
-      offset: [-16, 16] as const
+      offset: [-17, 17] as const
     }
   }
 })
