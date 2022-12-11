@@ -9,8 +9,9 @@
 
 ### Fixes
 
-- Fix 'n-image' preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
-- Fix 'n-tree' cannot access 'mergedFilterRef' before initialization error, close [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
+- Fix `n-image` preview toolbar error, closes [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix `n-tree` cannot access `mergedFilterRef` before initialization error, closes [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
+- Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
 
 ## 2.34.2
 
