@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-card` adds `tag` prop
+
 ### Fixes
 
 - Fix 'n-image' preview toolbar error, close [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
