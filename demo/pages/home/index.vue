@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watchEffect, onBeforeUnmount } from 'vue'
+import { defineComponent, computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
@@ -70,17 +70,6 @@ export default defineComponent({
   },
   setup () {
     const isMobileRef = useIsMobile()
-    const { locale } = i18n()
-    watchEffect(() => {
-      if (locale.value === 'zh-CN') {
-        document.documentElement.style.filter = 'grayscale(100%)'
-      } else {
-        document.documentElement.style.filter = ''
-      }
-    })
-    onBeforeUnmount(() => {
-      document.documentElement.style.filter = ''
-    })
     return {
       isMobile: isMobileRef,
       isTablet: useIsTablet(),
