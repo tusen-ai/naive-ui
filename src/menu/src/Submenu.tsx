@@ -179,6 +179,7 @@ export const NSubmenu = defineComponent({
     return this.root ? (
       <NDropdown
         size="large"
+        trigger="hover"
         {...this.menuProps?.dropdownProps}
         themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
         theme={this.mergedTheme.peers.Dropdown}
@@ -187,7 +188,6 @@ export const NSubmenu = defineComponent({
           optionIconSizeLarge: '18px'
         }}
         value={this.mergedValue}
-        trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}
         keyField={this.menuProps.keyField}

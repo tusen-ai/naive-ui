@@ -1,7 +1,7 @@
 <markdown>
 # Custom parsing
 
-You can use `parse` and `format` to custom parsing & display. For example add thousand separator. Usually they should be set together.
+You can use `parse` and `format` to custom parsing & display. For example add thousand separator. Usually they should be set together, especially you have a custom `validator` set.
 
 Use `parse` and `format` will disable `update-value-on-input`.
 </markdown>
