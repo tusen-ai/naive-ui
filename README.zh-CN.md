@@ -74,6 +74,10 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 [Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)
 
+## 在 Cloud IDE 中预览
+
+[https://idegithub.com/tusen-ai/naive-ui](https://idegithub.com/tusen-ai/naive-ui)
+
 ## 贡献
 
 请参考 [CONTRIBUTING.zh-CN.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)
