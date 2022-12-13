@@ -13,7 +13,7 @@ function getPartsOfDemo (text) {
   let template = text.slice(firstIndex + 10)
   const lastIndex = template.lastIndexOf('</template>')
   template = template.slice(0, lastIndex)
-  const script = text.match(/<script.*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
+  const script = text.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText = text
     .match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]
@@ -28,7 +28,13 @@ function getPartsOfDemo (text) {
       contentTokens.push(token)
     }
   }
-  const languageType = text.includes('lang="ts"') ? 'ts' : 'js'
+  const scriptAttributes = text
+    .match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1]
+    .trim()
+  const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
+  const apiType = scriptAttributes?.includes('setup')
+    ? 'composition'
+    : 'options'
   return {
     template,
     script,
@@ -37,7 +43,8 @@ function getPartsOfDemo (text) {
     content: marked.parser(contentTokens, {
       renderer: mdRenderer
     }),
-    language: languageType
+    language: languageType,
+    api: apiType
   }
 }
 
