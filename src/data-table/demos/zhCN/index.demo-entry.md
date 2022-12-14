@@ -68,6 +68,7 @@ keep-alive-debug.vue
 ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
+pagination-slots.vue
 ```
 
 ## API
@@ -221,7 +222,8 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 ### DataTable Slots
 
-| 名称    | 参数 | 说明                  | 版本   |
-| ------- | ---- | --------------------- | ------ |
-| empty   | `()` | 表格数据为空时的展示  |        |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| empty | `()` | 表格数据为空时的展示 |  |
 | loading | `()` | 表格 loading 时的展示 | 2.34.0 |
+| pagination-[slotName](pagination#Pagination-Slots) | `()` | slotName 与[Pagination Slots](pagination#Pagination-Slots)是一致的。 |  |

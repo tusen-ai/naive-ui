@@ -1,4 +1,4 @@
-import { CSSProperties } from 'vue'
+import { CSSProperties, Slots } from 'vue'
 import { depx } from 'seemly'
 import { formatLength } from '../../_utils'
 import type {
@@ -12,6 +12,7 @@ import type {
   TableColumn,
   TableExpandColumn
 } from './interface'
+import { RemoveReadonly } from '../../_utils/naive/extract-public-props'
 
 export const SELECTION_COL_WIDTH = 40
 export const EXPAND_COL_WIDTH = 40
@@ -170,4 +171,27 @@ export function isColumnSorting (
         state.columnKey === (column as TableBaseColumn).key && state.order
     ) !== undefined
   )
+}
+
+// support data-table pagination slots
+export function resolvePaginationSlots ($slots: Slots): RemoveReadonly<Slots> {
+  const tempSlots: RemoveReadonly<Slots> = {}
+  const supportedSlotNames = [
+    'goto',
+    'label',
+    'next',
+    'prev',
+    'prefix',
+    'suffix'
+  ]
+  for (const slotName in $slots) {
+    const slot = $slots[slotName]
+    if (slotName.startsWith('pagination-')) {
+      const processedSlotName = slotName.replace(/^pagination-/, '')
+      if (supportedSlotNames.includes(processedSlotName)) {
+        tempSlots[processedSlotName] = slot
+      }
+    }
+  }
+  return tempSlots
 }

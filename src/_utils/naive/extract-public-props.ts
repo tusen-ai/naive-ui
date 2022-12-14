@@ -3,7 +3,7 @@ import { useTheme } from '../../_mixins'
 
 type themePropKeys = keyof typeof useTheme.props
 
-type RemoveReadonly<T> = {
+export type RemoveReadonly<T> = {
   -readonly [key in keyof T]: T[key]
 }
 

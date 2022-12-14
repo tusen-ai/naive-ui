@@ -26,6 +26,7 @@ import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
 import style from './styles/index.cssr'
+import { resolvePaginationSlots } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
@@ -430,7 +431,9 @@ export default defineComponent({
               themeOverrides={this.mergedTheme.peerOverrides.Pagination}
               disabled={this.loading}
               {...this.mergedPagination}
-            />
+            >
+              {resolvePaginationSlots(this.$slots)}
+            </NPagination>
           </div>
         ) : null}
         <Transition name="fade-in-scale-up-transition">

@@ -58,6 +58,7 @@ switchable-editable
 context-menu.vue
 async-expand.vue
 render-cell.vue
+pagination-slots.vue
 ```
 
 ## API
@@ -211,7 +212,8 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ### DataTable Slots
 
-| Name    | Type | Description                                       | Version |
-| ------- | ---- | ------------------------------------------------- | ------- |
-| empty   | `()` | Custom description when data of table is empty.   |         |
-| loading | `()` | Custom description when data of table is loading. | 2.34.0  |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| empty | `()` | Custom description when data of table is empty. |  |
+| loading | `()` | Custom description when data of table is loading. | 2.34.0 |
+| pagination-[slotName](pagination#Pagination-Slots) | `()` | slotName is same as [Pagination Slots](pagination#Pagination-Slots). |  |

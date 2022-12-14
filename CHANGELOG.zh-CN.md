@@ -6,6 +6,7 @@
 
 - `n-badge` 新增 `offset` 属性，关闭 [#4149](https://github.com/tusen-ai/naive-ui/issues/4149)
 - `n-card` 新增 `tag` 属性
+- `n-data-table` 新增分页器插槽，关闭 [#4133](https://github.com/tusen-ai/naive-ui/issues/4133)
 
 ### Fixes
 
