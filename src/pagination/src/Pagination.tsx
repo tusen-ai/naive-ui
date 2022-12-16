@@ -87,6 +87,10 @@ export const paginationProps = {
     type: Number,
     default: 9
   },
+  consistentMenuWidth: {
+    type: Boolean,
+    default: false
+  },
   prev: Function as PropType<RenderPrev>,
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
@@ -516,6 +520,7 @@ export default defineComponent({
       showFastBackwardMenu: showFastBackwardMenuRef,
       fastForwardActive: fastForwardActiveRef,
       fastBackwardActive: fastBackwardActiveRef,
+      consistentMenuWidth: props.consistentMenuWidth,
       handleMenuSelect,
       handleFastForwardMouseenter,
       handleFastForwardMouseleave,
@@ -871,6 +876,7 @@ export default defineComponent({
                   theme={mergedTheme.peers.Select}
                   themeOverrides={mergedTheme.peerOverrides.Select}
                   onUpdateValue={handleSizePickerChange}
+                  consistentMenuWidth={this.consistentMenuWidth}
                 />
               ) : null
             }
