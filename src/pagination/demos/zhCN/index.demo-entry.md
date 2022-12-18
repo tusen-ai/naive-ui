@@ -32,9 +32,10 @@ rtl-debug.vue
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | 不同部分的展示顺序 | 2.32.2 |
+| goto | `() => VNodeChild` | `undefined` | 渲染快速跳转的文本内容 | NEXT_VERSION |
+| item-count | `number` | `undefined` | 总条数 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
-| item-count | `number` | `undefined` | 总条数 |  |
 | label | `PaginationRenderLabel` | `undefined` | 每一项的内容 | 2.24.0 |
 | page-count | `number` | `1` | 总页数 |  |
 | page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | 每页条数， 可自定义 |  |

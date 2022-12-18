@@ -30,9 +30,10 @@ page-size-option.vue
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | 2.32.2 |
+| goto | `() => VNodeChild` | `undefined` | Fast jump content render function. | NEXT_VERSION |
+| item-count | `number` | `undefined` | Total number. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
-| item-count | `number` | `undefined` | Total number. |  |
 | label | `PaginationRenderLabel` | `undefined` | Item content. | 2.24.0 |
 | page-count | `number` | `1` | Total pages. |  |
 | page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | Number of items per page, can be customize. |  |

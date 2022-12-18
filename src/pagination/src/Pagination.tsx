@@ -47,6 +47,7 @@ import type { Size as SelectSize } from '../../select/src/interface'
 import {
   PaginationRenderLabel,
   PaginationSizeOption,
+  RenderGoto,
   RenderNext,
   RenderPrefix,
   RenderPrev,
@@ -91,6 +92,7 @@ export const paginationProps = {
   selectProps: Object as PropType<SelectProps>,
   prev: Function as PropType<RenderPrev>,
   next: Function as PropType<RenderNext>,
+  goto: Function as PropType<RenderGoto>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
   label: Function as PropType<PaginationRenderLabel>,
@@ -559,6 +561,7 @@ export default defineComponent({
       prefix,
       suffix,
       label,
+      goto,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -881,7 +884,9 @@ export default defineComponent({
             case 'quick-jumper':
               return !simple && showQuickJumper ? (
                 <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-                  {resolveSlot(this.$slots.goto, () => [locale.goto])}
+                  {goto
+                    ? goto()
+                    : resolveSlot(this.$slots.goto, () => [locale.goto])}
                   <NInput
                     value={jumperValue}
                     onUpdateValue={handleJumperInput}
