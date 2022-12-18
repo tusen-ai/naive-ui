@@ -64,7 +64,8 @@ import type {
   TreeNodeProps,
   CheckOnClick,
   TreeInst,
-  GetChildren
+  GetChildren,
+  OnLoad
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -168,7 +169,6 @@ export type OnUpdateExpandedKeysImpl = (
     action: 'filter'
   }
 ) => void
-type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   allowCheckingNotLoaded: Boolean,

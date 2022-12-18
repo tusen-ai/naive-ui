@@ -14,6 +14,7 @@
 - `n-form` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
 - `n-radio` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
 - `n-checkbox` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
+- `n-tree` 的 `on-load` 属性支持返回值 resolve false 来关闭加载动画，关闭 [#4038](https://github.com/tusen-ai/naive-ui/issues/4038)
 
 ### Fixes
 

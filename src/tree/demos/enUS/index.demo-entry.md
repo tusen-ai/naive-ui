@@ -61,7 +61,7 @@ checkbox-placement.vue
 | disabled-field | `string` | `'disabled'` | The disabled field in `TreeOption`. | 2.32.2 |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
-| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
+| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. If not data is loaded, you should make promise resolve `false` or be rejected, nor the loading animation won't end. | Non void Promise NEXT_VERSION |
 | pattern | `string` | `''` | What to search by default. |  |
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |

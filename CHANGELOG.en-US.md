@@ -14,6 +14,7 @@
 - `n-form` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-radio` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-checkbox` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
+- `n-tree`'s `on-load` prop allows returned promise to resolve `false` to finish loading effect, closes [#4038](https://github.com/tusen-ai/naive-ui/issues/4038).
 
 ### Fixes
 
