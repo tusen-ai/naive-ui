@@ -65,6 +65,7 @@ custom-field.vue
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | show-checkmark | `boolean` | `true` | Whether to show checkmark in multiple select mode. | 2.33.4 |
+| show-on-focus | `boolean` | `false` | Whether to show menu on focus. | NEXT_VERSION |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
