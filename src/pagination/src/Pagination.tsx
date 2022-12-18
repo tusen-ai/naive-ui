@@ -15,6 +15,7 @@ import {
 import { useMergedState } from 'vooks'
 import { NPopselect } from '../../popselect'
 import { NSelect } from '../../select'
+import type { SelectProps } from '../../select'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -87,10 +88,7 @@ export const paginationProps = {
     type: Number,
     default: 9
   },
-  consistentMenuWidth: {
-    type: Boolean,
-    default: false
-  },
+  selectProps: Object as PropType<SelectProps>,
   prev: Function as PropType<RenderPrev>,
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
@@ -520,7 +518,6 @@ export default defineComponent({
       showFastBackwardMenu: showFastBackwardMenuRef,
       fastForwardActive: fastForwardActiveRef,
       fastBackwardActive: fastBackwardActiveRef,
-      consistentMenuWidth: props.consistentMenuWidth,
       handleMenuSelect,
       handleFastForwardMouseenter,
       handleFastForwardMouseleave,
@@ -866,9 +863,11 @@ export default defineComponent({
             case 'size-picker': {
               return !simple && showSizePicker ? (
                 <NSelect
-                  to={this.to}
+                  consistentMenuWidth={false}
                   placeholder=""
                   showCheckmark={false}
+                  to={this.to}
+                  {...this.selectProps}
                   size={selectSize}
                   options={pageSizeOptions}
                   value={mergedPageSize}
@@ -876,7 +875,6 @@ export default defineComponent({
                   theme={mergedTheme.peers.Select}
                   themeOverrides={mergedTheme.peerOverrides.Select}
                   onUpdateValue={handleSizePickerChange}
-                  consistentMenuWidth={this.consistentMenuWidth}
                 />
               ) : null
             }

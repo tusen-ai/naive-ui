@@ -39,8 +39,8 @@ page-size-option.vue
 | page-size | `number` | `undefined` | Page size in controlled mode. |  |
 | page-slot | `number` | `9` | The number of pages displayed. |  |
 | page | `number` | `undefined` | Current page in controlled mode. |  |
-| consistent-menu-width | `boolean` | `false` | The consistent-menu-width property of the drop-down page data selector | NEXT_VERSION |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
+| select-props | `SelectProps` | `undefined` | Page size select's props. | NEXT_VERSION |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | simple | `boolean` | `false` | Whether to use simple mode. | 2.32.2 |

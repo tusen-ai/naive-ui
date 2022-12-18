@@ -41,8 +41,8 @@ rtl-debug.vue
 | page-size | `number` | `undefined` | 受控模式下的分页大小 |  |
 | page-slot | `number` | `9` | 页码显示的个数 |  |
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
-| consistent-menu-width | `boolean` | `false` | 下拉页数据选择器的 consistent-menu-width 属性 | NEXT_VERSION |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
+| select-props | `SelectProps` | `undefined` | Page size select's props. | NEXT_VERSION |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | 2.29.0 |
 | simple | `boolean` | `false` | 是否显示为简单分页 | 2.32.2 |
