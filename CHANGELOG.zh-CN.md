@@ -6,7 +6,8 @@
 
 - `n-badge` 新增 `offset` 属性，关闭 [#4149](https://github.com/tusen-ai/naive-ui/issues/4149)
 - `n-card` 新增 `tag` 属性
-- `n-pagination` 新增 `select-props` 属性，关闭[#4199](https://github.com/tusen-ai/naive-ui/issues/4199)
+- `n-pagination` 新增 `select-props` 属性，关闭 [#4199](https://github.com/tusen-ai/naive-ui/issues/4199)
+- `n-select` 新增 `show-on-focus` 属性，关闭 [#4191](https://github.com/tusen-ai/naive-ui/issues/4191)
 
 ### Fixes
 
