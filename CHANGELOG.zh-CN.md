@@ -9,6 +9,7 @@
 - `n-pagination` 新增 `select-props` 属性，关闭 [#4199](https://github.com/tusen-ai/naive-ui/issues/4199)
 - `n-select` 新增 `show-on-focus` 属性，关闭 [#4191](https://github.com/tusen-ai/naive-ui/issues/4191)
 - `n-pagination` 新增 `goto` 属性，关闭 [#4133](https://github.com/tusen-ai/naive-ui/issues/4133)
+- `n-upload` 新增 `keep-file-after-finish` 属性，关闭 [#3868](https://github.com/tusen-ai/naive-ui/issues/3868)
 
 ### Fixes
 

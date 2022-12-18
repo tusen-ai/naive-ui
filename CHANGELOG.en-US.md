@@ -9,6 +9,7 @@
 - `n-pagination` adds `select-props` prop, closes [#4199](https://github.com/tusen-ai/naive-ui/issues/4199).
 - `n-select` adds `show-on-focus` prop, closes [#4191](https://github.com/tusen-ai/naive-ui/issues/4191).
 - `n-pagination` adds `goto` prop, closes [#4133](https://github.com/tusen-ai/naive-ui/issues/4133).
+- `n-upload` adds `keep-file-after-finish` prop, closes [#3868](https://github.com/tusen-ai/naive-ui/issues/3868).
 
 ### Fixes
 
