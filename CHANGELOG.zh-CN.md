@@ -5,16 +5,28 @@
 ### Feats
 
 - `n-tree` 新增 `ignore-empty-children` 属性，关闭 [#4128](https://github.com/tusen-ai/naive-ui/issues/4128)
+- `n-badge` 新增 `offset` 属性，关闭 [#4149](https://github.com/tusen-ai/naive-ui/issues/4149)
+- `n-card` 新增 `tag` 属性
+- `n-pagination` 新增 `select-props` 属性，关闭 [#4199](https://github.com/tusen-ai/naive-ui/issues/4199)
+- `n-select` 新增 `show-on-focus` 属性，关闭 [#4191](https://github.com/tusen-ai/naive-ui/issues/4191)
+- `n-pagination` 新增 `goto` 属性，关闭 [#4133](https://github.com/tusen-ai/naive-ui/issues/4133)
+- `n-upload` 新增 `keep-file-after-finish` 属性，关闭 [#3868](https://github.com/tusen-ai/naive-ui/issues/3868)
 
 ### Fixes
 
-- 修复 `n-image` 的预览工具栏报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
+- 修复 `indicator-placement` 为 `inside` 时，`indicator-text-color` 不生效的问题
+- 修复 `n-image` 操作预览图片时报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
+- 修复 `n-tree` 的`cannot access 'mergedFilterRef' before initialization`报错，关闭 [#4134](https://github.com/tusen-ai/naive-ui/issues/4134)
+- 修复 `n-menu` 无法通过 `dropdown-props` 覆盖子菜单 dropdown 的 `trigger`，关闭 [#4147](https://github.com/tusen-ai/naive-ui/issues/4147)
+- 修复 `n-ellipsis` 在使用 `keep-alive` 的情况下关闭异常，关闭 [#4079](https://github.com/tusen-ai/naive-ui/issues/4079)
+- 修复 `n-upload` 对于名称为图片的文件不显示预览图，关闭 [#4198](https://github.com/tusen-ai/naive-ui/issues/4198)
 
 ## 2.34.2
 
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
+- 修复 `n-image` 预览工具栏操作报错，关闭 [#4144](https://github.com/tusen-ai/naive-ui/issues/4144)
 
 ## 2.34.1
 

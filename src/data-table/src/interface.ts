@@ -175,9 +175,7 @@ export type SortOrderFlag = 1 | -1 | 0
 
 export type RowData = Record<string, any>
 
-export interface InternalRowData {
-  [key: string]: unknown
-}
+export type InternalRowData = Record<string, unknown>
 
 export type CreateRowKey<T = InternalRowData> = (row: T) => RowKey
 export type CreateRowClassName<T = InternalRowData> = (
@@ -474,9 +472,10 @@ export interface SortState {
   sorter: Sorter | boolean | 'default'
 }
 
-export interface FilterState {
-  [key: string]: FilterOptionValue[] | FilterOptionValue | null | undefined
-}
+export type FilterState = Record<
+string,
+FilterOptionValue[] | FilterOptionValue | null | undefined
+>
 
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
@@ -523,9 +522,7 @@ export interface SummaryCell {
   colSpan?: number
   rowSpan?: number
 }
-export interface SummaryRowData {
-  [key: string]: SummaryCell
-}
+export type SummaryRowData = Record<string, SummaryCell>
 
 export type DataTableOnLoad = (node: RowData) => Promise<void>
 
