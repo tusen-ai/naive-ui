@@ -11,6 +11,9 @@
 - `n-select` adds `show-on-focus` prop, closes [#4191](https://github.com/tusen-ai/naive-ui/issues/4191).
 - `n-pagination` adds `goto` prop, closes [#4133](https://github.com/tusen-ai/naive-ui/issues/4133).
 - `n-upload` adds `keep-file-after-finish` prop, closes [#3868](https://github.com/tusen-ai/naive-ui/issues/3868).
+- `n-form` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
+- `n-radio` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
+- `n-checkbox` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 
 ### Fixes
 
