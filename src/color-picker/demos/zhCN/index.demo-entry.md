@@ -40,8 +40,7 @@ close-debug.vue
 | on-confirm | `(value: string) => void` | `undefined` | 点击确定按钮的回调 | 2.29.0 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |  |
-| actions | `Array<'confirm'> \| null` | `null` | 显示按钮 |  |
-| internal-actions | `Array<'redo' \| 'undo' \| 'clear'>` | `undefined` | 内置操作选项 |  |
+| actions | `Array<'confirm' \| 'clear'> \| null` | `null` | 显示按钮 |  |
 
 ### ColorPicker Slots
 
