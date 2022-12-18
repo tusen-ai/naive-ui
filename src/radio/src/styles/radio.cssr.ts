@@ -95,6 +95,7 @@ export default cB('radio', `
   cE('label', `
     color: var(--n-text-color);
     padding: var(--n-label-padding);
+    font-weight: var(--n-label-font-weight);
     display: inline-block;
     transition: color .3s var(--n-bezier);
   `),
