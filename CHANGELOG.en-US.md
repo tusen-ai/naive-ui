@@ -5,6 +5,35 @@
 ### Feats
 
 - `n-image-group` adds `loop` prop.
+- `n-badge` adds `offset` prop, closes [#4149](https://github.com/tusen-ai/naive-ui/issues/4149).
+- `n-card` adds `tag` prop
+- `n-pagination` adds `select-props` prop, closes [#4199](https://github.com/tusen-ai/naive-ui/issues/4199).
+- `n-select` adds `show-on-focus` prop, closes [#4191](https://github.com/tusen-ai/naive-ui/issues/4191).
+- `n-pagination` adds `goto` prop, closes [#4133](https://github.com/tusen-ai/naive-ui/issues/4133).
+- `n-upload` adds `keep-file-after-finish` prop, closes [#3868](https://github.com/tusen-ai/naive-ui/issues/3868).
+
+### Fixes
+
+- Fix `n-image` error while operating the previewed image, closes [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix `n-tree` cannot access `mergedFilterRef` before initialization error, closes [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
+- Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
+- Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
+- Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
+
+## 2.34.2
+
+### Fixes
+
+- Fix `n-config-provider`'s katex type issue.
+- Fix `n-image` error in toolbar operation during preview, closes [#4144](https://github.com/tusen-ai/naive-ui/issues/4144).
+
+## 2.34.1
+
+### Fixes
+
+- Fix `n-select` will print useless content in console in multiple select mode.
+- Fix `n-tree` misses `getCheckedData` and `getIndeterminateData` methods, closes [#4064](https://github.com/tusen-ai/naive-ui/issues/4064).
+- Fix `n-data-table`'s column's `align` doesn't work for table header, closes [#4063](https://github.com/tusen-ai/naive-ui/issues/4063).
 
 ## 2.34.0
 

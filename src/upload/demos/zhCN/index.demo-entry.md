@@ -44,6 +44,7 @@ debug.vue
 | input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
+| keep-file-after-finish | `boolean` | `false` | 上传结束后是否在文件信息中保留 File 对象 | NEXT_VERSION |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |
@@ -60,6 +61,7 @@ debug.vue
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
+| keep-file-after-finish | `boolean` | `false` | 文件上传结束的回调中保留 File，不被置为 null |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |

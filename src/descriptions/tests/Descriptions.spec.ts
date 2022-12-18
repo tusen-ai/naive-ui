@@ -39,6 +39,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions-table-content').text()).toBe(
       'test-default'
     )
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -51,6 +52,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--bordered'
     )
+    wrapper.unmount()
   })
 
   it('should work with `column` prop', async () => {
@@ -65,6 +67,7 @@ describe('n-descriptions', () => {
     expect(
       wrapper.find('.n-descriptions-table-row').element.childNodes.length
     ).toBe(4)
+    wrapper.unmount()
   })
 
   it('should work with `label-align` prop', async () => {
@@ -84,6 +87,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--right-label-align'
     )
+    wrapper.unmount()
   })
 
   it('should work with `label-placement` prop', async () => {
@@ -98,6 +102,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--left-label-placement'
     )
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -117,6 +122,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--large-size'
     )
+    wrapper.unmount()
   })
 
   it('should work with `title` prop', async () => {
@@ -128,6 +134,7 @@ describe('n-descriptions', () => {
     await wrapper.setProps({ title: 'test' })
     expect(wrapper.find('.n-descriptions-header').exists()).toBe(true)
     expect(wrapper.find('.n-descriptions-header').text()).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `separator` prop', async () => {
@@ -141,6 +148,7 @@ describe('n-descriptions', () => {
 
     await wrapper.setProps({ separator: '/' })
     expect(wrapper.find('.n-descriptions-separator').text()).toEqual('/')
+    wrapper.unmount()
   })
 
   it('should work with `content-style` prop', () => {
@@ -156,6 +164,7 @@ describe('n-descriptions', () => {
     expect(
       wrapper.find('.n-descriptions-table-content').attributes('style')
     ).toBe('background-color: red;')
+    wrapper.unmount()
   })
 
   it('should work with `label-style` prop', () => {
@@ -171,5 +180,6 @@ describe('n-descriptions', () => {
     expect(
       wrapper.find('.n-descriptions-table-header').attributes('style')
     ).toBe('font-size: 30px;')
+    wrapper.unmount()
   })
 })

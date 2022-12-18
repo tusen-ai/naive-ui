@@ -44,7 +44,7 @@ expand-debug.vue
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |  |
 | cascade | `boolean` | `false` | 是否关联选项 |  |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定勾选回调返回的值，`all` 表示回调函数值为全部选中节点；`parent` 表示回调函数值为父节点（当父节点下所有子节点都选中时）；`child` 表示回调函数值为子节点 |  |
-| checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |  |
+| checkable | `boolean` | `false` | 是否显示选择框 |  |
 | checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | 2.28.3 |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |  |
@@ -107,5 +107,5 @@ expand-debug.vue
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
-| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
-| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |

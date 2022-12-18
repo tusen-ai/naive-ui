@@ -237,7 +237,7 @@ export default defineComponent({
     const imageContext = inject(imageContextKey, null)
 
     function handlePreviewMousedown (e: MouseEvent): void {
-      imageContext?.previewedImgPropsRef.value.onMousedown?.(e)
+      imageContext?.previewedImgPropsRef.value?.onMousedown?.(e)
       if (e.button !== 0) return
 
       const { clientX, clientY } = e
@@ -255,7 +255,7 @@ export default defineComponent({
       on('mouseup', document, handleMouseUp)
     }
     function handlePreviewDblclick (e: MouseEvent): void {
-      imageContext?.previewedImgPropsRef.value.onDblclick?.(e)
+      imageContext?.previewedImgPropsRef.value?.onDblclick?.(e)
       const originalImageSizeScale = getOrignalImageSizeScale()
       scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
       derivePreviewStyle()
@@ -342,7 +342,7 @@ export default defineComponent({
       if (!preview) return
       const { style } = preview
       const controlledStyle = normalizeStyle(
-        imageContext?.previewedImgPropsRef.value.style
+        imageContext?.previewedImgPropsRef.value?.style
       )
       let controlledStyleString = ''
       if (typeof controlledStyle === 'string') {
@@ -462,7 +462,7 @@ export default defineComponent({
         displayedRef.value = false
       },
       handleDragStart: (e: DragEvent) => {
-        imageContext?.previewedImgPropsRef.value.onDragstart?.(e)
+        imageContext?.previewedImgPropsRef.value?.onDragstart?.(e)
         e.preventDefault()
       },
       zoomIn,

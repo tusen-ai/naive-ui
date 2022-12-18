@@ -374,6 +374,20 @@ export default defineComponent({
       return virtualListInstRef.value?.itemsElRef
     }
 
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeOption): boolean => {
+        if (!pattern.length) return true
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
+      }
+    })
+
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeOption[]
       highlightKeySet: Set<Key> | null
@@ -536,20 +550,6 @@ export default defineComponent({
       //   return null
       // }
       return droppingNode.parent
-    })
-
-    const mergedFilterRef = computed(() => {
-      const { filter } = props
-      if (filter) return filter
-      const { labelField } = props
-      return (pattern: string, node: TreeOption): boolean => {
-        if (!pattern.length) return true
-        const label = node[labelField]
-        if (typeof label === 'string') {
-          return label.toLowerCase().includes(pattern.toLowerCase())
-        }
-        return false
-      }
     })
 
     // shallow watch data
@@ -1582,6 +1582,7 @@ export default defineComponent({
       ? useThemeClass('tree', undefined, cssVarsRef, props)
       : undefined
     return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       rtlEnabled: rtlEnabledRef,
@@ -1597,8 +1598,6 @@ export default defineComponent({
       getScrollContent,
       handleAfterEnter,
       handleResize,
-      handleKeydown: exposedMethods.handleKeydown,
-      scrollTo: exposedMethods.scrollTo,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
