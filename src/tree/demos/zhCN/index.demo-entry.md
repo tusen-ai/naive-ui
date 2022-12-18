@@ -21,6 +21,7 @@ batch-render.vue
 switcher-icon.vue
 node-props.vue
 checkbox-placement.vue
+ignore-empty-children.vue
 check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
@@ -59,6 +60,7 @@ expand-debug.vue
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
+| ignore-empty-children | `boolean` | `false` | 忽略空数组 |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.32.2 |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |

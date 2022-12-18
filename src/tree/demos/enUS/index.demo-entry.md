@@ -21,6 +21,7 @@ batch-render.vue
 switcher-icon.vue
 node-props.vue
 checkbox-placement.vue
+ignore-empty-children.vue
 ```
 
 ## API
@@ -53,6 +54,7 @@ checkbox-placement.vue
 | expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
+| ignore-empty-children | `boolean` | `false` | Ignoring empty arrays |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | keyboard | `boolean` | `true` | Whether to support keyboard operation. | 2.32.2 |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
