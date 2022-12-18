@@ -34,6 +34,7 @@ import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
+import { NEmpty } from '../../empty'
 import NTreeNode from './TreeNode'
 import {
   keysWithFilter,
@@ -62,13 +63,13 @@ import type {
   RenderSwitcherIcon,
   TreeNodeProps,
   CheckOnClick,
-  TreeInst
+  TreeInst,
+  GetChildren
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
-import { NEmpty } from '../../empty'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -80,8 +81,13 @@ export function createTreeMateOptions<T> (
   keyField: string,
   childrenField: string,
   disabledField: string,
-  ignoreEmptyChildren: boolean
+  getChildren: GetChildren | undefined
 ): TreeMateOptions<T, T, T> {
+  const settledGetChildren: GetChildren =
+    getChildren ||
+    ((node: T) => {
+      return (node as any)[childrenField]
+    })
   return {
     getIsGroup () {
       return false
@@ -89,14 +95,7 @@ export function createTreeMateOptions<T> (
     getKey (node: T) {
       return (node as any)[keyField]
     },
-    getChildren (node: T) {
-      const children = (node as any)[childrenField]
-      return ignoreEmptyChildren
-        ? children.length
-          ? children
-          : undefined
-        : children
-    },
+    getChildren: settledGetChildren,
     getDisabled (node: T) {
       return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
     }
@@ -287,10 +286,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
-  ignoreEmptyChildren: {
-    type: Boolean,
-    default: false
-  },
+  getChildren: Function as PropType<GetChildren>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -437,7 +433,7 @@ export default defineComponent({
           props.keyField,
           props.childrenField,
           props.disabledField,
-          props.ignoreEmptyChildren
+          props.getChildren
         )
       )
     )

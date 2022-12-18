@@ -150,3 +150,5 @@ export interface TreeInst {
   getCheckedData: () => { keys: Key[], options: Array<TreeOption | null> }
   getIndeterminateData: () => { keys: Key[], options: Array<TreeOption | null> }
 }
+
+export type GetChildren = (option: any) => unknown
