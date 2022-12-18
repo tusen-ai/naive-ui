@@ -164,6 +164,7 @@ export const selectProps = {
   inputProps: Object as PropType<InputHTMLAttributes>,
   nodeProps: Function as PropType<NodeProps>,
   ignoreComposition: { type: Boolean, default: true },
+  showOnFocus: Boolean,
   // for jsx
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -420,9 +421,12 @@ export default defineComponent({
       if (onClear) call(onClear)
     }
     function doFocus (e: FocusEvent): void {
-      const { onFocus } = props
+      const { onFocus, showOnFocus } = props
       const { nTriggerFormFocus } = formItem
       if (onFocus) call(onFocus, e)
+      if (showOnFocus) {
+        openMenu()
+      }
       nTriggerFormFocus()
     }
     function doSearch (value: string): void {

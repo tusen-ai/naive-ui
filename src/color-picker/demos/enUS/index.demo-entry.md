@@ -39,8 +39,7 @@ native.vue
 | on-confirm | `(value: string) => void` | `undefined` | Callback once the confirm button is clicked. | 2.29.0 |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |  |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |  |
-| actions | `Array<'confirm'> \| null` | `null` | The types of buttons to be shown in the panel. |  |
-| internal-actions | `Array<'redo' \| 'undo' \| 'clear'>` | `undefined` | Set of built-in operations. |  |
+| actions | `Array<'confirm' \| 'clear'> \| null` | `null` | The types of buttons to be shown in the panel. |  |
 
 ### ColorPicker Slots
 

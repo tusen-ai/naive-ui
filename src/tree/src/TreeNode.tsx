@@ -88,8 +88,10 @@ const TreeNode = defineComponent({
         } = NTree
         if (onLoad) {
           void onLoad(tmNode.rawNode)
-            .then(() => {
-              NTree.handleSwitcherClick(tmNode)
+            .then((value) => {
+              if (value !== false) {
+                NTree.handleSwitcherClick(tmNode)
+              }
             })
             .finally(() => {
               NTree.loadingKeysRef.value.delete(tmNode.key)

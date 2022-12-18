@@ -62,7 +62,8 @@ import style from './styles/index.cssr'
 function createXhrHandlers (
   inst: UploadInternalInst,
   file: SettledFileInfo,
-  xhr: XMLHttpRequest
+  xhr: XMLHttpRequest,
+  keepFileAfterFinish: boolean
 ): XhrHandlers {
   const { doChange, xhrMap } = inst
   let percentage = 0
@@ -90,10 +91,14 @@ function createXhrHandlers (
       }
     }
 
-    let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+    let fileAfterChange: SettledFileInfo = Object.assign<
+    {},
+    SettledFileInfo,
+    Partial<FileInfo>
+    >({}, file, {
       status: 'finished',
       percentage,
-      file: null
+      file: keepFileAfterFinish ? file.file : null
     })
     xhrMap.delete(file.id)
     fileAfterChange = createSettledFileInfo(
@@ -135,11 +140,20 @@ function customSubmitImpl (options: {
   headers?: FuncOrRecordOrUndef
   action?: string
   withCredentials?: boolean
+  keepFileAfterFinish?: boolean
   file: SettledFileInfo
   customRequest: CustomRequest
 }): void {
-  const { inst, file, data, headers, withCredentials, action, customRequest } =
-    options
+  const {
+    inst,
+    file,
+    data,
+    headers,
+    withCredentials,
+    action,
+    customRequest,
+    keepFileAfterFinish
+  } = options
   const { doChange } = options.inst
   let percentage = 0
   customRequest({
@@ -149,7 +163,11 @@ function customSubmitImpl (options: {
     withCredentials,
     action,
     onProgress (event) {
-      const fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      const fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'uploading'
       })
       const progress = event.percent
@@ -158,10 +176,14 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onFinish () {
-      let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      let fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'finished',
         percentage,
-        file: null
+        file: keepFileAfterFinish ? file.file : null
       })
       fileAfterChange = createSettledFileInfo(
         inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
@@ -169,7 +191,11 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onError () {
-      let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      let fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'error',
         percentage
       })
@@ -184,9 +210,10 @@ function customSubmitImpl (options: {
 function registerHandler (
   inst: UploadInternalInst,
   file: SettledFileInfo,
-  request: XMLHttpRequest
+  request: XMLHttpRequest,
+  keepFileAfterFinish: boolean
 ): void {
-  const handlers = createXhrHandlers(inst, file, request)
+  const handlers = createXhrHandlers(inst, file, request, keepFileAfterFinish)
   request.onabort = handlers.handleXHRAbort
   request.onerror = handlers.handleXHRError
   request.onload = handlers.handleXHRLoad
@@ -238,6 +265,7 @@ function submitImpl (
     method,
     action,
     withCredentials,
+    keepFileAfterFinish,
     responseType,
     headers,
     data
@@ -245,6 +273,7 @@ function submitImpl (
     method: string
     action?: string
     withCredentials: boolean
+    keepFileAfterFinish: boolean
     responseType: XMLHttpRequestResponseType
     headers: FuncOrRecordOrUndef
     data: FuncOrRecordOrUndef
@@ -257,7 +286,7 @@ function submitImpl (
   const formData = new FormData()
   appendData(formData, data, file)
   formData.append(fieldName, file.file as File)
-  registerHandler(inst, file, request)
+  registerHandler(inst, file, request, keepFileAfterFinish)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
     setHeaders(request, headers, file)
@@ -361,7 +390,8 @@ export const uploadProps = {
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
-  renderIcon: Object as PropType<RenderIcon>
+  renderIcon: Object as PropType<RenderIcon>,
+  keepFileAfterFinish: Boolean
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -510,6 +540,7 @@ export default defineComponent({
         method,
         action,
         withCredentials,
+        keepFileAfterFinish,
         headers,
         data,
         name: fieldName
@@ -533,6 +564,7 @@ export default defineComponent({
               file,
               action,
               withCredentials,
+              keepFileAfterFinish,
               headers,
               data,
               customRequest: props.customRequest
@@ -552,6 +584,7 @@ export default defineComponent({
                 method,
                 action,
                 withCredentials,
+                keepFileAfterFinish,
                 responseType: props.responseType,
                 headers,
                 data
