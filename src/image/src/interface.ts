@@ -14,7 +14,8 @@ export interface MoveStrategy {
 export const imagePreviewSharedProps = {
   ...(useTheme.props as ThemeProps<ImageTheme>),
   showToolbar: { type: Boolean, default: true },
-  showToolbarTooltip: Boolean
+  showToolbarTooltip: Boolean,
+  loop: { type: Boolean, default: true }
 }
 
 export interface ImageContext {
