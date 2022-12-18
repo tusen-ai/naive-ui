@@ -215,7 +215,7 @@ export default c([
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
-      min-width: auto;
+      min-width: 0;
     `, [
       c('~', [
         cE('icon', {
