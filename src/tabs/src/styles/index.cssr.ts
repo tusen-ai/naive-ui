@@ -69,6 +69,7 @@ export default cB('tabs', `
   ]),
   cM('bottom-position', `
     flex-direction: column-reverse;
+    justify-content: flex-end;
   `, [
     cB('tabs-bar', `
       top: 0;
