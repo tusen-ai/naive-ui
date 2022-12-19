@@ -22,6 +22,7 @@ no-pane.vue
 update-bar-manually.vue
 bar-width.vue
 trigger.vue
+position.vue
 ```
 
 ## API
@@ -39,6 +40,7 @@ trigger.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |  |
 | pane-class | `string` | `undefined` | Class of the pane. |  |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
+| position | `left` \| `right` \| `bottom` \| `top` | `top` | tab position |  |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |  |
 | trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |

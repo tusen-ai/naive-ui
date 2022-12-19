@@ -29,6 +29,7 @@ unkeyed-debug.vue
 addable-debug.vue
 animation-debug.vue
 animationx-debug.vue
+position.vue
 ```
 
 ## API
@@ -46,6 +47,7 @@ animationx-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
 | pane-class | `string` | `undefined` | 面板的类名 |  |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
+| position | `left` \| `right` \| `bottom` \| `top` | `top` | 标签位置 |  |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
