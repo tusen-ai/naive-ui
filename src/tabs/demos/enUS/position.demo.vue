@@ -15,12 +15,7 @@
     right
   </n-button>
 
-  <n-tabs
-    type="line"
-    animated
-    :position="position"
-    :style="{ height: '240px' }"
-  >
+  <n-tabs type="line" animated :position="position">
     <n-tab-pane name="oasis" tab="Oasis">
       Wonderwall
     </n-tab-pane>

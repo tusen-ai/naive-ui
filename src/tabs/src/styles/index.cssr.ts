@@ -239,7 +239,6 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-pane-wrapper', `
-    flex:1;
     position: relative;
     overflow: hidden;
     transition: max-height .2s var(--n-bezier);
