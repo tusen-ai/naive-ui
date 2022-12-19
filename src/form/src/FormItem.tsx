@@ -255,7 +255,7 @@ export default defineComponent({
       valid: boolean
       errors?: ValidateError[]
     }> => {
-      const { path } = props
+      const { path, label } = props
       if (!options) {
         options = {}
       } else {
@@ -315,7 +315,11 @@ export default defineComponent({
         void validator.validate({ [mergedPath]: value }, options, (errors) => {
           if (errors?.length) {
             renderExplainsRef.value = errors.map((error: ValidateError) => {
-              const transformedMessage = error?.message || ''
+              let transformedMessage = error?.message || ''
+              if (error.field && transformedMessage.includes(error.field)) {
+                const labelText = label || error.field
+                transformedMessage = error.message = `${labelText} is required`
+              }
               return {
                 key: transformedMessage,
                 render: () => {
