@@ -25,6 +25,10 @@
 - Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
 - Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
 
+### i18n
+
+- Update koKr locale.
+
 ## 2.34.2
 
 ### Fixes
