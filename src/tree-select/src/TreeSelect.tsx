@@ -227,7 +227,8 @@ export default defineComponent({
         createTreeMateOptions(
           props.keyField,
           props.childrenField,
-          props.disabledField
+          props.disabledField,
+          undefined
         )
       )
     )
