@@ -144,7 +144,7 @@ export type OnUpdateSelectedKeysImpl = (
   }
 ) => void
 export type onUpdateExpandedKeys = (
-  value: Key[],
+  value: Array<string & number>,
   option: Array<TreeOption | null>,
   meta:
   | {
