@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-tabs` adds `position` prop, closes [#1466](https://github.com/tusen-ai/naive-ui/issues/1466)
 - `n-tree` adds `get-children` prop, closes [#4128](https://github.com/tusen-ai/naive-ui/issues/4128).
 - `n-badge` adds `offset` prop, closes [#4149](https://github.com/tusen-ai/naive-ui/issues/4149).
 - `n-card` adds `tag` prop
