@@ -77,7 +77,7 @@ export const tabsProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  position: {
+  placement: {
     type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
     default: 'top'
   },
@@ -198,13 +198,13 @@ export default defineComponent({
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
-        const { barWidth, position } = props
+        const { barWidth, placement } = props
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        if (['top', 'bottom'].includes(position)) {
+        if (['top', 'bottom'].includes(placement)) {
           clearBarStyle(['top', 'maxHeight', 'height'])
           if (typeof barWidth === 'number' && tabEl.offsetWidth >= barWidth) {
             const offsetDiffLeft =
@@ -477,7 +477,7 @@ export default defineComponent({
     // avoid useless rerender
     watchEffect(() => {
       const { value: el } = scrollWrapperElRef
-      if (!el || ['left', 'right'].includes(props.position)) return
+      if (!el || ['left', 'right'].includes(props.placement)) return
       const { value: clsPrefix } = mergedClsPrefixRef
       const shadowBeforeClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-before`
       const shadowAfterClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-after`
@@ -547,7 +547,7 @@ export default defineComponent({
           closeBorderRadius,
           [createKey('panePadding', size)]: panePadding,
           [createKey('tabPadding', sizeType)]: tabPadding,
-          [createKey('verticalTabPadding', sizeType)]: verticalTabPadding,
+          [createKey('tabPaddingVertical', sizeType)]: tabPaddingVertical,
           [createKey('tabGap', sizeType)]: tabGap,
           [createKey('tabTextColor', type)]: tabTextColor,
           [createKey('tabTextColorActive', type)]: tabTextColorActive,
@@ -581,7 +581,7 @@ export default defineComponent({
         '--n-tab-font-weight': tabFontWeight,
         '--n-tab-font-weight-active': tabFontWeightActive,
         '--n-tab-padding': tabPadding,
-        '--n-vertical-tab-padding': verticalTabPadding,
+        '--n-tab-padding-vertical': tabPaddingVertical,
         '--n-tab-gap': tabGap,
         '--n-pane-padding': panePadding,
         '--n-font-weight-strong': fontWeightStrong,
@@ -632,7 +632,7 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       type,
-      position,
+      placement,
       addTabFixed,
       addable,
       mergedSize,
@@ -659,7 +659,7 @@ export default defineComponent({
     const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
     renderNameListRef.value = []
     const scrollContent = (): JSX.Element => {
-      const rawWrappedTabs = (
+      const tabs = (
         <div
           style={this.tabWrapperStyle}
           class={[`${mergedClsPrefix}-tabs-wrapper`]}
@@ -717,22 +717,20 @@ export default defineComponent({
           )}
         </div>
       )
-      let wrappedTabs = rawWrappedTabs
-      if (isCard && addable) {
-        wrappedTabs = (
-          <VResizeObserver onResize={this.handleTabsResize}>
-            {{
-              default: () => rawWrappedTabs
-            }}
-          </VResizeObserver>
-        )
-      }
       return (
         <div
           ref="tabsElRef"
           class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
         >
-          {wrappedTabs}
+          {isCard && addable ? (
+            <VResizeObserver onResize={this.handleTabsResize}>
+              {{
+                default: () => tabs
+              }}
+            </VResizeObserver>
+          ) : (
+            tabs
+          )}
           {isCard ? <div class={`${mergedClsPrefix}-tabs-pad`} /> : null}
           {isCard ? null : (
             <div ref="barElRef" class={`${mergedClsPrefix}-tabs-bar`} />
@@ -748,7 +746,7 @@ export default defineComponent({
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`,
-          `${mergedClsPrefix}-tabs--${position}-position`
+          `${mergedClsPrefix}-tabs--${placement}`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -759,7 +757,7 @@ export default defineComponent({
             // other. adding a class will make it easy to write the
             // style.
             `${mergedClsPrefix}-tabs-nav--${type}-type`,
-            `${mergedClsPrefix}-tabs-nav--${position}-position`,
+            `${mergedClsPrefix}-tabs-nav--${placement}`,
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
@@ -808,7 +806,7 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
                     ref="scrollWrapperElRef"
                   >
-                    {['top', 'bottom'].includes(position) ? (
+                    {['top', 'bottom'].includes(placement) ? (
                       <VXScroll
                         ref="xScrollInstRef"
                         onScroll={this.handleScroll}
@@ -818,7 +816,7 @@ export default defineComponent({
                         }}
                       </VXScroll>
                     ) : (
-                      <div class={`${mergedClsPrefix}-tabs-nav-yScroll`}>
+                      <div class={`${mergedClsPrefix}-tabs-nav-y-scroll`}>
                         {scrollContent()}
                       </div>
                     )}

@@ -1,24 +1,23 @@
 <markdown>
-# Position
+# Placement
 </markdown>
 <template>
-  <n-button @click="position = 'top'">
+  <n-button @click="placement = 'top'">
     top
   </n-button>
-  <n-button @click="position = 'bottom'">
+  <n-button @click="placement = 'bottom'">
     bottom
   </n-button>
-  <n-button @click="position = 'left'">
+  <n-button @click="placement = 'left'">
     left
   </n-button>
-  <n-button @click="position = 'right'">
+  <n-button @click="placement = 'right'">
     right
   </n-button>
-
   <n-tabs
-    type="line"
+    type="card"
     animated
-    :position="position"
+    :placement="placement"
     :style="{ height: '240px' }"
   >
     <n-tab-pane name="oasis" tab="Oasis">
@@ -81,5 +80,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { TabsProps } from 'naive-ui'
-const position = ref<TabsProps['position']>('left')
+const placement = ref<TabsProps['placement']>('left')
 </script>

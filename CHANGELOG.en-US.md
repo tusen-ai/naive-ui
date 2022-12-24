@@ -4,11 +4,10 @@
 
 ### Feats
 
-- `n-tabs` adds `position` prop, closes [#1466](https://github.com/tusen-ai/naive-ui/issues/1466)
 - `n-tree` adds `get-children` prop, closes [#4128](https://github.com/tusen-ai/naive-ui/issues/4128).
 - `n-badge` adds `offset` prop, closes [#4149](https://github.com/tusen-ai/naive-ui/issues/4149).
-- `n-card` adds `tag` prop
-- demos can now use `<script setup />`
+- `n-card` adds `tag` prop.
+- demos can now use `<script setup />`.
 - `n-pagination` adds `select-props` prop, closes [#4199](https://github.com/tusen-ai/naive-ui/issues/4199).
 - `n-select` adds `show-on-focus` prop, closes [#4191](https://github.com/tusen-ai/naive-ui/issues/4191).
 - `n-pagination` adds `goto` prop, closes [#4133](https://github.com/tusen-ai/naive-ui/issues/4133).

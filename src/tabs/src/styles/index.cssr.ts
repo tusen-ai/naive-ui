@@ -45,7 +45,7 @@ export default cB('tabs', `
       ])
     ])
   ]),
-  cM('left-position, right-position', `
+  cM('left, right', `
     flex-direction: row;
   `, [
     cB('tabs-bar', `
@@ -57,17 +57,17 @@ export default cB('tabs', `
       background-color .3s var(--n-bezier);
     `),
     cB('tabs-tab', `
-      padding: var(--n-vertical-tab-padding); 
+      padding: var(--n-tab-padding-vertical); 
     `)
   ]),
-  cM('right-position', `
+  cM('right', `
     flex-direction: row-reverse;
   `, [
     cB('tabs-bar', `
       left: 0;
     `)
   ]),
-  cM('bottom-position', `
+  cM('bottom', `
     flex-direction: column-reverse;
     justify-content: flex-end;
   `, [
@@ -152,11 +152,17 @@ export default cB('tabs', `
         box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
       `)
     ]),
-    cB('tabs-nav-yScroll', `
+    cB('tabs-nav-y-scroll', `
       height: 100%;
       width: 100%;
       overflow-y: auto; 
-    `),
+      scrollbar-width: none;
+    `, [
+      c('&::-webkit-scrollbar', `
+        width: 0;
+        height: 0;
+      `)
+    ]),
     c('&::before, &::after', `
       transition: box-shadow .3s var(--n-bezier);
       pointer-events: none;
@@ -371,7 +377,7 @@ export default cB('tabs', `
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ]),
-    cM('left-position,right-position', [
+    cM('left, right', [
       cB('tabs-wrapper', `
         flex-direction: column;
       `, [
@@ -388,23 +394,22 @@ export default cB('tabs', `
         border-bottom: none;
       `)
     ]),
-    cM('left-position', [
+    cM('left', [
       cB('tabs-nav-scroll-content', `
         box-sizing: border-box;
         border-right: 1px solid var(--n-tab-border-color);
       `)
     ]),
-    cM('right-position', [
+    cM('right', [
       cB('tabs-nav-scroll-content', `
         border-left: 1px solid var(--n-tab-border-color);
       `)
     ]),
-    cM('bottom-position', [
+    cM('bottom', [
       cB('tabs-nav-scroll-content', `
         border-top: 1px solid var(--n-tab-border-color);
         border-bottom: none;
       `)
     ])
-
   ])
 ])
