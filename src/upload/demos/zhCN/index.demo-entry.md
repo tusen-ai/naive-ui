@@ -48,7 +48,7 @@ debug.vue
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |  |
-| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | 文件图标的渲染函数，在 `list-type="image"` 时生效 | 2.34.0 |
+| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | 文件图标的渲染函数，仅在 `list-type="image"` 和 `list-type="image-card"` 时生效 | 2.34.0 |
 | response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | `n-upload` 使用的 `XMLHttpRequest` 的 `responseType` | 2.33.3 |
 | should-use-thumbnail-url | `(file: UploadSettledFileInfo) => boolean` | 只对图片类文件返回 `true` 的函数 | 是否要对文件使用预览图的判定函数，只在 `list-type="image"` 或 `list-type="image-card"` 时生效 | 2.34.0 |
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |  |
