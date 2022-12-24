@@ -47,7 +47,7 @@ download.vue
 | method | `string` | `'POST'` | The HTTP request method. |  |
 | multiple | `boolean` | `false` | Allow multiple files to be selected. |  |
 | name | `string` | `'file'` | The field name for the file(s) in the HTTP request's form data. |  |
-| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | Render function of file icon. It works when `list-type="image"`. | 2.34.0 |
+| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | Render function of file icon. It only works when `list-type="image"` or `list-type="image-card"`. | 2.34.0 |
 | response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | Response type of `XMLHttpRequest` used by `n-upload` | 2.33.3 |
 | should-use-thumbnail-url | `(file: UploadSettledFileInfo) => boolean` | A function that only returns `true` for image typed file. | A function that determines whether to show thumbnail for the file. It only works when `list-type="image"` or `list-type="image-card"`. | 2.34.0 |
 | show-cancel-button | `boolean` | `true` | Show a cancel button (while uploading). Use the `on-remove` callback for this event. |  |

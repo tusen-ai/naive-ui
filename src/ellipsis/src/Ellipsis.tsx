@@ -1,4 +1,12 @@
-import { defineComponent, h, ref, PropType, computed, mergeProps } from 'vue'
+import {
+  defineComponent,
+  h,
+  ref,
+  PropType,
+  computed,
+  mergeProps,
+  onDeactivated
+} from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
 import { TooltipInst } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'
@@ -96,6 +104,11 @@ export default defineComponent({
             expandedRef.value = !expanded
           }
         : undefined
+    })
+    onDeactivated(() => {
+      if (props.tooltip) {
+        tooltipRef.value?.setShow(false)
+      }
     })
     const renderTrigger = (): JSX.Element => (
       <span

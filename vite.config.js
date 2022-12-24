@@ -98,6 +98,7 @@ module.exports = {
     }
   },
   esbuild: {
+    jsx: 'transform',
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   }

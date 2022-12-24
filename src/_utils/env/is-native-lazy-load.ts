@@ -1,3 +1,4 @@
-export const isImageSupportNativeLazy = false
-// Keep it to false currently, we will provide a prop to make it configuable
-// typeof document !== 'undefined' && 'loading' in document.createElement('img')
+import { isBrowser } from './is-browser'
+
+export const isImageSupportNativeLazy =
+  isBrowser && 'loading' in document.createElement('img')

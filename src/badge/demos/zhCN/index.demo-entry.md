@@ -15,22 +15,24 @@ custom-content.vue
 color.vue
 raw.vue
 rtl-debug.vue
+offset.vue
 ```
 
 ## API
 
 ### Badge Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| color | `string` | `undefined` | 标记的颜色 |
-| dot | `boolean` | `false` | 标记是否显示为点 |
-| max | `number` | `undefined` | 标记最大数来处理溢出情况 |
-| processing | `boolean` | `false` | 标记显示进度 |
-| show-zero | `boolean` | `false` | 标记为 0 时是否显示 |
-| show | `boolean` | `true` | 标记受控显示 |
-| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |
-| value | `string \| number` | `undefined` | 标记数量 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| color | `string` | `undefined` | 标记的颜色 |  |
+| dot | `boolean` | `false` | 标记是否显示为点 |  |
+| max | `number` | `undefined` | 标记最大数来处理溢出情况 |  |
+| offset | `[string \| number, string \| number]` | `undefined` | 距默认位置左侧、上方的偏移量 | 2.34.3 |
+| processing | `boolean` | `false` | 标记显示进度 |  |
+| show-zero | `boolean` | `false` | 标记为 0 时是否显示 |  |
+| show | `boolean` | `true` | 标记受控显示 |  |
+| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |  |
+| value | `string \| number` | `undefined` | 标记数量 |  |
 
 ### Badge Slots
 

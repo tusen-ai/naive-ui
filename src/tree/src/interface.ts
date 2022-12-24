@@ -6,6 +6,8 @@ import type { TreeTheme } from '../styles'
 
 export type Key = string | number
 
+export type OnLoad = (node: TreeOption) => Promise<unknown>
+
 export interface TreeOptionBase {
   key?: Key
   label?: string
@@ -17,7 +19,7 @@ export interface TreeOptionBase {
   suffix?: () => VNodeChild
 }
 
-export type TreeOption = TreeOptionBase & { [k: string]: unknown }
+export type TreeOption = TreeOptionBase & Record<string, unknown>
 
 export type TreeOptions = TreeOption[]
 
@@ -91,7 +93,7 @@ export interface TreeInjection {
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   draggableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
-  onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
+  onLoadRef: Ref<OnLoad | undefined>
   blockLineRef: Ref<boolean>
   indentRef: Ref<number>
   draggingNodeRef: Ref<TmNode | null>
@@ -150,3 +152,5 @@ export interface TreeInst {
   getCheckedData: () => { keys: Key[], options: Array<TreeOption | null> }
   getIndeterminateData: () => { keys: Key[], options: Array<TreeOption | null> }
 }
+
+export type GetChildren = (option: any) => unknown

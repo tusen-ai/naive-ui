@@ -9,18 +9,11 @@ Handle events of buttons.
     Click Me
   </n-button>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleClick () {
-        message.info('Button Clicked')
-      }
-    }
-  }
-})
+const message = useMessage()
+const handleClick = () => {
+  message.info('Button Clicked')
+}
 </script>

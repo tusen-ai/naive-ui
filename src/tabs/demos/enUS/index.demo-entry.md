@@ -22,6 +22,7 @@ no-pane.vue
 update-bar-manually.vue
 bar-width.vue
 trigger.vue
+position-debug.vue
 ```
 
 ## API

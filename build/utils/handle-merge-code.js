@@ -1,5 +1,6 @@
 const tsToJs = require('./tsToJs')
 module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
+  const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
     // ts and js
     if (parts.template) {
@@ -11,10 +12,12 @@ module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
         mergedParts.tsCode += '\n\n'
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.tsCode += `<script lang="ts">
+      mergedParts.tsCode += `<script${
+        isCompositionApi ? ' setup' : ''
+      } lang="ts">
 ${parts.script}
 </script>`
-      mergedParts.jsCode += `<script>
+      mergedParts.jsCode += `<script${isCompositionApi ? ' setup' : ''}>
 ${tsToJs(parts.script)}
 </script>`
     }
@@ -41,7 +44,7 @@ ${tsToJs(parts.script)}
       if (parts.template) {
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.jsCode += `<script>
+      mergedParts.jsCode += `<script${isCompositionApi ? ' setup' : ''}>
 ${parts.script}
 </script>`
     }
