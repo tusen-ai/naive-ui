@@ -30,7 +30,7 @@
 
 ### i18n
 
-- Update koKr locale.
+- 更新 koKr 国际化
 
 ## 2.34.2
 
