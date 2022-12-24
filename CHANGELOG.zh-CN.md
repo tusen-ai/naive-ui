@@ -26,6 +26,10 @@
 - 修复 `n-ellipsis` 在使用 `keep-alive` 的情况下关闭异常，关闭 [#4079](https://github.com/tusen-ai/naive-ui/issues/4079)
 - 修复 `n-upload` 对于名称为图片的文件不显示预览图，关闭 [#4198](https://github.com/tusen-ai/naive-ui/issues/4198)
 
+### i18n
+
+- Update koKr locale.
+
 ## 2.34.2
 
 ### Fixes

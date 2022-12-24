@@ -46,8 +46,8 @@ const koKR: NLocale = {
     startDatetimePlaceholder: '시작 날짜 및 시간',
     endDatetimePlaceholder: '종료 날짜 및 시간',
     // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: '시작 월',
+    endMonthPlaceholder: '종료 월',
     monthBeforeYear: false,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: '오늘'
@@ -64,11 +64,11 @@ const koKR: NLocale = {
   },
   // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: '전체 선택',
+    unselectAll: '전체 해제',
+    clearAll: '전체 삭제',
+    total: (num: number): string => `총 ${num} 개`,
+    selected: (num: number): string => `${num} 개 선택`
   },
   Empty: {
     description: '데이터 없음'
@@ -80,7 +80,7 @@ const koKR: NLocale = {
     placeholder: '시간 선택',
     positiveText: '확인',
     negativeText: '취소',
-    now: 'Now'
+    now: '현재 시간'
   },
   Pagination: {
     goto: '이동',
@@ -120,7 +120,7 @@ const koKR: NLocale = {
     tipZoomIn: '확대',
     tipClose: '닫기 (Esc)',
     // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: '원본 크기로 확대'
   }
 }
 
