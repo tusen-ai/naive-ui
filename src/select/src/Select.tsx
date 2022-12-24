@@ -424,10 +424,10 @@ export default defineComponent({
       const { onFocus, showOnFocus } = props
       const { nTriggerFormFocus } = formItem
       if (onFocus) call(onFocus, e)
+      nTriggerFormFocus()
       if (showOnFocus) {
         openMenu()
       }
-      nTriggerFormFocus()
     }
     function doSearch (value: string): void {
       const { onSearch } = props

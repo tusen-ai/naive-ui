@@ -11,7 +11,7 @@
 - `n-pagination` adds `select-props` prop, closes [#4199](https://github.com/tusen-ai/naive-ui/issues/4199).
 - `n-select` adds `show-on-focus` prop, closes [#4191](https://github.com/tusen-ai/naive-ui/issues/4191).
 - `n-pagination` adds `goto` prop, closes [#4133](https://github.com/tusen-ai/naive-ui/issues/4133).
-- `n-upload` adds `keep-file-after-finish` prop, closes [#3868](https://github.com/tusen-ai/naive-ui/issues/3868).
+- `n-upload` won't set `file` field of file info to `null` after file is uploaded, closes [#3868](https://github.com/tusen-ai/naive-ui/issues/3868).
 - `n-form` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-radio` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-checkbox` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
@@ -19,13 +19,14 @@
 
 ### Fixes
 
+- Fix `n-progress`'s `indicator-text-color` prop doesn't work when `indicator-placement` is `'inside'`.
 - Fix `n-image` error while operating the previewed image, closes [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
 - Fix `n-tree` cannot access `mergedFilterRef` before initialization error, closes [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
 - Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
 - Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
 - Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
 - Fix `n-input` style bug of tiny size with autosize prop, closes [#4167](https://github.com/tusen-ai/naive-ui/issues/4167).
-- Fix 'n-image' in `lazy` mode, after setting the `intersection-observer-options` `rootMargin` attribute, the preload does not take effect.
+- Fix `n-image` & `n-avatar` in `lazy` mode, after setting the `intersection-observer-options` `rootMargin` attribute, the preload does not take effect.
 
 ### i18n
 

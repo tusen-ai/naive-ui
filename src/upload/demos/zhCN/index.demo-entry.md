@@ -44,7 +44,6 @@ debug.vue
 | input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
-| keep-file-after-finish | `boolean` | `false` | 上传结束后是否在文件信息中保留 File 对象 | NEXT_VERSION |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |

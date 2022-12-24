@@ -11,7 +11,7 @@
 - `n-pagination` 新增 `select-props` 属性，关闭 [#4199](https://github.com/tusen-ai/naive-ui/issues/4199)
 - `n-select` 新增 `show-on-focus` 属性，关闭 [#4191](https://github.com/tusen-ai/naive-ui/issues/4191)
 - `n-pagination` 新增 `goto` 属性，关闭 [#4133](https://github.com/tusen-ai/naive-ui/issues/4133)
-- `n-upload` 新增 `keep-file-after-finish` 属性，关闭 [#3868](https://github.com/tusen-ai/naive-ui/issues/3868)
+- `n-upload` 上传后不再将 `file` 字段置为 `null`，关闭 [#3868](https://github.com/tusen-ai/naive-ui/issues/3868)
 - `n-form` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
 - `n-radio` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
 - `n-checkbox` 新增 `labelFontWeight` 主题变量，关闭 [#3516](https://github.com/tusen-ai/naive-ui/issues/3516)
@@ -19,14 +19,14 @@
 
 ### Fixes
 
-- 修复 `indicator-placement` 为 `inside` 时，`indicator-text-color` 不生效的问题
+- 修复 `n-progress` `indicator-placement` 为 `inside` 时，`indicator-text-color` 不生效
 - 修复 `n-image` 操作预览图片时报错，关闭 [#4157](https://github.com/tusen-ai/naive-ui/issues/4157)
 - 修复 `n-tree` 的`cannot access 'mergedFilterRef' before initialization`报错，关闭 [#4134](https://github.com/tusen-ai/naive-ui/issues/4134)
 - 修复 `n-menu` 无法通过 `dropdown-props` 覆盖子菜单 dropdown 的 `trigger`，关闭 [#4147](https://github.com/tusen-ai/naive-ui/issues/4147)
 - 修复 `n-ellipsis` 在使用 `keep-alive` 的情况下关闭异常，关闭 [#4079](https://github.com/tusen-ai/naive-ui/issues/4079)
 - 修复 `n-upload` 对于名称为图片的文件不显示预览图，关闭 [#4198](https://github.com/tusen-ai/naive-ui/issues/4198)
 - 修复 `n-input` 在 size 为 tiny 和 autosize 属性下，input 对齐样式异常，关闭 [#4167](https://github.com/tusen-ai/naive-ui/issues/4167)
-- 修复 `n-image` 在 `lazy` 模式，设定 `intersection-observer-options` `rootMargin` 属性后，预加载不生效
+- 修复 `n-image` 和 `n-avatar` 在 `lazy` 模式，设定 `intersection-observer-options` `rootMargin` 属性后，预加载不生效
 
 ### i18n
 
