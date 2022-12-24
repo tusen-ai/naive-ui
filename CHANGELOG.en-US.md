@@ -24,7 +24,7 @@
 - Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
 - Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
 - Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
-- Fix `n-input` style bug of tiny size with autosize prop
+- Fix `n-input` style bug of tiny size with autosize prop, closes [#4167](https://github.com/tusen-ai/naive-ui/issues/4167).
 
 ### i18n
 
