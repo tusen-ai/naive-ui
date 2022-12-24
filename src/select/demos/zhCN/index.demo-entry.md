@@ -75,7 +75,7 @@ create-debug.vue
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | show-checkmark | `boolean` | `true` | 多选情况下是否展示对勾 | 2.33.4 |
-| show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | NEXT_VERSION |
+| show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |

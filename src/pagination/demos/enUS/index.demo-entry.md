@@ -30,7 +30,7 @@ page-size-option.vue
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |  |
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | 2.32.2 |
-| goto | `() => VNodeChild` | `undefined` | Fast jump content render function. | NEXT_VERSION |
+| goto | `() => VNodeChild` | `undefined` | Fast jump content render function. | 2.34.3 |
 | item-count | `number` | `undefined` | Total number. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
@@ -41,7 +41,7 @@ page-size-option.vue
 | page-slot | `number` | `9` | The number of pages displayed. |  |
 | page | `number` | `undefined` | Current page in controlled mode. |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
-| select-props | `SelectProps` | `undefined` | Page size select's props. | NEXT_VERSION |
+| select-props | `SelectProps` | `undefined` | Page size select's props. | 2.34.3 |
 | show-quick-jumper | `boolean` | `false` | Whether to show fast jump. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | simple | `boolean` | `false` | Whether to use simple mode. | 2.32.2 |
