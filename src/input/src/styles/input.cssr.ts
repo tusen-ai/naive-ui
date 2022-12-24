@@ -136,6 +136,7 @@ export default cB('input', `
   cE('input-mirror', `
     padding: 0;
     height: var(--n-height);
+    line-height: var(--n-height);
     overflow: hidden;
     visibility: hidden;
     position: static;
