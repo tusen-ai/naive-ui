@@ -26,6 +26,7 @@
 - 修复 `n-ellipsis` 在使用 `keep-alive` 的情况下关闭异常，关闭 [#4079](https://github.com/tusen-ai/naive-ui/issues/4079)
 - 修复 `n-upload` 对于名称为图片的文件不显示预览图，关闭 [#4198](https://github.com/tusen-ai/naive-ui/issues/4198)
 - 修复 `n-input` 在 size 为 tiny 和 autosize 属性下，input 对齐样式异常，关闭 [#4167](https://github.com/tusen-ai/naive-ui/issues/4167)
+- 修复 `n-image` 在 `lazy` 模式，设定 `intersection-observer-options` `rootMargin` 属性后，预加载不生效
 
 ### i18n
 
@@ -45,7 +46,6 @@
 - 修复 `n-select` 在多选模式下会在控制台打印无用内容
 - 修复 `n-tree` 缺少 `getCheckedData` 和 `getIndeterminateData` 方法，关闭 [#4064](https://github.com/tusen-ai/naive-ui/issues/4064)
 - 修复 `n-data-table` 列的 `align` 配置对表头不生效，关闭 [#4063](https://github.com/tusen-ai/naive-ui/issues/4063)
-- 修复 `n-image` 在 `lazy` 模式，设定 `intersection-observer-options` `rootMargin` 属性后，预加载不生效
 
 ## 2.34.0
 
