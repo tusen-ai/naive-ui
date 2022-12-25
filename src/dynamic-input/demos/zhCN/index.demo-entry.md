@@ -28,11 +28,11 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | create-button-props | `ButtonProps` | `undefined` | 新建项按钮的属性 | 2.25.0 |
 | default-value | `unknown[]` | `[]` | 非受控模式下的默认值 |  |
+| disabled | `boolean` | `false` | 是否禁用 | NEXT_VERSION |
 | item-style | `string \| Object` | `undefined` | 动态录入中每项的样式 |  |
 | key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |  |
 | min | `number` | `0` | 最少有几项内容 |  |
 | max | `number` | `undefined` | 最多有几项内容 |  |
-| disabled | `boolean` | `false` | 是否禁用 |  |
 | preset | `'input' \| 'pair'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |  |
 | show-sort-button | `boolean` | `false` | 是否显示排序按钮 | 2.25.0 |
 | value | `unknown[]` | `undefined` | 受控模式下的值 |  |
