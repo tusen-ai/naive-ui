@@ -4,7 +4,7 @@ After version `2.30.3`, you can use UMD version of naive.
 
 If you want to use a minified version of naive, use `https://unpkg.com/naive-ui@version/dist/index.prod.js` as `src`. `version` is the version of naive-ui you want to use. If you don't specify a version, latest version would be used.
 
-You'd better lock version of the package, nor there may be some breaking changes.
+It's preferable to link to a specific version of the package, as always relying on the latest version may lead to breaking changes.
 
 Here's a basic [demo](https://jsbin.com/saxubitaki/1/edit?html,output):
 

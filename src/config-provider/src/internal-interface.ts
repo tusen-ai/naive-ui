@@ -29,6 +29,7 @@ import type { DynamicTagsTheme } from '../../dynamic-tags/styles'
 import type { ElementTheme } from '../../element/styles'
 import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
+import type { EquationTheme } from '../../equation/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
@@ -129,6 +130,7 @@ export interface GlobalThemeWithoutCommon {
   Element?: ElementTheme
   Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
+  Equation?: EquationTheme
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
@@ -236,7 +238,7 @@ export type RtlEnabledState = Partial<
 Record<keyof GlobalThemeWithoutCommon, RtlItem>
 >
 
-export type Breakpoints = { [k: string]: number } | undefined
+export type Breakpoints = Record<string, number> | undefined
 
 export interface ConfigProviderInjection {
   mergedBreakpointsRef: Ref<Breakpoints | undefined>

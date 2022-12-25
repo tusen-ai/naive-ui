@@ -106,12 +106,13 @@ describe('n-upload', () => {
     const wrapper = mount(NUpload, {
       props: {
         listType: 'image',
-        createThumbnailUrl
+        createThumbnailUrl,
+        // It should be aligned with prop's default implementation
+        shouldUseThumbnailUrl: () => true
       }
     })
     const input = wrapper.find('input')
-    const fileList = [new File(['index'], 'file.txt')]
-
+    const fileList = [new File(['index'], 'file.jpeg')]
     getMockFile(input.element, fileList)
     await input.trigger('change')
     await sleep(0)

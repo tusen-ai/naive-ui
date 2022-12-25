@@ -8,7 +8,7 @@ import {
   ExtractPropTypes,
   VNodeChild
 } from 'vue'
-import type { ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import type { NLocale } from '../../locales'
@@ -18,6 +18,7 @@ import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
+import { BaseLoadingExposedProps } from '../../_internal'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -114,10 +115,12 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<() => VNodeChild>,
+  spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -172,9 +175,7 @@ export type SortOrderFlag = 1 | -1 | 0
 
 export type RowData = Record<string, any>
 
-export interface InternalRowData {
-  [key: string]: unknown
-}
+export type InternalRowData = Record<string, unknown>
 
 export type CreateRowKey<T = InternalRowData> = (row: T) => RowKey
 export type CreateRowClassName<T = InternalRowData> = (
@@ -389,6 +390,7 @@ export interface DataTableInjection {
   renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
+  scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   doUpdatePage: (page: number) => void
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (filters: FilterState, sourceColumn: TableBaseColumn) => void
@@ -471,9 +473,10 @@ export interface SortState {
   sorter: Sorter | boolean | 'default'
 }
 
-export interface FilterState {
-  [key: string]: FilterOptionValue[] | FilterOptionValue | null | undefined
-}
+export type FilterState = Record<
+string,
+FilterOptionValue[] | FilterOptionValue | null | undefined
+>
 
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
@@ -520,9 +523,7 @@ export interface SummaryCell {
   colSpan?: number
   rowSpan?: number
 }
-export interface SummaryRowData {
-  [key: string]: SummaryCell
-}
+export type SummaryRowData = Record<string, SummaryCell>
 
 export type DataTableOnLoad = (node: RowData) => Promise<void>
 

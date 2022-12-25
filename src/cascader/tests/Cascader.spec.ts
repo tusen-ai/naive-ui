@@ -46,6 +46,7 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection').classes()).toContain(
       'n-base-selection--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -54,6 +55,7 @@ describe('n-cascader', () => {
       expect(
         wrapper.find('.n-base-selection').attributes('style')
       ).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -74,6 +76,7 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-placeholder').text()).toBe(
       'test-placeholder'
     )
+    wrapper.unmount()
   })
 
   it('should work with `placement` prop', async () => {
@@ -113,6 +116,7 @@ describe('n-cascader', () => {
 
     await wrapper.setProps({ filterable: true })
     expect(wrapper.find('input').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `default-value` prop', async () => {
@@ -120,6 +124,7 @@ describe('n-cascader', () => {
       props: { options: getOptions(), defaultValue: 'l-1-1-2' }
     })
     expect(wrapper.find('.n-base-selection-input').text()).toBe('l-1-1-2')
+    wrapper.unmount()
   })
 
   it('should work with `multiple` prop', async () => {
@@ -133,6 +138,7 @@ describe('n-cascader', () => {
 
     expect(wrapper.find('.n-base-selection-tags').exists()).toBe(true)
     expect(wrapper.find('.n-base-selection-label').exists()).not.toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `label-field` `value-field` `children-field` props', async () => {
@@ -162,6 +168,7 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-label').text()).toBe(
       "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
     )
+    wrapper.unmount()
   })
 
   it('should work with `check-strategy=child`', async () => {

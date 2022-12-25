@@ -24,10 +24,48 @@ export type OnUpdateValue = (
   option: TreeSelectOption &
   null &
   TreeSelectOption[] &
-  Array<TreeSelectOption | null>
+  Array<TreeSelectOption | null>,
+  meta:
+  | {
+    node: TreeSelectOption
+    action: 'select' | 'unselect'
+  }
+  | {
+    node: TreeSelectOption | null
+    action: 'delete'
+  }
+  | {
+    node: null
+    action: 'clear'
+  }
 ) => void
 
 export type OnUpdateValueImpl = (
+  value:
+  | string
+  | number
+  | (string | number)
+  | string[]
+  | number[]
+  | Array<string | number>
+  | null,
+  option: TreeSelectOption | null | Array<TreeSelectOption | null>,
+  meta:
+  | {
+    node: TreeSelectOption
+    action: 'select' | 'unselect'
+  }
+  | {
+    node: TreeSelectOption | null
+    action: 'delete'
+  }
+  | {
+    node: null
+    action: 'clear'
+  }
+) => void
+
+export type OnUpdateIndeterminateKeysImpl = (
   value:
   | string
   | number
@@ -77,8 +115,14 @@ export type TreeSelectNodeProps = (info: {
 }) => HTMLAttributes & Record<string, unknown>
 
 export interface TreeSelectInst {
-  getCheckedKeys: () => Array<string | number>
-  getIndeterminateKeys: () => Array<string | number>
+  getCheckedData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
+  getIndeterminateData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
   focus: () => void
   blur: () => void
 }

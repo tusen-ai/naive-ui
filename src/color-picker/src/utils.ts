@@ -17,7 +17,7 @@ import { warn } from '../../_utils'
 
 export type ColorPickerMode = 'rgb' | 'hsl' | 'hsv' | 'hex'
 
-export type ActionType = 'confirm'
+export type ActionType = 'confirm' | 'clear'
 
 export function deriveDefaultValue (
   modes: ColorPickerMode[],

@@ -19,6 +19,7 @@ describe('n-collapse', () => {
       )
     })
     expect(wrapper.find('.my-icon').exists()).toEqual(true)
+    wrapper.unmount()
   })
 
   it('should work with `accordion` prop', async () => {
@@ -63,6 +64,7 @@ describe('n-collapse', () => {
     expect(wrapper.findAll('.n-collapse-item__header')[2].classes()).toContain(
       'n-collapse-item__header--active'
     )
+    wrapper.unmount()
   })
 
   it('should work with `arrow-placement` prop', async () => {
@@ -79,6 +81,7 @@ describe('n-collapse', () => {
     expect(wrapper.find('.n-collapse-item').classes()).toContain(
       'n-collapse-item--right-arrow-placement'
     )
+    wrapper.unmount()
   })
 
   it('should work with nested structure', async () => {
@@ -112,6 +115,7 @@ describe('n-collapse', () => {
         .find('.n-collapse-item__header')
         .classes()
     ).toContain('n-collapse-item__header--active')
+    wrapper.unmount()
   })
 
   it('should work with `display-directive` prop', async () => {
@@ -144,6 +148,7 @@ describe('n-collapse', () => {
     expect(wrapper.find('.n-collapse-item__content-wrapper').exists()).toBe(
       false
     )
+    wrapper.unmount()
   })
 
   it('should work with `on-item-header-click` prop', async () => {
@@ -159,6 +164,7 @@ describe('n-collapse', () => {
     const triggerNodeWrapper = wrapper.find('.n-collapse-item__header-main')
     await triggerNodeWrapper.trigger('click')
     expect(onClick).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with `slots` ', async () => {
@@ -180,6 +186,7 @@ describe('n-collapse', () => {
 
     expect(wrapper.find('.n-collapse-item-arrow').exists()).toBe(true)
     expect(wrapper.find('.n-collapse-item-arrow').text()).toBe('arrow')
+    wrapper.unmount()
   })
 
   it('props.defaultExpandedNames', async () => {
@@ -218,6 +225,7 @@ describe('n-collapse', () => {
     })
     expect(wrapper.find('.ci1').isVisible()).toEqual(true)
     expect(wrapper.find('.ci2').exists()).toEqual(false)
+    wrapper.unmount()
   })
 
   it('should work with collapseItem component `title` prop', async () => {
@@ -229,5 +237,6 @@ describe('n-collapse', () => {
 
     await wrapper.find('.n-collapse-item__header-main').trigger('click')
     expect(wrapper.find('.n-collapse-item__header-main').text()).toBe('test')
+    wrapper.unmount()
   })
 })

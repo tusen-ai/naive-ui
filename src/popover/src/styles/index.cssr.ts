@@ -37,6 +37,7 @@ export default c([
     font-size: var(--n-font-size);
     color: var(--n-text-color);
     box-shadow: var(--n-box-shadow);
+    word-break: break-word;
   `, [
     c('>', [
       cB('scrollbar', `

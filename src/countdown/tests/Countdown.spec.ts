@@ -13,6 +13,7 @@ describe('n-countdown', () => {
       }
     })
     expect(wrapper.text()).toBe('02:00:00')
+    wrapper.unmount()
   })
   it('should work with `precision`&`active` prop`', async () => {
     const wrapper = mount(NCountdown, {
@@ -30,6 +31,7 @@ describe('n-countdown', () => {
     expect(wrapper.text()).toBe('02:00:00.000')
     await wrapper.setProps({ active: true })
     expect(wrapper.text()).not.toBe('02:00:00.000')
+    wrapper.unmount()
   })
   it('should work with `render` prop', () => {
     const render: CountdownProps['render'] = ({
@@ -46,6 +48,7 @@ describe('n-countdown', () => {
       }
     })
     expect(wrapper.text()).not.toBe('1:1:1:1')
+    wrapper.unmount()
   })
   it('should work with `on-finish` prop', async () => {
     const onFinish = jest.fn()

@@ -87,6 +87,7 @@ describe('n-color-picker', () => {
           }
         })
         expect(wrapper.text().includes(value))
+        wrapper.unmount()
       })
     })
   })

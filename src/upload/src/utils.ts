@@ -1,5 +1,10 @@
 import { isBrowser } from '../../_utils'
-import type { FileAndEntry, FileInfo, SettledFileInfo } from './interface'
+import type {
+  FileAndEntry,
+  FileInfo,
+  SettledFileInfo,
+  ShouldUseThumbnailUrl
+} from './interface'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -11,26 +16,23 @@ const getExtname = (url: string = ''): string => {
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
 }
 
-export const isImageFile = (file: FileInfo): boolean => {
+const imageExtensionRegex = /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i
+
+// Do not need File object
+export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   if (file.type) {
     return isImageFileType(file.type)
   }
-  const url: string = file.thumbnailUrl || file.url || ''
-  const extension = getExtname(url)
-  if (
-    /^data:image\//.test(url) ||
-    /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i.test(extension)
-  ) {
+  const fileNameExtension = getExtname(file.name || '')
+  if (imageExtensionRegex.test(fileNameExtension)) {
     return true
   }
-  if (/^data:/.test(url)) {
-    return false
+  const url: string = file.thumbnailUrl || file.url || ''
+  const urlExtension = getExtname(url)
+  if (/^data:image\//.test(url) || imageExtensionRegex.test(urlExtension)) {
+    return true
   }
-  if (extension) {
-    return false
-  }
-
-  return true
+  return false
 }
 
 export async function createImageDataUrl (file: File): Promise<string> {
@@ -39,7 +41,6 @@ export async function createImageDataUrl (file: File): Promise<string> {
       resolve('')
       return
     }
-
     resolve(window.URL.createObjectURL(file))
   })
 }

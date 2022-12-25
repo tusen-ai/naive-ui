@@ -45,7 +45,7 @@ export default defineComponent({
       } else {
         cell = renderCell
           ? renderCell(get(row, key), row, column)
-          : (get(row, key) as any)
+          : get(row, key)
       }
     }
     if (ellipsis) {

@@ -27,6 +27,7 @@ inline-theme-disabled.vue
 | cls-prefix | `string` | `n` | The class prefix of all inner components. It's applied in the first time. |  |
 | date-locale | `DateLocale \| null` | `undefined` | The date locale object to be consumed by its child. If set to `null` it will use the default `dateEnUS` locale. If set to `undefined` it will inherit its parent `n-config-provider`. |  |
 | inline-theme-disabled | `boolean` | `false` | Whether to disabled inline theme CSS variables. If you won't change theme overrides frequently in client side, and need SSR or make devtools looks clear. You can enable the prop. Note that the prop is not responsive. | 2.26.0 |
+| katex | `object` | `undefined` | Katex object for `n-equation`. | 2.34.0 |
 | locale | `Locale \| null` | `undefined` | The locale object to be consumed by its child. If set to `null` it will use the default `enUS` locale. If set to `undefined` it will inherit its parent `n-config-provider`. |  |
 | namespace | `string` | `undefined` | Class name of detached parts of components inside `n-config-provider` |  |
 | preflight-style-disabled | `boolean` | `false` | Whether to disabled preflight style of naive-ui. If you disable it, you can take control of all global css. Also you can use `n-global-style` to apply global style (which is recommend since global style will be reactive). | 2.29.0 |

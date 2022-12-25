@@ -1,17 +1,12 @@
 <markdown>
 # 图标
 
-在按钮上使用图标。
+在按钮上使用图标，可以使用 `render-icon` 属性或 `icon` 插槽。
 </markdown>
 
 <template>
   <n-space>
-    <n-button secondary strong>
-      <template #icon>
-        <n-icon>
-          <cash-icon />
-        </n-icon>
-      </template>
+    <n-button secondary strong :render-icon="renderIcon">
       +100 元
     </n-button>
     <n-button icon-placement="right" secondary strong>
@@ -27,11 +22,18 @@
 
 <script lang="ts">
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   components: {
     CashIcon
+  },
+  setup () {
+    return {
+      renderIcon () {
+        return h(CashIcon)
+      }
+    }
   }
 })
 </script>

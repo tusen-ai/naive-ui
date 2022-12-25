@@ -5,7 +5,8 @@ const ruRu: NLocale = {
   global: {
     undo: 'Отменить',
     redo: 'Вернуть',
-    confirm: 'Подтвердить'
+    confirm: 'Подтвердить',
+    clear: 'Очистить'
   },
   Popconfirm: {
     positiveText: 'Подтвердить',

@@ -65,9 +65,9 @@ debug.vue
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
-| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |  |
+| on-update:expanded-keys | `(value: Array<string \| number>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | Callback on expanded keys updated. | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function on indeterminate options changing. |  |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | Callback on value updated. |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' \| 'delete' \| 'clear' }) => void) => void` | `undefined` | Callback on value updated. |  |
 
 ### TreeSelectOption Properties
 
@@ -91,7 +91,7 @@ debug.vue
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| blur | `() => void` | Blur. | NEXT_VERSION |
-| focus | `() => void` | Focus. | NEXT_VERSIONs |
-| getCheckedKeys | `() => Array<string \| number>` | Get checked keys. | NEXT_VERSION |
-| getIndeterminateKeys | `() => Array<string \| number>` | Get indeterminate keys. | NEXT_VERSION |
+| blur | `() => void` | Blur. | 2.34.0 |
+| focus | `() => void` | Focus. | 2.34.0s |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

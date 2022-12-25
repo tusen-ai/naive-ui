@@ -136,10 +136,11 @@ export default cB('input', `
   cE('input-mirror', `
     padding: 0;
     height: var(--n-height);
+    line-height: var(--n-height);
     overflow: hidden;
     visibility: hidden;
     position: static;
-    white-space: nowrap;
+    white-space: pre;
     pointer-events: none;
   `),
   cE('input-el', `

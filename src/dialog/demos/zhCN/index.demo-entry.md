@@ -2,7 +2,7 @@
 
 执行之前，请确认。
 
-<n-alert title="使用前提" type="warning">
+<n-alert title="使用前提" type="warning" :bordered="false">
   如果你想使用对话框，你需要把调用其方法的组件放在 <n-text code>n-dialog-provider</n-text> 内部并且使用 <n-text code>useDialog</n-text> 去获取 API。
 </n-alert>
 
@@ -84,6 +84,7 @@ focus-debug.vue
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
+| transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | 2.33.3 |
@@ -116,6 +117,7 @@ focus-debug.vue
 | showIcon | `boolean` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
+| transformOrigin | `'mouse' \| 'center'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void \| undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void \| undefined` | 关闭动画完成执行的回调 | 2.33.3 |
