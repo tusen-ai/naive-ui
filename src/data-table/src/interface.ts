@@ -222,7 +222,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   maxWidth?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
-  headerAlign?: 'left' | 'center' | 'right'
+  titleAlign?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
 }
