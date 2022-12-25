@@ -72,7 +72,7 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ### 设计资源
 
-[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch)
+[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-zh-CN.sketch)
 
 ## 贡献
 
