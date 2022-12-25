@@ -1,7 +1,5 @@
 <markdown>
 # Customizing action
-
-The knowledge I want to learn is like my shopping cart -- only adding not remove.
 </markdown>
 
 <template>

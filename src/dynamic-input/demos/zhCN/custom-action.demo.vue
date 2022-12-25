@@ -1,7 +1,5 @@
 <markdown>
 # 自定义操作
-
-想学的知识就像我的购物车 ———— 只增不减
 </markdown>
 
 <template>
