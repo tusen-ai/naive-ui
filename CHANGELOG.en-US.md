@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
+- Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 
 ### Feats
 

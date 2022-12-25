@@ -18,6 +18,7 @@ form.vue
 move.vue
 custom-action.vue
 rtl-debug.vue
+create-debug.vue
 ```
 
 ## API
