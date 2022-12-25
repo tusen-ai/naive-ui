@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-dynamic-input` 新增 `action` slot，关闭 [#3981](https://github.com/tusen-ai/naive-ui/issues/3981)
+- `n-dynamic-input` 新增 `disabled` 属性，关闭 [#4055](https://github.com/tusen-ai/naive-ui/issues/4055)
 
 ## 2.34.3
 

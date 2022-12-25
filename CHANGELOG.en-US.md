@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
+- `n-dynamic-input` add `disabled` prop, closes [#4055](https://github.com/tusen-ai/naive-ui/issues/4055).
 
 ## 2.34.3
 

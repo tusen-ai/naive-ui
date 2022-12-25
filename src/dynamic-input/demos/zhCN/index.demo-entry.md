@@ -32,6 +32,7 @@ rtl-debug.vue
 | key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |  |
 | min | `number` | `0` | 最少有几项内容 |  |
 | max | `number` | `undefined` | 最多有几项内容 |  |
+| disabled | `boolean` | `false` | 是否禁用 |  |
 | preset | `'input' \| 'pair'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |  |
 | show-sort-button | `boolean` | `false` | 是否显示排序按钮 | 2.25.0 |
 | value | `unknown[]` | `undefined` | 受控模式下的值 |  |

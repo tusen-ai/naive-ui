@@ -73,6 +73,7 @@ export const dynamicInputProps = {
     type: String,
     default: ''
   },
+  disabled: Boolean,
   showSortButton: Boolean,
   createButtonProps: Object as PropType<ButtonProps>,
   onCreate: Function as PropType<(index: number) => any>,
@@ -317,7 +318,8 @@ export default defineComponent({
       remove,
       createItem,
       move,
-      onRender
+      onRender,
+      disabled
     } = this
     onRender?.()
     return (
@@ -336,7 +338,7 @@ export default defineComponent({
             dashed
             size={buttonSize}
             {...this.createButtonProps}
-            disabled={this.insertionDisabled}
+            disabled={this.insertionDisabled || disabled}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleCreateClick}
@@ -372,6 +374,7 @@ export default defineComponent({
                   return [
                     preset === 'input' ? (
                       <NDynamicInputInputPreset
+                        disabled={disabled}
                         clsPrefix={mergedClsPrefix}
                         value={mergedValue[index]}
                         parentPath={
@@ -386,6 +389,7 @@ export default defineComponent({
                       />
                     ) : preset === 'pair' ? (
                       <NDynamicInputPairPreset
+                        disabled={disabled}
                         clsPrefix={mergedClsPrefix}
                         value={mergedValue[index]}
                         parentPath={
@@ -417,7 +421,7 @@ export default defineComponent({
                       {{
                         default: () => [
                           <NButton
-                            disabled={this.removeDisabled}
+                            disabled={this.removeDisabled || disabled}
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
                             circle
@@ -432,7 +436,7 @@ export default defineComponent({
                             }}
                           </NButton>,
                           <NButton
-                            disabled={this.insertionDisabled}
+                            disabled={this.insertionDisabled || disabled}
                             circle
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
@@ -448,7 +452,7 @@ export default defineComponent({
                           </NButton>,
                           showSortButton ? (
                             <NButton
-                              disabled={index === 0}
+                              disabled={index === 0 || disabled}
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
@@ -467,7 +471,7 @@ export default defineComponent({
                           ) : null,
                           showSortButton ? (
                             <NButton
-                              disabled={index === mergedValue.length - 1}
+                              disabled={index === mergedValue.length - 1 || disabled}
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
