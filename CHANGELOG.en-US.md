@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
+
 ## 2.34.3
 
 ### Feats
