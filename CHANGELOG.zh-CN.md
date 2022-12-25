@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在
+
 ## 2.34.3
 
 ### Feats
@@ -31,6 +37,7 @@
 ### i18n
 
 - 更新 koKr 国际化
+
 
 ## 2.34.2
 

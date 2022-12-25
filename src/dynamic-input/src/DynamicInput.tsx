@@ -215,11 +215,13 @@ export default defineComponent({
       if (!Array.isArray(mergedValue)) return
       const { min } = props
       if (mergedValue.length <= min) return
+      const { onRemove } = props
+      if (onRemove){
+        onRemove(index)
+      }
       const newValue = Array.from(mergedValue)
       newValue.splice(index, 1)
       doUpdateValue(newValue)
-      const { onRemove } = props
-      if (onRemove) onRemove(index)
     }
     function swap (
       array: any[],
