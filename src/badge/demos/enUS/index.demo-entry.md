@@ -26,7 +26,7 @@ offset.vue
 | color | `string` | `undefined` | Badge color. |  |
 | dot | `boolean` | `false` | Show badge as dot. |  |
 | max | `number` | `undefined` | The maximum number of the badge when its value overflows. |  |
-| offset | `[string \| number, string \| number]` | `undefined` | Offset of the badge from the left and top of the default position. | NEXT_VERSION |
+| offset | `[string \| number, string \| number]` | `undefined` | Offset of the badge from the left and top of the default position. | 2.34.3 |
 | processing | `boolean` | `false` | Show processing status. |  |
 | show-zero | `boolean` | `false` | Whether to display the badge, even if provided value equals 0. |  |
 | show | `boolean` | `true` | Whether the badge should be shown altogether. |  |

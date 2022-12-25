@@ -94,7 +94,7 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
-    const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
+    const messageRefs = ref<Record<string, PrivateMessageRef>>({})
     const api: MessageApiInjection = {
       create (content: ContentType, options?: MessageOptions) {
         return create(content, { type: 'default', ...options })

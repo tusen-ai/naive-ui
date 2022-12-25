@@ -251,12 +251,14 @@ export default defineComponent({
           borderDisabledChecked,
           labelPadding,
           labelLineHeight,
+          labelFontWeight,
           [createKey('fontSize', mergedSize)]: fontSize,
           [createKey('size', mergedSize)]: size
         }
       } = themeRef.value
       return {
         '--n-label-line-height': labelLineHeight,
+        '--n-label-font-weight': labelFontWeight,
         '--n-size': size,
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,

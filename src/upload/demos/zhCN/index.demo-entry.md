@@ -48,7 +48,7 @@ debug.vue
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
 | multiple | `boolean` | `false` | 是否支持多个文件 |  |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |  |
-| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | 文件图标的渲染函数，在 `list-type="image"` 时生效 | 2.34.0 |
+| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | 文件图标的渲染函数，仅在 `list-type="image"` 和 `list-type="image-card"` 时生效 | 2.34.0 |
 | response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | `n-upload` 使用的 `XMLHttpRequest` 的 `responseType` | 2.33.3 |
 | should-use-thumbnail-url | `(file: UploadSettledFileInfo) => boolean` | 只对图片类文件返回 `true` 的函数 | 是否要对文件使用预览图的判定函数，只在 `list-type="image"` 或 `list-type="image-card"` 时生效 | 2.34.0 |
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |  |
@@ -60,6 +60,7 @@ debug.vue
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
+| keep-file-after-finish | `boolean` | `false` | 文件上传结束的回调中保留 File，不被置为 null |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |

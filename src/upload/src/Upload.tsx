@@ -90,10 +90,13 @@ function createXhrHandlers (
       }
     }
 
-    let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+    let fileAfterChange: SettledFileInfo = Object.assign<
+    {},
+    SettledFileInfo,
+    Partial<FileInfo>
+    >({}, file, {
       status: 'finished',
-      percentage,
-      file: null
+      percentage
     })
     xhrMap.delete(file.id)
     fileAfterChange = createSettledFileInfo(
@@ -149,7 +152,11 @@ function customSubmitImpl (options: {
     withCredentials,
     action,
     onProgress (event) {
-      const fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      const fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'uploading'
       })
       const progress = event.percent
@@ -158,10 +165,13 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onFinish () {
-      let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      let fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'finished',
-        percentage,
-        file: null
+        percentage
       })
       fileAfterChange = createSettledFileInfo(
         inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
@@ -169,7 +179,11 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onError () {
-      let fileAfterChange: SettledFileInfo = Object.assign({}, file, {
+      let fileAfterChange: SettledFileInfo = Object.assign<
+      {},
+      SettledFileInfo,
+      Partial<FileInfo>
+      >({}, file, {
         status: 'error',
         percentage
       })
