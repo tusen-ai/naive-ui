@@ -218,7 +218,6 @@ export default defineComponent({
       const { onRemove } = props
       if (onRemove){
         onRemove(index)
-        return
       }
       const newValue = Array.from(mergedValue)
       newValue.splice(index, 1)
