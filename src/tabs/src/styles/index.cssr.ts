@@ -30,6 +30,8 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 export default cB('tabs', `
   box-sizing: border-box;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   transition:
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
@@ -42,6 +44,36 @@ export default cB('tabs', `
         `)
       ])
     ])
+  ]),
+  cM('left, right', `
+    flex-direction: row;
+  `, [
+    cB('tabs-bar', `
+      width: 2px;
+      right: 0;
+      transition:
+      top .2s var(--n-bezier),
+      max-height .2s var(--n-bezier),
+      background-color .3s var(--n-bezier);
+    `),
+    cB('tabs-tab', `
+      padding: var(--n-tab-padding-vertical); 
+    `)
+  ]),
+  cM('right', `
+    flex-direction: row-reverse;
+  `, [
+    cB('tabs-bar', `
+      left: 0;
+    `)
+  ]),
+  cM('bottom', `
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  `, [
+    cB('tabs-bar', `
+      top: 0;
+    `)
   ]),
   cB('tabs-rail', `
     padding: 3px;
@@ -118,6 +150,17 @@ export default cB('tabs', `
     cM('shadow-after', [
       c('&::after', `
         box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
+      `)
+    ]),
+    cB('tabs-nav-y-scroll', `
+      height: 100%;
+      width: 100%;
+      overflow-y: auto; 
+      scrollbar-width: none;
+    `, [
+      c('&::-webkit-scrollbar', `
+        width: 0;
+        height: 0;
       `)
     ]),
     c('&::before, &::after', `
@@ -333,6 +376,40 @@ export default cB('tabs', `
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
+    ]),
+    cM('left, right', [
+      cB('tabs-wrapper', `
+        flex-direction: column;
+      `, [
+        cB('tabs-tab-wrapper', `
+          flex-direction: column;
+        `, [
+          cB('tabs-tab-pad', `
+            height: var(--n-tab-gap);
+            width: 100%;
+          `)
+        ])
+      ]),
+      cB('tabs-nav-scroll-content', `
+        border-bottom: none;
+      `)
+    ]),
+    cM('left', [
+      cB('tabs-nav-scroll-content', `
+        box-sizing: border-box;
+        border-right: 1px solid var(--n-tab-border-color);
+      `)
+    ]),
+    cM('right', [
+      cB('tabs-nav-scroll-content', `
+        border-left: 1px solid var(--n-tab-border-color);
+      `)
+    ]),
+    cM('bottom', [
+      cB('tabs-nav-scroll-content', `
+        border-top: 1px solid var(--n-tab-border-color);
+        border-bottom: none;
+      `)
     ])
   ])
 ])

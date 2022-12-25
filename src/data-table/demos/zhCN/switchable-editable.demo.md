@@ -34,6 +34,12 @@ const createData = () => [
     name: 'Joe Black',
     age: '32',
     address: 'Sidney No. 1 Lake Park'
+  },
+  {
+    key: 3,
+    name: '',
+    age: '',
+    address: ''
   }
 ]
 
@@ -60,6 +66,7 @@ const ShowOrEdit = defineComponent({
       h(
         'div',
         {
+          style: 'min-height: 22px',
           onClick: handleOnClick
         },
         isEdit.value

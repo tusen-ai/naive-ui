@@ -48,6 +48,7 @@ export default defineComponent({
           dotColorDisabled,
           labelPadding,
           labelLineHeight,
+          labelFontWeight,
           [createKey('fontSize', size)]: fontSize,
           [createKey('radioSize', size)]: radioSize
         }
@@ -55,6 +56,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-label-line-height': labelLineHeight,
+        '--n-label-font-weight': labelFontWeight,
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-active': boxShadowActive,
         '--n-box-shadow-disabled': boxShadowDisabled,

@@ -44,7 +44,7 @@ expand-debug.vue
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |  |
 | cascade | `boolean` | `false` | 是否关联选项 |  |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定勾选回调返回的值，`all` 表示回调函数值为全部选中节点；`parent` 表示回调函数值为父节点（当父节点下所有子节点都选中时）；`child` 表示回调函数值为子节点 |  |
-| checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |  |
+| checkable | `boolean` | `false` | 是否显示选择框 |  |
 | checkbox-placement | `'left' \| 'right'` | `'left'` | 复选框的位置 | 2.28.3 |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |  |
@@ -59,6 +59,7 @@ expand-debug.vue
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
+| get-children | `(option: any) => unknown` | `undefined` | 获取当前选项的子选项 | 2.34.3 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.32.2 |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |
@@ -66,7 +67,7 @@ expand-debug.vue
 | disabled-field | `string` | `'disabled'` | 替代 `TreeOption` 中的 disabled 字段名 | 2.32.2 |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.25.0 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
-| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
+| on-load | `(node: TreeOption) => Promise<unknown>` | `undefined` | 异步加载数据的回调函数，如果没有加载到数据你应该让 Promise resolve `false` 或者 reject 这个 Promise，否则加载动画不会停止 | 非 void Promise 2.34.3 |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |

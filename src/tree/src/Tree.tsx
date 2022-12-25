@@ -34,6 +34,7 @@ import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
+import { NEmpty } from '../../empty'
 import NTreeNode from './TreeNode'
 import {
   keysWithFilter,
@@ -62,13 +63,14 @@ import type {
   RenderSwitcherIcon,
   TreeNodeProps,
   CheckOnClick,
-  TreeInst
+  TreeInst,
+  GetChildren,
+  OnLoad
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
-import { NEmpty } from '../../empty'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -79,8 +81,14 @@ const ITEM_SIZE = 30 // 24 + 3 + 3
 export function createTreeMateOptions<T> (
   keyField: string,
   childrenField: string,
-  disabledField: string
+  disabledField: string,
+  getChildren: GetChildren | undefined
 ): TreeMateOptions<T, T, T> {
+  const settledGetChildren: GetChildren =
+    getChildren ||
+    ((node: T) => {
+      return (node as any)[childrenField]
+    })
   return {
     getIsGroup () {
       return false
@@ -88,9 +96,7 @@ export function createTreeMateOptions<T> (
     getKey (node: T) {
       return (node as any)[keyField]
     },
-    getChildren (node: T) {
-      return (node as any)[childrenField]
-    },
+    getChildren: settledGetChildren,
     getDisabled (node: T) {
       return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
     }
@@ -138,7 +144,7 @@ export type OnUpdateSelectedKeysImpl = (
   }
 ) => void
 export type onUpdateExpandedKeys = (
-  value: Key[],
+  value: Array<string & number>,
   option: Array<TreeOption | null>,
   meta:
   | {
@@ -163,7 +169,6 @@ export type OnUpdateExpandedKeysImpl = (
     action: 'filter'
   }
 ) => void
-type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   allowCheckingNotLoaded: Boolean,
@@ -281,6 +286,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  getChildren: Function as PropType<GetChildren>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -374,6 +380,20 @@ export default defineComponent({
       return virtualListInstRef.value?.itemsElRef
     }
 
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeOption): boolean => {
+        if (!pattern.length) return true
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
+      }
+    })
+
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeOption[]
       highlightKeySet: Set<Key> | null
@@ -412,7 +432,8 @@ export default defineComponent({
         createTreeMateOptions(
           props.keyField,
           props.childrenField,
-          props.disabledField
+          props.disabledField,
+          props.getChildren
         )
       )
     )
@@ -538,20 +559,6 @@ export default defineComponent({
       return droppingNode.parent
     })
 
-    const mergedFilterRef = computed(() => {
-      const { filter } = props
-      if (filter) return filter
-      const { labelField } = props
-      return (pattern: string, node: TreeOption): boolean => {
-        if (!pattern.length) return true
-        const label = node[labelField]
-        if (typeof label === 'string') {
-          return label.toLowerCase().includes(pattern.toLowerCase())
-        }
-        return false
-      }
-    })
-
     // shallow watch data
     watch(
       toRef(props, 'data'),
@@ -631,20 +638,19 @@ export default defineComponent({
         return await Promise.resolve()
       }
       const { value: loadingKeys } = loadingKeysRef
-      return await new Promise((resolve) => {
-        if (!loadingKeys.has(node.key)) {
-          loadingKeys.add(node.key)
-          onLoad(node.rawNode)
-            .then(() => {
-              loadingKeys.delete(node.key)
-              resolve()
-            })
-            .catch((loadError: Error) => {
-              console.error(loadError)
-              resetDragExpandState()
-            })
+      if (!loadingKeys.has(node.key)) {
+        loadingKeys.add(node.key)
+        try {
+          const loadResult = await onLoad(node.rawNode)
+          if (loadResult === false) {
+            resetDragExpandState()
+          }
+        } catch (loadError) {
+          console.error(loadError)
+          resetDragExpandState()
         }
-      })
+        loadingKeys.delete(node.key)
+      }
     }
     watchEffect(() => {
       const { value: displayTreeMate } = displayTreeMateRef

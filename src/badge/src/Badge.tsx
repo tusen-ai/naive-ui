@@ -41,7 +41,10 @@ export const badgeProps = {
   },
   showZero: Boolean,
   processing: Boolean,
-  color: String
+  color: String,
+  offset: Array as unknown as PropType<
+  readonly [number | string, number | string]
+  >
 } as const
 
 export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
@@ -116,6 +119,19 @@ export default defineComponent({
       )
       : undefined
 
+    const offsetStyleRef = computed(() => {
+      const { offset } = props
+      if (!offset) return undefined
+      const [x, y] = offset
+      const reslovedOffsetX = typeof x === 'number' ? `${x}px` : x
+      const reslovedOffsetY = typeof y === 'number' ? `${y}px` : y
+      return {
+        transform: `translate(calc(${
+          rtlEnabledRef?.value ? '50%' : '-50%'
+        } + ${reslovedOffsetX}), ${reslovedOffsetY})`
+      }
+    })
+
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -125,7 +141,8 @@ export default defineComponent({
       handleAfterLeave,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      offsetStyle: offsetStyleRef
     }
   },
   render () {
@@ -157,6 +174,7 @@ export default defineComponent({
                 <sup
                   class={`${mergedClsPrefix}-badge-sup`}
                   title={getTitleAttribute(this.value)}
+                  style={this.offsetStyle}
                 >
                   {resolveSlot($slots.value, () => [
                     !this.dot ? (

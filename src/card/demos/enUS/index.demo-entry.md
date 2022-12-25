@@ -35,6 +35,7 @@ embedded.vue
 | hoverable | `boolean` | `false` | Whether to show shadow when hovering on the card. |  |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | Segment divider settings of the card. |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size. |  |
+| tag | `string` | `'div'` | What tag need the card be rendered as. | 2.34.3 |
 | title | `string` | `undefined` | Card title. |  |
 | on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |  |
 

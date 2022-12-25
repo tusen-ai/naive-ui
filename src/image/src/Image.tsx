@@ -126,6 +126,7 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
+
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
@@ -171,7 +172,11 @@ export default defineComponent({
       onClick: this.mergedOnClick,
       onError: this.mergedOnError,
       onLoad: this.mergedOnLoad,
-      loading: lazy ? 'lazy' : 'eager',
+      // If interseciton observer options is set, do not use native lazy
+      loading:
+        isImageSupportNativeLazy && lazy && !this.intersectionObserverOptions
+          ? 'lazy'
+          : 'eager',
       style: [
         imgProps.style || '',
         placeholderNode && !loaded
