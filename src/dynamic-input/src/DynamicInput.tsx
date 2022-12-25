@@ -216,7 +216,7 @@ export default defineComponent({
       const { min } = props
       if (mergedValue.length <= min) return
       const { onRemove } = props
-      if (onRemove){
+      if (onRemove) {
         onRemove(index)
       }
       const newValue = Array.from(mergedValue)

@@ -6,7 +6,22 @@
 
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
 
+### Feats
+
+- `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
+
 ## 2.34.3
+
+### Fixes
+
+- Fix `n-progress`'s `indicator-text-color` prop doesn't work when `indicator-placement` is `'inside'`.
+- Fix `n-image` error while operating the previewed image, closes [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
+- Fix `n-tree` cannot access `mergedFilterRef` before initialization error, closes [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
+- Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
+- Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
+- Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
+- Fix `n-input` style bug of tiny size with autosize prop, closes [#4167](https://github.com/tusen-ai/naive-ui/issues/4167).
+- Fix `n-image` & `n-avatar` in `lazy` mode, after setting the `intersection-observer-options` `rootMargin` attribute, the preload does not take effect.
 
 ### Feats
 
@@ -22,17 +37,6 @@
 - `n-radio` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-checkbox` adds `labelFontWeight` theme variable, closes [#3516](https://github.com/tusen-ai/naive-ui/issues/3516).
 - `n-tree`'s `on-load` prop allows returned promise to resolve `false` to finish loading effect, closes [#4038](https://github.com/tusen-ai/naive-ui/issues/4038).
-
-### Fixes
-
-- Fix `n-progress`'s `indicator-text-color` prop doesn't work when `indicator-placement` is `'inside'`.
-- Fix `n-image` error while operating the previewed image, closes [#4157](https://github.com/tusen-ai/naive-ui/issues/4157).
-- Fix `n-tree` cannot access `mergedFilterRef` before initialization error, closes [#4134](https://github.com/tusen-ai/naive-ui/issues/4134).
-- Fix `n-menu` can't override submenu dropdown's `trigger` by `dropdown-props`, closes [#4147](https://github.com/tusen-ai/naive-ui/issues/4147).
-- Fix `n-ellipsis` cannot be closed when using `keep-alive`, closes [#4079](https://github.com/tusen-ai/naive-ui/issues/4079).
-- Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
-- Fix `n-input` style bug of tiny size with autosize prop, closes [#4167](https://github.com/tusen-ai/naive-ui/issues/4167).
-- Fix `n-image` & `n-avatar` in `lazy` mode, after setting the `intersection-observer-options` `rootMargin` attribute, the preload does not take effect.
 
 ### i18n
 
@@ -79,7 +83,6 @@
 - `n-input` adds `count-graphemes` prop, closes [#3967](https://github.com/tusen-ai/naive-ui/issues/3967).
 - `n-cascader` adds `not-found` slot, closes [#3862](https://github.com/tusen-ai/naive-ui/issues/3862).
 - `n-avatar` adds `img-props` prop, closes [#3963](https://github.com/tusen-ai/naive-ui/issues/3963).
-- `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
 - `n-data-table` adds `spin-props` prop, closes [#3649](https://github.com/tusen-ai/naive-ui/issues/3649).
 - `n-button` adds `render-icon` prop, closes [#4007](https://github.com/tusen-ai/naive-ui/issues/4007).
 - Add `n-equation` component.
