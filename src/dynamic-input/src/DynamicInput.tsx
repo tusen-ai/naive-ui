@@ -186,7 +186,7 @@ export default defineComponent({
       doUpdateValue(newValue)
     }
     function handleCreateClick (): void {
-      createItem(0)
+      createItem(-1)
     }
     function createItem (index: number): void {
       const { value: mergedValue } = mergedValueRef
