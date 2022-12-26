@@ -19,8 +19,8 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | size | `Number` | `5` | 滚动条大小 |   |
 | duration | `Number` | `0` | 滚动条隐藏动画时间 |   |
-| container-class | `string` | `undefined` | 容器的的类名 |   |
-| container-style | `Object` | `undefined` | 容器的的样式 |   |
+| container-class | `string` | `undefined` | 容器的类名 |   |
+| container-style | `Object` | `undefined` | 容器的样式 |   |
 | content-class | `string` | `undefined` | 内容的类名 |   |
 | content-style | `Object` | `undefined` | 内容的样式 |   |
 | horizontal-rail-style | `Object` | `undefined` | 横向轨道的样式 |   |
