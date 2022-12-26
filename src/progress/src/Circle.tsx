@@ -6,7 +6,7 @@ import {
   WarningIcon,
   InfoIcon
 } from '../../_internal/icons'
-import { Status } from './interface'
+import { Gradient, Status } from './interface'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -30,7 +30,7 @@ export default defineComponent({
       type: Number,
       required: true
     },
-    fillColor: String,
+    fillColor: [String, Object] as PropType<string | Gradient>,
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,
     percentage: {
@@ -64,7 +64,8 @@ export default defineComponent({
     function getPathStyles (
       percent: number,
       offsetDegree: number,
-      strokeColor?: string
+      strokeColor?: string | Gradient,
+      type?: 'rail' | 'fill'
     ): { pathString: string, pathStyle: CSSProperties } {
       const { gapDegree, viewBoxWidth, strokeWidth } = props
       const radius = 50
@@ -78,7 +79,12 @@ export default defineComponent({
       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
       const pathStyle: CSSProperties = {
-        stroke: strokeColor,
+        stroke:
+          type === 'rail'
+            ? (strokeColor as string)
+            : typeof props.fillColor === 'object'
+              ? 'url(#gradient)'
+              : (strokeColor as string),
         strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
@@ -91,6 +97,23 @@ export default defineComponent({
         pathStyle
       }
     }
+
+    const createGradientNode = (): false | JSX.Element => {
+      const form =
+        typeof props.fillColor === 'object' ? props.fillColor.form : ''
+      const to = typeof props.fillColor === 'object' ? props.fillColor.to : ''
+      return (
+        typeof props.fillColor === 'object' && (
+          <defs>
+            <linearGradient id="gradient">
+              <stop offset="0%" stop-color={form} />
+              <stop offset="100%" stop-color={to} />
+            </linearGradient>
+          </defs>
+        )
+      )
+    }
+
     return () => {
       const {
         fillColor,
@@ -106,10 +129,11 @@ export default defineComponent({
         clsPrefix
       } = props
       const { pathString: railPathString, pathStyle: railPathStyle } =
-        getPathStyles(100, 0, railColor)
+        getPathStyles(100, 0, railColor, 'rail')
       const { pathString: fillPathString, pathStyle: fillPathStyle } =
-        getPathStyles(percentage, offsetDegree, fillColor)
+        getPathStyles(percentage, offsetDegree, fillColor, 'fill')
       const viewBoxSize = 100 + strokeWidth
+
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
@@ -122,6 +146,7 @@ export default defineComponent({
               }}
             >
               <svg viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}>
+                {createGradientNode()}
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
