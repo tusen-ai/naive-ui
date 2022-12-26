@@ -145,7 +145,7 @@
   "dependencies": {
     "@css-render/plugin-bem": "^0.15.10",
     "@css-render/vue3-ssr": "^0.15.10",
-    "@types/katex": "^0.14.0",
+    "@types/katex": "^0.16.0",
     "@types/lodash": "^4.14.181",
     "@types/lodash-es": "^4.17.6",
     "async-validator": "^4.0.7",
