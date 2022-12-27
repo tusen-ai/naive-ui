@@ -14,6 +14,7 @@ tooltip.vue
 full-debug.vue
 lazy.vue
 previewed-img-props.vue
+preview-actions.vue
 ```
 
 ## API
@@ -38,6 +39,7 @@ previewed-img-props.vue
 | width | `string \| number` | `undefined` | 图片宽度 |  |
 | on-error | `(e: Event) => void` | `undefined` | 图片加载失败执行的回调 |  |
 | on-load | `(e: Event) => void` | `undefined` | 图片加载完成执行的回调 |  |
+| preview-actions | `Array<'prev' \| 'next' \| 'rotate-left' \| 'rotate-right' \| 'resize' \| 'zoom-out' \| 'zoom-in' \| 'close'>` | `['prev', 'next', 'rotate-left', 'rotate-right', 'resize', 'zoom-out', 'zoom-in', 'close']` | 预览显示按钮 |  |
 
 ### ImageGroup Props
 
