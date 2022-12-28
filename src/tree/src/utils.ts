@@ -116,7 +116,7 @@ export function filterTree (
         }
       }
       const children = n[childrenField] as TreeOption[] | undefined
-      if (children) {
+      if (children && children.length > 0) {
         visit(children)
       }
       path.pop()
