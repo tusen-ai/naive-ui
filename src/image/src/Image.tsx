@@ -161,12 +161,14 @@ export default defineComponent({
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
       src: isImageSupportNativeLazy
-        ? loadSrc
-        : this.showError
+        ? this.showError
           ? this.fallbackSrc
           : this.shouldStartLoading
             ? loadSrc
-            : undefined,
+            : undefined
+        : this.showError
+          ? this.fallbackSrc
+          : loadSrc,
       alt: this.alt || imgProps.alt,
       'aria-label': this.alt || imgProps.alt,
       onClick: this.mergedOnClick,
