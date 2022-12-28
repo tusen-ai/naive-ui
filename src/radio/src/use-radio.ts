@@ -107,7 +107,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     }
   })
   const { mergedSizeRef, mergedDisabledRef } = formItem
-  const inputRef = ref<HTMLElement | null>(null)
+  const inputRef = ref<HTMLInputElement | null>(null)
   const labelRef = ref<HTMLElement | null>(null)
   const NRadioGroup = inject(radioGroupInjectionKey, null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
@@ -148,6 +148,12 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     }
   }
   function handleRadioInputChange (): void {
+    if (
+      (NRadioGroup?.valueRef || props.checked !== undefined) &&
+      inputRef.value
+    ) {
+      inputRef.value.checked = props.checked || props.defaultChecked
+    }
     toggle()
   }
   function handleRadioInputBlur (): void {
