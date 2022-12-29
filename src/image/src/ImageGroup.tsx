@@ -1,5 +1,6 @@
 import { defineComponent, h, ref, provide, getCurrentInstance, Ref } from 'vue'
 import { createId } from 'seemly'
+import { isUndefined } from 'lodash-es'
 import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
@@ -25,7 +26,7 @@ export default defineComponent({
   props: imageGroupProps,
   setup (props) {
     let currentSrc: string | undefined
-    let currentIndex: string | undefined
+    let currentIndex: number | undefined
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
     const vm = getCurrentInstance()
@@ -36,7 +37,7 @@ export default defineComponent({
     }
 
     const setPreviewImg = (img: HTMLImageElement): void => {
-      currentIndex = img.dataset.index
+      currentIndex = Number(img.dataset.index)
       currentSrc = img.dataset.previewSrc
       previewInstRef.value?.setPreviewSrc(currentSrc)
     }
@@ -50,9 +51,13 @@ export default defineComponent({
       )
 
       if (!imgs.length) return
-      const current =
-        imgs[(Number(currentIndex) + step + imgs.length) % imgs.length]
-      setPreviewImg(current)
+      if (isUndefined(currentIndex)) {
+        setPreviewImg(imgs[0])
+      } else {
+        const current = imgs[(currentIndex + step + imgs.length) % imgs.length]
+        if (!current) return
+        setPreviewImg(current)
+      }
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
