@@ -7,9 +7,12 @@ import type { ImagePreviewInst } from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
-ImagePreviewInst & {
+Partial<ImagePreviewInst> & {
   groupId: string
   mergedClsPrefixRef: Ref<string>
+  imageIndex: Ref<number>
+  setImageIndex: (index: number) => void
+  setPreviewImg: (img: HTMLImageElement) => void
 }
 >('n-image-group')
 
@@ -22,12 +25,20 @@ export default defineComponent({
   props: imageGroupProps,
   setup (props) {
     let currentSrc: string | undefined
+    let currentIndex: string | undefined
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
     const vm = getCurrentInstance()
-    const setPreviewSrc = (src: string | undefined): void => {
-      currentSrc = src
-      previewInstRef.value?.setPreviewSrc(src)
+
+    const imageIndex = ref(0)
+    const setImageIndex = (count: number): void => {
+      imageIndex.value = count
+    }
+
+    const setPreviewImg = (img: HTMLImageElement): void => {
+      currentIndex = img.dataset.index
+      currentSrc = img.dataset.previewSrc
+      previewInstRef.value?.setPreviewSrc(currentSrc)
     }
 
     function go (step: 1 | -1): void {
@@ -39,20 +50,15 @@ export default defineComponent({
       )
 
       if (!imgs.length) return
-      const index = Array.from(imgs).findIndex(
-        (img) => img.dataset.previewSrc === currentSrc
-      )
-      if (~index) {
-        setPreviewSrc(
-          imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
-        )
-      } else {
-        setPreviewSrc(imgs[0].dataset.previewSrc)
-      }
+      const current =
+        imgs[(Number(currentIndex) + step + imgs.length) % imgs.length]
+      setPreviewImg(current)
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
-      setPreviewSrc,
+      imageIndex,
+      setPreviewImg,
+      setImageIndex,
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
       },

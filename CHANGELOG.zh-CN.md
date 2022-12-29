@@ -7,6 +7,7 @@
 - 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
+- 修复 `n-image-group` 在预览时因为相同 `src` 而导致的无法正常切换预览的问题，关闭 [#4248](https://github.com/tusen-ai/naive-ui/issues/4248)
 
 ### Feats
 
