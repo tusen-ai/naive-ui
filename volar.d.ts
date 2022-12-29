@@ -47,7 +47,6 @@ declare module 'vue' {
     NElement: typeof import('naive-ui')['NElement']
     NEllipsis: typeof import('naive-ui')['NEllipsis']
     NEmpty: typeof import('naive-ui')['NEmpty']
-    NEquation: typeof import('naive-ui')['NEquation']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
     NFormItemCol: typeof import('naive-ui')['NFormItemCol']
@@ -141,6 +140,7 @@ declare module 'vue' {
     NUploadFileList: typeof import('naive-ui')['NUploadFileList']
     NUploadTrigger: typeof import('naive-ui')['NUploadTrigger']
     NWatermark: typeof import('naive-ui')['NWatermark']
+    NEquation: typeof import('naive-ui')['NEquation']
   }
 }
 export {}

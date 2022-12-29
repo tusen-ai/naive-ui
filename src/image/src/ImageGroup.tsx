@@ -25,7 +25,6 @@ export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
   setup (props) {
-    let currentSrc: string | undefined
     let currentIndex: number | undefined
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
@@ -38,7 +37,7 @@ export default defineComponent({
 
     const setPreviewImg = (img: HTMLImageElement): void => {
       currentIndex = Number(img.dataset.index)
-      currentSrc = img.dataset.previewSrc
+      const currentSrc = img.dataset.previewSrc
       previewInstRef.value?.setPreviewSrc(currentSrc)
     }
 
