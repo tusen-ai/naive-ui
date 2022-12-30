@@ -25,7 +25,12 @@ import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
-import { Key, InternalTreeInst, TreeOption } from '../../tree/src/interface'
+import {
+  Key,
+  InternalTreeInst,
+  TreeOption,
+  GetChildren
+} from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
@@ -150,6 +155,7 @@ export const treeSelectProps = {
   renderPrefix: Function as PropType<TreeSelectRenderPrefix>,
   renderSuffix: Function as PropType<TreeSelectRenderSuffix>,
   nodeProps: Function as PropType<TreeSelectNodeProps>,
+  getChildren: Function as PropType<GetChildren>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
@@ -915,6 +921,7 @@ export default defineComponent({
                                 allowCheckingNotLoaded={
                                   this.allowCheckingNotLoaded
                                 }
+                                getChildren={this.getChildren}
                                 showIrrelevantNodes={false}
                                 animated={false}
                                 pattern={this.pattern}
