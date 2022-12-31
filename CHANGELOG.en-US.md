@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-data-table` last-row missing border-bottom when table heigher than its content, closed [#4216](https://github.com/tusen-ai/naive-ui/issues/4216)
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
