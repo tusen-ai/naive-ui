@@ -426,6 +426,15 @@ export default defineComponent({
       })
       fixedStyleMounted = true
     })
+    const isOverlap = computed(() => {
+      const emptyElem = document.createElement('p')
+      return (
+        getComputedStyle(scrollbarInstRef.value?.wrapperRef ?? emptyElem)
+          .height ===
+        getComputedStyle(scrollbarInstRef.value?.containerRef ?? emptyElem)
+          .height
+      )
+    })
     onUnmounted(() => {
       style.unmount({
         id: `n-${componentId}`
@@ -497,6 +506,7 @@ export default defineComponent({
       stickyExpandedRows: stickyExpandedRowsRef,
       renderExpandIcon: renderExpandIconRef,
       scrollbarProps: scrollbarPropsRef,
+      isOverlap,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -689,6 +699,7 @@ export default defineComponent({
                         `${mergedClsPrefix}-data-table-td`,
                         `${mergedClsPrefix}-data-table-td--last-col`,
                         displayedRowIndex + 1 === rowCount &&
+                          this.isOverlap &&
                           `${mergedClsPrefix}-data-table-td--last-row`
                       ]}
                       colspan={colCount}
@@ -840,6 +851,7 @@ export default defineComponent({
                           isLastCol &&
                             `${mergedClsPrefix}-data-table-td--last-col`,
                           isLastRow &&
+                            this.isOverlap &&
                             `${mergedClsPrefix}-data-table-td--last-row`
                         ]}
                       >
