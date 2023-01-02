@@ -11,12 +11,7 @@
         <n-text depth="1" class="col-header">
           {{ t('resources') }}
         </n-text>
-        <n-button
-          text
-          tag="a"
-          href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch"
-          download
-        >
+        <n-button text tag="a" :href="t('sketchLink')" download>
           {{ t('designResources') }}
         </n-button>
         <n-button text tag="a" target="_blank" href="https://www.xicons.org">
@@ -129,6 +124,8 @@ export default defineComponent({
           dingTalkGroupChat: '钉钉交流群',
           memberLimitReached: '（已满）',
           reportBug: '报告 Bug',
+          sketchLink:
+            'https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-zh-CN.sketch',
           joinUsLink: 'https://app.mokahr.com/campus_apply/tusenweilai/3232#/'
         },
         'en-US': {
@@ -147,6 +144,8 @@ export default defineComponent({
           dingTalkGroupChat: 'DingTalk Group Chat',
           memberLimitReached: '(Member limit reached)',
           reportBug: 'Report Bug',
+          sketchLink:
+            'https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-en-US.sketch',
           joinUsLink:
             'https://boards.greenhouse.io/tusimplerelocationjobs/jobs/5137805002?gh_src=7908a9242us'
         }

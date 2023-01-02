@@ -68,7 +68,7 @@ const trTR: NLocale = {
     selected: (num: number): string => `${num} öğe Seçili`
   },
   Empty: {
-    description: 'Tarih Yok'
+    description: 'Veri Yok'
   },
   Select: {
     placeholder: 'Lütfen seçin'

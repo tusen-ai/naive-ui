@@ -13,7 +13,7 @@ DataTable is used to displays rows of structured data.
       In non-async mode, page count is determined by data's count. Even if you pass a <n-text code>page-count</n-text> in, it won't change data table's displayed page count. If you want it behaves in this way, you should set <n-text code>remote</n-text> prop.
     </li>
     <li>
-      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
+      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
     </li>
   </n-ul>
 </n-alert>
@@ -93,6 +93,7 @@ render-cell.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
@@ -117,6 +118,7 @@ render-cell.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied |  |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |

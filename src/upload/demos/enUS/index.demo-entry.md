@@ -42,13 +42,12 @@ download.vue
 | input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
-| keep-file-after-finish | `boolean` | `false` | Whether to keep file object in file info after upload is finished. | NEXT_VERSION |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |
 | method | `string` | `'POST'` | The HTTP request method. |  |
 | multiple | `boolean` | `false` | Allow multiple files to be selected. |  |
 | name | `string` | `'file'` | The field name for the file(s) in the HTTP request's form data. |  |
-| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | Render function of file icon. It works when `list-type="image"`. | 2.34.0 |
+| render-icon | `(file: UploadSettledFileInfo) => VNodeChild` | `undefined` | Render function of file icon. It only works when `list-type="image"` or `list-type="image-card"`. | 2.34.0 |
 | response-type | `'' \| 'arraybuffer' \| 'blob' \| 'document' \| 'json' \| 'text'` | `''` | Response type of `XMLHttpRequest` used by `n-upload` | 2.33.3 |
 | should-use-thumbnail-url | `(file: UploadSettledFileInfo) => boolean` | A function that only returns `true` for image typed file. | A function that determines whether to show thumbnail for the file. It only works when `list-type="image"` or `list-type="image-card"`. | 2.34.0 |
 | show-cancel-button | `boolean` | `true` | Show a cancel button (while uploading). Use the `on-remove` callback for this event. |  |
