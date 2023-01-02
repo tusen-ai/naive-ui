@@ -76,6 +76,7 @@ describe('n-dynamic-tags', () => {
     )
     await wrapper.setProps({ value: ['教师', '程序员'] })
     expect(wrapper.find('.n-button').classes()).toContain('n-button--disabled')
+    wrapper.unmount()
   })
 
   it('should work with `round` prop', async () => {
