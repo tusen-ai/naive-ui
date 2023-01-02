@@ -144,7 +144,7 @@ export type OnUpdateSelectedKeysImpl = (
   }
 ) => void
 export type onUpdateExpandedKeys = (
-  value: Key[],
+  value: Array<string & number>,
   option: Array<TreeOption | null>,
   meta:
   | {
@@ -638,20 +638,19 @@ export default defineComponent({
         return await Promise.resolve()
       }
       const { value: loadingKeys } = loadingKeysRef
-      return await new Promise((resolve) => {
-        if (!loadingKeys.has(node.key)) {
-          loadingKeys.add(node.key)
-          onLoad(node.rawNode)
-            .then(() => {
-              loadingKeys.delete(node.key)
-              resolve()
-            })
-            .catch((loadError: Error) => {
-              console.error(loadError)
-              resetDragExpandState()
-            })
+      if (!loadingKeys.has(node.key)) {
+        loadingKeys.add(node.key)
+        try {
+          const loadResult = await onLoad(node.rawNode)
+          if (loadResult === false) {
+            resetDragExpandState()
+          }
+        } catch (loadError) {
+          console.error(loadError)
+          resetDragExpandState()
         }
-      })
+        loadingKeys.delete(node.key)
+      }
     }
     watchEffect(() => {
       const { value: displayTreeMate } = displayTreeMateRef

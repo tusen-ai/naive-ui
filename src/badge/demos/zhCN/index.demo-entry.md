@@ -27,7 +27,7 @@ offset.vue
 | color | `string` | `undefined` | 标记的颜色 |  |
 | dot | `boolean` | `false` | 标记是否显示为点 |  |
 | max | `number` | `undefined` | 标记最大数来处理溢出情况 |  |
-| offset | `[string \| number, string \| number]` | `undefined` | 距默认位置左侧、上方的偏移量 | NEXT_VERSION |
+| offset | `[string \| number, string \| number]` | `undefined` | 距默认位置左侧、上方的偏移量 | 2.34.3 |
 | processing | `boolean` | `false` | 标记显示进度 |  |
 | show-zero | `boolean` | `false` | 标记为 0 时是否显示 |  |
 | show | `boolean` | `true` | 标记受控显示 |  |

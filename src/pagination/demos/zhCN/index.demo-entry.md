@@ -32,7 +32,7 @@ rtl-debug.vue
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | 不同部分的展示顺序 | 2.32.2 |
-| goto | `() => VNodeChild` | `undefined` | 渲染快速跳转的文本内容 | NEXT_VERSION |
+| goto | `() => VNodeChild` | `undefined` | 渲染快速跳转的文本内容 | 2.34.3 |
 | item-count | `number` | `undefined` | 总条数 |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
@@ -43,7 +43,7 @@ rtl-debug.vue
 | page-slot | `number` | `9` | 页码显示的个数 |  |
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
-| select-props | `SelectProps` | `undefined` | Page size select's props. | NEXT_VERSION |
+| select-props | `SelectProps` | `undefined` | 分页大小选择器的属性 | 2.34.3 |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | 2.29.0 |
 | simple | `boolean` | `false` | 是否显示为简单分页 | 2.32.2 |

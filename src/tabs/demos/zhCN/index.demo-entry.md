@@ -29,6 +29,7 @@ unkeyed-debug.vue
 addable-debug.vue
 animation-debug.vue
 animationx-debug.vue
+position-debug.vue
 ```
 
 ## API
