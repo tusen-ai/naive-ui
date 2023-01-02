@@ -318,11 +318,20 @@ export interface TableExpandColumn<T = InternalRowData>
   expandable?: Expandable<T>
 }
 
+export type TableColumnKey<T> = T extends any
+  ? {
+      key: keyof T
+    }
+  : {
+      key: ColumnKey
+    }
+
 export type TableColumn<T = InternalRowData> =
   | TableColumnGroup<T>
   | TableBaseColumn<T>
   | TableSelectionColumn<T>
   | TableExpandColumn<T>
+  | TableColumnKey<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions<T = InternalRowData> = Array<
