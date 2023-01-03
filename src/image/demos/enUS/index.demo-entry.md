@@ -13,6 +13,7 @@ custom.vue
 tooltip.vue
 lazy.vue
 previewed-img-props.vue
+preview-actions.vue
 ```
 
 ## API
@@ -37,6 +38,7 @@ previewed-img-props.vue
 | width | `string \| number` | `undefined` | Image width. |  |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the image fails to load. |  |
 | on-load | `(e: Event) => void` | `undefined` | Callback executed after the image is loaded. |  |
+| preview-actions | `Array<'prev' \| 'next' \| 'rotate-left' \| 'rotate-right' \| 'resize' \| 'zoom-out' \| 'zoom-in' \| 'close'>` | `['prev', 'next', 'rotate-left', 'rotate-right', 'resize', 'zoom-out', 'zoom-in', 'close']` | Preview display button. |  |
 
 ### ImageGroup Props
 
