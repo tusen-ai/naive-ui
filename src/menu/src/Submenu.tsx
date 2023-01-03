@@ -180,7 +180,7 @@ export const NSubmenu = defineComponent({
       <NDropdown
         size="large"
         trigger="hover"
-        {...this.menuProps?.dropdownProps}
+        {...(this.menuProps?.dropdownProps || {})}
         themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
         theme={this.mergedTheme.peers.Dropdown}
         builtinThemeOverrides={{

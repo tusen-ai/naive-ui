@@ -16,6 +16,7 @@ import { useCompitable, useMergedState } from 'vooks'
 import { FollowerPlacement } from 'vueuc'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import { DropdownProps } from '../../dropdown'
+import { TooltipProps } from '../../tooltip'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
@@ -119,6 +120,7 @@ export const menuProps = {
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
   dropdownProps: Object as PropType<DropdownProps>,
+  tooltipProps: Object as PropType<TooltipProps>,
   accordion: Boolean,
   nodeProps: Function as PropType<MenuNodeProps>,
   // deprecated

@@ -12,7 +12,8 @@
 
 - `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
 - `n-dynamic-input` add `disabled` prop, closes [#4055](https://github.com/tusen-ai/naive-ui/issues/4055).
-- `n-data-table` adds `titleAlign` prop, closes[#3954](https://github.com/tusen-ai/naive-ui/issues/3954).
+- `n-data-table` adds `titleAlign` prop, closes [#3954](https://github.com/tusen-ai/naive-ui/issues/3954).
+- `n-menu` adds `tooltip-props` prop, closes [#4226](https://github.com/tusen-ai/naive-ui/issues/4226).
 
 ## 2.34.3
 
