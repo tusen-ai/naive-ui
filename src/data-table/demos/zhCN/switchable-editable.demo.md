@@ -68,11 +68,11 @@ const ShowOrEdit = defineComponent({
 export default defineComponent({
   setup () {
     const data = ref(createData())
+    const page = ref(1)
+
     const getDataIndex = (key) => {
       return data.value.findIndex((item) => item.key === key)
     }
-    const page = ref(1)
-
     const handlePageChange = (curPage) => {
       page.value = curPage
     }
@@ -81,6 +81,7 @@ export default defineComponent({
       pageSize: 10,
       page: page.value
     }))
+
     return {
       data,
       paginationRef,
