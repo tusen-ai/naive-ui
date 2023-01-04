@@ -150,9 +150,11 @@ export default defineComponent({
     const xScrollInstRef = ref<(VXScrollInst & ComponentPublicInstance) | null>(
       null
     )
-
-    const leftReachedRef = ref(true)
-    const rightReachedRef = ref(true)
+    const yScrollRef = ref<HTMLElement | null>(null)
+    const leftReachedRef = ref(false)
+    const rightReachedRef = ref(false)
+    const topReachedRef = ref(false)
+    const bottomReachedRef = ref(false)
 
     const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
@@ -179,6 +181,10 @@ export default defineComponent({
         justifyContent: props.justifyContent
       }
     })
+
+    const isVertical = computed(() =>
+      ['left', 'right'].includes(props.placement)
+    )
 
     watch(mergedValueRef, () => {
       tabChangeIdRef.id = 0
@@ -393,7 +399,7 @@ export default defineComponent({
         }
       }
       if (type !== 'segment') {
-        deriveScrollShadow(xScrollInstRef.value?.$el)
+        deriveScrollShadow(xScrollInstRef.value?.$el || yScrollRef.value)
       }
     }
     const handleNavResize = throttle(_handleNavResize, 64)
@@ -446,14 +452,31 @@ export default defineComponent({
 
     function deriveScrollShadow (el: HTMLElement | null): void {
       if (!el) return
-      const { scrollLeft, scrollWidth, offsetWidth } = el
-      leftReachedRef.value = scrollLeft <= 0
-      rightReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+      const {
+        scrollLeft,
+        scrollWidth,
+        offsetWidth,
+        scrollTop,
+        scrollHeight,
+        offsetHeight
+      } = el
+      if (isVertical.value) {
+        topReachedRef.value = scrollTop <= 0
+        bottomReachedRef.value = scrollTop + offsetHeight >= scrollHeight
+      } else {
+        leftReachedRef.value = scrollLeft <= 0
+        rightReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+      }
     }
 
     const handleScroll = throttle((e: Event) => {
       deriveScrollShadow(e.target as HTMLElement)
     }, 64)
+
+    const handleYScroll = throttle((e: Event) => {
+      deriveScrollShadow(e.target as HTMLElement)
+    }, 64)
+
     provide(tabsInjectionKey, {
       triggerRef: toRef(props, 'trigger'),
       tabStyleRef: toRef(props, 'tabStyle'),
@@ -477,16 +500,23 @@ export default defineComponent({
     // avoid useless rerender
     watchEffect(() => {
       const { value: el } = scrollWrapperElRef
-      if (!el || ['left', 'right'].includes(props.placement)) return
+      if (!el) return
       const { value: clsPrefix } = mergedClsPrefixRef
       const shadowBeforeClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-before`
       const shadowAfterClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-after`
-      if (leftReachedRef.value) {
+
+      if (
+        (!isVertical.value && leftReachedRef.value) ||
+        (isVertical.value && topReachedRef.value)
+      ) {
         el.classList.remove(shadowBeforeClass)
       } else {
         el.classList.add(shadowBeforeClass)
       }
-      if (rightReachedRef.value) {
+      if (
+        (!isVertical.value && rightReachedRef.value) ||
+        (isVertical.value && bottomReachedRef.value)
+      ) {
         el.classList.remove(shadowAfterClass)
       } else {
         el.classList.add(shadowAfterClass)
@@ -610,12 +640,15 @@ export default defineComponent({
       barElRef,
       addTabInstRef,
       xScrollInstRef,
+      yScrollRef,
       scrollWrapperElRef,
+      isVertical,
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
       handleNavResize,
       mergedSize: compitableSizeRef,
       handleScroll,
+      handleYScroll,
       handleTabsResize,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
@@ -806,7 +839,7 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
                     ref="scrollWrapperElRef"
                   >
-                    {['top', 'bottom'].includes(placement) ? (
+                    {!this.isVertical ? (
                       <VXScroll
                         ref="xScrollInstRef"
                         onScroll={this.handleScroll}
@@ -816,7 +849,11 @@ export default defineComponent({
                         }}
                       </VXScroll>
                     ) : (
-                      <div class={`${mergedClsPrefix}-tabs-nav-y-scroll`}>
+                      <div
+                        class={`${mergedClsPrefix}-tabs-nav-y-scroll`}
+                        ref="yScrollRef"
+                        onScroll={this.handleYScroll}
+                      >
                         {scrollContent()}
                       </div>
                     )}
