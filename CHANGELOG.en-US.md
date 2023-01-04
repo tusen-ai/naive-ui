@@ -7,6 +7,7 @@
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
+- Fix `n-layout-sider` the problem that the `n-scrollbar` is affected by the `z-index` when the child node is `n-menu`, closes [#4244](https://github.com/tusen-ai/naive-ui/issues/4244).
 
 ### Feats
 

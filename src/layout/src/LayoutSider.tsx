@@ -309,6 +309,9 @@ export default defineComponent({
             contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            // Fix the problem that the scrollbar is affected by the z-index when the layout-sider child node is menu
+            verticalRailStyle={{ zIndex: 1 }}
+            horizontalRailStyle={{ zIndex: 1 }}
             // here is a hack, since in light theme the scrollbar color is dark,
             // we need to invert it in light color...
             builtinThemeOverrides={
