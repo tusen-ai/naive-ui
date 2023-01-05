@@ -7,6 +7,7 @@ Affix 可以让内容在页面滚动的时候固定在一个位置，它和 `pos
 ```demo
 basic.vue
 position.vue
+event.vue
 ```
 
 ## API

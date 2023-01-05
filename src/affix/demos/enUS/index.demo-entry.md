@@ -7,6 +7,7 @@ Affix can make content stick to fixed places when scrolling. It's similar to `po
 ```demo
 basic.vue
 position.vue
+event.vue
 ```
 
 ## API
