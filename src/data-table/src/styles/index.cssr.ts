@@ -222,6 +222,7 @@ export default c([
       ]),
       fixedColumnStyle,
       cM('selection', `
+        min-width: 46px;
         padding: 0;
         text-align: center;
         line-height: 0;
@@ -506,7 +507,7 @@ export default c([
       color: var(--n-th-icon-color);
       position: absolute;
       font-size: 14px;
-      right: -4px;
+      right: -1px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 1;
