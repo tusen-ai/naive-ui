@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `German` i18n, closes [#4306](https://github.com/tusen-ai/naive-ui/issues/4306).
+
+### Feats
+
 ## 2.34.3
 
 ### Feats
