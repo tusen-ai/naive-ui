@@ -1,4 +1,5 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import { Gradient } from './interface'
 
 function circlePath (r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -34,7 +35,7 @@ export default defineComponent({
       required: true
     },
     fillColor: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<string[] | Gradient[]>,
       default: () => []
     },
     railColor: {
@@ -60,6 +61,22 @@ export default defineComponent({
       )
       return strokeDasharrays
     })
+    const createGradientNode = (
+      p: number,
+      index: number
+    ): false | JSX.Element => {
+      const item = props.fillColor[index]
+      const form = typeof item === 'object' ? item.form : ''
+      const to = typeof item === 'object' ? item.to : ''
+      return (
+        typeof props.fillColor[index] === 'object' && (
+          <linearGradient id={`gradient-${index}`}>
+            <stop offset="0%" stop-color={form} />
+            <stop offset="100%" stop-color={to} />
+          </linearGradient>
+        )
+      )
+    }
     return () => {
       const {
         viewBoxWidth,
@@ -77,6 +94,11 @@ export default defineComponent({
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxWidth}`}>
+                <defs>
+                  {percentage.map((p, index) => {
+                    return createGradientNode(p, index)
+                  })}
+                </defs>
                 {percentage.map((p, index) => {
                   return (
                     <g key={index}>
@@ -121,7 +143,10 @@ export default defineComponent({
                         style={{
                           strokeDasharray: strokeDasharrayRef.value[index],
                           strokeDashoffset: 0,
-                          stroke: fillColor[index]
+                          stroke:
+                            typeof fillColor[index] === 'object'
+                              ? `url(#gradient-${index})`
+                              : (fillColor[index] as string)
                         }}
                       />
                     </g>
