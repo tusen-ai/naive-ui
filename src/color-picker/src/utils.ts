@@ -54,7 +54,7 @@ export function floor (color: number[]): number[] {
 
 export function normalizeHue (hue: number): number {
   hue = Math.round(hue)
-  return hue >= 360 ? 359 : hue < 0 ? 0 : hue
+  return hue >= 360 ? 360 : hue < 0 ? 0 : hue
 }
 
 export function normalizeAlpha (alpha: number): number {
