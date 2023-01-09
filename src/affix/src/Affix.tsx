@@ -6,7 +6,8 @@ import {
   defineComponent,
   CSSProperties,
   PropType,
-  h
+  h,
+  watch
 } from 'vue'
 import { unwrapElement, beforeNextFrameOnce } from 'seemly'
 import { useConfig, useStyle } from '../../_mixins'
@@ -64,7 +65,8 @@ export const affixProps = {
       return true
     },
     default: undefined
-  }
+  },
+  onChange: Function as PropType<(affixed: boolean) => void>
 } as const
 
 export const affixPropKeys = keysOf(affixProps)
@@ -99,6 +101,9 @@ export default defineComponent({
     })
     const selfRef = ref<Element | null>(null)
     const init = (): void => {
+      watch(affixedRef, (val) => {
+        if (props.onChange) props.onChange(val)
+      })
       const { target: getScrollTarget, listenTo } = props
       if (getScrollTarget) {
         // deprecated

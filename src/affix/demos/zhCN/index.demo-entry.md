@@ -7,6 +7,7 @@ Affix 可以让内容在页面滚动的时候固定在一个位置，它和 `pos
 ```demo
 basic.vue
 position.vue
+event.vue
 ```
 
 ## API
@@ -21,3 +22,4 @@ position.vue
 | trigger-top | `number` | `undefined` | 触发顶部固定时，Affix 和目标元素元素的顶部距离（如果没设定，会使用 `top` 代替) |
 | position | `'fixed' \| 'absolute'` | `'fixed'` | Affix 的 CSS position |
 | top | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS top 属性（如果没设定，会使用 `trigger-top` 代替) |
+| on-change | `(value: boolean) => void` | `undefined` | Affix 的状态发生变化时触发事件 |
