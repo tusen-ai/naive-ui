@@ -22,3 +22,4 @@ event.vue
 | trigger-top | `number` | `undefined` | The distance px to top of target to trigger top affix. (if not set, use `top` prop) |
 | position | `'fixed' \| 'absolute'` | `'fixed'` | CSS position of the affix. |
 | top | `number` | `undefined` | The css top property after trigger top affix. (if not set, use `trigger-top` prop) |
+| on-change | `(value: boolean) => void` | `undefined` | When the status of Affix changes, a callback will be triggered |
