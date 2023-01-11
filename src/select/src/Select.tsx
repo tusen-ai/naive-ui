@@ -395,6 +395,7 @@ export default defineComponent({
       value: string | number | Array<string | number> | null,
       option: SelectOption | null | SelectOption[]
     ): void {
+      if (!props.multiple && value === mergedValueRef.value) return
       const {
         onChange,
         'onUpdate:value': _onUpdateValue,
