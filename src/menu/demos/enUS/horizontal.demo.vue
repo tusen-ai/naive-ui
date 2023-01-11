@@ -56,6 +56,15 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(BookIcon)
   },
   {
+    type: 'spacer',
+    key: 'spacer',
+    props: {
+      style: {
+        flex: '1'
+      }
+    }
+  },
+  {
     label: 'Dance Dance Dance',
     key: 'Dance Dance Dance',
     icon: renderIcon(BookIcon),
@@ -115,3 +124,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.n-menu {
+  display: flex;
+}
+</style>

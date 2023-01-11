@@ -46,7 +46,7 @@ show.vue
 | inverted | `boolean` | `false` | Use inverted style. |  |
 | key-field | `string` | `'key'` | Field name of key. |  |
 | label-field | `string` | `'label'` | Field name of label. |  |
-| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuSpacerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
 | node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | Node's DOM attrs generator. | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |  |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |  |
@@ -88,6 +88,14 @@ show.vue
 | props | `HTMLAttributes` | Attributes of the divider. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 | type | `'divider'` | The type of the menu item, **required!** |  |
+
+### MenuSpacerOption Properties
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| key | `string` | The indentifier of the menu group. | 2.33.0 |
+| props | `HTMLAttributes` | Attributes of the spacer. | 2.33.0 |
+| type | `'spacer'` | The type of the menu item, **required!** | 2.33.0 |
 
 ### Menu Methods
 

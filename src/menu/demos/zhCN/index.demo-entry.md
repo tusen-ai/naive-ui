@@ -48,7 +48,7 @@ show-debug.vue
 | inverted | `boolean` | `false` | 使用反转样式 |  |
 | key-field | `string` | `'key'` | key 的字段名 |  |
 | label-field | `string` | `'label'` | label 的字段名 |  |
-| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuSpacerOption \|MenuGroupOption>` | `[]` | 菜单的数据 |  |
 | node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | 节点的 DOM 属性生成函数 | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |  |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |  |
@@ -90,6 +90,14 @@ show-debug.vue
 | props | `HTMLAttributes` | 分割线的属性             |        |
 | show? | `boolean`        | 是否显示菜单项           | 2.32.2 |
 | type  | `'divider'`      | 菜单项的类型，**必填！** |        |
+
+#### MenuSpacerOption Properties
+
+| 名称  | 类型             | 说明                     | 版本   |
+| ----- | ---------------- | ------------------------ | ------ |
+| key   | `string`         | 菜单项的标识符           | 2.33.0 |
+| props | `HTMLAttributes` | 间隔的属性               | 2.33.0 |
+| type  | `'spacer'`       | 菜单项的类型，**必填！** | 2.33.0 |
 
 ### Menu Methods
 

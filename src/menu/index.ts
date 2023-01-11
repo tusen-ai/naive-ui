@@ -4,6 +4,7 @@ export type {
   MenuOption,
   MenuGroupOption,
   MenuDividerOption,
+  MenuSpacerOption,
   MenuNodeProps,
   MenuInst
 } from './src/interface'

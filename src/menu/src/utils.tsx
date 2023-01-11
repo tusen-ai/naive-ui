@@ -7,11 +7,14 @@ import { NMenuOptionGroup, menuItemGroupProps } from './MenuOptionGroup'
 import { NSubmenu, submenuProps } from './Submenu'
 import { NMenuOption, menuItemProps } from './MenuOption'
 import NMenuDivider from './MenuDivider'
+import NMenuSpacer from './MenuSpacer'
 import {
   MenuOption,
   MenuGroupOption,
   MenuIgnoredOption,
-  MenuMixedOption
+  MenuMixedOption,
+  MenuSpacerOption,
+  MenuDividerOption
 } from './interface'
 import type { MenuSetupProps } from './Menu'
 
@@ -22,13 +25,23 @@ const submenuPropKeys = keysOf(submenuProps)
 export function isIgnoredNode (
   rawNode: MenuMixedOption
 ): rawNode is MenuIgnoredOption {
-  return rawNode.type === 'divider' || rawNode.type === 'render'
+  return (
+    rawNode.type === 'divider' ||
+    rawNode.type === 'render' ||
+    rawNode.type === 'spacer'
+  )
 }
 
 export function isDividerNode (
   rawNode: MenuMixedOption
-): rawNode is MenuIgnoredOption {
+): rawNode is MenuDividerOption {
   return rawNode.type === 'divider'
+}
+
+export function isSpacerNode (
+  rawNode: MenuMixedOption
+): rawNode is MenuSpacerOption {
+  return rawNode.type === 'spacer'
 }
 
 export function itemRenderer (
@@ -43,6 +56,8 @@ export function itemRenderer (
   if (isIgnoredNode(rawNode)) {
     if (isDividerNode(rawNode)) {
       return <NMenuDivider key={tmNode.key} {...rawNode.props} />
+    } else if (isSpacerNode(rawNode)) {
+      return <NMenuSpacer key={tmNode.key} {...rawNode.props} />
     }
     return null
   }
