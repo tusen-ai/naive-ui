@@ -15,7 +15,7 @@ export function createDiscreteApi<T extends DiscreteApiType> (
     notificationProviderProps,
     loadingBarProviderProps
   }: DiscreteApiOptions = {}
-): DiscreteApi {
+): DiscreteApi<T> {
   const providersAndProps: Array<{
     type: DiscreteApiType
     Provider: Component
