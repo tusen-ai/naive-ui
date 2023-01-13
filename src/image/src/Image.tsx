@@ -160,6 +160,7 @@ export default defineComponent({
       ref: 'imageRef',
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
+      draggable: false,
       src: isImageSupportNativeLazy
         ? loadSrc
         : this.showError
