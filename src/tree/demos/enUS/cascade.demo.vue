@@ -47,8 +47,15 @@ export default defineComponent({
       data: createData(),
       defaultExpandedKeys: ref(['40', '4030', '403020']),
       defaultCheckedKeys: ref(['40302010']),
-      updateCheckedKeys: (v: string[]) => {
-        console.log('updateCheckedKeys', v)
+      updateCheckedKeys: (
+        keys: Array<string | number>,
+        options: Array<TreeOption | null>,
+        meta: {
+          node: TreeOption | null
+          action: 'check' | 'uncheck'
+        }
+      ) => {
+        console.log('updateCheckedKeys', keys, options, meta)
       }
     }
   }

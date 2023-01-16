@@ -10,6 +10,7 @@ export const exposedDialogEnvProps = {
   ...dialogProps,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
+  transformOrigin: String as PropType<'center' | 'mouse'>,
   blockScroll: { type: Boolean, default: true },
   closeOnEsc: { type: Boolean, default: true },
   onEsc: Function as PropType<() => void>,
@@ -144,6 +145,7 @@ export const NDialogEnvironment = defineComponent({
         closeOnEsc={this.closeOnEsc}
         blockScroll={this.blockScroll}
         autoFocus={this.autoFocus}
+        transformOrigin={this.transformOrigin}
         internalAppear
         internalDialog
       >

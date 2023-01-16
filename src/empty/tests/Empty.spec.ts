@@ -23,6 +23,7 @@ describe('n-empty', () => {
     expect(wrapper.find('.n-empty__icon').text()).toBe('test-icon')
     expect(wrapper.find('.n-empty__extra').exists()).toBe(true)
     expect(wrapper.find('.n-empty__extra').text()).toBe('test-extra')
+    wrapper.unmount()
   })
   it('should work with `description` prop', () => {
     const wrapper = mount(NEmpty, {
@@ -35,6 +36,7 @@ describe('n-empty', () => {
     expect(wrapper.find('.n-empty__description').text()).toContain(
       'test-description'
     )
+    wrapper.unmount()
   })
 
   it('should work with `show-description` prop', async () => {
@@ -43,6 +45,7 @@ describe('n-empty', () => {
 
     await wrapper.setProps({ showDescription: false })
     expect(wrapper.find('.n-empty__description').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `show-icon` prop', async () => {
@@ -51,6 +54,7 @@ describe('n-empty', () => {
 
     await wrapper.setProps({ showIcon: false })
     expect(wrapper.find('.n-empty__icon').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -66,5 +70,6 @@ describe('n-empty', () => {
 
     await wrapper.setProps({ size: 'huge' })
     expect(wrapper.find('.n-empty').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 })

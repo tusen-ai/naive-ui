@@ -243,6 +243,7 @@ export default defineComponent({
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       summaryPlacementRef: toRef(props, 'summaryPlacement'),
+      scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       syncScrollState,
       doUpdatePage,
       doUpdateFilters,
@@ -400,7 +401,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, themeClass, onRender, $slots } = this
+    const { mergedClsPrefix, themeClass, onRender, $slots, spinProps } = this
     onRender?.()
     return (
       <div
@@ -435,14 +436,17 @@ export default defineComponent({
         <Transition name="fade-in-scale-up-transition">
           {{
             default: () => {
-              return this.loading
-                ? resolveSlot($slots.loading, () => [
+              return this.loading ? (
+                <div class={`${mergedClsPrefix}-data-table-loading-wrapper`}>
+                  {resolveSlot($slots.loading, () => [
                     <NBaseLoading
                       clsPrefix={mergedClsPrefix}
                       strokeWidth={20}
+                      {...spinProps}
                     />
-                ])
-                : null
+                  ])}
+                </div>
+              ) : null
             }
           }}
         </Transition>

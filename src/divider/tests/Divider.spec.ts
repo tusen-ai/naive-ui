@@ -14,6 +14,7 @@ describe('n-divider', () => {
       }
     })
     wrapper.text().includes(str)
+    wrapper.unmount()
   })
 
   it('should work with `title-placement` prop', async () => {
@@ -29,6 +30,7 @@ describe('n-divider', () => {
     expect(wrapper.find('.n-divider').classes()).toContain(
       'n-divider--title-position-right'
     )
+    wrapper.unmount()
   })
 
   it('should work with `dashed` prop', async () => {
@@ -39,6 +41,7 @@ describe('n-divider', () => {
     expect(wrapper.find('.n-divider').classes()).toContain(
       'n-divider--no-title'
     )
+    wrapper.unmount()
   })
 
   it('should work with `vertical` prop', async () => {
@@ -49,5 +52,6 @@ describe('n-divider', () => {
     expect(wrapper.find('.n-divider').classes()).toContain(
       'n-divider--vertical'
     )
+    wrapper.unmount()
   })
 })

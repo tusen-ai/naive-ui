@@ -2,7 +2,7 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { Ref, VNodeChild } from 'vue'
+import { Ref, Slots, VNodeChild } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
@@ -57,6 +57,7 @@ export type OnUpdateValueImpl = (
 export type MenuModel = TmNode[][]
 
 export interface CascaderInjection {
+  slots: Slots
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<CascaderTheme>>
   mergedValueRef: Ref<Value | null>
@@ -77,6 +78,7 @@ export interface CascaderInjection {
   virtualScrollRef: Ref<boolean>
   optionHeightRef: Ref<string>
   labelFieldRef: Ref<string>
+  showCheckboxRef: Ref<boolean>
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void
@@ -119,4 +121,9 @@ export const cascaderInjectionKey =
 export interface CascaderInst {
   focus: () => void
   blur: () => void
+  getCheckedData: () => { keys: Key[], options: Array<CascaderOption | null> }
+  getIndeterminateData: () => {
+    keys: Key[]
+    options: Array<CascaderOption | null>
+  }
 }

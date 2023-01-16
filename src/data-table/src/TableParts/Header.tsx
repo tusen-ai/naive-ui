@@ -218,29 +218,38 @@ export default defineComponent({
                   }
                   return (
                     <>
-                      {ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
-                        <div
-                          class={`${mergedClsPrefix}-data-table-th__ellipsis`}
-                        >
-                          {renderTitle(column)}
+                      <div
+                        class={`${mergedClsPrefix}-data-table-th__title-wrapper`}
+                      >
+                        <div class={`${mergedClsPrefix}-data-table-th__title`}>
+                          {ellipsis === true ||
+                          (ellipsis && !ellipsis.tooltip) ? (
+                            <div
+                              class={`${mergedClsPrefix}-data-table-th__ellipsis`}
+                            >
+                              {renderTitle(column)}
+                            </div>
+                              ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+                            : ellipsis && typeof ellipsis === 'object' ? (
+                            <NEllipsis
+                              {...ellipsis}
+                              theme={mergedTheme.peers.Ellipsis}
+                              themeOverrides={
+                                mergedTheme.peerOverrides.Ellipsis
+                              }
+                            >
+                              {{
+                                default: () => renderTitle(column)
+                              }}
+                            </NEllipsis>
+                            ) : (
+                              renderTitle(column)
+                            )}
                         </div>
-                      ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                        : ellipsis && typeof ellipsis === 'object' ? (
-                        <NEllipsis
-                          {...ellipsis}
-                          theme={mergedTheme.peers.Ellipsis}
-                          themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-                        >
-                          {{
-                            default: () => renderTitle(column)
-                          }}
-                        </NEllipsis>
-                        ) : (
-                          renderTitle(column)
-                        )}
-                      {isColumnSortable(column) ? (
-                        <SortButton column={column as TableBaseColumn} />
-                      ) : null}
+                        {isColumnSortable(column) ? (
+                          <SortButton column={column as TableBaseColumn} />
+                        ) : null}
+                      </div>
                       {isColumnFilterable(column) ? (
                         <FilterButton
                           column={column as TableBaseColumn}
@@ -270,7 +279,7 @@ export default defineComponent({
                     ref={(el) => (cellElsRef[key] = el as HTMLTableCellElement)}
                     key={key}
                     style={{
-                      textAlign: column.align,
+                      textAlign: column.titleAlign || column.align,
                       left: pxfy(fixedColumnLeftMap[key]?.start),
                       right: pxfy(fixedColumnRightMap[key]?.start)
                     }}

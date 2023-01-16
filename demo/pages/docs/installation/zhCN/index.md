@@ -35,7 +35,7 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
   <template #footer>
     <n-button
       tag="a"
-      href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch"
+      href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-zh-CN.sketch"
       text
       target="_blank"
       icon-placement="right"

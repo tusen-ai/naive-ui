@@ -4,7 +4,7 @@
 
 收集、验证信息。
 
-<n-alert type="warning" title="注意">
+<n-alert type="warning" title="注意" :bordered="false">
   如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: number`</n-text>。
 </n-alert>
 
@@ -48,7 +48,7 @@ dynamic.vue
 
 #### FormItemRule Type
 
-<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
+<n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
   以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 </n-alert>
 
@@ -90,7 +90,7 @@ dynamic.vue
 
 ### Form Methods
 
-<n-alert type="warning" title="Validate 方法的注意事项" style="margin-bottom: 16px;">
+<n-alert type="warning" title="Validate 方法的注意事项" style="margin-bottom: 16px;" :bordered="false">
   默认情况下，验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么
 </n-alert>
 

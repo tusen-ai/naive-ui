@@ -50,7 +50,8 @@ export default defineComponent({
     ])
     return {
       fileList: fileListRef,
-      createThumbnailUrl (file: File): Promise<string> {
+      createThumbnailUrl (file: File | null): Promise<string> | undefined {
+        if (!file) return undefined
         message.info(
           'createThumbnailUrl 产生了图片的 URL，你传什么都会变成 07akioni'
         )

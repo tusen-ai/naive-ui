@@ -23,6 +23,7 @@ event.vue
 input-props.vue
 status.vue
 pattern.vue
+graphemes.vue
 ```
 
 ## API
@@ -35,6 +36,7 @@ pattern.vue
 | autofocus | `boolean` | `false` | Whether to autofocus. |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | Sizing property for when the input is of type `textarea`. e.g. `{ minRows: 1, maxRows: 3 }`. |  |
 | clearable | `boolean` | `false` | Whether the input is clearable. |  |
+| count-graphemes | `(value: string) => number` | `undefined` | Count graphemes of input value. If it's set, native `maxlength` and `minlength` won't be used. | 2.34.0 |
 | default-value | `string \| [string, string] \| null` | `null` | Default value when not manually set. |  |
 | disabled | `boolean` | `false` | Whether to disable the input. |  |
 | input-props | `HTMLInputAttributes` | `undefined` | The dom props of the input element inside the component. This is disabled if the `pair` property is true. For avaiable attributes, [see here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). Warning：It won't override internal props with the same name (except `type`). |  |

@@ -24,10 +24,48 @@ export type OnUpdateValue = (
   option: TreeSelectOption &
   null &
   TreeSelectOption[] &
-  Array<TreeSelectOption | null>
+  Array<TreeSelectOption | null>,
+  meta:
+  | {
+    node: TreeSelectOption
+    action: 'select' | 'unselect'
+  }
+  | {
+    node: TreeSelectOption | null
+    action: 'delete'
+  }
+  | {
+    node: null
+    action: 'clear'
+  }
 ) => void
 
 export type OnUpdateValueImpl = (
+  value:
+  | string
+  | number
+  | (string | number)
+  | string[]
+  | number[]
+  | Array<string | number>
+  | null,
+  option: TreeSelectOption | null | Array<TreeSelectOption | null>,
+  meta:
+  | {
+    node: TreeSelectOption
+    action: 'select' | 'unselect'
+  }
+  | {
+    node: TreeSelectOption | null
+    action: 'delete'
+  }
+  | {
+    node: null
+    action: 'clear'
+  }
+) => void
+
+export type OnUpdateIndeterminateKeysImpl = (
   value:
   | string
   | number
@@ -75,3 +113,16 @@ export type TreeSelectRenderSuffix = TreeSelectRenderTreePart
 export type TreeSelectNodeProps = (info: {
   option: TreeSelectOption
 }) => HTMLAttributes & Record<string, unknown>
+
+export interface TreeSelectInst {
+  getCheckedData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
+  getIndeterminateData: () => {
+    keys: Array<string | number>
+    options: Array<TreeSelectOption | null>
+  }
+  focus: () => void
+  blur: () => void
+}

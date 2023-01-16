@@ -1,4 +1,4 @@
-import { Ref, CSSProperties } from 'vue'
+import { Ref, CSSProperties, VNodeChild } from 'vue'
 import { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -18,6 +18,8 @@ export interface FileInfo {
 }
 
 export type SettledFileInfo = Required<FileInfo>
+
+export type ShouldUseThumbnailUrl = (file: SettledFileInfo) => boolean
 
 export type FuncOrRecordOrUndef =
   | Record<string, string>
@@ -67,6 +69,8 @@ export type DoChange = (
 
 export type OnUpdateFileList = (fileList: SettledFileInfo[]) => void
 
+export type RenderIcon = (file: SettledFileInfo) => VNodeChild
+
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
@@ -97,7 +101,11 @@ export interface UploadInjection {
   doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
-  getFileThumbnailUrl: (file: SettledFileInfo) => Promise<string>
+  shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
+  getFileThumbnailUrlResolver: (
+    file: SettledFileInfo
+  ) => Promise<string> | string
+  renderIconRef: Ref<RenderIcon | undefined>
   handleFileAddition: (files: FileAndEntry[] | null, e?: Event) => void
   openOpenFileDialog: () => void
 }
@@ -128,7 +136,10 @@ export type ListType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: SettledFileInfo) => void
 
-export type CreateThumbnailUrl = (file: File) => Promise<string>
+export type CreateThumbnailUrl = (
+  file: File | null,
+  fileInfo: SettledFileInfo
+) => Promise<string> | string | undefined
 
 export interface CustomRequestOptions {
   file: SettledFileInfo

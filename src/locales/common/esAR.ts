@@ -5,7 +5,8 @@ const esAR: NLocale = {
   global: {
     undo: 'Deshacer',
     redo: 'Rehacer',
-    confirm: 'Confirmar'
+    confirm: 'Confirmar',
+    clear: 'Borrar'
   },
   Popconfirm: {
     positiveText: 'Confirmar',

@@ -167,7 +167,7 @@ export default defineComponent({
       watchEffect(() => {
         if (props.onChange !== undefined) {
           warnOnce(
-            'data-picker',
+            'date-picker',
             '`on-change` is deprecated, please use `on-update:value` instead.'
           )
         }
@@ -389,7 +389,7 @@ export default defineComponent({
         }
         default: {
           warn(
-            'data-picker',
+            'date-picker',
             "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
           )
           break
@@ -641,6 +641,8 @@ export default defineComponent({
       // TODO, fix conflict with clear
       if (v === '') {
         doUpdateValue(null, { doConfirm: false })
+        pendingValueRef.value = null
+        singleInputValueRef.value = ''
         return
       }
       const newSelectedDateTime = strictParse(
@@ -660,6 +662,9 @@ export default defineComponent({
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
         doUpdateValue(null, { doConfirm: false })
+        pendingValueRef.value = null
+        rangeStartInputValueRef.value = ''
+        rangeEndInputValueRef.value = ''
         return
       }
       const [startTime, endTime] = v

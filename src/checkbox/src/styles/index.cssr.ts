@@ -203,6 +203,7 @@ export default c([
       user-select: none;
       -webkit-user-select: none;
       padding: var(--n-label-padding);
+      font-weight: var(--n-label-font-weight);
     `, [
       c('&:empty', {
         display: 'none'

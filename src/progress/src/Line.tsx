@@ -134,7 +134,12 @@ export default defineComponent({
                   }}
                 >
                   {indicatorPlacement === 'inside' ? (
-                    <div class={`${clsPrefix}-progress-graph-line-indicator`}>
+                    <div
+                      class={`${clsPrefix}-progress-graph-line-indicator`}
+                      style={{
+                        color: indicatorTextColor
+                      }}
+                    >
                       {percentage}
                       {unit}
                     </div>

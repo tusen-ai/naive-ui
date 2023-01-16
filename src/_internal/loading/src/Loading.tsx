@@ -1,7 +1,23 @@
 import { h, defineComponent, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
+import { ExtractPublicPropTypes } from '../../../_utils'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
+
+const exposedLoadingProps = {
+  strokeWidth: {
+    type: Number,
+    default: 28
+  },
+  stroke: {
+    type: String,
+    default: undefined
+  }
+}
+
+export type BaseLoadingExposedProps = ExtractPublicPropTypes<
+  typeof exposedLoadingProps
+>
 
 export default defineComponent({
   name: 'BaseLoading',
@@ -9,6 +25,10 @@ export default defineComponent({
     clsPrefix: {
       type: String,
       required: true
+    },
+    show: {
+      type: Boolean,
+      default: true
     },
     scale: {
       type: Number,
@@ -18,18 +38,7 @@ export default defineComponent({
       type: Number,
       default: 100
     },
-    strokeWidth: {
-      type: Number,
-      default: 28
-    },
-    stroke: {
-      type: String,
-      default: undefined
-    },
-    show: {
-      type: Boolean,
-      default: true
-    }
+    ...exposedLoadingProps
   },
   setup (props) {
     useStyle('-base-loading', style, toRef(props, 'clsPrefix'))

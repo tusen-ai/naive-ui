@@ -26,6 +26,7 @@ v-show-debug.vue
 | bordered | `boolean` | `false` | Whether to display a avatar with border. |  |
 | color | `string` | `undefined` | The background color of the avatar. |  |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |  |
+| img-props | `object` | `undefined` | The props of the img element inside the component. | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.31.0 |
 | lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |  |

@@ -5,7 +5,8 @@ const itIT: NLocale = {
   global: {
     undo: 'Annulla',
     redo: 'Ripeti',
-    confirm: 'Conferma'
+    confirm: 'Conferma',
+    clear: 'Cancella'
   },
   Popconfirm: {
     positiveText: 'Conferma',

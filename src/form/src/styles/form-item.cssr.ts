@@ -33,6 +33,7 @@ export default cB('form-item', `
     color: var(--n-label-text-color);
     transition: color .3s var(--n-bezier);
     box-sizing: border-box;
+    font-weight: var(--n-label-font-weight);
   `, [
     cE('asterisk', `
       white-space: nowrap;
@@ -72,6 +73,9 @@ export default cB('form-item', `
       flex-shrink: 0;
       flex-grow: 0;
     `, [
+      cM('reverse-columns-space', `
+        grid-template-columns: auto 1fr;
+      `),
       cM('left-mark', `
         grid-template-areas:
           "mark text"
