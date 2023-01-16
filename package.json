@@ -127,7 +127,7 @@
     "lyla": "^0.6.8",
     "marked": "^4.0.13",
     "prettier": "^2.6.2",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.7",
     "rollup": "^3.7.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "superagent": "^8.0.0",
