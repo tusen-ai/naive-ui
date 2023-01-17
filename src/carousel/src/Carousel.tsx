@@ -365,6 +365,7 @@ export default defineComponent({
 
     // To
     function to (index: number): void {
+      isGoNext = isGoPrev = false
       const realIndex = clampValue(
         getRealIndex(index, duplicatedableRef.value),
         0,
@@ -378,10 +379,12 @@ export default defineComponent({
       }
     }
     function prev (): void {
+      handleGoPrev()
       const prevIndex = getRealPrevIndex()
       if (prevIndex !== null) toRealIndex(prevIndex)
     }
     function next (): void {
+      handleGoNext()
       const nextIndex = getRealNextIndex()
       if (nextIndex !== null) toRealIndex(nextIndex)
     }
@@ -537,6 +540,16 @@ export default defineComponent({
       }
     }
 
+    function handleGoNext (): void {
+      isGoNext = true
+      isGoPrev = false
+    }
+
+    function handleGoPrev (): void {
+      isGoPrev = true
+      isGoNext = false
+    }
+
     // Drag
     let dragStartX = 0
     let dragStartY = 0
@@ -544,8 +557,8 @@ export default defineComponent({
     let dragStartTime = 0
     let dragging = false
     let isEffectiveDrag = false
-    let isGoLeft = false
-    let isGoRight = false
+    let isGoPrev = false
+    let isGoNext = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
       if (
@@ -632,11 +645,9 @@ export default defineComponent({
         }
       }
       if (dragOffset < 0) {
-        isGoRight = true
-        isGoLeft = false
+        handleGoNext()
       } else {
-        isGoLeft = true
-        isGoRight = false
+        handleGoPrev()
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
         isEffectiveDrag = true
@@ -763,21 +774,22 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
+          if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
             if (realIndex === length - 2 && lastRealIndex === 1) {
-              realIndex = 0
+              if (
+                displayTotalViewRef.value > 2 ||
+                (displayTotalViewRef.value === 2 && isGoPrev)
+              ) {
+                realIndex = 0
+              }
             } else if (realIndex === 1 && lastRealIndex === length - 2) {
-              realIndex = length - 1
-            }
-          }
-
-          if (duplicatedableRef.value && displayTotalViewRef.value === 2) {
-            const { value: length } = totalViewRef
-            if (realIndex === 2 && lastRealIndex === 1 && isGoLeft) {
-              realIndex = 0
-            } else if (realIndex === 1 && lastRealIndex === 2 && isGoRight) {
-              realIndex = length - 1
+              if (
+                displayTotalViewRef.value > 2 ||
+                (displayTotalViewRef.value === 2 && isGoNext)
+              ) {
+                realIndex = length - 1
+              }
             }
           }
           translateTo(realIndex, speedRef.value)
