@@ -544,6 +544,8 @@ export default defineComponent({
     let dragStartTime = 0
     let dragging = false
     let isEffectiveDrag = false
+    let isGoLeft = false
+    let isGoRight = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       if (globalDragging) return
       if (
@@ -628,6 +630,13 @@ export default defineComponent({
         ) {
           currentIndex = getRealNextIndex(realIndex)
         }
+      }
+      if (dragOffset < 0) {
+        isGoRight = true
+        isGoLeft = false
+      } else {
+        isGoLeft = true
+        isGoRight = false
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
         isEffectiveDrag = true
@@ -759,6 +768,15 @@ export default defineComponent({
             if (realIndex === length - 2 && lastRealIndex === 1) {
               realIndex = 0
             } else if (realIndex === 1 && lastRealIndex === length - 2) {
+              realIndex = length - 1
+            }
+          }
+
+          if (duplicatedableRef.value && displayTotalViewRef.value === 2) {
+            const { value: length } = totalViewRef
+            if (realIndex === 2 && lastRealIndex === 1 && isGoLeft) {
+              realIndex = 0
+            } else if (realIndex === 1 && lastRealIndex === 2 && isGoRight) {
               realIndex = length - 1
             }
           }
