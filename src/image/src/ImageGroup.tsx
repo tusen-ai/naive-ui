@@ -1,5 +1,6 @@
 import { defineComponent, h, ref, provide, getCurrentInstance, Ref } from 'vue'
 import { createId } from 'seemly'
+import { isUndefined } from 'lodash-es'
 import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
@@ -7,9 +8,12 @@ import type { ImagePreviewInst } from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
-ImagePreviewInst & {
+Omit<ImagePreviewInst, 'setPreviewSrc'> & {
   groupId: string
   mergedClsPrefixRef: Ref<string>
+  imageIndex: Ref<number>
+  setImageIndex: (index: number) => void
+  setPreviewImg: (img: HTMLImageElement) => void
 }
 >('n-image-group')
 
@@ -21,13 +25,20 @@ export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
   setup (props) {
-    let currentSrc: string | undefined
+    let currentIndex: number | undefined
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
     const vm = getCurrentInstance()
-    const setPreviewSrc = (src: string | undefined): void => {
-      currentSrc = src
-      previewInstRef.value?.setPreviewSrc(src)
+
+    const imageIndex = ref(0)
+    const setImageIndex = (count: number): void => {
+      imageIndex.value = count
+    }
+
+    const setPreviewImg = (img: HTMLImageElement): void => {
+      currentIndex = Number(img.dataset.index)
+      const currentSrc = img.dataset.previewSrc
+      previewInstRef.value?.setPreviewSrc(currentSrc)
     }
 
     function go (step: 1 | -1): void {
@@ -39,20 +50,19 @@ export default defineComponent({
       )
 
       if (!imgs.length) return
-      const index = Array.from(imgs).findIndex(
-        (img) => img.dataset.previewSrc === currentSrc
-      )
-      if (~index) {
-        setPreviewSrc(
-          imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
-        )
+      if (isUndefined(currentIndex)) {
+        setPreviewImg(imgs[0])
       } else {
-        setPreviewSrc(imgs[0].dataset.previewSrc)
+        const current = imgs[(currentIndex + step + imgs.length) % imgs.length]
+        if (!current) return
+        setPreviewImg(current)
       }
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
-      setPreviewSrc,
+      imageIndex,
+      setPreviewImg,
+      setImageIndex,
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
       },

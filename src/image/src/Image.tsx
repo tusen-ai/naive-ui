@@ -62,13 +62,14 @@ export default defineComponent({
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
     const exposedMethods = {
-      click: () => {
+      click: (e: MouseEvent) => {
+        const { target } = e
         if (props.previewDisabled || showErrorRef.value) return
         const mergedPreviewSrc = props.previewSrc || props.src
         if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
-          imageGroupHandle.setThumbnailEl(imageRef.value)
-          imageGroupHandle.toggleShow()
+          imageGroupHandle.setPreviewImg(target as HTMLImageElement)
+          imageGroupHandle.setThumbnailEl?.(imageRef.value)
+          imageGroupHandle.toggleShow?.()
           return
         }
         const { value: previewInst } = previewInstRef
@@ -82,10 +83,13 @@ export default defineComponent({
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
+      const index = imageGroupHandle?.imageIndex.value || 0
+      imageGroupHandle?.setImageIndex(index + 1)
       imageRef.value?.setAttribute(
         'data-group-id',
         imageGroupHandle?.groupId || ''
       )
+      imageRef.value?.setAttribute('data-index', String(index))
     })
 
     onMounted(() => {
@@ -131,7 +135,7 @@ export default defineComponent({
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnClick: (e: MouseEvent) => {
-        exposedMethods.click()
+        exposedMethods.click(e)
         props.imgProps?.onClick?.(e)
       },
       mergedOnError: (e: Event) => {
