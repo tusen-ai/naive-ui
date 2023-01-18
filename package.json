@@ -106,7 +106,7 @@
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-config-standard-with-typescript": "^30.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-n": "^15.2.0",
