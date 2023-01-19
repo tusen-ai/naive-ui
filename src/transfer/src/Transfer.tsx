@@ -11,7 +11,7 @@ import {
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
 import { NScrollbar } from '../../_internal'
-import { useFormItem, useTheme, useConfig } from '../../_mixins'
+import { useFormItem, useTheme, useConfig, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
 import { call, ExtractPublicPropTypes, warnOnce } from '../../_utils'
@@ -105,7 +105,7 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
       '-transfer',
@@ -142,6 +142,7 @@ export default defineComponent({
       handleSrcFilterUpdateValue,
       handleTgtFilterUpdateValue
     } = useTransferData(props)
+    const rtlEnabledRef = useRtl('Transfer', mergedRtlRef, mergedClsPrefixRef)
     function doUpdateValue (value: OptionValue[]): void {
       const {
         onUpdateValue,
@@ -200,6 +201,7 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       mergedDisabled: mergedDisabledRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
@@ -291,6 +293,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-transfer`,
+          this.rtlEnabled && `${mergedClsPrefix}-transfer--rtl`,
           this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`
         ]}
         style={this.cssVars as CSSProperties}
