@@ -283,7 +283,7 @@ export default defineComponent({
             return value > 50
           },
           trigger: ['blur', 'change'],
-          message: 'sliderValue should be larger tha 50'
+          message: 'sliderValue should be larger than 50'
         },
         transferValue: {
           type: 'array',
