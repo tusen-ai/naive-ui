@@ -6,7 +6,7 @@ import {
   provide,
   Ref
 } from 'vue'
-import { MergedTheme, useConfig, useTheme } from '../../_mixins'
+import { MergedTheme, useConfig, useTheme, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { TimelineTheme } from '../styles'
 import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
@@ -41,7 +41,7 @@ export default defineComponent({
   name: 'Timeline',
   props: timelineProps,
   setup (props, { slots }) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Timeline',
       '-timeline',
@@ -55,6 +55,7 @@ export default defineComponent({
       mergedThemeRef: themeRef,
       mergedClsPrefixRef
     })
+    const rtlEnabledRef = useRtl('Timeline', mergedRtlRef, mergedClsPrefixRef)
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
@@ -62,6 +63,7 @@ export default defineComponent({
           class={[
             `${mergedClsPrefix}-timeline`,
             props.horizontal && `${mergedClsPrefix}-timeline--horizontal`,
+            rtlEnabledRef?.value && `${mergedClsPrefix}-timeline--rtl`,
             `${mergedClsPrefix}-timeline--${props.size}-size`,
             !props.horizontal &&
               `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
