@@ -1345,7 +1345,7 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
-        {this.showCount && type === 'textarea' ? (
+        {this.showCount && type !=== 'textarea' ? (
           <WordCount>
             {{
               default: (props: unknown) => {
