@@ -818,7 +818,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, fontWeight },
         self: {
           color,
           borderRadius,
@@ -875,6 +875,7 @@ export default defineComponent({
         '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,
         '--n-font-size': fontSize,
+        '--n-font-weight': fontWeight,
         '--n-border-radius': borderRadius,
         '--n-height': height,
         '--n-padding-left': paddingLeft,
