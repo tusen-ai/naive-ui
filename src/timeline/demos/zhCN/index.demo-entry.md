@@ -11,6 +11,7 @@ item-placement.vue
 horizontal.vue
 customize-icon.vue
 nested-debug.vue
+rtl-debug.vue
 ```
 
 ## API
