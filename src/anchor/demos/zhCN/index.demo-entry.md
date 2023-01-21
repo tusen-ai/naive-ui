@@ -12,6 +12,7 @@ ignore-gap.vue
 affix.vue
 scrollto.vue
 max-height-debug.vue
+rtl-debug.vue
 ```
 
 ## API
