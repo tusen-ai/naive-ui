@@ -24,7 +24,13 @@ import { call, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useLocale,
+  useRtl,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
@@ -50,7 +56,8 @@ export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
   setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Calendar',
       '-calendar',
@@ -59,6 +66,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Calendar', mergedRtlRef, mergedClsPrefixRef)
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const now = Date.now()
     // ts => timestamp
@@ -187,7 +195,8 @@ export default defineComponent({
       mergedTheme: themeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      rtlEnabled: rtlEnabledRef
     }
   },
   render () {
@@ -212,7 +221,11 @@ export default defineComponent({
     const calendarMonth = getMonth(monthTs) + 1
     return (
       <div
-        class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
+        class={[
+          `${mergedClsPrefix}-calendar`,
+          this.rtlEnabled && `${this.mergedClsPrefix}-calendar--rtl`,
+          this.themeClass
+        ]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
