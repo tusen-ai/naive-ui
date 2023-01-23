@@ -55,6 +55,7 @@ describe('n-grid', () => {
     expect(wrapper.find('.n-grid').attributes('style')).toContain(
       'column-gap: 10px; row-gap: 20px;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `offset` prop', async () => {
@@ -72,6 +73,7 @@ describe('n-grid', () => {
     expect(
       wrapper.find('.n-grid').element.children[1].getAttribute('style')
     ).toContain('grid-column: span 2 / span 2;')
+    wrapper.unmount()
   })
 
   it('should work with `collapsed` prop', async () => {
@@ -108,6 +110,7 @@ describe('n-grid', () => {
       }
     }
     expect(len1).toBe(2)
+    wrapper.unmount()
   })
 
   it('should work with `suffix` prop', async () => {
@@ -147,6 +150,7 @@ describe('n-grid', () => {
       }
     }
     expect(len1).toBe(3)
+    wrapper.unmount()
   })
 
   it('should work with `item-responsive` prop', async () => {
@@ -182,5 +186,6 @@ describe('n-grid', () => {
     expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
       'grid-column: span 2 / span 2;'
     )
+    wrapper.unmount()
   })
 })
