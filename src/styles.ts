@@ -8,13 +8,12 @@ export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
-export { notificationRtl as unstableNotificationRtl } from './notification/styles'
-export { messageRtl as unstableMessageRtl } from './message/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
 } from './button-group/styles'
 export { cardDark, cardRtl as unstableCardRtl } from './card/styles'
+export { calendarRtl as unstableCalendarRtl } from './calendar/styles'
 export { cascaderDark } from './cascader/styles'
 export {
   checkboxDark,
@@ -52,11 +51,15 @@ export { layoutDark } from './layout/styles'
 export { listDark, listRtl as unstableListRtl } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'
 export { logDark } from './log/styles'
+export { messageRtl as unstableMessageRtl } from './message/styles'
 export { mentionDark } from './mention/styles'
 export { menuDark } from './menu/styles'
 export { messageDark } from './message/styles'
 export { modalDark } from './modal/styles'
-export { notificationDark } from './notification/styles'
+export {
+  notificationDark,
+  notificationRtl as unstableNotificationRtl
+} from './notification/styles'
 export {
   paginationDark,
   paginationRtl as unstablePaginationRtl
