@@ -210,6 +210,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | page | `(page: number) => void` | Manually set the page. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
+| toggleAllSelection | `() => void` | Used to switch between select all and select none in a multi-selection table. |  |
 
 ### DataTable Slots
 

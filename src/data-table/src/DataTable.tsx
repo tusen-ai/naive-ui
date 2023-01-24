@@ -125,6 +125,7 @@ export default defineComponent({
       doUncheck,
       headerCheckboxDisabledRef,
       someRowsCheckedRef,
+      toggleAllSelection,
       allRowsCheckedRef,
       mergedCheckedRowKeySetRef,
       mergedInderminateRowKeySetRef
@@ -269,6 +270,7 @@ export default defineComponent({
       clearSorter,
       page,
       sort,
+      toggleAllSelection,
       clearFilter,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
