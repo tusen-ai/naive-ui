@@ -216,6 +216,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | --- | --- | --- | --- |
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
+| clearSelection | `() => void` | 清空所有的 selection 状态 |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |

@@ -510,6 +510,7 @@ export interface DataTableInst {
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
   scrollTo: ScrollTo
+  clearSelection: () => void
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }
