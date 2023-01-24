@@ -220,6 +220,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | page | `(page: number) => void` | 手动设置 page |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
+| toggleAllSelection | `() => void` | 用于多选表格，切换全选和全不选 |  |
 
 ### DataTable Slots
 

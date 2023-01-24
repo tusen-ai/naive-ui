@@ -196,6 +196,9 @@ export function useCheck (
       'uncheckAll'
     )
   }
+  function toggleAllSelection (): void {
+    allRowsCheckedRef.value ? doUncheckAll() : doCheckAll()
+  }
   return {
     mergedCheckedRowKeySetRef,
     mergedCheckedRowKeysRef,
@@ -207,6 +210,7 @@ export function useCheck (
     doCheckAll,
     doUncheckAll,
     doCheck,
-    doUncheck
+    doUncheck,
+    toggleAllSelection
   }
 }
