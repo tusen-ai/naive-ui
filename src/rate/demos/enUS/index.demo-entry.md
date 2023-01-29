@@ -33,6 +33,6 @@ clearable.vue
 
 ### Rate Slots
 
-| Name    | Parameters | Description             |
-| ------- | ---------- | ----------------------- |
-| default | `()`       | The icon of the rating. |
+| Name    | Parameters                  | Description             |
+| ------- | --------------------------- | ----------------------- |
+| default | `(info: { index: number })` | The icon of the rating. |
