@@ -14,6 +14,7 @@ render-label.vue
 render-source-list.vue
 asynchronous-options-debug.vue
 value-debug.vue
+rtl-debug.vue
 ```
 
 ## API

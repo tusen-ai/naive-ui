@@ -14,7 +14,13 @@ import {
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useFormItem, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useTheme,
+  useFormItem,
+  useThemeClass,
+  useRtl
+} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { warn, call, throwError } from '../../_utils'
@@ -390,7 +396,8 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Upload',
       '-upload',
@@ -714,8 +721,11 @@ export default defineComponent({
       openOpenFileDialog
     }
 
+    const rtlEnabledRef = useRtl('Upload', mergedRtlRef, mergedClsPrefixRef)
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       draggerInsideRef,
       inputElRef,
       mergedTheme: themeRef,
@@ -768,6 +778,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-upload`,
+          this.rtlEnabled && `${mergedClsPrefix}-upload--rtl`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
           this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
           this.themeClass
