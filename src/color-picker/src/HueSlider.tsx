@@ -88,7 +88,7 @@ export default defineComponent({
             <div
               class={`${clsPrefix}-color-picker-handle`}
               style={{
-                left: `calc((${this.hue}%) / 359 * 100 - ${RADIUS})`,
+                left: `calc((${this.hue}%) / 360 * 100 - ${RADIUS})`,
                 borderRadius: RADIUS,
                 width: HANDLE_SIZE,
                 height: HANDLE_SIZE
