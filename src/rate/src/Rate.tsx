@@ -196,7 +196,7 @@ export default defineComponent({
       >
         {renderList(this.count, (_, index) => {
           const icon = defaultSlot ? (
-            defaultSlot()
+            defaultSlot({ index })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => StarIcon }}
