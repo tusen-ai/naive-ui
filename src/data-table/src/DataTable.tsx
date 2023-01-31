@@ -123,6 +123,7 @@ export default defineComponent({
       doUncheckAll,
       doCheck,
       doUncheck,
+      getSelectionData,
       headerCheckboxDisabledRef,
       someRowsCheckedRef,
       allRowsCheckedRef,
@@ -270,6 +271,7 @@ export default defineComponent({
       page,
       sort,
       clearFilter,
+      getSelectionData,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }

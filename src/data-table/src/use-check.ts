@@ -1,4 +1,4 @@
-import { computed, ComputedRef, ref } from 'vue'
+import { computed, ComputedRef, ref, toRaw } from 'vue'
 import type {
   DataTableSetupProps,
   RowKey,
@@ -45,6 +45,7 @@ export function useCheck (
   const mergedInderminateRowKeysRef = computed(
     () => mergedCheckState.value.indeterminateKeys
   )
+  const checkedRowsRef = ref()
   const mergedCheckedRowKeySetRef = computed(() => {
     return new Set(mergedCheckedRowKeysRef.value)
   })
@@ -103,6 +104,7 @@ export function useCheck (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rows.push(row!)
     })
+    checkedRowsRef.value = rows
     if (_onUpdateCheckedRowKeys) {
       call(_onUpdateCheckedRowKeys, keys, rows, { row, action })
     }
@@ -196,6 +198,13 @@ export function useCheck (
       'uncheckAll'
     )
   }
+  function getSelectionData (): { keys: RowKey[], rows: Object[] } {
+    return {
+      keys: mergedCheckedRowKeysRef.value,
+      rows: toRaw(checkedRowsRef.value)
+    }
+  }
+
   return {
     mergedCheckedRowKeySetRef,
     mergedCheckedRowKeysRef,
@@ -207,6 +216,7 @@ export function useCheck (
     doCheckAll,
     doUncheckAll,
     doCheck,
-    doUncheck
+    doUncheck,
+    getSelectionData
   }
 }
