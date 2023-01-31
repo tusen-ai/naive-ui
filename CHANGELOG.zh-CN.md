@@ -7,6 +7,7 @@
 - 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
+- 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
 
 ### Feats
 
