@@ -85,7 +85,10 @@ export default cB('steps', `
       box-shadow .3s var(--n-bezier);
   `, [
     cB('step-indicator-slot', `
-      position: relative;
+      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: var(--n-indicator-icon-size);
       height: var(--n-indicator-icon-size);
       font-size: var(--n-indicator-icon-size);
@@ -94,12 +97,7 @@ export default cB('steps', `
       cE('index', `
         display: inline-block;
         text-align: center;
-        position: absolute;
-        left: 0;
-        top: 0;
         font-size: var(--n-indicator-index-font-size);
-        width: var(--n-indicator-icon-size);
-        height: var(--n-indicator-icon-size);
         line-height: var(--n-indicator-icon-size);
         color: var(--n-indicator-text-color);
         transition: color .3s var(--n-bezier);
