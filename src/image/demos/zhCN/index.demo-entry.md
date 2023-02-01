@@ -23,6 +23,7 @@ previewed-img-props.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | alt | `string` | `undefined` | 图片说明 |  |
+| draggable | `boolean` | `true` | 是否允许图片拖拽 |  |
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
 | img-props | `object` | `undefined` | 组件中 img 元素的属性 |  |

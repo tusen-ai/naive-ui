@@ -46,6 +46,10 @@ export const imageProps = {
   loadDescription: String,
   onError: Function as PropType<(e: Event) => void>,
   onLoad: Function as PropType<(e: Event) => void>,
+  draggable: {
+    type: Boolean,
+    default: true
+  },
   ...imagePreviewSharedProps
 }
 
@@ -160,6 +164,7 @@ export default defineComponent({
       ref: 'imageRef',
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
+      draggable: this.draggable,
       src: isImageSupportNativeLazy
         ? loadSrc
         : this.showError

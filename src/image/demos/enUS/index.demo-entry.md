@@ -22,6 +22,7 @@ previewed-img-props.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | alt | `string` | `undefined` | Image alt information. |  |
+| draggable | `boolean` | `true` | Whether to allow image drag and drop. |  |
 | fallback-src | `string` | `undefined` | URL to show when the image fails to load. |  |
 | height | `string \| number` | `undefined` | Image height. |  |
 | img-props | `object` | `undefined` | The props of the img element inside the component. |  |
