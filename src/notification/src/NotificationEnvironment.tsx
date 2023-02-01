@@ -132,9 +132,23 @@ export const NotificationEnvironment = defineComponent({
         hide()
       }
     }
+    function isDocVisible (): boolean {
+      return document.visibilityState === 'visible'
+    }
     onMounted(() => {
       if (props.duration) {
-        timerId = window.setTimeout(hide, props.duration)
+        timerId = window.setTimeout(() => {
+          if (!isDocVisible()) {
+            timerId && window.clearTimeout(timerId)
+            document.addEventListener('visibilitychange', () => {
+              if (isDocVisible()) {
+                timerId = window.setTimeout(hide, props.duration)
+              }
+            })
+            return
+          }
+          hide()
+        }, props.duration)
       }
     })
     return {

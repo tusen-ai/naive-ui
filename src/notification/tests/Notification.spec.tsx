@@ -98,6 +98,37 @@ describe('n-notification', () => {
     expect(document.querySelector('.n-notification')).toBe(null)
     wrapper.unmount()
   })
+
+  it('should not be hid when visibilityState is "hidden"', async () => {
+    Object.defineProperty(document, 'visibilityState', {
+      configurable: true,
+      get: function () {
+        return 'hidden'
+      }
+    })
+    const Comp = defineComponent({
+      setup () {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info',
+          duration: 1000
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(() => (
+      <Provider>{{ default: () => <Comp /> }}</Provider>
+    ))
+    await nextTick()
+    await sleep(500)
+    expect(document.querySelector('.n-notification')).not.toEqual(null)
+    await sleep(1200)
+    expect(document.querySelector('.n-notification')).not.toEqual(null)
+    wrapper.unmount()
+  })
 })
 
 describe('notification-provider', () => {
