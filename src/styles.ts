@@ -1,6 +1,6 @@
 export { commonDark, commonLight } from './_styles/common'
 export { alertDark, alertRtl as unstableAlertRtl } from './alert/styles'
-export { anchorDark } from './anchor/styles'
+export { anchorDark, anchorRtl as unstableAnchorRtl } from './anchor/styles'
 export { autoCompleteDark } from './auto-complete/styles'
 export { avatarDark } from './avatar/styles'
 export { avatarGroupRtl as unstableAvatarGroupRtl } from './avatar-group/styles'
