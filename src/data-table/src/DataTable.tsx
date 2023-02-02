@@ -119,6 +119,7 @@ export default defineComponent({
       sort
     } = useTableData(props, { dataRelatedColsRef })
     const {
+      clearSelection,
       doCheckAll,
       doUncheckAll,
       doCheck,
@@ -267,6 +268,7 @@ export default defineComponent({
       filters,
       clearFilters,
       clearSorter,
+      clearSelection,
       page,
       sort,
       clearFilter,
