@@ -7,7 +7,7 @@ import type {
 } from '../../../select/src/interface'
 import { createInjectionKey } from '../../../_utils/vue/create-injection-key'
 
-export type Size = 'small' | 'medium' | 'large' | 'huge'
+export type Size = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 
 export type RenderLabel = (
   option: SelectBaseOption & SelectGroupOption & SelectIgnoredOption,
