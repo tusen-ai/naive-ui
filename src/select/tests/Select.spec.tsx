@@ -315,7 +315,7 @@ describe('n-select', () => {
   })
 
   it('should work with `size` prop', async () => {
-    ;(['small', 'medium', 'large'] as const).forEach((i) => {
+    ;(['tiny', 'small', 'medium', 'large'] as const).forEach((i) => {
       const wrapper = mount(NSelect, { props: { size: i } })
       expect(
         wrapper.find('.n-base-selection').attributes('style')
