@@ -19,6 +19,7 @@ trigger.vue
 | trigger | `'hover' \| 'none'` | `'hover'` | Trigger of show scrollbar. `'none'` means always show it. | 2.29.1 |
 | x-scrollable | `boolean` | `false` | Whether it can scroll horizontally. |  |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback on scroll |  |
+| size | `number` | `undefined` | Size of scrollbar. | NEXT_VERSION |
 
 ### Scrollbar Slots
 
