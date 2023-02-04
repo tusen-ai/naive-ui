@@ -13,6 +13,7 @@
 - `n-dynamic-input` 新增 `action` slot，关闭 [#3981](https://github.com/tusen-ai/naive-ui/issues/3981)
 - `n-dynamic-input` 新增 `disabled` 属性，关闭 [#4055](https://github.com/tusen-ai/naive-ui/issues/4055)
 - `n-data-table` 新增 `titleAlign` 属性，关闭 [#3954](https://github.com/tusen-ai/naive-ui/issues/3954)
+- `n-select` 新增 `keyboard` 属性，[#4340](https://github.com/tusen-ai/naive-ui/issues/4340)
 
 ## 2.34.3
 

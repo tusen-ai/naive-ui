@@ -58,6 +58,7 @@ create-debug.vue
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
 | ignore-composition | `boolean` | `true` | 忽略输入法 Composition 状态，默认情况下 `filter` 在输入法输入的过程中不会触发 | 2.33.4 |
 | input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
+| keyboard | `boolean` | `true` | 是否支持键盘操作 | NEXT_VERSION |
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
