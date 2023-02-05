@@ -20,6 +20,7 @@ rtl-debug.vue
 | trigger | `'hover' \| 'none'` | `'hover'` | 显示滚动条的时机，`'none'` 表示一直显示 | 2.29.1 |
 | x-scrollable | `boolean` | `false` | 是否可以横向滚动 |  |
 | on-scroll | `(e: Event) => void` | `undefined` | 滚动的回调 |  |
+| size | `number` | `undefined` | 滚动条的大小 | NEXT_VERSION |
 
 ### Scrollbar Slots
 

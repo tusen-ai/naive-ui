@@ -81,6 +81,7 @@ describe('n-input-number', () => {
     expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').text()).toBe('%')
+    wrapper.unmount()
   })
   it('should work with decimal `step`', async () => {
     const wrapper = mount(NInputNumber, {
@@ -115,6 +116,7 @@ describe('n-input-number', () => {
       )
     }
     expect(addBtn.classes()).toContain('n-button--disabled')
+    wrapper.unmount()
   })
 
   it('should work with decimal value', async () => {
