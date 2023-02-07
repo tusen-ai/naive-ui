@@ -12,6 +12,7 @@ describe('n-legacy-transfer', () => {
     expect(wrapper.find('.n-legacy-transfer').attributes('class')).toContain(
       'n-legacy-transfer--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `filterable` prop', () => {
@@ -19,6 +20,7 @@ describe('n-legacy-transfer', () => {
     expect(wrapper.find('.n-legacy-transfer').attributes('class')).toContain(
       'n-legacy-transfer--filterable'
     )
+    wrapper.unmount()
   })
 
   it('should work with `filter` prop', async () => {
@@ -35,6 +37,7 @@ describe('n-legacy-transfer', () => {
     await wrapper.find('input').setValue('1')
     await sleep(300)
     expect(onFilter).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -45,6 +48,7 @@ describe('n-legacy-transfer', () => {
       expect(
         wrapper.find('.n-legacy-transfer').attributes('style')
       ).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -62,6 +66,7 @@ describe('n-legacy-transfer', () => {
     expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe(
       'test-target'
     )
+    wrapper.unmount()
   })
 
   it('should work with `source-title`、`target-title` props', async () => {
@@ -77,5 +82,6 @@ describe('n-legacy-transfer', () => {
     expect(
       wrapper.findAll('.n-legacy-transfer-list-header__header')[1].text()
     ).toBe('test-target')
+    wrapper.unmount()
   })
 })
