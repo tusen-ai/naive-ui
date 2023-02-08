@@ -97,6 +97,10 @@ export const selectProps = {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
+  keyboard: {
+    type: Boolean,
+    default: true
+  },
   value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
   menuProps: Object as PropType<HTMLAttributes>,
@@ -705,6 +709,10 @@ export default defineComponent({
     // keyboard events
     // also for menu keydown
     function handleKeydown (e: KeyboardEvent): void {
+      if (!props.keyboard) {
+        e.preventDefault()
+        return
+      }
       switch (e.key) {
         case ' ':
           if (props.filterable) break

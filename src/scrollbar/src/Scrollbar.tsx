@@ -23,7 +23,8 @@ export const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
   trigger: String as PropType<'none' | 'hover'>,
   xScrollable: Boolean,
-  onScroll: Function as PropType<(e: Event) => void>
+  onScroll: Function as PropType<(e: Event) => void>,
+  size: Number
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>

@@ -119,7 +119,7 @@ export const dataTableProps = {
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
-  renderExpandIcon: Function as PropType<() => VNodeChild>,
+  renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
@@ -308,6 +308,11 @@ export type RenderExpand<T = InternalRowData> = (
   row: T,
   index: number
 ) => VNodeChild
+export type RenderExpandIcon = ({
+  expanded
+}: {
+  expanded: boolean
+}) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
@@ -387,7 +392,7 @@ export interface DataTableInjection {
   paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
-  renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
+  renderExpandIconRef: Ref<undefined | RenderExpandIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   scrollbarPropsRef: Ref<ScrollbarProps | undefined>
