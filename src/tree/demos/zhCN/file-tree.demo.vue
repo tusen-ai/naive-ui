@@ -15,92 +15,92 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, h } from "vue";
-import { useMessage, NIcon, TreeOption } from "naive-ui";
+import { defineComponent, h } from 'vue'
+import { useMessage, NIcon, TreeOption } from 'naive-ui'
 import {
   Folder,
   FolderOpenOutline,
-  FileTrayFullOutline,
-} from "@vicons/ionicons5";
+  FileTrayFullOutline
+} from '@vicons/ionicons5'
 
 export default defineComponent({
-  setup() {
-    const message = useMessage();
+  setup () {
+    const message = useMessage()
     const updatePrefixWithExpaned = (
       _keys: Array<string | number>,
       _option: Array<TreeOption | null>,
       meta: {
-        node: TreeOption | null;
-        action: "expand" | "collapse" | "filter";
+        node: TreeOption | null
+        action: 'expand' | 'collapse' | 'filter'
       }
     ) => {
       switch (meta.action) {
-        case "expand":
+        case 'expand':
           (meta.node as any).prefix = () =>
             h(NIcon, null, {
-              default: () => h(FolderOpenOutline),
-            });
-          break;
-        case "collapse":
+              default: () => h(FolderOpenOutline)
+            })
+          break
+        case 'collapse':
           (meta.node as any).prefix = () =>
             h(NIcon, null, {
-              default: () => h(Folder),
-            });
-          break;
+              default: () => h(Folder)
+            })
+          break
       }
-    };
+    }
     const nodeProps = ({ option }: { option: TreeOption }) => {
       return {
-        onClick() {
+        onClick () {
           if (!option.children && !option.disabled) {
-            message.info("[Click] " + option.label);
+            message.info('[Click] ' + option.label)
           }
-        },
-      };
-    };
+        }
+      }
+    }
     return {
-      updatePrefixWithExpaned: updatePrefixWithExpaned,
-      nodeProps: nodeProps,
+      updatePrefixWithExpaned,
+      nodeProps,
       data: [
         {
-          key: "文件夹",
-          label: "文件夹",
+          key: '文件夹',
+          label: '文件夹',
           prefix: () =>
             h(NIcon, null, {
-              default: () => h(Folder),
+              default: () => h(Folder)
             }),
           children: [
             {
-              key: "空的",
-              label: "空的",
+              key: '空的',
+              label: '空的',
               disabled: true,
               prefix: () =>
                 h(NIcon, null, {
-                  default: () => h(Folder),
-                }),
+                  default: () => h(Folder)
+                })
             },
             {
-              key: "我的文件",
-              label: "我的文件",
+              key: '我的文件',
+              label: '我的文件',
               prefix: () =>
                 h(NIcon, null, {
-                  default: () => h(Folder),
+                  default: () => h(Folder)
                 }),
               children: [
                 {
-                  label: "template.txt",
-                  key: "template.txt",
+                  label: 'template.txt',
+                  key: 'template.txt',
                   prefix: () =>
                     h(NIcon, null, {
-                      default: () => h(FileTrayFullOutline),
-                    }),
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-  },
-});
+                      default: () => h(FileTrayFullOutline)
+                    })
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+})
 </script>
