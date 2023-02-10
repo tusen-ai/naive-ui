@@ -34,15 +34,16 @@ export default defineComponent({
         action: 'expand' | 'collapse' | 'filter'
       }
     ) => {
+      if (!meta.node) return
       switch (meta.action) {
         case 'expand':
-          (meta.node as any).prefix = () =>
+          meta.node.prefix = () =>
             h(NIcon, null, {
               default: () => h(FolderOpenOutline)
             })
           break
         case 'collapse':
-          (meta.node as any).prefix = () =>
+          meta.node.prefix = () =>
             h(NIcon, null, {
               default: () => h(Folder)
             })
