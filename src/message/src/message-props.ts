@@ -6,7 +6,7 @@ export const messageProps = {
   icon: Function as PropType<() => VNodeChild>,
   type: {
     type: String as PropType<MessageType>,
-    default: 'info'
+    default: 'default'
   },
   content: [String, Number, Function] as PropType<
   string | number | (() => VNodeChild)
