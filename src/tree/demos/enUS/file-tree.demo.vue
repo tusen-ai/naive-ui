@@ -15,92 +15,92 @@ Use `on-update:expanded-keys` to change the prefix icon style of the node in dif
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, h } from "vue";
-import { useMessage, NIcon, TreeOption } from "naive-ui";
+import { defineComponent, h } from 'vue'
+import { useMessage, NIcon, TreeOption } from 'naive-ui'
 import {
   Folder,
   FolderOpenOutline,
-  FileTrayFullOutline,
-} from "@vicons/ionicons5";
+  FileTrayFullOutline
+} from '@vicons/ionicons5'
 
 export default defineComponent({
-  setup() {
-    const message = useMessage();
+  setup () {
+    const message = useMessage()
     const updatePrefixWithExpaned = (
       _keys: Array<string | number>,
       _option: Array<TreeOption | null>,
       meta: {
-        node: TreeOption | null;
-        action: "expand" | "collapse" | "filter";
+        node: TreeOption | null
+        action: 'expand' | 'collapse' | 'filter'
       }
     ) => {
       switch (meta.action) {
-        case "expand":
+        case 'expand':
           (meta.node as any).prefix = () =>
             h(NIcon, null, {
-              default: () => h(FolderOpenOutline),
-            });
-          break;
-        case "collapse":
+              default: () => h(FolderOpenOutline)
+            })
+          break
+        case 'collapse':
           (meta.node as any).prefix = () =>
             h(NIcon, null, {
-              default: () => h(Folder),
-            });
-          break;
+              default: () => h(Folder)
+            })
+          break
       }
-    };
+    }
     const nodeProps = ({ option }: { option: TreeOption }) => {
       return {
-        onClick() {
+        onClick () {
           if (!option.children && !option.disabled) {
-            message.info("[Click] " + option.label);
+            message.info('[Click] ' + option.label)
           }
-        },
-      };
-    };
+        }
+      }
+    }
     return {
-      updatePrefixWithExpaned: updatePrefixWithExpaned,
-      nodeProps: nodeProps,
+      updatePrefixWithExpaned,
+      nodeProps,
       data: [
         {
-          key: "Folder",
-          label: "Folder",
+          key: 'Folder',
+          label: 'Folder',
           prefix: () =>
             h(NIcon, null, {
-              default: () => h(Folder),
+              default: () => h(Folder)
             }),
           children: [
             {
-              key: "Empty",
-              label: "Empty",
+              key: 'Empty',
+              label: 'Empty',
               disabled: true,
               prefix: () =>
                 h(NIcon, null, {
-                  default: () => h(Folder),
-                }),
+                  default: () => h(Folder)
+                })
             },
             {
-              key: "MyFiles",
-              label: "MyFiles",
+              key: 'MyFiles',
+              label: 'MyFiles',
               prefix: () =>
                 h(NIcon, null, {
-                  default: () => h(Folder),
+                  default: () => h(Folder)
                 }),
               children: [
                 {
-                  label: "template.txt",
-                  key: "template.txt",
+                  label: 'template.txt',
+                  key: 'template.txt',
                   prefix: () =>
                     h(NIcon, null, {
-                      default: () => h(FileTrayFullOutline),
-                    }),
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-  },
-});
+                      default: () => h(FileTrayFullOutline)
+                    })
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+})
 </script>
