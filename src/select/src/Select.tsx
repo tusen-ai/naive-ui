@@ -516,7 +516,10 @@ export default defineComponent({
       }
     }
     function handleTriggerBlur (e: FocusEvent): void {
-      if (menuRef.value?.selfRef?.contains(e.relatedTarget as any)) {
+      if (
+        menuRef.value?.selfRef?.contains(e.relatedTarget as any) ||
+        props.disabled
+      ) {
         return
       }
       focusedRef.value = false
@@ -525,6 +528,7 @@ export default defineComponent({
       closeMenu()
     }
     function handleTriggerFocus (e: FocusEvent): void {
+      if (props.disabled) return
       doFocus(e)
       focusedRef.value = true
     }
