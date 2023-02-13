@@ -1,6 +1,0 @@
-{
-  "rules": {
-    "@typescript-eslint/no-floating-promises": 0,
-    "@typescript-eslint/triple-slash-reference": 0
-  }
-}

@@ -12,7 +12,6 @@
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.0",
     "typescript": "^4.6.4",
-    "unplugin-vue-components": "^0.22.9",
-    "vite": "^3.2.0"
+    "unplugin-vue-components": "^0.22.9"
   }
 }

@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+/* eslint-disable @typescript-eslint/no-floating-promises */
 ;(async () => {
   const apps = import.meta.glob<any>('./src/*.vue')
 
