@@ -96,7 +96,9 @@ export default defineComponent({
             const { focusLine } = props
             if (focusLine) {
               const children = preEl.children
-              if (children[focusLine - 1]) { children[focusLine - 1]?.classList.add('__has_focus__') }
+              if (children[focusLine - 1]) {
+                children[focusLine - 1]?.classList.add('__has_focus__')
+              }
             }
             codeEl.appendChild(preEl)
           }
@@ -119,9 +121,7 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
-      setCode()
-    })
+    onMounted(setCode)
 
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
