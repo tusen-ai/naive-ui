@@ -33,6 +33,7 @@ export const codeProps = {
     default: true
   },
   hljs: Object as PropType<Hljs>,
+  focusLine: Number,
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
@@ -52,6 +53,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = internalNoHighlight ? { value: undefined } : useHljs(props)
+
     const createCodeHtml = (
       language: string,
       code: string,
@@ -91,6 +93,11 @@ export default defineComponent({
             const preEl = document.createElement('pre')
             preEl.className = '__code__'
             preEl.innerHTML = html
+            const { focusLine } = props
+            if (focusLine) {
+              const children = preEl.children
+              if (children[focusLine - 1]) { children[focusLine - 1]?.classList.add('__has_focus__') }
+            }
             codeEl.appendChild(preEl)
           }
           return
@@ -111,7 +118,11 @@ export default defineComponent({
         codeEl.appendChild(wrap)
       }
     }
-    onMounted(setCode)
+
+    onMounted(() => {
+      setCode()
+    })
+
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
     if (!internalNoHighlight) watch(hljsRef, setCode)
@@ -207,7 +218,8 @@ export default defineComponent({
           `${mergedClsPrefix}-code`,
           this.themeClass,
           wordWrap && `${mergedClsPrefix}-code--word-wrap`,
-          mergedShowLineNumbers && `${mergedClsPrefix}-code--show-line-numbers`
+          mergedShowLineNumbers && `${mergedClsPrefix}-code--show-line-numbers`,
+          this.focusLine && `${mergedClsPrefix}-code--has-focus-line`
         ]}
         style={this.cssVars as any}
         ref="codeRef"

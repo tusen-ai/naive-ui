@@ -25,6 +25,13 @@ export default c([
     cM('show-line-numbers', `
       display: flex;
     `),
+    cM('has-focus-line', [
+      cB('code-line', [
+        c('&:not(.__has_focus__)', `
+          filter: blur(2px) 
+        `)
+      ])
+    ]),
     cE('line-numbers', `
       user-select: none;
       padding-right: 12px;

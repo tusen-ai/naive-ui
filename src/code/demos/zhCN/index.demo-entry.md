@@ -40,6 +40,7 @@ inline.vue
 softwrap.vue
 loop-debug.vue
 line-numbers.vue
+focus-line.vue
 ```
 
 ## API
@@ -55,3 +56,4 @@ line-numbers.vue
 | show-line-numbers | `boolean` | `false` | 是否显示行号，在 `inline` 或 `word-wrap` 的情况下不生效 | 2.32.0 |
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
 | word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | 2.24.0 |
+| focus-line | `number` | `undefined` | 聚焦于哪一行 | 2.34.4 |

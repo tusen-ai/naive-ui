@@ -39,6 +39,7 @@ basic.vue
 inline.vue
 softwrap.vue
 line-numbers.vue
+focus-line.vue
 ```
 
 ## API
@@ -54,3 +55,4 @@ line-numbers.vue
 | show-line-numbers | `boolean` | `false` | Whether to show line numbers. Won't work if `inline` or `word-wrap` is `true`. | 2.32.0 |
 | trim | `boolean` | `true` | Whether to display trimmed code. |  |
 | word-wrap | `boolean` | `false` | Whether to display word-wrapped code. | 2.24.0 |
+| focus-line | `number` | `undefined` | focus which line | 2.34.4 |
