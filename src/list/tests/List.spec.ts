@@ -20,6 +20,7 @@ describe('n-list', () => {
     expect(wrapper.find('.n-list__header').text()).toBe('test header')
     expect(wrapper.find('.n-list__footer').exists()).toBe(true)
     expect(wrapper.find('.n-list__footer').text()).toBe('test footer')
+    wrapper.unmount()
   })
 
   it('should work with n-list-item slots', async () => {
@@ -39,6 +40,7 @@ describe('n-list', () => {
     expect(wrapper.find('.n-list-item__prefix').text()).toBe('test prefix')
     expect(wrapper.find('.n-list-item__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-list-item__suffix').text()).toBe('test suffix')
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -54,5 +56,6 @@ describe('n-list', () => {
 
     await wrapper.setProps({ bordered: true })
     expect(wrapper.find('.n-list').classes()).toContain('n-list--bordered')
+    wrapper.unmount()
   })
 })
