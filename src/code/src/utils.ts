@@ -38,9 +38,7 @@ export default (): any => {
             content += Array(spanStack.length).fill('</span>').join('')
           }
           let retString = '<div '
-          retString += `class="${mergedClsPrefixRef.value}-code-line ${
-            mergedClsPrefixRef.value
-          }-code-line--${index + 1}"`
+          retString += `class="${mergedClsPrefixRef.value}-code-line"`
           retString += `>${content}</div>`
           return retString
         })

@@ -34,6 +34,7 @@ export const codeProps = {
   },
   hljs: Object as PropType<Hljs>,
   focusLine: Number,
+  highlightLines: Array as PropType<number[]>,
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
@@ -93,11 +94,16 @@ export default defineComponent({
             const preEl = document.createElement('pre')
             preEl.className = '__code__'
             preEl.innerHTML = html
-            const { focusLine } = props
+            const { focusLine, highlightLines } = props
+            const children = preEl.children
             if (focusLine) {
-              const children = preEl.children
-              if (children[focusLine - 1]) {
+              children[focusLine - 1] &&
                 children[focusLine - 1]?.classList.add('__has_focus__')
+            }
+            if (highlightLines) {
+              for (const line of highlightLines) {
+                children[line - 1] &&
+                  children[line - 1]?.classList.add('__highlight_line__')
               }
             }
             codeEl.appendChild(preEl)
@@ -142,6 +148,7 @@ export default defineComponent({
           fontSize,
           fontWeightStrong,
           lineNumberTextColor,
+          lineHighLightBgColor,
           // extracted from hljs atom-one-light.scss
           'mono-3': $1,
           'hue-1': $2,
@@ -170,7 +177,8 @@ export default defineComponent({
         '--n-hue-5-2': $7,
         '--n-hue-6': $8,
         '--n-hue-6-2': $9,
-        '--n-line-number-text-color': lineNumberTextColor
+        '--n-line-number-text-color': lineNumberTextColor,
+        '--n-line-highlight-bg-color': lineHighLightBgColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -219,7 +227,9 @@ export default defineComponent({
           this.themeClass,
           wordWrap && `${mergedClsPrefix}-code--word-wrap`,
           mergedShowLineNumbers && `${mergedClsPrefix}-code--show-line-numbers`,
-          this.focusLine && `${mergedClsPrefix}-code--has-focus-line`
+          this.focusLine && `${mergedClsPrefix}-code--has-focus-line`,
+          this.highlightLines?.length &&
+            `${mergedClsPrefix}-code--has-highlight-line`
         ]}
         style={this.cssVars as any}
         ref="codeRef"
