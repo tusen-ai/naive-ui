@@ -20,7 +20,7 @@ const self = (vars: ThemeCommonVars) => {
     'hue-6-2': '#c18401',
     // line-number styles
     lineNumberTextColor: textColor3,
-    lineHighLightBgColor: '#eaf8ec'
+    lineHighLightBgColor: '#f4f5f4'
   }
 }
 

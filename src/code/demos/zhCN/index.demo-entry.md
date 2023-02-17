@@ -41,7 +41,12 @@ softwrap.vue
 loop-debug.vue
 line-numbers.vue
 focus-line.vue
+highlight-line.vue
 ```
+
+<n-alert title="注意" type="warning" style="margin:16px 0;" :bordered="false">
+如果你打算使用`focus-line`或者`highlight-line`特性的话, 请添加`lineToDiv`插件到`hljs`, 由于`hljs`的插件是全局的, 所以应该尽量避免重复添加插件。
+</n-alert>
 
 ## API
 
@@ -57,3 +62,4 @@ focus-line.vue
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
 | word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | 2.24.0 |
 | focus-line | `number` | `undefined` | 聚焦于哪一行 | 2.34.4 |
+| highlight-line | `number[]` | `undefined` | 高亮的行号 | 2.34.4 |

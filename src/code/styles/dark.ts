@@ -22,7 +22,7 @@ const codeDark: CodeTheme = {
       'hue-6-2': '#e6c07b',
       // line-number styles
       lineNumberTextColor: textColor3,
-      lineHighLightBgColor: '#626462'
+      lineHighLightBgColor: '#000'
     }
   }
 }
