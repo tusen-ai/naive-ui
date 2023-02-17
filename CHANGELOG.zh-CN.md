@@ -19,6 +19,10 @@
 - `n-select` 新增 `keyboard` 属性，[#4340](https://github.com/tusen-ai/naive-ui/issues/4340)
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
 
+### i18n
+
+- 更新 zhTw 国际化
+
 ## 2.34.3
 
 ### Fixes
