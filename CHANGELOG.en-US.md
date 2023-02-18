@@ -19,6 +19,10 @@
 - `n-select` adds `keyboard` prop, closes [#4340](https://github.com/tusen-ai/naive-ui/issues/4340).
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
 
+### i18n
+
+- Update zhTw locale.
+
 ## 2.34.3
 
 ### Fixes

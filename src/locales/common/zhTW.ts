@@ -62,15 +62,14 @@ const zhTW: NLocale = {
     targetTitle: '目標項'
   },
   Transfer: {
-    // TODO: translation
-    selectAll: '全选',
-    unselectAll: '取消全选',
+    selectAll: '全選',
+    unselectAll: '取消全選',
     clearAll: '清除',
     total: (num: number): string => `共 ${num} 項`,
     selected: (num: number): string => `已選 ${num} 項`
   },
   Empty: {
-    description: '無數據'
+    description: '無資料'
   },
   Select: {
     placeholder: '請選擇'
@@ -86,7 +85,7 @@ const zhTW: NLocale = {
     selectionSuffix: '頁'
   },
   DynamicTags: {
-    add: '添加'
+    add: '新增'
   },
   Log: {
     loading: '載入中'
@@ -98,29 +97,27 @@ const zhTW: NLocale = {
     placeholder: '請輸入'
   },
   DynamicInput: {
-    create: '添加'
+    create: '新增'
   },
   ThemeEditor: {
     title: '主題編輯器',
     clearAllVars: '清除全部變數',
-    clearSearch: '清除搜索',
+    clearSearch: '清除搜尋',
     filterCompName: '過濾組件名',
     filterVarName: '過濾變數名',
     import: '導入',
     export: '匯出',
-    restore: '恢復默認'
+    restore: '恢復預設'
   },
-  // TODO: translation
   Image: {
-    tipPrevious: '上一张（←）',
-    tipNext: '下一张（→）',
-    tipCounterclockwise: '向左旋转',
-    tipClockwise: '向右旋转',
-    tipZoomOut: '缩小',
+    tipPrevious: '上一張（←）',
+    tipNext: '下一張（→）',
+    tipCounterclockwise: '向左旋轉',
+    tipClockwise: '向右旋轉',
+    tipZoomOut: '縮小',
     tipZoomIn: '放大',
-    tipClose: '关闭（Esc）',
-    // TODO: translation
-    tipOriginalSize: '缩放到原始尺寸'
+    tipClose: '關閉（Esc）',
+    tipOriginalSize: '縮放到原始尺寸'
   }
 }
 
