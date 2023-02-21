@@ -84,7 +84,7 @@ export default defineComponent({
           name: props.width
             ? 'fade-in-width-expand-transition'
             : 'fade-in-height-expand-transition',
-          mode: props.mode,
+          mode: props.mode ?? 'default',
           appear: props.appear,
           onEnter: handleEnter,
           onAfterEnter: handleAfterEnter,
