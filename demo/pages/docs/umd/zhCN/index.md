@@ -36,3 +36,41 @@
   </body>
 </html>
 ```
+
+## 通知组件的用法
+
+在 UMD 下在使用 Message、Notification 组件时，需要用 createDiscreteApi 在 Setup 之外创建一个 DiscreteApi 实例。
+
+以下是一个示例：
+
+``` vue
+<script>
+	const func = () =>{
+	    // do something
+	    notify('success', '提交成功', '提示内容', 5000)
+	}
+	
+	const App = {
+		setup() {
+			return {
+				func,
+			}
+		},
+	}
+	const app = Vue.createApp(App)
+	app.use(naive)
+	app.mount('#app')
+	
+	// 创建一个 Naive UI 的离散 API 实例，其中包括属性： "notification"，"message"，这个 API 实例将用于创建通知。
+	const x = naive.createDiscreteApi(['notification', 'message']);
+	
+	const notify = (type, title, content, duration) => {
+		x.notification.create({
+			type: type,
+			title: title,
+			content: content,
+			duration: duration,
+		})
+	}
+</script>
+```
