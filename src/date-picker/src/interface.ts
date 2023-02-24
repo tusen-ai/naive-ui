@@ -115,6 +115,12 @@ export type DatePickerInjection = {
   timePickerPropsRef: Ref<
   undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
   >
+  monthPanelPropsRef: Ref<
+  | undefined
+  | {
+    actions: Array<'confirm' | 'now'> | null
+  }
+  >
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>

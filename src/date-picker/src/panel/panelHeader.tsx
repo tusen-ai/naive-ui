@@ -4,7 +4,9 @@ import {
   Transition,
   withDirectives,
   PropType,
-  ref
+  ref,
+  computed,
+  unref
 } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -33,12 +35,19 @@ export default defineComponent({
     onUpdateValue: {
       type: Function as PropType<(value: number) => void>,
       required: true
+    },
+    actions: {
+      type: Array as PropType<string[] | null>,
+      default: () => ['confirm', 'now']
     }
   },
-  setup () {
+  setup ({ actions }) {
     const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
+    const activeRef = computed<boolean>(() => {
+      return Array.isArray(actions) && actions.length && unref(showRef)
+    })
     function handleClickOutside (e: MouseEvent): void {
       if (
         showRef.value &&
@@ -52,6 +61,7 @@ export default defineComponent({
     }
     return {
       show: showRef,
+      activeRef,
       triggerRef,
       monthPanelRef,
       handleHeaderClick,
@@ -97,7 +107,9 @@ export default defineComponent({
                                 <MonthPanel
                                   ref="monthPanelRef"
                                   onUpdateValue={this.onUpdateValue}
-                                  actions={[]}
+                                  onClose={this.handleHeaderClick}
+                                  actions={this.actions}
+                                  active={this.activeRef}
                                   // month and year click show month type
                                   type="month"
                                   key="month"

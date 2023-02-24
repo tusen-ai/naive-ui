@@ -34,7 +34,14 @@ export default defineComponent({
     return useCalendar(props, 'date')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      onRender,
+      $slots,
+      monthPanelProps
+    } = this
     onRender?.()
     return (
       <div
@@ -70,6 +77,7 @@ export default defineComponent({
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.calendarMonth}
               calendarYear={this.calendarYear}
+              {...monthPanelProps}
             />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}

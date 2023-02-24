@@ -131,6 +131,12 @@ export const datePickerProps = {
   timePickerProps: [Object, Array] as PropType<
   TimePickerProps | [TimePickerProps, TimePickerProps]
   >,
+  monthPanelProps: Object as PropType<
+  | undefined
+  | {
+    actions: Array<'confirm' | 'now'> | null
+  }
+  >,
   onClear: Function as PropType<() => void>,
   onConfirm: Function as PropType<OnConfirm>,
   defaultCalendarStartTime: Number,
@@ -759,6 +765,7 @@ export default defineComponent({
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
       timePickerPropsRef: toRef(props, 'timePickerProps'),
+      monthPanelPropsRef: toRef(props, 'monthPanelProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
       ...uniVaidation,

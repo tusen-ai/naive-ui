@@ -71,6 +71,7 @@ form-debug.vue
 | placeholder | `string` | `'选择日期'` | 自动填充的提示信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
+| month-panel-props | `{ actions: Array<'now' \| 'confirm'> \| null }` | `[now', 'confirm']` | 面板中年月选择器的属性 |  |
 
 ### DateTime 类型的 Props
 
@@ -104,6 +105,7 @@ form-debug.vue
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
+| month-panel-props | `{ actions: Array<'now' \| 'confirm'> \| null }` | `[now', 'confirm']` | 面板中年月选择器的属性 |  |
 
 ### DateTimeRange 类型的 Props
 

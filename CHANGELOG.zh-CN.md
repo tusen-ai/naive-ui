@@ -18,6 +18,7 @@
 - `n-scrollbar` 新增 `size` 属性，关闭 [#3896](https://github.com/tusen-ai/naive-ui/issues/3896)
 - `n-select` 新增 `keyboard` 属性，[#4340](https://github.com/tusen-ai/naive-ui/issues/4340)
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
+- `n-date-picker` 当 `type` 为 `date` 或者 `daterange`时，新增`monthPanelProps`属性
 
 ### i18n
 

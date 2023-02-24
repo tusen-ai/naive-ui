@@ -18,6 +18,7 @@
 - `n-scrollbar` adds `size` prop, closes [#3896](https://github.com/tusen-ai/naive-ui/issues/3896).
 - `n-select` adds `keyboard` prop, closes [#4340](https://github.com/tusen-ai/naive-ui/issues/4340).
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
+- `n-date-picker` 当 `type` 为 `date` 或者 `daterange`时，新增`monthPanelProps`属性
 
 ### i18n
 
