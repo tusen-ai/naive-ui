@@ -132,8 +132,9 @@ export function filterTree (
       const children = n[childrenField] as TreeOption[] | undefined
       if (children) {
         if (isVisitedTail) {
-          // If it is visited path tail, use origin node
-          sibs.push(n)
+           // If it is visited path tail, use origin node and discard all child nodes
+           const clonedNode = { ...n, [childrenField]: [] }
+           sibs.push(clonedNode)
         } else {
           // It it is not visited path tail, use cloned node
           expandedKeys.push(key)
