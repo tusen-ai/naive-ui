@@ -173,6 +173,7 @@ describe('notification-provider', () => {
     expect(
       container.classList.contains('n-notification-container--bottom-left')
     ).toEqual(true)
+    wrapper.unmount()
   })
   it('should work with `destroyAll` method', async () => {
     const Test = defineComponent({
@@ -201,5 +202,6 @@ describe('notification-provider', () => {
     })
     await nextTick()
     expect(wrapper.find('.notification-container').exists()).toBe(false)
+    wrapper.unmount()
   })
 })
