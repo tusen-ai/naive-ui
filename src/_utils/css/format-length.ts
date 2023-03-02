@@ -1,4 +1,4 @@
-const pureNumberRegex = /^(\d|\.)+$/
+export const pureNumberRegex = /^(\d|\.)+$/
 const numberRegex = /(\d|\.)+/
 
 interface FormatLengthOptions {

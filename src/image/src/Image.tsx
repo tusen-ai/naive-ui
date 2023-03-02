@@ -13,6 +13,7 @@ import {
 } from 'vue'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { pureNumberRegex } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
@@ -155,11 +156,14 @@ export default defineComponent({
 
     const placeholderNode = this.$slots.placeholder?.()
     const loadSrc: string = this.src || imgProps.src || ''
+    const isPureNumberWidth = pureNumberRegex.test(this.width as any)
+    const isPureNumberHeight = pureNumberRegex.test(this.height as any)
+
     const imgNode = h('img', {
       ...imgProps,
       ref: 'imageRef',
-      width: this.width || imgProps.width,
-      height: this.height || imgProps.height,
+      width: isPureNumberWidth ? this.width : undefined,
+      height: isPureNumberHeight ? this.height : undefined,
       src: isImageSupportNativeLazy
         ? loadSrc
         : this.showError
@@ -178,11 +182,19 @@ export default defineComponent({
           ? 'lazy'
           : 'eager',
       style: [
+        {
+          objectFit: this.objectFit,
+          width: isPureNumberWidth
+            ? `${this.width as string | number}px`
+            : this.width,
+          height: isPureNumberHeight
+            ? `${this.height as string | number}px`
+            : this.height
+        },
         imgProps.style || '',
         placeholderNode && !loaded
           ? { height: '0', width: '0', visibility: 'hidden' }
-          : '',
-        { objectFit: this.objectFit }
+          : ''
       ],
       'data-error': this.showError,
       'data-preview-src': this.previewSrc || this.src
