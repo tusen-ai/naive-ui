@@ -60,6 +60,27 @@ export function isFileSystemFileEntry (
   return item.isFile
 }
 
+async function getAllEntriesFromDirectoryReader (
+  directoryReader: FileSystemDirectoryReader
+): Promise<FileSystemEntry[] | Array<FileSystemEntry | null>> {
+  const entries = await new Promise<
+  FileSystemEntry[] | Array<FileSystemEntry | null>
+  >((resolve, reject) => {
+    directoryReader.readEntries(
+      (entries) => {
+        resolve(entries)
+      },
+      (error) => reject(error)
+    )
+  })
+  if (entries?.length > 0) {
+    return entries.concat(
+      await getAllEntriesFromDirectoryReader(directoryReader)
+    )
+  }
+  return entries
+}
+
 export async function getFilesFromEntries (
   entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>,
   directory: boolean
@@ -85,15 +106,14 @@ export async function getFilesFromEntries (
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
         lock()
-        directoryReader.readEntries(
-          (entries) => {
+        getAllEntriesFromDirectoryReader(directoryReader)
+          .then((entries) => {
             _getFilesFromEntries(entries)
             unlock()
-          },
-          () => {
+          })
+          .catch(() => {
             unlock()
-          }
-        )
+          })
       } else if (isFileSystemFileEntry(entry)) {
         lock()
         entry.file(
