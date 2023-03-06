@@ -89,6 +89,7 @@ export default c([
     border-radius: var(--n-panel-border-radius);
     background-color: var(--n-panel-color);
     color: var(--n-panel-text-color);
+    user-select: none;
   `, [
     fadeInScaleUpTransition(),
     cM('shadow', `
