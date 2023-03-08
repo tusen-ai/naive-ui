@@ -40,7 +40,7 @@ export default defineComponent({
     if (render && !isSummary) {
       cell = render(row, this.index)
     } else {
-      if (isSummary) {
+      if (isSummary && row[key]) {
         cell = (row[key] as SummaryCell).value
       } else {
         cell = renderCell
