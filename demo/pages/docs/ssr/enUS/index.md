@@ -50,25 +50,25 @@ You can also use the `unplugin-auto-import` plugin to automatically import APIs 
 In this case, the `nuxt.config.ts` file will have a few additional configuration lines compared to the example above.
 
 ```ts
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   build: {
     transpile:
-      process.env.NODE_ENV === "production" ? ["naive-ui", "vueuc", "@css-render/vue3-ssr", "@juggle/resize-observer"] : ["@juggle/resize-observer"],
+      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
   },
   vite: {
     optimizeDeps: {
-      include: process.env.NODE_ENV === "development" ? ["naive-ui", "vueuc", "date-fns-tz/esm/formatInTimeZone"] : [],
+      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
     },
     plugins: [
       AutoImport({
         imports: [
           {
-            "naive-ui": ["useDialog", "useMessage", "useNotification", "useLoadingBar"],
+            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
           },
         ],
       }),
