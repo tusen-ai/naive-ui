@@ -50,25 +50,25 @@ export default defineNuxtConfig({
 在这种情况下，`nuxt.config.ts` 会比上面的例子多几行配置。
 
 ```ts
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   build: {
     transpile:
-      process.env.NODE_ENV === "production" ? ["naive-ui", "vueuc", "@css-render/vue3-ssr", "@juggle/resize-observer"] : ["@juggle/resize-observer"],
+      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
   },
   vite: {
     optimizeDeps: {
-      include: process.env.NODE_ENV === "development" ? ["naive-ui", "vueuc", "date-fns-tz/esm/formatInTimeZone"] : [],
+      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
     },
     plugins: [
       AutoImport({
         imports: [
           {
-            "naive-ui": ["useDialog", "useMessage", "useNotification", "useLoadingBar"],
+            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
           },
         ],
       }),
