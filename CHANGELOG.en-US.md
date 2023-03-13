@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+- `n-input-number` export the `select` method.
+
 ### Fixes
 
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.

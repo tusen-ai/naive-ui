@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+- `n-input-number` 导出 `select` 方法
+
 ### Fixes
 
 - 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在

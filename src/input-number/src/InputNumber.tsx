@@ -552,7 +552,8 @@ export default defineComponent({
     })
     const exposedMethods: InputNumberInst = {
       focus: () => inputInstRef.value?.focus(),
-      blur: () => inputInstRef.value?.blur()
+      blur: () => inputInstRef.value?.blur(),
+      select: () => inputInstRef.value?.select()
     }
     const rtlEnabledRef = useRtl(
       'InputNumber',
