@@ -26,3 +26,4 @@ web-types.json
 ~*
 .pnpm-debug.log
 .history
+.eslintcache

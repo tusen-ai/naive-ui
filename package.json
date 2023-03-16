@@ -17,13 +17,13 @@
     "release:changelog": "node scripts/release-changelog.mjs",
     "lint": "pnpm run lint:code && pnpm run lint:type",
     "lint:type": "pnpm run lint:src-type && pnpm run lint:demo-type",
-    "lint:code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
-    "lint:fix": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\"",
+    "lint:code": "eslint \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\" --cache",
+    "lint:fix": "eslint --fix \"{src,build,scripts,demo}/**/*.{ts,tsx,js,vue,md}\" --cache",
     "lint:src-type": "tsc -b --force tsconfig.esm.json",
     "lint:demo-type": "NODE_OPTIONS=--max-old-space-size=4096 vue-tsc -p src/tsconfig.demo.json",
     "format": "pnpm run format:code && pnpm run format:md && pnpm run lint:fix",
-    "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\"",
-    "format:md": "prettier --write --parser markdown --prose-wrap never \"(src|demo)/**/*.md\"",
+    "format:code": "prettier --write \"(src|demo)/**/*.(vue|js)\" --cache",
+    "format:md": "prettier --write --parser markdown --prose-wrap never \"(src|demo)/**/*.md\" --cache",
     "test": "NODE_ENV=test jest --collectCoverage=false",
     "test:update": "NODE_ENV=test jest -u --collectCoverage=false",
     "test:cov": "NODE_ENV=test NODE_OPTIONS=--unhandled-rejections=warn jest",
@@ -49,27 +49,27 @@
   "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [
-      "prettier --write",
-      "eslint --fix"
+      "prettier --write --cache",
+      "eslint --fix --cache"
     ],
     "*.ts": [
-      "prettier --write",
-      "eslint --fix"
+      "prettier --write --cache",
+      "eslint --fix --cache"
     ],
     "*.tsx": [
-      "prettier --write",
-      "eslint --fix"
+      "prettier --write --cache",
+      "eslint --fix --cache"
     ],
     "*.vue": [
-      "prettier --parser=vue --write",
-      "eslint --fix"
+      "prettier --parser=vue --write --cache",
+      "eslint --fix --cache"
     ],
     "*.css": [
-      "prettier --write"
+      "prettier --write --cache"
     ],
     "*.md": [
-      "prettier --write --parser markdown --prose-wrap never",
-      "eslint --fix"
+      "prettier --write --parser markdown --prose-wrap never --cache",
+      "eslint --fix --cache"
     ]
   },
   "devDependencies": {
