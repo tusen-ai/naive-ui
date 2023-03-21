@@ -4,7 +4,7 @@
 
 <template>
   <n-button @click="createMessage">
-    漏斗图标
+    沙漏图标
   </n-button>
 </template>
 
