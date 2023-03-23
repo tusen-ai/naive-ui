@@ -28,33 +28,33 @@ export default cB('base-close', `
     height: var(--n-close-icon-size);
     width: var(--n-close-icon-size);
   `),
-  c('&::before', `
-    content: "";
-    position: absolute;
-    width: var(--n-close-size);
-    height: var(--n-close-size);
-    left: 50%;
-    top: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    transition: inherit;
-    border-radius: inherit;
-  `),
+  // c('&::before', `
+  //   content: "";
+  //   position: absolute;
+  //   width: var(--n-close-size);
+  //   height: var(--n-close-size);
+  //   left: 50%;
+  //   top: 50%;
+  //   transform: translateY(-50%) translateX(-50%);
+  //   transition: inherit;
+  //   border-radius: inherit;
+  // `),
   cNotM('disabled', [
     c('&:hover', `
       color: var(--n-close-icon-color-hover);
     `),
-    c('&::before::hover', `
-      background-color: var(--n-close-color-hover);
-    `),
-    c('&::before:focus', `
-      background-color: var(--n-close-color-hover);
-    `),
+    // c('&:hover::before', `
+    //   background-color: var(--n-close-color-hover);
+    // `),
+    // c('&:focus::before', `
+    //   background-color: var(--n-close-color-hover);
+    // `),
     c('&:active', `
       color: var(--n-close-icon-color-pressed);
-    `),
-    c('&::before:active', `
-      background-color: var(--n-close-color-pressed);
     `)
+    // c('&:active::before', `
+    //   background-color: var(--n-close-color-pressed);
+    // `)
   ]),
   cM('disabled', `
     cursor: not-allowed;

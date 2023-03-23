@@ -31,6 +31,7 @@ export default defineComponent({
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
       const { clsPrefix, disabled, absolute, round, isButtonTag } = props
+      const iconClsSuffix = disabled ? [] : ['close']
       const Tag = isButtonTag ? 'button' : 'div'
       return (
         <Tag
@@ -53,7 +54,7 @@ export default defineComponent({
           }}
           onClick={props.onClick}
         >
-          <NBaseIcon clsPrefix={clsPrefix}>
+          <NBaseIcon clsPrefix={clsPrefix} clsSuffix={iconClsSuffix}>
             {{
               default: () => <CloseIcon />
             }}
