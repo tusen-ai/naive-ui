@@ -43,16 +43,16 @@ export default cB('base-close', `
     c('&:hover', `
       color: var(--n-close-icon-color-hover);
     `),
-    c('&:hover::before', `
+    c('&::before::hover', `
       background-color: var(--n-close-color-hover);
     `),
-    c('&:focus::before', `
+    c('&::before:focus', `
       background-color: var(--n-close-color-hover);
     `),
     c('&:active', `
       color: var(--n-close-icon-color-pressed);
     `),
-    c('&:active::before', `
+    c('&::before:active', `
       background-color: var(--n-close-color-pressed);
     `)
   ]),
