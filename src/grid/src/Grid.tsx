@@ -248,7 +248,12 @@ export default defineComponent({
       if (maybeSuffixNode?.props) {
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
-          suffixSpan = maybeSuffixNode.props?.span ?? defaultSpan
+          suffixSpan = Number(
+            parseResponsivePropValue(
+              maybeSuffixNode.props?.span,
+              responsiveQuery
+            ) ?? defaultSpan
+          )
           maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
