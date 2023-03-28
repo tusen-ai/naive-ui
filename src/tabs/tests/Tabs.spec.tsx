@@ -171,17 +171,16 @@ describe('n-tabs', () => {
       props: {
         type: 'card',
         defaultValue: '3',
-        onBeforeLeave: (name: string) => {
+        onBeforeLeave: async (name: string) => {
           switch (name) {
             case '1':
               return false
             case '2':
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-              return new Promise((resolve) => {
+              return await new Promise<boolean>((resolve) => {
                 setTimeout(() => {
                   resolve(true)
                 }, 1000)
-              }) as Promise<boolean>
+              })
             default:
               return true
           }
@@ -295,7 +294,7 @@ describe('n-tabs', () => {
                 tab: 'Oasis',
                 name: 'oasis'
               },
-              'Wonderwall'
+              { default: () => 'Wonderwall' }
             )
         }
       })
