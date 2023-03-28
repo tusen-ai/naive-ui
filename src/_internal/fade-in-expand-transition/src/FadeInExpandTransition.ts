@@ -78,20 +78,25 @@ export default defineComponent({
     }
     return () => {
       const type = props.group ? TransitionGroup : Transition
+      const transitionBaseProps = {
+        name: props.width
+          ? 'fade-in-width-expand-transition'
+          : 'fade-in-height-expand-transition',
+        appear: props.appear,
+        onEnter: handleEnter,
+        onAfterEnter: handleAfterEnter,
+        onBeforeLeave: handleBeforeLeave,
+        onLeave: handleLeave,
+        onAfterLeave: handleAfterLeave
+      }
       return h(
         type as any,
-        {
-          name: props.width
-            ? 'fade-in-width-expand-transition'
-            : 'fade-in-height-expand-transition',
-          mode: props.mode,
-          appear: props.appear,
-          onEnter: handleEnter,
-          onAfterEnter: handleAfterEnter,
-          onBeforeLeave: handleBeforeLeave,
-          onLeave: handleLeave,
-          onAfterLeave: handleAfterLeave
-        },
+        props.group
+          ? transitionBaseProps
+          : {
+              ...transitionBaseProps,
+              mode: props.mode
+            },
         slots
       )
     }
