@@ -36,6 +36,7 @@
 - Fix `n-upload` doesn't show thumbnail for file with image type file name, closes [#4198](https://github.com/tusen-ai/naive-ui/issues/4198).
 - Fix `n-input` style bug of tiny size with autosize prop, closes [#4167](https://github.com/tusen-ai/naive-ui/issues/4167).
 - Fix `n-image` & `n-avatar` in `lazy` mode, after setting the `intersection-observer-options` `rootMargin` attribute, the preload does not take effect.
+- Fix `type` default value of `props` in `n-message` is wrong, change `info` to `default`
 
 ### Feats
 

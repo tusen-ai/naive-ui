@@ -36,6 +36,7 @@
 - 修复 `n-upload` 对于名称为图片的文件不显示预览图，关闭 [#4198](https://github.com/tusen-ai/naive-ui/issues/4198)
 - 修复 `n-input` 在 size 为 tiny 和 autosize 属性下，input 对齐样式异常，关闭 [#4167](https://github.com/tusen-ai/naive-ui/issues/4167)
 - 修复 `n-image` 和 `n-avatar` 在 `lazy` 模式，设定 `intersection-observer-options` `rootMargin` 属性后，预加载不生效
+- 修复 `n-message` 中 `props` 的 `type` 默认值错误, 将 `info` 更改为 `default`
 
 ### Feats
 
