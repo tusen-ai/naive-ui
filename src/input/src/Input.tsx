@@ -134,7 +134,7 @@ export const inputProps = {
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onChange: [Function, Array] as PropType<OnUpdateValue>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
-  countGraphemes: Function as PropType<(value: string) => number>,
+  countGraphemes: Function as PropType<(value: string) => string[]>, // string[]: make sure the emoji character length is correct
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -451,7 +451,25 @@ export default defineComponent({
       index: 0 | 1 = 0,
       event = 'input'
     ): void {
-      const targetValue = (e.target as HTMLInputElement).value
+      const { maxlength, minlength, countGraphemes } = props
+      let isIncomingValueValid: boolean = true
+      let targetValue = (e.target as HTMLInputElement).value ?? ''
+      if (countGraphemes) {
+        let charArray: string[] | undefined
+        if (maxlength !== undefined) {
+          charArray = countGraphemes(targetValue)
+          const isSlice = charArray.length > Number(maxlength)
+          if (isSlice) {
+            targetValue = charArray.slice(0, Number(maxlength)).join('')
+          }
+        }
+        if (minlength !== undefined) {
+          if (charArray === undefined) {
+            charArray = countGraphemes(targetValue)
+          }
+          if (charArray.length < Number(minlength)) isIncomingValueValid = false
+        }
+      }
       syncMirror(targetValue)
       if (e instanceof InputEvent && !e.isComposing) {
         isComposingRef.value = false
@@ -465,7 +483,7 @@ export default defineComponent({
       syncSource = targetValue
       if (isComposingRef.value) return
       focusedInputCursorControl.recordCursor()
-      const isIncomingValueValid = allowInput(targetValue)
+      isIncomingValueValid = isIncomingValueValid && allowInput(targetValue)
       if (isIncomingValueValid) {
         if (!props.pair) {
           event === 'input' ? doUpdateValue(targetValue) : doChange(targetValue)
@@ -488,22 +506,6 @@ export default defineComponent({
       }
     }
     function allowInput (value: string): boolean {
-      const { countGraphemes, maxlength, minlength } = props
-      if (countGraphemes) {
-        let graphemesCount: number | undefined
-        if (maxlength !== undefined) {
-          if (graphemesCount === undefined) {
-            graphemesCount = countGraphemes(value)
-          }
-          if (graphemesCount > Number(maxlength)) return false
-        }
-        if (minlength !== undefined) {
-          if (graphemesCount === undefined) {
-            graphemesCount = countGraphemes(value)
-          }
-          if (graphemesCount < Number(maxlength)) return false
-        }
-      }
       const { allowInput } = props
       if (typeof allowInput === 'function') {
         return allowInput(value)

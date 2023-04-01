@@ -28,7 +28,7 @@ export default defineComponent({
   setup () {
     const splitter = new GraphemeSplitter()
     return {
-      countGraphemes: (value: string) => splitter.countGraphemes(value)
+      countGraphemes: (value: string) => splitter.splitGraphemes(value)
     }
   }
 })

@@ -17,7 +17,10 @@ export default defineComponent({
     const wordCountRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null || Array.isArray(mergedValue)) return 0
-      return (countGraphemesRef.value || len)(mergedValue)
+      if (countGraphemesRef.value) {
+        return countGraphemesRef.value(mergedValue).length
+      }
+      return len(mergedValue)
     })
     return () => {
       const { value: maxlength } = maxlengthRef
