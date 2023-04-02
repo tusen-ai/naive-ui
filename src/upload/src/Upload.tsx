@@ -375,7 +375,7 @@ export const uploadProps = {
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
-  renderIcon: Object as PropType<RenderIcon>
+  renderIcon: Function as PropType<RenderIcon>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
