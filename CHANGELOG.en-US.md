@@ -19,6 +19,7 @@
 - `n-scrollbar` adds `size` prop, closes [#3896](https://github.com/tusen-ai/naive-ui/issues/3896).
 - `n-select` adds `keyboard` prop, closes [#4340](https://github.com/tusen-ai/naive-ui/issues/4340).
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
+- `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
 
 ### i18n
 
