@@ -58,6 +58,10 @@
 
 ## 2.34.2
 
+### Feats
+
+- 新增 `n-checkbox-button` 组件
+
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题

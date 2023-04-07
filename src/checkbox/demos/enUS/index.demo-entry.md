@@ -8,6 +8,7 @@ Yo, yo, check it out.
 basic.vue
 size.vue
 group.vue
+button-group.vue
 grid.vue
 indeterminate.vue
 controlled.vue
@@ -18,7 +19,7 @@ focus.vue
 
 ## API
 
-### Checkbox Props
+### Checkbox Props, CheckboxButton Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

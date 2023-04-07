@@ -15,14 +15,22 @@ export const self = (vars: ThemeCommonVars) => {
     borderColor,
     primaryColor,
     textColor2,
+    opacityDisabled,
+    borderRadius,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
     borderRadiusSmall,
+    heightSmall,
+    heightMedium,
+    heightLarge,
     lineHeight
   } = vars
   return {
     ...commonVariables,
+    buttonHeightSmall: heightSmall,
+    buttonHeightMedium: heightMedium,
+    buttonHeightLarge: heightLarge,
     labelLineHeight: lineHeight,
     fontSizeSmall,
     fontSizeMedium,
@@ -45,7 +53,23 @@ export const self = (vars: ThemeCommonVars) => {
     borderFocus: `1px solid ${primaryColor}`,
     boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
     textColor: textColor2,
-    textColorDisabled
+    textColorDisabled,
+    buttonBorderColor: borderColor,
+    buttonBorderColorActive: primaryColor,
+    buttonBorderColorHover: borderColor,
+    buttonColor: baseColor,
+    buttonColorActive: baseColor,
+    buttonTextColor: textColor2,
+    buttonTextColorActive: primaryColor,
+    buttonTextColorHover: primaryColor,
+    opacityDisabled,
+    buttonBoxShadowFocus: `inset 0 0 0 1px ${primaryColor}, 0 0 0 2px ${changeColor(
+      primaryColor,
+      { alpha: 0.3 }
+    )}`,
+    buttonBoxShadowHover: 'inset 0 0 0 1px #0000',
+    buttonBoxShadow: 'inset 0 0 0 1px #0000',
+    buttonBorderRadius: borderRadius
   }
 }
 

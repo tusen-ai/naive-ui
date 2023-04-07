@@ -58,6 +58,10 @@
 
 ## 2.34.2
 
+### Feats
+
+- Add `n-checkbox-button` component.
+
 ### Fixes
 
 - Fix `n-config-provider`'s katex type issue.
