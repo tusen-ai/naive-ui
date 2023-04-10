@@ -25,6 +25,7 @@ icon-button.vue
 popover.vue
 rtl-debug.vue
 debug.vue
+throttle.vue
 ```
 
 ## API
@@ -57,6 +58,7 @@ debug.vue
 | text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |
 | type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |  |
 | tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |  |
+| throttle | `number` | `300` | 节流触发 ，默认为 300ms |  |
 
 ### ButtonGroup Props
 

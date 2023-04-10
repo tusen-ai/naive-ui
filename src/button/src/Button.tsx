@@ -39,6 +39,7 @@ import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
 import type { Type, Size } from './interface'
 import style from './styles/index.cssr'
+import { throttle } from 'lodash-es'
 
 export const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
@@ -90,6 +91,10 @@ export const buttonProps = {
   nativeFocusBehavior: {
     type: Boolean,
     default: !isSafari
+  },
+  throttle: {
+    type: Number,
+    default: 300
   }
 } as const
 
@@ -173,6 +178,10 @@ const Button = defineComponent({
         }
       }
     }
+    const handleClickThrottle = throttle(handleClick, props.throttle, {
+      leading: true,
+      trailing: false
+    })
     const handleKeyup = (e: KeyboardEvent): void => {
       switch (e.key) {
         case 'Enter':
@@ -528,7 +537,7 @@ const Button = defineComponent({
       handleKeydown,
       handleBlur,
       handleKeyup,
-      handleClick,
+      handleClickThrottle,
       customColorCssVars: computed(() => {
         const { color } = props
         if (!color) return null
@@ -578,7 +587,7 @@ const Button = defineComponent({
         type={this.attrType}
         style={this.cssVars as CSSProperties}
         disabled={this.disabled}
-        onClick={this.handleClick}
+        onClick={this.handleClickThrottle}
         onBlur={this.handleBlur}
         onMousedown={this.handleMousedown}
         onKeyup={this.handleKeyup}

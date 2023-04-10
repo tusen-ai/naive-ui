@@ -23,6 +23,7 @@ color.vue
 group.vue
 icon-button.vue
 popover.vue
+throttle.vue
 ```
 
 ## API
@@ -55,6 +56,7 @@ popover.vue
 | text-color | `string` | `undefined` | Button text color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
 | type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |  |
 | tag | `string` | `'button'` | What tag need the button be rendered as. |  |
+| throttle | `number` | `300` | throttle ，default 300ms. |  |
 
 ### ButtonGroup Props
 
