@@ -12,6 +12,7 @@
 
 ### Feats
 
+- `n-button` 新增 `throttle` 属性，修复 Popconfirm 按钮多次触发[#4687](https://github.com/tusen-ai/naive-ui/issues/4687)
 - `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
 - `n-dynamic-input` add `disabled` prop, closes [#4055](https://github.com/tusen-ai/naive-ui/issues/4055).
 - `n-data-table` adds `titleAlign` prop, closes [#3954](https://github.com/tusen-ai/naive-ui/issues/3954).
