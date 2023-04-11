@@ -47,6 +47,8 @@ position-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
 | pane-class | `string` | `undefined` | 面板的类名 |  |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
+| pane-warpper-class | `string` | `undefined` | 面板容器的类名 |  |
+| pane-warpper-style | `string \| object` | `undefined` | 面板容器的样式 |  |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
