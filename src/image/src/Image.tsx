@@ -154,19 +154,19 @@ export default defineComponent({
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
-    const loadSrc: string = this.src || imgProps.src || ''
+    const loadSrc = this.src || imgProps.src
     const imgNode = h('img', {
       ...imgProps,
       ref: 'imageRef',
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
-      src: isImageSupportNativeLazy
-        ? loadSrc
-        : this.showError
-          ? this.fallbackSrc
+      src: this.showError
+        ? isImageSupportNativeLazy
+          ? loadSrc
           : this.shouldStartLoading
             ? loadSrc
-            : undefined,
+            : undefined
+        : this.fallbackSrc,
       alt: this.alt || imgProps.alt,
       'aria-label': this.alt || imgProps.alt,
       onClick: this.mergedOnClick,

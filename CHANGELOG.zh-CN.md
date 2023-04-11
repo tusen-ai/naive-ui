@@ -9,6 +9,7 @@
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
 - 修复 `n-input` 同时使用 `password` 和 `disabled` 时，显示密码图标偏移的问题，关闭 [#4364](https://github.com/tusen-ai/naive-ui/issues/4364)
+- 修复 `n-image` 的 `fallback-src` 属性无法正常触发，关闭 [#4697](https://github.com/tusen-ai/naive-ui/issues/4697)
 
 ### Feats
 
