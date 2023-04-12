@@ -253,11 +253,11 @@ export default defineComponent({
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {
-      if (happensIn(e, 'action')) return
+      if (happensIn(e, 'action') || happensIn(e, 'empty')) return
       props.onKeyup?.(e)
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (happensIn(e, 'action')) return
+      if (happensIn(e, 'action') || happensIn(e, 'empty')) return
       props.onKeydown?.(e)
     }
     function handleMouseDown (e: MouseEvent): void {
