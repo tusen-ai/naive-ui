@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- 修复 `n-select` 的 empty 插槽里面 input 输入空格 浮窗会自动关闭 [#4700](https://github.com/tusen-ai/naive-ui/issues/4700).
 - Fix `n-notification` 's `description` does not wrap when there is English, closes [#4609](https://github.com/tusen-ai/naive-ui/issues/4609).
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
