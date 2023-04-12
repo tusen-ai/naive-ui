@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- 修复 `n-select` 动态添加选项时，会添加已存在的选项 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703).
 - Fix `n-notification` 's `description` does not wrap when there is English, closes [#4609](https://github.com/tusen-ai/naive-ui/issues/4609).
 - Fix `n-dynamic-input` can't access `value[index]` by `index` passed in `on-remove` prop.
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
