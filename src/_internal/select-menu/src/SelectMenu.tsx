@@ -540,7 +540,11 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
+          <div
+            class={`${clsPrefix}-base-select-menu__empty`}
+            data-empty
+            data-action
+          >
             {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}
