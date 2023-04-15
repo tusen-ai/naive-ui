@@ -1,6 +1,6 @@
 import type { NLocale } from './enUS'
 
-const zhCN: NLocale = {
+const faIR: NLocale = {
   name: 'fa-IR',
   global: {
     undo: 'لغو انجام شده',
@@ -121,4 +121,4 @@ const zhCN: NLocale = {
   }
 }
 
-export default zhCN
+export default faIR

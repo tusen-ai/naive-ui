@@ -11,6 +11,7 @@ import {
   idID,
   deDE,
   nbNO,
+  faIR,
   frFR,
   esAR,
   itIT,
@@ -33,6 +34,7 @@ import {
   dateIdID,
   dateDeDE,
   dateNbNO,
+  dateFaIR,
   dateFrFR,
   dateEsAR,
   dateItIT,
@@ -301,6 +303,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateTrTR,
           locale: trTR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateFaIR,
+          locale: faIR
         }
       }).html()
     ).toMatchSnapshot()
