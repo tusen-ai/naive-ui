@@ -5,7 +5,7 @@ import {
   ref,
   provide,
   toRef,
-  CSSProperties,
+  type CSSProperties,
   Transition,
   watchEffect,
   onDeactivated

@@ -1,4 +1,4 @@
-import { Slots, VNode } from 'vue'
+import { type Slots, type VNode } from 'vue'
 import { flatten } from './flatten'
 import { warn } from '../naive'
 

@@ -5,8 +5,8 @@ import {
   inject,
   ref,
   toRef,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   watchEffect
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
@@ -18,8 +18,8 @@ import { NIconSwitchTransition } from '../../_internal'
 import {
   call,
   createKey,
-  MaybeArray,
-  ExtractPublicPropTypes,
+  type MaybeArray,
+  type ExtractPublicPropTypes,
   warnOnce
 } from '../../_utils'
 import { checkboxLight } from '../styles'

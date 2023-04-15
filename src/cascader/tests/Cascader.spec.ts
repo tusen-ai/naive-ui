@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NCascader } from '../index'
-import { CascaderOption } from '../src/interface'
+import type { CascaderOption } from '../src/interface'
 
 function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12

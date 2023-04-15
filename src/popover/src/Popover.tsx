@@ -4,18 +4,18 @@ import {
   computed,
   createTextVNode,
   defineComponent,
-  PropType,
-  VNode,
+  type PropType,
+  type VNode,
   provide,
-  CSSProperties,
-  ComputedRef,
-  Ref,
+  type CSSProperties,
+  type ComputedRef,
+  type Ref,
   toRef,
   cloneVNode,
   watchEffect,
   withDirectives
 } from 'vue'
-import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
+import { VBinder, VTarget, type FollowerPlacement, type BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { zindexable } from 'vdirs'
 import {

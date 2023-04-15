@@ -207,6 +207,7 @@ describe('n-mention', () => {
       attachTo: document.body,
       props: { options }
     })
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     await wrapper.vm.focus()
     expect(wrapper.find('.n-input').classes()).toContain('n-input--focus')
     wrapper.unmount()

@@ -12,8 +12,8 @@ import { cloneDeep, merge } from 'lodash-es'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { lightTheme } from '../../themes/light'
 import {
-  GlobalTheme,
-  GlobalThemeOverrides,
+  type GlobalTheme,
+  type GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
 import { NPopover } from '../../popover'
@@ -69,7 +69,7 @@ export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
   setup () {
-    const isMaximized = ref<Boolean>(false)
+    const isMaximized = ref<boolean>(false)
     const fileInputRef = ref<HTMLInputElement | null>(null)
     const NConfigProvider = inject(configProviderInjectionKey, null)
     const theme = computed(() => {

@@ -33,7 +33,7 @@ export default defineComponent({
     const isNextRef = computed(() => NCarousel.isNext(indexRef.value))
     const isActiveRef = computed(() => NCarousel.isActive(indexRef.value))
     const styleRef = computed(() => NCarousel.getSlideStyle(indexRef.value))
-    onMounted(() => NCarousel.addSlide(selfElRef.value))
+    onMounted(() => { NCarousel.addSlide(selfElRef.value) })
     onBeforeUnmount(() => {
       NCarousel.removeSlide(selfElRef.value)
     })
@@ -94,6 +94,7 @@ export default defineComponent({
           index
         })}
       </div>
+      
     )
   }
 })

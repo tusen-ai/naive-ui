@@ -2,13 +2,13 @@ import {
   h,
   defineComponent,
   computed,
-  PropType,
-  VNode,
+  type PropType,
+  type VNode,
   provide,
   ref,
   toRef,
-  VNodeChild,
-  CSSProperties
+  type VNodeChild,
+  type CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
@@ -20,7 +20,7 @@ import type { RadioTheme } from '../styles'
 import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { type OnUpdateValue, type OnUpdateValueImpl } from './interface'
 import { useRtl } from '../../_mixins/use-rtl'
 
 function mapSlot (

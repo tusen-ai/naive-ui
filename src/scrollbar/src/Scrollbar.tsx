@@ -1,10 +1,10 @@
-import { h, defineComponent, PropType, ref } from 'vue'
+import { h, defineComponent, type PropType, ref } from 'vue'
 import {
   NScrollbar,
-  ScrollbarInst as InternalScrollbarInst
+  type ScrollbarInst as InternalScrollbarInst
 } from '../../_internal'
-import { ScrollbarTheme } from '../../_internal/scrollbar/styles'
-import { useTheme, ThemeProps } from '../../_mixins'
+import { type ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import { useTheme, type ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface ScrollTo {

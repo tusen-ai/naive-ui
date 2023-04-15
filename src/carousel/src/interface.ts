@@ -1,4 +1,4 @@
-import { CarouselContextValue } from './CarouselContext'
+import type { CarouselContextValue } from './CarouselContext'
 
 export interface CarouselInst {
   getCurrentIndex: () => number

@@ -1,7 +1,6 @@
-import { h, HTMLAttributes, nextTick, ref } from 'vue'
+import { h, type HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { DataTableInst, NDataTable } from '../index'
-import type { DataTableColumns } from '../index'
+import { type DataTableInst, NDataTable, type DataTableColumns } from '../index'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 

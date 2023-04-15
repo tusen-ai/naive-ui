@@ -1,4 +1,4 @@
-import { ComputedRef, Ref, Slots } from 'vue'
+import type { ComputedRef, Ref, Slots } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { ColorPickerTheme } from '../styles'

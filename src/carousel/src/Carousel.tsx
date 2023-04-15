@@ -39,7 +39,7 @@ import {
   getDisplayTotalView,
   addDuplicateSlides
 } from './utils'
-import { provideCarouselContext, CarouselContextValue } from './CarouselContext'
+import { provideCarouselContext, type CarouselContextValue } from './CarouselContext'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
 import NCarouselItem, { isCarouselItem } from './CarouselItem'
@@ -771,9 +771,9 @@ export default defineComponent({
     )
     watch(
       [duplicatedableRef, displaySlidesPerViewRef],
-      () => void nextTick(() => toRealIndex(realIndexRef.value))
+      () => void nextTick(() => { toRealIndex(realIndexRef.value) })
     )
-    watch(slideTranlatesRef, () => sequenceLayoutRef.value && fixTranslate(), {
+    watch(slideTranlatesRef, () => { sequenceLayoutRef.value && fixTranslate() }, {
       deep: true
     })
     watch(sequenceLayoutRef, (value) => {

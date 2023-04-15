@@ -1,11 +1,11 @@
-import { h, computed, defineComponent, PropType } from 'vue'
+import { h, computed, defineComponent, type PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import { TmNode } from './interface'
+import type { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChildProps,

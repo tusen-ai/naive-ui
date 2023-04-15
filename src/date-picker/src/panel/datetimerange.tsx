@@ -191,12 +191,12 @@ export default defineComponent({
                     }
                   ]}
                   onClick={
-                    disabled ? undefined : () => this.handleDateClick(dateItem)
+                    disabled ? undefined : () => { this.handleDateClick(dateItem) }
                   }
                   onMouseenter={
                     disabled
                       ? undefined
-                      : () => this.handleDateMouseEnter(dateItem)
+                      : () => { this.handleDateMouseEnter(dateItem) }
                   }
                 >
                   <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
@@ -285,12 +285,12 @@ export default defineComponent({
                     }
                   ]}
                   onClick={
-                    disabled ? undefined : () => this.handleDateClick(dateItem)
+                    disabled ? undefined : () => { this.handleDateClick(dateItem) }
                   }
                   onMouseenter={
                     disabled
                       ? undefined
-                      : () => this.handleDateMouseEnter(dateItem)
+                      : () => { this.handleDateMouseEnter(dateItem) }
                   }
                 >
                   <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />

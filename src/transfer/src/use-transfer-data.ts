@@ -7,9 +7,9 @@ interface UseTransferDataProps {
   value?: OptionValue[] | null
   options: Option[]
   filterable: boolean | undefined
-  sourceFilterable: Boolean
-  targetFilterable: Boolean
-  showSelected: Boolean
+  sourceFilterable: boolean
+  targetFilterable: boolean
+  showSelected: boolean
   filter: Filter
 }
 
@@ -82,7 +82,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const valueSetForCheckAllRef = computed(() => {
-    const values: Set<string | number> = new Set(mergedValueSetRef.value)
+    const values = new Set<string | number>(mergedValueSetRef.value)
     filteredSrcOptionsRef.value.forEach((option) => {
       if (!option.disabled && !values.has(option.value)) {
         values.add(option.value)
@@ -92,7 +92,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const valueSetForUncheckAllRef = computed(() => {
-    const values: Set<string | number> = new Set(mergedValueSetRef.value)
+    const values = new Set<string | number>(mergedValueSetRef.value)
     filteredSrcOptionsRef.value.forEach((option) => {
       if (!option.disabled && values.has(option.value)) {
         values.delete(option.value)
@@ -102,7 +102,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const valueSetForClearRef = computed(() => {
-    const values: Set<string | number> = new Set(mergedValueSetRef.value)
+    const values = new Set<string | number>(mergedValueSetRef.value)
     filteredTgtOptionsRef.value.forEach((option) => {
       if (!option.disabled) {
         values.delete(option.value)

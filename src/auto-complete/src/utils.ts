@@ -1,9 +1,9 @@
-import {
+import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectMixedOption
 } from '../../select/src/interface'
-import {
+import type {
   AutoCompleteGroupOption,
   AutoCompleteOption,
   AutoCompleteOptions

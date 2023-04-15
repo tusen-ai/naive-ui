@@ -1,5 +1,5 @@
-import { ExtractPropTypes } from 'vue'
-import { useTheme } from '../../_mixins'
+import { type ExtractPropTypes } from 'vue'
+import { type useTheme } from '../../_mixins'
 
 type themePropKeys = keyof typeof useTheme.props
 
