@@ -8,6 +8,7 @@
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
 - Fix `n-input`'s show password icon is offset when use both `password` and `disabled`, closes [#4364](https://github.com/tusen-ai/naive-ui/issues/4364).
+- Fix `n-image` set `fallback-src` prop and lazy loading dosen't work, closes[#4480](https://github.com/tusen-ai/naive-ui/issues/4480)
 
 ### Feats
 
