@@ -14,6 +14,7 @@ import { NEllipsis } from '../../../ellipsis'
 import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import ResizeButton from '../HeaderButton/ResizeButton'
+import Cell from './Cell'
 import {
   isColumnSortable,
   isColumnFilterable,
@@ -28,9 +29,37 @@ import {
   TableColumnGroup,
   TableBaseColumn,
   dataTableInjectionKey,
-  ColumnKey
+  ColumnKey,
+  RowKey,
+  SummaryRowData,
+  TmNode
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
+
+interface NormalRowRenderInfo {
+  striped: boolean
+  tmNode: TmNode
+  key: RowKey
+  index: number
+}
+
+type RowRenderInfo =
+  | {
+    isSummaryRow: true
+    key: RowKey
+    tmNode: {
+      rawNode: SummaryRowData
+      disabled: boolean
+    }
+    index: number
+  }
+  | NormalRowRenderInfo
+  | {
+    isExpandedRow: true
+    tmNode: TmNode
+    key: RowKey
+    index: number
+  }
 
 function renderTitle (
   column: TableExpandColumn | TableBaseColumn | TableColumnGroup
@@ -71,7 +100,10 @@ export default defineComponent({
       handleTableHeaderScroll,
       deriveNextSorter,
       doUncheckAll,
-      doCheckAll
+      doCheckAll,
+      rawPaginatedDataRef,
+      summaryHeaderRef,
+      renderCell
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const cellElsRef = ref<Record<ColumnKey, HTMLTableCellElement>>({})
@@ -159,7 +191,10 @@ export default defineComponent({
       handleColHeaderClick,
       handleTableHeaderScroll,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      rawPaginatedData: rawPaginatedDataRef,
+      summaryHeader: summaryHeaderRef,
+      renderCell
     }
   },
   render () {
@@ -183,8 +218,158 @@ export default defineComponent({
       handleColHeaderClick,
       handleCheckboxUpdateChecked,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      summaryHeader
     } = this
+    let summaryData: RowRenderInfo[] = []
+    if (summaryHeader) {
+      const summaryRows = summaryHeader(this.rawPaginatedData)
+      if (Array.isArray(summaryRows)) {
+        const summaryRowData = summaryRows.map((row, i) => ({
+          isSummaryRow: true as const,
+          key: `__n_summary__${i}`,
+          tmNode: {
+            rawNode: row,
+            disabled: true
+          },
+          index: -1
+        }))
+        summaryData = summaryRowData
+      } else {
+        const summaryRowData = {
+          isSummaryRow: true as const,
+          key: '__n_summary__',
+          tmNode: {
+            rawNode: summaryRows,
+            disabled: true
+          },
+          index: -1
+        }
+        summaryData = [summaryRowData]
+      }
+    }
+    const { length: colCount } = cols
+    const cordToPass: Record<number, number[]> = {}
+    const cordKey: Record<number, Record<number, RowKey[]>> = {}
+    const renderSummaryHeaderRow = (
+      rowInfo: RowRenderInfo,
+      displayedRowIndex: number
+    ): VNode => {
+      const { index: actualRowIndex } = rowInfo
+      const isSummary = 'isSummaryRow' in rowInfo
+      const { tmNode, key: rowKey } = rowInfo
+      const { rawNode: rowData } = tmNode
+      const row = (
+        <tr
+          key={rowKey}
+          class={[
+            `${mergedClsPrefix}-data-table-tr`,
+            isSummary && `${mergedClsPrefix}-data-table-tr--summary`
+          ]}
+        >
+          {cols.map((col, colIndex) => {
+            if (displayedRowIndex in cordToPass) {
+              const cordOfRowToPass = cordToPass[displayedRowIndex]
+              const indexInCordOfRowToPass = cordOfRowToPass.indexOf(colIndex)
+              if (~indexInCordOfRowToPass) {
+                cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
+                return null
+              }
+            }
+            const { column } = col
+            const colKey = getColKey(col)
+            const { rowSpan, colSpan } = column
+            const mergedColSpan = isSummary
+              ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1
+              : colSpan
+                ? colSpan(rowData, actualRowIndex)
+                : 1
+            const mergedRowSpan = isSummary
+              ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1
+              : rowSpan
+                ? rowSpan(rowData, actualRowIndex)
+                : 1
+            const isLastCol = colIndex + mergedColSpan === colCount
+            const isCrossRowTd = mergedRowSpan > 1
+            if (isCrossRowTd) {
+              cordKey[displayedRowIndex] = {
+                [colIndex]: []
+              }
+            }
+            if (mergedColSpan > 1 || isCrossRowTd) {
+              for (
+                let i = displayedRowIndex;
+                i < displayedRowIndex + mergedRowSpan;
+                ++i
+              ) {
+                if (isCrossRowTd) {
+                  cordKey[displayedRowIndex][colIndex].push(i)
+                }
+                for (let j = colIndex; j < colIndex + mergedColSpan; ++j) {
+                  if (i === displayedRowIndex && j === colIndex) {
+                    continue
+                  }
+                  if (!(i in cordToPass)) {
+                    cordToPass[i] = [j]
+                  } else {
+                    cordToPass[i].push(j)
+                  }
+                }
+              }
+            }
+            const { cellProps } = column
+            const resolvedCellProps = cellProps?.(rowData, actualRowIndex)
+            return (
+              <td
+                {...resolvedCellProps}
+                key={colKey}
+                style={[
+                  {
+                    textAlign: column.align || undefined,
+                    left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                    right: pxfy(fixedColumnRightMap[colKey]?.start)
+                  },
+                  resolvedCellProps?.style || ''
+                ]}
+                colspan={mergedColSpan}
+                rowspan={mergedRowSpan}
+                data-col-key={colKey}
+                class={[
+                  `${mergedClsPrefix}-data-table-th`,
+                  column.className,
+                  resolvedCellProps?.class,
+                  isSummary && `${mergedClsPrefix}-data-table-td--summary`,
+                  column.fixed &&
+                    `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
+                  column.align &&
+                    `${mergedClsPrefix}-data-table-td--${column.align}-align`,
+                  column.type === 'selection' &&
+                    `${mergedClsPrefix}-data-table-th--selection`,
+                  isLastCol && `${mergedClsPrefix}-data-table-th--last`
+                ]}
+              >
+                {column.type === 'selection' || column.type === 'expand' ? (
+                  !isSummary ? (
+                    <span />
+                  ) : null
+                ) : (
+                  <Cell
+                    clsPrefix={mergedClsPrefix}
+                    index={actualRowIndex}
+                    row={rowData}
+                    column={column}
+                    isSummary={isSummary}
+                    mergedTheme={mergedTheme}
+                    renderCell={this.renderCell}
+                  />
+                )}
+              </td>
+            )
+          })}
+        </tr>
+      )
+      return row
+    }
     let hasEllipsis = false
     const theadVNode = (
       <thead
@@ -322,6 +507,10 @@ export default defineComponent({
             </tr>
           )
         })}
+        {!!summaryData &&
+          summaryData.map((rowInfo, displayedRowIndex) => {
+            return renderSummaryHeaderRow(rowInfo, displayedRowIndex)
+          })}
       </thead>
     )
     if (!discrete) {

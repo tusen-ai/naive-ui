@@ -51,6 +51,7 @@ export const dataTableProps = {
   rowProps: Function as PropType<CreateRowProps<any>>,
   rowKey: Function as PropType<CreateRowKey<any>>,
   summary: [Function] as PropType<CreateSummary<any>>,
+  summaryHeader: [Function] as PropType<CreateSummary<any>>,
   data: {
     type: Array as PropType<RowData[]>,
     default: () => []
@@ -376,6 +377,7 @@ export interface DataTableInjection {
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>
   summaryRef: Ref<undefined | CreateSummary>
+  summaryHeaderRef: Ref<undefined | CreateSummary>
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
