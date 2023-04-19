@@ -9,6 +9,7 @@
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
 - Fix `n-input`'s show password icon is offset when use both `password` and `disabled`, closes [#4364](https://github.com/tusen-ai/naive-ui/issues/4364).
+- 修复 `n-data-table` 开启 `tooltip` 在数据量比较大的情况下，渲染过多，内存增长过大造成卡顿问题，关闭 [#4737](https://github.com/tusen-ai/naive-ui/issues/4737)
 
 ### Feats
 

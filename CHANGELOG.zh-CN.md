@@ -9,6 +9,7 @@
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
 - 修复 `n-input` 同时使用 `password` 和 `disabled` 时，显示密码图标偏移的问题，关闭 [#4364](https://github.com/tusen-ai/naive-ui/issues/4364)
+- 修复 `n-data-table` 开启 `tooltip` 在数据量比较大的情况下，渲染过多，内存增长过大造成卡顿问题，关闭 [#4737](https://github.com/tusen-ai/naive-ui/issues/4737)
 
 ### Feats
 
