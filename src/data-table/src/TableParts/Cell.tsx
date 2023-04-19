@@ -11,14 +11,22 @@ const ShowOrTooltip = defineComponent({
   setup (props, { slots }) {
     const tooltip = ref()
     tooltip.value = false
+    let timers: any
+    let duration: number | undefined
+    if (typeof props.tooltip === 'object') {
+      duration = props.tooltip.duration
+    }
     return () =>
       h(
         'div',
         {
           onMouseover: () => {
+            clearTimeout(timers)
             const onUpdateShow = (value: boolean): void => {
               if (!value) {
-                tooltip.value = false
+                timers = setTimeout(() => {
+                  tooltip.value = false
+                }, (duration ?? 100) + 1000)
               }
             }
             let tooltipProps = cloneDeep(props.tooltip)
