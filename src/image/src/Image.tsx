@@ -46,6 +46,19 @@ export const imageProps = {
   loadDescription: String,
   onError: Function as PropType<(e: Event) => void>,
   onLoad: Function as PropType<(e: Event) => void>,
+  referrerPolicy: {
+    type: String as PropType<
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+    >,
+    default: 'strict-origin-when-cross-origin'
+  },
   ...imagePreviewSharedProps
 }
 
@@ -158,6 +171,7 @@ export default defineComponent({
     const imgNode = h('img', {
       ...imgProps,
       ref: 'imageRef',
+      referrerPolicy: this.referrerPolicy,
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
       src: isImageSupportNativeLazy

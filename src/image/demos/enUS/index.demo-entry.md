@@ -31,6 +31,7 @@ previewed-img-props.vue
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
 | previewed-img-props | `object` | `undefined` | DOM attributes of img element in preview mode. | 2.34.0 |
+| referrer-policy | `'no-referrer' \| 'no-referrer-when-downgrade' \| 'origin' \| 'origin-when-cross-origin' \| 'same-origin' \| 'strict-origin' \| 'strict-origin-when-cross-origin' \| 'unsafe-url'` | `strict-origin-when-cross-origin` | Native attribute [preferrerPolicy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) |  |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 | src | `string` | `undefined` | Image source. |  |
