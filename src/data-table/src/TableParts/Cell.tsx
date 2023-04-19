@@ -1,9 +1,56 @@
-import { defineComponent, PropType, VNodeChild, h } from 'vue'
-import { get } from 'lodash-es'
+import { defineComponent, PropType, VNodeChild, ref, h } from 'vue'
+import { get, cloneDeep } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
-import { NEllipsis } from '../../../ellipsis'
+import { NEllipsis, ellipsisProps } from '../../../ellipsis'
 import type { DataTableTheme } from '../../styles'
 import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
+import { call } from '../../../_utils'
+
+const ShowOrTooltip = defineComponent({
+  props: ellipsisProps,
+  setup (props, { slots }) {
+    const tooltip = ref()
+    tooltip.value = false
+    return () =>
+      h(
+        'div',
+        {
+          onMouseover: () => {
+            const onUpdateShow = (value: boolean): void => {
+              if (!value) {
+                tooltip.value = false
+              }
+            }
+            let tooltipProps = cloneDeep(props.tooltip)
+            if (typeof tooltipProps === 'object') {
+              if (tooltipProps.onUpdateShow) {
+                const _onUpdateShow = tooltipProps.onUpdateShow
+                tooltipProps.onUpdateShow = (value: boolean): void => {
+                  call(_onUpdateShow, value)
+                  call(onUpdateShow, value)
+                }
+              } else {
+                tooltipProps.onUpdateShow = onUpdateShow
+              }
+            } else {
+              if (props.tooltip === true) {
+                tooltipProps = { onUpdateShow }
+              }
+            }
+            tooltip.value = tooltipProps
+          }
+        },
+        h(
+          NEllipsis,
+          {
+            ...props,
+            tooltip: tooltip.value
+          },
+          { default: slots.default }
+        )
+      )
+  }
+})
 
 export default defineComponent({
   name: 'DataTableCell',
@@ -51,6 +98,17 @@ export default defineComponent({
     if (ellipsis) {
       if (typeof ellipsis === 'object') {
         const { mergedTheme } = this
+        if (ellipsis.tooltip) {
+          return (
+            <ShowOrTooltip
+              {...ellipsis}
+              theme={mergedTheme.peers.Ellipsis}
+              themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+            >
+              {{ default: () => cell }}
+            </ShowOrTooltip>
+          )
+        }
         return (
           <NEllipsis
             {...ellipsis}
