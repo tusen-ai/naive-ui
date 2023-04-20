@@ -13,7 +13,8 @@ import {
   toRef,
   cloneVNode,
   watchEffect,
-  withDirectives
+  withDirectives,
+  Text
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -78,8 +79,6 @@ function appendEvents (
     }
   })
 }
-
-const textVNodeType = createTextVNode('').type
 
 interface BodyInstance {
   syncPosition: () => void
@@ -461,7 +460,7 @@ export default defineComponent({
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode =
-          triggerVNode.type === textVNodeType
+          triggerVNode.type === Text
             ? h('span', [triggerVNode])
             : triggerVNode
         const handlers = {
