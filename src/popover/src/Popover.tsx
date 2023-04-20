@@ -2,7 +2,6 @@ import {
   h,
   ref,
   computed,
-  createTextVNode,
   defineComponent,
   PropType,
   VNode,
