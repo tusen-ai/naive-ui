@@ -9,7 +9,7 @@
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
 - Fix `n-input`'s show password icon is offset when use both `password` and `disabled`, closes [#4364](https://github.com/tusen-ai/naive-ui/issues/4364).
-- Fix `n-menu` show prop default attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
+- Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
 
 ### Feats
 
