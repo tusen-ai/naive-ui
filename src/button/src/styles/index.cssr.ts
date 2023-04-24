@@ -41,6 +41,7 @@ export default c([
     margin: 0;
     font-weight: var(--n-font-weight);
     line-height: 1;
+    vertical-align: middle;
     font-family: inherit;
     padding: var(--n-padding);
     height: var(--n-height);
