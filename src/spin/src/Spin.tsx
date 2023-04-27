@@ -5,6 +5,7 @@ import {
   Transition,
   type PropType,
   type CSSProperties,
+  ref,
   watchEffect
 } from 'vue'
 import { useCompitable } from 'vooks'
@@ -16,6 +17,7 @@ import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
+import { debounce, isNumber } from 'lodash-es'
 
 const STROKE_WIDTH = {
   small: 20,
@@ -45,6 +47,10 @@ export const spinProps = {
     validator: () => {
       return true
     },
+    default: undefined
+  },
+  delay: {
+    type: Number,
     default: undefined
   }
 }
@@ -104,9 +110,29 @@ export default defineComponent({
         props
       )
       : undefined
+
+    const shouldDelay = computed(
+      () => isNumber(props.delay) && props.delay !== 0
+    )
+    const compitableShow = useCompitable(props, ['spinning', 'show'])
+    const spanning = ref(compitableShow.value)
+
+    watchEffect((onCleanup) => {
+      if (compitableShow.value && shouldDelay.value) {
+        const debouncedShow = debounce(
+          () => (spanning.value = true),
+          props.delay
+        )
+        debouncedShow()
+        onCleanup(() => debouncedShow.cancel())
+      } else {
+        spanning.value = compitableShow.value
+      }
+    })
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      compitableShow: useCompitable(props, ['spinning', 'show']),
+      spanning,
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
         if (strokeWidth !== undefined) return strokeWidth
@@ -160,14 +186,14 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-spin-content`,
-            this.compitableShow && `${mergedClsPrefix}-spin-content--spinning`
+            this.spanning && `${mergedClsPrefix}-spin-content--spinning`
           ]}
         >
           {$slots}
         </div>
         <Transition name="fade-in-transition">
           {{
-            default: () => (this.compitableShow ? icon : null)
+            default: () => (this.spanning ? icon : null)
           }}
         </Transition>
       </div>
