@@ -9,6 +9,7 @@ basic.vue
 wrap.vue
 description.vue
 customize-icon.vue
+delay.vue
 ```
 
 ## API
