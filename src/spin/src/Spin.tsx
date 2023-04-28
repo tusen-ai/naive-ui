@@ -115,7 +115,7 @@ export default defineComponent({
       () => isNumber(props.delay) && props.delay !== 0
     )
     const compitableShow = useCompitable(props, ['spinning', 'show'])
-    const spanning = ref(compitableShow.value)
+    const spanning = ref(false)
 
     watchEffect((onCleanup) => {
       if (compitableShow.value && shouldDelay.value) {
