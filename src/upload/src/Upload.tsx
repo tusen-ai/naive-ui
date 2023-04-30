@@ -747,7 +747,7 @@ export default defineComponent({
         accept={this.accept}
         multiple={this.mergedMultiple}
         onChange={this.handleFileInputChange}
-        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
         // @ts-ignore // seems vue-tsc will add the prop, so we can't use expect-error
         webkitdirectory={directory || undefined}
         directory={directory || undefined}

@@ -83,7 +83,7 @@ export default defineComponent({
         style={style}
         // We use ts-ignore for vue-tsc, since it seems to patch native event
         // for vue components
-        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
         // @ts-ignore
         onClickCapture={this.handleClick}
       >
@@ -94,7 +94,6 @@ export default defineComponent({
           index
         })}
       </div>
-      
     )
   }
 })
