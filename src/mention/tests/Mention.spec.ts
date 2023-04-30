@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+/* eslint-disable @typescript-eslint/await-thenable */
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { h } from 'vue'
@@ -207,7 +209,6 @@ describe('n-mention', () => {
       attachTo: document.body,
       props: { options }
     })
-    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     await wrapper.vm.focus()
     expect(wrapper.find('.n-input').classes()).toContain('n-input--focus')
     wrapper.unmount()

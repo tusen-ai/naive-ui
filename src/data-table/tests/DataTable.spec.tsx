@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import { h, type HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { type DataTableInst, NDataTable, type DataTableColumns } from '../index'

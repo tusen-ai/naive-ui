@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+/* eslint-disable @typescript-eslint/await-thenable */
 import { mount } from '@vue/test-utils'
 import { NCascader } from '../index'
 import type { CascaderOption } from '../src/interface'
