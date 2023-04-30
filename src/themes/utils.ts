@@ -1,4 +1,4 @@
-import { GlobalTheme } from '../config-provider'
+import { type GlobalTheme } from '../config-provider'
 
 type ComponentKey = Exclude<keyof GlobalTheme, 'name'>
 type ComponentThemes = Array<Exclude<GlobalTheme[ComponentKey], undefined>>

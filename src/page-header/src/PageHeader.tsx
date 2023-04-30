@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, defineComponent, computed, PropType } from 'vue'
+import { h, defineComponent, computed, type PropType } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { pageHeaderLight } from '../styles/light'

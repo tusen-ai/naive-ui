@@ -1,5 +1,5 @@
 import sk from 'date-fns/esm/locale/sk'
-import { NDateLocale } from './enUS'
+import { type NDateLocale } from './enUS'
 
 const dateSkSK: NDateLocale = {
   name: 'sk-SK',

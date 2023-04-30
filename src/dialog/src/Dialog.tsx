@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { h, defineComponent, computed, type CSSProperties } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,

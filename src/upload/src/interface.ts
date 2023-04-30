@@ -1,5 +1,5 @@
-import { Ref, CSSProperties, VNodeChild } from 'vue'
-import { ImageGroupProps } from '../../image'
+import { type Ref, type CSSProperties, type VNodeChild } from 'vue'
+import { type ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { UploadTheme } from '../styles'

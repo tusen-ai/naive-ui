@@ -3,8 +3,8 @@ import {
   ref,
   provide,
   defineComponent,
-  PropType,
-  ExtractPropTypes
+  type PropType,
+  type ExtractPropTypes
 } from 'vue'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
@@ -17,7 +17,7 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { popselectLight } from '../styles'
 import type { PopselectTheme } from '../styles'
-import { popselectInjectionKey, PopselectInst } from './interface'
+import { popselectInjectionKey, type PopselectInst } from './interface'
 
 export const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),

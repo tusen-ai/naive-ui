@@ -1,5 +1,5 @@
 import { commonDark } from '../../_styles/common'
-import { EllipsisTheme } from './light'
+import { type EllipsisTheme } from './light'
 import { tooltipDark } from '../../tooltip/styles'
 
 const ellipsisDark: EllipsisTheme = {

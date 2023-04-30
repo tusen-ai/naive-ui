@@ -4,12 +4,12 @@ import {
   computed,
   inject,
   defineComponent,
-  PropType,
-  CSSProperties,
-  ButtonHTMLAttributes,
+  type PropType,
+  type CSSProperties,
+  type ButtonHTMLAttributes,
   watchEffect,
-  ExtractPropTypes,
-  VNodeChild
+  type ExtractPropTypes,
+  type VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { changeColor } from 'seemly'

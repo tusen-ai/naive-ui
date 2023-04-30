@@ -1,8 +1,8 @@
-import { CheckStrategy, TreeNode } from 'treemate'
+import type { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { Ref, Slots, VNodeChild } from 'vue'
+import type { Ref, Slots, VNodeChild } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number

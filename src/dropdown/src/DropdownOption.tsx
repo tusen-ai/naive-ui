@@ -6,13 +6,13 @@ import {
   Transition,
   defineComponent,
   provide,
-  PropType,
-  Ref,
+  type PropType,
+  type Ref,
   mergeProps,
-  HTMLAttributes,
-  VNodeChild
+  type HTMLAttributes,
+  type VNodeChild
 } from 'vue'
-import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
+import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_internal/icons'
 import { render, useDeferredTrue } from '../../_utils'
@@ -26,8 +26,8 @@ import {
 } from './context'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { isSubmenuNode } from './utils'
-import { TreeNode } from 'treemate'
-import {
+import type { TreeNode } from 'treemate'
+import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption

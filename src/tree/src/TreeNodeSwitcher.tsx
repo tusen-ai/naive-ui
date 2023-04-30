@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, inject } from 'vue'
+import { h, defineComponent, type PropType, inject } from 'vue'
 import { SwitcherIcon } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
 import { treeInjectionKey } from './interface'

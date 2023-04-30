@@ -1,4 +1,4 @@
-import { VNodeChild } from 'vue'
+import type { VNodeChild } from 'vue'
 import type { MessageSetupProps } from './message-props'
 
 export type MessageType =

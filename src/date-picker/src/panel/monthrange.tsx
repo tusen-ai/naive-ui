@@ -3,8 +3,8 @@ import {
   h,
   renderSlot,
   watchEffect,
-  PropType,
-  VNode,
+  type PropType,
+  type VNode,
   onMounted
 } from 'vue'
 import { VirtualList } from 'vueuc'

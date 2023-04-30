@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import { onMounted, onUnmounted, type Ref, ref } from 'vue'
 import { isBrowser } from '../env/is-browser'
 
 const defaultWindow = isBrowser ? window : null

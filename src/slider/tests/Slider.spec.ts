@@ -205,6 +205,7 @@ describe('n-slider', () => {
     const slider = wrapper.find('.n-slider')
     const handle = wrapper.find('.n-slider-handle-wrapper')
     ;(slider.element as HTMLElement).style.width = '100px'
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     await (slider.element as HTMLElement).dispatchEvent(mouseDown)
     expect((handle.element as HTMLElement).style.left).toEqual('30%')
     wrapper.unmount()

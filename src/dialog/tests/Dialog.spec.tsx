@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick } from 'vue'
-import { NDialogProvider, useDialog, NDialog, DialogProps } from '../index'
+import { NDialogProvider, useDialog, NDialog, type DialogProps } from '../index'
 
 const Provider = defineComponent({
   render () {

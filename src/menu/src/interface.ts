@@ -1,5 +1,5 @@
-import { TreeNode } from 'treemate'
-import { VNodeChild, HTMLAttributes } from 'vue'
+import { type TreeNode } from 'treemate'
+import { type VNodeChild, type HTMLAttributes } from 'vue'
 
 export type Key = string | number
 

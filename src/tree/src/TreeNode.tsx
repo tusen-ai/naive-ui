@@ -3,9 +3,9 @@ import {
   inject,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   ref,
-  ComponentPublicInstance,
+  type ComponentPublicInstance,
   onMounted
 } from 'vue'
 import { useMemo } from 'vooks'
@@ -14,7 +14,7 @@ import { createDataKey } from '../../_utils'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
-import { TmNode, treeInjectionKey } from './interface'
+import { type TmNode, treeInjectionKey } from './interface'
 import { renderDropMark } from './dnd'
 import { isNodeDisabled } from './utils'
 
