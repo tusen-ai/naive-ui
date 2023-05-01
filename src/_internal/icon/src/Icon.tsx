@@ -7,6 +7,10 @@ export default defineComponent({
   props: {
     role: String,
     ariaLabel: String,
+    clsSuffix: {
+      type: Array<string>,
+      default: []
+    },
     ariaDisabled: {
       type: Boolean,
       default: undefined
@@ -25,11 +29,18 @@ export default defineComponent({
   },
   setup (props) {
     useStyle('-base-icon', style, toRef(props, 'clsPrefix'))
+    const clss = props.clsSuffix.map(
+      (suffix) => `${props.clsPrefix}-base-icon--${suffix}`
+    )
+    return {
+      clss: clss.concat(`${props.clsPrefix}-base-icon`)
+    }
   },
   render () {
+    const { clss } = this
     return (
       <i
-        class={`${this.clsPrefix}-base-icon`}
+        class={[...clss]}
         onClick={this.onClick}
         onMousedown={this.onMousedown}
         onMouseup={this.onMouseup}
