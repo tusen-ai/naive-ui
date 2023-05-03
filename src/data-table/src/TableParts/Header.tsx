@@ -92,7 +92,8 @@ export default defineComponent({
     ): void {
       if (
         happensIn(e, 'dataTableFilter') ||
-        happensIn(e, 'dataTableResizable')
+        happensIn(e, 'dataTableResizable') ||
+        e.eventPhase !== e.BUBBLING_PHASE
       ) {
         return
       }
