@@ -351,7 +351,7 @@ export default defineComponent({
       if (enterTimerId !== null) window.clearTimeout(enterTimerId)
     }
     function handleMouseEnterCounter (): void {
-      if (props.disabled || props.active) return
+      if (props.active) return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
         if (selectedRef.value) {
@@ -598,14 +598,18 @@ export default defineComponent({
           {renderTag ? (
             renderTag({
               option,
-              handleClose: () => { this.handleDeleteOption(option) }
+              handleClose: () => {
+                this.handleDeleteOption(option)
+              }
             })
           ) : (
             <NTag
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              onClose={() => { this.handleDeleteOption(option) }}
+              onClose={() => {
+                this.handleDeleteOption(option)
+              }}
               internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >
