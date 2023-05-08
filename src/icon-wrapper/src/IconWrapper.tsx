@@ -26,14 +26,15 @@ export const NIconWrapper = defineComponent({
   name: 'IconWrapper',
   props: iconWrapperProps,
   setup (props, { slots }) {
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'IconWrapper',
       '-icon-wrapper',
       style,
       iconWrapperLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
