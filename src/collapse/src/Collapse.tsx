@@ -192,6 +192,7 @@ export default defineComponent({
         self: {
           titleFontWeight,
           dividerColor,
+          titlePadding,
           titleTextColor,
           titleTextColorDisabled,
           textColor,
@@ -207,6 +208,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-text-color': textColor,
         '--n-divider-color': dividerColor,
+        '--n-title-padding': titlePadding,
         '--n-title-font-size': titleFontSize,
         '--n-title-text-color': titleTextColor,
         '--n-title-text-color-disabled': titleTextColorDisabled,
