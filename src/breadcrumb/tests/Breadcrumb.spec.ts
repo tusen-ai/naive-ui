@@ -107,15 +107,18 @@ describe('n-breadcrumb', () => {
 
     it('should add `aria-current` if the item is the current location', () => {
       const originalWindow = window
-      globalThis.window = Object.create(window)
+      const windowSpy = jest.spyOn(globalThis, 'window', 'get')
       const currentUrl = 'http://some-domaine/path2'
       const url = 'http://some-domaine/path1'
-      Object.defineProperty(window, 'location', {
-        value: {
-          href: currentUrl
-        }
+      windowSpy.mockImplementation(() => {
+        const mockedWindow = Object.create(originalWindow)
+        Object.defineProperty(mockedWindow, 'location', {
+          value: {
+            href: currentUrl
+          }
+        })
+        return mockedWindow
       })
-
       const wrapper = mount(NBreadcrumb, {
         slots: {
           default: () => [
@@ -151,7 +154,7 @@ describe('n-breadcrumb', () => {
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
-      globalThis.window = originalWindow
+      windowSpy.mockRestore()
       wrapper.unmount()
     })
 

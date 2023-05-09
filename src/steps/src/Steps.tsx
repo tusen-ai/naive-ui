@@ -1,13 +1,13 @@
 import {
   h,
   defineComponent,
-  VNode,
+  type VNode,
   provide,
-  PropType,
-  VNodeChild,
-  ExtractPropTypes,
-  Ref,
-  Slots
+  type PropType,
+  type VNodeChild,
+  type ExtractPropTypes,
+  type Ref,
+  type Slots
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme, useRtl } from '../../_mixins'

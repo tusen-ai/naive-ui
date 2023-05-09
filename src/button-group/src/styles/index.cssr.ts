@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import { type CNode } from 'css-render'
 import type { Type } from '../../../button/src/interface'
 import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr/index'
 

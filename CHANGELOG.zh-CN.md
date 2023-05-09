@@ -10,6 +10,8 @@
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
 - 修复 `n-input` 同时使用 `password` 和 `disabled` 时，显示密码图标偏移的问题，关闭 [#4364](https://github.com/tusen-ai/naive-ui/issues/4364)
 - 修复 `n-upload` 内部使用 vue `TransitionGroup` 组件时, 传递了未声明的 prop 且未被自动继承导致警告, 关闭[#4447](https://github.com/tusen-ai/naive-ui/issues/4447)
+- 修复 `n-menu` `show` `default` 属性拼写问题，关闭 [#4750](https://github.com/tusen-ai/naive-ui/issues/4750)
+- 修复 `n-icon-wrapper` 的主题异常，关闭 [#4768](https://github.com/tusen-ai/naive-ui/issues/4768)
 
 ### Feats
 
@@ -20,6 +22,7 @@
 - `n-scrollbar` 新增 `size` 属性，关闭 [#3896](https://github.com/tusen-ai/naive-ui/issues/3896)
 - `n-select` 新增 `keyboard` 属性，[#4340](https://github.com/tusen-ai/naive-ui/issues/4340)
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
+- `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
 
 ### i18n
 

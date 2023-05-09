@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NSlider } from '../index'
+import { nextTick } from 'vue'
 
 describe('n-slider', () => {
   it('should work with import on demand', () => {
@@ -205,7 +206,8 @@ describe('n-slider', () => {
     const slider = wrapper.find('.n-slider')
     const handle = wrapper.find('.n-slider-handle-wrapper')
     ;(slider.element as HTMLElement).style.width = '100px'
-    await (slider.element as HTMLElement).dispatchEvent(mouseDown)
+    ;(slider.element as HTMLElement).dispatchEvent(mouseDown)
+    await nextTick()
     expect((handle.element as HTMLElement).style.left).toEqual('30%')
     wrapper.unmount()
   })

@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef } from 'vue'
+import { computed, ref, type ComputedRef } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { PaginationProps } from '../../pagination/src/Pagination'

@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, CSSProperties } from 'vue'
+import { h, defineComponent, type PropType, type CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -6,7 +6,7 @@ import {
   WarningIcon,
   InfoIcon
 } from '../../_internal/icons'
-import { Status } from './interface'
+import { type Status } from './interface'
 
 const iconMap = {
   success: <SuccessIcon />,

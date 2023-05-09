@@ -1,6 +1,6 @@
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { Theme } from '../../_mixins'
+import type { Theme } from '../../_mixins'
 
 const self = (vars: ThemeCommonVars) => {
   const { errorColor, infoColor, successColor, warningColor, fontFamily } = vars

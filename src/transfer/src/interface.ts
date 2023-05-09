@@ -1,4 +1,4 @@
-import { Ref, VNodeChild } from 'vue'
+import type { Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TransferTheme } from '../styles'

@@ -7,12 +7,12 @@ import {
   watchEffect,
   provide,
   inject,
-  PropType,
+  type PropType,
   withDirectives,
   vShow,
   mergeProps,
-  CSSProperties,
-  DirectiveArguments,
+  type CSSProperties,
+  type DirectiveArguments,
   watch,
   onBeforeUnmount
 } from 'vue'

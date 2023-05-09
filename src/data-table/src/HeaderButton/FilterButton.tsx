@@ -1,17 +1,13 @@
-import { h, defineComponent, ref, computed, PropType, inject } from 'vue'
+import { h, defineComponent, ref, computed, type PropType, inject } from 'vue'
 import { FilterIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import { NPopover } from '../../../popover'
 import RenderFilter from './RenderFilter'
 import NDataTableFilterMenu from './FilterMenu'
 import {
-  ColumnKey,
-  dataTableInjectionKey,
-  FilterOption,
-  FilterOptionValue,
-  FilterState,
-  TableBaseColumn
+  dataTableInjectionKey
 } from '../interface'
+import type { ColumnKey, FilterOption, FilterOptionValue, FilterState, TableBaseColumn } from '../interface'
 import { useConfig } from '../../../_mixins'
 
 function createFilterState (

@@ -1,4 +1,4 @@
-import { ComputedRef, Ref, ref, inject, watchEffect } from 'vue'
+import { type ComputedRef, type Ref, ref, inject, watchEffect } from 'vue'
 import { hash } from 'css-render'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
