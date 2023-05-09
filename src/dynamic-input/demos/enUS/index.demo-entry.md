@@ -16,6 +16,7 @@ pair.vue
 custom.vue
 form.vue
 move.vue
+custom-action.vue
 ```
 
 ## API
@@ -26,6 +27,7 @@ move.vue
 | --- | --- | --- | --- | --- |
 | create-button-props | `ButtonProps` | `undefined` | Props of create item button. | 2.25.0 |
 | default-value | `unknown[]` | `[]` | Default value. |  |
+| disabled | `boolean` | `false` | Whether to disable the dynamic-input. | NEXT_VERSION |
 | item-style | `string \| Object` | `undefined` | The style of each item of the dynamic input. |  |
 | key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |  |
 | min | `number` | `0` | Minimum number of items. |  |
@@ -56,6 +58,7 @@ move.vue
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
+| action | `(options: { value: any, index: number, create: (index: number) => void, remove: (index: number) => void, move: (type: 'up' \| 'down', index: number) => void })` | Customizing action; `value` and `index` are the value and index of the current item. | NEXT_VERSION |
 | default | `(options: { value: any, index: number })` | The content of each item; `value` and `index` are the value and index of the current item. |  |
 | create-button-default | `()` | Content of create button. | 2.25.0 |
 | create-button-icon | `()` | Icon of create button. | 2.25.0 |

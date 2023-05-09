@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, CSSProperties } from 'vue'
+import { h, defineComponent, computed, type CSSProperties } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import style from './styles/blockquote.cssr'

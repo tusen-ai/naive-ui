@@ -16,5 +16,6 @@ describe('n-element', () => {
     })
     expect(wrapper.find('span').exists()).toBe(true)
     expect(wrapper.find('span').text()).toBe('element')
+    wrapper.unmount()
   })
 })

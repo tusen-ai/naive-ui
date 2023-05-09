@@ -1,15 +1,19 @@
 import {
   h,
   defineComponent,
-  PropType,
-  ExtractPropTypes,
+  type PropType,
+  type ExtractPropTypes,
   provide,
-  Ref
+  type Ref
 } from 'vue'
-import { MergedTheme, useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import {
+  type MergedTheme,
+  useConfig,
+  useTheme,
+  type ThemeProps
+} from '../../_mixins'
 import type { TimelineTheme } from '../styles'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import { timelineLight } from '../styles'
 import style from './styles/index.cssr'
 

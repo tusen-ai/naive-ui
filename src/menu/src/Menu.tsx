@@ -5,17 +5,17 @@ import {
   computed,
   defineComponent,
   provide,
-  PropType,
-  ExtractPropTypes,
+  type PropType,
+  type ExtractPropTypes,
   inject,
-  VNodeChild,
+  type VNodeChild,
   watchEffect
 } from 'vue'
-import { createTreeMate, Key } from 'treemate'
+import { createTreeMate, type Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
-import { DropdownProps } from '../../dropdown'
+import type { DropdownProps } from '../../dropdown'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call } from '../../_utils'
@@ -23,7 +23,7 @@ import type { MaybeArray } from '../../_utils'
 import { isIgnoredNode, itemRenderer } from './utils'
 import { menuLight } from '../styles'
 import type { MenuTheme } from '../styles'
-import {
+import type {
   MenuOption,
   MenuGroupOption,
   MenuIgnoredOption,

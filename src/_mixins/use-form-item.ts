@@ -3,8 +3,8 @@ import {
   inject,
   provide,
   onBeforeUnmount,
-  ComputedRef,
-  Ref
+  type ComputedRef,
+  type Ref
 } from 'vue'
 import type { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'

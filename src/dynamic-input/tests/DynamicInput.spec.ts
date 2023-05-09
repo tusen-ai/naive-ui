@@ -13,7 +13,7 @@ describe('n-dynamic-input', () => {
       }
     })
 
-    const inputEl = await wrapper.find('input')
+    const inputEl = wrapper.find('input')
     expect(inputEl.element.value).toEqual('aaa')
     expect(wrapper.html()).toContain('data-key="0"')
     wrapper.unmount()

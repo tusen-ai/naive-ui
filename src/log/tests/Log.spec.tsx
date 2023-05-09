@@ -22,6 +22,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-code').attributes('style')).toContain(
       `--n-font-size: ${fontSize}px`
     )
+    wrapper.unmount()
   })
 
   it('should work with `line-height` prop', async () => {
@@ -31,6 +32,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-log').attributes('style')).toContain(
       `line-height: ${lineHeight}`
     )
+    wrapper.unmount()
   })
 
   it('should work with `lines` `log` prop', async () => {
@@ -48,6 +50,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
       'test3'
     )
+    wrapper.unmount()
   })
 
   it('should work with `loading` prop', async () => {
@@ -56,6 +59,7 @@ describe('n-log', () => {
 
     await wrapper.setProps({ loading: true })
     expect(wrapper.find('.n-log-loader').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `rows` prop', async () => {
@@ -66,6 +70,7 @@ describe('n-log', () => {
       expect(wrapper.find('.n-log').attributes('style')).toContain(
         `height: calc(${Math.floor(fontSize * lineHeight) * rows}px)`
       )
+      wrapper.unmount()
     })
   })
 
@@ -77,6 +82,7 @@ describe('n-log', () => {
 
     await wrapper.setProps({ trim: true, log: ' test2     ' })
     expect(wrapper.find('pre').element.innerHTML).toBe('test2')
+    wrapper.unmount()
   })
 
   it('should work with `scrollTo` `on-require-more` `on-reach-top` `on-reach-bottom` prop', async () => {

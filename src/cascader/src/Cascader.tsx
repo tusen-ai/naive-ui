@@ -3,24 +3,28 @@ import {
   defineComponent,
   computed,
   provide,
-  PropType,
+  type PropType,
   ref,
   watch,
   toRef,
-  CSSProperties,
+  type CSSProperties,
   isReactive,
   watchEffect,
-  VNodeChild,
-  HTMLAttributes,
+  type VNodeChild,
+  type HTMLAttributes,
   nextTick
 } from 'vue'
-import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
+import {
+  createTreeMate,
+  SubtreeNotLoadedError,
+  type CheckStrategy
+} from 'treemate'
 import {
   VBinder,
   VTarget,
   VFollower,
-  FollowerPlacement,
-  FollowerInst
+  type FollowerPlacement,
+  type FollowerInst
 } from 'vueuc'
 import { depx, changeColor, happensIn, getPreciseEventTarget } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -156,10 +160,10 @@ export const cascaderProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: Boolean) => void>
+  MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: Boolean) => void>
+  MaybeArray<(show: boolean) => void>
   >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,

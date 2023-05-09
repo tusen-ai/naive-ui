@@ -1,15 +1,15 @@
 import {
   h,
   defineComponent,
-  PropType,
+  type PropType,
   computed,
   inject,
   ref,
   watchEffect,
-  VNode
+  type VNode
 } from 'vue'
 import { useMemo } from 'vooks'
-import { ImageInst } from '../../image/src/Image'
+import { type ImageInst } from '../../image/src/Image'
 import {
   CancelIcon,
   TrashIcon,
@@ -19,7 +19,7 @@ import {
   EyeIcon
 } from '../../_internal/icons'
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
-import { ButtonTheme } from '../../button/styles'
+import { type ButtonTheme } from '../../button/styles'
 import { NImage } from '../../image'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'

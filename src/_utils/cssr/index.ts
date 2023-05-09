@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { CssRender, CNode, CProperties } from 'css-render'
+import { CssRender, type CNode, type CProperties } from 'css-render'
 import { plugin as BemPlugin } from '@css-render/plugin-bem'
 
 const namespace = 'n'

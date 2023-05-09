@@ -16,7 +16,7 @@ const idID: NLocale = {
     placeholder: 'Mohon Pilih',
     loading: 'Memuat',
     loadingRequiredMessage: (label: string): string =>
-      `Mohon muat semua ${label}'s turunan sebelum memeriksa.`
+      `Mohon muat semua ${label} sebelum memeriksa.`
   },
   Time: {
     dateFormat: 'dd-MM-yyyy',
@@ -40,15 +40,15 @@ const idID: NLocale = {
     datetimePlaceholder: 'Pilih Tanggal dan Waktu',
     monthPlaceholder: 'Pilih Bulan',
     // FIXME: translation needed
-    yearPlaceholder: 'Select Year',
-    quarterPlaceholder: 'Select Quarter',
+    yearPlaceholder: 'Pilih tahun',
+    quarterPlaceholder: 'Pilih perempat tahun',
     startDatePlaceholder: 'Tanggal Mulai',
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
     endDatetimePlaceholder: 'Tanggal dan Waktu Selesai',
     // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Awal bulan',
+    endMonthPlaceholder: 'Akhir bulan',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hari ini'
@@ -65,11 +65,11 @@ const idID: NLocale = {
   },
   // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Pilih semua',
+    unselectAll: 'Batalkan pilihan',
+    clearAll: 'Bersihkan',
+    total: (num: number): string => `Total ${num} item`,
+    selected: (num: number): string => `${num} item dipilih`
   },
   Empty: {
     description: 'Tidak ada data'
@@ -103,7 +103,7 @@ const idID: NLocale = {
     create: 'Buat baru'
   },
   ThemeEditor: {
-    title: 'Tema editor',
+    title: 'Pengaturan Tema',
     clearAllVars: 'Bersihkan semua variabel',
     clearSearch: 'Bersihkan pencarian',
     filterCompName: 'Saring nama komponen',
@@ -113,15 +113,15 @@ const idID: NLocale = {
     restore: 'Setel ulang ke awal'
   },
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
+    tipPrevious: 'Gambar sebelumnya (←)',
+    tipNext: 'Gambar berikutnya (→)',
+    tipCounterclockwise: 'Berlawanan arah jarum jam',
+    tipClockwise: 'Searah jarum jam',
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
-    tipClose: 'Close (Esc)',
+    tipClose: 'Tutup (Esc)',
     // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Zoom ke ukuran asli'
   }
 }
 

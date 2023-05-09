@@ -2,25 +2,25 @@
 import {
   defineComponent,
   h,
-  PropType,
+  type PropType,
   ref,
   toRef,
   nextTick,
   computed,
   Transition,
-  CSSProperties
+  type CSSProperties
 } from 'vue'
-import { createTreeMate, TreeNode } from 'treemate'
+import { createTreeMate, type TreeNode } from 'treemate'
 import {
   VBinder,
   VFollower,
   VTarget,
-  FollowerInst,
-  FollowerPlacement
+  type FollowerInst,
+  type FollowerPlacement
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'
-import { RenderLabel } from '../../_internal/select-menu/src/interface'
+import type { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'

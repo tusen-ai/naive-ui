@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { CountdownProps, NCountdown } from '../index'
+import { type CountdownProps, NCountdown } from '../index'
 
 describe('n-countdown', () => {
   it('should work with import on demand', () => {

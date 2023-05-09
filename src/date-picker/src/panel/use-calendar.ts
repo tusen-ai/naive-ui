@@ -1,4 +1,11 @@
-import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
+import {
+  ref,
+  computed,
+  inject,
+  watch,
+  type ExtractPropTypes,
+  type PropType
+} from 'vue'
 import {
   addMonths,
   addYears,
@@ -19,7 +26,7 @@ import {
   setYear,
   setMonth
 } from 'date-fns/esm'
-import { VirtualListInst } from 'vueuc'
+import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import {
   getDefaultTime,

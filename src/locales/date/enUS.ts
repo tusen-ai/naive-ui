@@ -11,5 +11,5 @@ const dateEnUs: NDateLocale = {
   locale: enUS
 }
 
-export { NDateLocale }
+export type { NDateLocale }
 export default dateEnUs

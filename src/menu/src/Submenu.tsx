@@ -2,11 +2,11 @@ import {
   h,
   ref,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
   computed,
-  VNode,
-  VNodeChild
+  type VNode,
+  type VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
@@ -16,7 +16,7 @@ import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import { MenuMixedOption, TmNode } from './interface'
+import type { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 
 export const submenuProps = {

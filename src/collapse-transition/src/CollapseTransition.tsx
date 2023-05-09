@@ -3,7 +3,7 @@ import {
   h,
   defineComponent,
   mergeProps,
-  PropType,
+  type PropType,
   watchEffect
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

@@ -159,6 +159,9 @@ export default cB('input', `
     cE('placeholder', 'white-space: nowrap;')
   ]),
   cE('eye', `
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: color .3s var(--n-bezier);
   `),
   // textarea
@@ -250,9 +253,6 @@ export default cB('input', `
   ]),
   cNotM('disabled', [
     cE('eye', `
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: var(--n-icon-color);
       cursor: pointer;
     `, [
