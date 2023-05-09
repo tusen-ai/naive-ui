@@ -2,9 +2,9 @@ import {
   computed,
   h,
   defineComponent,
-  PropType,
-  VNode,
-  CSSProperties
+  type PropType,
+  type VNode,
+  type CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

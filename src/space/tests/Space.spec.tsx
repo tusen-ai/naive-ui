@@ -1,4 +1,4 @@
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount, type VueWrapper } from '@vue/test-utils'
 import { h, Fragment, createCommentVNode } from 'vue'
 import { NSpace } from '../index'
 import { NConfigProvider } from '../../config-provider'

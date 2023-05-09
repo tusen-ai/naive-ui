@@ -20,7 +20,7 @@ const makeScroll = async (
     })
   )
 
-  return await sleep(100)
+  await sleep(100)
 }
 
 describe('n-affix', () => {

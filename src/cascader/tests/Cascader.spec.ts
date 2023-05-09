@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { mount } from '@vue/test-utils'
 import { NCascader } from '../index'
-import { CascaderOption } from '../src/interface'
+import type { CascaderOption } from '../src/interface'
+import { nextTick } from 'vue'
 
 function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
@@ -236,11 +238,11 @@ describe('n-cascader', () => {
 
     await wrapper.find('.n-base-selection').trigger('click')
     expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
-    await document.body.click()
-    await document.body.dispatchEvent(mousedownEvent)
-    await document.body.dispatchEvent(mouseupEvent)
+    document.body.click()
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    await nextTick()
     expect(document.querySelector('.n-cascader-menu')).toEqual(null)
-
     wrapper.unmount()
   })
 })

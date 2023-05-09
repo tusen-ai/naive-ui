@@ -1,5 +1,5 @@
 import { commonDark } from '../../_styles/common'
-import { RateTheme } from './light'
+import { type RateTheme } from './light'
 
 const rateDark: RateTheme = {
   name: 'Rate',

@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, toRef } from 'vue'
+import { h, defineComponent, type PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 

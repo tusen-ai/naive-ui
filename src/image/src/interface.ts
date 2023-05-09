@@ -1,8 +1,8 @@
-import { ImgHTMLAttributes, Ref } from 'vue'
+import type { ImgHTMLAttributes, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import { ImageTheme } from '../styles'
+import type { ImageTheme } from '../styles'
 
 export interface MoveStrategy {
   moveVerticalDirection: 'verticalTop' | 'verticalBottom'

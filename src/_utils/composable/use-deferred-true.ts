@@ -1,4 +1,4 @@
-import { ref, Ref, watch } from 'vue'
+import { ref, type Ref, watch } from 'vue'
 
 export function useDeferredTrue (
   valueRef: Ref<any>,

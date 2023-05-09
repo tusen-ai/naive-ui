@@ -1,6 +1,6 @@
-import { defineComponent, h, PropType, inject } from 'vue'
+import { defineComponent, h, type PropType, inject } from 'vue'
 import { NCheckbox } from '../../../checkbox'
-import { dataTableInjectionKey, RowKey } from '../interface'
+import { dataTableInjectionKey, type RowKey } from '../interface'
 
 // Extract the checkbox to avoid useless rendering in table body
 export default defineComponent({

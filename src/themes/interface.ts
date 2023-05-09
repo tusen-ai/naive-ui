@@ -1,4 +1,4 @@
-import { GlobalTheme } from '../config-provider'
+import { type GlobalTheme } from '../config-provider'
 
 export type BuiltInGlobalTheme = Omit<
 Required<GlobalTheme>,

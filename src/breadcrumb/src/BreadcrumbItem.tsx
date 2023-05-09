@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   inject,
-  ExtractPropTypes,
+  type ExtractPropTypes,
   computed,
-  PropType
+  type PropType
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
@@ -42,6 +42,10 @@ export default defineComponent({
     const browserLocationRef = useBrowserLocation()
 
     const htmlTagRef = computed(() => (props.href ? 'a' : 'span'))
+    console.log(
+      '!!!browserLocationRef.value.href',
+      browserLocationRef.value.href
+    )
     const ariaCurrentRef = computed(() =>
       browserLocationRef.value.href === props.href ? 'location' : null
     )

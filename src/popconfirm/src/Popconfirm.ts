@@ -3,8 +3,8 @@ import {
   ref,
   defineComponent,
   provide,
-  PropType,
-  ExtractPropTypes
+  type PropType,
+  type ExtractPropTypes
 } from 'vue'
 import { NPopover } from '../../popover'
 import type { PopoverInst, PopoverTrigger } from '../../popover'

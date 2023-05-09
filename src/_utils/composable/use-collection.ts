@@ -2,10 +2,10 @@ import {
   watch,
   onMounted,
   inject,
-  Ref,
+  type Ref,
   getCurrentInstance,
   onBeforeUnmount,
-  InjectionKey
+  type InjectionKey
 } from 'vue'
 
 // injection.collection {

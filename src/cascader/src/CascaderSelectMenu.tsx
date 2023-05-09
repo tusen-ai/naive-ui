@@ -4,27 +4,27 @@ import {
   ref,
   inject,
   defineComponent,
-  PropType,
+  type PropType,
   computed,
   withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
-import { createTreeMate, TreeNode } from 'treemate'
+import { createTreeMate, type TreeNode } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
 import { createTmOptions } from '../../select/src/utils'
-import { InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
+import { type InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
 import { createSelectOptions } from './utils'
-import {
+import { cascaderInjectionKey } from './interface'
+import type {
   TmNode,
   Value,
   Filter,
   CascaderOption,
-  SelectMenuInstance,
-  cascaderInjectionKey
+  SelectMenuInstance
 } from './interface'
 import { resolveSlot } from '../../_utils'
 
