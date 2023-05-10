@@ -1,4 +1,3 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "files": [".git/**/*"]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
