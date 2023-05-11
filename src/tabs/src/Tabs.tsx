@@ -47,6 +47,7 @@ import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { type tabPaneProps } from './TabPane'
 import style from './styles/index.cssr'
+import { getPadding } from 'seemly'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -153,8 +154,8 @@ export default defineComponent({
       null
     )
 
-    const leftReachedRef = ref(true)
-    const rightReachedRef = ref(true)
+    const startReachedRef = ref(true)
+    const endReachedRef = ref(true)
 
     const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
@@ -448,9 +449,16 @@ export default defineComponent({
 
     function deriveScrollShadow (el: HTMLElement | null): void {
       if (!el) return
-      const { scrollLeft, scrollWidth, offsetWidth } = el
-      leftReachedRef.value = scrollLeft <= 0
-      rightReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+      const { placement } = props
+      if (placement === 'top' || placement === 'bottom') {
+        const { scrollLeft, scrollWidth, offsetWidth } = el
+        startReachedRef.value = scrollLeft <= 0
+        endReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+      } else {
+        const { scrollTop, scrollHeight, offsetHeight } = el
+        startReachedRef.value = scrollTop <= 0
+        endReachedRef.value = scrollTop + offsetHeight >= scrollHeight
+      }
     }
 
     const handleScroll = throttle((e: Event) => {
@@ -479,19 +487,19 @@ export default defineComponent({
     // avoid useless rerender
     watchEffect(() => {
       const { value: el } = scrollWrapperElRef
-      if (!el || ['left', 'right'].includes(props.placement)) return
+      if (!el) return
       const { value: clsPrefix } = mergedClsPrefixRef
-      const shadowBeforeClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-before`
-      const shadowAfterClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-after`
-      if (leftReachedRef.value) {
-        el.classList.remove(shadowBeforeClass)
+      const shadowStartClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-start`
+      const shadowEndClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-end`
+      if (startReachedRef.value) {
+        el.classList.remove(shadowStartClass)
       } else {
-        el.classList.add(shadowBeforeClass)
+        el.classList.add(shadowStartClass)
       }
-      if (rightReachedRef.value) {
-        el.classList.remove(shadowAfterClass)
+      if (endReachedRef.value) {
+        el.classList.remove(shadowEndClass)
       } else {
-        el.classList.add(shadowAfterClass)
+        el.classList.add(shadowEndClass)
       }
     })
 
@@ -551,6 +559,7 @@ export default defineComponent({
           [createKey('tabPadding', sizeType)]: tabPadding,
           [createKey('tabPaddingVertical', sizeType)]: tabPaddingVertical,
           [createKey('tabGap', sizeType)]: tabGap,
+          [createKey('tabGap', `${sizeType}Vertical`)]: tabGapVertical,
           [createKey('tabTextColor', type)]: tabTextColor,
           [createKey('tabTextColorActive', type)]: tabTextColorActive,
           [createKey('tabTextColorHover', type)]: tabTextColorHover,
@@ -585,7 +594,11 @@ export default defineComponent({
         '--n-tab-padding': tabPadding,
         '--n-tab-padding-vertical': tabPaddingVertical,
         '--n-tab-gap': tabGap,
-        '--n-pane-padding': panePadding,
+        '--n-tab-gap-vertical': tabGapVertical,
+        '--n-pane-padding-left': getPadding(panePadding, 'left'),
+        '--n-pane-padding-right': getPadding(panePadding, 'right'),
+        '--n-pane-padding-top': getPadding(panePadding, 'top'),
+        '--n-pane-padding-bottom': getPadding(panePadding, 'bottom'),
         '--n-font-weight-strong': fontWeightStrong,
         '--n-tab-color-segment': tabColorSegment
       }
@@ -820,7 +833,10 @@ export default defineComponent({
                         }}
                       </VXScroll>
                     ) : (
-                      <div class={`${mergedClsPrefix}-tabs-nav-y-scroll`}>
+                      <div
+                        class={`${mergedClsPrefix}-tabs-nav-y-scroll`}
+                        onScroll={this.handleScroll}
+                      >
                         {scrollContent()}
                       </div>
                     )}
@@ -843,7 +859,7 @@ export default defineComponent({
           )}
         </div>
         {showPane &&
-          (this.animated ? (
+          (this.animated && (placement === 'top' || placement === 'bottom') ? (
             <div
               ref="tabsPaneWrapperRef"
               style={paneWrapperStyle}
