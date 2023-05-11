@@ -12,6 +12,7 @@
 - 修复 `n-upload` 内部使用 vue `TransitionGroup` 组件时, 传递了未声明的 prop 且未被自动继承导致警告, 关闭[#4447](https://github.com/tusen-ai/naive-ui/issues/4447)
 - 修复 `n-menu` `show` `default` 属性拼写问题，关闭 [#4750](https://github.com/tusen-ai/naive-ui/issues/4750)
 - 修复 `n-icon-wrapper` 的主题异常，关闭 [#4768](https://github.com/tusen-ai/naive-ui/issues/4768)
+- 修复 `n-popconfirm` 操作按钮不应该被多次触发，关闭 [#4687][https://github.com/tusen-ai/naive-ui/issues/4687]
 
 ### Feats
 
