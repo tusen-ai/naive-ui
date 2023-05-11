@@ -172,7 +172,12 @@ async function convertMd2ComponentDocumentation (
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
-  const tokens = marked.lexer(text)
+  const componentName = url.match(/src\/(\S*)\/demos/)?.at(1)
+  const _text = `${text} 
+  ### Contributors
+  <Contributors id="${componentName}" />
+`
+  const tokens = marked.lexer(_text)
   // resolve external components
   const componentsIndex = tokens.findIndex(
     (token) => token.type === 'code' && token.lang === 'component'
