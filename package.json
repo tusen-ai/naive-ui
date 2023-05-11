@@ -79,6 +79,7 @@
     "@babel/parser": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/traverse": "^7.21.4",
+    "@octokit/graphql": "^5.0.5",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.1.0",
     "@rollup/plugin-node-resolve": "^15.0.2",

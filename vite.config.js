@@ -1,16 +1,21 @@
+import { Contributors } from './build/vite-plugin-contributors'
+
 const path = require('path')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
 const dns = require('dns')
-
 dns.setDefaultResultOrder('verbatim')
+const { getContributorsByComponent } = require('./build/loaders/contributor')
 
 /**
  * @type {import('vite').UserConfig}
  */
 module.exports = {
   root: __dirname,
-  plugins: createDemoPlugin(),
+  plugins: [
+    getContributorsByComponent().then((data) => Contributors(data)),
+    createDemoPlugin()
+  ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
