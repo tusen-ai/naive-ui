@@ -21,7 +21,7 @@ import {
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import { Value } from './interface'
+import type { Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,

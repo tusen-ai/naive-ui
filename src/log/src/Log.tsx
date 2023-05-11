@@ -4,21 +4,21 @@ import {
   defineComponent,
   computed,
   provide,
-  PropType,
+  type PropType,
   nextTick,
   ref,
   toRef,
-  Ref
+  type Ref
 } from 'vue'
 import { throttle } from 'lodash-es'
 import {
   useTheme,
   useHljs,
-  ThemeProps,
+  type ThemeProps,
   useConfig,
   useThemeClass
+  , type Hljs
 } from '../../_mixins'
-import type { Hljs } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'

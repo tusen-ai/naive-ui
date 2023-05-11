@@ -1,5 +1,5 @@
-import { TreeMate } from 'treemate'
-import { CSSProperties, VNodeChild, VNode } from 'vue'
+import { type TreeMate } from 'treemate'
+import { type CSSProperties, type VNodeChild, type VNode } from 'vue'
 
 export type SelectMixedOption =
   | SelectBaseOption

@@ -1,4 +1,4 @@
-import { h, Transition, TransitionGroup, defineComponent, PropType } from 'vue'
+import { h, Transition, TransitionGroup, defineComponent, type PropType } from 'vue'
 
 export default defineComponent({
   name: 'FadeInExpandTransition',
@@ -78,19 +78,20 @@ export default defineComponent({
     }
     return () => {
       const type = props.group ? TransitionGroup : Transition
+      const differentProps = props.group ? undefined : { mode: props.mode }
       return h(
         type as any,
         {
           name: props.width
             ? 'fade-in-width-expand-transition'
             : 'fade-in-height-expand-transition',
-          mode: props.mode,
           appear: props.appear,
           onEnter: handleEnter,
           onAfterEnter: handleAfterEnter,
           onBeforeLeave: handleBeforeLeave,
           onLeave: handleLeave,
-          onAfterLeave: handleAfterLeave
+          onAfterLeave: handleAfterLeave,
+          ...differentProps
         },
         slots
       )

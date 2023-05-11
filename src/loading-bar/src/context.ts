@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 import type {
   LoadingBarApiInjection,

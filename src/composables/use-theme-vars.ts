@@ -1,4 +1,4 @@
-import { computed, ComputedRef, inject } from 'vue'
+import { computed, type ComputedRef, inject } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import { commonLight } from '../_styles/common'
 import type { ThemeCommonVars } from '../_styles/common'

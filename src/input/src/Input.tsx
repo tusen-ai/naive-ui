@@ -7,17 +7,17 @@ import {
   toRef,
   onMounted,
   getCurrentInstance,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   watch,
   watchEffect,
-  WatchStopHandle,
+  type WatchStopHandle,
   provide,
-  InputHTMLAttributes,
-  TextareaHTMLAttributes,
+  type InputHTMLAttributes,
+  type TextareaHTMLAttributes,
   Fragment,
-  VNode,
-  VNodeChild
+  type VNode,
+  type VNodeChild
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
@@ -32,7 +32,7 @@ import {
   NBaseIcon,
   NBaseSuffix,
   NScrollbar,
-  ScrollbarInst
+  type ScrollbarInst
 } from '../../_internal'
 import {
   useTheme,
@@ -46,12 +46,12 @@ import type { ThemeProps } from '../../_mixins'
 import {
   call,
   createKey,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   resolveSlot,
   resolveWrappedSlot,
   warnOnce
+  , type MaybeArray
 } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
 import type {
@@ -1108,7 +1108,7 @@ export default defineComponent({
                           scrollContainerWidthStyle
                         ]}
                         onBlur={this.handleInputBlur}
-                        onFocus={(e) => this.handleInputFocus(e, 2)}
+                        onFocus={(e) => { this.handleInputFocus(e, 2) }}
                         onInput={this.handleInput}
                         onChange={this.handleChange}
                         onScroll={this.handleTextAreaScroll}
@@ -1181,9 +1181,9 @@ export default defineComponent({
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
-                onFocus={(e) => this.handleInputFocus(e, 0)}
-                onInput={(e) => this.handleInput(e, 0)}
-                onChange={(e) => this.handleChange(e, 0)}
+                onFocus={(e) => { this.handleInputFocus(e, 0) }}
+                onInput={(e) => { this.handleInput(e, 0) }}
+                onChange={(e) => { this.handleChange(e, 0) }}
               />
               {this.showPlaceholder1 ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>
@@ -1302,9 +1302,9 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
-                onFocus={(e) => this.handleInputFocus(e, 1)}
-                onInput={(e) => this.handleInput(e, 1)}
-                onChange={(e) => this.handleChange(e, 1)}
+                onFocus={(e) => { this.handleInputFocus(e, 1) }}
+                onInput={(e) => { this.handleInput(e, 1) }}
+                onChange={(e) => { this.handleChange(e, 1) }}
               />
               {this.showPlaceholder2 ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>

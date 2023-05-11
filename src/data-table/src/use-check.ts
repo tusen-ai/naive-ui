@@ -1,4 +1,4 @@
-import { computed, ComputedRef, ref } from 'vue'
+import { computed, type ComputedRef, ref } from 'vue'
 import type {
   DataTableSetupProps,
   RowKey,
@@ -8,7 +8,7 @@ import type {
   TmNode
 } from './interface'
 import { call } from '../../_utils'
-import { TreeMate } from 'treemate'
+import type { TreeMate } from 'treemate'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useCheck (

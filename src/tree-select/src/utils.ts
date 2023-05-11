@@ -1,5 +1,5 @@
-import { SelectBaseOption } from '../../select/src/interface'
-import { TreeSelectTmNode } from './interface'
+import { type SelectBaseOption } from '../../select/src/interface'
+import { type TreeSelectTmNode } from './interface'
 
 export function treeOption2SelectOption (
   tmNode: TreeSelectTmNode,

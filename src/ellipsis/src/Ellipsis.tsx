@@ -2,13 +2,13 @@ import {
   defineComponent,
   h,
   ref,
-  PropType,
+  type PropType,
   computed,
   mergeProps,
   onDeactivated
 } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
-import { TooltipInst } from '../../tooltip/src/Tooltip'
+import type { TooltipInst } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'

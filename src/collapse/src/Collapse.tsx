@@ -2,13 +2,13 @@ import {
   computed,
   h,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
   ref,
-  Ref,
-  ExtractPropTypes,
-  CSSProperties,
-  Slots
+  type Ref,
+  type ExtractPropTypes,
+  type CSSProperties,
+  type Slots
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -16,14 +16,13 @@ import type { ThemeProps } from '../../_mixins'
 import {
   call,
   createInjectionKey,
-  ExtractPublicPropTypes,
   warn
 } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import { collapseLight, CollapseTheme } from '../styles'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import { collapseLight, type CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
+import type {
   OnItemHeaderClick,
   OnUpdateExpandedNames,
   OnUpdateExpandedNamesImpl,
@@ -197,6 +196,7 @@ export default defineComponent({
         self: {
           titleFontWeight,
           dividerColor,
+          titlePadding,
           titleTextColor,
           titleTextColorDisabled,
           textColor,
@@ -212,6 +212,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-text-color': textColor,
         '--n-divider-color': dividerColor,
+        '--n-title-padding': titlePadding,
         '--n-title-font-size': titleFontSize,
         '--n-title-text-color': titleTextColor,
         '--n-title-text-color-disabled': titleTextColorDisabled,

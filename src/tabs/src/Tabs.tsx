@@ -3,22 +3,22 @@ import {
   ref,
   defineComponent,
   computed,
-  PropType,
+  type PropType,
   provide,
-  CSSProperties,
+  type CSSProperties,
   watch,
   toRef,
-  ComponentPublicInstance,
-  VNode,
+  type ComponentPublicInstance,
+  type VNode,
   nextTick,
   withDirectives,
   vShow,
   watchEffect,
-  ExtractPropTypes,
+  type ExtractPropTypes,
   cloneVNode,
   TransitionGroup
 } from 'vue'
-import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
+import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -45,7 +45,7 @@ import type {
 } from './interface'
 import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
-import { tabPaneProps } from './TabPane'
+import { type tabPaneProps } from './TabPane'
 import style from './styles/index.cssr'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {

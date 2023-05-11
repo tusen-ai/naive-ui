@@ -3,8 +3,8 @@ import {
   defineComponent,
   computed,
   inject,
-  PropType,
-  CSSProperties
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import {
   CheckmarkIcon as FinishedIcon,

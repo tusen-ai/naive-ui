@@ -3,9 +3,9 @@ import {
   ref,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   mergeProps,
-  HTMLAttributes,
+  type HTMLAttributes,
   watchEffect
 } from 'vue'
 import { getMargin } from 'seemly'

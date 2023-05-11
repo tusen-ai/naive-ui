@@ -9,6 +9,9 @@
 - Fix `n-dynamic-input` doesn't return correct `index` in `on-create` callback.
 - Fix `trTR` i18n, closes [#4231](https://github.com/tusen-ai/naive-ui/issues/4231).
 - Fix `n-input`'s show password icon is offset when use both `password` and `disabled`, closes [#4364](https://github.com/tusen-ai/naive-ui/issues/4364).
+- Fix `n-upload` warning cause by extraneous non-props attributes were passed to vue component `TransitionGroup` but could not be automatically inherited, closes [#4447](https://github.com/tusen-ai/naive-ui/issues/4447).
+- Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
+- Fix `n-icon-wrapper`'s theme error, closes [#4768](https://github.com/tusen-ai/naive-ui/issues/4768).
 
 ### Feats
 
@@ -20,10 +23,12 @@
 - `n-select` adds `keyboard` prop, closes [#4340](https://github.com/tusen-ai/naive-ui/issues/4340).
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
 - `n-tabs` adds `pane-wrapper-class` `pane-wrapper-style` prop
+- `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
 
 ### i18n
 
-- Update zhTw locale.
+- Update `zhTW` locale.
+- Add `faIR` locale.
 
 ## 2.34.3
 

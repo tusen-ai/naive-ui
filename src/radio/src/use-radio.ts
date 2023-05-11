@@ -2,17 +2,17 @@ import {
   inject,
   ref,
   toRef,
-  ExtractPropTypes,
-  PropType,
-  Ref,
-  ComputedRef,
+  type ExtractPropTypes,
+  type PropType,
+  type Ref,
+  type ComputedRef,
   watchEffect
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { type OnUpdateValue, type OnUpdateValueImpl } from './interface'
 
 export const radioProps = {
   name: String,

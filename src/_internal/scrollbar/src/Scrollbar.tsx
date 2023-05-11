@@ -3,17 +3,14 @@ import {
   ref,
   defineComponent,
   computed,
-  PropType,
   onMounted,
   onBeforeUnmount,
   mergeProps,
   Transition,
-  CSSProperties,
   watchEffect,
-  VNode,
-  HTMLAttributes,
   Fragment
 } from 'vue'
+import type { PropType, CSSProperties, VNode, HTMLAttributes } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
