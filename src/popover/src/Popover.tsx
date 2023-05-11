@@ -2,7 +2,6 @@ import {
   h,
   ref,
   computed,
-  createTextVNode,
   defineComponent,
   type PropType,
   type VNode,
@@ -13,7 +12,8 @@ import {
   toRef,
   cloneVNode,
   watchEffect,
-  withDirectives
+  withDirectives,
+  Text
 } from 'vue'
 import { VBinder, VTarget, type FollowerPlacement, type BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -78,8 +78,6 @@ function appendEvents (
     }
   })
 }
-
-const textVNodeType = createTextVNode('').type
 
 interface BodyInstance {
   syncPosition: () => void
@@ -461,7 +459,7 @@ export default defineComponent({
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode =
-          triggerVNode.type === textVNodeType
+          triggerVNode.type === Text
             ? h('span', [triggerVNode])
             : triggerVNode
         const handlers = {
