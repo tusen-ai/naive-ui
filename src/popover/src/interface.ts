@@ -1,4 +1,4 @@
-import { Ref, CSSProperties, VNode } from 'vue'
+import { type Ref, type CSSProperties, type VNode } from 'vue'
 import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 
 export type PopoverTrigger = 'click' | 'hover' | 'focus' | 'manual'

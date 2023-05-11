@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   computed,
-  PropType,
+  type PropType,
   ref,
-  CSSProperties,
+  type CSSProperties,
   toRef,
   inject,
   provide
@@ -23,7 +23,7 @@ import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import {
   layoutSiderInjectionKey,
-  LayoutSiderInst,
+  type LayoutSiderInst,
   positionProp
 } from './interface'
 import { layoutInjectionKey } from './Layout'

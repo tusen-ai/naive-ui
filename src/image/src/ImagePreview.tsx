@@ -8,11 +8,11 @@ import {
   vShow,
   watch,
   computed,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   toRef,
   onBeforeUnmount,
-  VNode,
+  type VNode,
   inject,
   normalizeStyle
 } from 'vue'
@@ -36,7 +36,7 @@ import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
 import {
   imageContextKey,
-  MoveStrategy,
+  type MoveStrategy,
   imagePreviewSharedProps
 } from './interface'
 import style from './styles/index.cssr'

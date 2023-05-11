@@ -13,11 +13,13 @@ describe('n-skeleton', () => {
       }
     })
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with box', async () => {
     const wrapper = mount(NSkeleton)
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `sharp` prop', async () => {
@@ -27,6 +29,7 @@ describe('n-skeleton', () => {
       }
     })
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `round` prop', async () => {
@@ -36,6 +39,7 @@ describe('n-skeleton', () => {
       }
     })
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `circle` prop', async () => {
@@ -45,6 +49,7 @@ describe('n-skeleton', () => {
       }
     })
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `repeat` prop', async () => {
@@ -54,6 +59,7 @@ describe('n-skeleton', () => {
       }
     })
     expect(wrapper.findAll('.n-skeleton').length).toBe(2)
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -67,6 +73,7 @@ describe('n-skeleton', () => {
 
     await wrapper.setProps({ size: 'large' })
     expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should show correct width', () => {
@@ -80,6 +87,7 @@ describe('n-skeleton', () => {
     expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
       'width: 100px;'
     )
+    wrapper.unmount()
   })
 
   it('should show correct height', () => {
@@ -93,6 +101,7 @@ describe('n-skeleton', () => {
     expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
       'height: 100px;'
     )
+    wrapper.unmount()
   })
 
   it('should show correct animation', () => {
@@ -105,5 +114,6 @@ describe('n-skeleton', () => {
     expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
       'animation: none;'
     )
+    wrapper.unmount()
   })
 })

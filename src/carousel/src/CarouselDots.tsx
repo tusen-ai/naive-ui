@@ -119,9 +119,9 @@ export default defineComponent({
                 selected && `${mergedClsPrefix}-carousel__dot--active`
               ]}
               key={i}
-              onClick={() => this.handleClick(i)}
-              onMouseenter={() => this.handleMouseenter(i)}
-              onKeydown={(e) => this.handleKeydown(e, i)}
+              onClick={() => { this.handleClick(i) }}
+              onMouseenter={() => { this.handleMouseenter(i) }}
+              onKeydown={(e) => { this.handleKeydown(e, i) }}
             />
           )
         })}

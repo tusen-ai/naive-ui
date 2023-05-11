@@ -1,6 +1,6 @@
-import { h, defineComponent, PropType } from 'vue'
-import { TreeNode } from 'treemate'
-import { DropdownRenderOption } from './interface'
+import { h, defineComponent, type PropType } from 'vue'
+import type { TreeNode } from 'treemate'
+import type { DropdownRenderOption } from './interface'
 
 export default defineComponent({
   name: 'DropdownRenderOption',

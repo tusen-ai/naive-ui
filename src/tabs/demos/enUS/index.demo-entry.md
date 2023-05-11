@@ -40,6 +40,8 @@ position-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |  |
 | pane-class | `string` | `undefined` | Class of the pane. |  |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
+| pane-wrapper-class | `string` | `undefined` | Class of the pane warpper. |  NEXT_VERSION |
+| pane-wrapper-style | `string \| object` | `undefined` | Style of the pane warpper. | NEXT_VERSION |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |  |
 | trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |

@@ -2,9 +2,9 @@ import {
   defineComponent,
   computed,
   inject,
-  PropType,
+  type PropType,
   h,
-  CSSProperties
+  type CSSProperties
 } from 'vue'
 import {
   createKey,

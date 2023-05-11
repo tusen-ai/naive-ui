@@ -1,4 +1,4 @@
-import { h, VNode } from 'vue'
+import { h, type VNode } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NDescriptions, NDescriptionsItem } from '../index'
 

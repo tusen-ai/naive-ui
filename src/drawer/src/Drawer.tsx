@@ -1,11 +1,11 @@
 import {
   h,
   ref,
-  PropType,
+  type PropType,
   defineComponent,
   computed,
   provide,
-  CSSProperties,
+  type CSSProperties,
   withDirectives,
   Transition,
   watchEffect,
@@ -24,8 +24,8 @@ import {
   eventEffectNotPerformed
 } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { ScrollbarProps } from '../../_internal'
-import { drawerLight, DrawerTheme } from '../styles'
+import type { ScrollbarProps } from '../../_internal'
+import { drawerLight, type DrawerTheme } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'

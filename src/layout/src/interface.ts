@@ -1,4 +1,4 @@
-import { PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export const layoutSiderInjectionKey = createInjectionKey<{

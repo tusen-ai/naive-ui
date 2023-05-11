@@ -1,6 +1,6 @@
-import { computed, defineComponent, h, PropType, ref } from 'vue'
+import { computed, defineComponent, h, type PropType, ref } from 'vue'
 import { off, on } from 'evtd'
-import { RGBA, toRgbaString } from 'seemly'
+import { type RGBA, toRgbaString } from 'seemly'
 import { normalizeAlpha } from './utils'
 
 const HANDLE_SIZE = '12px'
