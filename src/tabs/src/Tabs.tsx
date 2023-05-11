@@ -85,6 +85,8 @@ export const tabsProps = {
   barWidth: Number,
   paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
+  paneWrapperClass: String,
+  paneWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
   tabsPadding: {
     type: Number,
@@ -638,6 +640,8 @@ export default defineComponent({
       mergedSize,
       renderNameListRef,
       onRender,
+      paneWrapperClass,
+      paneWrapperStyle,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
 
@@ -842,7 +846,8 @@ export default defineComponent({
           (this.animated ? (
             <div
               ref="tabsPaneWrapperRef"
-              class={`${mergedClsPrefix}-tabs-pane-wrapper`}
+              style={paneWrapperStyle}
+              class={[`${mergedClsPrefix}-tabs-pane-wrapper`, paneWrapperClass]}
             >
               {filterMapTabPanes(
                 tabPaneChildren,
