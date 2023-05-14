@@ -5,7 +5,7 @@ const path = require('path')
 const owner = 'jahnli'
 const repo = 'naive-ui'
 const authorization =
-  'token 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'
+  'token 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'
 
 const graphqlWithAuth = graphql.defaults({
   headers: {
