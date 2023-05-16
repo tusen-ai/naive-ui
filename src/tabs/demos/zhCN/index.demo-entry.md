@@ -37,9 +37,9 @@ position-debug.vue
 ### Tabs Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否允许添加标签，只在标签的 `type` 为 `card` 时生效 |  |
-| animated | `boolean` | `false` | 标签页切换是否使用动画 | 2.27.0 |
+| animated | `boolean` | `false` | 标签页切换是否使用动画，当 `placement` 为 `'left'` 或 `'right'` 时不生效 | 2.27.0 |
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |
@@ -49,6 +49,7 @@ position-debug.vue
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
 | pane-wrapper-class | `string` | `undefined` | 面板容器的类名 | NEXT_VERSION |
 | pane-wrapper-style | `string \| object` | `undefined` | 面板容器的样式 | NEXT_VERSION |
+| placement | `'left' | 'right' | 'top' | 'bottom'` | `'top'` | 标签的位置 | NEXT_VERSION |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
