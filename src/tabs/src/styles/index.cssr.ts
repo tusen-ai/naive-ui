@@ -238,6 +238,7 @@ export default cB('tabs', `
     position: relative;
     min-width: 100%;
     width: fit-content;
+    box-sizing: border-box;
   `),
   cB('tabs-wrapper', `
     display: inline-flex;
@@ -369,6 +370,9 @@ export default cB('tabs', `
         `),
         cB('tabs-nav-scroll-content', `
           border-bottom: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          bottom: -1px;
         `)
       ]),
       cM('left', [
@@ -377,6 +381,9 @@ export default cB('tabs', `
         `),
         cB('tabs-nav-scroll-content', `
           border-right: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          right: -1px;
         `)
       ]),
       cM('right', [
@@ -385,6 +392,9 @@ export default cB('tabs', `
         `),
         cB('tabs-nav-scroll-content', `
           border-left: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          left: -1px;
         `)
       ]),
       cM('bottom', [
@@ -393,6 +403,9 @@ export default cB('tabs', `
         `),
         cB('tabs-nav-scroll-content', `
           border-top: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          top: -1px;
         `)
       ]),
       cE('prefix, suffix', `
@@ -403,7 +416,6 @@ export default cB('tabs', `
       `),
       cB('tabs-bar', `
         border-radius: 0;
-        bottom: -1px;
       `)
     ]),
     cM('card-type', [
@@ -446,7 +458,7 @@ export default cB('tabs', `
             `)
           ])
         ]),
-        cM('closable', 'padding-right: 6px;'),
+        cM('closable', 'padding-right: 8px;'),
         cM('active', `
           background-color: #0000;
           font-weight: var(--n-tab-font-weight-active);
@@ -468,10 +480,7 @@ export default cB('tabs', `
             width: 100%;
           `)
         ])
-      ]),
-      cB('tabs-nav-scroll-content', `
-        border-bottom: none;
-      `)
+      ])
     ]),
     cM('top', [
       cM('card-type', [
