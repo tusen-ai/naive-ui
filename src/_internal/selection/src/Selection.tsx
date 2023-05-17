@@ -45,6 +45,7 @@ export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
   blur: () => void
+  blurInput: () => void
   $el: HTMLElement
 }
 
@@ -598,14 +599,18 @@ export default defineComponent({
           {renderTag ? (
             renderTag({
               option,
-              handleClose: () => { this.handleDeleteOption(option) }
+              handleClose: () => {
+                this.handleDeleteOption(option)
+              }
             })
           ) : (
             <NTag
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              onClose={() => { this.handleDeleteOption(option) }}
+              onClose={() => {
+                this.handleDeleteOption(option)
+              }}
               internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >
