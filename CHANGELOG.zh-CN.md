@@ -26,6 +26,7 @@
 - `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
 - `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
 - `n-select` 新增 `focusInput` `blurInput` 方法
+- `n-tree-select` 新增 `focusInput` `blurInput` 方法
 
 ### i18n
 
