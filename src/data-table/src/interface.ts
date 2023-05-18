@@ -151,6 +151,7 @@ export const dataTableProps = {
   MaybeArray<OnUpdateExpandedRowKeys>
   >,
   onScroll: Function as PropType<(e: Event) => void>,
+  onColumnResizeEnd: Function as PropType<(info: ColumnResizeInfo) => void>,
   // deprecated
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   onPageSizeChange: [Function, Array] as PropType<
@@ -408,6 +409,7 @@ export interface DataTableInjection {
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
   doUpdateResizableWidth: (column: TableColumn, width: number) => void
+  doUpdateResizableWidthEnd: (column: TableBaseColumn) => void
   deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
@@ -527,6 +529,10 @@ export interface SummaryCell {
   value?: VNodeChild
   colSpan?: number
   rowSpan?: number
+}
+export interface ColumnResizeInfo {
+  key: ColumnKey
+  width?: number
 }
 export type SummaryRowData = Record<string, SummaryCell>
 

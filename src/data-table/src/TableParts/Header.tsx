@@ -68,6 +68,7 @@ export default defineComponent({
       headerCheckboxDisabledRef,
       onUnstableColumnResize,
       doUpdateResizableWidth,
+      doUpdateResizableWidthEnd,
       handleTableHeaderScroll,
       deriveNextSorter,
       doUncheckAll,
@@ -136,6 +137,9 @@ export default defineComponent({
       )
       doUpdateResizableWidth(column, limitWidth)
     }
+    function handleColumnResizeEnd (column: TableBaseColumn): void {
+      doUpdateResizableWidthEnd(column)
+    }
     return {
       cellElsRef,
       componentId,
@@ -159,7 +163,8 @@ export default defineComponent({
       handleColHeaderClick,
       handleTableHeaderScroll,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      handleColumnResizeEnd
     }
   },
   render () {
@@ -183,7 +188,8 @@ export default defineComponent({
       handleColHeaderClick,
       handleCheckboxUpdateChecked,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      handleColumnResizeEnd
     } = this
     let hasEllipsis = false
     const theadVNode = (
@@ -258,15 +264,18 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          onResizeStart={() => { handleColumnResizeStart(column as TableBaseColumn) }
-                          }
+                          onResizeStart={() => {
+                            handleColumnResizeStart(column as TableBaseColumn)
+                          }}
                           onResize={(displacementX) => {
                             handleColumnResize(
                               column as TableBaseColumn,
                               displacementX
                             )
-                          }
-                          }
+                          }}
+                          onResizeEnd={() => {
+                            handleColumnResizeEnd(column as TableBaseColumn)
+                          }}
                         />
                       ) : null}
                     </>

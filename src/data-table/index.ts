@@ -1,5 +1,6 @@
 export { default as NDataTable } from './src/DataTable'
 export { dataTableProps } from './src/interface'
+export type { ColumnResizeInfo } from './src/interface'
 export type {
   DataTableProps,
   RowKey as DataTableRowKey,
