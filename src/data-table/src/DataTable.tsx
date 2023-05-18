@@ -91,8 +91,12 @@ export default defineComponent({
       scrollPartRef.value = 'body'
     })
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth } =
-      useResizable()
+    const {
+      getResizableWidth,
+      clearResizableWidth,
+      doUpdateResizableWidth,
+      doUpdateResizableWidthEnd
+    } = useResizable(props)
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props, getResizableWidth)
     const {
@@ -251,6 +255,7 @@ export default defineComponent({
       onUnstableColumnResize,
       clearResizableWidth,
       doUpdateResizableWidth,
+      doUpdateResizableWidthEnd,
       deriveNextSorter,
       doCheck,
       doUncheck,

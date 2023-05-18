@@ -25,6 +25,7 @@
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
 - `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
 - `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
+- `n-data-table` 新增 `on-column-resize-end` 事件
 
 ### i18n
 

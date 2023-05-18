@@ -10,13 +10,14 @@
     :data="data"
     :pagination="pagination"
     :bordered="false"
+    @column-resize-end="handleColumnResizeEnd"
   />
 </template>
 
 <script lang="ts">
 import { h, defineComponent } from 'vue'
 import { NButton, useMessage } from 'naive-ui'
-import type { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns, ColumnResizeInfo } from 'naive-ui'
 
 type Song = {
   no: number
@@ -75,6 +76,9 @@ const data: Song[] = [
 export default defineComponent({
   setup () {
     const message = useMessage()
+    function handleColumnResizeEnd (info: ColumnResizeInfo) {
+      message.info(`${info.key}: ${info.width}`)
+    }
     return {
       data,
       columns: createColumns({
@@ -82,7 +86,8 @@ export default defineComponent({
           message.info(`Play ${row.title}`)
         }
       }),
-      pagination: false as const
+      pagination: false as const,
+      handleColumnResizeEnd
     }
   }
 })
