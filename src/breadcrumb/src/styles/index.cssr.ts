@@ -93,10 +93,7 @@ export default cB('breadcrumb', `
         cB('icon', `
           color: var(--n-item-text-color-active);
         `)
-      ]),
-      cE('separator', `
-        display: none;
-      `)
+      ])
     ])
   ])
 ])

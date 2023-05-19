@@ -4,7 +4,10 @@ import {
   inject,
   type ExtractPropTypes,
   computed,
-  type PropType
+  type PropType,
+  getCurrentInstance,
+  ref,
+  nextTick
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
@@ -28,6 +31,7 @@ export default defineComponent({
   name: 'BreadcrumbItem',
   props: breadcrumbItemProps,
   setup (props, { slots }) {
+    const vm = getCurrentInstance()
     const NBreadcrumb = inject(breadcrumbInjectionKey, null)
     if (!NBreadcrumb) {
       if (__DEV__) {
@@ -46,6 +50,13 @@ export default defineComponent({
     const ariaCurrentRef = computed(() =>
       browserLocationRef.value.href === props.href ? 'location' : null
     )
+
+    const isLastChild = ref(false)
+    void nextTick(() => {
+      isLastChild.value = !vm?.vnode.el?.nextSibling?.classList?.contains(
+        `${mergedClsPrefixRef.value}-breadcrumb-item`
+      )
+    })
 
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
@@ -66,14 +77,16 @@ export default defineComponent({
             },
             slots
           )}
-          <span
-            class={`${mergedClsPrefix}-breadcrumb-item__separator`}
-            aria-hidden="true"
-          >
-            {resolveSlot(slots.separator, () => [
-              props.separator ?? separatorRef.value
-            ])}
-          </span>
+          {!isLastChild.value && (
+            <span
+              class={`${mergedClsPrefix}-breadcrumb-item__separator`}
+              aria-hidden="true"
+            >
+              {resolveSlot(slots.separator, () => [
+                props.separator ?? separatorRef.value
+              ])}
+            </span>
+          )}
         </li>
       )
     }
