@@ -3,7 +3,7 @@ import { h, defineComponent, ref, computed } from 'vue'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInst } from '../../popover'
-import { useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { tooltipLight } from '../styles'
 import type { TooltipTheme } from '../styles'
@@ -23,12 +23,14 @@ export default defineComponent({
   props: tooltipProps,
   __popover__: true,
   setup (props) {
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tooltip',
       '-tooltip',
       undefined,
       tooltipLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     const popoverRef = ref<PopoverInst | null>(null)
     const tooltipExposedMethod: TooltipInst = {

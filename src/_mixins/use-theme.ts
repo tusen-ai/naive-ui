@@ -90,7 +90,7 @@ function useTheme<N, T, R> (
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
-  clsPrefixRef?: Ref<string | undefined>
+  clsPrefixRef: Ref<string | undefined> | undefined
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   const ssrAdapter = useSsrAdapter()
   const NConfigProvider = inject(configProviderInjectionKey, null)
