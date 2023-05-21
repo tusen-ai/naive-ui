@@ -88,7 +88,7 @@ render-cell.vue
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
-| render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: NEXT_VERSION |
+| render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4 |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
