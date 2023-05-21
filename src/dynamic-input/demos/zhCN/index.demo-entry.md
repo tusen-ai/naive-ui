@@ -29,7 +29,7 @@ create-debug.vue
 | --- | --- | --- | --- | --- |
 | create-button-props | `ButtonProps` | `undefined` | 新建项按钮的属性 | 2.25.0 |
 | default-value | `unknown[]` | `[]` | 非受控模式下的默认值 |  |
-| disabled | `boolean` | `false` | 是否禁用，对自定义内容无效 | NEXT_VERSION |
+| disabled | `boolean` | `false` | 是否禁用，对自定义内容无效 | 2.34.4 |
 | item-style | `string \| Object` | `undefined` | 动态录入中每项的样式 |  |
 | key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |  |
 | min | `number` | `0` | 最少有几项内容 |  |
@@ -60,7 +60,7 @@ create-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| action | `(options: { value: any, index: number, create: (index: number) => void, remove: (index: number) => void, move: (type: 'up' \| 'down', index: number) => void })` | 自定义操作，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引 | NEXT_VERSION |
+| action | `(options: { value: any, index: number, create: (index: number) => void, remove: (index: number) => void, move: (type: 'up' \| 'down', index: number) => void })` | 自定义操作，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引 | 2.34.4 |
 | default | `(options: { value: any, index: number })` | 每一项的渲染方式，其中 `value` 为该项对应的数组值，`index` 为该项对应的数组索引 |  |
 | create-button-default | `()` | 新建项按钮的内容 | 2.25.0 |
 | create-button-icon | `()` | 新建项按钮的图标 | 2.25.0 |

@@ -47,9 +47,9 @@ animationx-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
 | pane-class | `string` | `undefined` | 面板的类名 |  |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
-| pane-wrapper-class | `string` | `undefined` | 面板容器的类名 | NEXT_VERSION |
-| pane-wrapper-style | `string \| object` | `undefined` | 面板容器的样式 | NEXT_VERSION |
-| placement | `'left' \| 'right' \| 'top' \| 'bottom'` | `'top'` | 标签的位置，对于 `'segment'` 类型的 `n-tabs` 不生效 | NEXT_VERSION |
+| pane-wrapper-class | `string` | `undefined` | 面板容器的类名 | 2.34.4 |
+| pane-wrapper-style | `string \| object` | `undefined` | 面板容器的样式 | 2.34.4 |
+| placement | `'left' \| 'right' \| 'top' \| 'bottom'` | `'top'` | 标签的位置，对于 `'segment'` 类型的 `n-tabs` 不生效 | 2.34.4 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
