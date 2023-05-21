@@ -459,7 +459,7 @@ export type OnUpdateCheckedRowKeys = (
 ) => void
 
 // `null` only occurs when clearSorter is called
-export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
+export type OnUpdateSorter = (sortState: SortState | SortState[] | null) => void
 export type OnUpdateSorterImpl = (
   sortState: SortState | SortState[] | null
 ) => void
