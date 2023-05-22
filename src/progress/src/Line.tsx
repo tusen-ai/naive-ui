@@ -1,4 +1,10 @@
-import { defineComponent, h, type PropType, computed, type CSSProperties } from 'vue'
+import {
+  defineComponent,
+  h,
+  type PropType,
+  computed,
+  type CSSProperties
+} from 'vue'
 import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {

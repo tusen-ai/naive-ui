@@ -25,7 +25,11 @@ import { clickoutside } from 'vdirs'
 import { createTreeMate, type CheckStrategy } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
-import { type Key, type InternalTreeInst, type TreeOption } from '../../tree/src/interface'
+import {
+  type Key,
+  type InternalTreeInst,
+  type TreeOption
+} from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'

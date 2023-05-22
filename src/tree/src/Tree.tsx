@@ -498,10 +498,14 @@ export default defineComponent({
     }
     if (watchProps?.includes('defaultExpandedKeys')) {
       // if watching defaultExpandedKeys, we use access props.defaultExpandedKeys inside initiator
-      watchEffect(() => { initUncontrolledExpandedKeys(undefined) })
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(undefined)
+      })
     } else {
       // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
-      watchEffect(() => { initUncontrolledExpandedKeys(props.defaultExpandedKeys) })
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(props.defaultExpandedKeys)
+      })
     }
 
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
@@ -635,7 +639,8 @@ export default defineComponent({
             'There is unloaded node in data but props.onLoad is not specified.'
           )
         }
-        await Promise.resolve(); return
+        await Promise.resolve()
+        return
       }
       const { value: loadingKeys } = loadingKeysRef
       if (!loadingKeys.has(node.key)) {

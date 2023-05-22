@@ -13,8 +13,8 @@ import {
   useHljs,
   type Hljs,
   useConfig,
-  useThemeClass
-  , type ThemeProps
+  useThemeClass,
+  type ThemeProps
 } from '../../_mixins'
 import { codeLight } from '../styles'
 import type { CodeTheme } from '../styles'

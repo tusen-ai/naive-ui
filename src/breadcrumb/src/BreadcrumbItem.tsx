@@ -42,6 +42,7 @@ export default defineComponent({
     const browserLocationRef = useBrowserLocation()
 
     const htmlTagRef = computed(() => (props.href ? 'a' : 'span'))
+
     const ariaCurrentRef = computed(() =>
       browserLocationRef.value.href === props.href ? 'location' : null
     )

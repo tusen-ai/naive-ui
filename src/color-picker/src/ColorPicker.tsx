@@ -577,7 +577,9 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   mode={displayedModeRef.value}
                   color={rgbaRef.value && toHexString(rgbaRef.value)}
-                  onUpdateColor={(color) => { doUpdateValue(color, 'input') }}
+                  onUpdateColor={(color) => {
+                    doUpdateValue(color, 'input')
+                  }}
                 />
               ) : null}
             </div>
@@ -596,7 +598,9 @@ export default defineComponent({
                 clsPrefix={mergedClsPrefix}
                 mode={displayedModeRef.value}
                 swatches={props.swatches}
-                onUpdateColor={(color) => { doUpdateValue(color, 'input') }}
+                onUpdateColor={(color) => {
+                  doUpdateValue(color, 'input')
+                }}
               />
             )}
           </div>

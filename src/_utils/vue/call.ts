@@ -1,4 +1,3 @@
-
 type AnyFuction = (...args: any[]) => any
 
 function call (funcs: MaybeArray<() => void>): void
@@ -21,7 +20,10 @@ function call<A1, A2, A3, A4> (
   a3: A3,
   a4: A4
 ): void
-function call<A extends any[]> (funcs: AnyFuction[] | AnyFuction, ...args: A): void {
+function call<A extends any[]> (
+  funcs: AnyFuction[] | AnyFuction,
+  ...args: A
+): void {
   if (Array.isArray(funcs)) {
     funcs.forEach((func) => (call as any)(func, ...args))
   } else return funcs(...args)

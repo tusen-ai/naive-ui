@@ -49,8 +49,8 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import {
   NInternalSelectMenu,
   NInternalSelection,
-  type InternalSelectMenuRef
-  , type InternalSelectionInst
+  type InternalSelectMenuRef,
+  type InternalSelectionInst
 } from '../../_internal'
 import { selectLight, type SelectTheme } from '../styles'
 import {

@@ -46,7 +46,8 @@ rtl-debug.vue
 | scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | show | `boolean` | `false` | 是否展示抽屉 |  |
 | show-mask | `boolean \| 'transparent'` | `true` | 是否显示遮罩，如果设为 `'transparent'` 会展示透明遮罩，如果设为 `false` 会禁用 `trap-focus` | 2.28.3 |
-| style | `string \| Object` | `undefined` | 抽屉的样式 |  |
+| drawer-style | `string \| Object` | `undefined` | 抽屉的样式 |  |
+| drawer-class | `string` | `undefined` | 抽屉的class |  |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |  |
 | trap-focus | `boolean` | `true` | 是否将焦点锁定在 Drawer 内部 | 2.24.2 |
 | width | `number \| string` | `undefined` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |  |

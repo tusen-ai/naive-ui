@@ -16,8 +16,8 @@ import {
   useHljs,
   type ThemeProps,
   useConfig,
-  useThemeClass
-  , type Hljs
+  useThemeClass,
+  type Hljs
 } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { warn } from '../../_utils'

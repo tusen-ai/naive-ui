@@ -16,7 +16,10 @@ import type {
   SelectIgnoredOption
 } from '../../select/src/interface'
 import { createTmOptions } from '../../select/src/utils'
-import { type InternalSelectMenuRef, NInternalSelectMenu } from '../../_internal'
+import {
+  type InternalSelectMenuRef,
+  NInternalSelectMenu
+} from '../../_internal'
 import { createSelectOptions } from './utils'
 import { cascaderInjectionKey } from './interface'
 import type {

@@ -21,7 +21,9 @@ export default defineComponent({
     const NTree = inject(treeInjectionKey)!
     function doCheck (value: boolean): void {
       const { onCheck } = props
-      if (onCheck) { onCheck(value) }
+      if (onCheck) {
+        onCheck(value)
+      }
     }
     function handleUpdateValue (value: boolean): void {
       if (props.indeterminate) {

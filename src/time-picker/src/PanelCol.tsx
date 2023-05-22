@@ -34,7 +34,11 @@ export default defineComponent({
             disabled && `${clsPrefix}-time-picker-col__item--disabled`
           ]}
           onClick={
-            onItemClick && !disabled ? () => { onItemClick(value) } : undefined
+            onItemClick && !disabled
+              ? () => {
+                  onItemClick(value)
+                }
+              : undefined
           }
         >
           {label}

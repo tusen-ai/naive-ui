@@ -6,7 +6,12 @@ import {
   provide,
   type Ref
 } from 'vue'
-import { type MergedTheme, useConfig, useTheme, type ThemeProps } from '../../_mixins'
+import {
+  type MergedTheme,
+  useConfig,
+  useTheme,
+  type ThemeProps
+} from '../../_mixins'
 import type { TimelineTheme } from '../styles'
 import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import { timelineLight } from '../styles'

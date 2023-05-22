@@ -21,6 +21,7 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-content').classes()).toContain(
       'n-spin-content--spinning'
     )
+    wrapper.unmount()
   })
 
   it('should work with icon slot', () => {
@@ -35,6 +36,7 @@ describe('n-spin', () => {
 
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
     expect(wrapper.findComponent(Reload).exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('rotate should work on icon slot', async () => {
@@ -51,6 +53,7 @@ describe('n-spin', () => {
       rotate: false
     })
     expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -61,6 +64,7 @@ describe('n-spin', () => {
         }
       })
       expect(wrapper.find('.n-spin').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -72,6 +76,7 @@ describe('n-spin', () => {
     })
     expect(wrapper.find('.n-spin-container').exists()).toBe(true)
     expect(wrapper.find('.n-spin-content').text()).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `strokeWidth` prop', () => {
@@ -83,6 +88,7 @@ describe('n-spin', () => {
     })
 
     expect(wrapper.find('circle').attributes('stroke-width')).toEqual('40')
+    wrapper.unmount()
   })
 
   it('should work with `delay` prop', async () => {

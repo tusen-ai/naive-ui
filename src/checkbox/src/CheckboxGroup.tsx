@@ -12,7 +12,13 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
-import { call, type MaybeArray, createInjectionKey, warnOnce, type ExtractPublicPropTypes } from '../../_utils'
+import {
+  call,
+  type MaybeArray,
+  createInjectionKey,
+  warnOnce,
+  type ExtractPublicPropTypes
+} from '../../_utils'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>

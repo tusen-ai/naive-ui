@@ -125,7 +125,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateZhCN,
           locale: zhCN,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -134,7 +136,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateZhTW,
           locale: zhTW,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -143,7 +147,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateEnUS,
           locale: enUS,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -152,7 +158,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateRuRU,
           locale: ruRU,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -161,7 +169,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateUkUA,
           locale: ukUA,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -170,7 +180,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateJaJP,
           locale: jaJP,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -179,7 +191,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateKoKR,
           locale: koKR,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -188,7 +202,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateIdID,
           locale: idID,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -197,7 +213,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateDeDE,
           locale: deDE,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -206,7 +224,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateNbNO,
           locale: nbNO,
-          onMounted: (date: string) => { expect(date).toMatchSnapshot() }
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
