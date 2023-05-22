@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)，关闭 [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
+
 ## 2.34.4
 
 ### Fixes
