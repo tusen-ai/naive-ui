@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-avatar-group` 新增 `hover-expand` 属性
+
 ## 2.34.4
 
 ### Fixes

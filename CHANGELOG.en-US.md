@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-avatar-group` adds `hover-expand` prop.
+
 ## 2.34.4
 
 ### Fixes
