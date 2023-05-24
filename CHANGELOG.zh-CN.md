@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-image-group` 新增 `on-preview-prev` `on-preview-next` 属性
+
 ## 2.34.4
 
 ### Fixes

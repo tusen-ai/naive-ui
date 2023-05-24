@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-image-group` adds `on-preview-prev` `on-preview-next` prop
+
 ## 2.34.4
 
 ### Fixes
