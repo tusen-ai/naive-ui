@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-upload` 的 `data` 属性类型.
+
 ## 2.34.4
 
 ### Fixes

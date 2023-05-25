@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-upload`'s `data` prop type.
+
 ## 2.34.4
 
 ### Fixes
