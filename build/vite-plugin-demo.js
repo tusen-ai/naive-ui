@@ -12,17 +12,17 @@ const vuePlugin = createVuePlugin({
 })
 
 const createDemoPlugin = () => {
-  // const contributors = process.env.NODE_ENV === 'production' ? getComponentContributors() : {}
-  const contributors = getComponentContributors()
+  const contributors =
+    process.env.NODE_ENV === 'production' ? getComponentContributors() : {}
 
   const naiveDemoVitePlugin = {
     name: 'demo-vite',
-    transform (_, id) {
+    transform(_, id) {
       if (fileRegex.test(id)) {
         return getTransformedVueSrc(id)
       }
     },
-    async handleHotUpdate (ctx) {
+    async handleHotUpdate(ctx) {
       const { file } = ctx
       if (fileRegex.test(file)) {
         const code = await getTransformedVueSrc(file)
