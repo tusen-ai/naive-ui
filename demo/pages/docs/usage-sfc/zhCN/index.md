@@ -72,7 +72,11 @@ app.use(naive)
 {
   "compilerOptions": {
     // ...
-    "types": ["naive-ui/volar"]
+    "types": ["naive-ui/volar"],
+    "typeRoots": [
+      // ...
+      "./node_modules/@types/"
+    ]
   }
 }
 ```
