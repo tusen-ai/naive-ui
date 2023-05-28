@@ -115,8 +115,8 @@ const faIR: NLocale = {
     tipCounterclockwise: 'چرخش به سمت چپ',
     tipClockwise: 'چرخش به سمت راست',
     tipZoomOut: 'کوچک نمایی تصویر',
-    tipZoomIn: 'بارگیری',
-    tipDownload: 'Descargar',
+    tipZoomIn: 'بزرگ نمایی تصویر',
+    tipDownload: 'بارگیری',
     tipClose: 'بستن (Esc)',
     tipOriginalSize: 'اندازه اصلی تصویر'
   }
