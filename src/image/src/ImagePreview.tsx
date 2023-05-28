@@ -33,7 +33,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon, closeIcon } from './icons'
+import { prevIcon, nextIcon, closeIcon, downloadIcon } from './icons'
 import {
   imageContextKey,
   type MoveStrategy,
@@ -337,6 +337,16 @@ export default defineComponent({
       }
     }
 
+    function download (): void {
+      if (previewSrcRef.value) {
+        const a = document.createElement('a')
+        a.href = previewSrcRef.value
+        a.setAttribute('target', '_blank')
+        a.click()
+        a.remove()
+      }
+    }
+
     function derivePreviewStyle (transition: boolean = true): void {
       const { value: preview } = previewRef
       if (!preview) return
@@ -467,6 +477,7 @@ export default defineComponent({
       },
       zoomIn,
       zoomOut,
+      download,
       rotateCounterclockwise,
       rotateClockwise,
       handleSwitchPrev,
@@ -595,6 +606,15 @@ export default defineComponent({
                                   {{ default: () => <ZoomInIcon /> }}
                                 </NBaseIcon>,
                                 'tipZoomIn'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.download}
+                                >
+                                  {{ default: () => downloadIcon }}
+                                </NBaseIcon>,
+                                'tipDownload'
                               )}
                               {withTooltip(
                                 <NBaseIcon

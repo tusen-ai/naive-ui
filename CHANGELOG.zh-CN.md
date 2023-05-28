@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+## Feats
+
+- `n-iamge-preview` 新增 `downaload` 工具，关闭 [#4302](https://github.com/tusen-ai/naive-ui/issues/4302)
+
 ## 2.34.4
 
 ### Fixes

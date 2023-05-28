@@ -115,6 +115,7 @@ const enUS = {
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
     tipClose: 'Close (Esc)',
+    tipDownload: 'Download',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
   }
