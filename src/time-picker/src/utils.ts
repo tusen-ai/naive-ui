@@ -218,8 +218,8 @@ export function getTimeUnits (
           return getFixValue(hourAsNumber === 12 ? 12 : hourAsNumber - 12)
         })
     }
-    return defaultValue.filter((hour) => {
-      return Number(hour) % stepOrList === 0
+    return defaultValue.filter((tick) => {
+      return Number(tick) === 0 || Number(tick) % stepOrList === 0
     })
   } else {
     return isHourWithAmPm === 'am'

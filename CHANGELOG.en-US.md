@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-time-picker` trigger an incorrect value when click the 'now' button by passing a zero value as the time step, closes [#4859](https://github.com/tusen-ai/naive-ui/issues/4859).
+
 ## 2.34.4
 
 ### Fixes

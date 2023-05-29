@@ -681,11 +681,14 @@ export default defineComponent({
       }
       const [mergeHours, mergeMinutes, mergeSeconds] = (
         ['hours', 'minutes', 'seconds'] as const
-      ).map((i) =>
-        !props[i] || isTimeInStep(getNowTime[i](now), i, props[i])
-          ? getNowTime[i](now)
-          : findSimilarTime(getNowTime[i](now), i, props[i])
-      )
+      ).map((i) => {
+        const timePart = props[i]
+        const nowTime = getNowTime[i](now)
+        if (timePart === 0) return 0
+        return !timePart || isTimeInStep(nowTime, i, timePart)
+          ? nowTime
+          : findSimilarTime(nowTime, i, timePart)
+      })
       const newValue = setSeconds(
         setMinutes(
           setHours(

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-time-picker` 设置时间步进传递零值时，点击此刻按钮触发错误的值, 关闭 [#4859](https://github.com/tusen-ai/naive-ui/issues/4859)
+
 ## 2.34.4
 
 ### Fixes
