@@ -42,6 +42,15 @@ export default cB('form-item', `
       color: var(--n-asterisk-color);
       transition: color .3s var(--n-bezier);
     `),
+    cE('tooltip', `
+      grid-area: tooltip;
+      width: 1rem;
+      height: 1rem;
+      color: rgba(0, 0, 0, 0.45);
+      cursor: help;
+      margin-left: 4px;
+      align-self: end;
+    `),
     cE('asterisk-placeholder', `
       grid-area: mark;
       user-select: none;
@@ -78,18 +87,18 @@ export default cB('form-item', `
       `),
       cM('left-mark', `
         grid-template-areas:
-          "mark text"
-          ".    text";
+          "mark text tooltip"
+          ".    text .";
       `),
       cM('right-mark', `
         grid-template-areas: 
-          "text mark"
-          "text .";
+          "text tooltip mark"
+          "text . .";
       `),
       cM('right-hanging-mark', `
         grid-template-areas: 
-          "text mark"
-          "text .";
+          "text tooltip mark"
+          "text . .";
       `),
       cE('text', `
         grid-area: text;      
@@ -116,7 +125,7 @@ export default cB('form-item', `
     `),
     cB('form-item-label', `
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: var(--n-label-text-align);
     `)
   ]),

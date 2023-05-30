@@ -26,6 +26,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { QuestionIcon } from '../../_internal/icons'
 import {
   warn,
   createKey,
@@ -51,6 +52,7 @@ import type {
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
+import { NTooltip } from '../../tooltip'
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -81,6 +83,7 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  tooltip: [String] as PropType<string>,
   labelProps: Object as PropType<LabelHTMLAttributes>
 } as const
 
@@ -508,6 +511,22 @@ export default defineComponent({
           </span>
         )
       )
+
+      const tooltipNode = this.tooltip ? (
+        <NTooltip to={false}>
+          {{
+            default: () => {
+              return this.tooltip
+            },
+            trigger: () => (
+              <QuestionIcon
+                class={`${mergedClsPrefix}-form-item-label__tooltip`}
+              />
+            )
+          }}
+        </NTooltip>
+      ) : null
+
       const { labelProps } = this
       return (
         <label
@@ -523,8 +542,8 @@ export default defineComponent({
           ref="labelElementRef"
         >
           {mergedRequireMarkPlacement === 'left'
-            ? [markNode, textNode]
-            : [textNode, markNode]}
+            ? [markNode, textNode, tooltipNode]
+            : [textNode, tooltipNode, markNode]}
         </label>
       )
     }
