@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
+
 ## 2.34.4
 
 ### Fixes

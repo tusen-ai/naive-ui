@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-radio` export `radioProps` dosen't not includes `theme-overrides`.
+
 ## 2.34.4
 
 ### Fixes
