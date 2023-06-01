@@ -2,7 +2,7 @@
 
 ## NEXT_VERSION
 
-### Fixes
+### Breaking Changes
 
 - Fix `n-log` 的 `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
 
