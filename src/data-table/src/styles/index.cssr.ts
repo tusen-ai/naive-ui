@@ -388,7 +388,7 @@ export default c([
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        max-width: 100%;
+        max-width: calc(100% - var(--prefix-num, 0) * 16px - min(var(--prefix-num, 0) ,1) * 8px);
         vertical-align: bottom;
       `),
       cM('selection, expand', `

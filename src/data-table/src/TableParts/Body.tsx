@@ -810,7 +810,11 @@ export default defineComponent({
                           {
                             textAlign: column.align || undefined,
                             left: pxfy(fixedColumnLeftMap[colKey]?.start),
-                            right: pxfy(fixedColumnRightMap[colKey]?.start)
+                            right: pxfy(fixedColumnRightMap[colKey]?.start),
+                            '--prefix-num':
+                              hasChildren && colIndex === childTriggerColIndex
+                                ? (isSummary ? 0 : rowInfo.tmNode.level) + 1
+                                : 0
                           },
                           resolvedCellProps?.style || ''
                         ]}

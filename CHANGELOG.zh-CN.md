@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 当使用树形表格时，某一列设置了固定宽度且 ellipsis: true 后，如果文字溢出，不会显示省略号，而是换行[#3755](https://github.com/tusen-ai/naive-ui/issues/3755)
+
 ## 2.34.4
 
 ### Fixes
