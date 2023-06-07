@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-transfer` adds `select-all-title` `un-select-all-title` prop, closes [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
+
 ## 2.34.4
 
 ### Fixes

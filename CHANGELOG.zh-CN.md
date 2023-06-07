@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-transfer` 新增 `select-all-title` `un-select-all-title` 属性，关闭 [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
+
 ## 2.34.4
 
 ### Fixes

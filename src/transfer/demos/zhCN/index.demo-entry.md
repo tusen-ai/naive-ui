@@ -30,6 +30,7 @@ value-debug.vue
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
 | render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义目标列表 | 2.33.4 |
+| select-all-title | `string` | `undefined` | 全选按钮标题 | NEXT_VERSION |
 | show-selected | `boolean` | `true` | 是否显示源列表中选中的项 | 2.34.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |
@@ -38,6 +39,7 @@ value-debug.vue
 | target-filterable | `boolean` | `false` | 目标项是否可过滤 | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | 目标项搜索框中的占位符 | 2.32.0 |
 | target-title | `string` | `undefined` | 目标项标题 | 2.32.0 |
+| un-select-all-title | `string` | `undefined` | 取消全选按钮标题 | NEXT_VERSION |
 | value | `Array<string \| number> \| null` | `undefined` | 受控模式下的值 | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | 值发生改变时的回调 | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 | 2.32.0 |
