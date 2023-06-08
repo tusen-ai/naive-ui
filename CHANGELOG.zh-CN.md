@@ -6,6 +6,10 @@
 
 - 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
 
+### Breaking Changes
+
+- 修复 `n-log` 的 `silent` 拼写问题，关闭 [#4875](https://github.com/tusen-ai/naive-ui/issues/4875)
+
 ## 2.34.4
 
 ### Fixes
