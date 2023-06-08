@@ -14,6 +14,7 @@
 ### Features
 
 - `n-drawer` 新增 `max-height`、`min-height`、`max-width`、`max-width` 属性
+- `n-progress` 在 `'line'` 类型下设置指标位置为 `'inside'` 时支持指示标插槽，关闭 [#4888](https://github.com/tusen-ai/naive-ui/issues/4888)
 
 ## 2.34.4
 
