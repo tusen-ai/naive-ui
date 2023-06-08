@@ -78,8 +78,10 @@ export const drawerProps = {
     type: Boolean,
     default: true
   },
-  max: Number,
-  min: Number,
+  maxWitdh: Number,
+  maxHeight: Number,
+  minWidth: Number,
+  minHeight: Number,
   resizable: Boolean,
   defaultWidth: {
     type: [Number, String] as PropType<string | number>,
@@ -366,8 +368,10 @@ export default defineComponent({
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
                   resizable={this.resizable}
-                  max={this.max}
-                  min={this.min}
+                  maxHeight={this.maxHeight}
+                  minHeight={this.minHeight}
+                  maxWitdh={this.minWidth}
+                  minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
                   onClickoutside={this.handleMaskClick}

@@ -63,8 +63,10 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
-    max: Number,
-    min: Number,
+    maxWitdh: Number,
+    maxHeight: Number,
+    minWidth: Number,
+    minHeight: Number,
     resizable: Boolean,
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
@@ -124,9 +126,19 @@ export default defineComponent({
 
     const { doUpdateHeight, doUpdateWidth } = NDrawer
 
-    const boundary = (size: number): number => {
-      if (props.max && size > props.max) return props.max
-      if (props.min && size > props.min) return props.min
+    const regulateWidth = (size: number): number => {
+      const { maxWitdh } = props
+      if (maxWitdh && size > maxWitdh) return maxWitdh
+      const { minWidth } = props
+      if (minWidth && size < minWidth) return minWidth
+      return size
+    }
+
+    const regulateHeight = (size: number): number => {
+      const { maxHeight } = props
+      if (maxHeight && size > maxHeight) return maxHeight
+      const { minHeight } = props
+      if (minHeight && size < minHeight) return minHeight
       return size
     }
 
@@ -136,14 +148,14 @@ export default defineComponent({
           let height = bodyRef.value?.offsetHeight || 0
           const increment = startPosition - e.clientY
           height += props.placement === 'bottom' ? increment : -increment
-          height = boundary(height)
+          height = regulateHeight(height)
           doUpdateHeight(height)
           startPosition = e.clientY
         } else {
           let width = bodyRef.value?.offsetWidth || 0
           const increment = startPosition - e.clientX
           width += props.placement === 'right' ? increment : -increment
-          width = boundary(width)
+          width = regulateWidth(width)
           doUpdateWidth(width)
           startPosition = e.clientX
         }
