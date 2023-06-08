@@ -2,9 +2,21 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Fix `n-log`'s `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
+
 ### Fixes
 
-- Fix `n-upload`'s `data` prop type.
+- Fix `n-radio` export `radioProps` dosen't not includes `theme-overrides`.
+- Fix `n-description-item`'s `span` doesn't work when `n-descriptions`'s `label-placement` is `'top'` if there's only single line, closes [#4874](https://github.com/tusen-ai/naive-ui/issues/4874).
+- Fix `n-upload`'s `data` prop type can't include `Blob` element.
+
+### Features
+
+- `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.
+- `n-progress` supports indicator slot when the `indicator-placement` is set to `'inside'` in the `'line'` type, closes [#4888](https://github.com/tusen-ai/naive-ui/issues/4888).
+- `n-transfer` adds `select-all-title` `un-select-all-title` prop, closes [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
 
 ## 2.34.4
 
