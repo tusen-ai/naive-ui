@@ -305,7 +305,23 @@ export default defineComponent({
         ) : null}
         <div class={`${mergedClsPrefix}-descriptions-table-wrapper`}>
           <table class={`${mergedClsPrefix}-descriptions-table`}>
-            <tbody>{rows}</tbody>
+            <tbody>
+              {rows}
+              {labelPlacement === 'top' && (
+                <tr
+                  class={`${mergedClsPrefix}-descriptions-table-row`}
+                  style={{
+                    visibility: 'collapse'
+                  }}
+                >
+                  {Array.from({ length: compitableColumn * 2 }, () => (
+                    <td
+                      class={`${mergedClsPrefix}-descriptions-table-content`}
+                    />
+                  ))}
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
       </div>
