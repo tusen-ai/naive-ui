@@ -108,7 +108,7 @@ const Button = defineComponent({
         ) {
           warnOnce(
             'button',
-            "`dashed`, `ghost` and `text` props can't be used along with `secondary`, `tertiary` and `quaterary` props."
+            "`dashed`, `ghost` and `text` props can't be used along with `secondary`, `tertiary` and `quaternary` props."
           )
         }
       })

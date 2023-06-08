@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- Fix `n-log`'s `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
+
+### Fixes
+
+- Fix `n-radio` export `radioProps` dosen't not includes `theme-overrides`.
+
+### Features
+
+- `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.
+
 ## 2.34.4
 
 ### Fixes

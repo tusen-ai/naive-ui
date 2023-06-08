@@ -2,9 +2,18 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 修复 `n-log` 的 `silent` 拼写问题，关闭 [#4875](https://github.com/tusen-ai/naive-ui/issues/4875)
+
 ### Fixes
 
+- 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
 - 修复 `n-descriptions` 当 label-placement 为 top 的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 span 属性失效[#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
+
+### Features
+
+- `n-drawer` 新增 `max-height`、`min-height`、`max-width`、`max-width` 属性
 
 ## 2.34.4
 
