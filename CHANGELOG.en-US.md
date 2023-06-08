@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-notification-provider` `bottom-right` describe error
+
 ## 2.34.4
 
 ### Fixes

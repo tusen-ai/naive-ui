@@ -61,7 +61,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | container-style | `string \| Object` | `undefined` | 容器的样式 | 2.25.0 |
 | max | `number` | `undefined` | 限制通知框显示的个数 |  |
-| placement | `'top' \| 'bottom' \| 'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 | `'top' \| 'bottom'` 2.29.0 |
+| placement | `'top' \| 'bottom' \| 'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom-right'` | `top-right` | 所有通知框显示的位置 | `'top' \| 'bottom'` 2.29.0 |
 | scrollable | `boolean` | `true` | 通知是否可滚动，对于 `placement` 为 `'top'` 和 `'bottom'` 不生效 |  |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |  |
 
