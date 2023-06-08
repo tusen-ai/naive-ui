@@ -123,7 +123,7 @@ export const selectProps = {
     default: 'trigger'
   },
   tag: Boolean,
-  onCreate: Function as PropType<(label: string) => SelectOption>,
+  onCreate: Function as PropType<(label: string) => SelectOption | undefined>,
   fallbackOption: {
     type: [Function, Boolean] as PropType<
     SelectFallbackOption | false | undefined
@@ -660,8 +660,8 @@ export default defineComponent({
       }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
-      const { tag, remote } = props
       doSearch(value)
+      const { tag, remote } = props
       if (tag && !remote) {
         if (!value) {
           beingCreatedOptionsRef.value = emptyArray
@@ -671,6 +671,7 @@ export default defineComponent({
         const optionBeingCreated = onCreate
           ? onCreate(value)
           : { [props.labelField]: value, [props.valueField]: value }
+        if (!optionBeingCreated) return
         const { valueField } = props
         if (
           compitableOptionsRef.value.some(
