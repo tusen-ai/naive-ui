@@ -134,7 +134,7 @@ function createXhrHandlers (
 
 function customSubmitImpl (options: {
   inst: Omit<UploadInternalInst, 'isErrorState'>
-  data?: FuncOrRecordOrUndef
+  data?: FuncOrRecordOrUndef<string | Blob>
   headers?: FuncOrRecordOrUndef
   action?: string
   withCredentials?: boolean
@@ -209,10 +209,10 @@ function registerHandler (
   }
 }
 
-function unwrapFunctionValue (
-  data: FuncOrRecordOrUndef,
+function unwrapFunctionValue<T> (
+  data: FuncOrRecordOrUndef<T>,
   file: SettledFileInfo
-): Record<string, string> {
+): Record<string, T> {
   if (typeof data === 'function') {
     return data({ file })
   }
@@ -234,7 +234,7 @@ function setHeaders (
 
 function appendData (
   formData: FormData,
-  data: FuncOrRecordOrUndef,
+  data: FuncOrRecordOrUndef<string | Blob>,
   file: SettledFileInfo
 ): void {
   const dataObject = unwrapFunctionValue(data, file)
@@ -261,7 +261,7 @@ function submitImpl (
     withCredentials: boolean
     responseType: XMLHttpRequestResponseType
     headers: FuncOrRecordOrUndef
-    data: FuncOrRecordOrUndef
+    data: FuncOrRecordOrUndef<string | Blob>
   }
 ): void {
   const request = new XMLHttpRequest()
@@ -303,7 +303,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
-  data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+  data: [Object, Function] as PropType<FuncOrRecordOrUndef<string | Blob>>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
   responseType: {
