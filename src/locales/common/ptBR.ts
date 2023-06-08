@@ -116,6 +116,7 @@ const ptBR: NLocale = {
     tipClockwise: 'Sentido horário',
     tipZoomOut: 'Reduzir o zoom',
     tipZoomIn: 'Aumentar o zoom',
+    tipDownload: 'Download',
     tipClose: 'Fechar (Esc)',
     tipOriginalSize: 'Exibir no tamanho original'
   }

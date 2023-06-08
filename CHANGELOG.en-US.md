@@ -17,6 +17,8 @@
 - `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.
 - `n-progress` supports indicator slot when the `indicator-placement` is set to `'inside'` in the `'line'` type, closes [#4888](https://github.com/tusen-ai/naive-ui/issues/4888).
 - `n-transfer` adds `select-all-title` `un-select-all-title` prop, closes [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
+- `n-image-preview` adds `downaload` button, closes [#4302](https://github.com/tusen-ai/naive-ui/issues/4302).
+
 
 ## 2.34.4
 

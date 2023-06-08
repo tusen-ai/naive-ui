@@ -117,6 +117,7 @@ const nlNL: NLocale = {
     tipClockwise: 'Met de klok mee',
     tipZoomOut: 'Uitzoomen',
     tipZoomIn: 'Inzoomen',
+    tipDownload: 'Download',
     tipClose: 'Sluiten (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
