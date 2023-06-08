@@ -82,7 +82,7 @@ focus-debug.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
-| style | `string \| Object` | 样式 |  |
+| style | `string \| Object` | `undefined` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
