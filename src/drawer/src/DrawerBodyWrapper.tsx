@@ -63,6 +63,8 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
+    max: Number,
+    min: Number,
     resizable: Boolean,
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
@@ -122,18 +124,26 @@ export default defineComponent({
 
     const { doUpdateHeight, doUpdateWidth } = NDrawer
 
+    const boundary = (size: number): number => {
+      if (props.max && size > props.max) return props.max
+      if (props.min && size > props.min) return props.min
+      return size
+    }
+
     const handleBodyMousemove = (e: MouseEvent): void => {
       if (isDraggingRef.value) {
         if (isVertical.value) {
           let height = bodyRef.value?.offsetHeight || 0
           const increment = startPosition - e.clientY
           height += props.placement === 'bottom' ? increment : -increment
+          height = boundary(height)
           doUpdateHeight(height)
           startPosition = e.clientY
         } else {
           let width = bodyRef.value?.offsetWidth || 0
           const increment = startPosition - e.clientX
           width += props.placement === 'right' ? increment : -increment
+          width = boundary(width)
           doUpdateWidth(width)
           startPosition = e.clientX
         }
@@ -217,7 +227,7 @@ export default defineComponent({
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
           /* Keep the wrapper dom. Make sure the drawer has a host.
-            Nor the detached content will disappear without transition */
+          Nor the detached content will disappear without transition */
           <div role="none">
             <VFocusTrap
               disabled={!this.showMask || !this.trapFocus}
