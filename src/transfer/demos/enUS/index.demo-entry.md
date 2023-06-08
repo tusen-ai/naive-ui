@@ -28,6 +28,7 @@ render-source-list.vue
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize target label rendering. | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize source list rendering. | 2.32.0 |
 | render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | Customize target list rendering. | 2.33.4 |
+| select-all-title | `string` | `undefined` | Select all button title. | NEXT_VERSION |
 | show-selected | `boolean` | `true` | Whether to show selected options in the source list. | 2.34.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. | 2.32.0 |
 | source-filterable | `boolean` | `false` | The source filterable state. | 2.32.2 |
@@ -36,6 +37,7 @@ render-source-list.vue
 | target-filterable | `boolean` | `false` | The target filterable state. | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. | 2.32.0 |
 | target-title | `string` | `undefined` | Target items title. | 2.32.0 |
+| un-select-all-title | `string` | `undefined` | Un select all button title. | NEXT_VERSION |
 | value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | Enable virtual scrolling. | 2.32.0 |

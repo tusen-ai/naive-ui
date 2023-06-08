@@ -1,4 +1,4 @@
-type AnyFuction = (...args: any[]) => any
+type AnyFunction = (...args: any[]) => any
 
 function call (funcs: MaybeArray<() => void>): void
 function call<A1> (funcs: MaybeArray<(a1: A1) => void>, a1: A1): void
@@ -21,7 +21,7 @@ function call<A1, A2, A3, A4> (
   a4: A4
 ): void
 function call<A extends any[]> (
-  funcs: AnyFuction[] | AnyFuction,
+  funcs: AnyFunction[] | AnyFunction,
   ...args: A
 ): void {
   if (Array.isArray(funcs)) {

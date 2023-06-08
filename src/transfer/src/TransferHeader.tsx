@@ -10,6 +10,8 @@ export default defineComponent({
       type: String as PropType<'small' | 'medium' | 'large'>,
       required: true
     },
+    selectAllTitle: String,
+    unSelectAllTitle: String,
     source: Boolean,
     onCheckedAll: Function as PropType<() => void>,
     onClearAll: Function as PropType<() => void>,
@@ -29,7 +31,13 @@ export default defineComponent({
     } = inject(transferInjectionKey)!
     const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source, onClearAll, onCheckedAll } = props
+      const {
+        source,
+        onClearAll,
+        onCheckedAll,
+        selectAllTitle,
+        unSelectAllTitle
+      } = props
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const { value: locale } = localeRef
@@ -54,7 +62,9 @@ export default defineComponent({
             >
               {{
                 default: () =>
-                  allCheckedRef.value ? locale.unselectAll : locale.selectAll
+                  allCheckedRef.value
+                    ? unSelectAllTitle || locale.unselectAll
+                    : selectAllTitle || locale.selectAll
               }}
             </NButton>
           )}

@@ -6,16 +6,16 @@
 <template>
   <n-space vertical>
     <n-button-group>
-      <n-button @click="scrollTo({ position: 'bottom', slient: false })">
+      <n-button @click="scrollTo({ position: 'bottom', silent: false })">
         滚动到底部
       </n-button>
-      <n-button @click="scrollTo({ position: 'bottom', slient: true })">
+      <n-button @click="scrollTo({ position: 'bottom', silent: true })">
         滚动到底部（无事件）
       </n-button>
-      <n-button @click="scrollTo({ position: 'top', slient: false })">
+      <n-button @click="scrollTo({ position: 'top', silent: false })">
         滚动到顶部
       </n-button>
-      <n-button @click="scrollTo({ position: 'top', slient: true })">
+      <n-button @click="scrollTo({ position: 'top', silent: true })">
         滚动到顶部（无事件）
       </n-button>
     </n-button-group>
@@ -71,7 +71,7 @@ export default defineComponent({
       handleReachBottom () {
         message.info('Reach Bottom')
       },
-      scrollTo (options: { position: 'bottom' | 'top'; slient: boolean }) {
+      scrollTo (options: { position: 'bottom' | 'top'; silent: boolean }) {
         logInstRef.value?.scrollTo(options)
       }
     }
