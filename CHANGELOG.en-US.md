@@ -2,9 +2,9 @@
 
 ## NEXT_VERSION
 
-### Fixes
+### Breaking Changes
 
-- Fix `n-notification-provider` `bottom-right` describe error
+- Fix `n-log`'s `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
 
 ## 2.34.4
 
