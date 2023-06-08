@@ -103,7 +103,7 @@ expandable-debug.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |  |
-| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
