@@ -22,6 +22,7 @@ import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
 import { kebabCase } from 'lodash-es'
+import { download } from '../../upload/src/utils'
 import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
@@ -337,13 +338,10 @@ export default defineComponent({
       }
     }
 
-    function download (): void {
-      if (previewSrcRef.value) {
-        const a = document.createElement('a')
-        a.href = previewSrcRef.value
-        a.setAttribute('target', '_blank')
-        a.click()
-        a.remove()
+    function handleDownloadClick (): void {
+      const src = previewSrcRef.value
+      if (src) {
+        download(src, undefined)
       }
     }
 
@@ -477,7 +475,7 @@ export default defineComponent({
       },
       zoomIn,
       zoomOut,
-      download,
+      handleDownloadClick,
       rotateCounterclockwise,
       rotateClockwise,
       handleSwitchPrev,
@@ -610,7 +608,7 @@ export default defineComponent({
                               {withTooltip(
                                 <NBaseIcon
                                   clsPrefix={clsPrefix}
-                                  onClick={this.download}
+                                  onClick={this.handleDownloadClick}
                                 >
                                   {{ default: () => downloadIcon }}
                                 </NBaseIcon>,
