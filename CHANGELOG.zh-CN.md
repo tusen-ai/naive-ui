@@ -9,7 +9,7 @@
 ### Fixes
 
 - 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
-- 修复 `n-descriptions` 当 label-placement 为 top 的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 span 属性失效[#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
+- 修复 `n-descriptions` 当 `label-placement` 为 `'top'` 的时候并且只有一列的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 `span` 属性失效，关闭 [#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
 
 ### Features
 

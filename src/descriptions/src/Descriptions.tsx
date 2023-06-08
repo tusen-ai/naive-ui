@@ -21,6 +21,7 @@ import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
+import { repeat } from 'seemly'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
@@ -306,7 +307,6 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-descriptions-table-wrapper`}>
           <table class={`${mergedClsPrefix}-descriptions-table`}>
             <tbody>
-              {rows}
               {labelPlacement === 'top' && (
                 <tr
                   class={`${mergedClsPrefix}-descriptions-table-row`}
@@ -314,13 +314,15 @@ export default defineComponent({
                     visibility: 'collapse'
                   }}
                 >
-                  {Array.from({ length: compitableColumn * 2 }, () => (
+                  {repeat(
+                    compitableColumn * 2,
                     <td
                       class={`${mergedClsPrefix}-descriptions-table-content`}
                     />
-                  ))}
+                  )}
                 </tr>
               )}
+              {rows}
             </tbody>
           </table>
         </div>
