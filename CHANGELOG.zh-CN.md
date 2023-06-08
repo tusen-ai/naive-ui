@@ -16,8 +16,8 @@
 
 - `n-drawer` 新增 `max-height`、`min-height`、`max-width`、`max-width` 属性
 - `n-progress` 在 `'line'` 类型下设置指标位置为 `'inside'` 时支持指示标插槽，关闭 [#4888](https://github.com/tusen-ai/naive-ui/issues/4888)
-- `n-transfer` 新增 `select-all-title` `un-select-all-title` 属性，关闭 [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
-- `n-iamge-preview` 新增 `downaload` 按钮，关闭 [#4302](https://github.com/tusen-ai/naive-ui/issues/4302)
+- `n-image-preview` 新增 `downaload` 按钮，关闭 [#4302](https://github.com/tusen-ai/naive-ui/issues/4302)
+- `n-transfer` 新增 `select-all-text` 和 `clear-text` 属性，关闭 [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
 
 ## 2.34.4
 

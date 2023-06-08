@@ -55,8 +55,8 @@ export const transferProps = {
   },
   virtualScroll: Boolean,
   sourceTitle: String,
-  selectAllTitle: String,
-  unSelectAllTitle: String,
+  selectAllText: String,
+  clearText: String,
   targetTitle: String,
   filterable: {
     type: Boolean,
@@ -306,8 +306,8 @@ export default defineComponent({
         >
           <NTransferHeader
             source
-            select-all-title={this.selectAllTitle}
-            un-select-all-title={this.unSelectAllTitle}
+            selectAllText={this.selectAllText}
+            clearText={this.clearText}
             title={this.sourceTitle}
             onCheckedAll={this.handleSourceCheckAll}
             onClearAll={this.handleSourceUncheckAll}
