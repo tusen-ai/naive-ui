@@ -64,6 +64,7 @@ export default defineComponent({
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
     function handlePositiveClick (e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow()) return
       const { onPositiveClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onPositiveClick ? onPositiveClick(e) : true).then(
         (value) => {
@@ -74,6 +75,7 @@ export default defineComponent({
       )
     }
     function handleNegativeClick (e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow()) return
       const { onNegativeClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onNegativeClick ? onNegativeClick(e) : true).then(
         (value) => {
@@ -88,7 +90,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       props
     })
-    const exposedMethods: PopconfirmInst = {
+    const exposedMethods: Omit<PopconfirmInst, 'getMergedShow'> = {
       setShow (value) {
         popoverInstRef.value?.setShow(value)
       },

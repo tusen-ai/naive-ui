@@ -4,6 +4,7 @@ import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 export type PopoverTrigger = 'click' | 'hover' | 'focus' | 'manual'
 
 export interface PopoverInst {
+  getMergedShow: () => void
   syncPosition: () => void
   setShow: (value: boolean) => void
 }
