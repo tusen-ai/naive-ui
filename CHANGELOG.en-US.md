@@ -18,6 +18,9 @@
 - `n-progress` supports indicator slot when the `indicator-placement` is set to `'inside'` in the `'line'` type, closes [#4888](https://github.com/tusen-ai/naive-ui/issues/4888).
 - `n-image-preview` adds `downaload` button, closes [#4302](https://github.com/tusen-ai/naive-ui/issues/4302).
 - `n-transfer` adds `select-all-text` and `clear-text` prop, closes [#4910](https://github.com/tusen-ai/naive-ui/issues/4910).
+- `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
+- `n-select` adds `focusInput` `blurInput` methods.
+- `n-tree-select` adds `focusInput` `blurInput` methods.
 
 ## 2.34.4
 
@@ -44,8 +47,6 @@
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
 - `n-tabs` adds `pane-wrapper-class` `pane-wrapper-style` prop.
 - `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
-- `n-select` adds `focusInput` `blurInput` methods.
-- `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-tabs` adds `placement` prop.
 
 ### i18n

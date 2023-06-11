@@ -18,7 +18,10 @@
 - `n-progress` 在 `'line'` 类型下设置指标位置为 `'inside'` 时支持指示标插槽，关闭 [#4888](https://github.com/tusen-ai/naive-ui/issues/4888)
 - `n-image-preview` 新增 `downaload` 按钮，关闭 [#4302](https://github.com/tusen-ai/naive-ui/issues/4302)
 - `n-transfer` 新增 `select-all-text` 和 `clear-text` 属性，关闭 [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
-
+- `n-tree` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4666)
+- `n-select` 新增 `focusInput` `blurInput` 方法
+- `n-tree-select` 新增 `focusInput` `blurInput` 方法
+- 
 ## 2.34.4
 
 ### Fixes
@@ -44,8 +47,6 @@
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
 - `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
 - `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
-- `n-select` 新增 `focusInput` `blurInput` 方法
-- `n-tree-select` 新增 `focusInput` `blurInput` 方法
 - `n-tabs` 新增 `placement` 属性
 
 ### i18n
