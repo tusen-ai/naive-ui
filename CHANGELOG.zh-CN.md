@@ -11,6 +11,7 @@
 - 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
 - 修复 `n-descriptions` 当 `label-placement` 为 `'top'` 的时候并且只有一列的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 `span` 属性失效，关闭 [#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
 - 修复 `n-upload` 的 `data` 属性类型不能包含 `Blob` 元素
+- 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 
 ### Features
 
@@ -26,6 +27,7 @@
 
 ### Fixes
 
+- 修复 `n-notification` 的 `description` 有英文时没有自动换行, closes [#4609](https://github.com/tusen-ai/naive-ui/issues/4609).
 - 修复 `n-notification` 的 `description` 有英文时没有自动换行，关闭 [#4609](https://github.com/tusen-ai/naive-ui/issues/4609)
 - 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确

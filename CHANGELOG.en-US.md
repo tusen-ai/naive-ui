@@ -11,6 +11,7 @@
 - Fix `n-radio` export `radioProps` dosen't not includes `theme-overrides`.
 - Fix `n-description-item`'s `span` doesn't work when `n-descriptions`'s `label-placement` is `'top'` if there's only single line, closes [#4874](https://github.com/tusen-ai/naive-ui/issues/4874).
 - Fix `n-upload`'s `data` prop type can't include `Blob` element.
+- Fix `n-select` allows option to be created with existed label, closes [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 
 ### Features
 
