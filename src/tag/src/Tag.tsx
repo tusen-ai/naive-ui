@@ -2,10 +2,10 @@ import {
   h,
   defineComponent,
   computed,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   ref,
-  Ref,
+  type Ref,
   provide,
   toRef,
   watchEffect

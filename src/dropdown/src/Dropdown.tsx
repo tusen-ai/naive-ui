@@ -4,15 +4,15 @@ import {
   computed,
   ref,
   toRef,
-  PropType,
+  type PropType,
   watch,
   provide,
-  Ref,
+  type Ref,
   mergeProps
 } from 'vue'
-import { createTreeMate, Key, TreeNode } from 'treemate'
+import { createTreeMate, type Key, type TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
-import { FollowerPlacement } from 'vueuc'
+import { type FollowerPlacement } from 'vueuc'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
@@ -23,15 +23,15 @@ import {
   keep,
   call,
   createKey,
-  MaybeArray,
-  ExtractPublicPropTypes,
+  type MaybeArray,
+  type ExtractPublicPropTypes,
   createRefSetter
 } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
 import NDropdownMenu from './DropdownMenu'
 import style from './styles/index.cssr'
-import {
+import type {
   DropdownOption,
   DropdownRenderOption,
   DropdownGroupOption,

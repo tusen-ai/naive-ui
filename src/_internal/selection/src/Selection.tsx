@@ -3,19 +3,19 @@ import {
   h,
   defineComponent,
   Fragment,
-  PropType,
+  type PropType,
   ref,
   computed,
   watch,
   toRef,
   nextTick,
-  CSSProperties,
+  type CSSProperties,
   watchEffect,
   onMounted,
-  InputHTMLAttributes,
-  VNode
+  type InputHTMLAttributes,
+  type VNode
 } from 'vue'
-import { VOverflow, VOverflowInst } from 'vueuc'
+import { VOverflow, type VOverflowInst } from 'vueuc'
 import type {
   RenderLabel,
   RenderLabelImpl
@@ -45,6 +45,7 @@ export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
   blur: () => void
+  blurInput: () => void
   $el: HTMLElement
 }
 
@@ -598,14 +599,18 @@ export default defineComponent({
           {renderTag ? (
             renderTag({
               option,
-              handleClose: () => this.handleDeleteOption(option)
+              handleClose: () => {
+                this.handleDeleteOption(option)
+              }
             })
           ) : (
             <NTag
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              onClose={() => this.handleDeleteOption(option)}
+              onClose={() => {
+                this.handleDeleteOption(option)
+              }}
               internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >

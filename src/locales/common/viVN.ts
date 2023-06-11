@@ -116,6 +116,7 @@ const viVN: NLocale = {
     tipClockwise: 'Chiều kim đồng hồ',
     tipZoomOut: 'Thu nhỏ',
     tipZoomIn: 'Phóng to',
+    tipDownload: 'Tải về',
     tipClose: 'Đóng (Esc)',
     tipOriginalSize: 'Xem kích thước gốc'
   }

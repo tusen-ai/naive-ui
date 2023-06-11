@@ -5,16 +5,16 @@ import {
   defineComponent,
   computed,
   withDirectives,
-  PropType,
+  type PropType,
   Transition,
   provide,
   nextTick,
   watch,
-  CSSProperties,
+  type CSSProperties,
   watchEffect
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
+import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import {
@@ -37,7 +37,7 @@ import type { Locale } from 'date-fns'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'
 import { TimeIcon } from '../../_internal/icons'
-import { InputInst, NInput } from '../../input'
+import { type InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
   useConfig,

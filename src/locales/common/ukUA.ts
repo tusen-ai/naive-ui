@@ -117,6 +117,7 @@ const ukUA: NLocale = {
     tipClockwise: 'За годинниковою стрілкою',
     tipZoomOut: 'Віддалити',
     tipZoomIn: 'Наблизити',
+    tipDownload: 'звантажити',
     tipClose: 'Закрити (Esc)',
     tipOriginalSize: 'Масштабувати до оригінального розміру'
   }

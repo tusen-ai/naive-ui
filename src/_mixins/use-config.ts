@@ -1,4 +1,4 @@
-import { inject, computed, ComputedRef, Ref } from 'vue'
+import { inject, computed, type ComputedRef, type Ref } from 'vue'
 import type {
   RtlEnabledState,
   GlobalComponentConfig,

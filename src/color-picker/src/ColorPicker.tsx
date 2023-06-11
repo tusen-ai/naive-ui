@@ -3,15 +3,15 @@ import {
   defineComponent,
   ref,
   computed,
-  PropType,
+  type PropType,
   toRef,
   watchEffect,
-  VNode,
+  type VNode,
   withDirectives,
   Transition,
-  CSSProperties,
+  type CSSProperties,
   provide,
-  Ref,
+  type Ref,
   watch,
   nextTick
 } from 'vue'
@@ -28,9 +28,9 @@ import {
   toRgbaString,
   toHsvaString,
   toHslaString,
-  HSVA,
-  RGBA,
-  HSLA,
+  type HSVA,
+  type RGBA,
+  type HSLA,
   toHexaString,
   toHsvString,
   toRgbString,
@@ -39,12 +39,12 @@ import {
   getPreciseEventTarget
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { VBinder, VFollower, VTarget, FollowerPlacement } from 'vueuc'
+import { VBinder, VFollower, VTarget, type FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'
 import {
-  ThemeProps,
+  type ThemeProps,
   useFormItem,
   useConfig,
   useTheme,
@@ -61,7 +61,7 @@ import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
-import {
+import type {
   OnConfirmImpl,
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -577,7 +577,9 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   mode={displayedModeRef.value}
                   color={rgbaRef.value && toHexString(rgbaRef.value)}
-                  onUpdateColor={(color) => doUpdateValue(color, 'input')}
+                  onUpdateColor={(color) => {
+                    doUpdateValue(color, 'input')
+                  }}
                 />
               ) : null}
             </div>
@@ -596,7 +598,9 @@ export default defineComponent({
                 clsPrefix={mergedClsPrefix}
                 mode={displayedModeRef.value}
                 swatches={props.swatches}
-                onUpdateColor={(color) => doUpdateValue(color, 'input')}
+                onUpdateColor={(color) => {
+                  doUpdateValue(color, 'input')
+                }}
               />
             )}
           </div>

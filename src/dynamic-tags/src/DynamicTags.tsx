@@ -2,13 +2,13 @@ import {
   h,
   defineComponent,
   ref,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   computed,
   nextTick,
   toRef,
   watchEffect,
-  VNodeChild
+  type VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
@@ -254,7 +254,9 @@ export default defineComponent({
                     color={color}
                     closable={closable}
                     disabled={mergedDisabled}
-                    onClose={() => handleCloseClick(index)}
+                    onClose={() => {
+                      handleCloseClick(index)
+                    }}
                   >
                     {{
                       default: () => (typeof tag === 'string' ? tag : tag.label)

@@ -4,7 +4,7 @@ import {
   nextTick,
   ref,
   computed,
-  PropType,
+  type PropType,
   watch,
   toRef
 } from 'vue'

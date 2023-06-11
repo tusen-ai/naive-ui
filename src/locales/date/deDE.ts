@@ -1,5 +1,5 @@
 import de from 'date-fns/esm/locale/de'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
 
 const dateDeDE: NDateLocale = {
   name: 'de-DE',

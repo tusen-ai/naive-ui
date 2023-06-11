@@ -3,9 +3,9 @@ import {
   h,
   defineComponent,
   inject,
-  VNodeChild,
-  CSSProperties,
-  PropType
+  type VNodeChild,
+  type CSSProperties,
+  type PropType
 } from 'vue'
 import {
   InfoIcon,

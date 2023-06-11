@@ -1,5 +1,5 @@
-import { VNodeChild, Ref } from 'vue'
-import { CNode } from 'css-render'
+import type { VNodeChild, Ref } from 'vue'
+import type { CNode } from 'css-render'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'

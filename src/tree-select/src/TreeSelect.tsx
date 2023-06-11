@@ -1,37 +1,41 @@
 import {
   h,
   defineComponent,
-  PropType,
+  type PropType,
   ref,
   toRef,
   Transition,
   withDirectives,
   computed,
-  CSSProperties,
+  type CSSProperties,
   provide,
   watchEffect,
-  HTMLAttributes,
-  VNodeChild
+  type HTMLAttributes,
+  type VNodeChild
 } from 'vue'
 import {
-  FollowerPlacement,
+  type FollowerPlacement,
   VBinder,
   VFollower,
   VTarget,
-  FollowerInst
+  type FollowerInst
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate, CheckStrategy } from 'treemate'
+import { createTreeMate, type CheckStrategy } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
-import { Key, InternalTreeInst, TreeOption } from '../../tree/src/interface'
+import {
+  type Key,
+  type InternalTreeInst,
+  type TreeOption
+} from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
 import {
   NInternalSelection,
-  InternalSelectionInst,
+  type InternalSelectionInst,
   NBaseFocusDetector
 } from '../../_internal'
 import { NTree } from '../../tree'
@@ -46,16 +50,16 @@ import {
 import type { ThemeProps } from '../../_mixins'
 import {
   call,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   markEventEffectPerformed,
-  MaybeArray,
+  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
   useOnResize,
   warnOnce
 } from '../../_utils'
-import { treeSelectLight, TreeSelectTheme } from '../styles'
+import { treeSelectLight, type TreeSelectTheme } from '../styles'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -721,7 +725,9 @@ export default defineComponent({
         }
       },
       focus: () => triggerInstRef.value?.focus(),
-      blur: () => triggerInstRef.value?.blur()
+      focusInput: () => triggerInstRef.value?.focusInput(),
+      blur: () => triggerInstRef.value?.blur(),
+      blurInput: () => triggerInstRef.value?.blurInput()
     }
 
     const themeRef = useTheme(

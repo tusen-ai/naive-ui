@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, VNodeChild } from 'vue'
+import { type ComponentPublicInstance, type VNodeChild } from 'vue'
 
 export function getSlot (
   instance: ComponentPublicInstance,

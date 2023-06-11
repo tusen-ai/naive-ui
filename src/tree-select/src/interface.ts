@@ -1,5 +1,5 @@
-import { TreeMate, TreeNode } from 'treemate'
-import { HTMLAttributes, Ref, VNodeChild } from 'vue'
+import { type TreeMate, type TreeNode } from 'treemate'
+import { type HTMLAttributes, type Ref, type VNodeChild } from 'vue'
 import type { TreeOptionBase, TreeOption } from '../../tree/src/interface'
 import { createInjectionKey } from '../../_utils'
 
@@ -124,5 +124,7 @@ export interface TreeSelectInst {
     options: Array<TreeSelectOption | null>
   }
   focus: () => void
+  focusInput: () => void
   blur: () => void
+  blurInput: () => void
 }

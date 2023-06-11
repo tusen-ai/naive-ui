@@ -1,4 +1,11 @@
-import { h, withDirectives, vShow, defineComponent, toRef, PropType } from 'vue'
+import {
+  h,
+  withDirectives,
+  vShow,
+  defineComponent,
+  toRef,
+  type PropType
+} from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 

@@ -1,12 +1,12 @@
-import { h, computed, defineComponent, inject, PropType } from 'vue'
+import { h, computed, defineComponent, inject, type PropType } from 'vue'
 import {
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   formatLength,
   keysOf,
   throwError
 } from '../../_utils'
 import { rowInjectionKey } from './Row'
-import { Span } from './interface'
+import type { Span } from './interface'
 
 export const colProps = {
   span: {

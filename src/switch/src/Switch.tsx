@@ -4,8 +4,8 @@ import {
   toRef,
   defineComponent,
   computed,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   watchEffect
 } from 'vue'
 import { depx, pxfy } from 'seemly'
