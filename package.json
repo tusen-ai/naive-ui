@@ -126,7 +126,7 @@
     "lint-staged": "^13.0.3",
     "lyla": "^0.6.8",
     "marked": "^5.0.5",
-    "prettier": "^2.6.2",
+    "prettier": "^2.8.8",
     "rimraf": "^5.0.0",
     "rollup": "^3.21.2",
     "rollup-plugin-esbuild": "^5.0.0",
