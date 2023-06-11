@@ -13,6 +13,7 @@ span.vue
 placement.vue
 bordered.vue
 size.vue
+single-line-debug.vue
 ```
 
 ## API

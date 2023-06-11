@@ -20,7 +20,12 @@ import {
   watchEffect,
   Fragment
 } from 'vue'
-import { VFollower, type FollowerPlacement, type FollowerInst, VFocusTrap } from 'vueuc'
+import {
+  VFollower,
+  type FollowerPlacement,
+  type FollowerInst,
+  VFocusTrap
+} from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { getPreciseEventTarget } from 'seemly'
 import { NxScrollbar } from '../../_internal/scrollbar'

@@ -19,6 +19,7 @@ disabled.vue
 prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
+file-tree.vue
 node-props.vue
 checkbox-placement.vue
 check-strategy-debug.vue

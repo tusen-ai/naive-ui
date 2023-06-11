@@ -6,7 +6,12 @@ import {
   mergeProps,
   type PropType
 } from 'vue'
-import { type ThemeProps, useThemeClass, useConfig, useTheme } from '../../_mixins'
+import {
+  type ThemeProps,
+  useThemeClass,
+  useConfig,
+  useTheme
+} from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { formatLength, warn } from '../../_utils'
 import type { IconTheme } from '../styles'

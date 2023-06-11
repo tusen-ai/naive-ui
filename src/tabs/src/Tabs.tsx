@@ -755,6 +755,7 @@ export default defineComponent({
         </div>
       )
     }
+    const resolvedPlacement = isSegment ? 'top' : placement
     return (
       <div
         class={[
@@ -763,7 +764,7 @@ export default defineComponent({
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`,
-          `${mergedClsPrefix}-tabs--${placement}`
+          `${mergedClsPrefix}-tabs--${resolvedPlacement}`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -774,7 +775,7 @@ export default defineComponent({
             // other. adding a class will make it easy to write the
             // style.
             `${mergedClsPrefix}-tabs-nav--${type}-type`,
-            `${mergedClsPrefix}-tabs-nav--${placement}`,
+            `${mergedClsPrefix}-tabs-nav--${resolvedPlacement}`,
             `${mergedClsPrefix}-tabs-nav`
           ]}
         >
@@ -823,7 +824,7 @@ export default defineComponent({
                     class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
                     ref="scrollWrapperElRef"
                   >
-                    {['top', 'bottom'].includes(placement) ? (
+                    {['top', 'bottom'].includes(resolvedPlacement) ? (
                       <VXScroll
                         ref="xScrollInstRef"
                         onScroll={this.handleScroll}
@@ -859,7 +860,8 @@ export default defineComponent({
           )}
         </div>
         {showPane &&
-          (this.animated && (placement === 'top' || placement === 'bottom') ? (
+          (this.animated &&
+          (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
             <div
               ref="tabsPaneWrapperRef"
               style={paneWrapperStyle}
@@ -875,13 +877,13 @@ export default defineComponent({
                 this.animationDirection
               )}
             </div>
-          ) : (
-            filterMapTabPanes(
-              tabPaneChildren,
-              this.mergedValue,
-              this.renderedNames
-            )
-          ))}
+              ) : (
+                filterMapTabPanes(
+                  tabPaneChildren,
+                  this.mergedValue,
+                  this.renderedNames
+                )
+              ))}
       </div>
     )
   }

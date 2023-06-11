@@ -104,8 +104,12 @@ export default defineComponent({
           <div
             class={`${clsPrefix}-color-picker-swatch`}
             tabindex={0}
-            onClick={() => { this.handleSwatchSelect(swatch) }}
-            onKeydown={(e) => { this.handleSwatchKeyDown(e, swatch) }}
+            onClick={() => {
+              this.handleSwatchSelect(swatch)
+            }}
+            onKeydown={(e) => {
+              this.handleSwatchKeyDown(e, swatch)
+            }}
           >
             <div
               class={`${clsPrefix}-color-picker-swatch__fill`}

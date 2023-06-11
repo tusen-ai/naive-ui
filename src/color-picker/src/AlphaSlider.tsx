@@ -15,7 +15,7 @@ export default defineComponent({
       required: true
     },
     rgba: {
-      type: (Array as unknown) as PropType<RGBA | null>,
+      type: Array as unknown as PropType<RGBA | null>,
       default: null
     },
     alpha: {

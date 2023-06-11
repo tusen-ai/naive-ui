@@ -151,7 +151,9 @@ export default defineComponent({
       }
       handleScroll()
     }
-    const handleScroll = throttle(() => { _handleScroll(true) }, 128)
+    const handleScroll = throttle(() => {
+      _handleScroll(true)
+    }, 128)
     function _handleScroll (transition = true): void {
       interface LinkInfo {
         top: number

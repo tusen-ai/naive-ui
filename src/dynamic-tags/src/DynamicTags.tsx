@@ -254,7 +254,9 @@ export default defineComponent({
                     color={color}
                     closable={closable}
                     disabled={mergedDisabled}
-                    onClose={() => { handleCloseClick(index) }}
+                    onClose={() => {
+                      handleCloseClick(index)
+                    }}
                   >
                     {{
                       default: () => (typeof tag === 'string' ? tag : tag.label)

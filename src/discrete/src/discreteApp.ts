@@ -1,5 +1,8 @@
 import { type App, type Component, createApp, h, unref, type VNode } from 'vue'
-import { type ConfigProviderProps, NConfigProvider } from '../../config-provider'
+import {
+  type ConfigProviderProps,
+  NConfigProvider
+} from '../../config-provider'
 import { type DialogApi, useDialog } from '../../dialog'
 import { type LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { type MessageApi, useMessage } from '../../message'

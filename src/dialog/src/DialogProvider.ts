@@ -14,7 +14,10 @@ import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import { NDialogEnvironment, type exposedDialogEnvProps } from './DialogEnvironment'
+import {
+  NDialogEnvironment,
+  type exposedDialogEnvProps
+} from './DialogEnvironment'
 import {
   dialogApiInjectionKey,
   dialogProviderInjectionKey,
@@ -110,8 +113,9 @@ export const NDialogProvider = defineComponent({
     }
 
     function destroyAll (): void {
-      Object.values(dialogInstRefs).forEach((dialogInstRef) => { dialogInstRef.hide() }
-      )
+      Object.values(dialogInstRefs).forEach((dialogInstRef) => {
+        dialogInstRef.hide()
+      })
     }
 
     const api = {
