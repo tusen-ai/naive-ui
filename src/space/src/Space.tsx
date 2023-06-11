@@ -1,4 +1,10 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { depx, getGap } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'

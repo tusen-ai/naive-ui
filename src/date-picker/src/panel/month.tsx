@@ -1,11 +1,11 @@
-import { h, defineComponent, VNode, PropType, onMounted } from 'vue'
+import { h, defineComponent, type VNode, type PropType, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import type { MonthItem, YearItem, QuarterItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useCalendar, useCalendarProps } from './use-calendar'
-import { OnPanelUpdateValueImpl } from '../interface'
+import type { OnPanelUpdateValueImpl } from '../interface'
 
 /**
  * Month Panel
@@ -63,9 +63,9 @@ export default defineComponent({
           ]}
           onClick={() => {
             useAsQuickJump
-              ? handleQuickMonthClick(item, (value) =>
-                (props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
-              )
+              ? handleQuickMonthClick(item, (value) => {
+                ;(props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
+              })
               : handleDateClick(item)
           }}
         >

@@ -3,12 +3,12 @@ import {
   inject,
   computed,
   onBeforeMount,
-  ComputedRef,
-  Ref,
-  PropType
+  type ComputedRef,
+  type Ref,
+  type PropType
 } from 'vue'
 import { merge } from 'lodash-es'
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
@@ -16,7 +16,7 @@ import type { GlobalTheme } from '../config-provider'
 import type { ThemeCommonVars } from '../_styles/common'
 import { cssrAnchorMetaName } from './common'
 
-export interface Theme<N, T = {}, R = any> {
+export interface Theme<N, T = Record<string, unknown>, R = any> {
   name: N
   common?: ThemeCommonVars
   peers?: R
@@ -37,9 +37,9 @@ export interface ThemePropsReactive<T> {
 
 export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
   ? unknown extends U // self is undefined, ThemeVars is unknown
-    ? {}
+    ? Record<string, unknown>
     : U
-  : {}
+  : Record<string, unknown>
 
 export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
   ? {
@@ -90,7 +90,7 @@ function useTheme<N, T, R> (
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
-  clsPrefixRef?: Ref<string | undefined>
+  clsPrefixRef: Ref<string | undefined> | undefined
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   const ssrAdapter = useSsrAdapter()
   const NConfigProvider = inject(configProviderInjectionKey, null)

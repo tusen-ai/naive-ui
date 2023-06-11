@@ -6,14 +6,14 @@ import {
   defineComponent,
   provide,
   nextTick,
-  PropType,
-  ExtractPropTypes,
-  CSSProperties
+  type PropType,
+  type ExtractPropTypes,
+  type CSSProperties
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LoadingBarTheme } from '../styles'
 import NLoadingBar from './LoadingBar'
 import {

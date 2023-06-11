@@ -5,7 +5,7 @@ import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const headerProps = {
   position: positionProp,

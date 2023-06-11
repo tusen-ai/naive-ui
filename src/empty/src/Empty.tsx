@@ -1,4 +1,11 @@
-import { h, defineComponent, computed, PropType, inject, VNodeChild } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  type PropType,
+  inject,
+  type VNodeChild
+} from 'vue'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'

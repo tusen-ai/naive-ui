@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, type PropType } from 'vue'
 import { NCheckbox } from '../../checkbox'
 import { treeInjectionKey } from './interface'
 
@@ -21,7 +21,9 @@ export default defineComponent({
     const NTree = inject(treeInjectionKey)!
     function doCheck (value: boolean): void {
       const { onCheck } = props
-      if (onCheck) return onCheck(value)
+      if (onCheck) {
+        onCheck(value)
+      }
     }
     function handleUpdateValue (value: boolean): void {
       if (props.indeterminate) {

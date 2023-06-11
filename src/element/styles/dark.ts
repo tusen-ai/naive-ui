@@ -1,5 +1,5 @@
 import { commonDark } from '../../_styles/common'
-import { ElementTheme } from './light'
+import { type ElementTheme } from './light'
 
 const elementDark: ElementTheme = {
   name: 'Element',

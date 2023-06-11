@@ -1,4 +1,4 @@
-import { ref, computed, toRef, Ref } from 'vue'
+import { ref, computed, toRef, type Ref } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import type { Option, OptionValue, Filter, CheckedStatus } from './interface'
 

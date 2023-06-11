@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   computed,
-  CSSProperties,
+  type CSSProperties,
   defineComponent,
   Fragment,
   h,
   nextTick,
-  PropType,
+  type PropType,
   ref,
   toRef,
-  VNodeChild,
+  type VNodeChild,
   watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
@@ -44,7 +44,7 @@ import {
 } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
-import {
+import type {
   PaginationRenderLabel,
   PaginationSizeOption,
   RenderGoto,
@@ -754,7 +754,9 @@ export default defineComponent({
                             type === 'page' &&
                               `${mergedClsPrefix}-pagination-item--clickable`
                           ]}
-                          onClick={() => handlePageItemClick(pageItem)}
+                          onClick={() => {
+                            handlePageItemClick(pageItem)
+                          }}
                           onMouseenter={onMouseenter}
                           onMouseleave={onMouseleave}
                         >

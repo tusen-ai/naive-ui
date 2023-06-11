@@ -3,19 +3,19 @@ import {
   ref,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   inject,
   watch,
-  VNodeChild,
+  type VNodeChild,
   watchEffect,
   onMounted,
   onBeforeUnmount,
-  ImgHTMLAttributes
+  type ImgHTMLAttributes
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import {
-  IntersectionObserverOptions,
+  type IntersectionObserverOptions,
   observeIntersection
 } from '../../image/src/utils'
 import { tagInjectionKey } from '../../tag/src/Tag'

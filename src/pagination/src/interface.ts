@@ -1,5 +1,5 @@
-import { VNodeChild } from 'vue'
-import { SelectBaseOption } from '../../select/src/interface'
+import type { VNodeChild } from 'vue'
+import type { SelectBaseOption } from '../../select/src/interface'
 
 export type Size = 'small' | 'medium' | 'large'
 

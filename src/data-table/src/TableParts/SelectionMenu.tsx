@@ -1,6 +1,6 @@
-import { h, defineComponent, inject, computed, Ref } from 'vue'
+import { h, defineComponent, inject, computed, type Ref } from 'vue'
 import { NDropdown } from '../../../dropdown'
-import { NLocale } from '../../../locales'
+import type { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
 import type { InternalRowData, DataTableSelectionOption } from '../interface'

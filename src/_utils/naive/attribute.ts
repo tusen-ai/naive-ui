@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'vue'
+import type { HTMLAttributes } from 'vue'
 
 export function getTitleAttribute (value: unknown): HTMLAttributes['title'] {
   switch (typeof value) {

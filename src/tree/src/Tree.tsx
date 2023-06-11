@@ -6,24 +6,24 @@ import {
   computed,
   defineComponent,
   provide,
-  PropType,
+  type PropType,
   watch,
-  CSSProperties,
-  VNode,
+  type CSSProperties,
+  type VNode,
   nextTick,
   watchEffect,
-  VNodeChild,
+  type VNodeChild,
   inject
 } from 'vue'
 import {
   createTreeMate,
   flatten,
   createIndexGetter,
-  TreeMateOptions,
-  CheckStrategy
+  type TreeMateOptions,
+  type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { VirtualListInst, VVirtualList } from 'vueuc'
+import { type VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
@@ -71,6 +71,7 @@ import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
+import { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -258,6 +259,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   indent: {
     type: Number,
     default: 16
@@ -498,10 +500,14 @@ export default defineComponent({
     }
     if (watchProps?.includes('defaultExpandedKeys')) {
       // if watching defaultExpandedKeys, we use access props.defaultExpandedKeys inside initiator
-      watchEffect(() => initUncontrolledExpandedKeys(undefined))
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(undefined)
+      })
     } else {
       // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
-      watchEffect(() => initUncontrolledExpandedKeys(props.defaultExpandedKeys))
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(props.defaultExpandedKeys)
+      })
     }
 
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
@@ -635,7 +641,8 @@ export default defineComponent({
             'There is unloaded node in data but props.onLoad is not specified.'
           )
         }
-        return await Promise.resolve()
+        await Promise.resolve()
+        return
       }
       const { value: loadingKeys } = loadingKeysRef
       if (!loadingKeys.has(node.key)) {
@@ -1624,7 +1631,8 @@ export default defineComponent({
       checkable,
       handleKeydown,
       rtlEnabled,
-      handleFocusout
+      handleFocusout,
+      scrollbarProps
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined
@@ -1657,6 +1665,7 @@ export default defineComponent({
       const padding = getPadding(internalScrollablePadding || '0')
       return (
         <NxScrollbar
+          {...scrollbarProps}
           ref="scrollbarInstRef"
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
@@ -1709,6 +1718,7 @@ export default defineComponent({
     if (internalScrollable) {
       return (
         <NxScrollbar
+          {...scrollbarProps}
           class={treeClass}
           tabindex={tabindex}
           onKeydown={mergedFocusable ? handleKeydown : undefined}

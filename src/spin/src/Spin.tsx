@@ -3,8 +3,8 @@ import {
   defineComponent,
   h,
   Transition,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   watchEffect
 } from 'vue'
 import { useCompitable } from 'vooks'
@@ -12,7 +12,7 @@ import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'

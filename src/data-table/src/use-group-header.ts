@@ -1,4 +1,4 @@
-import { CSSProperties, ComputedRef, computed } from 'vue'
+import { type CSSProperties, type ComputedRef, computed } from 'vue'
 import { formatLength } from '../../_utils'
 import type {
   TableExpandColumn,

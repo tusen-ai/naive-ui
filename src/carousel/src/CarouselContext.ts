@@ -28,7 +28,9 @@ const carouselMethodsInjectionKey =
 
 export const provideCarouselContext = (
   contextValue: CarouselContextValue
-): void => provide(carouselMethodsInjectionKey, contextValue)
+): void => {
+  provide(carouselMethodsInjectionKey, contextValue)
+}
 
 export const useCarouselContext = (
   location: string = 'unknown',

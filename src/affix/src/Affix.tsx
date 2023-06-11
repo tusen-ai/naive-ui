@@ -4,8 +4,8 @@ import {
   onMounted,
   onBeforeUnmount,
   defineComponent,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   h
 } from 'vue'
 import { unwrapElement, beforeNextFrameOnce } from 'seemly'

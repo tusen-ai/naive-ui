@@ -1,5 +1,5 @@
-import { CheckStrategy, TreeNode } from 'treemate'
-import { HTMLAttributes, Ref, VNodeChild } from 'vue'
+import { type CheckStrategy, type TreeNode } from 'treemate'
+import { type HTMLAttributes, type Ref, type VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'

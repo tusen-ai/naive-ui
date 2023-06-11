@@ -1,4 +1,4 @@
-import { inject, computed, Ref } from 'vue'
+import { inject, computed, type Ref } from 'vue'
 import { enUS, dateEnUS } from '../locales'
 import type { NLocale } from '../locales/common/enUS'
 import type { NDateLocale } from '../locales/date/enUS'

@@ -2,9 +2,9 @@ import {
   h,
   computed,
   defineComponent,
-  CSSProperties,
+  type CSSProperties,
   provide,
-  Ref,
+  type Ref,
   toRef
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -12,7 +12,7 @@ import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import type { BreadcrumbTheme } from '../styles'
 import style from './styles/index.cssr'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 
 export interface BreadcrumbInjection {
   separatorRef: Ref<string>

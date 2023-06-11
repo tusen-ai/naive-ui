@@ -1,4 +1,10 @@
-import { defineComponent, h, PropType, computed, CSSProperties } from 'vue'
+import {
+  defineComponent,
+  h,
+  type PropType,
+  computed,
+  type CSSProperties
+} from 'vue'
 import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -7,7 +13,7 @@ import {
   ErrorIcon as ErrorCircleIcon,
   SuccessIcon as SuccessCircleIcon
 } from '../../_internal/icons'
-import { Status } from './interface'
+import { type Status } from './interface'
 
 const iconMap = {
   success: <SuccessCircleIcon />,
@@ -140,8 +146,7 @@ export default defineComponent({
                         color: indicatorTextColor
                       }}
                     >
-                      {percentage}
-                      {unit}
+                      {slots.default ? slots.default() : `${percentage}${unit}`}
                     </div>
                   ) : null}
                 </div>

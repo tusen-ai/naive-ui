@@ -2,21 +2,21 @@ import {
   h,
   ref,
   defineComponent,
-  PropType,
+  type PropType,
   inject,
   Transition,
   withDirectives
 } from 'vue'
-import { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import FocusDetector from '../../_internal/focus-detector'
-import { MenuMaskRef } from '../../_internal/menu-mask'
+import type { MenuMaskRef } from '../../_internal/menu-mask'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
 import { NEmpty } from '../../empty'
 import { NBaseMenuMask } from '../../_internal'
 import NCascaderSubmenu from './CascaderSubmenu'
-import {
-  cascaderInjectionKey,
+import { cascaderInjectionKey } from './interface'
+import type {
   CascaderMenuExposedMethods,
   CascaderSubmenuInstance,
   MenuModel,

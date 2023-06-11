@@ -1,4 +1,4 @@
-import { h, VNode, VNodeChild } from 'vue'
+import { h, type VNode, type VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
 // eslint-disable-next-line import/no-cycle
@@ -7,7 +7,7 @@ import { NMenuOptionGroup, menuItemGroupProps } from './MenuOptionGroup'
 import { NSubmenu, submenuProps } from './Submenu'
 import { NMenuOption, menuItemProps } from './MenuOption'
 import NMenuDivider from './MenuDivider'
-import {
+import type {
   MenuOption,
   MenuGroupOption,
   MenuIgnoredOption,
