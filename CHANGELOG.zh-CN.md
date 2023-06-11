@@ -12,6 +12,7 @@
 - 修复 `n-descriptions` 当 `label-placement` 为 `'top'` 的时候并且只有一列的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 `span` 属性失效，关闭 [#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
 - 修复 `n-upload` 的 `data` 属性类型不能包含 `Blob` 元素
 - 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
+- 修复 `n-upload` `render-icon` 属性的类型
 
 ### Features
 
@@ -22,7 +23,7 @@
 - `n-tree` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4666)
 - `n-select` 新增 `focusInput` `blurInput` 方法
 - `n-tree-select` 新增 `focusInput` `blurInput` 方法
-- 
+
 ## 2.34.4
 
 ### Fixes
