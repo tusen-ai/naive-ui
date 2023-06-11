@@ -44,6 +44,8 @@
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
 - `n-tabs` adds `pane-wrapper-class` `pane-wrapper-style` prop.
 - `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
+- `n-select` adds `focusInput` `blurInput` methods.
+- `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-tabs` adds `placement` prop.
 
 ### i18n

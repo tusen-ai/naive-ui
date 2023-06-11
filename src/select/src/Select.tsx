@@ -799,8 +799,14 @@ export default defineComponent({
       focus: () => {
         triggerRef.value?.focus()
       },
+      focusInput: () => {
+        triggerRef.value?.focusInput()
+      },
       blur: () => {
         triggerRef.value?.blur()
+      },
+      blurInput: () => {
+        triggerRef.value?.blurInput()
       }
     }
     const cssVarsRef = computed(() => {
