@@ -124,7 +124,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "katex": "^0.16.3",
     "lint-staged": "^13.0.3",
-    "lyla": "^0.6.8",
+    "lyla": "^1.1.1",
     "marked": "^5.0.5",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.0",
