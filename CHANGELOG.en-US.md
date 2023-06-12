@@ -23,6 +23,8 @@
 - `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
 - `n-select` adds `focusInput` `blurInput` methods.
 - `n-tree-select` adds `focusInput` `blurInput` methods.
+- `n-image-group` adds `on-preview-prev` `on-preview-next` prop
+
 
 ## 2.34.4
 

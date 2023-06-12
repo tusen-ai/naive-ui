@@ -23,6 +23,7 @@
 - `n-tree` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4666)
 - `n-select` 新增 `focusInput` `blurInput` 方法
 - `n-tree-select` 新增 `focusInput` `blurInput` 方法
+- `n-image-group` 新增 `on-preview-prev` `on-preview-next` 属性
 
 ## 2.34.4
 

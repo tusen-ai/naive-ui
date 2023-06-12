@@ -56,6 +56,7 @@ export default defineComponent({
       } else {
         setPreviewSrc(imgs[0].dataset.previewSrc)
       }
+      step === 1 ? props.onPreviewNext?.() : props.onPreviewPrev?.()
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
