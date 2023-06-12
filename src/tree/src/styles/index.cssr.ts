@@ -28,11 +28,6 @@ export default cB('tree', `
       })
     ])
   ]),
-  cB('tree-node-indent', `
-    flex-grow: 0;
-    flex-shrink: 0;
-    height: 0;
-  `),
   cB('tree-motion-wrapper', [
     cM('expand', [
       fadeInHeightExpandTransition({
@@ -136,6 +131,32 @@ export default cB('tree', `
         cursor: not-allowed;
       `)
     ])
+  ]),
+  cM('show-line', [
+    cB('tree-node-indent', `
+      flex-grow: 0;
+      flex-shrink: 0;
+      position: relative
+    `, [
+      c('&::before', `
+        position: absolute;
+        left: 50%;
+        box-sizing: border-box;
+        border: 1px solid var(--n-border-color);
+        transform: translate(-50%);
+        content: "";
+        top: -5px;
+        bottom: -5px;
+      }
+    `)
+    ])
+  ]),
+  cNotM('show-line', [
+    cB('tree-node-indent', `
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 0;
+  `)
   ]),
   cB('tree-node-switcher', `
     cursor: pointer;

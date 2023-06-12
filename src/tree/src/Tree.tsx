@@ -237,6 +237,7 @@ export const treeProps = {
   draggable: Boolean,
   blockNode: Boolean,
   blockLine: Boolean,
+  showLine: Boolean,
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
@@ -262,7 +263,7 @@ export const treeProps = {
   scrollbarProps: Object as PropType<ScrollbarProps>,
   indent: {
     type: Number,
-    default: 16
+    default: 24
   },
   allowDrop: {
     type: Function as PropType<AllowDrop>,
@@ -1625,6 +1626,7 @@ export default defineComponent({
       mergedClsPrefix,
       blockNode,
       blockLine,
+      showLine,
       draggable,
       disabled,
       internalFocusable,
@@ -1641,7 +1643,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      showLine && `${mergedClsPrefix}-tree--show-line`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (
