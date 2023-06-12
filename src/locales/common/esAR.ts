@@ -119,6 +119,7 @@ const esAR: NLocale = {
     tipClockwise: 'Sentido horario',
     tipZoomOut: 'Alejar',
     tipZoomIn: 'Acercar',
+    tipDownload: 'Descargar',
     tipClose: 'Cerrar (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'

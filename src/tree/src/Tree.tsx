@@ -71,6 +71,7 @@ import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
+import { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -259,6 +260,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   indent: {
     type: Number,
     default: 24
@@ -1631,7 +1633,8 @@ export default defineComponent({
       checkable,
       handleKeydown,
       rtlEnabled,
-      handleFocusout
+      handleFocusout,
+      scrollbarProps
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined
@@ -1665,6 +1668,7 @@ export default defineComponent({
       const padding = getPadding(internalScrollablePadding || '0')
       return (
         <NxScrollbar
+          {...scrollbarProps}
           ref="scrollbarInstRef"
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
@@ -1717,6 +1721,7 @@ export default defineComponent({
     if (internalScrollable) {
       return (
         <NxScrollbar
+          {...scrollbarProps}
           class={treeClass}
           tabindex={tabindex}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
