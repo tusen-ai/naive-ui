@@ -124,5 +124,7 @@ export interface TreeSelectInst {
     options: Array<TreeSelectOption | null>
   }
   focus: () => void
+  focusInput: () => void
   blur: () => void
+  blurInput: () => void
 }

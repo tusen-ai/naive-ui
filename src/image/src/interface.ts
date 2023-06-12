@@ -20,7 +20,7 @@ export const imagePreviewSharedProps = {
 }
 
 export interface ImageContext {
-  previewedImgPropsRef: Ref<ImgHTMLAttributes>
+  previewedImgPropsRef: Ref<ImgHTMLAttributes | undefined>
 }
 
 export const imageContextKey = createInjectionKey<ImageContext>('n-image')

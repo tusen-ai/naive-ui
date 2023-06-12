@@ -124,7 +124,9 @@ create-debug.vue
 
 ### Select Methods
 
-| 名称  | 类型         | 说明 | 版本   |
-| ----- | ------------ | ---- | ------ |
-| focus | `() => void` | 聚焦 | 2.24.2 |
-| blur  | `() => void` | 失焦 | 2.24.2 |
+| 名称       | 类型         | 说明     | 版本         |
+| ---------- | ------------ | -------- | ------------ |
+| focus      | `() => void` | 聚焦     | 2.24.2       |
+| focusInput | `() => void` | 输入聚焦 | NEXT_VERSION |
+| blur       | `() => void` | 失焦     | 2.24.2       |
+| blurInput  | `() => void` | 输入失焦 | NEXT_VERSION |

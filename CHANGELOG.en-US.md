@@ -2,9 +2,29 @@
 
 ## NEXT_VERSION
 
-### Feats
+### Breaking Changes
 
+- Fix `n-log`'s `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
+
+### Fixes
+
+- Fix `n-radio` export `radioProps` dosen't not includes `theme-overrides`.
+- Fix `n-description-item`'s `span` doesn't work when `n-descriptions`'s `label-placement` is `'top'` if there's only single line, closes [#4874](https://github.com/tusen-ai/naive-ui/issues/4874).
+- Fix `n-upload`'s `data` prop type can't include `Blob` element.
+- Fix `n-select` allows option to be created with existed label, closes [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
+- Fix `n-upload`'s `render-icon` prop's type.
+
+### Features
+
+- `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.
+- `n-progress` supports indicator slot when the `indicator-placement` is set to `'inside'` in the `'line'` type, closes [#4888](https://github.com/tusen-ai/naive-ui/issues/4888).
+- `n-image-preview` adds `downaload` button, closes [#4302](https://github.com/tusen-ai/naive-ui/issues/4302).
+- `n-transfer` adds `select-all-text` and `clear-text` prop, closes [#4910](https://github.com/tusen-ai/naive-ui/issues/4910).
+- `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
+- `n-select` adds `focusInput` `blurInput` methods.
+- `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-image-group` adds `on-preview-prev` `on-preview-next` prop
+
 
 ## 2.34.4
 
@@ -19,6 +39,7 @@
 - Fix `n-upload` warning cause by extraneous non-props attributes were passed to vue component `TransitionGroup` but could not be automatically inherited, closes [#4447](https://github.com/tusen-ai/naive-ui/issues/4447).
 - Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
 - Fix `n-icon-wrapper`'s theme error, closes [#4768](https://github.com/tusen-ai/naive-ui/issues/4768).
+- Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
 ### Feats
 

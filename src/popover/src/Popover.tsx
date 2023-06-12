@@ -39,7 +39,11 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type { PopoverTrigger, InternalRenderBody } from './interface'
+import type {
+  PopoverTrigger,
+  InternalRenderBody,
+  InternalPopoverInst
+} from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -434,7 +438,7 @@ export default defineComponent({
         doUpdateShow(false)
       }
     })
-    return {
+    const returned = {
       binderInstRef,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
@@ -450,6 +454,7 @@ export default defineComponent({
       handleBlur,
       syncPosition
     }
+    return returned satisfies InternalPopoverInst
   },
   render () {
     const { positionManually, $slots: slots } = this
