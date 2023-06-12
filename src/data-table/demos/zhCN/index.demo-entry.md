@@ -128,7 +128,7 @@ expandable-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
-| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
 | className | `string` | `undefined` | 列的类名 |  |
