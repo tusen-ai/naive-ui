@@ -1,6 +1,6 @@
 # Timeline
 
-The world is 2 demensioned. One of them is time. The Other is event.
+The world is 2 dimensioned. One of them is time. The Other is event.
 
 ## Demos
 
