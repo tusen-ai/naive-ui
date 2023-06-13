@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   inject,
-  VNodeChild,
+  type VNodeChild,
   Fragment,
-  VNode,
+  type VNode,
   ref
 } from 'vue'
 import { happensIn, pxfy } from 'seemly'
@@ -24,11 +24,11 @@ import {
   clampValueFollowCSSRules
 } from '../utils'
 import {
-  TableExpandColumn,
-  TableColumnGroup,
-  TableBaseColumn,
+  type TableExpandColumn,
+  type TableColumnGroup,
+  type TableBaseColumn,
   dataTableInjectionKey,
-  ColumnKey
+  type ColumnKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
 
@@ -110,7 +110,7 @@ export default defineComponent({
     function handleMouseleave (): void {
       scrollPartRef.value = 'body'
     }
-    const resizeStartWidthMap: Map<ColumnKey, number | undefined> = new Map()
+    const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
     function handleColumnResizeStart (column: TableBaseColumn): void {
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
     }
@@ -258,15 +258,15 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          onResizeStart={() =>
+                          onResizeStart={() => {
                             handleColumnResizeStart(column as TableBaseColumn)
-                          }
-                          onResize={(displacementX) =>
+                          }}
+                          onResize={(displacementX) => {
                             handleColumnResize(
                               column as TableBaseColumn,
                               displacementX
                             )
-                          }
+                          }}
                         />
                       ) : null}
                     </>

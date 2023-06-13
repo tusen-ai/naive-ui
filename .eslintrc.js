@@ -2,6 +2,13 @@ module.exports = {
   extends: ['plugin:markdown/recommended', 'prettier'],
   overrides: [
     {
+      files: '*.mjs',
+      parserOptions: {
+        sourceType: 'module',
+        ecmaVersion: 'latest'
+      }
+    },
+    {
       files: '*.vue',
       extends: [
         '@vue/typescript/recommended',

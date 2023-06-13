@@ -12,8 +12,8 @@ import { cloneDeep, merge } from 'lodash-es'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { lightTheme } from '../../themes/light'
 import {
-  GlobalTheme,
-  GlobalThemeOverrides,
+  type GlobalTheme,
+  type GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
 import { NPopover } from '../../popover'
@@ -69,7 +69,7 @@ export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
   setup () {
-    const isMaximized = ref<Boolean>(false)
+    const isMaximized = ref<boolean>(false)
     const fileInputRef = ref<HTMLInputElement | null>(null)
     const NConfigProvider = inject(configProviderInjectionKey, null)
     const theme = computed(() => {
@@ -246,7 +246,7 @@ export default defineComponent({
                     ]}
                     // We use ts-ignore for vue-tsc, since it seems to patch
                     // native event for vue components
-                    // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+                    // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     onClick={() => {
                       this.showPanel = !this.showPanel

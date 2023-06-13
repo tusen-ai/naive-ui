@@ -3,13 +3,13 @@ import {
   defineComponent,
   h,
   inject,
-  PropType,
+  type PropType,
   provide,
-  Ref,
-  CSSProperties,
+  type Ref,
+  type CSSProperties,
   ref
 } from 'vue'
-import { TreeNode } from 'treemate'
+import type { TreeNode } from 'treemate'
 import { renderArrow } from '../../popover/src/PopoverBody'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import NDropdownDivider from './DropdownDivider'
@@ -25,7 +25,7 @@ import {
   isRenderNode
 } from './utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
-import {
+import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption,

@@ -2,13 +2,46 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 修复 `n-log` 的 `silent` 拼写问题，关闭 [#4875](https://github.com/tusen-ai/naive-ui/issues/4875)
+
 ### Fixes
 
+- 修复 `n-radio` 导出的 `radioProps` 未包含 `theme-overrides`
+- 修复 `n-descriptions` 当 `label-placement` 为 `'top'` 的时候并且只有一列的时候，生成的 table 缺少对应的列导致 `n-description-item` 的 `span` 属性失效，关闭 [#4874](https://github.com/tusen-ai/naive-ui/issues/4874)
+- 修复 `n-upload` 的 `data` 属性类型不能包含 `Blob` 元素
+- 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
+- 修复 `n-upload` `render-icon` 属性的类型
+- 修复 `n-auto-complete` 的 `onSelect` 类型，关闭[#4617](https://github.com/tusen-ai/naive-ui/issues/4617)
+
+### Features
+
+- `n-drawer` 新增 `max-height`、`min-height`、`max-width`、`max-width` 属性
+- `n-progress` 在 `'line'` 类型下设置指标位置为 `'inside'` 时支持指示标插槽，关闭 [#4888](https://github.com/tusen-ai/naive-ui/issues/4888)
+- `n-image-preview` 新增 `downaload` 按钮，关闭 [#4302](https://github.com/tusen-ai/naive-ui/issues/4302)
+- `n-transfer` 新增 `select-all-text` 和 `clear-text` 属性，关闭 [#4910](https://github.com/tusen-ai/naive-ui/issues/4910)
+- `n-tree` 新增 `scrollbar-props` 属性，关闭 [#4021](https://github.com/tusen-ai/naive-ui/issues/4666)
+- `n-select` 新增 `focusInput` `blurInput` 方法
+- `n-tree-select` 新增 `focusInput` `blurInput` 方法
+- `n-image-group` 新增 `on-preview-prev` `on-preview-next` 属性
+- `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)， [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
+
+## 2.34.4
+
+### Fixes
+
+- 修复 `n-notification` 的 `description` 有英文时没有自动换行, closes [#4609](https://github.com/tusen-ai/naive-ui/issues/4609).
+- 修复 `n-notification` 的 `description` 有英文时没有自动换行，关闭 [#4609](https://github.com/tusen-ai/naive-ui/issues/4609)
 - 修复 `n-dynamic-input` 的 `on-remove` 方法返回被删除的数据下标 `index` 时 `value[index]` 已经不存在
 - 修复 `n-dynamic-input` 在点击添加按钮后 `on-create` 返回的 `index` 不正确
 - 修复 `trTR` 国际化，关闭 [#4231](https://github.com/tusen-ai/naive-ui/issues/4231)
 - 修复 `n-input` 同时使用 `password` 和 `disabled` 时，显示密码图标偏移的问题，关闭 [#4364](https://github.com/tusen-ai/naive-ui/issues/4364)
-- 修复 `n-auto-complete` 的 `onSelect` 类型，关闭[#4617](https://github.com/tusen-ai/naive-ui/issues/4617)
+- 修复 `n-image` 设置 `fallback-src` 属性和懒加载无效，关闭 [#4480](https://github.com/tusen-ai/naive-ui/issues/4480)
+- 修复 `n-upload` 内部使用 vue `TransitionGroup` 组件时，传递了未声明的 prop 且未被自动继承导致警告，关闭[#4447](https://github.com/tusen-ai/naive-ui/issues/4447)
+- 修复 `n-menu` `show` `default` 属性拼写问题，关闭 [#4750](https://github.com/tusen-ai/naive-ui/issues/4750)
+- 修复 `n-icon-wrapper` 的主题异常，关闭 [#4768](https://github.com/tusen-ai/naive-ui/issues/4768)
+- 修复 `n-popconfirm` 操作按钮不应该被多次触发，关闭 [#4687][https://github.com/tusen-ai/naive-ui/issues/4687]
 
 ### Feats
 
@@ -19,10 +52,14 @@
 - `n-scrollbar` 新增 `size` 属性，关闭 [#3896](https://github.com/tusen-ai/naive-ui/issues/3896)
 - `n-select` 新增 `keyboard` 属性，[#4340](https://github.com/tusen-ai/naive-ui/issues/4340)
 - `n-data-table` 的 `render-expand-icon` 属性新增 `expanded` 参数，关闭 [#4439](https://github.com/tusen-ai/naive-ui/issues/4439)
+- `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
+- `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
+- `n-tabs` 新增 `placement` 属性
 
 ### i18n
 
-- 更新 zhTw 国际化
+- 更新 `zhTW` 国际化
+- 新增 `faIR` 国际化
 
 ## 2.34.3
 

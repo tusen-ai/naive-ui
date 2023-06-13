@@ -6,18 +6,18 @@ import {
   ref,
   inject,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
   withDirectives,
   vShow,
   Transition,
-  VNode,
-  ComponentPublicInstance,
+  type VNode,
+  type ComponentPublicInstance,
   mergeProps,
   cloneVNode,
   computed,
-  DirectiveArguments,
-  VNodeChild
+  type DirectiveArguments,
+  type VNodeChild
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -26,7 +26,7 @@ import { NDialog } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { NScrollbar, ScrollbarInst } from '../../_internal'
+import { NScrollbar, type ScrollbarInst } from '../../_internal'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'

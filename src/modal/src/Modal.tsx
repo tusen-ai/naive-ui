@@ -6,8 +6,8 @@ import {
   computed,
   defineComponent,
   provide,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   toRef,
   inject
 } from 'vue'

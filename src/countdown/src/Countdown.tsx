@@ -2,9 +2,9 @@ import {
   defineComponent,
   onMounted,
   onBeforeUnmount,
-  PropType,
+  type PropType,
   watchEffect,
-  VNodeChild,
+  type VNodeChild,
   ref
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'

@@ -4,32 +4,32 @@ import {
   computed,
   toRef,
   defineComponent,
-  PropType,
+  type PropType,
   watch,
   Transition,
   withDirectives,
   vShow,
-  InputHTMLAttributes,
-  HTMLAttributes,
+  type InputHTMLAttributes,
+  type HTMLAttributes,
   watchEffect
 } from 'vue'
 import { getPreciseEventTarget, happensIn } from 'seemly'
-import { createTreeMate, TreeNode } from 'treemate'
+import { createTreeMate, type TreeNode } from 'treemate'
 import {
   VBinder,
   VFollower,
   VTarget,
-  FollowerInst,
-  FollowerPlacement
+  type FollowerInst,
+  type FollowerPlacement
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
 import {
-  RenderLabel,
-  RenderOption,
-  NodeProps
+  type RenderLabel,
+  type RenderOption,
+  type NodeProps
 } from '../../_internal/select-menu/src/interface'
-import { RenderTag } from '../../_internal/selection/src/interface'
+import { type RenderTag } from '../../_internal/selection/src/interface'
 import type { FormValidationStatus } from '../../form/src/interface'
 import {
   useTheme,
@@ -49,10 +49,10 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import {
   NInternalSelectMenu,
   NInternalSelection,
-  InternalSelectMenuRef
+  type InternalSelectMenuRef,
+  type InternalSelectionInst
 } from '../../_internal'
-import type { InternalSelectionInst } from '../../_internal'
-import { selectLight, SelectTheme } from '../styles'
+import { selectLight, type SelectTheme } from '../styles'
 import {
   createValOptMap,
   filterOptions,
@@ -671,14 +671,20 @@ export default defineComponent({
         const optionBeingCreated = onCreate
           ? onCreate(value)
           : { [props.labelField]: value, [props.valueField]: value }
-        const { valueField } = props
+        const { valueField, labelField } = props
         if (
-          compitableOptionsRef.value.some(
-            (option) => option[valueField] === optionBeingCreated[valueField]
-          ) ||
-          createdOptionsRef.value.some(
-            (option) => option[valueField] === optionBeingCreated[valueField]
-          )
+          compitableOptionsRef.value.some((option) => {
+            return (
+              option[valueField] === optionBeingCreated[valueField] ||
+              option[labelField] === optionBeingCreated[labelField]
+            )
+          }) ||
+          createdOptionsRef.value.some((option) => {
+            return (
+              option[valueField] === optionBeingCreated[valueField] ||
+              option[labelField] === optionBeingCreated[labelField]
+            )
+          })
         ) {
           beingCreatedOptionsRef.value = emptyArray
         } else {
@@ -799,8 +805,14 @@ export default defineComponent({
       focus: () => {
         triggerRef.value?.focus()
       },
+      focusInput: () => {
+        triggerRef.value?.focusInput()
+      },
       blur: () => {
         triggerRef.value?.blur()
+      },
+      blurInput: () => {
+        triggerRef.value?.blurInput()
       }
     }
     const cssVarsRef = computed(() => {
