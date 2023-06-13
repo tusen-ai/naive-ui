@@ -20,7 +20,8 @@ import {
   createKey,
   type MaybeArray,
   type ExtractPublicPropTypes,
-  warnOnce
+  warnOnce,
+  resolveWrappedSlot
 } from '../../_utils'
 import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
@@ -325,6 +326,16 @@ export default defineComponent({
       handleClick
     } = this
     this.onRender?.()
+    const labelNode = resolveWrappedSlot($slots.default, (children) => {
+      if (label || children) {
+        return (
+          <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
+            {label || children}
+          </span>
+        )
+      }
+      return null
+    })
     return (
       <div
         ref="selfRef"
@@ -335,7 +346,8 @@ export default defineComponent({
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`,
+          labelNode && `${mergedClsPrefix}-checkbox--show-label`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
@@ -381,11 +393,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-checkbox-box__border`} />
           </div>
         </div>
-        {label !== null || $slots.default ? (
-          <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
-            {$slots.default ? $slots.default() : label}
-          </span>
-        ) : null}
+        {labelNode}
       </div>
     )
   }

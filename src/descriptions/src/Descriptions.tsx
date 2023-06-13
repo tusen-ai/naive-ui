@@ -314,12 +314,7 @@ export default defineComponent({
                     visibility: 'collapse'
                   }}
                 >
-                  {repeat(
-                    compitableColumn * 2,
-                    <td
-                      class={`${mergedClsPrefix}-descriptions-table-content`}
-                    />
-                  )}
+                  {repeat(compitableColumn * 2, <td />)}
                 </tr>
               )}
               {rows}
