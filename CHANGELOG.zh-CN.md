@@ -15,6 +15,7 @@
 - 修复 `n-upload` `render-icon` 属性的类型
 - 修复 `n-tabs` 的 `paneWrapperStyle` 属性在动画后丢失高度
 - 修复 `n-tree` 在级联选择下点击半选状态勾选框时应选中全部而不是清空已选，关闭 [#4941](https://github.com/tusen-ai/naive-ui/issues/4941)
+- 修复 `n-internal-selection` 在 `disabled` 时，鼠标移动到 `+n` 标签上时，未展示 popover，关闭 [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
 
 ### Features
 
