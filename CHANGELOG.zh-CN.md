@@ -14,6 +14,7 @@
 - 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 - 修复 `n-upload` `render-icon` 属性的类型
 - 修复 `n-tabs` 的 `paneWrapperStyle` 属性在动画后丢失高度
+- 修复 `n-tree` 在级联选择下点击半选状态勾选框时应选中全部而不是清空已选，关闭 [#4941](https://github.com/tusen-ai/naive-ui/issues/4941)
 
 ### Features
 
