@@ -33,7 +33,9 @@ export default defineComponent({
     const isNextRef = computed(() => NCarousel.isNext(indexRef.value))
     const isActiveRef = computed(() => NCarousel.isActive(indexRef.value))
     const styleRef = computed(() => NCarousel.getSlideStyle(indexRef.value))
-    onMounted(() => NCarousel.addSlide(selfElRef.value))
+    onMounted(() => {
+      NCarousel.addSlide(selfElRef.value)
+    })
     onBeforeUnmount(() => {
       NCarousel.removeSlide(selfElRef.value)
     })
@@ -83,8 +85,7 @@ export default defineComponent({
         style={style}
         // We use ts-ignore for vue-tsc, since it seems to patch native event
         // for vue components
-        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
-        // @ts-ignore
+        // @ts-expect-error vue's tsx has type for capture events
         onClickCapture={this.handleClick}
       >
         {slots.default?.({

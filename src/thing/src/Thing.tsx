@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   computed,
-  CSSProperties,
+  type CSSProperties,
   Fragment,
-  PropType
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'

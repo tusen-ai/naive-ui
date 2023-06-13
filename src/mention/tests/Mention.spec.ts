@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { NMention } from '../index'
 
@@ -196,8 +196,8 @@ describe('n-mention', () => {
       props: { options, 'on-blur': onBlur }
     })
 
-    await wrapper.find('input').element.focus()
-    await wrapper.find('input').element.blur()
+    wrapper.find('input').element.focus()
+    wrapper.find('input').element.blur()
     expect(onBlur).toHaveBeenCalled()
     wrapper.unmount()
   })
@@ -207,7 +207,8 @@ describe('n-mention', () => {
       attachTo: document.body,
       props: { options }
     })
-    await wrapper.vm.focus()
+    wrapper.vm.focus()
+    await nextTick()
     expect(wrapper.find('.n-input').classes()).toContain('n-input--focus')
     wrapper.unmount()
   })
@@ -217,8 +218,9 @@ describe('n-mention', () => {
       attachTo: document.body,
       props: { options }
     })
-    await wrapper.vm.focus()
-    await wrapper.vm.blur()
+    wrapper.vm.focus()
+    wrapper.vm.blur()
+    await nextTick()
     expect(wrapper.find('.n-input').classes()).not.toContain('n-input--focus')
     wrapper.unmount()
   })

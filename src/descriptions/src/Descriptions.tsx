@@ -2,9 +2,9 @@ import {
   computed,
   h,
   defineComponent,
-  PropType,
-  VNode,
-  CSSProperties
+  type PropType,
+  type VNode,
+  type CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -21,6 +21,7 @@ import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
+import { repeat } from 'seemly'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
@@ -305,7 +306,19 @@ export default defineComponent({
         ) : null}
         <div class={`${mergedClsPrefix}-descriptions-table-wrapper`}>
           <table class={`${mergedClsPrefix}-descriptions-table`}>
-            <tbody>{rows}</tbody>
+            <tbody>
+              {labelPlacement === 'top' && (
+                <tr
+                  class={`${mergedClsPrefix}-descriptions-table-row`}
+                  style={{
+                    visibility: 'collapse'
+                  }}
+                >
+                  {repeat(compitableColumn * 2, <td />)}
+                </tr>
+              )}
+              {rows}
+            </tbody>
           </table>
         </div>
       </div>

@@ -92,6 +92,8 @@ debug.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur. | 2.34.0 |
+| blurInput | `() => void` | Input blur. | NEXT_VERSION |
 | focus | `() => void` | Focus. | 2.34.0s |
+| focusInput | `() => void` | Input focus. | NEXT_VERSION |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

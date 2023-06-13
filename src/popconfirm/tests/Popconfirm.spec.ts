@@ -117,5 +117,6 @@ describe('n-popconfirm', () => {
     expect(document.querySelector('.n-popconfirm__action')?.textContent).toBe(
       'test-action'
     )
+    wrapper.unmount()
   })
 })

@@ -1,9 +1,13 @@
-import { defineComponent, PropType, VNodeChild, h } from 'vue'
+import { defineComponent, type PropType, type VNodeChild, h } from 'vue'
 import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
 import type { DataTableTheme } from '../../styles'
-import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
+import type {
+  TableBaseColumn,
+  InternalRowData,
+  SummaryCell
+} from '../interface'
 
 export default defineComponent({
   name: 'DataTableCell',

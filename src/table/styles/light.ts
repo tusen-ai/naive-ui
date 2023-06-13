@@ -2,7 +2,7 @@ import { composite } from 'seemly'
 import sizeVariables from './_common'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { Theme } from '../../_mixins'
+import { type Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
