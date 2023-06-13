@@ -326,6 +326,7 @@ export default defineComponent({
       if (tabsPaneWrapperEl) {
         tabsPaneWrapperEl.style.maxHeight = ''
         tabsPaneWrapperEl.style.height = ''
+        tabsPaneWrapperEl.style = props.paneWrapperStyle;
       }
     }
 
