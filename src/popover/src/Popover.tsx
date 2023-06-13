@@ -2,20 +2,25 @@ import {
   h,
   ref,
   computed,
-  createTextVNode,
   defineComponent,
-  PropType,
-  VNode,
+  type PropType,
+  type VNode,
   provide,
-  CSSProperties,
-  ComputedRef,
-  Ref,
+  type CSSProperties,
+  type ComputedRef,
+  type Ref,
   toRef,
   cloneVNode,
   watchEffect,
-  withDirectives
+  withDirectives,
+  Text
 } from 'vue'
-import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
+import {
+  VBinder,
+  VTarget,
+  type FollowerPlacement,
+  type BinderInst
+} from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { zindexable } from 'vdirs'
 import {
@@ -34,7 +39,11 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type { PopoverTrigger, InternalRenderBody } from './interface'
+import type {
+  PopoverTrigger,
+  InternalRenderBody,
+  InternalPopoverInst
+} from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -78,8 +87,6 @@ function appendEvents (
     }
   })
 }
-
-const textVNodeType = createTextVNode('').type
 
 interface BodyInstance {
   syncPosition: () => void
@@ -431,7 +438,7 @@ export default defineComponent({
         doUpdateShow(false)
       }
     })
-    return {
+    const returned = {
       binderInstRef,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
@@ -447,6 +454,7 @@ export default defineComponent({
       handleBlur,
       syncPosition
     }
+    return returned satisfies InternalPopoverInst
   },
   render () {
     const { positionManually, $slots: slots } = this
@@ -461,9 +469,7 @@ export default defineComponent({
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode =
-          triggerVNode.type === textVNodeType
-            ? h('span', [triggerVNode])
-            : triggerVNode
+          triggerVNode.type === Text ? h('span', [triggerVNode]) : triggerVNode
         const handlers = {
           onClick: this.handleClick,
           onMouseenter: this.handleMouseEnter,

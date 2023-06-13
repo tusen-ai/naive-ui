@@ -1,5 +1,5 @@
-import { CNode } from 'css-render'
-import { Ref, onBeforeMount, inject } from 'vue'
+import type { CNode } from 'css-render'
+import { type Ref, onBeforeMount, inject } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import globalStyle from '../_styles/global/index.cssr'

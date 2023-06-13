@@ -2,27 +2,27 @@ import {
   h,
   defineComponent,
   computed,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   provide,
   toRef,
   mergeProps,
   ref,
-  VNode,
-  Ref,
+  type VNode,
+  type Ref,
   cloneVNode,
   vShow,
   onMounted
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
-import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
+import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
 import {
   getSlot,
   flatten,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   isBrowser,
   isNodeVShowFalse
 } from '../../_utils'

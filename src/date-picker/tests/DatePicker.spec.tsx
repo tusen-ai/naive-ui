@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns/esm'
 import { NDatePicker } from '../index'
-import { Value } from '../src/interface'
+import type { Value } from '../src/interface'
 import { dateEnUS } from '../../locales'
 
 describe('n-date-picker', () => {
@@ -205,7 +205,7 @@ describe('n-date-picker', () => {
       }
     })
 
-    const inputEl = await wrapper.find('.n-input__input').find('input')
+    const inputEl = wrapper.find('.n-input__input').find('input')
     expect(inputEl.element.value).toEqual(
       format(1183135260000, 'yyyy-MM-dd', {
         locale: dateEnUS.locale

@@ -7,17 +7,17 @@ import {
   nextTick,
   defineComponent,
   Transition,
-  PropType,
-  CSSProperties,
-  ComponentPublicInstance,
+  type PropType,
+  type CSSProperties,
+  type ComponentPublicInstance,
   onBeforeUnmount
 } from 'vue'
 import {
   VBinder,
   VTarget,
   VFollower,
-  FollowerPlacement,
-  FollowerInst
+  type FollowerPlacement,
+  type FollowerInst
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
@@ -25,18 +25,18 @@ import {
   useTheme,
   useFormItem,
   useConfig,
-  ThemeProps,
+  type ThemeProps,
   useThemeClass
 } from '../../_mixins'
 import {
   call,
   useAdjustedTo,
-  MaybeArray,
-  ExtractPublicPropTypes,
+  type MaybeArray,
+  type ExtractPublicPropTypes,
   resolveSlot
 } from '../../_utils'
-import { sliderLight, SliderTheme } from '../styles'
-import { OnUpdateValueImpl } from './interface'
+import { sliderLight, type SliderTheme } from '../styles'
+import { type OnUpdateValueImpl } from './interface'
 import { isTouchEvent, useRefs } from './utils'
 import style from './styles/index.cssr'
 
@@ -129,7 +129,7 @@ export default defineComponent({
     const { mergedDisabledRef } = formItem
     const precisionRef = computed(() => {
       const { step } = props
-      if (step <= 0 || step === 'mark') return 0
+      if (Number(step) <= 0 || step === 'mark') return 0
       const stepString = step.toString()
       let precision = 0
       if (stepString.includes('.')) {
@@ -357,7 +357,7 @@ export default defineComponent({
     }
     function getRoundValue (value: number): number {
       const { step, min } = props
-      if (step <= 0 || step === 'mark') return value
+      if (Number(step) <= 0 || step === 'mark') return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
@@ -432,7 +432,7 @@ export default defineComponent({
       const { step } = props
       const currentValue = arrifiedValueRef.value[activeIndex]
       const nextValue =
-        step <= 0 || step === 'mark'
+        Number(step) <= 0 || step === 'mark'
           ? currentValue
           : currentValue + step * ratio
       doDispatchValue(
@@ -718,14 +718,18 @@ export default defineComponent({
                               class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
                               style={this.getHandleStyle(value, index)}
-                              onFocus={() => this.handleHandleFocus(index)}
-                              onBlur={() => this.handleHandleBlur(index)}
-                              onMouseenter={() =>
+                              onFocus={() => {
+                                this.handleHandleFocus(index)
+                              }}
+                              onBlur={() => {
+                                this.handleHandleBlur(index)
+                              }}
+                              onMouseenter={() => {
                                 this.handleHandleMouseEnter(index)
-                              }
-                              onMouseleave={() =>
+                              }}
+                              onMouseleave={() => {
                                 this.handleHandleMouseLeave(index)
-                              }
+                              }}
                             >
                               {resolveSlot(this.$slots.thumb, () => [
                                 <div

@@ -1,16 +1,8 @@
-import {
-  computed,
-  defineComponent,
-  h,
-  PropType,
-  CSSProperties,
-  Ref,
-  provide,
-  toRef
-} from 'vue'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import type { PropType, CSSProperties, Ref } from 'vue'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'

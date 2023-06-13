@@ -1,4 +1,4 @@
-import { inject, computed, ComputedRef, Ref, watchEffect } from 'vue'
+import { inject, computed, type ComputedRef, type Ref, watchEffect } from 'vue'
 import type { HLJSApi } from 'highlight.js'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import { warn } from '../_utils'

@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef } from 'vue'
+import { computed, ref, type ComputedRef } from 'vue'
 import { call } from '../../_utils'
 import type {
   ColumnKey,

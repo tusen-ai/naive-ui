@@ -5,8 +5,8 @@ import {
   computed,
   defineComponent,
   renderList,
-  PropType,
-  CSSProperties
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'

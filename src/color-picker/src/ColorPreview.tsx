@@ -1,5 +1,5 @@
-import { defineComponent, h, PropType } from 'vue'
-import { ColorPickerMode, convertColor, getModeFromValue } from './utils'
+import { defineComponent, h, type PropType } from 'vue'
+import { type ColorPickerMode, convertColor, getModeFromValue } from './utils'
 
 export default defineComponent({
   name: 'ColorPreview',

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick } from 'vue'
-import { NDialogProvider, useDialog, NDialog, DialogProps } from '../index'
+import { NDialogProvider, useDialog, NDialog, type DialogProps } from '../index'
 
 const Provider = defineComponent({
   render () {
@@ -86,9 +86,10 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => (
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(document.querySelector('.n-button__icon')).not.toEqual(null)
     wrapper.unmount()
   })
@@ -113,9 +114,8 @@ describe('n-dialog', () => {
     document
       .querySelector('.n-modal-mask')
       ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    await nextTick(() => {
-      expect(document.querySelector('.n-dialog')).not.toBeNull()
-    })
+    await nextTick()
+    expect(document.querySelector('.n-dialog')).not.toBeNull()
     wrapper.unmount()
   })
 
@@ -134,9 +134,10 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => (
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     document
       .querySelector('.n-modal-mask')
       ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -160,9 +161,10 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => (
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('color: rgb(79, 178, 51);')
@@ -176,41 +178,46 @@ describe('n-dialog', () => {
     const TestSuccess = createTestComponent('success')
     const TestWarning = createTestComponent('warning')
 
-    const wrapperCreate = await mount(() => (
+    const wrapperCreate = mount(() => (
       <Provider>{{ default: () => <TestCreate /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('--n-icon-color: #18a058;')
     wrapperCreate.unmount()
 
-    const wrapperError = await mount(() => (
+    const wrapperError = mount(() => (
       <Provider>{{ default: () => <TestError /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('--n-icon-color: #d03050;')
     wrapperError.unmount()
 
-    const wrapperInfo = await mount(() => (
+    const wrapperInfo = mount(() => (
       <Provider>{{ default: () => <TestInfo /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('--n-icon-color: #2080f0;')
     wrapperInfo.unmount()
 
-    const wrapperSuccess = await mount(() => (
+    const wrapperSuccess = mount(() => (
       <Provider>{{ default: () => <TestSuccess /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('--n-icon-color: #18a058;')
     wrapperSuccess.unmount()
 
-    const wrapperWarning = await mount(() => (
+    const wrapperWarning = mount(() => (
       <Provider>{{ default: () => <TestWarning /> }}</Provider>
     ))
+    await nextTick()
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
     ).toContain('--n-icon-color: #f0a020;')
@@ -219,18 +226,20 @@ describe('n-dialog', () => {
 
   it('should work with `bordered` option', async () => {
     const Test = createTestComponent('info', { bordered: true })
-    const wrapper = await mount(() => (
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(document.querySelector('.n-dialog--bordered')).not.toEqual(null)
     wrapper.unmount()
   })
 
   it('should work with `closable` option', async () => {
     const Test = createTestComponent('info', { closable: false })
-    const wrapper = await mount(() => (
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(document.querySelector('.n-base-icon')).not.toEqual(null)
     wrapper.unmount()
   })
@@ -239,13 +248,13 @@ describe('n-dialog', () => {
     const TestLeft = createTestComponent('info', { iconPlacement: 'left' })
     const TestTop = createTestComponent('info', { iconPlacement: 'top' })
 
-    const wrapperLeft = await mount(() => (
+    const wrapperLeft = mount(() => (
       <Provider>{{ default: () => <TestLeft /> }}</Provider>
     ))
-    const wrapperTop = await mount(() => (
+    const wrapperTop = mount(() => (
       <Provider>{{ default: () => <TestTop /> }}</Provider>
     ))
-
+    await nextTick()
     expect(document.querySelector('.n-dialog--icon-left')).not.toEqual(null)
     wrapperLeft.unmount()
     expect(document.querySelector('.n-dialog--icon-top')).not.toEqual(null)
@@ -253,23 +262,25 @@ describe('n-dialog', () => {
   })
 
   it('should work with `negative-text` option', async () => {
-    const Test = createTestComponent('info', { negativeText: 'test' })
-    const wrapper = await mount(() => (
+    const Test = createTestComponent('info', { negativeText: 'test1' })
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(document.querySelector('.n-button__content')?.textContent).toBe(
-      'test'
+      'test1'
     )
     wrapper.unmount()
   })
 
   it('should work with `positive-text` option', async () => {
-    const Test = createTestComponent('info', { positiveText: 'test' })
-    const wrapper = await mount(() => (
+    const Test = createTestComponent('info', { positiveText: 'test2' })
+    const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
+    await nextTick()
     expect(document.querySelector('.n-button__content')?.textContent).toBe(
-      'test'
+      'test2'
     )
     wrapper.unmount()
   })

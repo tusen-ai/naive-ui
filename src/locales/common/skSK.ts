@@ -119,6 +119,7 @@ const skSK: NLocale = {
     tipClockwise: 'V smere hodinových ručičiek',
     tipZoomOut: 'Oddialiť',
     tipZoomIn: 'Priblížiť',
+    tipDownload: 'Sťahovať',
     tipClose: 'Zavrieť (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'

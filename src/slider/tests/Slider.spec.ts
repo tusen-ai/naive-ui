@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NSlider } from '../index'
+import { nextTick } from 'vue'
 
 describe('n-slider', () => {
   it('should work with import on demand', () => {
@@ -15,6 +16,7 @@ describe('n-slider', () => {
 
     const sliderRailFill = wrapper.find('.n-slider-rail__fill')
     expect((sliderRailFill.element as HTMLElement).style.width).toEqual('23%')
+    wrapper.unmount()
   })
 
   it('should work with `marks`', async () => {
@@ -40,6 +42,7 @@ describe('n-slider', () => {
 
     expect((sliderMarks[1].element as HTMLElement).style.left).toEqual('75%')
     expect(sliderMarks[1].text()).toEqual('不错')
+    wrapper.unmount()
   })
 
   it('accept correct callback types', () => {
@@ -62,6 +65,7 @@ describe('n-slider', () => {
 
     await wrapper.setProps({ disabled: true })
     expect(wrapper.find('.n-slider').classes()).toContain('n-slider--disabled')
+    wrapper.unmount()
   })
 
   it('should work with `marks` prop', async () => {
@@ -83,6 +87,7 @@ describe('n-slider', () => {
       'left: 70%'
     )
     expect(wrapper.findAll('.n-slider-mark')[1].text()).toContain('test2')
+    wrapper.unmount()
   })
 
   it('should work with `min` & `max` prop', async () => {
@@ -98,6 +103,7 @@ describe('n-slider', () => {
     const element = sliderRailFill.element as HTMLElement
     expect(element.style.left).toEqual('0%')
     expect(element.style.width).toEqual('23%')
+    wrapper.unmount()
   })
 
   it('should work with `range` & `defaultValue` prop', async () => {
@@ -114,6 +120,7 @@ describe('n-slider', () => {
     const element = sliderRailFill.element as HTMLElement
     expect(element.style.left).toEqual('24%')
     expect(element.style.width).toEqual('25%')
+    wrapper.unmount()
   })
 
   it('should work with `range` & `min` & `max` prop', async () => {
@@ -130,6 +137,7 @@ describe('n-slider', () => {
     const element = sliderRailFill.element as HTMLElement
     expect(element.style.left).toEqual('24%')
     expect(element.style.width).toEqual('40%')
+    wrapper.unmount()
   })
 
   it('should work with `vertical` prop', async () => {
@@ -144,6 +152,7 @@ describe('n-slider', () => {
     const firstHandle = wrapper.find('.n-slider-handle-wrapper')
     expect((sliderRailFill.element as HTMLElement).style.height).toEqual('77%')
     expect((firstHandle.element as HTMLElement).style.bottom).toEqual('77%')
+    wrapper.unmount()
   })
 
   it('should work with `range` & `vertical` prop', async () => {
@@ -165,6 +174,7 @@ describe('n-slider', () => {
     expect(
       wrapper.findAll('.n-slider-handle-wrapper')[1].attributes('style')
     ).toContain('bottom: 49%')
+    wrapper.unmount()
   })
 
   it('should work with `reverse` prop', async () => {
@@ -176,6 +186,7 @@ describe('n-slider', () => {
 
     await wrapper.setProps({ reverse: true })
     expect(wrapper.find('.n-slider').classes()).toContain('n-slider--reverse')
+    wrapper.unmount()
   })
 
   it('should slided to the specific mark when step is `mark`', async () => {
@@ -195,7 +206,9 @@ describe('n-slider', () => {
     const slider = wrapper.find('.n-slider')
     const handle = wrapper.find('.n-slider-handle-wrapper')
     ;(slider.element as HTMLElement).style.width = '100px'
-    await (slider.element as HTMLElement).dispatchEvent(mouseDown)
+    ;(slider.element as HTMLElement).dispatchEvent(mouseDown)
+    await nextTick()
     expect((handle.element as HTMLElement).style.left).toEqual('30%')
+    wrapper.unmount()
   })
 })

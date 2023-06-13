@@ -1,7 +1,7 @@
 import { popselectLight } from '../../popselect/styles'
 import { selectLight } from '../../select/styles'
 import { inputLight } from '../../input/styles'
-import { commonLight, ThemeCommonVars } from '../../_styles/common'
+import { commonLight, type ThemeCommonVars } from '../../_styles/common'
 import commonVariables from './_common'
 import { createTheme } from '../../_mixins'
 

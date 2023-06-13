@@ -3,18 +3,18 @@ import {
   inject,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
-  ComputedRef,
+  type ComputedRef,
   markRaw,
-  ExtractPropTypes
+  type ExtractPropTypes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
 import { hash } from 'css-render'
 import { warn } from '../../_utils'
-import { defaultClsPrefix, Hljs } from '../../_mixins'
-import { NDateLocale, NLocale } from '../../locales'
+import { defaultClsPrefix, type Hljs } from '../../_mixins'
+import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalTheme,
   GlobalThemeOverrides,

@@ -26,9 +26,9 @@ describe('n-steps', () => {
       }
     })
 
-    wrapper
-      .findAll('.n-step')
-      .map((item) => expect(item.attributes('style')).toContain(processStyle))
+    wrapper.findAll('.n-step').forEach((item) => {
+      expect(item.attributes('style')).toContain(processStyle)
+    })
 
     await wrapper.setProps({ current: 1 })
     expect(wrapper.findAll('.n-step')[0].attributes('style')).toContain(

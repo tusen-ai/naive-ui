@@ -1,4 +1,4 @@
-import { PropType, VNodeChild } from 'vue'
+import type { PropType, VNodeChild } from 'vue'
 import type { ButtonProps } from '../../button'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { keysOf } from '../../_utils'

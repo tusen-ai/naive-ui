@@ -47,11 +47,12 @@ The following list is sorted by 'Config' column.
 | Language                  | Config | Date config | Version |
 | ------------------------- | ------ | ----------- | ------- |
 | Arabic (العربية)          | arDZ   | dateArDZ    | 2.34.0  |
-| German (Germany)          | deDE   | dateDeDe    |         |
+| German (Germany)          | deDE   | dateDeDE    |         |
 | English (British)         | enGB   | dateEnGB    | 2.25.1  |
 | English                   | enUS   | dateEnUS    |         |
 | Esperanto                 | eo     | dateEo      | 2.25.2  |
 | Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| Persian                   | faIR   | dateFaIR    | 2.34.4  |
 | French                    | frFR   | dateFrFR    |         |
 | Bahasa Indonesia          | idID   | dateIdID    |         |
 | Italiano                  | itIT   | dateItIT    | 2.24.2  |
