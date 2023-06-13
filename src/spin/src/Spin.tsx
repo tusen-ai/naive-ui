@@ -17,7 +17,6 @@ import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
-import { debounce, isNumber } from 'lodash-es'
 
 const STROKE_WIDTH = {
   small: 20,
@@ -49,10 +48,7 @@ export const spinProps = {
     },
     default: undefined
   },
-  delay: {
-    type: Number,
-    default: undefined
-  }
+  delay: Number
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
@@ -111,28 +107,29 @@ export default defineComponent({
       )
       : undefined
 
-    const shouldDelay = computed(
-      () => isNumber(props.delay) && props.delay !== 0
-    )
     const compitableShow = useCompitable(props, ['spinning', 'show'])
-    const spanning = ref(false)
+    const activeRef = ref(false)
 
     watchEffect((onCleanup) => {
-      if (compitableShow.value && shouldDelay.value) {
-        const debouncedShow = debounce(
-          () => (spanning.value = true),
-          props.delay
-        )
-        debouncedShow()
-        onCleanup(() => debouncedShow.cancel())
-      } else {
-        spanning.value = compitableShow.value
+      let timerId: number
+      if (compitableShow.value) {
+        const { delay } = props
+        if (delay) {
+          timerId = window.setTimeout(() => {
+            activeRef.value = true
+          }, props.delay)
+          onCleanup(() => {
+            clearTimeout(timerId)
+          })
+          return
+        }
       }
+      activeRef.value = compitableShow.value
     })
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      spanning,
+      active: activeRef,
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
         if (strokeWidth !== undefined) return strokeWidth
@@ -186,14 +183,14 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-spin-content`,
-            this.spanning && `${mergedClsPrefix}-spin-content--spinning`
+            this.active && `${mergedClsPrefix}-spin-content--spinning`
           ]}
         >
           {$slots}
         </div>
         <Transition name="fade-in-transition">
           {{
-            default: () => (this.spanning ? icon : null)
+            default: () => (this.active ? icon : null)
           }}
         </Transition>
       </div>
