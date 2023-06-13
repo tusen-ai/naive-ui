@@ -13,6 +13,7 @@
 - Fix `n-upload`'s `data` prop type can't include `Blob` element.
 - Fix `n-select` allows option to be created with existed label, closes [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 - Fix `n-upload`'s `render-icon` prop's type.
+- Fix `n-tree` should check all items instead of uncheck all if indeterminate checkbox is clicked, closes [#4941](https://github.com/tusen-ai/naive-ui/issues/4941).
 
 ### Features
 
