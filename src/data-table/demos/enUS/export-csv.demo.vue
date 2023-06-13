@@ -4,9 +4,14 @@
 
 <template>
   <n-space vertical :size="12">
-    <n-button @click="exportCsv">
-      Export Csv
-    </n-button>
+    <n-space>
+      <n-button @click="exportCsv">
+        Export Csv
+      </n-button>
+      <n-button @click="exportSorterAndFilterCsv">
+        Export Sorter & Filter Csv
+      </n-button>
+    </n-space>
     <n-data-table
       ref="tableRef"
       :columns="columns"
@@ -18,9 +23,9 @@
 </template>
 
 <script lang="ts">
-import { h, defineComponent, ref } from 'vue'
-import { DataTableInst, NButton, useMessage } from 'naive-ui'
-import type { DataTableColumns } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
+import { DataTableColumns, DataTableInst } from 'naive-ui'
+import { RowData } from '../../src/interface'
 
 type Song = {
   key: number
@@ -29,44 +34,36 @@ type Song = {
   address: string
 }
 
-const createColumns = ({
-  play
-}: {
-  play: (row: Song) => void
-}): DataTableColumns<Song> => {
-  return [
-    {
-      title: 'Name',
-      key: 'name',
-      sorter: 'default'
-    },
-    {
-      title: 'Age',
-      key: 'age',
-      sorter: (row1, row2) => row1.age - row2.age
-    },
-    {
-      title: 'Address',
-      key: 'address'
-    },
-    {
-      title: 'Action',
-      key: 'actions',
-      render (row) {
-        return h(
-          NButton,
-          {
-            strong: true,
-            tertiary: true,
-            size: 'small',
-            onClick: () => play(row)
-          },
-          { default: () => 'Play' }
-        )
+const columns: DataTableColumns<RowData> = [
+  {
+    title: 'Name',
+    key: 'name',
+    sorter: 'default'
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    sorter: (row1: object, row2: object) =>
+      (row1 as Song).age - (row2 as Song).age
+  },
+  {
+    title: 'Address',
+    key: 'address',
+    filterOptions: [
+      {
+        label: 'London',
+        value: 'London'
+      },
+      {
+        label: 'New York',
+        value: 'New York'
       }
+    ],
+    filter: (value: string | number, row: object) => {
+      return !!~(row as Song).address.indexOf(value as string)
     }
-  ]
-}
+  }
+]
 
 const data: Song[] = [
   {
@@ -97,21 +94,23 @@ const data: Song[] = [
 
 export default defineComponent({
   setup () {
-    const message = useMessage()
     const tableRef = ref<DataTableInst>()
 
     const exportCsv = () =>
       tableRef.value?.exportCsv({ fileName: 'data-table' })
 
+    const exportSorterAndFilterCsv = () =>
+      tableRef.value?.exportCsv({
+        fileName: 'sorter-filter',
+        originalData: false
+      })
+
     return {
       data,
       tableRef,
       exportCsv,
-      columns: createColumns({
-        play (row: Song) {
-          message.info(`Play ${row.name}`)
-        }
-      }),
+      exportSorterAndFilterCsv,
+      columns,
       pagination: false as const
     }
   }
