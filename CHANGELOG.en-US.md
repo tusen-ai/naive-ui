@@ -25,6 +25,7 @@
 - `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-image-group` adds `on-preview-prev` `on-preview-next` prop
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
+- `n-data-table` adds `exportCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 
 ## 2.34.4
 
