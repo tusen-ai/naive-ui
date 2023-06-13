@@ -26,11 +26,7 @@ export default defineComponent({
       }
     }
     function handleUpdateValue (value: boolean): void {
-      if (props.indeterminate) {
-        doCheck(false)
-      } else {
-        doCheck(value)
-      }
+      doCheck(value)
     }
     return {
       handleUpdateValue,
