@@ -13,6 +13,7 @@
 - 修复 `n-upload` 的 `data` 属性类型不能包含 `Blob` 元素
 - 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 - 修复 `n-upload` `render-icon` 属性的类型
+- 修复 `n-tabs` 的 `paneWrapperStyle` 属性在动画后丢失高度
 
 ### Features
 
