@@ -90,4 +90,51 @@ describe('n-spin', () => {
     expect(wrapper.find('circle').attributes('stroke-width')).toEqual('40')
     wrapper.unmount()
   })
+
+  it('should work with `delay` prop', async () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        show: true,
+        delay: 1000
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
+    await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000))
+
+    expect(wrapper.find('.n-spin-content').classes()).toContain(
+      'n-spin-content--spinning'
+    )
+  })
+
+  it('should `delay` prop not delay close spin', async () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        show: true,
+        delay: 1000
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
+    await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000))
+
+    expect(wrapper.find('.n-spin-content').classes()).toContain(
+      'n-spin-content--spinning'
+    )
+
+    await wrapper.setProps({
+      show: false
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
+  })
 })

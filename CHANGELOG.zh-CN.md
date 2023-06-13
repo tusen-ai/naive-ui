@@ -57,6 +57,7 @@
 - `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
 - `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
 - `n-tabs` 新增 `placement` 属性
+- `n-spin` 新增 `delay` 属性，
 
 ### i18n
 

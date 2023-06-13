@@ -51,11 +51,11 @@
 - `n-data-table` adds `titleAlign` prop, closes [#3954](https://github.com/tusen-ai/naive-ui/issues/3954).
 - `n-rate` exposes `index` in the default slot, closes [#4413](https://github.com/tusen-ai/naive-ui/issues/4413).
 - `n-scrollbar` adds `size` prop, closes [#3896](https://github.com/tusen-ai/naive-ui/issues/3896).
-- `n-select` adds `keyboard` prop, closes [#4340](https://github.com/tusen-ai/naive-ui/issues/4340).
 - `n-data-table`'s `render-expand-icon` add `expanded` param, closes [#4439](https://github.com/tusen-ai/naive-ui/issues/4439).
 - `n-tabs` adds `pane-wrapper-class` `pane-wrapper-style` prop.
 - `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
 - `n-tabs` adds `placement` prop.
+- `n-spin` adds `delay` prop.
 
 ### i18n
 
