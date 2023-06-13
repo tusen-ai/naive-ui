@@ -8,6 +8,10 @@ export interface PopoverInst {
   setShow: (value: boolean) => void
 }
 
+export type InternalPopoverInst = PopoverInst & {
+  getMergedShow: () => boolean
+}
+
 export type PopoverBodyInjection = Ref<HTMLElement | null> | null
 
 export const popoverBodyInjectionKey =

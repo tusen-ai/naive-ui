@@ -16,15 +16,16 @@ import {
   type VNodeChild
 } from 'vue'
 import Schema from 'async-validator'
-import type {
-  ValidateError,
-  RuleItem,
-  ValidateOption
-} from 'async-validator'
+import type { ValidateError, RuleItem, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { type ThemeProps, useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import {
   warn,
   createKey,

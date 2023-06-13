@@ -718,12 +718,18 @@ export default defineComponent({
                               class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
                               style={this.getHandleStyle(value, index)}
-                              onFocus={() => { this.handleHandleFocus(index) }}
-                              onBlur={() => { this.handleHandleBlur(index) }}
-                              onMouseenter={() => { this.handleHandleMouseEnter(index) }
-                              }
-                              onMouseleave={() => { this.handleHandleMouseLeave(index) }
-                              }
+                              onFocus={() => {
+                                this.handleHandleFocus(index)
+                              }}
+                              onBlur={() => {
+                                this.handleHandleBlur(index)
+                              }}
+                              onMouseenter={() => {
+                                this.handleHandleMouseEnter(index)
+                              }}
+                              onMouseleave={() => {
+                                this.handleHandleMouseLeave(index)
+                              }}
                             >
                               {resolveSlot(this.$slots.thumb, () => [
                                 <div

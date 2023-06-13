@@ -7,35 +7,22 @@ Not too simple, but good-looking.
   :key="(row) => row.key"
   :columns="columns"
   :data="data"
-  :pagination="pagination"
+  :pagination="paginationRef"
+  :on-update:page="handlePageChange"
 />
-<pre>{{ JSON.stringify(data, null, 2) }}</pre>
 ```
 
 ```js
-import { h, defineComponent, ref, nextTick } from 'vue'
+import { h, defineComponent, ref, nextTick, computed } from 'vue'
 import { NInput } from 'naive-ui'
 
-const createData = () => [
-  {
-    key: 0,
-    name: 'John Brown',
-    age: '32',
-    address: 'New York No. 1 Lake Park'
-  },
-  {
-    key: 1,
-    name: 'Jim Green',
-    age: '42',
-    address: 'London No. 1 Lake Park'
-  },
-  {
-    key: 2,
-    name: 'Joe Black',
-    age: '32',
-    address: 'Sidney No. 1 Lake Park'
-  }
-]
+const createData = () =>
+  Array.from({ length: 100 }).map((_, index) => ({
+    key: index,
+    name: `John Brown ${index}`,
+    age: (Math.random() * 40) | 0,
+    address: `New York No. ${index} Lake Park`
+  }))
 
 const ShowOrEdit = defineComponent({
   props: {
@@ -60,6 +47,7 @@ const ShowOrEdit = defineComponent({
       h(
         'div',
         {
+          style: 'min-height: 22px',
           onClick: handleOnClick
         },
         isEdit.value
@@ -80,14 +68,32 @@ const ShowOrEdit = defineComponent({
 export default defineComponent({
   setup () {
     const data = ref(createData())
+
+    const getDataIndex = (key) => {
+      return data.value.findIndex((item) => item.key === key)
+    }
+    const page = ref(1)
+
+    const handlePageChange = (curPage) => {
+      page.value = curPage
+    }
+
+    const paginationRef = computed(() => ({
+      pageSize: 10,
+      page: page.value
+    }))
+
     return {
       data,
+      paginationRef,
+      handlePageChange,
       columns: [
         {
           title: 'Name',
           key: 'name',
           width: 150,
-          render (row, index) {
+          render (row) {
+            const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.name,
               onUpdateValue (v) {
@@ -100,7 +106,8 @@ export default defineComponent({
           title: 'Age',
           key: 'age',
           width: 100,
-          render (row, index) {
+          render (row) {
+            const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.age,
               onUpdateValue (v) {
@@ -112,7 +119,8 @@ export default defineComponent({
         {
           title: 'Address',
           key: 'address',
-          render (row, index) {
+          render (row) {
+            const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.address,
               onUpdateValue (v) {
@@ -121,10 +129,7 @@ export default defineComponent({
             })
           }
         }
-      ],
-      pagination: {
-        pageSize: 10
-      }
+      ]
     }
   }
 })

@@ -1,4 +1,10 @@
-import { h, computed, defineComponent, type PropType, type CSSProperties } from 'vue'
+import {
+  h,
+  computed,
+  defineComponent,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes } from '../../_utils'

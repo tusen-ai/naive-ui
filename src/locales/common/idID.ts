@@ -119,6 +119,7 @@ const idID: NLocale = {
     tipClockwise: 'Searah jarum jam',
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
+    tipDownload: 'Download',
     tipClose: 'Tutup (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom ke ukuran asli'

@@ -22,7 +22,7 @@ no-pane.vue
 update-bar-manually.vue
 bar-width.vue
 trigger.vue
-position-debug.vue
+placement.vue
 ```
 
 ## API
@@ -32,7 +32,7 @@ position-debug.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
-| animated | `boolean` | `false` | Whether to activate tab switching animation. | 2.27.0 |
+| animated | `boolean` | `false` | Whether to activate tab switching animation. It won't have effect if `placement` is `'left'` or `'right'`. | 2.27.0 |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
@@ -40,6 +40,9 @@ position-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |  |
 | pane-class | `string` | `undefined` | Class of the pane. |  |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
+| pane-wrapper-class | `string` | `undefined` | Class of the pane warpper. | 2.34.4 |
+| pane-wrapper-style | `string \| object` | `undefined` | Style of the pane warpper. | 2.34.4 |
+| placement | `'left' \| 'right' \| 'top' \| 'bottom'` | `'top'` | Placement of tabs. It won't work with `n-tabs` whose `type` is `'segment'`. | 2.34.4 |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |  |
 | trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |

@@ -1,4 +1,11 @@
-import { h, computed, inject, defineComponent, type PropType, Transition } from 'vue'
+import {
+  h,
+  computed,
+  inject,
+  defineComponent,
+  type PropType,
+  Transition
+} from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { NBaseLoading, NBaseIcon } from '../../_internal'

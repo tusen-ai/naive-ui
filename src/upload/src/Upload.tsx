@@ -134,7 +134,7 @@ function createXhrHandlers (
 
 function customSubmitImpl (options: {
   inst: Omit<UploadInternalInst, 'isErrorState'>
-  data?: FuncOrRecordOrUndef
+  data?: FuncOrRecordOrUndef<string | Blob>
   headers?: FuncOrRecordOrUndef
   action?: string
   withCredentials?: boolean
@@ -209,10 +209,10 @@ function registerHandler (
   }
 }
 
-function unwrapFunctionValue (
-  data: FuncOrRecordOrUndef,
+function unwrapFunctionValue<T> (
+  data: FuncOrRecordOrUndef<T>,
   file: SettledFileInfo
-): Record<string, string> {
+): Record<string, T> {
   if (typeof data === 'function') {
     return data({ file })
   }
@@ -234,7 +234,7 @@ function setHeaders (
 
 function appendData (
   formData: FormData,
-  data: FuncOrRecordOrUndef,
+  data: FuncOrRecordOrUndef<string | Blob>,
   file: SettledFileInfo
 ): void {
   const dataObject = unwrapFunctionValue(data, file)
@@ -261,7 +261,7 @@ function submitImpl (
     withCredentials: boolean
     responseType: XMLHttpRequestResponseType
     headers: FuncOrRecordOrUndef
-    data: FuncOrRecordOrUndef
+    data: FuncOrRecordOrUndef<string | Blob>
   }
 ): void {
   const request = new XMLHttpRequest()
@@ -303,7 +303,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
-  data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+  data: [Object, Function] as PropType<FuncOrRecordOrUndef<string | Blob>>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
   responseType: {
@@ -375,7 +375,7 @@ export const uploadProps = {
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
-  renderIcon: Object as PropType<RenderIcon>
+  renderIcon: Function as PropType<RenderIcon>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -747,8 +747,7 @@ export default defineComponent({
         accept={this.accept}
         multiple={this.mergedMultiple}
         onChange={this.handleFileInputChange}
-        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-        // @ts-ignore // seems vue-tsc will add the prop, so we can't use expect-error
+        // @ts-expect-error // seems vue-tsc will add the prop, so we can't use expect-error
         webkitdirectory={directory || undefined}
         directory={directory || undefined}
       />

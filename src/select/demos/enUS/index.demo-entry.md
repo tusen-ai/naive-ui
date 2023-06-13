@@ -48,7 +48,7 @@ custom-field.vue
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
 | ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
-| keyboard | `boolean` | `true` | Whether to allow keyboard control. | NEXT_VERSION |
+| keyboard | `boolean` | `true` | Whether to allow keyboard control. | 2.34.4 |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
@@ -114,7 +114,9 @@ custom-field.vue
 
 ### Select Methods
 
-| Name  | Type         | Description | Version |
-| ----- | ------------ | ----------- | ------- |
-| focus | `() => void` | Focus.      | 2.24.2  |
-| blur  | `() => void` | Blur.       | 2.24.2  |
+| Name       | Type         | Description  | Version      |
+| ---------- | ------------ | ------------ | ------------ |
+| focus      | `() => void` | Focus.       | 2.24.2       |
+| focusInput | `() => void` | Input focus. | NEXT_VERSION |
+| blur       | `() => void` | Blur.        | 2.24.2       |
+| blurInput  | `() => void` | Input blur.  | NEXT_VERSION |

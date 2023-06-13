@@ -13,11 +13,7 @@ import {
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  warn
-} from '../../_utils'
+import { call, createInjectionKey, warn } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { collapseLight, type CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -196,6 +192,7 @@ export default defineComponent({
         self: {
           titleFontWeight,
           dividerColor,
+          titlePadding,
           titleTextColor,
           titleTextColorDisabled,
           textColor,
@@ -211,6 +208,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-text-color': textColor,
         '--n-divider-color': dividerColor,
+        '--n-title-padding': titlePadding,
         '--n-title-font-size': titleFontSize,
         '--n-title-text-color': titleTextColor,
         '--n-title-text-color-disabled': titleTextColorDisabled,

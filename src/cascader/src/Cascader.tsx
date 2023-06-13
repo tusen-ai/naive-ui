@@ -14,7 +14,11 @@ import {
   type HTMLAttributes,
   nextTick
 } from 'vue'
-import { createTreeMate, SubtreeNotLoadedError, type CheckStrategy } from 'treemate'
+import {
+  createTreeMate,
+  SubtreeNotLoadedError,
+  type CheckStrategy
+} from 'treemate'
 import {
   VBinder,
   VTarget,

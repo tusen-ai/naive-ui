@@ -9,6 +9,10 @@ export default defineComponent({
       type: String,
       required: true
     },
+    indent: {
+      type: Number,
+      required: true
+    },
     right: Boolean,
     focusable: Boolean,
     disabled: Boolean,
@@ -21,14 +25,12 @@ export default defineComponent({
     const NTree = inject(treeInjectionKey)!
     function doCheck (value: boolean): void {
       const { onCheck } = props
-      if (onCheck) { onCheck(value) }
+      if (onCheck) {
+        onCheck(value)
+      }
     }
     function handleUpdateValue (value: boolean): void {
-      if (props.indeterminate) {
-        doCheck(false)
-      } else {
-        doCheck(value)
-      }
+      doCheck(value)
     }
     return {
       handleUpdateValue,
@@ -43,6 +45,7 @@ export default defineComponent({
       indeterminate,
       disabled,
       focusable,
+      indent,
       handleUpdateValue
     } = this
     return (
@@ -51,6 +54,9 @@ export default defineComponent({
           `${clsPrefix}-tree-node-checkbox`,
           this.right && `${clsPrefix}-tree-node-checkbox--right`
         ]}
+        style={{
+          width: `${indent}px`
+        }}
         data-checkbox
       >
         <NCheckbox

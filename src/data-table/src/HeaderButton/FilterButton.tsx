@@ -4,10 +4,14 @@ import { NBaseIcon } from '../../../_internal'
 import { NPopover } from '../../../popover'
 import RenderFilter from './RenderFilter'
 import NDataTableFilterMenu from './FilterMenu'
-import {
-  dataTableInjectionKey
+import { dataTableInjectionKey } from '../interface'
+import type {
+  ColumnKey,
+  FilterOption,
+  FilterOptionValue,
+  FilterState,
+  TableBaseColumn
 } from '../interface'
-import type { ColumnKey, FilterOption, FilterOptionValue, FilterState, TableBaseColumn } from '../interface'
 import { useConfig } from '../../../_mixins'
 
 function createFilterState (

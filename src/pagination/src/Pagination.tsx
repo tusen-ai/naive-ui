@@ -754,7 +754,9 @@ export default defineComponent({
                             type === 'page' &&
                               `${mergedClsPrefix}-pagination-item--clickable`
                           ]}
-                          onClick={() => { handlePageItemClick(pageItem) }}
+                          onClick={() => {
+                            handlePageItemClick(pageItem)
+                          }}
                           onMouseenter={onMouseenter}
                           onMouseleave={onMouseleave}
                         >

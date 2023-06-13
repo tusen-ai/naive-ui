@@ -15,7 +15,12 @@ import { NButton } from '../../button'
 import { useLocale, useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { call, type ExtractPublicPropTypes, warnOnce, type MaybeArray } from '../../_utils'
+import {
+  call,
+  type ExtractPublicPropTypes,
+  warnOnce,
+  type MaybeArray
+} from '../../_utils'
 import { legacyTransferLight } from '../styles'
 import type { LegacyTransferTheme } from '../styles'
 import NTransferHeader from './TransferHeader'
