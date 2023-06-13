@@ -713,7 +713,7 @@ const Scrollbar = defineComponent({
     } = this
     if (!this.scrollable) return $slots.default?.()
     const triggerIsNone = this.trigger === 'none'
-    const createYRail = (): VNode => {
+    const createYRail = (style?: CSSProperties): VNode => {
       return (
         <div
           ref="yRailRef"
@@ -722,8 +722,11 @@ const Scrollbar = defineComponent({
             `${mergedClsPrefix}-scrollbar-rail--vertical`
           ]}
           data-scrollbar-rail
-          style={this.verticalRailStyle}
-          aria-hidden
+          style={[
+            style as CSSProperties,
+            this.verticalRailStyle as CSSProperties
+          ]}
+          aria-hiddens
         >
           {h(
             (triggerIsNone ? Wrapper : Transition) as any,
@@ -854,7 +857,7 @@ const Scrollbar = defineComponent({
       return (
         <Fragment>
           {scrollbarNode}
-          {createYRail()}
+          {createYRail(this.cssVars)}
         </Fragment>
       )
     } else {
