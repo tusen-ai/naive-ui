@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { NSpin } from '../index'
 import { Reload } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
-
+import { sleep } from 'seemly'
 describe('n-spin', () => {
   it('should work with import on demand', () => {
     mount(NSpin)
@@ -104,7 +104,7 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-content').classes()).not.toContain(
       'n-spin-content--spinning'
     )
-    await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000))
+    await sleep(1000)
 
     expect(wrapper.find('.n-spin-content').classes()).toContain(
       'n-spin-content--spinning'
@@ -124,7 +124,7 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-content').classes()).not.toContain(
       'n-spin-content--spinning'
     )
-    await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000))
+    await sleep(1000)
 
     expect(wrapper.find('.n-spin-content').classes()).toContain(
       'n-spin-content--spinning'
