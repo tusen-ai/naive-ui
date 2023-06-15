@@ -52,6 +52,7 @@
 
 - 更新 zhTW locale
 - 新增 svSE locale
+- 更新 jaJP locale
 
 ## 2.34.4
 

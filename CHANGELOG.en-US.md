@@ -52,6 +52,7 @@
 
 - Update `zhTW` locale.
 - Add `svSE` locale.
+- Update `jaJP` locale.
 
 ## 2.34.4
 
