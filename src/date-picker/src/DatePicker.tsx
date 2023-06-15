@@ -68,7 +68,8 @@ import type {
   OnUpdateFormattedValueImpl,
   DatePickerInst,
   OnConfirmImpl,
-  OnConfirm
+  OnConfirm,
+  MonthStringType
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -153,7 +154,11 @@ export const datePickerProps = {
   onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
   onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
   // deprecated
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  monthStringType: {
+    type: String as PropType<MonthStringType>,
+    default: 'numeric'
+  }
 } as const
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
@@ -761,6 +766,7 @@ export default defineComponent({
       timePickerPropsRef: toRef(props, 'timePickerProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
+      monthStringTypeRef: toRef(props, 'monthStringType'),
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots

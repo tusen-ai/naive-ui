@@ -11,7 +11,12 @@ import { VirtualList } from 'vueuc'
 import { NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
-import type { MonthItem, QuarterItem, YearItem } from '../utils'
+import {
+  type MonthItem,
+  type QuarterItem,
+  type YearItem,
+  getMonthString
+} from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
@@ -71,7 +76,7 @@ export default defineComponent({
           }
         >
           {item.type === 'month'
-            ? item.dateObject.month + 1
+            ? getMonthString(item.dateObject.month, item.monthStringType)
             : item.type === 'quarter'
               ? `Q${item.dateObject.quarter}`
               : item.dateObject.year}
