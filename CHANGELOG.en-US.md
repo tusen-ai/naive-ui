@@ -29,6 +29,7 @@
 - `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-image-group` adds `on-preview-prev` `on-preview-next` prop
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
+- adds `n-qrcode` component, closes [#2535](https://github.com/tusen-ai/naive-ui/issues/2535)
 
 ## 2.34.4
 
