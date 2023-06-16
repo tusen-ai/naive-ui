@@ -15,6 +15,6 @@ border.vue
 
 | 名称     | 类型      | 默认值 | 说明                               | 版本 |
 | -------- | --------- | ------ | ---------------------------------- | ---- |
-| value    | `string`  | `-`    | text information.                  |      |
+| value    | `string`  | `-`    | Text information.                  |      |
 | bordered | `boolean` | `true` | Whether to show the qrcode border. |      |
 | width    | `number`  | `160`  | Width of the qrcode                |
