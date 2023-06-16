@@ -15,7 +15,7 @@ export const qrcodeProps = {
   },
   width: {
     type: Number,
-    default: 160
+    default: 110
   }
 } as const
 
@@ -33,7 +33,8 @@ export default defineComponent({
 
     const generateQRcode = async (): Promise<void> => {
       src.value = await QRCode.toDataURL(props.value || '-', {
-        width: props.width
+        width: props.width,
+        margin: 0
       })
     }
 

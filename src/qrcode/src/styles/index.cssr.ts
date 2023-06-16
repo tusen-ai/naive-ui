@@ -13,6 +13,11 @@ export default c([
               width: fit-content;
               border: 1px solid var(--n-border-color);
               border-radius: var(--n-border-radius) var(--n-border-radius) 0 0;
+              padding:
+                var(--n-padding-top)
+                var(--n-padding-left)
+                var(--n-padding-bottom)
+                var(--n-padding-left);
           `)
         ]
       )
