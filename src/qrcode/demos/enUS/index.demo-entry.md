@@ -13,8 +13,8 @@ border.vue
 
 ### Qrcode Props
 
-| 名称     | 类型      | 默认值 | 说明                               | 版本 |
-| -------- | --------- | ------ | ---------------------------------- | ---- |
-| value    | `string`  | `-`    | Text information.                  |      |
-| bordered | `boolean` | `true` | Whether to show the qrcode border. |      |
-| width    | `number`  | `160`  | Width of the qrcode                |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| value | `string` | `-` | Text information. |  |
+| bordered | `boolean` | `true` | Whether to show the qrcode border. |  |
+| width | `number` | `160` | Width of the qrcode |
