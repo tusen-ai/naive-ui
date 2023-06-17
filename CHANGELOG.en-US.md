@@ -13,6 +13,7 @@
 - Fix `n-upload`'s `data` prop type can't include `Blob` element.
 - Fix `n-select` allows option to be created with existed label, closes [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 - Fix `n-upload`'s `render-icon` prop's type.
+- Fix `n-grid-item`'s suffix prop won't work with responsive config, closes [#4635](https://github.com/tusen-ai/naive-ui/issues/4635)
 - Fix `n-tabs`'s `paneWrapperStyle` prop missing height after animation
 - Fix `n-tree` should check all items instead of uncheck all if indeterminate checkbox is clicked, closes [#4941](https://github.com/tusen-ai/naive-ui/issues/4941).
 - Fix the Popover was not displayed when the `n-internal-selection` was disabled and the mouse was moved over the '+n' tag. closes [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
