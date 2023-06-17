@@ -27,7 +27,6 @@ import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.c
 // --n-label-padding
 export default c([
   cB('checkbox', `
-    line-height: var(--n-label-line-height);
     font-size: var(--n-font-size);
     outline: none;
     cursor: pointer;
@@ -35,13 +34,13 @@ export default c([
     flex-wrap: nowrap;
     align-items: flex-start;
     word-break: break-word;
+    line-height: var(--n-size);
     --n-merged-color-table: var(--n-color-table);
   `, [
+    cM('show-label', 'line-height: var(--n-label-line-height);'),
     c('&:hover', [
       cB('checkbox-box', [
-        cE('border', {
-          border: 'var(--n-border-checked)'
-        })
+        cE('border', 'border: var(--n-border-checked);')
       ])
     ]),
     c('&:focus:not(:active)', [
@@ -123,18 +122,18 @@ export default c([
       cB('checkbox-box', `
         background-color: var(--n-color-disabled);
       `, [
-        cE('border', {
-          border: 'var(--n-border-disabled)'
-        }),
+        cE('border', `
+          border: var(--n-border-disabled);
+        `),
         cB('checkbox-icon', [
-          c('.check-icon, .line-icon', {
-            fill: 'var(--n-check-mark-color-disabled)'
-          })
+          c('.check-icon, .line-icon', `
+            fill: var(--n-check-mark-color-disabled);
+          `)
         ])
       ]),
-      cE('label', {
-        color: 'var(--n-text-color-disabled)'
-      })
+      cE('label', `
+        color: var(--n-text-color-disabled);
+      `)
     ]),
     cB('checkbox-box-wrapper', `
       position: relative;

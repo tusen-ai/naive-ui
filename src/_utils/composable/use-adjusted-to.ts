@@ -1,12 +1,12 @@
 import { useMemo } from 'vooks'
 import { on, off } from 'evtd'
 import {
-  ComponentPublicInstance,
-  ComputedRef,
+  type ComponentPublicInstance,
+  type ComputedRef,
   inject,
   onBeforeUnmount,
   onMounted,
-  PropType,
+  type PropType,
   ref
 } from 'vue'
 import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'

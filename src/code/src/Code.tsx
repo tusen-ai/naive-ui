@@ -6,16 +6,16 @@ import {
   onMounted,
   ref,
   computed,
-  PropType
+  type PropType
 } from 'vue'
 import {
   useTheme,
   useHljs,
-  Hljs,
+  type Hljs,
   useConfig,
-  useThemeClass
+  useThemeClass,
+  type ThemeProps
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { codeLight } from '../styles'
 import type { CodeTheme } from '../styles'
 import style from './styles/index.cssr'

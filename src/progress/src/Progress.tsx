@@ -1,11 +1,17 @@
-import { h, computed, defineComponent, PropType, CSSProperties } from 'vue'
+import {
+  h,
+  computed,
+  defineComponent,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes } from '../../_utils'
+import { createKey, type ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
 import type { ProgressTheme } from '../styles'
 import style from './styles/index.cssr'
-import { Status } from './interface'
+import { type Status } from './interface'
 import Line from './Line'
 import Circle from './Circle'
 import MultipleCircle from './MultipleCircle'

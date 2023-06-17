@@ -8,11 +8,11 @@ import {
   vShow,
   watch,
   computed,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   toRef,
   onBeforeUnmount,
-  VNode,
+  type VNode,
   inject,
   normalizeStyle
 } from 'vue'
@@ -22,6 +22,7 @@ import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
 import { kebabCase } from 'lodash-es'
+import { download } from '../../upload/src/utils'
 import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
@@ -33,10 +34,10 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon, closeIcon } from './icons'
+import { prevIcon, nextIcon, closeIcon, downloadIcon } from './icons'
 import {
   imageContextKey,
-  MoveStrategy,
+  type MoveStrategy,
   imagePreviewSharedProps
 } from './interface'
 import style from './styles/index.cssr'
@@ -337,6 +338,13 @@ export default defineComponent({
       }
     }
 
+    function handleDownloadClick (): void {
+      const src = previewSrcRef.value
+      if (src) {
+        download(src, undefined)
+      }
+    }
+
     function derivePreviewStyle (transition: boolean = true): void {
       const { value: preview } = previewRef
       if (!preview) return
@@ -467,6 +475,7 @@ export default defineComponent({
       },
       zoomIn,
       zoomOut,
+      handleDownloadClick,
       rotateCounterclockwise,
       rotateClockwise,
       handleSwitchPrev,
@@ -595,6 +604,15 @@ export default defineComponent({
                                   {{ default: () => <ZoomInIcon /> }}
                                 </NBaseIcon>,
                                 'tipZoomIn'
+                              )}
+                              {withTooltip(
+                                <NBaseIcon
+                                  clsPrefix={clsPrefix}
+                                  onClick={this.handleDownloadClick}
+                                >
+                                  {{ default: () => downloadIcon }}
+                                </NBaseIcon>,
+                                'tipDownload'
                               )}
                               {withTooltip(
                                 <NBaseIcon

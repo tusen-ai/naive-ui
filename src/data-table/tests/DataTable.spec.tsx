@@ -1,7 +1,6 @@
-import { h, HTMLAttributes, nextTick, ref } from 'vue'
+import { h, type HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { DataTableInst, NDataTable } from '../index'
-import type { DataTableColumns } from '../index'
+import { type DataTableInst, NDataTable, type DataTableColumns } from '../index'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 
@@ -93,7 +92,7 @@ describe('n-data-table', () => {
         onUpdatePage={onPageChange}
       />
     ))
-    await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
+    void wrapper.findAll('.n-pagination-item')[2].trigger('click')
     await nextTick()
     expect(onPageChange).toHaveBeenCalled()
     expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
@@ -361,7 +360,7 @@ describe('n-data-table', () => {
       colClassName: string,
       target: number[]
     ): Promise<boolean> => {
-      const cols = await wrapper.findAll(colClassName)
+      const cols = wrapper.findAll(colClassName)
       const colNums = cols.slice(1).map((item) => Number(item.text()))
       const matchResult = String(colNums) === String(target)
       if (!matchResult) {
@@ -387,7 +386,7 @@ describe('n-data-table', () => {
     const ageDom: HTMLElement | null = document.querySelector('#age-title')
 
     it('chinese: descend, math: false, english: false', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -397,7 +396,8 @@ describe('n-data-table', () => {
       ).toEqual(true)
     })
     it('chinese: descend, math: descend, english: false', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -408,7 +408,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: descend, english: descend', async () => {
-      await englishDom?.click()
+      englishDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -419,7 +420,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: ascend, math: descend, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -430,7 +432,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: descend, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -441,7 +444,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: ascend, english: descend', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -452,7 +456,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: false, english: descend', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 88, 98],
@@ -463,7 +468,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: false, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -492,7 +498,8 @@ describe('n-data-table', () => {
     })
 
     it('age: descend', async () => {
-      await ageDom?.click()
+      ageDom?.click()
+      await nextTick()
       const result =
         (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
         (await checkScoreIsMatched([
@@ -1168,7 +1175,7 @@ describe('props.columns', () => {
     expect(wrapper.findAll('tbody td')[0].attributes('class')).toContain(
       'n-data-table-td--expand'
     )
-    await void wrapper
+    void wrapper
       .findAll('tbody .n-data-table-expand-trigger')[0]
       .trigger('click')
     await nextTick()

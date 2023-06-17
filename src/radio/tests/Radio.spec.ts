@@ -12,6 +12,7 @@ describe('n-radio', () => {
     expect(wrapper.find('.n-radio').classes()).not.toContain('n-radio--checked')
     await wrapper.setProps({ checked: true })
     expect(wrapper.find('.n-radio').classes()).toContain('n-radio--checked')
+    wrapper.unmount()
   })
 
   it('should work with `defaultChecked` prop', async () => {
@@ -20,6 +21,7 @@ describe('n-radio', () => {
 
     wrapper = mount(NRadio, { props: { defaultChecked: false } })
     expect(wrapper.find('.n-radio').classes()).not.toContain('n-radio--checked')
+    wrapper.unmount()
   })
 
   it('should work with `disabled` prop', async () => {
@@ -29,6 +31,7 @@ describe('n-radio', () => {
     )
     await wrapper.setProps({ disabled: true })
     expect(wrapper.find('.n-radio').classes()).toContain('n-radio--disabled')
+    wrapper.unmount()
   })
 
   it('should work with `name` prop', async () => {
@@ -41,6 +44,7 @@ describe('n-radio', () => {
     await wrapper.setProps({ name: 'randomName222' })
 
     expect(radio.attributes('name')).toEqual('randomName222')
+    wrapper.unmount()
   })
 
   it('should render default slot content', async () => {
@@ -49,6 +53,7 @@ describe('n-radio', () => {
     const radio = wrapper.find('.n-radio__label')
 
     expect(radio.text()).toContain('MySlotContent')
+    wrapper.unmount()
   })
 
   it('should work with `label` prop', async () => {
@@ -61,6 +66,7 @@ describe('n-radio', () => {
     await wrapper.setProps({ label: 'MyNewRandomLabel' })
 
     expect(radio.text()).toContain('MyNewRandomLabel')
+    wrapper.unmount()
   })
 
   it('should render default slot content in priority of label', async () => {
@@ -73,12 +79,14 @@ describe('n-radio', () => {
 
     expect(radio.text()).not.toContain('MyRandomLabel')
     expect(radio.text()).toContain('MySlotContent')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NRadio, { props: { size } })
       expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -94,6 +102,7 @@ describe('n-radio', () => {
       expect(onUpdate1).toHaveBeenCalled()
       expect(onUpdate2).toHaveBeenCalled()
     }, 0)
+    wrapper.unmount()
   })
 })
 
@@ -127,6 +136,7 @@ describe('n-radio-group', () => {
     expect(wrapper.findAll('.n-radio')[1].classes()).toContain(
       'n-radio--disabled'
     )
+    wrapper.unmount()
   })
 
   it('should work with `name` prop', async () => {
@@ -152,6 +162,7 @@ describe('n-radio-group', () => {
 
     expect(radio1.attributes('name')).toEqual('randomName222')
     expect(radio2.attributes('name')).toEqual('randomName222')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -170,6 +181,7 @@ describe('n-radio-group', () => {
       expect(
         wrapper.find('.n-radio-group').attributes('style')
       ).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -199,6 +211,7 @@ describe('n-radio-group', () => {
     expect(wrapper.findAll('.n-radio')[0].classes()).not.toContain(
       'n-radio--checked'
     )
+    wrapper.unmount()
   })
 
   it('should work with `on-update:value` prop', async () => {
@@ -218,6 +231,7 @@ describe('n-radio-group', () => {
     await wrapper.findAll('.n-radio')[1].trigger('click')
     setTimeout(() => {
       expect(onUpdate).toHaveBeenCalled()
+      wrapper.unmount()
     }, 0)
   })
 })

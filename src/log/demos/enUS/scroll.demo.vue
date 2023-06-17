@@ -6,16 +6,16 @@ You can easily make log scroll to top or bottom. Also you can make the scroll ac
 <template>
   <n-space vertical>
     <n-button-group>
-      <n-button @click="scrollTo({ position: 'bottom', slient: false })">
+      <n-button @click="scrollTo({ position: 'bottom', silent: false })">
         Scroll To Bottom
       </n-button>
-      <n-button @click="scrollTo({ position: 'bottom', slient: true })">
+      <n-button @click="scrollTo({ position: 'bottom', silent: true })">
         Scroll To Bottom (silent)
       </n-button>
-      <n-button @click="scrollTo({ position: 'top', slient: false })">
+      <n-button @click="scrollTo({ position: 'top', silent: false })">
         Scroll To Top
       </n-button>
-      <n-button @click="scrollTo({ position: 'top', slient: true })">
+      <n-button @click="scrollTo({ position: 'top', silent: true })">
         Scroll To Top (silent)
       </n-button>
     </n-button-group>
@@ -71,7 +71,7 @@ export default defineComponent({
       handleReachBottom () {
         message.info('Reach Bottom')
       },
-      scrollTo (options: { position: 'bottom' | 'top'; slient: boolean }) {
+      scrollTo (options: { position: 'bottom' | 'top'; silent: boolean }) {
         logInstRef.value?.scrollTo(options)
       }
     }

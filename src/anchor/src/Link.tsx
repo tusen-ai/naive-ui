@@ -1,4 +1,4 @@
-import { h, toRef, ref, inject, defineComponent, watch, Ref } from 'vue'
+import { h, toRef, ref, inject, defineComponent, watch, type Ref } from 'vue'
 import { useMemo } from 'vooks'
 import {
   useInjectionCollection,
@@ -6,7 +6,7 @@ import {
 } from '../../_utils/composable'
 import {
   createInjectionKey,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   getTitleAttribute
 } from '../../_utils'
 

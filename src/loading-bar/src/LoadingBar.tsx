@@ -8,8 +8,8 @@ import {
   vShow,
   ref,
   nextTick,
-  PropType,
-  CSSProperties
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'

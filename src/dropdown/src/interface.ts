@@ -1,5 +1,5 @@
-import { TreeNode } from 'treemate'
-import { HTMLAttributes, VNode, VNodeChild } from 'vue'
+import type { TreeNode } from 'treemate'
+import type { HTMLAttributes, VNode, VNodeChild } from 'vue'
 import type {
   MenuOption,
   MenuGroupOption,

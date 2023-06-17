@@ -1,9 +1,16 @@
-import { h, computed, inject, defineComponent, PropType, Transition } from 'vue'
+import {
+  h,
+  computed,
+  inject,
+  defineComponent,
+  type PropType,
+  Transition
+} from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { NBaseLoading, NBaseIcon } from '../../_internal'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
-import { cascaderInjectionKey, TmNode } from './interface'
+import { cascaderInjectionKey, type TmNode } from './interface'
 import { happensIn } from 'seemly'
 
 export default defineComponent({

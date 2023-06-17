@@ -34,7 +34,7 @@ module.exports = {
       'async-validator',
       'css-render',
       'date-fns/esm',
-      'date-fns-tz/esm/getTimezoneOffset',
+      'date-fns-tz/getTimezoneOffset',
       'evtd',
       'highlight.js',
       'lodash-es',

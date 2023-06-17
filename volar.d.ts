@@ -141,6 +141,7 @@ declare module 'vue' {
     NUploadTrigger: typeof import('naive-ui')['NUploadTrigger']
     NWatermark: typeof import('naive-ui')['NWatermark']
     NEquation: typeof import('naive-ui')['NEquation']
+    NPerformantEllipsis: typeof import('naive-ui')['NPerformantEllipsis']
   }
 }
 export {}

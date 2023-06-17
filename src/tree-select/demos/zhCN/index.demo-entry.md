@@ -95,6 +95,8 @@ render-debug.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | blur | `() => void` | 失焦 | 2.34.0 |
+| blurInput | `() => void` | 输入失焦 | NEXT_VERSION |
 | focus | `() => void` | 聚焦 | 2.34.0 |
+| focusInput | `() => void` | 输入聚焦 | NEXT_VERSION |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |

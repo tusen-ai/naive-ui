@@ -1,5 +1,5 @@
 import viVN from 'date-fns/esm/locale/vi'
-import { NDateLocale } from './enUS'
+import { type NDateLocale } from './enUS'
 
 const dateVi: NDateLocale = {
   name: 'vi-VN',

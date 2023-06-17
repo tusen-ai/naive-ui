@@ -1,10 +1,17 @@
-import { h, defineComponent, provide, PropType, Fragment, inject } from 'vue'
+import {
+  h,
+  defineComponent,
+  provide,
+  type PropType,
+  Fragment,
+  inject
+} from 'vue'
 import { render } from '../../_utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
 // eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
-import { TmNode } from './interface'
+import type { TmNode } from './interface'
 import {
   submenuInjectionKey,
   menuInjectionKey,

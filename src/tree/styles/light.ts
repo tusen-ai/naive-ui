@@ -19,6 +19,9 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     fontSize,
+    lineHeight: '1.5',
+    nodeHeight: '30px',
+    nodeWrapperPadding: '3px 0',
     nodeBorderRadius: borderRadiusSmall,
     nodeColorHover: hoverColor,
     nodeColorPressed: pressedColor,
