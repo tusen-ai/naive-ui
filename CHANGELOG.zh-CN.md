@@ -19,6 +19,7 @@
 - 修复 `n-internal-selection` 在 `disabled` 时，鼠标移动到 `+n` 标签上时，未展示 popover，关闭 [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
 - 修复 `n-input` 当 `type` 为 `textarea` 时不显示纵向滚动条的问题，关闭 [#4570](https://github.com/tusen-ai/naive-ui/issues/4570)
 - 修复 `n-alert` 在没有标题且可关闭时，内容样式出现的问题，关闭 [#4588](https://github.com/tusen-ai/naive-ui/issues/4588)
+- 修复 `n-select` 的 `empty` slot 为可交互组件时的行为，关闭 [#4700](https://github.com/tusen-ai/naive-ui/issues/4700)
 
 ### Features
 
