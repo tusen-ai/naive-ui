@@ -11,7 +11,7 @@ export const qrcodeProps = {
   value: String,
   bordered: {
     type: Boolean,
-    default: true as boolean
+    default: true
   },
   width: {
     type: Number,
