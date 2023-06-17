@@ -2,11 +2,11 @@ import {
   h,
   defineComponent,
   computed,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   ref,
   provide,
-  ExtractPropTypes
+  type ExtractPropTypes
 } from 'vue'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarProps, ScrollbarInst } from '../../_internal'

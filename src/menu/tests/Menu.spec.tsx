@@ -2,7 +2,12 @@ import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
 import { h, Comment } from 'vue'
 import { sleep } from 'seemly'
-import { NMenu, MenuOption, MenuGroupOption, MenuDividerOption } from '../index'
+import {
+  NMenu,
+  type MenuOption,
+  type MenuGroupOption,
+  type MenuDividerOption
+} from '../index'
 import { NIcon } from '../../icon'
 
 describe('n-menu', () => {

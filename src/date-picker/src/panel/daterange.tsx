@@ -116,8 +116,12 @@ export default defineComponent({
                       this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
-                onClick={() => this.handleDateClick(dateItem)}
-                onMouseenter={() => this.handleDateMouseEnter(dateItem)}
+                onClick={() => {
+                  this.handleDateClick(dateItem)
+                }}
+                onMouseenter={() => {
+                  this.handleDateMouseEnter(dateItem)
+                }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}
@@ -202,8 +206,12 @@ export default defineComponent({
                       this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
-                onClick={() => this.handleDateClick(dateItem)}
-                onMouseenter={() => this.handleDateMouseEnter(dateItem)}
+                onClick={() => {
+                  this.handleDateClick(dateItem)
+                }}
+                onMouseenter={() => {
+                  this.handleDateMouseEnter(dateItem)
+                }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}

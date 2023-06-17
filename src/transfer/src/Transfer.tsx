@@ -3,8 +3,8 @@ import {
   defineComponent,
   h,
   provide,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   watchEffect,
   toRef
 } from 'vue'
@@ -14,8 +14,12 @@ import { NScrollbar } from '../../_internal'
 import { useFormItem, useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
-import { call, ExtractPublicPropTypes, warnOnce } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import {
+  call,
+  type ExtractPublicPropTypes,
+  warnOnce,
+  type MaybeArray
+} from '../../_utils'
 import { transferLight } from '../styles'
 import type { TransferTheme } from '../styles'
 import NTransferHeader from './TransferHeader'
@@ -23,14 +27,14 @@ import NTransferList from './TransferList'
 import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
 import {
-  OptionValue,
-  Option,
-  Filter,
-  OnUpdateValue,
+  type OptionValue,
+  type Option,
+  type Filter,
+  type OnUpdateValue,
   transferInjectionKey,
-  TransferRenderTargetLabel,
-  TransferRenderSourceList,
-  TransferRenderSourceLabel
+  type TransferRenderTargetLabel,
+  type TransferRenderSourceList,
+  type TransferRenderSourceLabel
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -51,6 +55,8 @@ export const transferProps = {
   },
   virtualScroll: Boolean,
   sourceTitle: String,
+  selectAllText: String,
+  clearText: String,
   targetTitle: String,
   filterable: {
     type: Boolean,
@@ -300,6 +306,8 @@ export default defineComponent({
         >
           <NTransferHeader
             source
+            selectAllText={this.selectAllText}
+            clearText={this.clearText}
             title={this.sourceTitle}
             onCheckedAll={this.handleSourceCheckAll}
             onClearAll={this.handleSourceUncheckAll}

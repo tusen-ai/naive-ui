@@ -1,5 +1,5 @@
-import { VNodeChild, Ref } from 'vue'
-import { CNode } from 'css-render'
+import type { VNodeChild, Ref } from 'vue'
+import type { CNode } from 'css-render'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
@@ -242,7 +242,7 @@ export type Breakpoints = Record<string, number> | undefined
 
 export interface ConfigProviderInjection {
   mergedBreakpointsRef: Ref<Breakpoints | undefined>
-  mergedClsPrefixRef: Ref<string | undefined>
+  mergedClsPrefixRef: Ref<string>
   mergedBorderedRef: Ref<boolean | undefined>
   mergedNamespaceRef: Ref<string | undefined>
   mergedLocaleRef: Ref<NLocale | undefined>

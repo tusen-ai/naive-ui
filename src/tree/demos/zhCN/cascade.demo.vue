@@ -9,6 +9,7 @@
     block-line
     cascade
     checkable
+    :selectable="false"
     :data="data"
     :default-expanded-keys="defaultExpandedKeys"
     :default-checked-keys="defaultCheckedKeys"

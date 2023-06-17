@@ -1,6 +1,6 @@
 import { defineComponent, h, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { ModalProps, NModal } from '../index'
+import { type ModalProps, NModal } from '../index'
 import { NButton } from '../../button'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

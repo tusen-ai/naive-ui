@@ -1,7 +1,7 @@
 <markdown>
 # 滚动到最新
 
-当日志不断增加是总是滚动到最新。
+当日志不断增加时总是滚动到最新。
 </markdown>
 
 <template>
@@ -46,7 +46,7 @@ export default defineComponent({
       watchEffect(() => {
         if (logRef.value) {
           nextTick(() => {
-            logInstRef.value?.scrollTo({ position: 'bottom', slient: true })
+            logInstRef.value?.scrollTo({ position: 'bottom', silent: true })
           })
         }
       })

@@ -5,17 +5,17 @@ import {
   Transition,
   computed,
   provide,
-  PropType,
+  type PropType,
   watch,
   withDirectives,
-  ExtractPropTypes,
-  CSSProperties,
+  type ExtractPropTypes,
+  type CSSProperties,
   toRef,
-  Ref,
+  type Ref,
   watchEffect,
-  VNode
+  type VNode
 } from 'vue'
-import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
+import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns/esm'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -52,7 +52,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { DatePickerType } from './config'
+import { type DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,

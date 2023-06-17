@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onMounted, PropType } from 'vue'
+import { h, defineComponent, ref, onMounted, type PropType } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import NMessage from './Message'
 import { messageProps } from './message-props'

@@ -1,5 +1,5 @@
-import { h, defineComponent, PropType } from 'vue'
-import { Item } from './interface'
+import { h, defineComponent, type PropType } from 'vue'
+import { type Item } from './interface'
 
 export default defineComponent({
   name: 'TimePickerPanelCol',
@@ -34,7 +34,11 @@ export default defineComponent({
             disabled && `${clsPrefix}-time-picker-col__item--disabled`
           ]}
           onClick={
-            onItemClick && !disabled ? () => onItemClick(value) : undefined
+            onItemClick && !disabled
+              ? () => {
+                  onItemClick(value)
+                }
+              : undefined
           }
         >
           {label}

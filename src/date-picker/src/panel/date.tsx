@@ -112,7 +112,9 @@ export default defineComponent({
                       this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
-                onClick={() => this.handleDateClick(dateItem)}
+                onClick={() => {
+                  this.handleDateClick(dateItem)
+                }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.dateObject.date}

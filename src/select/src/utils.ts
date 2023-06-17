@@ -1,4 +1,4 @@
-import { TreeMateOptions } from 'treemate'
+import { type TreeMateOptions } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
