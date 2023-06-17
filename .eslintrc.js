@@ -47,6 +47,7 @@ module.exports = {
         }
       },
       rules: {
+        '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/strict-boolean-expressions': 0,
         '@typescript-eslint/prefer-nullish-coalescing': 0,
         '@typescript-eslint/naming-convention': 0,

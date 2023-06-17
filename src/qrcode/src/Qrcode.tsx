@@ -1,4 +1,4 @@
-import { h, watch, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent, watchEffect } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import QRCode from 'qrcode'
@@ -31,20 +31,12 @@ export default defineComponent({
 
     const src = ref('')
 
-    const generateQRcode = async (): Promise<void> => {
+    watchEffect(async () => {
       src.value = await QRCode.toDataURL(props.value || '-', {
         width: props.width,
         margin: 0
       })
-    }
-
-    watch(
-      props,
-      async () => {
-        await generateQRcode()
-      },
-      { immediate: true }
-    )
+    })
 
     return {
       src,
