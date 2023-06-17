@@ -14,6 +14,10 @@
 - 修复 `n-select` 动态添加选项时，可以添加已存在的选项，关闭 [#4703](https://github.com/tusen-ai/naive-ui/issues/4703)
 - 修复 `n-upload` `render-icon` 属性的类型
 - 修复 `n-grid-item` 属性 suffix 响应式设置不生效，关闭[#4635](https://github.com/tusen-ai/naive-ui/issues/4635)
+- 修复 `n-tabs` 的 `paneWrapperStyle` 属性在动画后丢失高度
+- 修复 `n-tree` 在级联选择下点击半选状态勾选框时应选中全部而不是清空已选，关闭 [#4941](https://github.com/tusen-ai/naive-ui/issues/4941)
+- 修复 `n-internal-selection` 在 `disabled` 时，鼠标移动到 `+n` 标签上时，未展示 popover，关闭 [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
+- 修复 `n-input` 当 `type` 为 `textarea` 时不显示纵向滚动条的问题，关闭 [#4570](https://github.com/tusen-ai/naive-ui/issues/4570)
 
 ### Features
 
@@ -55,6 +59,7 @@
 - `n-tabs` 新增 `pane-wrapper-class` `pane-wrapper-style` 属性
 - `n-collapse` 新增 `titlePadding` 主题变量，关闭 [#4728](https://github.com/tusen-ai/naive-ui/issues/4728)
 - `n-tabs` 新增 `placement` 属性
+- `n-spin` 新增 `delay` 属性，
 
 ### i18n
 
