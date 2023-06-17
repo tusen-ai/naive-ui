@@ -68,8 +68,7 @@ module.exports = {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '^lodash-es$': 'lodash',
-    '^date-fns/esm(.*)$': 'date-fns$1',
-    '^date-fns-tz/esm(.*)$': 'date-fns-tz$1'
+    '^date-fns/esm(.*)$': 'date-fns$1'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

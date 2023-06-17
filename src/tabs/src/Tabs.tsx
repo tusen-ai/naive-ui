@@ -326,6 +326,18 @@ export default defineComponent({
       if (tabsPaneWrapperEl) {
         tabsPaneWrapperEl.style.maxHeight = ''
         tabsPaneWrapperEl.style.height = ''
+        const { paneWrapperStyle } = props
+        if (typeof paneWrapperStyle === 'string') {
+          tabsPaneWrapperEl.style.cssText = paneWrapperStyle
+        } else if (paneWrapperStyle) {
+          const { maxHeight, height } = paneWrapperStyle
+          if (maxHeight !== undefined) {
+            tabsPaneWrapperEl.style.maxHeight = maxHeight as string
+          }
+          if (height !== undefined) {
+            tabsPaneWrapperEl.style.height = height as string
+          }
+        }
       }
     }
 
