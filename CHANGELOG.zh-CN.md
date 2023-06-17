@@ -18,6 +18,7 @@
 - 修复 `n-tree` 在级联选择下点击半选状态勾选框时应选中全部而不是清空已选，关闭 [#4941](https://github.com/tusen-ai/naive-ui/issues/4941)
 - 修复 `n-internal-selection` 在 `disabled` 时，鼠标移动到 `+n` 标签上时，未展示 popover，关闭 [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
 - 修复 `n-input` 当 `type` 为 `textarea` 时不显示纵向滚动条的问题，关闭 [#4570](https://github.com/tusen-ai/naive-ui/issues/4570)
+- 修复 `n-alert` 在没有标题且可关闭时，内容样式出现的问题，关闭 [#4588](https://github.com/tusen-ai/naive-ui/issues/4588)
 
 ### Features
 

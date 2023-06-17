@@ -18,6 +18,7 @@
 - Fix `n-tree` should check all items instead of uncheck all if indeterminate checkbox is clicked, closes [#4941](https://github.com/tusen-ai/naive-ui/issues/4941).
 - Fix the Popover was not displayed when the `n-internal-selection` was disabled and the mouse was moved over the '+n' tag. closes [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
 - Fix `n-input` doesn't display the horizontal scroll bar when `type` is `textarea`, closes [#4570](https://github.com/tusen-ai/naive-ui/issues/4570).
+- Fix `n-alert`'s content style problem, when there is no title and use closable, closes [#4588](https://github.com/tusen-ai/naive-ui/issues/4588).
 
 ### Features
 
