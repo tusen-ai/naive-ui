@@ -1,7 +1,7 @@
 import { h, defineComponent, type PropType, inject } from 'vue'
 import { SwitcherIcon } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
-import { treeInjectionKey } from './interface'
+import { type TmNode, treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTreeSwitcher',
@@ -15,7 +15,11 @@ export default defineComponent({
     selected: Boolean,
     hide: Boolean,
     loading: Boolean,
-    onClick: Function as PropType<(e: MouseEvent) => void>
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    tmNode: {
+      type: Object as PropType<TmNode>,
+      required: true
+    }
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -51,7 +55,8 @@ export default defineComponent({
                   return renderSwitcherIcon ? (
                     renderSwitcherIcon({
                       expanded: props.expanded,
-                      selected: props.selected
+                      selected: props.selected,
+                      option: props.tmNode.rawNode
                     })
                   ) : (
                     <NBaseIcon clsPrefix={clsPrefix} key="switcher">

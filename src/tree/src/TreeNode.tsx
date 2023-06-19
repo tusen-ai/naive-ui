@@ -423,6 +423,7 @@ const TreeNode = defineComponent({
               selected={selected}
               loading={this.loading}
               hide={tmNode.isLeaf}
+              tmNode={this.tmNode}
               indent={indent}
               onClick={this.handleSwitcherClick}
             />

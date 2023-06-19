@@ -33,6 +33,7 @@
 - `n-tree-select` adds `focusInput` `blurInput` methods.
 - `n-image-group` adds `on-preview-prev` `on-preview-next` prop
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
+- `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 
 ## 2.34.4
 
@@ -61,6 +62,7 @@
 - `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
 - `n-tabs` adds `placement` prop.
 - `n-spin` adds `delay` prop.
+
 
 ### i18n
 

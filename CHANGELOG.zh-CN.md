@@ -33,6 +33,7 @@
 - `n-tree-select` 新增 `focusInput` `blurInput` 方法
 - `n-image-group` 新增 `on-preview-prev` `on-preview-next` 属性
 - `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)， [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
+- `n-tree` 为 `render-switcher-icon` 属性添加节点信息，关闭 [#4815](https://github.com/tusen-ai/naive-ui/issues/4815)
 
 ## 2.34.4
 
