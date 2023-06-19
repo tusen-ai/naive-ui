@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, type PropType } from 'vue'
 import { NButton } from '../../button'
 import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
@@ -10,6 +10,8 @@ export default defineComponent({
       type: String as PropType<'small' | 'medium' | 'large'>,
       required: true
     },
+    selectAllText: String,
+    clearText: String,
     source: Boolean,
     onCheckedAll: Function as PropType<() => void>,
     onClearAll: Function as PropType<() => void>,
@@ -29,7 +31,8 @@ export default defineComponent({
     } = inject(transferInjectionKey)!
     const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source, onClearAll, onCheckedAll } = props
+      const { source, onClearAll, onCheckedAll, selectAllText, clearText } =
+        props
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const { value: locale } = localeRef
@@ -54,7 +57,9 @@ export default defineComponent({
             >
               {{
                 default: () =>
-                  allCheckedRef.value ? locale.unselectAll : locale.selectAll
+                  allCheckedRef.value
+                    ? clearText || locale.unselectAll
+                    : selectAllText || locale.selectAll
               }}
             </NButton>
           )}

@@ -1,7 +1,7 @@
-import { Ref, onBeforeMount, watchEffect, computed } from 'vue'
+import { type Ref, onBeforeMount, watchEffect, computed } from 'vue'
 import { exists } from 'css-render'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
-import {
+import type {
   RtlEnabledState,
   RtlItem
 } from '../config-provider/src/internal-interface'

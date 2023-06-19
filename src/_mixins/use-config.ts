@@ -1,4 +1,4 @@
-import { inject, computed, ComputedRef, Ref } from 'vue'
+import { inject, computed, type ComputedRef, type Ref, shallowRef } from 'vue'
 import type {
   RtlEnabledState,
   GlobalComponentConfig,
@@ -24,7 +24,7 @@ export default function useConfig (
     inlineThemeDisabled: boolean | undefined
     mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
     mergedBorderedRef: ComputedRef<boolean>
-    mergedClsPrefixRef: ComputedRef<string>
+    mergedClsPrefixRef: Ref<string>
     mergedBreakpointsRef: Ref<Breakpoints> | undefined
     mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
     namespaceRef: ComputedRef<string | undefined>
@@ -45,10 +45,16 @@ export default function useConfig (
         true
       )
     }),
-    mergedClsPrefixRef: computed(() => {
-      const clsPrefix = NConfigProvider?.mergedClsPrefixRef.value
-      return clsPrefix || defaultClsPrefix
-    }),
+    mergedClsPrefixRef: NConfigProvider
+      ? NConfigProvider.mergedClsPrefixRef
+      : shallowRef(defaultClsPrefix),
     namespaceRef: computed(() => NConfigProvider?.mergedNamespaceRef.value)
   }
+}
+
+export function useMergedClsPrefix (): Ref<string> {
+  const NConfigProvider = inject(configProviderInjectionKey, null)
+  return NConfigProvider
+    ? NConfigProvider.mergedClsPrefixRef
+    : shallowRef(defaultClsPrefix)
 }

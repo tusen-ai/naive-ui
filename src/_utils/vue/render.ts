@@ -1,4 +1,4 @@
-import { createTextVNode, VNodeChild } from 'vue'
+import { createTextVNode, type VNodeChild } from 'vue'
 
 export const render = <T extends any[]>(
   r:

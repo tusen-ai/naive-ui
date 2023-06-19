@@ -1,6 +1,13 @@
-import { defineComponent, h, ref, provide, getCurrentInstance, Ref } from 'vue'
+import {
+  defineComponent,
+  h,
+  ref,
+  provide,
+  getCurrentInstance,
+  type Ref
+} from 'vue'
 import { createId } from 'seemly'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -49,6 +56,7 @@ export default defineComponent({
       } else {
         setPreviewSrc(imgs[0].dataset.previewSrc)
       }
+      step === 1 ? props.onPreviewNext?.() : props.onPreviewPrev?.()
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
@@ -65,8 +73,12 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       previewInstRef,
-      next: () => go(1),
-      prev: () => go(-1)
+      next: () => {
+        go(1)
+      },
+      prev: () => {
+        go(-1)
+      }
     }
   },
   render () {

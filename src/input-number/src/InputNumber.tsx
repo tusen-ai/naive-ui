@@ -5,9 +5,9 @@ import {
   toRef,
   watch,
   computed,
-  PropType,
+  type PropType,
   watchEffect,
-  VNode,
+  type VNode,
   nextTick
 } from 'vue'
 import { rgba } from 'seemly'
@@ -22,8 +22,8 @@ import { NxButton } from '../../button'
 import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  MaybeArray,
-  ExtractPublicPropTypes,
+  type MaybeArray,
+  type ExtractPublicPropTypes,
   warnOnce,
   call,
   resolveSlot,

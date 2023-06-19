@@ -1,7 +1,7 @@
 import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NColorPicker } from '../index'
-import { ColorPickerMode } from '../src/utils'
+import type { ColorPickerMode } from '../src/utils'
 import { NButton } from '../../button'
 
 describe('n-color-picker', () => {

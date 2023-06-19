@@ -1,5 +1,5 @@
 import frFR from 'date-fns/esm/locale/fr'
-import { NDateLocale } from './enUS'
+import { type NDateLocale } from './enUS'
 
 const dateFrFR: NDateLocale = {
   name: 'fr-FR',

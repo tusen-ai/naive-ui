@@ -3,10 +3,10 @@ import {
   Transition,
   h,
   defineComponent,
-  PropType,
+  type PropType,
   ref,
   onMounted,
-  ExtractPropTypes,
+  type ExtractPropTypes,
   inject
 } from 'vue'
 import { keep } from '../../_utils'

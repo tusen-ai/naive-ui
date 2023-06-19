@@ -3,11 +3,11 @@ import {
   computed,
   defineComponent,
   h,
-  PropType,
+  type PropType,
   Fragment,
   mergeProps
 } from 'vue'
-import { ThemeProps, useConfig, useTheme } from '../../_mixins'
+import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
 import { createKey, useHoudini } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'

@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, type PropType } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NProgress } from '../../progress'
 import { uploadInjectionKey } from './interface'

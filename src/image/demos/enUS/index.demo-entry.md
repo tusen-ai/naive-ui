@@ -25,7 +25,8 @@ previewed-img-props.vue
 | fallback-src | `string` | `undefined` | URL to show when the image fails to load. |  |
 | height | `string \| number` | `undefined` | Image height. |  |
 | img-props | `object` | `undefined` | The props of the img element inside the component. |  |
-| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.30.5 |
+| lazy | `boolean` | `false` | Load image after it enters viewport. When used alone, it will be assigned the property value of [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading). Alternatively, it can be used in conjunction with the `intersection-observer-options` configuration to achieve lazy loading. |
+| 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | Object-fit type of the image in the container. |  |
 | preview-src | `string` | `undefined` | Source of preview image. |  |
@@ -42,6 +43,8 @@ previewed-img-props.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
+| on-preview-next | `() => void` | `undefined` | Click the callback on the next slide |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 

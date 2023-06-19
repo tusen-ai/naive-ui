@@ -118,6 +118,7 @@ const plPL: NLocale = {
     tipClockwise: 'Zgodnie z ruchem wskazówek zegara',
     tipZoomOut: 'Powiększ',
     tipZoomIn: 'Pomniejsz',
+    tipDownload: 'Pobierz',
     tipClose: 'Zamknij (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'

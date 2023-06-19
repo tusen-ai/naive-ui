@@ -3,8 +3,8 @@ import {
   defineComponent,
   h,
   ref,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   Fragment,
   toRef
 } from 'vue'

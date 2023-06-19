@@ -1,4 +1,4 @@
-import { Ref, CSSProperties } from 'vue'
+import { type Ref, type CSSProperties } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type TabsType = 'line' | 'card' | 'bar' | 'segment'

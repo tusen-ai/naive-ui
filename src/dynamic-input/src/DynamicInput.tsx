@@ -6,9 +6,9 @@ import {
   toRaw,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   inject,
-  CSSProperties,
+  type CSSProperties,
   provide,
   watchEffect
 } from 'vue'
@@ -385,7 +385,9 @@ export default defineComponent({
                             ? `${NFormItem.path.value}[${index}]`
                             : undefined
                         }
-                        onUpdateValue={(v) => handleValueChange(index, v)}
+                        onUpdateValue={(v) => {
+                          handleValueChange(index, v)
+                        }}
                       />
                     ) : preset === 'pair' ? (
                       <NDynamicInputPairPreset
@@ -400,7 +402,9 @@ export default defineComponent({
                             ? `${NFormItem.path.value}[${index}]`
                             : undefined
                         }
-                        onUpdateValue={(v) => handleValueChange(index, v)}
+                        onUpdateValue={(v) => {
+                          handleValueChange(index, v)
+                        }}
                       />
                     ) : null
                   ]
@@ -425,7 +429,9 @@ export default defineComponent({
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
                             circle
-                            onClick={() => remove(index)}
+                            onClick={() => {
+                              remove(index)
+                            }}
                           >
                             {{
                               icon: () => (
@@ -440,7 +446,9 @@ export default defineComponent({
                             circle
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
-                            onClick={() => createItem(index)}
+                            onClick={() => {
+                              createItem(index)
+                            }}
                           >
                             {{
                               icon: () => (
@@ -456,7 +464,9 @@ export default defineComponent({
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
-                              onClick={() => move('up', index)}
+                              onClick={() => {
+                                move('up', index)
+                              }}
                             >
                               {{
                                 icon: () => (
@@ -471,11 +481,15 @@ export default defineComponent({
                           ) : null,
                           showSortButton ? (
                             <NButton
-                              disabled={index === mergedValue.length - 1 || disabled}
+                              disabled={
+                                index === mergedValue.length - 1 || disabled
+                              }
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
-                              onClick={() => move('down', index)}
+                              onClick={() => {
+                                move('down', index)
+                              }}
                             >
                               {{
                                 icon: () => (

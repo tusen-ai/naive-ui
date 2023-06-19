@@ -9,18 +9,23 @@ import {
   mergeProps,
   inject,
   onBeforeUnmount,
-  DirectiveArguments,
-  PropType,
+  type DirectiveArguments,
+  type PropType,
   watch,
   toRef,
   provide,
-  CSSProperties,
-  VNode,
-  VNodeChild,
+  type CSSProperties,
+  type VNode,
+  type VNodeChild,
   watchEffect,
   Fragment
 } from 'vue'
-import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
+import {
+  VFollower,
+  type FollowerPlacement,
+  type FollowerInst,
+  VFocusTrap
+} from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { getPreciseEventTarget } from 'seemly'
 import { NxScrollbar } from '../../_internal/scrollbar'
