@@ -118,6 +118,7 @@ const itIT: NLocale = {
     tipClockwise: 'Ruota a destra',
     tipZoomOut: 'Ingrandisci',
     tipZoomIn: 'Riduci',
+    tipDownload: 'Download',
     tipClose: 'Chiudi (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'

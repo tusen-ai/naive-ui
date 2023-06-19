@@ -33,6 +33,7 @@ export default cB('form-item', `
     color: var(--n-label-text-color);
     transition: color .3s var(--n-bezier);
     box-sizing: border-box;
+    font-weight: var(--n-label-font-weight);
   `, [
     cE('asterisk', `
       white-space: nowrap;

@@ -1,4 +1,4 @@
-import { CNode, CNodeChildren, CProperties } from 'css-render'
+import type { CNode, CNodeChildren, CProperties } from 'css-render'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 

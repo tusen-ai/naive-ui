@@ -1,6 +1,6 @@
-import { HSVA } from 'seemly'
+import type { HSVA } from 'seemly'
 import { on, off } from 'evtd'
-import { computed, defineComponent, h, PropType, ref } from 'vue'
+import { computed, defineComponent, h, type PropType, ref } from 'vue'
 
 const HANDLE_SIZE = '12px'
 const RADIUS = '6px'
@@ -13,7 +13,7 @@ export default defineComponent({
       required: true
     },
     rgba: {
-      type: (Array as unknown) as PropType<HSVA | null>,
+      type: Array as unknown as PropType<HSVA | null>,
       default: null
     },
     // 0 - 360
@@ -22,7 +22,7 @@ export default defineComponent({
       required: true
     },
     displayedSv: {
-      type: (Array as unknown) as PropType<[number, number]>,
+      type: Array as unknown as PropType<[number, number]>,
       required: true
     },
     onUpdateSV: {

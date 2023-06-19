@@ -58,6 +58,7 @@ create-debug.vue
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
 | ignore-composition | `boolean` | `true` | 忽略输入法 Composition 状态，默认情况下 `filter` 在输入法输入的过程中不会触发 | 2.33.4 |
 | input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
+| keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.34.4 |
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
@@ -65,7 +66,7 @@ create-debug.vue
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
-| placeholder | `string` | `'请选择'` | 提示信息 |  |
+| placeholder | `string` | `'请选择' (i18n)` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 菜单的弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
@@ -75,6 +76,7 @@ create-debug.vue
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | show-checkmark | `boolean` | `true` | 多选情况下是否展示对勾 | 2.33.4 |
+| show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
@@ -122,7 +124,9 @@ create-debug.vue
 
 ### Select Methods
 
-| 名称  | 类型         | 说明 | 版本   |
-| ----- | ------------ | ---- | ------ |
-| focus | `() => void` | 聚焦 | 2.24.2 |
-| blur  | `() => void` | 失焦 | 2.24.2 |
+| 名称       | 类型         | 说明     | 版本         |
+| ---------- | ------------ | -------- | ------------ |
+| focus      | `() => void` | 聚焦     | 2.24.2       |
+| focusInput | `() => void` | 输入聚焦 | NEXT_VERSION |
+| blur       | `() => void` | 失焦     | 2.24.2       |
+| blurInput  | `() => void` | 输入失焦 | NEXT_VERSION |

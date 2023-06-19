@@ -2,11 +2,11 @@ import {
   h,
   ref,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
   computed,
-  VNode,
-  VNodeChild
+  type VNode,
+  type VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
@@ -16,7 +16,7 @@ import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import { MenuMixedOption, TmNode } from './interface'
+import type { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 
 export const submenuProps = {
@@ -179,6 +179,7 @@ export const NSubmenu = defineComponent({
     return this.root ? (
       <NDropdown
         size="large"
+        trigger="hover"
         {...this.menuProps?.dropdownProps}
         themeOverrides={this.mergedTheme.peerOverrides.Dropdown}
         theme={this.mergedTheme.peers.Dropdown}
@@ -187,7 +188,6 @@ export const NSubmenu = defineComponent({
           optionIconSizeLarge: '18px'
         }}
         value={this.mergedValue}
-        trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}
         keyField={this.menuProps.keyField}

@@ -14,6 +14,7 @@ describe('n-gradient-text', () => {
     expect(wrapper.find('.n-gradient-text').classes()).toContain(
       'n-gradient-text--error-type'
     )
+    wrapper.unmount()
 
     const typeArray = [
       'error',
@@ -30,6 +31,7 @@ describe('n-gradient-text', () => {
       expect(wrapper.find('.n-gradient-text').classes()).toContain(
         `n-gradient-text--${item}-type`
       )
+      wrapper.unmount()
     })
   })
 
@@ -43,6 +45,7 @@ describe('n-gradient-text', () => {
     expect(wrapper.find('.n-gradient-text').attributes('style')).toContain(
       'font-size: 24px;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `gradient` prop', async () => {
@@ -61,5 +64,6 @@ describe('n-gradient-text', () => {
     expect(
       wrapper.find('.n-gradient-text').attributes('style')
     ).toMatchSnapshot()
+    wrapper.unmount()
   })
 })

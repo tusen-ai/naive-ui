@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, defineComponent, inject, PropType, ref, watchEffect } from 'vue'
+import {
+  h,
+  defineComponent,
+  inject,
+  type PropType,
+  ref,
+  watchEffect
+} from 'vue'
 import { NScrollbar } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
 import type { NotificationPlacement } from './NotificationProvider'

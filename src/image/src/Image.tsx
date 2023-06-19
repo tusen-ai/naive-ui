@@ -3,9 +3,9 @@ import {
   h,
   inject,
   ref,
-  PropType,
+  type PropType,
   watchEffect,
-  ImgHTMLAttributes,
+  type ImgHTMLAttributes,
   onMounted,
   onBeforeUnmount,
   provide,
@@ -89,25 +89,23 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      if (isImageSupportNativeLazy) {
-        return
-      }
-      let unobserve: (() => void) | undefined
-      const stopWatchHandle = watchEffect(() => {
-        unobserve?.()
-        unobserve = undefined
-        if (props.lazy) {
+      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      if (props.lazy && props.intersectionObserverOptions) {
+        let unobserve: (() => void) | undefined
+        const stopWatchHandle = watchEffect(() => {
+          unobserve?.()
+          unobserve = undefined
           unobserve = observeIntersection(
             imageRef.value,
             props.intersectionObserverOptions,
             shouldStartLoadingRef
           )
-        }
-      })
-      onBeforeUnmount(() => {
-        stopWatchHandle()
-        unobserve?.()
-      })
+        })
+        onBeforeUnmount(() => {
+          stopWatchHandle()
+          unobserve?.()
+        })
+      }
     })
 
     watchEffect(() => {
@@ -126,6 +124,7 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
+
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
@@ -153,25 +152,30 @@ export default defineComponent({
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
-    const loadSrc: string = this.src || imgProps.src || ''
+    const loadSrc = this.src || imgProps.src
+
     const imgNode = h('img', {
       ...imgProps,
       ref: 'imageRef',
       width: this.width || imgProps.width,
       height: this.height || imgProps.height,
-      src: isImageSupportNativeLazy
-        ? loadSrc
-        : this.showError
-          ? this.fallbackSrc
-          : this.shouldStartLoading
+      src: this.showError
+        ? this.fallbackSrc
+        : lazy && this.intersectionObserverOptions
+          ? this.shouldStartLoading
             ? loadSrc
-            : undefined,
+            : undefined
+          : loadSrc,
       alt: this.alt || imgProps.alt,
       'aria-label': this.alt || imgProps.alt,
       onClick: this.mergedOnClick,
       onError: this.mergedOnError,
       onLoad: this.mergedOnLoad,
-      loading: lazy ? 'lazy' : 'eager',
+      // If interseciton observer options is set, do not use native lazy
+      loading:
+        isImageSupportNativeLazy && lazy && !this.intersectionObserverOptions
+          ? 'lazy'
+          : 'eager',
       style: [
         imgProps.style || '',
         placeholderNode && !loaded

@@ -13,6 +13,7 @@ export type {
   TableBaseColumn as DataTableBaseColumn,
   TableSelectionColumn as DataTableSelectionColumn,
   TableExpandColumn as DataTableExpandColumn,
+  TableColumnGroup as DataTableColumnGroup,
   CreateRowClassName as DataTableCreateRowClassName,
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,

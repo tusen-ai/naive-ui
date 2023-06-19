@@ -1,5 +1,5 @@
 import { beforeNextFrameOnce } from 'seemly'
-import { computed, ComputedRef, watch, Ref, ref } from 'vue'
+import { computed, type ComputedRef, watch, type Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
 import type {
   ColumnKey,

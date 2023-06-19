@@ -5,17 +5,17 @@ import {
   Transition,
   computed,
   provide,
-  PropType,
+  type PropType,
   watch,
   withDirectives,
-  ExtractPropTypes,
-  CSSProperties,
+  type ExtractPropTypes,
+  type CSSProperties,
   toRef,
-  Ref,
+  type Ref,
   watchEffect,
-  VNode
+  type VNode
 } from 'vue'
-import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
+import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns/esm'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -52,7 +52,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { DatePickerType } from './config'
+import { type DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -167,7 +167,7 @@ export default defineComponent({
       watchEffect(() => {
         if (props.onChange !== undefined) {
           warnOnce(
-            'data-picker',
+            'date-picker',
             '`on-change` is deprecated, please use `on-update:value` instead.'
           )
         }
@@ -389,7 +389,7 @@ export default defineComponent({
         }
         default: {
           warn(
-            'data-picker',
+            'date-picker',
             "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
           )
           break

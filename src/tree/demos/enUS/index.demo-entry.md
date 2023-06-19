@@ -19,7 +19,9 @@ disabled.vue
 prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
+file-tree.vue
 node-props.vue
+show-line.vue
 checkbox-placement.vue
 ```
 
@@ -38,7 +40,7 @@ checkbox-placement.vue
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |  |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |  |
 | check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |  |
-| checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |  |
+| checkable | `boolean` | `false` | Whether to display the selection box. |  |
 | checkbox-placement | `'left' \| 'right'` | `'left'` | Checkbox's placement. | 2.28.3 |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |  |
 | checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |  |
@@ -53,6 +55,7 @@ checkbox-placement.vue
 | expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
+| get-children | `(option: any) => unknown` | `undefined` | Get children of the option. | 2.34.3 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | keyboard | `boolean` | `true` | Whether to support keyboard operation. | 2.32.2 |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
@@ -60,15 +63,17 @@ checkbox-placement.vue
 | disabled-field | `string` | `'disabled'` | The disabled field in `TreeOption`. | 2.32.2 |
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
-| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |  |
+| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. If not data is loaded, you should make promise resolve `false` or be rejected, nor the loading animation won't end. | Non void Promise 2.34.3 |
 | pattern | `string` | `''` | What to search by default. |  |
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
-| render-switcher-icon | `(props: { expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0, `props` 2.34.0 |
+| render-switcher-icon | `(props: { option: TreeOption, expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0, `props` 2.34.0 |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
+| show-line | `boolean` | `false` | Whether to display the connection line. | NEXT_VERSION |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |  |

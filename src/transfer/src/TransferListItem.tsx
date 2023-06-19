@@ -1,9 +1,9 @@
-import { h, inject, defineComponent, PropType } from 'vue'
+import { h, inject, defineComponent, type PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { getTitleAttribute } from '../../_utils'
 import { NBaseClose } from '../../_internal'
-import { transferInjectionKey, Option } from './interface'
+import { transferInjectionKey, type Option } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',

@@ -27,6 +27,7 @@ describe('n-form', () => {
       expect(wrapper.find('.n-form-item-label__asterisk').exists()).toEqual(
         false
       )
+      wrapper.unmount()
     })
     it('shows when props.showRequireMark is set', () => {
       const wrapper = mount(() => (
@@ -47,6 +48,7 @@ describe('n-form', () => {
       expect(wrapper.find('.n-form-item-label__asterisk').exists()).toEqual(
         true
       )
+      wrapper.unmount()
     })
     it('shows when required rule is set in form', () => {
       const wrapper = mount(() => (
@@ -67,6 +69,7 @@ describe('n-form', () => {
       expect(wrapper.find('.n-form-item-label__asterisk').exists()).toEqual(
         true
       )
+      wrapper.unmount()
     })
     it('shows when required rule is set in form item', () => {
       const wrapper = mount(() => (
@@ -87,6 +90,7 @@ describe('n-form', () => {
       expect(wrapper.find('.n-form-item-label__asterisk').exists()).toEqual(
         true
       )
+      wrapper.unmount()
     })
     it('show require mark placement left when set require-mark-placement is "left"', () => {
       const wrapper = mount(() => (
@@ -107,6 +111,7 @@ describe('n-form', () => {
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
       const nextSibling = requireMark.element.nextSibling as HTMLElement
       expect(nextSibling.textContent).toEqual('star kirby')
+      wrapper.unmount()
     })
 
     it('show require mark placement left when set require-mark-placement is "right"', () => {
@@ -128,6 +133,7 @@ describe('n-form', () => {
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
       const previousSibling = requireMark.element.previousSibling as HTMLElement
       expect(previousSibling.textContent).toEqual('star kirby')
+      wrapper.unmount()
     })
 
     it('show require mark placement left when set require-mark-placement is "right" in form-item', () => {
@@ -149,6 +155,7 @@ describe('n-form', () => {
       const requireMark = wrapper.find('.n-form-item-label__asterisk')
       const previousSibling = requireMark.element.previousSibling as HTMLElement
       expect(previousSibling.textContent).toEqual('star kirby')
+      wrapper.unmount()
     })
   })
 
@@ -194,6 +201,7 @@ describe('n-form', () => {
       wrapper.find('.n-form-item').classes().includes('n-form-item--no-label')
     ).toBe(true)
     expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
+    wrapper.unmount()
   })
 
   it('includes `for` attribute in label', () => {
@@ -213,5 +221,6 @@ describe('n-form', () => {
       </NForm>
     ))
     expect(wrapper.find('.n-form-item-label').attributes('for')).toBe('input')
+    wrapper.unmount()
   })
 })

@@ -48,6 +48,7 @@ custom-field.vue
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
 | ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
+| keyboard | `boolean` | `true` | Whether to allow keyboard control. | 2.34.4 |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
@@ -55,7 +56,7 @@ custom-field.vue
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |
-| placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placeholder | `string` | `'Please Select' (i18n)` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Option menu's placement. | 2.25.0 |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
@@ -65,6 +66,7 @@ custom-field.vue
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | show-checkmark | `boolean` | `true` | Whether to show checkmark in multiple select mode. | 2.33.4 |
+| show-on-focus | `boolean` | `false` | Whether to show menu on focus. | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
@@ -112,7 +114,9 @@ custom-field.vue
 
 ### Select Methods
 
-| Name  | Type         | Description | Version |
-| ----- | ------------ | ----------- | ------- |
-| focus | `() => void` | Focus.      | 2.24.2  |
-| blur  | `() => void` | Blur.       | 2.24.2  |
+| Name       | Type         | Description  | Version      |
+| ---------- | ------------ | ------------ | ------------ |
+| focus      | `() => void` | Focus.       | 2.24.2       |
+| focusInput | `() => void` | Input focus. | NEXT_VERSION |
+| blur       | `() => void` | Blur.        | 2.24.2       |
+| blurInput  | `() => void` | Input blur.  | NEXT_VERSION |

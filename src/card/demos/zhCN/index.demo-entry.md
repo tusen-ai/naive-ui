@@ -37,6 +37,7 @@ embedded-debug.vue
 | hoverable | `boolean` | `false` | 卡片是否可悬浮 |  |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | 卡片的分段区域设置 |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 卡片的尺寸 |  |
+| tag | `string` | `'div'` | 卡片组件要渲染为什么标签 | 2.34.3 |
 | title | `string` | `undefined` | 卡片的标题 |  |
 | on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |  |
 

@@ -17,6 +17,7 @@ describe('n-ellipsis', () => {
     expect(wrapper.find('.n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `line-clamp` prop', async () => {
@@ -38,6 +39,7 @@ describe('n-ellipsis', () => {
     expect(wrapper.find('.n-ellipsis').classes()).toContain(
       'n-ellipsis--line-clamp'
     )
+    wrapper.unmount()
   })
 
   it('should work with `expand-trigger` prop', async () => {
@@ -58,5 +60,6 @@ describe('n-ellipsis', () => {
     expect(wrapper.find('.n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis;'
     )
+    wrapper.unmount()
   })
 })

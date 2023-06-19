@@ -4,31 +4,31 @@ import {
   ref,
   defineComponent,
   inject,
-  VNode,
+  type VNode,
   watchEffect,
   onUnmounted,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   computed,
   Fragment
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
-import { VirtualList, VirtualListInst, VResizeObserver } from 'vueuc'
-import { CNode } from 'css-render'
+import { VirtualList, type VirtualListInst, VResizeObserver } from 'vueuc'
+import { type CNode } from 'css-render'
 import { useMemo } from 'vooks'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
-import { NScrollbar, ScrollbarInst } from '../../../_internal'
+import { NScrollbar, type ScrollbarInst } from '../../../_internal'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
 import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
-  RowKey,
-  ColumnKey,
-  SummaryRowData,
-  MainTableBodyRef,
-  TmNode,
-  RowData
+  type RowKey,
+  type ColumnKey,
+  type SummaryRowData,
+  type MainTableBodyRef,
+  type TmNode,
+  type RowData
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -871,22 +871,22 @@ export default defineComponent({
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={() =>
+                                onUpdateChecked={() => {
                                   handleRadioUpdateChecked(rowInfo.tmNode)
-                                }
+                                }}
                               />
                             ) : (
                               <RenderSafeCheckbox
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={(checked: boolean, e) =>
+                                onUpdateChecked={(checked: boolean, e) => {
                                   handleCheckboxUpdateChecked(
                                     rowInfo.tmNode,
                                     checked,
                                     e.shiftKey
                                   )
-                                }
+                                }}
                               />
                             )
                           ) : null
@@ -898,9 +898,9 @@ export default defineComponent({
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
                                 renderExpandIcon={this.renderExpandIcon}
-                                onClick={() =>
+                                onClick={() => {
                                   handleUpdateExpanded(rowKey, null)
-                                }
+                                }}
                               />
                                 ) : null
                           ) : null

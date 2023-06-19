@@ -3,7 +3,7 @@ import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render, omit } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
+import { type OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
 export const tabProps = {

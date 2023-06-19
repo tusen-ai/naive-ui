@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   inject,
-  VNodeChild,
+  type VNodeChild,
   Fragment,
-  VNode,
+  type VNode,
   ref
 } from 'vue'
 import { happensIn, pxfy } from 'seemly'
@@ -24,11 +24,11 @@ import {
   clampValueFollowCSSRules
 } from '../utils'
 import {
-  TableExpandColumn,
-  TableColumnGroup,
-  TableBaseColumn,
+  type TableExpandColumn,
+  type TableColumnGroup,
+  type TableBaseColumn,
   dataTableInjectionKey,
-  ColumnKey
+  type ColumnKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
 
@@ -249,15 +249,15 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          onResizeStart={() =>
+                          onResizeStart={() => {
                             handleColumnResizeStart(column as TableBaseColumn)
-                          }
-                          onResize={(displacementX) =>
+                          }}
+                          onResize={(displacementX) => {
                             handleColumnResize(
                               column as TableBaseColumn,
                               displacementX
                             )
-                          }
+                          }}
                         />
                       ) : null}
                     </>
@@ -270,7 +270,7 @@ export default defineComponent({
                     ref={(el) => (cellElsRef[key] = el as HTMLTableCellElement)}
                     key={key}
                     style={{
-                      textAlign: column.align,
+                      textAlign: column.titleAlign || column.align,
                       left: pxfy(fixedColumnLeftMap[key]?.start),
                       right: pxfy(fixedColumnRightMap[key]?.start)
                     }}

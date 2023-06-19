@@ -19,7 +19,8 @@
 - DingTalk Group 1 (Member limit reached) 33482509
 - DingTalk Group 2 (Member limit reached) 35886835
 - DingTalk Group 3 (Member limit reached) 32377370
-- DingTalk Group 4 8165002788
+- DingTalk Group 4 (Member limit reached) 8165002788
+- DingTalk Group 5 31205022250
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
@@ -70,7 +71,7 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 ### Design Resources
 
-[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch).
+[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library-en-US.sketch).
 
 ## Contributing
 

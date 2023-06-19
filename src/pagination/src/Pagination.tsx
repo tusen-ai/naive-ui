@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   computed,
-  CSSProperties,
+  type CSSProperties,
   defineComponent,
   Fragment,
   h,
   nextTick,
-  PropType,
+  type PropType,
   ref,
   toRef,
-  VNodeChild,
+  type VNodeChild,
   watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NPopselect } from '../../popselect'
 import { NSelect } from '../../select'
+import type { SelectProps } from '../../select'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -43,9 +44,10 @@ import {
 } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
-import {
+import type {
   PaginationRenderLabel,
   PaginationSizeOption,
+  RenderGoto,
   RenderNext,
   RenderPrefix,
   RenderPrev,
@@ -87,8 +89,10 @@ export const paginationProps = {
     type: Number,
     default: 9
   },
+  selectProps: Object as PropType<SelectProps>,
   prev: Function as PropType<RenderPrev>,
   next: Function as PropType<RenderNext>,
+  goto: Function as PropType<RenderGoto>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
   label: Function as PropType<PaginationRenderLabel>,
@@ -557,6 +561,7 @@ export default defineComponent({
       prefix,
       suffix,
       label,
+      goto,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -749,7 +754,9 @@ export default defineComponent({
                             type === 'page' &&
                               `${mergedClsPrefix}-pagination-item--clickable`
                           ]}
-                          onClick={() => handlePageItemClick(pageItem)}
+                          onClick={() => {
+                            handlePageItemClick(pageItem)
+                          }}
                           onMouseenter={onMouseenter}
                           onMouseleave={onMouseleave}
                         >
@@ -861,9 +868,11 @@ export default defineComponent({
             case 'size-picker': {
               return !simple && showSizePicker ? (
                 <NSelect
-                  to={this.to}
+                  consistentMenuWidth={false}
                   placeholder=""
                   showCheckmark={false}
+                  to={this.to}
+                  {...this.selectProps}
                   size={selectSize}
                   options={pageSizeOptions}
                   value={mergedPageSize}
@@ -877,7 +886,9 @@ export default defineComponent({
             case 'quick-jumper':
               return !simple && showQuickJumper ? (
                 <div class={`${mergedClsPrefix}-pagination-quick-jumper`}>
-                  {resolveSlot(this.$slots.goto, () => [locale.goto])}
+                  {goto
+                    ? goto()
+                    : resolveSlot(this.$slots.goto, () => [locale.goto])}
                   <NInput
                     value={jumperValue}
                     onUpdateValue={handleJumperInput}

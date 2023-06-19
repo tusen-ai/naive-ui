@@ -1,7 +1,6 @@
-import { h, HTMLAttributes, nextTick, ref } from 'vue'
+import { h, type HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { DataTableInst, NDataTable } from '../index'
-import type { DataTableColumns } from '../index'
+import { type DataTableInst, NDataTable, type DataTableColumns } from '../index'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 
@@ -24,6 +23,7 @@ describe('n-data-table', () => {
       </NDataTable>
     ))
     expect(wrapper.find('.empty-info').exists()).toEqual(true)
+    wrapper.unmount()
   })
   it('should work with `itemCount` without `remote`', () => {
     const columns = [
@@ -50,6 +50,7 @@ describe('n-data-table', () => {
       <NDataTable columns={columns} data={data} pagination={pagination} />
     ))
     expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
+    wrapper.unmount()
   })
 
   it('should work with `itemCount` with `remote`', async () => {
@@ -91,10 +92,11 @@ describe('n-data-table', () => {
         onUpdatePage={onPageChange}
       />
     ))
-    await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
+    void wrapper.findAll('.n-pagination-item')[2].trigger('click')
     await nextTick()
     expect(onPageChange).toHaveBeenCalled()
     expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
+    wrapper.unmount()
   })
 
   it('should work with `bordered` prop', async () => {
@@ -120,6 +122,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).not.toContain(
       'n-data-table--bordered'
     )
+    wrapper.unmount()
   })
 
   it('should work with `bottom-bordered` prop', async () => {
@@ -152,6 +155,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).not.toContain(
       'n-data-table--bottom-bordered'
     )
+    wrapper.unmount()
   })
 
   it('should work with `loading` prop', async () => {
@@ -173,6 +177,7 @@ describe('n-data-table', () => {
       <NDataTable columns={columns} data={data} loading={true} />
     ))
     expect(wrapper.find('.n-base-loading').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `flex-height` prop', async () => {
@@ -198,6 +203,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).toContain(
       'n-data-table--flex-height'
     )
+    wrapper.unmount()
   })
 
   it('should work with `row-class-name` prop', async () => {
@@ -233,6 +239,7 @@ describe('n-data-table', () => {
       />
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
+    wrapper.unmount()
   })
 
   describe('should work with multiple sorter', () => {
@@ -353,7 +360,7 @@ describe('n-data-table', () => {
       colClassName: string,
       target: number[]
     ): Promise<boolean> => {
-      const cols = await wrapper.findAll(colClassName)
+      const cols = wrapper.findAll(colClassName)
       const colNums = cols.slice(1).map((item) => Number(item.text()))
       const matchResult = String(colNums) === String(target)
       if (!matchResult) {
@@ -379,7 +386,7 @@ describe('n-data-table', () => {
     const ageDom: HTMLElement | null = document.querySelector('#age-title')
 
     it('chinese: descend, math: false, english: false', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -389,7 +396,8 @@ describe('n-data-table', () => {
       ).toEqual(true)
     })
     it('chinese: descend, math: descend, english: false', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -400,7 +408,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: descend, english: descend', async () => {
-      await englishDom?.click()
+      englishDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -411,7 +420,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: ascend, math: descend, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -422,7 +432,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: descend, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -433,7 +444,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: ascend, english: descend', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -444,7 +456,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: false, english: descend', async () => {
-      await mathDom?.click()
+      mathDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 88, 98],
@@ -455,7 +468,8 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: false, english: descend', async () => {
-      await chineseDom?.click()
+      chineseDom?.click()
+      await nextTick()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -484,7 +498,8 @@ describe('n-data-table', () => {
     })
 
     it('age: descend', async () => {
-      await ageDom?.click()
+      ageDom?.click()
+      await nextTick()
       const result =
         (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
         (await checkScoreIsMatched([
@@ -554,6 +569,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
       'width: 20px'
     )
+    wrapper.unmount()
   })
 
   it('should work with `row-props` prop', async () => {
@@ -582,6 +598,7 @@ describe('n-data-table', () => {
     expect(
       wrapper.find('tbody .n-data-table-tr').attributes('style')
     ).toContain('cursor: pointer')
+    wrapper.unmount()
   })
 
   it('should work with `scroll-x` prop', async () => {
@@ -607,6 +624,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-scrollbar-content').attributes('style')).toContain(
       'min-width: 1800px'
     )
+    wrapper.unmount()
   })
 
   it('should work with `single-column` prop', async () => {
@@ -631,6 +649,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).toContain(
       'n-data-table--single-column'
     )
+    wrapper.unmount()
   })
 
   it('should work with `single-line` prop', async () => {
@@ -655,6 +674,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).not.toContain(
       'n-data-table--single-line'
     )
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -676,6 +696,7 @@ describe('n-data-table', () => {
       expect(
         wrapper.find('.n-data-table').attributes('style')
       ).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -739,6 +760,7 @@ describe('n-data-table', () => {
       wrapper.findAll('.n-data-table-td--summary')[1].attributes('rowspan')
     ).toBe('1')
     expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
+    wrapper.unmount()
   })
 
   it('should work with `table-layout` prop', async () => {
@@ -763,6 +785,7 @@ describe('n-data-table', () => {
     expect(wrapper.find('table').attributes('style')).toContain(
       'table-layout: fixed'
     )
+    wrapper.unmount()
   })
 
   it('should work with `virtual-scroll` prop', async () => {
@@ -783,6 +806,7 @@ describe('n-data-table', () => {
       <NDataTable columns={columns} data={data} virtual-scroll={true} />
     ))
     expect(wrapper.find('tbody').element.children.length).toBe(0)
+    wrapper.unmount()
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
@@ -812,6 +836,7 @@ describe('n-data-table', () => {
     ))
     await wrapper.find('.n-checkbox').trigger('click')
     expect(handleCheck).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })
 
@@ -929,6 +954,7 @@ describe('props.columns', () => {
       expect(
         wrapper.find('tbody .n-data-table-td').attributes('style')
       ).toContain(`text-align: ${align}`)
+      wrapper.unmount()
     })
   })
 
@@ -961,6 +987,7 @@ describe('props.columns', () => {
     expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
       '2'
     )
+    wrapper.unmount()
   })
 
   it('should work with `ellipsis` prop', async () => {
@@ -995,6 +1022,7 @@ describe('props.columns', () => {
     expect(wrapper.find('tbody .n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis'
     )
+    wrapper.unmount()
   })
 
   it('should work with `children` prop', async () => {
@@ -1056,6 +1084,7 @@ describe('props.columns', () => {
     expect(
       wrapper.find('thead [data-col-key="test2"]').attributes('rowspan')
     ).toBe('1')
+    wrapper.unmount()
   })
 
   it('should work with `className` prop', async () => {
@@ -1087,6 +1116,7 @@ describe('props.columns', () => {
     expect(wrapper.find('thead [data-col-key="age"]').classes()).toContain(
       'test-age'
     )
+    wrapper.unmount()
   })
 
   it('should work with `render` prop', async () => {
@@ -1109,6 +1139,7 @@ describe('props.columns', () => {
       <NDataTable columns={columns} data={data} row-key={rowKey} />
     ))
     expect(wrapper.find('tbody [data-col-key="name"]').text()).toContain('0-0')
+    wrapper.unmount()
   })
 
   it('should work with `renderExpand` `expandable` prop', async () => {
@@ -1144,7 +1175,7 @@ describe('props.columns', () => {
     expect(wrapper.findAll('tbody td')[0].attributes('class')).toContain(
       'n-data-table-td--expand'
     )
-    await void wrapper
+    void wrapper
       .findAll('tbody .n-data-table-expand-trigger')[0]
       .trigger('click')
     await nextTick()
@@ -1152,6 +1183,7 @@ describe('props.columns', () => {
     expect(wrapper.find('tbody [colspan="2"]').text()).toContain(
       '0 is a good guy.'
     )
+    wrapper.unmount()
   })
 
   it('should work with `children` prop', async () => {
@@ -1183,6 +1215,7 @@ describe('props.columns', () => {
     expect(wrapper.findAll('colgroup col')[1].attributes('style')).toContain(
       'width: 200px; min-width: 200px'
     )
+    wrapper.unmount()
   })
 
   it('should work with `striped` prop', async () => {
@@ -1216,6 +1249,7 @@ describe('props.columns', () => {
     expect(trList[2].attributes('class')).not.toContain(
       'n-data-table-tr--striped'
     )
+    wrapper.unmount()
   })
 
   it('should work with `column.multiple` prop', async () => {
@@ -1262,5 +1296,6 @@ describe('props.columns', () => {
       expect(radios[1].classes()).toContain('n-radio--checked')
       expect(radios[4].classes()).not.toContain('n-radio--checked')
     }, 0)
+    wrapper.unmount()
   })
 })

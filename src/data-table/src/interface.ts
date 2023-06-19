@@ -1,5 +1,5 @@
-import { TreeMate, TreeNode } from 'treemate'
-import {
+import type { TreeMate, TreeNode } from 'treemate'
+import type {
   CSSProperties,
   Ref,
   HTMLAttributes,
@@ -18,7 +18,7 @@ import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
-import { BaseLoadingExposedProps } from '../../_internal'
+import type { BaseLoadingExposedProps } from '../../_internal'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -119,7 +119,7 @@ export const dataTableProps = {
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
-  renderExpandIcon: Function as PropType<() => VNodeChild>,
+  renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
@@ -175,9 +175,7 @@ export type SortOrderFlag = 1 | -1 | 0
 
 export type RowData = Record<string, any>
 
-export interface InternalRowData {
-  [key: string]: unknown
-}
+export type InternalRowData = Record<string, unknown>
 
 export type CreateRowKey<T = InternalRowData> = (row: T) => RowKey
 export type CreateRowClassName<T = InternalRowData> = (
@@ -224,6 +222,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   maxWidth?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
+  titleAlign?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
 }
@@ -309,6 +308,11 @@ export type RenderExpand<T = InternalRowData> = (
   row: T,
   index: number
 ) => VNodeChild
+export type RenderExpandIcon = ({
+  expanded
+}: {
+  expanded: boolean
+}) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
@@ -387,7 +391,7 @@ export interface DataTableInjection {
   paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
-  renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
+  renderExpandIconRef: Ref<undefined | RenderExpandIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   scrollbarPropsRef: Ref<ScrollbarProps | undefined>
@@ -473,9 +477,10 @@ export interface SortState {
   sorter: Sorter | boolean | 'default'
 }
 
-export interface FilterState {
-  [key: string]: FilterOptionValue[] | FilterOptionValue | null | undefined
-}
+export type FilterState = Record<
+string,
+FilterOptionValue[] | FilterOptionValue | null | undefined
+>
 
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
@@ -522,9 +527,7 @@ export interface SummaryCell {
   colSpan?: number
   rowSpan?: number
 }
-export interface SummaryRowData {
-  [key: string]: SummaryCell
-}
+export type SummaryRowData = Record<string, SummaryCell>
 
 export type DataTableOnLoad = (node: RowData) => Promise<void>
 

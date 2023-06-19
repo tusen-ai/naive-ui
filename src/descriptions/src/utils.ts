@@ -1,4 +1,4 @@
-import { VNodeChild } from 'vue'
+import type { VNodeChild } from 'vue'
 
 export const DESCRIPTION_ITEM_FLAG = 'DESCRIPTION_ITEM_FLAG'
 

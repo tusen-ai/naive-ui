@@ -5,8 +5,8 @@ import {
   computed,
   defineComponent,
   renderList,
-  PropType,
-  CSSProperties
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
@@ -196,7 +196,7 @@ export default defineComponent({
       >
         {renderList(this.count, (_, index) => {
           const icon = defaultSlot ? (
-            defaultSlot()
+            defaultSlot({ index })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => StarIcon }}

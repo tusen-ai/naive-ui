@@ -6,25 +6,25 @@ import {
   computed,
   defineComponent,
   provide,
-  PropType,
+  type PropType,
   watch,
-  CSSProperties,
-  VNode,
+  type CSSProperties,
+  type VNode,
   nextTick,
   watchEffect,
-  VNodeChild,
+  type VNodeChild,
   inject
 } from 'vue'
 import {
   createTreeMate,
   flatten,
   createIndexGetter,
-  TreeMateOptions,
-  CheckStrategy
+  type TreeMateOptions,
+  type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { VirtualListInst, VVirtualList } from 'vueuc'
-import { getPadding } from 'seemly'
+import { type VirtualListInst, VVirtualList } from 'vueuc'
+import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -34,6 +34,7 @@ import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
+import { NEmpty } from '../../empty'
 import NTreeNode from './TreeNode'
 import {
   keysWithFilter,
@@ -62,25 +63,27 @@ import type {
   RenderSwitcherIcon,
   TreeNodeProps,
   CheckOnClick,
-  TreeInst
+  TreeInst,
+  GetChildren,
+  OnLoad
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
-import { NEmpty } from '../../empty'
-
-// TODO:
-// During expanding, some node are mis-applied with :active style
-// Async dnd has bug
-
-const ITEM_SIZE = 30 // 24 + 3 + 3
+import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 
 export function createTreeMateOptions<T> (
   keyField: string,
   childrenField: string,
-  disabledField: string
+  disabledField: string,
+  getChildren: GetChildren | undefined
 ): TreeMateOptions<T, T, T> {
+  const settledGetChildren: GetChildren =
+    getChildren ||
+    ((node: T) => {
+      return (node as any)[childrenField]
+    })
   return {
     getIsGroup () {
       return false
@@ -88,9 +91,7 @@ export function createTreeMateOptions<T> (
     getKey (node: T) {
       return (node as any)[keyField]
     },
-    getChildren (node: T) {
-      return (node as any)[childrenField]
-    },
+    getChildren: settledGetChildren,
     getDisabled (node: T) {
       return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
     }
@@ -138,7 +139,7 @@ export type OnUpdateSelectedKeysImpl = (
   }
 ) => void
 export type onUpdateExpandedKeys = (
-  value: Key[],
+  value: Array<string & number>,
   option: Array<TreeOption | null>,
   meta:
   | {
@@ -163,7 +164,6 @@ export type OnUpdateExpandedKeysImpl = (
     action: 'filter'
   }
 ) => void
-type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   allowCheckingNotLoaded: Boolean,
@@ -231,6 +231,7 @@ export const treeProps = {
   draggable: Boolean,
   blockNode: Boolean,
   blockLine: Boolean,
+  showLine: Boolean,
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
@@ -253,9 +254,10 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   indent: {
     type: Number,
-    default: 16
+    default: 24
   },
   allowDrop: {
     type: Function as PropType<AllowDrop>,
@@ -281,6 +283,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  getChildren: Function as PropType<GetChildren>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -374,6 +377,20 @@ export default defineComponent({
       return virtualListInstRef.value?.itemsElRef
     }
 
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeOption): boolean => {
+        if (!pattern.length) return true
+        const label = node[labelField]
+        if (typeof label === 'string') {
+          return label.toLowerCase().includes(pattern.toLowerCase())
+        }
+        return false
+      }
+    })
+
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeOption[]
       highlightKeySet: Set<Key> | null
@@ -412,7 +429,8 @@ export default defineComponent({
         createTreeMateOptions(
           props.keyField,
           props.childrenField,
-          props.disabledField
+          props.disabledField,
+          props.getChildren
         )
       )
     )
@@ -477,10 +495,14 @@ export default defineComponent({
     }
     if (watchProps?.includes('defaultExpandedKeys')) {
       // if watching defaultExpandedKeys, we use access props.defaultExpandedKeys inside initiator
-      watchEffect(() => initUncontrolledExpandedKeys(undefined))
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(undefined)
+      })
     } else {
       // We by default watchEffect since if defaultExpandAll is true, we should remain tree expand if data changes
-      watchEffect(() => initUncontrolledExpandedKeys(props.defaultExpandedKeys))
+      watchEffect(() => {
+        initUncontrolledExpandedKeys(props.defaultExpandedKeys)
+      })
     }
 
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
@@ -536,20 +558,6 @@ export default defineComponent({
       //   return null
       // }
       return droppingNode.parent
-    })
-
-    const mergedFilterRef = computed(() => {
-      const { filter } = props
-      if (filter) return filter
-      const { labelField } = props
-      return (pattern: string, node: TreeOption): boolean => {
-        if (!pattern.length) return true
-        const label = node[labelField]
-        if (typeof label === 'string') {
-          return label.toLowerCase().includes(pattern.toLowerCase())
-        }
-        return false
-      }
     })
 
     // shallow watch data
@@ -628,23 +636,23 @@ export default defineComponent({
             'There is unloaded node in data but props.onLoad is not specified.'
           )
         }
-        return await Promise.resolve()
+        await Promise.resolve()
+        return
       }
       const { value: loadingKeys } = loadingKeysRef
-      return await new Promise((resolve) => {
-        if (!loadingKeys.has(node.key)) {
-          loadingKeys.add(node.key)
-          onLoad(node.rawNode)
-            .then(() => {
-              loadingKeys.delete(node.key)
-              resolve()
-            })
-            .catch((loadError: Error) => {
-              console.error(loadError)
-              resetDragExpandState()
-            })
+      if (!loadingKeys.has(node.key)) {
+        loadingKeys.add(node.key)
+        try {
+          const loadResult = await onLoad(node.rawNode)
+          if (loadResult === false) {
+            resetDragExpandState()
+          }
+        } catch (loadError) {
+          console.error(loadError)
+          resetDragExpandState()
         }
-      })
+        loadingKeys.delete(node.key)
+      }
     }
     watchEffect(() => {
       const { value: displayTreeMate } = displayTreeMateRef
@@ -671,6 +679,7 @@ export default defineComponent({
         void nextTick(syncScrollbar)
         return
       }
+      const nodeHeight = depx(themeRef.value.self.nodeHeight)
       const prevVSet = new Set(prevValue)
       let addedKey: Key | null = null
       let removedKey: Key | null = null
@@ -696,7 +705,7 @@ export default defineComponent({
       const viewportHeight = (
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
-      const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
+      const viewportItemCount = Math.ceil(viewportHeight / nodeHeight) + 1
       // play add animation
       let baseExpandedKeys: Key[] | undefined
       if (addedKey !== null) {
@@ -728,7 +737,7 @@ export default defineComponent({
               __motion: true,
               mode: 'expand',
               height: virtualScroll
-                ? expandedChildren.length * ITEM_SIZE
+                ? expandedChildren.length * nodeHeight
                 : undefined,
               nodes: virtualScroll
                 ? expandedChildren.slice(0, viewportItemCount)
@@ -755,7 +764,7 @@ export default defineComponent({
             __motion: true,
             mode: 'collapse',
             height: virtualScroll
-              ? collapsedChildren.length * ITEM_SIZE
+              ? collapsedChildren.length * nodeHeight
               : undefined,
             nodes: virtualScroll
               ? collapsedChildren.slice(0, viewportItemCount)
@@ -1505,6 +1514,7 @@ export default defineComponent({
       droppingOffsetLevelRef,
       fNodesRef,
       pendingNodeKeyRef,
+      showLineRef: toRef(props, 'showLine'),
       disabledFieldRef: toRef(props, 'disabledField'),
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
@@ -1561,9 +1571,17 @@ export default defineComponent({
           loadingColor,
           nodeTextColor,
           nodeTextColorDisabled,
-          dropMarkColor
+          dropMarkColor,
+          nodeWrapperPadding,
+          nodeHeight,
+          lineHeight
         }
       } = themeRef.value
+      const lineOffsetTop = getPadding(nodeWrapperPadding, 'top')
+      const lineOffsetBottom = getPadding(nodeWrapperPadding, 'bottom')
+      const nodeContentHeight = pxfy(
+        depx(nodeHeight) - depx(lineOffsetTop) - depx(lineOffsetBottom)
+      )
       return {
         '--n-arrow-color': arrowColor,
         '--n-loading-color': loadingColor,
@@ -1575,7 +1593,12 @@ export default defineComponent({
         '--n-node-color-pressed': nodeColorPressed,
         '--n-node-text-color': nodeTextColor,
         '--n-node-text-color-disabled': nodeTextColorDisabled,
-        '--n-drop-mark-color': dropMarkColor
+        '--n-drop-mark-color': dropMarkColor,
+        '--n-node-wrapper-padding': nodeWrapperPadding,
+        '--n-line-offset-top': `-${lineOffsetTop}`,
+        '--n-line-offset-bottom': `-${lineOffsetBottom}`,
+        '--n-node-content-height': nodeContentHeight,
+        '--n-line-height': lineHeight
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -1618,7 +1641,8 @@ export default defineComponent({
       checkable,
       handleKeydown,
       rtlEnabled,
-      handleFocusout
+      handleFocusout,
+      scrollbarProps
     } = this
     const mergedFocusable = internalFocusable && !disabled
     const tabindex = mergedFocusable ? '0' : undefined
@@ -1651,6 +1675,7 @@ export default defineComponent({
       const padding = getPadding(internalScrollablePadding || '0')
       return (
         <NxScrollbar
+          {...scrollbarProps}
           ref="scrollbarInstRef"
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
@@ -1669,7 +1694,7 @@ export default defineComponent({
                 <VVirtualList
                   ref="virtualListInstRef"
                   items={this.fNodes}
-                  itemSize={ITEM_SIZE}
+                  itemSize={depx(mergedTheme.self.nodeHeight)}
                   ignoreItemResize={this.aip}
                   paddingTop={padding.top}
                   paddingBottom={padding.bottom}
@@ -1703,6 +1728,7 @@ export default defineComponent({
     if (internalScrollable) {
       return (
         <NxScrollbar
+          {...scrollbarProps}
           class={treeClass}
           tabindex={tabindex}
           onKeydown={mergedFocusable ? handleKeydown : undefined}

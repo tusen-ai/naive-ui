@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, type PropType } from 'vue'
 import { NInput } from '../../input'
 import { dynamicInputInjectionKey } from './interface'
 
@@ -13,6 +13,7 @@ export default defineComponent({
       type: String,
       default: ''
     },
+    disabled: Boolean,
     parentPath: String,
     path: String,
     onUpdateValue: {
@@ -32,7 +33,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, placeholder, value, clsPrefix, onUpdateValue } = this
+    const {
+      mergedTheme,
+      placeholder,
+      value,
+      clsPrefix,
+      onUpdateValue,
+      disabled
+    } = this
     return (
       <div class={`${clsPrefix}-dynamic-input-preset-input`}>
         <NInput
@@ -41,6 +49,7 @@ export default defineComponent({
           value={value}
           placeholder={placeholder}
           onUpdateValue={onUpdateValue}
+          disabled={disabled}
         />
       </div>
     )
