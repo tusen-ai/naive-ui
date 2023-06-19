@@ -379,7 +379,6 @@ export interface DataTableInjection {
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
-  scrollPartRef: Ref<'head' | 'body'>
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
