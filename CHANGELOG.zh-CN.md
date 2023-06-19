@@ -4,6 +4,7 @@
 
 ### Breaking Changes
 
+- `n-input` 的 `suffix` 移动到 `loading` 之后，关闭 [#4685](https://github.com/tusen-ai/naive-ui/issues/4685)
 - 修复 `n-log` 的 `silent` 拼写问题，关闭 [#4875](https://github.com/tusen-ai/naive-ui/issues/4875)
 
 ### Fixes
