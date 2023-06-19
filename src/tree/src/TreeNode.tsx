@@ -6,7 +6,8 @@ import {
   type PropType,
   ref,
   type ComponentPublicInstance,
-  onMounted
+  onMounted,
+  type VNode
 } from 'vue'
 import { useMemo } from 'vooks'
 import { happensIn, repeat } from 'seemly'
@@ -44,7 +45,8 @@ const TreeNode = defineComponent({
       blockLineRef,
       checkboxPlacementRef,
       checkOnClickRef,
-      disabledFieldRef
+      disabledFieldRef,
+      showLineRef
     } = NTree
 
     const checkboxDisabledRef = useMemo(
@@ -217,6 +219,43 @@ const TreeNode = defineComponent({
         })
       }
     }
+    const indentNodes = computed(() => {
+      const { clsPrefix } = props
+      const { value: indent } = indentRef
+      if (showLineRef.value) {
+        const indentNodes: VNode[] = []
+        let cursor = props.tmNode.parent
+        while (cursor) {
+          if (cursor.isLastChild) {
+            indentNodes.push(
+              <div class={`${clsPrefix}-tree-node-indent`}>
+                <div style={{ width: `${indent}px` }} />
+              </div>
+            )
+          } else {
+            indentNodes.push(
+              <div
+                class={[
+                  `${clsPrefix}-tree-node-indent`,
+                  `${clsPrefix}-tree-node-indent--show-line`
+                ]}
+              >
+                <div style={{ width: `${indent}px` }} />
+              </div>
+            )
+          }
+          cursor = cursor.parent
+        }
+        return indentNodes.reverse()
+      } else {
+        return repeat(
+          props.tmNode.level,
+          <div class={`${props.clsPrefix}-tree-node-indent`}>
+            <div style={{ width: `${indent}px` }} />
+          </div>
+        )
+      }
+    })
     return {
       showDropMark: useMemo(() => {
         const { value: draggingNode } = draggingNodeRef
@@ -273,8 +312,10 @@ const TreeNode = defineComponent({
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
       checkboxPlacement: checkboxPlacementRef,
+      showLine: showLineRef,
       contentInstRef,
       contentElRef,
+      indentNodes,
       handleCheck,
       handleDrop,
       handleDragStart,
@@ -300,6 +341,7 @@ const TreeNode = defineComponent({
       draggable,
       blockLine,
       indent,
+      indentNodes,
       disabled,
       pending,
       internalScrollable,
@@ -324,6 +366,7 @@ const TreeNode = defineComponent({
     const checkboxOnRight = checkboxPlacement === 'right'
     const checkboxNode = checkable ? (
       <NTreeNodeCheckbox
+        indent={indent}
         right={checkboxOnRight}
         focusable={this.checkboxFocusable}
         disabled={disabled || this.checkboxDisabled}
@@ -360,21 +403,31 @@ const TreeNode = defineComponent({
               : undefined
           }
         >
-          {repeat(
-            tmNode.level,
-            <div class={`${clsPrefix}-tree-node-indent`}>
+          {indentNodes}
+          {tmNode.isLeaf && this.showLine ? (
+            <div
+              class={[
+                `${clsPrefix}-tree-node-indent`,
+                `${clsPrefix}-tree-node-indent--show-line`,
+                tmNode.isLeaf && `${clsPrefix}-tree-node-indent--is-leaf`,
+                tmNode.isLastChild &&
+                  `${clsPrefix}-tree-node-indent--last-child`
+              ]}
+            >
               <div style={{ width: `${indent}px` }} />
             </div>
+          ) : (
+            <NTreeNodeSwitcher
+              clsPrefix={clsPrefix}
+              expanded={this.expanded}
+              selected={selected}
+              loading={this.loading}
+              hide={tmNode.isLeaf}
+              tmNode={this.tmNode}
+              indent={indent}
+              onClick={this.handleSwitcherClick}
+            />
           )}
-          <NTreeNodeSwitcher
-            clsPrefix={clsPrefix}
-            expanded={this.expanded}
-            selected={selected}
-            loading={this.loading}
-            tmNode={this.tmNode}
-            hide={tmNode.isLeaf}
-            onClick={this.handleSwitcherClick}
-          />
           {!checkboxOnRight ? checkboxNode : null}
           <NTreeNodeContent
             ref="contentInstRef"

@@ -34,20 +34,19 @@ const ptBR: NLocale = {
     clear: 'Limpar',
     now: 'Agora',
     confirm: 'Confirmar',
-    selectTime: 'Selecionar hora',
+    selectTime: 'Selecione a hora',
     selectDate: 'Selecione a data',
     datePlaceholder: 'Selecione a data',
-    datetimePlaceholder: 'Selecione Data e Hora',
+    datetimePlaceholder: 'Selecione a data e hora',
     monthPlaceholder: 'Selecione o mês',
     yearPlaceholder: 'Selecione o ano',
-    quarterPlaceholder: 'Selecione o quatrimestre',
+    quarterPlaceholder: 'Selecione o trimestre',
     startDatePlaceholder: 'Selecione a data de início',
     endDatePlaceholder: 'Selecione a data de término',
     startDatetimePlaceholder: 'Selecione a data e hora de início',
-    endDatetimePlaceholder: 'Select a data e hora de término',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    endDatetimePlaceholder: 'Selecione a data e hora de término',
+    startMonthPlaceholder: 'Selecione o mês de início',
+    endMonthPlaceholder: 'Selecione o mês de término',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Hoje'
@@ -59,16 +58,15 @@ const ptBR: NLocale = {
     clear: 'Limpar'
   },
   LegacyTransfer: {
-    sourceTitle: 'Fonte',
+    sourceTitle: 'Origem',
     targetTitle: 'Destino'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Selecionar todos',
+    unselectAll: 'Desmarcar todos',
+    clearAll: 'Limpar',
+    total: (num: number): string => `Total ${num} itens`,
+    selected: (num: number): string => `${num} itens selecionados`
   },
   Empty: {
     description: 'Não há dados'
@@ -117,10 +115,10 @@ const ptBR: NLocale = {
     tipCounterclockwise: 'Sentido anti-horário',
     tipClockwise: 'Sentido horário',
     tipZoomOut: 'Reduzir o zoom',
-    tipZoomIn: 'Mais Zoom',
+    tipZoomIn: 'Aumentar o zoom',
+    tipDownload: 'Download',
     tipClose: 'Fechar (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Exibir no tamanho original'
   }
 }
 

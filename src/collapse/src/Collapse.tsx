@@ -13,11 +13,7 @@ import {
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  warn
-} from '../../_utils'
+import { call, createInjectionKey, warn } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { collapseLight, type CollapseTheme } from '../styles'
 import style from './styles/index.cssr'

@@ -35,10 +35,13 @@ import {
   useAdjustedTo,
   type MaybeArray,
   getFirstSlotVNode,
-  warnOnce
-  , type ExtractPublicPropTypes
+  warnOnce,
+  type ExtractPublicPropTypes
 } from '../../_utils'
-import { NInternalSelectMenu, type InternalSelectMenuRef } from '../../_internal'
+import {
+  NInternalSelectMenu,
+  type InternalSelectMenuRef
+} from '../../_internal'
 import type { InputInst } from '../../input'
 import { NInput } from '../../input'
 import { autoCompleteLight } from '../styles'

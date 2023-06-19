@@ -242,7 +242,7 @@ export type Breakpoints = Record<string, number> | undefined
 
 export interface ConfigProviderInjection {
   mergedBreakpointsRef: Ref<Breakpoints | undefined>
-  mergedClsPrefixRef: Ref<string | undefined>
+  mergedClsPrefixRef: Ref<string>
   mergedBorderedRef: Ref<boolean | undefined>
   mergedNamespaceRef: Ref<string | undefined>
   mergedLocaleRef: Ref<NLocale | undefined>

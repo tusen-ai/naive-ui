@@ -258,15 +258,15 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          onResizeStart={() => { handleColumnResizeStart(column as TableBaseColumn) }
-                          }
+                          onResizeStart={() => {
+                            handleColumnResizeStart(column as TableBaseColumn)
+                          }}
                           onResize={(displacementX) => {
                             handleColumnResize(
                               column as TableBaseColumn,
                               displacementX
                             )
-                          }
-                          }
+                          }}
                         />
                       ) : null}
                     </>

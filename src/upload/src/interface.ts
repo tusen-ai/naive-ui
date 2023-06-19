@@ -21,9 +21,9 @@ export type SettledFileInfo = Required<FileInfo>
 
 export type ShouldUseThumbnailUrl = (file: SettledFileInfo) => boolean
 
-export type FuncOrRecordOrUndef =
-  | Record<string, string>
-  | (({ file }: { file: SettledFileInfo }) => Record<string, string>)
+export type FuncOrRecordOrUndef<T = string> =
+  | Record<string, T>
+  | (({ file }: { file: SettledFileInfo }) => Record<string, T>)
   | undefined
 
 export type OnChange = (data: {
@@ -145,7 +145,7 @@ export interface CustomRequestOptions {
   file: SettledFileInfo
   action?: string
   withCredentials?: boolean
-  data?: FuncOrRecordOrUndef
+  data?: FuncOrRecordOrUndef<string | Blob>
   headers?: FuncOrRecordOrUndef
   onProgress: (e: { percent: number }) => void
   onFinish: () => void

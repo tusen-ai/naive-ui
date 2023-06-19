@@ -1,4 +1,10 @@
-import { defineComponent, h, type PropType, computed, type CSSProperties } from 'vue'
+import {
+  defineComponent,
+  h,
+  type PropType,
+  computed,
+  type CSSProperties
+} from 'vue'
 import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -140,8 +146,7 @@ export default defineComponent({
                         color: indicatorTextColor
                       }}
                     >
-                      {percentage}
-                      {unit}
+                      {slots.default ? slots.default() : `${percentage}${unit}`}
                     </div>
                   ) : null}
                 </div>

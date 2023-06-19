@@ -10,6 +10,7 @@ export default defineComponent({
       type: String,
       required: true
     },
+    indent: { type: Number, required: true },
     expanded: Boolean,
     selected: Boolean,
     hide: Boolean,
@@ -24,16 +25,17 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {
-      const { clsPrefix } = props
+      const { clsPrefix, expanded, hide, indent, onClick } = props
       return (
         <span
           data-switcher
           class={[
             `${clsPrefix}-tree-node-switcher`,
-            props.expanded && `${clsPrefix}-tree-node-switcher--expanded`,
-            props.hide && `${clsPrefix}-tree-node-switcher--hide`
+            expanded && `${clsPrefix}-tree-node-switcher--expanded`,
+            hide && `${clsPrefix}-tree-node-switcher--hide`
           ]}
-          onClick={props.onClick}
+          style={{ width: `${indent}px` }}
+          onClick={onClick}
         >
           <div class={`${clsPrefix}-tree-node-switcher__icon`}>
             <NIconSwitchTransition>

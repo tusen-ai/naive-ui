@@ -32,7 +32,10 @@ import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
-import { internalSelectMenuLight, type InternalSelectMenuTheme } from '../styles'
+import {
+  internalSelectMenuLight,
+  type InternalSelectMenuTheme
+} from '../styles'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import type {
@@ -540,7 +543,11 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
+          <div
+            class={`${clsPrefix}-base-select-menu__empty`}
+            data-empty
+            data-action
+          >
             {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}

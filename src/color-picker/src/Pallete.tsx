@@ -13,7 +13,7 @@ export default defineComponent({
       required: true
     },
     rgba: {
-      type: (Array as unknown) as PropType<HSVA | null>,
+      type: Array as unknown as PropType<HSVA | null>,
       default: null
     },
     // 0 - 360
@@ -22,7 +22,7 @@ export default defineComponent({
       required: true
     },
     displayedSv: {
-      type: (Array as unknown) as PropType<[number, number]>,
+      type: Array as unknown as PropType<[number, number]>,
       required: true
     },
     onUpdateSV: {

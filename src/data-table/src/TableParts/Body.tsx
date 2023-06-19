@@ -877,8 +877,9 @@ export default defineComponent({
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={() => { handleRadioUpdateChecked(rowInfo.tmNode) }
-                                }
+                                onUpdateChecked={() => {
+                                  handleRadioUpdateChecked(rowInfo.tmNode)
+                                }}
                               />
                             ) : (
                               <RenderSafeCheckbox
@@ -891,8 +892,7 @@ export default defineComponent({
                                     checked,
                                     e.shiftKey
                                   )
-                                }
-                                }
+                                }}
                               />
                             )
                           ) : null
@@ -904,8 +904,9 @@ export default defineComponent({
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
                                 renderExpandIcon={this.renderExpandIcon}
-                                onClick={() => { handleUpdateExpanded(rowKey, null) }
-                                }
+                                onClick={() => {
+                                  handleUpdateExpanded(rowKey, null)
+                                }}
                               />
                                 ) : null
                           ) : null

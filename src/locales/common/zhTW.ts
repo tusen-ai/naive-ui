@@ -116,6 +116,7 @@ const zhTW: NLocale = {
     tipClockwise: '向右旋轉',
     tipZoomOut: '縮小',
     tipZoomIn: '放大',
+    tipDownload: '下載',
     tipClose: '關閉（Esc）',
     tipOriginalSize: '縮放到原始尺寸'
   }

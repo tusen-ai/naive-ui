@@ -49,8 +49,8 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import {
   NInternalSelectMenu,
   NInternalSelection,
-  type InternalSelectMenuRef
-  , type InternalSelectionInst
+  type InternalSelectMenuRef,
+  type InternalSelectionInst
 } from '../../_internal'
 import { selectLight, type SelectTheme } from '../styles'
 import {
@@ -671,14 +671,20 @@ export default defineComponent({
         const optionBeingCreated = onCreate
           ? onCreate(value)
           : { [props.labelField]: value, [props.valueField]: value }
-        const { valueField } = props
+        const { valueField, labelField } = props
         if (
-          compitableOptionsRef.value.some(
-            (option) => option[valueField] === optionBeingCreated[valueField]
-          ) ||
-          createdOptionsRef.value.some(
-            (option) => option[valueField] === optionBeingCreated[valueField]
-          )
+          compitableOptionsRef.value.some((option) => {
+            return (
+              option[valueField] === optionBeingCreated[valueField] ||
+              option[labelField] === optionBeingCreated[labelField]
+            )
+          }) ||
+          createdOptionsRef.value.some((option) => {
+            return (
+              option[valueField] === optionBeingCreated[valueField] ||
+              option[labelField] === optionBeingCreated[labelField]
+            )
+          })
         ) {
           beingCreatedOptionsRef.value = emptyArray
         } else {
@@ -799,8 +805,14 @@ export default defineComponent({
       focus: () => {
         triggerRef.value?.focus()
       },
+      focusInput: () => {
+        triggerRef.value?.focusInput()
+      },
       blur: () => {
         triggerRef.value?.blur()
+      },
+      blurInput: () => {
+        triggerRef.value?.blurInput()
       }
     }
     const cssVarsRef = computed(() => {

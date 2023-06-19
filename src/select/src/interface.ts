@@ -86,6 +86,8 @@ export type SelectGroupOption =
 export interface SelectInst {
   focus: () => void
   blur: () => void
+  focusInput: () => void
+  blurInput: () => void
 }
 
 export type SelectFallbackOption = (value: string & number) => SelectOption

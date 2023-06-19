@@ -63,8 +63,9 @@ export default defineComponent({
           ]}
           onClick={() => {
             useAsQuickJump
-              ? handleQuickMonthClick(item, (value) => { (props.onUpdateValue as OnPanelUpdateValueImpl)(value, false) }
-              )
+              ? handleQuickMonthClick(item, (value) => {
+                ;(props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
+              })
               : handleDateClick(item)
           }}
         >
