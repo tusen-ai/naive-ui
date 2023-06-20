@@ -1,6 +1,6 @@
 # Avatar
 
-On the Internet, nobody knows you're \*\*\* .
+On the Internet, nobody knows you're a dog.
 
 ## Demos
 
