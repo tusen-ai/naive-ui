@@ -37,6 +37,10 @@
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 
+### i18n
+
+- Improve `zhTW` locale.
+
 ## 2.34.4
 
 ### Fixes

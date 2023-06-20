@@ -37,6 +37,10 @@
 - `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)， [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
 - `n-tree` 为 `render-switcher-icon` 属性添加节点信息，关闭 [#4815](https://github.com/tusen-ai/naive-ui/issues/4815)
 
+### i18n
+
+- 完善 zhTW locale
+
 ## 2.34.4
 
 ### Fixes
