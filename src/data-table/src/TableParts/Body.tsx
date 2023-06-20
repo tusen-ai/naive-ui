@@ -796,6 +796,9 @@ export default defineComponent({
                       rowData,
                       actualRowIndex
                     )
+                    const indentOffsetStyle = {
+                      '--indent-offset': '' as string | number
+                    }
                     return (
                       <td
                         {...resolvedCellProps}
@@ -806,6 +809,7 @@ export default defineComponent({
                             left: pxfy(fixedColumnLeftMap[colKey]?.start),
                             right: pxfy(fixedColumnRightMap[colKey]?.start)
                           },
+                          indentOffsetStyle as CSSProperties,
                           resolvedCellProps?.style || ''
                         ]}
                         colspan={mergedColSpan}
@@ -840,7 +844,8 @@ export default defineComponent({
                         {hasChildren && colIndex === childTriggerColIndex
                           ? [
                               repeat(
-                                isSummary ? 0 : rowInfo.tmNode.level,
+                                (indentOffsetStyle['--indent-offset'] =
+                                  isSummary ? 0 : rowInfo.tmNode.level),
                                 <div
                                   class={`${mergedClsPrefix}-data-table-indent`}
                                   style={indentStyle}

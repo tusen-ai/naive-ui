@@ -24,6 +24,7 @@
 - 修复 `n-select` 的 `empty` slot 为可交互组件时的行为，关闭 [#4700](https://github.com/tusen-ai/naive-ui/issues/4700)
 - 修复 `n-data-table` 使用按键滚动时 header 和 body 不同步，关闭 [#3941](https://github.com/tusen-ai/naive-ui/issues/3941)
 - 修复 `n-data-table` 在 Safari 中拖拽列时文本会被选中, closes [#4957](https://github.com/tusen-ai/naive-ui/issues/4957)
+- 修复 `n-data-table` 当使用树形表格时，某一列设置了固定宽度且 ellipsis: true 后，如果文字溢出，不会显示省略号，而是换行[#3755](https://github.com/tusen-ai/naive-ui/issues/3755)
 
 ### Features
 
