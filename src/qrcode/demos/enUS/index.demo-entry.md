@@ -15,6 +15,8 @@ border.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| value | `string` | `-` | Text information. |  |
+| bgColor | `string` | `#FFF` | Qr code background color, Values need to be in `hex` format. |  |
 | bordered | `boolean` | `true` | Whether to show the qrcode border. |  |
+| color | `string` | `#000` | Qr code color, Values need to be in `hex` format. |  |
+| value | `string` | `-` | Text information. |  |
 | width | `number` | `160` | Width of the qrcode |

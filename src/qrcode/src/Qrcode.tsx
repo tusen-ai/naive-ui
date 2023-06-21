@@ -9,6 +9,14 @@ import { type QrcodeTheme, qrcodeLight } from '../styles'
 export const qrcodeProps = {
   ...(useTheme.props as ThemeProps<QrcodeTheme>),
   value: String,
+  color: {
+    type: String,
+    default: '#000'
+  },
+  bgColor: {
+    type: String,
+    default: '#FFF'
+  },
   bordered: {
     type: Boolean,
     default: true
@@ -34,7 +42,11 @@ export default defineComponent({
     watchEffect(async () => {
       src.value = await QRCode.toDataURL(props.value || '-', {
         width: props.width,
-        margin: 0
+        margin: 0,
+        color: {
+          dark: props.color,
+          light: props.bgColor
+        }
       })
     })
 
@@ -44,7 +56,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { src, mergedClsPrefix, bordered } = this
+    const { src, mergedClsPrefix, bordered, bgColor } = this
     return (
       <div
         class={[
@@ -52,7 +64,10 @@ export default defineComponent({
           { [`${mergedClsPrefix}-qrcode--bordered`]: bordered }
         ]}
       >
-        <div class={`${mergedClsPrefix}-qrcode-wrapper`}>
+        <div
+          class={[`${mergedClsPrefix}-qrcode-wrapper`]}
+          style={{ backgroundColor: bgColor }}
+        >
           <img src={src} />
         </div>
       </div>

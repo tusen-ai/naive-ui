@@ -7,14 +7,17 @@
 ```demo
 basic.vue
 border.vue
+color.vue
 ```
 
 ## API
 
 ### Qrcode Props
 
-| 名称     | 类型      | 默认值 | 说明               | 版本 |
-| -------- | --------- | ------ | ------------------ | ---- |
-| value    | `string`  | `-`    | 文本信息           |      |
-| bordered | `boolean` | `true` | 是否显示二维码边框 |      |
-| width    | `number`  | `160`  | 二维码的宽度       |
+| 名称     | 类型      | 默认值 | 说明                                  | 版本 |
+| -------- | --------- | ------ | ------------------------------------- | ---- |
+| bgColor  | `string`  | `#FFF` | 二维码背景颜色，值需要采用 `hex` 格式 |      |
+| bordered | `boolean` | `true` | 是否显示二维码边框                    |      |
+| color    | `string`  | `#000` | 二维码颜色，值需要采用 `hex` 格式     |      |
+| value    | `string`  | `-`    | 文本信息                              |      |
+| width    | `number`  | `160`  | 二维码的宽度                          |

@@ -1,7 +1,7 @@
 <markdown>
   # 基础用法
 
-  基础二维码
+基础二维码。
 </markdown>
 
 <template>

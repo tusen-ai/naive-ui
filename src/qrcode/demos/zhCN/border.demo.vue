@@ -5,21 +5,5 @@
 </markdown>
 
 <template>
-  <n-space vertical>
-    <n-qrcode :bordered="false" :value="text" />
-    <n-input v-model:value="text" type="text" />
-  </n-space>
+  <n-qrcode :bordered="false" value="https://www.naiveui.com/" />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const text = ref('岁月在墙上剥落看见小时候')
-    return {
-      text
-    }
-  }
-})
-</script>
