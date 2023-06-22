@@ -103,7 +103,7 @@ export default defineComponent({
       const nextSorter = createNextSorter(column, activeSorter)
       deriveNextSorter(nextSorter)
     }
-    const resizeStartWidthMap: Map<ColumnKey, number | undefined> = new Map()
+    const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
     function handleColumnResizeStart (column: TableBaseColumn): void {
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
     }

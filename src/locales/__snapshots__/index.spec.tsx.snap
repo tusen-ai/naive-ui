@@ -28,6 +28,8 @@ exports[`locale works 1`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -35,8 +37,6 @@ exports[`locale works 1`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -58,6 +58,8 @@ exports[`locale works 1`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -65,8 +67,6 @@ exports[`locale works 1`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -88,6 +88,8 @@ exports[`locale works 1`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -95,8 +97,6 @@ exports[`locale works 1`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -118,6 +118,8 @@ exports[`locale works 1`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -125,8 +127,6 @@ exports[`locale works 1`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -172,6 +172,8 @@ exports[`locale works 2`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -179,8 +181,6 @@ exports[`locale works 2`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -202,6 +202,8 @@ exports[`locale works 2`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -209,8 +211,6 @@ exports[`locale works 2`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -232,6 +232,8 @@ exports[`locale works 2`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -239,8 +241,6 @@ exports[`locale works 2`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -262,6 +262,8 @@ exports[`locale works 2`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -269,8 +271,6 @@ exports[`locale works 2`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -316,6 +316,8 @@ exports[`locale works 3`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -323,8 +325,6 @@ exports[`locale works 3`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -346,6 +346,8 @@ exports[`locale works 3`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -353,8 +355,6 @@ exports[`locale works 3`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -376,6 +376,8 @@ exports[`locale works 3`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -383,8 +385,6 @@ exports[`locale works 3`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -406,6 +406,8 @@ exports[`locale works 3`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -413,8 +415,6 @@ exports[`locale works 3`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -460,6 +460,8 @@ exports[`locale works 4`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -467,8 +469,6 @@ exports[`locale works 4`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -490,6 +490,8 @@ exports[`locale works 4`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -497,8 +499,6 @@ exports[`locale works 4`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -520,6 +520,8 @@ exports[`locale works 4`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -527,8 +529,6 @@ exports[`locale works 4`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -550,6 +550,8 @@ exports[`locale works 4`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -557,8 +559,6 @@ exports[`locale works 4`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -604,6 +604,8 @@ exports[`locale works 5`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -611,8 +613,6 @@ exports[`locale works 5`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -634,6 +634,8 @@ exports[`locale works 5`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -641,8 +643,6 @@ exports[`locale works 5`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -664,6 +664,8 @@ exports[`locale works 5`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -671,8 +673,6 @@ exports[`locale works 5`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -694,6 +694,8 @@ exports[`locale works 5`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -701,8 +703,6 @@ exports[`locale works 5`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -748,6 +748,8 @@ exports[`locale works 6`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -755,8 +757,6 @@ exports[`locale works 6`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -778,6 +778,8 @@ exports[`locale works 6`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -785,8 +787,6 @@ exports[`locale works 6`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -808,6 +808,8 @@ exports[`locale works 6`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -815,8 +817,6 @@ exports[`locale works 6`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -838,6 +838,8 @@ exports[`locale works 6`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -845,8 +847,6 @@ exports[`locale works 6`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -892,6 +892,8 @@ exports[`locale works 7`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -899,8 +901,6 @@ exports[`locale works 7`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -922,6 +922,8 @@ exports[`locale works 7`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -929,8 +931,6 @@ exports[`locale works 7`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -952,6 +952,8 @@ exports[`locale works 7`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -959,8 +961,6 @@ exports[`locale works 7`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -982,6 +982,8 @@ exports[`locale works 7`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -989,8 +991,6 @@ exports[`locale works 7`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1036,6 +1036,8 @@ exports[`locale works 8`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1043,8 +1045,6 @@ exports[`locale works 8`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1066,6 +1066,8 @@ exports[`locale works 8`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1073,8 +1075,6 @@ exports[`locale works 8`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1096,6 +1096,8 @@ exports[`locale works 8`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1103,8 +1105,6 @@ exports[`locale works 8`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1126,6 +1126,8 @@ exports[`locale works 8`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1133,8 +1135,6 @@ exports[`locale works 8`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1180,6 +1180,8 @@ exports[`locale works 9`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1187,8 +1189,6 @@ exports[`locale works 9`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1210,6 +1210,8 @@ exports[`locale works 9`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1217,8 +1219,6 @@ exports[`locale works 9`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1240,6 +1240,8 @@ exports[`locale works 9`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1247,8 +1249,6 @@ exports[`locale works 9`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1270,6 +1270,8 @@ exports[`locale works 9`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1277,8 +1279,6 @@ exports[`locale works 9`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1324,6 +1324,8 @@ exports[`locale works 10`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1331,8 +1333,6 @@ exports[`locale works 10`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1354,6 +1354,8 @@ exports[`locale works 10`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1361,8 +1363,6 @@ exports[`locale works 10`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1384,6 +1384,8 @@ exports[`locale works 10`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1391,8 +1393,6 @@ exports[`locale works 10`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1414,6 +1414,8 @@ exports[`locale works 10`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1421,8 +1423,6 @@ exports[`locale works 10`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1468,6 +1468,8 @@ exports[`locale works 11`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1475,8 +1477,6 @@ exports[`locale works 11`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1498,6 +1498,8 @@ exports[`locale works 11`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1505,8 +1507,6 @@ exports[`locale works 11`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1528,6 +1528,8 @@ exports[`locale works 11`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1535,8 +1537,6 @@ exports[`locale works 11`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1558,6 +1558,8 @@ exports[`locale works 11`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1565,8 +1567,6 @@ exports[`locale works 11`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1612,6 +1612,8 @@ exports[`locale works 12`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1619,8 +1621,6 @@ exports[`locale works 12`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1642,6 +1642,8 @@ exports[`locale works 12`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1649,8 +1651,6 @@ exports[`locale works 12`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1672,6 +1672,8 @@ exports[`locale works 12`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1679,8 +1681,6 @@ exports[`locale works 12`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1702,6 +1702,8 @@ exports[`locale works 12`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1709,8 +1711,6 @@ exports[`locale works 12`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1756,6 +1756,8 @@ exports[`locale works 13`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1763,8 +1765,6 @@ exports[`locale works 13`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1786,6 +1786,8 @@ exports[`locale works 13`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1793,8 +1795,6 @@ exports[`locale works 13`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1816,6 +1816,8 @@ exports[`locale works 13`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1823,8 +1825,6 @@ exports[`locale works 13`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1846,6 +1846,8 @@ exports[`locale works 13`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1853,8 +1855,6 @@ exports[`locale works 13`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1900,6 +1900,8 @@ exports[`locale works 14`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1907,8 +1909,6 @@ exports[`locale works 14`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1930,6 +1930,8 @@ exports[`locale works 14`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1937,8 +1939,6 @@ exports[`locale works 14`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1960,6 +1960,8 @@ exports[`locale works 14`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1967,8 +1969,6 @@ exports[`locale works 14`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -1990,6 +1990,8 @@ exports[`locale works 14`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -1997,8 +1999,6 @@ exports[`locale works 14`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2044,6 +2044,8 @@ exports[`locale works 15`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2051,8 +2053,6 @@ exports[`locale works 15`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2074,6 +2074,8 @@ exports[`locale works 15`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2081,8 +2083,6 @@ exports[`locale works 15`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2104,6 +2104,8 @@ exports[`locale works 15`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2111,8 +2113,6 @@ exports[`locale works 15`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2134,6 +2134,8 @@ exports[`locale works 15`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2141,8 +2143,6 @@ exports[`locale works 15`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2188,6 +2188,8 @@ exports[`locale works 16`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2195,8 +2197,6 @@ exports[`locale works 16`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2218,6 +2218,8 @@ exports[`locale works 16`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2225,8 +2227,6 @@ exports[`locale works 16`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2248,6 +2248,8 @@ exports[`locale works 16`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2255,8 +2257,6 @@ exports[`locale works 16`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2278,6 +2278,8 @@ exports[`locale works 16`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2285,8 +2287,6 @@ exports[`locale works 16`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2332,6 +2332,8 @@ exports[`locale works 17`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2339,8 +2341,6 @@ exports[`locale works 17`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2362,6 +2362,8 @@ exports[`locale works 17`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2369,8 +2371,6 @@ exports[`locale works 17`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2392,6 +2392,8 @@ exports[`locale works 17`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2399,8 +2401,6 @@ exports[`locale works 17`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2422,6 +2422,8 @@ exports[`locale works 17`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2429,8 +2431,6 @@ exports[`locale works 17`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2476,6 +2476,8 @@ exports[`locale works 18`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2483,8 +2485,6 @@ exports[`locale works 18`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2506,6 +2506,8 @@ exports[`locale works 18`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2513,8 +2515,6 @@ exports[`locale works 18`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2536,6 +2536,8 @@ exports[`locale works 18`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2543,8 +2545,6 @@ exports[`locale works 18`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2566,6 +2566,8 @@ exports[`locale works 18`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2573,8 +2575,6 @@ exports[`locale works 18`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2620,6 +2620,8 @@ exports[`locale works 19`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2627,8 +2629,6 @@ exports[`locale works 19`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2650,6 +2650,8 @@ exports[`locale works 19`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2657,8 +2659,6 @@ exports[`locale works 19`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2680,6 +2680,8 @@ exports[`locale works 19`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2687,8 +2689,6 @@ exports[`locale works 19`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2710,6 +2710,8 @@ exports[`locale works 19`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2717,8 +2719,6 @@ exports[`locale works 19`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2764,6 +2764,8 @@ exports[`locale works 20`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2771,8 +2773,6 @@ exports[`locale works 20`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2794,6 +2794,8 @@ exports[`locale works 20`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2801,8 +2803,6 @@ exports[`locale works 20`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2824,6 +2824,8 @@ exports[`locale works 20`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2831,8 +2833,6 @@ exports[`locale works 20`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2854,6 +2854,8 @@ exports[`locale works 20`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2861,8 +2863,6 @@ exports[`locale works 20`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2908,6 +2908,8 @@ exports[`locale works 21`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2915,8 +2917,6 @@ exports[`locale works 21`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2938,6 +2938,8 @@ exports[`locale works 21`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2945,8 +2947,6 @@ exports[`locale works 21`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2968,6 +2968,8 @@ exports[`locale works 21`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -2975,8 +2977,6 @@ exports[`locale works 21`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -2998,6 +2998,8 @@ exports[`locale works 21`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3005,8 +3007,6 @@ exports[`locale works 21`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3052,6 +3052,8 @@ exports[`locale works 22`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3059,8 +3061,6 @@ exports[`locale works 22`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3082,6 +3082,8 @@ exports[`locale works 22`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3089,8 +3091,6 @@ exports[`locale works 22`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3112,6 +3112,8 @@ exports[`locale works 22`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3119,8 +3121,6 @@ exports[`locale works 22`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3142,6 +3142,8 @@ exports[`locale works 22`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3149,8 +3151,6 @@ exports[`locale works 22`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3196,6 +3196,8 @@ exports[`locale works 23`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3203,8 +3205,6 @@ exports[`locale works 23`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3226,6 +3226,8 @@ exports[`locale works 23`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3233,8 +3235,6 @@ exports[`locale works 23`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3256,6 +3256,8 @@ exports[`locale works 23`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3263,8 +3265,6 @@ exports[`locale works 23`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>
@@ -3286,6 +3286,8 @@ exports[`locale works 23`] = `
               <!---->
             </div>
             <div class="n-input__suffix">
+              <!---->
+              <!---->
               <!----><i class="n-base-icon n-date-picker-icon"><svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g stroke="none" stroke-width="1" fill-rule="evenodd">
                     <g fill-rule="nonzero">
@@ -3293,8 +3295,6 @@ exports[`locale works 23`] = `
                     </g>
                   </g>
                 </svg></i>
-              <!---->
-              <!---->
               <!---->
               <!---->
             </div>

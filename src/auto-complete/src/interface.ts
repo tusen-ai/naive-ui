@@ -16,6 +16,7 @@ AutoCompleteOption | AutoCompleteGroupOption | string
 export type OnUpdateValue = (value: string & (string | null)) => void
 export type OnUpdateImpl = (value: string | null) => void
 export type OnSelect = (value: string & number) => void
+export type OnSelectImpl = (value: string | number) => void
 
 export interface AutoCompleteInst {
   focus: () => void
