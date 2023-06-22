@@ -41,7 +41,8 @@
 
 ### i18n
 
-- 完善 zhTW locale 新增 svSE locale
+- 完善 zhTW locale
+- 新增 svSE locale
 
 ## 2.34.4
 
