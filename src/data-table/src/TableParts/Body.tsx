@@ -675,7 +675,7 @@ export default defineComponent({
                 } = rowInfo
                 return (
                   <tr
-                    class={`${mergedClsPrefix}-data-table-tr ${mergedClsPrefix}-data-table-tr--expand`}
+                    class={`${mergedClsPrefix}-data-table-tr ${mergedClsPrefix}-data-table-tr--expanded`}
                     key={`${key}__expand`}
                   >
                     <td
