@@ -191,6 +191,7 @@ export default cB('input', `
       margin: 0;
       resize: none;
       white-space: pre-wrap;
+      scroll-padding-block-end: var(--n-padding-vertical);
     `),
     cE('textarea-mirror', `
       width: 100%;

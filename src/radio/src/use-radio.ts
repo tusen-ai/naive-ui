@@ -2,19 +2,19 @@ import {
   inject,
   ref,
   toRef,
-  ExtractPropTypes,
-  PropType,
-  Ref,
-  ComputedRef,
+  type ExtractPropTypes,
+  type PropType,
+  type Ref,
+  type ComputedRef,
   watchEffect
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { type OnUpdateValue, type OnUpdateValueImpl } from './interface'
 
-export const radioProps = {
+export const radioBaseProps = {
   name: String,
   value: {
     type: [String, Number, Boolean] as PropType<string | number | boolean>,
@@ -71,7 +71,7 @@ export interface UseRadio {
   handleRadioInputFocus: () => void
 }
 
-function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
+function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   if (__DEV__) {
     watchEffect(() => {
       if (props.checkedValue !== undefined) {
@@ -174,5 +174,5 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   }
 }
 
-export type RadioProps = ExtractPropTypes<typeof radioProps>
+export type RadioBaseProps = ExtractPropTypes<typeof radioBaseProps>
 export { setup }

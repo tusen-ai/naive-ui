@@ -8,7 +8,7 @@ import {
   defineComponent,
   mergeProps,
   Transition,
-  PropType,
+  type PropType,
   onMounted,
   onBeforeUnmount,
   watchEffect

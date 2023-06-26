@@ -30,17 +30,17 @@ processing.vue
 | gap-degree | `number` | `75` | 仪表盘进度条缺口角度，取值范围 0 ~ 360 | 2.25.2 |
 | gap-offset-degree | `number` | `0` | 仪表盘进度条缺口位置 | 2.25.2 |
 | height | `number` | `undefined` | `'line'` 类型进度条的高度，不填写则维持默认高度 |  |
-| indicator-placement | `'inside' \| 'outside'` | `'outside'` | 设置指标位置 |  |
-| indicator-text-color | `string` | `undefined` | 指标文本颜色 |  |
-| offset-degree | `number` | `0` | 进度的偏移角度，只对 `circle` 类型生效 | 2.24.0 |
+| indicator-placement | `'inside' \| 'outside'` | `'outside'` | `'line'` 类型设置指示标位置 |  |
+| indicator-text-color | `string` | `undefined` | 指示标文本颜色 |  |
+| offset-degree | `number` | `0` | 进度的偏移角度，只对 `'circle'` 类型生效 | 2.24.0 |
 | percentage | `number \| number[]` | `0` | 百分比的值 |  |
 | processing | `boolean` | `false` | 处理中状态 |  |
 | rail-color | `string \| string[]` | `undefined` | 轨道的颜色 |  |
 | rail-style | `string \| CSS \| Array<string \| CSS>` | `undefined` | 轨道的对象 |  |
-| show-indicator | `boolean` | `true` | 是否显示指标 |  |
+| show-indicator | `boolean` | `true` | 是否显示指示标 |  |
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 进度条状态 |  |
 | stroke-width | `number` | `7` | 进度条宽度 |  |
-| type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `line` | 进度条类型 | `'dashboard'` 2.25.2 |
+| type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `'line'` | 进度条类型 | `'dashboard'` 2.25.2 |
 | unit | `string` | `%` | 进度条单位 |  |
 
 ### Progress Slots

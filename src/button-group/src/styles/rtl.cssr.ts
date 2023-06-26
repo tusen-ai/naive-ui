@@ -1,5 +1,5 @@
-import { CNode } from 'css-render'
-import { Type } from '../../../button/src/interface'
+import type { CNode } from 'css-render'
+import type { Type } from '../../../button/src/interface'
 import { cB, cM, cE, cNotM, c } from '../../../_utils/cssr'
 import { zero, n1 } from './index.cssr'
 

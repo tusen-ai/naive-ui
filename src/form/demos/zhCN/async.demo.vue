@@ -89,7 +89,7 @@ export default defineComponent({
           required: true,
           trigger: ['input'],
           validator: (rule: FormItemRule, value: string) => {
-            return /^[1]+[3,8]+\\d{9}$/.test(value)
+            return /^[1]+[3,8]+\d{9}$/.test(value)
           }
         }
       },

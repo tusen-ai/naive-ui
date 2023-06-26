@@ -1,5 +1,5 @@
 import { beforeNextFrameOnce } from 'seemly'
-import { computed, ComputedRef, watch, Ref, ref } from 'vue'
+import { computed, type ComputedRef, watch, type Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
 import type {
   ColumnKey,
@@ -15,16 +15,15 @@ export function useScroll (
   {
     mainTableInstRef,
     mergedCurrentPageRef,
-    bodyWidthRef,
-    scrollPartRef
+    bodyWidthRef
   }: {
-    scrollPartRef: Ref<'head' | 'body'>
     bodyWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
   }
 ) {
-  let scrollLeft = 0
+  let lastScrollLeft = 0
+  const scrollPartRef = ref<'head' | 'body' | undefined>()
   const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const leftActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
   const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
@@ -91,7 +90,7 @@ export function useScroll (
     let leftActiveFixedColKey: string | number | null = null
     for (let i = 0; i < leftFixedColumns.length; ++i) {
       const key = getColKey(leftFixedColumns[i])
-      if (scrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
+      if (lastScrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
         leftActiveFixedColKey = key
         leftWidth = fixedColumnLeftMap[key]?.end || 0
       } else {
@@ -129,7 +128,7 @@ export function useScroll (
       const key = getColKey(rightFixedColumns[i])
       if (
         Math.round(
-          scrollLeft +
+          lastScrollLeft +
             (fixedColumnRightMap[key]?.start || 0) +
             tableWidth -
             rightWidth
@@ -183,14 +182,18 @@ export function useScroll (
     }
   }
   function handleTableHeaderScroll (): void {
-    if (scrollPartRef.value === 'head') {
+    if (scrollPartRef.value !== 'body') {
       beforeNextFrameOnce(syncScrollState)
+    } else {
+      scrollPartRef.value = undefined
     }
   }
   function handleTableBodyScroll (e: Event): void {
     props.onScroll?.(e)
-    if (scrollPartRef.value === 'body') {
+    if (scrollPartRef.value !== 'head') {
       beforeNextFrameOnce(syncScrollState)
+    } else {
+      scrollPartRef.value = undefined
     }
   }
   function syncScrollState (): void {
@@ -201,19 +204,20 @@ export function useScroll (
     if (!body) return
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
-    const { value: scrollPart } = scrollPartRef
     if (props.maxHeight || props.flexHeight) {
       if (!header) return
       // we need to deal with overscroll
-      if (scrollPart === 'head') {
-        scrollLeft = header.scrollLeft
-        body.scrollLeft = scrollLeft
+      const directionHead = lastScrollLeft - header.scrollLeft
+      scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
+      if (scrollPartRef.value === 'head') {
+        lastScrollLeft = header.scrollLeft
+        body.scrollLeft = lastScrollLeft
       } else {
-        scrollLeft = body.scrollLeft
-        header.scrollLeft = scrollLeft
+        lastScrollLeft = body.scrollLeft
+        header.scrollLeft = lastScrollLeft
       }
     } else {
-      scrollLeft = body.scrollLeft
+      lastScrollLeft = body.scrollLeft
     }
     deriveActiveLeftFixedColumn()
     deriveActiveLeftFixedChildrenColumns()

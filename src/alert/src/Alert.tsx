@@ -3,9 +3,9 @@ import {
   ref,
   computed,
   defineComponent,
-  PropType,
+  type PropType,
   mergeProps,
-  HTMLAttributes,
+  type HTMLAttributes,
   watchEffect
 } from 'vue'
 import { getMargin } from 'seemly'
@@ -193,6 +193,10 @@ export default defineComponent({
                 this.themeClass,
                 this.closable && `${mergedClsPrefix}-alert--closable`,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
+                // fix: https://github.com/tusen-ai/naive-ui/issues/4588
+                !this.title &&
+                  this.closable &&
+                  `${mergedClsPrefix}-alert--right-adjust`,
                 this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`
               ],
               style: this.cssVars as any,

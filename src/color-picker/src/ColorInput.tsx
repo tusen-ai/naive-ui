@@ -1,7 +1,7 @@
 import {
-  HSVA,
-  HSLA,
-  RGBA,
+  type HSVA,
+  type HSLA,
+  type RGBA,
   toHsvaString,
   toRgbaString,
   toHslaString,
@@ -11,7 +11,7 @@ import {
   toRgbString,
   toHslString
 } from 'seemly'
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, type PropType } from 'vue'
 import { NInputGroup } from '../../input'
 import ColorInputUnit from './ColorInputUnit'
 import type { ColorPickerMode } from './utils'

@@ -1,4 +1,10 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { getPadding } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -33,7 +39,7 @@ export const cardBaseProps = {
   },
   bordered: {
     type: Boolean,
-    default: true as boolean
+    default: true
   },
   closable: Boolean,
   hoverable: Boolean,
