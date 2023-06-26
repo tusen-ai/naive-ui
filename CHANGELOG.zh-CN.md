@@ -28,6 +28,7 @@
 - 修复 `useLoadingBar` 调用 `finish` 方法无法结束加载，关闭 [#4965](https://github.com/tusen-ai/naive-ui/issues/4965)
 - 修复 `n-select` 在 `disabled` 的情况下还可以触发 `focus` 和 `blur`，关闭 [#4454](https://github.com/tusen-ai/naive-ui/issues/4454)
 - 修复 `n-steps` 在超过 9 个步数的时候换行可能存在问题
+- 修复 `n-form-item-gi` v-show 多次切换报错，关闭 [#4422](https://github.com/tusen-ai/naive-ui/issues/4422)
 
 ### Features
 

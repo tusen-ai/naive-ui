@@ -28,6 +28,7 @@
 - Fix `useLoadingBar` can't finish loading when called `finish` method, closes [#4965](https://github.com/tusen-ai/naive-ui/issues/4965).
 - Fix `n-select` can still trigger focus and blur event in the disabled state, closes [#4454](https://github.com/tusen-ai/naive-ui/issues/4454).
 - Fix `n-steps` may have line wrap issue if step is more than 9.
+- Fix `n-grid` v-show reports errors when switching multiple times, closes [#4422](https://github.com/tusen-ai/naive-ui/issues/4422).
 
 ### Features
 
