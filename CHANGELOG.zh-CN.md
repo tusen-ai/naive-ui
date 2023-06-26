@@ -27,6 +27,7 @@
 - 修复 `n-data-table` 当使用树形表格时，某一列设置了固定宽度且 ellipsis: true 后，如果文字溢出，不会显示省略号，而是换行[#3755](https://github.com/tusen-ai/naive-ui/issues/3755)
 - 修复 `useLoadingBar` 调用 `finish` 方法无法结束加载，关闭 [#4965](https://github.com/tusen-ai/naive-ui/issues/4965)
 - 修复 `n-select` 在 `disabled` 的情况下还可以触发 `focus` 和 `blur`，关闭 [#4454](https://github.com/tusen-ai/naive-ui/issues/4454)
+- 修复 `n-steps` 在超过 9 个步数的时候换行可能存在问题
 
 ### Features
 
