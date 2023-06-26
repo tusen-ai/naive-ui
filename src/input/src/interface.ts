@@ -1,4 +1,4 @@
-import { Ref, UnwrapRef } from 'vue'
+import type { Ref, UnwrapRef } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'

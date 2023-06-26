@@ -1,5 +1,5 @@
-import { TreeMate, TreeNode } from 'treemate'
-import {
+import type { TreeMate, TreeNode } from 'treemate'
+import type {
   CSSProperties,
   Ref,
   HTMLAttributes,
@@ -18,7 +18,7 @@ import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
-import { BaseLoadingExposedProps } from '../../_internal'
+import type { BaseLoadingExposedProps } from '../../_internal'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -119,7 +119,7 @@ export const dataTableProps = {
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
-  renderExpandIcon: Function as PropType<() => VNodeChild>,
+  renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
@@ -308,6 +308,11 @@ export type RenderExpand<T = InternalRowData> = (
   row: T,
   index: number
 ) => VNodeChild
+export type RenderExpandIcon = ({
+  expanded
+}: {
+  expanded: boolean
+}) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
@@ -374,7 +379,6 @@ export interface DataTableInjection {
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
-  scrollPartRef: Ref<'head' | 'body'>
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
@@ -387,7 +391,7 @@ export interface DataTableInjection {
   paginationBehaviorOnFilterRef: Ref<'current' | 'first'>
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
-  renderExpandIconRef: Ref<undefined | (() => VNodeChild)>
+  renderExpandIconRef: Ref<undefined | RenderExpandIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   scrollbarPropsRef: Ref<ScrollbarProps | undefined>

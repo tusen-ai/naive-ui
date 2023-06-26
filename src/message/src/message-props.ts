@@ -1,6 +1,6 @@
-import { ExtractPropTypes, PropType, VNodeChild } from 'vue'
-import { ExtractPublicPropTypes } from '../../_utils'
-import { MessageType } from './types'
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { MessageType } from './types'
 
 export const messageProps = {
   icon: Function as PropType<() => VNodeChild>,

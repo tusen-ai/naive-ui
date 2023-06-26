@@ -2,7 +2,7 @@ import {
   h,
   defineComponent,
   onBeforeUnmount,
-  PropType,
+  type PropType,
   toRef,
   watch
 } from 'vue'
@@ -18,7 +18,7 @@ import {
 import { themeOverridesLight } from './theme-overrides-light'
 import { themeOverridesDark } from './theme-overrides-dark'
 import { icons as tusimpleIcons } from './icons'
-import { CNode } from 'css-render'
+import { type CNode } from 'css-render'
 
 const tusimpleComponentOptions = {
   Pagination: {

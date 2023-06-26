@@ -3,18 +3,21 @@ import {
   Fragment,
   ref,
   h,
-  ExtractPropTypes,
+  type ExtractPropTypes,
   provide,
-  PropType,
+  type PropType,
   reactive,
-  Ref,
-  CSSProperties
+  type Ref,
+  type CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import { NDialogEnvironment, exposedDialogEnvProps } from './DialogEnvironment'
+import {
+  NDialogEnvironment,
+  type exposedDialogEnvProps
+} from './DialogEnvironment'
 import {
   dialogApiInjectionKey,
   dialogProviderInjectionKey,
@@ -101,7 +104,7 @@ export const NDialogProvider = defineComponent({
       return create({ ...options, type })
     })
 
-    function handleAfterLeave (key: String): void {
+    function handleAfterLeave (key: string): void {
       const { value: dialogList } = dialogListRef
       dialogList.splice(
         dialogList.findIndex((dialog) => dialog.key === key),
@@ -110,9 +113,9 @@ export const NDialogProvider = defineComponent({
     }
 
     function destroyAll (): void {
-      Object.values(dialogInstRefs).forEach((dialogInstRef) =>
+      Object.values(dialogInstRefs).forEach((dialogInstRef) => {
         dialogInstRef.hide()
-      )
+      })
     }
 
     const api = {

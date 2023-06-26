@@ -2,7 +2,12 @@ import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
 import { h, Comment } from 'vue'
 import { sleep } from 'seemly'
-import { NMenu, MenuOption, MenuGroupOption, MenuDividerOption } from '../index'
+import {
+  NMenu,
+  type MenuOption,
+  type MenuGroupOption,
+  type MenuDividerOption
+} from '../index'
 import { NIcon } from '../../icon'
 
 describe('n-menu', () => {
@@ -91,6 +96,7 @@ describe('n-menu', () => {
     })
     expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(2)
     expect(wrapper.findAll('.n-icon').length).toBe(1)
+    wrapper.unmount()
   })
 
   it('should tooltip work with `render-label` props', async () => {
@@ -138,6 +144,7 @@ describe('n-menu', () => {
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should dropdown work with `render-label` props', async () => {
@@ -193,6 +200,7 @@ describe('n-menu', () => {
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('a').length).toEqual(3)
     expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
+    wrapper.unmount()
   })
 
   it('should dropdown work with `render-icon` props', async () => {
@@ -239,6 +247,7 @@ describe('n-menu', () => {
     await sleep(150)
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('.n-icon').length).toEqual(2)
+    wrapper.unmount()
   })
 
   it('should dropdown work with `expand-icon` props', () => {
@@ -279,6 +288,7 @@ describe('n-menu', () => {
       }
     })
     expect(wrapper.find('.expand-icon').text()).toEqual('1')
+    wrapper.unmount()
   })
 
   it('should dropdown work with `render-extra` props', async () => {
@@ -322,6 +332,7 @@ describe('n-menu', () => {
     expect(
       wrapper.findAll('.n-menu-item-content-header__extra').length
     ).toEqual(4)
+    wrapper.unmount()
   })
 
   it('should accept empty object in type-checking phase', () => {
@@ -368,6 +379,7 @@ describe('n-menu', () => {
       }
     })
     expect(wrapper.find('.n-submenu-children').element.children.length).toBe(3)
+    wrapper.unmount()
   })
 
   it('accepts proper options', () => {
@@ -429,6 +441,7 @@ describe('n-menu', () => {
       }
     })
     expect(wrapper.findAll('.n-menu-item-content').length).toBe(2)
+    wrapper.unmount()
   })
 
   it('should work submenu extra', async () => {
@@ -451,5 +464,6 @@ describe('n-menu', () => {
       }
     })
     expect(wrapper.html()).toContain('bar')
+    wrapper.unmount()
   })
 })

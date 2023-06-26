@@ -2,6 +2,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
+const iconSwitchTransitionNode = iconSwitchTransition()
+
 // vars:
 // --n-arrow-color
 // --n-bezier
@@ -12,6 +14,11 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-node-color-pressed
 // --n-node-text-color
 // --n-node-text-color-disabled
+// --n-node-wrapper-padding
+// --n-line-offset-top
+// --n-line-offset-bottom
+// --n-node-content-height
+// --n-line-height
 export default cB('tree', `
   font-size: var(--n-font-size);
   outline: none;
@@ -23,16 +30,9 @@ export default cB('tree', `
   `),
   c('>', [
     cB('tree-node', [
-      c('&:first-child', {
-        marginTop: 0
-      })
+      c('&:first-child', 'margin-top: 0;')
     ])
   ]),
-  cB('tree-node-indent', `
-    flex-grow: 0;
-    flex-shrink: 0;
-    height: 0;
-  `),
   cB('tree-motion-wrapper', [
     cM('expand', [
       fadeInHeightExpandTransition({
@@ -48,7 +48,7 @@ export default cB('tree', `
   ]),
   cB('tree-node-wrapper', `
     box-sizing: border-box;
-    padding: 3px 0;
+    padding: var(--n-node-wrapper-padding);
   `),
   cB('tree-node', `
     transform: translate3d(0,0,0);
@@ -59,9 +59,7 @@ export default cB('tree', `
   `, [
     cM('highlight', [
       cB('tree-node-content', [
-        cE('text', {
-          borderBottomColor: 'var(--n-node-text-color-disabled)'
-        })
+        cE('text', 'border-bottom-color: var(--n-node-text-color-disabled);')
       ])
     ]),
     cM('disabled', [
@@ -88,26 +86,20 @@ export default cB('tree', `
     cB('tree-node', [
       cNotM('disabled', [
         cB('tree-node-content', [
-          c('&:hover', {
-            backgroundColor: 'var(--n-node-color-hover)'
-          })
+          c('&:hover', 'background: var(--n-node-color-hover);')
         ]),
         cM('selectable', [
           cB('tree-node-content', [
-            c('&:active', {
-              backgroundColor: 'var(--n-node-color-pressed)'
-            })
+            c('&:active', 'background: var(--n-node-color-pressed);')
           ])
         ]),
         cM('pending', [
           cB('tree-node-content', `
-            background-color: var(--n-node-color-hover);
+            background: var(--n-node-color-hover);
           `)
         ]),
         cM('selected', [
-          cB('tree-node-content', {
-            backgroundColor: 'var(--n-node-color-active)'
-          })
+          cB('tree-node-content', 'background: var(--n-node-color-active);')
         ])
       ])
     ])
@@ -115,34 +107,61 @@ export default cB('tree', `
   cM('block-line', [
     cB('tree-node', [
       cNotM('disabled', [
-        c('&:hover', {
-          backgroundColor: 'var(--n-node-color-hover)'
-        }),
+        c('&:hover', 'background: var(--n-node-color-hover);'),
         cM('pending', `
-          background-color: var(--n-node-color-hover);
+          background: var(--n-node-color-hover);
         `),
         cM('selectable', [
           cNotM('selected', [
-            c('&:active', {
-              backgroundColor: 'var(--n-node-color-pressed)'
-            })
+            c('&:active', 'background: var(--n-node-color-pressed);')
           ])
         ]),
-        cM('selected', {
-          backgroundColor: 'var(--n-node-color-active)'
-        })
+        cM('selected', 'background: var(--n-node-color-active);')
       ]),
       cM('disabled', `
         cursor: not-allowed;
       `)
     ])
   ]),
+  cB('tree-node-indent', `
+    flex-grow: 0;
+    flex-shrink: 0;
+  `, [
+    cM('show-line', 'position: relative', [
+      c('&::before', `
+        position: absolute;
+        left: 50%;
+        border-left: 1px solid var(--n-border-color);
+        transition: border-color .3s var(--n-bezier);
+        transform: translate(-50%);
+        content: "";
+        top: var(--n-line-offset-top);
+        bottom: var(--n-line-offset-bottom);
+      `),
+      cM('last-child', [
+        c('&::before', `
+          bottom: 50%;
+        `)
+      ]),
+      cM('is-leaf', [
+        c('&::after', `
+          position: absolute;
+          content: "";
+          left: calc(50% + 0.5px);
+          right: 0;
+          bottom: 50%;
+          transition: border-color .3s var(--n-bezier);
+          border-bottom: 1px solid var(--n-border-color);
+        `)
+      ])
+    ]),
+    cNotM('show-line', 'height: 0;')
+  ]),
   cB('tree-node-switcher', `
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
-    height: 24px;
-    width: 24px;
+    height: var(--n-node-content-height);
     align-items: center;
     justify-content: center;
     transition: transform .15s var(--n-bezier);
@@ -157,7 +176,9 @@ export default cB('tree', `
       transition: color .3s var(--n-bezier);
       font-size: 14px;
     `, [
-      cB('icon', [iconSwitchTransition()]),
+      cB('icon', [
+        iconSwitchTransitionNode
+      ]),
       cB('base-loading', `
         color: var(--n-loading-color);
         position: absolute;
@@ -166,58 +187,41 @@ export default cB('tree', `
         right: 0;
         bottom: 0;
       `, [
-        iconSwitchTransition()
+        iconSwitchTransitionNode
       ]),
       cB('base-icon', [
-        iconSwitchTransition()
+        iconSwitchTransitionNode
       ])
     ]),
-    cM('hide', {
-      visibility: 'hidden'
-    }),
-    cM('expanded', {
-      transform: 'rotate(90deg)'
-    })
+    cM('hide', 'visibility: hidden;'),
+    cM('expanded', 'transform: rotate(90deg);')
   ]),
   cB('tree-node-checkbox', `
     display: inline-flex;
-    height: 24px;
-    width: 16px;
+    height: var(--n-node-content-height);
     vertical-align: bottom;
     align-items: center;
     justify-content: center;
-    margin-right: 4px;
-  `, [
-    cM('right', 'margin-left: 4px;')
-  ]),
-  cM('checkable', [
-    cB('tree-node-content', `
-      padding: 0 6px;
-    `)
-  ]),
+  `),
   cB('tree-node-content', `
+    user-select: none;
     position: relative;
     display: inline-flex;
     align-items: center;
-    min-height: 24px;
+    min-height: var(--n-node-content-height);
     box-sizing: border-box;
-    line-height: 1.5;
+    line-height: var(--n-line-height);
     vertical-align: bottom;
     padding: 0 6px 0 4px;
     cursor: default;
     border-radius: var(--n-node-border-radius);
-    text-decoration-color: #0000;
-    text-decoration-line: underline;
     color: var(--n-node-text-color);
     transition:
       color .3s var(--n-bezier),
-      text-decoration-color .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
       border-color .3s var(--n-bezier);
   `, [
-    c('&:last-child', {
-      marginBottom: 0
-    }),
+    c('&:last-child', 'margin-bottom: 0;'),
     cE('prefix', `
       display: inline-flex;
       margin-right: 8px;

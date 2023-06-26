@@ -3,7 +3,7 @@ import {
   defineComponent,
   Transition,
   withDirectives,
-  PropType,
+  type PropType,
   ref
 } from 'vue'
 import { VBinder, VTarget, VFollower } from 'vueuc'

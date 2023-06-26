@@ -1,5 +1,5 @@
 import enGB from 'date-fns/esm/locale/en-GB'
-import { NDateLocale } from './enUS'
+import { type NDateLocale } from './enUS'
 
 const dateEnGB: NDateLocale = {
   name: 'en-GB',

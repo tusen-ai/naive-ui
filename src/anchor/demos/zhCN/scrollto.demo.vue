@@ -22,10 +22,10 @@
     </n-anchor>
   </div>
   <n-space style="padding-left: 400px">
-    <n-button @click="scrollTo('#basic')">
+    <n-button @click="scrollTo('#basic.vue')">
       基础用法
     </n-button>
-    <n-button @click="scrollTo('#affix')">
+    <n-button @click="scrollTo('#affix.vue')">
       固定
     </n-button>
   </n-space>

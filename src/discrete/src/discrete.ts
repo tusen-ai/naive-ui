@@ -1,10 +1,14 @@
-import { Component } from 'vue'
+import type { Component } from 'vue'
 import { NMessageProvider } from '../../message'
 import { NDialogProvider } from '../../dialog'
 import { NNotificationProvider } from '../../notification'
 import { NLoadingBarProvider } from '../../loading-bar'
 import { createDiscreteApp } from './discreteApp'
-import { DiscreteApi, DiscreteApiOptions, DiscreteApiType } from './interface'
+import type {
+  DiscreteApi,
+  DiscreteApiOptions,
+  DiscreteApiType
+} from './interface'
 
 export function createDiscreteApi<T extends DiscreteApiType> (
   includes: T[],
@@ -15,7 +19,7 @@ export function createDiscreteApi<T extends DiscreteApiType> (
     notificationProviderProps,
     loadingBarProviderProps
   }: DiscreteApiOptions = {}
-): DiscreteApi {
+): DiscreteApi<T> {
   const providersAndProps: Array<{
     type: DiscreteApiType
     Provider: Component

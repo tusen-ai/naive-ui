@@ -3,7 +3,7 @@ import {
   defineComponent,
   inject,
   getCurrentInstance,
-  PropType,
+  type PropType,
   computed
 } from 'vue'
 import { pxfy } from 'seemly'

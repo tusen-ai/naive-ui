@@ -3,19 +3,19 @@ import {
   h,
   defineComponent,
   Fragment,
-  PropType,
+  type PropType,
   ref,
   computed,
   watch,
   toRef,
   nextTick,
-  CSSProperties,
+  type CSSProperties,
   watchEffect,
   onMounted,
-  InputHTMLAttributes,
-  VNode
+  type InputHTMLAttributes,
+  type VNode
 } from 'vue'
-import { VOverflow, VOverflowInst } from 'vueuc'
+import { VOverflow, type VOverflowInst } from 'vueuc'
 import type {
   RenderLabel,
   RenderLabelImpl
@@ -45,6 +45,7 @@ export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
   blur: () => void
+  blurInput: () => void
   $el: HTMLElement
 }
 
@@ -351,7 +352,7 @@ export default defineComponent({
       if (enterTimerId !== null) window.clearTimeout(enterTimerId)
     }
     function handleMouseEnterCounter (): void {
-      if (props.disabled || props.active) return
+      if (props.active) return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
         if (selectedRef.value) {
@@ -377,8 +378,11 @@ export default defineComponent({
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
         if (!patternInputWrapperEl) return
-        patternInputWrapperEl.tabIndex =
-          props.disabled || patternInputFocusedRef.value ? -1 : 0
+        if (props.disabled) {
+          patternInputWrapperEl.removeAttribute('tabindex')
+        } else {
+          patternInputWrapperEl.tabIndex = patternInputFocusedRef.value ? -1 : 0
+        }
       })
     })
     useOnResize(selfRef, props.onResize)
@@ -598,14 +602,18 @@ export default defineComponent({
           {renderTag ? (
             renderTag({
               option,
-              handleClose: () => this.handleDeleteOption(option)
+              handleClose: () => {
+                this.handleDeleteOption(option)
+              }
             })
           ) : (
             <NTag
               size={size}
               closable={!option.disabled}
               disabled={disabled}
-              onClose={() => this.handleDeleteOption(option)}
+              onClose={() => {
+                this.handleDeleteOption(option)
+              }}
               internalCloseIsButtonTag={false}
               internalCloseFocusable={false}
             >

@@ -3,10 +3,10 @@ import {
   computed,
   onMounted,
   ref,
-  PropType,
+  type PropType,
   defineComponent,
   Transition,
-  CSSProperties
+  type CSSProperties
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -75,7 +75,7 @@ export default defineComponent({
         props.show &&
         (props.dot ||
           (props.value !== undefined &&
-            !(!props.showZero && props.value <= 0)) ||
+            !(!props.showZero && Number(props.value) <= 0)) ||
           !isSlotEmpty(slots.value))
       )
     })

@@ -118,6 +118,7 @@ const eo: NLocale = {
     tipClockwise: 'Dekstrume',
     tipZoomOut: 'Malzomi',
     tipZoomIn: 'Zomi',
+    tipDownload: 'Elŝuti',
     tipClose: 'Fermi (Esc)',
     tipOriginalSize: 'Zoom to original size'
   }

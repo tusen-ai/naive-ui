@@ -4,31 +4,31 @@ import {
   ref,
   defineComponent,
   inject,
-  VNode,
+  type VNode,
   watchEffect,
   onUnmounted,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   computed,
   Fragment
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
-import { VirtualList, VirtualListInst, VResizeObserver } from 'vueuc'
-import { CNode } from 'css-render'
+import { VirtualList, type VirtualListInst, VResizeObserver } from 'vueuc'
+import { type CNode } from 'css-render'
 import { useMemo } from 'vooks'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
-import { NScrollbar, ScrollbarInst } from '../../../_internal'
+import { NScrollbar, type ScrollbarInst } from '../../../_internal'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
 import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
-  RowKey,
-  ColumnKey,
-  SummaryRowData,
-  MainTableBodyRef,
-  TmNode,
-  RowData
+  type RowKey,
+  type ColumnKey,
+  type SummaryRowData,
+  type MainTableBodyRef,
+  type TmNode,
+  type RowData
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
@@ -170,7 +170,6 @@ export default defineComponent({
       mergedSortStateRef,
       virtualScrollRef,
       componentId,
-      scrollPartRef,
       mergedTableLayoutRef,
       childTriggerColIndexRef,
       indentRef,
@@ -320,9 +319,6 @@ export default defineComponent({
     }
     function handleMouseleaveTable (): void {
       hoverKeyRef.value = null
-    }
-    function handleMouseenterTable (): void {
-      scrollPartRef.value = 'body'
     }
     function virtualListContainer (): HTMLElement {
       const { value } = virtualListRef
@@ -498,7 +494,6 @@ export default defineComponent({
       renderExpandIcon: renderExpandIconRef,
       scrollbarProps: scrollbarPropsRef,
       setHeaderScrollLeft,
-      handleMouseenterTable,
       handleVirtualListScroll,
       handleVirtualListResize,
       handleMouseleaveTable,
@@ -580,7 +575,6 @@ export default defineComponent({
               childTriggerColIndex,
               expandable,
               rowProps,
-              handleMouseenterTable,
               handleMouseleaveTable,
               renderExpand,
               summary,
@@ -803,6 +797,9 @@ export default defineComponent({
                       rowData,
                       actualRowIndex
                     )
+                    const indentOffsetStyle = {
+                      '--indent-offset': '' as string | number
+                    }
                     return (
                       <td
                         {...resolvedCellProps}
@@ -813,6 +810,7 @@ export default defineComponent({
                             left: pxfy(fixedColumnLeftMap[colKey]?.start),
                             right: pxfy(fixedColumnRightMap[colKey]?.start)
                           },
+                          indentOffsetStyle as CSSProperties,
                           resolvedCellProps?.style || ''
                         ]}
                         colspan={mergedColSpan}
@@ -847,7 +845,8 @@ export default defineComponent({
                         {hasChildren && colIndex === childTriggerColIndex
                           ? [
                               repeat(
-                                isSummary ? 0 : rowInfo.tmNode.level,
+                                (indentOffsetStyle['--indent-offset'] =
+                                  isSummary ? 0 : rowInfo.tmNode.level),
                                 <div
                                   class={`${mergedClsPrefix}-data-table-indent`}
                                   style={indentStyle}
@@ -878,22 +877,22 @@ export default defineComponent({
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={() =>
+                                onUpdateChecked={() => {
                                   handleRadioUpdateChecked(rowInfo.tmNode)
-                                }
+                                }}
                               />
                             ) : (
                               <RenderSafeCheckbox
                                 key={currentPage}
                                 rowKey={rowKey}
                                 disabled={rowInfo.tmNode.disabled}
-                                onUpdateChecked={(checked: boolean, e) =>
+                                onUpdateChecked={(checked: boolean, e) => {
                                   handleCheckboxUpdateChecked(
                                     rowInfo.tmNode,
                                     checked,
                                     e.shiftKey
                                   )
-                                }
+                                }}
                               />
                             )
                           ) : null
@@ -905,9 +904,9 @@ export default defineComponent({
                                 clsPrefix={mergedClsPrefix}
                                 expanded={expanded}
                                 renderExpandIcon={this.renderExpandIcon}
-                                onClick={() =>
+                                onClick={() => {
                                   handleUpdateExpanded(rowKey, null)
-                                }
+                                }}
                               />
                                 ) : null
                           ) : null
@@ -936,7 +935,6 @@ export default defineComponent({
                 <table
                   class={`${mergedClsPrefix}-data-table-table`}
                   onMouseleave={handleMouseleaveTable}
-                  onMouseenter={handleMouseenterTable}
                   style={{
                     tableLayout: this.mergedTableLayout
                   }}
@@ -970,7 +968,6 @@ export default defineComponent({
                     clsPrefix: mergedClsPrefix,
                     id: componentId,
                     cols,
-                    onMouseenter: handleMouseenterTable,
                     onMouseleave: handleMouseleaveTable
                   }}
                   showScrollbar={false}

@@ -5,7 +5,7 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  PropType,
+  type PropType,
   provide,
   ref,
   toRef,
@@ -40,6 +40,10 @@ export const baseAnchorProps = {
   bound: {
     type: Number,
     default: 12
+  },
+  top: {
+    type: Number,
+    default: 0
   },
   internalScrollable: Boolean,
   ignoreGap: Boolean,
@@ -151,7 +155,9 @@ export default defineComponent({
       }
       handleScroll()
     }
-    const handleScroll = throttle(() => _handleScroll(true), 128)
+    const handleScroll = throttle(() => {
+      _handleScroll(true)
+    }, 128)
     function _handleScroll (transition = true): void {
       interface LinkInfo {
         top: number
@@ -193,7 +199,7 @@ export default defineComponent({
             return prevLink
           }
         }
-        if (link.top <= bound) {
+        if (link.top <= bound + props.top) {
           if (prevLink === null) {
             return link
           } else if (link.top === prevLink.top) {

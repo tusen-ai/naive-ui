@@ -1,4 +1,11 @@
-import { h, Transition, TransitionGroup, defineComponent, PropType } from 'vue'
+import {
+  h,
+  Transition,
+  TransitionGroup,
+  type TransitionProps,
+  defineComponent,
+  type PropType
+} from 'vue'
 
 export default defineComponent({
   name: 'FadeInExpandTransition',
@@ -77,23 +84,23 @@ export default defineComponent({
       props.onAfterEnter?.()
     }
     return () => {
-      const type = props.group ? TransitionGroup : Transition
-      return h(
-        type as any,
-        {
-          name: props.width
-            ? 'fade-in-width-expand-transition'
-            : 'fade-in-height-expand-transition',
-          mode: props.mode,
-          appear: props.appear,
-          onEnter: handleEnter,
-          onAfterEnter: handleAfterEnter,
-          onBeforeLeave: handleBeforeLeave,
-          onLeave: handleLeave,
-          onAfterLeave: handleAfterLeave
-        },
-        slots
-      )
+      const { group, width, appear, mode } = props
+      const type = group ? TransitionGroup : Transition
+      const resolvedProps = {
+        name: width
+          ? 'fade-in-width-expand-transition'
+          : 'fade-in-height-expand-transition',
+        appear,
+        onEnter: handleEnter,
+        onAfterEnter: handleAfterEnter,
+        onBeforeLeave: handleBeforeLeave,
+        onLeave: handleLeave,
+        onAfterLeave: handleAfterLeave
+      }
+      if (!group) {
+        ;(resolvedProps as unknown as TransitionProps).mode = mode
+      }
+      return h(type as any, resolvedProps, slots)
     }
   }
 })

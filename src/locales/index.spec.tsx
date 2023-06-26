@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, ref, onMounted } from 'vue'
+import { h, defineComponent, type PropType, ref, onMounted } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   ruRU,
@@ -11,6 +11,7 @@ import {
   idID,
   deDE,
   nbNO,
+  faIR,
   frFR,
   esAR,
   itIT,
@@ -22,6 +23,7 @@ import {
   nlNL,
   arDZ,
   trTR,
+  svSE,
   eo,
   dateEnUS,
   dateZhCN,
@@ -33,6 +35,7 @@ import {
   dateIdID,
   dateDeDE,
   dateNbNO,
+  dateFaIR,
   dateFrFR,
   dateEsAR,
   dateItIT,
@@ -44,10 +47,11 @@ import {
   dateNlNL,
   dateArDZ,
   dateTrTR,
+  dateSvSE,
   dateEo,
   NConfigProvider,
-  NDateLocale,
-  NLocale,
+  type NDateLocale,
+  type NLocale,
   NInput
 } from '../index'
 import { createLocale } from '.'
@@ -123,7 +127,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateZhCN,
           locale: zhCN,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -132,7 +138,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateZhTW,
           locale: zhTW,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -141,7 +149,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateEnUS,
           locale: enUS,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -150,7 +160,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateRuRU,
           locale: ruRU,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -159,7 +171,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateUkUA,
           locale: ukUA,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -168,7 +182,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateJaJP,
           locale: jaJP,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -177,7 +193,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateKoKR,
           locale: koKR,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -186,7 +204,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateIdID,
           locale: idID,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -195,7 +215,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateDeDE,
           locale: deDE,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -204,7 +226,9 @@ describe('locale', () => {
         props: {
           dateLocale: dateNbNO,
           locale: nbNO,
-          onMounted: (date: string) => expect(date).toMatchSnapshot()
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
@@ -301,6 +325,25 @@ describe('locale', () => {
         props: {
           dateLocale: dateTrTR,
           locale: trTR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateFaIR,
+          locale: faIR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateSvSE,
+          locale: svSE,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()

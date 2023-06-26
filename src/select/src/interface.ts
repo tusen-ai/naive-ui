@@ -1,5 +1,5 @@
-import { TreeMate } from 'treemate'
-import { CSSProperties, VNodeChild, VNode } from 'vue'
+import { type TreeMate } from 'treemate'
+import { type CSSProperties, type VNodeChild, type VNode } from 'vue'
 
 export type SelectMixedOption =
   | SelectBaseOption
@@ -86,6 +86,8 @@ export type SelectGroupOption =
 export interface SelectInst {
   focus: () => void
   blur: () => void
+  focusInput: () => void
+  blurInput: () => void
 }
 
 export type SelectFallbackOption = (value: string & number) => SelectOption
