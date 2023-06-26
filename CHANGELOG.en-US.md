@@ -43,6 +43,7 @@
 ### i18n
 
 - Improve `zhTW` locale.
+- Add `svSE` locale.
 
 ## 2.34.4
 
