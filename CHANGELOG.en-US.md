@@ -25,6 +25,7 @@
 - Fix `n-data-table` header and body's scrolling are not sync when using the keyboard, closes [#3941](https://github.com/tusen-ai/naive-ui/issues/3941).
 - Fix `n-data-table` drag column causing text selection in Safari, closes [#4957](https://github.com/tusen-ai/naive-ui/issues/4957).
 - Fix `n-data-table` ellipsis content in table cell would wrap with expand button when using tree data, closes [#3755](https://github.com/tusen-ai/naive-ui/issues/3755).
+- Fix `useLoadingBar` can't finish loading when called `finish` method, close [#4965](https://github.com/tusen-ai/naive-ui/issues/4965).
 
 ### Features
 
