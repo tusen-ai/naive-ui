@@ -39,6 +39,7 @@
 - `n-image-group` adds `on-preview-prev` `on-preview-next` prop
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
+- `n-input-number` export the `select` method.
 
 ### i18n
 
