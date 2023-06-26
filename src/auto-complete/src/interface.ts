@@ -1,4 +1,7 @@
-import { SelectGroupOption, SelectBaseOption } from '../../select/src/interface'
+import type {
+  SelectGroupOption,
+  SelectBaseOption
+} from '../../select/src/interface'
 
 export type AutoCompleteOption = SelectBaseOption<string, string>
 export interface AutoCompleteGroupOption
@@ -12,7 +15,8 @@ AutoCompleteOption | AutoCompleteGroupOption | string
 
 export type OnUpdateValue = (value: string & (string | null)) => void
 export type OnUpdateImpl = (value: string | null) => void
-export type OnSelect = (value: string | number) => void
+export type OnSelect = (value: string & number) => void
+export type OnSelectImpl = (value: string | number) => void
 
 export interface AutoCompleteInst {
   focus: () => void

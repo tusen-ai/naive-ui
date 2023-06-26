@@ -1,4 +1,4 @@
-import { defineComponent, h, inject, PropType } from 'vue'
+import { defineComponent, h, inject, type PropType } from 'vue'
 import { NInput } from '../../input'
 import { dynamicInputInjectionKey } from './interface'
 

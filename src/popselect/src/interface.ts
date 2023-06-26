@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import { type Ref } from 'vue'
 import type { PopoverInst } from '../../popover/src/interface'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'

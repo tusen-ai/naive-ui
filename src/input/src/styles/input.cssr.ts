@@ -159,6 +159,9 @@ export default cB('input', `
     cE('placeholder', 'white-space: nowrap;')
   ]),
   cE('eye', `
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: color .3s var(--n-bezier);
   `),
   // textarea
@@ -188,6 +191,7 @@ export default cB('input', `
       margin: 0;
       resize: none;
       white-space: pre-wrap;
+      scroll-padding-block-end: var(--n-padding-vertical);
     `),
     cE('textarea-mirror', `
       width: 100%;
@@ -250,9 +254,6 @@ export default cB('input', `
   ]),
   cNotM('disabled', [
     cE('eye', `
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: var(--n-icon-color);
       cursor: pointer;
     `, [

@@ -6,10 +6,10 @@ import {
   Teleport,
   defineComponent,
   provide,
-  VNodeChild,
-  ExtractPropTypes,
-  PropType,
-  CSSProperties
+  type VNodeChild,
+  type ExtractPropTypes,
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'

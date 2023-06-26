@@ -1,10 +1,11 @@
-import { h, defineComponent, PropType, VNodeChild } from 'vue'
+import { h, defineComponent, type PropType } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
 import {
   NBaseIcon,
   NBaseLoading,
   NIconSwitchTransition
 } from '../../../_internal'
+import type { RenderExpandIcon } from '../interface'
 
 export default defineComponent({
   name: 'DataTableExpandTrigger',
@@ -20,7 +21,7 @@ export default defineComponent({
       required: true
     },
     renderExpandIcon: {
-      type: Function as PropType<() => VNodeChild>
+      type: Function as PropType<RenderExpandIcon>
     }
   },
   render () {
@@ -32,6 +33,9 @@ export default defineComponent({
           this.expanded && `${clsPrefix}-data-table-expand-trigger--expanded`
         ]}
         onClick={this.onClick}
+        onMousedown={(e) => {
+          e.preventDefault()
+        }}
       >
         <NIconSwitchTransition>
           {{
@@ -45,7 +49,9 @@ export default defineComponent({
                   scale={0.88}
                 />
               ) : this.renderExpandIcon ? (
-                this.renderExpandIcon()
+                this.renderExpandIcon({
+                  expanded: this.expanded
+                })
               ) : (
                 <NBaseIcon clsPrefix={clsPrefix} key="base-icon">
                   {{

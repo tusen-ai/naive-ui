@@ -1,8 +1,15 @@
-import { defineComponent, h, PropType, provide, Ref, toRef } from 'vue'
+import {
+  defineComponent,
+  h,
+  type PropType,
+  provide,
+  type Ref,
+  toRef
+} from 'vue'
 import { useMemo } from 'vooks'
 import {
   createInjectionKey,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   formatLength,
   keysOf
 } from '../../_utils'

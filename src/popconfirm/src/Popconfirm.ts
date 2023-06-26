@@ -3,11 +3,12 @@ import {
   ref,
   defineComponent,
   provide,
-  PropType,
-  ExtractPropTypes
+  type PropType,
+  type ExtractPropTypes
 } from 'vue'
+import type { InternalPopoverInst } from '../../popover/src/interface'
 import { NPopover } from '../../popover'
-import type { PopoverInst, PopoverTrigger } from '../../popover'
+import type { PopoverTrigger } from '../../popover'
 import type { ButtonProps } from '../../button'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { omit, keep, call } from '../../_utils'
@@ -62,8 +63,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const popoverInstRef = ref<PopoverInst | null>(null)
+    const popoverInstRef = ref<InternalPopoverInst | null>(null)
     function handlePositiveClick (e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow()) return
       const { onPositiveClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onPositiveClick ? onPositiveClick(e) : true).then(
         (value) => {
@@ -74,6 +76,7 @@ export default defineComponent({
       )
     }
     function handleNegativeClick (e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow()) return
       const { onNegativeClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onNegativeClick ? onNegativeClick(e) : true).then(
         (value) => {
@@ -88,21 +91,19 @@ export default defineComponent({
       mergedClsPrefixRef,
       props
     })
-    const exposedMethods: PopconfirmInst = {
-      setShow (value) {
+    const returned = {
+      setShow (value: boolean) {
         popoverInstRef.value?.setShow(value)
       },
       syncPosition () {
         popoverInstRef.value?.syncPosition()
-      }
-    }
-    return {
-      ...exposedMethods,
+      },
       mergedTheme: themeRef,
       popoverInstRef,
       handlePositiveClick,
       handleNegativeClick
     }
+    return returned satisfies PopconfirmInst
   },
   render () {
     const { $slots: slots, $props: props, mergedTheme } = this

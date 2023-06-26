@@ -4,7 +4,7 @@ import {
   onMounted,
   ref,
   watchEffect,
-  PropType
+  type PropType
 } from 'vue'
 import { round } from 'lodash-es'
 import type { ExtractPublicPropTypes } from '../../_utils'

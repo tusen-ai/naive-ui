@@ -1,4 +1,10 @@
-import { defineComponent, computed, h, PropType, CSSProperties } from 'vue'
+import {
+  defineComponent,
+  computed,
+  h,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import type { ThemeProps } from '../../_mixins'

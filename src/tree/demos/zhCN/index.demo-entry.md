@@ -19,7 +19,9 @@ disabled.vue
 prefix-and-suffix.vue
 batch-render.vue
 switcher-icon.vue
+file-tree.vue
 node-props.vue
+show-line.vue
 checkbox-placement.vue
 check-strategy-debug.vue
 change-debug.vue
@@ -72,10 +74,12 @@ expand-debug.vue
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
 | render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |
-| render-switcher-icon | `(props: { expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0, `props` 2.34.0 |
+| render-switcher-icon | `(props: { option: TreeOption, expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0, `props` 2.34.0 |
+| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |   |
 | selectable | `boolean` | `true` | 节点是否可以被选中 |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
 | show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
+| show-line | `boolean` | `false` | 是否显示连接线 | NEXT_VERSION |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |

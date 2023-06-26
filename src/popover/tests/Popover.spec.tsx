@@ -1,13 +1,13 @@
 import { defineComponent, h, Fragment, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopover, PopoverInst } from '../index'
+import { NPopover, type PopoverInst } from '../index'
 import { createId } from 'seemly'
 
 const popoverBodyHeader = '.n-popover__header'
 const popoverBodyFooter = '.n-popover__footer'
 
 async function sleep (ms: number): Promise<void> {
-  return await new Promise((resolve) => {
+  await new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
 }

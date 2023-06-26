@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import { type CNode } from 'css-render'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
@@ -300,6 +300,8 @@ export default c([
         cE('description', `
           margin-top: 8px;
           font-size: var(--n-description-font-size);
+          white-space: pre-wrap;
+          word-wrap: break-word;
           transition: color .3s var(--n-bezier-ease-out);
           color: var(--n-description-text-color);
         `),

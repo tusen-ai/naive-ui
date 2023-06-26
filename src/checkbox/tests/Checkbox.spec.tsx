@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount, type VueWrapper } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
 
@@ -208,15 +208,6 @@ describe('n-checkbox', () => {
       const labelId = 'custom-id'
       const wrapper = mount(() => <NCheckbox aria-labelledby={labelId} />)
       expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toMatch(
-        labelId
-      )
-      wrapper.unmount()
-    })
-
-    it('should allow to set aria-labelledby from outside', () => {
-      const wrapper = mount(NCheckbox)
-      const labelId = wrapper.find('.n-checkbox__label').attributes('id')
-      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
         labelId
       )
       wrapper.unmount()

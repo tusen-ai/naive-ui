@@ -1,11 +1,11 @@
-import { h, defineComponent, PropType, inject, Ref } from 'vue'
-import { TreeNode } from 'treemate'
+import { h, defineComponent, type PropType, inject, type Ref } from 'vue'
+import type { TreeNode } from 'treemate'
 import type { SelectGroupOption } from '../../../select/src/interface'
 import { render } from '../../../_utils'
 import {
   internalSelectionMenuInjectionKey,
-  RenderLabelImpl,
-  RenderOptionImpl
+  type RenderLabelImpl,
+  type RenderOptionImpl
 } from './interface'
 
 export default defineComponent({

@@ -1,6 +1,6 @@
-import { Ref, Slots, UnwrapNestedRefs } from 'vue'
-import { VirtualListInst } from 'vueuc'
-import { NLocale, NDateLocale } from '../../locales'
+import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
+import { type VirtualListInst } from 'vueuc'
+import type { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
 import type {
   IsHourDisabled,
@@ -11,7 +11,7 @@ import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
-import {
+import type {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
