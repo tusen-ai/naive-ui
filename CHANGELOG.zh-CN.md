@@ -30,6 +30,7 @@
 - 修复 `n-steps` 在超过 9 个步数的时候换行可能存在问题
 - 修复 `n-form-item-gi` v-show 多次切换报错，关闭 [#4422](https://github.com/tusen-ai/naive-ui/issues/4422)
 - 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
+- Fixed rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 
 ### Features
 
