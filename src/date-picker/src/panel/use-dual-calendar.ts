@@ -1,4 +1,4 @@
-import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
+import { inject, computed, watch, ref, type ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
@@ -13,27 +13,27 @@ import {
   getTime,
   startOfQuarter
 } from 'date-fns/esm'
-import { VirtualListInst } from 'vueuc'
+import type { VirtualListInst } from 'vueuc'
 import {
   dateArray,
-  DateItem,
-  MonthItem,
-  YearItem,
+  type DateItem,
+  type MonthItem,
+  type YearItem,
   strictParse,
   yearArray,
   monthArray,
   getDefaultTime,
   pluckValueFromRange,
-  QuarterItem,
+  type QuarterItem,
   quarterArray
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
   datePickerInjectionKey,
-  RangePanelChildComponentRefs,
-  Shortcuts
+  type RangePanelChildComponentRefs,
+  type Shortcuts
 } from '../interface'
-import { ScrollbarInst } from '../../../_internal'
+import type { ScrollbarInst } from '../../../_internal'
 import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useDualCalendarProps = {

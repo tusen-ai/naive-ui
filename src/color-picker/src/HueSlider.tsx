@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, ref } from 'vue'
+import { defineComponent, h, type PropType, ref } from 'vue'
 import { off, on } from 'evtd'
 import { normalizeHue } from './utils'
 

@@ -1,8 +1,8 @@
 import {
   onBeforeUnmount,
   onMounted,
-  WatchStopHandle,
-  Ref,
+  type WatchStopHandle,
+  type Ref,
   watch,
   ref
 } from 'vue'

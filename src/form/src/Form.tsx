@@ -1,12 +1,12 @@
 import {
   h,
   defineComponent,
-  PropType,
+  type PropType,
   provide,
-  ExtractPropTypes,
+  type ExtractPropTypes,
   ref
 } from 'vue'
-import { ValidateError } from 'async-validator'
+import type { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
@@ -23,7 +23,7 @@ import type {
   Size,
   FormValidateMessages
 } from './interface'
-import { ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
 export const formProps = {
@@ -53,7 +53,9 @@ export const formProps = {
   },
   onSubmit: {
     type: Function as PropType<(e: Event) => void>,
-    default: (e: Event) => e.preventDefault()
+    default: (e: Event) => {
+      e.preventDefault()
+    }
   },
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
@@ -88,7 +90,7 @@ export default defineComponent({
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<void> {
-      return await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
         const formItemValidationPromises: Array<
         Promise<{
           valid: boolean

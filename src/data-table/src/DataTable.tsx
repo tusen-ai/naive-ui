@@ -5,10 +5,9 @@ import {
   ref,
   provide,
   toRef,
-  CSSProperties,
+  type CSSProperties,
   Transition,
-  watchEffect,
-  onDeactivated
+  watchEffect
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -86,10 +85,6 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const bodyWidthRef = ref<number | null>(null)
-    const scrollPartRef = ref<'head' | 'body'>('body')
-    onDeactivated(() => {
-      scrollPartRef.value = 'body'
-    })
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth } =
       useResizable()
@@ -154,7 +149,6 @@ export default defineComponent({
       fixedColumnLeftMapRef,
       fixedColumnRightMapRef
     } = useScroll(props, {
-      scrollPartRef,
       bodyWidthRef,
       mainTableInstRef,
       mergedCurrentPageRef
@@ -210,7 +204,6 @@ export default defineComponent({
       mergedExpandedRowKeysRef,
       mergedInderminateRowKeySetRef,
       localeRef,
-      scrollPartRef,
       expandableRef,
       stickyExpandedRowsRef,
       rowKeyRef: toRef(props, 'rowKey'),

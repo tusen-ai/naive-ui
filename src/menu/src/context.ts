@@ -7,8 +7,9 @@ import type {
 
 export const menuInjectionKey = createInjectionKey<MenuInjection>('n-menu')
 
-export const submenuInjectionKey =
-  createInjectionKey<SubmenuInjection>('n-submenu')
+export const submenuInjectionKey = createInjectionKey<SubmenuInjection | null>(
+  'n-submenu'
+)
 
 export const menuItemGroupInjectionKey =
-  createInjectionKey<MenuOptionGroupInjection>('n-menu-item-group')
+  createInjectionKey<MenuOptionGroupInjection | null>('n-menu-item-group')

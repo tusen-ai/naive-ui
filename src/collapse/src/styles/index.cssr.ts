@@ -6,6 +6,7 @@ import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-
 // --n-bezier
 // --n-text-color
 // --n-divider-color
+// --n-title-padding
 // --n-title-font-size
 // --n-title-text-color
 // --n-title-font-weight
@@ -66,7 +67,7 @@ export default cB('collapse', 'width: 100%;', [
       align-items: center;
       transition: color .3s var(--n-bezier);
       position: relative;
-      padding: 16px 0 0 0;
+      padding: var(--n-title-padding);
       color: var(--n-title-text-color);
       cursor: pointer;
     `, [

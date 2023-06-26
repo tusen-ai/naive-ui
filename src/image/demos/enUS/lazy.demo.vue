@@ -1,10 +1,26 @@
 <markdown>
 # Lazy load
 
-You can use `lazy` to let image load after it enters viewport.
+Load the images only after they enter the viewport. There are two ways to use it: one is to use the `lazy` property alone, which will be set to the value of the [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) property, and the other is to use `lazy` together with the `intersection-observer-options` configuration to implement lazy loading using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) API.
 </markdown>
 
 <template>
+  <n-p>use<n-text code>
+    lazy
+  </n-text> along</n-p>
+  <n-image
+    lazy
+    width="100"
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+  />
+  <n-p>
+    use <n-text code>
+      lazy
+    </n-text> with
+    <n-text code>
+      intersection-observer-options
+    </n-text>
+  </n-p>
   <div
     id="image-scroll-container"
     style="

@@ -115,6 +115,7 @@ const trTR: NLocale = {
     tipClockwise: 'saat yönününe',
     tipZoomOut: 'Uzaklaştır',
     tipZoomIn: 'Yakınlaştır',
+    tipDownload: 'indir',
     tipClose: 'Kapat (Esc)',
     // TODO: translation
     tipOriginalSize: 'Orijinal boyuta yakınlaştır'

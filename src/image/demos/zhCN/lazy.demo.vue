@@ -1,10 +1,27 @@
 <markdown>
 # 懒加载
 
-你可以使用 `lazy` 属性让图片进入视口再加载。
+让图片进入视口再加载，两种使用方式：一种是单独使用 `lazy` 属性，则将设置为原生[HTMLImageElement.loading](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLImageElement/loading) 的属性值；
+另一种方式是配合 `intersection-observer-options` 配置，将采用 [IntersectionObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver) API 实现懒加载。
 </markdown>
 
 <template>
+  <n-p>单独设置 <n-text code>
+    lazy
+  </n-text> 属性</n-p>
+  <n-image
+    lazy
+    width="100"
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+  />
+  <n-p>
+    <n-text code>
+      lazy
+    </n-text> 属性配合
+    <n-text code>
+      intersection-observer-options
+    </n-text>
+  </n-p>
   <div
     id="image-scroll-container"
     style="

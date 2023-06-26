@@ -118,6 +118,7 @@ const koKR: NLocale = {
     tipClockwise: '시계 방향으로 회전',
     tipZoomOut: '축소',
     tipZoomIn: '확대',
+    tipDownload: '다운로드',
     tipClose: '닫기 (Esc)',
     // TODO: translation
     tipOriginalSize: '원본 크기로 확대'

@@ -2,27 +2,27 @@ import {
   h,
   defineComponent,
   computed,
-  CSSProperties,
-  PropType,
+  type CSSProperties,
+  type PropType,
   provide,
   toRef,
   mergeProps,
   ref,
-  VNode,
-  Ref,
+  type VNode,
+  type Ref,
   cloneVNode,
   vShow,
   onMounted
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
-import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
+import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
 import {
   getSlot,
   flatten,
-  ExtractPublicPropTypes,
+  type ExtractPublicPropTypes,
   isBrowser,
   isNodeVShowFalse
 } from '../../_utils'
@@ -225,6 +225,9 @@ export default defineComponent({
         // here, nor it may mess child's style
         child.dirs = child.dirs?.filter(({ dir }) => dir !== vShow) || null
 
+        if (child.dirs?.length === 0) {
+          child.dirs = null
+        }
         const clonedChild = cloneVNode(child)
 
         const rawChildSpan = Number(
@@ -235,7 +238,6 @@ export default defineComponent({
         )
 
         if (rawChildSpan === 0) return
-
         childrenAndRawSpan.push({
           child: clonedChild,
           rawChildSpan
@@ -248,7 +250,12 @@ export default defineComponent({
       if (maybeSuffixNode?.props) {
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
-          suffixSpan = maybeSuffixNode.props?.span ?? defaultSpan
+          suffixSpan = Number(
+            parseResponsivePropValue(
+              maybeSuffixNode.props?.span,
+              responsiveQuery
+            ) ?? defaultSpan
+          )
           maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
@@ -310,7 +317,6 @@ export default defineComponent({
           }
         }
       }
-
       return h(
         'div',
         mergeProps(

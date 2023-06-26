@@ -8,8 +8,8 @@ import {
   vShow,
   ref,
   nextTick,
-  PropType,
-  CSSProperties
+  type PropType,
+  type CSSProperties
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'
@@ -61,9 +61,10 @@ export default defineComponent({
       toProgress = 80,
       status: 'starting' | 'error' = 'starting'
     ): Promise<void> {
-      await init()
-      loadingRef.value = true
       startedRef.value = true
+      await init()
+      if (finishing) return
+      loadingRef.value = true
       await nextTick()
       const el = loadingBarRef.value
       if (!el) return
@@ -74,8 +75,11 @@ export default defineComponent({
       el.style.transition = ''
       el.style.maxWidth = `${toProgress}%`
     }
-    function finish (): void {
-      if (finishing || erroringRef.value || !loadingRef.value) return
+    async function finish (): Promise<void> {
+      if (finishing || erroringRef.value) return
+      if (startedRef.value) {
+        await nextTick()
+      }
       finishing = true
       const el = loadingBarRef.value
       if (!el) return

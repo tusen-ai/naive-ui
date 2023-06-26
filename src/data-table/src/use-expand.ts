@@ -1,6 +1,6 @@
-import { toRef, ref, Ref } from 'vue'
+import { toRef, ref, type Ref } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
-import { TreeMate } from 'treemate'
+import type { TreeMate } from 'treemate'
 import type {
   Expandable,
   InternalRowData,

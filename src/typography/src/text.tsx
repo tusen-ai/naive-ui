@@ -1,4 +1,10 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  type PropType,
+  type CSSProperties
+} from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'

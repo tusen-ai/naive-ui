@@ -1,13 +1,13 @@
 import { h, defineComponent } from 'vue'
-import { ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
-import { setup, radioProps } from './use-radio'
+import { type ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
+import { setup, radioBaseProps } from './use-radio'
 
-export const radioButtonProps = radioProps
-export type RadioButtonProps = ExtractPublicPropTypes<typeof radioProps>
+export const radioButtonProps = radioBaseProps
+export type RadioButtonProps = ExtractPublicPropTypes<typeof radioBaseProps>
 
 export default defineComponent({
   name: 'RadioButton',
-  props: radioProps,
+  props: radioBaseProps,
   setup,
   render () {
     const { mergedClsPrefix } = this

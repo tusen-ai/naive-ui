@@ -1,4 +1,9 @@
-import { ref, onBeforeUpdate, Ref, ComponentPublicInstance } from 'vue'
+import {
+  ref,
+  onBeforeUpdate,
+  type Ref,
+  type ComponentPublicInstance
+} from 'vue'
 
 export function isTouchEvent (e: MouseEvent | TouchEvent): e is TouchEvent {
   return window.TouchEvent && e instanceof window.TouchEvent
@@ -16,7 +21,9 @@ export function useRefs<T extends RefType> (): [
     refs.value.set(index, el)
   }
 
-  onBeforeUpdate(() => refs.value.clear())
+  onBeforeUpdate(() => {
+    refs.value.clear()
+  })
 
   return [refs, setRefs]
 }

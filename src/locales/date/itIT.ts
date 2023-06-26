@@ -1,5 +1,5 @@
 import itIT from 'date-fns/esm/locale/it'
-import { NDateLocale } from './enUS'
+import { type NDateLocale } from './enUS'
 
 const dateItIT: NDateLocale = {
   name: 'it-IT',

@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, toRef } from 'vue'
+import { h, defineComponent, type PropType, toRef } from 'vue'
 import { resolveSlot } from '../../../_utils'
 import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'

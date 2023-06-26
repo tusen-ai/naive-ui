@@ -97,6 +97,7 @@ export default cB('steps', `
         position: absolute;
         left: 0;
         top: 0;
+        white-space: nowrap;
         font-size: var(--n-indicator-index-font-size);
         width: var(--n-indicator-icon-size);
         height: var(--n-indicator-icon-size);

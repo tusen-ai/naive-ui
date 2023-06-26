@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
@@ -48,6 +48,8 @@ const fixedColumnStyle = createFixedColumnStyle()
 
 // --n-box-shadow-before used in Body.tsx
 // --n-box-shadow-after used in Body.tsx
+
+// --indent-offset for ellipsis & expand trigger
 export default c([
   cB('data-table', `
     width: 100%;
@@ -390,6 +392,7 @@ export default c([
         white-space: nowrap;
         max-width: 100%;
         vertical-align: bottom;
+        max-width: calc(100% - var(--indent-offset, -1.5) * 16px - 24px);
       `),
       cM('selection, expand', `
         text-align: center;

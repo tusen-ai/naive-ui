@@ -5,19 +5,19 @@ import {
   computed,
   defineComponent,
   Transition,
-  PropType,
+  type PropType,
   withDirectives,
-  CSSProperties,
-  InputHTMLAttributes,
+  type CSSProperties,
+  type InputHTMLAttributes,
   watchEffect,
-  HTMLAttributes
+  type HTMLAttributes
 } from 'vue'
-import { createTreeMate, TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
+import { createTreeMate, type TreeNode } from 'treemate'
+import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getPreciseEventTarget } from 'seemly'
-import {
+import type {
   RenderOption,
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
@@ -33,12 +33,15 @@ import type { ThemeProps } from '../../_mixins'
 import {
   call,
   useAdjustedTo,
-  MaybeArray,
+  type MaybeArray,
   getFirstSlotVNode,
-  warnOnce
+  warnOnce,
+  type ExtractPublicPropTypes
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
+import {
+  NInternalSelectMenu,
+  type InternalSelectMenuRef
+} from '../../_internal'
 import type { InputInst } from '../../input'
 import { NInput } from '../../input'
 import { autoCompleteLight } from '../styles'
@@ -48,6 +51,7 @@ import type {
   AutoCompleteOptions,
   OnUpdateValue,
   OnSelect,
+  OnSelectImpl,
   OnUpdateImpl,
   AutoCompleteOption,
   AutoCompleteInst
@@ -186,7 +190,7 @@ export default defineComponent({
     function doSelect (value: string | number): void {
       const { onSelect } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onSelect) call(onSelect, value)
+      if (onSelect) call(onSelect as OnSelectImpl, value)
       nTriggerFormInput()
       nTriggerFormChange()
     }

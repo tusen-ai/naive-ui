@@ -3,7 +3,7 @@ import NCol, { colProps, colPropKeys } from '../../legacy-grid/src/Col'
 import { keep, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
-import { FormItemInst } from './interface'
+import type { FormItemInst } from './interface'
 
 export const formItemColProps = {
   ...colProps,
@@ -28,7 +28,7 @@ export default defineComponent({
     const restoreValidation: FormItemInst['restoreValidation'] = () => {
       const { value } = formItemInstRef
       if (value) {
-        return value.restoreValidation()
+        value.restoreValidation()
       }
     }
     return {

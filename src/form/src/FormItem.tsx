@@ -3,27 +3,29 @@ import {
   defineComponent,
   computed,
   toRef,
-  PropType,
-  CSSProperties,
-  ExtractPropTypes,
+  type PropType,
+  type CSSProperties,
+  type ExtractPropTypes,
   ref,
   provide,
   inject,
   watch,
   Transition,
   onMounted,
-  LabelHTMLAttributes,
-  VNodeChild
+  type LabelHTMLAttributes,
+  type VNodeChild
 } from 'vue'
-import Schema, {
-  ValidateError,
-  RuleItem,
-  ValidateOption
-} from 'async-validator'
+import Schema from 'async-validator'
+import type { ValidateError, RuleItem, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { ThemeProps, useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import {
   warn,
   createKey,
@@ -32,9 +34,9 @@ import {
   resolveWrappedSlot
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { formLight, FormTheme } from '../styles'
+import { formLight, type FormTheme } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
-import {
+import type {
   ShouldRuleBeApplied,
   FormItemRule,
   LabelAlign,
@@ -215,7 +217,7 @@ export default defineComponent({
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
       let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
-      let asyncValidatorOptions: {} | undefined
+      let asyncValidatorOptions: Record<string, any> | undefined
       if (typeof options === 'string') {
         trigger = options
         validateCallback = callback
@@ -225,7 +227,7 @@ export default defineComponent({
         shouldRuleBeApplied = options.shouldRuleBeApplied
         asyncValidatorOptions = options.options
       }
-      return await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
         void internalValidate(
           trigger,
           shouldRuleBeApplied,
