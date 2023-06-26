@@ -1,6 +1,10 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPagination, PaginationRenderLabel, PaginationInfo } from '../index'
+import {
+  NPagination,
+  type PaginationRenderLabel,
+  type PaginationInfo
+} from '../index'
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {

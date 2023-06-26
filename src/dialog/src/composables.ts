@@ -1,4 +1,4 @@
-import { inject, Ref } from 'vue'
+import { inject, type Ref } from 'vue'
 import {
   dialogApiInjectionKey,
   dialogReactiveListInjectionKey

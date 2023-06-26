@@ -1,5 +1,5 @@
-import { TreeMate, TreeNode } from 'treemate'
-import {
+import type { TreeMate, TreeNode } from 'treemate'
+import type {
   CSSProperties,
   Ref,
   HTMLAttributes,
@@ -18,7 +18,7 @@ import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
-import { BaseLoadingExposedProps } from '../../_internal'
+import type { BaseLoadingExposedProps } from '../../_internal'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -379,7 +379,6 @@ export interface DataTableInjection {
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
-  scrollPartRef: Ref<'head' | 'body'>
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>

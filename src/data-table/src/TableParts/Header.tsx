@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   inject,
-  VNodeChild,
+  type VNodeChild,
   Fragment,
-  VNode,
+  type VNode,
   ref
 } from 'vue'
 import { happensIn, pxfy } from 'seemly'
@@ -24,11 +24,11 @@ import {
   clampValueFollowCSSRules
 } from '../utils'
 import {
-  TableExpandColumn,
-  TableColumnGroup,
-  TableBaseColumn,
+  type TableExpandColumn,
+  type TableColumnGroup,
+  type TableBaseColumn,
   dataTableInjectionKey,
-  ColumnKey
+  type ColumnKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
 
@@ -63,7 +63,6 @@ export default defineComponent({
       checkOptionsRef,
       mergedSortStateRef,
       componentId,
-      scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
       onUnstableColumnResize,
@@ -104,13 +103,7 @@ export default defineComponent({
       const nextSorter = createNextSorter(column, activeSorter)
       deriveNextSorter(nextSorter)
     }
-    function handleMouseenter (): void {
-      scrollPartRef.value = 'head'
-    }
-    function handleMouseleave (): void {
-      scrollPartRef.value = 'body'
-    }
-    const resizeStartWidthMap: Map<ColumnKey, number | undefined> = new Map()
+    const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
     function handleColumnResizeStart (column: TableBaseColumn): void {
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
     }
@@ -153,8 +146,6 @@ export default defineComponent({
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
       headerCheckboxDisabled: headerCheckboxDisabledRef,
-      handleMouseenter,
-      handleMouseleave,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,
@@ -258,15 +249,15 @@ export default defineComponent({
                       ) : null}
                       {isColumnResizable(column) ? (
                         <ResizeButton
-                          onResizeStart={() =>
+                          onResizeStart={() => {
                             handleColumnResizeStart(column as TableBaseColumn)
-                          }
-                          onResize={(displacementX) =>
+                          }}
+                          onResize={(displacementX) => {
                             handleColumnResize(
                               column as TableBaseColumn,
                               displacementX
                             )
-                          }
+                          }}
                         />
                       ) : null}
                     </>
@@ -327,18 +318,11 @@ export default defineComponent({
     if (!discrete) {
       return theadVNode
     }
-    const {
-      handleTableHeaderScroll,
-      handleMouseenter,
-      handleMouseleave,
-      scrollX
-    } = this
+    const { handleTableHeaderScroll, scrollX } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
         onScroll={handleTableHeaderScroll}
-        onMouseenter={handleMouseenter}
-        onMouseleave={handleMouseleave}
       >
         <table
           ref="body"

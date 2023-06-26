@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, inject, computed } from 'vue'
+import { h, defineComponent, type PropType, inject, computed } from 'vue'
 import { createId } from 'seemly'
 import { useMemo } from 'vooks'
 import {

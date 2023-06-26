@@ -3,8 +3,8 @@ import {
   defineComponent,
   computed,
   inject,
-  PropType,
-  CSSProperties,
+  type PropType,
+  type CSSProperties,
   toRef
 } from 'vue'
 import { NButton } from '../../button'

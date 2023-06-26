@@ -1,11 +1,11 @@
-import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
-import { VirtualList, VirtualListInst } from 'vueuc'
+import { h, ref, defineComponent, inject, type PropType, computed } from 'vue'
+import { VirtualList, type VirtualListInst } from 'vueuc'
 import NCascaderOption from './CascaderOption'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import {
-  TmNode,
-  CascaderSubmenuInstance,
+  type TmNode,
+  type CascaderSubmenuInstance,
   cascaderInjectionKey
 } from './interface'
 import { depx } from 'seemly'

@@ -3,9 +3,9 @@ import {
   defineComponent,
   computed,
   inject,
-  PropType,
-  VNodeChild,
-  CSSProperties
+  type PropType,
+  type VNodeChild,
+  type CSSProperties
 } from 'vue'
 import { getPadding } from 'seemly'
 import {

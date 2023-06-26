@@ -1,4 +1,4 @@
-import { defineComponent, PropType, CSSProperties } from 'vue'
+import { defineComponent, type PropType, type CSSProperties } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 

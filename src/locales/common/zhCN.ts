@@ -116,6 +116,7 @@ const zhCN: NLocale = {
     tipClockwise: '向右旋转',
     tipZoomOut: '缩小',
     tipZoomIn: '放大',
+    tipDownload: '下载',
     tipClose: '关闭（Esc）',
     tipOriginalSize: '缩放到原始尺寸'
   }

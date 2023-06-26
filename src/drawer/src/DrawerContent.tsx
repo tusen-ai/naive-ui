@@ -1,4 +1,10 @@
-import { CSSProperties, defineComponent, h, inject, PropType } from 'vue'
+import {
+  type CSSProperties,
+  defineComponent,
+  h,
+  inject,
+  type PropType
+} from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import type { ScrollbarProps } from '../../_internal'
 import { throwError } from '../../_utils'
