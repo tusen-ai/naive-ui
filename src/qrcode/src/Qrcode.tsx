@@ -53,22 +53,20 @@ export default defineComponent({
     ): void {
       const canvas = canvasRef.value
       if (!canvas) return
-      const border = 0
       const canvasWidth = size
-      const width = qr.size + border * 2
+      const width = qr.size
       const scale = canvasWidth / width
-
       canvas.width = canvasWidth
       canvas.height = canvasWidth
       const ctx = canvas.getContext('2d')
       if (!ctx) return
-      for (let y = -border; y < qr.size + border; y++) {
-        for (let x = -border; x < qr.size + border; x++) {
+      for (let y = 0; y < qr.size; y++) {
+        for (let x = 0; x < qr.size; x++) {
           ctx.fillStyle = qr.getModule(x, y) ? darkColor : lightColor
-          const startX = Math.floor((x + border) * scale)
-          const endX = Math.ceil((x + border + 1) * scale)
-          const startY = Math.floor((y + border) * scale)
-          const endY = Math.ceil((y + border + 1) * scale)
+          const startX = Math.floor(x * scale)
+          const endX = Math.ceil((x + 1) * scale)
+          const startY = Math.floor(y * scale)
+          const endY = Math.ceil((y + 1) * scale)
           ctx.fillRect(startX, startY, endX - startX, endY - startY)
         }
       }
