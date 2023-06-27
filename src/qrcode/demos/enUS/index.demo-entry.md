@@ -19,4 +19,4 @@ border.vue
 | bordered | `boolean` | `true` | Whether to show the qrcode border. |  |
 | color | `string` | `#000` | Qr code color, Values need to be in `hex` format. |  |
 | value | `string` | `-` | Text information. |  |
-| width | `number` | `160` | Width of the qrcode |
+| size | `number` | `160` | Size of the qrcode |

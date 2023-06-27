@@ -7,7 +7,7 @@
 <template>
   <n-space vertical>
     <n-qrcode :value="text" />
-    <n-input v-model:value="text" type="text" />
+    <n-input v-model:value="text" :maxlength="60" type="text" />
   </n-space>
 </template>
 

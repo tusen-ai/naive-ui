@@ -90,6 +90,14 @@ module.exports = {
       }
     },
     {
+      files: ['qrcodegen.ts'],
+      rules: {
+        '@typescript-eslint/no-namespace': 0,
+        eqeqeq: 0,
+        'no-useless-escape': 0
+      }
+    },
+    {
       files: '*',
       globals: {
         __DEV__: 'readonly'

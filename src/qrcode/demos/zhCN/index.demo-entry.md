@@ -20,4 +20,4 @@ color.vue
 | bordered | `boolean` | `true` | 是否显示二维码边框                    |      |
 | color    | `string`  | `#000` | 二维码颜色，值需要采用 `hex` 格式     |      |
 | value    | `string`  | `-`    | 文本信息                              |      |
-| width    | `number`  | `160`  | 二维码的宽度                          |
+| size     | `number`  | `160`  | 二维码大小                            |
