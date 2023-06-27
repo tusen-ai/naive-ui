@@ -7,6 +7,7 @@
 ```demo
 basic.vue
 border.vue
+size.vue
 color.vue
 ```
 

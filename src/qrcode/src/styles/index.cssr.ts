@@ -6,11 +6,14 @@ import { c, cB, cM } from '../../../_utils/cssr'
 
 export default c([
   cB('qrcode', [
+    cB('qrcode-wrapper', `
+        width: fit-content;
+        line-height: 0;
+    `),
     cM('bordered', [
       c('>',
         [
           cB('qrcode-wrapper', `
-              width: fit-content;
               border: 1px solid var(--n-border-color);
               border-radius: var(--n-border-radius) var(--n-border-radius) 0 0;
               padding:

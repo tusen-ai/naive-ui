@@ -37,7 +37,6 @@ export default defineComponent({
 
     useTheme('Qrcode', '-qrcode', style, qrcodeLight, props, mergedClsPrefixRef)
 
-    const src = ref('')
     const canvasRef = ref<HTMLCanvasElement>()
 
     watchEffect(() => {
@@ -76,7 +75,6 @@ export default defineComponent({
     }
 
     return {
-      src,
       canvasRef,
       mergedClsPrefix: mergedClsPrefixRef
     }

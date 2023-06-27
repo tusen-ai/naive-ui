@@ -7,6 +7,8 @@ Like a humorous magician, he skillfully turns tedious information into a mysteri
 ```demo
 basic.vue
 border.vue
+size.vue
+color.vue
 ```
 
 ## API
