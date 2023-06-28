@@ -79,7 +79,7 @@ expandable-debug.vue
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的 | 2.28.0 |
 | bordered | `boolean` | `true` | 是否显示 border |  |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |  |
-| checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |  |
+| checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的行的 key |  |
 | cascade | `boolean` | `true` | 在进行树型数据选择的时候是否级联 |  |
 | children-key | `string` | `'children'` | 树形数据下后代节点在数据中的 key |  |
 | columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |  |
