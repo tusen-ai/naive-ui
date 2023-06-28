@@ -132,7 +132,7 @@
     "rollup-plugin-esbuild": "^5.0.0",
     "superagent": "^8.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "5.1.3",
+    "typescript": "5.1.5",
     "vfonts": "^0.1.0",
     "vite": "^4.3.3",
     "vue": "^3.3.4",
