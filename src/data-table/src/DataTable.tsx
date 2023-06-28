@@ -265,6 +265,12 @@ export default defineComponent({
       clearFilter,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
+      },
+      scrollToKey (key: string | number) {
+        mainTableInstRef.value?.scrollToKey(key)
+      },
+      scrollToIndex (index: number) {
+        mainTableInstRef.value?.scrollToIndex(index)
       }
     }
     const cssVarsRef = computed(() => {

@@ -60,6 +60,7 @@ switchable-editable
 context-menu.vue
 async-expand.vue
 render-cell.vue
+scroll.vue
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
@@ -213,12 +214,14 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
 
 | 名称 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动到指定位置 | 2.30.4 |
+| scrollToKey | `(key: number | string) => void` | 滚动到 key | NEXT_VERSION |
+| scrollToIndex | `(index: number) => void` | 滚动到 index | NEXT_VERSION |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
 
 ### DataTable Slots

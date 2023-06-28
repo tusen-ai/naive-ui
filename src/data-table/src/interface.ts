@@ -482,15 +482,23 @@ string,
 FilterOptionValue[] | FilterOptionValue | null | undefined
 >
 
+export type ScrollToKey = (key: string | number) => void
+
+export type ScrollToIndex = (index: number) => void
+
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
   getBodyElement: () => HTMLElement | null
   scrollTo: ScrollTo
+  scrollToKey: ScrollToKey
+  scrollToIndex: ScrollToIndex
 }
 
 export interface MainTableBodyRef {
   getScrollContainer: () => HTMLElement | null
   scrollTo: ScrollTo
+  scrollToKey: ScrollToKey
+  scrollToIndex: ScrollToIndex
 }
 
 export interface MainTableHeaderRef {
@@ -514,6 +522,8 @@ export interface DataTableInst {
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
   scrollTo: ScrollTo
+  scrollToKey: ScrollToKey
+  scrollToIndex: ScrollToIndex
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }

@@ -195,6 +195,7 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
+    const tableBodyRef = ref<HTMLElement | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
     const emptyRef = useMemo(() => paginatedDataRef.value.length === 0)
     // If header is not inside & empty is displayed, no table part would be
@@ -337,6 +338,47 @@ export default defineComponent({
       if (onResize) onResize(e)
       scrollbarInstRef.value?.sync()
     }
+
+    const keyIndexMapRef = computed(() => {
+      const map = new Map()
+      rawPaginatedDataRef.value.forEach((item, index) => {
+        if (item?.key) {
+          map.set(item.key, index)
+        }
+      })
+      return map
+    })
+    const pureRowForScrollRef = computed<NodeListOf<HTMLElement> | undefined>(
+      () => {
+        return tableBodyRef.value?.querySelectorAll(
+          'tr:not([row-type="expand"])'
+        )
+      }
+    )
+    function scrollToIndex (index: number): void {
+      const itemEle = pureRowForScrollRef.value?.[index]
+      if (itemEle) {
+        scrollbarInstRef.value?.scrollTo({ left: 0, top: itemEle.offsetTop })
+      }
+    }
+    function scrollToKey (key: string | number): void {
+      if (virtualScrollRef.value) {
+        virtualListRef.value?.scrollTo({ key })
+      } else {
+        if (keyIndexMapRef.value.size) {
+          const toIndex = keyIndexMapRef.value.get(key)
+          if (toIndex !== undefined) scrollToIndex(toIndex)
+        }
+      }
+    }
+    function mergeScrollToIndex (index: number): void {
+      if (virtualScrollRef.value) {
+        virtualListRef.value?.scrollTo({ index })
+      } else {
+        scrollToIndex(index)
+      }
+    }
+
     const exposedMethods: MainTableBodyRef = {
       getScrollContainer,
       scrollTo (arg0: any, arg1?: any) {
@@ -345,7 +387,9 @@ export default defineComponent({
         } else {
           scrollbarInstRef.value?.scrollTo(arg0, arg1)
         }
-      }
+      },
+      scrollToKey,
+      scrollToIndex: mergeScrollToIndex
     }
 
     interface StyleCProps {
@@ -434,6 +478,7 @@ export default defineComponent({
       componentId,
       scrollbarInstRef,
       virtualListRef,
+      tableBodyRef,
       emptyElRef,
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -677,6 +722,7 @@ export default defineComponent({
                   <tr
                     class={`${mergedClsPrefix}-data-table-tr ${mergedClsPrefix}-data-table-tr--expanded`}
                     key={`${key}__expand`}
+                    row-type="expand"
                   >
                     <td
                       class={[
@@ -947,6 +993,7 @@ export default defineComponent({
                   {this.showHeader ? <TableHeader discrete={false} /> : null}
                   {!this.empty ? (
                     <tbody
+                      ref="tableBodyRef"
                       data-n-id={componentId}
                       class={`${mergedClsPrefix}-data-table-tbody`}
                     >

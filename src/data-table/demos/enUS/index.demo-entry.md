@@ -58,6 +58,7 @@ switchable-editable
 context-menu.vue
 async-expand.vue
 render-cell.vue
+scroll.vue
 ```
 
 ## API
@@ -203,12 +204,14 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.
 
 | Name | Type | Description | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll to the position. | 2.30.4 |
+| scrollToKey | `(key: number | string) => void` | Scroll to the key. | NEXT_VERSION |
+| scrollToIndex | `(index: number) => void` | Scroll to the index. | NEXT_VERSION |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

@@ -64,6 +64,12 @@ export default defineComponent({
       getHeaderElement,
       scrollTo (arg0: any, arg1?: any) {
         bodyInstRef.value?.scrollTo(arg0, arg1)
+      },
+      scrollToKey (key: string | number) {
+        bodyInstRef.value?.scrollToKey(key)
+      },
+      scrollToIndex (index: number) {
+        bodyInstRef.value?.scrollToIndex(index)
       }
     }
     watchEffect(() => {
