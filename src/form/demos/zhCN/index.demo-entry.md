@@ -14,6 +14,7 @@
 inline.vue
 custom-rule.vue
 custom-validation.vue
+warning-only.vue
 i18n.vue
 top.vue
 left.vue

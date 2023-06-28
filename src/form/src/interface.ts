@@ -89,7 +89,10 @@ export type ValidateCallback = (
   warnings?: ValidateError[]
 ) => void
 
-export type FormValidateCallback = (errors?: ValidateError[][]) => void
+export type FormValidateCallback = (
+  errors?: ValidateError[][],
+  warnings?: ValidateError[][]
+) => void
 export type FormValidate = (
   callback?: FormValidateCallback,
   shouldRuleBeApplied?: ShouldRuleBeApplied

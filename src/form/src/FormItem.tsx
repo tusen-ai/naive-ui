@@ -321,7 +321,7 @@ export default defineComponent({
         warningValidator.messages(validateMessages)
       }
 
-      const renderErrors = (errors: ValidateError[]): void => {
+      const renderMessages = (errors: ValidateError[]): void => {
         renderExplainsRef.value = errors.map((error: ValidateError) => {
           const transformedMessage = error?.message || ''
           return {
@@ -352,11 +352,12 @@ export default defineComponent({
           validationErroredRef.value = true
           validationResult.valid = false
           validationResult.errors = errors
-          renderErrors(errors)
+          renderMessages(errors)
         }
       }
 
-      if (activeWarningRules.length) {
+      // if there are already errors, warning check can be skipped
+      if (activeWarningRules.length && !validationResult.errors) {
         const warnings = await new Promise<ValidateError[] | null>(
           (resolve) => {
             void warningValidator.validate(
@@ -367,10 +368,14 @@ export default defineComponent({
           }
         )
         if (warnings?.length) {
-          renderErrors(warnings)
+          renderMessages(warnings)
           validationWarnedRef.value = true
           validationResult.warnings = warnings
         }
+      }
+
+      if (!validationResult.errors && !validationResult.warnings) {
+        restoreValidation()
       }
 
       return validationResult
