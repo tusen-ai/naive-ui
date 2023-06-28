@@ -116,8 +116,8 @@ export default defineComponent({
             .map((result) => result.warnings)
           if (validateCallback) {
             validateCallback(
-              errors as ValidateError[][],
-              warnings as ValidateError[][]
+              errors?.length ? (errors as ValidateError[][]) : undefined,
+              warnings?.length ? (warnings as ValidateError[][]) : undefined
             )
           } else {
             formValid ? resolve() : reject(errors)
