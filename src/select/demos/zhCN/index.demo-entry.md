@@ -62,6 +62,7 @@ create-debug.vue
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |  |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |

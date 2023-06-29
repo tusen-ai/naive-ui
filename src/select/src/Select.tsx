@@ -76,6 +76,7 @@ import type {
   SelectFilter
 } from './interface'
 import style from './styles/index.cssr'
+import { PopoverProps } from '../../popover'
 
 export const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -139,6 +140,7 @@ export const selectProps = {
     default: true
   },
   maxTagCount: [Number, String] as PropType<number | 'responsive'>,
+  ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   consistentMenuWidth: {
     type: Boolean,
     default: true
@@ -893,6 +895,7 @@ export default defineComponent({
                       clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
+                      ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
                       bordered={this.mergedBordered}
                       active={this.activeWithoutMenuOpen || this.mergedShow}
                       pattern={this.pattern}

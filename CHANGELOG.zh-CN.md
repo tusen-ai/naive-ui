@@ -46,6 +46,9 @@
 - `n-tree` 为 `render-switcher-icon` 属性添加节点信息，关闭 [#4815](https://github.com/tusen-ai/naive-ui/issues/4815)
 - `n-input-number` 导出 `select` 方法
 - `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row. closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
+- `n-cascader` 新增 `ellipsis-tag-popover-props` 属性
+- `n-select` 新增 `ellipsis-tag-popover-props` 属性
+- `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性
 
 ### i18n
 

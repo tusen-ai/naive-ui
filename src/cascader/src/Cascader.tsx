@@ -67,6 +67,7 @@ import type {
 } from './interface'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { PopoverProps } from '../../popover'
 
 export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
@@ -131,6 +132,7 @@ export const cascaderProps = {
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   menuProps: Object as PropType<HTMLAttributes>,
   filterMenuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
@@ -1022,6 +1024,7 @@ export default defineComponent({
                       status={this.mergedStatus}
                       clsPrefix={mergedClsPrefix}
                       maxTagCount={this.maxTagCount}
+                      ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
                       bordered={this.mergedBordered}
                       size={this.mergedSize}
                       theme={this.mergedTheme.peers.InternalSelection}
