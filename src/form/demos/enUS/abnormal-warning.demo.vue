@@ -1,7 +1,7 @@
 <markdown>
-  # 警告不阻塞
+  # Abnormal warning
 
-  你可能需要对可能异常的值向用户显示警告，但是不希望`validate`方法抛出异常， 这种情况下`warningOnly`属性可以帮到你。
+  You may want to display warnings to the user for values that may be abnormal, but do not want the validate method to throw an exception. In this case, the warningOnly attribute can help you.
   </markdown>
 
 <template>
@@ -12,19 +12,19 @@
     :model="formValue"
     :rules="rules"
   >
-    <n-form-item label="联系电话，输入个座机试试" path="phone">
-      <n-input v-model:value="formValue.phone" placeholder="电话" />
+    <n-form-item label="How many humps can a camel have at most?" path="count">
+      <n-input-number v-model:value="formValue.count" />
     </n-form-item>
     <n-form-item>
       <n-button attr-type="button" @click="handleValidateClick">
-        验证
+        Submit Answer
       </n-button>
     </n-form-item>
   </n-form>
 </template>
 
 <script lang="ts">
-import { FormInst, useMessage } from 'naive-ui'
+import { FormInst, FormItemRule, FormRules, useMessage } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -34,34 +34,39 @@ export default defineComponent({
     return {
       formRef,
       formValue: ref({
-        phone: ''
+        count: undefined
       }),
       rules: {
-        phone: [
+        count: [
           {
             required: true,
-            message: '输入电话号码',
+            message: 'Try to answer?',
+            type: 'number',
             trigger: ['input', 'blur']
           },
           {
             trigger: ['input', 'blur'],
             warningOnly: true,
-            len: 11,
-            message: '要不要换成手机号？'
+            validator (_rule: FormItemRule, value: number) {
+              if (value !== 3) {
+                return new Error('How about three-humped camel? when it’s pregnant.')
+              }
+              return true
+            }
           }
         ]
-      },
+      } satisfies FormRules,
       handleValidateClick (e: MouseEvent) {
         e.preventDefault()
         formRef.value?.validate((errors, warnings) => {
           if (errors) {
             console.error(errors)
-            message.error('Invalid')
+            message.error('Valid')
           } else if (warnings) {
-            message.warning('Warning')
+            message.warning('Valid but be aware warnings')
             console.warn(warnings)
           } else {
-            message.success('搞定，完全没得问题了')
+            message.success('Perfect')
           }
         })
       }

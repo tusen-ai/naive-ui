@@ -13,6 +13,7 @@ The element to collect and validate data.
 ```demo
 inline.vue
 custom-rule.vue
+abnormal-warning.vue
 custom-validation.vue
 i18n.vue
 top.vue
