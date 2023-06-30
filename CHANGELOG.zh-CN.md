@@ -30,7 +30,7 @@
 - 修复 `n-steps` 在超过 9 个步数的时候换行可能存在问题
 - 修复 `n-form-item-gi` v-show 多次切换报错，关闭 [#4422](https://github.com/tusen-ai/naive-ui/issues/4422)
 - 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
-- Fixed rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
+- 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
 
 ### Features
 
@@ -45,11 +45,11 @@
 - `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)， [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
 - `n-tree` 为 `render-switcher-icon` 属性添加节点信息，关闭 [#4815](https://github.com/tusen-ai/naive-ui/issues/4815)
 - `n-input-number` 导出 `select` 方法
-- `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row. closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
+- `n-data-table` 新增 `n-data-table-tr--expanded` class 到展开行，新增 `n-data-table-tr n-data-table-tr--expand` class 到附加行，关闭 [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
 
 ### i18n
 
-- 完善 zhTW locale
+- 更新 zhTW locale
 - 新增 svSE locale
 
 ## 2.34.4
