@@ -1,4 +1,3 @@
-
 # CHANGELOG
 
 ## NEXT_VERSION
@@ -31,7 +30,7 @@
 - Fix `n-steps` may have line wrap issue if step is more than 9.
 - Fix `n-grid` v-show reports errors when switching multiple times, closes [#4422](https://github.com/tusen-ai/naive-ui/issues/4422).
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
-- Fixed rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
+- Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 
 ### Features
 
@@ -46,11 +45,11 @@
 - `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 - `n-input-number` export the `select` method.
-- `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row. closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
+- `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row, closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
 
 ### i18n
 
-- Improve `zhTW` locale.
+- Update `zhTW` locale.
 - Add `svSE` locale.
 
 ## 2.34.4
