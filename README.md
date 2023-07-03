@@ -77,6 +77,12 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 Please see [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
 
+## Contributors
+
+<a href="https://github.com/tusen-ai/naive-ui/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=tusen-ai/naive-ui"  />
+</a>
+
 ## License
 
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).
