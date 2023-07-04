@@ -182,7 +182,10 @@ export function useScroll (
     }
   }
   function handleTableHeaderScroll (): void {
-    if (scrollPartRef.value !== 'body') {
+    if (!scrollPartRef.value) {
+      scrollPartRef.value = 'head'
+    }
+    if (scrollPartRef.value === 'head') {
       beforeNextFrameOnce(syncScrollState)
     } else {
       scrollPartRef.value = undefined
@@ -190,7 +193,10 @@ export function useScroll (
   }
   function handleTableBodyScroll (e: Event): void {
     props.onScroll?.(e)
-    if (scrollPartRef.value !== 'head') {
+    if (!scrollPartRef.value) {
+      scrollPartRef.value = 'body'
+    }
+    if (scrollPartRef.value === 'body') {
       beforeNextFrameOnce(syncScrollState)
     } else {
       scrollPartRef.value = undefined
@@ -207,8 +213,6 @@ export function useScroll (
     if (props.maxHeight || props.flexHeight) {
       if (!header) return
       // we need to deal with overscroll
-      const directionHead = lastScrollLeft - header.scrollLeft
-      scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
       if (scrollPartRef.value === 'head') {
         lastScrollLeft = header.scrollLeft
         body.scrollLeft = lastScrollLeft

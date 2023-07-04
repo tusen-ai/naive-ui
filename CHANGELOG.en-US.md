@@ -32,6 +32,10 @@
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 
+## Refactors
+
+- Refactor `n-data-table` header and body's scrolling synchronization implementation.
+
 ### Features
 
 - `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.

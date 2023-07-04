@@ -32,6 +32,10 @@
 - 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
 - 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
 
+## Refactors
+
+- 重构 `n-data-table` header 和 body 滚动同步实现
+
 ### Features
 
 - `n-drawer` 新增 `max-height`、`min-height`、`max-width`、`max-width` 属性
