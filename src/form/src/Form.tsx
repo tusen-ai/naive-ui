@@ -106,7 +106,7 @@ export default defineComponent({
           }
         }
         void Promise.all(formItemValidationPromises).then((results) => {
-          const formValid = results.some((result) => !result.valid)
+          const formInvalid = results.some((result) => !result.valid)
 
           const errors = results
             .filter((result) => result.errors?.length)
@@ -120,7 +120,7 @@ export default defineComponent({
               warnings?.length ? (warnings as ValidateError[][]) : undefined
             )
           } else {
-            formValid ? resolve() : reject(errors)
+            formInvalid ? reject(errors) : resolve()
           }
         })
       })
