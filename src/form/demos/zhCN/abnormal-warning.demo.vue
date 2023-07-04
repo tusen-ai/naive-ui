@@ -40,7 +40,7 @@ export default defineComponent({
         count: [
           {
             required: true,
-            message: '你不知道？',
+            message: '请作答',
             type: 'number',
             trigger: ['input', 'blur']
           },
