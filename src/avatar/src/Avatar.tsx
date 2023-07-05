@@ -5,7 +5,6 @@ import {
   defineComponent,
   type PropType,
   inject,
-  watch,
   type VNodeChild,
   watchEffect,
   onMounted,
@@ -124,19 +123,6 @@ export default defineComponent({
       if (NAvatarGroup) return true
       return props.bordered || false
     })
-    const handleError = (e: Event): void => {
-      if (!shouldStartLoadingRef.value) return
-      hasLoadErrorRef.value = true
-      const { onError, imgProps } = props
-      imgProps?.onError?.(e)
-      if (onError) {
-        onError(e)
-      }
-    }
-    watch(
-      () => props.src,
-      () => (hasLoadErrorRef.value = false)
-    )
     const cssVarsRef = computed(() => {
       const size = mergedSizeRef.value
       const round = mergedRoundRef.value
@@ -205,26 +191,33 @@ export default defineComponent({
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
-      if (isImageSupportNativeLazy) {
-        return
+      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      if (props.lazy && props.intersectionObserverOptions) {
+        let unobserve: (() => void) | undefined
+        const stopWatchHandle = watchEffect(() => {
+          unobserve?.()
+          unobserve = undefined
+          if (props.lazy) {
+            unobserve = observeIntersection(
+              selfRef.value,
+              props.intersectionObserverOptions,
+              shouldStartLoadingRef
+            )
+          }
+        })
+        onBeforeUnmount(() => {
+          stopWatchHandle()
+          unobserve?.()
+        })
       }
-      let unobserve: (() => void) | undefined
-      const stopWatchHandle = watchEffect(() => {
-        unobserve?.()
-        unobserve = undefined
-        if (props.lazy) {
-          unobserve = observeIntersection(
-            selfRef.value,
-            props.intersectionObserverOptions,
-            shouldStartLoadingRef
-          )
-        }
-      })
-      onBeforeUnmount(() => {
-        stopWatchHandle()
-        unobserve?.()
-      })
     })
+
+    watchEffect(() => {
+      void props.src
+      void props.imgProps?.src
+      hasLoadErrorRef.value = false
+    })
+
     const loadedRef = ref(!props.lazy)
 
     return {
@@ -237,13 +230,18 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,
-      handleError,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
+      mergedOnError: (e: Event) => {
+        hasLoadErrorRef.value = true
+        const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
+        onError?.(e)
+        imgPropsOnError?.(e)
+      },
       mergedOnLoad: (e: Event) => {
-        const { onLoad, imgProps } = props
+        const { onLoad, imgProps: { onLoad: imgPropsOnLoad } = {} } = props
         onLoad?.(e)
-        imgProps?.onLoad?.(e)
+        imgPropsOnLoad?.(e)
         loadedRef.value = true
       }
     }
@@ -255,10 +253,9 @@ export default defineComponent({
       mergedClsPrefix,
       lazy,
       onRender,
-      mergedOnLoad,
-      shouldStartLoading,
       loaded,
-      hasLoadError
+      hasLoadError,
+      imgProps = {}
     } = this
     onRender?.()
     let img: VNodeChild
@@ -268,6 +265,7 @@ export default defineComponent({
       (this.renderPlaceholder
         ? this.renderPlaceholder()
         : this.$slots.placeholder?.())
+
     if (this.hasLoadError) {
       img = this.renderFallback
         ? this.renderFallback()
@@ -288,8 +286,8 @@ export default defineComponent({
               }}
             </VResizeObserver>
           )
-        } else if (src) {
-          const { imgProps } = this
+        } else if (src || imgProps.src) {
+          const loadSrc = this.src || imgProps.src
           return h('img', {
             ...imgProps,
             loading:
@@ -299,16 +297,17 @@ export default defineComponent({
               lazy
                 ? 'lazy'
                 : 'eager',
-            src: isImageSupportNativeLazy
-              ? src
-              : shouldStartLoading || loaded
-                ? src
-                : undefined,
-            onLoad: mergedOnLoad,
-            'data-image-src': src,
-            onError: this.handleError,
+            src:
+              lazy && this.intersectionObserverOptions
+                ? this.shouldStartLoading
+                  ? loadSrc
+                  : undefined
+                : loadSrc,
+            'data-image-src': loadSrc,
+            onLoad: this.mergedOnLoad,
+            onError: this.mergedOnError,
             style: [
-              imgProps?.style,
+              imgProps.style || '',
               { objectFit: this.objectFit },
               placeholderNode
                 ? {
