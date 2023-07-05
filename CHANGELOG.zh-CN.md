@@ -31,6 +31,7 @@
 - 修复 `n-form-item-gi` v-show 多次切换报错，关闭 [#4422](https://github.com/tusen-ai/naive-ui/issues/4422)
 - 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
 - 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
+- 修复 `n-image` 属性 `fallback-src` 在图片懒加载错误时不生效
 
 ### Features
 

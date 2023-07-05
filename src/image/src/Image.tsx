@@ -133,7 +133,6 @@ export default defineComponent({
         props.imgProps?.onClick?.(e)
       },
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value) return
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
