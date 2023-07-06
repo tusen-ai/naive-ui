@@ -25,7 +25,7 @@ export interface FormItemInjection {
 }
 
 export const formItemInjectionKey =
-  createInjectionKey<FormItemInjection>('n-form-item')
+  createInjectionKey<FormItemInjection | null>('n-form-item')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize

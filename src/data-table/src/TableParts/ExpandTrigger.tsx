@@ -33,6 +33,9 @@ export default defineComponent({
           this.expanded && `${clsPrefix}-data-table-expand-trigger--expanded`
         ]}
         onClick={this.onClick}
+        onMousedown={(e) => {
+          e.preventDefault()
+        }}
       >
         <NIconSwitchTransition>
           {{

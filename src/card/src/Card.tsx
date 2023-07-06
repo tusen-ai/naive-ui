@@ -39,7 +39,7 @@ export const cardBaseProps = {
   },
   bordered: {
     type: Boolean,
-    default: true as boolean
+    default: true
   },
   closable: Boolean,
   hoverable: Boolean,

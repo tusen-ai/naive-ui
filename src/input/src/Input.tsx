@@ -160,7 +160,10 @@ export const inputProps = {
   >,
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
-  internalLoadingBeforeSuffix: Boolean,
+  internalLoadingBeforeSuffix: {
+    type: Boolean,
+    default: true
+  },
   /** deprecated */
   showPasswordToggle: Boolean
 }

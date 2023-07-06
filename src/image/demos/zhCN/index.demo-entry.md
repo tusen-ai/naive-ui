@@ -43,6 +43,8 @@ previewed-img-props.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
+| on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 

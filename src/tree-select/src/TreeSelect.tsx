@@ -725,7 +725,9 @@ export default defineComponent({
         }
       },
       focus: () => triggerInstRef.value?.focus(),
-      blur: () => triggerInstRef.value?.blur()
+      focusInput: () => triggerInstRef.value?.focusInput(),
+      blur: () => triggerInstRef.value?.blur(),
+      blurInput: () => triggerInstRef.value?.blurInput()
     }
 
     const themeRef = useTheme(

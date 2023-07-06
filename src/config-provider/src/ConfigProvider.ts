@@ -35,7 +35,7 @@ export const configProviderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clsPrefix: String,
+  clsPrefix: { type: String, default: defaultClsPrefix },
   locale: Object as PropType<NLocale | null>,
   dateLocale: Object as PropType<NDateLocale | null>,
   namespace: String,
@@ -130,7 +130,8 @@ export default defineComponent({
     const mergedClsPrefixRef = computed(() => {
       const { clsPrefix } = props
       if (clsPrefix !== undefined) return clsPrefix
-      return NConfigProvider?.mergedClsPrefixRef.value
+      if (NConfigProvider) return NConfigProvider.mergedClsPrefixRef.value
+      return defaultClsPrefix
     })
     const mergedRtlRef: ComputedRef<RtlEnabledState | undefined> = computed(
       () => {

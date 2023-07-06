@@ -20,6 +20,7 @@ export default cB('scrollbar', `
       width: 100%;
       overflow: scroll;
       height: 100%;
+      min-height: inherit;
       max-height: inherit;
       scrollbar-width: none;
     `, [
