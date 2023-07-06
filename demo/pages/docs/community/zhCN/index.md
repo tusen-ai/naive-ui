@@ -14,3 +14,4 @@ Naive-ui 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | [tsx-naive-admin](https://github.com/WalkAlone0325/tsx-naive-admin) | 基于 Vue 3 + Naive UI + TSX + Vite 的后台管理基本模板 |
 | [Soybean Admin](https://github.com/honghuangdc/soybean-admin) | 一个基于 Vue3 + Vite + Naive UI + TypeScript 的漂亮清爽的中后台模版 |
 | [GoView](https://gitee.com/dromara/go-view) | 开源、精美、便捷的「数据可视化」低代码开发平台 |
+| [Dolphin Admin](https://dolphin-admin.bit-ocean.studio) | 基于 Vue 3 + Vite + Naive UI + TypeScript + TailwindCSS 的开源、轻量级、优雅精致、支持国际化的后台管理模板 |
