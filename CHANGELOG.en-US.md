@@ -31,6 +31,7 @@
 - Fix `n-grid` v-show reports errors when switching multiple times, closes [#4422](https://github.com/tusen-ai/naive-ui/issues/4422).
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
+- Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 
 ### Features
 
