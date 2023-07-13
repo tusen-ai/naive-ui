@@ -103,6 +103,7 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  disabledNodePropsClickRef: Ref<boolean>
   checkableRef: Ref<boolean>
   cascadeRef: Ref<boolean>
   mergedCheckStrategyRef: Ref<CheckStrategy>

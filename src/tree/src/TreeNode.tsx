@@ -61,6 +61,10 @@ const TreeNode = defineComponent({
       () => NTree.disabledRef.value || nodeIsDisabledRef.value
     )
 
+    const disabledNodePropsClickRef = useMemo(
+      () => NTree.disabledNodePropsClickRef.value
+    )
+
     const resolvedNodePropsRef = computed(() => {
       const { value: nodeProps } = nodePropsRef
       if (!nodeProps) return undefined
@@ -158,7 +162,7 @@ const TreeNode = defineComponent({
     function handleContentClick (e: MouseEvent): void {
       if (blockLineRef.value) return
       if (!disabledRef.value) _handleClick(e)
-      resolvedNodePropsRef.value?.onClick?.(e)
+      if (!disabledNodePropsClickRef.value) { resolvedNodePropsRef.value?.onClick?.(e) }
     }
 
     function handleLineClick (e: MouseEvent): void {
@@ -166,7 +170,7 @@ const TreeNode = defineComponent({
       if (!disabledRef.value) {
         _handleClick(e)
       }
-      resolvedNodePropsRef.value?.onClick?.(e)
+      if (!disabledNodePropsClickRef.value) { resolvedNodePropsRef.value?.onClick?.(e) }
     }
 
     function handleCheck (checked: boolean): void {

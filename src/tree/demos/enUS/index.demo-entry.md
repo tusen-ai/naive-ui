@@ -50,6 +50,8 @@ checkbox-placement.vue
 | default-expand-all | `boolean` | `false` | Expand all options. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expanded items by default. |  |
 | default-selected-keys | `Array<string \| number>` | `[]` | Nodes selected by default. |  |
+| disabled | `boolean` | `false` | Whether to disable the form. |  |
+| disabled-node-props-click | `boolean` | `false` | Whether to disable the `node-props` Click event. |  |
 | draggable | `boolean` | `false` | Whether it can be dragged. |  |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
 | expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | 2.29.1 |

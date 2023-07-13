@@ -56,6 +56,8 @@ expand-debug.vue
 | default-expand-all | `boolean` | `false` | 展开全部选项 |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开项 |  |
 | default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |  |
+| disabled | `boolean` | `false` | 是否禁用 |  |
+| disabled-node-props-click | `boolean` | `false` | 是否禁用 `node-props` `Click` 事件 |  |
 | draggable | `boolean` | `false` | 是否可拖拽 |  |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |  |
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |

@@ -66,6 +66,10 @@ export default cB('tree', `
       cB('tree-node-content', `
         color: var(--n-node-text-color-disabled);
         cursor: not-allowed;
+      `),
+      cB('tree-node-switcher', `
+        color: var(--n-node-text-color-disabled);
+        cursor: not-allowed;
       `)
     ]),
     cNotM('disabled', [

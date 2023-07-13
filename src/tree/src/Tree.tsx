@@ -233,6 +233,7 @@ export const treeProps = {
   blockLine: Boolean,
   showLine: Boolean,
   disabled: Boolean,
+  disabledNodePropsClick: Boolean,
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
@@ -1497,6 +1498,7 @@ export default defineComponent({
       mergedCheckStrategyRef,
       nodePropsRef: toRef(props, 'nodeProps'),
       disabledRef: toRef(props, 'disabled'),
+      disabledNodePropsClickRef: toRef(props, 'disabledNodePropsClick'),
       checkableRef: toRef(props, 'checkable'),
       selectableRef: toRef(props, 'selectable'),
       expandOnClickRef: toRef(props, 'expandOnClick'),
