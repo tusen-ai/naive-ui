@@ -110,12 +110,17 @@ export default defineComponent({
                       !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
                       this.mergedIsDateDisabled(dateItem.ts),
+                    [`${mergedClsPrefix}-date-panel-date--covered`]:
+                      this.isCovered(dateItem),
                     [`${mergedClsPrefix}-date-panel-date--heavily-covered`]:
                       dateItem.inHeavySpan
                   }
                 ]}
                 onClick={() => {
                   this.handleDateClick(dateItem)
+                }}
+                onMouseenter={() => {
+                  this.handleDateMouseEnter(dateItem)
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />

@@ -282,6 +282,22 @@ function useCalendar (
       justifyColumnsScrollState(now)
     }
   }
+  const hoveredWeekRef = ref<number | null>(null)
+  function handleDateMouseEnter (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): void {
+    if (dateItem.type === 'date' && type === 'week') {
+      hoveredWeekRef.value = sanitizeValue(getTime(dateItem.ts))
+    }
+  }
+  function isCovered (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): boolean {
+    if (dateItem.type === 'date' && type === 'week') {
+      return sanitizeValue(getTime(dateItem.ts)) === hoveredWeekRef.value
+    }
+    return false
+  }
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
@@ -482,6 +498,8 @@ function useCalendar (
     handleDateClick,
     handleDateInputBlur,
     handleDateInput,
+    handleDateMouseEnter,
+    isCovered,
     handleTimePickerChange,
     clearSelectedDateTime,
     virtualListContainer,
