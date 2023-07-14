@@ -22,6 +22,7 @@ import {
   startOfMonth,
   startOfYear,
   startOfQuarter,
+  startOfWeek,
   setQuarter,
   setYear,
   setMonth
@@ -37,6 +38,7 @@ import {
   quarterArray
 } from '../utils'
 import type {
+  FirstDayOfWeek,
   IsSingleDateDisabled,
   PanelChildComponentRefs,
   Shortcuts
@@ -51,13 +53,17 @@ const useCalendarProps = {
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
+  },
+  type: {
+    type: String as PropType<'date' | 'week'>,
+    required: false
   }
 } as const
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -106,7 +112,9 @@ function useCalendar (
       calendarValueRef.value,
       props.value,
       nowRef.value,
-      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
+      false,
+      type === 'week'
     )
   })
   const monthArrayRef = computed(() => {
@@ -175,11 +183,24 @@ function useCalendar (
       }
     }
   )
+
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
     if (type === 'quarter') return getTime(startOfQuarter(value))
+    if (type === 'week') {
+      // refer to makeWeekMatcher
+      const weekStartsOn = (((firstDayOfWeekRef.value ??
+        localeRef.value.firstDayOfWeek) +
+        1) %
+        7) as FirstDayOfWeek
+      return getTime(
+        startOfWeek(value, {
+          weekStartsOn
+        })
+      )
+    }
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -293,10 +314,11 @@ function useCalendar (
     )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
-      props.panel || type === 'date' || type === 'year'
+      props.panel || type === 'date' || type === 'week' || type === 'year'
     )
     switch (type) {
       case 'date':
+      case 'week':
         panelCommon.doClose()
         break
       case 'year':

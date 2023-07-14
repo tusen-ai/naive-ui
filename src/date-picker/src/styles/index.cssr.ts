@@ -439,6 +439,29 @@ export default c([
               backgroundColor: 'var(--n-item-color-disabled)'
             })
           ])
+        ]),
+        cM('heavily-covered', [
+          c('&', `
+              color: var(--n-item-text-color-active)
+          `),
+          c('&::before', `
+            content: "";
+            z-index: -2;
+            position: absolute;
+            left: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            top: 0;
+            bottom: 0;
+            background-color: var(--n-item-color-active);
+          `),
+          c('&:nth-child(7n + 1)::before', {
+            borderTopLeftRadius: 'var(--n-item-border-radius)',
+            borderBottomLeftRadius: 'var(--n-item-border-radius)'
+          }),
+          c('&:nth-child(7n + 7)::before', {
+            borderTopRightRadius: 'var(--n-item-border-radius)',
+            borderBottomRightRadius: 'var(--n-item-border-radius)'
+          })
         ])
       ])
     ]),

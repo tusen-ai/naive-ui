@@ -1026,7 +1026,9 @@ export default defineComponent({
         type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps}>{$slots}</DatePanel>
+        <DatePanel {...commonPanelProps} type={type}>
+          {$slots}
+        </DatePanel>
           )
     }
     if (this.panel) {

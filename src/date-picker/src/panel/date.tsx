@@ -31,7 +31,7 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, 'date')
+    return useCalendar(props, props.type ?? 'date')
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
@@ -109,7 +109,9 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--excluded`]:
                       !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+                      this.mergedIsDateDisabled(dateItem.ts),
+                    [`${mergedClsPrefix}-date-panel-date--heavily-covered`]:
+                      dateItem.inHeavySpan
                   }
                 ]}
                 onClick={() => {
