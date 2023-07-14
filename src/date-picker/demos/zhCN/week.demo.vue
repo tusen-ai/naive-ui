@@ -1,9 +1,9 @@
 <markdown>
 # 周
 </markdown>
-<!-- TODO 实现week -->
+
 <template>
-  <n-date-picker v-model:value="timestamp" type="quarter" clearable />
+  <n-date-picker v-model:value="timestamp" type="week" clearable />
   <pre>{{ JSON.stringify(timestamp) }}</pre>
 </template>
 

@@ -214,6 +214,8 @@ export default defineComponent({
         case 'quarter':
         case 'quarterrange':
           return localeRef.value.quarterFormat
+        case 'week':
+          return localeRef.value.weekFormat
       }
     })
     const mergedValueFormatRef = computed(() => {
@@ -312,6 +314,8 @@ export default defineComponent({
             return localeRef.value.yearPlaceholder
           case 'quarter':
             return localeRef.value.quarterPlaceholder
+          case 'week':
+            return localeRef.value.weekPlaceholder
           default:
             return ''
         }
@@ -384,6 +388,10 @@ export default defineComponent({
         case 'monthrange':
         case 'yearrange':
         case 'quarterrange': {
+          result.push('confirm')
+          return result
+        }
+        case 'week': {
           result.push('confirm')
           return result
         }
