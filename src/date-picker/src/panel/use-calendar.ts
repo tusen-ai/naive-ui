@@ -53,10 +53,6 @@ const useCalendarProps = {
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
-  },
-  type: {
-    type: String as PropType<'date' | 'week'>,
-    required: false
   }
 } as const
 

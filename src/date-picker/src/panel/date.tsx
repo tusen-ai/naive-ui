@@ -1,4 +1,4 @@
-import { h, defineComponent, watchEffect } from 'vue'
+import { h, defineComponent, watchEffect, type PropType } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -19,7 +19,13 @@ import PanelHeader from './panelHeader'
  */
 export default defineComponent({
   name: 'DatePanel',
-  props: useCalendarProps,
+  props: {
+    ...useCalendarProps,
+    type: {
+      type: String as PropType<'date' | 'week'>,
+      required: false
+    }
+  },
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
