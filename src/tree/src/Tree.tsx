@@ -613,7 +613,7 @@ export default defineComponent({
             )
           }
         } else {
-          if (!oldValue.length) {
+          if (oldValue && !oldValue.length) {
             memoizedExpandedKeys = mergedExpandedKeysRef.value
           }
           const { expandedKeys } = filteredTreeInfoRef.value
