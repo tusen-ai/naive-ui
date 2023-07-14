@@ -371,6 +371,7 @@ export default c([
           border-radius: inherit;
           transition: background-color .3s var(--n-bezier);
         `),
+
         cM('covered, start, end', [
           cNotM('excluded', [
             c('&::before', `
@@ -439,6 +440,26 @@ export default c([
               backgroundColor: 'var(--n-item-color-disabled)'
             })
           ])
+        ]),
+        cM('slightly-covered', [
+          c('&::before', `
+            content: "";
+            z-index: -2;
+            position: absolute;
+            left: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            top: 0;
+            bottom: 0;
+            background-color: var(--n-item-color-included);
+          `),
+          c('&:nth-child(7n + 1)::before', {
+            borderTopLeftRadius: 'var(--n-item-border-radius)',
+            borderBottomLeftRadius: 'var(--n-item-border-radius)'
+          }),
+          c('&:nth-child(7n + 7)::before', {
+            borderTopRightRadius: 'var(--n-item-border-radius)',
+            borderBottomRightRadius: 'var(--n-item-border-radius)'
+          })
         ]),
         cM('heavily-covered', [
           c('&', `
