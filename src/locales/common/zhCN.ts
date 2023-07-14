@@ -31,7 +31,7 @@ const zhCN: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-wo 周',
+    weekFormat: 'yyyy-w周',
     clear: '清除',
     now: '此刻',
     confirm: '确认',
