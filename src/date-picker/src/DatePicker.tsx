@@ -357,7 +357,8 @@ export default defineComponent({
       if (actions !== undefined) return actions
       const result = clearable ? ['clear'] : []
       switch (type) {
-        case 'date': {
+        case 'date':
+        case 'week': {
           result.push('now')
           return result
         }
@@ -388,10 +389,6 @@ export default defineComponent({
         case 'monthrange':
         case 'yearrange':
         case 'quarterrange': {
-          result.push('confirm')
-          return result
-        }
-        case 'week': {
           result.push('confirm')
           return result
         }
