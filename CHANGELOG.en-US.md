@@ -31,6 +31,7 @@
 - Fix `n-grid` v-show reports errors when switching multiple times, closes [#4422](https://github.com/tusen-ai/naive-ui/issues/4422).
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
+- Fix `n-auto-complete`'s autocomplete menu's unexpected open when clicking the clear icon with the input not focused, closes [#4658](https://github.com/tusen-ai/naive-ui/issues/4658).
 
 ### Features
 
@@ -235,6 +236,7 @@
 - `n-avatar-group` adds `gap` theme variable, closes [#3819](https://github.com/tusen-ai/naive-ui/issues/3819).
 
 ## 2.33.3
+
 
 ### Feats
 

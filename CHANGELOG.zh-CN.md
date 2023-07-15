@@ -31,6 +31,7 @@
 - 修复 `n-form-item-gi` v-show 多次切换报错，关闭 [#4422](https://github.com/tusen-ai/naive-ui/issues/4422)
 - 修复 `n-tree` `check-on-click` 为 `true` 时，`TreeOption` `checkboxDisabled` 不生效
 - 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
+- 修复 `n-auto-complete` 在未聚焦状态下点击清除按钮时补全菜单意外打开的问题，关闭 [#4658](https://github.com/tusen-ai/naive-ui/issues/4658)
 
 ### Features
 
@@ -236,6 +237,7 @@
 - `n-avatar-group` 新增 `gap` 主题变量，关闭 [#3819](https://github.com/tusen-ai/naive-ui/issues/3819)
 
 ## 2.33.3
+
 
 ### Feats
 
