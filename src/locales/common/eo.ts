@@ -41,6 +41,7 @@ const eo: NLocale = {
     monthPlaceholder: 'Elekti monaton',
     yearPlaceholder: 'Elekti jaron',
     quarterPlaceholder: 'Elekti jarkvaronon',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Komenca dato',
     endDatePlaceholder: 'Fina dato',
     startDatetimePlaceholder: 'Komencaj dato kaj tempo',

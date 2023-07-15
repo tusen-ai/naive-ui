@@ -41,6 +41,7 @@ const esAR: NLocale = {
     monthPlaceholder: 'Seleccionar mes',
     yearPlaceholder: 'Seleccionar año',
     quarterPlaceholder: 'Seleccionar Trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Fecha de inicio',
     endDatePlaceholder: 'Fecha final',
     startDatetimePlaceholder: 'Fecha y hora de inicio',

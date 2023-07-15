@@ -41,6 +41,7 @@ const jaJP: NLocale = {
     monthPlaceholder: '月を選択',
     yearPlaceholder: '年を選択',
     quarterPlaceholder: '四半期を選択',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',

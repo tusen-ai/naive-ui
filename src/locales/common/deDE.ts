@@ -41,6 +41,7 @@ const deDE: NLocale = {
     monthPlaceholder: 'Monat auswählen',
     yearPlaceholder: 'Jahr auswählen',
     quarterPlaceholder: 'Quartal auswählen',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Anfangsdatum',
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',

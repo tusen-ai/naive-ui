@@ -41,6 +41,7 @@ const frFR: NLocale = {
     monthPlaceholder: 'Sélectionner le mois',
     yearPlaceholder: "Sélectionner l'année",
     quarterPlaceholder: 'Sélectionner le trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Date de début',
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',

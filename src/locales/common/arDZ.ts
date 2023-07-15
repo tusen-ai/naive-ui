@@ -41,6 +41,7 @@ const arDZ: NLocale = {
     monthPlaceholder: 'إختيار الشهر',
     yearPlaceholder: 'إختيار السنة',
     quarterPlaceholder: 'إختيار الربع',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'تاريخ البدء',
     endDatePlaceholder: 'تاريخ الإنتهاء',
     startDatetimePlaceholder: 'تاريخ ووقت البدء',

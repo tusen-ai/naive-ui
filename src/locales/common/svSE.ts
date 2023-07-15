@@ -41,6 +41,7 @@ const svSE: NLocale = {
     monthPlaceholder: 'Välj månad',
     yearPlaceholder: 'Välj år',
     quarterPlaceholder: 'Välj kvartal',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Startdatum',
     endDatePlaceholder: 'Slutdatum',
     startDatetimePlaceholder: 'Startdatum och -tid',

@@ -40,6 +40,7 @@ const trTR: NLocale = {
     monthPlaceholder: 'Ay Seçin',
     yearPlaceholder: 'Yıl Seçin',
     quarterPlaceholder: 'Mevsim Seçin',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Başlangıç Tarihi',
     endDatePlaceholder: 'Bitiş Tarihi',
     startDatetimePlaceholder: 'Başlangıç Tarih ve Saati',

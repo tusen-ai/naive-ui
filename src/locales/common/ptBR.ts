@@ -41,6 +41,7 @@ const ptBR: NLocale = {
     monthPlaceholder: 'Selecione o mês',
     yearPlaceholder: 'Selecione o ano',
     quarterPlaceholder: 'Selecione o trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Selecione a data de início',
     endDatePlaceholder: 'Selecione a data de término',
     startDatetimePlaceholder: 'Selecione a data e hora de início',

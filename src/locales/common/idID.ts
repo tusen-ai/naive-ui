@@ -42,6 +42,7 @@ const idID: NLocale = {
     // FIXME: translation needed
     yearPlaceholder: 'Pilih tahun',
     quarterPlaceholder: 'Pilih perempat tahun',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Tanggal Mulai',
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',

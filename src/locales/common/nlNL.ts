@@ -41,6 +41,7 @@ const nlNL: NLocale = {
     monthPlaceholder: 'Selecteer Maand',
     yearPlaceholder: 'Selecteer Jaar',
     quarterPlaceholder: 'Selecteer Kwartaal',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Begindatum',
     endDatePlaceholder: 'Einddatum',
     startDatetimePlaceholder: 'Begindatum en Uur',

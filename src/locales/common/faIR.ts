@@ -41,6 +41,7 @@ const faIR: NLocale = {
     monthPlaceholder: 'انتخاب ماه',
     yearPlaceholder: 'انتخاب سال',
     quarterPlaceholder: 'انتخاب سه‌ماهه',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'تاریخ شروع',
     endDatePlaceholder: 'تاریخ پایان',
     startDatetimePlaceholder: 'زمان شروع',

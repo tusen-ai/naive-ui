@@ -41,6 +41,7 @@ const ukUA: NLocale = {
     monthPlaceholder: 'Оберіть місяць',
     yearPlaceholder: 'Оберіть рік',
     quarterPlaceholder: 'Оберіть квартал',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',

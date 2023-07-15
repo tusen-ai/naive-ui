@@ -41,6 +41,7 @@ const skSK: NLocale = {
     monthPlaceholder: 'Vyberte mesiac',
     yearPlaceholder: 'Vyberte rok',
     quarterPlaceholder: 'Vyberte štvrťrok',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Dátum začiatku',
     endDatePlaceholder: 'Dátum ukončenia',
     startDatetimePlaceholder: 'Dátum a čas začiatku',

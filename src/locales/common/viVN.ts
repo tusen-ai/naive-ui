@@ -41,6 +41,7 @@ const viVN: NLocale = {
     monthPlaceholder: 'Chọn tháng',
     yearPlaceholder: 'Chọn năm',
     quarterPlaceholder: 'Chọn quý',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Ngày bắt đầu',
     endDatePlaceholder: 'Ngày kết thúc',
     startDatetimePlaceholder: 'Thời gian bắt đầu',

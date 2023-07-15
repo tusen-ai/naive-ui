@@ -41,6 +41,7 @@ const thTH: NLocale = {
     monthPlaceholder: 'เดือน',
     yearPlaceholder: 'ปี',
     quarterPlaceholder: 'ไตรมาส',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'วันที่เริ่มต้น',
     endDatePlaceholder: 'วันที่สิ้นสุด',
     startDatetimePlaceholder: 'วันที่เริ่มต้นและสิ้นสุด',

@@ -41,6 +41,7 @@ const koKR: NLocale = {
     monthPlaceholder: '월 선택',
     yearPlaceholder: '년 선택',
     quarterPlaceholder: '분기 선택',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '시작 날짜',
     endDatePlaceholder: '종료 날짜',
     startDatetimePlaceholder: '시작 날짜 및 시간',
