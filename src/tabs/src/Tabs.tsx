@@ -518,7 +518,7 @@ export default defineComponent({
     const tabsRailElRef = ref<HTMLElement | null>(null)
     const segmentCapsuleElRef = ref<HTMLElement | null>(null)
 
-    watchEffect(() => {
+    watch([mergedValueRef, tabsRailElRef], () => {
       if (props.type === 'segment') {
         const { value: tabsRailEl } = tabsRailElRef
         if (!tabsRailEl) return
