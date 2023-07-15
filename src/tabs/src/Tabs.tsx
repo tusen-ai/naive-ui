@@ -517,29 +517,26 @@ export default defineComponent({
 
     const tabsRailElRef = ref<HTMLElement | null>(null)
     const segmentCapsuleElRef = ref<HTMLElement | null>(null)
-    watch(
-      mergedValueRef,
-      () => {
-        if (props.type === 'segment') {
-          const tabsRailEl = tabsRailElRef.value
-          if (tabsRailEl) {
-            void nextTick(() => {
-              tabsRailEl.classList.add('transition-disabled')
-              const ele = tabsRailEl.querySelector('.n-tabs-tab--active')
-              if (ele && segmentCapsuleElRef.value) {
-                const rect = ele.getBoundingClientRect()
-                segmentCapsuleElRef.value.style.width = `${rect.width}px`
-                segmentCapsuleElRef.value.style.transform = `translateX(${
-                  rect.left - tabsRailEl.getBoundingClientRect().left - 3
-                }px)`
-              }
-              tabsRailEl.classList.remove('transition-disabled')
-            })
+
+    watchEffect(() => {
+      if (props.type === 'segment') {
+        const { value: tabsRailEl } = tabsRailElRef
+        if (!tabsRailEl) return
+        void nextTick(() => {
+          tabsRailEl.classList.add('transition-disabled')
+          const activeTabEl = tabsRailEl.querySelector('.n-tabs-tab--active')
+          if (activeTabEl && segmentCapsuleElRef.value) {
+            const rect = activeTabEl.getBoundingClientRect()
+            // move segment capsule to match the position of the active tab
+            segmentCapsuleElRef.value.style.width = `${rect.width}px`
+            segmentCapsuleElRef.value.style.transform = `translateX(${
+              rect.left - tabsRailEl.getBoundingClientRect().left - 3
+            }px)`
           }
-        }
-      },
-      { flush: 'post' }
-    )
+          tabsRailEl.classList.remove('transition-disabled')
+        })
+      }
+    })
 
     const exposedMethods: TabsInst = {
       syncBarPosition: () => {
