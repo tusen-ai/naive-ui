@@ -389,6 +389,33 @@ export default defineComponent({
       barEl.classList.remove(disableTransitionClassName)
     }
 
+    const tabsRailElRef = ref<HTMLElement | null>(null)
+    const segmentCapsuleElRef = ref<HTMLElement | null>(null)
+
+    function updateSegmentPosition (): void {
+      if (props.type === 'segment') {
+        const { value: tabsRailEl } = tabsRailElRef
+        if (!tabsRailEl) return
+        void nextTick(() => {
+          tabsRailEl.classList.add('transition-disabled')
+          const activeTabEl = tabsRailEl.querySelector('.n-tabs-tab--active')
+          if (activeTabEl && segmentCapsuleElRef.value) {
+            const rect = activeTabEl.getBoundingClientRect()
+            // move segment capsule to match the position of the active tab
+            segmentCapsuleElRef.value.style.width = `${rect.width}px`
+            segmentCapsuleElRef.value.style.transform = `translateX(${
+              rect.left - tabsRailEl.getBoundingClientRect().left - 3
+            }px)`
+          }
+          tabsRailEl.classList.remove('transition-disabled')
+        })
+      }
+    }
+
+    watch([mergedValueRef, tabsRailElRef], () => {
+      updateSegmentPosition()
+    })
+
     let memorizedWidth = 0
     function _handleNavResize (entry: ResizeObserverEntry): void {
       if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
@@ -512,29 +539,6 @@ export default defineComponent({
         el.classList.remove(shadowEndClass)
       } else {
         el.classList.add(shadowEndClass)
-      }
-    })
-
-    const tabsRailElRef = ref<HTMLElement | null>(null)
-    const segmentCapsuleElRef = ref<HTMLElement | null>(null)
-
-    watch([mergedValueRef, tabsRailElRef], () => {
-      if (props.type === 'segment') {
-        const { value: tabsRailEl } = tabsRailElRef
-        if (!tabsRailEl) return
-        void nextTick(() => {
-          tabsRailEl.classList.add('transition-disabled')
-          const activeTabEl = tabsRailEl.querySelector('.n-tabs-tab--active')
-          if (activeTabEl && segmentCapsuleElRef.value) {
-            const rect = activeTabEl.getBoundingClientRect()
-            // move segment capsule to match the position of the active tab
-            segmentCapsuleElRef.value.style.width = `${rect.width}px`
-            segmentCapsuleElRef.value.style.transform = `translateX(${
-              rect.left - tabsRailEl.getBoundingClientRect().left - 3
-            }px)`
-          }
-          tabsRailEl.classList.remove('transition-disabled')
-        })
       }
     })
 
