@@ -31,6 +31,7 @@ const arDZ: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'مسح',
     now: 'الآن',
     confirm: 'تأكيد',

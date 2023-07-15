@@ -31,6 +31,7 @@ const thTH: NLocale = {
     dateFormat: 'dd/MMMM/yyyy',
     dateTimeFormat: 'dd/MMMM/yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'ล้าง',
     now: 'วันนี้',
     confirm: 'ยืนยัน',

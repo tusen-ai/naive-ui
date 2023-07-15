@@ -31,6 +31,7 @@ const viVN: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'HH:mm:ss dd-MM-yyyy',
     quarterFormat: 'qqq-yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'Xóa',
     now: 'Hôm nay',
     confirm: 'Xác nhận',

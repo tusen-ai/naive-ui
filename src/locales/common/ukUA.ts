@@ -31,6 +31,7 @@ const ukUA: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',

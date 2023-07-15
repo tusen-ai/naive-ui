@@ -31,6 +31,7 @@ const idID: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Bersihkan',
     now: 'Sekarang',
     confirm: 'Setuju',

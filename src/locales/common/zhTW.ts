@@ -31,6 +31,7 @@ const zhTW: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: '清除',
     now: '現在',
     confirm: '確定',
