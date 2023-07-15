@@ -341,9 +341,13 @@ export default c([
         `),
         cNotM('disabled', [
           cNotM('selected', [
-            c('&:hover', {
-              backgroundColor: 'var(--n-item-color-hover)'
-            })
+            cNotM('slightly-covered', [
+              cNotM('heavily-covered', [
+                c('&:hover', {
+                  backgroundColor: 'var(--n-item-color-hover)'
+                })
+              ])
+            ])
           ])
         ]),
         cM('current', [
