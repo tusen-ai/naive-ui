@@ -187,8 +187,6 @@ function weekItem (
   currentTs: number,
   firstDayOfWeek: FirstDayOfWeek
 ): DateItem {
-  console.log({ firstDayOfWeek }, 'weekItem')
-
   let inSpan = false
   let startOfSpan = false
   let endOfSpan = false
