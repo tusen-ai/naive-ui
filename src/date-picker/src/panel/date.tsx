@@ -117,7 +117,7 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
                       this.mergedIsDateDisabled(dateItem.ts),
                     [`${mergedClsPrefix}-date-panel-date--slightly-covered`]:
-                      this.isCovered(dateItem),
+                      this.isSlightlyCovered(dateItem),
                     [`${mergedClsPrefix}-date-panel-date--heavily-covered`]:
                       dateItem.inHeavySpan
                   }

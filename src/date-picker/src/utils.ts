@@ -187,6 +187,8 @@ function weekItem (
   currentTs: number,
   firstDayOfWeek: FirstDayOfWeek
 ): DateItem {
+  console.log({ firstDayOfWeek }, 'weekItem')
+
   let inSpan = false
   let startOfSpan = false
   let endOfSpan = false
@@ -281,8 +283,7 @@ function dateArray (
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
   strip: boolean = false,
-  weekMode: boolean = false,
-  firstDayOfWeek: FirstDayOfWeek = 0
+  weekMode: boolean = false
 ): DateItem[] {
   const granularity = weekMode ? 'week' : 'date'
   const displayMonth = getMonth(monthTs)
@@ -303,7 +304,7 @@ function dateArray (
         valueTs,
         currentTs,
         granularity,
-        firstDayOfWeek
+        startDay
       )
     )
     lastMonthIterator = getTime(addDays(lastMonthIterator, -1))
@@ -317,7 +318,7 @@ function dateArray (
         valueTs,
         currentTs,
         granularity,
-        firstDayOfWeek
+        startDay
       )
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
@@ -337,7 +338,7 @@ function dateArray (
         valueTs,
         currentTs,
         granularity,
-        firstDayOfWeek
+        startDay
       )
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))

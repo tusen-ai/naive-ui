@@ -191,6 +191,8 @@ function useCalendar (
         localeRef.value.firstDayOfWeek) +
         1) %
         7) as FirstDayOfWeek
+      console.log(firstDayOfWeekRef.value, localeRef.value.firstDayOfWeek)
+
       return getTime(
         startOfWeek(value, {
           weekStartsOn
@@ -286,7 +288,7 @@ function useCalendar (
       hoveredWeekRef.value = sanitizeValue(getTime(dateItem.ts))
     }
   }
-  function isCovered (
+  function isSlightlyCovered (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): boolean {
     if (dateItem.type === 'date' && type === 'week') {
@@ -495,7 +497,7 @@ function useCalendar (
     handleDateInputBlur,
     handleDateInput,
     handleDateMouseEnter,
-    isCovered,
+    isSlightlyCovered,
     handleTimePickerChange,
     clearSelectedDateTime,
     virtualListContainer,
