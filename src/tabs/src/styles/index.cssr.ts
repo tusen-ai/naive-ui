@@ -104,7 +104,7 @@ export default cB('tabs', `
     display: flex;
     align-items: center;
   `, [
-    cB('tabs-haha', `
+    cB('tabs-capsule', `
         border-radius: var(--n-tab-border-radius);
         width: 50px;
         position: absolute;
@@ -112,7 +112,7 @@ export default cB('tabs', `
         background-color: var(--n-tab-color-segment);
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
         transition: 0.3s;
-      `, []),
+      `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;
       flex-grow: 1;

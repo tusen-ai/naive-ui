@@ -815,12 +815,9 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div
-              class={`${mergedClsPrefix}-tabs-rail ${mergedClsPrefix}-tabs-rail-segment`}
-              ref="tabsRailElRef"
-            >
+            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
               <div
-                class={`${mergedClsPrefix}-tabs-haha`}
+                class={`${mergedClsPrefix}-tabs-capsule`}
                 ref="segmentCapsuleElRef"
               >
                 <Tab name="">&nbsp;</Tab>
