@@ -10,6 +10,7 @@
     }"
     :options="options"
     placeholder="邮箱"
+    clearable
   />
 </template>
 
