@@ -29,7 +29,7 @@ export default c([
         originalTransform: 'translateX(-50%) translateY(-50%)'
       })
     ]),
-    cE('wrapper', `
+    cE('container', `
       animation: rotator 3s linear infinite both;
     `, [
       cE('icon', `

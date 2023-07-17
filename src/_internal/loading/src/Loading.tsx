@@ -54,7 +54,7 @@ export default defineComponent({
           {{
             default: () =>
               this.show ? (
-                <div class={`${clsPrefix}-base-loading__wrapper`}>
+                <div class={`${clsPrefix}-base-loading__container`}>
                   <svg
                     class={`${clsPrefix}-base-loading__icon`}
                     viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}
