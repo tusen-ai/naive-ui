@@ -6,6 +6,7 @@
 
 - `n-input`'s `suffix` to the back of `loading`, close [#4685](https://github.com/tusen-ai/naive-ui/issues/4685).
 - Fix `n-log`'s `silent` attribute spelling problem, closes [#4875](https://github.com/tusen-ai/naive-ui/issues/4875).
+- Refactor `scrollbar` use `_internal`'s `scrollbar`, don't wrapper with component.
 
 ### Fixes
 
@@ -236,7 +237,6 @@
 - `n-avatar-group` adds `gap` theme variable, closes [#3819](https://github.com/tusen-ai/naive-ui/issues/3819).
 
 ## 2.33.3
-
 
 ### Feats
 

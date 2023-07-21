@@ -6,6 +6,7 @@
 
 - `n-input` 的 `suffix` 移动到 `loading` 之后，关闭 [#4685](https://github.com/tusen-ai/naive-ui/issues/4685)
 - 修复 `n-log` 的 `silent` 拼写问题，关闭 [#4875](https://github.com/tusen-ai/naive-ui/issues/4875)
+- 重构 `scrollbar` 直接使用 `_internal` 内的 `scrollbar` 组件, 不再包裹一层组件
 
 ### Fixes
 
@@ -237,7 +238,6 @@
 - `n-avatar-group` 新增 `gap` 主题变量，关闭 [#3819](https://github.com/tusen-ai/naive-ui/issues/3819)
 
 ## 2.33.3
-
 
 ### Feats
 
