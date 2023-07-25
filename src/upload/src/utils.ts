@@ -84,16 +84,25 @@ export async function getFilesFromEntries (
       lock()
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
+        let entries: FileSystemEntry[] = []
         lock()
-        directoryReader.readEntries(
-          (entries) => {
-            _getFilesFromEntries(entries)
-            unlock()
-          },
-          () => {
-            unlock()
-          }
-        )
+        const getEntry = (): void => {
+          directoryReader.readEntries(
+            (_entries) => {
+              if (_entries.length) {
+                entries = entries.concat(_entries)
+                getEntry()
+              } else {
+                _getFilesFromEntries(entries)
+                unlock()
+              }
+            },
+            () => {
+              unlock()
+            }
+          )
+        }
+        getEntry()
       } else if (isFileSystemFileEntry(entry)) {
         lock()
         entry.file(
