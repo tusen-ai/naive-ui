@@ -1,13 +1,15 @@
 # Height debug
 
 ```html
+set max-height：<n-switch v-model:value="setMaxHeightRef" /> set
+min-height：<n-switch v-model:value="setMinHeightRef" />
 <n-data-table
   :columns="columns"
   :data="data"
   :pagination="pagination"
   :scroll-x="1800"
-  :max-height="500"
-  :min-height="300"
+  :max-height="setMaxHeightRef ? 500 : undefined"
+  :min-height="setMinHeightRef ? 300 : undefined"
 />
 ```
 
@@ -34,7 +36,8 @@ export default defineComponent({
       data: [],
       columns,
       pagination: { pageSize: 10 },
-      height: ref(200)
+      setMaxHeightRef: ref(false),
+      setMinHeightRef: ref(false)
     }
   }
 })
