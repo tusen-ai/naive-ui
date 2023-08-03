@@ -659,7 +659,7 @@ export default defineComponent({
       on('mouseup', document, hidePassword)
     }
     function handleWrapperKeydown (e: KeyboardEvent): void {
-      props.onKeydown?.(e)
+      if (props.onKeydown) call(props.onKeydown, e)
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
