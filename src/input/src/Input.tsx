@@ -127,7 +127,7 @@ export const inputProps = {
   renderCount: Function as PropType<(props: { value: string }) => VNodeChild>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
-  onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+  onKeyup: [Function, Array] as PropType<(e: KeyboardEvent) => void>,
   onInput: [Function, Array] as PropType<OnUpdateValue>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -174,6 +174,7 @@ export default defineComponent({
   name: 'Input',
   props: inputProps,
   setup (props) {
+    console.log(props)
     if (__DEV__) {
       watchEffect(() => {
         if (props.showPasswordToggle) {
