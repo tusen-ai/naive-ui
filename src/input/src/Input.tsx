@@ -174,7 +174,6 @@ export default defineComponent({
   name: 'Input',
   props: inputProps,
   setup (props) {
-    console.log(props)
     if (__DEV__) {
       watchEffect(() => {
         if (props.showPasswordToggle) {
