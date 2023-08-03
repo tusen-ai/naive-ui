@@ -174,7 +174,6 @@ export default defineComponent({
   name: 'Input',
   props: inputProps,
   setup (props) {
-    console.log(props)
     if (__DEV__) {
       watchEffect(() => {
         if (props.showPasswordToggle) {
@@ -659,6 +658,9 @@ export default defineComponent({
       }
       on('mouseup', document, hidePassword)
     }
+    function handleWrapperKeyup (e: KeyboardEvent): void {
+      if (props.onKeyup) call(props.onKeyup, e)
+    }
     function handleWrapperKeydown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
       switch (e.key) {
@@ -989,6 +991,7 @@ export default defineComponent({
       handlePasswordToggleClick,
       handlePasswordToggleMousedown,
       handleWrapperKeydown,
+      handleWrapperKeyup,
       handleTextAreaMirrorResize,
       getTextareaScrollContainer: () => {
         return textareaElRef.value
@@ -1054,7 +1057,7 @@ export default defineComponent({
         onMouseleave={this.handleMouseLeave}
         onCompositionstart={this.handleCompositionStart}
         onCompositionend={this.handleCompositionEnd}
-        onKeyup={this.onKeyup}
+        onKeyup={this.handleWrapperKeyup}
         onKeydown={this.handleWrapperKeydown}
       >
         {/* textarea & basic input */}
