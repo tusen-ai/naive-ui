@@ -662,7 +662,7 @@ export default defineComponent({
       if (props.onKeyup) call(props.onKeyup, e)
     }
     function handleWrapperKeydown (e: KeyboardEvent): void {
-      props.onKeydown?.(e)
+      if (props.onKeydown) call(props.onKeydown, e)
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
