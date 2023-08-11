@@ -3,7 +3,7 @@
   "version": "2.34.4",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "es/index.mjs",
   "types": "es/index.d.ts",
   "unpkg": "dist/index.js",
   "jsdelivr": "dist/index.js",
@@ -46,6 +46,14 @@
     "web-types.json",
     "README.md"
   ],
+  "exports": {
+    ".": {
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js",
+      "types": "./es/index.d.ts"
+    },
+    "./*": "./*"
+  },
   "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [
