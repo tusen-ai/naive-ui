@@ -60,7 +60,7 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-Pick<CSSProperties, typeof transitionProperties[number]>
+Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
 export const carouselProps = {
@@ -163,7 +163,11 @@ export default defineComponent({
     const duplicatedableRef = computed(
       // duplicate the copy operation in `slide` mode,
       // because only its DOM is sequence layout
-      () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
+      () =>
+        props.loop &&
+        props.slidesPerView === 1 &&
+        sequenceLayoutRef.value &&
+        totalViewRef.value > 1
     )
     // user wants to control the transition animation
     const userWantsControlRef = computed(() => props.effect === 'custom')
