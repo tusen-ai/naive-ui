@@ -33,6 +33,8 @@
 - 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
 - 修复 `n-auto-complete` 在未聚焦状态下点击清除按钮时补全菜单意外打开的问题，关闭 [#4658](https://github.com/tusen-ai/naive-ui/issues/4658)
 - 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)
+- 修复 `n-input` 属性 `on-keyup` 类型，关闭 [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
+
 
 ### Features
 
