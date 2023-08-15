@@ -60,7 +60,7 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-Pick<CSSProperties, typeof transitionProperties[number]>
+Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
 export const carouselProps = {
@@ -757,9 +757,13 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
+          if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
-            if (realIndex === length - 2 && lastRealIndex === 1) {
+            if (
+              displayTotalViewRef.value > 2 &&
+              realIndex === length - 2 &&
+              lastRealIndex === 1
+            ) {
               realIndex = 0
             } else if (realIndex === 1 && lastRealIndex === length - 2) {
               realIndex = length - 1
