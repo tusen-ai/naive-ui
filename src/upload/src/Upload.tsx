@@ -750,6 +750,7 @@ export default defineComponent({
         // @ts-expect-error // seems vue-tsc will add the prop, so we can't use expect-error
         webkitdirectory={directory || undefined}
         directory={directory || undefined}
+        disable={this.abstract}
       />
     )
 
