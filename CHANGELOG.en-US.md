@@ -51,6 +51,7 @@
 
 ### i18n
 
+- Update `ruRU` locale.
 - Update `zhTW` locale.
 - Add `svSE` locale.
 
