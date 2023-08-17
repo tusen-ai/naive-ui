@@ -51,6 +51,7 @@
 
 ### i18n
 
+- 更新 ruRU locale
 - 更新 zhTW locale
 - 新增 svSE locale
 
