@@ -65,7 +65,7 @@ const ruRu: NLocale = {
     selectAll: 'Выбрать все',
     unselectAll: 'Снять все',
     clearAll: 'Очистить',
-    total: (num: number): string => `Все ${num} элементов`,
+    total: (num: number): string => `Всего ${num} элементов`,
     selected: (num: number): string => `${num} выбрано элементов`
   },
   Empty: {
