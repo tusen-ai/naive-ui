@@ -3307,3 +3307,7 @@
 ### Feats
 
 - `n-data-table` 增加了 empty 插槽 [#86](https://github.com/tusen-ai/naive-ui/issues/86)
+
+### Feats
+
+- 給 n-auto-complte 元件增加 auto-select props，用來設定展開後是否預設選取第一個 option [#4674](https://github.com/tusen-ai/naive-ui/issues/4674)

@@ -13,6 +13,7 @@ Start typing to see how this works.
     :options="options"
     placeholder="Email"
     clearable
+    :auto-select="false"
   />
 </template>
 

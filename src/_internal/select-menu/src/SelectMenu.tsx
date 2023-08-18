@@ -396,7 +396,8 @@ export default defineComponent({
       selfRef,
       next,
       prev,
-      getPendingTmNode
+      getPendingTmNode,
+      setPendingTmNode
     }
     useOnResize(selfRef, props.onResize)
     return {

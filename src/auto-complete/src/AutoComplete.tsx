@@ -91,6 +91,10 @@ export const autoCompleteProps = {
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
+  autoSelect: {
+    type: Boolean,
+    default: true
+  },
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -226,10 +230,23 @@ export default defineComponent({
           }
           break
         case 'ArrowDown':
-          menuInstRef.value?.next()
+          if (menuInstRef.value?.getPendingTmNode()) {
+            menuInstRef.value?.next()
+          } else {
+            menuInstRef.value?.setPendingTmNode(
+              treeMateRef.value.getFirstAvailableNode()
+            )
+          }
           break
         case 'ArrowUp':
-          menuInstRef.value?.prev()
+          if (
+            !props.autoSelect &&
+            menuInstRef.value?.getPendingTmNode()?.isFirstChild
+          ) {
+            menuInstRef.value.setPendingTmNode(null)
+          } else {
+            menuInstRef.value?.prev()
+          }
           break
       }
     }
@@ -416,7 +433,7 @@ export default defineComponent({
                                 this.mergedTheme.peerOverrides
                                   .InternalSelectMenu
                               }
-                              auto-pending
+                              autoPending={this.autoSelect}
                               class={[
                                 `${mergedClsPrefix}-auto-complete-menu`,
                                 this.themeClass,

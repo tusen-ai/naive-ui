@@ -58,6 +58,10 @@ export interface InternalExposedProps {
   getPendingTmNode: () => TreeNode<SelectBaseOption> | null
   prev: () => void
   next: () => void
+  setPendingTmNode: (
+    tmNode: TreeNode<SelectBaseOption> | null,
+    doScroll?: boolean
+  ) => void
 }
 
 export const internalSelectionMenuInjectionKey =
