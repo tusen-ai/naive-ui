@@ -169,6 +169,10 @@ async function convertMd2ComponentDocumentation (
   url,
   env = 'development'
 ) {
+  let componentName = null
+  if (/^src\/[\w-]+\/demos\/\w+\/index.demo-entry.md/.test(url)) {
+    componentName = url.split('/')[1]
+  }
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
@@ -224,6 +228,10 @@ async function convertMd2ComponentDocumentation (
     gfm: true,
     renderer: mdRenderer
   })
+  // doc contributors
+  const docContributorsTemplate = componentName
+    ? `<Contributors name="${componentName}" />`
+    : ''
   // generate page
   const docTemplate = `
 <template>
@@ -233,6 +241,7 @@ async function convertMd2ComponentDocumentation (
   >
     <div :style="contentStyle">
       ${docMainTemplate}
+      ${docContributorsTemplate}
     </div>
     <div style="width: 192px;" v-if="showAnchor">
       ${

@@ -23,6 +23,7 @@ es
 *.tsbuildinfo
 pnpm-lock.yaml
 web-types.json
+*.meta.json
 ~*
 .pnpm-debug.log
 .history

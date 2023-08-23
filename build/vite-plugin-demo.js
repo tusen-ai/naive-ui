@@ -2,6 +2,8 @@ const createVuePlugin = require('@vitejs/plugin-vue')
 const getTransformedVueSrc = require('./utils/get-demo-by-path')
 const createCssrPlugin = require('./vite-plugin-css-render')
 const siteIndexTransFormPlugin = require('./vite-plugin-index-tranform')
+const createContributorsPlugin = require('./vite-plugin-contributors')
+const { getComponentContributors } = require('./utils/virtual-contributors')
 
 const fileRegex = /\.(md|vue)$/
 
@@ -10,6 +12,9 @@ const vuePlugin = createVuePlugin({
 })
 
 const createDemoPlugin = () => {
+  const contributors =
+    process.env.NODE_ENV === 'production' ? getComponentContributors() : {}
+
   const naiveDemoVitePlugin = {
     name: 'demo-vite',
     transform (_, id) {
@@ -30,8 +35,14 @@ const createDemoPlugin = () => {
   }
 
   const cssrPlugin = createCssrPlugin()
-
-  return [siteIndexTransFormPlugin, naiveDemoVitePlugin, vuePlugin, cssrPlugin]
+  const plugins = [
+    siteIndexTransFormPlugin,
+    naiveDemoVitePlugin,
+    createContributorsPlugin(contributors),
+    vuePlugin,
+    cssrPlugin
+  ]
+  return plugins
 }
 
 module.exports = createDemoPlugin
