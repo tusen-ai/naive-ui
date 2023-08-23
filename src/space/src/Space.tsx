@@ -123,7 +123,7 @@ export default defineComponent({
       wrapItem,
       internalUseGap
     } = this
-    const children = flatten(getSlot(this))
+    const children = flatten(getSlot(this), false)
     if (!children.length) return null
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
