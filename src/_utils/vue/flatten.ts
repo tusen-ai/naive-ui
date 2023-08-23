@@ -30,8 +30,7 @@ export function flatten (
         flatten(vNode.children, filterCommentNode, result)
       }
       // rawSlot
-    } else {
-      if (vNode.type === Comment && filterCommentNode) return
+    } else if (vNode.type !== Comment) {
       result.push(vNode)
     }
   })
