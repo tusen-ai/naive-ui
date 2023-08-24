@@ -239,14 +239,27 @@ export default defineComponent({
           }
           break
         case 'ArrowUp':
-          if (
-            !props.autoSelect &&
-            menuInstRef.value?.getPendingTmNode()?.isFirstChild
-          ) {
-            menuInstRef.value.setPendingTmNode(null)
+          if (!props.autoSelect) {
+            const pendingTmNode = menuInstRef.value?.getPendingTmNode()
+            if (!pendingTmNode) {
+              return
+            }
+
+            if (pendingTmNode.isFirstChild) {
+              if (
+                pendingTmNode.level === 0 ||
+                pendingTmNode.parent?.isFirstChild
+              ) {
+                menuInstRef.value?.setPendingTmNode(null)
+                return
+              }
+              return
+            }
+            menuInstRef.value?.prev()
           } else {
             menuInstRef.value?.prev()
           }
+
           break
       }
     }

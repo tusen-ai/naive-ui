@@ -6,6 +6,7 @@
   <n-auto-complete
     v-model:value="value"
     :options="options"
+    :auto-select="false"
     placeholder="Email"
   />
 </template>

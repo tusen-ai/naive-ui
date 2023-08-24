@@ -1,6 +1,6 @@
 {
   "name": "@johnson0903/naive-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "main": "lib/index.js",
   "module": "es/index.js",
