@@ -8,7 +8,7 @@
       <n-checkbox value="Beijing" label="Beijing" />
       <n-checkbox value="Shanghai" label="Shanghai" />
       <n-checkbox value="Guangzhou" label="Guangzhou" />
-      <n-checkbox value="Shenzen" label="Shenzhen" />
+      <n-checkbox value="Shenzhen" label="Shenzhen" />
     </n-space>
   </n-checkbox-group>
 </template>
