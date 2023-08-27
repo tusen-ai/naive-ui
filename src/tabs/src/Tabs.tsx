@@ -195,7 +195,7 @@ export default defineComponent({
       const tabEl = tabsElRef.value?.querySelector(`[data-name="${value}"]`)
       return tabEl as HTMLElement | null
     }
-    function updateBarStyle (tabEl: HTMLElement | null): void {
+    function updateBarStyle (tabEl: HTMLElement): void {
       if (props.type === 'card') return
       const { value: barEl } = barElRef
       if (!barEl) return
@@ -234,21 +234,25 @@ export default defineComponent({
           barEl.style.height = '8192px'
           void barEl.offsetHeight
         }
+      }
+    }
+    function hideBarStyle (): void {
+      if (props.type === 'card') return
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      const { placement } = props
+      if (['top', 'bottom'].includes(placement)) {
+        clearBarStyle(['top', 'maxHeight', 'height'])
+        barEl.style.left = '0px'
+        barEl.style.maxWidth = '0px'
+        barEl.style.width = '8192px'
+        void barEl.offsetWidth
       } else {
-        const { placement } = props
-        if (['top', 'bottom'].includes(placement)) {
-          clearBarStyle(['top', 'maxHeight', 'height'])
-          barEl.style.left = '0px'
-          barEl.style.maxWidth = '0px'
-          barEl.style.width = '8192px'
-          void barEl.offsetWidth
-        } else {
-          clearBarStyle(['left', 'maxWidth', 'width'])
-          barEl.style.top = '0px'
-          barEl.style.maxHeight = '0px'
-          barEl.style.height = '8192px'
-          void barEl.offsetHeight
-        }
+        clearBarStyle(['left', 'maxWidth', 'width'])
+        barEl.style.top = '0px'
+        barEl.style.maxHeight = '0px'
+        barEl.style.height = '8192px'
+        void barEl.offsetHeight
       }
     }
     function clearBarStyle (styleProps: string[]): void {
@@ -261,7 +265,11 @@ export default defineComponent({
     function updateCurrentBarStyle (): void {
       if (props.type === 'card') return
       const tabEl = getCurrentEl()
-      updateBarStyle(tabEl)
+      if (tabEl) {
+        updateBarStyle(tabEl)
+      } else {
+        hideBarStyle()
+      }
     }
     function updateCurrentScrollPosition (smooth: boolean): void {
       const scrollWrapperEl: HTMLElement | undefined = xScrollInstRef.value?.$el
