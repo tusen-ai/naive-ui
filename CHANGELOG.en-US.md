@@ -32,7 +32,8 @@
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 - Fix `n-auto-complete`'s autocomplete menu's unexpected open when clicking the clear icon with the input not focused, closes [#4658](https://github.com/tusen-ai/naive-ui/issues/4658).
-- Fix `n-input`'s `on-keyup` prop type, closes [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
+- Fix `n-input`'s `on-keyup` prop type, closes [#5101](https://github.com/tusen-ai/naive-ui/issues/5101).
+- Fix n-space vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
 
 ### Features
 
