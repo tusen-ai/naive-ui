@@ -1690,7 +1690,15 @@ export default defineComponent({
           {{
             default: () => {
               this.onRender?.()
-              return (
+              return !fNodes.length ? (
+                resolveSlot(this.$slots.empty, () => [
+                  <NEmpty
+                    class={`${mergedClsPrefix}-tree__empty`}
+                    theme={this.mergedTheme.peers.Empty}
+                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                  />
+                ])
+              ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
                   items={this.fNodes}
