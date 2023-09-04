@@ -1,23 +1,23 @@
-name: 🔀 Sync mirror to Gitee
+name: GitlabSync
 
 on:
-  push:
-    branches:
-      - main
-      - docs
-  create:
+  - workflow_dispatch
+  - push
+  - delete
 
 jobs:
-  mirror:
+  sync:
     runs-on: ubuntu-latest
-    if: github.repository == 'TuSimple/naive-ui'
+    name: Git Repo Sync
     steps:
-      - name: mirror
-        continue-on-error: true
-        if: github.event_name == 'push' || (github.event_name == 'create' && github.event.ref_type == 'tag')
-        uses: wearerequired/git-mirror-action@v1.2.0
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_SSH_PRIVATE_KEY }}
-        with:
-          source-repo: 'git@github.com:TuSimple/naive-ui.git'
-          destination-repo: 'git@gitee.com:naive-ui/naive-ui.git'
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: wangchucheng/git-repo-sync@v0.1.0
+      with:
+        # Such as https://github.com/wangchucheng/git-repo-sync.git
+        target-url: ${{ secrets.TARGET_URL }}
+        # Such as wangchucheng
+        target-username: ${{ secrets.TARGET_USERNAME }}
+          # You can store token in your project's 'Setting > Secrets' and reference the name here. Such as ${{ secrets.ACCESS\_TOKEN }}
+        target-token: ${{ secrets.TARGET_TOKEN }}
