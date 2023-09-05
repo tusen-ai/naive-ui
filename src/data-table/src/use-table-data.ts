@@ -79,9 +79,21 @@ export function useTableData (
     return firstContentfulColIndex || 0
   })
 
+  const getDefaultPageSize = (): number => {
+    const { pagination } = props
+    if (pagination === false) return 10
+    if (pagination.defaultPageSize !== undefined) { return pagination.defaultPageSize }
+    if (pagination.pageSizes) {
+      const pageSizeOption = pagination.pageSizes[0]
+      if (typeof pageSizeOption === 'number') return pageSizeOption
+      return pageSizeOption.value || 10
+    }
+    return 10
+  }
+
   const uncontrolledFilterStateRef = ref<FilterState>({})
   const uncontrolledCurrentPageRef = ref(1)
-  const uncontrolledPageSizeRef = ref(10)
+  const uncontrolledPageSizeRef = ref(getDefaultPageSize())
 
   const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = dataRelatedColsRef.value.filter(
