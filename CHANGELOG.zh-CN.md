@@ -69,6 +69,7 @@
 - 修复 `n-menu` `show` `default` 属性拼写问题，关闭 [#4750](https://github.com/tusen-ai/naive-ui/issues/4750)
 - 修复 `n-icon-wrapper` 的主题异常，关闭 [#4768](https://github.com/tusen-ai/naive-ui/issues/4768)
 - 修复 `n-popconfirm` 操作按钮不应该被多次触发，关闭 [#4687][https://github.com/tusen-ai/naive-ui/issues/4687]
+- 修复 `n-time-picker` 时间选择器 Time Picker 格式化(format="HH:mm:ss.SSS")后无法在编辑框内修改毫秒数的问题，关闭 [#5224](https://github.com/tusen-ai/naive-ui/issues/5224)
 
 ### Feats
 
