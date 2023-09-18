@@ -16,3 +16,4 @@ If you want to contribute excellent resources, please contact 07akioni or amadeu
 | [GoView](https://github.com/dromara/go-view) | A free open source and powerful yet accessible data visualization tool. |
 | [Vue Naive Admin](https://github.com/zclzone/vue-naive-admin) | A lightweight backend management template base on Vue3 + Vite4 + Pinia + Unocss + Naive UI. |
 | [Celeris Web](https://github.com/kirklin/celeris-web) | Celeris Web, based on Vue 3 and Vite, is a free and open-source front-end framework with Naive UI components and TypeScript support, featuring a Monorepo structure. It also integrates with OpenAI, providing natural language processing capabilities for modern web development. |
+| [Dolphin Admin](https://dolphin-admin.bit-ocean.studio) | An open-source, light-weight, elegant, support i18n back-end management template based on Vue 3 + Vite + Naive UI + TypeScript + TailwindCSS. |

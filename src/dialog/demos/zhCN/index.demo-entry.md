@@ -78,11 +78,11 @@ focus-debug.vue
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
 | negativeButtonProps | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
-| negativeText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| negativeText | `string` | `undefined` | 取消按钮的文字，不填对应的按钮不会出现 |  |
 | positiveButtonProps | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
-| positiveText | `string` | `undefined` | 不填对应的按钮不会出现 |  |
+| positiveText | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
-| style | `string \| Object` | 样式 |  |
+| style | `string \| Object` | `undefined` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
@@ -111,9 +111,9 @@ focus-debug.vue
 | loading | `boolean` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |  |
 | negativeButtonProps | `ButtonProps` | 取消按钮的属性 | 2.27.0 |
-| negativeText | `string` | 不填对应的按钮不会出现 |  |
+| negativeText | `string` | 取消按钮的文字，不填对应的按钮不会出现 |  |
 | positiveButtonProps | `ButtonProps` | 确认按钮的属性 | 2.27.0 |
-| positiveText | `string` | 不填对应的按钮不会出现 |  |
+| positiveText | `string` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
