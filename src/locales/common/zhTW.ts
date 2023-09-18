@@ -3,27 +3,27 @@ import type { NLocale } from './enUS'
 const zhTW: NLocale = {
   name: 'zh-TW',
   global: {
-    undo: '撤銷',
+    undo: '復原',
     redo: '重做',
-    confirm: '確認',
+    confirm: '確定',
     clear: '清除'
   },
   Popconfirm: {
-    positiveText: '確認',
+    positiveText: '確定',
     negativeText: '取消'
   },
   Cascader: {
     placeholder: '請選擇',
     loading: '載入中',
     loadingRequiredMessage: (label: string): string =>
-      `載入全部 ${label} 的子節點後才可選中`
+      `載入全部 ${label} 的子節點後才可選擇`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
   },
   DatePicker: {
-    yearFormat: 'yyyy年',
+    yearFormat: 'yyyy 年',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
@@ -32,8 +32,8 @@ const zhTW: NLocale = {
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
     clear: '清除',
-    now: '此刻',
-    confirm: '確認',
+    now: '現在',
+    confirm: '確定',
     selectTime: '選擇時間',
     selectDate: '選擇日期',
     datePlaceholder: '選擇日期',
@@ -54,17 +54,17 @@ const zhTW: NLocale = {
   DataTable: {
     checkTableAll: '選擇全部表格資料',
     uncheckTableAll: '取消選擇全部表格資料',
-    confirm: '確認',
-    clear: '重置'
+    confirm: '確定',
+    clear: '重設'
   },
   LegacyTransfer: {
-    sourceTitle: '源項',
-    targetTitle: '目標項'
+    sourceTitle: '來源',
+    targetTitle: '目標'
   },
   Transfer: {
     selectAll: '全選',
     unselectAll: '取消全選',
-    clearAll: '清除',
+    clearAll: '清除全部',
     total: (num: number): string => `共 ${num} 項`,
     selected: (num: number): string => `已選 ${num} 項`
   },
@@ -76,9 +76,9 @@ const zhTW: NLocale = {
   },
   TimePicker: {
     placeholder: '請選擇時間',
-    positiveText: '確認',
+    positiveText: '確定',
     negativeText: '取消',
-    now: '此刻'
+    now: '現在'
   },
   Pagination: {
     goto: '跳至',
@@ -103,9 +103,9 @@ const zhTW: NLocale = {
     title: '主題編輯器',
     clearAllVars: '清除全部變數',
     clearSearch: '清除搜尋',
-    filterCompName: '過濾組件名',
-    filterVarName: '過濾變數名',
-    import: '導入',
+    filterCompName: '過濾組件名稱',
+    filterVarName: '過濾變數名稱',
+    import: '匯入',
     export: '匯出',
     restore: '恢復預設'
   },
@@ -116,6 +116,7 @@ const zhTW: NLocale = {
     tipClockwise: '向右旋轉',
     tipZoomOut: '縮小',
     tipZoomIn: '放大',
+    tipDownload: '下載',
     tipClose: '關閉（Esc）',
     tipOriginalSize: '縮放到原始尺寸'
   }

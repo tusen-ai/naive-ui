@@ -19,6 +19,7 @@ export default defineComponent({
       return e.clientX
     }
     function handleMousedown (e: MouseEvent): void {
+      e.preventDefault()
       const alreadyStarted = activeRef.value
       startX = getMouseX(e)
       activeRef.value = true

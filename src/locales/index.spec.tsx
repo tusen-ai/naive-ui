@@ -23,6 +23,7 @@ import {
   nlNL,
   arDZ,
   trTR,
+  svSE,
   eo,
   dateEnUS,
   dateZhCN,
@@ -46,6 +47,7 @@ import {
   dateNlNL,
   dateArDZ,
   dateTrTR,
+  dateSvSE,
   dateEo,
   NConfigProvider,
   type NDateLocale,
@@ -331,6 +333,17 @@ describe('locale', () => {
         props: {
           dateLocale: dateFaIR,
           locale: faIR
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateSvSE,
+          locale: svSE,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
         }
       }).html()
     ).toMatchSnapshot()
