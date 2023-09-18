@@ -81,4 +81,4 @@ Please see [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONT
 
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-Graphics resouces of `result` component is licensed under the [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). The graphics resources come from [Twemoji](https://github.com/twitter/twemoji).
+Graphics resources of `result` component is licensed under the [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). The graphics resources come from [Twemoji](https://github.com/twitter/twemoji).
