@@ -36,5 +36,6 @@ For other props, see [Popover](popover#Popover-Props)
 
 | Name   | Parameters | Description                            | Version |
 | ------ | ---------- | -------------------------------------- | ------- |
+| header | `()`       | Header menu slot.                      | NEXT    |
 | action | `()`       | Options menu slot.                     | 2.22.0  |
 | empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
