@@ -1,7 +1,5 @@
 <markdown>
-  # 虚拟列表
-
-  一个虚拟列表.
+  # 基础
 </markdown>
 
 <template>
@@ -26,9 +24,9 @@ export default defineComponent({
       return ret
     }
 
-    const basicData = createArray(100000).map((_, i) => ({
+    const basicData = createArray(10000).map((_, i) => ({
       key: i,
-      value: `item_${i}`
+      value: `item-${i}`
     }))
 
     return {

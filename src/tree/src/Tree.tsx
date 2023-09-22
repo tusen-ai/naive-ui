@@ -1696,8 +1696,6 @@ export default defineComponent({
                   items={this.fNodes}
                   itemSize={depx(mergedTheme.self.nodeHeight)}
                   ignoreItemResize={this.aip}
-                  paddingTop={padding.top}
-                  paddingBottom={padding.bottom}
                   class={this.themeClass}
                   style={[
                     this.cssVars as CSSProperties,
