@@ -26,6 +26,8 @@ const STROKE_WIDTH = {
 
 export const spinProps = {
   ...(useTheme.props as ThemeProps<SpinTheme>),
+  contentClass: String,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
   description: String,
   stroke: String,
   size: {
@@ -183,8 +185,10 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-spin-content`,
-            this.active && `${mergedClsPrefix}-spin-content--spinning`
+            this.active && `${mergedClsPrefix}-spin-content--spinning`,
+            this.contentClass
           ]}
+          style={this.contentStyle}
         >
           {$slots}
         </div>
