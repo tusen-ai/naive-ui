@@ -25,15 +25,7 @@ export default defineComponent({
       'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
     ]
 
-    function createArray (length: number): number[] {
-      const ret = []
-      for (let i = 0; i < length; ++i) {
-        ret.push(i)
-      }
-      return ret
-    }
-
-    const items = createArray(10000).map((_, i) => ({
+    const items = Array.from({ length: 10000 }, (_, i) => ({
       key: i,
       value: i,
       avatar: avatars[i % avatars.length]
@@ -47,7 +39,6 @@ export default defineComponent({
 </script>
 <style>
 .item {
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
 }

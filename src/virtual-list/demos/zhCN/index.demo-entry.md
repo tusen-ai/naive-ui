@@ -8,4 +8,5 @@
 
 ```demo
 basic.vue
+dynamic-size.vue
 ```
