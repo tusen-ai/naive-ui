@@ -34,6 +34,7 @@ rtl-debug.vue
 | auto-focus | `boolean` | `true` | 是否自动聚焦 Drawer 第一个可聚焦的元素 | 2.24.2 |
 | block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Drawer | 2.24.2 |
+| content-class | `string` | `undefined` | 抽屉可滚动内容节点的类名 |  |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |  |
 | default-width | `number \| string` | `251` | 抽屉的默认宽度，在位置是 `left` 和 `right` 时生效 | 2.31.0 |
 | default-height | `number \| string` | `251` | 抽屉的默认高度，在位置是 `top` 和 `bottom` 时生效 | 2.31.0 |
@@ -68,10 +69,14 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| body-class | `string` | `undefined` | 主体 body 的类名 |
 | body-style | `string \| Object` | `undefined` | 主体 body 的样式 |
+| body-content-class | `string` | `undefined` | 主体可滚动内容节点的类名 |
 | body-content-style | `string \| Object` | `undefined` | 主体可滚动内容节点的样式 |
 | closable | `boolean` | `false` | 是否可关闭 |
+| footer-class | `string` | `undefined` | 主体 footer 的类名 |
 | footer-style | `string \| Object` | `undefined` | 主体 footer 的样式 |
+| header-class | `string` | `undefined` | 主体 header 的类名 |
 | header-style | `string \| Object` | `undefined` | 主体 header 的样式 |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |
 | scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |

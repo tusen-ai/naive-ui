@@ -48,6 +48,7 @@
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 - `n-input-number` export the `select` method.
 - `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row, closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
+- `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
 
 ### i18n
 

@@ -45,6 +45,7 @@ export default defineComponent({
       type: String as PropType<Placement>,
       required: true
     },
+    contentClass: String,
     contentStyle: [Object, String] as PropType<string | CSSProperties>,
     nativeScrollbar: {
       type: Boolean,
@@ -301,7 +302,10 @@ export default defineComponent({
                               ) : null,
                               this.nativeScrollbar ? (
                                 <div
-                                  class={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  class={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   style={this.contentStyle}
                                   role="none"
                                 >
@@ -311,7 +315,9 @@ export default defineComponent({
                                 <NScrollbar
                                   {...this.scrollbarProps}
                                   contentStyle={this.contentStyle}
-                                  contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  contentClass={`${mergedClsPrefix}-drawer-content-wrapper ${
+                                    this.contentClass ?? ''
+                                  }`}
                                   theme={this.mergedTheme.peers.Scrollbar}
                                   themeOverrides={
                                     this.mergedTheme.peerOverrides.Scrollbar
