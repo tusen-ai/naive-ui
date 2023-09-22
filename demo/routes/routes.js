@@ -534,6 +534,11 @@ export const enComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -911,6 +916,11 @@ export const zhComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/zhCN/index.demo-entry.md')
   }
 ]
 

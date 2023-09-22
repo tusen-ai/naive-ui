@@ -496,6 +496,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '树',
           enSuffix: true,
           path: '/tree'
+        },
+        {
+          en: 'Virtual List',
+          zh: '虚拟列表',
+          enSuffix: true,
+          path: '/virtual-list'
         }
       ]
     }),
