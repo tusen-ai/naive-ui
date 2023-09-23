@@ -2,9 +2,13 @@ import { h, defineComponent, type PropType, type CSSProperties, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
-import { type ItemData } from 'vueuc/lib/virtual-list/src/type'
+import {
+  type VScrollToOptions,
+  type ItemData
+} from 'vueuc/lib/virtual-list/src/type'
 import { VVirtualList, type VirtualListInst } from 'vueuc'
 export { type VirtualListInst } from 'vueuc'
+
 export const virtualListProps = {
   scrollbarProps: Object as PropType<ScrollbarProps>,
   items: {
@@ -70,6 +74,14 @@ export default defineComponent({
       props.onWheel?.(e)
     }
 
+    function scrollTo (options: VScrollToOptions | number, y?: number): void {
+      if (typeof options === 'number') {
+        virtualListInstRef.value?.scrollTo(options, y ?? 0)
+      } else {
+        virtualListInstRef.value?.scrollTo(options)
+      }
+    }
+
     function getScrollContainer (): HTMLElement | null | undefined {
       return virtualListInstRef.value?.listElRef
     }
@@ -79,6 +91,7 @@ export default defineComponent({
     }
 
     return {
+      scrollTo,
       scrollbarInstRef,
       virtualListInstRef,
       getScrollContainer,

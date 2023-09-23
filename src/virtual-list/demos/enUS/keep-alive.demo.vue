@@ -1,22 +1,38 @@
 <markdown>
-  # Basic size
+  # Keep state
 </markdown>
 
 <template>
-  <n-virtual-list style="max-height: 240px" :item-size="42" :items="items">
-    <template #default="{ item }">
-      <div :key="item.key" class="item" style="height: 42px">
-        <img class="avatar" :src="item.avatar" alt="">
-        <span> {{ item.value }}</span>
-      </div>
-    </template>
-  </n-virtual-list>
+  <n-space vertical>
+    <n-button @click="showVirtualList = !showVirtualList">
+      Toggle visibility
+    </n-button>
+    <keep-alive>
+      <n-virtual-list
+        v-if="showVirtualList"
+        style="max-height: 240px"
+        :item-size="48"
+        :items="items"
+        item-resizable
+      >
+        <template #default="{ item, index }">
+          <div :key="item.key" class="item">
+            <img class="avatar" :src="item.avatar" alt="">
+            <span> {{ index }}</span>
+          </div>
+        </template>
+      </n-virtual-list>
+    </keep-alive>
+  </n-space>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup () {
+    const showVirtualList = ref(true)
+
     const avatars = [
       'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
       'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
@@ -32,7 +48,8 @@ export default defineComponent({
     }))
 
     return {
-      items
+      items,
+      showVirtualList
     }
   }
 })
@@ -40,10 +57,10 @@ export default defineComponent({
 <style>
 .item {
   display: flex;
-  align-items: center;
 }
 .avatar {
   width: 28px;
+  height: 28px;
   border-radius: 50%;
   margin-right: 10px;
 }

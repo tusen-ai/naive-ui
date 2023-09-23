@@ -41,7 +41,7 @@ export default defineComponent({
     ]
 
     const items = Array.from({ length: 10000 }, (_, i) => ({
-      key: i,
+      key: `${i}`,
       value: i,
       avatar: avatars[i % avatars.length],
       message: messages[Math.floor(Math.random() * messages.length)]
@@ -56,7 +56,7 @@ export default defineComponent({
 <style>
 .item {
   display: flex;
-  padding: 10px;
+  align-items: start;
 }
 .avatar {
   width: 28px;

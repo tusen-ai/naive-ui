@@ -9,6 +9,8 @@
 ```demo
 basic.vue
 dynamic-size.vue
+scroll.vue
+keep-alive.vue
 ```
 
 ## API
