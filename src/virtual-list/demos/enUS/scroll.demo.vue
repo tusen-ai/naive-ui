@@ -1,20 +1,20 @@
 <markdown>
-  # 滚动
+  # Scroll
 </markdown>
 
 <template>
   <n-space>
     <n-button @click="handleScrollToKey">
-      滚动
+      Scroll
     </n-button>
     <n-button @click="handleScrollToPosition">
-      滚动到指定位置
+      Scroll to position
     </n-button>
     <n-button @click="handleScrollToIndex">
-      滚动到指定Index
+      Scroll to index
     </n-button>
     <n-button @click="handleScrollToDistance">
-      滚动到指定距离
+      Scroll to distance
     </n-button>
   </n-space>
   <n-virtual-list

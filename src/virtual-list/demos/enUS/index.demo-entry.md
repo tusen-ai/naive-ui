@@ -13,7 +13,7 @@ scroll.vue
 keep-alive.vue
 ```
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | items | `Array<object>` | `[]` | Data to display. |  |
 | item-resizable | `Number` | `undefined` | Whether dynamic sizing is enabled, you don't have to care about the size of the item, it will be calculated automatically. |  |
