@@ -10,3 +10,23 @@ It's like a lazy programmer holding up a blank note and saying, "You can't see m
 basic.vue
 dynamic-size.vue
 ```
+
+## API
+
+### Virtual List Props
+
+| Name     | Type      | Default | Description                    | Version |
+| -------- | --------- | ------- | ------------------------------ | ------- |
+| animated | `boolean` | `true`  | Use animation when popping up. |         |
+
+### Virtual List Slots
+
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| trigger | `()` | The element or component that triggers popover. |  |
+
+### Virtual List Methods
+
+| Name    | Parameters        | Description                           |
+| ------- | ----------------- | ------------------------------------- |
+| setShow | `(show: boolean)` | Set show status in uncontrolled mode. |

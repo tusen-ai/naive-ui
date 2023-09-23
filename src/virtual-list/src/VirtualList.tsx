@@ -104,7 +104,7 @@ export default defineComponent({
                 showScrollbar={false}
                 items={this.items}
                 itemSize={this.itemSize}
-                itemResizable
+                itemResizable={this.itemResizable}
                 itemsStyle={this.itemsStyle}
                 visibleItemsTag={this.visibleItemsTag}
                 visibleItemsProps={this.visibleItemsProps}

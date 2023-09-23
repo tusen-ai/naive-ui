@@ -1,9 +1,16 @@
 <markdown>
   # Dynamic size
+
+  Set 'item-resizable' which can render items of unknown size.
 </markdown>
 
 <template>
-  <n-virtual-list style="max-height: 240px" :item-size="42" :items="items">
+  <n-virtual-list
+    style="max-height: 240px"
+    :item-size="42"
+    :items="items"
+    item-resizable
+  >
     <template #default="{ item, index }">
       <div :key="item.key" class="item">
         <img class="avatar" :src="item.avatar" alt="">
@@ -27,9 +34,10 @@ export default defineComponent({
 
     const messages = [
       'Life is like a grand magic show, we sometimes play the magician, and sometimes become the audience to be teased, and finally found that the biggest magic is actually time, it makes our youth and wallet have become lost',
-      "Complexity isn't going away, it's just going to shift, and when you hear people talking about elaborate conceptual models, stay awake.",
+      "Complexity isn't going away, it's just going to shift, and when you hear people talking about elaborate conceptual models, stay awake",
       "When it comes to virtual lists, it can make you feel like the list is infinite, but in reality it is just secretly hiding the invisible elements, like a lazy programmer with a blank note saying, You can't see me, and I won't load myself!",
-      'Hemingway read the sea and found that life is a fish that takes a lifetime to catch. Van Gogh read the wheat fields and found that art hid behind the sun to cool itself. Freud read dreams and discovered a secret passage to the unconscious mind. Rodin read the human body and discovered beautiful coastlines that Columbus had not. Camus reads Kafka and finds that the truth has been half told'
+      'Sometimes the question itself is the answer, the process of pursuing it is an answer, language has the ability to destroy, once a thing is said, it is destroyed, I say I want to be silent, but in fact, I say I want to enjoy the moment, the moment I say enjoy the moment, the moment is gone',
+      'Freud read dreams and discovered a secret passage to the unconscious mind. Hemingway read the sea and found that life is a fish that takes a lifetime to catch. Van Gogh read the wheat fields and found that art hid behind the sun to cool itself. Rodin read the human body and discovered beautiful coastlines that Columbus had not. Camus reads Kafka and finds that half of the truth has been told'
     ]
 
     const items = Array.from({ length: 10000 }, (_, i) => ({
