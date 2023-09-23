@@ -19,22 +19,22 @@ keep-alive.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| default-scroll-key | `String \| Number` | `undefined` | 默认滚动的 Key |  |
+| default-scroll-index | `Number` | `undefined` | 默认滚动的 Index |  |
+| ignore-item-resize | `Boolean` | `undefined` | 忽略 |  |
 | items | `Array<object>` | `[]` | 需要展示的数据 |  |
 | item-resizable | `Number` | `undefined` | 是否启用动态尺寸，你不必关心项目大小，它会自动计算 |  |
 | item-size | `Number` | `undefined` | 以像素为单位显示项目的最小高度，用于计算滚动大小和位置 |  |
 | items-style | `String \| CSSProperties` | `undefined` | Items 容器样式 |  |
-| scrollbar-props | `Object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
-| visible-tems-tag | `String` | `div` | Items 容器标签 |  |
-| visible-tems-props | `Object` | `undefined` | Items 容器属性 |  |
-| ignore-item-resize | `Boolean` | `undefined` | 忽略 |  |
-| on-scroll | `(event: Event) => void` | `undefined` | 滚动的回调函数 |  |
-| on-wheel | `(event: WheelEvent) => void` | `undefined` | 滚轮事件的回调函数 |  |
-| on-resize | `(event: ResizeObserverEntry) => void` | `undefined` | 元素大小调整的回调函数 |  |
-| default-scroll-key | `String \| Number` | `undefined` | 默认滚动的 Key |  |
-| default-scroll-index | `Number` | `undefined` | 默认滚动的 Index |  |
 | key-field | `String` | `key` | 选项 key 的字段名 |  |
 | padding-top | `String \| Nunmber` | `undefined` | 距离上部的距离 |  |
 | padding-bottom | `String \| Nunmber` | `undefined` | 距离底部的距离 |  |
+| scrollbar-props | `Object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| visible-tems-tag | `String` | `div` | Items 容器标签 |  |
+| visible-tems-props | `Object` | `undefined` | Items 容器属性 |  |
+| on-scroll | `(event: Event) => void` | `undefined` | 滚动的回调函数 |  |
+| on-wheel | `(event: WheelEvent) => void` | `undefined` | 滚轮事件的回调函数 |  |
+| on-resize | `(event: ResizeObserverEntry) => void` | `undefined` | 元素大小调整的回调函数 |  |
 
 #### ScrollTo Type
 
