@@ -68,5 +68,5 @@ interface ScrollTo {
 ### Virtual List Methods
 
 | 名称     | 参数       | 说明           |
-| -------- | ---------- | -------------- | ---- |
-| scrollTo | `ScrollTo` | 滚动到某个节点 | NEXT |
+| -------- | ---------- | -------------- |
+| scrollTo | `ScrollTo` | 滚动到某个节点 |

@@ -13,6 +13,10 @@ scroll.vue
 keep-alive.vue
 ```
 
+## API
+
+### Virtual List Props
+
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | items | `Array<object>` | `[]` | Data to display. |  |
@@ -64,5 +68,5 @@ interface ScrollTo {
 ### Virtual List Methods
 
 | 名称     | 参数       | 说明              |
-| -------- | ---------- | ----------------- | ---- |
-| scrollTo | `ScrollTo` | Scroll to a node. | NEXT |
+| -------- | ---------- | ----------------- |
+| scrollTo | `ScrollTo` | Scroll to a node. |
