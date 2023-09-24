@@ -3,34 +3,36 @@
 </markdown>
 
 <template>
-  <n-space>
-    <n-button @click="handleScrollToKey">
-      Scroll
-    </n-button>
-    <n-button @click="handleScrollToPosition">
-      Scroll to position
-    </n-button>
-    <n-button @click="handleScrollToIndex">
-      Scroll to index
-    </n-button>
-    <n-button @click="handleScrollToDistance">
-      Scroll to distance
-    </n-button>
+  <n-space vertical>
+    <n-space>
+      <n-button @click="handleScrollToKey">
+        Scroll
+      </n-button>
+      <n-button @click="handleScrollToPosition">
+        Scroll to position
+      </n-button>
+      <n-button @click="handleScrollToIndex">
+        Scroll to index
+      </n-button>
+      <n-button @click="handleScrollToDistance">
+        Scroll to distance
+      </n-button>
+    </n-space>
+    <n-virtual-list
+      ref="virtualListInst"
+      style="max-height: 240px"
+      :item-size="42"
+      :items="items"
+      item-resizable
+    >
+      <template #default="{ item, index }">
+        <div :key="item.key" class="item" style="height: 42px">
+          <img class="avatar" :src="item.avatar" alt="">
+          <span> {{ index }}</span>
+        </div>
+      </template>
+    </n-virtual-list>
   </n-space>
-  <n-virtual-list
-    ref="virtualListInst"
-    style="max-height: 240px"
-    :item-size="48"
-    :items="items"
-    item-resizable
-  >
-    <template #default="{ item, index }">
-      <div :key="item.key" class="item">
-        <img class="avatar" :src="item.avatar" alt="">
-        <span> {{ index }}</span>
-      </div>
-    </template>
-  </n-virtual-list>
 </template>
 
 <script lang="ts">

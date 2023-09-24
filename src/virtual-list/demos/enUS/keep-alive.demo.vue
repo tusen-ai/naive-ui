@@ -11,12 +11,12 @@
       <n-virtual-list
         v-if="showVirtualList"
         style="max-height: 240px"
-        :item-size="48"
+        :item-size="42"
         :items="items"
         item-resizable
       >
         <template #default="{ item, index }">
-          <div :key="item.key" class="item">
+          <div :key="item.key" class="item" style="height: 42px">
             <img class="avatar" :src="item.avatar" alt="">
             <span> {{ index }}</span>
           </div>
