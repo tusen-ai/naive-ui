@@ -1,4 +1,4 @@
-# Qrcode
+# QRCode
 
 Like a humorous magician, he skillfully turns tedious information into a mysterious QR code
 
@@ -16,7 +16,7 @@ download.vue
 
 ## API
 
-### Qrcode Props
+### QRCode Props
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
