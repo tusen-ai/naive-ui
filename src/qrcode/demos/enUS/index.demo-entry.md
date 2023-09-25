@@ -9,6 +9,7 @@ basic.vue
 border.vue
 size.vue
 color.vue
+error-correction.vue
 ```
 
 ## API
@@ -17,8 +18,9 @@ color.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| bgColor | `string` | `#FFF` | Qr code background color, Values need to be in `hex` format. |  |
+| bg-color | `string` | `#FFF` | Qr code background color, Values need to be in `hex` format. |  |
 | bordered | `boolean` | `true` | Whether to show the qrcode border. |  |
 | color | `string` | `#000` | Qr code color, Values need to be in `hex` format. |  |
+| error-correction-level | `L` \| `M` \| `Q` \| `H` | `M` | Qr code error correction level. |
 | value | `string` | `-` | Text information. |  |
-| size | `number` | `160` | Size of the qrcode |
+| size | `number` | `160` | Size of the qrcode. |

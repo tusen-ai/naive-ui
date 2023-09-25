@@ -6,6 +6,13 @@ import style from './styles/index.cssr'
 import { type QrcodeTheme, qrcodeLight } from '../styles'
 import qrcodegen from './qrcodegen'
 
+const ERROR_CORRECTION_LEVEL: Record<string, qrcodegen.QrCode.Ecc> = {
+  L: qrcodegen.QrCode.Ecc.LOW,
+  M: qrcodegen.QrCode.Ecc.MEDIUM,
+  Q: qrcodegen.QrCode.Ecc.QUARTILE,
+  H: qrcodegen.QrCode.Ecc.HIGH
+}
+
 export const qrcodeProps = {
   ...(useTheme.props as ThemeProps<QrcodeTheme>),
   value: String,
@@ -24,6 +31,10 @@ export const qrcodeProps = {
   size: {
     type: Number,
     default: 110
+  },
+  errorCorrectionLevel: {
+    type: String,
+    default: 'M'
   }
 } as const
 
@@ -40,8 +51,12 @@ export default defineComponent({
     const canvasRef = ref<HTMLCanvasElement>()
 
     watchEffect(() => {
-      const errCorLvl = qrcodegen.QrCode.Ecc.LOW
-      const qr = qrcodegen.QrCode.encodeText(props.value ?? '-', errCorLvl)
+      const errorCorrectionLevel =
+        ERROR_CORRECTION_LEVEL[props.errorCorrectionLevel]
+      const qr = qrcodegen.QrCode.encodeText(
+        props.value ?? '-',
+        errorCorrectionLevel
+      )
       drawCanvas(qr, props.size, props.color, props.bgColor)
     })
 
