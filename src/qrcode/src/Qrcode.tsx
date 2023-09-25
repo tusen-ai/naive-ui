@@ -103,7 +103,14 @@ export default defineComponent({
           const centerY = (canvas.height - iconSize) / 2
           ctx.fillStyle = props.iconBackgroundColor
           ctx.fillRect(centerX, centerY, iconSize, iconSize)
-          ctx.drawImage(img, centerX, centerY, iconSize, iconSize)
+          const aspectRatio = img.width / img.height
+          const scaledWidth =
+            aspectRatio >= 1 ? iconSize : iconSize * aspectRatio
+          const scaledHeight =
+            aspectRatio <= 1 ? iconSize : iconSize / aspectRatio
+          const left = centerX + (iconSize - scaledWidth) / 2
+          const top = centerY + (iconSize - scaledHeight) / 2
+          ctx.drawImage(img, left, top, scaledWidth, scaledHeight)
         }
       }
     }
