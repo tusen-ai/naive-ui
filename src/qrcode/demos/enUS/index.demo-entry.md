@@ -11,6 +11,7 @@ border.vue
 size.vue
 color.vue
 error-correction.vue
+download.vue
 ```
 
 ## API
