@@ -10,7 +10,7 @@
     <n-qrcode
       value="https://www.naiveui.com/"
       color="#409eff"
-      bg-color="#F5F5F5"
+      background-color="#F5F5F5"
     />
   </n-space>
 </template>

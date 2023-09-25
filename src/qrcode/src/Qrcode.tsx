@@ -20,13 +20,22 @@ export const qrcodeProps = {
     type: String,
     default: '#000'
   },
-  bgColor: {
+  backgroundColor: {
     type: String,
     default: '#FFF'
   },
   bordered: {
     type: Boolean,
     default: true
+  },
+  icon: String,
+  iconSize: {
+    type: Number,
+    default: 40
+  },
+  iconBackgroundColor: {
+    type: String,
+    default: '#FFF'
   },
   size: {
     type: Number,
@@ -57,7 +66,7 @@ export default defineComponent({
         props.value ?? '-',
         errorCorrectionLevel
       )
-      drawCanvas(qr, props.size, props.color, props.bgColor)
+      drawCanvas(qr, props.size, props.color, props.backgroundColor)
     })
 
     function drawCanvas (
@@ -85,6 +94,18 @@ export default defineComponent({
           ctx.fillRect(startX, startY, endX - startX, endY - startY)
         }
       }
+      if (props.icon) {
+        const img = new Image()
+        img.src = props.icon
+        img.onload = () => {
+          const iconSize = props.iconSize
+          const centerX = (canvas.width - iconSize) / 2
+          const centerY = (canvas.height - iconSize) / 2
+          ctx.fillStyle = props.iconBackgroundColor
+          ctx.fillRect(centerX, centerY, iconSize, iconSize)
+          ctx.drawImage(img, centerX, centerY, iconSize, iconSize)
+        }
+      }
     }
 
     return {
@@ -93,7 +114,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, bordered, bgColor } = this
+    const { mergedClsPrefix, bordered, backgroundColor } = this
     return (
       <div
         class={[
@@ -103,7 +124,7 @@ export default defineComponent({
       >
         <div
           class={[`${mergedClsPrefix}-qrcode-wrapper`]}
-          style={{ backgroundColor: bgColor }}
+          style={{ backgroundColor }}
         >
           <canvas ref="canvasRef"></canvas>
         </div>

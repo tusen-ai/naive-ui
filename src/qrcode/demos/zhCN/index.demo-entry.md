@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+icon.vue
 border.vue
 size.vue
 color.vue
@@ -18,12 +19,15 @@ error-correction.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| bg-color | `string` | `#FFF` | 二维码背景颜色，值需要采用 `hex` 格式 |  |
-| bordered | `boolean` | `true` | 是否显示二维码边框 |  |
-| color | `string` | `#000` | 二维码颜色，值需要采用 `hex` 格式 |  |
-| error-correction-level | `L` \| `M` \| `Q` \| `H` | `M` | 二维码纠错级别 |
-| value | `string` | `-` | 文本信息 |  |
-| size | `number` | `160` | 二维码大小 |
+| background-color | `string` | `#FFF` | 二维码背景颜色，值需要采用 `hex` 格式 | NEXT |
+| bordered | `boolean` | `true` | 是否显示二维码边框 | NEXT |
+| color | `string` | `#000` | 二维码颜色，值需要采用 `hex` 格式 | NEXT |
+| error-correction-level | `L` \| `M` \| `Q` \| `H` | `M` | 二维码纠错级别 | NEXT |
+| icon | `string` | `undefined` | 图标地址 | NEXT |
+| icon-size | `number` | `40` | 图标大小 | NEXT |
+| icon-background-color | `string` | `#FFF` | 图标背景颜色 | NEXT |
+| value | `string` | `-` | 文本信息 | NEXT |
+| size | `number` | `160` | 二维码大小 | NEXT |
 
 ## Q & A
 
