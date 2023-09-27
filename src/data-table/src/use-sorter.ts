@@ -57,7 +57,11 @@ function getDefaultSorterFn (
     const value1 = row1[columnKey]
     const value2 = row2[columnKey]
 
-    if (typeof value1 === 'number' && typeof value2 === 'number') {
+    if(value1 === null) {
+      return -1
+    } else if(value2 === null) {
+      return 1
+    } else if (typeof value1 === 'number' && typeof value2 === 'number') {
       return value1 - value2
     } else if (typeof value1 === 'string' && typeof value2 === 'string') {
       return value1.localeCompare(value2)
