@@ -129,7 +129,7 @@
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
     "rollup": "^3.29.0",
-    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-esbuild": "^6.0.2",
     "superagent": "^8.1.2",
     "ts-jest": "^29.1.1",
     "typescript": "5.2.2",
