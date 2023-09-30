@@ -15,6 +15,10 @@ export const splitProps = {
     type: Number,
     default: 3
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   size: {
     type: Number,
     default: 0.5
@@ -117,11 +121,15 @@ export default defineComponent({
         >
           {this.$slots.first?.()}
         </div>
-        <div
-          ref="dividerRef"
-          class={`${this.mergedClsPrefixRef}-split__resize-trigger`}
-          style={this.resizeTriggerStyle}
-        />
+
+        {!this.disabled && (
+          <div
+            ref="dividerRef"
+            class={`${this.mergedClsPrefixRef}-split__resize-trigger`}
+            style={this.resizeTriggerStyle}
+          />
+        )}
+
         <div
           class={[
             `${this.mergedClsPrefixRef}-split-pane`,
