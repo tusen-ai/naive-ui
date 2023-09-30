@@ -11,7 +11,7 @@ export const splitProps = {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal'
   },
-  barSize: {
+  triggerSize: {
     type: Number,
     default: 3
   },
@@ -52,19 +52,19 @@ export default defineComponent({
     const firstPaneStyle = computed(() => {
       const size = currentSize.value * 100
       return {
-        flex: `0 0 calc(${size}% - ${props.barSize}px)`
+        flex: `0 0 calc(${size}% - ${props.triggerSize}px)`
       }
     })
 
     const resizeTriggerStyle = computed(() => {
       return props.direction === 'horizontal'
         ? {
-            width: `${props.barSize}px`,
+            width: `${props.triggerSize}px`,
             height: '100%'
           }
         : {
             width: '100%',
-            height: `${props.barSize}px`
+            height: `${props.triggerSize}px`
           }
     })
 

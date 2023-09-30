@@ -17,12 +17,12 @@ event.vue
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| bar-size | `Number` | `3` | Split 的分隔条大小 |
 | disabled | `Boolean` | `false` | 是否禁用 |
 | direction | `horizontal \| vertical` | `horizontal` | Split 的分割方向 |
 | min | `Number` | `0` | Split 的分割最小阈值，0-1 代表百分比 |
 | max | `Number` | `1` | Split 的分割最大阈值，0-1 代表百分比 |
 | size | `Number` | `0.5` | Split 的分割大小，0-1 代表百分比 |
+| trigger-size | `Number` | `3` | Split 的分隔条大小 |
 
 ### Split Slots
 
