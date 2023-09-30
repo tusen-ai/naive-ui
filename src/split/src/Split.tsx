@@ -1,6 +1,13 @@
-import { h, defineComponent, type PropType, ref, computed } from 'vue'
+import {
+  h,
+  defineComponent,
+  type PropType,
+  ref,
+  computed,
+  type CSSProperties
+} from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { useMergedClsPrefix } from '../../_mixins/use-config'
+import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
@@ -42,11 +49,28 @@ export default defineComponent({
   name: 'Split',
   props: splitProps,
   setup (props) {
-    const mergedClsPrefixRef = useMergedClsPrefix()
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
-    useTheme('Split', '-split', style, splitLight, props, mergedClsPrefixRef)
+    const themeRef = useTheme(
+      'Split',
+      '-split',
+      style,
+      splitLight,
+      props,
+      mergedClsPrefixRef
+    )
+
+    const cssVarsRef = computed(() => {
+      const {
+        self: { resizableTriggerColorHover }
+      } = themeRef.value
+      return {
+        '--n-resize-trigger-color-hover': resizableTriggerColorHover
+      }
+    })
 
     const dividerRef = ref<HTMLElement | null>(null)
+    const isDraggingRef = ref(false)
     const currentSize = ref(props.size)
 
     const firstPaneStyle = computed(() => {
@@ -71,6 +95,7 @@ export default defineComponent({
     const handleMouseDown = (e: MouseEvent): void => {
       if (e.target !== dividerRef.value) return
       e.preventDefault()
+      isDraggingRef.value = true
       if (props.onMoveStart) props.onMoveStart(e)
       const mouseMoveEvent = 'mousemove'
       const mouseUpEvent = 'mouseup'
@@ -81,6 +106,7 @@ export default defineComponent({
       const onMouseUp = (): void => {
         document.removeEventListener(mouseMoveEvent, onMouseMove)
         document.removeEventListener(mouseUpEvent, onMouseUp)
+        isDraggingRef.value = false
         if (props.onMoveEnd) props.onMoveEnd(e)
       }
       document.addEventListener(mouseMoveEvent, onMouseMove)
@@ -105,8 +131,10 @@ export default defineComponent({
     }
 
     return {
-      dividerRef,
-      mergedClsPrefixRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      divider: dividerRef,
+      isDragging: isDraggingRef,
+      mergedClsPrefix: mergedClsPrefixRef,
       resizeTriggerStyle,
       handleMouseDown,
       firstPaneStyle
@@ -116,13 +144,14 @@ export default defineComponent({
     return (
       <div
         class={[
-          `${this.mergedClsPrefixRef}-split`,
-          `${this.mergedClsPrefixRef}-split--${this.direction}`
+          `${this.mergedClsPrefix}-split`,
+          `${this.mergedClsPrefix}-split--${this.direction}`
         ]}
+        style={this.cssVars as CSSProperties}
         onMousedown={this.handleMouseDown}
       >
         <div
-          class={`${this.mergedClsPrefixRef}-split-pane`}
+          class={`${this.mergedClsPrefix}-split-pane`}
           style={this.firstPaneStyle}
         >
           {this.$slots.first?.()}
@@ -130,16 +159,20 @@ export default defineComponent({
 
         {!this.disabled && (
           <div
-            ref="dividerRef"
-            class={`${this.mergedClsPrefixRef}-split__resize-trigger`}
+            ref="divider"
+            class={[
+              `${this.mergedClsPrefix}-split__resize-trigger`,
+              this.isDragging &&
+                `${this.mergedClsPrefix}-split__resize-trigger--hover`
+            ]}
             style={this.resizeTriggerStyle}
           />
         )}
 
         <div
           class={[
-            `${this.mergedClsPrefixRef}-split-pane`,
-            `${this.mergedClsPrefixRef}-split-second-pane`
+            `${this.mergedClsPrefix}-split-pane`,
+            `${this.mergedClsPrefix}-split-second-pane`
           ]}
         >
           {this.$slots.second?.()}

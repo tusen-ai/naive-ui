@@ -2,8 +2,11 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { type Theme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
-  return {}
+export const self = (vars: ThemeCommonVars) => {
+  const { primaryColorHover } = vars
+  return {
+    resizableTriggerColorHover: primaryColorHover
+  }
 }
 
 export type SplitThemeVars = ReturnType<typeof self>
