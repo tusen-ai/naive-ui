@@ -30,7 +30,10 @@ export const splitProps = {
   max: {
     type: Number,
     default: 1
-  }
+  },
+  onMoveStart: Function as PropType<(e: Event) => void>,
+  onMoving: Function as PropType<(e: Event) => void>,
+  onMoveEnd: Function as PropType<(e: Event) => void>
 } as const
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
@@ -65,17 +68,20 @@ export default defineComponent({
           }
     })
 
-    const startDragging = (event: MouseEvent): void => {
-      if (event.target !== dividerRef.value) return
-      event.preventDefault()
+    const handleMouseDown = (e: MouseEvent): void => {
+      if (e.target !== dividerRef.value) return
+      e.preventDefault()
+      if (props.onMoveStart) props.onMoveStart(e)
       const mouseMoveEvent = 'mousemove'
       const mouseUpEvent = 'mouseup'
       const onMouseMove = (e: MouseEvent): void => {
         updateSize(e)
+        if (props.onMoving) props.onMoving(e)
       }
       const onMouseUp = (): void => {
         document.removeEventListener(mouseMoveEvent, onMouseMove)
         document.removeEventListener(mouseUpEvent, onMouseUp)
+        if (props.onMoveEnd) props.onMoveEnd(e)
       }
       document.addEventListener(mouseMoveEvent, onMouseMove)
       document.addEventListener(mouseUpEvent, onMouseUp)
@@ -102,7 +108,7 @@ export default defineComponent({
       dividerRef,
       mergedClsPrefixRef,
       resizeTriggerStyle,
-      startDragging,
+      handleMouseDown,
       firstPaneStyle
     }
   },
@@ -113,7 +119,7 @@ export default defineComponent({
           `${this.mergedClsPrefixRef}-split`,
           `${this.mergedClsPrefixRef}-split--${this.direction}`
         ]}
-        onMousedown={this.startDragging}
+        onMousedown={this.handleMouseDown}
       >
         <div
           class={`${this.mergedClsPrefixRef}-split-pane`}
