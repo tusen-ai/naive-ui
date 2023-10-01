@@ -11,11 +11,14 @@ basic.vue
 line-clamp.vue
 expand-trigger.vue
 custom-tooltip.vue
+performant-ellipsis.vue
 ```
 
 ## API
 
-### Ellipsis Props
+### Ellipsis, PerformantEllipsis Props
+
+`n-performant-ellipsis` since NEXT_VERSION.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |

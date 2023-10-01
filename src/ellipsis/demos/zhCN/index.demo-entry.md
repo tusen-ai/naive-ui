@@ -11,13 +11,16 @@ basic.vue
 line-clamp.vue
 expand-trigger.vue
 custom-tooltip.vue
+performant-ellipsis.vue
 dynamic-debug.vue
 width-debug.vue
 ```
 
 ## API
 
-### Ellipsis Props
+### Ellipsis, PerformantEllipsis Props
+
+`n-performant-ellipsis` 从 NEXT_VERSION 开始提供。
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
