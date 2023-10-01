@@ -21,9 +21,19 @@
           </template>
 
           <template #second>
-            <div :style="{ height: '100%' }">
-              Pane 3
-            </div>
+            <n-split direction="horizontal" style="height: 100px">
+              <template #first>
+                <div :style="{ height: '100%' }">
+                  Pane 3
+                </div>
+              </template>
+
+              <template #second>
+                <div :style="{ height: '100%' }">
+                  Pane 4
+                </div>
+              </template>
+            </n-split>
           </template>
         </n-split>
       </div>

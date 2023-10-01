@@ -8,6 +8,8 @@ The flexible layout tool provides the possibility of customizing the interface l
 basic.vue
 vertical.vue
 nest.vue
+event.vue
+slot.vue
 ```
 
 ## API

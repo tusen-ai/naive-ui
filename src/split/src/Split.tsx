@@ -100,6 +100,16 @@ export default defineComponent({
           }
     })
 
+    const resizeTriggerWrapperStyle = computed(() => {
+      return props.direction === 'horizontal'
+        ? {
+            cursor: 'col-resize'
+          }
+        : {
+            cursor: 'row-resize'
+          }
+    })
+
     const handleMouseDown = (e: MouseEvent): void => {
       e.preventDefault()
       isDraggingRef.value = true
@@ -142,6 +152,7 @@ export default defineComponent({
       divider: dividerRef,
       isDragging: isDraggingRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      resizeTriggerWrapperStyle,
       resizeTriggerStyle,
       handleMouseDown,
       firstPaneStyle
@@ -167,6 +178,7 @@ export default defineComponent({
           <div
             ref="divider"
             class={[`${this.mergedClsPrefix}-split__resize-trigger-wrapper`]}
+            style={this.resizeTriggerWrapperStyle}
             onMousedown={this.handleMouseDown}
           >
             {this.$slots['resize-trigger']?.() ?? (
@@ -177,9 +189,7 @@ export default defineComponent({
                   this.isDragging &&
                     `${this.mergedClsPrefix}-split__resize-trigger--hover`
                 ]}
-              >
-                {' '}
-              </div>
+              ></div>
             )}
           </div>
         )}

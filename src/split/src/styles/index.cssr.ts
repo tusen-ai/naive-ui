@@ -12,18 +12,10 @@ export default c([
 `, [
     cM('horizontal', `
         flex-direction: row;
-    `, [
-      cE('resize-trigger-wrapper', `
-        cursor: col-resize;
-    `)
-    ]),
+    `),
     cM('vertical', `
         flex-direction: column;
-    `, [
-      cE('resize-trigger-wrapper', `
-          cursor: row-resize;
-      `)
-    ]),
+    `),
     cB('split-pane', `
         overflow: hidden;
     `),
