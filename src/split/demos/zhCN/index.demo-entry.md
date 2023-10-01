@@ -9,6 +9,7 @@ basic.vue
 vertical.vue
 nest.vue
 event.vue
+slot.vue
 ```
 
 ## API
@@ -22,11 +23,12 @@ event.vue
 | min | `Number` | `0` | Split 的分割最小阈值，0-1 代表百分比 |
 | max | `Number` | `1` | Split 的分割最大阈值，0-1 代表百分比 |
 | size | `Number` | `0.5` | Split 的分割大小，0-1 代表百分比 |
-| trigger-size | `Number` | `3` | Split 的分隔条大小 |
+| resize-trigger-size | `Number` | `3` | Split 的分隔条大小 |
 
 ### Split Slots
 
-| 名称   | 参数 | 说明           |
-| ------ | ---- | -------------- |
-| first  | `()` | 第一个面板内容 |
-| second | `()` | 第二个面板内容 |
+| 名称           | 参数 | 说明           |
+| -------------- | ---- | -------------- |
+| first          | `()` | 第一个面板内容 |
+| second         | `()` | 第二个面板内容 |
+| resize-trigger | `()` | 分割条内容     |

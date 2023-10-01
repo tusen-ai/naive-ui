@@ -28,7 +28,6 @@
 <script lang="ts">
 import { useMessage } from 'naive-ui'
 import { defineComponent } from 'vue'
-import { throttle } from 'lodash-es'
 
 export default defineComponent({
   setup () {
@@ -37,9 +36,9 @@ export default defineComponent({
       handleOnMoveStart: () => {
         message.info('Move Start')
       },
-      handleOnMoving: throttle(() => {
+      handleOnMoving: () => {
         message.info('Moving')
-      }, 500),
+      },
       handleOnMoveEnd: () => {
         message.info('Move end')
       }
