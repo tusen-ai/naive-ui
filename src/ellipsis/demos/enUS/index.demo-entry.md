@@ -18,7 +18,7 @@ performant-ellipsis.vue
 
 ### Ellipsis, PerformantEllipsis Props
 
-`n-performant-ellipsis` since NEXT_VERSION.
+`n-performant-ellipsis` since 2.35.0.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |

@@ -20,7 +20,7 @@ width-debug.vue
 
 ### Ellipsis, PerformantEllipsis Props
 
-`n-performant-ellipsis` 从 NEXT_VERSION 开始提供。
+`n-performant-ellipsis` 从 2.35.0 开始提供。
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
