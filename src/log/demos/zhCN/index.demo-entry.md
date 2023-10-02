@@ -74,4 +74,4 @@ auto-bottom.vue
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| scrollTo | `(options: { top?: number, position?: 'top' \| 'bottom', slient?: boolean })` | 滚动事件的回调函数 |
+| scrollTo | `(options: { top?: number, position?: 'top' \| 'bottom', silent?: boolean })` | 滚动事件的回调函数 |

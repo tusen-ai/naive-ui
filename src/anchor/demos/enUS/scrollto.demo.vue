@@ -22,10 +22,10 @@
     </n-anchor>
   </div>
   <n-space style="padding-left: 400px">
-    <n-button @click="scrollTo('#basic')">
+    <n-button @click="scrollTo('#basic.vue')">
       Basic
     </n-button>
-    <n-button @click="scrollTo('#affix')">
+    <n-button @click="scrollTo('#affix.vue')">
       Affix
     </n-button>
   </n-space>

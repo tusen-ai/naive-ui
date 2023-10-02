@@ -64,6 +64,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 葡萄牙语 (巴西)    | ptBR | datePtBR | 2.28.1 |
 | 俄罗斯语           | ruRU | dateRuRU |        |
 | 斯洛伐克语         | skSK | dateSkSK | 2.25.3 |
+| 瑞典語             | svSE | dateSvSE | 2.35.0 |
 | 泰语（泰国）       | thTH | dateThTH | 2.27.0 |
 | 土耳其语           | trTR | dateTrTR | 2.34.0 |
 | 乌克兰语           | ukUA | dateUkUA |        |

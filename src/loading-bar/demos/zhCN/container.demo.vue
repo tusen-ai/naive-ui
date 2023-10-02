@@ -37,8 +37,8 @@ export default defineComponent({
         return () => {
           return h(NSpace, null, {
             default: () => [
-              h(NButton, { onClick: () => loadingBar.start() }, ['Start']),
-              h(NButton, { onClick: () => loadingBar.finish() }, ['Finish'])
+              h(NButton, { onClick: () => loadingBar.start() }, () => 'Start'),
+              h(NButton, { onClick: () => loadingBar.finish() }, () => 'Finish')
             ]
           })
         }

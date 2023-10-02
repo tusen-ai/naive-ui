@@ -79,6 +79,7 @@ export interface InternalDropInfo {
 export type RenderSwitcherIcon = (props: {
   expanded: boolean
   selected: boolean
+  option: TreeOption
 }) => VNodeChild
 
 export type CheckOnClick = (option: TreeOption) => boolean
@@ -121,6 +122,7 @@ export interface TreeInjection {
   internalTreeSelect: boolean
   checkOnClickRef: Ref<boolean | CheckOnClick>
   disabledFieldRef: Ref<string>
+  showLineRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

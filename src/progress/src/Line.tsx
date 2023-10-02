@@ -146,8 +146,7 @@ export default defineComponent({
                         color: indicatorTextColor
                       }}
                     >
-                      {percentage}
-                      {unit}
+                      {slots.default ? slots.default() : `${percentage}${unit}`}
                     </div>
                   ) : null}
                 </div>

@@ -116,6 +116,7 @@ const arDZ: NLocale = {
     tipClockwise: 'إتجاه عقارب الساعة',
     tipZoomOut: 'تكبير',
     tipZoomIn: 'تصغير',
+    tipDownload: 'للتحميل',
     tipClose: 'إغلاق (Esc زر)',
     tipOriginalSize: 'تكبير إلى الحجم الأصلي'
   }

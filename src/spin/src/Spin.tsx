@@ -5,6 +5,7 @@ import {
   Transition,
   type PropType,
   type CSSProperties,
+  ref,
   watchEffect
 } from 'vue'
 import { useCompitable } from 'vooks'
@@ -46,7 +47,8 @@ export const spinProps = {
       return true
     },
     default: undefined
-  }
+  },
+  delay: Number
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
@@ -104,9 +106,30 @@ export default defineComponent({
         props
       )
       : undefined
+
+    const compitableShow = useCompitable(props, ['spinning', 'show'])
+    const activeRef = ref(false)
+
+    watchEffect((onCleanup) => {
+      let timerId: number
+      if (compitableShow.value) {
+        const { delay } = props
+        if (delay) {
+          timerId = window.setTimeout(() => {
+            activeRef.value = true
+          }, delay)
+          onCleanup(() => {
+            clearTimeout(timerId)
+          })
+          return
+        }
+      }
+      activeRef.value = compitableShow.value
+    })
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      compitableShow: useCompitable(props, ['spinning', 'show']),
+      active: activeRef,
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
         if (strokeWidth !== undefined) return strokeWidth
@@ -160,14 +183,14 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-spin-content`,
-            this.compitableShow && `${mergedClsPrefix}-spin-content--spinning`
+            this.active && `${mergedClsPrefix}-spin-content--spinning`
           ]}
         >
           {$slots}
         </div>
         <Transition name="fade-in-transition">
           {{
-            default: () => (this.compitableShow ? icon : null)
+            default: () => (this.active ? icon : null)
           }}
         </Transition>
       </div>

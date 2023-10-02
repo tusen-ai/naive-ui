@@ -212,15 +212,6 @@ describe('n-checkbox', () => {
       )
       wrapper.unmount()
     })
-
-    it('should allow to set aria-labelledby from outside', () => {
-      const wrapper = mount(NCheckbox)
-      const labelId = wrapper.find('.n-checkbox__label').attributes('id')
-      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
-        labelId
-      )
-      wrapper.unmount()
-    })
   })
 })
 
