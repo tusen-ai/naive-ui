@@ -117,7 +117,7 @@ export default defineComponent({
         if (delay) {
           timerId = window.setTimeout(() => {
             activeRef.value = true
-          }, props.delay)
+          }, delay)
           onCleanup(() => {
             clearTimeout(timerId)
           })
