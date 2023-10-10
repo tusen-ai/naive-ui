@@ -13,6 +13,7 @@ export { messageRtl as unstableMessageRtl } from './message/styles'
 export { dialogRtl as unstableDialogRtl } from './dialog/styles'
 export { DataTableRtl as unstableDataTableRtl } from './data-table/styles'
 export { InternalSelectMenuRtl as unstableInternalSelectMenuRtl } from './_internal/select-menu/styles'
+export { InternalSelectionRtl as unstableInternalSelectionRtl } from './_internal/selection/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
