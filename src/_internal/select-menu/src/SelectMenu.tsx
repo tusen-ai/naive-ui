@@ -28,7 +28,7 @@ import type {
 } from '../../../select/src/interface'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useThemeClass, useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
@@ -119,6 +119,12 @@ export default defineComponent({
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
   setup (props) {
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const rtlEnabledRef = useRtl(
+      'InternalSelectMenu',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const themeRef = useTheme(
       'InternalSelectMenu',
       '-internal-select-menu',
@@ -401,6 +407,8 @@ export default defineComponent({
     useOnResize(selfRef, props.onResize)
     return {
       mergedTheme: themeRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       virtualListRef,
       scrollbarRef,
       itemSize: itemSizeRef,
@@ -445,6 +453,7 @@ export default defineComponent({
         tabindex={this.focusable ? 0 : -1}
         class={[
           `${clsPrefix}-base-select-menu`,
+          this.rtlEnabled && `${clsPrefix}-base-select-menu--rtl`,
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
