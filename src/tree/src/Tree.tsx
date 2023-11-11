@@ -1574,7 +1574,8 @@ export default defineComponent({
           dropMarkColor,
           nodeWrapperPadding,
           nodeHeight,
-          lineHeight
+          lineHeight,
+          lineColor
         }
       } = themeRef.value
       const lineOffsetTop = getPadding(nodeWrapperPadding, 'top')
@@ -1598,7 +1599,8 @@ export default defineComponent({
         '--n-line-offset-top': `-${lineOffsetTop}`,
         '--n-line-offset-bottom': `-${lineOffsetBottom}`,
         '--n-node-content-height': nodeContentHeight,
-        '--n-line-height': lineHeight
+        '--n-line-height': lineHeight,
+        '--n-line-color': lineColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
