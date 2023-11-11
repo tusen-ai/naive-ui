@@ -8,11 +8,12 @@
 - 修复 `n-tree` 在 `disabled` 的情况下不显示选中节点的样式
 - 修复 `n-tree` `virtual-scroll` 空数据占位符丢失
 - 修复 `n-watermark` 组件中的 `content` 属性为空时，无法清空水印内容
-- `n-space` 新增 `item-class` 属性
 
 ### Features
 
 - `n-tree` 导出 `treeGetClickTarget` 函数，判断点击位置，关闭 [#5375](https://github.com/tusen-ai/naive-ui/issues/5375)
+- `n-space` 新增 `item-class` 属性
+- `n-layout` 新增 `content-class`、`collapsed-trigger-class`、`trigger-class` 属性
 
 ## 2.35.0
 
