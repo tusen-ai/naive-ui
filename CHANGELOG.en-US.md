@@ -7,6 +7,7 @@
 - Fix `n-tree` unexposed line color variable `--n-line-color`, closes [#5339](https://github.com/tusen-ai/naive-ui/issues/5339).
 - Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 - Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
+- Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
 
 ### Features
 

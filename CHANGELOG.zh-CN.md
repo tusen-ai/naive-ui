@@ -7,6 +7,7 @@
 - 修复 `n-tree` 未暴露连接线颜色变量 `--n-line-color`，关闭[#5339](https://github.com/tusen-ai/naive-ui/issues/5339)
 - 修复 `n-tree` 在 `disabled` 的情况下不显示选中节点的样式
 - 修复 `n-tree` `virtual-scroll` 空数据占位符丢失
+- 修复 `n-watermark` 组件中的 `content` 属性为空时，无法清空水印内容
 
 ### Features
 
