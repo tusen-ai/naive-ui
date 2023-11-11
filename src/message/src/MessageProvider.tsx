@@ -77,6 +77,7 @@ export const messageProviderProps = {
     default: 'top'
   },
   closable: Boolean,
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
@@ -173,7 +174,8 @@ export default defineComponent({
             <div
               class={[
                 `${this.mergedClsPrefix}-message-container`,
-                `${this.mergedClsPrefix}-message-container--${this.placement}`
+                `${this.mergedClsPrefix}-message-container--${this.placement}`,
+                this.containerClass
               ]}
               key="message-container"
               style={this.containerStyle}
