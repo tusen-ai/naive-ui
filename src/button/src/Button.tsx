@@ -654,7 +654,7 @@ type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 export default Button
 
 // XButton is for tsx type checking
-// It's not compitable with render function `h`
+// It's not compatible with render function `h`
 // Currently we don't expose it as public
 // If there's any issue about this, we may expose it
 // Since most people use template, the type checking phase doesn't work as tsx
