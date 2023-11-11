@@ -2,6 +2,7 @@ import { computed, type ComputedRef } from 'vue'
 import { type CheckStrategy } from 'treemate'
 import { isBrowser } from '../../_utils'
 import { type Key, type TmNode, type TreeOption } from './interface'
+import { happensIn } from 'seemly'
 
 export function useMergedCheckStrategy (props: {
   leafOnly: boolean
@@ -151,5 +152,17 @@ export function filterTree (
     filteredTree,
     highlightKeySet,
     expandedKeys
+  }
+}
+
+export function treeGetClickTarget (
+  e: MouseEvent
+): 'checkbox' | 'switcher' | 'node' {
+  if (happensIn(e, 'checkbox')) {
+    return 'checkbox'
+  } else if (happensIn(e, 'switcher')) {
+    return 'switcher'
+  } else {
+    return 'node'
   }
 }
