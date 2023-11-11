@@ -9,6 +9,7 @@
 - Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
 - Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
 - Fix `n-input` not display vertical scrollbar when `type` is `textarea` and the inline theme is disabled, closes [#5418](https://github.com/tusen-ai/naive-ui/issues/5418).
+- Fix if `inline-theme-disabled` is set, custom color whose params include decimal won't work in `n-tag`, `n-avatar`, `n-badge`, `n-button`, `n-rate`.
 
 ### Features
 
