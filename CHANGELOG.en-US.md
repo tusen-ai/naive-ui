@@ -24,6 +24,7 @@
 - `n-descriptions` adds `content-class` and `label-class` props.
 - `n-upload` adds `file-list-class` and `trigger-class` props.
 - `n-dynamic-input` adds `input-class` and `tag-class` props.
+- `n-dynamic-input` adds `item-class` prop.
 
 ## 2.35.0
 
@@ -69,8 +70,8 @@
 - `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
 - `n-select` adds `focusInput` `blurInput` methods.
 - `n-tree-select` adds `focusInput` `blurInput` methods.
-- `n-image-group` adds `on-preview-prev` `on-preview-next` prop
-- `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
+- `n-image-group` adds `on-preview-prev` `on-preview-next` prop.
+- `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554).
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 - `n-input-number` export the `select` method.
 - `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row, closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
