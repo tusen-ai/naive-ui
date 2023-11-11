@@ -21,7 +21,7 @@
 - `n-loading-bar` adds `container-class` prop.
 - `n-thing` adds `content-class` and `description-class` props.
 - `n-card` adds `content-class`, `footer-class`, `header-class` and `header-extra-class` props.
-- 
+- `n-descriptions` adds `content-class` and `label-class` props.
 ## 2.35.0
 
 ### Breaking Changes
