@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- Fix `n-tree` unexposed line color variable `--n-line-color`, closes [#5339](https://github.com/tusen-ai/naive-ui/issues/5339).
+
 ### Features
 
 - `n-tree` adds `treeGetClickTarget` method to get click target of node click event, closes [#5375](https://github.com/tusen-ai/naive-ui/issues/5375).
