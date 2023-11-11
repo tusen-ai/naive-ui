@@ -108,3 +108,7 @@ checkbox-placement.vue
 | scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | 2.32.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.1 |
+
+### Others
+
+1. `treeGetClickTarget: (e: MouseEvent) => ('checkbox' | 'switcher' | 'node')`: Get click target of a node click event. It can be used in `nodeProps.onClick`.

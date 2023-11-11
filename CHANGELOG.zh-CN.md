@@ -6,6 +6,10 @@
 
 - 修复 `n-tree` 未暴露连接线颜色变量 `--n-line-color`，关闭[#5339](https://github.com/tusen-ai/naive-ui/issues/5339)
 
+### Features
+
+- `n-tree` 导出 `treeGetClickTarget` 函数，判断点击位置，关闭 [#5375](https://github.com/tusen-ai/naive-ui/issues/5375)
+
 ## 2.35.0
 
 ### Breaking Changes
