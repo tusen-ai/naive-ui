@@ -36,7 +36,7 @@ download.vue
 | directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | 2.28.3 |
 | directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | 2.28.3 |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
-| file-list-class | `string` | `undefined` | The class of file list area |  |
+| file-list-class | `string` | `undefined` | The class of file list area | NEXT_VERSION |
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
@@ -58,7 +58,7 @@ download.vue
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |  |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |  |
 | show-trigger | `boolean` | `true` | Show upload trigger. | 2.21.5 |
-| trigger-class | `string` | `undefined` | Class of trigger area. | 2.29.1 |
+| trigger-class | `string` | `undefined` | Class of trigger area. | NEXT_VERSION |
 | trigger-style | `Object \| string` | `undefined` | Style of trigger area. | 2.29.1 |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
