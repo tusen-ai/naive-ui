@@ -16,6 +16,7 @@
 - `n-layout` adds `content-class`, `collapsed-trigger-class` and `trigger-class` props.
 - `n-spin` adds `content-class` and `content-style` props.
 - `n-popover` adds `arrow-class`, `arrow-wrapper-class`, `arrow-wrapper-style`, `content-class`, `footer-class` and `header-class` props.
+- `n-notification` adds `container-class` prop.
 
 ## 2.35.0
 
