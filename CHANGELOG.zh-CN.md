@@ -17,6 +17,7 @@
 - `n-spin` 新增 `content-class`、`content-style` 属性
 - `n-popover` 新增 `arrow-class`、`arrow-wraperr-class`、`arrow-wraperr-style`、`content-class`、`footer-class`、`header-class` 属性
 - `n-notification` 新增 `container-class` 属性
+- `n-message` 新增 `container-class` 属性
 
 ## 2.35.0
 
