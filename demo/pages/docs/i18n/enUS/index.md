@@ -44,33 +44,33 @@ PRs are welcomed for locales that are not supported yet!
 
 The following list is sorted by 'Config' column.
 
-| Language                  | Config | Date config | Version      |
-| ------------------------- | ------ | ----------- | ------------ |
-| Arabic (العربية)          | arDZ   | dateArDZ    | 2.34.0       |
-| German (Germany)          | deDE   | dateDeDE    |              |
-| English (British)         | enGB   | dateEnGB    | 2.25.1       |
-| English                   | enUS   | dateEnUS    |              |
-| Esperanto                 | eo     | dateEo      | 2.25.2       |
-| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2       |
-| Persian                   | faIR   | dateFaIR    | 2.34.4       |
-| French                    | frFR   | dateFrFR    |              |
-| Bahasa Indonesia          | idID   | dateIdID    |              |
-| Italiano                  | itIT   | dateItIT    | 2.24.2       |
-| Japanese                  | jaJP   | dateJaJP    |              |
-| Korean (South Korea)      | koKR   | dateKoKR    | 2.28.1       |
-| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |              |
-| Dutch (Netherlands)       | nlNL   | dateNlNL    | 2.29.0       |
-| Polish (Poland)           | plPL   | datePlPL    | 2.25.2       |
-| Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1       |
-| Russian                   | ruRU   | dateRuRU    |              |
-| Slovak                    | skSK   | dateSkSK    | 2.25.3       |
-| Swedish                   | svSE   | dateSvSE    | NEXT_VERSION |
-| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0       |
-| Turkish                   | trTR   | dateTrTR    | 2.34.0       |
-| Ukrainian                 | ukUA   | dateUkUA    |              |
-| Vietnamese (Vietnam)      | viVN   | dateViVN    | 2.30.7       |
-| Chinese (Simplified)      | zhCN   | dateZhCN    |              |
-| Chinese (Traditional)     | zhTW   | dateZhTW    |              |
+| Language                  | Config | Date config | Version |
+| ------------------------- | ------ | ----------- | ------- |
+| Arabic (العربية)          | arDZ   | dateArDZ    | 2.34.0  |
+| German (Germany)          | deDE   | dateDeDE    |         |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
+| English                   | enUS   | dateEnUS    |         |
+| Esperanto                 | eo     | dateEo      | 2.25.2  |
+| Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| Persian                   | faIR   | dateFaIR    | 2.34.4  |
+| French                    | frFR   | dateFrFR    |         |
+| Bahasa Indonesia          | idID   | dateIdID    |         |
+| Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| Japanese                  | jaJP   | dateJaJP    |         |
+| Korean (South Korea)      | koKR   | dateKoKR    | 2.28.1  |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |         |
+| Dutch (Netherlands)       | nlNL   | dateNlNL    | 2.29.0  |
+| Polish (Poland)           | plPL   | datePlPL    | 2.25.2  |
+| Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1  |
+| Russian                   | ruRU   | dateRuRU    |         |
+| Slovak                    | skSK   | dateSkSK    | 2.25.3  |
+| Swedish                   | svSE   | dateSvSE    | 2.35.0  |
+| Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
+| Turkish                   | trTR   | dateTrTR    | 2.34.0  |
+| Ukrainian                 | ukUA   | dateUkUA    |         |
+| Vietnamese (Vietnam)      | viVN   | dateViVN    | 2.30.7  |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |         |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |         |
 
 ## Customize the existing locale
 

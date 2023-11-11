@@ -1,7 +1,8 @@
 import { defineComponent, type PropType, type VNodeChild, h } from 'vue'
 import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
-import { NEllipsis } from '../../../ellipsis'
+import NEllipsis from '../../../ellipsis/src/Ellipsis'
+import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'
 import type { DataTableTheme } from '../../styles'
 import type {
   TableBaseColumn,
@@ -55,6 +56,17 @@ export default defineComponent({
     if (ellipsis) {
       if (typeof ellipsis === 'object') {
         const { mergedTheme } = this
+        if (column.ellipsisComponent === 'performant-ellipsis') {
+          return (
+            <NPerformantEllipsis
+              {...ellipsis}
+              theme={mergedTheme.peers.Ellipsis}
+              themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+            >
+              {{ default: () => cell }}
+            </NPerformantEllipsis>
+          )
+        }
         return (
           <NEllipsis
             {...ellipsis}
