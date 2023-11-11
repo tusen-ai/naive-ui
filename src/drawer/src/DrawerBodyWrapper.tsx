@@ -63,7 +63,7 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
-    maxWitdh: Number,
+    maxWidth: Number,
     maxHeight: Number,
     minWidth: Number,
     minHeight: Number,
@@ -127,8 +127,8 @@ export default defineComponent({
     const { doUpdateHeight, doUpdateWidth } = NDrawer
 
     const regulateWidth = (size: number): number => {
-      const { maxWitdh } = props
-      if (maxWitdh && size > maxWitdh) return maxWitdh
+      const { maxWidth } = props
+      if (maxWidth && size > maxWidth) return maxWidth
       const { minWidth } = props
       if (minWidth && size < minWidth) return minWidth
       return size
