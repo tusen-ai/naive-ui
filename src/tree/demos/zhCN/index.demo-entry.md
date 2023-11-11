@@ -90,7 +90,7 @@ expand-debug.vue
 | on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | 节点勾选项发生变化时的回调函数 | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | 节点展开项发生变化时的回调函数 | `meta` 2.34.0 |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` 2.34.0 |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` 2.34.0 |
 
 ### TreeOption Properties
 
