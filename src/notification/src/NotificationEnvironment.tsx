@@ -155,7 +155,7 @@ export const NotificationEnvironment = defineComponent({
       <Transition
         name="notification-transition"
         appear={true}
-        // convert to any since Element is not compitable with HTMLElement
+        // convert to any since Element is not compatible with HTMLElement
         onBeforeEnter={this.handleBeforeEnter as any}
         onAfterEnter={this.handleAfterEnter as any}
         onBeforeLeave={this.handleBeforeLeave as any}
