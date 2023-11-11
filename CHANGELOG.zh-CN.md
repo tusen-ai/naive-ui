@@ -18,6 +18,7 @@
 - `n-popover` 新增 `arrow-class`、`arrow-wraperr-class`、`arrow-wraperr-style`、`content-class`、`footer-class`、`header-class` 属性
 - `n-notification` 新增 `container-class` 属性
 - `n-message` 新增 `container-class` 属性
+- `n-loading-bar` 新增 `container-class` 属性
 
 ## 2.35.0
 
