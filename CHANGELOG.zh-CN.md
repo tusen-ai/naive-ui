@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-tree` 未暴露连接线颜色变量 `--n-line-color`，关闭[#5339](https://github.com/tusen-ai/naive-ui/issues/5339)
+- 修复 `n-tree` 在 `disabled` 的情况下不显示选中节点的样式
 
 ### Features
 

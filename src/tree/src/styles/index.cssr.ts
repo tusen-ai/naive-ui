@@ -98,10 +98,10 @@ export default cB('tree', `
           cB('tree-node-content', `
             background: var(--n-node-color-hover);
           `)
-        ]),
-        cM('selected', [
-          cB('tree-node-content', 'background: var(--n-node-color-active);')
         ])
+      ]),
+      cM('selected', [
+        cB('tree-node-content', 'background: var(--n-node-color-active);')
       ])
     ])
   ]),
@@ -116,9 +116,9 @@ export default cB('tree', `
           cNotM('selected', [
             c('&:active', 'background: var(--n-node-color-pressed);')
           ])
-        ]),
-        cM('selected', 'background: var(--n-node-color-active);')
+        ])
       ]),
+      cM('selected', 'background: var(--n-node-color-active);'),
       cM('disabled', `
         cursor: not-allowed;
       `)

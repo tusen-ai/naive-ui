@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-tree` unexposed line color variable `--n-line-color`, closes [#5339](https://github.com/tusen-ai/naive-ui/issues/5339).
+- Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 
 ### Features
 
