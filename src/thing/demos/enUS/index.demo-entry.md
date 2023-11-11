@@ -19,10 +19,10 @@ indent.vue
 | --- | --- | --- | --- | --- |
 | content-indented | `boolean` | `false` | Whether to enable content indentation. |
 | content | `string` | `undefined` | Content area. |
-| content-class | `string` | `undefined` | Content area class. | 2.32.2 |
+| content-class | `string` | `undefined` | Content area class. | NEXT_VERSION |
 | content-style | `string \| Object` | `undefined` | Content area style. | 2.32.2 |
 | description | `string` | `undefined` | Description information. |
-| description-class | `string` | `undefined` | Description area class. | 2.32.2 |
+| description-class | `string` | `undefined` | Description area class. | NEXT_VERSION |
 | description-style | `string \| Object` | `undefined` | Description area style. | 2.32.2 |
 | title-extra | `string` | `undefined` | Additional information for the title. |
 | title | `string` | `undefined` | Title information. |
