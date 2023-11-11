@@ -19,6 +19,7 @@
 - `n-notification` adds `container-class` prop.
 - `n-message` adds `container-class` prop.
 - `n-loading-bar` adds `container-class` prop.
+- `n-thing` adds `content-class` and `description-class` props.
 
 ## 2.35.0
 
