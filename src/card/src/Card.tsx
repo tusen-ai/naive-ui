@@ -24,9 +24,13 @@ export interface CardSegmented {
 
 export const cardBaseProps = {
   title: String,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerClass: String,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerExtraClass: String,
   headerExtraStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
   embedded: Boolean,
   segmented: {
@@ -172,6 +176,10 @@ export default defineComponent({
   },
   render () {
     const {
+      footerStyle,
+      headerExtraClass,
+      headerClass,
+      contentClass,
       segmented,
       bordered,
       hoverable,
@@ -224,7 +232,7 @@ export default defineComponent({
         {resolveWrappedSlot($slots.header, (children) => {
           return children || this.title || this.closable ? (
             <div
-              class={`${mergedClsPrefix}-card-header`}
+              class={[`${mergedClsPrefix}-card-header`, headerClass]}
               style={this.headerStyle}
             >
               <div
@@ -238,7 +246,10 @@ export default defineComponent({
                 (children) =>
                   children && (
                     <div
-                      class={`${mergedClsPrefix}-card-header__extra`}
+                      class={[
+                        `${mergedClsPrefix}-card-header__extra`,
+                        headerExtraClass
+                      ]}
                       style={this.headerExtraStyle}
                     >
                       {children}
@@ -261,7 +272,7 @@ export default defineComponent({
           (children) =>
             children && (
               <div
-                class={`${mergedClsPrefix}-card__content`}
+                class={[`${mergedClsPrefix}-card__content`, contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
@@ -274,7 +285,7 @@ export default defineComponent({
           (children) =>
             children && [
               <div
-                class={`${mergedClsPrefix}-card__footer`}
+                class={[`${mergedClsPrefix}-card__footer`, footerStyle]}
                 style={this.footerStyle}
                 role="none"
               >

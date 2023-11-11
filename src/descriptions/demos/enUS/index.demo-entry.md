@@ -23,9 +23,11 @@ size.vue
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to display border. |
 | column | `number` | `3` | Total columns. |
+| content-class | `string` | `undefined` | Class of the item content. |
 | content-style | `Object \| string` | `undefined` | Style of the item content. |
 | label-align | `'center' \| 'left' \| 'right'` | `'left'` | Label align. |
 | label-placement | `'top' \| 'left'` | `'top'` | Label placement. |
+| label-class | `string` | `undefined` | Class of the item label. |
 | label-style | `Object \| string` | `undefined` | Style of the item label. |
 | separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and 　`bordered` is `false`.　 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |
@@ -35,8 +37,10 @@ size.vue
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | Class of the item content. |
 | content-style | `Object \| string` | `undefined` | Style of the item content. |
 | label | `string` | `undefined` | Label of the item. |
+| label-class | `string` | `undefined` | Class of the item label. |
 | label-style | `Object \| string` | `undefined` | Style of the item label. |
 | span | `number` | `1` | Column span of the item. |
 

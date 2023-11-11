@@ -39,6 +39,7 @@ export const layoutSiderProps = {
     type: [Number, String] as PropType<string | number>,
     default: 272
   },
+  contentClass: String,
   contentStyle: {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
@@ -68,7 +69,9 @@ export const layoutSiderProps = {
   scrollbarProps: Object as PropType<
   Partial<ScrollbarProps> & { style: CSSProperties }
   >,
+  triggerClass: String,
   triggerStyle: [String, Object] as PropType<string | CSSProperties>,
+  collapsedTriggerClass: String,
   collapsedTriggerStyle: [String, Object] as PropType<string | CSSProperties>,
   'onUpdate:collapsed': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -307,6 +310,7 @@ export default defineComponent({
             ref="scrollbarInstRef"
             style={this.scrollContainerStyle}
             contentStyle={this.contentStyle}
+            contentClass={this.contentClass}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
             // here is a hack, since in light theme the scrollbar color is dark,
@@ -324,7 +328,10 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div
-            class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            class={[
+              `${mergedClsPrefix}-layout-sider-scroll-container`,
+              this.contentClass
+            ]}
             onScroll={this.handleNativeElScroll}
             style={[
               this.scrollContainerStyle,
@@ -342,6 +349,9 @@ export default defineComponent({
           showTrigger === 'bar' ? (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
+              class={
+                mergedCollapsed ? this.collapsedTriggerClass : this.triggerClass
+              }
               style={
                 mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
               }
@@ -350,6 +360,9 @@ export default defineComponent({
           ) : (
             <ToggleButton
               clsPrefix={mergedClsPrefix}
+              class={
+                mergedCollapsed ? this.collapsedTriggerClass : this.triggerClass
+              }
               style={
                 mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
               }

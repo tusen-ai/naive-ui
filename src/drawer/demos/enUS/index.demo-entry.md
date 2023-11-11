@@ -34,10 +34,10 @@ resizable.vue
 | height | `number \| string` | `undefined` | Works when placement is `top` and `bottom`. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |  |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
-| max-width | `number` | `undefined` | Max width of draggable drawer. | NEXT_VERSION |
-| max-height | `number` | `undefined` | Max height of draggable drawer. | NEXT_VERSION |
-| min-width | `number` | `undefined` | Min width of draggable drawer. | NEXT_VERSION |
-| min-height | `number` | `undefined` | Max height of draggable drawer. | NEXT_VERSION |
+| max-width | `number` | `undefined` | Max width of draggable drawer. | 2.35.0 |
+| max-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
+| min-width | `number` | `undefined` | Min width of draggable drawer. | 2.35.0 |
+| min-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | resizable | `boolean` | `false` | Whether to resize the width / height of drawer. | 2.31.0 |
 | scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |

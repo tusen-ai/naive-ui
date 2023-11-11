@@ -29,6 +29,7 @@ export const layoutProps = {
   },
   scrollbarProps: Object as PropType<Partial<ScrollbarProps>>,
   onScroll: Function as PropType<(e: Event) => void>,
+  contentClass: String,
   contentStyle: {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
@@ -160,7 +161,10 @@ export function createLayoutComponent (isContent: boolean) {
           {this.nativeScrollbar ? (
             <div
               ref="scrollableElRef"
-              class={`${mergedClsPrefix}-layout-scroll-container`}
+              class={[
+                `${mergedClsPrefix}-layout-scroll-container`,
+                this.contentClass
+              ]}
               style={[this.contentStyle, hasSiderStyle] as any}
               onScroll={this.handleNativeElScroll}
             >
@@ -173,6 +177,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollbarInstRef"
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+              contentClass={this.contentClass}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
               {this.$slots}
