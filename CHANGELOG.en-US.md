@@ -12,6 +12,7 @@
 ### Features
 
 - `n-tree` adds `treeGetClickTarget` method to get click target of node click event, closes [#5375](https://github.com/tusen-ai/naive-ui/issues/5375).
+- `n-space` adds `item-class` prop.
 
 ## 2.35.0
 
