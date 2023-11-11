@@ -22,6 +22,7 @@
 - `n-thing` 新增 `content-class` 和 `description-class` 属性
 - `n-card` 新增 `content-class`、`footer-class`、`header-class` 和 `header-extra-class` 属性
 - `n-descriptions` 新增 `content-class` 和 `label-class` 属性
+- `n-upload` 新增 `file-list-class` 和 `trigger-class` 属性
 
 ## 2.35.0
 
