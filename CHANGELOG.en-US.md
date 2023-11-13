@@ -8,6 +8,7 @@
 - Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 - Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
 - Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
+- Fix `n-tree` use `render-switcher-icon` prop to customize switcher icon will cause node selection, closes [#5380](https://github.com/tusen-ai/naive-ui/issues/5380)
 
 ### Features
 
