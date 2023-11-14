@@ -96,7 +96,9 @@ export const sliderProps = {
   >,
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<(value: number & number[]) => void>
-  >
+  >,
+  onDragstart: [Function] as PropType<() => void>,
+  onDragend: [Function] as PropType<() => void>
 } as const
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
@@ -466,6 +468,7 @@ export default defineComponent({
     function startDragging (): void {
       if (!draggingRef.value) {
         draggingRef.value = true
+        if (props.onDragstart) call(props.onDragstart)
         on('touchend', document, handleMouseUp)
         on('mouseup', document, handleMouseUp)
         on('touchmove', document, handleMouseMove)
@@ -475,6 +478,7 @@ export default defineComponent({
     function stopDragging (): void {
       if (draggingRef.value) {
         draggingRef.value = false
+        if (props.onDragend) call(props.onDragend)
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
