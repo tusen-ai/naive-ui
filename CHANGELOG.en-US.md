@@ -8,6 +8,7 @@
 - Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 - Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
 - Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
+- Fix `n-radio-button` css var `buttonColor` not working.
 
 ### Features
 
