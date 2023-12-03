@@ -534,6 +534,10 @@ export const enComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -911,6 +915,10 @@ export const zhComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/zhCN/index.demo-entry.md')
   }
 ]
 

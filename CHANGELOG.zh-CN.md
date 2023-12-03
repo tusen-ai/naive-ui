@@ -36,6 +36,7 @@
 - `n-equation` 导出 `EquationProps` 类型
 - `n-popselect` 新增 `header` 插槽
 - `n-tree-select` 新增 `watch-props` 属性
+- 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
 
 ## 2.35.0
 
