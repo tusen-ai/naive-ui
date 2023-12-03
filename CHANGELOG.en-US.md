@@ -35,6 +35,7 @@
 - `n-dialog` adds `close` slot.
 - `n-equation` export the `EquationProps` type.
 - `n-popselect` adds `header` slot.
+- `n-tree-select` adds `watch-props` prop.
 
 ## 2.35.0
 

@@ -35,6 +35,7 @@
 - `n-dialog` 新增 `close` 插槽
 - `n-equation` 导出 `EquationProps` 类型
 - `n-popselect` 新增 `header` 插槽
+- `n-tree-select` 新增 `watch-props` 属性
 
 ## 2.35.0
 
