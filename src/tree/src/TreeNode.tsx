@@ -77,8 +77,7 @@ const TreeNode = defineComponent({
       contentElRef.value = contentInstRef.value!.$el as HTMLElement
     })
 
-    function handleSwitcherClick (e?: MouseEvent): void {
-      e?.stopPropagation()
+    function handleSwitcherClick (): void {
       const { tmNode } = props
       if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
         if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
