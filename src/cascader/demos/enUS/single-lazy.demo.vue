@@ -12,7 +12,7 @@
     </n-space>
     <n-cascader
       v-model:value="value"
-      placeholder="没啥用的值"
+      placeholder="Meaningless values"
       :options="options"
       :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
       :show-path="showPath"

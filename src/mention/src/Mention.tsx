@@ -164,7 +164,7 @@ export default defineComponent({
       SelectGroupOption,
       SelectIgnoredOption
       // We need to cast filteredOptionsRef's type since the render function
-      // is not compitable
+      // is not compatible
       // MentionOption { value: string, render?: (value: string) => VNodeChild }
       // SelectOption { value: string | number, render?: (value: string | number) => VNodeChild }
       // The 2 types are not compatible since `render`s are not compatible
