@@ -18,8 +18,8 @@ delay.vue
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- | --- |
-| content-class | `string` | `undefined` | Content Class of the spin. | NEXT |
-| content-style | `string \| Object` | `undefined` | Content style of the spin. | NEXT |
+| content-class | `string` | `undefined` | Content Class of the spin. | NEXT_VERSION |
+| content-style | `string \| Object` | `undefined` | Content style of the spin. | NEXT_VERSION |
 | description | `string` | `undefined` | Description of the spin. |
 | rotate | `boolean` | `true` | Specify whether icon rotates, only working for custom icon. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Size of the spin. |
