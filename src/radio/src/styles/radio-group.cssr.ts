@@ -56,6 +56,7 @@ export default cB('radio-group', `
       opacity .3s var(--n-bezier),
       border-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
+    background: var(--n-button-color);
     color: var(--n-button-text-color);
     border-top: 1px solid var(--n-button-border-color);
     border-bottom: 1px solid var(--n-button-border-color);
