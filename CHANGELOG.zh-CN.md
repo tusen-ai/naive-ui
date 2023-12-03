@@ -8,6 +8,7 @@
 - 修复 `n-tree` 在 `disabled` 的情况下不显示选中节点的样式
 - 修复 `n-tree` `virtual-scroll` 空数据占位符丢失
 - 修复 `n-watermark` 组件中的 `content` 属性为空时，无法清空水印内容
+- 修复 `n-input` 当 `type` 为 `textarea` 且禁用 inline 主题时不显示纵向滚动条，关闭 [#5418](https://github.com/tusen-ai/naive-ui/issues/5418)
 
 ### Features
 
