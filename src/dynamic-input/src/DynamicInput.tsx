@@ -58,6 +58,7 @@ export const dynamicInputProps = {
     default: 'input'
   },
   keyField: String,
+  itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
   // for preset pair
   keyPlaceholder: {
@@ -303,6 +304,7 @@ export default defineComponent({
   render () {
     const {
       $slots,
+      itemClass,
       buttonSize,
       mergedClsPrefix,
       mergedValue,
@@ -361,7 +363,7 @@ export default defineComponent({
             <div
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
-              class={`${mergedClsPrefix}-dynamic-input-item`}
+              class={[`${mergedClsPrefix}-dynamic-input-item`, itemClass]}
               style={itemStyle}
             >
               {resolveSlotWithProps(

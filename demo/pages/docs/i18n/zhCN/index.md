@@ -44,33 +44,33 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 
 以下列表依据“配置”列排序。
 
-| 语言               | 配置 | 日期配置 | 版本         |
-| ------------------ | ---- | -------- | ------------ |
-| 阿拉伯语           | arDZ | dateArDZ | 2.34.0       |
-| 德语               | deDE | dateDeDE |              |
-| 英国英语           | enGB | dateEnGB | 2.25.1       |
-| 英语               | enUS | dateEnUS |              |
-| 世界语             | eo   | dateEo   | 2.25.2       |
-| 西班牙语（阿根廷） | esAR | dateEsAR | 2.24.2       |
-| 波斯语             | faIR | dateFaIR | 2.34.4       |
-| 法语               | frFR | dateFrFR |              |
-| 印度尼西亚语       | idID | dateIdID |              |
-| 意大利语           | itIT | dateItIT | 2.24.2       |
-| 日语               | jaJP | dateJaJP |              |
-| 韩语               | koKR | dateKoKR | 2.28.1       |
-| 书面挪威语         | nbNO | dateNbNO |              |
-| 荷兰语（荷兰）     | nlNL | dateNlNL | 2.29.0       |
-| 波兰语（波兰）     | plPL | datePlPL | 2.25.2       |
-| 葡萄牙语 (巴西)    | ptBR | datePtBR | 2.28.1       |
-| 俄罗斯语           | ruRU | dateRuRU |              |
-| 斯洛伐克语         | skSK | dateSkSK | 2.25.3       |
-| 瑞典語             | svSE | dateSvSE | NEXT_VERSION |
-| 泰语（泰国）       | thTH | dateThTH | 2.27.0       |
-| 土耳其语           | trTR | dateTrTR | 2.34.0       |
-| 乌克兰语           | ukUA | dateUkUA |              |
-| 越南语（越南）     | viVN | dateViVN | 2.30.7       |
-| 简体中文           | zhCN | dateZhCN |              |
-| 繁体中文           | zhTW | dateZhTW |              |
+| 语言               | 配置 | 日期配置 | 版本   |
+| ------------------ | ---- | -------- | ------ |
+| 阿拉伯语           | arDZ | dateArDZ | 2.34.0 |
+| 德语               | deDE | dateDeDE |        |
+| 英国英语           | enGB | dateEnGB | 2.25.1 |
+| 英语               | enUS | dateEnUS |        |
+| 世界语             | eo   | dateEo   | 2.25.2 |
+| 西班牙语（阿根廷） | esAR | dateEsAR | 2.24.2 |
+| 波斯语             | faIR | dateFaIR | 2.34.4 |
+| 法语               | frFR | dateFrFR |        |
+| 印度尼西亚语       | idID | dateIdID |        |
+| 意大利语           | itIT | dateItIT | 2.24.2 |
+| 日语               | jaJP | dateJaJP |        |
+| 韩语               | koKR | dateKoKR | 2.28.1 |
+| 书面挪威语         | nbNO | dateNbNO |        |
+| 荷兰语（荷兰）     | nlNL | dateNlNL | 2.29.0 |
+| 波兰语（波兰）     | plPL | datePlPL | 2.25.2 |
+| 葡萄牙语 (巴西)    | ptBR | datePtBR | 2.28.1 |
+| 俄罗斯语           | ruRU | dateRuRU |        |
+| 斯洛伐克语         | skSK | dateSkSK | 2.25.3 |
+| 瑞典語             | svSE | dateSvSE | 2.35.0 |
+| 泰语（泰国）       | thTH | dateThTH | 2.27.0 |
+| 土耳其语           | trTR | dateTrTR | 2.34.0 |
+| 乌克兰语           | ukUA | dateUkUA |        |
+| 越南语（越南）     | viVN | dateViVN | 2.30.7 |
+| 简体中文           | zhCN | dateZhCN |        |
+| 繁体中文           | zhTW | dateZhTW |        |
 
 ## 在现有国际化基础上调整
 
