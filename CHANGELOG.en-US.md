@@ -27,6 +27,7 @@
 - `n-upload` adds `file-list-class` and `trigger-class` props.
 - `n-dynamic-input` adds `input-class` and `tag-class` props.
 - `n-dynamic-input` adds `item-class` prop.
+- `n-dialog` adds `close` slot.
 
 ## 2.35.0
 
