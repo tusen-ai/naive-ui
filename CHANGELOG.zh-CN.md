@@ -13,6 +13,7 @@
 - 修复 `n-radio-button` 主题变量 `buttonColor` 设置不生效
 - 修复 `n-input` 当 `type` 为 `textarea` 且禁用 inline 主题时不显示纵向滚动条，关闭 [#5418](https://github.com/tusen-ai/naive-ui/issues/5418)
 - 修复在 `inline-theme-disabled` 设定后，带小数点的自定义颜色在 `n-tag`、`n-avatar`、`n-badge`、`n-button`、`n-rate` 使用会出问题
+- 修复 `n-tabs` 在 `vertical` 模式下的边界高度不正常
 
 ### Features
 

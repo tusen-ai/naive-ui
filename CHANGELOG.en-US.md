@@ -13,6 +13,7 @@
 - Fix `n-radio-button` css var `buttonColor` not working.
 - Fix `n-input` not display vertical scrollbar when `type` is `textarea` and the inline theme is disabled, closes [#5418](https://github.com/tusen-ai/naive-ui/issues/5418).
 - Fix if `inline-theme-disabled` is set, custom color whose params include decimal won't work in `n-tag`, `n-avatar`, `n-badge`, `n-button`, `n-rate`.
+- Fix `n-tabs`'s border height in `vertical` mode.
 
 ### Features
 
