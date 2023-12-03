@@ -246,7 +246,14 @@ export const NDialog = defineComponent({
         style={cssVars as CSSProperties}
         role="dialog"
       >
-        {closable ? (
+        {this.$slots.close ? (
+          <div
+            class={`${mergedClsPrefix}-dialog__close`}
+            clsPrefix={mergedClsPrefix}
+          >
+            {this.$slots.close?.()}
+          </div>
+        ) : closable ? (
           <NBaseClose
             clsPrefix={mergedClsPrefix}
             class={`${mergedClsPrefix}-dialog__close`}

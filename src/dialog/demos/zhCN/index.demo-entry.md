@@ -161,3 +161,4 @@ focus-debug.vue
 | default | `()` | 对话框内容    |
 | header  | `()` | `header` 内容 |
 | icon    | `()` | `icon` 内容   |
+| close   | `()` | `close` 内容  |
