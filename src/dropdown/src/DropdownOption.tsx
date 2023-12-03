@@ -156,8 +156,14 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !happensIn({ target: relatedTarget }, 'dropdownOption') &&
-        !happensIn({ target: relatedTarget }, 'scrollbarRail')
+        !happensIn(
+          { target: relatedTarget, currentTarget: relatedTarget },
+          'dropdownOption'
+        ) &&
+        !happensIn(
+          { target: relatedTarget, currentTarget: relatedTarget },
+          'scrollbarRail'
+        )
       ) {
         hoverKeyRef.value = null
       }

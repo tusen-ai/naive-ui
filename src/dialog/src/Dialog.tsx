@@ -246,13 +246,19 @@ export const NDialog = defineComponent({
         style={cssVars as CSSProperties}
         role="dialog"
       >
-        {closable ? (
-          <NBaseClose
-            clsPrefix={mergedClsPrefix}
-            class={`${mergedClsPrefix}-dialog__close`}
-            onClick={this.handleCloseClick}
-          />
-        ) : null}
+        {closable
+          ? resolveWrappedSlot(this.$slots.close, (node) => {
+            return node ? (
+                <div class={`${mergedClsPrefix}-dialog__close`}>{node}</div>
+            ) : (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  class={`${mergedClsPrefix}-dialog__close`}
+                  onClick={this.handleCloseClick}
+                />
+            )
+          })
+          : null}
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}

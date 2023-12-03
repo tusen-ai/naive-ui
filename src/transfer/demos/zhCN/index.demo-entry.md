@@ -22,7 +22,7 @@ value-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| clear-text | `string` | `undefined` | 清楚按钮的文本 | NEXT_VERSION |
+| clear-text | `string` | `undefined` | 清楚按钮的文本 | 2.35.0 |
 | default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 | 2.32.0 |
 | disabled | `boolean` | `true` | 是否禁用 | 2.32.0 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 | 2.32.0，`from` 2.32.2 |
@@ -31,7 +31,7 @@ value-debug.vue
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | 自定义目标标签 | 2.32.0 |
 | render-source-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义源列表 | 2.32.0 |
 | render-target-list | `(props: { onCheck: (checkedValueList: Array<string \| number>) => void, checkedOptions: TransferOption[], pattern: string }) => VNodeChild` | `undefined` | 自定义目标列表 | 2.33.4 |
-| select-all-text | `string` | `undefined` | 全选按钮的文本 | NEXT_VERSION |
+| select-all-text | `string` | `undefined` | 全选按钮的文本 | 2.35.0 |
 | show-selected | `boolean` | `true` | 是否显示源列表中选中的项 | 2.34.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |

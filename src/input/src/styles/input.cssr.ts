@@ -148,6 +148,7 @@ export default cB('input', `
     height: var(--n-height);
     line-height: var(--n-height);
   `, [
+    c('&[type=password]::-ms-reveal', 'display: none;'),
     c('+', [
       cE('placeholder', `
         display: flex;

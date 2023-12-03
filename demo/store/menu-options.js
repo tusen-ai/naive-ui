@@ -691,6 +691,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '间距',
           enSuffix: true,
           path: '/space'
+        },
+        {
+          en: 'Split',
+          zh: '面板分割',
+          enSuffix: true,
+          path: '/split'
         }
       ]
     }),
