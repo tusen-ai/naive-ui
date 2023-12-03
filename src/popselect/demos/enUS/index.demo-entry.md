@@ -34,7 +34,8 @@ For other props, see [Popover](popover#Popover-Props)
 
 ### Popselect Slots
 
-| Name   | Parameters | Description                            | Version |
-| ------ | ---------- | -------------------------------------- | ------- |
-| action | `()`       | Options menu slot.                     | 2.22.0  |
-| empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| header | `()`       | Header menu slot.                      | NEXT_VERSION |
+| action | `()`       | Options menu slot.                     | 2.22.0       |
+| empty  | `()`       | Empty state slot for the options menu. | 2.22.0       |

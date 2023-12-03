@@ -40,10 +40,10 @@ rtl-debug.vue
 | display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |
 | height | `number \| string` | `undefined` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |  |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
-| max-width | `number` | `undefined` | 拖动时的最大宽度 | NEXT_VERSION |
-| max-height | `number` | `undefined` | 拖动时的最大高度 | NEXT_VERSION |
-| min-width | `number` | `undefined` | 拖动时的最小宽度 | NEXT_VERSION |
-| min-height | `number` | `undefined` | 拖动时的最小高度 | NEXT_VERSION |
+| max-width | `number` | `undefined` | 拖动时的最大宽度 | 2.35.0 |
+| max-height | `number` | `undefined` | 拖动时的最大高度 | 2.35.0 |
+| min-width | `number` | `undefined` | 拖动时的最小宽度 | 2.35.0 |
+| min-height | `number` | `undefined` | 拖动时的最小高度 | 2.35.0 |
 | native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |  |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |  |
 | resizable | `boolean` | `false` | 抽屉是否可以调整宽度、高度 | 2.31.0 |

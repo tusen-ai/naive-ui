@@ -457,6 +457,19 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
+        {resolveWrappedSlot(
+          $slots.header,
+          (children) =>
+            children && (
+              <div
+                class={`${clsPrefix}-base-select-menu__header`}
+                data-header
+                key="header"
+              >
+                {children}
+              </div>
+            )
+        )}
         {this.loading ? (
           <div class={`${clsPrefix}-base-select-menu__loading`}>
             <NInternalLoading clsPrefix={clsPrefix} strokeWidth={20} />
