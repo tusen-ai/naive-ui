@@ -460,16 +460,15 @@ export default defineComponent({
         {resolveWrappedSlot(
           $slots.header,
           (children) =>
-            children && [
+            children && (
               <div
                 class={`${clsPrefix}-base-select-menu__header`}
                 data-header
                 key="header"
               >
                 {children}
-              </div>,
-              <NFocusDetector onFocus={this.onTabOut} key="focus-detector" />
-            ]
+              </div>
+            )
         )}
         {this.loading ? (
           <div class={`${clsPrefix}-base-select-menu__loading`}>
