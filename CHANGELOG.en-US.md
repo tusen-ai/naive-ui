@@ -8,6 +8,7 @@
 - Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
 - Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
 - Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
+- Fix `n-input` will display the password reveal button by default when the `type` is set to `password`. Starting with Microsoft Edge browser Version 87. closes [#5384](https://github.com/tusen-ai/naive-ui/issues/5384).
 - Fix `n-radio-button` css var `buttonColor` not working.
 - Fix `n-input` not display vertical scrollbar when `type` is `textarea` and the inline theme is disabled, closes [#5418](https://github.com/tusen-ai/naive-ui/issues/5418).
 - Fix if `inline-theme-disabled` is set, custom color whose params include decimal won't work in `n-tag`, `n-avatar`, `n-badge`, `n-button`, `n-rate`.
