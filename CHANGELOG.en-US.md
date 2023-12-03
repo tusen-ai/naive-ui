@@ -33,6 +33,7 @@
 - `n-slider` adds `on-dragstart` `on-dragend` prop, closes [#5365](https://github.com/tusen-ai/naive-ui/issues/5365).
 - `n-dialog` adds `close` slot.
 - `n-equation` export the `EquationProps` type.
+- `n-popselect` adds `header` slot.
 
 ## 2.35.0
 
