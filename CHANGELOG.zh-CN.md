@@ -29,6 +29,7 @@
 - `n-upload` 新增 `file-list-class` 和 `trigger-class` 属性
 - `n-dynamic-input` 新增 `input-class` 和 `tag-class` 属性
 - `n-dynamic-input` 新增 `item-class` 属性
+- `n-slider` 新增 `on-dragstart` `on-dragend` 属性，关闭 [#5365](https://github.com/tusen-ai/naive-ui/issues/5365)
 - `n-dialog` 新增 `close` 插槽
 
 ## 2.35.0
