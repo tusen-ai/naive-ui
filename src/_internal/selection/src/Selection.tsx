@@ -45,6 +45,7 @@ export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
   blur: () => void
+  blurInput: () => void
   $el: HTMLElement
 }
 
@@ -351,7 +352,7 @@ export default defineComponent({
       if (enterTimerId !== null) window.clearTimeout(enterTimerId)
     }
     function handleMouseEnterCounter (): void {
-      if (props.disabled || props.active) return
+      if (props.active) return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
         if (selectedRef.value) {
@@ -377,8 +378,11 @@ export default defineComponent({
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
         if (!patternInputWrapperEl) return
-        patternInputWrapperEl.tabIndex =
-          props.disabled || patternInputFocusedRef.value ? -1 : 0
+        if (props.disabled) {
+          patternInputWrapperEl.removeAttribute('tabindex')
+        } else {
+          patternInputWrapperEl.tabIndex = patternInputFocusedRef.value ? -1 : 0
+        }
       })
     })
     useOnResize(selfRef, props.onResize)

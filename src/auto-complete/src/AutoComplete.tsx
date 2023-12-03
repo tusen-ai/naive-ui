@@ -51,6 +51,7 @@ import type {
   AutoCompleteOptions,
   OnUpdateValue,
   OnSelect,
+  OnSelectImpl,
   OnUpdateImpl,
   AutoCompleteOption,
   AutoCompleteInst
@@ -189,7 +190,7 @@ export default defineComponent({
     function doSelect (value: string | number): void {
       const { onSelect } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onSelect) call(onSelect, value)
+      if (onSelect) call(onSelect as OnSelectImpl, value)
       nTriggerFormInput()
       nTriggerFormChange()
     }
