@@ -9,6 +9,10 @@
 - 修复 `n-tree` `virtual-scroll` 空数据占位符丢失
 - 修复 `n-watermark` 组件中的 `content` 属性为空时，无法清空水印内容
 - 修复 `n-tree` 自定义不同的展开开关图标时会导致节点选中，关闭[#5380](https://github.com/tusen-ai/naive-ui/issues/5380)
+- 修复 `n-input` 从 Edge 浏览器 87 版本开始，`type` 为 `password` 时默认样式会多出一个显示密码按钮，关闭[#5384](https://github.com/tusen-ai/naive-ui/issues/5384)
+- 修复 `n-radio-button` 主题变量 `buttonColor` 设置不生效
+- 修复 `n-input` 当 `type` 为 `textarea` 且禁用 inline 主题时不显示纵向滚动条，关闭 [#5418](https://github.com/tusen-ai/naive-ui/issues/5418)
+- 修复在 `inline-theme-disabled` 设定后，带小数点的自定义颜色在 `n-tag`、`n-avatar`、`n-badge`、`n-button`、`n-rate` 使用会出问题
 
 ### Features
 
@@ -26,6 +30,8 @@
 - `n-upload` 新增 `file-list-class` 和 `trigger-class` 属性
 - `n-dynamic-input` 新增 `input-class` 和 `tag-class` 属性
 - `n-dynamic-input` 新增 `item-class` 属性
+- `n-slider` 新增 `on-dragstart` `on-dragend` 属性，关闭 [#5365](https://github.com/tusen-ai/naive-ui/issues/5365)
+- `n-dialog` 新增 `close` 插槽
 
 ## 2.35.0
 
