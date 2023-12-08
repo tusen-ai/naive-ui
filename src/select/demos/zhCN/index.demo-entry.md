@@ -116,11 +116,12 @@ create-debug.vue
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                | 版本   |
-| ------ | ---- | ------------------- | ------ |
-| action | `()` | 菜单操作区域的 slot |        |
-| empty  | `()` | 菜单无数据时的 slot |        |
-| arrow  | `()` | 箭头的 slot         | 2.24.2 |
+| 名称   | 参数 | 说明                | 版本         |
+| ------ | ---- | ------------------- | ------------ |
+| header | `()` | 菜单头部区域的 slot | NEXT_VERSION |
+| action | `()` | 菜单操作区域的 slot |              |
+| empty  | `()` | 菜单无数据时的 slot |              |
+| arrow  | `()` | 箭头的 slot         | 2.24.2       |
 
 ### Select Methods
 
