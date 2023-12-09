@@ -37,6 +37,7 @@
 - `n-popselect` 新增 `header` 插槽
 - `n-tree-select` 新增 `watch-props` 属性
 - 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
+- `n-date-picker` 新增 `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` 属性，关闭 [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 
 ## 2.35.0
 

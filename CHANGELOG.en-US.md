@@ -37,7 +37,7 @@
 - `n-popselect` adds `header` slot.
 - `n-tree-select` adds `watch-props` prop.
 - Adds `n-split` component, closes [#3557](https://github.com/tusen-ai/naive-ui/issues/3557).
-
+- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 
 ## 2.35.0
 
