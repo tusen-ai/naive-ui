@@ -80,7 +80,8 @@ const jaJP: NLocale = {
     placeholder: '選択してください',
     positiveText: 'OK',
     negativeText: 'キャンセル',
-    now: '現在'
+    now: '現在',
+    clear: 'クリア'
   },
   Pagination: {
     goto: 'ページジャンプ',

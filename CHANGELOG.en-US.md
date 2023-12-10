@@ -37,7 +37,7 @@
 - `n-popselect` adds `header` slot.
 - `n-tree-select` adds `watch-props` prop.
 - Adds `n-split` component, closes [#3557](https://github.com/tusen-ai/naive-ui/issues/3557).
-
+- `n-time-picker` adds `clear` `action`, closes [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
 
 ## 2.35.0
 

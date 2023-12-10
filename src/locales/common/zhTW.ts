@@ -78,7 +78,8 @@ const zhTW: NLocale = {
     placeholder: '請選擇時間',
     positiveText: '確定',
     negativeText: '取消',
-    now: '現在'
+    now: '現在',
+    clear: '清除'
   },
   Pagination: {
     goto: '跳至',

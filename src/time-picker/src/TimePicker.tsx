@@ -300,6 +300,9 @@ export default defineComponent({
     const memorizedValueRef = ref(mergedValueRef.value)
     const transitionDisabledRef = ref(false)
 
+    const localizedClearRef = computed(() => {
+      return localeRef.value.clear
+    })
     const localizedNowRef = computed(() => {
       return localeRef.value.now
     })
@@ -457,6 +460,15 @@ export default defineComponent({
       props.onClear?.()
     }
     function handleFocusDetectorFocus (): void {
+      closePanel({
+        returnFocus: true
+      })
+    }
+
+    // 清除选中时间
+    function handleClearSelectedDateTime (): void {
+      doUpdateValue(null)
+      deriveInputValue(null)
       closePanel({
         returnFocus: true
       })
@@ -807,6 +819,7 @@ export default defineComponent({
       panelInstRef,
       adjustedTo: useAdjustedTo(props),
       mergedShow: mergedShowRef,
+      localizedClear: localizedClearRef,
       localizedNow: localizedNowRef,
       localizedPlaceholder: localizedPlaceholderRef,
       localizedNegativeText: localizedNegativeTextRef,
@@ -852,7 +865,8 @@ export default defineComponent({
       triggerOnRender: triggerThemeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      handleClearSelectedDateTime
     }
   },
   render () {
@@ -960,6 +974,7 @@ export default defineComponent({
                                 isSecondInvalid={this.isSecondInvalid}
                                 isSecondDisabled={this.isSecondDisabled}
                                 isValueInvalid={this.isValueInvalid}
+                                clearText={this.localizedClear}
                                 nowText={this.localizedNow}
                                 confirmText={this.localizedPositiveText}
                                 use12Hours={this.use12Hours}
@@ -971,6 +986,7 @@ export default defineComponent({
                                 onAmPmClick={this.handleAmPmClick}
                                 onNowClick={this.handleNowClick}
                                 onConfirmClick={this.handleConfirmClick}
+                                onClearClick={this.handleClearSelectedDateTime}
                                 onFocusDetectorFocus={
                                   this.handleFocusDetectorFocus
                                 }

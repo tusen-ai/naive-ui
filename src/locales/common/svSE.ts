@@ -78,7 +78,8 @@ const svSE: NLocale = {
     placeholder: 'Välj tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nu'
+    now: 'Nu',
+    clear: 'Rensa'
   },
   Pagination: {
     goto: 'Gå till',

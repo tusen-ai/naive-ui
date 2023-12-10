@@ -80,7 +80,8 @@ const eo: NLocale = {
     placeholder: 'Elekti tempon',
     positiveText: 'Bone',
     negativeText: 'Nuligi',
-    now: 'Nun'
+    now: 'Nun',
+    clear: 'Malplenigi'
   },
   Pagination: {
     goto: 'Iri al',

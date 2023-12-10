@@ -37,6 +37,7 @@
 - `n-popselect` 新增 `header` 插槽
 - `n-tree-select` 新增 `watch-props` 属性
 - 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
+- `n-time-picker` 新增 `clear` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
 
 ## 2.35.0
 

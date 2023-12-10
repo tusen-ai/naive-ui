@@ -81,7 +81,8 @@ const idID: NLocale = {
     placeholder: 'Pilih Waktu',
     positiveText: 'OK',
     negativeText: 'Batalkan',
-    now: 'Sekarang'
+    now: 'Sekarang',
+    clear: 'Bersihkan'
   },
   Pagination: {
     goto: 'Ke',

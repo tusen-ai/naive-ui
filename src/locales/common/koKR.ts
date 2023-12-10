@@ -80,7 +80,8 @@ const koKR: NLocale = {
     placeholder: '시간 선택',
     positiveText: '확인',
     negativeText: '취소',
-    now: '현재 시간'
+    now: '현재 시간',
+    clear: '지우기'
   },
   Pagination: {
     goto: '이동',
