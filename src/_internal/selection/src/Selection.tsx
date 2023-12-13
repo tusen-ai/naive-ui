@@ -378,8 +378,11 @@ export default defineComponent({
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
         if (!patternInputWrapperEl) return
-        patternInputWrapperEl.tabIndex =
-          props.disabled || patternInputFocusedRef.value ? -1 : 0
+        if (props.disabled) {
+          patternInputWrapperEl.removeAttribute('tabindex')
+        } else {
+          patternInputWrapperEl.tabIndex = patternInputFocusedRef.value ? -1 : 0
+        }
       })
     })
     useOnResize(selfRef, props.onResize)

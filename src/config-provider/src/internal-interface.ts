@@ -98,6 +98,7 @@ import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { RowTheme } from '../../legacy-grid/styles'
 import type { Katex } from './katex'
+import type { SplitTheme } from '../../split/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -181,6 +182,7 @@ export interface GlobalThemeWithoutCommon {
   Typography?: TypographyTheme
   Upload?: UploadTheme
   Watermark?: WatermarkTheme
+  Split?: SplitTheme
   Row?: RowTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme

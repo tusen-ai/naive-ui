@@ -538,6 +538,15 @@ export const enComponentRoutes = [
   {
     path: 'qrcode',
     component: () => import('../../src/qrcode/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -919,6 +928,15 @@ export const zhComponentRoutes = [
   {
     path: 'qrcode',
     component: () => import('../../src/qrcode/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/zhCN/index.demo-entry.md')
   }
 ]
 

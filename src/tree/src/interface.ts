@@ -79,6 +79,7 @@ export interface InternalDropInfo {
 export type RenderSwitcherIcon = (props: {
   expanded: boolean
   selected: boolean
+  option: TreeOption
 }) => VNodeChild
 
 export type CheckOnClick = (option: TreeOption) => boolean

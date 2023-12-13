@@ -237,6 +237,7 @@ export default cB('tabs', `
     display: flex;
     position: relative;
     min-width: 100%;
+    min-height: 100%;
     width: fit-content;
     box-sizing: border-box;
   `),

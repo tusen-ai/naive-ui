@@ -108,6 +108,7 @@ export default defineComponent({
             ])}
           >
             {{
+              header: () => this.$slots.header?.(),
               action: () => this.$slots.action?.(),
               empty: () => this.$slots.empty?.()
             }}

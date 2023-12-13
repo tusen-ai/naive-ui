@@ -64,6 +64,7 @@ The following list is sorted by 'Config' column.
 | Portuguese (Brazil)       | ptBR   | datePtBR    | 2.28.1  |
 | Russian                   | ruRU   | dateRuRU    |         |
 | Slovak                    | skSK   | dateSkSK    | 2.25.3  |
+| Swedish                   | svSE   | dateSvSE    | 2.35.0  |
 | Thai (Thailand)           | thTH   | dateThTH    | 2.27.0  |
 | Turkish                   | trTR   | dateTrTR    | 2.34.0  |
 | Ukrainian                 | ukUA   | dateUkUA    |         |

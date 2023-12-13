@@ -144,7 +144,10 @@ export const popoverBaseProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
+  arrowClass: String,
   arrowStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowWrapperClass: String,
+  arrowWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
   flip: {
     type: Boolean,
     default: true
@@ -165,8 +168,11 @@ export const popoverBaseProps = {
   zIndex: Number,
   to: useAdjustedTo.propTo,
   scrollable: Boolean,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerClass: String,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // events
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,

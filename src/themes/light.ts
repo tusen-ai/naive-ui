@@ -83,6 +83,7 @@ import { treeLight } from '../tree/styles'
 import { treeSelectLight } from '../tree-select/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
+import { splitLight } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
@@ -169,5 +170,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   TreeSelect: treeSelectLight,
   Typography: typographyLight,
   Upload: uploadLight,
-  Watermark: watermarkLight
+  Watermark: watermarkLight,
+  Split: splitLight
 }

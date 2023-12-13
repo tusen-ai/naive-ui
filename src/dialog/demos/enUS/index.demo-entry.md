@@ -160,3 +160,4 @@ All the properties can be modified dynamically.
 | default | `()`       | Dialog content.   |
 | header  | `()`       | `Header` content. |
 | icon    | `()`       | `Icon` content.   |
+| close   | `()`       | `Close` content.  |

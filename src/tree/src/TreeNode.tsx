@@ -130,8 +130,9 @@ const TreeNode = defineComponent({
       const { value: checkable } = checkableRef
       if (!checkable) return false
       const { value: checkOnClick } = checkOnClickRef
+      const { tmNode } = props
       if (typeof checkOnClick === 'boolean') {
-        return checkOnClick
+        return !tmNode.disabled && checkOnClick
       }
       return checkOnClick(props.tmNode.rawNode)
     })
@@ -423,6 +424,7 @@ const TreeNode = defineComponent({
               selected={selected}
               loading={this.loading}
               hide={tmNode.isLeaf}
+              tmNode={this.tmNode}
               indent={indent}
               onClick={this.handleSwitcherClick}
             />

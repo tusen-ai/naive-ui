@@ -88,6 +88,7 @@ export interface UploadInjection {
   listTypeRef: Ref<ListType>
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
+  fileListClassRef: Ref<string | undefined>
   fileListStyleRef: Ref<string | CSSProperties | undefined>
   mergedDisabledRef: Ref<boolean>
   maxReachedRef: Ref<boolean>
@@ -97,6 +98,7 @@ export interface UploadInjection {
   themeClassRef: undefined | Ref<string>
   mergedDirectoryDndRef: Ref<boolean>
   acceptRef: Ref<string | undefined>
+  triggerClassRef: Ref<string | undefined>
   triggerStyleRef: Ref<CSSProperties | string | undefined>
   doChange: DoChange
   onRender: undefined | (() => void)

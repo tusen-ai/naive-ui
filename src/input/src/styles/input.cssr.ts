@@ -148,6 +148,7 @@ export default cB('input', `
     height: var(--n-height);
     line-height: var(--n-height);
   `, [
+    c('&[type=password]::-ms-reveal', 'display: none;'),
     c('+', [
       cE('placeholder', `
         display: flex;
@@ -191,6 +192,7 @@ export default cB('input', `
       margin: 0;
       resize: none;
       white-space: pre-wrap;
+      scroll-padding-block-end: var(--n-padding-vertical);
     `),
     cE('textarea-mirror', `
       width: 100%;

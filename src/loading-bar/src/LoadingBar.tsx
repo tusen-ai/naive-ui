@@ -26,6 +26,7 @@ function createClassName (
 export default defineComponent({
   name: 'LoadingBar',
   props: {
+    containerClass: String,
     containerStyle: [String, Object] as PropType<string | CSSProperties>
   },
   setup () {
@@ -61,9 +62,10 @@ export default defineComponent({
       toProgress = 80,
       status: 'starting' | 'error' = 'starting'
     ): Promise<void> {
-      await init()
-      loadingRef.value = true
       startedRef.value = true
+      await init()
+      if (finishing) return
+      loadingRef.value = true
       await nextTick()
       const el = loadingBarRef.value
       if (!el) return
@@ -74,8 +76,11 @@ export default defineComponent({
       el.style.transition = ''
       el.style.maxWidth = `${toProgress}%`
     }
-    function finish (): void {
-      if (finishing || erroringRef.value || !loadingRef.value) return
+    async function finish (): Promise<void> {
+      if (finishing || erroringRef.value) return
+      if (startedRef.value) {
+        await nextTick()
+      }
       finishing = true
       const el = loadingBarRef.value
       if (!el) return
@@ -179,7 +184,8 @@ export default defineComponent({
               <div
                 class={[
                   `${mergedClsPrefix}-loading-bar-container`,
-                  this.themeClass
+                  this.themeClass,
+                  this.containerClass
                 ]}
                 style={this.containerStyle}
               >
