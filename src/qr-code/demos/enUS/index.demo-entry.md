@@ -1,4 +1,4 @@
-# QrCode
+# QR Code
 
 It is always only valid for a short time.
 
