@@ -38,6 +38,7 @@
 - `n-tree-select` 新增 `watch-props` 属性
 - 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
 - 新增 `n-qrcode` 组件，关闭 [#2535](https://github.com/tusen-ai/naive-ui/issues/2535)
+- 新增 `n-virtual-list` 组件
 
 ## 2.35.0
 

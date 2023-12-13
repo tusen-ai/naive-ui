@@ -4,14 +4,16 @@ import {
   type PropType,
   ref,
   computed,
-  type CSSProperties
+  type CSSProperties,
+  watchEffect
 } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
 import { onMounted } from 'vue'
+import { off, on } from 'evtd'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
@@ -23,11 +25,8 @@ export const splitProps = {
     type: Number,
     default: 3
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  size: {
+  disabled: Boolean,
+  defaultSize: {
     type: Number,
     default: 0.5
   },
@@ -72,13 +71,15 @@ export default defineComponent({
 
     const dividerRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
-    const currentSize = ref(props.size)
+    const currentSize = ref(props.defaultSize)
     const triggerSize = ref(0)
 
     onMounted(() => {
-      if (!dividerRef.value) return
-      const { width, height } = dividerRef.value.getBoundingClientRect()
-      triggerSize.value = props.direction === 'horizontal' ? width : height
+      watchEffect(() => {
+        if (!dividerRef.value) return
+        const { width, height } = dividerRef.value.getBoundingClientRect()
+        triggerSize.value = props.direction === 'horizontal' ? width : height
+      })
     })
 
     const firstPaneStyle = computed(() => {
@@ -101,13 +102,9 @@ export default defineComponent({
     })
 
     const resizeTriggerWrapperStyle = computed(() => {
-      return props.direction === 'horizontal'
-        ? {
-            cursor: 'col-resize'
-          }
-        : {
-            cursor: 'row-resize'
-          }
+      return {
+        cursor: props.direction === 'horizontal' ? 'col-resize' : 'row-resize'
+      }
     })
 
     const handleMouseDown = (e: MouseEvent): void => {
@@ -121,13 +118,13 @@ export default defineComponent({
         if (props.onMoving) props.onMoving(e)
       }
       const onMouseUp = (): void => {
-        document.removeEventListener(mouseMoveEvent, onMouseMove)
-        document.removeEventListener(mouseUpEvent, onMouseUp)
+        on(mouseMoveEvent, document, onMouseMove)
+        on(mouseUpEvent, document, onMouseUp)
         isDraggingRef.value = false
         if (props.onMoveEnd) props.onMoveEnd(e)
       }
-      document.addEventListener(mouseMoveEvent, onMouseMove)
-      document.addEventListener(mouseUpEvent, onMouseUp)
+      off(mouseMoveEvent, document, onMouseMove)
+      off(mouseUpEvent, document, onMouseUp)
     }
 
     const updateSize = (event: MouseEvent): void => {
@@ -173,7 +170,6 @@ export default defineComponent({
         >
           {this.$slots.first?.()}
         </div>
-
         {!this.disabled && (
           <div
             ref="divider"
@@ -181,7 +177,7 @@ export default defineComponent({
             style={this.resizeTriggerWrapperStyle}
             onMousedown={this.handleMouseDown}
           >
-            {this.$slots['resize-trigger']?.() ?? (
+            {resolveSlot(this.$slots['resize-trigger'], () => [
               <div
                 style={this.resizeTriggerStyle}
                 class={[
@@ -190,7 +186,7 @@ export default defineComponent({
                     `${this.mergedClsPrefix}-split__resize-trigger--hover`
                 ]}
               ></div>
-            )}
+            ])}
           </div>
         )}
         <div
