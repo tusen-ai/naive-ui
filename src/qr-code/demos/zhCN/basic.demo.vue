@@ -1,12 +1,12 @@
 <markdown>
-  # Basic
+# 基础用法
 
-  A basic Qrcode.
+基础二维码。
 </markdown>
 
 <template>
   <n-space vertical>
-    <n-qrcode :value="text" />
+    <n-qr-code :value="text" />
     <n-input v-model:value="text" :maxlength="60" type="text" />
   </n-space>
 </template>
@@ -16,7 +16,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const text = ref('The rain dampened the sky')
+    const text = ref('雨淋湿了天空')
     return {
       text
     }

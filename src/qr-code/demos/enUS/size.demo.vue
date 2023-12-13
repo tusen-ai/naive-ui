@@ -1,20 +1,18 @@
 <markdown>
-  # 尺寸
-
-  它就像疯狂千层饼，无论大小，都会引领你进入另一个神秘的信息空间。
+  # Size
 </markdown>
 
 <template>
   <n-space vertical>
     <n-space>
       <n-button @click="minus">
-        减 10
+        Minus 10px
       </n-button>
       <n-button @click="add">
-        加 10
+        Add 10px
       </n-button>
     </n-space>
-    <n-qrcode :value="text" :size="size" />
+    <n-qr-code :value="text" :size="size" />
   </n-space>
 </template>
 

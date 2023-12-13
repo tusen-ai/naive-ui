@@ -23,6 +23,7 @@
 
 'use strict'
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace qrcodegen {
   type bit = number
   type byte = number
@@ -143,14 +144,11 @@ namespace qrcodegen {
           bb.push(b)
         }
       }
-      assert(bb.length == dataUsedBits)
 
       // Add terminator and pad up to a byte if applicable
       const dataCapacityBits: int = QrCode.getNumDataCodewords(version, ecl) * 8
-      assert(bb.length <= dataCapacityBits)
       appendBits(0, Math.min(4, dataCapacityBits - bb.length), bb)
       appendBits(0, (8 - (bb.length % 8)) % 8, bb)
-      assert(bb.length % 8 == 0)
 
       // Pad with alternating bytes until data capacity is reached
       for (
@@ -235,7 +233,7 @@ namespace qrcodegen {
       this.drawCodewords(allCodewords)
 
       // Do masking
-      if (msk == -1) {
+      if (msk === -1) {
         // Automatically choose best mask
         let minPenalty: int = 1000000000
         for (let i = 0; i < 8; i++) {
@@ -249,7 +247,6 @@ namespace qrcodegen {
           this.applyMask(i) // Undoes the mask due to XOR
         }
       }
-      assert(msk >= 0 && msk <= 7)
       this.mask = msk
       this.applyMask(msk) // Apply the final choice of mask
       this.drawFormatBits(msk) // Overwrite old format bits
@@ -274,8 +271,8 @@ namespace qrcodegen {
     private drawFunctionPatterns (): void {
       // Draw horizontal and vertical timing patterns
       for (let i = 0; i < this.size; i++) {
-        this.setFunctionModule(6, i, i % 2 == 0)
-        this.setFunctionModule(i, 6, i % 2 == 0)
+        this.setFunctionModule(6, i, i % 2 === 0)
+        this.setFunctionModule(i, 6, i % 2 === 0)
       }
 
       // Draw 3 finder patterns (all corners except bottom right; overwrites some timing modules)
@@ -291,9 +288,9 @@ namespace qrcodegen {
           // Don't draw on the three finder corners
           if (
             !(
-              (i == 0 && j == 0) ||
-              (i == 0 && j == numAlign - 1) ||
-              (i == numAlign - 1 && j == 0)
+              (i === 0 && j === 0) ||
+              (i === 0 && j === numAlign - 1) ||
+              (i === numAlign - 1 && j === 0)
             )
           ) {
             this.drawAlignmentPattern(alignPatPos[i], alignPatPos[j])
@@ -316,7 +313,6 @@ namespace qrcodegen {
         rem = (rem << 1) ^ ((rem >>> 9) * 0x537)
       }
       const bits = ((data << 10) | rem) ^ 0x5412 // uint15
-      assert(bits >>> 15 == 0)
 
       // Draw first copy
       for (let i = 0; i <= 5; i++) {
@@ -352,7 +348,6 @@ namespace qrcodegen {
         rem = (rem << 1) ^ ((rem >>> 11) * 0x1f25)
       }
       const bits: int = (this.version << 12) | rem // uint18
-      assert(bits >>> 18 == 0)
 
       // Draw two copies
       for (let i = 0; i < 18; i++) {
@@ -373,7 +368,7 @@ namespace qrcodegen {
           const xx: int = x + dx
           const yy: int = y + dy
           if (xx >= 0 && xx < this.size && yy >= 0 && yy < this.size) {
-            this.setFunctionModule(xx, yy, dist != 2 && dist != 4)
+            this.setFunctionModule(xx, yy, dist !== 2 && dist !== 4)
           }
         }
       }
@@ -387,7 +382,7 @@ namespace qrcodegen {
           this.setFunctionModule(
             x + dx,
             y + dy,
-            Math.max(Math.abs(dx), Math.abs(dy)) != 1
+            Math.max(Math.abs(dx), Math.abs(dy)) !== 1
           )
         }
       }
@@ -407,7 +402,7 @@ namespace qrcodegen {
     private addEccAndInterleave (data: Readonly<byte[]>): byte[] {
       const ver: int = this.version
       const ecl: QrCode.Ecc = this.errorCorrectionLevel
-      if (data.length != QrCode.getNumDataCodewords(ver, ecl)) {
+      if (data.length !== QrCode.getNumDataCodewords(ver, ecl)) {
         throw new RangeError('Invalid argument')
       }
 
@@ -440,12 +435,11 @@ namespace qrcodegen {
       for (let i = 0; i < blocks[0].length; i++) {
         blocks.forEach((block, j) => {
           // Skip the padding byte in short blocks
-          if (i != shortBlockLen - blockEccLen || j >= numShortBlocks) {
+          if (i !== shortBlockLen - blockEccLen || j >= numShortBlocks) {
             result.push(block[i])
           }
         })
       }
-      assert(result.length == rawCodewords)
       return result
     }
 
@@ -453,7 +447,8 @@ namespace qrcodegen {
     // data area of this QR Code. Function modules need to be marked off before this is called.
     private drawCodewords (data: Readonly<byte[]>): void {
       if (
-        data.length != Math.floor(QrCode.getNumRawDataModules(this.version) / 8)
+        data.length !==
+        Math.floor(QrCode.getNumRawDataModules(this.version) / 8)
       ) {
         throw new RangeError('Invalid argument')
       }
@@ -461,14 +456,14 @@ namespace qrcodegen {
       // Do the funny zigzag scan
       for (let right = this.size - 1; right >= 1; right -= 2) {
         // Index of right column in each column pair
-        if (right == 6) {
+        if (right === 6) {
           right = 5
         }
         for (let vert = 0; vert < this.size; vert++) {
           // Vertical counter
           for (let j = 0; j < 2; j++) {
             const x: int = right - j // Actual x coordinate
-            const upward: boolean = ((right + 1) & 2) == 0
+            const upward: boolean = ((right + 1) & 2) === 0
             const y: int = upward ? this.size - 1 - vert : vert // Actual y coordinate
             if (!this.isFunction[y][x] && i < data.length * 8) {
               this.modules[y][x] = getBit(data[i >>> 3], 7 - (i & 7))
@@ -479,7 +474,6 @@ namespace qrcodegen {
           }
         }
       }
-      assert(i == data.length * 8)
     }
 
     // XORs the codeword modules in this QR Code with the given mask pattern.
@@ -496,28 +490,28 @@ namespace qrcodegen {
           let invert: boolean
           switch (mask) {
             case 0:
-              invert = (x + y) % 2 == 0
+              invert = (x + y) % 2 === 0
               break
             case 1:
-              invert = y % 2 == 0
+              invert = y % 2 === 0
               break
             case 2:
-              invert = x % 3 == 0
+              invert = x % 3 === 0
               break
             case 3:
-              invert = (x + y) % 3 == 0
+              invert = (x + y) % 3 === 0
               break
             case 4:
-              invert = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 == 0
+              invert = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0
               break
             case 5:
-              invert = ((x * y) % 2) + ((x * y) % 3) == 0
+              invert = ((x * y) % 2) + ((x * y) % 3) === 0
               break
             case 6:
-              invert = (((x * y) % 2) + ((x * y) % 3)) % 2 == 0
+              invert = (((x * y) % 2) + ((x * y) % 3)) % 2 === 0
               break
             case 7:
-              invert = (((x + y) % 2) + ((x * y) % 3)) % 2 == 0
+              invert = (((x + y) % 2) + ((x * y) % 3)) % 2 === 0
               break
             default:
               throw new Error('Unreachable')
@@ -540,9 +534,9 @@ namespace qrcodegen {
         let runX = 0
         const runHistory = [0, 0, 0, 0, 0, 0, 0]
         for (let x = 0; x < this.size; x++) {
-          if (this.modules[y][x] == runColor) {
+          if (this.modules[y][x] === runColor) {
             runX++
-            if (runX == 5) {
+            if (runX === 5) {
               result += QrCode.PENALTY_N1
             } else if (runX > 5) {
               result++
@@ -567,9 +561,9 @@ namespace qrcodegen {
         let runY = 0
         const runHistory = [0, 0, 0, 0, 0, 0, 0]
         for (let y = 0; y < this.size; y++) {
-          if (this.modules[y][x] == runColor) {
+          if (this.modules[y][x] === runColor) {
             runY++
-            if (runY == 5) {
+            if (runY === 5) {
               result += QrCode.PENALTY_N1
             } else if (runY > 5) {
               result++
@@ -594,9 +588,9 @@ namespace qrcodegen {
         for (let x = 0; x < this.size - 1; x++) {
           const color: boolean = this.modules[y][x]
           if (
-            color == this.modules[y][x + 1] &&
-            color == this.modules[y + 1][x] &&
-            color == this.modules[y + 1][x + 1]
+            color === this.modules[y][x + 1] &&
+            color === this.modules[y + 1][x] &&
+            color === this.modules[y + 1][x + 1]
           ) {
             result += QrCode.PENALTY_N2
           }
@@ -611,9 +605,7 @@ namespace qrcodegen {
       const total: int = this.size * this.size // Note that size is odd, so dark/total != 1/2
       // Compute the smallest integer k >= 0 such that (45-5k)% <= dark/total <= (55+5k)%
       const k: int = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1
-      assert(k >= 0 && k <= 9)
       result += k * QrCode.PENALTY_N4
-      assert(result >= 0 && result <= 2568888) // Non-tight upper bound based on default values of PENALTY_N1, ..., N4
       return result
     }
 
@@ -623,12 +615,12 @@ namespace qrcodegen {
     // Each position is in the range [0,177), and are used on both the x and y axes.
     // This could be implemented as lookup table of 40 variable-length lists of integers.
     private getAlignmentPatternPositions (): int[] {
-      if (this.version == 1) {
+      if (this.version === 1) {
         return []
       } else {
         const numAlign: int = Math.floor(this.version / 7) + 2
         const step: int =
-          this.version == 32
+          this.version === 32
             ? 26
             : Math.ceil((this.version * 4 + 4) / (numAlign * 2 - 2)) * 2
         const result: int[] = [6]
@@ -654,7 +646,6 @@ namespace qrcodegen {
           result -= 36
         }
       }
-      assert(result >= 208 && result <= 29648)
       return result
     }
 
@@ -720,7 +711,7 @@ namespace qrcodegen {
     // Returns the product of the two given field elements modulo GF(2^8/0x11D). The arguments and result
     // are unsigned 8-bit integers. This could be implemented as a lookup table of 256*256 entries of uint8.
     private static reedSolomonMultiply (x: byte, y: byte): byte {
-      if (x >>> 8 != 0 || y >>> 8 != 0) {
+      if (x >>> 8 !== 0 || y >>> 8 !== 0) {
         throw new RangeError('Byte out of range')
       }
       // Russian peasant multiplication
@@ -729,7 +720,6 @@ namespace qrcodegen {
         z = (z << 1) ^ ((z >>> 7) * 0x11d)
         z ^= ((y >>> i) & 1) * x
       }
-      assert(z >>> 8 == 0)
       return z
     }
 
@@ -737,13 +727,12 @@ namespace qrcodegen {
     // returns either 0, 1, or 2. A helper function for getPenaltyScore().
     private finderPenaltyCountPatterns (runHistory: Readonly<int[]>): int {
       const n: int = runHistory[1]
-      assert(n <= this.size * 3)
       const core: boolean =
         n > 0 &&
-        runHistory[2] == n &&
-        runHistory[3] == n * 3 &&
-        runHistory[4] == n &&
-        runHistory[5] == n
+        runHistory[2] === n &&
+        runHistory[3] === n * 3 &&
+        runHistory[4] === n &&
+        runHistory[5] === n
       return (
         (core && runHistory[0] >= n * 4 && runHistory[6] >= n ? 1 : 0) +
         (core && runHistory[6] >= n * 4 && runHistory[0] >= n ? 1 : 0)
@@ -771,7 +760,7 @@ namespace qrcodegen {
       currentRunLength: int,
       runHistory: int[]
     ): void {
-      if (runHistory[0] == 0) {
+      if (runHistory[0] === 0) {
         currentRunLength += this.size
       } // Add light border to initial run
       runHistory.pop()
@@ -844,7 +833,7 @@ namespace qrcodegen {
   // Appends the given number of low-order bits of the given value
   // to the given buffer. Requires 0 <= len <= 31 and 0 <= val < 2^len.
   function appendBits (val: int, len: int, bb: bit[]): void {
-    if (len < 0 || len > 31 || val >>> len != 0) {
+    if (len < 0 || len > 31 || val >>> len !== 0) {
       throw new RangeError('Value out of range')
     }
     for (
@@ -858,14 +847,7 @@ namespace qrcodegen {
 
   // Returns true iff the i'th bit of x is set to 1.
   function getBit (x: int, i: int): boolean {
-    return ((x >>> i) & 1) != 0
-  }
-
-  // Throws an exception if the given condition is false.
-  function assert (cond: boolean): void {
-    if (!cond) {
-      throw new Error('Assertion error')
-    }
+    return ((x >>> i) & 1) !== 0
   }
 
   /* ---- Data segment class ---- */
@@ -943,7 +925,7 @@ namespace qrcodegen {
     // The result may use various segment modes and switch modes to optimize the length of the bit stream.
     public static makeSegments (text: string): QrSegment[] {
       // Select the most efficient segment encoding automatically
-      if (text == '') {
+      if (text === '') {
         return []
       } else if (QrSegment.isNumeric(text)) {
         return [QrSegment.makeNumeric(text)]
@@ -1039,7 +1021,7 @@ namespace qrcodegen {
       str = encodeURI(str)
       const result: byte[] = []
       for (let i = 0; i < str.length; i++) {
-        if (str.charAt(i) != '%') {
+        if (str.charAt(i) !== '%') {
           result.push(str.charCodeAt(i))
         } else {
           result.push(parseInt(str.substr(i + 1, 2), 16))
@@ -1055,7 +1037,7 @@ namespace qrcodegen {
     private static readonly NUMERIC_REGEX: RegExp = /^[0-9]*$/
 
     // Describes precisely all strings that are encodable in alphanumeric mode.
-    private static readonly ALPHANUMERIC_REGEX: RegExp = /^[A-Z0-9 $%*+.\/:-]*$/
+    private static readonly ALPHANUMERIC_REGEX: RegExp = /^[A-Z0-9 $%*+./:-]*$/
 
     // The set of all legal characters in alphanumeric mode,
     // where each character value maps to the index in the string.
@@ -1066,6 +1048,7 @@ namespace qrcodegen {
 
 /* ---- Public helper enumeration ---- */
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace qrcodegen.QrCode {
   type int = number
 
@@ -1093,6 +1076,7 @@ namespace qrcodegen.QrCode {
 
 /* ---- Public helper enumeration ---- */
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace qrcodegen.QrSegment {
   type int = number
 

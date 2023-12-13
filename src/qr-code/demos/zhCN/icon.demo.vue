@@ -1,26 +1,26 @@
 <markdown>
   # 图标
 
-可以放一些代表性的 Icon
+可以放一些代表性的图标。
 </markdown>
 
 <template>
   <n-space>
-    <n-qrcode
+    <n-qr-code
       value="https://www.naiveui.com/"
-      icon="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
       error-correction-level="H"
     />
-    <n-qrcode
+    <n-qr-code
       value="https://www.naiveui.com/"
-      icon="https://www.naiveui.com/assets/naivelogo-93278402.svg"
-      icon-background-color="#ccc"
+      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      icon-background-color="#333"
       error-correction-level="H"
     />
-    <n-qrcode
+    <n-qr-code
       value="https://www.naiveui.com/"
-      icon="https://www.naiveui.com/assets/naivelogo-93278402.svg"
-      :icon-size="48"
+      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      :icon-size="32"
       error-correction-level="H"
     />
   </n-space>

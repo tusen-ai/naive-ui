@@ -53,7 +53,7 @@ import type { PopconfirmTheme } from '../../popconfirm/styles'
 import type { PopoverTheme } from '../../popover/styles'
 import type { PopselectTheme } from '../../popselect/styles'
 import type { ProgressTheme } from '../../progress/styles'
-import type { QrcodeTheme } from '../../qrcode/styles'
+import type { QrCodeTheme } from '../../qr-code/styles'
 import type { RadioTheme } from '../../radio/styles'
 import type { RateTheme } from '../../rate/styles'
 import type { ResultTheme } from '../../result/styles'
@@ -156,7 +156,7 @@ export interface GlobalThemeWithoutCommon {
   Popover?: PopoverTheme
   Popselect?: PopselectTheme
   Progress?: ProgressTheme
-  Qrcode?: QrcodeTheme
+  QrCode?: QrCodeTheme
   Radio?: RadioTheme
   Rate?: RateTheme
   Result?: ResultTheme

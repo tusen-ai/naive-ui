@@ -6,8 +6,8 @@
 
 <template>
   <n-space>
-    <n-qrcode value="https://www.naiveui.com/" color="#18a058" />
-    <n-qrcode
+    <n-qr-code value="https://www.naiveui.com/" color="#18a058" />
+    <n-qr-code
       value="https://www.naiveui.com/"
       color="#409eff"
       background-color="#F5F5F5"

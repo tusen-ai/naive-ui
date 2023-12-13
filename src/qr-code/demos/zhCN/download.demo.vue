@@ -1,15 +1,14 @@
 <markdown>
-  # Download
+  # 下载
 
-  Download two-dimensional code code implementation, you can also choose to right-click the picture save as.
-
+下载二维码的代码实现，你也可以选择右键图片另存为。
 </markdown>
 
 <template>
   <n-space vertical>
-    <n-qrcode id="qrcode" value="https://www.naiveui.com/" />
+    <n-qr-code id="qr-code" value="https://www.naiveui.com/" />
     <n-button @click="handleDownloadQRCode">
-      Download
+      下载
     </n-button>
   </n-space>
 </template>
@@ -21,7 +20,7 @@ export default defineComponent({
   setup () {
     const handleDownloadQRCode = () => {
       const canvas = document
-        .querySelector('#qrcode')
+        .querySelector('#qr-code')
         ?.querySelector<HTMLCanvasElement>('canvas')
       if (canvas) {
         const url = canvas.toDataURL()

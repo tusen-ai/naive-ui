@@ -1,20 +1,20 @@
 <markdown>
-  # Size
+  # 尺寸
 
-  It is like a crazy puff pastry, no matter how big or small, it will lead you into another mysterious information space.
+  它就像疯狂千层饼，无论大小，都会引领你进入另一个神秘的信息空间。
 </markdown>
 
 <template>
   <n-space vertical>
     <n-space>
       <n-button @click="minus">
-        Minus 10
+        减 10
       </n-button>
       <n-button @click="add">
-        Add 10
+        加 10
       </n-button>
     </n-space>
-    <n-qrcode :value="text" :size="size" />
+    <n-qr-code :value="text" :size="size" />
   </n-space>
 </template>
 

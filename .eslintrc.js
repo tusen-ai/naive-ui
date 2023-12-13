@@ -47,7 +47,6 @@ module.exports = {
         }
       },
       rules: {
-        '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/strict-boolean-expressions': 0,
         '@typescript-eslint/prefer-nullish-coalescing': 0,
         '@typescript-eslint/naming-convention': 0,
@@ -87,14 +86,6 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-floating-promises': 0
-      }
-    },
-    {
-      files: ['qrcodegen.ts'],
-      rules: {
-        '@typescript-eslint/no-namespace': 0,
-        eqeqeq: 0,
-        'no-useless-escape': 0
       }
     },
     {

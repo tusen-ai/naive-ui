@@ -1,13 +1,13 @@
 <markdown>
-  # 纠错
+  # Error correction
 
-  使用 `error-correction-level` 来设定纠错级别。
+  Use `error-correction-level` to set the error correction level.
 </markdown>
 
 <template>
   <n-space vertical>
-    <n-qrcode
-      value="犹如一位幽默风趣的魔术师，巧妙地将繁琐的信息变成了一个神秘的二维码"
+    <n-qr-code
+      value="Like a humorous magician, he skillfully turns tedious information into a mysterious QR code"
       :error-correction-level="errorCorrectionLevel"
     />
     <n-radio-group v-model:value="errorCorrectionLevel">

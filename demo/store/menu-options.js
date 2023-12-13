@@ -462,10 +462,10 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/number-animation'
         },
         {
-          en: 'QRCode',
+          en: 'QrCode',
           zh: '二维码',
           enSuffix: true,
-          path: '/qrcode'
+          path: '/qr-code'
         },
         {
           en: 'Statistic',
