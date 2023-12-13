@@ -15,14 +15,14 @@ download.vue
 
 ## API
 
-### QrCode Props
+### QR Code Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| background-color | `string` | `#FFF` | 二维码背景颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
-| color | `string` | `#000` | 二维码颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
-| error-correction-level | `L` \| `M` \| `Q` \| `H` | `M` | 二维码纠错级别 | NEXT_VERSION |
-| icon-background-color | `string` | `#FFF` | 图标背景颜色 | NEXT_VERSION |
+| background-color | `string` | `'#FFF'` | 二维码背景颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
+| color | `string` | `'#000'` | 二维码颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
+| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | 二维码纠错级别 | NEXT_VERSION |
+| icon-background-color | `string` | `'#FFF'` | 图标背景颜色 | NEXT_VERSION |
 | icon-border-radius | `number` | `4` | 图标背景圆角大小 | NEXT_VERSION |
 | icon-size | `number` | `40` | 图标大小 | NEXT_VERSION |
 | icon-src | `string` | `undefined` | 图标地址 | NEXT_VERSION |

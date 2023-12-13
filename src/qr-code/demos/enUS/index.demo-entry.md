@@ -15,15 +15,15 @@ download.vue
 
 ## API
 
-### QrCode Props
+### QR Code Props
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| background-color | `string` | `#FFF` | Qr code background color, Values need to be in `hex` format. | NEXT_VERSION |
-| color | `string` | `#000` | Qr code color, Values need to be in `hex` format. | NEXT_VERSION |
-| error-correction-level | `L` \| `M` \| `Q` \| `H` | `M` | Qr code error correction level. | NEXT_VERSION |
+| background-color | `string` | `'#FFF'` | QR code background color, Values need to be in `hex` format. | NEXT_VERSION |
+| color | `string` | `'#000'` | QR code color, Values need to be in `hex` format. | NEXT_VERSION |
+| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | QR code error correction level. | NEXT_VERSION |
 | icon-border-radius | `number` | `4` | Icon background's border-radius | NEXT_VERSION |
-| icon-background-color | `string` | `#FFF` | Icon's background color. | NEXT_VERSION |
+| icon-background-color | `string` | `'#FFF'` | Icon's background color. | NEXT_VERSION |
 | icon-size | `number` | `40` | Icon's size. | NEXT_VERSION |
 | icon-src | `string` | `undefined` | Icon's URL. | NEXT_VERSION |
 | padding | `number \| string` | `12` | Padding size of the QR Code. | NEXT_VERSION |
