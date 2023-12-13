@@ -4,15 +4,13 @@ import {
   type PropType,
   ref,
   computed,
-  type CSSProperties,
-  watchEffect
+  type CSSProperties
 } from 'vue'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
-import { onMounted } from 'vue'
 import { off, on } from 'evtd'
 
 export const splitProps = {
@@ -38,9 +36,9 @@ export const splitProps = {
     type: Number,
     default: 1
   },
-  onMoveStart: Function as PropType<(e: Event) => void>,
-  onMoving: Function as PropType<(e: Event) => void>,
-  onMoveEnd: Function as PropType<(e: Event) => void>
+  onDragStart: Function as PropType<(e: Event) => void>,
+  onDragMove: Function as PropType<(e: Event) => void>,
+  onDragEnd: Function as PropType<(e: Event) => void>
 } as const
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
@@ -69,23 +67,14 @@ export default defineComponent({
       }
     })
 
-    const dividerRef = ref<HTMLElement | null>(null)
+    const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
     const currentSize = ref(props.defaultSize)
-    const triggerSize = ref(0)
-
-    onMounted(() => {
-      watchEffect(() => {
-        if (!dividerRef.value) return
-        const { width, height } = dividerRef.value.getBoundingClientRect()
-        triggerSize.value = props.direction === 'horizontal' ? width : height
-      })
-    })
 
     const firstPaneStyle = computed(() => {
       const size = currentSize.value * 100
       return {
-        flex: `0 0 calc(${size}% - ${triggerSize.value}px)`
+        flex: `0 0 calc(${size}% - ${(props.resizeTriggerSize * size) / 100}px)`
       }
     })
 
@@ -102,51 +91,79 @@ export default defineComponent({
     })
 
     const resizeTriggerWrapperStyle = computed(() => {
+      const horizontal = props.direction === 'horizontal'
       return {
+        width: horizontal ? `${props.resizeTriggerSize}px` : '',
+        height: horizontal ? '' : `${props.resizeTriggerSize}px`,
         cursor: props.direction === 'horizontal' ? 'col-resize' : 'row-resize'
       }
     })
 
+    let offset = 0
     const handleMouseDown = (e: MouseEvent): void => {
       e.preventDefault()
       isDraggingRef.value = true
-      if (props.onMoveStart) props.onMoveStart(e)
+      if (props.onDragStart) props.onDragStart(e)
       const mouseMoveEvent = 'mousemove'
       const mouseUpEvent = 'mouseup'
       const onMouseMove = (e: MouseEvent): void => {
         updateSize(e)
-        if (props.onMoving) props.onMoving(e)
+        if (props.onDragMove) props.onDragMove(e)
       }
       const onMouseUp = (): void => {
-        on(mouseMoveEvent, document, onMouseMove)
-        on(mouseUpEvent, document, onMouseUp)
+        off(mouseMoveEvent, document, onMouseMove)
+        off(mouseUpEvent, document, onMouseUp)
         isDraggingRef.value = false
-        if (props.onMoveEnd) props.onMoveEnd(e)
+        if (props.onDragEnd) props.onDragEnd(e)
+        document.body.style.cursor = ''
       }
-      off(mouseMoveEvent, document, onMouseMove)
-      off(mouseUpEvent, document, onMouseUp)
+      document.body.style.cursor = resizeTriggerWrapperStyle.value.cursor
+      on(mouseMoveEvent, document, onMouseMove)
+      on(mouseUpEvent, document, onMouseUp)
+
+      const resizeTriggerEl = resizeTriggerElRef.value
+      if (resizeTriggerEl) {
+        const elRect = resizeTriggerEl.getBoundingClientRect()
+        if (props.direction === 'horizontal') {
+          offset = e.clientX - elRect.left
+          console.log('!!! offset', offset)
+        } else {
+          offset = elRect.top - e.clientY
+        }
+      }
+
+      updateSize(e)
     }
 
     const updateSize = (event: MouseEvent): void => {
       const parentRect =
-        dividerRef.value?.parentElement?.getBoundingClientRect()
+        resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!parentRect) return
+      console.log(
+        'event.clientX, parentRect.left, offset',
+        event.clientX - parentRect.left - offset,
+        event.clientX,
+        parentRect.left,
+        offset
+      )
       const newSize =
         props.direction === 'horizontal'
-          ? (event.clientX - parentRect.left) / parentRect.width
-          : (event.clientY - parentRect.top) / parentRect.height
+          ? (event.clientX - parentRect.left - offset) /
+            (parentRect.width - props.resizeTriggerSize)
+          : (event.clientY - parentRect.top + offset) /
+            (parentRect.height - props.resizeTriggerSize)
       currentSize.value = newSize
       if (props.min) {
         currentSize.value = Math.max(newSize, props.min)
       }
       if (props.max) {
-        currentSize.value = Math.min(newSize, props.max)
+        currentSize.value = Math.min(currentSize.value, props.max)
       }
     }
 
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      divider: dividerRef,
+      resizeTriggerElRef,
       isDragging: isDraggingRef,
       mergedClsPrefix: mergedClsPrefixRef,
       resizeTriggerWrapperStyle,
@@ -165,15 +182,15 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div
-          class={`${this.mergedClsPrefix}-split-pane`}
+          class={`${this.mergedClsPrefix}-split-pane-1`}
           style={this.firstPaneStyle}
         >
-          {this.$slots.first?.()}
+          {this.$slots[1]?.()}
         </div>
         {!this.disabled && (
           <div
-            ref="divider"
-            class={[`${this.mergedClsPrefix}-split__resize-trigger-wrapper`]}
+            ref="resizeTriggerElRef"
+            class={`${this.mergedClsPrefix}-split__resize-trigger-wrapper`}
             style={this.resizeTriggerWrapperStyle}
             onMousedown={this.handleMouseDown}
           >
@@ -189,13 +206,8 @@ export default defineComponent({
             ])}
           </div>
         )}
-        <div
-          class={[
-            `${this.mergedClsPrefix}-split-pane`,
-            `${this.mergedClsPrefix}-split-second-pane`
-          ]}
-        >
-          {this.$slots.second?.()}
+        <div class={`${this.mergedClsPrefix}-split-pane-2`}>
+          {this.$slots[2]?.()}
         </div>
       </div>
     )

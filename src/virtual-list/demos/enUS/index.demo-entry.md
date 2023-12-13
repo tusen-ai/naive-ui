@@ -38,9 +38,9 @@ keep-alive.vue
 
 ### Virtual List Methods
 
-| Name     | Type       | Description       |
-| -------- | ---------- | ----------------- |
-| scrollTo | `ScrollTo` | Scroll to a node. |
+| Name     | Type       | Description           | Version      |
+| -------- | ---------- | --------------------- | ------------ |
+| scrollTo | `ScrollTo` | Scroll to a position. | NEXT_VERSION |
 
 #### ScrollTo Type
 

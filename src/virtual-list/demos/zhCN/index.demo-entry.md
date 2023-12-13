@@ -36,6 +36,12 @@ keep-alive.vue
 | on-wheel | `(event: WheelEvent) => void` | `undefined` | 滚轮事件的回调函数 | NEXT_VERSION |
 | on-resize | `(event: ResizeObserverEntry) => void` | `undefined` | 元素大小调整的回调函数 | NEXT_VERSION |
 
+### Virtual List Methods
+
+| 名称     | 参数       | 说明           | 版本         |
+| -------- | ---------- | -------------- | ------------ |
+| scrollTo | `ScrollTo` | 滚动到某个位置 | NEXT_VERSION |
+
 #### ScrollTo Type
 
 ```ts
@@ -64,9 +70,3 @@ interface ScrollTo {
   }): void
 }
 ```
-
-### Virtual List Methods
-
-| 名称     | 参数       | 说明           |
-| -------- | ---------- | -------------- |
-| scrollTo | `ScrollTo` | 滚动到某个节点 |
