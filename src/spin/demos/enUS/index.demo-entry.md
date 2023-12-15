@@ -16,7 +16,7 @@ delay.vue
 
 ### Spin Props
 
-| Name | Type | Default | Description |
+| Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | content-class | `string` | `undefined` | Content Class of the spin. | NEXT_VERSION |
 | content-style | `string \| Object` | `undefined` | Content style of the spin. | NEXT_VERSION |

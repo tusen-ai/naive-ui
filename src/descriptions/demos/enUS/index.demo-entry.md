@@ -19,19 +19,19 @@ size.vue
 
 ### Descriptions Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| bordered | `boolean` | `false` | Whether to display border. |
-| column | `number` | `3` | Total columns. |
-| content-class | `string` | `undefined` | Class of the item content. |
-| content-style | `Object \| string` | `undefined` | Style of the item content. |
-| label-align | `'center' \| 'left' \| 'right'` | `'left'` | Label align. |
-| label-placement | `'top' \| 'left'` | `'top'` | Label placement. |
-| label-class | `string` | `undefined` | Class of the item label. |
-| label-style | `Object \| string` | `undefined` | Style of the item label. |
-| separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and 　`bordered` is `false`.　 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |
-| title | `string` | `undefined` | Title of the description. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| bordered | `boolean` | `false` | Whether to display border. |  |
+| column | `number` | `3` | Total columns. |  |
+| content-class | `string` | `undefined` | Class of the item content. | NEXT_VERSION |
+| content-style | `Object \| string` | `undefined` | Style of the item content. |  |
+| label-align | `'center' \| 'left' \| 'right'` | `'left'` | Label align. |  |
+| label-placement | `'top' \| 'left'` | `'top'` | Label placement. |  |
+| label-class | `string` | `undefined` | Class of the item label. | NEXT_VERSION |
+| label-style | `Object \| string` | `undefined` | Style of the item label. |  |
+| separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and 　`bordered` is `false`.　 |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |  |
+| title | `string` | `undefined` | Title of the description. |  |
 
 ### DescriptionItem Props
 

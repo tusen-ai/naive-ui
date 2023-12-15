@@ -31,7 +31,7 @@ on-create.vue
 | round | `boolean` | `false` | 是否圆角 |  |
 | render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | 自定义渲染 tag | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸大小 |  |
-| tag-class | `string` | `undefined` | 自定义标签的类名 |  NEXT_VERSION |
+| tag-class | `string` | `undefined` | 自定义标签的类名 | NEXT_VERSION |
 | tag-style | `string \| Object` | `undefined` | 自定义标签的样式 |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |  |
 | value | `string[] \| Array<{ label: string, value: string }>` | `undefined` | 受控模式下的值 |  |

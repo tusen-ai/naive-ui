@@ -20,17 +20,18 @@
 
 - `n-tree` adds `treeGetClickTarget` method to get click target of node click event, closes [#5375](https://github.com/tusen-ai/naive-ui/issues/5375).
 - `n-space` adds `item-class` prop.
-- `n-layout` adds `content-class`, `collapsed-trigger-class` and `trigger-class` props.
+- `n-layout` adds `content-class` prop.
+- `n-layout-sider` adds `collapsed-trigger-class` and `trigger-class` props.
 - `n-spin` adds `content-class` and `content-style` props.
 - `n-popover` adds `arrow-class`, `arrow-wrapper-class`, `arrow-wrapper-style`, `content-class`, `footer-class` and `header-class` props.
-- `n-notification` adds `container-class` prop.
-- `n-message` adds `container-class` prop.
-- `n-loading-bar` adds `container-class` prop.
+- `n-notification-provider` adds `container-class` prop.
+- `n-message-provider` adds `container-class` prop.
+- `n-loading-bar-provider` adds `container-class` prop.
 - `n-thing` adds `content-class` and `description-class` props.
 - `n-card` adds `content-class`, `footer-class`, `header-class` and `header-extra-class` props.
 - `n-descriptions` adds `content-class` and `label-class` props.
 - `n-upload` adds `file-list-class` and `trigger-class` props.
-- `n-dynamic-input` adds `input-class` and `tag-class` props.
+- `n-dynamic-tags` adds `input-class` and `tag-class` props.
 - `n-dynamic-input` adds `item-class` prop.
 - `n-slider` adds `on-dragstart` `on-dragend` prop, closes [#5365](https://github.com/tusen-ai/naive-ui/issues/5365).
 - `n-dialog` adds `close` slot.

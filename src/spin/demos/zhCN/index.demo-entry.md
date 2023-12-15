@@ -16,7 +16,7 @@ delay.vue
 
 ### Spin Props
 
-| 名称 | 类型 | 默认值 | 说明 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | content-class | `string` | `undefined` | Spin 内容的类名 | NEXT_VERSION |
 | content-style | `string \| Object` | `undefined` | Spin 内容的样式 | NEXT_VERSION |
