@@ -93,6 +93,7 @@ export default c([
   `, [
     cM('horizontal', `
       max-width: 100%;
+      width: 100%;
       display: inline-flex;
       overflow: hidden;
       padding-bottom: 0;
