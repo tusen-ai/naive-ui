@@ -126,7 +126,6 @@ export default defineComponent({
         const elRect = resizeTriggerEl.getBoundingClientRect()
         if (props.direction === 'horizontal') {
           offset = e.clientX - elRect.left
-          console.log('!!! offset', offset)
         } else {
           offset = elRect.top - e.clientY
         }
@@ -139,13 +138,6 @@ export default defineComponent({
       const parentRect =
         resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!parentRect) return
-      console.log(
-        'event.clientX, parentRect.left, offset',
-        event.clientX - parentRect.left - offset,
-        event.clientX,
-        parentRect.left,
-        offset
-      )
       const newSize =
         props.direction === 'horizontal'
           ? (event.clientX - parentRect.left - offset) /

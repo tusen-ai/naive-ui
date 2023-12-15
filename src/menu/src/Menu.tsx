@@ -9,11 +9,17 @@ import {
   type ExtractPropTypes,
   inject,
   type VNodeChild,
-  watchEffect
+  watchEffect,
+  type VNode
 } from 'vue'
 import { createTreeMate, type Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
-import type { FollowerPlacement } from 'vueuc'
+import {
+  VOverflow,
+  type VOverflowInst,
+  type FollowerPlacement,
+  VResizeObserver
+} from 'vueuc'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import type { DropdownProps } from '../../dropdown'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -38,6 +44,8 @@ import type {
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
 import style from './styles/index.cssr'
+import { NSubmenu } from './Submenu'
+import { createId } from 'seemly'
 
 export const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -480,6 +488,103 @@ export default defineComponent({
         props
       )
       : undefined
+
+    const ellipsisNodeId = createId()
+    const overflowRef = ref<VOverflowInst | null>(null)
+    const counterRef = ref<HTMLElement | null>(null)
+    let isFirstResize = true
+    const onResize = (): void => {
+      if (isFirstResize) {
+        isFirstResize = false
+      } else {
+        overflowRef.value?.sync({
+          showAllItemsBeforeCalculate: true
+        })
+      }
+    }
+    function getCounter (): HTMLElement | null {
+      return document.getElementById(ellipsisNodeId)
+    }
+    const ellipsisFromIndexRef = ref(-1)
+    function onUpdateCount (count: number): void {
+      ellipsisFromIndexRef.value = props.options.length - count
+    }
+    function onUpdateOverflow (overflow: boolean): void {
+      if (!overflow) {
+        ellipsisFromIndexRef.value = -1
+      }
+    }
+    const ellipsisOptionRef = computed<MenuOption>(() => {
+      const ellipsisFromIndex = ellipsisFromIndexRef.value
+      const option: MenuOption = {
+        children:
+          ellipsisFromIndex === -1 ? [] : props.options.slice(ellipsisFromIndex)
+      }
+      return option
+    })
+    const ellipsisTreeMateRef = computed(() => {
+      const { childrenField, disabledField, keyField } = props
+      return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
+        [ellipsisOptionRef.value],
+        {
+          getIgnored (node) {
+            return isIgnoredNode(node)
+          },
+          getChildren (node) {
+            return node[childrenField]
+          },
+          getDisabled (node) {
+            return (node as any)[disabledField]
+          },
+          getKey (node) {
+            return (node[keyField] as Key) ?? node.name
+          }
+        }
+      )
+    })
+    const emptyTmNodeRef = computed(() => {
+      return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>([
+        {}
+      ]).treeNodes[0]
+    })
+    function renderCounter (): VNodeChild {
+      if (ellipsisFromIndexRef.value === -1) {
+        // Only a placeholder
+        return (
+          <NSubmenu
+            root
+            level={0}
+            key="__ellpisisGroupPlaceholder__"
+            internalKey="__ellpisisGroupPlaceholder__"
+            title="···"
+            tmNode={emptyTmNodeRef.value}
+            domId={ellipsisNodeId}
+            isEllipsisPlaceholder
+          />
+        )
+      }
+      const tmNode = ellipsisTreeMateRef.value.treeNodes[0]
+      const activePath = activePathRef.value
+      const childActive = !!tmNode.children?.some((tmNode) => {
+        return activePath.includes(tmNode.key)
+      })
+      return (
+        <NSubmenu
+          level={0}
+          root
+          key="__ellpisisGroup__"
+          internalKey="__ellpisisGroup__"
+          title="···"
+          virtualChildActive={childActive}
+          tmNode={tmNode}
+          domId={ellipsisNodeId}
+          rawNodes={(tmNode.rawNode as MenuOption).children || []}
+          tmNodes={tmNode.children || []}
+          isEllipsisPlaceholder
+        />
+      )
+    }
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       controlledExpandedKeys: controlledExpandedKeysRef,
@@ -493,14 +598,25 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
+      overflowRef,
+      counterRef,
+      updateCounter: () => {},
+      onResize,
+      onUpdateOverflow,
+      onUpdateCount,
+      renderCounter,
+      getCounter,
       onRender: themeClassHandle?.onRender,
-      showOption
-    }
+      showOption,
+      deriveEllipsis: onResize
+    } satisfies MenuInst & Record<string, unknown>
   },
   render () {
     const { mergedClsPrefix, mode, themeClass, onRender } = this
     onRender?.()
-    return (
+    const renderMenuItemNodes = (): VNodeChild[] =>
+      this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))
+    const renderMainNode = (): VNode => (
       <div
         role={mode === 'horizontal' ? 'menubar' : 'menu'}
         class={[
@@ -511,8 +627,35 @@ export default defineComponent({
         ]}
         style={this.cssVars as any}
       >
-        {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))}
+        {mode === 'horizontal' ? (
+          <VOverflow
+            ref="overflowRef"
+            onUpdateOverflow={this.onUpdateOverflow}
+            getCounter={this.getCounter}
+            onUpdateCount={this.onUpdateCount}
+            updateCounter={this.updateCounter}
+            style={{
+              width: '100%',
+              display: 'flex',
+              overflow: 'hidden'
+            }}
+          >
+            {{
+              default: renderMenuItemNodes,
+              counter: this.renderCounter
+            }}
+          </VOverflow>
+        ) : (
+          renderMenuItemNodes()
+        )}
       </div>
+    )
+    return mode === 'horizontal' ? (
+      <VResizeObserver onResize={this.onResize}>
+        {{ default: renderMainNode }}
+      </VResizeObserver>
+    ) : (
+      renderMainNode()
     )
   }
 })

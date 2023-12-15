@@ -178,7 +178,9 @@ export default defineComponent({
         if (patternInputEl) {
           patternInputEl.style.width = `${patternInputMirrorEl.offsetWidth}px`
           if (props.maxTagCount !== 'responsive') {
-            overflowRef.value?.sync()
+            overflowRef.value?.sync({
+              showAllItemsBeforeCalculate: false
+            })
           }
         }
       }
