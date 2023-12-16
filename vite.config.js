@@ -1,14 +1,13 @@
-const path = require('path')
-const { babel } = require('@rollup/plugin-babel')
-const createDemoPlugin = require('./build/vite-plugin-demo')
-const dns = require('dns')
+import { defineConfig } from 'vite'
+import { babel } from '@rollup/plugin-babel'
+
+import dns from 'dns'
+import path from 'path'
+import createDemoPlugin from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
 
-/**
- * @type {import('vite').UserConfig}
- */
-module.exports = {
+export default defineConfig({
   root: __dirname,
   plugins: createDemoPlugin(),
   resolve: {
@@ -102,4 +101,4 @@ module.exports = {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   }
-}
+})
