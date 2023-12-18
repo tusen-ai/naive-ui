@@ -1,10 +1,9 @@
 <markdown>
-    # Rtl Debug
+# Rtl Debug
 </markdown>
 
 <template>
   <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-
   <n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
       <n-dialog-provider>

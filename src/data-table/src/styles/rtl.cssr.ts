@@ -1,11 +1,11 @@
 import { cB, cE, cM, c } from '../../../_utils/cssr'
+
 export default c([
   cB('data-table', [
     cM('rtl', `
-       direction: rtl;
+      direction: rtl;
     `, [
-      cB('data-table-th', `
-      `, [
+      cB('data-table-th', [
         cB('data-table-sorter', `
           margin-left: 20px;
         `),
@@ -20,9 +20,11 @@ export default c([
       `)
     ])
   ]),
-  cB('data-table-filter-menu--rtl', [
-    cB('scrollbar', `
-      direction: rtl;
-    `)
+  cB('data-table-filter-menu', [
+    cM('rtl', [
+      cB('scrollbar', `
+        direction: rtl;
+      `)
+    ])
   ])
 ])

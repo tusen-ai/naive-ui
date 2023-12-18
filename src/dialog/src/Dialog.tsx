@@ -255,18 +255,16 @@ export const NDialog = defineComponent({
       >
         {closable
           ? resolveWrappedSlot(this.$slots.close, (node) => {
+            const classNames = [
+                `${mergedClsPrefix}-dialog__close`,
+                this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
+            ]
             return node ? (
-                <div class={[
-                  `${mergedClsPrefix}-dialog__close`,
-                  this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
-                ]}>{node}</div>
+                <div class={classNames}>{node}</div>
             ) : (
                 <NBaseClose
                   clsPrefix={mergedClsPrefix}
-                  class={[
-                    `${mergedClsPrefix}-dialog__close`,
-                    this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
-                  ]}
+                  class={classNames}
                   onClick={this.handleCloseClick}
                 />
             )

@@ -1,6 +1,7 @@
-import { cB, c } from '../../../../_utils/cssr'
-export default c([
-  cB('base-selection--rtl', `
-      direction: rtl;
-    `)
+import { cB, cM } from '../../../../_utils/cssr'
+
+export default cB('base-selection', [
+  cM('rtl', `
+    direction: rtl;
+  `)
 ])
