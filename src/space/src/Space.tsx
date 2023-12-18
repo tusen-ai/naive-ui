@@ -41,6 +41,7 @@ export const spaceProps = {
   },
   inline: Boolean,
   vertical: Boolean,
+  reverse: Boolean,
   size: {
     type: [String, Number, Array] as PropType<
     'small' | 'medium' | 'large' | number | [number, number]
@@ -112,6 +113,7 @@ export default defineComponent({
   render () {
     const {
       vertical,
+      reverse,
       align,
       inline,
       justify,
@@ -142,7 +144,12 @@ export default defineComponent({
         ]}
         style={{
           display: inline ? 'inline-flex' : 'flex',
-          flexDirection: vertical ? 'column' : 'row',
+          flexDirection: (() => {
+            if (vertical && !reverse) return 'column'
+            if (vertical && reverse) return 'column-reverse'
+            if (!vertical && reverse) return 'row-reverse'
+            /** (!vertical && !reverse) */ else return 'row'
+          })(),
           justifyContent: ['start', 'end'].includes(justify)
             ? 'flex-' + justify
             : justify,

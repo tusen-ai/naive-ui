@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-space` adds `reverse` prop.
+
 ## 2.36.0
 
 ### Fixes

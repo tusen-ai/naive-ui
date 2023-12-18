@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+- `n-space` 新增 `reverse` 属性
+
 ## 2.36.0
 
 ### Fixes
