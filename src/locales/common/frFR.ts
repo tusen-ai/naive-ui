@@ -78,7 +78,8 @@ const frFR: NLocale = {
     placeholder: "Sélectionner l'heure",
     positiveText: 'OK',
     negativeText: 'Annuler',
-    now: 'Maintenant'
+    now: 'Maintenant',
+    clear: 'Effacer'
   },
   Pagination: {
     goto: 'Aller à',

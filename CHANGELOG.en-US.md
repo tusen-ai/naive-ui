@@ -10,6 +10,7 @@
 
 - `n-space` adds `reverse` prop.
 - `n-input` adds `clear` method, closes [#5423](https://github.com/tusen-ai/naive-ui/issues/5423).
+- `n-time-picker` adds `clear` `action`, closes [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
 
 ## 2.36.0
 

@@ -78,7 +78,8 @@ const enGB: NLocale = {
     placeholder: 'Select Time',
     positiveText: 'OK',
     negativeText: 'Cancel',
-    now: 'Now'
+    now: 'Now',
+    clear: 'Clear'
   },
   Pagination: {
     goto: 'Goto',
