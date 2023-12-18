@@ -133,7 +133,7 @@ export const inputProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onChange: [Function, Array] as PropType<OnUpdateValue>,
-  onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(e?: MouseEvent) => void>>,
   countGraphemes: Function as PropType<(value: string) => number>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -405,7 +405,7 @@ export default defineComponent({
       if (onFocus) call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doClear (e: MouseEvent): void {
+    function doClear (e?: MouseEvent): void {
       const { onClear } = props
       if (onClear) call(onClear, e)
     }
@@ -585,7 +585,7 @@ export default defineComponent({
     function handleClick (e: MouseEvent): void {
       doClick(e)
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear (e?: MouseEvent): void {
       doClear(e)
       if (props.pair) {
         doUpdateValue(['', ''])
@@ -812,6 +812,7 @@ export default defineComponent({
       inputElRef,
       textareaElRef,
       isCompositing: isComposingRef,
+      clear: handleClear,
       focus,
       blur,
       select,

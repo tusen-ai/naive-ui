@@ -5,6 +5,7 @@
 ### Features
 
 - `n-space` adds `reverse` prop.
+- `n-input` expose `clear` method, closes [#5423](https://github.com/tusen-ai/naive-ui/issues/5423).
 
 ## 2.36.0
 
