@@ -125,7 +125,7 @@ export default defineComponent({
       toggle(tmNode.key)
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action')) e.preventDefault()
+      if (!happensIn(e, 'action') && !happensIn(e, 'empty')) e.preventDefault()
     }
     function toggle (value: ValueAtom): void {
       const {
@@ -229,6 +229,7 @@ export default defineComponent({
         showCheckmark={this.showCheckmark}
       >
         {{
+          header: () => this.$slots.header?.() || [],
           action: () => this.$slots.action?.() || [],
           empty: () => this.$slots.empty?.() || []
         }}

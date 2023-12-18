@@ -420,6 +420,7 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function getTriggerElement (): HTMLElement {
+      // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
       return binderInstRef.value?.targetRef as HTMLElement
     }
     function setBodyInstance (value: BodyInstance | null): void {

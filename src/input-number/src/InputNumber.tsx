@@ -373,7 +373,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
       } else {
         const { value: mergedStep } = mergedStepRef
@@ -394,7 +394,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
       } else {
         const { value: mergedStep } = mergedStepRef

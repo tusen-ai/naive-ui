@@ -116,7 +116,8 @@ export default cB('tree', `
           cNotM('selected', [
             c('&:active', 'background: var(--n-node-color-pressed);')
           ])
-        ])
+        ]),
+        cM('selected', 'background: var(--n-node-color-active);')
       ]),
       cM('selected', 'background: var(--n-node-color-active);'),
       cM('disabled', `

@@ -132,6 +132,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const followerRef = ref<FollowerInst | null>(null)
+    // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
@@ -444,7 +445,7 @@ export default defineComponent({
               `${mergedClsPrefix}-popover-shared--center-arrow`
           ],
           bodyRef,
-          styleRef.value as any,
+          styleRef.value,
           handleMouseEnter,
           handleMouseLeave
         )

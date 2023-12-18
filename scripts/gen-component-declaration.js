@@ -50,7 +50,7 @@ async function generateComponentsType () {
       }
       return `${name}: ${v}`
     })
-  const code = `// Auto generated component declarations
+  const code = `/* eslint-disable @typescript-eslint/consistent-type-imports */\n// Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
     ${lines.join('\n    ')}

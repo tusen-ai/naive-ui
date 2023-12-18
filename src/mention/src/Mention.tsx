@@ -169,6 +169,7 @@ export default defineComponent({
       // SelectOption { value: string | number, render?: (value: string | number) => VNodeChild }
       // The 2 types are not compatible since `render`s are not compatible
       // However we know it works...
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       >(filteredOptionsRef.value as any, {
         getKey: (v) => {
           return (v as any).value
