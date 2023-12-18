@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)
+- 修复 `n-data-table` 属性 `pagination` 在非受控模式下的默认分页大小 `default-page-size` 和当前页数 `default-page` 不生效，关闭 [#5201](https://github.com/tusen-ai/naive-ui/issues/5201)
 
 ### Features
 
