@@ -81,7 +81,7 @@ use-dialog-reactive-list.vue
 | positiveButtonProps | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
-| style | `string \| Object` | Style of the dialog. |  |
+| style | `string \| Object` | `undefined` | Style of the dialog. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |

@@ -65,7 +65,7 @@ custom-field.vue
 | reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
-| show-checkmark | `boolean` | `true` | Whether to show checkmark in multiple select mode. | 2.33.4 |
+| show-checkmark | `boolean` | `true` | Whether to show checkmark. | 2.33.4 |
 | show-on-focus | `boolean` | `false` | Whether to show menu on focus. | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
