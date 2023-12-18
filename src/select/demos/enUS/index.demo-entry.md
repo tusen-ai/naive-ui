@@ -106,11 +106,12 @@ custom-field.vue
 
 ### Select Slots
 
-| Name   | Parameters | Description                            | Version |
-| ------ | ---------- | -------------------------------------- | ------- |
-| action | `()`       | Options menu slot.                     |         |
-| empty  | `()`       | Empty state slot for the options menu. |         |
-| arrow  | `()`       | Arrow icon slot.                       | 2.24.2  |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| header | `()`       | Header menu slot.                      | NEXT_VERSION |
+| action | `()`       | Options menu slot.                     |              |
+| empty  | `()`       | Empty state slot for the options menu. |              |
+| arrow  | `()`       | Arrow icon slot.                       | 2.24.2       |
 
 ### Select Methods
 

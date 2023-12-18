@@ -1008,6 +1008,7 @@ export default defineComponent({
                             >
                               {{
                                 empty: () => [this.$slots.empty?.()],
+                                header: () => [this.$slots.header?.()],
                                 action: () => [this.$slots.action?.()]
                               }}
                             </NInternalSelectMenu>,

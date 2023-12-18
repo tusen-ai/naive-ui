@@ -14,6 +14,7 @@
 - `n-select` 支持 RTL
 - `n-data-table` 支持 RTL
 - `n-dialog` 支持 RTL
+- `n-select` 新增 `header` 插槽，关闭 [#5448](https://github.com/tusen-ai/naive-ui/issues/5448)
 
 ## 2.36.0
 
