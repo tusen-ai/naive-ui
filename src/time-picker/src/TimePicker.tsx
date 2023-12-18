@@ -93,7 +93,7 @@ export const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  actions: Array as PropType<Array<'now' | 'confirm'> | null>,
+  actions: Array as PropType<Array<'clear' | 'now' | 'confirm'> | null>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
