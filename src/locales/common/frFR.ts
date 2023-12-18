@@ -48,7 +48,7 @@ const frFR: NLocale = {
     startMonthPlaceholder: 'Mois de début',
     endMonthPlaceholder: 'Mois de fin',
     monthBeforeYear: true,
-    firstDayOfWeek: 1,
+    firstDayOfWeek: 0,
     today: "Aujourd'hui"
   },
   DataTable: {

@@ -42,6 +42,7 @@ export const spaceProps = {
   },
   inline: Boolean,
   vertical: Boolean,
+  reverse: Boolean,
   size: {
     type: [String, Number, Array] as PropType<
     'small' | 'medium' | 'large' | number | [number, number]
@@ -52,6 +53,7 @@ export const spaceProps = {
     type: Boolean,
     default: true
   },
+  itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
   wrap: {
     type: Boolean,
@@ -112,9 +114,11 @@ export default defineComponent({
   render () {
     const {
       vertical,
+      reverse,
       align,
       inline,
       justify,
+      itemClass,
       itemStyle,
       margin,
       wrap,
@@ -141,7 +145,12 @@ export default defineComponent({
         ]}
         style={{
           display: inline ? 'inline-flex' : 'flex',
-          flexDirection: vertical ? 'column' : 'row',
+          flexDirection: (() => {
+            if (vertical && !reverse) return 'column'
+            if (vertical && reverse) return 'column-reverse'
+            if (!vertical && reverse) return 'row-reverse'
+            /** (!vertical && !reverse) */ else return 'row'
+          })(),
           justifyContent: ['start', 'end'].includes(justify)
             ? 'flex-' + justify
             : justify,
@@ -154,20 +163,22 @@ export default defineComponent({
       >
         {!wrapItem && (useGap || internalUseGap)
           ? children
-          : children.map((child, index) =>
-            child.type === Comment ? (
-              child
-            ) : (
-                <div
-                  role="none"
-                  style={[
-                    itemStyle as any,
-                    {
-                      maxWidth: '100%'
-                    },
-                    useGap
-                      ? ''
-                      : vertical
+          : children.map((child, index) => (
+              <div
+                role="none"
+                class={itemClass}
+                style={[
+                  itemStyle as any,
+                  {
+                    maxWidth: '100%'
+                  },
+                  useGap
+                    ? ''
+                    : vertical
+                      ? {
+                          marginBottom: index !== lastIndex ? verticalMargin : ''
+                        }
+                      : rtlEnabled
                         ? {
                             marginBottom:
                             index !== lastIndex ? verticalMargin : ''

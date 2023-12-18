@@ -93,6 +93,7 @@ graphemes.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur the input element. |  |
+| clear | `() => void` | Clear input value | NEXT_VERSION |
 | focus | `() => void` | Focus the input element. |  |
 | select | `() => void` | Select the input element. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | Scroll To. | 2.32.0 |

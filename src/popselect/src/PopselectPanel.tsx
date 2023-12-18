@@ -229,6 +229,7 @@ export default defineComponent({
         showCheckmark={this.showCheckmark}
       >
         {{
+          header: () => this.$slots.header?.() || [],
           action: () => this.$slots.action?.() || [],
           empty: () => this.$slots.empty?.() || []
         }}

@@ -221,12 +221,11 @@ export default defineComponent({
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
         } = themeRef.value
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
           '--n-action-padding': actionPadding,
           '--n-action-button-margin': actionButtonMargin,
           '--n-action-divider-color': actionDividerColor
-        } as CSSProperties
+        } satisfies CSSProperties
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
@@ -264,6 +263,7 @@ export default defineComponent({
       sort,
       clearFilter,
       scrollTo: (arg0: any, arg1?: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }
     }

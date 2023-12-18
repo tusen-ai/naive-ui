@@ -587,6 +587,9 @@ export default defineComponent({
     }
     function handleClear (e: MouseEvent): void {
       doClear(e)
+      clearValue()
+    }
+    function clearValue (): void {
       if (props.pair) {
         doUpdateValue(['', ''])
         doChange(['', ''])
@@ -812,6 +815,7 @@ export default defineComponent({
       inputElRef,
       textareaElRef,
       isCompositing: isComposingRef,
+      clear: clearValue,
       focus,
       blur,
       select,

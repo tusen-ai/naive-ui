@@ -462,6 +462,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/number-animation'
         },
         {
+          en: 'QR Code',
+          zh: '二维码',
+          enSuffix: true,
+          path: '/qr-code'
+        },
+        {
           en: 'Statistic',
           zh: '统计数据',
           enSuffix: true,
@@ -685,6 +691,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '间距',
           enSuffix: true,
           path: '/space'
+        },
+        {
+          en: 'Split',
+          zh: '面板分割',
+          enSuffix: true,
+          path: '/split'
         }
       ]
     }),
@@ -710,6 +722,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '滚动条',
           enSuffix: true,
           path: '/scrollbar'
+        },
+        {
+          en: 'Virtual List',
+          zh: '虚拟列表',
+          enSuffix: true,
+          path: '/virtual-list'
         }
       ]
     }),
