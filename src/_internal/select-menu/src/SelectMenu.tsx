@@ -559,7 +559,6 @@ export default defineComponent({
           <div
             class={`${clsPrefix}-base-select-menu__empty`}
             data-empty
-            data-action
           >
             {resolveSlot($slots.empty, () => [
               <NEmpty
