@@ -3,7 +3,7 @@
 ## NEXT_VERSION
 
 - `n-space` 新增 `reverse` 属性
-- `n-input` 暴露 `clear` 方法，关闭[#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
+- `n-input` 新增 `clear` 方法，关闭[#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
 
 ## 2.36.0
 
