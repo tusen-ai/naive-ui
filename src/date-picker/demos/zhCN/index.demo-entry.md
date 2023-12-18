@@ -60,6 +60,10 @@ form-debug.vue
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
+| on-prev-month | `() => void` | `undefined` | 点击上一个月时的回调 | NEXT_VERSION |
+| on-next-month | `() => void` | `undefined` | 点击下一个月时的回调 | NEXT_VERSION |
+| on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | NEXT_VERSION |
+| on-next-year | `() => void` | `undefined` | 点击下一年时的回调 | NEXT_VERSION |
 
 ### Date 类型的 Props
 

@@ -14,6 +14,7 @@
 - `n-select` supports RTL.
 - `n-data-table` supports RTL.
 - `n-dialog` supports RTL.
+- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 
 ## 2.36.0
 

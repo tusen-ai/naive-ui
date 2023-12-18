@@ -15,6 +15,7 @@
 - `n-data-table` 支持 RTL
 - `n-dialog` 支持 RTL
 - `n-select` 新增 `header` 插槽，关闭 [#5448](https://github.com/tusen-ai/naive-ui/issues/5448)
+- `n-date-picker` 新增 `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` 属性，关闭 [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 
 ## 2.36.0
 

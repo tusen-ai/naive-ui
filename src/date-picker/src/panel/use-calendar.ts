@@ -367,15 +367,19 @@ function useCalendar (
   }
   function nextYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
+    props.onNextYear?.()
   }
   function prevYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
+    props.onPrevYear?.()
   }
   function nextMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
+    props.onNextMonth?.()
   }
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
+    props.onPrevMonth?.()
   }
   // For month type
   function virtualListContainer (): HTMLElement | null {

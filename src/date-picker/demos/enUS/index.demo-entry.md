@@ -59,6 +59,10 @@ panel.vue
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
+| on-prev-month | `() => void` | `undefined` | Callback when click prev month button. | NEXT_VERSION |
+| on-next-month | `() => void` | `undefined` | Callback when click next month button. | NEXT_VERSION |
+| on-prev-year | `() => void` | `undefined` | Callback when click prev year button. | NEXT_VERSION |
+| on-next-year | `() => void` | `undefined` | Callback when click next year button. | NEXT_VERSION |
 
 ### Date Type Props
 
