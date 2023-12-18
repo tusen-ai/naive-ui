@@ -5,13 +5,12 @@
 
 <template>
   <n-split direction="vertical" style="height: 200px">
-    <template #first>
+    <template #1>
       <div :style="{ height: '100%' }">
         Pane 1
       </div>
     </template>
-
-    <template #second>
+    <template #2>
       <div :style="{ height: '100%' }">
         Pane 2
       </div>

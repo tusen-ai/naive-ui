@@ -302,12 +302,12 @@ export default defineComponent({
       }
     }
     function handleFocusin (e: FocusEvent): void {
-      if (selfRef.value?.contains(e.target as any)) {
+      if (selfRef.value?.contains(e.target as Node | null)) {
         props.onFocus?.(e)
       }
     }
     function handleFocusout (e: FocusEvent): void {
-      if (!selfRef.value?.contains(e.relatedTarget as any)) {
+      if (!selfRef.value?.contains(e.relatedTarget as Node | null)) {
         props.onBlur?.(e)
       }
     }
@@ -409,11 +409,11 @@ export default defineComponent({
       empty: emptyRef,
       virtualListContainer () {
         const { value } = virtualListRef
-        return value?.listElRef as HTMLElement
+        return value?.listElRef
       },
       virtualListContent () {
         const { value } = virtualListRef
-        return value?.itemsElRef as HTMLElement
+        return value?.itemsElRef
       },
       doScroll,
       handleFocusin,

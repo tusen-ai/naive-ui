@@ -1,11 +1,20 @@
 <markdown>
 # 水平菜单
 
-一个水平菜单
+一个水平菜单，可以自动折叠。
 </markdown>
 
 <template>
-  <n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
+  <n-split :default-size="0.8">
+    <template #1>
+      <n-menu
+        v-model:value="activeKey"
+        mode="horizontal"
+        :options="menuOptions"
+        responsive
+      />
+    </template>
+  </n-split>
 </template>
 
 <script lang="ts">

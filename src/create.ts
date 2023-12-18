@@ -1,4 +1,4 @@
-import { type App } from 'vue'
+import { type Component, type App, type DefineComponent } from 'vue'
 import version from './version'
 
 type ComponentType = any
@@ -26,7 +26,10 @@ function create ({
   ): void {
     const registered = app.component(componentPrefix + name)
     if (!registered) {
-      app.component(componentPrefix + name, component)
+      app.component(
+        componentPrefix + name,
+        component as Component<any> | DefineComponent<any>
+      )
     }
   }
   function install (app: App): void {
@@ -34,7 +37,7 @@ function create ({
     installTargets.push(app)
     components.forEach((component) => {
       const { name, alias } = component
-      registerComponent(app, name, component)
+      registerComponent(app, name as string, component)
       if (alias) {
         alias.forEach((aliasName: string) => {
           registerComponent(app, aliasName, component)

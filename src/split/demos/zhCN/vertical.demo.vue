@@ -1,20 +1,14 @@
 <markdown>
 # 垂直布局
-
 </markdown>
 
 <template>
   <n-split direction="vertical" style="height: 200px">
-    <template #first>
-      <div :style="{ height: '100%' }">
-        Pane 1
-      </div>
+    <template #1>
+      Pane 1
     </template>
-
-    <template #second>
-      <div :style="{ height: '100%' }">
-        Pane 2
-      </div>
+    <template #2>
+      Pane 2
     </template>
   </n-split>
 </template>

@@ -37,7 +37,7 @@ debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | 2.28.3 |
 | directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | 2.28.3 |
-| file-list-class | `string` | `undefined` | 文件列表区域的类名 | NEXT_VERSION |
+| file-list-class | `string` | `undefined` | 文件列表区域的类名 | 2.36.0 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
@@ -59,7 +59,7 @@ debug.vue
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
-| trigger-class | `string` | `undefined` | 触发器区域的类名 | NEXT_VERSION |
+| trigger-class | `string` | `undefined` | 触发器区域的类名 | 2.36.0 |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | keep-file-after-finish | `boolean` | `false` | 文件上传结束的回调中保留 File，不被置为 null |  |

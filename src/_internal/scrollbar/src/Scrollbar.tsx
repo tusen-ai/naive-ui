@@ -730,6 +730,7 @@ const Scrollbar = defineComponent({
           aria-hiddens
         >
           {h(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             (triggerIsNone ? Wrapper : Transition) as any,
             triggerIsNone ? null : { name: 'fade-in-transition' },
             {
@@ -823,6 +824,7 @@ const Scrollbar = defineComponent({
               aria-hidden
             >
               {h(
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 (triggerIsNone ? Wrapper : Transition) as any,
                 triggerIsNone ? null : { name: 'fade-in-transition' },
                 {
