@@ -95,7 +95,7 @@ export default defineComponent({
           <NPopselectPanel
             {...$attrs}
             class={[$attrs.class, className]}
-            style={[$attrs.style, style]}
+            style={[$attrs.style, ...style]}
             {...keep(this.$props, panelPropKeys)}
             ref={createRefSetter(ref)}
             onMouseenter={mergeEventHandlers([

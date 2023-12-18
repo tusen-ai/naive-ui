@@ -445,7 +445,7 @@ export default defineComponent({
               `${mergedClsPrefix}-popover-shared--center-arrow`
           ],
           bodyRef,
-          styleRef,
+          styleRef.value,
           handleMouseEnter,
           handleMouseLeave
         )

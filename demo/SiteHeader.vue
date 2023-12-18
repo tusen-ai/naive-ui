@@ -12,6 +12,7 @@
       <div v-if="!(isMobile || isTablet)" class="nav-menu">
         <n-menu
           ref="menuInstRef"
+          responsive
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
