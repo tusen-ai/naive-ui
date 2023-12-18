@@ -2,9 +2,9 @@ import {
   h,
   defineComponent,
   computed,
-  Comment,
   type PropType,
-  type CSSProperties
+  type CSSProperties,
+  Comment
 } from 'vue'
 import { depx, getGap } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
@@ -163,30 +163,30 @@ export default defineComponent({
       >
         {!wrapItem && (useGap || internalUseGap)
           ? children
-          : children.map((child, index) => (
-              <div
-                role="none"
-                class={itemClass}
-                style={[
-                  itemStyle as any,
-                  {
-                    maxWidth: '100%'
-                  },
-                  useGap
-                    ? ''
-                    : vertical
-                      ? {
-                          marginBottom: index !== lastIndex ? verticalMargin : ''
-                        }
-                      : rtlEnabled
+          : children.map((child, index) =>
+            child.type === Comment ? (
+              child
+            ) : (
+                <div
+                  role="none"
+                  class={itemClass}
+                  style={[
+                    itemStyle as any,
+                    {
+                      maxWidth: '100%'
+                    },
+                    useGap
+                      ? ''
+                      : vertical
                         ? {
                             marginBottom:
-                            index !== lastIndex ? verticalMargin : ''
+                              index !== lastIndex ? verticalMargin : ''
                           }
                         : rtlEnabled
                           ? {
                               marginLeft: isJustifySpace
-                                ? justify === 'space-between' && index === lastIndex
+                                ? justify === 'space-between' &&
+                                  index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex
@@ -202,7 +202,8 @@ export default defineComponent({
                             }
                           : {
                               marginRight: isJustifySpace
-                                ? justify === 'space-between' && index === lastIndex
+                                ? justify === 'space-between' &&
+                                  index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex
