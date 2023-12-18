@@ -78,7 +78,8 @@ const zhCN: NLocale = {
     placeholder: '请选择时间',
     positiveText: '确认',
     negativeText: '取消',
-    now: '此刻'
+    now: '此刻',
+    clear: '清除'
   },
   Pagination: {
     goto: '跳至',

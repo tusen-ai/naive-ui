@@ -10,7 +10,13 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useRtl,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
 import { createKey, resolveSlot, warnOnce } from '../../_utils'
@@ -66,8 +72,13 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
+    const rtlEnabledRef = useRtl('DataTable', mergedRtlRef, mergedClsPrefixRef)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -221,12 +232,11 @@ export default defineComponent({
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
         } = themeRef.value
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
           '--n-action-padding': actionPadding,
           '--n-action-button-margin': actionButtonMargin,
           '--n-action-divider-color': actionDividerColor
-        } as CSSProperties
+        } satisfies CSSProperties
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
@@ -264,6 +274,7 @@ export default defineComponent({
       sort,
       clearFilter,
       scrollTo: (arg0: any, arg1?: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }
     }
@@ -381,6 +392,7 @@ export default defineComponent({
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
       mergedBordered: mergedBorderedRef,
@@ -400,6 +412,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-data-table`,
+          this.rtlEnabled && `${mergedClsPrefix}-data-table--rtl`,
           themeClass,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,

@@ -73,14 +73,17 @@ export function createLayoutComponent (isContent: boolean) {
           const { value: scrollableEl } = scrollableElRef
           if (scrollableEl) {
             if (y === undefined) {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               scrollableEl.scrollTo(options as any)
             } else {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               scrollableEl.scrollTo(options as any, y as any)
             }
           }
         } else {
           const { value: scrollbarInst } = scrollbarInstRef
           if (scrollbarInst) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             scrollbarInst.scrollTo(options as any, y as any)
           }
         }

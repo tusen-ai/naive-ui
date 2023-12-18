@@ -80,7 +80,8 @@ const plPL: NLocale = {
     placeholder: 'Wybierz czas',
     positiveText: 'Potwierdź',
     negativeText: 'Anuluj',
-    now: 'Teraz'
+    now: 'Teraz',
+    clear: 'Wyczyść'
   },
   Pagination: {
     goto: 'Idź do',

@@ -54,6 +54,7 @@ import { popconfirmDark } from '../popconfirm/styles'
 import { popoverDark } from '../popover/styles'
 import { popselectDark } from '../popselect/styles'
 import { progressDark } from '../progress/styles'
+import { qrcodeDark } from '../qr-code/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
@@ -141,6 +142,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Popover: popoverDark,
   Popselect: popselectDark,
   Progress: progressDark,
+  QrCode: qrcodeDark,
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
