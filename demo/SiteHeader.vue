@@ -369,7 +369,7 @@ export default defineComponent({
     let lastWindowInnerWidth = window.innerWidth
     window.addEventListener('resize', () => {
       if (window.innerWidth > lastWindowInnerWidth) {
-        menuInstRef.value?.deriveEllipsis()
+        menuInstRef.value?.deriveResponsiveState()
       }
       lastWindowInnerWidth = window.innerWidth
     })

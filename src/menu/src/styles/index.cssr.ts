@@ -94,7 +94,7 @@ export default c([
     cM('horizontal', `
       max-width: 100%;
       width: 100%;
-      display: inline-flex;
+      display: flex;
       overflow: hidden;
       padding-bottom: 0;
     `, [
@@ -167,7 +167,7 @@ export default c([
         ])
       ])
     ]),
-    cM('vertical', [
+    cNotM('responsive', [
       cB('menu-item-content-header', `
         overflow: hidden;
         text-overflow: ellipsis;

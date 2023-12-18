@@ -15,6 +15,7 @@
 - Fix if `inline-theme-disabled` is set, custom color whose params include decimal won't work in `n-tag`, `n-avatar`, `n-badge`, `n-button`, `n-rate`.
 - Fix `n-tabs`'s border height in `vertical` mode.
 - Fix `n-tree`'s node's hover color has higher priority than selected color in `block-line` mode.
+- Fix `n-tree` click expand switch causes checkbox being checked.
 
 ### Features
 
@@ -41,6 +42,8 @@
 - Adds `n-split` component, closes [#3557](https://github.com/tusen-ai/naive-ui/issues/3557).
 - Adds `n-virtual-list` component.
 - Adds `n-qr-code` component, closes [#2535](https://github.com/tusen-ai/naive-ui/issues/2535).
+- `n-menu` add `responsive` prop, it will collapse overflow menu items in horizontal mode.
+- `n-menu` add `deriveResponsiveState` method.
 
 ## 2.35.0
 

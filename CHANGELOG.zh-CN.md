@@ -15,6 +15,7 @@
 - 修复在 `inline-theme-disabled` 设定后，带小数点的自定义颜色在 `n-tag`、`n-avatar`、`n-badge`、`n-button`、`n-rate` 使用会出问题
 - 修复 `n-tabs` 在 `vertical` 模式下的边界高度不正常
 - 修复 `n-tree` 节点在 `block-line` 模式下的悬浮颜色比选种颜色有更高的优先级
+- 修复 `n-tree` 点击展开开关会导致选中勾选框
 
 ### Features
 
@@ -41,6 +42,8 @@
 - 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
 - 新增 `n-virtual-list` 组件
 - 新增 `n-qr-code` 组件，关闭 [#2535](https://github.com/tusen-ai/naive-ui/issues/2535)
+- `n-menu` 新增 `responsive` 属性，在水平状态会收起溢出的菜单项
+- `n-menu` 新增 `deriveResponsiveState` 方法
 
 ## 2.35.0
 

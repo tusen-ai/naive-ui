@@ -20,6 +20,7 @@ import {
   type FollowerPlacement,
   VResizeObserver
 } from 'vueuc'
+import { createId } from 'seemly'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import type { DropdownProps } from '../../dropdown'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -43,9 +44,8 @@ import type {
 } from './interface'
 import { useCheckDeprecated } from './useCheckDeprecated'
 import { menuInjectionKey } from './context'
-import style from './styles/index.cssr'
 import { NSubmenu } from './Submenu'
-import { createId } from 'seemly'
+import style from './styles/index.cssr'
 
 export const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -129,6 +129,11 @@ export const menuProps = {
   dropdownProps: Object as PropType<DropdownProps>,
   accordion: Boolean,
   nodeProps: Function as PropType<MenuNodeProps>,
+  dropdownPlacement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
+  },
+  responsive: Boolean,
   // deprecated
   items: Array as PropType<Array<MenuOption | MenuGroupOption>>,
   onOpenNamesChange: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
@@ -137,11 +142,7 @@ export const menuProps = {
   MaybeArray<OnUpdateKeys>
   >,
   expandedNames: Array as PropType<Key[]>,
-  defaultExpandedNames: Array as PropType<Key[]>,
-  dropdownPlacement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom'
-  }
+  defaultExpandedNames: Array as PropType<Key[]>
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
@@ -608,7 +609,7 @@ export default defineComponent({
       getCounter,
       onRender: themeClassHandle?.onRender,
       showOption,
-      deriveEllipsis: onResize
+      deriveResponsiveState: onResize
     } satisfies MenuInst & Record<string, unknown>
   },
   render () {
@@ -616,6 +617,8 @@ export default defineComponent({
     onRender?.()
     const renderMenuItemNodes = (): VNodeChild[] =>
       this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))
+    const horizontal = mode === 'horizontal'
+    const finalResponsive = horizontal && this.responsive
     const renderMainNode = (): VNode => (
       <div
         role={mode === 'horizontal' ? 'menubar' : 'menu'}
@@ -623,11 +626,12 @@ export default defineComponent({
           `${mergedClsPrefix}-menu`,
           themeClass,
           `${mergedClsPrefix}-menu--${mode}`,
+          finalResponsive && `${mergedClsPrefix}-menu--responsive`,
           this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
         ]}
         style={this.cssVars as any}
       >
-        {mode === 'horizontal' ? (
+        {finalResponsive ? (
           <VOverflow
             ref="overflowRef"
             onUpdateOverflow={this.onUpdateOverflow}
@@ -650,7 +654,7 @@ export default defineComponent({
         )}
       </div>
     )
-    return mode === 'horizontal' ? (
+    return finalResponsive ? (
       <VResizeObserver onResize={this.onResize}>
         {{ default: renderMainNode }}
       </VResizeObserver>

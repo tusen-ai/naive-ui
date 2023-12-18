@@ -83,5 +83,5 @@ export type MenuNodeProps = (
 
 export interface MenuInst {
   showOption: (key?: Key) => void
-  deriveEllipsis: () => void
+  deriveResponsiveState: () => void
 }
