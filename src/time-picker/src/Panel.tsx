@@ -15,7 +15,7 @@ import { type MaybeArray } from '../../_utils'
 
 const timePickerPanelProps = {
   actions: {
-    type: Array as PropType<Array<'now' | 'confirm'> | null>,
+    type: Array as PropType<Array<'clear' | 'now' | 'confirm'> | null>,
     default: () => ['clear', 'now', 'confirm']
   },
   showHour: {

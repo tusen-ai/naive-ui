@@ -464,9 +464,8 @@ export default defineComponent({
         returnFocus: true
       })
     }
-
     // 清除选中时间
-    function handleClearSelectedDateTime (): void {
+    function clearSelectedValue (): void {
       doUpdateValue(null)
       deriveInputValue(null)
       closePanel({
@@ -866,7 +865,7 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
-      handleClearSelectedDateTime
+      clearSelectedValue
     }
   },
   render () {
@@ -986,7 +985,7 @@ export default defineComponent({
                                 onAmPmClick={this.handleAmPmClick}
                                 onNowClick={this.handleNowClick}
                                 onConfirmClick={this.handleConfirmClick}
-                                onClearClick={this.handleClearSelectedDateTime}
+                                onClearClick={this.clearSelectedValue}
                                 onFocusDetectorFocus={
                                   this.handleFocusDetectorFocus
                                 }
