@@ -155,9 +155,10 @@ focus-debug.vue
 
 ### Dialog Slots
 
-| 名称    | 参数 | 说明          |
-| ------- | ---- | ------------- |
-| action  | `()` | `action` 内容 |
-| default | `()` | 对话框内容    |
-| header  | `()` | `header` 内容 |
-| icon    | `()` | `icon` 内容   |
+| 名称    | 参数 | 说明          | 版本   |
+| ------- | ---- | ------------- | ------ |
+| action  | `()` | `action` 内容 |        |
+| default | `()` | 对话框内容    |        |
+| header  | `()` | `header` 内容 |        |
+| icon    | `()` | `icon` 内容   |        |
+| close   | `()` | `close` 内容  | 2.36.0 |

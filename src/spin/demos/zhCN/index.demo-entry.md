@@ -16,8 +16,10 @@ delay.vue
 
 ### Spin Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | Spin 内容的类名 | 2.36.0 |
+| content-style | `string \| Object` | `undefined` | Spin 内容的样式 | 2.36.0 |
 | description | `string` | `undefined` | Spin 的文字信息 |
 | rotate | `boolean` | `true` | 自定义的加载图标是否有旋转动画 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Spin 的尺寸 |

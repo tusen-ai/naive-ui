@@ -52,6 +52,7 @@ export const spaceProps = {
     type: Boolean,
     default: true
   },
+  itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
   wrap: {
     type: Boolean,
@@ -116,6 +117,7 @@ export default defineComponent({
       align,
       inline,
       justify,
+      itemClass,
       itemStyle,
       margin,
       wrap,
@@ -163,6 +165,7 @@ export default defineComponent({
           : children.map((child, index) => (
               <div
                 role="none"
+                class={itemClass}
                 style={[
                   itemStyle as any,
                   {

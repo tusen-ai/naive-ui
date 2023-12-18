@@ -420,7 +420,7 @@ describe('n-tree', () => {
     })
     setTimeout(() => {
       expect(onLoad).toHaveBeenCalled()
-      wrapper.setProps({ 'expanded-keys': [1, 2] }).then(() => {
+      wrapper.setProps({ expandedKeys: [1, 2] }).then(() => {
         expect(onLoad).toHaveBeenCalled()
       })
     }, 0)

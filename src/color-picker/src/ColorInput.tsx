@@ -9,7 +9,10 @@ import {
   toHexString,
   toHsvString,
   toRgbString,
-  toHslString
+  toHslString,
+  type HSV,
+  type RGB,
+  type HSL
 } from 'seemly'
 import { h, defineComponent, type PropType } from 'vue'
 import { NInputGroup } from '../../input'
@@ -73,19 +76,25 @@ export default defineComponent({
           case 'hsv':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toHsvaString : toHsvString)(nextValueArr)
+              (showAlpha ? toHsvaString : toHsvString)(
+                nextValueArr as HSVA | HSV
+              )
             )
             break
           case 'rgb':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toRgbaString : toRgbString)(nextValueArr)
+              (showAlpha ? toRgbaString : toRgbString)(
+                nextValueArr as RGBA | RGB
+              )
             )
             break
           case 'hsl':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toHslaString : toHslString)(nextValueArr)
+              (showAlpha ? toHslaString : toHslString)(
+                nextValueArr as HSLA | HSL
+              )
             )
             break
         }

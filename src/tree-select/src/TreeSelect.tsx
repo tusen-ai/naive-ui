@@ -154,6 +154,9 @@ export const treeSelectProps = {
   renderPrefix: Function as PropType<TreeSelectRenderPrefix>,
   renderSuffix: Function as PropType<TreeSelectRenderSuffix>,
   nodeProps: Function as PropType<TreeSelectNodeProps>,
+  watchProps: Array as PropType<
+  Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
+  >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
@@ -948,6 +951,7 @@ export default defineComponent({
                                 renderSuffix={this.renderSuffix}
                                 renderSwitcherIcon={this.renderSwitcherIcon}
                                 nodeProps={this.nodeProps}
+                                watchProps={this.watchProps}
                                 virtualScroll={
                                   this.consistentMenuWidth && this.virtualScroll
                                 }
