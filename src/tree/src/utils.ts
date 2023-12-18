@@ -12,7 +12,7 @@ export function useMergedCheckStrategy (props: {
 }
 
 export function isNodeDisabled (node: TmNode, disabledField: string): boolean {
-  return !!(node.rawNode as any)[disabledField]
+  return !!node.rawNode[disabledField]
 }
 
 function traverse (
