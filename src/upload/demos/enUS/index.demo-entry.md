@@ -65,7 +65,7 @@ download.vue
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| undefined` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
-| on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |  |
+| on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. Returning `false`, `Promise resolve false`, `Promise rejected` will cancel the download. |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |  |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |  |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
