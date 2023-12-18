@@ -82,7 +82,8 @@ const itIT: NLocale = {
     placeholder: 'Seleziona ora',
     positiveText: 'OK',
     negativeText: 'Annulla',
-    now: 'Ora'
+    now: 'Ora',
+    clear: 'Cancella'
   },
   Pagination: {
     goto: 'Vai a',

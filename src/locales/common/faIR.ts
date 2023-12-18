@@ -80,7 +80,8 @@ const faIR: NLocale = {
     placeholder: 'لطفاً زمان مورد نظر را انتخاب کنید',
     positiveText: 'تأیید',
     negativeText: 'لغو',
-    now: 'همین الان'
+    now: 'همین الان',
+    clear: 'پاک کردن'
   },
   Pagination: {
     goto: 'رفتن به صفحه',

@@ -80,7 +80,8 @@ const ptBR: NLocale = {
     placeholder: 'Selecione a hora',
     positiveText: 'OK',
     negativeText: 'Cancelar',
-    now: 'Agora'
+    now: 'Agora',
+    clear: 'Limpar'
   },
   Pagination: {
     goto: 'Ir para',

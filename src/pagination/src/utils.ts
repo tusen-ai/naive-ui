@@ -1,3 +1,16 @@
+import type { PaginationProps } from './Pagination'
+
+export const getDefaultPageSize = (
+  paginationProps: PaginationProps | false
+): number => {
+  if (!paginationProps) return 10
+  const { defaultPageSize } = paginationProps
+  if (defaultPageSize !== undefined) return defaultPageSize
+  const pageSizeOption = paginationProps.pageSizes?.[0]
+  if (typeof pageSizeOption === 'number') return pageSizeOption
+  return pageSizeOption?.value || 10
+}
+
 function createPageItemsInfo (
   currentPage: number,
   pageCount: number,

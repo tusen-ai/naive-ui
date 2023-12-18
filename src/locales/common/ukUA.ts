@@ -81,7 +81,8 @@ const ukUA: NLocale = {
     placeholder: 'Обрати час',
     positiveText: 'OK',
     negativeText: 'Скасувати',
-    now: 'Зараз'
+    now: 'Зараз',
+    clear: 'Стерти'
   },
   Pagination: {
     goto: 'Перейти',

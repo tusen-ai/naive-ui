@@ -55,7 +55,7 @@ describe('n-badge', () => {
     const wrapper = mount(NBadge, { props: { value: 0 } })
     expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
 
-    await wrapper.setProps({ 'show-zero': true })
+    await wrapper.setProps({ showZero: true })
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
     wrapper.unmount()
   })

@@ -80,7 +80,8 @@ const viVN: NLocale = {
     placeholder: 'Chọn thời gian',
     positiveText: 'OK',
     negativeText: 'Hủy',
-    now: 'Hiện tại'
+    now: 'Hiện tại',
+    clear: 'Xóa'
   },
   Pagination: {
     goto: 'Đi đến trang',

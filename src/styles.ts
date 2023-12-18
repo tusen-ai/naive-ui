@@ -10,6 +10,9 @@ export { breadcrumbDark } from './breadcrumb/styles'
 export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
 export { notificationRtl as unstableNotificationRtl } from './notification/styles'
 export { messageRtl as unstableMessageRtl } from './message/styles'
+export { DataTableRtl as unstableDataTableRtl } from './data-table/styles'
+export { InternalSelectMenuRtl as unstableInternalSelectMenuRtl } from './_internal/select-menu/styles'
+export { InternalSelectionRtl as unstableInternalSelectionRtl } from './_internal/selection/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
@@ -29,7 +32,7 @@ export { collapseTransitionRtl as unstableCollapseTransitionRtl } from './collap
 export { dataTableDark } from './data-table/styles'
 export { datePickerDark } from './date-picker/styles'
 export { descriptionsDark } from './descriptions/styles'
-export { dialogDark } from './dialog/styles'
+export { dialogDark, dialogRtl as unstableDialogRtl } from './dialog/styles'
 export { dividerDark } from './divider/styles'
 export { drawerDark, drawerRtl as unstableDrawerRtl } from './drawer/styles'
 export { dropdownDark } from './dropdown/styles'

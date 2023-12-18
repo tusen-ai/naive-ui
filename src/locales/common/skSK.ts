@@ -82,7 +82,8 @@ const skSK: NLocale = {
     placeholder: 'Vybrať čas',
     positiveText: 'OK',
     negativeText: 'Zrušiť',
-    now: 'Teraz'
+    now: 'Teraz',
+    clear: 'Vyčistiť'
   },
   Pagination: {
     goto: 'Ísť',

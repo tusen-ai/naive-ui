@@ -50,7 +50,7 @@ const frFR: NLocale = {
     startMonthPlaceholder: 'Mois de début',
     endMonthPlaceholder: 'Mois de fin',
     monthBeforeYear: true,
-    firstDayOfWeek: 1,
+    firstDayOfWeek: 0,
     today: "Aujourd'hui"
   },
   DataTable: {
@@ -80,7 +80,8 @@ const frFR: NLocale = {
     placeholder: "Sélectionner l'heure",
     positiveText: 'OK',
     negativeText: 'Annuler',
-    now: 'Maintenant'
+    now: 'Maintenant',
+    clear: 'Effacer'
   },
   Pagination: {
     goto: 'Aller à',

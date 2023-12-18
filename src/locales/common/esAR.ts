@@ -83,7 +83,8 @@ const esAR: NLocale = {
     placeholder: 'Seleccionar hora',
     positiveText: 'OK',
     negativeText: 'Cancelar',
-    now: 'Ahora'
+    now: 'Ahora',
+    clear: 'Borrar'
   },
   Pagination: {
     goto: 'Ir a',

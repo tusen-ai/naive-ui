@@ -67,11 +67,7 @@ function matchDate (
 ): boolean {
   const matcher =
     type === 'week' ? makeWeekMatcher(firstDayOfWeek) : matcherMap[type]
-  if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => matcher(time, patternTime))
-  } else {
     return matcher(sourceTime, patternTime)
-  }
 }
 
 export interface DateItem {

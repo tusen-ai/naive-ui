@@ -21,6 +21,7 @@ export default defineComponent({
     return {
       handleMouseDown (e: MouseEvent) {
         e.preventDefault()
+        props.onClear?.(e)
       }
     }
   },

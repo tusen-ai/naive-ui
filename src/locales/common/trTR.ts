@@ -79,7 +79,8 @@ const trTR: NLocale = {
     placeholder: 'Saat Seç',
     positiveText: 'Tamam',
     negativeText: 'İptal',
-    now: 'Şimdi'
+    now: 'Şimdi',
+    clear: 'Temizle'
   },
   Pagination: {
     goto: 'git',

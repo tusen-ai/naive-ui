@@ -83,7 +83,8 @@ const nbNO: NLocale = {
     placeholder: 'Velg tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nå'
+    now: 'Nå',
+    clear: 'Tøm'
   },
   Pagination: {
     goto: 'Gå til',

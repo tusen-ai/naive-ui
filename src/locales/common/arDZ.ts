@@ -80,7 +80,8 @@ const arDZ: NLocale = {
     placeholder: 'إختيار الوقت',
     positiveText: 'تأكيد',
     negativeText: 'إلغاء',
-    now: 'الآن'
+    now: 'الآن',
+    clear: 'مسح'
   },
   Pagination: {
     goto: 'إذهب إلى',
