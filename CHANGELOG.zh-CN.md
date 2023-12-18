@@ -2,6 +2,12 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)
+
+### Features
+
 - `n-space` 新增 `reverse` 属性
 - `n-input` 新增 `clear` 方法，关闭[#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
 
