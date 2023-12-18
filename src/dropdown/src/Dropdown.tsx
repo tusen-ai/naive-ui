@@ -444,7 +444,7 @@ export default defineComponent({
         class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
-        style: [style, this.cssVars as any],
+        style: [...style, this.cssVars as any],
         showArrow: this.showArrow,
         arrowStyle: this.arrowStyle,
         scrollable: this.scrollable,

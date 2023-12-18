@@ -382,14 +382,14 @@ function useCalendar (
     props.onPrevMonth?.()
   }
   // For month type
-  function virtualListContainer (): HTMLElement {
+  function virtualListContainer (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.listElRef as HTMLElement
+    return value?.listElRef || null
   }
   // For month type
-  function virtualListContent (): HTMLElement {
+  function virtualListContent (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.itemsElRef as HTMLElement
+    return value?.itemsElRef || null
   }
   // For month type
   function handleVirtualListScroll (e: Event): void {

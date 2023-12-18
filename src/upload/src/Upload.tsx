@@ -270,7 +270,9 @@ function submitImpl (
   request.withCredentials = withCredentials
   const formData = new FormData()
   appendData(formData, data, file)
-  formData.append(fieldName, file.file as File)
+  if (file.file !== null) {
+    formData.append(fieldName, file.file)
+  }
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -506,6 +508,7 @@ export default defineComponent({
           let nextTickChain = Promise.resolve()
 
           fileInfos.forEach((fileInfo) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             nextTickChain = nextTickChain.then(nextTick as any).then(() => {
               fileInfo &&
                 doChange(fileInfo, e, {

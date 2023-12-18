@@ -56,6 +56,7 @@ import { popconfirmLight } from '../popconfirm/styles'
 import { popoverLight } from '../popover/styles'
 import { popselectLight } from '../popselect/styles'
 import { progressLight } from '../progress/styles'
+import { qrcodeLight } from '../qr-code/styles'
 import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
@@ -143,6 +144,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Popover: popoverLight,
   Popselect: popselectLight,
   Progress: progressLight,
+  QrCode: qrcodeLight,
   Radio: radioLight,
   Rate: rateLight,
   Row: rowLight,

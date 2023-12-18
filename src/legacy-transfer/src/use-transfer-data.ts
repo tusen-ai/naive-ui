@@ -47,7 +47,7 @@ export function useTransferData (
     if (!props.filterable) return tgtOptsRef.value
     const { filter } = props
     return tgtOptsRef.value.filter((opt) =>
-      filter(tgtPatternRef.value, opt, 'target')
+      filter(tgtPatternRef.value, opt as Option, 'target')
     )
   })
   const avlSrcValueSetRef = computed(

@@ -80,7 +80,8 @@ const thTH: NLocale = {
     placeholder: 'เวลา',
     positiveText: 'ตกลง',
     negativeText: 'ยกเลิก',
-    now: 'วันนี้'
+    now: 'วันนี้',
+    clear: 'ล้าง'
   },
   Pagination: {
     goto: 'ไปยัง',

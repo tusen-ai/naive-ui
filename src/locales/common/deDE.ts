@@ -78,7 +78,8 @@ const deDE: NLocale = {
     placeholder: 'Uhrzeit auswählen',
     positiveText: 'OK',
     negativeText: 'Abbrechen',
-    now: 'Jetzt'
+    now: 'Jetzt',
+    clear: 'Löschen'
   },
   Pagination: {
     goto: 'Gehe zu',
