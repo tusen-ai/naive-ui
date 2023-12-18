@@ -68,6 +68,7 @@ keep-alive-debug.vue
 ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
+rtl-debug.vue
 ```
 
 ## API

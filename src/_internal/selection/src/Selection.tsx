@@ -25,7 +25,7 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
-import { useThemeClass, useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import {
   createKey,
@@ -114,6 +114,12 @@ export default defineComponent({
     onResize: Function as PropType<() => void>
   },
   setup (props) {
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const rtlEnabledRef = useRtl(
+      'InternalSelection',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
     const patternInputRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -510,6 +516,8 @@ export default defineComponent({
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       patternInputFocused: patternInputFocusedRef,
       filterablePlaceholder: filterablePlaceholderRef,
       label: labelRef,
@@ -917,6 +925,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${clsPrefix}-base-selection`,
+          this.rtlEnabled && `${clsPrefix}-base-selection--rtl`,
           this.themeClass,
           status && `${clsPrefix}-base-selection--${status}-status`,
           {
