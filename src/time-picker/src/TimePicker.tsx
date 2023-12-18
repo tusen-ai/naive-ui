@@ -464,7 +464,7 @@ export default defineComponent({
         returnFocus: true
       })
     }
-    // 清除选中时间
+    // clear selected time
     function clearSelectedValue (): void {
       doUpdateValue(null)
       deriveInputValue(null)

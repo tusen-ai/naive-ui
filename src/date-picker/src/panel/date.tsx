@@ -23,7 +23,7 @@ export default defineComponent({
     ...useCalendarProps,
     type: {
       type: String as PropType<'date' | 'week'>,
-      required: false
+      required: true
     }
   },
   setup (props) {
@@ -37,10 +37,11 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, props.type ?? 'date')
+    return useCalendar(props, props.type)
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type } =
+      this
     onRender?.()
     return (
       <div
@@ -48,7 +49,7 @@ export default defineComponent({
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--date`,
+          `${mergedClsPrefix}-date-panel--${type}`,
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
@@ -116,10 +117,10 @@ export default defineComponent({
                       !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
                       this.mergedIsDateDisabled(dateItem.ts),
-                    [`${mergedClsPrefix}-date-panel-date--slightly-covered`]:
-                      this.isSlightlyCovered(dateItem),
-                    [`${mergedClsPrefix}-date-panel-date--heavily-covered`]:
-                      dateItem.inHeavySpan
+                    [`${mergedClsPrefix}-date-panel-date--week-hovered`]:
+                      this.isWeekHovered(dateItem),
+                    [`${mergedClsPrefix}-date-panel-date--week-selected`]:
+                      dateItem.inSelectedWeek
                   }
                 ]}
                 onClick={() => {

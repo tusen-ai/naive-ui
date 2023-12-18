@@ -62,12 +62,23 @@ function makeWeekMatcher (firstDayOfWeek: FirstDayOfWeek) {
 function matchDate (
   sourceTime: number,
   patternTime: number | Date,
+  type: 'date' | 'month' | 'year' | 'quarter'
+): boolean
+function matchDate (
+  sourceTime: number,
+  patternTime: number | Date,
+  type: 'week',
+  firstDayOfWeek: FirstDayOfWeek
+): boolean
+function matchDate (
+  sourceTime: number,
+  patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter' | 'week',
   firstDayOfWeek: FirstDayOfWeek = 0
 ): boolean {
   const matcher =
     type === 'week' ? makeWeekMatcher(firstDayOfWeek) : matcherMap[type]
-    return matcher(sourceTime, patternTime)
+  return matcher(sourceTime, patternTime)
 }
 
 export interface DateItem {
@@ -83,7 +94,7 @@ export interface DateItem {
   startOfSpan: boolean
   endOfSpan: boolean
   selected: boolean
-  inHeavySpan: boolean
+  inSelectedWeek: boolean
   ts: number
 }
 
@@ -168,7 +179,7 @@ function dateItem (
     inCurrentMonth: isSameMonth(time, monthTs),
     isCurrentDate: matchDate(currentTs, time, 'date'),
     inSpan,
-    inHeavySpan: false,
+    inSelectedWeek: false,
     startOfSpan,
     endOfSpan,
     selected,
@@ -193,7 +204,7 @@ function weekItem (
     if (matchDate(valueTs[0], time, 'week', firstDayOfWeek)) startOfSpan = true
     if (matchDate(valueTs[1], time, 'week', firstDayOfWeek)) endOfSpan = true
   }
-  const inHeavySpan =
+  const inSelectedWeek =
     valueTs !== null &&
     (Array.isArray(valueTs)
       ? matchDate(valueTs[0], time, 'week', firstDayOfWeek) ||
@@ -212,7 +223,7 @@ function weekItem (
     startOfSpan,
     endOfSpan,
     selected: false,
-    inHeavySpan,
+    inSelectedWeek,
     ts: getTime(time)
   }
 }

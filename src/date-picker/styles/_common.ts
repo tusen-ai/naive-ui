@@ -23,7 +23,7 @@ export default {
   calendarLeftPaddingMonthrange: '0',
   calendarLeftPaddingQuarterrange: '0',
   calendarLeftPaddingYearrange: '0',
-  calendarLeftPaddingWeek: '0',
+  calendarLeftPaddingWeek: '6px 12px 4px 12px',
   calendarRightPaddingDate: '6px 12px 4px 12px',
   calendarRightPaddingDatetime: '4px 12px',
   calendarRightPaddingDaterange: '6px 12px 4px 12px',
