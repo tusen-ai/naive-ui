@@ -8,18 +8,18 @@
   <n-space>
     <n-qr-code
       value="https://www.naiveui.com/"
-      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      icon-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
       error-correction-level="H"
     />
     <n-qr-code
       value="https://www.naiveui.com/"
-      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      icon-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
       icon-background-color="#333"
       error-correction-level="H"
     />
     <n-qr-code
       value="https://www.naiveui.com/"
-      icon-src="https://www.naiveui.com/assets/naivelogo-93278402.svg"
+      icon-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
       :icon-size="32"
       error-correction-level="H"
     />
