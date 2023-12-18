@@ -31,6 +31,7 @@ const ruRu: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Очистить',
     now: 'Сейчас',
     confirm: 'Подтвердить',
@@ -42,6 +43,7 @@ const ruRu: NLocale = {
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
     quarterPlaceholder: 'Select Quarter',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Дата начала',
     endDatePlaceholder: 'Дата окончания',
     startDatetimePlaceholder: 'Дата и время начала',

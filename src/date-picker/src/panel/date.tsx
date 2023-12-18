@@ -1,4 +1,4 @@
-import { h, defineComponent, watchEffect } from 'vue'
+import { h, defineComponent, watchEffect, type PropType } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -19,7 +19,13 @@ import PanelHeader from './panelHeader'
  */
 export default defineComponent({
   name: 'DatePanel',
-  props: useCalendarProps,
+  props: {
+    ...useCalendarProps,
+    type: {
+      type: String as PropType<'date' | 'week'>,
+      required: false
+    }
+  },
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -31,7 +37,7 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, 'date')
+    return useCalendar(props, props.type ?? 'date')
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
@@ -109,11 +115,18 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--excluded`]:
                       !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+                      this.mergedIsDateDisabled(dateItem.ts),
+                    [`${mergedClsPrefix}-date-panel-date--slightly-covered`]:
+                      this.isSlightlyCovered(dateItem),
+                    [`${mergedClsPrefix}-date-panel-date--heavily-covered`]:
+                      dateItem.inHeavySpan
                   }
                 ]}
                 onClick={() => {
                   this.handleDateClick(dateItem)
+                }}
+                onMouseenter={() => {
+                  this.handleDateMouseEnter(dateItem)
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />

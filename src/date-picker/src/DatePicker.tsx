@@ -218,6 +218,8 @@ export default defineComponent({
         case 'quarter':
         case 'quarterrange':
           return localeRef.value.quarterFormat
+        case 'week':
+          return localeRef.value.weekFormat
       }
     })
     const mergedValueFormatRef = computed(() => {
@@ -316,6 +318,8 @@ export default defineComponent({
             return localeRef.value.yearPlaceholder
           case 'quarter':
             return localeRef.value.quarterPlaceholder
+          case 'week':
+            return localeRef.value.weekPlaceholder
           default:
             return ''
         }
@@ -357,7 +361,8 @@ export default defineComponent({
       if (actions !== undefined) return actions
       const result = clearable ? ['clear'] : []
       switch (type) {
-        case 'date': {
+        case 'date':
+        case 'week': {
           result.push('now')
           return result
         }
@@ -1030,7 +1035,9 @@ export default defineComponent({
         type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps}>{$slots}</DatePanel>
+        <DatePanel {...commonPanelProps} type={type}>
+          {$slots}
+        </DatePanel>
           )
     }
     if (this.panel) {

@@ -31,6 +31,7 @@ const nbNO: NLocale = {
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Tøm',
     now: 'Nå',
     confirm: 'Bekreft',
@@ -42,6 +43,7 @@ const nbNO: NLocale = {
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
     quarterPlaceholder: 'Select Quarter',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',

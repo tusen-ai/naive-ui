@@ -16,6 +16,7 @@ year.vue
 yearrange.vue
 quarter.vue
 quarterrange.vue
+week.vue
 size.vue
 default-time.vue
 disabled.vue
