@@ -699,6 +699,7 @@ namespace qrcodegen {
       const result: byte[] = divisor.map((_) => 0)
       for (const b of data) {
         // Polynomial division
+        // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
         const factor: byte = b ^ (result.shift() as byte)
         result.push(0)
         divisor.forEach(

@@ -264,6 +264,7 @@ export default defineComponent({
       sort,
       clearFilter,
       scrollTo: (arg0: any, arg1?: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }
     }

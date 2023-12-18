@@ -739,8 +739,8 @@ export default defineComponent({
             }}
           </VOverflow>
         )
-      ) : maxTagCountNumeric ? (
-        createOriginalTagNodes().concat(counter as JSX.Element)
+      ) : maxTagCountNumeric && counter ? (
+        createOriginalTagNodes().concat(counter)
       ) : (
         createOriginalTagNodes()
       )
@@ -889,11 +889,11 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption as SelectBaseOption,
+                      option: this.selectedOption!,
                       handleClose: () => {}
                     })
                     : renderLabel
-                      ? renderLabel(this.selectedOption as SelectBaseOption, true)
+                      ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}
                 </div>
               </div>

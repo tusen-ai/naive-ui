@@ -14,6 +14,11 @@ import {
 } from 'vue'
 import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
+import { happensIn } from 'seemly'
+import type {
+  MenuGroupOption,
+  MenuOptionSharedPart
+} from '../../menu/src/interface'
 import { ChevronRightIcon } from '../../_internal/icons'
 import { render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
@@ -32,7 +37,6 @@ import type {
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
-import { happensIn } from 'seemly'
 
 export interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
@@ -238,8 +242,7 @@ export default defineComponent({
     if (mergedShowSubmenu) {
       const submenuNodeProps = this.menuProps?.(
         rawNode,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        rawNode.children as any
+        rawNode.children as Array<MenuOptionSharedPart | MenuGroupOption>
       )
       submenuVNode = (
         <NDropdownMenu
@@ -272,42 +275,49 @@ export default defineComponent({
         data-dropdown-option
         {...optionNodeProps}
       >
-        {h('div', mergeProps(builtinProps as any, props as any), [
-          <div
-            class={[
-              `${clsPrefix}-dropdown-option-body__prefix`,
-              siblingHasIcon &&
-                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
-            ]}
-          >
-            {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
-          </div>,
-          <div
-            data-dropdown-option
-            class={`${clsPrefix}-dropdown-option-body__label`}
-          >
-            {/* TODO: Workaround, menu compatible */}
-            {renderLabel
-              ? renderLabel(rawNode)
-              : render(rawNode[this.labelField] ?? rawNode.title)}
-          </div>,
-          <div
-            data-dropdown-option
-            class={[
-              `${clsPrefix}-dropdown-option-body__suffix`,
-              siblingHasSubmenu &&
-                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
-            ]}
-          >
-            {this.hasSubmenu ? (
-              <NIcon>
-                {{
-                  default: () => <ChevronRightIcon />
-                }}
-              </NIcon>
-            ) : null}
-          </div>
-        ])}
+        {h(
+          'div',
+          mergeProps(
+            builtinProps as Record<string, any>,
+            props as Record<string, any>
+          ),
+          [
+            <div
+              class={[
+                `${clsPrefix}-dropdown-option-body__prefix`,
+                siblingHasIcon &&
+                  `${clsPrefix}-dropdown-option-body__prefix--show-icon`
+              ]}
+            >
+              {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
+            </div>,
+            <div
+              data-dropdown-option
+              class={`${clsPrefix}-dropdown-option-body__label`}
+            >
+              {/* TODO: Workaround, menu compatible */}
+              {renderLabel
+                ? renderLabel(rawNode)
+                : render(rawNode[this.labelField] ?? rawNode.title)}
+            </div>,
+            <div
+              data-dropdown-option
+              class={[
+                `${clsPrefix}-dropdown-option-body__suffix`,
+                siblingHasSubmenu &&
+                  `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
+              ]}
+            >
+              {this.hasSubmenu ? (
+                <NIcon>
+                  {{
+                    default: () => <ChevronRightIcon />
+                  }}
+                </NIcon>
+              ) : null}
+            </div>
+          ]
+        )}
         {this.hasSubmenu ? (
           <VBinder>
             {{

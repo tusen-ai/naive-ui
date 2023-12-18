@@ -788,18 +788,18 @@ function useDualCalendar (
   function handleEndYearVlScroll (): void {
     endYearScrollbarRef.value?.sync()
   }
-  function virtualListContainer (type: 'start' | 'end'): HTMLElement {
+  function virtualListContainer (type: 'start' | 'end'): HTMLElement | null {
     if (type === 'start') {
-      return startYearVlRef.value?.listElRef as HTMLElement
+      return startYearVlRef.value?.listElRef || null
     } else {
-      return endYearVlRef.value?.listElRef as HTMLElement
+      return endYearVlRef.value?.listElRef || null
     }
   }
-  function virtualListContent (type: 'start' | 'end'): HTMLElement {
+  function virtualListContent (type: 'start' | 'end'): HTMLElement | null {
     if (type === 'start') {
-      return startYearVlRef.value?.itemsElRef as HTMLElement
+      return startYearVlRef.value?.itemsElRef || null
     } else {
-      return endYearVlRef.value?.itemsElRef as HTMLElement
+      return endYearVlRef.value?.itemsElRef || null
     }
   }
   const childComponentRefs: RangePanelChildComponentRefs = {

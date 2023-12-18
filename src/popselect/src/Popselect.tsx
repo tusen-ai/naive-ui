@@ -100,11 +100,11 @@ export default defineComponent({
             ref={createRefSetter(ref)}
             onMouseenter={mergeEventHandlers([
               onMouseenter,
-              $attrs.onMouseenter as any
+              $attrs.onMouseenter as ((e: MouseEvent) => void) | undefined
             ])}
             onMouseleave={mergeEventHandlers([
               onMouseleave,
-              $attrs.onMouseleave as any
+              $attrs.onMouseleave as ((e: MouseEvent) => void) | undefined
             ])}
           >
             {{

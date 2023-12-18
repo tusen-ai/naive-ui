@@ -24,7 +24,7 @@ function traverse (
   nodes?.forEach((node) => {
     callback(node)
     traverse(
-      (node as any)[childrenField],
+      (node as any)[childrenField] as TreeOption[] | undefined,
       childrenField,
       callback,
       callbackAfter
@@ -52,10 +52,10 @@ export function keysWithFilter (
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {
-        highlightKeySet.add((node as any)[keyField])
+        highlightKeySet.add((node as any)[keyField] as Key)
         for (let i = path.length - 2; i >= 0; --i) {
-          if (!keys.has((path[i] as any)[keyField])) {
-            keys.add((path[i] as any)[keyField])
+          if (!keys.has((path[i] as any)[keyField] as Key)) {
+            keys.add((path[i] as any)[keyField] as Key)
           } else {
             return
           }

@@ -54,7 +54,7 @@ function getPathLabel (
 ): string {
   const path: string[] = []
   while (node) {
-    path.push((node.rawNode as any)[labelField])
+    path.push((node.rawNode as any)[labelField] as string)
     node = node.parent
   }
   return path.reverse().join(separator)
