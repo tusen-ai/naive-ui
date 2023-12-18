@@ -17,6 +17,7 @@
 - `n-dialog` supports RTL.
 - `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 - `n-date-picker`'s `type` prop supports `'week'`.
+- Update `ruRU` locale.
 
 ## 2.36.0
 
@@ -118,7 +119,6 @@
 
 ### i18n
 
-- Update `ruRU` locale.
 - Update `zhTW` locale.
 - Add `svSE` locale.
 
