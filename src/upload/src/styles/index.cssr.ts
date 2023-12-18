@@ -321,7 +321,7 @@ export default c([
     ])
   ]),
   cB('upload-file-input', `
-    display: block;
+    display: none;
     width: 0;
     height: 0;
     opacity: 0;

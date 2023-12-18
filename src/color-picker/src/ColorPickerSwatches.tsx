@@ -16,9 +16,10 @@ function normalizeColor (color: string, mode: ColorPickerMode | null): string {
 }
 
 function getHexFromName (color: string): string {
-  const ctx = document
-    .createElement('canvas')
-    .getContext('2d') as CanvasRenderingContext2D
+  const ctx = document.createElement('canvas').getContext('2d')
+  if (!ctx) {
+    return '#000000'
+  }
   ctx.fillStyle = color
   return ctx.fillStyle
 }

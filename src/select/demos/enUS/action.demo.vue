@@ -5,6 +5,9 @@ Is there anybody who needs an action slot on a select menu?
 </markdown>
 <template>
   <n-select v-model:value="value" :options="options">
+    <template #header>
+      Don't know what to put
+    </template>
     <template #action>
       If you click this demo, you may need it.
     </template>
