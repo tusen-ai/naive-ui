@@ -1,7 +1,6 @@
 <markdown>
   # Event
-
-  </markdown>
+</markdown>
 
 <template>
   <n-split
@@ -11,16 +10,11 @@
     @moving="handleOnMoving"
     @move-end="handleOnMoveEnd"
   >
-    <template #first>
-      <div :style="{ height: '100%' }">
-        Pane 1
-      </div>
+    <template #1>
+      Pane 1
     </template>
-
-    <template #second>
-      <div :style="{ height: '100%' }">
-        Pane 2
-      </div>
+    <template #2>
+      Pane 2
     </template>
   </n-split>
 </template>

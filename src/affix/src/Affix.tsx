@@ -124,11 +124,17 @@ export default defineComponent({
       if (!scrollTarget || !selfEl) return
       const scrollTop = getScrollTop(scrollTarget)
       if (affixedRef.value) {
-        if (scrollTop < (topAffixedTriggerScrollTopRef.value as number)) {
+        if (
+          topAffixedTriggerScrollTopRef.value !== null &&
+          scrollTop < topAffixedTriggerScrollTopRef.value
+        ) {
           stickToTopRef.value = false
           topAffixedTriggerScrollTopRef.value = null
         }
-        if (scrollTop > (bottomAffixedTriggerScrollTopRef.value as number)) {
+        if (
+          bottomAffixedTriggerScrollTopRef.value !== null &&
+          scrollTop > bottomAffixedTriggerScrollTopRef.value
+        ) {
           stickToBottomRef.value = false
           bottomAffixedTriggerScrollTopRef.value = null
         }

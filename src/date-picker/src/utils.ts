@@ -55,11 +55,7 @@ function matchDate (
   type: 'date' | 'month' | 'year' | 'quarter'
 ): boolean {
   const matcher = matcherMap[type]
-  if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => matcher(time, patternTime))
-  } else {
-    return matcher(sourceTime, patternTime)
-  }
+  return matcher(sourceTime, patternTime)
 }
 
 export interface DateItem {

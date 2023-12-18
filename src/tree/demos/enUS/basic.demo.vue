@@ -9,7 +9,8 @@ Fortunately, the tree is now alive and it's not balanced.
     block-line
     :data="data"
     :default-expanded-keys="defaultExpandedKeys"
-    selectable
+    expand-on-click
+    checkable
   />
 </template>
 

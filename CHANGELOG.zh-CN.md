@@ -4,6 +4,18 @@
 
 ### Fixes
 
+- 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)
+
+### Features
+
+- `n-space` 新增 `reverse` 属性
+- `n-input` 新增 `clear` 方法，关闭[#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
+- `n-time-picker` 新增 `clear` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
+
+## 2.36.0
+
+### Fixes
+
 - 修复 `n-tree` 未暴露连接线颜色变量 `--n-line-color`，关闭[#5339](https://github.com/tusen-ai/naive-ui/issues/5339)
 - 修复 `n-tree` 在 `disabled` 的情况下不显示选中节点的样式
 - 修复 `n-tree` `virtual-scroll` 空数据占位符丢失
@@ -14,22 +26,25 @@
 - 修复 `n-input` 当 `type` 为 `textarea` 且禁用 inline 主题时不显示纵向滚动条，关闭 [#5418](https://github.com/tusen-ai/naive-ui/issues/5418)
 - 修复在 `inline-theme-disabled` 设定后，带小数点的自定义颜色在 `n-tag`、`n-avatar`、`n-badge`、`n-button`、`n-rate` 使用会出问题
 - 修复 `n-tabs` 在 `vertical` 模式下的边界高度不正常
+- 修复 `n-tree` 节点在 `block-line` 模式下的悬浮颜色比选种颜色有更高的优先级
+- 修复 `n-tree` 点击展开开关会导致选中勾选框
 
 ### Features
 
 - `n-tree` 导出 `treeGetClickTarget` 函数，判断点击位置，关闭 [#5375](https://github.com/tusen-ai/naive-ui/issues/5375)
 - `n-space` 新增 `item-class` 属性
-- `n-layout` 新增 `content-class`、`collapsed-trigger-class` 和 `trigger-class` 属性
+- `n-layout` 新增 `content-class` 属性
+- `n-layout-sider` 新增 `collapsed-trigger-class` 和 `trigger-class` 属性
 - `n-spin` 新增 `content-class`、`content-style` 属性
-- `n-popover` 新增 `arrow-class`、`arrow-wraperr-class`、`arrow-wraperr-style`、`content-class`、`footer-class` 和 `header-class` 属性
-- `n-notification` 新增 `container-class` 属性
-- `n-message` 新增 `container-class` 属性
-- `n-loading-bar` 新增 `container-class` 属性
+- `n-popover` 新增 `arrow-class`、`arrow-wrapper-class`、`arrow-wrapper-style`、`content-class`、`footer-class` 和 `header-class` 属性
+- `n-notification-provider` 新增 `container-class` 属性
+- `n-message-provider` 新增 `container-class` 属性
+- `n-loading-bar-provider` 新增 `container-class` 属性
 - `n-thing` 新增 `content-class` 和 `description-class` 属性
 - `n-card` 新增 `content-class`、`footer-class`、`header-class` 和 `header-extra-class` 属性
 - `n-descriptions` 新增 `content-class` 和 `label-class` 属性
 - `n-upload` 新增 `file-list-class` 和 `trigger-class` 属性
-- `n-dynamic-input` 新增 `input-class` 和 `tag-class` 属性
+- `n-dynamic-tags` 新增 `input-class` 和 `tag-class` 属性
 - `n-dynamic-input` 新增 `item-class` 属性
 - `n-slider` 新增 `on-dragstart` `on-dragend` 属性，关闭 [#5365](https://github.com/tusen-ai/naive-ui/issues/5365)
 - `n-dialog` 新增 `close` 插槽
@@ -37,7 +52,10 @@
 - `n-popselect` 新增 `header` 插槽
 - `n-tree-select` 新增 `watch-props` 属性
 - 新增 `n-split` 组件，关闭 [#3557](https://github.com/tusen-ai/naive-ui/issues/3557)
-- `n-time-picker` 新增 `clear` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
+- 新增 `n-virtual-list` 组件
+- 新增 `n-qr-code` 组件，关闭 [#2535](https://github.com/tusen-ai/naive-ui/issues/2535)
+- `n-menu` 新增 `responsive` 属性，在水平状态会收起溢出的菜单项
+- `n-menu` 新增 `deriveResponsiveState` 方法
 
 ## 2.35.0
 

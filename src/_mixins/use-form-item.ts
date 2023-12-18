@@ -63,7 +63,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     mergedSize
       ? () => mergedSize(NFormItem)
       : () => {
-          const { size } = props as any
+          const { size } = props
           if (size) return size
           if (NFormItem) {
             const { mergedSize } = NFormItem

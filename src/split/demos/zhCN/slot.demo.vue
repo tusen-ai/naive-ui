@@ -1,34 +1,34 @@
 <markdown>
 # 插槽
-
 </markdown>
 
 <template>
-  <n-split direction="horizontal" style="height: 200px">
-    <template #first>
-      <div :style="{ height: '100%' }">
-        Pane 1
-      </div>
+  <n-split
+    direction="horizontal"
+    style="height: 200px"
+    :default-size="0.4"
+    :resize-trigger-size="16"
+    :min="0.25"
+    :max="0.75"
+  >
+    <template #1>
+      Pane 1
     </template>
-
-    <template #second>
-      <div :style="{ height: '100%' }">
-        Pane 2
-      </div>
+    <template #2>
+      Pane 2
     </template>
-
     <template #resize-trigger>
       <div
         :style="{
           height: '100%',
-          width: '16px',
           backgroundColor: '#409eff',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          borderRadius: '8px'
         }"
       >
-        <n-icon color="white" :size="18">
+        <n-icon color="white" :size="16">
           <swap-horizontal-icon />
         </n-icon>
       </div>

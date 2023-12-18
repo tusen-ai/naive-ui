@@ -536,6 +536,10 @@ export const enComponentRoutes = [
     component: () => import('../../src/equation/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'qr-code',
+    component: () => import('../../src/qr-code/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'virtual-list',
     component: () =>
       import('../../src/virtual-list/demos/enUS/index.demo-entry.md')
@@ -920,6 +924,10 @@ export const zhComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'qr-code',
+    component: () => import('../../src/qr-code/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'virtual-list',

@@ -22,7 +22,7 @@ value-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| clear-text | `string` | `undefined` | 清楚按钮的文本 | 2.35.0 |
+| clear-text | `string` | `undefined` | 清除按钮的文本 | 2.35.0 |
 | default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 | 2.32.0 |
 | disabled | `boolean` | `true` | 是否禁用 | 2.32.0 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 | 2.32.0，`from` 2.32.2 |
