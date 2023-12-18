@@ -63,6 +63,7 @@ export default defineComponent({
       getBodyElement,
       getHeaderElement,
       scrollTo (arg0: any, arg1?: any) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         bodyInstRef.value?.scrollTo(arg0, arg1)
       }
     }
