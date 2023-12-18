@@ -30,7 +30,7 @@ scroll-to.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content-class | `string` | `undefined` | Class of scrollable content node. | NEXT_VERSION |
+| content-class | `string` | `undefined` | Class of scrollable content node. | 2.36.0 |
 | content-style | `string \| Object` | `undefined` | Style of scrollable content node. |  |
 | embedded | `boolean` | `false` | Use darker background to show a embedded effect. Only work for light theme. |  |
 | has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |  |
@@ -63,7 +63,7 @@ scroll-to.vue
 | bordered | `boolean` | `false` | Whether to show the border. |  |
 | collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. |  |
 | collapsed | `boolean` | `undefined` | Whether the sider is collapsed. It only works for when `position` is `'static'`. |  |
-| collapsed-trigger-class | `string` | `undefined` | Trigger class when collapsed. | NEXT_VERSION |
+| collapsed-trigger-class | `string` | `undefined` | Trigger class when collapsed. | 2.36.0 |
 | collapsed-trigger-style | `string \| Object` | `undefined` | Trigger style when collapsed. |  |
 | collapsed-width | `number` | `48` | Folded width. |  |
 | content-class | `string` | `undefined` | Class of scrollable content node. |  |
@@ -75,7 +75,7 @@ scroll-to.vue
 | scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | show-collapsed-content | `boolean` | `true` | Whether to show content in sider after it is collapsed. |  |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |  |
-| trigger-class | `string` | `undefined` | Trigger class. | NEXT_VERSION |
+| trigger-class | `string` | `undefined` | Trigger class. | 2.36.0 |
 | trigger-style | `string \| Object` | `undefined` | Trigger style. |  |
 | width | `number \| string` | `272` | Width CSS value. When it is number, px will be added. |  |
 | on-after-enter | `() => void` | `undefined` | Callback after it's expanded. |  |

@@ -154,10 +154,10 @@ All the properties can be modified dynamically.
 
 ### Dialog Slots
 
-| Name    | Parameters | Description       | Version      |
-| ------- | ---------- | ----------------- | ------------ |
-| action  | `()`       | `Action` content. |              |
-| default | `()`       | Dialog content.   |              |
-| header  | `()`       | `Header` content. |              |
-| icon    | `()`       | `Icon` content.   |              |
-| close   | `()`       | `Close` content.  | NEXT_VERSION |
+| Name    | Parameters | Description       | Version |
+| ------- | ---------- | ----------------- | ------- |
+| action  | `()`       | `Action` content. |         |
+| default | `()`       | Dialog content.   |         |
+| header  | `()`       | `Header` content. |         |
+| icon    | `()`       | `Icon` content.   |         |
+| close   | `()`       | `Close` content.  | 2.36.0  |

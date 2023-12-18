@@ -19,16 +19,16 @@ download.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| background-color | `string` | `'#FFF'` | 二维码背景颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
-| color | `string` | `'#000'` | 二维码颜色，值需要采用 `hex` 格式 | NEXT_VERSION |
-| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | 二维码纠错级别 | NEXT_VERSION |
-| icon-background-color | `string` | `'#FFF'` | 图标背景颜色 | NEXT_VERSION |
-| icon-border-radius | `number` | `4` | 图标背景圆角大小 | NEXT_VERSION |
-| icon-size | `number` | `40` | 图标大小 | NEXT_VERSION |
-| icon-src | `string` | `undefined` | 图标地址 | NEXT_VERSION |
-| padding | `number \| string` | `12` | 二维码填充大小 | NEXT_VERSION |
-| value | `string` | `''` | 文本信息 | NEXT_VERSION |
-| size | `number` | `100` | 二维码大小 | NEXT_VERSION |
+| background-color | `string` | `'#FFF'` | 二维码背景颜色，值需要采用 `hex` 格式 | 2.36.0 |
+| color | `string` | `'#000'` | 二维码颜色，值需要采用 `hex` 格式 | 2.36.0 |
+| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | 二维码纠错级别 | 2.36.0 |
+| icon-background-color | `string` | `'#FFF'` | 图标背景颜色 | 2.36.0 |
+| icon-border-radius | `number` | `4` | 图标背景圆角大小 | 2.36.0 |
+| icon-size | `number` | `40` | 图标大小 | 2.36.0 |
+| icon-src | `string` | `undefined` | 图标地址 | 2.36.0 |
+| padding | `number \| string` | `12` | 二维码填充大小 | 2.36.0 |
+| value | `string` | `''` | 文本信息 | 2.36.0 |
+| size | `number` | `100` | 二维码大小 | 2.36.0 |
 
 ### 关于二维码纠错级别
 

@@ -23,11 +23,11 @@ size.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to display border. |  |
 | column | `number` | `3` | Total columns. |  |
-| content-class | `string` | `undefined` | Class of the item content. | NEXT_VERSION |
+| content-class | `string` | `undefined` | Class of the item content. | 2.36.0 |
 | content-style | `Object \| string` | `undefined` | Style of the item content. |  |
 | label-align | `'center' \| 'left' \| 'right'` | `'left'` | Label align. |  |
 | label-placement | `'top' \| 'left'` | `'top'` | Label placement. |  |
-| label-class | `string` | `undefined` | Class of the item label. | NEXT_VERSION |
+| label-class | `string` | `undefined` | Class of the item label. | 2.36.0 |
 | label-style | `Object \| string` | `undefined` | Style of the item label. |  |
 | separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and 　`bordered` is `false`.　 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |  |

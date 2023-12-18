@@ -19,16 +19,16 @@ download.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| background-color | `string` | `'#FFF'` | QR code background color, Values need to be in `hex` format. | NEXT_VERSION |
-| color | `string` | `'#000'` | QR code color, Values need to be in `hex` format. | NEXT_VERSION |
-| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | QR code error correction level. | NEXT_VERSION |
-| icon-border-radius | `number` | `4` | Icon background's border-radius | NEXT_VERSION |
-| icon-background-color | `string` | `'#FFF'` | Icon's background color. | NEXT_VERSION |
-| icon-size | `number` | `40` | Icon's size. | NEXT_VERSION |
-| icon-src | `string` | `undefined` | Icon's URL. | NEXT_VERSION |
-| padding | `number \| string` | `12` | Padding size of the QR Code. | NEXT_VERSION |
-| value | `string` | `''` | Text information. | NEXT_VERSION |
-| size | `number` | `100` | Size of the qrcode. | NEXT_VERSION |
+| background-color | `string` | `'#FFF'` | QR code background color, Values need to be in `hex` format. | 2.36.0 |
+| color | `string` | `'#000'` | QR code color, Values need to be in `hex` format. | 2.36.0 |
+| error-correction-level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` | QR code error correction level. | 2.36.0 |
+| icon-border-radius | `number` | `4` | Icon background's border-radius | 2.36.0 |
+| icon-background-color | `string` | `'#FFF'` | Icon's background color. | 2.36.0 |
+| icon-size | `number` | `40` | Icon's size. | 2.36.0 |
+| icon-src | `string` | `undefined` | Icon's URL. | 2.36.0 |
+| padding | `number \| string` | `12` | Padding size of the QR Code. | 2.36.0 |
+| value | `string` | `''` | Text information. | 2.36.0 |
+| size | `number` | `100` | Size of the qrcode. | 2.36.0 |
 
 ### About QR code error correction level
 

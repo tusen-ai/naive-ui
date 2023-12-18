@@ -41,8 +41,8 @@ custom-thumb.vue
 | vertical | `boolean` | `false` | Whether to enable vertical mode. |  |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the slider. |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | Callback on value update. |  |
-| on-dragstart | `() => void` | `undefined` | Callback function of dragging start. | NEXT_VERSION |
-| on-dragend | `() => void` | `undefined` | Callback function of dragging end. | NEXT_VERSION |
+| on-dragstart | `() => void` | `undefined` | Callback function of dragging start. | 2.36.0 |
+| on-dragend | `() => void` | `undefined` | Callback function of dragging end. | 2.36.0 |
 
 ### Slider Slots
 

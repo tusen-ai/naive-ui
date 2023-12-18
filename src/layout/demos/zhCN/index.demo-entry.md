@@ -31,7 +31,7 @@ keep-alive-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| content-class | `string` | `undefined` | 可滚动内容节点的类名 | NEXT_VERSION |
+| content-class | `string` | `undefined` | 可滚动内容节点的类名 | 2.36.0 |
 | content-style | `string \| Object` | `undefined` | 可滚动内容节点的样式 |  |
 | embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |  |
 | has-sider | `boolean` | `false` | 组件内部是否有边栏，如果有的话必须设为 `true` |  |
@@ -64,7 +64,7 @@ keep-alive-debug.vue
 | bordered | `boolean` | `false` | 是否显示边框 |  |
 | collapse-mode | `'transform' \| 'width'` | `'transform'` | 如果设定为 `'width'`，Sider 的内容宽度将会被实际改变；如果设定为 `'transform'`，边栏将只会移动它的位置而不会改变宽度 |  |
 | collapsed | `boolean` | `undefined` | 边栏是否折叠。只在 `position` 为 `'static'` 时生效 |  |
-| collapsed-trigger-class | `string` | `undefined` | 折叠时触发器类名 | NEXT_VERSION |
+| collapsed-trigger-class | `string` | `undefined` | 折叠时触发器类名 | 2.36.0 |
 | collapsed-trigger-style | `string \| Object` | `undefined` | 折叠时触发器样式 |  |
 | collapsed-width | `number` | `48` | 折叠宽度 |  |
 | content-class | `string` | `undefined` | 可滚动内容节点的类名 |  |
@@ -76,7 +76,7 @@ keep-alive-debug.vue
 | scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | show-collapsed-content | `boolean` | `true` | 是否在 `sider` 折叠后展示内部内容 |  |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | 内置的触发按钮是否展示 |  |
-| trigger-class | `string` | `undefined` | 触发器类名 | NEXT_VERSION |
+| trigger-class | `string` | `undefined` | 触发器类名 | 2.36.0 |
 | trigger-style | `string \| Object` | `undefined` | 触发器样式 |  |
 | width | `number \| string` | `272` | 宽度的 CSS 值，为数字时会添加 px |  |
 | on-after-enter | `() => void` | `undefined` | 完成展开后的回调 |  |

@@ -24,11 +24,11 @@ single-line-debug.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | 是否显示 border |  |
 | column | `number` | `3` | 设置的总列数 |  |
-| content-class | `string` | `undefined` | 内容的类名 | NEXT_VERSION |
+| content-class | `string` | `undefined` | 内容的类名 | 2.36.0 |
 | content-style | `Object \| string` | `undefined` | 内容的样式 |  |
 | label-align | `'center' \| 'left' \| 'right'` | `'left'` | label 对齐方式 |  |
 | label-placement | `'top' \| 'left'` | `'top'` | label 显示位置 |  |
-| label-class | `string` | `undefined` | label 的类名 | NEXT_VERSION |
+| label-class | `string` | `undefined` | label 的类名 | 2.36.0 |
 | label-style | `Object \| string` | `undefined` | label 的样式 |  |
 | separator | `string` | `':'` | 分隔符，`label-placement` 为 `left` 并且　`bordered`　为 `false`　时生效 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
