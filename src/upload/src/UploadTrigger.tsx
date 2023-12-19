@@ -30,6 +30,7 @@ export default defineComponent({
       draggerInsideRef,
       handleFileAddition,
       mergedDirectoryDndRef,
+      triggerClassRef,
       triggerStyleRef
     } = NUpload
 
@@ -97,7 +98,8 @@ export default defineComponent({
             (mergedDisabledRef.value || maxReachedRef.value) &&
               `${mergedClsPrefix}-upload-trigger--disabled`,
             isImageCardTypeRef.value &&
-              `${mergedClsPrefix}-upload-trigger--image-card`
+              `${mergedClsPrefix}-upload-trigger--image-card`,
+            triggerClassRef.value
           ]}
           style={triggerStyleRef.value}
           onClick={handleTriggerClick}

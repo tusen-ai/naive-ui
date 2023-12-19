@@ -1,4 +1,4 @@
-import { h, defineComponent, watchEffect } from 'vue'
+import { h, defineComponent, watchEffect, type PropType } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -19,7 +19,13 @@ import PanelHeader from './panelHeader'
  */
 export default defineComponent({
   name: 'DatePanel',
-  props: useCalendarProps,
+  props: {
+    ...useCalendarProps,
+    type: {
+      type: String as PropType<'date' | 'week'>,
+      required: true
+    }
+  },
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -31,10 +37,11 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, 'date')
+    return useCalendar(props, props.type)
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type } =
+      this
     onRender?.()
     return (
       <div
@@ -42,7 +49,7 @@ export default defineComponent({
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--date`,
+          `${mergedClsPrefix}-date-panel--${type}`,
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
@@ -109,11 +116,18 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--excluded`]:
                       !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
+                      this.mergedIsDateDisabled(dateItem.ts),
+                    [`${mergedClsPrefix}-date-panel-date--week-hovered`]:
+                      this.isWeekHovered(dateItem),
+                    [`${mergedClsPrefix}-date-panel-date--week-selected`]:
+                      dateItem.inSelectedWeek
                   }
                 ]}
                 onClick={() => {
                   this.handleDateClick(dateItem)
+                }}
+                onMouseenter={() => {
+                  this.handleDateMouseEnter(dateItem)
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   h,
   defineComponent,
@@ -60,7 +61,7 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-Pick<CSSProperties, typeof transitionProperties[number]>
+Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
 export const carouselProps = {
@@ -163,7 +164,11 @@ export default defineComponent({
     const duplicatedableRef = computed(
       // duplicate the copy operation in `slide` mode,
       // because only its DOM is sequence layout
-      () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
+      () =>
+        props.loop &&
+        props.slidesPerView === 1 &&
+        sequenceLayoutRef.value &&
+        totalViewRef.value > 1
     )
     // user wants to control the transition animation
     const userWantsControlRef = computed(() => props.effect === 'custom')
@@ -574,7 +579,7 @@ export default defineComponent({
         dragStartX = touchEvent.clientX
       }
       if (props.touchable) {
-        on('touchmove', document, handleTouchmove, { passive: true } as any)
+        on('touchmove', document, handleTouchmove)
         on('touchend', document, handleTouchend)
         on('touchcancel', document, handleTouchend)
       }
@@ -757,9 +762,13 @@ export default defineComponent({
         if (realIndex === lastRealIndex) return
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
+          if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
-            if (realIndex === length - 2 && lastRealIndex === 1) {
+            if (
+              displayTotalViewRef.value > 2 &&
+              realIndex === length - 2 &&
+              lastRealIndex === 1
+            ) {
               realIndex = 0
             } else if (realIndex === 1 && lastRealIndex === length - 2) {
               realIndex = length - 1

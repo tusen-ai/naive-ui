@@ -587,6 +587,9 @@ export default defineComponent({
     }
     function handleClear (e: MouseEvent): void {
       doClear(e)
+      clearValue()
+    }
+    function clearValue (): void {
       if (props.pair) {
         doUpdateValue(['', ''])
         doChange(['', ''])
@@ -662,7 +665,7 @@ export default defineComponent({
       if (props.onKeyup) call(props.onKeyup, e)
     }
     function handleWrapperKeydown (e: KeyboardEvent): void {
-      props.onKeydown?.(e)
+      if (props.onKeydown) call(props.onKeydown, e)
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
@@ -812,6 +815,7 @@ export default defineComponent({
       inputElRef,
       textareaElRef,
       isCompositing: isComposingRef,
+      clear: clearValue,
       focus,
       blur,
       select,

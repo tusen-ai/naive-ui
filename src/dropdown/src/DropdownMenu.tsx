@@ -157,7 +157,10 @@ export default defineComponent({
         {this.showArrow
           ? renderArrow({
             clsPrefix,
-            arrowStyle: this.arrowStyle
+            arrowStyle: this.arrowStyle,
+            arrowClass: undefined,
+            arrowWrapperClass: undefined,
+            arrowWrapperStyle: undefined
           })
           : null}
       </div>
