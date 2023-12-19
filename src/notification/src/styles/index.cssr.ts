@@ -217,6 +217,7 @@ export default c([
       padding-left: var(--n-padding-left);
       padding-right: var(--n-padding-right);
       width: var(--n-width);
+      max-width: calc(100vw - 28px - 16px);
       border-radius: var(--n-border-radius);
       box-shadow: var(--n-box-shadow);
       box-sizing: border-box;

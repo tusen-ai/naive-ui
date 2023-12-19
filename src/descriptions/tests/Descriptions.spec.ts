@@ -78,12 +78,12 @@ describe('n-descriptions', () => {
       'n-descriptions--left-label-align'
     )
 
-    await wrapper.setProps({ 'label-align': 'center' })
+    await wrapper.setProps({ labelAlign: 'center' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--center-label-align'
     )
 
-    await wrapper.setProps({ 'label-align': 'right' })
+    await wrapper.setProps({ labelAlign: 'right' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--right-label-align'
     )
@@ -98,7 +98,7 @@ describe('n-descriptions', () => {
       'n-descriptions--top-label-placement'
     )
 
-    await wrapper.setProps({ 'label-placement': 'left' })
+    await wrapper.setProps({ labelPlacement: 'left' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--left-label-placement'
     )
