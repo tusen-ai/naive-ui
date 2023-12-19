@@ -398,7 +398,10 @@ export default defineComponent({
         clearHideTimer()
         doUpdateShow(false)
       }
-      props.onClickoutside?.(e)
+      // avoid double triggering of right-click events
+      if (e.button === 0) {
+        props.onClickoutside?.(e)
+      }
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {
