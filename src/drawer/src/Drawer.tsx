@@ -224,6 +224,18 @@ export default defineComponent({
       if (onMaskClick) onMaskClick(e)
     }
 
+    // handleMaskClick event runs the risk of being executed multiple times
+    // so the onClickoutside logic is handled separately
+    function onClickoutside (e: MouseEvent): void {
+      const className = (e.target as Element).className
+      const mask = `${mergedClsPrefixRef.value}-drawer-mask`
+      const target = className?.split(' ')
+      // if the element triggered by a click is not a mask layer
+      if (target && target[0] !== mask) {
+        doUpdateShow(false)
+      }
+    }
+
     const isComposingRef = useIsComposing()
 
     function handleEsc (e: KeyboardEvent): void {
@@ -309,6 +321,7 @@ export default defineComponent({
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
+      onClickoutside,
       handleEsc,
       mergedTheme: themeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -374,7 +387,7 @@ export default defineComponent({
                   minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
-                  onClickoutside={this.handleMaskClick}
+                  onClickoutside={this.onClickoutside}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>
