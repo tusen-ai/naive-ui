@@ -12,6 +12,7 @@ export interface InputWrappedRef {
   inputElRef: Ref<HTMLInputElement | null>
   isCompositing: Ref<boolean>
   blur: () => void
+  clear: () => void
   focus: () => void
   select: () => void
   activate: () => void

@@ -10,23 +10,20 @@ on:
     branches: [ main, feat, docs ]
 
 jobs:
-  build:
+  lint:
     environment: test
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x, 18.15]
+        node-version: [18]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
+        run: corepack enable
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -38,6 +35,27 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
+  test:
+    environment: test
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        run: corepack enable
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: pnpm install
+
       - name: Test
         run: pnpm run test:cov
 
@@ -45,4 +63,3 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-

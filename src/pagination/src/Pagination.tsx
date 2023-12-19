@@ -30,7 +30,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
 import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
-import { createPageItemsInfo } from './utils'
+import { createPageItemsInfo, getDefaultPageSize } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import {
@@ -166,14 +166,7 @@ export default defineComponent({
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
     const uncontrolledPageRef = ref(props.defaultPage)
-    const getDefaultPageSize = (): number => {
-      const { defaultPageSize } = props
-      if (defaultPageSize !== undefined) return defaultPageSize
-      const pageSizeOption = props.pageSizes[0]
-      if (typeof pageSizeOption === 'number') return pageSizeOption
-      return pageSizeOption.value || 10
-    }
-    const uncontrolledPageSizeRef = ref(getDefaultPageSize())
+    const uncontrolledPageSizeRef = ref(getDefaultPageSize(props))
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef

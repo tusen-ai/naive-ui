@@ -54,6 +54,7 @@ show-debug.vue
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |  |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |  |
+| responsive | `boolean` | `false` | 是否收起溢出的菜单，仅对 `mode='horizontal'` 的菜单生效 | 2.36.0 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |  |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |  |
 | watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
@@ -95,4 +96,5 @@ show-debug.vue
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| showOption | `(key?: string \| number) => void` | 展开菜单，确保设定的元素被显示，如果不传入 `key` 会当前选中元素 | 2.27.0 |
+| deriveResponsiveState | `() => void` | 重新计算响应式菜单内容折叠状态。在菜单容器宽度并不完全由外部宽度决定的时候，在 `responsive` 情况下，菜单内容收起后无法自动展开，此时你可以调用此方法以保证菜单可以重新展开 | 2.36.0 |
+| showOption | `(key?: string \| number) => void` | 展开菜单，确保设定的元素被显示，如果不传入 `key` 会展示当前选中元素 | 2.27.0 |

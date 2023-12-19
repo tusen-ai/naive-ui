@@ -516,7 +516,7 @@ export default defineComponent({
       }
     }
     function handleTriggerBlur (e: FocusEvent): void {
-      if (menuRef.value?.selfRef?.contains(e.relatedTarget as any)) {
+      if (menuRef.value?.selfRef?.contains(e.relatedTarget as Node | null)) {
         return
       }
       focusedRef.value = false
@@ -532,7 +532,7 @@ export default defineComponent({
       focusedRef.value = true
     }
     function handleMenuBlur (e: FocusEvent): void {
-      if (triggerRef.value?.$el.contains(e.relatedTarget as any)) return
+      if (triggerRef.value?.$el.contains(e.relatedTarget as Node | null)) return
       focusedRef.value = false
       doBlur(e)
       // outside select, don't need to return focus
@@ -1008,6 +1008,7 @@ export default defineComponent({
                             >
                               {{
                                 empty: () => [this.$slots.empty?.()],
+                                header: () => [this.$slots.header?.()],
                                 action: () => [this.$slots.action?.()]
                               }}
                             </NInternalSelectMenu>,
