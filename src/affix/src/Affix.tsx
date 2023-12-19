@@ -25,8 +25,8 @@ export const affixProps = {
   triggerTop: Number,
   triggerBottom: Number,
   position: {
-    type: String as PropType<'fix' | 'absolute'>,
-    default: 'fix'
+    type: String as PropType<'fixed' | 'absolute'>,
+    default: 'fixed'
   },
   // deprecated
   offsetTop: {
