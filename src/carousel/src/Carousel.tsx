@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   h,
   defineComponent,
@@ -574,7 +575,7 @@ export default defineComponent({
         dragStartX = touchEvent.clientX
       }
       if (props.touchable) {
-        on('touchmove', document, handleTouchmove, { passive: true } as any)
+        on('touchmove', document, handleTouchmove)
         on('touchend', document, handleTouchend)
         on('touchcancel', document, handleTouchend)
       }

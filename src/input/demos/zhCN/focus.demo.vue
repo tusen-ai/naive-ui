@@ -1,12 +1,15 @@
 <markdown>
 # 手动操作
 
-聚焦、失焦、选中、滚动。
+清除、聚焦、失焦、选中、滚动。
 </markdown>
 
 <template>
   <n-space vertical>
     <n-space>
+      <n-button @click="handleClear">
+        Clear
+      </n-button>
       <n-button @click="handleFocus">
         Focus
       </n-button>
@@ -34,6 +37,9 @@ export default defineComponent({
     return {
       inputInstRef,
       inputValue: ref('马儿乖，马儿好，马儿光跑不吃草。'.repeat(4)),
+      handleClear () {
+        inputInstRef.value?.clear()
+      },
       handleFocus () {
         inputInstRef.value?.focus()
       },

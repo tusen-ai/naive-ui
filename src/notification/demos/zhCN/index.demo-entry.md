@@ -59,6 +59,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| container-class | `string` | `undefined` | 容器的类名 | 2.36.0 |
 | container-style | `string \| Object` | `undefined` | 容器的样式 | 2.25.0 |
 | max | `number` | `undefined` | 限制通知框显示的个数 |  |
 | placement | `'top' \| 'bottom' \| 'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom-right'` | `top-right` | 所有通知框显示的位置 | `'top' \| 'bottom'` 2.29.0 |

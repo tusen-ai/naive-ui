@@ -78,7 +78,7 @@ export const drawerProps = {
     type: Boolean,
     default: true
   },
-  maxWitdh: Number,
+  maxWidth: Number,
   maxHeight: Number,
   minWidth: Number,
   minHeight: Number,
@@ -370,7 +370,7 @@ export default defineComponent({
                   resizable={this.resizable}
                   maxHeight={this.maxHeight}
                   minHeight={this.minHeight}
-                  maxWitdh={this.minWidth}
+                  maxWidth={this.maxWidth}
                   minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}

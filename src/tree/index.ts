@@ -6,3 +6,4 @@ export type {
   TreeDropInfo,
   TreeInst
 } from './src/interface'
+export { treeGetClickTarget } from './src/utils'
