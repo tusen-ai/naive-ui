@@ -9,6 +9,7 @@
 - 修复 `n-time-picker` 时间选择器格式化（`format="HH:mm:ss.SSS"`）后无法在编辑框内修改毫秒数的问题，关闭 [#5224](https://github.com/tusen-ai/naive-ui/issues/5224)
 - 修复 `n-notification` 通知在屏幕宽度小于 400px 的时候溢出屏幕
 - 修复 `n-carousel` 在只有两个元素时，过渡效果为 `slide` 且循环播放时过渡效果有问题，关闭 [#4323](https://github.com/tusen-ai/naive-ui/issues/4323)
+- 修复 `n-carousel` 在只有一张图片时点击箭头切换按钮触发的 `current-index` 值不正确，关闭 [#5130](https://github.com/tusen-ai/naive-ui/issues/5130)
 
 ### Features
 
