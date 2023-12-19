@@ -8,6 +8,7 @@
 - 修复 `n-data-table` 属性 `pagination` 在非受控模式下的默认分页大小 `default-page-size` 和当前页数 `default-page` 不生效，关闭 [#5201](https://github.com/tusen-ai/naive-ui/issues/5201)
 - 修复 `n-time-picker` 时间选择器格式化（`format="HH:mm:ss.SSS"`）后无法在编辑框内修改毫秒数的问题，关闭 [#5224](https://github.com/tusen-ai/naive-ui/issues/5224)
 - 修复 `n-notification` 通知在屏幕宽度小于 400px 的时候溢出屏幕
+- 修复 `n-carousel` 在只有两个元素时，过渡效果为 `slide` 且循环播放时过渡效果有问题，关闭 [#4323](https://github.com/tusen-ai/naive-ui/issues/4323)
 
 ### Features
 
