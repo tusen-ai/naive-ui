@@ -153,7 +153,7 @@ export default cB('tree', `
           right: 0;
           bottom: 50%;
           transition: border-color .3s var(--n-bezier);
-          border-bottom: 1px solid var(--n-border-color);
+          border-bottom: 1px solid var(--n-line-color);
         `)
       ])
     ]),
