@@ -94,7 +94,7 @@ export default cB('input', `
       cE('placeholder', 'display: none;')
     ]),
     // overlay autofill's default background color
-    c('&:autofill, &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus,&:-webkit-autofill:active', `
+    c('&:autofill, &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active', `
       box-shadow: inset 0 0 0 var(--n-height) var(--n-color);
     `)
   ]),
