@@ -55,9 +55,11 @@ export const dynamicTagsProps = {
     default: () => []
   },
   value: Array as PropType<Array<string | DynamicTagsOption>>,
+  inputClass: String,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
   inputProps: Object as PropType<InputProps>,
   max: Number as PropType<number>,
+  tagClass: String,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   renderTag: Function as PropType<
   | ((tag: string, index: number) => VNodeChild)
@@ -218,6 +220,7 @@ export default defineComponent({
           default: () => {
             const {
               mergedTheme,
+              tagClass,
               tagStyle,
               type,
               round,
@@ -227,6 +230,7 @@ export default defineComponent({
               mergedDisabled,
               showInput,
               inputValue,
+              inputClass,
               inputStyle,
               inputSize,
               inputForceFocused,
@@ -247,6 +251,7 @@ export default defineComponent({
                     key={index}
                     theme={mergedTheme.peers.Tag}
                     themeOverrides={mergedTheme.peerOverrides.Tag}
+                    class={tagClass}
                     style={tagStyle}
                     type={type}
                     round={round}
@@ -276,6 +281,7 @@ export default defineComponent({
                       placeholder=""
                       size={inputSize}
                       style={inputStyle}
+                      class={inputClass}
                       autosize
                       {...this.inputProps}
                       ref="inputInstRef"

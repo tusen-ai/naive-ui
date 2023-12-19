@@ -22,6 +22,7 @@ import {
   startOfMonth,
   startOfYear,
   startOfQuarter,
+  startOfWeek,
   setQuarter,
   setYear,
   setMonth
@@ -37,6 +38,7 @@ import {
   quarterArray
 } from '../utils'
 import type {
+  FirstDayOfWeek,
   IsSingleDateDisabled,
   PanelChildComponentRefs,
   Shortcuts
@@ -57,7 +59,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -106,7 +108,9 @@ function useCalendar (
       calendarValueRef.value,
       props.value,
       nowRef.value,
-      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
+      false,
+      type === 'week'
     )
   })
   const monthArrayRef = computed(() => {
@@ -175,11 +179,24 @@ function useCalendar (
       }
     }
   )
+
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
     if (type === 'quarter') return getTime(startOfQuarter(value))
+    if (type === 'week') {
+      // refer to makeWeekMatcher
+      const weekStartsOn = (((firstDayOfWeekRef.value ??
+        localeRef.value.firstDayOfWeek) +
+        1) %
+        7) as FirstDayOfWeek
+      return getTime(
+        startOfWeek(value, {
+          weekStartsOn
+        })
+      )
+    }
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -261,6 +278,22 @@ function useCalendar (
       justifyColumnsScrollState(now)
     }
   }
+  const hoveredWeekRef = ref<number | null>(null)
+  function handleDateMouseEnter (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): void {
+    if (dateItem.type === 'date' && type === 'week') {
+      hoveredWeekRef.value = sanitizeValue(getTime(dateItem.ts))
+    }
+  }
+  function isWeekHovered (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): boolean {
+    if (dateItem.type === 'date' && type === 'week') {
+      return sanitizeValue(getTime(dateItem.ts)) === hoveredWeekRef.value
+    }
+    return false
+  }
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
@@ -293,10 +326,11 @@ function useCalendar (
     )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
-      props.panel || type === 'date' || type === 'year'
+      props.panel || type === 'date' || type === 'week' || type === 'year'
     )
     switch (type) {
       case 'date':
+      case 'week':
         panelCommon.doClose()
         break
       case 'year':
@@ -367,25 +401,29 @@ function useCalendar (
   }
   function nextYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
+    props.onNextYear?.()
   }
   function prevYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
+    props.onPrevYear?.()
   }
   function nextMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
+    props.onNextMonth?.()
   }
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
+    props.onPrevMonth?.()
   }
   // For month type
-  function virtualListContainer (): HTMLElement {
+  function virtualListContainer (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.listElRef as HTMLElement
+    return value?.listElRef || null
   }
   // For month type
-  function virtualListContent (): HTMLElement {
+  function virtualListContent (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.itemsElRef as HTMLElement
+    return value?.itemsElRef || null
   }
   // For month type
   function handleVirtualListScroll (e: Event): void {
@@ -460,6 +498,8 @@ function useCalendar (
     handleDateClick,
     handleDateInputBlur,
     handleDateInput,
+    handleDateMouseEnter,
+    isWeekHovered,
     handleTimePickerChange,
     clearSelectedDateTime,
     virtualListContainer,

@@ -270,7 +270,9 @@ function submitImpl (
   request.withCredentials = withCredentials
   const formData = new FormData()
   appendData(formData, data, file)
-  formData.append(fieldName, file.file as File)
+  if (file.file !== null) {
+    formData.append(fieldName, file.file)
+  }
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -331,6 +333,7 @@ export const uploadProps = {
   MaybeArray<OnUpdateFileList>
   >,
   onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
+  fileListClass: String,
   fileListStyle: [String, Object] as PropType<string | CSSProperties>,
   defaultFileList: {
     type: Array as PropType<FileInfo[]>,
@@ -374,6 +377,7 @@ export const uploadProps = {
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
+  triggerClass: String,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
   renderIcon: Function as PropType<RenderIcon>
 } as const
@@ -504,6 +508,7 @@ export default defineComponent({
           let nextTickChain = Promise.resolve()
 
           fileInfos.forEach((fileInfo) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             nextTickChain = nextTickChain.then(nextTick as any).then(() => {
               fileInfo &&
                 doChange(fileInfo, e, {
@@ -677,6 +682,7 @@ export default defineComponent({
       onRemoveRef: toRef(props, 'onRemove'),
       onDownloadRef: toRef(props, 'onDownload'),
       mergedFileListRef,
+      triggerClassRef: toRef(props, 'triggerClass'),
       triggerStyleRef: toRef(props, 'triggerStyle'),
       shouldUseThumbnailUrlRef: toRef(props, 'shouldUseThumbnailUrl'),
       renderIconRef: toRef(props, 'renderIcon'),
@@ -693,6 +699,7 @@ export default defineComponent({
       handleFileAddition,
       mergedDisabledRef: formItem.mergedDisabledRef,
       maxReachedRef,
+      fileListClassRef: toRef(props, 'fileListClass'),
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       acceptRef: toRef(props, 'accept'),

@@ -2,12 +2,15 @@ import { h, defineComponent, computed, type PropType, inject } from 'vue'
 import type { KatexOptions } from 'katex'
 import type { Katex } from '../../config-provider/src/katex'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const equationProps = {
   value: String,
   katex: Object as PropType<Katex>,
   katexOptions: Object as PropType<KatexOptions>
 } as const
+
+export type EquationProps = ExtractPublicPropTypes<typeof equationProps>
 
 export const Equation = defineComponent({
   name: 'Equation',

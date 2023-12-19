@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 import {
   h,
   ref,
@@ -96,7 +97,9 @@ export const sliderProps = {
   >,
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<(value: number & number[]) => void>
-  >
+  >,
+  onDragstart: [Function] as PropType<() => void>,
+  onDragend: [Function] as PropType<() => void>
 } as const
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
@@ -104,7 +107,7 @@ export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
 export default defineComponent({
   name: 'Slider',
   props: sliderProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
       useConfig(props)
     const themeRef = useTheme(
@@ -232,7 +235,7 @@ export default defineComponent({
       return mergedMarks
     })
 
-    function getHandleStyle (value: number, index: number): Record<string, any> {
+    function getHandleStyle(value: number, index: number): Record<string, any> {
       const percentage = valueToPercentage(value)
       const { value: styleDirection } = styleDirectionRef
       return {
@@ -240,31 +243,31 @@ export default defineComponent({
         zIndex: index === activeIndexRef.value ? 1 : 0
       }
     }
-    function isShowTooltip (index: number): boolean {
+    function isShowTooltip(index: number): boolean {
       return (
         props.showTooltip ||
         hoverIndexRef.value === index ||
         (activeIndexRef.value === index && draggingRef.value)
       )
     }
-    function shouldKeepTooltipTransition (index: number): boolean {
+    function shouldKeepTooltipTransition(index: number): boolean {
       if (!draggingRef.value) return true
       return !(
         activeIndexRef.value === index && previousIndexRef.value === index
       )
     }
-    function focusActiveHandle (index: number): void {
+    function focusActiveHandle(index: number): void {
       if (~index) {
         activeIndexRef.value = index
-        handleRefs.value.get(index)?.focus()
+        handleRefs.get(index)?.focus()
       }
     }
-    function syncPosition (): void {
-      followerRefs.value.forEach((inst, index) => {
+    function syncPosition(): void {
+      followerRefs.forEach((inst, index) => {
         if (isShowTooltip(index)) inst.syncPosition()
       })
     }
-    function doUpdateValue (value: number | number[]): void {
+    function doUpdateValue(value: number | number[]): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
@@ -273,7 +276,7 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function dispatchValueUpdate (value: number | number[]): void {
+    function dispatchValueUpdate(value: number | number[]): void {
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
@@ -289,7 +292,7 @@ export default defineComponent({
         }
       }
     }
-    function doDispatchValue (value: number, index: number): void {
+    function doDispatchValue(value: number, index: number): void {
       if (props.range) {
         const values = arrifiedValueRef.value.slice()
         values.splice(index, 1, value)
@@ -300,7 +303,7 @@ export default defineComponent({
     }
 
     // value conversion
-    function sanitizeValue (
+    function sanitizeValue(
       value: number,
       currentValue: number,
       stepBuffer?: number
@@ -344,24 +347,24 @@ export default defineComponent({
       }
       return closestMark ? clampValue(closestMark.value) : currentValue
     }
-    function clampValue (value: number): number {
+    function clampValue(value: number): number {
       return Math.min(props.max, Math.max(props.min, value))
     }
-    function valueToPercentage (value: number): number {
+    function valueToPercentage(value: number): number {
       const { max, min } = props
       return ((value - min) / (max - min)) * 100
     }
-    function percentageToValue (percentage: number): number {
+    function percentageToValue(percentage: number): number {
       const { max, min } = props
       return min + (max - min) * percentage
     }
-    function getRoundValue (value: number): number {
+    function getRoundValue(value: number): number {
       const { step, min } = props
       if (Number(step) <= 0 || step === 'mark') return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
-    function getClosestMark (
+    function getClosestMark(
       currentValue: number,
       markValues = markValuesRef.value,
       buffer?: number
@@ -386,7 +389,7 @@ export default defineComponent({
       }
       return closestMark
     }
-    function getPointValue (event: MouseEvent | TouchEvent): number | undefined {
+    function getPointValue(event: MouseEvent | TouchEvent): number | undefined {
       const railEl = handleRailRef.value
       if (!railEl) return
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
@@ -404,7 +407,7 @@ export default defineComponent({
     }
 
     // dom event handle
-    function handleRailKeyDown (e: KeyboardEvent): void {
+    function handleRailKeyDown(e: KeyboardEvent): void {
       if (mergedDisabledRef.value || !props.keyboard) return
       const { vertical, reverse } = props
       switch (e.key) {
@@ -426,7 +429,7 @@ export default defineComponent({
           break
       }
     }
-    function handleStepValue (ratio: number): void {
+    function handleStepValue(ratio: number): void {
       const activeIndex = activeIndexRef.value
       if (activeIndex === -1) return
       const { step } = props
@@ -441,7 +444,7 @@ export default defineComponent({
         activeIndex
       )
     }
-    function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
+    function handleRailMouseDown(event: MouseEvent | TouchEvent): void {
       if (mergedDisabledRef.value) return
       if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
         return
@@ -463,47 +466,50 @@ export default defineComponent({
         )
       }
     }
-    function startDragging (): void {
+    function startDragging(): void {
       if (!draggingRef.value) {
         draggingRef.value = true
+        if (props.onDragstart) call(props.onDragstart)
         on('touchend', document, handleMouseUp)
         on('mouseup', document, handleMouseUp)
         on('touchmove', document, handleMouseMove)
         on('mousemove', document, handleMouseMove)
       }
     }
-    function stopDragging (): void {
+    function stopDragging(): void {
       if (draggingRef.value) {
         draggingRef.value = false
+        if (props.onDragend) call(props.onDragend)
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
         off('mousemove', document, handleMouseMove)
       }
     }
-    function handleMouseMove (event: MouseEvent | TouchEvent): void {
+    function handleMouseMove(event: MouseEvent | TouchEvent): void {
       const { value: activeIndex } = activeIndexRef
       if (!draggingRef.value || activeIndex === -1) {
         stopDragging()
         return
       }
-      const pointValue = getPointValue(event) as number
+      const pointValue = getPointValue(event)
+      if (pointValue === undefined) return
       doDispatchValue(
         sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
         activeIndex
       )
     }
-    function handleMouseUp (): void {
+    function handleMouseUp(): void {
       stopDragging()
     }
-    function handleHandleFocus (index: number): void {
+    function handleHandleFocus(index: number): void {
       activeIndexRef.value = index
       // Wake focus style
       if (!mergedDisabledRef.value) {
         hoverIndexRef.value = index
       }
     }
-    function handleHandleBlur (index: number): void {
+    function handleHandleBlur(index: number): void {
       if (activeIndexRef.value === index) {
         activeIndexRef.value = -1
         stopDragging()
@@ -512,10 +518,10 @@ export default defineComponent({
         hoverIndexRef.value = -1
       }
     }
-    function handleHandleMouseEnter (index: number): void {
+    function handleHandleMouseEnter(index: number): void {
       hoverIndexRef.value = index
     }
-    function handleHandleMouseLeave (index: number): void {
+    function handleHandleMouseLeave(index: number): void {
       if (hoverIndexRef.value === index) {
         hoverIndexRef.value = -1
       }
@@ -655,7 +661,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, themeClass, formatTooltip } = this
     this.onRender?.()
     return (

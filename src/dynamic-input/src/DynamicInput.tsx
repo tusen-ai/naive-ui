@@ -58,6 +58,7 @@ export const dynamicInputProps = {
     default: 'input'
   },
   keyField: String,
+  itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
   // for preset pair
   keyPlaceholder: {
@@ -155,9 +156,9 @@ export default defineComponent({
       if (value === undefined || value === null) return index
       if (typeof value !== 'object') return index
       const rawValue = isProxy(value) ? toRaw(value) : value
-      let key = globalDataKeyMap.get(rawValue)
+      let key = globalDataKeyMap.get(rawValue as WeakKey)
       if (key === undefined) {
-        globalDataKeyMap.set(rawValue, (key = createId()))
+        globalDataKeyMap.set(rawValue as WeakKey, (key = createId()))
       }
       return key
     }
@@ -178,9 +179,9 @@ export default defineComponent({
           : originalItem
         const rawNew = isProxy(value) ? toRaw(value) : value
         // inherit key is value position is not change
-        const originalKey = globalDataKeyMap.get(rawOriginal)
+        const originalKey = globalDataKeyMap.get(rawOriginal as WeakKey)
         if (originalKey !== undefined) {
-          globalDataKeyMap.set(rawNew, originalKey)
+          globalDataKeyMap.set(rawNew as WeakKey, originalKey)
         }
       }
       doUpdateValue(newValue)
@@ -303,6 +304,7 @@ export default defineComponent({
   render () {
     const {
       $slots,
+      itemClass,
       buttonSize,
       mergedClsPrefix,
       mergedValue,
@@ -361,7 +363,7 @@ export default defineComponent({
             <div
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
-              class={`${mergedClsPrefix}-dynamic-input-item`}
+              class={[`${mergedClsPrefix}-dynamic-input-item`, itemClass]}
               style={itemStyle}
             >
               {resolveSlotWithProps(

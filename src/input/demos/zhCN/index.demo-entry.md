@@ -97,6 +97,7 @@ textarea-resize-debug.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur input 元素 |  |
+| clear | `() => void` | 清空输入框 | NEXT_VERSION |
 | focus | `() => void` | Focus input 元素 |  |
 | select | `() => void` | Select input 元素 |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: 'auto' \| 'smooth' }) => void` | 滚动到 | 2.32.0 |

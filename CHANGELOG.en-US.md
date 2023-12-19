@@ -2,6 +2,77 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix n-space vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
+- Fix `n-data-table`'s prop `pagination`'s `default-page-size` and `default-page` not work in uncontrolled mode, closes [#5201](https://github.com/tusen-ai/naive-ui/issues/5201).
+- Fix `n-time-picker` formatting (format="HH: mm: ss. SSS") preventing modification of milliseconds in the edit box, closes [#5224](https://github.com/tusen-ai/naive-ui/issues/5224).
+- Fix `n-notification` notification clips out of screen when screen width is less than 400px wide.
+- Fix `n-carousel` transition effect incorrect when using the `slide` effect in loop mode with only two elements, closes [#4323](https://github.com/tusen-ai/naive-ui/issues/4323).
+- Fix `n-carousel` trigger incorrect `current-index` value on arrow button click with single image, closes [#5130](https://github.com/tusen-ai/naive-ui/issues/5130).
+- Fix `n-input` autofill's default background color, closes [#5123](https://github.com/tusen-ai/naive-ui/issues/5123).
+- Fix `n-upload-trigger` in directory drag mode with a lot of files, some of the files are not read.
+- Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
+
+### Features
+
+- `n-space` adds `reverse` prop.
+- `n-input` adds `clear` method, closes [#5423](https://github.com/tusen-ai/naive-ui/issues/5423).
+- `n-time-picker` adds `'clear'` action, closes [#5334](https://github.com/tusen-ai/naive-ui/issues/5334).
+- `n-select` supports RTL.
+- `n-data-table` supports RTL.
+- `n-dialog` supports RTL.
+- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
+- `n-date-picker`'s `type` prop supports `'week'`.
+- Update `ruRU` locale.
+
+## 2.36.0
+
+### Fixes
+
+- Fix `n-tree` unexposed line color variable `--n-line-color`, closes [#5339](https://github.com/tusen-ai/naive-ui/issues/5339).
+- Fix `n-tree` The style of the selected node is not displayed in the case of 'disabled'.
+- Fix `n-tree` on `virtual-scroll` empty data placeholder lost problem.
+- Fix `n-watermark` won't clear it's content when `content` prop is set to empty.
+- Fix `n-tree` use `render-switcher-icon` prop to customize switcher icon will cause node selection, closes [#5380](https://github.com/tusen-ai/naive-ui/issues/5380).
+- Fix `n-input` will display the password reveal button by default when the `type` is set to `password`. Starting with Microsoft Edge browser Version 87. closes [#5384](https://github.com/tusen-ai/naive-ui/issues/5384).
+- Fix `n-radio-button` css var `buttonColor` not working.
+- Fix `n-input` not display vertical scrollbar when `type` is `textarea` and the inline theme is disabled, closes [#5418](https://github.com/tusen-ai/naive-ui/issues/5418).
+- Fix if `inline-theme-disabled` is set, custom color whose params include decimal won't work in `n-tag`, `n-avatar`, `n-badge`, `n-button`, `n-rate`.
+- Fix `n-tabs`'s border height in `vertical` mode.
+- Fix `n-tree`'s node's hover color has higher priority than selected color in `block-line` mode.
+- Fix `n-tree` click expand switch causes checkbox being checked.
+
+### Features
+
+- `n-tree` adds `treeGetClickTarget` method to get click target of node click event, closes [#5375](https://github.com/tusen-ai/naive-ui/issues/5375).
+- `n-space` adds `item-class` prop.
+- `n-layout` adds `content-class` prop.
+- `n-layout-sider` adds `collapsed-trigger-class` and `trigger-class` props.
+- `n-spin` adds `content-class` and `content-style` props.
+- `n-popover` adds `arrow-class`, `arrow-wrapper-class`, `arrow-wrapper-style`, `content-class`, `footer-class` and `header-class` props.
+- `n-notification-provider` adds `container-class` prop.
+- `n-message-provider` adds `container-class` prop.
+- `n-loading-bar-provider` adds `container-class` prop.
+- `n-thing` adds `content-class` and `description-class` props.
+- `n-card` adds `content-class`, `footer-class`, `header-class` and `header-extra-class` props.
+- `n-descriptions` adds `content-class` and `label-class` props.
+- `n-upload` adds `file-list-class` and `trigger-class` props.
+- `n-dynamic-tags` adds `input-class` and `tag-class` props.
+- `n-dynamic-input` adds `item-class` prop.
+- `n-slider` adds `on-dragstart` `on-dragend` prop, closes [#5365](https://github.com/tusen-ai/naive-ui/issues/5365).
+- `n-dialog` adds `close` slot.
+- `n-equation` export the `EquationProps` type.
+- `n-popselect` adds `header` slot.
+- `n-tree-select` adds `watch-props` prop.
+- Adds `n-split` component, closes [#3557](https://github.com/tusen-ai/naive-ui/issues/3557).
+- Adds `n-virtual-list` component.
+- Adds `n-qr-code` component, closes [#2535](https://github.com/tusen-ai/naive-ui/issues/2535).
+- `n-menu` add `responsive` prop, it will collapse overflow menu items in horizontal mode.
+- `n-menu` add `deriveResponsiveState` method.
+
+## 2.35.0
+
 ### Breaking Changes
 
 - `n-input`'s `suffix` to the back of `loading`, close [#4685](https://github.com/tusen-ai/naive-ui/issues/4685).
@@ -19,7 +90,7 @@
 - Fix `n-tabs`'s `paneWrapperStyle` prop missing height after animation
 - Fix `n-tree` should check all items instead of uncheck all if indeterminate checkbox is clicked, closes [#4941](https://github.com/tusen-ai/naive-ui/issues/4941).
 - Fix the Popover was not displayed when the `n-internal-selection` was disabled and the mouse was moved over the '+n' tag. closes [#4789](https://github.com/tusen-ai/naive-ui/issues/4789)
-- Fix `n-input` doesn't display the horizontal scroll bar when `type` is `textarea`, closes [#4570](https://github.com/tusen-ai/naive-ui/issues/4570).
+- Fix `n-input` doesn't display the vertical scroll bar when `type` is `textarea`, closes [#4570](https://github.com/tusen-ai/naive-ui/issues/4570).
 - Fix `n-alert`'s content style problem, when there is no title and use closable, closes [#4588](https://github.com/tusen-ai/naive-ui/issues/4588).
 - Fix `n-select`'s `empty` slot action then it is an interactive component, closes [#4700](https://github.com/tusen-ai/naive-ui/issues/4700).
 - Fix `n-data-table` header and body's scrolling are not sync when using the keyboard, closes [#3941](https://github.com/tusen-ai/naive-ui/issues/3941).
@@ -32,7 +103,8 @@
 - Fix `n-tree`'s `TreeOption`'s `checkboxDisabled` prop doesn't work when `check-on-click` is `true`.
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 - Fix `n-auto-complete`'s autocomplete menu's unexpected open when clicking the clear icon with the input not focused, closes [#4658](https://github.com/tusen-ai/naive-ui/issues/4658).
-- Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
+- Fix `n-input`'s `on-keyup` prop type, closes [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
+- Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
 ### Features
 
@@ -43,11 +115,14 @@
 - `n-tree` adds `scrollbar-props` prop, closes [#4021](https://github.com/tusen-ai/naive-ui/issues/4666).
 - `n-select` adds `focusInput` `blurInput` methods.
 - `n-tree-select` adds `focusInput` `blurInput` methods.
-- `n-image-group` adds `on-preview-prev` `on-preview-next` prop
-- `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554)
+- `n-image-group` adds `on-preview-prev` `on-preview-next` prop.
+- `n-tree` adds `show-line` prop, closes [#3796](https://github.com/tusen-ai/naive-ui/issues/3796), [#4554](https://github.com/tusen-ai/naive-ui/pull/4554).
 - `n-tree` adds node information for `render-switcher-icon` props, closes [#4815](https://github.com/tusen-ai/naive-ui/issues/4815).
 - `n-input-number` export the `select` method.
 - `n-data-table` adds `n-data-table-tr--expanded` class to expanded rows, and `n-data-table-tr n-data-table-tr--expand` class to the additional row, closes [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
+- `n-spin` adds `delay` prop.
+- Adds `n-performant-ellipsis` component.
+- `DataTableBaseColumn` adds `ellipsisComponent` prop.
 
 ### i18n
 
@@ -67,7 +142,6 @@
 - Fix `n-upload` warning cause by extraneous non-props attributes were passed to vue component `TransitionGroup` but could not be automatically inherited, closes [#4447](https://github.com/tusen-ai/naive-ui/issues/4447).
 - Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
 - Fix `n-icon-wrapper`'s theme error, closes [#4768](https://github.com/tusen-ai/naive-ui/issues/4768).
-- Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
 ### Feats
 
@@ -80,7 +154,6 @@
 - `n-tabs` adds `pane-wrapper-class` `pane-wrapper-style` prop.
 - `n-collapse` adds `titlePadding` theme variable, closes [#4728](https://github.com/tusen-ai/naive-ui/issues/4728).
 - `n-tabs` adds `placement` prop.
-- `n-spin` adds `delay` prop.
 
 ### i18n
 
