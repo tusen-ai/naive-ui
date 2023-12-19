@@ -6,6 +6,7 @@
 
 - Fix n-space vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
 - Fix `n-data-table`'s prop `pagination`'s `default-page-size` and `default-page` not work in uncontrolled mode, closes [#5201](https://github.com/tusen-ai/naive-ui/issues/5201).
+- Fix `n-time-picker` formatting (format="HH: mm: ss. SSS") preventing modification of milliseconds in the edit box, closes [#5224](https://github.com/tusen-ai/naive-ui/issues/5224).
 
 ### Features
 
@@ -135,9 +136,6 @@
 - Fix `n-upload` warning cause by extraneous non-props attributes were passed to vue component `TransitionGroup` but could not be automatically inherited, closes [#4447](https://github.com/tusen-ai/naive-ui/issues/4447).
 - Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
 - Fix `n-icon-wrapper`'s theme error, closes [#4768](https://github.com/tusen-ai/naive-ui/issues/4768).
-
-- Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
-- Fix `n-time picker` time picker formatting (format="HH: mm: ss. SSS") preventing modification of milliseconds in the edit box, closes [# 5224]（ https://github.com/tusen-ai/naive-ui/issues/5224 ）.
 
 ### Feats
 
