@@ -101,9 +101,9 @@ checkbox-placement.vue
 
 ### Tree Slots
 
-| Name  | Parameters | Description                    | Version      |
-| ----- | ---------- | ------------------------------ | ------------ |
-| empty | `()`       | Empty state slot for the tree. | NEXT_VERSION |
+| Name  | Parameters | Description                    | Version |
+| ----- | ---------- | ------------------------------ | ------- |
+| empty | `()`       | Empty state slot for the tree. |         |
 
 ## Methods
 
