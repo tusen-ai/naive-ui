@@ -30,7 +30,8 @@ import {
   getTime,
   getMinutes,
   getHours,
-  getSeconds
+  getSeconds,
+  getMilliseconds
 } from 'date-fns/esm'
 import formatInTimeZone from 'date-fns-tz/formatInTimeZone'
 import type { Locale } from 'date-fns'
@@ -671,7 +672,8 @@ export default defineComponent({
           const newTime = set(mergedValue, {
             hours: getHours(time),
             minutes: getMinutes(time),
-            seconds: getSeconds(time)
+            seconds: getSeconds(time),
+            milliseconds: getMilliseconds(time)
           })
           doUpdateValue(getTime(newTime))
         } else {

@@ -136,6 +136,9 @@
 - Fix `n-menu` `show` `default` attribute spelling problem, closes [#4750](https://github.com/tusen-ai/naive-ui/issues/4750).
 - Fix `n-icon-wrapper`'s theme error, closes [#4768](https://github.com/tusen-ai/naive-ui/issues/4768).
 
+- Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
+- Fix `n-time picker` time picker formatting (format="HH: mm: ss. SSS") preventing modification of milliseconds in the edit box, closes [# 5224]（ https://github.com/tusen-ai/naive-ui/issues/5224 ）.
+
 ### Feats
 
 - `n-dynamic-input` adds `action` slot, closes [#3981](https://github.com/tusen-ai/naive-ui/issues/3981).
