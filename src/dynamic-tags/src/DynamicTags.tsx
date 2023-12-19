@@ -144,7 +144,7 @@ export default defineComponent({
       tags.splice(index, 1)
       doChange(tags)
     }
-    function handleInputKeyUp (e: KeyboardEvent): void {
+    function handleInputKeyDown (e: KeyboardEvent): void {
       switch (e.key) {
         case 'Enter':
           handleInputConfirm()
@@ -193,7 +193,7 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
       triggerDisabled: triggerDisabledRef,
-      handleInputKeyUp,
+      handleInputKeyDown,
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
@@ -235,7 +235,7 @@ export default defineComponent({
               inputSize,
               inputForceFocused,
               triggerDisabled,
-              handleInputKeyUp,
+              handleInputKeyDown,
               handleInputBlur,
               handleAddClick,
               handleCloseClick,
@@ -291,7 +291,7 @@ export default defineComponent({
                       }}
                       theme={mergedTheme.peers.Input}
                       themeOverrides={mergedTheme.peerOverrides.Input}
-                      onKeyup={handleInputKeyUp}
+                      onKeydown={handleInputKeyDown}
                       onBlur={handleInputBlur}
                       internalForceFocus={inputForceFocused}
                     />

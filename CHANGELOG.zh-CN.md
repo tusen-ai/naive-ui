@@ -12,6 +12,7 @@
 - 修复 `n-carousel` 在只有一张图片时点击箭头切换按钮触发的 `current-index` 值不正确，关闭 [#5130](https://github.com/tusen-ai/naive-ui/issues/5130)
 - 修复 `n-input` 自动填充时的默认背景色，关闭 [#5123](https://github.com/tusen-ai/naive-ui/issues/5123)
 - 修复 `n-upload-trigger` 在拖拽文件夹场景下当文件夹内文件较多时，部分文件不会被正确读取的问题
+- 修复 `n-dynamic-tags` 使用键盘触发新增时行为异常，关闭 [#5077](https://github.com/tusen-ai/naive-ui/issues/5077)
 
 ### Features
 

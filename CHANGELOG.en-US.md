@@ -12,6 +12,7 @@
 - Fix `n-carousel` trigger incorrect `current-index` value on arrow button click with single image, closes [#5130](https://github.com/tusen-ai/naive-ui/issues/5130).
 - Fix `n-input` autofill's default background color, closes [#5123](https://github.com/tusen-ai/naive-ui/issues/5123).
 - Fix `n-upload-trigger` in directory drag mode with a lot of files, some of the files are not read.
+- Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
 
 ### Features
 
