@@ -294,6 +294,7 @@ export default cB('tabs', `
     transition:
       left .2s var(--n-bezier),
       max-width .2s var(--n-bezier),
+      opacity .3s var(--n-bezier),
       background-color .3s var(--n-bezier);
   `, [
     c('&.transition-disabled', `

@@ -20,6 +20,7 @@
 - 修复 `n-tree` 属性 `data` 当数据源`data`按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 - 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
 - 修复 `n-data-table` 空表格在设置 `min-height` 时高度不正确，关闭 [#5108](https://github.com/tusen-ai/naive-ui/issues/5108)
+- Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).
 
 ### Features
 
@@ -36,6 +37,7 @@
 - 更新 ruRU locale
 - `n-drawer` 新增 `content-class` `body-class` `body-content-class` `footer-class` `header-class` 属性
 - `n-tree` 新增多种 `scrollTo` 配置
+- TODO: tree select 支持控制节点展开行为
 
 ## 2.36.0
 

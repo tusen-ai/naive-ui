@@ -199,6 +199,7 @@ export default defineComponent({
       if (props.type === 'card') return
       const { value: barEl } = barElRef
       if (!barEl) return
+      const barIsHide = barEl.style.opacity === '0'
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
         const { barWidth, placement } = props
@@ -219,7 +220,14 @@ export default defineComponent({
             barEl.style.maxWidth = `${tabEl.offsetWidth}px`
           }
           barEl.style.width = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetWidth
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         } else {
           clearBarStyle(['left', 'maxWidth', 'width'])
           if (typeof barWidth === 'number' && tabEl.offsetHeight >= barWidth) {
@@ -232,7 +240,14 @@ export default defineComponent({
             barEl.style.maxHeight = `${tabEl.offsetHeight}px`
           }
           barEl.style.height = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetHeight
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         }
       }
     }
@@ -240,20 +255,7 @@ export default defineComponent({
       if (props.type === 'card') return
       const { value: barEl } = barElRef
       if (!barEl) return
-      const { placement } = props
-      if (['top', 'bottom'].includes(placement)) {
-        clearBarStyle(['top', 'maxHeight', 'height'])
-        barEl.style.left = '0px'
-        barEl.style.maxWidth = '0px'
-        barEl.style.width = '8192px'
-        void barEl.offsetWidth
-      } else {
-        clearBarStyle(['left', 'maxWidth', 'width'])
-        barEl.style.top = '0px'
-        barEl.style.maxHeight = '0px'
-        barEl.style.height = '8192px'
-        void barEl.offsetHeight
-      }
+      barEl.style.opacity = '0'
     }
     function clearBarStyle (styleProps: string[]): void {
       const { value: barEl } = barElRef
