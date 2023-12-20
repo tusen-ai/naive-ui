@@ -6,7 +6,8 @@ import {
   type PropType,
   type Ref,
   type ComputedRef,
-  watchEffect
+  watchEffect,
+  nextTick
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -107,7 +108,7 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     }
   })
   const { mergedSizeRef, mergedDisabledRef } = formItem
-  const inputRef = ref<HTMLElement | null>(null)
+  const inputRef = ref<HTMLInputElement | null>(null)
   const labelRef = ref<HTMLElement | null>(null)
   const NRadioGroup = inject(radioGroupInjectionKey, null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
@@ -149,6 +150,12 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   }
   function handleRadioInputChange (): void {
     toggle()
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    nextTick(() => {
+      if (inputRef.value) {
+        inputRef.value.checked = mergedCheckedRef.value
+      }
+    })
   }
   function handleRadioInputBlur (): void {
     focusRef.value = false
