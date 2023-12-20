@@ -15,9 +15,12 @@ import {
 export function useInjectionInstanceCollection (
   injectionName: string | InjectionKey<unknown>,
   collectionKey: string,
-  registerKeyRef: Ref<any>
+  registerKeyRef: Ref<string | undefined>
 ): void {
-  const injection = inject<any | null>(injectionName, null)
+  const injection = inject<Record<string, Record<string, any>> | null>(
+    injectionName,
+    null
+  )
   if (injection === null) return
   const vm = getCurrentInstance()?.proxy
   watch(registerKeyRef, registerInstance)
@@ -26,6 +29,7 @@ export function useInjectionInstanceCollection (
     registerInstance(undefined, registerKeyRef.value)
   })
   function registerInstance (key?: string, oldKey?: string): void {
+    if (!injection) return
     const collection = injection[collectionKey]
     if (oldKey !== undefined) removeInstance(collection, oldKey)
     if (key !== undefined) addInstance(collection, key)

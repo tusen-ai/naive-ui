@@ -184,6 +184,13 @@ export default c([
         "action"
       `
     }),
+    cM('week', {
+      gridTemplateAreas: `
+        "left-calendar"
+        "footer"
+        "action"
+      `
+    }),
     cM('daterange', {
       gridTemplateAreas: `
         "left-calendar divider right-calendar"
@@ -339,13 +346,6 @@ export default c([
           width:  var(--n-item-cell-width);
           height:  var(--n-item-cell-height);
         `),
-        cNotM('disabled', [
-          cNotM('selected', [
-            c('&:hover', {
-              backgroundColor: 'var(--n-item-color-hover)'
-            })
-          ])
-        ]),
         cM('current', [
           cE('sup', `
             position: absolute;
@@ -439,6 +439,63 @@ export default c([
               backgroundColor: 'var(--n-item-color-disabled)'
             })
           ])
+        ]),
+        cM('week-hovered', [
+          c('&::before', `
+            background-color: var(--n-item-color-included);
+          `),
+          c('&:nth-child(7n + 1)::before', `
+            border-top-left-radius: var(--n-item-border-radius);
+            border-bottom-left-radius: var(--n-item-border-radius);
+          `),
+          c('&:nth-child(7n + 7)::before', `
+            border-top-right-radius: var(--n-item-border-radius);
+            border-bottom-right-radius: var(--n-item-border-radius);
+          `)
+        ]),
+        cM('week-selected', `
+          color: var(--n-item-text-color-active)
+        `, [
+          c('&::before', `
+            background-color: var(--n-item-color-active);
+          `),
+          c('&:nth-child(7n + 1)::before', `
+            border-top-left-radius: var(--n-item-border-radius);
+            border-bottom-left-radius: var(--n-item-border-radius);
+          `),
+          c('&:nth-child(7n + 7)::before', `
+            border-top-right-radius: var(--n-item-border-radius);
+            border-bottom-right-radius: var(--n-item-border-radius);
+          `)
+        ])
+      ])
+    ]),
+    cNotM('week', [
+      cB('date-panel-dates', [
+        cB('date-panel-date', [
+          cNotM('disabled', [
+            cNotM('selected', [
+              c('&:hover', `
+                background-color: var(--n-item-color-hover);
+              `)
+            ])
+          ])
+        ])
+      ])
+    ]),
+    cM('week', [
+      cB('date-panel-dates', [
+        cB('date-panel-date', [
+          c('&::before', `
+            content: "";
+            z-index: -2;
+            position: absolute;
+            left: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+            top: 0;
+            bottom: 0;
+            transition: background-color .3s var(--n-bezier);
+          `)
         ])
       ])
     ]),
@@ -448,10 +505,10 @@ export default c([
       width: 1px;
       background-color: var(--n-calendar-divider-color);
     `),
-    cB('date-panel-footer', {
-      borderTop: '1px solid var(--n-panel-action-divider-color)',
-      padding: 'var(--n-panel-extra-footer-padding)'
-    }),
+    cB('date-panel-footer', `
+      border-top: 1px solid var(--n-panel-action-divider-color);
+      padding: var(--n-panel-extra-footer-padding);
+    `),
     cB('date-panel-actions', `
       flex: 1;
       padding: var(--n-panel-action-padding);

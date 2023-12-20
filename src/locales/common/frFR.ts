@@ -31,6 +31,7 @@ const frFR: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'qqq yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'Effacer',
     now: 'Maintenant',
     confirm: 'Confirmer',
@@ -41,6 +42,7 @@ const frFR: NLocale = {
     monthPlaceholder: 'Sélectionner le mois',
     yearPlaceholder: "Sélectionner l'année",
     quarterPlaceholder: 'Sélectionner le trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Date de début',
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
@@ -48,7 +50,7 @@ const frFR: NLocale = {
     startMonthPlaceholder: 'Mois de début',
     endMonthPlaceholder: 'Mois de fin',
     monthBeforeYear: true,
-    firstDayOfWeek: 1,
+    firstDayOfWeek: 0,
     today: "Aujourd'hui"
   },
   DataTable: {
@@ -78,7 +80,8 @@ const frFR: NLocale = {
     placeholder: "Sélectionner l'heure",
     positiveText: 'OK',
     negativeText: 'Annuler',
-    now: 'Maintenant'
+    now: 'Maintenant',
+    clear: 'Effacer'
   },
   Pagination: {
     goto: 'Aller à',

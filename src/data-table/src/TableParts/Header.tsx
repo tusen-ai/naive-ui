@@ -36,7 +36,7 @@ function renderTitle (
   column: TableExpandColumn | TableBaseColumn | TableColumnGroup
 ): VNodeChild {
   return typeof column.title === 'function'
-    ? column.title(column as any)
+    ? column.title(column as never)
     : column.title
 }
 

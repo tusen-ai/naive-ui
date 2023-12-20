@@ -320,13 +320,13 @@ export default defineComponent({
     function handleMouseleaveTable (): void {
       hoverKeyRef.value = null
     }
-    function virtualListContainer (): HTMLElement {
+    function virtualListContainer (): HTMLElement | null {
       const { value } = virtualListRef
-      return value?.listElRef as HTMLElement
+      return value?.listElRef || null
     }
-    function virtualListContent (): HTMLElement {
+    function virtualListContent (): HTMLElement | null {
       const { value } = virtualListRef
-      return value?.itemsElRef as HTMLElement
+      return value?.itemsElRef || null
     }
     function handleVirtualListScroll (e: Event): void {
       handleTableBodyScroll(e)
@@ -341,8 +341,10 @@ export default defineComponent({
       getScrollContainer,
       scrollTo (arg0: any, arg1?: any) {
         if (virtualScrollRef.value) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           virtualListRef.value?.scrollTo(arg0, arg1)
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           scrollbarInstRef.value?.scrollTo(arg0, arg1)
         }
       }

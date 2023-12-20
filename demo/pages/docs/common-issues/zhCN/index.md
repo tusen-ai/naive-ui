@@ -22,6 +22,10 @@
 
 这是因为 `v-model:value="xxx"` 会被转化为 `:onUpdate:value="xxx"`。如果你同时使用了 `@update:value="yyy"`，他们会被转化为 `:onUpdate:value="[xxx, yyy]"`，然后 Naive UI 会来处理这种情况。
 
-然而如果你使用了 `on-update:value="yyy"`，Vue 会生成类似于 `:onUpdate:value="xxx" :on-update-value="yyy"` 的代码，然后第二个属性会在运行时覆盖掉第一个，`v-model:value` 会崩掉。
+然而如果你使用了 `on-update:value="yyy"`，Vue 会生成类似于 `:onUpdate:value="xxx" :on-update:value="yyy"` 的代码，然后第二个属性会在运行时覆盖掉第一个，`v-model:value` 会崩掉。
 
 如果你发现任何问题，欢迎在 GitHub 上提交 issue 和 PR。
+
+## 2. 如何在单文件组件（SFC - Single File Component）中使用？
+
+详见 [在 SFC 中使用](usage-sfc)

@@ -2,6 +2,7 @@ import { computed, type ComputedRef } from 'vue'
 import { type CheckStrategy } from 'treemate'
 import { isBrowser } from '../../_utils'
 import { type Key, type TmNode, type TreeOption } from './interface'
+import { happensIn } from 'seemly'
 
 export function useMergedCheckStrategy (props: {
   leafOnly: boolean
@@ -11,7 +12,7 @@ export function useMergedCheckStrategy (props: {
 }
 
 export function isNodeDisabled (node: TmNode, disabledField: string): boolean {
-  return !!(node.rawNode as any)[disabledField]
+  return !!node.rawNode[disabledField]
 }
 
 function traverse (
@@ -23,7 +24,7 @@ function traverse (
   nodes?.forEach((node) => {
     callback(node)
     traverse(
-      (node as any)[childrenField],
+      (node as any)[childrenField] as TreeOption[] | undefined,
       childrenField,
       callback,
       callbackAfter
@@ -51,10 +52,10 @@ export function keysWithFilter (
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {
-        highlightKeySet.add((node as any)[keyField])
+        highlightKeySet.add((node as any)[keyField] as Key)
         for (let i = path.length - 2; i >= 0; --i) {
-          if (!keys.has((path[i] as any)[keyField])) {
-            keys.add((path[i] as any)[keyField])
+          if (!keys.has((path[i] as any)[keyField] as Key)) {
+            keys.add((path[i] as any)[keyField] as Key)
           } else {
             return
           }
@@ -151,5 +152,17 @@ export function filterTree (
     filteredTree,
     highlightKeySet,
     expandedKeys
+  }
+}
+
+export function treeGetClickTarget (
+  e: MouseEvent
+): 'checkbox' | 'switcher' | 'node' {
+  if (happensIn(e, 'checkbox')) {
+    return 'checkbox'
+  } else if (happensIn(e, 'switcher')) {
+    return 'switcher'
+  } else {
+    return 'node'
   }
 }

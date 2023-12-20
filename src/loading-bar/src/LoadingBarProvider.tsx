@@ -36,6 +36,7 @@ export const loadingBarProviderProps = {
     type: [String, Object, Boolean] as PropType<string | HTMLElement | false>,
     default: undefined
   },
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   loadingBarStyle: {
     type: Object as PropType<{
@@ -105,6 +106,7 @@ export default defineComponent({
           <NLoadingBar
             ref="loadingBarRef"
             containerStyle={this.containerStyle}
+            containerClass={this.containerClass}
           />
         </Teleport>
         {this.$slots.default?.()}

@@ -1,12 +1,15 @@
 <markdown>
 # Imperative handle
 
- Focus. Blur. Selection. Scroll.
+ Clear. Focus. Blur. Selection. Scroll.
 </markdown>
 
 <template>
   <n-space vertical>
     <n-space>
+      <n-button @click="handleClear">
+        Clear
+      </n-button>
       <n-button @click="handleFocus">
         Focus
       </n-button>
@@ -34,6 +37,9 @@ export default defineComponent({
     return {
       inputInstRef,
       inputValue: ref("I heard you're going to select all? ".repeat(4).trim()),
+      handleClear () {
+        inputInstRef.value?.clear()
+      },
       handleFocus () {
         inputInstRef.value?.focus()
       },
