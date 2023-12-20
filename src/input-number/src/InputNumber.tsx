@@ -8,7 +8,8 @@ import {
   type PropType,
   watchEffect,
   type VNode,
-  nextTick
+  nextTick,
+  type InputHTMLAttributes
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -76,6 +77,7 @@ export const inputNumberProps = {
     type: String as PropType<'right' | 'both'>,
     default: 'right'
   },
+  inputProps: Object as PropType<InputHTMLAttributes>,
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -692,6 +694,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          inputProps={this.inputProps}
           internalLoadingBeforeSuffix
         >
           {{
