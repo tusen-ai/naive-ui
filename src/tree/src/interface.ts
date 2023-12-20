@@ -1,9 +1,9 @@
 import { type CheckStrategy, type TreeNode } from 'treemate'
 import { type HTMLAttributes, type Ref, type VNodeChild } from 'vue'
+import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
-import type { ScrollTo } from 'vueuc/lib/virtual-list/src/VirtualList'
 
 export type Key = string | number
 
@@ -151,7 +151,7 @@ export interface InternalTreeInst {
 }
 
 export interface TreeInst {
-  scrollTo: ScrollTo
+  scrollTo: VirtualListScrollTo
   getCheckedData: () => { keys: Key[], options: Array<TreeOption | null> }
   getIndeterminateData: () => { keys: Key[], options: Array<TreeOption | null> }
 }

@@ -14,7 +14,7 @@
         滚动到指定位置
       </n-button>
       <n-button @click="handleScrollToIndex">
-        滚动到指定Index
+        滚动到指定 Index
       </n-button>
       <n-button @click="handleScrollToDistance">
         滚动到指定距离

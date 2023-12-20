@@ -113,33 +113,15 @@ expand-debug.vue
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |
 
-
 #### ScrollTo Type
 
 ```ts
 interface ScrollTo {
   (x: number, y: number): void
-  (
-    options: {
-      left?: number
-      top?: number
-    } & CommonScrollToOptions
-  ): void
-  (
-    options: {
-      index: number
-    } & CommonScrollToOptions
-  ): void
-  (
-    options: {
-      key: string | number
-    } & CommonScrollToOptions
-  ): void
-  (
-    options: {
-      position: 'top' | 'bottom'
-    } & CommonScrollToOptions
-  ): void
+  (options: { left?: number; top?: number; debounce?: boolean }): void
+  (options: { index: number; debounce?: boolean }): void
+  (options: { key: string | number; debounce?: boolean }): void
+  (options: { position: 'top' | 'bottom'; debounce?: boolean }): void
 }
 ```
 

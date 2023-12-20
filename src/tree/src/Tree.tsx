@@ -23,7 +23,11 @@ import {
   type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { type VirtualListInst, VVirtualList } from 'vueuc'
+import {
+  type VirtualListInst,
+  VVirtualList,
+  type VirtualListScrollOptions
+} from 'vueuc'
 import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
@@ -72,7 +76,6 @@ import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import { type VScrollToOptions } from 'vueuc/lib/virtual-list/src/type'
 
 export function createTreeMateOptions<T> (
   keyField: string,
@@ -1544,9 +1547,12 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    function scrollTo (options: VScrollToOptions | number, y?: number): void {
+    function scrollTo (
+      options: VirtualListScrollOptions | number,
+      y?: number
+    ): void {
       if (typeof options === 'number') {
-        virtualListInstRef.value?.scrollTo(options, y ?? 0)
+        virtualListInstRef.value?.scrollTo(options, y || 0)
       } else {
         virtualListInstRef.value?.scrollTo(options)
       }
