@@ -16,7 +16,8 @@ import {
   watchEffect,
   type ExtractPropTypes,
   cloneVNode,
-  TransitionGroup
+  TransitionGroup,
+  type VNodeChild
 } from 'vue'
 import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -163,9 +164,8 @@ export default defineComponent({
       compitableValueRef.value ??
         props.defaultValue ??
         (slots.default
-          ? ((flatten((slots as any).default())[0] as any)?.props?.name as
-              | string
-              | number)
+          ? ((flatten((slots as any).default() as VNodeChild[])[0] as any)
+              ?.props?.name as string | number)
           : null)
     )
     const mergedValueRef = useMergedState(
@@ -199,6 +199,7 @@ export default defineComponent({
       if (props.type === 'card') return
       const { value: barEl } = barElRef
       if (!barEl) return
+      const barIsHide = barEl.style.opacity === '0'
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
         const { barWidth, placement } = props
@@ -219,7 +220,14 @@ export default defineComponent({
             barEl.style.maxWidth = `${tabEl.offsetWidth}px`
           }
           barEl.style.width = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetWidth
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         } else {
           clearBarStyle(['left', 'maxWidth', 'width'])
           if (typeof barWidth === 'number' && tabEl.offsetHeight >= barWidth) {
@@ -232,9 +240,22 @@ export default defineComponent({
             barEl.style.maxHeight = `${tabEl.offsetHeight}px`
           }
           barEl.style.height = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetHeight
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         }
       }
+    }
+    function hideBarStyle (): void {
+      if (props.type === 'card') return
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      barEl.style.opacity = '0'
     }
     function clearBarStyle (styleProps: string[]): void {
       const { value: barEl } = barElRef
@@ -248,6 +269,8 @@ export default defineComponent({
       const tabEl = getCurrentEl()
       if (tabEl) {
         updateBarStyle(tabEl)
+      } else {
+        hideBarStyle()
       }
     }
     function updateCurrentScrollPosition (smooth: boolean): void {
@@ -408,7 +431,9 @@ export default defineComponent({
         }
       }
       if (type !== 'segment') {
-        deriveScrollShadow(xScrollInstRef.value?.$el)
+        deriveScrollShadow(
+          (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
+        )
       }
     }
     const handleNavResize = throttle(_handleNavResize, 64)
@@ -440,7 +465,9 @@ export default defineComponent({
           addTabFixedRef.value = false
         }
       }
-      deriveScrollShadow(xScrollInstRef.value?.$el)
+      deriveScrollShadow(
+        (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
+      )
     }
     const handleTabsResize = throttle(_handleTabsResize, 64)
 
@@ -701,7 +728,9 @@ export default defineComponent({
           )}
           {showPane
             ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-              renderNameListRef.value.push(tabPaneVNode.props.name)
+              renderNameListRef.value.push(
+                tabPaneVNode.props.name as string | number
+              )
               return justifyTabDynamicProps(
                   <Tab
                     {...tabPaneVNode.props}
@@ -723,13 +752,15 @@ export default defineComponent({
               )
             })
             : tabChildren.map((tabVNode: any, index: number) => {
-              renderNameListRef.value.push(tabVNode.props.name)
+              renderNameListRef.value.push(
+                tabVNode.props.name as string | number
+              )
               if (index !== 0 && !mergedJustifyContent) {
                 return justifyTabDynamicProps(
-                  createLeftPaddedTabVNode(tabVNode)
+                  createLeftPaddedTabVNode(tabVNode as VNode)
                 )
               } else {
-                return justifyTabDynamicProps(tabVNode)
+                return justifyTabDynamicProps(tabVNode as VNode)
               }
             })}
           {!addTabFixed && addable && isCard
@@ -804,7 +835,9 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-                  renderNameListRef.value.push(tabPaneVNode.props.name)
+                  renderNameListRef.value.push(
+                    tabPaneVNode.props.name as string | number
+                  )
                   return (
                       <Tab
                         {...tabPaneVNode.props}
@@ -820,11 +853,13 @@ export default defineComponent({
                   )
                 })
                 : tabChildren.map((tabVNode: any, index: number) => {
-                  renderNameListRef.value.push(tabVNode.props.name)
+                  renderNameListRef.value.push(
+                    tabVNode.props.name as string | number
+                  )
                   if (index === 0) {
                     return tabVNode
                   } else {
-                    return createLeftPaddedTabVNode(tabVNode)
+                    return createLeftPaddedTabVNode(tabVNode as VNode)
                   }
                 })}
             </div>

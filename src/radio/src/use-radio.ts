@@ -62,7 +62,6 @@ export interface UseRadio {
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>
   mergedDisabled: Ref<boolean>
-  uncontrolledChecked: Ref<boolean>
   renderSafeChecked: Ref<boolean>
   focus: Ref<boolean>
   mergedSize: ComputedRef<'small' | 'medium' | 'large'>
@@ -107,7 +106,7 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     }
   })
   const { mergedSizeRef, mergedDisabledRef } = formItem
-  const inputRef = ref<HTMLElement | null>(null)
+  const inputRef = ref<HTMLInputElement | null>(null)
   const labelRef = ref<HTMLElement | null>(null)
   const NRadioGroup = inject(radioGroupInjectionKey, null)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
@@ -149,6 +148,12 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   }
   function handleRadioInputChange (): void {
     toggle()
+    // Restore element check prop's value to current state, since if doesn't
+    // reflect current VNode. If not, bug will happens in component with element
+    // that has internal state such as <input />.
+    if (inputRef.value) {
+      inputRef.value.checked = renderSafeCheckedRef.value
+    }
   }
   function handleRadioInputBlur (): void {
     focusRef.value = false
@@ -164,7 +169,6 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     labelRef,
     mergedName: mergedNameRef,
     mergedDisabled: mergedDisabledRef,
-    uncontrolledChecked: uncontrolledCheckedRef,
     renderSafeChecked: renderSafeCheckedRef,
     focus: focusRef,
     mergedSize: mergedSizeRef,

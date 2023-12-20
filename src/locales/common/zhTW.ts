@@ -31,6 +31,7 @@ const zhTW: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: '清除',
     now: '現在',
     confirm: '確定',
@@ -41,6 +42,7 @@ const zhTW: NLocale = {
     monthPlaceholder: '選擇月份',
     yearPlaceholder: '選擇年份',
     quarterPlaceholder: '選擇季度',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '開始日期',
     endDatePlaceholder: '結束日期',
     startDatetimePlaceholder: '開始日期時間',
@@ -78,7 +80,8 @@ const zhTW: NLocale = {
     placeholder: '請選擇時間',
     positiveText: '確定',
     negativeText: '取消',
-    now: '現在'
+    now: '現在',
+    clear: '清除'
   },
   Pagination: {
     goto: '跳至',
