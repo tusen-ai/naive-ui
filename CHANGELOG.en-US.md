@@ -21,7 +21,7 @@
 - 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
 - Fix `n-data-table` height incorrect when set `min-height` in empty state，closes [#5108](https://github.com/tusen-ai/naive-ui/issues/5108).
 - Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).
-- Fix `n-spin` abnormal animation，closes [#3556](https://github.com/tusen-ai/naive-ui/issues/3556)
+- Fix `n-spin` abnormal animation, closes [#3556](https://github.com/tusen-ai/naive-ui/issues/3556).
 
 ### Features
 

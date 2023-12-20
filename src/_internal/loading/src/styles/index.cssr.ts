@@ -7,8 +7,8 @@ export default c([
       transform: rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
     }`
   ),
   cB('base-loading', `
@@ -18,11 +18,11 @@ export default c([
     height: 1em;
   `, [
     cE('placeholder', `
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  `, [
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    `, [
       iconSwitchTransition({
         left: '50%',
         top: '50%',
