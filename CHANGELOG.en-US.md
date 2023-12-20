@@ -32,6 +32,7 @@
 - `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
 - `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
+- `n-tree` adds multiple `scrollTo` configurations.
 
 ## 2.36.0
 

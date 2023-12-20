@@ -109,9 +109,39 @@ expand-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| scrollTo | `(options: { key: string \| number })` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
+| scrollTo | `ScrollTo` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |
+
+
+#### ScrollTo Type
+
+```ts
+interface ScrollTo {
+  (x: number, y: number): void
+  (
+    options: {
+      left?: number
+      top?: number
+    } & CommonScrollToOptions
+  ): void
+  (
+    options: {
+      index: number
+    } & CommonScrollToOptions
+  ): void
+  (
+    options: {
+      key: string | number
+    } & CommonScrollToOptions
+  ): void
+  (
+    options: {
+      position: 'top' | 'bottom'
+    } & CommonScrollToOptions
+  ): void
+}
+```
 
 ### Others
 

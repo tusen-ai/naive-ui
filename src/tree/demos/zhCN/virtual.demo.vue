@@ -6,9 +6,20 @@
 
 <template>
   <n-space vertical>
-    <n-button @click="handleClick">
-      滚动
-    </n-button>
+    <n-space>
+      <n-button @click="handleScrollToKey">
+        滚动
+      </n-button>
+      <n-button @click="handleScrollToPosition">
+        滚动到指定位置
+      </n-button>
+      <n-button @click="handleScrollToIndex">
+        滚动到指定Index
+      </n-button>
+      <n-button @click="handleScrollToDistance">
+        滚动到指定距离
+      </n-button>
+    </n-space>
     <n-tree
       ref="treeInstRef"
       block-line
@@ -51,8 +62,17 @@ export default defineComponent({
     return {
       treeInstRef,
       data: createData(),
-      handleClick: () => {
+      handleScrollToKey: () => {
         treeInstRef.value?.scrollTo({ key: '45362710' })
+      },
+      handleScrollToPosition: () => {
+        treeInstRef.value?.scrollTo({ position: 'bottom' })
+      },
+      handleScrollToIndex: () => {
+        treeInstRef.value?.scrollTo({ index: 100 })
+      },
+      handleScrollToDistance: () => {
+        treeInstRef.value?.scrollTo({ top: 400 })
       }
     }
   }

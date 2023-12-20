@@ -72,6 +72,7 @@ import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
+import { type VScrollToOptions } from 'vueuc/lib/virtual-list/src/type'
 
 export function createTreeMateOptions<T> (
   keyField: string,
@@ -1543,8 +1544,12 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    function scrollTo (options: { key: Key }): void {
-      virtualListInstRef.value?.scrollTo(options)
+    function scrollTo (options: VScrollToOptions | number, y?: number): void {
+      if (typeof options === 'number') {
+        virtualListInstRef.value?.scrollTo(options, y ?? 0)
+      } else {
+        virtualListInstRef.value?.scrollTo(options)
+      }
     }
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
