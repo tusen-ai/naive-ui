@@ -11,6 +11,7 @@ import type {
 import { dataTableInjectionKey } from './interface'
 
 export default defineComponent({
+  name: 'MainTable',
   setup () {
     const {
       mergedClsPrefixRef,
