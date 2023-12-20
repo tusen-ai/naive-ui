@@ -126,9 +126,10 @@ export default defineComponent({
             theme={mergedTheme.peers.Scrollbar}
             {...scrollbarProps}
             class={`${mergedClsPrefix}-drawer-body`}
-            contentClass={`${mergedClsPrefix}-drawer-body-content-wrapper ${
-              bodyContentClass ?? ''
-            }`}
+            contentClass={[
+              `${mergedClsPrefix}-drawer-body-content-wrapper`,
+              bodyContentClass
+            ]}
             contentStyle={bodyContentStyle}
           >
             {$slots}

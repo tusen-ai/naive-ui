@@ -315,9 +315,10 @@ export default defineComponent({
                                 <NScrollbar
                                   {...this.scrollbarProps}
                                   contentStyle={this.contentStyle}
-                                  contentClass={`${mergedClsPrefix}-drawer-content-wrapper ${
-                                    this.contentClass ?? ''
-                                  }`}
+                                  contentClass={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   theme={this.mergedTheme.peers.Scrollbar}
                                   themeOverrides={
                                     this.mergedTheme.peerOverrides.Scrollbar
