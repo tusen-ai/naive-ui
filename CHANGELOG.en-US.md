@@ -16,6 +16,7 @@
 - Fix `n-tree` leaf node line color.
 - Fix `n-data-table` throws error if summary config has empty column.
 - Fix `n-drawer`'s `on-mask-click` may be called multiple times.
+- Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 
 ### Features
 
@@ -108,7 +109,6 @@
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 - Fix `n-auto-complete`'s autocomplete menu's unexpected open when clicking the clear icon with the input not focused, closes [#4658](https://github.com/tusen-ai/naive-ui/issues/4658).
 - Fix `n-input`'s `on-keyup` prop type, closes [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
-- Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 - Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
 ### Features
