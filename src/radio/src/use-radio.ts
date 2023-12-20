@@ -150,7 +150,7 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     toggle()
     // Restore element check prop's value to current state, since if doesn't
     // reflect current VNode. If not, bug will happens in component with element
-    //  that has internal state such as <input />.
+    // that has internal state such as <input />.
     if (inputRef.value) {
       inputRef.value.checked = renderSafeCheckedRef.value
     }
