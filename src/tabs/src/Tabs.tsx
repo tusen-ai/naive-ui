@@ -412,6 +412,33 @@ export default defineComponent({
       barEl.classList.remove(disableTransitionClassName)
     }
 
+    const tabsRailElRef = ref<HTMLElement | null>(null)
+    const segmentCapsuleElRef = ref<HTMLElement | null>(null)
+
+    function updateSegmentPosition (): void {
+      if (props.type === 'segment') {
+        const { value: tabsRailEl } = tabsRailElRef
+        if (!tabsRailEl) return
+        void nextTick(() => {
+          tabsRailEl.classList.add('transition-disabled')
+          const activeTabEl = tabsRailEl.querySelector('.n-tabs-tab--active')
+          if (activeTabEl && segmentCapsuleElRef.value) {
+            const rect = activeTabEl.getBoundingClientRect()
+            // move segment capsule to match the position of the active tab
+            segmentCapsuleElRef.value.style.width = `${rect.width}px`
+            segmentCapsuleElRef.value.style.transform = `translateX(${
+              rect.left - tabsRailEl.getBoundingClientRect().left - 3
+            }px)`
+          }
+          tabsRailEl.classList.remove('transition-disabled')
+        })
+      }
+    }
+
+    watch([mergedValueRef, tabsRailElRef], () => {
+      updateSegmentPosition()
+    })
+
     let memorizedWidth = 0
     function _handleNavResize (entry: ResizeObserverEntry): void {
       if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
@@ -542,20 +569,6 @@ export default defineComponent({
       }
     })
 
-    const tabsRailElRef = ref<HTMLElement | null>(null)
-    watch(mergedValueRef, () => {
-      if (props.type === 'segment') {
-        const tabsRailEl = tabsRailElRef.value
-        if (tabsRailEl) {
-          void nextTick(() => {
-            tabsRailEl.classList.add('transition-disabled')
-            void tabsRailEl.offsetWidth
-            tabsRailEl.classList.remove('transition-disabled')
-          })
-        }
-      }
-    })
-
     const exposedMethods: TabsInst = {
       syncBarPosition: () => {
         updateCurrentBarStyle()
@@ -659,6 +672,7 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
       tabsRailElRef,
+      segmentCapsuleElRef,
       tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
@@ -833,6 +847,12 @@ export default defineComponent({
           )}
           {isSegment ? (
             <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
+              <div
+                class={`${mergedClsPrefix}-tabs-capsule`}
+                ref="segmentCapsuleElRef"
+              >
+                <Tab name="">&nbsp;</Tab>
+              </div>
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
                   renderNameListRef.value.push(

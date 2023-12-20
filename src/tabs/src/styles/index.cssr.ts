@@ -104,6 +104,15 @@ export default cB('tabs', `
     display: flex;
     align-items: center;
   `, [
+    cB('tabs-capsule', `
+        border-radius: var(--n-tab-border-radius);
+        width: 50px;
+        position: absolute;
+        pointer-events: none;
+        background-color: var(--n-tab-color-segment);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+        transition: 0.3s;
+      `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;
       flex-grow: 1;
@@ -122,8 +131,6 @@ export default cB('tabs', `
         cM('active', `
           font-weight: var(--n-font-weight-strong);
           color: var(--n-tab-text-color-active);
-          background-color: var(--n-tab-color-segment);
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
         `),
         c('&:hover', `
           color: var(--n-tab-text-color-hover);
@@ -283,6 +290,7 @@ export default cB('tabs', `
     cE('label', `
       display: flex;
       align-items: center;
+      z-index: 1;
     `)
   ]),
   cB('tabs-bar', `
