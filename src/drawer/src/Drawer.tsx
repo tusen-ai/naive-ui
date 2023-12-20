@@ -224,10 +224,8 @@ export default defineComponent({
       if (onMaskClick) onMaskClick(e)
     }
 
-    function handleOutsideClick (): void {
-      if (props.maskClosable) {
-        doUpdateShow(false)
-      }
+    function handleOutsideClick (e: MouseEvent): void {
+      handleMaskClick(e)
     }
 
     const isComposingRef = useIsComposing()
