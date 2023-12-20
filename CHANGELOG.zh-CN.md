@@ -110,6 +110,7 @@
 - 修复 `n-date-input` 的按钮快速点击时网站其余文本会被选中
 - 修复 `n-auto-complete` 在未聚焦状态下点击清除按钮时补全菜单意外打开的问题，关闭 [#4658](https://github.com/tusen-ai/naive-ui/issues/4658)
 - 修复 `n-input` 属性 `on-keyup` 类型，关闭 [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
+- 修复 `n-tree` 属性 `data` 当数据源`data`按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 - 修复 `n-popconfirm` 操作按钮不应该被多次触发，关闭 [#4687](https://github.com/tusen-ai/naive-ui/issues/4687)
 
 ### Features

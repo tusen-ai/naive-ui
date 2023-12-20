@@ -561,9 +561,11 @@ export default defineComponent({
     })
 
     // shallow watch data
+    const resetDataState = ref<boolean>(false)
     watch(
       toRef(props, 'data'),
       () => {
+        resetDataState.value = true
         loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
@@ -677,6 +679,10 @@ export default defineComponent({
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
+        return
+      }
+      if (resetDataState.value) {
+        resetDataState.value = false
         return
       }
       const nodeHeight = depx(themeRef.value.self.nodeHeight)
