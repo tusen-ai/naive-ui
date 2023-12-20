@@ -14,7 +14,8 @@
 - Fix `n-upload-trigger` in directory drag mode with a lot of files, some of the files are not read.
 - Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
 - Fix `n-tree` leaf node line color.
-- Fix `n-data-table` Summary column `colSpan` Unfilled problem
+- Fix `n-data-table` throws error if summary config has empty column.
+- Fix `n-drawer`'s `on-mask-click` may be called multiple times.
 
 ### Features
 
