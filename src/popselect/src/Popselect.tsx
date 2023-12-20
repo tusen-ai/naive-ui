@@ -95,19 +95,20 @@ export default defineComponent({
           <NPopselectPanel
             {...$attrs}
             class={[$attrs.class, className]}
-            style={[$attrs.style, style]}
+            style={[$attrs.style, ...style]}
             {...keep(this.$props, panelPropKeys)}
             ref={createRefSetter(ref)}
             onMouseenter={mergeEventHandlers([
               onMouseenter,
-              $attrs.onMouseenter as any
+              $attrs.onMouseenter as ((e: MouseEvent) => void) | undefined
             ])}
             onMouseleave={mergeEventHandlers([
               onMouseleave,
-              $attrs.onMouseleave as any
+              $attrs.onMouseleave as ((e: MouseEvent) => void) | undefined
             ])}
           >
             {{
+              header: () => this.$slots.header?.(),
               action: () => this.$slots.action?.(),
               empty: () => this.$slots.empty?.()
             }}

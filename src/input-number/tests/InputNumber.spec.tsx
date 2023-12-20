@@ -275,4 +275,12 @@ describe('n-input-number', () => {
       wrapper.unmount()
     })
   })
+
+  it('should work with `input-props` prop', async () => {
+    const wrapper = mount(NInputNumber, {
+      props: { inputProps: { id: 'i am an id' } }
+    })
+    expect(wrapper.find('input').element.id).toEqual('i am an id')
+    wrapper.unmount()
+  })
 })

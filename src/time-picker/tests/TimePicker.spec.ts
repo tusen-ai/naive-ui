@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { NTimePicker } from '../index'

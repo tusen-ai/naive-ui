@@ -27,7 +27,7 @@ function parseComponentsDeclaration (code) {
 async function generateComponentsType () {
   const components = {}
   Object.keys(globalComponents).forEach((key) => {
-    const entry = `typeof import('naive-ui')['${key}']`
+    const entry = `(typeof import('naive-ui'))['${key}']`
     if (key.startsWith('N') && !excludeComponents.includes(key)) {
       components[key] = entry
     }
@@ -50,7 +50,7 @@ async function generateComponentsType () {
       }
       return `${name}: ${v}`
     })
-  const code = `// Auto generated component declarations
+  const code = `/* eslint-disable @typescript-eslint/consistent-type-imports */\n// Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
     ${lines.join('\n    ')}
