@@ -57,9 +57,10 @@ function getDefaultSorterFn (
     const value1 = row1[columnKey]
     const value2 = row2[columnKey]
 
-    if(value1 === null) {
+    if (value1 === null || value1 === undefined) {
+      if (value2 === null || value2 === undefined) return 0
       return -1
-    } else if(value2 === null) {
+    } else if (value2 === null || value2 === undefined) {
       return 1
     } else if (typeof value1 === 'number' && typeof value2 === 'number') {
       return value1 - value2
