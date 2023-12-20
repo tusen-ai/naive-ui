@@ -164,11 +164,7 @@ export default defineComponent({
     const duplicatedableRef = computed(
       // duplicate the copy operation in `slide` mode,
       // because only its DOM is sequence layout
-      () =>
-        props.loop &&
-        props.slidesPerView === 1 &&
-        sequenceLayoutRef.value &&
-        totalViewRef.value > 1
+      () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
     )
     // user wants to control the transition animation
     const userWantsControlRef = computed(() => props.effect === 'custom')
@@ -878,7 +874,6 @@ export default defineComponent({
       duplicatedable: duplicatedableRef,
       userWantsControl: userWantsControlRef,
       autoSlideSize: autoSlideSizeRef,
-      displayIndex: mergedDisplayIndexRef,
       realIndex: realIndexRef,
       slideStyles: slideStylesRef,
       translateStyle: translateStyleRef,

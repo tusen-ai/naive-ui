@@ -27,7 +27,7 @@ function parseComponentsDeclaration (code) {
 async function generateComponentsType () {
   const components = {}
   Object.keys(globalComponents).forEach((key) => {
-    const entry = `typeof import('naive-ui')['${key}']`
+    const entry = `(typeof import('naive-ui'))['${key}']`
     if (key.startsWith('N') && !excludeComponents.includes(key)) {
       components[key] = entry
     }
