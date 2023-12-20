@@ -32,6 +32,7 @@
 - `n-date-picker` 的 `type` 属性支持 `'week'`
 - `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
 - 更新 ruRU locale
+- `n-drawer` 新增 `content-class` `body-class` `body-content-class` `footer-class` `header-class` 属性
 
 ## 2.36.0
 
@@ -128,6 +129,7 @@
 - `n-tree` 新增 `show-line` 属性，关闭 [#3796](https://github.com/tusen-ai/naive-ui/issues/3796)， [#4554](https://github.com/tusen-ai/naive-ui/issues/4554)
 - `n-tree` 为 `render-switcher-icon` 属性添加节点信息，关闭 [#4815](https://github.com/tusen-ai/naive-ui/issues/4815)
 - `n-input-number` 导出 `select` 方法
+- `n-data-table` 新增 `n-data-table-tr--expanded` class 到展开行，新增 `n-data-table-tr n-data-table-tr--expand` class 到附加行，关闭 [#4420](https://github.com/tusen-ai/naive-ui/issues/4420).
 - `n-data-table` 新增 `n-data-table-tr--expanded` class 到展开行，新增 `n-data-table-tr n-data-table-tr--expand` class 到附加行，关闭 [#4420](https://github.com/tusen-ai/naive-ui/issues/4420)
 - `n-spin` 新增 `delay` 属性
 - 新增 `n-performant-ellipsis` 组件

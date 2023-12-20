@@ -60,6 +60,7 @@ export const drawerProps = {
   zIndex: Number,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
   trapFocus: {
     type: Boolean,
@@ -363,6 +364,7 @@ export default defineComponent({
                   style={[this.mergedBodyStyle, this.$attrs.style]}
                   blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
+                  contentClass={this.contentClass}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}

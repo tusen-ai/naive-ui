@@ -15,9 +15,13 @@ export const drawerContentProps = {
   title: {
     type: String
   },
+  headerClass: String,
   headerStyle: [Object, String] as PropType<string | CSSProperties>,
+  footerClass: String,
   footerStyle: [Object, String] as PropType<string | CSSProperties>,
+  bodyClass: String,
   bodyStyle: [Object, String] as PropType<string | CSSProperties>,
+  bodyContentClass: String,
   bodyContentStyle: [Object, String] as PropType<string | CSSProperties>,
   nativeScrollbar: { type: Boolean, default: true },
   scrollbarProps: Object as PropType<ScrollbarProps>,
@@ -55,9 +59,13 @@ export default defineComponent({
       mergedClsPrefix,
       nativeScrollbar,
       mergedTheme,
+      bodyClass,
       bodyStyle,
+      bodyContentClass,
       bodyContentStyle,
+      headerClass,
       headerStyle,
+      footerClass,
       footerStyle,
       scrollbarProps,
       closable,
@@ -74,7 +82,7 @@ export default defineComponent({
       >
         {$slots.header || title || closable ? (
           <div
-            class={`${mergedClsPrefix}-drawer-header`}
+            class={[`${mergedClsPrefix}-drawer-header`, headerClass]}
             style={headerStyle}
             role="none"
           >
@@ -97,12 +105,15 @@ export default defineComponent({
         ) : null}
         {nativeScrollbar ? (
           <div
-            class={`${mergedClsPrefix}-drawer-body`}
+            class={[`${mergedClsPrefix}-drawer-body`, bodyClass]}
             style={bodyStyle}
             role="none"
           >
             <div
-              class={`${mergedClsPrefix}-drawer-body-content-wrapper`}
+              class={[
+                `${mergedClsPrefix}-drawer-body-content-wrapper`,
+                bodyContentClass
+              ]}
               style={bodyContentStyle}
               role="none"
             >
@@ -115,7 +126,9 @@ export default defineComponent({
             theme={mergedTheme.peers.Scrollbar}
             {...scrollbarProps}
             class={`${mergedClsPrefix}-drawer-body`}
-            contentClass={`${mergedClsPrefix}-drawer-body-content-wrapper`}
+            contentClass={`${mergedClsPrefix}-drawer-body-content-wrapper ${
+              bodyContentClass ?? ''
+            }`}
             contentStyle={bodyContentStyle}
           >
             {$slots}
@@ -123,7 +136,7 @@ export default defineComponent({
         )}
         {$slots.footer ? (
           <div
-            class={`${mergedClsPrefix}-drawer-footer`}
+            class={[`${mergedClsPrefix}-drawer-footer`, footerClass]}
             style={footerStyle}
             role="none"
           >
