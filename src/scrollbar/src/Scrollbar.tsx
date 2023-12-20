@@ -36,9 +36,11 @@ const Scrollbar = defineComponent({
     const scrollbarInstRef = ref<InternalScrollbarInst | null>(null)
     const exposedMethods: ScrollbarInst = {
       scrollTo: (...args: any[]) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         scrollbarInstRef.value?.scrollTo(args[0], args[1])
       },
       scrollBy: (...args: any[]) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         scrollbarInstRef.value?.scrollBy(args[0], args[1])
       }
     }

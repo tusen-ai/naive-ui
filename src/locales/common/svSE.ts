@@ -31,6 +31,7 @@ const svSE: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Rensa',
     now: 'Nu',
     confirm: 'Bekräfta',
@@ -41,6 +42,7 @@ const svSE: NLocale = {
     monthPlaceholder: 'Välj månad',
     yearPlaceholder: 'Välj år',
     quarterPlaceholder: 'Välj kvartal',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Startdatum',
     endDatePlaceholder: 'Slutdatum',
     startDatetimePlaceholder: 'Startdatum och -tid',
@@ -78,7 +80,8 @@ const svSE: NLocale = {
     placeholder: 'Välj tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nu'
+    now: 'Nu',
+    clear: 'Rensa'
   },
   Pagination: {
     goto: 'Gå till',

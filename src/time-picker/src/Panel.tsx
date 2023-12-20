@@ -15,7 +15,7 @@ import { type MaybeArray } from '../../_utils'
 
 const timePickerPanelProps = {
   actions: {
-    type: Array as PropType<Array<'now' | 'confirm'> | null>,
+    type: Array as PropType<Array<'clear' | 'now' | 'confirm'> | null>,
     default: () => ['now', 'confirm']
   },
   showHour: {
@@ -75,9 +75,11 @@ const timePickerPanelProps = {
     required: true
   },
   onNowClick: Function as PropType<() => void>,
+  clearText: String,
   nowText: String,
   confirmText: String,
   transitionDisabled: Boolean,
+  onClearClick: Function as PropType<() => void>,
   onConfirmClick: Function as PropType<() => void>,
   onFocusin: Function as PropType<(e: FocusEvent) => void>,
   onFocusout: Function as PropType<(e: FocusEvent) => void>,
@@ -335,6 +337,16 @@ export default defineComponent({
         </div>
         {this.actions?.length ? (
           <div class={`${mergedClsPrefix}-time-picker-actions`}>
+            {this.actions?.includes('clear') ? (
+              <NButton
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                size="tiny"
+                onClick={this.onClearClick}
+              >
+                {{ default: () => this.clearText }}
+              </NButton>
+            ) : null}
             {this.actions?.includes('now') ? (
               <NButton
                 size="tiny"

@@ -13,3 +13,4 @@ export type DatePickerType =
   | 'monthrange'
   | 'quarterrange'
   | 'yearrange'
+  | 'week'

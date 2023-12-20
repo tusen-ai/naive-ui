@@ -90,16 +90,16 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
       }
       return mergedRootIndent
     }
-    if (NMenuOptionGroup) {
-      return indent / 2 + (NMenuOptionGroup.paddingLeftRef.value as number)
+    if (
+      NMenuOptionGroup &&
+      typeof NMenuOptionGroup.paddingLeftRef.value === 'number'
+    ) {
+      return indent / 2 + NMenuOptionGroup.paddingLeftRef.value
     }
-    if (NSubmenu) {
-      return (
-        (isGroup ? indent / 2 : indent) +
-        (NSubmenu.paddingLeftRef.value as number)
-      )
+    if (NSubmenu && typeof NSubmenu.paddingLeftRef.value === 'number') {
+      return (isGroup ? indent / 2 : indent) + NSubmenu.paddingLeftRef.value
     }
-    return undefined as never
+    return 0
   })
   const iconMarginRightRef = computed(() => {
     const { collapsedWidth, indent, rootIndent } = menuProps

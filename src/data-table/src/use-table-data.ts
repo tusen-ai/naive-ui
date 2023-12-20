@@ -18,6 +18,7 @@ import type {
 } from './interface'
 import { createShallowClonedObject } from './utils'
 import { useSorter } from './use-sorter'
+import { getDefaultPageSize } from '../../pagination/src/utils'
 
 // useTableData combines filter, sorter and pagination
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -80,8 +81,11 @@ export function useTableData (
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
-  const uncontrolledCurrentPageRef = ref(1)
-  const uncontrolledPageSizeRef = ref(10)
+  const { pagination } = props
+  const uncontrolledCurrentPageRef = ref(
+    pagination ? pagination.defaultPage || 1 : 1
+  )
+  const uncontrolledPageSizeRef = ref(getDefaultPageSize(pagination))
 
   const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = dataRelatedColsRef.value.filter(

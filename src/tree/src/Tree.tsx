@@ -561,9 +561,14 @@ export default defineComponent({
     })
 
     // shallow watch data
+    let isDataReset = false
     watch(
       toRef(props, 'data'),
       () => {
+        isDataReset = true
+        void nextTick(() => {
+          isDataReset = false
+        })
         loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
@@ -677,6 +682,9 @@ export default defineComponent({
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
+        return
+      }
+      if (isDataReset) {
         return
       }
       const nodeHeight = depx(themeRef.value.self.nodeHeight)
@@ -1574,7 +1582,8 @@ export default defineComponent({
           dropMarkColor,
           nodeWrapperPadding,
           nodeHeight,
-          lineHeight
+          lineHeight,
+          lineColor
         }
       } = themeRef.value
       const lineOffsetTop = getPadding(nodeWrapperPadding, 'top')
@@ -1598,7 +1607,8 @@ export default defineComponent({
         '--n-line-offset-top': `-${lineOffsetTop}`,
         '--n-line-offset-bottom': `-${lineOffsetBottom}`,
         '--n-node-content-height': nodeContentHeight,
-        '--n-line-height': lineHeight
+        '--n-line-height': lineHeight,
+        '--n-line-color': lineColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -1690,7 +1700,15 @@ export default defineComponent({
           {{
             default: () => {
               this.onRender?.()
-              return (
+              return !fNodes.length ? (
+                resolveSlot(this.$slots.empty, () => [
+                  <NEmpty
+                    class={`${mergedClsPrefix}-tree__empty`}
+                    theme={this.mergedTheme.peers.Empty}
+                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                  />
+                ])
+              ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
                   items={this.fNodes}

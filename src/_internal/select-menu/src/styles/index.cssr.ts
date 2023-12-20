@@ -54,6 +54,15 @@ export default cB('base-select-menu', `
     color: var(--n-loading-color);
     font-size: var(--n-loading-size);
   `),
+  cE('header', `
+    padding: 8px var(--n-option-padding-left);
+    font-size: var(--n-option-font-size);
+    transition: 
+      color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
+    border-bottom: 1px solid var(--n-action-divider-color);
+    color: var(--n-action-text-color);
+  `),
   cE('action', `
     padding: 8px var(--n-option-padding-left);
     font-size: var(--n-option-font-size);
