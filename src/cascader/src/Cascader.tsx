@@ -376,7 +376,7 @@ export default defineComponent({
               const tmNode = getNode(key)
               if (tmNode !== null) {
                 cascaderMenuInstRef.value.showErrorMessage(
-                  (tmNode.rawNode as any)[props.labelField]
+                  (tmNode.rawNode as any)[props.labelField] as string
                 )
               }
             }

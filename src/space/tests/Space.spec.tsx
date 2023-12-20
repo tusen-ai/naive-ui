@@ -53,15 +53,12 @@ describe('n-space', () => {
   })
 
   it('render space array size', async () => {
-    const wrapper = mount({
-      render () {
-        return (
-          <NSpace size={[20, 30]}>
-            {{
-              default: () => [<div>1</div>, <div>2</div>]
-            }}
-          </NSpace>
-        )
+    const wrapper = mount(NSpace, {
+      props: {
+        size: [20, 30]
+      },
+      slots: {
+        default: () => [<div>1</div>, <div>2</div>]
       }
     })
 
@@ -225,12 +222,8 @@ describe('n-space', () => {
   })
 
   it('should work with `wrap` prop', async () => {
-    const wrapper = mount({
-      render () {
-        return (
-          <NSpace>{{ default: () => [<div>1</div>, <div>2</div>] }}</NSpace>
-        )
-      }
+    const wrapper = mount(NSpace, {
+      slots: { default: () => [<div>1</div>, <div>2</div>] }
     })
     expect(wrapper.find('.n-space').attributes('style')).toContain(
       'flex-wrap: wrap'

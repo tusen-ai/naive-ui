@@ -1,7 +1,7 @@
+import { repeat } from 'seemly'
 import { c, cB, cM, cE } from '../../../_utils/cssr'
 
-const positionStyles = Array
-  .apply(null, { length: 24 } as any)
+const positionStyles = repeat(24, null)
   .map((_, index) => {
     const prefixIndex = index + 1
     const percent = `calc(100% / 24 * ${prefixIndex})`
