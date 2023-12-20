@@ -1,4 +1,4 @@
-import { pxfy } from 'seemly'
+import { pxfy, repeat } from 'seemly'
 import {
   computed,
   defineComponent,
@@ -95,7 +95,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { repeat, style, mergedClsPrefix, $attrs } = this
+    const { repeat: repeatProp, style, mergedClsPrefix, $attrs } = this
     // BUG:
     // Chrome devtools can't read the element
     // Maybe it's a bug of chrome
@@ -109,15 +109,8 @@ export default defineComponent({
         $attrs
       )
     )
-    if (repeat > 1) {
-      return (
-        <>
-          {Array.apply(null, { length: repeat } as any).map((_) => [
-            child,
-            '\n'
-          ])}
-        </>
-      )
+    if (repeatProp > 1) {
+      return <>{repeat(repeatProp, null).map((_) => [child, '\n'])}</>
     }
     return child
   }

@@ -8,7 +8,9 @@ export const descriptionsItemProps = {
     type: Number,
     default: 1
   },
+  labelClass: String,
   labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 

@@ -30,7 +30,7 @@ layout-shift-disabled.vue
 | collapsed | `boolean` | `false` | Whether to fold by default. |  |
 | collapsed-rows | `number` | `1` | The number of rows displayed by default. |  |
 | layout-shift-disabled | `boolean` | `false` | By default, `n-grid` will compute grid content based on window size and container size. This would cause 2 side effects: Content may shift in SSR mode; Render items has layout shift and it would influence performance slightly. If you don't need any responsive functionality, you can use `layout-shift-disabled` to get rid of side effects of it. Please note that set `layout-shift-disabled` will disabled all responsive functionality of `n-grid` and `suffix`, `offset` of `n-grid-item`. | 2.32.2 |
-| responsive | `'self' \| 'screen'` | `'screen'` | `'self'` triggers responsive layout by its own width. `'screen'` triggers responsive layout by viewport's width. |  |
+| responsive | `'self' \| 'screen'` | `'self'` | `'self'` triggers responsive layout by its own width. `'screen'` triggers responsive layout by viewport's width. |  |
 | item-responsive | `boolean` | `false` | Whether the grid item is responsive. |  |
 | x-gap | `number \| ResponsiveDescription` | `0` | Horizontal gap. |  |
 | y-gap | `number \| ResponsiveDescription` | `0` | Vertical gap. |  |

@@ -79,7 +79,7 @@ expand-debug.vue
 | selectable | `boolean` | `true` | 节点是否可以被选中 |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
 | show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
-| show-line | `boolean` | `false` | 是否显示连接线 | NEXT_VERSION |
+| show-line | `boolean` | `false` | 是否显示连接线 | 2.35.0 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |
@@ -90,7 +90,7 @@ expand-debug.vue
 | on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | 节点勾选项发生变化时的回调函数 | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | 节点展开项发生变化时的回调函数 | `meta` 2.34.0 |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` 2.34.0 |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>, meta: { node: TreeOption \| null, action: 'select' \| 'unselect' }) => void` | `undefined` | 节点选中项发生变化时的回调函数 | `meta` 2.34.0 |
 
 ### TreeOption Properties
 
@@ -105,7 +105,14 @@ expand-debug.vue
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
 
-## Methods
+### Tree Methods
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| scrollTo | `ScrollTo` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |
+
 
 #### ScrollTo Type
 
@@ -136,10 +143,6 @@ interface ScrollTo {
 }
 ```
 
-### Tree Methods
+### Others
 
-| 名称 | 参数 | 说明 | 版本 |
-| --- | --- | --- | --- |
-| scrollTo | `ScrollTo` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
-| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
-| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |
+1. `treeGetClickTarget: (e: MouseEvent) => ('checkbox' | 'switcher' | 'node')`：获取点击位置，可以用于 `nodeProps.onClick`

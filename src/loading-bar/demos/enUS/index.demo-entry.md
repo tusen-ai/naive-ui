@@ -47,6 +47,7 @@ container.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| container-class | `string` | `undefined` | Class of the loading bar container. | 2.33.4 |
 | container-style | `string \| object` | `undefined` | Style of the loading bar container. | 2.33.4 |
 | loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |  |
 | to | `string \| HTMLElement \| false` | `undefined` | Mount target of loading bar. | 2.33.4 |

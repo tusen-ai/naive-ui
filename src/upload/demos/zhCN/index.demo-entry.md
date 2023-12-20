@@ -37,6 +37,7 @@ debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | directory | `boolean` | `false` | 是否支持目录上传（在文件选框中只能选择目录） | 2.28.3 |
 | directory-dnd | `boolean` | `false` | 是否支持目录拖拽上传（如果不设定会默认跟随 `directory`） | 2.28.3 |
+| file-list-class | `string` | `undefined` | 文件列表区域的类名 | 2.36.0 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
@@ -58,6 +59,7 @@ debug.vue
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
+| trigger-class | `string` | `undefined` | 触发器区域的类名 | 2.36.0 |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | keep-file-after-finish | `boolean` | `false` | 文件上传结束的回调中保留 File，不被置为 null |  |
@@ -65,7 +67,7 @@ debug.vue
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
-| on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |  |
+| on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 |  |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |

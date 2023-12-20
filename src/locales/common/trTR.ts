@@ -30,6 +30,7 @@ const trTR: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Temizle',
     now: 'Şimdi',
     confirm: 'Onayla',
@@ -40,6 +41,7 @@ const trTR: NLocale = {
     monthPlaceholder: 'Ay Seçin',
     yearPlaceholder: 'Yıl Seçin',
     quarterPlaceholder: 'Mevsim Seçin',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Başlangıç Tarihi',
     endDatePlaceholder: 'Bitiş Tarihi',
     startDatetimePlaceholder: 'Başlangıç Tarih ve Saati',
@@ -77,7 +79,8 @@ const trTR: NLocale = {
     placeholder: 'Saat Seç',
     positiveText: 'Tamam',
     negativeText: 'İptal',
-    now: 'Şimdi'
+    now: 'Şimdi',
+    clear: 'Temizle'
   },
   Pagination: {
     goto: 'git',
