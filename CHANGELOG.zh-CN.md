@@ -14,6 +14,7 @@
 - 修复 `n-upload-trigger` 在拖拽文件夹场景下当文件夹内文件较多时，部分文件不会被正确读取的问题
 - 修复 `n-dynamic-tags` 使用键盘触发新增时行为异常，关闭 [#5077](https://github.com/tusen-ai/naive-ui/issues/5077)
 - 修复 `n-tree` 叶子节点连接线颜色
+- Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
 - 修复 `n-data-table` 总结栏有未设定的列时，会抛出 error
 - 修复 `n-drawer` 的 `on-mask-click` 属性可能被触发多次
 - 修复 `n-tree` 属性 `data` 当数据源`data`按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
