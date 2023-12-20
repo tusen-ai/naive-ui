@@ -18,6 +18,7 @@
 - Fix `n-data-table` throws error if summary config has empty column.
 - Fix `n-drawer`'s `on-mask-click` may be called multiple times.
 - Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
+- 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
 
 ### Features
 

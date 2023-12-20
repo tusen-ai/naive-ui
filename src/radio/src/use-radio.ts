@@ -6,8 +6,7 @@ import {
   type PropType,
   type Ref,
   type ComputedRef,
-  watchEffect,
-  nextTick
+  watchEffect
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -63,7 +62,6 @@ export interface UseRadio {
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>
   mergedDisabled: Ref<boolean>
-  uncontrolledChecked: Ref<boolean>
   renderSafeChecked: Ref<boolean>
   focus: Ref<boolean>
   mergedSize: ComputedRef<'small' | 'medium' | 'large'>
@@ -150,12 +148,12 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   }
   function handleRadioInputChange (): void {
     toggle()
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    nextTick(() => {
-      if (inputRef.value) {
-        inputRef.value.checked = mergedCheckedRef.value
-      }
-    })
+    // Restore element check prop's value to current state, since if doesn't
+    // reflect current VNode. If not, bug will happens in component with element
+    //  that has internal state such as <input />.
+    if (inputRef.value) {
+      inputRef.value.checked = renderSafeCheckedRef.value
+    }
   }
   function handleRadioInputBlur (): void {
     focusRef.value = false
@@ -171,7 +169,6 @@ function setup (props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     labelRef,
     mergedName: mergedNameRef,
     mergedDisabled: mergedDisabledRef,
-    uncontrolledChecked: uncontrolledCheckedRef,
     renderSafeChecked: renderSafeCheckedRef,
     focus: focusRef,
     mergedSize: mergedSizeRef,
