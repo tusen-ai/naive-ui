@@ -17,7 +17,8 @@ import {
   type ExtractPropTypes,
   cloneVNode,
   TransitionGroup,
-  type VNodeChild
+  type VNodeChild,
+  onMounted
 } from 'vue'
 import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -48,7 +49,7 @@ import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { type tabPaneProps } from './TabPane'
 import style from './styles/index.cssr'
-import { getPadding } from 'seemly'
+import { depx, getPadding } from 'seemly'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -412,31 +413,47 @@ export default defineComponent({
       barEl.classList.remove(disableTransitionClassName)
     }
 
-    const tabsRailElRef = ref<HTMLElement | null>(null)
     const segmentCapsuleElRef = ref<HTMLElement | null>(null)
 
-    function updateSegmentPosition (): void {
-      if (props.type === 'segment') {
-        const { value: tabsRailEl } = tabsRailElRef
-        if (!tabsRailEl) return
-        void nextTick(() => {
-          tabsRailEl.classList.add('transition-disabled')
-          const activeTabEl = tabsRailEl.querySelector('.n-tabs-tab--active')
-          if (activeTabEl && segmentCapsuleElRef.value) {
-            const rect = activeTabEl.getBoundingClientRect()
-            // move segment capsule to match the position of the active tab
-            segmentCapsuleElRef.value.style.width = `${rect.width}px`
-            segmentCapsuleElRef.value.style.transform = `translateX(${
-              rect.left - tabsRailEl.getBoundingClientRect().left - 3
-            }px)`
-          }
-          tabsRailEl.classList.remove('transition-disabled')
-        })
+    function updateSegmentPosition ({
+      disabledTransition
+    }: {
+      disabledTransition: boolean
+    }): void {
+      const tabsEl = tabsElRef.value
+      if (!tabsEl) return
+      disabledTransition && tabsEl.classList.add('transition-disabled')
+      const activeTabEl = getCurrentEl()
+      if (activeTabEl && segmentCapsuleElRef.value) {
+        const rect = activeTabEl.getBoundingClientRect()
+        // move segment capsule to match the position of the active tab
+        segmentCapsuleElRef.value.style.width = `${rect.width}px`
+        segmentCapsuleElRef.value.style.height = `${rect.height}px`
+        segmentCapsuleElRef.value.style.transform = `translateX(${
+          rect.left -
+          tabsEl.getBoundingClientRect().left -
+          depx(getComputedStyle(tabsEl).paddingLeft)
+        }px)`
       }
+      disabledTransition && tabsEl.classList.remove('transition-disabled')
     }
 
-    watch([mergedValueRef, tabsRailElRef], () => {
-      updateSegmentPosition()
+    watch([mergedValueRef], () => {
+      if (props.type === 'segment') {
+        void nextTick(() => {
+          updateSegmentPosition({
+            disabledTransition: false
+          })
+        })
+      }
+    })
+
+    onMounted(() => {
+      if (props.type === 'segment') {
+        updateSegmentPosition({
+          disabledTransition: true
+        })
+      }
     })
 
     let memorizedWidth = 0
@@ -671,7 +688,6 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
-      tabsRailElRef,
       segmentCapsuleElRef,
       tabsPaneWrapperRef,
       tabsElRef,
@@ -846,12 +862,14 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
+            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsElRef">
               <div
                 class={`${mergedClsPrefix}-tabs-capsule`}
                 ref="segmentCapsuleElRef"
               >
-                <Tab name="">&nbsp;</Tab>
+                <div class={`${mergedClsPrefix}-tabs-wrapper`}>
+                  <div class={`${mergedClsPrefix}-tabs-tab`} />
+                </div>
               </div>
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
