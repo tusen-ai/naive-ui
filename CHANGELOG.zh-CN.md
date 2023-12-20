@@ -15,6 +15,9 @@
 - 修复 `n-dynamic-tags` 使用键盘触发新增时行为异常，关闭 [#5077](https://github.com/tusen-ai/naive-ui/issues/5077)
 - 修复 `n-tree` 叶子节点连接线颜色
 - Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
+- 修复 `n-data-table` 总结栏有未设定的列时，会抛出 error
+- 修复 `n-drawer` 的 `on-mask-click` 属性可能被触发多次
+- 修复 `n-tree` 属性 `data` 当数据源`data`按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 
 ### Features
 
@@ -27,6 +30,7 @@
 - `n-select` 新增 `header` 插槽，关闭 [#5448](https://github.com/tusen-ai/naive-ui/issues/5448)
 - `n-date-picker` 新增 `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` 属性，关闭 [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 - `n-date-picker` 的 `type` 属性支持 `'week'`
+- `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
 - 更新 ruRU locale
 
 ## 2.36.0

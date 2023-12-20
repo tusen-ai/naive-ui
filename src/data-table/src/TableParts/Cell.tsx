@@ -46,7 +46,7 @@ export default defineComponent({
       cell = render(row, this.index)
     } else {
       if (isSummary) {
-        cell = (row[key] as SummaryCell).value
+        cell = (row[key] as SummaryCell)?.value
       } else {
         cell = renderCell
           ? renderCell(get(row, key), row, column)

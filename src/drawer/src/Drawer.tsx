@@ -224,6 +224,10 @@ export default defineComponent({
       if (onMaskClick) onMaskClick(e)
     }
 
+    function handleOutsideClick (e: MouseEvent): void {
+      handleMaskClick(e)
+    }
+
     const isComposingRef = useIsComposing()
 
     function handleEsc (e: KeyboardEvent): void {
@@ -308,6 +312,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
+      handleOutsideClick,
       handleMaskClick,
       handleEsc,
       mergedTheme: themeRef,
@@ -374,7 +379,7 @@ export default defineComponent({
                   minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
-                  onClickoutside={this.handleMaskClick}
+                  onClickoutside={this.handleOutsideClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

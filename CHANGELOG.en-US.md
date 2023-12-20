@@ -15,6 +15,9 @@
 - Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
 - Fix `n-tree` leaf node line color.
 - Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
+- Fix `n-data-table` throws error if summary config has empty column.
+- Fix `n-drawer`'s `on-mask-click` may be called multiple times.
+- Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 
 ### Features
 
@@ -24,8 +27,9 @@
 - `n-select` supports RTL.
 - `n-data-table` supports RTL.
 - `n-dialog` supports RTL.
-- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
+- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350).
 - `n-date-picker`'s `type` prop supports `'week'`.
+- `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
 
 ## 2.36.0
