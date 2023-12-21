@@ -52,6 +52,7 @@ custom-field.vue
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |  |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.32.2 |

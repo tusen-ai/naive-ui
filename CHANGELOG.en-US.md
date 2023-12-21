@@ -39,7 +39,9 @@
 - `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
 - `n-tree` adds multiple `scrollTo` configurations.
 - `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
-
+- `n-cascader` adds `ellipsis-tag-popover-props` prop.
+- `n-select` adds `ellipsis-tag-popover-props` prop.
+- `n-tree-select` adds `ellipsis-tag-popover-props` prop.
 ## 2.36.0
 
 ### Fixes

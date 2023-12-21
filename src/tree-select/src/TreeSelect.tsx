@@ -80,6 +80,7 @@ import {
 } from './utils'
 import style from './styles/index.cssr'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
+import { PopoverProps } from '../../popover'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
@@ -149,6 +150,7 @@ export const treeSelectProps = {
   },
   status: String as PropType<FormValidationStatus>,
   renderTag: Function as PropType<TreeSelectRenderTag>,
+  ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   ...treeSharedProps,
   renderLabel: Function as PropType<TreeSelectRenderLabel>,
   renderPrefix: Function as PropType<TreeSelectRenderPrefix>,
@@ -841,6 +843,7 @@ export default defineComponent({
                       themeOverrides={
                         mergedTheme.peerOverrides.InternalSelection
                       }
+                      ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
                       renderTag={this.selectionRenderTag}
                       selectedOption={this.selectedOption}
                       selectedOptions={this.selectedOptions}
