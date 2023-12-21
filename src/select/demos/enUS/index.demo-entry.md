@@ -43,6 +43,7 @@ custom-field.vue
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the select. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |

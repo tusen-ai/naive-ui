@@ -58,6 +58,7 @@ switchable-editable
 context-menu.vue
 async-expand.vue
 render-cell.vue
+export-csv.vue
 ```
 
 ## API
@@ -207,6 +208,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | --- | --- | --- | --- |
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
+| exportCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Export CSV. | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |

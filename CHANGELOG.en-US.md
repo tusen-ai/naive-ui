@@ -13,6 +13,17 @@
 - Fix `n-input` autofill's default background color, closes [#5123](https://github.com/tusen-ai/naive-ui/issues/5123).
 - Fix `n-upload-trigger` in directory drag mode with a lot of files, some of the files are not read.
 - Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
+- Fix `n-tree` leaf node line color.
+- Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
+- Fix `n-data-table` throws error if summary config has empty column.
+- Fix `n-drawer`'s `on-mask-click` may be called multiple times.
+- Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
+- 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
+- Fix `n-data-table` height incorrect when set `min-height` in empty state，closes [#5108](https://github.com/tusen-ai/naive-ui/issues/5108).
+- Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).
+- Fix `n-spin` abnormal animation, closes [#3556](https://github.com/tusen-ai/naive-ui/issues/3556).
+- Fix `n-avatar`'s lazy loading and `fallback-src` prop not working when load error in lazy, closes [#5007](https://github.com/tusen-ai/naive-ui/issues/5007).
+- Fix `n-split` has no color if it's not used in a card.
 
 ### Features
 
@@ -22,9 +33,19 @@
 - `n-select` supports RTL.
 - `n-data-table` supports RTL.
 - `n-dialog` supports RTL.
-- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
+- `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350).
 - `n-date-picker`'s `type` prop supports `'week'`.
+- `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
+- `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
+- `n-tree` adds multiple `scrollTo` configurations.
+- `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
+- `n-cascader` adds `ellipsis-tag-popover-props` prop.
+- `n-select` adds `ellipsis-tag-popover-props` prop.
+- `n-tree-select` adds `ellipsis-tag-popover-props` prop.
+- `n-date-picker` adds `month-string-type` prop, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- `n-avatar-group` adds `expand-on-hover` prop.
+- `n-data-table` adds `exportCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 
 ## 2.36.0
 
@@ -104,6 +125,7 @@
 - Fix rapid clicks on `n-date-input`'s buttons triggering a text select for the rest of the website.
 - Fix `n-auto-complete`'s autocomplete menu's unexpected open when clicking the clear icon with the input not focused, closes [#4658](https://github.com/tusen-ai/naive-ui/issues/4658).
 - Fix `n-input`'s `on-keyup` prop type, closes [#5101](https://github.com/tusen-ai/naive-ui/issues/5101)
+- Fix `n-data-table`'s default sorter to place null values at the very top or bottom, closes [#5281](https://github.com/tusen-ai/naive-ui/issues/5281).
 - Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
 ### Features
@@ -128,6 +150,7 @@
 
 - Update `zhTW` locale.
 - Add `svSE` locale.
+- Update `jaJP` locale.
 
 ## 2.34.4
 

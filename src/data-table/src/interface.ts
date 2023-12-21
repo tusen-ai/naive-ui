@@ -515,6 +515,7 @@ export interface DataTableInst {
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
   scrollTo: ScrollTo
+  exportCsv: (options?: CsvOptionsType) => void
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }
@@ -536,3 +537,8 @@ export type DataTableSelectionOption = 'all' | 'none'
 
 export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
 export type DataTableSetupProps = ExtractPropTypes<typeof dataTableProps>
+
+export interface CsvOptionsType {
+  fileName?: string
+  keepOriginalData?: boolean
+}

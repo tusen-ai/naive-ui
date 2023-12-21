@@ -21,7 +21,8 @@ import type {
   LabelPlacement,
   FormInst,
   Size,
-  FormValidateMessages
+  FormValidateMessages,
+  FormItemInternalValidateResult
 } from './interface'
 import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
@@ -92,10 +93,7 @@ export default defineComponent({
     ): Promise<void> {
       await new Promise<void>((resolve, reject) => {
         const formItemValidationPromises: Array<
-        Promise<{
-          valid: boolean
-          errors?: ValidateError[]
-        }>
+        Promise<FormItemInternalValidateResult>
         > = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
@@ -108,17 +106,21 @@ export default defineComponent({
           }
         }
         void Promise.all(formItemValidationPromises).then((results) => {
-          if (results.some((result) => !result.valid)) {
-            const errors = results
-              .filter((result) => result.errors)
-              .map((result) => result.errors)
-            if (validateCallback) {
-              validateCallback(errors as ValidateError[][])
-            }
-            reject(errors)
+          const formInvalid = results.some((result) => !result.valid)
+
+          const errors = results
+            .filter((result) => result.errors?.length)
+            .map((result) => result.errors)
+          const warnings = results
+            .filter((result) => result.warnings?.length)
+            .map((result) => result.warnings)
+          if (validateCallback) {
+            validateCallback(
+              errors?.length ? (errors as ValidateError[][]) : undefined,
+              warnings?.length ? (warnings as ValidateError[][]) : undefined
+            )
           } else {
-            if (validateCallback) validateCallback()
-            resolve()
+            formInvalid ? reject(errors) : resolve()
           }
         })
       })

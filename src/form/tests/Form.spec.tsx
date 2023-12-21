@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
-import { NForm, NFormItem } from '../index'
+import { NForm, NFormItem, type FormInst } from '../index'
+import { type FormValidateCallback } from '../src/interface'
 
 describe('n-form', () => {
   it('should work with import on demand', () => {
@@ -222,5 +223,294 @@ describe('n-form', () => {
     ))
     expect(wrapper.find('.n-form-item-label').attributes('for')).toBe('input')
     wrapper.unmount()
+  })
+
+  describe('form validation', () => {
+    it('should form validation work with `warningOnly by async/await`', async () => {
+      const wrapper = mount(
+        defineComponent({
+          setup () {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({
+                warningOnly: '',
+                throwException: ''
+              })
+            }
+          },
+          render () {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{
+                  warningOnly: {
+                    required: true,
+                    warningOnly: true,
+                    message: 'warning!'
+                  },
+                  throwException: {
+                    required: true,
+                    message: 'error!'
+                  }
+                }}
+              >
+                {{
+                  default: () => {
+                    return [
+                      <NFormItem label="warningOnly" path="warningOnly">
+                        {{
+                          default: () => (
+                            <NInput
+                              ref="warningInputRef"
+                              value={this.formData.warningOnly}
+                              onUpdateValue={(v) => {
+                                this.formData.warningOnly = v
+                              }}
+                            />
+                          )
+                        }}
+                      </NFormItem>,
+                      <NFormItem label="throwException" path="throwException">
+                        {{
+                          default: () => (
+                            <NInput
+                              ref="errorInputRef"
+                              value={this.formData.throwException}
+                              onUpdateValue={(v) => {
+                                this.formData.throwException = v
+                              }}
+                            />
+                          )
+                        }}
+                      </NFormItem>
+                    ]
+                  }
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+      const validationError = [
+        [
+          {
+            field: 'throwException',
+            fieldValue: '',
+            message: 'error!'
+          }
+        ]
+      ]
+
+      // show warning and error feedback, validate method rejected while empty form fields
+      await expect(formRef.validate()).rejects.toMatchObject(validationError)
+
+      expect(
+        wrapper.find('.n-form-item-feedback.n-form-item-feedback--error').text()
+      ).toBe('error!')
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .text()
+      ).toBe('warning!')
+
+      // only warning is shown, validate method resolved while error filed got value.
+      await wrapper
+        .findComponent({ ref: 'errorInputRef' })
+        .find('input')
+        .setValue('value')
+
+      await expect(formRef.validate()).resolves.toBeUndefined()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .text()
+      ).toBe('warning!')
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(false)
+
+      // either error nor warning was shown, validate method resolve while form filled.
+      await wrapper
+        .findComponent({ ref: 'warningInputRef' })
+        .find('input')
+        .setValue('value')
+
+      await expect(formRef.validate()).resolves.toBeUndefined()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .exists()
+      ).toBe(false)
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(false)
+
+      wrapper.unmount()
+    })
+
+    it('should form validation work with `warningOnly` by callback', async () => {
+      const wrapper = mount(
+        defineComponent({
+          setup () {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({
+                warningOnly: '',
+                throwException: ''
+              })
+            }
+          },
+          render () {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{
+                  warningOnly: {
+                    required: true,
+                    warningOnly: true,
+                    message: 'warning!'
+                  },
+                  throwException: {
+                    required: true,
+                    message: 'error!'
+                  }
+                }}
+              >
+                {{
+                  default: () => {
+                    return [
+                      <NFormItem label="warningOnly" path="warningOnly">
+                        {{
+                          default: () => (
+                            <NInput
+                              ref="warningInputRef"
+                              value={this.formData.warningOnly}
+                              onUpdateValue={(v) => {
+                                this.formData.warningOnly = v
+                              }}
+                            />
+                          )
+                        }}
+                      </NFormItem>,
+                      <NFormItem label="throwException" path="throwException">
+                        {{
+                          default: () => (
+                            <NInput
+                              ref="errorInputRef"
+                              value={this.formData.throwException}
+                              onUpdateValue={(v) => {
+                                this.formData.throwException = v
+                              }}
+                            />
+                          )
+                        }}
+                      </NFormItem>
+                    ]
+                  }
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+      const validationError = [
+        [
+          {
+            field: 'throwException',
+            fieldValue: '',
+            message: 'error!'
+          }
+        ]
+      ]
+      const validationWarning = [
+        [
+          {
+            field: 'warningOnly',
+            fieldValue: '',
+            message: 'warning!'
+          }
+        ]
+      ]
+
+      async function validate (): Promise<Parameters<FormValidateCallback>> {
+        return await new Promise<Parameters<FormValidateCallback>>(
+          (resolve) => {
+            void formRef.validate((errs, warnings) => {
+              resolve([errs, warnings])
+            })
+          }
+        )
+      }
+      // show warning and error feedback, validate method rejected while empty form fields
+      expect(await validate()).toMatchObject([
+        validationError,
+        validationWarning
+      ])
+
+      expect(
+        wrapper.find('.n-form-item-feedback.n-form-item-feedback--error').text()
+      ).toBe('error!')
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .text()
+      ).toBe('warning!')
+
+      // only warning is shown, validate method resolved while error filed got value.
+      await wrapper
+        .findComponent({ ref: 'errorInputRef' })
+        .find('input')
+        .setValue('value')
+
+      // show warning and error feedback, validate method rejected while empty form fields
+      expect(await validate()).toMatchObject([undefined, validationWarning])
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .text()
+      ).toBe('warning!')
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(false)
+
+      // either error nor warning was shown, validate method resolve while form filled.
+      await wrapper
+        .findComponent({ ref: 'warningInputRef' })
+        .find('input')
+        .setValue('value')
+
+      expect(await validate()).toMatchObject([undefined, undefined])
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .exists()
+      ).toBe(false)
+
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(false)
+
+      wrapper.unmount()
+    })
   })
 })

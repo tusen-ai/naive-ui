@@ -3,16 +3,17 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
 import {
-  type VScrollToOptions,
-  type ItemData
-} from 'vueuc/lib/virtual-list/src/type'
-import { VVirtualList, type VirtualListInst } from 'vueuc'
+  VVirtualList,
+  type VirtualListInst,
+  type VirtualListItemData,
+  type VirtualListScrollOptions
+} from 'vueuc'
 export { type VirtualListInst } from 'vueuc'
 
 export const virtualListProps = {
   scrollbarProps: Object as PropType<ScrollbarProps>,
   items: {
-    type: Array as PropType<ItemData[]>,
+    type: Array as PropType<VirtualListItemData[]>,
     default: () => []
   },
   itemSize: {
@@ -74,7 +75,10 @@ export default defineComponent({
       props.onWheel?.(e)
     }
 
-    function scrollTo (options: VScrollToOptions | number, y?: number): void {
+    function scrollTo (
+      options: VirtualListScrollOptions | number,
+      y?: number
+    ): void {
       if (typeof options === 'number') {
         virtualListInstRef.value?.scrollTo(options, y ?? 0)
       } else {
@@ -136,7 +140,7 @@ export default defineComponent({
                     item,
                     index
                   }: {
-                    item: ItemData
+                    item: VirtualListItemData
                     index: number
                   }) => this.$slots.default?.({ item, index })
                 }}

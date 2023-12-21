@@ -30,7 +30,7 @@ rtl-debug.vue
 | fallback-src | `string` | `undefined` | 头像加载失败时显示的图片的地址 |  |
 | img-props | `object` | `undefined` | 组件中 img 元素的属性 | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.31.0 |
-| lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | 2.31.0 |
+| lazy | `boolean` | `false` | 是否让图片进入视口再加载，单独使用将设置为[HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) 的属性值；也可配合 `intersection-observer-options` 配置实现懒加载 | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |  |
 | render-fallback | `() => VNodeChild` | `undefined` | 加载失败的渲染函数 | 2.33.4 |
 | render-placeholder | `() => VNodeChild` | `undefined` | 占位的渲染函数 | 2.33.4 |
@@ -41,12 +41,13 @@ rtl-debug.vue
 
 ### AvatarGroup Props
 
-| 名称      | 类型                  | 默认值      | 说明                   |
-| --------- | --------------------- | ----------- | ---------------------- |
-| max       | `number`              | `undefined` | 组内头像显示的最大个数 |
-| max-style | `Object \| string`    | `undefined` | 溢出标识的样式         |
-| options   | `Array<AvatarOption>` | `[]`        | 头像组的选项           |
-| vertical  | `boolean`             | `false`     | 组内头像是否垂直排列   |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| expand-on-hover | `boolean` | `false` | 悬停时展开 | NEXT_VERSION |
+| max | `number` | `undefined` | 组内头像显示的最大个数 |  |
+| max-style | `Object \| string` | `undefined` | 溢出标识的样式 |  |
+| options | `Array<AvatarOption>` | `[]` | 头像组的选项 |  |
+| vertical | `boolean` | `false` | 组内头像是否垂直排列 |  |
 
 参考 [Avatar Props](avatar#Props)
 

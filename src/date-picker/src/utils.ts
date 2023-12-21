@@ -22,7 +22,7 @@ import {
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import type { FirstDayOfWeek, Value } from './interface'
+import type { FirstDayOfWeek, MonthStringType, Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -100,6 +100,7 @@ export interface DateItem {
 
 export interface MonthItem {
   type: 'month'
+  monthStringType: MonthStringType
   dateObject: {
     month: number
     year: number
@@ -187,6 +188,11 @@ function dateItem (
   }
 }
 
+function getMonthString (month: number, type: MonthStringType): string {
+  const date = new Date(Date.UTC(2000, month, 1))
+  return date.toLocaleString('UTC', { month: type })
+}
+
 function weekItem (
   time: number,
   monthTs: number,
@@ -231,10 +237,12 @@ function weekItem (
 function monthItem (
   monthTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  monthStringType: MonthStringType
 ): MonthItem {
   return {
     type: 'month',
+    monthStringType,
     dateObject: {
       month: getMonth(monthTs),
       year: getYear(monthTs)
@@ -354,13 +362,19 @@ function dateArray (
 function monthArray (
   yearAnchorTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  monthStringType: MonthStringType
 ): MonthItem[] {
   const calendarMonths: MonthItem[] = []
   const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
-      monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs)
+      monthItem(
+        getTime(addMonths(yearStart, i)),
+        valueTs,
+        currentTs,
+        monthStringType
+      )
     )
   }
   return calendarMonths
@@ -445,5 +459,6 @@ export {
   strictParse,
   getDerivedTimeFromKeyboardEvent,
   getDefaultTime,
+  getMonthString,
   pluckValueFromRange
 }

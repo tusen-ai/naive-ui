@@ -35,6 +35,7 @@ debug.vue
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |  |
 | disabled | `boolean` | `false` | Disabled state. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |

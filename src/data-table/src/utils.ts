@@ -10,7 +10,8 @@ import type {
   CreateRowClassName,
   TableSelectionColumn,
   TableColumn,
-  TableExpandColumn
+  TableExpandColumn,
+  RowData
 } from './interface'
 
 export const SELECTION_COL_WIDTH = 40
@@ -170,4 +171,12 @@ export function isColumnSorting (
         state.columnKey === (column as TableBaseColumn).key && state.order
     ) !== undefined
   )
+}
+
+export function generateCsv (columns: TableColumn[], data: RowData[]): string {
+  const header = columns.map((col: any) => col.title).join(',')
+  const rows = data.map((row) => {
+    return columns.map((col: any) => row[col.key]).join(',')
+  })
+  return [header, ...rows].join('\n')
 }

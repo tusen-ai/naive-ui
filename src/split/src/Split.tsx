@@ -6,12 +6,12 @@ import {
   computed,
   type CSSProperties
 } from 'vue'
+import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
-import { off, on } from 'evtd'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
@@ -60,9 +60,10 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        self: { resizableTriggerColorHover }
+        self: { resizableTriggerColor, resizableTriggerColorHover }
       } = themeRef.value
       return {
+        '--n-resize-trigger-color': resizableTriggerColor,
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })

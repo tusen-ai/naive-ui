@@ -31,8 +31,9 @@ function duplicateSlide (
 export function getDisplayIndex (
   current: number,
   length: number,
-  duplicatedable?: boolean
+  duplicatedable: boolean
 ): number {
+  if (length === 1) return 0
   return !duplicatedable
     ? current
     : current === 0

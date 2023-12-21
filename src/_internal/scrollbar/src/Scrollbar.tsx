@@ -99,7 +99,7 @@ const scrollbarProps = {
   content: Function as PropType<() => HTMLElement | null | undefined>,
   containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
-  contentClass: String,
+  contentClass: [String, Array] as PropType<string | Array<string | undefined>>,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
   horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
   verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,

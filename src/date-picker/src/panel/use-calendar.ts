@@ -73,7 +73,8 @@ function useCalendar (
     isSecondDisabledRef,
     localeRef,
     firstDayOfWeekRef,
-    datePickerSlots
+    datePickerSlots,
+    monthStringTypeRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -118,7 +119,8 @@ function useCalendar (
     return monthArray(
       calendarValueRef.value,
       Array.isArray(value) ? null : value,
-      nowRef.value
+      nowRef.value,
+      monthStringTypeRef.value
     )
   })
   const yearArrayRef = computed(() => {

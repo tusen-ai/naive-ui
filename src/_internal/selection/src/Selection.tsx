@@ -23,7 +23,7 @@ import type {
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
-import { NPopover } from '../../../popover'
+import { NPopover, PopoverProps } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
@@ -103,6 +103,7 @@ export default defineComponent({
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onDeleteOption: Function as PropType<(option: SelectBaseOption) => void>,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+    ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
     onPatternFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -574,6 +575,7 @@ export default defineComponent({
       maxTagCount,
       bordered,
       clsPrefix,
+      ellipsisTagPopoverProps,
       onRender,
       renderTag,
       renderLabel
@@ -770,7 +772,8 @@ export default defineComponent({
             width: 'trigger',
             onUpdateShow: this.onPopoverUpdateShow,
             theme: this.mergedTheme.peers.Popover,
-            themeOverrides: this.mergedTheme.peerOverrides.Popover
+            themeOverrides: this.mergedTheme.peerOverrides.Popover,
+            ...ellipsisTagPopoverProps
           } as const)
         : null
       const showPlaceholder = this.selected

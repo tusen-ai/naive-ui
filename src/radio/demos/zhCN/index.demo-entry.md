@@ -13,6 +13,7 @@ button-group.vue
 size.vue
 radio-focus-debug.vue
 rtl-debug.vue
+uncontrolled-debug.vue
 ```
 
 ## API

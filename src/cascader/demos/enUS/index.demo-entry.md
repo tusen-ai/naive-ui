@@ -34,6 +34,7 @@ status.vue
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |  |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |  |
 | disabled-field | `string` | `'disabled'` | The disabled field in `CascaderOption`. | 2.32.2 |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |

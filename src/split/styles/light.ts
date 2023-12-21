@@ -3,9 +3,10 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { type Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { primaryColorHover } = vars
+  const { primaryColorHover, borderColor } = vars
   return {
-    resizableTriggerColorHover: primaryColorHover
+    resizableTriggerColorHover: primaryColorHover,
+    resizableTriggerColor: borderColor
   }
 }
 

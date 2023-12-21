@@ -23,7 +23,11 @@ import {
   type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { type VirtualListInst, VVirtualList } from 'vueuc'
+import {
+  type VirtualListInst,
+  VVirtualList,
+  type VirtualListScrollOptions
+} from 'vueuc'
 import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
@@ -561,9 +565,14 @@ export default defineComponent({
     })
 
     // shallow watch data
+    let isDataReset = false
     watch(
       toRef(props, 'data'),
       () => {
+        isDataReset = true
+        void nextTick(() => {
+          isDataReset = false
+        })
         loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
@@ -677,6 +686,9 @@ export default defineComponent({
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
+        return
+      }
+      if (isDataReset) {
         return
       }
       const nodeHeight = depx(themeRef.value.self.nodeHeight)
@@ -1535,8 +1547,15 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    function scrollTo (options: { key: Key }): void {
-      virtualListInstRef.value?.scrollTo(options)
+    function scrollTo (
+      options: VirtualListScrollOptions | number,
+      y?: number
+    ): void {
+      if (typeof options === 'number') {
+        virtualListInstRef.value?.scrollTo(options, y || 0)
+      } else {
+        virtualListInstRef.value?.scrollTo(options)
+      }
     }
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
