@@ -158,7 +158,7 @@
     "@types/lodash-es": "^4.17.9",
     "async-validator": "^4.2.5",
     "css-render": "^0.15.12",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.0.4",
     "date-fns-tz": "^2.0.0",
     "evtd": "^0.2.4",
     "highlight.js": "^11.8.0",
