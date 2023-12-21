@@ -6,7 +6,7 @@ export const self = (vars: ThemeCommonVars) => {
   const { primaryColorHover, borderColor } = vars
   return {
     resizableTriggerColorHover: primaryColorHover,
-    borderColor: borderColor
+    resizableTriggerColor: borderColor
   }
 }
 
