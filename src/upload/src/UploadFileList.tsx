@@ -29,6 +29,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       listTypeRef,
       mergedFileListRef,
+      fileListClassRef,
       fileListStyleRef,
       cssVarsRef,
       themeClassRef,
@@ -73,7 +74,8 @@ export default defineComponent({
             `${mergedClsPrefix}-upload-file-list`,
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-file-list--grid`,
-            abstract ? themeClassRef?.value : undefined
+            abstract ? themeClassRef?.value : undefined,
+            fileListClassRef.value
           ]}
           style={[
             abstract && cssVarsRef ? cssVarsRef.value : '',

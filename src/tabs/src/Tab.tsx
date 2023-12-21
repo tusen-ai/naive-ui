@@ -114,6 +114,7 @@ export default defineComponent({
               onMouseenter: trigger === 'hover' ? this.activateTab : undefined,
               style: internalAddable ? undefined : style
             },
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             this.internalCreatedByPane
               ? ((this.tabProps || {}) as any)
               : this.$attrs

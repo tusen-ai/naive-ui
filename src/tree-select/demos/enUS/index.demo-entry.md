@@ -35,6 +35,7 @@ debug.vue
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |  |
 | disabled | `boolean` | `false` | Disabled state. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
@@ -62,6 +63,7 @@ debug.vue
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.36.0 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
@@ -92,6 +94,8 @@ debug.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur. | 2.34.0 |
+| blurInput | `() => void` | Input blur. | 2.35.0 |
 | focus | `() => void` | Focus. | 2.34.0s |
+| focusInput | `() => void` | Input focus. | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

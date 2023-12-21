@@ -127,7 +127,7 @@ export const inputProps = {
   renderCount: Function as PropType<(props: { value: string }) => VNodeChild>,
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
-  onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
+  onKeyup: [Function, Array] as PropType<(e: KeyboardEvent) => void>,
   onInput: [Function, Array] as PropType<OnUpdateValue>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -160,7 +160,10 @@ export const inputProps = {
   >,
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
-  internalLoadingBeforeSuffix: Boolean,
+  internalLoadingBeforeSuffix: {
+    type: Boolean,
+    default: true
+  },
   /** deprecated */
   showPasswordToggle: Boolean
 }
@@ -584,6 +587,9 @@ export default defineComponent({
     }
     function handleClear (e: MouseEvent): void {
       doClear(e)
+      clearValue()
+    }
+    function clearValue (): void {
       if (props.pair) {
         doUpdateValue(['', ''])
         doChange(['', ''])
@@ -655,8 +661,11 @@ export default defineComponent({
       }
       on('mouseup', document, hidePassword)
     }
+    function handleWrapperKeyup (e: KeyboardEvent): void {
+      if (props.onKeyup) call(props.onKeyup, e)
+    }
     function handleWrapperKeydown (e: KeyboardEvent): void {
-      props.onKeydown?.(e)
+      if (props.onKeydown) call(props.onKeydown, e)
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
@@ -806,6 +815,7 @@ export default defineComponent({
       inputElRef,
       textareaElRef,
       isCompositing: isComposingRef,
+      clear: clearValue,
       focus,
       blur,
       select,
@@ -985,6 +995,7 @@ export default defineComponent({
       handlePasswordToggleClick,
       handlePasswordToggleMousedown,
       handleWrapperKeydown,
+      handleWrapperKeyup,
       handleTextAreaMirrorResize,
       getTextareaScrollContainer: () => {
         return textareaElRef.value
@@ -1050,7 +1061,7 @@ export default defineComponent({
         onMouseleave={this.handleMouseLeave}
         onCompositionstart={this.handleCompositionStart}
         onCompositionend={this.handleCompositionEnd}
-        onKeyup={this.onKeyup}
+        onKeyup={this.handleWrapperKeyup}
         onKeydown={this.handleWrapperKeydown}
       >
         {/* textarea & basic input */}

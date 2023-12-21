@@ -47,6 +47,7 @@ render-debug.vue
 | disabled-field | `string` | `'disabled'` | 替代 `TreeSelectOption` 中的 disabled 字段名 | 2.32.2 |
 | loading | `boolean` | `false` | 是否加载中 | 2.28.3 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.22.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.30.7 |
@@ -65,6 +66,7 @@ render-debug.vue
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 | 2.36.0 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | 2.27.0 |
@@ -95,6 +97,8 @@ render-debug.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | blur | `() => void` | 失焦 | 2.34.0 |
+| blurInput | `() => void` | 输入失焦 | 2.35.0 |
 | focus | `() => void` | 聚焦 | 2.34.0 |
+| focusInput | `() => void` | 输入聚焦 | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |

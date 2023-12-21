@@ -17,7 +17,7 @@ import { getSlot, warn, createKey, call, flatten } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
-import type { RadioProps } from './use-radio'
+import type { RadioBaseProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
 import { type OnUpdateValue, type OnUpdateValueImpl } from './interface'
@@ -46,7 +46,7 @@ function mapSlot (
       )
       continue
     }
-    const instanceProps: RadioProps = wrappedInstance.props as any
+    const instanceProps: RadioBaseProps = wrappedInstance.props as any
     if (name !== 'RadioButton') {
       children.push(wrappedInstance)
       continue
@@ -54,7 +54,7 @@ function mapSlot (
     if (i === 0) {
       children.push(wrappedInstance)
     } else {
-      const lastInstanceProps: RadioProps = children[children.length - 1]
+      const lastInstanceProps: RadioBaseProps = children[children.length - 1]
         .props as any
       const lastInstanceChecked = value === lastInstanceProps.value
       const lastInstanceDisabled: boolean | undefined =
@@ -193,6 +193,7 @@ export default defineComponent({
           buttonBoxShadow,
           buttonBoxShadowFocus,
           buttonBoxShadowHover,
+          buttonColor,
           buttonColorActive,
           buttonTextColor,
           buttonTextColorActive,
@@ -211,6 +212,7 @@ export default defineComponent({
         '--n-button-box-shadow': buttonBoxShadow,
         '--n-button-box-shadow-focus': buttonBoxShadowFocus,
         '--n-button-box-shadow-hover': buttonBoxShadowHover,
+        '--n-button-color': buttonColor,
         '--n-button-color-active': buttonColorActive,
         '--n-button-text-color': buttonTextColor,
         '--n-button-text-color-hover': buttonTextColorHover,

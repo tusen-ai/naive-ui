@@ -56,6 +56,14 @@
           Enabled
         </template>
       </n-switch>
+      <n-switch v-model:value="checkOnClick">
+        <template #checked>
+          CheckOnClick Enabled
+        </template>
+        <template #unchecked>
+          CheckOnClick Disabled
+        </template>
+      </n-switch>
     </n-space>
     <n-tree
       v-model:checked-keys="checkedKeys"
@@ -65,6 +73,7 @@
       :multiple="multiple"
       :cascade="cascade"
       :checkable="checkable"
+      :check-on-click="checkOnClick"
       :check-strategy="checkStrategy"
       :data="options"
     />
@@ -84,6 +93,7 @@ export default defineComponent({
       checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       checkable: ref(false),
       selectable: ref(false),
+      checkOnClick: ref(false),
       checkedKeys: ref(['Dig It', 'go']),
       options: [
         {
@@ -111,7 +121,8 @@ export default defineComponent({
             },
             {
               label: 'Nowhere Man',
-              key: 'Nowhere Man'
+              key: 'Nowhere Man',
+              checkboxDisabled: true
             },
             {
               label: 'Think For Yourself',

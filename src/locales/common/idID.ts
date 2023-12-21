@@ -31,6 +31,7 @@ const idID: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Bersihkan',
     now: 'Sekarang',
     confirm: 'Setuju',
@@ -42,6 +43,7 @@ const idID: NLocale = {
     // FIXME: translation needed
     yearPlaceholder: 'Pilih tahun',
     quarterPlaceholder: 'Pilih perempat tahun',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Tanggal Mulai',
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
@@ -81,7 +83,8 @@ const idID: NLocale = {
     placeholder: 'Pilih Waktu',
     positiveText: 'OK',
     negativeText: 'Batalkan',
-    now: 'Sekarang'
+    now: 'Sekarang',
+    clear: 'Bersihkan'
   },
   Pagination: {
     goto: 'Ke',
@@ -119,6 +122,7 @@ const idID: NLocale = {
     tipClockwise: 'Searah jarum jam',
     tipZoomOut: 'Zoom out',
     tipZoomIn: 'Zoom in',
+    tipDownload: 'Download',
     tipClose: 'Tutup (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom ke ukuran asli'

@@ -39,7 +39,11 @@ import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type { PopoverTrigger, InternalRenderBody } from './interface'
+import type {
+  PopoverTrigger,
+  InternalRenderBody,
+  InternalPopoverInst
+} from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -140,7 +144,10 @@ export const popoverBaseProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
+  arrowClass: String,
   arrowStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowWrapperClass: String,
+  arrowWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
   flip: {
     type: Boolean,
     default: true
@@ -161,8 +168,11 @@ export const popoverBaseProps = {
   zIndex: Number,
   to: useAdjustedTo.propTo,
   scrollable: Boolean,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerClass: String,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
   // events
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
@@ -410,6 +420,7 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function getTriggerElement (): HTMLElement {
+      // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
       return binderInstRef.value?.targetRef as HTMLElement
     }
     function setBodyInstance (value: BodyInstance | null): void {
@@ -434,7 +445,7 @@ export default defineComponent({
         doUpdateShow(false)
       }
     })
-    return {
+    const returned = {
       binderInstRef,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
@@ -450,6 +461,7 @@ export default defineComponent({
       handleBlur,
       syncPosition
     }
+    return returned satisfies InternalPopoverInst
   },
   render () {
     const { positionManually, $slots: slots } = this

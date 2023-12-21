@@ -31,6 +31,7 @@ const skSK: NLocale = {
     dateFormat: 'd-M-yyyy',
     dateTimeFormat: 'd-M-yyyy HH:mm:ss',
     quarterFormat: 'qqq-yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'Vyčistiť',
     now: 'Teraz',
     confirm: 'Potvrdiť',
@@ -41,6 +42,7 @@ const skSK: NLocale = {
     monthPlaceholder: 'Vyberte mesiac',
     yearPlaceholder: 'Vyberte rok',
     quarterPlaceholder: 'Vyberte štvrťrok',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Dátum začiatku',
     endDatePlaceholder: 'Dátum ukončenia',
     startDatetimePlaceholder: 'Dátum a čas začiatku',
@@ -80,7 +82,8 @@ const skSK: NLocale = {
     placeholder: 'Vybrať čas',
     positiveText: 'OK',
     negativeText: 'Zrušiť',
-    now: 'Teraz'
+    now: 'Teraz',
+    clear: 'Vyčistiť'
   },
   Pagination: {
     goto: 'Ísť',
@@ -119,6 +122,7 @@ const skSK: NLocale = {
     tipClockwise: 'V smere hodinových ručičiek',
     tipZoomOut: 'Oddialiť',
     tipZoomIn: 'Priblížiť',
+    tipDownload: 'Sťahovať',
     tipClose: 'Zavrieť (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'

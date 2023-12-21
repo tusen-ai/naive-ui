@@ -45,6 +45,7 @@ export default defineComponent({
       type: String as PropType<Placement>,
       required: true
     },
+    contentClass: String,
     contentStyle: [Object, String] as PropType<string | CSSProperties>,
     nativeScrollbar: {
       type: Boolean,
@@ -63,6 +64,10 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
+    maxWidth: Number,
+    maxHeight: Number,
+    minWidth: Number,
+    minHeight: Number,
     resizable: Boolean,
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
@@ -122,18 +127,36 @@ export default defineComponent({
 
     const { doUpdateHeight, doUpdateWidth } = NDrawer
 
+    const regulateWidth = (size: number): number => {
+      const { maxWidth } = props
+      if (maxWidth && size > maxWidth) return maxWidth
+      const { minWidth } = props
+      if (minWidth && size < minWidth) return minWidth
+      return size
+    }
+
+    const regulateHeight = (size: number): number => {
+      const { maxHeight } = props
+      if (maxHeight && size > maxHeight) return maxHeight
+      const { minHeight } = props
+      if (minHeight && size < minHeight) return minHeight
+      return size
+    }
+
     const handleBodyMousemove = (e: MouseEvent): void => {
       if (isDraggingRef.value) {
         if (isVertical.value) {
           let height = bodyRef.value?.offsetHeight || 0
           const increment = startPosition - e.clientY
           height += props.placement === 'bottom' ? increment : -increment
+          height = regulateHeight(height)
           doUpdateHeight(height)
           startPosition = e.clientY
         } else {
           let width = bodyRef.value?.offsetWidth || 0
           const increment = startPosition - e.clientX
           width += props.placement === 'right' ? increment : -increment
+          width = regulateWidth(width)
           doUpdateWidth(width)
           startPosition = e.clientX
         }
@@ -217,7 +240,7 @@ export default defineComponent({
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
           /* Keep the wrapper dom. Make sure the drawer has a host.
-            Nor the detached content will disappear without transition */
+          Nor the detached content will disappear without transition */
           <div role="none">
             <VFocusTrap
               disabled={!this.showMask || !this.trapFocus}
@@ -279,7 +302,10 @@ export default defineComponent({
                               ) : null,
                               this.nativeScrollbar ? (
                                 <div
-                                  class={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  class={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   style={this.contentStyle}
                                   role="none"
                                 >
@@ -289,7 +315,10 @@ export default defineComponent({
                                 <NScrollbar
                                   {...this.scrollbarProps}
                                   contentStyle={this.contentStyle}
-                                  contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  contentClass={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   theme={this.mergedTheme.peers.Scrollbar}
                                   themeOverrides={
                                     this.mergedTheme.peerOverrides.Scrollbar

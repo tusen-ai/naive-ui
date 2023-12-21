@@ -25,7 +25,7 @@ export interface FormItemInjection {
 }
 
 export const formItemInjectionKey =
-  createInjectionKey<FormItemInjection>('n-form-item')
+  createInjectionKey<FormItemInjection | null>('n-form-item')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
@@ -63,7 +63,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     mergedSize
       ? () => mergedSize(NFormItem)
       : () => {
-          const { size } = props as any
+          const { size } = props
           if (size) return size
           if (NFormItem) {
             const { mergedSize } = NFormItem

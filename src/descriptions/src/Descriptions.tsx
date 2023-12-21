@@ -21,6 +21,7 @@ import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
+import { repeat } from 'seemly'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
@@ -47,7 +48,9 @@ export const descriptionsProps = {
     default: 'medium'
   },
   bordered: Boolean,
+  labelClass: String,
   labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
@@ -145,6 +148,8 @@ export default defineComponent({
     const children = defaultSlots ? flatten(defaultSlots()) : []
     const memorizedLength = children.length
     const {
+      contentClass,
+      labelClass,
       compitableColumn,
       labelPlacement,
       labelAlign,
@@ -195,14 +200,20 @@ export default defineComponent({
         if (bordered) {
           state.row.push(
             <th
-              class={`${mergedClsPrefix}-descriptions-table-header`}
+              class={[
+                `${mergedClsPrefix}-descriptions-table-header`,
+                labelClass
+              ]}
               colspan={1}
               style={labelStyle}
             >
               {itemLabel}
             </th>,
             <td
-              class={`${mergedClsPrefix}-descriptions-table-content`}
+              class={[
+                `${mergedClsPrefix}-descriptions-table-content`,
+                contentClass
+              ]}
               colspan={
                 isLastIteration
                   ? (compitableColumn - memorizedSpan) * 2 + 1
@@ -224,7 +235,10 @@ export default defineComponent({
               }
             >
               <span
-                class={`${mergedClsPrefix}-descriptions-table-content__label`}
+                class={[
+                  `${mergedClsPrefix}-descriptions-table-content__label`,
+                  labelClass
+                ]}
                 style={labelStyle}
               >
                 {[
@@ -237,7 +251,10 @@ export default defineComponent({
                 ]}
               </span>
               <span
-                class={`${mergedClsPrefix}-descriptions-table-content__content`}
+                class={[
+                  `${mergedClsPrefix}-descriptions-table-content__content`,
+                  contentClass
+                ]}
                 style={contentStyle}
               >
                 {itemChildren}
@@ -251,7 +268,7 @@ export default defineComponent({
           : itemSpan * 2
         state.row.push(
           <th
-            class={`${mergedClsPrefix}-descriptions-table-header`}
+            class={[`${mergedClsPrefix}-descriptions-table-header`, labelClass]}
             colspan={colspan}
             style={labelStyle}
           >
@@ -260,7 +277,10 @@ export default defineComponent({
         )
         state.secondRow.push(
           <td
-            class={`${mergedClsPrefix}-descriptions-table-content`}
+            class={[
+              `${mergedClsPrefix}-descriptions-table-content`,
+              contentClass
+            ]}
             colspan={colspan}
             style={contentStyle}
           >
@@ -305,7 +325,19 @@ export default defineComponent({
         ) : null}
         <div class={`${mergedClsPrefix}-descriptions-table-wrapper`}>
           <table class={`${mergedClsPrefix}-descriptions-table`}>
-            <tbody>{rows}</tbody>
+            <tbody>
+              {labelPlacement === 'top' && (
+                <tr
+                  class={`${mergedClsPrefix}-descriptions-table-row`}
+                  style={{
+                    visibility: 'collapse'
+                  }}
+                >
+                  {repeat(compitableColumn * 2, <td />)}
+                </tr>
+              )}
+              {rows}
+            </tbody>
           </table>
         </div>
       </div>

@@ -17,9 +17,9 @@ export default c([
       transform: rotate(360deg);
     }
   `),
-  cB('spin-container', {
-    position: 'relative'
-  }, [
+  cB('spin-container', `
+    position: relative;
+  `, [
     cB('spin-body', `
       position: absolute;
       top: 50%;

@@ -8,6 +8,10 @@ export interface PopoverInst {
   setShow: (value: boolean) => void
 }
 
+export type InternalPopoverInst = PopoverInst & {
+  getMergedShow: () => boolean
+}
+
 export type PopoverBodyInjection = Ref<HTMLElement | null> | null
 
 export const popoverBodyInjectionKey =
@@ -16,7 +20,7 @@ export const popoverBodyInjectionKey =
 export type InternalRenderBody = (
   className: any,
   ref: Ref<HTMLElement | null>,
-  style: Ref<CSSProperties>,
+  style: CSSProperties[],
   onMouseenter: (e: MouseEvent) => void,
   onMouseleave: (e: MouseEvent) => void
 ) => VNode

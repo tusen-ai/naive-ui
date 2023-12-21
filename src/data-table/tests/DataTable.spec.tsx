@@ -310,7 +310,7 @@ describe('n-data-table', () => {
           }
         ],
         filter (value: any, row) {
-          return row.address.includes(value)
+          return row.address.includes(value as string)
         }
       }
     ]

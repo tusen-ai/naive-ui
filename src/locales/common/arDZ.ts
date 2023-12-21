@@ -31,6 +31,7 @@ const arDZ: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'مسح',
     now: 'الآن',
     confirm: 'تأكيد',
@@ -41,6 +42,7 @@ const arDZ: NLocale = {
     monthPlaceholder: 'إختيار الشهر',
     yearPlaceholder: 'إختيار السنة',
     quarterPlaceholder: 'إختيار الربع',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'تاريخ البدء',
     endDatePlaceholder: 'تاريخ الإنتهاء',
     startDatetimePlaceholder: 'تاريخ ووقت البدء',
@@ -78,7 +80,8 @@ const arDZ: NLocale = {
     placeholder: 'إختيار الوقت',
     positiveText: 'تأكيد',
     negativeText: 'إلغاء',
-    now: 'الآن'
+    now: 'الآن',
+    clear: 'مسح'
   },
   Pagination: {
     goto: 'إذهب إلى',
@@ -116,6 +119,7 @@ const arDZ: NLocale = {
     tipClockwise: 'إتجاه عقارب الساعة',
     tipZoomOut: 'تكبير',
     tipZoomIn: 'تصغير',
+    tipDownload: 'للتحميل',
     tipClose: 'إغلاق (Esc زر)',
     tipOriginalSize: 'تكبير إلى الحجم الأصلي'
   }

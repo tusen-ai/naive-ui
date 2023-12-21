@@ -17,11 +17,12 @@ import {
   format,
   startOfYear,
   getQuarter,
-  isSameQuarter
+  isSameQuarter,
+  isSameWeek
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import type { Value } from './interface'
+import type { FirstDayOfWeek, MonthStringType, Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -49,17 +50,35 @@ const matcherMap = {
   quarter: isSameQuarter
 } as const
 
+function makeWeekMatcher (firstDayOfWeek: FirstDayOfWeek) {
+  return (sourceTime: number, patternTime: number | Date) => {
+    // date-fns: 0 - Sunday
+    // naive-ui: 0 - Monday
+    const weekStartsOn = ((firstDayOfWeek + 1) % 7) as FirstDayOfWeek
+    return isSameWeek(sourceTime, patternTime, { weekStartsOn })
+  }
+}
+
 function matchDate (
   sourceTime: number,
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter'
+): boolean
+function matchDate (
+  sourceTime: number,
+  patternTime: number | Date,
+  type: 'week',
+  firstDayOfWeek: FirstDayOfWeek
+): boolean
+function matchDate (
+  sourceTime: number,
+  patternTime: number | Date,
+  type: 'date' | 'month' | 'year' | 'quarter' | 'week',
+  firstDayOfWeek: FirstDayOfWeek = 0
 ): boolean {
-  const matcher = matcherMap[type]
-  if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => matcher(time, patternTime))
-  } else {
-    return matcher(sourceTime, patternTime)
-  }
+  const matcher =
+    type === 'week' ? makeWeekMatcher(firstDayOfWeek) : matcherMap[type]
+  return matcher(sourceTime, patternTime)
 }
 
 export interface DateItem {
@@ -75,11 +94,13 @@ export interface DateItem {
   startOfSpan: boolean
   endOfSpan: boolean
   selected: boolean
+  inSelectedWeek: boolean
   ts: number
 }
 
 export interface MonthItem {
   type: 'month'
+  monthStringType: MonthStringType
   dateObject: {
     month: number
     year: number
@@ -108,6 +129,21 @@ export interface QuarterItem {
   isCurrent: boolean
   selected: boolean
   ts: number
+}
+
+function dateOrWeekItem (
+  time: number,
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number,
+  mode: 'date' | 'week',
+  firstDayOfWeek: FirstDayOfWeek
+): DateItem {
+  if (mode === 'date') {
+    return dateItem(time, monthTs, valueTs, currentTs)
+  } else {
+    return weekItem(time, monthTs, valueTs, currentTs, firstDayOfWeek)
+  }
 }
 
 // date item's valueTs can be a tuple since two date may show in one panel, so
@@ -144,6 +180,7 @@ function dateItem (
     inCurrentMonth: isSameMonth(time, monthTs),
     isCurrentDate: matchDate(currentTs, time, 'date'),
     inSpan,
+    inSelectedWeek: false,
     startOfSpan,
     endOfSpan,
     selected,
@@ -151,13 +188,61 @@ function dateItem (
   }
 }
 
+function getMonthString (month: number, type: MonthStringType): string {
+  const date = new Date(Date.UTC(2000, month, 1))
+  return date.toLocaleString('UTC', { month: type })
+}
+
+function weekItem (
+  time: number,
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number,
+  firstDayOfWeek: FirstDayOfWeek
+): DateItem {
+  let inSpan = false
+  let startOfSpan = false
+  let endOfSpan = false
+  if (Array.isArray(valueTs)) {
+    if (valueTs[0] < time && time < valueTs[1]) {
+      inSpan = true
+    }
+    if (matchDate(valueTs[0], time, 'week', firstDayOfWeek)) startOfSpan = true
+    if (matchDate(valueTs[1], time, 'week', firstDayOfWeek)) endOfSpan = true
+  }
+  const inSelectedWeek =
+    valueTs !== null &&
+    (Array.isArray(valueTs)
+      ? matchDate(valueTs[0], time, 'week', firstDayOfWeek) ||
+        matchDate(valueTs[1], time, 'week', firstDayOfWeek)
+      : matchDate(valueTs, time, 'week', firstDayOfWeek))
+  return {
+    type: 'date',
+    dateObject: {
+      date: getDate(time),
+      month: getMonth(time),
+      year: getYear(time)
+    },
+    inCurrentMonth: isSameMonth(time, monthTs),
+    isCurrentDate: matchDate(currentTs, time, 'date'),
+    inSpan,
+    startOfSpan,
+    endOfSpan,
+    selected: false,
+    inSelectedWeek,
+    ts: getTime(time)
+  }
+}
+
 function monthItem (
   monthTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  monthStringType: MonthStringType
 ): MonthItem {
   return {
     type: 'month',
+    monthStringType,
     dateObject: {
       month: getMonth(monthTs),
       year: getYear(monthTs)
@@ -210,8 +295,10 @@ function dateArray (
   valueTs: number | [number, number] | null,
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
-  strip: boolean = false
+  strip: boolean = false,
+  weekMode: boolean = false
 ): DateItem[] {
+  const granularity = weekMode ? 'week' : 'date'
   const displayMonth = getMonth(monthTs)
   // First day of current month
   let displayMonthIterator = getTime(startOfMonth(monthTs))
@@ -224,14 +311,28 @@ function dateArray (
     protectLastMonthDateIsShownFlag
   ) {
     calendarDays.unshift(
-      dateItem(lastMonthIterator, monthTs, valueTs, currentTs)
+      dateOrWeekItem(
+        lastMonthIterator,
+        monthTs,
+        valueTs,
+        currentTs,
+        granularity,
+        startDay
+      )
     )
     lastMonthIterator = getTime(addDays(lastMonthIterator, -1))
     protectLastMonthDateIsShownFlag = false
   }
   while (getMonth(displayMonthIterator) === displayMonth) {
     calendarDays.push(
-      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
+      dateOrWeekItem(
+        displayMonthIterator,
+        monthTs,
+        valueTs,
+        currentTs,
+        granularity,
+        startDay
+      )
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
@@ -244,7 +345,14 @@ function dateArray (
     : 42
   while (calendarDays.length < endIndex) {
     calendarDays.push(
-      dateItem(displayMonthIterator, monthTs, valueTs, currentTs)
+      dateOrWeekItem(
+        displayMonthIterator,
+        monthTs,
+        valueTs,
+        currentTs,
+        granularity,
+        startDay
+      )
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
@@ -254,13 +362,19 @@ function dateArray (
 function monthArray (
   yearAnchorTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  monthStringType: MonthStringType
 ): MonthItem[] {
   const calendarMonths: MonthItem[] = []
   const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
-      monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs)
+      monthItem(
+        getTime(addMonths(yearStart, i)),
+        valueTs,
+        currentTs,
+        monthStringType
+      )
     )
   }
   return calendarMonths
@@ -345,5 +459,6 @@ export {
   strictParse,
   getDerivedTimeFromKeyboardEvent,
   getDefaultTime,
+  getMonthString,
   pluckValueFromRange
 }

@@ -134,7 +134,7 @@ function createXhrHandlers (
 
 function customSubmitImpl (options: {
   inst: Omit<UploadInternalInst, 'isErrorState'>
-  data?: FuncOrRecordOrUndef
+  data?: FuncOrRecordOrUndef<string | Blob>
   headers?: FuncOrRecordOrUndef
   action?: string
   withCredentials?: boolean
@@ -209,10 +209,10 @@ function registerHandler (
   }
 }
 
-function unwrapFunctionValue (
-  data: FuncOrRecordOrUndef,
+function unwrapFunctionValue<T> (
+  data: FuncOrRecordOrUndef<T>,
   file: SettledFileInfo
-): Record<string, string> {
+): Record<string, T> {
   if (typeof data === 'function') {
     return data({ file })
   }
@@ -234,7 +234,7 @@ function setHeaders (
 
 function appendData (
   formData: FormData,
-  data: FuncOrRecordOrUndef,
+  data: FuncOrRecordOrUndef<string | Blob>,
   file: SettledFileInfo
 ): void {
   const dataObject = unwrapFunctionValue(data, file)
@@ -261,7 +261,7 @@ function submitImpl (
     withCredentials: boolean
     responseType: XMLHttpRequestResponseType
     headers: FuncOrRecordOrUndef
-    data: FuncOrRecordOrUndef
+    data: FuncOrRecordOrUndef<string | Blob>
   }
 ): void {
   const request = new XMLHttpRequest()
@@ -270,7 +270,9 @@ function submitImpl (
   request.withCredentials = withCredentials
   const formData = new FormData()
   appendData(formData, data, file)
-  formData.append(fieldName, file.file as File)
+  if (file.file !== null) {
+    formData.append(fieldName, file.file)
+  }
   registerHandler(inst, file, request)
   if (action !== undefined) {
     request.open(method.toUpperCase(), action)
@@ -303,7 +305,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
-  data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
+  data: [Object, Function] as PropType<FuncOrRecordOrUndef<string | Blob>>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
   responseType: {
@@ -331,6 +333,7 @@ export const uploadProps = {
   MaybeArray<OnUpdateFileList>
   >,
   onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
+  fileListClass: String,
   fileListStyle: [String, Object] as PropType<string | CSSProperties>,
   defaultFileList: {
     type: Array as PropType<FileInfo[]>,
@@ -374,8 +377,9 @@ export const uploadProps = {
   },
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
+  triggerClass: String,
   triggerStyle: [String, Object] as PropType<CSSProperties | string>,
-  renderIcon: Object as PropType<RenderIcon>
+  renderIcon: Function as PropType<RenderIcon>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -504,6 +508,7 @@ export default defineComponent({
           let nextTickChain = Promise.resolve()
 
           fileInfos.forEach((fileInfo) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             nextTickChain = nextTickChain.then(nextTick as any).then(() => {
               fileInfo &&
                 doChange(fileInfo, e, {
@@ -677,6 +682,7 @@ export default defineComponent({
       onRemoveRef: toRef(props, 'onRemove'),
       onDownloadRef: toRef(props, 'onDownload'),
       mergedFileListRef,
+      triggerClassRef: toRef(props, 'triggerClass'),
       triggerStyleRef: toRef(props, 'triggerStyle'),
       shouldUseThumbnailUrlRef: toRef(props, 'shouldUseThumbnailUrl'),
       renderIconRef: toRef(props, 'renderIcon'),
@@ -693,6 +699,7 @@ export default defineComponent({
       handleFileAddition,
       mergedDisabledRef: formItem.mergedDisabledRef,
       maxReachedRef,
+      fileListClassRef: toRef(props, 'fileListClass'),
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       acceptRef: toRef(props, 'accept'),

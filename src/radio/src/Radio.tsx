@@ -5,18 +5,19 @@ import type { ThemeProps } from '../../_mixins'
 import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { radioLight, type RadioTheme } from '../styles'
-import { setup, radioProps } from './use-radio'
+import { setup, radioBaseProps } from './use-radio'
 import style from './styles/radio.cssr'
 
-export { radioProps }
+export const radioProps = {
+  ...(useTheme.props as ThemeProps<RadioTheme>),
+  ...radioBaseProps
+} as const
+
 export type RadioProps = ExtractPublicPropTypes<typeof radioProps>
 
 export default defineComponent({
   name: 'Radio',
-  props: {
-    ...(useTheme.props as ThemeProps<RadioTheme>),
-    ...radioProps
-  },
+  props: radioProps,
   setup (props) {
     const radio = setup(props)
     const themeRef = useTheme(
@@ -100,12 +101,10 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-radio`,
           this.themeClass,
-          {
-            [`${mergedClsPrefix}-radio--rtl`]: this.rtlEnabled,
-            [`${mergedClsPrefix}-radio--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-radio--checked`]: this.renderSafeChecked,
-            [`${mergedClsPrefix}-radio--focus`]: this.focus
-          }
+          this.rtlEnabled && `${mergedClsPrefix}-radio--rtl`,
+          this.mergedDisabled && `${mergedClsPrefix}-radio--disabled`,
+          this.renderSafeChecked && `${mergedClsPrefix}-radio--checked`,
+          this.focus && `${mergedClsPrefix}-radio--focus`
         ]}
         style={this.cssVars as CSSProperties}
       >

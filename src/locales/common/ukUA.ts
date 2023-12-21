@@ -31,6 +31,7 @@ const ukUA: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',
@@ -41,6 +42,7 @@ const ukUA: NLocale = {
     monthPlaceholder: 'Оберіть місяць',
     yearPlaceholder: 'Оберіть рік',
     quarterPlaceholder: 'Оберіть квартал',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
@@ -79,7 +81,8 @@ const ukUA: NLocale = {
     placeholder: 'Обрати час',
     positiveText: 'OK',
     negativeText: 'Скасувати',
-    now: 'Зараз'
+    now: 'Зараз',
+    clear: 'Стерти'
   },
   Pagination: {
     goto: 'Перейти',
@@ -117,6 +120,7 @@ const ukUA: NLocale = {
     tipClockwise: 'За годинниковою стрілкою',
     tipZoomOut: 'Віддалити',
     tipZoomIn: 'Наблизити',
+    tipDownload: 'звантажити',
     tipClose: 'Закрити (Esc)',
     tipOriginalSize: 'Масштабувати до оригінального розміру'
   }

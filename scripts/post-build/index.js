@@ -5,6 +5,7 @@ const { terseCssr } = require('./terse-cssr')
 const { replaceDefine, outDirs, srcDir } = require('../utils')
 
 const { genWebTypes } = require('./gen-web-types')
+const { completePath } = require('./complete-path')
 
 ;(async () => {
   await terseCssr()
@@ -15,10 +16,11 @@ const { genWebTypes } = require('./gen-web-types')
     // the sequence is crucial
     "'lodash'": "'lodash-es'",
     "'date-fns/(.*)'//": "'date-fns/esm/$1'",
-    "'date-fns-tz/(.*)'//": "'date-fns-tz/esm/$1'",
-    "'date-fns'//": "'date-fns/esm'",
-    "'date-fns-tz'//": "'date-fns-tz/esm'"
+    "'date-fns'//": "'date-fns/esm'"
   })
+
+  // complete require and import source path
+  await completePath(['es'])
 
   // generate web-types.json for webstorm & vetur
   // web-types.json is only a very loose description for auto-complete
