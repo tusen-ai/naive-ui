@@ -60,9 +60,13 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        self: { resizableTriggerColorHover }
+        self: { 
+          borderColor,
+          resizableTriggerColorHover 
+        }
       } = themeRef.value
       return {
+        '--n-border-color': borderColor,
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })
