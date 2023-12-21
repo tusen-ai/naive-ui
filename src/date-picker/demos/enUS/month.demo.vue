@@ -1,10 +1,20 @@
 <markdown>
 # Month
+
+You can set the display type of month in the panel.
 </markdown>
 
 <template>
-  <n-date-picker v-model:value="timestamp" type="month" clearable />
-  <pre>{{ JSON.stringify(timestamp) }}</pre>
+  <n-space vertical>
+    <n-date-picker v-model:value="timestamp" type="month" clearable />
+    <n-date-picker
+      v-model:value="timestamp"
+      type="month"
+      :month-string-type="'short'"
+      clearable
+    />
+    <pre>{{ JSON.stringify(timestamp) }}</pre>
+  </n-space>
 </template>
 
 <script lang="ts">

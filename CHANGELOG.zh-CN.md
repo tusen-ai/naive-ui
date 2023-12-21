@@ -44,6 +44,7 @@
 - `n-cascader` 新增 `ellipsis-tag-popover-props` 属性
 - `n-select` 新增 `ellipsis-tag-popover-props` 属性
 - `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性
+- `n-date-picker` 新增 `month-string-type` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 - TODO: tree select 支持控制节点展开行为
 
 ## 2.36.0
@@ -150,6 +151,7 @@
 
 - 更新 zhTW locale
 - 新增 svSE locale
+- 更新 jaJP locale
 
 ## 2.34.4
 

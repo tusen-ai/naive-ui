@@ -43,6 +43,7 @@
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
+- `n-date-picker` adds `month-string-type` prop, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 
 ## 2.36.0
 
@@ -147,6 +148,7 @@
 
 - Update `zhTW` locale.
 - Add `svSE` locale.
+- Update `jaJP` locale.
 
 ## 2.34.4
 

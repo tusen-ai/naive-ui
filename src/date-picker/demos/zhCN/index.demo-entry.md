@@ -46,6 +46,7 @@ form-debug.vue
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |  |
 | formatted-value | `string \| [string, string] \| null` | `undefined` | 格式化之后的值 | 2.24.0 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
+| month-string-type | `'numeric' \| '2-digit' \| 'long' \| 'short' \| 'narrow'` | `'numeric'` | 设置面板中月份的显示方式 | NEXT_VERSION |
 | panel | `boolean` | `false` | 是否只使用面板 | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |

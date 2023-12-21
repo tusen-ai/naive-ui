@@ -77,7 +77,8 @@ function useDualCalendar (
     closeOnSelectRef,
     updateValueOnCloseRef,
     firstDayOfWeekRef,
-    datePickerSlots
+    datePickerSlots,
+    monthStringTypeRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -235,11 +236,21 @@ function useDualCalendar (
   })
   const startMonthArrayRef = computed(() => {
     const startValue = pluckValueFromRange(props.value, 'start')
-    return monthArray(startValue ?? Date.now(), startValue, nowRef.value)
+    return monthArray(
+      startValue ?? Date.now(),
+      startValue,
+      nowRef.value,
+      monthStringTypeRef.value
+    )
   })
   const endMonthArrayRef = computed(() => {
     const endValue = pluckValueFromRange(props.value, 'end')
-    return monthArray(endValue ?? Date.now(), endValue, nowRef.value)
+    return monthArray(
+      endValue ?? Date.now(),
+      endValue,
+      nowRef.value,
+      monthStringTypeRef.value
+    )
   })
   watch(
     computed(() => props.value),
