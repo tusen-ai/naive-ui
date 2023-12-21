@@ -52,7 +52,7 @@ For more info about theming, see [Customizing Theme](customize-theme).
 
 ## Auto Import
 
-you can use the `unplugin-auto-import` plugin to automatically import API.
+You can use the `unplugin-auto-import` plugin to automatically import APIs.
 
 If you develop using SFC, you can use the `unplugin-vue-components` plugin to automatically import components on demand.The plugin will automatically parse the components used in the template and import the components.
 
