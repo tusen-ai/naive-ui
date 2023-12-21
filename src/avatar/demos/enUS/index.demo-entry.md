@@ -39,13 +39,13 @@ v-show-debug.vue
 
 ### AvatarGroup Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| expand-on-hover| `boolean` | `false` | Expand on hover. |
-| max | `number` | `undefined` | Max avatar count in the group. |
-| max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |
-| options | `Array<AvatarOption>` | `[]` | Avatar group options. |
-| vertical | `boolean` | `false` | Whether display a vertical avatar group. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| expand-on-hover | `boolean` | `false` | Expand on hover. | NEXT_VERSION |
+| max | `number` | `undefined` | Max avatar count in the group. |  |
+| max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |  |
+| options | `Array<AvatarOption>` | `[]` | Avatar group options. |  |
+| vertical | `boolean` | `false` | Whether display a vertical avatar group. |  |
 
 see [Avatar Props](#Avatar-Props)
 

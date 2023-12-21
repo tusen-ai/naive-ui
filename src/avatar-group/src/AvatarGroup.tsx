@@ -100,7 +100,8 @@ export default defineComponent({
           `${mergedClsPrefix}-avatar-group`,
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`,
-          this. expandOnHover && `${mergedClsPrefix}-avatar-group--expand-on-hover`
+          this.expandOnHover &&
+            `${mergedClsPrefix}-avatar-group--expand-on-hover`
         ]}
         style={this.cssVars}
         role="group"

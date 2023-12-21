@@ -44,7 +44,7 @@
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
 - `n-date-picker` adds `month-string-type` prop, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
-- `n-avatar-group` adds `hover-expand` prop.
+- `n-avatar-group` adds `expand-on-hover` prop.
 
 ## 2.36.0
 
