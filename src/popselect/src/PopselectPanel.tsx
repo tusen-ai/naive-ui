@@ -125,7 +125,11 @@ export default defineComponent({
       toggle(tmNode.key)
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action') && !happensIn(e, 'empty')) e.preventDefault()
+      if (
+        !happensIn(e, 'action') &&
+        !happensIn(e, 'empty') &&
+        !happensIn(e, 'header')
+      ) { e.preventDefault() }
     }
     function toggle (value: ValueAtom): void {
       const {
