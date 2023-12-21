@@ -42,7 +42,6 @@
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
-- 
 ## 2.36.0
 
 ### Fixes
