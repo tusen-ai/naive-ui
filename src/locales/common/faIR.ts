@@ -31,6 +31,7 @@ const faIR: NLocale = {
     dateFormat: 'yyyy/MM/dd',
     dateTimeFormat: 'yyyy/MM/dd HH:mm:ss',
     quarterFormat: 'سه ماهه yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'پاک کردن',
     now: 'اکنون',
     confirm: 'تأیید',
@@ -41,6 +42,7 @@ const faIR: NLocale = {
     monthPlaceholder: 'انتخاب ماه',
     yearPlaceholder: 'انتخاب سال',
     quarterPlaceholder: 'انتخاب سه‌ماهه',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'تاریخ شروع',
     endDatePlaceholder: 'تاریخ پایان',
     startDatetimePlaceholder: 'زمان شروع',
@@ -78,7 +80,8 @@ const faIR: NLocale = {
     placeholder: 'لطفاً زمان مورد نظر را انتخاب کنید',
     positiveText: 'تأیید',
     negativeText: 'لغو',
-    now: 'همین الان'
+    now: 'همین الان',
+    clear: 'پاک کردن'
   },
   Pagination: {
     goto: 'رفتن به صفحه',

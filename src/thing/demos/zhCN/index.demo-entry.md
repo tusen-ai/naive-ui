@@ -20,8 +20,10 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | content-indented | `boolean` | `false` | 是否启用内容缩进 |  |
 | content | `string` | `undefined` | 内容区域 |  |
+| content-class | `string` | `undefined` | 内容区域类名 | 2.36.0 |
 | content-style | `string \| Object` | `undefined` | 内容区域样式 | 2.32.2 |
 | description | `string` | `undefined` | 描述信息 |  |
+| description-class | `string` | `undefined` | 描述信息区域类名 | 2.36.0 |
 | description-style | `string \| Object` | `undefined` | 描述信息区域样式 | 2.32.2 |
 | title-extra | `string` | `undefined` | 标题的附加信息 |  |
 | title | `string` | `undefined` | 标题 |  |

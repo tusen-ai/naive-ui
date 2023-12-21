@@ -23,6 +23,7 @@ describe('n-menu', () => {
       },
       {
         type: 'group',
+        key: 'group',
         children: [
           {
             label: 'l',

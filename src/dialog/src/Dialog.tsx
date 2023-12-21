@@ -5,7 +5,7 @@ import {
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   render,
@@ -39,8 +39,13 @@ export const NDialog = defineComponent({
     ...dialogProps
   },
   setup (props) {
-    const { mergedComponentPropsRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedComponentPropsRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
+    const rtlEnabledRef = useRtl('Dialog', mergedRtlRef, mergedClsPrefixRef)
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
@@ -141,6 +146,7 @@ export const NDialog = defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       mergedIconPlacement: mergedIconPlacementRef,
       mergedTheme: themeRef,
       handlePositiveClick,
@@ -241,18 +247,29 @@ export const NDialog = defineComponent({
           this.themeClass,
           this.closable && `${mergedClsPrefix}-dialog--closable`,
           `${mergedClsPrefix}-dialog--icon-${mergedIconPlacement}`,
-          bordered && `${mergedClsPrefix}-dialog--bordered`
+          bordered && `${mergedClsPrefix}-dialog--bordered`,
+          this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
         ]}
         style={cssVars as CSSProperties}
         role="dialog"
       >
-        {closable ? (
-          <NBaseClose
-            clsPrefix={mergedClsPrefix}
-            class={`${mergedClsPrefix}-dialog__close`}
-            onClick={this.handleCloseClick}
-          />
-        ) : null}
+        {closable
+          ? resolveWrappedSlot(this.$slots.close, (node) => {
+            const classNames = [
+                `${mergedClsPrefix}-dialog__close`,
+                this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
+            ]
+            return node ? (
+                <div class={classNames}>{node}</div>
+            ) : (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  class={classNames}
+                  onClick={this.handleCloseClick}
+                />
+            )
+          })
+          : null}
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}

@@ -38,7 +38,8 @@ export default defineComponent({
     tmNode: {
       type: Object as PropType<TmNode>,
       required: true
-    }
+    },
+    isEllipsisPlaceholder: Boolean
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -95,7 +96,11 @@ export default defineComponent({
           </div>
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
+          {this.isEllipsisPlaceholder
+            ? this.title
+            : renderLabel
+              ? renderLabel(tmNode.rawNode)
+              : render(this.title)}
           {this.extra || renderExtra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
