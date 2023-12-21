@@ -34,7 +34,7 @@ export const avatarGroupProps = {
     default: () => []
   },
   vertical: Boolean,
-  hoverExpand: Boolean,
+  expandOnHover: Boolean,
   size: [String, Number] as PropType<Size | undefined>
 } as const
 
@@ -100,7 +100,7 @@ export default defineComponent({
           `${mergedClsPrefix}-avatar-group`,
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`,
-          this.hoverExpand && `${mergedClsPrefix}-avatar-group--hover-expand`
+          this. expandOnHover && `${mergedClsPrefix}-avatar-group--expand-on-hover`
         ]}
         style={this.cssVars}
         role="group"

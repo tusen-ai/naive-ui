@@ -43,7 +43,7 @@ rtl-debug.vue
 
 | 名称         | 类型                  | 默认值      | 说明                   |
 | ------------ | --------------------- | ----------- | ---------------------- |
-| hover-expand | `boolean`             | `false`     | 悬停时展开             |
+| expand-on-hover | `boolean`             | `false`     | 悬停时展开             |
 | max          | `number`              | `undefined` | 组内头像显示的最大个数 |
 | max-style    | `Object \| string`    | `undefined` | 溢出标识的样式         |
 | options      | `Array<AvatarOption>` | `[]`        | 头像组的选项           |

@@ -6,7 +6,7 @@ export default cB('avatar-group', `
   display: inline-flex;
   position: relative;
 `, [
-  cM('hover-expand', [
+  cM('expand-on-hover', [
     cB('avatar', [
       c('&:not(:first-child)', `
          transition: margin .3s var(--n-bezier);
