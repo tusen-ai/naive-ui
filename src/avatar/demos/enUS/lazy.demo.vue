@@ -1,23 +1,37 @@
 <markdown>
 # Lazy load
 
-You can use `lazy` to let image load after it enters viewport.
+Load the images only after they enter the viewport. There are two ways to use it: one is to use the `lazy` property alone, which will be set to the value of the [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) property, and the other is to use `lazy` together with the `intersection-observer-options` configuration to implement lazy loading using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) API.
 </markdown>
 
 <template>
+  <n-p>use<n-text code>
+    lazy
+  </n-text> along</n-p>
+  <n-avatar
+    lazy
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+  />
+  <n-p>
+    use <n-text code>
+      lazy
+    </n-text> with
+    <n-text code>
+      intersection-observer-options
+    </n-text>
+  </n-p>
   <div
     id="image-scroll-container"
     style="overflow: auto; height: 100px; gap: 8px"
   >
     <n-space vertical>
       <n-avatar
-        v-for="i of range"
-        :key="i"
+        v-for="src of srcList"
+        :key="src"
         size="small"
-        :src="
-          'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg?t=' + i
-        "
         lazy
+        :src="src"
+        fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
         :intersection-observer-options="{
           root: '#image-scroll-container'
         }"
@@ -32,7 +46,18 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      range: Array.from({ length: 10 }, (_, i) => i + 1)
+      srcList: [
+        'https://picsum.photos/id/1/100/100',
+        'https://picsum.photos/id/2/100/100',
+        'https://picsum.photos/id/3/100/100',
+        'https://picsum.photos/id/4/100/100',
+        'https://picsum.photos/id/5/100/100',
+        'xxx.png',
+        'https://picsum.photos/id/7/100/100',
+        'https://picsum.photos/id/8/100/100',
+        'https://picsum.photos/id/9/100/100',
+        'https://picsum.photos/id/10/100/100'
+      ]
     }
   }
 })
