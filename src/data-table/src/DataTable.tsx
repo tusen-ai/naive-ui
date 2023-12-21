@@ -36,7 +36,7 @@ import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
 import style from './styles/index.cssr'
-import { generateCSV } from './utils'
+import { generateCsv } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
@@ -109,9 +109,10 @@ export default defineComponent({
       useGroupHeader(props, getResizableWidth)
 
     const exportCsv = (options?: CsvOptionsType): void => {
-      const { fileName = 'DataTable.csv', originalData = true } = options ?? {}
-      const data = originalData ? props.data : rawPaginatedDataRef.value
-      const csvData = generateCSV(props.columns, data)
+      const { fileName = 'DataTable.csv', keepOriginalData = false } =
+        options || {}
+      const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
+      const csvData = generateCsv(props.columns, data)
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
       const filename = fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
       const link = document.createElement('a')

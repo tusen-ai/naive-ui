@@ -540,5 +540,5 @@ export type DataTableSetupProps = ExtractPropTypes<typeof dataTableProps>
 
 export interface CsvOptionsType {
   fileName?: string
-  originalData?: boolean
+  keepOriginalData?: boolean
 }

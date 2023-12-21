@@ -173,11 +173,10 @@ export function isColumnSorting (
   )
 }
 
-export function generateCSV (columns: TableColumn[], data: RowData[]): string {
+export function generateCsv (columns: TableColumn[], data: RowData[]): string {
   const header = columns.map((col: any) => col.title).join(',')
   const rows = data.map((row) => {
     return columns.map((col: any) => row[col.key]).join(',')
   })
-  const csv = [header, ...rows].join('\n')
-  return csv
+  return [header, ...rows].join('\n')
 }

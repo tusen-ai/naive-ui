@@ -1,6 +1,6 @@
 <markdown>
-  # Export Csv
-  </markdown>
+# Export Csv
+</markdown>
 
 <template>
   <n-space vertical :size="12">
@@ -102,7 +102,7 @@ export default defineComponent({
     const exportSorterAndFilterCsv = () =>
       tableRef.value?.exportCsv({
         fileName: 'sorter-filter',
-        originalData: false
+        keepOriginalData: false
       })
 
     return {
