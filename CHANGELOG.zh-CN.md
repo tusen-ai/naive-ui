@@ -46,6 +46,7 @@
 - `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性
 - `n-date-picker` 新增 `month-string-type` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 - `n-avatar-group` 新增 `expand-on-hover` 属性
+- `n-data-table` 新增 `exportCsv` 方法，关闭 [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 - TODO: tree select 支持控制节点展开行为
 
 ## 2.36.0
