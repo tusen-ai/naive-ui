@@ -37,6 +37,7 @@
 - Update `ruRU` locale.
 - `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
 - `n-tree` adds multiple `scrollTo` configurations.
+- `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
 
 ## 2.36.0
 

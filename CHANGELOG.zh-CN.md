@@ -38,6 +38,7 @@
 - 更新 ruRU locale
 - `n-drawer` 新增 `content-class` `body-class` `body-content-class` `footer-class` `header-class` 属性
 - `n-tree` 新增多种 `scrollTo` 配置
+- `n-form` 为 `FormItemRule` 增加 `warningOnly` 属性，用于显示表单异常值，但不会阻塞提交
 - TODO: tree select 支持控制节点展开行为
 
 ## 2.36.0
