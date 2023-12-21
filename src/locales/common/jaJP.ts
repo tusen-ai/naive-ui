@@ -31,6 +31,7 @@ const jaJP: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'クリア',
     now: '現在',
     confirm: 'OK',
@@ -41,6 +42,7 @@ const jaJP: NLocale = {
     monthPlaceholder: '月を選択',
     yearPlaceholder: '年を選択',
     quarterPlaceholder: '四半期を選択',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',
@@ -80,7 +82,8 @@ const jaJP: NLocale = {
     placeholder: '選択してください',
     positiveText: 'OK',
     negativeText: 'キャンセル',
-    now: '現在'
+    now: '現在',
+    clear: 'クリア'
   },
   Pagination: {
     goto: 'ページジャンプ',

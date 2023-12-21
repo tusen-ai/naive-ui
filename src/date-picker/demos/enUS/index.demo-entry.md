@@ -16,6 +16,7 @@ year.vue
 yearrange.vue
 quarter.vue
 quarterrange.vue
+week.vue
 size.vue
 default-time.vue
 disabled.vue
@@ -59,6 +60,10 @@ panel.vue
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
+| on-prev-month | `() => void` | `undefined` | Callback when click prev month button. | NEXT_VERSION |
+| on-next-month | `() => void` | `undefined` | Callback when click next month button. | NEXT_VERSION |
+| on-prev-year | `() => void` | `undefined` | Callback when click prev year button. | NEXT_VERSION |
+| on-next-year | `() => void` | `undefined` | Callback when click next year button. | NEXT_VERSION |
 
 ### Date Type Props
 
@@ -99,7 +104,7 @@ panel.vue
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. |  |
-| separator | `string` | `'to'` | The separator between the start input and the end input. |  |
+| separator | `string` | internal icon | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date'` | The prompt information at the beginning of the input. |  |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | 2.24.0 |
@@ -118,7 +123,7 @@ panel.vue
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
-| separator | `string` | `'to'` | The separator between the start input and the end input. |  |
+| separator | `string` | internal icon | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
 | time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | Time picker props in the panel. | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
@@ -144,7 +149,7 @@ panel.vue
 | end-placeholder | `string` | `'End Month'` | Placeholder at end part of the input. | 2.28.3 |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.28.3 |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. | 2.28.3 |
-| separator | `string` | `'to'` | The separator between the start input and the end input. | 2.28.3 |
+| separator | `string` | internal icon | The separator between the start input and the end input. | 2.28.3 |
 | start-placeholder | `string` | `'Start Month'` | The prompt information at the beginning of the input. | 2.28.3 |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. | 2.28.3 |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | 2.28.3 |

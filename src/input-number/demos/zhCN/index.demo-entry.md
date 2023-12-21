@@ -41,6 +41,7 @@ precision-debug.vue
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | format | `(value: number \| null) => string` | `undefined` | 格式化值的方法，设定后会禁用 `update-value-on-input` | 2.30.0 |
+| input-props | `HTMLInputAttributes` | `undefined` | The dom props of the input element inside the component. For avaiable attributes, [see here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). Warning：It won't override internal props with the same name (except `type`). | NEXT_VERSION |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | 控制允许的键盘操作，属性值设为 `false` 的时候会禁用对应的键盘操作 |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |  |
 | max | `number` | `undefined` | 最大值 |  |

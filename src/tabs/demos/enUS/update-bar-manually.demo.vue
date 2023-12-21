@@ -1,8 +1,8 @@
 <markdown>
-# Update bar manually
+  # Update bar manually
 
-Since `n-tabs` renders children directly, it can't understand your intention to update active tab. In some edge cases, you need to update bar position manually.
-</markdown>
+  Since `n-tabs` renders children directly, it can't understand your intention to update active tab. In some edge cases, you need to update bar position manually.
+  </markdown>
 
 <template>
   <n-space vertical>

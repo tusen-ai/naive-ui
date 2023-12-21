@@ -13,6 +13,7 @@
 ```demo
 inline.vue
 custom-rule.vue
+abnormal-warning.vue
 custom-validation.vue
 i18n.vue
 top.vue

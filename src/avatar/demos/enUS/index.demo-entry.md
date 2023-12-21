@@ -46,7 +46,7 @@ v-show-debug.vue
 | options | `Array<AvatarOption>` | `[]` | Avatar group options. |
 | vertical | `boolean` | `false` | Whether display a vertical avatar group. |
 
-see [Avatar Props](avatar#Props)
+see [Avatar Props](#Avatar-Props)
 
 ### Avatar Slots
 

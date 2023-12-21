@@ -45,6 +45,7 @@ export default defineComponent({
       type: String as PropType<Placement>,
       required: true
     },
+    contentClass: String,
     contentStyle: [Object, String] as PropType<string | CSSProperties>,
     nativeScrollbar: {
       type: Boolean,
@@ -63,7 +64,7 @@ export default defineComponent({
       type: [Boolean, String] as PropType<boolean | 'transparent'>,
       required: true
     },
-    maxWitdh: Number,
+    maxWidth: Number,
     maxHeight: Number,
     minWidth: Number,
     minHeight: Number,
@@ -127,8 +128,8 @@ export default defineComponent({
     const { doUpdateHeight, doUpdateWidth } = NDrawer
 
     const regulateWidth = (size: number): number => {
-      const { maxWitdh } = props
-      if (maxWitdh && size > maxWitdh) return maxWitdh
+      const { maxWidth } = props
+      if (maxWidth && size > maxWidth) return maxWidth
       const { minWidth } = props
       if (minWidth && size < minWidth) return minWidth
       return size
@@ -301,7 +302,10 @@ export default defineComponent({
                               ) : null,
                               this.nativeScrollbar ? (
                                 <div
-                                  class={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  class={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   style={this.contentStyle}
                                   role="none"
                                 >
@@ -311,7 +315,10 @@ export default defineComponent({
                                 <NScrollbar
                                   {...this.scrollbarProps}
                                   contentStyle={this.contentStyle}
-                                  contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
+                                  contentClass={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
                                   theme={this.mergedTheme.peers.Scrollbar}
                                   themeOverrides={
                                     this.mergedTheme.peerOverrides.Scrollbar

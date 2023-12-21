@@ -31,6 +31,7 @@ const thTH: NLocale = {
     dateFormat: 'dd/MMMM/yyyy',
     dateTimeFormat: 'dd/MMMM/yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'ล้าง',
     now: 'วันนี้',
     confirm: 'ยืนยัน',
@@ -41,6 +42,7 @@ const thTH: NLocale = {
     monthPlaceholder: 'เดือน',
     yearPlaceholder: 'ปี',
     quarterPlaceholder: 'ไตรมาส',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'วันที่เริ่มต้น',
     endDatePlaceholder: 'วันที่สิ้นสุด',
     startDatetimePlaceholder: 'วันที่เริ่มต้นและสิ้นสุด',
@@ -80,7 +82,8 @@ const thTH: NLocale = {
     placeholder: 'เวลา',
     positiveText: 'ตกลง',
     negativeText: 'ยกเลิก',
-    now: 'วันนี้'
+    now: 'วันนี้',
+    clear: 'ล้าง'
   },
   Pagination: {
     goto: 'ไปยัง',

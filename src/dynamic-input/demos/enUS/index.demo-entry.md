@@ -28,6 +28,7 @@ custom-action.vue
 | create-button-props | `ButtonProps` | `undefined` | Props of create item button. | 2.25.0 |
 | default-value | `unknown[]` | `[]` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the dynamic-input. It won't work for custom content. | 2.34.4 |
+| item-class | `string` | `undefined` | The class of each item of the dynamic input. | 2.36.0 |
 | item-style | `string \| Object` | `undefined` | The style of each item of the dynamic input. |  |
 | key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |  |
 | min | `number` | `0` | Minimum number of items. |  |

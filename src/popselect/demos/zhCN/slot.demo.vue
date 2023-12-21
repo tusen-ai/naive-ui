@@ -7,6 +7,9 @@
 <template>
   <n-popselect v-model:value="value" :options="[]" trigger="click">
     <n-button>{{ value || '弹出选择' }}</n-button>
+    <template #header>
+      不知道放些什么
+    </template>
     <template #empty>
       没啥看的，这里是空的
     </template>

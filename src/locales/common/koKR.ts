@@ -31,6 +31,7 @@ const koKR: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: '지우기',
     now: '현재',
     confirm: '확인',
@@ -41,6 +42,7 @@ const koKR: NLocale = {
     monthPlaceholder: '월 선택',
     yearPlaceholder: '년 선택',
     quarterPlaceholder: '분기 선택',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '시작 날짜',
     endDatePlaceholder: '종료 날짜',
     startDatetimePlaceholder: '시작 날짜 및 시간',
@@ -80,7 +82,8 @@ const koKR: NLocale = {
     placeholder: '시간 선택',
     positiveText: '확인',
     negativeText: '취소',
-    now: '현재 시간'
+    now: '현재 시간',
+    clear: '지우기'
   },
   Pagination: {
     goto: '이동',
