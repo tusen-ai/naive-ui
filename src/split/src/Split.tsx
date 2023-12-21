@@ -60,9 +60,9 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        self: { 
+        self: {
           borderColor,
-          resizableTriggerColorHover 
+          resizableTriggerColorHover
         }
       } = themeRef.value
       return {
