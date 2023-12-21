@@ -213,8 +213,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      void props.src
-      void props.imgProps?.src
+      void props.src || props.imgProps?.src
       hasLoadErrorRef.value = false
     })
 
