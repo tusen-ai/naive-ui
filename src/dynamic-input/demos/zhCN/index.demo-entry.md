@@ -30,6 +30,7 @@ create-debug.vue
 | create-button-props | `ButtonProps` | `undefined` | 新建项按钮的属性 | 2.25.0 |
 | default-value | `unknown[]` | `[]` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用，对自定义内容无效 | 2.34.4 |
+| item-class | `string` | `undefined` | 动态录入中每项的类名 | 2.36.0 |
 | item-style | `string \| Object` | `undefined` | 动态录入中每项的样式 |  |
 | key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |  |
 | min | `number` | `0` | 最少有几项内容 |  |

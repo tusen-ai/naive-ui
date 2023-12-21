@@ -6,7 +6,8 @@ import {
   type PropType,
   ref,
   type ComponentPublicInstance,
-  onMounted
+  onMounted,
+  type VNode
 } from 'vue'
 import { useMemo } from 'vooks'
 import { happensIn, repeat } from 'seemly'
@@ -44,7 +45,9 @@ const TreeNode = defineComponent({
       blockLineRef,
       checkboxPlacementRef,
       checkOnClickRef,
-      disabledFieldRef
+      disabledFieldRef,
+      showLineRef,
+      renderSwitcherIconRef
     } = NTree
 
     const checkboxDisabledRef = useMemo(
@@ -76,29 +79,39 @@ const TreeNode = defineComponent({
     })
 
     function handleSwitcherClick (): void {
-      const { tmNode } = props
-      if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
-        if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
-          NTree.loadingKeysRef.value.add(tmNode.key)
+      const callback = (): void => {
+        const { tmNode } = props
+        if (!tmNode.isLeaf && !tmNode.shallowLoaded) {
+          if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
+            NTree.loadingKeysRef.value.add(tmNode.key)
+          } else {
+            return
+          }
+          const {
+            onLoadRef: { value: onLoad }
+          } = NTree
+          if (onLoad) {
+            void onLoad(tmNode.rawNode)
+              .then((value) => {
+                if (value !== false) {
+                  NTree.handleSwitcherClick(tmNode)
+                }
+              })
+              .finally(() => {
+                NTree.loadingKeysRef.value.delete(tmNode.key)
+              })
+          }
         } else {
-          return
+          NTree.handleSwitcherClick(tmNode)
         }
-        const {
-          onLoadRef: { value: onLoad }
-        } = NTree
-        if (onLoad) {
-          void onLoad(tmNode.rawNode)
-            .then((value) => {
-              if (value !== false) {
-                NTree.handleSwitcherClick(tmNode)
-              }
-            })
-            .finally(() => {
-              NTree.loadingKeysRef.value.delete(tmNode.key)
-            })
-        }
+      }
+      if (renderSwitcherIconRef.value) {
+        // if renderSwitcherIcon is set, icon dom may be altered before event
+        // bubbles to parent dom, so that target check fails. Call it in next
+        // event loop so that event bubble phase is finishes.
+        setTimeout(callback, 0)
       } else {
-        NTree.handleSwitcherClick(tmNode)
+        callback()
       }
     }
 
@@ -128,8 +141,9 @@ const TreeNode = defineComponent({
       const { value: checkable } = checkableRef
       if (!checkable) return false
       const { value: checkOnClick } = checkOnClickRef
+      const { tmNode } = props
       if (typeof checkOnClick === 'boolean') {
-        return checkOnClick
+        return !tmNode.disabled && checkOnClick
       }
       return checkOnClick(props.tmNode.rawNode)
     })
@@ -217,6 +231,43 @@ const TreeNode = defineComponent({
         })
       }
     }
+    const indentNodes = computed(() => {
+      const { clsPrefix } = props
+      const { value: indent } = indentRef
+      if (showLineRef.value) {
+        const indentNodes: VNode[] = []
+        let cursor = props.tmNode.parent
+        while (cursor) {
+          if (cursor.isLastChild) {
+            indentNodes.push(
+              <div class={`${clsPrefix}-tree-node-indent`}>
+                <div style={{ width: `${indent}px` }} />
+              </div>
+            )
+          } else {
+            indentNodes.push(
+              <div
+                class={[
+                  `${clsPrefix}-tree-node-indent`,
+                  `${clsPrefix}-tree-node-indent--show-line`
+                ]}
+              >
+                <div style={{ width: `${indent}px` }} />
+              </div>
+            )
+          }
+          cursor = cursor.parent
+        }
+        return indentNodes.reverse()
+      } else {
+        return repeat(
+          props.tmNode.level,
+          <div class={`${props.clsPrefix}-tree-node-indent`}>
+            <div style={{ width: `${indent}px` }} />
+          </div>
+        )
+      }
+    })
     return {
       showDropMark: useMemo(() => {
         const { value: draggingNode } = draggingNodeRef
@@ -273,8 +324,10 @@ const TreeNode = defineComponent({
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
       checkboxPlacement: checkboxPlacementRef,
+      showLine: showLineRef,
       contentInstRef,
       contentElRef,
+      indentNodes,
       handleCheck,
       handleDrop,
       handleDragStart,
@@ -300,6 +353,7 @@ const TreeNode = defineComponent({
       draggable,
       blockLine,
       indent,
+      indentNodes,
       disabled,
       pending,
       internalScrollable,
@@ -324,6 +378,7 @@ const TreeNode = defineComponent({
     const checkboxOnRight = checkboxPlacement === 'right'
     const checkboxNode = checkable ? (
       <NTreeNodeCheckbox
+        indent={indent}
         right={checkboxOnRight}
         focusable={this.checkboxFocusable}
         disabled={disabled || this.checkboxDisabled}
@@ -360,20 +415,31 @@ const TreeNode = defineComponent({
               : undefined
           }
         >
-          {repeat(
-            tmNode.level,
-            <div class={`${clsPrefix}-tree-node-indent`}>
+          {indentNodes}
+          {tmNode.isLeaf && this.showLine ? (
+            <div
+              class={[
+                `${clsPrefix}-tree-node-indent`,
+                `${clsPrefix}-tree-node-indent--show-line`,
+                tmNode.isLeaf && `${clsPrefix}-tree-node-indent--is-leaf`,
+                tmNode.isLastChild &&
+                  `${clsPrefix}-tree-node-indent--last-child`
+              ]}
+            >
               <div style={{ width: `${indent}px` }} />
             </div>
+          ) : (
+            <NTreeNodeSwitcher
+              clsPrefix={clsPrefix}
+              expanded={this.expanded}
+              selected={selected}
+              loading={this.loading}
+              hide={tmNode.isLeaf}
+              tmNode={this.tmNode}
+              indent={indent}
+              onClick={this.handleSwitcherClick}
+            />
           )}
-          <NTreeNodeSwitcher
-            clsPrefix={clsPrefix}
-            expanded={this.expanded}
-            selected={selected}
-            loading={this.loading}
-            hide={tmNode.isLeaf}
-            onClick={this.handleSwitcherClick}
-          />
           {!checkboxOnRight ? checkboxNode : null}
           <NTreeNodeContent
             ref="contentInstRef"

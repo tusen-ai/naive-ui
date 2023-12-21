@@ -81,10 +81,12 @@ export function formItemMisc (props: FormItemSetupProps) {
     return NForm?.props.requireMarkPlacement || 'right'
   })
   const validationErroredRef = ref(false)
+  const validationWarnedRef = ref(false)
   const mergedValidationStatusRef = computed(() => {
     const { validationStatus } = props
     if (validationStatus !== undefined) return validationStatus
     if (validationErroredRef.value) return 'error'
+    if (validationWarnedRef.value) return 'warning'
     return undefined
   })
   const mergedShowFeedbackRef = computed(() => {
@@ -101,6 +103,7 @@ export function formItemMisc (props: FormItemSetupProps) {
   })
   return {
     validationErrored: validationErroredRef,
+    validationWarned: validationWarnedRef,
     mergedLabelStyle: mergedLabelStyleRef,
     mergedLabelPlacement: mergedLabelPlacementRef,
     mergedLabelAlign: mergedLabelAlignRef,

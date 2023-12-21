@@ -94,7 +94,7 @@ export-csv.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props), the `on-scroll` attribute already exists in the `DataTable`, the `on-scroll` attribute does not take effect here. |  |
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
@@ -119,7 +119,7 @@ export-csv.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
-| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
@@ -129,6 +129,7 @@ export-csv.vue
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |  |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether the row is checkable. |  |
 | ellipsis | `boolean \| EllipsisProps` | `false` | Ellipsis options when content overflows. |  |
+| ellipsis-component | `'ellipsis' \| 'performant-ellipsis'` | `'ellipsis'` | Component for rendering text ellipsis. It works when `ellipsis` is `EllipsisProps`. If it's `'ellipsis'`, table will use regular `n-ellipsis` component to render text ellipsis. If it's `'performant-ellipsis'`, table will use `n-performant-ellipsis` to render text ellipsis. In the later situation, rendering speed will be much faster but component inside table cell would be unmounted & remounted. | 2.35.0 |
 | expandable | `(rowData: object) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |  |
 | filterMode | `'and' \| 'or'` | `'or'` | The filter mode. |  |

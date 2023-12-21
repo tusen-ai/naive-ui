@@ -100,6 +100,7 @@ export default defineComponent({
       if (!group) {
         ;(resolvedProps as unknown as TransitionProps).mode = mode
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return h(type as any, resolvedProps, slots)
     }
   }

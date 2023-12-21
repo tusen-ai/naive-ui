@@ -162,13 +162,14 @@ export function getRelativePosition (
     if (isInput && prop === 'lineHeight') {
       // Special case for <input>s because text is rendered centered and line height may be != height
       if (computed.boxSizing === 'border-box') {
-        const height = parseInt(computed.height)
+        const height = parseInt(computed.height as string)
         const outerHeight =
-          parseInt(computed.paddingTop) +
-          parseInt(computed.paddingBottom) +
-          parseInt(computed.borderTopWidth) +
-          parseInt(computed.borderBottomWidth)
-        const targetHeight = outerHeight + parseInt(computed.lineHeight)
+          parseInt(computed.paddingTop as string) +
+          parseInt(computed.paddingBottom as string) +
+          parseInt(computed.borderTopWidth as string) +
+          parseInt(computed.borderBottomWidth as string)
+        const targetHeight =
+          outerHeight + parseInt(computed.lineHeight as string)
         if (height > targetHeight) {
           style.lineHeight = `${height - outerHeight}px`
         } else if (height === targetHeight) {
@@ -186,7 +187,7 @@ export function getRelativePosition (
 
   if (isFirefox) {
     // Firefox lies about the overflow property for textareas: https://bugzilla.mozilla.org/show_bug.cgi?id=984275
-    if (element.scrollHeight > parseInt(computed.height)) {
+    if (element.scrollHeight > parseInt(computed.height as string)) {
       style.overflowY = 'scroll'
     }
   } else {
@@ -213,12 +214,12 @@ export function getRelativePosition (
   div.appendChild(span)
 
   const relativePosition = {
-    top: span.offsetTop + parseInt(computed.borderTopWidth),
-    left: span.offsetLeft + parseInt(computed.borderLeftWidth),
+    top: span.offsetTop + parseInt(computed.borderTopWidth as string),
+    left: span.offsetLeft + parseInt(computed.borderLeftWidth as string),
     absolute: false,
     // We don't use line-height since it may be too large for position. Eg. 34px
     // for input
-    height: parseInt(computed.fontSize) * 1.5
+    height: parseInt(computed.fontSize as string) * 1.5
   }
 
   if (debug) {

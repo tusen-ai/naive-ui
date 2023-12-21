@@ -76,6 +76,7 @@ import type {
   SelectFilter
 } from './interface'
 import style from './styles/index.cssr'
+import { PopoverProps } from '../../popover'
 
 export const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -139,6 +140,7 @@ export const selectProps = {
     default: true
   },
   maxTagCount: [Number, String] as PropType<number | 'responsive'>,
+  ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   consistentMenuWidth: {
     type: Boolean,
     default: true
@@ -516,7 +518,7 @@ export default defineComponent({
       }
     }
     function handleTriggerBlur (e: FocusEvent): void {
-      if (menuRef.value?.selfRef?.contains(e.relatedTarget as any)) {
+      if (menuRef.value?.selfRef?.contains(e.relatedTarget as Node | null)) {
         return
       }
       focusedRef.value = false
@@ -532,7 +534,7 @@ export default defineComponent({
       focusedRef.value = true
     }
     function handleMenuBlur (e: FocusEvent): void {
-      if (triggerRef.value?.$el.contains(e.relatedTarget as any)) return
+      if (triggerRef.value?.$el.contains(e.relatedTarget as Node | null)) return
       focusedRef.value = false
       doBlur(e)
       // outside select, don't need to return focus
@@ -893,6 +895,7 @@ export default defineComponent({
                       clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
+                      ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
                       bordered={this.mergedBordered}
                       active={this.activeWithoutMenuOpen || this.mergedShow}
                       pattern={this.pattern}
@@ -1008,6 +1011,7 @@ export default defineComponent({
                             >
                               {{
                                 empty: () => [this.$slots.empty?.()],
+                                header: () => [this.$slots.header?.()],
                                 action: () => [this.$slots.action?.()]
                               }}
                             </NInternalSelectMenu>,

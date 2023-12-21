@@ -16,7 +16,9 @@ import {
   watchEffect,
   type ExtractPropTypes,
   cloneVNode,
-  TransitionGroup
+  TransitionGroup,
+  type VNodeChild,
+  onMounted
 } from 'vue'
 import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -47,7 +49,7 @@ import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { type tabPaneProps } from './TabPane'
 import style from './styles/index.cssr'
-import { getPadding } from 'seemly'
+import { depx, getPadding } from 'seemly'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -163,9 +165,8 @@ export default defineComponent({
       compitableValueRef.value ??
         props.defaultValue ??
         (slots.default
-          ? ((flatten((slots as any).default())[0] as any)?.props?.name as
-              | string
-              | number)
+          ? ((flatten((slots as any).default() as VNodeChild[])[0] as any)
+              ?.props?.name as string | number)
           : null)
     )
     const mergedValueRef = useMergedState(
@@ -199,6 +200,7 @@ export default defineComponent({
       if (props.type === 'card') return
       const { value: barEl } = barElRef
       if (!barEl) return
+      const barIsHide = barEl.style.opacity === '0'
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
         const { barWidth, placement } = props
@@ -219,7 +221,14 @@ export default defineComponent({
             barEl.style.maxWidth = `${tabEl.offsetWidth}px`
           }
           barEl.style.width = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetWidth
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         } else {
           clearBarStyle(['left', 'maxWidth', 'width'])
           if (typeof barWidth === 'number' && tabEl.offsetHeight >= barWidth) {
@@ -232,9 +241,22 @@ export default defineComponent({
             barEl.style.maxHeight = `${tabEl.offsetHeight}px`
           }
           barEl.style.height = '8192px'
+          if (barIsHide) {
+            barEl.style.transition = 'none'
+          }
           void barEl.offsetHeight
+          if (barIsHide) {
+            barEl.style.transition = ''
+            barEl.style.opacity = '1'
+          }
         }
       }
+    }
+    function hideBarStyle (): void {
+      if (props.type === 'card') return
+      const { value: barEl } = barElRef
+      if (!barEl) return
+      barEl.style.opacity = '0'
     }
     function clearBarStyle (styleProps: string[]): void {
       const { value: barEl } = barElRef
@@ -248,6 +270,8 @@ export default defineComponent({
       const tabEl = getCurrentEl()
       if (tabEl) {
         updateBarStyle(tabEl)
+      } else {
+        hideBarStyle()
       }
     }
     function updateCurrentScrollPosition (smooth: boolean): void {
@@ -326,6 +350,18 @@ export default defineComponent({
       if (tabsPaneWrapperEl) {
         tabsPaneWrapperEl.style.maxHeight = ''
         tabsPaneWrapperEl.style.height = ''
+        const { paneWrapperStyle } = props
+        if (typeof paneWrapperStyle === 'string') {
+          tabsPaneWrapperEl.style.cssText = paneWrapperStyle
+        } else if (paneWrapperStyle) {
+          const { maxHeight, height } = paneWrapperStyle
+          if (maxHeight !== undefined) {
+            tabsPaneWrapperEl.style.maxHeight = maxHeight as string
+          }
+          if (height !== undefined) {
+            tabsPaneWrapperEl.style.height = height as string
+          }
+        }
       }
     }
 
@@ -377,6 +413,49 @@ export default defineComponent({
       barEl.classList.remove(disableTransitionClassName)
     }
 
+    const segmentCapsuleElRef = ref<HTMLElement | null>(null)
+
+    function updateSegmentPosition ({
+      disabledTransition
+    }: {
+      disabledTransition: boolean
+    }): void {
+      const tabsEl = tabsElRef.value
+      if (!tabsEl) return
+      disabledTransition && tabsEl.classList.add('transition-disabled')
+      const activeTabEl = getCurrentEl()
+      if (activeTabEl && segmentCapsuleElRef.value) {
+        const rect = activeTabEl.getBoundingClientRect()
+        // move segment capsule to match the position of the active tab
+        segmentCapsuleElRef.value.style.width = `${rect.width}px`
+        segmentCapsuleElRef.value.style.height = `${rect.height}px`
+        segmentCapsuleElRef.value.style.transform = `translateX(${
+          rect.left -
+          tabsEl.getBoundingClientRect().left -
+          depx(getComputedStyle(tabsEl).paddingLeft)
+        }px)`
+      }
+      disabledTransition && tabsEl.classList.remove('transition-disabled')
+    }
+
+    watch([mergedValueRef], () => {
+      if (props.type === 'segment') {
+        void nextTick(() => {
+          updateSegmentPosition({
+            disabledTransition: false
+          })
+        })
+      }
+    })
+
+    onMounted(() => {
+      if (props.type === 'segment') {
+        updateSegmentPosition({
+          disabledTransition: true
+        })
+      }
+    })
+
     let memorizedWidth = 0
     function _handleNavResize (entry: ResizeObserverEntry): void {
       if (entry.contentRect.width === 0 && entry.contentRect.height === 0) {
@@ -396,7 +475,9 @@ export default defineComponent({
         }
       }
       if (type !== 'segment') {
-        deriveScrollShadow(xScrollInstRef.value?.$el)
+        deriveScrollShadow(
+          (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
+        )
       }
     }
     const handleNavResize = throttle(_handleNavResize, 64)
@@ -428,7 +509,9 @@ export default defineComponent({
           addTabFixedRef.value = false
         }
       }
-      deriveScrollShadow(xScrollInstRef.value?.$el)
+      deriveScrollShadow(
+        (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
+      )
     }
     const handleTabsResize = throttle(_handleTabsResize, 64)
 
@@ -500,20 +583,6 @@ export default defineComponent({
         el.classList.remove(shadowEndClass)
       } else {
         el.classList.add(shadowEndClass)
-      }
-    })
-
-    const tabsRailElRef = ref<HTMLElement | null>(null)
-    watch(mergedValueRef, () => {
-      if (props.type === 'segment') {
-        const tabsRailEl = tabsRailElRef.value
-        if (tabsRailEl) {
-          void nextTick(() => {
-            tabsRailEl.classList.add('transition-disabled')
-            void tabsRailEl.offsetWidth
-            tabsRailEl.classList.remove('transition-disabled')
-          })
-        }
       }
     })
 
@@ -619,7 +688,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
-      tabsRailElRef,
+      segmentCapsuleElRef,
       tabsPaneWrapperRef,
       tabsElRef,
       barElRef,
@@ -689,7 +758,9 @@ export default defineComponent({
           )}
           {showPane
             ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-              renderNameListRef.value.push(tabPaneVNode.props.name)
+              renderNameListRef.value.push(
+                tabPaneVNode.props.name as string | number
+              )
               return justifyTabDynamicProps(
                   <Tab
                     {...tabPaneVNode.props}
@@ -711,13 +782,15 @@ export default defineComponent({
               )
             })
             : tabChildren.map((tabVNode: any, index: number) => {
-              renderNameListRef.value.push(tabVNode.props.name)
+              renderNameListRef.value.push(
+                tabVNode.props.name as string | number
+              )
               if (index !== 0 && !mergedJustifyContent) {
                 return justifyTabDynamicProps(
-                  createLeftPaddedTabVNode(tabVNode)
+                  createLeftPaddedTabVNode(tabVNode as VNode)
                 )
               } else {
-                return justifyTabDynamicProps(tabVNode)
+                return justifyTabDynamicProps(tabVNode as VNode)
               }
             })}
           {!addTabFixed && addable && isCard
@@ -789,10 +862,20 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsRailElRef">
+            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsElRef">
+              <div
+                class={`${mergedClsPrefix}-tabs-capsule`}
+                ref="segmentCapsuleElRef"
+              >
+                <div class={`${mergedClsPrefix}-tabs-wrapper`}>
+                  <div class={`${mergedClsPrefix}-tabs-tab`} />
+                </div>
+              </div>
               {showPane
                 ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-                  renderNameListRef.value.push(tabPaneVNode.props.name)
+                  renderNameListRef.value.push(
+                    tabPaneVNode.props.name as string | number
+                  )
                   return (
                       <Tab
                         {...tabPaneVNode.props}
@@ -808,11 +891,13 @@ export default defineComponent({
                   )
                 })
                 : tabChildren.map((tabVNode: any, index: number) => {
-                  renderNameListRef.value.push(tabVNode.props.name)
+                  renderNameListRef.value.push(
+                    tabVNode.props.name as string | number
+                  )
                   if (index === 0) {
                     return tabVNode
                   } else {
-                    return createLeftPaddedTabVNode(tabVNode)
+                    return createLeftPaddedTabVNode(tabVNode as VNode)
                   }
                 })}
             </div>

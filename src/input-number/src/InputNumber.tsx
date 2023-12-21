@@ -8,7 +8,8 @@ import {
   type PropType,
   watchEffect,
   type VNode,
-  nextTick
+  nextTick,
+  type InputHTMLAttributes
 } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -76,6 +77,7 @@ export const inputNumberProps = {
     type: String as PropType<'right' | 'both'>,
     default: 'right'
   },
+  inputProps: Object as PropType<InputHTMLAttributes>,
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -373,7 +375,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
       } else {
         const { value: mergedStep } = mergedStepRef
@@ -394,7 +396,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
       } else {
         const { value: mergedStep } = mergedStepRef
@@ -552,7 +554,8 @@ export default defineComponent({
     })
     const exposedMethods: InputNumberInst = {
       focus: () => inputInstRef.value?.focus(),
-      blur: () => inputInstRef.value?.blur()
+      blur: () => inputInstRef.value?.blur(),
+      select: () => inputInstRef.value?.select()
     }
     const rtlEnabledRef = useRtl(
       'InputNumber',
@@ -691,6 +694,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          inputProps={this.inputProps}
           internalLoadingBeforeSuffix
         >
           {{

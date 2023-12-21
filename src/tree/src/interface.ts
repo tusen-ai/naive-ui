@@ -1,5 +1,6 @@
 import { type CheckStrategy, type TreeNode } from 'treemate'
 import { type HTMLAttributes, type Ref, type VNodeChild } from 'vue'
+import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
@@ -79,6 +80,7 @@ export interface InternalDropInfo {
 export type RenderSwitcherIcon = (props: {
   expanded: boolean
   selected: boolean
+  option: TreeOption
 }) => VNodeChild
 
 export type CheckOnClick = (option: TreeOption) => boolean
@@ -121,6 +123,7 @@ export interface TreeInjection {
   internalTreeSelect: boolean
   checkOnClickRef: Ref<boolean | CheckOnClick>
   disabledFieldRef: Ref<string>
+  showLineRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -148,7 +151,7 @@ export interface InternalTreeInst {
 }
 
 export interface TreeInst {
-  scrollTo: (options: { key: Key }) => void
+  scrollTo: VirtualListScrollTo
   getCheckedData: () => { keys: Key[], options: Array<TreeOption | null> }
   getIndeterminateData: () => { keys: Key[], options: Array<TreeOption | null> }
 }

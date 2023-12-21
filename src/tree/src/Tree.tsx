@@ -23,8 +23,12 @@ import {
   type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { type VirtualListInst, VVirtualList } from 'vueuc'
-import { getPadding } from 'seemly'
+import {
+  type VirtualListInst,
+  VVirtualList,
+  type VirtualListScrollOptions
+} from 'vueuc'
+import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -71,13 +75,7 @@ import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
-import { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-
-// TODO:
-// During expanding, some node are mis-applied with :active style
-// Async dnd has bug
-
-const ITEM_SIZE = 30 // 24 + 3 + 3
+import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 
 export function createTreeMateOptions<T> (
   keyField: string,
@@ -567,9 +565,14 @@ export default defineComponent({
     })
 
     // shallow watch data
+    let isDataReset = false
     watch(
       toRef(props, 'data'),
       () => {
+        isDataReset = true
+        void nextTick(() => {
+          isDataReset = false
+        })
         loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
@@ -685,6 +688,10 @@ export default defineComponent({
         void nextTick(syncScrollbar)
         return
       }
+      if (isDataReset) {
+        return
+      }
+      const nodeHeight = depx(themeRef.value.self.nodeHeight)
       const prevVSet = new Set(prevValue)
       let addedKey: Key | null = null
       let removedKey: Key | null = null
@@ -710,7 +717,7 @@ export default defineComponent({
       const viewportHeight = (
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
-      const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
+      const viewportItemCount = Math.ceil(viewportHeight / nodeHeight) + 1
       // play add animation
       let baseExpandedKeys: Key[] | undefined
       if (addedKey !== null) {
@@ -742,7 +749,7 @@ export default defineComponent({
               __motion: true,
               mode: 'expand',
               height: virtualScroll
-                ? expandedChildren.length * ITEM_SIZE
+                ? expandedChildren.length * nodeHeight
                 : undefined,
               nodes: virtualScroll
                 ? expandedChildren.slice(0, viewportItemCount)
@@ -769,7 +776,7 @@ export default defineComponent({
             __motion: true,
             mode: 'collapse',
             height: virtualScroll
-              ? collapsedChildren.length * ITEM_SIZE
+              ? collapsedChildren.length * nodeHeight
               : undefined,
             nodes: virtualScroll
               ? collapsedChildren.slice(0, viewportItemCount)
@@ -1519,6 +1526,7 @@ export default defineComponent({
       droppingOffsetLevelRef,
       fNodesRef,
       pendingNodeKeyRef,
+      showLineRef: toRef(props, 'showLine'),
       disabledFieldRef: toRef(props, 'disabledField'),
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
@@ -1539,8 +1547,15 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    function scrollTo (options: { key: Key }): void {
-      virtualListInstRef.value?.scrollTo(options)
+    function scrollTo (
+      options: VirtualListScrollOptions | number,
+      y?: number
+    ): void {
+      if (typeof options === 'number') {
+        virtualListInstRef.value?.scrollTo(options, y || 0)
+      } else {
+        virtualListInstRef.value?.scrollTo(options)
+      }
     }
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
@@ -1575,9 +1590,18 @@ export default defineComponent({
           loadingColor,
           nodeTextColor,
           nodeTextColorDisabled,
-          dropMarkColor
+          dropMarkColor,
+          nodeWrapperPadding,
+          nodeHeight,
+          lineHeight,
+          lineColor
         }
       } = themeRef.value
+      const lineOffsetTop = getPadding(nodeWrapperPadding, 'top')
+      const lineOffsetBottom = getPadding(nodeWrapperPadding, 'bottom')
+      const nodeContentHeight = pxfy(
+        depx(nodeHeight) - depx(lineOffsetTop) - depx(lineOffsetBottom)
+      )
       return {
         '--n-arrow-color': arrowColor,
         '--n-loading-color': loadingColor,
@@ -1589,7 +1613,13 @@ export default defineComponent({
         '--n-node-color-pressed': nodeColorPressed,
         '--n-node-text-color': nodeTextColor,
         '--n-node-text-color-disabled': nodeTextColorDisabled,
-        '--n-drop-mark-color': dropMarkColor
+        '--n-drop-mark-color': dropMarkColor,
+        '--n-node-wrapper-padding': nodeWrapperPadding,
+        '--n-line-offset-top': `-${lineOffsetTop}`,
+        '--n-line-offset-bottom': `-${lineOffsetBottom}`,
+        '--n-node-content-height': nodeContentHeight,
+        '--n-line-height': lineHeight,
+        '--n-line-color': lineColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -1626,7 +1656,6 @@ export default defineComponent({
       mergedClsPrefix,
       blockNode,
       blockLine,
-      showLine,
       draggable,
       disabled,
       internalFocusable,
@@ -1643,8 +1672,7 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`,
-      showLine && `${mergedClsPrefix}-tree--show-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (
@@ -1683,11 +1711,19 @@ export default defineComponent({
           {{
             default: () => {
               this.onRender?.()
-              return (
+              return !fNodes.length ? (
+                resolveSlot(this.$slots.empty, () => [
+                  <NEmpty
+                    class={`${mergedClsPrefix}-tree__empty`}
+                    theme={this.mergedTheme.peers.Empty}
+                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                  />
+                ])
+              ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
                   items={this.fNodes}
-                  itemSize={ITEM_SIZE}
+                  itemSize={depx(mergedTheme.self.nodeHeight)}
                   ignoreItemResize={this.aip}
                   paddingTop={padding.top}
                   paddingBottom={padding.bottom}

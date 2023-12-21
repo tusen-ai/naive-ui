@@ -69,6 +69,7 @@ keep-alive-debug.vue
 ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -80,7 +81,7 @@ expandable-debug.vue
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `checked-row-keys` 可能是不完整的 | 2.28.0 |
 | bordered | `boolean` | `true` | 是否显示 border |  |
 | bottom-bordered | `boolean` | `true` | 是否显示 bottom border |  |
-| checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |  |
+| checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的行的 key |  |
 | cascade | `boolean` | `true` | 在进行树型数据选择的时候是否级联 |  |
 | children-key | `string` | `'children'` | 树形数据下后代节点在数据中的 key |  |
 | columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |  |
@@ -104,7 +105,7 @@ expandable-debug.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |  |
-| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
@@ -129,7 +130,7 @@ expandable-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
-| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
 | className | `string` | `undefined` | 列的类名 |  |
@@ -139,6 +140,7 @@ expandable-debug.vue
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |  |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |  |
 | ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |  |
+| ellipsis-component | `'ellipsis' \| 'performant-ellipsis'` | `'ellipsis'` | 渲染文本溢出时使用的组件，在 `ellipsis` 属性为 `EllipsisProps` 时生效。若为 `'ellipsis'` 则使用常规的 `n-ellipsis` 组件渲染，若为 `'performant-ellipsis'` 则使用 `n-performant-ellipsis` 渲染，这种情况下会有更高的渲染性能，但是每个折叠的单元格中的组件有可能被重新卸载和挂载 | 2.35.0 |
 | expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |  |
 | filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |  |
