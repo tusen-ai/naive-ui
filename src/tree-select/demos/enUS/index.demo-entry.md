@@ -35,6 +35,7 @@ debug.vue
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |  |
 | disabled | `boolean` | `false` | Disabled state. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
@@ -44,7 +45,6 @@ debug.vue
 | disabled-field | `string` | `'disabled'` | The disabled field used for `TreeSelectOption`. | 2.32.2 |
 | loading | `boolean` | `false` | Whether it's loading. | 2.28.3 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.22.0 |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.30.7 |

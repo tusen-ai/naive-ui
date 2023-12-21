@@ -34,6 +34,7 @@ status.vue
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |  |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |  |
 | disabled-field | `string` | `'disabled'` | The disabled field in `CascaderOption`. | 2.32.2 |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
@@ -41,7 +42,6 @@ status.vue
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. | 2.27.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
 | options | `CascaderOption[]` | `[]` | Options of the cascader. |  |

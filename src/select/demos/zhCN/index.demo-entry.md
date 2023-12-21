@@ -53,6 +53,7 @@ create-debug.vue
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
 | filterable | `boolean` | `false` | 是否可以过滤 |  |
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
@@ -62,7 +63,6 @@ create-debug.vue
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |  |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |
