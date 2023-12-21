@@ -38,6 +38,7 @@ render-debug.vue
 | default-expand-all | `boolean` | `false` | 默认展开全部 |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开节点的 key |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |  |
 | indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |  |
 | filterable | `boolean` | `false` | 是否可过滤 |  |
@@ -47,7 +48,6 @@ render-debug.vue
 | disabled-field | `string` | `'disabled'` | 替代 `TreeSelectOption` 中的 disabled 字段名 | 2.32.2 |
 | loading | `boolean` | `false` | 是否加载中 | 2.28.3 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `tag` 过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.22.0 |
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.30.7 |
