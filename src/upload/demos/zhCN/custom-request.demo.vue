@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage, UploadCustomRequestOptions } from 'naive-ui'
-import { lyla } from 'lyla'
+import { lyla } from '@lylajs/web'
 
 export default defineComponent({
   setup () {

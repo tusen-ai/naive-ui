@@ -81,6 +81,7 @@ interface NotificationRef {
 
 export const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,
   scrollable: {
@@ -211,6 +212,7 @@ export default defineComponent({
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer
+              class={this.containerClass}
               style={this.containerStyle}
               scrollable={
                 this.scrollable && placement !== 'top' && placement !== 'bottom'

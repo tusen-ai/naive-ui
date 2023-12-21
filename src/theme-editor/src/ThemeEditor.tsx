@@ -105,10 +105,10 @@ export default defineComponent({
     })
     const showPanelRef = ref(false)
     const overridesRef = ref<any>(
-      JSON.parse(localStorage['naive-ui-theme-overrides'] || '{}')
+      JSON.parse((localStorage['naive-ui-theme-overrides'] as string) || '{}')
     )
     const tempOverridesRef = ref<any>(
-      JSON.parse(localStorage['naive-ui-theme-overrides'] || '{}')
+      JSON.parse((localStorage['naive-ui-theme-overrides'] as string) || '{}')
     )
     const varNamePatternRef = ref('')
     const compNamePatternRef = ref('')

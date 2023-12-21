@@ -31,6 +31,7 @@ const viVN: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'HH:mm:ss dd-MM-yyyy',
     quarterFormat: 'qqq-yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'Xóa',
     now: 'Hôm nay',
     confirm: 'Xác nhận',
@@ -41,6 +42,7 @@ const viVN: NLocale = {
     monthPlaceholder: 'Chọn tháng',
     yearPlaceholder: 'Chọn năm',
     quarterPlaceholder: 'Chọn quý',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Ngày bắt đầu',
     endDatePlaceholder: 'Ngày kết thúc',
     startDatetimePlaceholder: 'Thời gian bắt đầu',
@@ -78,7 +80,8 @@ const viVN: NLocale = {
     placeholder: 'Chọn thời gian',
     positiveText: 'OK',
     negativeText: 'Hủy',
-    now: 'Hiện tại'
+    now: 'Hiện tại',
+    clear: 'Xóa'
   },
   Pagination: {
     goto: 'Đi đến trang',

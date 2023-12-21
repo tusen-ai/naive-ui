@@ -60,6 +60,7 @@ export const drawerProps = {
   zIndex: Number,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
   trapFocus: {
     type: Boolean,
@@ -78,7 +79,7 @@ export const drawerProps = {
     type: Boolean,
     default: true
   },
-  maxWitdh: Number,
+  maxWidth: Number,
   maxHeight: Number,
   minWidth: Number,
   minHeight: Number,
@@ -224,6 +225,10 @@ export default defineComponent({
       if (onMaskClick) onMaskClick(e)
     }
 
+    function handleOutsideClick (e: MouseEvent): void {
+      handleMaskClick(e)
+    }
+
     const isComposingRef = useIsComposing()
 
     function handleEsc (e: KeyboardEvent): void {
@@ -308,6 +313,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
+      handleOutsideClick,
       handleMaskClick,
       handleEsc,
       mergedTheme: themeRef,
@@ -358,6 +364,7 @@ export default defineComponent({
                   style={[this.mergedBodyStyle, this.$attrs.style]}
                   blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
+                  contentClass={this.contentClass}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}
@@ -370,11 +377,11 @@ export default defineComponent({
                   resizable={this.resizable}
                   maxHeight={this.maxHeight}
                   minHeight={this.minHeight}
-                  maxWitdh={this.minWidth}
+                  maxWidth={this.maxWidth}
                   minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
-                  onClickoutside={this.handleMaskClick}
+                  onClickoutside={this.handleOutsideClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

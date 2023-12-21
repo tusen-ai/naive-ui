@@ -153,6 +153,10 @@ export const datePickerProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
   onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
+  onNextMonth: Function as PropType<() => void>,
+  onPrevMonth: Function as PropType<() => void>,
+  onNextYear: Function as PropType<() => void>,
+  onPrevYear: Function as PropType<() => void>,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   monthStringType: {
@@ -219,6 +223,8 @@ export default defineComponent({
         case 'quarter':
         case 'quarterrange':
           return localeRef.value.quarterFormat
+        case 'week':
+          return localeRef.value.weekFormat
       }
     })
     const mergedValueFormatRef = computed(() => {
@@ -317,6 +323,8 @@ export default defineComponent({
             return localeRef.value.yearPlaceholder
           case 'quarter':
             return localeRef.value.quarterPlaceholder
+          case 'week':
+            return localeRef.value.weekPlaceholder
           default:
             return ''
         }
@@ -358,7 +366,8 @@ export default defineComponent({
       if (actions !== undefined) return actions
       const result = clearable ? ['clear'] : []
       switch (type) {
-        case 'date': {
+        case 'date':
+        case 'week': {
           result.push('now')
           return result
         }
@@ -972,7 +981,11 @@ export default defineComponent({
       triggerOnRender: triggerThemeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      onNextMonth: props.onNextMonth,
+      onPrevMonth: props.onPrevMonth,
+      onNextYear: props.onNextYear,
+      onPrevYear: props.onPrevYear
     }
   },
   render () {
@@ -993,7 +1006,11 @@ export default defineComponent({
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
       panel: this.panel,
-      onRender: this.onRender
+      onRender: this.onRender,
+      onNextMonth: this.onNextMonth,
+      onPrevMonth: this.onPrevMonth,
+      onNextYear: this.onNextYear,
+      onPrevYear: this.onPrevYear
     }
     const renderPanel = (): VNode => {
       const { type } = this
@@ -1024,7 +1041,9 @@ export default defineComponent({
         type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps}>{$slots}</DatePanel>
+        <DatePanel {...commonPanelProps} type={type}>
+          {$slots}
+        </DatePanel>
           )
     }
     if (this.panel) {

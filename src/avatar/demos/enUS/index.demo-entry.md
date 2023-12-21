@@ -28,7 +28,7 @@ v-show-debug.vue
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |  |
 | img-props | `object` | `undefined` | The props of the img element inside the component. | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.31.0 |
-| lazy | `boolean` | `false` | Whether to show after it enters viewport configured by `intersection-observer-options` | 2.31.0 |
+| lazy | `boolean` | `false` | Load image after it enters viewport. When used alone, it will be assigned the property value of [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading). Alternatively, it can be used in conjunction with the `intersection-observer-options` configuration to achieve lazy loading. | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |  |
 | render-fallback | `() => VNodeChild` | `undefined` | Render function of fallback content. | 2.33.4 |
 | render-placeholder | `() => VNodeChild` | `undefined` | Render function of placeholder. | 2.33.4 |
@@ -46,7 +46,7 @@ v-show-debug.vue
 | options | `Array<AvatarOption>` | `[]` | Avatar group options. |
 | vertical | `boolean` | `false` | Whether display a vertical avatar group. |
 
-see [Avatar Props](avatar#Props)
+see [Avatar Props](#Avatar-Props)
 
 ### Avatar Slots
 

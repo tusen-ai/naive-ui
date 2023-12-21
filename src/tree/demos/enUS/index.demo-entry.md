@@ -73,7 +73,7 @@ checkbox-placement.vue
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
-| show-line | `boolean` | `false` | Whether to display the connection line. | NEXT_VERSION |
+| show-line | `boolean` | `false` | Whether to display the connection line. | 2.35.0 |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |  |
@@ -84,7 +84,7 @@ checkbox-placement.vue
 | on-update:checked-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'check' \| 'uncheck' }) => void` | `undefined` | Callback function when node checked options change. | `meta` 2.34.0 |
 | on-update:indeterminate-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>) => void` | `undefined` | Callback function when node indeterminate options change. |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'expand' \| 'collapse' \| 'filter' }) => void` | `undefined` | The callback function when the node expansion item changes. | `meta` 2.34.0 |
-| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption, action: 'select' \| 'unselect' }) => void` | `undefined` | The callback function when the selected item of the node changes. | `meta` 2.34.0 |
+| on-update:selected-keys | `(keys: Array<string \| number>, option: Array<TreeOption \| null>), meta: { node: TreeOption \| null, action: 'select' \| 'unselect' }) => void` | `undefined` | The callback function when the selected item of the node changes. | `meta` 2.34.0 |
 
 ### TreeOption Properties
 
@@ -105,6 +105,22 @@ checkbox-placement.vue
 
 | Name | Paramaters | Description | Version |
 | --- | --- | --- | --- |
-| scrollTo | `(options: { key: string \| number })` | Scroll to some node in virtual scroll mode. | 2.32.2 |
+| scrollTo | `ScrollTo` | Scroll to some node in virtual scroll mode. | 2.32.2, `ScrollTo` NEXT_VERSION |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.1 |
+
+#### ScrollTo Type
+
+```ts
+interface ScrollTo {
+  (x: number, y: number): void
+  (options: { left?: number; top?: number; debounce?: boolean }): void
+  (options: { index: number; debounce?: boolean }): void
+  (options: { key: string | number; debounce?: boolean }): void
+  (options: { position: 'top' | 'bottom'; debounce?: boolean }): void
+}
+```
+
+### Others
+
+1. `treeGetClickTarget: (e: MouseEvent) => ('checkbox' | 'switcher' | 'node')`: Get click target of a node click event. It can be used in `nodeProps.onClick`.
