@@ -60,6 +60,7 @@ rtl-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | 所有 Message 是否显示 close 图标 |  |
+| container-class | `string` | `undefined` | Message 容器的类名 | 2.36.0 |
 | container-style | `string \| CSSProperties` | `undefined` | Message 容器的样式 |  |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |  |
 | keep-alive-on-hover | `boolean` | `false` | 所有 Message 在悬浮信息上时是否不销毁 |  |

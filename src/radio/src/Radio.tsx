@@ -101,12 +101,10 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-radio`,
           this.themeClass,
-          {
-            [`${mergedClsPrefix}-radio--rtl`]: this.rtlEnabled,
-            [`${mergedClsPrefix}-radio--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-radio--checked`]: this.renderSafeChecked,
-            [`${mergedClsPrefix}-radio--focus`]: this.focus
-          }
+          this.rtlEnabled && `${mergedClsPrefix}-radio--rtl`,
+          this.mergedDisabled && `${mergedClsPrefix}-radio--disabled`,
+          this.renderSafeChecked && `${mergedClsPrefix}-radio--checked`,
+          this.focus && `${mergedClsPrefix}-radio--focus`
         ]}
         style={this.cssVars as CSSProperties}
       >

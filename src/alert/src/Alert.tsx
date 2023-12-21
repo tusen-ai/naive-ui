@@ -203,6 +203,7 @@ export default defineComponent({
               role: 'alert'
             }
             return this.visible ? (
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               <div {...mergeProps(this.$attrs, attrs as any)}>
                 {this.closable && (
                   <NBaseClose

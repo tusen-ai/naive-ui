@@ -31,6 +31,7 @@ const nlNL: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'qqq yyyy',
+    weekFormat: 'yyyy-w',
     clear: 'Wis',
     now: 'Nu',
     confirm: 'Bevestig',
@@ -41,6 +42,7 @@ const nlNL: NLocale = {
     monthPlaceholder: 'Selecteer Maand',
     yearPlaceholder: 'Selecteer Jaar',
     quarterPlaceholder: 'Selecteer Kwartaal',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Begindatum',
     endDatePlaceholder: 'Einddatum',
     startDatetimePlaceholder: 'Begindatum en Uur',
@@ -79,7 +81,8 @@ const nlNL: NLocale = {
     placeholder: 'Selecteer Uur',
     positiveText: 'OK',
     negativeText: 'Annuleer',
-    now: 'Nu'
+    now: 'Nu',
+    clear: 'Wis'
   },
   Pagination: {
     goto: 'Ga naar',

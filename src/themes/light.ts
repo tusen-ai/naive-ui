@@ -56,6 +56,7 @@ import { popconfirmLight } from '../popconfirm/styles'
 import { popoverLight } from '../popover/styles'
 import { popselectLight } from '../popselect/styles'
 import { progressLight } from '../progress/styles'
+import { qrcodeLight } from '../qr-code/styles'
 import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
@@ -82,6 +83,7 @@ import { treeLight } from '../tree/styles'
 import { treeSelectLight } from '../tree-select/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
+import { splitLight } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
@@ -142,6 +144,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Popover: popoverLight,
   Popselect: popselectLight,
   Progress: progressLight,
+  QrCode: qrcodeLight,
   Radio: radioLight,
   Rate: rateLight,
   Row: rowLight,
@@ -167,5 +170,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   TreeSelect: treeSelectLight,
   Typography: typographyLight,
   Upload: uploadLight,
-  Watermark: watermarkLight
+  Watermark: watermarkLight,
+  Split: splitLight
 }

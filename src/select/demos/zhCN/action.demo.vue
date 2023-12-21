@@ -6,6 +6,9 @@
 
 <template>
   <n-select v-model:value="value" :options="options">
+    <template #header>
+      不知道放些什么
+    </template>
     <template #action>
       如果你点开了这个例子，你可能需要它
     </template>

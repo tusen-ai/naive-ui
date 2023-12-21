@@ -29,6 +29,7 @@ const enUS = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Clear',
     now: 'Now',
     confirm: 'Confirm',
@@ -39,6 +40,7 @@ const enUS = {
     monthPlaceholder: 'Select Month',
     yearPlaceholder: 'Select Year',
     quarterPlaceholder: 'Select Quarter',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Start Date',
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',
@@ -76,7 +78,8 @@ const enUS = {
     placeholder: 'Select Time',
     positiveText: 'OK',
     negativeText: 'Cancel',
-    now: 'Now'
+    now: 'Now',
+    clear: 'Clear'
   },
   Pagination: {
     goto: 'Goto',

@@ -38,6 +38,19 @@ const cCB: typeof cB = ((...args: any[]) => {
   return c('>', [(cB as any)(...args)])
 }) as any
 
+function createKey<P extends string, S extends string> (
+  prefix: P,
+  suffix: S
+): S extends 'default' ? P : `${P}${Capitalize<S>}` {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (prefix +
+    (suffix === 'default'
+      ? ''
+      : suffix.replace(/^[a-z]/, (startChar) =>
+        startChar.toUpperCase()
+      ))) as any
+}
+
 export {
   c,
   cB,
@@ -50,7 +63,6 @@ export {
   asModal,
   prefix,
   namespace,
-  find
+  find,
+  createKey
 }
-
-export { createKey } from './create-key'

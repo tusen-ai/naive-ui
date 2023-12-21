@@ -25,7 +25,7 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover, PopoverProps } from '../../../popover'
 import { NTag } from '../../../tag'
-import { useThemeClass, useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import {
   createKey,
@@ -115,6 +115,12 @@ export default defineComponent({
     onResize: Function as PropType<() => void>
   },
   setup (props) {
+    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const rtlEnabledRef = useRtl(
+      'InternalSelection',
+      mergedRtlRef,
+      mergedClsPrefixRef
+    )
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
     const patternInputRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -179,7 +185,9 @@ export default defineComponent({
         if (patternInputEl) {
           patternInputEl.style.width = `${patternInputMirrorEl.offsetWidth}px`
           if (props.maxTagCount !== 'responsive') {
-            overflowRef.value?.sync()
+            overflowRef.value?.sync({
+              showAllItemsBeforeCalculate: false
+            })
           }
         }
       }
@@ -509,6 +517,8 @@ export default defineComponent({
     return {
       mergedTheme: themeRef,
       mergedClearable: mergedClearableRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       patternInputFocused: patternInputFocusedRef,
       filterablePlaceholder: filterablePlaceholderRef,
       label: labelRef,
@@ -739,8 +749,8 @@ export default defineComponent({
             }}
           </VOverflow>
         )
-      ) : maxTagCountNumeric ? (
-        createOriginalTagNodes().concat(counter as JSX.Element)
+      ) : maxTagCountNumeric && counter ? (
+        createOriginalTagNodes().concat(counter)
       ) : (
         createOriginalTagNodes()
       )
@@ -890,11 +900,11 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption as SelectBaseOption,
+                      option: this.selectedOption!,
                       handleClose: () => {}
                     })
                     : renderLabel
-                      ? renderLabel(this.selectedOption as SelectBaseOption, true)
+                      ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}
                 </div>
               </div>
@@ -918,6 +928,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${clsPrefix}-base-selection`,
+          this.rtlEnabled && `${clsPrefix}-base-selection--rtl`,
           this.themeClass,
           status && `${clsPrefix}-base-selection--${status}-status`,
           {

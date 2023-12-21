@@ -69,7 +69,6 @@ export default cB('collapse', 'width: 100%;', [
       position: relative;
       padding: var(--n-title-padding);
       color: var(--n-title-text-color);
-      cursor: pointer;
     `, [
       cE('header-main', `
         display: flex;
@@ -79,6 +78,7 @@ export default cB('collapse', 'width: 100%;', [
         transition: color .3s var(--n-bezier);
         flex: 1;
         color: var(--n-title-text-color);
+        cursor: pointer;
       `),
       cE('header-extra', `
         display: flex;

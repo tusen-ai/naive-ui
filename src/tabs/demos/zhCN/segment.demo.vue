@@ -9,7 +9,7 @@
   <n-h3 style="text-align: center">
     五美金的礼品卡
   </n-h3>
-  <n-tabs type="segment">
+  <n-tabs type="segment" animated>
     <n-tab-pane name="chap1" tab="第一章">
       我这辈子最疯狂的事，发生在我在 Amazon
       当软件工程师的时候，故事是这样的：<br><br>

@@ -6,7 +6,7 @@
 
 ## 非受控模式
 
-在这种情况下，你不去控制 `<n-input />` 的 `value`，而只能监听它的变化，组件值的变化由组件自身控制。
+在这种情况下，你不能去控制 `<n-input />` 的 `value`，而只能监听它的变化，组件值的变化由组件自身控制。
 
 ```html
 <n-input @update:value="handleUpdateValue" />

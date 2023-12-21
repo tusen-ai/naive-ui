@@ -18,8 +18,10 @@ export const thingProps = {
   title: String,
   titleExtra: String,
   description: String,
+  descriptionClass: String,
   descriptionStyle: [String, Object] as PropType<string | CSSProperties>,
   content: String,
+  contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
   contentIndented: Boolean
 }
@@ -114,7 +116,10 @@ export default defineComponent({
                     </div>
                     {slots.description || props.description ? (
                       <div
-                        class={`${mergedClsPrefix}-thing-main__description`}
+                        class={[
+                          `${mergedClsPrefix}-thing-main__description`,
+                          props.descriptionClass
+                        ]}
                         style={props.descriptionStyle}
                       >
                         {slots.description
@@ -148,7 +153,10 @@ export default defineComponent({
                     ) : null}
                 {slots.description || props.description ? (
                   <div
-                    class={`${mergedClsPrefix}-thing-main__description`}
+                    class={[
+                      `${mergedClsPrefix}-thing-main__description`,
+                      props.descriptionClass
+                    ]}
                     style={props.descriptionStyle}
                   >
                     {slots.description
@@ -160,7 +168,10 @@ export default defineComponent({
                 )}
             {slots.default || props.content ? (
               <div
-                class={`${mergedClsPrefix}-thing-main__content`}
+                class={[
+                  `${mergedClsPrefix}-thing-main__content`,
+                  props.contentClass
+                ]}
                 style={props.contentStyle}
               >
                 {slots.default ? slots.default() : props.content}

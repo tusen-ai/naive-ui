@@ -76,7 +76,7 @@ create-debug.vue
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
-| show-checkmark | `boolean` | `true` | 多选情况下是否展示对勾 | 2.33.4 |
+| show-checkmark | `boolean` | `true` | 是否展示对勾 | 2.33.4 |
 | show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
@@ -117,17 +117,18 @@ create-debug.vue
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                | 版本   |
-| ------ | ---- | ------------------- | ------ |
-| action | `()` | 菜单操作区域的 slot |        |
-| empty  | `()` | 菜单无数据时的 slot |        |
-| arrow  | `()` | 箭头的 slot         | 2.24.2 |
+| 名称   | 参数 | 说明                | 版本         |
+| ------ | ---- | ------------------- | ------------ |
+| header | `()` | 菜单头部区域的 slot | NEXT_VERSION |
+| action | `()` | 菜单操作区域的 slot |              |
+| empty  | `()` | 菜单无数据时的 slot |              |
+| arrow  | `()` | 箭头的 slot         | 2.24.2       |
 
 ### Select Methods
 
-| 名称       | 类型         | 说明     | 版本         |
-| ---------- | ------------ | -------- | ------------ |
-| focus      | `() => void` | 聚焦     | 2.24.2       |
-| focusInput | `() => void` | 输入聚焦 | NEXT_VERSION |
-| blur       | `() => void` | 失焦     | 2.24.2       |
-| blurInput  | `() => void` | 输入失焦 | NEXT_VERSION |
+| 名称       | 类型         | 说明     | 版本   |
+| ---------- | ------------ | -------- | ------ |
+| focus      | `() => void` | 聚焦     | 2.24.2 |
+| focusInput | `() => void` | 输入聚焦 | 2.35.0 |
+| blur       | `() => void` | 失焦     | 2.24.2 |
+| blurInput  | `() => void` | 输入失焦 | 2.35.0 |
