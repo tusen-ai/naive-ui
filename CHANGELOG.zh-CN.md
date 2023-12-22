@@ -24,6 +24,7 @@
 - 修复 `n-spin` 动画异常问题，关闭 [#3556](https://github.com/tusen-ai/naive-ui/issues/3556)
 - 修复 `n-avatar` 懒加载和懒加载失败时 `fallback-src` 属性都不生效，关闭[#5007](https://github.com/tusen-ai/naive-ui/issues/5007)
 - 修复 `n-split` 不在卡片中使用没有颜色
+- 修复 `n-card` 的 `footer-class` 属性不生效
 
 ### Features
 

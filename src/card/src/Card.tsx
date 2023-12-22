@@ -176,10 +176,6 @@ export default defineComponent({
   },
   render () {
     const {
-      footerStyle,
-      headerExtraClass,
-      headerClass,
-      contentClass,
       segmented,
       bordered,
       hoverable,
@@ -232,7 +228,7 @@ export default defineComponent({
         {resolveWrappedSlot($slots.header, (children) => {
           return children || this.title || this.closable ? (
             <div
-              class={[`${mergedClsPrefix}-card-header`, headerClass]}
+              class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
               style={this.headerStyle}
             >
               <div
@@ -248,7 +244,7 @@ export default defineComponent({
                     <div
                       class={[
                         `${mergedClsPrefix}-card-header__extra`,
-                        headerExtraClass
+                        this.headerExtraClass
                       ]}
                       style={this.headerExtraStyle}
                     >
@@ -272,7 +268,7 @@ export default defineComponent({
           (children) =>
             children && (
               <div
-                class={[`${mergedClsPrefix}-card__content`, contentClass]}
+                class={[`${mergedClsPrefix}-card__content`, this.contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
@@ -285,7 +281,7 @@ export default defineComponent({
           (children) =>
             children && [
               <div
-                class={[`${mergedClsPrefix}-card__footer`, footerStyle]}
+                class={[`${mergedClsPrefix}-card__footer`, this.footerClass]}
                 style={this.footerStyle}
                 role="none"
               >
