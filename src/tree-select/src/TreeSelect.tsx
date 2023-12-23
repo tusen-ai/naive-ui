@@ -80,7 +80,7 @@ import {
 } from './utils'
 import style from './styles/index.cssr'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
-import { PopoverProps } from '../../popover'
+import { type PopoverProps } from '../../popover'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 

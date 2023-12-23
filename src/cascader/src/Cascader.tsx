@@ -67,7 +67,7 @@ import type {
 } from './interface'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { PopoverProps } from '../../popover'
+import { type PopoverProps } from '../../popover'
 
 export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),

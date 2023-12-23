@@ -9,7 +9,8 @@ import {
   watchEffect,
   onMounted,
   onBeforeUnmount,
-  type ImgHTMLAttributes
+  type ImgHTMLAttributes,
+  watch
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
@@ -212,8 +213,7 @@ export default defineComponent({
       }
     })
 
-    watchEffect(() => {
-      void props.src || props.imgProps?.src
+    watch([() => props.src, () => props.imgProps?.src], () => {
       hasLoadErrorRef.value = false
     })
 
