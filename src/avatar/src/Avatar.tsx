@@ -213,9 +213,12 @@ export default defineComponent({
       }
     })
 
-    watch([() => props.src, () => props.imgProps?.src], () => {
-      hasLoadErrorRef.value = false
-    })
+    watch(
+      () => props.src || props.imgProps?.src,
+      () => {
+        hasLoadErrorRef.value = false
+      }
+    )
 
     const loadedRef = ref(!props.lazy)
 
