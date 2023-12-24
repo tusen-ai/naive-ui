@@ -76,7 +76,7 @@ import type {
   SelectFilter
 } from './interface'
 import style from './styles/index.cssr'
-import { PopoverProps } from '../../popover'
+import { type PopoverProps } from '../../popover'
 
 export const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),

@@ -23,7 +23,7 @@ import type {
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
-import { NPopover, PopoverProps } from '../../../popover'
+import { NPopover, type PopoverProps } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
