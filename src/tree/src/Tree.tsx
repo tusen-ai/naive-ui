@@ -26,7 +26,7 @@ import { useMergedState } from 'vooks'
 import {
   type VirtualListInst,
   VVirtualList,
-  type VirtualListScrollOptions
+  type VirtualListScrollToOptions
 } from 'vueuc'
 import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
@@ -1548,12 +1548,13 @@ export default defineComponent({
       handleCheck
     })
     function scrollTo (
-      options: VirtualListScrollOptions | number,
+      options: VirtualListScrollToOptions | number,
       y?: number
     ): void {
       if (typeof options === 'number') {
         virtualListInstRef.value?.scrollTo(options, y || 0)
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         virtualListInstRef.value?.scrollTo(options)
       }
     }
