@@ -23,12 +23,12 @@ import { type ButtonTheme } from '../../button/styles'
 import { NImage } from '../../image'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
-import { warn } from '../../_utils'
+import { warn, download } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { uploadInjectionKey } from './interface'
 import type { SettledFileInfo, ListType } from './interface'
 import { imageIcon, documentIcon } from './icons'
-import { download, isImageFile } from './utils'
+import { isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
   paddingMedium: '0 3px',
