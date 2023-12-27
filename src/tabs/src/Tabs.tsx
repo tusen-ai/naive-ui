@@ -85,6 +85,9 @@ export const tabsProps = {
     default: 'top'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  tabClass: String,
+  addTabStyle: [String, Object] as PropType<string | CSSProperties>,
+  addTabClass: String,
   barWidth: Number,
   paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -550,6 +553,9 @@ export default defineComponent({
     provide(tabsInjectionKey, {
       triggerRef: toRef(props, 'trigger'),
       tabStyleRef: toRef(props, 'tabStyle'),
+      tabClassRef: toRef(props, 'tabClass'),
+      addTabStyleRef: toRef(props, 'addTabStyle'),
+      addTabClassRef: toRef(props, 'addTabClass'),
       paneClassRef: toRef(props, 'paneClass'),
       paneStyleRef: toRef(props, 'paneStyle'),
       mergedClsPrefixRef,

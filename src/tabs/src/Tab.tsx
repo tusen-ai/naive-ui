@@ -27,6 +27,9 @@ export default defineComponent({
       typeRef,
       closableRef,
       tabStyleRef,
+      addTabStyleRef,
+      tabClassRef,
+      addTabClassRef,
       tabChangeIdRef,
       onBeforeLeaveRef,
       triggerRef,
@@ -44,6 +47,9 @@ export default defineComponent({
         return closable
       }),
       style: tabStyleRef,
+      addStyle: addTabStyleRef,
+      tabClass: tabClassRef,
+      addTabClass: addTabClassRef,
       clsPrefix: mergedClsPrefixRef,
       value: valueRef,
       type: typeRef,
@@ -87,7 +93,6 @@ export default defineComponent({
       tab,
       value,
       mergedClosable,
-      style,
       trigger,
       $slots: { default: defaultSlot }
     } = this
@@ -108,11 +113,12 @@ export default defineComponent({
                 value === name && `${clsPrefix}-tabs-tab--active`,
                 disabled && `${clsPrefix}-tabs-tab--disabled`,
                 mergedClosable && `${clsPrefix}-tabs-tab--closable`,
-                internalAddable && `${clsPrefix}-tabs-tab--addable`
+                internalAddable && `${clsPrefix}-tabs-tab--addable`,
+                internalAddable ? this.addTabClass : this.tabClass
               ],
               onClick: trigger === 'click' ? this.activateTab : undefined,
               onMouseenter: trigger === 'hover' ? this.activateTab : undefined,
-              style: internalAddable ? undefined : style
+              style: internalAddable ? this.addStyle : this.style
             },
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             this.internalCreatedByPane
