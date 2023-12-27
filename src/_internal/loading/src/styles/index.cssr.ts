@@ -1,5 +1,6 @@
 import { c, cB, cE } from '../../../../_utils/cssr'
 import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
+
 export default c([
   c('@keyframes rotator', `
     0% {
@@ -17,6 +18,13 @@ export default c([
     width: 1em;
     height: 1em;
   `, [
+    cE('transition-wrapper', `
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    `, [
+      iconSwitchTransition()
+    ]),
     cE('placeholder', `
       position: absolute;
       left: 50%;
@@ -35,9 +43,7 @@ export default c([
       cE('icon', `
         height: 1em;
         width: 1em;
-      `, [
-        iconSwitchTransition()
-      ])
+      `)
     ])
   ])
 ])
