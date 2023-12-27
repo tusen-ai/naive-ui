@@ -173,10 +173,21 @@ export function isColumnSorting (
   )
 }
 
+function formatCsvCell (value: unknown): string {
+  if (typeof value === 'string') {
+    return value.replace(/,/g, '\\,')
+  } else if (value === null || value === undefined) {
+    return ''
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+    return `${value}`.replace(/,/g, '\\,')
+  }
+}
+
 export function generateCsv (columns: TableColumn[], data: RowData[]): string {
   const header = columns.map((col: any) => col.title).join(',')
   const rows = data.map((row) => {
-    return columns.map((col: any) => row[col.key]).join(',')
+    return columns.map((col: any) => formatCsvCell(row[col.key])).join(',')
   })
   return [header, ...rows].join('\n')
 }
