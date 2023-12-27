@@ -42,6 +42,17 @@ export type RenderPrefix = RenderTreePart
 
 export type RenderSuffix = RenderTreePart
 
+export type TreeOverrideNodeClickBehaviorReturn =
+  | 'toggleSelect'
+  | 'toggleExpand'
+  | 'toggleCheck'
+  | 'default'
+  | 'none'
+
+export type TreeOverrideNodeClickBehavior = (info: {
+  option: TreeOption
+}) => TreeOverrideNodeClickBehaviorReturn
+
 export type TreeNodeProps = (info: {
   option: TreeOption
 }) => HTMLAttributes & Record<string, unknown>
@@ -124,6 +135,9 @@ export interface TreeInjection {
   checkOnClickRef: Ref<boolean | CheckOnClick>
   disabledFieldRef: Ref<string>
   showLineRef: Ref<boolean>
+  overrideDefaultNodeClickBehaviorRef: Ref<
+  TreeOverrideNodeClickBehavior | undefined
+  >
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -147,7 +161,9 @@ export interface MotionData {
 }
 
 export interface InternalTreeInst {
-  handleKeydown: (e: KeyboardEvent) => void
+  handleKeydown: (e: KeyboardEvent) => {
+    enterBehavoir: TreeOverrideNodeClickBehaviorReturn | null
+  }
 }
 
 export interface TreeInst {

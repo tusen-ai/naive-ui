@@ -98,6 +98,9 @@ export default cB('tree', `
           cB('tree-node-content', `
             background: var(--n-node-color-hover);
           `)
+        ]),
+        cM('selected', [
+          cB('tree-node-content', 'background: var(--n-node-color-active);')
         ])
       ]),
       cM('selected', [

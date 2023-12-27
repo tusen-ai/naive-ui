@@ -48,6 +48,8 @@
 - `n-avatar-group` adds `expand-on-hover` prop.
 - `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 - `n-tabs` adds `tab-class`, `add-tab-style` and `add-tab-class` props.
+- `n-tree` adds `override-default-node-click-behavior` prop.
+- `n-tree-select` adds `override-default-node-click-behavior` prop.
 
 ## 2.36.0
 

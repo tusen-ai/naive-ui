@@ -28,7 +28,8 @@ import type { FormValidationStatus } from '../../form/src/interface'
 import {
   type Key,
   type InternalTreeInst,
-  type TreeOption
+  type TreeOption,
+  type TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -617,19 +618,31 @@ export default defineComponent({
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
     }
-    function treeHandleKeydown (e: KeyboardEvent): void {
+    function treeHandleKeydown (e: KeyboardEvent): {
+      enterBehavoir: TreeOverrideNodeClickBehaviorReturn | null
+    } {
       const { value: treeInst } = treeInstRef
       if (treeInst) {
-        treeInst.handleKeydown(e)
+        return treeInst.handleKeydown(e)
+      }
+      return {
+        enterBehavoir: null
       }
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (mergedShowRef.value) {
-          treeHandleKeydown(e)
+          const { enterBehavoir } = treeHandleKeydown(e)
           if (!props.multiple) {
-            closeMenu()
-            focusSelection()
+            switch (enterBehavoir) {
+              case 'default':
+              case 'toggleSelect':
+                closeMenu()
+                focusSelection()
+                break
+              default:
+                break
+            }
           }
         } else {
           openMenu()
@@ -957,6 +970,9 @@ export default defineComponent({
                                 watchProps={this.watchProps}
                                 virtualScroll={
                                   this.consistentMenuWidth && this.virtualScroll
+                                }
+                                overrideDefaultNodeClickBehavior={
+                                  this.overrideDefaultNodeClickBehavior
                                 }
                                 internalTreeSelect
                                 internalUnifySelectCheck

@@ -47,7 +47,8 @@ const TreeNode = defineComponent({
       checkOnClickRef,
       disabledFieldRef,
       showLineRef,
-      renderSwitcherIconRef
+      renderSwitcherIconRef,
+      overrideDefaultNodeClickBehaviorRef
     } = NTree
 
     const checkboxDisabledRef = useMemo(
@@ -65,7 +66,9 @@ const TreeNode = defineComponent({
     const resolvedNodePropsRef = computed(() => {
       const { value: nodeProps } = nodePropsRef
       if (!nodeProps) return undefined
-      return nodeProps({ option: props.tmNode.rawNode })
+      return nodeProps({
+        option: props.tmNode.rawNode
+      })
     })
 
     // used for drag and drop
@@ -166,18 +169,52 @@ const TreeNode = defineComponent({
       }
     }
 
+    function handleNodeClick (e: MouseEvent): void {
+      if (!disabledRef.value) {
+        const overrideDefaultNodeClickBehavior =
+          overrideDefaultNodeClickBehaviorRef.value
+        let shouldOverride = false
+        if (overrideDefaultNodeClickBehavior) {
+          switch (
+            overrideDefaultNodeClickBehavior({ option: props.tmNode.rawNode })
+          ) {
+            case 'toggleCheck':
+              shouldOverride = true
+              handleCheck(!checkedRef.value)
+              break
+            case 'toggleSelect':
+              shouldOverride = true
+              NTree.handleSelect(props.tmNode)
+              break
+            case 'toggleExpand':
+              shouldOverride = true
+              handleSwitcherClick()
+              shouldOverride = true
+              break
+            case 'none':
+              shouldOverride = true
+              shouldOverride = true
+              return
+            case 'default':
+            default:
+              break
+          }
+        }
+        if (!shouldOverride) {
+          _handleClick(e)
+        }
+      }
+      resolvedNodePropsRef.value?.onClick?.(e)
+    }
+
     function handleContentClick (e: MouseEvent): void {
       if (blockLineRef.value) return
-      if (!disabledRef.value) _handleClick(e)
-      resolvedNodePropsRef.value?.onClick?.(e)
+      handleNodeClick(e)
     }
 
     function handleLineClick (e: MouseEvent): void {
       if (!blockLineRef.value) return
-      if (!disabledRef.value) {
-        _handleClick(e)
-      }
-      resolvedNodePropsRef.value?.onClick?.(e)
+      handleNodeClick(e)
     }
 
     function handleCheck (checked: boolean): void {
