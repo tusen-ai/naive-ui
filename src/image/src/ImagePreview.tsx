@@ -22,7 +22,6 @@ import { LazyTeleport } from 'vueuc'
 import { on, off } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
 import { kebabCase } from 'lodash-es'
-import { download } from '../../upload/src/utils'
 import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
@@ -32,6 +31,7 @@ import {
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
+import { download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon, downloadIcon } from './icons'
@@ -145,14 +145,10 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection:
-      | 'verticalTop'
-      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection:
-      | 'horizontalLeft'
-      | 'horizontalRight' = `horizontal${
-        deltaHorizontal > 0 ? 'Left' : 'Right'
-      }`
+      const moveVerticalDirection: 'verticalTop' | 'verticalBottom' =
+        `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight' =
+        `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
 
       return {
         moveVerticalDirection,

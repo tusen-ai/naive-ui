@@ -5,7 +5,7 @@
 <template>
   <n-space vertical :size="12">
     <n-space>
-      <n-button @click="exportCsv">
+      <n-button @click="downloadCsv">
         导出 Csv
       </n-button>
       <n-button @click="exportSorterAndFilterCsv">
@@ -96,11 +96,11 @@ export default defineComponent({
   setup () {
     const tableRef = ref<DataTableInst>()
 
-    const exportCsv = () =>
-      tableRef.value?.exportCsv({ fileName: 'data-table' })
+    const downloadCsv = () =>
+      tableRef.value?.downloadCsv({ fileName: 'data-table' })
 
     const exportSorterAndFilterCsv = () =>
-      tableRef.value?.exportCsv({
+      tableRef.value?.downloadCsv({
         fileName: 'sorter-filter',
         keepOriginalData: false
       })
@@ -108,7 +108,7 @@ export default defineComponent({
     return {
       data,
       tableRef,
-      exportCsv,
+      downloadCsv,
       exportSorterAndFilterCsv,
       columns,
       pagination: false as const

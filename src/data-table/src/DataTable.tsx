@@ -19,7 +19,7 @@ import {
 } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import { createKey, resolveSlot, warnOnce } from '../../_utils'
+import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
 import { dataTableLight } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
@@ -108,19 +108,17 @@ export default defineComponent({
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props, getResizableWidth)
 
-    const exportCsv = (options?: CsvOptionsType): void => {
-      const { fileName = 'DataTable.csv', keepOriginalData = false } =
-        options || {}
+    const downloadCsv = (options?: CsvOptionsType): void => {
+      const { fileName = 'data.csv', keepOriginalData = false } = options || {}
       const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
       const csvData = generateCsv(props.columns, data)
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
-      const filename = fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
-      const link = document.createElement('a')
-      link.download = filename
-      link.href = URL.createObjectURL(blob)
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      const downloadUrl = URL.createObjectURL(blob)
+      download(
+        downloadUrl,
+        fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
+      )
+      URL.revokeObjectURL(downloadUrl)
     }
 
     const {
@@ -295,7 +293,7 @@ export default defineComponent({
       page,
       sort,
       clearFilter,
-      exportCsv,
+      downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
