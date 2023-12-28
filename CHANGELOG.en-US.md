@@ -25,6 +25,7 @@
 - Fix `n-avatar`'s lazy loading and `fallback-src` prop not working when load error in lazy, closes [#5007](https://github.com/tusen-ai/naive-ui/issues/5007).
 - Fix `n-split` has no color if it's not used in a card.
 - Fix `n-card` `footer-class` prop not working.
+- Fix `n-input` click clear icon to trigger twice when using the `clearable`, closes [#5510](https://github.com/tusen-ai/naive-ui/issues/5510).
 
 ### Features
 
