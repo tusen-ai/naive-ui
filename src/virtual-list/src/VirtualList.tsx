@@ -2,11 +2,11 @@ import { h, defineComponent, type PropType, type CSSProperties, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
-import {
-  VVirtualList,
-  type VirtualListInst,
-  type VirtualListItemData,
-  type VirtualListScrollOptions
+import { VVirtualList } from 'vueuc'
+import type {
+  VirtualListInst,
+  VirtualListItemData,
+  VirtualListScrollToOptions
 } from 'vueuc'
 export { type VirtualListInst } from 'vueuc'
 
@@ -76,7 +76,7 @@ export default defineComponent({
     }
 
     function scrollTo (
-      options: VirtualListScrollOptions | number,
+      options: VirtualListScrollToOptions | number,
       y?: number
     ): void {
       if (typeof options === 'number') {
