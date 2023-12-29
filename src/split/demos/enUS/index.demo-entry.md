@@ -1,6 +1,6 @@
 # Split
 
-The flexible layout tool provides the possibility of customizing the interface layout.
+The flexible layout tool provides the possibility of customizing the interface layout. Available since `2.36.0`.
 
 ## Demos
 

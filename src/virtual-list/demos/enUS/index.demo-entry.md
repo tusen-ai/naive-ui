@@ -4,6 +4,8 @@ When it comes to virtual lists, it can feel like a list is infinitely long, but 
 
 It's like a lazy programmer holding up a blank note and saying, "You can't see me, and I can't load myself!"
 
+Available since `2.36.0`.
+
 ## Demos
 
 ```demo
