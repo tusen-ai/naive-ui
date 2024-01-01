@@ -11,8 +11,6 @@ export { buttonDark, buttonRtl as unstableButtonRtl } from './button/styles'
 export { notificationRtl as unstableNotificationRtl } from './notification/styles'
 export { messageRtl as unstableMessageRtl } from './message/styles'
 export { DataTableRtl as unstableDataTableRtl } from './data-table/styles'
-export { InternalSelectMenuRtl as unstableInternalSelectMenuRtl } from './_internal/select-menu/styles'
-export { InternalSelectionRtl as unstableInternalSelectionRtl } from './_internal/selection/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
@@ -73,7 +71,7 @@ export { progressDark } from './progress/styles'
 export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
 export { rateDark } from './rate/styles'
 export { resultDark } from './result/styles'
-export { selectDark } from './select/styles'
+export { selectDark, selectRtl as unstableSelectRtl } from './select/styles'
 export { sliderDark } from './slider/styles'
 export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'
 export { spinDark } from './spin/styles'

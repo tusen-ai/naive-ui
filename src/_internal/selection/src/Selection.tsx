@@ -39,6 +39,7 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
+import { getPadding } from 'seemly'
 
 export interface InternalSelectionInst {
   isComposing: boolean
@@ -452,6 +453,9 @@ export default defineComponent({
         }
       } = themeRef.value
 
+      const paddingSingleDiscrete = getPadding(paddingSingle)
+      const paddingMultipleDiscrete = getPadding(paddingMultiple)
+
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-border': border,
@@ -468,8 +472,14 @@ export default defineComponent({
         '--n-color-disabled': colorDisabled,
         '--n-font-size': fontSize,
         '--n-height': height,
-        '--n-padding-single': paddingSingle,
-        '--n-padding-multiple': paddingMultiple,
+        '--n-padding-single-top': paddingSingleDiscrete.top,
+        '--n-padding-multiple-top': paddingMultipleDiscrete.top,
+        '--n-padding-single-right': paddingSingleDiscrete.right,
+        '--n-padding-multiple-right': paddingMultipleDiscrete.right,
+        '--n-padding-single-left': paddingSingleDiscrete.left,
+        '--n-padding-multiple-left': paddingMultipleDiscrete.left,
+        '--n-padding-single-bottom': paddingSingleDiscrete.bottom,
+        '--n-padding-multiple-bottom': paddingMultipleDiscrete.bottom,
         '--n-placeholder-color': placeholderColor,
         '--n-placeholder-color-disabled': placeholderColorDisabled,
         '--n-text-color': textColor,

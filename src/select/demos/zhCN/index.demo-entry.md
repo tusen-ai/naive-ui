@@ -29,6 +29,7 @@ focus.vue
 render-person.vue
 tag-input.vue
 status.vue
+rtl-debug.vue
 placeholder-debug.vue
 menu-debug.vue
 render-debug.vue
