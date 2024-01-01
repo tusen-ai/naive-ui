@@ -328,9 +328,17 @@ export default defineComponent({
     const searchableOptionsRef = useFlattenedDocOptions()
     const searchPatternRef = ref('')
     const searchOptionsRef = computed(() => {
-      function getLabel (item) {
+      // function getLabel(item) {
+      //   if (item.label) {
+      //     return typeof item.extra === 'function'
+      //       ? () => [item.label, ' ', item.extra()]
+      //       : item.label + (item.extra ? ' ' + item.extra : '')
+      //   }
+      //   return item.key
+      // }
+      function getSearchableContent (item) {
         if (item.label) {
-          return item.label + (item.extra ? ' ' + item.extra : '')
+          return item.label + (item.extraString ? ' ' + item.extraString : '')
         }
         return item.key
       }
@@ -342,11 +350,13 @@ export default defineComponent({
             .toLowerCase()
             .replace(replaceRegex, '')
             .slice(0, 20)
-          const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
+          const label = getSearchableContent(item)
+            .toLowerCase()
+            .replace(replaceRegex, '')
           return match(pattern, label)
         })
         .map((item) => ({
-          label: getLabel(item),
+          label: getSearchableContent(item),
           value: item.path
         }))
     })

@@ -17,18 +17,31 @@ export const renderMenuLabel = (option) => {
   )
 }
 
-const renderNewTag = () =>
-  h(NTag, { type: 'success', size: 'small' }, { default: () => 'New' })
+const renderNewTag = (isZh) =>
+  h(
+    NTag,
+    { type: 'success', size: 'small', round: true, bordered: false },
+    { default: isZh ? () => '新' : () => 'New' }
+  )
 
 const renderItemExtra = (rawItem, isZh) => {
-  if (!rawItem.enSuffix || !isZh) { return rawItem.isNew ? renderNewTag : undefined }
+  if (!rawItem.enSuffix || !isZh) {
+    return rawItem.isNew ? renderNewTag : undefined
+  }
   const renderEn = () =>
     h(
       NSpace,
-      { inline: true, size: 6 },
-      { default: () => [rawItem.en, renderNewTag()] }
+      { inline: true, size: 6, wrapItem: false, align: 'center' },
+      { default: () => [rawItem.en, renderNewTag(isZh)] }
     )
   return rawItem.isNew ? renderEn : rawItem.en
+}
+const getItemExtraString = (rawItem, isZh) => {
+  if (!rawItem.enSuffix || !isZh) {
+    return ''
+  } else {
+    return rawItem.en
+  }
 }
 
 const appendCounts = (item) => {
@@ -56,6 +69,7 @@ function createItems (lang, theme, prefix, items) {
       key: rawItem.en,
       label: rawItem[langKey] || rawItem.en,
       extra: renderItemExtra(rawItem, isZh),
+      extraString: getItemExtraString(rawItem, isZh),
       path: rawItem.path
         ? `/${lang}/${theme}` + prefix + rawItem.path
         : undefined
