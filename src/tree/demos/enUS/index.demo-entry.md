@@ -101,6 +101,12 @@ override-click-behavior.vue
 | prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
 | suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |
 
+### Tree Slots
+
+| Name  | Parameters | Description                    | Version |
+| ----- | ---------- | ------------------------------ | ------- |
+| empty | `()`       | Empty state slot for the tree. |         |
+
 ## Methods
 
 ### Tree Methods

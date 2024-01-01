@@ -107,6 +107,12 @@ expand-debug.vue
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
 
+### Tree Slots
+
+| 名称  | 参数 | 描述                  | 版本 |
+| ----- | ---- | --------------------- | ---- |
+| empty | `()` | 树组件无数据时的 slot |      |
+
 ### Tree Methods
 
 | 名称 | 参数 | 说明 | 版本 |

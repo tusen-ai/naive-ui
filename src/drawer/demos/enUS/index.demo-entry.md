@@ -41,7 +41,7 @@ resizable.vue
 | min-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | resizable | `boolean` | `false` | Whether to resize the width / height of drawer. | 2.31.0 |
-| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
 | show | `boolean` | `false` | Whether to show drawer. |  |
 | show-mask | `boolean` | `true` | Whether to show mask. If set to `'transparent'`, transparent mask would be shown. If set to false, `trap-focus` will be disabled. | 2.28.3 |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |

@@ -2,6 +2,8 @@
 
 It is always only valid for a short time.
 
+Available since `2.36.0`.
+
 ## Demos
 
 ```demo

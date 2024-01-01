@@ -49,7 +49,7 @@ rtl-debug.vue
 | options | `Array<AvatarOption>` | `[]` | 头像组的选项 |  |
 | vertical | `boolean` | `false` | 组内头像是否垂直排列 |  |
 
-参考 [Avatar Props](avatar#Props)
+参考 [Avatar Props](#Avatar-Props)
 
 ### Avatar Slots
 

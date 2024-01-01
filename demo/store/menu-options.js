@@ -2,6 +2,7 @@
 
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
+import { NTag, NSpace } from 'naive-ui'
 
 export const renderMenuLabel = (option) => {
   if (!('path' in option) || option.label === '--Debug') {
@@ -14,6 +15,33 @@ export const renderMenuLabel = (option) => {
     },
     { default: () => option.label }
   )
+}
+
+const renderNewTag = (isZh) =>
+  h(
+    NTag,
+    { type: 'success', size: 'small', round: true, bordered: false },
+    { default: isZh ? () => '新' : () => 'New' }
+  )
+
+const renderItemExtra = (rawItem, isZh) => {
+  if (!rawItem.enSuffix || !isZh) {
+    return rawItem.isNew ? renderNewTag : undefined
+  }
+  const renderEn = () =>
+    h(
+      NSpace,
+      { inline: true, size: 6, wrapItem: false, align: 'center' },
+      { default: () => [rawItem.en, renderNewTag(isZh)] }
+    )
+  return rawItem.isNew ? renderEn : rawItem.en
+}
+const getItemExtraString = (rawItem, isZh) => {
+  if (!rawItem.enSuffix || !isZh) {
+    return ''
+  } else {
+    return rawItem.en
+  }
 }
 
 const appendCounts = (item) => {
@@ -40,7 +68,8 @@ function createItems (lang, theme, prefix, items) {
       ...rawItem,
       key: rawItem.en,
       label: rawItem[langKey] || rawItem.en,
-      extra: rawItem.enSuffix && isZh ? rawItem.en : undefined,
+      extra: renderItemExtra(rawItem, isZh),
+      extraString: getItemExtraString(rawItem, isZh),
       path: rawItem.path
         ? `/${lang}/${theme}` + prefix + rawItem.path
         : undefined
@@ -465,7 +494,8 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'QR Code',
           zh: '二维码',
           enSuffix: true,
-          path: '/qr-code'
+          path: '/qr-code',
+          isNew: true
         },
         {
           en: 'Statistic',
@@ -702,7 +732,8 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Split',
           zh: '面板分割',
           enSuffix: true,
-          path: '/split'
+          path: '/split',
+          isNew: true
         }
       ]
     }),
@@ -733,7 +764,8 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Virtual List',
           zh: '虚拟列表',
           enSuffix: true,
-          path: '/virtual-list'
+          path: '/virtual-list',
+          isNew: true
         }
       ]
     }),
