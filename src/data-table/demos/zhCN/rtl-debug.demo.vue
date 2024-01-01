@@ -31,9 +31,7 @@ import {
   DataTableColumns,
   DataTableBaseColumn,
   DataTableFilterState,
-  unstableDataTableRtl,
-  unstableInternalSelectMenuRtl,
-  unstableInternalSelectionRtl
+  unstableDataTableRtl
 } from 'naive-ui'
 
 type Row = {
@@ -168,11 +166,7 @@ export default defineComponent({
 
     return {
       rtlEnabled: ref(true),
-      rtlStyles: [
-        unstableDataTableRtl,
-        unstableInternalSelectMenuRtl,
-        unstableInternalSelectionRtl
-      ],
+      rtlStyles: [unstableDataTableRtl],
       data,
       columns,
       pagination: paginationReactive,
