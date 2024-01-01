@@ -51,6 +51,7 @@
 - `n-tabs` 新增 `tab-class`、`add-tab-style`、`add-tab-class` 属性
 - `n-tree` 新增 `override-default-node-click-behavior` 属性
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
+- 新增 `n-flex` 组件
 
 ## 2.36.0
 

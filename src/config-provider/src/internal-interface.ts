@@ -99,6 +99,7 @@ import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { RowTheme } from '../../legacy-grid/styles'
 import type { Katex } from './katex'
 import type { SplitTheme } from '../../split/styles'
+import type { FlexTheme } from '../../flex/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -133,6 +134,7 @@ export interface GlobalThemeWithoutCommon {
   Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
   Equation?: EquationTheme
+  Flex?: FlexTheme
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme

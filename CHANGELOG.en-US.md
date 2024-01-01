@@ -50,6 +50,7 @@
 - `n-tabs` adds `tab-class`, `add-tab-style` and `add-tab-class` props.
 - `n-tree` adds `override-default-node-click-behavior` prop.
 - `n-tree-select` adds `override-default-node-click-behavior` prop.
+- Adds `n-flex` component.
 
 ## 2.36.0
 

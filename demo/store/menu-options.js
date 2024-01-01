@@ -669,6 +669,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       type: 'group',
       children: [
         {
+          en: 'Flex',
+          zh: '弹性布局',
+          enSuffix: true,
+          path: '/flex'
+        },
+        {
           en: 'Layout',
           zh: '布局',
           enSuffix: true,

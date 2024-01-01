@@ -450,6 +450,10 @@ export const enComponentRoutes = [
     component: () => import('../../src/space/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'flex',
+    component: () => import('../../src/flex/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'rate',
     component: () => import('../../src/rate/demos/enUS/index.demo-entry.md')
   },
@@ -838,6 +842,10 @@ export const zhComponentRoutes = [
   {
     path: 'space',
     component: () => import('../../src/space/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'flex',
+    component: () => import('../../src/flex/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'rate',

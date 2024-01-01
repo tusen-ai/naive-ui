@@ -43,6 +43,7 @@ export {
 export { dynamicTagsDark } from './dynamic-tags/styles'
 export { elementDark } from './element/styles'
 export { emptyDark } from './empty/styles'
+export { flexDark, flexRtl as unstableFlexRtl } from './flex/styles'
 export { formDark } from './form/styles'
 export { gradientTextDark } from './gradient-text/styles'
 export { iconDark } from './icon/styles'
