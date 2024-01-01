@@ -1,4 +1,4 @@
-import { cB, cE, cM, c } from '../../../_utils/cssr'
+import { cB, cM, c } from '../../../_utils/cssr'
 
 export default c([
   cB('data-table', [
@@ -23,10 +23,7 @@ export default c([
           right: unset;
           left: 0;
         `)
-      ]),
-      cE('pagination', `
-        direction: ltr;
-      `)
+      ])
     ])
   ]),
   cB('data-table-filter-menu', [
