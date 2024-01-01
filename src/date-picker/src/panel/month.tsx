@@ -1,12 +1,15 @@
 import { h, defineComponent, type VNode, type PropType, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
+import { useLocale } from '../../../_mixins'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import {
   type MonthItem,
   type YearItem,
   type QuarterItem,
-  getMonthString
+  getMonthString,
+  getQuarterString,
+  getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useCalendar, useCalendarProps } from './use-calendar'
@@ -31,16 +34,29 @@ export default defineComponent({
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
+    const { dateLocaleRef } = useLocale('DatePicker')
     const getRenderContent = (
       item: YearItem | MonthItem | QuarterItem
     ): number | string => {
       switch (item.type) {
         case 'year':
-          return item.dateObject.year
+          return getYearString(
+            item.dateObject.year,
+            item.yearFormat,
+            dateLocaleRef.value.locale
+          )
         case 'month':
-          return getMonthString(item.dateObject.month, item.monthStringType)
+          return getMonthString(
+            item.dateObject.month,
+            item.monthFormat,
+            dateLocaleRef.value.locale
+          )
         case 'quarter':
-          return `Q${item.dateObject.quarter}`
+          return getQuarterString(
+            item.dateObject.quarter,
+            item.quarterFormat,
+            dateLocaleRef.value.locale
+          )
       }
     }
     const { useAsQuickJump } = props
@@ -57,14 +73,13 @@ export default defineComponent({
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            {
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                item.isCurrent,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                item.selected,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                !useAsQuickJump && mergedIsDateDisabled(item.ts)
-            }
+            item.isCurrent &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            !useAsQuickJump &&
+              mergedIsDateDisabled(item.ts) &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={() => {
             useAsQuickJump

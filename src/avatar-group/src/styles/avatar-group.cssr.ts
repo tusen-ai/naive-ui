@@ -29,18 +29,18 @@ export default cB('avatar-group', `
       ])
     ])
   ]),
-  cNotM('vertical', {
-    flexDirection: 'row'
-  }, [
+  cNotM('vertical', `
+    flex-direction: row;
+  `, [
     cB('avatar', [
       c('&:not(:first-child)', `
          margin-left: var(--n-gap);
       `)
     ])
   ]),
-  cM('vertical', {
-    flexDirection: 'column'
-  }, [
+  cM('vertical', `
+    flex-direction: column;
+  `, [
     cB('avatar', [
       c('&:not(:first-child)', `
          margin-top: var(--n-gap);

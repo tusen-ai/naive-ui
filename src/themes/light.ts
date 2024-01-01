@@ -85,6 +85,7 @@ import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
 import { splitLight } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
+import { flexLight } from '../flex/styles'
 
 export const lightTheme: BuiltInGlobalTheme = {
   name: 'light',
@@ -121,6 +122,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Empty: emptyLight,
   Equation: equationLight,
   Ellipsis: ellipsisLight,
+  Flex: flexLight,
   Form: formLight,
   GradientText: gradientTextLight,
   Icon: iconLight,

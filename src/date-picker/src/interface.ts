@@ -108,14 +108,6 @@ export interface PanelRef
 // 0 is Monday
 export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
-// identical to Intl.DateTimeFormatOptions.month
-export type MonthStringType =
-  | 'numeric'
-  | '2-digit'
-  | 'long'
-  | 'short'
-  | 'narrow'
-
 export type DatePickerInjection = {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
@@ -130,7 +122,9 @@ export type DatePickerInjection = {
   closeOnSelectRef: Ref<boolean>
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
-  monthStringTypeRef: Ref<MonthStringType>
+  monthFormatRef: Ref<string>
+  yearFormatRef: Ref<string>
+  quarterFormatRef: Ref<string>
   datePickerSlots: Slots
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>

@@ -53,7 +53,13 @@ body {
 }
 
 .md-table td {
-  word-break: break-word;
+  word-break: normal;
+}
+
+@media only screen and (max-width: 1280px) {
+  .md-table td {
+    word-break: break-word;
+  }
 }
 
 @media only screen and (max-width: 639px) {

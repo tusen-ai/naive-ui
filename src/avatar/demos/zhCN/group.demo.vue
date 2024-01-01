@@ -5,7 +5,6 @@
 </markdown>
 
 <template>
-  <n-avatar-group expand-on-hover :options="options" :size="40" :max="3" />
   <n-avatar-group :options="options" :size="40" :max="3">
     <template #avatar="{ option: { name, src } }">
       <n-tooltip>

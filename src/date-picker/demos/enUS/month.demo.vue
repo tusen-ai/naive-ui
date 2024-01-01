@@ -1,7 +1,7 @@
 <markdown>
 # Month
 
-You can set the display type of month in the panel.
+Use `month-format` to format month item inside panel.
 </markdown>
 
 <template>
@@ -10,7 +10,8 @@ You can set the display type of month in the panel.
     <n-date-picker
       v-model:value="timestamp"
       type="month"
-      :month-string-type="'short'"
+      format="y MMM"
+      month-format="MMM"
       clearable
     />
     <pre>{{ JSON.stringify(timestamp) }}</pre>

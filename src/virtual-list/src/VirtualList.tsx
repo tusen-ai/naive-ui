@@ -6,7 +6,7 @@ import {
   VVirtualList,
   type VirtualListInst,
   type VirtualListItemData,
-  type VirtualListScrollOptions
+  type VirtualListScrollToOptions
 } from 'vueuc'
 export { type VirtualListInst } from 'vueuc'
 
@@ -76,7 +76,7 @@ export default defineComponent({
     }
 
     function scrollTo (
-      options: VirtualListScrollOptions | number,
+      options: VirtualListScrollToOptions | number,
       y?: number
     ): void {
       if (typeof options === 'number') {
