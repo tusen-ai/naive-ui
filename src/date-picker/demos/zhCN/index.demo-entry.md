@@ -55,7 +55,7 @@ form-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
@@ -63,11 +63,11 @@ form-debug.vue
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | 2.28.3 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
-| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
-| on-prev-month | `() => void` | `undefined` | 点击上一个月时的回调 | NEXT_VERSION |
 | on-next-month | `() => void` | `undefined` | 点击下一个月时的回调 | NEXT_VERSION |
-| on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | NEXT_VERSION |
+| on-prev-month | `() => void` | `undefined` | 点击上一个月时的回调 | NEXT_VERSION |
 | on-next-year | `() => void` | `undefined` | 点击下一年时的回调 | NEXT_VERSION |
+| on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | NEXT_VERSION |
+| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
 
 ### Date 类型的 Props
 

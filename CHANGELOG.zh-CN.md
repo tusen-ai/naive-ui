@@ -38,9 +38,10 @@
 - `n-select` 新增 `header` 插槽，关闭 [#5448](https://github.com/tusen-ai/naive-ui/issues/5448)
 - `n-date-picker` 新增 `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` 属性，关闭 [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 - `n-date-picker` 的 `type` 属性支持 `'week'`
-- `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
+- `n-input-number` 新增 `input-props` 属性，关闭 [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
 - 更新 ruRU locale
-- `n-drawer` 新增 `content-class` `body-class` `body-content-class` `footer-class` `header-class` 属性
+- `n-drawer` 新增 `content-class` 属性
+- `n-drawer-content` 新增 `body-class` `body-content-class` `footer-class` 和 `header-class` 属性
 - `n-tree` 新增多种 `scrollTo` 配置
 - `n-form` 为 `FormItemRule` 增加 `warningOnly` 属性，用于显示表单异常值，但不会阻塞提交
 - `n-cascader` 新增 `ellipsis-tag-popover-props` 属性

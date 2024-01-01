@@ -39,7 +39,8 @@
 - `n-date-picker`'s `type` prop supports `'week'`.
 - `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
-- `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
+- `n-drawer` adds `content-class` prop.
+- `n-drawer-content` adds `body-class` `body-content-class` `footer-class` and `header-class` props.
 - `n-tree` adds multiple `scrollTo` configurations.
 - `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
