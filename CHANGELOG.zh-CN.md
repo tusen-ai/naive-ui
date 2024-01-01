@@ -25,6 +25,7 @@
 - 修复 `n-avatar` 懒加载和懒加载失败时 `fallback-src` 属性都不生效，关闭[#5007](https://github.com/tusen-ai/naive-ui/issues/5007)
 - 修复 `n-split` 不在卡片中使用没有颜色
 - 修复 `n-card` 的 `footer-class` 属性不生效
+- 修复 `n-tabs` 在 `placement` 为 `'left'` 和 `'right'` 时初始化滚动阴影可能不正确
 
 ### Features
 

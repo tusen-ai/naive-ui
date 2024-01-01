@@ -1,19 +1,19 @@
 import { h, defineComponent, computed, type PropType } from 'vue'
-import type { Property } from 'csstype'
 import { depx, getGap } from 'seemly'
+import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { flexLight } from '../styles'
 import type { FlexTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
+import type { FlexAlign, FlexJustify } from './type'
 
 export const flexProps = {
   ...(useTheme.props as ThemeProps<FlexTheme>),
-  align: String as PropType<Property.AlignItems>,
+  align: String as PropType<FlexAlign>,
   justify: {
-    type: String as PropType<Property.JustifyContent>,
+    type: String as PropType<FlexJustify>,
     default: 'start'
   },
   inline: Boolean,

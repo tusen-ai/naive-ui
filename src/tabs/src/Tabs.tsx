@@ -158,6 +158,7 @@ export default defineComponent({
     const xScrollInstRef = ref<(VXScrollInst & ComponentPublicInstance) | null>(
       null
     )
+    const yScrollElRef = ref<HTMLElement | null>(null)
 
     const startReachedRef = ref(true)
     const endReachedRef = ref(true)
@@ -478,8 +479,11 @@ export default defineComponent({
         }
       }
       if (type !== 'segment') {
+        const { placement } = props
         deriveScrollShadow(
-          (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
+          (placement === 'top' || placement === 'bottom'
+            ? (xScrollInstRef.value?.$el as undefined | HTMLElement)
+            : yScrollElRef.value) || null
         )
       }
     }
@@ -711,6 +715,7 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       animationDirection: animationDirectionRef,
       renderNameListRef,
+      yScrollElRef,
       onAnimationBeforeLeave,
       onAnimationEnter,
       onAnimationAfterEnter,
@@ -928,6 +933,7 @@ export default defineComponent({
                       <div
                         class={`${mergedClsPrefix}-tabs-nav-y-scroll`}
                         onScroll={this.handleScroll}
+                        ref="yScrollElRef"
                       >
                         {scrollContent()}
                       </div>
