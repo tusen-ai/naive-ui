@@ -19,6 +19,7 @@ import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
+import { getMargin } from 'seemly'
 
 const iconRenderMap = {
   default: () => <InfoIcon />,
@@ -108,12 +109,16 @@ export const NDialog = defineComponent({
           [createKey('iconColor', type)]: iconColor
         }
       } = themeRef.value
+      const iconMarginDiscrete = getMargin(iconMargin)
       return {
         '--n-font-size': fontSize,
         '--n-icon-color': iconColor,
         '--n-bezier': cubicBezierEaseInOut,
         '--n-close-margin': closeMargin,
-        '--n-icon-margin': iconMargin,
+        '--n-icon-margin-top': iconMarginDiscrete.top,
+        '--n-icon-margin-right': iconMarginDiscrete.right,
+        '--n-icon-margin-bottom': iconMarginDiscrete.bottom,
+        '--n-icon-margin-left': iconMarginDiscrete.left,
         '--n-icon-size': iconSize,
         '--n-close-size': closeSize,
         '--n-close-icon-size': closeIconSize,
