@@ -1,6 +1,6 @@
 # Flex
 
-Usable since `NEXT_VERSION`.
+Available since `NEXT_VERSION`.
 
 Frankly saying, it functions similarly to `n-space`. However use `n-flex` if possible.
 

@@ -702,7 +702,8 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           en: 'Flex',
           zh: '弹性布局',
           enSuffix: true,
-          path: '/flex'
+          path: '/flex',
+          isNew: true
         },
         {
           en: 'Layout',
