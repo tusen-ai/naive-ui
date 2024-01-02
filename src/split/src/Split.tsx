@@ -4,7 +4,8 @@ import {
   type PropType,
   ref,
   computed,
-  type CSSProperties
+  type CSSProperties,
+  watch
 } from 'vue'
 import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
@@ -71,6 +72,13 @@ export default defineComponent({
     const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
     const currentSize = ref(props.defaultSize)
+
+    watch(
+      () => props.defaultSize,
+      (value: number) => {
+        currentSize.value = value
+      }
+    )
 
     const firstPaneStyle = computed(() => {
       const size = currentSize.value * 100
