@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
-   - type: textarea
+  - type: textarea
     id: bug-description
     attributes:
       label: Describe the bug
