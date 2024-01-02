@@ -6,12 +6,23 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
-  - type: textarea
+   - type: textarea
     id: bug-description
     attributes:
       label: Describe the bug
       description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description. Thanks!
       placeholder: Bug description
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Clear and concise steps to reproduce this bug.
+      placeholder: |
+        1. apply magic
+        2. wait 3.1415 seconds
+        3. 🧙🏽‍♂️
     validations:
       required: true
   - type: input
@@ -48,15 +59,13 @@ body:
       label: Validations
       description: Before submitting the issue, please make sure you do the following
       options:
-#        - label: Follow our [Code of Conduct](https://github.com/vueuse/vueuse/blob/main/CODE_OF_CONDUCT.md)
-#          required: true
-#        - label: Read the [Contributing Guidelines](https://github.com/vueuse/vueuse/blob/main/CONTRIBUTING.md).
-#          required: true
-        - label: Read the [docs](https://singularit-de.github.io/drf-axios-middleware/).
+        - label: Read the [Contributing Guidelines](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
           required: true
-        - label: Check that there isn't [already an issue](https://github.com/singularit-de/drf-axios-middleware/issues) that reports the same bug to avoid creating a duplicate.
+        - label: Read the [docs](https://www.naiveui.com/en-US/).
           required: true
-#        - label: Check that this is a concrete bug. For Q&A open a [GitHub Discussion](https://github.com/vueuse/vueuse/discussions).
-#          required: true
+        - label: Check that there isn't [already an issue](https://github.com/tusen-ai/naive-ui/issues) that reports the same bug to avoid creating a duplicate.
+          required: true
+        - label: Check that this is a concrete bug. For Q&A open a [GitHub Discussion](https://github.com/tusen-ai/naive-ui/discussions).
+          required: true
         - label: The provided reproduction is a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) of the bug.
           required: true
