@@ -1,1 +1,8 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Discord Chat
+    url: https://discord.gg/Pqv7Mev5Dd
+    about: Ask questions and discuss with other Naive UI users in real time.
+  - name: Questions & Discussions
+    url: https://github.com/tusen-ai/naive-ui/discussions
+    about: Use GitHub discussions for message-board style questions and discussions.
