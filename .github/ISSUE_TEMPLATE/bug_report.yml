@@ -1,4 +1,3 @@
-blank_issues_enabled: false
 name: 🐞 Bug report
 description: Report an issue with naive-ui
 labels: [untriaged]
