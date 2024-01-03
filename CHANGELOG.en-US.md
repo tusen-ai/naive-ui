@@ -26,7 +26,6 @@
 - Fix `n-split` has no color if it's not used in a card.
 - Fix `n-card` `footer-class` prop not working.
 - Fix `n-tabs` may miss over-scroll shadow if `placement` is `'left'` or `'right'`.
-- Fix `n-split` Modified `default-size` panel not updated issue
 
 ### Features
 
@@ -54,6 +53,7 @@
 - `n-tree` adds `override-default-node-click-behavior` prop.
 - `n-tree-select` adds `override-default-node-click-behavior` prop.
 - Adds `n-flex` component.
+- `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 
 ## 2.36.0
 

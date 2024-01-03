@@ -55,6 +55,7 @@
 - `n-tree` 新增 `override-default-node-click-behavior` 属性
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - 新增 `n-flex` 组件
+- `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 
 ## 2.36.0
 

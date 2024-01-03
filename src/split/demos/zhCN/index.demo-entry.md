@@ -26,6 +26,7 @@ slot.vue
 | min | `number` | `0` | Split 的分割最小阈值，0-1 代表百分比 | 2.36.0 |
 | max | `number` | `1` | Split 的分割最大阈值，0-1 代表百分比 | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Split 的分隔条大小 | 2.36.0 |
+| watch-props | `Array<defaultSize>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 | 2.36.0 |
 
 ### Split Slots
 

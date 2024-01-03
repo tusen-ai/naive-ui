@@ -39,7 +39,8 @@ export const splitProps = {
   },
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
-  onDragEnd: Function as PropType<(e: Event) => void>
+  onDragEnd: Function as PropType<(e: Event) => void>,
+  watchProps: Array as PropType<Array<'defaultSize'>>
 } as const
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
@@ -73,12 +74,14 @@ export default defineComponent({
     const isDraggingRef = ref(false)
     const currentSize = ref(props.defaultSize)
 
-    watch(
-      () => props.defaultSize,
-      (value: number) => {
-        currentSize.value = value
-      }
-    )
+    if (props.watchProps?.includes('defaultSize')) {
+      watch(
+        () => props.defaultSize,
+        (value: number) => {
+          currentSize.value = value
+        }
+      )
+    }
 
     const firstPaneStyle = computed(() => {
       const size = currentSize.value * 100
