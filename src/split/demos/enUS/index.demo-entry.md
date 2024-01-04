@@ -26,7 +26,7 @@ slot.vue
 | min | `number` | `0` | The minimum threshold for splitting, 0-1 is a percentage. | 2.36.0 |
 | max | `number` | `1` | The maximum split threshold, 0-1 is a percentage. | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
-| watch-props | `Array<defaultSize>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.36.0 |
+| watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | NEXT_VERSION |
 
 ### Split Slots
 
