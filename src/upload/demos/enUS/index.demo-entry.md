@@ -32,7 +32,7 @@ download.vue
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
-| default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |  |
+| default-upload | `boolean` | `true` | If file uploaded immediately after file is selected. |  |
 | directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | 2.28.3 |
 | directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | 2.28.3 |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
