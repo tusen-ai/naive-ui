@@ -26,7 +26,6 @@
 - 修复 `n-split` 不在卡片中使用没有颜色
 - 修复 `n-card` 的 `footer-class` 属性不生效
 - 修复 `n-tabs` 在 `placement` 为 `'left'` 和 `'right'` 时初始化滚动阴影可能不正确
-- 修复 `n-split` 修改 `default-size` 面板未更新问题
 
 ### Features
 
