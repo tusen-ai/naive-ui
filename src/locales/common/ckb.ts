@@ -1,4 +1,4 @@
-const enUS = {
+const ckb = {
   name: 'ckb',
   global: {
     undo: 'هەڵوەشاندنەوە',
