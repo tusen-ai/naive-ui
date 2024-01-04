@@ -5,7 +5,7 @@ import {
   ref,
   computed,
   type CSSProperties,
-  watch
+  watchEffect
 } from 'vue'
 import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
@@ -75,12 +75,7 @@ export default defineComponent({
     const currentSize = ref(props.defaultSize)
 
     if (props.watchProps?.includes('defaultSize')) {
-      watch(
-        () => props.defaultSize,
-        (value: number) => {
-          currentSize.value = value
-        }
-      )
+      watchEffect(() => (currentSize.value = props.defaultSize))
     }
 
     const firstPaneStyle = computed(() => {
