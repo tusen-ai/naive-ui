@@ -14,6 +14,7 @@ filterable.vue
 action.vue
 async.vue
 status.vue
+file-picker.vue
 debug.vue
 ```
 
@@ -35,7 +36,7 @@ debug.vue
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |  |
 | disabled | `boolean` | `false` | Disabled state. |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | the `popover` properties of the preview ellipsis tag | NEXT_VERSION |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | NEXT_VERSION |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
@@ -49,6 +50,7 @@ debug.vue
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
+| override-default-node-click-behavoir | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | Override default node click behavior. | NEXT_VERSION |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
 | render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. | 2.30.7 |

@@ -74,13 +74,12 @@ export default cB('scrollbar', `
       ]),
       cM('disabled', [
         c('>', [
-          cE('scrollbar', {
-            pointerEvents: 'none'
-          })
+          cE('scrollbar', 'pointer-events: none;')
         ])
       ]),
       c('>', [
         cE('scrollbar', `
+          z-index: 1;
           position: absolute;
           cursor: pointer;
           pointer-events: all;
@@ -88,9 +87,7 @@ export default cB('scrollbar', `
           transition: background-color .2s var(--n-scrollbar-bezier);
         `, [
           fadeInTransition(),
-          c('&:hover', {
-            backgroundColor: 'var(--n-scrollbar-color-hover)'
-          })
+          c('&:hover', 'background-color: var(--n-scrollbar-color-hover);')
         ])
       ])
     ])

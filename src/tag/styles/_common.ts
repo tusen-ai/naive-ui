@@ -8,6 +8,5 @@ export default {
   closeSizeMedium: '18px',
   closeSizeLarge: '18px',
   padding: '0 7px',
-  closeMargin: '0 0 0 4px',
-  closeMarginRtl: '0 4px 0 0'
+  closeMargin: '0 0 0 4px'
 }

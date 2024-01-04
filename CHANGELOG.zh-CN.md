@@ -26,31 +26,35 @@
 - 修复 `n-split` 不在卡片中使用没有颜色
 - 修复 `n-card` 的 `footer-class` 属性不生效
 - 修复 `n-input` 在使用 `clearable` 时点击触发两次的问题，关闭 [#5510](https://github.com/tusen-ai/naive-ui/issues/5510)
+- 修复 `n-tabs` 在 `placement` 为 `'left'` 和 `'right'` 时初始化滚动阴影可能不正确
 
 ### Features
 
 - `n-space` 新增 `reverse` 属性
-- `n-input` 新增 `clear` 方法，关闭[#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
-- `n-time-picker` 新增 `clear` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
+- `n-input` 新增 `clear` 方法，关闭 [#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
+- `n-time-picker` 新增 `'clear'` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)
 - `n-select` 支持 RTL
 - `n-data-table` 支持 RTL
 - `n-dialog` 支持 RTL
 - `n-select` 新增 `header` 插槽，关闭 [#5448](https://github.com/tusen-ai/naive-ui/issues/5448)
 - `n-date-picker` 新增 `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` 属性，关闭 [#5350](https://github.com/tusen-ai/naive-ui/issues/5350)
 - `n-date-picker` 的 `type` 属性支持 `'week'`
-- `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
+- `n-input-number` 新增 `input-props` 属性，关闭 [#5450](https://github.com/tusen-ai/naive-ui/issues/5450)
 - 更新 ruRU locale
-- `n-drawer` 新增 `content-class` `body-class` `body-content-class` `footer-class` `header-class` 属性
+- `n-drawer` 新增 `content-class` 属性
+- `n-drawer-content` 新增 `body-class` `body-content-class` `footer-class` 和 `header-class` 属性
 - `n-tree` 新增多种 `scrollTo` 配置
 - `n-form` 为 `FormItemRule` 增加 `warningOnly` 属性，用于显示表单异常值，但不会阻塞提交
 - `n-cascader` 新增 `ellipsis-tag-popover-props` 属性
 - `n-select` 新增 `ellipsis-tag-popover-props` 属性
 - `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性
-- `n-date-picker` 新增 `month-string-type` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- `n-date-picker` 新增 `month-format`、`year-format` 和 `quarter-format` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 - `n-avatar-group` 新增 `expand-on-hover` 属性
 - `n-data-table` 新增 `downloadCsv` 方法，关闭 [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 - `n-tabs` 新增 `tab-class`、`add-tab-style`、`add-tab-class` 属性
-- TODO: tree select 支持控制节点展开行为
+- `n-tree` 新增 `override-default-node-click-behavior` 属性
+- `n-tree-select` 新增 `override-default-node-click-behavior` 属性
+- 新增 `n-flex` 组件
 
 ## 2.36.0
 

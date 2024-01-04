@@ -12,9 +12,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
 export const drawerContentProps = {
-  title: {
-    type: String
-  },
+  title: String,
   headerClass: String,
   headerStyle: [Object, String] as PropType<string | CSSProperties>,
   footerClass: String,

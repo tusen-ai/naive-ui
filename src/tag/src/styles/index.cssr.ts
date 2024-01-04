@@ -27,6 +27,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-text-color-pressed-checkable
 // --n-font-weight-strong
 export default cB('tag', `
+  --n-close-margin: var(--n-close-margin-top) var(--n-close-margin-right) var(--n-close-margin-bottom) var(--n-close-margin-left);
   white-space: nowrap;
   position: relative;
   box-sizing: border-box;

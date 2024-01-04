@@ -146,6 +146,7 @@ declare module 'vue' {
     NSplit: (typeof import('naive-ui'))['NSplit']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NQrCode: (typeof import('naive-ui'))['NQrCode']
+    NFlex: (typeof import('naive-ui'))['NFlex']
   }
 }
 export {}

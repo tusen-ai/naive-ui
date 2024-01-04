@@ -22,7 +22,7 @@ import {
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
-import type { FirstDayOfWeek, MonthStringType, Value } from './interface'
+import type { FirstDayOfWeek, Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -100,7 +100,7 @@ export interface DateItem {
 
 export interface MonthItem {
   type: 'month'
-  monthStringType: MonthStringType
+  monthFormat: string
   dateObject: {
     month: number
     year: number
@@ -112,6 +112,7 @@ export interface MonthItem {
 
 export interface YearItem {
   type: 'year'
+  yearFormat: string
   dateObject: {
     year: number
   }
@@ -122,6 +123,7 @@ export interface YearItem {
 
 export interface QuarterItem {
   type: 'quarter'
+  quarterFormat: string
   dateObject: {
     quarter: number
     year: number
@@ -188,9 +190,31 @@ function dateItem (
   }
 }
 
-function getMonthString (month: number, type: MonthStringType): string {
-  const date = new Date(Date.UTC(2000, month, 1))
-  return date.toLocaleString('UTC', { month: type })
+function getMonthString (
+  month: number,
+  monthFormat: string,
+  locale: NDateLocale['locale']
+): string {
+  const date = Date.UTC(2000, month, 1)
+  return format(date, monthFormat, { locale })
+}
+
+function getYearString (
+  year: number,
+  yearFormat: string,
+  locale: NDateLocale['locale']
+): string {
+  const date = Date.UTC(year, 1, 1)
+  return format(date, yearFormat, { locale })
+}
+
+function getQuarterString (
+  quarter: number,
+  quarterFormat: string,
+  locale: NDateLocale['locale']
+): string {
+  const date = Date.UTC(2000, quarter * 3 - 2, 1)
+  return format(date, quarterFormat, { locale })
 }
 
 function weekItem (
@@ -238,11 +262,15 @@ function monthItem (
   monthTs: number,
   valueTs: number | null,
   currentTs: number,
-  monthStringType: MonthStringType
+  {
+    monthFormat
+  }: {
+    monthFormat: string
+  }
 ): MonthItem {
   return {
     type: 'month',
-    monthStringType,
+    monthFormat,
     dateObject: {
       month: getMonth(monthTs),
       year: getYear(monthTs)
@@ -256,10 +284,16 @@ function monthItem (
 function yearItem (
   yearTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  {
+    yearFormat
+  }: {
+    yearFormat: string
+  }
 ): YearItem {
   return {
     type: 'year',
+    yearFormat,
     dateObject: {
       year: getYear(yearTs)
     },
@@ -272,10 +306,16 @@ function yearItem (
 function quarterItem (
   quarterTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  {
+    quarterFormat
+  }: {
+    quarterFormat: string
+  }
 ): QuarterItem {
   return {
     type: 'quarter',
+    quarterFormat,
     dateObject: {
       quarter: getQuarter(quarterTs),
       year: getYear(quarterTs)
@@ -363,18 +403,15 @@ function monthArray (
   yearAnchorTs: number,
   valueTs: number | null,
   currentTs: number,
-  monthStringType: MonthStringType
+  format: {
+    monthFormat: string
+  }
 ): MonthItem[] {
   const calendarMonths: MonthItem[] = []
   const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
-      monthItem(
-        getTime(addMonths(yearStart, i)),
-        valueTs,
-        currentTs,
-        monthStringType
-      )
+      monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs, format)
     )
   }
   return calendarMonths
@@ -383,19 +420,33 @@ function monthArray (
 function quarterArray (
   yearAnchorTs: number,
   valueTs: number | null,
-  currentTs: number
+  currentTs: number,
+  format: {
+    quarterFormat: string
+  }
 ): QuarterItem[] {
   const calendarQuarters: QuarterItem[] = []
   const yearStart = startOfYear(yearAnchorTs)
   for (let i = 0; i < 4; i++) {
     calendarQuarters.push(
-      quarterItem(getTime(addQuarters(yearStart, i)), valueTs, currentTs)
+      quarterItem(
+        getTime(addQuarters(yearStart, i)),
+        valueTs,
+        currentTs,
+        format
+      )
     )
   }
   return calendarQuarters
 }
 
-function yearArray (valueTs: number | null, currentTs: number): YearItem[] {
+function yearArray (
+  valueTs: number | null,
+  currentTs: number,
+  format: {
+    yearFormat: string
+  }
+): YearItem[] {
   const calendarYears: YearItem[] = []
   const time1900 = new Date(START_YEAR, 0, 1)
   // 1900 is not a round time, so we use 1911 as start...
@@ -403,7 +454,7 @@ function yearArray (valueTs: number | null, currentTs: number): YearItem[] {
   // 1899-12-31T15:54:17.000Z
   for (let i = 0; i < 200; i++) {
     calendarYears.push(
-      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs)
+      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs, format)
     )
   }
   return calendarYears
@@ -460,5 +511,7 @@ export {
   getDerivedTimeFromKeyboardEvent,
   getDefaultTime,
   getMonthString,
+  getYearString,
+  getQuarterString,
   pluckValueFromRange
 }

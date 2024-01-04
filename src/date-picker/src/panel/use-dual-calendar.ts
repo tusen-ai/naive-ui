@@ -78,7 +78,9 @@ function useDualCalendar (
     updateValueOnCloseRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    monthStringTypeRef
+    monthFormatRef,
+    yearFormatRef,
+    quarterFormatRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -221,36 +223,38 @@ function useDualCalendar (
     return shortcuts || rangesRef.value
   })
   const startYearArrayRef = computed(() => {
-    return yearArray(pluckValueFromRange(props.value, 'start'), nowRef.value)
+    return yearArray(pluckValueFromRange(props.value, 'start'), nowRef.value, {
+      yearFormat: yearFormatRef.value
+    })
   })
   const endYearArrayRef = computed(() => {
-    return yearArray(pluckValueFromRange(props.value, 'end'), nowRef.value)
+    return yearArray(pluckValueFromRange(props.value, 'end'), nowRef.value, {
+      yearFormat: yearFormatRef.value
+    })
   })
   const startQuarterArrayRef = computed(() => {
     const startValue = pluckValueFromRange(props.value, 'start')
-    return quarterArray(startValue ?? Date.now(), startValue, nowRef.value)
+    return quarterArray(startValue ?? Date.now(), startValue, nowRef.value, {
+      quarterFormat: quarterFormatRef.value
+    })
   })
   const endQuarterArrayRef = computed(() => {
     const endValue = pluckValueFromRange(props.value, 'end')
-    return quarterArray(endValue ?? Date.now(), endValue, nowRef.value)
+    return quarterArray(endValue ?? Date.now(), endValue, nowRef.value, {
+      quarterFormat: quarterFormatRef.value
+    })
   })
   const startMonthArrayRef = computed(() => {
     const startValue = pluckValueFromRange(props.value, 'start')
-    return monthArray(
-      startValue ?? Date.now(),
-      startValue,
-      nowRef.value,
-      monthStringTypeRef.value
-    )
+    return monthArray(startValue ?? Date.now(), startValue, nowRef.value, {
+      monthFormat: monthFormatRef.value
+    })
   })
   const endMonthArrayRef = computed(() => {
     const endValue = pluckValueFromRange(props.value, 'end')
-    return monthArray(
-      endValue ?? Date.now(),
-      endValue,
-      nowRef.value,
-      monthStringTypeRef.value
-    )
+    return monthArray(endValue ?? Date.now(), endValue, nowRef.value, {
+      monthFormat: monthFormatRef.value
+    })
   })
   watch(
     computed(() => props.value),

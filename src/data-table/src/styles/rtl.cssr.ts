@@ -1,4 +1,4 @@
-import { cB, cE, cM, c } from '../../../_utils/cssr'
+import { cB, cM, c } from '../../../_utils/cssr'
 
 export default c([
   cB('data-table', [
@@ -6,25 +6,29 @@ export default c([
       direction: rtl;
     `, [
       cB('data-table-th', [
+        cM('filterable', `
+          padding-left: 36px;
+          padding-right: var(--n-th-padding);
+        `, [
+          cM('sortable', `
+            padding-right: var(--n-th-padding);
+            padding-left: calc(var(--n-th-padding) + 36px);
+          `)
+        ]),
         cB('data-table-sorter', `
-          margin-left: 20px;
+          margin-left: 0;
+          margin-right: 4px;
         `),
         cB('data-table-filter', `
           right: unset;
           left: 0;
         `)
-      ]),
-      cE('pagination', `
-        direction: ltr;
-        justify-content: flex-start;
-      `)
+      ])
     ])
   ]),
   cB('data-table-filter-menu', [
-    cM('rtl', [
-      cB('scrollbar', `
-        direction: rtl;
-      `)
-    ])
+    cM('rtl', `
+      direction: rtl;
+    `)
   ])
 ])

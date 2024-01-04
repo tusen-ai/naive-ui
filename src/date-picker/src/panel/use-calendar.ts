@@ -74,7 +74,9 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    monthStringTypeRef
+    yearFormatRef,
+    monthFormatRef,
+    quarterFormatRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -120,19 +122,26 @@ function useCalendar (
       calendarValueRef.value,
       Array.isArray(value) ? null : value,
       nowRef.value,
-      monthStringTypeRef.value
+      {
+        monthFormat: monthFormatRef.value
+      }
     )
   })
   const yearArrayRef = computed(() => {
     const { value } = props
-    return yearArray(Array.isArray(value) ? null : value, nowRef.value)
+    return yearArray(Array.isArray(value) ? null : value, nowRef.value, {
+      yearFormat: yearFormatRef.value
+    })
   })
   const quarterArrayRef = computed(() => {
     const { value } = props
     return quarterArray(
       calendarValueRef.value,
       Array.isArray(value) ? null : value,
-      nowRef.value
+      nowRef.value,
+      {
+        quarterFormat: quarterFormatRef.value
+      }
     )
   })
   const weekdaysRef = computed(() => {

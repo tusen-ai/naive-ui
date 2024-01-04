@@ -4,6 +4,8 @@ export type {
   TreeOption,
   TreeDragInfo,
   TreeDropInfo,
-  TreeInst
+  TreeInst,
+  TreeOverrideNodeClickBehavior,
+  TreeOverrideNodeClickBehaviorReturn
 } from './src/interface'
 export { treeGetClickTarget } from './src/utils'

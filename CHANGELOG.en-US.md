@@ -18,7 +18,7 @@
 - Fix `n-data-table` throws error if summary config has empty column.
 - Fix `n-drawer`'s `on-mask-click` may be called multiple times.
 - Fix `n-tree`'s `data` When the data source 'data' switches several times according to a certain scene, some logic of animation processing can cause errors in rendering the displayed data, closes [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
-- 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
+- Fix `n-radio` value's native input element's checked value is not updated, closes [#5184](https://github.com/tusen-ai/naive-ui/issues/5184).
 - Fix `n-data-table` height incorrect when set `min-height` in empty state，closes [#5108](https://github.com/tusen-ai/naive-ui/issues/5108).
 - Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).
 - Fix `n-spin` abnormal animation, closes [#3556](https://github.com/tusen-ai/naive-ui/issues/3556).
@@ -26,6 +26,8 @@
 - Fix `n-split` has no color if it's not used in a card.
 - Fix `n-card` `footer-class` prop not working.
 - Fix `n-input` click clear icon to trigger twice when using the `clearable`, closes [#5510](https://github.com/tusen-ai/naive-ui/issues/5510).
+- Fix `n-tabs` may miss over-scroll shadow if `placement` is `'left'` or `'right'`.
+
 
 ### Features
 
@@ -39,16 +41,20 @@
 - `n-date-picker`'s `type` prop supports `'week'`.
 - `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
-- `n-drawer` adds `content-class` `body-class` `body-content-class` `footer-class` `header-class` prop.
+- `n-drawer` adds `content-class` prop.
+- `n-drawer-content` adds `body-class` `body-content-class` `footer-class` and `header-class` props.
 - `n-tree` adds multiple `scrollTo` configurations.
 - `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
-- `n-date-picker` adds `month-string-type` prop, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 - `n-avatar-group` adds `expand-on-hover` prop.
 - `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 - `n-tabs` adds `tab-class`, `add-tab-style` and `add-tab-class` props.
+- `n-tree` adds `override-default-node-click-behavior` prop.
+- `n-tree-select` adds `override-default-node-click-behavior` prop.
+- Adds `n-flex` component.
 
 ## 2.36.0
 

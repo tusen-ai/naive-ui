@@ -1,15 +1,15 @@
 <markdown>
-# 导出 Csv
+# 导出 CSV
 </markdown>
 
 <template>
   <n-space vertical :size="12">
     <n-space>
       <n-button @click="downloadCsv">
-        导出 Csv
+        导出 CSV（原始数据）
       </n-button>
       <n-button @click="exportSorterAndFilterCsv">
-        导出 Sorter & Filter Csv
+        导出 CSV（展示的数据）
       </n-button>
     </n-space>
     <n-data-table

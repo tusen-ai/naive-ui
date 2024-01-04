@@ -46,26 +46,28 @@ form-debug.vue
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |  |
 | formatted-value | `string \| [string, string] \| null` | `undefined` | 格式化之后的值 | 2.24.0 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
-| month-string-type | `'numeric' \| '2-digit' \| 'long' \| 'short' \| 'narrow'` | `'numeric'` | 设置面板中月份的显示方式 | NEXT_VERSION |
+| month-format | `string` | `'M'` | 设置面板中月份的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
 | panel | `boolean` | `false` | 是否只使用面板 | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
+| quarter-format | `string` | `'Q'Q` | 设置面板中季度的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
+| year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
 | on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | 2.28.3 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |  |
-| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
-| on-prev-month | `() => void` | `undefined` | 点击上一个月时的回调 | NEXT_VERSION |
 | on-next-month | `() => void` | `undefined` | 点击下一个月时的回调 | NEXT_VERSION |
-| on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | NEXT_VERSION |
+| on-prev-month | `() => void` | `undefined` | 点击上一个月时的回调 | NEXT_VERSION |
 | on-next-year | `() => void` | `undefined` | 点击下一年时的回调 | NEXT_VERSION |
+| on-prev-year | `() => void` | `undefined` | 点击上一年时的回调 | NEXT_VERSION |
+| on-update:show | `(show: boolean) => void` | `undefined` | 面板打开、关闭时的回调 | 2.28.3 |
 
 ### Date 类型的 Props
 

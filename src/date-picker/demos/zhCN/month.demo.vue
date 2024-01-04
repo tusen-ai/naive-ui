@@ -1,7 +1,7 @@
 <markdown>
 # 月份
 
-可以指定面板中月份的显示方式
+可以使用 `month-format` 属性指定面板中月份的显示方式。
 </markdown>
 
 <template>
@@ -10,7 +10,9 @@
     <n-date-picker
       v-model:value="timestamp"
       type="month"
-      :month-string-type="'short'"
+      format="y年 M月"
+      year-format="y年"
+      month-format="M月"
       clearable
     />
     <pre>{{ JSON.stringify(timestamp) }}</pre>
