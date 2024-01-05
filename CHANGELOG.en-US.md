@@ -26,6 +26,7 @@
 - Fix `n-split` has no color if it's not used in a card.
 - Fix `n-card` `footer-class` prop not working.
 - Fix `n-tabs` may miss over-scroll shadow if `placement` is `'left'` or `'right'`.
+- Fix `n-select` selecting the same option `on-update:value` to trigger repeatedly, closes [#4571](https://github.com/tusen-ai/naive-ui/issues/4571).
 
 ### Features
 

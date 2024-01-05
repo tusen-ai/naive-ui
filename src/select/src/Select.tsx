@@ -406,6 +406,24 @@ export default defineComponent({
         'onUpdate:value': _onUpdateValue,
         onUpdateValue
       } = props
+      if (
+        !Array.isArray(value) &&
+        !Array.isArray(mergedValueRef.value) &&
+        value === mergedValueRef.value
+      ) {
+        return
+      } else {
+        const mergedValueSet = new Set(
+          mergedValueRef.value as Array<string | number>
+        )
+        if (
+          (value as Array<string | number>).every((v, i) =>
+            mergedValueSet.has(v)
+          )
+        ) {
+          return
+        }
+      }
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       if (onChange) call(onChange as OnUpdateValueImpl, value, option)
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
