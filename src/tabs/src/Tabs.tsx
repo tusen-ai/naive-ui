@@ -43,7 +43,9 @@ import type {
   TabsType,
   TabsInst,
   OnUpdateValue,
-  OnUpdateValueImpl
+  OnUpdateValueImpl,
+  OnTabClick,
+  OnTabClickImpl
 } from './interface'
 import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
@@ -104,6 +106,7 @@ export const tabsProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<OnClose>>,
+  onTabClick: [Function, Array] as PropType<MaybeArray<OnTabClick>>,
   // deprecated
   labelSize: String as PropType<'small' | 'medium' | 'large'>,
   activeName: [String, Number] as PropType<string | number>,
@@ -404,6 +407,11 @@ export default defineComponent({
       if (onClose) call(onClose as OnCloseImpl, panelName)
     }
 
+    function handleTabClick (panelName: string | number): void {
+      const { onTabClick } = props
+      if (onTabClick) call(onTabClick as OnTabClickImpl, panelName)
+    }
+
     let firstTimeUpdatePosition = true
     function updateBarPositionInstantly (): void {
       const { value: barEl } = barElRef
@@ -570,7 +578,8 @@ export default defineComponent({
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       activateTab,
       handleClose,
-      handleAdd
+      handleAdd,
+      handleTabClick
     })
     onFontsReady(() => {
       updateCurrentBarStyle()

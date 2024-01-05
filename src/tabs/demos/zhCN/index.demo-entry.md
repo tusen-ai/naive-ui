@@ -23,6 +23,7 @@ update-bar-manually.vue
 bar-width.vue
 trigger.vue
 placement.vue
+tab-click.vue
 line-debug.vue
 style-inherit-debug.vue
 shadow-debug.vue
@@ -62,6 +63,7 @@ none-debug.vue
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |  |
 | on-before-leave | `(name: string \| number, oldName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止切换 |  |
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |  |
+| on-tab-click | `(name: string \| number) => void` | `undefined` | 点击标签的回调函数 | NEXT_VERSION |
 | on-update:value | `(value: string \| number) => void` | `undefined` | 选中发生改变时的回调函数 |  |
 
 ### TabPane Props

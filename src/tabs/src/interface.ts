@@ -9,6 +9,9 @@ export type OnUpdateValueImpl = (value: string | number) => void
 export type OnClose = (name: string & number) => void
 export type OnCloseImpl = (name: string | number) => void
 
+export type OnTabClick = (value: string & number) => void
+export type OnTabClickImpl = (value: string | number) => void
+
 export type OnBeforeLeave = (
   name: string & number,
   oldName: string & number & null
@@ -35,6 +38,7 @@ export interface TabsInjection {
   activateTab: (panelName: string | number) => void
   handleClose: (panelName: string | number) => void
   handleAdd: () => void
+  handleTabClick: (panelName: string | number) => void
 }
 
 export type Addable =

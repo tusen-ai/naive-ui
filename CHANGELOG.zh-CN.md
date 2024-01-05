@@ -54,6 +54,7 @@
 - `n-tree` 新增 `override-default-node-click-behavior` 属性
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - 新增 `n-flex` 组件
+- `n-tabs` 新增 `on-tab-click` 属性，用来触发点击Tab的事件
 
 ## 2.36.0
 
