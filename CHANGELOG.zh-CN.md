@@ -10,14 +10,13 @@
 - 修复 `n-notification` 通知在屏幕宽度小于 400px 的时候溢出屏幕
 - 修复 `n-carousel` 在只有两个元素时，过渡效果为 `slide` 且循环播放时过渡效果有问题，关闭 [#4323](https://github.com/tusen-ai/naive-ui/issues/4323)
 - 修复 `n-carousel` 在只有一张图片时点击箭头切换按钮触发的 `current-index` 值不正确，关闭 [#5130](https://github.com/tusen-ai/naive-ui/issues/5130)
-- 修复 `n-input` 自动填充时的默认背景色，关闭 [#5123](https://github.com/tusen-ai/naive-ui/issues/5123)
 - 修复 `n-upload-trigger` 在拖拽文件夹场景下当文件夹内文件较多时，部分文件不会被正确读取的问题
 - 修复 `n-dynamic-tags` 使用键盘触发新增时行为异常，关闭 [#5077](https://github.com/tusen-ai/naive-ui/issues/5077)
 - 修复 `n-tree` 叶子节点连接线颜色
 - Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
-- 修复 `n-data-table` 总结栏有未设定的列时，会抛出 error
+- 修复 `n-data-table` 总结栏有未设定的列时，会抛出异常
 - 修复 `n-drawer` 的 `on-mask-click` 属性可能被触发多次
-- 修复 `n-tree` 属性 `data` 当数据源`data`按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
+- 修复 `n-tree` 属性 `data` 当数据源 `data` 按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 - 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
 - 修复 `n-data-table` 空表格在设置 `min-height` 时高度不正确，关闭 [#5108](https://github.com/tusen-ai/naive-ui/issues/5108)
 - Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).

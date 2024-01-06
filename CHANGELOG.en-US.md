@@ -10,7 +10,6 @@
 - Fix `n-notification` notification clips out of screen when screen width is less than 400px wide.
 - Fix `n-carousel` transition effect incorrect when using the `slide` effect in loop mode with only two elements, closes [#4323](https://github.com/tusen-ai/naive-ui/issues/4323).
 - Fix `n-carousel` trigger incorrect `current-index` value on arrow button click with single image, closes [#5130](https://github.com/tusen-ai/naive-ui/issues/5130).
-- Fix `n-input` autofill's default background color, closes [#5123](https://github.com/tusen-ai/naive-ui/issues/5123).
 - Fix `n-upload-trigger` in directory drag mode with a lot of files, some of the files are not read.
 - Fix `n-dynamic-tags`'s abnormal behavior when using keyboard to trigger add button, closes [#5077](https://github.com/tusen-ai/naive-ui/issues/5077).
 - Fix `n-tree` leaf node line color.
