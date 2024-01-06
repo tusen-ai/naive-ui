@@ -20,6 +20,7 @@ import {
   type VNodeChild,
   onMounted
 } from 'vue'
+import 'vue/jsx'
 import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'

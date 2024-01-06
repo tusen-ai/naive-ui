@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { isYesterday, format, addMonths, getYear } from 'date-fns/esm'
+import { isYesterday, format, addMonths, getYear } from 'date-fns' //
 import { NCalendar } from '../index'
 import { NButton } from '../../button'
 

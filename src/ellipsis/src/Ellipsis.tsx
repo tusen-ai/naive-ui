@@ -7,6 +7,7 @@ import {
   mergeProps,
   onDeactivated
 } from 'vue'
+import 'vue/jsx'
 import type { PopoverProps } from '../../popover/src/Popover'
 import type { TooltipInst } from '../../tooltip/src/Tooltip'
 import { NTooltip } from '../../tooltip'

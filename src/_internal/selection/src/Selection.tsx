@@ -15,6 +15,7 @@ import {
   type InputHTMLAttributes,
   type VNode
 } from 'vue'
+import 'vue/jsx'
 import { VOverflow, type VOverflowInst } from 'vueuc'
 import type {
   RenderLabel,

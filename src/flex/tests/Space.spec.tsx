@@ -3,11 +3,9 @@ import { h, Fragment, createCommentVNode } from 'vue'
 import { NFlex } from '../index'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
-  return (
-    wrapper.findAll('div').filter((v) => {
-      return !v.classes().includes('n-flex')
-    }) || []
-  )
+  const nodes = wrapper.findAllComponents(NFlex).at(0)
+  const element = nodes?.element
+  return Array.from(element?.childNodes ?? [])
 }
 
 describe('n-flex', () => {
@@ -32,7 +30,7 @@ describe('n-flex', () => {
         return <NFlex size="large">{{ default: () => 'kirby' }}</NFlex>
       }
     })
-    expect(wrapper.attributes('style')).toContain('margin')
+    expect(wrapper.attributes('style')).toContain('gap')
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -85,7 +83,6 @@ describe('n-flex', () => {
         )
       }
     })
-
     const childNodes = getChildrenNode(wrapper)
     expect(childNodes.length).toBe(3)
     expect(wrapper.html()).toMatchSnapshot()
@@ -99,7 +96,8 @@ describe('n-flex', () => {
       }
     })
     const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toEqual(0)
+    expect(childNodes.length).toEqual(1)
+    expect(childNodes[0].nodeType).toEqual(Node.COMMENT_NODE)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

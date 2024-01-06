@@ -15,6 +15,7 @@ import {
   type LabelHTMLAttributes,
   type VNodeChild
 } from 'vue'
+import 'vue/jsx'
 import Schema from 'async-validator'
 import type { ValidateError, RuleItem, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
