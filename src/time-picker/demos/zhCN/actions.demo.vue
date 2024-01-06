@@ -4,7 +4,7 @@
 </markdown>
 <template>
   <n-space vertical>
-    <n-time-picker v-model:value="ts1" :actions="['now']" />
+    <n-time-picker v-model:value="ts1" :actions="['now', 'clear']" />
     <n-time-picker v-model:value="ts2" :actions="null" />
   </n-space>
 </template>

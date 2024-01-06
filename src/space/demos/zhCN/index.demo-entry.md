@@ -2,6 +2,8 @@
 
 这是个伟大的发明（不是我发明的）。
 
+如果你没有对 `gap` CSS 属性的兼容性要求，建议使用 [Flex](flex)。
+
 ## 演示
 
 ```demo
@@ -11,6 +13,7 @@ from-end.vue
 space-between.vue
 space-around.vue
 center.vue
+reverse.vue
 grid-debug.vue
 rtl-debug.vue
 ```

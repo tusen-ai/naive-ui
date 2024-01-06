@@ -2,6 +2,8 @@
 
 A great invention (which is not invented by me).
 
+If you don't have compitable issue for `gap` CSS property, it's suggested to use [Flex](flex).
+
 ## Demos
 
 ```demo
@@ -11,6 +13,7 @@ from-end.vue
 space-between.vue
 space-around.vue
 center.vue
+reverse.vue
 ```
 
 ## API
