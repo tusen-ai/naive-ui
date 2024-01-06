@@ -308,53 +308,24 @@ describe('n-date-picker', () => {
     })
   })
 
-  it('should work with `monthStringType` prop', async () => {
+  it('should work with `monthFormat` prop', async () => {
     const wrapper = mount(NDatePicker, {
       attachTo: document.body,
       props: {
         type: 'month'
       }
     })
+    await wrapper.setProps({
+      monthFormat: 'MMM',
+      value: 1183135260000
+    })
 
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
+        '.n-date-panel-month-calendar__picker-col-item--selected'
       )[0].textContent
-    ).toBe('1')
-
-    await wrapper.setProps({ monthStringType: '2-digit' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('01')
-
-    await wrapper.setProps({ monthStringType: 'long' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('January')
-
-    await wrapper.setProps({ monthStringType: 'short' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('Jan')
-
-    await wrapper.setProps({ monthStringType: 'narrow' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('J')
-
+    ).toBe('Jun')
     wrapper.unmount()
   })
 })
