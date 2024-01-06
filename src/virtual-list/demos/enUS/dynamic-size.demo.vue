@@ -53,6 +53,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style>
 .item {
   display: flex;
