@@ -13,15 +13,15 @@
 - 修复 `n-upload-trigger` 在拖拽文件夹场景下当文件夹内文件较多时，部分文件不会被正确读取的问题
 - 修复 `n-dynamic-tags` 使用键盘触发新增时行为异常，关闭 [#5077](https://github.com/tusen-ai/naive-ui/issues/5077)
 - 修复 `n-tree` 叶子节点连接线颜色
-- Fix `n-collapse-item` cursor pointer to correct element, closes [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
+- Fix `n-collapse-item` 光标样式和实际点击生效的位置不对应，关闭 [#5482](https://github.com/tusen-ai/naive-ui/issues/5482).
 - 修复 `n-data-table` 总结栏有未设定的列时，会抛出异常
 - 修复 `n-drawer` 的 `on-mask-click` 属性可能被触发多次
 - 修复 `n-tree` 属性 `data` 当数据源 `data` 按一定场景多次发生切换时，动画处理的一些逻辑会导致渲染展示的数据出错，关闭 [#5217](https://github.com/tusen-ai/naive-ui/issues/5217)
 - 修复 `n-radio` value 值取消更新后，input 原生 checked 值未更新，关闭 [#5184](https://github.com/tusen-ai/naive-ui/issues/5184)
 - 修复 `n-data-table` 空表格在设置 `min-height` 时高度不正确，关闭 [#5108](https://github.com/tusen-ai/naive-ui/issues/5108)
-- Fix `n-tabs`'s bar not hidden when `value` is set manually to the value other than the children `n-tab`s, closes [#5100](https://github.com/tusen-ai/naive-ui/issues/5100).
+- 修复 `n-tabs` 在 `value` 被设为没有对应标签页的值的时候指示条仍然展示，关闭 [#5100](https://github.com/tusen-ai/naive-ui/issues/5100)
 - 修复 `n-spin` 动画异常问题，关闭 [#3556](https://github.com/tusen-ai/naive-ui/issues/3556)
-- 修复 `n-avatar` 懒加载和懒加载失败时 `fallback-src` 属性都不生效，关闭[#5007](https://github.com/tusen-ai/naive-ui/issues/5007)
+- 修复 `n-avatar` 懒加载和懒加载失败时 `fallback-src` 属性都不生效，关闭 [#5007](https://github.com/tusen-ai/naive-ui/issues/5007)
 - 修复 `n-split` 不在卡片中使用没有颜色
 - 修复 `n-card` 的 `footer-class` 属性不生效
 - 修复 `n-tabs` 在 `placement` 为 `'left'` 和 `'right'` 时初始化滚动阴影可能不正确
