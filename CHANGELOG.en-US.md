@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `module` prop in `package.json` is changed from `es/index.js` to `es/index.mjs`
+
 ### Fixes
 
 - Fix `n-space` vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
@@ -32,7 +36,7 @@
 - 🚀 Adds `n-flex` component.
 - 🚀 `n-date-picker`'s `type` prop supports `'week'`.
 - 🚀 `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260).
-- 🚀 `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- 🚀 `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891).
 - 🚀 `n-tree` adds `override-default-node-click-behavior` prop.
 - 🚀 `n-tree-select` adds `override-default-node-click-behavior` prop.
 - `n-space` adds `reverse` prop.
@@ -47,7 +51,7 @@
 - `n-drawer` adds `content-class` prop.
 - `n-drawer-content` adds `body-class` `body-content-class` `footer-class` and `header-class` props.
 - `n-tree` adds multiple `scrollTo` configurations.
-- `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit
+- `n-form` adds `warningOnly` property from `FormItemRule` to show abnormal values but not block submit.
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.

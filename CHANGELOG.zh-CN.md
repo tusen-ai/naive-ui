@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- `package.json` 中的 `module` 属性由 `es/index.js` 改为 `es/index.mjs`
+
 ### Fixes
 
 - 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)
