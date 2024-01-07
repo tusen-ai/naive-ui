@@ -312,7 +312,8 @@ describe('n-date-picker', () => {
     const wrapper = mount(NDatePicker, {
       attachTo: document.body,
       props: {
-        type: 'month'
+        type: 'month',
+        monthFormat: 'M'
       }
     })
 
@@ -323,7 +324,7 @@ describe('n-date-picker', () => {
       )[0].textContent
     ).toBe('1')
 
-    await wrapper.setProps({ monthStringType: '2-digit' })
+    await wrapper.setProps({ monthFormat: 'MM' })
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll(
@@ -331,7 +332,7 @@ describe('n-date-picker', () => {
       )[0].textContent
     ).toBe('01')
 
-    await wrapper.setProps({ monthStringType: 'long' })
+    await wrapper.setProps({ monthFormat: 'MMMM' })
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll(
@@ -339,7 +340,7 @@ describe('n-date-picker', () => {
       )[0].textContent
     ).toBe('January')
 
-    await wrapper.setProps({ monthStringType: 'short' })
+    await wrapper.setProps({ monthFormat: 'MMM' })
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll(
@@ -347,7 +348,7 @@ describe('n-date-picker', () => {
       )[0].textContent
     ).toBe('Jan')
 
-    await wrapper.setProps({ monthStringType: 'narrow' })
+    await wrapper.setProps({ monthFormat: 'MMMMM' })
     await wrapper.find('.n-input__input').trigger('click')
     expect(
       document.querySelectorAll(
