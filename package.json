@@ -46,14 +46,6 @@
     "web-types.json",
     "README.md"
   ],
-  "exports": {
-    ".": {
-      "import": "./es/index.mjs",
-      "require": "./lib/index.js",
-      "types": "./es/index.d.ts"
-    },
-    "./*": "./*"
-  },
   "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [
@@ -104,7 +96,7 @@
     "@vue/compiler-sfc": "^3.3.4",
     "@vue/eslint-config-standard": "^8.0.1",
     "@vue/eslint-config-typescript": "^12.0.0",
-    "@vue/server-renderer": "^3.3.4",
+    "@vue/server-renderer": "~3.3.4",
     "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.15",
     "babel-jest": "^29.6.4",
