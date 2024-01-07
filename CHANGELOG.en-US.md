@@ -25,9 +25,16 @@
 - Fix `n-split` has no color if it's not used in a card.
 - Fix `n-card` `footer-class` prop not working.
 - Fix `n-tabs` may miss over-scroll shadow if `placement` is `'left'` or `'right'`.
+- Fix `n-date-picker` with range type can input start time that is later than end time, closes [#5544](https://github.com/tusen-ai/naive-ui/issues/5544).
 
 ### Features
 
+- 🚀 Adds `n-flex` component.
+- 🚀 `n-date-picker`'s `type` prop supports `'week'`.
+- 🚀 `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260).
+- 🚀 `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- 🚀 `n-tree` adds `override-default-node-click-behavior` prop.
+- 🚀 `n-tree-select` adds `override-default-node-click-behavior` prop.
 - `n-space` adds `reverse` prop.
 - `n-input` adds `clear` method, closes [#5423](https://github.com/tusen-ai/naive-ui/issues/5423).
 - `n-time-picker` adds `'clear'` action, closes [#5334](https://github.com/tusen-ai/naive-ui/issues/5334).
@@ -35,7 +42,6 @@
 - `n-data-table` supports RTL.
 - `n-dialog` supports RTL.
 - `n-date-picker` adds `on-prev-month` `on-next-month` `on-prev-year` `on-next-year` prop, closes [#5350](https://github.com/tusen-ai/naive-ui/issues/5350).
-- `n-date-picker`'s `type` prop supports `'week'`.
 - `n-input-number` adds `input-props` prop, closes [#5450](https://github.com/tusen-ai/naive-ui/issues/5450).
 - Update `ruRU` locale.
 - `n-drawer` adds `content-class` prop.
@@ -45,13 +51,8 @@
 - `n-cascader` adds `ellipsis-tag-popover-props` prop.
 - `n-select` adds `ellipsis-tag-popover-props` prop.
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
-- `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
 - `n-avatar-group` adds `expand-on-hover` prop.
-- `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
 - `n-tabs` adds `tab-class`, `add-tab-style` and `add-tab-class` props.
-- `n-tree` adds `override-default-node-click-behavior` prop.
-- `n-tree-select` adds `override-default-node-click-behavior` prop.
-- Adds `n-flex` component.
 - `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
 
 ## 2.36.0
