@@ -240,12 +240,12 @@ export default defineComponent({
         ).then(({ valid, errors, warnings }) => {
           if (valid) {
             if (validateCallback) {
-              validateCallback(undefined, warnings)
+              validateCallback(undefined, { warnings })
             }
             resolve()
           } else {
             if (validateCallback) {
-              validateCallback(errors, warnings)
+              validateCallback(errors, { warnings })
             }
             reject(errors)
           }
@@ -305,8 +305,10 @@ export default defineComponent({
           }
           return shallowClonedRule
         })
-      const activeErrorRules = activeRules.filter((r) => !r.warningOnly)
-      const activeWarningRules = activeRules.filter((r) => r.warningOnly)
+      const activeErrorRules = activeRules.filter((r) => r.level !== 'warning')
+      const activeWarningRules = activeRules.filter(
+        (r) => r.level === 'warning'
+      )
 
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({
@@ -342,7 +344,9 @@ export default defineComponent({
       }
 
       const validationResult: FormItemInternalValidateResult = {
-        valid: true
+        valid: true,
+        errors: undefined,
+        warnings: undefined
       }
       if (activeErrorRules.length) {
         const errors = await new Promise<ValidateError[] | null>((resolve) => {

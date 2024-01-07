@@ -1,17 +1,11 @@
 <markdown>
-  # 异常值警告
+# 异常值警告
 
-  你可能需要对可能异常的值向用户显示警告，但是不希望`validate`方法抛出异常， 这种情况下`warningOnly`属性可以帮到你。
-  </markdown>
+你可能需要对可能异常的值向用户显示警告，但是不希望 `validate` 方法抛出异常， 这种情况下 `FormItemRule` 的 `level` 属性可以帮到你（`level: 'warning'`）。
+</markdown>
 
 <template>
-  <n-form
-    ref="formRef"
-    inline
-    :label-width="80"
-    :model="formValue"
-    :rules="rules"
-  >
+  <n-form ref="formRef" inline :model="formValue" :rules="rules">
     <n-form-item label="茴香豆的回有几种写法？" path="count">
       <n-input-number v-model:value="formValue.count" />
     </n-form-item>
@@ -46,7 +40,7 @@ export default defineComponent({
           },
           {
             trigger: ['input', 'blur'],
-            warningOnly: true,
+            level: 'warning',
             validator (_rule: FormItemRule, value: number) {
               if (value !== 4) {
                 return new Error('你确定吗？')
@@ -58,7 +52,7 @@ export default defineComponent({
       } satisfies FormRules,
       handleValidateClick (e: MouseEvent) {
         e.preventDefault()
-        formRef.value?.validate((errors, warnings) => {
+        formRef.value?.validate((errors, { warnings }) => {
           if (errors) {
             console.error(errors)
             message.error('校验通过了')

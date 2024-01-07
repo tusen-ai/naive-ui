@@ -52,7 +52,7 @@
 - `n-drawer` 新增 `content-class` 属性
 - `n-drawer-content` 新增 `body-class` `body-content-class` `footer-class` 和 `header-class` 属性
 - `n-tree` 新增多种 `scrollTo` 配置
-- `n-form` 为 `FormItemRule` 增加 `warningOnly` 属性，用于显示表单异常值，但不会阻塞提交
+- `n-form` 为 `FormItemRule` 增加 `level` 属性，`level: 'warning'` 用于显示表单异常值，但不会阻塞提交
 - `n-cascader` 新增 `ellipsis-tag-popover-props` 属性
 - `n-select` 新增 `ellipsis-tag-popover-props` 属性
 - `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性

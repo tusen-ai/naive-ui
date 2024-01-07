@@ -117,7 +117,11 @@ export default defineComponent({
           if (validateCallback) {
             validateCallback(
               errors?.length ? (errors as ValidateError[][]) : undefined,
-              warnings?.length ? (warnings as ValidateError[][]) : undefined
+              {
+                warnings: warnings?.length
+                  ? (warnings as ValidateError[][])
+                  : undefined
+              }
             )
           } else {
             formInvalid ? reject(errors) : resolve()

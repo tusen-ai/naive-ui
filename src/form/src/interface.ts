@@ -34,7 +34,7 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
   renderMessage?: () => VNodeChild
-  warningOnly?: boolean
+  level?: 'warning' | 'error'
 }
 
 export interface FormItemValidateOptions {
@@ -46,8 +46,8 @@ export interface FormItemValidateOptions {
 
 export interface FormItemInternalValidateResult {
   valid: boolean
-  errors?: ValidateError[]
-  warnings?: ValidateError[]
+  errors: ValidateError[] | undefined
+  warnings: ValidateError[] | undefined
 }
 
 export type FormItemInternalValidate = (
@@ -85,13 +85,17 @@ export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
 export type ShouldRuleBeApplied = (rule: FormItemRule) => boolean
 export type ValidateCallback = (
-  errors?: ValidateError[],
-  warnings?: ValidateError[]
+  errors: ValidateError[] | undefined,
+  extra: {
+    warnings: ValidateError[] | undefined
+  }
 ) => void
 
 export type FormValidateCallback = (
-  errors?: ValidateError[][],
-  warnings?: ValidateError[][]
+  errors: ValidateError[][] | undefined,
+  extra: {
+    warnings: ValidateError[][] | undefined
+  }
 ) => void
 export type FormValidate = (
   callback?: FormValidateCallback,
