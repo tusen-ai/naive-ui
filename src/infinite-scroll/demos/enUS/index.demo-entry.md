@@ -2,6 +2,8 @@
 
 Snowball, roll and roll, more and more content, can not stop.
 
+Available since `NEXT_VERSION`.
+
 ## Demos
 
 ```demo
