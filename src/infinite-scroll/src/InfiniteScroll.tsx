@@ -29,7 +29,7 @@ export default defineComponent({
         containerScrollTop + containerRef.clientHeight >=
         scrollHeight - props.distance
       ) {
-        await props.onLoad()
+        await props.onLoad?.()
       }
     }
 
