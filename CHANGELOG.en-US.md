@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix n-space vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
+- Fix `n-space` vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
 - Fix `n-data-table`'s prop `pagination`'s `default-page-size` and `default-page` not work in uncontrolled mode, closes [#5201](https://github.com/tusen-ai/naive-ui/issues/5201).
 - Fix `n-time-picker` formatting (format="HH: mm: ss. SSS") preventing modification of milliseconds in the edit box, closes [#5224](https://github.com/tusen-ai/naive-ui/issues/5224).
 - Fix `n-notification` notification clips out of screen when screen width is less than 400px wide.
@@ -52,6 +52,7 @@
 - `n-tree` adds `override-default-node-click-behavior` prop.
 - `n-tree-select` adds `override-default-node-click-behavior` prop.
 - Adds `n-flex` component.
+- `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
 
 ## 2.36.0
 

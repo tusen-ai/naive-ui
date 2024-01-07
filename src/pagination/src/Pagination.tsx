@@ -101,6 +101,7 @@ export const paginationProps = {
     default: ['pages', 'size-picker', 'quick-jumper']
   },
   to: useAdjustedTo.propTo,
+  showQuickJumpDropdown: { type: Boolean, default: true },
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -222,7 +223,8 @@ export default defineComponent({
       createPageItemsInfo(
         mergedPageRef.value,
         mergedPageCountRef.value,
-        props.pageSlot
+        props.pageSlot,
+        props.showQuickJumpDropdown
       )
     )
 
@@ -769,6 +771,9 @@ export default defineComponent({
                               ? 'fast-backward'
                               : 'fast-forward'
                             : pageItem.type
+                        if (pageItem.type !== 'page' && !pageItem.options) {
+                          return itemNode
+                        }
                         return (
                           <NPopselect
                             to={this.to}
@@ -812,7 +817,9 @@ export default defineComponent({
                               }
                             }}
                             options={
-                              pageItem.type !== 'page' ? pageItem.options : []
+                              pageItem.type !== 'page' && pageItem.options
+                                ? pageItem.options
+                                : []
                             }
                             onUpdateValue={this.handleMenuSelect}
                             scrollable
