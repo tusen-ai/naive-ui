@@ -1,4 +1,3 @@
-import { h } from 'vue'
 export default (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
     <circle fill="#FFCB4C" cx="18" cy="17.018" r="17" />

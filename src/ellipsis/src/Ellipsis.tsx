@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   ref,
   type PropType,
   computed,

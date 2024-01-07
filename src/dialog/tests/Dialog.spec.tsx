@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { NDialogProvider, useDialog, NDialog, type DialogProps } from '../index'
 
 const Provider = defineComponent({

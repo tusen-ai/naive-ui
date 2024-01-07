@@ -1,4 +1,4 @@
-import { defineComponent, computed, h } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { resolveWrappedSlot } from '../../_utils'

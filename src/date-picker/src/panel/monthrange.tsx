@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   renderSlot,
   watchEffect,
   type PropType,

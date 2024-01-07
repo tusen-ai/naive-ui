@@ -1,6 +1,5 @@
 import {
   computed,
-  h,
   defineComponent,
   type PropType,
   provide,

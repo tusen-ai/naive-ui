@@ -1,5 +1,4 @@
 import {
-  h,
   defineComponent,
   computed,
   type PropType,
@@ -180,13 +179,12 @@ export default defineComponent({
                       : vertical
                         ? {
                             marginBottom:
-                              index !== lastIndex ? verticalMargin : ''
+                            index !== lastIndex ? verticalMargin : ''
                           }
                         : rtlEnabled
                           ? {
                               marginLeft: isJustifySpace
-                                ? justify === 'space-between' &&
-                                  index === lastIndex
+                                ? justify === 'space-between' && index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex
@@ -202,8 +200,7 @@ export default defineComponent({
                             }
                           : {
                               marginRight: isJustifySpace
-                                ? justify === 'space-between' &&
-                                  index === lastIndex
+                                ? justify === 'space-between' && index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex

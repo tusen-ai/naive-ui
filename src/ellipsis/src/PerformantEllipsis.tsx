@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, mergeProps } from 'vue'
+import { defineComponent, ref, mergeProps, h } from 'vue'
 import { useMergedClsPrefix } from '../../_mixins/use-config'
 import { useStyle } from '../../_mixins'
 import Ellipsis, {

@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   nextTick,
   ref,
   computed,

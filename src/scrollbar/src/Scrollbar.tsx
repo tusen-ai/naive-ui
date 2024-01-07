@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, ref } from 'vue'
+import { defineComponent, type PropType, ref } from 'vue'
 import {
   NScrollbar,
   type ScrollbarInst as InternalScrollbarInst

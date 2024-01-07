@@ -1,4 +1,4 @@
-import { h, computed, defineComponent, type PropType } from 'vue'
+import { computed, defineComponent, type PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'

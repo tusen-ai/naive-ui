@@ -1,12 +1,10 @@
 import {
-  h,
   defineComponent,
   ref,
   inject,
   type PropType,
   TransitionGroup,
-  Transition,
-  Fragment
+  Transition
 } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'

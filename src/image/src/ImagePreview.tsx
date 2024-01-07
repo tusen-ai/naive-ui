@@ -1,7 +1,5 @@
 import {
-  h,
   defineComponent,
-  Fragment,
   ref,
   withDirectives,
   Transition,
@@ -145,10 +143,14 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection: 'verticalTop' | 'verticalBottom' =
-        `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight' =
-        `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
+      const moveVerticalDirection:
+      | 'verticalTop'
+      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection:
+      | 'horizontalLeft'
+      | 'horizontalRight' = `horizontal${
+        deltaHorizontal > 0 ? 'Left' : 'Right'
+      }`
 
       return {
         moveVerticalDirection,
@@ -644,6 +646,7 @@ export default defineComponent({
                             ref="previewWrapperRef"
                           >
                             <img
+                              key={this.previewSrc}
                               {...previewedImgProps}
                               draggable={false}
                               onMousedown={this.handlePreviewMousedown}
@@ -652,7 +655,6 @@ export default defineComponent({
                                 `${clsPrefix}-image-preview`,
                                 previewedImgProps.class
                               ]}
-                              key={this.previewSrc}
                               src={this.previewSrc}
                               ref="previewRef"
                               onDragstart={this.handleDragStart}

@@ -1,13 +1,4 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  ref,
-  Fragment,
-  toRaw,
-  watch,
-  inject
-} from 'vue'
+import { computed, defineComponent, ref, toRaw, watch, inject } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { lightTheme } from '../../themes/light'

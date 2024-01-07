@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import NBaseClear from '../../clear'
 import NBaseLoading from '../../loading'
 import { NBaseIcon } from '../../icon'

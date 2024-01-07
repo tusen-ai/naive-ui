@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, type CSSProperties, ref } from 'vue'
+import { defineComponent, type PropType, type CSSProperties, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'

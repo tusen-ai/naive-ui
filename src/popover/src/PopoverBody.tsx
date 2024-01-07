@@ -17,8 +17,7 @@ import {
   type CSSProperties,
   type VNode,
   type VNodeChild,
-  watchEffect,
-  Fragment
+  watchEffect
 } from 'vue'
 import {
   VFollower,

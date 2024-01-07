@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
 

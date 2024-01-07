@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, computed } from 'vue'
+import { defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { resolveSlot, throwError } from '../../_utils'

@@ -1,7 +1,6 @@
 import {
   computed,
   defineComponent,
-  h,
   Transition,
   type PropType,
   type CSSProperties,

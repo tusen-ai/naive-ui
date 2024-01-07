@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, computed, type PropType, inject } from 'vue'
+import { defineComponent, ref, computed, type PropType, inject } from 'vue'
 import { FilterIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import { NPopover } from '../../../popover'

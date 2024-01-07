@@ -1,12 +1,5 @@
 import { pxfy, repeat } from 'seemly'
-import {
-  computed,
-  defineComponent,
-  h,
-  type PropType,
-  Fragment,
-  mergeProps
-} from 'vue'
+import { computed, defineComponent, type PropType, mergeProps, h } from 'vue'
 import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
 import { createKey, useHoudini } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'

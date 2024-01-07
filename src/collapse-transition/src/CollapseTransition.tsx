@@ -1,10 +1,10 @@
 import {
   computed,
-  h,
   defineComponent,
   mergeProps,
   type PropType,
-  watchEffect
+  watchEffect,
+  h
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'

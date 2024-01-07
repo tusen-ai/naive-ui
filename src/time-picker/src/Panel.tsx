@@ -1,4 +1,4 @@
-import { h, ref, defineComponent, inject, type PropType, computed } from 'vue'
+import { ref, defineComponent, inject, type PropType, computed } from 'vue'
 import { NScrollbar, NBaseFocusDetector } from '../../_internal'
 import { NButton } from '../../button'
 import { getTimeUnits, time, getAmPm } from './utils'

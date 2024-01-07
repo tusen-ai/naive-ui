@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   inject,
   ref,
   type PropType,
@@ -9,7 +8,8 @@ import {
   onMounted,
   onBeforeUnmount,
   provide,
-  toRef
+  toRef,
+  h
 } from 'vue'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import type { ExtractPublicPropTypes } from '../../_utils'

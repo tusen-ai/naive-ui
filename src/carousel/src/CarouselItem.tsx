@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  ref,
-  onMounted,
-  onBeforeUnmount
-} from 'vue'
+import { defineComponent, computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import type { VNode } from 'vue'
 import { camelCase } from 'lodash-es'
 import { useConfig } from '../../_mixins'

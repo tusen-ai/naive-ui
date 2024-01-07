@@ -1,4 +1,4 @@
-import { h, computed, defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'

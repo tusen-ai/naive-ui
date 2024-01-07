@@ -1,4 +1,4 @@
-import { defineComponent, Fragment, h, type PropType } from 'vue'
+import { defineComponent, type PropType, h } from 'vue'
 import type { TreeNode } from 'treemate'
 import { warn } from '../../_utils'
 // eslint-disable-next-line import/no-cycle

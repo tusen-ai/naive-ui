@@ -1,4 +1,4 @@
-import { h, inject, defineComponent, type PropType } from 'vue'
+import { inject, defineComponent, type PropType } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { getTitleAttribute } from '../../_utils'

@@ -1,5 +1,4 @@
 import {
-  h,
   defineComponent,
   inject,
   getCurrentInstance,

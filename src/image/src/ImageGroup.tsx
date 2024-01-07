@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   ref,
   provide,
   getCurrentInstance,

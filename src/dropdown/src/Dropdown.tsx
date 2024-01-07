@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   computed,
   ref,
   toRef,
@@ -8,7 +7,8 @@ import {
   watch,
   provide,
   type Ref,
-  mergeProps
+  mergeProps,
+  h
 } from 'vue'
 import { createTreeMate, type Key, type TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'

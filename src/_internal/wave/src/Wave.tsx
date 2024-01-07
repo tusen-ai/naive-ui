@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onBeforeUnmount, nextTick, toRef } from 'vue'
+import { defineComponent, ref, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 

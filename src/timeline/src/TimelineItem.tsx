@@ -3,7 +3,6 @@ import {
   computed,
   inject,
   type PropType,
-  h,
   type CSSProperties
 } from 'vue'
 import {

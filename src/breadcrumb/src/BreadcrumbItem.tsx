@@ -1,10 +1,10 @@
 import {
-  h,
   defineComponent,
   inject,
   type ExtractPropTypes,
   computed,
-  type PropType
+  type PropType,
+  h
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'

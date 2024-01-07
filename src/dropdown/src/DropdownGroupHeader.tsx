@@ -1,4 +1,4 @@
-import { defineComponent, h, inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { render } from '../../_utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
 import type { DropdownMixedOption } from './interface'

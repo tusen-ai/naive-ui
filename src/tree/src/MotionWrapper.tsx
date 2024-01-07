@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { pxfy } from 'seemly'
 import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
 import { type TmNode } from './interface'

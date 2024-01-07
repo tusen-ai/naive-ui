@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  h,
   defineComponent,
-  Fragment,
   type PropType,
   ref,
   computed,

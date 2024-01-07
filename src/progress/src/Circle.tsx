@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, type CSSProperties } from 'vue'
+import { defineComponent, type PropType, type CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,

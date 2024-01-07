@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { menuInjectionKey } from './context'
 
 export default defineComponent({

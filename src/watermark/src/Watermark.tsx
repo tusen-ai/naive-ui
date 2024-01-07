@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, ref, watchEffect } from 'vue'
+import { defineComponent, type PropType, ref, watchEffect } from 'vue'
 import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'

@@ -1,7 +1,5 @@
 import {
-  Fragment,
   ref,
-  h,
   reactive,
   Teleport,
   defineComponent,

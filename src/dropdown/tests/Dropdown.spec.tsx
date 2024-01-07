@@ -1,6 +1,6 @@
 import type { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
 import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
+import { h, type ComponentPublicInstance, nextTick, type VNodeChild } from 'vue'
 import { NIcon } from '../../icon'
 import type { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'

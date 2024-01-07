@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 export const MaximizeIcon = defineComponent({
   render () {

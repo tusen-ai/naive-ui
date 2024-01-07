@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { type Item } from './interface'
 
 export default defineComponent({

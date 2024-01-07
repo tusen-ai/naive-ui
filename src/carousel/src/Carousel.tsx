@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
-  h,
   defineComponent,
   ref,
   cloneVNode,

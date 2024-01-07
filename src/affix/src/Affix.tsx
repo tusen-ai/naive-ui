@@ -5,8 +5,7 @@ import {
   onBeforeUnmount,
   defineComponent,
   type CSSProperties,
-  type PropType,
-  h
+  type PropType
 } from 'vue'
 import { unwrapElement, beforeNextFrameOnce } from 'seemly'
 import { useConfig, useStyle } from '../../_mixins'

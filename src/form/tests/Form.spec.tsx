@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { NInput } from '../../input'
 import { NForm, NFormItem, type FormInst } from '../index'
 import { type FormValidateCallback } from '../src/interface'

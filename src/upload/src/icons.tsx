@@ -1,5 +1,3 @@
-import { h } from 'vue'
-
 /**
  * Since image is too large compared with normal icons, we keep it inside upload
  * now.

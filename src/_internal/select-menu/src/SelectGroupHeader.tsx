@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, inject, type Ref } from 'vue'
+import { defineComponent, type PropType, inject, type Ref } from 'vue'
 import type { TreeNode } from 'treemate'
 import type { SelectGroupOption } from '../../../select/src/interface'
 import { render } from '../../../_utils'

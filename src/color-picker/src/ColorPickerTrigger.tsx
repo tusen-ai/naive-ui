@@ -1,5 +1,5 @@
 import { type HSLA, toHslaString } from 'seemly'
-import { defineComponent, type PropType, h, inject } from 'vue'
+import { defineComponent, type PropType, inject } from 'vue'
 import { colorPickerInjectionKey } from './context'
 
 export default defineComponent({

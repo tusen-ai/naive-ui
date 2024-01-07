@@ -1,11 +1,9 @@
 import {
   computed,
   defineComponent,
-  h,
   ref,
   type PropType,
   type CSSProperties,
-  Fragment,
   toRef
 } from 'vue'
 import {

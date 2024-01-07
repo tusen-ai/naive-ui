@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-dynamic-delete */
 import {
-  Fragment,
-  h,
   reactive,
   ref,
   Teleport,

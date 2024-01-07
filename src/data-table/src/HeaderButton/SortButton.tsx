@@ -1,4 +1,4 @@
-import { defineComponent, type PropType, h, computed, inject } from 'vue'
+import { defineComponent, type PropType, computed, inject } from 'vue'
 import { ArrowDownIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
 import RenderSorter from './RenderSorter'

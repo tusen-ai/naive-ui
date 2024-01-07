@@ -4,7 +4,6 @@ import {
   type CSSProperties,
   defineComponent,
   Fragment,
-  h,
   nextTick,
   type PropType,
   ref,

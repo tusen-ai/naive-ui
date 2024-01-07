@@ -1,5 +1,4 @@
 import {
-  h,
   defineComponent,
   computed,
   provide,
@@ -7,7 +6,6 @@ import {
   ref,
   type PropType,
   type CSSProperties,
-  Fragment,
   Teleport,
   nextTick,
   type InputHTMLAttributes

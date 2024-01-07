@@ -1,6 +1,4 @@
 import {
-  Fragment,
-  h,
   ref,
   Teleport,
   defineComponent,

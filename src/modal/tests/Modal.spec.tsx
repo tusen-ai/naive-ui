@@ -1,4 +1,4 @@
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { type ModalProps, NModal } from '../index'
 import { NButton } from '../../button'

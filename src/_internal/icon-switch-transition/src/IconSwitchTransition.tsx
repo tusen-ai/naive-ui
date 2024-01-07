@@ -1,4 +1,4 @@
-import { h, Transition, defineComponent } from 'vue'
+import { Transition, defineComponent } from 'vue'
 import { useIsMounted } from 'vooks'
 
 export default defineComponent({

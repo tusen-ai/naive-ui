@@ -1,4 +1,4 @@
-import { h, defineComponent, type VNode, type PropType, onMounted } from 'vue'
+import { defineComponent, type VNode, type PropType, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
 import { NButton, NxButton } from '../../../button'

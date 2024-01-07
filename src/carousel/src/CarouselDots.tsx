@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onBeforeUpdate } from 'vue'
+import { defineComponent, ref, onBeforeUpdate } from 'vue'
 import type { PropType } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'

@@ -1,5 +1,4 @@
 import {
-  h,
   Transition,
   computed,
   defineComponent,

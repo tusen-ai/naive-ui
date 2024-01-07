@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  h,
   toRef,
   watch,
   onMounted,

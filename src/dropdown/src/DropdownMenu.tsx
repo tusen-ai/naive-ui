@@ -1,7 +1,6 @@
 import {
   computed,
   defineComponent,
-  h,
   inject,
   type PropType,
   provide,

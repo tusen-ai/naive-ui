@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  h,
   ref,
   defineComponent,
   inject,
@@ -9,8 +8,7 @@ import {
   onUnmounted,
   type PropType,
   type CSSProperties,
-  computed,
-  Fragment
+  computed
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, type VirtualListInst, VResizeObserver } from 'vueuc'
@@ -804,8 +802,8 @@ export default defineComponent({
                     }
                     return (
                       <td
-                        {...resolvedCellProps}
                         key={colKey}
+                        {...resolvedCellProps}
                         style={[
                           {
                             textAlign: column.align || undefined,

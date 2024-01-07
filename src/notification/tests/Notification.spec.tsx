@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { defineComponent, h, ref, type Ref, nextTick, onMounted } from 'vue'
+import { defineComponent, ref, type Ref, nextTick, onMounted } from 'vue'
 import {
   NNotificationProvider,
   useNotification,

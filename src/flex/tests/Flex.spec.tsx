@@ -1,13 +1,9 @@
 import { mount, type VueWrapper } from '@vue/test-utils'
-import { h, Fragment, createCommentVNode } from 'vue'
+import { createCommentVNode } from 'vue'
 import { NFlex } from '../index'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
-  return (
-    wrapper.findAll('div').filter((v) => {
-      return !v.classes().includes('n-flex')
-    }) || []
-  )
+  return Array.from(wrapper.find('.n-flex').element.childNodes)
 }
 
 describe('n-flex', () => {
@@ -32,7 +28,7 @@ describe('n-flex', () => {
         return <NFlex size="large">{{ default: () => 'kirby' }}</NFlex>
       }
     })
-    expect(wrapper.attributes('style')).toContain('margin')
+    expect(wrapper.attributes('style')).toContain('gap')
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -92,15 +88,15 @@ describe('n-flex', () => {
     wrapper.unmount()
   })
 
-  it('should not render while v-if is false', () => {
+  it('should not render comment node', () => {
     const wrapper = mount({
       render () {
         return <NFlex>{{ default: () => false && 'div' }}</NFlex>
       }
     })
-    const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toEqual(0)
     expect(wrapper.html()).toMatchSnapshot()
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes.length).toEqual(1) // Comment node
   })
 
   it('should work with `wrap` prop', async () => {

@@ -5,7 +5,6 @@
     "rootDir": ".",
     "outDir": "../es",
     "module": "ES6",
-    "target": "ES6",
-    "jsx": "react"
+    "target": "ES6"
   }
 }

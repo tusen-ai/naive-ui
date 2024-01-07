@@ -1,5 +1,4 @@
 import {
-  h,
   inject,
   computed,
   defineComponent,

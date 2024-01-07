@@ -1,11 +1,4 @@
-import {
-  h,
-  ref,
-  onBeforeUnmount,
-  defineComponent,
-  Transition,
-  toRef
-} from 'vue'
+import { ref, onBeforeUnmount, defineComponent, Transition, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import type { MenuMaskRef } from './interface'
 import style from './styles/index.cssr'

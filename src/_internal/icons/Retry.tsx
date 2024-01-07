@@ -1,4 +1,3 @@
-import { h } from 'vue'
 import { replaceable } from './replaceable'
 
 export default replaceable(

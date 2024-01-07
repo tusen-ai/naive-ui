@@ -1,4 +1,4 @@
-import { h, defineComponent, watchEffect, type PropType } from 'vue'
+import { defineComponent, watchEffect, type PropType } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,

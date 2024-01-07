@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, inject, type PropType } from 'vue'
+import { defineComponent, ref, inject, type PropType } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'
 import { NScrollbar, type ScrollbarInst } from '../../_internal'

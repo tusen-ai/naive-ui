@@ -1,5 +1,3 @@
-import { h } from 'vue'
-
 export default (
   <svg
     viewBox="0 0 24 24"

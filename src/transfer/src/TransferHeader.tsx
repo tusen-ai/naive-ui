@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import { defineComponent, inject, type PropType } from 'vue'
 import { NButton } from '../../button'
 import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'

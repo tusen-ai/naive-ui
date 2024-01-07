@@ -1,4 +1,4 @@
-import { defineComponent, h, watchEffect } from 'vue'
+import { defineComponent, watchEffect } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'

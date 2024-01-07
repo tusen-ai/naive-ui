@@ -1,7 +1,6 @@
 import {
   computed,
   defineComponent,
-  h,
   nextTick,
   onBeforeUnmount,
   onMounted,

@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useLocale } from '../../_mixins'
 

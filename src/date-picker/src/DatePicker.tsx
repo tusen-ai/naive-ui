@@ -1,5 +1,4 @@
 import {
-  h,
   defineComponent,
   ref,
   Transition,
@@ -1015,9 +1014,12 @@ export default defineComponent({
     const renderPanel = (): VNode => {
       const { type } = this
       return type === 'datetime' ? (
-        <DatetimePanel {...commonPanelProps}>{$slots}</DatetimePanel>
+        <DatetimePanel key={type} {...commonPanelProps}>
+          {$slots}
+        </DatetimePanel>
       ) : type === 'daterange' ? (
         <DaterangePanel
+          key={type}
           {...commonPanelProps}
           defaultCalendarStartTime={this.defaultCalendarStartTime}
           defaultCalendarEndTime={this.defaultCalendarEndTime}
@@ -1027,6 +1029,7 @@ export default defineComponent({
         </DaterangePanel>
       ) : type === 'datetimerange' ? (
         <DatetimerangePanel
+          key={type}
           {...commonPanelProps}
           defaultCalendarStartTime={this.defaultCalendarStartTime}
           defaultCalendarEndTime={this.defaultCalendarEndTime}
@@ -1035,13 +1038,13 @@ export default defineComponent({
           {$slots}
         </DatetimerangePanel>
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
-        <MonthPanel {...commonPanelProps} type={type} key={type} />
+        <MonthPanel key={type} {...commonPanelProps} type={type} />
       ) : type === 'monthrange' ||
         type === 'yearrange' ||
         type === 'quarterrange' ? (
-        <MonthRangePanel {...commonPanelProps} type={type} />
+        <MonthRangePanel key={type} {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps} type={type}>
+        <DatePanel key={type} {...commonPanelProps} type={type}>
           {$slots}
         </DatePanel>
           )

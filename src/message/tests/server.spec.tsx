@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import { h, createSSRApp, defineComponent } from 'vue'
+import { createSSRApp, defineComponent } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
 import { NMessageProvider, useMessage } from '../..'

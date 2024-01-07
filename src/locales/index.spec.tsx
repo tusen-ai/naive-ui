@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, ref, onMounted } from 'vue'
+import { defineComponent, type PropType, ref, onMounted } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   ruRU,

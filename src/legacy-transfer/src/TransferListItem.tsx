@@ -1,4 +1,4 @@
-import { h, inject, defineComponent } from 'vue'
+import { inject, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { transferInjectionKey } from './interface'

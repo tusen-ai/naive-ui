@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { listInjectionKey } from './List'
 

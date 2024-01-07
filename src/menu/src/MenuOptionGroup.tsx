@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  provide,
-  type PropType,
-  Fragment,
-  inject
-} from 'vue'
+import { defineComponent, provide, type PropType, inject } from 'vue'
 import { render } from '../../_utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'

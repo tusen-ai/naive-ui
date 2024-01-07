@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 import {
-  h,
   ref,
   toRef,
   computed,

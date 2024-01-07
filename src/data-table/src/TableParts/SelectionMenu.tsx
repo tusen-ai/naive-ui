@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, computed, type Ref } from 'vue'
+import { defineComponent, inject, computed, type Ref } from 'vue'
 import { NDropdown } from '../../../dropdown'
 import type { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'

@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, type PropType, ref } from 'vue'
+import { computed, defineComponent, type PropType, ref } from 'vue'
 import { off, on } from 'evtd'
 import { type RGBA, toRgbaString } from 'seemly'
 import { normalizeAlpha } from './utils'

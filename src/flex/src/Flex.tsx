@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, type PropType } from 'vue'
+import { defineComponent, computed, type PropType } from 'vue'
 import { depx, getGap } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, flatten, getSlot } from '../../_utils'

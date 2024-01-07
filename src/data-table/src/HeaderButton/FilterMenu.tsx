@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, ref, computed, inject } from 'vue'
+import { defineComponent, type PropType, ref, computed, inject } from 'vue'
 import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
 import { NRadio, NRadioGroup } from '../../../radio'
 import { NButton } from '../../../button'

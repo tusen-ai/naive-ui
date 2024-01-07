@@ -1,4 +1,4 @@
-import { defineComponent, inject, h, computed } from 'vue'
+import { defineComponent, inject, computed } from 'vue'
 import { resolveSlotWithProps } from '../../_utils'
 import { inputInjectionKey } from './interface'
 import { len } from './utils'

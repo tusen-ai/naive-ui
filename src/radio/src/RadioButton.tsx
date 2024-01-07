@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { type ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
 import { setup, radioBaseProps } from './use-radio'
 

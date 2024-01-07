@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, ref, type CSSProperties } from 'vue'
+import { defineComponent, computed, ref, type CSSProperties } from 'vue'
 import { NAffix } from '../../affix'
 import { affixProps, affixPropKeys } from '../../affix/src/Affix'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

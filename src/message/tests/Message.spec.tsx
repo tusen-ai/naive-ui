@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { sleep } from 'seemly'
 import { NMessageProvider, useMessage } from '../index'
 

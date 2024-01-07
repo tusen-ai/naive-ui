@@ -14,7 +14,7 @@ import {
   type RGB,
   type HSL
 } from 'seemly'
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { NInputGroup } from '../../input'
 import ColorInputUnit from './ColorInputUnit'
 import type { ColorPickerMode } from './utils'

@@ -1,9 +1,7 @@
 import {
-  h,
   defineComponent,
   computed,
   type CSSProperties,
-  Fragment,
   type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'

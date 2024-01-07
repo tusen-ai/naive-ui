@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, ref, defineComponent, inject, computed, watchEffect } from 'vue'
+import { ref, defineComponent, inject, computed, watchEffect } from 'vue'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'

@@ -1,7 +1,6 @@
 import {
   defineComponent,
   computed,
-  h,
   type PropType,
   type CSSProperties
 } from 'vue'

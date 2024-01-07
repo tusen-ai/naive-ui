@@ -1,7 +1,6 @@
 import {
   nextTick,
   Transition,
-  h,
   defineComponent,
   type PropType,
   ref,

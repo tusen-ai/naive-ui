@@ -1,4 +1,4 @@
-import { h, defineComponent, toRef } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import type { ExtractPublicPropTypes } from '../../../_utils'
 import NIconSwitchTransition from '../../icon-switch-transition'

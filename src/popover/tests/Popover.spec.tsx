@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { defineComponent, h, Fragment, nextTick } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NPopover, type PopoverInst } from '../index'
 import { createId } from 'seemly'

@@ -1,5 +1,4 @@
 import {
-  h,
   Transition,
   ref,
   inject,

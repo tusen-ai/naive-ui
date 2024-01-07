@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 
@@ -25,7 +25,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-dragger`,
-            (mergedDisabled || maxReached) && `${mergedClsPrefix}-upload-dragger--disabled`
+            (mergedDisabled || maxReached) &&
+              `${mergedClsPrefix}-upload-dragger--disabled`
           ]}
         >
           {slots}

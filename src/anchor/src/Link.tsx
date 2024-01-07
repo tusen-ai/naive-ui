@@ -1,4 +1,4 @@
-import { h, toRef, ref, inject, defineComponent, watch, type Ref } from 'vue'
+import { toRef, ref, inject, defineComponent, watch, type Ref } from 'vue'
 import { useMemo } from 'vooks'
 import {
   useInjectionCollection,

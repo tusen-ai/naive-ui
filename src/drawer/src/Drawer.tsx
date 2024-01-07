@@ -1,5 +1,4 @@
 import {
-  h,
   ref,
   type PropType,
   defineComponent,

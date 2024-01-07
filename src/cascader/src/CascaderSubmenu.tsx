@@ -1,4 +1,4 @@
-import { h, ref, defineComponent, inject, type PropType, computed } from 'vue'
+import { ref, defineComponent, inject, type PropType, computed } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
 import NCascaderOption from './CascaderOption'
 import { NScrollbar } from '../../_internal'

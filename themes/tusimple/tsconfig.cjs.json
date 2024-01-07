@@ -4,8 +4,7 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "module": "CommonJS",
-    "target": "ES6",
-    "jsx": "react"
+    "target": "ES6"
   },
   "references": [{ "path": "../../src/tsconfig.cjs.json" }]
 }

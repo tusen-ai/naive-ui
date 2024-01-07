@@ -1,4 +1,4 @@
-import { defineComponent, type PropType, type VNodeChild, h } from 'vue'
+import { defineComponent, type PropType, type VNodeChild } from 'vue'
 import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
 import NEllipsis from '../../../ellipsis/src/Ellipsis'

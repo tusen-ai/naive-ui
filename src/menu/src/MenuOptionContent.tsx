@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { computed, defineComponent, inject, type PropType } from 'vue'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'

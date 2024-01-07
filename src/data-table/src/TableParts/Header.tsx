@@ -1,12 +1,4 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  type VNodeChild,
-  Fragment,
-  type VNode,
-  ref
-} from 'vue'
+import { defineComponent, inject, type VNodeChild, type VNode, ref } from 'vue'
 import { happensIn, pxfy } from 'seemly'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
