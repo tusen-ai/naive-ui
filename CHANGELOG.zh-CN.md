@@ -33,12 +33,12 @@
 
 ### Features
 
-- 🚀 新增 `n-flex` 组件
-- 🚀 `n-date-picker` 的 `type` 属性支持 `'week'`
-- 🚀 `n-data-table` 新增 `downloadCsv` 方法，关闭 [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
-- 🚀 `n-date-picker` 新增 `month-format`、`year-format` 和 `quarter-format` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
-- 🚀 `n-tree` 新增 `override-default-node-click-behavior` 属性
-- 🚀 `n-tree-select` 新增 `override-default-node-click-behavior` 属性
+- 🌟 新增 `n-flex` 组件
+- 🌟 `n-date-picker` 的 `type` 属性支持 `'week'`
+- 🌟 `n-data-table` 新增 `downloadCsv` 方法，关闭 [#4260](https://github.com/tusen-ai/naive-ui/issues/4260)
+- 🌟 `n-date-picker` 新增 `month-format`、`year-format` 和 `quarter-format` 属性，关闭 [#4891](https://github.com/tusen-ai/naive-ui/issues/4891)
+- 🌟 `n-tree` 新增 `override-default-node-click-behavior` 属性
+- 🌟 `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - `n-space` 新增 `reverse` 属性
 - `n-input` 新增 `clear` 方法，关闭 [#5423](https://github.com/tusen-ai/naive-ui/issues/5423)
 - `n-time-picker` 新增 `'clear'` `action`，关闭 [#5334](https://github.com/tusen-ai/naive-ui/issues/5334)

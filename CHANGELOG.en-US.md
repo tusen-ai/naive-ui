@@ -33,12 +33,12 @@
 
 ### Features
 
-- 🚀 Adds `n-flex` component.
-- 🚀 `n-date-picker`'s `type` prop supports `'week'`.
-- 🚀 `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260).
-- 🚀 `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891).
-- 🚀 `n-tree` adds `override-default-node-click-behavior` prop.
-- 🚀 `n-tree-select` adds `override-default-node-click-behavior` prop.
+- 🌟 Adds `n-flex` component.
+- 🌟 `n-date-picker`'s `type` prop supports `'week'`.
+- 🌟 `n-data-table` adds `downloadCsv` method, closes [#4260](https://github.com/tusen-ai/naive-ui/issues/4260).
+- 🌟 `n-date-picker` adds `month-format`, `year-format` and `quarter-format` props, closes [#4891](https://github.com/tusen-ai/naive-ui/issues/4891).
+- 🌟 `n-tree` adds `override-default-node-click-behavior` prop.
+- 🌟 `n-tree-select` adds `override-default-node-click-behavior` prop.
 - `n-space` adds `reverse` prop.
 - `n-input` adds `clear` method, closes [#5423](https://github.com/tusen-ai/naive-ui/issues/5423).
 - `n-time-picker` adds `'clear'` action, closes [#5334](https://github.com/tusen-ai/naive-ui/issues/5334).
