@@ -39,7 +39,7 @@ render-debug.vue
 | default-expand-all | `boolean` | `false` | 默认展开全部 |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开节点的 key |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | NEXT_VERSION |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |  |
 | indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |  |
 | filterable | `boolean` | `false` | 是否可过滤 |  |
@@ -53,7 +53,7 @@ render-debug.vue
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
-| override-default-node-click-behavoir | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | NEXT_VERSION |
+| override-default-node-click-behavoir | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
 | render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 | 2.30.7 |

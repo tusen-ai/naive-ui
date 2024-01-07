@@ -45,10 +45,10 @@ panel.vue
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |  |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
-| month-format | `string` | `'M'` | Format of month item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| month-format | `string` | `'M'` | Format of month item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | panel | `boolean` | `false` | Whether to use date-picker as panel. | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
-| quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
@@ -57,15 +57,15 @@ panel.vue
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
-| year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | on-clear | `() => void` | `undefined` | On clear callback. | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | On confirm callback. | 2.28.3 |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
-| on-next-month | `() => void` | `undefined` | Callback when click next month button. | NEXT_VERSION |
-| on-next-year | `() => void` | `undefined` | Callback when click next year button. | NEXT_VERSION |
-| on-prev-month | `() => void` | `undefined` | Callback when click previous month button. | NEXT_VERSION |
-| on-prev-year | `() => void` | `undefined` | Callback when click previous year button. | NEXT_VERSION |
+| on-next-month | `() => void` | `undefined` | Callback when click next month button. | 2.37.0 |
+| on-next-year | `() => void` | `undefined` | Callback when click next year button. | 2.37.0 |
+| on-prev-month | `() => void` | `undefined` | Callback when click previous month button. | 2.37.0 |
+| on-prev-year | `() => void` | `undefined` | Callback when click previous year button. | 2.37.0 |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
 
 ### Date Type Props

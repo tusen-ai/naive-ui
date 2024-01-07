@@ -42,7 +42,7 @@ pnpm run build:site
 - 不要在英文文档中使用中文标点
 - 不要写在已经发布的版本中
 - rebase 分支时注意是否放到已发布的版本中
-- 添加 NEXT_VERSION 到 API 表格的版本上
+- 添加 2.37.0 到 API 表格的版本上
 
 例如:
 
@@ -50,12 +50,12 @@ pnpm run build:site
 英文 API 表格：
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| example | `any` | `undefined` | Need period. | NEXT_VERSION |
+| example | `any` | `undefined` | Need period. | 2.37.0 |
 
 中文 API 表格：
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| example | `any` | `undefined` | 描述不要加句号 | NEXT_VERSION |
+| example | `any` | `undefined` | 描述不要加句号 | 2.37.0 |
 
 English Changelog:
 - Some changes, period needed.
@@ -70,7 +70,7 @@ Changelog 位置：
 
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.37.0
 
 ### Feats
 

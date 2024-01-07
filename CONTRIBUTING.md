@@ -42,7 +42,7 @@ pnpm run build:site
 - Don't use Chinese punctuation in English docs.
 - Don't write changelogs in a released version.
 - When rebase the branch, pay attention to whether it is placed in the released version.
-- Add NEXT_VERSION to the version of the API table.
+- Add 2.37.0 to the version of the API table.
 
 For Example:
 
@@ -50,12 +50,12 @@ For Example:
 English API table:
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| example | `any` | `undefined` | Need period. | NEXT_VERSION |
+| example | `any` | `undefined` | Need period. | 2.37.0 |
 
 Chinese API table:
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| example | `any` | `undefined` | 描述不要加句号 | NEXT_VERSION |
+| example | `any` | `undefined` | 描述不要加句号 | 2.37.0 |
 
 English Changelog:
 - Some changes, period needed.
@@ -70,7 +70,7 @@ Changelog position:
 
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.37.0
 
 ### Feats
 
