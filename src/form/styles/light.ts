@@ -24,7 +24,8 @@ export const self = (vars: ThemeCommonVars) => {
     asteriskColor: errorColor,
     feedbackTextColorError: errorColor,
     feedbackTextColorWarning: warningColor,
-    feedbackTextColor: textColor3
+    feedbackTextColor: textColor3,
+    descTextColor: textColor3
   }
 }
 

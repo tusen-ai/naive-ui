@@ -28,8 +28,16 @@
     :rules="rules"
     :size="size"
   >
-    <n-form-item label="姓名" path="user.name">
+    <n-form-item
+      label="姓名"
+      path="user.name"
+      desc="你的名字"
+      desc-class="name-desc"
+    >
       <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+      <!-- <template #desc>
+        <span :style="{ color:'red' }">测试</span>
+      </template> -->
     </n-form-item>
     <n-form-item label="年龄" path="user.age">
       <n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
@@ -100,3 +108,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.name-desc {
+  color: grey;
+  font-size: 12px;
+}
+</style>

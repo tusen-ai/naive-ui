@@ -1,4 +1,7 @@
 export default {
+  descFontSizeSmall: '12px',
+  descFontSizeMedium: '13px',
+  descFontSizeLarge: '13px',
   feedbackPadding: '4px 0 0 2px',
   feedbackHeightSmall: '24px',
   feedbackHeightMedium: '24px',

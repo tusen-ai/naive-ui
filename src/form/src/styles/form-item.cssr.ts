@@ -18,6 +18,8 @@ import { fadeDownTransition } from '../../../_styles/transitions/fade-down.cssr'
 // --n-feedback-text-color-error
 // --n-label-text-align
 // --n-label-padding
+// --n-desc-text-color
+// --n-desc-font-size
 export default cB('form-item', `
   display: grid;
   line-height: var(--n-line-height);
@@ -52,6 +54,12 @@ export default cB('form-item', `
   cB('form-item-blank', `
     grid-area: blank;
     min-height: var(--n-blank-height);
+  `),
+  cB('form-item-desc', `
+    font-size: var(--n-desc-font-size);
+    color: var(--n-desc-text-color);
+    line-height: 1.25;
+    box-sizing: border-box;
   `),
   cM('auto-label-width', [
     cB('form-item-label', 'white-space: nowrap;')
