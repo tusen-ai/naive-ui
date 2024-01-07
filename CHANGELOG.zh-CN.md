@@ -54,6 +54,7 @@
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - 新增 `n-flex` 组件
 - `n-pagination` 新增 `show-quick-jump-dropdown` 属性，关闭 [#5251](https://github.com/tusen-ai/naive-ui/issues/5251)
+- 新增 `n-infinite-scroll` 组件
 
 ## 2.36.0
 
