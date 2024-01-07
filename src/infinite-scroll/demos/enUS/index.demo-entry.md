@@ -8,6 +8,8 @@ Available since `NEXT_VERSION`.
 
 ```demo
 basic.vue
+delay.vue
+chat.vue
 ```
 
 ## API

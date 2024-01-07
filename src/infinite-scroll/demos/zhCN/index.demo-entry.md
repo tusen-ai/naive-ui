@@ -9,6 +9,7 @@
 ```demo
 basic.vue
 delay.vue
+chat.vue
 ```
 
 ## API
