@@ -1,9 +1,14 @@
 <markdown>
-  # 基础
+  # 延时
 </markdown>
 
 <template>
-  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
+  <n-infinite-scroll
+    style="height: 240px"
+    :distance="10"
+    :delay="1000"
+    @load="handleLoad"
+  >
     <div v-for="i in count" :key="i" class="item">
       {{ i }}
     </div>
