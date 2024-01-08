@@ -2,10 +2,16 @@
 
 ## 2.37.1
 
+### Fixes
+
+- Click clear button on components with popup may trigger reopen behaviors.
+
 ### Features
 
 - `n-collapse` adds `trigger-areas` prop.
-- `n-date-picker`'s `is-date-disabled` callback prop support get detail info of date/year/month/quarter button as parameter, closes [#4649](https://github.com/tusen-ai/naive-ui/issues/4649).
+- `n-date-picker`'s `is-date-disabled` callback prop supports get detail info of date/year/month/quarter button as parameter, closes [#4649](https://github.com/tusen-ai/naive-ui/issues/4649).
+- `n-auto-complete` adds `empty` slot.
+- `n-auto-complete` adds `show-empty` prop.
 
 ## 2.37.0
 

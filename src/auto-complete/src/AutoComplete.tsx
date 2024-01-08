@@ -91,6 +91,7 @@ export const autoCompleteProps = {
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
+  showEmpty: Boolean,
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -168,7 +169,7 @@ export default defineComponent({
       return (
         mergedShowOptionsRef.value &&
         canBeActivatedRef.value &&
-        !!selectOptionsRef.value.length
+        (props.showEmpty ? true : !!selectOptionsRef.value.length)
       )
     })
     const treeMateRef = computed(() =>
@@ -432,7 +433,9 @@ export default defineComponent({
                               renderOption={this.renderOption}
                               size="medium"
                               onToggle={this.handleToggle}
-                            />,
+                            >
+                              {{ empty: () => this.$slots.empty?.() }}
+                            </NInternalSelectMenu>,
                             [
                               [
                                 clickoutside,

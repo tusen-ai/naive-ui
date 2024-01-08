@@ -2,10 +2,16 @@
 
 ## 2.37.1
 
+### Fixes
+
+- 点击具有弹出菜单的组件的清空按钮时，可能会触发菜单的重复出现
+
 ### Features
 
 - `n-collapse` 新增 `trigger-areas` 属性
 - `n-date-picker` 的 `is-date-disabled` 回调函数支持获取对应年、月、日、季度按钮的具体信息，关闭 [#4649](https://github.com/tusen-ai/naive-ui/issues/4649)
+- `n-auto-complete` 新增 `empty` 插槽
+- `n-auto-complete` 新增 `show-empty` 属性
 
 ## 2.37.0
 
