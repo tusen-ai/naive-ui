@@ -48,7 +48,7 @@ type TypeSafeModalReactive = ModalReactive & {
 }
 
 export interface ModalApiInjection {
-  destroyAll: () => void
+  destroy: () => void
   create: (options: ModalOptions) => ModalReactive
 }
 
@@ -101,7 +101,7 @@ export const NModalProvider = defineComponent({
       )
     }
 
-    function destroyAll (): void {
+    function destroy (): void {
       Object.values(modalInstRefs).forEach((modalInstRef) => {
         modalInstRef.hide()
       })
@@ -109,7 +109,7 @@ export const NModalProvider = defineComponent({
 
     const api = {
       create,
-      destroyAll
+      destroy
     }
 
     provide(modalApiInjectionKey, api)
