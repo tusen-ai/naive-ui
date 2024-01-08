@@ -323,7 +323,11 @@ describe('n-form', () => {
         .find('input')
         .setValue('value')
 
-      await expect(formRef.validate()).resolves.toBeUndefined()
+      await expect(formRef.validate()).resolves.toMatchObject({
+        warnings: [
+          [{ field: 'warningOnly', fieldValue: '', message: 'warning!' }]
+        ]
+      })
       expect(
         wrapper
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
@@ -342,7 +346,9 @@ describe('n-form', () => {
         .find('input')
         .setValue('value')
 
-      await expect(formRef.validate()).resolves.toBeUndefined()
+      await expect(formRef.validate()).resolves.toMatchObject({
+        warnings: undefined
+      })
       expect(
         wrapper
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
@@ -448,9 +454,11 @@ describe('n-form', () => {
       async function validate (): Promise<Parameters<FormValidateCallback>> {
         return await new Promise<Parameters<FormValidateCallback>>(
           (resolve) => {
-            void formRef.validate((errs, { warnings }) => {
-              resolve([errs, { warnings }])
-            })
+            void formRef
+              .validate((errs, { warnings }) => {
+                resolve([errs, { warnings }])
+              })
+              .catch(() => {})
           }
         )
       }
