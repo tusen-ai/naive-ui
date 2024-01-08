@@ -123,9 +123,8 @@ export default defineComponent({
                   : undefined
               }
             )
-          } else {
-            formInvalid ? reject(errors) : resolve()
           }
+          formInvalid ? reject(errors) : resolve()
         })
       })
     }

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-form` 的 `validate`方法无法正常结束运行
+
 ## 2.37.0
 
 ### Breaking Changes
