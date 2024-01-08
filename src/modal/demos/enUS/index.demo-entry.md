@@ -13,6 +13,7 @@ preset-card.vue
 preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
+reactive.vue
 ```
 
 ## API

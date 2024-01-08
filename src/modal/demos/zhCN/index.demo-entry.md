@@ -6,6 +6,29 @@
 
 ```demo
 basic.vue
+controlled.vue
+mask-closable.vue
+custom-position.vue
+preset-card.vue
+preset-confirm.vue
+preset-confirm-slot.vue
+transform-origin.vue
+reactive.vue
+nested-debug.vue
+a11y-debug.vue
+raw-debug.vue
+dark-1-debug.vue
+dark-2-debug.vue
+dark-3-debug.vue
+dark-4-debug.vue
+dark-5-debug.vue
+drawer-debug.vue
+dark-6-debug.vue
+dark-7-debug.vue
+dark-8-debug.vue
+dark-9-debug.vue
+dark-10-debug.vue
+mask-click-debug.vue
 ```
 
 ## API

@@ -14,21 +14,16 @@ import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import {
-  NModalEnvironment,
-  type exposedModalEnvProps
-} from './ModalEnvironment'
+import { NModalEnvironment } from './ModalEnvironment'
 import {
   modalApiInjectionKey,
   modalProviderInjectionKey,
   modalReactiveListInjectionKey
 } from './context'
+import { type modalProps } from './Modal'
 
 export type ModalOptions = Mutable<
-Omit<
-Partial<ExtractPropTypes<typeof exposedModalEnvProps>>,
-'internalStyle'
-> & {
+Omit<Partial<ExtractPropTypes<typeof modalProps>>, 'internalStyle'> & {
   class?: any
   style?: string | CSSProperties
 }

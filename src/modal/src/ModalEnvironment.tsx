@@ -1,9 +1,7 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
 import { h, defineComponent, type PropType, ref, type CSSProperties } from 'vue'
-import { keep } from '../../_utils'
-import NModal from './Modal'
-import { modalProps, dialogPropKeys } from './modalProps'
+import NModal, { modalProps } from './Modal'
 
 export const exposedModalEnvProps = {
   ...modalProps,
@@ -121,7 +119,6 @@ export const NModalEnvironment = defineComponent({
   render () {
     const {
       handleUpdateShow,
-      handleCloseClick,
       handleAfterLeave,
       handleMaskClick,
       handleEsc,
@@ -131,6 +128,7 @@ export const NModalEnvironment = defineComponent({
     } = this
     return (
       <NModal
+        {...this.$props}
         show={show}
         onUpdateShow={handleUpdateShow}
         onMaskClick={handleMaskClick}
@@ -145,17 +143,7 @@ export const NModalEnvironment = defineComponent({
         transformOrigin={this.transformOrigin}
         internalAppear
         internalDialog
-      >
-        {{
-          default: () => (
-            <NModal
-              {...keep(this.$props, dialogPropKeys)}
-              style={this.internalStyle}
-              onClose={handleCloseClick}
-            />
-          )
-        }}
-      </NModal>
+      ></NModal>
     )
   }
 })
