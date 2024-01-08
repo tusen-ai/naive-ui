@@ -5,36 +5,29 @@
 </markdown>
 
 <template>
-  <n-button @click="showModal = true">
+  <n-button @click="handleClick">
     来吧
   </n-button>
-  <n-modal v-model:show="showModal">
-    <n-card
-      style="width: 600px"
-      title="模态框"
-      :bordered="false"
-      size="huge"
-      role="dialog"
-      aria-modal="true"
-    >
-      <template #header-extra>
-        噢！
-      </template>
-      内容
-      <template #footer>
-        尾部
-      </template>
-    </n-card>
-  </n-modal>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
+import { useModal } from 'naive-ui'
 
 export default defineComponent({
   setup () {
+    const modal = useModal()
+    console.log(modal)
+
+    const handleClick = () => {
+      modal.create({
+        title: '模态框',
+        content: '内容'
+      })
+    }
+
     return {
-      showModal: ref(false)
+      handleClick
     }
   }
 })

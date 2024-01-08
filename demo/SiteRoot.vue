@@ -14,9 +14,11 @@
       <n-loading-bar-provider>
         <n-message-provider>
           <n-notification-provider>
-            <n-dialog-provider>
-              <Site />
-            </n-dialog-provider>
+            <n-modal-provider>
+              <n-dialog-provider>
+                <Site />
+              </n-dialog-provider>
+            </n-modal-provider>
           </n-notification-provider>
         </n-message-provider>
       </n-loading-bar-provider>
