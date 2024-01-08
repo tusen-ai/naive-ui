@@ -209,15 +209,21 @@ export default defineComponent({
     }
     // Resolve : ()
     // Reject  : (errors: AsyncValidator.ValidateError[])
-    async function validate (options: FormItemValidateOptions): Promise<void>
+    async function validate (options: FormItemValidateOptions): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       trigger?: string | null,
       callback?: ValidateCallback
-    ): Promise<void>
+    ): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       options?: string | null | FormItemValidateOptions,
       callback?: ValidateCallback
-    ): Promise<void> {
+    ): Promise<{
+        warnings: ValidateError[] | undefined
+      }> {
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
@@ -232,7 +238,9 @@ export default defineComponent({
         shouldRuleBeApplied = options.shouldRuleBeApplied
         asyncValidatorOptions = options.options
       }
-      await new Promise<void>((resolve, reject) => {
+      return await new Promise<{
+        warnings: ValidateError[] | undefined
+      }>((resolve, reject) => {
         void internalValidate(
           trigger,
           shouldRuleBeApplied,
@@ -242,7 +250,7 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(undefined, { warnings })
             }
-            resolve()
+            resolve({ warnings })
           } else {
             if (validateCallback) {
               validateCallback(errors, { warnings })

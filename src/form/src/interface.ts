@@ -56,10 +56,13 @@ export type FormItemInternalValidate = (
   options?: ValidateOption
 ) => Promise<FormItemInternalValidateResult>
 
-export type FormItemValidate = ((
-  options: FormItemValidateOptions
-) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
+  warnings: ValidateError[] | undefined
+}>) &
+((
+  trigger?: string,
+  callback?: ValidateCallback
+) => Promise<{ warnings: ValidateError[] | undefined }>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -100,7 +103,9 @@ export type FormValidateCallback = (
 export type FormValidate = (
   callback?: FormValidateCallback,
   shouldRuleBeApplied?: ShouldRuleBeApplied
-) => Promise<void>
+) => Promise<{
+  warnings: ValidateError[][] | undefined
+}>
 
 export type FormValidationError = ValidateError[]
 

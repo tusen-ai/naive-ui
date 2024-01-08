@@ -5,6 +5,7 @@
 ### Fixes
 
 - Click clear button on components with popup may trigger reopen behaviors.
+- Fix `n-form`'s `validate` returned `Promise` may not `resolve`.
 
 ### Features
 

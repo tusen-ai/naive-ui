@@ -5,6 +5,7 @@
 ### Fixes
 
 - 点击具有弹出菜单的组件的清空按钮时，可能会触发菜单的重复出现
+- `n-form` 的 `validate` 方法返回的 `Promise` 可能不会 `resolve`
 
 ### Features
 
