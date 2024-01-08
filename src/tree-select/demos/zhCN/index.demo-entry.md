@@ -53,7 +53,7 @@ render-debug.vue
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
-| override-default-node-click-behavoir | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
+| override-default-node-click-behavior | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
 | render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 | 2.30.7 |

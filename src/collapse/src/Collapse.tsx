@@ -49,6 +49,10 @@ export const collapseProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
+  triggerAreas: {
+    type: Array as PropType<Array<'main' | 'extra' | 'arrow'>>,
+    default: () => ['main', 'extra', 'arrow']
+  },
   onItemHeaderClick: [Function, Array] as PropType<
   MaybeArray<OnItemHeaderClick>
   >,

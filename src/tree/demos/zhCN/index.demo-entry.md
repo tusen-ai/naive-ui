@@ -71,7 +71,7 @@ expand-debug.vue
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.25.0 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<unknown>` | `undefined` | 异步加载数据的回调函数，如果没有加载到数据你应该让 Promise resolve `false` 或者 reject 这个 Promise，否则加载动画不会停止 | 非 void Promise 2.34.3 |
-| override-default-node-click-behavoir | `(info: { option: TreeOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
+| override-default-node-click-behavior | `(info: { option: TreeOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |

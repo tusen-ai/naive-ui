@@ -619,22 +619,22 @@ export default defineComponent({
       patternRef.value = value
     }
     function treeHandleKeydown (e: KeyboardEvent): {
-      enterBehavoir: TreeOverrideNodeClickBehaviorReturn | null
+      enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
     } {
       const { value: treeInst } = treeInstRef
       if (treeInst) {
         return treeInst.handleKeydown(e)
       }
       return {
-        enterBehavoir: null
+        enterBehavior: null
       }
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (mergedShowRef.value) {
-          const { enterBehavoir } = treeHandleKeydown(e)
+          const { enterBehavior } = treeHandleKeydown(e)
           if (!props.multiple) {
-            switch (enterBehavoir) {
+            switch (enterBehavior) {
               case 'default':
               case 'toggleSelect':
                 closeMenu()

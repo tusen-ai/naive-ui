@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.37.1
+
+### Features
+
+- `n-collapse` adds `trigger-areas` prop.
+
 ## 2.37.0
 
 ### Breaking Changes

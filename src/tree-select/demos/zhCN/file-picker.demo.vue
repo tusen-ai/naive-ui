@@ -1,7 +1,7 @@
 <markdown>
 # 文件选择器
 
-利用 `override-default-node-click-behavoir` 属性模拟仅允许选中文件、而不允许选中文件夹的行为。
+利用 `override-default-node-click-behavior` 属性模拟仅允许选中文件、而不允许选中文件夹的行为。
 </markdown>
 
 <template>

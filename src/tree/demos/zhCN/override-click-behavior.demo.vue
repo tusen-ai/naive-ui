@@ -1,7 +1,7 @@
 <markdown>
 # 自定义点击后的行为
 
-你可以利用 `override-default-node-click-behavoir` 属性来覆盖默认的点击行为。
+你可以利用 `override-default-node-click-behavior` 属性来覆盖默认的点击行为。
 
 例如下面的例子中，你可以使非根节点的点击行为变成展开，来模拟仅允许选中文件、而不允许选中文件夹的行为。
 </markdown>

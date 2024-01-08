@@ -65,7 +65,7 @@ override-click-behavior.vue
 | node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.25.0 |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. If not data is loaded, you should make promise resolve `false` or be rejected, nor the loading animation won't end. | Non void Promise 2.34.3 |
-| override-default-node-click-behavoir | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | Override default node click behavior. | 2.37.0 |
+| override-default-node-click-behavior | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | Override default node click behavior. | 2.37.0 |
 | pattern | `string` | `''` | What to search by default. |  |
 | render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |

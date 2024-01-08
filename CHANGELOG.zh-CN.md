@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.37.1
+
+### Features
+
+- `n-collapse` 新增 `trigger-areas` 属性
+
 ## 2.37.0
 
 ### Breaking Changes
