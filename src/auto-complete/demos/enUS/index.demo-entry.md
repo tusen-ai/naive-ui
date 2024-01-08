@@ -35,7 +35,7 @@ status.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Autocomplete's placement. | 2.25.0 |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. | 2.24.0 |
-| show-empty | `boolean` | `false` | Whether to show menu if there's no option. | NEXT_VERSION |
+| show-empty | `boolean` | `false` | Whether to show menu if there's no option. | 2.37.1 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
@@ -67,7 +67,7 @@ status.vue
 | Name | Parameters | Description |
 | --- | --- | --- | --- |
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |
-| empty | `()` | Menu's content to show when there's no option. | NEXT_VERSION |
+| empty | `()` | Menu's content to show when there's no option. | 2.37.1 |
 | prefix | `()` | Input's prefix content. |
 | suffix | `()` | Input's suffix content. |
 

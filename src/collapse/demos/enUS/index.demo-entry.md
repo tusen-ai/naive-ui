@@ -29,7 +29,7 @@ trigger-areas.vue
 | default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | Pre-expanded panels that can still be collapsed. If `accordion` mode is set, it should be a non-array value. |
 | display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-collapse-item` renders content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
 | expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | Expanded panels that cannot be collapsed. If `accordion` mode is set, it should be a non-array value. |
-| trigger-areas | `Array<'main' \| 'arrow' \| 'extra'>` | `['main', 'arrow', 'extra']` | Expansion trigger areas. If you don't want to trigger expansion on some areas, you can use the prop. | NEXT_VERSION |
+| trigger-areas | `Array<'main' \| 'arrow' \| 'extra'>` | `['main', 'arrow', 'extra']` | Expansion trigger areas. If you don't want to trigger expansion on some areas, you can use the prop. | 2.37.1 |
 | on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | Callback function triggered when the title is clicked. |
 | on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | Callback function triggered when the expanded-names array is changed. |
 
