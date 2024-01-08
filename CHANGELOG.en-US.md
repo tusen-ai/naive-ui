@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-form` method `validate` unable to complete execution properly.
+
 ## 2.37.0
 
 ### Breaking Changes
