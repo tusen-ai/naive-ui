@@ -5,6 +5,7 @@
 ### Features
 
 - `n-collapse` adds `trigger-areas` prop.
+- `n-date-picker`'s `is-date-disabled` callback prop support get detail info of date/year/month/quarter button as parameter, closes [#4649](https://github.com/tusen-ai/naive-ui/issues/4649).
 
 ## 2.37.0
 

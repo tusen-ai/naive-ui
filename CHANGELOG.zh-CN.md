@@ -5,6 +5,7 @@
 ### Features
 
 - `n-collapse` 新增 `trigger-areas` 属性
+- `n-date-picker` 的 `is-date-disabled` 回调函数支持获取对应年、月、日、季度按钮的具体信息，关闭 [#4649](https://github.com/tusen-ai/naive-ui/issues/4649)
 
 ## 2.37.0
 
