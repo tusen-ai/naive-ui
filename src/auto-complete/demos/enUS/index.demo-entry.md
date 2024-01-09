@@ -64,12 +64,12 @@ status.vue
 
 ### AutoComplete Slots
 
-| Name | Parameters | Description |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |
+| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |  |
 | empty | `()` | Menu's content to show when there's no option. | 2.37.1 |
-| prefix | `()` | Input's prefix content. |
-| suffix | `()` | Input's suffix content. |
+| prefix | `()` | Input's prefix content. |  |
+| suffix | `()` | Input's suffix content. |  |
 
 ### AutoComplete Methods
 
