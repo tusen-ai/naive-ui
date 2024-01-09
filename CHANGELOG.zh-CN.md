@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.37.2
+
+### Fixes
+
+- `n-data-table` 的 `downloadCsv` 方法会导出选择列、展开列
+
 ## 2.37.1
 
 ### Fixes

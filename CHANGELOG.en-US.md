@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.37.2
+
+### Fixes
+
+- `n-data-table`'s `downloadCsv` method will export selection & expand column.
+
 ## 2.37.1
 
 ### Fixes
