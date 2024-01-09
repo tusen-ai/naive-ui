@@ -54,7 +54,7 @@ export default defineComponent({
       type: 'start' | 'end'
     ): VNode => {
       const { handleColItemClick, mergedIsDateDisabled } = useCalendarRef
-      const disabled = mergedIsDateDisabled(item)
+      const disabled = mergedIsDateDisabled(item.ts)
       return (
         <div
           data-n-date
