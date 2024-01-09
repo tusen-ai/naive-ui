@@ -103,6 +103,7 @@ export default defineComponent({
                                   key="month"
                                   useAsQuickJump
                                   value={this.value}
+                                  onClick={this.handleHeaderClick}
                                 />,
                                 [
                                   [
