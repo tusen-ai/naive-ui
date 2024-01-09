@@ -60,9 +60,11 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
+        common: { cubicBezierEaseInOut },
         self: { resizableTriggerColor, resizableTriggerColorHover }
       } = themeRef.value
       return {
+        '--n-bezier': cubicBezierEaseInOut,
         '--n-resize-trigger-color': resizableTriggerColor,
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
