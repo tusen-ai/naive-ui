@@ -1126,7 +1126,12 @@ export default defineComponent({
                         disabled={this.mergedDisabled}
                         maxlength={countGraphemes ? undefined : this.maxlength}
                         minlength={countGraphemes ? undefined : this.minlength}
-                        readonly={this.readonly as any}
+                        {...Object.assign(
+                          {},
+                          ['', true].includes(this.readonly) && {
+                            readonly: true
+                          }
+                        )}
                         tabindex={
                           this.passivelyActivated && !this.activated
                             ? -1
@@ -1209,7 +1214,10 @@ export default defineComponent({
                     ? this.mergedValue[0]
                     : (this.mergedValue as any)
                 }
-                readonly={this.readonly as any}
+                {...Object.assign(
+                  {},
+                  ['', true].includes(this.readonly) && { readonly: true }
+                )}
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
@@ -1337,7 +1345,10 @@ export default defineComponent({
                     ? this.mergedValue[1]
                     : undefined
                 }
-                readonly={this.readonly as any}
+                {...Object.assign(
+                  {},
+                  ['', true].includes(this.readonly) && { readonly: true }
+                )}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={(e) => {
