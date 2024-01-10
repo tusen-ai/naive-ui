@@ -152,12 +152,13 @@ export default defineComponent({
 
     const placeholderNode = this.$slots.placeholder?.()
     const loadSrc = this.src || imgProps.src
-
+    const imgWidth = this.width || imgProps.width
+    const imgHeight = this.height || imgProps.height
     const imgNode = h('img', {
       ...imgProps,
       ref: 'imageRef',
-      width: this.width || imgProps.width,
-      height: this.height || imgProps.height,
+      ...(imgWidth ? { width: imgWidth } : {}),
+      ...(imgHeight ? { height: imgHeight } : {}),
       src: this.showError
         ? this.fallbackSrc
         : lazy && this.intersectionObserverOptions
