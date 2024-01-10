@@ -71,7 +71,7 @@ export default defineComponent({
         ref="selfRef"
         class={[`${clsPrefix}-tree-node-content`, nodeProps?.class]}
         onClick={handleClick}
-        draggable={onDragstart === undefined ? undefined : true}
+        draggable={onDragstart === undefined ? 'false' : 'true'}
         onDragstart={onDragstart}
       >
         {renderPrefix || prefix ? (
