@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-select` add native `title` attribute when `filterable` and blur input.
+
 ## 2.37.3
 
 ### Fixes

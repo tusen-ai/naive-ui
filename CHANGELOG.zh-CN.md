@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-select` 在组件可过滤且输入失焦时，添加原生 `title` 属性
+
 ## 2.37.3
 
 ### Fixes
