@@ -170,6 +170,7 @@ const TreeNode = defineComponent({
     }
 
     function handleNodeClick (e: MouseEvent): void {
+      if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       if (!disabledRef.value) {
         const overrideDefaultNodeClickBehavior =
           overrideDefaultNodeClickBehaviorRef.value
