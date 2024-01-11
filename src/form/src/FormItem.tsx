@@ -260,7 +260,7 @@ export default defineComponent({
         })
       })
     }
-
+    const prevValidateTriggerType: Ref<null | string> = ref(null)
     const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
@@ -268,6 +268,14 @@ export default defineComponent({
         suppressWarning: true
       }
     ) => {
+      if (
+        (prevValidateTriggerType.value === 'input' ||
+          prevValidateTriggerType.value === 'change') &&
+        trigger === 'blur'
+      ) {
+        prevValidateTriggerType.value = trigger
+        return
+      }
       const { path } = props
       if (!options) {
         options = {}
