@@ -85,7 +85,7 @@ export default defineComponent({
         }
       )
       watch(
-        () => currentSize,
+        () => currentSize.value,
         (newSize) => {
           emit('update:size', newSize)
         }
