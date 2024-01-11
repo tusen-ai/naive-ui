@@ -352,4 +352,74 @@ describe('n-tabs', () => {
     expect(wrapper.find('.n-tabs-nav__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
   })
+
+  it('should work with `tab-class` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        tabClass: 'foo'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-tabs-tab').classes()).toContain('foo')
+  })
+
+  it('should work with `add-tab-class` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        type: 'card',
+        addTabClass: 'foo',
+        addable: true
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-tabs-tab.n-tabs-tab--addable').classes()).toContain(
+      'foo'
+    )
+    expect(
+      wrapper.find('.n-tabs-tab:not(.n-tabs-tab--addable)').classes()
+    ).not.toContain('foo')
+  })
+
+  it('should work with `add-tab-style` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        type: 'card',
+        addTabStyle: {
+          fontSize: '64px'
+        },
+        addable: true
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(
+      wrapper.find('.n-tabs-tab.n-tabs-tab--addable').attributes('style')
+    ).toContain('64px')
+    expect(
+      wrapper.find('.n-tabs-tab:not(.n-tabs-tab--addable)').attributes('style')
+    ).toBe(undefined)
+  })
 })

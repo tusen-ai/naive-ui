@@ -27,6 +27,7 @@ import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
+import { getMargin } from 'seemly'
 
 export interface TagPublicMethods {
   setTextContent: (textContent: string) => void
@@ -143,7 +144,6 @@ export default defineComponent({
         self: {
           padding,
           closeMargin,
-          closeMarginRtl,
           borderRadius,
           opacityDisabled,
           textColorCheckable,
@@ -173,6 +173,7 @@ export default defineComponent({
           [createKey('closeColorPressed', type)]: closeColorPressed
         }
       } = themeRef.value
+      const closeMarginDiscrete = getMargin(closeMargin)
       return {
         '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
@@ -187,8 +188,10 @@ export default defineComponent({
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-disabled': closeIconColor,
-        '--n-close-margin': closeMargin,
-        '--n-close-margin-rtl': closeMarginRtl,
+        '--n-close-margin-top': closeMarginDiscrete.top,
+        '--n-close-margin-right': closeMarginDiscrete.right,
+        '--n-close-margin-bottom': closeMarginDiscrete.bottom,
+        '--n-close-margin-left': closeMarginDiscrete.left,
         '--n-close-size': closeSize,
         '--n-color':
           color || (mergedBorderedRef.value ? colorBordered : typedColor),

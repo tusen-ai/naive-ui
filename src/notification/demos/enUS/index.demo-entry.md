@@ -58,6 +58,7 @@ placement.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| container-class | `string` | `undefined` | Class of notification container. | 2.36.0 |
 | container-style | `string \| Object` | `undefined` | Style of notification container. | 2.25.0 |
 | placement | `'top' \| 'bottom' \|'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom-right'` | `'top-right'` | Placement of all notifications. | `'top' \| 'bottom'` 2.29.0 |
 | max | `number` | `undefined` | Limit the number of notifications to display. |  |

@@ -27,6 +27,7 @@ resizable.vue
 | auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside drawer. | 2.24.2 |
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close drawer on Esc is pressed. | 2.24.2 |
+| content-class | `string` | `undefined` | Class of drawer's scrollable content node. | 2.37.0 |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |  |
 | default-width | `number \| string` | `251` | Default width of the drawer, works when placement is `left` and `right`. | 2.31.0 |
 | default-height | `number \| string` | `251` | Default height of the drawer, works when placement is `top` and `bottom`. | 2.31.0 |
@@ -34,17 +35,15 @@ resizable.vue
 | height | `number \| string` | `undefined` | Works when placement is `top` and `bottom`. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |  |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
-| max-width | `number` | `undefined` | Max width of draggable drawer. | NEXT_VERSION |
-| max-height | `number` | `undefined` | Max height of draggable drawer. | NEXT_VERSION |
-| min-width | `number` | `undefined` | Min width of draggable drawer. | NEXT_VERSION |
-| min-height | `number` | `undefined` | Max height of draggable drawer. | NEXT_VERSION |
+| max-width | `number` | `undefined` | Max width of draggable drawer. | 2.35.0 |
+| max-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
+| min-width | `number` | `undefined` | Min width of draggable drawer. | 2.35.0 |
+| min-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | resizable | `boolean` | `false` | Whether to resize the width / height of drawer. | 2.31.0 |
-| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
 | show | `boolean` | `false` | Whether to show drawer. |  |
 | show-mask | `boolean` | `true` | Whether to show mask. If set to `'transparent'`, transparent mask would be shown. If set to false, `trap-focus` will be disabled. | 2.28.3 |
-| drawer-style | `string \| Object` | `undefined` | Style of the drawer. |  |
-| drawer-class | `string` | `undefined` | Class of the drawer. |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside drawer. | 2.24.2 |
 | width | `number \| string` | `undefined` | Works when placement is `left` and `right`. |  |
@@ -59,16 +58,20 @@ resizable.vue
 
 ### DrawerContent Props
 
-| Name | Parameters | Default | Description |
-| --- | --- | --- | --- |
-| body-style | `string \| Object` | `undefined` | Drawer content's body style. |
-| body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. |
-| closable | `boolean` | `false` | Whether the drawer content is closable. |
-| footer-style | `string \| Object` | `undefined` | Drawer content's footer style. |
-| header-style | `string \| Object` | `undefined` | Drawer content's header style. |
-| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |
-| title | `string` | `undefined` | Drawer content title. |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |
+| Name | Parameters | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| body-class | `string` | `undefined` | Drawer content's body class. | 2.37.0 |
+| body-style | `string \| Object` | `undefined` | Drawer content's body style. |  |
+| body-content-class | `string` | `undefined` | Class of body's scrollable content node. |  |
+| body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. | 2.37.0 |
+| closable | `boolean` | `false` | Whether the drawer content is closable. |  |
+| footer-class | `string` | `undefined` | Drawer content's footer class. | 2.37.0 |
+| footer-style | `string \| Object` | `undefined` | Drawer content's footer style. |  |
+| header-class | `string` | `undefined` | Drawer content's header class. | 2.37.0 |
+| header-style | `string \| Object` | `undefined` | Drawer content's header style. |  |
+| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |  |
+| title | `string` | `undefined` | Drawer content title. |  |
+| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 
 ### Drawer Slots
 

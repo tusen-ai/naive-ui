@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns/esm'
@@ -305,5 +306,56 @@ describe('n-date-picker', () => {
       )
       wrapper.unmount()
     })
+  })
+
+  it('should work with `monthStringType` prop', async () => {
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: {
+        type: 'month',
+        monthFormat: 'M'
+      }
+    })
+
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('1')
+
+    await wrapper.setProps({ monthFormat: 'MM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('01')
+
+    await wrapper.setProps({ monthFormat: 'MMMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('January')
+
+    await wrapper.setProps({ monthFormat: 'MMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('Jan')
+
+    await wrapper.setProps({ monthFormat: 'MMMMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('J')
+
+    wrapper.unmount()
   })
 })

@@ -1,4 +1,4 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
@@ -60,6 +60,24 @@ export default cB('collapse', 'width: 100%;', [
       ])
     ]),
     c('&:not(:first-child)', 'border-top: 1px solid var(--n-divider-color);'),
+    cNotM('disabled', [
+      cM('trigger-area-main', [
+        cE('header', [
+          cE('header-main', 'cursor: pointer;'),
+          cB('collapse-item-arrow', 'cursor: default;')
+        ])
+      ]),
+      cM('trigger-area-arrow', [
+        cE('header', [
+          cB('collapse-item-arrow', 'cursor: pointer;')
+        ])
+      ]),
+      cM('trigger-area-extra', [
+        cE('header', [
+          cE('header-extra', 'cursor: pointer;')
+        ])
+      ])
+    ]),
     cE('header', `
       font-size: var(--n-title-font-size);
       display: flex;
@@ -69,7 +87,6 @@ export default cB('collapse', 'width: 100%;', [
       position: relative;
       padding: var(--n-title-padding);
       color: var(--n-title-text-color);
-      cursor: pointer;
     `, [
       cE('header-main', `
         display: flex;

@@ -54,6 +54,7 @@ import { popconfirmDark } from '../popconfirm/styles'
 import { popoverDark } from '../popover/styles'
 import { popselectDark } from '../popselect/styles'
 import { progressDark } from '../progress/styles'
+import { qrcodeDark } from '../qr-code/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
@@ -80,7 +81,9 @@ import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import { watermarkDark } from '../watermark/styles'
+import { splitDark } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
+import { flexDark } from '../styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -117,6 +120,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Empty: emptyDark,
   Ellipsis: ellipsisDark,
   Equation: equationDark,
+  Flex: flexDark,
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
@@ -140,6 +144,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Popover: popoverDark,
   Popselect: popselectDark,
   Progress: progressDark,
+  QrCode: qrcodeDark,
   Radio: radioDark,
   Rate: rateDark,
   Result: resultDark,
@@ -165,5 +170,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   TreeSelect: treeSelectDark,
   Typography: typographyDark,
   Upload: uploadDark,
-  Watermark: watermarkDark
+  Watermark: watermarkDark,
+  Split: splitDark
 }

@@ -20,7 +20,7 @@ export const popoverBodyInjectionKey =
 export type InternalRenderBody = (
   className: any,
   ref: Ref<HTMLElement | null>,
-  style: Ref<CSSProperties>,
+  style: CSSProperties[],
   onMouseenter: (e: MouseEvent) => void,
   onMouseleave: (e: MouseEvent) => void
 ) => VNode

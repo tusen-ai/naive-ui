@@ -31,6 +31,7 @@ const eo: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Malplenigi',
     now: 'Nun',
     confirm: 'Konfirmi',
@@ -41,6 +42,7 @@ const eo: NLocale = {
     monthPlaceholder: 'Elekti monaton',
     yearPlaceholder: 'Elekti jaron',
     quarterPlaceholder: 'Elekti jarkvaronon',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Komenca dato',
     endDatePlaceholder: 'Fina dato',
     startDatetimePlaceholder: 'Komencaj dato kaj tempo',
@@ -80,7 +82,8 @@ const eo: NLocale = {
     placeholder: 'Elekti tempon',
     positiveText: 'Bone',
     negativeText: 'Nuligi',
-    now: 'Nun'
+    now: 'Nun',
+    clear: 'Malplenigi'
   },
   Pagination: {
     goto: 'Iri al',

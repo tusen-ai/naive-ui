@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-flex render empty children 1`] = `""`;
+
+exports[`n-flex render flex string size 1`] = `"<div role="none" class="n-flex" style="display: flex; flex-direction: row; justify-content: start; flex-wrap: wrap; gap: 12px 16px;">kirby</div>"`;
+
+exports[`n-flex render vertical flex 1`] = `
+"<div role="none" class="n-flex" style="display: flex; flex-direction: column; justify-content: start; flex-wrap: nowrap; gap: 8px 12px;">
+  <div>1</div>
+  <div>2</div>
+</div>"
+`;
+
+exports[`n-flex should not render comment node 1`] = `
+"<div role="none" class="n-flex" style="display: flex; flex-direction: row; justify-content: start; flex-wrap: wrap; gap: 8px 12px;">
+  <!---->
+</div>"
+`;
+
+exports[`n-flex should render while slot is Comment 1`] = `
+"<div role="none" class="n-flex" style="display: flex; flex-direction: row; justify-content: start; flex-wrap: wrap; gap: 8px 12px;">
+  <!--random comment text-->
+</div>"
+`;
+
+exports[`n-flex should render with invalidElement 1`] = `"<div role="none" class="n-flex" style="display: flex; flex-direction: row; justify-content: start; flex-wrap: wrap; gap: 8px 12px;">text1<span>text1</span>text1</div>"`;

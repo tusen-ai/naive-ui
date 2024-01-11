@@ -53,6 +53,7 @@ import type { PopconfirmTheme } from '../../popconfirm/styles'
 import type { PopoverTheme } from '../../popover/styles'
 import type { PopselectTheme } from '../../popselect/styles'
 import type { ProgressTheme } from '../../progress/styles'
+import type { QrCodeTheme } from '../../qr-code/styles'
 import type { RadioTheme } from '../../radio/styles'
 import type { RateTheme } from '../../rate/styles'
 import type { ResultTheme } from '../../result/styles'
@@ -97,6 +98,8 @@ import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { RowTheme } from '../../legacy-grid/styles'
 import type { Katex } from './katex'
+import type { SplitTheme } from '../../split/styles'
+import type { FlexTheme } from '../../flex/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -131,6 +134,7 @@ export interface GlobalThemeWithoutCommon {
   Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
   Equation?: EquationTheme
+  Flex?: FlexTheme
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
@@ -154,6 +158,7 @@ export interface GlobalThemeWithoutCommon {
   Popover?: PopoverTheme
   Popselect?: PopselectTheme
   Progress?: ProgressTheme
+  QrCode?: QrCodeTheme
   Radio?: RadioTheme
   Rate?: RateTheme
   Result?: ResultTheme
@@ -179,6 +184,7 @@ export interface GlobalThemeWithoutCommon {
   Typography?: TypographyTheme
   Upload?: UploadTheme
   Watermark?: WatermarkTheme
+  Split?: SplitTheme
   Row?: RowTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme

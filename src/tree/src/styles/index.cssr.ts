@@ -19,6 +19,7 @@ const iconSwitchTransitionNode = iconSwitchTransition()
 // --n-line-offset-bottom
 // --n-node-content-height
 // --n-line-height
+// --n-line-color
 export default cB('tree', `
   font-size: var(--n-font-size);
   outline: none;
@@ -101,6 +102,9 @@ export default cB('tree', `
         cM('selected', [
           cB('tree-node-content', 'background: var(--n-node-color-active);')
         ])
+      ]),
+      cM('selected', [
+        cB('tree-node-content', 'background: var(--n-node-color-active);')
       ])
     ])
   ]),
@@ -118,6 +122,7 @@ export default cB('tree', `
         ]),
         cM('selected', 'background: var(--n-node-color-active);')
       ]),
+      cM('selected', 'background: var(--n-node-color-active);'),
       cM('disabled', `
         cursor: not-allowed;
       `)
@@ -131,7 +136,7 @@ export default cB('tree', `
       c('&::before', `
         position: absolute;
         left: 50%;
-        border-left: 1px solid var(--n-border-color);
+        border-left: 1px solid var(--n-line-color);
         transition: border-color .3s var(--n-bezier);
         transform: translate(-50%);
         content: "";
@@ -151,7 +156,7 @@ export default cB('tree', `
           right: 0;
           bottom: 50%;
           transition: border-color .3s var(--n-bezier);
-          border-bottom: 1px solid var(--n-border-color);
+          border-bottom: 1px solid var(--n-line-color);
         `)
       ])
     ]),

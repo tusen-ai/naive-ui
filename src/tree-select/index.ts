@@ -9,3 +9,7 @@ export type {
   TreeSelectRenderTag,
   TreeSelectInst
 } from './src/interface'
+export type {
+  TreeOverrideNodeClickBehavior as TreeSelectOverrideNodeClickBehavior,
+  TreeOverrideNodeClickBehaviorReturn as TreeSelectOverrideNodeClickBehaviorReturn
+} from '../tree'

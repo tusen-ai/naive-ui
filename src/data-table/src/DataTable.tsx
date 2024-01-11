@@ -10,21 +10,33 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useRtl,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import { createKey, resolveSlot, warnOnce } from '../../_utils'
+import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
 import { dataTableLight } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
 import { useResizable } from './use-resizable'
-import type { RowKey, MainTableRef, DataTableInst } from './interface'
+import type {
+  RowKey,
+  MainTableRef,
+  DataTableInst,
+  CsvOptionsType
+} from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
 import style from './styles/index.cssr'
+import { generateCsv } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
@@ -66,8 +78,13 @@ export default defineComponent({
       })
     }
 
-    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
+    const rtlEnabledRef = useRtl('DataTable', mergedRtlRef, mergedClsPrefixRef)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -90,6 +107,20 @@ export default defineComponent({
       useResizable()
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props, getResizableWidth)
+
+    const downloadCsv = (options?: CsvOptionsType): void => {
+      const { fileName = 'data.csv', keepOriginalData = false } = options || {}
+      const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
+      const csvData = generateCsv(props.columns, data)
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
+      const downloadUrl = URL.createObjectURL(blob)
+      download(
+        downloadUrl,
+        fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
+      )
+      URL.revokeObjectURL(downloadUrl)
+    }
+
     const {
       treeMateRef,
       mergedCurrentPageRef,
@@ -221,12 +252,11 @@ export default defineComponent({
         const {
           self: { actionDividerColor, actionPadding, actionButtonMargin }
         } = themeRef.value
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
           '--n-action-padding': actionPadding,
           '--n-action-button-margin': actionButtonMargin,
           '--n-action-divider-color': actionDividerColor
-        } as CSSProperties
+        } satisfies CSSProperties
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
@@ -263,7 +293,9 @@ export default defineComponent({
       page,
       sort,
       clearFilter,
+      downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }
     }
@@ -381,6 +413,7 @@ export default defineComponent({
     return {
       mainTableInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
       paginatedData: paginatedDataRef,
       mergedBordered: mergedBorderedRef,
@@ -400,6 +433,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-data-table`,
+          this.rtlEnabled && `${mergedClsPrefix}-data-table--rtl`,
           themeClass,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,

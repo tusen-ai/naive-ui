@@ -21,7 +21,8 @@ import type {
   LabelPlacement,
   FormInst,
   Size,
-  FormValidateMessages
+  FormValidateMessages,
+  FormItemInternalValidateResult
 } from './interface'
 import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
@@ -89,39 +90,49 @@ export default defineComponent({
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
-    ): Promise<void> {
-      await new Promise<void>((resolve, reject) => {
-        const formItemValidationPromises: Array<
-        Promise<{
-          valid: boolean
-          errors?: ValidateError[]
-        }>
-        > = []
-        for (const key of keysOf(formItems)) {
-          const formItemInstances = formItems[key]
-          for (const formItemInstance of formItemInstances) {
-            if (formItemInstance.path) {
-              formItemValidationPromises.push(
-                formItemInstance.internalValidate(null, shouldRuleBeApplied)
-              )
+    ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      return await new Promise<{ warnings: ValidateError[][] | undefined }>(
+        (resolve, reject) => {
+          const formItemValidationPromises: Array<
+          Promise<FormItemInternalValidateResult>
+          > = []
+          for (const key of keysOf(formItems)) {
+            const formItemInstances = formItems[key]
+            for (const formItemInstance of formItemInstances) {
+              if (formItemInstance.path) {
+                formItemValidationPromises.push(
+                  formItemInstance.internalValidate(null, shouldRuleBeApplied)
+                )
+              }
             }
           }
-        }
-        void Promise.all(formItemValidationPromises).then((results) => {
-          if (results.some((result) => !result.valid)) {
-            const errors = results
-              .filter((result) => result.errors)
-              .map((result) => result.errors)
+          void Promise.all(formItemValidationPromises).then((results) => {
+            const formInvalid = results.some((result) => !result.valid)
+            const errors: ValidateError[][] = []
+            const warnings: ValidateError[][] = []
+            results.forEach((result) => {
+              if (result.errors?.length) {
+                errors.push(result.errors)
+              }
+              if (result.warnings?.length) {
+                warnings.push(result.warnings)
+              }
+            })
             if (validateCallback) {
-              validateCallback(errors as ValidateError[][])
+              validateCallback(errors.length ? errors : undefined, {
+                warnings: warnings.length ? warnings : undefined
+              })
             }
-            reject(errors)
-          } else {
-            if (validateCallback) validateCallback()
-            resolve()
-          }
-        })
-      })
+            if (formInvalid) {
+              reject(errors.length ? errors : undefined)
+            } else {
+              resolve({
+                warnings: warnings.length ? warnings : undefined
+              })
+            }
+          })
+        }
+      )
     }
     function restoreValidation (): void {
       for (const key of keysOf(formItems)) {

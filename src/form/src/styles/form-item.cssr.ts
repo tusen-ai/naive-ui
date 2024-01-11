@@ -62,7 +62,7 @@ export default cB('form-item', `
       "label feedback";
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-rows: auto 1fr;
-    align-items: start;
+    align-items: flex-start;
   `, [
     cB('form-item-label', `
       display: grid;

@@ -8,10 +8,18 @@ import {
   onMounted
 } from 'vue'
 import { VirtualList } from 'vueuc'
+import { useLocale } from '../../../_mixins'
 import { NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
-import type { MonthItem, QuarterItem, YearItem } from '../utils'
+import {
+  type MonthItem,
+  type QuarterItem,
+  type YearItem,
+  getMonthString,
+  getQuarterString,
+  getYearString
+} from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
@@ -38,6 +46,7 @@ export default defineComponent({
       })
     }
     const useCalendarRef = useDualCalendar(props, props.type)
+    const { dateLocaleRef } = useLocale('DatePicker')
     const renderItem = (
       item: YearItem | MonthItem | QuarterItem,
       i: number,
@@ -53,14 +62,12 @@ export default defineComponent({
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            {
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                item.isCurrent,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                item.selected,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                disabled
-            }
+            item.isCurrent &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            disabled &&
+              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={
             disabled
@@ -71,10 +78,22 @@ export default defineComponent({
           }
         >
           {item.type === 'month'
-            ? item.dateObject.month + 1
+            ? getMonthString(
+              item.dateObject.month,
+              item.monthFormat,
+              dateLocaleRef.value.locale
+            )
             : item.type === 'quarter'
-              ? `Q${item.dateObject.quarter}`
-              : item.dateObject.year}
+              ? getQuarterString(
+                item.dateObject.quarter,
+                item.quarterFormat,
+                dateLocaleRef.value.locale
+              )
+              : getYearString(
+                item.dateObject.year,
+                item.yearFormat,
+                dateLocaleRef.value.locale
+              )}
         </div>
       )
     }

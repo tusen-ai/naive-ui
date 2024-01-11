@@ -47,7 +47,8 @@ import type {
   FormItemRuleValidator,
   FormItemValidateOptions,
   FormItemInst,
-  FormItemInternalValidate
+  FormItemInternalValidate,
+  FormItemInternalValidateResult
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -152,7 +153,10 @@ export default defineComponent({
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
-    const { validationErrored: validationErroredRef } = formItemMiscRefs
+    const {
+      validationErrored: validationErroredRef,
+      validationWarned: validationWarnedRef
+    } = formItemMiscRefs
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
@@ -186,6 +190,7 @@ export default defineComponent({
     function restoreValidation (): void {
       renderExplainsRef.value = []
       validationErroredRef.value = false
+      validationWarnedRef.value = false
       if (props.feedback) {
         feedbackIdRef.value = createId()
       }
@@ -204,15 +209,21 @@ export default defineComponent({
     }
     // Resolve : ()
     // Reject  : (errors: AsyncValidator.ValidateError[])
-    async function validate (options: FormItemValidateOptions): Promise<void>
+    async function validate (options: FormItemValidateOptions): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       trigger?: string | null,
       callback?: ValidateCallback
-    ): Promise<void>
+    ): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       options?: string | null | FormItemValidateOptions,
       callback?: ValidateCallback
-    ): Promise<void> {
+    ): Promise<{
+        warnings: ValidateError[] | undefined
+      }> {
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
@@ -227,36 +238,40 @@ export default defineComponent({
         shouldRuleBeApplied = options.shouldRuleBeApplied
         asyncValidatorOptions = options.options
       }
-      await new Promise<void>((resolve, reject) => {
+      return await new Promise<{
+        warnings: ValidateError[] | undefined
+      }>((resolve, reject) => {
         void internalValidate(
           trigger,
           shouldRuleBeApplied,
           asyncValidatorOptions
-        ).then(({ valid, errors }) => {
+        ).then(({ valid, errors, warnings }) => {
           if (valid) {
             if (validateCallback) {
-              validateCallback()
+              validateCallback(undefined, { warnings })
             }
-            resolve()
+            resolve({ warnings })
           } else {
             if (validateCallback) {
-              validateCallback(errors)
+              validateCallback(errors, { warnings })
             }
             reject(errors)
           }
         })
       })
     }
+    const prevValidateTriggerType: Ref<null | string> = ref(null)
     const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
       options: ValidateOption = {
         suppressWarning: true
       }
-    ): Promise<{
-      valid: boolean
-      errors?: ValidateError[]
-    }> => {
+    ) => {
+      if ((prevValidateTriggerType.value === 'input' || prevValidateTriggerType.value === 'change') && trigger === 'blur') {
+        prevValidateTriggerType.value = trigger
+        return
+      }
       const { path } = props
       if (!options) {
         options = {}
@@ -302,50 +317,84 @@ export default defineComponent({
           }
           return shallowClonedRule
         })
-      if (!activeRules.length) {
-        return {
-          valid: true
-        }
-      }
+      const activeErrorRules = activeRules.filter((r) => r.level !== 'warning')
+      const activeWarningRules = activeRules.filter(
+        (r) => r.level === 'warning'
+      )
+
       const mergedPath = path ?? '__n_no_path__'
-      const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
+      const validator = new Schema({
+        [mergedPath]: activeErrorRules as RuleItem[]
+      })
+      const warningValidator = new Schema({
+        [mergedPath]: activeWarningRules as RuleItem[]
+      })
       const { validateMessages } = NForm?.props || {}
       if (validateMessages) {
         validator.messages(validateMessages)
+        warningValidator.messages(validateMessages)
       }
-      return await new Promise((resolve) => {
-        void validator.validate({ [mergedPath]: value }, options, (errors) => {
-          if (errors?.length) {
-            renderExplainsRef.value = errors.map((error: ValidateError) => {
-              const transformedMessage = error?.message || ''
-              return {
-                key: transformedMessage,
-                render: () => {
-                  if (transformedMessage.startsWith('__renderMessage__')) {
-                    return messageRenderers[transformedMessage]()
-                  }
-                  return transformedMessage
-                }
+
+      const renderMessages = (errors: ValidateError[]): void => {
+        renderExplainsRef.value = errors.map((error: ValidateError) => {
+          const transformedMessage = error?.message || ''
+          return {
+            key: transformedMessage,
+            render: () => {
+              if (transformedMessage.startsWith('__renderMessage__')) {
+                return messageRenderers[transformedMessage]()
               }
-            })
-            errors.forEach((error) => {
-              if (error.message?.startsWith('__renderMessage__')) {
-                error.message = originalMessageRendersMessage[error.message]
-              }
-            })
-            validationErroredRef.value = true
-            resolve({
-              valid: false,
-              errors
-            })
-          } else {
-            restoreValidation()
-            resolve({
-              valid: true
-            })
+              return transformedMessage
+            }
           }
         })
-      })
+        errors.forEach((error) => {
+          if (error.message?.startsWith('__renderMessage__')) {
+            error.message = originalMessageRendersMessage[error.message]
+          }
+        })
+      }
+
+      const validationResult: FormItemInternalValidateResult = {
+        valid: true,
+        errors: undefined,
+        warnings: undefined
+      }
+      if (activeErrorRules.length) {
+        const errors = await new Promise<ValidateError[] | null>((resolve) => {
+          void validator.validate({ [mergedPath]: value }, options, resolve)
+        })
+        if (errors?.length) {
+          validationErroredRef.value = true
+          validationResult.valid = false
+          validationResult.errors = errors
+          renderMessages(errors)
+        }
+      }
+
+      // if there are already errors, warning check can be skipped
+      if (activeWarningRules.length && !validationResult.errors) {
+        const warnings = await new Promise<ValidateError[] | null>(
+          (resolve) => {
+            void warningValidator.validate(
+              { [mergedPath]: value },
+              options,
+              resolve
+            )
+          }
+        )
+        if (warnings?.length) {
+          renderMessages(warnings)
+          validationWarnedRef.value = true
+          validationResult.warnings = warnings
+        }
+      }
+
+      if (!validationResult.errors && !validationResult.warnings) {
+        restoreValidation()
+      }
+
+      return validationResult
     }
     provide(formItemInjectionKey, {
       path: toRef(props, 'path'),

@@ -22,6 +22,7 @@ import {
   startOfMonth,
   startOfYear,
   startOfQuarter,
+  startOfWeek,
   setQuarter,
   setYear,
   setMonth
@@ -37,7 +38,9 @@ import {
   quarterArray
 } from '../utils'
 import type {
+  FirstDayOfWeek,
   IsSingleDateDisabled,
+  IsSingleDateDisabledDetail,
   PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
@@ -57,7 +60,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -71,7 +74,10 @@ function useCalendar (
     isSecondDisabledRef,
     localeRef,
     firstDayOfWeekRef,
-    datePickerSlots
+    datePickerSlots,
+    yearFormatRef,
+    monthFormatRef,
+    quarterFormatRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -106,7 +112,9 @@ function useCalendar (
       calendarValueRef.value,
       props.value,
       nowRef.value,
-      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
+      false,
+      type === 'week'
     )
   })
   const monthArrayRef = computed(() => {
@@ -114,19 +122,27 @@ function useCalendar (
     return monthArray(
       calendarValueRef.value,
       Array.isArray(value) ? null : value,
-      nowRef.value
+      nowRef.value,
+      {
+        monthFormat: monthFormatRef.value
+      }
     )
   })
   const yearArrayRef = computed(() => {
     const { value } = props
-    return yearArray(Array.isArray(value) ? null : value, nowRef.value)
+    return yearArray(Array.isArray(value) ? null : value, nowRef.value, {
+      yearFormat: yearFormatRef.value
+    })
   })
   const quarterArrayRef = computed(() => {
     const { value } = props
     return quarterArray(
       calendarValueRef.value,
       Array.isArray(value) ? null : value,
-      nowRef.value
+      nowRef.value,
+      {
+        quarterFormat: quarterFormatRef.value
+      }
     )
   })
   const weekdaysRef = computed(() => {
@@ -175,19 +191,35 @@ function useCalendar (
       }
     }
   )
+
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
     if (type === 'quarter') return getTime(startOfQuarter(value))
+    if (type === 'week') {
+      // refer to makeWeekMatcher
+      const weekStartsOn = (((firstDayOfWeekRef.value ??
+        localeRef.value.firstDayOfWeek) +
+        1) %
+        7) as FirstDayOfWeek
+      return getTime(
+        startOfWeek(value, {
+          weekStartsOn
+        })
+      )
+    }
     return getTime(startOfDay(value))
   }
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled (
+    ts: number,
+    detail: IsSingleDateDisabledDetail
+  ): boolean {
     const {
       isDateDisabled: { value: isDateDisabled }
     } = validation
     if (!isDateDisabled) return false
-    return (isDateDisabled as IsSingleDateDisabled)(ts)
+    return (isDateDisabled as IsSingleDateDisabled)(ts, detail)
   }
   function handleDateInput (value: string): void {
     const date = strictParse(
@@ -261,10 +293,50 @@ function useCalendar (
       justifyColumnsScrollState(now)
     }
   }
+  const hoveredWeekRef = ref<number | null>(null)
+  function handleDateMouseEnter (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): void {
+    if (dateItem.type === 'date' && type === 'week') {
+      hoveredWeekRef.value = sanitizeValue(getTime(dateItem.ts))
+    }
+  }
+  function isWeekHovered (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): boolean {
+    if (dateItem.type === 'date' && type === 'week') {
+      return sanitizeValue(getTime(dateItem.ts)) === hoveredWeekRef.value
+    }
+    return false
+  }
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
-    if (mergedIsDateDisabled(dateItem.ts)) {
+    if (
+      mergedIsDateDisabled(
+        dateItem.ts,
+        dateItem.type === 'date'
+          ? {
+              type: 'date',
+              year: dateItem.dateObject.year,
+              month: dateItem.dateObject.month,
+              date: dateItem.dateObject.date
+            }
+          : dateItem.type === 'month'
+            ? {
+                type: 'month',
+                year: dateItem.dateObject.year,
+                month: dateItem.dateObject.month
+              }
+            : dateItem.type === 'year'
+              ? { type: 'year', year: dateItem.dateObject.year }
+              : {
+                  type: 'quarter',
+                  year: dateItem.dateObject.year,
+                  quarter: dateItem.dateObject.quarter
+                }
+      )
+    ) {
       return
     }
     let newValue: number
@@ -293,10 +365,11 @@ function useCalendar (
     )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
-      props.panel || type === 'date' || type === 'year'
+      props.panel || type === 'date' || type === 'week' || type === 'year'
     )
     switch (type) {
       case 'date':
+      case 'week':
         panelCommon.doClose()
         break
       case 'year':
@@ -367,25 +440,29 @@ function useCalendar (
   }
   function nextYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
+    props.onNextYear?.()
   }
   function prevYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
+    props.onPrevYear?.()
   }
   function nextMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
+    props.onNextMonth?.()
   }
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
+    props.onPrevMonth?.()
   }
   // For month type
-  function virtualListContainer (): HTMLElement {
+  function virtualListContainer (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.listElRef as HTMLElement
+    return value?.listElRef || null
   }
   // For month type
-  function virtualListContent (): HTMLElement {
+  function virtualListContent (): HTMLElement | null {
     const { value } = yearVlRef
-    return value?.itemsElRef as HTMLElement
+    return value?.itemsElRef || null
   }
   // For month type
   function handleVirtualListScroll (e: Event): void {
@@ -460,6 +537,8 @@ function useCalendar (
     handleDateClick,
     handleDateInputBlur,
     handleDateInput,
+    handleDateMouseEnter,
+    isWeekHovered,
     handleTimePickerChange,
     clearSelectedDateTime,
     virtualListContainer,

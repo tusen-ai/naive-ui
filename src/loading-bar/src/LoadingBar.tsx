@@ -26,6 +26,7 @@ function createClassName (
 export default defineComponent({
   name: 'LoadingBar',
   props: {
+    containerClass: String,
     containerStyle: [String, Object] as PropType<string | CSSProperties>
   },
   setup () {
@@ -183,7 +184,8 @@ export default defineComponent({
               <div
                 class={[
                   `${mergedClsPrefix}-loading-bar-container`,
-                  this.themeClass
+                  this.themeClass,
+                  this.containerClass
                 ]}
                 style={this.containerStyle}
               >

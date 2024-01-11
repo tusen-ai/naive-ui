@@ -23,7 +23,11 @@ import {
   type CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
-import { type VirtualListInst, VVirtualList } from 'vueuc'
+import {
+  type VirtualListInst,
+  VVirtualList,
+  type VirtualListScrollToOptions
+} from 'vueuc'
 import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
@@ -65,7 +69,8 @@ import type {
   CheckOnClick,
   TreeInst,
   GetChildren,
-  OnLoad
+  OnLoad,
+  TreeOverrideNodeClickBehavior
 } from './interface'
 import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
@@ -203,7 +208,9 @@ export const treeSharedProps = {
   >,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
   MaybeArray<onUpdateExpandedKeys>
-  >
+  >,
+  overrideDefaultNodeClickBehavior:
+    Function as PropType<TreeOverrideNodeClickBehavior>
 } as const
 
 export const treeProps = {
@@ -517,9 +524,11 @@ export default defineComponent({
 
     const { pendingNodeKeyRef, handleKeydown } = useKeyboard({
       props,
+      mergedCheckedKeysRef,
       mergedSelectedKeysRef,
       fNodesRef,
       mergedExpandedKeysRef,
+      handleCheck,
       handleSelect,
       handleSwitcherClick
     })
@@ -561,9 +570,14 @@ export default defineComponent({
     })
 
     // shallow watch data
+    let isDataReset = false
     watch(
       toRef(props, 'data'),
       () => {
+        isDataReset = true
+        void nextTick(() => {
+          isDataReset = false
+        })
         loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
@@ -677,6 +691,9 @@ export default defineComponent({
     watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated || expandAnimationDisabled) {
         void nextTick(syncScrollbar)
+        return
+      }
+      if (isDataReset) {
         return
       }
       const nodeHeight = depx(themeRef.value.self.nodeHeight)
@@ -1525,6 +1542,10 @@ export default defineComponent({
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
       multipleRef: toRef(props, 'multiple'),
+      overrideDefaultNodeClickBehaviorRef: toRef(
+        props,
+        'overrideDefaultNodeClickBehavior'
+      ),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -1535,8 +1556,16 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
-    function scrollTo (options: { key: Key }): void {
-      virtualListInstRef.value?.scrollTo(options)
+    function scrollTo (
+      options: VirtualListScrollToOptions | number,
+      y?: number
+    ): void {
+      if (typeof options === 'number') {
+        virtualListInstRef.value?.scrollTo(options, y || 0)
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        virtualListInstRef.value?.scrollTo(options)
+      }
     }
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
@@ -1574,7 +1603,8 @@ export default defineComponent({
           dropMarkColor,
           nodeWrapperPadding,
           nodeHeight,
-          lineHeight
+          lineHeight,
+          lineColor
         }
       } = themeRef.value
       const lineOffsetTop = getPadding(nodeWrapperPadding, 'top')
@@ -1598,7 +1628,8 @@ export default defineComponent({
         '--n-line-offset-top': `-${lineOffsetTop}`,
         '--n-line-offset-bottom': `-${lineOffsetBottom}`,
         '--n-node-content-height': nodeContentHeight,
-        '--n-line-height': lineHeight
+        '--n-line-height': lineHeight,
+        '--n-line-color': lineColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -1690,7 +1721,15 @@ export default defineComponent({
           {{
             default: () => {
               this.onRender?.()
-              return (
+              return !fNodes.length ? (
+                resolveSlot(this.$slots.empty, () => [
+                  <NEmpty
+                    class={`${mergedClsPrefix}-tree__empty`}
+                    theme={this.mergedTheme.peers.Empty}
+                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                  />
+                ])
+              ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
                   items={this.fNodes}

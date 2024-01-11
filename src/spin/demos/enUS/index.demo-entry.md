@@ -10,14 +10,17 @@ wrap.vue
 description.vue
 customize-icon.vue
 delay.vue
+blocking-debug.vue
 ```
 
 ## API
 
 ### Spin Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | Content Class of the spin. | 2.36.0 |
+| content-style | `string \| Object` | `undefined` | Content style of the spin. | 2.36.0 |
 | description | `string` | `undefined` | Description of the spin. |
 | rotate | `boolean` | `true` | Specify whether icon rotates, only working for custom icon. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Size of the spin. |

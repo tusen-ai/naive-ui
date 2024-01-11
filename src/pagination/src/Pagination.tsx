@@ -30,7 +30,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { PaginationTheme } from '../styles'
 import { paginationLight } from '../styles'
 import type { PageItem } from './utils'
-import { createPageItemsInfo } from './utils'
+import { createPageItemsInfo, getDefaultPageSize } from './utils'
 import style from './styles/index.cssr'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import {
@@ -101,6 +101,7 @@ export const paginationProps = {
     default: ['pages', 'size-picker', 'quick-jumper']
   },
   to: useAdjustedTo.propTo,
+  showQuickJumpDropdown: { type: Boolean, default: true },
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -166,14 +167,7 @@ export default defineComponent({
     const { localeRef } = useLocale('Pagination')
     const selfRef = ref<HTMLElement | null>(null)
     const uncontrolledPageRef = ref(props.defaultPage)
-    const getDefaultPageSize = (): number => {
-      const { defaultPageSize } = props
-      if (defaultPageSize !== undefined) return defaultPageSize
-      const pageSizeOption = props.pageSizes[0]
-      if (typeof pageSizeOption === 'number') return pageSizeOption
-      return pageSizeOption.value || 10
-    }
-    const uncontrolledPageSizeRef = ref(getDefaultPageSize())
+    const uncontrolledPageSizeRef = ref(getDefaultPageSize(props))
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
@@ -229,7 +223,8 @@ export default defineComponent({
       createPageItemsInfo(
         mergedPageRef.value,
         mergedPageCountRef.value,
-        props.pageSlot
+        props.pageSlot,
+        props.showQuickJumpDropdown
       )
     )
 
@@ -776,6 +771,9 @@ export default defineComponent({
                               ? 'fast-backward'
                               : 'fast-forward'
                             : pageItem.type
+                        if (pageItem.type !== 'page' && !pageItem.options) {
+                          return itemNode
+                        }
                         return (
                           <NPopselect
                             to={this.to}
@@ -819,7 +817,9 @@ export default defineComponent({
                               }
                             }}
                             options={
-                              pageItem.type !== 'page' ? pageItem.options : []
+                              pageItem.type !== 'page' && pageItem.options
+                                ? pageItem.options
+                                : []
                             }
                             onUpdateValue={this.handleMenuSelect}
                             scrollable

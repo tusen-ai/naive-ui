@@ -1,6 +1,7 @@
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
+import type { DropdownMixedOption } from './interface'
 
 export default defineComponent({
   name: 'DropdownGroupHeader',
@@ -45,7 +46,10 @@ export default defineComponent({
     } = this
     const { rawNode } = this.tmNode
     const node = (
-      <div class={`${clsPrefix}-dropdown-option`} {...nodeProps?.(rawNode)}>
+      <div
+        class={`${clsPrefix}-dropdown-option`}
+        {...nodeProps?.(rawNode as DropdownMixedOption)}
+      >
         <div
           class={`${clsPrefix}-dropdown-option-body ${clsPrefix}-dropdown-option-body--group`}
         >
@@ -63,7 +67,7 @@ export default defineComponent({
             data-dropdown-option
           >
             {renderLabel
-              ? renderLabel(rawNode)
+              ? renderLabel(rawNode as DropdownMixedOption)
               : render(rawNode.title ?? rawNode[this.labelField])}
           </div>
           <div

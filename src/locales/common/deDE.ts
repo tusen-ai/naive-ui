@@ -31,6 +31,7 @@ const deDE: NLocale = {
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'Löschen',
     now: 'Jetzt',
     confirm: 'Bestätigen',
@@ -41,6 +42,7 @@ const deDE: NLocale = {
     monthPlaceholder: 'Monat auswählen',
     yearPlaceholder: 'Jahr auswählen',
     quarterPlaceholder: 'Quartal auswählen',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Anfangsdatum',
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
@@ -78,7 +80,8 @@ const deDE: NLocale = {
     placeholder: 'Uhrzeit auswählen',
     positiveText: 'OK',
     negativeText: 'Abbrechen',
-    now: 'Jetzt'
+    now: 'Jetzt',
+    clear: 'Löschen'
   },
   Pagination: {
     goto: 'Gehe zu',

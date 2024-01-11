@@ -252,7 +252,7 @@ export default defineComponent({
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
           suffixSpan = Number(
             parseResponsivePropValue(
-              maybeSuffixNode.props?.span,
+              maybeSuffixNode.props?.span as string | number | null | undefined,
               responsiveQuery
             ) ?? defaultSpan
           )

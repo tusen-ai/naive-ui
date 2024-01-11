@@ -4,9 +4,15 @@
       <img src="./assets/images/naivelogo.svg">
       <span v-if="!isMobile">Naive UI</span>
     </n-text>
-    <div :style="!isMobile ? 'display: flex; align-items: center;' : ''">
+    <div
+      :style="
+        !isMobile ? 'display: flex; align-items: center; overflow: hidden;' : ''
+      "
+    >
       <div v-if="!(isMobile || isTablet)" class="nav-menu">
         <n-menu
+          ref="menuInstRef"
+          responsive
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
@@ -15,7 +21,11 @@
       </div>
       <n-auto-complete
         v-model:value="searchPattern"
-        :style="!isMobile ? 'width: 216px; margin-left: 24px' : undefined"
+        :style="
+          !isMobile
+            ? 'width: 216px; margin-left: 24px; margin-right: 12px; flex-shrink: 0;'
+            : undefined
+        "
         :placeholder="t('searchPlaceholder')"
         :options="searchOptions"
         clear-after-select
@@ -318,9 +328,17 @@ export default defineComponent({
     const searchableOptionsRef = useFlattenedDocOptions()
     const searchPatternRef = ref('')
     const searchOptionsRef = computed(() => {
-      function getLabel (item) {
+      // function getLabel(item) {
+      //   if (item.label) {
+      //     return typeof item.extra === 'function'
+      //       ? () => [item.label, ' ', item.extra()]
+      //       : item.label + (item.extra ? ' ' + item.extra : '')
+      //   }
+      //   return item.key
+      // }
+      function getSearchableContent (item) {
         if (item.label) {
-          return item.label + (item.extra ? ' ' + item.extra : '')
+          return item.label + (item.extraString ? ' ' + item.extraString : '')
         }
         return item.key
       }
@@ -332,11 +350,13 @@ export default defineComponent({
             .toLowerCase()
             .replace(replaceRegex, '')
             .slice(0, 20)
-          const label = getLabel(item).toLowerCase().replace(replaceRegex, '')
+          const label = getSearchableContent(item)
+            .toLowerCase()
+            .replace(replaceRegex, '')
           return match(pattern, label)
         })
         .map((item) => ({
-          label: getLabel(item),
+          label: getSearchableContent(item),
           value: item.path
         }))
     })
@@ -355,7 +375,18 @@ export default defineComponent({
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
     }
 
+    // responsive menu
+    const menuInstRef = ref()
+    let lastWindowInnerWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > lastWindowInnerWidth) {
+        menuInstRef.value?.deriveResponsiveState()
+      }
+      lastWindowInnerWidth = window.innerWidth
+    })
+
     return {
+      menuInstRef,
       renderMenuLabel,
       mobilePopoverRef,
       tusimple: process.env.TUSIMPLE,
@@ -435,6 +466,9 @@ export default defineComponent({
 
 .nav-menu {
   padding-left: 36px;
+  overflow: hidden;
+  flex-grow: 0;
+  flex-shrink: 1;
 }
 
 .nav-picker {
@@ -456,7 +490,9 @@ export default defineComponent({
 </style>
 
 <style>
-.nav-menu .n-menu-item {
+.nav-menu .n-menu-item,
+.nav-menu .n-submenu,
+.nav-menu .n-menu-item-content {
   height: calc(var(--header-height) - 1px) !important;
 }
 </style>

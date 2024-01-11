@@ -10,7 +10,8 @@ import type {
   CreateRowClassName,
   TableSelectionColumn,
   TableColumn,
-  TableExpandColumn
+  TableExpandColumn,
+  RowData
 } from './interface'
 
 export const SELECTION_COL_WIDTH = 40
@@ -170,4 +171,28 @@ export function isColumnSorting (
         state.columnKey === (column as TableBaseColumn).key && state.order
     ) !== undefined
   )
+}
+
+function formatCsvCell (value: unknown): string {
+  if (typeof value === 'string') {
+    return value.replace(/,/g, '\\,')
+  } else if (value === null || value === undefined) {
+    return ''
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string, @typescript-eslint/restrict-template-expressions
+    return `${value}`.replace(/,/g, '\\,')
+  }
+}
+
+export function generateCsv (columns: TableColumn[], data: RowData[]): string {
+  const exportableColumns = columns.filter(
+    (column) => column.type !== 'expand' && column.type !== 'selection'
+  )
+  const header = exportableColumns.map((col: any) => col.title).join(',')
+  const rows = data.map((row) => {
+    return exportableColumns
+      .map((col: any) => formatCsvCell(row[col.key]))
+      .join(',')
+  })
+  return [header, ...rows].join('\n')
 }

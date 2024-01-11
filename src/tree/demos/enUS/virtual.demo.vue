@@ -6,9 +6,20 @@ Set `virtual-scroll` to use virtual scroll. Note that you should set the height 
 
 <template>
   <n-space vertical>
-    <n-button @click="handleClick">
-      Scroll
-    </n-button>
+    <n-space>
+      <n-button @click="handleScrollToKey">
+        Scroll
+      </n-button>
+      <n-button @click="handleScrollToPosition">
+        Scroll to position
+      </n-button>
+      <n-button @click="handleScrollToIndex">
+        Scroll to index
+      </n-button>
+      <n-button @click="handleScrollToDistance">
+        Scroll to distance
+      </n-button>
+    </n-space>
     <n-tree
       ref="treeInstRef"
       block-line
@@ -51,8 +62,17 @@ export default defineComponent({
     return {
       treeInstRef,
       data: createData(),
-      handleClick: () => {
+      handleScrollToKey: () => {
         treeInstRef.value?.scrollTo({ key: '45362710' })
+      },
+      handleScrollToPosition: () => {
+        treeInstRef.value?.scrollTo({ position: 'bottom' })
+      },
+      handleScrollToIndex: () => {
+        treeInstRef.value?.scrollTo({ index: 100 })
+      },
+      handleScrollToDistance: () => {
+        treeInstRef.value?.scrollTo({ top: 400 })
       }
     }
   }

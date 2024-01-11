@@ -31,6 +31,7 @@ const jaJP: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'yyyy-w',
     clear: 'クリア',
     now: '現在',
     confirm: 'OK',
@@ -41,13 +42,13 @@ const jaJP: NLocale = {
     monthPlaceholder: '月を選択',
     yearPlaceholder: '年を選択',
     quarterPlaceholder: '四半期を選択',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',
     endDatetimePlaceholder: '終了時間',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: '開始月',
+    endMonthPlaceholder: '終了月',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今日'
@@ -62,13 +63,12 @@ const jaJP: NLocale = {
     sourceTitle: '元',
     targetTitle: '先'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: '全選択',
+    unselectAll: '全選択取消',
+    clearAll: 'リセット',
+    total: (num: number): string => `合計 ${num} 項目`,
+    selected: (num: number): string => `${num} 個の項目を選択`
   },
   Empty: {
     description: 'データなし'
@@ -80,7 +80,8 @@ const jaJP: NLocale = {
     placeholder: '選択してください',
     positiveText: 'OK',
     negativeText: 'キャンセル',
-    now: '現在'
+    now: '現在',
+    clear: 'クリア'
   },
   Pagination: {
     goto: 'ページジャンプ',
@@ -120,8 +121,7 @@ const jaJP: NLocale = {
     tipZoomIn: '拡大',
     tipDownload: 'ダウンロード',
     tipClose: '閉じる (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: '元のサイズに戻す'
   }
 }
 
