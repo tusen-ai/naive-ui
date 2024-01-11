@@ -4,7 +4,8 @@ import {
   type PropType,
   ref,
   computed,
-  type CSSProperties
+  type CSSProperties,
+  watch
 } from 'vue'
 import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
@@ -28,6 +29,10 @@ export const splitProps = {
     type: Number,
     default: 0.5
   },
+  size: {
+    type: Number,
+    default: 0
+  },
   min: {
     type: Number,
     default: 0
@@ -46,9 +51,8 @@ export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 export default defineComponent({
   name: 'Split',
   props: splitProps,
-  setup (props) {
+  setup (props, { emit }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
-
     const themeRef = useTheme(
       'Split',
       '-split',
@@ -72,8 +76,21 @@ export default defineComponent({
 
     const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
-    const currentSize = ref(props.defaultSize)
-
+    const currentSize = ref(props.size || props.defaultSize)
+    if (props.size) {
+      watch(
+        () => props.size,
+        (newSize) => {
+          currentSize.value = newSize
+        }
+      )
+      watch(
+        () => currentSize,
+        (newSize) => {
+          emit('update:size', newSize)
+        }
+      )
+    }
     const firstPaneStyle = computed(() => {
       const size = currentSize.value * 100
       return {
