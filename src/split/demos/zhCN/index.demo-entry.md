@@ -12,6 +12,7 @@ vertical.vue
 nest.vue
 event.vue
 slot.vue
+controlled.vue
 ```
 
 ## API

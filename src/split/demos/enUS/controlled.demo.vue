@@ -4,7 +4,7 @@
 
 <template>
   <n-input-number v-model:value="split" :step="0.1" clearable />
-  <NSplit v-model:size="split" style="height: 100%">
+  <NSplit v-model:size="split" style="height: 200px">
     <template #1>
       <div style="width: 100%; background-color: black" />
     </template>
