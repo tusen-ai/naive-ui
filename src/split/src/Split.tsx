@@ -81,15 +81,9 @@ export default defineComponent({
       watch(
         () => props.size,
         (newSize) => {
-          if (newSize > props.max) {
-            emit('update:size', props.max)
-            return
+          if (newSize <= props.max && newSize >= props.min) {
+            currentSize.value = newSize
           }
-          if (newSize < props.max) {
-            emit('update:size', props.min)
-            return
-          }
-          currentSize.value = newSize
         }
       )
       watch(
