@@ -13,7 +13,7 @@ import {
   Transition,
   onMounted,
   type LabelHTMLAttributes,
-  type VNodeChild
+  type VNodeChild, Ref
 } from 'vue'
 import Schema from 'async-validator'
 import type { ValidateError, RuleItem, ValidateOption } from 'async-validator'
