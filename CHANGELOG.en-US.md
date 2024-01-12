@@ -5,7 +5,7 @@
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
-- Fix `form-item`'s `validation` input or change and blur, The animation triggers twice
+- Fix `form-item`'s `validation` input or change and blur, The animation triggers twice.
 
 ## 2.37.3
 
