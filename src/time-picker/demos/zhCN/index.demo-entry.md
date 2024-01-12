@@ -26,7 +26,7 @@ timezone-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Time Picker 中支持的操作 | `'clear'` NEXT_VERSION |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Time Picker 中支持的操作 | `'clear'` 2.37.0 |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
 | default-formatted-value | `string \| null` | `undefined` | 非受控模式下的默认格式化后的值 | 2.24.0 |

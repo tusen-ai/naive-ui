@@ -1,7 +1,7 @@
 <markdown>
 # File picker
 
-Use `override-default-node-click-behavoir` to simulate a file picker (folder is not selectable).
+Use `override-default-node-click-behavior` to simulate a file picker (folder is not selectable).
 </markdown>
 
 <template>

@@ -41,7 +41,7 @@ v-show-debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| expand-on-hover | `boolean` | `false` | Expand on hover. | NEXT_VERSION |
+| expand-on-hover | `boolean` | `false` | Expand on hover. | 2.37.0 |
 | max | `number` | `undefined` | Max avatar count in the group. |  |
 | max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |  |
 | options | `Array<AvatarOption>` | `[]` | Avatar group options. |  |

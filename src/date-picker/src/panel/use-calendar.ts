@@ -40,6 +40,7 @@ import {
 import type {
   FirstDayOfWeek,
   IsSingleDateDisabled,
+  IsSingleDateDisabledDetail,
   PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
@@ -210,12 +211,15 @@ function useCalendar (
     }
     return getTime(startOfDay(value))
   }
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled (
+    ts: number,
+    detail: IsSingleDateDisabledDetail
+  ): boolean {
     const {
       isDateDisabled: { value: isDateDisabled }
     } = validation
     if (!isDateDisabled) return false
-    return (isDateDisabled as IsSingleDateDisabled)(ts)
+    return (isDateDisabled as IsSingleDateDisabled)(ts, detail)
   }
   function handleDateInput (value: string): void {
     const date = strictParse(
@@ -308,7 +312,31 @@ function useCalendar (
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
-    if (mergedIsDateDisabled(dateItem.ts)) {
+    if (
+      mergedIsDateDisabled(
+        dateItem.ts,
+        dateItem.type === 'date'
+          ? {
+              type: 'date',
+              year: dateItem.dateObject.year,
+              month: dateItem.dateObject.month,
+              date: dateItem.dateObject.date
+            }
+          : dateItem.type === 'month'
+            ? {
+                type: 'month',
+                year: dateItem.dateObject.year,
+                month: dateItem.dateObject.month
+              }
+            : dateItem.type === 'year'
+              ? { type: 'year', year: dateItem.dateObject.year }
+              : {
+                  type: 'quarter',
+                  year: dateItem.dateObject.year,
+                  quarter: dateItem.dateObject.quarter
+                }
+      )
+    ) {
       return
     }
     let newValue: number

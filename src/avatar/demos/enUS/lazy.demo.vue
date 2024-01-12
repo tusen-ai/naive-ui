@@ -32,6 +32,7 @@ Load the images only after they enter the viewport. There are two ways to use it
         lazy
         :src="src"
         fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+        :render-placeholder="() => null"
         :intersection-observer-options="{
           root: '#image-scroll-container'
         }"
@@ -52,11 +53,11 @@ export default defineComponent({
         'https://picsum.photos/id/3/100/100',
         'https://picsum.photos/id/4/100/100',
         'https://picsum.photos/id/5/100/100',
-        'xxx.png',
         'https://picsum.photos/id/7/100/100',
         'https://picsum.photos/id/8/100/100',
         'https://picsum.photos/id/9/100/100',
-        'https://picsum.photos/id/10/100/100'
+        'https://picsum.photos/id/10/100/100',
+        'xxx.png'
       ]
     }
   }

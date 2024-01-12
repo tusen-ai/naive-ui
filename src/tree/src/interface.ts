@@ -162,7 +162,7 @@ export interface MotionData {
 
 export interface InternalTreeInst {
   handleKeydown: (e: KeyboardEvent) => {
-    enterBehavoir: TreeOverrideNodeClickBehaviorReturn | null
+    enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
   }
 }
 

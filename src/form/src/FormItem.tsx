@@ -209,15 +209,21 @@ export default defineComponent({
     }
     // Resolve : ()
     // Reject  : (errors: AsyncValidator.ValidateError[])
-    async function validate (options: FormItemValidateOptions): Promise<void>
+    async function validate (options: FormItemValidateOptions): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       trigger?: string | null,
       callback?: ValidateCallback
-    ): Promise<void>
+    ): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
     async function validate (
       options?: string | null | FormItemValidateOptions,
       callback?: ValidateCallback
-    ): Promise<void> {
+    ): Promise<{
+        warnings: ValidateError[] | undefined
+      }> {
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
@@ -232,7 +238,9 @@ export default defineComponent({
         shouldRuleBeApplied = options.shouldRuleBeApplied
         asyncValidatorOptions = options.options
       }
-      await new Promise<void>((resolve, reject) => {
+      return await new Promise<{
+        warnings: ValidateError[] | undefined
+      }>((resolve, reject) => {
         void internalValidate(
           trigger,
           shouldRuleBeApplied,
@@ -240,12 +248,12 @@ export default defineComponent({
         ).then(({ valid, errors, warnings }) => {
           if (valid) {
             if (validateCallback) {
-              validateCallback(undefined, warnings)
+              validateCallback(undefined, { warnings })
             }
-            resolve()
+            resolve({ warnings })
           } else {
             if (validateCallback) {
-              validateCallback(errors, warnings)
+              validateCallback(errors, { warnings })
             }
             reject(errors)
           }
@@ -305,8 +313,10 @@ export default defineComponent({
           }
           return shallowClonedRule
         })
-      const activeErrorRules = activeRules.filter((r) => !r.warningOnly)
-      const activeWarningRules = activeRules.filter((r) => r.warningOnly)
+      const activeErrorRules = activeRules.filter((r) => r.level !== 'warning')
+      const activeWarningRules = activeRules.filter(
+        (r) => r.level === 'warning'
+      )
 
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({
@@ -342,7 +352,9 @@ export default defineComponent({
       }
 
       const validationResult: FormItemInternalValidateResult = {
-        valid: true
+        valid: true,
+        errors: undefined,
+        warnings: undefined
       }
       if (activeErrorRules.length) {
         const errors = await new Promise<ValidateError[] | null>((resolve) => {

@@ -219,7 +219,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | --- | --- | --- | --- |
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
-| downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | NEXT_VERSION |
+| downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | 2.37.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |

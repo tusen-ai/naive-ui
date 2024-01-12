@@ -43,7 +43,7 @@ custom-field.vue
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the select. |  |
-| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | NEXT_VERSION |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
@@ -107,12 +107,12 @@ custom-field.vue
 
 ### Select Slots
 
-| Name   | Parameters | Description                            | Version      |
-| ------ | ---------- | -------------------------------------- | ------------ |
-| header | `()`       | Header menu slot.                      | NEXT_VERSION |
-| action | `()`       | Options menu slot.                     |              |
-| empty  | `()`       | Empty state slot for the options menu. |              |
-| arrow  | `()`       | Arrow icon slot.                       | 2.24.2       |
+| Name   | Parameters | Description                            | Version |
+| ------ | ---------- | -------------------------------------- | ------- |
+| header | `()`       | Header menu slot.                      | 2.37.0  |
+| action | `()`       | Options menu slot.                     |         |
+| empty  | `()`       | Empty state slot for the options menu. |         |
+| arrow  | `()`       | Arrow icon slot.                       | 2.24.2  |
 
 ### Select Methods
 

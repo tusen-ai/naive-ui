@@ -53,10 +53,11 @@ export default defineComponent({
   }
 })
 </script>
+
 <style>
 .item {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 .avatar {
   width: 28px;
