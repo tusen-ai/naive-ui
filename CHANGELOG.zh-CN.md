@@ -4,7 +4,7 @@
 
 ### Feat
 
-- 新增 `n-split`的 `add size and on-update:size, controlled properties` 添加 size 和 on-update：size，受控属性
+- 新增 `n-split`的 `size` 和 `on-update:size`, 添加 size 和 on-update：size、受控属性
 
 ### Fixes
 
