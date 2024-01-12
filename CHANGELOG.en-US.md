@@ -5,7 +5,7 @@
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
-- Fix `n-scrollbar`'s typo in `aria-hidden`
+- Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
 
 ## 2.37.3
 
