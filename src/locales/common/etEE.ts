@@ -55,7 +55,7 @@ const etEE: NLocale = {
   },
   DataTable: {
     checkTableAll: 'Vali tabelis kõik',
-    uncheckTableAll: 'Kustuta tabeli valik',
+    uncheckTableAll: 'Tühista tabeli valik',
     confirm: 'Kinnita',
     clear: 'Tühjenda'
   },
@@ -65,7 +65,7 @@ const etEE: NLocale = {
   },
   Transfer: {
     selectAll: 'Vali kõik',
-    unselectAll: 'Kustuta valik',
+    unselectAll: 'Tühista valik',
     clearAll: 'Tühjenda',
     total: (num: number): string => `Kokku ${num} rida`,
     selected: (num: number): string => `${num} rida valitud`
