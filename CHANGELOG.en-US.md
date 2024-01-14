@@ -6,6 +6,10 @@
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
 
+### i18n
+
+- Add `etEE` locale.
+
 ## 2.37.3
 
 ### Fixes
