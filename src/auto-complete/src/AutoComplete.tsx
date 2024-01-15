@@ -62,6 +62,10 @@ export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
+  append: {
+    type: Boolean,
+    default: false
+  },
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -184,6 +188,8 @@ export default defineComponent({
       if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
       if (onInput) call(onInput as OnUpdateImpl, value)
+      console.log('controlledValueRef.value', controlledValueRef.value)
+      console.log('uncontrolledValueRef.value', uncontrolledValueRef.value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -240,7 +246,11 @@ export default defineComponent({
         if (props.clearAfterSelect) {
           doUpdateValue(null)
         } else if (option.label !== undefined) {
-          doUpdateValue(option.label)
+          doUpdateValue(
+            props.append
+              ? `${mergedValueRef.value}${option.label}`
+              : option.label
+          )
         }
         canBeActivatedRef.value = false
         if (props.blurAfterSelect) {
