@@ -6,6 +6,10 @@
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为
 
+### Features
+
+- `n-autocomplete` 新增 `append` 属性
+
 ## 2.37.3
 
 ### Fixes
