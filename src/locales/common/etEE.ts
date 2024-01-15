@@ -121,7 +121,6 @@ const etEE: NLocale = {
     tipZoomIn: 'Suumi sisse',
     tipDownload: 'Lae alla',
     tipClose: 'Sulge (Esc)',
-    // TODO: translation
     tipOriginalSize: 'Algsuurus'
   }
 }
