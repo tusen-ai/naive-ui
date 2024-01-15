@@ -188,8 +188,6 @@ export default defineComponent({
       if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
       if (onInput) call(onInput as OnUpdateImpl, value)
-      console.log('controlledValueRef.value', controlledValueRef.value)
-      console.log('uncontrolledValueRef.value', uncontrolledValueRef.value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
