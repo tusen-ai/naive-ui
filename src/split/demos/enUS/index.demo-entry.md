@@ -26,6 +26,9 @@ slot.vue
 | min | `number` | `0` | The minimum threshold for splitting, 0-1 is a percentage. | 2.36.0 |
 | max | `number` | `1` | The maximum split threshold, 0-1 is a percentage. | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
+| on-drag-start | `(e: Event) => void` | `undefined` | Callback function when drag start. | 2.36.0 |
+| on-drag-move | `(e: Event) => void` | `undefined` | Callback function when dragging. | 2.36.0 |
+| on-drag-end | `(e: Event) => void` | `undefined` | Callback function when drag end. | 2.36.0 |
 
 ### Split Slots
 

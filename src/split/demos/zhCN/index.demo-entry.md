@@ -26,6 +26,9 @@ slot.vue
 | min | `number` | `0` | Split 的分割最小阈值，0-1 代表百分比 | 2.36.0 |
 | max | `number` | `1` | Split 的分割最大阈值，0-1 代表百分比 | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Split 的分隔条大小 | 2.36.0 |
+| on-drag-start | `(e: Event) => void` | `undefined` | 开始拖拽的回调函数 | 2.36.0 |
+| on-drag-move | `(e: Event) => void` | `undefined` | 拖拽中的回调函数 | 2.36.0 |
+| on-drag-end | `(e: Event) => void` | `undefined` | 结束拖拽的回调函数 | 2.36.0 |
 
 ### Split Slots
 
