@@ -6,9 +6,9 @@
   <n-split
     direction="horizontal"
     style="height: 200px"
-    @move-start="handleOnMoveStart"
-    @moving="handleOnMoving"
-    @move-end="handleOnMoveEnd"
+    @drag-start="handleOnDragStart"
+    @drag-move="handleOnDragMove"
+    @drag-end="handleOnDragEnd"
   >
     <template #1>
       Pane 1
@@ -27,13 +27,13 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      handleOnMoveStart: () => {
+      handleOnDragStart: () => {
         message.info('开始滚动')
       },
-      handleOnMoving: () => {
+      handleOnDragMove: () => {
         message.info('滚动中')
       },
-      handleOnMoveEnd: () => {
+      handleOnDragEnd: () => {
         message.info('滚动结束')
       }
     }
