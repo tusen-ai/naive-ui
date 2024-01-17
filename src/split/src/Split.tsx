@@ -31,7 +31,7 @@ export const splitProps = {
   },
   size: {
     type: Number,
-    default: 0
+    default: undefined
   },
   min: {
     type: Number,
