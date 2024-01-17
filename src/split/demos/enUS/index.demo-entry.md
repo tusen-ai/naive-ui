@@ -21,6 +21,8 @@ slot.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | default-size | `number` | `0.5` | Default split size, 0-1 is a percentage. | 2.36.0 |
+| size | `number` | `undefined` | Split is the controlled split size, with 0-1 representing the percentage | 2.37.4 |
+| on-update:size | `(value: number) => void` | `undefined` | When a controlled property is used, it is triggered when the size property of the component changes | 2.37.4 |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
 | min | `number` | `0` | The minimum threshold for splitting, 0-1 is a percentage. | 2.36.0 |
