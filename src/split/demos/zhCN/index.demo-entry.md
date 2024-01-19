@@ -22,8 +22,8 @@ controlled.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | default-size | `number` | `0.5` | Split 的默认分割大小，0-1 代表百分比 | 2.36.0 |
-| size | `number` | `undefined` | Split 的受控分割大小，0-1 代表百分比 | 2.37.4 |
-| on-update:size | `(value: number) => void` | `undefined` | 使用受控属性时, 组件size属性变化时触发 | 2.37.4 |
+| size | `number` | `undefined` | Split 的受控分割大小，0-1 代表百分比 | NEXT_VERSION |
+| on-update:size | `(value: number) => void` | `undefined` | 使用受控属性时, 组件size属性变化时触发 | NEXT_VERSION |
 | disabled | `boolean` | `false` | 是否禁用 | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Split 的分割方向 | 2.36.0 |
 | min | `number` | `0` | Split 的分割最小阈值，0-1 代表百分比 | 2.36.0 |
