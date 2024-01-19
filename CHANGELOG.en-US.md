@@ -4,7 +4,7 @@
 
 ### Feat
 
--Feat `n-split`'s `size` and `on-update:size` add size and on-update:size, controlled properties.
+- Add `n-split` `size` prop and `on-update:size` event.
 
 ### Fixes
 
