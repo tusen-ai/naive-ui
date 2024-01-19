@@ -5,7 +5,7 @@ import {
   ref,
   computed,
   type CSSProperties,
-  watch
+  toRef
 } from 'vue'
 import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
@@ -13,6 +13,7 @@ import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
+import { useMergedState } from 'vooks'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
@@ -73,28 +74,21 @@ export default defineComponent({
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })
-
     const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
-    const currentSize = ref(props.size || props.defaultSize)
-    if (props.size) {
-      watch(
-        () => props.size,
-        (newSize) => {
-          if (newSize <= props.max && newSize >= props.min) {
-            currentSize.value = newSize
-          }
-        }
-      )
-      watch(
-        () => currentSize.value,
-        (newSize) => {
-          emit('update:size', newSize)
-        }
-      )
+    const controlledSizeRef = toRef(props, 'size')
+    const uncontrolledSizeRef = ref(props.defaultSize)
+    // use to update controlled or uncontrolled values
+    const updatePropSize = (size): void => {
+      if (typeof props.size !== 'undefined') {
+        emit('update:size', size)
+      } else {
+        uncontrolledSizeRef.value = size
+      }
     }
+    const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
     const firstPaneStyle = computed(() => {
-      const size = currentSize.value * 100
+      const size = mergedSizeRef.value * 100
       return {
         flex: `0 0 calc(${size}% - ${(props.resizeTriggerSize * size) / 100}px)`
       }
@@ -166,12 +160,12 @@ export default defineComponent({
             (parentRect.width - props.resizeTriggerSize)
           : (event.clientY - parentRect.top + offset) /
             (parentRect.height - props.resizeTriggerSize)
-      currentSize.value = newSize
+      updatePropSize(newSize)
       if (props.min) {
-        currentSize.value = Math.max(newSize, props.min)
+        updatePropSize(Math.max(newSize, props.min))
       }
       if (props.max) {
-        currentSize.value = Math.min(currentSize.value, props.max)
+        updatePropSize(Math.min(newSize, props.max))
       }
     }
 
