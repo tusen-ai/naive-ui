@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Features
+
+- `n-form-item` 新增 `desc` 属性和 `desc` 插槽，关闭 [#2927](https://github.com/tusen-ai/naive-ui/issues/2927)
+
 ### Fixes
 
 - 修复 `n-space` 插槽过滤了注释节点导致节点复用问题，关闭 [#5136](https://github.com/tusen-ai/naive-ui/issues/5136)

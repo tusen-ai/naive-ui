@@ -72,6 +72,7 @@ dynamic.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| desc | `string` | `undefined` | Description | NEXT_VERSION |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
@@ -124,7 +125,8 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 ### FormItem, FormItemGi Slots
 
-| Name     | Parameters | Description    | Version |
-| -------- | ---------- | -------------- | ------- |
-| feedback | `()`       | Feedback.      | 2.24.0  |
-| label    | `()`       | Label content. |         |
+| Name     | Parameters | Description          | Version      |
+| -------- | ---------- | -------------------- | ------------ |
+| desc     | `()`       | Description content. | NEXT_VERSION |
+| feedback | `()`       | Feedback.            | 2.24.0       |
+| label    | `()`       | Label content.       |              |

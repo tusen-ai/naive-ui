@@ -5,21 +5,31 @@
 </markdown>
 
 <template>
-  <n-radio-group
-    v-model:value="size"
-    name="left-size"
-    style="margin-bottom: 12px"
-  >
-    <n-radio-button value="small">
-      小
-    </n-radio-button>
-    <n-radio-button value="medium">
-      中
-    </n-radio-button>
-    <n-radio-button value="large">
-      大
-    </n-radio-button>
-  </n-radio-group>
+  <n-flex vertical align="start">
+    <n-radio-group
+      v-model:value="size"
+      name="left-size"
+      style="margin-bottom: 12px"
+    >
+      <n-radio-button value="small">
+        小
+      </n-radio-button>
+      <n-radio-button value="medium">
+        中
+      </n-radio-button>
+      <n-radio-button value="large">
+        大
+      </n-radio-button>
+    </n-radio-group>
+    <n-switch v-model:value="showFeedback">
+      <template #checked>
+        显示反馈
+      </template>
+      <template #unchecked>
+        关闭反馈
+      </template>
+    </n-switch>
+  </n-flex>
   <n-form
     ref="formRef"
     inline
@@ -27,19 +37,15 @@
     :model="formValue"
     :rules="rules"
     :size="size"
+    :show-feedback="showFeedback"
   >
-    <n-form-item
-      label="姓名"
-      path="user.name"
-      desc="你的名字"
-      desc-class="name-desc"
-    >
+    <n-form-item label="姓名" path="user.name">
       <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-      <!-- <template #desc>
-        <span :style="{ color:'red' }">测试</span>
-      </template> -->
+      <template #desc>
+        我已记不得你的名字
+      </template>
     </n-form-item>
-    <n-form-item label="年龄" path="user.age">
+    <n-form-item label="年龄" path="user.age" desc="也不记得你的年龄">
       <n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
     </n-form-item>
     <n-form-item label="电话号码" path="phone">
@@ -63,8 +69,10 @@ import { FormInst, useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const formRef = ref<FormInst | null>(null)
+    const showFeedbackRef = ref(true)
     const message = useMessage()
     return {
+      showFeedback: showFeedbackRef,
       formRef,
       size: ref<'small' | 'medium' | 'large'>('medium'),
       formValue: ref({
@@ -108,10 +116,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style>
-.name-desc {
-  color: grey;
-  font-size: 12px;
-}
-</style>

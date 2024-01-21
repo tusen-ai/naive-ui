@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Features
+
+- `n-form-item` adds `desc` prop and `desc` slot, closes [#2927](https://github.com/tusen-ai/naive-ui/issues/2927).
+
 ### Fixes
 
 - Fix n-space vnode reuse problem caused by filtering out comment nodes of slot, closes [#5136](https://github.com/tusen-ai/naive-ui/issues/5136).
