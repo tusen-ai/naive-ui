@@ -83,6 +83,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     if (horizontalRef.value) return undefined
     const { collapsedWidth, indent: propsIdent, rootIndent: propsRootIdent } = menuProps
     const { root, isGroup } = props
+    // Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
     const indent = propsIdent + 8
     const rootIndent = propsRootIdent === undefined ? undefined : propsRootIdent + 8
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
