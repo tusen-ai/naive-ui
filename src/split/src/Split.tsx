@@ -14,7 +14,7 @@ import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
 import { useMergedState } from 'vooks'
-import { onUpdateSizeType } from './types'
+import { type onUpdateSizeType } from './types'
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
   direction: {
