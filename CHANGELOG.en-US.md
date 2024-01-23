@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feat
+
+- Add `n-split` `size` prop and `on-update:size` event.
+
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.

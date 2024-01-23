@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feat
+
+- 新增 `n-split`的 `size` 和 `on-update:size`, 添加 size 和 on-update：size、受控属性
+
 ### Fixes
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为
