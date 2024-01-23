@@ -2,10 +2,6 @@
 
 ## NEXT_VERSION
 
-### Feat
-
-- 新增 `n-split`的 `size` 和 `on-update:size`, 添加 size 和 on-update：size、受控属性
-
 ### Fixes
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为
@@ -15,7 +11,9 @@
 
 ### Features
 
-- `n-autocomplete` 新增 `append` 属性
+- `n-auto-complete` 新增 `append` 属性
+- `n-select` 在组件可过滤且输入失焦时，添加原生 `title` 属性
+- `n-split` 新增 `size` 和 `on-update:size` 属性
 
 ### i18n
 
