@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为
+- Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
 - `n-drawer` 新增 `borderRadius` 属性
 - 修复 `n-menu` `root-indent` `indent` 下内容溢出的问题，关闭(#5616)
 
