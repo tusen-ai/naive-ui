@@ -14,6 +14,7 @@
 - `n-auto-complete` 新增 `append` 属性
 - `n-select` 在组件可过滤且输入失焦时，添加原生 `title` 属性
 - `n-split` 新增 `size` 和 `on-update:size` 属性
+- `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 
 ### i18n
 
@@ -103,6 +104,9 @@
 - `n-tree-select` 新增 `ellipsis-tag-popover-props` 属性
 - `n-avatar-group` 新增 `expand-on-hover` 属性
 - `n-tabs` 新增 `tab-class`、`add-tab-style`、`add-tab-class` 属性
+- `n-tree` 新增 `override-default-node-click-behavior` 属性
+- `n-tree-select` 新增 `override-default-node-click-behavior` 属性
+- 新增 `n-flex` 组件
 - `n-pagination` 新增 `show-quick-jump-dropdown` 属性，关闭 [#5251](https://github.com/tusen-ai/naive-ui/issues/5251)
 
 ## 2.36.0

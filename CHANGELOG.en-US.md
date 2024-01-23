@@ -14,6 +14,7 @@
 - `n-auto-complete` adds `append` prop.
 - `n-select` add native `title` attribute when `filterable` and blur input.
 - `n-split` adds `size` prop and `on-update:size` prop.
+- `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
 
 ### i18n
 
@@ -102,6 +103,9 @@
 - `n-tree-select` adds `ellipsis-tag-popover-props` prop.
 - `n-avatar-group` adds `expand-on-hover` prop.
 - `n-tabs` adds `tab-class`, `add-tab-style` and `add-tab-class` props.
+- `n-tree` adds `override-default-node-click-behavior` prop.
+- `n-tree-select` adds `override-default-node-click-behavior` prop.
+- Adds `n-flex` component.
 - `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
 
 ## 2.36.0

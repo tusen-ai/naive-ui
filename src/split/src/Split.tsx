@@ -5,6 +5,7 @@ import {
   ref,
   computed,
   type CSSProperties,
+  watchEffect,
   toRef
 } from 'vue'
 import { off, on } from 'evtd'
@@ -47,7 +48,8 @@ export const splitProps = {
   },
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
-  onDragEnd: Function as PropType<(e: Event) => void>
+  onDragEnd: Function as PropType<(e: Event) => void>,
+  watchProps: Array as PropType<Array<'defaultSize'>>
 } as const
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
@@ -81,6 +83,9 @@ export default defineComponent({
     const isDraggingRef = ref(false)
     const controlledSizeRef = toRef(props, 'size')
     const uncontrolledSizeRef = ref(props.defaultSize)
+    if (props.watchProps?.includes('defaultSize')) {
+      watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
+    }
     // use to update controlled or uncontrolled values
     const doUpdateSize = (size: number): void => {
       const _onUpdateSize = props['onUpdate:size']
