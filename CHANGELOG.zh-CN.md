@@ -12,6 +12,10 @@
 
 - `n-autocomplete` 新增 `append` 属性
 
+### i18n
+
+- 新增 `etEE` locale
+
 ## 2.37.3
 
 ### Fixes

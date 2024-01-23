@@ -12,6 +12,10 @@
 
 - `n-autocomplete` adds `append` prop.
 
+### i18n
+
+- Add `etEE` locale.
+
 ## 2.37.3
 
 ### Fixes
