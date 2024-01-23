@@ -62,10 +62,7 @@ export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
-  append: {
-    type: Boolean,
-    default: false
-  },
+  append: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
