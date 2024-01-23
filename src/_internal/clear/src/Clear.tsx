@@ -35,6 +35,7 @@ export default defineComponent({
                 <div
                   key="dismiss"
                   class={`${clsPrefix}-base-clear__clear`}
+                  onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
                   data-clear
                 >
