@@ -6,9 +6,9 @@
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
 - Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
-- `n-drawer` adds `borderRadius` attribute
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
+- Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
 
 ### Features
 
@@ -16,6 +16,7 @@
 - `n-select` add native `title` attribute when `filterable` and blur input.
 - `n-split` adds `size` prop and `on-update:size` prop.
 - `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
+- `n-drawer` adds `borderRadius` theme variable.
 
 ### i18n
 
