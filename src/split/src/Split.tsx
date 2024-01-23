@@ -4,15 +4,17 @@ import {
   type PropType,
   ref,
   computed,
-  type CSSProperties
+  type CSSProperties,
+  toRef
 } from 'vue'
 import { off, on } from 'evtd'
-import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
+import { type ExtractPublicPropTypes, resolveSlot, call } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
-
+import { useMergedState } from 'vooks'
+import { type SplitOnUpdateSize } from './types'
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
   direction: {
@@ -28,6 +30,13 @@ export const splitProps = {
     type: Number,
     default: 0.5
   },
+  'onUpdate:size': [Function, Array] as PropType<
+  SplitOnUpdateSize | SplitOnUpdateSize[]
+  >,
+  onUpdateSize: [Function, Array] as PropType<
+  SplitOnUpdateSize | SplitOnUpdateSize[]
+  >,
+  size: Number,
   min: {
     type: Number,
     default: 0
@@ -48,7 +57,6 @@ export default defineComponent({
   props: splitProps,
   setup (props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
-
     const themeRef = useTheme(
       'Split',
       '-split',
@@ -69,13 +77,20 @@ export default defineComponent({
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })
-
     const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
-    const currentSize = ref(props.defaultSize)
-
+    const controlledSizeRef = toRef(props, 'size')
+    const uncontrolledSizeRef = ref(props.defaultSize)
+    // use to update controlled or uncontrolled values
+    const doUpdateSize = (size: number): void => {
+      const _onUpdateSize = props['onUpdate:size']
+      if (props.onUpdateSize) call(props.onUpdateSize, size)
+      if (_onUpdateSize) call(_onUpdateSize, size)
+      uncontrolledSizeRef.value = size
+    }
+    const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
     const firstPaneStyle = computed(() => {
-      const size = currentSize.value * 100
+      const size = mergedSizeRef.value * 100
       return {
         flex: `0 0 calc(${size}% - ${(props.resizeTriggerSize * size) / 100}px)`
       }
@@ -147,13 +162,14 @@ export default defineComponent({
             (parentRect.width - props.resizeTriggerSize)
           : (event.clientY - parentRect.top + offset) /
             (parentRect.height - props.resizeTriggerSize)
-      currentSize.value = newSize
+      let nextSize = newSize
       if (props.min) {
-        currentSize.value = Math.max(newSize, props.min)
+        nextSize = Math.max(newSize, props.min)
       }
       if (props.max) {
-        currentSize.value = Math.min(currentSize.value, props.max)
+        nextSize = Math.min(newSize, props.max)
       }
+      doUpdateSize(nextSize)
     }
 
     return {

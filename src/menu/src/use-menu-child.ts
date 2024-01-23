@@ -81,8 +81,11 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   })
   const paddingLeftRef = computed(() => {
     if (horizontalRef.value) return undefined
-    const { collapsedWidth, indent, rootIndent } = menuProps
+    const { collapsedWidth, indent: propsIdent, rootIndent: propsRootIdent } = menuProps
     const { root, isGroup } = props
+    // Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
+    const indent = propsIdent + 8
+    const rootIndent = propsRootIdent === undefined ? undefined : propsRootIdent + 8
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     if (root) {
       if (mergedCollapsedRef.value) {
@@ -99,7 +102,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     if (NSubmenu && typeof NSubmenu.paddingLeftRef.value === 'number') {
       return (isGroup ? indent / 2 : indent) + NSubmenu.paddingLeftRef.value
     }
-    return 0
+    return 8
   })
   const iconMarginRightRef = computed(() => {
     const { collapsedWidth, indent, rootIndent } = menuProps

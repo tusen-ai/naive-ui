@@ -13,6 +13,7 @@ after-select.vue
 show-options-by-value.vue
 customized-rendering.vue
 status.vue
+append.vue
 ```
 
 ## API
@@ -21,6 +22,7 @@ status.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| append | `boolean` | `false` | Whether to append content to input. | NEXT_VERSION |
 | blur-after-select | `boolean` | `false` | Whether to blur after selection. |  |
 | clear-after-select | `boolean` | `false` | Whether to clear after selection. |  |
 | clearable | `boolean` | `false` | Whether autocomplete is clearable. |  |
@@ -64,12 +66,12 @@ status.vue
 
 ### AutoComplete Slots
 
-| Name | Parameters | Description |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |
+| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |  |
 | empty | `()` | Menu's content to show when there's no option. | 2.37.1 |
-| prefix | `()` | Input's prefix content. |
-| suffix | `()` | Input's suffix content. |
+| prefix | `()` | Input's prefix content. |  |
+| suffix | `()` | Input's suffix content. |  |
 
 ### AutoComplete Methods
 

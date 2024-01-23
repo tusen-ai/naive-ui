@@ -21,11 +21,13 @@ slot.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | default-size | `number` | `0.5` | Default split size, 0-1 is a percentage. | 2.36.0 |
+| size | `number` | `undefined` | Split is the controlled split size, with 0-1 representing the percentage | NEXT_VERSION |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
 | min | `number` | `0` | The minimum threshold for splitting, 0-1 is a percentage. | 2.36.0 |
 | max | `number` | `1` | The maximum split threshold, 0-1 is a percentage. | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
+| on-update:size | `(value: number) => void` | `undefined` | Callback fired on size changes. | NEXT_VERSION |
 
 ### Split Slots
 
