@@ -92,11 +92,7 @@ export default cB('input', `
     `),
     c('&:-webkit-autofill ~', [
       cE('placeholder', 'display: none;')
-    ]),
-    // overlay autofill's default background color
-    c('&:autofill, &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active', `
-      box-shadow: inset 0 0 0 var(--n-height) var(--n-color);
-    `)
+    ])
   ]),
   cM('round', [
     cNotM('textarea', 'border-radius: calc(var(--n-height) / 2);')

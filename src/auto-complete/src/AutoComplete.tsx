@@ -62,6 +62,7 @@ export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
+  append: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -91,6 +92,7 @@ export const autoCompleteProps = {
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
+  showEmpty: Boolean,
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -168,7 +170,7 @@ export default defineComponent({
       return (
         mergedShowOptionsRef.value &&
         canBeActivatedRef.value &&
-        !!selectOptionsRef.value.length
+        (props.showEmpty ? true : !!selectOptionsRef.value.length)
       )
     })
     const treeMateRef = computed(() =>
@@ -239,7 +241,11 @@ export default defineComponent({
         if (props.clearAfterSelect) {
           doUpdateValue(null)
         } else if (option.label !== undefined) {
-          doUpdateValue(option.label)
+          doUpdateValue(
+            props.append
+              ? `${mergedValueRef.value}${option.label}`
+              : option.label
+          )
         }
         canBeActivatedRef.value = false
         if (props.blurAfterSelect) {
@@ -432,7 +438,9 @@ export default defineComponent({
                               renderOption={this.renderOption}
                               size="medium"
                               onToggle={this.handleToggle}
-                            />,
+                            >
+                              {{ empty: () => this.$slots.empty?.() }}
+                            </NInternalSelectMenu>,
                             [
                               [
                                 clickoutside,

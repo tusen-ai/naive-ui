@@ -1,7 +1,7 @@
 <markdown>
 # Custom node click behavior
 
-You can use `override-default-node-click-behavoir` prop to override default node click behavior.
+You can use `override-default-node-click-behavior` prop to override default node click behavior.
 
 For example, you can change non-leaf key's default behavior to `'toggleExpand'` to simulate a file selector.
 </markdown>

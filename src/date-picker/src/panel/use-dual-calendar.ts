@@ -30,6 +30,7 @@ import {
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 import {
   datePickerInjectionKey,
+  type IsRangeDateDisabled,
   type RangePanelChildComponentRefs,
   type Shortcuts
 } from '../interface'
@@ -366,20 +367,20 @@ function useDualCalendar (
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) return isDateDisabled(ts, 'start', null)
+    if (!Array.isArray(props.value)) { return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null) }
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
-      return isDateDisabled(ts, 'start', null)
+      return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
     } else {
       const { value: memorizedStartDateTime } = memorizedStartDateTimeRef
       // after you starting to select
       if (ts < memorizedStartDateTimeRef.value) {
-        return isDateDisabled(ts, 'start', [
+        return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', [
           memorizedStartDateTime,
           memorizedStartDateTime
         ])
       } else {
-        return isDateDisabled(ts, 'end', [
+        return (isDateDisabled as IsRangeDateDisabled)(ts, 'end', [
           memorizedStartDateTime,
           memorizedStartDateTime
         ])

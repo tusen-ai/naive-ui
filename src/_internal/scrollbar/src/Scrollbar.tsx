@@ -727,7 +727,7 @@ const Scrollbar = defineComponent({
           ]}
           data-scrollbar-rail
           style={[style || '', this.verticalRailStyle as CSSProperties]}
-          aria-hiddens
+          aria-hidden
         >
           {h(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

@@ -102,17 +102,17 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
   By default, validation will use all rules regardless of the triggers of the rules.
 </n-alert>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. |
-| restoreValidation | `() => void` | Restore validate. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | Restore validate. |  |
 
 ### FormItem, FormItemGi Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | Validate the form item. The rejection value type of returned promise is `Array<FormValidationError>`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. |
-| restoreValidation | `() => void` | Restore validate. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | Validate the form item. The rejection value type of returned promise is `FormValidationError`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | Restore validate. |  |
 
 To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 

@@ -27,7 +27,7 @@ resizable.vue
 | auto-focus | `boolean` | `true` | Whether to focus the first focusable element inside drawer. | 2.24.2 |
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close drawer on Esc is pressed. | 2.24.2 |
-| content-class | `string` | `undefined` | Class of drawer's scrollable content node. | NEXT_VERSION |
+| content-class | `string` | `undefined` | Class of drawer's scrollable content node. | 2.37.0 |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |  |
 | default-width | `number \| string` | `251` | Default width of the drawer, works when placement is `left` and `right`. | 2.31.0 |
 | default-height | `number \| string` | `251` | Default height of the drawer, works when placement is `top` and `bottom`. | 2.31.0 |
@@ -60,14 +60,14 @@ resizable.vue
 
 | Name | Parameters | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| body-class | `string` | `undefined` | Drawer content's body class. | NEXT_VERSION |
+| body-class | `string` | `undefined` | Drawer content's body class. | 2.37.0 |
 | body-style | `string \| Object` | `undefined` | Drawer content's body style. |  |
 | body-content-class | `string` | `undefined` | Class of body's scrollable content node. |  |
-| body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. | NEXT_VERSION |
+| body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. | 2.37.0 |
 | closable | `boolean` | `false` | Whether the drawer content is closable. |  |
-| footer-class | `string` | `undefined` | Drawer content's footer class. | NEXT_VERSION |
+| footer-class | `string` | `undefined` | Drawer content's footer class. | 2.37.0 |
 | footer-style | `string \| Object` | `undefined` | Drawer content's footer style. |  |
-| header-class | `string` | `undefined` | Drawer content's header class. | NEXT_VERSION |
+| header-class | `string` | `undefined` | Drawer content's header class. | 2.37.0 |
 | header-style | `string \| Object` | `undefined` | Drawer content's header style. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |  |
 | title | `string` | `undefined` | Drawer content title. |  |

@@ -22,6 +22,7 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     bodyPadding: '16px 24px',
+    borderRadius,
     headerPadding: '16px 24px',
     footerPadding: '16px 24px',
     color: modalColor,

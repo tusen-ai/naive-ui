@@ -1,17 +1,11 @@
 <markdown>
-  # Abnormal warning
+# Abnormal warning
 
-  You may want to display warnings to the user for values that may be abnormal, but do not want the validate method to throw an exception. In this case, the warningOnly attribute can help you.
-  </markdown>
+You may want to display warnings to the user for values that may be abnormal, but do not want the validate method to throw an exception. In this case, `FormItemRule`'s `level` attribute can help you (`level: 'warning'`).
+</markdown>
 
 <template>
-  <n-form
-    ref="formRef"
-    inline
-    :label-width="80"
-    :model="formValue"
-    :rules="rules"
-  >
+  <n-form ref="formRef" inline :model="formValue" :rules="rules">
     <n-form-item label="How many humps can a camel have at most?" path="count">
       <n-input-number v-model:value="formValue.count" />
     </n-form-item>
@@ -46,10 +40,12 @@ export default defineComponent({
           },
           {
             trigger: ['input', 'blur'],
-            warningOnly: true,
+            level: 'warning',
             validator (_rule: FormItemRule, value: number) {
               if (value !== 3) {
-                return new Error('How about three-humped camel? when it’s pregnant.')
+                return new Error(
+                  'How about three-humped camel? when it’s pregnant.'
+                )
               }
               return true
             }
@@ -58,15 +54,15 @@ export default defineComponent({
       } satisfies FormRules,
       handleValidateClick (e: MouseEvent) {
         e.preventDefault()
-        formRef.value?.validate((errors, warnings) => {
+        formRef.value?.validate((errors, { warnings }) => {
           if (errors) {
             console.error(errors)
-            message.error('Valid')
+            message.error('Valid.')
           } else if (warnings) {
-            message.warning('Valid but be aware warnings')
+            message.warning('Valid but be aware of warnings.')
             console.warn(warnings)
           } else {
-            message.success('Perfect')
+            message.success('Perfect.')
           }
         })
       }

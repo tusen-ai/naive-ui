@@ -1,9 +1,9 @@
 import { c, cB, cM, cE } from '../../../_utils/cssr'
 
 // vars:
-// --n-border-color
-// --n-color
-
+// --n-resize-trigger-color
+// --n-resize-trigger-color-hover
+// --n-bezier
 export default cB('split', `
   display: flex;
   width: 100%;
@@ -23,7 +23,7 @@ export default cB('split', `
     flex: 1;
   `),
   cE('resize-trigger', `
-    background-color: var(--n-border-color);
+    background-color: var(--n-resize-trigger-color);
     transition: background-color .3s var(--n-bezier);
   `, [
     cM('hover', `

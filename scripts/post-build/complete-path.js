@@ -119,10 +119,55 @@ const parseSource = (source, currentDir, suffix) => {
         ? source
         : joinPath(source, 'index' + suffix)
       : source + suffix
+  } else if (
+    source.includes('date-fns') &&
+    source !== 'date-fns-tz/formatInTimeZone'
+  ) {
+    // Xxxx date-fns for its poor compatibility
+    const [pkgName, subpath] = splitSource(source) || []
+    return pkgName === null || subpath === null
+      ? null
+      : guessFullPath(pkgName, subpath)
   } else {
     return source
   }
 }
+
+/**
+ * @param {string} pkgName
+ * @param {string} subpath
+ * @return {string | null}
+ */
+const guessFullPath = (pkgName, subpath) => {
+  const pkgPath = require.resolve(path.posix.join(pkgName, 'package.json'))
+  const pkgRootPath = path.dirname(pkgPath)
+
+  let parsedSource = null
+  const sourcePath = path.join(pkgRootPath, subpath)
+  if (fs.existsSync(sourcePath + '.js')) {
+    parsedSource = joinPath(pkgName, subpath + '.js')
+  } else if (fs.existsSync(sourcePath + '.mjs')) {
+    parsedSource = joinPath(pkgName, subpath + '.mjs')
+  } else if (fs.existsSync(path.join(sourcePath, 'index.js'))) {
+    parsedSource = joinPath(pkgName, subpath, 'index.js')
+  } else if (fs.existsSync(path.join(sourcePath, 'index.mjs'))) {
+    parsedSource = joinPath(pkgName, subpath, 'index.mjs')
+  }
+  return parsedSource
+}
+
+const splitSource = (() => {
+  const splitRegex = /^([\w-]+|@[\w-]+\/[\w-]+)(?:\/(.*))?$/
+  /**
+   * @param {string} source
+   * @return {[string, string] | null}
+   */
+  return (source) => {
+    const matched = splitRegex.exec(source)
+    if (!matched) return null
+    return matched.slice(1)
+  }
+})()
 
 const replaceExtname = (filePath, ext) => {
   const oldExt = path.extname(filePath)

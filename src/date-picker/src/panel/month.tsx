@@ -78,7 +78,27 @@ export default defineComponent({
             item.selected &&
               `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
             !useAsQuickJump &&
-              mergedIsDateDisabled(item.ts) &&
+              mergedIsDateDisabled(
+                item.ts,
+                item.type === 'year'
+                  ? {
+                      type: 'year',
+                      year: item.dateObject.year
+                    }
+                  : item.type === 'month'
+                    ? {
+                        type: 'month',
+                        year: item.dateObject.year,
+                        month: item.dateObject.month
+                      }
+                    : item.type === 'quarter'
+                      ? {
+                          type: 'month',
+                          year: item.dateObject.year,
+                          month: item.dateObject.quarter
+                        }
+                      : (null as never)
+              ) &&
               `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={() => {

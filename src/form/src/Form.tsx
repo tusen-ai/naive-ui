@@ -90,40 +90,49 @@ export default defineComponent({
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
-    ): Promise<void> {
-      await new Promise<void>((resolve, reject) => {
-        const formItemValidationPromises: Array<
-        Promise<FormItemInternalValidateResult>
-        > = []
-        for (const key of keysOf(formItems)) {
-          const formItemInstances = formItems[key]
-          for (const formItemInstance of formItemInstances) {
-            if (formItemInstance.path) {
-              formItemValidationPromises.push(
-                formItemInstance.internalValidate(null, shouldRuleBeApplied)
-              )
+    ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      return await new Promise<{ warnings: ValidateError[][] | undefined }>(
+        (resolve, reject) => {
+          const formItemValidationPromises: Array<
+          Promise<FormItemInternalValidateResult>
+          > = []
+          for (const key of keysOf(formItems)) {
+            const formItemInstances = formItems[key]
+            for (const formItemInstance of formItemInstances) {
+              if (formItemInstance.path) {
+                formItemValidationPromises.push(
+                  formItemInstance.internalValidate(null, shouldRuleBeApplied)
+                )
+              }
             }
           }
+          void Promise.all(formItemValidationPromises).then((results) => {
+            const formInvalid = results.some((result) => !result.valid)
+            const errors: ValidateError[][] = []
+            const warnings: ValidateError[][] = []
+            results.forEach((result) => {
+              if (result.errors?.length) {
+                errors.push(result.errors)
+              }
+              if (result.warnings?.length) {
+                warnings.push(result.warnings)
+              }
+            })
+            if (validateCallback) {
+              validateCallback(errors.length ? errors : undefined, {
+                warnings: warnings.length ? warnings : undefined
+              })
+            }
+            if (formInvalid) {
+              reject(errors.length ? errors : undefined)
+            } else {
+              resolve({
+                warnings: warnings.length ? warnings : undefined
+              })
+            }
+          })
         }
-        void Promise.all(formItemValidationPromises).then((results) => {
-          const formInvalid = results.some((result) => !result.valid)
-
-          const errors = results
-            .filter((result) => result.errors?.length)
-            .map((result) => result.errors)
-          const warnings = results
-            .filter((result) => result.warnings?.length)
-            .map((result) => result.warnings)
-          if (validateCallback) {
-            validateCallback(
-              errors?.length ? (errors as ValidateError[][]) : undefined,
-              warnings?.length ? (warnings as ValidateError[][]) : undefined
-            )
-          } else {
-            formInvalid ? reject(errors) : resolve()
-          }
-        })
-      })
+      )
     }
     function restoreValidation (): void {
       for (const key of keysOf(formItems)) {
