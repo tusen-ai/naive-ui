@@ -8,13 +8,13 @@ import {
   toRef
 } from 'vue'
 import { off, on } from 'evtd'
-import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
+import { type ExtractPublicPropTypes, resolveSlot, call } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
 import { useMergedState } from 'vooks'
-import { type onUpdateSizeType } from './types'
+import { type SplitOnUpdateSize } from './types'
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
   direction: {
@@ -30,13 +30,13 @@ export const splitProps = {
     type: Number,
     default: 0.5
   },
-  'onUpdate:size': {
-    type: Function as PropType<onUpdateSizeType>
-  },
-  size: {
-    type: Number,
-    default: undefined
-  },
+  'onUpdate:size': [Function, Array] as PropType<
+  SplitOnUpdateSize | SplitOnUpdateSize[]
+  >,
+  onUpdateSize: [Function, Array] as PropType<
+  SplitOnUpdateSize | SplitOnUpdateSize[]
+  >,
+  size: Number,
   min: {
     type: Number,
     default: 0
@@ -55,7 +55,7 @@ export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 export default defineComponent({
   name: 'Split',
   props: splitProps,
-  setup (props, { emit }) {
+  setup (props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Split',
@@ -82,12 +82,11 @@ export default defineComponent({
     const controlledSizeRef = toRef(props, 'size')
     const uncontrolledSizeRef = ref(props.defaultSize)
     // use to update controlled or uncontrolled values
-    const updatePropSize = (size): void => {
-      if (typeof props.size !== 'undefined') {
-        emit('update:size', size)
-      } else {
-        uncontrolledSizeRef.value = size
-      }
+    const doUpdateSize = (size: number): void => {
+      const _onUpdateSize = props['onUpdate:size']
+      if (props.onUpdateSize) call(props.onUpdateSize, size)
+      if (_onUpdateSize) call(_onUpdateSize, size)
+      uncontrolledSizeRef.value = size
     }
     const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
     const firstPaneStyle = computed(() => {
@@ -163,13 +162,14 @@ export default defineComponent({
             (parentRect.width - props.resizeTriggerSize)
           : (event.clientY - parentRect.top + offset) /
             (parentRect.height - props.resizeTriggerSize)
-      updatePropSize(newSize)
+      let nextSize = newSize
       if (props.min) {
-        updatePropSize(Math.max(newSize, props.min))
+        nextSize = Math.max(newSize, props.min)
       }
       if (props.max) {
-        updatePropSize(Math.min(newSize, props.max))
+        nextSize = Math.min(newSize, props.max)
       }
+      doUpdateSize(nextSize)
     }
 
     return {

@@ -1,1 +1,1 @@
-export type onUpdateSizeType = (size: number) => void;
+export type SplitOnUpdateSize = (size: number) => void
