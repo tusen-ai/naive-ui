@@ -8,6 +8,10 @@
 - `n-drawer` 新增 `borderRadius` 属性
 - 修复 `n-menu` `root-indent` `indent` 下内容溢出的问题，关闭(#5616)
 
+### Features
+
+- `n-autocomplete` 新增 `append` 属性
+
 ## 2.37.3
 
 ### Fixes

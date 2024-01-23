@@ -8,6 +8,10 @@
 - `n-drawer` adds `borderRadius` attribute
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 
+### Features
+
+- `n-autocomplete` adds `append` prop.
+
 ## 2.37.3
 
 ### Fixes
