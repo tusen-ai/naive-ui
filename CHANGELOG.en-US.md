@@ -8,6 +8,7 @@
 - Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
 - `n-drawer` adds `borderRadius` attribute
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
+- Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 
 ### Features
 

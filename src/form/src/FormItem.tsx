@@ -386,7 +386,11 @@ export default defineComponent({
         }
       }
 
-      if (!validationResult.errors && !validationResult.warnings) {
+      if (
+        activeErrorRules.length + activeWarningRules.length > 0 &&
+        !validationResult.errors &&
+        !validationResult.warnings
+      ) {
         restoreValidation()
       }
 
