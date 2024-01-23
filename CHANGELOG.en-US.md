@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
+- `n-drawer` adds `borderRadius` attribute
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 
 ## 2.37.3
