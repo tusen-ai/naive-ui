@@ -6,6 +6,16 @@
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
 - Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
+- `n-drawer` adds `borderRadius` attribute
+- Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
+
+### Features
+
+- `n-autocomplete` adds `append` prop.
+
+### i18n
+
+- Add `etEE` locale.
 
 ## 2.37.3
 
