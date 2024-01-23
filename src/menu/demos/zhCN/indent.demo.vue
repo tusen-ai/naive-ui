@@ -7,8 +7,8 @@
 <template>
   <n-menu
     v-model:value="activeKey"
-    :root-indent="0"
-    :indent="0"
+    :root-indent="36"
+    :indent="12"
     :options="menuOptions"
   />
 </template>
