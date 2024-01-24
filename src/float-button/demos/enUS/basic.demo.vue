@@ -3,9 +3,13 @@
 </markdown>
 
 <template>
-  <n-float-button :right="100">
-    <n-icon><cash-icon /></n-icon>
-  </n-float-button>
+  <div style="height: 200px; transform: translate(0)">
+    <n-float-button :right="0" :bottom="0">
+      <n-icon :size="24">
+        <cash-icon />
+      </n-icon>
+    </n-float-button>
+  </div>
 </template>
 
 <script lang="ts">
