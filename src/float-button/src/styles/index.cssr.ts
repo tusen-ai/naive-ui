@@ -2,14 +2,12 @@ import { c, cB } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
-// --n-border-radius
-// --n-height
-// --n-width
 // --n-box-shadow
 // --n-box-shadow-hover
 // --n-box-shadow-pressed
 // --n-color
 // --n-text-color
+
 export default cB('float-button', `
   position: fixed;
   cursor: pointer;
@@ -21,9 +19,6 @@ export default cB('float-button', `
     color .3s var(--n-bezier),
     box-shadow .3s var(--n-bezier),
     background-color .3s var(--n-bezier);
-  border-radius: var(--n-border-radius);
-  height: var(--n-height);
-  min-width: var(--n-width);
   box-shadow: var(--n-box-shadow);
   background-color: var(--n-color);
 `, [

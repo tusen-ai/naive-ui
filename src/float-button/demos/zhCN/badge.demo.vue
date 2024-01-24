@@ -1,5 +1,8 @@
 <markdown>
   # 徽章
+
+  带有徽章数的悬浮按钮
+
 </markdown>
 
 <template>

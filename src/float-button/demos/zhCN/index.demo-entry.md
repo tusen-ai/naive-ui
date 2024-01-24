@@ -7,14 +7,20 @@
 ```demo
 basic.vue
 badge.vue
+tooltip.vue
+custom.vue
 ```
 
 ## API
 
 ### Float Button Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| bottom | `number \| string` | `40` | `Float Button` 距离页面底部的高度 |
-| right | `number \| string` | `40` | `Float Button` 距离页面右侧的宽度 |
-| to | `string \| HTMLElement` | `'body'` | `Float Button` 渲染的容器节点 |
+| 名称   | 类型               | 默认值 | 说明                              |
+| ------ | ------------------ | ------ | --------------------------------- |
+| width  | `number \| string` | `40`   | `Float Button` 的宽度             |
+| height | `number \| string` | `40`   | `Float Button` 的高度             |
+| left   | `number \| string` | `40`   | `Float Button` 距离页面左侧的宽度 |
+| right  | `number \| string` | `40`   | `Float Button` 距离页面右侧的宽度 |
+| top    | `number \| string` | `40`   | `Float Button` 距离页面顶部的高度 |
+| bottom | `number \| string` | `40`   | `Float Button` 距离页面底部的高度 |
+| radius | `number \| string` | `22`   | `Float Button` 的圆角             |

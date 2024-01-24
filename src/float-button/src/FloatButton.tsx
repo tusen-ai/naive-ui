@@ -13,6 +13,14 @@ import { type FloatButtonTheme, floatButtonLight } from '../styles'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
+  width: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
+  },
+  height: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
+  },
   left: {
     type: [Number, String] as PropType<string | number>,
     default: undefined
@@ -28,6 +36,10 @@ export const floatButtonProps = {
   bottom: {
     type: [Number, String] as PropType<string | number>,
     default: 40
+  },
+  radius: {
+    type: [Number, String] as PropType<string | number>,
+    default: 22
   }
 } as const
 
@@ -50,30 +62,23 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        self: {
-          color,
-          boxShadow,
-          boxShadowHover,
-          boxShadowPressed,
-          width,
-          height,
-          borderRadius
-        },
+        self: { color, textColor, boxShadow, boxShadowHover, boxShadowPressed },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
-        '--n-border-radius': borderRadius,
-        '--n-height': height,
-        '--n-width': width,
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-hover': boxShadowHover,
         '--n-box-shadow-pressed': boxShadowPressed,
         '--n-color': color,
+        '--n-text-color': textColor,
         left: formatNumber(props.left),
         right: formatNumber(props.right),
         top: formatNumber(props.top),
-        bottom: formatNumber(props.bottom)
+        bottom: formatNumber(props.bottom),
+        width: formatNumber(props.width),
+        height: formatNumber(props.height),
+        borderRadius: formatNumber(props.radius)
       }
     })
 
