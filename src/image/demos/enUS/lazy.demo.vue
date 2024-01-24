@@ -11,7 +11,9 @@ Load the images only after they enter the viewport. There are two ways to use it
   <n-image
     lazy
     width="100"
-    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    src="xxx.png"
+    fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    @error="handleLoadError"
   />
   <n-p>
     use <n-text code>
@@ -41,6 +43,7 @@ Load the images only after they enter the viewport. There are two ways to use it
       :intersection-observer-options="{
         root: '#image-scroll-container'
       }"
+      @error="handleLoadError"
     >
       <template #placeholder>
         <div
@@ -67,6 +70,7 @@ export default defineComponent({
   setup () {
     return {
       srcList: [
+        'error_image_start.png',
         'https://picsum.photos/id/1/100/100',
         'https://picsum.photos/id/2/100/100',
         'https://picsum.photos/id/3/100/100',
@@ -76,8 +80,11 @@ export default defineComponent({
         'https://picsum.photos/id/7/100/100',
         'https://picsum.photos/id/8/100/100',
         'https://picsum.photos/id/9/100/100',
-        'https://picsum.photos/id/10/100/100'
-      ]
+        'error_image_end.png'
+      ],
+      handleLoadError (e: Event) {
+        console.error(e)
+      }
     }
   }
 })

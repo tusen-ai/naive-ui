@@ -11,7 +11,9 @@
   </n-text> 属性</n-p>
   <n-avatar
     lazy
-    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    src="xxx.png"
+    fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    @error="handleLoadError"
   />
   <n-p>
     <n-text code>
@@ -37,6 +39,7 @@
         :intersection-observer-options="{
           root: '#image-scroll-container'
         }"
+        @error="handleLoadError"
       />
     </n-space>
   </div>
@@ -49,17 +52,21 @@ export default defineComponent({
   setup () {
     return {
       srcList: [
+        'error_avatar_start.png',
         'https://picsum.photos/id/1/100/100',
         'https://picsum.photos/id/2/100/100',
         'https://picsum.photos/id/3/100/100',
         'https://picsum.photos/id/4/100/100',
         'https://picsum.photos/id/5/100/100',
+        'https://picsum.photos/id/6/100/100',
         'https://picsum.photos/id/7/100/100',
         'https://picsum.photos/id/8/100/100',
         'https://picsum.photos/id/9/100/100',
-        'https://picsum.photos/id/10/100/100',
-        'xxx.png'
-      ]
+        'error_avatar_end.png'
+      ],
+      handleLoadError (e: Event) {
+        console.error(e)
+      }
     }
   }
 })
