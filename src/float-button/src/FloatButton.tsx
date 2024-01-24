@@ -13,13 +13,17 @@ import { type FloatButtonTheme, floatButtonLight } from '../styles'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
-  to: {
-    type: [String, Object] as PropType<HTMLElement | string>,
-    default: 'body'
+  left: {
+    type: [Number, String] as PropType<string | number>,
+    default: undefined
   },
   right: {
     type: [Number, String] as PropType<string | number>,
     default: 40
+  },
+  top: {
+    type: [Number, String] as PropType<string | number>,
+    default: undefined
   },
   bottom: {
     type: [Number, String] as PropType<string | number>,
@@ -65,13 +69,25 @@ export default defineComponent({
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-hover': boxShadowHover,
         '--n-box-shadow-pressed': boxShadowPressed,
-        '--n-color': color
+        '--n-color': color,
+        left: formatNumber(props.left),
+        right: formatNumber(props.right),
+        top: formatNumber(props.top),
+        bottom: formatNumber(props.bottom)
       }
     })
 
+    const formatNumber = (
+      value: number | string | undefined
+    ): string | undefined => {
+      if (typeof value === 'number') return `${value}px`
+      return value
+    }
+
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      formatNumber
     }
   },
 

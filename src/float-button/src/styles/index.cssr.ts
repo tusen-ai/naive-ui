@@ -12,8 +12,6 @@ import { c, cB } from '../../../_utils/cssr'
 // --n-text-color
 export default cB('float-button', `
   position: fixed;
-  right: 40px;
-  bottom: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
