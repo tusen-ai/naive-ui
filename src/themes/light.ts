@@ -34,6 +34,7 @@ import { ellipsisLight } from '../ellipsis/styles'
 import { emptyLight } from '../empty/styles'
 import { equationLight } from '../equation/styles'
 import { formLight } from '../form/styles'
+import { floatButtonLight } from '../float-button/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
 import { iconWrapperLight } from '../icon-wrapper/styles'
@@ -173,5 +174,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Typography: typographyLight,
   Upload: uploadLight,
   Watermark: watermarkLight,
-  Split: splitLight
+  Split: splitLight,
+  FloatButton: floatButtonLight
 }

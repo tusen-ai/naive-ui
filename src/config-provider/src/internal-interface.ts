@@ -31,6 +31,7 @@ import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
 import type { EquationTheme } from '../../equation/styles'
 import type { FormTheme } from '../../form/styles'
+import type { FloatButtonTheme } from '../../float-button/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { IconWrapperTheme } from '../../icon-wrapper/styles'
@@ -136,6 +137,7 @@ export interface GlobalThemeWithoutCommon {
   Equation?: EquationTheme
   Flex?: FlexTheme
   Form?: FormTheme
+  FloatButton?: FloatButtonTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
   IconWrapper?: IconWrapperTheme
