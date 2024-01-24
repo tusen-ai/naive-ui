@@ -1,47 +1,32 @@
+import { h, defineComponent, type PropType, computed, mergeProps } from 'vue'
 import {
-  h,
-  defineComponent,
-  type PropType,
-  ref,
-  computed,
-  type CSSProperties
-} from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
+  resolveSlot,
+  type ExtractPublicPropTypes,
+  formatLength,
+  lockHtmlScrollRightCompensationRef
+} from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import { onMounted } from 'vue'
+import { VLazyTeleport } from 'vueuc'
+import { NBaseIcon } from '../../_internal'
+import BackTopIcon from '../../back-top/src/BackTopIcon'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
-  direction: {
-    type: String as PropType<'horizontal' | 'vertical'>,
-    default: 'horizontal'
+  to: {
+    type: [String, Object] as PropType<HTMLElement | string>,
+    default: 'body'
   },
-  resizeTriggerSize: {
-    type: Number,
-    default: 3
+  right: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  size: {
-    type: Number,
-    default: 0.5
-  },
-  min: {
-    type: Number,
-    default: 0
-  },
-  max: {
-    type: Number,
-    default: 1
-  },
-  onMoveStart: Function as PropType<(e: Event) => void>,
-  onMoving: Function as PropType<(e: Event) => void>,
-  onMoveEnd: Function as PropType<(e: Event) => void>
+  bottom: {
+    type: [Number, String] as PropType<string | number>,
+    default: 40
+  }
 } as const
 
 export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
@@ -63,144 +48,86 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        self: { resizableTriggerColorHover }
+        self: {
+          color,
+          boxShadow,
+          boxShadowHover,
+          boxShadowPressed,
+          iconColor,
+          iconColorHover,
+          iconColorPressed,
+          width,
+          height,
+          iconSize,
+          borderRadius,
+          textColor
+        },
+        common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
-        '--n-resize-trigger-color-hover': resizableTriggerColorHover
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-height': height,
+        '--n-width': width,
+        '--n-box-shadow': boxShadow,
+        '--n-box-shadow-hover': boxShadowHover,
+        '--n-box-shadow-pressed': boxShadowPressed,
+        '--n-color': color,
+        '--n-icon-size': iconSize,
+        '--n-icon-color': iconColor,
+        '--n-icon-color-hover': iconColorHover,
+        '--n-icon-color-pressed': iconColorPressed,
+        '--n-text-color': textColor
       }
     })
 
-    const dividerRef = ref<HTMLElement | null>(null)
-    const isDraggingRef = ref(false)
-    const currentSize = ref(props.size)
-    const triggerSize = ref(0)
-
-    onMounted(() => {
-      if (!dividerRef.value) return
-      const { width, height } = dividerRef.value.getBoundingClientRect()
-      triggerSize.value = props.direction === 'horizontal' ? width : height
-    })
-
-    const firstPaneStyle = computed(() => {
-      const size = currentSize.value * 100
-      return {
-        flex: `0 0 calc(${size}% - ${triggerSize.value}px)`
+    const styleRef = computed(
+      (): {
+        right: string
+        bottom: string
+      } => {
+        return {
+          right: `calc(${formatLength(props.right)} + ${
+            lockHtmlScrollRightCompensationRef.value
+          })`,
+          bottom: formatLength(props.bottom)
+        }
       }
-    })
-
-    const resizeTriggerStyle = computed(() => {
-      return props.direction === 'horizontal'
-        ? {
-            width: `${props.resizeTriggerSize}px`,
-            height: '100%'
-          }
-        : {
-            width: '100%',
-            height: `${props.resizeTriggerSize}px`
-          }
-    })
-
-    const resizeTriggerWrapperStyle = computed(() => {
-      return props.direction === 'horizontal'
-        ? {
-            cursor: 'col-resize'
-          }
-        : {
-            cursor: 'row-resize'
-          }
-    })
-
-    const handleMouseDown = (e: MouseEvent): void => {
-      e.preventDefault()
-      isDraggingRef.value = true
-      if (props.onMoveStart) props.onMoveStart(e)
-      const mouseMoveEvent = 'mousemove'
-      const mouseUpEvent = 'mouseup'
-      const onMouseMove = (e: MouseEvent): void => {
-        updateSize(e)
-        if (props.onMoving) props.onMoving(e)
-      }
-      const onMouseUp = (): void => {
-        document.removeEventListener(mouseMoveEvent, onMouseMove)
-        document.removeEventListener(mouseUpEvent, onMouseUp)
-        isDraggingRef.value = false
-        if (props.onMoveEnd) props.onMoveEnd(e)
-      }
-      document.addEventListener(mouseMoveEvent, onMouseMove)
-      document.addEventListener(mouseUpEvent, onMouseUp)
-    }
-
-    const updateSize = (event: MouseEvent): void => {
-      const parentRect =
-        dividerRef.value?.parentElement?.getBoundingClientRect()
-      if (!parentRect) return
-      const newSize =
-        props.direction === 'horizontal'
-          ? (event.clientX - parentRect.left) / parentRect.width
-          : (event.clientY - parentRect.top) / parentRect.height
-      currentSize.value = newSize
-      if (props.min) {
-        currentSize.value = Math.max(newSize, props.min)
-      }
-      if (props.max) {
-        currentSize.value = Math.min(newSize, props.max)
-      }
-    }
+    )
 
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      divider: dividerRef,
-      isDragging: isDraggingRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      resizeTriggerWrapperStyle,
-      resizeTriggerStyle,
-      handleMouseDown,
-      firstPaneStyle
+      style: styleRef
     }
   },
+
   render () {
+    const { mergedClsPrefix } = this
     return (
       <div
-        class={[
-          `${this.mergedClsPrefix}-float-button`,
-          `${this.mergedClsPrefix}-float-button--${this.direction}`
-        ]}
-        style={this.cssVars as CSSProperties}
+        ref="placeholderRef"
+        class={`${mergedClsPrefix}-float-button-placeholder`}
+        style="display: none"
+        aria-hidden
       >
-        <div
-          class={`${this.mergedClsPrefix}-float-button-pane`}
-          style={this.firstPaneStyle}
-        >
-          {this.$slots.first?.()}
-        </div>
-
-        {!this.disabled && (
-          <div
-            ref="divider"
-            class={[`${this.mergedClsPrefix}-split__resize-trigger-wrapper`]}
-            style={this.resizeTriggerWrapperStyle}
-            onMousedown={this.handleMouseDown}
-          >
-            {this.$slots['resize-trigger']?.() ?? (
-              <div
-                style={this.resizeTriggerStyle}
-                class={[
-                  `${this.mergedClsPrefix}-split__resize-trigger`,
-                  this.isDragging &&
-                    `${this.mergedClsPrefix}-split__resize-trigger--hover`
-                ]}
-              ></div>
-            )}
-          </div>
-        )}
-        <div
-          class={[
-            `${this.mergedClsPrefix}-split-pane`,
-            `${this.mergedClsPrefix}-split-second-pane`
-          ]}
-        >
-          {this.$slots.second?.()}
-        </div>
+        <VLazyTeleport to={this.to} show>
+          {{
+            default: () =>
+              h(
+                'div',
+                mergeProps(this.$attrs, {
+                  class: [`${mergedClsPrefix}-float-button`],
+                  style: [this.style, this.cssVars]
+                }),
+                resolveSlot(this.$slots.default, () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => BackTopIcon }}
+                  </NBaseIcon>
+                ])
+              )
+          }}
+        </VLazyTeleport>
       </div>
     )
   }

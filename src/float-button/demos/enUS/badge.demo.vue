@@ -5,7 +5,7 @@
   </markdown>
 
 <template>
-  <n-float-button :right="100">
+  <n-float-button :right="160">
     <n-icon><cash-icon /></n-icon>
   </n-float-button>
 </template>
