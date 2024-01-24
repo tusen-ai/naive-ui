@@ -1,5 +1,4 @@
-import { c, cB, cM } from '../../../_utils/cssr'
-import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { c, cB } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -10,10 +9,6 @@ import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-sc
 // --n-box-shadow-hover
 // --n-box-shadow-pressed
 // --n-color
-// --n-icon-size
-// --n-icon-color
-// --n-icon-color-hover
-// --n-icon-color-pressed
 // --n-text-color
 export default cB('float-button', `
   position: fixed;
@@ -34,30 +29,10 @@ export default cB('float-button', `
   box-shadow: var(--n-box-shadow);
   background-color: var(--n-color);
 `, [
-  fadeInScaleUpTransition(),
-  cM('transition-disabled', {
-    transition: 'none !important'
-  }),
-  cB('base-icon', `
-    font-size: var(--n-icon-size);
-    color: var(--n-icon-color);
-    transition: color .3s var(--n-bezier);
-  `),
-  c('svg', {
-    pointerEvents: 'none'
-  }),
   c('&:hover', {
     boxShadow: 'var(--n-box-shadow-hover)'
-  }, [
-    cB('base-icon', {
-      color: 'var(--n-icon-color-hover)'
-    })
-  ]),
+  }),
   c('&:active', {
     boxShadow: 'var(--n-box-shadow-pressed)'
-  }, [
-    cB('base-icon', {
-      color: 'var(--n-icon-color-pressed)'
-    })
-  ])
+  })
 ])

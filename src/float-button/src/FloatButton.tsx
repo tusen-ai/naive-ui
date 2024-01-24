@@ -1,17 +1,15 @@
-import { h, defineComponent, type PropType, computed, mergeProps } from 'vue'
 import {
-  resolveSlot,
-  type ExtractPublicPropTypes,
-  formatLength,
-  lockHtmlScrollRightCompensationRef
-} from '../../_utils'
+  h,
+  defineComponent,
+  type PropType,
+  computed,
+  type CSSProperties
+} from 'vue'
+import { type ExtractPublicPropTypes } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
 import { type ThemeProps, useTheme } from '../../_mixins'
 import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import { VLazyTeleport } from 'vueuc'
-import { NBaseIcon } from '../../_internal'
-import BackTopIcon from '../../back-top/src/BackTopIcon'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
@@ -53,14 +51,9 @@ export default defineComponent({
           boxShadow,
           boxShadowHover,
           boxShadowPressed,
-          iconColor,
-          iconColorHover,
-          iconColorPressed,
           width,
           height,
-          iconSize,
-          borderRadius,
-          textColor
+          borderRadius
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -72,62 +65,25 @@ export default defineComponent({
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-hover': boxShadowHover,
         '--n-box-shadow-pressed': boxShadowPressed,
-        '--n-color': color,
-        '--n-icon-size': iconSize,
-        '--n-icon-color': iconColor,
-        '--n-icon-color-hover': iconColorHover,
-        '--n-icon-color-pressed': iconColorPressed,
-        '--n-text-color': textColor
+        '--n-color': color
       }
     })
 
-    const styleRef = computed(
-      (): {
-        right: string
-        bottom: string
-      } => {
-        return {
-          right: `calc(${formatLength(props.right)} + ${
-            lockHtmlScrollRightCompensationRef.value
-          })`,
-          bottom: formatLength(props.bottom)
-        }
-      }
-    )
-
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      mergedClsPrefix: mergedClsPrefixRef,
-      style: styleRef
+      mergedClsPrefix: mergedClsPrefixRef
     }
   },
 
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, cssVars, $slots } = this
+
     return (
       <div
-        ref="placeholderRef"
-        class={`${mergedClsPrefix}-float-button-placeholder`}
-        style="display: none"
-        aria-hidden
+        class={`${mergedClsPrefix}-float-button`}
+        style={cssVars as CSSProperties}
       >
-        <VLazyTeleport to={this.to} show>
-          {{
-            default: () =>
-              h(
-                'div',
-                mergeProps(this.$attrs, {
-                  class: [`${mergedClsPrefix}-float-button`],
-                  style: [this.style, this.cssVars]
-                }),
-                resolveSlot(this.$slots.default, () => [
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => BackTopIcon }}
-                  </NBaseIcon>
-                ])
-              )
-          }}
-        </VLazyTeleport>
+        {$slots.default?.()}
       </div>
     )
   }

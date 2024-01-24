@@ -1,8 +1,6 @@
 <markdown>
   # 基础用法
-
-  跟 BackTop 很像
-  </markdown>
+</markdown>
 
 <template>
   <n-float-button :right="100">
@@ -17,6 +15,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   components: {
     CashIcon
+  },
+  setup () {
+    return {}
   }
 })
 </script>

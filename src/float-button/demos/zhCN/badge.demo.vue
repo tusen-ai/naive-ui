@@ -5,9 +5,15 @@
   </markdown>
 
 <template>
-  <n-float-button :right="160">
-    <n-icon><cash-icon /></n-icon>
-  </n-float-button>
+  <div id="test" style="height: 200px">
+    <n-float-button to="#test" badge>
+      <n-badge :value="9">
+        <n-icon :size="24">
+          <cash-icon />
+        </n-icon>
+      </n-badge>
+    </n-float-button>
+  </div>
 </template>
 
 <script lang="ts">
