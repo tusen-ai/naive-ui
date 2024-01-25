@@ -85,6 +85,7 @@ import { watermarkDark } from '../watermark/styles'
 import { splitDark } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
 import { flexDark } from '../styles'
+import { floatButtonGroupDark } from '../float-button-group/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -173,5 +174,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Upload: uploadDark,
   Watermark: watermarkDark,
   Split: splitDark,
-  FloatButton: floatButtonDark
+  FloatButton: floatButtonDark,
+  FloatButtonGroup: floatButtonGroupDark
 }

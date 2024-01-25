@@ -15,7 +15,7 @@
       </n-badge>
     </n-float-button>
     <n-float-button :right="70" :bottom="0">
-      <n-badge :value="9" :offset="[6, -8]">
+      <n-badge :value="100" :max="99" :offset="[6, -8]">
         <n-icon :size="22" color="grey">
           <alarm-outline-icon />
         </n-icon>

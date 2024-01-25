@@ -2,6 +2,8 @@
 
 Like `Back Top`, more appearance level, more interaction.
 
+Available since NEXT_VERSION.
+
 ## Demos
 
 ```demo

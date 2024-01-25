@@ -2,6 +2,8 @@
 
 跟 `Back Top` 很像，多一份颜值，多一份互动。
 
+NEXT_VERSION 版本开始提供该组件。
+
 ## 演示
 
 ```demo
@@ -9,6 +11,7 @@ basic.vue
 badge.vue
 tooltip.vue
 custom.vue
+group.vue
 ```
 
 ## API

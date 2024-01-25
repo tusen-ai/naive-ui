@@ -101,6 +101,7 @@ import type { RowTheme } from '../../legacy-grid/styles'
 import type { Katex } from './katex'
 import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
+import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -138,6 +139,7 @@ export interface GlobalThemeWithoutCommon {
   Flex?: FlexTheme
   Form?: FormTheme
   FloatButton?: FloatButtonTheme
+  FloatButtonGroup?: FloatButtonGroupTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
   IconWrapper?: IconWrapperTheme
