@@ -40,6 +40,10 @@ export const floatButtonProps = {
   radius: {
     type: [Number, String] as PropType<string | number>,
     default: 22
+  },
+  backgroundColor: {
+    type: String,
+    default: '#ffffff'
   }
 } as const
 
@@ -78,7 +82,8 @@ export default defineComponent({
         bottom: formatNumber(props.bottom),
         width: formatNumber(props.width),
         height: formatNumber(props.height),
-        borderRadius: formatNumber(props.radius)
+        borderRadius: formatNumber(props.radius),
+        backgroundColor: props.backgroundColor
       }
     })
 

@@ -20,7 +20,6 @@ export default cB('float-button', `
     box-shadow .3s var(--n-bezier),
     background-color .3s var(--n-bezier);
   box-shadow: var(--n-box-shadow);
-  background-color: var(--n-color);
 `, [
   c('&:hover', {
     boxShadow: 'var(--n-box-shadow-hover)'

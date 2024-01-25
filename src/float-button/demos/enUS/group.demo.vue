@@ -7,7 +7,13 @@
 
 <template>
   <div style="height: 200px; transform: translate(0)">
-    <n-float-button-group :left="0" right="auto" :bottom="0" vertical>
+    <n-float-button-group
+      :left="0"
+      right="auto"
+      :bottom="0"
+      vertical
+      background-color="lightgrey"
+    >
       <n-button
         tertiary
         circle
