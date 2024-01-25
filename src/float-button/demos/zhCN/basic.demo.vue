@@ -9,6 +9,21 @@
         <cash-icon />
       </n-icon>
     </n-float-button>
+    <n-float-button :left="0" :bottom="0">
+      <n-icon :size="24">
+        <cash-icon />
+      </n-icon>
+    </n-float-button>
+    <n-float-button :right="0" :top="0">
+      <n-icon :size="24">
+        <cash-icon />
+      </n-icon>
+    </n-float-button>
+    <n-float-button :left="0" :top="0">
+      <n-icon :size="24">
+        <cash-icon />
+      </n-icon>
+    </n-float-button>
   </div>
 </template>
 
