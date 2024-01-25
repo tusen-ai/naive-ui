@@ -11,6 +11,7 @@ basic.vue
 badge.vue
 tooltip.vue
 custom.vue
+group.vue
 ```
 
 ## API
