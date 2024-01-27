@@ -9,6 +9,7 @@
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
+- Fix `n-scrollbar`'s `scrollTo (x: number, y: number)` error where the order of method parameters does not match the document.
 
 ### Features
 

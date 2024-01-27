@@ -9,6 +9,7 @@
 - 修复 `n-menu` `root-indent` `indent` 下内容溢出的问题，关闭 #5616
 - 修复 `n-form-item` 校验结果可能会闪烁的问题，关闭 [#5583](https://github.com/tusen-ai/naive-ui/issues/5583)
 - 修复 `n-popselect` 组件的 header 插槽里 input 无法输入，关闭 [#5494](https://github.com/tusen-ai/naive-ui/pull/5494)
+- 修复 `n-scrollbar` 组件的 `scrollTo (x: number, y: number)`方法参数顺序与文档不符的错误
 
 ### Features
 
