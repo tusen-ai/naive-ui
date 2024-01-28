@@ -16,6 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "composite": true,
     "target": "ES6",
+    "types": ["vue/jsx","jest"],
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"]
   }
