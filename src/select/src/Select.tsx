@@ -579,7 +579,8 @@ export default defineComponent({
       handleToggleByOption(tmNode.rawNode)
     }
     function handleToggleByOption (option: SelectOption): void {
-      if (mergedDisabledRef.value) return
+      // The `mergedShowRef` is to solve https://github.com/tusen-ai/naive-ui/issues/4538
+      if (mergedDisabledRef.value || !mergedShowRef.value) return
       const { tag, remote, clearFilterAfterSelect, valueField } = props
       if (tag && !remote) {
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
