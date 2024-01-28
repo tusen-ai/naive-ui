@@ -17,6 +17,7 @@
 - `n-split` 新增 `size` 和 `on-update:size` 属性
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
+- `n-date-picker` 当 `type="monthrange"` 时支持 `is-date-disabled` 属性
 
 ### i18n
 
