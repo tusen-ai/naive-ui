@@ -9,7 +9,7 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "noImplicitAny": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "module": "ES6",
     "moduleResolution": "Node",
     "declaration": true,
