@@ -7,6 +7,7 @@ import type {
   NotificationApi,
   NotificationProviderProps
 } from '../../notification'
+import { type ModalProviderProps } from '../../modal/src/ModalProvider'
 
 export type MaybeRef<T> = Ref<T> | T
 
@@ -16,6 +17,7 @@ export interface DiscreteApiOptions {
   dialogProviderProps?: MaybeRef<DialogProviderProps>
   notificationProviderProps?: MaybeRef<NotificationProviderProps>
   loadingBarProviderProps?: MaybeRef<LoadingBarProviderProps>
+  modalProviderProps?: MaybeRef<ModalProviderProps>
 }
 
 export type DiscreteApiType =
@@ -23,6 +25,7 @@ export type DiscreteApiType =
   | 'notification'
   | 'loadingBar'
   | 'dialog'
+  | 'modal'
 
 export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   unmount: () => void
