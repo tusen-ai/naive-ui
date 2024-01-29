@@ -311,7 +311,7 @@ const Scrollbar = defineComponent({
     ): void => {
       if (!props.scrollable) return
       if (typeof options === 'number') {
-        scrollToPosition(y ?? 0, options, 0, false, 'auto')
+        scrollToPosition(options, y ?? 0, 0, false, 'auto')
         return
       }
       const {
