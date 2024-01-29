@@ -32,7 +32,7 @@
     "gen-version": "node scripts/gen-version",
     "gen-volar-dts": "esbuild scripts/gen-component-declaration.js --bundle --platform=node --tsconfig=tsconfig.esbuild.json | node",
     "build:site:ts": "bash ./scripts/pre-build-site/pre-build-site.sh && TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
-    "prepare": "husky install",
+    "prepare": "husky",
     "transpile-docs": "node scripts/md-to-vue data-table",
     "release:site": "TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
