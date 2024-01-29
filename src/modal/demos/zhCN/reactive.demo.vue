@@ -1,6 +1,9 @@
 <markdown>
-# Use Modal
+# 命令式 API
 
+自 NEXT_VERSION 开始提供。
+
+你可以使用 `useModal.create` 来打开一个模态框。（请确保使用此 API 的组件被 `n-modal-provider` 包含。）
 </markdown>
 
 <template>

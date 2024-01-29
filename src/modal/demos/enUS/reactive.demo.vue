@@ -1,11 +1,14 @@
 <markdown>
-# Use Modal
+# Imperative API
 
+Provided since NEXT_VERSION.
+
+You can use `useModal.create` to create a modal. (Please make sure this API is called inside `n-modal-provider`.)
 </markdown>
 
 <template>
   <n-button @click="handleClick">
-    Come
+    Start me up
   </n-button>
 </template>
 

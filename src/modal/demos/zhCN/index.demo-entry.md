@@ -2,10 +2,24 @@
 
 它会弹出来，然后给你看点东西。
 
+<n-alert title="使用前提" type="warning" :bordered="false">
+  如果你想通过 <n-text code>useModal</n-text> 使用对话框，你需要把调用其方法的组件放在 <n-text code>n-modal-provider</n-text> 内部并且使用 <n-text code>useModal</n-text> 去获取 API。
+</n-alert>
+
+例如：
+
+```html
+<!-- App.vue -->
+<n-modal-provider>
+  <content />
+</n-modal-provider>
+```
+
 ## 演示
 
 ```demo
 basic.vue
+reactive.vue
 controlled.vue
 mask-closable.vue
 custom-position.vue
@@ -13,7 +27,6 @@ preset-card.vue
 preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
-reactive.vue
 nested-debug.vue
 a11y-debug.vue
 raw-debug.vue
@@ -32,6 +45,25 @@ mask-click-debug.vue
 ```
 
 ## API
+
+### ModalProvider Props
+
+自 NEXT_VERSION 开始提供。
+
+| 名称 | 类型                    | 默认值 | 说明           | 版本         |
+| ---- | ----------------------- | ------ | -------------- | ------------ |
+| to   | `string \| HTMLElement` | `body` | 模态的挂载位置 | NEXT_VERSION |
+
+### useModal API
+
+自 NEXT_VERSION 开始提供。
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| create | `(options: ModalOptions) => ModalReactive` | 创建模态框 | NEXT_VERSION |
+| destroyAll | `() => void` | 销毁所有弹出的模态框 | NEXT_VERSION |
+
+`ModalOptions` 的属性和 `ModalReactive` 属性同 `ModalProps`（属性应使用 camelCase，例如 `auto-focus` 对应 `autoFocus`）。
 
 ### Modal Props
 

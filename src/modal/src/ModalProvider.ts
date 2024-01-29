@@ -43,13 +43,13 @@ type TypeSafeModalReactive = ModalReactive & {
 }
 
 export interface ModalApiInjection {
-  destroy: () => void
+  destroyAll: () => void
   create: (options: ModalOptions) => ModalReactive
 }
 
 export interface ModalProviderInjection {
   clickedRef: Ref<boolean>
-  clickPositionRef: Ref<{ x: number, y: number } | null>
+  clickedPositionRef: Ref<{ x: number, y: number } | null>
 }
 
 export type ModalReactiveListInjection = Ref<ModalReactive[]>
@@ -61,7 +61,6 @@ interface ModalInst {
 export type ModalProviderInst = ModalApiInjection
 
 export const modalProviderProps = {
-  injectionKey: String,
   to: [String, Object] as PropType<string | HTMLElement>
 }
 
@@ -73,6 +72,9 @@ export const NModalProvider = defineComponent({
   name: 'ModalProvider',
   props: modalProviderProps,
   setup () {
+    const clickedRef = useClicked(64)
+    const clickedPositionRef = useClickPosition()
+
     const modalListRef = ref<TypeSafeModalReactive[]>([])
     const modalInstRefs: Record<string, ModalInst> = {}
     function create (options: ModalOptions = {}): ModalReactive {
@@ -96,7 +98,7 @@ export const NModalProvider = defineComponent({
       )
     }
 
-    function destroy (): void {
+    function destroyAll (): void {
       Object.values(modalInstRefs).forEach((modalInstRef) => {
         modalInstRef.hide()
       })
@@ -104,15 +106,19 @@ export const NModalProvider = defineComponent({
 
     const api = {
       create,
-      destroy
+      destroyAll
     }
 
     provide(modalApiInjectionKey, api)
     provide(modalProviderInjectionKey, {
       clickedRef: useClicked(64),
-      clickPositionRef: useClickPosition()
+      clickedPositionRef: useClickPosition()
     })
     provide(modalReactiveListInjectionKey, modalListRef)
+    provide(modalProviderInjectionKey, {
+      clickedRef,
+      clickedPositionRef
+    })
     return {
       ...api,
       modalList: modalListRef,
@@ -127,7 +133,7 @@ export const NModalProvider = defineComponent({
           NModalEnvironment,
           omit(modal, ['destroy', 'style'], {
             internalStyle: modal.style,
-            to: this.to,
+            to: modal.to ?? this.to,
             ref: ((inst: ModalInst | null) => {
               if (inst === null) {
                 // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
