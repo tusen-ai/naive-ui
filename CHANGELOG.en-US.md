@@ -9,6 +9,7 @@
 - Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
+- Fix `n-qr-code`'s style of size.
 
 ### Features
 
@@ -79,7 +80,6 @@
 - Fix `n-input` click clear icon to trigger twice when using the `clearable`, closes [#5510](https://github.com/tusen-ai/naive-ui/issues/5510).
 - Fix `n-tabs` may miss over-scroll shadow if `placement` is `'left'` or `'right'`.
 - Fix `n-date-picker` with range type can input start time that is later than end time, closes [#5544](https://github.com/tusen-ai/naive-ui/issues/5544).
-
 
 ### Features
 
