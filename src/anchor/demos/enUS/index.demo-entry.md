@@ -27,6 +27,13 @@ scrollto.vue
 | show-background | `boolean` | `true` | Whether to show background of links. |
 | type | `'rail' \| 'block'` | `'rail'` | The type to use. |
 
+### AnchorLink Props
+
+| Name  | Type     | Default     | Description         |
+| ----- | -------- | ----------- | ------------------- |
+| href  | `string` | `undefined` | The target of link  |
+| title | `stirng` | `undefined` | The content of link |
+
 ### Anchor Methods
 
 | Name | Type | Description |
