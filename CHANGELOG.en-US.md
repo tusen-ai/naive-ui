@@ -22,6 +22,7 @@
 - `n-split` adds `size` prop and `on-update:size` prop.
 - `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
 - `n-drawer` adds `borderRadius` theme variable.
+- adds `n-float-button` component.
 
 ### i18n
 
