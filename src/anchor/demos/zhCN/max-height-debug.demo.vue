@@ -8,7 +8,7 @@
       :bound="16"
       type="block"
       style="width: 128px; max-height: 100px"
-      native-scrollbar
+      internal-scrollable
     >
       <n-anchor-link title="非常长的 TOC, 固定" href="#basic" />
       <n-anchor-link title="很长很长" href="#basic" />
