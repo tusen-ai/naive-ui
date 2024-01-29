@@ -209,9 +209,9 @@ export default defineComponent({
         })
         // Observe root if intersectionObserverOptions.root is configured
         const rootShouldStartLoading = ref(false)
-        const hasObserveRoot = !!props.intersectionObserverOptions?.root
+        const needObserveRoot = !!props.intersectionObserverOptions?.root
         let unobserveRoot: (() => void) | undefined
-        if (hasObserveRoot) {
+        if (needObserveRoot) {
           const rootObserverOptions = resolveOptionsAndHash(
             props.intersectionObserverOptions
           ).options
@@ -221,13 +221,14 @@ export default defineComponent({
             rootShouldStartLoading
           )
         }
-        watchEffect(() => {
-          shouldStartLoadingRef.value = hasObserveRoot
+        const stopWatchHandle2 = watchEffect(() => {
+          shouldStartLoadingRef.value = needObserveRoot
             ? rootShouldStartLoading.value && imageShouldStartLoading.value
             : imageShouldStartLoading.value
         })
         onBeforeUnmount(() => {
           stopWatchHandle()
+          stopWatchHandle2()
           unobserveImage?.()
           unobserveRoot?.()
         })
