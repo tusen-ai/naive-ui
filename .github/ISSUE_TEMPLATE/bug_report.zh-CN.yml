@@ -37,7 +37,7 @@ body:
     id: system-info
     attributes:
       label: 系统信息
-      description: `npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出
+      description: "`npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出"
       render: Shell
       placeholder: 系统信息，二进制文件，浏览器
     validations:
