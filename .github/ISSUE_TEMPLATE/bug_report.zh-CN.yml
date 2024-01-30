@@ -1,6 +1,6 @@
 name: 🐞 错误报告
 description: 报告 naive-ui 的问题
-labels: [未分类]
+labels: [untriaged]
 body:
   - type: markdown
     attributes:
