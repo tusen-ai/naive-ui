@@ -11,8 +11,8 @@ When in affix mode, Anchor can recieve addition props as same as Affix.
       listen-to=".document-scroll-container"
       :trigger-top="24"
       :top="88"
+      offset-target=".document-scroll-container"
       style="z-index: 1"
-      :bound="24"
     >
       <n-anchor-link title="Demos" href="#Demos">
         <n-anchor-link title="Basic" href="#basic.vue" />

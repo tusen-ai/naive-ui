@@ -1,20 +1,15 @@
 <markdown>
-# 基础用法
+# 偏移量
+
+我想要在滚到屏幕中间就触发导航。
 </markdown>
 
 <template>
-  <n-space style="margin-bottom: 12px">
-    <n-switch v-model:value="showRail" /> 展示轨道
-    <n-switch v-model:value="showBackground" /> 展示背景
-  </n-space>
-  <n-anchor
-    offset-target=".document-scroll-container"
-    :show-rail="showRail"
-    :show-background="showBackground"
-  >
+  <n-anchor :bound="bound">
     <n-anchor-link title="演示" href="#演示">
       <n-anchor-link title="基础用法" href="#basic.vue" />
       <n-anchor-link title="忽略间隔" href="#ignore-gap.vue" />
+      <n-anchor-link title="偏移量" href="#bound.vue" />
       <n-anchor-link title="固定" href="#affix.vue" />
       <n-anchor-link title="滚动到" href="#scrollto.vue" />
     </n-anchor-link>
@@ -23,13 +18,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      showRail: ref(true),
-      showBackground: ref(true)
+      bound: document.documentElement.scrollHeight / 2
     }
   }
 })
