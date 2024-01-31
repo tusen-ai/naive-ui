@@ -1,6 +1,6 @@
 name: 🐞 错误报告
 description: 报告 naive-ui 的问题
-labels: [未分类]
+labels: [untriaged]
 body:
   - type: markdown
     attributes:
@@ -37,7 +37,7 @@ body:
     id: system-info
     attributes:
       label: 系统信息
-      description: `npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出
+      description: "`npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出"
       render: Shell
       placeholder: 系统信息，二进制文件，浏览器
     validations:
