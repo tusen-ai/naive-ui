@@ -19,8 +19,10 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
   import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
   import javascript from 'highlight.js/lib/languages/javascript'
+  import { lineToDiv } from 'naive-ui'
 
   hljs.registerLanguage('javascript', javascript)
+  hljs.addPlugin(lineToDiv())
 
   export default defineComponent({
     setup() {
@@ -39,7 +41,13 @@ basic.vue
 inline.vue
 softwrap.vue
 line-numbers.vue
+focus-line.vue
+highlight-line.vue
 ```
+
+<n-alert title="warning" type="warning" style="margin:16px 0;" :bordered="false">
+If you want to use `focus-line` or `highlight-line` feature, please add `lineToDiv` to `hljs`.Since `hljs`'s plugin is global, please don't add plugin repeatly.
+</n-alert>
 
 ## API
 
@@ -54,3 +62,5 @@ line-numbers.vue
 | show-line-numbers | `boolean` | `false` | Whether to show line numbers. Won't work if `inline` or `word-wrap` is `true`. | 2.32.0 |
 | trim | `boolean` | `true` | Whether to display trimmed code. |  |
 | word-wrap | `boolean` | `false` | Whether to display word-wrapped code. | 2.24.0 |
+| focus-line | `number` | `undefined` | focus which line | 2.34.4 |
+| highlight-line | `number[]` | `undefined` | highlight line numbers | 2.34.4 |
