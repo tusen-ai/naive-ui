@@ -14,6 +14,7 @@ tooltip.vue
 full-debug.vue
 lazy.vue
 previewed-img-props.vue
+custom-error.vue
 ```
 
 ## API
@@ -50,9 +51,10 @@ previewed-img-props.vue
 
 ### Image Slots
 
-| 名称        | 参数 | 说明                       | 版本   |
-| ----------- | ---- | -------------------------- | ------ |
-| placeholder | `()` | 图像没有加载成功时候的占位 | 2.30.5 |
+| 名称        | 参数 | 说明                       | 版本         |
+| ----------- | ---- | -------------------------- | ------------ |
+| placeholder | `()` | 图像没有加载成功时候的占位 | 2.30.5       |
+| error       | `()` | 图像加载失败时候的内容     | NEXT_VERSION |
 
 ### ImageGroup Slots
 

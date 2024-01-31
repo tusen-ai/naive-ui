@@ -23,6 +23,7 @@
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
 - 新增 `n-float-button` 组件
+- `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 
 ### i18n
 
