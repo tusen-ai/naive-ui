@@ -82,7 +82,8 @@ export function createTreeMateOptions<T> (
   keyField: string,
   childrenField: string,
   disabledField: string,
-  getChildren: GetChildren | undefined
+  getChildren: GetChildren | undefined,
+  ignoreEmptyChildren?: boolean
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren =
     getChildren ||
@@ -99,7 +100,8 @@ export function createTreeMateOptions<T> (
     getChildren: settledGetChildren,
     getDisabled (node: T) {
       return !!((node as any)[disabledField] || (node as any).checkboxDisabled)
-    }
+    },
+    ignoreEmptyChildren
   }
 }
 
@@ -215,6 +217,7 @@ export const treeSharedProps = {
 
 export const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
+  ignoreEmptyChildren: Boolean,
   accordion: Boolean,
   showIrrelevantNodes: { type: Boolean, default: true },
   data: {
@@ -437,7 +440,8 @@ export default defineComponent({
           props.keyField,
           props.childrenField,
           props.disabledField,
-          props.getChildren
+          props.getChildren,
+          props.ignoreEmptyChildren
         )
       )
     )

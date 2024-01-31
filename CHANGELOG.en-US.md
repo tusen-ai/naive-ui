@@ -23,6 +23,7 @@
 - `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
 - `n-drawer` adds `borderRadius` theme variable.
 - adds `n-float-button` component.
+- `n-tree` adds `ignore-empty-children` prop.
 
 ### i18n
 

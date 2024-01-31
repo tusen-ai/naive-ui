@@ -64,6 +64,7 @@ expand-debug.vue
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
 | get-children | `(option: any) => unknown` | `undefined` | 获取当前选项的子选项 | 2.34.3 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
+| ignore-empty-children | `boolean` | `false` | 是否忽略空数组 children | NEXT_VERSION |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.32.2 |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |  |

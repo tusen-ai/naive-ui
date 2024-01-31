@@ -58,6 +58,7 @@ override-click-behavior.vue
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
 | get-children | `(option: any) => unknown` | `undefined` | Get children of the option. | 2.34.3 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
+| ignore-empty-children | `boolean` | `false` | Whether to ignore empty children. | NEXT_VERSION |
 | keyboard | `boolean` | `true` | Whether to support keyboard operation. | 2.32.2 |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |  |

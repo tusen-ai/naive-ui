@@ -13,6 +13,7 @@
     label-field="whateverLabel"
     children-field="whateverChildren"
     selectable
+    ignore-empty-children
   />
 </template>
 
@@ -22,7 +23,7 @@ import { repeat } from 'seemly'
 import { TreeOption } from 'naive-ui'
 
 function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
-  if (!level) return undefined
+  if (!level) return []
   return repeat(6 - level, undefined).map((_, index) => {
     const key = '' + baseKey + level + index
     return {
