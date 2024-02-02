@@ -317,7 +317,7 @@ export default defineComponent({
           cascade: mergedCascadeRef.value,
           allowNotLoaded: props.allowCheckingNotLoaded
         })
-        const { labelField } = props
+        const { labelField, keyField } = props
         checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
@@ -331,6 +331,13 @@ export default defineComponent({
                 )
                 : treeOption2SelectOption(tmNode, labelField)
             )
+          } else {
+            // if checkedKeys are not includes options create new option
+            res.push({
+              [keyField]: value,
+              [labelField]: value as Key,
+              value
+            })
           }
         })
         return res
