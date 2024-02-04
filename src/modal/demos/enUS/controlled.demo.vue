@@ -6,7 +6,7 @@ Modal can be controlled.
 
 <template>
   <n-button @click="handleClick">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal :show="showModal">
     <n-card

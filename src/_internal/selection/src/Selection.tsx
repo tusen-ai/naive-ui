@@ -847,6 +847,11 @@ export default defineComponent({
           <div
             ref="patternInputWrapperRef"
             class={`${clsPrefix}-base-selection-label`}
+            title={
+              this.patternInputFocused
+                ? undefined
+                : getTitleAttribute(this.label)
+            }
           >
             <input
               {...this.inputProps}

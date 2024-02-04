@@ -62,6 +62,7 @@ export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
+  append: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -240,7 +241,11 @@ export default defineComponent({
         if (props.clearAfterSelect) {
           doUpdateValue(null)
         } else if (option.label !== undefined) {
-          doUpdateValue(option.label)
+          doUpdateValue(
+            props.append
+              ? `${mergedValueRef.value}${option.label}`
+              : option.label
+          )
         }
         canBeActivatedRef.value = false
         if (props.blurAfterSelect) {

@@ -6,7 +6,7 @@ Basic usage of modal. You can put anything in modal, a card for example.
 
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal v-model:show="showModal">
     <n-card

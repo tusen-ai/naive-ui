@@ -311,7 +311,7 @@ const Scrollbar = defineComponent({
     ): void => {
       if (!props.scrollable) return
       if (typeof options === 'number') {
-        scrollToPosition(y ?? 0, options, 0, false, 'auto')
+        scrollToPosition(options, y ?? 0, 0, false, 'auto')
         return
       }
       const {
@@ -727,7 +727,7 @@ const Scrollbar = defineComponent({
           ]}
           data-scrollbar-rail
           style={[style || '', this.verticalRailStyle as CSSProperties]}
-          aria-hiddens
+          aria-hidden
         >
           {h(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

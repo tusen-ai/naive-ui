@@ -1,52 +1,52 @@
 name: 🐞 错误报告
-description: Report an issue with naive-ui
+description: 报告 naive-ui 的问题
 labels: [untriaged]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        感谢您抽出时间填写此错误报告！
   - type: textarea
     id: bug-description
     attributes:
-      label: Describe the bug
-      description: A clear and concise description of what the bug is. If you intend to submit a PR for this issue, tell us in the description. Thanks!
-      placeholder: Bug description
+      label: 描述错误
+      description: 对错误的清晰而简明的描述。如果您打算为此问题提交 PR，请在描述中告诉我们。谢谢！
+      placeholder: 错误描述
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
-      description: Clear and concise steps to reproduce this bug.
+      label: 复现步骤
+      description: 复现此错误的清晰而简明的步骤。
       placeholder: |
-        1. apply magic
-        2. wait 3.1415 seconds
+        1. 应用魔法
+        2. 等待 3.1415 秒
         3. 🧙🏽‍♂️
     validations:
       required: true
   - type: input
     id: reproduction
     attributes:
-      label: Link to minimal reproduction
-      description: Please provide a  [minimal reproduction](https://stackoverflow.com/help/minimal-reproducible-example). Provide a streamlined CodePen/CodeSandbox or GitHub repository link. Please don't fill in a link randomly.
-      placeholder: Reproduction
+      label: 最小复现链接
+      description: 请提供[最小复现](https://stackoverflow.com/help/minimal-reproducible-example)链接。提供一个简化的 CodePen/CodeSandbox 或 GitHub 仓库链接。请不要随机填写链接。
+      placeholder: 复现链接
     validations:
       required: true
   - type: textarea
     id: system-info
     attributes:
-      label: System Info
-      description: Output of `npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers`
+      label: 系统信息
+      description: "`npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出"
       render: Shell
-      placeholder: System, Binaries, Browsers
+      placeholder: 系统信息，二进制文件，浏览器
     validations:
       required: true
   - type: dropdown
     id: package-manager
     attributes:
-      label: Used Package Manager
-      description: Select the used package manager
+      label: 使用的包管理器
+      description: 选择所使用的包管理器
       options:
         - npm
         - yarn
@@ -56,16 +56,16 @@ body:
   - type: checkboxes
     id: checkboxes
     attributes:
-      label: Validations
-      description: Before submitting the issue, please make sure you do the following
+      label: 验证
+      description: 在提交问题之前，请确保完成以下步骤
       options:
-        - label: Read the [Contributing Guidelines](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md).
+        - label: 阅读 [贡献指南](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)。
           required: true
-        - label: Read the [docs](https://www.naiveui.com/zh-CN/).
+        - label: 阅读 [文档](https://www.naiveui.com/zh-CN/)。
           required: true
-        - label: Check that there isn't [already an issue](https://github.com/tusen-ai/naive-ui/issues) that reports the same bug to avoid creating a duplicate.
+        - label: 检查是否已经存在[相同问题的问题](https://github.com/tusen-ai/naive-ui/issues)，以避免创建重复的问题。
           required: true
-        - label: Check that this is a concrete bug. For Q&A open a [GitHub Discussion](https://github.com/tusen-ai/naive-ui/discussions).
+        - label: 确保这是一个具体的 bug。有关问题和答案，请打开 [GitHub 讨论](https://github.com/tusen-ai/naive-ui/discussions)。
           required: true
-        - label: The provided reproduction is a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) of the bug.
+        - label: 提供的复现是[最小可复现的示例](https://stackoverflow.com/help/minimal-reproducible-example)。
           required: true
