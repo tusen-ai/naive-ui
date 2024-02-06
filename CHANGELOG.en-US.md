@@ -17,6 +17,7 @@
 
 ### Features
 
+- `n-form-item` add `feedback-vertical` prop and `feedback-crosswise` prop
 - `n-auto-complete` adds `append` prop.
 - `n-select` add native `title` attribute when `filterable` and blur input.
 - `n-split` adds `size` prop and `on-update:size` prop.

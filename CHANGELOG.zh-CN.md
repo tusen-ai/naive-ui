@@ -17,6 +17,7 @@
 
 ### Features
 
+- `n-form-item` 新增 `feedback-vertical` 和 `feedback-crosswise` 属性
 - `n-auto-complete` 新增 `append` 属性
 - `n-select` 在组件可过滤且输入失焦时，添加原生 `title` 属性
 - `n-split` 新增 `size` 和 `on-update:size` 属性
