@@ -49,8 +49,9 @@ import type {
   FormItemValidateOptions,
   FormItemInst,
   FormItemInternalValidate,
-  FormItemInternalValidateResult
-  , type FeedBackPositonCrosswise, type FeedBackPositonVertical
+  FormItemInternalValidateResult,
+  type FeedBackPositonCrosswise,
+  type FeedBackPositonVertical
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -594,6 +595,7 @@ export default defineComponent({
           `${mergedClsPrefix}-form-item`,
           this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
+          `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
           `${mergedClsPrefix}-form-item--labelled-vertical-${this.feedbackVertical}`,
           this.isAutoLabelWidth &&
             `${mergedClsPrefix}-form-item--auto-label-width`,
