@@ -12,7 +12,7 @@ import { off, on } from 'evtd'
 import { type ExtractPublicPropTypes, resolveSlot, call } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import style from './styles/index.cssr'
-import { type ThemeProps, useTheme } from '../../_mixins'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
 import { useMergedState } from 'vooks'
 import { type SplitOnUpdateSize } from './types'
@@ -71,14 +71,29 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
-        self: { resizableTriggerColor, resizableTriggerColorHover }
+        self
       } = themeRef.value
-      return {
+      const {
+        resizableTriggerColor,
+        resizableTriggerColorHover
+      } = self
+      const vars: any = {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-resize-trigger-color': resizableTriggerColor,
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
+      return vars
     })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'split',
+        undefined,
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     const resizeTriggerElRef = ref<HTMLElement | null>(null)
     const isDraggingRef = ref(false)
     const controlledSizeRef = toRef(props, 'size')
@@ -185,6 +200,8 @@ export default defineComponent({
       resizeTriggerWrapperStyle,
       resizeTriggerStyle,
       handleMouseDown,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       firstPaneStyle
     }
   },

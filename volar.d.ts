@@ -50,6 +50,8 @@ declare module 'vue' {
     NEmpty: (typeof import('naive-ui'))['NEmpty']
     NEquation: (typeof import('naive-ui'))['NEquation']
     NFlex: (typeof import('naive-ui'))['NFlex']
+    NFloatButton: (typeof import('naive-ui'))['NFloatButton']
+    NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
     NForm: (typeof import('naive-ui'))['NForm']
     NFormItem: (typeof import('naive-ui'))['NFormItem']
     NFormItemCol: (typeof import('naive-ui'))['NFormItemCol']
@@ -91,6 +93,7 @@ declare module 'vue' {
     NMenu: (typeof import('naive-ui'))['NMenu']
     NMessageProvider: (typeof import('naive-ui'))['NMessageProvider']
     NModal: (typeof import('naive-ui'))['NModal']
+    NModalProvider: (typeof import('naive-ui'))['NModalProvider']
     NNotificationProvider: (typeof import('naive-ui'))['NNotificationProvider']
     NNumberAnimation: (typeof import('naive-ui'))['NNumberAnimation']
     NOl: (typeof import('naive-ui'))['NOl']
@@ -147,7 +150,6 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
-    NModalProvider: (typeof import('naive-ui'))['NModalProvider']
   }
 }
 export {}
