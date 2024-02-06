@@ -206,10 +206,13 @@ export default defineComponent({
     }
   },
   render () {
+    const { themeClass, onRender } = this
+    onRender?.()
     return (
       <div
         class={[
           `${this.mergedClsPrefix}-split`,
+          themeClass,
           `${this.mergedClsPrefix}-split--${this.direction}`
         ]}
         style={this.cssVars as CSSProperties}
