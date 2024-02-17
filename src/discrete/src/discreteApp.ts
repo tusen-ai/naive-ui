@@ -7,6 +7,7 @@ import { type DialogApi, useDialog } from '../../dialog'
 import { type LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { type MessageApi, useMessage } from '../../message'
 import { type NotificationApi, useNotification } from '../../notification'
+import { type ModalApi, useModal } from '../../modal'
 import { isBrowser, warn } from '../../_utils'
 import { NInjectionExtractor } from './InjectionExtractor'
 import type { DiscreteApiType, MaybeRef } from './interface'
@@ -31,13 +32,15 @@ export interface DiscreteApp {
   notification?: NotificationApi
   dialog?: DialogApi
   loadingBar?: LoadingBarApi
+  modal?: ModalApi
 }
 
 const injectionFactoryMap: Record<DiscreteApiType, any> = {
   message: useMessage,
   notification: useNotification,
   loadingBar: useLoadingBar,
-  dialog: useDialog
+  dialog: useDialog,
+  modal: useModal
 }
 
 export function createDiscreteApp ({
