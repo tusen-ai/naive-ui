@@ -14,6 +14,7 @@
 - 修复 `n-form-item` 校验结果可能会闪烁的问题，关闭 [#5583](https://github.com/tusen-ai/naive-ui/issues/5583)
 - 修复 `n-popselect` 组件的 header 插槽里 input 无法输入，关闭 [#5494](https://github.com/tusen-ai/naive-ui/pull/5494)
 - 修复 `n-qr-code` 大小样式问题
+- Fix `n-result` built-in icons not re-rendered after hydration.
 
 ### Features
 
