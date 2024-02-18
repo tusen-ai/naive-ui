@@ -24,7 +24,7 @@ import image418 from './418'
 import image403 from './403'
 import style from './styles/index.cssr'
 
-const iconMap = {
+const iconRenderMap = {
   403: () => image403,
   404: () => image404,
   418: () => image418,
@@ -130,7 +130,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-result-icon`}>
           {$slots.icon?.() || (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => iconMap[status]() }}
+              {{ default: () => iconRenderMap[status]() }}
             </NBaseIcon>
           )}
         </div>
