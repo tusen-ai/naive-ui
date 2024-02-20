@@ -14,6 +14,7 @@
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
 - Fix `n-qr-code`'s style of size.
+- Fix `n-badge` affects child elements' text color.
 
 ### Features
 
