@@ -35,17 +35,23 @@ menu indent...
 
 ## 2.37.3
 
+`2024-01-09`
+
 ### Fixes
 
 - 修复 `n-split` 不在卡片中使用没有颜色
 
-## 2.37.2 (2024-01-09)
+## 2.37.2
+
+`2024-01-09`
 
 ### Fixes
 
 - `n-data-table` 的 `downloadCsv` 方法会导出选择列、展开列
 
-## 2.37.1 (2024-01-08)
+## 2.37.1
+
+`2024-01-08`
 
 ### Fixes
 
@@ -59,7 +65,9 @@ menu indent...
 - `n-auto-complete` 新增 `empty` 插槽
 - `n-auto-complete` 新增 `show-empty` 属性
 
-## 2.37.0 (2024-01-07)
+## 2.37.0
+
+`2024-01-07`
 
 ### Breaking Changes
 
@@ -123,7 +131,9 @@ menu indent...
 - 新增 `n-flex` 组件
 - `n-pagination` 新增 `show-quick-jump-dropdown` 属性，关闭 [#5251](https://github.com/tusen-ai/naive-ui/issues/5251)
 
-## 2.36.0 (2024-12-18)
+## 2.36.0
+
+`2024-12-18`
 
 ### Fixes
 
@@ -168,7 +178,9 @@ menu indent...
 - `n-menu` 新增 `responsive` 属性，在水平状态会收起溢出的菜单项
 - `n-menu` 新增 `deriveResponsiveState` 方法
 
-## 2.35.0 (2023-10-02)
+## 2.35.0
+
+`2023-10-02`
 
 ### Breaking Changes
 
@@ -229,7 +241,9 @@ menu indent...
 - 新增 svSE locale
 - 更新 jaJP locale
 
-## 2.34.4 (2023-05-21)
+## 2.34.4
+
+`2023-05-21`
 
 ### Fixes
 
@@ -261,7 +275,9 @@ menu indent...
 - 更新 `zhTW` 国际化
 - 新增 `faIR` 国际化
 
-## 2.34.3 (2022-12-24)
+## 2.34.3
+
+`2022-12-24`
 
 ### Fixes
 
@@ -293,14 +309,18 @@ menu indent...
 
 - 更新 koKr 国际化
 
-## 2.34.2 (2022-11-22)
+## 2.34.2
+
+`2022-11-22`
 
 ### Fixes
 
 - 修复 `n-config-provider` 的 katex 的类型问题
 - 修复 `n-image` 预览工具栏操作报错，关闭 [#4144](https://github.com/tusen-ai/naive-ui/issues/4144)
 
-## 2.34.1 (2022-11-21)
+## 2.34.1
+
+`2022-11-21`
 
 ### Fixes
 
@@ -308,7 +328,9 @@ menu indent...
 - 修复 `n-tree` 缺少 `getCheckedData` 和 `getIndeterminateData` 方法，关闭 [#4064](https://github.com/tusen-ai/naive-ui/issues/4064)
 - 修复 `n-data-table` 列的 `align` 配置对表头不生效，关闭 [#4063](https://github.com/tusen-ai/naive-ui/issues/4063)
 
-## 2.34.0 (2022-11-21)
+## 2.34.0
+
+`2022-11-21`
 
 ### Breaking Changes
 
@@ -361,13 +383,17 @@ menu indent...
 - 新增 arDZ locale
 - 新增 trTR locale
 
-## 2.33.5 (2022-10-12)
+## 2.33.5
+
+`2022-10-12`
 
 ### Fixes
 
 - 修复 `n-data-table` 树形数据勾选时报错，关闭 [#3832](https://github.com/tusen-ai/naive-ui/issues/3832)
 
-## 2.33.4 (2022-10-06)
+## 2.33.4
+
+`2022-10-06`
 
 ### Fixes
 
@@ -409,7 +435,9 @@ menu indent...
 - `n-slider` 新增 `markFontSize` 主题变量，关闭 [#3820](https://github.com/tusen-ai/naive-ui/issues/3820)
 - `n-avatar-group` 新增 `gap` 主题变量，关闭 [#3819](https://github.com/tusen-ai/naive-ui/issues/3819)
 
-## 2.33.3 (2022-09-13)
+## 2.33.3
+
+`2022-09-13`
 
 ### Feats
 
@@ -433,7 +461,9 @@ menu indent...
 - 修复 `n-tree` 在设定 `:show-irrelevant-nodes="false"` 并搜索后展开关闭按钮失效，关闭 [#3647](https://github.com/tusen-ai/naive-ui/issues/3647)
 - 修复 `n-progress` 在 `type="circle"` 并且 `stroke-width` 过大时，圆圈可能溢出，关闭 [#3638](https://github.com/tusen-ai/naive-ui/issues/3638)
 
-## 2.33.2 (2022-09-01)
+## 2.33.2
+
+`2022-09-01`
 
 ### Fixes
 
@@ -446,13 +476,17 @@ menu indent...
 
 - `n-radio` 新增 `colorActive` 主题变量，关闭 [#3610](https://github.com/tusen-ai/naive-ui/issues/3610)
 
-## 2.33.1 (2022-08-29)
+## 2.33.1
+
+`2022-08-29`
 
 ### Fixes
 
 - 修复 Could not resolve "@vicons/ionicons5" 异常，关闭 [#3616](https://github.com/tusen-ai/naive-ui/issues/3616)
 
 ## 2.33.0
+
+`2022-08-29`
 
 ### Breaking Changes
 
@@ -477,6 +511,8 @@ menu indent...
 - `DialogOptions` 支持 `class` 属性，关闭 [#3591](https://github.com/tusen-ai/naive-ui/issues/3591)
 
 ## 2.32.2
+
+`2022-08-19`
 
 ### Fixes
 
@@ -536,7 +572,9 @@ menu indent...
 - `n-grid` 新增 `layout-shift-disabled` 属性，关闭 [#3301](https://github.com/tusen-ai/naive-ui/issues/3301)
 - `n-data-table` 新增 `sticky-expanded-rows` 属性，支持固定展开内容，关闭 [#3485](https://github.com/tusen-ai/naive-ui/issues/3485).
 
-## 2.32.1 (2022-07-30)
+## 2.32.1
+
+`2022-07-30`
 
 ### Fixes
 
@@ -547,7 +585,9 @@ menu indent...
 
 - `n-steps` 支持 RTL
 
-## 2.32.0 (2022-07-28)
+## 2.32.0
+
+`2022-07-28`
 
 ### Breaking Changes
 
@@ -586,7 +626,9 @@ menu indent...
 - `n-watermark` 新增 `global-rotate` 属性
 - `n-notification` 新增 `keepAliveOnHover` 属性，用于设置鼠标移入时是否保持通知框显示，关闭 [#3249](https://github.com/tusen-ai/naive-ui/issues/3249)
 
-## 2.31.0 (2022-07-07)
+## 2.31.0
+
+`2022-07-07`
 
 ### Breaking Changes
 
@@ -638,13 +680,17 @@ menu indent...
 - 更新 ukUA locale
 - `n-message` 支持 RTL
 
-## 2.30.8 (2022-06-29)
+## 2.30.8
+
+`2022-06-29`
 
 ### Fixes
 
 - 修复 `n-select` 菜单的 transition 样式，关闭 [#3211](https://github.com/tusen-ai/naive-ui/issues/3211)
 
-## 2.30.7 (2022-06-29)
+## 2.30.7
+
+`2022-06-29`
 
 ### Fixes
 
@@ -668,7 +714,9 @@ menu indent...
 - `n-tree-select` 新增 `render-tag` 属性
 - `n-notification` 新增 `titleFontSize`、`metaFontSize`、`descriptionFontSize` 主题变量
 
-## 2.30.6 (2022-06-22)
+## 2.30.6
+
+`2022-06-22`
 
 ### Fixes
 
@@ -680,7 +728,9 @@ menu indent...
 - 修复 `n-data-table` 在列同时设为 `ellipsis` 和 `fixed` 时会丢失固定列的阴影
 - 修复 `n-image` 的 `lazy` 属性在 Safari 和 Firefox 上工作不正常
 
-## 2.30.5 (2022-06-20)
+## 2.30.5
+
+`2022-06-20`
 
 ### Fixes
 
@@ -700,7 +750,9 @@ menu indent...
 - `n-space` 新增 `wrap-item` 属性
 - `n-data-table` 的 `on-update:checked-row-keys` 会传出行数据，关闭 [#2215](https://github.com/tusen-ai/naive-ui/issues/2215)，关闭 [#2265](https://github.com/tusen-ai/naive-ui/pull/2265)
 
-## 2.30.4 (2022-06-15)
+## 2.30.4
+
+`2022-06-15`
 
 ### Fixes
 
@@ -737,7 +789,9 @@ menu indent...
 - `n-data-table` 新增 `scrollTo` 方法，关闭 [#2570](https://github.com/tusen-ai/naive-ui/issues/2570)
 - `n-slider` 新增 `thumb` 插槽
 
-## 2.30.3 (2022-06-09)
+## 2.30.3
+
+`2022-06-09`
 
 ### Fixes
 
@@ -751,13 +805,17 @@ menu indent...
 - `n-cascader` 在单选状态下会展开选中的值，关闭 [#3058](https://github.com/tusen-ai/naive-ui/issues/3058)
 - `n-space` 在可能的情况下会使用 `gap` CSS 属性，关闭 [#3053](https://github.com/tusen-ai/naive-ui/issues/3053)
 
-## 2.30.2 (2022-06-07)
+## 2.30.2
+
+`2022-06-07`
 
 ### Fixes
 
 - 修复 `n-select` 每次关闭菜单时会重新计算选项，提升了性能
 
-## 2.30.1 (2022-06-07)
+## 2.30.1
+
+`2022-06-07`
 
 ### Feats
 
@@ -768,7 +826,9 @@ menu indent...
 - 修复 `n-menu` `node-props` 属性没有添加到 `role="menuitem"` 的元素上，而是添加到了里层元素
 - 修复 `n-menu` `node-props` 对 `type="group"` 的选项不生效
 
-## 2.30.0 (2022-06-06)
+## 2.30.0
+
+`2022-06-06`
 
 ### Breaking Changes
 
@@ -808,7 +868,9 @@ menu indent...
 - `n-dialog` 优化标题过长时的样式
 - `n-card` 优化标题过长时的样式
 
-## 2.29.1 (2022-06-03)
+## 2.29.1
+
+`2022-06-03`
 
 ### Fixes
 
@@ -855,7 +917,9 @@ menu indent...
 - `n-calendar` 新增 `header` slot，关闭 [#3036](https://github.com/tusen-ai/naive-ui/issues/3036)
 - `n-tree` 新增 `expand-on-click` 属性， [#2949](https://github.com/tusen-ai/naive-ui/issues/2949)
 
-## 2.29.0 (2022-05-18)
+## 2.29.0
+
+`2022-05-18`
 
 ### Breaking Changes
 
@@ -888,13 +952,17 @@ menu indent...
 
 - 新增 nlNL locale
 
-## 2.28.4 (2022-05-11)
+## 2.28.4
+
+`2022-05-11`
 
 ### Fixes
 
 - 修复 `n-theme-editor` 内容不能滚动
 
-## 2.28.3 (2022-05-11)
+## 2.28.3
+
+`2022-05-11`
 
 ### Fixes
 
@@ -953,7 +1021,9 @@ menu indent...
 - `UploadFileInfo` 新增 `fullPath` 和 `batchId` 属性
 - `DataTableBaseColumn` 新增 `tree` 属性，关闭 [#2757](https://github.com/tusen-ai/naive-ui/issues/2757)
 
-## 2.28.2 (2022-04-22)
+## 2.28.2
+
+`2022-04-22`
 
 ### Fixes
 
@@ -964,7 +1034,9 @@ menu indent...
 - 修复 `n-tree-select` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
 - 修复 `n-cascader` 在 `:allow-checking-not-loaded="true"` 的情况下菜单可能和选框位置不同步
 
-## 2.28.1 (2022-04-20)
+## 2.28.1
+
+`2022-04-20`
 
 ### Fixes
 
@@ -996,7 +1068,9 @@ menu indent...
 - 新增 ptBR locale
 - 新增 koKR locale
 
-## 2.28.0 (2022-04-11)
+## 2.28.0
+
+`2022-04-11`
 
 ### Breaking Changes
 
@@ -1025,7 +1099,9 @@ menu indent...
 - `n-alert` 添加 `RTL` 支持
 - `n-data-table` 新增 `allow-checking-not-loaded` 属性，关闭 [#2758](https://github.com/tusen-ai/naive-ui/issues/2758)
 
-## 2.27.0 (2022-03-27)
+## 2.27.0
+
+`2022-03-27`
 
 ### Breaking Changes
 
@@ -1084,7 +1160,9 @@ menu indent...
 
 - 新增 thTH locale.
 
-## 2.26.4 (2022-03-11)
+## 2.26.4
+
+`2022-03-11`
 
 ### Fixes
 
@@ -1100,13 +1178,17 @@ menu indent...
 - `n-data-table` 导出 `DataTableFilterState` 类型
 - `n-data-table` 导出 `DataTableSortState` 类型
 
-## 2.26.3 (2022-03-09)
+## 2.26.3
+
+`2022-03-09`
 
 ### Fixes
 
 - 修复 `n-button` loading 图标漂移
 
-## 2.26.2 (2022-03-09)
+## 2.26.2
+
+`2022-03-09`
 
 ### Fixes
 
@@ -1126,7 +1208,9 @@ menu indent...
 - `n-auto-complete` 新增 `focus` 方法
 - `n-auto-complete` 新增 `blur` 方法
 
-## 2.26.1 (2022-03-06)
+## 2.26.1
+
+`2022-03-06`
 
 ### Fixes
 
@@ -1143,7 +1227,9 @@ menu indent...
 - `n-input-number` 新增 `autofocus` 属性，关闭 [#2551](https://github.com/tusen-ai/naive-ui/issues/2551)
 - `n-date-picker` 扩大日期点击触发范围，关闭 [#2552](https://github.com/tusen-ai/naive-ui/issues/2552)
 
-## 2.26.0 (2022-03-02)
+## 2.26.0
+
+`2022-03-02`
 
 ### Breaking Changes
 
@@ -1156,11 +1242,15 @@ menu indent...
 
 ## 2.25.8
 
+`2022-03-01`
+
 ### Fixes
 
 - 修复 `useMessage` 丢失样式
 
-## 2.25.7 (2022-03-01)
+## 2.25.7
+
+`2022-03-01`
 
 ### Fixes
 
@@ -1182,14 +1272,18 @@ menu indent...
 - `n-input` 添加 `RTL` 支持
 - `n-input-number` 添加 `RTL` 支持
 
-## 2.25.5 (2022-02-24)
+## 2.25.5
+
+`2022-02-24`
 
 ### Fixes
 
 - 修复 `n-col` 在 `span=6` 时不能正确的换行，关闭 [#2497](https://github.com/tusen-ai/naive-ui/issues/2497)
 - 修复 `n-tabs` 在内容过多时底部边框在滚动区域不显示，关闭 [#2500](https://github.com/tusen-ai/naive-ui/issues/2500)
 
-## 2.25.3 (2022-02-23)
+## 2.25.3
+
+`2022-02-23`
 
 ### Fixes
 
@@ -1223,7 +1317,9 @@ menu indent...
 - 新增 skSK locale
 - 完善 frFR locale
 
-## 2.25.2 (2022-02-11)
+## 2.25.2
+
+`2022-02-11`
 
 ### Fixes
 
@@ -1244,14 +1340,18 @@ menu indent...
 - 新增 plPL locale，关闭 [#2354](https://github.com/tusen-ai/naive-ui/issues/2354)
 - 新增 eo locale
 
-## 2.25.1 (2022-02-06)
+## 2.25.1
+
+`2022-02-06`
 
 ### i18n
 
 - 新增 enGB locale
 - 完善 deDE locale
 
-## 2.25.0 (2022-02-04)
+## 2.25.0
+
+`2022-02-04`
 
 ### Breaking Changes
 
@@ -1308,7 +1408,9 @@ menu indent...
 - `n-select` 导出 `SelectRenderTag` 类型
 - `n-tree` 新增 `node-props` 属性
 
-## 2.24.7 (2022-01-28)
+## 2.24.7
+
+`2022-01-28`
 
 ### Fixes
 
@@ -1319,7 +1421,9 @@ menu indent...
 - 更新 jaJP locale
 - 更新 deDE locale
 
-## 2.24.6 (2022-01-26)
+## 2.24.6
+
+`2022-01-26`
 
 ### Feats
 
@@ -1330,7 +1434,9 @@ menu indent...
 - 修复 `n-dynamic-input` 当 max 为 0 时可以添加子项， 关闭 [#2271](https://github.com/tusen-ai/naive-ui/issues/2271)
 - 修复 `n-dialog` 有无用的 `console.log`
 
-## 2.24.5 (2022-01-25)
+## 2.24.5
+
+`2022-01-25`
 
 ### Fixes
 
@@ -1342,19 +1448,25 @@ menu indent...
 - `n-color-picker` 新增 `disabled` 属性
 - `n-date-picker` 快速跳转面板增加触发背景区域
 
-## 2.24.4 (2022-01-24)
+## 2.24.4
+
+`2022-01-24`
 
 ### Fixes
 
 - 更新 vueuc 版本
 
-## 2.24.3 (2022-01-24)
+## 2.24.3
+
+`2022-01-24`
 
 ### Fixes
 
 - 修复 `n-layout-sider` 边框没有 transition
 
-## 2.24.2 (2022-01-24)
+## 2.24.2
+
+`2022-01-24`
 
 ### Fixes
 
@@ -1412,13 +1524,17 @@ menu indent...
 - 新增 esAR locale
 - 新增 itIT locale
 
-## 2.24.1 (2022-01-12)
+## 2.24.1
+
+`2022-01-12`
 
 ### Fixes
 
 - 修复安装错误
 
-## 2.24.0 (2022-01-12)
+## 2.24.0
+
+`2022-01-12`
 
 ### Breaking Changes
 
@@ -1505,7 +1621,9 @@ menu indent...
 - `n-form-item` 新增 `label-props` 属性
 - 新增 volar 类型支持
 
-## 2.23.2 (2021-12-29)
+## 2.23.2
+
+`2021-12-29`
 
 ### Feats
 
@@ -1579,7 +1697,9 @@ menu indent...
 - 修复 `n-transfer` 在虚拟滚动模式下没有滚动条
 - 修复 `n-input-number` 不能输入以 0 结尾的小数
 
-## 2.23.1 (2021-12-20)
+## 2.23.1
+
+`2021-12-20`
 
 ### Fixes
 
@@ -1607,7 +1727,9 @@ menu indent...
 - `n-tree` 的 CSS 变量使用 `n` 作为前缀
 - `n-tree-select` 的 CSS 变量使用 `n` 作为前缀
 
-## 2.23.0 (2021-12-17)
+## 2.23.0
+
+`2021-12-17`
 
 ### Breaking Changes
 
@@ -1625,7 +1747,9 @@ menu indent...
 - `typography` 的 CSS 变量使用 `n` 作为前缀
 - `n-badge` 的 CSS 变量使用 `n` 作为前缀
 
-## 2.22.0 (2021-12-15)
+## 2.22.0
+
+`2021-12-15`
 
 ### Breaking Changes
 
@@ -1668,7 +1792,9 @@ menu indent...
 
 - 新增 zhTW locale
 
-## 2.21.5 (2021-12-07)
+## 2.21.5
+
+`2021-12-07`
 
 ### Fixes
 
@@ -1683,7 +1809,9 @@ menu indent...
 
 - 新增 frFR locale
 
-## 2.21.4 (2021-12-06)
+## 2.21.4
+
+`2021-12-06`
 
 ### Fixes
 
@@ -1700,7 +1828,9 @@ menu indent...
 - `n-upload` 新增 `show-trigger` 属性
 - `n-data-table` 展示树形数据时会忽略长度为 0 的 `children`，关闭 [#1703](https://github.com/tusen-ai/naive-ui/issues/1703)
 
-## 2.21.3 (2021-12-03)
+## 2.21.3
+
+`2021-12-03`
 
 ### Fixes
 
@@ -1721,7 +1851,9 @@ menu indent...
 - `n-data-table` 新增 `on-update:expanded-row-keys` 属性
 - `n-tree` 新增 `watch-props` 属性
 
-## 2.21.2 (2021-11-29)
+## 2.21.2
+
+`2021-11-29`
 
 ### Fixes
 
@@ -1751,7 +1883,9 @@ menu indent...
 - `n-input-number` 新增 `update-value-on-input` 属性，关闭 [#1662](https://github.com/tusen-ai/naive-ui/issues/1662)
 - `n-auto-complete` 新增 `prefix` & `suffix` 插槽
 
-## 2.21.1 (2021-11-23)
+## 2.21.1
+
+`2021-11-23`
 
 ### Fixes
 
@@ -1759,7 +1893,9 @@ menu indent...
 - 修复 `n-data-table` 在某些行展开后出现的样式问题
 - 修复 `n-data-table` 未能正确展开树形数据，关闭 [#1644](https://github.com/tusen-ai/naive-ui/issues/1644)
 
-## 2.21.0 (2021-11-21)
+## 2.21.0
+
+`2021-11-21`
 
 ### Breaking Changes
 
@@ -1797,7 +1933,9 @@ menu indent...
 - 修复 `n-global-style` SSR 报错
 - 修复 `n-button` 按下 Enter 会出发两次 click 时间 [#1626](https://github.com/tusen-ai/naive-ui/issues/1626)
 
-## 2.20.3 (2021-11-15)
+## 2.20.3
+
+`2021-11-15`
 
 ### Fixes
 
@@ -1815,7 +1953,9 @@ menu indent...
 
 - 新增 `createLocale` 方法允许用户自定义国际化，关闭 [#1525](https://github.com/tusen-ai/naive-ui/issues/1525)
 
-## 2.20.2 (2021-11-05)
+## 2.20.2
+
+`2021-11-05`
 
 ### Feats
 
@@ -1835,7 +1975,9 @@ menu indent...
 - 新增 deDE locale
 - 新增 nbNO locale
 
-## 2.20.1 (2021-11-01)
+## 2.20.1
+
+`2021-11-01`
 
 ### Fixes
 
@@ -1851,7 +1993,9 @@ menu indent...
 - `n-image` 的 `toolbar` 增加关闭图标，关闭 [#1412](https://github.com/tusen-ai/naive-ui/issues/1412)
 - `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发，关闭 [#1339](https://github.com/tusen-ai/naive-ui/issues/1339)
 
-## 2.20.0 (2021-10-28)
+## 2.20.0
+
+`2021-10-28`
 
 ### Breaking Changes
 
@@ -1874,7 +2018,9 @@ menu indent...
 
 - 新增 idID locale
 
-## 2.19.11 (2021-10-21)
+## 2.19.11
+
+`2021-10-21`
 
 ### Fixes
 
@@ -1885,7 +2031,9 @@ menu indent...
 - `n-tabs` 新增 `on-before-leave` 属性，关闭 [#1337](https://github.com/tusen-ai/naive-ui/issues/1337)
 - `n-color-picker` 新增 `show-preview` 属性，关闭 [#1281](https://github.com/tusen-ai/naive-ui/issues/1281)
 
-## 2.19.9 (2021-10-18)
+## 2.19.9
+
+`2021-10-18`
 
 ### Fixes
 
@@ -1904,7 +2052,9 @@ menu indent...
 - `n-input-number` 新增 `focus` 和 `blur` 方法
 - `n-config-provider` 新增 `breakpoints` 属性，关闭 [#1379](https://github.com/tusen-ai/naive-ui/issues/1379)
 
-## 2.19.8 (2021-10-14)
+## 2.19.8
+
+`2021-10-14`
 
 ### Fixes
 
@@ -1925,7 +2075,9 @@ menu indent...
 
 - 新增 jaJP locale
 
-## 2.19.7 (2021-10-12)
+## 2.19.7
+
+`2021-10-12`
 
 ### Fixes
 
@@ -1933,7 +2085,9 @@ menu indent...
 - 修复 `n-select` `fallback-option` 属性类型，关闭 [#1327](https://github.com/tusen-ai/naive-ui/issues/1327)
 - 修复 `n-modal` `on-after-enter` 不生效
 
-## 2.19.6 (2021-10-10)
+## 2.19.6
+
+`2021-10-10`
 
 ### Fixes
 
@@ -1946,7 +2100,9 @@ menu indent...
 - `n-cascader` 值改变时回调函数提供上层节点的全部 options 值，关闭 [#1235](https://github.com/tusen-ai/naive-ui/issues/1235)
 - `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/tusen-ai/naive-ui/issues/1232)
 
-## 2.19.5 (2021-10-07)
+## 2.19.5
+
+`2021-10-07`
 
 ### Fixes
 
@@ -1987,7 +2143,9 @@ menu indent...
 - `n-tree` 的 `on-update:checkedKeys` 回调新增选项信息
 - `n-tree` 的 `on-update:selectedKeys` 回调新增选项信息
 
-## 2.19.3 (2021-09-28)
+## 2.19.3
+
+`2021-09-28`
 
 ### Fixes
 
@@ -2000,7 +2158,9 @@ menu indent...
 - `n-grid-item` 在 `span` 为 0 的时候隐藏，关闭 [#1220](https://github.com/tusen-ai/naive-ui/issues/1220)
 - `n-grid` 新增 `item-responsive` 属性
 
-## 2.19.2 (2021-09-26)
+## 2.19.2
+
+`2021-09-26`
 
 ### i18n
 
@@ -2020,7 +2180,9 @@ menu indent...
 - `n-checkbox` 增加 aria 支持
 - `n-alert` 增加 aria 支持
 
-## 2.19.1 (2021-09-21)
+## 2.19.1
+
+`2021-09-21`
 
 ### Fixes
 
@@ -2032,7 +2194,9 @@ menu indent...
 - 修复 `n-tree` 在 `cascade` 设置为 `false` 时 `checkable` 无法显示勾选框
 - 修复 `n-tree-select` 在 `cascade` 或 `multiple` 设置为 `false` 时 `checkable` 无法显示勾选框
 
-## 2.19.0 (2021-09-19)
+## 2.19.0
+
+`2021-09-19`
 
 ### Breaking Changes
 
@@ -2063,7 +2227,9 @@ menu indent...
 - 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/tusen-ai/naive-ui/issues/1194)、[#1176](https://github.com/tusen-ai/naive-ui/issues/1176)
 - Fix `n-tabs` 在 card 类型时左侧滚动的阴影不显示
 
-## 2.18.2 (2021-09-14)
+## 2.18.2
+
+`2021-09-14`
 
 ### Feats
 
@@ -2092,7 +2258,9 @@ menu indent...
 - 修复 `n-auto-complete` 的 `children` 属性不允许使用 `AutoCompleteOption` 类型
 - 修复 `n-gi` 的 `collapsed` 在 `n-form-item-gi` 中切换无法生效问题，关闭 [#1160](https://github.com/tusen-ai/naive-ui/issues/1160)
 
-## 2.18.1 (2021-09-08)
+## 2.18.1
+
+`2021-09-08`
 
 ### Feats
 
@@ -2105,7 +2273,9 @@ menu indent...
 - 修复 `n-step` 无法使用 `v-for` 的子元素
 - 修复 `n-input-number` 在 `step` 不为小数时不能输入小数
 
-## 2.18.0 (2021-09-07)
+## 2.18.0
+
+`2021-09-07`
 
 ### Breaking Changes
 
@@ -2123,19 +2293,25 @@ menu indent...
 - 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
 - 修复 `n-cascader` `check-strategy="child"` 和原有 `leaf-only` 表现不一致
 
-## 2.17.2 (2021-09-06)
+## 2.17.2
+
+`2021-09-06`
 
 ### Fixes
 
 - 修复 `n-tree-select` 显示路径是展示 key 而不是 label，关闭 [#1095](https://github.com/tusen-ai/naive-ui/issues/1095)
 
-## 2.17.1 (2021-09-06)
+## 2.17.1
+
+`2021-09-06`
 
 ### Fixes
 
 - 修复 `n-cascader` 菜单未展示正确的选中 key
 
-## 2.17.0 (2021-09-05)
+## 2.17.0
+
+`2021-09-05`
 
 ### Breaking Changes
 
@@ -2184,7 +2360,9 @@ menu indent...
 - `n-input` 新增 `show-password-on` 属性
 - `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
-## 2.16.7 (2021-08-27)
+## 2.16.7
+
+`2021-08-27`
 
 ### Feats
 
@@ -2195,7 +2373,9 @@ menu indent...
 - 修复 `n-mention` 在 input 模式下菜单距离文字太远
 - 修复 `n-tree` 节点无法展开的问题
 
-## 2.16.6 (2021-08-26)
+## 2.16.6
+
+`2021-08-26`
 
 ### Feats
 
@@ -2212,7 +2392,9 @@ menu indent...
 - 修复 `n-input` 当传递 `value=ref(0)` 时，同时显示 0 和占位符问题，关闭 [#914](https://github.com/tusen-ai/naive-ui/issues/914)
 - 修复 `n-data-table` `flex-height` 在不设定 `scroll-x` 的时候不生效，关闭 [#952](https://github.com/tusen-ai/naive-ui/issues/952)
 
-## 2.16.5 (2021-08-20)
+## 2.16.5
+
+`2021-08-20`
 
 ### Feats
 
@@ -2227,13 +2409,17 @@ menu indent...
 - 修复 `n-popover` 嵌套于不同 placement 的 popover 中箭头位置错乱，关闭 [#916](https://github.com/tusen-ai/naive-ui/issues/916)
 - 修复 `n-ellpisis` 在更新内容后失效，关闭 [#776](https://github.com/tusen-ai/naive-ui/issues/776)
 
-## 2.16.4 (2021-08-16)
+## 2.16.4
+
+`2021-08-16`
 
 ### Fixes
 
 - 修复 ruRU locale 导出
 
-## 2.16.3 (2021-08-16)
+## 2.16.3
+
+`2021-08-16`
 
 ### i18n
 
@@ -2252,7 +2438,9 @@ menu indent...
 - 修复 `n-menu` 使用 `render-icon` 在返回值为 `true` 时渲染有误
 - 修复 `n-space` 在使用 `v-if` 时渲染空的占位，关闭 [#824](https://github.com/tusen-ai/naive-ui/issues/824)
 
-## 2.16.2 (2021-08-09)
+## 2.16.2
+
+`2021-08-09`
 
 ### Feats
 
@@ -2268,7 +2456,9 @@ menu indent...
 - 修复 `n-data-table` 当全选选中时，全选的状态显示不应该包含被禁用的行，关闭 [#778](https://github.com/tusen-ai/naive-ui/issues/778)
 - 修复 `n-color-picker` 的 `on-complete` 回调参数 `value` 值不正确，关闭 [#748](https://github.com/tusen-ai/naive-ui/issues/748)
 
-## 2.16.1 (2021-08-06)
+## 2.16.1
+
+`2021-08-06`
 
 ### Feats
 
@@ -2285,7 +2475,9 @@ menu indent...
 - 修复 `n-select` 当选项禁用时未隐藏关闭图标
 - 修复 `n-modal` 使用自定义内容无法正常关闭，关闭 [#788](https://github.com/tusen-ai/naive-ui/issues/788)
 
-## 2.16.0 (2021-08-02)
+## 2.16.0
+
+`2021-08-02`
 
 ### Breaking Changes
 
@@ -2307,13 +2499,17 @@ menu indent...
 - 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/tusen-ai/naive-ui/issues/744)
 - 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/tusen-ai/naive-ui/issues/728)
 
-## 2.15.11 (2021-07-29)
+## 2.15.11
+
+`2021-07-29`
 
 ### Fixes
 
 - 修复 `n-data-table` pagination 的报错
 
-## 2.15.10 (2021-07-29)
+## 2.15.10
+
+`2021-07-29`
 
 ### Feats
 
@@ -2330,7 +2526,9 @@ menu indent...
 - 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误，关闭 [#698](https://github.com/tusen-ai/naive-ui/issues/698)
 - 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/tusen-ai/naive-ui/issues/668)
 
-## 2.15.9 (2021-07-28)
+## 2.15.9
+
+`2021-07-28`
 
 ### Feats
 
@@ -2341,7 +2539,9 @@ menu indent...
 
 - 修复 `n-message` 的 options 中 `duration` 配置无效
 
-## 2.15.8 (2021-07-27)
+## 2.15.8
+
+`2021-07-27`
 
 ### Feats
 
@@ -2352,7 +2552,9 @@ menu indent...
 
 - 修复 `n-data-table` `n-spin`的样式穿透问题，关闭 [#663](https://github.com/tusen-ai/naive-ui/issues/663)
 
-## 2.15.7 (2021-07-25)
+## 2.15.7
+
+`2021-07-25`
 
 ### Feats
 
@@ -2378,7 +2580,9 @@ menu indent...
 - 修复 `n-data-table` 无数据时头部 checkbox 显示状态不正确
 - 修复 `n-data-table` header 和 body 滚动不同步
 
-## 2.15.6 (2021-07-23)
+## 2.15.6
+
+`2021-07-23`
 
 ### Feats
 
@@ -2404,7 +2608,9 @@ menu indent...
 - 修复 `n-pagination` `PaginationInfo` 的 `endIndex` 数据错误，关闭 [#584](https://github.com/tusen-ai/naive-ui/issues/584)
 - 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/tusen-ai/naive-ui/issues/582)
 
-## 2.15.5 (2021-07-16)
+## 2.15.5
+
+`2021-07-16`
 
 ### Feats
 
@@ -2432,7 +2638,9 @@ menu indent...
 - 修复 `n-tag` 的 `type` 增加 `primary`　类型
 - 修复 `n-dynamic-tags` 的 `type` 增加 `primary`　类型
 
-## 2.15.4 (2021-07-09)
+## 2.15.4
+
+`2021-07-09`
 
 ### Feats
 
@@ -2458,7 +2666,9 @@ menu indent...
 - 修复 `n-select` clear 按钮在 `n-spin` 内过大，关闭 [#454](https://github.com/tusen-ai/naive-ui/issues/454)
 - 修复 `n-select` 选项没有被正常更新，关闭 [#441](https://github.com/tusen-ai/naive-ui/issues/441)
 
-## 2.15.3 (2021-07-05)
+## 2.15.3
+
+`2021-07-05`
 
 ### Feats
 
@@ -2480,7 +2690,9 @@ menu indent...
 - 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/tusen-ai/naive-ui/issues/213)
 - 修复 `n-data-table` 在不设定 `max-height` 时固定列阴影失效，关闭 [#376](https://github.com/tusen-ai/naive-ui/issues/376)
 
-## 2.15.2 (2021-07-02)
+## 2.15.2
+
+`2021-07-02`
 
 ### Feats
 
@@ -2506,11 +2718,15 @@ menu indent...
 - 修复 `n-tag` 缺少 `on-update-checked` 属性
 - 修复 `n-menu` 折叠时 `render-label` 对于 dropdown 不生效
 
-## 2.15.1 (2021-06-30)
+## 2.15.1
+
+`2021-06-30`
 
 - 修复缺少 `web-types.json`
 
-## 2.15.0 (2021-06-29)
+## 2.15.0
+
+`2021-06-29`
 
 ### Breaking Changes
 
@@ -2538,7 +2754,9 @@ menu indent...
 - 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
 - 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
 
-## 2.14.0 (2021-06-23)
+## 2.14.0
+
+`2021-06-23`
 
 ### Breaking Changes
 
@@ -2564,7 +2782,9 @@ menu indent...
 
 - `n-input-number` 会直接聚焦，关闭 [#244](https://github.com/tusen-ai/naive-ui/issues/244)
 
-## 2.13.0 (2021-06-21)
+## 2.13.0
+
+`2021-06-21`
 
 ### Feats
 
@@ -2583,13 +2803,17 @@ menu indent...
 - 修复 `n-date-picker` 非 clearable 不显示图标
 - 修复 `n-time-picker` clearable 状态下图标位置不正确，关闭 [#222](https://github.com/tusen-ai/naive-ui/issues/222)
 
-## 2.12.2 (2021-06-19)
+## 2.12.2
+
+`2021-06-19`
 
 ### Fixes
 
 - 修复 `n-form-item` 始终展示必需的星号
 
-## 2.12.1 (2021-06-19)
+## 2.12.1
+
+`2021-06-19`
 
 ### Feats
 
@@ -2607,7 +2831,9 @@ menu indent...
 - 修复 `n-notification` 位置不正确
 - 修复 `n-message` 的 content & option 类型不正确
 
-## 2.12.0 (2021-06-16)
+## 2.12.0
+
+`2021-06-16`
 
 ### Breaking Changes
 
@@ -2623,7 +2849,9 @@ menu indent...
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
 - 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
 
-## 2.11.12 (2021-06-16)
+## 2.11.12
+
+`2021-06-16`
 
 ### Feats
 
@@ -2636,7 +2864,9 @@ menu indent...
 - 修复 `n-radio-group` 不触发 form-item 验证
 - 修复 `n-auto-complete` 无法自定义元素
 
-## 2.11.11 (2021-06-15)
+## 2.11.11
+
+`2021-06-15`
 
 ### Feats
 
@@ -2646,7 +2876,9 @@ menu indent...
 
 - 将 `vue` 和 `vue-router` 移至 peer dependencies 避免重复打包
 
-## 2.11.9 (2021-06-15)
+## 2.11.9
+
+`2021-06-15`
 
 ### Feats
 
@@ -2665,7 +2897,9 @@ menu indent...
 - 修复 `n-dialog` 的 `destroyAll` 方法缺失
 - 修复 `n-data-table` 缺少 `on-update-sorter`、`on-update-filters`、`on-update-page`、`on-update-page-size` 属性
 
-## 2.11.8 (2021-06-13)
+## 2.11.8
+
+`2021-06-13`
 
 ### Feats
 
@@ -2677,7 +2911,9 @@ menu indent...
 - 修复 `n-form-item` 的 `grid-template-columns` 样式属性对子元素布局的影响 [#93](https://github.com/tusen-ai/naive-ui/pull/93)
 - 修复 `n-data-table` 的 `rowKey`、`rowClassName`、`rowProps`、`summary` 属性类型和期望值不兼容
 
-## 2.11.7 (2021-06-12)
+## 2.11.7
+
+`2021-06-12`
 
 ### Fixes
 
@@ -2685,7 +2921,9 @@ menu indent...
 - 修复 `n-color-picker` 默认值不跟随模式设定
 - 修复缺少 `lodash` & `lodash-es` 类型
 
-## 2.11.6 (2021-06-11)
+## 2.11.6
+
+`2021-06-11`
 
 ### Feats
 
@@ -2702,7 +2940,9 @@ menu indent...
 - 修正 `n-tabs` 在控制台输出无用信息
 - 修正 `n-color-picker` 设定 `modes` 无效 [#77](https://github.com/tusen-ai/naive-ui/issues/77)
 
-## 2.11.5 (2021-06-10)
+## 2.11.5
+
+`2021-06-10`
 
 ### Feats
 
@@ -2720,6 +2960,8 @@ menu indent...
 - 修复 `n-dropdown` 选项鼠标形状不是 pointer
 
 ## 2.11.4
+
+`2021-06-07`
 
 ### Feats
 
@@ -2739,11 +2981,15 @@ menu indent...
 
 ## 2.11.3
 
+`2021-06-05`
+
 ### Fixes
 
 - 修复 `n-collapse` `default-expanded-names` 不生效
 
 ## 2.11.2
+
+`2021-06-05`
 
 ### Fixes
 
@@ -2757,9 +3003,13 @@ menu indent...
 
 ## 2.11.1
 
+`2021-06-05`
+
 更新 package.json & README.md
 
 ## 2.11.0
+
+`2021-06-05`
 
 ### Breaking Changes
 
@@ -2787,6 +3037,8 @@ menu indent...
 
 ## 2.10.0
 
+`2021-05-26`
+
 ### Breaking Changes
 
 - `n-popover` 的 `placement` 属性默认值设为 `'top'`
@@ -2810,6 +3062,8 @@ menu indent...
 - `n-tab-pane` 的 `label` 属性被废弃，请使用 `tab` 属性代替
 
 ## 2.9.0
+
+`2021-05-25`
 
 ### Breaking Changes
 
@@ -2843,6 +3097,8 @@ menu indent...
 
 ## 2.8.0
 
+`2021-05-19`
+
 ### Perf
 
 - 优化 `n-data-table` 初始渲染次数
@@ -2869,6 +3125,8 @@ menu indent...
 
 ## 2.7.4
 
+`2021-04-25`
+
 ### Feats
 
 - `n-form-item` 可以在 `n-form` 外使用
@@ -2882,6 +3140,8 @@ menu indent...
 - 修正 `n-data-table` 取消全部选择不工作
 
 ## 2.7.3
+
+`2021-04-22`
 
 ### Feats
 
@@ -2897,6 +3157,8 @@ menu indent...
 
 ## 2.7.2
 
+`2021-04-21`
+
 ### Feats
 
 - `n-data-table` 增加 `summary` 属性
@@ -2907,6 +3169,8 @@ menu indent...
 - Fix `n-layout` 横向溢出的问题
 
 ## 2.7.1
+
+`2021-04-20`
 
 ### Feats
 
@@ -2920,6 +3184,8 @@ menu indent...
 
 ## 2.7.0
 
+`2021-04-19`
+
 ### Breaking Changes
 
 - `n-drawer` 默认不再包含 padding，填充 drawer 的内容可以使用 `n-drawer-content`
@@ -2932,6 +3198,8 @@ menu indent...
 
 ## 2.6.0
 
+`2021-04-19`
+
 ### Feats
 
 - `n-config-provider` 增加 `cls-prefix` 属性
@@ -2942,6 +3210,8 @@ menu indent...
 
 ## 2.5.1
 
+`2021-04-14`
+
 ### Feats
 
 - `n-color-picker` 增加 `show-alpha` 属性
@@ -2951,6 +3221,8 @@ menu indent...
 - 修正 `n-select` 默认 `fallback-option` 属性使组件崩溃
 
 ## 2.5.0
+
+`2021-04-13`
 
 ### Feats
 
@@ -2969,6 +3241,8 @@ menu indent...
 
 ## 2.4.2
 
+`2021-04-08`
+
 ### Feats
 
 - 添加 `n-form-item-gi` 组件
@@ -2980,12 +3254,16 @@ menu indent...
 
 ## 2.4.1
 
+`2021-04-07`
+
 ### Fixes
 
 - 修正 `n-select` 单选过滤模式的光标颜色
 - 修正 `n-select` 菜单的 action 部分不能 focus
 
 ## 2.4.0
+
+`2021-04-07`
 
 ### Feats
 
@@ -3012,11 +3290,15 @@ menu indent...
 
 ## 2.3.1
 
+`2021-03-29`
+
 ### Fixes
 
 - 修正 `n-layout-sider` 横向宽度溢出
 
 ## 2.3.0
+
+`2021-03-29`
 
 ### Breaking Changes
 
@@ -3024,6 +3306,8 @@ menu indent...
 - 对于包含 `n-layout-sider` 的 `n-layout` 必须设定 `has-sider`
 
 ## 2.2.0
+
+`2021-03-29`
 
 ### Feats
 
@@ -3047,12 +3331,16 @@ menu indent...
 
 ## 2.1.3
 
+`2021-03-25`
+
 ### Fixes
 
 - 修正 `n-data-table` 对于不是最后一个的 td 没有右侧边框
 - 修正 `n-data-table` 头部在表格宽度大于 `scroll-x` 的时候不够宽
 
 ## 2.1.2
+
+`2021-03-24`
 
 ### Feats
 
@@ -3063,13 +3351,17 @@ menu indent...
 
 - 修正 `n-dropdown` 在设定 `x` 和 `y` 之后鼠标在外面移动会报错
 
-## 2.1.1 (2021-03-22)
+## 2.1.1
+
+`2021-03-22`
 
 ### Fixes
 
 - 修正 `n-select` 选择器溢出计数器 popover 触发区域有误
 
-## 2.1.0 (2021-03-22)
+## 2.1.0
+
+`2021-03-22`
 
 ### Breaking Changes
 
@@ -3094,7 +3386,9 @@ menu indent...
 - 修正 `n-card` 设定高度后 action 不在底部的问题
 - 修正 `n-popover` 的 `duration` 和 `delay` 属性执行有问题
 
-## 2.0.1 (2021-03-17)
+## 2.0.1
+
+`2021-03-17`
 
 ### Feats
 
@@ -3108,11 +3402,15 @@ menu indent...
 - 修正 `n-menu` 回调类 prop 不接受数组
 - 修正 `n-layout-sider` 按钮被遮挡的问题
 
-## 2.0.0 (2021-03-15)
+## 2.0.0
+
+`2021-03-15`
 
 参考 vue3.md
 
 ## 1.6.0
+
+`2020-10-23`
 
 ### Fixes
 
@@ -3130,7 +3428,9 @@ menu indent...
 
 - `n-log` 添加 zhCN 本地化
 
-## 1.5.5 (2020-08-15)
+## 1.5.5
+
+`2020-08-15`
 
 ### Breaking Changes
 
@@ -3141,19 +3441,25 @@ menu indent...
 - 修正了未设定主题时样式报错的问题
 - 修正了 `n-select` `single` `filterable` 时 placeholder 的样式问题
 
-## 1.5.4 (2020-08-08)
+## 1.5.4
+
+`2020-08-08`
 
 ### Fixes
 
 - 修正了 Message、Notification、Confirm 不随主题切换的问题
 
-## 1.5.3 (2020-07-23)
+## 1.5.3
+
+`2020-07-23`
 
 ### Fixes
 
 - 修正了 `n-select` 在 `placeholder` 为空的时候显示出错的问题
 
-## 1.5.2 (2020-07-22)
+## 1.5.2
+
+`2020-07-22`
 
 ### Fixes
 
@@ -3164,7 +3470,9 @@ menu indent...
 
 - 重构了 `n-tag` 的样式
 
-## 1.5.1 (2020-07-20)
+## 1.5.1
+
+`2020-07-20`
 
 ### Feats
 
@@ -3174,7 +3482,9 @@ menu indent...
 
 - 修正了 `n-radio` 下的子元素无法获取焦点的问题
 
-## 1.5.0 (2020-07-09)
+## 1.5.0
+
+`2020-07-09`
 
 ### Breaking Changes
 
@@ -3184,13 +3494,17 @@ menu indent...
 
 - 修正了一些零碎的样式错误
 
-## 1.4.1 (2020-06-23)
+## 1.4.1
+
+`2020-06-23`
 
 ### Feats
 
 - 为 `n-select` 增加了 `autofocus` 属性
 
-## 1.4.0 (2020-06-19)
+## 1.4.0
+
+`2020-06-19`
 
 ### Breaking Changes
 
@@ -3200,7 +3514,9 @@ menu indent...
 
 - 增加了试验性的设定主色功能
 
-## 1.3.5 (2020-06-06)
+## 1.3.5
+
+`2020-06-06`
 
 ### Feats
 
@@ -3211,26 +3527,34 @@ menu indent...
 - 修正了 `n-input` 如果太宽里面的 input 元素宽度不会展开的问题
 - 修正了 `n-input-group` 中 `n-input-number` 边框的样式瑕疵
 
-## 1.3.4 (2020-06-05)
+## 1.3.4
+
+`2020-06-05`
 
 ### Fixes
 
 - 修正了 `n-a` 的 `to` 属性不能为对象的问题
 
-## 1.3.3 (2020-06-03)
+## 1.3.3
+
+`2020-06-03`
 
 ### Feats
 
 - 增加了 `$NOs.theme` 来获取当前操作系统的主题
 
-## 1.3.2 (2020-06-02)
+## 1.3.2
+
+`2020-06-02`
 
 ### Fixes
 
 - 修正了 `n-log` 的加载器显示等宽字体的问题
 - 修正了 `n-button` icon 有关的类名没有被正确应用的问题
 
-## 1.3.1 (2020-06-01)
+## 1.3.1
+
+`2020-06-01`
 
 ### Fixes
 
@@ -3242,7 +3566,9 @@ menu indent...
 
 - 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
 
-## 1.3.0 (2020-06-01)
+## 1.3.0
+
+`2020-06-01`
 
 ### Breaking Changes
 
@@ -3263,19 +3589,25 @@ menu indent...
 
 - 调整了一些组件亮色主题下的样式
 
-## 1.2.1 (2020-05-29)
+## 1.2.1
+
+`2020-05-29`
 
 ### Fixes
 
 - 修正了 `n-slider` 弹框没有 z-index 的问题
 
-## 1.2.0 (2020-05-29)
+## 1.2.0
+
+`2020-05-29`
 
 ### Feats
 
 - 为 `n-form-item` 增加了 `feedback` 和 `validation-status` 属性
 
-## 1.1.5 (2020-05-28)
+## 1.1.5
+
+`2020-05-28`
 
 ### Feats
 
@@ -3287,7 +3619,9 @@ menu indent...
 
 - 修正了 `n-select` 在 disabled 状态下能被清除的问题
 
-## 1.1.4 (2020-05-28)
+## 1.1.4
+
+`2020-05-28`
 
 ### Fixes
 
@@ -3297,7 +3631,9 @@ menu indent...
 
 - 一个 UI 实例最多在一个 Vue 上安装一次
 
-## 1.1.3 (2020-05-20)
+## 1.1.3
+
+`2020-05-20`
 
 ### Chores
 
@@ -3307,7 +3643,9 @@ menu indent...
 
 - 修正了 `n-transfer` 在值改变时动画出错的问题
 
-## 1.1.2 (2020-05-19)
+## 1.1.2
+
+`2020-05-19`
 
 ### Feats
 
@@ -3322,7 +3660,9 @@ menu indent...
 - 减少了 `n-checkbox` 在值未改变时的重复渲染
 - 提升了文字内容的 `n-avatar` 的性能
 
-## 1.1.1 (2020-05-18)
+## 1.1.1
+
+`2020-05-18`
 
 ### Fixes
 
@@ -3338,7 +3678,9 @@ menu indent...
 
 - 为了性能重构了 `n-nimbus-service-layout` 的部分代码
 
-## 1.1.0 (2020-05-16)
+## 1.1.0
+
+`2020-05-16`
 
 ### Feats
 
@@ -3349,7 +3691,9 @@ menu indent...
 - 将内部所有使用 $插槽 s 的地方换为 $scopedSlots 来获得更好的鲁棒性
 - 将部分按钮样式生成转移到组件内动态进行
 
-## 1.0.14 (2020-05-15)
+## 1.0.14
+
+`2020-05-15`
 
 ### Fixes
 
@@ -3357,19 +3701,25 @@ menu indent...
 - 修正了 `n-tabs` 滚动按钮没有随着宽度改变触发的问题
 - 修正了 `n-tabs` 高度变化会导致一些不期望的调用的问题
 
-## 1.0.13 (2020-05-14)
+## 1.0.13
+
+`2020-05-14`
 
 ### Fixes
 
 - 修正 `n-form-item-col` & `n-form-item-row` 的 label 插槽 不显示的问题
 
-## 1.0.12 (2020-04-30)
+## 1.0.12
+
+`2020-04-30`
 
 ### Fixes
 
 - 修正了一些 CSS 长度属性格式化错误的问题
 
-## 1.0.11 (2020-04-30)
+## 1.0.11
+
+`2020-04-30`
 
 ### Feats
 
@@ -3384,7 +3734,9 @@ menu indent...
 - `n-data-table` 的 `max-height` 和 `min-height` 会对表格部分的整体生效，不只是表格的内容部分
 - `n-select` 在默认情况下会显示选项中不存在的值
 
-## 1.0.10 (2020-04-28)
+## 1.0.10
+
+`2020-04-28`
 
 ### Feats
 
@@ -3395,7 +3747,9 @@ menu indent...
 
 - 解决了可卸载组件在嵌套成 `modal > drawer > component` 样子的时候会被卸载到错误位置的问题
 
-## 1.0.9 (2020-04-23)
+## 1.0.9
+
+`2020-04-23`
 
 ### Feats
 
@@ -3408,14 +3762,18 @@ menu indent...
 - 解决了 `n-data-table` 不能使用全部 `pagination` prop 的问题
 - 解决了 `n-pagination` `on-page-size-change` 不生效的问题
 
-## 1.0.8 (2020-04-22)
+## 1.0.8
+
+`2020-04-22`
 
 ### Feats
 
 - 增加 `n-dynamic-tags` 组件
 - `styleScheme` 新增暴露颜色 `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor`
 
-## 1.0.7 (2020-04-10)
+## 1.0.7
+
+`2020-04-10`
 
 ### Feats
 
@@ -3425,13 +3783,17 @@ menu indent...
 
 - 解决了 `n-collpase-item` 不支持 `number` 的问题
 
-## 1.0.6 (2020-04-03)
+## 1.0.6
+
+`2020-04-03`
 
 ### Fixes
 
 - 解决了所有的 `console` 语句都在打包中被删除了的问题
 
-## 1.0.5 (2020-03-27)
+## 1.0.5
+
+`2020-03-27`
 
 ### Feats
 
@@ -3441,13 +3803,17 @@ menu indent...
 
 - `n-data-table` 在有多列筛选的情况下数据不能被正确筛选
 
-## 1.0.4 (2020-03-26)
+## 1.0.4
+
+`2020-03-26`
 
 ### Feats
 
 - 当选项过多时，`n-data-table` 过滤菜单的内容可以滚动
 
-## 1.0.3 (2020-03-25)
+## 1.0.3
+
+`2020-03-25`
 
 ### Feats
 
@@ -3459,14 +3825,18 @@ menu indent...
 - `n-form-item` 的 validate 方法在某些 validator 的返回值下不会 resolve
 - `$NConfirm` 主题未随 `n-config-provider` 切换
 
-## 1.0.2 (2020-03-23)
+## 1.0.2
+
+`2020-03-23`
 
 ### Fixes
 
 - `n-transfer` 的选项在值变化之后没有重置
 - `n-nimbus-service-layout` (deprecated) 没有兼容 Vue Router(3.1 版本以下) `push` 方法的返回值
 
-## 1.0.1 (2020-03-21)
+## 1.0.1
+
+`2020-03-21`
 
 ### Feats
 
