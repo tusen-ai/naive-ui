@@ -12,33 +12,42 @@ badge.vue
 tooltip.vue
 custom.vue
 group.vue
+menu.vue
 ```
 
 ## API
 
-### Float Button Props
+### FloatButton Props
 
-| 名称             | 类型               | 默认值    | 说明               |
-| ---------------- | ------------------ | --------- | ------------------ |
-| width            | `number \| string` | `40`      | 宽度               |
-| height           | `number \| string` | `40`      | 高度               |
-| left             | `number \| string` | `40`      | 距离页面左侧的宽度 |
-| right            | `number \| string` | `40`      | 距离页面右侧的宽度 |
-| top              | `number \| string` | `40`      | 距离页面顶部的高度 |
-| bottom           | `number \| string` | `40`      | 距离页面底部的高度 |
-| radius           | `number \| string` | `22`      | 圆角               |
-| background-color | `string`           | `#ffffff` | 背景色             |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| bottom | `number \| string` | `40` | 距离页面底部的高度 | NEXT_VERSION |
+| height | `number \| string` | `40` | 高度 | NEXT_VERSION |
+| left | `number \| string` | `undefined` | 距离页面左侧的宽度 | NEXT_VERSION |
+| menu-trigger | `'click' \| 'hover'` | `undefined` | 触发菜单显示的方式 | NEXT_VERSION |
+| position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | 按钮组的定位方式 | NEXT_VERSION |
+| right | `number \| string` | `undefined` | 距离页面右侧的宽度 | NEXT_VERSION |
+| shape | `'circle' \| 'square'` | `'circle'` | 按钮的形状 | NEXT_VERSION |
+| show-menu | `boolean` | `undefined` | 是否打开菜单 | NEXT_VERSION |
+| top | `number \| string` | `undefined` | 距离页面顶部的高度 | NEXT_VERSION |
+| type | `'default' \| 'primary'` | `'default'` | 按钮的类型 | NEXT_VERSION |
+| width | `number \| string` | `undefined` | 宽度 | NEXT_VERSION |
+| on-update:show-menu | `(value: boolean) => void` | `undefined` | 菜单打开或者关闭的回调 | NEXT_VERSION |
 
-### Float Button Group Props
+### FloatButtonGroup Props
 
-| 名称             | 类型               | 默认值      | 说明               |
-| ---------------- | ------------------ | ----------- | ------------------ |
-| width            | `number \| string` | `40`        | 宽度               |
-| height           | `number \| string` | `40`        | 高度               |
-| left             | `number \| string` | `40`        | 距离页面左侧的宽度 |
-| right            | `number \| string` | `40`        | 距离页面右侧的宽度 |
-| top              | `number \| string` | `40`        | 距离页面顶部的高度 |
-| bottom           | `number \| string` | `40`        | 距离页面底部的高度 |
-| radius           | `number \| string` | `22`        | 圆角               |
-| background-color | `string`           | `undefined` | 背景色             |
-| vertical         | `boolean`          | `undefined` | 子元素排列的方向   |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| bottom | `number \| string` | `undefined` | 距离页面底部的高度 | NEXT_VERSION |
+| left | `number \| string` | `undefined` | 距离页面左侧的宽度 | NEXT_VERSION |
+| position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | 按钮组的定位方式 | NEXT_VERSION |
+| right | `number \| string` | `undefined` | 距离页面右侧的宽度 | NEXT_VERSION |
+| shape | `'circle' \| 'square'` | `'circle'` | 按钮组的形状 | NEXT_VERSION |
+| top | `number \| string` | `undefined` | 距离页面顶部的高度 | NEXT_VERSION |
+
+### FloatButton Slots
+
+| 名称        | 参数 | 说明               | 版本         |
+| ----------- | ---- | ------------------ | ------------ |
+| description | `()` | 按钮中的描述信息   | NEXT_VERSION |
+| menu        | `()` | 按钮会触发的子菜单 | NEXT_VERSION |

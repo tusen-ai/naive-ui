@@ -14,6 +14,7 @@
 - 修复 `n-form-item` 校验结果可能会闪烁的问题，关闭 [#5583](https://github.com/tusen-ai/naive-ui/issues/5583)
 - 修复 `n-popselect` 组件的 header 插槽里 input 无法输入，关闭 [#5494](https://github.com/tusen-ai/naive-ui/pull/5494)
 - 修复 `n-qr-code` 大小样式问题
+- 修复 `n-badge` 会影响子元素的文字颜色
 
 ### Features
 
@@ -28,7 +29,11 @@
 
 - 新增 `etEE` locale
 
-## 2.37.3 (2024-01-09)
+### TODO
+
+menu indent...
+
+## 2.37.3
 
 ### Fixes
 
