@@ -12,6 +12,7 @@ const extensions = ['.mjs', '.js', '.json', '.ts']
 
 const baseConfig = defineConfig({
   input: path.resolve('./src/index.ts'),
+  external: ['vue'],
   plugins: [
     nodeResolve({ extensions }),
     esbuild({
@@ -28,25 +29,20 @@ const baseConfig = defineConfig({
 })
 
 const umdConfig = defineConfig({
-  external: ['vue'],
-  output: [
-    {
-      name: 'naive',
-      format: 'umd',
-      exports: 'named',
-      globals: {
-        vue: 'Vue'
-      }
+  output: {
+    name: 'naive',
+    format: 'umd',
+    exports: 'named',
+    globals: {
+      vue: 'Vue'
     }
-  ]
+  }
 })
 
 const esmConfig = defineConfig({
-  output: [
-    {
-      format: 'esm'
-    }
-  ]
+  output: {
+    format: 'esm'
+  }
 })
 
 const devConfig = defineConfig({
@@ -100,11 +96,11 @@ const esmProdOutputConfig = defineConfig({
 
 module.exports = [
   // umd dev
-  merge(baseConfig, umdConfig, devConfig, umdDevOutputConfig),
+  merge.all([baseConfig, umdConfig, devConfig, umdDevOutputConfig]),
   // umd prod
-  merge(baseConfig, umdConfig, prodConfig, umdProdOutputConfig),
+  merge.all([baseConfig, umdConfig, prodConfig, umdProdOutputConfig]),
   // esm dev
-  merge(baseConfig, esmConfig, devConfig, esmDevOutputConfig),
+  merge.all([baseConfig, esmConfig, devConfig, esmDevOutputConfig]),
   // esm prod
-  merge(baseConfig, esmConfig, prodConfig, esmProdOutputConfig)
+  merge.all([baseConfig, esmConfig, prodConfig, esmProdOutputConfig])
 ]
