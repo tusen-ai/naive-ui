@@ -29,19 +29,19 @@
 
 - Add `etEE` locale.
 
-## 2.37.3
+## 2.37.3 (2024-01-09)
 
 ### Fixes
 
 - Fix `n-split` has no color if it's not used in a card.
 
-## 2.37.2
+## 2.37.2 (2024-01-09)
 
 ### Fixes
 
 - `n-data-table`'s `downloadCsv` method will export selection & expand column.
 
-## 2.37.1
+## 2.37.1 (2024-01-08)
 
 ### Fixes
 
@@ -55,7 +55,7 @@
 - `n-auto-complete` adds `empty` slot.
 - `n-auto-complete` adds `show-empty` prop.
 
-## 2.37.0
+## 2.37.0 (2024-01-07)
 
 ### Breaking Changes
 
@@ -118,7 +118,7 @@
 - Adds `n-flex` component.
 - `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
 
-## 2.36.0
+## 2.36.0 (2024-12-18)
 
 ### Fixes
 
@@ -163,7 +163,7 @@
 - `n-menu` add `responsive` prop, it will collapse overflow menu items in horizontal mode.
 - `n-menu` add `deriveResponsiveState` method.
 
-## 2.35.0
+## 2.35.0 (2023-10-02)
 
 ### Breaking Changes
 
@@ -223,7 +223,7 @@
 - Add `svSE` locale.
 - Update `jaJP` locale.
 
-## 2.34.4
+## 2.34.4 (2023-05-21)
 
 ### Fixes
 
@@ -254,7 +254,7 @@
 - Update `zhTW` locale.
 - Add `faIR` locale.
 
-## 2.34.3
+## 2.34.3 (2022-12-24)
 
 ### Fixes
 
@@ -286,14 +286,14 @@
 
 - Update koKr locale.
 
-## 2.34.2
+## 2.34.2 (2022-11-22)
 
 ### Fixes
 
 - Fix `n-config-provider`'s katex type issue.
 - Fix `n-image` error in toolbar operation during preview, closes [#4144](https://github.com/tusen-ai/naive-ui/issues/4144).
 
-## 2.34.1
+## 2.34.1 (2022-11-21)
 
 ### Fixes
 
@@ -301,7 +301,7 @@
 - Fix `n-tree` misses `getCheckedData` and `getIndeterminateData` methods, closes [#4064](https://github.com/tusen-ai/naive-ui/issues/4064).
 - Fix `n-data-table`'s column's `align` doesn't work for table header, closes [#4063](https://github.com/tusen-ai/naive-ui/issues/4063).
 
-## 2.34.0
+## 2.34.0 (2022-11-21)
 
 ### Breaking Changes
 
@@ -356,13 +356,13 @@
 - Add arDZ locale.
 - Add trTR locale.
 
-## 2.33.5
+## 2.33.5 (2022-10-12)
 
 ### Fixes
 
 - Fix `n-data-table` throws error on tree data check action, closes [#3832](https://github.com/tusen-ai/naive-ui/issues/3832).
 
-## 2.33.4
+## 2.33.4 (2022-10-06)
 
 ### Fixes
 
@@ -403,7 +403,7 @@
 - `n-slider` adds `markFontSize` theme variable, closes [#3820](https://github.com/tusen-ai/naive-ui/issues/3820).
 - `n-avatar-group` adds `gap` theme variable, closes [#3819](https://github.com/tusen-ai/naive-ui/issues/3819).
 
-## 2.33.3
+## 2.33.3 (2022-09-13)
 
 ### Feats
 
@@ -427,7 +427,7 @@
 - Fix `n-tree`'s switcher won't work when `:show-irrelevant-nodes="false"` is set & being searched, closes [#3647](https://github.com/tusen-ai/naive-ui/issues/3647).
 - Fix `n-progress`'s graph may overflow if `type="circle"` and `stroke-width` is too large, closes [#3638](https://github.com/tusen-ai/naive-ui/issues/3638).
 
-## 2.33.2
+## 2.33.2 (2022-09-01)
 
 ### Fixes
 
@@ -440,7 +440,7 @@
 
 - `n-radio` adds `colorActive` theme variable, closes [#3610](https://github.com/tusen-ai/naive-ui/issues/3610).
 
-## 2.33.1
+## 2.33.1 (2022-08-29)
 
 ### Fixes
 
@@ -529,7 +529,7 @@
 - `n-pagination` adds `display-order` prop, closes [#3466](https://github.com/tusen-ai/naive-ui/issues/3466).
 - `n-grid` adds `layout-shift-disabled` prop, closes [#3301](https://github.com/tusen-ai/naive-ui/issues/3301).
 
-## 2.32.1
+## 2.32.1 (2022-07-30)
 
 ### Fixes
 
@@ -540,7 +540,7 @@
 
 - `n-steps` supports RTL.
 
-## 2.32.0
+## 2.32.0 (2022-07-28)
 
 ### Breaking Changes
 
@@ -578,7 +578,7 @@
 - `n-watermark` adds `global-rotate` prop.
 - `n-notification` add `keepAliveOnHover` props to control whether the notification will be closed when mouse hover, closes [#3249](https://github.com/tusen-ai/naive-ui/issues/3249).
 
-## 2.31.0
+## 2.31.0 (2022-07-07)
 
 ### Breaking Changes
 
@@ -630,13 +630,13 @@
 - Update ukUA locale.
 - `n-message` supports RTL.
 
-## 2.30.8
+## 2.30.8 (2022-06-29)
 
 ### Fixes
 
 - Fix `n-select`'s menu transition style, closes [#3211](https://github.com/tusen-ai/naive-ui/issues/3211).
 
-## 2.30.7
+## 2.30.7 (2022-06-29)
 
 ### Fixes
 
@@ -660,7 +660,7 @@
 - `n-tree-select` adds `render-tag` prop.
 - `n-notification` adds `titleFontSize`, `metaFontSize`, `descriptionFontSize` theme variables.
 
-## 2.30.6
+## 2.30.6 (2022-06-22)
 
 ### Fixes
 
@@ -672,7 +672,7 @@
 - Fix `n-data-table`'s column will lose box shadow when set to `ellipsis` & `fixed` simultaneously, closes [#3145](https://github.com/tusen-ai/naive-ui/issues/3145).
 - Fix `n-image`'s `lazy` prop doesn't work on Safari & Firefox.
 
-## 2.30.5
+## 2.30.5 (2022-06-20)
 
 ### Fixes
 
@@ -692,7 +692,7 @@
 - `n-space` adds `wrap-item` prop.
 - `n-data-table`'s `on-update:checked-row-keys` will pass row data, closes [#2215](https://github.com/tusen-ai/naive-ui/issues/2215), closes [#2265](https://github.com/tusen-ai/naive-ui/pull/2265)
 
-## 2.30.4
+## 2.30.4 (2022-06-15)
 
 ### Fixes
 
@@ -729,7 +729,7 @@
 - `n-data-table` adds `scrollTo` method, closes [#2570](https://github.com/tusen-ai/naive-ui/issues/2570).
 - `n-slider` adds `thumb` slot.
 
-## 2.30.3
+## 2.30.3 (2022-06-09)
 
 ### Fixes
 
@@ -743,13 +743,13 @@
 - `n-cascader` will expand menu to selected value, closes [#3058](https://github.com/tusen-ai/naive-ui/issues/3058).
 - `n-space` will use `gap` CSS property if possible, closes [#3053](https://github.com/tusen-ai/naive-ui/issues/3053).
 
-## 2.30.2
+## 2.30.2 (2022-06-07)
 
 ### Fixes
 
 - Fix `n-select` recomputed options on menu close, improves performance.
 
-## 2.30.1
+## 2.30.1 (2022-06-07)
 
 ### Feats
 
@@ -760,7 +760,7 @@
 - Fix `n-menu` `node-props` is not applied to element with `role="menuitem"` but a inner element.
 - Fix `n-menu` `node-props` doesn't work with `type="group"` option.
 
-## 2.30.0
+## 2.30.0 (2022-06-06)
 
 ### Breaking Changes
 
@@ -800,7 +800,7 @@
 - `n-dialog` optimizes title style when it's too long.
 - `n-card` optimizes title style when it's too long.
 
-## 2.29.1
+## 2.29.1 (2022-06-03)
 
 ### Fixes
 
@@ -847,7 +847,7 @@
 - `n-calendar` adds `header` slot, closes [#3036](https://github.com/tusen-ai/naive-ui/issues/3036).
 - `n-tree` adds `expand-on-click` prop， [#2949](https://github.com/tusen-ai/naive-ui/issues/2949).
 
-## 2.29.0
+## 2.29.0 (2022-05-18)
 
 ### Breaking Changes
 
@@ -880,13 +880,13 @@
 
 - Add nlNL locale.
 
-## 2.28.4
+## 2.28.4 (2022-05-11)
 
 ### Fixes
 
 - Fix `n-theme-editor`'s content can't be scrolled.
 
-## 2.28.3
+## 2.28.3 (2022-05-11)
 
 ### Fixes
 
@@ -944,7 +944,7 @@
 - `UploadFileInfo` adds `fullPath` and `batchId` attrs.
 - `DataTableBaseColumn` adds `tree` attr, closes [#2757](https://github.com/tusen-ai/naive-ui/issues/2757).
 
-## 2.28.2
+## 2.28.2 (2022-04-22)
 
 ### Fixes
 
@@ -955,7 +955,7 @@
 - Fix `n-tree-select`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
 - Fix `n-cascader`'s menu position may not sync with trigger box if `:allow-checking-not-loaded="true"`.
 
-## 2.28.1
+## 2.28.1 (2022-04-20)
 
 ### Fixes
 
@@ -987,7 +987,7 @@
 - Add ptBR locale.
 - Add koKR locale.
 
-## 2.28.0
+## 2.28.0 (2022-04-11)
 
 ### Breaking Changes
 
@@ -1016,7 +1016,7 @@
 - `n-alert` add `RTL` support.
 - `n-data-table` adds `allow-checking-not-loaded` prop, closes [#2758](https://github.com/tusen-ai/naive-ui/issues/2758).
 
-## 2.27.0
+## 2.27.0 (2022-03-27)
 
 ### Breaking Changes
 
@@ -1075,7 +1075,7 @@
 
 - Add thTH locale.
 
-## 2.26.4
+## 2.26.4 (2022-03-11)
 
 ### Fixes
 
@@ -1091,13 +1091,13 @@
 - `n-data-table` exports `DataTableFilterState` type.
 - `n-data-table` exports `DataTableSortState` type.
 
-## 2.26.3
+## 2.26.3 (2022-03-09)
 
 ### Fixes
 
 - Fix `n-button`'s loading icon shifts.
 
-## 2.26.2
+## 2.26.2 (2022-03-09)
 
 ### Fixes
 
@@ -1117,7 +1117,7 @@
 - `n-auto-complete` adds `focus` method.
 - `n-auto-complete` adds `blur` method.
 
-## 2.26.1
+## 2.26.1 (2022-03-06)
 
 ### Fixes
 
@@ -1134,7 +1134,7 @@
 - `n-input-number` adds `autofocus` prop, closes [#2551](https://github.com/tusen-ai/naive-ui/issues/2551).
 - `n-date-picker`'s date item click trigger area is as large as cell size, closes [#2552](https://github.com/tusen-ai/naive-ui/issues/2552).
 
-## 2.26.0
+## 2.26.0 (2022-03-02)
 
 ### Breaking Changes
 
@@ -1151,7 +1151,7 @@
 
 - Fix `useMessage` loses styles.
 
-## 2.25.7
+## 2.25.7 (2022-03-01)
 
 ### Fixes
 
@@ -3056,13 +3056,13 @@ Update package.json & README.md.
 
 - Fix `n-dropdown` with `x` and `y` set logs errors when mouse move outside it.
 
-## 2.1.1
+## 2.1.1 (2021-03-22)
 
 ### Fixes
 
 - Fix `n-select` selection overflow counter wrong popover trigger area
 
-## 2.1.0
+## 2.1.0 (2021-03-22)
 
 ### Breaking Changes
 
@@ -3087,7 +3087,7 @@ Update package.json & README.md.
 - Fix `n-card`'s action not placed at bottom after style height is set.
 - Fix `n-popover`'s `duration` and `delay` prop works unexpectly.
 
-## 2.0.1
+## 2.0.1 (2021-03-17)
 
 ### Feats
 
@@ -3101,7 +3101,7 @@ Update package.json & README.md.
 - Fix `n-menu` callback props validate array with error.
 - Fix `n-layout-sider` toggle button is covered.
 
-## 2.0.0
+## 2.0.0 (2021-03-15)
 
 See vue3.md
 
