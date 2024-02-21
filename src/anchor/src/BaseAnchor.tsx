@@ -43,6 +43,9 @@ export const baseAnchorProps = {
   },
   internalScrollable: Boolean,
   ignoreGap: Boolean,
+  getCurrentAnchor: Function as PropType<
+  (activeHref: string | null) => string | null
+  >,
   offsetTarget: [String, Object, Function] as PropType<
   string | OffsetTarget | (() => HTMLElement)
   >
@@ -211,11 +214,10 @@ export default defineComponent({
         return prevLink
       }, null)
       if (!transition) disableTransitionOneTick()
-      if (activeLink) {
-        activeHrefRef.value = activeLink.href
-      } else {
-        activeHrefRef.value = null
-      }
+      const activeHref = activeLink ? activeLink.href : null
+      activeHrefRef.value = props.getCurrentAnchor
+        ? props.getCurrentAnchor(activeHref || currentActiveHref)
+        : activeHref
     }
     provide(anchorInjectionKey, {
       activeHref: activeHrefRef,

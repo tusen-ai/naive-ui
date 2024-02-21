@@ -10,6 +10,7 @@
 basic.vue
 ignore-gap.vue
 affix.vue
+custom-active-anchor.vue
 scrollto.vue
 max-height-debug.vue
 ```
@@ -18,10 +19,11 @@ max-height-debug.vue
 
 ### Anchor Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
 | affix | `boolean` | `false` | Anchor 是否像 Affix 一样展示，如果设定为 `true`，它还会接受 [Affix](affix#Affix-Props) 的 Props |
 | bound | `number` | `12` | 元素开始触发 anchor 的偏移量 |
+| get-current-anchor | `(activeHref: string \| null) => string \| null` | `undefined` | 获取当前激活的锚点 | NEXT_VERSION |
 | ignore-gap | `boolean` | `false` | 如果设定为 `true`, 导航将显示在准确的 href 区域 |
 | offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | 计算偏移位置相对的元素或选择器。如果你滚动的不是整个文档而只是其中的一部分，那你有可能要设定这个 |
 | show-rail | `boolean` | `true` | 是否展示侧面的轨道 |
