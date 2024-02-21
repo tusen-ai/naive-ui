@@ -151,40 +151,46 @@ export default defineComponent({
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
+    const errorNode = this.$slots.error?.()
     const loadSrc = this.src || imgProps.src
 
-    const imgNode = h('img', {
-      ...imgProps,
-      ref: 'imageRef',
-      width: this.width || imgProps.width,
-      height: this.height || imgProps.height,
-      src: this.showError
-        ? this.fallbackSrc
-        : lazy && this.intersectionObserverOptions
-          ? this.shouldStartLoading
-            ? loadSrc
-            : undefined
-          : loadSrc,
-      alt: this.alt || imgProps.alt,
-      'aria-label': this.alt || imgProps.alt,
-      onClick: this.mergedOnClick,
-      onError: this.mergedOnError,
-      onLoad: this.mergedOnLoad,
-      // If interseciton observer options is set, do not use native lazy
-      loading:
-        isImageSupportNativeLazy && lazy && !this.intersectionObserverOptions
-          ? 'lazy'
-          : 'eager',
-      style: [
-        imgProps.style || '',
-        placeholderNode && !loaded
-          ? { height: '0', width: '0', visibility: 'hidden' }
-          : '',
-        { objectFit: this.objectFit }
-      ],
-      'data-error': this.showError,
-      'data-preview-src': this.previewSrc || this.src
-    })
+    const imgNode =
+      this.showError && errorNode
+        ? errorNode
+        : h('img', {
+          ...imgProps,
+          ref: 'imageRef',
+          width: this.width || imgProps.width,
+          height: this.height || imgProps.height,
+          src: this.showError
+            ? this.fallbackSrc
+            : lazy && this.intersectionObserverOptions
+              ? this.shouldStartLoading
+                ? loadSrc
+                : undefined
+              : loadSrc,
+          alt: this.alt || imgProps.alt,
+          'aria-label': this.alt || imgProps.alt,
+          onClick: this.mergedOnClick,
+          onError: this.mergedOnError,
+          onLoad: this.mergedOnLoad,
+          // If interseciton observer options is set, do not use native lazy
+          loading:
+              isImageSupportNativeLazy &&
+              lazy &&
+              !this.intersectionObserverOptions
+                ? 'lazy'
+                : 'eager',
+          style: [
+            imgProps.style || '',
+            placeholderNode && !loaded
+              ? { height: '0', width: '0', visibility: 'hidden' }
+              : '',
+            { objectFit: this.objectFit }
+          ],
+          'data-error': this.showError,
+          'data-preview-src': this.previewSrc || this.src
+        })
     return (
       <div
         {...$attrs}
