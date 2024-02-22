@@ -208,7 +208,8 @@ export default defineComponent({
             showToolbarTooltip={this.showToolbarTooltip}
           >
             {{
-              default: () => imgNode
+              default: () => imgNode,
+              toolbar: () => this.$slots.toolbar?.()
             }}
           </NImagePreview>
         )}
