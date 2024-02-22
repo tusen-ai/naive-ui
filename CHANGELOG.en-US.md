@@ -4,13 +4,13 @@
 
 ### Breaking Changes
 
-- Fix `n-scrollbar`'s `scrollTo (x: number, y: number)` error where the order of method parameters does not match the document.
+- Fix `n-scrollbar`'s `scrollTo(x: number, y: number)` error where the order of method parameters does not match the document.
 
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
 - Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
-- Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
+- Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616).
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
 - Fix `n-qr-code`'s style of size.
@@ -18,6 +18,8 @@
 
 ### Features
 
+- 🌟 Adds `n-float-button` and `n-float-button-group` component.
+- 🌟 Provides ES module bundle at `/dist/index.mjs` and `/dist/index.prod.mjs`.
 - `n-auto-complete` adds `append` prop.
 - `n-select` add native `title` attribute when `filterable` and blur input.
 - `n-split` adds `size` prop and `on-update:size` prop.

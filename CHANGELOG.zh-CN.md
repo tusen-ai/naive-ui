@@ -4,12 +4,12 @@
 
 ### Breaking Changes
 
-- 修复 `n-scrollbar` 组件的 `scrollTo (x: number, y: number)`方法参数顺序与文档不符的错误
+- 修复 `n-scrollbar` 组件的 `scrollTo(x: number, y: number)`方法参数顺序与文档不符的错误
 
 ### Fixes
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为
-- Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
+- 修复 `n-scrollbar` `aria-hidden` 拼写错误
 - 修复 `n-menu` `root-indent` `indent` 下内容溢出的问题，关闭 #5616
 - 修复 `n-form-item` 校验结果可能会闪烁的问题，关闭 [#5583](https://github.com/tusen-ai/naive-ui/issues/5583)
 - 修复 `n-popselect` 组件的 header 插槽里 input 无法输入，关闭 [#5494](https://github.com/tusen-ai/naive-ui/pull/5494)
@@ -18,6 +18,8 @@
 
 ### Features
 
+- 🌟 新增 `n-float-button` 和 `n-float-button-group` 组件
+- 🌟 提供 ES module 打包（在 `/dist/index.mjs` 和 `/dist/index.prod.mjs`）
 - `n-auto-complete` 新增 `append` 属性
 - `n-select` 在组件可过滤且输入失焦时，添加原生 `title` 属性
 - `n-split` 新增 `size` 和 `on-update:size` 属性

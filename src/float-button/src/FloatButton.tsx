@@ -22,7 +22,7 @@ import {
   call
 } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme } from '../../_mixins'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import { type FloatButtonTheme, floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 import { NBaseIcon } from '../../_internal'
@@ -100,7 +100,7 @@ export default defineComponent({
       }
     }
 
-    const cssVarsRef = computed(() => {
+    const cssVarsRef = computed<Record<string, string>>(() => {
       const {
         self: {
           color,
@@ -124,7 +124,7 @@ export default defineComponent({
         '--n-color': type === 'primary' ? colorPrimary : color,
         '--n-text-color': type === 'primary' ? textColorPrimary : textColor,
         '--n-color-hover': type === 'primary' ? colorPrimaryHover : colorHover,
-        position: floatButtonGroupInjection ? undefined : props.position,
+        position: floatButtonGroupInjection ? '' : props.position,
         width: formatLength(width),
         minHeight: formatLength(height),
         ...(floatButtonGroupInjection
@@ -162,11 +162,17 @@ export default defineComponent({
       }
     }
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
       mergedShowMenu: mergedShowMenuRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       Mouseenter,
       handleMouseleave,
       handleClick
@@ -181,19 +187,23 @@ export default defineComponent({
       type,
       menuTrigger,
       mergedShowMenu,
-      $slots
+      themeClass,
+      $slots,
+      onRender
     } = this
     const dirs: DirectiveArguments = []
     if (menuTrigger === 'hover' && mergedShowMenu) {
       dirs.push([mousemoveoutside, this.handleMouseleave])
     }
+    onRender?.()
     return withDirectives(
       <div
         class={[
           `${mergedClsPrefix}-float-button`,
           `${mergedClsPrefix}-float-button--${mergedShape}-shape`,
           `${mergedClsPrefix}-float-button--${type}-type`,
-          mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`
+          mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`,
+          themeClass
         ]}
         style={cssVars as CSSProperties}
         onMouseenter={this.Mouseenter}

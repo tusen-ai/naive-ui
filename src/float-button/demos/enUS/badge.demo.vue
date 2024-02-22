@@ -1,8 +1,7 @@
 <markdown>
-  # Badge
+# Badge
 
-  You can put a hover button with the number of badges on any element.
-
+You can put a hover button with the number of badges on any element.
 </markdown>
 
 <template>
