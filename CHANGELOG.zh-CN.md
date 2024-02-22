@@ -15,6 +15,7 @@
 - 修复 `n-popselect` 组件的 header 插槽里 input 无法输入，关闭 [#5494](https://github.com/tusen-ai/naive-ui/pull/5494)
 - 修复 `n-qr-code` 大小样式问题
 - 修复 `n-badge` 会影响子元素的文字颜色
+- 修复 `n-date-picker` 在输入框失焦到日历面板时未重新验证值，关闭 [#5210](https://github.com/tusen-ai/naive-ui/issues/5210)
 
 ### Features
 

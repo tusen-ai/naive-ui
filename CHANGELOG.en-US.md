@@ -15,6 +15,7 @@
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
 - Fix `n-qr-code`'s style of size.
 - Fix `n-badge` affects child elements' text color.
+- Fix `n-date-picker` not derive input state on blur to calendar panel, closes [#5210](https://github.com/tusen-ai/naive-ui/issues/5210)
 
 ### Features
 
