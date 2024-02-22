@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+`2024-02-22`
+
 ### Breaking Changes
 
 - 修复 `n-scrollbar` 组件的 `scrollTo(x: number, y: number)`方法参数顺序与文档不符的错误
@@ -28,10 +30,6 @@
 ### i18n
 
 - 新增 `etEE` locale
-
-### TODO
-
-menu indent...
 
 ## 2.37.3
 

@@ -2,6 +2,8 @@
 
 ## NEXT_VERSION
 
+`2024-02-22`
+
 ### Breaking Changes
 
 - Fix `n-scrollbar`'s `scrollTo(x: number, y: number)` error where the order of method parameters does not match the document.
