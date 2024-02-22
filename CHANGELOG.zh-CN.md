@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.0
 
 `2024-02-22`
 
@@ -19,6 +19,7 @@
 
 ### Features
 
+- 🌟 新增 `n-modal-provider` 组件和 `useModal` 方法
 - 🌟 新增 `n-float-button` 和 `n-float-button-group` 组件
 - 🌟 提供 ES module 打包（在 `/dist/index.mjs` 和 `/dist/index.prod.mjs`）
 - `n-auto-complete` 新增 `append` 属性

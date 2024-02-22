@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.0
 
 `2024-02-22`
 
@@ -19,6 +19,7 @@
 
 ### Features
 
+- 🌟 Adds `n-modal-provider` component and `useModal` method.
 - 🌟 Adds `n-float-button` and `n-float-button-group` component.
 - 🌟 Provides ES module bundle at `/dist/index.mjs` and `/dist/index.prod.mjs`.
 - `n-auto-complete` adds `append` prop.
