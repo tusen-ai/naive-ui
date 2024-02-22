@@ -21,6 +21,9 @@ Use `createDiscreteApi` to create series of API.
     <n-button @click="handleLoadingBarTriggerClick">
       loadingBar
     </n-button>
+    <n-button @click="handleModalTriggerClick">
+      modal
+    </n-button>
   </n-space>
 </template>
 
@@ -38,8 +41,8 @@ const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
   theme: themeRef.value === 'light' ? lightTheme : darkTheme
 }))
 
-const { message, notification, dialog, loadingBar } = createDiscreteApi(
-  ['message', 'dialog', 'notification', 'loadingBar'],
+const { message, notification, dialog, loadingBar, modal } = createDiscreteApi(
+  ['message', 'dialog', 'notification', 'loadingBar', 'modal'],
   {
     configProviderProps: configProviderPropsRef
   }
@@ -61,6 +64,12 @@ export default defineComponent({
       },
       handleDialogTriggerClick () {
         dialog.info({ title: 'Dialog' })
+      },
+      handleModalTriggerClick () {
+        modal.create({
+          preset: 'card',
+          title: 'Modal'
+        })
       },
       handleLoadingBarTriggerClick () {
         loadingBar.start()
