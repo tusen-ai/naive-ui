@@ -1,5 +1,6 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr/index'
 
+// --n-border-radius-square
 export default cB('float-button-group', [
   cB('float-button', `
     position: relative;
@@ -11,7 +12,7 @@ export default cB('float-button-group', [
     width: fit-content;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--n-border-radius-square);
     flex-direction: column;
     box-shadow: var(--n-box-shadow);
     transition:
@@ -36,7 +37,7 @@ export default cB('float-button-group', [
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
       `),
-      cE('hover-background', 'inset: 4px; border-radius: 4px;')
+      cE('fill', 'inset: 4px; border-radius: var(--n-border-radius-square);')
     ])
   ]),
   cM('circle-shape', [

@@ -66,7 +66,7 @@ export default defineComponent({
     )
     const cssVarsRef = computed<Record<string, string>>(() => {
       const {
-        self: { color, boxShadow, buttonBorderColor },
+        self: { color, boxShadow, buttonBorderColor, borderRadiusSquare },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
@@ -74,6 +74,7 @@ export default defineComponent({
         '--n-box-shadow': boxShadow,
         '--n-color': color,
         '--n-button-border-color': buttonBorderColor,
+        '--n-border-radius-square': borderRadiusSquare,
         position: props.position,
         left: formatLength(props.left) || '',
         right: formatLength(props.right) || '',

@@ -9,8 +9,12 @@ const floatButtonDark: FloatButtonTheme = {
       popoverColor,
       textColor2,
       buttonColor2Hover,
+      buttonColor2Pressed,
       primaryColor,
-      primaryColorHover
+      primaryColorHover,
+      primaryColorPressed,
+      baseColor,
+      borderRadius
     } = vars
     return {
       color: popoverColor,
@@ -19,9 +23,12 @@ const floatButtonDark: FloatButtonTheme = {
       boxShadowHover: '0 2px 12px 0px rgba(0, 0, 0, .18)',
       boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .18)',
       colorHover: buttonColor2Hover,
+      colorPressed: buttonColor2Pressed,
       colorPrimary: primaryColor,
       colorPrimaryHover: primaryColorHover,
-      textColorPrimary: textColor2
+      colorPrimaryPressed: primaryColorPressed,
+      textColorPrimary: baseColor,
+      borderRadiusSquare: borderRadius
     }
   }
 }

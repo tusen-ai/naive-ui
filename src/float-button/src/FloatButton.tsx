@@ -80,7 +80,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const floatButtonGroupInjection = inject(floatButtonGroupInjectionKey)
+    const floatButtonGroupInjection = inject(floatButtonGroupInjectionKey, null)
 
     const uncontrolledShowMenuRef = ref(false)
     const controlledShoeMenuRef = toRef(props, 'showMenu')
@@ -111,7 +111,10 @@ export default defineComponent({
           colorHover,
           colorPrimary,
           colorPrimaryHover,
-          textColorPrimary
+          textColorPrimary,
+          borderRadiusSquare,
+          colorPressed,
+          colorPrimaryPressed
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -124,6 +127,9 @@ export default defineComponent({
         '--n-color': type === 'primary' ? colorPrimary : color,
         '--n-text-color': type === 'primary' ? textColorPrimary : textColor,
         '--n-color-hover': type === 'primary' ? colorPrimaryHover : colorHover,
+        '--n-color-pressed':
+          type === 'primary' ? colorPrimaryPressed : colorPressed,
+        '--n-border-radius-square': borderRadiusSquare,
         position: floatButtonGroupInjection ? '' : props.position,
         width: formatLength(width),
         minHeight: formatLength(height),
@@ -151,7 +157,7 @@ export default defineComponent({
     }
 
     const handleMouseleave = (): void => {
-      if (props.menuTrigger === 'hover') {
+      if (props.menuTrigger === 'hover' && mergedShowMenuRef.value) {
         doUpdateShowMenu(false)
       }
     }
@@ -191,10 +197,7 @@ export default defineComponent({
       $slots,
       onRender
     } = this
-    const dirs: DirectiveArguments = []
-    if (menuTrigger === 'hover' && mergedShowMenu) {
-      dirs.push([mousemoveoutside, this.handleMouseleave])
-    }
+    const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
     onRender?.()
     return withDirectives(
       <div
@@ -210,7 +213,7 @@ export default defineComponent({
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}
       >
-        <div class={`${mergedClsPrefix}-float-button__hover-background`}></div>
+        <div class={`${mergedClsPrefix}-float-button__fill`}></div>
         <div class={`${mergedClsPrefix}-float-button__body`}>
           {$slots.default?.()}
           {resolveWrappedSlot($slots.description, (children) => {
@@ -227,7 +230,7 @@ export default defineComponent({
         {menuTrigger ? (
           <div class={`${mergedClsPrefix}-float-button__close`}>
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              <CloseIcon />
+              {{ default: () => <CloseIcon /> }}
             </NBaseIcon>
           </div>
         ) : null}
