@@ -6,7 +6,7 @@ An example of preset `dialog`.
 
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal
     v-model:show="showModal"

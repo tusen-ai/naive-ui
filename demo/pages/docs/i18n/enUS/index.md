@@ -52,6 +52,7 @@ The following list is sorted by 'Config' column.
 | English                   | enUS   | dateEnUS    |         |
 | Esperanto                 | eo     | dateEo      | 2.25.2  |
 | Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
+| Estonian                  | etEE   | dateEtEE    | 2.38.0  |
 | Persian                   | faIR   | dateFaIR    | 2.34.4  |
 | French                    | frFR   | dateFrFR    |         |
 | Bahasa Indonesia          | idID   | dateIdID    |         |

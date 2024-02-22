@@ -262,6 +262,7 @@ export default defineComponent({
           lineHeight,
           headerPadding,
           footerPadding,
+          borderRadius,
           bodyPadding,
           titleFontSize,
           titleTextColor,
@@ -282,6 +283,7 @@ export default defineComponent({
       return {
         '--n-line-height': lineHeight,
         '--n-color': color,
+        '--n-border-radius': borderRadius,
         '--n-text-color': textColor,
         '--n-box-shadow': boxShadow,
         '--n-bezier': cubicBezierEaseInOut,

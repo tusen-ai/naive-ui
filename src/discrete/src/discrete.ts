@@ -9,6 +9,7 @@ import type {
   DiscreteApiOptions,
   DiscreteApiType
 } from './interface'
+import { NModalProvider } from '../../modal/src/ModalProvider'
 
 export function createDiscreteApi<T extends DiscreteApiType> (
   includes: T[],
@@ -17,7 +18,8 @@ export function createDiscreteApi<T extends DiscreteApiType> (
     messageProviderProps,
     dialogProviderProps,
     notificationProviderProps,
-    loadingBarProviderProps
+    loadingBarProviderProps,
+    modalProviderProps
   }: DiscreteApiOptions = {}
 ): DiscreteApi<T> {
   const providersAndProps: Array<{
@@ -56,6 +58,12 @@ export function createDiscreteApi<T extends DiscreteApiType> (
           props: loadingBarProviderProps
         })
         break
+      case 'modal':
+        providersAndProps.push({
+          type,
+          Provider: NModalProvider,
+          props: modalProviderProps
+        })
     }
   })
 

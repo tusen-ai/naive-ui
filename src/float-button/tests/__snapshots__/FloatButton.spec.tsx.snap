@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-flex render empty children 1`] = `
+"<div class="n-float-button n-float-button--circle-shape n-float-button--default-type" style="--n-bezier: cubic-bezier(.4, 0, .2, 1); --n-box-shadow: 0 2px 8px 0px rgba(0, 0, 0, .16); --n-box-shadow-hover: 0 2px 12px 0px rgba(0, 0, 0, .24); --n-box-shadow-pressed: 0 2px 12px 0px rgba(0, 0, 0, .24); --n-color: #fff; --n-text-color: rgb(51, 54, 57); --n-color-hover: rgba(46, 51, 56, .09); --n-color-pressed: rgba(46, 51, 56, .13); --n-border-radius-square: 3px; position: fixed; width: 40px; min-height: 40px;" role="button">
+  <div class="n-float-button__fill" aria-hidden="true"></div>
+  <div class="n-float-button__body">
+    <!---->
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>"
+`;

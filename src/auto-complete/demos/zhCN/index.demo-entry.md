@@ -13,6 +13,7 @@ after-select.vue
 show-options-by-value.vue
 customized-rendering.vue
 status.vue
+append.vue
 ```
 
 ## API
@@ -21,6 +22,7 @@ status.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| append | `boolean` | `false` | 选中后是否追加 | 2.38.0 |
 | blur-after-select | `boolean` | `false` | 选中后是否 blur |  |
 | clear-after-select | `boolean` | `false` | 选中后是否清空 |  |
 | clearable | `boolean` | `false` | 自动填充是否支持可清除 |  |

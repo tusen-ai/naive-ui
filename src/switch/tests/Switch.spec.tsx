@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { type CSSProperties, h } from 'vue'
+import { type CSSProperties, h, Fragment } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {
@@ -36,24 +36,19 @@ describe('n-switch', () => {
     const onUpdateValue1: (value: string) => void = () => {}
     const onUpdateValue2: (value: number) => void = () => {}
     const onUpdateValue3: (value: boolean) => void = () => {}
-    let _ = (
+    <Fragment>
       <NSwitch
         onUpdateValue={onUpdateValue1}
         value={'123'}
         defaultValue={'123'}
       />
-    )
-    _ = (
       <NSwitch onUpdateValue={onUpdateValue2} value={123} defaultValue={123} />
-    )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _ = (
       <NSwitch
         onUpdateValue={onUpdateValue3}
         value={true}
         defaultValue={false}
       />
-    )
+    </Fragment>
   })
 
   it('should work with `round` prop', async () => {

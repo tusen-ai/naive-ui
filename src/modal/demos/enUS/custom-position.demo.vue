@@ -6,7 +6,7 @@ Use fixed position to set the position of the modal.
 
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal v-model:show="showModal">
     <n-card

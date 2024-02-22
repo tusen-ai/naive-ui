@@ -8,6 +8,7 @@ import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 // vars:
 // --n-line-height
 // --n-color
+// --n-border-radius
 // --n-text-color
 // --n-box-shadow
 // --n-bezier
@@ -121,6 +122,8 @@ export default c([
       top: 0;
       bottom: 0;
       right: 0;
+      border-top-left-radius: var(--n-border-radius);
+      border-bottom-left-radius: var(--n-border-radius);
     `, [
       cE('resize-trigger', `
         width: 3px;
@@ -135,6 +138,8 @@ export default c([
       top: 0;
       bottom: 0;
       left: 0;
+      border-top-right-radius: var(--n-border-radius);
+      border-bottom-right-radius: var(--n-border-radius);
     `, [
       cE('resize-trigger', `
         width: 3px;
@@ -149,6 +154,8 @@ export default c([
       top: 0;
       left: 0;
       right: 0;
+      border-bottom-left-radius: var(--n-border-radius);
+      border-bottom-right-radius: var(--n-border-radius);
     `, [
       cE('resize-trigger', `
         width: 100%;
@@ -163,6 +170,8 @@ export default c([
       left: 0;
       bottom: 0;
       right: 0;
+      border-top-left-radius: var(--n-border-radius);
+      border-top-right-radius: var(--n-border-radius);
     `, [
       cE('resize-trigger', `
         width: 100%;
@@ -176,9 +185,9 @@ export default c([
   ]),
   c('body', [
     c('>', [
-      cB('drawer-container', {
-        position: 'fixed'
-      })
+      cB('drawer-container', `
+        position: fixed;
+      `)
     ])
   ]),
   cB('drawer-container', `
@@ -190,9 +199,9 @@ export default c([
     bottom: 0;
     pointer-events: none;
   `, [
-    c('> *', {
-      pointerEvents: 'all'
-    })
+    c('> *', `
+      pointer-events: all;
+    `)
   ]),
   cB('drawer-mask', `
     background-color: rgba(0, 0, 0, .3);

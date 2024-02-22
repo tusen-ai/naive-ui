@@ -1,0 +1,45 @@
+name: 🚀 新功能请求
+description: 提议将新功能添加到 Naive UI
+labels: [feature request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您对该项目的关注，并抽出时间填写此功能请求！
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 问题的清晰而简明的描述
+      description: '作为使用 Naive UI 的开发者，我希望 [目标/愿望]，以便 [好处]。如果您打算为此问题提交 PR，请在描述中告诉我们。谢谢！'
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: 建议的解决方案
+      description: '在模块 [xy] 中，我们可以提供以下实现...'
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 备选方案
+      description: 对您考虑过的任何备选解决方案或功能的清晰而简明的描述。
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 附加上下文
+      description: 在这里提供有关功能请求的任何其他上下文或截图。
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: 验证
+      description: 在提交问题之前，请确保完成以下步骤
+      options:
+        - label: 阅读 [贡献指南](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md)。
+          required: true
+        - label: 阅读 [文档](https://www.naiveui.com/en-US)。
+          required: true
+        - label: 检查是否已经存在请求相同功能的问题，以避免创建重复的问题。
+          required: true
