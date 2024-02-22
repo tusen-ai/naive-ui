@@ -212,8 +212,9 @@ export default defineComponent({
         onMouseenter={this.Mouseenter}
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}
+        role="button"
       >
-        <div class={`${mergedClsPrefix}-float-button__fill`}></div>
+        <div class={`${mergedClsPrefix}-float-button__fill`} aria-hidden></div>
         <div class={`${mergedClsPrefix}-float-button__body`}>
           {$slots.default?.()}
           {resolveWrappedSlot($slots.description, (children) => {
