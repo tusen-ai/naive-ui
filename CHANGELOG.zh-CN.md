@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-split` 的 `min` 属性未生效
+- 修复 `n-date-picker` 在输入框失焦到日历面板时未重新验证值，关闭 [#5210](https://github.com/tusen-ai/naive-ui/issues/5210)
 
 ### Features
 

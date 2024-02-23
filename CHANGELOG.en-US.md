@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-split`'s `min` attribute does not take effect
+- Fix `n-date-picker` not derive input state on blur to calendar panel, closes [#5210](https://github.com/tusen-ai/naive-ui/issues/5210).
 
 ### Features
 
