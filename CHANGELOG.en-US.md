@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-split`'s `min` attribute does not take effect
+
+### Features
+
 ## 2.38.0
 
 `2024-02-22`
