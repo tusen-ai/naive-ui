@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-split`的 `min` 属性未生效
+
+### Features
+
 ## 2.38.0
 
 `2024-02-22`

@@ -168,10 +168,10 @@ export default defineComponent({
           : (event.clientY - parentRect.top + offset) /
             (parentRect.height - props.resizeTriggerSize)
       let nextSize = newSize
-      if (props.min) {
+      if (props.min && newSize < props.min) {
         nextSize = Math.max(newSize, props.min)
       }
-      if (props.max) {
+      if (props.max && newSize > props.max) {
         nextSize = Math.min(newSize, props.max)
       }
       doUpdateSize(nextSize)
