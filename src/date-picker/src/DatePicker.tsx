@@ -633,9 +633,9 @@ export default defineComponent({
       }
     }
     function handleInputBlur (e: FocusEvent): void {
+      deriveInputState()
       if (!panelInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         doBlur(e)
-        deriveInputState()
         closeCalendar({
           returnFocus: false
         })
