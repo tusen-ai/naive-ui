@@ -185,9 +185,9 @@ export default c([
   ]),
   c('body', [
     c('>', [
-      cB('drawer-container', {
-        position: 'fixed'
-      })
+      cB('drawer-container', `
+        position: fixed;
+      `)
     ])
   ]),
   cB('drawer-container', `
@@ -199,9 +199,9 @@ export default c([
     bottom: 0;
     pointer-events: none;
   `, [
-    c('> *', {
-      pointerEvents: 'all'
-    })
+    c('> *', `
+      pointer-events: all;
+    `)
   ]),
   cB('drawer-mask', `
     background-color: rgba(0, 0, 0, .3);

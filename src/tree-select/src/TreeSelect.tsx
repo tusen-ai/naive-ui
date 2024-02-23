@@ -29,7 +29,8 @@ import {
   type Key,
   type InternalTreeInst,
   type TreeOption,
-  type TreeOverrideNodeClickBehaviorReturn
+  type TreeOverrideNodeClickBehaviorReturn,
+  type GetChildren
 } from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -160,6 +161,7 @@ export const treeSelectProps = {
   watchProps: Array as PropType<
   Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
   >,
+  getChildren: Function as PropType<GetChildren>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
@@ -943,6 +945,7 @@ export default defineComponent({
                                 showIrrelevantNodes={false}
                                 animated={false}
                                 pattern={this.pattern}
+                                getChildren={this.getChildren}
                                 filter={this.mergedFilter}
                                 data={options}
                                 cancelable={multiple}

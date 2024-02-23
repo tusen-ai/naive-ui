@@ -1,38 +1,31 @@
 <markdown>
-  # 自定义元素
+# 描述
 
-  可以放任意元素
-
+在 `n-float-button` 上展示描述信息。
 </markdown>
 
 <template>
-  <div style="height: 200px; transform: translate(0)">
-    <n-float-button
-      :right="0"
-      :bottom="60"
-      height="auto"
-      width="auto"
-      :radius="10"
-    >
-      <n-flex
-        vertical
-        :style="{ padding: '4px', textAlign: 'center' }"
-        align="center"
-      >
-        <n-icon :size="24">
-          <document-icon />
-        </n-icon>
-        <span> 文档 </span>
-      </n-flex>
+  <div style="height: 120px; transform: translate(0)">
+    <n-float-button shape="square">
+      <n-icon>
+        <document-icon />
+      </n-icon>
+      <template #description>
+        文档
+      </template>
     </n-float-button>
-
-    <n-float-button :right="0" :left="0" :bottom="0" width="100%" :radius="10">
-      <n-flex align="center">
-        <n-icon :size="24">
-          <document-icon />
-        </n-icon>
-        <span> 文档 </span>
-      </n-flex>
+    <n-float-button :left="60" shape="square">
+      <template #description>
+        文档
+      </template>
+    </n-float-button>
+    <n-float-button :left="120" shape="square">
+      <n-icon>
+        <document-icon />
+      </n-icon>
+      <template #description>
+        很长很长的文档
+      </template>
     </n-float-button>
   </div>
 </template>

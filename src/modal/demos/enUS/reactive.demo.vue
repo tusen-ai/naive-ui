@@ -1,7 +1,7 @@
 <markdown>
 # Imperative API
 
-Provided since NEXT_VERSION.
+Provided since `2.38.0`.
 
 You can use `useModal.create` to create a modal. (Please make sure this API is called inside `n-modal-provider`.)
 </markdown>
