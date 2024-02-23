@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-split` 的 `min` 属性未生效
+- Fix `n-result` built-in icons not re-rendered after hydration.
 
 ### Features
 

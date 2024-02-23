@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-split`'s `min` attribute does not take effect
+- Fix `n-result` built-in icons not re-rendered after hydration.
 
 ### Features
 
