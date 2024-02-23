@@ -1022,7 +1022,8 @@ export default defineComponent({
       onNextMonth: this.onNextMonth,
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
-      onPrevYear: this.onPrevYear
+      onPrevYear: this.onPrevYear,
+      timeFormat: this.timeFormat
     }
     const renderPanel = (): VNode => {
       const { type } = this

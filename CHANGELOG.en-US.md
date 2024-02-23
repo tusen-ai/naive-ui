@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Breaking Changes
+
+- `n-date-picker` adds `time-format` prop.
+
 ## 2.38.0
 
 `2024-02-22`
