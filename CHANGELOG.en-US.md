@@ -8,6 +8,8 @@
 - Fix `n-result` built-in icons not re-rendered after hydration.
 - Fix `n-tabs` whose `type` is `'segment'` has capsule with wrong width and position after resize, closes [#5705](https://github.com/tusen-ai/naive-ui/issues/5705).
 - Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
+- Fix `n-split` doesn't work with `inline-theme-disabled` prop.
+- Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
 
 ### Features
 
