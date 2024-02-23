@@ -2,13 +2,13 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
-
 ### Fixes
 
 - 修复 `n-split`的 `min` 属性未生效
 
 ### Features
+
+- `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
 
 ## 2.38.0
 
@@ -37,6 +37,8 @@
 - `n-split` 新增 `size` 和 `on-update:size` 属性
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
+- 新增 `n-float-button` 组件
+- 提供 ES module 打包
 
 ### i18n
 
