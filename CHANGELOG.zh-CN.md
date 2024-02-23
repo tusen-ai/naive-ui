@@ -11,6 +11,7 @@
 
 - `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
 - `n-tree-select` 新增 `get-children` 属性
+- `n-split` 支持设置像素值大小
 
 ## 2.38.0
 

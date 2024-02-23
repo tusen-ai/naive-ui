@@ -28,7 +28,7 @@ export const splitProps = {
   },
   disabled: Boolean,
   defaultSize: {
-    type: Number,
+    type: [String, Number] as PropType<string | number>,
     default: 0.5
   },
   'onUpdate:size': [Function, Array] as PropType<
@@ -37,13 +37,13 @@ export const splitProps = {
   onUpdateSize: [Function, Array] as PropType<
   SplitOnUpdateSize | SplitOnUpdateSize[]
   >,
-  size: Number,
+  size: [String, Number] as PropType<string | number>,
   min: {
-    type: Number,
+    type: [String, Number] as PropType<string | number>,
     default: 0
   },
   max: {
-    type: Number,
+    type: [String, Number] as PropType<string | number>,
     default: 1
   },
   onDragStart: Function as PropType<(e: Event) => void>,
@@ -87,17 +87,32 @@ export default defineComponent({
       watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     }
     // use to update controlled or uncontrolled values
-    const doUpdateSize = (size: number): void => {
+    const doUpdateSize = (size: number, containerSize: number): void => {
+      const sizeValue =
+        typeof props.size === 'string' ? `${size * containerSize}px` : size
       const _onUpdateSize = props['onUpdate:size']
-      if (props.onUpdateSize) call(props.onUpdateSize, size)
-      if (_onUpdateSize) call(_onUpdateSize, size)
+      if (props.onUpdateSize) call(props.onUpdateSize, sizeValue)
+      if (_onUpdateSize) call(_onUpdateSize, sizeValue)
       uncontrolledSizeRef.value = size
     }
     const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
+
+    const isPixel = computed(() => typeof mergedSizeRef.value === 'string')
+
     const firstPaneStyle = computed(() => {
-      const size = mergedSizeRef.value * 100
-      return {
-        flex: `0 0 calc(${size}% - ${(props.resizeTriggerSize * size) / 100}px)`
+      const sizeValue = mergedSizeRef.value
+      if (isPixel.value) {
+        const size = parseFloat(sizeValue as string)
+        return {
+          flex: `0 0 ${size}px`
+        }
+      } else if (typeof sizeValue === 'number') {
+        const size = sizeValue * 100
+        return {
+          flex: `0 0 calc(${size}% - ${
+            (props.resizeTriggerSize * size) / 100
+          }px)`
+        }
       }
     })
 
@@ -153,28 +168,46 @@ export default defineComponent({
           offset = elRect.top - e.clientY
         }
       }
-
       updateSize(e)
+    }
+
+    const parseSizeValue = (
+      value: string | number,
+      parentSize: number
+    ): number => {
+      if (isPixel.value) {
+        return parseFloat(value as string) / parentSize
+      } else {
+        const numericValue = value as number
+        return numericValue >= 0 && numericValue <= 1
+          ? numericValue
+          : numericValue / 100
+      }
     }
 
     const updateSize = (event: MouseEvent): void => {
       const parentRect =
         resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!parentRect) return
+
       const newSize =
         props.direction === 'horizontal'
           ? (event.clientX - parentRect.left - offset) /
             (parentRect.width - props.resizeTriggerSize)
           : (event.clientY - parentRect.top + offset) /
             (parentRect.height - props.resizeTriggerSize)
+      const containerSize =
+        props.direction === 'horizontal' ? parentRect.width : parentRect.height
+      const min = parseSizeValue(props.min, containerSize)
+      const max = parseSizeValue(props.max, containerSize)
       let nextSize = newSize
       if (props.min) {
-        nextSize = Math.max(newSize, props.min)
+        nextSize = Math.max(newSize, min)
       }
       if (props.max) {
-        nextSize = Math.min(nextSize, props.max)
+        nextSize = Math.min(nextSize, max)
       }
-      doUpdateSize(nextSize)
+      doUpdateSize(nextSize, containerSize)
     }
 
     return {
