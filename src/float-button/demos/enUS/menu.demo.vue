@@ -1,7 +1,7 @@
 <markdown>
-# 菜单显示
+# Show menu
 
-设定 `menu-trigger` 后，更多的 `n-float-button` 可被折叠于一个 `n-float-button` 中。
+After `menu-trigger` is set, more `n-float-button` can be folded into one `n-float-button`.
 </markdown>
 
 <template>

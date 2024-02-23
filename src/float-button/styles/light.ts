@@ -7,19 +7,25 @@ const self = (vars: ThemeCommonVars) => {
     popoverColor,
     textColor2,
     buttonColor2Hover,
+    buttonColor2Pressed,
     primaryColor,
-    primaryColorHover
+    primaryColorHover,
+    primaryColorPressed,
+    borderRadius
   } = vars
   return {
     color: popoverColor,
     colorHover: buttonColor2Hover,
+    colorPressed: buttonColor2Pressed,
     colorPrimary: primaryColor,
     colorPrimaryHover: primaryColorHover,
+    colorPrimaryPressed: primaryColorPressed,
     textColor: textColor2,
-    boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
-    boxShadowHover: '0 2px 12px 0px rgba(0, 0, 0, .18)',
-    boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .18)',
-    textColorPrimary: '#fff'
+    boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .16)',
+    boxShadowHover: '0 2px 12px 0px rgba(0, 0, 0, .24)',
+    boxShadowPressed: '0 2px 12px 0px rgba(0, 0, 0, .24)',
+    textColorPrimary: '#fff',
+    borderRadiusSquare: borderRadius
   }
 }
 
