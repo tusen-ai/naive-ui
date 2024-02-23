@@ -53,7 +53,7 @@ show.vue
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |  |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |  |
 | responsive | `boolean` | `false` | Whether to collapsed menu items that overflows menu. Only work for menu with `mode='horizontal'`. | 2.36.0 |
-| root-indent | `number` | `32` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |  |
+| root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |  |
 | value | `string \| null` | `undefined` | The selected item key of the menu. |  |
 | watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |  |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu options' `key`. |  |
