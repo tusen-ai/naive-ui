@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
+
 ## 2.38.0
 
 `2024-02-22`
@@ -27,6 +33,8 @@
 - `n-split` 新增 `size` 和 `on-update:size` 属性
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
+- 新增 `n-float-button` 组件
+- 提供 ES module 打包
 
 ### i18n
 

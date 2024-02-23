@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-date-picker` adds `default-calendar-start-time` props when `type` is `date\datetime\week`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+
 ## 2.38.0
 
 `2024-02-22`
@@ -27,6 +33,8 @@
 - `n-split` adds `size` prop and `on-update:size` prop.
 - `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
 - `n-drawer` adds `borderRadius` theme variable.
+- adds `n-float-button` component.
+- Provides ES module bundle.
 
 ### i18n
 
