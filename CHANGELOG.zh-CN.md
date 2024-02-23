@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-split`的 `min` 属性未生效
+
 ### Features
 
 - `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)

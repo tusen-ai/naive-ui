@@ -172,7 +172,7 @@ export default defineComponent({
         nextSize = Math.max(newSize, props.min)
       }
       if (props.max) {
-        nextSize = Math.min(newSize, props.max)
+        nextSize = Math.min(nextSize, props.max)
       }
       doUpdateSize(nextSize)
     }
