@@ -118,7 +118,7 @@ export default defineComponent({
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
-      const { width, height, type } = props
+      const { type } = props
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-box-shadow': boxShadow,
@@ -129,8 +129,13 @@ export default defineComponent({
         '--n-color-hover': type === 'primary' ? colorPrimaryHover : colorHover,
         '--n-color-pressed':
           type === 'primary' ? colorPrimaryPressed : colorPressed,
-        '--n-border-radius-square': borderRadiusSquare,
-        position: floatButtonGroupInjection ? '' : props.position,
+        '--n-border-radius-square': borderRadiusSquare
+      }
+    })
+    const inlineStyle = computed<CSSProperties>(() => {
+      const { width, height } = props
+      return {
+        position: floatButtonGroupInjection ? undefined : props.position,
         width: formatLength(width),
         minHeight: formatLength(height),
         ...(floatButtonGroupInjection
@@ -169,10 +174,16 @@ export default defineComponent({
     }
 
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      ? useThemeClass(
+        'float-button',
+        computed(() => props.type[0]),
+        cssVarsRef,
+        props
+      )
       : undefined
 
     return {
+      inlineStyle,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
@@ -195,6 +206,7 @@ export default defineComponent({
       mergedShowMenu,
       themeClass,
       $slots,
+      inlineStyle,
       onRender
     } = this
     const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
@@ -208,7 +220,7 @@ export default defineComponent({
           mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`,
           themeClass
         ]}
-        style={cssVars as CSSProperties}
+        style={[cssVars as CSSProperties, inlineStyle]}
         onMouseenter={this.Mouseenter}
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}
