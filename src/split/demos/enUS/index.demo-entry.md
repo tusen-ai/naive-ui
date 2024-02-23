@@ -21,8 +21,8 @@ controlled.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| default-size | `string \| number` | `0.5` | Default split size, 0~1 is a percentage. | 2.36.0 |
-| size | `string \| number` | `undefined` | Split is the controlled split size, with 0~1 representing the percentage. | 2.38.0 |
+| default-size | `string \| number` | `0.5` | Default split size, 0~1 is a percentage or pixel value. | 2.36.0 |
+| size | `string \| number` | `undefined` | Split is the controlled split size, with 0~1 representing the percentage or pixel value. | 2.38.0 |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
 | min | `string \| number` | `0` | The minimum threshold for splitting, 0~1 is a percentage. | 2.36.0 |
