@@ -175,8 +175,8 @@ export default defineComponent({
       value: string | number,
       parentSize: number
     ): number => {
-      if (isPixel.value) {
-        return parseFloat(value as string) / parentSize
+      if (typeof value === 'string' && value.endsWith('px')) {
+        return parseFloat(value) / parentSize
       } else {
         const numericValue = value as number
         return numericValue >= 0 && numericValue <= 1
