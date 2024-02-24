@@ -25,11 +25,11 @@ controlled.vue
 | size | `string \| number` | `undefined` | Split 的受控分割大小，0~1 代表百分比或像素值 | 2.38.0 |
 | disabled | `boolean` | `false` | 是否禁用 | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Split 的分割方向 | 2.36.0 |
-| min | `string \| number` | `0` | Split 的分割最小阈值，0~1 代表百分比 | 2.36.0 |
-| max | `string \| number` | `1` | Split 的分割最大阈值，0~1 代表百分比 | 2.36.0 |
+| min | `string \| number` | `0` | Split 的分割最小阈值，0~1 代表百分比或像素值 | 2.36.0 |
+| max | `string \| number` | `1` | Split 的分割最大阈值，0~1 代表百分比或像素值 | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Split 的分隔条大小 | 2.36.0 |
 | watch-props | `Array<'defaultSize'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 | 2.38.0 |
-| on-update:size | `(value: string \| number) => void` | `undefined` | 组件 size 属性变化时触发的回调 | 2.38.0 |
+| on-update:size | `(value: string \| number) => void` | `undefined` | 组件 `size` 属性变化时触发的回调 | 2.38.0 |
 
 ### Split Slots
 

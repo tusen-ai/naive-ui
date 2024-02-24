@@ -25,11 +25,11 @@ controlled.vue
 | size | `string \| number` | `undefined` | Split is the controlled split size, with 0~1 representing the percentage or pixel value. | 2.38.0 |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
-| min | `string \| number` | `0` | The minimum threshold for splitting, 0~1 is a percentage. | 2.36.0 |
-| max | `string \| number` | `1` | The maximum split threshold, 0~1 is a percentage. | 2.36.0 |
+| min | `string \| number` | `0` | The minimum threshold for splitting, 0~1 is a percentage or pixel value. | 2.36.0 |
+| max | `string \| number` | `1` | The maximum split threshold, 0~1 is a percentage or pixel value. | 2.36.0 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
 | watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.38.0 |
-| on-update:size | `(value: string \| number) => void` | `undefined` | Callback fired on size changes. | 2.38.0 |
+| on-update:size | `(value: string \| number) => void` | `undefined` | Callback fired on `size` changes. | 2.38.0 |
 
 ### Split Slots
 
