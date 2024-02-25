@@ -6,6 +6,7 @@
 
 - Fix `n-split`'s `min` attribute does not take effect
 - Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-split` component losing css variables with inline theme disabled, closes(#5717)
 
 ### Features
 

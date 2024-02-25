@@ -6,6 +6,7 @@
 
 - 修复 `n-split` 的 `min` 属性未生效
 - Fix `n-result` built-in icons not re-rendered after hydration.
+- 修复 `n-split` 在禁用 inline 主题情况下丢失css变量，关闭(#5717)
 
 ### Features
 
