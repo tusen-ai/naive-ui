@@ -110,7 +110,7 @@ export default cB('tabs', `
       pointer-events: none;
       background-color: var(--n-tab-color-segment);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
-      transition: 0.3s;
+      transition: transform 0.3s var(--n-bezier);
     `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;

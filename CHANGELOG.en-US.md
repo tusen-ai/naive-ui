@@ -4,12 +4,13 @@
 
 ### Fixes
 
-- Fix `n-split`'s `min` attribute does not take effect
+- Fix `n-split`'s `min` attribute does not take effect.
 - Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-tabs` whose `type` is `'segmented'` has capsule wrong width and position after resize, closes [#5705](https://github.com/tusen-ai/naive-ui/issues/5705).
 
 ### Features
 
-- `n-date-picker` adds `default-calendar-start-time` props when `type` is `date\datetime\week`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+- `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
 - `n-tree-select` adds `get-children` prop.
 
 ## 2.38.0

@@ -5,11 +5,12 @@
 ### Fixes
 
 - 修复 `n-split` 的 `min` 属性未生效
-- Fix `n-result` built-in icons not re-rendered after hydration.
+- 修复 `n-result` 内置的 icon 无法在 hydration 之后重渲染
+- 修复 `n-tabs` 在 `type` 为 `'segmented'` 时候，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5705](https://github.com/tusen-ai/naive-ui/issues/5705)
 
 ### Features
 
-- `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
+- `n-date-picker` 在 `type` 为 `'date'`、`'datetime'` 或 `'week'` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
 - `n-tree-select` 新增 `get-children` 属性
 
 ## 2.38.0

@@ -420,13 +420,13 @@ export default defineComponent({
     const segmentCapsuleElRef = ref<HTMLElement | null>(null)
 
     function updateSegmentPosition ({
-      disabledTransition
+      transitionDisabled
     }: {
-      disabledTransition: boolean
+      transitionDisabled: boolean
     }): void {
       const tabsEl = tabsElRef.value
       if (!tabsEl) return
-      disabledTransition && tabsEl.classList.add('transition-disabled')
+      transitionDisabled && tabsEl.classList.add('transition-disabled')
       const activeTabEl = getCurrentEl()
       if (activeTabEl && segmentCapsuleElRef.value) {
         const rect = activeTabEl.getBoundingClientRect()
@@ -438,15 +438,18 @@ export default defineComponent({
           tabsEl.getBoundingClientRect().left -
           depx(getComputedStyle(tabsEl).paddingLeft)
         }px)`
+        if (transitionDisabled) {
+          void segmentCapsuleElRef.value.offsetWidth
+        }
       }
-      disabledTransition && tabsEl.classList.remove('transition-disabled')
+      transitionDisabled && tabsEl.classList.remove('transition-disabled')
     }
 
     watch([mergedValueRef], () => {
       if (props.type === 'segment') {
         void nextTick(() => {
           updateSegmentPosition({
-            disabledTransition: false
+            transitionDisabled: false
           })
         })
       }
@@ -455,7 +458,7 @@ export default defineComponent({
     onMounted(() => {
       if (props.type === 'segment') {
         updateSegmentPosition({
-          disabledTransition: true
+          transitionDisabled: true
         })
       }
     })
@@ -602,6 +605,12 @@ export default defineComponent({
       }
     }
 
+    const handleSegmentedResize = (): void => {
+      updateSegmentPosition({
+        transitionDisabled: true
+      })
+    }
+
     const cssVarsRef = computed(() => {
       const { value: size } = compitableSizeRef
       const { type } = props
@@ -716,6 +725,7 @@ export default defineComponent({
       animationDirection: animationDirectionRef,
       renderNameListRef,
       yScrollElRef,
+      handleSegmentedResize,
       onAnimationBeforeLeave,
       onAnimationEnter,
       onAnimationAfterEnter,
@@ -873,45 +883,53 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsElRef">
-              <div
-                class={`${mergedClsPrefix}-tabs-capsule`}
-                ref="segmentCapsuleElRef"
-              >
-                <div class={`${mergedClsPrefix}-tabs-wrapper`}>
-                  <div class={`${mergedClsPrefix}-tabs-tab`} />
-                </div>
-              </div>
-              {showPane
-                ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-                  renderNameListRef.value.push(
-                    tabPaneVNode.props.name as string | number
-                  )
-                  return (
-                      <Tab
-                        {...tabPaneVNode.props}
-                        internalCreatedByPane={true}
-                        internalLeftPadded={index !== 0}
-                      >
-                        {tabPaneVNode.children
-                          ? {
-                              default: tabPaneVNode.children.tab
-                            }
-                          : undefined}
-                      </Tab>
-                  )
-                })
-                : tabChildren.map((tabVNode: any, index: number) => {
-                  renderNameListRef.value.push(
-                    tabVNode.props.name as string | number
-                  )
-                  if (index === 0) {
-                    return tabVNode
-                  } else {
-                    return createLeftPaddedTabVNode(tabVNode as VNode)
-                  }
-                })}
-            </div>
+            <VResizeObserver onResize={this.handleSegmentedResize}>
+              {{
+                default: () => (
+                  <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsElRef">
+                    <div
+                      class={`${mergedClsPrefix}-tabs-capsule`}
+                      ref="segmentCapsuleElRef"
+                    >
+                      <div class={`${mergedClsPrefix}-tabs-wrapper`}>
+                        <div class={`${mergedClsPrefix}-tabs-tab`} />
+                      </div>
+                    </div>
+                    {showPane
+                      ? tabPaneChildren.map(
+                        (tabPaneVNode: any, index: number) => {
+                          renderNameListRef.value.push(
+                            tabPaneVNode.props.name as string | number
+                          )
+                          return (
+                              <Tab
+                                {...tabPaneVNode.props}
+                                internalCreatedByPane={true}
+                                internalLeftPadded={index !== 0}
+                              >
+                                {tabPaneVNode.children
+                                  ? {
+                                      default: tabPaneVNode.children.tab
+                                    }
+                                  : undefined}
+                              </Tab>
+                          )
+                        }
+                      )
+                      : tabChildren.map((tabVNode: any, index: number) => {
+                        renderNameListRef.value.push(
+                          tabVNode.props.name as string | number
+                        )
+                        if (index === 0) {
+                          return tabVNode
+                        } else {
+                          return createLeftPaddedTabVNode(tabVNode as VNode)
+                        }
+                      })}
+                  </div>
+                )
+              }}
+            </VResizeObserver>
           ) : (
             <VResizeObserver onResize={this.handleNavResize}>
               {{
