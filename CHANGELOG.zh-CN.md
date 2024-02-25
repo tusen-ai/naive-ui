@@ -6,7 +6,8 @@
 
 - 修复 `n-split` 的 `min` 属性未生效
 - 修复 `n-result` 内置的 icon 无法在 hydration 之后重渲染
-- 修复 `n-tabs` 在 `type` 为 `'segmented'` 时候，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5705](https://github.com/tusen-ai/naive-ui/issues/5705)
+- 修复 `n-tabs` 在 `type` 为 `'segment'` 时候，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5705](https://github.com/tusen-ai/naive-ui/issues/5705)
+- 修复 `n-tabs` 在 `n-modal` 内部时，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5569](https://github.com/tusen-ai/naive-ui/issues/5569)
 
 ### Features
 

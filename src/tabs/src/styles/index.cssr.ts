@@ -138,15 +138,16 @@ export default cB('tabs', `
     ])
   ]),
   cM('flex', [
-    cB('tabs-nav', {
-      width: '100%'
-    }, [
-      cB('tabs-wrapper', {
-        width: '100%'
-      }, [
-        cB('tabs-tab', {
-          marginRight: 0
-        })
+    cB('tabs-nav', `
+      width: 100%;
+      position: relative;
+    `, [
+      cB('tabs-wrapper', `
+        width: 100%;
+      `, [
+        cB('tabs-tab', `
+          margin-right: 0;
+        `)
       ])
     ])
   ]),

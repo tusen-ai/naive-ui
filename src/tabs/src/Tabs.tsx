@@ -429,13 +429,12 @@ export default defineComponent({
       transitionDisabled && tabsEl.classList.add('transition-disabled')
       const activeTabEl = getCurrentEl()
       if (activeTabEl && segmentCapsuleElRef.value) {
-        const rect = activeTabEl.getBoundingClientRect()
         // move segment capsule to match the position of the active tab
-        segmentCapsuleElRef.value.style.width = `${rect.width}px`
-        segmentCapsuleElRef.value.style.height = `${rect.height}px`
+        segmentCapsuleElRef.value.style.width = `${activeTabEl.offsetWidth}px`
+        segmentCapsuleElRef.value.style.height = `${activeTabEl.offsetHeight}px`
         segmentCapsuleElRef.value.style.transform = `translateX(${
-          rect.left -
-          tabsEl.getBoundingClientRect().left -
+          activeTabEl.offsetLeft -
+          tabsEl.offsetLeft -
           depx(getComputedStyle(tabsEl).paddingLeft)
         }px)`
         if (transitionDisabled) {
@@ -605,7 +604,7 @@ export default defineComponent({
       }
     }
 
-    const handleSegmentedResize = (): void => {
+    const handleSegmentResize = (): void => {
       updateSegmentPosition({
         transitionDisabled: true
       })
@@ -725,7 +724,7 @@ export default defineComponent({
       animationDirection: animationDirectionRef,
       renderNameListRef,
       yScrollElRef,
-      handleSegmentedResize,
+      handleSegmentResize,
       onAnimationBeforeLeave,
       onAnimationEnter,
       onAnimationAfterEnter,
@@ -883,7 +882,7 @@ export default defineComponent({
               )
           )}
           {isSegment ? (
-            <VResizeObserver onResize={this.handleSegmentedResize}>
+            <VResizeObserver onResize={this.handleSegmentResize}>
               {{
                 default: () => (
                   <div class={`${mergedClsPrefix}-tabs-rail`} ref="tabsElRef">
