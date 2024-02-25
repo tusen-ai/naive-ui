@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.1
+
+`2024-02-26`
 
 ### Fixes
 
