@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.38.1
+
+`2024-02-26`
+
+### Fixes
+
+- Fix `n-split`'s `min` attribute does not take effect.
+- Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-tabs` whose `type` is `'segment'` has capsule with wrong width and position after resize, closes [#5705](https://github.com/tusen-ai/naive-ui/issues/5705).
+- Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
+- Fix `n-split` doesn't work with `inline-theme-disabled` prop.
+- Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
+
+### Features
+
+- `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+- `n-tree-select` adds `get-children` prop.
+
 ## 2.38.0
 
 `2024-02-22`
@@ -27,6 +45,8 @@
 - `n-split` adds `size` prop and `on-update:size` prop.
 - `n-split` adds `watch-props` prop, closes [#5526](https://github.com/tusen-ai/naive-ui/issues/5526).
 - `n-drawer` adds `borderRadius` theme variable.
+- adds `n-float-button` component.
+- Provides ES module bundle.
 
 ### i18n
 

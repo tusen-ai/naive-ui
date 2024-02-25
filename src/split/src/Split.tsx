@@ -9,13 +9,14 @@ import {
   toRef
 } from 'vue'
 import { off, on } from 'evtd'
+import { useMergedState } from 'vooks'
 import { type ExtractPublicPropTypes, resolveSlot, call } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import style from './styles/index.cssr'
-import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
-import { useMergedState } from 'vooks'
 import { type SplitOnUpdateSize } from './types'
+
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
   direction: {
@@ -172,12 +173,18 @@ export default defineComponent({
         nextSize = Math.max(newSize, props.min)
       }
       if (props.max) {
-        nextSize = Math.min(newSize, props.max)
+        nextSize = Math.min(nextSize, props.max)
       }
       doUpdateSize(nextSize)
     }
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      : undefined
+
     return {
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       resizeTriggerElRef,
       isDragging: isDraggingRef,
@@ -189,11 +196,13 @@ export default defineComponent({
     }
   },
   render () {
+    this.onRender?.()
     return (
       <div
         class={[
           `${this.mergedClsPrefix}-split`,
-          `${this.mergedClsPrefix}-split--${this.direction}`
+          `${this.mergedClsPrefix}-split--${this.direction}`,
+          this.themeClass
         ]}
         style={this.cssVars as CSSProperties}
       >

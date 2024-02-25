@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.38.1
+
+`2024-02-26`
+
+### Fixes
+
+- 修复 `n-split` 的 `min` 属性未生效
+- 修复 `n-result` 内置的 icon 无法在 hydration 之后重渲染
+- 修复 `n-tabs` 在 `type` 为 `'segment'` 时候，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5705](https://github.com/tusen-ai/naive-ui/issues/5705)
+- 修复 `n-tabs` 在 `n-modal` 内部时，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5569](https://github.com/tusen-ai/naive-ui/issues/5569)
+- 修复 `n-split` 不支持 `inline-theme-disabled` 属性
+- 修复 `n-float-button` 不支持 `inline-theme-disabled` 属性
+
+### Features
+
+- `n-date-picker` 在 `type` 为 `'date'`、`'datetime'` 或 `'week'` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
+- `n-tree-select` 新增 `get-children` 属性
+
 ## 2.38.0
 
 `2024-02-22`
@@ -27,6 +45,8 @@
 - `n-split` 新增 `size` 和 `on-update:size` 属性
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
+- 新增 `n-float-button` 组件
+- 提供 ES module 打包
 
 ### i18n
 
