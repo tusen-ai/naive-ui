@@ -81,7 +81,6 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   })
   const paddingLeftRef = computed(() => {
     if (horizontalRef.value) return undefined
-    if (horizontalRef.value) return undefined
     const { collapsedWidth, indent, rootIndent } = menuProps
     const { root, isGroup } = props
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
