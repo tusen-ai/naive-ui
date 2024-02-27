@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-watermark` support multi lines in content
+
 ## 2.38.1
 
 `2024-02-26`
