@@ -646,21 +646,16 @@ const Scrollbar = defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: {
-          cubicBezierEaseInOut,
-          scrollbarBorderRadius,
-          scrollbarHeight,
-          scrollbarWidth
-        },
-        self: { color, colorHover }
+        common: { cubicBezierEaseInOut },
+        self: { color, colorHover, borderRadius, height, width }
       } = themeRef.value
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
-        '--n-scrollbar-border-radius': scrollbarBorderRadius,
-        '--n-scrollbar-width': scrollbarWidth,
-        '--n-scrollbar-height': scrollbarHeight
+        '--n-scrollbar-border-radius': borderRadius,
+        '--n-scrollbar-width': width,
+        '--n-scrollbar-height': height
       }
     })
     const themeClassHandle = inlineThemeDisabled

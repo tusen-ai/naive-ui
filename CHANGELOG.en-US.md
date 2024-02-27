@@ -17,6 +17,7 @@
 
 - `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
 - `n-tree-select` adds `get-children` prop.
+- `n-scrollbar` exposes theme vars such as `width`, `height` and `border-radius`, closes [#5719](https://github.com/tusen-ai/naive-ui/issues/5719).
 
 ## 2.38.0
 

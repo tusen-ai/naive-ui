@@ -3,10 +3,19 @@ import type { ThemeCommonVars } from '../../../_styles/common'
 import type { Theme } from '../../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { scrollbarColor, scrollbarColorHover } = vars
+  const {
+    scrollbarColor,
+    scrollbarColorHover,
+    scrollbarWidth,
+    scrollbarHeight,
+    scrollbarBorderRadius
+  } = vars
   return {
     color: scrollbarColor,
-    colorHover: scrollbarColorHover
+    colorHover: scrollbarColorHover,
+    width: scrollbarWidth,
+    height: scrollbarHeight,
+    borderRadius: scrollbarBorderRadius
   }
 }
 
