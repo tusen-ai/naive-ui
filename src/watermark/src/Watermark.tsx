@@ -197,11 +197,9 @@ export default defineComponent({
             fontFamily || themeRef.value.self.fontFamily
           }`
           ctx.fillStyle = fontColor
-          ctx.fillText(
-            content,
-            canvasOffsetLeft,
-            canvasOffsetTop + lineHeight * ratio
-          )
+          content.split('\n').forEach((line, index) => {
+            ctx.fillText(line, canvasOffsetLeft, canvasOffsetTop + (lineHeight * ratio) * (index + 1));
+          })
           base64UrlRef.value = canvas.toDataURL()
         } else if (!content) {
           // For example, you are using the input box to customize the watermark
