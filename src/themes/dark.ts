@@ -32,6 +32,7 @@ import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
 import { equationDark } from '../equation/styles'
 import { formDark } from '../form/styles'
+import { floatButtonDark } from '../float-button/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
 import { iconWrapperDark } from '../icon-wrapper/styles'
@@ -84,6 +85,7 @@ import { watermarkDark } from '../watermark/styles'
 import { splitDark } from '../split/styles'
 import type { BuiltInGlobalTheme } from './interface'
 import { flexDark } from '../styles'
+import { floatButtonGroupDark } from '../float-button-group/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -171,5 +173,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Typography: typographyDark,
   Upload: uploadDark,
   Watermark: watermarkDark,
-  Split: splitDark
+  Split: splitDark,
+  FloatButton: floatButtonDark,
+  FloatButtonGroup: floatButtonGroupDark
 }

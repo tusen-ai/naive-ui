@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-flex render empty children 1`] = `"<div class="n-float-button-group n-float-button-group--circle-shape" style="--n-bezier: cubic-bezier(.4, 0, .2, 1); --n-box-shadow: 0 2px 8px 0px rgba(0, 0, 0, .12); --n-color: #fff; --n-button-border-color: rgb(239, 239, 245); --n-border-radius-square: 3px; position: fixed;" role="group"></div>"`;

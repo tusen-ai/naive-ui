@@ -6,7 +6,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal
     v-model:show="showModal"

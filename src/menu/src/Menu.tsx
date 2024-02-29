@@ -629,7 +629,7 @@ export default defineComponent({
           finalResponsive && `${mergedClsPrefix}-menu--responsive`,
           this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
         ]}
-        style={this.cssVars as any}
+        style={this.cssVars}
       >
         {finalResponsive ? (
           <VOverflow

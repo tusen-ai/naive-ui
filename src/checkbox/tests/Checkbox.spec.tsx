@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, Fragment } from 'vue'
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
@@ -58,28 +58,23 @@ describe('n-checkbox', () => {
     const onUpdateChecked1: (value: string) => void = () => {}
     const onUpdateChecked2: (value: number) => void = () => {}
     const onUpdateChecked3: (value: boolean) => void = () => {}
-    let _ = (
+    <Fragment>
       <NCheckbox
         onUpdateChecked={onUpdateChecked1}
         checked={'123'}
         defaultChecked={'123'}
       />
-    )
-    _ = (
       <NCheckbox
         onUpdateChecked={onUpdateChecked2}
         checked={123}
         defaultChecked={123}
       />
-    )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _ = (
       <NCheckbox
         onUpdateChecked={onUpdateChecked3}
         checked={true}
         defaultChecked={false}
       />
-    )
+    </Fragment>
   })
 
   it('should work with `indeterminate` prop', () => {

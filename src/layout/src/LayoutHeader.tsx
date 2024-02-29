@@ -80,7 +80,7 @@ export default defineComponent({
             `${mergedClsPrefix}-layout-header--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-header--bordered`
         ]}
-        style={this.cssVars as any}
+        style={this.cssVars}
       >
         {this.$slots}
       </div>

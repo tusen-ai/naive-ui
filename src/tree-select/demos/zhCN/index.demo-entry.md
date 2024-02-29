@@ -44,6 +44,7 @@ render-debug.vue
 | indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |  |
 | filterable | `boolean` | `false` | 是否可过滤 |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |  |
+| get-children | `(option: any) => unknown` | `undefined` | 获取当前选项的子选项 | 2.38.1 |
 | key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |  |
 | disabled-field | `string` | `'disabled'` | 替代 `TreeSelectOption` 中的 disabled 字段名 | 2.32.2 |

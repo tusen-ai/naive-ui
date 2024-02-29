@@ -778,7 +778,7 @@ export default defineComponent({
           this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
           this.themeClass
         ]}
-        style={this.cssVars as any}
+        style={this.cssVars}
       >
         {inputNode}
         {this.showTrigger && this.listType !== 'image-card' && (

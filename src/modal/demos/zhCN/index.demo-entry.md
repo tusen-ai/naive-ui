@@ -2,10 +2,24 @@
 
 它会弹出来，然后给你看点东西。
 
+<n-alert title="使用前提" type="warning" :bordered="false">
+  如果你想通过 <n-text code>useModal</n-text> 使用对话框，你需要把调用其方法的组件放在 <n-text code>n-modal-provider</n-text> 内部并且使用 <n-text code>useModal</n-text> 去获取 API。
+</n-alert>
+
+例如：
+
+```html
+<!-- App.vue -->
+<n-modal-provider>
+  <content />
+</n-modal-provider>
+```
+
 ## 演示
 
 ```demo
 basic.vue
+reactive.vue
 controlled.vue
 mask-closable.vue
 custom-position.vue
@@ -31,6 +45,25 @@ mask-click-debug.vue
 ```
 
 ## API
+
+### ModalProvider Props
+
+自 `2.38.0` 开始提供。
+
+| 名称 | 类型                    | 默认值 | 说明           | 版本   |
+| ---- | ----------------------- | ------ | -------------- | ------ |
+| to   | `string \| HTMLElement` | `body` | 模态的挂载位置 | 2.38.0 |
+
+### useModal API
+
+自 `2.38.0` 开始提供。
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| create | `(options: ModalOptions) => ModalReactive` | 创建模态框 | 2.38.0 |
+| destroyAll | `() => void` | 销毁所有弹出的模态框 | 2.38.0 |
+
+`ModalOptions` 的属性和 `ModalReactive` 属性同 `ModalProps`（属性应使用 camelCase，例如 `auto-focus` 对应 `autoFocus`）。
 
 ### Modal Props
 

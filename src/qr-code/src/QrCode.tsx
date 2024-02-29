@@ -219,6 +219,8 @@ export default defineComponent({
         style={{
           padding: typeof padding === 'number' ? `${padding}px` : padding,
           backgroundColor,
+          width: `${size}px`,
+          height: `${size}px`,
           ...cssVars
         }}
       >

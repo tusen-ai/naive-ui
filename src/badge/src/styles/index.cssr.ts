@@ -24,7 +24,6 @@ export default c([
     display: inline-flex;
     position: relative;
     vertical-align: middle;
-    color: var(--n-color);
     font-family: var(--n-font-family);
   `, [
     cM('as-is', [

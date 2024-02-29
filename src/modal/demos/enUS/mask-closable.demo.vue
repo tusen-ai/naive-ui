@@ -6,7 +6,7 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
 
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal
     v-model:show="showModal"

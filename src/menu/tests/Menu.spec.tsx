@@ -337,8 +337,7 @@ describe('n-menu', () => {
   })
 
   it('should accept empty object in type-checking phase', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const menu = <NMenu options={[{}]} />
+    ;<NMenu options={[{}]} />
   })
 
   it('should work with `defaultExpandedKeys` props', async () => {
@@ -384,40 +383,37 @@ describe('n-menu', () => {
   })
 
   it('accepts proper options', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const menu = (
-      <NMenu
-        options={[
-          {
-            type: 'divider'
-          },
-          {
-            type: 'group',
-            key: 'foo'
-          },
-          {
-            key: 'blabla',
-            label: 'kirby'
-          },
-          {
-            key: 'xxxx',
-            children: [
-              {
-                type: 'divider'
-              },
-              {
-                type: 'group',
-                key: 'foo1'
-              },
-              {
-                key: 'blabla1',
-                label: 'kirby'
-              }
-            ]
-          }
-        ]}
-      />
-    )
+    ;<NMenu
+      options={[
+        {
+          type: 'divider'
+        },
+        {
+          type: 'group',
+          key: 'foo'
+        },
+        {
+          key: 'blabla',
+          label: 'kirby'
+        },
+        {
+          key: 'xxxx',
+          children: [
+            {
+              type: 'divider'
+            },
+            {
+              type: 'group',
+              key: 'foo1'
+            },
+            {
+              key: 'blabla1',
+              label: 'kirby'
+            }
+          ]
+        }
+      ]}
+    />
   })
 
   it('should work with `hidden` prop', async () => {

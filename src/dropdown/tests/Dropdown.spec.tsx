@@ -297,7 +297,6 @@ describe('n-dropdown', () => {
   })
 
   it('should accept empty object in type-checking phase', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const dropdown = <NDropdown options={[{}]} />
+    ;<NDropdown options={[{}]} />
   })
 })

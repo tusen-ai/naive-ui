@@ -10,6 +10,14 @@ HTMLElement | ComponentPublicInstance | null
 export const modalBodyInjectionKey =
   createInjectionKey<ModalBodyInjection>('n-modal-body')
 
+export interface ModalProviderInjection {
+  clickedRef: Ref<boolean>
+  clickedPositionRef: Ref<{ x: number, y: number } | null>
+}
+
+export const modalProviderInjectionKey =
+  createInjectionKey<ModalProviderInjection>('n-modal-provider')
+
 export interface ModalInjection {
   getMousePosition: () => {
     x: number

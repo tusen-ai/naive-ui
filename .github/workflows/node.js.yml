@@ -13,11 +13,11 @@ jobs:
   lint:
     environment: test
 
-    runs-on: ubuntu-latest
+    runs-on: macos-14
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [18, 20]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - uses: actions/checkout@v3
@@ -38,11 +38,11 @@ jobs:
   test:
     environment: test
 
-    runs-on: ubuntu-latest
+    runs-on: macos-14
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [18, 20]
     steps:
       - uses: actions/checkout@v3
 

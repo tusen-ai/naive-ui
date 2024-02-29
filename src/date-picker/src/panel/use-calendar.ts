@@ -51,6 +51,7 @@ import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useCalendarProps = {
   ...usePanelCommonProps,
+  defaultCalendarStartTime: Number,
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
@@ -100,7 +101,7 @@ function useCalendar (
   )
   const calendarValueRef = ref(
     props.value === null || Array.isArray(props.value)
-      ? Date.now()
+      ? props.defaultCalendarStartTime ?? Date.now()
       : props.value
   )
   const yearVlRef = ref<VirtualListInst | null>(null)

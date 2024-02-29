@@ -131,7 +131,6 @@ const cancelIcon = (
   </svg>
 )
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const retryIcon = (
   <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -150,7 +149,6 @@ const retryIcon = (
   </svg>
 )
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const toIcon = (
   <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -207,6 +205,10 @@ function to (): VNode {
   return toIcon
 }
 
+function retry (): VNode {
+  return retryIcon
+}
+
 export const icons = {
   clear,
   success,
@@ -215,5 +217,6 @@ export const icons = {
   attach,
   trash,
   cancel,
-  to
+  to,
+  retry
 }

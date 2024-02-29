@@ -1,6 +1,6 @@
 name: 🚀 新功能请求
 description: 提议将新功能添加到 Naive UI
-labels: [功能请求]
+labels: [feature request]
 body:
   - type: markdown
     attributes:

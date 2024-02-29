@@ -79,9 +79,6 @@
         <n-button text tag="a" target="_blank" href="https://www.tusimple.com/">
           {{ t('tusimple') }}
         </n-button>
-        <n-button text tag="a" target="_blank" :href="t('joinUsLink')">
-          {{ t('joinUs') }}
-        </n-button>
       </div>
     </div>
     <n-divider class="footer-divider" />
@@ -119,7 +116,6 @@ export default defineComponent({
           changelog: '更新日志',
           commonIssues: '常见问题',
           tusimple: '图森未来',
-          joinUs: '加入我们',
           icons: '图标库',
           libraries: '社区精选资源',
           dingTalk: '钉钉',
@@ -139,7 +135,6 @@ export default defineComponent({
           changelog: 'Change Log',
           commonIssues: 'Common Issues',
           tusimple: 'TuSimple',
-          joinUs: 'Join Us',
           icons: 'Icon Library',
           libraries: 'Third-Party Libraries',
           dingTalk: 'DingTalk',

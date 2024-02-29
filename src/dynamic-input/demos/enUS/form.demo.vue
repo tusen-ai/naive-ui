@@ -10,7 +10,7 @@
       v-model:value="model.dynamicInputValue"
       item-style="margin-bottom: 0;"
       :on-create="onCreate"
-      #="{ index, value }"
+      #="{ index }"
     >
       <div style="display: flex">
         <!--

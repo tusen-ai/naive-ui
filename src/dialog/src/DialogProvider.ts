@@ -58,7 +58,7 @@ export interface DialogApiInjection {
 
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
-  clickPositionRef: Ref<{ x: number, y: number } | null>
+  clickedPositionRef: Ref<{ x: number, y: number } | null>
 }
 
 export type DialogReactiveListInjection = Ref<DialogReactive[]>
@@ -129,7 +129,7 @@ export const NDialogProvider = defineComponent({
     provide(dialogApiInjectionKey, api)
     provide(dialogProviderInjectionKey, {
       clickedRef: useClicked(64),
-      clickPositionRef: useClickPosition()
+      clickedPositionRef: useClickPosition()
     })
     provide(dialogReactiveListInjectionKey, dialogListRef)
     return {

@@ -75,7 +75,7 @@ export default defineComponent({
             `${mergedClsPrefix}-layout-footer--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-footer--bordered`
         ]}
-        style={this.cssVars as any}
+        style={this.cssVars}
       >
         {this.$slots}
       </div>

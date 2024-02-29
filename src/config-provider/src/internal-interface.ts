@@ -31,6 +31,7 @@ import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
 import type { EquationTheme } from '../../equation/styles'
 import type { FormTheme } from '../../form/styles'
+import type { FloatButtonTheme } from '../../float-button/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { IconWrapperTheme } from '../../icon-wrapper/styles'
@@ -100,6 +101,7 @@ import type { RowTheme } from '../../legacy-grid/styles'
 import type { Katex } from './katex'
 import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
+import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -136,6 +138,8 @@ export interface GlobalThemeWithoutCommon {
   Equation?: EquationTheme
   Flex?: FlexTheme
   Form?: FormTheme
+  FloatButton?: FloatButtonTheme
+  FloatButtonGroup?: FloatButtonGroupTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
   IconWrapper?: IconWrapperTheme

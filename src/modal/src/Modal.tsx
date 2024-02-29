@@ -30,7 +30,7 @@ import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
 import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
-import { modalInjectionKey } from './interface'
+import { modalInjectionKey, modalProviderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
 export const modalProps = {
@@ -86,6 +86,7 @@ export const modalProps = {
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   // private
   internalDialog: Boolean,
+  internalModal: Boolean,
   internalAppear: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -143,6 +144,9 @@ export default defineComponent({
     const isMountedRef = useIsMounted()
     const NDialogProvider = props.internalDialog
       ? inject(dialogProviderInjectionKey, null)
+      : null
+    const NModalProvider = props.internalModal
+      ? inject(modalProviderInjectionKey, null)
       : null
 
     const isComposingRef = useIsComposing()
@@ -220,10 +224,11 @@ export default defineComponent({
     }
     provide(modalInjectionKey, {
       getMousePosition: () => {
-        if (NDialogProvider) {
-          const { clickedRef, clickPositionRef } = NDialogProvider
-          if (clickedRef.value && clickPositionRef.value) {
-            return clickPositionRef.value
+        const mergedProvider = NDialogProvider || NModalProvider
+        if (mergedProvider) {
+          const { clickedRef, clickedPositionRef } = mergedProvider
+          if (clickedRef.value && clickedPositionRef.value) {
+            return clickedPositionRef.value
           }
         }
         if (clickedRef.value) {
