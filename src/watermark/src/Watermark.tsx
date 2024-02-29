@@ -197,9 +197,25 @@ export default defineComponent({
             fontFamily || themeRef.value.self.fontFamily
           }`
           ctx.fillStyle = fontColor
-          content.split('\n').forEach((line, index) => {
-            ctx.fillText(line, canvasOffsetLeft, canvasOffsetTop + (lineHeight * ratio) * (index + 1));
-          })
+
+          let maxWidth = 0
+          content
+            .split('\n')
+            .map((line) => {
+              const width = ctx.measureText(line).width
+              maxWidth = Math.max(maxWidth, width)
+              return {
+                width,
+                line
+              }
+            })
+            .forEach(({ line, width }, index) => {
+              ctx.fillText(
+                line,
+                canvasOffsetLeft + (maxWidth - width) / 2,
+                canvasOffsetTop + lineHeight * ratio * (index + 1)
+              )
+            })
           base64UrlRef.value = canvas.toDataURL()
         } else if (!content) {
           // For example, you are using the input box to customize the watermark
@@ -237,10 +253,10 @@ export default defineComponent({
                   : ''
                 : props.cross
                   ? `calc(${rotatedImageOffset} + ${
-                    props.width / 2
-                  }px) calc(${rotatedImageOffset} + ${
-                    props.height / 2
-                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                      props.width / 2
+                    }px) calc(${rotatedImageOffset} + ${
+                      props.height / 2
+                    }px), ${rotatedImageOffset} ${rotatedImageOffset}`
                   : rotatedImageOffset,
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
