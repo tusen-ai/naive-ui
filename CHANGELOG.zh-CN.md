@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-menu` 中 Submenu 组件的 wai-aria role 设置错误，关闭 [#5729](https://github.com/tusen-ai/naive-ui/issues/5729)
+
 ## 2.38.1
 
 `2024-02-26`

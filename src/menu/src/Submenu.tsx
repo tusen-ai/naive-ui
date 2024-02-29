@@ -213,7 +213,7 @@ export const NSubmenu = defineComponent({
           default: () => (
             <div
               class={`${mergedClsPrefix}-submenu`}
-              role="menuitem"
+              role="menu"
               aria-expanded={!this.collapsed}
               id={this.domId}
             >
@@ -226,7 +226,7 @@ export const NSubmenu = defineComponent({
     ) : (
       <div
         class={`${mergedClsPrefix}-submenu`}
-        role="menuitem"
+        role="menu"
         aria-expanded={!this.collapsed}
         id={this.domId}
       >
