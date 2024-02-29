@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- Add csCZ locale.
+
 ## 2.38.1
 
 `2024-02-26`
