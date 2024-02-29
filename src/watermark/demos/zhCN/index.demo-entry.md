@@ -21,7 +21,7 @@ image.vue
 | debug | `boolean` | `false` | 是否显示调试信息 | 2.25.3 |
 | font-size | `number` | `14` | 字体大小 | 2.25.3 |
 | font-family | `string` | `undefined` | 字体族 | 2.25.3 |
-| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | 字体风格 | 2.25.3 |
+| font-style | ``'normal' \| 'italic' \| `oblique ${number}deg` `` | `normal` | 字体风格 | 2.25.3 |
 | font-variant | `string` | `''` | 字型 | 2.25.3 |
 | font-weight | `number` | `400` | 字重 | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | 字体颜色 | 2.25.3 |
@@ -33,6 +33,7 @@ image.vue
 | image-height | `number` | `undefined` | 图片高度 | 2.25.3 |
 | image-opacity | `number` | `1` | 图片不透明度 | 2.25.3 |
 | image-width | `number` | `undefined` | 图片宽度 | 2.25.3 |
+| node-props | `HTMLAttributes` | `undefined` | 水印节点元素的 HTML 属性 | NEXT_VERSION |
 | rotate | `number` | `0` | 旋转角度 | 2.25.3 |
 | selectable | `boolean` | `true` | 被水印覆盖的内容是否可选中 | 2.25.3 |
 | width | `number` | `32` | 宽度 | 2.25.3 |

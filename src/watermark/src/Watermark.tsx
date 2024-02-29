@@ -1,4 +1,12 @@
-import { h, defineComponent, type PropType, ref, watchEffect } from 'vue'
+import {
+  h,
+  defineComponent,
+  ref,
+  watchEffect,
+  mergeProps,
+  type PropType,
+  type HTMLAttributes
+} from 'vue'
 import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -101,7 +109,8 @@ export const watermarkProps = {
   globalRotate: {
     type: Number,
     default: 0
-  }
+  },
+  nodeProps: Object as PropType<HTMLAttributes>
 } as const
 
 export type WatermarkProps = ExtractPublicPropTypes<typeof watermarkProps>
@@ -215,39 +224,43 @@ export default defineComponent({
       }
     })
     return () => {
-      const { globalRotate, fullscreen, zIndex } = props
+      const { globalRotate, fullscreen, zIndex, nodeProps = {} } = props
       const mergedClsPrefix = mergedClsPrefixRef.value
       const isFullScreenGlobalRotate = globalRotate !== 0 && fullscreen
       const rotatedImageOffset = 'max(142vh, 142vw)'
       const watermarkNode = (
         <div
-          class={[
-            `${mergedClsPrefix}-watermark`,
-            globalRotate !== 0 && `${mergedClsPrefix}-watermark--global-rotate`,
-            fullscreen && `${mergedClsPrefix}-watermark--fullscreen`
-          ]}
-          style={{
-            transform: globalRotate
-              ? `translateX(-50%) translateY(-50%) rotate(${globalRotate}deg)`
-              : undefined,
-            zIndex: isFullScreenGlobalRotate ? undefined : zIndex,
-            backgroundSize: `${props.xGap + props.width}px`,
-            backgroundPosition:
-              globalRotate === 0
-                ? props.cross
-                  ? `${props.width / 2}px ${props.height / 2}px, 0 0`
-                  : ''
-                : props.cross
-                  ? `calc(${rotatedImageOffset} + ${
-                    props.width / 2
-                  }px) calc(${rotatedImageOffset} + ${
-                    props.height / 2
-                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
-                  : rotatedImageOffset,
-            backgroundImage: props.cross
-              ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
-              : `url(${base64UrlRef.value})`
-          }}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          {...mergeProps(nodeProps as any, {
+            class: [
+              `${mergedClsPrefix}-watermark`,
+              globalRotate !== 0 &&
+                `${mergedClsPrefix}-watermark--global-rotate`,
+              fullscreen && `${mergedClsPrefix}-watermark--fullscreen`
+            ],
+            style: {
+              transform: globalRotate
+                ? `translateX(-50%) translateY(-50%) rotate(${globalRotate}deg)`
+                : undefined,
+              zIndex: isFullScreenGlobalRotate ? undefined : zIndex,
+              backgroundSize: `${props.xGap + props.width}px`,
+              backgroundPosition:
+                globalRotate === 0
+                  ? props.cross
+                    ? `${props.width / 2}px ${props.height / 2}px, 0 0`
+                    : ''
+                  : props.cross
+                    ? `calc(${rotatedImageOffset} + ${
+                      props.width / 2
+                    }px) calc(${rotatedImageOffset} + ${
+                      props.height / 2
+                    }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                    : rotatedImageOffset,
+              backgroundImage: props.cross
+                ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
+                : `url(${base64UrlRef.value})`
+            }
+          })}
         />
       )
       if (props.fullscreen && !globalRotate) return watermarkNode
