@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-watermark` add `node-props` prop，closes [#5726](https://github.com/tusen-ai/naive-ui/issues/5726).
+
 ## 2.38.1
 
 `2024-02-26`
@@ -15,7 +21,7 @@
 
 ### Features
 
-- `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+- `n-date-picker` adds `default-calendar-start-time` prop when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
 - `n-tree-select` adds `get-children` prop.
 
 ## 2.38.0

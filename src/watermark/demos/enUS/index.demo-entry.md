@@ -21,7 +21,7 @@ image.vue
 | debug | `boolean` | `false` | Whether to show debug grid. | 2.25.3 |
 | font-size | `number` | `14` | Font size. | 2.25.3 |
 | font-family | `string` | `undefined` | Font family. | 2.25.3 |
-| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | Font style. | 2.25.3 |
+| font-style | ``'normal' \| 'italic' \| `oblique ${number}deg` `` | `normal` | Font style. | 2.25.3 |
 | font-variant | `string` | `''` | Font variant. | 2.25.3 |
 | font-weight | `number` | `400` | Font weight. | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | 2.25.3 |
@@ -33,6 +33,7 @@ image.vue
 | image-height | `number` | `undefined` | Image height. | 2.25.3 |
 | image-opacity | `number` | `1` | Image opacity. | 2.25.3 |
 | image-width | `number` | `undefined` | Image width. | 2.25.3 |
+| node-props | `HTMLAttributes` | `undefined` | HTML attributes of watermark element. | NEXT_VERSION |
 | rotate | `number` | `0` | Rotate degree | 2.25.3 |
 | selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | 2.25.3 |
 | width | `number` | `32` | Width of watermark area. | 2.25.3 |

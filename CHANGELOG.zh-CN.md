@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-watermark` 新增 `node-props` 属性，关闭 [#5726](https://github.com/tusen-ai/naive-ui/issues/5726)
+
 ## 2.38.1
 
 `2024-02-26`
