@@ -1,5 +1,5 @@
 <markdown>
-  # Tooltip
+# Tooltip
 </markdown>
 
 <template>
@@ -11,7 +11,7 @@
         </n-icon>
       </n-float-button>
     </template>
-    This story is not over.
+    Lpsum
   </n-tooltip>
 </template>
 

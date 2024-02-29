@@ -6,7 +6,7 @@ Show description on float button.
 
 <template>
   <div style="height: 120px; transform: translate(0)">
-    <n-float-button style="border-radius: 6px">
+    <n-float-button shape="square">
       <n-icon>
         <document-icon />
       </n-icon>
@@ -14,12 +14,12 @@ Show description on float button.
         Docs
       </template>
     </n-float-button>
-    <n-float-button :left="60" style="border-radius: 6px">
+    <n-float-button :left="60" shape="square">
       <template #description>
         Docs
       </template>
     </n-float-button>
-    <n-float-button :left="120" style="border-radius: 6px">
+    <n-float-button :left="120" shape="square">
       <n-icon>
         <document-icon />
       </n-icon>

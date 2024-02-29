@@ -1,16 +1,35 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.1
+
+`2024-02-26`
+
+### Fixes
+
+- Fix `n-split`'s `min` attribute does not take effect.
+- Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-tabs` whose `type` is `'segment'` has capsule with wrong width and position after resize, closes [#5705](https://github.com/tusen-ai/naive-ui/issues/5705).
+- Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
+- Fix `n-split` doesn't work with `inline-theme-disabled` prop.
+- Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
+
+### Features
+
+- `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+- `n-tree-select` adds `get-children` prop.
+
+## 2.38.0
+
+`2024-02-22`
 
 ### Breaking Changes
 
-- Fix `n-scrollbar`'s `scrollTo (x: number, y: number)` error where the order of method parameters does not match the document.
+- Fix `n-scrollbar`'s `scrollTo(x: number, y: number)` error where the order of method parameters does not match the document.
 
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.
 - Fix `n-scrollbar`'s typo on `aria-hidden` attribute.
-- Fix overflow issue with `n-menu` `root-indent` `indent`, closes (#5616)
 - Fix `n-form-item`'s feedback may hide and show again, closes [#5583](https://github.com/tusen-ai/naive-ui/issues/5583).
 - Fix `n-popselect`'s header make inner input unavailable, closes [#5494](https://github.com/tusen-ai/naive-ui/pull/5494).
 - Fix `n-qr-code`'s style of size.
@@ -18,6 +37,9 @@
 
 ### Features
 
+- 🌟 Adds `n-modal-provider` component and `useModal` method.
+- 🌟 Adds `n-float-button` and `n-float-button-group` component.
+- 🌟 Provides ES module bundle at `/dist/index.mjs` and `/dist/index.prod.mjs`.
 - `n-auto-complete` adds `append` prop.
 - `n-select` add native `title` attribute when `filterable` and blur input.
 - `n-split` adds `size` prop and `on-update:size` prop.

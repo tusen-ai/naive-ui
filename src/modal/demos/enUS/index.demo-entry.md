@@ -33,20 +33,20 @@ transform-origin.vue
 
 ### ModalProvider Props
 
-Provided since NEXT_VERSION.
+Provided since `2.38.0`.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| to | `string \| HTMLElement` | `body` | Container node of the modal content. | NEXT_VERSION |
+| to | `string \| HTMLElement` | `body` | Container node of the modal content. | 2.38.0 |
 
 ### useModal API
 
-Provided since NEXT_VERSION.
+Provided since `2.38.0`.
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| create | `(options: ModalOptions) => ModalReactive` | Create a modal. | NEXT_VERSION |
-| destroyAll | `() => void` | Destroy all modals. | NEXT_VERSION |
+| create | `(options: ModalOptions) => ModalReactive` | Create a modal. | 2.38.0 |
+| destroyAll | `() => void` | Destroy all modals. | 2.38.0 |
 
 `ModalOptions` and `ModalReactive`'s properties are the same as `ModalProps` (properties should use camelCase, for example `auto-focus` property should use `autoFocus` as option property).
 
@@ -73,11 +73,11 @@ Provided since NEXT_VERSION.
 
 ### ModalProvider Props
 
-Provided since NEXT_VERSION.
+Provided since 2.38.0.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| to | `string \| HTMLElement` | `body` | Container node of the modal content. | NEXT_VERSION |
+| to | `string \| HTMLElement` | `body` | Container node of the modal content. | 2.38.0 |
 
 ### Modal with Preset Card Props
 

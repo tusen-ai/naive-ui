@@ -22,7 +22,7 @@ import {
   call
 } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme } from '../../_mixins'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import { type FloatButtonTheme, floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 import { NBaseIcon } from '../../_internal'
@@ -80,7 +80,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const floatButtonGroupInjection = inject(floatButtonGroupInjectionKey)
+    const floatButtonGroupInjection = inject(floatButtonGroupInjectionKey, null)
 
     const uncontrolledShowMenuRef = ref(false)
     const controlledShoeMenuRef = toRef(props, 'showMenu')
@@ -100,7 +100,7 @@ export default defineComponent({
       }
     }
 
-    const cssVarsRef = computed(() => {
+    const cssVarsRef = computed<Record<string, string>>(() => {
       const {
         self: {
           color,
@@ -111,11 +111,14 @@ export default defineComponent({
           colorHover,
           colorPrimary,
           colorPrimaryHover,
-          textColorPrimary
+          textColorPrimary,
+          borderRadiusSquare,
+          colorPressed,
+          colorPrimaryPressed
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
-      const { width, height, type } = props
+      const { type } = props
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-box-shadow': boxShadow,
@@ -124,6 +127,14 @@ export default defineComponent({
         '--n-color': type === 'primary' ? colorPrimary : color,
         '--n-text-color': type === 'primary' ? textColorPrimary : textColor,
         '--n-color-hover': type === 'primary' ? colorPrimaryHover : colorHover,
+        '--n-color-pressed':
+          type === 'primary' ? colorPrimaryPressed : colorPressed,
+        '--n-border-radius-square': borderRadiusSquare
+      }
+    })
+    const inlineStyle = computed<CSSProperties>(() => {
+      const { width, height } = props
+      return {
         position: floatButtonGroupInjection ? undefined : props.position,
         width: formatLength(width),
         minHeight: formatLength(height),
@@ -151,7 +162,7 @@ export default defineComponent({
     }
 
     const handleMouseleave = (): void => {
-      if (props.menuTrigger === 'hover') {
+      if (props.menuTrigger === 'hover' && mergedShowMenuRef.value) {
         doUpdateShowMenu(false)
       }
     }
@@ -162,11 +173,23 @@ export default defineComponent({
       }
     }
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+        'float-button',
+        computed(() => props.type[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
+
     return {
+      inlineStyle,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
       mergedShowMenu: mergedShowMenuRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       Mouseenter,
       handleMouseleave,
       handleClick
@@ -181,26 +204,29 @@ export default defineComponent({
       type,
       menuTrigger,
       mergedShowMenu,
-      $slots
+      themeClass,
+      $slots,
+      inlineStyle,
+      onRender
     } = this
-    const dirs: DirectiveArguments = []
-    if (menuTrigger === 'hover' && mergedShowMenu) {
-      dirs.push([mousemoveoutside, this.handleMouseleave])
-    }
+    const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
+    onRender?.()
     return withDirectives(
       <div
         class={[
           `${mergedClsPrefix}-float-button`,
           `${mergedClsPrefix}-float-button--${mergedShape}-shape`,
           `${mergedClsPrefix}-float-button--${type}-type`,
-          mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`
+          mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`,
+          themeClass
         ]}
-        style={cssVars as CSSProperties}
+        style={[cssVars as CSSProperties, inlineStyle]}
         onMouseenter={this.Mouseenter}
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}
+        role="button"
       >
-        <div class={`${mergedClsPrefix}-float-button__hover-background`}></div>
+        <div class={`${mergedClsPrefix}-float-button__fill`} aria-hidden></div>
         <div class={`${mergedClsPrefix}-float-button__body`}>
           {$slots.default?.()}
           {resolveWrappedSlot($slots.description, (children) => {
@@ -217,7 +243,7 @@ export default defineComponent({
         {menuTrigger ? (
           <div class={`${mergedClsPrefix}-float-button__close`}>
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              <CloseIcon />
+              {{ default: () => <CloseIcon /> }}
             </NBaseIcon>
           </div>
         ) : null}

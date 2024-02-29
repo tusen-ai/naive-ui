@@ -8,6 +8,8 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-color
 // --n-text-color
 // --n-color-hover
+// --n-color-pressed
+// --n-border-radius-square
 export default cB('float-button', `
   user-select: none;
   cursor: pointer;
@@ -28,9 +30,9 @@ export default cB('float-button', `
     border-radius: 4096px;
   `),
   cM('square-shape', `
-    border-radius: 4px;
+    border-radius: var(--n-border-radius-square);
   `),
-  cE('hover-background', `
+  cE('fill', `
     position: absolute;
     inset: 0;
     transition: background-color .3s var(--n-bezier);
@@ -58,12 +60,18 @@ export default cB('float-button', `
   ]),
   c('&:hover', 'box-shadow: var(--n-box-shadow-hover);', [
     c('>', [
-      cE('hover-background', `
+      cE('fill', `
         background-color: var(--n-color-hover);
       `)
     ])
   ]),
-  c('&:active', 'box-shadow: var(--n-box-shadow-pressed);'),
+  c('&:active', 'box-shadow: var(--n-box-shadow-pressed);', [
+    c('>', [
+      cE('fill', `
+        background-color: var(--n-color-pressed);
+      `)
+    ])
+  ]),
   cM('show-menu', [
     c('>', [
       cE('menu', `

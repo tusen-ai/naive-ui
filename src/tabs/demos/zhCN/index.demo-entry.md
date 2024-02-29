@@ -32,6 +32,7 @@ addable-debug.vue
 animation-debug.vue
 animationx-debug.vue
 none-debug.vue
+modal-debug.vue
 ```
 
 ## API

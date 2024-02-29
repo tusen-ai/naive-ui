@@ -8,7 +8,12 @@ import {
   type Ref,
   toRef
 } from 'vue'
-import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import {
   createInjectionKey,
   formatLength,
@@ -59,9 +64,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const cssVarsRef = computed(() => {
+    const cssVarsRef = computed<Record<string, string>>(() => {
       const {
-        self: { color, boxShadow, buttonBorderColor },
+        self: { color, boxShadow, buttonBorderColor, borderRadiusSquare },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
@@ -69,11 +74,12 @@ export default defineComponent({
         '--n-box-shadow': boxShadow,
         '--n-color': color,
         '--n-button-border-color': buttonBorderColor,
+        '--n-border-radius-square': borderRadiusSquare,
         position: props.position,
-        left: formatLength(props.left),
-        right: formatLength(props.right),
-        top: formatLength(props.top),
-        bottom: formatLength(props.bottom)
+        left: formatLength(props.left) || '',
+        right: formatLength(props.right) || '',
+        top: formatLength(props.top) || '',
+        bottom: formatLength(props.bottom) || ''
       }
     })
 
@@ -81,9 +87,15 @@ export default defineComponent({
       shapeRef: toRef(props, 'shape')
     })
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      : undefined
+
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
