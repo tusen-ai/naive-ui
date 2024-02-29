@@ -41,7 +41,7 @@ resizable.vue
 | min-height | `number` | `undefined` | Max height of draggable drawer. | 2.35.0 |
 | placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
 | resizable | `boolean` | `false` | Whether to resize the width / height of drawer. | 2.31.0 |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
 | show | `boolean` | `false` | Whether to show drawer. |  |
 | show-mask | `boolean` | `true` | Whether to show mask. If set to `'transparent'`, transparent mask would be shown. If set to false, `trap-focus` will be disabled. | 2.28.3 |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |
@@ -71,7 +71,7 @@ resizable.vue
 | header-style | `string \| Object` | `undefined` | Drawer content's header style. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |  |
 | title | `string` | `undefined` | Drawer content title. |  |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 
 ### Drawer Slots
 
