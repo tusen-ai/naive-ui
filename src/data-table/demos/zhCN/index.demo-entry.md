@@ -10,7 +10,7 @@
       传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
     </li>
     <li>
-      在非异步状况下，页面的数量是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望这么做，那么需要设定 `remote` 属性。
+      在非异步状况下，总页数 <n-text code>page-count</n-text> 是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望指定总页数，需要设定 <n-text code>remote</n-text> 属性。
     </li>
     <li>
     如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
