@@ -12,6 +12,7 @@
 - 修复 `n-tabs` 在 `n-modal` 内部时，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5569](https://github.com/tusen-ai/naive-ui/issues/5569)
 - 修复 `n-split` 不支持 `inline-theme-disabled` 属性
 - 修复 `n-float-button` 不支持 `inline-theme-disabled` 属性
+- 修复 `n-tabs` 在 `type` 为 `'segment'` 时候，胶囊样式存在问题， 关闭 [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
 
 ### Features
 
