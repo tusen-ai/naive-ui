@@ -90,7 +90,7 @@ export const NDialogProvider = defineComponent({
         ...options,
         key,
         destroy: () => {
-          dialogInstRefs[`n-dialog-${key}`].hide()
+          dialogInstRefs[`n-dialog-${key}`]?.hide()
         }
       })
       dialogListRef.value.push(dialogReactive)
