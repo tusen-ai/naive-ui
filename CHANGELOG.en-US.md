@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
+
 ## 2.38.1
 
 `2024-02-26`
