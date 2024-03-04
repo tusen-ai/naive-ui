@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 get\*String() 方法中 UTC/区域设置不匹配的问题
+
 ## 2.38.1
 
 `2024-02-26`

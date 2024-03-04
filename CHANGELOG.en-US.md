@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix the get\*String() methods for UTC/locale mismatch
+
 ## 2.38.1
 
 `2024-02-26`
