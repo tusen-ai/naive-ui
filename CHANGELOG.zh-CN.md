@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- 修复 get\*String() 方法中 UTC/区域设置不匹配的问题
+- 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
 
 ## 2.38.1
 
