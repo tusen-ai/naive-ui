@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix the get\*String() methods for UTC/locale mismatch
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702)
 
 ## 2.38.1
 
