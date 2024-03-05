@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
+
 ## 2.38.1
 
 `2024-02-26`

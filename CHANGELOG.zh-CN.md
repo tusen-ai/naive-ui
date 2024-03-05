@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
+
 ## 2.38.1
 
 `2024-02-26`
