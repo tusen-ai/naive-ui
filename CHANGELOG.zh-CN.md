@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-dialog` 关闭 `dialog` 时，实例可能不存在，关闭 [#5750](https://github.com/tusen-ai/naive-ui/issues/5750)
+
 ## 2.38.1
 
 `2024-02-26`

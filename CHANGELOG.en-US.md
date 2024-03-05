@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-dialog` When you close dialog, the instance may not exist, closes [#5750](https://github.com/tusen-ai/naive-ui/issues/5750)
+
 ## 2.38.1
 
 `2024-02-26`
