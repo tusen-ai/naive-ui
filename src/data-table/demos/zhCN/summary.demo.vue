@@ -36,6 +36,30 @@ const createColumns = (): DataTableColumns<RowData> => {
       title: 'Address',
       key: 'address'
     }
+        {
+      title: 'Name',
+      key: 'name'
+    },
+    {
+      title: 'Age',
+      key: 'age'
+    },
+    {
+      title: 'Address',
+      key: 'address'
+    }
+      {
+      title: 'Name',
+      key: 'name'
+    },
+    {
+      title: 'Age',
+      key: 'age'
+    },
+    {
+      title: 'Address',
+      key: 'address'
+    }
   ]
 }
 
