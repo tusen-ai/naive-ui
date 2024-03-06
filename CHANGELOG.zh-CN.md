@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
+
 ## 2.38.1
 
 `2024-02-26`
