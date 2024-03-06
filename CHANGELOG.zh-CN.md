@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
+
+### Features
+
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
+
 ## 2.38.1
 
 `2024-02-26`
