@@ -193,7 +193,8 @@ export default defineComponent({
     } = useScroll(props, {
       bodyWidthRef,
       mainTableInstRef,
-      mergedCurrentPageRef
+      mergedCurrentPageRef,
+      getResizableWidth
     })
     const { localeRef } = useLocale('DataTable')
     const mergedTableLayoutRef = computed(() => {

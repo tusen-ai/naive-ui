@@ -14,11 +14,13 @@ export function useScroll(
   {
     mainTableInstRef,
     mergedCurrentPageRef,
-    bodyWidthRef
+    bodyWidthRef,
+    getResizableWidth
   }: {
     bodyWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
+    getResizableWidth: (key: ColumnKey) => number | undefined
   }
 ) {
   let lastScrollLeft = 0
@@ -45,13 +47,20 @@ export function useScroll(
     function traverse(cols: TableColumn[]): void {
       cols.forEach((col) => {
         const positionInfo = { start: left, end: 0 }
-        columns[getColKey(col)] = positionInfo
+        const key = getColKey(col)
+        columns[key] = positionInfo
         if ('children' in col) {
           traverse(col.children)
           positionInfo.end = left
         }
         else {
-          left += getNumberColWidth(col) || 0
+          const resizeWidth = getResizableWidth(key)
+          if (resizeWidth) {
+            left += resizeWidth
+          }
+          else {
+            left += getNumberColWidth(col) || 0
+          }
           positionInfo.end = left
         }
       })
@@ -69,13 +78,20 @@ export function useScroll(
       for (let i = cols.length - 1; i >= 0; --i) {
         const col = cols[i]
         const positionInfo = { start: right, end: 0 }
-        columns[getColKey(col)] = positionInfo
+        const key = getColKey(col)
+        columns[key] = positionInfo
         if ('children' in col) {
           traverse(col.children)
           positionInfo.end = right
         }
         else {
-          right += getNumberColWidth(col) || 0
+          const resizeWidth = getResizableWidth(key)
+          if (resizeWidth) {
+            right += resizeWidth
+          }
+          else {
+            right += getNumberColWidth(col) || 0
+          }
           positionInfo.end = right
         }
       }
