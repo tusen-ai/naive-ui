@@ -6,10 +6,11 @@
 
 <template>
   <n-data-table
+    :row-key="(d) => d.no"
     :columns="columns"
     :data="data"
     :pagination="pagination"
-    :bordered="false"
+    :scroll-x="1800"
   />
 </template>
 
@@ -21,9 +22,9 @@ import type { DataTableColumns } from 'naive-ui'
 type Song = {
   no: number
   title: string
+  band: string
   length: string
 }
-
 const createColumns = ({
   play
 }: {
@@ -31,25 +32,40 @@ const createColumns = ({
 }): DataTableColumns<Song> => {
   return [
     {
+      type: 'selection',
+      fixed: 'left'
+    },
+    {
       title: 'No',
       key: 'no',
-      width: 50
+      width: 100,
+      fixed: 'left',
+      resizable: true
     },
     {
       title: 'Title',
       key: 'title',
+      width: 200,
+      fixed: 'left',
       resizable: true
     },
     {
       title: 'Length (minWidth: 100, maxWidth: 500)',
-      key: 'length',
-      resizable: true,
-      minWidth: 100,
-      maxWidth: 500
+      key: 'length'
+    },
+    {
+      title: 'Band',
+      key: 'band',
+      width: 100,
+      fixed: 'right',
+      resizable: true
     },
     {
       title: 'Action',
       key: 'actions',
+      fixed: 'right',
+      width: 100,
+      resizable: true,
       render (row) {
         return h(
           NButton,
@@ -67,9 +83,24 @@ const createColumns = ({
 }
 
 const data: Song[] = [
-  { no: 3, title: 'Wonderwall', length: '4:18' },
-  { no: 4, title: "Don't Look Back in Anger", length: '4:48' },
-  { no: 12, title: 'Champagne Supernova', length: '7:27' }
+  {
+    no: 3,
+    title: 'Wonderwall',
+    band: 'Oasis',
+    length: '4:18'
+  },
+  {
+    no: 4,
+    title: "Don't Look Back in Anger",
+    band: 'Oasis',
+    length: '4:48'
+  },
+  {
+    no: 12,
+    title: 'Champagne Supernova',
+    band: 'Oasis',
+    length: '7:27'
+  }
 ]
 
 export default defineComponent({
