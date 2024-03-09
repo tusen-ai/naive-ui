@@ -78,6 +78,7 @@ export const formItemProps = {
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
+  desc: String,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -442,8 +443,10 @@ export default defineComponent({
           feedbackTextColorError,
           feedbackPadding,
           labelFontWeight,
+          descTextColor,
           [createKey('labelHeight', size)]: labelHeight,
           [createKey('blankHeight', size)]: blankHeight,
+          [createKey('descFontSize', size)]: descFontSize,
           [createKey('feedbackFontSize', size)]: feedbackFontSize,
           [createKey('feedbackHeight', size)]: feedbackHeight,
           [createKey('labelPadding', direction)]: labelPadding,
@@ -475,7 +478,9 @@ export default defineComponent({
         '--n-feedback-height': feedbackHeight,
         '--n-feedback-text-color': feedbackTextColor,
         '--n-feedback-text-color-warning': feedbackTextColorWarning,
-        '--n-feedback-text-color-error': feedbackTextColorError
+        '--n-feedback-text-color-error': feedbackTextColorError,
+        '--n-desc-text-color': descTextColor,
+        '--n-desc-font-size': descFontSize
       }
       return cssVars
     })
@@ -665,6 +670,17 @@ export default defineComponent({
                 }
               }}
             </Transition>
+          </div>
+        ) : null}
+        {this.desc || this.$slots.desc ? (
+          <div class={`${mergedClsPrefix}-form-item-desc`}>
+            {{
+              default: () => {
+                return resolveWrappedSlot(this.$slots.desc, (children) => {
+                  return children || this.desc
+                })
+              }
+            }}
           </div>
         ) : null}
       </div>

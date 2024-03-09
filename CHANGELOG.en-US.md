@@ -4,6 +4,10 @@
 
 `2024-02-26`
 
+### Features
+
+- `n-form-item` adds `desc` prop and `desc` slot, closes [#2927](https://github.com/tusen-ai/naive-ui/issues/2927).
+
 ### Fixes
 
 - Fix `n-split`'s `min` attribute does not take effect.

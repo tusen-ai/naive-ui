@@ -5,21 +5,31 @@ An example of an inline form.
 </markdown>
 
 <template>
-  <n-radio-group
-    v-model:value="size"
-    name="left-size"
-    style="margin-bottom: 12px"
-  >
-    <n-radio-button value="small">
-      Small
-    </n-radio-button>
-    <n-radio-button value="medium">
-      Medium
-    </n-radio-button>
-    <n-radio-button value="large">
-      Large
-    </n-radio-button>
-  </n-radio-group>
+  <n-flex vertical align="start">
+    <n-radio-group
+      v-model:value="size"
+      name="left-size"
+      style="margin-bottom: 12px"
+    >
+      <n-radio-button value="small">
+        小
+      </n-radio-button>
+      <n-radio-button value="medium">
+        中
+      </n-radio-button>
+      <n-radio-button value="large">
+        大
+      </n-radio-button>
+    </n-radio-group>
+    <n-switch v-model:value="showFeedback">
+      <template #checked>
+        Show Feedback
+      </template>
+      <template #unchecked>
+        Close Feedback
+      </template>
+    </n-switch>
+  </n-flex>
   <n-form
     ref="formRef"
     inline
@@ -30,8 +40,11 @@ An example of an inline form.
   >
     <n-form-item label="Name" path="user.name">
       <n-input v-model:value="formValue.user.name" placeholder="Input Name" />
+      <template #desc>
+        I am allready forgot your name
+      </template>
     </n-form-item>
-    <n-form-item label="Age" path="user.age">
+    <n-form-item label="Age" path="user.age" desc="also forgot your age">
       <n-input v-model:value="formValue.user.age" placeholder="Input Age" />
     </n-form-item>
     <n-form-item label="Phone" path="phone">
@@ -55,8 +68,10 @@ import { FormInst, useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const formRef = ref<FormInst | null>(null)
+    const showFeedbackRef = ref(true)
     const message = useMessage()
     return {
+      showFeedback: showFeedbackRef,
       formRef,
       size: ref<'small' | 'medium' | 'large'>('medium'),
       formValue: ref({

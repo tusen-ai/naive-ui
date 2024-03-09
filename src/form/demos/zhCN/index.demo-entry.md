@@ -66,6 +66,7 @@ dynamic.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| desc | `string` | `undefined` | 描述信息 | NEXT_VERSION |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
 | ignore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |  |
@@ -117,7 +118,8 @@ dynamic.vue
 
 ### FormItem, FormItemGi Slots
 
-| 名称     | 参数 | 说明           | 版本   |
-| -------- | ---- | -------------- | ------ |
-| feedback | `()` | 表项的反馈信息 | 2.24.0 |
-| label    | `()` | 标签内容       |        |
+| 名称     | 参数 | 说明           | 版本         |
+| -------- | ---- | -------------- | ------------ |
+| desc     | `()` | 描述信息       | NEXT_VERSION |
+| feedback | `()` | 表项的反馈信息 | 2.24.0       |
+| label    | `()` | 标签内容       |              |
