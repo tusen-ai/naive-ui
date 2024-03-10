@@ -131,8 +131,7 @@ export const NModalProvider = defineComponent({
       this.modalList.map((modal) =>
         h(
           NModalEnvironment,
-          omit(modal, ['destroy', 'style'], {
-            internalStyle: modal.style,
+          omit(modal, ['destroy'], {
             to: modal.to ?? this.to,
             ref: ((inst: ModalInst | null) => {
               if (inst === null) {

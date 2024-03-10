@@ -5,6 +5,13 @@
 ### Fixes
 
 - Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
+- Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
+
+### Features
+
+- `n-qr-code` adds `type` prop, Customize rendering output by setting `type`, providing two options: `canvas` and `svg`.
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
 
 ## 2.38.1
 
