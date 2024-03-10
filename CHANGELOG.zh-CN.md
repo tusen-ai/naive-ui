@@ -13,6 +13,7 @@
 - `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
 - `n-card` 的 `title` 属性支持 render 函数
 - `n-upload` 导出 `on-remove` 方法的 `index` 属性，关闭 [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
+- `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
 
 ## 2.38.1
 
