@@ -28,6 +28,7 @@
 - `n-slider` aria support
 - `n-date-picker` adds `time-format` prop.
 - `n-form-item` add `feedback-vertical` prop and `feedback-crosswise` prop
+- `n-split` supports setting the pixel value size.
 
 ## 2.38.1
 
@@ -46,7 +47,6 @@
 
 - `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
 - `n-tree-select` adds `get-children` prop.
-- `n-split` supports setting the pixel value size.
 
 ## 2.38.0
 

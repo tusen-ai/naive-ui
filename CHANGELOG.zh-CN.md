@@ -28,6 +28,7 @@
 - `n-slider` aria support
 - `n-date-picker` 新增 `time-format` 属性
 - `n-form-item` 新增 `feedback-vertical` 和 `feedback-crosswise` 属性
+- `n-split` 支持设置像素值大小
 
 ## 2.38.1
 
@@ -46,7 +47,6 @@
 
 - `n-date-picker` 在 `type` 为 `'date'`、`'datetime'` 或 `'week'` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
 - `n-tree-select` 新增 `get-children` 属性
-- `n-split` 支持设置像素值大小
 
 ## 2.38.0
 
