@@ -178,6 +178,7 @@
 - `n-tree-select` adds `override-default-node-click-behavior` prop.
 - Adds `n-flex` component.
 - `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
+- Adds `n-infinite-scroll` component.
 
 ## 2.36.0
 
