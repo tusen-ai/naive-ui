@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add csCZ locale.
+
 ### Fixes
 
 - Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)

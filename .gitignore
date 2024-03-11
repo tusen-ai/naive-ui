@@ -12,6 +12,7 @@ yarn.lock
 .DS_Store
 .vscode
 .idea
+.pulsar
 *.swp
 *.tgz
 coverage
