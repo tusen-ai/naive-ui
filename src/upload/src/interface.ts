@@ -44,6 +44,7 @@ export type OnFinish = ({
 export type OnRemove = (data: {
   file: SettledFileInfo
   fileList: SettledFileInfo[]
+  index: number
 }) => Promise<boolean> | boolean | any
 
 export type OnDownload = (
