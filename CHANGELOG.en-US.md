@@ -29,6 +29,7 @@
 - `n-date-picker` adds `time-format` prop.
 - `n-form-item` add `feedback-vertical` prop and `feedback-crosswise` prop
 - `n-split` supports setting the pixel value size.
+- `n-scrollbar` adds `content-style` and `content-class` props, closes [#4497](https://github.com/tusen-ai/naive-ui/issues/4497).
 
 ## 2.38.1
 
