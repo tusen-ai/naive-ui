@@ -61,7 +61,7 @@ infer V
   : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
+ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
 
 export function createTheme<N extends string, T, R> (
   theme: Theme<N, T, R>

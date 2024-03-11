@@ -36,6 +36,7 @@
 - Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
 - Fix `n-split` doesn't work with `inline-theme-disabled` prop.
 - Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
+- Fix the `common` type error in the `theme-overrides` prop when modifying components' themes.
 
 ### Features
 
