@@ -183,7 +183,7 @@ export default defineComponent({
     }
 
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      ? useThemeClass('split', undefined, cssVarsRef, props)
       : undefined
 
     return {
