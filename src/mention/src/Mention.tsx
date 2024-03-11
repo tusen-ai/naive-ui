@@ -51,6 +51,21 @@ export const mentionProps = {
     type: Array as PropType<MentionOption[]>,
     default: []
   },
+  filter: {
+    type: Function as PropType<
+    (pattern: string, option: MentionOption) => boolean
+    >,
+    default: (pattern: string, option: MentionOption) => {
+      if (!pattern) return true
+      if (typeof option.label === 'string') {
+        return option.label.startsWith(pattern)
+      }
+      if (typeof option.value === 'string') {
+        return option.value.startsWith(pattern)
+      }
+      return false
+    }
+  },
   type: {
     type: String as PropType<'text' | 'textarea'>,
     default: 'text'
@@ -147,16 +162,7 @@ export default defineComponent({
     let cachedPartialPatternEnd: number | null = null
     const filteredOptionsRef = computed(() => {
       const { value: pattern } = partialPatternRef
-      return props.options.filter((option) => {
-        if (!pattern) return true
-        if (typeof option.label === 'string') {
-          return option.label.startsWith(pattern)
-        }
-        if (typeof option.value === 'string') {
-          return option.value.startsWith(pattern)
-        }
-        return false
-      })
+      return props.options.filter((option) => props.filter(pattern, option))
     })
     const treeMateRef = computed(() => {
       return createTreeMate<

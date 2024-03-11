@@ -24,6 +24,7 @@
 - `n-upload` export the `index` prop of on-remove function, closes [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
 - `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
 - `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
+- `n-mention` adds `filter` method, closes [#5721](https://github.com/tusen-ai/naive-ui/pull/5721).
 
 ## 2.38.1
 
