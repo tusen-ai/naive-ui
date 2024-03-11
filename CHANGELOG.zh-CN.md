@@ -27,6 +27,7 @@
 - `n-mention` 新增 `filter` 方法，关闭 [#5721](https://github.com/tusen-ai/naive-ui/pull/5721)
 - `n-slider` aria support
 - `n-date-picker` 新增 `time-format` 属性
+- `n-form-item` 新增 `feedback-vertical` 和 `feedback-crosswise` 属性
 
 ## 2.38.1
 

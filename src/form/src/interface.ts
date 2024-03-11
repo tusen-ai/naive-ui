@@ -117,3 +117,7 @@ export interface FormInst {
 export type FormValidationStatus = 'success' | 'error' | 'warning'
 
 export interface FormValidateMessages extends ValidateMessages {}
+type FeedBackPositonCrosswiseKeys = ['left', 'center', 'right']
+export type FeedBackPositonCrosswise = FeedBackPositonCrosswiseKeys[number]
+type FeedBackPositonVerticalKeys = ['top', 'bottom']
+export type FeedBackPositonVertical = FeedBackPositonVerticalKeys[number]

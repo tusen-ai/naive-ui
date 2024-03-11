@@ -27,6 +27,7 @@
 - `n-mention` adds `filter` method, closes [#5721](https://github.com/tusen-ai/naive-ui/pull/5721).
 - `n-slider` aria support
 - `n-date-picker` adds `time-format` prop.
+- `n-form-item` add `feedback-vertical` prop and `feedback-crosswise` prop
 
 ## 2.38.1
 
