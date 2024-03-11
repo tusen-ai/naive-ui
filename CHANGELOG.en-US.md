@@ -2,9 +2,27 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add csCZ locale.
+
 ### Fixes
 
+- Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702)
+- Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
+- Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
 - Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
+
+### Features
+
+- `n-watermark` support multi-lines in content
+- `n-qr-code` adds `type` prop, Customize rendering output by setting `type`, providing two options: `canvas` and `svg`.
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
+- `n-upload` export the `index` prop of on-remove function, closes [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
+- `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
+- `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
 
 ## 2.38.1
 

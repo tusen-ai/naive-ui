@@ -137,9 +137,13 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| action-class | `string` | `undefined` | 操作区域的类名 | NEXT_VERSION |
+| action-style | `Object \| string` | `undefined` | 操作区域的样式 | NEXT_VERSION |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
+| content-class | `string` | `undefined` | 内容的类名 | NEXT_VERSION |
+| content-style | `Object \| string` | `undefined` | 内容的样式 | NEXT_VERSION |
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
@@ -149,6 +153,8 @@ rtl-debug.vue
 | positive-text | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | show-icon | `boolean` | `true` | 是否显示 `icon` |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |  |
+| title-class | `string` | `undefined` | 标题的类名 | NEXT_VERSION |
+| title-style | `Object \| string` | `undefined` | 标题的样式 | NEXT_VERSION |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |  |
 | on-close | `() => void` | `undefined` | 点击关闭时执行的回调函数 |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | 执行 `negative` 时执行的回调函数 |  |
