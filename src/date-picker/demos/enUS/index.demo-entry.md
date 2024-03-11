@@ -53,6 +53,7 @@ panel.vue
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
+| time-format | `string \| undefined` | `undefined` | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
@@ -73,6 +74,7 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `date` type date picker. |  |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
@@ -84,6 +86,7 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
 | default-time | `string` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
@@ -174,6 +177,7 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `week` type date picker. | 2.37.0 |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
 | format | `string` | `'yyyy-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | placeholder | `string` | `'Select Week'` for en-US, Locale specific. | Placeholder. | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.37.0 |

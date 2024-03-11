@@ -12,6 +12,7 @@ const extensions = ['.mjs', '.js', '.json', '.ts']
 
 const baseConfig = defineConfig({
   input: path.resolve('./src/index.ts'),
+  external: ['vue'],
   plugins: [
     nodeResolve({ extensions }),
     esbuild({
@@ -24,8 +25,10 @@ const baseConfig = defineConfig({
       babelHelpers: 'bundled'
     }),
     commonjs()
-  ],
-  external: ['vue'],
+  ]
+})
+
+const umdConfig = defineConfig({
   output: {
     name: 'naive',
     format: 'umd',
@@ -33,6 +36,12 @@ const baseConfig = defineConfig({
     globals: {
       vue: 'Vue'
     }
+  }
+})
+
+const esmConfig = defineConfig({
+  output: {
+    format: 'esm'
   }
 })
 
@@ -45,9 +54,18 @@ const devConfig = defineConfig({
       },
       preventAssignment: true
     })
-  ],
+  ]
+})
+
+const umdDevOutputConfig = defineConfig({
   output: {
     file: path.resolve('dist/index.js')
+  }
+})
+
+const esmDevOutputConfig = defineConfig({
+  output: {
+    file: path.resolve('dist/index.mjs')
   }
 })
 
@@ -61,10 +79,28 @@ const prodConfig = defineConfig({
       preventAssignment: true
     }),
     terser()
-  ],
+  ]
+})
+
+const umdProdOutputConfig = defineConfig({
   output: {
     file: path.resolve('dist/index.prod.js')
   }
 })
 
-module.exports = [merge(baseConfig, devConfig), merge(baseConfig, prodConfig)]
+const esmProdOutputConfig = defineConfig({
+  output: {
+    file: path.resolve('dist/index.prod.mjs')
+  }
+})
+
+module.exports = [
+  // umd dev
+  merge.all([baseConfig, umdConfig, devConfig, umdDevOutputConfig]),
+  // umd prod
+  merge.all([baseConfig, umdConfig, prodConfig, umdProdOutputConfig]),
+  // esm dev
+  merge.all([baseConfig, esmConfig, devConfig, esmDevOutputConfig]),
+  // esm prod
+  merge.all([baseConfig, esmConfig, prodConfig, esmProdOutputConfig])
+]

@@ -22,7 +22,7 @@ append.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| append | `boolean` | `false` | Whether to append content to input. | NEXT_VERSION |
+| append | `boolean` | `false` | Whether to append content to input. | 2.38.0 |
 | blur-after-select | `boolean` | `false` | Whether to blur after selection. |  |
 | clear-after-select | `boolean` | `false` | Whether to clear after selection. |  |
 | clearable | `boolean` | `false` | Whether autocomplete is clearable. |  |

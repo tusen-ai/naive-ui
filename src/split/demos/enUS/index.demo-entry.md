@@ -12,6 +12,7 @@ vertical.vue
 nest.vue
 event.vue
 slot.vue
+controlled.vue
 ```
 
 ## API
@@ -20,15 +21,19 @@ slot.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| default-size | `number` | `0.5` | Default split size, 0-1 is a percentage. | 2.36.0 |
-| size | `number` | `undefined` | Split is the controlled split size, with 0-1 representing the percentage | NEXT_VERSION |
-| disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
+| default-size | `string \| number` | `0.5` | Default split size, 0~1 is a percentage or pixel value. | 2.36.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
-| min | `number` | `0` | The minimum threshold for splitting, 0-1 is a percentage. | 2.36.0 |
-| max | `number` | `1` | The maximum split threshold, 0-1 is a percentage. | 2.36.0 |
+| disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
+| max | `string \| number` | `1` | The maximum split threshold, 0~1 is a percentage or pixel value. | 2.36.0 |
+| min | `string \| number` | `0` | The minimum threshold for splitting, 0~1 is a percentage or pixel value. | 2.36.0 |
+| panel1-class | `string` | `undefined` | The class name of the first panel. | NEXT_VERSION |
+| panel1-style | `Object \| string` | `undefined` | The Style of the first panel | NEXT_VERSION |
+| panel2-class | `string` | `undefined` | The class name of the second panel. | NEXT_VERSION |
+| panel2-style | `Object \| string` | `undefined` | The Style of the second panel | NEXT_VERSION |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
-| watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | NEXT_VERSION |
-| on-update:size | `(value: number) => void` | `undefined` | Callback fired on size changes. | NEXT_VERSION |
+| size | `string \| number` | `undefined` | Split is the controlled split size, with 0~1 representing the percentage or pixel value. | 2.38.0 |
+| watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.38.0 |
+| on-update:size | `(value: string \| number) => void` | `undefined` | Callback fired on `size` changes. | 2.38.0 |
 
 ### Split Slots
 

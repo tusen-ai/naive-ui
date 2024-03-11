@@ -54,6 +54,7 @@ form-debug.vue
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
+| time-format | `string \| undefined` | `undefined` | 设置面板中时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
@@ -74,6 +75,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Date 类型的 Date Picker 中支持的操作 |  |
+| default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择日期'` | 没有值时的占位信息 |  |
@@ -85,6 +87,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | DateTime 类型的 Date Picker 中支持的操作 |  |
+| default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | default-time | `string` | `undefined` | 默认时间，格式为 `HH:mm:ss` | 2.22.0 |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
@@ -174,6 +177,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Week 类型的 Date Picker 中支持的操作 | 2.37.0 |
+| default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | format | `string` | 中文为 `'yyyy-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |

@@ -3,64 +3,59 @@ import {
   type PropType,
   defineComponent,
   computed,
-  type CSSProperties
+  type CSSProperties,
+  provide,
+  type Ref,
+  toRef
 } from 'vue'
-import type { Size } from '../../button/src/interface'
-import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  createInjectionKey,
+  formatLength,
+  type ExtractPublicPropTypes
+} from '../../_utils'
 import style from './styles/index.cssr'
 import floatButtonGroupLight, {
   type FloatButtonGroupTheme
 } from '../styles/light'
 
 export interface ButtonGroupInjection {
-  size?: Size | undefined
+  shapeRef: Ref<'circle' | 'square'>
 }
 
 export const floatButtonGroupProps = {
   ...(useTheme.props as ThemeProps<FloatButtonGroupTheme>),
-  width: {
-    type: [Number, String] as PropType<string | number>,
-    default: 'auto'
+  left: [Number, String] as PropType<string | number>,
+  right: [Number, String] as PropType<string | number>,
+  top: [Number, String] as PropType<string | number>,
+  bottom: [Number, String] as PropType<string | number>,
+  shape: {
+    type: String as PropType<'square' | 'circle'>,
+    default: 'circle'
   },
-  height: {
-    type: [Number, String] as PropType<string | number>,
-    default: 'auto'
-  },
-  left: {
-    type: [Number, String] as PropType<string | number>,
-    default: undefined
-  },
-  right: {
-    type: [Number, String] as PropType<string | number>,
-    default: 40
-  },
-  top: {
-    type: [Number, String] as PropType<string | number>,
-    default: undefined
-  },
-  bottom: {
-    type: [Number, String] as PropType<string | number>,
-    default: 40
-  },
-  radius: {
-    type: [Number, String] as PropType<string | number>,
-    default: 22
-  },
-  backgroundColor: String,
-  vertical: Boolean
+  position: {
+    type: String as PropType<'relative' | 'absolute' | 'fixed'>,
+    default: 'fixed'
+  }
 } as const
 
 export type FloatButtonGroupProps = ExtractPublicPropTypes<
   typeof floatButtonGroupProps
 >
 
+export const floatButtonGroupInjectionKey =
+  createInjectionKey<ButtonGroupInjection>('n-float-button-group')
+
 export default defineComponent({
   name: 'FloatButtonGroup',
   props: floatButtonGroupProps,
   setup (props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
-
     const themeRef = useTheme(
       'FloatButtonGroup',
       '-float-button-group',
@@ -69,50 +64,47 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-
-    const cssVarsRef = computed(() => {
+    const cssVarsRef = computed<Record<string, string>>(() => {
       const {
-        self: { color, textColor, boxShadow, boxShadowHover, boxShadowPressed },
+        self: { color, boxShadow, buttonBorderColor, borderRadiusSquare },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-box-shadow': boxShadow,
-        '--n-box-shadow-hover': boxShadowHover,
-        '--n-box-shadow-pressed': boxShadowPressed,
         '--n-color': color,
-        '--n-text-color': textColor,
-        left: formatNumber(props.left),
-        right: formatNumber(props.right),
-        top: formatNumber(props.top),
-        bottom: formatNumber(props.bottom),
-        width: formatNumber(props.width),
-        height: formatNumber(props.height),
-        borderRadius: formatNumber(props.radius),
-        backgroundColor: props.backgroundColor
+        '--n-button-border-color': buttonBorderColor,
+        '--n-border-radius-square': borderRadiusSquare,
+        position: props.position,
+        left: formatLength(props.left) || '',
+        right: formatLength(props.right) || '',
+        top: formatLength(props.top) || '',
+        bottom: formatLength(props.bottom) || ''
       }
     })
 
-    const formatNumber = (
-      value: number | string | undefined
-    ): string | undefined => {
-      if (typeof value === 'number') return `${value}px`
-      return value
-    }
+    provide(floatButtonGroupInjectionKey, {
+      shapeRef: toRef(props, 'shape')
+    })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      : undefined
 
     return {
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      formatNumber
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render () {
-    const { mergedClsPrefix, cssVars } = this
+    const { mergedClsPrefix, cssVars, shape } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-float-button-group`,
-          this.vertical && `${mergedClsPrefix}-float-button-group--vertical`
+          `${mergedClsPrefix}-float-button-group--${shape}-shape`
         ]}
         style={cssVars as CSSProperties}
         role="group"
