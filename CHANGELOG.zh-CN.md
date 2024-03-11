@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- 修复 `n-menu` 中 Submenu 组件的 wai-aria role 设置错误，关闭 [#5729](https://github.com/tusen-ai/naive-ui/issues/5729)
 - 修复 `n-tabs` type 为 `segment` 时样式存在问题，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
 - 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
 - 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
