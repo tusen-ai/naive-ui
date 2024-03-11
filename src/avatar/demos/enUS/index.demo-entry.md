@@ -26,7 +26,7 @@ v-show-debug.vue
 | bordered | `boolean` | `false` | Whether to display a avatar with border. |  |
 | color | `string` | `undefined` | The background color of the avatar. |  |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |  |
-| img-props | `object` | `undefined` | The props of the img element inside the component. | 2.34.0 |
+| img-props | `ImgHTMLAttributes` | `undefined` | The props of the img element inside the component. | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.31.0 |
 | lazy | `boolean` | `false` | Load image after it enters viewport. When used alone, it will be assigned the property value of [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading). Alternatively, it can be used in conjunction with the `intersection-observer-options` configuration to achieve lazy loading. | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |  |

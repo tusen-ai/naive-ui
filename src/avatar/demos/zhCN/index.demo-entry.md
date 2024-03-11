@@ -28,7 +28,7 @@ rtl-debug.vue
 | bordered | `boolean` | `false` | 头像是否带边框 |  |
 | color | `string` | `undefined` | 头像的背景色 |  |
 | fallback-src | `string` | `undefined` | 头像加载失败时显示的图片的地址 |  |
-| img-props | `object` | `undefined` | 组件中 img 元素的属性 | 2.34.0 |
+| img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.31.0 |
 | lazy | `boolean` | `false` | 是否让图片进入视口再加载，单独使用将设置为[HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) 的属性值；也可配合 `intersection-observer-options` 配置实现懒加载 | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |  |

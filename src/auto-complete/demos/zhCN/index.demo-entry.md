@@ -29,7 +29,7 @@ append.vue
 | default-value | `string` | `null` | 自动填充的默认值 |  |
 | disabled | `boolean` | `false` | 自动填充是否禁用 |  |
 | get-show | `(value: string) => boolean` | `undefined` | 根据输入值在聚焦的状态中决定是否显示菜单 |  |
-| input-props | `HTMLInputAttributes` | `undefined` | 自动填充中 input 元素的属性 |  |
+| input-props | `InputHTMLAttributes` | `undefined` | 自动填充中 input 元素的属性 |  |
 | loading | `boolean` | `false` | 是否展示加载状态 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 | 2.32.2 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |  |
