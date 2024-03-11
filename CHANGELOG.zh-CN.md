@@ -13,6 +13,7 @@
 - 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
 - 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
 - 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
+- 修复组件调整主题时 `theme-overrides` 属性中的 `common` 类型报错
 
 ### Features
 
@@ -36,7 +37,6 @@
 - 修复 `n-tabs` 在 `n-modal` 内部时，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5569](https://github.com/tusen-ai/naive-ui/issues/5569)
 - 修复 `n-split` 不支持 `inline-theme-disabled` 属性
 - 修复 `n-float-button` 不支持 `inline-theme-disabled` 属性
-- 修复组件调整主题时 `theme-overrides` 属性中的 `common` 类型报错
 
 ### Features
 
