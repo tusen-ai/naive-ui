@@ -68,7 +68,7 @@ debug.vue
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
-| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 |  |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` NEXT_VERSION |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 
 #### UploadFileInfo Type
