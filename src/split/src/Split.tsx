@@ -9,13 +9,14 @@ import {
   toRef
 } from 'vue'
 import { off, on } from 'evtd'
+import { useMergedState } from 'vooks'
 import { type ExtractPublicPropTypes, resolveSlot, call } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import style from './styles/index.cssr'
-import { type ThemeProps, useTheme } from '../../_mixins'
 import { type SplitTheme, splitLight } from '../styles'
-import { useMergedState } from 'vooks'
 import { type SplitOnUpdateSize } from './types'
+
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
   direction: {
@@ -46,6 +47,10 @@ export const splitProps = {
     type: [String, Number] as PropType<string | number>,
     default: 1
   },
+  panel1Class: String,
+  panel1Style: [Object, String] as PropType<CSSProperties | string>,
+  panel2Class: String,
+  panel2Style: [Object, String] as PropType<CSSProperties | string>,
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
   onDragEnd: Function as PropType<(e: Event) => void>,
@@ -210,7 +215,13 @@ export default defineComponent({
       doUpdateSize(nextSize, containerSize)
     }
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('split', undefined, cssVarsRef, props)
+      : undefined
+
     return {
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       resizeTriggerElRef,
       isDragging: isDraggingRef,
@@ -222,17 +233,19 @@ export default defineComponent({
     }
   },
   render () {
+    this.onRender?.()
     return (
       <div
         class={[
           `${this.mergedClsPrefix}-split`,
-          `${this.mergedClsPrefix}-split--${this.direction}`
+          `${this.mergedClsPrefix}-split--${this.direction}`,
+          this.themeClass
         ]}
         style={this.cssVars as CSSProperties}
       >
         <div
-          class={`${this.mergedClsPrefix}-split-pane-1`}
-          style={this.firstPaneStyle}
+          class={[`${this.mergedClsPrefix}-split-pane-1`, this.panel1Class]}
+          style={[this.firstPaneStyle, this.panel1Style]}
         >
           {this.$slots[1]?.()}
         </div>
@@ -255,7 +268,10 @@ export default defineComponent({
             ])}
           </div>
         )}
-        <div class={`${this.mergedClsPrefix}-split-pane-2`}>
+        <div
+          class={[`${this.mergedClsPrefix}-split-pane-2`, this.panel2Class]}
+          style={this.panel2Style}
+        >
           {this.$slots[2]?.()}
         </div>
       </div>

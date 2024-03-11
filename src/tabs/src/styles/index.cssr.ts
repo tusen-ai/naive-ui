@@ -96,6 +96,7 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-rail', `
+    position: relative;
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
     width: 100%;
@@ -110,7 +111,7 @@ export default cB('tabs', `
       pointer-events: none;
       background-color: var(--n-tab-color-segment);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
-      transition: 0.3s;
+      transition: transform 0.3s var(--n-bezier);
     `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;
@@ -138,15 +139,16 @@ export default cB('tabs', `
     ])
   ]),
   cM('flex', [
-    cB('tabs-nav', {
-      width: '100%'
-    }, [
-      cB('tabs-wrapper', {
-        width: '100%'
-      }, [
-        cB('tabs-tab', {
-          marginRight: 0
-        })
+    cB('tabs-nav', `
+      width: 100%;
+      position: relative;
+    `, [
+      cB('tabs-wrapper', `
+        width: 100%;
+      `, [
+        cB('tabs-tab', `
+          margin-right: 0;
+        `)
       ])
     ])
   ]),

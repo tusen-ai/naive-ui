@@ -2,14 +2,47 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add csCZ locale.
+
 ### Fixes
 
-- Fix `n-split`'s `min` attribute does not take effect
-- Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702)
+- Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
+- Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
+- Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
+- Fix the `common` type error in the `theme-overrides` prop when modifying components' themes.
 
 ### Features
 
-- `n-date-picker` adds `default-calendar-start-time` props when `type` is `date\datetime\week`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
+- `n-watermark` support multi-lines in content
+- `n-qr-code` adds `type` prop, Customize rendering output by setting `type`, providing two options: `canvas` and `svg`.
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
+- `n-upload` export the `index` prop of on-remove function, closes [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
+- `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
+- `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
+- `n-mention` adds `filter` method, closes [#5721](https://github.com/tusen-ai/naive-ui/pull/5721).
+
+## 2.38.1
+
+`2024-02-26`
+
+### Fixes
+
+- Fix `n-split`'s `min` attribute does not take effect.
+- Fix `n-result` built-in icons not re-rendered after hydration.
+- Fix `n-tabs` whose `type` is `'segment'` has capsule with wrong width and position after resize, closes [#5705](https://github.com/tusen-ai/naive-ui/issues/5705).
+- Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
+- Fix `n-split` doesn't work with `inline-theme-disabled` prop.
+- Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
+- `n-slider` aria support
+
+### Features
+
+- `n-date-picker` adds `default-calendar-start-time` props when `type` is `'date'`/`'datetime'` or `'week'`, closes [#4493](https://github.com/tusen-ai/naive-ui/issues/4493).
 - `n-tree-select` adds `get-children` prop.
 - `n-split` supports setting the pixel value size.
 

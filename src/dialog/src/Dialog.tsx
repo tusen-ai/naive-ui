@@ -205,7 +205,10 @@ export const NDialog = defineComponent({
 
     const actionNode = resolveWrappedSlot(this.$slots.action, (children) =>
       children || positiveText || negativeText || action ? (
-        <div class={`${mergedClsPrefix}-dialog__action`}>
+        <div
+          class={[`${mergedClsPrefix}-dialog__action`, this.actionClass]}
+          style={this.actionStyle}
+        >
           {children ||
             (action
               ? [render(action)]
@@ -278,15 +281,20 @@ export const NDialog = defineComponent({
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}
-        <div class={`${mergedClsPrefix}-dialog__title`}>
+        <div
+          class={[`${mergedClsPrefix}-dialog__title`, this.titleClass]}
+          style={this.titleStyle}
+        >
           {showIcon && mergedIconPlacement === 'left' ? icon : null}
           {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
         <div
           class={[
             `${mergedClsPrefix}-dialog__content`,
-            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`
+            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`,
+            this.contentClass
           ]}
+          style={this.contentStyle}
         >
           {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>

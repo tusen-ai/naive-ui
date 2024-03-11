@@ -2,14 +2,46 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add csCZ locale.
+
 ### Fixes
 
-- 修复 `n-split` 的 `min` 属性未生效
-- Fix `n-result` built-in icons not re-rendered after hydration.
+- 修复 `n-menu` 中 Submenu 组件的 wai-aria role 设置错误，关闭 [#5729](https://github.com/tusen-ai/naive-ui/issues/5729)
+- 修复 `n-tabs` type 为 `segment` 时样式存在问题，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
+- 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
+- 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
+- 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
+- 修复组件调整主题时 `theme-overrides` 属性中的 `common` 类型报错
 
 ### Features
 
-- `n-date-picker` 在 `type` 为 `date\datetime\week` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
+- `n-watermark` 支持多行content
+- `n-qr-code` 新增 `type` 属性，设置 `type` 自定义渲染结果，提供 `canvas` 和 `svg` 两个选项
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
+- `n-upload` 导出 `on-remove` 方法的 `index` 属性，关闭 [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
+- `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
+- `n-split` 新增 `panel1-class` `panel1-style` `panel2-class` `panel2-style` 属性
+- `n-mention` 新增 `filter` 方法，关闭 [#5721](https://github.com/tusen-ai/naive-ui/pull/5721)
+
+## 2.38.1
+
+`2024-02-26`
+
+### Fixes
+
+- 修复 `n-split` 的 `min` 属性未生效
+- 修复 `n-result` 内置的 icon 无法在 hydration 之后重渲染
+- 修复 `n-tabs` 在 `type` 为 `'segment'` 时候，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5705](https://github.com/tusen-ai/naive-ui/issues/5705)
+- 修复 `n-tabs` 在 `n-modal` 内部时，胶囊在 tabs 大小改变后有错误的位置和宽度，关闭 [#5569](https://github.com/tusen-ai/naive-ui/issues/5569)
+- 修复 `n-split` 不支持 `inline-theme-disabled` 属性
+- 修复 `n-float-button` 不支持 `inline-theme-disabled` 属性
+
+### Features
+
+- `n-date-picker` 在 `type` 为 `'date'`、`'datetime'` 或 `'week'` 时新增 `default-calendar-start-time` 属性，关闭 [#4493](https://github.com/tusen-ai/naive-ui/issues/4493)
 - `n-tree-select` 新增 `get-children` 属性
 - `n-split` 支持设置像素值大小
 

@@ -16,6 +16,7 @@ import {
   esAR,
   itIT,
   skSK,
+  csCZ,
   enGB,
   plPL,
   ptBR,
@@ -41,6 +42,7 @@ import {
   dateEsAR,
   dateItIT,
   dateSkSK,
+  dateCsCZ,
   dateEnGB,
   datePlPL,
   datePtBR,
@@ -271,6 +273,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateSkSK,
           locale: skSK
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateCsCZ,
+          locale: csCZ
         }
       }).html()
     ).toMatchSnapshot()
