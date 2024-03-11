@@ -19,7 +19,7 @@ describe('n-input', () => {
     })
     wrapper.find('input').element.value = 'cool'
     await wrapper.find('input').trigger('input')
-    expect(onUpdateValue).toHaveBeenCalledWith('cool')
+    expect(onUpdateValue).toHaveBeenCalledWith('cool', { source: 0 })
     wrapper.unmount()
   })
 

@@ -226,7 +226,7 @@ describe('n-form', () => {
   })
 
   describe('form validation', () => {
-    it('should form validation work with `warningOnly by async/await`', async () => {
+    it("should form validation work with `level: 'warning'` by async/await`", async () => {
       const wrapper = mount(
         defineComponent({
           setup () {
@@ -246,7 +246,7 @@ describe('n-form', () => {
                 rules={{
                   warningOnly: {
                     required: true,
-                    warningOnly: true,
+                    level: 'warning',
                     message: 'warning!'
                   },
                   throwException: {
@@ -323,7 +323,11 @@ describe('n-form', () => {
         .find('input')
         .setValue('value')
 
-      await expect(formRef.validate()).resolves.toBeUndefined()
+      await expect(formRef.validate()).resolves.toMatchObject({
+        warnings: [
+          [{ field: 'warningOnly', fieldValue: '', message: 'warning!' }]
+        ]
+      })
       expect(
         wrapper
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
@@ -342,7 +346,9 @@ describe('n-form', () => {
         .find('input')
         .setValue('value')
 
-      await expect(formRef.validate()).resolves.toBeUndefined()
+      await expect(formRef.validate()).resolves.toMatchObject({
+        warnings: undefined
+      })
       expect(
         wrapper
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
@@ -378,7 +384,7 @@ describe('n-form', () => {
                 rules={{
                   warningOnly: {
                     required: true,
-                    warningOnly: true,
+                    level: 'warning',
                     message: 'warning!'
                   },
                   throwException: {
@@ -448,16 +454,18 @@ describe('n-form', () => {
       async function validate (): Promise<Parameters<FormValidateCallback>> {
         return await new Promise<Parameters<FormValidateCallback>>(
           (resolve) => {
-            void formRef.validate((errs, warnings) => {
-              resolve([errs, warnings])
-            })
+            void formRef
+              .validate((errs, { warnings }) => {
+                resolve([errs, { warnings }])
+              })
+              .catch(() => {})
           }
         )
       }
       // show warning and error feedback, validate method rejected while empty form fields
       expect(await validate()).toMatchObject([
         validationError,
-        validationWarning
+        { warnings: validationWarning }
       ])
 
       expect(
@@ -477,7 +485,10 @@ describe('n-form', () => {
         .setValue('value')
 
       // show warning and error feedback, validate method rejected while empty form fields
-      expect(await validate()).toMatchObject([undefined, validationWarning])
+      expect(await validate()).toMatchObject([
+        undefined,
+        { warnings: validationWarning }
+      ])
       expect(
         wrapper
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
@@ -496,7 +507,10 @@ describe('n-form', () => {
         .find('input')
         .setValue('value')
 
-      expect(await validate()).toMatchObject([undefined, undefined])
+      expect(await validate()).toMatchObject([
+        undefined,
+        { warnings: undefined }
+      ])
 
       expect(
         wrapper

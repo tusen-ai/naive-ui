@@ -15,6 +15,7 @@ customize-icon.vue
 default-expanded.vue
 header-extra.vue
 disabled.vue
+trigger-areas.vue
 rtl-debug.vue
 ```
 
@@ -22,15 +23,16 @@ rtl-debug.vue
 
 ### Collapse Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| accordion | `boolean` | `false` | 是否只允许展开一个面板 |
-| arrow-placement | `'left' \| 'right'` | `'left'` | 箭头位置 |
-| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | 非受控模式下展开的面板 `name`。`accordion` 模式时不为数组 |
-| display-directive | `'if' \| 'show'` | `'if'` | 内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |
-| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | 受控模式下展开的面板的 `name`，`accordion` 模式时不为数组 |
-| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | 展开内容改变时触发的回调函数 |
-| on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | 点击标题时触发的回调函数 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | 是否只允许展开一个面板 |  |
+| arrow-placement | `'left' \| 'right'` | `'left'` | 箭头位置 |  |
+| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | 非受控模式下展开的面板 `name`。`accordion` 模式时不为数组 |  |
+| display-directive | `'if' \| 'show'` | `'if'` | 内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |
+| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | 受控模式下展开的面板的 `name`，`accordion` 模式时不为数组 |  |
+| trigger-areas | `Array<'main' \| 'arrow' \| 'extra'>` | `['main', 'arrow', 'extra']` | 触发展开的区域，如果不想让某些区域触发展开，可以使用此属性 | 2.37.1 |
+| on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | 点击标题时触发的回调函数 |  |
+| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | 展开内容改变时触发的回调函数 |  |
 
 ### CollapseItem Props
 

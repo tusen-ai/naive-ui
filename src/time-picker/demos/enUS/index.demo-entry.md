@@ -25,7 +25,7 @@ timezone.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Operations supported by the Time Picker. | `'clear'` NEXT_VERSION |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Operations supported by the Time Picker. | `'clear'` 2.37.0 |
 | clearable | `boolean` | `false` | Whether the value is clearable. |  |
 | default-value | `number \| null` | `null` | Default value. |  |
 | default-formatted-value | `number \| null` | `undefined` | Default formatted value. | 2.24.0 |

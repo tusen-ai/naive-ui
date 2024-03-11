@@ -25,6 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
+feedback-position.vue
 ```
 
 ## API
@@ -79,6 +80,8 @@ dynamic.vue
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |  |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |  |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |  |
+| feedBack-vertical | `'top' \| 'bottom'` | `bottom` | 反馈校验竖向展示定位 | NEXT_VERSION |
+| feedBack-crosswise | `'left' \| 'center' \| 'right'` | `left` | 反馈校验横向展示定位 | NEXT_VERSION |
 | show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |  |
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填的星号的位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` | `'right-hanging'` 2.24.0 |
@@ -95,17 +98,17 @@ dynamic.vue
   默认情况下，验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么
 </n-alert>
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` |
-| restoreValidation | `() => void` | 还原到未校验的状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | 还原到未校验的状态 |  |
 
 ### FormItem, FormItemGi Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<FormValidationError>`。如果不设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
-| restoreValidation | `() => void` | 还原到未校验的状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | 验证表项，Promise rejection 的返回值类型是 `FormValidationError`。如果不设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | 还原到未校验的状态 |  |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 

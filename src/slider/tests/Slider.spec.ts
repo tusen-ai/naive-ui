@@ -211,4 +211,28 @@ describe('n-slider', () => {
     expect((handle.element as HTMLElement).style.left).toEqual('30%')
     wrapper.unmount()
   })
+
+  it('should have the aria role of "slider"', () => {
+    const wrapper = mount(NSlider)
+    expect(wrapper.find('.n-slider-handle-wrapper').attributes('role')).toBe(
+      'slider'
+    )
+    wrapper.unmount()
+  })
+
+  it('should be some aria properties for "slider"', () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        defaultValue: 50,
+        disabled: true
+      }
+    })
+    const handle = wrapper.find('.n-slider-handle-wrapper')
+    expect(handle.attributes('aria-valuenow')).toBe('50')
+    expect(handle.attributes('aria-valuemin')).toBe('0')
+    expect(handle.attributes('aria-valuemax')).toBe('100')
+    expect(handle.attributes('aria-orientation')).toBe('horizontal')
+    expect(handle.attributes('aria-disabled')).toBe('true')
+    wrapper.unmount()
+  })
 })

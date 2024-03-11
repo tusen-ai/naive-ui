@@ -30,7 +30,7 @@ rtl-debug.vue
 | item-class | `string` | `undefined` | 节点类名，当 `wrap-item` 为 `true` 时有效 | 2.36.0 |
 | item-style | `string \| object` | `undefined` | 节点样式，当 `wrap-item` 为 `true` 时有效 |  |
 | justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between' \| 'space-evenly'` | `'start'` | 水平排列方式 | `'space-evenly'` 2.28.3 |
-| reverse | `boolean` | `false` | 是否反向排列内部元素 | NEXT_VERSION |
+| reverse | `boolean` | `false` | 是否反向排列内部元素 | 2.37.0 |
 | size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 为数字时，是水平和垂直间距；为数组时，是 [水平间距, 垂直间距] |  |
 | vertical | `boolean` | `false` | 是否垂直布局 |  |
 | wrap | `boolean` | `true` | 是否超出换行 |  |

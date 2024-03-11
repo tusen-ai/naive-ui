@@ -670,7 +670,10 @@ export default defineComponent({
         singleInputValueRef.value = v
       }
     }
-    function handleRangeUpdateValue (v: [string, string]): void {
+    function handleRangeUpdateValue (
+      v: [string, string],
+      { source }: { source: 0 | 1 | 'clear' }
+    ): void {
       if (v[0] === '' && v[1] === '') {
         // clear or just delete all the inputs
         doUpdateValue(null, { doConfirm: false })
@@ -693,7 +696,16 @@ export default defineComponent({
         dateFnsOptionsRef.value
       )
       if (isValid(newStartTime) && isValid(newEndTime)) {
-        doUpdateValue([getTime(newStartTime), getTime(newEndTime)], {
+        let newStartTs = getTime(newStartTime)
+        let newEndTs = getTime(newEndTime)
+        if (newEndTime < newStartTime) {
+          if (source === 0) {
+            newEndTs = newStartTs
+          } else {
+            newStartTs = newEndTs
+          }
+        }
+        doUpdateValue([newStartTs, newEndTs], {
           doConfirm: false
         })
         deriveInputState()
@@ -1010,12 +1022,18 @@ export default defineComponent({
       onNextMonth: this.onNextMonth,
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
-      onPrevYear: this.onPrevYear
+      onPrevYear: this.onPrevYear,
+      timeFormat: this.timeFormat
     }
     const renderPanel = (): VNode => {
       const { type } = this
       return type === 'datetime' ? (
-        <DatetimePanel {...commonPanelProps}>{$slots}</DatetimePanel>
+        <DatetimePanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+        >
+          {$slots}
+        </DatetimePanel>
       ) : type === 'daterange' ? (
         <DaterangePanel
           {...commonPanelProps}
@@ -1041,7 +1059,11 @@ export default defineComponent({
         type === 'quarterrange' ? (
         <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel {...commonPanelProps} type={type}>
+        <DatePanel
+          {...commonPanelProps}
+          type={type}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+        >
           {$slots}
         </DatePanel>
           )

@@ -25,6 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
+feedback-position.vue
 ```
 
 ## API
@@ -32,7 +33,7 @@ dynamic.vue
 ### Form Props
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether to disable the form. |  |
 | inline | `boolean` | `false` | Whether to display as an inline form. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |  |
@@ -41,6 +42,8 @@ dynamic.vue
 | model | `Object` | `{}` | The object to get/set form item values. |  |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |  |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
+| feedBack-vertical | `'top' \| 'bottom'` | `bottom` | Feedback check vertical display positioning | NEXT_VERSION |  |
+| feedBack-crosswise | `'left' \| 'center' \| 'right'` | `left` | Feedback check horizontal display positioning | NEXT_VERSION |  |
 | show-label | `boolean` | `true` | Whether to show the label. |  |
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
@@ -102,17 +105,17 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
   By default, validation will use all rules regardless of the triggers of the rules.
 </n-alert>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. |
-| restoreValidation | `() => void` | Restore validate. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | Restore validate. |  |
 
 ### FormItem, FormItemGi Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | Validate the form item. The rejection value type of returned promise is `Array<FormValidationError>`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. |
-| restoreValidation | `() => void` | Restore validate. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | Validate the form item. The rejection value type of returned promise is `FormValidationError`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | Restore validate. |  |
 
 To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 

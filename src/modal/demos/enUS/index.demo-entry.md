@@ -2,10 +2,24 @@
 
 It just pops and shows you something.
 
+<n-alert title="Prerequisite" type="warning" :bordered="false">
+  If you want to create modal using <n-text code>useModal</n-text>, you need to wrap the component where you call related methods inside <n-text code>n-modal-provider</n-text> and use <n-text code>useModal</n-text> to get the API.
+</n-alert>
+
+For example:
+
+```html
+<!-- App.vue -->
+<n-modal-provider>
+  <content />
+</n-modal-provider>
+```
+
 ## Demos
 
 ```demo
 basic.vue
+reactive.vue
 controlled.vue
 mask-closable.vue
 custom-position.vue
@@ -16,6 +30,25 @@ transform-origin.vue
 ```
 
 ## API
+
+### ModalProvider Props
+
+Provided since `2.38.0`.
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| to | `string \| HTMLElement` | `body` | Container node of the modal content. | 2.38.0 |
+
+### useModal API
+
+Provided since `2.38.0`.
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| create | `(options: ModalOptions) => ModalReactive` | Create a modal. | 2.38.0 |
+| destroyAll | `() => void` | Destroy all modals. | 2.38.0 |
+
+`ModalOptions` and `ModalReactive`'s properties are the same as `ModalProps` (properties should use camelCase, for example `auto-focus` property should use `autoFocus` as option property).
 
 ### Modal Props
 
@@ -37,6 +70,14 @@ transform-origin.vue
 | on-esc | `() => void` | `undefined` | Callback fired when the escape key is pressed and focus is within modal. | 2.24.2 |
 | on-mask-click | `() => void` | `undefined` | Callback on mask is clicked. |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |  |
+
+### ModalProvider Props
+
+Provided since 2.38.0.
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| to | `string \| HTMLElement` | `body` | Container node of the modal content. | 2.38.0 |
 
 ### Modal with Preset Card Props
 

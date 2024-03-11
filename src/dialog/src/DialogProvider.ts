@@ -58,7 +58,7 @@ export interface DialogApiInjection {
 
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
-  clickPositionRef: Ref<{ x: number, y: number } | null>
+  clickedPositionRef: Ref<{ x: number, y: number } | null>
 }
 
 export type DialogReactiveListInjection = Ref<DialogReactive[]>
@@ -83,14 +83,14 @@ export const NDialogProvider = defineComponent({
   props: dialogProviderProps,
   setup () {
     const dialogListRef = ref<TypeSafeDialogReactive[]>([])
-    const dialogInstRefs: Record<string, DialogInst> = {}
+    const dialogInstRefs: Record<string, DialogInst | undefined> = {}
     function create (options: DialogOptions = {}): DialogReactive {
       const key = createId()
       const dialogReactive = reactive({
         ...options,
         key,
         destroy: () => {
-          dialogInstRefs[`n-dialog-${key}`].hide()
+          dialogInstRefs[`n-dialog-${key}`]?.hide()
         }
       })
       dialogListRef.value.push(dialogReactive)
@@ -114,7 +114,7 @@ export const NDialogProvider = defineComponent({
 
     function destroyAll (): void {
       Object.values(dialogInstRefs).forEach((dialogInstRef) => {
-        dialogInstRef.hide()
+        dialogInstRef?.hide()
       })
     }
 
@@ -129,7 +129,7 @@ export const NDialogProvider = defineComponent({
     provide(dialogApiInjectionKey, api)
     provide(dialogProviderInjectionKey, {
       clickedRef: useClicked(64),
-      clickPositionRef: useClickPosition()
+      clickedPositionRef: useClickPosition()
     })
     provide(dialogReactiveListInjectionKey, dialogListRef)
     return {

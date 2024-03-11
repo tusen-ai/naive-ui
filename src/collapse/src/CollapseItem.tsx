@@ -1,5 +1,5 @@
-import { h, defineComponent, type PropType, inject, computed } from 'vue'
-import { createId } from 'seemly'
+import { h, defineComponent, type PropType, inject, computed, toRef } from 'vue'
+import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
 import {
   ChevronRightIcon as ArrowRightIcon,
@@ -69,6 +69,7 @@ export default defineComponent({
       randomName,
       mergedClsPrefix: mergedClsPrefixRef,
       collapsed: collapsedRef,
+      triggerAreas: toRef(collapseProps, 'triggerAreas'),
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props
         if (displayDirective) {
@@ -81,6 +82,12 @@ export default defineComponent({
         return collapseProps.arrowPlacement
       }),
       handleClick (e: MouseEvent) {
+        let happensInArea: 'arrow' | 'main' | 'extra' = 'main'
+        if (happensIn(e, 'arrow')) happensInArea = 'arrow'
+        if (happensIn(e, 'extra')) happensInArea = 'extra'
+        if (!collapseProps.triggerAreas.includes(happensInArea)) {
+          return
+        }
         if (NCollapse && !props.disabled) {
           NCollapse.toggleItem(collapsedRef.value, mergedNameRef.value, e)
         }
@@ -95,7 +102,8 @@ export default defineComponent({
       collapsed,
       mergedDisplayDirective,
       mergedClsPrefix,
-      disabled
+      disabled,
+      triggerAreas
     } = this
     const headerNode = resolveSlotWithProps(
       $slots.header,
@@ -111,7 +119,10 @@ export default defineComponent({
           `${mergedClsPrefix}-collapse-item`,
           `${mergedClsPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
           disabled && `${mergedClsPrefix}-collapse-item--disabled`,
-          !collapsed && `${mergedClsPrefix}-collapse-item--active`
+          !collapsed && `${mergedClsPrefix}-collapse-item--active`,
+          triggerAreas.map((area) => {
+            return `${mergedClsPrefix}-collapse-item--trigger-area-${area}`
+          })
         ]}
       >
         <div
@@ -128,6 +139,7 @@ export default defineComponent({
             <div
               class={`${mergedClsPrefix}-collapse-item-arrow`}
               key={this.rtlEnabled ? 0 : 1}
+              data-arrow
             >
               {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -153,6 +165,7 @@ export default defineComponent({
               <div
                 class={`${mergedClsPrefix}-collapse-item__header-extra`}
                 onClick={this.handleClick}
+                data-extra
               >
                 {children}
               </div>

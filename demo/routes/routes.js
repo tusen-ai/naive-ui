@@ -556,6 +556,11 @@ export const enComponentRoutes = [
     path: 'infinite-scroll',
     component: () =>
       import('../../src/infinite-scroll/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'float-button',
+    component: () =>
+      import('../../src/float-button/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -955,6 +960,11 @@ export const zhComponentRoutes = [
     path: 'infinite-scroll',
     component: () =>
       import('../../src/infinite-scroll/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'float-button',
+    component: () =>
+      import('../../src/float-button/demos/zhCN/index.demo-entry.md')
   }
 ]
 

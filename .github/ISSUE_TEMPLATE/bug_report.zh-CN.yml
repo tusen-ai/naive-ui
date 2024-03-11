@@ -1,0 +1,71 @@
+name: 🐞 错误报告
+description: 报告 naive-ui 的问题
+labels: [untriaged]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您抽出时间填写此错误报告！
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 描述错误
+      description: 对错误的清晰而简明的描述。如果您打算为此问题提交 PR，请在描述中告诉我们。谢谢！
+      placeholder: 错误描述
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 复现此错误的清晰而简明的步骤。
+      placeholder: |
+        1. 应用魔法
+        2. 等待 3.1415 秒
+        3. 🧙🏽‍♂️
+    validations:
+      required: true
+  - type: input
+    id: reproduction
+    attributes:
+      label: 最小复现链接
+      description: 请提供[最小复现](https://stackoverflow.com/help/minimal-reproducible-example)链接。提供一个简化的 CodePen/CodeSandbox 或 GitHub 仓库链接。请不要随机填写链接。
+      placeholder: 复现链接
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: 系统信息
+      description: "`npx envinfo --system --npmPackages 'naive-ui,vue' --binaries --browsers` 命令的输出"
+      render: Shell
+      placeholder: 系统信息，二进制文件，浏览器
+    validations:
+      required: true
+  - type: dropdown
+    id: package-manager
+    attributes:
+      label: 使用的包管理器
+      description: 选择所使用的包管理器
+      options:
+        - npm
+        - yarn
+        - pnpm
+    validations:
+      required: true
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: 验证
+      description: 在提交问题之前，请确保完成以下步骤
+      options:
+        - label: 阅读 [贡献指南](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.zh-CN.md)。
+          required: true
+        - label: 阅读 [文档](https://www.naiveui.com/zh-CN/)。
+          required: true
+        - label: 检查是否已经存在[相同问题的问题](https://github.com/tusen-ai/naive-ui/issues)，以避免创建重复的问题。
+          required: true
+        - label: 确保这是一个具体的 bug。有关问题和答案，请打开 [GitHub 讨论](https://github.com/tusen-ai/naive-ui/discussions)。
+          required: true
+        - label: 提供的复现是[最小可复现的示例](https://stackoverflow.com/help/minimal-reproducible-example)。
+          required: true

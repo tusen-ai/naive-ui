@@ -16,6 +16,7 @@ import {
   esAR,
   itIT,
   skSK,
+  csCZ,
   enGB,
   plPL,
   ptBR,
@@ -24,6 +25,7 @@ import {
   arDZ,
   trTR,
   svSE,
+  etEE,
   eo,
   dateEnUS,
   dateZhCN,
@@ -40,6 +42,7 @@ import {
   dateEsAR,
   dateItIT,
   dateSkSK,
+  dateCsCZ,
   dateEnGB,
   datePlPL,
   datePtBR,
@@ -48,6 +51,7 @@ import {
   dateArDZ,
   dateTrTR,
   dateSvSE,
+  dateEtEE,
   dateEo,
   NConfigProvider,
   type NDateLocale,
@@ -275,6 +279,14 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
+          dateLocale: dateCsCZ,
+          locale: csCZ
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
           dateLocale: datePlPL,
           locale: plPL
         }
@@ -341,6 +353,17 @@ describe('locale', () => {
         props: {
           dateLocale: dateSvSE,
           locale: svSE,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateEtEE,
+          locale: etEE,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }

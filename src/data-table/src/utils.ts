@@ -185,9 +185,14 @@ function formatCsvCell (value: unknown): string {
 }
 
 export function generateCsv (columns: TableColumn[], data: RowData[]): string {
-  const header = columns.map((col: any) => col.title).join(',')
+  const exportableColumns = columns.filter(
+    (column) => column.type !== 'expand' && column.type !== 'selection'
+  )
+  const header = exportableColumns.map((col: any) => col.title).join(',')
   const rows = data.map((row) => {
-    return columns.map((col: any) => formatCsvCell(row[col.key])).join(',')
+    return exportableColumns
+      .map((col: any) => formatCsvCell(row[col.key]))
+      .join(',')
   })
   return [header, ...rows].join('\n')
 }
