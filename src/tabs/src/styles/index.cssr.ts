@@ -96,6 +96,7 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-rail', `
+    position: relative;
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
     width: 100%;

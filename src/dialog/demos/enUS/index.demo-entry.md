@@ -135,9 +135,13 @@ All the properties can be modified dynamically.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| action-class | `string` | `undefined` | The class name of the action area. | NEXT_VERSION |
+| action-style | `Object \| string` | `undefined` | The style of the action area. | NEXT_VERSION |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
 | content | `string \| (() => VNodeChild)` | `undefined` | Can be a `render` function. |  |
+| content-class | `string` | `undefined` | The class name of the content. | NEXT_VERSION |
+| content-style | `Object \| string` | `undefined` | The style of the content. | NEXT_VERSION |
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
@@ -147,6 +151,8 @@ All the properties can be modified dynamically.
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
+| title-class | `string` | `undefined` | The class name of the content. | NEXT_VERSION |
+| title-style | `Object \| string` | `undefined` | The style of the content. | NEXT_VERSION |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
 | on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |

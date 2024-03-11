@@ -76,14 +76,14 @@ export const NModalProvider = defineComponent({
     const clickedPositionRef = useClickPosition()
 
     const modalListRef = ref<TypeSafeModalReactive[]>([])
-    const modalInstRefs: Record<string, ModalInst> = {}
+    const modalInstRefs: Record<string, ModalInst | undefined> = {}
     function create (options: ModalOptions = {}): ModalReactive {
       const key = createId()
       const modalReactive = reactive({
         ...options,
         key,
         destroy: () => {
-          modalInstRefs[`n-modal-${key}`].hide()
+          modalInstRefs[`n-modal-${key}`]?.hide()
         }
       })
       modalListRef.value.push(modalReactive)
@@ -100,7 +100,7 @@ export const NModalProvider = defineComponent({
 
     function destroyAll (): void {
       Object.values(modalInstRefs).forEach((modalInstRef) => {
-        modalInstRef.hide()
+        modalInstRef?.hide()
       })
     }
 
@@ -131,8 +131,7 @@ export const NModalProvider = defineComponent({
       this.modalList.map((modal) =>
         h(
           NModalEnvironment,
-          omit(modal, ['destroy', 'style'], {
-            internalStyle: modal.style,
+          omit(modal, ['destroy'], {
             to: modal.to ?? this.to,
             ref: ((inst: ModalInst | null) => {
               if (inst === null) {
