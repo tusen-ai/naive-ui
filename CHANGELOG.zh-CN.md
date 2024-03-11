@@ -5,6 +5,17 @@
 ### Fixes
 
 - 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
+- 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
+- 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
+
+### Features
+
+- `n-qr-code` 新增 `type` 属性，设置 `type` 自定义渲染结果，提供 `canvas` 和 `svg` 两个选项
+- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
+- `n-card` 的 `title` 属性支持 render 函数
+- `n-upload` 导出 `on-remove` 方法的 `index` 属性，关闭 [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
+- `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
+- `n-split` 新增 `panel1-class` `panel1-style` `panel2-class` `panel2-style` 属性
 
 ## 2.38.1
 

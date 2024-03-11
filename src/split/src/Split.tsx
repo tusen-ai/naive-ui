@@ -47,6 +47,10 @@ export const splitProps = {
     type: Number,
     default: 1
   },
+  panel1Class: String,
+  panel1Style: [Object, String] as PropType<CSSProperties | string>,
+  panel2Class: String,
+  panel2Style: [Object, String] as PropType<CSSProperties | string>,
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
   onDragEnd: Function as PropType<(e: Event) => void>,
@@ -207,8 +211,8 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div
-          class={`${this.mergedClsPrefix}-split-pane-1`}
-          style={this.firstPaneStyle}
+          class={[`${this.mergedClsPrefix}-split-pane-1`, this.panel1Class]}
+          style={[this.firstPaneStyle, this.panel1Style]}
         >
           {this.$slots[1]?.()}
         </div>
@@ -231,7 +235,10 @@ export default defineComponent({
             ])}
           </div>
         )}
-        <div class={`${this.mergedClsPrefix}-split-pane-2`}>
+        <div
+          class={[`${this.mergedClsPrefix}-split-pane-2`, this.panel2Class]}
+          style={this.panel2Style}
+        >
           {this.$slots[2]?.()}
         </div>
       </div>
