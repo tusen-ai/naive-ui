@@ -26,6 +26,7 @@
 - `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
 - `n-mention` adds `filter` method, closes [#5721](https://github.com/tusen-ai/naive-ui/pull/5721).
 - `n-slider` aria support
+- `n-date-picker` adds `time-format` prop.
 
 ## 2.38.1
 
