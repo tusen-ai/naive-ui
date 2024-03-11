@@ -25,6 +25,7 @@
 - `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
 - `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
 - `n-mention` adds `filter` method, closes [#5721](https://github.com/tusen-ai/naive-ui/pull/5721).
+- `n-slider` aria support
 
 ## 2.38.1
 
@@ -38,7 +39,6 @@
 - Fix `n-tabs`'s capsule wrong width and position after resize within `n-modal`, closes [#5569](https://github.com/tusen-ai/naive-ui/issues/5569).
 - Fix `n-split` doesn't work with `inline-theme-disabled` prop.
 - Fix `n-float-button` doesn't work with `inline-theme-disabled` prop.
-- `n-slider` aria support
 
 ### Features
 

@@ -25,6 +25,7 @@
 - `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
 - `n-split` 新增 `panel1-class` `panel1-style` `panel2-class` `panel2-style` 属性
 - `n-mention` 新增 `filter` 方法，关闭 [#5721](https://github.com/tusen-ai/naive-ui/pull/5721)
+- `n-slider` aria support
 
 ## 2.38.1
 
