@@ -9,6 +9,7 @@
 ```demo
 basic.vue
 ignore-gap.vue
+bound.vue
 affix.vue
 scrollto.vue
 max-height-debug.vue

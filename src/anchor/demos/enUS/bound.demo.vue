@@ -1,20 +1,16 @@
 <markdown>
-# Basic
+# Bound
+
+I want to trigger anchor when scrolling to the middle of the screen.
 </markdown>
 
 <template>
-  <n-space style="margin-bottom: 12px">
-    <n-switch v-model:value="showRail" /> Show Rail
-    <n-switch v-model:value="showBackground" /> Show Background
-  </n-space>
-  <n-anchor
-    offset-target=".document-scroll-container"
-    :show-rail="showRail"
-    :show-background="showBackground"
-  >
+  <n-anchor :bound="bound">
+    <n-anchor-link title="API" href="#API" />
     <n-anchor-link title="Demos" href="#Demos">
       <n-anchor-link title="Basic" href="#basic.vue" />
       <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
+      <n-anchor-link title="Bound" href="#bound.vue" />
       <n-anchor-link title="Affix" href="#affix.vue" />
       <n-anchor-link title="Scroll To" href="#scrollto.vue" />
     </n-anchor-link>
@@ -23,13 +19,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      showRail: ref(true),
-      showBackground: ref(true)
+      bound: document.documentElement.scrollHeight / 2
     }
   }
 })
