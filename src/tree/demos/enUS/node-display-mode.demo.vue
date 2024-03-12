@@ -31,8 +31,6 @@ function createData (level = 3, baseKey = ''): TreeOption[] | undefined {
   if (!level) return undefined
   return repeat(6 - level, undefined).map((_, index) => {
     const key = '' + baseKey + level + index
-    console.log(key)
-
     return {
       label: createLabel(level),
       key,
