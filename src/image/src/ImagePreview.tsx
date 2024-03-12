@@ -485,7 +485,74 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, renderToolbar, withTooltip } = this
+
+    const prevNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchPrev}>
+        {{ default: () => prevIcon }}
+      </NBaseIcon>,
+      'tipPrevious'
+    )
+    const nextNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchNext}>
+        {{ default: () => nextIcon }}
+      </NBaseIcon>,
+      'tipNext'
+    )
+
+    const rotateLeftNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateCounterclockwise}>
+        {{
+          default: () => <RotateCounterclockwiseIcon />
+        }}
+      </NBaseIcon>,
+      'tipCounterclockwise'
+    )
+    const rotateRightNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateClockwise}>
+        {{
+          default: () => <RotateClockwiseIcon />
+        }}
+      </NBaseIcon>,
+      'tipClockwise'
+    )
+    const originalSizeNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.resizeToOrignalImageSize}>
+        {{
+          default: () => {
+            return <ResizeSmallIcon />
+          }
+        }}
+      </NBaseIcon>,
+      'tipOriginalSize'
+    )
+    const zoomOutNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.zoomOut}>
+        {{ default: () => <ZoomOutIcon /> }}
+      </NBaseIcon>,
+      'tipZoomOut'
+    )
+
+    const downloadNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleDownloadClick}>
+        {{ default: () => downloadIcon }}
+      </NBaseIcon>,
+      'tipDownload'
+    )
+
+    const closeNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.toggleShow}>
+        {{ default: () => closeIcon }}
+      </NBaseIcon>,
+      'tipClose'
+    )
+
+    const zoomInNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.zoomIn}>
+        {{ default: () => <ZoomInIcon /> }}
+      </NBaseIcon>,
+      'tipZoomIn'
+    )
 
     return (
       <>
@@ -522,108 +589,35 @@ export default defineComponent({
                       {{
                         default: () => {
                           if (!this.show) return null
-                          const { withTooltip } = this
                           return (
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
-                              {this.$slots.toolbar?.() ? (
-                                this.$slots.toolbar?.()
+                              {renderToolbar ? (
+                                renderToolbar({
+                                  prev: prevNode,
+                                  next: nextNode,
+                                  rotateLeft: rotateLeftNode,
+                                  rotateRight: rotateRightNode,
+                                  originalSize: originalSizeNode,
+                                  zoomOut: zoomOutNode,
+                                  zoomIn: zoomInNode,
+                                  download: downloadNode,
+                                  close: closeNode
+                                })
                               ) : (
                                 <>
                                   {this.onPrev ? (
                                     <>
-                                      {withTooltip(
-                                        <NBaseIcon
-                                          clsPrefix={clsPrefix}
-                                          onClick={this.handleSwitchPrev}
-                                        >
-                                          {{ default: () => prevIcon }}
-                                        </NBaseIcon>,
-                                        'tipPrevious'
-                                      )}
-                                      {withTooltip(
-                                        <NBaseIcon
-                                          clsPrefix={clsPrefix}
-                                          onClick={this.handleSwitchNext}
-                                        >
-                                          {{ default: () => nextIcon }}
-                                        </NBaseIcon>,
-                                        'tipNext'
-                                      )}
+                                      {prevNode}
+                                      {nextNode}
                                     </>
                                   ) : null}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.rotateCounterclockwise}
-                                    >
-                                      {{
-                                        default: () => (
-                                          <RotateCounterclockwiseIcon />
-                                        )
-                                      }}
-                                    </NBaseIcon>,
-                                    'tipCounterclockwise'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.rotateClockwise}
-                                    >
-                                      {{
-                                        default: () => <RotateClockwiseIcon />
-                                      }}
-                                    </NBaseIcon>,
-                                    'tipClockwise'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.resizeToOrignalImageSize}
-                                    >
-                                      {{
-                                        default: () => {
-                                          return <ResizeSmallIcon />
-                                        }
-                                      }}
-                                    </NBaseIcon>,
-                                    'tipOriginalSize'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.zoomOut}
-                                    >
-                                      {{ default: () => <ZoomOutIcon /> }}
-                                    </NBaseIcon>,
-                                    'tipZoomOut'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.zoomIn}
-                                    >
-                                      {{ default: () => <ZoomInIcon /> }}
-                                    </NBaseIcon>,
-                                    'tipZoomIn'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.handleDownloadClick}
-                                    >
-                                      {{ default: () => downloadIcon }}
-                                    </NBaseIcon>,
-                                    'tipDownload'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.toggleShow}
-                                    >
-                                      {{ default: () => closeIcon }}
-                                    </NBaseIcon>,
-                                    'tipClose'
-                                  )}
+                                  {rotateLeftNode}
+                                  {rotateRightNode}
+                                  {originalSizeNode}
+                                  {zoomOutNode}
+                                  {zoomInNode}
+                                  {downloadNode}
+                                  {closeNode}
                                 </>
                               )}
                             </div>

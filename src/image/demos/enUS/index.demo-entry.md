@@ -9,6 +9,7 @@ basic.vue
 group.vue
 error.vue
 preview-disabled.vue
+custom-toolbar.vue
 custom.vue
 tooltip.vue
 lazy.vue
@@ -32,6 +33,7 @@ previewed-img-props.vue
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
 | previewed-img-props | `object` | `undefined` | DOM attributes of img element in preview mode. | 2.34.0 |
+| render-toolbar | `(nodes: { prev: VNode, next: VNode, rotateLeft: VNode, rotateRight: VNode, originalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode }) => VNodeChild` | `undefined` | Toolbar rendering function. | `NEXT_VERSION` |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 | src | `string` | `undefined` | Image source. |  |
@@ -53,7 +55,6 @@ previewed-img-props.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
-| toolbar | `()` | Image toolbar contents | NEXT_VERSION |
 
 ### ImageGroup Slots
 
