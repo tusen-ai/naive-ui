@@ -15,6 +15,7 @@ action.vue
 async.vue
 status.vue
 file-picker.vue
+node-display-mode.vue
 debug.vue
 ```
 
