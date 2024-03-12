@@ -1,5 +1,7 @@
 <markdown>
-  # 自定义工具栏
+# 自定义工具栏
+
+你可以使用 `render-toolbar` 来自定义工具栏。
   </markdown>
 
 <template>

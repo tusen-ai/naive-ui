@@ -1,5 +1,7 @@
 <markdown>
-  # Custom Toolbar
+# Custom Toolbar
+
+You can customize the toolbar using `render-toolbar`.
   </markdown>
 
 <template>
