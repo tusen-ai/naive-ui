@@ -50,7 +50,6 @@ slots.vue
 | scrollable | `boolean` | `false` | Whether the popover's content is scrollable. | 2.28.3 |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |  |
 | show | `boolean` | `undefined` | Whether to show popover. |  |
-| title | `string` | `undefined` | Popover title. |  |
 | to | `string \| HTMLElement \| false` | `'body'` | Container node of the popover content. `false` will keep it at trigger container. |  |
 | trigger | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'hover'` | The popover trigger type. |  |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's width will follow its trigger's width. |  |

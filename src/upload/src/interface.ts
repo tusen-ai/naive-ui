@@ -124,7 +124,7 @@ export interface XhrHandlers {
 
 export interface UploadInst {
   openOpenFileDialog: () => void
-  submit: () => void
+  submit: (fileId?: string) => void
   clear: () => void
 }
 
