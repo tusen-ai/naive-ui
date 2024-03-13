@@ -868,6 +868,8 @@ export default defineComponent({
                                   onClick={() => {
                                     handleUpdateExpanded(rowKey, rowInfo.tmNode)
                                   }}
+                                  rowKey={rowKey}
+                                  tmNode={tmNode}
                                 />
                               )
                             ]
@@ -909,6 +911,8 @@ export default defineComponent({
                                 onClick={() => {
                                   handleUpdateExpanded(rowKey, null)
                                 }}
+                                rowKey={rowKey}
+                                tmNode={tmNode}
                               />
                                 ) : null
                           ) : null

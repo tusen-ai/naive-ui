@@ -30,6 +30,7 @@
 - `n-form-item` add `feedback-vertical` prop and `feedback-crosswise` prop
 - `n-split` supports setting the pixel value size.
 - `n-scrollbar` adds `content-style` and `content-class` props, closes [#4497](https://github.com/tusen-ai/naive-ui/issues/4497).
+- `n-data-table` `render-expand-icon` add `rowKey` `rowData` props, closes [#3779](https://github.com/tusen-ai/naive-ui/issues/3779)
 
 ## 2.38.1
 
