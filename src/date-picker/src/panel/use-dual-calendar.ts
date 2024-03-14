@@ -367,7 +367,9 @@ function useDualCalendar (
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) { return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null) }
+    if (!Array.isArray(props.value)) {
+      return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
+    }
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
       return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
@@ -411,7 +413,10 @@ function useDualCalendar (
       if (props.panel && Array.isArray(value)) {
         changeStartEndTime(value[0], value[1], 'done')
       } else {
-        if (closeOnSelectRef.value && type === 'daterange') {
+        if (
+          closeOnSelectRef.value &&
+          (type === 'daterange' || type === 'datetimerange')
+        ) {
           if (updateValueOnCloseRef.value) {
             closeCalendar()
           } else {

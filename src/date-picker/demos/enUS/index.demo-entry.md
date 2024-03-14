@@ -129,6 +129,7 @@ panel.vue
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
+| close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. | NEXT_VERSION |
 | separator | `string` | internal icon | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
 | time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | Time picker props in the panel. | 2.27.0 |
