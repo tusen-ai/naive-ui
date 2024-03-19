@@ -108,6 +108,7 @@ export const autoCompleteProps = {
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onClear: [Function, Array] as PropType<() => void>,
   // deprecated
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -240,6 +241,7 @@ export default defineComponent({
         doSelect(option.value)
         if (props.clearAfterSelect) {
           doUpdateValue(null)
+          props.onClear?.()
         } else if (option.label !== undefined) {
           doUpdateValue(
             props.append
@@ -255,6 +257,7 @@ export default defineComponent({
     }
     function handleClear (): void {
       doUpdateValue(null)
+      props.onClear?.()
     }
     function handleFocus (e: FocusEvent): void {
       canBeActivatedRef.value = true
