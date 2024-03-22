@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Fixes
+
+- Fix `n-auto-complete` should use option's `value` instead of `label` for update value, closes [5794](https://github.com/tusen-ai/naive-ui/issues/5794).
+
 ## 2.41.0
 
 `2025-01-05`
