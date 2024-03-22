@@ -43,6 +43,7 @@ append.vue
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |  |
+| on-clear | `() => void` | `undefined` | 清除时触发的回调函数 | NEXT_VERSION |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |  |
