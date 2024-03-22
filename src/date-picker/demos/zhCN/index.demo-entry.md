@@ -30,6 +30,7 @@ status.vue
 icon.vue
 panel.vue
 panel-debug.vue
+close-panel-on-select-date.vue
 form-debug.vue
 ```
 
@@ -79,6 +80,8 @@ form-debug.vue
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择日期'` | 没有值时的占位信息 |  |
+| close-panel-on-select-year | `boolean` | `false` | 选择年后，关闭年月面板 |  |
+| close-panel-on-select-month | `boolean` | `false` | 选择月后，关闭年月面板 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -95,6 +98,8 @@ form-debug.vue
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |  |
 | time-picker-props | `TimePickerProps` | `undefined` | 面板中时间选择器的属性 | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |  |
+| close-panel-on-select-year | `boolean` | `false` | 选择年后，关闭年月面板 |  |
+| close-panel-on-select-month | `boolean` | `false` | 选择月后，关闭年月面板 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -113,6 +118,8 @@ form-debug.vue
 | separator | `string` | 内置图标 | start 选框与 end 选框之间的分隔符 |  |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |  |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
+| close-panel-on-select-year | `boolean` | `false` | 选择年后，关闭年月面板 |  |
+| close-panel-on-select-month | `boolean` | `false` | 选择月后，关闭年月面板 |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -133,6 +140,8 @@ form-debug.vue
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |  |
 | time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | 面板中时间选择器的属性 | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
+| close-panel-on-select-year | `boolean` | `false` | 选择年后，关闭年月面板 |  |
+| close-panel-on-select-month | `boolean` | `false` | 选择月后，关闭年月面板 |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -180,6 +189,8 @@ form-debug.vue
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | format | `string` | 中文为 `'yyyy-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
+| close-panel-on-select-year | `boolean` | `false` | 选择年后，关闭年月面板 |  |
+| close-panel-on-select-month | `boolean` | `false` | 选择月后，关闭年月面板 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 
