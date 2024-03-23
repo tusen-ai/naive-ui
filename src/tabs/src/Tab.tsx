@@ -35,7 +35,8 @@ export default defineComponent({
       triggerRef,
       handleAdd,
       activateTab,
-      handleClose
+      handleClose,
+      handleTabClick
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
     return {
@@ -66,6 +67,7 @@ export default defineComponent({
         }
         const { name: nameProp } = props
         const id = ++tabChangeIdRef.id
+        handleTabClick(nameProp)
         if (nameProp !== valueRef.value) {
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {

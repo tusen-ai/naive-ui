@@ -23,6 +23,7 @@ update-bar-manually.vue
 bar-width.vue
 trigger.vue
 placement.vue
+tab-click.vue
 ```
 
 ## API
@@ -54,6 +55,7 @@ placement.vue
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |  |
 | on-before-leave | `(activeName: string \| number, oldActiveName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | Hook function before switching tab. Returning `false` or promise resolving `false` or promise rejection will prevent tab switching. |  |
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |  |
+| on-tab-click | `(name: string \| number) => void` | `undefined` | Callback function triggered when click tag. | NEXT_VERSION |
 | on-update:value | `(value: string \| number) => void` | `undefined` | Callback function triggered when the value changes. |  |
 
 ### TabPane Props
