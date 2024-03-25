@@ -51,6 +51,7 @@ line-numbers.vue
 | hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |  |
 | inline | `boolean` | `false` | Whether the code is displayed as inline. |  |
 | language | `string` | `undefined` | Code language in highlightjs. |  |
+| initial-line-number | `number` | `1` | Initial line number | NEXT_VERSION |
 | show-line-numbers | `boolean` | `false` | Whether to show line numbers. Won't work if `inline` or `word-wrap` is `true`. | 2.32.0 |
 | trim | `boolean` | `true` | Whether to display trimmed code. |  |
 | word-wrap | `boolean` | `false` | Whether to display word-wrapped code. | 2.24.0 |
