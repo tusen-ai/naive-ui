@@ -138,7 +138,7 @@ export-csv.vue
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
 | resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
-| fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
+| fixed | `'left' \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
 | minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | Max width of the column. Only works when `resizable` is `true`. | 2.33.4 |
