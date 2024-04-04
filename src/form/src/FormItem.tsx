@@ -50,8 +50,8 @@ import type {
   FormItemInst,
   FormItemInternalValidate,
   FormItemInternalValidateResult,
-  type FeedBackPositonCrosswise,
-  type FeedBackPositonVertical
+  FeedBackPositonCrosswise,
+  FeedBackPositonVertical
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -82,11 +82,11 @@ export const formItemProps = {
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
   feedbackCrosswise: {
-    type: String as FeedBackPositonCrosswise,
+    type: String as PropType<FeedBackPositonCrosswise>,
     default: 'left'
   },
   feedbackVertical: {
-    type: String as FeedBackPositonVertical,
+    type: String as PropType<FeedBackPositonVertical>,
     default: 'bottom'
   },
   showLabel: {
