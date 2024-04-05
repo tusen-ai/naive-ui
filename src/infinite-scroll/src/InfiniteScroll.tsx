@@ -28,13 +28,23 @@ export default defineComponent({
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
 
     const handleCheckBottom = async (): Promise<void> => {
-      const { containerRef, containerScrollTop } = scrollbarInstRef.value
-      const { scrollHeight } = containerRef
-      if (
-        containerScrollTop + containerRef.clientHeight >=
-        scrollHeight - props.distance
-      ) {
-        await props.onLoad?.()
+      const { value: scrollbarInst } = scrollbarInstRef
+      if (scrollbarInst) {
+        const { containerRef, containerScrollTop } = scrollbarInst
+        const scrollHeight = containerRef?.scrollHeight
+        const clientHeight = containerRef?.clientHeight
+        if (
+          containerRef &&
+          scrollHeight !== undefined &&
+          clientHeight !== undefined
+        ) {
+          if (
+            containerScrollTop + clientHeight >=
+            scrollHeight - props.distance
+          ) {
+            await props.onLoad?.()
+          }
+        }
       }
     }
 
