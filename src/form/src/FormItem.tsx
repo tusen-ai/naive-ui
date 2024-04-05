@@ -266,6 +266,7 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(errors, { warnings })
             }
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
             reject(errors)
           }
         })

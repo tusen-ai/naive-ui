@@ -1,3 +1,4 @@
+import { toRaw, h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NCode } from '../index'
 import hljs from 'highlight.js/lib/core'
@@ -21,23 +22,19 @@ describe('n-code', () => {
     wrapper.unmount()
   })
   it('should work with `language` prop', () => {
-    const wrapper = mount(NCode, {
-      props: {
-        code: 'console.log(a)',
-        language: 'javascript',
-        hljs
-      }
+    const wrapper = mount(() => {
+      return (
+        <NCode code="console.log(a)" language="javascript" hljs={toRaw(hljs)} />
+      )
     })
     expect(wrapper.find('.hljs-variable').text()).toBe('console')
     wrapper.unmount()
   })
   it('should work with `hljs` prop', () => {
-    const wrapper = mount(NCode, {
-      props: {
-        code: 'console.log(a)',
-        language: 'javascript',
-        hljs
-      }
+    const wrapper = mount(() => {
+      return (
+        <NCode code="console.log(a)" language="javascript" hljs={toRaw(hljs)} />
+      )
     })
     expect(wrapper.find('.function_').text()).toBe('log')
     wrapper.unmount()
