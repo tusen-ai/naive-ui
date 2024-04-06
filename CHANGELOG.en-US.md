@@ -9,11 +9,12 @@
 ### Fixes
 
 - Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
-- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702)
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
 - Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
 - Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
 - Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
 - Fix the `common` type error in the `theme-overrides` prop when modifying components' themes.
+- Fix the issue where the size attribute of `n-auto-complete` and `n-select` does not take effect on options, close [#5842](https://github.com/tusen-ai/naive-ui/issues/5842)
 
 ### Features
 

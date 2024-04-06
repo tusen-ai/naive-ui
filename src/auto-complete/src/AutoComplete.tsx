@@ -436,7 +436,7 @@ export default defineComponent({
                               multiple={false}
                               renderLabel={this.renderLabel}
                               renderOption={this.renderOption}
-                              size="medium"
+                              size={this.size}
                               onToggle={this.handleToggle}
                             >
                               {{ empty: () => this.$slots.empty?.() }}
