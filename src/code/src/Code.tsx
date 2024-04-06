@@ -36,6 +36,10 @@ export const codeProps = {
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
+  initialLineNumber: {
+    type: Number,
+    default: 1
+  },
   showLineNumbers: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalFontSize: Number,
@@ -177,7 +181,7 @@ export default defineComponent({
       codeRef,
       mergedShowLineNumbers: mergedShowLineNumbersRef,
       lineNumbers: computed(() => {
-        let number = 1
+        let number = props.initialLineNumber
         const numbers: number[] = []
         let lastIsLineWrap = false
         for (const char of props.code) {
