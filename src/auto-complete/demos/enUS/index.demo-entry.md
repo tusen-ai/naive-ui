@@ -43,6 +43,7 @@ append.vue
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |
+| on-clear | `() => void` | `undefined` | On clear callback function. | NEXT_VERSION |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | On update callback function. |  |
