@@ -26,13 +26,16 @@ export default cB('dynamic-input', {
         })
       ])
     ]),
+
+    cE('action__left', ' margin: var(--action-margin-right);'),
+    cE('action__right', ' margin: var(--action-margin-left);'),
     cE('action', `
       align-self: flex-start;
       display: flex;
       justify-content: flex-end;
       flex-shrink: 0;
       flex-grow: 0;
-      margin: var(--action-margin);
+     
     `, [
       cM('icon', {
         cursor: 'pointer'
