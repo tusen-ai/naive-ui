@@ -220,6 +220,7 @@ export default defineComponent({
       shouldUseThumbnailUrl: NUpload.shouldUseThumbnailUrlRef,
       renderIcon: NUpload.renderIconRef,
       imageRef,
+      imagePropsRef: NUpload.imagePropsRef,
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,
@@ -265,6 +266,7 @@ export default defineComponent({
                 previewSrc={file.url || undefined}
                 alt={file.name}
                 ref="imageRef"
+                {...this.imagePropsRef}
               />
             ) : (
               <img src={this.mergedThumbnailUrl || undefined} alt={file.name} />

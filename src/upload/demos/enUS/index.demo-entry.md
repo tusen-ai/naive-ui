@@ -41,6 +41,7 @@ download.vue
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
 | input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
+| image-props | `ImageProps` | `undefined` | Props of `n-image` inside upload. See [Image Props](image#Image-Props). | NEXT_VERSION |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |

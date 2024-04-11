@@ -41,6 +41,7 @@ debug.vue
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
+| image-props | `ImageProps` | `undefined` | Upload 中上传图片组件的属性，参考 [Image Props](image#Image-Props) | NEXT_VERSION |
 | image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
 | input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
