@@ -14,6 +14,9 @@ You can use `useModal.create` to create a modal. (Please make sure this API is c
     <n-button @click="showCardPreset">
       Start me up Card
     </n-button>
+    <n-button @click="showAny">
+      Start me every thing
+    </n-button>
   </n-flex>
 </template>
 
@@ -53,9 +56,28 @@ export default defineComponent({
           )
       })
     }
+    const showAny = () => {
+      const m = modal.create({
+        style: {
+          width: '400px',
+          background: '#fff'
+        },
+        render () {
+          return h('div', [
+            'Content',
+            h(
+              NButton,
+              { type: 'primary', onClick: () => m.destroy() },
+              () => 'Close'
+            )
+          ])
+        }
+      })
+    }
     return {
       showDialogPreset,
-      showCardPreset
+      showCardPreset,
+      showAny
     }
   }
 })

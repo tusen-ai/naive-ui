@@ -8,7 +8,8 @@ import {
   type PropType,
   reactive,
   type Ref,
-  type CSSProperties
+  type CSSProperties,
+  type VNodeChild
 } from 'vue'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
@@ -26,6 +27,7 @@ export type ModalOptions = Mutable<
 Omit<Partial<ExtractPropTypes<typeof modalProps>>, 'internalStyle'> & {
   class?: any
   style?: string | CSSProperties
+  render?: () => VNodeChild
 }
 >
 
@@ -131,7 +133,7 @@ export const NModalProvider = defineComponent({
       this.modalList.map((modal) =>
         h(
           NModalEnvironment,
-          omit(modal, ['destroy'], {
+          omit(modal, ['destroy', 'render'], {
             to: modal.to ?? this.to,
             ref: ((inst: ModalInst | null) => {
               if (inst === null) {
@@ -143,7 +145,10 @@ export const NModalProvider = defineComponent({
             }) as any,
             internalKey: modal.key,
             onInternalAfterLeave: this.handleAfterLeave
-          })
+          }),
+          {
+            default: modal.render
+          }
         )
       ),
       this.$slots.default?.()
