@@ -18,7 +18,7 @@ import { useConfig, useTheme, useFormItem, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { warn, call, throwError } from '../../_utils'
-import type { ImageGroupProps } from '../../image'
+import type { ImageGroupProps, ImageProps } from '../../image'
 import { uploadLight, type UploadTheme } from '../styles'
 import { uploadDraggerKey } from './UploadDragger'
 import type {
@@ -375,6 +375,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
+  imageProps: Object as PropType<ImageProps>,
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerClass: String,
@@ -707,6 +708,7 @@ export default defineComponent({
       themeClassRef: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       showTriggerRef: toRef(props, 'showTrigger'),
+      imagePropsRef: toRef(props, 'imageProps'),
       imageGroupPropsRef: toRef(props, 'imageGroupProps'),
       mergedDirectoryDndRef: computed(() => {
         return props.directoryDnd ?? props.directory
