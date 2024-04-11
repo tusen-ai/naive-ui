@@ -14,6 +14,9 @@
     <n-button @click="showCardPreset">
       来吧 Card
     </n-button>
+    <n-button @click="showAny">
+      来吧 随便啥
+    </n-button>
   </n-flex>
 </template>
 
@@ -53,9 +56,28 @@ export default defineComponent({
           )
       })
     }
+    const showAny = () => {
+      const m = modal.create({
+        style: {
+          width: '400px',
+          background: '#fff'
+        },
+        render () {
+          return h('div', [
+            '随便啥',
+            h(
+              NButton,
+              { type: 'primary', onClick: () => m.destroy() },
+              () => '关闭'
+            )
+          ])
+        }
+      })
+    }
     return {
       showDialogPreset,
-      showCardPreset
+      showCardPreset,
+      showAny
     }
   }
 })
