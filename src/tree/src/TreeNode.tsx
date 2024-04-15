@@ -484,6 +484,7 @@ const TreeNode = defineComponent({
             clsPrefix={clsPrefix}
             checked={checked}
             selected={selected}
+            expanded={this.expanded}
             onClick={this.handleContentClick}
             nodeProps={blockLine ? undefined : nodeProps}
             onDragstart={

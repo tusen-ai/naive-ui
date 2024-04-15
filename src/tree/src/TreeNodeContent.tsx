@@ -17,6 +17,7 @@ export default defineComponent({
       required: true
     },
     disabled: Boolean,
+    expanded: Boolean,
     checked: Boolean,
     selected: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>,
@@ -55,6 +56,7 @@ export default defineComponent({
       nodeProps,
       checked = false,
       selected = false,
+      expanded,
       renderLabel,
       renderPrefix,
       renderSuffix,
@@ -80,7 +82,8 @@ export default defineComponent({
               ? renderPrefix({
                 option: rawNode,
                 selected,
-                checked
+                checked,
+                expanded
               })
               : render(prefix)}
           </div>
@@ -90,7 +93,8 @@ export default defineComponent({
             ? renderLabel({
               option: rawNode,
               selected,
-              checked
+              checked,
+              expanded
             })
             : render(label)}
         </div>
@@ -100,7 +104,8 @@ export default defineComponent({
               ? renderSuffix({
                 option: rawNode,
                 selected,
-                checked
+                checked,
+                expanded
               })
               : render(suffix)}
           </div>

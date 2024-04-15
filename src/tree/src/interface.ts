@@ -28,12 +28,14 @@ export interface TreeRenderProps {
   option: TreeOption
   checked: boolean
   selected: boolean
+  expanded: boolean
 }
 
 type RenderTreePart = ({
   option,
   checked,
-  selected
+  selected,
+  expanded
 }: TreeRenderProps) => VNodeChild
 
 export type RenderLabel = RenderTreePart
