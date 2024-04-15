@@ -73,9 +73,9 @@ expand-debug.vue
 | on-load | `(node: TreeOption) => Promise<unknown>` | `undefined` | 异步加载数据的回调函数，如果没有加载到数据你应该让 Promise resolve `false` 或者 reject 这个 Promise，否则加载动画不会停止 | 非 void Promise 2.34.3 |
 | override-default-node-click-behavior | `(info: { option: TreeOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
 | pattern | `string` | `''` | 默认搜索的内容 |  |
-| render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 |  |
-| render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |  |
-| render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |  |
+| render-label | `(info: { option: TreeOption, checked: boolean, selected: boolean, expanded: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 | `expanded` NEXT_VERSION |
+| render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean, expanded: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | `expanded` NEXT_VERSION |
+| render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean, expanded: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | `expanded` NEXT_VERSION |
 | render-switcher-icon | `(props: { option: TreeOption, expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.24.0, `props` 2.34.0 |
 | scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) |   |
 | selectable | `boolean` | `true` | 节点是否可以被选中 |  |

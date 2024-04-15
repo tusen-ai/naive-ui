@@ -1,7 +1,7 @@
 <markdown>
 # File Tree
 
-Use `on-update:expanded-keys` to change the prefix icon style of the node in different states.
+Use `on-update:expanded-keys` or `render-prefix` to change the prefix icon style of the node in different states.
 </markdown>
 
 <template>
@@ -11,6 +11,13 @@ Use `on-update:expanded-keys` to change the prefix icon style of the node in dif
     :data="data"
     :node-props="nodeProps"
     :on-update:expanded-keys="updatePrefixWithExpaned"
+  />
+  <n-tree
+    block-line
+    expand-on-click
+    :data="data2"
+    :node-props="nodeProps"
+    :render-prefix="renderPrefix"
   />
 </template>
 
@@ -26,14 +33,14 @@ import {
 export default defineComponent({
   setup () {
     const message = useMessage()
-    const updatePrefixWithExpaned = (
+    function updatePrefixWithExpaned (
       _keys: Array<string | number>,
       _option: Array<TreeOption | null>,
       meta: {
         node: TreeOption | null
         action: 'expand' | 'collapse' | 'filter'
       }
-    ) => {
+    ) {
       if (!meta.node) return
       switch (meta.action) {
         case 'expand':
@@ -50,7 +57,26 @@ export default defineComponent({
           break
       }
     }
-    const nodeProps = ({ option }: { option: TreeOption }) => {
+    function renderPrefix ({
+      option,
+      expanded
+    }: {
+      option: TreeOption
+      expanded: boolean
+    }) {
+      return option.children
+        ? expanded
+          ? h(NIcon, null, {
+            default: () => h(FolderOpenOutline)
+          })
+          : h(NIcon, null, {
+            default: () => h(Folder)
+          })
+        : h(NIcon, null, {
+          default: () => h(FileTrayFullOutline)
+        })
+    }
+    function nodeProps ({ option }: { option: TreeOption }) {
       return {
         onClick () {
           if (!option.children && !option.disabled) {
@@ -61,6 +87,7 @@ export default defineComponent({
     }
     return {
       updatePrefixWithExpaned,
+      renderPrefix,
       nodeProps,
       data: [
         {
@@ -95,6 +122,31 @@ export default defineComponent({
                     h(NIcon, null, {
                       default: () => h(FileTrayFullOutline)
                     })
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      data2: [
+        {
+          key: 'Folder',
+          label: 'Folder',
+
+          children: [
+            {
+              key: 'Empty',
+              label: 'Empty',
+              disabled: true
+            },
+            {
+              key: 'MyFiles',
+              label: 'MyFiles',
+
+              children: [
+                {
+                  label: 'template.txt',
+                  key: 'template.txt'
                 }
               ]
             }
