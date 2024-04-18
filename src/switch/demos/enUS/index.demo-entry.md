@@ -30,7 +30,7 @@ icon.vue
 | round | `boolean` | `true` | Whether the switch has rounded corners.   |  |
 | rubber-band | `boolean` | `true` | Whether the switch button has rubber band effect. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the switch. |  |
-| unchecked-value | `string \| boolean \| number` | `false` | Value of checked state. |  |
+| unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |  |
 | value | `string \| number \| boolean \| undefined` | `undefined` | Value when being set manually. |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
 
