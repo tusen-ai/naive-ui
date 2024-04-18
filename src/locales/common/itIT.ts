@@ -48,7 +48,7 @@ const itIT: NLocale = {
     startDatetimePlaceholder: 'Data e ora di inizio',
     endDatetimePlaceholder: 'Data e ora di fine',
     startMonthPlaceholder: 'Mese di inizio',
-    endMonthPlaceholder: 'Mese di fine'
+    endMonthPlaceholder: 'Mese di fine',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Oggi'
