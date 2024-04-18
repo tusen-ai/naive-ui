@@ -117,7 +117,7 @@ interface UploadCustomRequestOptions {
 | --- | --- | --- | --- |
 | clear | `() => void` | 清空上传列表 | 2.24.2 |
 | openOpenFileDialog | `() => void` | 打开文件选择对话框 |  |
-| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |  |
+| submit | `(fileId?: string)` | 提交当前所有处于 pending 状态的文件 |  |
 
 ### Upload Slots
 
