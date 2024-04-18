@@ -35,7 +35,9 @@ export default defineComponent({
       triggerRef,
       handleAdd,
       activateTab,
-      handleClose
+      handleClose,
+      activeTabClassRef,
+      activeTabStyleRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
     return {
@@ -50,6 +52,8 @@ export default defineComponent({
       addStyle: addTabStyleRef,
       tabClass: tabClassRef,
       addTabClass: addTabClassRef,
+      activeTabClass: activeTabClassRef,
+      activeTabStyle: activeTabStyleRef,
       clsPrefix: mergedClsPrefixRef,
       value: valueRef,
       type: typeRef,
@@ -94,6 +98,8 @@ export default defineComponent({
       value,
       mergedClosable,
       trigger,
+      activeTabClass,
+      activeTabStyle,
       $slots: { default: defaultSlot }
     } = this
     const mergedTab = label ?? tab
@@ -111,6 +117,7 @@ export default defineComponent({
               class: [
                 `${clsPrefix}-tabs-tab`,
                 value === name && `${clsPrefix}-tabs-tab--active`,
+                value === name && activeTabClass,
                 disabled && `${clsPrefix}-tabs-tab--disabled`,
                 mergedClosable && `${clsPrefix}-tabs-tab--closable`,
                 internalAddable && `${clsPrefix}-tabs-tab--addable`,
@@ -118,7 +125,10 @@ export default defineComponent({
               ],
               onClick: trigger === 'click' ? this.activateTab : undefined,
               onMouseenter: trigger === 'hover' ? this.activateTab : undefined,
-              style: internalAddable ? this.addStyle : this.style
+              style: [
+                internalAddable ? this.addStyle : this.style,
+                value === name && activeTabStyle
+              ]
             },
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             this.internalCreatedByPane

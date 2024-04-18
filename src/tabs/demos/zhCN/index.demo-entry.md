@@ -40,6 +40,8 @@ modal-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| active-tab-class | `string` | `undefined` | 激活状态标签的类名 | NEXT_VERSION |
+| active-tab-style | `string \| object` | `undefined` | 激活状态标签的样式 | NEXT_VERSION |
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否允许添加标签，只在标签的 `type` 为 `card` 时生效 |  |
 | add-tab-class | `string` | `undefined` | 添加标签标签的类名 | 2.37.0 |
 | add-tab-style | `string \| object` | `undefined` | 添加标签标签的样式 | 2.37.0 |
