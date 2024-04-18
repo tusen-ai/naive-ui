@@ -25,6 +25,8 @@ export interface TabsInjection {
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   tabClassRef: Ref<string | undefined>
+  activeTabStyleRef: Ref<string | CSSProperties | undefined>
+  activeTabClassRef: Ref<string | undefined>
   addTabClassRef: Ref<string | undefined>
   addTabStyleRef: Ref<string | CSSProperties | undefined>
   paneClassRef: Ref<string | undefined>

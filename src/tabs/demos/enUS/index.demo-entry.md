@@ -31,6 +31,8 @@ placement.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| active-tab-class | `string` | `undefined` | Class of the active pane. | NEXT_VERSION |
+| active-tab-style | `string \| object` | `undefined` | Style of the active pane. | NEXT_VERSION |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |  |
 | add-tab-class | `string` | `undefined` | Class of the add tab. | 2.37.0 |
 | add-tab-style | `string \| object` | `undefined` | Style of the add tab. | 2.37.0 |
