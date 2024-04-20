@@ -7,7 +7,7 @@ const transformIndexHtml = (code) => {
   }
 }
 
-const demoIndexTransFormPlugin = {
+export const demoIndexTransFormPlugin = {
   name: 'demo-transform',
   transformIndexHtml: {
     order: 'pre',
@@ -16,5 +16,3 @@ const demoIndexTransFormPlugin = {
     }
   }
 }
-
-module.exports = demoIndexTransFormPlugin

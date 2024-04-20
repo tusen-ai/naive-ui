@@ -1,11 +1,8 @@
-const { marked } = require('marked')
-const createRenderer = require('./md-renderer')
+import marked from 'marked'
+import { createRenderer } from './md-renderer'
+import { genVueComponent, getFileName, mergeParts } from './convert-md-to-demo'
+
 const mdRenderer = createRenderer()
-const {
-  genVueComponent,
-  getFileName,
-  mergeParts
-} = require('./convert-md-to-demo')
 
 function getPartsOfDemo (text) {
   // slot template
@@ -48,7 +45,10 @@ function getPartsOfDemo (text) {
   }
 }
 
-function convertVue2Demo (content, { resourcePath, relativeUrl, isVue = true }) {
+export function convertVue2Demo (
+  content,
+  { resourcePath, relativeUrl, isVue = true }
+) {
   const parts = getPartsOfDemo(content)
   const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
@@ -59,5 +59,3 @@ function convertVue2Demo (content, { resourcePath, relativeUrl, isVue = true }) 
   )
   return vueComponent
 }
-
-module.exports = convertVue2Demo

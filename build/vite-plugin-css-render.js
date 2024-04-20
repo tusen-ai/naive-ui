@@ -1,6 +1,6 @@
-const terseCssr = require('./utils/terse-cssr')
+import { terseCssr } from './utils/terse-cssr'
 
-module.exports = () => {
+export const createCssrPlugin = () => {
   return {
     name: 'css-render-vite',
     transform (src, id) {

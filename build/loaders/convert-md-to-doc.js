@@ -1,9 +1,10 @@
-const path = require('path')
-const fse = require('fs-extra')
-const { marked } = require('marked')
-const camelCase = require('lodash/camelCase')
-const createRenderer = require('./md-renderer')
-const projectPath = require('./project-path')
+import { projectPath } from './project-path'
+import path from 'path'
+import fse from 'fs-extra'
+import marked from 'marked'
+import camelCase from 'lodash/camelCase'
+import { createRenderer } from './md-renderer'
+
 const mdRenderer = createRenderer()
 
 async function resolveDemoTitle (fileName, demoEntryPath) {
@@ -164,7 +165,7 @@ export default {
   return script
 }
 
-async function convertMd2ComponentDocumentation (
+export async function convertMd2ComponentDocumentation (
   text,
   url,
   env = 'development'
@@ -246,5 +247,3 @@ async function convertMd2ComponentDocumentation (
   const docScript = await genScript(demoInfos, components, url, forceShowAnchor)
   return `${docTemplate}\n\n${docScript}`
 }
-
-module.exports = convertMd2ComponentDocumentation

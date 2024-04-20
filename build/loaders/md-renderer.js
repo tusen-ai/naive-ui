@@ -1,7 +1,7 @@
-const hljs = require('highlight.js')
-const { marked } = require('marked')
+import hljs from 'highlight.js'
+import marked from 'marked'
 
-function createRenderer (wrapCodeWithCard = true) {
+export function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
     table (header, body) {
@@ -90,5 +90,3 @@ function createRenderer (wrapCodeWithCard = true) {
   })
   return renderer
 }
-
-module.exports = createRenderer

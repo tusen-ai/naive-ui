@@ -1,12 +1,12 @@
-const parser = require('@babel/parser')
-const { default: traverse } = require('@babel/traverse')
-const { default: generate } = require('@babel/generator')
+import { parse } from '@babel/parser'
+import traverse from '@babel/traverse'
+import generate from '@babel/generator'
 
-module.exports = function terseCssr (code) {
+export function terseCssr (code) {
   const patternSpace = / +/g
   const patternEnter = /\n+/g
 
-  const ast = parser.parse(code, {
+  const ast = parse(code, {
     sourceType: 'module'
   })
 

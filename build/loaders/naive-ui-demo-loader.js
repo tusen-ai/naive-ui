@@ -1,8 +1,8 @@
-const { convertMd2Demo } = require('./convert-md-to-demo')
-const convertVue2Demo = require('./convert-vue-to-demo')
-const projectPath = require('./project-path')
+import { convertMd2Demo } from './convert-md-to-demo'
+import { convertVue2Demo } from './convert-vue-to-demo'
+import { projectPath } from './project-path'
 
-module.exports = function (content, path, type) {
+export function demoLoader (content, path, type) {
   const relativeUrl = path.replace(projectPath + '/', '')
   if (type === 'vue') {
     return convertVue2Demo(content, {
