@@ -5,7 +5,7 @@ const { kebabCase } = require('lodash')
 
 const baseDir = path.resolve(__dirname, '../..')
 
-exports.genWebTypes = function genWebTypes () {
+function genWebTypes () {
   const components = require('../../lib/components')
   const { default: version } = require('../../lib/version')
 
@@ -328,6 +328,6 @@ exports.genWebTypes = function genWebTypes () {
   }
 }
 
-if (require.main === module) {
-  exports.genWebTypes()
+if (import.meta.main) {
+  genWebTypes()
 }

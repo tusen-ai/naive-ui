@@ -1,12 +1,12 @@
-const fs = require('fs-extra')
-const path = require('path')
-const glob = require('fast-glob')
-const babel = require('@babel/core')
+import fs from 'fs-extra'
+import path from 'path'
+import glob from 'fast-glob'
+import babel from '@babel/core'
 
 /**
  * @param {('es' | 'lib')[]} formats
  */
-module.exports.completePath = async (formats) => {
+export const completePath = async (formats) => {
   await Promise.all(
     formats.map(async (format) => {
       const config = formatConfigs[format]

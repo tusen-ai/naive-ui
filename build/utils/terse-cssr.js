@@ -1,6 +1,9 @@
 import { parse } from '@babel/parser'
-import traverse from '@babel/traverse'
-import generate from '@babel/generator'
+import _traverse from '@babel/traverse'
+import _generate from '@babel/generator'
+
+const traverse = _traverse.default
+const generate = _generate.default
 
 export function terseCssr (code) {
   const patternSpace = / +/g

@@ -1,4 +1,4 @@
-import marked from 'marked'
+import * as marked from 'marked'
 import { createRenderer } from './md-renderer'
 import { genVueComponent, getFileName, mergeParts } from './convert-md-to-demo'
 

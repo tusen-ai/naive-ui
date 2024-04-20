@@ -138,7 +138,7 @@ async function transformMdToVueAndUpdateEntryFile (files) {
 
 const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
 
-async function convertFilesByComponentName (componentName) {
+export async function convertFilesByComponentName (componentName) {
   const folders = ['zhCN', 'enUS'].map((item) =>
     path.resolve(COMPONENT_ROOT, `${componentName}/demos/${item}`)
   )
@@ -146,8 +146,4 @@ async function convertFilesByComponentName (componentName) {
     const files = await loadAllMdFile(folders)
     transformMdToVueAndUpdateEntryFile(files)
   }
-}
-
-module.exports = {
-  convertFilesByComponentName
 }

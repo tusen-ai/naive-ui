@@ -1,5 +1,5 @@
 import hljs from 'highlight.js'
-import marked from 'marked'
+import * as marked from 'marked'
 
 export function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()

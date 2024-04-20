@@ -6,7 +6,7 @@ const commentPattern = /^( *)(\*|(\/\/)|(\/\*))/g
  * Collect css vars
  * @param {string} code
  */
-function collectVars (code) {
+export function collectVars (code) {
   const vars = new Set()
   const lines = code.split('\n')
   lines.forEach((line) => {
@@ -24,12 +24,9 @@ function collectVars (code) {
 /**
  * @param {string[]} vars
  */
-function genDts (vars) {
+export function genDts (vars) {
   console.log(vars)
   return `interface CssVars {
 ${vars.map((v) => "  '" + v + "': string").join('\n')}
 }\n`
 }
-
-exports.genDts = genDts
-exports.collectVars = collectVars

@@ -1,5 +1,5 @@
 import { handleMergeCode } from '../utils/handle-merge-code'
-import marked from 'marked'
+import * as marked from 'marked'
 import fs from 'fs'
 import path from 'path'
 import { createRenderer } from './md-renderer'

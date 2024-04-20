@@ -1,7 +1,7 @@
 import { projectPath } from './project-path'
 import path from 'path'
 import fse from 'fs-extra'
-import marked from 'marked'
+import * as marked from 'marked'
 import camelCase from 'lodash/camelCase'
 import { createRenderer } from './md-renderer'
 

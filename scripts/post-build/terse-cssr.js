@@ -1,6 +1,6 @@
-const fs = require('fs').promises
-const terseCssr = require('../../build/utils/terse-cssr.js')
-const { walk, outDirs } = require('../utils')
+import fs from 'fs/promises'
+import { terseCssr } from './terse-cssr'
+import { walk, outDirs } from '../utils'
 
 exports.terseCssr = async () => {
   for (const dir of outDirs) {
@@ -13,6 +13,6 @@ exports.terseCssr = async () => {
   }
 }
 
-if (require.main === module) {
+if (import.meta.main === module) {
   exports.terseCssr()
 }
