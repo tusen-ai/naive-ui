@@ -1,17 +1,14 @@
-import fs from 'fs/promises'
-import path from 'path'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-export const walk = async function * walk (dir) {
-  for await (const d of await fs.opendir(dir)) {
-    const entry = path.join(dir, d.name)
-    if (d.isDirectory()) yield * walk(entry)
-    else if (d.isFile()) yield entry
-  }
-}
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 export const outDirs = ['es', 'lib'].map((d) =>
   path.resolve(__dirname, '../..', d)
 )
+
 export const srcDir = path.resolve(__dirname, '../../src')
 
-export const replaceDefine = require('./replace-define').replaceDefine
+export { walk } from './walk.js'
+export { replaceDefine } from './replace-define.js'

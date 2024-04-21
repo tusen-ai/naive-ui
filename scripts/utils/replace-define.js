@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { walk } from '.'
+import { walk } from './walk.js'
 
 export const replaceDefine = async (dirs, defines) => {
   const defineKeys = Object.keys(defines)

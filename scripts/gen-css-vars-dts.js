@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { genDts, collectVars } from './utils/collect-vars'
-import { walk } from './utils'
+import { walk } from './utils/index.js'
 
 const srcPath = path.resolve(__dirname, '..', 'src')
 

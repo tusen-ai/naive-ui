@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { terseCssr as buildTerse } from '../../build/utils/terse-cssr.js'
-import { walk, outDirs } from '../utils.js'
+import { walk, outDirs } from '../utils/index.js'
 import url from 'url'
 
 export let terseCssr
