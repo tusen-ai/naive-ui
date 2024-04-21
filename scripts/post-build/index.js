@@ -1,8 +1,8 @@
 // terse cssr
-import { genWebTypes } from './gen-web-types'
-import { completePath } from './complete-path'
-import { replaceDefine, outDirs, srcDir } from '../utils'
-import { terseCssr } from './terse-cssr'
+import { genWebTypes } from './gen-web-types.js'
+import { completePath } from './complete-path.js'
+import { replaceDefine, outDirs, srcDir } from '../utils/index.js'
+import { terseCssr } from './terse-cssr.js'
 
 // replace __DEV__`
 ;(async () => {

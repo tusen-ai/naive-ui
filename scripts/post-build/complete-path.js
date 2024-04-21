@@ -1,7 +1,12 @@
 import fs from 'fs-extra'
-import path from 'path'
+import path, { dirname } from 'path'
 import glob from 'fast-glob'
 import babel from '@babel/core'
+
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 /**
  * @param {('es' | 'lib')[]} formats
@@ -139,7 +144,10 @@ const parseSource = (source, currentDir, suffix) => {
  * @return {string | null}
  */
 const guessFullPath = (pkgName, subpath) => {
-  const pkgPath = require.resolve(path.posix.join(pkgName, 'package.json'))
+  const pkgPath = new URL(
+    path.posix.join(pkgName, 'package.json'),
+    import.meta.url
+  ).pathname
   const pkgRootPath = path.dirname(pkgPath)
 
   let parsedSource = null

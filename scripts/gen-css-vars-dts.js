@@ -1,7 +1,11 @@
 import fs from 'fs/promises'
-import path from 'path'
+import path, { dirname } from 'path'
 import { genDts, collectVars } from './utils/collect-vars'
 import { walk } from './utils/index.js'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const srcPath = path.resolve(__dirname, '..', 'src')
 

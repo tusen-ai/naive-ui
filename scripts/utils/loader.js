@@ -2,8 +2,12 @@
 // const fs = require('fs-extra')
 // const { marked } = require('marked')
 import fs from 'fs-extra'
-import path from 'path'
+import path, { dirname } from 'path'
 import * as marked from 'marked'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const fileRegex = /\.demo\.md$/
 

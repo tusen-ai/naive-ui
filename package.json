@@ -11,7 +11,7 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && NODE_ENV=development vite",
-    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run test:umd && pnpm run test:esm && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-x-dts && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run test:umd && pnpm run test:esm && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "bash ./scripts/pre-build-site/pre-build-site.sh && NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/tusimple/es themes/tusimple/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",

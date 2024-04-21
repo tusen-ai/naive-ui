@@ -1,8 +1,12 @@
 import { handleMergeCode } from '../utils/handle-merge-code'
 import * as marked from 'marked'
 import fs from 'fs'
-import path from 'path'
+import path, { dirname } from 'path'
 import { createRenderer } from './md-renderer'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'

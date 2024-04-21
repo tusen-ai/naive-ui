@@ -1,14 +1,17 @@
 // I don't like web-types, why can't webstrom just work with typescript?
 import fs from 'fs'
-import path from 'path'
-import url from 'url'
+import path, { dirname } from 'path'
+import url, { fileURLToPath } from 'url'
 import { kebabCase } from 'lodash-es'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const baseDir = path.resolve(__dirname, '../..')
 export let genWebTypes
-function genWebTypesFunc () {
-  const components = require('../../lib/components')
-  const { default: version } = require('../../lib/version')
+async function genWebTypesFunc () {
+  const components = await import('../../lib/components')
+  const { default: version } = await import('../../lib/version')
 
   const vueComponents = []
 
