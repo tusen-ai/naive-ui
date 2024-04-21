@@ -49,7 +49,7 @@ import type {
   FormItemValidateOptions,
   FormItemInst,
   FormItemInternalValidate,
-  FormItemInternalValidateResult,
+  FormItemValidateResult,
   FeedBackPositonCrosswise,
   FeedBackPositonVertical
 } from './interface'
@@ -93,7 +93,8 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  labelProps: Object as PropType<LabelHTMLAttributes>
+  labelProps: Object as PropType<LabelHTMLAttributes>,
+  onValidate: Function as PropType<(errors: ValidateError[]) => void>
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -337,7 +338,7 @@ export default defineComponent({
       const warningValidator = new Schema({
         [mergedPath]: activeWarningRules as RuleItem[]
       })
-      const { validateMessages } = NForm?.props || {}
+      const { validateMessages, onValidate } = NForm?.props || {}
       if (validateMessages) {
         validator.messages(validateMessages)
         warningValidator.messages(validateMessages)
@@ -363,7 +364,7 @@ export default defineComponent({
         })
       }
 
-      const validationResult: FormItemInternalValidateResult = {
+      const validationResult: FormItemValidateResult = {
         valid: true,
         errors: undefined,
         warnings: undefined
@@ -405,7 +406,9 @@ export default defineComponent({
       ) {
         restoreValidation()
       }
-
+      if (onValidate && activeRules.length > 0) {
+        onValidate(path, validationResult)
+      }
       return validationResult
     }
     provide(formItemInjectionKey, {
