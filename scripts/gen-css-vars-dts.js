@@ -1,7 +1,3 @@
-// const fs = require('fs').promises
-// const path = require('path')
-// const { genDts, collectVars } = require('./utils/collect-vars')
-// const { walk } = require('./utils')
 import fs from 'fs/promises'
 import path from 'path'
 import { genDts, collectVars } from './utils/collect-vars'

@@ -1,6 +1,9 @@
-const path = require('path')
-const fs = require('fs-extra')
-const { marked } = require('marked')
+// const path = require('path')
+// const fs = require('fs-extra')
+// const { marked } = require('marked')
+import fs from 'fs-extra'
+import path from 'path'
+import * as marked from 'marked'
 
 const fileRegex = /\.demo\.md$/
 
