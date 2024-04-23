@@ -23,10 +23,10 @@ export default defineComponent({
 
     const url = ref('https://picsum.photos/id/10/100/100')
 
-    const renderToolbar = ({ originalNodes }: ImageRenderToolbarProps) => {
+    const renderToolbar = ({ nodes }: ImageRenderToolbarProps) => {
       return [
-        originalNodes.prev,
-        originalNodes.next,
+        nodes.prev,
+        nodes.next,
         h(
           NButton,
           {

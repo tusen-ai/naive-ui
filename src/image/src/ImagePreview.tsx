@@ -598,7 +598,7 @@ export default defineComponent({
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
                               {renderToolbar ? (
                                 renderToolbar({
-                                  originalNodes: {
+                                  nodes: {
                                     prev: prevNode,
                                     next: nextNode,
                                     rotateLeft: rotateLeftNode,

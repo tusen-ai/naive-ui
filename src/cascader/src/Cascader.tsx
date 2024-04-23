@@ -12,7 +12,8 @@ import {
   watchEffect,
   type VNodeChild,
   type HTMLAttributes,
-  nextTick
+  nextTick,
+  type VNode
 } from 'vue'
 import {
   createTreeMate,
@@ -171,6 +172,20 @@ export const cascaderProps = {
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   getColumnStyle: Function as PropType<
   (detail: { level: number }) => string | CSSProperties
+  >,
+  renderPrefix: Function as PropType<
+  (props: {
+    option: CascaderOption
+    checked: boolean
+    node: VNode | null
+  }) => VNodeChild
+  >,
+  renderSuffix: Function as PropType<
+  (props: {
+    option: CascaderOption
+    checked: boolean
+    node: VNode | null
+  }) => VNodeChild
   >,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
@@ -877,6 +892,8 @@ export default defineComponent({
       labelFieldRef: toRef(props, 'labelField'),
       renderLabelRef: toRef(props, 'renderLabel'),
       getColumnStyleRef: toRef(props, 'getColumnStyle'),
+      renderPrefixRef: toRef(props, 'renderPrefix'),
+      renderSuffixRef: toRef(props, 'renderSuffix'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,

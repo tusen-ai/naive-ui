@@ -49,7 +49,9 @@ status.vue
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Cascader placement. | 2.25.0 |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |  |
+| render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. | NEXT_VERSION |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Render function for cascader menu option label. | 2.24.0 |
+| render-suffix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. | NEXT_VERSION |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |  |
 | show | `boolean` | `undefined` | Whether to show the menu. |  |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |

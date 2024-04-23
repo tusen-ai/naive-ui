@@ -50,7 +50,9 @@ default-value-debug.vue
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否远程获取数据 |  |
+| render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | NEXT_VERSION |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
+| render-suffix | `(info: { option: CascaderOption, checked: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | NEXT_VERSION |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |

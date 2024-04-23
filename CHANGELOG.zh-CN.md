@@ -33,6 +33,8 @@
 - `n-scrollbar` 新增 `content-style` 和 `content-class` 属性，关闭 [#4497](https://github.com/tusen-ai/naive-ui/issues/4497)
 - `n-image` 新增 `render-toolbar` 属性
 - `n-cascader` 新增 `get-column-width` 属性
+- `n-cascader` 新增 `render-prefix` 属性
+- `n-cascader` 新增 `render-suffix` 属性
 - `n-image` 优化下载按钮图标
 
 ## 2.38.1

@@ -1,7 +1,7 @@
 import type { VNode, VNodeChild } from 'vue'
 
 export interface ImageRenderToolbarProps {
-  originalNodes: {
+  nodes: {
     prev: VNode
     next: VNode
     rotateLeft: VNode
