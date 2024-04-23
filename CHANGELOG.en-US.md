@@ -5,6 +5,7 @@
 ### i18n
 
 - Add csCZ locale.
+- Add missing itIT locale translations
 
 ### Fixes
 
