@@ -33,6 +33,7 @@
 - `n-scrollbar` adds `content-style` and `content-class` props, closes [#4497](https://github.com/tusen-ai/naive-ui/issues/4497).
 - `n-image` adds `render-toolbar` prop.
 - `n-cascader` adds `get-column-style` prop.
+- `n-image` optimizes download icon style.
 
 ## 2.38.1
 

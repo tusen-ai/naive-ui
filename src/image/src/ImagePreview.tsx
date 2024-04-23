@@ -27,14 +27,15 @@ import {
   RotateCounterclockwiseIcon,
   ZoomInIcon,
   ZoomOutIcon,
-  ResizeSmallIcon
+  ResizeSmallIcon,
+  DownloadIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon, closeIcon, downloadIcon } from './icons'
+import { prevIcon, nextIcon, closeIcon } from './icons'
 import {
   imageContextKey,
   type MoveStrategy,
@@ -539,7 +540,7 @@ export default defineComponent({
 
     const downloadNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleDownloadClick}>
-        {{ default: () => downloadIcon }}
+        {{ default: () => <DownloadIcon /> }}
       </NBaseIcon>,
       'tipDownload'
     )
