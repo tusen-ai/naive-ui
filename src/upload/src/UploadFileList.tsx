@@ -43,11 +43,12 @@ export default defineComponent({
     )
 
     const renderFileList = (): VNode[] =>
-      mergedFileListRef.value.map((file) => (
+      mergedFileListRef.value.map((file, index) => (
         <NUploadFile
           clsPrefix={mergedClsPrefixRef.value}
           key={file.id}
           file={file}
+          index={index}
           listType={listTypeRef.value}
         />
       ))

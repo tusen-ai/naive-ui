@@ -10,7 +10,7 @@ It is fairly complete, themeable, written in typescript, not too slow.
 
 ## Fairly Complete
 
-There are more than 80 components. Hope they can help you write less code.
+There are more than 90 components. Hope they can help you write less code.
 
 What's more, they are all treeshakable.
 

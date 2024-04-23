@@ -8,6 +8,7 @@ It looks better but I'm sure it's not as reliable as native scrollbar.
 basic.vue
 x.vue
 trigger.vue
+no-sync.vue
 ```
 
 ## API
@@ -16,10 +17,12 @@ trigger.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | Class name of content div. | NEXT_VERSION |
+| content-style | `string \| object` | `undefined` | Style of content div. | NEXT_VERSION |
+| size | `number` | `undefined` | Size of scrollbar. | 2.34.4 |
 | trigger | `'hover' \| 'none'` | `'hover'` | Trigger of show scrollbar. `'none'` means always show it. | 2.29.1 |
 | x-scrollable | `boolean` | `false` | Whether it can scroll horizontally. |  |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback on scroll |  |
-| size | `number` | `undefined` | Size of scrollbar. | 2.34.4 |
 
 ### Scrollbar Slots
 

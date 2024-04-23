@@ -41,6 +41,7 @@ debug.vue
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |
+| get-children | `(option: any) => unknown` | `undefined` | Get children of the option. | 2.38.1 |
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |  |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |  |
 | disabled-field | `string` | `'disabled'` | The disabled field used for `TreeSelectOption`. | 2.32.2 |

@@ -30,6 +30,7 @@ export default cB('scrollbar', `
         display: none;
       `),
       c('>', [
+        // We can't set overflow hidden since it affects positioning.
         cB('scrollbar-content', `
           box-sizing: border-box;
           min-width: 100%;

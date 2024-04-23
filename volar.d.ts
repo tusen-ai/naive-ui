@@ -148,6 +148,9 @@ declare module 'vue' {
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
     NModalProvider: (typeof import('naive-ui'))['NModalProvider']
+    NFloatButton: (typeof import('naive-ui'))['NFloatButton']
+    NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
+    NInfiniteScroll: (typeof import('naive-ui'))['NInfiniteScroll']
   }
 }
 export {}

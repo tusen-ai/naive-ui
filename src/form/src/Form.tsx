@@ -124,6 +124,7 @@ export default defineComponent({
               })
             }
             if (formInvalid) {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
               reject(errors.length ? errors : undefined)
             } else {
               resolve({

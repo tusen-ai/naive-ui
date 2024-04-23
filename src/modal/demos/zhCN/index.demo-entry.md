@@ -48,20 +48,20 @@ mask-click-debug.vue
 
 ### ModalProvider Props
 
-自 NEXT_VERSION 开始提供。
+自 `2.38.0` 开始提供。
 
-| 名称 | 类型                    | 默认值 | 说明           | 版本         |
-| ---- | ----------------------- | ------ | -------------- | ------------ |
-| to   | `string \| HTMLElement` | `body` | 模态的挂载位置 | NEXT_VERSION |
+| 名称 | 类型                    | 默认值 | 说明           | 版本   |
+| ---- | ----------------------- | ------ | -------------- | ------ |
+| to   | `string \| HTMLElement` | `body` | 模态的挂载位置 | 2.38.0 |
 
 ### useModal API
 
-自 NEXT_VERSION 开始提供。
+自 `2.38.0` 开始提供。
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| create | `(options: ModalOptions) => ModalReactive` | 创建模态框 | NEXT_VERSION |
-| destroyAll | `() => void` | 销毁所有弹出的模态框 | NEXT_VERSION |
+| create | `(options: ModalOptions) => ModalReactive` | 创建模态框 | 2.38.0 |
+| destroyAll | `() => void` | 销毁所有弹出的模态框 | 2.38.0 |
 
 `ModalOptions` 的属性和 `ModalReactive` 属性同 `ModalProps`（属性应使用 camelCase，例如 `auto-focus` 对应 `autoFocus`）。
 

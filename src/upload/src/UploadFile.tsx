@@ -50,6 +50,10 @@ export default defineComponent({
     listType: {
       type: String as PropType<ListType>,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   setup (props) {
@@ -138,7 +142,8 @@ export default defineComponent({
         onRemove
           ? onRemove({
             file: Object.assign({}, file),
-            fileList: mergedFileList
+            fileList: mergedFileList,
+            index: props.index
           })
           : true
       ).then((result) => {
