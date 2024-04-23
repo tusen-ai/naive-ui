@@ -40,6 +40,7 @@ default-value-debug.vue
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | 可过滤菜单的 DOM 属性 | 2.27.0 |
+| get-column-style | `(detail: { level: number }) => string \| object` | `undefined` | 获取列样式的函数，`level` 从 `0` 开始 | NEXT_VERSION |
 | value-field | `string` | `'value'` | 替代 `CascaderOption` 中的 value 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |

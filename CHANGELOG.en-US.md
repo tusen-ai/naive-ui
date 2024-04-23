@@ -32,6 +32,7 @@
 - `n-split` supports setting the pixel value size.
 - `n-scrollbar` adds `content-style` and `content-class` props, closes [#4497](https://github.com/tusen-ai/naive-ui/issues/4497).
 - `n-image` adds `render-toolbar` prop.
+- `n-cascader` adds `get-column-style` prop.
 
 ## 2.38.1
 

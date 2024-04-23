@@ -169,6 +169,9 @@ export const cascaderProps = {
   >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  getColumnStyle: Function as PropType<
+  (detail: { level: number }) => string | CSSProperties
+  >,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -873,6 +876,7 @@ export default defineComponent({
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
       renderLabelRef: toRef(props, 'renderLabel'),
+      getColumnStyleRef: toRef(props, 'getColumnStyle'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
