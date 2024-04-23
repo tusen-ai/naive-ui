@@ -2,24 +2,20 @@
 # Custom Toolbar
 
 You can customize the toolbar using `render-toolbar`.
-  </markdown>
+</markdown>
 
 <template>
-  <n-flex>
-    <n-image
-      width="100"
-      src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-      :render-toolbar="renderToolbar"
-    />
-    <n-image width="100" :src="url" :render-toolbar="renderCustomToolbar" />
-  </n-flex>
+  <n-image
+    width="100"
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    :render-toolbar="renderToolbar"
+  />
 </template>
+
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue'
-import { ToolbarNodes } from '../../src/interface'
-import { NButton } from '../../../button'
 import { OpenOutline, ClipboardOutline } from '@vicons/ionicons5'
-import { NFlex, useMessage } from 'naive-ui'
+import { useMessage, ImageRenderToolbarProps, NButton } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -27,57 +23,45 @@ export default defineComponent({
 
     const url = ref('https://picsum.photos/id/10/100/100')
 
-    const renderToolbar = (nodes: ToolbarNodes) => {
+    const renderToolbar = ({ originalNodes }: ImageRenderToolbarProps) => {
       return [
-        nodes.prev,
-        nodes.zoomIn,
-        nodes.zoomOut,
-        nodes.next,
-        nodes.rotateLeft,
-        nodes.rotateRight,
-        nodes.originalSize,
-        nodes.download,
-        nodes.close
+        originalNodes.prev,
+        originalNodes.next,
+        h(
+          NButton,
+          {
+            circle: true,
+            type: 'primary',
+            style: { marginLeft: '12px' },
+            onClick: () => {
+              window.open(url.value)
+            }
+          },
+          {
+            icon: () => h(OpenOutline)
+          }
+        ),
+        h(
+          NButton,
+          {
+            circle: true,
+            type: 'primary',
+            style: { marginLeft: '12px' },
+            onClick: async () => {
+              await navigator.clipboard.writeText(url.value)
+              message.success('Copied to clipboard')
+            }
+          },
+          {
+            icon: () => h(ClipboardOutline)
+          }
+        )
       ]
     }
 
-    const renderCustomToolbar = () => {
-      return h(NFlex, null, {
-        default: () => [
-          h(
-            NButton,
-            {
-              circle: true,
-              type: 'primary',
-              onClick: () => {
-                window.open(url.value)
-              }
-            },
-            {
-              icon: () => h(OpenOutline)
-            }
-          ),
-          h(
-            NButton,
-            {
-              circle: true,
-              type: 'primary',
-              onClick: async () => {
-                await navigator.clipboard.writeText(url.value)
-                message.success('Copied to clipboard')
-              }
-            },
-            {
-              icon: () => h(ClipboardOutline)
-            }
-          )
-        ]
-      })
-    }
     return {
       url,
-      renderToolbar,
-      renderCustomToolbar
+      renderToolbar
     }
   }
 })

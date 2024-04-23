@@ -145,10 +145,14 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection: 'verticalTop' | 'verticalBottom' =
-        `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight' =
-        `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
+      const moveVerticalDirection:
+      | 'verticalTop'
+      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection:
+      | 'horizontalLeft'
+      | 'horizontalRight' = `horizontal${
+        deltaHorizontal > 0 ? 'Left' : 'Right'
+      }`
 
       return {
         moveVerticalDirection,
@@ -593,15 +597,17 @@ export default defineComponent({
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
                               {renderToolbar ? (
                                 renderToolbar({
-                                  prev: prevNode,
-                                  next: nextNode,
-                                  rotateLeft: rotateLeftNode,
-                                  rotateRight: rotateRightNode,
-                                  originalSize: originalSizeNode,
-                                  zoomOut: zoomOutNode,
-                                  zoomIn: zoomInNode,
-                                  download: downloadNode,
-                                  close: closeNode
+                                  originalNodes: {
+                                    prev: prevNode,
+                                    next: nextNode,
+                                    rotateLeft: rotateLeftNode,
+                                    rotateRight: rotateRightNode,
+                                    resizeToOriginalSize: originalSizeNode,
+                                    zoomOut: zoomOutNode,
+                                    zoomIn: zoomInNode,
+                                    download: downloadNode,
+                                    close: closeNode
+                                  }
                                 })
                               ) : (
                                 <>
