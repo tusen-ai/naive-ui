@@ -31,6 +31,7 @@
 - `n-form-item` 新增 `feedback-vertical` 和 `feedback-crosswise` 属性
 - `n-split` 支持设置像素值大小
 - `n-scrollbar` 新增 `content-style` 和 `content-class` 属性，关闭 [#4497](https://github.com/tusen-ai/naive-ui/issues/4497)
+- `n-image` 新增 `render-toolbar` 属性
 
 ## 2.38.1
 

@@ -9,6 +9,7 @@ basic.vue
 group.vue
 error.vue
 preview-disabled.vue
+custom-toolbar.vue
 custom.vue
 tooltip.vue
 full-debug.vue
@@ -32,6 +33,7 @@ previewed-img-props.vue
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否禁用单击图像预览 |  |
 | previewed-img-props | `object` | `undefined` | 预览图片时 img 元素的属性 | 2.34.0 |
+| render-toolbar | `(nodes: { prev: VNode, next: VNode, rotateLeft: VNode, rotateRight: VNode, originalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `NEXT_VERSION` |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 | src | `string` | `undefined` | 图片来源 |  |

@@ -92,6 +92,7 @@ export default defineComponent({
         onNext={this.next}
         showToolbar={this.showToolbar}
         showToolbarTooltip={this.showToolbarTooltip}
+        renderToolbar={this.renderToolbar}
       >
         {this.$slots}
       </NImagePreview>
