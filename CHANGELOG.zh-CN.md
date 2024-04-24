@@ -15,6 +15,7 @@
 - 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
 - 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
 - 修复组件调整主题时 `theme-overrides` 属性中的 `common` 类型报错
+- 修复 `n-auto-complete` 与 `n-select` 的 `size` 属性未对选项生效的问题，关闭 [#5842](https://github.com/tusen-ai/naive-ui/issues/5842)
 
 ### Features
 
