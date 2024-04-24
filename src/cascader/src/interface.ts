@@ -2,7 +2,7 @@ import type { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import type { Ref, Slots, VNodeChild } from 'vue'
+import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
@@ -79,6 +79,25 @@ export interface CascaderInjection {
   optionHeightRef: Ref<string>
   labelFieldRef: Ref<string>
   showCheckboxRef: Ref<boolean>
+  getColumnStyleRef: Ref<
+  ((detail: { level: number }) => string | CSSProperties) | undefined
+  >
+  renderPrefixRef: Ref<
+  | ((info: {
+    option: CascaderOption
+    checked: boolean
+    node: VNode | null
+  }) => VNodeChild)
+  | undefined
+  >
+  renderSuffixRef: Ref<
+  | ((info: {
+    option: CascaderOption
+    checked: boolean
+    node: VNode | null
+  }) => VNodeChild)
+  | undefined
+  >
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void

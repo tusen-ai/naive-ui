@@ -37,17 +37,17 @@ export default c([
       flex: 1;
       justify-content: center;
     `),
-    cB('scrollbar', {
-      // if width not set, cascader select menu's inner scroll area's width is
-      // not correct, which won't change after select menu width is set
-      width: '100%'
-    }),
-    cB('base-menu-mask', {
-      backgroundColor: 'var(--n-menu-mask-color)'
-    }),
-    cB('base-loading', {
-      color: 'var(--n-loading-color)'
-    }),
+    // if width not set, cascader select menu's inner scroll area's width is
+    // not correct, which won't change after select menu width is set
+    cB('scrollbar', `
+      width: 100%;
+    `),
+    cB('base-menu-mask', `
+      background-color: var(--n-menu-mask-color);
+    `),
+    cB('base-loading', `
+      color: var(--n-loading-color);
+    `),
     cB('cascader-submenu-wrapper', `
       position: relative;
       display: flex;
@@ -61,9 +61,9 @@ export default c([
       cM('virtual', `
         width: var(--n-column-width);
       `),
-      cB('scrollbar-content', {
-        position: 'relative'
-      }),
+      cB('scrollbar-content', `
+        position: relative;
+      `),
       c('&:first-child', `
         border-top-left-radius: var(--n-menu-border-radius);
         border-bottom-left-radius: var(--n-menu-border-radius);
@@ -98,68 +98,68 @@ export default c([
         background-color .2s var(--n-bezier),
         color 0.2s var(--n-bezier);
     `, [
-      cM('show-prefix', {
-        paddingLeft: 0
-      }),
+      cM('show-prefix', `
+        padding-left: 0;
+      `),
       cE('label', `
         flex: 1 0 0;
         overflow: hidden;
         text-overflow: ellipsis;
       `),
-      cE('prefix', {
-        width: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }),
-      cE('suffix', {
-        width: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }),
-      cB('cascader-option-icon-placeholder', {
-        lineHeight: 0,
-        position: 'relative',
-        width: '16px',
-        height: '16px',
-        fontSize: '16px'
-      }, [
+      cE('prefix', `
+        min-width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `),
+      cE('suffix', `
+        min-width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `),
+      cB('cascader-option-icon-placeholder', `
+        line-height: 0;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+      `, [
         cB('cascader-option-icon', [
-          cM('checkmark', {
-            color: 'var(--n-option-check-mark-color)'
-          }, [
+          cM('checkmark', `
+            color: var(--n-option-check-mark-color);
+          `, [
             fadeInScaleUpTransition({
               originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
             })
           ]),
-          cM('arrow', {
-            color: 'var(--n-option-arrow-color)'
-          })
+          cM('arrow', `
+            color: var(--n-option-arrow-color);
+          `)
         ])
       ]),
-      cM('selected', {
-        color: 'var(--n-option-text-color-active)'
-      }),
-      cM('active', {
-        color: 'var(--n-option-text-color-active)',
-        backgroundColor: 'var(--n-option-color-hover)'
-      }),
-      cM('pending', {
-        backgroundColor: 'var(--n-option-color-hover)'
-      }),
-      c('&:hover', {
-        backgroundColor: 'var(--n-option-color-hover)'
-      }),
+      cM('selected', `
+        color: var(--n-option-text-color-active);
+      `),
+      cM('active', `
+        color: var(--n-option-text-color-active);
+        background-color: var(--n-option-color-hover);
+      `),
+      cM('pending', `
+        background-color: var(--n-option-color-hover);
+      `),
+      c('&:hover', `
+        background-color: var(--n-option-color-hover);
+      `),
       cM('disabled', `
         color: var(--n-option-text-color-disabled);
         background-color: #0000;
         cursor: not-allowed;
       `, [
         cB('cascader-option-icon', [
-          cM('arrow', {
-            color: 'var(--n-option-text-color-disabled)'
-          })
+          cM('arrow', `
+            color: var(--n-option-text-color-disabled);
+          `)
         ])
       ])
     ])

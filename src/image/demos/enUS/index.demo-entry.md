@@ -9,6 +9,7 @@ basic.vue
 group.vue
 error.vue
 preview-disabled.vue
+custom-toolbar.vue
 custom.vue
 tooltip.vue
 lazy.vue
@@ -32,6 +33,7 @@ previewed-img-props.vue
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
 | previewed-img-props | `object` | `undefined` | DOM attributes of img element in preview mode. | 2.34.0 |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateLeft: VNode, rotateRight: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `NEXT_VERSION` |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 | src | `string` | `undefined` | Image source. |  |
@@ -43,10 +45,11 @@ previewed-img-props.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
-| on-preview-next | `() => void` | `undefined` | Click the callback on the next slide |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateLeft: VNode, rotateRight: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `NEXT_VERSION` |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
+| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
+| on-preview-next | `() => void` | `undefined` | Click the callback on the next slide |
 
 ### Image Slots
 
