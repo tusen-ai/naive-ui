@@ -57,7 +57,6 @@ center-arrow-debug.vue
 | scrollable | `boolean` | `false` | popover 内容是否可滚动 | 2.28.3 |
 | show-arrow | `boolean` | `true` | 是否显示箭头 |  |
 | show | `boolean` | `undefined` | 是否展示 popover |  |
-| title | `string` | `undefined` | popover 的 title 信息 |  |
 | to | `string \| HTMLElement \| false` | `'body'` | 弹出内容的目标容器位置，`false` 会待在原地 |  |
 | trigger | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'hover'` | popover 的触发方式 |  |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` 表示 popover 的宽度会和它的触发元素一致 |  |
