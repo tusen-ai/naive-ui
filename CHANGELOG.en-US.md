@@ -36,6 +36,7 @@
 - `n-cascader` adds `get-render-prefix` prop.
 - `n-cascader` adds `get-render-suffix` prop.
 - `n-image` optimizes download icon style.
+- `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
 
 ## 2.38.1
 

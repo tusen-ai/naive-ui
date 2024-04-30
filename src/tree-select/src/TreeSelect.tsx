@@ -936,6 +936,16 @@ export default defineComponent({
                               onFocusin={this.handleMenuFocusin}
                               onFocusout={this.handleMenuFocusout}
                             >
+                              {resolveWrappedSlot($slots.header, (children) => {
+                                return children ? (
+                                  <div
+                                    class={`${mergedClsPrefix}-tree-select-menu__header`}
+                                    data-action
+                                  >
+                                    {children}
+                                  </div>
+                                ) : null
+                              })}
                               <NTree
                                 ref="treeInstRef"
                                 blockLine
