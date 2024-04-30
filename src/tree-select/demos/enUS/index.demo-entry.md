@@ -86,11 +86,12 @@ debug.vue
 
 ### TreeSelect Slots
 
-| Name   | Parameters | Description                            | Version |
-| ------ | ---------- | -------------------------------------- | ------- |
-| action | `()`       | Options menu slot.                     | 2.22.0  |
-| arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4  |
-| empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| header | `()`       | Header menu slot.                      | NEXT_VERSION |
+| action | `()`       | Options menu slot.                     | 2.22.0       |
+| arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4       |
+| empty  | `()`       | Empty state slot for the options menu. | 2.22.0       |
 
 ### TreeSelect Methods
 

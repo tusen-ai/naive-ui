@@ -34,6 +34,14 @@ export default c([
       flex: 1;
       justify-content: center;
     `),
+    cE('header', `
+      padding: var(--n-action-padding);
+      transition: 
+        color .3s var(--n-bezier);
+        border-color .3s var(--n-bezier);
+      border-bottom: 1px solid var(--n-action-divider-color);
+      color: var(--n-action-text-color);
+    `),
     cE('action', `
       padding: var(--n-action-padding);
       transition: 
