@@ -36,6 +36,7 @@
 - `n-cascader` 新增 `render-prefix` 属性
 - `n-cascader` 新增 `render-suffix` 属性
 - `n-image` 优化下载按钮图标
+- `n-tree-select` 新增 `header` 插槽，关闭 [#5915](https://github.com/tusen-ai/naive-ui/issues/5915)
 
 ## 2.38.1
 
