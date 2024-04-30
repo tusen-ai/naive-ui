@@ -10,6 +10,9 @@ Maybe you need to use this slot in the tree selection menu.
     default-value="Drive My Car"
     @update:value="handleUpdateValue"
   >
+    <template #header>
+      Don't know what to put
+    </template>
     <template #action>
       You can customize some operations here.
     </template>

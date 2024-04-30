@@ -10,6 +10,9 @@
     default-value="Drive My Car"
     @update:value="handleUpdateValue"
   >
+    <template #header>
+      不知道放些什么
+    </template>
     <template #action>
       你可以在这里自定义一些操作
     </template>
