@@ -21,8 +21,8 @@
 - `n-watermark` support multi-lines in content.
 - `n-watermark` adds `text-align` prop.
 - `n-qr-code` adds `type` prop, Customize rendering output by setting `type`, providing two options: `canvas` and `svg`.
-- `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
-- `n-card` 的 `title` 属性支持 render 函数
+- `n-card` adds `action`, `content`, `cover`, `footer` and `header-extra` props.
+- `n-card`'s `title` prop supports render function.
 - `n-upload` export the `index` prop of on-remove function, closes [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
 - `n-dialog` adds `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` prop.
 - `n-split` adds `panel1-class` `panel1-style` `panel2-class` `panel2-style` prop.
