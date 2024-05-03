@@ -18,7 +18,8 @@
 
 ### Features
 
-- `n-watermark` 支持多行content
+- `n-watermark` 支持多行文本
+- `n-watermark` 新增 `text-align` 属性
 - `n-qr-code` 新增 `type` 属性，设置 `type` 自定义渲染结果，提供 `canvas` 和 `svg` 两个选项
 - `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
 - `n-card` 的 `title` 属性支持 render 函数
