@@ -40,6 +40,7 @@
 - `n-cascader` adds `get-render-prefix` prop.
 - `n-cascader` adds `get-render-suffix` prop.
 - `n-image` optimizes download icon style.
+- `n-scrollbar` adds `height`, `width`, `radius`, `railInsetHorizontal`, `railInsetVertical` and `railColor` theme variables.
 
 ## 2.38.1
 

@@ -10,6 +10,7 @@ x.vue
 trigger.vue
 no-sync.vue
 rtl-debug.vue
+custom.vue
 ```
 
 ## API

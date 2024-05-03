@@ -39,6 +39,7 @@
 - `n-cascader` 新增 `render-prefix` 属性
 - `n-cascader` 新增 `render-suffix` 属性
 - `n-image` 优化下载按钮图标
+- `n-scrollbar` 新增 `height`、`width`、`radius`、`railInsetHorizontal`、`railInsetVertical`、`railColor` 主题变量
 
 ## 2.38.1
 

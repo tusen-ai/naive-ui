@@ -9,6 +9,7 @@ basic.vue
 x.vue
 trigger.vue
 no-sync.vue
+custom.vue
 ```
 
 ## API
