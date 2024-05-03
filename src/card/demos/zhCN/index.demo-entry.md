@@ -47,7 +47,7 @@ embedded-debug.vue
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | 卡片的分段区域设置 |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 卡片的尺寸 |  |
 | tag | `string` | `'div'` | 卡片组件要渲染为什么标签 | 2.34.3 |
-| title | `string \| (() => VNodeChild)` | `undefined` | 卡片的标题，，可以是 render 函数 | NEXT_VERSION 支持 render 函数 |
+| title | `string \| (() => VNodeChild)` | `undefined` | 卡片的标题，，可以是 render 函数 | 2.38.2 支持 render 函数 |
 | on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |  |
 
 ### Card Slots

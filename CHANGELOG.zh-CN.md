@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.2
 
 `2024-05-03`
 
@@ -17,6 +17,7 @@
 ### Features
 
 - `n-watermark` 支持多行文本
+- 新增 `n-infinite-scroll` 组件
 - `n-watermark` 新增 `text-align` 属性
 - `n-qr-code` 新增 `type` 属性，设置 `type` 自定义渲染结果，提供 `canvas` 和 `svg` 两个选项
 - `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
@@ -192,7 +193,6 @@
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - 新增 `n-flex` 组件
 - `n-pagination` 新增 `show-quick-jump-dropdown` 属性，关闭 [#5251](https://github.com/tusen-ai/naive-ui/issues/5251)
-- 新增 `n-infinite-scroll` 组件
 
 ## 2.36.0
 

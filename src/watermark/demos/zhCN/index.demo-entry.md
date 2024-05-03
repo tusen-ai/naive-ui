@@ -12,7 +12,7 @@ image.vue
 
 ## API
 
-自 `NEXT_VERSION` 支持由 `\n` 分割的多行文本。
+自 `2.38.2` 支持由 `\n` 分割的多行文本。
 
 ### Watermark Props
 
@@ -37,7 +37,7 @@ image.vue
 | image-width | `number` | `undefined` | 图片宽度 | 2.25.3 |
 | rotate | `number` | `0` | 旋转角度 | 2.25.3 |
 | selectable | `boolean` | `true` | 被水印覆盖的内容是否可选中 | 2.25.3 |
-| text-align | `'left' \| 'center' \| 'right'` | `'left'` | 在文本有多行的情况下，多行文本的对齐方式 | NEXT_VERSION |
+| text-align | `'left' \| 'center' \| 'right'` | `'left'` | 在文本有多行的情况下，多行文本的对齐方式 | 2.38.2 |
 | width | `number` | `32` | 宽度 | 2.25.3 |
 | x-gap | `number` | `0` | x 轴间隔 | 2.25.3 |
 | x-offset | `number` | `0` | x 轴偏移 | 2.25.3 |

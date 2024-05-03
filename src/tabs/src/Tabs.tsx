@@ -433,9 +433,7 @@ export default defineComponent({
         segmentCapsuleElRef.value.style.width = `${activeTabEl.offsetWidth}px`
         segmentCapsuleElRef.value.style.height = `${activeTabEl.offsetHeight}px`
         segmentCapsuleElRef.value.style.transform = `translateX(${
-          activeTabEl.offsetLeft -
-          tabsEl.offsetLeft -
-          depx(getComputedStyle(tabsEl).paddingLeft)
+          activeTabEl.offsetLeft - depx(getComputedStyle(tabsEl).paddingLeft)
         }px)`
         if (transitionDisabled) {
           void segmentCapsuleElRef.value.offsetWidth

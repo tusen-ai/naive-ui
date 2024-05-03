@@ -32,7 +32,7 @@ type.vue
 | padding | `number \| string` | `12` | Padding size of the QR Code. | 2.36.0 |
 | value | `string` | `''` | Text information. | 2.36.0 |
 | size | `number` | `100` | Size of the qrcode. | 2.36.0 |
-| type | `'canvas'` \| `'svg'` | `'canvas'` | Customize Render Type. | NEXT_VERSION |
+| type | `'canvas'` \| `'svg'` | `'canvas'` | Customize Render Type. | 2.38.2 |
 
 ### About QR code error correction level
 

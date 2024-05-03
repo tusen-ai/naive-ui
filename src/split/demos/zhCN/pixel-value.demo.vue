@@ -1,7 +1,7 @@
 <markdown>
 # 使用像素值控制尺寸
 
-自 `NEXT_VERSION` 开始，`min`、`max`、`size` 和 `default-size` 属性可以接受像素值。
+自 `2.38.2` 开始，`min`、`max`、`size` 和 `default-size` 属性可以接受像素值。
 </markdown>
 
 <template>

@@ -12,7 +12,7 @@ image.vue
 
 ## API
 
-Supports multiple lines text separated by `\n` since `NEXT_VERSION`.
+Supports multiple lines text separated by `\n` since `2.38.2`.
 
 ### Watermark Props
 
@@ -37,7 +37,7 @@ Supports multiple lines text separated by `\n` since `NEXT_VERSION`.
 | image-width | `number` | `undefined` | Image width. | 2.25.3 |
 | rotate | `number` | `0` | Rotate degree | 2.25.3 |
 | selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | 2.25.3 |
-| text-align | `'left' \| 'center' \| 'right'` | `'left'` | Text align method when there's multiple lines of text. | NEXT_VERSION |
+| text-align | `'left' \| 'center' \| 'right'` | `'left'` | Text align method when there's multiple lines of text. | 2.38.2 |
 | width | `number` | `32` | Width of watermark area. | 2.25.3 |
 | x-gap | `number` | `0` | Horizontal gap. | 2.25.3 |
 | x-offset | `number` | `0` | Horizontal offset. | 2.25.3 |

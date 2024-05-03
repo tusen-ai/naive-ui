@@ -45,7 +45,7 @@ embedded.vue
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | Segment divider settings of the card. |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size. |  |
 | tag | `string` | `'div'` | What tag need the card be rendered as. | 2.34.3 |
-| title | `string \| (() => VNodeChild)` | `undefined` | Card title. | Render function since NEXT_VERSION |
+| title | `string \| (() => VNodeChild)` | `undefined` | Card title. | Render function since 2.38.2 |
 | on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |  |
 
 ### Card Slots

@@ -146,14 +146,10 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection:
-      | 'verticalTop'
-      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection:
-      | 'horizontalLeft'
-      | 'horizontalRight' = `horizontal${
-        deltaHorizontal > 0 ? 'Left' : 'Right'
-      }`
+      const moveVerticalDirection: 'verticalTop' | 'verticalBottom' =
+        `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight' =
+        `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
 
       return {
         moveVerticalDirection,
@@ -505,7 +501,7 @@ export default defineComponent({
       'tipNext'
     )
 
-    const rotateLeftNode = withTooltip(
+    const rotateCounterclockwiseNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateCounterclockwise}>
         {{
           default: () => <RotateCounterclockwiseIcon />
@@ -513,7 +509,7 @@ export default defineComponent({
       </NBaseIcon>,
       'tipCounterclockwise'
     )
-    const rotateRightNode = withTooltip(
+    const rotateClockwiseNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateClockwise}>
         {{
           default: () => <RotateClockwiseIcon />
@@ -601,8 +597,9 @@ export default defineComponent({
                                   nodes: {
                                     prev: prevNode,
                                     next: nextNode,
-                                    rotateLeft: rotateLeftNode,
-                                    rotateRight: rotateRightNode,
+                                    rotateCounterclockwise:
+                                      rotateCounterclockwiseNode,
+                                    rotateClockwise: rotateClockwiseNode,
                                     resizeToOriginalSize: originalSizeNode,
                                     zoomOut: zoomOutNode,
                                     zoomIn: zoomInNode,
@@ -618,8 +615,8 @@ export default defineComponent({
                                       {nextNode}
                                     </>
                                   ) : null}
-                                  {rotateLeftNode}
-                                  {rotateRightNode}
+                                  {rotateCounterclockwiseNode}
+                                  {rotateClockwiseNode}
                                   {originalSizeNode}
                                   {zoomOutNode}
                                   {zoomInNode}

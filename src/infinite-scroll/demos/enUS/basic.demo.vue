@@ -1,5 +1,5 @@
 <markdown>
-  # Basic
+# Basic
 </markdown>
 
 <template>
@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup () {
     const count = ref(6)
@@ -25,6 +26,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style>
 .item {
   display: flex;
@@ -33,5 +35,9 @@ export default defineComponent({
   justify-content: center;
   margin-bottom: 10px;
   background-color: #e7f5ee;
+}
+
+.item:last-child {
+  margin-bottom: 0;
 }
 </style>

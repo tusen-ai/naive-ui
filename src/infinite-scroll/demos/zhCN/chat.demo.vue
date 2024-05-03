@@ -1,5 +1,5 @@
 <markdown>
-  # 示例
+# 稍微复杂的例子
 </markdown>
 
 <template>
@@ -7,7 +7,7 @@
     <div
       v-for="(item, index) in items"
       :key="item.key"
-      class="item"
+      class="message"
       :class="{ reverse: index % 5 === 0 }"
     >
       <img class="avatar" :src="item.avatar" alt="">
@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup () {
     const loading = ref(false)
@@ -67,22 +68,31 @@ export default defineComponent({
   }
 })
 </script>
+
 <style>
-.item {
+.message {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
 }
+
+.message:last-child {
+  margin-bottom: 0;
+}
+
 .reverse {
   flex-direction: row-reverse;
 }
+
 .text {
   text-align: center;
 }
+
 .reverse .avatar {
   margin-left: 10px;
 }
+
 .avatar {
   width: 28px;
   height: 28px;

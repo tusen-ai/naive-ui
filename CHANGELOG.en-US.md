@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.38.2
 
 `2024-05-03`
 
@@ -18,6 +18,7 @@
 ### Features
 
 - `n-watermark` support multi-lines in content.
+- Adds `n-infinite-scroll` component.
 - `n-watermark` adds `text-align` prop.
 - `n-qr-code` adds `type` prop, Customize rendering output by setting `type`, providing two options: `canvas` and `svg`.
 - `n-card` adds `action`, `content`, `cover`, `footer` and `header-extra` props.
@@ -192,7 +193,6 @@
 - `n-tree-select` adds `override-default-node-click-behavior` prop.
 - Adds `n-flex` component.
 - `n-pagination` adds `show-quick-jump-dropdown` prop, closes [#5251](https://github.com/tusen-ai/naive-ui/issues/5251).
-- Adds `n-infinite-scroll` component.
 
 ## 2.36.0
 

@@ -31,7 +31,7 @@ Mention requires `v2.2.0` and above.
 | bordered | `boolean` | `true` | Whether to display the border of the input element. |  |
 | disabled | `boolean` | `false` | Whether to disable the input element. |  |
 | default-value | `string` | `''` | Default value when the value is not manually set. |  |
-| filter | `(pattern: string, option: MentionOption) => boolean` | Default filter method | Method to filter options corresponding to `pattern`. | NEXT_VERSION |
+| filter | `(pattern: string, option: MentionOption) => boolean` | Default filter method | Method to filter options corresponding to `pattern`. | 2.38.2 |
 | loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |  |
 | prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |  |
 | placeholder | `string` | `''` | Placeholder. |  |

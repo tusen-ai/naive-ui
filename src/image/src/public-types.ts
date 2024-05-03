@@ -4,8 +4,8 @@ export interface ImageRenderToolbarProps {
   nodes: {
     prev: VNode
     next: VNode
-    rotateLeft: VNode
-    rotateRight: VNode
+    rotateCounterclockwise: VNode
+    rotateClockwise: VNode
     resizeToOriginalSize: VNode
     zoomOut: VNode
     zoomIn: VNode

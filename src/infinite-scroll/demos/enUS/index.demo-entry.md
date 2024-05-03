@@ -1,14 +1,13 @@
 # Infinite Scroll
 
-Snowball, roll and roll, more and more content, can not stop.
+Scroll, scroll, scroll, scroll...
 
-Available since `NEXT_VERSION`.
+Available since `2.38.2`.
 
 ## Demos
 
 ```demo
 basic.vue
-delay.vue
 chat.vue
 ```
 
@@ -18,7 +17,6 @@ chat.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| delay | `Number` | `undefined` | Delay display, in milliseconds. | NEXT_VERSION |
-| distance | `Number` | `0` | Distance threshold that triggers loading. | NEXT_VERSION |
-| on-load | `() => Promise<void>` | `undefined` | The callback function when scrolling to the bottom. | NEXT_VERSION |
-| scrollbar-props | `Object` | `undefined` | Attribute reference [Scrollbar props](scrollbar#Scrollbar-Props). | NEXT_VERSION |
+| distance | `number` | `0` | Distance threshold that triggers loading. | 2.38.2 |
+| scrollbar-props | `Object` | `undefined` | Attribute reference [Scrollbar props](scrollbar#Scrollbar-Props). | 2.38.2 |
+| on-load | `() => Promise<void> \| void` | `undefined` | The callback function when scrolling to the bottom. | 2.38.2 |
