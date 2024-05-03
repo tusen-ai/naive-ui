@@ -20,6 +20,7 @@
     <n-qr-code
       value="https://www.naiveui.com/"
       icon-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+      type="svg"
       :icon-size="32"
       error-correction-level="H"
     />
