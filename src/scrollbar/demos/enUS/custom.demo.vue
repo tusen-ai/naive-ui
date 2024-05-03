@@ -9,7 +9,8 @@ You can use `theme-overrides` to control the style of the scrollbar.
     :theme-overrides="{
       Scrollbar: {
         width: '8px',
-        railInsetHorizontal: '4px 4px 4px auto'
+        railInsetHorizontal: '4px 4px 4px auto',
+        borderRadius: 0
       }
     }"
   >
