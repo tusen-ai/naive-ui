@@ -34,7 +34,7 @@ export default defineComponent({
   height: 46px;
   justify-content: center;
   margin-bottom: 10px;
-  background-color: #e7f5ee;
+  background-color: rgba(0, 128, 0, 0.16);
 }
 
 .item:last-child {
