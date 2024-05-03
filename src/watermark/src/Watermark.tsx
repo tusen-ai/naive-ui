@@ -58,6 +58,10 @@ export const watermarkProps = {
     type: Number,
     default: 0
   },
+  textAlign: {
+    type: String as PropType<'left' | 'center' | 'right'>,
+    default: 'left'
+  },
   image: String,
   imageOpacity: { type: Number, default: 1 },
   imageHeight: Number,
@@ -197,11 +201,33 @@ export default defineComponent({
             fontFamily || themeRef.value.self.fontFamily
           }`
           ctx.fillStyle = fontColor
-          ctx.fillText(
-            content,
-            canvasOffsetLeft,
-            canvasOffsetTop + lineHeight * ratio
-          )
+
+          let maxWidth = 0
+          const { textAlign } = props
+          content
+            .split('\n')
+            .map((line) => {
+              const width = ctx.measureText(line).width
+              maxWidth = Math.max(maxWidth, width)
+              return {
+                width,
+                line
+              }
+            })
+            .forEach(({ line, width }, index) => {
+              const alignOffset =
+                textAlign === 'left'
+                  ? 0
+                  : textAlign === 'center'
+                    ? (maxWidth - width) / 2
+                    : maxWidth - width
+
+              ctx.fillText(
+                line,
+                canvasOffsetLeft + alignOffset,
+                canvasOffsetTop + lineHeight * ratio * (index + 1)
+              )
+            })
           base64UrlRef.value = canvas.toDataURL()
         } else if (!content) {
           // For example, you are using the input box to customize the watermark
@@ -239,10 +265,10 @@ export default defineComponent({
                   : ''
                 : props.cross
                   ? `calc(${rotatedImageOffset} + ${
-                    props.width / 2
-                  }px) calc(${rotatedImageOffset} + ${
-                    props.height / 2
-                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                      props.width / 2
+                    }px) calc(${rotatedImageOffset} + ${
+                      props.height / 2
+                    }px), ${rotatedImageOffset} ${rotatedImageOffset}`
                   : rotatedImageOffset,
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`

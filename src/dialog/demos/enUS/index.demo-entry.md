@@ -64,14 +64,18 @@ use-dialog-reactive-list.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a `render` function. |  |
+| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a render function. |  |
+| actionClass | `string` | The class name of the action area. | 2.38.2 |
+| actionStyle | `Object \| string` | The style of the action area. | 2.38.2 |
 | autoFocus | `boolean` | `true` | Whether to focus the first focusable element inside modal. | 2.28.3 |
 | blockScroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | class | `any` | `undefined` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
-| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a `render` function. |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
+| contentClass | `string` | The class name of the content. | 2.38.2 |
+| contentStyle | `Object \| string` | The style of the content. | 2.38.2 |
 | iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
@@ -82,7 +86,9 @@ use-dialog-reactive-list.vue
 | positiveText | `string` | `undefined` | Confirm button text. Corresponding button won't show if not set. |  |
 | showIcon | `boolean` | `true` | Whether to show `icon`. |  |
 | style | `string \| Object` | `undefined` | Style of the dialog. |  |
-| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a render function. |  |
+| titleClass | `string` | The class name of the content. | 2.38.2 |
+| titleStyle | `Object \| string` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
@@ -100,11 +106,15 @@ All the properties can be modified dynamically.
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
+| actionClass | `string` | The class name of the action area. | 2.38.2 |
+| actionStyle | `Object \| string` | The style of the action area. | 2.38.2 |
 | bordered | `boolean` | Whether to show `border`. |  |
 | class | `any` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
-| content | `string \| (() => VNodeChild)` | Content, can be a `render` function. |  |
+| content | `string \| (() => VNodeChild)` | Content, can be a render function. |  |
+| contentClass | `string` | The class name of the content. | 2.38.2 |
+| contentStyle | `Object \| string` | The style of the content. | 2.38.2 |
 | iconPlacement | `'left' \| 'top'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `Render` function of `icon`. |  |
 | loading | `boolean` | Whether to display `loading` status. |  |
@@ -115,7 +125,9 @@ All the properties can be modified dynamically.
 | positiveText | `string` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | Whether to show `icon`. |  |
 | style | `string \| Object` | Style of the dialog. |  |
-| title | `string \| (() => VNodeChild)` | Can be a `render` function. |  |
+| title | `string \| (() => VNodeChild)` | Can be a render function. |  |
+| titleClass | `string` | The class name of the content. | 2.38.2 |
+| titleStyle | `Object \| string` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
 | onAfterEnter | `() => void \| undefined` | Callback on enter animation ends. | 2.33.0 |
@@ -135,9 +147,13 @@ All the properties can be modified dynamically.
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| action-class | `string` | `undefined` | The class name of the action area. | 2.38.2 |
+| action-style | `Object \| string` | `undefined` | The style of the action area. | 2.38.2 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
-| content | `string \| (() => VNodeChild)` | `undefined` | Can be a `render` function. |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |  |
+| content-class | `string` | `undefined` | The class name of the content. | 2.38.2 |
+| content-style | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of icon. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |
@@ -146,7 +162,9 @@ All the properties can be modified dynamically.
 | positive-button-props | `ButtonProps` | `undefined` | Confirm button's DOM props | 2.27.0 |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |  |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |  |
-| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a render function. |  |
+| title-class | `string` | `undefined` | The class name of the content. | 2.38.2 |
+| title-style | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
 | on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |

@@ -14,14 +14,14 @@ import type { PropType, CSSProperties, VNode, HTMLAttributes } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
-import { getPreciseEventTarget } from 'seemly'
+import { depx, getPreciseEventTarget } from 'seemly'
 import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { useReactivated, Wrapper } from '../../../_utils'
+import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -75,10 +75,6 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
 
 const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
-  size: {
-    type: Number,
-    default: 5
-  },
   duration: {
     type: Number,
     default: 0
@@ -155,6 +151,15 @@ const Scrollbar = defineComponent({
     let memoMouseY: number = 0
     const isIos = useIsIos()
 
+    const themeRef = useTheme(
+      'Scrollbar',
+      '-scrollbar',
+      style,
+      scrollbarLight,
+      props,
+      mergedClsPrefixRef
+    )
+
     const yBarSizeRef = computed(() => {
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
@@ -168,7 +173,8 @@ const Scrollbar = defineComponent({
       } else {
         return Math.min(
           containerHeight,
-          (yRailSize * containerHeight) / contentHeight + props.size * 1.5
+          (yRailSize * containerHeight) / contentHeight +
+            depx(themeRef.value.self.width) * 1.5
         )
       }
     })
@@ -186,7 +192,10 @@ const Scrollbar = defineComponent({
       ) {
         return 0
       } else {
-        return (xRailSize * containerWidth) / contentWidth + props.size * 1.5
+        return (
+          (xRailSize * containerWidth) / contentWidth +
+          depx(themeRef.value.self.height) * 1.5
+        )
       }
     })
     const xBarSizePxRef = computed(() => {
@@ -636,31 +645,32 @@ const Scrollbar = defineComponent({
       off('mousemove', window, handleYScrollMouseMove, true)
       off('mouseup', window, handleYScrollMouseUp, true)
     })
-    const themeRef = useTheme(
-      'Scrollbar',
-      '-scrollbar',
-      style,
-      scrollbarLight,
-      props,
-      mergedClsPrefixRef
-    )
     const cssVarsRef = computed(() => {
       const {
-        common: {
-          cubicBezierEaseInOut,
-          scrollbarBorderRadius,
-          scrollbarHeight,
-          scrollbarWidth
-        },
-        self: { color, colorHover }
+        common: { cubicBezierEaseInOut },
+        self: {
+          color,
+          colorHover,
+          height,
+          width,
+          borderRadius,
+          railInsetHorizontal,
+          railInsetVertical,
+          railColor
+        }
       } = themeRef.value
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
-        '--n-scrollbar-border-radius': scrollbarBorderRadius,
-        '--n-scrollbar-width': scrollbarWidth,
-        '--n-scrollbar-height': scrollbarHeight
+        '--n-scrollbar-border-radius': borderRadius,
+        '--n-scrollbar-width': width,
+        '--n-scrollbar-height': height,
+        '--n-scrollbar-rail-inset-horizontal': railInsetHorizontal,
+        '--n-scrollbar-rail-inset-vertical': rtlEnabledRef?.value
+          ? rtlInset(railInsetVertical)
+          : railInsetVertical,
+        '--n-scrollbar-rail-color': railColor
       }
     })
     const themeClassHandle = inlineThemeDisabled

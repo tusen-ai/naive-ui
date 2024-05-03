@@ -8,6 +8,7 @@ import {
   type ExtractPropTypes,
   ref,
   provide,
+  type Slot,
   inject,
   watch,
   Transition,
@@ -78,6 +79,8 @@ export const formItemProps = {
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
+  feedbackClass: String,
+  feedbackStyle: [String, Object] as PropType<string | CSSProperties>,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -255,6 +258,7 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(errors, { warnings })
             }
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
             reject(errors)
           }
         })
@@ -604,64 +608,71 @@ export default defineComponent({
         {this.mergedShowFeedback ? (
           <div
             key={this.feedbackId}
-            class={`${mergedClsPrefix}-form-item-feedback-wrapper`}
+            style={this.feedbackStyle}
+            class={[
+              `${mergedClsPrefix}-form-item-feedback-wrapper`,
+              this.feedbackClass
+            ]}
           >
             <Transition name="fade-down-transition" mode="out-in">
               {{
                 default: () => {
                   const { mergedValidationStatus } = this
-                  return resolveWrappedSlot($slots.feedback, (children) => {
-                    const { feedback } = this
-                    const feedbackNodes =
-                      children || feedback ? (
-                        <div
-                          key="__feedback__"
-                          class={`${mergedClsPrefix}-form-item-feedback__line`}
-                        >
-                          {children || feedback}
-                        </div>
-                      ) : this.renderExplains.length ? (
-                        this.renderExplains?.map(({ key, render }) => (
+                  return resolveWrappedSlot(
+                    $slots.feedback as Slot | undefined,
+                    (children) => {
+                      const { feedback } = this
+                      const feedbackNodes =
+                        children || feedback ? (
                           <div
-                            key={key}
+                            key="__feedback__"
                             class={`${mergedClsPrefix}-form-item-feedback__line`}
                           >
-                            {render()}
+                            {children || feedback}
                           </div>
-                        ))
+                        ) : this.renderExplains.length ? (
+                          this.renderExplains?.map(({ key, render }) => (
+                            <div
+                              key={key}
+                              class={`${mergedClsPrefix}-form-item-feedback__line`}
+                            >
+                              {render()}
+                            </div>
+                          ))
+                        ) : null
+                      return feedbackNodes ? (
+                        mergedValidationStatus === 'warning' ? (
+                          <div
+                            key="controlled-warning"
+                            class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--warning`}
+                          >
+                            {feedbackNodes}
+                          </div>
+                        ) : mergedValidationStatus === 'error' ? (
+                          <div
+                            key="controlled-error"
+                            class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--error`}
+                          >
+                            {feedbackNodes}
+                          </div>
+                        ) : mergedValidationStatus === 'success' ? (
+                          <div
+                            key="controlled-success"
+                            class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--success`}
+                          >
+                            {feedbackNodes}
+                          </div>
+                        ) : (
+                          <div
+                            key="controlled-default"
+                            class={`${mergedClsPrefix}-form-item-feedback`}
+                          >
+                            {feedbackNodes}
+                          </div>
+                        )
                       ) : null
-                    return feedbackNodes ? (
-                      mergedValidationStatus === 'warning' ? (
-                        <div
-                          key="controlled-warning"
-                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--warning`}
-                        >
-                          {feedbackNodes}
-                        </div>
-                      ) : mergedValidationStatus === 'error' ? (
-                        <div
-                          key="controlled-error"
-                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--error`}
-                        >
-                          {feedbackNodes}
-                        </div>
-                      ) : mergedValidationStatus === 'success' ? (
-                        <div
-                          key="controlled-success"
-                          class={`${mergedClsPrefix}-form-item-feedback ${mergedClsPrefix}-form-item-feedback--success`}
-                        >
-                          {feedbackNodes}
-                        </div>
-                      ) : (
-                        <div
-                          key="controlled-default"
-                          class={`${mergedClsPrefix}-form-item-feedback`}
-                        >
-                          {feedbackNodes}
-                        </div>
-                      )
-                    ) : null
-                  })
+                    }
+                  )
                 }
               }}
             </Transition>

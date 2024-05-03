@@ -723,6 +723,14 @@ export default defineComponent({
                               ref={this.setHandleRefs(index)}
                               class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
+                              role="slider"
+                              aria-valuenow={value}
+                              aria-valuemin={this.min}
+                              aria-valuemax={this.max}
+                              aria-orientation={
+                                this.vertical ? 'vertical' : 'horizontal'
+                              }
+                              aria-disabled={this.disabled}
                               style={this.getHandleStyle(value, index)}
                               onFocus={() => {
                                 this.handleHandleFocus(index)

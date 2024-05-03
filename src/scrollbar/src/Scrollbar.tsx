@@ -24,6 +24,8 @@ export const scrollbarProps = {
   trigger: String as PropType<'none' | 'hover'>,
   xScrollable: Boolean,
   onScroll: Function as PropType<(e: Event) => void>,
+  contentClass: String,
+  contentStyle: [Object, String] as PropType<string | Record<string, any>>,
   size: Number
 } as const
 

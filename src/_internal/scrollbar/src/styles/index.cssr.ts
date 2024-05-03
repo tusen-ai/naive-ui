@@ -8,6 +8,9 @@ import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 // --n-scrollbar-width
 // --n-scrollbar-height
 // --n-scrollbar-border-radius
+// --n-scrollbar-rail-inset-horizontal
+// --n-scrollbar-rail-inset-vertical
+// --n-scrollbar-rail-color
 export default cB('scrollbar', `
   overflow: hidden;
   position: relative;
@@ -30,6 +33,7 @@ export default cB('scrollbar', `
         display: none;
       `),
       c('>', [
+        // We can't set overflow hidden since it affects positioning.
         cB('scrollbar-content', `
           box-sizing: border-box;
           min-width: 100%;
@@ -42,12 +46,11 @@ export default cB('scrollbar', `
       position: absolute;
       pointer-events: none;
       user-select: none;
+      background: var(--n-scrollbar-rail-color);
       -webkit-user-select: none;
     `, [
       cM('horizontal', `
-        left: 2px;
-        right: 2px;
-        bottom: 4px;
+        inset: var(--n-scrollbar-rail-inset-horizontal);
         height: var(--n-scrollbar-height);
       `, [
         c('>', [
@@ -59,9 +62,7 @@ export default cB('scrollbar', `
         ])
       ]),
       cM('vertical', `
-        right: 4px;
-        top: 2px;
-        bottom: 2px;
+        inset: var(--n-scrollbar-rail-inset-vertical);
         width: var(--n-scrollbar-width);
       `, [
         c('>', [

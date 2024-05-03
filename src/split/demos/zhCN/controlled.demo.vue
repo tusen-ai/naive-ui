@@ -4,7 +4,13 @@
 
 <template>
   <n-flex vertical>
-    <n-input-number v-model:value="split" :step="0.1" clearable />
+    <n-input-number
+      v-model:value="split"
+      :step="0.1"
+      clearable
+      :max="1"
+      :min="0"
+    />
     <NSplit v-model:size="split" style="height: 200px">
       <template #1>
         <div style="width: 100%; background-color: black" />

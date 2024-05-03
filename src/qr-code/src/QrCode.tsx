@@ -14,6 +14,8 @@ import style from './styles/index.cssr'
 import { type QrCodeTheme, qrcodeLight } from '../styles'
 import qrcodegen from './qrcodegen'
 
+type Modules = ReturnType<qrcodegen.QrCode['getModules']>
+
 const ERROR_CORRECTION_LEVEL: Record<string, qrcodegen.QrCode.Ecc> = {
   L: qrcodegen.QrCode.Ecc.LOW,
   M: qrcodegen.QrCode.Ecc.MEDIUM,
@@ -56,6 +58,10 @@ export const qrCodeProps = {
   errorCorrectionLevel: {
     type: String,
     default: 'M'
+  },
+  type: {
+    type: String,
+    default: 'canvas'
   }
 } as const
 
@@ -104,6 +110,7 @@ export default defineComponent({
       const imageLoadedTrigger = ref(0)
       let loadedIcon: HTMLImageElement | null = null
       watchEffect(() => {
+        if (props.type === 'svg') return
         void imageLoadedTrigger.value
         drawCanvas(
           qr.value,
@@ -120,7 +127,9 @@ export default defineComponent({
             : null
         )
       })
+
       watchEffect(() => {
+        if (props.type === 'svg') return
         const { iconSrc } = props
         if (iconSrc) {
           let aborted = false
@@ -197,11 +206,112 @@ export default defineComponent({
       }
     }
 
+    function generatePath (modules: Modules, margin: number = 0): string {
+      const ops: string[] = []
+      modules.forEach(function (row, y) {
+        let start: number | null = null
+        row.forEach(function (cell, x) {
+          if (!cell && start !== null) {
+            // M0 0h7v1H0z injects the space with the move and drops the comma,
+            // saving a char per operation
+            ops.push(
+              `M${start + margin} ${y + margin}h${x - start}v1H${start + margin}z`
+            )
+            start = null
+            return
+          }
+
+          // end of row, clean up or skip
+          if (x === row.length - 1) {
+            if (!cell) {
+              // We would have closed the op above already so this can only mean
+              // 2+ light modules in a row.
+              return
+            }
+            if (start === null) {
+              // Just a single dark module.
+              ops.push(`M${x + margin},${y + margin} h1v1H${x + margin}z`)
+            } else {
+              // Otherwise finish the current line.
+              ops.push(
+                `M${start + margin},${y + margin} h${x + 1 - start}v1H${
+                  start + margin
+                }z`
+              )
+            }
+            return
+          }
+
+          if (cell && start === null) {
+            start = x
+          }
+        })
+      })
+      return ops.join('')
+    }
+
+    function svgInfo (
+      qr: qrcodegen.QrCode,
+      size: number,
+      iconConfig: {
+        iconSrc: string
+        iconBorderRadius: number
+        iconSize: number
+        iconBackgroundColor: string
+      } | null
+    ): {
+        innerHtml: string
+        numCells: number
+      } {
+      const cells = qr.getModules()
+      const numCells = cells.length
+      const cellsToDraw = cells
+      let svgInnerHtml = ''
+      const path1Html = `<path fill="transparent" d="M0,0 h${numCells}v${numCells}H0z" shape-rendering="crispEdges"></path>`
+      const path2Html = `<path fill="${props.color}" d="${generatePath(cellsToDraw, 0)}" shape-rendering="crispEdges"></path>`
+      let iconHtml = ''
+      if (iconConfig) {
+        const { iconSrc, iconSize } = iconConfig
+
+        const DEFAULT_IMG_SCALE = 0.1
+        const defaultSize = Math.floor(size * DEFAULT_IMG_SCALE)
+        const scale = numCells / size
+        const h = (iconSize || defaultSize) * scale
+        const w = (iconSize || defaultSize) * scale
+        const x = cells.length / 2 - w / 2
+        const y = cells.length / 2 - h / 2
+        iconHtml += `<image href="${iconSrc}" width="${w}" height="${h}" x="${x}" y="${y}" preserveAspectRatio="none"></image>`
+      }
+      svgInnerHtml += path1Html
+      svgInnerHtml += path2Html
+      svgInnerHtml += iconHtml
+      return {
+        innerHtml: svgInnerHtml,
+        numCells
+      }
+    }
+
+    const svgInfoRef = computed(() =>
+      svgInfo(
+        qr.value,
+        props.size,
+        props.iconSrc
+          ? {
+              iconSrc: props.iconSrc,
+              iconBorderRadius: props.iconBorderRadius,
+              iconSize: props.iconSize,
+              iconBackgroundColor: props.iconBackgroundColor
+            }
+          : null
+      )
+    )
+
     return {
       canvasRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      themeClass: themeClassHandle?.themeClass
+      themeClass: themeClassHandle?.themeClass,
+      svgInfo: svgInfoRef
     }
   },
   render () {
@@ -211,8 +321,10 @@ export default defineComponent({
       padding,
       cssVars,
       themeClass,
-      size
+      size,
+      type
     } = this
+
     return (
       <div
         class={[`${mergedClsPrefix}-qr-code`, themeClass]}
@@ -224,13 +336,23 @@ export default defineComponent({
           ...cssVars
         }}
       >
-        <canvas
-          ref="canvasRef"
-          style={{
-            width: `${size}px`,
-            height: `${size}px`
-          }}
-        />
+        {type === 'canvas' ? (
+          <canvas
+            ref="canvasRef"
+            style={{
+              width: `${size}px`,
+              height: `${size}px`
+            }}
+          />
+        ) : (
+          <svg
+            height={size}
+            width={size}
+            viewBox={`0 0 ${this.svgInfo.numCells} ${this.svgInfo.numCells}`}
+            role="img"
+            innerHTML={this.svgInfo.innerHtml}
+          />
+        )}
       </div>
     )
   }

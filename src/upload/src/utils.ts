@@ -1,10 +1,6 @@
 import { isBrowser } from '../../_utils'
-import type {
-  FileAndEntry,
-  FileInfo,
-  SettledFileInfo,
-  ShouldUseThumbnailUrl
-} from './interface'
+import type { FileAndEntry, ShouldUseThumbnailUrl } from './interface'
+import type { UploadFileInfo, UploadSettledFileInfo } from './public-types'
 
 export const isImageFileType = (type: string): boolean =>
   type.includes('image/')
@@ -97,7 +93,9 @@ export async function getFilesFromEntries (
   return fileAndEntries
 }
 
-export function createSettledFileInfo (fileInfo: FileInfo): SettledFileInfo {
+export function createSettledFileInfo (
+  fileInfo: UploadFileInfo
+): UploadSettledFileInfo {
   const {
     id,
     name,

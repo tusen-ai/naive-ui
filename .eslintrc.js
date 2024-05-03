@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:markdown/recommended', 'prettier'],
+  extends: ['plugin:markdown/recommended-legacy', 'prettier'],
   overrides: [
     {
       files: '*.mjs',
@@ -39,7 +39,7 @@ module.exports = {
     },
     {
       files: ['*.ts', '*.tsx'],
-      extends: ['standard-with-typescript', 'plugin:import/typescript'],
+      extends: ['love', 'plugin:import/typescript'],
       parserOptions: {
         project: './tsconfig.json',
         ecmaFeatures: {

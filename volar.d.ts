@@ -150,6 +150,7 @@ declare module 'vue' {
     NModalProvider: (typeof import('naive-ui'))['NModalProvider']
     NFloatButton: (typeof import('naive-ui'))['NFloatButton']
     NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
+    NInfiniteScroll: (typeof import('naive-ui'))['NInfiniteScroll']
   }
 }
 export {}

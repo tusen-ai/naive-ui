@@ -22,7 +22,7 @@ const TIME_FORMAT = 'HH:mm:ss'
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
-  timeFormat: {
+  timerPickerFormat: {
     type: String,
     value: TIME_FORMAT
   },

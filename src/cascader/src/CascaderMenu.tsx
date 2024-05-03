@@ -65,7 +65,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       syncCascaderMenuPosition,
       handleCascaderMenuClickOutside,
-      mergedThemeRef
+      mergedThemeRef,
+      getColumnStyleRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const submenuInstRefs: CascaderSubmenuInstance[] = []
@@ -114,6 +115,7 @@ export default defineComponent({
       submenuInstRefs,
       maskInstRef,
       mergedTheme: mergedThemeRef,
+      getColumnStyle: getColumnStyleRef,
       handleFocusin,
       handleFocusout,
       handleClickOutside,
@@ -141,6 +143,7 @@ export default defineComponent({
                   <div class={`${mergedClsPrefix}-cascader-submenu-wrapper`}>
                     {this.menuModel.map((submenuOptions, index) => (
                       <NCascaderSubmenu
+                        style={this.getColumnStyle?.({ level: index })}
                         ref={
                           ((instance: CascaderSubmenuInstance) => {
                             if (instance) {

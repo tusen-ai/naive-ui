@@ -195,7 +195,7 @@ function getMonthString (
   monthFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(2000, month, 1)
+  const date = new Date(2000, month, 1).getTime()
   return format(date, monthFormat, { locale })
 }
 
@@ -204,7 +204,7 @@ function getYearString (
   yearFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(year, 1, 1)
+  const date = new Date(year, 1, 1).getTime()
   return format(date, yearFormat, { locale })
 }
 
@@ -213,7 +213,7 @@ function getQuarterString (
   quarterFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(2000, quarter * 3 - 2, 1)
+  const date = new Date(2000, quarter * 3 - 2, 1).getTime()
   return format(date, quarterFormat, { locale })
 }
 

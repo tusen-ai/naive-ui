@@ -265,6 +265,11 @@ namespace qrcodegen {
       )
     }
 
+    // Modified to expose modules for easy access
+    public getModules (): boolean[][] {
+      return this.modules
+    }
+
     /* -- Private helper methods for constructor: Drawing function modules -- */
 
     // Reads this object's version field, and draws and marks all function modules.

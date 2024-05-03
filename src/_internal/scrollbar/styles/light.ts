@@ -1,10 +1,21 @@
 import { commonLight } from '../../../_styles/common'
 import type { ThemeCommonVars } from '../../../_styles/common'
 import type { Theme } from '../../../_mixins'
+import { commonVars } from './common'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { scrollbarColor, scrollbarColorHover } = vars
+  const {
+    scrollbarColor,
+    scrollbarColorHover,
+    scrollbarHeight,
+    scrollbarWidth,
+    scrollbarBorderRadius
+  } = vars
   return {
+    ...commonVars,
+    height: scrollbarHeight,
+    width: scrollbarWidth,
+    borderRadius: scrollbarBorderRadius,
     color: scrollbarColor,
     colorHover: scrollbarColorHover
   }

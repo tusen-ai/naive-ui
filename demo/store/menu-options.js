@@ -539,6 +539,13 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '树',
           enSuffix: true,
           path: '/tree'
+        },
+        {
+          en: 'Infinite Scroll',
+          zh: '无限滚动',
+          enSuffix: true,
+          path: '/infinite-scroll',
+          isNew: true
         }
       ]
     }),

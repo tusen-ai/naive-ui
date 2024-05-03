@@ -67,7 +67,7 @@ export default defineComponent({
           />
           <NTimePicker
             placeholder={this.locale.selectTime}
-            format={this.timeFormat}
+            format={this.timerPickerFormat}
             size={this.timePickerSize}
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[0]
@@ -98,7 +98,7 @@ export default defineComponent({
           />
           <NTimePicker
             placeholder={this.locale.selectTime}
-            format={this.timeFormat}
+            format={this.timerPickerFormat}
             size={this.timePickerSize}
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[1]

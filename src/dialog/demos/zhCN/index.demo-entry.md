@@ -66,16 +66,20 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 `render` 函数 |  |
+| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是渲染函数 |  |
+| actionClass | `string` | 操作区域的类名 | 2.38.2 |
+| actionStyle | `Object \| string` | 操作区域的样式 | 2.38.2 |
 | autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.28.3 |
 | blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | class | `any` | `undefined` | 类名 | 2.33.0 |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
-| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
+| contentClass | `string` | 内容的类名 | 2.38.2 |
+| contentStyle | `Object \| string` | 内容的样式 | 2.38.2 |
 | iconPlacement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
-| icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是 `render` 函数 |  |
+| icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是渲染函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | `true` | 是否可以通过点击 `mask` 关闭对话框 |  |
 | negativeButtonProps | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
@@ -84,7 +88,9 @@ rtl-debug.vue
 | positiveText | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | style | `string \| Object` | `undefined` | 样式 |  |
-| title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是 `render` 函数 |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是渲染函数 |  |
+| titleClass | `string` | 标题的类名 | 2.38.2 |
+| titleStyle | `Object \| string` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
@@ -102,13 +108,17 @@ rtl-debug.vue
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
+| actionClass | `string` | 操作区域的类名 | 2.38.2 |
+| actionStyle | `Object \| string` | 操作区域的样式 | 2.38.2 |
 | bordered | `boolean` | 是否显示 `border` |  |
 | class | `any` | 类名 | 2.33.0 |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
-| content | `string \| (() => VNodeChild)` | 对话框内容，可以是 `render` 函数 |  |
+| content | `string \| (() => VNodeChild)` | 对话框内容，可以是渲染函数 |  |
+| contentClass | `string` | 内容的类名 | 2.38.2 |
+| contentStyle | `Object \| string` | 内容的样式 | 2.38.2 |
 | iconPlacement | `'left' \| 'top'` | 图标的位置 |  |
-| icon | `() => VNodeChild` | 对话框 `icon`，需要是 `render` 函数 |  |
+| icon | `() => VNodeChild` | 对话框 `icon`，需要是渲染函数 |  |
 | loading | `boolean` | 是否显示 `loading` 状态 |  |
 | maskClosable | `boolean` | 是否可以通过点击 `mask` 关闭对话框 |  |
 | negativeButtonProps | `ButtonProps` | 取消按钮的属性 | 2.27.0 |
@@ -117,7 +127,9 @@ rtl-debug.vue
 | positiveText | `string` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | showIcon | `boolean` | 是否显示 `icon` |  |
 | style | `string \| Object` | 样式 |  |
-| title | `string \| (() => VNodeChild)` | 可以是 `render` 函数 |  |
+| title | `string \| (() => VNodeChild)` | 可以是渲染函数 |  |
+| titleClass | `string` | 标题的类名 | 2.38.2 |
+| titleStyle | `Object \| string` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void \| undefined` | 出现动画完成执行的回调 | 2.33.0 |
@@ -137,18 +149,24 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| action-class | `string` | `undefined` | 操作区域的类名 | 2.38.2 |
+| action-style | `Object \| string` | `undefined` | 操作区域的样式 | 2.38.2 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
-| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |  |
+| content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
+| content-class | `string` | `undefined` | 内容的类名 | 2.38.2 |
+| content-style | `Object \| string` | `undefined` | 内容的样式 | 2.38.2 |
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |  |
-| icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |  |
+| icon | `() => VNodeChild` | `undefined` | 需要是渲染函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
 | negative-button-props | `ButtonProps` | `undefined` | 取消按钮的属性 | 2.27.0 |
 | negative-text | `string` | `undefined` | 取消按钮的文字，不填对应的按钮不会出现 |  |
 | positive-button-props | `ButtonProps` | `undefined` | 确认按钮的属性 | 2.27.0 |
 | positive-text | `string` | `undefined` | 确认按钮的文字，不填对应的按钮不会出现 |  |
 | show-icon | `boolean` | `true` | 是否显示 `icon` |  |
-| title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是渲染函数 |  |
+| title-class | `string` | `undefined` | 标题的类名 | 2.38.2 |
+| title-style | `Object \| string` | `undefined` | 标题的样式 | 2.38.2 |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |  |
 | on-close | `() => void` | `undefined` | 点击关闭时执行的回调函数 |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | 执行 `negative` 时执行的回调函数 |  |

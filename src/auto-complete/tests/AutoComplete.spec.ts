@@ -114,10 +114,7 @@ describe('n-auto-complete', () => {
     const wrapper = mount(NAutoComplete)
     await wrapper.setProps({
       getShow: (value: string | null) => {
-        if (value && value.endsWith('@')) {
-          return true
-        }
-        return false
+        return !!value?.endsWith('@')
       },
       options
     })

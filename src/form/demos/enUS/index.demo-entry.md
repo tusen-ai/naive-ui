@@ -25,6 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
+feedback-style.vue
 ```
 
 ## API
@@ -73,6 +74,8 @@ dynamic.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
+| feedback-class | `string` | `undefined` | Feedback check vertical display positioning | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | Feedback check horizontal display positioning | 2.38.2 |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |
