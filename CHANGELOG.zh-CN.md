@@ -10,7 +10,7 @@
 ### Fixes
 
 - 修复 `n-menu` 中 Submenu 组件的 wai-aria role 设置错误，关闭 [#5729](https://github.com/tusen-ai/naive-ui/issues/5729)
-- 修复 `n-tabs` type 为 `segment` 时样式存在问题，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
+- 修复 `n-tabs` type 为 `segment` 时样式存在问题，关闭 [#5728](https://github.com/tusen-ai/naive-ui/issues/5728)
 - 修复 get\*String() 方法中 UTC/区域设置不匹配的问题，关闭 [#5702](https://github.com/tusen-ai/naive-ui/issues/5702)
 - 修复 `n-dialog` / `n-modal` 调用 `destroy` 方法时可能会报错
 - 修复 `useModal` 设置 `card` 预设时 `n-card` 插槽缺少相应属性，关闭 [#5746](https://github.com/tusen-ai/naive-ui/issues/5746)
@@ -24,12 +24,13 @@
 - `n-card` 新增 `action`、`content`、`cover`、`footer`、`header-extra` 属性
 - `n-card` 的 `title` 属性支持渲染函数
 - `n-upload` 导出 `on-remove` 方法的 `index` 属性，关闭 [#5747](https://github.com/tusen-ai/naive-ui/issues/5747)
-- `n-dialog` 新增 `action-class` `action-style` `content-class` `content-style` `title-class` `title-style` 属性
-- `n-split` 新增 `panel1-class` `panel1-style` `panel2-class` `panel2-style` 属性
+- `n-upload` 导出 `UploadOnDownload`、`UploadOnRemove`、`UploadOnFinish` 和 `UploadOnChange` 类型
+- `n-dialog` 新增 `action-class`、`action-style`、`content-class`、`content-style`、`title-class` 和 `title-style` 属性
+- `n-split` 新增 `pane1-class`、`pane1-style`、`pane2-class` 和 `pane2-style` 属性
 - `n-mention` 新增 `filter` 方法，关闭 [#5721](https://github.com/tusen-ai/naive-ui/pull/5721)
-- `n-slider` aria support
-- `n-date-picker` 新增 `time-format` 属性
-- `n-form-item` 新增 `feedback-vertical` 和 `feedback-crosswise` 属性
+- `n-slider` 新增 wai-aria 支持
+- `n-date-picker` 新增 `time-picker-format` 属性
+- `n-form-item` 新增 `feedback-class` 和 `feedback-style` 属性
 - `n-split` 支持设置像素值大小
 - `n-scrollbar` 新增 `content-style` 和 `content-class` 属性，关闭 [#4497](https://github.com/tusen-ai/naive-ui/issues/4497)
 - `n-image` 新增 `render-toolbar` 属性

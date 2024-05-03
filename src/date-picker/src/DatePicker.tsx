@@ -113,7 +113,7 @@ export const datePickerProps = {
   endPlaceholder: String,
   format: String,
   dateFormat: String,
-  timeFormat: String,
+  timerPickerFormat: String,
   actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
@@ -1023,7 +1023,7 @@ export default defineComponent({
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timeFormat: this.timeFormat
+      timerPickerFormat: this.timerPickerFormat
     }
     const renderPanel = (): VNode => {
       const { type } = this

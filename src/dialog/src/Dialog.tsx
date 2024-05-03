@@ -1,4 +1,5 @@
 import { h, defineComponent, computed, type CSSProperties } from 'vue'
+import { getMargin } from 'seemly'
 import {
   InfoIcon,
   SuccessIcon,
@@ -19,7 +20,6 @@ import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
-import { getMargin } from 'seemly'
 
 const iconRenderMap = {
   default: () => <InfoIcon />,
