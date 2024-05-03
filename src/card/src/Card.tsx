@@ -4,19 +4,19 @@ import {
   computed,
   type PropType,
   type CSSProperties,
-  type VNodeChild,
-  type VNodeArrayChildren
+  type VNodeChild
 } from 'vue'
 import { getPadding } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf, resolveSlot, render } from '../../_utils'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
+import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
 
 export interface CardSegmented {
   content?: boolean | 'soft'
@@ -70,14 +70,6 @@ export const cardProps = {
 }
 
 export type CardProps = ExtractPublicPropTypes<typeof cardProps>
-
-function resolveWrappedVNode (
-  vnodes: VNodeArrayChildren,
-  wrapper: (vnodes: VNodeArrayChildren | null) => VNodeChild
-): VNodeChild | null {
-  vnodes = vnodes.filter(Boolean)
-  return wrapper(vnodes.length ? vnodes : null)
-}
 
 export default defineComponent({
   name: 'Card',
@@ -231,94 +223,113 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         role={this.role}
       >
-        {resolveWrappedVNode(
-          resolveSlot($slots.cover, () => [render(this.cover)]),
-          (children) =>
-            children && (
+        {resolveWrappedSlot($slots.cover, (children) => {
+          const mergedChildren = this.cover
+            ? ensureValidVNode([this.cover()])
+            : children
+          return (
+            mergedChildren && (
               <div class={`${mergedClsPrefix}-card-cover`} role="none">
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
-        {resolveWrappedVNode(
-          resolveSlot($slots.header, () => [render(this.title)]),
-          (children) => {
-            return children || this.closable ? (
+          )
+        })}
+        {resolveWrappedSlot($slots.header, (children) => {
+          const { title } = this
+          const mergedChildren = title
+            ? ensureValidVNode(
+              typeof title === 'function' ? [title()] : [title]
+            )
+            : children
+          return mergedChildren || this.closable ? (
+            <div
+              class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
+              style={this.headerStyle}
+              role="heading"
+            >
               <div
-                class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
-                style={this.headerStyle}
+                class={`${mergedClsPrefix}-card-header__main`}
                 role="heading"
               >
-                <div
-                  class={`${mergedClsPrefix}-card-header__main`}
-                  role="heading"
-                >
-                  {children || this.title}
-                </div>
-                {resolveWrappedVNode(
-                  resolveSlot($slots['header-extra'], () => [
-                    render(this.headerExtra)
-                  ]),
-                  (children) =>
-                    children && (
-                      <div
-                        class={[
-                          `${mergedClsPrefix}-card-header__extra`,
-                          this.headerExtraClass
-                        ]}
-                        style={this.headerExtraStyle}
-                      >
-                        {children}
-                      </div>
-                    )
-                )}
-                {this.closable && (
-                  <NBaseClose
-                    clsPrefix={mergedClsPrefix}
-                    class={`${mergedClsPrefix}-card-header__close`}
-                    onClick={this.handleCloseClick}
-                    absolute
-                  />
-                )}
+                {mergedChildren}
               </div>
-            ) : null
-          }
-        )}
-        {resolveWrappedVNode(
-          resolveSlot($slots.default, () => [render(this.content)]),
-          (children) =>
-            children && (
+              {resolveWrappedSlot($slots['header-extra'], (children) => {
+                const mergedChildren = this.headerExtra
+                  ? ensureValidVNode([this.headerExtra()])
+                  : children
+                return (
+                  mergedChildren && (
+                    <div
+                      class={[
+                        `${mergedClsPrefix}-card-header__extra`,
+                        this.headerExtraClass
+                      ]}
+                      style={this.headerExtraStyle}
+                    >
+                      {mergedChildren}
+                    </div>
+                  )
+                )
+              })}
+              {this.closable && (
+                <NBaseClose
+                  clsPrefix={mergedClsPrefix}
+                  class={`${mergedClsPrefix}-card-header__close`}
+                  onClick={this.handleCloseClick}
+                  absolute
+                />
+              )}
+            </div>
+          ) : null
+        })}
+        {resolveWrappedSlot($slots.default, (children) => {
+          const { content } = this
+          const mergedChildren = content
+            ? ensureValidVNode(
+              typeof content === 'function' ? [content()] : [content]
+            )
+            : children
+          return (
+            mergedChildren && (
               <div
                 class={[`${mergedClsPrefix}-card__content`, this.contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
-        {resolveWrappedVNode(
-          resolveSlot($slots.footer, () => [render(this.footer)]),
-          (children) =>
-            children && (
+          )
+        })}
+        {resolveWrappedSlot($slots.footer, (children) => {
+          const mergedChildren = this.footer
+            ? ensureValidVNode([this.footer()])
+            : children
+          return (
+            mergedChildren && (
               <div
                 class={[`${mergedClsPrefix}-card__footer`, this.footerClass]}
                 style={this.footerStyle}
                 role="none"
               >
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
-        {resolveWrappedVNode(
-          resolveSlot($slots.action, () => [render(this.action)]),
-          (children) =>
-            children && (
+          )
+        })}
+        {resolveWrappedSlot($slots.action, (children) => {
+          const mergedChildren = this.action
+            ? ensureValidVNode([this.action()])
+            : children
+          return (
+            mergedChildren && (
               <div class={`${mergedClsPrefix}-card__action`} role="none">
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
+          )
+        })}
       </Component>
     )
   }

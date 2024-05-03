@@ -7,7 +7,7 @@ import {
   type VNodeChild
 } from 'vue'
 
-function ensureValidVNode (
+export function ensureValidVNode (
   vnodes: VNodeArrayChildren
 ): VNodeArrayChildren | null {
   return vnodes.some((child) => {
