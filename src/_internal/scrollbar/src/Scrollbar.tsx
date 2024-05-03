@@ -21,7 +21,7 @@ import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { useReactivated, Wrapper } from '../../../_utils'
+import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -667,7 +667,9 @@ const Scrollbar = defineComponent({
         '--n-scrollbar-width': width,
         '--n-scrollbar-height': height,
         '--n-scrollbar-rail-inset-horizontal': railInsetHorizontal,
-        '--n-scrollbar-rail-inset-vertical': railInsetVertical,
+        '--n-scrollbar-rail-inset-vertical': rtlEnabledRef?.value
+          ? rtlInset(railInsetVertical)
+          : railInsetVertical,
         '--n-scrollbar-rail-color': railColor
       }
     })
