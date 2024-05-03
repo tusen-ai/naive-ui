@@ -2,10 +2,7 @@
 
 ## NEXT_VERSION
 
-### i18n
-
-- Add csCZ locale.
-- Add missing itIT locale translations
+`2024-05-03`
 
 ### Fixes
 
@@ -40,6 +37,11 @@
 - `n-cascader` 新增 `render-suffix` 属性
 - `n-image` 优化下载按钮图标
 - `n-scrollbar` 新增 `height`、`width`、`radius`、`railInsetHorizontal`、`railInsetVertical`、`railColor` 主题变量
+
+### i18n
+
+- 新增 csCZ locale
+- 增加缺少的 itIT locale
 
 ## 2.38.1
 

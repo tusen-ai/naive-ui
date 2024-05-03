@@ -2,10 +2,7 @@
 
 ## NEXT_VERSION
 
-### i18n
-
-- Add csCZ locale.
-- Add missing itIT locale translations
+`2024-05-03`
 
 ### Fixes
 
@@ -41,6 +38,11 @@
 - `n-cascader` adds `get-render-suffix` prop.
 - `n-image` optimizes download icon style.
 - `n-scrollbar` adds `height`, `width`, `radius`, `railInsetHorizontal`, `railInsetVertical` and `railColor` theme variables.
+
+### i18n
+
+- Add csCZ locale.
+- Add missing itIT locale translations
 
 ## 2.38.1
 
