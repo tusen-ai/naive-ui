@@ -16,6 +16,7 @@
 - Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
 - Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
 - Fix the `common` type error in the `theme-overrides` prop when modifying components' themes.
+- Fix `n-split` may emit value less than `0`.
 
 ### Features
 

@@ -200,12 +200,8 @@ export default defineComponent({
         typeof max === 'string' ? depx(max) : max * containerUsableSize
 
       let nextPxSize = newPxSize
-      if (pxMin) {
-        nextPxSize = Math.max(nextPxSize, pxMin)
-      }
-      if (props.max) {
-        nextPxSize = Math.min(nextPxSize, pxMax)
-      }
+      nextPxSize = Math.max(nextPxSize, pxMin)
+      nextPxSize = Math.min(nextPxSize, pxMax, containerUsableSize)
       // in pixel mode
       if (typeof mergedSizeRef.value === 'string') {
         doUpdateSize(`${nextPxSize}px`)
