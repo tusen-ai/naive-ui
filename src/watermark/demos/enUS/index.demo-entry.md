@@ -12,6 +12,8 @@ image.vue
 
 ## API
 
+Supports multiple lines text separated by `\n` since `2.38.2`.
+
 ### Watermark Props
 
 | Name | Type | Default | Description | Version |
@@ -21,7 +23,7 @@ image.vue
 | debug | `boolean` | `false` | Whether to show debug grid. | 2.25.3 |
 | font-size | `number` | `14` | Font size. | 2.25.3 |
 | font-family | `string` | `undefined` | Font family. | 2.25.3 |
-| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | Font style. | 2.25.3 |
+| font-style | ``'normal' \| 'italic' \| `oblique ${number}deg` `` | `normal` | Font style. | 2.25.3 |
 | font-variant | `string` | `''` | Font variant. | 2.25.3 |
 | font-weight | `number` | `400` | Font weight. | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | Font color. | 2.25.3 |
@@ -35,6 +37,7 @@ image.vue
 | image-width | `number` | `undefined` | Image width. | 2.25.3 |
 | rotate | `number` | `0` | Rotate degree | 2.25.3 |
 | selectable | `boolean` | `true` | Whether content covered by watermark is selectable. | 2.25.3 |
+| text-align | `'left' \| 'center' \| 'right'` | `'left'` | Text align method when there's multiple lines of text. | 2.38.2 |
 | width | `number` | `32` | Width of watermark area. | 2.25.3 |
 | x-gap | `number` | `0` | Horizontal gap. | 2.25.3 |
 | x-offset | `number` | `0` | Horizontal offset. | 2.25.3 |

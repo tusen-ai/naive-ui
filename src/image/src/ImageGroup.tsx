@@ -4,7 +4,8 @@ import {
   ref,
   provide,
   getCurrentInstance,
-  type Ref
+  type Ref,
+  toRef
 } from 'vue'
 import { createId } from 'seemly'
 import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
@@ -12,11 +13,13 @@ import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
+import type { ImageRenderToolbar } from './public-types'
 
 export const imageGroupInjectionKey = createInjectionKey<
 ImagePreviewInst & {
   groupId: string
   mergedClsPrefixRef: Ref<string>
+  renderToolbarRef: Ref<ImageRenderToolbar | undefined>
 }
 >('n-image-group')
 
@@ -67,7 +70,8 @@ export default defineComponent({
       toggleShow: () => {
         previewInstRef.value?.toggleShow()
       },
-      groupId
+      groupId,
+      renderToolbarRef: toRef(props, 'renderToolbar')
     })
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     return {
@@ -92,6 +96,7 @@ export default defineComponent({
         onNext={this.next}
         showToolbar={this.showToolbar}
         showToolbarTooltip={this.showToolbarTooltip}
+        renderToolbar={this.renderToolbar}
       >
         {this.$slots}
       </NImagePreview>

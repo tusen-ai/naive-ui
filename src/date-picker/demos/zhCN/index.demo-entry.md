@@ -54,9 +54,9 @@ form-debug.vue
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
-| time-format | `string \| undefined` | `undefined` | 设置面板中时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
+| time-picker-format | `string \| undefined` | `undefined` | 日期面板内时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |

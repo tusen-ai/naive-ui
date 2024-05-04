@@ -13,11 +13,7 @@ export default cB('scrollbar', [
               right: unset;
             `)
           ])
-        ]),
-        cM('vertical', `
-          left: 4px;
-          right: unset;
-        `)
+        ])
       ])
     ])
   ])

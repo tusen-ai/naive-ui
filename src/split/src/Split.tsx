@@ -16,6 +16,7 @@ import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import style from './styles/index.cssr'
 import { type SplitTheme, splitLight } from '../styles'
 import { type SplitOnUpdateSize } from './types'
+import { depx } from 'seemly'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
@@ -47,10 +48,10 @@ export const splitProps = {
     type: [String, Number] as PropType<string | number>,
     default: 1
   },
-  panel1Class: String,
-  panel1Style: [Object, String] as PropType<CSSProperties | string>,
-  panel2Class: String,
-  panel2Style: [Object, String] as PropType<CSSProperties | string>,
+  pane1Class: String,
+  pane1Style: [Object, String] as PropType<CSSProperties | string>,
+  pane2Class: String,
+  pane2Style: [Object, String] as PropType<CSSProperties | string>,
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
   onDragEnd: Function as PropType<(e: Event) => void>,
@@ -92,24 +93,19 @@ export default defineComponent({
       watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     }
     // use to update controlled or uncontrolled values
-    const doUpdateSize = (size: number, containerSize: number): void => {
-      const sizeValue =
-        typeof props.size === 'string' ? `${size * containerSize}px` : size
+    const doUpdateSize = (size: number | string): void => {
       const _onUpdateSize = props['onUpdate:size']
-      if (props.onUpdateSize) call(props.onUpdateSize, sizeValue)
-      if (_onUpdateSize) call(_onUpdateSize, sizeValue)
+      if (props.onUpdateSize) call(props.onUpdateSize, size as string & number)
+      if (_onUpdateSize) call(_onUpdateSize, size as string & number)
       uncontrolledSizeRef.value = size
     }
     const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
 
-    const isPixel = computed(() => typeof mergedSizeRef.value === 'string')
-
     const firstPaneStyle = computed(() => {
       const sizeValue = mergedSizeRef.value
-      if (isPixel.value) {
-        const size = parseFloat(sizeValue as string)
+      if (typeof sizeValue === 'string') {
         return {
-          flex: `0 0 ${size}px`
+          flex: `0 0 ${sizeValue}`
         }
       } else if (typeof sizeValue === 'number') {
         const size = sizeValue * 100
@@ -176,43 +172,43 @@ export default defineComponent({
       updateSize(e)
     }
 
-    const parseSizeValue = (
-      value: string | number,
-      parentSize: number
-    ): number => {
-      if (typeof value === 'string' && value.endsWith('px')) {
-        return parseFloat(value) / parentSize
-      } else {
-        const numericValue = value as number
-        return numericValue >= 0 && numericValue <= 1
-          ? numericValue
-          : numericValue / 100
-      }
-    }
-
     const updateSize = (event: MouseEvent): void => {
-      const parentRect =
+      const containerRect =
         resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
-      if (!parentRect) return
+      if (!containerRect) return
 
-      const newSize =
-        props.direction === 'horizontal'
-          ? (event.clientX - parentRect.left - offset) /
-            (parentRect.width - props.resizeTriggerSize)
-          : (event.clientY - parentRect.top + offset) /
-            (parentRect.height - props.resizeTriggerSize)
-      const containerSize =
-        props.direction === 'horizontal' ? parentRect.width : parentRect.height
-      const min = parseSizeValue(props.min, containerSize)
-      const max = parseSizeValue(props.max, containerSize)
-      let nextSize = newSize
-      if (props.min) {
-        nextSize = Math.max(newSize, min)
+      const { direction } = props
+
+      const containerUsableWidth = containerRect.width - props.resizeTriggerSize
+      const containerUsableHeight =
+        containerRect.height - props.resizeTriggerSize
+      const containerUsableSize =
+        direction === 'horizontal'
+          ? containerUsableWidth
+          : containerUsableHeight
+
+      const newPxSize =
+        direction === 'horizontal'
+          ? event.clientX - containerRect.left - offset
+          : event.clientY - containerRect.top + offset
+
+      const { min, max } = props
+
+      const pxMin =
+        typeof min === 'string' ? depx(min) : min * containerUsableSize
+      const pxMax =
+        typeof max === 'string' ? depx(max) : max * containerUsableSize
+
+      let nextPxSize = newPxSize
+      nextPxSize = Math.max(nextPxSize, pxMin)
+      nextPxSize = Math.min(nextPxSize, pxMax, containerUsableSize)
+      // in pixel mode
+      if (typeof mergedSizeRef.value === 'string') {
+        doUpdateSize(`${nextPxSize}px`)
+      } else {
+        // in percentage mode
+        doUpdateSize(nextPxSize / containerUsableSize)
       }
-      if (props.max) {
-        nextSize = Math.min(nextSize, max)
-      }
-      doUpdateSize(nextSize, containerSize)
     }
 
     const themeClassHandle = inlineThemeDisabled
@@ -244,8 +240,8 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div
-          class={[`${this.mergedClsPrefix}-split-pane-1`, this.panel1Class]}
-          style={[this.firstPaneStyle, this.panel1Style]}
+          class={[`${this.mergedClsPrefix}-split-pane-1`, this.pane1Class]}
+          style={[this.firstPaneStyle, this.pane1Style]}
         >
           {this.$slots[1]?.()}
         </div>
@@ -269,8 +265,8 @@ export default defineComponent({
           </div>
         )}
         <div
-          class={[`${this.mergedClsPrefix}-split-pane-2`, this.panel2Class]}
-          style={this.panel2Style}
+          class={[`${this.mergedClsPrefix}-split-pane-2`, this.pane2Class]}
+          style={this.pane2Style}
         >
           {this.$slots[2]?.()}
         </div>

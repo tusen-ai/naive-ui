@@ -26,7 +26,8 @@ import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn, download } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { uploadInjectionKey } from './interface'
-import type { SettledFileInfo, ListType } from './interface'
+import type { ListType } from './interface'
+import type { UploadSettledFileInfo } from './public-types'
 import { imageIcon, documentIcon } from './icons'
 import { isImageFile } from './utils'
 
@@ -44,7 +45,7 @@ export default defineComponent({
       required: true
     },
     file: {
-      type: Object as PropType<SettledFileInfo>,
+      type: Object as PropType<UploadSettledFileInfo>,
       required: true
     },
     listType: {
@@ -131,7 +132,7 @@ export default defineComponent({
       e.preventDefault()
       handleDownload(props.file)
     }
-    function handleRemove (file: SettledFileInfo): void {
+    function handleRemove (file: UploadSettledFileInfo): void {
       const {
         xhrMap,
         doChange,
@@ -157,7 +158,7 @@ export default defineComponent({
         })
       })
     }
-    function handleDownload (file: SettledFileInfo): void {
+    function handleDownload (file: UploadSettledFileInfo): void {
       const {
         onDownloadRef: { value: onDownload }
       } = NUpload
@@ -169,7 +170,7 @@ export default defineComponent({
         }
       })
     }
-    function handleAbort (file: SettledFileInfo): void {
+    function handleAbort (file: UploadSettledFileInfo): void {
       const { xhrMap } = NUpload
       const xhr = xhrMap.get(file.id)
       xhr?.abort()

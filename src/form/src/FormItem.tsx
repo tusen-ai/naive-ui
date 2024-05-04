@@ -49,9 +49,7 @@ import type {
   FormItemValidateOptions,
   FormItemInst,
   FormItemInternalValidate,
-  FormItemInternalValidateResult,
-  FeedBackPositonCrosswise,
-  FeedBackPositonVertical
+  FormItemInternalValidateResult
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -81,14 +79,8 @@ export const formItemProps = {
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
-  feedbackCrosswise: {
-    type: String as PropType<FeedBackPositonCrosswise>,
-    default: 'left'
-  },
-  feedbackVertical: {
-    type: String as PropType<FeedBackPositonVertical>,
-    default: 'bottom'
-  },
+  feedbackClass: String,
+  feedbackStyle: [String, Object] as PropType<string | CSSProperties>,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -597,7 +589,6 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          `${mergedClsPrefix}-form-item--labelled-vertical-${this.feedbackVertical}`,
           this.isAutoLabelWidth &&
             `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
@@ -617,10 +608,11 @@ export default defineComponent({
         {this.mergedShowFeedback ? (
           <div
             key={this.feedbackId}
-            style={{
-              textAlign: this.feedbackCrosswise
-            }}
-            class={`${mergedClsPrefix}-form-item-feedback-wrapper`}
+            style={this.feedbackStyle}
+            class={[
+              `${mergedClsPrefix}-form-item-feedback-wrapper`,
+              this.feedbackClass
+            ]}
           >
             <Transition name="fade-down-transition" mode="out-in">
               {{

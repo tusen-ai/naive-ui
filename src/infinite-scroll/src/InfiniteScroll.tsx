@@ -1,19 +1,15 @@
 import { h, defineComponent, type PropType, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { resolveSlot } from '../../_utils'
 import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
-import { debounce } from 'lodash-es'
 
 export const infiniteScrollProps = {
   distance: {
     type: Number,
     default: 0
   },
-  delay: {
-    type: Number,
-    default: undefined
-  },
-  onLoad: Function as PropType<() => Promise<void>>,
+  onLoad: Function as PropType<() => Promise<void> | void>,
   scrollbarProps: Object as PropType<ScrollbarProps>
 } as const
 
@@ -26,6 +22,8 @@ export default defineComponent({
   props: infiniteScrollProps,
   setup (props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+
+    let loading = false
 
     const handleCheckBottom = async (): Promise<void> => {
       const { value: scrollbarInst } = scrollbarInstRef
@@ -42,24 +40,31 @@ export default defineComponent({
             containerScrollTop + clientHeight >=
             scrollHeight - props.distance
           ) {
-            await props.onLoad?.()
+            loading = true
+            try {
+              await props.onLoad?.()
+            } catch {}
+            loading = false
           }
         }
       }
     }
 
     const handleScroll = (): void => {
-      if (props.delay) {
-        const debounceFn = debounce(handleCheckBottom, props.delay)
-        debounceFn() as any
-      } else {
-        handleCheckBottom() as any
-      }
+      if (loading) return
+      void handleCheckBottom()
+    }
+
+    const handleWheel = (e: WheelEvent): void => {
+      if (e.deltaY <= 0) return
+      if (loading) return
+      void handleCheckBottom()
     }
 
     return {
       scrollbarInstRef,
-      handleScroll
+      handleScroll,
+      handleWheel
     }
   },
   render () {
@@ -67,15 +72,12 @@ export default defineComponent({
       <NxScrollbar
         {...this.scrollbarProps}
         ref="scrollbarInstRef"
+        onWheel={this.handleWheel}
         onScroll={this.handleScroll}
       >
         {{
           default: () => {
-            return (
-              <div style={{ height: '100%', overflow: 'auto' }}>
-                {this.$slots.default?.()}
-              </div>
-            )
+            return resolveSlot(this.$slots.default, () => [])
           }
         }}
       </NxScrollbar>

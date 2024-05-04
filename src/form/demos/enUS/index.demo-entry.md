@@ -25,7 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
-feedback-position.vue
+feedback-style.vue
 ```
 
 ## API
@@ -33,7 +33,7 @@ feedback-position.vue
 ### Form Props
 
 | Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether to disable the form. |  |
 | inline | `boolean` | `false` | Whether to display as an inline form. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |  |
@@ -42,8 +42,6 @@ feedback-position.vue
 | model | `Object` | `{}` | The object to get/set form item values. |  |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |  |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
-| feedBack-vertical | `'top' \| 'bottom'` | `bottom` | Feedback check vertical display positioning | NEXT_VERSION |  |
-| feedBack-crosswise | `'left' \| 'center' \| 'right'` | `left` | Feedback check horizontal display positioning | NEXT_VERSION |  |
 | show-label | `boolean` | `true` | Whether to show the label. |  |
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
@@ -76,6 +74,8 @@ feedback-position.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
+| feedback-class | `string` | `undefined` | Feedback check vertical display positioning | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | Feedback check horizontal display positioning | 2.38.2 |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |

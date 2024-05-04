@@ -47,9 +47,8 @@ const itIT: NLocale = {
     endDatePlaceholder: 'Data fine',
     startDatetimePlaceholder: 'Data e ora di inizio',
     endDatetimePlaceholder: 'Data e ora di fine',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Mese di inizio',
+    endMonthPlaceholder: 'Mese di fine',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Oggi'
@@ -64,13 +63,18 @@ const itIT: NLocale = {
     sourceTitle: 'Fonte',
     targetTitle: 'Destinazione'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Seleziona tutto',
+    unselectAll: 'Deseleziona tutto',
+    clearAll: 'Pulisci',
+    total: (num: number): string => {
+      if (num !== 1) return `${num} elementi in totale`
+      return '1 elemento in totale'
+    },
+    selected: (num: number): string => {
+      if (num !== 1) return `${num} elementi selezionati`
+      return '1 elemento selezionato'
+    }
   },
   Empty: {
     description: 'Nessun Dato'
@@ -123,8 +127,7 @@ const itIT: NLocale = {
     tipZoomIn: 'Riduci',
     tipDownload: 'Download',
     tipClose: 'Chiudi (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Torna alla dimensione originale'
   }
 }
 

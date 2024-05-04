@@ -32,7 +32,7 @@ download.vue
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
-| default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |  |
+| default-upload | `boolean` | `true` | If file uploaded immediately after file is selected. |  |
 | directory | `boolean` | `false` | Whether to allow directory upload. (In open file dialog only directory can be selected) | 2.28.3 |
 | directory-dnd | `boolean` | `false` | Whether to allow directory drag and drop. (If it's not set, it will follow `directory` prop by default.) | 2.28.3 |
 | disabled | `boolean` | `false` | Whether to disable the upload. |  |
@@ -40,7 +40,7 @@ download.vue
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
-| input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
+| input-props | `InputHTMLAttributes` | `undefined` | Attributes of file input. | 2.24.2 |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
@@ -67,7 +67,7 @@ download.vue
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. Returning `false`, `Promise resolve false`, `Promise rejected` will cancel the download. |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |  |
-| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. | `index` NEXT_VERSION |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. | `index` 2.38.2 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
 
 #### UploadFileInfo Type

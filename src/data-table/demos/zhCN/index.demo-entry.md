@@ -10,7 +10,7 @@
       传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
     </li>
     <li>
-      在非异步状况下，页面的数量是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望这么做，那么需要设定 `remote` 属性。
+      在非异步状况下，总页数 <n-text code>page-count</n-text> 是由数据的数量决定的，即使传入 <n-text code>page-count</n-text> 也不会生效，如果你希望指定总页数，需要设定 <n-text code>remote</n-text> 属性。
     </li>
     <li>
     如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
@@ -103,9 +103,9 @@ rtl-debug.vue
 | render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | 自定义渲染展开图标 | 2.32.2, `expanded`: 2.34.4 |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
-| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |  |
+| row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | 自定义行属性 |  |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |  |
-| scrollbar-props | `object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |

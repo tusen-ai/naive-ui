@@ -67,7 +67,7 @@ show.vue
 | disabled? | `boolean` | Whether to disable the menu item. |  |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |  |
 | icon? | `() => VNodeChild` | The icon for the menu item. |  |
-| key | `string` | The indentifier of the menu item. |  |
+| key | `string` | The identifier of the menu item. |  |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 
@@ -76,7 +76,7 @@ show.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |  |
-| key | `string` | The indentifier of the menu group. |  |
+| key | `string` | The identifier of the menu group. |  |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 | type | `'group'` | The type of the menu item, **required!** |  |
@@ -85,7 +85,7 @@ show.vue
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| key | `string` | The indentifier of the menu group. |  |
+| key | `string` | The identifier of the menu group. |  |
 | props | `HTMLAttributes` | Attributes of the divider. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 | type | `'divider'` | The type of the menu item, **required!** |  |

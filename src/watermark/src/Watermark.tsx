@@ -58,9 +58,9 @@ export const watermarkProps = {
     type: Number,
     default: 0
   },
-  align: {
+  textAlign: {
     type: String as PropType<'left' | 'center' | 'right'>,
-    default: 'center'
+    default: 'left'
   },
   image: String,
   imageOpacity: { type: Number, default: 1 },
@@ -203,6 +203,7 @@ export default defineComponent({
           ctx.fillStyle = fontColor
 
           let maxWidth = 0
+          const { textAlign } = props
           content
             .split('\n')
             .map((line) => {
@@ -215,9 +216,9 @@ export default defineComponent({
             })
             .forEach(({ line, width }, index) => {
               const alignOffset =
-                props.align === 'left'
+                textAlign === 'left'
                   ? 0
-                  : props.align === 'center'
+                  : textAlign === 'center'
                     ? (maxWidth - width) / 2
                     : maxWidth - width
 

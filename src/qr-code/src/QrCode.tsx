@@ -96,7 +96,6 @@ export default defineComponent({
       : undefined
 
     const canvasRef = ref<HTMLCanvasElement>()
-    const svgRef = ref<HTMLCanvasElement>()
 
     const qr = computed(() => {
       const errorCorrectionLevel =
@@ -111,6 +110,7 @@ export default defineComponent({
       const imageLoadedTrigger = ref(0)
       let loadedIcon: HTMLImageElement | null = null
       watchEffect(() => {
+        if (props.type === 'svg') return
         void imageLoadedTrigger.value
         drawCanvas(
           qr.value,
@@ -127,22 +127,9 @@ export default defineComponent({
             : null
         )
       })
+
       watchEffect(() => {
-        void imageLoadedTrigger.value
-        drawSvg(
-          qr.value,
-          props.size,
-          loadedIcon
-            ? {
-                icon: loadedIcon,
-                iconBorderRadius: props.iconBorderRadius,
-                iconSize: props.iconSize,
-                iconBackgroundColor: props.iconBackgroundColor
-              }
-            : null
-        )
-      })
-      watchEffect(() => {
+        if (props.type === 'svg') return
         const { iconSrc } = props
         if (iconSrc) {
           let aborted = false
@@ -263,48 +250,28 @@ export default defineComponent({
       return ops.join('')
     }
 
-    function drawSvg (
+    function svgInfo (
       qr: qrcodegen.QrCode,
       size: number,
       iconConfig: {
-        icon: HTMLImageElement
+        iconSrc: string
         iconBorderRadius: number
         iconSize: number
         iconBackgroundColor: string
       } | null
-    ): void {
-      const svg = svgRef.value
-      if (!svg) return
+    ): {
+        innerHtml: string
+        numCells: number
+      } {
       const cells = qr.getModules()
       const numCells = cells.length
       const cellsToDraw = cells
-
-      svg.setAttribute('viewBox', `0 0 ${numCells} ${numCells}`)
-      while (svg.firstChild) {
-        svg.removeChild(svg.firstChild)
-      }
-
-      const pathEle = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'path'
-      )
-      pathEle.setAttribute('fill', 'transparent')
-      pathEle.setAttribute('d', `M0,0 h${numCells}v${numCells}H0z`)
-      pathEle.setAttribute('shape-rendering', 'crispEdges')
-      svg.appendChild(pathEle)
-
-      const fgPath = generatePath(cellsToDraw, 0)
-      const fgPathEle = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'path'
-      )
-      fgPathEle.setAttribute('fill', props.color)
-      fgPathEle.setAttribute('d', fgPath)
-      fgPathEle.setAttribute('shape-rendering', 'crispEdges')
-      svg.appendChild(fgPathEle)
-
+      let svgInnerHtml = ''
+      const path1Html = `<path fill="transparent" d="M0,0 h${numCells}v${numCells}H0z" shape-rendering="crispEdges"></path>`
+      const path2Html = `<path fill="${props.color}" d="${generatePath(cellsToDraw, 0)}" shape-rendering="crispEdges"></path>`
+      let iconHtml = ''
       if (iconConfig) {
-        const { icon, iconSize } = iconConfig
+        const { iconSrc, iconSize } = iconConfig
 
         const DEFAULT_IMG_SCALE = 0.1
         const defaultSize = Math.floor(size * DEFAULT_IMG_SCALE)
@@ -313,26 +280,38 @@ export default defineComponent({
         const w = (iconSize || defaultSize) * scale
         const x = cells.length / 2 - w / 2
         const y = cells.length / 2 - h / 2
-        const image = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'image'
-        )
-        image.setAttribute('href', icon.src)
-        image.setAttribute('width', w.toString())
-        image.setAttribute('height', h.toString())
-        image.setAttribute('x', x.toString())
-        image.setAttribute('y', y.toString())
-        image.setAttribute('preserveAspectRatio', 'none')
-        svg.appendChild(image)
+        iconHtml += `<image href="${iconSrc}" width="${w}" height="${h}" x="${x}" y="${y}" preserveAspectRatio="none"></image>`
+      }
+      svgInnerHtml += path1Html
+      svgInnerHtml += path2Html
+      svgInnerHtml += iconHtml
+      return {
+        innerHtml: svgInnerHtml,
+        numCells
       }
     }
 
+    const svgInfoRef = computed(() =>
+      svgInfo(
+        qr.value,
+        props.size,
+        props.iconSrc
+          ? {
+              iconSrc: props.iconSrc,
+              iconBorderRadius: props.iconBorderRadius,
+              iconSize: props.iconSize,
+              iconBackgroundColor: props.iconBackgroundColor
+            }
+          : null
+      )
+    )
+
     return {
       canvasRef,
-      svgRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      themeClass: themeClassHandle?.themeClass
+      themeClass: themeClassHandle?.themeClass,
+      svgInfo: svgInfoRef
     }
   },
   render () {
@@ -366,7 +345,13 @@ export default defineComponent({
             }}
           />
         ) : (
-          <svg ref="svgRef" height={size} width={size} role="img" />
+          <svg
+            height={size}
+            width={size}
+            viewBox={`0 0 ${this.svgInfo.numCells} ${this.svgInfo.numCells}`}
+            role="img"
+            innerHTML={this.svgInfo.innerHtml}
+          />
         )}
       </div>
     )

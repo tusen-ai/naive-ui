@@ -6,9 +6,9 @@
   <n-split
     direction="horizontal"
     style="height: 200px"
-    @move-start="handleOnMoveStart"
-    @moving="handleOnMoving"
-    @move-end="handleOnMoveEnd"
+    @drag-start="handleOnDragStart"
+    @drag-move="handleOnDragMove"
+    @drag-end="handleOnDragEnd"
   >
     <template #1>
       Pane 1
@@ -27,13 +27,13 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      handleOnMoveStart: () => {
+      handleOnDragStart: () => {
         message.info('Move Start')
       },
-      handleOnMoving: () => {
+      handleOnDragMove: () => {
         message.info('Moving')
       },
-      handleOnMoveEnd: () => {
+      handleOnDragEnd: () => {
         message.info('Move end')
       }
     }

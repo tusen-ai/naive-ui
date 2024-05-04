@@ -4,7 +4,8 @@ import {
   inject,
   defineComponent,
   type PropType,
-  Transition
+  Transition,
+  type VNode
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
@@ -39,6 +40,8 @@ export default defineComponent({
       mergedThemeRef,
       labelFieldRef,
       showCheckboxRef,
+      renderPrefixRef,
+      renderSuffixRef,
       updateHoverKey,
       updateKeyboardKey,
       addLoadingKey,
@@ -171,88 +174,121 @@ export default defineComponent({
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
       mergedHandleMouseMove: mergedHandleMouseMoveRef,
-      renderLabel: renderLabelRef
+      renderLabel: renderLabelRef,
+      renderPrefix: renderPrefixRef,
+      renderSuffix: renderSuffixRef
     }
   },
   render () {
-    const { mergedClsPrefix, renderLabel } = this
+    const {
+      mergedClsPrefix,
+      showCheckbox,
+      renderLabel,
+      renderPrefix,
+      renderSuffix
+    } = this
+
+    let prefixNode: VNode | null = null
+    if (showCheckbox || renderPrefix) {
+      const originalNode = this.showCheckbox ? (
+        <NCheckbox
+          focusable={false}
+          data-checkbox
+          disabled={this.disabled}
+          checked={this.checked}
+          indeterminate={this.indeterminate}
+          theme={this.mergedTheme.peers.Checkbox}
+          themeOverrides={this.mergedTheme.peerOverrides.Checkbox}
+          onUpdateChecked={this.handleCheckboxUpdateValue}
+        />
+      ) : null
+      prefixNode = (
+        <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
+          {renderPrefix
+            ? renderPrefix({
+              option: this.tmNode.rawNode,
+              checked: this.checked,
+              node: originalNode
+            })
+            : originalNode}
+        </div>
+      )
+    }
+    let suffixNode: VNode | null = null
+    const originalSuffixChild = (
+      <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>
+        {!this.isLeaf ? (
+          <NBaseLoading
+            clsPrefix={mergedClsPrefix}
+            scale={0.85}
+            strokeWidth={24}
+            show={this.isLoading}
+            class={`${mergedClsPrefix}-cascader-option-icon`}
+          >
+            {{
+              default: () => (
+                <NBaseIcon
+                  clsPrefix={mergedClsPrefix}
+                  key="arrow"
+                  class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--arrow`}
+                >
+                  {{
+                    default: () => <ChevronRightIcon />
+                  }}
+                </NBaseIcon>
+              )
+            }}
+          </NBaseLoading>
+        ) : this.checkStrategy === 'child' &&
+          !(this.multiple && this.cascade) ? (
+          <Transition name="fade-in-scale-up-transition">
+            {{
+              default: () =>
+                this.checked ? (
+                  <NBaseIcon
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--checkmark`}
+                  >
+                    {{ default: () => <CheckmarkIcon /> }}
+                  </NBaseIcon>
+                ) : null
+            }}
+          </Transition>
+            ) : null}
+      </div>
+    )
+    suffixNode = (
+      <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
+        {renderSuffix
+          ? renderSuffix({
+            option: this.tmNode.rawNode,
+            checked: this.checked,
+            node: originalSuffixChild
+          })
+          : originalSuffixChild}
+      </div>
+    )
     return (
       <div
         class={[
           `${mergedClsPrefix}-cascader-option`,
-          {
-            [`${mergedClsPrefix}-cascader-option--pending`]:
-              this.keyboardPending || this.hoverPending,
-            [`${mergedClsPrefix}-cascader-option--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-cascader-option--show-prefix`]:
-              this.showCheckbox
-          }
+          this.keyboardPending ||
+            (this.hoverPending &&
+              `${mergedClsPrefix}-cascader-option--pending`),
+          this.disabled && `${mergedClsPrefix}-cascader-option--disabled`,
+          this.showCheckbox && `${mergedClsPrefix}-cascader-option--show-prefix`
         ]}
         onMouseenter={this.mergedHandleMouseEnter}
         onMousemove={this.mergedHandleMouseMove}
         onClick={this.handleClick}
       >
-        {this.showCheckbox ? (
-          <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
-            <NCheckbox
-              focusable={false}
-              data-checkbox
-              disabled={this.disabled}
-              checked={this.checked}
-              indeterminate={this.indeterminate}
-              theme={this.mergedTheme.peers.Checkbox}
-              themeOverrides={this.mergedTheme.peerOverrides.Checkbox}
-              onUpdateChecked={this.handleCheckboxUpdateValue}
-            />
-          </div>
-        ) : null}
+        {prefixNode}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
           {renderLabel
             ? renderLabel(this.tmNode.rawNode, this.checked)
             : this.label}
         </span>
-        <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
-          <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>
-            {!this.isLeaf ? (
-              <NBaseLoading
-                clsPrefix={mergedClsPrefix}
-                scale={0.85}
-                strokeWidth={24}
-                show={this.isLoading}
-                class={`${mergedClsPrefix}-cascader-option-icon`}
-              >
-                {{
-                  default: () => (
-                    <NBaseIcon
-                      clsPrefix={mergedClsPrefix}
-                      key="arrow"
-                      class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--arrow`}
-                    >
-                      {{
-                        default: () => <ChevronRightIcon />
-                      }}
-                    </NBaseIcon>
-                  )
-                }}
-              </NBaseLoading>
-            ) : this.checkStrategy === 'child' &&
-              !(this.multiple && this.cascade) ? (
-              <Transition name="fade-in-scale-up-transition">
-                {{
-                  default: () =>
-                    this.checked ? (
-                      <NBaseIcon
-                        clsPrefix={mergedClsPrefix}
-                        class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--checkmark`}
-                      >
-                        {{ default: () => <CheckmarkIcon /> }}
-                      </NBaseIcon>
-                    ) : null
-                }}
-              </Transition>
-                ) : null}
-          </div>
-        </div>
+        {suffixNode}
       </div>
     )
   }

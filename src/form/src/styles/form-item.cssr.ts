@@ -100,19 +100,11 @@ export default cB('form-item', `
       `)
     ])
   ]),
-  cM('labelled-vertical-top', `
-      grid-template-areas:
-        "label"
-        "feedback"
-        "blank";
-    `),
-  cM('labelled-vertical-bottom', `
-      grid-template-areas:
-        "label"
-        "blank"
-        "feedback";
-    `),
   cM('top-labelled', `
+    grid-template-areas:
+      "label"
+      "blank"
+      "feedback";
     grid-template-rows: minmax(var(--n-label-height), auto) 1fr;
     grid-template-columns: minmax(0, 100%);
   `, [
