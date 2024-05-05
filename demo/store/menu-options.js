@@ -170,7 +170,7 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
         {
           en: 'Vite SSG/SSE',
           zh: 'Vite SSG/SSE',
-          path: '/ssr'
+          path: '/vite-ssge'
         },
         {
           en: 'Customizing Theme',
