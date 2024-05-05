@@ -1,6 +1,6 @@
 # Nuxt.js
 
-## Nuxt 示例
+## Nuxt.js 示例
 
 参考[例子](https://github.com/07akioni/naive-ui-nuxt-demo)。
 

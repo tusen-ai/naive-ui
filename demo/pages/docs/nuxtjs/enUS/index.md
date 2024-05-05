@@ -1,6 +1,6 @@
-# Nuxt
+# Nuxt.js
 
-## Nuxt Demo
+## Nuxt.js Demo
 
 You can refer to [example](https://github.com/07akioni/naive-ui-nuxt-demo).
 
