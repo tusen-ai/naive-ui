@@ -10,6 +10,10 @@ See [Nuxt.js](nuxtjs).
 
 See [Vitepress](vitepress).
 
+## Vite SSG/SSE
+
+See [Vite SSG/SSE](vite-ssge).
+
 ## Vite Example
 
 If you are using Vite, please see [example](https://github.com/07akioni/naive-ui-vite-ssr).

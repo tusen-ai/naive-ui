@@ -10,6 +10,10 @@
 
 参考 [Vitepress](vitepress)。
 
+## Vite SSG/SSE
+
+参考 [Vite SSG/SSE](vite-ssge)。
+
 ## Vite 示例
 
 如果你是用的是 Vite，请参考[例子](https://github.com/07akioni/naive-ui-vite-ssr)。

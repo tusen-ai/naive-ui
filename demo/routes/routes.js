@@ -61,6 +61,10 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/vitepress/enUS/index.md')
   },
   {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/enUS/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
@@ -148,6 +152,10 @@ export const zhDocRoutes = [
   {
     path: 'vitepress',
     component: () => import('../pages/docs/vitepress/zhCN/index.md')
+  },
+  {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/zhCN/index.md')
   },
   {
     path: 'common-issues',

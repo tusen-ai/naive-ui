@@ -168,6 +168,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/vitepress'
         },
         {
+          en: 'Vite SSG/SSE',
+          zh: 'Vite SSG/SSE',
+          path: '/ssr'
+        },
+        {
           en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'

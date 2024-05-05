@@ -20,7 +20,7 @@ pnpm dlx nuxi module add nuxtjs-naive-ui
 
 > If you are using this module, make sure:
 >
-> 1. `@css-render/*` and `css-render` packages' version satisfies `>=0.15.4`.
+> 1. `@css-render/*` and `css-render` packages' version satisfies `>=0.15.14`.
 > 2. Each of `@css-render/*` and `css-render` only resolves 1 target. (No different versions of same package & No duplicate for the same version)
 >
 > You can search in lock file for `css-render` to check if there's duplicate.
