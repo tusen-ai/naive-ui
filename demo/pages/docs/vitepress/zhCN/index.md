@@ -2,9 +2,9 @@
 
 ## 例子
 
-这是一个使用 `naive-ui`、`vitepress` 的[例子](https://github.com/07akioni/naive-ui-vitepress-demo)，支持 SSR。
+这是一个使用 `naive-ui`、`vitepress` 的[样例](https://github.com/07akioni/naive-ui-vitepress-demo)，支持 SSR。
 
-你可以直接使用这个例子。
+你可以直接使用这个样例。
 
 ## 从零开始的关键步骤
 
