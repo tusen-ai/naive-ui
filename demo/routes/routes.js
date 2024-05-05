@@ -57,6 +57,10 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/nuxtjs/enUS/index.md')
   },
   {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/enUS/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
@@ -140,6 +144,10 @@ export const zhDocRoutes = [
   {
     path: 'nuxtjs',
     component: () => import('../pages/docs/nuxtjs/zhCN/index.md')
+  },
+  {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/zhCN/index.md')
   },
   {
     path: 'common-issues',

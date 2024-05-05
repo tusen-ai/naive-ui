@@ -6,6 +6,10 @@
 
 参考 [Nuxt.js](nuxtjs)。
 
+## Vitepress
+
+参考 [Vitepress](vitepress)。
+
 ## Vite 示例
 
 如果你是用的是 Vite，请参考[例子](https://github.com/07akioni/naive-ui-vite-ssr)。

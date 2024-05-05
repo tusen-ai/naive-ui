@@ -6,6 +6,10 @@ Since naive-ui is using CSS in JS, in SSR mode it needs some extra configuration
 
 See [Nuxt.js](nuxtjs).
 
+## Vitepress
+
+See [Vitepress](vitepress).
+
 ## Vite Example
 
 If you are using Vite, please see [example](https://github.com/07akioni/naive-ui-vite-ssr).

@@ -163,6 +163,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/nuxtjs'
         },
         {
+          en: 'Vitepress',
+          zh: 'Vitepress',
+          path: '/vitepress'
+        },
+        {
           en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'
