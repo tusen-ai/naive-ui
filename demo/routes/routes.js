@@ -53,6 +53,10 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/ssr/enUS/index.md')
   },
   {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/enUS/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
@@ -132,6 +136,10 @@ export const zhDocRoutes = [
   {
     path: 'ssr',
     component: () => import('../pages/docs/ssr/zhCN/index.md')
+  },
+  {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/zhCN/index.md')
   },
   {
     path: 'common-issues',

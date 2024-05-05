@@ -2,83 +2,9 @@
 
 由于 naive-ui 在使用 CSS in JS，在 SSR 的情况下需要一些额外的配置。
 
-## Nuxt
+## Nuxt.js
 
-如果你在使用 Nuxt，请确保你在使用 `naive-ui@>=2.29.0`。
-
-### Nuxt 示例
-
-如果你在使用 Nuxt，参考[例子](https://github.com/07akioni/naive-ui-nuxt-demo)。
-
-### 重点步骤
-
-1. 安装 `naive-ui` 和 `@css-render/vue3-ssr`
-2. 在 `nuxt.config.ts` 增添下列配置
-
-```ts
-import { defineNuxtConfig } from 'nuxt'
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? [
-            'naive-ui',
-            'vueuc',
-            '@css-render/vue3-ssr',
-            '@juggle/resize-observer'
-          ]
-        : ['@juggle/resize-observer']
-  },
-  vite: {
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
-          : []
-    }
-  }
-})
-```
-
-3. 在 Nuxt 项目的 `plugins` 文件夹增加这个[插件](https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts)
-
-### 在 Nuxt 中使用自动引入
-
-同样可以使用 `unplugin-auto-import` 插件来自动导入 API，使用 `unplugin-vue-components` 插件来按需自动加载组件。
-在这种情况下，`nuxt.config.ts` 会比上面的例子多几行配置。
-
-```ts
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
-  },
-  vite: {
-    optimizeDeps: {
-      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
-    },
-    plugins: [
-      AutoImport({
-        imports: [
-          {
-            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-          },
-        ],
-      }),
-      Components({
-        resolvers: [NaiveUiResolver()]
-      })
-    ]
-  }
-});
-```
+参考 [Nuxt.js](nuxtjs)。
 
 ## Vite 示例
 

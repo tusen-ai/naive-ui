@@ -2,83 +2,9 @@
 
 Since naive-ui is using CSS in JS, in SSR mode it needs some extra configuration.
 
-## Nuxt
+## Nuxt.js
 
-If you are using Nuxt, please make sure you are using `naive-ui@>=2.29.0`.
-
-### Nuxt Example
-
-If you are using Nuxt, please see [example](https://github.com/07akioni/naive-ui-nuxt-demo).
-
-### Main Process
-
-1. Install `naive-ui` and `@css-render/vue3-ssr`.
-2. Add the following config in your `nuxt.config.ts`.
-
-```ts
-import { defineNuxtConfig } from 'nuxt'
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? [
-            'naive-ui',
-            'vueuc',
-            '@css-render/vue3-ssr',
-            '@juggle/resize-observer'
-          ]
-        : ['@juggle/resize-observer']
-  },
-  vite: {
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
-          : []
-    }
-  }
-})
-```
-
-3. Add the [plugin](https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts) in `plugins` folder of your nuxt project.
-
-### Using Auto Import in Nuxt
-
-You can also use the `unplugin-auto-import` plugin to automatically import APIs and the `unplugin-vue-components` plugin to automatically import components on demand.
-In this case, the `nuxt.config.ts` file will have a few additional configuration lines compared to the example above.
-
-```ts
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
-  },
-  vite: {
-    optimizeDeps: {
-      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
-    },
-    plugins: [
-      AutoImport({
-        imports: [
-          {
-            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-          },
-        ],
-      }),
-      Components({
-        resolvers: [NaiveUiResolver()]
-      })
-    ]
-  }
-});
-```
+See [Nuxt.js](nuxtjs).
 
 ## Vite Example
 

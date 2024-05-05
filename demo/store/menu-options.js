@@ -158,6 +158,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/ssr'
         },
         {
+          en: 'Nuxt.js',
+          zh: 'Nuxt.js',
+          path: '/nuxtjs'
+        },
+        {
           en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'
