@@ -10,6 +10,18 @@ You can directly use the demo.
 
 If you want to build your own demo from scratch, follow the next steps:
 
+### 0. Install `@css-render/vue3-ssr`
+
+Make sure its version `>=0.15.14`.
+
+```bash
+# npm
+npm install --save-dev @css-render/vue3-ssr
+
+# pnpm
+pnpm install --save-dev @css-render/vue3-ssr
+```
+
 ### 1. Add this content to `.vitepress/theme/index.js`
 
 ```js

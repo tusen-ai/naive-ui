@@ -10,6 +10,18 @@
 
 如果你希望从头开始改造一个 vitepress 项目，遵循下列步骤
 
+### 0. 安装 `@css-render/vue3-ssr`
+
+确保其版本 `>=0.15.14`。
+
+```bash
+# npm
+npm install --save-dev @css-render/vue3-ssr
+
+# pnpm
+pnpm install --save-dev @css-render/vue3-ssr
+```
+
 ### 1. 把下面的内容增加到 `.vitepress/theme/index.js`
 
 ```js
