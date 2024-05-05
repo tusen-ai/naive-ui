@@ -1,5 +1,9 @@
 # Vitepress
 
+## 注意
+
+本文档涉及到 SSR，请先了解[SSR 的注意事项](ssr#注意)。
+
 ## 例子
 
 这是一个使用 `naive-ui`、`vitepress` 的[样例](https://github.com/07akioni/naive-ui-vitepress-demo)，支持 SSR。

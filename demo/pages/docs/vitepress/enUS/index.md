@@ -1,5 +1,9 @@
 # Vitepress
 
+## Caveat
+
+This document pertains to SSR (Server-Side Rendering). Please familiarize yourself with the [SSR Caveats](ssr#Caveat) before proceeding.
+
 ## Example
 
 This is a [demo](https://github.com/07akioni/naive-ui-vitepress-demo) for using `naive-ui` in `vitepress` with SSR enabled.

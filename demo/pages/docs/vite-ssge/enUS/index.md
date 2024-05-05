@@ -1,8 +1,14 @@
 # Vite SSG/SSE
 
+## Caveat
+
+This document pertains to SSR (Server-Side Rendering). Please familiarize yourself with the [SSR Caveats](ssr#Caveat) before proceeding.
+
+## Setup Guide
+
 If you are using `vite-sse` or `vite-ssg`. Follow the following steps to setup `naive-ui`.
 
-## 1. Install `naive-ui`, `@css-render/vue3-ssr`
+### 1. Install `naive-ui`, `@css-render/vue3-ssr`
 
 ```bash
 # pnpm
@@ -12,7 +18,7 @@ pnpm i naive-ui @css-render/vue3-ssr
 npm i naive-ui @css-render/vue3-ssr
 ```
 
-## 2. Modify `vite.config.ts`
+### 2. Modify `vite.config.ts`
 
 Add following content. If there exists content already, merge them.
 

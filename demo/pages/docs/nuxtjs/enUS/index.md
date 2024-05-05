@@ -1,5 +1,9 @@
 # Nuxt.js
 
+## Caveat
+
+This document pertains to SSR (Server-Side Rendering). Please familiarize yourself with the [SSR Caveats](ssr#Caveat) before proceeding.
+
 ## Nuxt.js Demo
 
 You can refer to [example](https://github.com/07akioni/naive-ui-nuxt-demo).
@@ -17,13 +21,6 @@ npx nuxi module add nuxtjs-naive-ui
 # pnpm
 pnpm dlx nuxi module add nuxtjs-naive-ui
 ```
-
-> If you are using this module, make sure:
->
-> 1. `@css-render/*` and `css-render` packages' version satisfies `>=0.15.14`.
-> 2. Each of `@css-render/*` and `css-render` only resolves 1 target. (No different versions of same package & No duplicate for the same version)
->
-> You can search in lock file for `css-render` to check if there's duplicate.
 
 ## Using Auto Import in Nuxt
 
