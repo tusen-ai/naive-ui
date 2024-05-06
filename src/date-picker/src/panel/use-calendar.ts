@@ -51,6 +51,7 @@ import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useCalendarProps = {
   ...usePanelCommonProps,
+  closeOnSelect: Boolean,
   defaultCalendarStartTime: Number,
   actions: {
     type: Array as PropType<string[]>,
@@ -74,6 +75,8 @@ function useCalendar (
     isMinuteDisabledRef,
     isSecondDisabledRef,
     localeRef,
+    closeOnSelectRef,
+    updateValueOnCloseRef,
     firstDayOfWeekRef,
     datePickerSlots,
     yearFormatRef,
@@ -382,11 +385,22 @@ function useCalendar (
       case 'month':
         panelCommon.disableTransitionOneTick()
         justifyColumnsScrollState(newValue)
+        doMonthCloseOnSelect()
         break
       case 'quarter':
         panelCommon.disableTransitionOneTick()
         justifyColumnsScrollState(newValue)
         break
+    }
+  }
+
+  function doMonthCloseOnSelect (): void {
+    if (closeOnSelectRef.value) {
+      if (updateValueOnCloseRef.value) {
+        closeCalendar()
+      } else {
+        handleConfirmClick()
+      }
     }
   }
 

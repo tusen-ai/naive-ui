@@ -38,6 +38,7 @@
 - `n-cascader` 新增 `render-suffix` 属性
 - `n-image` 优化下载按钮图标
 - `n-scrollbar` 新增 `height`、`width`、`radius`、`railInsetHorizontal`、`railInsetVertical`、`railColor` 主题变量
+- `n-date-picker` 新增 `close-on-select` 属性，关闭 [#5786](https://github.com/tusen-ai/naive-ui/issues/5786).
 
 ### i18n
 

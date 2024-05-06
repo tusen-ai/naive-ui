@@ -141,6 +141,7 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Operations supported for the `month` type date picker. |  |
+| close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. |  |
 | format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the month. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |

@@ -39,6 +39,7 @@
 - `n-cascader` adds `get-render-suffix` prop.
 - `n-image` optimizes download icon style.
 - `n-scrollbar` adds `height`, `width`, `radius`, `railInsetHorizontal`, `railInsetVertical` and `railColor` theme variables.
+- `n-date-picker` adds `close-on-select` prop, closes [#5786](https://github.com/tusen-ai/naive-ui/issues/5786).
 
 ### i18n
 

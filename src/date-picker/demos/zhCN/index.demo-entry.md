@@ -141,6 +141,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Month 类型的 Date Picker 中支持的操作 |  |
+| close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |  |
 | format | `string` | `'yyyy-MM'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 月份禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择月份'` | 没有值时的占位信息 |  |
