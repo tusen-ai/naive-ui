@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix 'n-badge' unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
+
+### Features
+
 ## 2.38.2
 
 `2024-05-03`
