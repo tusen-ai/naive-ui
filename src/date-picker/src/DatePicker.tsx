@@ -91,6 +91,7 @@ export const datePickerProps = {
   defaultValue: [Number, Array] as PropType<Value | null>,
   defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
+  defaultYearRange: Array as PropType<number[]>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -790,7 +791,8 @@ export default defineComponent({
       quarterFormatRef: toRef(props, 'quarterFormat'),
       ...uniVaidation,
       ...dualValidation,
-      datePickerSlots: slots
+      datePickerSlots: slots,
+      defaultYearRange: props.defaultYearRange
     })
 
     const exposedMethods: DatePickerInst = {

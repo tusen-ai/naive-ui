@@ -21,7 +21,7 @@ import {
   isSameWeek
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
-import { START_YEAR } from './config'
+import { START_YEAR, DEFAULT_RANGE } from './config'
 import type { FirstDayOfWeek, Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
@@ -445,14 +445,18 @@ function yearArray (
   currentTs: number,
   format: {
     yearFormat: string
-  }
+  },
+  defaultYearRange?: number[]
 ): YearItem[] {
   const calendarYears: YearItem[] = []
-  const time1900 = new Date(START_YEAR, 0, 1)
+  const [startYear = START_YEAR, endYear] = defaultYearRange || []
+  const time1900 = new Date(startYear, 0, 1)
   // 1900 is not a round time, so we use 1911 as start...
   // new Date(1900, 0, 1)
   // 1899-12-31T15:54:17.000Z
-  for (let i = 0; i < 200; i++) {
+  const range = startYear && endYear ? endYear - startYear : DEFAULT_RANGE
+
+  for (let i = 0; i < range; i++) {
     calendarYears.push(
       yearItem(getTime(addYears(time1900, i)), valueTs, currentTs, format)
     )
