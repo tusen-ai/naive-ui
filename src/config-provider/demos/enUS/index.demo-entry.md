@@ -10,6 +10,7 @@ For more info about theming, see [Customizing Theme](../docs/customize-theme).
 theme.vue
 namespace.vue
 inherit-theme.vue
+cls-prefix.vue
 os-theme.vue
 language.vue
 transparent.vue
@@ -24,7 +25,7 @@ inline-theme-disabled.vue
 | --- | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | If `n-config-provider` has no wrapper DOM |  |
 | breakpoints | `{ [k: string]: number }` | `{ xs: 0, s: 640, m: 1024, l: 1280, xl: 1536, xxl: 1920 }` | Responsive breakpoints, it will be used in `n-grid`. The prop is not responsive, you need to set it on its first mount. |  |
-| cls-prefix | `string` | `n` | The class prefix of all inner components. It's applied in the first time. |  |
+| cls-prefix | `string` | `undefined` | The class prefix of all inner components. It's applied in the first time. |  |
 | date-locale | `DateLocale \| null` | `undefined` | The date locale object to be consumed by its child. If set to `null` it will use the default `dateEnUS` locale. If set to `undefined` it will inherit its parent `n-config-provider`. |  |
 | inline-theme-disabled | `boolean` | `false` | Whether to disabled inline theme CSS variables. If you won't change theme overrides frequently in client side, and need SSR or make devtools looks clear. You can enable the prop. Note that the prop is not responsive. | 2.26.0 |
 | katex | `object` | `undefined` | Katex object for `n-equation`. | 2.34.0 |

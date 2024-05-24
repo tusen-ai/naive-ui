@@ -10,6 +10,7 @@
 theme.vue
 namespace.vue
 inherit-theme.vue
+cls-prefix.vue
 os-theme.vue
 language.vue
 transparent.vue
@@ -24,7 +25,7 @@ inline-theme-disabled.vue
 | --- | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |  |
 | breakpoints | `{ [k: string]: number }` | `{ xs: 0, s: 640, m: 1024, l: 1280, xl: 1536, xxl: 1920 }` | 屏幕响应式断点，对 `n-grid` 生效。这个属性不是响应式的，你需要在组件第一次挂载时就设定好 |  |
-| cls-prefix | `string` | `n` | 内部所有组件的类的前缀，仅首次设定会生效 |  |
+| cls-prefix | `string` | `undefined` | 内部所有组件的类的前缀，仅首次设定会生效 |  |
 | date-locale | `DateLocale \| null` | `undefined` | 对后代组件生效的日期语言对象，为 `null` 时会使用默认 `dateEnUS`，为 `undefined` 时会继承上级 `n-config-provider` |  |
 | inline-theme-disabled | `boolean` | `false` | 是否禁用 inline css 主题变量，如果你不会频繁调整主题变量，并且需要 SSR 或者想让 devtools 看起来更干净，可以打开这个选项。注意，这个属性不是响应式的 | 2.26.0 |
 | katex | `object` | `undefined` | 公式组件需要的 katex 对象 | 2.34.0 |
