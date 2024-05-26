@@ -26,14 +26,16 @@ export default function useStyle (
       props: {
         bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
       },
-      ssr: ssrAdapter
+      ssr: ssrAdapter,
+      parent: NConfigProvider?.styleMountParent
     })
     if (!NConfigProvider?.preflightStyleDisabled) {
       globalStyle.mount({
         id: 'n-global',
         head: true,
         anchorMetaName: cssrAnchorMetaName,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: NConfigProvider?.styleMountParent
       })
     }
   }

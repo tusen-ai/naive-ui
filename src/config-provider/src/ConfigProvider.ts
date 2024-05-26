@@ -52,6 +52,7 @@ export const configProviderProps = {
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
   preflightStyleDisabled: Boolean,
+  styleMountParent: HTMLElement,
   inlineThemeDisabled: {
     type: Boolean,
     default: undefined
@@ -158,6 +159,8 @@ export default defineComponent({
       props.inlineThemeDisabled || NConfigProvider?.inlineThemeDisabled
     const preflightStyleDisabled =
       props.preflightStyleDisabled || NConfigProvider?.preflightStyleDisabled
+    const styleMountParent =
+      props.styleMountParent || NConfigProvider?.styleMountParent
     const mergedThemeHashRef = computed(() => {
       const { value: theme } = mergedThemeRef
       const { value: mergedThemeOverrides } = mergedThemeOverridesRef
@@ -214,7 +217,8 @@ export default defineComponent({
       mergedThemeRef,
       mergedThemeOverridesRef,
       inlineThemeDisabled: inlineThemeDisabled || false,
-      preflightStyleDisabled: preflightStyleDisabled || false
+      preflightStyleDisabled: preflightStyleDisabled || false,
+      styleMountParent
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
