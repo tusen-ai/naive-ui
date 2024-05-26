@@ -268,5 +268,5 @@ export interface ConfigProviderInjection {
   // non-reactive
   inlineThemeDisabled: boolean
   preflightStyleDisabled: boolean
-  styleMountParent?: HTMLElement
+  styleMountParent?: ParentNode
 }

@@ -52,7 +52,7 @@ export const configProviderProps = {
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
   preflightStyleDisabled: Boolean,
-  styleMountParent: HTMLElement,
+  styleMountParent: Object as PropType<ParentNode | null>,
   inlineThemeDisabled: {
     type: Boolean,
     default: undefined
