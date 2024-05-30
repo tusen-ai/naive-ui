@@ -368,6 +368,7 @@ export default defineComponent({
     }
 
     // To
+    let expectedTransitionDirection = 0
     function to (index: number): void {
       const realIndex = clampValue(
         getRealIndex(index, duplicatedableRef.value),
@@ -383,11 +384,17 @@ export default defineComponent({
     }
     function prev (): void {
       const prevIndex = getRealPrevIndex()
-      if (prevIndex !== null) toRealIndex(prevIndex)
+      if (prevIndex !== null) {
+        expectedTransitionDirection = -1
+        toRealIndex(prevIndex)
+      }
     }
     function next (): void {
       const nextIndex = getRealNextIndex()
-      if (nextIndex !== null) toRealIndex(nextIndex)
+      if (nextIndex !== null) {
+        expectedTransitionDirection = 1
+        toRealIndex(nextIndex)
+      }
     }
     function prevIfSlideTransitionEnd (): void {
       if (!inTransition || !duplicatedableRef.value) prev()
@@ -625,12 +632,12 @@ export default defineComponent({
         const perViewSize = perViewSizeRef.value[axis]
         // more than 50% width or faster than 0.4px per ms
         if (dragOffset > perViewSize / 2 || dragOffset / timeElapsed > 0.4) {
-          currentIndex = getRealPrevIndex(realIndex)
+          prev()
         } else if (
           dragOffset < -perViewSize / 2 ||
           dragOffset / timeElapsed < -0.4
         ) {
-          currentIndex = getRealNextIndex(realIndex)
+          next()
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
@@ -754,26 +761,34 @@ export default defineComponent({
     })
     watch(
       realIndexRef,
-      (realIndex, lastRealIndex) => {
-        if (realIndex === lastRealIndex) return
+      (nextRealIndex, lastRealIndex) => {
+        if (nextRealIndex === lastRealIndex) {
+          expectedTransitionDirection = 0
+          return
+        }
         resetAutoplay()
         if (sequenceLayoutRef.value) {
           if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
             if (
-              displayTotalViewRef.value > 2 &&
-              realIndex === length - 2 &&
-              lastRealIndex === 1
+              expectedTransitionDirection === -1 &&
+              lastRealIndex === 1 &&
+              nextRealIndex === length - 2
             ) {
-              realIndex = 0
-            } else if (realIndex === 1 && lastRealIndex === length - 2) {
-              realIndex = length - 1
+              nextRealIndex = 0
+            } else if (
+              expectedTransitionDirection === 1 &&
+              lastRealIndex === length - 2 &&
+              nextRealIndex === 1
+            ) {
+              nextRealIndex = length - 1
             }
           }
-          translateTo(realIndex, speedRef.value)
+          translateTo(nextRealIndex, speedRef.value)
         } else {
           fixTranslate()
         }
+        expectedTransitionDirection = 0
       },
       { immediate: true }
     )

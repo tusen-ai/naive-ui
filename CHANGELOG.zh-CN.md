@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
+
 ## 2.38.2
 
 `2024-05-03`
