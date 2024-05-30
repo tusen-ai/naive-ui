@@ -177,7 +177,6 @@
     "ui",
     "vue"
   ],
-  "packageManager": "^pnpm@6.16.0",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
