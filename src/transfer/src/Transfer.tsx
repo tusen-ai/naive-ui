@@ -58,7 +58,7 @@ export const transferProps = {
   sourceTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   selectAllText: String,
   clearText: String,
-  targetTitle: String,
+  targetTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   filterable: {
     type: Boolean,
     default: undefined

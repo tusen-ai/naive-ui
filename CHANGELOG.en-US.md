@@ -6,7 +6,7 @@
 
 ### Features
 
-- `n-transfer` `source-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 
 ## 2.38.2
 

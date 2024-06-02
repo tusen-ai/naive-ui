@@ -6,7 +6,7 @@
 
 ### Features
 
-- `n-transfer` `source-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 
 ## 2.38.2
 
