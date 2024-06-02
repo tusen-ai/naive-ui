@@ -36,7 +36,7 @@ value-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |
-| source-title | `string` | `undefined` | 源项标题 | 2.32.0 |
+| source-title | `string \| (() => VNodeChild)` | `undefined` | 源项标题 | 2.32.0，NEXT_VERSION 支持 render 函数 |
 | target-filterable | `boolean` | `false` | 目标项是否可过滤 | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | 目标项搜索框中的占位符 | 2.32.0 |
 | target-title | `string` | `undefined` | 目标项标题 | 2.32.0 |

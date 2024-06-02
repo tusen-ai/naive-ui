@@ -34,7 +34,7 @@ render-source-list.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. | 2.32.0 |
 | source-filterable | `boolean` | `false` | The source filterable state. | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. | 2.32.0 |
-| source-title | `string` | `'undefined'` | Source items title. | 2.32.0 |
+| source-title | `string \| (() => VNodeChild)` | `undefined` | Source items title. | 2.32.0，Render function since NEXT_VERSION |
 | target-filterable | `boolean` | `false` | The target filterable state. | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. | 2.32.0 |
 | target-title | `string` | `undefined` | Target items title. | 2.32.0 |
