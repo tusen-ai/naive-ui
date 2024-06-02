@@ -12,7 +12,7 @@ import {
   type CSSProperties,
   type ComponentPublicInstance,
   onBeforeUnmount,
-  type VNode
+  type VNodeChild
 } from 'vue'
 import {
   VBinder,
@@ -58,7 +58,7 @@ export const sliderProps = {
     type: [Number, Array] as PropType<number | number[]>,
     default: 0
   },
-  marks: Object as PropType<Record<string, string | (() => VNode)>>,
+  marks: Object as PropType<Record<string, string | (() => VNodeChild)>>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -205,7 +205,7 @@ export default defineComponent({
     const markInfosRef = computed(() => {
       const mergedMarks: Array<{
         active: boolean
-        label: string | (() => VNode)
+        label: string | (() => VNodeChild)
         key: number
         style: CSSProperties
       }> = []
