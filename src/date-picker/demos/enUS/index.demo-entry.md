@@ -49,7 +49,7 @@ panel.vue
 | panel | `boolean` | `false` | Whether to use date-picker as panel. | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
 | quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
-| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
+| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| ((e: MouseEvent) => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |

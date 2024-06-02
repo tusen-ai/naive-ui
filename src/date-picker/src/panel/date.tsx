@@ -158,11 +158,11 @@ export default defineComponent({
                   return Array.isArray(shortcut) ? null : (
                     <NxButton
                       size="tiny"
-                      onMouseenter={() => {
-                        this.handleSingleShortcutMouseenter(shortcut)
+                      onMouseenter={(e) => {
+                        this.handleSingleShortcutMouseenter(shortcut, e)
                       }}
-                      onClick={() => {
-                        this.handleSingleShortcutClick(shortcut)
+                      onClick={(e) => {
+                        this.handleSingleShortcutClick(shortcut, e)
                       }}
                       onMouseleave={() => {
                         this.handleShortcutMouseleave()

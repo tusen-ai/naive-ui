@@ -367,7 +367,9 @@ function useDualCalendar (
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) { return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null) }
+    if (!Array.isArray(props.value)) {
+      return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
+    }
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
       return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
@@ -669,14 +671,20 @@ function useDualCalendar (
     if (value === null) return
     changeEndDateTime(value)
   }
-  function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
+  function handleRangeShortcutMouseenter (
+    shortcut: Shortcuts[string],
+    e: MouseEvent
+  ): void {
     panelCommon.cachePendingValue()
-    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    const shortcutValue = panelCommon.getShortcutValue(shortcut, e)
     if (!Array.isArray(shortcutValue)) return
     changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutPreview')
   }
-  function handleRangeShortcutClick (shortcut: Shortcuts[string]): void {
-    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+  function handleRangeShortcutClick (
+    shortcut: Shortcuts[string],
+    e: MouseEvent
+  ): void {
+    const shortcutValue = panelCommon.getShortcutValue(shortcut, e)
     if (!Array.isArray(shortcutValue)) return
     changeStartEndTime(shortcutValue[0], shortcutValue[1], 'done')
     panelCommon.clearPendingValue()

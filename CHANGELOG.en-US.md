@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-date-picker` add event support for shortcuts, closes [#6001](https://github.com/tusen-ai/naive-ui/issues/6001)
+
 ## 2.38.2
 
 `2024-05-03`

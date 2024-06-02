@@ -50,7 +50,7 @@ form-debug.vue
 | panel | `boolean` | `false` | 是否只使用面板 | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | quarter-format | `string` | `'Q'Q` | 设置面板中季度的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
-| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
+| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| ((e: MouseEvent) => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |

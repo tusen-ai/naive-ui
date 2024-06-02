@@ -28,7 +28,7 @@ export type Shortcuts =
   string,
   | [number, number]
   | readonly [number, number]
-  | (() => [number, number] | readonly [number, number])
+  | ((e: MouseEvent) => [number, number] | readonly [number, number])
   >
 
 export type OnUpdateValue = (

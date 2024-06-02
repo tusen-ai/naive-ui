@@ -473,14 +473,20 @@ function useCalendar (
     if (value === null) return
     panelCommon.doUpdateValue(value, props.panel)
   }
-  function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
+  function handleSingleShortcutMouseenter (
+    shortcut: Shortcuts[string],
+    e: MouseEvent
+  ): void {
     panelCommon.cachePendingValue()
-    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    const shortcutValue = panelCommon.getShortcutValue(shortcut, e)
     if (typeof shortcutValue !== 'number') return
     panelCommon.doUpdateValue(shortcutValue, false)
   }
-  function handleSingleShortcutClick (shortcut: Shortcuts[string]): void {
-    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+  function handleSingleShortcutClick (
+    shortcut: Shortcuts[string],
+    e: MouseEvent
+  ): void {
+    const shortcutValue = panelCommon.getShortcutValue(shortcut, e)
     if (typeof shortcutValue !== 'number') return
     panelCommon.doUpdateValue(shortcutValue, props.panel)
     panelCommon.clearPendingValue()
