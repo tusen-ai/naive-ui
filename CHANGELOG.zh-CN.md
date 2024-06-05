@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-config-provider` 新增 `style-mount-parent` 属性，将传递给 css-render 的 mount 的 parent，用来解决在 shadow dom 中样式无法生效的问题
+
 ## 2.38.2
 
 `2024-05-03`
