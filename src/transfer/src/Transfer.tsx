@@ -6,7 +6,8 @@ import {
   type PropType,
   type CSSProperties,
   watchEffect,
-  toRef
+  toRef,
+  type VNodeChild
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
@@ -54,10 +55,10 @@ export const transferProps = {
     default: undefined
   },
   virtualScroll: Boolean,
-  sourceTitle: String,
+  sourceTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   selectAllText: String,
   clearText: String,
-  targetTitle: String,
+  targetTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   filterable: {
     type: Boolean,
     default: undefined
