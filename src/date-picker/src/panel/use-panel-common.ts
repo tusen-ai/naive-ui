@@ -145,10 +145,11 @@ function usePanelCommon (props: UsePanelCommonProps) {
     }
   }
   function getShortcutValue (
-    shortcut: Shortcuts[string]
+    shortcut: Shortcuts[string],
+    e: MouseEvent
   ): number | [number, number] | readonly [number, number] {
     if (typeof shortcut === 'function') {
-      return shortcut()
+      return shortcut(e)
     }
     return shortcut
   }

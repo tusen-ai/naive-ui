@@ -330,11 +330,11 @@ export default defineComponent({
                     typeof shortcut === 'function' ? (
                     <NxButton
                       size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
+                      onMouseenter={(e) => {
+                        this.handleRangeShortcutMouseenter(shortcut, e)
                       }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
+                      onClick={(e) => {
+                        this.handleRangeShortcutClick(shortcut, e)
                       }}
                       onMouseleave={() => {
                         this.handleShortcutMouseleave()
