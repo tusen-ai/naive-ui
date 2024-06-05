@@ -23,12 +23,14 @@ focus.vue
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | checked | `boolean` | `false` | Whether the checkbox is being checked manually. |
+| checked-value | `string \| boolean \| number` | `true` | Value of checked state. |
 | default-checked | `boolean` | `false` | Whether the checkbox is checked by default. |
 | disabled | `boolean` | `false` | Whether the checkbox is disabled. |
 | focusable | `boolean` | `true` | Whether the checkbox gains focus after being checked. |
 | indeterminate | `boolean` | `false` | Whether the checkbox can have a third indeterminate state. |
 | label | `string` | `undefined` | Checkbox label. |
 | size | `'small' \| 'medium' \| 'large'`  | `'medium'`  | The size of the checkbox. |
+| unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
 
