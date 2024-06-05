@@ -5,18 +5,32 @@
 </markdown>
 
 <template>
-  <n-highlight
-    :text="text"
-    :words="words"
-    :highlight-style="{
-      display: 'inline-block',
-      margin: '4px',
-      padding: '4px',
-      'border-radius': '6px',
-      background: '#18a058',
-      color: 'white'
-    }"
-  />
+  <n-flex vertical>
+    <n-highlight
+      :text="text"
+      :words="words"
+      :highlight-style="{
+        display: 'inline-block',
+        margin: '4px',
+        padding: '4px',
+        'border-radius': '6px',
+        background: '#18a058',
+        color: 'white'
+      }"
+    />
+    <n-highlight
+      :text="text"
+      :words="words"
+      :highlight-style="{
+        display: 'inline-block',
+        margin: '4px',
+        padding: '4px 12px',
+        'border-radius': '30px',
+        background: '#409EFF',
+        color: 'white'
+      }"
+    />
+  </n-flex>
 </template>
 
 <script lang="ts">
