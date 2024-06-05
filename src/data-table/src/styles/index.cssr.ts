@@ -163,6 +163,7 @@ export default c([
         iconSwitchTransition()
       ]),
       cB('base-icon', `
+        transition: all .3s var(--n-bezier);
         position: absolute;
         left: 0;
         right: 0;
