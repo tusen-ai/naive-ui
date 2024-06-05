@@ -41,6 +41,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | 是否支持清除 |  |
 | default-value | `number \| [number, number] \| null` | `undefined` | 默认被选中的日期的时间戳 |  |
+| default-year-range | `[number, number]` | `[1901,2100]` | 设置面板中默认的年份选择范围 |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date Picker 格式化后的值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |  |

@@ -78,7 +78,8 @@ function useCalendar (
     datePickerSlots,
     yearFormatRef,
     monthFormatRef,
-    quarterFormatRef
+    quarterFormatRef,
+    defaultYearRange
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -131,9 +132,14 @@ function useCalendar (
   })
   const yearArrayRef = computed(() => {
     const { value } = props
-    return yearArray(Array.isArray(value) ? null : value, nowRef.value, {
-      yearFormat: yearFormatRef.value
-    })
+    return yearArray(
+      Array.isArray(value) ? null : value,
+      nowRef.value,
+      {
+        yearFormat: yearFormatRef.value
+      },
+      defaultYearRange
+    )
   })
   const quarterArrayRef = computed(() => {
     const { value } = props
@@ -489,6 +495,7 @@ function useCalendar (
 
   function justifyColumnsScrollState (value?: number): void {
     const { value: mergedValue } = props
+    const [startYear = START_YEAR] = defaultYearRange || []
     if (monthScrollbarRef.value) {
       const monthIndex =
         value === undefined
@@ -504,7 +511,7 @@ function useCalendar (
           ? mergedValue === null
             ? getYear(Date.now())
             : getYear(mergedValue as number)
-          : getYear(value)) - START_YEAR
+          : getYear(value)) - startYear
       yearVlRef.value.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
     }
   }
