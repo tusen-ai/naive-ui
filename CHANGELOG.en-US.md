@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
+
 ## 2.38.2
 
 `2024-05-03`
