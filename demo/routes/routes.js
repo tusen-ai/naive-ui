@@ -561,6 +561,11 @@ export const enComponentRoutes = [
     path: 'float-button',
     component: () =>
       import('../../src/float-button/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'highlight',
+    component: () =>
+      import('../../src/highlight/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -965,6 +970,11 @@ export const zhComponentRoutes = [
     path: 'float-button',
     component: () =>
       import('../../src/float-button/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'highlight',
+    component: () =>
+      import('../../src/highlight/demos/zhCN/index.demo-entry.md')
   }
 ]
 

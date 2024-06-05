@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- 新增 `n-highlight` 组件
+
 ## 2.38.2
 
 `2024-05-03`

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- Adds `n-highlight` component.
+
 ## 2.38.2
 
 `2024-05-03`
