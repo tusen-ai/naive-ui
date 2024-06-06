@@ -97,6 +97,10 @@
 
 - Add `etEE` locale.
 
+### Feature
+
+- `n-tabs` adds `on-tab-click` prop.
+
 ## 2.37.3
 
 `2024-01-09`
