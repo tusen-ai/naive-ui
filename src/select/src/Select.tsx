@@ -98,6 +98,10 @@ export const selectProps = {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
+  keepFilterLabel: {
+    type: Boolean,
+    default: false
+  },
   keyboard: {
     type: Boolean,
     default: true
@@ -487,7 +491,13 @@ export default defineComponent({
       doUpdateShow(false)
     }
     function handleMenuAfterLeave (): void {
-      patternRef.value = ''
+      const { multiple, keepFilterLabel, filterable } = props
+      if (!multiple && filterable && keepFilterLabel) {
+        patternRef.value = triggerRef.value.label ?? ''
+      } else {
+        patternRef.value = ''
+      }
+      beingCreatedOptionsRef.value = emptyArray
       beingCreatedOptionsRef.value = emptyArray
     }
     const activeWithoutMenuOpenRef = ref(false)
