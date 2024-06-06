@@ -1,8 +1,12 @@
-const { marked } = require('marked')
-const fs = require('fs')
-const path = require('path')
-const createRenderer = require('./md-renderer')
-const handleMergeCode = require('../utils/handle-merge-code.js')
+import { handleMergeCode } from '../utils/handle-merge-code'
+import * as marked from 'marked'
+import fs from 'fs'
+import path, { dirname } from 'path'
+import { createRenderer } from './md-renderer'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
@@ -161,9 +165,4 @@ function convertMd2Demo (text, { resourcePath, relativeUrl, isVue = false }) {
   return vueComponent
 }
 
-module.exports = {
-  getFileName,
-  genVueComponent,
-  mergeParts,
-  convertMd2Demo
-}
+export { getFileName, genVueComponent, mergeParts, convertMd2Demo }

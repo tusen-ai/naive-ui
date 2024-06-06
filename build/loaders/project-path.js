@@ -1,2 +1,3 @@
-const path = require('path')
-module.exports = path.resolve(__dirname, '..', '..')
+import path from 'path'
+
+export const projectPath = path.resolve(__dirname, '..', '..')

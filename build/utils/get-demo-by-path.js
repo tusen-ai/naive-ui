@@ -1,9 +1,8 @@
-const fs = require('fs-extra')
+import fs from 'fs-extra'
+import { demoLoader } from '../loaders/naive-ui-demo-loader'
+import { docLoader } from '../loaders/naive-ui-doc-loader'
 
-const demoLoader = require('../loaders/naive-ui-demo-loader')
-const docLoader = require('../loaders/naive-ui-doc-loader')
-
-module.exports = async function getTransformedVueSrc (path) {
+export async function getTransformedVueSrc (path) {
   if (path.endsWith('.demo.md') || path.endsWith('.demo.vue')) {
     const code = await fs.readFile(path, 'utf-8')
     const type = path.endsWith('.vue') ? 'vue' : 'md'
