@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-data-table` 在列的配置中新增是否导出的属性
+
 ## 2.38.2
 
 `2024-05-03`
