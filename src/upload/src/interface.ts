@@ -72,6 +72,7 @@ export interface UploadInjection {
   doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
+  onRetry: undefined | OnRetry
   shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
   getFileThumbnailUrlResolver: (
     file: UploadSettledFileInfo
@@ -114,6 +115,13 @@ export type OnError = ({
 }: {
   file: UploadSettledFileInfo
   event?: ProgressEvent
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+}) => UploadFileInfo | undefined | void
+
+export type OnRetry = ({
+  file
+}: {
+  file: UploadSettledFileInfo
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 }) => UploadFileInfo | undefined | void
 
