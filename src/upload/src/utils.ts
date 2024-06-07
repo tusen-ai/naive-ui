@@ -69,14 +69,15 @@ export async function getFilesFromEntries (
       if (!entry) continue
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
-        try {
-          const entries = await new Promise<readonly FileSystemEntry[]>(
-            (resolve, reject) => {
-              directoryReader.readEntries(resolve, reject)
-            }
-          )
-          await _getFilesFromEntries(entries)
-        } catch {}
+        let allEntries = [];
+        let readEntries;
+        do {
+          readEntries = yield new Promise((resolve, reject) => {
+            directoryReader.readEntries(resolve, reject);
+          });
+          allEntries = allEntries.concat(readEntries);
+          yield _getFilesFromEntries(readEntries);
+        } while (readEntries.length > 0);
       } else if (isFileSystemFileEntry(entry)) {
         try {
           const file = await new Promise<File>((resolve, reject) => {
