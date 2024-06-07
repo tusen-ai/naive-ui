@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-upload` 新增 `on-retry`属性，关闭 [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
+
 ## 2.38.2
 
 `2024-05-03`
