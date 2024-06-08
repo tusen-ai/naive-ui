@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-date-picker` adds `clear` `now` `confirm` slot, closes [#6013](https://github.com/tusen-ai/naive-ui/issues/6013).
+
 ## 2.38.2
 
 `2024-05-03`
