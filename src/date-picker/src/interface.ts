@@ -15,12 +15,22 @@ import type {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
+import { type ButtonProps } from '../../button'
 
 export type Value = number | [number, number]
 
 export type DefaultTime = string | [string | undefined, string | undefined]
 
 export type FormattedValue = string | [string, string]
+
+export type NowButtonProps = Pick<ButtonProps, 'size' | 'onClick'>
+
+export type ClearButtonProps = Pick<ButtonProps, 'size' | 'onClick'>
+
+export type ConfirmButtonProps = Pick<
+ButtonProps,
+'size' | 'onClick' | 'type' | 'disabled'
+>
 
 export type Shortcuts =
   | Record<string, number | (() => number)>
