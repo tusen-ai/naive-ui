@@ -70,6 +70,11 @@
 
 - 修复 `n-scrollbar` 组件的 `scrollTo(x: number, y: number)`方法参数顺序与文档不符的错误
 
+### Features
+
+- `n-date-picker` 新增 `closePanelOnSelectYear` 属性
+- `n-date-picker` 新增 `closePanelOnSelectMonth` 属性
+
 ### Fixes
 
 - 修复 `n-tree` 的 `override-default-node-click-behavior` 属性可能覆盖掉默认展开按钮和选中按钮的行为

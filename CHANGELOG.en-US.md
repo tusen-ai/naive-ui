@@ -71,6 +71,11 @@
 
 - Fix `n-scrollbar`'s `scrollTo(x: number, y: number)` error where the order of method parameters does not match the document.
 
+### Features
+
+- `n-date-picker` adds `closePanelOnSelectYear` prop.
+- `n-date-picker` adds `closePanelOnSelectMonth` prop.
+
 ### Fixes
 
 - Fix `n-tree`'s `override-default-node-click-behavior` prop may conflict with default switcher click or checkbox click behavior.

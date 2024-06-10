@@ -21,6 +21,8 @@ const TIME_FORMAT = 'HH:mm:ss'
 
 const usePanelCommonProps = {
   active: Boolean,
+  closePanelOnSelectYear: Boolean,
+  closePanelOnSelectMonth: Boolean,
   dateFormat: String,
   timerPickerFormat: {
     type: String,
@@ -32,6 +34,8 @@ const usePanelCommonProps = {
   },
   shortcuts: Object as PropType<Shortcuts>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
+  onSelectYear: Function as PropType<(() => void) | undefined>,
+  onSelectMonth: Function as PropType<(() => void) | undefined>,
   onClear: Function,
   onConfirm: Function as PropType<(value: Value | null) => void>,
   onClose: Function as PropType<OnClose>,
