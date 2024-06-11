@@ -279,6 +279,10 @@
 - Fix `n-data-table`'s default sorter to place null values at the very top or bottom, closes [#5281](https://github.com/tusen-ai/naive-ui/issues/5281).
 - Fix `n-popconfirm`'s action button should not be triggered multiple times，closes [#4687](https://github.com/tusen-ai/naive-ui/issues/4687).
 
+## Refactors
+
+- Refactor `n-data-table` header and body's scrolling synchronization implementation.
+
 ### Features
 
 - `n-drawer` adds `max-height`, `min-height`, `max-width` and `max-width` props.
