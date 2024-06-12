@@ -9,7 +9,7 @@
       affix
       :trigger-top="24"
       :top="88"
-      :bound="24"
+      offset-target=".document-scroll-container"
       style="z-index: 1"
     >
       <n-anchor-link title="演示" href="#演示">
