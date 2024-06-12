@@ -6,12 +6,9 @@ import {
   type CSSProperties,
   inject,
   ref,
-  toRef,
-  withDirectives,
-  type DirectiveArguments
+  toRef
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { mousemoveoutside } from 'vdirs'
 import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
 import {
   formatLength,
@@ -209,9 +206,8 @@ export default defineComponent({
       inlineStyle,
       onRender
     } = this
-    const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
     onRender?.()
-    return withDirectives(
+    return (
       <div
         class={[
           `${mergedClsPrefix}-float-button`,
@@ -258,8 +254,7 @@ export default defineComponent({
             {resolveSlot($slots.menu, () => [])}
           </div>
         ) : null}
-      </div>,
-      dirs
+      </div>
     )
   }
 })

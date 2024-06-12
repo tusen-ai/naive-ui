@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-float-button` error when using with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
+
 ## 2.38.2
 
 `2024-05-03`
