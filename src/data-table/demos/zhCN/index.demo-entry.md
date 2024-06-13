@@ -149,7 +149,7 @@ rtl-debug.vue
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
 | resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
-| fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
+| fixed | `'left' \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
 | minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | 列的最大宽度，仅在 `resizable` 为 `true` 的时候生效 | 2.33.4 |
