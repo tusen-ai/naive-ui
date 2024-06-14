@@ -5,7 +5,7 @@
 The element to collect and validate data.
 
 <n-alert type="warning" title="Caveat" :bordered="false">
-  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: number`</n-text> in the rule object.
+  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: Number`</n-text> in the rule object.
 </n-alert>
 
 ## Demos

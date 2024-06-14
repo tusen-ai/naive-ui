@@ -5,7 +5,7 @@
 收集、验证信息。
 
 <n-alert type="warning" title="注意" :bordered="false">
-  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: number`</n-text>。
+  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: Number`</n-text>。
 </n-alert>
 
 ## 演示
