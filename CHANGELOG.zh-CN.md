@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
+
 ## 2.38.2
 
 `2024-05-03`
