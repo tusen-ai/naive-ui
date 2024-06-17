@@ -62,7 +62,11 @@ export const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  validateMessages: Object as PropType<Partial<FormValidateMessages>>
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>,
+  autoScrollToError: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -87,6 +91,7 @@ export default defineComponent({
         maxChildLabelWidthRef.value = currentWidth
       }
     }
+    const formElRef = ref<HTMLElement | null>(null)
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
@@ -124,6 +129,11 @@ export default defineComponent({
               })
             }
             if (formInvalid) {
+              if (props.autoScrollToError) {
+                formElRef.value
+                  ?.querySelector('.n-form-item-feedback--error')
+                  ?.parentElement?.parentElement?.scrollIntoView()
+              }
               // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
               reject(errors.length ? errors : undefined)
             } else {
@@ -154,7 +164,8 @@ export default defineComponent({
       restoreValidation
     }
     return Object.assign(formExposedMethod, {
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      formElRef
     })
   },
   render () {
@@ -166,6 +177,7 @@ export default defineComponent({
           this.inline && `${mergedClsPrefix}-form--inline`
         ]}
         onSubmit={this.onSubmit}
+        ref="formElRef"
       >
         {this.$slots}
       </form>
