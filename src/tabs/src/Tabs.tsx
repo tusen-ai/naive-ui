@@ -504,7 +504,7 @@ export default defineComponent({
         contentRect: { width }
       } = entry
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const containerWidth = target.parentElement!.offsetWidth
+      const containerWidth = target.parentElement!.parentElement!.offsetWidth
       if (!addTabFixedRef.value) {
         if (containerWidth < width) {
           addTabFixedRef.value = true
