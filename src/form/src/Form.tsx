@@ -26,6 +26,8 @@ import type {
 } from './interface'
 import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
+import scrollIntoView from 'scroll-into-view-if-needed'
+import type { Options } from 'scroll-into-view-if-needed'
 
 export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -63,7 +65,7 @@ export const formProps = {
     default: undefined
   },
   validateMessages: Object as PropType<Partial<FormValidateMessages>>,
-  autoScrollToError: {
+  scrollToFirstError: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   }
@@ -129,10 +131,18 @@ export default defineComponent({
               })
             }
             if (formInvalid) {
-              if (props.autoScrollToError) {
-                formElRef.value
-                  ?.querySelector('.n-form-item-feedback--error')
-                  ?.parentElement?.parentElement?.scrollIntoView()
+              if (props.scrollToFirstError) {
+                const errorElement = formElRef.value?.querySelector(
+                  '.n-form-item-feedback--error'
+                )?.parentElement?.parentElement
+
+                if (errorElement) {
+                  let defaultScrollToFirstError: Options = { block: 'nearest' }
+                  if (typeof props.scrollToFirstError === 'object') {
+                    defaultScrollToFirstError = props.scrollToFirstError
+                  }
+                  scrollIntoView(errorElement, defaultScrollToFirstError)
+                }
               }
               // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
               reject(errors.length ? errors : undefined)
