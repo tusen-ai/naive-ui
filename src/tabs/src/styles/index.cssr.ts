@@ -460,6 +460,7 @@ export default cB('tabs', `
           padding-left: 8px;
           padding-right: 8px;
           font-size: 16px;
+          justify-content: center;
         `, [
           cE('height-placeholder', `
             width: 0;
@@ -481,18 +482,19 @@ export default cB('tabs', `
       ]),
       cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ]),
-    cM('left, right', [
+    cM('left, right', `
+      flex-direction: column;
+    `, [
       cB('tabs-wrapper', `
         flex-direction: column;
+      `),
+      cB('tabs-tab-wrapper', `
+        flex-direction: column;
       `, [
-        cB('tabs-tab-wrapper', `
-          flex-direction: column;
-        `, [
-          cB('tabs-tab-pad', `
-            height: var(--n-tab-gap-vertical);
-            width: 100%;
-          `)
-        ])
+        cB('tabs-tab-pad', `
+          height: var(--n-tab-gap-vertical);
+          width: 100%;
+        `)
       ])
     ]),
     cM('top', [
