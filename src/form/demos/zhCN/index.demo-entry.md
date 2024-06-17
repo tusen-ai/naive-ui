@@ -47,6 +47,7 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | 2.27.0 |
+| scroll-to-first-error | `boolean` \| [Options](https://github.com/scroll-into-view/scroll-into-view-if-needed#options) | `false` | 提交失败自动滚动到第一个错误字段 |  |
 
 #### FormItemRule Type
 
