@@ -37,6 +37,7 @@ native.vue
 | value | `string \| null` | `undefined` | Value of the picker. |  |
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |  |
 | on-confirm | `(value: string) => void` | `undefined` | Callback once the confirm button is clicked. | 2.29.0 |
+| on-clear | `() => void` | `undefined` | Callback once the clear button is clicked. | NEXT_VERSION |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |  |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |  |
 | actions | `Array<'confirm' \| 'clear'> \| null` | `null` | The types of buttons to be shown in the panel. |  |
