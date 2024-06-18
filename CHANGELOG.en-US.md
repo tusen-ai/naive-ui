@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-color-picker` add `on-clear` props
+
 ## 2.38.2
 
 `2024-05-03`
