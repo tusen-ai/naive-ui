@@ -46,6 +46,7 @@ native.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | label | `(color: string \| null)` | Label of the color picker trigger. | 2.24.0 |
+| action | `()` | Custom action. | 2.24.0 |
 
 ## Q & A
 
