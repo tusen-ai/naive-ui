@@ -322,6 +322,13 @@ export default defineComponent({
         (r) => r.level === 'warning'
       )
 
+      const validationResult: FormItemInternalValidateResult = {
+        valid: true,
+        errors: undefined,
+        warnings: undefined
+      }
+      if (!activeRules.length) return validationResult
+
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({
         [mergedPath]: activeErrorRules as RuleItem[]
@@ -355,17 +362,11 @@ export default defineComponent({
         })
       }
 
-      const validationResult: FormItemInternalValidateResult = {
-        valid: true,
-        errors: undefined,
-        warnings: undefined
-      }
       if (activeErrorRules.length) {
         const errors = await new Promise<ValidateError[] | null>((resolve) => {
           void validator.validate({ [mergedPath]: value }, options, resolve)
         })
         if (errors?.length) {
-          validationErroredRef.value = true
           validationResult.valid = false
           validationResult.errors = errors
           renderMessages(errors)
@@ -385,17 +386,15 @@ export default defineComponent({
         )
         if (warnings?.length) {
           renderMessages(warnings)
-          validationWarnedRef.value = true
           validationResult.warnings = warnings
         }
       }
 
-      if (
-        activeErrorRules.length + activeWarningRules.length > 0 &&
-        !validationResult.errors &&
-        !validationResult.warnings
-      ) {
+      if (!validationResult.errors && !validationResult.warnings) {
         restoreValidation()
+      } else {
+        validationErroredRef.value = !!validationResult.errors
+        validationWarnedRef.value = !!validationResult.warnings
       }
 
       return validationResult

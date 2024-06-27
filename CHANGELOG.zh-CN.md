@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- `n-form-item` 确保验证状态正确更新[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
+
+# CHANGELOG
+
 ## 2.38.2
 
 `2024-05-03`

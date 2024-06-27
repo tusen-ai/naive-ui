@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- `n-form-item` ensure validation state is correctly updated[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
+
 ## 2.38.2
 
 `2024-05-03`
