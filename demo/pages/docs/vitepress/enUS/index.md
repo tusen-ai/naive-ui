@@ -14,82 +14,130 @@ You can directly use the demo.
 
 If you want to build your own demo from scratch, follow the next steps:
 
-### 0. Install `@css-render/vue3-ssr`
+### 0. Install `@css-render/vue3-ssr` and `vite`
 
-Make sure its version `>=0.15.14`.
+Make sure `@css-render/vue3-ssr`'s version `>=0.15.14`.
+
+When you create a `vitepress` project, `vite` is not automatically installed, but we need its types here.
 
 ```bash
 # npm
-npm install --save-dev @css-render/vue3-ssr
+npm install -D @css-render/vue3-ssr
+npm install -D vite
 
 # pnpm
-pnpm install --save-dev @css-render/vue3-ssr
+pnpm add -D @css-render/vue3-ssr
+pnpm add -D vite
 ```
 
-### 1. Add this content to `.vitepress/theme/index.js`
+### 1. Add this content to `env.d.ts`
 
-```js
-// .vitepress/theme/index.js
+```ts
+/// <reference types="vite/client" />
 
-import { defineComponent, h, inject } from 'vue'
-import DefaultTheme from 'vitepress/theme'
-import { NConfigProvider } from 'naive-ui'
-import { setup } from '@css-render/vue3-ssr'
-import { useRoute } from 'vitepress'
-
-const { Layout } = DefaultTheme
-
-const CssRenderStyle = defineComponent({
-  setup () {
-    const collect = inject('css-render-collect')
-    return {
-      style: collect()
-    }
-  },
-  render () {
-    return h('css-render-style', {
-      innerHTML: this.style
-    })
-  }
-})
-
-const VitepressPath = defineComponent({
-  setup () {
-    const route = useRoute()
-    return () => {
-      return h('vitepress-path', null, [route.path])
-    }
-  }
-})
-
-const NaiveUIProvider = defineComponent({
-  render () {
-    return h(
-      NConfigProvider,
-      { abstract: true, inlineThemeDisabled: true },
-      {
-        default: () => [
-          h(Layout, null, { default: this.$slots.default?.() }),
-          import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
-        ]
-      }
-    )
-  }
-})
-
-export default {
-  extends: DefaultTheme,
-  Layout: NaiveUIProvider,
-  enhanceApp: ({ app }) => {
-    if (import.meta.env.SSR) {
-      const { collect } = setup(app)
-      app.provide('css-render-collect', collect)
-    }
-  }
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
 }
 ```
 
-### 2. Add this content to `.vitepress/config.mts`
+### 2. Add this content to `.vitepress/theme/index.ts`
+
+> In steps 2 and 3, ensure that the `type` property in your `package.json` is set to `module`. Otherwise, you'll need to change the `.ts` extension to `.mts`.
+
+```ts
+// .vitepress/theme/index.ts
+
+import { setup } from "@css-render/vue3-ssr"
+import { defineComponent, reactive, inject, h, watchEffect } from "vue"
+import DefaultTheme from "vitepress/theme"
+import { useData, useRoute } from "vitepress"
+import { NConfigProvider, lightTheme, darkTheme } from "naive-ui"
+import type { Theme } from 'vitepress'
+
+// if you use default theme
+const { Layout } = DefaultTheme;
+
+// if you use your own theme
+// import Layout from './Layout.vue'
+
+// optional
+import 'vfonts/Lato.css'
+import 'vfonts/FiraCode.css'
+
+const CssRenderStyle = defineComponent({
+    setup() {
+        const collect = inject<CallableFunction>("css-render-collect");
+        return {
+            style: collect!(),
+        };
+    },
+    render() {
+        return h("css-render-style", {
+            innerHTML: this.style,
+        });
+    },
+});
+
+const VitepressPath = defineComponent({
+    setup() {
+        const route = useRoute();
+        return () => {
+            return h("vitepress-path", null, [route.path]);
+        };
+    },
+});
+
+const NaiveUIProvider = defineComponent({
+    setup() {
+        const isDark = useData().isDark
+        const providerProps = reactive({
+            abstract: true,
+            inlineThemeDisabled: true,
+
+            // set on ssr
+            theme: isDark ? darkTheme : lightTheme
+        })
+
+        return {
+            isDark,
+            providerProps,
+        }
+    },
+    mounted() {
+        watchEffect(() => {
+            // set on client
+            this.providerProps.theme = this.isDark ? darkTheme : lightTheme
+        })
+    },
+    render() {
+        return h(
+            NConfigProvider,
+            this.providerProps,
+            {
+                default: () => [
+                    h(Layout, null, { default: this.$slots.default?.() }),
+                    import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
+                ]
+            }
+        )
+    }
+})
+
+export default {
+    extends: DefaultTheme,
+    Layout: NaiveUIProvider,
+    enhanceApp({ app, router, siteData }) {
+
+        if (import.meta.env.SSR) {
+            const { collect } = setup(app);
+            app.provide("css-render-collect", collect);
+        }
+
+    }
+} satisfies Theme
+```
+
+### 3. Add this content to `.vitepress/config.ts`
 
 ```ts
 import { defineConfig } from 'vitepress'
@@ -125,7 +173,7 @@ export default defineConfig({
 })
 ```
 
-### 3. Start using naive-ui in your markdown file
+### 4. Start using naive-ui in your markdown file
 
 ```md
 ...
