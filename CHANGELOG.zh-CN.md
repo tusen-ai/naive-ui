@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
+
 ## 2.38.2
 
 `2024-05-03`

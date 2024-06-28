@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
+
 ## 2.38.2
 
 `2024-05-03`
