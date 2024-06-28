@@ -57,7 +57,7 @@ export default defineComponent({
         formRef.value?.validate((errors, { warnings }) => {
           if (errors) {
             console.error(errors)
-            message.error('Valid.')
+            message.error('Invalid.')
           } else if (warnings) {
             message.warning('Valid but be aware of warnings.')
             console.warn(warnings)
