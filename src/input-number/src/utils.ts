@@ -35,7 +35,9 @@ export function format (
   precision: number | undefined
 ): string {
   if (value === undefined || value === null) return ''
-  return precision === undefined ? String(value) : value.toFixed(precision)
+  return precision === undefined
+    ? String(value)
+    : Number(value).toFixed(precision)
 }
 
 export function parseNumber (
