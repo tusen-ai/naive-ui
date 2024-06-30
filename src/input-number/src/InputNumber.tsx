@@ -91,6 +91,10 @@ export const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  round: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   parse: Function as PropType<(input: string) => number | null>,
   format: Function as PropType<(value: number | null) => string>,
   precision: Number,
@@ -685,6 +689,7 @@ export default defineComponent({
           placeholder={this.mergedPlaceholder}
           disabled={this.mergedDisabled}
           readonly={this.readonly as any}
+          round={this.round}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
