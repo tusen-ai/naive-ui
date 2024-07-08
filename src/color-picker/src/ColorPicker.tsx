@@ -63,6 +63,7 @@ import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
 import type {
   OnConfirmImpl,
+  OnClear,
   OnUpdateValue,
   OnUpdateValueImpl,
   RenderLabel
@@ -110,6 +111,7 @@ export const colorPickerProps = {
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
   onConfirm: Function as PropType<OnUpdateValue>,
+  onClear: Function as PropType<OnClear>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -445,6 +447,10 @@ export default defineComponent({
 
     function handleClear (): void {
       doUpdateValue(null, 'input')
+      const { onClear } = props
+      if (onClear) {
+        onClear()
+      }
       doUpdateShow(false)
     }
 
