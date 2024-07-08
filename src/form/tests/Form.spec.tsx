@@ -526,5 +526,100 @@ describe('n-form', () => {
 
       wrapper.unmount()
     })
+
+    /** @see https://github.com/tusen-ai/naive-ui/issues/6068 */
+    it('The validation status should be updated correctly', async () => {
+      const wrapper = mount(
+        defineComponent({
+          setup () {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({
+                input: 'other'
+              })
+            }
+          },
+          render () {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{
+                  input: [
+                    {
+                      level: 'error',
+                      validator (rule, value) {
+                        if (value !== 'target') {
+                          return new Error('error')
+                        }
+                        return true
+                      }
+                    },
+                    {
+                      level: 'warning',
+                      validator (rule, value) {
+                        return new Error('warning')
+                      }
+                    }
+                  ]
+                }}
+              >
+                {{
+                  default: () => (
+                    <NFormItem path="input">
+                      {{
+                        default: () => (
+                          <NInput
+                            ref="inputRef"
+                            value={this.formData.input}
+                            onUpdateValue={(v) => {
+                              this.formData.input = v
+                            }}
+                          />
+                        )
+                      }}
+                    </NFormItem>
+                  )
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+      async function validate (): Promise<Parameters<FormValidateCallback>> {
+        return await new Promise<Parameters<FormValidateCallback>>(
+          (resolve) => {
+            void formRef
+              .validate((errs, { warnings }) => {
+                resolve([errs, { warnings }])
+              })
+              .catch(() => {})
+          }
+        )
+      }
+
+      await validate()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(true)
+
+      await wrapper
+        .findComponent({ ref: 'inputRef' })
+        .find('input')
+        .setValue('target')
+
+      await validate()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .exists()
+      ).toBe(true)
+
+      wrapper.unmount()
+    })
   })
 })
