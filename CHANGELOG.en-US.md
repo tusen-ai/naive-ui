@@ -2,11 +2,15 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
+`xxxx-xx-xx`
 
 ### Fixes
 
 - Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
+
+### Features
+
+- `n-input-number` adds `round` prop, closes [#6097](https://github.com/tusen-ai/naive-ui/issues/6097).
 
 ## 2.38.2
 
