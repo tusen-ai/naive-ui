@@ -2,8 +2,15 @@
 
 ## NEXT_VERSION
 
+`xxxx-xx-xx`
+
+### Fixes
+
+- 修复 `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091)
+
 ### Features
 
+- `n-input-number` 新增 `round` 属性，关闭 [#6097](https://github.com/tusen-ai/naive-ui/issues/6097)
 - `n-color-picker` 新增 `on-clear` 属性
 
 ## 2.38.2
