@@ -176,12 +176,13 @@ export default defineComponent({
       xhr?.abort()
       handleRemove(Object.assign({}, file))
     }
-    function handlePreviewClick (): void {
+    function handlePreviewClick (e: MouseEvent): void {
       const {
         onPreviewRef: { value: onPreview }
       } = NUpload
 
       if (onPreview) {
+        e.preventDefault()
         onPreview(props.file)
       } else if (props.listType === 'image-card') {
         const { value } = imageRef
