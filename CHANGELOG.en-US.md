@@ -11,6 +11,8 @@
 ### Features
 
 - `n-input-number` adds `round` prop, closes [#6097](https://github.com/tusen-ai/naive-ui/issues/6097).
+- `n-color-picker` add `on-clear` props
+
 
 ## 2.38.2
 
