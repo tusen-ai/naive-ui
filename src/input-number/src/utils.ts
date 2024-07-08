@@ -36,8 +36,6 @@ export function format (
 ): string {
   if (typeof value !== 'number') return ''
   return precision === undefined ? String(value) : value.toFixed(precision)
-    ? String(value)
-    : Number(value).toFixed(precision)
 }
 
 export function parseNumber (
