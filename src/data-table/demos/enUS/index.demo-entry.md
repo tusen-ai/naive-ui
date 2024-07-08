@@ -156,7 +156,7 @@ export-csv.vue
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
 | tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
-| titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
+| titleColSpan | `number` | `undefined` | The number of cells occupied by the title col. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
