@@ -99,7 +99,12 @@ export type OnBeforeUpload = (data: {
 
 export type ListType = 'text' | 'image' | 'image-card'
 
-export type OnPreview = (file: UploadSettledFileInfo) => void
+export type OnPreview = (
+  file: UploadSettledFileInfo,
+  detail: {
+    event: MouseEvent
+  }
+) => void
 
 export type CreateThumbnailUrl = (
   file: File | null,

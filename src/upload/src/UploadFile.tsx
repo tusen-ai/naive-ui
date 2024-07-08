@@ -182,8 +182,9 @@ export default defineComponent({
       } = NUpload
 
       if (onPreview) {
-        e.preventDefault()
-        onPreview(props.file)
+        onPreview(props.file, {
+          event: e
+        })
       } else if (props.listType === 'image-card') {
         const { value } = imageRef
         if (!value) return
