@@ -34,8 +34,8 @@ export function format (
   value: number | undefined | null,
   precision: number | undefined
 ): string {
-  if (value === undefined || value === null) return ''
-  return precision === undefined
+  if (typeof value !== 'number') return ''
+  return precision === undefined ? String(value) : value.toFixed(precision)
     ? String(value)
     : Number(value).toFixed(precision)
 }
