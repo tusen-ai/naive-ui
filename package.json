@@ -105,7 +105,7 @@
     "cssnano": "^7.0.4",
     "deepmerge": "^4.3.1",
     "esbuild": "0.21.5",
-    "eslint": "^8.48.0",
+    "eslint": "^9.6.0",
     "eslint-config-love": "^44.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
