@@ -45,7 +45,8 @@ export default defineComponent({
       filterMenuCssVarsRef,
       paginationBehaviorOnFilterRef,
       doUpdatePage,
-      doUpdateFilters
+      doUpdateFilters,
+      filterIconPopoverPropsRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const showPopoverRef = ref(false)
@@ -100,6 +101,7 @@ export default defineComponent({
       active: activeRef,
       showPopover: showPopoverRef,
       mergedRenderFilter: mergedRenderFilterRef,
+      filterIconPopoverProps: filterIconPopoverPropsRef,
       filterMultiple: filterMultipleRef,
       mergedFilterValue: mergedFilterValueRef,
       filterMenuCssVars: filterMenuCssVarsRef,
@@ -109,7 +111,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix, handleFilterMenuCancel } = this
+    const {
+      mergedTheme,
+      mergedClsPrefix,
+      handleFilterMenuCancel,
+      filterIconPopoverProps
+    } = this
     return (
       <NPopover
         show={this.showPopover}
@@ -118,6 +125,7 @@ export default defineComponent({
         theme={mergedTheme.peers.Popover}
         themeOverrides={mergedTheme.peerOverrides.Popover}
         placement="bottom"
+        {...filterIconPopoverProps}
         style={{ padding: 0 }}
       >
         {{

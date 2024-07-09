@@ -19,6 +19,7 @@ import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
 import type { RowItem, ColItem } from './use-group-header'
 import type { BaseLoadingExposedProps } from '../../_internal'
+import { type PopoverProps } from '../../popover'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -115,6 +116,7 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
+  filterIconPopoverProps: Object as PropType<PopoverProps>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   renderCell: Function as PropType<
   (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
