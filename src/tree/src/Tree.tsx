@@ -444,7 +444,17 @@ export default defineComponent({
     const treeSelectInjection = inject(treeSelectInjectionKey, null)
     const dataTreeMateRef = props.internalTreeSelect
       ? treeSelectInjection!.dataTreeMate
-      : displayTreeMateRef
+      : computed(() =>
+        createTreeMate(
+          props.data,
+          createTreeMateOptions(
+            props.keyField,
+            props.childrenField,
+            props.disabledField,
+            props.getChildren
+          )
+        )
+      )
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultCheckedKeys')) {
