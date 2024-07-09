@@ -12,6 +12,7 @@
 
 ### Features
 
+- `n-data-table` adds `filter-icon-popover-props` prop, closes [#6111](https://github.com/tusen-ai/naive-ui/issues/6111)
 - `n-input-number` adds `round` prop, closes [#6097](https://github.com/tusen-ai/naive-ui/issues/6097).
 - `n-color-picker` add `on-clear` props
 
