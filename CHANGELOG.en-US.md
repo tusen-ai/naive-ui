@@ -9,6 +9,7 @@
 - Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
 - `n-form-item` ensure validation state is correctly updated[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
 - Fix `n-select`'s header make inner input unavailable, closes [#6030](https://github.com/tusen-ai/naive-ui/issues/6030).
+- Fix `n-tree` may have incorrect node selection status when `show-irrelevant-nodes` is disabled.
 
 ### Features
 
