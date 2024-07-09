@@ -30,7 +30,7 @@ import {
   type TmNode,
   type RowData
 } from '../interface'
-import { createRowClassName, getColKey, isColumnSorting } from '../utils'
+import { createRowClassName, getColKey } from '../utils'
 import type { ColItem } from '../use-group-header'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
@@ -570,7 +570,6 @@ export default defineComponent({
               fixedColumnRightMap,
               currentPage,
               rowClassName,
-              mergedSortState,
               mergedExpandedRowKeySet,
               stickyExpandedRows,
               componentId,
@@ -824,11 +823,11 @@ export default defineComponent({
                           resolvedCellProps?.class,
                           isSummary &&
                             `${mergedClsPrefix}-data-table-td--summary`,
-                          ((hoverKey !== null &&
+                          hoverKey !== null &&
                             cordKey[displayedRowIndex][colIndex].includes(
                               hoverKey
-                            )) ||
-                            isColumnSorting(column, mergedSortState)) &&
+                            ) &&
+                            // || isColumnSorting(column, mergedSortState)
                             `${mergedClsPrefix}-data-table-td--hover`,
                           column.fixed &&
                             `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
