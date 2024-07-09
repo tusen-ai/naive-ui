@@ -396,6 +396,7 @@ export interface DataTableInjection {
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | RenderExpandIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
+  filterIconPopoverPropsRef: Ref<PopoverProps | undefined>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   doUpdatePage: (page: number) => void
