@@ -19,7 +19,6 @@
       :key="type + placement"
       :type="type"
       animated
-      addable
       :placement="placement"
       :style="
         placement === 'left' || placement === 'right'
