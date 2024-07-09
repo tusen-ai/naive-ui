@@ -1,6 +1,23 @@
 # CHANGELOG
 
-## 2.38.3
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+- 修复 `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091)
+- `n-form-item` 确保验证状态正确更新[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
+- 修复 `n-select` 组件的 header 插槽里 input 无法输入，关闭 [#6030](https://github.com/tusen-ai/naive-ui/issues/6030)
+- 修复 `n-tree` 组件在禁用 `show-irrelevant-nodes` 时，节点的选中状态可能不正确，关闭 [#6115](https://github.com/tusen-ai/naive-ui/issues/6115)
+
+### Features
+
+- `n-data-table` 新增 `filter-icon-popover-props` 属性，关闭 [#6111](https://github.com/tusen-ai/naive-ui/issues/6111)
+- `n-input-number` 新增 `round` 属性，关闭 [#6097](https://github.com/tusen-ai/naive-ui/issues/6097)
+- `n-color-picker` 新增 `on-clear` 属性
+- `n-upload` 的 `on-preview` 属性新增 `detail.event` 参数，关闭 [#6036](https://github.com/tusen-ai/naive-ui/issues/6036)
+- `n-data-table` 新增 `thColorSorting`、`thColorSortingModal`、`thColorSortingPopover`、`tdColorSorting`、`tdColorSortingModal` 和 `tdColorSortingPopover` 主题变量，关闭 [#6118](https://github.com/tusen-ai/naive-ui/issues/6118)、 [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
 
 ### i18n
 

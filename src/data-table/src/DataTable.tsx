@@ -266,6 +266,7 @@ export default defineComponent({
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       summaryPlacementRef: toRef(props, 'summaryPlacement'),
+      filterIconPopoverPropsRef: toRef(props, 'filterIconPopoverProps'),
       scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       syncScrollState,
       doUpdatePage,
@@ -306,6 +307,12 @@ export default defineComponent({
         self: {
           borderColor,
           tdColorHover,
+          tdColorSorting,
+          tdColorSortingModal,
+          tdColorSortingPopover,
+          thColorSorting,
+          thColorSortingModal,
+          thColorSortingPopover,
           thColor,
           thColorHover,
           tdColor,
@@ -387,7 +394,13 @@ export default defineComponent({
         '--n-opacity-loading': opacityLoading,
         '--n-td-color-striped': tdColorStriped,
         '--n-td-color-striped-modal': tdColorStripedModal,
-        '--n-td-color-striped-popover': tdColorStripedPopover
+        '--n-td-color-striped-popover': tdColorStripedPopover,
+        'n-td-color-sorting': tdColorSorting,
+        'n-td-color-sorting-modal': tdColorSortingModal,
+        'n-td-color-sorting-popover': tdColorSortingPopover,
+        'n-th-color-sorting': thColorSorting,
+        'n-th-color-sorting-modal': thColorSortingModal,
+        'n-th-color-sorting-popover': thColorSortingPopover
       }
     })
     const themeClassHandle = inlineThemeDisabled

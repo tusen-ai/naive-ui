@@ -284,7 +284,7 @@ export default defineComponent({
                           leftFixed ? 'left' : 'right'
                         }`,
                       {
-                        [`${mergedClsPrefix}-data-table-th--hover`]:
+                        [`${mergedClsPrefix}-data-table-th--sorting`]:
                           isColumnSorting(column, mergedSortState),
                         [`${mergedClsPrefix}-data-table-th--filterable`]:
                           isColumnFilterable(column),
