@@ -445,15 +445,17 @@ export default defineComponent({
     const dataTreeMateRef = props.internalTreeSelect
       ? treeSelectInjection!.dataTreeMate
       : computed(() =>
-        createTreeMate(
-          props.data,
-          createTreeMateOptions(
-            props.keyField,
-            props.childrenField,
-            props.disabledField,
-            props.getChildren
+        props.showIrrelevantNodes
+          ? displayTreeMateRef.value
+          : createTreeMate(
+            props.data,
+            createTreeMateOptions(
+              props.keyField,
+              props.childrenField,
+              props.disabledField,
+              props.getChildren
+            )
           )
-        )
       )
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
