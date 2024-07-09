@@ -104,8 +104,7 @@
 - `n-split` 新增 `size` 和 `on-update:size` 属性
 - `n-split` 新增 `watch-props` 属性，关闭 [#5526](https://github.com/tusen-ai/naive-ui/issues/5526)
 - `n-drawer` 新增 `borderRadius` 主题变量
-- 新增 `n-float-button` 组件
-- 提供 ES module 打包
+- `n-tabs` 新增 `on-tab-click` 属性，用来触发点击Tab的事件
 
 ### i18n
 
@@ -208,6 +207,7 @@
 - `n-tree-select` 新增 `override-default-node-click-behavior` 属性
 - 新增 `n-flex` 组件
 - `n-pagination` 新增 `show-quick-jump-dropdown` 属性，关闭 [#5251](https://github.com/tusen-ai/naive-ui/issues/5251)
+
 
 ## 2.36.0
 
