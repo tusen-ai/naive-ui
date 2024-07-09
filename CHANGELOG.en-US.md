@@ -16,6 +16,7 @@
 - `n-input-number` adds `round` prop, closes [#6097](https://github.com/tusen-ai/naive-ui/issues/6097).
 - `n-color-picker` add `on-clear` props.
 - `n-upload`'s `on-preview` prop adds `detail.event` parameter, closes [#6036](https://github.com/tusen-ai/naive-ui/issues/6036).
+- `n-data-table` adds `thColorSorting`, `thColorSortingModal`, `thColorSortingPopover`, `tdColorSorting`, `tdColorSortingModal` and `tdColorSortingPopover` theme variables, closes [#6118](https://github.com/tusen-ai/naive-ui/issues/6118), [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
 
 ## 2.38.2
 

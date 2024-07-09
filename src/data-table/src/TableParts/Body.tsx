@@ -824,12 +824,13 @@ export default defineComponent({
                           resolvedCellProps?.class,
                           isSummary &&
                             `${mergedClsPrefix}-data-table-td--summary`,
-                          ((hoverKey !== null &&
+                          hoverKey !== null &&
                             cordKey[displayedRowIndex][colIndex].includes(
                               hoverKey
-                            )) ||
-                            isColumnSorting(column, mergedSortState)) &&
+                            ) &&
                             `${mergedClsPrefix}-data-table-td--hover`,
+                          isColumnSorting(column, mergedSortState) &&
+                            `${mergedClsPrefix}-data-table-td--sorting`,
                           column.fixed &&
                             `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
                           column.align &&

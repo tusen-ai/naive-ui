@@ -16,6 +16,7 @@
 - `n-input-number` 新增 `round` 属性，关闭 [#6097](https://github.com/tusen-ai/naive-ui/issues/6097)
 - `n-color-picker` 新增 `on-clear` 属性
 - `n-upload` 的 `on-preview` 属性新增 `detail.event` 参数，关闭 [#6036](https://github.com/tusen-ai/naive-ui/issues/6036)
+- `n-data-table` 新增 `thColorSorting`、`thColorSortingModal`、`thColorSortingPopover`、`tdColorSorting`、`tdColorSortingModal` 和 `tdColorSortingPopover` 主题变量，关闭 [#6118](https://github.com/tusen-ai/naive-ui/issues/6118)、 [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
 
 ## 2.38.2
 
