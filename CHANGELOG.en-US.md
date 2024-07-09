@@ -19,6 +19,11 @@
 - `n-upload`'s `on-preview` prop adds `detail.event` parameter, closes [#6036](https://github.com/tusen-ai/naive-ui/issues/6036).
 - `n-data-table` adds `thColorSorting`, `thColorSortingModal`, `thColorSortingPopover`, `tdColorSorting`, `tdColorSortingModal` and `tdColorSortingPopover` theme variables, closes [#6118](https://github.com/tusen-ai/naive-ui/issues/6118), [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
 
+### i18n
+
+- Add azAZ locale.
+
+
 ## 2.38.2
 
 `2024-05-03`
