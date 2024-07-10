@@ -81,7 +81,8 @@ function useDualCalendar (
     datePickerSlots,
     monthFormatRef,
     yearFormatRef,
-    quarterFormatRef
+    quarterFormatRef,
+    defaultYearRange
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -367,7 +368,9 @@ function useDualCalendar (
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
     if (!isDateDisabled) return false
-    if (!Array.isArray(props.value)) { return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null) }
+    if (!Array.isArray(props.value)) {
+      return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
+    }
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
       return (isDateDisabled as IsRangeDateDisabled)(ts, 'start', null)
@@ -692,6 +695,7 @@ function useDualCalendar (
     type?: 'start' | 'end' | undefined
   ): void {
     const mergedValue = value === undefined ? props.value : value
+    const [startYear = START_YEAR] = defaultYearRange || []
     if (value === undefined || type === 'start') {
       if (startMonthScrollbarRef.value) {
         const monthIndex = !Array.isArray(mergedValue)
@@ -707,7 +711,7 @@ function useDualCalendar (
         const yearIndex =
           (!Array.isArray(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[0])) - START_YEAR
+            : getYear(mergedValue[0])) - startYear
         startYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
@@ -726,7 +730,7 @@ function useDualCalendar (
         const yearIndex =
           (!Array.isArray(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[1])) - START_YEAR
+            : getYear(mergedValue[1])) - startYear
         endYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
