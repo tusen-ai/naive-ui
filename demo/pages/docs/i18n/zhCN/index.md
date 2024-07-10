@@ -70,6 +70,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 泰语（泰国）       | thTH | dateThTH | 2.27.0 |
 | 土耳其语           | trTR | dateTrTR | 2.34.0 |
 | 乌克兰语           | ukUA | dateUkUA |        |
+| 乌兹别克语         | uzUZ | dateUzUZ |        |
 | 越南语（越南）     | viVN | dateViVN | 2.30.7 |
 | 简体中文           | zhCN | dateZhCN |        |
 | 繁体中文           | zhTW | dateZhTW |        |

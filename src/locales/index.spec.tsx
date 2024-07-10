@@ -6,6 +6,7 @@ import {
   zhTW,
   enUS,
   ukUA,
+  uzUZ,
   jaJP,
   koKR,
   idID,
@@ -33,6 +34,7 @@ import {
   dateZhTW,
   dateRuRU,
   dateUkUA,
+  dateUzUZ,
   dateJaJP,
   dateKoKR,
   dateIdID,
@@ -177,6 +179,17 @@ describe('locale', () => {
         props: {
           dateLocale: dateUkUA,
           locale: ukUA,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+    except(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateUzUZ,
+          locale: uzUZ,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }

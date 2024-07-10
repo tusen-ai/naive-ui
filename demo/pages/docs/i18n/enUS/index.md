@@ -70,6 +70,7 @@ The following list is sorted by 'Config' column.
 | Thai (Thailand)            | thTH   | dateThTH    | 2.27.0  |
 | Turkish                    | trTR   | dateTrTR    | 2.34.0  |
 | Ukrainian                  | ukUA   | dateUkUA    |         |
+| Uzbek (Uzbekistan)         | uzUZ   | dateUzUZ    |         |
 | Vietnamese (Vietnam)       | viVN   | dateViVN    | 2.30.7  |
 | Chinese (Simplified)       | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)      | zhTW   | dateZhTW    |         |

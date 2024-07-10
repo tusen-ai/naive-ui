@@ -22,6 +22,7 @@
 ### i18n
 
 - 新增 azAZ locale.
+- 新增 uzUZ locale.
 
 ## 2.38.2
 
