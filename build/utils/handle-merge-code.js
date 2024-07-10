@@ -1,5 +1,6 @@
-const tsToJs = require('./tsToJs')
-module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
+import { tsToJs } from './tsToJs'
+
+export function handleMergeCode ({ parts, mergedParts, isVue }) {
   const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
     // ts and js

@@ -1,6 +1,6 @@
-const { transformSync } = require('esbuild')
+import { transformSync } from 'esbuild'
 
-const tsToJs = (content) => {
+export const tsToJs = (content) => {
   if (!content) {
     return ''
   }
@@ -17,5 +17,3 @@ const tsToJs = (content) => {
   })
   return code.trim().replace(/__blankline;/g, '')
 }
-
-module.exports = tsToJs

@@ -1,7 +1,7 @@
-const fs = require('fs').promises
-const { walk } = require('.')
+import fs from 'fs/promises'
+import { walk } from './walk.js'
 
-exports.replaceDefine = async (dirs, defines) => {
+export const replaceDefine = async (dirs, defines) => {
   const defineKeys = Object.keys(defines)
   const patterns = {}
   defineKeys.forEach((key) => {

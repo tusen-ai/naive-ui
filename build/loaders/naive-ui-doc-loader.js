@@ -1,7 +1,7 @@
-const convertMd2Doc = require('./convert-md-to-doc')
-const projectPath = require('./project-path')
+import { projectPath } from './project-path'
+import { convertMd2ComponentDocumentation as convertMd2Doc } from './convert-md-to-doc'
 
-module.exports = async function (content, path) {
+export async function docLoader (content, path) {
   const env = process.env.NODE_ENV
   const relativeUrl = path.replace(projectPath + '/', '')
   return convertMd2Doc(content, relativeUrl, env)

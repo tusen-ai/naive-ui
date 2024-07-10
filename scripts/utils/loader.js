@@ -1,6 +1,13 @@
-const path = require('path')
-const fs = require('fs-extra')
-const { marked } = require('marked')
+// const path = require('path')
+// const fs = require('fs-extra')
+// const { marked } = require('marked')
+import fs from 'fs-extra'
+import path, { dirname } from 'path'
+import * as marked from 'marked'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const fileRegex = /\.demo\.md$/
 
@@ -138,7 +145,7 @@ async function transformMdToVueAndUpdateEntryFile (files) {
 
 const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
 
-async function convertFilesByComponentName (componentName) {
+export async function convertFilesByComponentName (componentName) {
   const folders = ['zhCN', 'enUS'].map((item) =>
     path.resolve(COMPONENT_ROOT, `${componentName}/demos/${item}`)
   )
@@ -146,8 +153,4 @@ async function convertFilesByComponentName (componentName) {
     const files = await loadAllMdFile(folders)
     transformMdToVueAndUpdateEntryFile(files)
   }
-}
-
-module.exports = {
-  convertFilesByComponentName
 }
