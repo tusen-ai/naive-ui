@@ -525,19 +525,54 @@ export default defineComponent({
       }
     }
 
-    // Autoplay
-    let autoplayTimer: number | null = null
-    function stopAutoplay (): void {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer)
-        autoplayTimer = null
+    // 自定义setInterval。浏览器自带setInterval当轮播得内容占用内存高得时候，并不会按照指定事件触发
+    const setIntervalRAF: {autoplayTimer: number | null, setInterval: Function, clearInterval: Function} = {
+      autoplayTimer: null,
+      setInterval: function (callback: Function, interval: number | string) {
+        // 起始时间
+        let startTime = Date.now();
+        // 结束时间
+        let endTime = Date.now();
+        // 循环函数
+        const loop = () => {
+          // 该方法调用必须在 callback 之前，确保打印的 'self.timer'  'clearInterval' 的值一样
+          this.autoplayTimer = requestAnimationFrame(loop);
+          endTime = Date.now();
+          // 判断时间超过 interval 就执行函数，并重置时间
+          if(endTime - startTime >= interval) {
+            // 让起始时间、结束时间相同
+            endTime = startTime = Date.now();
+            // 执行回调
+            callback && callback();
+          }
+        }
+        // 执行 requestAnimationFrame
+        this.autoplayTimer = requestAnimationFrame(loop);
+        // 返回 timer
+        return this.autoplayTimer;
+      },
+      clearInterval: function () {
+        cancelAnimationFrame(this.autoplayTimer as number);
+        this.autoplayTimer = null
+      }
+    };
+
+    // let autoplayTimer = null;
+    let isMouse: boolean = false;
+    function stopAutoplay() {
+      if (setIntervalRAF.autoplayTimer) {
+        // clearInterval(autoplayTimer);
+        setIntervalRAF.clearInterval();
+        // setIntervalRAF.autoplayTimer = null;
       }
     }
-    function resetAutoplay (): void {
-      stopAutoplay()
-      const disabled = !props.autoplay || displayTotalViewRef.value < 2
-      if (!disabled) {
-        autoplayTimer = window.setInterval(next, props.interval)
+    function resetAutoplay() {
+      const disabled = !props.autoplay || displayTotalViewRef.value < 2;
+      // 自动播放关闭清除定时器
+      disabled && stopAutoplay();
+      if (!disabled && !setIntervalRAF.autoplayTimer && !isMouse) {
+        // autoplayTimer = window.setInterval(next, props.interval);
+        setIntervalRAF.setInterval(next, props.interval);
       }
     }
 
@@ -716,11 +751,13 @@ export default defineComponent({
     }
     function handleMouseenter (): void {
       if (props.autoplay) {
+        isMouse = true;
         stopAutoplay()
       }
     }
     function handleMouseleave (): void {
       if (props.autoplay) {
+        isMouse = false;
         resetAutoplay()
       }
     }
