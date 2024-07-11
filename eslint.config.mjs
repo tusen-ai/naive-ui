@@ -30,7 +30,8 @@ export default antfu(
     rules: {
       'style/multiline-ternary': 'off',
       'style/max-statements-per-line': 'off',
-      'style/comma-dangle': 'off'
+      'style/comma-dangle': 'off',
+      'style/quote-props': 'off'
     }
   }
 )
