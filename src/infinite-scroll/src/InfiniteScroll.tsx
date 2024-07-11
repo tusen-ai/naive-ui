@@ -28,16 +28,19 @@ export default defineComponent({
     const handleCheckBottom = async (): Promise<void> => {
       const { value: scrollbarInst } = scrollbarInstRef
       if (scrollbarInst) {
-        const { containerRef, containerScrollTop } = scrollbarInst
+        const { containerRef } = scrollbarInst
         const scrollHeight = containerRef?.scrollHeight
         const clientHeight = containerRef?.clientHeight
+        const scrollTop = containerRef?.scrollTop
+        
         if (
           containerRef &&
           scrollHeight !== undefined &&
-          clientHeight !== undefined
+          clientHeight !== undefined &&
+          scrollTop !== undefined
         ) {
           if (
-            containerScrollTop + clientHeight >=
+            scrollTop + clientHeight >=
             scrollHeight - props.distance
           ) {
             loading = true

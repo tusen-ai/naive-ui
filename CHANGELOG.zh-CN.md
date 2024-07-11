@@ -10,6 +10,7 @@
 - `n-form-item` 确保验证状态正确更新[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
 - 修复 `n-select` 组件的 header 插槽里 input 无法输入，关闭 [#6030](https://github.com/tusen-ai/naive-ui/issues/6030)
 - 修复 `n-tree` 组件在禁用 `show-irrelevant-nodes` 时，节点的选中状态可能不正确，关闭 [#6115](https://github.com/tusen-ai/naive-ui/issues/6115)
+- 修复 `n-infinite-scroll` 组件触底判断错误，关闭 [#6133](https://github.com/tusen-ai/naive-ui/issues/6133)
 
 ### Features
 
