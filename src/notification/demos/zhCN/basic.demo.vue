@@ -2,29 +2,18 @@
 # 基础用法
 </markdown>
 
-<template>
-  <n-space>
-    <n-button @click="handleClick1">
-      Wouldn't it be Nice
-    </n-button>
-    <n-button @click="handleClick2">
-      Satisfaction
-    </n-button>
-  </n-space>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import { useNotification, useMessage, NButton, NAvatar } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { NAvatar, NButton, useMessage, useNotification } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const notification = useNotification()
     return {
-      handleClick1 () {
+      handleClick1() {
         notification.create({
-          title: "Wouldn't it be Nice",
+          title: 'Wouldn\'t it be Nice',
           description: 'From the Beach Boys',
           content: `Wouldn't it be nice if we were older
 Then we wouldn't have to wait so long
@@ -44,11 +33,11 @@ Hold each other close the whole night through`,
               src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
             }),
           onAfterLeave: () => {
-            message.success("Wouldn't it be Nice")
+            message.success('Wouldn\'t it be Nice')
           }
         })
       },
-      handleClick2 () {
+      handleClick2() {
         let markAsRead = false
         const n = notification.create({
           title: 'Satisfaction',
@@ -84,3 +73,14 @@ I cant get no, I cant get no`,
   }
 })
 </script>
+
+<template>
+  <n-space>
+    <n-button @click="handleClick1">
+      Wouldn't it be Nice
+    </n-button>
+    <n-button @click="handleClick2">
+      Satisfaction
+    </n-button>
+  </n-space>
+</template>

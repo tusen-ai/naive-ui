@@ -1,5 +1,5 @@
 import { type HSLA, toHslaString } from 'seemly'
-import { defineComponent, type PropType, h, inject } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { colorPickerInjectionKey } from './context'
 
 export default defineComponent({
@@ -20,8 +20,7 @@ export default defineComponent({
     disabled: Boolean,
     onClick: Function as PropType<() => void>
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { colorPickerSlots, renderLabelRef } = inject(
       colorPickerInjectionKey,
       null

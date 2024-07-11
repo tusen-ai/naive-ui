@@ -1,11 +1,11 @@
 // I don't like web-types, why can't webstrom just work with typescript?
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { kebabCase } = require('lodash')
 
 const baseDir = path.resolve(__dirname, '../..')
 
-exports.genWebTypes = function genWebTypes () {
+exports.genWebTypes = function genWebTypes() {
   const components = require('../../lib/components')
   const { default: version } = require('../../lib/version')
 
@@ -28,8 +28,10 @@ exports.genWebTypes = function genWebTypes () {
   const ignoredPropNames = ['theme', 'themeOverrides', 'builtinThemeOverrides']
 
   Object.entries(components).forEach(([exportName, component]) => {
-    if (exportName[0] !== 'N') return
-    if (exportName.startsWith('Nx')) return
+    if (exportName[0] !== 'N')
+      return
+    if (exportName.startsWith('Nx'))
+      return
 
     const {
       props: docProps,
@@ -44,33 +46,36 @@ exports.genWebTypes = function genWebTypes () {
     const attributes = []
     const props = []
     const events = []
-    componentProps &&
-      Object.entries(componentProps).forEach(([propName, prop]) => {
-        if (propName.startsWith('internal')) return
-        if (ignoredPropNames.includes(propName)) return
-        if (propName.startsWith('on') && /[A-Z]/.test(propName[2])) {
-          // is event
-          const event = {
-            name: kebabCase(propName.slice(2)),
-            'doc-url': docUrl
-          }
-          assignDocs(event, docProps[kebabCase(propName)])
-          delete docProps[kebabCase(propName)]
-          events.push(event)
-        } else {
-          const resultProp = {
-            name: kebabCase(propName),
-            'doc-url': docUrl
-          }
-          const type = prop ? getType(prop) : null
-          if (type !== null) {
-            resultProp.type = type
-          }
-          assignDocs(resultProp, docProps[resultProp.name])
-          delete docProps[resultProp.name]
-          props.push(resultProp)
+    componentProps
+    && Object.entries(componentProps).forEach(([propName, prop]) => {
+      if (propName.startsWith('internal'))
+        return
+      if (ignoredPropNames.includes(propName))
+        return
+      if (propName.startsWith('on') && /[A-Z]/.test(propName[2])) {
+        // is event
+        const event = {
+          name: kebabCase(propName.slice(2)),
+          'doc-url': docUrl
         }
-      })
+        assignDocs(event, docProps[kebabCase(propName)])
+        delete docProps[kebabCase(propName)]
+        events.push(event)
+      }
+      else {
+        const resultProp = {
+          name: kebabCase(propName),
+          'doc-url': docUrl
+        }
+        const type = prop ? getType(prop) : null
+        if (type !== null) {
+          resultProp.type = type
+        }
+        assignDocs(resultProp, docProps[resultProp.name])
+        delete docProps[resultProp.name]
+        props.push(resultProp)
+      }
+    })
 
     // Add the rest of the props and events from docs
     for (const name in docProps) {
@@ -82,7 +87,8 @@ exports.genWebTypes = function genWebTypes () {
       if (prop.name.startsWith('on-')) {
         prop.name = prop.name.substring(3)
         events.push(prop)
-      } else {
+      }
+      else {
         props.push(prop)
       }
     }
@@ -120,7 +126,7 @@ exports.genWebTypes = function genWebTypes () {
     }
   )
 
-  function getType (prop) {
+  function getType(prop) {
     if (typeof prop !== 'object' && typeof prop !== 'function') {
       console.error(`invalid prop: ${prop}`)
       return null
@@ -134,16 +140,17 @@ exports.genWebTypes = function genWebTypes () {
     return _getType(prop)
   }
 
-  function _getType (propType) {
+  function _getType(propType) {
     if (Array.isArray(propType)) {
       const types = propType.map(mapType)
-      if (types.some((v) => v === null)) return null
+      if (types.includes(null))
+        return null
       return types.join(' | ')
     }
     return mapType(propType)
   }
 
-  function mapType (type) {
+  function mapType(type) {
     switch (type) {
       case String:
         return 'string'
@@ -164,7 +171,7 @@ exports.genWebTypes = function genWebTypes () {
     return null
   }
 
-  function loadDocs (componentName) {
+  function loadDocs(componentName) {
     let componentPath = kebabCase(componentName)
     switch (componentPath) {
       case 'row':
@@ -206,9 +213,10 @@ exports.genWebTypes = function genWebTypes () {
     do {
       docsPath = path.resolve(
         baseDir,
-        'src/' + componentPath + '/demos/enUS/index.demo-entry.md'
+        `src/${componentPath}/demos/enUS/index.demo-entry.md`
       )
-      if (fs.existsSync(docsPath)) break
+      if (fs.existsSync(docsPath))
+        break
       componentPath = componentPath.substring(
         0,
         Math.max(0, componentPath.lastIndexOf('-'))
@@ -234,7 +242,7 @@ exports.genWebTypes = function genWebTypes () {
       docUrl: `https://www.naiveui.com/en-US/os-theme/components/${componentPath}`
     }
 
-    function extractComponentDescription () {
+    function extractComponentDescription() {
       const description = docsFile.match(
         RegExp(`#.*${componentName}\n(.*)## Demos`, 's')
       )
@@ -243,16 +251,18 @@ exports.genWebTypes = function genWebTypes () {
       }
     }
 
-    function extractSectionTable (sectionName) {
+    function extractSectionTable(sectionName) {
       const result = {}
       try {
         const sectionHeaderRegex = RegExp(
           `##.*${componentName}[, ].*${sectionName}\n`
         )
         const location = docsFile.match(sectionHeaderRegex)
-        if (!location || location.index < 0) return result
+        if (!location || location.index < 0)
+          return result
         let end = docsFile.indexOf('##', location.index + 3)
-        if (end < 0) end = docsFile.length
+        if (end < 0)
+          end = docsFile.length
 
         const rowRegex = /\|((\\\||[^|])+)/g
         const sectionContents = docsFile.substring(
@@ -261,17 +271,18 @@ exports.genWebTypes = function genWebTypes () {
         )
         const table = sectionContents
           .split('\n')
-          .map((it) => it.trim())
-          .filter((it) => !!it && it.indexOf('| ---') < 0 && it.startsWith('|'))
+          .map(it => it.trim())
+          .filter(it => !!it && !it.includes('| ---') && it.startsWith('|'))
           .map((it) => {
             const row = it.match(rowRegex)
-            if (row === null) throw new Error('Failed to match: ' + it)
-            return row.map((it) => it.substring(1).trim())
+            if (row === null)
+              throw new Error(`Failed to match: ${it}`)
+            return row.map(it => it.substring(1).trim())
           })
 
         if (table.length > 0) {
           if (table[0][0] !== 'Name') {
-            throw new Error('Bad table ' + sectionName + ' in ' + componentName)
+            throw new Error(`Bad table ${sectionName} in ${componentName}`)
           }
           for (let i = 1; i < table.length; i++) {
             const row = table[i]
@@ -283,7 +294,8 @@ exports.genWebTypes = function genWebTypes () {
             result[name] = info
           }
         }
-      } catch (e) {
+      }
+      catch (e) {
         console.error(
           `Failed to build table info for section ${sectionName} of ${componentName} under ${docsPath}`,
           e
@@ -293,8 +305,9 @@ exports.genWebTypes = function genWebTypes () {
     }
   }
 
-  function assignDocs (target, docs) {
-    if (!docs) return
+  function assignDocs(target, docs) {
+    if (!docs)
+      return
     if (docs.parameters) {
       // For slot
       const type = strip(strip(docs.parameters, '`'), '(', ')')
@@ -318,9 +331,11 @@ exports.genWebTypes = function genWebTypes () {
     }
   }
 
-  function strip (str, prefix, suffix) {
-    if (!str) return str
-    if (!suffix) suffix = prefix
+  function strip(str, prefix, suffix) {
+    if (!str)
+      return str
+    if (!suffix)
+      suffix = prefix
     if (str.startsWith(prefix) && str.endsWith(suffix)) {
       return str.substring(1, str.length - 1).trim()
     }

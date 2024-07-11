@@ -1,26 +1,26 @@
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick } from 'vue'
-import { NDialogProvider, useDialog, NDialog, type DialogProps } from '../index'
+import { type DialogProps, NDialog, NDialogProvider, useDialog } from '../index'
 
 const Provider = defineComponent({
-  render () {
+  render() {
     return <NDialogProvider>{this.$slots}</NDialogProvider>
   }
 })
 
-const createTestComponent = (
+function createTestComponent(
   type: 'create' | 'error' | 'info' | 'success' | 'warning',
   dialogProps?: DialogProps
-): any => {
+): any {
   return defineComponent({
-    setup () {
+    setup() {
       const dialog = useDialog()
       dialog[type]({
         title: 'test dialog type',
         ...dialogProps
       })
     },
-    render () {
+    render() {
       return null
     }
   })
@@ -33,7 +33,7 @@ describe('n-dialog', () => {
 
   it('should have correct type', () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const dialog = useDialog()
         const dialogReactive = dialog.success({
           title: 'Test success',
@@ -41,7 +41,7 @@ describe('n-dialog', () => {
         })
         dialogReactive.style = 'color: red;'
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -65,7 +65,7 @@ describe('n-dialog', () => {
     dialog.unmount()
   })
 
-  it("shouldn't useDialog display button if no text is set", () => {
+  it('shouldn\'t useDialog display button if no text is set', () => {
     const wrapper = mount(NDialog)
     expect(wrapper.find('.n-button').exists()).toEqual(false)
     wrapper.unmount()
@@ -73,7 +73,7 @@ describe('n-dialog', () => {
 
   it('loading', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const dialog = useDialog()
         dialog.success({
           title: 'Loading',
@@ -82,7 +82,7 @@ describe('n-dialog', () => {
           loading: true
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -96,7 +96,7 @@ describe('n-dialog', () => {
 
   it('maskClosable', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const dialog = useDialog()
         dialog.success({
           title: 'Close by mask',
@@ -104,7 +104,7 @@ describe('n-dialog', () => {
           maskClosable: false
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -122,7 +122,7 @@ describe('n-dialog', () => {
   it('onMaskClick', async () => {
     const onMaskClick = jest.fn()
     const Test = defineComponent({
-      setup () {
+      setup() {
         const dialog = useDialog()
         dialog.success({
           title: 'Close by mask',
@@ -130,7 +130,7 @@ describe('n-dialog', () => {
           onMaskClick
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -147,7 +147,7 @@ describe('n-dialog', () => {
 
   it('should work with `style` option', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const dialog = useDialog()
         dialog.warning({
           title: 'Custom style',
@@ -157,7 +157,7 @@ describe('n-dialog', () => {
           }
         })
       },
-      render () {
+      render() {
         return null
       }
     })

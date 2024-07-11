@@ -3,7 +3,7 @@ const convertVue2Demo = require('./convert-vue-to-demo')
 const projectPath = require('./project-path')
 
 module.exports = function (content, path, type) {
-  const relativeUrl = path.replace(projectPath + '/', '')
+  const relativeUrl = path.replace(`${projectPath}/`, '')
   if (type === 'vue') {
     return convertVue2Demo(content, {
       relativeUrl,

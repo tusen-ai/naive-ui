@@ -57,7 +57,7 @@ Naive doesn't provide it builtin. You can create a color map, like [https://gith
 Or you can create a function like this.
 
 ```js
-export function getRgb (colorName) {
+export function getRgb(colorName) {
   const el = document.createElement('div')
   el.style.color = colorName
   document.body.appendChild(el)

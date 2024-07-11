@@ -1,5 +1,5 @@
-const transformIndexHtml = (code) => {
-  switch (process.env.NODE_ENV) {
+function transformIndexHtml(code) {
+  switch (require('node:process').env.NODE_ENV) {
     case 'production':
       return code.replace(/__INDEX__/, 'demo/index.prod.js')
     default:

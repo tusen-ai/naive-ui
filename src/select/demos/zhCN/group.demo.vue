@@ -4,16 +4,12 @@
 把选项集合成组。
 </markdown>
 
-<template>
-  <n-select v-model:value="value" filterable :options="options" />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { SelectOption, SelectGroupOption } from 'naive-ui'
+import type { SelectGroupOption, SelectOption } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const options: Array<SelectOption | SelectGroupOption> = [
       {
         type: 'group',
@@ -21,7 +17,7 @@ export default defineComponent({
         key: 'Rubber Soul',
         children: [
           {
-            label: "Everybody's Got Something to Hide Except Me and My Monkey",
+            label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
             value: 'song0',
             disabled: true
           },
@@ -34,7 +30,7 @@ export default defineComponent({
             value: 'song2'
           },
           {
-            label: "You Won't See",
+            label: 'You Won\'t See',
             value: 'song3',
             disabled: true
           },
@@ -64,7 +60,7 @@ export default defineComponent({
             value: 'song9'
           },
           {
-            label: "I'm looking through you",
+            label: 'I\'m looking through you',
             value: 'song10'
           },
           {
@@ -111,8 +107,8 @@ export default defineComponent({
             value: 'Maggie Mae'
           },
           {
-            label: "I've Got A Feeling",
-            value: "I've Got A Feeling"
+            label: 'I\'ve Got A Feeling',
+            value: 'I\'ve Got A Feeling'
           },
           {
             label: 'One After 909',
@@ -140,3 +136,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select v-model:value="value" filterable :options="options" />
+</template>

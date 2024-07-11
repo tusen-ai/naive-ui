@@ -166,7 +166,7 @@ The following types can be imported from the package.
 #### DataTableSortState Type
 
 ```ts
-type DataTableSortState = {
+interface DataTableSortState {
   columnKey: string | number
   sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
@@ -176,7 +176,7 @@ type DataTableSortState = {
 #### DataTableFilterState Type
 
 ```ts
-type DataTableFilterState = {
+interface DataTableFilterState {
   [key: string]: Array<string | number> | string | number | null | undefined
 }
 ```
@@ -185,20 +185,20 @@ type DataTableFilterState = {
 
 ```ts
 type DataTableCreateSummary = (pageData: RowData[]) =>
-  | Array<{
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }>
-  | {
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }
+| Array<{
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}>
+| {
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}
 ```
 
 ### DataTable Methods

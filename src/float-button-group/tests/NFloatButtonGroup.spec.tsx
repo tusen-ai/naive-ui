@@ -9,7 +9,7 @@ describe('n-flex', () => {
 
   it('render empty children', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NFloatButtonGroup />
       }
     })

@@ -4,34 +4,17 @@
 使用 `node-props` 为节点绑定属性，比如点击事件或者右键菜单。
 </markdown>
 
-<template>
-  <n-tree
-    block-line
-    :data="data"
-    :default-expanded-keys="defaultExpandedKeys"
-    :node-props="nodeProps"
-  />
-  <n-dropdown
-    trigger="manual"
-    placement="bottom-start"
-    :show="showDropdown"
-    :options="(options as any)"
-    :x="x"
-    :y="y"
-    @select="handleSelect"
-    @clickoutside="handleClickoutside"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { repeat } from 'seemly'
-import { TreeOption, useMessage, DropdownOption } from 'naive-ui'
+import type { DropdownOption, TreeOption } from 'naive-ui'
+import { useMessage } from 'naive-ui'
 
-function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
-  if (!level) return undefined
+function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
+  if (!level)
+    return undefined
   return repeat(6 - level, undefined).map((_, index) => {
-    const key = '' + baseKey + level + index
+    const key = `${baseKey}${level}${index}`
     return {
       label: createLabel(level),
       key,
@@ -40,16 +23,20 @@ function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   })
 }
 
-function createLabel (level: number): string {
-  if (level === 4) return '道生一'
-  if (level === 3) return '一生二'
-  if (level === 2) return '二生三'
-  if (level === 1) return '三生万物'
+function createLabel(level: number): string {
+  if (level === 4)
+    return '道生一'
+  if (level === 3)
+    return '一生二'
+  if (level === 2)
+    return '二生三'
+  if (level === 1)
+    return '三生万物'
   return ''
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const showDropdownRef = ref(false)
     const optionsRef = ref<DropdownOption[]>([])
@@ -70,10 +57,10 @@ export default defineComponent({
       },
       nodeProps: ({ option }: { option: TreeOption }) => {
         return {
-          onClick () {
-            message.info('[Click] ' + option.label)
+          onClick() {
+            message.info(`[Click] ${option.label}`)
           },
-          onContextmenu (e: MouseEvent): void {
+          onContextmenu(e: MouseEvent): void {
             optionsRef.value = [option]
             showDropdownRef.value = true
             xRef.value = e.clientX
@@ -87,3 +74,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree
+    block-line
+    :data="data"
+    :default-expanded-keys="defaultExpandedKeys"
+    :node-props="nodeProps"
+  />
+  <n-dropdown
+    trigger="manual"
+    placement="bottom-start"
+    :show="showDropdown"
+    :options="options as any"
+    :x="x"
+    :y="y"
+    @select="handleSelect"
+    @clickoutside="handleClickoutside"
+  />
+</template>

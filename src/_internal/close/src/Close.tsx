@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, toRef } from 'vue'
+import { type PropType, defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import { NBaseIcon } from '../../icon'
 import { CloseIcon } from '../../icons'
@@ -27,7 +27,7 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>,
     absolute: Boolean
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
       const { clsPrefix, disabled, absolute, round, isButtonTag } = props

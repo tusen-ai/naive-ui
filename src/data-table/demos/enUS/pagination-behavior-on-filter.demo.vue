@@ -6,20 +6,11 @@ Set `pagination-behavior-on-filter` to control the behavior (whether to stay at 
 If table stays on the current page and the total amount of filtered data cannot reach the current page, the last page of data would be shown.
 </markdown>
 
-<template>
-  <n-data-table
-    pagination-behavior-on-filter="first"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -49,7 +40,7 @@ const columns: DataTableColumns<RowData> = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return !!~row.address.indexOf(String(value))
     }
   }
@@ -83,7 +74,7 @@ const data: RowData[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data,
       columns,
@@ -92,3 +83,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    pagination-behavior-on-filter="first"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</template>

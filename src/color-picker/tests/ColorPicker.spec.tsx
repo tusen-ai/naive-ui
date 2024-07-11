@@ -148,7 +148,7 @@ describe('n-color-picker', () => {
         }
       }
       const modes = Object.values(output).map(
-        (v) => v.mode
+        v => v.mode
       ) as ColorPickerMode[]
       const wrapper = mount(NColorPicker, {
         attachTo: document.body,
@@ -163,6 +163,7 @@ describe('n-color-picker', () => {
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       let length = modes.length
       let currentMode: string | null | undefined = null
+      // eslint-disable-next-line no-cond-assign
       while (length && (currentMode = modeDom?.textContent)) {
         ;(swatch as HTMLElement).click()
         await nextTick()
@@ -195,7 +196,7 @@ describe('props.label', () => {
   })
 })
 
-describe('n-color-picker', () => {
+describe('n-color-picker 2', () => {
   it('should work with `placement` prop', async () => {
     ;(
       [

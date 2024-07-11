@@ -58,7 +58,7 @@ naive 不内置提供这种功能，你可以自己建立一个对象进行映�
 或者你自己写一个函数，例如：
 
 ```js
-export function getRgb (colorName) {
+export function getRgb(colorName) {
   const el = document.createElement('div')
   el.style.color = colorName
   document.body.appendChild(el)

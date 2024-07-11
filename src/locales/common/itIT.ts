@@ -68,11 +68,13 @@ const itIT: NLocale = {
     unselectAll: 'Deseleziona tutto',
     clearAll: 'Pulisci',
     total: (num: number): string => {
-      if (num !== 1) return `${num} elementi in totale`
+      if (num !== 1)
+        return `${num} elementi in totale`
       return '1 elemento in totale'
     },
     selected: (num: number): string => {
-      if (num !== 1) return `${num} elementi selezionati`
+      if (num !== 1)
+        return `${num} elementi selezionati`
       return '1 elemento selezionato'
     }
   },

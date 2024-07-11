@@ -31,7 +31,9 @@ export default antfu(
       'style/multiline-ternary': 'off',
       'style/max-statements-per-line': 'off',
       'style/comma-dangle': 'off',
-      'style/quote-props': 'off'
+      'style/quote-props': 'off',
+      'jsdoc/require-returns-description': 'off',
+      'jsdoc/check-param-names': 'off'
     }
   }
 )

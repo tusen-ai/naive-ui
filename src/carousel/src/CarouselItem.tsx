@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
   computed,
-  ref,
+  defineComponent,
+  h,
+  onBeforeUnmount,
   onMounted,
-  onBeforeUnmount
+  ref
 } from 'vue'
 import type { VNode } from 'vue'
 import { camelCase } from 'lodash-es'
@@ -13,12 +13,13 @@ import { useCarouselContext } from './CarouselContext'
 
 const CarouselItemName = 'CarouselItem'
 
-export const isCarouselItem = (child: VNode): boolean =>
-  (child.type as any)?.name === CarouselItemName
+export function isCarouselItem(child: VNode): boolean {
+  return (child.type as any)?.name === CarouselItemName
+}
 
 export default defineComponent({
   name: CarouselItemName,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const NCarousel = useCarouselContext(
       camelCase(CarouselItemName),
@@ -39,7 +40,7 @@ export default defineComponent({
     onBeforeUnmount(() => {
       NCarousel.removeSlide(selfElRef.value)
     })
-    function handleClick (event: MouseEvent): void {
+    function handleClick(event: MouseEvent): void {
       const { value: index } = indexRef
       if (index !== undefined) {
         NCarousel?.onCarouselItemClick(index, event)
@@ -56,7 +57,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       $slots: slots,
       mergedClsPrefix,

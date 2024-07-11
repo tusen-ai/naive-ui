@@ -588,7 +588,7 @@ export default c([
   `))
 ])
 
-function createFixedColumnStyle (): CNode[] {
+function createFixedColumnStyle(): CNode[] {
   return [
     cM('fixed-left', `
       left: 0;

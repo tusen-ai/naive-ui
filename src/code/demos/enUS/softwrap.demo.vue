@@ -4,15 +4,11 @@
 Code can wrap content if it overflows.
 </markdown>
 
-<template>
-  <n-code :code="code" language="js" word-wrap />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       code: `
 function padEnd(string, length, chars) {
@@ -24,3 +20,7 @@ function padEnd(string, length, chars) {
   }
 })
 </script>
+
+<template>
+  <n-code :code="code" language="js" word-wrap />
+</template>

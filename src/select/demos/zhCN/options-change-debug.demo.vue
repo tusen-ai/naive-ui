@@ -2,25 +2,16 @@
 # Options Change Debug
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-button @click="handleClick">
-      reset
-    </n-button>
-    <n-select v-model:value="value" multiple :options="options" />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { SelectOption } from 'naive-ui'
+import type { SelectOption } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const value = ref(null)
     const options = ref<SelectOption[]>([
       {
-        label: "Everybody's Got Something to Hide Except Me and My Monkey",
+        label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
         value: 'song0'
       },
       {
@@ -32,14 +23,14 @@ export default defineComponent({
         value: 'song2'
       },
       {
-        label: "You Won't See",
+        label: 'You Won\'t See',
         value: 'song3'
       }
     ])
     const handleClick = () => {
       options.value = [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0'
         },
         {
@@ -53,7 +44,7 @@ export default defineComponent({
           disabled: true
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3'
         }
       ]
@@ -66,3 +57,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-button @click="handleClick">
+      reset
+    </n-button>
+    <n-select v-model:value="value" multiple :options="options" />
+  </n-space>
+</template>

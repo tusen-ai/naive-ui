@@ -2,19 +2,10 @@
 # 表头分组
 </markdown>
 
-<template>
-  <n-data-table
-    :data="data"
-    :columns="columns"
-    :single-line="false"
-    :pagination="pagination"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-function createCols () {
+function createCols() {
   return [
     {
       title: 'Name',
@@ -51,7 +42,7 @@ function createCols () {
   ]
 }
 
-function createData () {
+function createData() {
   return Array.from({ length: 50 }).map((_, i) => {
     return {
       key: i,
@@ -65,7 +56,7 @@ function createData () {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: ref(createData()),
       columns: ref(createCols()),
@@ -76,3 +67,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :data="data"
+    :columns="columns"
+    :single-line="false"
+    :pagination="pagination"
+  />
+</template>

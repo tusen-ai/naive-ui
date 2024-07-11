@@ -2,6 +2,19 @@
 # Nested debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show1: ref(false),
+      show2: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="show1 = !show1">
     show1
@@ -15,16 +28,3 @@
     </n-modal>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show1: ref(false),
-      show2: ref(false)
-    }
-  }
-})
-</script>

@@ -4,30 +4,17 @@
 Use `tag` & `filterable` properties to create options dynamically.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-select
-      v-model:value="multipleSelectValue"
-      filterable
-      multiple
-      tag
-      :options="options"
-    />
-    <n-select v-model:value="selectValue" filterable tag :options="options" />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       multipleSelectValue: ref(null),
       selectValue: ref(null),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0',
           disabled: true
         },
@@ -40,7 +27,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3',
           disabled: true
         },
@@ -70,7 +57,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -86,3 +73,16 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-select
+      v-model:value="multipleSelectValue"
+      filterable
+      multiple
+      tag
+      :options="options"
+    />
+    <n-select v-model:value="selectValue" filterable tag :options="options" />
+  </n-space>
+</template>

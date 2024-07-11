@@ -2,10 +2,6 @@
 # Controlled pagination
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
-</template>
-
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 
@@ -32,7 +28,7 @@ const data = Array.from({ length: 46 }).map((_, index) => ({
 }))
 
 export default defineComponent({
-  setup () {
+  setup() {
     const paginationReactive = reactive({
       page: 2,
       pageSize: 5,
@@ -55,3 +51,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>

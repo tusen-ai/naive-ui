@@ -1,11 +1,11 @@
-import { h, defineComponent, computed } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { positionProp } from './interface'
 import style from './styles/layout-header.cssr'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const headerProps = {
   position: positionProp,
@@ -24,7 +24,7 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<LayoutTheme>),
     ...headerProps
   },
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
@@ -46,7 +46,8 @@ export default defineComponent({
         vars['--n-color'] = self.headerColorInverted
         vars['--n-text-color'] = self.textColorInverted
         vars['--n-border-color'] = self.headerBorderColorInverted
-      } else {
+      }
+      else {
         vars['--n-color'] = self.headerColor
         vars['--n-text-color'] = self.textColor
         vars['--n-border-color'] = self.headerBorderColor
@@ -68,7 +69,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (
@@ -76,8 +77,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-header`,
           this.themeClass,
-          this.position &&
-            `${mergedClsPrefix}-layout-header--${this.position}-positioned`,
+          this.position
+          && `${mergedClsPrefix}-layout-header--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-header--bordered`
         ]}
         style={this.cssVars}

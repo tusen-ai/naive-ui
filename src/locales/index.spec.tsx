@@ -1,67 +1,67 @@
-import { h, defineComponent, type PropType, ref, onMounted } from 'vue'
+import { type PropType, defineComponent, h, onMounted, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
-  ruRU,
-  zhCN,
-  zhTW,
-  enUS,
-  ukUA,
-  jaJP,
-  koKR,
-  idID,
-  deDE,
-  nbNO,
-  faIR,
-  frFR,
-  esAR,
-  itIT,
-  skSK,
-  csCZ,
-  enGB,
-  plPL,
-  ptBR,
-  thTH,
-  nlNL,
-  arDZ,
-  trTR,
-  svSE,
-  etEE,
-  azAZ,
-  eo,
-  dateEnUS,
-  dateZhCN,
-  dateZhTW,
-  dateRuRU,
-  dateUkUA,
-  dateJaJP,
-  dateKoKR,
-  dateIdID,
-  dateDeDE,
-  dateNbNO,
-  dateFaIR,
-  dateFrFR,
-  dateEsAR,
-  dateItIT,
-  dateSkSK,
-  dateCsCZ,
-  dateEnGB,
-  datePlPL,
-  datePtBR,
-  dateThTH,
-  dateNlNL,
-  dateArDZ,
-  dateTrTR,
-  dateSvSE,
-  dateEtEE,
-  dateAzAZ,
-  dateEo,
   NConfigProvider,
   type NDateLocale,
+  NInput,
   type NLocale,
-  NInput
+  arDZ,
+  azAZ,
+  csCZ,
+  dateArDZ,
+  dateAzAZ,
+  dateCsCZ,
+  dateDeDE,
+  dateEnGB,
+  dateEnUS,
+  dateEo,
+  dateEsAR,
+  dateEtEE,
+  dateFaIR,
+  dateFrFR,
+  dateIdID,
+  dateItIT,
+  dateJaJP,
+  dateKoKR,
+  dateNbNO,
+  dateNlNL,
+  datePlPL,
+  datePtBR,
+  dateRuRU,
+  dateSkSK,
+  dateSvSE,
+  dateThTH,
+  dateTrTR,
+  dateUkUA,
+  dateZhCN,
+  dateZhTW,
+  deDE,
+  enGB,
+  enUS,
+  eo,
+  esAR,
+  etEE,
+  faIR,
+  frFR,
+  idID,
+  itIT,
+  jaJP,
+  koKR,
+  nbNO,
+  nlNL,
+  plPL,
+  ptBR,
+  ruRU,
+  skSK,
+  svSE,
+  thTH,
+  trTR,
+  ukUA,
+  zhCN,
+  zhTW
 } from '../index'
-import { createLocale } from '.'
 import { NDatePicker } from '../date-picker'
+import { createLocale } from '.'
 
 const Wrapper = defineComponent({
   props: {
@@ -69,7 +69,7 @@ const Wrapper = defineComponent({
     locale: Object as PropType<NLocale>,
     onMounted: Function as PropType<(date: string) => void>
   },
-  setup (props) {
+  setup() {
     const datePickerWrapperElRef = ref<HTMLElement | null>(null)
     onMounted(() => {
       // const { value: datePickerWrapperEl } = datePickerWrapperElRef
@@ -90,7 +90,7 @@ const Wrapper = defineComponent({
       datePickerWrapperElRef
     }
   },
-  render () {
+  render() {
     return (
       <NConfigProvider {...this.$props}>
         {{

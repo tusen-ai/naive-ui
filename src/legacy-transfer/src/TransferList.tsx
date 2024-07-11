@@ -1,12 +1,12 @@
 import {
-  h,
-  defineComponent,
-  ref,
-  inject,
+  Fragment,
   type PropType,
-  TransitionGroup,
   Transition,
-  Fragment
+  TransitionGroup,
+  defineComponent,
+  h,
+  inject,
+  ref
 } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'
@@ -46,23 +46,24 @@ export default defineComponent({
       default: false
     }
   },
-  setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
-    function syncVLScroller (): void {
+    function syncVLScroller(): void {
       scrollerInstRef.value?.sync()
     }
-    function scrollContainer (): HTMLElement | null {
+    function scrollContainer(): HTMLElement | null {
       const { value } = vlInstRef
-      if (!value) return null
+      if (!value)
+        return null
       const { listElRef } = value
       return listElRef
     }
-    function scrollContent (): HTMLElement | null {
+    function scrollContent(): HTMLElement | null {
       const { value } = vlInstRef
-      if (!value) return null
+      if (!value)
+        return null
       const { itemsElRef } = value
       return itemsElRef
     }
@@ -76,7 +77,7 @@ export default defineComponent({
       scrollContent
     }
   },
-  render () {
+  render() {
     const { mergedTheme, mergedClsPrefix, virtualScroll, syncVLScroller } = this
     return (
       <>
@@ -126,7 +127,7 @@ export default defineComponent({
                     {{
                       default: () => {
                         const { source, disabled } = this
-                        return this.options.map((option) => (
+                        return this.options.map(option => (
                           <NTransferListItem
                             source={source}
                             key={option.value}

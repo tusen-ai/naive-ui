@@ -2,20 +2,14 @@
 # Debug
 </markdown>
 
-<template>
-  <n-menu
-    :options="menuOptions"
-    :default-expanded-keys="defaultExpandedKeys"
-    @update:expanded-keys="handleUpdateExpandedKeys"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, Component } from 'vue'
-import { NButton, NIcon, useMessage, MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { MenuOption } from 'naive-ui'
+import { NButton, NIcon, useMessage } from 'naive-ui'
 import { BookOutline as BookIcon } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -41,16 +35,24 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
 
     return {
       menuOptions,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      handleUpdateExpandedKeys (value: string[]) {
-        message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(value))
+      handleUpdateExpandedKeys(value: string[]) {
+        message.info(`[onUpdate:expandedKeys]: ${JSON.stringify(value)}`)
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    @update:expanded-keys="handleUpdateExpandedKeys"
+  />
+</template>

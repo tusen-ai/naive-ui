@@ -4,6 +4,18 @@
 You can specify a delay for displaying spin. If spinning ends during delay, spin won't appear.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-spin :show="show" :delay="1000">
@@ -16,15 +28,3 @@ You can specify a delay for displaying spin. If spinning ends during delay, spin
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

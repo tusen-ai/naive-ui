@@ -1,7 +1,7 @@
-import { type CSSProperties, h, type VNode } from 'vue'
-import { type DropPosition, type TreeOption } from './interface'
+import { type CSSProperties, type VNode, h } from 'vue'
+import type { DropPosition, TreeOption } from './interface'
 
-export function renderDropMark ({
+export function renderDropMark({
   position,
   offsetLevel,
   indent,
@@ -23,7 +23,8 @@ export function renderDropMark ({
     style.bottom = 0
     style.borderRadius = 'inherit'
     style.boxShadow = 'inset 0 0 0 2px var(--n-drop-mark-color)'
-  } else {
+  }
+  else {
     const cssPosition = position === 'before' ? 'top' : 'bottom'
     style[cssPosition] = 0
     // The left prop should be modified when tree's style is changed
@@ -33,20 +34,21 @@ export function renderDropMark ({
     style.backgroundColor = 'var(--n-drop-mark-color)'
     style.transformOrigin = cssPosition
     style.borderRadius = '1px'
-    style.transform =
-      position === 'before' ? 'translateY(-4px)' : 'translateY(4px)'
+    style.transform
+      = position === 'before' ? 'translateY(-4px)' : 'translateY(4px)'
   }
   return <div style={style} />
 }
 
-export function defaultAllowDrop ({
+export function defaultAllowDrop({
   dropPosition,
   node
 }: {
   dropPosition: DropPosition
   node: TreeOption
 }): boolean {
-  if (node.isLeaf === false) return true
+  if (node.isLeaf === false)
+    return true
   if (node.children) {
     return true
   }

@@ -1,11 +1,11 @@
-import sizeVariables from './_common'
 import { commonDark } from '../../_styles/common'
+import sizeVariables from './_common'
 import type { TimelineTheme } from './light'
 
 const timelineDark: TimelineTheme = {
   name: 'Timeline',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       textColor3,
       infoColorSuppl,

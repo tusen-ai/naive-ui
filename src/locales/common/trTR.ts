@@ -1,4 +1,5 @@
 import type { NLocale } from './enUS'
+
 const trTR: NLocale = {
   name: 'tr-TR',
   global: {
