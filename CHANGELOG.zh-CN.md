@@ -10,6 +10,7 @@
 - `n-form-item` 确保验证状态正确更新[#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
 - 修复 `n-select` 组件的 header 插槽里 input 无法输入，关闭 [#6030](https://github.com/tusen-ai/naive-ui/issues/6030)
 - 修复 `n-tree` 组件在禁用 `show-irrelevant-nodes` 时，节点的选中状态可能不正确，关闭 [#6115](https://github.com/tusen-ai/naive-ui/issues/6115)
+- 修复 `n-carousel` 组件开启自动轮播时，浏览器性能不足或内存占用过高时，setInterval 不能如期执行
 
 ### Features
 
