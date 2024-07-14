@@ -1,16 +1,35 @@
 import { type PropType, defineComponent, h, onMounted, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
-  NConfigProvider,
-  type NDateLocale,
-  NInput,
-  type NLocale,
+  ruRU,
+  zhCN,
+  zhTW,
+  enUS,
+  ukUA,
+  jaJP,
+  koKR,
+  idID,
+  deDE,
+  nbNO,
+  faIR,
+  frFR,
+  esAR,
+  itIT,
+  skSK,
+  csCZ,
+  enGB,
+  plPL,
+  ptBR,
+  thTH,
+  nlNL,
   arDZ,
   azAZ,
   csCZ,
+  uzUZ,
   dateArDZ,
   dateAzAZ,
   dateCsCZ,
+  dateUzUZ,
   dateDeDE,
   dateEnGB,
   dateEnUS,
@@ -177,6 +196,17 @@ describe('locale', () => {
         props: {
           dateLocale: dateUkUA,
           locale: ukUA,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+    except(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateUzUZ,
+          locale: uzUZ,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }
