@@ -58,8 +58,12 @@ import {
   zhCN,
   zhTW
 } from '../index'
-import { NDatePicker } from '../date-picker'
-import { createLocale } from '.'
+import { NDatePicker } from '../date-picker/index'
+import { NInput } from '../input/index'
+import { NConfigProvider } from '../config-provider/index'
+import type { NDateLocale } from './date/enUS'
+import type { NLocale } from './common/enUS'
+import { createLocale } from './utils/index'
 
 const Wrapper = defineComponent({
   props: {
@@ -181,7 +185,7 @@ describe('locale', () => {
         }
       }).html()
     ).toMatchSnapshot()
-    except(
+    expect(
       mount(Wrapper, {
         props: {
           dateLocale: dateUzUZ,
