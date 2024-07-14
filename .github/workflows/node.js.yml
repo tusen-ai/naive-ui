@@ -58,6 +58,8 @@ jobs:
         uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: Asia/Shanghai
+          timezoneMacos: Asia/Shanghai
+          timezoneWindows: Asia/Shanghai
 
       - run: pnpm install
 
