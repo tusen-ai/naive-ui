@@ -4,7 +4,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { codeLight } from '../../code/styles'
 import { createTheme } from '../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const { textColor2, modalColor, borderColor, fontSize, primaryColor } = vars
   return {
     loaderFontSize: fontSize,

@@ -1,12 +1,12 @@
-import { h, defineComponent, type PropType, type CSSProperties } from 'vue'
+import { type CSSProperties, type PropType, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
-  SuccessIcon,
   ErrorIcon,
-  WarningIcon,
-  InfoIcon
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon
 } from '../../_internal/icons'
-import { type Status } from './interface'
+import type { Status } from './interface'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -60,8 +60,8 @@ export default defineComponent({
       default: 0
     }
   },
-  setup (props, { slots }) {
-    function getPathStyles (
+  setup(props, { slots }) {
+    function getPathStyles(
       percent: number,
       offsetDegree: number,
       strokeColor?: string
@@ -105,10 +105,10 @@ export default defineComponent({
         gapOffsetDegree,
         clsPrefix
       } = props
-      const { pathString: railPathString, pathStyle: railPathStyle } =
-        getPathStyles(100, 0, railColor)
-      const { pathString: fillPathString, pathStyle: fillPathStyle } =
-        getPathStyles(percentage, offsetDegree, fillColor)
+      const { pathString: railPathString, pathStyle: railPathStyle }
+        = getPathStyles(100, 0, railColor)
+      const { pathString: fillPathString, pathStyle: fillPathStyle }
+        = getPathStyles(percentage, offsetDegree, fillColor)
       const viewBoxSize = 100 + strokeWidth
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
@@ -136,8 +136,8 @@ export default defineComponent({
                   <path
                     class={[
                       `${clsPrefix}-progress-graph-circle-fill`,
-                      percentage === 0 &&
-                        `${clsPrefix}-progress-graph-circle-fill--empty`
+                      percentage === 0
+                      && `${clsPrefix}-progress-graph-circle-fill--empty`
                     ]}
                     d={fillPathString}
                     stroke-width={strokeWidth}

@@ -4,6 +4,13 @@
 在调用`alert()`之类的阻塞性方法的时候，仍然可看到旋转动画，但不会有圆圈的收缩和伸展动画。
 </markdown>
 
+<script lang="ts" setup>
+function handleClick() {
+  // eslint-disable-next-line no-alert
+  window.alert('已举办!')
+}
+</script>
+
 <template>
   <n-space>
     <n-button @click="handleClick">
@@ -14,9 +21,3 @@
     <n-spin size="large" />
   </n-space>
 </template>
-
-<script lang="ts" setup>
-const handleClick = () => {
-  window.alert('已举办!')
-}
-</script>

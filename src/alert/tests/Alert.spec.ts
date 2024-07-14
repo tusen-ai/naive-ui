@@ -1,8 +1,8 @@
 import { h } from 'vue'
-import { NAlert } from '../index'
 import { mount } from '@vue/test-utils'
-import { NIcon } from '../../icon'
 import { IosAirplane } from '@vicons/ionicons4'
+import { NAlert } from '../index'
+import { NIcon } from '../../icon'
 
 describe('n-alert', () => {
   it('should work with import on demand', () => {
@@ -115,7 +115,7 @@ describe('n-alert', () => {
     wrapper.unmount()
   })
 
-  it("shouldn't closed when on-close prop returns false", async () => {
+  it('shouldn\'t closed when on-close prop returns false', async () => {
     const wrapper = mount(NAlert, {
       props: { closable: true, onClose: () => false }
     })

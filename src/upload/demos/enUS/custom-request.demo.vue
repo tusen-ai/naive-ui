@@ -4,21 +4,6 @@
 User `custom-request` to customize upload request.
 </markdown>
 
-<template>
-  <n-upload
-    action="__HTTP__://naive-upload.free.beeceptor.com/"
-    :headers="{
-      'naive-info': 'hello!'
-    }"
-    :data="{
-      'naive-data': 'cool! naive!'
-    }"
-    :custom-request="customRequest"
-  >
-    <n-button>Upload</n-button>
-  </n-upload>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { lyla } from '@lylajs/web'
@@ -26,7 +11,7 @@ import { useMessage } from 'naive-ui'
 import type { UploadCustomRequestOptions } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const customRequest = ({
       file,
@@ -72,3 +57,18 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-upload
+    action="__HTTP__://naive-upload.free.beeceptor.com/"
+    :headers="{
+      'naive-info': 'hello!',
+    }"
+    :data="{
+      'naive-data': 'cool! naive!',
+    }"
+    :custom-request="customRequest"
+  >
+    <n-button>Upload</n-button>
+  </n-upload>
+</template>

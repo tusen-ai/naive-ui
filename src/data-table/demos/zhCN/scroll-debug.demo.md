@@ -75,27 +75,27 @@ Fixed Layout No Overflow, Max Height
 ```js
 import { defineComponent, h } from 'vue'
 
-const label0 =
-  'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+const label0
+  = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
-const label =
-  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+const label
+  = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       columns: [
         {
           key: '1',
           title: '1',
-          render (rowData) {
+          render(rowData) {
             return h('div', { style: 'white-space: nowrap;' }, rowData['1'])
           }
         },
         {
           key: '2',
           title: '2',
-          render (rowData) {
+          render(rowData) {
             return h('div', { style: 'white-space: nowrap;' }, rowData['2'])
           }
         }

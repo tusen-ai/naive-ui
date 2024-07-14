@@ -1,9 +1,10 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NSpin } from '../index'
 import { Reload } from '@vicons/ionicons5'
-import { NIcon } from '../../icon'
 import { sleep } from 'seemly'
+import { NSpin } from '../index'
+import { NIcon } from '../../icon'
+
 describe('n-spin', () => {
   it('should work with import on demand', () => {
     mount(NSpin)

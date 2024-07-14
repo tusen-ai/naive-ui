@@ -93,10 +93,10 @@ export default defineConfig({
 ```js
 import { createApp } from 'vue'
 import {
-  // create naive ui
-  create,
   // component
-  NButton
+  NButton,
+  // create naive ui
+  create
 } from 'naive-ui'
 
 const naive = create({

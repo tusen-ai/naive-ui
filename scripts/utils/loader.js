@@ -1,10 +1,10 @@
-const path = require('path')
+const path = require('node:path')
 const fs = require('fs-extra')
 const { marked } = require('marked')
 
 const fileRegex = /\.demo\.md$/
 
-function getPartsOfMdDemo (tokens) {
+function getPartsOfMdDemo(tokens) {
   let template = null
   let script = null
   let style = null
@@ -13,22 +13,26 @@ function getPartsOfMdDemo (tokens) {
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
       title = token.text
-    } else if (
-      token.type === 'code' &&
-      (token.lang === 'template' || token.lang === 'html')
+    }
+    else if (
+      token.type === 'code'
+      && (token.lang === 'template' || token.lang === 'html')
     ) {
       template = token.text
-    } else if (
-      token.type === 'code' &&
-      (token.lang === 'script' || token.lang === 'js' || token.lang === 'ts')
+    }
+    else if (
+      token.type === 'code'
+      && (token.lang === 'script' || token.lang === 'js' || token.lang === 'ts')
     ) {
       script = token.text
-    } else if (
-      token.type === 'code' &&
-      (token.lang === 'style' || token.lang === 'css')
+    }
+    else if (
+      token.type === 'code'
+      && (token.lang === 'style' || token.lang === 'css')
     ) {
       style = token.text
-    } else if (token.type === 'paragraph') {
+    }
+    else if (token.type === 'paragraph') {
       content = token.text
     }
   }
@@ -41,10 +45,10 @@ function getPartsOfMdDemo (tokens) {
   }
 }
 
-function createBlockTemplate (tag, content, attrs) {
+function createBlockTemplate(tag, content, attrs) {
   const attrsStr = attrs
     ? Object.keys(attrs).reduce((attrsStr, key) => {
-      return attrsStr + ` ${key}="${attrs[key]}"`
+      return `${attrsStr} ${key}="${attrs[key]}"`
     }, '')
     : ''
   return `<${tag}${attrsStr}>
@@ -52,21 +56,21 @@ ${content}
 </${tag}>`
 }
 
-async function loadFile (filepath) {
+async function loadFile(filepath) {
   if (fs.existsSync(filepath)) {
     return await fs.readFile(filepath, 'utf-8')
   }
   return undefined
 }
 
-async function loadAllMdFile (filePathArr) {
+async function loadAllMdFile(filePathArr) {
   const filesArr = []
   for (let i = 0; i < filePathArr.length; i++) {
     const filePath = filePathArr[i]
     if (fs.existsSync(filePath)) {
       const files = await fs.readdir(filePath)
       const filesObjArr = files
-        .filter((file) => fileRegex.test(file))
+        .filter(file => fileRegex.test(file))
         .map((file) => {
           const index = file.lastIndexOf('.')
           return {
@@ -82,7 +86,7 @@ async function loadAllMdFile (filePathArr) {
   return filesArr
 }
 
-async function updateIndexEntryDemo (file) {
+async function updateIndexEntryDemo(file) {
   let indexFileContent = await loadFile(
     path.resolve(file.dir, './index.demo-entry.md')
   )
@@ -96,7 +100,7 @@ async function updateIndexEntryDemo (file) {
 }
 
 const LINE_SPACE = '\n\n'
-async function transformMdToVueAndUpdateEntryFile (files) {
+async function transformMdToVueAndUpdateEntryFile(files) {
   for (const file of files) {
     const fileString = await loadFile(file.path)
     const tokens = marked.lexer(fileString)
@@ -138,8 +142,8 @@ async function transformMdToVueAndUpdateEntryFile (files) {
 
 const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
 
-async function convertFilesByComponentName (componentName) {
-  const folders = ['zhCN', 'enUS'].map((item) =>
+async function convertFilesByComponentName(componentName) {
+  const folders = ['zhCN', 'enUS'].map(item =>
     path.resolve(COMPONENT_ROOT, `${componentName}/demos/${item}`)
   )
   if (folders.length) {

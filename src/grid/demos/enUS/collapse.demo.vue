@@ -4,6 +4,21 @@
 Collapsing works in responsive layout.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      gridCollapsed: ref(false),
+      gridCollapsedRows: ref(1),
+      gridItemCount: ref(4),
+      showSuffix: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-grid :cols="2">
     <n-form-item-gi label="Item Count">
@@ -36,21 +51,6 @@ Collapsing works in responsive layout.
     </n-gi>
   </n-grid>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      gridCollapsed: ref(false),
-      gridCollapsedRows: ref(1),
-      gridItemCount: ref(4),
-      showSuffix: ref(true)
-    }
-  }
-})
-</script>
 
 <style>
 .suffix {

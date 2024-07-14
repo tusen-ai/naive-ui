@@ -72,7 +72,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return ~row.address.indexOf(value)
     }
   }
@@ -118,25 +118,25 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const dataTableInstRef = ref(null)
     return {
       data,
       columns,
       dataTableInst: dataTableInstRef,
       pagination: ref({ pageSize: 5 }),
-      filterAddress () {
+      filterAddress() {
         dataTableInstRef.value.filter({
           address: ['London']
         })
       },
-      sortName () {
+      sortName() {
         dataTableInstRef.value.sort('name', 'ascend')
       },
-      clearFilters () {
+      clearFilters() {
         dataTableInstRef.value.filter(null)
       },
-      clearSorter () {
+      clearSorter() {
         dataTableInstRef.value.sort(null)
       }
     }

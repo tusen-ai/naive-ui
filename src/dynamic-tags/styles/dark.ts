@@ -14,7 +14,7 @@ const dynamicTagsDark: DynamicTagsTheme = {
     Tag: tagDark,
     Space: spaceDark
   },
-  self () {
+  self() {
     return {
       inputWidth: '64px'
     }

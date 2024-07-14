@@ -1,4 +1,4 @@
-import { type App, type Component, createApp, h, unref, type VNode } from 'vue'
+import { type App, type Component, type VNode, createApp, h, unref } from 'vue'
 import {
   type ConfigProviderProps,
   NConfigProvider
@@ -43,11 +43,15 @@ const injectionFactoryMap: Record<DiscreteApiType, any> = {
   modal: useModal
 }
 
-export function createDiscreteApp ({
+export function createDiscreteApp({
   providersAndProps,
   configProviderProps
 }: DiscreteAppOptions): DiscreteApp {
-  const App = (): VNode => {
+  let app: App<Element> | null = createApp(App)
+  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
+    app
+  }
+  function App(): VNode {
     return h(NConfigProvider, unref(configProviderProps), {
       default: () =>
         providersAndProps.map(({ type, Provider, props }) => {
@@ -60,11 +64,6 @@ export function createDiscreteApp ({
           })
         })
     })
-  }
-
-  let app: App<Element> | null = createApp(App)
-  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
-    app
   }
 
   let hostEl: Element | null

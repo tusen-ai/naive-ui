@@ -14,7 +14,7 @@ const treeDark: TreeTheme = {
     Scrollbar: scrollbarDark,
     Empty: emptyDark
   },
-  self (vars) {
+  self(vars) {
     const { primaryColor } = vars
     const commonSelf = self(vars)
     commonSelf.nodeColorActive = changeColor(primaryColor, { alpha: 0.15 })

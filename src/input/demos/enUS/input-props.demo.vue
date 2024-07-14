@@ -4,6 +4,18 @@
 Input element has some special attributes, such as `auto-complete` or `type`. You can use `input-props` to set it.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input
@@ -18,15 +30,3 @@ Input element has some special attributes, such as `auto-complete` or `type`. Yo
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null)
-    }
-  }
-})
-</script>

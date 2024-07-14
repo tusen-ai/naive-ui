@@ -2,19 +2,11 @@
 # 基础
 </markdown>
 
-<template>
-  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
-    <div v-for="i in count" :key="i" class="item">
-      {{ i }}
-    </div>
-  </n-infinite-scroll>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const count = ref(6)
     const handleLoad = () => {
       count.value += 1
@@ -26,6 +18,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
+    <div v-for="i in count" :key="i" class="item">
+      {{ i }}
+    </div>
+  </n-infinite-scroll>
+</template>
 
 <style>
 .item {

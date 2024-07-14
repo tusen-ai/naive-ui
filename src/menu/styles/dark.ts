@@ -12,7 +12,7 @@ const menuDark: MenuTheme = {
     Tooltip: tooltipDark,
     Dropdown: dropdownDark
   },
-  self (vars) {
+  self(vars) {
     const { primaryColor, primaryColorSuppl } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorActive = changeColor(primaryColor, { alpha: 0.15 })

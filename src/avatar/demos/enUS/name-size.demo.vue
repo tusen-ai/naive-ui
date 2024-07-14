@@ -4,6 +4,18 @@
 Text is resized to fit the avatar.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref('Oasis')
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical item-style="line-height: 0;">
     <n-space>
@@ -15,15 +27,3 @@ Text is resized to fit the avatar.
     <n-input v-model:value="value" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref('Oasis')
-    }
-  }
-})
-</script>

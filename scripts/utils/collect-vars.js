@@ -6,11 +6,12 @@ const commentPattern = /^( *)(\*|(\/\/)|(\/\*))/g
  * Collect css vars
  * @param {string} code
  */
-function collectVars (code) {
+function collectVars(code) {
   const vars = new Set()
   const lines = code.split('\n')
   lines.forEach((line) => {
-    if (line.match(commentPattern)) return
+    if (line.match(commentPattern))
+      return
     const result = line.match(pattern)
     if (result) {
       result.forEach((varExpr) => {
@@ -24,10 +25,10 @@ function collectVars (code) {
 /**
  * @param {string[]} vars
  */
-function genDts (vars) {
+function genDts(vars) {
   console.log(vars)
   return `interface CssVars {
-${vars.map((v) => "  '" + v + "': string").join('\n')}
+${vars.map(v => `  '${v}': string`).join('\n')}
 }\n`
 }
 

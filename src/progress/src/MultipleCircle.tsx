@@ -1,12 +1,12 @@
 import {
-  h,
-  defineComponent,
-  computed,
+  type CSSProperties,
   type PropType,
-  type CSSProperties
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 
-function circlePath (r: number, sw: number, vw: number = 100): string {
+function circlePath(r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
     2 * r
   } a ${r} ${r} 0 1 1 0 -${2 * r}`
@@ -52,16 +52,16 @@ export default defineComponent({
       default: () => []
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const strokeDasharrayRef = computed(() => {
       const strokeDasharrays = props.percentage.map(
         (v, i) =>
           `${
-            ((Math.PI * v) / 100) *
-            (props.viewBoxWidth / 2 -
-              (props.strokeWidth / 2) * (1 + 2 * i) -
-              props.circleGap * i) *
-            2
+            ((Math.PI * v) / 100)
+            * (props.viewBoxWidth / 2
+            - (props.strokeWidth / 2) * (1 + 2 * i)
+            - props.circleGap * i)
+            * 2
           }, ${props.viewBoxWidth * 8}`
       )
       return strokeDasharrays
@@ -89,9 +89,9 @@ export default defineComponent({
                       <path
                         class={`${clsPrefix}-progress-graph-circle-rail`}
                         d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
+                          viewBoxWidth / 2
+                          - (strokeWidth / 2) * (1 + 2 * index)
+                          - circleGap * index,
                           strokeWidth,
                           viewBoxWidth
                         )}
@@ -111,13 +111,13 @@ export default defineComponent({
                       <path
                         class={[
                           `${clsPrefix}-progress-graph-circle-fill`,
-                          p === 0 &&
-                            `${clsPrefix}-progress-graph-circle-fill--empty`
+                          p === 0
+                          && `${clsPrefix}-progress-graph-circle-fill--empty`
                         ]}
                         d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
+                          viewBoxWidth / 2
+                          - (strokeWidth / 2) * (1 + 2 * index)
+                          - circleGap * index,
                           strokeWidth,
                           viewBoxWidth
                         )}

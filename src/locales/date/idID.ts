@@ -1,5 +1,5 @@
-import { type NDateLocale } from './enUS'
 import idID from 'date-fns/esm/locale/id'
+import type { NDateLocale } from './enUS'
 
 const dateIdID: NDateLocale = {
   name: 'id-ID',

@@ -4,24 +4,13 @@
 Thumbnails can be created using your own custom method via the `create-thumbnail-url` property.
 </markdown>
 
-<template>
-  <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="fileList"
-    list-type="image"
-    :create-thumbnail-url="createThumbnailUrl"
-  >
-    <n-button>Upload</n-button>
-  </n-upload>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 import type { UploadFileInfo } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const fileListRef = ref<UploadFileInfo[]>([
       {
@@ -50,8 +39,9 @@ export default defineComponent({
     ])
     return {
       fileList: fileListRef,
-      createThumbnailUrl (file: File | null): Promise<string> | undefined {
-        if (!file) return undefined
+      createThumbnailUrl(file: File | null): Promise<string> | undefined {
+        if (!file)
+          return undefined
         message.info(() => [
           '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
           h('br'),
@@ -71,3 +61,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="fileList"
+    list-type="image"
+    :create-thumbnail-url="createThumbnailUrl"
+  >
+    <n-button>Upload</n-button>
+  </n-upload>
+</template>

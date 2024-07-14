@@ -45,6 +45,7 @@ describe('n-time', () => {
       props: { time: date, type: 'date', timeZone: 'Asia/Shanghai' }
     })
     expect(wrapper.find('time').text()).toContain('1970-01-01')
+    // eslint-disable-next-line no-console
     console.log(
       'github ci time zone',
       Intl.DateTimeFormat().resolvedOptions().timeZone

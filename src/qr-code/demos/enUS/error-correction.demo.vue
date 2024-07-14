@@ -4,6 +4,26 @@
   Use `error-correction-level` to set the error correction level.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const errorCorrectionLevel = ref('M')
+    const errorCorrectionOptions = [
+      { value: 'L', label: 'L' },
+      { value: 'M', label: 'M' },
+      { value: 'Q', label: 'Q' },
+      { value: 'H', label: 'H' }
+    ]
+    return {
+      errorCorrectionLevel,
+      errorCorrectionOptions
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-qr-code
@@ -20,23 +40,3 @@
     </n-radio-group>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const errorCorrectionLevel = ref('M')
-    const errorCorrectionOptions = [
-      { value: 'L', label: 'L' },
-      { value: 'M', label: 'M' },
-      { value: 'Q', label: 'Q' },
-      { value: 'H', label: 'H' }
-    ]
-    return {
-      errorCorrectionLevel,
-      errorCorrectionOptions
-    }
-  }
-})
-</script>

@@ -8,19 +8,19 @@
     language-type="<!--LANGUAGE_TYPE_SLOT-->"
   >
     <template #title>
-      <!--TITLE_SLOT-->
+      <!-- TITLE_SLOT -->
     </template>
     <template #content>
-      <!--CONTENT_SLOT-->
+      <!-- CONTENT_SLOT -->
     </template>
     <template #demo>
       <div class="demo-card__view">
-        <!--DEMO_SLOT-->
+        <!-- DEMO_SLOT -->
       </div>
     </template>
   </component-demo>
 </template>
 
-<!--SCRIPT_SLOT-->
+<!-- SCRIPT_SLOT -->
 
-<!--STYLE_SLOT-->
+<!-- STYLE_SLOT -->

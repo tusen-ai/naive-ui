@@ -4,30 +4,16 @@
 Inject `dialog` to create a dialog.
 </markdown>
 
-<template>
-  <n-space>
-    <n-button @click="handleConfirm">
-      Confirm
-    </n-button>
-    <n-button @click="handleSuccess">
-      Success
-    </n-button>
-    <n-button @click="handleError">
-      Error
-    </n-button>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useMessage, useDialog } from 'naive-ui'
+import { useDialog, useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const dialog = useDialog()
     return {
-      handleConfirm () {
+      handleConfirm() {
         dialog.warning({
           title: 'Confirm',
           content: 'Are you sure?',
@@ -41,7 +27,7 @@ export default defineComponent({
           }
         })
       },
-      handleSuccess () {
+      handleSuccess() {
         dialog.success({
           title: 'Success',
           content: 'Cool',
@@ -51,7 +37,7 @@ export default defineComponent({
           }
         })
       },
-      handleError () {
+      handleError() {
         dialog.error({
           title: 'Error',
           content: 'A mistake.',
@@ -65,3 +51,17 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space>
+    <n-button @click="handleConfirm">
+      Confirm
+    </n-button>
+    <n-button @click="handleSuccess">
+      Success
+    </n-button>
+    <n-button @click="handleError">
+      Error
+    </n-button>
+  </n-space>
+</template>

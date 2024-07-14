@@ -7,7 +7,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 import { emptyLight } from '../../empty/styles'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     boxShadow2,

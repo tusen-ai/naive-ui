@@ -4,6 +4,18 @@
 在前缀后缀添加内容
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(0)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number v-model:value="value">
@@ -23,15 +35,3 @@
     </n-input-number>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(0)
-    }
-  }
-})
-</script>

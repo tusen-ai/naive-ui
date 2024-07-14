@@ -31,7 +31,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--success-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -48,7 +48,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--error-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -65,7 +65,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--warning-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -82,7 +82,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--info-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -99,7 +99,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--warning-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -116,7 +116,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--error-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -131,7 +131,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--success-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
             d="M216.5,388.57h69a11.5,11.5,0,0,1,11.5,11.5h0a11.5,11.5,0,0,1-11.5,11.5h-69a11.5,11.5,0,0,1-11.5-11.5h0A11.5,11.5,0,0,1,216.5,388.57Z"
             transform="translate(8.97 8.95)"
@@ -153,7 +153,7 @@
           :style="{
             transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
             fill: 'var(--info-color)',
-            fillRule: 'evenodd'
+            fillRule: 'evenodd',
           }"
         />
       </g>

@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, ref, onMounted } from 'vue'
+import { type PropType, defineComponent, h, onMounted, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   ruRU,
@@ -6,7 +6,6 @@ import {
   zhTW,
   enUS,
   ukUA,
-  uzUZ,
   jaJP,
   koKR,
   idID,
@@ -24,46 +23,64 @@ import {
   thTH,
   nlNL,
   arDZ,
-  trTR,
-  svSE,
-  etEE,
   azAZ,
-  eo,
-  dateEnUS,
-  dateZhCN,
-  dateZhTW,
-  dateRuRU,
-  dateUkUA,
+  csCZ,
+  uzUZ,
+  dateArDZ,
+  dateAzAZ,
+  dateCsCZ,
   dateUzUZ,
-  dateJaJP,
-  dateKoKR,
-  dateIdID,
   dateDeDE,
-  dateNbNO,
+  dateEnGB,
+  dateEnUS,
+  dateEo,
+  dateEsAR,
+  dateEtEE,
   dateFaIR,
   dateFrFR,
-  dateEsAR,
+  dateIdID,
   dateItIT,
-  dateSkSK,
-  dateCsCZ,
-  dateEnGB,
+  dateJaJP,
+  dateKoKR,
+  dateNbNO,
+  dateNlNL,
   datePlPL,
   datePtBR,
-  dateThTH,
-  dateNlNL,
-  dateArDZ,
-  dateTrTR,
+  dateRuRU,
+  dateSkSK,
   dateSvSE,
-  dateEtEE,
-  dateAzAZ,
-  dateEo,
-  NConfigProvider,
-  type NDateLocale,
-  type NLocale,
-  NInput
+  dateThTH,
+  dateTrTR,
+  dateUkUA,
+  dateZhCN,
+  dateZhTW,
+  deDE,
+  enGB,
+  enUS,
+  eo,
+  esAR,
+  etEE,
+  faIR,
+  frFR,
+  idID,
+  itIT,
+  jaJP,
+  koKR,
+  nbNO,
+  nlNL,
+  plPL,
+  ptBR,
+  ruRU,
+  skSK,
+  svSE,
+  thTH,
+  trTR,
+  ukUA,
+  zhCN,
+  zhTW
 } from '../index'
-import { createLocale } from '.'
 import { NDatePicker } from '../date-picker'
+import { createLocale } from '.'
 
 const Wrapper = defineComponent({
   props: {
@@ -71,7 +88,7 @@ const Wrapper = defineComponent({
     locale: Object as PropType<NLocale>,
     onMounted: Function as PropType<(date: string) => void>
   },
-  setup (props) {
+  setup() {
     const datePickerWrapperElRef = ref<HTMLElement | null>(null)
     onMounted(() => {
       // const { value: datePickerWrapperEl } = datePickerWrapperElRef
@@ -92,7 +109,7 @@ const Wrapper = defineComponent({
       datePickerWrapperElRef
     }
   },
-  render () {
+  render() {
     return (
       <NConfigProvider {...this.$props}>
         {{

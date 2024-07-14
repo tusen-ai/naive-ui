@@ -1,12 +1,12 @@
 import {
-  h,
-  defineComponent,
-  inject,
+  type HTMLAttributes,
   type PropType,
-  type VNodeChild,
   type VNode,
-  watchEffect,
-  type HTMLAttributes
+  type VNodeChild,
+  defineComponent,
+  h,
+  inject,
+  watchEffect
 } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -14,7 +14,7 @@ import { tabsInjectionKey } from './interface'
 
 export const tabPaneProps = {
   tab: [String, Number, Object, Function] as PropType<
-  string | number | VNode | (() => VNodeChild)
+    string | number | VNode | (() => VNodeChild)
   >,
   name: {
     type: [String, Number] as PropType<string | number>,
@@ -32,7 +32,7 @@ export const tabPaneProps = {
   tabProps: Object as PropType<HTMLAttributes>,
   /** @deprecated */
   label: [String, Number, Object, Function] as PropType<
-  string | number | VNode | (() => VNodeChild)
+    string | number | VNode | (() => VNodeChild)
   >
 } as const
 
@@ -43,7 +43,7 @@ export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.label !== undefined) {
@@ -64,7 +64,7 @@ export default defineComponent({
       mergedClsPrefix: NTab.mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     return (
       <div
         class={[`${this.mergedClsPrefix}-tab-pane`, this.class]}

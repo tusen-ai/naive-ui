@@ -22,14 +22,14 @@ export type RenderGoto = () => VNodeChild
 
 export type PaginationRenderLabel = (
   info:
-  | {
-    type: 'fast-backward' | 'fast-forward'
-    node: VNodeChild
-    active: boolean
-  }
-  | {
-    type: 'page'
-    node: number
-    active: boolean
-  }
+    | {
+      type: 'fast-backward' | 'fast-forward'
+      node: VNodeChild
+      active: boolean
+    }
+    | {
+      type: 'page'
+      node: number
+      active: boolean
+    }
 ) => VNodeChild

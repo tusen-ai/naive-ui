@@ -2,6 +2,18 @@
 # 尺寸
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      page: ref(2)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-pagination
@@ -27,15 +39,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      page: ref(2)
-    }
-  }
-})
-</script>

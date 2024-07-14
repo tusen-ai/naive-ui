@@ -1,18 +1,19 @@
 /**
  * @jest-environment node
  */
-import { h, createSSRApp } from 'vue'
+import { createSSRApp, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
 import { NSkeleton } from '../..'
 
-describe('SSR', () => {
+describe('sSR', () => {
   it('works', async () => {
     const app = createSSRApp(() => <NSkeleton />)
     setup(app)
     try {
       await renderToString(app)
-    } catch (e) {
+    }
+    catch (e) {
       expect(e).not.toBeTruthy()
     }
   })

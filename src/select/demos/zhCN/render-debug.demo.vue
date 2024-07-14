@@ -1,18 +1,15 @@
 <markdown>
 # Render Debug
-
 </markdown>
 
-<template>
-  <n-select v-model:value="value" filterable :options="options" />
-</template>
-
 <script lang="ts">
-import { h, defineComponent, VNode } from 'vue'
-import { NTooltip, SelectGroupOption, SelectOption } from 'naive-ui'
+import type { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { SelectGroupOption, SelectOption } from 'naive-ui'
+import { NTooltip } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const options: Array<SelectOption | SelectGroupOption> = [
       {
         type: 'group',
@@ -27,7 +24,7 @@ export default defineComponent({
         children: [
           {
             label: () =>
-              "Everybody's Got Something to Hide Except Me and My Monkey",
+              'Everybody\'s Got Something to Hide Except Me and My Monkey',
             value: 'song0',
             disabled: true
           },
@@ -46,7 +43,7 @@ export default defineComponent({
             value: 'song2'
           },
           {
-            label: "You Won't See",
+            label: 'You Won\'t See',
             value: 'song3',
             disabled: true
           },
@@ -76,7 +73,7 @@ export default defineComponent({
             value: 'song9'
           },
           {
-            label: "I'm looking through you",
+            label: 'I\'m looking through you',
             value: 'song10'
           },
           {
@@ -97,3 +94,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select v-model:value="value" filterable :options="options" />
+</template>

@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
-  inject,
-  type VNodeChild,
   Fragment,
   type VNode,
+  type VNodeChild,
+  defineComponent,
+  h,
+  inject,
   ref
 } from 'vue'
 import { happensIn, pxfy } from 'seemly'
@@ -15,24 +15,24 @@ import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import ResizeButton from '../HeaderButton/ResizeButton'
 import {
-  isColumnSortable,
-  isColumnFilterable,
+  clampValueFollowCSSRules,
   createNextSorter,
   getColKey,
-  isColumnSorting,
+  isColumnFilterable,
   isColumnResizable,
-  clampValueFollowCSSRules
+  isColumnSortable,
+  isColumnSorting
 } from '../utils'
 import {
-  type TableExpandColumn,
-  type TableColumnGroup,
+  type ColumnKey,
   type TableBaseColumn,
-  dataTableInjectionKey,
-  type ColumnKey
+  type TableColumnGroup,
+  type TableExpandColumn,
+  dataTableInjectionKey
 } from '../interface'
 import SelectionMenu from './SelectionMenu'
 
-function renderTitle (
+function renderTitle(
   column: TableExpandColumn | TableBaseColumn | TableColumnGroup
 ): VNodeChild {
   return typeof column.title === 'function'
@@ -48,7 +48,7 @@ export default defineComponent({
       default: true
     }
   },
-  setup () {
+  setup() {
     const {
       mergedClsPrefixRef,
       scrollXRef,
@@ -71,43 +71,44 @@ export default defineComponent({
       deriveNextSorter,
       doUncheckAll,
       doCheckAll
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const cellElsRef = ref<Record<ColumnKey, HTMLTableCellElement>>({})
-    function getCellActualWidth (key: ColumnKey): number | undefined {
+    function getCellActualWidth(key: ColumnKey): number | undefined {
       const element = cellElsRef.value[key]
       return element?.getBoundingClientRect().width
     }
-    function handleCheckboxUpdateChecked (): void {
+    function handleCheckboxUpdateChecked(): void {
       if (allRowsCheckedRef.value) {
         doUncheckAll()
-      } else {
+      }
+      else {
         doCheckAll()
       }
     }
-    function handleColHeaderClick (
+    function handleColHeaderClick(
       e: MouseEvent,
       column: TableBaseColumn
     ): void {
       if (
-        happensIn(e, 'dataTableFilter') ||
-        happensIn(e, 'dataTableResizable')
+        happensIn(e, 'dataTableFilter')
+        || happensIn(e, 'dataTableResizable')
       ) {
         return
       }
-      if (!isColumnSortable(column)) return
-      const activeSorter =
-        mergedSortStateRef.value.find(
-          (state) => state.columnKey === column.key
+      if (!isColumnSortable(column))
+        return
+      const activeSorter
+        = mergedSortStateRef.value.find(
+          state => state.columnKey === column.key
         ) || null
       const nextSorter = createNextSorter(column, activeSorter)
       deriveNextSorter(nextSorter)
     }
     const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
-    function handleColumnResizeStart (column: TableBaseColumn): void {
+    function handleColumnResizeStart(column: TableBaseColumn): void {
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
     }
-    function handleColumnResize (
+    function handleColumnResize(
       column: TableBaseColumn,
       displacementX: number
     ): void {
@@ -153,7 +154,7 @@ export default defineComponent({
       handleColumnResize
     }
   },
-  render () {
+  render() {
     const {
       cellElsRef,
       mergedClsPrefix,
@@ -188,7 +189,8 @@ export default defineComponent({
               {row.map(({ column, colSpan, rowSpan, isLast }) => {
                 const key = getColKey(column)
                 const { ellipsis } = column
-                if (!hasEllipsis && ellipsis) hasEllipsis = true
+                if (!hasEllipsis && ellipsis)
+                  hasEllipsis = true
                 const createColumnVNode = (): VNode | null => {
                   if (column.type === 'selection') {
                     return column.multiple !== false ? (
@@ -213,29 +215,28 @@ export default defineComponent({
                         class={`${mergedClsPrefix}-data-table-th__title-wrapper`}
                       >
                         <div class={`${mergedClsPrefix}-data-table-th__title`}>
-                          {ellipsis === true ||
-                          (ellipsis && !ellipsis.tooltip) ? (
-                            <div
-                              class={`${mergedClsPrefix}-data-table-th__ellipsis`}
-                            >
-                              {renderTitle(column)}
-                            </div>
-                              ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                            : ellipsis && typeof ellipsis === 'object' ? (
-                            <NEllipsis
-                              {...ellipsis}
-                              theme={mergedTheme.peers.Ellipsis}
-                              themeOverrides={
-                                mergedTheme.peerOverrides.Ellipsis
-                              }
-                            >
-                              {{
-                                default: () => renderTitle(column)
-                              }}
-                            </NEllipsis>
-                            ) : (
-                              renderTitle(column)
-                            )}
+                          {ellipsis === true
+                          || (ellipsis && !ellipsis.tooltip) ? (
+                                <div
+                                  class={`${mergedClsPrefix}-data-table-th__ellipsis`}
+                                >
+                                  {renderTitle(column)}
+                                </div>
+                              ) : ellipsis && typeof ellipsis === 'object' ? (
+                                <NEllipsis
+                                  {...ellipsis}
+                                  theme={mergedTheme.peers.Ellipsis}
+                                  themeOverrides={
+                                    mergedTheme.peerOverrides.Ellipsis
+                                  }
+                                >
+                                  {{
+                                    default: () => renderTitle(column)
+                                  }}
+                                </NEllipsis>
+                              ) : (
+                                renderTitle(column)
+                              )}
                         </div>
                         {isColumnSortable(column) ? (
                           <SortButton column={column as TableBaseColumn} />
@@ -267,7 +268,7 @@ export default defineComponent({
                 const rightFixed = key in fixedColumnRightMap
                 return (
                   <th
-                    ref={(el) => (cellElsRef[key] = el as HTMLTableCellElement)}
+                    ref={el => (cellElsRef[key] = el as HTMLTableCellElement)}
                     key={key}
                     style={{
                       textAlign: column.titleAlign || column.align,
@@ -279,8 +280,8 @@ export default defineComponent({
                     data-col-key={key}
                     class={[
                       `${mergedClsPrefix}-data-table-th`,
-                      (leftFixed || rightFixed) &&
-                        `${mergedClsPrefix}-data-table-th--fixed-${
+                      (leftFixed || rightFixed)
+                      && `${mergedClsPrefix}-data-table-th--fixed-${
                           leftFixed ? 'left' : 'right'
                         }`,
                       {
@@ -297,9 +298,9 @@ export default defineComponent({
                       column.className
                     ]}
                     onClick={
-                      column.type !== 'selection' &&
-                      column.type !== 'expand' &&
-                      !('children' in column)
+                      column.type !== 'selection'
+                      && column.type !== 'expand'
+                      && !('children' in column)
                         ? (e) => {
                             handleColHeaderClick(e, column)
                           }
@@ -333,7 +334,7 @@ export default defineComponent({
           }}
         >
           <colgroup>
-            {cols.map((col) => (
+            {cols.map(col => (
               <col key={col.key} style={col.style} />
             ))}
           </colgroup>

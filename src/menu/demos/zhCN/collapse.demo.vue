@@ -4,37 +4,9 @@
 可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`。详细信息参考页面底下的 API 文档。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-switch v-model:value="collapsed" />
-    <n-layout has-sider>
-      <n-layout-sider
-        bordered
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        :collapsed="collapsed"
-        show-trigger
-        @collapse="collapsed = true"
-        @expand="collapsed = false"
-      >
-        <n-menu
-          v-model:value="activeKey"
-          :collapsed="collapsed"
-          :collapsed-width="64"
-          :collapsed-icon-size="22"
-          :options="menuOptions"
-        />
-      </n-layout-sider>
-      <n-layout>
-        <span>内容</span>
-      </n-layout>
-    </n-layout>
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
@@ -43,7 +15,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -123,7 +95,7 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       activeKey: ref<string | null>(null),
       collapsed: ref(true),
@@ -132,3 +104,32 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="collapsed" />
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        :collapsed="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          v-model:value="activeKey"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>内容</span>
+      </n-layout>
+    </n-layout>
+  </n-space>
+</template>

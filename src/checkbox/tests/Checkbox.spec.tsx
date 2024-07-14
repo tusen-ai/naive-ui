@@ -1,10 +1,10 @@
-import { h, Fragment } from 'vue'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { Fragment, h } from 'vue'
+import { type VueWrapper, mount } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
 
-function expectChecked (wrapper: VueWrapper<any>, value: boolean): void {
-  expect(wrapper.classes().some((c) => c.includes('checked'))).toEqual(value)
+function expectChecked(wrapper: VueWrapper<any>, value: boolean): void {
+  expect(wrapper.classes().some(c => c.includes('checked'))).toEqual(value)
   expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe(
     value.toString()
   )
@@ -61,8 +61,8 @@ describe('n-checkbox', () => {
     <Fragment>
       <NCheckbox
         onUpdateChecked={onUpdateChecked1}
-        checked={'123'}
-        defaultChecked={'123'}
+        checked="123"
+        defaultChecked="123"
       />
       <NCheckbox
         onUpdateChecked={onUpdateChecked2}

@@ -1,13 +1,13 @@
-import { defineComponent, type PropType, type VNodeChild, h } from 'vue'
+import { type PropType, type VNodeChild, defineComponent, h } from 'vue'
 import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
 import NEllipsis from '../../../ellipsis/src/Ellipsis'
 import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'
 import type { DataTableTheme } from '../../styles'
 import type {
-  TableBaseColumn,
   InternalRowData,
-  SummaryCell
+  SummaryCell,
+  TableBaseColumn
 } from '../interface'
 
 export default defineComponent({
@@ -35,19 +35,21 @@ export default defineComponent({
       required: true
     },
     renderCell: Function as PropType<
-    (value: any, rowData: object, column: any) => VNodeChild
+      (value: any, rowData: object, column: any) => VNodeChild
     >
   },
-  render () {
+  render() {
     const { isSummary, column, row, renderCell } = this
     let cell: VNodeChild
     const { render, key, ellipsis } = column
     if (render && !isSummary) {
       cell = render(row, this.index)
-    } else {
+    }
+    else {
       if (isSummary) {
         cell = (row[key] as SummaryCell)?.value
-      } else {
+      }
+      else {
         cell = renderCell
           ? renderCell(get(row, key), row, column)
           : get(row, key)
@@ -76,7 +78,8 @@ export default defineComponent({
             {{ default: () => cell }}
           </NEllipsis>
         )
-      } else {
+      }
+      else {
         return (
           <span class={`${this.clsPrefix}-data-table-td__ellipsis`}>
             {cell}

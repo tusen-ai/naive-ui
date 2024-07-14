@@ -3,7 +3,7 @@ import type { Theme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     primaryColor,
     successColor,

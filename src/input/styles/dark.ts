@@ -1,12 +1,12 @@
-import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
+import commonVariables from './_common'
 import type { InputTheme } from './light'
 
 const inputDark: InputTheme = {
   name: 'Input',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       textColor2,
       textColor3,
