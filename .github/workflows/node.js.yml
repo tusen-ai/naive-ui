@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
   pull_request:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
 
 jobs:
   lint:
@@ -55,6 +55,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: pnpm install
+
+      - name: Setup timezone
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: Asia/Shanghai
 
       - name: Test
         run: pnpm run test:cov
