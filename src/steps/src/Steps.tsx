@@ -1,32 +1,33 @@
 import {
-  h,
-  defineComponent,
-  type VNode,
-  provide,
-  type PropType,
-  type VNodeChild,
   type ExtractPropTypes,
+  type PropType,
   type Ref,
-  type Slots
+  type Slots,
+  type VNode,
+  type VNodeChild,
+  defineComponent,
+  h,
+  provide
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { useConfig, useTheme, useRtl } from '../../_mixins'
+import { useConfig, useRtl, useTheme } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { StepsTheme } from '../styles'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
 
-function stepWithIndex (step: VNodeChild, i: number): VNode | null {
+function stepWithIndex(step: VNodeChild, i: number): VNode | null {
   if (typeof step !== 'object' || step === null || Array.isArray(step)) {
     return null
   }
-  if (!step.props) step.props = {}
+  if (!step.props)
+    step.props = {}
   step.props.internalIndex = i + 1
   return step
 }
 
-function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
+function stepsWithIndex(steps: VNodeChild[]): Array<VNode | null> {
   return steps.map((step, i) => stepWithIndex(step, i))
 }
 
@@ -43,10 +44,10 @@ export const stepsProps = {
   },
   vertical: Boolean,
   'onUpdate:current': [Function, Array] as PropType<
-  MaybeArray<(current: number) => void>
+    MaybeArray<(current: number) => void>
   >,
   onUpdateCurrent: [Function, Array] as PropType<
-  MaybeArray<(current: number) => void>
+    MaybeArray<(current: number) => void>
   >
 }
 
@@ -64,7 +65,7 @@ export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 export default defineComponent({
   name: 'Steps',
   props: stepsProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const rtlEnabledRef = useRtl('Steps', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
@@ -86,7 +87,7 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div

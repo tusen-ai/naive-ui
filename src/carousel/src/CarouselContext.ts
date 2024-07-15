@@ -23,19 +23,19 @@ export interface CarouselContextValue {
   onCarouselItemClick: (index: number, event: MouseEvent) => void
 }
 
-const carouselMethodsInjectionKey =
-  createInjectionKey<CarouselContextValue>('n-carousel-methods')
+const carouselMethodsInjectionKey
+  = createInjectionKey<CarouselContextValue>('n-carousel-methods')
 
-export const provideCarouselContext = (
+export function provideCarouselContext(
   contextValue: CarouselContextValue
-): void => {
+): void {
   provide(carouselMethodsInjectionKey, contextValue)
 }
 
-export const useCarouselContext = (
+export function useCarouselContext(
   location: string = 'unknown',
   component: string = 'component'
-): CarouselContextValue => {
+): CarouselContextValue {
   const CarouselContext = inject(carouselMethodsInjectionKey)
   if (!CarouselContext) {
     throwError(

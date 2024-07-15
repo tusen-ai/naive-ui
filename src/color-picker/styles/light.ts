@@ -4,7 +4,7 @@ import { createTheme } from '../../_mixins/use-theme'
 import { inputLight } from '../../input/styles'
 import { buttonLight } from '../../button/styles'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     fontSize,
     boxShadow2,

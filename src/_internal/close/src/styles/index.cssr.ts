@@ -1,4 +1,4 @@
-import { cB, cM, c, cNotM } from '../../../../_utils/cssr'
+import { c, cB, cM, cNotM } from '../../../../_utils/cssr'
 
 // vars:
 // --n-close-border-radius

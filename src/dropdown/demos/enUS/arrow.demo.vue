@@ -4,23 +4,12 @@
 Show an arrow with the dropdown.
 </markdown>
 
-<template>
-  <n-dropdown
-    trigger="click"
-    :options="options"
-    :show-arrow="true"
-    @select="handleSelect"
-  >
-    <n-button>Go For a Trip</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options: [
@@ -30,8 +19,8 @@ export default defineComponent({
           disabled: true
         },
         {
-          label: "Brown's Hotel, London",
-          key: "brown's hotel, london"
+          label: 'Brown\'s Hotel, London',
+          key: 'brown\'s hotel, london'
         },
         {
           label: 'Atlantis Bahamas, Nassau',
@@ -42,10 +31,21 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    trigger="click"
+    :options="options"
+    :show-arrow="true"
+    @select="handleSelect"
+  >
+    <n-button>Go For a Trip</n-button>
+  </n-dropdown>
+</template>

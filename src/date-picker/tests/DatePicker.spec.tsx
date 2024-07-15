@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns/esm'

@@ -1,5 +1,4 @@
 import { composite } from 'seemly'
-import commonVariables from './_common'
 import { ellipsisLight } from '../../ellipsis/styles'
 import { buttonLight } from '../../button/styles'
 import { checkboxLight } from '../../checkbox/styles'
@@ -12,8 +11,9 @@ import { dropdownLight } from '../../dropdown/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     cardColor,
     modalColor,
@@ -45,9 +45,14 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     borderColor: composite(cardColor, dividerColor),
     tdColorHover: composite(cardColor, tableColorHover),
+    tdColorSorting: composite(cardColor, tableColorHover),
     tdColorStriped: composite(cardColor, tableColorStriped),
     thColor: composite(cardColor, tableHeaderColor),
     thColorHover: composite(
+      composite(cardColor, tableHeaderColor),
+      tableColorHover
+    ),
+    thColorSorting: composite(
       composite(cardColor, tableHeaderColor),
       tableColorHover
     ),
@@ -61,9 +66,14 @@ export const self = (vars: ThemeCommonVars) => {
     // modal
     borderColorModal: composite(modalColor, dividerColor),
     tdColorHoverModal: composite(modalColor, tableColorHover),
+    tdColorSortingModal: composite(modalColor, tableColorHover),
     tdColorStripedModal: composite(modalColor, tableColorStriped),
     thColorModal: composite(modalColor, tableHeaderColor),
     thColorHoverModal: composite(
+      composite(modalColor, tableHeaderColor),
+      tableColorHover
+    ),
+    thColorSortingModal: composite(
       composite(modalColor, tableHeaderColor),
       tableColorHover
     ),
@@ -71,9 +81,14 @@ export const self = (vars: ThemeCommonVars) => {
     // popover
     borderColorPopover: composite(popoverColor, dividerColor),
     tdColorHoverPopover: composite(popoverColor, tableColorHover),
+    tdColorSortingPopover: composite(popoverColor, tableColorHover),
     tdColorStripedPopover: composite(popoverColor, tableColorStriped),
     thColorPopover: composite(popoverColor, tableHeaderColor),
     thColorHoverPopover: composite(
+      composite(popoverColor, tableHeaderColor),
+      tableColorHover
+    ),
+    thColorSortingPopover: composite(
       composite(popoverColor, tableHeaderColor),
       tableColorHover
     ),

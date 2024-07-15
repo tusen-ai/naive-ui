@@ -1,13 +1,13 @@
 import type { CNode } from 'css-render'
 import type { Type } from '../../../button/src/interface'
-import { cB, cM, cE, cNotM, c } from '../../../_utils/cssr'
-import { zero, n1 } from './index.cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
+import { n1, zero } from './index.cssr'
 
-function createRightBorderStyle (type: Type): CNode {
-  return cM(type + '-type', [
+function createRightBorderStyle(type: Type): CNode {
+  return cM(`${type}-type`, [
     c('& +', [
       cB('button', {}, [
-        cM(type + '-type', [
+        cM(`${type}-type`, [
           cE('border', {
             borderRightWidth: zero
           }),

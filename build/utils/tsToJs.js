@@ -1,6 +1,6 @@
 const { transformSync } = require('esbuild')
 
-const tsToJs = (content) => {
+function tsToJs(content) {
   if (!content) {
     return ''
   }

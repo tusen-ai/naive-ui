@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2.39.0
+
+`2023-07-15`
+
+### Breaking Changes
+
+- Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
+
+### Fixes
+
+- Fix `n-form-item` validation state is not correctly updated [#6068](https://github.com/tusen-ai/naive-ui/issues/6068).
+- Fix `n-select`'s header make inner input unavailable, closes [#6030](https://github.com/tusen-ai/naive-ui/issues/6030).
+- Fix `n-tree` may have incorrect node selection status when `show-irrelevant-nodes` is disabled, close [#6115](https://github.com/tusen-ai/naive-ui/issues/6115).
+
+### Features
+
+- `n-data-table` adds `filter-icon-popover-props` prop, closes [#6111](https://github.com/tusen-ai/naive-ui/issues/6111).
+- `n-input-number` adds `round` prop, closes [#6097](https://github.com/tusen-ai/naive-ui/issues/6097).
+- `n-color-picker` add `on-clear` props.
+- `n-upload`'s `on-preview` prop adds `detail.event` parameter. You can use `preventDefault` to prevent default anchor link open behavior. Closes [#6036](https://github.com/tusen-ai/naive-ui/issues/6036).
+- `n-data-table` adds `thColorSorting`, `thColorSortingModal`, `thColorSortingPopover`, `tdColorSorting`, `tdColorSortingModal` and `tdColorSortingPopover` theme variables, closes [#6118](https://github.com/tusen-ai/naive-ui/issues/6118), [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
+
+### i18n
+
+- Add azAZ locale.
+- Add uzUZ locale.
+
 ## 2.38.2
 
 `2024-05-03`

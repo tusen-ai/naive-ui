@@ -1,6 +1,6 @@
-import { h, defineComponent, computed, ref, type CSSProperties } from 'vue'
+import { type CSSProperties, computed, defineComponent, h, ref } from 'vue'
 import { NAffix } from '../../affix'
-import { affixProps, affixPropKeys } from '../../affix/src/Affix'
+import { affixPropKeys, affixProps } from '../../affix/src/Affix'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -8,7 +8,7 @@ import { keep } from '../../_utils'
 import { anchorLight } from '../styles'
 import type { AnchorTheme } from '../styles'
 import style from './styles/index.cssr'
-import NBaseAnchor, { baseAnchorProps, baseAnchorPropKeys } from './BaseAnchor'
+import NBaseAnchor, { baseAnchorPropKeys, baseAnchorProps } from './BaseAnchor'
 import type { BaseAnchorInst } from './BaseAnchor'
 
 export interface AnchorInst {
@@ -27,7 +27,7 @@ export type AnchorProps = ExtractPublicPropTypes<typeof anchorProps>
 export default defineComponent({
   name: 'Anchor',
   props: anchorProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Anchor',
@@ -74,7 +74,7 @@ export default defineComponent({
       ? useThemeClass('anchor', undefined, cssVarsRef, props)
       : undefined
     return {
-      scrollTo (href: string) {
+      scrollTo(href: string) {
         anchorRef.value?.setActiveHref(href)
       },
       renderAnchor: () => {
@@ -97,7 +97,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     return !this.affix ? (
       this.renderAnchor()
     ) : (

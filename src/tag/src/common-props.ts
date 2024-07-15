@@ -1,4 +1,4 @@
-import { type PropType } from 'vue'
+import type { PropType } from 'vue'
 
 export interface TagColor {
   color?: string
@@ -10,7 +10,7 @@ export default {
   color: Object as PropType<TagColor>,
   type: {
     type: String as PropType<
-    'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
+      'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
     >,
     default: 'default'
   },

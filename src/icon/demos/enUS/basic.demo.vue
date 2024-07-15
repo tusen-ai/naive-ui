@@ -2,18 +2,8 @@
 # Basic
 </markdown>
 
-<template>
-  <n-icon size="40">
-    <game-controller-outline />
-  </n-icon>
-  <n-icon size="40" color="#0e7a0d">
-    <game-controller />
-  </n-icon>
-  <n-icon size="40" :component="GameController" />
-</template>
-
 <script lang="ts">
-import { GameControllerOutline, GameController } from '@vicons/ionicons5'
+import { GameController, GameControllerOutline } from '@vicons/ionicons5'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -21,10 +11,20 @@ export default defineComponent({
     GameController,
     GameControllerOutline
   },
-  setup () {
+  setup() {
     return {
       GameController
     }
   }
 })
 </script>
+
+<template>
+  <n-icon size="40">
+    <GameControllerOutline />
+  </n-icon>
+  <n-icon size="40" color="#0e7a0d">
+    <GameController />
+  </n-icon>
+  <n-icon size="40" :component="GameController" />
+</template>

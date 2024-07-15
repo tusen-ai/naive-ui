@@ -4,6 +4,27 @@
 记得使用 `resizable` 的时候配合 `default-width` 或者 `default-height`。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { DrawerPlacement } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const activeRef = ref(false)
+    const placementRef = ref<DrawerPlacement>('right')
+    const activate = (place: DrawerPlacement) => {
+      activeRef.value = true
+      placementRef.value = place
+    }
+    return {
+      active: activeRef,
+      placement: placementRef,
+      activate
+    }
+  }
+})
+</script>
+
 <template>
   <n-button-group>
     <n-button @click="activate('top')">
@@ -30,24 +51,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { DrawerPlacement } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const activeRef = ref(false)
-    const placementRef = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      activeRef.value = true
-      placementRef.value = place
-    }
-    return {
-      active: activeRef,
-      placement: placementRef,
-      activate
-    }
-  }
-})
-</script>

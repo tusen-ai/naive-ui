@@ -4,8 +4,24 @@
 Use `locale` to set i18n language.
 
 Please note that, the feature uses `Intl` API. For compitability refers to [format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) and [formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts).
-
 </markdown>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { NumberAnimationInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    return {
+      numberAnimationInstRef,
+      handleClick() {
+        numberAnimationInstRef.value?.play()
+      }
+    }
+  }
+})
+</script>
 
 <template>
   <n-statistic label="ru-RU" tabular-nums>
@@ -23,20 +39,3 @@ Please note that, the feature uses `Intl` API. For compitability refers to [form
     Play
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

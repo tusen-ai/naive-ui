@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
-  type PropType,
   type CSSProperties,
-  provide,
-  computed
+  type PropType,
+  computed,
+  defineComponent,
+  h,
+  provide
 } from 'vue'
 import type { Size } from '../../avatar/src/interface'
 import { avatarGroupInjectionKey } from '../../avatar/src/context'
@@ -12,10 +12,10 @@ import NAvatar from '../../avatar/src/Avatar'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/avatar-group.cssr'
 import { useRtl } from '../../_mixins/use-rtl'
 import { avatarGroupLight } from '../styles'
 import type { AvatarGroupTheme } from '../styles'
+import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
@@ -43,7 +43,7 @@ export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
 export default defineComponent({
   name: 'AvatarGroup',
   props: avatarGroupProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const mergedThemeRef = useTheme(
       'AvatarGroup',
@@ -61,16 +61,21 @@ export default defineComponent({
     )
     const restOptionsRef = computed(() => {
       const { max } = props
-      if (max === undefined) return undefined
+      if (max === undefined)
+        return undefined
       const { options } = props
-      if (options.length > max) return options.slice(max - 1, options.length)
+      if (options.length > max)
+        return options.slice(max - 1, options.length)
       return []
     })
     const displayedOptionsRef = computed(() => {
       const { options, max } = props
-      if (max === undefined) return options
-      if (options.length > max) return options.slice(0, max - 1)
-      if (options.length === max) return options.slice(0, max)
+      if (max === undefined)
+        return options
+      if (options.length > max)
+        return options.slice(0, max - 1)
+      if (options.length === max)
+        return options.slice(0, max)
       return options
     })
     return {
@@ -86,7 +91,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       displayedOptions,
@@ -100,8 +105,8 @@ export default defineComponent({
           `${mergedClsPrefix}-avatar-group`,
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`,
-          this.expandOnHover &&
-            `${mergedClsPrefix}-avatar-group--expand-on-hover`
+          this.expandOnHover
+          && `${mergedClsPrefix}-avatar-group--expand-on-hover`
         ]}
         style={this.cssVars}
         role="group"
@@ -117,21 +122,21 @@ export default defineComponent({
             />
           )
         })}
-        {restOptions !== undefined &&
-          restOptions.length > 0 &&
-          ($slots.rest ? (
-            $slots.rest({ options: restOptions, rest: restOptions.length })
-          ) : (
-            <NAvatar
-              style={this.maxStyle}
-              theme={mergedTheme.peers.Avatar}
-              themeOverrides={mergedTheme.peerOverrides.Avatar}
-            >
-              {{
-                default: () => `+${restOptions.length}`
-              }}
-            </NAvatar>
-          ))}
+        {restOptions !== undefined
+        && restOptions.length > 0
+        && ($slots.rest ? (
+          $slots.rest({ options: restOptions, rest: restOptions.length })
+        ) : (
+          <NAvatar
+            style={this.maxStyle}
+            theme={mergedTheme.peers.Avatar}
+            themeOverrides={mergedTheme.peerOverrides.Avatar}
+          >
+            {{
+              default: () => `+${restOptions.length}`
+            }}
+          </NAvatar>
+        ))}
       </div>
     )
   }

@@ -2,14 +2,48 @@
 # 垂直 debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
+import type { StepsProps } from 'naive-ui'
+
+export default defineComponent({
+  components: {
+    MdArrowRoundBack,
+    MdArrowRoundForward
+  },
+  setup() {
+    const currentRef = ref<number | null>(1)
+    return {
+      currentStatus: ref<StepsProps['status']>('process'),
+      current: currentRef,
+      next() {
+        if (currentRef.value === null)
+          currentRef.value = 1
+        else if (currentRef.value >= 5)
+          currentRef.value = null
+        else currentRef.value++
+      },
+      prev() {
+        if (currentRef.value === 0)
+          currentRef.value = null
+        else if (currentRef.value === null)
+          currentRef.value = 5
+        else currentRef.value--
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
-    <n-steps vertical :current="(current as number)" :status="currentStatus">
+    <n-steps vertical :current="current as number" :status="currentStatus">
       <n-step
         title="I Me Mine"
         description="All through the day, I me mine I me mine, I me mine"
       >
-        <n-steps :current="(current as number)" :status="currentStatus">
+        <n-steps :current="current as number" :status="currentStatus">
           <n-step
             title="I Me Mine"
             description="All through the day, I me mine I me mine, I me mine"
@@ -48,14 +82,14 @@
         <n-button @click="prev">
           <template #icon>
             <n-icon>
-              <md-arrow-round-back />
+              <MdArrowRoundBack />
             </n-icon>
           </template>
         </n-button>
         <n-button @click="next">
           <template #icon>
             <n-icon>
-              <md-arrow-round-forward />
+              <MdArrowRoundForward />
             </n-icon>
           </template>
         </n-button>
@@ -81,33 +115,3 @@
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
-import { StepsProps } from 'naive-ui'
-
-export default defineComponent({
-  components: {
-    MdArrowRoundBack,
-    MdArrowRoundForward
-  },
-  setup () {
-    const currentRef = ref<number | null>(1)
-    return {
-      currentStatus: ref<StepsProps['status']>('process'),
-      current: currentRef,
-      next () {
-        if (currentRef.value === null) currentRef.value = 1
-        else if (currentRef.value >= 5) currentRef.value = null
-        else currentRef.value++
-      },
-      prev () {
-        if (currentRef.value === 0) currentRef.value = null
-        else if (currentRef.value === null) currentRef.value = 5
-        else currentRef.value--
-      }
-    }
-  }
-})
-</script>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 // Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {

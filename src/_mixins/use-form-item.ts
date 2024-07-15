@@ -1,10 +1,10 @@
 import {
+  type ComputedRef,
+  type Ref,
   computed,
   inject,
-  provide,
   onBeforeUnmount,
-  type ComputedRef,
-  type Ref
+  provide
 } from 'vue'
 import type { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'
@@ -24,8 +24,8 @@ export interface FormItemInjection {
   handleContentChange: () => void
 }
 
-export const formItemInjectionKey =
-  createInjectionKey<FormItemInjection | null>('n-form-item')
+export const formItemInjectionKey
+  = createInjectionKey<FormItemInjection | null>('n-form-item')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
@@ -49,7 +49,7 @@ export interface UseFormItem<T> {
   nTriggerFormInput: () => void
 }
 
-export default function useFormItem<T extends AllowedSize = FormItemSize> (
+export default function useFormItem<T extends AllowedSize = FormItemSize>(
   props: UseFormItemProps<T>,
   {
     defaultSize = 'medium',
@@ -64,7 +64,8 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
       ? () => mergedSize(NFormItem)
       : () => {
           const { size } = props
-          if (size) return size
+          if (size)
+            return size
           if (NFormItem) {
             const { mergedSize } = NFormItem
             if (mergedSize.value !== undefined) {
@@ -90,7 +91,8 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   )
   const mergedStatusRef = computed<FormValidationStatus | undefined>(() => {
     const { status } = props
-    if (status) return status
+    if (status)
+      return status
     return NFormItem?.mergedValidationStatus.value
   })
   onBeforeUnmount(() => {
@@ -102,22 +104,22 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     mergedSizeRef,
     mergedDisabledRef,
     mergedStatusRef,
-    nTriggerFormBlur () {
+    nTriggerFormBlur() {
       if (NFormItem) {
         NFormItem.handleContentBlur()
       }
     },
-    nTriggerFormChange () {
+    nTriggerFormChange() {
       if (NFormItem) {
         NFormItem.handleContentChange()
       }
     },
-    nTriggerFormFocus () {
+    nTriggerFormFocus() {
       if (NFormItem) {
         NFormItem.handleContentFocus()
       }
     },
-    nTriggerFormInput () {
+    nTriggerFormInput() {
       if (NFormItem) {
         NFormItem.handleContentInput()
       }

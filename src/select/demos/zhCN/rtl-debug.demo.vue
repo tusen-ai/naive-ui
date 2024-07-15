@@ -2,30 +2,18 @@
 # Rtl Debug
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-flex vertical>
-        <n-select :options="options" />
-        <n-select multiple :options="options" />
-      </n-flex>
-    </n-config-provider>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { unstableSelectRtl } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       rtlEnabled: ref(false),
       rtlStyles: [unstableSelectRtl],
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0',
           disabled: true
         },
@@ -38,7 +26,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3',
           disabled: true
         },
@@ -68,7 +56,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -84,3 +72,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
+      <n-flex vertical>
+        <n-select :options="options" />
+        <n-select multiple :options="options" />
+      </n-flex>
+    </n-config-provider>
+  </n-space>
+</template>

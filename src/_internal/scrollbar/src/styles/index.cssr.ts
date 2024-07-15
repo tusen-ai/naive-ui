@@ -1,4 +1,4 @@
-import { cB, c, cM, cE } from '../../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../../_utils/cssr'
 import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 
 // vars:

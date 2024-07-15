@@ -79,7 +79,7 @@ export-csv.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
-| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |
@@ -87,6 +87,7 @@ export-csv.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
 | render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4 |
@@ -165,7 +166,7 @@ The following types can be imported from the package.
 #### DataTableSortState Type
 
 ```ts
-type DataTableSortState = {
+interface DataTableSortState {
   columnKey: string | number
   sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
@@ -175,7 +176,7 @@ type DataTableSortState = {
 #### DataTableFilterState Type
 
 ```ts
-type DataTableFilterState = {
+interface DataTableFilterState {
   [key: string]: Array<string | number> | string | number | null | undefined
 }
 ```
@@ -184,20 +185,20 @@ type DataTableFilterState = {
 
 ```ts
 type DataTableCreateSummary = (pageData: RowData[]) =>
-  | Array<{
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }>
-  | {
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }
+| Array<{
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}>
+| {
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}
 ```
 
 ### DataTable Methods

@@ -1,18 +1,18 @@
 import {
-  h,
-  ref,
-  defineComponent,
   type PropType,
-  provide,
-  computed,
   type VNode,
-  type VNodeChild
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
-// eslint-disable-next-line import/no-cycle
+
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
@@ -47,14 +47,16 @@ export const submenuProps = {
 export const NSubmenu = defineComponent({
   name: 'Submenu',
   props: submenuProps,
-  setup (props) {
+  setup(props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild
     const { props: menuProps, mergedCollapsedRef, mergedThemeRef } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
-      if (NSubmenu?.mergedDisabledRef.value) return true
-      if (menuProps.disabled) return true
+      if (NSubmenu?.mergedDisabledRef.value)
+        return true
+      if (menuProps.disabled)
+        return true
       return disabled
     })
     const dropdownShowRef = ref(false)
@@ -63,11 +65,12 @@ export const NSubmenu = defineComponent({
       mergedDisabledRef
     })
     provide(menuItemGroupInjectionKey, null)
-    function doClick (): void {
+    function doClick(): void {
       const { onClick } = props
-      if (onClick) onClick()
+      if (onClick)
+        onClick()
     }
-    function handleClick (): void {
+    function handleClick(): void {
       if (!mergedDisabledRef.value) {
         if (!mergedCollapsedRef.value) {
           NMenu.toggleExpand(props.internalKey)
@@ -75,7 +78,7 @@ export const NSubmenu = defineComponent({
         doClick()
       }
     }
-    function handlePopoverShowChange (value: boolean): void {
+    function handlePopoverShowChange(value: boolean): void {
       dropdownShowRef.value = value
     }
     return {
@@ -95,12 +98,13 @@ export const NSubmenu = defineComponent({
       mergedValue: NMenu.mergedValueRef,
       childActive: useMemo(() => {
         return (
-          props.virtualChildActive ??
-          NMenu.activePathRef.value.includes(props.internalKey)
+          props.virtualChildActive
+          ?? NMenu.activePathRef.value.includes(props.internalKey)
         )
       }),
       collapsed: computed(() => {
-        if (menuProps.mode === 'horizontal') return false
+        if (menuProps.mode === 'horizontal')
+          return false
         if (mergedCollapsedRef.value) {
           return true
         }
@@ -108,15 +112,15 @@ export const NSubmenu = defineComponent({
       }),
       dropdownEnabled: computed(() => {
         return (
-          !mergedDisabledRef.value &&
-          (menuProps.mode === 'horizontal' || mergedCollapsedRef.value)
+          !mergedDisabledRef.value
+          && (menuProps.mode === 'horizontal' || mergedCollapsedRef.value)
         )
       }),
       handlePopoverShowChange,
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       menuProps: { renderIcon, renderLabel }
@@ -177,7 +181,7 @@ export const NSubmenu = defineComponent({
               const { tmNodes, collapsed } = this
               return !collapsed ? (
                 <div class={`${mergedClsPrefix}-submenu-children`} role="menu">
-                  {tmNodes.map((item) => itemRenderer(item, this.menuProps))}
+                  {tmNodes.map(item => itemRenderer(item, this.menuProps))}
                 </div>
               ) : null
             }

@@ -52,16 +52,16 @@ app.use(naive);
 app.mount("#app");
 `
 
-function getDeps (code) {
+function getDeps(code) {
   return (code.match(/from '([^']+)'\n/g) || [])
-    .map((v) => v.slice(6, v.length - 2))
+    .map(v => v.slice(6, v.length - 2))
     .reduce((prevV, dep) => {
       prevV[dep] = 'latest'
       return prevV
     }, {})
 }
 
-export function getCodeSandboxParams (code) {
+export function getCodeSandboxParams(code) {
   return getParameters({
     files: {
       'package.json': {

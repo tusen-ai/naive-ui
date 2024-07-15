@@ -11,7 +11,7 @@ import type {
   DiscreteApiType
 } from './interface'
 
-export function createDiscreteApi<T extends DiscreteApiType> (
+export function createDiscreteApi<T extends DiscreteApiType>(
   includes: T[],
   {
     configProviderProps,

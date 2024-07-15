@@ -2,9 +2,16 @@
 # Controlled manner
 </markdown>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NInputNumber, NSplit } from 'naive-ui'
+
+const split = ref<number>(0.8)
+</script>
+
 <template>
   <n-flex vertical>
-    <n-input-number
+    <NInputNumber
       v-model:value="split"
       :step="0.1"
       clearable
@@ -21,10 +28,3 @@
     </NSplit>
   </n-flex>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { NSplit, NInputNumber } from 'naive-ui'
-
-const split = ref<number>(0.8)
-</script>
