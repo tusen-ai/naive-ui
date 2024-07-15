@@ -38,7 +38,7 @@ close-debug.vue
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |  |
 | on-confirm | `(value: string) => void` | `undefined` | 点击确定按钮的回调 | 2.29.0 |
-| on-clear | `() => void` | `undefined` | 点击清除按钮的回调 | NEXT_VERSION |
+| on-clear | `() => void` | `undefined` | 点击清除按钮的回调 | 2.39.0 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |  |
 | actions | `Array<'confirm' \| 'clear'> \| null` | `null` | 显示按钮 |  |

@@ -91,7 +91,7 @@ rtl-debug.vue
 | default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
-| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | NEXT_VERSION |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |

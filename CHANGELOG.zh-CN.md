@@ -1,12 +1,15 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.39.0
 
-`xxxx-xx-xx`
+`2023-07-15`
+
+### Breaking Changes
+
+- 修复 `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091)
 
 ### Fixes
 
-- 修复 `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091)
 - 修复 `n-form-item` 状态更新不正常 [#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
 - 修复 `n-select` 组件的 header 插槽里 input 无法输入，关闭 [#6030](https://github.com/tusen-ai/naive-ui/issues/6030)
 - 修复 `n-tree` 组件在禁用 `show-irrelevant-nodes` 时，节点的选中状态可能不正确，关闭 [#6115](https://github.com/tusen-ai/naive-ui/issues/6115)

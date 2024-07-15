@@ -82,9 +82,8 @@ const themeRef = computed(() => {
 })
 
 // config provider
-const configProviderNameRef = ref(
-  require('node:process').env.TUSIMPLE ? 'tusimple' : 'default'
-)
+// eslint-disable-next-line node/prefer-global/process
+const configProviderNameRef = ref(process.env.TUSIMPLE ? 'tusimple' : 'default')
 
 const configProviderRef = computed(() => {
   return configProviderNameRef.value === 'tusimple'

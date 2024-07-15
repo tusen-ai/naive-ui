@@ -1,12 +1,15 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.39.0
 
-`xxxx-xx-xx`
+`2023-07-15`
+
+### Breaking Changes
+
+- Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
 
 ### Fixes
 
-- Fix `n-input-number` Exception when the value is a string in precision mode, closes [#6091](https://github.com/tusen-ai/naive-ui/issues/6091).
 - Fix `n-form-item` validation state is not correctly updated [#6068](https://github.com/tusen-ai/naive-ui/issues/6068).
 - Fix `n-select`'s header make inner input unavailable, closes [#6030](https://github.com/tusen-ai/naive-ui/issues/6030).
 - Fix `n-tree` may have incorrect node selection status when `show-irrelevant-nodes` is disabled, close [#6115](https://github.com/tusen-ai/naive-ui/issues/6115).

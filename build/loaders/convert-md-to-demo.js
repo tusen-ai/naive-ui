@@ -104,16 +104,16 @@ function genStyle(sourceStyle) {
 }
 
 function genVueComponent(parts, fileName, relativeUrl) {
-  const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
-  const relativeUrlReg = /<!--URL-->/g
-  const titleReg = /<!--TITLE_SLOT-->/g
-  const contentReg = /<!--CONTENT_SLOT-->/
-  const tsCodeReg = /<!--TS_CODE_SLOT-->/
-  const jsCodeReg = /<!--JS_CODE_SLOT-->/
-  const scriptReg = /<!--SCRIPT_SLOT-->/
-  const styleReg = /<!--STYLE_SLOT-->/
-  const demoReg = /<!--DEMO_SLOT-->/
-  const languageTypeReg = /<!--LANGUAGE_TYPE_SLOT-->/
+  const demoFileNameReg = /<!-- DEMO_FILE_NAME -->/g
+  const relativeUrlReg = /<!-- URL -->/g
+  const titleReg = /<!-- TITLE_SLOT -->/g
+  const contentReg = /<!-- CONTENT_SLOT -->/
+  const tsCodeReg = /<!-- TS_CODE_SLOT -->/
+  const jsCodeReg = /<!-- JS_CODE_SLOT -->/
+  const scriptReg = /<!-- SCRIPT_SLOT -->/
+  const styleReg = /<!-- STYLE_SLOT -->/
+  const demoReg = /<!-- DEMO_SLOT -->/
+  const languageTypeReg = /<!-- LANGUAGE_TYPE_SLOT -->/
   let src = demoBlock
   src = src.replace(demoFileNameReg, fileName)
   src = src.replace(relativeUrlReg, relativeUrl)
