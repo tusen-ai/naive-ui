@@ -105,7 +105,15 @@ const scrollbarProps = {
   internalOnUpdateScrollLeft: Function as PropType<
     (scrollLeft: number) => void
   >,
-  internalHoistYRail: Boolean
+  internalHoistYRail: Boolean,
+  yPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'right'
+  },
+  xPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  }
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -686,8 +694,10 @@ const Scrollbar = defineComponent({
           height,
           width,
           borderRadius,
-          railInsetHorizontal,
-          railInsetVertical,
+          railInsetHorizontalTop,
+          railInsetHorizontalBottom,
+          railInsetVerticalRight,
+          railInsetVerticalLeft,
           railColor
         }
       } = themeRef.value
@@ -698,10 +708,14 @@ const Scrollbar = defineComponent({
         '--n-scrollbar-border-radius': borderRadius,
         '--n-scrollbar-width': width,
         '--n-scrollbar-height': height,
-        '--n-scrollbar-rail-inset-horizontal': railInsetHorizontal,
-        '--n-scrollbar-rail-inset-vertical': rtlEnabledRef?.value
-          ? rtlInset(railInsetVertical)
-          : railInsetVertical,
+        '--n-scrollbar-rail-inset-horizontal-top': railInsetHorizontalTop,
+        '--n-scrollbar-rail-inset-horizontal-bottom': railInsetHorizontalBottom,
+        '--n-scrollbar-rail-inset-vertical-right': rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalRight)
+          : railInsetVerticalRight,
+        '--n-scrollbar-rail-inset-vertical-left': rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalLeft)
+          : railInsetVerticalLeft,
         '--n-scrollbar-rail-color': railColor
       }
     })
@@ -751,7 +765,10 @@ const Scrollbar = defineComponent({
       mergedClsPrefix,
       triggerDisplayManually,
       rtlEnabled,
-      internalHoistYRail
+      internalHoistYRail,
+      yPlacement,
+      xPlacement,
+      xScrollable
     } = this
     if (!this.scrollable)
       return $slots.default?.()
@@ -766,6 +783,7 @@ const Scrollbar = defineComponent({
           class={[
             `${mergedClsPrefix}-scrollbar-rail`,
             `${mergedClsPrefix}-scrollbar-rail--vertical`,
+            `${mergedClsPrefix}-scrollbar-rail--vertical--${yPlacement}`,
             className
           ]}
           data-scrollbar-rail
@@ -854,12 +872,13 @@ const Scrollbar = defineComponent({
             </div>
           ),
           internalHoistYRail ? null : createYRail(undefined, undefined),
-          this.xScrollable && (
+          xScrollable && (
             <div
               ref="xRailRef"
               class={[
                 `${mergedClsPrefix}-scrollbar-rail`,
-                `${mergedClsPrefix}-scrollbar-rail--horizontal`
+                `${mergedClsPrefix}-scrollbar-rail--horizontal`,
+                `${mergedClsPrefix}-scrollbar-rail--horizontal--${xPlacement}`
               ]}
               style={this.horizontalRailStyle}
               data-scrollbar-rail

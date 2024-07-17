@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+### Features
+
+- `n-scrollbar` adds `x-placement` and `y-placement` props, closes [#6089](https://github.com/tusen-ai/naive-ui/issues/6089).
+
 ## 2.39.0
 
 `2023-07-15`
