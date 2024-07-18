@@ -1,4 +1,3 @@
-import commonVariables from './_common'
 import { composite } from 'seemly'
 import { checkboxLight } from '../../checkbox/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
@@ -8,8 +7,9 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { emptyLight } from '../../empty/styles'
 import { buttonLight } from '../../button/styles'
 import { createTheme } from '../../_mixins'
+import commonVariables from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     fontWeight,
     iconColorDisabled,

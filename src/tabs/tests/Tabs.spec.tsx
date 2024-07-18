@@ -1,8 +1,9 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import { sleep } from 'seemly'
 import { NTabPane, NTabs } from '../index'
 import { AddIcon } from '../../_internal/icons'
-import { sleep } from 'seemly'
 
 describe('n-tabs', () => {
   it('should work with import on demand', () => {
@@ -10,9 +11,9 @@ describe('n-tabs', () => {
   })
 
   it('should work with callback types', () => {
-    function onUpdateValue1 (name: number): void {}
-    function onUpdateValue2 (name: string): void {}
-    function onUpdateValue3 (name: number | string): void {}
+    function onUpdateValue1(name: number): void {}
+    function onUpdateValue2(name: string): void {}
+    function onUpdateValue3(name: number | string): void {}
     mount(NTabs, {
       props: {
         onUpdateValue: onUpdateValue1
@@ -137,7 +138,7 @@ describe('n-tabs', () => {
       props: { value: 'show' },
       slots: {
         default: () =>
-          displayDirectives.map((directive) => (
+          displayDirectives.map(directive => (
             <NTabPane
               displayDirective={directive}
               tab={directive}

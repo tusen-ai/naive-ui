@@ -10,5 +10,5 @@ export const loadingBarProviderInjectionKey = createInjectionKey<{
   mergedClsPrefixRef: Ref<string>
 }>('n-loading-bar')
 
-export const loadingBarApiInjectionKey =
-  createInjectionKey<LoadingBarApiInjection>('n-loading-bar-api')
+export const loadingBarApiInjectionKey
+  = createInjectionKey<LoadingBarApiInjection>('n-loading-bar-api')

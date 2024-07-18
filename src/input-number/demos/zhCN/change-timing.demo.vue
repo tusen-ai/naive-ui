@@ -4,6 +4,18 @@
 将 `update-value-on-input` 设为 `false`，则在输入的过程中不会改变值。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(35)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number
@@ -17,15 +29,3 @@
     {{ value }}
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(35)
-    }
-  }
-})
-</script>

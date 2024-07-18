@@ -1,31 +1,31 @@
 import {
-  h,
-  withDirectives,
+  type CSSProperties,
+  type PropType,
   Transition,
-  ref,
   computed,
   defineComponent,
+  h,
+  inject,
   provide,
-  type PropType,
-  type CSSProperties,
+  ref,
   toRef,
-  inject
+  withDirectives
 } from 'vue'
 import { zindexable } from 'vdirs'
-import { useIsMounted, useClicked, useClickPosition } from 'vooks'
+import { useClickPosition, useClicked, useIsMounted } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
 import { getPreciseEventTarget } from 'seemly'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  keep,
   call,
-  warnOnce,
+  eventEffectNotPerformed,
+  keep,
   useIsComposing,
-  eventEffectNotPerformed
+  warnOnce
 } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
 import { presetProps, presetPropsKeys } from './presetProps'
@@ -72,10 +72,10 @@ export const modalProps = {
   // events
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onAfterEnter: Function as PropType<() => void>,
   onBeforeLeave: Function as PropType<() => void>,
@@ -104,7 +104,7 @@ export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
   props: modalProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       if (props.onHide) {
         warnOnce('modal', '`on-hide` is deprecated.')
@@ -129,8 +129,8 @@ export default defineComponent({
       }
     }
     const containerRef = ref<HTMLElement | null>(null)
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'Modal',
       '-modal',
@@ -151,59 +151,72 @@ export default defineComponent({
 
     const isComposingRef = useIsComposing()
 
-    function doUpdateShow (show: boolean): void {
+    function doUpdateShow(show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
-      if (onUpdateShow) call(onUpdateShow, show)
-      if (_onUpdateShow) call(_onUpdateShow, show)
+      if (onUpdateShow)
+        call(onUpdateShow, show)
+      if (_onUpdateShow)
+        call(_onUpdateShow, show)
       // deprecated
-      if (onHide && !show) onHide(show)
+      if (onHide && !show)
+        onHide(show)
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
       if (onClose) {
         void Promise.resolve(onClose()).then((value) => {
-          if (value === false) return
+          if (value === false)
+            return
           doUpdateShow(false)
         })
-      } else {
+      }
+      else {
         doUpdateShow(false)
       }
     }
-    function handlePositiveClick (): void {
+    function handlePositiveClick(): void {
       const { onPositiveClick } = props
       if (onPositiveClick) {
         void Promise.resolve(onPositiveClick()).then((value) => {
-          if (value === false) return
+          if (value === false)
+            return
           doUpdateShow(false)
         })
-      } else {
+      }
+      else {
         doUpdateShow(false)
       }
     }
-    function handleNegativeClick (): void {
+    function handleNegativeClick(): void {
       const { onNegativeClick } = props
       if (onNegativeClick) {
         void Promise.resolve(onNegativeClick()).then((value) => {
-          if (value === false) return
+          if (value === false)
+            return
           doUpdateShow(false)
         })
-      } else {
+      }
+      else {
         doUpdateShow(false)
       }
     }
-    function handleBeforeLeave (): void {
+    function handleBeforeLeave(): void {
       const { onBeforeLeave, onBeforeHide } = props
-      if (onBeforeLeave) call(onBeforeLeave)
+      if (onBeforeLeave)
+        call(onBeforeLeave)
       // deprecated
-      if (onBeforeHide) onBeforeHide()
+      if (onBeforeHide)
+        onBeforeHide()
     }
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       const { onAfterLeave, onAfterHide } = props
-      if (onAfterLeave) call(onAfterLeave)
+      if (onAfterLeave)
+        call(onAfterLeave)
       // deprecated
-      if (onAfterHide) onAfterHide()
+      if (onAfterHide)
+        onAfterHide()
     }
-    function handleClickoutside (e: MouseEvent): void {
+    function handleClickoutside(e: MouseEvent): void {
       const { onMaskClick } = props
       if (onMaskClick) {
         onMaskClick(e)
@@ -216,10 +229,12 @@ export default defineComponent({
         }
       }
     }
-    function handleEsc (e: KeyboardEvent): void {
+    function handleEsc(e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
-        !isComposingRef.value && doUpdateShow(false)
+        if (!isComposingRef.value) {
+          doUpdateShow(false)
+        }
       }
     }
     provide(modalInjectionKey, {
@@ -280,7 +295,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>

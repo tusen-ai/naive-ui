@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { type CSSProperties, h, Fragment } from 'vue'
+import { type CSSProperties, Fragment, h } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {
@@ -37,11 +37,7 @@ describe('n-switch', () => {
     const onUpdateValue2: (value: number) => void = () => {}
     const onUpdateValue3: (value: boolean) => void = () => {}
     <Fragment>
-      <NSwitch
-        onUpdateValue={onUpdateValue1}
-        value={'123'}
-        defaultValue={'123'}
-      />
+      <NSwitch onUpdateValue={onUpdateValue1} value="123" defaultValue="123" />
       <NSwitch onUpdateValue={onUpdateValue2} value={123} defaultValue={123} />
       <NSwitch
         onUpdateValue={onUpdateValue3}

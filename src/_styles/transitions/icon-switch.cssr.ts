@@ -13,7 +13,7 @@ interface IconSwitchTransitionOptions {
   transition?: string
 }
 
-export function iconSwitchTransition ({
+export function iconSwitchTransition({
   originalTransform = '',
   left = 0,
   top = 0,
@@ -21,7 +21,7 @@ export function iconSwitchTransition ({
 }: IconSwitchTransitionOptions = {}): CNode[] {
   return [
     c('&.icon-switch-transition-enter-from, &.icon-switch-transition-leave-to', {
-      transform: originalTransform + ' scale(0.75)',
+      transform: `${originalTransform} scale(0.75)`,
       left,
       top,
       opacity: 0

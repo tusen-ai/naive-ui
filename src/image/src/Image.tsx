@@ -1,15 +1,15 @@
 import {
+  type ImgHTMLAttributes,
+  type PropType,
   defineComponent,
   h,
   inject,
-  ref,
-  type PropType,
-  watchEffect,
-  type ImgHTMLAttributes,
-  onMounted,
   onBeforeUnmount,
+  onMounted,
   provide,
-  toRef
+  ref,
+  toRef,
+  watchEffect
 } from 'vue'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -34,7 +34,7 @@ export const imageProps = {
   intersectionObserverOptions: Object as PropType<IntersectionObserverOptions>,
   objectFit: {
     type: String as PropType<
-    'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+      'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
     >,
     default: 'fill'
   },
@@ -55,7 +55,7 @@ export default defineComponent({
   name: 'Image',
   props: imageProps,
   inheritAttrs: false,
-  setup (props) {
+  setup(props) {
     const imageRef = ref<HTMLImageElement | null>(null)
     const showErrorRef = ref(false)
     const previewInstRef = ref<ImagePreviewInst | null>(null)
@@ -63,7 +63,8 @@ export default defineComponent({
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
     const exposedMethods = {
       click: () => {
-        if (props.previewDisabled || showErrorRef.value) return
+        if (props.previewDisabled || showErrorRef.value)
+          return
         const mergedPreviewSrc = props.previewSrc || props.src
         if (imageGroupHandle) {
           imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
@@ -72,7 +73,8 @@ export default defineComponent({
           return
         }
         const { value: previewInst } = previewInstRef
-        if (!previewInst) return
+        if (!previewInst)
+          return
         previewInst.setPreviewSrc(mergedPreviewSrc)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
@@ -132,7 +134,8 @@ export default defineComponent({
         props.imgProps?.onClick?.(e)
       },
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value) return
+        if (!shouldStartLoadingRef.value)
+          return
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
@@ -147,7 +150,7 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
 
     const placeholderNode = this.$slots.placeholder?.()
@@ -192,8 +195,8 @@ export default defineComponent({
         class={[
           $attrs.class,
           `${mergedClsPrefix}-image`,
-          (this.previewDisabled || this.showError) &&
-            `${mergedClsPrefix}-image--preview-disabled`
+          (this.previewDisabled || this.showError)
+          && `${mergedClsPrefix}-image--preview-disabled`
         ]}
       >
         {this.groupId ? (

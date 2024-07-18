@@ -4,12 +4,6 @@
 有些人表示特别想用 Alert 来当成 Message，当然换个别的也行。
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    No Party For Cao Dong
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
 import { NAlert, useMessage } from 'naive-ui'
@@ -37,9 +31,9 @@ const renderMessage: MessageRenderMessage = (props) => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const { error } = useMessage()
-    function handleClick () {
+    function handleClick() {
       error('那东西我们早就不屑啦，哈哈哈', {
         render: renderMessage,
         closable: true
@@ -51,3 +45,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleClick">
+    No Party For Cao Dong
+  </n-button>
+</template>

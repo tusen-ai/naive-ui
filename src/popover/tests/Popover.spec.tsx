@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { defineComponent, h, Fragment, nextTick } from 'vue'
+import { Fragment, defineComponent, h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopover, type PopoverInst } from '../index'
 import { createId } from 'seemly'
+import { NPopover, type PopoverInst } from '../index'
 
 const popoverBodyHeader = '.n-popover__header'
 const popoverBodyFooter = '.n-popover__footer'
 
-async function sleep (ms: number): Promise<void> {
+async function sleep(ms: number): Promise<void> {
   await new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
@@ -25,7 +24,7 @@ describe('n-popover', () => {
 
   const TriggerComponent1 = defineComponent({
     name: 'TriggerComponent1',
-    render () {
+    render() {
       return <div>GoGoGo</div>
     }
   })
@@ -33,15 +32,14 @@ describe('n-popover', () => {
   ;(['hover', 'click'] as const).forEach((trigger) => {
     // test trigger node
     ;['text', 'div', 'Fragment', TriggerComponent1].forEach((type) => {
-      const classNameHash: string =
-        trigger + '-' + (typeof type === 'string' ? type : type.name)
+      const classNameHash: string = `${trigger}-${typeof type === 'string' ? type : type.name}`
       it(`trigger node ${classNameHash}`, async () => {
         // hover trigger, click trigger
         const triggerEvent = trigger === 'hover' ? 'mouseenter' : 'click'
         const hideTriggerEvent = trigger === 'hover' ? 'mouseleave' : 'click'
         // text node, element node
-        const triggerNode =
-          type === 'text' ? (
+        const triggerNode
+          = type === 'text' ? (
             'star kirby'
           ) : type === 'Fragment' ? (
             <>
@@ -68,8 +66,8 @@ describe('n-popover', () => {
             )
           }
         })
-        const triggerNodeWrapper =
-          type === 'text'
+        const triggerNodeWrapper
+          = type === 'text'
             ? wrapper.find('span')
             : wrapper.find(`.star-kirby-${classNameHash}-trigger`)
 

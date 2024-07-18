@@ -67,7 +67,7 @@ debug.vue
 | on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
-| on-preview | `(file: FileInfo, detail: { event: MouseEvent }) => void` | `undefined` | 点击文件链接或预览按钮的回调函数，你可以通过 `preventDefault` 来取消默认的链接打开行为 | `detail.event` NEXT_VERSION |
+| on-preview | `(file: FileInfo, detail: { event: MouseEvent }) => void` | `undefined` | 点击文件链接或预览按钮的回调函数，你可以通过 `preventDefault` 来取消默认的链接打开行为 | `detail.event` 2.39.0 |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` 2.38.2 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 

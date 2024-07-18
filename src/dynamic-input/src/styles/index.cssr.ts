@@ -1,4 +1,4 @@
-import { c, cB, cM, cE } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --action-margin
@@ -9,8 +9,7 @@ export default cB('dynamic-input', {
     margin-bottom: 10px;
     display: flex;
     flex-wrap: nowrap;
-  `,
-  [
+  `, [
     cB('dynamic-input-preset-input', {
       flex: 1,
       alignItems: 'center'

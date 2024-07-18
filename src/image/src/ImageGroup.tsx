@@ -1,14 +1,14 @@
 import {
-  defineComponent,
-  h,
-  ref,
-  provide,
-  getCurrentInstance,
   type Ref,
+  defineComponent,
+  getCurrentInstance,
+  h,
+  provide,
+  ref,
   toRef
 } from 'vue'
 import { createId } from 'seemly'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, createInjectionKey } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -16,11 +16,11 @@ import { imagePreviewSharedProps } from './interface'
 import type { ImageRenderToolbar } from './public-types'
 
 export const imageGroupInjectionKey = createInjectionKey<
-ImagePreviewInst & {
-  groupId: string
-  mergedClsPrefixRef: Ref<string>
-  renderToolbarRef: Ref<ImageRenderToolbar | undefined>
-}
+  ImagePreviewInst & {
+    groupId: string
+    mergedClsPrefixRef: Ref<string>
+    renderToolbarRef: Ref<ImageRenderToolbar | undefined>
+  }
 >('n-image-group')
 
 export const imageGroupProps = imagePreviewSharedProps
@@ -30,36 +30,46 @@ export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
-  setup (props) {
+  setup(props) {
     let currentSrc: string | undefined
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
     const vm = getCurrentInstance()
+    const previewInstRef = ref<ImagePreviewInst | null>(null)
+
     const setPreviewSrc = (src: string | undefined): void => {
       currentSrc = src
       previewInstRef.value?.setPreviewSrc(src)
     }
 
-    function go (step: 1 | -1): void {
-      if (!vm?.proxy) return
+    function go(step: 1 | -1): void {
+      if (!vm?.proxy)
+        return
       const container: HTMLElement = vm.proxy.$el.parentElement
       // use dom api since we can't get the correct order before all children are rendered
       const imgs: NodeListOf<HTMLImageElement> = container.querySelectorAll(
         `[data-group-id=${groupId}]:not([data-error=true])`
       )
 
-      if (!imgs.length) return
+      if (!imgs.length)
+        return
       const index = Array.from(imgs).findIndex(
-        (img) => img.dataset.previewSrc === currentSrc
+        img => img.dataset.previewSrc === currentSrc
       )
       if (~index) {
         setPreviewSrc(
           imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
         )
-      } else {
+      }
+      else {
         setPreviewSrc(imgs[0].dataset.previewSrc)
       }
-      step === 1 ? props.onPreviewNext?.() : props.onPreviewPrev?.()
+      if (step === 1) {
+        props.onPreviewNext?.()
+      }
+      else {
+        props.onPreviewPrev?.()
+      }
     }
     provide(imageGroupInjectionKey, {
       mergedClsPrefixRef,
@@ -73,7 +83,6 @@ export default defineComponent({
       groupId,
       renderToolbarRef: toRef(props, 'renderToolbar')
     })
-    const previewInstRef = ref<ImagePreviewInst | null>(null)
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       previewInstRef,
@@ -85,7 +94,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     return (
       <NImagePreview
         theme={this.theme}

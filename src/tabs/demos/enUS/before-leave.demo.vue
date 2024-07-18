@@ -4,31 +4,12 @@
 You can prevent or postpone tab switching.
 </markdown>
 
-<template>
-  <n-tabs
-    type="line"
-    default-value="okay"
-    @before-leave="handleBeforeLeave"
-    @update:value="handleUpdateValue"
-  >
-    <n-tab-pane name="wait" tab="Wait for 1s">
-      +1s
-    </n-tab-pane>
-    <n-tab-pane name="not-allowed" tab="Not allowed">
-      ???
-    </n-tab-pane>
-    <n-tab-pane name="okay" tab="Okay">
-      Just so so
-    </n-tab-pane>
-  </n-tabs>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       handleBeforeLeave: (tabName: string) => {
@@ -55,3 +36,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tabs
+    type="line"
+    default-value="okay"
+    @before-leave="handleBeforeLeave"
+    @update:value="handleUpdateValue"
+  >
+    <n-tab-pane name="wait" tab="Wait for 1s">
+      +1s
+    </n-tab-pane>
+    <n-tab-pane name="not-allowed" tab="Not allowed">
+      ???
+    </n-tab-pane>
+    <n-tab-pane name="okay" tab="Okay">
+      Just so so
+    </n-tab-pane>
+  </n-tabs>
+</template>

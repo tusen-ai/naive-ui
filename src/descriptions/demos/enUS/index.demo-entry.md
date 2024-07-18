@@ -29,7 +29,7 @@ size.vue
 | label-placement | `'top' \| 'left'` | `'top'` | Label placement. |  |
 | label-class | `string` | `undefined` | Class of the item label. | 2.36.0 |
 | label-style | `Object \| string` | `undefined` | Style of the item label. |  |
-| separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and 　`bordered` is `false`.　 |  |
+| separator | `string` | `':'` | Separator, only work when `label-placement` is `left` and `bordered` is `false`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |  |
 | title | `string` | `undefined` | Title of the description. |  |
 

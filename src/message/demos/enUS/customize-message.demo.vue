@@ -4,12 +4,6 @@
 Some users said that they want to use alert as message.
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    Lpsum
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
 import { NAlert, useMessage } from 'naive-ui'
@@ -37,9 +31,9 @@ const renderMessage: MessageRenderMessage = (props) => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const { error } = useMessage()
-    function handleClick () {
+    function handleClick() {
       error('Lorem ipsum dolor sit amet, consectetur adipiscing elit', {
         render: renderMessage,
         closable: true
@@ -51,3 +45,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleClick">
+    Lpsum
+  </n-button>
+</template>

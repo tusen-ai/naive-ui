@@ -13,33 +13,34 @@ Not too simple, but good-looking.
 ```
 
 ```js
-import { h, defineComponent, ref, nextTick, computed } from 'vue'
+import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { NInput } from 'naive-ui'
 
-const createData = () =>
-  Array.from({ length: 100 }).map((_, index) => ({
+function createData() {
+  return Array.from({ length: 100 }).map((_, index) => ({
     key: index,
     name: `John Brown ${index}`,
     age: (Math.random() * 40) | 0,
     address: `New York No. ${index} Lake Park`
   }))
+}
 
 const ShowOrEdit = defineComponent({
   props: {
     value: [String, Number],
     onUpdateValue: [Function, Array]
   },
-  setup (props) {
+  setup(props) {
     const isEdit = ref(false)
     const inputRef = ref(null)
     const inputValue = ref(props.value)
-    function handleOnClick () {
+    function handleOnClick() {
       isEdit.value = true
       nextTick(() => {
         inputRef.value.focus()
       })
     }
-    function handleChange () {
+    function handleChange() {
       props.onUpdateValue(inputValue.value)
       isEdit.value = false
     }
@@ -66,11 +67,11 @@ const ShowOrEdit = defineComponent({
 })
 
 export default defineComponent({
-  setup () {
+  setup() {
     const data = ref(createData())
 
     const getDataIndex = (key) => {
-      return data.value.findIndex((item) => item.key === key)
+      return data.value.findIndex(item => item.key === key)
     }
     const page = ref(1)
 
@@ -92,11 +93,11 @@ export default defineComponent({
           title: 'Name',
           key: 'name',
           width: 150,
-          render (row) {
+          render(row) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.name,
-              onUpdateValue (v) {
+              onUpdateValue(v) {
                 data.value[index].name = v
               }
             })
@@ -106,11 +107,11 @@ export default defineComponent({
           title: 'Age',
           key: 'age',
           width: 100,
-          render (row) {
+          render(row) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.age,
-              onUpdateValue (v) {
+              onUpdateValue(v) {
                 data.value[index].age = v
               }
             })
@@ -119,11 +120,11 @@ export default defineComponent({
         {
           title: 'Address',
           key: 'address',
-          render (row) {
+          render(row) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.address,
-              onUpdateValue (v) {
+              onUpdateValue(v) {
                 data.value[index].address = v
               }
             })

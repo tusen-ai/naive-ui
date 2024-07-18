@@ -2,6 +2,18 @@
 # Dark Debug 5
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      showModal: false
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = !showModal">
     Toggle
@@ -15,15 +27,3 @@
     <n-calendar />
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      showModal: false
-    }
-  }
-})
-</script>

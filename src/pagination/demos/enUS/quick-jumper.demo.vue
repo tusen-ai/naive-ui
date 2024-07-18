@@ -4,6 +4,18 @@
 You can customize the content to jump to (press `Enter` to jump quickly).
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      page: ref(2)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-pagination :page-count="100" show-quick-jumper>
@@ -18,15 +30,3 @@ You can customize the content to jump to (press `Enter` to jump quickly).
     </n-pagination>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      page: ref(2)
-    }
-  }
-})
-</script>

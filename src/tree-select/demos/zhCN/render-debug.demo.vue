@@ -2,33 +2,18 @@
 # Render debug
 </markdown>
 
-<template>
-  <n-tree-select
-    :options="options"
-    default-value="Drive My Car"
-    multiple
-    :node-props="nodeProps"
-    :render-label="renderXxx"
-    :render-prefix="renderXxx"
-    :render-suffix="renderXxx"
-    :render-switcher-icon="renderSwitcherIcon"
-    :render-tag="renderTag"
-    @update:value="handleUpdateValue"
-  />
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import {
-  TreeSelectOption,
+import { defineComponent, h } from 'vue'
+import type {
   TreeSelectNodeProps,
+  TreeSelectOption,
   TreeSelectRenderLabel,
-  TreeSelectRenderTag,
-  NTag
+  TreeSelectRenderTag
 } from 'naive-ui'
+import { NTag } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const nodeProps: TreeSelectNodeProps = ({ option }) => {
       return {
         'data-xxx': option.label || ''
@@ -62,7 +47,7 @@ export default defineComponent({
       renderTag,
       renderXxx,
       renderSwitcherIcon: () => 'x',
-      handleUpdateValue (
+      handleUpdateValue(
         value: string | number | Array<string | number> | null,
         option: TreeSelectOption | null | Array<TreeSelectOption | null>
       ) {
@@ -75,8 +60,8 @@ export default defineComponent({
           children: [
             {
               label:
-                "Everybody's Got Something to Hide Except Me and My Monkey",
-              key: "Everybody's Got Something to Hide Except Me and My Monkey"
+                'Everybody\'s Got Something to Hide Except Me and My Monkey',
+              key: 'Everybody\'s Got Something to Hide Except Me and My Monkey'
             },
             {
               label: 'Drive My Car',
@@ -88,8 +73,8 @@ export default defineComponent({
               key: 'Norwegian Wood'
             },
             {
-              label: "You Won't See",
-              key: "You Won't See",
+              label: 'You Won\'t See',
+              key: 'You Won\'t See',
               disabled: true
             },
             {
@@ -118,8 +103,8 @@ export default defineComponent({
               key: 'Girl'
             },
             {
-              label: "I'm looking through you",
-              key: "I'm looking through you"
+              label: 'I\'m looking through you',
+              key: 'I\'m looking through you'
             },
             {
               label: 'In My Life',
@@ -164,8 +149,8 @@ export default defineComponent({
               key: 'Maggie Mae'
             },
             {
-              label: "I've Got A Feeling",
-              key: "I've Got A Feeling"
+              label: 'I\'ve Got A Feeling',
+              key: 'I\'ve Got A Feeling'
             },
             {
               label: 'One After 909',
@@ -190,3 +175,18 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    multiple
+    :node-props="nodeProps"
+    :render-label="renderXxx"
+    :render-prefix="renderXxx"
+    :render-suffix="renderXxx"
+    :render-switcher-icon="renderSwitcherIcon"
+    :render-tag="renderTag"
+    @update:value="handleUpdateValue"
+  />
+</template>

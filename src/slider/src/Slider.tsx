@@ -1,43 +1,42 @@
-/* eslint-disable @typescript-eslint/space-before-function-paren */
 import {
-  h,
-  ref,
-  toRef,
-  computed,
-  watch,
-  nextTick,
-  defineComponent,
-  Transition,
-  type PropType,
   type CSSProperties,
   type ComponentPublicInstance,
-  onBeforeUnmount
+  type PropType,
+  Transition,
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  ref,
+  toRef,
+  watch
 } from 'vue'
 import {
-  VBinder,
-  VTarget,
-  VFollower,
+  type FollowerInst,
   type FollowerPlacement,
-  type FollowerInst
+  VBinder,
+  VFollower,
+  VTarget
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
-import { on, off } from 'evtd'
+import { off, on } from 'evtd'
 import {
-  useTheme,
-  useFormItem,
-  useConfig,
   type ThemeProps,
+  useConfig,
+  useFormItem,
+  useTheme,
   useThemeClass
 } from '../../_mixins'
 import {
-  call,
-  useAdjustedTo,
-  type MaybeArray,
   type ExtractPublicPropTypes,
-  resolveSlot
+  type MaybeArray,
+  call,
+  resolveSlot,
+  useAdjustedTo
 } from '../../_utils'
-import { sliderLight, type SliderTheme } from '../styles'
-import { type OnUpdateValueImpl } from './interface'
+import { type SliderTheme, sliderLight } from '../styles'
+import type { OnUpdateValueImpl } from './interface'
 import { isTouchEvent, useRefs } from './utils'
 import style from './styles/index.cssr'
 
@@ -93,10 +92,10 @@ export const sliderProps = {
   vertical: Boolean,
   reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number & number[]) => void>
+    MaybeArray<(value: number & number[]) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: number & number[]) => void>
+    MaybeArray<(value: number & number[]) => void>
   >,
   onDragstart: [Function] as PropType<() => void>,
   onDragend: [Function] as PropType<() => void>
@@ -108,8 +107,8 @@ export default defineComponent({
   name: 'Slider',
   props: sliderProps,
   setup(props) {
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'Slider',
       '-slider',
@@ -123,7 +122,7 @@ export default defineComponent({
     const handleRailRef = ref<HTMLElement | null>(null)
     const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
     const [followerRefs, setFollowerRefs] = useRefs<
-    FollowerInst & ComponentPublicInstance
+      FollowerInst & ComponentPublicInstance
     >()
     const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
 
@@ -132,7 +131,8 @@ export default defineComponent({
     const { mergedDisabledRef } = formItem
     const precisionRef = computed(() => {
       const { step } = props
-      if (Number(step) <= 0 || step === 'mark') return 0
+      if (Number(step) <= 0 || step === 'mark')
+        return 0
       const stepString = step.toString()
       let precision = 0
       if (stepString.includes('.')) {
@@ -164,7 +164,7 @@ export default defineComponent({
     })
     const markValuesRef = computed(() => {
       const { marks } = props
-      return marks ? Object.keys(marks).map(parseFloat) : null
+      return marks ? Object.keys(marks).map(Number.parseFloat) : null
     })
 
     // status ref
@@ -182,7 +182,8 @@ export default defineComponent({
       return vertical ? bottom : left
     })
     const fillStyleRef = computed(() => {
-      if (handleCountExceeds2Ref.value) return
+      if (handleCountExceeds2Ref.value)
+        return
       const values = arrifiedValueRef.value
       const start = valueToPercentage(
         props.range ? Math.min(...values) : props.min
@@ -218,8 +219,8 @@ export default defineComponent({
           ? () => false
           : (num: number): boolean =>
               range
-                ? num >= orderValues[0] &&
-                  num <= orderValues[orderValues.length - 1]
+                ? num >= orderValues[0]
+                && num <= orderValues[orderValues.length - 1]
                 : num <= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
@@ -245,13 +246,14 @@ export default defineComponent({
     }
     function isShowTooltip(index: number): boolean {
       return (
-        props.showTooltip ||
-        hoverIndexRef.value === index ||
-        (activeIndexRef.value === index && draggingRef.value)
+        props.showTooltip
+        || hoverIndexRef.value === index
+        || (activeIndexRef.value === index && draggingRef.value)
       )
     }
     function shouldKeepTooltipTransition(index: number): boolean {
-      if (!draggingRef.value) return true
+      if (!draggingRef.value)
+        return true
       return !(
         activeIndexRef.value === index && previousIndexRef.value === index
       )
@@ -264,14 +266,17 @@ export default defineComponent({
     }
     function syncPosition(): void {
       followerRefs.forEach((inst, index) => {
-        if (isShowTooltip(index)) inst.syncPosition()
+        if (isShowTooltip(index))
+          inst.syncPosition()
       })
     }
     function doUpdateValue(value: number | number[]): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -285,7 +290,8 @@ export default defineComponent({
             doUpdateValue(value)
           }
         }
-      } else if (!Array.isArray(value)) {
+      }
+      else if (!Array.isArray(value)) {
         const oldValue = arrifiedValueRef.value[0]
         if (oldValue !== value) {
           doUpdateValue(value)
@@ -297,7 +303,8 @@ export default defineComponent({
         const values = arrifiedValueRef.value.slice()
         values.splice(index, 1, value)
         dispatchValueUpdate(values)
-      } else {
+      }
+      else {
         dispatchValueUpdate(value)
       }
     }
@@ -322,7 +329,8 @@ export default defineComponent({
         )
         return closestMark ? closestMark.value : currentValue
       }
-      if (step <= 0) return currentValue
+      if (step <= 0)
+        return currentValue
       const { value: precision } = precisionRef
       let closestMark
       // if it is a stepping, priority will be given to the marks
@@ -341,7 +349,8 @@ export default defineComponent({
           ],
           stepBuffer
         )
-      } else {
+      }
+      else {
         const roundValue = getRoundValue(value)
         closestMark = getClosestMark(value, [...markValues, roundValue])
       }
@@ -360,7 +369,8 @@ export default defineComponent({
     }
     function getRoundValue(value: number): number {
       const { step, min } = props
-      if (Number(step) <= 0 || step === 'mark') return value
+      if (Number(step) <= 0 || step === 'mark')
+        return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
@@ -369,7 +379,8 @@ export default defineComponent({
       markValues = markValuesRef.value,
       buffer?: number
     ): ClosestMark | null {
-      if (!markValues?.length) return null
+      if (!markValues?.length)
+        return null
       let closestMark: ClosestMark | null = null
       let index = -1
       while (++index < markValues.length) {
@@ -377,8 +388,8 @@ export default defineComponent({
         const distance = Math.abs(diff)
         if (
           // find marks in the same direction
-          (buffer === undefined || diff * buffer > 0) &&
-          (closestMark === null || distance < closestMark.distance)
+          (buffer === undefined || diff * buffer > 0)
+          && (closestMark === null || distance < closestMark.distance)
         ) {
           closestMark = {
             index,
@@ -391,13 +402,15 @@ export default defineComponent({
     }
     function getPointValue(event: MouseEvent | TouchEvent): number | undefined {
       const railEl = handleRailRef.value
-      if (!railEl) return
+      if (!railEl)
+        return
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
       const railRect = railEl.getBoundingClientRect()
       let percentage: number
       if (props.vertical) {
         percentage = (railRect.bottom - touchEvent.clientY) / railRect.height
-      } else {
+      }
+      else {
         percentage = (touchEvent.clientX - railRect.left) / railRect.width
       }
       if (props.reverse) {
@@ -408,7 +421,8 @@ export default defineComponent({
 
     // dom event handle
     function handleRailKeyDown(e: KeyboardEvent): void {
-      if (mergedDisabledRef.value || !props.keyboard) return
+      if (mergedDisabledRef.value || !props.keyboard)
+        return
       const { vertical, reverse } = props
       switch (e.key) {
         case 'ArrowUp':
@@ -431,11 +445,12 @@ export default defineComponent({
     }
     function handleStepValue(ratio: number): void {
       const activeIndex = activeIndexRef.value
-      if (activeIndex === -1) return
+      if (activeIndex === -1)
+        return
       const { step } = props
       const currentValue = arrifiedValueRef.value[activeIndex]
-      const nextValue =
-        Number(step) <= 0 || step === 'mark'
+      const nextValue
+        = Number(step) <= 0 || step === 'mark'
           ? currentValue
           : currentValue + step * ratio
       doDispatchValue(
@@ -445,12 +460,14 @@ export default defineComponent({
       )
     }
     function handleRailMouseDown(event: MouseEvent | TouchEvent): void {
-      if (mergedDisabledRef.value) return
+      if (mergedDisabledRef.value)
+        return
       if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
         return
       }
       const pointValue = getPointValue(event)
-      if (pointValue === undefined) return
+      if (pointValue === undefined)
+        return
       const values = arrifiedValueRef.value.slice()
       const activeIndex = props.range
         ? getClosestMark(pointValue, values)?.index ?? -1
@@ -469,7 +486,8 @@ export default defineComponent({
     function startDragging(): void {
       if (!draggingRef.value) {
         draggingRef.value = true
-        if (props.onDragstart) call(props.onDragstart)
+        if (props.onDragstart)
+          call(props.onDragstart)
         on('touchend', document, handleMouseUp)
         on('mouseup', document, handleMouseUp)
         on('touchmove', document, handleMouseMove)
@@ -479,7 +497,8 @@ export default defineComponent({
     function stopDragging(): void {
       if (draggingRef.value) {
         draggingRef.value = false
-        if (props.onDragend) call(props.onDragend)
+        if (props.onDragend)
+          call(props.onDragend)
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
@@ -493,7 +512,8 @@ export default defineComponent({
         return
       }
       const pointValue = getPointValue(event)
-      if (pointValue === undefined) return
+      if (pointValue === undefined)
+        return
       doDispatchValue(
         sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
         activeIndex
@@ -532,7 +552,8 @@ export default defineComponent({
     )
     watch(mergedValueRef, () => {
       if (props.marks) {
-        if (dotTransitionDisabledRef.value) return
+        if (dotTransitionDisabledRef.value)
+          return
         dotTransitionDisabledRef.value = true
         void nextTick(() => {
           dotTransitionDisabledRef.value = false
@@ -691,11 +712,11 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-slider-dots`,
-                this.dotTransitionDisabled &&
-                  `${mergedClsPrefix}-slider-dots--transition-disabled`
+                this.dotTransitionDisabled
+                && `${mergedClsPrefix}-slider-dots--transition-disabled`
               ]}
             >
-              {this.markInfos.map((mark) => (
+              {this.markInfos.map(mark => (
                 <div
                   key={mark.label}
                   class={[
@@ -760,8 +781,8 @@ export default defineComponent({
                           show={showTooltip}
                           to={this.adjustedTo}
                           enabled={
-                            (this.showTooltip && !this.range) ||
-                            this.followerEnabledIndexSet.has(index)
+                            (this.showTooltip && !this.range)
+                            || this.followerEnabledIndexSet.has(index)
                           }
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
@@ -820,7 +841,7 @@ export default defineComponent({
           </div>
           {this.marks ? (
             <div class={`${mergedClsPrefix}-slider-marks`}>
-              {this.markInfos.map((mark) => (
+              {this.markInfos.map(mark => (
                 <div
                   key={mark.label}
                   class={`${mergedClsPrefix}-slider-mark`}

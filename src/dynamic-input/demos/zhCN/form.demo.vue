@@ -4,6 +4,34 @@
 `n-dynamic-input` 并不能作为一个单独的表项检验，如果你需要检验 `n-dynamic-input` 里面的内容，可以在自定义内容中传入 `n-form-item` 来完成数据的检验。下面是一个完整的例子。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      dynamicInputRule: {
+        trigger: 'input',
+        validator(rule: unknown, value: string) {
+          if (value.length >= 5)
+            return new Error('最多输入四个字符')
+          return true
+        }
+      },
+      model: ref({
+        dynamicInputValue: [{ value: '', name: '' }]
+      }),
+      onCreate() {
+        return {
+          name: '',
+          value: ''
+        }
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-form :model="model">
     <n-dynamic-input
@@ -53,30 +81,3 @@
   </n-form>
   <pre>{{ JSON.stringify(model.dynamicInputValue, null, 2) }}</pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      dynamicInputRule: {
-        trigger: 'input',
-        validator (rule: unknown, value: string) {
-          if (value.length >= 5) return new Error('最多输入四个字符')
-          return true
-        }
-      },
-      model: ref({
-        dynamicInputValue: [{ value: '', name: '' }]
-      }),
-      onCreate () {
-        return {
-          name: '',
-          value: ''
-        }
-      }
-    }
-  }
-})
-</script>

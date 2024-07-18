@@ -1,5 +1,6 @@
 const { marked } = require('marked')
 const createRenderer = require('./md-renderer')
+
 const mdRenderer = createRenderer()
 const {
   genVueComponent,
@@ -7,7 +8,7 @@ const {
   mergeParts
 } = require('./convert-md-to-demo')
 
-function getPartsOfDemo (text) {
+function getPartsOfDemo(text) {
   // slot template
   const firstIndex = text.indexOf('<template>')
   let template = text.slice(firstIndex + 10)
@@ -24,7 +25,8 @@ function getPartsOfDemo (text) {
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
       title = token.text
-    } else {
+    }
+    else {
       contentTokens.push(token)
     }
   }
@@ -48,13 +50,13 @@ function getPartsOfDemo (text) {
   }
 }
 
-function convertVue2Demo (content, { resourcePath, relativeUrl, isVue = true }) {
+function convertVue2Demo(content, { resourcePath, relativeUrl, isVue = true }) {
   const parts = getPartsOfDemo(content)
   const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
   const vueComponent = genVueComponent(
     mergedParts,
-    fileName + '.vue',
+    `${fileName}.vue`,
     relativeUrl
   )
   return vueComponent

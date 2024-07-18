@@ -14,7 +14,7 @@ const dynamicTagsLight = createTheme({
     Tag: tagLight,
     Space: spaceLight
   },
-  self () {
+  self() {
     return {
       inputWidth: '64px'
     }
@@ -22,6 +22,5 @@ const dynamicTagsLight = createTheme({
 })
 
 export default dynamicTagsLight
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DynamicTagsThemeVars {}
 export type DynamicTagsTheme = typeof dynamicTagsLight

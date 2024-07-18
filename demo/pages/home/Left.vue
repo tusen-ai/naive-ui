@@ -31,7 +31,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--info-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -48,7 +48,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--error-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -65,7 +65,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--warning-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -82,7 +82,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--warning-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -99,7 +99,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--error-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -116,7 +116,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--success-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -132,7 +132,7 @@
             :style="{
               transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
               fill: 'var(--success-color)',
-              fillRule: 'evenodd'
+              fillRule: 'evenodd',
             }"
           />
         </g>
@@ -150,7 +150,7 @@
           r="22.5"
           :style="{
             transition: `fill .3s var(--cubic-bezier-ease-in-out)`,
-            fill: 'var(--info-color)'
+            fill: 'var(--info-color)',
           }"
         />
       </g>

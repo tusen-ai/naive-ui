@@ -4,18 +4,10 @@
 Column: Set `className` property on column object to assign a class name to a certain column.
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :row-class-name="rowClassName"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -44,7 +36,7 @@ const data: RowData[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data,
       columns: [
@@ -62,7 +54,7 @@ export default defineComponent({
           key: 'address'
         }
       ],
-      rowClassName (row: RowData) {
+      rowClassName(row: RowData) {
         if (row.age > 32) {
           return 'too-old'
         }
@@ -72,6 +64,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :row-class-name="rowClassName"
+  />
+</template>
 
 <style>
 :deep(.too-old td) {

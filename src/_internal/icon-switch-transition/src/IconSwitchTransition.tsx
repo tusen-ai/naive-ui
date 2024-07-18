@@ -1,9 +1,9 @@
-import { h, Transition, defineComponent } from 'vue'
+import { Transition, defineComponent, h } from 'vue'
 import { useIsMounted } from 'vooks'
 
 export default defineComponent({
   name: 'BaseIconSwitchTransition',
-  setup (_, { slots }) {
+  setup(_, { slots }) {
     const isMountedRef = useIsMounted()
     return () => (
       <Transition name="icon-switch-transition" appear={isMountedRef.value}>

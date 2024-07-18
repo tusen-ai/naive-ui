@@ -2,30 +2,17 @@
 # Change data debug
 </markdown>
 
-<template>
-  <n-tree
-    default-expand-all
-    :data="data"
-    :watch-props="['defaultExpandedKeys']"
-  />
-  <n-button @click="addChildrenToKey2">
-    add children to key 2
-  </n-button>
-  <n-button @click="moveChildrenOutside">
-    move children to top
-  </n-button>
-</template>
-
 <script lang="ts">
-import { NTree, NButton } from 'naive-ui'
-import { ref, defineComponent } from 'vue'
+import { NButton, NTree } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   name: 'App',
   components: {
     NTree,
     NButton
   },
-  setup () {
+  setup() {
     const data = ref([
       { key: '1', label: '1', children: [{ key: '1-1', label: '1-1' }] },
       { key: '2', label: '2' }
@@ -53,3 +40,17 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <NTree
+    default-expand-all
+    :data="data"
+    :watch-props="['defaultExpandedKeys']"
+  />
+  <NButton @click="addChildrenToKey2">
+    add children to key 2
+  </NButton>
+  <NButton @click="moveChildrenOutside">
+    move children to top
+  </NButton>
+</template>

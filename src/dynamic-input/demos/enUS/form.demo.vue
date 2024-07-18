@@ -4,6 +4,34 @@
 `n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      dynamicInputRule: {
+        trigger: 'input',
+        validator(rule: unknown, value: string) {
+          if (value.length >= 5)
+            return new Error('Input up to 4 characters')
+          return true
+        }
+      },
+      model: ref({
+        dynamicInputValue: [{ value: '', name: '' }]
+      }),
+      onCreate() {
+        return {
+          name: '',
+          value: ''
+        }
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-form :model="model">
     <n-dynamic-input
@@ -55,30 +83,3 @@
   </n-form>
   <pre>{{ JSON.stringify(model.dynamicInputValue, null, 2) }}</pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      dynamicInputRule: {
-        trigger: 'input',
-        validator (rule: unknown, value: string) {
-          if (value.length >= 5) return new Error('Input up to 4 characters')
-          return true
-        }
-      },
-      model: ref({
-        dynamicInputValue: [{ value: '', name: '' }]
-      }),
-      onCreate () {
-        return {
-          name: '',
-          value: ''
-        }
-      }
-    }
-  }
-})
-</script>

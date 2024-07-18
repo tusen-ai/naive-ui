@@ -9,7 +9,7 @@ const tooltipDark: TooltipTheme = {
   peers: {
     Popover: popoverDark
   },
-  self (vars) {
+  self(vars) {
     const { borderRadius, boxShadow2, popoverColor, textColor2 } = vars
     return {
       ...commonVars,

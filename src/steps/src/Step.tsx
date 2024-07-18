@@ -1,16 +1,16 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  inject,
+  type CSSProperties,
   type PropType,
-  type CSSProperties
+  computed,
+  defineComponent,
+  h,
+  inject
 } from 'vue'
 import {
-  CheckmarkIcon as FinishedIcon,
-  CloseIcon as ErrorIcon
+  CloseIcon as ErrorIcon,
+  CheckmarkIcon as FinishedIcon
 } from '../../_internal/icons'
-import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
+import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   call,
   createKey,
@@ -19,8 +19,8 @@ import {
   throwError
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { stepsInjectionKey } from './Steps'
 import { useConfig, useThemeClass } from '../../_mixins'
+import { stepsInjectionKey } from './Steps'
 
 export const stepProps = {
   status: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
@@ -39,10 +39,11 @@ export type StepProps = ExtractPublicPropTypes<typeof stepProps>
 export default defineComponent({
   name: 'Step',
   props: stepProps,
-  setup (props) {
+  setup(props) {
     const NSteps = inject(stepsInjectionKey, null)
 
-    if (!NSteps) throwError('step', '`n-step` must be placed inside `n-steps`.')
+    if (!NSteps)
+      throwError('step', '`n-step` must be placed inside `n-steps`.')
 
     const { inlineThemeDisabled } = useConfig()
 
@@ -61,15 +62,19 @@ export default defineComponent({
         const { status } = props
         if (status) {
           return status
-        } else {
+        }
+        else {
           const { internalIndex } = props
           const { current } = stepsProps
-          if (current === undefined) return 'process'
+          if (current === undefined)
+            return 'process'
           if (internalIndex < current) {
             return 'finish'
-          } else if (internalIndex === current) {
+          }
+          else if (internalIndex === current) {
             return stepsProps.status || 'process'
-          } else if (internalIndex > current) {
+          }
+          else if (internalIndex > current) {
             return 'wait'
           }
         }
@@ -124,9 +129,10 @@ export default defineComponent({
       : undefined
 
     const handleStepClick = computed((): undefined | (() => void) => {
-      if (props.disabled) return undefined
-      const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } =
-        stepsProps
+      if (props.disabled)
+        return undefined
+      const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent }
+        = stepsProps
       return onUpdateCurrent || _onUpdateCurrent
         ? () => {
             if (onUpdateCurrent) {
@@ -149,7 +155,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, onRender, handleStepClick, disabled } = this
     const descriptionNode = resolveWrappedSlot(
       this.$slots.default,
@@ -190,31 +196,31 @@ export default defineComponent({
                       mergedStatus === 'finish' || mergedStatus === 'error'
                     ) ? (
                           icon || (
-                        <div
-                          key={this.internalIndex}
-                          class={`${mergedClsPrefix}-step-indicator-slot__index`}
-                        >
-                          {this.internalIndex}
-                        </div>
+                            <div
+                              key={this.internalIndex}
+                              class={`${mergedClsPrefix}-step-indicator-slot__index`}
+                            >
+                              {this.internalIndex}
+                            </div>
                           )
                         ) : mergedStatus === 'finish' ? (
-                      <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
-                        {{
-                          default: () =>
-                            resolveSlot(stepsSlots['finish-icon'], () => [
-                              <FinishedIcon />
-                            ])
-                        }}
-                      </NBaseIcon>
+                          <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
+                            {{
+                              default: () =>
+                                resolveSlot(stepsSlots['finish-icon'], () => [
+                                  <FinishedIcon />
+                                ])
+                            }}
+                          </NBaseIcon>
                         ) : mergedStatus === 'error' ? (
-                      <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
-                        {{
-                          default: () =>
-                            resolveSlot(stepsSlots['error-icon'], () => [
-                              <ErrorIcon />
-                            ])
-                        }}
-                      </NBaseIcon>
+                          <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
+                            {{
+                              default: () =>
+                                resolveSlot(stepsSlots['error-icon'], () => [
+                                  <ErrorIcon />
+                                ])
+                            }}
+                          </NBaseIcon>
                         ) : null
                   })
                 }

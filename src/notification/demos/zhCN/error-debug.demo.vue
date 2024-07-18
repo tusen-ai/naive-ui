@@ -2,24 +2,12 @@
 # Error debug
 </markdown>
 
-<template>
-  <n-card>
-    <n-input
-      v-model:value="urlToAnalyse"
-      placeholder="URL website to analyse"
-    />
-    <n-button class="w-100" @click="analyzeWebsite()">
-      Analyse
-    </n-button>
-  </n-card>
-</template>
-
 <script lang="ts">
 import { useNotification } from 'naive-ui'
 
 export default {
   name: 'DOMAnalyzer',
-  setup () {
+  setup() {
     const notification = useNotification()
     // const message = useMessage()
     console.log(notification)
@@ -31,7 +19,7 @@ export default {
         // message.error('oooo')
         notification.error({
           content:
-            "Website doesn't allow to be fetched => Blocked by CORS policy: 'No Access-Control-Allow-Origin' header found on that website."
+            'Website doesn\'t allow to be fetched => Blocked by CORS policy: \'No Access-Control-Allow-Origin\' header found on that website.'
         })
       }, 500)
     }
@@ -39,7 +27,7 @@ export default {
       analyzeWebsite
     }
   },
-  data () {
+  data() {
     return {
       urlToAnalyse: undefined,
       analysedDocument: undefined
@@ -47,3 +35,15 @@ export default {
   }
 }
 </script>
+
+<template>
+  <n-card>
+    <n-input
+      v-model:value="urlToAnalyse"
+      placeholder="URL website to analyse"
+    />
+    <n-button class="w-100" @click="analyzeWebsite()">
+      Analyse
+    </n-button>
+  </n-card>
+</template>
