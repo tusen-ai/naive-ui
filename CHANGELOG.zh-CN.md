@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+### Features
+
+- `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性， 关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
+
 ## 2.39.0
 
 `2024-07-15`

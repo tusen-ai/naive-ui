@@ -26,7 +26,15 @@ export const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<string | Record<string, any>>,
-  size: Number
+  size: Number,
+  yPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'right'
+  },
+  xPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  }
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
