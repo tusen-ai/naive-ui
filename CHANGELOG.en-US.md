@@ -23,6 +23,7 @@
 - Fix `n-form-item` validation state is not correctly updated [#6068](https://github.com/tusen-ai/naive-ui/issues/6068).
 - Fix `n-select`'s header make inner input unavailable, closes [#6030](https://github.com/tusen-ai/naive-ui/issues/6030).
 - Fix `n-tree` may have incorrect node selection status when `show-irrelevant-nodes` is disabled, close [#6115](https://github.com/tusen-ai/naive-ui/issues/6115).
+- Fix `n-infinite-scroll` bottoming out judgment error, closes [#6133](https://github.com/tusen-ai/naive-ui/issues/6133).
 
 ### Features
 
