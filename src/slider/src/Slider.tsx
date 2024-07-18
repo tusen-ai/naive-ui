@@ -470,7 +470,7 @@ export default defineComponent({
         return
       const values = arrifiedValueRef.value.slice()
       const activeIndex = props.range
-        ? getClosestMark(pointValue, values)?.index ?? -1
+        ? (getClosestMark(pointValue, values)?.index ?? -1)
         : 0
       if (activeIndex !== -1) {
         // avoid triggering scrolling on touch

@@ -43,7 +43,7 @@ export default defineComponent({
         formRef.value?.validate((errors, { warnings }) => {
           if (errors) {
             console.error(errors)
-            message.error('校验通过了')
+            message.error('校验未通过')
           }
           else if (warnings) {
             message.warning('校验通过但是留意还有警告')

@@ -18,7 +18,7 @@ export function resolveOptionsAndHash(
     hash: `${options.rootMargin || '0px 0px 0px 0px'}-${
       Array.isArray(options.threshold)
         ? options.threshold.join(',')
-        : options.threshold ?? '0'
+        : (options.threshold ?? '0')
     }`,
     options: {
       ...options,

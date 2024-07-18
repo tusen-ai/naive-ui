@@ -160,6 +160,21 @@ export function createDocumentationMenuOptions({ lang, theme }) {
           path: '/ssr'
         },
         {
+          en: 'Nuxt.js',
+          zh: 'Nuxt.js',
+          path: '/nuxtjs'
+        },
+        {
+          en: 'Vitepress',
+          zh: 'Vitepress',
+          path: '/vitepress'
+        },
+        {
+          en: 'Vite SSG/SSE',
+          zh: 'Vite SSG/SSE',
+          path: '/vite-ssge'
+        },
+        {
           en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'

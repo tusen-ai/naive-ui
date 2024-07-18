@@ -68,8 +68,8 @@ export default defineComponent({
         if (size !== undefined) {
           sizeHeight = selfThemeVars[createKey('height', size)]
         }
-        const mergedWidth = circle ? width ?? height ?? sizeHeight : width
-        const mergedHeight = (circle ? width ?? height : height) ?? sizeHeight
+        const mergedWidth = circle ? (width ?? height ?? sizeHeight) : width
+        const mergedHeight = (circle ? (width ?? height) : height) ?? sizeHeight
         return {
           display: text ? 'inline-block' : '',
           verticalAlign: text ? '-0.125em' : '',
