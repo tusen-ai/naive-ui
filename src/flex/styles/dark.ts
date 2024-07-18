@@ -3,7 +3,7 @@ import type { FlexTheme } from './light'
 
 const flexDark: FlexTheme = {
   name: 'Flex',
-  self () {
+  self() {
     return commonVars
   }
 }

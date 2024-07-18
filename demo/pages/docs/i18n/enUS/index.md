@@ -47,7 +47,8 @@ The following list is sorted by 'Config' column.
 | Language                   | Config | Date config | Version |
 | -------------------------- | ------ | ----------- | ------- |
 | Arabic (العربية)           | arDZ   | dateArDZ    | 2.34.0  |
-| Azerbaijani (Azərbaycanca) | azAZ   | dateAzAZ    |         |
+| Azerbaijani (Azərbaycanca) | azAZ   | dateAzAZ    | 2.39.0  |
+| Czech (Czechia)            | csCZ   | dateCsCz    | 2.38.2  |
 | German (Germany)           | deDE   | dateDeDE    |         |
 | English (British)          | enGB   | dateEnGB    | 2.25.1  |
 | English                    | enUS   | dateEnUS    |         |
@@ -70,6 +71,7 @@ The following list is sorted by 'Config' column.
 | Thai (Thailand)            | thTH   | dateThTH    | 2.27.0  |
 | Turkish                    | trTR   | dateTrTR    | 2.34.0  |
 | Ukrainian                  | ukUA   | dateUkUA    |         |
+| Uzbek (Uzbekistan)         | uzUZ   | dateUzUZ    | 2.39.0  |
 | Vietnamese (Vietnam)       | viVN   | dateViVN    | 2.30.7  |
 | Chinese (Simplified)       | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)      | zhTW   | dateZhTW    |         |

@@ -4,6 +4,20 @@
 Browser's default `maxlength` and `minlength` and naive-ui's builtin character count method can't split all string correctly. You can use `count-graphemes` count to count graphemes correctly.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import GraphemeSplitter from 'grapheme-splitter'
+
+export default defineComponent({
+  setup() {
+    const splitter = new GraphemeSplitter()
+    return {
+      countGraphemes: (value: string) => splitter.countGraphemes(value)
+    }
+  }
+})
+</script>
+
 <template>
   <n-form>
     <n-form-item label="Default behavior">
@@ -19,17 +33,3 @@ Browser's default `maxlength` and `minlength` and naive-ui's builtin character c
     </n-form-item>
   </n-form>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import GraphemeSplitter from 'grapheme-splitter'
-
-export default defineComponent({
-  setup () {
-    const splitter = new GraphemeSplitter()
-    return {
-      countGraphemes: (value: string) => splitter.countGraphemes(value)
-    }
-  }
-})
-</script>

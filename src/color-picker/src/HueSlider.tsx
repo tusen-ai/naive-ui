@@ -1,4 +1,4 @@
-import { defineComponent, h, type PropType, ref } from 'vue'
+import { type PropType, defineComponent, h, ref } from 'vue'
 import { off, on } from 'evtd'
 import { normalizeHue } from './utils'
 
@@ -7,8 +7,8 @@ const HANDLE_SIZE_NUM = 12
 const RADIUS = '6px'
 const RADIUS_NUM = 6
 
-const GRADIENT =
-  'linear-gradient(90deg,red,#ff0 16.66%,#0f0 33.33%,#0ff 50%,#00f 66.66%,#f0f 83.33%,red)'
+const GRADIENT
+  = 'linear-gradient(90deg,red,#ff0 16.66%,#0f0 33.33%,#0ff 50%,#00f 66.66%,#f0f 83.33%,red)'
 
 export default defineComponent({
   name: 'HueSlider',
@@ -27,24 +27,26 @@ export default defineComponent({
     },
     onComplete: Function as PropType<() => void>
   },
-  setup (props) {
+  setup(props) {
     const railRef = ref<HTMLElement | null>(null)
-    function handleMouseDown (e: MouseEvent): void {
-      if (!railRef.value) return
+    function handleMouseDown(e: MouseEvent): void {
+      if (!railRef.value)
+        return
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
       handleMouseMove(e)
     }
-    function handleMouseMove (e: MouseEvent): void {
+    function handleMouseMove(e: MouseEvent): void {
       const { value: railEl } = railRef
-      if (!railEl) return
+      if (!railEl)
+        return
       const { width, left } = railEl.getBoundingClientRect()
       const newHue = normalizeHue(
         ((e.clientX - left - RADIUS_NUM) / (width - HANDLE_SIZE_NUM)) * 360
       )
       props.onUpdateHue(newHue)
     }
-    function handleMouseUp (): void {
+    function handleMouseUp(): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
       props.onComplete?.()
@@ -54,7 +56,7 @@ export default defineComponent({
       handleMouseDown
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div

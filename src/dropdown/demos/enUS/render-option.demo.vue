@@ -4,28 +4,14 @@
 You can use `render-option` to add tooltip for option.
 </markdown>
 
-<template>
-  <n-dropdown
-    trigger="hover"
-    :options="options"
-    :render-option="renderOption"
-    @select="handleSelect"
-  >
-    <n-button>Go For a Trip</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
-import { defineComponent, h, VNode } from 'vue'
-import {
-  useMessage,
-  NTooltip,
-  DropdownOption,
-  DropdownGroupOption
-} from 'naive-ui'
+import type { VNode } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { DropdownGroupOption, DropdownOption } from 'naive-ui'
+import { NTooltip, useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       renderOption: ({
@@ -51,8 +37,8 @@ export default defineComponent({
           disabled: true
         },
         {
-          label: "Brown's Hotel, London",
-          key: "brown's hotel, london"
+          label: 'Brown\'s Hotel, London',
+          key: 'brown\'s hotel, london'
         },
         {
           label: 'Atlantis Bahamas, Nassau',
@@ -63,10 +49,21 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    trigger="hover"
+    :options="options"
+    :render-option="renderOption"
+    @select="handleSelect"
+  >
+    <n-button>Go For a Trip</n-button>
+  </n-dropdown>
+</template>

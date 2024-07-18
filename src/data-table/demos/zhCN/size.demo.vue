@@ -2,29 +2,12 @@
 # 尺寸
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-data-table
-      size="small"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-    />
-    <n-data-table
-      size="large"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import { NTag, NButton, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { NButton, NTag, useMessage } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -32,11 +15,11 @@ type RowData = {
   tags: string[]
 }
 
-const createColumns = ({
+function createColumns({
   sendMail
 }: {
   sendMail: (rowData: RowData) => void
-}): DataTableColumns<RowData> => {
+}): DataTableColumns<RowData> {
   return [
     {
       title: 'Name',
@@ -53,7 +36,7 @@ const createColumns = ({
     {
       title: 'Tags',
       key: 'tags',
-      render (row) {
+      render(row) {
         const tags = row.tags.map((tagKey) => {
           return h(
             NTag,
@@ -75,7 +58,7 @@ const createColumns = ({
     {
       title: 'Action',
       key: 'actions',
-      render (row) {
+      render(row) {
         return h(
           NButton,
           {
@@ -89,38 +72,40 @@ const createColumns = ({
   ]
 }
 
-const createData = (): RowData[] => [
-  {
-    key: 0,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer']
-  },
-  {
-    key: 1,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['wow']
-  },
-  {
-    key: 2,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher']
-  }
-]
+function createData(): RowData[] {
+  return [
+    {
+      key: 0,
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park',
+      tags: ['nice', 'developer']
+    },
+    {
+      key: 1,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park',
+      tags: ['wow']
+    },
+    {
+      key: 2,
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park',
+      tags: ['cool', 'teacher']
+    }
+  ]
+}
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       data: createData(),
       columns: createColumns({
-        sendMail (rowData) {
-          message.info('send mail to ' + rowData.name)
+        sendMail(rowData) {
+          message.info(`send mail to ${rowData.name}`)
         }
       }),
       pagination: {
@@ -130,3 +115,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-data-table
+      size="small"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+    <n-data-table
+      size="large"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
+</template>

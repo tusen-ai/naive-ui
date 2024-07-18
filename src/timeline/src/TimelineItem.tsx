@@ -1,10 +1,10 @@
 import {
-  defineComponent,
-  computed,
-  inject,
+  type CSSProperties,
   type PropType,
+  computed,
+  defineComponent,
   h,
-  type CSSProperties
+  inject
 } from 'vue'
 import {
   createKey,
@@ -15,8 +15,8 @@ import {
   useHoudini
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { timelineInjectionKey } from './Timeline'
 import { useConfig, useThemeClass } from '../../_mixins'
+import { timelineInjectionKey } from './Timeline'
 
 export const timelineItemProps = {
   time: [String, Number] as PropType<string | number>,
@@ -29,7 +29,7 @@ export const timelineItemProps = {
   },
   type: {
     type: String as PropType<
-    'default' | 'success' | 'error' | 'warning' | 'info'
+      'default' | 'success' | 'error' | 'warning' | 'info'
     >,
     default: 'default'
   }
@@ -40,7 +40,7 @@ export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 export default defineComponent({
   name: 'TimelineItem',
   props: timelineItemProps,
-  setup (props) {
+  setup(props) {
     const NTimeline = inject(timelineInjectionKey)
     if (!NTimeline) {
       throwError(
@@ -108,7 +108,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, color, onRender, $slots } = this
     onRender?.()
     return (

@@ -80,7 +80,7 @@ export default c([
       font-size: var(--n-icon-size);
       flex-shrink: 0;
     `, [
-      ['default', 'info', 'success', 'warning', 'error', 'loading'].map((type) =>
+      ['default', 'info', 'success', 'warning', 'error', 'loading'].map(type =>
         cM(`${type}-type`, [
           c('> *', `
             color: var(--n-icon-color-${type});
@@ -94,8 +94,7 @@ export default c([
         top: 0;
         right: 0;
         bottom: 0;
-      `,
-      [iconSwitchTransition()])
+      `, [iconSwitchTransition()])
     ]),
     cE('close', `
       margin: var(--n-close-margin);

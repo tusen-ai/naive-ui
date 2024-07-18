@@ -4,6 +4,18 @@
 Basic usage of modal. You can put anything in modal, a card for example.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showModal: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     Start me up
@@ -27,15 +39,3 @@ Basic usage of modal. You can put anything in modal, a card for example.
     </n-card>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

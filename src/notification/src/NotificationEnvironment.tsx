@@ -1,20 +1,20 @@
 import {
-  nextTick,
-  Transition,
-  h,
-  defineComponent,
-  type PropType,
-  ref,
-  onMounted,
   type ExtractPropTypes,
-  inject
+  type PropType,
+  Transition,
+  defineComponent,
+  h,
+  inject,
+  nextTick,
+  onMounted,
+  ref
 } from 'vue'
 import { keep } from '../../_utils'
 import { notificationProviderInjectionKey } from './context'
 import {
   Notification,
-  notificationProps,
-  notificationPropKeys
+  notificationPropKeys,
+  notificationProps
 } from './Notification'
 
 export const notificationEnvOptions = {
@@ -33,7 +33,7 @@ export const notificationEnvOptions = {
 } as const
 
 export type NotificationOptions = Partial<
-ExtractPropTypes<typeof notificationEnvOptions>
+  ExtractPropTypes<typeof notificationEnvOptions>
 >
 
 export const NotificationEnvironment = defineComponent({
@@ -50,20 +50,17 @@ export const NotificationEnvironment = defineComponent({
       required: true
     }
   },
-  setup (props) {
-    const {
-      wipTransitionCountRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(notificationProviderInjectionKey)!
+  setup(props) {
+    const { wipTransitionCountRef } = inject(notificationProviderInjectionKey)!
     const showRef = ref(true)
     let timerId: number | null = null
-    function hide (): void {
+    function hide(): void {
       showRef.value = false
       if (timerId) {
         window.clearTimeout(timerId)
       }
     }
-    function handleBeforeEnter (el: HTMLElement): void {
+    function handleBeforeEnter(el: HTMLElement): void {
       wipTransitionCountRef.value++
       void nextTick(() => {
         el.style.height = `${el.offsetHeight}px`
@@ -74,61 +71,70 @@ export const NotificationEnvironment = defineComponent({
         el.style.maxHeight = el.style.height
       })
     }
-    function handleAfterEnter (el: HTMLElement): void {
+    function handleAfterEnter(el: HTMLElement): void {
       wipTransitionCountRef.value--
       el.style.height = ''
       el.style.maxHeight = ''
       const { onAfterEnter, onAfterShow } = props
-      if (onAfterEnter) onAfterEnter()
+      if (onAfterEnter)
+        onAfterEnter()
       // deprecated
-      if (onAfterShow) onAfterShow()
+      if (onAfterShow)
+        onAfterShow()
     }
-    function handleBeforeLeave (el: HTMLElement): void {
+    function handleBeforeLeave(el: HTMLElement): void {
       wipTransitionCountRef.value++
       el.style.maxHeight = `${el.offsetHeight}px`
       el.style.height = `${el.offsetHeight}px`
       void el.offsetHeight
     }
-    function handleLeave (el: HTMLElement): void {
+    function handleLeave(el: HTMLElement): void {
       const { onHide } = props
-      if (onHide) onHide()
+      if (onHide)
+        onHide()
       el.style.maxHeight = '0'
       void el.offsetHeight
     }
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       wipTransitionCountRef.value--
-      const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey } =
-        props
-      if (onAfterLeave) onAfterLeave()
+      const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey }
+        = props
+      if (onAfterLeave)
+        onAfterLeave()
       onInternalAfterLeave(internalKey)
       // deprecated
-      if (onAfterHide) onAfterHide()
+      if (onAfterHide)
+        onAfterHide()
     }
-    function setHideTimeout (): void {
+    function setHideTimeout(): void {
       const { duration } = props
       if (duration) {
         timerId = window.setTimeout(hide, duration)
       }
     }
-    function handleMouseenter (e: MouseEvent): void {
-      if (e.currentTarget !== e.target) return
+    function handleMouseenter(e: MouseEvent): void {
+      if (e.currentTarget !== e.target)
+        return
       if (timerId !== null) {
         window.clearTimeout(timerId)
         timerId = null
       }
     }
-    function handleMouseleave (e: MouseEvent): void {
-      if (e.currentTarget !== e.target) return
+    function handleMouseleave(e: MouseEvent): void {
+      if (e.currentTarget !== e.target)
+        return
       setHideTimeout()
     }
-    function handleClose (): void {
+    function handleClose(): void {
       const { onClose } = props
       if (onClose) {
         void Promise.resolve(onClose()).then((feedback) => {
-          if (feedback === false) return
+          if (feedback === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
@@ -150,7 +156,7 @@ export const NotificationEnvironment = defineComponent({
       handleMouseleave
     }
   },
-  render () {
+  render() {
     return (
       <Transition
         name="notification-transition"

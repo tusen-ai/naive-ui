@@ -2,6 +2,36 @@
 # 基础用法
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleBack() {
+        message.info('[onBack]')
+      },
+      options: [
+        {
+          label: '催更',
+          key: '1'
+        },
+        {
+          label: '催更',
+          key: '2'
+        },
+        {
+          label: '催更',
+          key: '3'
+        }
+      ]
+    }
+  }
+})
+</script>
+
 <template>
   <n-page-header subtitle="让你的听觉更懂视觉" @back="handleBack">
     <n-grid :cols="5">
@@ -22,10 +52,7 @@
       </n-gi>
     </n-grid>
     <template #title>
-      <a
-        href="https://anyway.fm/"
-        style="text-decoration: none; color: inherit"
-      >Anyway.FM</a>
+      <a href="https://anyway.fm/" style="text-decoration: none; color: inherit">Anyway.FM</a>
     </template>
     <template #header>
       <n-breadcrumb>
@@ -55,33 +82,3 @@
     </template>
   </n-page-header>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleBack () {
-        message.info('[onBack]')
-      },
-      options: [
-        {
-          label: '催更',
-          key: '1'
-        },
-        {
-          label: '催更',
-          key: '2'
-        },
-        {
-          label: '催更',
-          key: '3'
-        }
-      ]
-    }
-  }
-})
-</script>

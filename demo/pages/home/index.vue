@@ -1,3 +1,79 @@
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
+import { useThemeName } from '../../store'
+import LandingFooter from './Footer.vue'
+import leftImage from './Left.vue'
+import rightImage from './Right.vue'
+
+export default defineComponent({
+  components: {
+    LandingFooter,
+    LeftImage: leftImage,
+    RightImage: rightImage
+  },
+  setup() {
+    const isMobileRef = useIsMobile()
+    return {
+      isMobile: isMobileRef,
+      isTablet: useIsTablet(),
+      theme: useThemeName(),
+      titleStyle: computed(() => {
+        if (isMobileRef.value) {
+          return 'margin-top: 0; font-size: 64px !important'
+        }
+        else {
+          return 'margin-top: 0; font-size: 80px !important'
+        }
+      }),
+      ...i18n({
+        'zh-CN': {
+          start: '开始使用',
+          intro1: '一个 Vue 3 组件库',
+          intro2: '比较完整，主题可调，使用 TypeScript，快',
+          intro3: '有点意思',
+          intro4: '换个主题'
+        },
+        'en-US': {
+          start: 'Get Started',
+          intro1: 'A Vue 3 Component Library',
+          intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
+          intro3: 'Kinda Interesting',
+          intro4: 'Change Theme'
+        }
+      })
+    }
+  },
+  data() {
+    return {
+      hover: false,
+      themeOptions: {
+        dark: {
+          next: 'light'
+        },
+        light: {
+          next: 'dark'
+        }
+      }
+    }
+  },
+  methods: {
+    handleStartClick() {
+      this.$router.push(`${this.$route.path}/docs/installation`)
+    },
+    handleTitleMouseEnter() {
+      this.hover = true
+    },
+    handleTitleMouseLeave() {
+      this.hover = false
+    },
+    handleThemeChangeClick() {
+      this.theme = this.themeOptions[this.theme].next
+    }
+  }
+})
+</script>
+
 <template>
   <n-layout
     :native-scrollbar="false"
@@ -5,7 +81,7 @@
     :style="isMobile ? undefined : 'top: var(--header-height);'"
   >
     <div class="banner" style="overflow: hidden">
-      <right-image v-if="!(isMobile || isTablet)" class="right-image" />
+      <RightImage v-if="!(isMobile || isTablet)" class="right-image" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
@@ -46,88 +122,13 @@
           {{ t('start') }}
         </n-button>
       </div>
-      <left-image class="left-image" />
+      <LeftImage class="left-image" />
     </div>
     <n-layout-footer>
-      <landing-footer centered />
+      <LandingFooter centered />
     </n-layout-footer>
   </n-layout>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from 'vue'
-import LandingFooter from './Footer.vue'
-import leftImage from './Left.vue'
-import rightImage from './Right.vue'
-import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
-import { useThemeName } from '../../store'
-
-export default defineComponent({
-  components: {
-    LandingFooter,
-    leftImage,
-    rightImage
-  },
-  setup () {
-    const isMobileRef = useIsMobile()
-    return {
-      isMobile: isMobileRef,
-      isTablet: useIsTablet(),
-      theme: useThemeName(),
-      titleStyle: computed(() => {
-        if (isMobileRef.value) {
-          return 'margin-top: 0; font-size: 64px !important'
-        } else {
-          return 'margin-top: 0; font-size: 80px !important'
-        }
-      }),
-      ...i18n({
-        'zh-CN': {
-          start: '开始使用',
-          intro1: '一个 Vue 3 组件库',
-          intro2: '比较完整，主题可调，使用 TypeScript，快',
-          intro3: '有点意思',
-          intro4: '换个主题'
-        },
-        'en-US': {
-          start: 'Get Started',
-          intro1: 'A Vue 3 Component Library',
-          intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
-          intro3: 'Kinda Interesting',
-          intro4: 'Change Theme'
-        }
-      })
-    }
-  },
-  data () {
-    return {
-      hover: false,
-      themeOptions: {
-        dark: {
-          next: 'light'
-        },
-        light: {
-          next: 'dark'
-        }
-      }
-    }
-  },
-  methods: {
-    handleStartClick () {
-      this.$router.push(this.$route.path + '/docs/installation')
-    },
-    handleTitleMouseEnter () {
-      this.hover = true
-    },
-    handleTitleMouseLeave () {
-      this.hover = false
-    },
-    handleThemeChangeClick () {
-      this.theme = this.themeOptions[this.theme].next
-    }
-  }
-})
-</script>
 
 <style scoped>
 .banner {

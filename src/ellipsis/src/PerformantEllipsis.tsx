@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, mergeProps } from 'vue'
+import { defineComponent, h, mergeProps, ref } from 'vue'
 import { useMergedClsPrefix } from '../../_mixins/use-config'
 import { useStyle } from '../../_mixins'
 import Ellipsis, {
@@ -12,7 +12,7 @@ export const NPerformantEllipsis = defineComponent({
   name: 'PerformantEllipsis',
   props: ellipsisProps,
   inheritAttrs: false,
-  setup (props, { attrs, slots }) {
+  setup(props, { attrs, slots }) {
     const mouseEnteredRef = ref(false)
     const mergedClsPrefixRef = useMergedClsPrefix()
     useStyle('-ellipsis', style, mergedClsPrefixRef)
@@ -54,10 +54,11 @@ export const NPerformantEllipsis = defineComponent({
       renderTrigger
     }
   },
-  render () {
+  render() {
     if (this.mouseEntered) {
       return h(Ellipsis, mergeProps({}, this.$attrs, this.$props), this.$slots)
-    } else {
+    }
+    else {
       return this.renderTrigger()
     }
   }

@@ -4,27 +4,8 @@
 Warning: when manually positioned, the `trigger` prop must be set to `'manual'`.
 </markdown>
 
-<template>
-  <div
-    style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, 0.5)"
-    @contextmenu="handleContextMenu"
-  >
-    Right Click
-  </div>
-  <n-dropdown
-    placement="bottom-start"
-    trigger="manual"
-    :x="x"
-    :y="y"
-    :options="options"
-    :show="showDropdown"
-    :on-clickoutside="onClickoutside"
-    @select="handleSelect"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, nextTick } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
 const options = [
@@ -75,7 +56,7 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
 
     const showDropdownRef = ref(false)
@@ -87,11 +68,11 @@ export default defineComponent({
       showDropdown: showDropdownRef,
       x: xRef,
       y: yRef,
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         showDropdownRef.value = false
         message.info(String(key))
       },
-      handleContextMenu (e: MouseEvent) {
+      handleContextMenu(e: MouseEvent) {
         e.preventDefault()
         showDropdownRef.value = false
         nextTick().then(() => {
@@ -100,7 +81,7 @@ export default defineComponent({
           yRef.value = e.clientY
         })
       },
-      onClickoutside () {
+      onClickoutside() {
         message.info('clickoutside')
         showDropdownRef.value = false
       }
@@ -108,3 +89,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <div
+    style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, 0.5)"
+    @contextmenu="handleContextMenu"
+  >
+    Right Click
+  </div>
+  <n-dropdown
+    placement="bottom-start"
+    trigger="manual"
+    :x="x"
+    :y="y"
+    :options="options"
+    :show="showDropdown"
+    :on-clickoutside="onClickoutside"
+    @select="handleSelect"
+  />
+</template>

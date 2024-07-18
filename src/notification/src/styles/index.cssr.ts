@@ -1,4 +1,4 @@
-import { type CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
@@ -322,7 +322,7 @@ export default c([
   ])
 ])
 
-function placementTransformStyle (placement: string): CNode {
+function placementTransformStyle(placement: string): CNode {
   const direction = placement.split('-')[1]
   const transformXEnter = direction === 'left' ? 'calc(-100%)' : 'calc(100%)'
   const transformXLeave = '0'

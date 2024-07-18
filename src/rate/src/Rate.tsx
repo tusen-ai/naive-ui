@@ -1,16 +1,16 @@
 import {
-  h,
-  toRef,
-  ref,
+  type CSSProperties,
+  type PropType,
   computed,
   defineComponent,
+  h,
+  ref,
   renderList,
-  type PropType,
-  type CSSProperties
+  toRef
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
-import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, color2Class, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -41,7 +41,7 @@ export const rateProps = {
   color: String,
   onClear: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<RateOnUpdateValue>
+    MaybeArray<RateOnUpdateValue>
   >,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>
 } as const
@@ -51,7 +51,7 @@ export type RateProps = ExtractPublicPropTypes<typeof rateProps>
 export default defineComponent({
   name: 'Rate',
   props: rateProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Rate',
@@ -66,7 +66,7 @@ export default defineComponent({
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
     const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
-    function doUpdateValue (value: number | null): void {
+    function doUpdateValue(value: number | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       if (_onUpdateValue) {
@@ -79,29 +79,32 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function getDerivedValue (index: number, e: MouseEvent): number {
+    function getDerivedValue(index: number, e: MouseEvent): number {
       if (props.allowHalf) {
         if (
-          e.offsetX >=
-          Math.floor((e.currentTarget as HTMLDivElement).offsetWidth / 2)
+          e.offsetX
+          >= Math.floor((e.currentTarget as HTMLDivElement).offsetWidth / 2)
         ) {
           return index + 1
-        } else {
+        }
+        else {
           return index + 0.5
         }
-      } else {
+      }
+      else {
         return index + 1
       }
     }
     let cleared = false
-    function handleMouseMove (index: number, e: MouseEvent): void {
-      if (cleared) return
+    function handleMouseMove(index: number, e: MouseEvent): void {
+      if (cleared)
+        return
       hoverIndexRef.value = getDerivedValue(index, e)
     }
-    function handleMouseLeave (): void {
+    function handleMouseLeave(): void {
       hoverIndexRef.value = null
     }
-    function handleClick (index: number, e: MouseEvent): void {
+    function handleClick(index: number, e: MouseEvent): void {
       const { clearable } = props
       const derivedValue = getDerivedValue(index, e)
       if (clearable && derivedValue === mergedValue.value) {
@@ -109,11 +112,12 @@ export default defineComponent({
         props.onClear?.()
         hoverIndexRef.value = null
         doUpdateValue(null)
-      } else {
+      }
+      else {
         doUpdateValue(derivedValue)
       }
     }
-    function handleMouseEnterSomeStar (): void {
+    function handleMouseEnterSomeStar(): void {
       cleared = false
     }
     const mergedSizeRef = computed(() => {
@@ -121,7 +125,8 @@ export default defineComponent({
       const { self } = themeRef.value
       if (typeof size === 'number') {
         return `${size}px`
-      } else {
+      }
+      else {
         return self[createKey('size', size)]
       }
     })
@@ -172,7 +177,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       readonly,
       hoverIndex,
@@ -202,8 +207,8 @@ export default defineComponent({
               {{ default: () => StarIcon }}
             </NBaseIcon>
           )
-          const entireStarActive =
-            hoverIndex !== null
+          const entireStarActive
+            = hoverIndex !== null
               ? index + 1 <= hoverIndex
               : index + 1 <= (mergedValue || 0)
           return (

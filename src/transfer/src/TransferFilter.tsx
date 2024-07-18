@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { SearchIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NInput } from '../../input'
@@ -15,15 +15,14 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef
     }
   },
-  render () {
+  render() {
     const { mergedTheme, mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-transfer-filter`}>

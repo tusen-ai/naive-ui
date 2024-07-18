@@ -1,6 +1,7 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
-import { NSlider } from '../index'
 import { nextTick } from 'vue'
+import { NSlider } from '../index'
 
 describe('n-slider', () => {
   it('should work with import on demand', () => {
@@ -46,8 +47,8 @@ describe('n-slider', () => {
   })
 
   it('accept correct callback types', () => {
-    function onUpdateValue1 (value: number): void {}
-    function onUpdateValue2 (value: number[]): void {}
+    function onUpdateValue1(value: number): void {}
+    function onUpdateValue2(value: number[]): void {}
     mount(NSlider, {
       props: {
         onUpdateValue: onUpdateValue1

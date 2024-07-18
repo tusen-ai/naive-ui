@@ -2,17 +2,13 @@
 # precision debug
 </markdown>
 
-<template>
-  <n-input-number v-model:value="v" :precision="0" @blur="check" />
-</template>
-
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const v = ref(1)
-    function check () {
+    function check() {
       if (v.value === null) {
         v.value = 1
       }
@@ -24,3 +20,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-input-number v-model:value="v" :precision="0" @blur="check" />
+</template>

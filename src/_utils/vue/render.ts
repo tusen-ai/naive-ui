@@ -1,22 +1,25 @@
-import { createTextVNode, type VNodeChild } from 'vue'
+import { type VNodeChild, createTextVNode } from 'vue'
 
-export const render = <T extends any[]>(
+export function render<T extends any[]>(
   r:
-  | string
-  | number
-  | undefined
-  | null
-  | ((...args: [...T]) => VNodeChild)
-  | unknown,
+    | string
+    | number
+    | undefined
+    | null
+    | ((...args: [...T]) => VNodeChild)
+    | unknown,
   ...args: [...T]
-): VNodeChild => {
+): VNodeChild {
   if (typeof r === 'function') {
     return r(...args)
-  } else if (typeof r === 'string') {
+  }
+  else if (typeof r === 'string') {
     return createTextVNode(r)
-  } else if (typeof r === 'number') {
+  }
+  else if (typeof r === 'number') {
     return createTextVNode(String(r))
-  } else {
+  }
+  else {
     return null
   }
 }

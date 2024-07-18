@@ -6,6 +6,23 @@
 需要注意的是，该功能使用了 `Intl` API，兼容性请参考 [format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) 和 [formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts)。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { NumberAnimationInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    return {
+      numberAnimationInstRef,
+      handleClick() {
+        numberAnimationInstRef.value?.play()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-statistic label="你可能不知道俄语的小数点是逗号" tabular-nums>
     <n-number-animation
@@ -22,20 +39,3 @@
     播放
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

@@ -1,11 +1,11 @@
-import { mount, type VueWrapper } from '@vue/test-utils'
-import { h, Fragment, createCommentVNode } from 'vue'
+import { type VueWrapper, mount } from '@vue/test-utils'
+import { Fragment, createCommentVNode, h } from 'vue'
 import { NSpace } from '../index'
 import { NConfigProvider } from '../../config-provider'
 import type { Justify } from '../src/Space'
 import { c } from '../../_utils/cssr'
 
-const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
+function getChildrenNode(wrapper: VueWrapper<any>): any[] {
   return (
     wrapper.findAll('div').filter((v) => {
       return !v.classes().includes('n-space')
@@ -20,7 +20,7 @@ describe('n-space', () => {
 
   it('render empty children', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace />
       }
     })
@@ -31,7 +31,7 @@ describe('n-space', () => {
 
   it('render space string size', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace size="large">{{ default: () => 'kirby' }}</NSpace>
       }
     })
@@ -43,7 +43,7 @@ describe('n-space', () => {
   it('render space number size', () => {
     const size = 20
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace size={size}>{{ default: () => 'kirby' }}</NSpace>
       }
     })
@@ -72,7 +72,7 @@ describe('n-space', () => {
 
   it('render vertical space', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace vertical>
             {{
@@ -103,13 +103,14 @@ describe('n-space', () => {
 
   it('should render with invalidElement', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace>
             {{
               default: () => (
                 <>
-                  text1<span>text1</span>
+                  text1
+                  <span>text1</span>
                   text1
                 </>
               )
@@ -137,7 +138,7 @@ describe('n-space', () => {
 
     justifyList.forEach((pos) => {
       const wrapper = mount({
-        render () {
+        render() {
           return (
             <NSpace justify={pos}>
               {{
@@ -150,7 +151,7 @@ describe('n-space', () => {
 
       expect(wrapper.attributes('style')).toContain(
         `justify-content: ${
-          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+          ['start', 'end'].includes(pos) ? `flex-${pos};` : pos
         }`
       )
       expect(wrapper.html()).toMatchSnapshot()
@@ -159,7 +160,7 @@ describe('n-space', () => {
 
     justifyList.forEach((pos) => {
       const wrapper = mount({
-        render () {
+        render() {
           return (
             <NConfigProvider rtl={[{ name: 'Space', style: c(null) }]}>
               {{
@@ -180,7 +181,7 @@ describe('n-space', () => {
 
       expect(wrapper.find('.n-space').attributes('style')).toContain(
         `justify-content: ${
-          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+          ['start', 'end'].includes(pos) ? `flex-${pos};` : pos
         }`
       )
       expect(wrapper.html()).toMatchSnapshot()
@@ -191,7 +192,7 @@ describe('n-space', () => {
   it('render custom style space', () => {
     const wrapper = mount(
       {
-        render () {
+        render() {
           return <NSpace>{{ default: () => 'div' }}</NSpace>
         }
       },
@@ -212,7 +213,7 @@ describe('n-space', () => {
 
   it('should not render while v-if is false', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace>{{ default: () => false && 'div' }}</NSpace>
       }
     })
@@ -238,7 +239,7 @@ describe('n-space', () => {
 
   it('should not render while slot is Comment', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace>
             {{
@@ -257,7 +258,7 @@ describe('n-space', () => {
   it('shound not render a container to wrap child elements', () => {
     const wrapper = mount(
       {
-        render () {
+        render() {
           return (
             <NSpace>
               {{

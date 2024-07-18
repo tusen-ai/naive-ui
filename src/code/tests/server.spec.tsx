@@ -1,17 +1,17 @@
 /**
  * @jest-environment node
  */
-import { h, createSSRApp } from 'vue'
+import { createSSRApp, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
-import { NCode } from '../..'
-import { NConfigProvider } from '../../config-provider'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
+import { NCode } from '../..'
+import { NConfigProvider } from '../../config-provider'
 
 hljs.registerLanguage('javascript', javascript)
 
-describe('SSR', () => {
+describe('sSR', () => {
   it('works', async () => {
     const app = createSSRApp(() => (
       <NConfigProvider hljs={hljs}>
@@ -23,7 +23,8 @@ describe('SSR', () => {
     setup(app)
     try {
       await renderToString(app)
-    } catch (e) {
+    }
+    catch (e) {
       expect(e).not.toBeTruthy()
     }
   })

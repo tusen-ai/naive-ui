@@ -1,5 +1,4 @@
 import { composite } from 'seemly'
-import commonVariables from './_common'
 import { ellipsisLight } from '../../ellipsis/styles'
 import { buttonLight } from '../../button/styles'
 import { checkboxLight } from '../../checkbox/styles'
@@ -12,8 +11,9 @@ import { dropdownLight } from '../../dropdown/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     cardColor,
     modalColor,

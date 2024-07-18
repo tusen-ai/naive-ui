@@ -15,7 +15,8 @@ const azAZ: NLocale = {
   Cascader: {
     placeholder: 'Zəhmət olmasa, seçin',
     loading: 'Yüklənir',
-    loadingRequiredMessage: (label) => `Zəhmət olmasa, yoxlamadan əvvəl bütün ${label}ləri yükləyin.`
+    loadingRequiredMessage: label =>
+      `Zəhmət olmasa, yoxlamadan əvvəl bütün ${label}ləri yükləyin.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
@@ -66,8 +67,8 @@ const azAZ: NLocale = {
     selectAll: 'Hamısını seç',
     unselectAll: 'Hamısını ləğv et',
     clearAll: 'Təmizlə',
-    total: (num) => `Cəmi ${num} maddə`,
-    selected: (num) => `${num} maddə seçildi`
+    total: num => `Cəmi ${num} maddə`,
+    selected: num => `${num} maddə seçildi`
   },
   Empty: {
     description: 'Məlumat yoxdur'

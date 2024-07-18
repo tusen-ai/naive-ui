@@ -391,6 +391,6 @@ export default c([
   `)
 ])
 
-function hoverStyle (props: CProperties, children: CNodeChildren): CNode[] {
+function hoverStyle(props: CProperties, children: CNodeChildren): CNode[] {
   return [cM('hover', props, children), c('&:hover', props, children)]
 }

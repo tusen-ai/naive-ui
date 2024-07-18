@@ -2,6 +2,36 @@
 # Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { TreeSelectOption } from 'naive-ui'
+
+function createData(level = 4, baseKey = ''): TreeSelectOption[] | undefined {
+  if (!level)
+    return undefined
+  return Array.from({ length: 6 - level }).map((_, index) => {
+    const key = `${baseKey}${level}${index}`
+    return {
+      label: key,
+      key,
+      children: createData(level - 1, key)
+    }
+  })
+}
+
+export default defineComponent({
+  setup() {
+    return {
+      multiple: ref(false),
+      checkable: ref(false),
+      cascade: ref(false),
+      filterable: ref(false),
+      options: createData()
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space>
@@ -20,32 +50,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { TreeSelectOption } from 'naive-ui'
-
-function createData (level = 4, baseKey = ''): TreeSelectOption[] | undefined {
-  if (!level) return undefined
-  return Array.from({ length: 6 - level }).map((_, index) => {
-    const key = '' + baseKey + level + index
-    return {
-      label: key,
-      key,
-      children: createData(level - 1, key)
-    }
-  })
-}
-
-export default defineComponent({
-  setup () {
-    return {
-      multiple: ref(false),
-      checkable: ref(false),
-      cascade: ref(false),
-      filterable: ref(false),
-      options: createData()
-    }
-  }
-})
-</script>

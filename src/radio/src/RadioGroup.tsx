@@ -1,29 +1,29 @@
 import {
-  h,
-  defineComponent,
-  computed,
+  type CSSProperties,
   type PropType,
   type VNode,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
   provide,
   ref,
-  toRef,
-  type VNodeChild,
-  type CSSProperties
+  toRef
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { getSlot, warn, createKey, call, flatten } from '../../_utils'
+import { call, createKey, flatten, getSlot, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
+import { useRtl } from '../../_mixins/use-rtl'
 import type { RadioBaseProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
-import { type OnUpdateValue, type OnUpdateValueImpl } from './interface'
-import { useRtl } from '../../_mixins/use-rtl'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
-function mapSlot (
+function mapSlot(
   defaultSlot: VNode[],
   value: string | number | boolean | null,
   clsPrefix: string
@@ -53,12 +53,13 @@ function mapSlot (
     }
     if (i === 0) {
       children.push(wrappedInstance)
-    } else {
+    }
+    else {
       const lastInstanceProps: RadioBaseProps = children[children.length - 1]
         .props as any
       const lastInstanceChecked = value === lastInstanceProps.value
-      const lastInstanceDisabled: boolean | undefined =
-        lastInstanceProps.disabled
+      const lastInstanceDisabled: boolean | undefined
+        = lastInstanceProps.disabled
       const currentInstanceChecked = value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
       /**
@@ -68,10 +69,10 @@ function mapSlot (
        * !disabled !checked >
        *  disabled !checked
        */
-      const lastInstancePriority: number =
-        (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
-      const currentInstancePriority =
-        (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
+      const lastInstancePriority: number
+        = (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
+      const currentInstancePriority
+        = (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
       const lastInstanceClass = {
         [`${clsPrefix}-radio-group__splitor--disabled`]: lastInstanceDisabled,
         [`${clsPrefix}-radio-group__splitor--checked`]: lastInstanceChecked
@@ -81,8 +82,8 @@ function mapSlot (
           currentInstanceDisabled,
         [`${clsPrefix}-radio-group__splitor--checked`]: currentInstanceChecked
       }
-      const splitorClass =
-        lastInstancePriority < currentInstancePriority
+      const splitorClass
+        = lastInstancePriority < currentInstancePriority
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
@@ -101,11 +102,11 @@ export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
   value: [String, Number, Boolean] as PropType<
-  string | number | boolean | null
+    string | number | boolean | null
   >,
   defaultValue: {
     type: [String, Number, Boolean] as PropType<
-    string | number | boolean | null
+      string | number | boolean | null
     >,
     default: null
   },
@@ -123,7 +124,7 @@ export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
 export default defineComponent({
   name: 'RadioGroup',
   props: radioGroupProps,
-  setup (props) {
+  setup(props) {
     const selfElRef = ref<HTMLDivElement | null>(null)
     const {
       mergedSizeRef,
@@ -133,8 +134,8 @@ export default defineComponent({
       nTriggerFormBlur,
       nTriggerFormFocus
     } = useFormItem(props)
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Radio',
       '-radio-group',
@@ -149,7 +150,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    function doUpdateValue (value: string | number | boolean): void {
+    function doUpdateValue(value: string | number | boolean): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value)
@@ -161,16 +162,20 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function handleFocusin (e: FocusEvent): void {
+    function handleFocusin(e: FocusEvent): void {
       const { value: selfEl } = selfElRef
-      if (!selfEl) return
-      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      if (!selfEl)
+        return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null))
+        return
       nTriggerFormFocus()
     }
-    function handleFocusout (e: FocusEvent): void {
+    function handleFocusout(e: FocusEvent): void {
       const { value: selfEl } = selfElRef
-      if (!selfEl) return
-      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      if (!selfEl)
+        return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null))
+        return
       nTriggerFormBlur()
     }
     provide(radioGroupInjectionKey, {
@@ -241,7 +246,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedValue, mergedClsPrefix, handleFocusin, handleFocusout } = this
     const { children, isButtonGroup } = mapSlot(
       flatten(getSlot(this)),

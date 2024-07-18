@@ -1,12 +1,12 @@
 import { changeColor } from 'seemly'
-import commonVars from './_common'
 import { commonDark } from '../../_styles/common'
+import commonVars from './_common'
 import type { SwitchTheme } from './light'
 
 const switchDark: SwitchTheme = {
   name: 'Switch',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       primaryColorSuppl,
       opacityDisabled,

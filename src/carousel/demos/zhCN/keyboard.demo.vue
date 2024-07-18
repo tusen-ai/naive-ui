@@ -4,6 +4,20 @@
 是否通过按键切换轮播图，只有焦点在 Dots 上时才有效。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
+    return {
+      direction: directionRef,
+      directions: ['horizontal', 'vertical']
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="direction">
@@ -40,20 +54,6 @@
     </n-carousel>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
-    return {
-      direction: directionRef,
-      directions: ['horizontal', 'vertical']
-    }
-  }
-})
-</script>
 
 <style>
 .carousel-img {

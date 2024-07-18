@@ -4,13 +4,13 @@ import { sleep } from 'seemly'
 import { NMessageProvider, useMessage } from '../index'
 
 const Provider = defineComponent({
-  render () {
+  render() {
     return <NMessageProvider max={1}>{this.$slots}</NMessageProvider>
   }
 })
 
 const NoMaxProvider = defineComponent({
-  render () {
+  render() {
     return <NMessageProvider>{this.$slots}</NMessageProvider>
   }
 })
@@ -21,13 +21,13 @@ describe('n-message', () => {
   })
   it('should have correct type', () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         message.info('string')
         const messageReactive = message.info(() => 'string')
         messageReactive.content = '123'
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -38,7 +38,7 @@ describe('n-message', () => {
   })
   it('should work with showIcon', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
 
         message.info('string')
@@ -46,7 +46,7 @@ describe('n-message', () => {
           showIcon: false
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -65,14 +65,14 @@ describe('n-message', () => {
 describe('message-provider', () => {
   it('props.max', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         message.info('string')
         message.info('string1')
         message.info('string2')
         message.info('string3')
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -91,11 +91,11 @@ describe('message-provider', () => {
   })
   it('props.duration', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         message.info('string')
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -116,11 +116,11 @@ describe('message-provider', () => {
   })
   it('props.closable', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         message.info('string')
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -139,11 +139,11 @@ describe('message-provider', () => {
 
   it('props.container-style', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         message.info('string')
       },
-      render () {
+      render() {
         return null
       }
     })

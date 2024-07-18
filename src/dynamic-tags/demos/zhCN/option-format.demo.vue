@@ -4,15 +4,11 @@
 你可以配置 `@create` 来产生 `{ label, value }` 格式的值，注意不要和 `string` 类型混用。
 </markdown>
 
-<template>
-  <n-dynamic-tags v-model:value="value" @create="onCreate" />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref([
       { label: '你没见过不等于没有', value: 'hello world 1' },
       {
@@ -32,7 +28,7 @@ export default defineComponent({
       onCreate: (label: string) => {
         return {
           label,
-          value: 'v' + label
+          value: `v${label}`
         }
       },
       value: valueRef
@@ -40,3 +36,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dynamic-tags v-model:value="value" @create="onCreate" />
+</template>

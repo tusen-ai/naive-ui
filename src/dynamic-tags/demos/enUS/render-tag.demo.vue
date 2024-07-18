@@ -2,16 +2,12 @@
 # Custom render for each tag
 </markdown>
 
-<template>
-  <n-dynamic-tags v-model:value="tags" :render-tag="renderTag" />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NTag } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const tagsRef = ref(['teacher', 'programmer'])
     return {
       tags: tagsRef,
@@ -35,3 +31,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dynamic-tags v-model:value="tags" :render-tag="renderTag" />
+</template>

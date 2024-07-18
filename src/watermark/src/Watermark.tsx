@@ -1,23 +1,23 @@
-import { h, defineComponent, type PropType, ref, watchEffect } from 'vue'
+import { type PropType, defineComponent, h, ref, watchEffect } from 'vue'
 import { onFontsReady } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { type ExtractPublicPropTypes, isBrowser, warnOnce } from '../../_utils'
-import { watermarkLight, type WatermarkTheme } from '../styles'
+import { type WatermarkTheme, watermarkLight } from '../styles'
 import style from './styles/index.cssr'
 
-function getRatio (context: any): number {
+function getRatio(context: any): number {
   if (!context) {
     return 1
   }
-  const backingStore =
-    context.backingStorePixelRatio ||
-    context.webkitBackingStorePixelRatio ||
-    context.mozBackingStorePixelRatio ||
-    context.msBackingStorePixelRatio ||
-    context.oBackingStorePixelRatio ||
-    context.backingStorePixelRatio ||
-    1
+  const backingStore
+    = context.backingStorePixelRatio
+    || context.webkitBackingStorePixelRatio
+    || context.mozBackingStorePixelRatio
+    || context.msBackingStorePixelRatio
+    || context.oBackingStorePixelRatio
+    || context.backingStorePixelRatio
+    || 1
   return (window.devicePixelRatio || 1) / backingStore
 }
 
@@ -78,7 +78,7 @@ export const watermarkProps = {
   fontFamily: String,
   fontStyle: {
     type: String as PropType<
-    'normal' | 'italic' | 'oblique' | `oblique ${number}deg`
+      'normal' | 'italic' | 'oblique' | `oblique ${number}deg`
     >,
     default: 'normal'
   },
@@ -113,7 +113,7 @@ export type WatermarkProps = ExtractPublicPropTypes<typeof watermarkProps>
 export default defineComponent({
   name: 'Watermark',
   props: watermarkProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Watermark',
@@ -129,7 +129,8 @@ export default defineComponent({
     const fontsReadyRef = ref(false)
     onFontsReady(() => (fontsReadyRef.value = true))
     watchEffect(() => {
-      if (!canvas) return
+      if (!canvas)
+        return
       void fontsReadyRef.value
       const ratio = getRatio(ctx)
       const {
@@ -179,18 +180,19 @@ export default defineComponent({
               img,
               canvasOffsetLeft,
               canvasOffsetTop,
-              (props.imageWidth ||
-                (imageHeight
-                  ? (img.width * imageHeight) / img.height
-                  : img.width)) * ratio,
-              (props.imageHeight ||
-                (imageWidth
-                  ? (img.height * imageWidth) / img.width
-                  : img.height)) * ratio
+              (props.imageWidth
+              || (imageHeight
+                ? (img.width * imageHeight) / img.height
+                : img.width)) * ratio,
+              (props.imageHeight
+              || (imageWidth
+                ? (img.height * imageWidth) / img.width
+                : img.height)) * ratio
             )
             base64UrlRef.value = canvas.toDataURL()
           }
-        } else if (content) {
+        }
+        else if (content) {
           if (debug) {
             ctx.strokeStyle = 'green'
             ctx.strokeRect(0, 0, markWidth, markHeight)
@@ -215,8 +217,8 @@ export default defineComponent({
               }
             })
             .forEach(({ line, width }, index) => {
-              const alignOffset =
-                textAlign === 'left'
+              const alignOffset
+                = textAlign === 'left'
                   ? 0
                   : textAlign === 'center'
                     ? (maxWidth - width) / 2
@@ -229,14 +231,16 @@ export default defineComponent({
               )
             })
           base64UrlRef.value = canvas.toDataURL()
-        } else if (!content) {
+        }
+        else if (!content) {
           // For example, you are using the input box to customize the watermark
           // content, but after clearing the input box, the content is empty,
           // and the canvas content is empty. Clear canvas when content is empty
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           base64UrlRef.value = canvas.toDataURL()
         }
-      } else {
+      }
+      else {
         warnOnce('watermark', 'Canvas is not supported in the browser.')
       }
     })
@@ -276,16 +280,17 @@ export default defineComponent({
           }}
         />
       )
-      if (props.fullscreen && !globalRotate) return watermarkNode
+      if (props.fullscreen && !globalRotate)
+        return watermarkNode
       return (
         <div
           class={[
             `${mergedClsPrefix}-watermark-container`,
-            globalRotate !== 0 &&
-              `${mergedClsPrefix}-watermark-container--global-rotate`,
+            globalRotate !== 0
+            && `${mergedClsPrefix}-watermark-container--global-rotate`,
             fullscreen && `${mergedClsPrefix}-watermark-container--fullscreen`,
-            props.selectable &&
-              `${mergedClsPrefix}-watermark-container--selectable`
+            props.selectable
+            && `${mergedClsPrefix}-watermark-container--selectable`
           ]}
           style={{
             zIndex: isFullScreenGlobalRotate ? zIndex : undefined

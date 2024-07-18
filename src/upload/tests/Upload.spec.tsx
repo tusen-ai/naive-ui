@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import { sleep } from 'seemly'
 import {
   NUpload,
   NUploadDragger,
   NUploadFileList,
   NUploadTrigger
 } from '../index'
-import { sleep } from 'seemly'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 import { NCard } from '../../card'
 import { NImageGroup } from '../../image'
 import { matchType } from '../src/utils'
 
-const getMockFile = (element: Element, files: File[]): void => {
+function getMockFile(element: Element, files: File[]): void {
   Object.defineProperty(element, 'files', {
-    get () {
+    get() {
       return files
     }
   })
@@ -45,7 +45,7 @@ describe('n-upload', () => {
     await wrapper.setProps({ disabled: true })
     for (const disabledClass of disabledClasses) {
       expect(
-        wrapper.find('.' + disabledClass.split('--')[0]).classes()
+        wrapper.find(`.${disabledClass.split('--')[0]}`).classes()
       ).toContain(disabledClass)
     }
   })
@@ -269,7 +269,8 @@ describe('n-upload', () => {
           listType: 'image-card'
         }
       })
-    } catch (error) {
+    }
+    catch (error) {
       expect(String(error)).toBe(
         'Error: [naive/upload]: when the list-type is image-card, abstract is not supported.'
       )
@@ -345,7 +346,8 @@ describe('n-upload-file-list', () => {
   it('should work inside `n-upload`', async () => {
     try {
       mount(NUploadFileList)
-    } catch (error) {
+    }
+    catch (error) {
       expect(String(error)).toBe(
         'Error: [naive/upload-file-list]: `n-upload-file-list` must be placed inside `n-upload`.'
       )
@@ -387,7 +389,8 @@ describe('n-upload-trigger', () => {
   it('should work inside `n-upload`', async () => {
     try {
       mount(NUploadTrigger)
-    } catch (error) {
+    }
+    catch (error) {
       expect(String(error)).toBe(
         'Error: [naive/upload-trigger]: `n-upload-trigger` must be placed inside `n-upload`.'
       )
@@ -428,7 +431,8 @@ describe('n-upload-dragger', () => {
   it('should work inside `n-upload`', async () => {
     try {
       mount(NUploadDragger)
-    } catch (error) {
+    }
+    catch (error) {
       expect(String(error)).toBe(
         'Error: [naive/upload-dragger]: `n-upload-dragger` must be placed inside `n-upload`.'
       )

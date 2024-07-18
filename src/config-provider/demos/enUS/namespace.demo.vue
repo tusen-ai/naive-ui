@@ -4,6 +4,19 @@
 Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of `n-config-provider`. Open devtools to see detached part.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      ns: ref('custom-app-namespace1'),
+      isActive: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-config-provider :namespace="ns">
     <n-tooltip placement="bottom" trigger="click">
@@ -16,16 +29,3 @@ Some parts of component are detached to `document.body`. If you want to add a cl
     </n-tooltip>
   </n-config-provider>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      ns: ref('custom-app-namespace1'),
-      isActive: ref(false)
-    }
-  }
-})
-</script>

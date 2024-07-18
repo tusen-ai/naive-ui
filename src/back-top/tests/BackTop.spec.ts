@@ -9,9 +9,7 @@ describe('n-back-top', () => {
   })
 
   it('should work with `show` prop', async () => {
-    document.body.innerHTML =
-      document.body.innerHTML +
-      `
+    document.body.innerHTML = `${document.body.innerHTML}
       <div id="test" style="height: 3000px; width: 100%;"></div>
     `
 

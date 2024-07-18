@@ -1,31 +1,31 @@
 import {
-  h,
-  ref,
-  type PropType,
-  defineComponent,
-  computed,
-  provide,
   type CSSProperties,
-  withDirectives,
+  type PropType,
   Transition,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
   watchEffect,
-  toRef
+  withDirectives
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import { useTheme, useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  formatLength,
   call,
-  warnOnce,
+  eventEffectNotPerformed,
+  formatLength,
   useIsComposing,
-  eventEffectNotPerformed
+  warnOnce
 } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ScrollbarProps } from '../../_internal'
-import { drawerLight, type DrawerTheme } from '../styles'
+import { type DrawerTheme, drawerLight } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
@@ -93,22 +93,22 @@ export const drawerProps = {
     default: 251
   },
   onUpdateWidth: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   onUpdateHeight: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:width': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:height': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
@@ -126,7 +126,7 @@ export default defineComponent({
   name: 'Drawer',
   inheritAttrs: false,
   props: drawerProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.drawerStyle !== undefined) {
@@ -158,8 +158,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
@@ -184,26 +184,32 @@ export default defineComponent({
 
     const styleWidthRef = computed(() => {
       const { placement } = props
-      if (placement === 'top' || placement === 'bottom') return ''
+      if (placement === 'top' || placement === 'bottom')
+        return ''
       return formatLength(mergedWidthRef.value)
     })
 
     const styleHeightRef = computed(() => {
       const { placement } = props
-      if (placement === 'left' || placement === 'right') return ''
+      if (placement === 'left' || placement === 'right')
+        return ''
       return formatLength(mergedHeightRef.value)
     })
 
     const doUpdateWidth = (value: number): void => {
       const { onUpdateWidth, 'onUpdate:width': _onUpdateWidth } = props
-      if (onUpdateWidth) call(onUpdateWidth, value)
-      if (_onUpdateWidth) call(_onUpdateWidth, value)
+      if (onUpdateWidth)
+        call(onUpdateWidth, value)
+      if (_onUpdateWidth)
+        call(_onUpdateWidth, value)
       uncontrolledWidthRef.value = value
     }
     const doUpdateHeight = (value: number): void => {
       const { onUpdateHeight, 'onUpdate:width': _onUpdateHeight } = props
-      if (onUpdateHeight) call(onUpdateHeight, value)
-      if (_onUpdateHeight) call(_onUpdateHeight, value)
+      if (onUpdateHeight)
+        call(onUpdateHeight, value)
+      if (_onUpdateHeight)
+        call(_onUpdateHeight, value)
       uncontrolledHeightRef.value = value
     }
 
@@ -217,32 +223,38 @@ export default defineComponent({
       ]
     })
 
-    function handleMaskClick (e: MouseEvent): void {
+    function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (maskClosable) {
         doUpdateShow(false)
       }
-      if (onMaskClick) onMaskClick(e)
+      if (onMaskClick)
+        onMaskClick(e)
     }
 
-    function handleOutsideClick (e: MouseEvent): void {
+    function handleOutsideClick(e: MouseEvent): void {
       handleMaskClick(e)
     }
 
     const isComposingRef = useIsComposing()
 
-    function handleEsc (e: KeyboardEvent): void {
+    function handleEsc(e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
-        !isComposingRef.value && doUpdateShow(false)
+        if (!isComposingRef.value) {
+          doUpdateShow(false)
+        }
       }
     }
-    function doUpdateShow (show: boolean): void {
+    function doUpdateShow(show: boolean): void {
       const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) call(onUpdateShow, show)
-      if (_onUpdateShow) call(_onUpdateShow, show)
+      if (onUpdateShow)
+        call(onUpdateShow, show)
+      if (_onUpdateShow)
+        call(_onUpdateShow, show)
       // deprecated
-      if (onHide && !show) call(onHide, show)
+      if (onHide && !show)
+        call(onHide, show)
     }
     provide(drawerInjectionKey, {
       isMountedRef,
@@ -325,7 +337,7 @@ export default defineComponent({
       isMounted: isMountedRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
@@ -351,8 +363,8 @@ export default defineComponent({
                             aria-hidden
                             class={[
                               `${mergedClsPrefix}-drawer-mask`,
-                              this.showMask === 'transparent' &&
-                                `${mergedClsPrefix}-drawer-mask--invisible`
+                              this.showMask === 'transparent'
+                              && `${mergedClsPrefix}-drawer-mask--invisible`
                             ]}
                             onClick={this.handleMaskClick}
                           />

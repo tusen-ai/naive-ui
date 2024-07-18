@@ -2,10 +2,11 @@ import { isBrowser } from '../../_utils'
 import type { FileAndEntry, ShouldUseThumbnailUrl } from './interface'
 import type { UploadFileInfo, UploadSettledFileInfo } from './public-types'
 
-export const isImageFileType = (type: string): boolean =>
-  type.includes('image/')
+export function isImageFileType(type: string): boolean {
+  return type.includes('image/')
+}
 
-const getExtname = (url: string = ''): string => {
+function getExtname(url: string = ''): string {
   const temp = url.split('/')
   const filename = temp[temp.length - 1]
   const filenameWithoutSuffix = filename.split(/#|\?/)[0]
@@ -31,7 +32,7 @@ export const isImageFile: ShouldUseThumbnailUrl = (file) => {
   return false
 }
 
-export async function createImageDataUrl (file: File): Promise<string> {
+export async function createImageDataUrl(file: File): Promise<string> {
   return await new Promise((resolve) => {
     if (!file.type || !isImageFileType(file.type)) {
       resolve('')
@@ -41,32 +42,33 @@ export async function createImageDataUrl (file: File): Promise<string> {
   })
 }
 
-export const environmentSupportFile =
-  isBrowser && window.FileReader && window.File
+export const environmentSupportFile
+  = isBrowser && window.FileReader && window.File
 
-export function isFileSystemDirectoryEntry (
+export function isFileSystemDirectoryEntry(
   item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
 ): item is FileSystemDirectoryEntry {
   return item.isDirectory
 }
 
-export function isFileSystemFileEntry (
+export function isFileSystemFileEntry(
   item: FileSystemEntry | FileSystemFileEntry | FileSystemDirectoryEntry
 ): item is FileSystemFileEntry {
   return item.isFile
 }
 
-export async function getFilesFromEntries (
+export async function getFilesFromEntries(
   entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>,
   directory: boolean
 ): Promise<FileAndEntry[]> {
   const fileAndEntries: FileAndEntry[] = []
 
-  async function _getFilesFromEntries (
+  async function _getFilesFromEntries(
     entries: readonly FileSystemEntry[] | Array<FileSystemEntry | null>
   ): Promise<void> {
     for (const entry of entries) {
-      if (!entry) continue
+      if (!entry)
+        continue
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
         try {
@@ -76,14 +78,17 @@ export async function getFilesFromEntries (
             }
           )
           await _getFilesFromEntries(entries)
-        } catch {}
-      } else if (isFileSystemFileEntry(entry)) {
+        }
+        catch {}
+      }
+      else if (isFileSystemFileEntry(entry)) {
         try {
           const file = await new Promise<File>((resolve, reject) => {
             entry.file(resolve, reject)
           })
           fileAndEntries.push({ file, entry, source: 'dnd' })
-        } catch {}
+        }
+        catch {}
       }
     }
   }
@@ -93,7 +98,7 @@ export async function getFilesFromEntries (
   return fileAndEntries
 }
 
-export function createSettledFileInfo (
+export function createSettledFileInfo(
   fileInfo: UploadFileInfo
 ): UploadSettledFileInfo {
   const {
@@ -127,7 +132,7 @@ export function createSettledFileInfo (
  * I've looked at https://github.com/broofa/mime, however it doesn't has a esm
  * version, so I can't simply use it.
  */
-export function matchType (
+export function matchType(
   name: string,
   mimeType: string,
   accept: string
@@ -137,25 +142,28 @@ export function matchType (
   accept = accept.toLocaleLowerCase()
   const acceptAtoms = accept
     .split(',')
-    .map((acceptAtom) => acceptAtom.trim())
+    .map(acceptAtom => acceptAtom.trim())
     .filter(Boolean)
   return acceptAtoms.some((acceptAtom) => {
     if (acceptAtom.startsWith('.')) {
       // suffix
-      if (name.endsWith(acceptAtom)) return true
-    } else if (acceptAtom.includes('/')) {
+      if (name.endsWith(acceptAtom))
+        return true
+    }
+    else if (acceptAtom.includes('/')) {
       // mime type
       const [type, subtype] = mimeType.split('/')
       const [acceptType, acceptSubtype] = acceptAtom.split('/')
       if (acceptType === '*' || (type && acceptType && acceptType === type)) {
         if (
-          acceptSubtype === '*' ||
-          (subtype && acceptSubtype && acceptSubtype === subtype)
+          acceptSubtype === '*'
+          || (subtype && acceptSubtype && acceptSubtype === subtype)
         ) {
           return true
         }
       }
-    } else {
+    }
+    else {
       // invalid type
       return true
     }

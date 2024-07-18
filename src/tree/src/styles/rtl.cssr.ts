@@ -1,4 +1,4 @@
-import { cB, cM, cE } from '../../../_utils/cssr'
+import { cB, cE, cM } from '../../../_utils/cssr'
 
 export default cB('tree', [
   cM('rtl', `

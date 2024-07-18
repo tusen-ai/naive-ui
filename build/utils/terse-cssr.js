@@ -2,7 +2,7 @@ const parser = require('@babel/parser')
 const { default: traverse } = require('@babel/traverse')
 const { default: generate } = require('@babel/generator')
 
-module.exports = function terseCssr (code) {
+module.exports = function terseCssr(code) {
   const patternSpace = / +/g
   const patternEnter = /\n+/g
 
@@ -11,7 +11,7 @@ module.exports = function terseCssr (code) {
   })
 
   traverse(ast, {
-    TemplateElement (path) {
+    TemplateElement(path) {
       ;['raw', 'cooked'].forEach((type) => {
         path.node.value[type] = path.node.value[type]
           .replace(patternSpace, ' ')
