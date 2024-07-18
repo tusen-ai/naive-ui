@@ -71,6 +71,7 @@ export default c([
       ])
     ]),
     cM('vertical', `
+      box-sizing: content-box;
       padding: 0 calc((var(--n-handle-size) - var(--n-rail-height)) / 2);
       width: var(--n-rail-width-vertical);
       height: 100%;

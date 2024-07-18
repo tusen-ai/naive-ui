@@ -25,6 +25,7 @@
 - Fix `n-form-item` validation state is not correctly updated [#6068](https://github.com/tusen-ai/naive-ui/issues/6068).
 - Fix `n-select`'s header make inner input unavailable, closes [#6030](https://github.com/tusen-ai/naive-ui/issues/6030).
 - Fix `n-tree` may have incorrect node selection status when `show-irrelevant-nodes` is disabled, close [#6115](https://github.com/tusen-ai/naive-ui/issues/6115).
+- Fix `n-slider` style bug in `vertical` mode, closes [#6114](https://github.com/tusen-ai/naive-ui/issues/6114).
 
 ### Features
 
@@ -36,7 +37,6 @@
 
 ### i18n
 
-- Add azAZ locale.
 - Add uzUZ locale.
 
 ## 2.38.2
