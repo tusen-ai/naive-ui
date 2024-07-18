@@ -1,4 +1,4 @@
-import cs from 'date-fns/esm/locale/cs'
+import { cs } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
 
 const dateCsCZ: NDateLocale = {

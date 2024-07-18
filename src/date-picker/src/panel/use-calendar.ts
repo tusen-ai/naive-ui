@@ -26,7 +26,7 @@ import {
   startOfSecond,
   startOfWeek,
   startOfYear
-} from 'date-fns/esm'
+} from 'date-fns'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import {
@@ -99,7 +99,7 @@ function useCalendar(
   )
   const calendarValueRef = ref(
     props.value === null || Array.isArray(props.value)
-      ? props.defaultCalendarStartTime ?? Date.now()
+      ? (props.defaultCalendarStartTime ?? Date.now())
       : props.value
   )
   const yearVlRef = ref<VirtualListInst | null>(null)

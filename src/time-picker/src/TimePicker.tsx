@@ -32,8 +32,8 @@ import {
   startOfHour,
   startOfMinute,
   startOfSecond
-} from 'date-fns/esm'
-import formatInTimeZone from 'date-fns-tz/formatInTimeZone'
+} from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
 import type { Locale } from 'date-fns'
 import type { FormValidationStatus } from '../../form/src/interface'
 import { strictParse } from '../../date-picker/src/utils'

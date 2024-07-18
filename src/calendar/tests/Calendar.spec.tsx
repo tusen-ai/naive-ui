@@ -1,7 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { addMonths, format, getYear, isYesterday } from 'date-fns/esm'
+import { addMonths, format, getYear, isYesterday } from 'date-fns'
 import { NCalendar } from '../index'
 import { NButton } from '../../button'
 

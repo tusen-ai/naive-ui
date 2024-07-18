@@ -16,9 +16,7 @@ const { completePath } = require('./complete-path')
   })
   await replaceDefine([srcDir], {
     // the sequence is crucial
-    '\'lodash\'': '\'lodash-es\'',
-    '\'date-fns/(.*)\'//': '\'date-fns/esm/$1\'',
-    '\'date-fns\'//': '\'date-fns/esm\''
+    '\'lodash\'': '\'lodash-es\''
   })
 
   // complete require and import source path

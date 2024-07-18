@@ -19,7 +19,7 @@ import {
   parse,
   startOfMonth,
   startOfYear
-} from 'date-fns/esm'
+} from 'date-fns'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
 import type { FirstDayOfWeek, Value } from './interface'

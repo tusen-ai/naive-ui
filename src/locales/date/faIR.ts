@@ -1,4 +1,4 @@
-import faIR from 'date-fns/esm/locale/zh-CN'
+import { faIR } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
 
 const dateFaIR: NDateLocale = {

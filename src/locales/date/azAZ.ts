@@ -1,4 +1,4 @@
-import az from 'date-fns/esm/locale/az'
+import { az } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
 
 const dateAzAZ: NDateLocale = {

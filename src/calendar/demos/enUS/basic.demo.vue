@@ -7,7 +7,7 @@ A basic calender.
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
-import { addDays, isYesterday } from 'date-fns/esm'
+import { addDays, isYesterday } from 'date-fns'
 
 export default defineComponent({
   setup() {

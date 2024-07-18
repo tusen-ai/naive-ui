@@ -5,9 +5,9 @@ import {
   defineComponent,
   h
 } from 'vue'
-import { format, formatDistanceStrict, fromUnixTime } from 'date-fns/esm'
+import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
 import type { Locale } from 'date-fns'
-import formatInTimeZone from 'date-fns-tz/formatInTimeZone'
+import { formatInTimeZone } from 'date-fns-tz'
 import { useLocale } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 

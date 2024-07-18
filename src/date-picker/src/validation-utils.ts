@@ -1,5 +1,5 @@
 import { type Ref, computed } from 'vue'
-import { getHours, getMinutes, getSeconds } from 'date-fns/esm'
+import { getHours, getMinutes, getSeconds } from 'date-fns'
 import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeDateDisabled,

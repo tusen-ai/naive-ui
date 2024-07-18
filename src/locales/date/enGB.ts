@@ -1,4 +1,4 @@
-import enGB from 'date-fns/esm/locale/en-GB'
+import { enGB } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
 
 const dateEnGB: NDateLocale = {
