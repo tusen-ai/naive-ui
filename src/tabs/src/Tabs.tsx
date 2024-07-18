@@ -529,20 +529,43 @@ export default defineComponent({
     function _handleTabsResize(entry: ResizeObserverEntry): void {
       const {
         target,
-        contentRect: { width }
+        contentRect: { width, height }
       } = entry
-      const containerWidth = target.parentElement!.offsetWidth
+      const containerWidth = target.parentElement!.parentElement!.offsetWidth
+      const containerHeight = target.parentElement!.parentElement!.offsetHeight
+      // console.log(target, target.parentElement, width, containerWidth)
+      const { placement } = props
       if (!addTabFixedRef.value) {
-        if (containerWidth < width) {
-          addTabFixedRef.value = true
+        if (placement === 'top' || placement === 'bottom') {
+          if (containerWidth < width) {
+            addTabFixedRef.value = true
+          }
+        }
+        else {
+          if (containerHeight < height) {
+            addTabFixedRef.value = true
+          }
         }
       }
       else {
         const { value: addTabInst } = addTabInstRef
         if (!addTabInst)
           return
-        if (containerWidth - width > addTabInst.$el.offsetWidth) {
-          addTabFixedRef.value = false
+        if (placement === 'top' || placement === 'bottom') {
+          if (
+            containerWidth - width
+            > (addTabInst.$el as HTMLElement).offsetWidth
+          ) {
+            addTabFixedRef.value = false
+          }
+        }
+        else {
+          if (
+            containerHeight - height
+            > (addTabInst.$el as HTMLElement).offsetHeight
+          ) {
+            addTabFixedRef.value = false
+          }
         }
       }
       deriveScrollShadow(
@@ -802,12 +825,16 @@ export default defineComponent({
       const tabs = (
         <div
           style={this.tabWrapperStyle}
-          class={[`${mergedClsPrefix}-tabs-wrapper`]}
+          class={`${mergedClsPrefix}-tabs-wrapper`}
         >
           {mergedJustifyContent ? null : (
             <div
               class={`${mergedClsPrefix}-tabs-scroll-padding`}
-              style={{ width: `${this.tabsPadding}px` }}
+              style={
+                placement === 'top' || placement === 'bottom'
+                  ? { width: `${this.tabsPadding}px` }
+                  : { height: `${this.tabsPadding}px` }
+              }
             />
           )}
           {showPane

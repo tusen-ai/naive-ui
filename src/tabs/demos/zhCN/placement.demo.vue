@@ -25,6 +25,7 @@ const type = ref<TabsProps['type']>('card')
     </n-radio-group>
     <n-tabs
       :key="type + placement"
+      addable
       :type="type"
       animated
       :placement="placement"
@@ -34,6 +35,12 @@ const type = ref<TabsProps['type']>('card')
           : undefined
       "
     >
+      <template #prefix>
+        Prefix
+      </template>
+      <template #suffix>
+        Suffix
+      </template>
       <n-tab-pane name="oasis" tab="Oasis">
         Wonderwall
       </n-tab-pane>

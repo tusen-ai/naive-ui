@@ -8,6 +8,7 @@
 
 - 修复 `n-infinite-scroll` 组件触底判断错误，关闭 [#6133](https://github.com/tusen-ai/naive-ui/issues/6133)
 - 修复 `n-slider` 在垂直模式下的宽度样式可能会被全局 CSS box-sizing override 影响，关闭[#6114](https://github.com/tusen-ai/naive-ui/issues/6114)
+- 修复 `n-tabs` 在垂直模式下使用 `prefix` slot、`suffix` slot 和 `addable` 属性的时候可能出现样式问题，关闭 [#6059](https://github.com/tusen-ai/naive-ui/issues/6059)，[#6060](https://github.com/tusen-ai/naive-ui/pull/6060)
 
 ### Features
 

@@ -8,6 +8,7 @@
 
 - Fix `n-infinite-scroll` bottoming out judgment error, closes [#6133](https://github.com/tusen-ai/naive-ui/issues/6133).
 - Fix `n-slider`'s rail may have styling issue in `vertical` mode when global box-sizing is overrided, closes [#6114](https://github.com/tusen-ai/naive-ui/issues/6114).
+- Fix `n-tabs` has style issue when using `prefix` slot, `suffix` slot or `addable` prop with vertical placement, closes [#6059](https://github.com/tusen-ai/naive-ui/issues/6059), [#6060](https://github.com/tusen-ai/naive-ui/pull/6060).
 
 ### Features
 
