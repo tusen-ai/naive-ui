@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, toRef } from 'vue'
+import { type PropType, defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 
@@ -23,10 +23,10 @@ export default defineComponent({
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onMouseup: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-icon', style, toRef(props, 'clsPrefix'))
   },
-  render () {
+  render() {
     return (
       <i
         class={`${this.clsPrefix}-base-icon`}

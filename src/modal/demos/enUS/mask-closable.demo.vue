@@ -4,6 +4,30 @@
 Use `mask-closable=false` to make modal not emit the event which may close the modal.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    const showModalRef = ref(false)
+
+    return {
+      showModal: showModalRef,
+      onPositiveClick() {
+        message.success('Submit')
+        showModalRef.value = false
+      },
+      onNegativeClick() {
+        message.success('Cancel')
+        showModalRef.value = false
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     Start me up
@@ -20,27 +44,3 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
     @negative-click="onNegativeClick"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    const showModalRef = ref(false)
-
-    return {
-      showModal: showModalRef,
-      onPositiveClick () {
-        message.success('Submit')
-        showModalRef.value = false
-      },
-      onNegativeClick () {
-        message.success('Cancel')
-        showModalRef.value = false
-      }
-    }
-  }
-})
-</script>

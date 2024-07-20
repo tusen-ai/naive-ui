@@ -2,7 +2,7 @@
 
 # 社区精选资源
 
-Naive-ui 是统一设计规范的高质量 Vue 组件库，我们倾向于只提供符合统一规范且带有视觉展现的 UI 组件。所以我们推荐以下社区已有的优秀资源，与 naive-ui 形成互补。
+Naive UI 是统一设计规范的高质量 Vue 组件库，我们倾向于只提供符合统一规范且带有视觉展现的 UI 组件。所以我们推荐以下社区已有的优秀资源，与 Naive UI 形成互补。
 
 想贡献优秀资源，请在 `钉钉` 或 `Discord` 的社区中联系 amadeus711 或 07akioni。
 
@@ -19,3 +19,4 @@ Naive-ui 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | [Celeris Web](https://github.com/kirklin/celeris-web) | 一个基于 Vue 3 和 Vite 的免费开源前端框架，具有 Naive UI 组件和 TypeScript 支持，采用 Monorepo 结构。它还集成了 OpenAI，为现代 Web 开发提供自然语言处理能力。 |
 | [Pinx](https://themeforest.net/item/pinx-vuejs-admin-template/47799543?ref=DverseStudio&utm_source=awesomevue) | Pinx 是一个使用 Vue 3 + TypeScript 构建的管理模板，对开发人员友好，并使用 Naive UI 和 Tailwind CSS 进行设计。 与 Nuxt 兼容！ |
 | [Nova admin](https://github.com/chansee97/nova-admin) | 一个基于Vue3、Vite5、Typescript、Naive UI, 简洁干净后台管理模板，用简单的方式实现完整功能，并尽可能的考虑代码规范，易读易理解无过度封装，方便二次开发。 |
+| [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | 使用 Express 和 Vue3 搭建的 ChatGPT 演示网页 |

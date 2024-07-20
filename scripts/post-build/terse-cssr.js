@@ -1,4 +1,4 @@
-const fs = require('fs').promises
+const fs = require('node:fs').promises
 const terseCssr = require('../../build/utils/terse-cssr.js')
 const { walk, outDirs } = require('../utils')
 

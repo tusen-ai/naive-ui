@@ -4,6 +4,17 @@
 You can set `directory-dnd` to `true` to make directory drag and drop available.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
+
+export default defineComponent({
+  components: {
+    ArchiveIcon
+  }
+})
+</script>
+
 <template>
   <n-upload
     multiple
@@ -14,7 +25,7 @@ You can set `directory-dnd` to `true` to make directory drag and drop available.
     <n-upload-dragger>
       <div style="margin-bottom: 12px">
         <n-icon size="48" :depth="3">
-          <archive-icon />
+          <ArchiveIcon />
         </n-icon>
       </div>
       <n-text style="font-size: 16px">
@@ -27,14 +38,3 @@ You can set `directory-dnd` to `true` to make directory drag and drop available.
     </n-upload-dragger>
   </n-upload>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  }
-})
-</script>

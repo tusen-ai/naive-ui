@@ -10,7 +10,7 @@ const inputNumberDark: InputNumberTheme = {
     Button: buttonDark,
     Input: inputDark
   },
-  self (vars) {
+  self(vars) {
     const { textColorDisabled } = vars
     return {
       iconColorDisabled: textColorDisabled

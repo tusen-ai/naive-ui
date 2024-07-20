@@ -4,18 +4,10 @@
 可以变成通讯录、菜单等，应用场景挺多。
 </markdown>
 
-<template>
-  <n-transfer
-    ref="transfer"
-    v-model:value="value"
-    :options="options"
-    :render-target-label="renderLabel"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { NAvatar, TransferRenderTargetLabel } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import type { TransferRenderTargetLabel } from 'naive-ui'
+import { NAvatar } from 'naive-ui'
 
 const options = [
   {
@@ -41,7 +33,7 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderLabel: TransferRenderTargetLabel = function ({ option }) {
       return h(
         'div',
@@ -83,3 +75,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-transfer
+    v-model:value="value"
+    :options="options"
+    :render-target-label="renderLabel"
+  />
+</template>

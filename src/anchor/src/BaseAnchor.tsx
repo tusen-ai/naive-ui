@@ -1,11 +1,11 @@
 import {
+  type PropType,
   computed,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
   toRef,
@@ -44,7 +44,7 @@ export const baseAnchorProps = {
   internalScrollable: Boolean,
   ignoreGap: Boolean,
   offsetTarget: [String, Object, Function] as PropType<
-  string | OffsetTarget | (() => HTMLElement)
+    string | OffsetTarget | (() => HTMLElement)
   >
 } as const
 
@@ -59,7 +59,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const collectedLinkHrefs: string[] = []
     const titleEls: HTMLElement[] = []
     const activeHrefRef = ref<string | null>(null)
@@ -72,7 +72,7 @@ export default defineComponent({
     const mergedShowRailRef = computed(() => {
       return !isBlockTypeRef.value && props.showRail
     })
-    function disableTransitionOneTick (): void {
+    function disableTransitionOneTick(): void {
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
       if (barEl) {
@@ -105,23 +105,25 @@ export default defineComponent({
         }
       })
     }
-    function updateBarPosition (
+    function updateBarPosition(
       linkTitleEl: HTMLElement,
       transition = true
     ): void {
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
       const { value: selfEl } = selfRef
-      if (!selfEl || !barEl) return
+      if (!selfEl || !barEl)
+        return
       if (!transition) {
         barEl.style.transition = 'none'
-        if (slotEl) slotEl.style.transition = 'none'
+        if (slotEl)
+          slotEl.style.transition = 'none'
       }
       const { offsetHeight, offsetWidth } = linkTitleEl
-      const { top: linkTitleClientTop, left: linkTitleClientLeft } =
-        linkTitleEl.getBoundingClientRect()
-      const { top: anchorClientTop, left: anchorClientLeft } =
-        selfEl.getBoundingClientRect()
+      const { top: linkTitleClientTop, left: linkTitleClientLeft }
+        = linkTitleEl.getBoundingClientRect()
+      const { top: anchorClientTop, left: anchorClientLeft }
+        = selfEl.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
       barEl.style.top = `${offsetTop}px`
@@ -132,18 +134,25 @@ export default defineComponent({
         slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
       }
       void barEl.offsetHeight
-      if (slotEl) void slotEl.offsetHeight
+      if (slotEl)
+        void slotEl.offsetHeight
 
       if (!transition) {
         barEl.style.transition = ''
-        if (slotEl) slotEl.style.transition = ''
+        if (slotEl)
+          slotEl.style.transition = ''
       }
     }
-    function setActiveHref (href: string, transition = true): void {
+    const handleScroll = throttle(() => {
+      _handleScroll(true)
+    }, 128)
+    function setActiveHref(href: string, transition = true): void {
       const idMatchResult = /^#([^#]+)$/.exec(href)
-      if (!idMatchResult) return
+      if (!idMatchResult)
+        return
       const linkEl = document.getElementById(idMatchResult[1])
-      if (!linkEl) return
+      if (!linkEl)
+        return
       activeHrefRef.value = href
       linkEl.scrollIntoView()
       if (!transition) {
@@ -151,10 +160,8 @@ export default defineComponent({
       }
       handleScroll()
     }
-    const handleScroll = throttle(() => {
-      _handleScroll(true)
-    }, 128)
-    function _handleScroll (transition = true): void {
+
+    function _handleScroll(transition = true): void {
       interface LinkInfo {
         top: number
         height: number
@@ -164,7 +171,8 @@ export default defineComponent({
       const offsetTarget = unwrapElement(props.offsetTarget ?? document)
       collectedLinkHrefs.forEach((href) => {
         const idMatchResult = /#([^#]+)$/.exec(href)
-        if (!idMatchResult) return
+        if (!idMatchResult)
+          return
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl && offsetTarget) {
           const { top, height } = getOffset(linkEl, offsetTarget)
@@ -180,7 +188,8 @@ export default defineComponent({
         if (a.top > b.top) {
           return 1
           // descend height
-        } else if (a.top === b.top && a.height < b.height) {
+        }
+        else if (a.top === b.top && a.height < b.height) {
           return -1
         }
         return -1
@@ -191,29 +200,38 @@ export default defineComponent({
         if (link.top + link.height < 0) {
           if (ignoreGap) {
             return link
-          } else {
+          }
+          else {
             return prevLink
           }
         }
         if (link.top <= bound) {
           if (prevLink === null) {
             return link
-          } else if (link.top === prevLink.top) {
+          }
+          else if (link.top === prevLink.top) {
             if (link.href === currentActiveHref) {
               return link
-            } else return prevLink
-          } else if (link.top > prevLink.top) {
+            }
+            else {
+              return prevLink
+            }
+          }
+          else if (link.top > prevLink.top) {
             return link
-          } else {
+          }
+          else {
             return prevLink
           }
         }
         return prevLink
       }, null)
-      if (!transition) disableTransitionOneTick()
+      if (!transition)
+        disableTransitionOneTick()
       if (activeLink) {
         activeHrefRef.value = activeLink.href
-      } else {
+      }
+      else {
         activeHrefRef.value = null
       }
     }
@@ -255,7 +273,7 @@ export default defineComponent({
       mergedShowRail: mergedShowRailRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedShowRail, isBlockType, $slots } = this
 
     const Anchor = (
@@ -279,8 +297,8 @@ export default defineComponent({
               ref="barRef"
               class={[
                 `${mergedClsPrefix}-anchor-rail__bar`,
-                this.activeHref !== null &&
-                  `${mergedClsPrefix}-anchor-rail__bar--active`
+                this.activeHref !== null
+                && `${mergedClsPrefix}-anchor-rail__bar--active`
               ]}
             />
           </div>

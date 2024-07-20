@@ -4,22 +4,9 @@
 Asynchronous example for a single select case.
 </markdown>
 
-<template>
-  <n-select
-    v-model:value="value"
-    filterable
-    placeholder="Search Songs"
-    :options="options"
-    :loading="loading"
-    clearable
-    remote
-    @search="handleSearch"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { SelectOption } from 'naive-ui'
+import type { SelectOption } from 'naive-ui'
 
 const options = [
   {
@@ -31,7 +18,7 @@ const options = [
     value: 'song2'
   },
   {
-    label: "You Won't See",
+    label: 'You Won\'t See',
     value: 'song3'
   },
   {
@@ -59,7 +46,7 @@ const options = [
     value: 'song9'
   },
   {
-    label: "I'm looking through you",
+    label: 'I\'m looking through you',
     value: 'song10'
   },
   {
@@ -73,7 +60,7 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const loadingRef = ref(false)
     const optionsRef = ref<SelectOption[]>([])
 
@@ -89,7 +76,7 @@ export default defineComponent({
         loadingRef.value = true
         window.setTimeout(() => {
           optionsRef.value = options.filter(
-            (item) => ~item.label.indexOf(query)
+            item => ~item.label.indexOf(query)
           )
           loadingRef.value = false
         }, 1000)
@@ -98,3 +85,16 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select
+    v-model:value="value"
+    filterable
+    placeholder="Search Songs"
+    :options="options"
+    :loading="loading"
+    clearable
+    remote
+    @search="handleSearch"
+  />
+</template>

@@ -5,10 +5,35 @@
 另一种方式是配合 `intersection-observer-options` 配置，将采用 [IntersectionObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver) API 实现懒加载。
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      srcList: [
+        'https://picsum.photos/id/1/100/100',
+        'https://picsum.photos/id/2/100/100',
+        'https://picsum.photos/id/3/100/100',
+        'https://picsum.photos/id/4/100/100',
+        'https://picsum.photos/id/5/100/100',
+        'https://picsum.photos/id/7/100/100',
+        'https://picsum.photos/id/8/100/100',
+        'https://picsum.photos/id/9/100/100',
+        'https://picsum.photos/id/10/100/100',
+        'xxx.png'
+      ]
+    }
+  }
+})
+</script>
+
 <template>
-  <n-p>单独设置 <n-text code>
-    lazy
-  </n-text> 属性</n-p>
+  <n-p>
+    单独设置 <n-text code>
+      lazy
+    </n-text> 属性
+  </n-p>
   <n-avatar
     lazy
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
@@ -35,32 +60,9 @@
         fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
         :render-placeholder="() => null"
         :intersection-observer-options="{
-          root: '#image-scroll-container'
+          root: '#image-scroll-container',
         }"
       />
     </n-space>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      srcList: [
-        'https://picsum.photos/id/1/100/100',
-        'https://picsum.photos/id/2/100/100',
-        'https://picsum.photos/id/3/100/100',
-        'https://picsum.photos/id/4/100/100',
-        'https://picsum.photos/id/5/100/100',
-        'https://picsum.photos/id/7/100/100',
-        'https://picsum.photos/id/8/100/100',
-        'https://picsum.photos/id/9/100/100',
-        'https://picsum.photos/id/10/100/100',
-        'xxx.png'
-      ]
-    }
-  }
-})
-</script>

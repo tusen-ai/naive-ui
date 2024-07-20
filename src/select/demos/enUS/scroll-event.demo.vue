@@ -4,19 +4,11 @@
 A colleague of mine wanted to use a scroll event for loading options asynchronously. Here's that example.
 </markdown>
 
-<template>
-  <n-select
-    :options="options"
-    :reset-menu-on-options-change="false"
-    @scroll="handleScroll"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const optionsRef = ref([
       {
         label: 'Drive My Car',
@@ -27,7 +19,7 @@ export default defineComponent({
         value: 'song2'
       },
       {
-        label: "You Won't See",
+        label: 'You Won\'t See',
         value: 'song3'
       },
       {
@@ -55,7 +47,7 @@ export default defineComponent({
         value: 'song9'
       },
       {
-        label: "I'm looking through you",
+        label: 'I\'m looking through you',
         value: 'song10'
       },
       {
@@ -70,11 +62,11 @@ export default defineComponent({
 
     return {
       options: optionsRef,
-      handleScroll (e: Event) {
+      handleScroll(e: Event) {
         const currentTarget = e.currentTarget as HTMLElement
         if (
-          currentTarget.scrollTop + currentTarget.offsetHeight >=
-          currentTarget.scrollHeight
+          currentTarget.scrollTop + currentTarget.offsetHeight
+          >= currentTarget.scrollHeight
         ) {
           optionsRef.value.push(
             {
@@ -92,3 +84,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select
+    :options="options"
+    :reset-menu-on-options-change="false"
+    @scroll="handleScroll"
+  />
+</template>

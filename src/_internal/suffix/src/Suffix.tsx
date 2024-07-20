@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import NBaseClear from '../../clear'
 import NBaseLoading from '../../loading'
 import { NBaseIcon } from '../../icon'
@@ -26,7 +26,7 @@ export default defineComponent({
     },
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     return () => {
       const { clsPrefix } = props
       return (

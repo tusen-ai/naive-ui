@@ -2,6 +2,14 @@
 # Tabs placement
 </markdown>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { TabsProps } from 'naive-ui'
+
+const placement = ref<NonNullable<TabsProps['placement']>>('left')
+const type = ref<TabsProps['type']>('card')
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="placement">
@@ -83,11 +91,3 @@
     </n-tabs>
   </n-space>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import type { TabsProps } from 'naive-ui'
-
-const placement = ref<NonNullable<TabsProps['placement']>>('left')
-const type = ref<TabsProps['type']>('card')
-</script>

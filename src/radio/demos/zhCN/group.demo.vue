@@ -4,27 +4,17 @@
 一个选项组看起来就挺舒服。
 </markdown>
 
-<template>
-  <n-radio-group v-model:value="value" name="radiogroup">
-    <n-space>
-      <n-radio v-for="song in songs" :key="song.value" :value="song.value">
-        {{ song.label }}
-      </n-radio>
-    </n-space>
-  </n-radio-group>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       value: ref(null),
       songs: [
         {
-          value: "Rock'n'Roll Star",
-          label: "Rock'n'Roll Star"
+          value: 'Rock\'n\'Roll Star',
+          label: 'Rock\'n\'Roll Star'
         },
         {
           value: 'Shakermaker',
@@ -50,3 +40,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-radio-group v-model:value="value" name="radiogroup">
+    <n-space>
+      <n-radio v-for="song in songs" :key="song.value" :value="song.value">
+        {{ song.label }}
+      </n-radio>
+    </n-space>
+  </n-radio-group>
+</template>

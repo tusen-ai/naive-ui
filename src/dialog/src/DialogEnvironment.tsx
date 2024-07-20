@@ -1,10 +1,10 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { h, defineComponent, type PropType, ref, type CSSProperties } from 'vue'
+import { type CSSProperties, type PropType, defineComponent, h, ref } from 'vue'
 import NModal from '../../modal/src/Modal'
 import { keep } from '../../_utils'
 import { NDialog } from './Dialog'
-import { dialogProps, dialogPropKeys } from './dialogProps'
+import { dialogPropKeys, dialogProps } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
@@ -24,10 +24,10 @@ export const exposedDialogEnvProps = {
     default: true
   },
   onPositiveClick: Function as PropType<
-  (e: MouseEvent) => Promise<unknown> | unknown
+    (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onNegativeClick: Function as PropType<
-  (e: MouseEvent) => Promise<unknown> | unknown
+    (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>
@@ -48,63 +48,73 @@ export const NDialogEnvironment = defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const showRef = ref(true)
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       const { onInternalAfterLeave, internalKey, onAfterLeave } = props
-      if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
-      if (onAfterLeave) onAfterLeave()
+      if (onInternalAfterLeave)
+        onInternalAfterLeave(internalKey)
+      if (onAfterLeave)
+        onAfterLeave()
     }
-    function handlePositiveClick (e: MouseEvent): void {
+    function handlePositiveClick(e: MouseEvent): void {
       const { onPositiveClick } = props
       if (onPositiveClick) {
         void Promise.resolve(onPositiveClick(e)).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleNegativeClick (e: MouseEvent): void {
+    function handleNegativeClick(e: MouseEvent): void {
       const { onNegativeClick } = props
       if (onNegativeClick) {
         void Promise.resolve(onNegativeClick(e)).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
       if (onClose) {
         void Promise.resolve(onClose()).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleMaskClick (e: MouseEvent): void {
+    function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (onMaskClick) {
         onMaskClick(e)
-        maskClosable && hide()
+        if (maskClosable) {
+          hide()
+        }
       }
     }
-    function handleEsc (): void {
+    function handleEsc(): void {
       const { onEsc } = props
       if (onEsc) {
         onEsc()
       }
     }
-    function hide (): void {
+    function hide(): void {
       showRef.value = false
     }
-    function handleUpdateShow (value: boolean): void {
+    function handleUpdateShow(value: boolean): void {
       showRef.value = value
     }
     return {
@@ -119,7 +129,7 @@ export const NDialogEnvironment = defineComponent({
       handleEsc
     }
   },
-  render () {
+  render() {
     const {
       handlePositiveClick,
       handleUpdateShow,

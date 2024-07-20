@@ -23,10 +23,10 @@ import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
-      warning () {
+      warning() {
         message.warning('...')
       }
     }
@@ -169,7 +169,7 @@ Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefu
 
 ```js
 // xxx.js
-export const handler = () => {
+export function handler() {
   // You need to ensure that window.$message = message has been executed in setup
   window.$message.success(
     'Cause you walked hand in hand With another man in my place'

@@ -4,20 +4,11 @@
 在 `type='selection'` 的列，同时设置 `multiple=false` 来变成单选模式。
 </markdown>
 
-<template>
-  <n-data-table
-    v-model:checked-row-keys="checkedRowKeys"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -31,12 +22,12 @@ const data = Array.from({ length: 46 }).map((_, index) => ({
   key: index
 }))
 
-const createColumns = (): DataTableColumns<RowData> => {
+function createColumns(): DataTableColumns<RowData> {
   return [
     {
       type: 'selection',
       multiple: false,
-      disabled (row: RowData) {
+      disabled(row: RowData) {
         return row.name === 'Edward King 3'
       }
     },
@@ -56,7 +47,7 @@ const createColumns = (): DataTableColumns<RowData> => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const checkedRowKeysRef = ref([4, 1])
     return {
       checkedRowKeys: checkedRowKeysRef,
@@ -69,3 +60,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    v-model:checked-row-keys="checkedRowKeys"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</template>

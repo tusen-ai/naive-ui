@@ -1,16 +1,16 @@
 import {
-  h,
-  ref,
+  type PropType,
+  Transition,
   computed,
+  defineComponent,
+  h,
+  mergeProps,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
   toRef,
   watch,
-  nextTick,
-  defineComponent,
-  mergeProps,
-  Transition,
-  type PropType,
-  onMounted,
-  onBeforeUnmount,
   watchEffect
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
@@ -20,10 +20,10 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import {
-  lockHtmlScrollRightCompensationRef,
   formatLength,
-  resolveSlot,
   isDocument,
+  lockHtmlScrollRightCompensationRef,
+  resolveSlot,
   warn,
   warnOnce
 } from '../../_utils'
@@ -56,7 +56,7 @@ export const backTopProps = {
     default: 180
   },
   listenTo: [String, Object, Function] as PropType<
-  string | HTMLElement | Document | (() => HTMLElement | Document)
+    string | HTMLElement | Document | (() => HTMLElement | Document)
   >,
   'onUpdate:show': {
     type: Function,
@@ -75,7 +75,7 @@ export default defineComponent({
   // make style applied to back-top button
   inheritAttrs: false,
   props: backTopProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.target !== undefined) {
@@ -152,13 +152,14 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function init (): void {
-      if (scrollListenerRegistered) return
+    function init(): void {
+      if (scrollListenerRegistered)
+        return
       scrollListenerRegistered = true
-      const scrollEl =
-        props.target?.() ||
-        unwrapElement(props.listenTo) ||
-        getScrollParent(placeholderRef.value)
+      const scrollEl
+        = props.target?.()
+        || unwrapElement(props.listenTo)
+        || getScrollParent(placeholderRef.value)
       if (!scrollEl) {
         if (__DEV__) {
           warn(
@@ -168,8 +169,8 @@ export default defineComponent({
         }
         return
       }
-      scrollElement =
-        scrollEl === document.documentElement ? document : scrollEl
+      scrollElement
+        = scrollEl === document.documentElement ? document : scrollEl
       const { to } = props
       const target = typeof to === 'string' ? document.querySelector(to) : to
       if (__DEV__ && !target) {
@@ -178,7 +179,7 @@ export default defineComponent({
       scrollElement.addEventListener('scroll', handleScroll)
       handleScroll()
     }
-    function handleClick (): void {
+    function handleClick(): void {
       ;(isDocument(scrollElement)
         ? document.documentElement
         : scrollElement
@@ -187,7 +188,7 @@ export default defineComponent({
         behavior: 'smooth'
       })
     }
-    function handleScroll (): void {
+    function handleScroll(): void {
       scrollTopRef.value = (
         isDocument(scrollElement) ? document.documentElement : scrollElement
       ).scrollTop
@@ -197,7 +198,7 @@ export default defineComponent({
         })
       }
     }
-    function handleAfterEnter (): void {
+    function handleAfterEnter(): void {
       transitionDisabledRef.value = false
     }
     onMounted(() => {
@@ -265,7 +266,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div
@@ -292,16 +293,16 @@ export default defineComponent({
                           class: [
                               `${mergedClsPrefix}-back-top`,
                               this.themeClass,
-                              this.transitionDisabled &&
-                                `${mergedClsPrefix}-back-top--transition-disabled`
+                              this.transitionDisabled
+                              && `${mergedClsPrefix}-back-top--transition-disabled`
                           ],
                           style: [this.style, this.cssVars],
                           onClick: this.handleClick
                         }),
                         resolveSlot(this.$slots.default, () => [
-                            <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{ default: () => BackTopIcon }}
-                            </NBaseIcon>
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                            {{ default: () => BackTopIcon }}
+                          </NBaseIcon>
                         ])
                       )
                       : null

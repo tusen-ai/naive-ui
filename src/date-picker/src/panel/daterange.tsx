@@ -3,18 +3,22 @@ import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
   FastBackwardIcon,
-  ForwardIcon,
-  FastForwardIcon
+  FastForwardIcon,
+  ForwardIcon
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
-import { resolveSlot, warnOnce } from '../../../_utils'
+import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps
+} from '../public-types'
 import PanelHeader from './panelHeader'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
   name: 'DateRangePanel',
   props: useDualCalendarProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('now')) {
@@ -27,9 +31,10 @@ export default defineComponent({
     }
     return useDualCalendar(props, 'daterange')
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
     onRender?.()
+
     return (
       <div
         ref="selfRef"
@@ -82,7 +87,7 @@ export default defineComponent({
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -172,7 +177,7 @@ export default defineComponent({
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -230,51 +235,68 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
-                    typeof shortcut === 'function' ? (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                      ) : null
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut)
+                  || typeof shortcut === 'function' ? (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.handleRangeShortcutMouseenter(shortcut)
+                        }}
+                        onClick={() => {
+                          this.handleRangeShortcutClick(shortcut)
+                        }}
+                        onMouseleave={() => {
+                          this.handleShortcutMouseleave()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    ) : null
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NButton>
-              ) : null}
-              {this.actions?.includes('confirm') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid || this.isSelecting}
-                  onClick={this.handleConfirmClick}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NButton>
-              ) : null}
+              {this.actions?.includes('clear')
+                ? resolveSlotWithProps(
+                  $slots.clear,
+                    {
+                      onClear: this.handleClearClick
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleClearClick}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NButton>
+                    ]
+                )
+                : null}
+              {this.actions?.includes('confirm')
+                ? resolveSlotWithProps(
+                  $slots.confirm,
+                    {
+                      onConfirm: this.handleConfirmClick,
+                      disabled: this.isRangeInvalid || this.isSelecting
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isRangeInvalid || this.isSelecting}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NButton>
+                    ]
+                )
+                : null}
             </div>
           </div>
         ) : null}

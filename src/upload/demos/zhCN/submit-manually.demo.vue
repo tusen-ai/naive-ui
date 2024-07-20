@@ -4,6 +4,29 @@
 你可以使用 submit 方法来进行非受控状态下的手动提交。当然你也可以在受控模式下完全控制提交行为。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { UploadFileInfo, UploadInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const fileListLengthRef = ref(0)
+    const uploadRef = ref<UploadInst | null>(null)
+
+    return {
+      upload: uploadRef,
+      fileListLength: fileListLengthRef,
+      handleChange(options: { fileList: UploadFileInfo[] }) {
+        fileListLengthRef.value = options.fileList.length
+      },
+      handleClick() {
+        uploadRef.value?.submit()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-button
     :disabled="!fileListLength"
@@ -22,26 +45,3 @@
     <n-button>选择文件</n-button>
   </n-upload>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { UploadInst, UploadFileInfo } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const fileListLengthRef = ref(0)
-    const uploadRef = ref<UploadInst | null>(null)
-
-    return {
-      upload: uploadRef,
-      fileListLength: fileListLengthRef,
-      handleChange (options: { fileList: UploadFileInfo[] }) {
-        fileListLengthRef.value = options.fileList.length
-      },
-      handleClick () {
-        uploadRef.value?.submit()
-      }
-    }
-  }
-})
-</script>

@@ -4,28 +4,11 @@
 You can customize some shorcut buttons.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-date-picker v-model:value="ts1" type="date" :shortcuts="shortcuts" />
-    <n-date-picker v-model:value="ts2" type="datetime" :shortcuts="shortcuts" />
-    <n-date-picker
-      v-model:value="range1"
-      type="daterange"
-      :shortcuts="rangeShortcuts"
-    />
-    <n-date-picker
-      v-model:value="range2"
-      type="datetimerange"
-      :shortcuts="rangeShortcuts"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       ts1: ref(null),
       ts2: ref(1183135260000),
@@ -46,3 +29,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-date-picker v-model:value="ts1" type="date" :shortcuts="shortcuts" />
+    <n-date-picker v-model:value="ts2" type="datetime" :shortcuts="shortcuts" />
+    <n-date-picker
+      v-model:value="range1"
+      type="daterange"
+      :shortcuts="rangeShortcuts"
+    />
+    <n-date-picker
+      v-model:value="range2"
+      type="datetimerange"
+      :shortcuts="rangeShortcuts"
+    />
+  </n-space>
+</template>

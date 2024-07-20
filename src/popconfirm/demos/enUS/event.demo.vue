@@ -4,6 +4,25 @@
 `positive-click` & `negative-click`
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handlePositiveClick() {
+        message.info('positive click')
+      },
+      handleNegativeClick() {
+        message.info('negative click')
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-popconfirm
     @positive-click="handlePositiveClick"
@@ -16,22 +35,3 @@
     when I watch Bilibili.
   </n-popconfirm>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handlePositiveClick () {
-        message.info('positive click')
-      },
-      handleNegativeClick () {
-        message.info('negative click')
-      }
-    }
-  }
-})
-</script>

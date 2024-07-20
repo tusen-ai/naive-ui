@@ -1,10 +1,9 @@
-import { h, defineComponent, inject } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { menuInjectionKey } from './context'
 
 export default defineComponent({
   name: 'MenuDivider',
-  setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup() {
     const NMenu = inject(menuInjectionKey)!
     const { mergedClsPrefixRef, isHorizontalRef } = NMenu
     return () =>

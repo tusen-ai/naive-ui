@@ -1,17 +1,17 @@
 import {
-  h,
-  ref,
-  defineComponent,
-  provide,
+  type ExtractPropTypes,
   type PropType,
-  type ExtractPropTypes
+  defineComponent,
+  h,
+  provide,
+  ref
 } from 'vue'
 import type { InternalPopoverInst } from '../../popover/src/interface'
 import { NPopover } from '../../popover'
 import type { PopoverTrigger } from '../../popover'
 import type { ButtonProps } from '../../button'
 import { popoverBaseProps } from '../../popover/src/Popover'
-import { omit, keep, call } from '../../_utils'
+import { call, keep, omit } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -38,10 +38,10 @@ export const popconfirmProps = {
   positiveButtonProps: Object as PropType<ButtonProps>,
   negativeButtonProps: Object as PropType<ButtonProps>,
   onPositiveClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | any
+    (e: MouseEvent) => Promise<boolean> | boolean | any
   >,
   onNegativeClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | any
+    (e: MouseEvent) => Promise<boolean> | boolean | any
   >
 }
 
@@ -53,7 +53,7 @@ export default defineComponent({
   name: 'Popconfirm',
   props: popconfirmProps,
   __popover__: true,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig()
     const themeRef = useTheme(
       'Popconfirm',
@@ -64,25 +64,31 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const popoverInstRef = ref<InternalPopoverInst | null>(null)
-    function handlePositiveClick (e: MouseEvent): void {
-      if (!popoverInstRef.value?.getMergedShow()) return
+    function handlePositiveClick(e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow())
+        return
       const { onPositiveClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onPositiveClick ? onPositiveClick(e) : true).then(
         (value) => {
-          if (value === false) return
+          if (value === false)
+            return
           popoverInstRef.value?.setShow(false)
-          if (onUpdateShow) call(onUpdateShow, false)
+          if (onUpdateShow)
+            call(onUpdateShow, false)
         }
       )
     }
-    function handleNegativeClick (e: MouseEvent): void {
-      if (!popoverInstRef.value?.getMergedShow()) return
+    function handleNegativeClick(e: MouseEvent): void {
+      if (!popoverInstRef.value?.getMergedShow())
+        return
       const { onNegativeClick, 'onUpdate:show': onUpdateShow } = props
       void Promise.resolve(onNegativeClick ? onNegativeClick(e) : true).then(
         (value) => {
-          if (value === false) return
+          if (value === false)
+            return
           popoverInstRef.value?.setShow(false)
-          if (onUpdateShow) call(onUpdateShow, false)
+          if (onUpdateShow)
+            call(onUpdateShow, false)
         }
       )
     }
@@ -92,10 +98,10 @@ export default defineComponent({
       props
     })
     const returned = {
-      setShow (value: boolean) {
+      setShow(value: boolean) {
         popoverInstRef.value?.setShow(value)
       },
-      syncPosition () {
+      syncPosition() {
         popoverInstRef.value?.syncPosition()
       },
       mergedTheme: themeRef,
@@ -105,7 +111,7 @@ export default defineComponent({
     }
     return returned satisfies PopconfirmInst
   },
-  render () {
+  render() {
     const { $slots: slots, $props: props, mergedTheme } = this
     return h(
       NPopover,

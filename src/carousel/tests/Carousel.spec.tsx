@@ -1,7 +1,7 @@
 import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NCarousel, NCarouselItem } from '../index'
 import { sleep } from 'seemly'
+import { NCarousel, NCarouselItem } from '../index'
 
 describe('n-carousel', () => {
   it('should work with import on demand', () => {
@@ -191,7 +191,7 @@ describe('n-carousel', () => {
       hover: 'mouseenter'
     }
     const triggers = Object.keys(triggerEvent) as Array<
-    keyof typeof triggerEvent
+      keyof typeof triggerEvent
     >
     for (let i = 0; i < triggers.length; i++) {
       const trigger = triggers[i]

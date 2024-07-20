@@ -1,12 +1,13 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
-import { h, Comment } from 'vue'
+import { Comment, h } from 'vue'
 import { sleep } from 'seemly'
 import {
-  NMenu,
-  type MenuOption,
+  type MenuDividerOption,
   type MenuGroupOption,
-  type MenuDividerOption
+  type MenuOption,
+  NMenu
 } from '../index'
 import { NIcon } from '../../icon'
 
@@ -81,11 +82,13 @@ describe('n-menu', () => {
         key: 'initialj'
       }
     ]
-    function renderMenuIcon (option: any): any {
+    function renderMenuIcon(option: any): any {
       // return comment vnode, render placeholder for indent
-      if (option.key === 'mojito') return h(Comment)
+      if (option.key === 'mojito')
+        return h(Comment)
       // return falsy, don't render icon placeholder
-      if (option.key === 'initialj') return null
+      if (option.key === 'initialj')
+        return null
       // otherwise, render returns vnode
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
@@ -232,7 +235,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderMenuIcon (): any {
+    function renderMenuIcon(): any {
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
     const wrapper = mount(NMenu, {
@@ -279,7 +282,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderExpandIcon (): any {
+    function renderExpandIcon(): any {
       return h('span', { class: 'expand-icon' }, '1')
     }
     const wrapper = mount(NMenu, {
@@ -320,7 +323,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderMenuExtra (): any {
+    function renderMenuExtra(): any {
       return 'test'
     }
     const wrapper = mount(NMenu, {
@@ -383,37 +386,39 @@ describe('n-menu', () => {
   })
 
   it('accepts proper options', () => {
-    ;<NMenu
-      options={[
-        {
-          type: 'divider'
-        },
-        {
-          type: 'group',
-          key: 'foo'
-        },
-        {
-          key: 'blabla',
-          label: 'kirby'
-        },
-        {
-          key: 'xxxx',
-          children: [
-            {
-              type: 'divider'
-            },
-            {
-              type: 'group',
-              key: 'foo1'
-            },
-            {
-              key: 'blabla1',
-              label: 'kirby'
-            }
-          ]
-        }
-      ]}
-    />
+    ;(() => (
+      <NMenu
+        options={[
+          {
+            type: 'divider'
+          },
+          {
+            type: 'group',
+            key: 'foo'
+          },
+          {
+            key: 'blabla',
+            label: 'kirby'
+          },
+          {
+            key: 'xxxx',
+            children: [
+              {
+                type: 'divider'
+              },
+              {
+                type: 'group',
+                key: 'foo1'
+              },
+              {
+                key: 'blabla1',
+                label: 'kirby'
+              }
+            ]
+          }
+        ]}
+      />
+    ))()
   })
 
   it('should work with `hidden` prop', async () => {

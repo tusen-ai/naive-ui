@@ -1,4 +1,4 @@
-const easeOut = (t: number): number => 1 - Math.pow(1 - t, 5)
+const easeOut = (t: number): number => 1 - (1 - t) ** 5
 
 // Tween
 export interface TweenProps {
@@ -9,8 +9,9 @@ export interface TweenProps {
   onFinish: () => void
 }
 
-export function tween (props: TweenProps): void {
+export function tween(props: TweenProps): void {
   const { from, to, duration, onUpdate, onFinish } = props
+  const startTime = performance.now()
   const tick = (): void => {
     const current = performance.now()
     const elapsedTime = Math.min(current - startTime, duration)
@@ -22,6 +23,5 @@ export function tween (props: TweenProps): void {
     onUpdate(currentValue)
     requestAnimationFrame(tick)
   }
-  const startTime = performance.now()
   tick()
 }

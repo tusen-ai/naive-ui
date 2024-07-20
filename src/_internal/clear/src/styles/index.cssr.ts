@@ -1,4 +1,4 @@
-import { cB, c, cE } from '../../../../_utils/cssr'
+import { c, cB, cE } from '../../../../_utils/cssr'
 import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
 
 // vars:

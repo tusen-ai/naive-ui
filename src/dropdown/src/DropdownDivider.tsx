@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'DropdownDivider',
@@ -8,7 +8,7 @@ export default defineComponent({
       required: true
     }
   },
-  render () {
+  render() {
     return <div class={`${this.clsPrefix}-dropdown-divider`} />
   }
 })

@@ -1,9 +1,9 @@
 import {
-  h,
-  ref,
-  onBeforeUnmount,
-  defineComponent,
   Transition,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  ref,
   toRef
 } from 'vue'
 import { useStyle } from '../../../_mixins'
@@ -18,7 +18,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-menu-mask', style, toRef(props, 'clsPrefix'))
     const messageRef = ref<string | null>(null)
     let timerId: number | null = null
@@ -29,8 +29,9 @@ export default defineComponent({
       }
     })
     const exposedRef: MenuMaskRef = {
-      showOnce (message: string, duration = 1500) {
-        if (timerId) window.clearTimeout(timerId)
+      showOnce(message: string, duration = 1500) {
+        if (timerId)
+          window.clearTimeout(timerId)
         uncontrolledShowRef.value = true
         messageRef.value = message
         timerId = window.setTimeout(() => {
@@ -45,7 +46,7 @@ export default defineComponent({
       ...exposedRef
     }
   },
-  render () {
+  render() {
     return (
       <Transition name="fade-in-transition">
         {{

@@ -1,25 +1,25 @@
 import {
-  h,
+  type CSSProperties,
+  Fragment,
+  type InputHTMLAttributes,
+  type PropType,
+  type TextareaHTMLAttributes,
+  type VNode,
+  type VNodeChild,
+  type WatchStopHandle,
   computed,
   defineComponent,
+  getCurrentInstance,
+  h,
   nextTick,
+  onMounted,
+  provide,
   ref,
   toRef,
-  onMounted,
-  getCurrentInstance,
-  type PropType,
-  type CSSProperties,
   watch,
-  watchEffect,
-  type WatchStopHandle,
-  provide,
-  type InputHTMLAttributes,
-  type TextareaHTMLAttributes,
-  Fragment,
-  type VNode,
-  type VNodeChild
+  watchEffect
 } from 'vue'
-import { useMergedState, useMemo } from 'vooks'
+import { useMemo, useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
@@ -35,30 +35,30 @@ import {
   type ScrollbarInst
 } from '../../_internal'
 import {
-  useTheme,
-  useLocale,
-  useFormItem,
   useConfig,
-  useThemeClass,
-  useStyle
+  useFormItem,
+  useLocale,
+  useStyle,
+  useTheme,
+  useThemeClass
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
+  type ExtractPublicPropTypes,
+  type MaybeArray,
   call,
   createKey,
-  type ExtractPublicPropTypes,
   resolveSlot,
   resolveWrappedSlot,
-  warnOnce,
-  type MaybeArray
+  warnOnce
 } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
 import type {
+  InputWrappedRef,
   OnUpdateValue,
   OnUpdateValueImpl,
-  Size,
-  InputWrappedRef
+  Size
 } from './interface'
 import { inputInjectionKey } from './interface'
 import { isEmptyInputValue, useCursor } from './utils'
@@ -96,7 +96,7 @@ export const inputProps = {
   clearable: Boolean,
   autosize: {
     type: [Boolean, Object] as PropType<
-    boolean | { minRows?: number, maxRows?: number }
+      boolean | { minRows?: number, maxRows?: number }
     >,
     default: false
   },
@@ -145,18 +145,18 @@ export const inputProps = {
     default: 20
   },
   onInputBlur: [Function, Array] as PropType<
-  MaybeArray<(e: FocusEvent) => void>
+    MaybeArray<(e: FocusEvent) => void>
   >,
   onInputFocus: [Function, Array] as PropType<
-  MaybeArray<(e: FocusEvent) => void>
+    MaybeArray<(e: FocusEvent) => void>
   >,
   onDeactivate: [Function, Array] as PropType<MaybeArray<() => void>>,
   onActivate: [Function, Array] as PropType<MaybeArray<() => void>>,
   onWrapperFocus: [Function, Array] as PropType<
-  MaybeArray<(e: FocusEvent) => void>
+    MaybeArray<(e: FocusEvent) => void>
   >,
   onWrapperBlur: [Function, Array] as PropType<
-  MaybeArray<(e: FocusEvent) => void>
+    MaybeArray<(e: FocusEvent) => void>
   >,
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
@@ -173,7 +173,7 @@ export type InputProps = ExtractPublicPropTypes<typeof inputProps>
 export default defineComponent({
   name: 'Input',
   props: inputProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.showPasswordToggle) {
@@ -209,7 +209,7 @@ export default defineComponent({
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
     const currentFocusedInputRef = ref<
-    HTMLInputElement | HTMLTextAreaElement | null
+      HTMLInputElement | HTMLTextAreaElement | null
     >(null)
     const focusedInputCursorControl = useCursor(currentFocusedInputRef)
     const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
@@ -237,13 +237,16 @@ export default defineComponent({
       if (pair) {
         if (Array.isArray(placeholder)) {
           return placeholder
-        } else if (placeholder === undefined) {
+        }
+        else if (placeholder === undefined) {
           return ['', '']
         }
         return [placeholder, placeholder]
-      } else if (placeholder === undefined) {
+      }
+      else if (placeholder === undefined) {
         return [localeRef.value.placeholder]
-      } else {
+      }
+      else {
         return [placeholder] as [string]
       }
     })
@@ -252,10 +255,10 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
-        !isComposing &&
-        (isEmptyInputValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0]))) &&
-        mergedPlaceholder[0]
+        !isComposing
+        && (isEmptyInputValue(mergedValue)
+        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
+        && mergedPlaceholder[0]
       )
     })
     const showPlaceholder2Ref = computed(() => {
@@ -263,10 +266,10 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
-        !isComposing &&
-        mergedPlaceholder[1] &&
-        (isEmptyInputValue(mergedValue) ||
-          (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
+        !isComposing
+        && mergedPlaceholder[1]
+        && (isEmptyInputValue(mergedValue)
+        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
     // focus
@@ -276,10 +279,10 @@ export default defineComponent({
     // clear
     const showClearButton = useMemo(() => {
       if (
-        mergedDisabledRef.value ||
-        props.readonly ||
-        !props.clearable ||
-        (!mergedFocusRef.value && !hoverRef.value)
+        mergedDisabledRef.value
+        || props.readonly
+        || !props.clearable
+        || (!mergedFocusRef.value && !hoverRef.value)
       ) {
         return false
       }
@@ -288,12 +291,13 @@ export default defineComponent({
       if (props.pair) {
         return (
           !!(
-            Array.isArray(mergedValue) &&
-            (mergedValue[0] || mergedValue[1])
-          ) &&
-          (hoverRef.value || mergedFocus)
+            Array.isArray(mergedValue)
+            && (mergedValue[0] || mergedValue[1])
+          )
+          && (hoverRef.value || mergedFocus)
         )
-      } else {
+      }
+      else {
         return !!mergedValue && (hoverRef.value || mergedFocus)
       }
     })
@@ -303,16 +307,18 @@ export default defineComponent({
       if (showPasswordOn) {
         return showPasswordOn
       }
-      if (props.showPasswordToggle) return 'click'
+      if (props.showPasswordToggle)
+        return 'click'
       return undefined
     })
     const passwordVisibleRef = ref<boolean>(false)
     // text-decoration
     const textDecorationStyleRef = computed(() => {
       const { textDecoration } = props
-      if (!textDecoration) return ['', '']
+      if (!textDecoration)
+        return ['', '']
       if (Array.isArray(textDecoration)) {
-        return textDecoration.map((v) => ({
+        return textDecoration.map(v => ({
           textDecoration: v
         }))
       }
@@ -328,11 +334,13 @@ export default defineComponent({
       if (props.type === 'textarea') {
         const { autosize } = props
         if (autosize) {
-          textAreaScrollContainerWidthRef.value =
-            textareaScrollbarInstRef.value?.$el?.offsetWidth
+          textAreaScrollContainerWidthRef.value
+            = textareaScrollbarInstRef.value?.$el?.offsetWidth
         }
-        if (!textareaElRef.value) return
-        if (typeof autosize === 'boolean') return
+        if (!textareaElRef.value)
+          return
+        if (typeof autosize === 'boolean')
+          return
         const {
           paddingTop: stylePaddingTop,
           paddingBottom: stylePaddingBottom,
@@ -342,7 +350,8 @@ export default defineComponent({
         const paddingBottom = Number(stylePaddingBottom.slice(0, -2))
         const lineHeight = Number(styleLineHeight.slice(0, -2))
         const { value: textareaMirrorEl } = textareaMirrorElRef
-        if (!textareaMirrorEl) return
+        if (!textareaMirrorEl)
+          return
         if (autosize.minRows) {
           const minRows = Math.max(autosize.minRows, 1)
           const styleMinHeight = `${
@@ -371,100 +380,114 @@ export default defineComponent({
       }
     })
     // other methods
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const vm = getCurrentInstance()!.proxy!
-    function doUpdateValue (
+    function doUpdateValue(
       value: [string, string],
       meta: { source: 0 | 1 | 'clear' }
     ): void
-    function doUpdateValue (
+    function doUpdateValue(
       value: string,
       meta: { source: 0 | 1 | 'clear' }
     ): void
-    function doUpdateValue (
+    function doUpdateValue(
       value: string | [string, string],
       meta: { source: 0 | 1 | 'clear' }
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue, onInput } = props
       const { nTriggerFormInput } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value, meta)
-      if (onInput) call(onInput as OnUpdateValueImpl, value, meta)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (onInput)
+        call(onInput as OnUpdateValueImpl, value, meta)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
     }
-    function doChange (
+    function doChange(
       value: [string, string],
       meta: { source: 0 | 1 | 'clear' }
     ): void
-    function doChange (value: string, meta: { source: 0 | 1 | 'clear' }): void
-    function doChange (
+    function doChange(value: string, meta: { source: 0 | 1 | 'clear' }): void
+    function doChange(
       value: string | [string, string],
       meta: { source: 0 | 1 | 'clear' }
     ): void {
       const { onChange } = props
       const { nTriggerFormChange } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value, meta)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doClear (e: MouseEvent): void {
+    function doClear(e: MouseEvent): void {
       const { onClear } = props
-      if (onClear) call(onClear, e)
+      if (onClear)
+        call(onClear, e)
     }
-    function doUpdateValueBlur (e: FocusEvent): void {
+    function doUpdateValueBlur(e: FocusEvent): void {
       const { onInputBlur } = props
-      if (onInputBlur) call(onInputBlur, e)
+      if (onInputBlur)
+        call(onInputBlur, e)
     }
-    function doUpdateValueFocus (e: FocusEvent): void {
+    function doUpdateValueFocus(e: FocusEvent): void {
       const { onInputFocus } = props
-      if (onInputFocus) call(onInputFocus, e)
+      if (onInputFocus)
+        call(onInputFocus, e)
     }
-    function doDeactivate (): void {
+    function doDeactivate(): void {
       const { onDeactivate } = props
-      if (onDeactivate) call(onDeactivate)
+      if (onDeactivate)
+        call(onDeactivate)
     }
-    function doActivate (): void {
+    function doActivate(): void {
       const { onActivate } = props
-      if (onActivate) call(onActivate)
+      if (onActivate)
+        call(onActivate)
     }
-    function doClick (e: MouseEvent): void {
+    function doClick(e: MouseEvent): void {
       const { onClick } = props
-      if (onClick) call(onClick, e)
+      if (onClick)
+        call(onClick, e)
     }
-    function doWrapperFocus (e: FocusEvent): void {
+    function doWrapperFocus(e: FocusEvent): void {
       const { onWrapperFocus } = props
-      if (onWrapperFocus) call(onWrapperFocus, e)
+      if (onWrapperFocus)
+        call(onWrapperFocus, e)
     }
-    function doWrapperBlur (e: FocusEvent): void {
+    function doWrapperBlur(e: FocusEvent): void {
       const { onWrapperBlur } = props
-      if (onWrapperBlur) call(onWrapperBlur, e)
+      if (onWrapperBlur)
+        call(onWrapperBlur, e)
     }
     // methods
-    function handleCompositionStart (): void {
+    function handleCompositionStart(): void {
       isComposingRef.value = true
     }
-    function handleCompositionEnd (e: CompositionEvent): void {
+    function handleCompositionEnd(e: CompositionEvent): void {
       isComposingRef.value = false
       if (e.target === inputEl2Ref.value) {
         handleInput(e, 1)
-      } else {
+      }
+      else {
         handleInput(e, 0)
       }
     }
-    function handleInput (
+    function handleInput(
       e: InputEvent | CompositionEvent | Event,
       index: 0 | 1 = 0,
       event = 'input'
@@ -481,25 +504,34 @@ export default defineComponent({
         }
       }
       syncSource = targetValue
-      if (isComposingRef.value) return
+      if (isComposingRef.value)
+        return
       focusedInputCursorControl.recordCursor()
       const isIncomingValueValid = allowInput(targetValue)
       if (isIncomingValueValid) {
         if (!props.pair) {
-          event === 'input'
-            ? doUpdateValue(targetValue, { source: index })
-            : doChange(targetValue, { source: index })
-        } else {
+          if (event === 'input') {
+            doUpdateValue(targetValue, { source: index })
+          }
+          else {
+            doChange(targetValue, { source: index })
+          }
+        }
+        else {
           let { value } = mergedValueRef
           if (!Array.isArray(value)) {
             value = ['', '']
-          } else {
+          }
+          else {
             value = [value[0], value[1]]
           }
           value[index] = targetValue
-          event === 'input'
-            ? doUpdateValue(value, { source: index })
-            : doChange(value, { source: index })
+          if (event === 'input') {
+            doUpdateValue(value, { source: index })
+          }
+          else {
+            doChange(value, { source: index })
+          }
         }
       }
       // force update to sync input's view with value
@@ -509,7 +541,7 @@ export default defineComponent({
         void nextTick(focusedInputCursorControl.restoreCursor)
       }
     }
-    function allowInput (value: string): boolean {
+    function allowInput(value: string): boolean {
       const { countGraphemes, maxlength, minlength } = props
       if (countGraphemes) {
         let graphemesCount: number | undefined
@@ -517,13 +549,15 @@ export default defineComponent({
           if (graphemesCount === undefined) {
             graphemesCount = countGraphemes(value)
           }
-          if (graphemesCount > Number(maxlength)) return false
+          if (graphemesCount > Number(maxlength))
+            return false
         }
         if (minlength !== undefined) {
           if (graphemesCount === undefined) {
             graphemesCount = countGraphemes(value)
           }
-          if (graphemesCount < Number(maxlength)) return false
+          if (graphemesCount < Number(maxlength))
+            return false
         }
       }
       const { allowInput } = props
@@ -532,17 +566,17 @@ export default defineComponent({
       }
       return true
     }
-    function handleInputBlur (e: FocusEvent): void {
+    function handleInputBlur(e: FocusEvent): void {
       doUpdateValueBlur(e)
       if (e.relatedTarget === wrapperElRef.value) {
         doDeactivate()
       }
       if (
         !(
-          e.relatedTarget !== null &&
-          (e.relatedTarget === inputElRef.value ||
-            e.relatedTarget === inputEl2Ref.value ||
-            e.relatedTarget === textareaElRef.value)
+          e.relatedTarget !== null
+          && (e.relatedTarget === inputElRef.value
+          || e.relatedTarget === inputEl2Ref.value
+          || e.relatedTarget === textareaElRef.value)
         )
       ) {
         activatedRef.value = false
@@ -550,7 +584,7 @@ export default defineComponent({
       dealWithEvent(e, 'blur')
       currentFocusedInputRef.value = null
     }
-    function handleInputFocus (e: FocusEvent, index: number): void {
+    function handleInputFocus(e: FocusEvent, index: number): void {
       doUpdateValueFocus(e)
       focusedRef.value = true
       activatedRef.value = true
@@ -558,81 +592,87 @@ export default defineComponent({
       dealWithEvent(e, 'focus')
       if (index === 0) {
         currentFocusedInputRef.value = inputElRef.value
-      } else if (index === 1) {
+      }
+      else if (index === 1) {
         currentFocusedInputRef.value = inputEl2Ref.value
-      } else if (index === 2) {
+      }
+      else if (index === 2) {
         currentFocusedInputRef.value = textareaElRef.value
       }
     }
-    function handleWrapperBlur (e: FocusEvent): void {
+    function handleWrapperBlur(e: FocusEvent): void {
       if (props.passivelyActivated) {
         doWrapperBlur(e)
         dealWithEvent(e, 'blur')
       }
     }
-    function handleWrapperFocus (e: FocusEvent): void {
+    function handleWrapperFocus(e: FocusEvent): void {
       if (props.passivelyActivated) {
         focusedRef.value = true
         doWrapperFocus(e)
         dealWithEvent(e, 'focus')
       }
     }
-    function dealWithEvent (e: FocusEvent, type: 'focus' | 'blur'): void {
+    function dealWithEvent(e: FocusEvent, type: 'focus' | 'blur'): void {
       if (
-        e.relatedTarget !== null &&
-        (e.relatedTarget === inputElRef.value ||
-          e.relatedTarget === inputEl2Ref.value ||
-          e.relatedTarget === textareaElRef.value ||
-          e.relatedTarget === wrapperElRef.value)
+        e.relatedTarget !== null
+        && (e.relatedTarget === inputElRef.value
+        || e.relatedTarget === inputEl2Ref.value
+        || e.relatedTarget === textareaElRef.value
+        || e.relatedTarget === wrapperElRef.value)
       ) {
         /**
          * activeElement transfer inside the input, do nothing
          */
-      } else {
+      }
+      else {
         if (type === 'focus') {
           doFocus(e)
           focusedRef.value = true
-        } else if (type === 'blur') {
+        }
+        else if (type === 'blur') {
           doBlur(e)
           focusedRef.value = false
         }
       }
     }
-    function handleChange (e: Event, index?: 0 | 1): void {
+    function handleChange(e: Event, index?: 0 | 1): void {
       handleInput(e, index, 'change')
     }
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       doClick(e)
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       doClear(e)
       clearValue()
     }
-    function clearValue (): void {
+    function clearValue(): void {
       if (props.pair) {
         doUpdateValue(['', ''], { source: 'clear' })
         doChange(['', ''], { source: 'clear' })
-      } else {
+      }
+      else {
         doUpdateValue('', { source: 'clear' })
         doChange('', { source: 'clear' })
       }
     }
-    function handleMouseDown (e: MouseEvent): void {
+    function handleMouseDown(e: MouseEvent): void {
       const { onMousedown } = props
-      if (onMousedown) onMousedown(e)
+      if (onMousedown)
+        onMousedown(e)
       const { tagName } = e.target as HTMLElement
       if (tagName !== 'INPUT' && tagName !== 'TEXTAREA') {
         if (props.resizable) {
           const { value: wrapperEl } = wrapperElRef
           if (wrapperEl) {
-            const { left, top, width, height } =
-              wrapperEl.getBoundingClientRect()
+            const { left, top, width, height }
+              = wrapperEl.getBoundingClientRect()
             const resizeHandleSize = 14
             if (
-              left + width - resizeHandleSize < e.clientX &&
-              e.clientX < left + width &&
-              top + height - resizeHandleSize < e.clientY &&
-              e.clientY < top + height
+              left + width - resizeHandleSize < e.clientX
+              && e.clientX < left + width
+              && top + height - resizeHandleSize < e.clientY
+              && e.clientY < top + height
             ) {
               // touching resize handle, just let it go.
               // resize won't take focus, maybe there is a better way to do this.
@@ -647,32 +687,36 @@ export default defineComponent({
         }
       }
     }
-    function handleMouseEnter (): void {
+    function handleMouseEnter(): void {
       hoverRef.value = true
       if (props.type === 'textarea') {
         textareaScrollbarInstRef.value?.handleMouseEnterWrapper()
       }
     }
-    function handleMouseLeave (): void {
+    function handleMouseLeave(): void {
       hoverRef.value = false
       if (props.type === 'textarea') {
         textareaScrollbarInstRef.value?.handleMouseLeaveWrapper()
       }
     }
-    function handlePasswordToggleClick (): void {
-      if (mergedDisabledRef.value) return
-      if (mergedShowPasswordOnRef.value !== 'click') return
+    function handlePasswordToggleClick(): void {
+      if (mergedDisabledRef.value)
+        return
+      if (mergedShowPasswordOnRef.value !== 'click')
+        return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
-    function handlePasswordToggleMousedown (e: MouseEvent): void {
-      if (mergedDisabledRef.value) return
+    function handlePasswordToggleMousedown(e: MouseEvent): void {
+      if (mergedDisabledRef.value)
+        return
       e.preventDefault()
       const preventDefaultOnce = (e: MouseEvent): void => {
         e.preventDefault()
         off('mouseup', document, preventDefaultOnce)
       }
       on('mouseup', document, preventDefaultOnce)
-      if (mergedShowPasswordOnRef.value !== 'mousedown') return
+      if (mergedShowPasswordOnRef.value !== 'mousedown')
+        return
       passwordVisibleRef.value = true
       const hidePassword = (): void => {
         passwordVisibleRef.value = false
@@ -680,11 +724,13 @@ export default defineComponent({
       }
       on('mouseup', document, hidePassword)
     }
-    function handleWrapperKeyup (e: KeyboardEvent): void {
-      if (props.onKeyup) call(props.onKeyup, e)
+    function handleWrapperKeyup(e: KeyboardEvent): void {
+      if (props.onKeyup)
+        call(props.onKeyup, e)
     }
-    function handleWrapperKeydown (e: KeyboardEvent): void {
-      if (props.onKeydown) call(props.onKeydown, e)
+    function handleWrapperKeydown(e: KeyboardEvent): void {
+      if (props.onKeydown)
+        call(props.onKeydown, e)
       switch (e.key) {
         case 'Escape':
           handleWrapperKeydownEsc()
@@ -694,7 +740,7 @@ export default defineComponent({
           break
       }
     }
-    function handleWrapperKeydownEnter (e: KeyboardEvent): void {
+    function handleWrapperKeydownEnter(e: KeyboardEvent): void {
       if (props.passivelyActivated) {
         const { value: focused } = activatedRef
         if (focused) {
@@ -706,12 +752,13 @@ export default defineComponent({
         e.preventDefault()
         if (props.type === 'textarea') {
           textareaElRef.value?.focus()
-        } else {
+        }
+        else {
           inputElRef.value?.focus()
         }
       }
     }
-    function handleWrapperKeydownEsc (): void {
+    function handleWrapperKeydownEsc(): void {
       if (props.passivelyActivated) {
         activatedRef.value = false
         void nextTick(() => {
@@ -719,77 +766,85 @@ export default defineComponent({
         })
       }
     }
-    function focus (): void {
-      if (mergedDisabledRef.value) return
+    function focus(): void {
+      if (mergedDisabledRef.value)
+        return
       if (props.passivelyActivated) {
         wrapperElRef.value?.focus()
-      } else {
+      }
+      else {
         textareaElRef.value?.focus()
         inputElRef.value?.focus()
       }
     }
-    function blur (): void {
+    function blur(): void {
       if (wrapperElRef.value?.contains(document.activeElement)) {
         ;(document.activeElement as HTMLElement).blur()
       }
     }
-    function select (): void {
+    function select(): void {
       textareaElRef.value?.select()
       inputElRef.value?.select()
     }
-    function activate (): void {
-      if (mergedDisabledRef.value) return
-      if (textareaElRef.value) textareaElRef.value.focus()
-      else if (inputElRef.value) inputElRef.value.focus()
+    function activate(): void {
+      if (mergedDisabledRef.value)
+        return
+      if (textareaElRef.value)
+        textareaElRef.value.focus()
+      else if (inputElRef.value)
+        inputElRef.value.focus()
     }
-    function deactivate (): void {
+    function deactivate(): void {
       const { value: wrapperEl } = wrapperElRef
       if (
-        wrapperEl?.contains(document.activeElement) &&
-        wrapperEl !== document.activeElement
+        wrapperEl?.contains(document.activeElement)
+        && wrapperEl !== document.activeElement
       ) {
         handleWrapperKeydownEsc()
       }
     }
 
-    function scrollTo (options: ScrollToOptions): void {
+    function scrollTo(options: ScrollToOptions): void {
       if (props.type === 'textarea') {
         const { value: textareaEl } = textareaElRef
         textareaEl?.scrollTo(options)
-      } else {
+      }
+      else {
         const { value: inputEl } = inputElRef
         inputEl?.scrollTo(options)
       }
     }
 
-    function syncMirror (value: string | null): void {
+    function syncMirror(value: string | null): void {
       const { type, pair, autosize } = props
       if (!pair && autosize) {
         if (type === 'textarea') {
           const { value: textareaMirrorEl } = textareaMirrorElRef
           if (textareaMirrorEl) {
-            textareaMirrorEl.textContent = (value ?? '') + '\r\n'
+            textareaMirrorEl.textContent = `${value ?? ''}\r\n`
           }
-        } else {
+        }
+        else {
           const { value: inputMirrorEl } = inputMirrorElRef
           if (inputMirrorEl) {
             if (value) {
               inputMirrorEl.textContent = value
-            } else {
+            }
+            else {
               inputMirrorEl.innerHTML = '&nbsp;'
             }
           }
         }
       }
     }
-    function handleTextAreaMirrorResize (): void {
+    function handleTextAreaMirrorResize(): void {
       updateTextAreaStyle()
     }
 
     const placeholderStyleRef = ref({
       top: '0'
     })
-    function handleTextAreaScroll (e: Event): void {
+    function handleTextAreaScroll(e: Event): void {
       const { scrollTop } = e.target as HTMLElement
       placeholderStyleRef.value.top = `${-scrollTop}px`
       textareaScrollbarInstRef.value?.syncUnifiedContainer()
@@ -804,7 +859,8 @@ export default defineComponent({
             syncMirror(value)
           }
         })
-      } else {
+      }
+      else {
         stopWatchMergedValue1?.()
       }
     })
@@ -817,7 +873,8 @@ export default defineComponent({
             textareaScrollbarInstRef.value?.syncUnifiedContainer()
           }
         })
-      } else {
+      }
+      else {
         stopWatchMergedValue2?.()
       }
     })
@@ -1025,7 +1082,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedStatus,
@@ -1087,7 +1144,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-input-wrapper`}>
           {resolveWrappedSlot(
             $slots.prefix,
-            (children) =>
+            children =>
               children && (
                 <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
               )
@@ -1106,9 +1163,9 @@ export default defineComponent({
                   const { textAreaScrollContainerWidth } = this
                   const scrollContainerWidthStyle = {
                     width:
-                      this.autosize &&
-                      textAreaScrollContainerWidth &&
-                      `${textAreaScrollContainerWidth}px`
+                      this.autosize
+                      && textAreaScrollContainerWidth
+                      && `${textAreaScrollContainerWidth}px`
                   }
                   return (
                     <>
@@ -1181,9 +1238,9 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 type={
-                  type === 'password' &&
-                  this.mergedShowPasswordOn &&
-                  this.passwordVisible
+                  type === 'password'
+                  && this.mergedShowPasswordOn
+                  && this.passwordVisible
                     ? 'text'
                     : type
                 }
@@ -1239,78 +1296,78 @@ export default defineComponent({
               ) : null}
             </div>
           )}
-          {!this.pair &&
-            resolveWrappedSlot($slots.suffix, (children) => {
-              return children ||
-                this.clearable ||
-                this.showCount ||
-                this.mergedShowPasswordOn ||
-                this.loading !== undefined ? (
-                <div class={`${mergedClsPrefix}-input__suffix`}>
-                  {[
-                    resolveWrappedSlot(
-                      $slots['clear-icon-placeholder'],
-                      (children) => {
-                        return (
-                          (this.clearable || children) && (
-                            <NBaseClear
-                              clsPrefix={mergedClsPrefix}
-                              show={this.showClearButton}
-                              onClear={this.handleClear}
-                            >
-                              {{
-                                placeholder: () => children,
-                                icon: () => this.$slots['clear-icon']?.()
-                              }}
-                            </NBaseClear>
+          {!this.pair
+          && resolveWrappedSlot($slots.suffix, (children) => {
+            return children
+              || this.clearable
+              || this.showCount
+              || this.mergedShowPasswordOn
+              || this.loading !== undefined ? (
+                  <div class={`${mergedClsPrefix}-input__suffix`}>
+                    {[
+                      resolveWrappedSlot(
+                        $slots['clear-icon-placeholder'],
+                        (children) => {
+                          return (
+                            (this.clearable || children) && (
+                              <NBaseClear
+                                clsPrefix={mergedClsPrefix}
+                                show={this.showClearButton}
+                                onClear={this.handleClear}
+                              >
+                                {{
+                                  placeholder: () => children,
+                                  icon: () => this.$slots['clear-icon']?.()
+                                }}
+                              </NBaseClear>
+                            )
                           )
-                        )
-                      }
-                    ),
-                    !this.internalLoadingBeforeSuffix ? children : null,
-                    this.loading !== undefined ? (
-                      <NBaseSuffix
-                        clsPrefix={mergedClsPrefix}
-                        loading={this.loading}
-                        showArrow={false}
-                        showClear={false}
-                        style={this.cssVars as CSSProperties}
-                      />
-                    ) : null,
-                    this.internalLoadingBeforeSuffix ? children : null,
-                    this.showCount && this.type !== 'textarea' ? (
-                      <WordCount>
-                        {{
-                          default: (props: unknown) => $slots.count?.(props)
-                        }}
-                      </WordCount>
-                    ) : null,
-                    this.mergedShowPasswordOn && this.type === 'password' ? (
-                      <div
-                        class={`${mergedClsPrefix}-input__eye`}
-                        onMousedown={this.handlePasswordToggleMousedown}
-                        onClick={this.handlePasswordToggleClick}
-                      >
-                        {this.passwordVisible
-                          ? resolveSlot($slots['password-visible-icon'], () => [
+                        }
+                      ),
+                      !this.internalLoadingBeforeSuffix ? children : null,
+                      this.loading !== undefined ? (
+                        <NBaseSuffix
+                          clsPrefix={mergedClsPrefix}
+                          loading={this.loading}
+                          showArrow={false}
+                          showClear={false}
+                          style={this.cssVars as CSSProperties}
+                        />
+                      ) : null,
+                      this.internalLoadingBeforeSuffix ? children : null,
+                      this.showCount && this.type !== 'textarea' ? (
+                        <WordCount>
+                          {{
+                            default: (props: unknown) => $slots.count?.(props)
+                          }}
+                        </WordCount>
+                      ) : null,
+                      this.mergedShowPasswordOn && this.type === 'password' ? (
+                        <div
+                          class={`${mergedClsPrefix}-input__eye`}
+                          onMousedown={this.handlePasswordToggleMousedown}
+                          onClick={this.handlePasswordToggleClick}
+                        >
+                          {this.passwordVisible
+                            ? resolveSlot($slots['password-visible-icon'], () => [
                               <NBaseIcon clsPrefix={mergedClsPrefix}>
                                 {{ default: () => <EyeIcon /> }}
                               </NBaseIcon>
-                          ])
-                          : resolveSlot(
-                            $slots['password-invisible-icon'],
-                            () => [
+                            ])
+                            : resolveSlot(
+                              $slots['password-invisible-icon'],
+                              () => [
                                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                                   {{ default: () => <EyeOffIcon /> }}
                                 </NBaseIcon>
-                            ]
-                          )}
-                      </div>
-                    ) : null
-                  ]}
-                </div>
-                  ) : null
-            })}
+                              ]
+                            )}
+                        </div>
+                      ) : null
+                    ]}
+                  </div>
+                ) : null
+          })}
         </div>
         {/* pair input */}
         {this.pair ? (

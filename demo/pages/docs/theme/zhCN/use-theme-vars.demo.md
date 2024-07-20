@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 import { useThemeVars } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       themeVars: useThemeVars()
     }

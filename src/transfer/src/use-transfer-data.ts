@@ -1,6 +1,6 @@
-import { ref, computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { useMergedState } from 'vooks'
-import type { Option, OptionValue, Filter } from './interface'
+import type { Filter, Option, OptionValue } from './interface'
 
 interface UseTransferDataProps {
   defaultValue: OptionValue[] | null
@@ -13,8 +13,7 @@ interface UseTransferDataProps {
   filter: Filter
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useTransferData (props: UseTransferDataProps) {
+export function useTransferData(props: UseTransferDataProps) {
   const uncontrolledValueRef = ref(props.defaultValue)
   const mergedValueRef = useMergedState(
     toRef(props, 'value'),
@@ -23,7 +22,7 @@ export function useTransferData (props: UseTransferDataProps) {
 
   const optionsMapRef = computed(() => {
     const map = new Map()
-    ;(props.options || []).forEach((opt) => map.set(opt.value, opt))
+    ;(props.options || []).forEach(opt => map.set(opt.value, opt))
     return map as Map<OptionValue, Option>
   })
 
@@ -53,31 +52,34 @@ export function useTransferData (props: UseTransferDataProps) {
     if (!mergedSrcFilterableRef.value) {
       if (showSelected) {
         return options
-      } else {
+      }
+      else {
         return options.filter(
-          (option) => !targetValueSetRef.value.has(option.value)
+          option => !targetValueSetRef.value.has(option.value)
         )
       }
     }
     return options.filter((option) => {
       return (
-        filter(srcPatternRef.value, option, 'source') &&
-        (showSelected || !targetValueSetRef.value.has(option.value))
+        filter(srcPatternRef.value, option, 'source')
+        && (showSelected || !targetValueSetRef.value.has(option.value))
       )
     })
   })
 
   const filteredTgtOptionsRef = computed(() => {
-    if (!props.targetFilterable) return targetOptionsRef.value
+    if (!props.targetFilterable)
+      return targetOptionsRef.value
     const { filter } = props
-    return targetOptionsRef.value.filter((opt) =>
+    return targetOptionsRef.value.filter(opt =>
       filter(tgtPatternRef.value, opt, 'target')
     )
   })
 
   const mergedValueSetRef = computed<Set<string | number>>(() => {
     const { value } = mergedValueRef
-    if (value === null) return new Set()
+    if (value === null)
+      return new Set()
     return new Set(value)
   })
 
@@ -112,7 +114,7 @@ export function useTransferData (props: UseTransferDataProps) {
   })
 
   const canNotSelectAnythingRef = computed(() => {
-    return filteredSrcOptionsRef.value.every((option) => option.disabled)
+    return filteredSrcOptionsRef.value.every(option => option.disabled)
   })
 
   const allCheckedRef = computed(() => {
@@ -121,19 +123,19 @@ export function useTransferData (props: UseTransferDataProps) {
     }
     const mergedValueSet = mergedValueSetRef.value
     return filteredSrcOptionsRef.value.every(
-      (option) => option.disabled || mergedValueSet.has(option.value)
+      option => option.disabled || mergedValueSet.has(option.value)
     )
   })
 
   const canBeClearedRef = computed(() => {
-    return filteredTgtOptionsRef.value.some((option) => !option.disabled)
+    return filteredTgtOptionsRef.value.some(option => !option.disabled)
   })
 
-  function handleSrcFilterUpdateValue (value: string | null): void {
+  function handleSrcFilterUpdateValue(value: string | null): void {
     srcPatternRef.value = value ?? ''
   }
 
-  function handleTgtFilterUpdateValue (value: string | null): void {
+  function handleTgtFilterUpdateValue(value: string | null): void {
     tgtPatternRef.value = value ?? ''
   }
 

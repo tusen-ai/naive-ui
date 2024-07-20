@@ -1,10 +1,10 @@
 import { pxfy, repeat } from 'seemly'
 import {
+  Fragment,
+  type PropType,
   computed,
   defineComponent,
   h,
-  type PropType,
-  Fragment,
   mergeProps
 } from 'vue'
 import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
@@ -42,7 +42,7 @@ export default defineComponent({
   name: 'Skeleton',
   inheritAttrs: false,
   props: skeletonProps,
-  setup (props) {
+  setup(props) {
     useHoudini()
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
@@ -63,13 +63,13 @@ export default defineComponent({
         const selfThemeVars = theme.self
         const { color, colorEnd, borderRadius } = selfThemeVars
         let sizeHeight: string | undefined
-        const { circle, sharp, round, width, height, size, text, animated } =
-          props
+        const { circle, sharp, round, width, height, size, text, animated }
+          = props
         if (size !== undefined) {
           sizeHeight = selfThemeVars[createKey('height', size)]
         }
-        const mergedWidth = circle ? width ?? height ?? sizeHeight : width
-        const mergedHeight = (circle ? width ?? height : height) ?? sizeHeight
+        const mergedWidth = circle ? (width ?? height ?? sizeHeight) : width
+        const mergedHeight = (circle ? (width ?? height) : height) ?? sizeHeight
         return {
           display: text ? 'inline-block' : '',
           verticalAlign: text ? '-0.125em' : '',
@@ -94,7 +94,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { repeat: repeatProp, style, mergedClsPrefix, $attrs } = this
     // BUG:
     // Chrome devtools can't read the element
@@ -110,7 +110,7 @@ export default defineComponent({
       )
     )
     if (repeatProp > 1) {
-      return <>{repeat(repeatProp, null).map((_) => [child, '\n'])}</>
+      return <>{repeat(repeatProp, null).map(_ => [child, '\n'])}</>
     }
     return child
   }

@@ -4,17 +4,11 @@
 可以在代码块左侧显示行号。
 </markdown>
 
-<template>
-  <div style="overflow: auto">
-    <n-code :code="code" language="cpp" show-line-numbers />
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       code: `#include <bits/stdc++.h>
 using namespace std;
@@ -34,3 +28,9 @@ int main() {
   }
 })
 </script>
+
+<template>
+  <div style="overflow: auto">
+    <n-code :code="code" language="cpp" show-line-numbers />
+  </div>
+</template>

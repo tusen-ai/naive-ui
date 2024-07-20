@@ -2,6 +2,24 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { unstableRowRtl, unstableStatisticRtl } from 'naive-ui'
+import { MdSave } from '@vicons/ionicons4'
+
+export default defineComponent({
+  components: {
+    MdSave
+  },
+  setup() {
+    return {
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableStatisticRtl, unstableRowRtl]
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
@@ -11,7 +29,7 @@
           <n-statistic label="Statistic" :value="99">
             <template #prefix>
               <n-icon>
-                <md-save />
+                <MdSave />
               </n-icon>
             </template>
             <template #suffix>
@@ -28,21 +46,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableStatisticRtl, unstableRowRtl } from 'naive-ui'
-import { MdSave } from '@vicons/ionicons4'
-
-export default defineComponent({
-  components: {
-    MdSave
-  },
-  setup () {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableStatisticRtl, unstableRowRtl]
-    }
-  }
-})
-</script>

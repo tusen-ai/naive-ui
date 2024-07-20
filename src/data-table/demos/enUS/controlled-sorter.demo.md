@@ -32,7 +32,7 @@ const ageColumn = {
   title: 'Age',
   key: 'age',
   sortOrder: false,
-  sorter (rowA, rowB) {
+  sorter(rowA, rowB) {
     return rowA.age - rowB.age
   }
 }
@@ -54,8 +54,8 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
-      return row.address.indexOf(value) >= 0
+    filter(value, row) {
+      return row.address.includes(value)
     }
   }
 ]
@@ -88,7 +88,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const nameColumnReactive = reactive(nameColumn)
     const ageColumnReactive = reactive(ageColumn)
     const columnsRef = ref(columns)
@@ -99,22 +99,24 @@ export default defineComponent({
       nameColumn: nameColumnReactive,
       ageColumn: ageColumnReactive,
       pagination: { pageSize: 5 },
-      sortName (order) {
+      sortName(order) {
         nameColumnReactive.sortOrder = order
       },
-      clearSorter () {
+      clearSorter() {
         nameColumnReactive.sortOrder = false
         ageColumnReactive.sortOrder = false
       },
-      handleSorterChange (sorter) {
+      handleSorterChange(sorter) {
         columnsRef.value.forEach((column) => {
           /** column.sortOrder !== undefined means it is uncontrolled */
-          if (column.sortOrder === undefined) return
+          if (column.sortOrder === undefined)
+            return
           if (!sorter) {
             column.sortOrder = false
             return
           }
-          if (column.key === sorter.columnKey) column.sortOrder = sorter.order
+          if (column.key === sorter.columnKey)
+            column.sortOrder = sorter.order
           else column.sortOrder = false
         })
       }
