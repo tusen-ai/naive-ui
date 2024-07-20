@@ -2,6 +2,38 @@
 # Use slot in step
 </markdown>
 
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+import type { StepsProps } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const currentRef = ref(1)
+    const currentStatusRef = ref<StepsProps['status']>('process')
+
+    const buttonTypeRef = computed(() => {
+      switch (currentStatusRef.value) {
+        case 'error':
+          return 'error'
+        case 'finish':
+          return 'success'
+        default:
+          return 'default'
+      }
+    })
+
+    return {
+      current: currentRef,
+      currentStatus: currentStatusRef,
+      handleButtonClick() {
+        currentRef.value = (currentRef.value % 4) + 1
+      },
+      buttonType: buttonTypeRef
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-steps :current="current" :status="currentStatus">
@@ -74,35 +106,3 @@
     </n-radio-group>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-import { StepsProps } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const currentRef = ref(1)
-    const currentStatusRef = ref<StepsProps['status']>('process')
-
-    const buttonTypeRef = computed(() => {
-      switch (currentStatusRef.value) {
-        case 'error':
-          return 'error'
-        case 'finish':
-          return 'success'
-        default:
-          return 'default'
-      }
-    })
-
-    return {
-      current: currentRef,
-      currentStatus: currentStatusRef,
-      handleButtonClick () {
-        currentRef.value = (currentRef.value % 4) + 1
-      },
-      buttonType: buttonTypeRef
-    }
-  }
-})
-</script>

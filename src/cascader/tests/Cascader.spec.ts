@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { NCascader } from '../index'
 import type { CascaderOption } from '../src/interface'
-import { nextTick } from 'vue'
 
-function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
+function getOptions(depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
   const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
@@ -13,15 +12,17 @@ function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
         value: `v-${i}`,
         label: `l-${i}`,
         disabled: i % 5 === 0,
-        children: getOptions(depth, iterator + 1, '' + String(i))
+        children: getOptions(depth, iterator + 1, `${String(i)}`)
       })
-    } else if (iterator === depth) {
+    }
+    else if (iterator === depth) {
       options.push({
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
         disabled: i % 5 === 0
       })
-    } else {
+    }
+    else {
       options.push({
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
@@ -153,9 +154,9 @@ describe('n-cascader', () => {
             whateverChildren: [
               {
                 whateverLabel:
-                  "Everybody's Got Something to Hide Except Me and My Monkey",
+                  'Everybody\'s Got Something to Hide Except Me and My Monkey',
                 whateverValue:
-                  "Everybody's Got Something to Hide Except Me and My Monkey"
+                  'Everybody\'s Got Something to Hide Except Me and My Monkey'
               }
             ]
           }
@@ -164,11 +165,11 @@ describe('n-cascader', () => {
         'value-field': 'whateverValue',
         'children-field': 'whateverChildren',
         'default-value':
-          "Everybody's Got Something to Hide Except Me and My Monkey"
+          'Everybody\'s Got Something to Hide Except Me and My Monkey'
       }
     })
     expect(wrapper.find('.n-base-selection-label').text()).toBe(
-      "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
+      'Rubber Soul / Everybody\'s Got Something to Hide Except Me and My Monkey'
     )
     wrapper.unmount()
   })

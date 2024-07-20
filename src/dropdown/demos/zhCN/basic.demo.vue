@@ -4,18 +4,12 @@
 下拉菜单的基础用法。
 </markdown>
 
-<template>
-  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <n-button>找个地方休息</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options: [
@@ -26,7 +20,7 @@ export default defineComponent({
         },
         {
           label: '布朗酒店，伦敦',
-          key: "brown's hotel, london"
+          key: 'brown\'s hotel, london'
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
@@ -37,10 +31,16 @@ export default defineComponent({
           key: 'the beverly hills hotel, los angeles'
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <n-button>找个地方休息</n-button>
+  </n-dropdown>
+</template>

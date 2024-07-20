@@ -4,21 +4,11 @@
 后端会传来各种各样的数据。
 </markdown>
 
-<template>
-  <n-tree-select
-    :options="options"
-    default-value="Drive My Car"
-    label-field="whateverLabel"
-    key-field="whateverKey"
-    children-field="whateverChildren"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -27,9 +17,9 @@ export default defineComponent({
           whateverChildren: [
             {
               whateverLabel:
-                "Everybody's Got Something to Hide Except Me and My Monkey",
+                'Everybody\'s Got Something to Hide Except Me and My Monkey',
               whateverKey:
-                "Everybody's Got Something to Hide Except Me and My Monkey"
+                'Everybody\'s Got Something to Hide Except Me and My Monkey'
             },
             {
               whateverLabel: 'Drive My Car',
@@ -41,8 +31,8 @@ export default defineComponent({
               whateverKey: 'Norwegian Wood'
             },
             {
-              whateverLabel: "You Won't See",
-              whateverKey: "You Won't See",
+              whateverLabel: 'You Won\'t See',
+              whateverKey: 'You Won\'t See',
               disabled: true
             },
             {
@@ -71,8 +61,8 @@ export default defineComponent({
               whateverKey: 'Girl'
             },
             {
-              whateverLabel: "I'm looking through you",
-              whateverKey: "I'm looking through you"
+              whateverLabel: 'I\'m looking through you',
+              whateverKey: 'I\'m looking through you'
             },
             {
               whateverLabel: 'In My Life',
@@ -117,8 +107,8 @@ export default defineComponent({
               whateverKey: 'Maggie Mae'
             },
             {
-              whateverLabel: "I've Got A Feeling",
-              whateverKey: "I've Got A Feeling"
+              whateverLabel: 'I\'ve Got A Feeling',
+              whateverKey: 'I\'ve Got A Feeling'
             },
             {
               whateverLabel: 'One After 909',
@@ -143,3 +133,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree-select
+    :options="options"
+    default-value="Drive My Car"
+    label-field="whateverLabel"
+    key-field="whateverKey"
+    children-field="whateverChildren"
+  />
+</template>

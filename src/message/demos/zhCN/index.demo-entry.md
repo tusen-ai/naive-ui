@@ -23,10 +23,10 @@ import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
-      warning () {
+      warning() {
         message.warning('...')
       }
     }
@@ -170,7 +170,7 @@ type MessageRenderMessage = (props: {
 
 ```js
 // xxx.js
-export const handler = () => {
+export function handler() {
   // 需要确保已经在 setup 中执行了 window.$message = message
   window.$message.success(
     'Cause you walked hand in hand With another man in my place'

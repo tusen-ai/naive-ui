@@ -2,6 +2,19 @@
 # 基础用法
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showRail: ref(true),
+      showBackground: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space style="margin-bottom: 12px">
     <n-switch v-model:value="showRail" /> 展示轨道
@@ -17,16 +30,3 @@
     <n-anchor-link title="API" href="#API" />
   </n-anchor>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showRail: ref(true),
-      showBackground: ref(true)
-    }
-  }
-})
-</script>

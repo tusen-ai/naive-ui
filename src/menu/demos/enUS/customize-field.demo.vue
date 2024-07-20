@@ -4,34 +4,9 @@
 Various data would come from backend, you can customize `key`, `label` and `children`'s field name.
 </markdown>
 
-<template>
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        key-field="whateverKey"
-        label-field="whateverLabel"
-        children-field="whateverChildren"
-      />
-    </n-layout-sider>
-    <n-layout />
-  </n-layout>
-</template>
-
 <script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
@@ -40,7 +15,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -120,7 +95,7 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       collapsed: ref(true),
       menuOptions
@@ -128,3 +103,29 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-layout has-sider>
+    <n-layout-sider
+      bordered
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="240"
+      :collapsed="collapsed"
+      show-trigger
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+        key-field="whateverKey"
+        label-field="whateverLabel"
+        children-field="whateverChildren"
+      />
+    </n-layout-sider>
+    <n-layout />
+  </n-layout>
+</template>

@@ -2,6 +2,23 @@
 # 事件
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      showPopover: ref(false),
+      handleUpdateShow(show: boolean) {
+        message.success(show ? 'show' : 'hide')
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-popover
@@ -39,19 +56,3 @@
     </n-popover>
   </n-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      showPopover: ref(false),
-      handleUpdateShow (show: boolean) {
-        message.success(show ? 'show' : 'hide')
-      }
-    }
-  }
-})
-</script>

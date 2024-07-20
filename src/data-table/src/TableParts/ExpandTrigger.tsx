@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import { ChevronRightIcon } from '../../../_internal/icons'
 import {
   NBaseIcon,
@@ -24,7 +24,7 @@ export default defineComponent({
       type: Function as PropType<RenderExpandIcon>
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div

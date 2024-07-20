@@ -1,11 +1,11 @@
 import {
-  defineComponent,
-  h,
-  renderSlot,
-  watchEffect,
   type PropType,
   type VNode,
-  onMounted
+  defineComponent,
+  h,
+  onMounted,
+  renderSlot,
+  watchEffect
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
@@ -22,6 +22,7 @@ import {
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'MonthRangePanel',
@@ -32,15 +33,15 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('now')) {
           warnOnce(
             'date-picker',
-            'The `now` action is not supported for n-date-picker of ' +
-              `${props.type}` +
-              'type'
+            'The `now` action is not supported for n-date-picker of '
+            + `${props.type}`
+            + 'type'
           )
         }
       })
@@ -62,12 +63,12 @@ export default defineComponent({
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            item.isCurrent &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
-            item.selected &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
-            disabled &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
+            item.isCurrent
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            disabled
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={
             disabled
@@ -102,7 +103,7 @@ export default defineComponent({
     })
     return { ...useCalendarRef, renderItem }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
@@ -112,6 +113,17 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isRangeInvalid || this.isSelecting,
+      onClick: this.handleConfirmClick
+    }
     return (
       <div
         ref="selfRef"
@@ -274,47 +286,47 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
-                    typeof shortcut === 'function' ? (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                      ) : null
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut)
+                  || typeof shortcut === 'function' ? (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.handleRangeShortcutMouseenter(shortcut)
+                        }}
+                        onClick={() => {
+                          this.handleRangeShortcutClick(shortcut)
+                        }}
+                        onMouseleave={() => {
+                          this.handleShortcutMouseleave()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    ) : null
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.datePickerSlots.clear ? (
+                this.datePickerSlots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NxButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {this.datePickerSlots.confirm ? (
+                this.datePickerSlots.confirm(confirmButtonProps)
+              ) : this.actions?.includes('confirm') ? (
                 <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NxButton>

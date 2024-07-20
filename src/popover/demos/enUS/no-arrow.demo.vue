@@ -1,6 +1,5 @@
 <markdown>
 # No arrow
-
 </markdown>
 
 <template>

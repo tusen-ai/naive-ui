@@ -4,6 +4,22 @@
 圆的 Tag 长得像个胶囊。
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleClose() {
+        message.info('tag close')
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-tag type="success" size="small" round closable @close="handleClose">
@@ -17,19 +33,3 @@
     </n-tag>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleClose () {
-        message.info('tag close')
-      }
-    }
-  }
-})
-</script>

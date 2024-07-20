@@ -4,6 +4,25 @@
 模态框有一些预设，让你在设定之后可以使用对应的 slots 还有 props。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      bodyStyle: {
+        width: '600px'
+      },
+      segmented: {
+        content: 'soft',
+        footer: 'soft'
+      } as const,
+      showModal: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     来吧
@@ -27,22 +46,3 @@
     </template>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      bodyStyle: {
-        width: '600px'
-      },
-      segmented: {
-        content: 'soft',
-        footer: 'soft'
-      } as const,
-      showModal: ref(false)
-    }
-  }
-})
-</script>

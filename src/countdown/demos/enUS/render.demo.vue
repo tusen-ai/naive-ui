@@ -4,25 +4,12 @@
 Do whatever you want.
 </markdown>
 
-<template>
-  <n-space item-style="display: flex; align-items: center;">
-    <n-statistic label="I'm free to be whatever I" tabular-nums>
-      <n-countdown
-        :render="renderCountdown"
-        :duration="996 * 1000"
-        :active="active"
-      />
-    </n-statistic>
-    <n-switch v-model:value="active" />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { CountdownProps } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import type { CountdownProps } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderCountdown: CountdownProps['render'] = ({
       hours,
       minutes,
@@ -61,3 +48,16 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space item-style="display: flex; align-items: center;">
+    <n-statistic label="I'm free to be whatever I" tabular-nums>
+      <n-countdown
+        :render="renderCountdown"
+        :duration="996 * 1000"
+        :active="active"
+      />
+    </n-statistic>
+    <n-switch v-model:value="active" />
+  </n-space>
+</template>

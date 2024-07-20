@@ -1,42 +1,43 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  provide,
-  toRef,
-  ref,
-  type PropType,
   type CSSProperties,
   Fragment,
+  type InputHTMLAttributes,
+  type PropType,
   Teleport,
+  computed,
+  defineComponent,
+  h,
   nextTick,
-  type InputHTMLAttributes
+  provide,
+  ref,
+  toRef
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useFormItem, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { warn, call, throwError } from '../../_utils'
+import { call, throwError, warn } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
-import { uploadLight, type UploadTheme } from '../styles'
+import { type UploadTheme, uploadLight } from '../styles'
 import { uploadDraggerKey } from './UploadDragger'
 import type {
-  XhrHandlers,
-  DoChange,
-  UploadInternalInst,
-  FuncOrRecordOrUndef,
-  OnUpdateFileList,
-  OnBeforeUpload,
-  ListType,
-  OnPreview,
   CreateThumbnailUrl,
   CustomRequest,
-  OnError,
+  DoChange,
   FileAndEntry,
+  FuncOrRecordOrUndef,
+  ListType,
+  OnBeforeUpload,
+  OnError,
+  OnPreview,
+  OnUpdateFileList,
+  RenderIcon,
   ShouldUseThumbnailUrl,
   RenderIcon,
-  OnRetry
+  OnRetry,
+  UploadInternalInst,
+  XhrHandlers
 } from './interface'
 import { uploadInjectionKey } from './interface'
 import {
@@ -62,14 +63,14 @@ import style from './styles/index.cssr'
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
-function createXhrHandlers (
+function createXhrHandlers(
   inst: UploadInternalInst,
   file: UploadSettledFileInfo,
   xhr: XMLHttpRequest
 ): XhrHandlers {
   const { doChange, xhrMap } = inst
   let percentage = 0
-  function handleXHRError (e: ProgressEvent<EventTarget>): void {
+  function handleXHRError(e: ProgressEvent<EventTarget>): void {
     let fileAfterChange: UploadSettledFileInfo = Object.assign({}, file, {
       status: 'error',
       percentage
@@ -80,13 +81,14 @@ function createXhrHandlers (
     )
     doChange(fileAfterChange, e)
   }
-  function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
+  function handleXHRLoad(e: ProgressEvent<EventTarget>): void {
     if (inst.isErrorState) {
       if (inst.isErrorState(xhr)) {
         handleXHRError(e)
         return
       }
-    } else {
+    }
+    else {
       if (xhr.status < 200 || xhr.status >= 300) {
         handleXHRError(e)
         return
@@ -94,9 +96,9 @@ function createXhrHandlers (
     }
 
     let fileAfterChange: UploadSettledFileInfo = Object.assign<
-    Record<string, unknown>,
-    UploadSettledFileInfo,
-    Partial<UploadFileInfo>
+      Record<string, unknown>,
+      UploadSettledFileInfo,
+      Partial<UploadFileInfo>
     >({}, file, {
       status: 'finished',
       percentage
@@ -110,7 +112,7 @@ function createXhrHandlers (
   return {
     handleXHRLoad,
     handleXHRError,
-    handleXHRAbort (e) {
+    handleXHRAbort(e) {
       const fileAfterChange: UploadSettledFileInfo = Object.assign({}, file, {
         status: 'removed',
         file: null,
@@ -120,7 +122,7 @@ function createXhrHandlers (
       xhrMap.delete(file.id)
       doChange(fileAfterChange, e)
     },
-    handleXHRProgress (e) {
+    handleXHRProgress(e) {
       const fileAfterChange: UploadSettledFileInfo = Object.assign({}, file, {
         status: 'uploading'
       })
@@ -135,7 +137,7 @@ function createXhrHandlers (
   }
 }
 
-function customSubmitImpl (options: {
+function customSubmitImpl(options: {
   inst: Omit<UploadInternalInst, 'isErrorState'>
   data?: FuncOrRecordOrUndef<string | Blob>
   headers?: FuncOrRecordOrUndef
@@ -144,8 +146,8 @@ function customSubmitImpl (options: {
   file: UploadSettledFileInfo
   customRequest: CustomRequest
 }): void {
-  const { inst, file, data, headers, withCredentials, action, customRequest } =
-    options
+  const { inst, file, data, headers, withCredentials, action, customRequest }
+    = options
   const { doChange } = options.inst
   let percentage = 0
   customRequest({
@@ -154,11 +156,11 @@ function customSubmitImpl (options: {
     headers,
     withCredentials,
     action,
-    onProgress (event) {
+    onProgress(event) {
       const fileAfterChange: UploadSettledFileInfo = Object.assign<
-      Record<string, unknown>,
-      UploadSettledFileInfo,
-      Partial<UploadFileInfo>
+        Record<string, unknown>,
+        UploadSettledFileInfo,
+        Partial<UploadFileInfo>
       >({}, file, {
         status: 'uploading'
       })
@@ -167,11 +169,11 @@ function customSubmitImpl (options: {
       percentage = progress
       doChange(fileAfterChange)
     },
-    onFinish () {
+    onFinish() {
       let fileAfterChange: UploadSettledFileInfo = Object.assign<
-      Record<string, unknown>,
-      UploadSettledFileInfo,
-      Partial<UploadFileInfo>
+        Record<string, unknown>,
+        UploadSettledFileInfo,
+        Partial<UploadFileInfo>
       >({}, file, {
         status: 'finished',
         percentage
@@ -181,11 +183,11 @@ function customSubmitImpl (options: {
       )
       doChange(fileAfterChange)
     },
-    onError () {
+    onError() {
       let fileAfterChange: UploadSettledFileInfo = Object.assign<
-      Record<string, unknown>,
-      UploadSettledFileInfo,
-      Partial<UploadFileInfo>
+        Record<string, unknown>,
+        UploadSettledFileInfo,
+        Partial<UploadFileInfo>
       >({}, file, {
         status: 'error',
         percentage
@@ -198,7 +200,7 @@ function customSubmitImpl (options: {
   })
 }
 
-function registerHandler (
+function registerHandler(
   inst: UploadInternalInst,
   file: UploadSettledFileInfo,
   request: XMLHttpRequest
@@ -212,42 +214,45 @@ function registerHandler (
   }
 }
 
-function unwrapFunctionValue<T> (
+function unwrapFunctionValue<T>(
   data: FuncOrRecordOrUndef<T>,
   file: UploadSettledFileInfo
 ): Record<string, T> {
   if (typeof data === 'function') {
     return data({ file })
   }
-  if (data) return data
+  if (data)
+    return data
   return {}
 }
 
-function setHeaders (
+function setHeaders(
   request: XMLHttpRequest,
   headers: FuncOrRecordOrUndef,
   file: UploadSettledFileInfo
 ): void {
   const headersObject = unwrapFunctionValue(headers, file)
-  if (!headersObject) return
+  if (!headersObject)
+    return
   Object.keys(headersObject).forEach((key) => {
     request.setRequestHeader(key, headersObject[key])
   })
 }
 
-function appendData (
+function appendData(
   formData: FormData,
   data: FuncOrRecordOrUndef<string | Blob>,
   file: UploadSettledFileInfo
 ): void {
   const dataObject = unwrapFunctionValue(data, file)
-  if (!dataObject) return
+  if (!dataObject)
+    return
   Object.keys(dataObject).forEach((key) => {
     formData.append(key, dataObject[key])
   })
 }
 
-function submitImpl (
+function submitImpl(
   inst: UploadInternalInst,
   fieldName: string,
   file: UploadSettledFileInfo,
@@ -334,7 +339,7 @@ export const uploadProps = {
   },
   fileList: Array as PropType<UploadFileInfo[]>,
   'onUpdate:fileList': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFileList>
+    MaybeArray<OnUpdateFileList>
   >,
   onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
   fileListClass: String,
@@ -368,7 +373,8 @@ export const uploadProps = {
   shouldUseThumbnailUrl: {
     type: Function as PropType<ShouldUseThumbnailUrl>,
     default: (file: UploadSettledFileInfo) => {
-      if (!environmentSupportFile) return false
+      if (!environmentSupportFile)
+        return false
       return isImageFile(file)
     }
   },
@@ -391,7 +397,7 @@ export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
 export default defineComponent({
   name: 'Upload',
   props: uploadProps,
-  setup (props) {
+  setup(props) {
     if (props.abstract && props.listType === 'image-card') {
       throwError(
         'upload',
@@ -408,13 +414,6 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const maxReachedRef = computed(() => {
-      const { max } = props
-      if (max !== undefined) {
-        return mergedFileListRef.value.length >= max
-      }
-      return false
-    })
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)
@@ -430,14 +429,21 @@ export default defineComponent({
     const mergedFileListRef = computed(() =>
       _mergedFileListRef.value.map(createSettledFileInfo)
     )
-    function openOpenFileDialog (): void {
+    const maxReachedRef = computed(() => {
+      const { max } = props
+      if (max !== undefined) {
+        return mergedFileListRef.value.length >= max
+      }
+      return false
+    })
+    function openOpenFileDialog(): void {
       inputElRef.value?.click()
     }
-    function handleFileInputChange (e: Event): void {
+    function handleFileInputChange(e: Event): void {
       const target = e.target as HTMLInputElement
       handleFileAddition(
         target.files
-          ? Array.from(target.files).map((file) => ({
+          ? Array.from(target.files).map(file => ({
             file,
             entry: null,
             source: 'input'
@@ -448,18 +454,58 @@ export default defineComponent({
       // May have bug! set to null?
       target.value = ''
     }
-    function doUpdateFileList (files: UploadSettledFileInfo[]): void {
+    function doUpdateFileList(files: UploadSettledFileInfo[]): void {
       const { 'onUpdate:fileList': _onUpdateFileList, onUpdateFileList } = props
-      if (_onUpdateFileList) call(_onUpdateFileList, files)
-      if (onUpdateFileList) call(onUpdateFileList, files)
+      if (_onUpdateFileList)
+        call(_onUpdateFileList, files)
+      if (onUpdateFileList)
+        call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
     }
     const mergedMultipleRef = computed(() => props.multiple || props.directory)
-    function handleFileAddition (
+    const doChange: DoChange = (
+      fileAfterChange,
+      event,
+      options = {
+        append: false,
+        remove: false
+      }
+    ) => {
+      const { append, remove } = options
+      const fileListAfterChange = Array.from(mergedFileListRef.value)
+      const fileIndex = fileListAfterChange.findIndex(
+        file => file.id === fileAfterChange.id
+      )
+      if (append || remove || ~fileIndex) {
+        if (append) {
+          fileListAfterChange.push(fileAfterChange)
+        }
+        else if (remove) {
+          fileListAfterChange.splice(fileIndex, 1)
+        }
+        else {
+          fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
+        }
+        const { onChange } = props
+        if (onChange) {
+          onChange({
+            file: fileAfterChange,
+            fileList: fileListAfterChange,
+            event
+          })
+        }
+        doUpdateFileList(fileListAfterChange)
+      }
+      else if (__DEV__) {
+        warn('upload', 'File has no corresponding id in current file list.')
+      }
+    }
+    function handleFileAddition(
       fileAndEntries: FileAndEntry[] | null,
       e?: Event
     ): void {
-      if (!fileAndEntries || fileAndEntries.length === 0) return
+      if (!fileAndEntries || fileAndEntries.length === 0)
+        return
       const { onBeforeUpload } = props
       fileAndEntries = mergedMultipleRef.value
         ? fileAndEntries
@@ -468,7 +514,8 @@ export default defineComponent({
       fileAndEntries = fileAndEntries.filter(({ file, source }) => {
         if (source === 'dnd' && accept?.trim()) {
           return matchType(file.name, file.type, accept)
-        } else {
+        }
+        else {
           return true
         }
       })
@@ -497,8 +544,8 @@ export default defineComponent({
               entry?.fullPath ?? `/${file.webkitRelativePath || file.name}`
           }
           if (
-            !onBeforeUpload ||
-            (await onBeforeUpload({
+            !onBeforeUpload
+            || (await onBeforeUpload({
               file: fileInfo,
               fileList: mergedFileListRef.value
             })) !== false
@@ -512,12 +559,12 @@ export default defineComponent({
           let nextTickChain = Promise.resolve()
 
           fileInfos.forEach((fileInfo) => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             nextTickChain = nextTickChain.then(nextTick as any).then(() => {
-              fileInfo &&
+              if (fileInfo) {
                 doChange(fileInfo, e, {
                   append: true
                 })
+              }
             })
           })
           await nextTickChain
@@ -528,7 +575,7 @@ export default defineComponent({
           }
         })
     }
-    function submit (fileId?: string): void {
+    function submit(fileId?: string): void {
       const {
         method,
         action,
@@ -537,9 +584,9 @@ export default defineComponent({
         data,
         name: fieldName
       } = props
-      const filesToUpload =
-        fileId !== undefined
-          ? mergedFileListRef.value.filter((file) => file.id === fileId)
+      const filesToUpload
+        = fileId !== undefined
+          ? mergedFileListRef.value.filter(file => file.id === fileId)
           : mergedFileListRef.value
       const shouldReupload = fileId !== undefined
       filesToUpload.forEach((file) => {
@@ -560,7 +607,8 @@ export default defineComponent({
               data,
               customRequest: props.customRequest
             })
-          } else {
+          }
+          else {
             submitImpl(
               {
                 doChange,
@@ -584,51 +632,19 @@ export default defineComponent({
         }
       })
     }
-    const doChange: DoChange = (
-      fileAfterChange,
-      event,
-      options = {
-        append: false,
-        remove: false
-      }
-    ) => {
-      const { append, remove } = options
-      const fileListAfterChange = Array.from(mergedFileListRef.value)
-      const fileIndex = fileListAfterChange.findIndex(
-        (file) => file.id === fileAfterChange.id
-      )
-      if (append || remove || ~fileIndex) {
-        if (append) {
-          fileListAfterChange.push(fileAfterChange)
-        } else if (remove) {
-          fileListAfterChange.splice(fileIndex, 1)
-        } else {
-          fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
-        }
-        const { onChange } = props
-        if (onChange) {
-          onChange({
-            file: fileAfterChange,
-            fileList: fileListAfterChange,
-            event
-          })
-        }
-        doUpdateFileList(fileListAfterChange)
-      } else if (__DEV__) {
-        warn('upload', 'File has no corresponding id in current file list.')
-      }
-    }
-    function getFileThumbnailUrlResolver (
+    function getFileThumbnailUrlResolver(
       file: UploadSettledFileInfo
     ): Promise<string> | string {
-      if (file.thumbnailUrl) return file.thumbnailUrl
+      if (file.thumbnailUrl)
+        return file.thumbnailUrl
       const { createThumbnailUrl } = props
       if (createThumbnailUrl) {
         return createThumbnailUrl(file.file, file) ?? (file.url || '')
       }
       if (file.url) {
         return file.url
-      } else if (file.file) {
+      }
+      else if (file.file) {
         return createImageDataUrl(file.file)
       }
       return ''
@@ -740,9 +756,9 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
-    const { draggerInsideRef, mergedClsPrefix, $slots, directory, onRender } =
-      this
+  render() {
+    const { draggerInsideRef, mergedClsPrefix, $slots, directory, onRender }
+      = this
     if ($slots.default && !this.abstract) {
       const firstChild = $slots.default()[0]
       if ((firstChild as any)?.type?.[uploadDraggerKey]) {

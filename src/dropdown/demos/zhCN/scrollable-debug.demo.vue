@@ -2,21 +2,9 @@
 # Scrollable debug
 </markdown>
 
-<template>
-  <n-dropdown
-    :options="options"
-    placement="bottom-start"
-    trigger="click"
-    scrollable
-    :menu-props="menuProps"
-  >
-    <n-button>Scrollable</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { DropdownMenuProps } from 'naive-ui'
+import type { DropdownMenuProps } from 'naive-ui'
 
 const options = [
   {
@@ -110,7 +98,7 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const menuProps: DropdownMenuProps = (option, options) => {
       console.log(option, options)
       return { style: 'max-height: 200px;' }
@@ -122,3 +110,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    scrollable
+    :menu-props="menuProps"
+  >
+    <n-button>Scrollable</n-button>
+  </n-dropdown>
+</template>

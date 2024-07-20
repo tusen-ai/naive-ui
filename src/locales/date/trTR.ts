@@ -1,9 +1,9 @@
-import trTR from 'date-fns/esm/locale/tr'
-import { type NDateLocale } from './enUS'
+import { tr } from 'date-fns/locale'
+import type { NDateLocale } from './enUS'
 
 const dateTrTR: NDateLocale = {
-  name: 'zh-CN',
-  locale: trTR
+  name: 'tr-TR',
+  locale: tr
 }
 
 export default dateTrTR

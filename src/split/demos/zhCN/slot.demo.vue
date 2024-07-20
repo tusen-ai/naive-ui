@@ -2,6 +2,17 @@
 # 插槽
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { SwapHorizontal as SwapHorizontalIcon } from '@vicons/ionicons5'
+
+export default defineComponent({
+  components: {
+    SwapHorizontalIcon
+  }
+})
+</script>
+
 <template>
   <n-split
     direction="horizontal"
@@ -25,24 +36,13 @@
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: '8px'
+          borderRadius: '8px',
         }"
       >
         <n-icon color="white" :size="16">
-          <swap-horizontal-icon />
+          <SwapHorizontalIcon />
         </n-icon>
       </div>
     </template>
   </n-split>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { SwapHorizontal as SwapHorizontalIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    SwapHorizontalIcon
-  }
-})
-</script>

@@ -1,4 +1,4 @@
-import { h, computed, defineComponent, inject, type PropType } from 'vue'
+import { type PropType, computed, defineComponent, h, inject } from 'vue'
 import {
   type ExtractPublicPropTypes,
   formatLength,
@@ -34,9 +34,10 @@ export type ColProps = ExtractPublicPropTypes<typeof colProps>
 export default defineComponent({
   name: 'Col',
   props: colProps,
-  setup (props) {
+  setup(props) {
     const NRow = inject(rowInjectionKey, null)
-    if (!NRow) throwError('col', '`n-col` must be placed inside `n-row`.')
+    if (!NRow)
+      throwError('col', '`n-col` must be placed inside `n-row`.')
     return {
       mergedClsPrefix: NRow.mergedClsPrefixRef,
       gutter: NRow.gutterRef,
@@ -49,7 +50,7 @@ export default defineComponent({
       mergedPush: computed(() => Number(props.push) - Number(props.pull))
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       span,

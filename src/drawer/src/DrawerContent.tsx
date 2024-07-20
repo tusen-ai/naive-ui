@@ -1,9 +1,9 @@
 import {
   type CSSProperties,
+  type PropType,
   defineComponent,
   h,
-  inject,
-  type PropType
+  inject
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import type { ScrollbarProps } from '../../_internal'
@@ -33,7 +33,7 @@ export type DrawerContentProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'DrawerContent',
   props: drawerContentProps,
-  setup () {
+  setup() {
     const NDrawer = inject(drawerInjectionKey, null)
     if (!NDrawer) {
       throwError(
@@ -42,7 +42,7 @@ export default defineComponent({
       )
     }
     const { doUpdateShow } = NDrawer
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       doUpdateShow(false)
     }
     return {
@@ -51,7 +51,7 @@ export default defineComponent({
       mergedClsPrefix: NDrawer.mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const {
       title,
       mergedClsPrefix,
@@ -74,8 +74,8 @@ export default defineComponent({
         role="none"
         class={[
           `${mergedClsPrefix}-drawer-content`,
-          nativeScrollbar &&
-            `${mergedClsPrefix}-drawer-content--native-scrollbar`
+          nativeScrollbar
+          && `${mergedClsPrefix}-drawer-content--native-scrollbar`
         ]}
       >
         {$slots.header || title || closable ? (

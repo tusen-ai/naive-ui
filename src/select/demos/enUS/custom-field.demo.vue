@@ -4,32 +4,12 @@
 Various data would come from backend.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-select
-      label-field="whateverLabel"
-      value-field="whateverValue"
-      children-field="whateverChildren"
-      filterable
-      :options="options"
-    />
-    <n-select
-      label-field="whateverLabel"
-      value-field="whateverValue"
-      children-field="whateverChildren"
-      filterable
-      multiple
-      :options="options"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { SelectOption, SelectGroupOption } from 'naive-ui'
+import type { SelectGroupOption, SelectOption } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const options: Array<SelectOption | SelectGroupOption> = [
       {
         type: 'group',
@@ -38,7 +18,7 @@ export default defineComponent({
         whateverChildren: [
           {
             whateverLabel:
-              "Everybody's Got Something to Hide Except Me and My Monkey",
+              'Everybody\'s Got Something to Hide Except Me and My Monkey',
             whateverValue: 'song0',
             disabled: true
           },
@@ -51,7 +31,7 @@ export default defineComponent({
             whateverValue: 'song2'
           },
           {
-            whateverLabel: "You Won't See",
+            whateverLabel: 'You Won\'t See',
             whateverValue: 'song3',
             disabled: true
           },
@@ -81,7 +61,7 @@ export default defineComponent({
             whateverValue: 'song9'
           },
           {
-            whateverLabel: "I'm looking through you",
+            whateverLabel: 'I\'m looking through you',
             whateverValue: 'song10'
           },
           {
@@ -128,8 +108,8 @@ export default defineComponent({
             whateverValue: 'Maggie Mae'
           },
           {
-            whateverLabel: "I've Got A Feeling",
-            whateverValue: "I've Got A Feeling"
+            whateverLabel: 'I\'ve Got A Feeling',
+            whateverValue: 'I\'ve Got A Feeling'
           },
           {
             whateverLabel: 'One After 909',
@@ -157,3 +137,23 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-select
+      label-field="whateverLabel"
+      value-field="whateverValue"
+      children-field="whateverChildren"
+      filterable
+      :options="options"
+    />
+    <n-select
+      label-field="whateverLabel"
+      value-field="whateverValue"
+      children-field="whateverChildren"
+      filterable
+      multiple
+      :options="options"
+    />
+  </n-space>
+</template>

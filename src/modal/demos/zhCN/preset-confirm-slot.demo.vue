@@ -4,6 +4,18 @@
 插槽也会随着预设变动。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showModal: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     来吧
@@ -18,15 +30,3 @@
     </template>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

@@ -46,7 +46,7 @@ const columns = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return ~row.address.indexOf(value)
     }
   }
@@ -80,7 +80,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const tableRef = ref(null)
 
     return {
@@ -88,18 +88,18 @@ export default defineComponent({
       data,
       columns,
       pagination: { pageSize: 5 },
-      filterAddress () {
+      filterAddress() {
         tableRef.value.filter({
           address: ['London']
         })
       },
-      sortName () {
+      sortName() {
         tableRef.value.sort('name', 'ascend')
       },
-      clearFilters () {
+      clearFilters() {
         tableRef.value.filter(null)
       },
-      clearSorter () {
+      clearSorter() {
         tableRef.value.sort(null)
       }
     }

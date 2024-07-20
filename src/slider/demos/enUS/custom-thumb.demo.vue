@@ -4,6 +4,20 @@
 You can use `handle` slot to customize handle button.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
+
+export default defineComponent({
+  setup() {
+    return {
+      AnimalCat24Regular,
+      value: ref(50)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-slider v-model:value="value" :step="10">
@@ -16,17 +30,3 @@ You can use `handle` slot to customize handle button.
     <n-input-number v-model:value="value" size="small" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
-
-export default defineComponent({
-  setup () {
-    return {
-      AnimalCat24Regular,
-      value: ref(50)
-    }
-  }
-})
-</script>

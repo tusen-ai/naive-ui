@@ -1,7 +1,7 @@
-import { h, defineComponent, inject, computed, mergeProps, Fragment } from 'vue'
+import { Fragment, computed, defineComponent, h, inject, mergeProps } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
-import { render, omit } from '../../_utils'
+import { omit, render } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { type OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
@@ -20,7 +20,7 @@ export default defineComponent({
   inheritAttrs: false,
   name: 'Tab',
   props: tabProps,
-  setup (props) {
+  setup(props) {
     const {
       mergedClsPrefixRef,
       valueRef,
@@ -36,14 +36,15 @@ export default defineComponent({
       handleAdd,
       activateTab,
       handleClose
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
     return {
       trigger: triggerRef,
       mergedClosable: computed(() => {
-        if (props.internalAddable) return false
+        if (props.internalAddable)
+          return false
         const { closable } = props
-        if (closable === undefined) return closableRef.value
+        if (closable === undefined)
+          return closableRef.value
         return closable
       }),
       style: tabStyleRef,
@@ -53,13 +54,15 @@ export default defineComponent({
       clsPrefix: mergedClsPrefixRef,
       value: valueRef,
       type: typeRef,
-      handleClose (e: MouseEvent) {
+      handleClose(e: MouseEvent) {
         e.stopPropagation()
-        if (props.disabled) return
+        if (props.disabled)
+          return
         handleClose(props.name)
       },
-      activateTab () {
-        if (props.disabled) return
+      activateTab() {
+        if (props.disabled)
+          return
         if (props.internalAddable) {
           handleAdd()
           return
@@ -70,7 +73,8 @@ export default defineComponent({
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {
             activateTab(nameProp)
-          } else {
+          }
+          else {
             void Promise.resolve(
               (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
             ).then((allowLeave) => {
@@ -83,7 +87,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const {
       internalAddable,
       clsPrefix,
@@ -120,7 +124,6 @@ export default defineComponent({
               onMouseenter: trigger === 'hover' ? this.activateTab : undefined,
               style: internalAddable ? this.addStyle : this.style
             },
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             this.internalCreatedByPane
               ? ((this.tabProps || {}) as any)
               : this.$attrs

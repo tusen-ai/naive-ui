@@ -1,19 +1,24 @@
-import { h, defineComponent, type VNode, type PropType, onMounted } from 'vue'
+import { type PropType, type VNode, defineComponent, h, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import {
   type MonthItem,
-  type YearItem,
   type QuarterItem,
+  type YearItem,
   getMonthString,
   getQuarterString,
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useCalendar, useCalendarProps } from './use-calendar'
-import type { OnPanelUpdateValueImpl } from '../interface'
+import type {
+  ClearButtonProps,
+  ConfirmButtonProps,
+  NowButtonProps,
+  OnPanelUpdateValueImpl
+} from '../interface'
 
 /**
  * Month Panel
@@ -32,7 +37,7 @@ export default defineComponent({
     // panelHeader prop
     useAsQuickJump: Boolean
   },
-  setup (props) {
+  setup(props) {
     const useCalendarRef = useCalendar(props, props.type)
     const { dateLocaleRef } = useLocale('DatePicker')
     const getRenderContent = (
@@ -65,48 +70,51 @@ export default defineComponent({
       i: number,
       mergedClsPrefix: string
     ): VNode => {
-      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } =
-        useCalendarRef
+      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick }
+        = useCalendarRef
       return (
         <div
           data-n-date
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            item.isCurrent &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
-            item.selected &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
-            !useAsQuickJump &&
-              mergedIsDateDisabled(
-                item.ts,
-                item.type === 'year'
+            item.isCurrent
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            !useAsQuickJump
+            && mergedIsDateDisabled(
+              item.ts,
+              item.type === 'year'
+                ? {
+                    type: 'year',
+                    year: item.dateObject.year
+                  }
+                : item.type === 'month'
                   ? {
-                      type: 'year',
-                      year: item.dateObject.year
+                      type: 'month',
+                      year: item.dateObject.year,
+                      month: item.dateObject.month
                     }
-                  : item.type === 'month'
+                  : item.type === 'quarter'
                     ? {
                         type: 'month',
                         year: item.dateObject.year,
-                        month: item.dateObject.month
+                        month: item.dateObject.quarter
                       }
-                    : item.type === 'quarter'
-                      ? {
-                          type: 'month',
-                          year: item.dateObject.year,
-                          month: item.dateObject.quarter
-                        }
-                      : (null as never)
-              ) &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
+                    : (null as never)
+            )
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={() => {
-            useAsQuickJump
-              ? handleQuickMonthClick(item, (value) => {
+            if (useAsQuickJump) {
+              handleQuickMonthClick(item, (value) => {
                 ;(props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
               })
-              : handleDateClick(item)
+            }
+            else {
+              handleDateClick(item)
+            }
           }}
         >
           {getRenderContent(item)}
@@ -118,7 +126,7 @@ export default defineComponent({
     })
     return { ...useCalendarRef, renderItem }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
@@ -129,6 +137,21 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
+    const nowButtonProps: NowButtonProps = {
+      size: 'tiny',
+      onClick: this.handleNowClick
+    }
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isDateInvalid,
+      onClick: this.handleConfirmClick
+    }
     return (
       <div
         ref="selfRef"
@@ -213,56 +236,57 @@ export default defineComponent({
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ? null : (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleSingleShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleSingleShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                  )
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut) ? null : (
+                  <NxButton
+                    size="tiny"
+                    onMouseenter={() => {
+                      this.handleSingleShortcutMouseenter(shortcut)
+                    }}
+                    onClick={() => {
+                      this.handleSingleShortcutClick(shortcut)
+                    }}
+                    onMouseleave={() => {
+                      this.handleShortcutMouseleave()
+                    }}
+                  >
+                    {{ default: () => key }}
+                  </NxButton>
+                )
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {actions?.includes('clear') ? (
+              {this.datePickerSlots.clear ? (
+                this.datePickerSlots.clear(clearButtonProps)
+              ) : actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {actions?.includes('now') ? (
+              {this.datePickerSlots.now ? (
+                this.datePickerSlots.now(nowButtonProps)
+              ) : actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleNowClick}
+                  {...nowButtonProps}
                 >
                   {{ default: () => this.locale.now }}
                 </NButton>
               ) : null}
-              {actions?.includes('confirm') ? (
+              {this.datePickerSlots.confirm ? (
+                this.datePickerSlots.confirm(confirmButtonProps)
+              ) : actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isDateInvalid}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NButton>

@@ -32,6 +32,7 @@ naive-ui 不推荐直接在 `n-layout-sider` 和 `n-layout` 上设定 padding。
     </n-layout>
   </n-space>
 </template>
+
 <style>
 .n-layout-sider {
   background: rgba(128, 128, 128, 0.3);

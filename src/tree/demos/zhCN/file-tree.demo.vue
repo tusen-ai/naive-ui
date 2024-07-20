@@ -4,27 +4,18 @@
 使用 `on-update:expanded-keys` 来更改节点在不同状态下的前缀图标样式。
 </markdown>
 
-<template>
-  <n-tree
-    block-line
-    expand-on-click
-    :data="data"
-    :node-props="nodeProps"
-    :on-update:expanded-keys="updatePrefixWithExpaned"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useMessage, NIcon, TreeOption } from 'naive-ui'
+import type { TreeOption } from 'naive-ui'
+import { NIcon, useMessage } from 'naive-ui'
 import {
+  FileTrayFullOutline,
   Folder,
-  FolderOpenOutline,
-  FileTrayFullOutline
+  FolderOpenOutline
 } from '@vicons/ionicons5'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const updatePrefixWithExpaned = (
       _keys: Array<string | number>,
@@ -34,7 +25,8 @@ export default defineComponent({
         action: 'expand' | 'collapse' | 'filter'
       }
     ) => {
-      if (!meta.node) return
+      if (!meta.node)
+        return
       switch (meta.action) {
         case 'expand':
           meta.node.prefix = () =>
@@ -52,9 +44,9 @@ export default defineComponent({
     }
     const nodeProps = ({ option }: { option: TreeOption }) => {
       return {
-        onClick () {
+        onClick() {
           if (!option.children && !option.disabled) {
-            message.info('[Click] ' + option.label)
+            message.info(`[Click] ${option.label}`)
           }
         }
       }
@@ -105,3 +97,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree
+    block-line
+    expand-on-click
+    :data="data"
+    :node-props="nodeProps"
+    :on-update:expanded-keys="updatePrefixWithExpaned"
+  />
+</template>

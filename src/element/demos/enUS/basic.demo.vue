@@ -4,6 +4,20 @@
 You can use CSS variables from it. If you need to use those variables in JS, please see [useThemeVars](../docs/theme#use-theme-vars).
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { darkTheme } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      darkTheme,
+      theme: ref<typeof darkTheme | null>(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space>
@@ -29,16 +43,3 @@ You can use CSS variables from it. If you need to use those variables in JS, ple
     </n-config-provider>
   </n-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { darkTheme } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      darkTheme,
-      theme: ref<typeof darkTheme | null>(null)
-    }
-  }
-})
-</script>

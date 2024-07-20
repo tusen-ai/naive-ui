@@ -4,20 +4,11 @@
   Download two-dimensional code code implementation, you can also choose to right-click the picture to save it.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-qr-code id="qr-code" value="https://www.naiveui.com/" />
-    <n-button @click="handleDownloadQRCode">
-      Download
-    </n-button>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const handleDownloadQRCode = () => {
       const canvas = document
         .querySelector('#qr-code')
@@ -38,3 +29,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-qr-code id="qr-code" value="https://www.naiveui.com/" />
+    <n-button @click="handleDownloadQRCode">
+      Download
+    </n-button>
+  </n-space>
+</template>

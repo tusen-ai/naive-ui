@@ -30,12 +30,12 @@ function createDiscreteApi(
   }
 ): {
   // 只有 includes 中包含的 API 才会被创建
-  message: MessageApi
-  dialog: DialogApi
-  notification: NotificationApi
-  loadingBar: LoadingBarApi
-  // Vue app
-  app: App
-  unmount: () => void
-} {}
+    message: MessageApi
+    dialog: DialogApi
+    notification: NotificationApi
+    loadingBar: LoadingBarApi
+    // Vue app
+    app: App
+    unmount: () => void
+  } {}
 ```
