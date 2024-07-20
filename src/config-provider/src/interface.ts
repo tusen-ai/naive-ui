@@ -4,7 +4,6 @@ import type { GlobalThemeWithoutCommon } from './internal-interface'
 
 export type { ThemeCommonVars }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CustomThemeCommonVars {}
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
@@ -16,7 +15,7 @@ export type GlobalThemeOverrides = {
   common?: Partial<ThemeCommonVars & CustomThemeCommonVars>
 } & {
   [key in keyof GlobalThemeWithoutCommon]?: ExtractThemeOverrides<
-  GlobalThemeWithoutCommon[key]
+    GlobalThemeWithoutCommon[key]
   >
 }
 

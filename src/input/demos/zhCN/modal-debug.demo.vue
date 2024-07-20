@@ -2,6 +2,30 @@
  # Modal debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      name: '',
+      value: '',
+      showModal: false
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      this.name = Math.random().toString()
+    }, 100)
+  },
+  methods: {
+    renderCount() {
+      return `${this.value.length} / Max`
+    }
+  }
+})
+</script>
+
 <template>
   <div>
     <n-button @click="showModal = true">
@@ -16,27 +40,3 @@
     </div>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      name: '',
-      value: '',
-      showModal: false
-    }
-  },
-  mounted () {
-    setInterval(() => {
-      this.name = Math.random().toString()
-    }, 100)
-  },
-  methods: {
-    renderCount () {
-      return `${this.value.length} / Max`
-    }
-  }
-})
-</script>

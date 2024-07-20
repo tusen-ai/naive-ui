@@ -1,14 +1,14 @@
-import { h, ref, defineComponent, inject, type PropType, computed } from 'vue'
+import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
-import NCascaderOption from './CascaderOption'
+import { depx } from 'seemly'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
+import NCascaderOption from './CascaderOption'
 import {
-  type TmNode,
   type CascaderSubmenuInstance,
+  type TmNode,
   cascaderInjectionKey
 } from './interface'
-import { depx } from 'seemly'
 
 export default defineComponent({
   name: 'CascaderSubmenu',
@@ -22,23 +22,23 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  setup() {
     const {
       virtualScrollRef,
       mergedClsPrefixRef,
       mergedThemeRef,
       optionHeightRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
     const inst: CascaderSubmenuInstance = {
-      scroll (index: number, elSize: number) {
+      scroll(index: number, elSize: number) {
         if (virtualScrollRef.value) {
           vlInstRef.value?.scrollTo({
             index
           })
-        } else {
+        }
+        else {
           scrollbarInstRef.value?.scrollTo({
             index,
             elSize
@@ -65,7 +65,7 @@ export default defineComponent({
       ...inst
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme, virtualScroll } = this
     return (
       <div
@@ -98,7 +98,7 @@ export default defineComponent({
                   }}
                 </VirtualList>
               ) : (
-                this.tmNodes.map((tmNode) => (
+                this.tmNodes.map(tmNode => (
                   <NCascaderOption key={tmNode.key} tmNode={tmNode} />
                 ))
               )

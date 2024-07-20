@@ -4,6 +4,19 @@
 Make the input clearable after a value is set.
 </markdown>
 
+<script lang="ts">
+import { TrashBinOutline } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      TrashBinOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input type="text" placeholder="Content is clearable" clearable />
@@ -21,16 +34,3 @@ Make the input clearable after a value is set.
     </n-input>
   </n-space>
 </template>
-
-<script lang="ts">
-import { TrashBinOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      TrashBinOutline
-    }
-  }
-})
-</script>

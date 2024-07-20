@@ -4,25 +4,23 @@
 `render-option` 可以让你控制整个选项的渲染。
 </markdown>
 
-<template>
-  <n-select :options="options" :render-option="renderOption" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, ref, VNode } from 'vue'
-import { NTooltip, SelectOption } from 'naive-ui'
+import type { VNode } from 'vue'
+import { defineComponent, h, ref } from 'vue'
+import type { SelectOption } from 'naive-ui'
+import { NTooltip } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
-      renderOption: ({ node, option }: { node: VNode; option: SelectOption }) =>
+      renderOption: ({ node, option }: { node: VNode, option: SelectOption }) =>
         h(NTooltip, null, {
           trigger: () => node,
-          default: () => 'Rubber Soul -' + option.label
+          default: () => `Rubber Soul -${option.label}`
         }),
       options: ref([
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0',
           disabled: true
         },
@@ -35,7 +33,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3',
           disabled: true
         },
@@ -65,7 +63,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -81,3 +79,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select :options="options" :render-option="renderOption" />
+</template>

@@ -1,18 +1,18 @@
-import { h, defineComponent, type PropType, inject, computed, toRef } from 'vue'
+import { type PropType, computed, defineComponent, h, inject, toRef } from 'vue'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
 import {
-  ChevronRightIcon as ArrowRightIcon,
-  ChevronLeftIcon as ArrowLeftIcon
+  ChevronLeftIcon as ArrowLeftIcon,
+  ChevronRightIcon as ArrowRightIcon
 } from '../../_internal/icons'
 import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  throwError,
   resolveSlotWithProps,
-  resolveWrappedSlotWithProps
+  resolveWrappedSlotWithProps,
+  throwError
 } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
@@ -29,7 +29,7 @@ export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
 export default defineComponent({
   name: 'CollapseItem',
   props: collapseItemProps,
-  setup (props) {
+  setup(props) {
     const { mergedRtlRef } = useConfig(props)
     const randomName = createId()
     const mergedNameRef = useMemo(() => {
@@ -54,9 +54,10 @@ export default defineComponent({
       if (Array.isArray(expandedNames)) {
         const { value: name } = mergedNameRef
         return !~expandedNames.findIndex(
-          (expandedName) => expandedName === name
+          expandedName => expandedName === name
         )
-      } else if (expandedNames) {
+      }
+      else if (expandedNames) {
         const { value: name } = mergedNameRef
         return name !== expandedNames
       }
@@ -74,17 +75,20 @@ export default defineComponent({
         const { displayDirective } = props
         if (displayDirective) {
           return displayDirective
-        } else {
+        }
+        else {
           return collapseProps.displayDirective
         }
       }),
       arrowPlacement: computed<'left' | 'right'>(() => {
         return collapseProps.arrowPlacement
       }),
-      handleClick (e: MouseEvent) {
+      handleClick(e: MouseEvent) {
         let happensInArea: 'arrow' | 'main' | 'extra' = 'main'
-        if (happensIn(e, 'arrow')) happensInArea = 'arrow'
-        if (happensIn(e, 'extra')) happensInArea = 'extra'
+        if (happensIn(e, 'arrow'))
+          happensInArea = 'arrow'
+        if (happensIn(e, 'extra'))
+          happensInArea = 'extra'
         if (!collapseProps.triggerAreas.includes(happensInArea)) {
           return
         }
@@ -94,7 +98,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const {
       collapseSlots,
       $slots,
@@ -110,8 +114,8 @@ export default defineComponent({
       { collapsed },
       () => [this.title]
     )
-    const headerExtraSlot =
-      $slots['header-extra'] || collapseSlots['header-extra']
+    const headerExtraSlot
+      = $slots['header-extra'] || collapseSlots['header-extra']
     const arrowSlot = $slots.arrow || collapseSlots.arrow
     return (
       <div
@@ -145,8 +149,8 @@ export default defineComponent({
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
                     default:
-                      collapseSlots.expandIcon ??
-                      (() =>
+                      collapseSlots.expandIcon
+                      ?? (() =>
                         this.rtlEnabled ? (
                           <ArrowLeftIcon />
                         ) : (
@@ -161,7 +165,7 @@ export default defineComponent({
           {resolveWrappedSlotWithProps(
             headerExtraSlot,
             { collapsed },
-            (children) => (
+            children => (
               <div
                 class={`${mergedClsPrefix}-collapse-item__header-extra`}
                 onClick={this.handleClick}

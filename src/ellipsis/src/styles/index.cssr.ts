@@ -1,4 +1,4 @@
-import { cB, cNotM, cM } from '../../../_utils/cssr'
+import { cB, cM, cNotM } from '../../../_utils/cssr'
 
 export default cB('ellipsis', {
   overflow: 'hidden'

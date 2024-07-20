@@ -1,4 +1,4 @@
-import { cB, c, cM, cE, insideModal, insidePopover } from '../../../_utils/cssr'
+import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -71,6 +71,7 @@ export default c([
       ])
     ]),
     cM('vertical', `
+      box-sizing: content-box;
       padding: 0 calc((var(--n-handle-size) - var(--n-rail-height)) / 2);
       width: var(--n-rail-width-vertical);
       height: 100%;

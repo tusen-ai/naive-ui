@@ -4,22 +4,9 @@
 In some cases, different roles will see different options. You can use the `show` field to control the visibility of menu options.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-switch v-model:value="accordion">
-      <template #checked>
-        Hide menu
-      </template>
-      <template #unchecked>
-        Show menu
-      </template>
-    </n-switch>
-    <n-menu :options="options" />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, Component, h, computed } from 'vue'
+import type { Component } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -27,9 +14,9 @@ import {
 } from '@vicons/ionicons5'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const accordionRef = ref(false)
-    function renderIcon (icon: Component) {
+    function renderIcon(icon: Component) {
       return () => h(NIcon, null, { default: () => h(icon) })
     }
     const MenuOptions = computed(() => [
@@ -72,3 +59,17 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="accordion">
+      <template #checked>
+        Hide menu
+      </template>
+      <template #unchecked>
+        Show menu
+      </template>
+    </n-switch>
+    <n-menu :options="options" />
+  </n-space>
+</template>

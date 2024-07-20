@@ -1,11 +1,11 @@
 import { popselectLight } from '../../popselect/styles'
 import { selectLight } from '../../select/styles'
 import { inputLight } from '../../input/styles'
-import { commonLight, type ThemeCommonVars } from '../../_styles/common'
-import commonVariables from './_common'
+import { type ThemeCommonVars, commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     textColor2,
     primaryColor,

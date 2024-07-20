@@ -1,17 +1,17 @@
 import {
-  h,
+  type CSSProperties,
+  type PropType,
   computed,
   defineComponent,
-  type PropType,
-  type CSSProperties
+  h
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, createKey } from '../../_utils'
 import { progressLight } from '../styles'
 import type { ProgressTheme } from '../styles'
 import style from './styles/index.cssr'
-import { type Status } from './interface'
+import type { Status } from './interface'
 import Line from './Line'
 import Circle from './Circle'
 import MultipleCircle from './MultipleCircle'
@@ -21,7 +21,7 @@ export const progressProps = {
   processing: Boolean,
   type: {
     type: String as PropType<
-    'line' | 'circle' | 'multiple-circle' | 'dashboard'
+      'line' | 'circle' | 'multiple-circle' | 'dashboard'
     >,
     default: 'line'
   },
@@ -33,7 +33,7 @@ export const progressProps = {
   },
   railColor: [String, Array] as PropType<string | string[]>,
   railStyle: [String, Array] as PropType<
-  string | CSSProperties | Array<string | CSSProperties>
+    string | CSSProperties | Array<string | CSSProperties>
   >,
   color: [String, Array] as PropType<string | string[]>,
   viewBoxWidth: {
@@ -77,7 +77,7 @@ export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
 export default defineComponent({
   name: 'Progress',
   props: progressProps,
-  setup (props) {
+  setup(props) {
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
@@ -153,7 +153,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     // it's ok to expand all prop here since no slots' deps
     const {
       type,

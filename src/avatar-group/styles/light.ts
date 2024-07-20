@@ -2,10 +2,9 @@ import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 import { avatarLight } from '../../avatar/styles'
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type AvatarGroupThemeVars = Record<string, unknown>
 
-export const self = () => {
+export function self() {
   return {
     gap: '-12px'
   }

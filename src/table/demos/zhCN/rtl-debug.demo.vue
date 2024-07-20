@@ -2,6 +2,23 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { unstableTableRtl } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      singleColumn: ref(false),
+      singleLine: ref(false),
+      bordered: ref(false),
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableTableRtl]
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
@@ -43,20 +60,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableTableRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      singleColumn: ref(false),
-      singleLine: ref(false),
-      bordered: ref(false),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableTableRtl]
-    }
-  }
-})
-</script>

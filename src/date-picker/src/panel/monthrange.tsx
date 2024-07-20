@@ -1,11 +1,11 @@
 import {
-  defineComponent,
-  h,
-  renderSlot,
-  watchEffect,
   type PropType,
   type VNode,
-  onMounted
+  defineComponent,
+  h,
+  onMounted,
+  renderSlot,
+  watchEffect
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
@@ -33,15 +33,15 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('now')) {
           warnOnce(
             'date-picker',
-            'The `now` action is not supported for n-date-picker of ' +
-              `${props.type}` +
-              'type'
+            'The `now` action is not supported for n-date-picker of '
+            + `${props.type}`
+            + 'type'
           )
         }
       })
@@ -63,12 +63,12 @@ export default defineComponent({
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            item.isCurrent &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
-            item.selected &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
-            disabled &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
+            item.isCurrent
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            disabled
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={
             disabled
@@ -103,7 +103,7 @@ export default defineComponent({
     })
     return { ...useCalendarRef, renderItem }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
@@ -286,27 +286,27 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
-                    typeof shortcut === 'function' ? (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                      ) : null
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut)
+                  || typeof shortcut === 'function' ? (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.handleRangeShortcutMouseenter(shortcut)
+                        }}
+                        onClick={() => {
+                          this.handleRangeShortcutClick(shortcut)
+                        }}
+                        onMouseleave={() => {
+                          this.handleShortcutMouseleave()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    ) : null
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.datePickerSlots.clear ? (

@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 
 export default defineComponent({
   props: {
@@ -8,7 +8,7 @@ export default defineComponent({
     },
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div onClick={this.onClick} class={`${clsPrefix}-layout-toggle-bar`}>

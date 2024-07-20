@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType, toRef } from 'vue'
+import { type PropType, defineComponent, h, toRef } from 'vue'
 import { resolveSlot } from '../../../_utils'
 import { useStyle } from '../../../_mixins'
 import { ClearIcon } from '../../icons'
@@ -16,15 +16,15 @@ export default defineComponent({
     show: Boolean,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-clear', style, toRef(props, 'clsPrefix'))
     return {
-      handleMouseDown (e: MouseEvent) {
+      handleMouseDown(e: MouseEvent) {
         e.preventDefault()
       }
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-base-clear`}>

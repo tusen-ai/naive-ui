@@ -2,6 +2,18 @@
 # 时区
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(Date.now())
+    }
+  }
+})
+</script>
+
 <template>
   <n-grid :cols="2" :x-gap="12" :y-gap="12">
     <n-grid-item>
@@ -33,15 +45,3 @@
     </n-grid-item>
   </n-grid>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(Date.now())
-    }
-  }
-})
-</script>

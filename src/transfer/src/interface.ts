@@ -47,7 +47,7 @@ export interface TransferInjection {
   showSelectedRef: Ref<boolean>
 }
 
-export const transferInjectionKey =
-  createInjectionKey<TransferInjection>('n-transfer')
+export const transferInjectionKey
+  = createInjectionKey<TransferInjection>('n-transfer')
 
 export type OnUpdateValue = (value: OptionValue[]) => void

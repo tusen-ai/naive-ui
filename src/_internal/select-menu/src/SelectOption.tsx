@@ -1,25 +1,25 @@
 import {
-  h,
-  inject,
-  defineComponent,
-  Transition,
   type PropType,
+  type Ref,
+  Transition,
   type VNode,
-  type Ref
+  defineComponent,
+  h,
+  inject
 } from 'vue'
-import { type TreeNode } from 'treemate'
+import type { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectOption } from '../../../select/src/interface'
-import { render, mergeEventHandlers } from '../../../_utils'
+import { mergeEventHandlers, render } from '../../../_utils'
 import { CheckmarkIcon } from '../../icons'
 import { NBaseIcon } from '../../icon'
 import {
   type RenderLabelImpl,
-  internalSelectionMenuInjectionKey,
-  type RenderOptionImpl
+  type RenderOptionImpl,
+  internalSelectionMenuInjectionKey
 } from './interface'
 
-function renderCheckMark (show: boolean, clsPrefix: string): VNode {
+function renderCheckMark(show: boolean, clsPrefix: string): VNode {
   return (
     <Transition name="fade-in-scale-up-transition">
       {{
@@ -51,7 +51,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const {
       valueRef,
       pendingTmNodeRef,
@@ -65,27 +65,30 @@ export default defineComponent({
       nodePropsRef,
       handleOptionClick,
       handleOptionMouseEnter
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(internalSelectionMenuInjectionKey)!
     const isPendingRef = useMemo(() => {
       const { value: pendingTmNode } = pendingTmNodeRef
-      if (!pendingTmNode) return false
+      if (!pendingTmNode)
+        return false
       return props.tmNode.key === pendingTmNode.key
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       const { tmNode } = props
-      if (tmNode.disabled) return
+      if (tmNode.disabled)
+        return
       handleOptionClick(e, tmNode)
     }
-    function handleMouseEnter (e: MouseEvent): void {
+    function handleMouseEnter(e: MouseEvent): void {
       const { tmNode } = props
-      if (tmNode.disabled) return
+      if (tmNode.disabled)
+        return
       handleOptionMouseEnter(e, tmNode)
     }
-    function handleMouseMove (e: MouseEvent): void {
+    function handleMouseMove(e: MouseEvent): void {
       const { tmNode } = props
       const { value: isPending } = isPendingRef
-      if (tmNode.disabled || isPending) return
+      if (tmNode.disabled || isPending)
+        return
       handleOptionMouseEnter(e, tmNode)
     }
     return {
@@ -101,14 +104,16 @@ export default defineComponent({
       isSelected: useMemo(() => {
         const { value } = valueRef
         const { value: multiple } = multipleRef
-        if (value === null) return false
+        if (value === null)
+          return false
         const optionValue = props.tmNode.rawNode[
           valueFieldRef.value
         ] as NonNullable<SelectOption['value']>
         if (multiple) {
           const { value: valueSet } = valueSetRef
           return valueSet.has(optionValue)
-        } else {
+        }
+        else {
           return value === optionValue
         }
       }),
@@ -120,7 +125,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       tmNode: { rawNode },

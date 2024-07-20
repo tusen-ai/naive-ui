@@ -4,6 +4,30 @@
 若 `show-label` 在 `n-form-item` 上未被设定，则会继承 `n-form` 的 `show-label`，默认为 `true`。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const formRef = ref(null)
+    const formShowLabel = ref(true)
+    const formItemShowLabel = ref(true)
+    return {
+      formRef,
+      formValue: ref({
+        user: {
+          name: '',
+          age: ''
+        },
+        phone: ''
+      }),
+      formShowLabel,
+      formItemShowLabel
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space>Form:<n-switch v-model:value="formShowLabel" /></n-space>
@@ -25,27 +49,3 @@
     </n-form>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const formRef = ref(null)
-    const formShowLabel = ref(true)
-    const formItemShowLabel = ref(true)
-    return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      formShowLabel,
-      formItemShowLabel
-    }
-  }
-})
-</script>

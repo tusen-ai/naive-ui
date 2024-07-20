@@ -2,10 +2,10 @@ import { changeColor } from 'seemly'
 import { commonLight } from '../../../_styles/common'
 import { popoverLight } from '../../../popover/styles'
 import type { ThemeCommonVars } from '../../../_styles/common'
-import commonVariables from './_common'
 import { createTheme } from '../../../_mixins'
+import commonVariables from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     textColor2,

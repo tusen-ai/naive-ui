@@ -4,6 +4,27 @@
 You can customize display area by `to` prop. Remember to set `:trap-focus="false"` and `:block-scroll="false"`, otherwise content outside drawer won't be focusable and body won't be scrollable.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { DrawerPlacement } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const active = ref(false)
+    const placement = ref<DrawerPlacement>('right')
+    const activate = (place: DrawerPlacement) => {
+      active.value = true
+      placement.value = place
+    }
+    return {
+      active,
+      placement,
+      activate
+    }
+  }
+})
+</script>
+
 <template>
   <n-button-group>
     <n-button @click="activate('top')">
@@ -48,24 +69,3 @@ You can customize display area by `to` prop. Remember to set `:trap-focus="false
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { DrawerPlacement } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
-    }
-    return {
-      active,
-      placement,
-      activate
-    }
-  }
-})
-</script>

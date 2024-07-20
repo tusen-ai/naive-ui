@@ -4,30 +4,20 @@
 你可以修改已经存在的通知
 </markdown>
 
-<template>
-  <n-space>
-    <n-button @click="open">
-      打开它
-    </n-button>
-    <n-button :disabled="!n" @click="change">
-      改它
-    </n-button>
-  </n-space>
-</template>
-
 <script lang="ts">
-import { h, ref, defineComponent } from 'vue'
-import { NAvatar, useNotification, NotificationReactive } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import type { NotificationReactive } from 'naive-ui'
+import { NAvatar, useNotification } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     const nRef = ref<NotificationReactive | null>(null)
     return {
       n: nRef,
-      open () {
+      open() {
         nRef.value = notification.create({
-          title: "Wouldn't it be Nice",
+          title: 'Wouldn\'t it be Nice',
           description: 'From the Beach Boys',
           content: `Wouldn't it be nice if we were older
 Then we wouldn't have to wait so long
@@ -51,7 +41,7 @@ Hold each other close the whole night through`,
           }
         })
       },
-      change () {
+      change() {
         if (nRef.value) {
           nRef.value.content = () =>
             h('img', {
@@ -64,3 +54,14 @@ Hold each other close the whole night through`,
   }
 })
 </script>
+
+<template>
+  <n-space>
+    <n-button @click="open">
+      打开它
+    </n-button>
+    <n-button :disabled="!n" @click="change">
+      改它
+    </n-button>
+  </n-space>
+</template>

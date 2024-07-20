@@ -4,28 +4,12 @@
 表单的规则支持 `renderMessage`，你可以利用它来完成验证信息的国际化。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-radio-group v-model:value="locale">
-      <n-space>
-        <n-radio label="语言1" value="语言1" />
-        <n-radio label="语言2" value="语言2" />
-      </n-space>
-    </n-radio-group>
-    <n-form :model="model" :rules="rules">
-      <n-form-item label="输入点什么去掉 error" path="input">
-        <n-input v-model:value="model.input" />
-      </n-form-item>
-    </n-form>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { FormRules } from 'naive-ui'
+import type { FormRules } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const localeRef = ref('语言1')
     const rules: FormRules = {
       input: {
@@ -49,3 +33,19 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-radio-group v-model:value="locale">
+      <n-space>
+        <n-radio label="语言1" value="语言1" />
+        <n-radio label="语言2" value="语言2" />
+      </n-space>
+    </n-radio-group>
+    <n-form :model="model" :rules="rules">
+      <n-form-item label="输入点什么去掉 error" path="input">
+        <n-input v-model:value="model.input" />
+      </n-form-item>
+    </n-form>
+  </n-space>
+</template>

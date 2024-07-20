@@ -16,7 +16,7 @@ const datePickerDark: DatePickerTheme = {
     TimePicker: timePickerDark,
     Scrollbar: scrollbarDark
   },
-  self (vars) {
+  self(vars) {
     const { popoverColor, hoverColor, primaryColor } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorDisabled = composite(popoverColor, hoverColor)

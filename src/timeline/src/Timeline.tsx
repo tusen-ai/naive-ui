@@ -1,19 +1,19 @@
 import {
-  h,
-  defineComponent,
-  type PropType,
   type ExtractPropTypes,
-  provide,
-  type Ref
+  type PropType,
+  type Ref,
+  defineComponent,
+  h,
+  provide
 } from 'vue'
 import {
   type MergedTheme,
+  type ThemeProps,
   useConfig,
-  useTheme,
-  type ThemeProps
+  useTheme
 } from '../../_mixins'
 import type { TimelineTheme } from '../styles'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, createInjectionKey } from '../../_utils'
 import { timelineLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -36,15 +36,15 @@ export interface TimelineInjection {
   mergedThemeRef: Ref<MergedTheme<TimelineTheme>>
   mergedClsPrefixRef: Ref<string>
 }
-export const timelineInjectionKey =
-  createInjectionKey<TimelineInjection>('n-timeline')
+export const timelineInjectionKey
+  = createInjectionKey<TimelineInjection>('n-timeline')
 
 export type TimelineProps = ExtractPublicPropTypes<typeof timelineProps>
 
 export default defineComponent({
   name: 'Timeline',
   props: timelineProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Timeline',
@@ -67,8 +67,8 @@ export default defineComponent({
             `${mergedClsPrefix}-timeline`,
             props.horizontal && `${mergedClsPrefix}-timeline--horizontal`,
             `${mergedClsPrefix}-timeline--${props.size}-size`,
-            !props.horizontal &&
-              `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
+            !props.horizontal
+            && `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
           {slots}

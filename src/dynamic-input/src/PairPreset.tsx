@@ -1,4 +1,4 @@
-import { defineComponent, h, inject, type PropType } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { NInput } from '../../input'
 import { dynamicInputInjectionKey } from './interface'
 
@@ -21,13 +21,12 @@ export default defineComponent({
     path: String,
     onUpdateValue: {
       type: Function as PropType<
-      (data: { key: string, value: string }) => void
+        (data: { key: string, value: string }) => void
       >,
       required: true
     }
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { mergedThemeRef, keyPlaceholderRef, valuePlaceholderRef } = inject(
       dynamicInputInjectionKey
     )!
@@ -35,13 +34,13 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       keyPlaceholder: keyPlaceholderRef,
       valuePlaceholder: valuePlaceholderRef,
-      handleKeyInput (key: string) {
+      handleKeyInput(key: string) {
         props.onUpdateValue({
           key,
           value: props.value.value
         })
       },
-      handleValueInput (value: string) {
+      handleValueInput(value: string) {
         props.onUpdateValue({
           key: props.value.key,
           value
@@ -49,7 +48,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const {
       mergedTheme,
       keyPlaceholder,

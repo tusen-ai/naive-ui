@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  type PropType,
   type CSSProperties,
-  type VNodeChild
+  type PropType,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 import { getPadding } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -15,8 +15,8 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
-import style from './styles/index.cssr'
 import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
+import style from './styles/index.cssr'
 
 export interface CardSegmented {
   content?: boolean | 'soft'
@@ -74,13 +74,14 @@ export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 export default defineComponent({
   name: 'Card',
   props: cardProps,
-  setup (props) {
+  setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
-      if (onClose) call(onClose)
+      if (onClose)
+        call(onClose)
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
-      useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -181,7 +182,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       segmented,
       bordered,

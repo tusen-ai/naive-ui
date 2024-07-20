@@ -1,11 +1,11 @@
 import {
-  h,
-  type PropType,
-  defineComponent,
-  computed,
   type CSSProperties,
-  provide,
+  type PropType,
   type Ref,
+  computed,
+  defineComponent,
+  h,
+  provide,
   toRef
 } from 'vue'
 import {
@@ -15,14 +15,14 @@ import {
   useThemeClass
 } from '../../_mixins'
 import {
+  type ExtractPublicPropTypes,
   createInjectionKey,
-  formatLength,
-  type ExtractPublicPropTypes
+  formatLength
 } from '../../_utils'
-import style from './styles/index.cssr'
 import floatButtonGroupLight, {
   type FloatButtonGroupTheme
 } from '../styles/light'
+import style from './styles/index.cssr'
 
 export interface ButtonGroupInjection {
   shapeRef: Ref<'circle' | 'square'>
@@ -48,13 +48,13 @@ export type FloatButtonGroupProps = ExtractPublicPropTypes<
   typeof floatButtonGroupProps
 >
 
-export const floatButtonGroupInjectionKey =
-  createInjectionKey<ButtonGroupInjection>('n-float-button-group')
+export const floatButtonGroupInjectionKey
+  = createInjectionKey<ButtonGroupInjection>('n-float-button-group')
 
 export default defineComponent({
   name: 'FloatButtonGroup',
   props: floatButtonGroupProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'FloatButtonGroup',
@@ -98,7 +98,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, cssVars, shape } = this
     return (
       <div

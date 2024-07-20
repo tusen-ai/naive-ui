@@ -2,6 +2,24 @@
 # Scroll to
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { AnchorInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const anchorRef = ref<AnchorInst | null>(null)
+    const scrollTo = (href: string) => {
+      anchorRef.value?.scrollTo(href)
+    }
+    return {
+      anchorRef,
+      scrollTo
+    }
+  }
+})
+</script>
+
 <template>
   <div style="height: 200px; padding-left: 200px">
     <n-anchor
@@ -30,21 +48,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { AnchorInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const anchorRef = ref<AnchorInst | null>(null)
-    const scrollTo = (href: string) => {
-      anchorRef.value?.scrollTo(href)
-    }
-    return {
-      anchorRef,
-      scrollTo
-    }
-  }
-})
-</script>

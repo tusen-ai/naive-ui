@@ -2,6 +2,32 @@
 # Vshow debug
 </markdown>
 
+<script lang="ts">
+import { reactive } from 'vue'
+
+export default {
+  setup() {
+    // 表单值，默认选择框的值为null
+    const formValue = reactive({ select: null })
+    // 选择框选项
+    const selectOptions = [
+      {
+        label: '值为1',
+        value: 1
+      },
+      {
+        label: '值为2',
+        value: 2
+      }
+    ]
+    return {
+      formValue,
+      selectOptions
+    }
+  }
+}
+</script>
+
 <template>
   <n-form :model="formValue" label-placement="left" :style="{ margin: '30px' }">
     <n-grid :col="24" x-gap="24">
@@ -24,48 +50,13 @@
     </n-grid>
   </n-form>
   <!-- 问题总结 -->
-  <n-h2
-    prefix="bar"
-    align-text
-    type="info"
-    :style="{ margin: '30px' }"
-  >期望：当选择框值为2时，显示输入框</n-h2>
-  <n-h2
-    prefix="bar"
-    align-text
-    type="error"
-    :style="{ margin: '30px' }"
-  >问题：当选择框值从null变为1时，依然显示了输入框，不符合预期</n-h2>
-  <n-h2
-    prefix="bar"
-    align-text
-    type="error"
-    :style="{ margin: '30px' }"
-  >问题：当选择框值从1变为null时，依然显示了输入框，不符合预期</n-h2>
+  <n-h2 prefix="bar" align-text type="info" :style="{ margin: '30px' }">
+    期望：当选择框值为2时，显示输入框
+  </n-h2>
+  <n-h2 prefix="bar" align-text type="error" :style="{ margin: '30px' }">
+    问题：当选择框值从null变为1时，依然显示了输入框，不符合预期
+  </n-h2>
+  <n-h2 prefix="bar" align-text type="error" :style="{ margin: '30px' }">
+    问题：当选择框值从1变为null时，依然显示了输入框，不符合预期
+  </n-h2>
 </template>
-
-<script lang="ts">
-import { reactive } from 'vue'
-
-export default {
-  setup () {
-    // 表单值，默认选择框的值为null
-    const formValue = reactive({ select: null })
-    // 选择框选项
-    const selectOptions = [
-      {
-        label: '值为1',
-        value: 1
-      },
-      {
-        label: '值为2',
-        value: 2
-      }
-    ]
-    return {
-      formValue,
-      selectOptions
-    }
-  }
-}
-</script>

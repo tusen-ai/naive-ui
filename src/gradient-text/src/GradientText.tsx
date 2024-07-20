@@ -1,4 +1,4 @@
-import { defineComponent, computed, h, type PropType } from 'vue'
+import { type PropType, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, formatLength, useHoudini } from '../../_utils'
@@ -21,7 +21,7 @@ export const gradientTextProps = {
   fontSize: [String, Number] as PropType<string | number>,
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
+      'info' | 'success' | 'warning' | 'error' | 'primary' | 'danger'
     >,
     default: 'primary'
   },
@@ -34,26 +34,29 @@ export type GradientTextProps = ExtractPublicPropTypes<typeof gradientTextProps>
 export default defineComponent({
   name: 'GradientText',
   props: gradientTextProps,
-  setup (props) {
+  setup(props) {
     useHoudini()
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const compatibleTypeRef = computed<
-    'info' | 'success' | 'warning' | 'error' | 'primary'
+      'info' | 'success' | 'warning' | 'error' | 'primary'
     >(() => {
       const { type } = props
-      if (type === 'danger') return 'error'
+      if (type === 'danger')
+        return 'error'
       return type
     })
     const styleFontSizeRef = computed(() => {
       let fontSize = props.size || props.fontSize
-      if (fontSize) fontSize = formatLength(fontSize)
+      if (fontSize)
+        fontSize = formatLength(fontSize)
       return fontSize || undefined
     })
     const styleBgImageRef = computed(() => {
       const gradient = props.color || props.gradient
       if (typeof gradient === 'string') {
         return gradient
-      } else if (gradient) {
+      }
+      else if (gradient) {
         const deg = gradient.deg || 0
         const from = gradient.from
         const to = gradient.to
@@ -106,7 +109,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, onRender } = this
     onRender?.()
     return (

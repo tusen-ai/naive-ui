@@ -9,13 +9,13 @@ import type {
   AutoCompleteOptions
 } from './interface'
 
-export function mapAutoCompleteOptionsToSelectOptions (
+export function mapAutoCompleteOptionsToSelectOptions(
   options: AutoCompleteOptions
 ): SelectMixedOption[] {
   return options.map(convertAutoCompleteOptionToSelectOption)
 }
 
-function convertAutoCompleteOptionToSelectOption (
+function convertAutoCompleteOptionToSelectOption(
   option: AutoCompleteOption | AutoCompleteGroupOption | string
 ): SelectMixedOption {
   if (typeof option === 'string') {
@@ -23,21 +23,23 @@ function convertAutoCompleteOptionToSelectOption (
       label: option,
       value: option
     }
-  } else if (option.type === 'group') {
+  }
+  else if (option.type === 'group') {
     const groupOption: SelectGroupOption = {
       type: 'group',
       label: option.label ?? (option.name as any),
       value: option.value ?? (option.name as any),
       key: (option.key || option.name) as any,
       children: (option.children as Array<string | AutoCompleteOption>).map(
-        (groupOption) =>
+        groupOption =>
           convertAutoCompleteOptionToSelectOption(
             groupOption
           ) as SelectBaseOption
       )
     }
     return groupOption
-  } else {
+  }
+  else {
     return option as SelectMixedOption
   }
 }
