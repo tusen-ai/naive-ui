@@ -10,13 +10,13 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot } from '../../../_utils'
+import type {
+  ClearButtonProps,
+  ConfirmButtonProps,
+  NowButtonProps
+} from '../interface'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
-import {
-  type ClearButtonProps,
-  type ConfirmButtonProps,
-  type NowButtonProps
-} from '../interface'
 
 /**
  * DateTime Panel

@@ -12,13 +12,13 @@ import {
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import { useCalendar, useCalendarProps } from './use-calendar'
 import type {
   ClearButtonProps,
   ConfirmButtonProps,
   NowButtonProps,
   OnPanelUpdateValueImpl
 } from '../interface'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * Month Panel

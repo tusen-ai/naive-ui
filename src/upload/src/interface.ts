@@ -125,7 +125,6 @@ export type OnRetry = ({
   file
 }: {
   file: UploadSettledFileInfo
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 }) => UploadFileInfo | undefined | void
 
 export interface FileAndEntry {

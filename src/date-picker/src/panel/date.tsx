@@ -8,9 +8,9 @@ import {
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, warnOnce } from '../../../_utils'
+import type { ClearButtonProps, NowButtonProps } from '../interface'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
-import { type ClearButtonProps, type NowButtonProps } from '../interface'
 
 /**
  * Date Panel
@@ -40,9 +40,9 @@ export default defineComponent({
     }
     return useCalendar(props, props.type)
   },
-  render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type } =
-      this
+  render() {
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type }
+      = this
     const nowButtonProps: NowButtonProps = {
       size: 'tiny',
       onClick: this.handleNowClick

@@ -8,9 +8,9 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, warnOnce } from '../../../_utils'
+import type { ClearButtonProps, ConfirmButtonProps } from '../interface'
 import PanelHeader from './panelHeader'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
-import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'DateRangePanel',

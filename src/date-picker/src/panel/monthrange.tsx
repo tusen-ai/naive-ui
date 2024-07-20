@@ -21,8 +21,8 @@ import {
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
+import type { ClearButtonProps, ConfirmButtonProps } from '../interface'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
-import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'MonthRangePanel',

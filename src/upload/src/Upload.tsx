@@ -31,11 +31,10 @@ import type {
   OnBeforeUpload,
   OnError,
   OnPreview,
+  OnRetry,
   OnUpdateFileList,
   RenderIcon,
   ShouldUseThumbnailUrl,
-  RenderIcon,
-  OnRetry,
   UploadInternalInst,
   XhrHandlers
 } from './interface'
