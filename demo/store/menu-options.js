@@ -563,6 +563,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/infinite-scroll',
           isNew: true
+        },
+        {
+          en: 'Highlight',
+          zh: '高亮文本',
+          enSuffix: true,
+          path: '/highlight',
+          isNew: true
         }
       ]
     }),
