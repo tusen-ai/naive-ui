@@ -12,6 +12,7 @@ import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, warnOnce } from '../../../_utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 import PanelHeader from './panelHeader'
+import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
@@ -39,6 +40,18 @@ export default defineComponent({
       $slots
     } = this
     onRender?.()
+
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isRangeInvalid || this.isSelecting,
+      onClick: this.handleConfirmClick
+    }
     return (
       <div
         ref="selfRef"
@@ -346,24 +359,24 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.$slots.clear ? (
+                this.$slots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {this.$slots.confirm ? (
+                this.$slots.confirm(confirmButtonProps)
+              ) : this.actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid || this.isSelecting}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NButton>

@@ -22,6 +22,7 @@ import {
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'MonthRangePanel',
@@ -112,6 +113,17 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isRangeInvalid || this.isSelecting,
+      onClick: this.handleConfirmClick
+    }
     return (
       <div
         ref="selfRef"
@@ -297,24 +309,24 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.datePickerSlots.clear ? (
+                this.datePickerSlots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NxButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {this.datePickerSlots.confirm ? (
+                this.datePickerSlots.confirm(confirmButtonProps)
+              ) : this.actions?.includes('confirm') ? (
                 <NxButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NxButton>

@@ -10,6 +10,7 @@ import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, warnOnce } from '../../../_utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
+import { type ClearButtonProps, type NowButtonProps } from '../interface'
 
 /**
  * Date Panel
@@ -39,9 +40,17 @@ export default defineComponent({
     }
     return useCalendar(props, props.type)
   },
-  render() {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type }
-      = this
+  render () {
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type } =
+      this
+    const nowButtonProps: NowButtonProps = {
+      size: 'tiny',
+      onClick: this.handleNowClick
+    }
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
     onRender?.()
     return (
       <div
@@ -174,22 +183,24 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.$slots.clear ? (
+                this.$slots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('now') ? (
+              {this.$slots.now ? (
+                this.$slots.now(nowButtonProps)
+              ) : this.actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleNowClick}
+                  {...nowButtonProps}
                 >
                   {{ default: () => this.locale.now }}
                 </NButton>

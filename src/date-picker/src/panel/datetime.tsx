@@ -12,6 +12,11 @@ import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot } from '../../../_utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
+import {
+  type ClearButtonProps,
+  type ConfirmButtonProps,
+  type NowButtonProps
+} from '../interface'
 
 /**
  * DateTime Panel
@@ -35,6 +40,22 @@ export default defineComponent({
       $slots
     } = this
     onRender?.()
+    const nowButtonProps: NowButtonProps = {
+      size: 'tiny',
+      onClick: this.handleNowClick
+    }
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isDateInvalid,
+      onClick: this.handleConfirmClick
+    }
+
     return (
       <div
         ref="selfRef"
@@ -189,34 +210,35 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.$slots.clear ? (
+                this.$slots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.clearSelectedDateTime}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('now') ? (
+              {this.$slots.now ? (
+                this.$slots.now(nowButtonProps)
+              ) : this.actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleNowClick}
+                  {...nowButtonProps}
                 >
                   {{ default: () => this.locale.now }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {this.$slots.confirm ? (
+                this.$slots.confirm(confirmButtonProps)
+              ) : this.actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isDateInvalid}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NButton>
