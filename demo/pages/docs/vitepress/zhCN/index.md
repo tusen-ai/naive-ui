@@ -40,13 +40,13 @@ import { useRoute } from 'vitepress'
 const { Layout } = DefaultTheme
 
 const CssRenderStyle = defineComponent({
-  setup () {
+  setup() {
     const collect = inject('css-render-collect')
     return {
       style: collect()
     }
   },
-  render () {
+  render() {
     return h('css-render-style', {
       innerHTML: this.style
     })
@@ -54,7 +54,7 @@ const CssRenderStyle = defineComponent({
 })
 
 const VitepressPath = defineComponent({
-  setup () {
+  setup() {
     const route = useRoute()
     return () => {
       return h('vitepress-path', null, [route.path])
@@ -63,7 +63,7 @@ const VitepressPath = defineComponent({
 })
 
 const NaiveUIProvider = defineComponent({
-  render () {
+  render() {
     return h(
       NConfigProvider,
       { abstract: true, inlineThemeDisabled: true },
@@ -116,10 +116,11 @@ export default defineConfig({
   },
   transformHtml(code, id) {
     const html = id.split('/').pop()
-    if (!html) return
+    if (!html)
+      return
     const style = fileAndStyles[`/${html}`]
     if (style) {
-      return code.replace(/<\/head>/, style + '</head>')
+      return code.replace(/<\/head>/, `${style}</head>`)
     }
   }
 })

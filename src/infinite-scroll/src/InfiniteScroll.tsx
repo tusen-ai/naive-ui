@@ -32,17 +32,14 @@ export default defineComponent({
         const scrollHeight = containerRef?.scrollHeight
         const clientHeight = containerRef?.clientHeight
         const scrollTop = containerRef?.scrollTop
-        
+
         if (
-          containerRef &&
-          scrollHeight !== undefined &&
-          clientHeight !== undefined &&
-          scrollTop !== undefined
+          containerRef
+          && scrollHeight !== undefined
+          && clientHeight !== undefined
+          && scrollTop !== undefined
         ) {
-          if (
-            scrollTop + clientHeight >=
-            scrollHeight - props.distance
-          ) {
+          if (scrollTop + clientHeight >= scrollHeight - props.distance) {
             loading = true
             try {
               await props.onLoad?.()
