@@ -21,10 +21,10 @@ import { useLoadingBar } from 'naive-ui'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const loadingBar = useLoadingBar()
     return {
-      loading () {
+      loading() {
         loadingBar.start()
       }
     }

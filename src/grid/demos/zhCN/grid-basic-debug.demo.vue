@@ -1,7 +1,19 @@
 <markdown>
 # Grid Basic
-
 </markdown>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const collapsedRef = ref(true)
+    return {
+      collapsed: collapsedRef
+    }
+  }
+})
+</script>
 
 <template>
   <n-grid
@@ -103,19 +115,6 @@
     </n-grid-item>
   </n-grid>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const collapsedRef = ref(true)
-    return {
-      collapsed: collapsedRef
-    }
-  }
-})
-</script>
 
 <style>
 .light-green {

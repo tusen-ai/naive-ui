@@ -2,6 +2,18 @@
 # Dark Debug 2
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      modalActive: false
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="modalActive = !modalActive">
     Toggle
@@ -255,15 +267,3 @@
     </n-descriptions>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      modalActive: false
-    }
-  }
-})
-</script>

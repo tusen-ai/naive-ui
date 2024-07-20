@@ -1,5 +1,5 @@
-import { type CheckStrategy, type TreeNode } from 'treemate'
-import { type HTMLAttributes, type Ref, type VNodeChild } from 'vue'
+import type { CheckStrategy, TreeNode } from 'treemate'
+import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -136,7 +136,7 @@ export interface TreeInjection {
   disabledFieldRef: Ref<string>
   showLineRef: Ref<boolean>
   overrideDefaultNodeClickBehaviorRef: Ref<
-  TreeOverrideNodeClickBehavior | undefined
+    TreeOverrideNodeClickBehavior | undefined
   >
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void

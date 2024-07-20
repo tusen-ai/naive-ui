@@ -4,47 +4,13 @@
 I've found that people often want to make a people picker. Here is an example that shows you how that can be done with a select.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-select
-      :options="options"
-      :render-label="renderLabel"
-      :render-tag="renderSingleSelectTag"
-    />
-    <n-select
-      :options="options"
-      :render-label="renderLabel"
-      :render-tag="renderSingleSelectTag"
-      filterable
-    />
-    <n-select
-      multiple
-      :options="options"
-      :render-label="renderLabel"
-      :render-tag="renderMultipleSelectTag"
-    />
-    <n-select
-      multiple
-      :options="options"
-      :render-label="renderLabel"
-      :render-tag="renderMultipleSelectTag"
-      filterable
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import {
-  NAvatar,
-  NText,
-  NTag,
-  SelectRenderTag,
-  SelectRenderLabel
-} from 'naive-ui'
+import type { SelectRenderLabel, SelectRenderTag } from 'naive-ui'
+import { NAvatar, NTag, NText } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderMultipleSelectTag: SelectRenderTag = ({
       option,
       handleClose
@@ -168,3 +134,32 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-select
+      :options="options"
+      :render-label="renderLabel"
+      :render-tag="renderSingleSelectTag"
+    />
+    <n-select
+      :options="options"
+      :render-label="renderLabel"
+      :render-tag="renderSingleSelectTag"
+      filterable
+    />
+    <n-select
+      multiple
+      :options="options"
+      :render-label="renderLabel"
+      :render-tag="renderMultipleSelectTag"
+    />
+    <n-select
+      multiple
+      :options="options"
+      :render-label="renderLabel"
+      :render-tag="renderMultipleSelectTag"
+      filterable
+    />
+  </n-space>
+</template>

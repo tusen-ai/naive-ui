@@ -83,9 +83,9 @@ import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import { watermarkDark } from '../watermark/styles'
 import { splitDark } from '../split/styles'
-import type { BuiltInGlobalTheme } from './interface'
 import { flexDark } from '../styles'
 import { floatButtonGroupDark } from '../float-button-group/styles'
+import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',

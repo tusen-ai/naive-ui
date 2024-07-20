@@ -4,28 +4,16 @@
 设定 `cascade` 进行级联选择。
 </markdown>
 
-<template>
-  <n-tree
-    block-line
-    cascade
-    checkable
-    :selectable="false"
-    :data="data"
-    :default-expanded-keys="defaultExpandedKeys"
-    :default-checked-keys="defaultCheckedKeys"
-    @update:checked-keys="updateCheckedKeys"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { repeat } from 'seemly'
-import { TreeOption } from 'naive-ui'
+import type { TreeOption } from 'naive-ui'
 
-function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
-  if (!level) return undefined
+function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
+  if (!level)
+    return undefined
   return repeat(6 - level, undefined).map((_, index) => {
-    const key = '' + baseKey + level + index
+    const key = `${baseKey}${level}${index}`
     return {
       label: createLabel(level),
       key,
@@ -34,16 +22,20 @@ function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   })
 }
 
-function createLabel (level: number): string {
-  if (level === 4) return '道生一'
-  if (level === 3) return '一生二'
-  if (level === 2) return '二生三'
-  if (level === 1) return '三生万物'
+function createLabel(level: number): string {
+  if (level === 4)
+    return '道生一'
+  if (level === 3)
+    return '一生二'
+  if (level === 2)
+    return '二生三'
+  if (level === 1)
+    return '三生万物'
   return ''
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: createData(),
       defaultExpandedKeys: ref(['40', '4030', '403020']),
@@ -62,3 +54,16 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree
+    block-line
+    cascade
+    checkable
+    :selectable="false"
+    :data="data"
+    :default-expanded-keys="defaultExpandedKeys"
+    :default-checked-keys="defaultCheckedKeys"
+    @update:checked-keys="updateCheckedKeys"
+  />
+</template>

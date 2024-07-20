@@ -1,8 +1,7 @@
 import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self() {
   return {
     dotSize: '8px',
     dotColor: 'rgba(255, 255, 255, .3)',

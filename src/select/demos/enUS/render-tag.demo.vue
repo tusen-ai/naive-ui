@@ -4,21 +4,13 @@
 Give the tag a little color.
 </markdown>
 
-<template>
-  <n-select
-    v-model:value="value"
-    multiple
-    :render-tag="renderTag"
-    :options="options"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { NTag, SelectRenderTag } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import type { SelectRenderTag } from 'naive-ui'
+import { NTag } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderTag: SelectRenderTag = ({ option, handleClose }) => {
       return h(
         NTag,
@@ -60,3 +52,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select
+    v-model:value="value"
+    multiple
+    :render-tag="renderTag"
+    :options="options"
+  />
+</template>

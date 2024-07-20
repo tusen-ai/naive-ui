@@ -1,15 +1,15 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  type PropType,
   type CSSProperties,
-  ref,
+  type ExtractPropTypes,
+  type PropType,
+  computed,
+  defineComponent,
+  h,
   provide,
-  type ExtractPropTypes
+  ref
 } from 'vue'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
+import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { createInjectionKey, useReactivated } from '../../_utils'
@@ -43,18 +43,17 @@ export const layoutProps = {
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey =
-  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
+export const layoutInjectionKey
+  = createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function createLayoutComponent (isContent: boolean) {
+export function createLayoutComponent(isContent: boolean) {
   return defineComponent({
     name: isContent ? 'LayoutContent' : 'Layout',
     props: {
       ...(useTheme.props as ThemeProps<LayoutTheme>),
       ...layoutProps
     },
-    setup (props) {
+    setup(props) {
       const scrollableElRef = ref<HTMLElement | null>(null)
       const scrollbarInstRef = ref<ScrollbarInst | null>(null)
       const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
@@ -66,24 +65,23 @@ export function createLayoutComponent (isContent: boolean) {
         props,
         mergedClsPrefixRef
       )
-      function scrollTo (options: ScrollToOptions): void
-      function scrollTo (x: number, y: number): void
-      function scrollTo (options: ScrollToOptions | number, y?: number): void {
+      function scrollTo(options: ScrollToOptions): void
+      function scrollTo(x: number, y: number): void
+      function scrollTo(options: ScrollToOptions | number, y?: number): void {
         if (props.nativeScrollbar) {
           const { value: scrollableEl } = scrollableElRef
           if (scrollableEl) {
             if (y === undefined) {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               scrollableEl.scrollTo(options as any)
-            } else {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            }
+            else {
               scrollableEl.scrollTo(options as any, y as any)
             }
           }
-        } else {
+        }
+        else {
           const { value: scrollbarInst } = scrollbarInstRef
           if (scrollbarInst) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             scrollbarInst.scrollTo(options as any, y as any)
           }
         }
@@ -149,7 +147,7 @@ export function createLayoutComponent (isContent: boolean) {
         ...exposedMethods
       }
     },
-    render () {
+    render() {
       const { mergedClsPrefix, hasSider } = this
       this.onRender?.()
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined

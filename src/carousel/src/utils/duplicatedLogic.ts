@@ -7,7 +7,7 @@
 import { cloneVNode } from 'vue'
 import type { VNode } from 'vue'
 
-export function addDuplicateSlides (slides: VNode[]): VNode[] {
+export function addDuplicateSlides(slides: VNode[]): VNode[] {
   const { length } = slides
   if (length > 1) {
     slides.push(duplicateSlide(slides[0], 0, 'append'))
@@ -17,7 +17,7 @@ export function addDuplicateSlides (slides: VNode[]): VNode[] {
   return slides
 }
 
-function duplicateSlide (
+function duplicateSlide(
   child: VNode,
   index: number,
   position: 'prepend' | 'append'
@@ -28,12 +28,13 @@ function duplicateSlide (
   })
 }
 
-export function getDisplayIndex (
+export function getDisplayIndex(
   current: number,
   length: number,
   duplicatedable: boolean
 ): number {
-  if (length === 1) return 0
+  if (length === 1)
+    return 0
   return !duplicatedable
     ? current
     : current === 0
@@ -43,32 +44,34 @@ export function getDisplayIndex (
         : current - 1
 }
 
-export function getRealIndex (
+export function getRealIndex(
   current: number,
   duplicatedable?: boolean
 ): number {
   return !duplicatedable ? current : current + 1
 }
 
-export function getPrevIndex (
+export function getPrevIndex(
   current: number,
   length: number,
   duplicatedable?: boolean
 ): number | null {
-  if (current < 0) return null
+  if (current < 0)
+    return null
   return current === 0 ? (duplicatedable ? length - 1 : null) : current - 1
 }
 
-export function getNextIndex (
+export function getNextIndex(
   current: number,
   length: number,
   duplicatedable?: boolean
 ): number | null {
-  if (current > length - 1) return null
+  if (current > length - 1)
+    return null
   return current === length - 1 ? (duplicatedable ? 0 : null) : current + 1
 }
 
-export function getDisplayTotalView (
+export function getDisplayTotalView(
   total: number,
   duplicatedable?: boolean
 ): number {

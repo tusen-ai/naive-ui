@@ -4,18 +4,12 @@
 Bind whatever you want.
 </markdown>
 
-<template>
-  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <n-button> Go For a Trip </n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options: [
@@ -29,8 +23,8 @@ export default defineComponent({
           }
         },
         {
-          label: "Brown's Hotel, London",
-          key: "brown's hotel, london",
+          label: 'Brown\'s Hotel, London',
+          key: 'brown\'s hotel, london',
           children: [
             {
               label: 'Chicken',
@@ -58,10 +52,16 @@ export default defineComponent({
           }
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <n-button> Go For a Trip </n-button>
+  </n-dropdown>
+</template>

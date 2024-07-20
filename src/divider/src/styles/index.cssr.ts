@@ -1,4 +1,4 @@
-import { cB, cNotM, cE, cM } from '../../../_utils/cssr'
+import { cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier

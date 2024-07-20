@@ -9,7 +9,7 @@ interface FadeInWidthExpandTransition {
   delay?: string
 }
 
-export function fadeInWidthExpandTransition ({
+export function fadeInWidthExpandTransition({
   duration = '.2s',
   delay = '.1s'
 }: FadeInWidthExpandTransition = {}): CNode[] {

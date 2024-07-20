@@ -6,23 +6,12 @@ Provided since `2.38.0`.
 You can use `useModal.create` to create a modal. (Please make sure this API is called inside `n-modal-provider`.)
 </markdown>
 
-<template>
-  <n-flex>
-    <n-button @click="showDialogPreset">
-      Start me up Dialog
-    </n-button>
-    <n-button @click="showCardPreset">
-      Start me up Card
-    </n-button>
-  </n-flex>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useModal, useMessage, NButton } from 'naive-ui'
+import { NButton, useMessage, useModal } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const modal = useModal()
     const message = useMessage()
 
@@ -60,3 +49,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-flex>
+    <n-button @click="showDialogPreset">
+      Start me up Dialog
+    </n-button>
+    <n-button @click="showCardPreset">
+      Start me up Card
+    </n-button>
+  </n-flex>
+</template>

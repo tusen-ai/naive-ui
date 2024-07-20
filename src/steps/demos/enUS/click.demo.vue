@@ -4,6 +4,19 @@
 If `@update:current` is set, you can switch step by click.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const currentRef = ref<number | undefined>(1)
+    return {
+      current: currentRef
+    }
+  }
+})
+</script>
+
 <template>
   <n-steps v-model:current="current">
     <n-step
@@ -25,16 +38,3 @@ If `@update:current` is set, you can switch step by click.
     />
   </n-steps>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const currentRef = ref<number | undefined>(1)
-    return {
-      current: currentRef
-    }
-  }
-})
-</script>

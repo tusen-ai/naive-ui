@@ -1,6 +1,6 @@
 import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
-import { type VirtualListInst } from 'vueuc'
-import type { NLocale, NDateLocale } from '../../locales'
+import type { VirtualListInst } from 'vueuc'
+import type { NDateLocale, NLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
 import type {
   IsHourDisabled,
@@ -12,9 +12,10 @@ import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
 import type {
-  uniCalendarValidation,
-  dualCalendarValidation
+  dualCalendarValidation,
+  uniCalendarValidation
 } from './validation-utils'
+import { type ButtonProps } from '../../button'
 
 export type Value = number | [number, number]
 
@@ -22,13 +23,22 @@ export type DefaultTime = string | [string | undefined, string | undefined]
 
 export type FormattedValue = string | [string, string]
 
+export type NowButtonProps = Pick<ButtonProps, 'size' | 'onClick'>
+
+export type ClearButtonProps = Pick<ButtonProps, 'size' | 'onClick'>
+
+export type ConfirmButtonProps = Pick<
+ButtonProps,
+'size' | 'onClick' | 'type' | 'disabled'
+>
+
 export type Shortcuts =
   | Record<string, number | (() => number)>
   | Record<
-  string,
-  | [number, number]
-  | readonly [number, number]
-  | (() => [number, number] | readonly [number, number])
+    string,
+    | [number, number]
+    | readonly [number, number]
+    | (() => [number, number] | readonly [number, number])
   >
 
 export type OnUpdateValue = (
@@ -100,7 +110,7 @@ export interface PanelChildComponentRefs {
 
 export interface PanelRef
   extends Partial<
-  UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+    UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
   > {
   $el: HTMLElement
 }
@@ -113,7 +123,7 @@ export type DatePickerInjection = {
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
   timePickerPropsRef: Ref<
-  undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
+    undefined | TimePickerProps | [TimePickerProps, TimePickerProps]
   >
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
@@ -129,8 +139,8 @@ export type DatePickerInjection = {
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
-export const datePickerInjectionKey =
-  createInjectionKey<DatePickerInjection>('n-date-picker')
+export const datePickerInjectionKey
+  = createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 

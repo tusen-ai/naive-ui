@@ -1,7 +1,7 @@
-import { h, defineComponent, type PropType, ref } from 'vue'
+import { type PropType, defineComponent, h, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { resolveSlot } from '../../_utils'
-import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
 
 export const infiniteScrollProps = {
@@ -20,7 +20,7 @@ export type InfiniteScrollProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'InfiniteScroll',
   props: infiniteScrollProps,
-  setup (props) {
+  setup(props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
 
     let loading = false
@@ -28,22 +28,26 @@ export default defineComponent({
     const handleCheckBottom = async (): Promise<void> => {
       const { value: scrollbarInst } = scrollbarInstRef
       if (scrollbarInst) {
-        const { containerRef, containerScrollTop } = scrollbarInst
+        const { containerRef } = scrollbarInst
         const scrollHeight = containerRef?.scrollHeight
         const clientHeight = containerRef?.clientHeight
+        const scrollTop = containerRef?.scrollTop
+        
         if (
           containerRef &&
           scrollHeight !== undefined &&
-          clientHeight !== undefined
+          clientHeight !== undefined &&
+          scrollTop !== undefined
         ) {
           if (
-            containerScrollTop + clientHeight >=
+            scrollTop + clientHeight >=
             scrollHeight - props.distance
           ) {
             loading = true
             try {
               await props.onLoad?.()
-            } catch {}
+            }
+            catch {}
             loading = false
           }
         }
@@ -51,13 +55,16 @@ export default defineComponent({
     }
 
     const handleScroll = (): void => {
-      if (loading) return
+      if (loading)
+        return
       void handleCheckBottom()
     }
 
     const handleWheel = (e: WheelEvent): void => {
-      if (e.deltaY <= 0) return
-      if (loading) return
+      if (e.deltaY <= 0)
+        return
+      if (loading)
+        return
       void handleCheckBottom()
     }
 
@@ -67,7 +74,7 @@ export default defineComponent({
       handleWheel
     }
   },
-  render () {
+  render() {
     return (
       <NxScrollbar
         {...this.scrollbarProps}

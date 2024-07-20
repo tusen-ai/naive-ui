@@ -4,7 +4,7 @@ import type { FloatButtonTheme } from './light'
 const floatButtonDark: FloatButtonTheme = {
   name: 'FloatButton',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       popoverColor,
       textColor2,

@@ -1,4 +1,4 @@
-import { c, cB, cNotM, cM } from '../../../_utils/cssr'
+import { c, cB, cM, cNotM } from '../../../_utils/cssr'
 
 export default c([
   cB('watermark-container', `

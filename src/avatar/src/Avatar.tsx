@@ -1,16 +1,16 @@
 import {
-  h,
-  ref,
+  type ImgHTMLAttributes,
+  type PropType,
+  type VNodeChild,
   computed,
   defineComponent,
-  type PropType,
+  h,
   inject,
-  type VNodeChild,
-  watchEffect,
-  onMounted,
   onBeforeUnmount,
-  type ImgHTMLAttributes,
-  watch
+  onMounted,
+  ref,
+  watch,
+  watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
@@ -22,16 +22,16 @@ import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  createKey,
   color2Class,
-  resolveWrappedSlot,
-  resolveSlot
+  createKey,
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { avatarLight } from '../styles'
 import type { AvatarTheme } from '../styles'
 import { avatarGroupInjectionKey } from './context'
-import type { Size, ObjectFit } from './interface'
+import type { ObjectFit, Size } from './interface'
 import style from './styles/index.cssr'
 
 export const avatarProps = {
@@ -68,7 +68,7 @@ export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 export default defineComponent({
   name: 'Avatar',
   props: avatarProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const hasLoadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
@@ -97,9 +97,11 @@ export default defineComponent({
     const NAvatarGroup = inject(avatarGroupInjectionKey, null)
     const mergedSizeRef = computed(() => {
       const { size } = props
-      if (size) return size
+      if (size)
+        return size
       const { size: avatarGroupSize } = NAvatarGroup || {}
-      if (avatarGroupSize) return avatarGroupSize
+      if (avatarGroupSize)
+        return avatarGroupSize
       return 'medium'
     })
     const themeRef = useTheme(
@@ -112,16 +114,19 @@ export default defineComponent({
     )
     const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
-      if (NAvatarGroup) return true
+      if (NAvatarGroup)
+        return true
       const { round, circle } = props
-      if (round !== undefined || circle !== undefined) return round || circle
+      if (round !== undefined || circle !== undefined)
+        return round || circle
       if (TagInjection) {
         return TagInjection.roundRef.value
       }
       return false
     })
     const mergedBorderedRef = computed(() => {
-      if (NAvatarGroup) return true
+      if (NAvatarGroup)
+        return true
       return props.bordered || false
     })
     const cssVarsRef = computed(() => {
@@ -143,7 +148,8 @@ export default defineComponent({
       let height: string
       if (typeof size === 'number') {
         height = `${size}px`
-      } else {
+      }
+      else {
         height = themeRef.value.self[createKey('height', size)]
       }
       return {
@@ -169,7 +175,8 @@ export default defineComponent({
           if (size) {
             if (typeof size === 'number') {
               hash += `a${size}`
-            } else {
+            }
+            else {
               hash += size[0]
             }
           }
@@ -235,7 +242,8 @@ export default defineComponent({
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value) return
+        if (!shouldStartLoadingRef.value)
+          return
         hasLoadErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
@@ -249,7 +257,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       src,
@@ -262,10 +270,10 @@ export default defineComponent({
     } = this
     onRender?.()
     let img: VNodeChild
-    const placeholderNode =
-      !loaded &&
-      !hasLoadError &&
-      (this.renderPlaceholder
+    const placeholderNode
+      = !loaded
+      && !hasLoadError
+      && (this.renderPlaceholder
         ? this.renderPlaceholder()
         : this.$slots.placeholder?.())
 
@@ -273,9 +281,10 @@ export default defineComponent({
       img = this.renderFallback
         ? this.renderFallback()
         : resolveSlot($slots.fallback, () => [
-            <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+          <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
         ])
-    } else {
+    }
+    else {
       img = resolveWrappedSlot($slots.default, (children) => {
         if (children) {
           return (
@@ -289,15 +298,16 @@ export default defineComponent({
               }}
             </VResizeObserver>
           )
-        } else if (src || imgProps.src) {
+        }
+        else if (src || imgProps.src) {
           const loadSrc = this.src || imgProps.src
           return h('img', {
             ...imgProps,
             loading:
               // If interseciton observer options is set, do not use native lazy
-              isImageSupportNativeLazy &&
-              !this.intersectionObserverOptions &&
-              lazy
+              isImageSupportNativeLazy
+              && !this.intersectionObserverOptions
+              && lazy
                 ? 'lazy'
                 : 'eager',
             src:

@@ -4,19 +4,8 @@
 弄个选项组。
 </markdown>
 
-<template>
-  <n-dropdown
-    :options="options"
-    placement="bottom-start"
-    trigger="click"
-    @select="handleSelect"
-  >
-    <n-button>里面有组</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
@@ -32,7 +21,7 @@ const options = [
       },
       {
         label: '黛西·布坎南',
-        icon () {
+        icon() {
           return h(NIcon, null, {
             default: () => h(CashIcon)
           })
@@ -80,14 +69,25 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options,
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    @select="handleSelect"
+  >
+    <n-button>里面有组</n-button>
+  </n-dropdown>
+</template>

@@ -2,6 +2,54 @@
 # Work with form
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { FormInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const formInstRef = ref<FormInst | null>(null)
+    const formModelRef = ref({
+      cool: '',
+      veryCool: ''
+    })
+    const rules = {
+      cool: {
+        trigger: ['input', 'blur'],
+        required: true,
+        message: 'Cool is required'
+      },
+      veryCool: {
+        trigger: ['input', 'blur'],
+        validator() {
+          if (!formModelRef.value.veryCool.includes('@07akioni')) {
+            return new Error('07akioni should be very cool!')
+          }
+        }
+      }
+    }
+    return {
+      formModel: formModelRef,
+      formInstRef,
+      rules,
+      options: [
+        {
+          label: '07akioni',
+          value: '07akioni'
+        },
+        {
+          label: 'star-kirby',
+          value: 'star-kirby'
+        }
+      ],
+      handleButtonClick() {
+        formInstRef.value?.validate()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-form ref="formInstRef" :model="formModel" :rules="rules">
@@ -21,51 +69,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FormInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const formInstRef = ref<FormInst | null>(null)
-    const formModelRef = ref({
-      cool: '',
-      veryCool: ''
-    })
-    const rules = {
-      cool: {
-        trigger: ['input', 'blur'],
-        required: true,
-        message: 'Cool is required'
-      },
-      veryCool: {
-        trigger: ['input', 'blur'],
-        validator () {
-          if (!formModelRef.value.veryCool.includes('@07akioni')) {
-            return Error('07akioni should be very cool!')
-          }
-        }
-      }
-    }
-    return {
-      formModel: formModelRef,
-      formInstRef,
-      rules,
-      options: [
-        {
-          label: '07akioni',
-          value: '07akioni'
-        },
-        {
-          label: 'star-kirby',
-          value: 'star-kirby'
-        }
-      ],
-      handleButtonClick () {
-        formInstRef.value?.validate()
-      }
-    }
-  }
-})
-</script>

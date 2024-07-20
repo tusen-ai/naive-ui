@@ -1,54 +1,54 @@
 import {
-  h,
-  defineComponent,
-  ref,
-  computed,
-  type PropType,
-  toRef,
-  watchEffect,
-  type VNode,
-  withDirectives,
-  Transition,
   type CSSProperties,
-  provide,
+  type PropType,
   type Ref,
+  Transition,
+  type VNode,
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  provide,
+  ref,
+  toRef,
   watch,
-  nextTick
+  watchEffect,
+  withDirectives
 } from 'vue'
 import {
-  hsv2rgb,
-  rgb2hsv,
-  rgba,
-  hsva,
-  hsla,
-  hsl2hsv,
-  hsv2hsl,
-  rgb2hsl,
-  hsl2rgb,
-  toRgbaString,
-  toHsvaString,
-  toHslaString,
+  type HSLA,
   type HSVA,
   type RGBA,
-  type HSLA,
-  toHexaString,
-  toHsvString,
-  toRgbString,
+  getPreciseEventTarget,
+  hsl2hsv,
+  hsl2rgb,
+  hsla,
+  hsv2hsl,
+  hsv2rgb,
+  hsva,
+  rgb2hsl,
+  rgb2hsv,
+  rgba,
   toHexString,
+  toHexaString,
   toHslString,
-  getPreciseEventTarget
+  toHslaString,
+  toHsvString,
+  toHsvaString,
+  toRgbString,
+  toRgbaString
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { VBinder, VFollower, VTarget, type FollowerPlacement } from 'vueuc'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'
 import {
   type ThemeProps,
-  useFormItem,
   useConfig,
-  useTheme,
+  useFormItem,
   useLocale,
+  useTheme,
   useThemeClass
 } from '../../_mixins'
 import { call, createKey, useAdjustedTo } from '../../_utils'
@@ -60,8 +60,9 @@ import Pallete from './Pallete'
 import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
-import type { ColorPickerMode, ActionType } from './utils'
+import type { ActionType, ColorPickerMode } from './utils'
 import type {
+  OnClear,
   OnConfirmImpl,
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -110,11 +111,12 @@ export const colorPickerProps = {
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
   onConfirm: Function as PropType<OnUpdateValue>,
+  onClear: Function as PropType<OnClear>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
@@ -125,15 +127,15 @@ export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
 
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -155,10 +157,12 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) call(onUpdateShow, value)
-      if (_onUpdateShow) call(_onUpdateShow, value)
+      if (onUpdateShow)
+        call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
 
@@ -183,13 +187,14 @@ export default defineComponent({
       getModeFromValue(mergedValueRef.value) || modes[0] || 'rgb'
     )
 
-    function handleUpdateDisplayedMode (): void {
+    function handleUpdateDisplayedMode(): void {
       const { modes } = props
       const { value: displayedMode } = displayedModeRef
-      const currentModeIndex = modes.findIndex((mode) => mode === displayedMode)
+      const currentModeIndex = modes.findIndex(mode => mode === displayedMode)
       if (~currentModeIndex) {
         displayedModeRef.value = modes[(currentModeIndex + 1) % modes.length]
-      } else {
+      }
+      else {
         displayedModeRef.value = 'rgb'
       }
     }
@@ -205,8 +210,8 @@ export default defineComponent({
 
     const hsvaRef = computed<HSVA | null>(() => {
       const { value: mergedValue } = mergedValueRef
-      if (!mergedValue) return null
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (!mergedValue)
+        return null
       switch (valueModeRef.value!) {
         case 'hsv':
           return hsva(mergedValue)
@@ -222,8 +227,8 @@ export default defineComponent({
 
     const rgbaRef = computed<RGBA | null>(() => {
       const { value: mergedValue } = mergedValueRef
-      if (!mergedValue) return null
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (!mergedValue)
+        return null
       switch (valueModeRef.value!) {
         case 'rgb':
         case 'hex':
@@ -239,8 +244,8 @@ export default defineComponent({
 
     const hslaRef = computed<HSLA | null>(() => {
       const { value: mergedValue } = mergedValueRef
-      if (!mergedValue) return null
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (!mergedValue)
+        return null
       switch (valueModeRef.value!) {
         case 'hsl':
           return hsla(mergedValue)
@@ -270,7 +275,7 @@ export default defineComponent({
     const displayedAlphaRef = ref<number>(1)
     const displayedSvRef = ref<[number, number]>([0, 0])
 
-    function handleUpdateSv (s: number, v: number): void {
+    function handleUpdateSv(s: number, v: number): void {
       const { value: hsvaArr } = hsvaRef
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
@@ -313,7 +318,7 @@ export default defineComponent({
       }
     }
 
-    function handleUpdateHue (hue: number): void {
+    function handleUpdateHue(hue: number): void {
       displayedHueRef.value = hue
       const { value: hsvaArr } = hsvaRef
       if (!hsvaArr) {
@@ -358,25 +363,21 @@ export default defineComponent({
       }
     }
 
-    function handleUpdateAlpha (alpha: number): void {
+    function handleUpdateAlpha(alpha: number): void {
       switch (displayedModeRef.value) {
         case 'hsv':
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[_h, s, v] = hsvaRef.value!
           doUpdateValue(toHsvaString([_h, s, v, alpha]), 'cursor')
           break
         case 'rgb':
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[r, g, b] = rgbaRef.value!
           doUpdateValue(toRgbaString([r, g, b, alpha]), 'cursor')
           break
         case 'hex':
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[r, g, b] = rgbaRef.value!
           doUpdateValue(toHexaString([r, g, b, alpha]), 'cursor')
           break
         case 'hsl':
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ;[_h, s, l] = hslaRef.value!
           doUpdateValue(toHslaString([_h, s, l, alpha]), 'cursor')
           break
@@ -384,30 +385,33 @@ export default defineComponent({
       displayedAlphaRef.value = alpha
     }
 
-    function doUpdateValue (
+    function doUpdateValue(
       value: string | null,
       updateSource: 'cursor' | 'input'
     ): void {
       if (updateSource === 'cursor') {
         upcomingValue = value
-      } else {
+      }
+      else {
         upcomingValue = null
       }
       const { nTriggerFormChange, nTriggerFormInput } = formItem
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
       nTriggerFormChange()
       nTriggerFormInput()
       uncontrolledValueRef.value = value
     }
 
-    function handleInputUpdateValue (value: string): void {
+    function handleInputUpdateValue(value: string): void {
       doUpdateValue(value, 'input')
       void nextTick(handleComplete)
     }
 
-    function handleComplete (pushStack: boolean = true): void {
+    function handleComplete(pushStack: boolean = true): void {
       const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
@@ -427,28 +431,34 @@ export default defineComponent({
       }
     }
 
-    function undo (): void {
+    function undo(): void {
       const { value: valueIndex } = valueIndexRef
-      if (valueIndex - 1 < 0) return
+      if (valueIndex - 1 < 0)
+        return
       doUpdateValue(undoStackRef.value[valueIndex - 1], 'input')
       handleComplete(false)
       valueIndexRef.value = valueIndex - 1
     }
 
-    function redo (): void {
+    function redo(): void {
       const { value: valueIndex } = valueIndexRef
-      if (valueIndex < 0 || valueIndex + 1 >= undoStackRef.value.length) return
+      if (valueIndex < 0 || valueIndex + 1 >= undoStackRef.value.length)
+        return
       doUpdateValue(undoStackRef.value[valueIndex + 1], 'input')
       handleComplete(false)
       valueIndexRef.value = valueIndex + 1
     }
 
-    function handleClear (): void {
+    function handleClear(): void {
       doUpdateValue(null, 'input')
+      const { onClear } = props
+      if (onClear) {
+        onClear()
+      }
       doUpdateShow(false)
     }
 
-    function handleConfirm (): void {
+    function handleConfirm(): void {
       const { value } = mergedValueRef
       const { onConfirm } = props
       if (onConfirm) {
@@ -473,7 +483,8 @@ export default defineComponent({
     watchEffect(() => {
       if (upcomingValue && upcomingValue === mergedValueRef.value) {
         // let it works in uncontrolled mode
-      } else {
+      }
+      else {
         const { value } = hsvaRef
         if (value) {
           displayedHueRef.value = value[0]
@@ -524,7 +535,7 @@ export default defineComponent({
       )
       : undefined
 
-    function renderPanel (): VNode {
+    function renderPanel(): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedHue } = displayedHueRef
       const { internalActions, modes, actions } = props
@@ -674,10 +685,10 @@ export default defineComponent({
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       mergedValue: mergedValueRef,
-      handleTriggerClick () {
+      handleTriggerClick() {
         doUpdateShow(true)
       },
-      handleClickOutside (e: MouseEvent) {
+      handleClickOutside(e: MouseEvent) {
         if (selfRef.value?.contains(getPreciseEventTarget(e) as Node | null)) {
           return
         }
@@ -689,7 +700,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, onRender } = this
     onRender?.()
     return (

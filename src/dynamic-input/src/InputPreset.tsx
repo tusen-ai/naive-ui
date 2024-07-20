@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { NInput } from '../../input'
 import { dynamicInputInjectionKey } from './interface'
 
@@ -21,18 +21,14 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    const {
-      mergedThemeRef,
-      placeholderRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(dynamicInputInjectionKey)!
+  setup() {
+    const { mergedThemeRef, placeholderRef } = inject(dynamicInputInjectionKey)!
     return {
       mergedTheme: mergedThemeRef,
       placeholder: placeholderRef
     }
   },
-  render () {
+  render() {
     const {
       mergedTheme,
       placeholder,

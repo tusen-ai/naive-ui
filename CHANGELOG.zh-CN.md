@@ -1,5 +1,48 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+- 修复 `n-infinite-scroll` 组件触底判断错误，关闭 [#6133](https://github.com/tusen-ai/naive-ui/issues/6133)
+- 修复 `n-slider` 在垂直模式下的宽度样式可能会被全局 CSS box-sizing override 影响，关闭[#6114](https://github.com/tusen-ai/naive-ui/issues/6114)
+- 修复 `n-tabs` 在垂直模式下使用 `prefix` slot、`suffix` slot 和 `addable` 属性的时候可能出现样式问题，关闭 [#6059](https://github.com/tusen-ai/naive-ui/issues/6059)，[#6060](https://github.com/tusen-ai/naive-ui/pull/6060)
+
+### Features
+
+- `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性， 关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
+- `n-date-picker` 新增 `clear` `now` `confirm` 插槽，关闭 [#6013](https://github.com/tusen-ai/naive-ui/issues/6013)
+- `n-upload` 新增 `on-retry`属性，关闭 [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
+
+## 2.39.0
+
+`2024-07-15`
+
+### Breaking Changes
+
+- 修复 `n-input-number` precision 模式下 value 为字符串时的异常问题，关闭 [#6091](https://github.com/tusen-ai/naive-ui/issues/6091)
+
+### Fixes
+
+- 修复 `n-form-item` 状态更新不正常 [#6068](https://github.com/tusen-ai/naive-ui/issues/6068)
+- 修复 `n-select` 组件的 header 插槽里 input 无法输入，关闭 [#6030](https://github.com/tusen-ai/naive-ui/issues/6030)
+- 修复 `n-tree` 组件在禁用 `show-irrelevant-nodes` 时，节点的选中状态可能不正确，关闭 [#6115](https://github.com/tusen-ai/naive-ui/issues/6115)
+
+### Features
+
+- `n-data-table` 新增 `filter-icon-popover-props` 属性，关闭 [#6111](https://github.com/tusen-ai/naive-ui/issues/6111)
+- `n-input-number` 新增 `round` 属性，关闭 [#6097](https://github.com/tusen-ai/naive-ui/issues/6097)
+- `n-color-picker` 新增 `on-clear` 属性
+- `n-upload` 的 `on-preview` 属性新增 `detail.event` 参数，你可以通过 `preventDefault` 来取消默认的链接打开行为，关闭 [#6036](https://github.com/tusen-ai/naive-ui/issues/6036)
+- `n-data-table` 新增 `thColorSorting`、`thColorSortingModal`、`thColorSortingPopover`、`tdColorSorting`、`tdColorSortingModal` 和 `tdColorSortingPopover` 主题变量，关闭 [#6118](https://github.com/tusen-ai/naive-ui/issues/6118)、 [#6120](https://github.com/tusen-ai/naive-ui/issues/6120)
+
+### i18n
+
+- 新增 azAZ 国际化
+- 新增 uzUZ 国际化
+
 ## 2.38.2
 
 `2024-05-03`

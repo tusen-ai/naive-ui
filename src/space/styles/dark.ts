@@ -3,7 +3,7 @@ import type { SpaceTheme } from './light'
 
 const spaceDark: SpaceTheme = {
   name: 'Space',
-  self () {
+  self() {
     return commonVars
   }
 }

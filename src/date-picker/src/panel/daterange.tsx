@@ -3,18 +3,19 @@ import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
   FastBackwardIcon,
-  ForwardIcon,
-  FastForwardIcon
+  FastForwardIcon,
+  ForwardIcon
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, warnOnce } from '../../../_utils'
 import PanelHeader from './panelHeader'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import { type ClearButtonProps, type ConfirmButtonProps } from '../interface'
 
 export default defineComponent({
   name: 'DateRangePanel',
   props: useDualCalendarProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('now')) {
@@ -27,9 +28,22 @@ export default defineComponent({
     }
     return useDualCalendar(props, 'daterange')
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots } = this
     onRender?.()
+
+    const clearButtonProps: ClearButtonProps = {
+      size: 'tiny',
+      onClick: this.handleClearClick
+    }
+
+    const confirmButtonProps: ConfirmButtonProps = {
+      size: 'tiny',
+      type: 'primary',
+      disabled: this.isRangeInvalid || this.isSelecting,
+      onClick: this.handleConfirmClick
+    }
+
     return (
       <div
         ref="selfRef"
@@ -82,7 +96,7 @@ export default defineComponent({
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -172,7 +186,7 @@ export default defineComponent({
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -230,47 +244,47 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
-                    typeof shortcut === 'function' ? (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                      ) : null
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut)
+                  || typeof shortcut === 'function' ? (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.handleRangeShortcutMouseenter(shortcut)
+                        }}
+                        onClick={() => {
+                          this.handleRangeShortcutClick(shortcut)
+                        }}
+                        onMouseleave={() => {
+                          this.handleShortcutMouseleave()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    ) : null
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {this.$slots.clear ? (
+                this.$slots.clear(clearButtonProps)
+              ) : this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
+                  {...clearButtonProps}
                 >
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {this.$slots.confirm ? (
+                this.$slots.confirm(confirmButtonProps)
+              ) : this.actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid || this.isSelecting}
-                  onClick={this.handleConfirmClick}
+                  {...confirmButtonProps}
                 >
                   {{ default: () => this.locale.confirm }}
                 </NButton>

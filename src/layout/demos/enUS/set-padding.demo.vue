@@ -32,6 +32,7 @@ If you still want to do so, please make sure you know about their DOM structure.
     </n-layout>
   </n-space>
 </template>
+
 <style>
 .n-layout-sider {
   background: rgba(128, 128, 128, 0.3);

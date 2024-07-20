@@ -1,11 +1,11 @@
-import { h, computed, defineComponent } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { positionProp } from './interface'
 import style from './styles/layout-footer.cssr'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const layoutFooterProps = {
   ...(useTheme.props as ThemeProps<LayoutTheme>),
@@ -19,7 +19,7 @@ export type LayoutFooterProps = ExtractPublicPropTypes<typeof layoutFooterProps>
 export default defineComponent({
   name: 'LayoutFooter',
   props: layoutFooterProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
@@ -41,7 +41,8 @@ export default defineComponent({
         vars['--n-color'] = self.footerColorInverted
         vars['--n-text-color'] = self.textColorInverted
         vars['--n-border-color'] = self.footerBorderColorInverted
-      } else {
+      }
+      else {
         vars['--n-color'] = self.footerColor
         vars['--n-text-color'] = self.textColor
         vars['--n-border-color'] = self.footerBorderColor
@@ -63,7 +64,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (
@@ -71,8 +72,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-footer`,
           this.themeClass,
-          this.position &&
-            `${mergedClsPrefix}-layout-footer--${this.position}-positioned`,
+          this.position
+          && `${mergedClsPrefix}-layout-footer--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-footer--bordered`
         ]}
         style={this.cssVars}

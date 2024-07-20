@@ -2,6 +2,31 @@
 # 图标
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+  ChevronBackCircle,
+  ChevronBackCircleOutline,
+  ChevronForwardCircle,
+  ChevronForwardCircleOutline,
+  RocketOutline,
+  TrendingUpSharp
+} from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      TrendingUpSharp,
+      RocketOutline,
+      ChevronBackCircle,
+      ChevronBackCircleOutline,
+      ChevronForwardCircle,
+      ChevronForwardCircleOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-date-picker type="date">
@@ -31,28 +56,3 @@
     </n-date-picker>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import {
-  TrendingUpSharp,
-  RocketOutline,
-  ChevronBackCircle,
-  ChevronBackCircleOutline,
-  ChevronForwardCircle,
-  ChevronForwardCircleOutline
-} from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      TrendingUpSharp,
-      RocketOutline,
-      ChevronBackCircle,
-      ChevronBackCircleOutline,
-      ChevronForwardCircle,
-      ChevronForwardCircleOutline
-    }
-  }
-})
-</script>

@@ -43,8 +43,7 @@ export default c([
     background-color: var(--n-color);
     color: var(--n-text-color);
     box-sizing: border-box;
-  `,
-  [
+  `, [
     slideInFromRightTransition(),
     slideInFromLeftTransition(),
     slideInFromTopTransition(),

@@ -1,9 +1,9 @@
-import { defineComponent, type PropType, h, computed, inject } from 'vue'
+import { type PropType, computed, defineComponent, h, inject } from 'vue'
 import { ArrowDownIcon } from '../../../_internal/icons'
 import { NBaseIcon } from '../../../_internal'
-import RenderSorter from './RenderSorter'
-import { dataTableInjectionKey, type TableBaseColumn } from '../interface'
+import { type TableBaseColumn, dataTableInjectionKey } from '../interface'
 import { useConfig } from '../../../_mixins'
+import RenderSorter from './RenderSorter'
 
 export default defineComponent({
   name: 'SortIcon',
@@ -13,15 +13,14 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const { mergedComponentPropsRef } = useConfig()
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedSortStateRef, mergedClsPrefixRef } = inject(
       dataTableInjectionKey
     )!
     const sortStateRef = computed(() =>
       mergedSortStateRef.value.find(
-        (state) => state.columnKey === props.column.key
+        state => state.columnKey === props.column.key
       )
     )
 
@@ -37,8 +36,8 @@ export default defineComponent({
     })
     const mergedRenderSorterRef = computed(() => {
       return (
-        mergedComponentPropsRef?.value?.DataTable?.renderSorter ||
-        props.column.renderSorter
+        mergedComponentPropsRef?.value?.DataTable?.renderSorter
+        || props.column.renderSorter
       )
     })
     return {
@@ -48,7 +47,7 @@ export default defineComponent({
       mergedRenderSorter: mergedRenderSorterRef
     }
   },
-  render () {
+  render() {
     const { mergedRenderSorter, mergedSortOrder, mergedClsPrefix } = this
     const { renderSorterIcon } = this.column
     return mergedRenderSorter ? (
@@ -57,10 +56,10 @@ export default defineComponent({
       <span
         class={[
           `${mergedClsPrefix}-data-table-sorter`,
-          mergedSortOrder === 'ascend' &&
-            `${mergedClsPrefix}-data-table-sorter--asc`,
-          mergedSortOrder === 'descend' &&
-            `${mergedClsPrefix}-data-table-sorter--desc`
+          mergedSortOrder === 'ascend'
+          && `${mergedClsPrefix}-data-table-sorter--asc`,
+          mergedSortOrder === 'descend'
+          && `${mergedClsPrefix}-data-table-sorter--desc`
         ]}
       >
         {renderSorterIcon ? (

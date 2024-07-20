@@ -1,12 +1,12 @@
-import commonVars from './_common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
 import { createTheme } from '../../_mixins'
 import { inputLight } from '../../input/styles'
+import commonVars from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     popoverColor,
     textColor2,

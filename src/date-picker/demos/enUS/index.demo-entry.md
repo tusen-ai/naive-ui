@@ -195,6 +195,28 @@ panel.vue
 | prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
 | separator  | `()`       | Separator of range picker.        | 2.29.0  |
 
+### Date Year QuarterRange Week Slots
+
+| 名称  | 参数               | 说明                       | 版本         |
+| ----- | ------------------ | -------------------------- | ------------ |
+| clear | `ClearButtonProps` | Clear button of the panel. | NEXT_VERSION |
+| now   | `NowButtonProps`   | Now button of the panel.   | NEXT_VERSION |
+
+### DateRange DateTimeRange MonthRange YearRange Slots
+
+| 名称    | 参数                 | 说明                         | 版本         |
+| ------- | -------------------- | ---------------------------- | ------------ |
+| clear   | `ClearButtonProps`   | Clear button of the panel.   | NEXT_VERSION |
+| confirm | `ConfirmButtonProps` | Confirm button of the panel. | NEXT_VERSION |
+
+### DateTime Month Quarter Slots
+
+| 名称    | 参数                 | 说明                         | 版本         |
+| ------- | -------------------- | ---------------------------- | ------------ |
+| now     | `NowButtonProps`     | Now button of the panel.     | NEXT_VERSION |
+| clear   | `ClearButtonProps`   | Clear button of the panel.   | NEXT_VERSION |
+| confirm | `ConfirmButtonProps` | Confirm button of the panel. | NEXT_VERSION |
+
 ### DatePicker Methods
 
 | Name  | Type         | Description | Version |

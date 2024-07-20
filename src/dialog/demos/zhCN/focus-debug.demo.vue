@@ -2,18 +2,12 @@
 # Focus debug
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    Click me
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useDialog, NTimePicker } from 'naive-ui'
+import { NTimePicker, useDialog } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const dialog = useDialog()
     return {
       handleClick: () => {
@@ -26,3 +20,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleClick">
+    Click me
+  </n-button>
+</template>

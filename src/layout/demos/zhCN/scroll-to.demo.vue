@@ -2,6 +2,22 @@
 # 滚动到
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { LayoutInst, LayoutSiderInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const siderRef = ref<LayoutSiderInst | null>(null)
+    const contentRef = ref<LayoutInst | null>(null)
+    return {
+      siderRef,
+      contentRef
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical size="large">
     <n-space>
@@ -60,19 +76,3 @@
     </n-layout>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { LayoutInst, LayoutSiderInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const siderRef = ref<LayoutSiderInst | null>(null)
-    const contentRef = ref<LayoutInst | null>(null)
-    return {
-      siderRef,
-      contentRef
-    }
-  }
-})
-</script>

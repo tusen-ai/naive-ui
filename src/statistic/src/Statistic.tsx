@@ -1,5 +1,5 @@
-import { defineComponent, computed, h } from 'vue'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -19,9 +19,9 @@ export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
 export default defineComponent({
   name: 'Statistic',
   props: statisticProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
       '-statistic',
@@ -68,7 +68,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       $slots: {
@@ -88,7 +88,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as any}
       >
-        {resolveWrappedSlot(labelSlot, (children) => (
+        {resolveWrappedSlot(labelSlot, children => (
           <div class={`${mergedClsPrefix}-statistic__label`}>
             {this.label || children}
           </div>
@@ -101,7 +101,7 @@ export default defineComponent({
         >
           {resolveWrappedSlot(
             prefixSlot,
-            (children) =>
+            children =>
               children && (
                 <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
                   {children}
@@ -115,7 +115,7 @@ export default defineComponent({
           ) : (
             resolveWrappedSlot(
               defaultSlot,
-              (children) =>
+              children =>
                 children && (
                   <span class={`${mergedClsPrefix}-statistic-value__content`}>
                     {children}
@@ -125,7 +125,7 @@ export default defineComponent({
           )}
           {resolveWrappedSlot(
             suffixSlot,
-            (children) =>
+            children =>
               children && (
                 <span class={`${mergedClsPrefix}-statistic-value__suffix`}>
                   {children}
