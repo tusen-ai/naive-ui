@@ -1,9 +1,9 @@
 import {
-  h,
-  defineComponent,
-  type PropType,
   type CSSProperties,
-  computed
+  type PropType,
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
@@ -34,7 +34,7 @@ export type HighlightProps = ExtractPublicPropTypes<typeof highlightProps>
 export default defineComponent({
   name: 'Highlight',
   props: highlightProps,
-  setup (props) {
+  setup(props) {
     const escapeRegExp = (text: string): string =>
       text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -56,7 +56,7 @@ export default defineComponent({
       let modifiedText = text
 
       const pattern = words
-        .map((word) => (autoEscape ? escapeRegExp(word) : word))
+        .map(word => (autoEscape ? escapeRegExp(word) : word))
         .join('|')
       const regex = new RegExp(`(${pattern})`, caseSensitive ? 'g' : 'gi')
 
@@ -79,7 +79,7 @@ export default defineComponent({
 
     return { highlightedText }
   },
-  render () {
+  render() {
     return h('span', {
       innerHTML: this.highlightedText
     })

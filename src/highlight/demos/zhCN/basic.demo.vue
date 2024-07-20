@@ -2,14 +2,11 @@
   # 基础
 </markdown>
 
-<template>
-  <n-highlight :text="text" :words="words" />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       text: 'Naive UI 是一个 Vue3 的组件库，它比较完整，主题可调，用 TypeScript 写的，快。',
       words: ['Naive UI', 'Vue3', 'TypeScript', '快']
@@ -17,3 +14,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-highlight :text="text" :words="words" />
+</template>
