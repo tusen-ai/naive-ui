@@ -72,7 +72,7 @@ export interface UploadInjection {
   doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
-  onRetry: undefined | OnRetry
+  onRetryRef: Ref<undefined | OnRetry>
   shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
   getFileThumbnailUrlResolver: (
     file: UploadSettledFileInfo
@@ -125,7 +125,7 @@ export type OnRetry = ({
   file
 }: {
   file: UploadSettledFileInfo
-}) => UploadFileInfo | undefined | void
+}) => Promise<boolean | void> | boolean | void
 
 export interface FileAndEntry {
   file: File

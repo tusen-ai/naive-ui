@@ -121,9 +121,13 @@ export default defineComponent({
         && listType === 'image-card'
       )
     })
-    function handleRetryClick(): void {
-      if (NUpload.onRetry) {
-        NUpload.onRetry({ file: props.file })
+    async function handleRetryClick(): Promise<void> {
+      const onRetry = NUpload.onRetryRef.value
+      if (onRetry) {
+        const onRetryReturn = await onRetry({ file: props.file })
+        if (onRetryReturn === false) {
+          return
+        }
       }
       NUpload.submit(props.file.id)
     }
