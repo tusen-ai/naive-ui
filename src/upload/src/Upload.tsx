@@ -34,6 +34,8 @@ import type {
   OnUpdateFileList,
   RenderIcon,
   ShouldUseThumbnailUrl,
+  RenderIcon,
+  OnRetry,
   UploadInternalInst,
   XhrHandlers
 } from './interface'
@@ -325,7 +327,8 @@ export const uploadProps = {
   onChange: Function as PropType<UploadOnChange>,
   onRemove: Function as PropType<UploadOnRemove>,
   onFinish: Function as PropType<UploadOnFinish>,
-  onError: Function as PropType<OnError>,
+  onError: Function as PropType<OnRetry>,
+  onRetry: Function as PropType<OnError>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
   isErrorState: Function as PropType<(xhr: XMLHttpRequest) => boolean>,
   /** currently not used */
@@ -727,7 +730,8 @@ export default defineComponent({
       imageGroupPropsRef: toRef(props, 'imageGroupProps'),
       mergedDirectoryDndRef: computed(() => {
         return props.directoryDnd ?? props.directory
-      })
+      }),
+      onRetry: props.onRetry
     })
 
     const exposedMethods: UploadInst = {

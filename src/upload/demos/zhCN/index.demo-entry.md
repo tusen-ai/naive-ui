@@ -69,6 +69,7 @@ debug.vue
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
 | on-preview | `(file: FileInfo, detail: { event: MouseEvent }) => void` | `undefined` | 点击文件链接或预览按钮的回调函数，你可以通过 `preventDefault` 来取消默认的链接打开行为 | `detail.event` 2.39.0 |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` 2.38.2 |
+| on-retry | `(file: FileInfo) => void` | `undefined` | 点击重试的回调函数 |  |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 
 #### UploadFileInfo Type

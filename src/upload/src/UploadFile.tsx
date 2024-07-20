@@ -122,6 +122,9 @@ export default defineComponent({
       )
     })
     function handleRetryClick(): void {
+      if (NUpload.onRetry) {
+        NUpload.onRetry({ file: props.file })
+      }
       NUpload.submit(props.file.id)
     }
     function handleRemoveOrCancelClick(e: MouseEvent): void {
