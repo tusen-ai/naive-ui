@@ -1,4 +1,5 @@
 import { isBrowser } from '../../_utils'
+import { error } from '../../_utils/naive/warn'
 import type { FileAndEntry, ShouldUseThumbnailUrl } from './interface'
 import type { UploadFileInfo, UploadSettledFileInfo } from './public-types'
 
@@ -71,23 +72,33 @@ export async function getFilesFromEntries(
         continue
       if (directory && isFileSystemDirectoryEntry(entry)) {
         const directoryReader = entry.createReader()
-        let allEntries = [];
-        let readEntries;
-        do {
-          readEntries = yield new Promise((resolve, reject) => {
-            directoryReader.readEntries(resolve, reject);
-          });
-          allEntries = allEntries.concat(readEntries);
-          yield _getFilesFromEntries(readEntries);
-        } while (readEntries.length > 0);
-      } else if (isFileSystemFileEntry(entry)) {
+        let allEntries: FileSystemEntry[] = []
+        let readEntries: readonly FileSystemEntry[]
+        try {
+          do {
+            readEntries = await new Promise<readonly FileSystemEntry[]>(
+              (resolve, reject) => {
+                directoryReader.readEntries(resolve, reject)
+              }
+            )
+            allEntries = allEntries.concat(readEntries)
+          } while (readEntries.length > 0)
+        }
+        catch (e) {
+          error('upload', 'error happens when handling directory upload', e)
+        }
+        await _getFilesFromEntries(allEntries)
+      }
+      else if (isFileSystemFileEntry(entry)) {
         try {
           const file = await new Promise<File>((resolve, reject) => {
             entry.file(resolve, reject)
           })
           fileAndEntries.push({ file, entry, source: 'dnd' })
         }
-        catch {}
+        catch (e) {
+          error('upload', 'error happens when handling file upload', e)
+        }
       }
     }
   }

@@ -12,6 +12,10 @@ export function warn(location: string, message: string): void {
   console.error(`[naive/${location}]: ${message}`)
 }
 
+export function error(location: string, message: string, error: unknown): void {
+  console.error(`[naive/${location}]: ${message}`, error)
+}
+
 export function throwError(location: string, message: string): never {
   throw new Error(`[naive/${location}]: ${message}`)
 }
