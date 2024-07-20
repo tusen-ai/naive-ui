@@ -11,7 +11,7 @@ import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
 import { NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { warnOnce } from '../../../_utils'
+import { resolveSlotWithProps, warnOnce } from '../../../_utils'
 import {
   type MonthItem,
   type QuarterItem,
@@ -21,7 +21,10 @@ import {
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import type { ClearButtonProps, ConfirmButtonProps } from '../interface'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps
+} from '../public-types'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -113,17 +116,6 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const clearButtonProps: ClearButtonProps = {
-      size: 'tiny',
-      onClick: this.handleClearClick
-    }
-
-    const confirmButtonProps: ConfirmButtonProps = {
-      size: 'tiny',
-      type: 'primary',
-      disabled: this.isRangeInvalid || this.isSelecting,
-      onClick: this.handleConfirmClick
-    }
     return (
       <div
         ref="selfRef"
@@ -309,28 +301,45 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.datePickerSlots.clear ? (
-                this.datePickerSlots.clear(clearButtonProps)
-              ) : this.actions?.includes('clear') ? (
-                <NxButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  {...clearButtonProps}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NxButton>
-              ) : null}
-              {this.datePickerSlots.confirm ? (
-                this.datePickerSlots.confirm(confirmButtonProps)
-              ) : this.actions?.includes('confirm') ? (
-                <NxButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  {...confirmButtonProps}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NxButton>
-              ) : null}
+              {this.actions?.includes('clear')
+                ? resolveSlotWithProps(
+                  this.$slots.clear,
+                    {
+                      onClear: this.handleClearClick
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NxButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleClearClick}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NxButton>
+                    ]
+                )
+                : null}
+              {this.actions?.includes('confirm')
+                ? resolveSlotWithProps(
+                  this.$slots.confirm,
+                    {
+                      disabled: this.isRangeInvalid,
+                      onConfirm: this.handleConfirmClick
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NxButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isRangeInvalid}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NxButton>
+                    ]
+                )
+                : null}
             </div>
           </div>
         ) : null}

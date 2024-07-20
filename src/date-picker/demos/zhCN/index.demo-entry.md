@@ -197,25 +197,25 @@ form-debug.vue
 
 ### Date Year QuarterRange Week Slots
 
-| 名称  | 参数               | 说明           | 版本         |
-| ----- | ------------------ | -------------- | ------------ |
-| clear | `ClearButtonProps` | 面板的清除按钮 | NEXT_VERSION |
-| now   | `NowButtonProps`   | 面板的此刻按钮 | NEXT_VERSION |
+| 名称  | 参数                               | 说明           | 版本         |
+| ----- | ---------------------------------- | -------------- | ------------ |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| now   | `(props: { onNow: () => void })`   | 面板的此刻按钮 | NEXT_VERSION |
 
 ### DateRange DateTimeRange MonthRange YearRange Slots
 
-| 名称    | 参数                 | 说明           | 版本         |
-| ------- | -------------------- | -------------- | ------------ |
-| clear   | `ClearButtonProps`   | 面板的清除按钮 | NEXT_VERSION |
-| confirm | `ConfirmButtonProps` | 面板的确认按钮 | NEXT_VERSION |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
 
 ### DateTime Month Quarter Slots
 
-| 名称    | 参数                 | 说明           | 版本         |
-| ------- | -------------------- | -------------- | ------------ |
-| now     | `NowButtonProps`     | 面板的此刻按钮 | NEXT_VERSION |
-| clear   | `ClearButtonProps`   | 面板的清除按钮 | NEXT_VERSION |
-| confirm | `ConfirmButtonProps` | 面板的确认按钮 | NEXT_VERSION |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| now | `(props: { onNow: () => void })` | 面板的此刻按钮 | NEXT_VERSION |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
 
 ### DatePicker Methods
 

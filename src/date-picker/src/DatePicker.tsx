@@ -1,7 +1,6 @@
 import {
   type CSSProperties,
   type ExtractPropTypes,
-  type PropType,
   type Ref,
   Transition,
   type VNode,
@@ -15,14 +14,12 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import type { TimePickerProps } from '../../time-picker/src/TimePicker'
-import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
@@ -34,7 +31,6 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   call,
   createKey,
@@ -44,30 +40,18 @@ import {
   warn,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 import {
   dualCalendarValidation,
   uniCalendarValidation
 } from './validation-utils'
-import type { DatePickerType } from './config'
 import type {
-  DatePickerInst,
-  DefaultTime,
-  FirstDayOfWeek,
   FormattedValue,
-  IsDateDisabled,
-  IsTimeDisabled,
-  OnConfirm,
   OnConfirmImpl,
-  OnUpdateFormattedValue,
   OnUpdateFormattedValueImpl,
-  OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
-  Shortcuts,
   Value
 } from './interface'
 import { datePickerInjectionKey } from './interface'
@@ -78,93 +62,10 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
-
-export const datePickerProps = {
-  ...(useTheme.props as ThemeProps<DatePickerTheme>),
-  to: useAdjustedTo.propTo,
-  bordered: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  clearable: Boolean,
-  updateValueOnClose: Boolean,
-  defaultValue: [Number, Array] as PropType<Value | null>,
-  defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
-  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
-  disabled: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom-start'
-  },
-  value: [Number, Array] as PropType<Value | null>,
-  formattedValue: [String, Array] as PropType<FormattedValue | null>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
-  type: {
-    type: String as PropType<DatePickerType>,
-    default: 'date'
-  },
-  valueFormat: String,
-  separator: String,
-  placeholder: String,
-  startPlaceholder: String,
-  endPlaceholder: String,
-  format: String,
-  dateFormat: String,
-  timerPickerFormat: String,
-  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
-  shortcuts: Object as PropType<Shortcuts>,
-  isDateDisabled: Function as PropType<IsDateDisabled>,
-  isTimeDisabled: Function as PropType<IsTimeDisabled>,
-  show: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  panel: Boolean,
-  ranges: Object as PropType<Record<string, [number, number]>>,
-  firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
-  inputReadonly: Boolean,
-  closeOnSelect: Boolean,
-  status: String as PropType<FormValidationStatus>,
-  timePickerProps: [Object, Array] as PropType<
-    TimePickerProps | [TimePickerProps, TimePickerProps]
-  >,
-  onClear: Function as PropType<() => void>,
-  onConfirm: Function as PropType<OnConfirm>,
-  defaultCalendarStartTime: Number,
-  defaultCalendarEndTime: Number,
-  bindCalendarMonths: Boolean,
-  monthFormat: { type: String, default: 'M' },
-  yearFormat: { type: String, default: 'y' },
-  quarterFormat: { type: String, default: '\'Q\'Q' },
-  'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(show: boolean) => void>
-  >,
-  onUpdateShow: [Function, Array] as PropType<
-    MaybeArray<(show: boolean) => void>
-  >,
-  'onUpdate:formattedValue': [Function, Array] as PropType<
-    MaybeArray<OnUpdateFormattedValue>
-  >,
-  onUpdateFormattedValue: [Function, Array] as PropType<
-    MaybeArray<OnUpdateFormattedValue>
-  >,
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
-  onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
-  onNextMonth: Function as PropType<() => void>,
-  onPrevMonth: Function as PropType<() => void>,
-  onNextYear: Function as PropType<() => void>,
-  onPrevYear: Function as PropType<() => void>,
-  // deprecated
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
-} as const
+import type { DatePickerInst } from './public-types'
+import { datePickerProps } from './props'
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
-export type DatePickerProps = ExtractPublicPropTypes<typeof datePickerProps>
 
 export default defineComponent({
   name: 'DatePicker',

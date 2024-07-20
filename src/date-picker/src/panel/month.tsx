@@ -12,12 +12,13 @@ import {
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
+import type { OnPanelUpdateValueImpl } from '../interface'
+import { resolveSlotWithProps } from '../../../_utils'
 import type {
-  ClearButtonProps,
-  ConfirmButtonProps,
-  NowButtonProps,
-  OnPanelUpdateValueImpl
-} from '../interface'
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
@@ -137,21 +138,6 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const nowButtonProps: NowButtonProps = {
-      size: 'tiny',
-      onClick: this.handleNowClick
-    }
-    const clearButtonProps: ClearButtonProps = {
-      size: 'tiny',
-      onClick: this.handleClearClick
-    }
-
-    const confirmButtonProps: ConfirmButtonProps = {
-      size: 'tiny',
-      type: 'primary',
-      disabled: this.isDateInvalid,
-      onClick: this.handleConfirmClick
-    }
     return (
       <div
         ref="selfRef"
@@ -258,39 +244,63 @@ export default defineComponent({
               })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.datePickerSlots.clear ? (
-                this.datePickerSlots.clear(clearButtonProps)
-              ) : actions?.includes('clear') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  {...clearButtonProps}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NButton>
-              ) : null}
-              {this.datePickerSlots.now ? (
-                this.datePickerSlots.now(nowButtonProps)
-              ) : actions?.includes('now') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  {...nowButtonProps}
-                >
-                  {{ default: () => this.locale.now }}
-                </NButton>
-              ) : null}
-              {this.datePickerSlots.confirm ? (
-                this.datePickerSlots.confirm(confirmButtonProps)
-              ) : actions?.includes('confirm') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  {...confirmButtonProps}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NButton>
-              ) : null}
+              {actions?.includes('clear')
+                ? resolveSlotWithProps(
+                  this.$slots.now,
+                    {
+                      onClear: this.handleClearClick
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleClearClick}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NButton>
+                    ]
+                )
+                : null}
+              {actions?.includes('now')
+                ? resolveSlotWithProps(
+                  this.$slots.now,
+                    {
+                      onNow: this.handleNowClick
+                    } satisfies DatePickerNowSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleNowClick}
+                      >
+                        {{ default: () => this.locale.now }}
+                      </NButton>
+                    ]
+                )
+                : null}
+              {actions?.includes('confirm')
+                ? resolveSlotWithProps(
+                  this.$slots.confirm,
+                    {
+                      onConfirm: this.handleConfirmClick,
+                      disabled: this.isDateInvalid
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isDateInvalid}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NButton>
+                    ]
+                )
+                : null}
             </div>
           </div>
         ) : null}
