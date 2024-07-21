@@ -9,12 +9,12 @@ export default defineComponent({
   setup() {
     return {
       text: 'Naive UI is a Vue3 component library, it is relatively complete, tunable themes, written in TypeScript, fast.',
-      words: ['Naive UI', 'Vue3', 'TypeScript', 'fast']
+      patterns: ['Naive UI', 'Vue3', 'TypeScript', 'fast']
     }
   }
 })
 </script>
 
 <template>
-  <n-highlight :text="text" :words="words" />
+  <n-highlight :text="text" :patterns="patterns" />
 </template>

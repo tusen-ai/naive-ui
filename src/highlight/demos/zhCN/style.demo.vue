@@ -6,42 +6,31 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useThemeVars } from 'naive-ui'
 
 export default defineComponent({
   setup() {
+    const themeVars = useThemeVars()
     return {
+      themeVars,
       text: 'Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接',
-      words: ['Naive UI', 'TypeScript']
+      patterns: ['Naive UI', 'TypeScript']
     }
   }
 })
 </script>
 
 <template>
-  <n-flex vertical>
-    <n-highlight
-      :text="text"
-      :words="words"
-      :highlight-style="{
-        'display': 'inline-block',
-        'margin': '4px',
-        'padding': '4px',
-        'border-radius': '6px',
-        'background': '#18a058',
-        'color': 'white',
-      }"
-    />
-    <n-highlight
-      :text="text"
-      :words="words"
-      :highlight-style="{
-        'display': 'inline-block',
-        'margin': '4px',
-        'padding': '4px 12px',
-        'border-radius': '30px',
-        'background': '#409EFF',
-        'color': 'white',
-      }"
-    />
-  </n-flex>
+  <n-highlight
+    :text="text"
+    :patterns="patterns"
+    :highlight-style="{
+      padding: '0 4px',
+      borderRadius: themeVars.borderRadius,
+      display: 'inline-block',
+      color: themeVars.baseColor,
+      background: themeVars.primaryColor,
+      transition: `all .3s ${themeVars.cubicBezierEaseInOut}`,
+    }"
+  />
 </template>

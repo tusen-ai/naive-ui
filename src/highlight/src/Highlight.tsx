@@ -1,27 +1,20 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig } from '../../_mixins'
+import { splitAndMarkByRegex } from './utils'
 
 export const highlightProps = {
-  component: {
+  highlightTag: {
     type: String,
     default: 'mark'
   },
-  caseSensitive: {
-    type: Boolean,
-    default: false
-  },
+  caseSensitive: Boolean,
   autoEscape: {
     type: Boolean,
     default: true
   },
   text: String,
-  words: {
+  patterns: {
     type: Array as PropType<string[]>,
     default: () => []
   },
@@ -29,59 +22,71 @@ export const highlightProps = {
   highlightStyle: [Object, String] as PropType<CSSProperties | string>
 } as const
 
-export type HighlightProps = ExtractPublicPropTypes<typeof highlightProps>
-
 export default defineComponent({
   name: 'Highlight',
   props: highlightProps,
   setup(props) {
+    const { mergedClsPrefixRef } = useConfig()
+
     const escapeRegExp = (text: string): string =>
       text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-    const highlightedText = computed(() => {
-      const {
-        component,
-        text,
-        words,
-        highlightStyle,
-        caseSensitive,
-        autoEscape,
-        highlightClass
-      } = props
+    const highlightedNodeRef = computed<VNode>(() => {
+      const mergedClsPrefix = mergedClsPrefixRef.value
 
-      if (words.length === 0) {
-        return text
+      let children: VNodeChild[] = []
+
+      const { patterns, text } = props
+
+      if (patterns.length === 0 || !text) {
+        children = [text]
+      }
+      else {
+        const {
+          highlightTag,
+          caseSensitive,
+          autoEscape,
+          highlightClass,
+          highlightStyle
+        } = props
+
+        const pattern = patterns
+          .map(word => (autoEscape ? escapeRegExp(word) : word))
+          .join('|')
+        const regex = new RegExp(`(${pattern})`, caseSensitive ? 'g' : 'gi')
+
+        const splitItems = splitAndMarkByRegex(text, regex)
+
+        children = splitItems.map(({ text, isMatch }) => {
+          if (isMatch) {
+            return h(
+              highlightTag,
+              {
+                class: [`${mergedClsPrefix}-highlight__mark`, highlightClass],
+                style: highlightStyle
+              },
+              text
+            )
+          }
+          return text
+        })
       }
 
-      let modifiedText = text
-
-      const pattern = words
-        .map(word => (autoEscape ? escapeRegExp(word) : word))
-        .join('|')
-      const regex = new RegExp(`(${pattern})`, caseSensitive ? 'g' : 'gi')
-
-      const style = highlightStyle
-        ? Object.entries(highlightStyle)
-          .map(([key, value]) => `${key}: ${value};`)
-          .join(' ')
-        : ''
-
-      const classes = highlightClass ? ` class="${highlightClass}"` : ''
-
-      const wrap = `<${component}${classes}${
-        style ? ` style="${style}"` : ''
-      }>$1</${component}>`
-
-      modifiedText = modifiedText?.replace(regex, wrap)
-
-      return modifiedText
+      return h(
+        'span',
+        {
+          class: `${mergedClsPrefix}-highlight`
+        },
+        children
+      )
     })
 
-    return { highlightedText }
+    return {
+      highlightedNode: highlightedNodeRef,
+      mergedClsPrefix: mergedClsPrefixRef
+    }
   },
   render() {
-    return h('span', {
-      innerHTML: this.highlightedText
-    })
+    return this.highlightedNode
   }
 })

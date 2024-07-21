@@ -11,24 +11,12 @@ export default defineComponent({
   setup() {
     return {
       text: 'Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接',
-      words: ['Naive UI', 'typeScript']
+      patterns: ['Naive UI', 'typeScript']
     }
   }
 })
 </script>
 
 <template>
-  <n-highlight
-    :text="text"
-    :words="words"
-    :case-sensitive="true"
-    :highlight-style="{
-      'display': 'inline-block',
-      'margin': '4px',
-      'padding': '4px',
-      'border-radius': '6px',
-      'background': '#18a058',
-      'color': 'white',
-    }"
-  />
+  <n-highlight :text="text" :patterns="patterns" :case-sensitive="true" />
 </template>
