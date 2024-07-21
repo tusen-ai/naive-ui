@@ -25,7 +25,7 @@ export default defineComponent({
     :text="text"
     :patterns="patterns"
     :highlight-style="{
-      padding: '0 4px',
+      padding: '0 6px',
       borderRadius: themeVars.borderRadius,
       display: 'inline-block',
       color: themeVars.baseColor,
