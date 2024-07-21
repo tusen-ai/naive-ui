@@ -19,7 +19,7 @@ component.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| auto-espace | `boolean` | `true` | 自动转义。默认情况下，words 中的元素会被转化为正则表达式进行匹配，这个过程中需要进行自动转义，正则表达式最终匹配的是元素的字面内容，例如 `\(` 匹配的就是 `\(`。如果你需要 `n-highlight` 组件去匹配使用 patterns 中元素本身构造的正则表达式，例如 `\(` 匹配的是 `(`，则可以设为 `false`。如果你看不懂这些，不要改这个设置。 | NEXT_VERSION |
+| auto-espace | `boolean` | `true` | 自动转义。默认情况下，`patterns` 中的元素会被转化为正则表达式进行匹配，这个过程中需要进行自动转义，正则表达式最终匹配的是元素的字面内容，例如 `\(` 匹配的就是 `\(`。如果你需要 `n-highlight` 组件去匹配使用 `patterns` 中元素本身构造的正则表达式，例如 `\(` 匹配的是 `(`，则可以设为 `false`。如果你看不懂这些，不要改这个设置。 | NEXT_VERSION |
 | case-sensitive | `boolean` | `false` | 区分大小写 | NEXT_VERSION |
 | highlight-class | `string` | `undefined` | 高亮内容的类名 | NEXT_VERSION |
 | highlight-style | `Object \| string` | `undefined` | 高亮内容的样式 | NEXT_VERSION |
