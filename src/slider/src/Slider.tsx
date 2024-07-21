@@ -2,6 +2,7 @@ import {
   type CSSProperties,
   type ComponentPublicInstance,
   type PropType,
+  type VNodeChild,
   Transition,
   computed,
   defineComponent,
@@ -56,7 +57,7 @@ export const sliderProps = {
     type: [Number, Array] as PropType<number | number[]>,
     default: 0
   },
-  marks: Object as PropType<Record<string, string>>,
+  marks: Object as PropType<Record<string, string | (() => VNodeChild)>>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -205,7 +206,8 @@ export default defineComponent({
     const markInfosRef = computed(() => {
       const mergedMarks: Array<{
         active: boolean
-        label: string
+        label: string | (() => VNodeChild)
+        key: number
         style: CSSProperties
       }> = []
       const { marks } = props
@@ -226,6 +228,7 @@ export default defineComponent({
           const num = Number(key)
           mergedMarks.push({
             active: isActive(num),
+            key: num,
             label: marks[key],
             style: {
               [styleDirection]: `${valueToPercentage(num)}%`
@@ -718,7 +721,7 @@ export default defineComponent({
             >
               {this.markInfos.map(mark => (
                 <div
-                  key={mark.label}
+                  key={mark.key}
                   class={[
                     `${mergedClsPrefix}-slider-dot`,
                     {
@@ -843,11 +846,11 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-slider-marks`}>
               {this.markInfos.map(mark => (
                 <div
-                  key={mark.label}
+                  key={mark.key}
                   class={`${mergedClsPrefix}-slider-mark`}
                   style={mark.style}
                 >
-                  {mark.label}
+                  {typeof mark.label === 'function' ? mark.label() : mark.label}
                 </div>
               ))}
             </div>

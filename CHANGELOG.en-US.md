@@ -17,6 +17,7 @@
 - `n-date-picker` adds `clear` `now` `confirm` slot, closes [#6013](https://github.com/tusen-ai/naive-ui/issues/6013).
 - `n-upload` adds `on-retry` prop, closes [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
 - Adds `n-highlight` component.
+- `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 
 ## 2.39.0
 
