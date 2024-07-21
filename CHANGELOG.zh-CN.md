@@ -18,6 +18,7 @@
 - `n-upload` 新增 `on-retry`属性，关闭 [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
 - 新增 `n-highlight` 组件
 - `n-slider` `marks` 支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
+- `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 
 ## 2.39.0
 

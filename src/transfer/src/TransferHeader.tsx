@@ -1,4 +1,4 @@
-import { type PropType, defineComponent, h, inject } from 'vue'
+import { type PropType, type VNodeChild, defineComponent, h, inject } from 'vue'
 import { NButton } from '../../button'
 import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
@@ -15,7 +15,7 @@ export default defineComponent({
     source: Boolean,
     onCheckedAll: Function as PropType<() => void>,
     onClearAll: Function as PropType<() => void>,
-    title: String
+    title: [String, Function] as PropType<string | (() => VNodeChild)>
   },
   setup(props) {
     const {
@@ -41,7 +41,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
           {title && (
             <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
-              {title}
+              {typeof title === 'function' ? [title()] : [title]}
             </div>
           )}
           {source && (
