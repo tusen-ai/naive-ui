@@ -2,6 +2,57 @@
 # 事件
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      datetime: ref(1183135260000),
+      date: ref(null),
+      datetimerange: ref(null),
+      daterange: ref(null),
+      disabled: ref(false),
+      onBlur1() {
+        message.info('Blur-1')
+      },
+      onChange1(v: number) {
+        message.info(`Change-1 ${v}`)
+      },
+      onBlur2() {
+        message.error('Blur-2')
+      },
+      onChange2(v: number) {
+        message.error(`Change-2 ${v}`)
+      },
+      onBlur3() {
+        message.warning('Blur-3')
+      },
+      onChange3(v: number) {
+        message.warning(`Change-3 ${v}`)
+      },
+      onBlur4() {
+        message.success('Blur-4')
+      },
+      onChange4(v: number) {
+        message.success(`Change-4 ${v}`)
+      },
+      onChange5(v: number) {
+        message.success(`Change-5 ${v}`)
+      },
+      onClear() {
+        message.info('Clear-5')
+      },
+      onConfirm(v: number | number[] | null) {
+        message.info(`Confirm-5 ${v}`)
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-date-picker
@@ -42,54 +93,3 @@
     <n-switch v-model:value="disabled" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      datetime: ref(1183135260000),
-      date: ref(null),
-      datetimerange: ref(null),
-      daterange: ref(null),
-      disabled: ref(false),
-      onBlur1 () {
-        message.info('Blur-1')
-      },
-      onChange1 (v: number) {
-        message.info('Change-1 ' + v)
-      },
-      onBlur2 () {
-        message.error('Blur-2')
-      },
-      onChange2 (v: number) {
-        message.error('Change-2 ' + v)
-      },
-      onBlur3 () {
-        message.warning('Blur-3')
-      },
-      onChange3 (v: number) {
-        message.warning('Change-3 ' + v)
-      },
-      onBlur4 () {
-        message.success('Blur-4')
-      },
-      onChange4 (v: number) {
-        message.success('Change-4 ' + v)
-      },
-      onChange5 (v: number) {
-        message.success('Change-5 ' + v)
-      },
-      onClear () {
-        message.info('Clear-5')
-      },
-      onConfirm (v: number | number[] | null) {
-        message.info('Confirm-5 ' + v)
-      }
-    }
-  }
-})
-</script>

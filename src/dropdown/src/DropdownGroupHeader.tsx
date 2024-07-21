@@ -15,16 +15,11 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    const {
-      showIconRef,
-      hasSubmenuRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(dropdownMenuInjectionKey)!
+  setup() {
+    const { showIconRef, hasSubmenuRef } = inject(dropdownMenuInjectionKey)!
 
-    const { renderLabelRef, labelFieldRef, nodePropsRef, renderOptionRef } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inject(dropdownInjectionKey)!
+    const { renderLabelRef, labelFieldRef, nodePropsRef, renderOptionRef }
+      = inject(dropdownInjectionKey)!
 
     return {
       labelField: labelFieldRef,
@@ -35,7 +30,7 @@ export default defineComponent({
       renderOption: renderOptionRef
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       hasSubmenu,
@@ -73,8 +68,8 @@ export default defineComponent({
           <div
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
-              hasSubmenu &&
-                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
+              hasSubmenu
+              && `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
             ]}
             data-dropdown-option
           />

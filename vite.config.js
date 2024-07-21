@@ -1,7 +1,8 @@
-const path = require('path')
+const path = require('node:path')
+const dns = require('node:dns')
+const process = require('node:process')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
-const dns = require('dns')
 
 dns.setDefaultResultOrder('verbatim')
 
@@ -33,7 +34,7 @@ module.exports = {
       '@css-render/plugin-bem',
       'async-validator',
       'css-render',
-      'date-fns/esm',
+      'date-fns',
       'date-fns-tz/getTimezoneOffset',
       'evtd',
       'highlight.js',
@@ -56,28 +57,7 @@ module.exports = {
       'highlight.js/lib/languages/xml',
       '@vicons/ionicons5',
       '@vicons/ionicons4',
-      '@vicons/fluent/Compose16Regular.js',
-      'date-fns/esm/locale/nb',
-      'date-fns/esm/locale/fr',
-      'date-fns/esm/locale/id',
-      'date-fns/esm/locale/de',
-      'date-fns/esm/locale/ja',
-      'date-fns/esm/locale/zh-CN',
-      'date-fns/esm/locale/en-US',
-      'date-fns/esm/locale/ru',
-      'date-fns/esm/locale/uk',
-      'date-fns/esm/locale/zh-TW',
-      'date-fns/esm/locale/es',
-      'date-fns/esm/locale/it',
-      'date-fns/esm/locale/en-GB',
-      'date-fns/esm/locale/pl',
-      'date-fns/esm/locale/eo',
-      'date-fns/esm/locale/sk',
-      'date-fns/esm/locale/pt-BR',
-      'date-fns/esm/locale/th',
-      'date-fns/esm/locale/ko',
-      'date-fns/esm/locale/nl',
-      'date-fns/esm/locale/ar'
+      '@vicons/fluent/Compose16Regular.js'
     ],
     exclude: ['__INDEX__']
   },

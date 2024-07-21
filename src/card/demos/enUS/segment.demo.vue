@@ -2,7 +2,6 @@
 # Segmented
 
 `content`, `footer` can be segmented or `soft` segmented. `action` can be segmented. Segment border will appear at the top of segmented parts.
-
 </markdown>
 
 <template>
@@ -10,7 +9,7 @@
     title="Card Segmented Demo"
     :segmented="{
       content: true,
-      footer: 'soft'
+      footer: 'soft',
     }"
   >
     <template #header-extra>

@@ -8,7 +8,7 @@ You can set colors related to things you want to eat.
   <n-avatar
     :style="{
       color: 'yellow',
-      backgroundColor: 'red'
+      backgroundColor: 'red',
     }"
   >
     M

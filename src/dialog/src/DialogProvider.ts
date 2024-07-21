@@ -1,17 +1,17 @@
 import {
-  defineComponent,
-  Fragment,
-  ref,
-  h,
+  type CSSProperties,
   type ExtractPropTypes,
-  provide,
+  Fragment,
   type PropType,
-  reactive,
   type Ref,
-  type CSSProperties
+  defineComponent,
+  h,
+  provide,
+  reactive,
+  ref
 } from 'vue'
 import { createId } from 'seemly'
-import { useClicked, useClickPosition } from 'vooks'
+import { useClickPosition, useClicked } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import {
@@ -25,13 +25,13 @@ import {
 } from './context'
 
 export type DialogOptions = Mutable<
-Omit<
-Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
-'internalStyle'
-> & {
-  class?: any
-  style?: string | CSSProperties
-}
+  Omit<
+    Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
+    'internalStyle'
+  > & {
+    class?: any
+    style?: string | CSSProperties
+  }
 >
 
 export type DialogReactive = {
@@ -81,10 +81,10 @@ export type DialogProviderProps = ExtractPublicPropTypes<
 export const NDialogProvider = defineComponent({
   name: 'DialogProvider',
   props: dialogProviderProps,
-  setup () {
+  setup() {
     const dialogListRef = ref<TypeSafeDialogReactive[]>([])
     const dialogInstRefs: Record<string, DialogInst | undefined> = {}
-    function create (options: DialogOptions = {}): DialogReactive {
+    function create(options: DialogOptions = {}): DialogReactive {
       const key = createId()
       const dialogReactive = reactive({
         ...options,
@@ -98,21 +98,21 @@ export const NDialogProvider = defineComponent({
     }
     const typedApi = (
       ['info', 'success', 'warning', 'error'] as Array<
-      'info' | 'success' | 'warning' | 'error'
+        'info' | 'success' | 'warning' | 'error'
       >
-    ).map((type) => (options: DialogOptions): DialogReactive => {
+    ).map(type => (options: DialogOptions): DialogReactive => {
       return create({ ...options, type })
     })
 
-    function handleAfterLeave (key: string): void {
+    function handleAfterLeave(key: string): void {
       const { value: dialogList } = dialogListRef
       dialogList.splice(
-        dialogList.findIndex((dialog) => dialog.key === key),
+        dialogList.findIndex(dialog => dialog.key === key),
         1
       )
     }
 
-    function destroyAll (): void {
+    function destroyAll(): void {
       Object.values(dialogInstRefs).forEach((dialogInstRef) => {
         dialogInstRef?.hide()
       })
@@ -139,9 +139,9 @@ export const NDialogProvider = defineComponent({
       handleAfterLeave
     }
   },
-  render () {
+  render() {
     return h(Fragment, null, [
-      this.dialogList.map((dialog) =>
+      this.dialogList.map(dialog =>
         h(
           NDialogEnvironment,
           omit(dialog, ['destroy', 'style'], {
@@ -149,9 +149,9 @@ export const NDialogProvider = defineComponent({
             to: this.to,
             ref: ((inst: DialogInst | null) => {
               if (inst === null) {
-                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
                 delete this.dialogInstRefs[`n-dialog-${dialog.key}`]
-              } else {
+              }
+              else {
                 this.dialogInstRefs[`n-dialog-${dialog.key}`] = inst
               }
             }) as any,

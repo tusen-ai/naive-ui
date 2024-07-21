@@ -4,19 +4,8 @@
 Dropdown options can be cascaded.
 </markdown>
 
-<template>
-  <n-dropdown
-    :options="options"
-    placement="bottom-start"
-    trigger="click"
-    @select="handleSelect"
-  >
-    <n-button>The Great Gatsby characters</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
@@ -27,7 +16,7 @@ const options = [
   },
   {
     label: 'Daisy Buchanan',
-    icon () {
+    icon() {
       return h(NIcon, null, {
         default: () => h(CashIcon)
       })
@@ -74,14 +63,25 @@ const options = [
 ]
 
 export default defineComponent({
-  data () {
+  data() {
     const message = useMessage()
     return {
       options,
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    @select="handleSelect"
+  >
+    <n-button>The Great Gatsby characters</n-button>
+  </n-dropdown>
+</template>

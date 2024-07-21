@@ -6,7 +6,7 @@ import 'vfonts/Inter.css'
 import 'vfonts/FiraCode.css'
 import 'katex/dist/katex.css'
 
-export function installDemoComponents (app) {
+export function installDemoComponents(app) {
   app.component('ComponentDemo', ComponentDemo)
   app.component('ComponentDemos', ComponentDemos)
   app.component('EditOnGithubHeader', EditOnGithubHeader)

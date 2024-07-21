@@ -1,3 +1,35 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  name: 'CopyCodeButton',
+  props: {
+    code: {
+      type: String,
+      required: true
+    },
+    successText: {
+      type: String,
+      required: true
+    },
+    text: Boolean,
+    size: String,
+    depth: String
+  },
+  setup(props) {
+    const message = useMessage()
+    return {
+      handleClick() {
+        navigator.clipboard.writeText(props.code).then(() => {
+          message.success(props.successText)
+        })
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-button
     class="edit-button"
@@ -22,35 +54,3 @@
     </template>
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  name: 'CopyCodeButton',
-  props: {
-    code: {
-      type: String,
-      required: true
-    },
-    successText: {
-      type: String,
-      required: true
-    },
-    text: Boolean,
-    size: String,
-    depth: String
-  },
-  setup (props) {
-    const message = useMessage()
-    return {
-      handleClick () {
-        navigator.clipboard.writeText(props.code).then(() => {
-          message.success(props.successText)
-        })
-      }
-    }
-  }
-})
-</script>

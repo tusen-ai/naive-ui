@@ -1,17 +1,17 @@
 import {
-  h,
-  ref,
-  defineComponent,
-  watchEffect,
   type PropType,
   computed,
-  onMounted
+  defineComponent,
+  h,
+  onMounted,
+  ref,
+  watchEffect
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/index.cssr'
 import { type QrCodeTheme, qrcodeLight } from '../styles'
+import style from './styles/index.cssr'
 import qrcodegen from './qrcodegen'
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>
@@ -73,7 +73,7 @@ const UPSCALE_RATIO = 2
 export default defineComponent({
   name: 'QrCode',
   props: qrCodeProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     const themeRef = useTheme(
@@ -98,8 +98,8 @@ export default defineComponent({
     const canvasRef = ref<HTMLCanvasElement>()
 
     const qr = computed(() => {
-      const errorCorrectionLevel =
-        ERROR_CORRECTION_LEVEL[props.errorCorrectionLevel]
+      const errorCorrectionLevel
+        = ERROR_CORRECTION_LEVEL[props.errorCorrectionLevel]
       return qrcodegen.QrCode.encodeText(
         props.value ?? '-',
         errorCorrectionLevel
@@ -110,7 +110,8 @@ export default defineComponent({
       const imageLoadedTrigger = ref(0)
       let loadedIcon: HTMLImageElement | null = null
       watchEffect(() => {
-        if (props.type === 'svg') return
+        if (props.type === 'svg')
+          return
         void imageLoadedTrigger.value
         drawCanvas(
           qr.value,
@@ -129,14 +130,16 @@ export default defineComponent({
       })
 
       watchEffect(() => {
-        if (props.type === 'svg') return
+        if (props.type === 'svg')
+          return
         const { iconSrc } = props
         if (iconSrc) {
           let aborted = false
           const img = new Image()
           img.src = iconSrc
           img.onload = () => {
-            if (aborted) return
+            if (aborted)
+              return
             loadedIcon = img
             imageLoadedTrigger.value++
           }
@@ -147,7 +150,7 @@ export default defineComponent({
       })
     })
 
-    function drawCanvas (
+    function drawCanvas(
       qr: qrcodegen.QrCode,
       size: number,
       foregroundColor: string,
@@ -160,14 +163,16 @@ export default defineComponent({
       } | null
     ): void {
       const canvas = canvasRef.value
-      if (!canvas) return
+      if (!canvas)
+        return
       const canvasWidth = size * UPSCALE_RATIO
       const width = qr.size
       const scale = canvasWidth / width
       canvas.width = canvasWidth
       canvas.height = canvasWidth
       const ctx = canvas.getContext('2d')
-      if (!ctx) return
+      if (!ctx)
+        return
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       for (let y = 0; y < qr.size; y++) {
         for (let x = 0; x < qr.size; x++) {
@@ -180,8 +185,8 @@ export default defineComponent({
         }
       }
       if (iconConfig) {
-        const { icon, iconBackgroundColor, iconBorderRadius, iconSize } =
-          iconConfig
+        const { icon, iconBackgroundColor, iconBorderRadius, iconSize }
+          = iconConfig
         const finalIconSize = iconSize * UPSCALE_RATIO
         const centerX = (canvas.width - finalIconSize) / 2
         const centerY = (canvas.height - finalIconSize) / 2
@@ -196,21 +201,21 @@ export default defineComponent({
         )
         ctx.fill()
         const aspectRatio = icon.width / icon.height
-        const scaledWidth =
-          aspectRatio >= 1 ? finalIconSize : finalIconSize * aspectRatio
-        const scaledHeight =
-          aspectRatio <= 1 ? finalIconSize : finalIconSize / aspectRatio
+        const scaledWidth
+          = aspectRatio >= 1 ? finalIconSize : finalIconSize * aspectRatio
+        const scaledHeight
+          = aspectRatio <= 1 ? finalIconSize : finalIconSize / aspectRatio
         const left = centerX + (finalIconSize - scaledWidth) / 2
         const top = centerY + (finalIconSize - scaledHeight) / 2
         ctx.drawImage(icon, left, top, scaledWidth, scaledHeight)
       }
     }
 
-    function generatePath (modules: Modules, margin: number = 0): string {
+    function generatePath(modules: Modules, margin: number = 0): string {
       const ops: string[] = []
-      modules.forEach(function (row, y) {
+      modules.forEach((row, y) => {
         let start: number | null = null
-        row.forEach(function (cell, x) {
+        row.forEach((cell, x) => {
           if (!cell && start !== null) {
             // M0 0h7v1H0z injects the space with the move and drops the comma,
             // saving a char per operation
@@ -231,7 +236,8 @@ export default defineComponent({
             if (start === null) {
               // Just a single dark module.
               ops.push(`M${x + margin},${y + margin} h1v1H${x + margin}z`)
-            } else {
+            }
+            else {
               // Otherwise finish the current line.
               ops.push(
                 `M${start + margin},${y + margin} h${x + 1 - start}v1H${
@@ -250,7 +256,7 @@ export default defineComponent({
       return ops.join('')
     }
 
-    function svgInfo (
+    function svgInfo(
       qr: qrcodegen.QrCode,
       size: number,
       iconConfig: {
@@ -314,7 +320,7 @@ export default defineComponent({
       svgInfo: svgInfoRef
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       backgroundColor,

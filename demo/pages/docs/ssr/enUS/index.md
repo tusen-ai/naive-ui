@@ -2,83 +2,30 @@
 
 Since naive-ui is using CSS in JS, in SSR mode it needs some extra configuration.
 
-## Nuxt
+## Caveat
 
-If you are using Nuxt, please make sure you are using `naive-ui@>=2.29.0`.
+When using SSR under any framework, it is essential to ensure that the project meets the following conditions:
 
-### Nuxt Example
+1. During the build process, any direct or indirect references to the `@css-render/*` and `css-render` packages must have a version of `>=0.15.14`.
+2. During the build process, each direct or indirect reference to any `@css-render/*` and `css-render` package should ultimately point to a single target (a package should not have multiple versions or multiple copies of the same version).
 
-If you are using Nuxt, please see [example](https://github.com/07akioni/naive-ui-nuxt-demo).
+You can search for `css-render` in the lock file to check for duplicate packages.
 
-### Main Process
+Failure to meet these conditions may result in SSR build failures.
 
-1. Install `naive-ui` and `@css-render/vue3-ssr`.
-2. Add the following config in your `nuxt.config.ts`.
+If you encounter issues due to this, you can resolve the problem by directing all related packages to the same version using the `resolution` field in the `package.json` file.
 
-```ts
-import { defineNuxtConfig } from 'nuxt'
+## Nuxt.js
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? [
-            'naive-ui',
-            'vueuc',
-            '@css-render/vue3-ssr',
-            '@juggle/resize-observer'
-          ]
-        : ['@juggle/resize-observer']
-  },
-  vite: {
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
-          : []
-    }
-  }
-})
-```
+See [Nuxt.js](nuxtjs).
 
-3. Add the [plugin](https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts) in `plugins` folder of your nuxt project.
+## Vitepress
 
-### Using Auto Import in Nuxt
+See [Vitepress](vitepress).
 
-You can also use the `unplugin-auto-import` plugin to automatically import APIs and the `unplugin-vue-components` plugin to automatically import components on demand.
-In this case, the `nuxt.config.ts` file will have a few additional configuration lines compared to the example above.
+## Vite SSG/SSE
 
-```ts
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
-  },
-  vite: {
-    optimizeDeps: {
-      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
-    },
-    plugins: [
-      AutoImport({
-        imports: [
-          {
-            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-          },
-        ],
-      }),
-      Components({
-        resolvers: [NaiveUiResolver()]
-      })
-    ]
-  }
-});
-```
+See [Vite SSG/SSE](vite-ssge).
 
 ## Vite Example
 

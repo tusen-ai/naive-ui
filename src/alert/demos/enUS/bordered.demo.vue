@@ -2,6 +2,18 @@
 # Bordered
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      bordered: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical :size="12">
     <n-switch v-model:value="bordered" />
@@ -10,15 +22,3 @@
     </n-alert>
   </n-space>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      bordered: ref(true)
-    }
-  }
-})
-</script>

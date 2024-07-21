@@ -2,16 +2,12 @@
 # 异步options报错debug
 </markdown>
 
-<template>
-  <NTransfer v-model:value="values" :options="options" source-filterable />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { Option } from '../../src/interface'
+import type { Option } from '../../src/interface'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const values = ref([1])
     const options = ref<Option[]>([])
     const getOptions = () => {
@@ -40,3 +36,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <NTransfer v-model:value="values" :options="options" source-filterable />
+</template>

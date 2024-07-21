@@ -2,12 +2,23 @@
 # Customize icon
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+
+export default defineComponent({
+  components: {
+    CashIcon
+  }
+})
+</script>
+
 <template>
   <n-timeline>
     <n-timeline-item color="grey" content="Oops">
       <template #icon>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </template>
     </n-timeline-item>
@@ -19,7 +30,7 @@
     >
       <template #icon>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </template>
     </n-timeline-item>
@@ -30,7 +41,7 @@
     >
       <template #icon>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </template>
     </n-timeline-item>
@@ -42,7 +53,7 @@
     >
       <template #icon>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </template>
     </n-timeline-item>
@@ -54,20 +65,9 @@
     >
       <template #icon>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </template>
     </n-timeline-item>
   </n-timeline>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
-</script>

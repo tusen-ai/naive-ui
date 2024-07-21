@@ -1,44 +1,44 @@
 import {
-  h,
-  defineComponent,
+  type CSSProperties,
   Fragment,
-  ref,
-  withDirectives,
+  type PropType,
   Transition,
+  type VNode,
+  computed,
+  defineComponent,
+  h,
+  inject,
+  normalizeStyle,
+  onBeforeUnmount,
+  ref,
+  toRef,
   vShow,
   watch,
-  computed,
-  type CSSProperties,
-  type PropType,
-  toRef,
-  onBeforeUnmount,
-  type VNode,
-  inject,
-  normalizeStyle
+  withDirectives
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
-import { on, off } from 'evtd'
+import { off, on } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
 import { kebabCase } from 'lodash-es'
 import {
+  DownloadIcon,
+  ResizeSmallIcon,
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
   ZoomInIcon,
-  ZoomOutIcon,
-  ResizeSmallIcon,
-  DownloadIcon
+  ZoomOutIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon, closeIcon } from './icons'
+import { closeIcon, nextIcon, prevIcon } from './icons'
 import {
-  imageContextKey,
   type MoveStrategy,
+  imageContextKey,
   imagePreviewSharedProps
 } from './interface'
 import style from './styles/index.cssr'
@@ -62,7 +62,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const themeRef = useTheme(
       'Image',
       '-image',
@@ -79,9 +79,10 @@ export default defineComponent({
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
 
-    function syncTransformOrigin (): void {
+    function syncTransformOrigin(): void {
       const { value: previewWrapper } = previewWrapperRef
-      if (!thumbnailEl || !previewWrapper) return
+      if (!thumbnailEl || !previewWrapper)
+        return
       const { style } = previewWrapper
       const tbox = thumbnailEl.getBoundingClientRect()
       const tx = tbox.left + tbox.width / 2
@@ -89,7 +90,7 @@ export default defineComponent({
       style.transformOrigin = `${tx}px ${ty}px`
     }
 
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       switch (e.key) {
         case ' ':
           e.preventDefault()
@@ -109,7 +110,10 @@ export default defineComponent({
     watch(showRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
-      } else off('keydown', document, handleKeydown)
+      }
+      else {
+        off('keydown', document, handleKeydown)
+      }
     })
 
     onBeforeUnmount(() => {
@@ -126,13 +130,13 @@ export default defineComponent({
     let mouseDownClientY = 0
 
     let dragging = false
-    function handleMouseMove (e: MouseEvent): void {
+    function handleMouseMove(e: MouseEvent): void {
       const { clientX, clientY } = e
       offsetX = clientX - startX
       offsetY = clientY - startY
       beforeNextFrameOnce(derivePreviewStyle)
     }
-    function getMoveStrategy (opts: {
+    function getMoveStrategy(opts: {
       mouseUpClientX: number
       mouseUpClientY: number
       mouseDownClientX: number
@@ -146,10 +150,10 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection: 'verticalTop' | 'verticalBottom' =
-        `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight' =
-        `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
+      const moveVerticalDirection: 'verticalTop' | 'verticalBottom'
+        = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight'
+        = `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
 
       return {
         moveVerticalDirection,
@@ -159,12 +163,13 @@ export default defineComponent({
       }
     }
     // avoid image move outside viewport
-    function getDerivedOffset (moveStrategy?: MoveStrategy): {
+    function getDerivedOffset(moveStrategy?: MoveStrategy): {
       offsetX: number
       offsetY: number
     } {
       const { value: preview } = previewRef
-      if (!preview) return { offsetX: 0, offsetY: 0 }
+      if (!preview)
+        return { offsetX: 0, offsetY: 0 }
       const pbox = preview.getBoundingClientRect()
       const {
         moveVerticalDirection,
@@ -177,16 +182,20 @@ export default defineComponent({
       let nextOffsetY = 0
       if (pbox.width <= window.innerWidth) {
         nextOffsetX = 0
-      } else if (pbox.left > 0) {
+      }
+      else if (pbox.left > 0) {
         nextOffsetX = (pbox.width - window.innerWidth) / 2
-      } else if (pbox.right < window.innerWidth) {
+      }
+      else if (pbox.right < window.innerWidth) {
         nextOffsetX = -(pbox.width - window.innerWidth) / 2
-      } else if (moveHorizontalDirection === 'horizontalRight') {
+      }
+      else if (moveHorizontalDirection === 'horizontalRight') {
         nextOffsetX = Math.min(
           (pbox.width - window.innerWidth) / 2,
           startOffsetX - (deltaHorizontal ?? 0)
         )
-      } else {
+      }
+      else {
         nextOffsetX = Math.max(
           -((pbox.width - window.innerWidth) / 2),
           startOffsetX - (deltaHorizontal ?? 0)
@@ -195,16 +204,20 @@ export default defineComponent({
 
       if (pbox.height <= window.innerHeight) {
         nextOffsetY = 0
-      } else if (pbox.top > 0) {
+      }
+      else if (pbox.top > 0) {
         nextOffsetY = (pbox.height - window.innerHeight) / 2
-      } else if (pbox.bottom < window.innerHeight) {
+      }
+      else if (pbox.bottom < window.innerHeight) {
         nextOffsetY = -(pbox.height - window.innerHeight) / 2
-      } else if (moveVerticalDirection === 'verticalBottom') {
+      }
+      else if (moveVerticalDirection === 'verticalBottom') {
         nextOffsetY = Math.min(
           (pbox.height - window.innerHeight) / 2,
           startOffsetY - (deltaVertical ?? 0)
         )
-      } else {
+      }
+      else {
         nextOffsetY = Math.max(
           -((pbox.height - window.innerHeight) / 2),
           startOffsetY - (deltaVertical ?? 0)
@@ -216,7 +229,7 @@ export default defineComponent({
         offsetY: nextOffsetY
       }
     }
-    function handleMouseUp (e: MouseEvent): void {
+    function handleMouseUp(e: MouseEvent): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
       const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
@@ -234,9 +247,10 @@ export default defineComponent({
     }
     const imageContext = inject(imageContextKey, null)
 
-    function handlePreviewMousedown (e: MouseEvent): void {
+    function handlePreviewMousedown(e: MouseEvent): void {
       imageContext?.previewedImgPropsRef.value?.onMousedown?.(e)
-      if (e.button !== 0) return
+      if (e.button !== 0)
+        return
 
       const { clientX, clientY } = e
       dragging = true
@@ -252,42 +266,43 @@ export default defineComponent({
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
     }
-    function handlePreviewDblclick (e: MouseEvent): void {
-      imageContext?.previewedImgPropsRef.value?.onDblclick?.(e)
-      const originalImageSizeScale = getOrignalImageSizeScale()
-      scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
-      derivePreviewStyle()
-    }
 
     const scaleRadix = 1.5
     let scaleExp = 0
     let scale = 1
     let rotate = 0
-    function resetScale (): void {
+    function handlePreviewDblclick(e: MouseEvent): void {
+      imageContext?.previewedImgPropsRef.value?.onDblclick?.(e)
+      const originalImageSizeScale = getOrignalImageSizeScale()
+      scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
+      derivePreviewStyle()
+    }
+    function resetScale(): void {
       scale = 1
       scaleExp = 0
     }
-    function handleSwitchPrev (): void {
+    function handleSwitchPrev(): void {
       resetScale()
       rotate = 0
       props.onPrev?.()
     }
-    function handleSwitchNext (): void {
+    function handleSwitchNext(): void {
       resetScale()
       rotate = 0
       props.onNext?.()
     }
-    function rotateCounterclockwise (): void {
+    function rotateCounterclockwise(): void {
       rotate -= 90
       derivePreviewStyle()
     }
-    function rotateClockwise (): void {
+    function rotateClockwise(): void {
       rotate += 90
       derivePreviewStyle()
     }
-    function getMaxScale (): number {
+    function getMaxScale(): number {
       const { value: preview } = previewRef
-      if (!preview) return 1
+      if (!preview)
+        return 1
       const { innerWidth, innerHeight } = window
       const heightMaxScale = Math.max(
         1,
@@ -299,9 +314,10 @@ export default defineComponent({
       )
       return Math.max(3, heightMaxScale * 2, widthMaxScale * 2)
     }
-    function getOrignalImageSizeScale (): number {
+    function getOrignalImageSizeScale(): number {
       const { value: preview } = previewRef
-      if (!preview) return 1
+      if (!preview)
+        return 1
       const { innerWidth, innerHeight } = window
       const heightScale = preview.naturalHeight / (innerHeight - BLEEDING)
       const widthScale = preview.naturalWidth / (innerWidth - BLEEDING)
@@ -310,19 +326,19 @@ export default defineComponent({
       }
       return Math.max(heightScale, widthScale)
     }
-    function zoomIn (): void {
+    function zoomIn(): void {
       const maxScale = getMaxScale()
       if (scale < maxScale) {
         scaleExp += 1
-        scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
+        scale = Math.min(maxScale, scaleRadix ** scaleExp)
         derivePreviewStyle()
       }
     }
-    function zoomOut (): void {
+    function zoomOut(): void {
       if (scale > 0.5) {
         const originalScale = scale
         scaleExp -= 1
-        scale = Math.max(0.5, Math.pow(scaleRadix, scaleExp))
+        scale = Math.max(0.5, scaleRadix ** scaleExp)
         const diff = originalScale - scale
         derivePreviewStyle(false)
         const offset = getDerivedOffset()
@@ -335,51 +351,51 @@ export default defineComponent({
       }
     }
 
-    function handleDownloadClick (): void {
+    function handleDownloadClick(): void {
       const src = previewSrcRef.value
       if (src) {
         download(src, undefined)
       }
     }
 
-    function derivePreviewStyle (transition: boolean = true): void {
+    function derivePreviewStyle(transition: boolean = true): void {
       const { value: preview } = previewRef
-      if (!preview) return
+      if (!preview)
+        return
       const { style } = preview
       const controlledStyle = normalizeStyle(
         imageContext?.previewedImgPropsRef.value?.style
       )
       let controlledStyleString = ''
       if (typeof controlledStyle === 'string') {
-        controlledStyleString = controlledStyle + ';'
-      } else {
+        controlledStyleString = `${controlledStyle};`
+      }
+      else {
         for (const key in controlledStyle) {
           controlledStyleString += `${kebabCase(key)}: ${controlledStyle[key]};`
         }
       }
       const transformStyle = `transform-origin: center; transform: translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale});`
       if (dragging) {
-        style.cssText =
-          controlledStyleString +
-          'cursor: grabbing; transition: none;' +
+        style.cssText = `${
+          controlledStyleString
+        }cursor: grabbing; transition: none;${transformStyle}`
+      }
+      else {
+        style.cssText = `${controlledStyleString}cursor: grab;${
           transformStyle
-      } else {
-        style.cssText =
-          controlledStyleString +
-          'cursor: grab;' +
-          transformStyle +
-          (transition ? '' : 'transition: none;')
+        }${transition ? '' : 'transition: none;'}`
       }
       if (!transition) {
         void preview.offsetHeight
       }
     }
 
-    function toggleShow (): void {
+    function toggleShow(): void {
       showRef.value = !showRef.value
       displayedRef.value = true
     }
-    function resizeToOrignalImageSize (): void {
+    function resizeToOrignalImageSize(): void {
       scale = getOrignalImageSizeScale()
       scaleExp = Math.ceil(Math.log(scale) / Math.log(scaleRadix))
       offsetX = 0
@@ -396,7 +412,7 @@ export default defineComponent({
       toggleShow
     }
 
-    function withTooltip (
+    function withTooltip(
       node: VNode,
       tooltipKey: keyof typeof localeRef.value
     ): VNode {
@@ -417,7 +433,8 @@ export default defineComponent({
             }}
           </NTooltip>
         )
-      } else {
+      }
+      else {
         return node
       }
     }
@@ -455,7 +472,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       previewedImgProps: imageContext?.previewedImgPropsRef,
-      handleWheel (e: WheelEvent) {
+      handleWheel(e: WheelEvent) {
         e.preventDefault()
       },
       handlePreviewMousedown,
@@ -485,7 +502,7 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const { clsPrefix, renderToolbar, withTooltip } = this
 
     const prevNode = withTooltip(
@@ -589,7 +606,8 @@ export default defineComponent({
                     <Transition name="fade-in-transition" appear={this.appear}>
                       {{
                         default: () => {
-                          if (!this.show) return null
+                          if (!this.show)
+                            return null
                           return (
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
                               {renderToolbar ? (

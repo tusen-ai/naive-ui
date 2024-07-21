@@ -2,11 +2,22 @@
 # 可以关掉
 </markdown>
 
+<script lang="ts">
+import { IosAirplane } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    IosAirplane
+  }
+})
+</script>
+
 <template>
   <n-alert title="Default 类型" type="default" closable>
     <template #icon>
       <n-icon>
-        <ios-airplane />
+        <IosAirplane />
       </n-icon>
     </template>
     Gee it's good to be back home
@@ -24,17 +35,6 @@
     I'm back in the U.S.S.R.
   </n-alert>
 </template>
-
-<script lang="ts">
-import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
-</script>
 
 <style>
 .n-alert:not(:last-child) {

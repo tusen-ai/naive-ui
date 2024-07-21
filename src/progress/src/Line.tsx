@@ -1,19 +1,19 @@
 import {
-  defineComponent,
-  h,
+  type CSSProperties,
   type PropType,
   computed,
-  type CSSProperties
+  defineComponent,
+  h
 } from 'vue'
 import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
-  WarningIcon,
-  InfoIcon as InfoCircleIcon,
   ErrorIcon as ErrorCircleIcon,
-  SuccessIcon as SuccessCircleIcon
+  InfoIcon as InfoCircleIcon,
+  SuccessIcon as SuccessCircleIcon,
+  WarningIcon
 } from '../../_internal/icons'
-import { type Status } from './interface'
+import type { Status } from './interface'
 
 const iconMap = {
   success: <SuccessCircleIcon />,
@@ -61,7 +61,7 @@ export default defineComponent({
     railBorderRadius: [String, Number],
     fillBorderRadius: [String, Number]
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const styleHeightRef = computed(() => {
       return formatLength(props.height)
     })
@@ -128,8 +128,8 @@ export default defineComponent({
                 <div
                   class={[
                     `${clsPrefix}-progress-graph-line-fill`,
-                    processing &&
-                      `${clsPrefix}-progress-graph-line-fill--processing`
+                    processing
+                    && `${clsPrefix}-progress-graph-line-fill--processing`
                   ]}
                   style={{
                     maxWidth: `${props.percentage}%`,

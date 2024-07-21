@@ -2,6 +2,31 @@
 # Customizing input content
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      customValue: ref([
+        {
+          isCheck: true,
+          num: 1,
+          string: 'A String'
+        }
+      ]),
+      onCreate() {
+        return {
+          isCheck: false,
+          num: 1,
+          string: 'A String'
+        }
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-dynamic-input v-model:value="customValue" :on-create="onCreate">
     <template #create-button-default>
@@ -23,28 +48,3 @@
   </n-dynamic-input>
   <pre>{{ JSON.stringify(customValue, null, 2) }}</pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      customValue: ref([
-        {
-          isCheck: true,
-          num: 1,
-          string: 'A String'
-        }
-      ]),
-      onCreate () {
-        return {
-          isCheck: false,
-          num: 1,
-          string: 'A String'
-        }
-      }
-    }
-  }
-})
-</script>

@@ -2,30 +2,9 @@
 # Dark Debug 3
 </markdown>
 
-<template>
-  <n-button @click="showModal = !showModal">
-    Toggle
-  </n-button>
-  <n-modal
-    v-model:show="showModal"
-    title="Dark Modal Debug"
-    preset="card"
-    :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
-  >
-    <n-data-table
-      ref="table"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :max-height="250"
-      :scroll-x="1800"
-    />
-  </n-modal>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
 
 const columns: DataTableColumns<{
@@ -36,7 +15,7 @@ const columns: DataTableColumns<{
 }> = [
   {
     type: 'selection',
-    disabled (row) {
+    disabled(row) {
       return row.name === 'Edward King 3'
     },
     fixed: 'left'
@@ -75,21 +54,21 @@ const columns: DataTableColumns<{
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -109,7 +88,7 @@ const data = repeat(46, undefined).map((_, index) => ({
 }))
 
 export default defineComponent({
-  data () {
+  data() {
     return {
       showModal: false,
       data,
@@ -117,9 +96,29 @@ export default defineComponent({
     }
   },
   computed: {
-    pagination () {
+    pagination() {
       return { pageSize: 10 }
     }
   }
 })
 </script>
+
+<template>
+  <n-button @click="showModal = !showModal">
+    Toggle
+  </n-button>
+  <n-modal
+    v-model:show="showModal"
+    title="Dark Modal Debug"
+    preset="card"
+    :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
+  >
+    <n-data-table
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      :max-height="250"
+      :scroll-x="1800"
+    />
+  </n-modal>
+</template>

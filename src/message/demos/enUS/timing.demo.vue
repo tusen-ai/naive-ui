@@ -4,23 +4,17 @@
 Specify the duration of messages.
 </markdown>
 
-<template>
-  <n-button @click="createMessage">
-    Last for 5 second
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
-      createMessage () {
+      createMessage() {
         message.info(
-          "I don't know why nobody told you how to unfold your love",
+          'I don\'t know why nobody told you how to unfold your love',
           { duration: 5000 }
         )
       }
@@ -28,3 +22,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="createMessage">
+    Last for 5 second
+  </n-button>
+</template>

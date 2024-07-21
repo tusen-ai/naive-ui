@@ -1,23 +1,23 @@
 import {
-  h,
-  nextTick,
-  toRef,
-  watch,
-  ref,
-  inject,
-  defineComponent,
+  type ComponentPublicInstance,
+  type DirectiveArguments,
   type PropType,
-  provide,
-  withDirectives,
-  vShow,
   Transition,
   type VNode,
-  type ComponentPublicInstance,
-  mergeProps,
+  type VNodeChild,
   cloneVNode,
   computed,
-  type DirectiveArguments,
-  type VNodeChild
+  defineComponent,
+  h,
+  inject,
+  mergeProps,
+  nextTick,
+  provide,
+  ref,
+  toRef,
+  vShow,
+  watch,
+  withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
@@ -81,19 +81,19 @@ export default defineComponent({
     onAfterEnter: Function as PropType<() => void>,
     onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const displayedRef = ref(props.show)
     const transformOriginXRef = ref<number | null>(null)
     const transformOriginYRef = ref<number | null>(null)
     watch(toRef(props, 'show'), (value) => {
-      if (value) displayedRef.value = true
+      if (value)
+        displayedRef.value = true
     })
     useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NModal = inject(modalInjectionKey)!
-    function styleTransformOrigin (): string {
+    function styleTransformOrigin(): string {
       if (NModal.transformOriginRef.value === 'center') {
         return ''
       }
@@ -101,13 +101,14 @@ export default defineComponent({
       const { value: transformOriginY } = transformOriginYRef
       if (transformOriginX === null || transformOriginY === null) {
         return ''
-      } else if (scrollbarRef.value) {
+      }
+      else if (scrollbarRef.value) {
         const scrollTop = scrollbarRef.value.containerScrollTop
         return `${transformOriginX}px ${transformOriginY + scrollTop}px`
       }
       return ''
     }
-    function syncTransformOrigin (el: HTMLElement): void {
+    function syncTransformOrigin(el: HTMLElement): void {
       if (NModal.transformOriginRef.value === 'center') {
         return
       }
@@ -115,7 +116,8 @@ export default defineComponent({
       if (!mousePosition) {
         return
       }
-      if (!scrollbarRef.value) return
+      if (!scrollbarRef.value)
+        return
       const scrollTop = scrollbarRef.value.containerScrollTop
       const { offsetLeft, offsetTop } = el
       if (mousePosition) {
@@ -126,31 +128,31 @@ export default defineComponent({
       }
       el.style.transformOrigin = styleTransformOrigin()
     }
-    function handleEnter (el: HTMLElement): void {
+    function handleEnter(el: HTMLElement): void {
       void nextTick(() => {
         syncTransformOrigin(el)
       })
     }
-    function handleBeforeLeave (el: HTMLElement): void {
+    function handleBeforeLeave(el: HTMLElement): void {
       el.style.transformOrigin = styleTransformOrigin()
       props.onBeforeLeave()
     }
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       displayedRef.value = false
       transformOriginXRef.value = null
       transformOriginYRef.value = null
       props.onAfterLeave()
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
       if (onClose) {
         onClose()
       }
     }
-    function handleNegativeClick (): void {
+    function handleNegativeClick(): void {
       props.onNegativeClick()
     }
-    function handlePositiveClick (): void {
+    function handlePositiveClick(): void {
       props.onPositiveClick()
     }
     const childNodeRef = ref<VNode | null>(null)
@@ -184,7 +186,7 @@ export default defineComponent({
       handleEnter
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       $attrs,
@@ -212,104 +214,104 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
-            <NScrollbar
-              ref="scrollbarRef"
-              theme={this.mergedTheme.peers.Scrollbar}
-              themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-              contentClass={`${mergedClsPrefix}-modal-scroll-content`}
-            >
-              {{
-                default: () => [
-                  this.renderMask?.(),
-                  <VFocusTrap
-                    disabled={!this.trapFocus}
-                    active={this.show}
-                    onEsc={this.onEsc}
-                    autoFocus={this.autoFocus}
-                  >
-                    {{
-                      default: () => (
-                        <Transition
-                          name="fade-in-scale-up-transition"
-                          appear={this.appear ?? this.isMounted}
-                          onEnter={handleEnter as any}
-                          onAfterEnter={this.onAfterEnter}
-                          onAfterLeave={handleAfterLeave}
-                          onBeforeLeave={handleBeforeLeave as any}
-                        >
-                          {{
-                            default: () => {
-                              const dirs: DirectiveArguments = [
-                                [vShow, this.show]
-                              ]
-                              const { onClickoutside } = this
-                              if (onClickoutside) {
-                                dirs.push([
-                                  clickoutside,
-                                  this.onClickoutside,
-                                  undefined as unknown as string,
-                                  { capture: true }
-                                ])
-                              }
-                              return withDirectives(
-                                (this.preset === 'confirm' ||
-                                this.preset === 'dialog' ? (
-                                  <NDialog
-                                    {...this.$attrs}
-                                    class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
-                                    ]}
-                                    ref="bodyRef"
-                                    theme={this.mergedTheme.peers.Dialog}
-                                    themeOverrides={
-                                      this.mergedTheme.peerOverrides.Dialog
-                                    }
-                                    {...keep(this.$props, dialogPropKeys)}
-                                    aria-modal="true"
-                                  >
-                                    {$slots}
-                                  </NDialog>
-                                    ) : this.preset === 'card' ? (
-                                  <NCard
-                                    {...this.$attrs}
-                                    ref="bodyRef"
-                                    class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
-                                    ]}
-                                    theme={this.mergedTheme.peers.Card}
-                                    themeOverrides={
-                                      this.mergedTheme.peerOverrides.Card
-                                    }
-                                    {...keep(this.$props, cardBasePropKeys)}
-                                    aria-modal="true"
-                                    role="dialog"
-                                  >
-                                    {$slots}
-                                  </NCard>
-                                    ) : (
-                                      (this.childNodeRef = childNode)
-                                    )) as any,
-                                dirs
-                              )
+        <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
+          <NScrollbar
+            ref="scrollbarRef"
+            theme={this.mergedTheme.peers.Scrollbar}
+            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            contentClass={`${mergedClsPrefix}-modal-scroll-content`}
+          >
+            {{
+              default: () => [
+                this.renderMask?.(),
+                <VFocusTrap
+                  disabled={!this.trapFocus}
+                  active={this.show}
+                  onEsc={this.onEsc}
+                  autoFocus={this.autoFocus}
+                >
+                  {{
+                    default: () => (
+                      <Transition
+                        name="fade-in-scale-up-transition"
+                        appear={this.appear ?? this.isMounted}
+                        onEnter={handleEnter as any}
+                        onAfterEnter={this.onAfterEnter}
+                        onAfterLeave={handleAfterLeave}
+                        onBeforeLeave={handleBeforeLeave as any}
+                      >
+                        {{
+                          default: () => {
+                            const dirs: DirectiveArguments = [
+                              [vShow, this.show]
+                            ]
+                            const { onClickoutside } = this
+                            if (onClickoutside) {
+                              dirs.push([
+                                clickoutside,
+                                this.onClickoutside,
+                                undefined as unknown as string,
+                                { capture: true }
+                              ])
                             }
-                          }}
-                        </Transition>
-                      )
-                    }}
-                  </VFocusTrap>
-                ]
-              }}
-            </NScrollbar>
-          </div>,
+                            return withDirectives(
+                              (this.preset === 'confirm'
+                              || this.preset === 'dialog' ? (
+                                    <NDialog
+                                      {...this.$attrs}
+                                      class={[
+                                      `${mergedClsPrefix}-modal`,
+                                      this.$attrs.class
+                                      ]}
+                                      ref="bodyRef"
+                                      theme={this.mergedTheme.peers.Dialog}
+                                      themeOverrides={
+                                        this.mergedTheme.peerOverrides.Dialog
+                                      }
+                                      {...keep(this.$props, dialogPropKeys)}
+                                      aria-modal="true"
+                                    >
+                                      {$slots}
+                                    </NDialog>
+                                  ) : this.preset === 'card' ? (
+                                    <NCard
+                                      {...this.$attrs}
+                                      ref="bodyRef"
+                                      class={[
+                                      `${mergedClsPrefix}-modal`,
+                                      this.$attrs.class
+                                      ]}
+                                      theme={this.mergedTheme.peers.Card}
+                                      themeOverrides={
+                                        this.mergedTheme.peerOverrides.Card
+                                      }
+                                      {...keep(this.$props, cardBasePropKeys)}
+                                      aria-modal="true"
+                                      role="dialog"
+                                    >
+                                      {$slots}
+                                    </NCard>
+                                  ) : (
+                                    (this.childNodeRef = childNode)
+                                  )) as any,
+                              dirs
+                            )
+                          }
+                        }}
+                      </Transition>
+                    )
+                  }}
+                </VFocusTrap>
+              ]
+            }}
+          </NScrollbar>
+        </div>,
+        [
           [
-            [
-              vShow,
-              this.displayDirective === 'if' || this.displayed || this.show
-            ]
+            vShow,
+            this.displayDirective === 'if' || this.displayed || this.show
           ]
+        ]
       )
       : null
   }

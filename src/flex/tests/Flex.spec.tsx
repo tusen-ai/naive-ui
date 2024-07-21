@@ -1,8 +1,8 @@
-import { mount, type VueWrapper } from '@vue/test-utils'
-import { h, Fragment, createCommentVNode } from 'vue'
+import { type VueWrapper, mount } from '@vue/test-utils'
+import { Fragment, createCommentVNode, h } from 'vue'
 import { NFlex } from '../index'
 
-const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
+function getChildrenNode(wrapper: VueWrapper<any>): any[] {
   return Array.from(wrapper.find('.n-flex').element.childNodes)
 }
 
@@ -13,7 +13,7 @@ describe('n-flex', () => {
 
   it('render empty children', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NFlex />
       }
     })
@@ -24,7 +24,7 @@ describe('n-flex', () => {
 
   it('render flex string size', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NFlex size="large">{{ default: () => 'kirby' }}</NFlex>
       }
     })
@@ -35,7 +35,7 @@ describe('n-flex', () => {
 
   it('render vertical flex', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NFlex vertical>
             {{
@@ -66,13 +66,14 @@ describe('n-flex', () => {
 
   it('should render with invalidElement', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NFlex>
             {{
               default: () => (
                 <>
-                  text1<span>text1</span>
+                  text1
+                  <span>text1</span>
                   text1
                 </>
               )
@@ -90,7 +91,7 @@ describe('n-flex', () => {
 
   it('should not render comment node', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NFlex>{{ default: () => false && 'div' }}</NFlex>
       }
     })
@@ -116,7 +117,7 @@ describe('n-flex', () => {
 
   it('should render while slot is Comment', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NFlex>
             {{

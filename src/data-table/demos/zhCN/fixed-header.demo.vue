@@ -4,15 +4,6 @@
 在展示大量数据的时候通过设定 `max-height` 来固定头部、滚动数据。
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-    :max-height="250"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -32,7 +23,7 @@ const columns = [
 ]
 
 export default defineComponent({
-  data () {
+  data() {
     return {
       data: Array.from({ length: 46 }).map((_, index) => ({
         key: index,
@@ -48,3 +39,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :max-height="250"
+  />
+</template>

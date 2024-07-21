@@ -4,23 +4,12 @@
 Dropdown options can be aligned using the `placement` property.
 </markdown>
 
-<template>
-  <n-dropdown
-    trigger="hover"
-    placement="bottom-start"
-    :options="options"
-    @select="handleSelect"
-  >
-    <n-button>Go For a Trip</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options: [
@@ -29,8 +18,8 @@ export default defineComponent({
           key: 'Marina Bay Sands'
         },
         {
-          label: "Brown's Hotel, London",
-          key: "Brown's Hotel, London"
+          label: 'Brown\'s Hotel, London',
+          key: 'Brown\'s Hotel, London'
         },
         {
           label: 'Atlantis Bahamas, Nassau',
@@ -41,10 +30,21 @@ export default defineComponent({
           key: 'The Beverly Hills Hotel, Los Angeles'
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    trigger="hover"
+    placement="bottom-start"
+    :options="options"
+    @select="handleSelect"
+  >
+    <n-button>Go For a Trip</n-button>
+  </n-dropdown>
+</template>

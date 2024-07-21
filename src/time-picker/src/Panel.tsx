@@ -1,17 +1,17 @@
-import { h, ref, defineComponent, inject, type PropType, computed } from 'vue'
-import { NScrollbar, NBaseFocusDetector } from '../../_internal'
+import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
+import { NBaseFocusDetector, NScrollbar } from '../../_internal'
 import { NButton } from '../../button'
-import { getTimeUnits, time, getAmPm } from './utils'
+import type { MaybeArray } from '../../_utils'
+import { getAmPm, getTimeUnits, time } from './utils'
 import {
   type IsHourDisabled,
   type IsMinuteDisabled,
   type IsSecondDisabled,
-  type ItemValue,
   type Item,
+  type ItemValue,
   timePickerInjectionKey
 } from './interface'
 import PanelCol from './PanelCol'
-import { type MaybeArray } from '../../_utils'
 
 const timePickerPanelProps = {
   actions: {
@@ -94,12 +94,10 @@ const timePickerPanelProps = {
 export default defineComponent({
   name: 'TimePickerPanel',
   props: timePickerPanelProps,
-  setup (props) {
-    const {
-      mergedThemeRef,
-      mergedClsPrefixRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(timePickerInjectionKey)!
+  setup(props) {
+    const { mergedThemeRef, mergedClsPrefixRef } = inject(
+      timePickerInjectionKey
+    )!
 
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours, use12Hours, amPmValue } = props
@@ -111,12 +109,13 @@ export default defineComponent({
             disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
           }
         })
-      } else {
+      }
+      else {
         const mergedAmPmValue = amPmValue ?? getAmPm(Date.now())
         return getTimeUnits(time.hours, hours, mergedAmPmValue).map((hour) => {
           const hourAs12FormattedNumber = Number(hour)
-          const hourAs24FormattedNumber =
-            mergedAmPmValue === 'pm' && hourAs12FormattedNumber !== 12
+          const hourAs24FormattedNumber
+            = mergedAmPmValue === 'pm' && hourAs12FormattedNumber !== 12
               ? hourAs12FormattedNumber + 12
               : hourAs12FormattedNumber
           return {
@@ -199,7 +198,7 @@ export default defineComponent({
       amPmScrollRef: ref(null)
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme } = this
     return (
       <div
@@ -214,10 +213,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                this.isHourInvalid &&
-                  `${mergedClsPrefix}-time-picker-col--invalid`,
-                this.transitionDisabled &&
-                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
+                this.isHourInvalid
+                && `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled
+                && `${mergedClsPrefix}-time-picker-col--transition-disabled`
               ]}
             >
               <NScrollbar
@@ -245,10 +244,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                this.transitionDisabled &&
-                  `${mergedClsPrefix}-time-picker-col--transition-disabled`,
-                this.isMinuteInvalid &&
-                  `${mergedClsPrefix}-time-picker-col--invalid`
+                this.transitionDisabled
+                && `${mergedClsPrefix}-time-picker-col--transition-disabled`,
+                this.isMinuteInvalid
+                && `${mergedClsPrefix}-time-picker-col--invalid`
               ]}
             >
               <NScrollbar
@@ -276,10 +275,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                this.isSecondInvalid &&
-                  `${mergedClsPrefix}-time-picker-col--invalid`,
-                this.transitionDisabled &&
-                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
+                this.isSecondInvalid
+                && `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled
+                && `${mergedClsPrefix}-time-picker-col--transition-disabled`
               ]}
             >
               <NScrollbar
@@ -307,10 +306,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                this.isAmPmInvalid &&
-                  `${mergedClsPrefix}-time-picker-col--invalid`,
-                this.transitionDisabled &&
-                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
+                this.isAmPmInvalid
+                && `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled
+                && `${mergedClsPrefix}-time-picker-col--transition-disabled`
               ]}
             >
               <NScrollbar

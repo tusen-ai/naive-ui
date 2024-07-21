@@ -1,11 +1,11 @@
 import {
+  type CSSProperties,
+  type PropType,
+  computed,
+  defineComponent,
   h,
   ref,
   toRef,
-  defineComponent,
-  computed,
-  type CSSProperties,
-  type PropType,
   watchEffect
 } from 'vue'
 import { depx, pxfy } from 'seemly'
@@ -16,14 +16,14 @@ import type { ThemeProps } from '../../_mixins'
 import {
   call,
   createKey,
-  warnOnce,
   isSlotEmpty,
-  resolveWrappedSlot
+  resolveWrappedSlot,
+  warnOnce
 } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
-import type { OnUpdateValueImpl, OnUpdateValue } from './interface'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 
 export const switchProps = {
@@ -34,7 +34,7 @@ export const switchProps = {
   },
   value: {
     type: [String, Number, Boolean] as PropType<
-    string | number | boolean | undefined
+      string | number | boolean | undefined
     >,
     default: undefined
   },
@@ -62,7 +62,7 @@ export const switchProps = {
     default: false
   },
   railStyle: Function as PropType<
-  (params: { focused: boolean, checked: boolean }) => string | CSSProperties
+    (params: { focused: boolean, checked: boolean }) => string | CSSProperties
   >,
   rubberBand: {
     type: Boolean,
@@ -79,7 +79,7 @@ let supportCssMax: boolean | undefined
 export default defineComponent({
   name: 'Switch',
   props: switchProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange) {
@@ -94,10 +94,12 @@ export default defineComponent({
       if (typeof CSS !== 'undefined') {
         if (typeof CSS.supports !== 'undefined') {
           supportCssMax = CSS.supports('width', 'max(1px)')
-        } else {
+        }
+        else {
           supportCssMax = false
         }
-      } else {
+      }
+      else {
         // If you are using SSR, we assume that you are targeting browsers with
         // recent versions
         supportCssMax = true
@@ -127,61 +129,70 @@ export default defineComponent({
     const focusedRef = ref(false)
     const mergedRailStyleRef = computed(() => {
       const { railStyle } = props
-      if (!railStyle) return undefined
+      if (!railStyle)
+        return undefined
       return railStyle({ focused: focusedRef.value, checked: checkedRef.value })
     })
-    function doUpdateValue (value: string | number | boolean): void {
+    function doUpdateValue(value: string | number | boolean): void {
       const {
         'onUpdate:value': _onUpdateValue,
         onChange,
         onUpdateValue
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doFocus (): void {
+    function doFocus(): void {
       const { nTriggerFormFocus } = formItem
       nTriggerFormFocus()
     }
-    function doBlur (): void {
+    function doBlur(): void {
       const { nTriggerFormBlur } = formItem
       nTriggerFormBlur()
     }
-    function handleClick (): void {
-      if (props.loading || mergedDisabledRef.value) return
+    function handleClick(): void {
+      if (props.loading || mergedDisabledRef.value)
+        return
       if (mergedValueRef.value !== props.checkedValue) {
         doUpdateValue(props.checkedValue)
-      } else {
+      }
+      else {
         doUpdateValue(props.uncheckedValue)
       }
     }
-    function handleFocus (): void {
+    function handleFocus(): void {
       focusedRef.value = true
       doFocus()
     }
-    function handleBlur (): void {
+    function handleBlur(): void {
       focusedRef.value = false
       doBlur()
       pressedRef.value = false
     }
-    function handleKeyup (e: KeyboardEvent): void {
-      if (props.loading || mergedDisabledRef.value) return
+    function handleKeyup(e: KeyboardEvent): void {
+      if (props.loading || mergedDisabledRef.value)
+        return
       if (e.key === ' ') {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
-        } else {
+        }
+        else {
           doUpdateValue(props.uncheckedValue)
         }
         pressedRef.value = false
       }
     }
-    function handleKeydown (e: KeyboardEvent): void {
-      if (props.loading || mergedDisabledRef.value) return
+    function handleKeydown(e: KeyboardEvent): void {
+      if (props.loading || mergedDisabledRef.value)
+        return
       if (e.key === ' ') {
         e.preventDefault()
         pressedRef.value = true
@@ -218,11 +229,12 @@ export default defineComponent({
         offset = `calc((${railHeight} - ${buttonHeight}) / 2)`
         height = `max(${railHeight}, ${buttonHeight})`
         width = `max(${railWidth}, calc(${railWidth} + ${buttonHeight} - ${railHeight}))`
-      } else {
+      }
+      else {
         offset = pxfy((depx(railHeight) - depx(buttonHeight)) / 2)
         height = pxfy(Math.max(depx(railHeight), depx(buttonHeight)))
-        width =
-          depx(railHeight) > depx(buttonHeight)
+        width
+          = depx(railHeight) > depx(buttonHeight)
             ? railWidth
             : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
       }
@@ -276,7 +288,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedDisabled,
@@ -294,9 +306,9 @@ export default defineComponent({
       'unchecked-icon': uncheckedIconSlot
     } = $slots
     const hasIcon = !(
-      isSlotEmpty(iconSlot) &&
-      isSlotEmpty(checkedIconSlot) &&
-      isSlotEmpty(uncheckedIconSlot)
+      isSlotEmpty(iconSlot)
+      && isSlotEmpty(checkedIconSlot)
+      && isSlotEmpty(uncheckedIconSlot)
     )
     return (
       <div
@@ -326,7 +338,7 @@ export default defineComponent({
           aria-hidden="true"
           style={mergedRailStyle}
         >
-          {resolveWrappedSlot(checkedSlot, (checkedSlotChildren) =>
+          {resolveWrappedSlot(checkedSlot, checkedSlotChildren =>
             resolveWrappedSlot(uncheckedSlot, (uncheckedSlotChildren) => {
               if (checkedSlotChildren || uncheckedSlotChildren) {
                 return (
@@ -350,11 +362,10 @@ export default defineComponent({
                 )
               }
               return null
-            })
-          )}
+            }))}
           <div class={`${mergedClsPrefix}-switch__button`}>
-            {resolveWrappedSlot(iconSlot, (icon) =>
-              resolveWrappedSlot(checkedIconSlot, (checkedIcon) =>
+            {resolveWrappedSlot(iconSlot, icon =>
+              resolveWrappedSlot(checkedIconSlot, checkedIcon =>
                 resolveWrappedSlot(uncheckedIconSlot, (uncheckedIcon) => {
                   return (
                     <NIconSwitchTransition>
@@ -384,12 +395,10 @@ export default defineComponent({
                       }}
                     </NIconSwitchTransition>
                   )
-                })
-              )
-            )}
+                })))}
             {resolveWrappedSlot(
               checkedSlot,
-              (children) =>
+              children =>
                 children && (
                   <div
                     key="checked"
@@ -401,7 +410,7 @@ export default defineComponent({
             )}
             {resolveWrappedSlot(
               uncheckedSlot,
-              (children) =>
+              children =>
                 children && (
                   <div
                     key="unchecked"
