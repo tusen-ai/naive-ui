@@ -1,4 +1,4 @@
-import { type Property } from 'csstype'
+import type { Property } from 'csstype'
 
 export type FlexAlign = Property.AlignItems
 

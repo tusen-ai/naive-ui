@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
-    "paths": {
-      "naive-ui": ["./src"]
-    },
-    "strict": true,
-    "strictNullChecks": true,
+    "composite": true,
+    "target": "ES6",
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
+    "lib": ["ESNext", "DOM"],
     "module": "ES6",
     "moduleResolution": "Node",
+    "paths": {
+      "naive-ui": ["./src"]
+    },
+    "types": ["vue/jsx", "jest"],
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "composite": true,
-    "target": "ES6",
-    "types": ["vue/jsx","jest"],
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"]
+    "forceConsistentCasingInFileNames": true
   }
 }

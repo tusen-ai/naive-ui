@@ -38,15 +38,17 @@ close-debug.vue
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |  |
 | on-confirm | `(value: string) => void` | `undefined` | 点击确定按钮的回调 | 2.29.0 |
+| on-clear | `() => void` | `undefined` | 点击清除按钮的回调 | 2.39.0 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |  |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |  |
 | actions | `Array<'confirm' \| 'clear'> \| null` | `null` | 显示按钮 |  |
 
 ### ColorPicker Slots
 
-| 名称  | 参数                      | 说明         | 版本   |
-| ----- | ------------------------- | ------------ | ------ |
-| label | `(color: string \| null)` | 触发器的内容 | 2.24.0 |
+| 名称   | 参数                      | 说明                | 版本   |
+| ------ | ------------------------- | ------------------- | ------ |
+| label  | `(color: string \| null)` | 触发器的内容        | 2.24.0 |
+| action | `()`                      | 菜单操作区域的 slot | 2.24.0 |
 
 ## Q & A
 
@@ -57,7 +59,7 @@ naive 不内置提供这种功能，你可以自己建立一个对象进行映�
 或者你自己写一个函数，例如：
 
 ```js
-export function getRgb (colorName) {
+export function getRgb(colorName) {
   const el = document.createElement('div')
   el.style.color = colorName
   document.body.appendChild(el)

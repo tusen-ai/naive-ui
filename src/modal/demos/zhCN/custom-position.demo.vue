@@ -4,6 +4,18 @@
 通过固定定位设定 Modal 的位置。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showModal: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     来吧
@@ -27,15 +39,3 @@
     </n-card>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

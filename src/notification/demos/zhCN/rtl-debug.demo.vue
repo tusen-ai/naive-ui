@@ -1,36 +1,24 @@
 <markdown>
 # Rtl Debug
-
 </markdown>
 
-<template>
-  <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-  <n-space>
-    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-notification-provider>
-        <notification-button />
-      </n-notification-provider>
-    </n-config-provider>
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import {
-  useNotification,
-  NButton,
   NAvatar,
-  unstableNotificationRtl
+  NButton,
+  unstableNotificationRtl,
+  useNotification
 } from 'naive-ui'
 
 const NotificationButton = defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     return {
       notification
     }
   },
-  render () {
+  render() {
     return h(
       NButton,
       {
@@ -97,7 +85,7 @@ export default defineComponent({
   components: {
     NotificationButton
   },
-  setup () {
+  setup() {
     return {
       rtlEnabled: ref(true),
       rtlStyles: [unstableNotificationRtl]
@@ -105,3 +93,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+  <n-space>
+    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
+      <n-notification-provider>
+        <NotificationButton />
+      </n-notification-provider>
+    </n-config-provider>
+  </n-space>
+</template>

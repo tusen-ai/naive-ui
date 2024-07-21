@@ -4,6 +4,22 @@
 Round tag looks like a capsule.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleClose() {
+        message.info('tag close')
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-tag closable size="small" round @close="handleClose">
@@ -17,19 +33,3 @@ Round tag looks like a capsule.
     </n-tag>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleClose () {
-        message.info('tag close')
-      }
-    }
-  }
-})
-</script>

@@ -4,29 +4,9 @@
 Tree accept `pattern` and `filter` to do searching.
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-input v-model:value="pattern" placeholder="Search" />
-    <n-switch v-model:value="showIrrelevantNodes">
-      <template #checked>
-        Show irrelevant nodes
-      </template>
-      <template #unchecked>
-        Hide irrelevant nodes
-      </template>
-    </n-switch>
-    <n-tree
-      :show-irrelevant-nodes="showIrrelevantNodes"
-      :pattern="pattern"
-      :data="data"
-      block-line
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { TreeOption } from 'naive-ui'
+import type { TreeOption } from 'naive-ui'
 
 const data: TreeOption[] = [
   {
@@ -76,7 +56,7 @@ const data: TreeOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data,
       pattern: ref(''),
@@ -85,3 +65,23 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-input v-model:value="pattern" placeholder="Search" />
+    <n-switch v-model:value="showIrrelevantNodes">
+      <template #checked>
+        Show irrelevant nodes
+      </template>
+      <template #unchecked>
+        Hide irrelevant nodes
+      </template>
+    </n-switch>
+    <n-tree
+      :show-irrelevant-nodes="showIrrelevantNodes"
+      :pattern="pattern"
+      :data="data"
+      block-line
+    />
+  </n-space>
+</template>

@@ -2,34 +2,15 @@
 # 受控的过滤器
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-space>
-      <n-button @click="filterAddress">
-        Filter Address(Use Value 'London')
-      </n-button>
-      <n-button @click="unfilterAddress">
-        Clear Address Filters
-      </n-button>
-    </n-space>
-    <n-data-table
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      @update:filters="handleUpdateFilter"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import {
-  DataTableColumns,
+import type {
   DataTableBaseColumn,
+  DataTableColumns,
   DataTableFilterState
 } from 'naive-ui'
 
-type Row = {
+interface Row {
   key: number
   name: string
   age: number
@@ -64,7 +45,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const addressColumn = reactive<DataTableBaseColumn<Row>>({
       title: 'Address',
       key: 'address',
@@ -81,7 +62,7 @@ export default defineComponent({
           value: 'New York'
         }
       ],
-      filter (value, row) {
+      filter(value, row) {
         return !!~row.address.indexOf(value.toString())
       }
     })
@@ -90,14 +71,14 @@ export default defineComponent({
       {
         title: 'Name',
         key: 'name',
-        sorter (rowA, rowB) {
+        sorter(rowA, rowB) {
           return rowA.name.length - rowB.name.length
         }
       },
       {
         title: 'Age',
         key: 'age',
-        sorter (rowA, rowB) {
+        sorter(rowA, rowB) {
           return rowA.age - rowB.age
         }
       },
@@ -107,13 +88,13 @@ export default defineComponent({
       data,
       columns,
       pagination: { pageSize: 5 },
-      filterAddress () {
+      filterAddress() {
         addressColumn.filterOptionValue = 'London'
       },
-      unfilterAddress () {
+      unfilterAddress() {
         addressColumn.filterOptionValue = null
       },
-      handleUpdateFilter (
+      handleUpdateFilter(
         filters: DataTableFilterState,
         sourceColumn: DataTableBaseColumn
       ) {
@@ -123,3 +104,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-space>
+      <n-button @click="filterAddress">
+        Filter Address(Use Value 'London')
+      </n-button>
+      <n-button @click="unfilterAddress">
+        Clear Address Filters
+      </n-button>
+    </n-space>
+    <n-data-table
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      @update:filters="handleUpdateFilter"
+    />
+  </n-space>
+</template>

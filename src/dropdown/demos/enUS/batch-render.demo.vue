@@ -4,20 +4,8 @@
 Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.
 </markdown>
 
-<template>
-  <n-dropdown
-    :options="options"
-    placement="bottom-start"
-    trigger="click"
-    :render-label="renderDropdownLabel"
-    :render-icon="renderDropdownIcon"
-  >
-    <n-button>Batch Render</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import type { VNodeChild } from 'vue'
 import { NIcon } from 'naive-ui'
 import type { DropdownOption } from 'naive-ui'
@@ -60,10 +48,10 @@ const options = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options,
-      renderDropdownLabel (option: DropdownOption) {
+      renderDropdownLabel(option: DropdownOption) {
         if (option.type === 'group') {
           return option.label as VNodeChild
         }
@@ -78,7 +66,7 @@ export default defineComponent({
           }
         )
       },
-      renderDropdownIcon () {
+      renderDropdownIcon() {
         return h(NIcon, null, {
           default: () => h(CashIcon)
         })
@@ -87,3 +75,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dropdown
+    :options="options"
+    placement="bottom-start"
+    trigger="click"
+    :render-label="renderDropdownLabel"
+    :render-icon="renderDropdownIcon"
+  >
+    <n-button>Batch Render</n-button>
+  </n-dropdown>
+</template>

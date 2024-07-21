@@ -295,7 +295,7 @@ describe('n-input', () => {
     const onFocus = jest.fn()
     const onSelect = jest.fn()
     const Mock = defineComponent({
-      setup () {
+      setup() {
         const inputInstRef: any = ref(null)
         onMounted(() => {
           inputInstRef.value?.focus()
@@ -303,12 +303,15 @@ describe('n-input', () => {
           inputInstRef.value?.select()
         })
         return () => {
-          ;<n-input
-            ref={inputInstRef}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onSelect={onSelect}
-          />
+          return (
+            <NInput
+              ref={inputInstRef}
+              onBlur={onBlur}
+              onFocus={onFocus}
+              // @ts-expect-error onSelect is not an exposed jsx prop
+              onSelect={onSelect}
+            />
+          )
         }
       }
     })

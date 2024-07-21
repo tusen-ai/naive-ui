@@ -1,4 +1,4 @@
-import { type Ref } from 'vue'
+import type { Ref } from 'vue'
 import type { PopoverInst } from '../../popover/src/interface'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -16,5 +16,5 @@ export interface PopselectInjection {
 
 export type PopselectInst = PopoverInst
 
-export const popselectInjectionKey =
-  createInjectionKey<PopselectInjection>('n-popselect')
+export const popselectInjectionKey
+  = createInjectionKey<PopselectInjection>('n-popselect')

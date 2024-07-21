@@ -4,28 +4,11 @@
 你可以替换 AutoComplete 的输入元素。
 </markdown>
 
-<template>
-  <n-auto-complete v-model:value="value" :options="options">
-    <template
-      #default="{ handleInput, handleBlur, handleFocus, value: slotValue }"
-    >
-      <n-input
-        type="textarea"
-        :value="slotValue"
-        placeholder="邮箱"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      />
-    </template>
-  </n-auto-complete>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -42,3 +25,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete v-model:value="value" :options="options">
+    <template
+      #default="{ handleInput, handleBlur, handleFocus, value: slotValue }"
+    >
+      <n-input
+        type="textarea"
+        :value="slotValue"
+        placeholder="邮箱"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
+    </template>
+  </n-auto-complete>
+</template>

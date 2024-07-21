@@ -1,30 +1,31 @@
-import { h, defineComponent, inject, computed, type Ref } from 'vue'
+import { type Ref, computed, defineComponent, h, inject } from 'vue'
 import { NDropdown } from '../../../dropdown'
 import type { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
-import type { InternalRowData, DataTableSelectionOption } from '../interface'
+import type { DataTableSelectionOption, InternalRowData } from '../interface'
 import { dataTableInjectionKey } from '../interface'
 
 const allKey = '_n_all__'
 const noneKey = '_n_none__'
 
-function createSelectHandler (
+function createSelectHandler(
   options:
-  | Array<
-  | DataTableSelectionOption
-  | {
-    label: string
-    key: string | number
-    onSelect: (pageData: InternalRowData[]) => void
-  }
-  >
-  | undefined,
+    | Array<
+      | DataTableSelectionOption
+      | {
+        label: string
+        key: string | number
+        onSelect: (pageData: InternalRowData[]) => void
+      }
+    >
+    | undefined,
   rawPaginatedDataRef: Ref<InternalRowData[]>,
   doCheckAll: (checkWholeTable?: boolean) => void,
   doUncheckAll: (checkWholeTable?: boolean) => void
 ): (key: string | number) => void {
-  if (!options) return () => {}
+  if (!options)
+    return () => {}
   return (key: string | number) => {
     for (const option of options) {
       switch (key) {
@@ -44,20 +45,21 @@ function createSelectHandler (
   }
 }
 
-function createDropdownOptions (
+function createDropdownOptions(
   options:
-  | Array<
-  | DataTableSelectionOption
-  | {
-    label: string
-    key: string | number
-    onSelect: (pageData: InternalRowData[]) => void
-  }
-  >
-  | undefined,
+    | Array<
+      | DataTableSelectionOption
+      | {
+        label: string
+        key: string | number
+        onSelect: (pageData: InternalRowData[]) => void
+      }
+    >
+    | undefined,
   localeRef: NLocale['DataTable']
 ): Array<{ label: string, key: string | number }> {
-  if (!options) return []
+  if (!options)
+    return []
   return options.map((option) => {
     switch (option) {
       case 'all':
@@ -84,7 +86,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const {
       props: dataTableProps,
       localeRef,
@@ -92,7 +94,6 @@ export default defineComponent({
       rawPaginatedDataRef,
       doCheckAll,
       doUncheckAll
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     const handleSelectRef = computed(() =>
       createSelectHandler(

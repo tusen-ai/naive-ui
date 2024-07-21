@@ -6,6 +6,18 @@
 记得注意图像 URL 的跨域设置，这会影响图片是否能正常显示。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-watermark
     v-if="show"
@@ -23,15 +35,3 @@
   />
   <n-switch v-model:value="show" />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

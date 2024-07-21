@@ -50,6 +50,7 @@ precision-debug.vue
 | placeholder | `string` | `'请输入'` | 提示信息 |  |
 | precision | `number` | `undefined` | 数值保留的精度值，设定后会禁用 `update-value-on-input` | 2.30.0 |
 | readonly | `boolean` | `false` | 是否只读 |  |
+| round | `boolean` | `undefined` | 输入框是否圆角 | 2.39.0 |
 | show-button | `boolean` | `true` | 是否有按钮 |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |

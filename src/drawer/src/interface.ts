@@ -4,8 +4,8 @@ import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 import type { DrawerTheme } from '../styles'
 
 export type DrawerBodyInjection = Ref<HTMLElement | null> | null
-export const drawerBodyInjectionKey =
-  createInjectionKey<DrawerBodyInjection>('n-drawer-body')
+export const drawerBodyInjectionKey
+  = createInjectionKey<DrawerBodyInjection>('n-drawer-body')
 
 export interface DrawerInjection {
   isMountedRef: Ref<boolean>
@@ -15,5 +15,5 @@ export interface DrawerInjection {
   doUpdateWidth: (value: number) => void
   doUpdateHeight: (value: number) => void
 }
-export const drawerInjectionKey =
-  createInjectionKey<DrawerInjection>('n-drawer')
+export const drawerInjectionKey
+  = createInjectionKey<DrawerInjection>('n-drawer')

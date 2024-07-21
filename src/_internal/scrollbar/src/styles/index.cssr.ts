@@ -1,4 +1,4 @@
-import { cB, c, cM, cE } from '../../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../../_utils/cssr'
 import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 
 // vars:
@@ -50,7 +50,6 @@ export default cB('scrollbar', `
       -webkit-user-select: none;
     `, [
       cM('horizontal', `
-        inset: var(--n-scrollbar-rail-inset-horizontal);
         height: var(--n-scrollbar-height);
       `, [
         c('>', [
@@ -61,8 +60,13 @@ export default cB('scrollbar', `
           `)
         ])
       ]),
+      cM('horizontal--top', `
+        inset: var(--n-scrollbar-rail-inset-horizontal-top);  
+      `),
+      cM('horizontal--bottom', `
+        inset: var(--n-scrollbar-rail-inset-horizontal-bottom);  
+      `),
       cM('vertical', `
-        inset: var(--n-scrollbar-rail-inset-vertical);
         width: var(--n-scrollbar-width);
       `, [
         c('>', [
@@ -73,6 +77,12 @@ export default cB('scrollbar', `
           `)
         ])
       ]),
+      cM('vertical--left', `
+        inset: var(--n-scrollbar-rail-inset-vertical-left);  
+      `),
+      cM('vertical--right', `
+        inset: var(--n-scrollbar-rail-inset-vertical-right);  
+      `),
       cM('disabled', [
         c('>', [
           cE('scrollbar', 'pointer-events: none;')

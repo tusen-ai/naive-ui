@@ -1,4 +1,4 @@
-import { type Component, type App, type DefineComponent } from 'vue'
+import type { App, Component, DefineComponent } from 'vue'
 import version from './version'
 
 type ComponentType = any
@@ -14,12 +14,12 @@ interface NUiCreateOptions {
   componentPrefix?: string
 }
 
-function create ({
+function create({
   componentPrefix = 'N',
   components = []
 }: NUiCreateOptions = {}): NUiInstance {
   const installTargets: App[] = []
-  function registerComponent (
+  function registerComponent(
     app: App,
     name: string,
     component: ComponentType
@@ -32,8 +32,9 @@ function create ({
       )
     }
   }
-  function install (app: App): void {
-    if (installTargets.includes(app)) return
+  function install(app: App): void {
+    if (installTargets.includes(app))
+      return
     installTargets.push(app)
     components.forEach((component) => {
       const { name, alias } = component

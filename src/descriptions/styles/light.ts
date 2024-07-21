@@ -1,9 +1,9 @@
 import { composite } from 'seemly'
-import commonVariables from './_common'
-import { commonLight, type ThemeCommonVars } from '../../_styles/common'
+import { type ThemeCommonVars, commonLight } from '../../_styles/common'
 import type { Theme } from '../../_mixins/use-theme'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     tableHeaderColor,
     textColor2,

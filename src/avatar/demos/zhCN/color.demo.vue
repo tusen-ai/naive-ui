@@ -8,7 +8,7 @@
   <n-avatar
     :style="{
       color: 'yellow',
-      backgroundColor: 'red'
+      backgroundColor: 'red',
     }"
   >
     M

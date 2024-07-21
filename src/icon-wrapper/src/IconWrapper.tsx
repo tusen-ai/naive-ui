@@ -25,7 +25,7 @@ export type IconWrapperProps = ExtractPublicPropTypes<typeof iconWrapperProps>
 export const NIconWrapper = defineComponent({
   name: 'IconWrapper',
   props: iconWrapperProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'IconWrapper',

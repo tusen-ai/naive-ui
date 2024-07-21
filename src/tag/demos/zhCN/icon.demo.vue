@@ -4,6 +4,19 @@
 在标签中使用图标。
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { CheckmarkCircle } from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      CheckmarkCircle
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-tag type="success">
@@ -20,16 +33,3 @@
     </n-tag>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { CheckmarkCircle } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      CheckmarkCircle
-    }
-  }
-})
-</script>

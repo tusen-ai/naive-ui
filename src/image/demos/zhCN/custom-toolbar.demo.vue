@@ -4,21 +4,14 @@
 你可以使用 `render-toolbar` 来自定义工具栏。
   </markdown>
 
-<template>
-  <n-image
-    width="100"
-    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-    :render-toolbar="renderToolbar"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { OpenOutline, ClipboardOutline } from '@vicons/ionicons5'
-import { useMessage, ImageRenderToolbarProps, NButton } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import { ClipboardOutline, OpenOutline } from '@vicons/ionicons5'
+import type { ImageRenderToolbarProps } from 'naive-ui'
+import { NButton, useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
 
     const url = ref('https://picsum.photos/id/10/100/100')
@@ -65,3 +58,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-image
+    width="100"
+    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    :render-toolbar="renderToolbar"
+  />
+</template>

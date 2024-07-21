@@ -4,22 +4,18 @@
 If you want to add attr or event handlers to a row, use `row-props` prop.
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :row-props="rowProps" />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: string
   address: string
 }
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       rowProps: (row: RowData) => {
@@ -68,3 +64,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :row-props="rowProps" />
+</template>

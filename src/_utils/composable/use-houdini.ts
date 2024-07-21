@@ -2,9 +2,11 @@ import { isBrowser } from '../env/is-browser'
 
 let houdiniRegistered = false
 
-export function useHoudini (): void {
-  if (!isBrowser) return
-  if (!window.CSS) return
+export function useHoudini(): void {
+  if (!isBrowser)
+    return
+  if (!window.CSS)
+    return
   if (!houdiniRegistered) {
     houdiniRegistered = true
     if ('registerProperty' in window?.CSS) {
@@ -21,7 +23,8 @@ export function useHoudini (): void {
           inherits: false,
           initialValue: '#0000'
         })
-      } catch (e) {}
+      }
+      catch {}
     }
   }
 }

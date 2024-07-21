@@ -4,6 +4,19 @@
 Set a prefix and/or suffix for the input.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { FlashOutline } from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      FlashOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input placeholder="Flash">
@@ -23,16 +36,3 @@ Set a prefix and/or suffix for the input.
     </n-input>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { FlashOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      FlashOutline
-    }
-  }
-})
-</script>

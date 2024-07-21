@@ -2,6 +2,20 @@
 # 格式化
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      timestamp: ref(null),
+      timestamp2: ref(1183135260000),
+      format: 'yyyy/MM/dd - HH:mm'
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-date-picker
@@ -18,17 +32,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      timestamp: ref(null),
-      timestamp2: ref(1183135260000),
-      format: 'yyyy/MM/dd - HH:mm'
-    }
-  }
-})
-</script>

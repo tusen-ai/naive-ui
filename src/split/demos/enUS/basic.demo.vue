@@ -1,6 +1,5 @@
 <markdown>
 # Basic
-
 </markdown>
 
 <template>

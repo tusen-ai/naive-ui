@@ -4,6 +4,19 @@
 使用 `tag` 和 `:show="false"` 来作为 Tag 框输入使用。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      multipleSelectValue: ref(null),
+      selectValue: ref(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-select
     v-model:value="multipleSelectValue"
@@ -15,16 +28,3 @@
     :show="false"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      multipleSelectValue: ref(null),
-      selectValue: ref(null)
-    }
-  }
-})
-</script>

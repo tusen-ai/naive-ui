@@ -1,11 +1,11 @@
 import {
-  defineComponent,
-  h,
-  ref,
   type PropType,
   computed,
+  defineComponent,
+  h,
   mergeProps,
-  onDeactivated
+  onDeactivated,
+  ref
 } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
 import type { TooltipInst } from '../../tooltip/src/Tooltip'
@@ -18,11 +18,11 @@ import { ellipsisLight } from '../styles'
 import type { EllipsisTheme } from '../styles'
 import style from './styles/index.cssr'
 
-export function createLineClampClass (clsPrefix: string): string {
+export function createLineClampClass(clsPrefix: string): string {
   return `${clsPrefix}-ellipsis--line-clamp`
 }
 
-export function createCursorClass (clsPrefix: string, cursor: string): string {
+export function createCursorClass(clsPrefix: string, cursor: string): string {
   return `${clsPrefix}-ellipsis--cursor-${cursor}`
 }
 
@@ -42,7 +42,7 @@ export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
   props: ellipsisProps,
-  setup (props, { slots, attrs }) {
+  setup(props, { slots, attrs }) {
     const mergedClsPrefixRef = useMergedClsPrefix()
     const mergedTheme = useTheme(
       'Ellipsis',
@@ -64,17 +64,19 @@ export default defineComponent({
           textOverflow: '',
           '-webkit-line-clamp': expanded ? '' : lineClamp
         }
-      } else {
+      }
+      else {
         return {
           textOverflow: expanded ? '' : 'ellipsis',
           '-webkit-line-clamp': ''
         }
       }
     })
-    function getTooltipDisabled (): boolean {
+    function getTooltipDisabled(): boolean {
       let tooltipDisabled = false
       const { value: expanded } = expandedRef
-      if (expanded) return true
+      if (expanded)
+        return true
       const { value: trigger } = triggerRef
       if (trigger) {
         const { lineClamp } = props
@@ -83,12 +85,13 @@ export default defineComponent({
         syncEllipsisStyle(trigger)
         if (lineClamp !== undefined) {
           tooltipDisabled = trigger.scrollHeight <= trigger.offsetHeight
-        } else {
+        }
+        else {
           const { value: triggerInner } = triggerInnerRef
           if (triggerInner) {
-            tooltipDisabled =
-              triggerInner.getBoundingClientRect().width <=
-              trigger.getBoundingClientRect().width
+            tooltipDisabled
+              = triggerInner.getBoundingClientRect().width
+              <= trigger.getBoundingClientRect().width
           }
         }
         syncCursorStyle(trigger, tooltipDisabled)
@@ -135,13 +138,15 @@ export default defineComponent({
         {props.lineClamp ? slots : <span ref="triggerInnerRef">{slots}</span>}
       </span>
     )
-    function syncEllipsisStyle (trigger: HTMLElement): void {
-      if (!trigger) return
+    function syncEllipsisStyle(trigger: HTMLElement): void {
+      if (!trigger)
+        return
       const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
         syncTriggerClass(trigger, lineClampClass, 'add')
-      } else {
+      }
+      else {
         syncTriggerClass(trigger, lineClampClass, 'remove')
       }
       for (const key in latestStyle) {
@@ -151,18 +156,19 @@ export default defineComponent({
         }
       }
     }
-    function syncCursorStyle (
+    function syncCursorStyle(
       trigger: HTMLElement,
       tooltipDisabled: boolean
     ): void {
       const cursorClass = createCursorClass(mergedClsPrefixRef.value, 'pointer')
       if (props.expandTrigger === 'click' && !tooltipDisabled) {
         syncTriggerClass(trigger, cursorClass, 'add')
-      } else {
+      }
+      else {
         syncTriggerClass(trigger, cursorClass, 'remove')
       }
     }
-    function syncTriggerClass (
+    function syncTriggerClass(
       trigger: HTMLElement,
       styleClass: string,
       action: 'add' | 'remove'
@@ -171,7 +177,8 @@ export default defineComponent({
         if (!trigger.classList.contains(styleClass)) {
           trigger.classList.add(styleClass)
         }
-      } else {
+      }
+      else {
         if (trigger.classList.contains(styleClass)) {
           trigger.classList.remove(styleClass)
         }
@@ -187,7 +194,7 @@ export default defineComponent({
       getTooltipDisabled
     }
   },
-  render () {
+  render() {
     const { tooltip, renderTrigger, $slots } = this
     if (tooltip) {
       const { mergedTheme } = this
@@ -206,6 +213,9 @@ export default defineComponent({
           }}
         </NTooltip>
       )
-    } else return renderTrigger()
+    }
+    else {
+      return renderTrigger()
+    }
   }
 })

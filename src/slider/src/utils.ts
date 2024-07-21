@@ -1,13 +1,13 @@
-import { onBeforeUpdate, type ComponentPublicInstance } from 'vue'
+import { type ComponentPublicInstance, onBeforeUpdate } from 'vue'
 
-export function isTouchEvent (e: MouseEvent | TouchEvent): e is TouchEvent {
+export function isTouchEvent(e: MouseEvent | TouchEvent): e is TouchEvent {
   return window.TouchEvent && e instanceof window.TouchEvent
 }
 
 type RefType = HTMLElement | ComponentPublicInstance
 type RefKey = number
 type RefsValue<T extends RefType> = Map<RefKey, T>
-export function useRefs<T extends RefType> (): [
+export function useRefs<T extends RefType>(): [
   RefsValue<T>,
   (key: RefKey) => (el: any) => void
 ] {

@@ -8,7 +8,7 @@ Design it yourself.
   <n-gradient-text
     :gradient="{
       from: 'rgb(85, 85, 85)',
-      to: 'rgb(170, 170, 170)'
+      to: 'rgb(170, 170, 170)',
     }"
   >
     Custom Color
@@ -18,7 +18,7 @@ Design it yourself.
     :gradient="{
       deg: 180,
       from: 'rgb(85, 85, 85)',
-      to: 'rgb(170, 170, 170)'
+      to: 'rgb(170, 170, 170)',
     }"
   >
     Custom Color

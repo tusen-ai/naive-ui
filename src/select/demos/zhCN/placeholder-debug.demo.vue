@@ -1,7 +1,26 @@
 <markdown>
 # Placehoder Debug
-
 </markdown>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      options: [
+        {
+          value: '1',
+          label: '1'
+        }
+      ],
+      value1: null,
+      value2: null,
+      value3: null
+    }
+  }
+})
+</script>
 
 <template>
   <n-space vertical>
@@ -20,23 +39,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      options: [
-        {
-          value: '1',
-          label: '1'
-        }
-      ],
-      value1: null,
-      value2: null,
-      value3: null
-    }
-  }
-})
-</script>

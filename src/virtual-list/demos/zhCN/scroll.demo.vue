@@ -2,44 +2,12 @@
   # 滚动
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-space>
-      <n-button @click="handleScrollToKey">
-        滚动
-      </n-button>
-      <n-button @click="handleScrollToPosition">
-        滚动到指定位置
-      </n-button>
-      <n-button @click="handleScrollToIndex">
-        滚动到指定 Index
-      </n-button>
-      <n-button @click="handleScrollToDistance">
-        滚动到指定距离
-      </n-button>
-    </n-space>
-    <n-virtual-list
-      ref="virtualListInst"
-      style="max-height: 240px"
-      :item-size="42"
-      :items="items"
-    >
-      <template #default="{ item, index }">
-        <div :key="item.key" class="item" style="height: 42px">
-          <img class="avatar" :src="item.avatar" alt="">
-          <span> {{ index }}</span>
-        </div>
-      </template>
-    </n-virtual-list>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { VirtualListInst } from 'naive-ui'
+import type { VirtualListInst } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const virtualListInst = ref<VirtualListInst>()
 
     const avatars = [
@@ -75,6 +43,39 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-space>
+      <n-button @click="handleScrollToKey">
+        滚动
+      </n-button>
+      <n-button @click="handleScrollToPosition">
+        滚动到指定位置
+      </n-button>
+      <n-button @click="handleScrollToIndex">
+        滚动到指定 Index
+      </n-button>
+      <n-button @click="handleScrollToDistance">
+        滚动到指定距离
+      </n-button>
+    </n-space>
+    <n-virtual-list
+      ref="virtualListInst"
+      style="max-height: 240px"
+      :item-size="42"
+      :items="items"
+    >
+      <template #default="{ item, index }">
+        <div :key="item.key" class="item" style="height: 42px">
+          <img class="avatar" :src="item.avatar" alt="">
+          <span> {{ index }}</span>
+        </div>
+      </template>
+    </n-virtual-list>
+  </n-space>
+</template>
+
 <style>
 .item {
   display: flex;

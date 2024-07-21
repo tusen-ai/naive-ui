@@ -2,15 +2,12 @@
 # Expandable debug
 </markdown>
 
-<template>
-  <n-data-table :columns="columns1" :data="data" default-expand-all />
-</template>
-
 <script lang="ts">
 import { defineComponent, h, ref } from 'vue'
-import { DataTableColumn, NButton, NDataTable } from 'naive-ui'
+import type { DataTableColumn } from 'naive-ui'
+import { NButton, NDataTable } from 'naive-ui'
 
-export type RowData = {
+export interface RowData {
   key: number
   name: string
   age: number
@@ -23,68 +20,7 @@ export type RowData1 = RowData & {
 }
 
 export default defineComponent({
-  setup () {
-    const handleDelete = (key: number) => {
-      data.value[0].data[key].show = -1
-    }
-    const dataColumns: DataTableColumn<RowData>[] = [
-      {
-        title: 'Name',
-        key: 'name'
-      },
-      {
-        title: 'Age',
-        key: 'age'
-      },
-      {
-        title: 'Address',
-        key: 'address'
-      },
-      {
-        title: 'Operation',
-        key: 'operation',
-        render (rowData) {
-          return h(
-            NButton,
-            {
-              text: true,
-              onClick: () => handleDelete(rowData.key)
-            },
-            { default: () => 'Delete' }
-          )
-        }
-      }
-    ]
-    const columns1: DataTableColumn<RowData1>[] = [
-      {
-        type: 'expand',
-        expandable: (rowData) => {
-          return rowData.data.filter((item) => item.show !== -1).length > 0
-        },
-        renderExpand: (rowData) => {
-          if (rowData.data.filter((item) => item.show !== -1).length > 0) {
-            return h(NDataTable, {
-              data: rowData.data.filter((item) => item.show !== -1),
-              index: rowData.key,
-              columns: dataColumns
-            })
-          }
-          return undefined
-        }
-      },
-      {
-        title: 'Name',
-        key: 'name'
-      },
-      {
-        title: 'Age',
-        key: 'age'
-      },
-      {
-        title: 'Address',
-        key: 'address'
-      }
-    ]
+  setup() {
     const data = ref<RowData1[]>([
       {
         key: 0,
@@ -130,6 +66,67 @@ export default defineComponent({
         data: []
       }
     ])
+    const handleDelete = (key: number) => {
+      data.value[0].data[key].show = -1
+    }
+    const dataColumns: DataTableColumn<RowData>[] = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      },
+      {
+        title: 'Address',
+        key: 'address'
+      },
+      {
+        title: 'Operation',
+        key: 'operation',
+        render(rowData) {
+          return h(
+            NButton,
+            {
+              text: true,
+              onClick: () => handleDelete(rowData.key)
+            },
+            { default: () => 'Delete' }
+          )
+        }
+      }
+    ]
+    const columns1: DataTableColumn<RowData1>[] = [
+      {
+        type: 'expand',
+        expandable: (rowData) => {
+          return rowData.data.filter(item => item.show !== -1).length > 0
+        },
+        renderExpand: (rowData) => {
+          if (rowData.data.filter(item => item.show !== -1).length > 0) {
+            return h(NDataTable, {
+              data: rowData.data.filter(item => item.show !== -1),
+              index: rowData.key,
+              columns: dataColumns
+            })
+          }
+          return undefined
+        }
+      },
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      },
+      {
+        title: 'Address',
+        key: 'address'
+      }
+    ]
 
     return {
       columns1,
@@ -139,3 +136,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns1" :data="data" default-expand-all />
+</template>

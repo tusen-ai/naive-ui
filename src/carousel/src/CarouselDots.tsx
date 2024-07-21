@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onBeforeUpdate } from 'vue'
+import { defineComponent, h, onBeforeUpdate, ref } from 'vue'
 import type { PropType } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
@@ -30,11 +30,11 @@ export type CarouselDotsProps = ExtractPublicPropTypes<typeof carouselDotsProps>
 export default defineComponent({
   name: 'CarouselDots',
   props: carouselDotsProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const dotElsRef = ref<HTMLElement[]>([])
     const NCarousel = useCarouselContext()
-    function handleKeydown (e: KeyboardEvent, current: number): void {
+    function handleKeydown(e: KeyboardEvent, current: number): void {
       switch (e.key) {
         case 'Enter':
         case ' ':
@@ -46,17 +46,17 @@ export default defineComponent({
         handleKeyboard(e)
       }
     }
-    function handleMouseenter (current: number): void {
+    function handleMouseenter(current: number): void {
       if (props.trigger === 'hover') {
         NCarousel.to(current)
       }
     }
-    function handleClick (current: number): void {
+    function handleClick(current: number): void {
       if (props.trigger === 'click') {
         NCarousel.to(current)
       }
     }
-    function handleKeyboard (e: KeyboardEvent): void {
+    function handleKeyboard(e: KeyboardEvent): void {
       if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
         return
       }
@@ -79,12 +79,13 @@ export default defineComponent({
       if (wantToNext && !NCarousel.isNextDisabled()) {
         NCarousel.next()
         focusDot(NCarousel.currentIndexRef.value)
-      } else if (wantToPrev && !NCarousel.isPrevDisabled()) {
+      }
+      else if (wantToPrev && !NCarousel.isPrevDisabled()) {
         NCarousel.prev()
         focusDot(NCarousel.currentIndexRef.value)
       }
     }
-    function focusDot (index: number): void {
+    function focusDot(index: number): void {
       dotElsRef.value[index]?.focus()
     }
     onBeforeUpdate(() => (dotElsRef.value.length = 0))
@@ -96,7 +97,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, dotEls } = this
     return (
       <div
@@ -111,7 +112,7 @@ export default defineComponent({
           return (
             <div
               aria-selected={selected}
-              ref={(el) => dotEls.push(el as HTMLElement)}
+              ref={el => dotEls.push(el as HTMLElement)}
               role="button"
               tabindex="0"
               class={[

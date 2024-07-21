@@ -1,21 +1,21 @@
 import {
-  h,
-  defineComponent,
-  inject,
-  type VNode,
   type CSSProperties,
-  computed
+  type VNode,
+  computed,
+  defineComponent,
+  h,
+  inject
 } from 'vue'
 import { throwError } from '../../_utils'
-import { uploadInjectionKey } from './interface'
-import NUploadFile from './UploadFile'
 import { NImageGroup } from '../../image'
 import { NFadeInExpandTransition } from '../../_internal'
+import { uploadInjectionKey } from './interface'
+import NUploadFile from './UploadFile'
 import NUploadTrigger from './UploadTrigger'
 
 export default defineComponent({
   name: 'UploadFileList',
-  setup (_, { slots }) {
+  setup(_, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -73,8 +73,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-file-list`,
-            isImageCardTypeRef.value &&
-              `${mergedClsPrefix}-upload-file-list--grid`,
+            isImageCardTypeRef.value
+            && `${mergedClsPrefix}-upload-file-list--grid`,
             abstract ? themeClassRef?.value : undefined,
             fileListClassRef.value
           ]}
@@ -84,10 +84,10 @@ export default defineComponent({
           ]}
         >
           {renderUploadFileList()}
-          {showTriggerRef.value &&
-            !maxReachedRef.value &&
-            isImageCardTypeRef.value && (
-              <NUploadTrigger>{slots}</NUploadTrigger>
+          {showTriggerRef.value
+          && !maxReachedRef.value
+          && isImageCardTypeRef.value && (
+            <NUploadTrigger>{slots}</NUploadTrigger>
           )}
         </div>
       )

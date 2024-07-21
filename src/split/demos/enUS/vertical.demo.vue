@@ -1,6 +1,5 @@
 <markdown>
 # Vertical layout
-
 </markdown>
 
 <template>

@@ -1,17 +1,17 @@
-import { h, type VNode, type VNodeChild } from 'vue'
+import { type VNode, type VNodeChild, h } from 'vue'
 import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
-// eslint-disable-next-line import/no-cycle
+
 import { NMenuOptionGroup, menuItemGroupProps } from './MenuOptionGroup'
-// eslint-disable-next-line import/no-cycle
+
 import { NSubmenu, submenuProps } from './Submenu'
 import { NMenuOption, menuItemProps } from './MenuOption'
 import NMenuDivider from './MenuDivider'
 import type {
-  MenuOption,
   MenuGroupOption,
   MenuIgnoredOption,
-  MenuMixedOption
+  MenuMixedOption,
+  MenuOption
 } from './interface'
 import type { MenuSetupProps } from './Menu'
 
@@ -19,19 +19,19 @@ const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
-export function isIgnoredNode (
+export function isIgnoredNode(
   rawNode: MenuMixedOption
 ): rawNode is MenuIgnoredOption {
   return rawNode.type === 'divider' || rawNode.type === 'render'
 }
 
-export function isDividerNode (
+export function isDividerNode(
   rawNode: MenuMixedOption
 ): rawNode is MenuIgnoredOption {
   return rawNode.type === 'divider'
 }
 
-export function itemRenderer (
+export function itemRenderer(
   tmNode: TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>,
   menuProps: MenuSetupProps
 ): VNode | null {
@@ -52,9 +52,9 @@ export function itemRenderer (
   const props = {
     ...rawNode,
     title: (rawNode.title || rawNode[labelField]) as
-      | string
-      | (() => VNodeChild)
-      | undefined,
+    | string
+    | (() => VNodeChild)
+    | undefined,
     extra: rawNode.titleExtra || rawNode.extra,
     key,
     internalKey: key, // since key can't be used as a prop
@@ -79,7 +79,8 @@ export function itemRenderer (
         tmNode
       })
     )
-  } else {
+  }
+  else {
     return h(
       NMenuOption,
       keep(props, itemPropKeys, {

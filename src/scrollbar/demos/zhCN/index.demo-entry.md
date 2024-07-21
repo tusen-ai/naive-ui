@@ -11,6 +11,7 @@ trigger.vue
 no-sync.vue
 rtl-debug.vue
 custom.vue
+placement.vue
 ```
 
 ## API
@@ -24,6 +25,8 @@ custom.vue
 | size | `number` | `undefined` | 滚动条的大小 | 2.34.4 |
 | trigger | `'hover' \| 'none'` | `'hover'` | 显示滚动条的时机，`'none'` 表示一直显示 | 2.29.1 |
 | x-scrollable | `boolean` | `false` | 是否可以横向滚动 |  |
+| x-placement | `'top' \| 'bottom'` | `bottom` | 横向滚动时滚动条的位置 | NEXT_VERSION |
+| y-placement | `'left' \| 'right'` | `right` | 纵向滚动时滚动条的位置 | NEXT_VERSION |
 | on-scroll | `(e: Event) => void` | `undefined` | 滚动的回调 |  |
 
 ### Scrollbar Slots
