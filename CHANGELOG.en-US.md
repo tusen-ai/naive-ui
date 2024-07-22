@@ -10,6 +10,7 @@
 - Fix `n-slider`'s rail may have styling issue in `vertical` mode when global box-sizing is overrided, closes [#6114](https://github.com/tusen-ai/naive-ui/issues/6114).
 - Fix `n-tabs` has style issue when using `prefix` slot, `suffix` slot or `addable` prop with vertical placement, closes [#6059](https://github.com/tusen-ai/naive-ui/issues/6059), [#6060](https://github.com/tusen-ai/naive-ui/pull/6060).
 - Fix `n-upload` can only upload a maximum of 100 files in certain old browsers when uploading directories, closes [#6027](https://github.com/tusen-ai/naive-ui/issues/6027).
+- Fix `n-date-picker`'s `input-readonly` prop not work in the panel's input for `'datetime'` or `'datetimerange'`.
 
 ### Features
 

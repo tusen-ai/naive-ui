@@ -64,6 +64,7 @@ export default defineComponent({
             themeOverrides={mergedTheme.peerOverrides.Input}
             size={this.timePickerSize}
             stateful={false}
+            readonly={this.inputReadonly}
             class={`${mergedClsPrefix}-date-panel-date-input`}
             textDecoration={this.isStartValueInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
@@ -95,6 +96,7 @@ export default defineComponent({
             themeOverrides={mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
+            readonly={this.inputReadonly}
             class={`${mergedClsPrefix}-date-panel-date-input`}
             textDecoration={this.isEndValueInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
