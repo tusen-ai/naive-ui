@@ -102,7 +102,7 @@ function createCols() {
 }
 
 function createData() {
-  return (data = Array(50)
+  return Array(50)
     .fill(null)
     .map((_, i) => {
       return {
@@ -113,7 +113,7 @@ function createData() {
         defend: `defend_${i}`,
         speed: `speed_${i}`
       }
-    }))
+    })
 }
 
 export default defineComponent({
