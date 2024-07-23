@@ -879,6 +879,7 @@ export default defineComponent({
                                   class={`${mergedClsPrefix}-data-table-expand-trigger`}
                                   clsPrefix={mergedClsPrefix}
                                   expanded={expanded}
+                                  rowData={rowData}
                                   renderExpandIcon={this.renderExpandIcon}
                                   loading={loadingKeySet.has(rowInfo.key)}
                                   onClick={() => {
@@ -920,6 +921,7 @@ export default defineComponent({
                             || column.expandable?.(rowData) ? (
                                   <ExpandTrigger
                                     clsPrefix={mergedClsPrefix}
+                                    rowData={rowData}
                                     expanded={expanded}
                                     renderExpandIcon={this.renderExpandIcon}
                                     onClick={() => {

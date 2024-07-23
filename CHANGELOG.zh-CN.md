@@ -19,6 +19,7 @@
 - 新增 `n-highlight` 组件
 - `n-slider` `marks` 支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 - `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-data-table` `render-expand-icon` 新增 `rowData`，关闭 [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
 
 ## 2.39.0
 

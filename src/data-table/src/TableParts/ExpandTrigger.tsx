@@ -5,7 +5,7 @@ import {
   NBaseLoading,
   NIconSwitchTransition
 } from '../../../_internal'
-import type { RenderExpandIcon } from '../interface'
+import type { RenderExpandIcon, RowData } from '../interface'
 
 export default defineComponent({
   name: 'DataTableExpandTrigger',
@@ -22,6 +22,10 @@ export default defineComponent({
     },
     renderExpandIcon: {
       type: Function as PropType<RenderExpandIcon>
+    },
+    rowData: {
+      type: Object as PropType<RowData>,
+      required: true
     }
   },
   render() {
@@ -50,7 +54,8 @@ export default defineComponent({
                 />
               ) : this.renderExpandIcon ? (
                 this.renderExpandIcon({
-                  expanded: this.expanded
+                  expanded: this.expanded,
+                  rowData: this.rowData
                 })
               ) : (
                 <NBaseIcon clsPrefix={clsPrefix} key="base-icon">
