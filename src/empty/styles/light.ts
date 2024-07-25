@@ -8,6 +8,7 @@ export function self(vars: ThemeCommonVars) {
     textColorDisabled,
     iconColor,
     textColor2,
+    fontSizeTiny,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
@@ -15,6 +16,7 @@ export function self(vars: ThemeCommonVars) {
   } = vars
   return {
     ...commonVars,
+    fontSizeTiny,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
