@@ -19,6 +19,7 @@
 - Adds `n-highlight` component.
 - `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 - `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-empty` `size` prop to support `tiny` size.
 
 ## 2.39.0
 
