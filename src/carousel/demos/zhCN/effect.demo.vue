@@ -4,6 +4,22 @@
 如果你想要自定义过渡效果，可以使用 `transition-props`，并把 `effect` 设置为 `custom`。
 </markdown>
 
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
+    const isCardRef = computed(() => effectRef.value === 'card')
+    return {
+      isCard: isCardRef,
+      myEffect: effectRef,
+      effects: ['slide', 'fade', 'card']
+    }
+  }
+})
+</script>
+
 <template>
   <n-radio-group v-model:value="myEffect" style="margin-bottom: 10px">
     <n-radio-button v-for="effect in effects" :key="effect" :value="effect">
@@ -44,22 +60,6 @@
     </n-carousel-item>
   </n-carousel>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
-    const isCardRef = computed(() => effectRef.value === 'card')
-    return {
-      isCard: isCardRef,
-      myEffect: effectRef,
-      effects: ['slide', 'fade', 'card']
-    }
-  }
-})
-</script>
 
 <style>
 .carousel-img {

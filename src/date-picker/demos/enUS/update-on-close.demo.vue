@@ -2,6 +2,18 @@
 # Update value on close
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      updateValueOnClose: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-date-picker
@@ -22,15 +34,3 @@
     <n-switch v-model:value="updateValueOnClose" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      updateValueOnClose: ref(true)
-    }
-  }
-})
-</script>

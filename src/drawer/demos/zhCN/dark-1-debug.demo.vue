@@ -2,6 +2,153 @@
 # Dark Debug 1
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+import type { FormInst, FormProps, FormRules } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      message: useMessage()
+    }
+  },
+  data() {
+    return {
+      modalActive: false,
+      size: 'medium' as FormProps['size'],
+      model: {
+        inputValue: null,
+        textareaValue: null,
+        selectValue: null,
+        multipleSelectValue: null,
+        datetimeValue: null,
+        nestedValue: {
+          path1: null,
+          path2: null
+        },
+        switchValue: false,
+        checkboxGroupValue: null,
+        radioGroupValue: null,
+        radioButtonGroupValue: null,
+        inputNumberValue: null,
+        timePickerValue: null,
+        sliderValue: 0,
+        transferValue: null
+      },
+      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+        v => ({
+          label: v,
+          value: v
+        })
+      ),
+      cascaderOptions: [
+        {
+          label: 'groode',
+          value: 'groode',
+          children: [
+            {
+              label: 'veli good',
+              value: 'veli good'
+            }
+          ]
+        }
+      ],
+      rules: {
+        inputValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: '请输入 inputValue'
+        },
+        textareaValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: '请输入 textareaValue'
+        },
+        selectValue: {
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请选择 selectValue'
+        },
+        multipleSelectValue: {
+          type: 'array',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请选择 multipleSelectValue'
+        },
+        datetimeValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 datetimeValue'
+        },
+        nestedValue: {
+          path1: {
+            required: true,
+            trigger: ['blur', 'input'],
+            message: '请输入 nestedValue.path1'
+          },
+          path2: {
+            required: true,
+            trigger: ['blur', 'change'],
+            message: '请输入 nestedValue.path2'
+          }
+        },
+        checkboxGroupValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: '请选择 checkboxGroupValue'
+        },
+        radioGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: '请选择 radioGroupValue'
+        },
+        radioButtonGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: '请选择 radioButtonGroupValue'
+        },
+        inputNumberValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 inputNumberValue'
+        },
+        timePickerValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 timePickerValue'
+        },
+        sliderValue: 0,
+        transferValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: '请输入 transferValue'
+        }
+      } as FormRules
+    }
+  },
+  methods: {
+    handleValidateButtonClick(e: MouseEvent) {
+      e.preventDefault()
+      ;(this.$refs.form as FormInst).validate((errors) => {
+        if (!errors) {
+          this.message.success('验证成功')
+        }
+        else {
+          console.log(errors)
+          this.message.error('验证失败')
+        }
+      })
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="modalActive = !modalActive">
     Toggle
@@ -47,7 +194,7 @@
               type="textarea"
               :autosize="{
                 minRows: 3,
-                maxRows: 5
+                maxRows: 5,
               }"
             />
           </n-form-item-col>
@@ -204,149 +351,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-import type { FormInst, FormProps, FormRules } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      message: useMessage()
-    }
-  },
-  data () {
-    return {
-      modalActive: false,
-      size: 'medium' as FormProps['size'],
-      model: {
-        inputValue: null,
-        textareaValue: null,
-        selectValue: null,
-        multipleSelectValue: null,
-        datetimeValue: null,
-        nestedValue: {
-          path1: null,
-          path2: null
-        },
-        switchValue: false,
-        checkboxGroupValue: null,
-        radioGroupValue: null,
-        radioButtonGroupValue: null,
-        inputNumberValue: null,
-        timePickerValue: null,
-        sliderValue: 0,
-        transferValue: null
-      },
-      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
-        (v) => ({
-          label: v,
-          value: v
-        })
-      ),
-      cascaderOptions: [
-        {
-          label: 'groode',
-          value: 'groode',
-          children: [
-            {
-              label: 'veli good',
-              value: 'veli good'
-            }
-          ]
-        }
-      ],
-      rules: {
-        inputValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: '请输入 inputValue'
-        },
-        textareaValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: '请输入 textareaValue'
-        },
-        selectValue: {
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请选择 selectValue'
-        },
-        multipleSelectValue: {
-          type: 'array',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请选择 multipleSelectValue'
-        },
-        datetimeValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 datetimeValue'
-        },
-        nestedValue: {
-          path1: {
-            required: true,
-            trigger: ['blur', 'input'],
-            message: '请输入 nestedValue.path1'
-          },
-          path2: {
-            required: true,
-            trigger: ['blur', 'change'],
-            message: '请输入 nestedValue.path2'
-          }
-        },
-        checkboxGroupValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: '请选择 checkboxGroupValue'
-        },
-        radioGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: '请选择 radioGroupValue'
-        },
-        radioButtonGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: '请选择 radioButtonGroupValue'
-        },
-        inputNumberValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 inputNumberValue'
-        },
-        timePickerValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 timePickerValue'
-        },
-        sliderValue: 0,
-        transferValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: '请输入 transferValue'
-        }
-      } as FormRules
-    }
-  },
-  methods: {
-    handleValidateButtonClick (e: MouseEvent) {
-      e.preventDefault()
-      ;(this.$refs.form as FormInst).validate((errors) => {
-        if (!errors) {
-          this.message.success('验证成功')
-        } else {
-          console.log(errors)
-          this.message.error('验证失败')
-        }
-      })
-    }
-  }
-})
-</script>

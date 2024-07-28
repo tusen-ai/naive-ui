@@ -1,12 +1,12 @@
-import { h, toRef, ref, inject, defineComponent, watch, type Ref } from 'vue'
+import { type Ref, defineComponent, h, inject, ref, toRef, watch } from 'vue'
 import { useMemo } from 'vooks'
 import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
 import {
-  createInjectionKey,
   type ExtractPublicPropTypes,
+  createInjectionKey,
   getTitleAttribute
 } from '../../_utils'
 
@@ -19,8 +19,8 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey =
-  createInjectionKey<AnchorInjection>('n-anchor')
+export const anchorInjectionKey
+  = createInjectionKey<AnchorInjection>('n-anchor')
 
 export const anchorLinkProps = {
   title: String,
@@ -32,9 +32,8 @@ export type AnchorLinkProps = ExtractPublicPropTypes<typeof anchorLinkProps>
 export default defineComponent({
   name: 'AnchorLink',
   props: anchorLinkProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const titleRef = ref<HTMLElement | null>(null)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NAnchor = inject(anchorInjectionKey)!
     const hrefRef = toRef(props, 'href')
     const activeRef = useMemo(() => {
@@ -51,7 +50,7 @@ export default defineComponent({
         NAnchor.updateBarPosition(titleRef.value)
       }
     })
-    function handleClick (): void {
+    function handleClick(): void {
       if (props.href !== undefined) {
         NAnchor.setActiveHref(props.href)
       }

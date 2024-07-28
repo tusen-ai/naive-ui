@@ -1,15 +1,16 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
-import { NForm, NFormItem, type FormInst } from '../index'
-import { type FormValidateCallback } from '../src/interface'
+import { type FormInst, NForm, NFormItem } from '../index'
+import type { FormValidateCallback } from '../src/interface'
 
 describe('n-form', () => {
   it('should work with import on demand', () => {
     mount(NForm)
   })
   describe('require mark', () => {
-    it("doesn't show by default", () => {
+    it('doesn\'t show by default', () => {
       const wrapper = mount(() => (
         <NForm>
           {{
@@ -95,7 +96,7 @@ describe('n-form', () => {
     })
     it('show require mark placement left when set require-mark-placement is "left"', () => {
       const wrapper = mount(() => (
-        <NForm showRequireMark={true} requireMarkPlacement={'left'}>
+        <NForm showRequireMark={true} requireMarkPlacement="left">
           {{
             default: () => {
               return (
@@ -117,7 +118,7 @@ describe('n-form', () => {
 
     it('show require mark placement left when set require-mark-placement is "right"', () => {
       const wrapper = mount(() => (
-        <NForm showRequireMark={true} requireMarkPlacement={'right'}>
+        <NForm showRequireMark={true} requireMarkPlacement="right">
           {{
             default: () => {
               return (
@@ -139,11 +140,11 @@ describe('n-form', () => {
 
     it('show require mark placement left when set require-mark-placement is "right" in form-item', () => {
       const wrapper = mount(() => (
-        <NForm showRequireMark={true} requireMarkPlacement={'left'}>
+        <NForm showRequireMark={true} requireMarkPlacement="left">
           {{
             default: () => {
               return (
-                <NFormItem label="star kirby" requireMarkPlacement={'right'}>
+                <NFormItem label="star kirby" requireMarkPlacement="right">
                   {{
                     default: () => <NInput />
                   }}
@@ -164,7 +165,7 @@ describe('n-form', () => {
     let wrapper = mount(NForm, {
       slots: {
         default: () =>
-          [1, 2, 3].map((num) => (
+          [1, 2, 3].map(num => (
             <NFormItem label={`label${num}`}>
               {{
                 default: () => <NInput />
@@ -226,10 +227,10 @@ describe('n-form', () => {
   })
 
   describe('form validation', () => {
-    it("should form validation work with `level: 'warning'` by async/await`", async () => {
+    it('should form validation work with `level: \'warning\'` by async/await`', async () => {
       const wrapper = mount(
         defineComponent({
-          setup () {
+          setup() {
             return {
               formRef: ref<FormInst>(),
               formData: ref({
@@ -238,7 +239,7 @@ describe('n-form', () => {
               })
             }
           },
-          render () {
+          render() {
             return (
               <NForm
                 ref="formRef"
@@ -367,7 +368,7 @@ describe('n-form', () => {
     it('should form validation work with `warningOnly` by callback', async () => {
       const wrapper = mount(
         defineComponent({
-          setup () {
+          setup() {
             return {
               formRef: ref<FormInst>(),
               formData: ref({
@@ -376,7 +377,7 @@ describe('n-form', () => {
               })
             }
           },
-          render () {
+          render() {
             return (
               <NForm
                 ref="formRef"
@@ -451,7 +452,7 @@ describe('n-form', () => {
         ]
       ]
 
-      async function validate (): Promise<Parameters<FormValidateCallback>> {
+      async function validate(): Promise<Parameters<FormValidateCallback>> {
         return await new Promise<Parameters<FormValidateCallback>>(
           (resolve) => {
             void formRef
@@ -523,6 +524,101 @@ describe('n-form', () => {
           .find('.n-form-item-feedback.n-form-item-feedback--error')
           .exists()
       ).toBe(false)
+
+      wrapper.unmount()
+    })
+
+    /** @see https://github.com/tusen-ai/naive-ui/issues/6068 */
+    it('the validation status should be updated correctly', async () => {
+      const wrapper = mount(
+        defineComponent({
+          setup() {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({
+                input: 'other'
+              })
+            }
+          },
+          render() {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{
+                  input: [
+                    {
+                      level: 'error',
+                      validator(rule, value) {
+                        if (value !== 'target') {
+                          return new Error('error')
+                        }
+                        return true
+                      }
+                    },
+                    {
+                      level: 'warning',
+                      validator(rule, value) {
+                        return new Error('warning')
+                      }
+                    }
+                  ]
+                }}
+              >
+                {{
+                  default: () => (
+                    <NFormItem path="input">
+                      {{
+                        default: () => (
+                          <NInput
+                            ref="inputRef"
+                            value={this.formData.input}
+                            onUpdateValue={(v) => {
+                              this.formData.input = v
+                            }}
+                          />
+                        )
+                      }}
+                    </NFormItem>
+                  )
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+      async function validate(): Promise<Parameters<FormValidateCallback>> {
+        return await new Promise<Parameters<FormValidateCallback>>(
+          (resolve) => {
+            void formRef
+              .validate((errs, { warnings }) => {
+                resolve([errs, { warnings }])
+              })
+              .catch(() => {})
+          }
+        )
+      }
+
+      await validate()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--error')
+          .exists()
+      ).toBe(true)
+
+      await wrapper
+        .findComponent({ ref: 'inputRef' })
+        .find('input')
+        .setValue('target')
+
+      await validate()
+      expect(
+        wrapper
+          .find('.n-form-item-feedback.n-form-item-feedback--warning')
+          .exists()
+      ).toBe(true)
 
       wrapper.unmount()
     })

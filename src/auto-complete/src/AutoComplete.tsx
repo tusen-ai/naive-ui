@@ -1,25 +1,25 @@
 import {
+  type CSSProperties,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type PropType,
+  Transition,
+  computed,
+  defineComponent,
   h,
   ref,
   toRef,
-  computed,
-  defineComponent,
-  Transition,
-  type PropType,
-  withDirectives,
-  type CSSProperties,
-  type InputHTMLAttributes,
   watchEffect,
-  type HTMLAttributes
+  withDirectives
 } from 'vue'
-import { createTreeMate, type TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
+import { type TreeNode, createTreeMate } from 'treemate'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getPreciseEventTarget } from 'seemly'
 import type {
-  RenderOption,
-  RenderLabel
+  RenderLabel,
+  RenderOption
 } from '../../_internal/select-menu/src/interface'
 import { createTmOptions } from '../../select/src/utils'
 import type { FormValidationStatus } from '../../form/src/interface'
@@ -28,19 +28,19 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { useFormItem, useTheme, useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  call,
-  useAdjustedTo,
+  type ExtractPublicPropTypes,
   type MaybeArray,
+  call,
   getFirstSlotVNode,
-  warnOnce,
-  type ExtractPublicPropTypes
+  useAdjustedTo,
+  warnOnce
 } from '../../_utils'
 import {
-  NInternalSelectMenu,
-  type InternalSelectMenuRef
+  type InternalSelectMenuRef,
+  NInternalSelectMenu
 } from '../../_internal'
 import type { InputInst } from '../../input'
 import { NInput } from '../../input'
@@ -48,13 +48,13 @@ import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 import type {
+  AutoCompleteInst,
+  AutoCompleteOption,
   AutoCompleteOptions,
-  OnUpdateValue,
   OnSelect,
   OnSelectImpl,
   OnUpdateImpl,
-  AutoCompleteOption,
-  AutoCompleteInst
+  OnUpdateValue
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -117,7 +117,7 @@ export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onInput !== undefined) {
@@ -168,9 +168,9 @@ export default defineComponent({
     })
     const activeRef = computed(() => {
       return (
-        mergedShowOptionsRef.value &&
-        canBeActivatedRef.value &&
-        (props.showEmpty ? true : !!selectOptionsRef.value.length)
+        mergedShowOptionsRef.value
+        && canBeActivatedRef.value
+        && (props.showEmpty ? true : !!selectOptionsRef.value.length)
       )
     })
     const treeMateRef = computed(() =>
@@ -179,44 +179,50 @@ export default defineComponent({
         createTmOptions('value', 'children')
       )
     )
-    function doUpdateValue (value: string | null): void {
+    function doUpdateValue(value: string | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue, onInput } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
-      if (onInput) call(onInput as OnUpdateImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateImpl, value)
+      if (onInput)
+        call(onInput as OnUpdateImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doSelect (value: string | number): void {
+    function doSelect(value: string | number): void {
       const { onSelect } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onSelect) call(onSelect as OnSelectImpl, value)
+      if (onSelect)
+        call(onSelect as OnSelectImpl, value)
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function handleCompositionStart (): void {
+    function handleCompositionStart(): void {
       isComposingRef.value = true
     }
-    function handleCompositionEnd (): void {
+    function handleCompositionEnd(): void {
       window.setTimeout(() => {
         isComposingRef.value = false
       }, 0)
     }
-    function handleKeyDown (e: KeyboardEvent): void {
+    function handleKeyDown(e: KeyboardEvent): void {
       switch (e.key) {
         case 'Enter':
           if (!isComposingRef.value) {
@@ -235,12 +241,13 @@ export default defineComponent({
           break
       }
     }
-    function select (option: AutoCompleteOption): void {
+    function select(option: AutoCompleteOption): void {
       if (option?.value !== undefined) {
         doSelect(option.value)
         if (props.clearAfterSelect) {
           doUpdateValue(null)
-        } else if (option.label !== undefined) {
+        }
+        else if (option.label !== undefined) {
           doUpdateValue(
             props.append
               ? `${mergedValueRef.value}${option.label}`
@@ -253,32 +260,32 @@ export default defineComponent({
         }
       }
     }
-    function handleClear (): void {
+    function handleClear(): void {
       doUpdateValue(null)
     }
-    function handleFocus (e: FocusEvent): void {
+    function handleFocus(e: FocusEvent): void {
       canBeActivatedRef.value = true
       doFocus(e)
     }
-    function handleBlur (e: FocusEvent): void {
+    function handleBlur(e: FocusEvent): void {
       canBeActivatedRef.value = false
       doBlur(e)
     }
-    function handleInput (value: string): void {
+    function handleInput(value: string): void {
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggle (option: TreeNode<SelectBaseOption>): void {
+    function handleToggle(option: TreeNode<SelectBaseOption>): void {
       select(option.rawNode as AutoCompleteOption)
     }
-    function handleClickOutsideMenu (e: MouseEvent): void {
+    function handleClickOutsideMenu(e: MouseEvent): void {
       if (
         !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
         canBeActivatedRef.value = false
       }
     }
-    function blur (): void {
+    function blur(): void {
       if (triggerElRef.value?.contains(document.activeElement)) {
         ;(document.activeElement as HTMLElement)?.blur()
       }
@@ -338,7 +345,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div
@@ -410,7 +417,8 @@ export default defineComponent({
                       {{
                         default: () => {
                           this.onRender?.()
-                          if (!this.active) return null
+                          if (!this.active)
+                            return null
                           const { menuProps } = this
                           return withDirectives(
                             <NInternalSelectMenu

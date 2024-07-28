@@ -2,14 +2,10 @@
   # Summary debug
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :summary="summary" />
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
 
-const createColumns = () => {
+function createColumns() {
   return [
     {
       title: 'parehnt',
@@ -29,32 +25,33 @@ const createColumns = () => {
       title: 'Address',
       key: 'address'
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ] as any
 }
 
-const createData = () => [
-  {
-    key: 0,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park'
-  },
-  {
-    key: 1,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park'
-  },
-  {
-    key: 2,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park'
-  }
-]
+function createData() {
+  return [
+    {
+      key: 0,
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park'
+    },
+    {
+      key: 1,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 2,
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park'
+    }
+  ]
+}
 
-const createSummary = () => {
+function createSummary() {
   return [
     {
       name: {
@@ -70,7 +67,7 @@ const createSummary = () => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       summary: createSummary,
       data: createData(),
@@ -79,3 +76,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :summary="summary" />
+</template>

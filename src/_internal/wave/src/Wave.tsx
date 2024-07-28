@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, onBeforeUnmount, nextTick, toRef } from 'vue'
+import { defineComponent, h, nextTick, onBeforeUnmount, ref, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import style from './styles/index.cssr'
 
@@ -14,7 +14,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-wave', style, toRef(props, 'clsPrefix'))
     const selfRef = ref<HTMLElement | null>(null)
     const activeRef = ref(false)
@@ -27,14 +27,13 @@ export default defineComponent({
     return {
       active: activeRef,
       selfRef,
-      play () {
+      play() {
         if (animationTimerId !== null) {
           window.clearTimeout(animationTimerId)
           activeRef.value = false
           animationTimerId = null
         }
         void nextTick(() => {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           void selfRef.value?.offsetHeight
           activeRef.value = true
           animationTimerId = window.setTimeout(() => {
@@ -45,7 +44,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div

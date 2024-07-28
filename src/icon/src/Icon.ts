@@ -1,16 +1,16 @@
 import {
   type Component,
+  type PropType,
   computed,
   defineComponent,
   h,
-  mergeProps,
-  type PropType
+  mergeProps
 } from 'vue'
 import {
   type ThemeProps,
-  useThemeClass,
   useConfig,
-  useTheme
+  useTheme,
+  useThemeClass
 } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { formatLength, warn } from '../../_utils'
@@ -35,7 +35,7 @@ export const NIcon = defineComponent({
   name: 'Icon',
   inheritAttrs: false,
   props: iconProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
@@ -87,11 +87,11 @@ export const NIcon = defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
-    const { $parent, depth, mergedClsPrefix, component, onRender, themeClass } =
-      this
+  render() {
+    const { $parent, depth, mergedClsPrefix, component, onRender, themeClass }
+      = this
     if ($parent?.$options?._n_icon__) {
-      warn('icon', "don't wrap `n-icon` inside `n-icon`")
+      warn('icon', 'don\'t wrap `n-icon` inside `n-icon`')
     }
     onRender?.()
     return h(

@@ -2,6 +2,27 @@
 # 多个抽屉
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const showOuterRef = ref(false)
+    const showInnerRef = ref(false)
+    return {
+      showOuter: showOuterRef,
+      showInner: showInnerRef,
+      doShowOuter() {
+        showOuterRef.value = true
+      },
+      doShowInner() {
+        showInnerRef.value = true
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="doShowOuter">
     来一个！
@@ -22,24 +43,3 @@
     </n-drawer>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const showOuterRef = ref(false)
-    const showInnerRef = ref(false)
-    return {
-      showOuter: showOuterRef,
-      showInner: showInnerRef,
-      doShowOuter () {
-        showOuterRef.value = true
-      },
-      doShowInner () {
-        showInnerRef.value = true
-      }
-    }
-  }
-})
-</script>

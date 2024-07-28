@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import { type PropType, type VNodeChild, defineComponent, h, inject } from 'vue'
 import { NButton } from '../../button'
 import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
@@ -15,9 +15,9 @@ export default defineComponent({
     source: Boolean,
     onCheckedAll: Function as PropType<() => void>,
     onClearAll: Function as PropType<() => void>,
-    title: String
+    title: [String, Function] as PropType<string | (() => VNodeChild)>
   },
-  setup (props) {
+  setup(props) {
     const {
       targetOptionsRef,
       canNotSelectAnythingRef,
@@ -27,12 +27,11 @@ export default defineComponent({
       disabledRef,
       mergedClsPrefixRef,
       srcOptionsLengthRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source, onClearAll, onCheckedAll, selectAllText, clearText } =
-        props
+      const { source, onClearAll, onCheckedAll, selectAllText, clearText }
+        = props
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const { value: locale } = localeRef
@@ -42,7 +41,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
           {title && (
             <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
-              {title}
+              {typeof title === 'function' ? [title()] : [title]}
             </div>
           )}
           {source && (

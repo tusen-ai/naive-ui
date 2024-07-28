@@ -1,4 +1,4 @@
-import { defineComponent, type PropType, type CSSProperties } from 'vue'
+import { type CSSProperties, type PropType, defineComponent } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
@@ -22,7 +22,7 @@ export default defineComponent({
   name: 'DescriptionsItem',
   [DESCRIPTION_ITEM_FLAG]: true,
   props: descriptionsItemProps,
-  render () {
+  render() {
     return null
   }
 })

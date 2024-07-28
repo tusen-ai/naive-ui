@@ -46,7 +46,6 @@ export type UploadOnFinish = ({
 }: {
   file: UploadSettledFileInfo
   event?: ProgressEvent
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 }) => UploadFileInfo | undefined | void
 
 export type UploadOnRemove = (data: {

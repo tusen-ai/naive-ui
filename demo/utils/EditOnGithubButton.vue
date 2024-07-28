@@ -1,31 +1,6 @@
-<template>
-  <n-button
-    class="edit-button"
-    :theme-overrides="
-      quaternary
-        ? {
-          paddingTiny: '4px',
-          heightTiny: '14px'
-        }
-        : undefined
-    "
-    :quaternary="quaternary"
-    :text="!quaternary"
-    :size="size"
-    tag="a"
-    :href="url"
-    target="_blank"
-  >
-    <template #icon>
-      <n-icon>
-        <edit-icon />
-      </n-icon>
-    </template>
-  </n-button>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
 import type { ButtonProps } from 'naive-ui'
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
 import { blobUrl } from './github-url'
@@ -47,10 +22,36 @@ export default defineComponent({
       default: 'tiny'
     }
   },
-  setup (props) {
+  setup(props) {
     return {
       url: blobUrl + props.relativeUrl
     }
   }
 })
 </script>
+
+<template>
+  <n-button
+    class="edit-button"
+    :theme-overrides="
+      quaternary
+        ? {
+          paddingTiny: '4px',
+          heightTiny: '14px',
+        }
+        : undefined
+    "
+    :quaternary="quaternary"
+    :text="!quaternary"
+    :size="size"
+    tag="a"
+    :href="url"
+    target="_blank"
+  >
+    <template #icon>
+      <n-icon>
+        <EditIcon />
+      </n-icon>
+    </template>
+  </n-button>
+</template>

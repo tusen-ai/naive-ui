@@ -1,12 +1,12 @@
 import {
-  h,
-  defineComponent,
-  Transition,
-  withDirectives,
   type PropType,
-  ref
+  Transition,
+  defineComponent,
+  h,
+  ref,
+  withDirectives
 } from 'vue'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { getPreciseEventTarget } from 'seemly'
 import MonthPanel from './month'
@@ -35,19 +35,19 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  setup() {
     const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
-    function handleClickOutside (e: MouseEvent): void {
+    function handleClickOutside(e: MouseEvent): void {
       if (
-        showRef.value &&
-        !triggerRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+        showRef.value
+        && !triggerRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
         showRef.value = false
       }
     }
-    function handleHeaderClick (): void {
+    function handleHeaderClick(): void {
       showRef.value = !showRef.value
     }
     return {
@@ -58,7 +58,7 @@ export default defineComponent({
       handleClickOutside
     }
   },
-  render () {
+  render() {
     const { handleClickOutside, mergedClsPrefix } = this
     return (
       <div
@@ -74,8 +74,8 @@ export default defineComponent({
                     <div
                       class={[
                         `${mergedClsPrefix}-date-panel-month__text`,
-                        this.show &&
-                          `${mergedClsPrefix}-date-panel-month__text--active`
+                        this.show
+                        && `${mergedClsPrefix}-date-panel-month__text--active`
                       ]}
                       onClick={this.handleHeaderClick}
                     >
@@ -94,24 +94,24 @@ export default defineComponent({
                         default: () =>
                           this.show
                             ? withDirectives(
-                                <MonthPanel
-                                  ref="monthPanelRef"
-                                  onUpdateValue={this.onUpdateValue}
-                                  actions={[]}
-                                  // month and year click show month type
-                                  type="month"
-                                  key="month"
-                                  useAsQuickJump
-                                  value={this.value}
-                                />,
+                              <MonthPanel
+                                ref="monthPanelRef"
+                                onUpdateValue={this.onUpdateValue}
+                                actions={[]}
+                                // month and year click show month type
+                                type="month"
+                                key="month"
+                                useAsQuickJump
+                                value={this.value}
+                              />,
+                              [
                                 [
-                                  [
-                                    clickoutside,
-                                    handleClickOutside,
-                                    undefined as unknown as string,
-                                    { capture: true }
-                                  ]
+                                  clickoutside,
+                                  handleClickOutside,
+                                  undefined as unknown as string,
+                                  { capture: true }
                                 ]
+                              ]
                             )
                             : null
                       }}

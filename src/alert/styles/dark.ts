@@ -6,7 +6,7 @@ import commonVars from './_common'
 const alertDark: AlertTheme = {
   name: 'Alert',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       lineHeight,
       borderRadius,

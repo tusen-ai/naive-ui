@@ -4,6 +4,19 @@
 Affix has `trigger-top`, `top`, `trigger-bottom` and `bottom`. `trigger-top` is top affixing trigger point. `top` is the style `top` value after top affixing is trigger. `trigger-bottom` and `bottom` work in similar way.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const containerRef = ref<HTMLElement | undefined>(undefined)
+    return {
+      containerRef
+    }
+  }
+})
+</script>
+
 <template>
   <div ref="containerRef" class="container">
     <div class="padding" />
@@ -27,19 +40,6 @@ Affix has `trigger-top`, `top`, `trigger-bottom` and `bottom`. `trigger-top` is 
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const containerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      containerRef
-    }
-  }
-})
-</script>
 
 <style>
 .container {

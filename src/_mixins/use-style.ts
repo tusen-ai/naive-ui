@@ -1,18 +1,19 @@
 import type { CNode } from 'css-render'
-import { type Ref, onBeforeMount, inject } from 'vue'
+import { type Ref, inject, onBeforeMount } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import globalStyle from '../_styles/global/index.cssr'
 import { throwError } from '../_utils'
 import { cssrAnchorMetaName } from './common'
 
-export default function useStyle (
+export default function useStyle(
   mountId: string,
   style: CNode,
   clsPrefixRef: Ref<string | undefined>
 ): void {
   if (!style) {
-    if (__DEV__) throwError('use-style', 'No style is specified.')
+    if (__DEV__)
+      throwError('use-style', 'No style is specified.')
     return
   }
   const ssrAdapter = useSsrAdapter()
@@ -41,7 +42,8 @@ export default function useStyle (
   }
   if (ssrAdapter) {
     mountStyle()
-  } else {
+  }
+  else {
     onBeforeMount(mountStyle)
   }
 }

@@ -4,6 +4,18 @@
 这是一个滚动内容的演示。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="show = !show">
     打开
@@ -76,15 +88,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

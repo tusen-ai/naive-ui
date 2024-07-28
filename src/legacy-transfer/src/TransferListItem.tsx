@@ -1,8 +1,8 @@
-import { h, inject, defineComponent } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
-import { transferInjectionKey } from './interface'
 import { getTitleAttribute } from '../../_utils'
+import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -24,7 +24,7 @@ export default defineComponent({
       default: false
     }
   },
-  setup (props) {
+  setup(props) {
     const { source } = props
     const {
       mergedClsPrefixRef,
@@ -33,7 +33,6 @@ export default defineComponent({
       tgtCheckedValuesRef,
       handleSrcCheckboxClick,
       handleTgtCheckboxClick
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkedRef = source
       ? useMemo(() => srcCheckedValuesRef.value.includes(props.value))
@@ -56,9 +55,9 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
-    const { disabled, mergedTheme, mergedClsPrefix, label, checked, source } =
-      this
+  render() {
+    const { disabled, mergedTheme, mergedClsPrefix, label, checked, source }
+      = this
     return (
       <div
         class={[

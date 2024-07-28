@@ -1,4 +1,4 @@
-import { h, defineComponent, computed, type CSSProperties } from 'vue'
+import { type CSSProperties, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
@@ -16,7 +16,7 @@ export type OlProps = ExtractPublicPropTypes<typeof olProps>
 export default defineComponent({
   name: 'Ol',
   props: olProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -58,7 +58,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

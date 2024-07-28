@@ -2,6 +2,20 @@
 # Modal debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const showRef = ref(false)
+    return {
+      tabs: ['ccccc', 'dddddd'],
+      show: showRef
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="show = true">
     Show modal
@@ -14,17 +28,3 @@
     </n-tabs>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const showRef = ref(false)
-    return {
-      tabs: ['ccccc', 'dddddd'],
-      show: showRef
-    }
-  }
-})
-</script>

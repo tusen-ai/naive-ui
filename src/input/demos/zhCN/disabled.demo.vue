@@ -4,6 +4,20 @@
 文本输入可以被禁用。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { FlashOutline } from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      FlashOutline,
+      active: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input
@@ -28,16 +42,3 @@
     <n-switch v-model:value="active" />
   </n-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FlashOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      FlashOutline,
-      active: ref(false)
-    }
-  }
-})
-</script>

@@ -4,6 +4,21 @@
 If you are not satisfied with builtin colors.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { changeColor } from 'seemly'
+import { useThemeVars } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      changeColor,
+      themeVars: useThemeVars()
+    }
+  }
+})
+</script>
+
 <template>
   <n-progress
     style="margin: 0 8px 12px 0"
@@ -22,7 +37,7 @@ If you are not satisfied with builtin colors.
     :color="[themeVars.infoColor, themeVars.infoColor]"
     :rail-color="[
       changeColor(themeVars.infoColor, { alpha: 0.2 }),
-      changeColor(themeVars.infoColor, { alpha: 0.2 })
+      changeColor(themeVars.infoColor, { alpha: 0.2 }),
     ]"
   />
   <n-progress
@@ -40,18 +55,3 @@ If you are not satisfied with builtin colors.
     :indicator-text-color="themeVars.warningColor"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { changeColor } from 'seemly'
-import { useThemeVars } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      changeColor,
-      themeVars: useThemeVars()
-    }
-  }
-})
-</script>

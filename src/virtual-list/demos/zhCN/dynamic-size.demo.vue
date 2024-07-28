@@ -4,26 +4,11 @@
   设定 `item-resizable` 它可以渲染未知大小的项目。
 </markdown>
 
-<template>
-  <n-virtual-list
-    style="max-height: 240px"
-    :item-size="42"
-    :items="items"
-    item-resizable
-  >
-    <template #default="{ item, index }">
-      <div :key="item.key" class="item">
-        <img class="avatar" :src="item.avatar" alt="">
-        <span> {{ index }} - {{ item.message }}</span>
-      </div>
-    </template>
-  </n-virtual-list>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  setup () {
+  setup() {
     const avatars = [
       'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
       'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
@@ -53,6 +38,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-virtual-list
+    style="max-height: 240px"
+    :item-size="42"
+    :items="items"
+    item-resizable
+  >
+    <template #default="{ item, index }">
+      <div :key="item.key" class="item">
+        <img class="avatar" :src="item.avatar" alt="">
+        <span> {{ index }} - {{ item.message }}</span>
+      </div>
+    </template>
+  </n-virtual-list>
+</template>
 
 <style>
 .item {

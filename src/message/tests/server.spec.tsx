@@ -1,19 +1,19 @@
 /**
  * @jest-environment node
  */
-import { h, createSSRApp, defineComponent } from 'vue'
+import { createSSRApp, defineComponent, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
 import { NMessageProvider, useMessage } from '../..'
 
-describe('SSR', () => {
+describe('sSR', () => {
   it('works', async () => {
     const Component = defineComponent({
-      setup () {
+      setup() {
         const message = useMessage()
         expect(message).toBeTruthy()
       },
-      render () {
+      render() {
         return '07akioni'
       }
     })
@@ -27,7 +27,8 @@ describe('SSR', () => {
     setup(app)
     try {
       await renderToString(app)
-    } catch (e) {
+    }
+    catch (e) {
       expect(e).not.toBeTruthy()
     }
   })

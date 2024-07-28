@@ -1,11 +1,11 @@
-import { h, ref, defineComponent } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import NGridItem, {
-  gridItemProps,
-  gridItemPropKeys
+  gridItemPropKeys,
+  gridItemProps
 } from '../../grid/src/GridItem'
 import { keep, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import NFormItem, { formItemProps, formItemPropKeys } from './FormItem'
+import NFormItem, { formItemPropKeys, formItemProps } from './FormItem'
 import type { FormItemInst } from './interface'
 
 export const formItemGiProps = {
@@ -22,7 +22,7 @@ export default defineComponent({
   name: 'FormItemGridItem',
   alias: ['FormItemGi'],
   props: formItemGiProps,
-  setup () {
+  setup() {
     const formItemInstRef = ref<FormItemInst | null>(null)
     const validate: FormItemInst['validate'] = ((...args: any[]) => {
       const { value } = formItemInstRef
@@ -42,7 +42,7 @@ export default defineComponent({
       restoreValidation
     }
   },
-  render () {
+  render() {
     return h(NGridItem, keep(this.$.vnode.props || {}, gridItemPropKeys), {
       default: () => {
         const itemProps = keep(this.$props, formItemPropKeys)

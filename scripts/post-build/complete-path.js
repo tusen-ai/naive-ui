@@ -1,34 +1,12 @@
+const path = require('node:path')
 const fs = require('fs-extra')
-const path = require('path')
 const glob = require('fast-glob')
 const babel = require('@babel/core')
-
-/**
- * @param {('es' | 'lib')[]} formats
- */
-module.exports.completePath = async (formats) => {
-  await Promise.all(
-    formats.map(async (format) => {
-      const config = formatConfigs[format]
-      const files = await glob('**/*.js', {
-        cwd: config.root,
-        absolute: true,
-        onlyFiles: true
-      })
-      await Promise.all(
-        files.map(async (filePath) => {
-          const code = await fs.readFile(filePath, 'utf-8')
-          await config.parse(code, filePath, path.dirname(filePath))
-        })
-      )
-    })
-  )
-}
 
 const formatConfigs = {
   es: {
     root: path.join(__dirname, '../../es'),
-    async parse (code, filePath, currentDir) {
+    async parse(code, filePath, currentDir) {
       const suffix = '.mjs'
       const result = await babel.transformAsync(code, {
         root: this.root,
@@ -72,7 +50,7 @@ const formatConfigs = {
   },
   lib: {
     root: path.join(__dirname, '../../lib'),
-    async parse (code, filePath, currentDir) {
+    async parse(code, filePath, currentDir) {
       const suffix = '.js'
       const result = await babel.transformAsync(code, {
         root: this.root,
@@ -83,8 +61,8 @@ const formatConfigs = {
             visitor: {
               CallExpression: ({ node }) => {
                 if (
-                  node.callee.type === 'Identifier' &&
-                  node.callee.name === 'require'
+                  node.callee.type === 'Identifier'
+                  && node.callee.name === 'require'
                 ) {
                   const firstArg = node.arguments[0]
                   if (firstArg.type === 'StringLiteral') {
@@ -106,54 +84,25 @@ const formatConfigs = {
 }
 
 /**
- * @param {string} source
- * @param {string} currentDir
- * @param {string} suffix
- * @returns {string | null}
+ * @param {('es' | 'lib')[]} formats
  */
-const parseSource = (source, currentDir, suffix) => {
-  if (source.startsWith('.')) {
-    const fullPath = joinPath(currentDir, source)
-    return fs.existsSync(fullPath)
-      ? path.extname(fullPath)
-        ? source
-        : joinPath(source, 'index' + suffix)
-      : source + suffix
-  } else if (
-    source.includes('date-fns') &&
-    source !== 'date-fns-tz/formatInTimeZone'
-  ) {
-    // Xxxx date-fns for its poor compatibility
-    const [pkgName, subpath] = splitSource(source) || []
-    return pkgName === null || subpath === null
-      ? null
-      : guessFullPath(pkgName, subpath)
-  } else {
-    return source
-  }
-}
-
-/**
- * @param {string} pkgName
- * @param {string} subpath
- * @return {string | null}
- */
-const guessFullPath = (pkgName, subpath) => {
-  const pkgPath = require.resolve(path.posix.join(pkgName, 'package.json'))
-  const pkgRootPath = path.dirname(pkgPath)
-
-  let parsedSource = null
-  const sourcePath = path.join(pkgRootPath, subpath)
-  if (fs.existsSync(sourcePath + '.js')) {
-    parsedSource = joinPath(pkgName, subpath + '.js')
-  } else if (fs.existsSync(sourcePath + '.mjs')) {
-    parsedSource = joinPath(pkgName, subpath + '.mjs')
-  } else if (fs.existsSync(path.join(sourcePath, 'index.js'))) {
-    parsedSource = joinPath(pkgName, subpath, 'index.js')
-  } else if (fs.existsSync(path.join(sourcePath, 'index.mjs'))) {
-    parsedSource = joinPath(pkgName, subpath, 'index.mjs')
-  }
-  return parsedSource
+module.exports.completePath = async (formats) => {
+  await Promise.all(
+    formats.map(async (format) => {
+      const config = formatConfigs[format]
+      const files = await glob('**/*.js', {
+        cwd: config.root,
+        absolute: true,
+        onlyFiles: true
+      })
+      await Promise.all(
+        files.map(async (filePath) => {
+          const code = await fs.readFile(filePath, 'utf-8')
+          await config.parse(code, filePath, path.dirname(filePath))
+        })
+      )
+    })
+  )
 }
 
 const splitSource = (() => {
@@ -164,23 +113,81 @@ const splitSource = (() => {
    */
   return (source) => {
     const matched = splitRegex.exec(source)
-    if (!matched) return null
+    if (!matched)
+      return null
     return matched.slice(1)
   }
 })()
 
-const replaceExtname = (filePath, ext) => {
-  const oldExt = path.extname(filePath)
-  if (!oldExt) return filePath + ext
-  return joinPath(path.dirname(filePath), path.basename(filePath, oldExt) + ext)
+/**
+ * @param {string} source
+ * @param {string} currentDir
+ * @param {string} suffix
+ * @returns {string | null}
+ */
+function parseSource(source, currentDir, suffix) {
+  if (source.startsWith('.')) {
+    const fullPath = joinPath(currentDir, source)
+    return fs.existsSync(fullPath)
+      ? path.extname(fullPath)
+        ? source
+        : joinPath(source, `index${suffix}`)
+      : source + suffix
+  }
+  else if (
+    source.includes('date-fns')
+    && source !== 'date-fns-tz/formatInTimeZone'
+  ) {
+    // Xxxx date-fns for its poor compatibility
+    const [pkgName, subpath] = splitSource(source) || []
+    return pkgName === null || subpath === null
+      ? null
+      : guessFullPath(pkgName, subpath)
+  }
+  else {
+    return source
+  }
 }
 
-const joinPath = (firstPath, ...restPath) => {
-  const joinedPath = normalizePath(path.join(firstPath, ...restPath))
-  return firstPath.startsWith('./') ? './' + joinedPath : joinedPath
+/**
+ * @param {string} pkgName
+ * @param {string} subpath
+ * @return {string | null}
+ */
+function guessFullPath(pkgName, subpath) {
+  const pkgPath = require.resolve(path.posix.join(pkgName, 'package.json'))
+  const pkgRootPath = path.dirname(pkgPath)
+
+  let parsedSource = null
+  const sourcePath = path.join(pkgRootPath, subpath)
+  if (fs.existsSync(`${sourcePath}.js`)) {
+    parsedSource = joinPath(pkgName, `${subpath}.js`)
+  }
+  else if (fs.existsSync(`${sourcePath}.mjs`)) {
+    parsedSource = joinPath(pkgName, `${subpath}.mjs`)
+  }
+  else if (fs.existsSync(path.join(sourcePath, 'index.js'))) {
+    parsedSource = joinPath(pkgName, subpath, 'index.js')
+  }
+  else if (fs.existsSync(path.join(sourcePath, 'index.mjs'))) {
+    parsedSource = joinPath(pkgName, subpath, 'index.mjs')
+  }
+  return parsedSource
+}
+
+function replaceExtname(filePath, ext) {
+  const oldExt = path.extname(filePath)
+  if (!oldExt)
+    return filePath + ext
+  return joinPath(path.dirname(filePath), path.basename(filePath, oldExt) + ext)
 }
 
 /**
  * @param {string} path
  */
-const normalizePath = (path) => path.replace(/\\/g, '/')
+const normalizePath = path => path.replace(/\\/g, '/')
+
+function joinPath(firstPath, ...restPath) {
+  const joinedPath = normalizePath(path.join(firstPath, ...restPath))
+  return firstPath.startsWith('./') ? `./${joinedPath}` : joinedPath
+}

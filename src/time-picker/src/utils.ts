@@ -1,4 +1,4 @@
-import { getHours } from 'date-fns/esm'
+import { getHours } from 'date-fns'
 import { type MaybeArray, throwError } from '../../_utils'
 
 export const time = {
@@ -183,12 +183,12 @@ export const time = {
   period: ['AM', 'PM']
 }
 
-export function getFixValue (value: number): string {
+export function getFixValue(value: number): string {
   return `00${value}`.slice(-2)
 }
 
 // TODO: refactor the logic, it's somehow a patch logic
-export function getTimeUnits (
+export function getTimeUnits(
   defaultValue: string[],
   stepOrList: MaybeArray<number> | undefined,
   isHourWithAmPm?: 'am' | 'pm'
@@ -196,18 +196,22 @@ export function getTimeUnits (
   if (Array.isArray(stepOrList)) {
     return (
       isHourWithAmPm === 'am'
-        ? stepOrList.filter((v) => v < 12)
+        ? stepOrList.filter(v => v < 12)
         : isHourWithAmPm === 'pm'
-          ? stepOrList.filter((v) => v >= 12).map((v) => (v === 12 ? 12 : v - 12))
+          ? stepOrList
+            .filter(v => v >= 12)
+            .map(v => (v === 12 ? 12 : v - 12))
           : stepOrList
-    ).map((v) => getFixValue(v))
-  } else if (typeof stepOrList === 'number') {
+    ).map(v => getFixValue(v))
+  }
+  else if (typeof stepOrList === 'number') {
     if (isHourWithAmPm === 'am') {
       return defaultValue.filter((hour) => {
         const hourAsNumber = Number(hour)
         return hourAsNumber < 12 && hourAsNumber % stepOrList === 0
       })
-    } else if (isHourWithAmPm === 'pm') {
+    }
+    else if (isHourWithAmPm === 'pm') {
       return defaultValue
         .filter((hour) => {
           const hourAsNumber = Number(hour)
@@ -221,33 +225,36 @@ export function getTimeUnits (
     return defaultValue.filter((hour) => {
       return Number(hour) % stepOrList === 0
     })
-  } else {
+  }
+  else {
     return isHourWithAmPm === 'am'
-      ? defaultValue.filter((hour) => Number(hour) < 12)
+      ? defaultValue.filter(hour => Number(hour) < 12)
       : isHourWithAmPm === 'pm'
         ? defaultValue
-          .map((hour) => Number(hour))
-          .filter((hour) => Number(hour) >= 12)
-          .map((v) => getFixValue(v === 12 ? 12 : v - 12))
+          .map(hour => Number(hour))
+          .filter(hour => Number(hour) >= 12)
+          .map(v => getFixValue(v === 12 ? 12 : v - 12))
         : defaultValue
   }
 }
 
-export function isTimeInStep (
+export function isTimeInStep(
   value: number,
   type: 'hours' | 'minutes' | 'seconds',
   stepOrList: MaybeArray<number> | undefined
 ): boolean {
   if (!stepOrList) {
     return true
-  } else if (typeof stepOrList === 'number') {
+  }
+  else if (typeof stepOrList === 'number') {
     return value % stepOrList === 0
-  } else {
+  }
+  else {
     return stepOrList.includes(value)
   }
 }
 
-export function findSimilarTime (
+export function findSimilarTime(
   value: number,
   type: 'hours' | 'minutes' | 'seconds',
   stepOrList: MaybeArray<number> | undefined
@@ -256,7 +263,9 @@ export function findSimilarTime (
   let lowerBound, upperBound
   for (let i = 0; i < list.length; ++i) {
     const v = list[i]
-    if (v === value) return v
+    if (v === value) {
+      return v
+    }
     else if (v > value) {
       upperBound = v
       break
@@ -267,7 +276,7 @@ export function findSimilarTime (
     if (!upperBound) {
       throwError(
         'time-picker',
-        "Please set 'hours' or 'minutes' or 'seconds' props"
+        'Please set \'hours\' or \'minutes\' or \'seconds\' props'
       )
     }
     return upperBound
@@ -278,6 +287,6 @@ export function findSimilarTime (
   return upperBound - value > value - lowerBound ? lowerBound : upperBound
 }
 
-export function getAmPm (value: number): 'am' | 'pm' {
+export function getAmPm(value: number): 'am' | 'pm' {
   return getHours(value) < 12 ? 'am' : 'pm'
 }

@@ -2,20 +2,11 @@
 # Placement
 </markdown>
 
-<template>
-  <n-notification-provider :placement="placement">
-    <placement-buttons @placement-change="handlePlacementChange" />
-  </n-notification-provider>
-</template>
-
 <script lang="ts">
-import { defineComponent, h, ref, PropType } from 'vue'
-import {
-  useNotification,
-  NButton,
-  NSpace,
-  NotificationPlacement
-} from 'naive-ui'
+import type { PropType } from 'vue'
+import { defineComponent, h, ref } from 'vue'
+import type { NotificationPlacement } from 'naive-ui'
+import { NButton, NSpace, useNotification } from 'naive-ui'
 
 const PlacementButtons = defineComponent({
   props: {
@@ -23,7 +14,7 @@ const PlacementButtons = defineComponent({
       (placement: NotificationPlacement) => void
     >
   },
-  setup () {
+  setup() {
     const notification = useNotification()
     const placementList = [
       { placement: 'top-left', text: 'Top left' },
@@ -38,10 +29,10 @@ const PlacementButtons = defineComponent({
       placementList
     }
   },
-  render () {
+  render() {
     return h(NSpace, null, {
       default: () =>
-        this.placementList.map((item) =>
+        this.placementList.map(item =>
           h(
             NButton,
             {
@@ -64,14 +55,20 @@ export default defineComponent({
   components: {
     PlacementButtons
   },
-  setup () {
+  setup() {
     const placementRef = ref<NotificationPlacement>('top-right')
     return {
       placement: placementRef,
-      handlePlacementChange (val: NotificationPlacement) {
+      handlePlacementChange(val: NotificationPlacement) {
         placementRef.value = val
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-notification-provider :placement="placement">
+    <PlacementButtons @placement-change="handlePlacementChange" />
+  </n-notification-provider>
+</template>

@@ -1,11 +1,11 @@
-import { h, defineComponent, computed, type CSSProperties } from 'vue'
+import { type CSSProperties, computed, defineComponent, h } from 'vue'
 import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { radioLight, type RadioTheme } from '../styles'
-import { setup, radioBaseProps } from './use-radio'
+import { type RadioTheme, radioLight } from '../styles'
+import { radioBaseProps, setup } from './use-radio'
 import style from './styles/radio.cssr'
 
 export const radioProps = {
@@ -18,7 +18,7 @@ export type RadioProps = ExtractPublicPropTypes<typeof radioProps>
 export default defineComponent({
   name: 'Radio',
   props: radioProps,
-  setup (props) {
+  setup(props) {
     const radio = setup(props)
     const themeRef = useTheme(
       'Radio',
@@ -75,8 +75,8 @@ export default defineComponent({
         '--n-label-padding': labelPadding
       }
     })
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
-      useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
@@ -93,7 +93,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     })
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, onRender, label } = this
     onRender?.()
     return (
@@ -130,7 +130,8 @@ export default defineComponent({
           />
         </div>
         {resolveWrappedSlot($slots.default, (children) => {
-          if (!children && !label) return null
+          if (!children && !label)
+            return null
           return (
             <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
               {children || label}
