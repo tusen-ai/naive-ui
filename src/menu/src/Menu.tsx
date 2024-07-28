@@ -7,11 +7,11 @@ import {
   defineComponent,
   h,
   inject,
+  mergeProps,
   provide,
   ref,
   toRef,
-  watchEffect,
-  mergeProps
+  watchEffect
 } from 'vue'
 import { type Key, createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -152,6 +152,7 @@ export type MenuProps = Partial<MenuSetupProps>
 
 export default defineComponent({
   name: 'Menu',
+  inheritAttrs: false,
   props: menuProps,
   setup(props) {
     if (__DEV__) {
@@ -627,8 +628,10 @@ export default defineComponent({
       this.tmNodes.map(tmNode => itemRenderer(tmNode, this.$props))
     const horizontal = mode === 'horizontal'
     const finalResponsive = horizontal && this.responsive
-    const renderMainNode = (): VNode => (
-      <div {...mergeProps(this.$attrs, {
+    const renderMainNode = (): VNode =>
+      h(
+        'div',
+        mergeProps(this.$attrs, {
           role: mode === 'horizontal' ? 'menubar' : 'menu',
           class: [
             `${mergedClsPrefix}-menu`,
@@ -638,9 +641,8 @@ export default defineComponent({
             this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
           ],
           style: this.cssVars
-        })}
-      >
-        {finalResponsive ? (
+        }),
+        finalResponsive ? (
           <VOverflow
             ref="overflowRef"
             onUpdateOverflow={this.onUpdateOverflow}
@@ -660,9 +662,8 @@ export default defineComponent({
           </VOverflow>
         ) : (
           renderMenuItemNodes()
-        )}
-      </div>
-    )
+        )
+      )
     return finalResponsive ? (
       <VResizeObserver onResize={this.onResize}>
         {{ default: renderMainNode }}
