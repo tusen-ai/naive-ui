@@ -1,4 +1,4 @@
-import { type Ref, computed, onBeforeMount, watchEffect } from 'vue'
+import { type Ref, computed, inject, onBeforeMount, watchEffect } from 'vue'
 import { exists } from 'css-render'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import type {
@@ -6,6 +6,7 @@ import type {
   RtlItem
 } from '../config-provider/src/internal-interface'
 import { cssrAnchorMetaName } from './common'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 
 export function useRtl(
   mountId: string,
@@ -26,6 +27,7 @@ export function useRtl(
     }
     return componentRtlState
   })
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   const mountStyle = (): void => {
     watchEffect(() => {
       const { value: clsPrefix } = clsPrefixRef
@@ -45,7 +47,8 @@ export function useRtl(
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: NConfigProvider?.styleMountParent
       })
     })
   }

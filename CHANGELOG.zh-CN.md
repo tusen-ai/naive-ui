@@ -20,6 +20,7 @@
 - `n-slider` `marks` 支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 - `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 - `n-empty` `size` 支持 `tiny` 尺寸
+- `n-config-provider` 新增 `style-mount-parent` 属性，将传递给 css-render 的 mount 的 parent，用来解决在 shadow dom 中样式无法生效的问题
 
 ## 2.39.0
 

@@ -103,14 +103,16 @@ function useTheme<N, T, R>(
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
         anchorMetaName: cssrAnchorMetaName,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: NConfigProvider?.styleMountParent
       })
       if (!NConfigProvider?.preflightStyleDisabled) {
         globalStyle.mount({
           id: 'n-global',
           head: true,
           anchorMetaName: cssrAnchorMetaName,
-          ssr: ssrAdapter
+          ssr: ssrAdapter,
+          parent: NConfigProvider?.styleMountParent
         })
       }
     }
