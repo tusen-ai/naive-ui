@@ -10,7 +10,8 @@ import {
   provide,
   ref,
   toRef,
-  watchEffect
+  watchEffect,
+  mergeProps
 } from 'vue'
 import { type Key, createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -627,16 +628,17 @@ export default defineComponent({
     const horizontal = mode === 'horizontal'
     const finalResponsive = horizontal && this.responsive
     const renderMainNode = (): VNode => (
-      <div
-        role={mode === 'horizontal' ? 'menubar' : 'menu'}
-        class={[
-          `${mergedClsPrefix}-menu`,
-          themeClass,
-          `${mergedClsPrefix}-menu--${mode}`,
-          finalResponsive && `${mergedClsPrefix}-menu--responsive`,
-          this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
-        ]}
-        style={this.cssVars}
+      <div {...mergeProps(this.$attrs, {
+          role: mode === 'horizontal' ? 'menubar' : 'menu',
+          class: [
+            `${mergedClsPrefix}-menu`,
+            themeClass,
+            `${mergedClsPrefix}-menu--${mode}`,
+            finalResponsive && `${mergedClsPrefix}-menu--responsive`,
+            this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
+          ],
+          style: this.cssVars
+        })}
       >
         {finalResponsive ? (
           <VOverflow
