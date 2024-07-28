@@ -28,7 +28,7 @@ export default function useStyle(
         bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
       },
       ssr: ssrAdapter,
-      parent: NConfigProvider?.styleMountParent
+      parent: NConfigProvider?.styleMountTarget
     })
     if (!NConfigProvider?.preflightStyleDisabled) {
       globalStyle.mount({
@@ -36,7 +36,7 @@ export default function useStyle(
         head: true,
         anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter,
-        parent: NConfigProvider?.styleMountParent
+        parent: NConfigProvider?.styleMountTarget
       })
     }
   }

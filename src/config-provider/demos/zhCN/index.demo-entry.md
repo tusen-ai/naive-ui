@@ -32,6 +32,7 @@ inline-theme-disabled.vue
 | locale | `Locale \| null` | `undefined` | 对后代组件生效的语言对象，为 `null` 时会使用默认 `enUS`，为 `undefined` 时会继承上级 `n-config-provider` |  |
 | namespace | `string` | `undefined` | `n-config-provider` 内部组件被卸载于其他位置的 DOM 的类名 |  |
 | preflight-style-disabled | `boolean` | `false` | 是否禁用默认样式，如果你禁用了它，便可以完全控制全局样式。你也可以使用 `n-global-style` 去挂载全局样式（推荐，样式是响应式的） | 2.29.0 |
+| style-mount-target | `ParentNode` | `undefined` | 组件样式的挂载位置 | NEXT_VERSION |
 | tag | `string` | `'div'` | `n-config-provider` 被渲染成的元素 |  |
 | theme | `Theme \| null` | `undefined` | 对后代组件生效的主题对象，为 `null` 时会使用默认亮色，为 `undefined` 时会继承上级 `n-config-provider`。更多信息参见[调整主题](../docs/customize-theme) |  |
 | theme-overrides | `ThemeOverrides \| null` | `undefined` | 对后代组件生效的主题变量覆盖，为 `null` 时会清除全部覆盖变量，为 `undefined` 时会继承上级 `n-config-provider`。更多信息参见[调整主题](../docs/customize-theme) |  |

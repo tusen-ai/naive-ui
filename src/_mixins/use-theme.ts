@@ -104,7 +104,7 @@ function useTheme<N, T, R>(
         },
         anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter,
-        parent: NConfigProvider?.styleMountParent
+        parent: NConfigProvider?.styleMountTarget
       })
       if (!NConfigProvider?.preflightStyleDisabled) {
         globalStyle.mount({
@@ -112,7 +112,7 @@ function useTheme<N, T, R>(
           head: true,
           anchorMetaName: cssrAnchorMetaName,
           ssr: ssrAdapter,
-          parent: NConfigProvider?.styleMountParent
+          parent: NConfigProvider?.styleMountTarget
         })
       }
     }

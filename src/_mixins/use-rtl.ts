@@ -5,8 +5,8 @@ import type {
   RtlEnabledState,
   RtlItem
 } from '../config-provider/src/internal-interface'
-import { cssrAnchorMetaName } from './common'
 import { configProviderInjectionKey } from '../config-provider/src/context'
+import { cssrAnchorMetaName } from './common'
 
 export function useRtl(
   mountId: string,
@@ -48,7 +48,7 @@ export function useRtl(
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
         ssr: ssrAdapter,
-        parent: NConfigProvider?.styleMountParent
+        parent: NConfigProvider?.styleMountTarget
       })
     })
   }
